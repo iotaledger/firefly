@@ -25,6 +25,9 @@
 
     export let transactions: AccountMessage[] = []
     export let classes = ''
+    export let scroll = true
+    export let scrollDetection = (node: Element): void => {}
+    export let bottomOffset = '0px'
 
     let drawer: Drawer
 
@@ -183,7 +186,15 @@
             </button>
         {/if}
     </div>
-    <TransactionTabs list={queryTransactions} tabs={filters} filterBy={getIncomingFlag} on:search={handleSearch}>
+    <TransactionTabs
+        list={queryTransactions}
+        tabs={filters}
+        filterBy={getIncomingFlag}
+        on:search={handleSearch}
+        {scrollDetection}
+        {scroll}
+        {bottomOffset}
+    >
         <div slot="transaction" let:transaction>
             {#if $isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>

@@ -94,6 +94,7 @@
 
     let headerHeight = 0
     let scroll = false
+    let bottomNavigation: BottomNavigation
 
     // If account changes force regeneration of Ledger receive address
     $: if ($selectedAccountId && $isLedgerProfile) {
@@ -440,7 +441,7 @@
         })
     }
 
-    function scrollDetection(node: Element): void {
+    function scrollDetection(node: HTMLElement): void {
         headerScale.subscribe((curr) => {
             if (curr <= 0 && node.scrollTop <= 0) {
                 scroll = true
@@ -448,7 +449,7 @@
             }
             scroll = false
         })
-        node.addEventListener('touchmove', (env) => {
+        node.addEventListener('touchstart', () => {
             if (node.scrollTop > 0) {
                 headerScaleOptions.active = false
                 return
@@ -500,16 +501,25 @@
                     <DashboardPane classes="w-full">
                         {#if $walletRoute === WalletRoute.Assets}
                             <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
-                                <AccountAssets classes="pb-0" {scroll} {scrollDetection} />
+                                <AccountAssets
+                                    {scroll}
+                                    {scrollDetection}
+                                    styles="padding-bottom: {bottomNavigation?.getHeight()}px"
+                                />
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
                             <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
-                                <AccountHistory classes="pb-0" transactions={getAccountMessages($selectedAccount)} />
+                                <AccountHistory
+                                    {scroll}
+                                    {scrollDetection}
+                                    transactions={getAccountMessages($selectedAccount)}
+                                    bottomOffset="{bottomNavigation?.getHeight() * 1.3}px"
+                                />
                             </div>
                         {/if}
                     </DashboardPane>
                 </div>
-                <BottomNavigation locale={localize} />
+                <BottomNavigation locale={localize} bind:this={bottomNavigation} />
             </div>
         </div>
     {:else}
