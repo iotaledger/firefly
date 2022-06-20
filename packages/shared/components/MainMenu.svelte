@@ -20,7 +20,7 @@
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         if ($profileRoute === ProfileRoute.ProfileActions) {
             drawer.close()
         } else if ($settingsRoute === SettingsRoute.Init) {
@@ -30,12 +30,12 @@
         }
     }
 
-    function handleClick() {
+    function handleClick(): void {
         $profileRouter.goTo(ProfileRoute.ProfileActions)
         drawer.open()
     }
 
-    function handleSettingsClick() {
+    function handleSettingsClick(): void {
         $profileRouter.goTo(ProfileRoute.Settings)
     }
 </script>
