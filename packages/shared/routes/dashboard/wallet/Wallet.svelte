@@ -13,7 +13,7 @@
         ExportTransactionHistory,
         HideAccount,
     } from 'shared/components/drawerContent'
-    import { touchInterpolation } from 'shared/lib/actions'
+    import { touchInterpolation, mobileHeaderAnimation } from 'shared/lib/animation'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -76,6 +76,8 @@
         upDownThreshold: 0.5,
         active: true,
     }
+
+    headerScale.subscribe((curr) => mobileHeaderAnimation.set(curr))
 
     let modal: Modal
 

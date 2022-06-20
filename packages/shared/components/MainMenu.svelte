@@ -9,6 +9,7 @@
     import { Locale } from '@core/i18n'
 
     export let locale: Locale
+    export let styles = ''
 
     $: color = getColor($activeProfile, $selectedAccount?.id) as string
     $: textColor = isBright(color) ? 'gray-800' : 'white'
@@ -33,7 +34,7 @@
 
 <button
     class="menu-button fixed left-6 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
-    style="--background-color: {color};"
+    style="--background-color: {color}; {styles}"
     on:click={handleClick}
 >
     <Text type="h4" overrideColor classes="z-10 uppercase">{profileInitial || 'A'}</Text>

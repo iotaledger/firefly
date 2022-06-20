@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { AccountSwitcher } from 'shared/components/drawerContent'
+    import { mobileHeaderAnimation } from '@lib/animation'
     import { activeProfile, getColor } from '@lib/profile'
     import { selectedAccount } from '@lib/wallet'
     import { createAccountCallback, WalletAccount } from '@lib/typings/wallet'
@@ -27,6 +28,16 @@
     function setDrawerRoute(route: DrawerRoutes): void {
         drawerRoute = route
     }
+
+    function animateTranslationLeft(node: HTMLElement): void {
+        mobileHeaderAnimation.subscribe((curr) => {
+            const { width } = node.getBoundingClientRect()
+            const centerPosition = window.innerWidth * 0.5 - width * 0.5
+            const yOffset = 0.09
+            const moveProgress = curr * (1 - yOffset) + yOffset
+            node.style.transform = `translateX(${centerPosition * moveProgress}px)`
+        })
+    }
 </script>
 
 <div class="flex flex-auto flex-col">
@@ -35,6 +46,7 @@
         class="mt-3 py-2 px-3 fixed rounded-lg flex flex-row justify-center items-center space-x-2 
             {isDrawerOpened ? 'bg-gray-100 dark:bg-gray-900' : ''}
             "
+        use:animateTranslationLeft
     >
         <span class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)}" />
         <Text type="h4">{$selectedAccount?.alias}</Text>
@@ -60,8 +72,6 @@
 
 <style type="text/scss">
     button {
-        left: 50%;
-        transform: translatex(-50%);
         .circle {
             @apply rounded-full;
             @apply w-3;
