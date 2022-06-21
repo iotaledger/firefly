@@ -20,7 +20,7 @@
     export let tabs = ['all', 'incoming', 'outgoing']
     export let scroll = true
     export let scrollDetection = (node: Element): void => {}
-    export let bottomOffset = '0px'
+    export let transactionTabsOffset = '0px'
 
     let current = tabs[selected]
 
@@ -108,7 +108,7 @@
     </nav>
     <main
         class="flex flex-col flex-auto h-0 space-y-2 px-6 pb-5 {scroll ? 'overflow-y-auto' : ''}"
-        style="padding-bottom: {bottomOffset}"
+        style="padding-bottom: {transactionTabsOffset}"
         use:scrollDetection
     >
         {#if filtered.length > 0}
