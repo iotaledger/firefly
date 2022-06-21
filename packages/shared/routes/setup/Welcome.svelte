@@ -2,9 +2,11 @@
     import { AppRoute, appRouter } from '@core/router'
     import { Animation, Button, Checkbox, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { SUPPORTED_LOCALES, setLanguage, _ } from '@core/i18n'
     import { Locale } from '@core/i18n'
+    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
+    import { TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
 
     export let locale: Locale
 
@@ -15,10 +17,14 @@
 
     function handleContinueClick(): void {
         if ($mobile) {
-            $appRouter.goTo(AppRoute.Setup)
-        } else {
-            $appRouter.next()
+            lastAcceptedTos.set(TOS_VERSION)
+            lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
+            appSettings.set({ ...$appSettings, sendCrashReports })
+            if (!$isAwareOfCrashReporting) {
+                isAwareOfCrashReporting.set(true)
+            }
         }
+        $appRouter.next()
     }
 
     function handleLegalClick(): void {
