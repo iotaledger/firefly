@@ -88,7 +88,7 @@
                             {localize('actions.reject')}
                         </button>
                         <button
-                            class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
+                            class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
                             on:click|stopPropagation={() => claimActivity(activity)}
                         >
                             {#if activity.isClaiming}
