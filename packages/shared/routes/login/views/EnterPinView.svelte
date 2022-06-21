@@ -1,22 +1,20 @@
 <script lang="typescript">
-    import { Icon, Pin, Profile, Text } from 'shared/components'
+    import { createEventDispatcher, onDestroy } from 'svelte'
+    import { Icon, PinInput, Profile, Text } from 'shared/components'
     import {
         isAwareOfCrashReporting,
         mobile,
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
-    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { Platform } from 'shared/lib/platform'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { validatePinFormat } from 'shared/lib/utils'
-    import { createEventDispatcher, onDestroy } from 'svelte'
-    import { Locale } from '@core/i18n'
+    import { localize } from '@core/i18n'
+    import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile, getStorageDirectoryOfProfile } from '@core/profile'
     import { initialiseProfileManager } from '@core/profile-manager'
-    import { NetworkProtocol, NetworkType } from '@core/network'
-
-    export let locale: Locale
+    import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
+    import { Platform } from '@lib/platform'
+    import { openPopup, popupState } from '@lib/popup'
+    import { validatePinFormat } from '@lib/utils'
 
     let attempts = 0
     let pinCode = ''
@@ -67,7 +65,7 @@
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
     function setButtonText(time) {
-        return locale('views.login.pleaseWait', { values: { time: time.toString() } })
+        return localize('views.login.pleaseWait', { values: { time: time.toString() } })
     }
 
     const dispatch = createEventDispatcher()
@@ -177,7 +175,7 @@
                         <Icon icon="arrow-left" classes="text-gray-500 dark:text-gray-100" />
                     </button>
                 </div>
-                <Pin
+                <PinInput
                     bind:this={pinRef}
                     bind:value={pinCode}
                     classes={shake && 'animate-shake'}
@@ -188,10 +186,10 @@
             </div>
             <Text type="p" bold classes="mt-4 text-center">
                 {attempts > 0
-                    ? locale('views.login.incorrectAttempts', {
+                    ? localize('views.login.incorrectAttempts', {
                           values: { attempts: attempts.toString() },
                       })
-                    : locale('actions.enterYourPin')}
+                    : localize('actions.enterYourPin')}
             </Text>
             {#if hasReachedMaxAttempts}
                 <Text error classes="mt-6">{buttonText}</Text>

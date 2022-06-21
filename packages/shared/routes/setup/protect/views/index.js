@@ -1,3 +1,2 @@
-export { default as Pin } from './Pin.svelte'
-export { default as Protect } from './Protect.svelte'
-export { default as RepeatPin } from './RepeatPin.svelte'
+export { default as ChooseProtectionMethodView } from './ChooseProtectionMethodView.svelte'
+export { default as SetupPinProtectionView } from './SetupPinProtectionView.svelte'

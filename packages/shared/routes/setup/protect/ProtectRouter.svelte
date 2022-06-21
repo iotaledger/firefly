@@ -1,12 +1,9 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { Pin, RepeatPin } from './views'
-    import { walletPin } from '@contexts/onboarding'
-    import { Locale } from '@core/i18n'
-    import { showAppNotification } from '@lib/notifications'
+    import { SetupPinProtectionView } from './views'
+    import { localize } from '@core/i18n'
     import { FireflyEvent, protectRoute, ProtectRouter, ProtectRoute } from '@core/router'
-
-    export let locale: Locale
+    import { showAppNotification } from '@lib/notifications'
 
     const protectRouter = new ProtectRouter()
 
@@ -19,7 +16,7 @@
         } catch (err) {
             showAppNotification({
                 type: 'error',
-                message: locale(err.error),
+                message: localize(err.error),
             })
         }
         busy = false
@@ -30,12 +27,8 @@
     }
 </script>
 
-{#if $protectRoute === ProtectRoute.Pin}
+{#if $protectRoute === ProtectRoute.SetupPinProtection}
     <Transition>
-        <Pin {busy} on:next={next} on:previous={previous} {locale} />
-    </Transition>
-{:else if $protectRoute === ProtectRoute.RepeatPin}
-    <Transition>
-        <RepeatPin {busy} on:next={next} on:previous={previous} pinCandidate={$walletPin} {locale} />
+        <SetupPinProtectionView {busy} on:next={next} on:previous={previous} />
     </Transition>
 {/if}
