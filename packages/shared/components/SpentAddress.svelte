@@ -1,15 +1,13 @@
 <script lang="typescript">
-    import { Icon, Text, Tooltip } from 'shared/components'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { truncateString } from 'shared/lib/helpers'
-    import { RiskLevel } from 'shared/lib/typings/migration'
-    import { formatUnitBestMatch } from 'shared/lib/units'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Locale } from '@core/i18n'
-    import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-
-    export let locale: Locale
+    import { Icon, Text, Tooltip } from 'shared/components'
+    import { localize } from '@core/i18n'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { truncateString } from '@lib/helpers'
+    import { formatUnitBestMatch } from '@lib/units'
+    import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
+    import { RiskLevel } from '@lib/typings/migration'
 
     export let address = ''
     export let balance = 0
@@ -101,8 +99,8 @@
             {#if showTooltip && risk}
                 <Tooltip anchor={tooltipAnchor}>
                     <Text
-                        >{locale('tooltips.risk.title', {
-                            values: { risk: locale(`tooltips.risk.${localeRiskLevel}`) },
+                        >{localize('tooltips.risk.title', {
+                            values: { risk: localize(`tooltips.risk.${localeRiskLevel}`) },
                         })}</Text
                     >
                 </Tooltip>

@@ -1,4 +1,4 @@
-export { default as Backup } from './Backup.svelte'
-export { default as RecoveryPhrase } from './RecoveryPhrase.svelte'
-export { default as VerifyRecoveryPhrase } from './VerifyRecoveryPhrase.svelte'
-export { default as BackupToFile } from './BackupToFile.svelte'
+export { default as BackupView } from './BackupView.svelte'
+export { default as RecoveryPhraseView } from './RecoveryPhraseView.svelte'
+export { default as VerifyRecoveryPhraseView } from './VerifyRecoveryPhraseView.svelte'
+export { default as BackupToFileView } from './BackupToFileView.svelte'

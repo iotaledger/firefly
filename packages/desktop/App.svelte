@@ -32,30 +32,30 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
     import {
-        Backup,
-        Balance,
-        ClaimRewards,
-        Congratulations,
-        CrashReporting,
-        Create,
+        BackupRouter,
+        BalanceView,
+        ClaimRewardsView,
+        CongratulationsView,
+        CrashReportingView,
+        CreateView,
         Dashboard,
-        Import,
+        ImportRouter,
         LanguageAndAppearanceView,
-        Ledger,
-        Legal,
+        LedgerRouter,
+        LegalView,
         LoginRouter,
-        Migrate,
-        Password,
-        Profile,
+        MigrateRouter,
+        OnboardingCustomNetworkView,
+        OnboardingNetworkView,
+        OnboardingProtocolView,
+        PasswordView,
+        ProfileView,
         ProtectRouter,
-        Secure,
+        SecureView,
         Settings,
-        Setup,
+        SetupView,
         Splash,
-        Welcome,
-        OnboardingProtocol,
-        OnboardingNetwork,
-        OnboardingCustomNetwork,
+        WelcomeView,
     } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -190,66 +190,66 @@
             />
         {/if}
         <Route route={AppRoute.Welcome}>
-            <Welcome />
+            <WelcomeView />
         </Route>
         <Route route={AppRoute.Legal}>
-            <Legal locale={$_} />
+            <LegalView />
         </Route>
         <Route route={AppRoute.CrashReporting}>
-            <CrashReporting locale={$_} />
+            <CrashReportingView />
         </Route>
         <Route route={AppRoute.LanguageAndAppearance}>
-            <LanguageAndAppearanceView locale={$_} />
+            <LanguageAndAppearanceView />
         </Route>
         <Route route={AppRoute.Profile}>
-            <Profile locale={$_} />
+            <ProfileView />
         </Route>
         <Route route={AppRoute.Setup}>
-            <Setup locale={$_} />
+            <SetupView />
         </Route>
         <!-- TODO: fix ledger -->
         <Route route={AppRoute.Create}>
-            <Create locale={$_} />
+            <CreateView />
         </Route>
         <Route route={AppRoute.Protocol}>
-            <OnboardingProtocol locale={$_} />
+            <OnboardingProtocolView />
         </Route>
         <Route route={AppRoute.Network}>
-            <OnboardingNetwork locale={$_} />
+            <OnboardingNetworkView />
         </Route>
         <Route route={AppRoute.CustomNetwork}>
-            <OnboardingCustomNetwork locale={$_} />
+            <OnboardingCustomNetworkView />
         </Route>
         <Route route={AppRoute.LedgerSetup}>
-            <Ledger locale={$_} />
+            <LedgerRouter />
         </Route>
         <!--  -->
         <Route route={AppRoute.Secure}>
-            <Secure locale={$_} />
+            <SecureView />
         </Route>
         <Route route={AppRoute.Password}>
-            <Password locale={$_} />
+            <PasswordView />
         </Route>
         <Route route={AppRoute.Protect} transition={false}>
             <ProtectRouter />
         </Route>
         <Route route={AppRoute.Backup} transition={false}>
-            <Backup locale={$_} />
+            <BackupRouter />
         </Route>
         <Route route={AppRoute.Import} transition={false}>
-            <Import locale={$_} />
+            <ImportRouter />
         </Route>
         <Route route={AppRoute.Balance}>
-            <Balance locale={$_} />
+            <BalanceView />
         </Route>
         <Route route={AppRoute.ClaimRewards}>
-            <ClaimRewards />
+            <ClaimRewardsView />
         </Route>
         <Route route={AppRoute.Migrate}>
-            <Migrate locale={$_} {goto} />
+            <MigrateRouter {goto} />
         </Route>
         <Route route={AppRoute.Congratulations}>
-            <Congratulations locale={$_} {goto} />
+            <CongratulationsView {goto} />
         </Route>
         <Route route={AppRoute.Dashboard}>
             <Dashboard locale={$_} {goto} />
