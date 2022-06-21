@@ -37,6 +37,7 @@
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
+    import NetworkStatus from './NetworkStatus.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
@@ -106,6 +107,7 @@
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,
         nodeInfo: NodeInfo,
+        networkStatus: NetworkStatus,
         addNode: AddNode,
         removeNode: RemoveNode,
         switchNetwork: SwitchNetwork,

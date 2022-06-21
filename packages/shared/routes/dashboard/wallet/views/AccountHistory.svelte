@@ -167,130 +167,88 @@
     }
 </script>
 
-{#if $mobile}
-    <div class="flex flex-row justify-items-start px-9 pt-6 -mb-6">
-        <Text type="h5">
-            {localize('general.transactions')}
-            <span class="text-gray-500 font-bold align-text-top">• {queryTransactions.length}</span>
-        </Text>
-        {#if !$selectedMessage || $mobile}
-            <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                <Icon
-                    icon="refresh"
-                    classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white -mt-1 ml-3"
-                />
+<div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
+    <div class="mb-5">
+        {#if $selectedMessage && !$mobile}
+            <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
+                <Icon icon="arrow-left" classes="text-blue-500" />
+                <Text type="h5">{localize('general.transactions')}</Text>
             </button>
+        {:else}
+            <div class="flex flex-1 flex-row justify-between">
+                <Text type="h5">
+                    {localize('general.transactions')}
+                    <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
+                </Text>
+                {#if !$selectedMessage || $mobile}
+                    <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
+                        <Icon
+                            icon="refresh"
+                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                        />
+                    </button>
+                {/if}
+            </div>
+            <div class="relative flex flex-row items-center justify-between text-white mt-4">
+                <ul class="flex flex-row justify-between space-x-8">
+                    {#each filters as filter, i}
+                        <li on:click={() => (activeFilterIndex = i)}>
+                            <Text
+                                type="p"
+                                overrideColor
+                                classes="cursor-pointer
+                            {activeFilterIndex === i
+                                    ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
+                                    : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
+                            >
+                                {localize(`general.${filter}`)}
+                            </Text>
+                        </li>
+                    {/each}
+                </ul>
+                <button on:click={() => (searchActive = !searchActive)}>
+                    <Icon
+                        icon="search"
+                        classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
+                    cursor-pointer ml-2"
+                    />
+                </button>
+                <div
+                    class="z-0 flex items-center absolute left-0 transition-all {searchActive
+                        ? 'w-full'
+                        : 'w-0'} overflow-hidden"
+                >
+                    <Icon icon="search" classes="z-10 absolute left-2 text-gray-500" />
+                    <Input bind:value={searchValue} classes="z-0" style="padding: 0.75rem  2.5rem;" bind:inputElement />
+                    <button on:click={() => (searchActive = !searchActive)} class="z-10 absolute right-2">
+                        <Icon icon="close" classes="text-gray-500 hover:text-blue-500" />
+                    </button>
+                </div>
+            </div>
         {/if}
     </div>
-    <TransactionTabs list={queryTransactions} tabs={filters} filterBy={getIncomingFlag} on:search={handleSearch}>
-        <div slot="transaction" let:transaction>
+    {#if $selectedMessage && !$mobile}
+        <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
+    {:else}
+        <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
             {#if $isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
-            {:else if queryTransactions.length > 0}
-                <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
+            {:else if queryTransactions.length}
+                {#each queryTransactions as transaction}
+                    <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
+                {/each}
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
                     <Text secondary>{localize('general.noRecentHistory')}</Text>
                 </div>
             {/if}
         </div>
-    </TransactionTabs>
-    {#if $selectedMessage}
-        <Drawer opened={true} bind:this={drawer} onClose={() => handleBackClick()}>
-            <div class="space-y-2.5 px-2" style="max-height: 70vh">
-                <ActivityDetail {...$selectedMessage} />
-            </div>
-        </Drawer>
     {/if}
-{:else}
-    <div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
-        <div class="mb-5">
-            {#if $selectedMessage && !$mobile}
-                <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
-                    <Icon icon="arrow-left" classes="text-blue-500" />
-                    <Text type="h5">{localize('general.transactions')}</Text>
-                </button>
-            {:else}
-                <div class="flex flex-1 flex-row justify-between">
-                    <Text type="h5">
-                        {localize('general.transactions')}
-                        <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
-                    </Text>
-                    {#if !$selectedMessage || $mobile}
-                        <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
-                            <Icon
-                                icon="refresh"
-                                classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                            />
-                        </button>
-                    {/if}
-                </div>
-                <div class="relative flex flex-row items-center justify-between text-white mt-4">
-                    <ul class="flex flex-row justify-between space-x-8">
-                        {#each filters as filter, i}
-                            <li on:click={() => (activeFilterIndex = i)}>
-                                <Text
-                                    type="p"
-                                    overrideColor
-                                    classes="cursor-pointer
-                                {activeFilterIndex === i
-                                        ? 'text-blue-500 border-b-2 border-blue-500 border-solid'
-                                        : 'text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}"
-                                >
-                                    {localize(`general.${filter}`)}
-                                </Text>
-                            </li>
-                        {/each}
-                    </ul>
-                    <button on:click={() => (searchActive = !searchActive)}>
-                        <Icon
-                            icon="search"
-                            classes="text-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-100
-                        cursor-pointer ml-2"
-                        />
-                    </button>
-                    <div
-                        class="z-0 flex items-center absolute left-0 transition-all {searchActive
-                            ? 'w-full'
-                            : 'w-0'} overflow-hidden"
-                    >
-                        <Icon icon="search" classes="z-10 absolute left-2 text-gray-500" />
-                        <Input
-                            bind:value={searchValue}
-                            classes="z-0"
-                            style="padding: 0.75rem  2.5rem;"
-                            bind:inputElement
-                        />
-                        <button on:click={() => (searchActive = !searchActive)} class="z-10 absolute right-2">
-                            <Icon icon="close" classes="text-gray-500 hover:text-blue-500" />
-                        </button>
-                    </div>
-                </div>
-            {/if}
-        </div>
-        {#if $selectedMessage && !$mobile}
-            <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
-        {:else}
-            <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
-                {#if $isSyncing && shouldShowFirstSync()}
-                    <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
-                {:else if queryTransactions.length}
-                    {#each queryTransactions as transaction}
-                        <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
-                    {/each}
-                {:else}
-                    <div class="h-full flex flex-col items-center justify-center text-center">
-                        <Text secondary>{localize('general.noRecentHistory')}</Text>
-                    </div>
-                {/if}
-            </div>
-        {/if}
-    </div>
-{/if}
-<!-- {#if $selectedMessage && $mobile}
-    <Drawer opened={true} bind:this={drawer} classes="" onClose={() => handleBackClick()}>
+</div>
+{#if $selectedMessage && $mobile}
+    <Drawer opened bind:this={drawer} onClose={handleBackClick}>
         <div class="overflow-y-auto h-2/3 space-y-2.5">
             <ActivityDetail {...$selectedMessage} />
         </div>
     </Drawer>
-{/if} -->
+{/if}
