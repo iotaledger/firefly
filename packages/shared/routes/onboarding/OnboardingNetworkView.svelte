@@ -11,7 +11,7 @@
 
     const networkProtocol = $newProfile.networkProtocol
 
-    const networkIcon = {
+    const networkIcon: Readonly<{ [key in NetworkType]: string }> = {
         [NetworkType.Mainnet]: networkProtocol,
         [NetworkType.Devnet]: 'settings',
         [NetworkType.PrivateNet]: 'settings',

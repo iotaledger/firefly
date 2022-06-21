@@ -10,10 +10,9 @@
     export let busy = false
 
     const { importFile } = getContext<ImportRouter>('importRouter')
+    const dispatch = createEventDispatcher()
 
     let password = ''
-
-    const dispatch = createEventDispatcher()
 
     async function handleContinue(): Promise<void> {
         if (password) {
@@ -64,7 +63,7 @@
         <Button
             classes="flex-1"
             disabled={password.length === 0 || busy || $isGettingMigrationData}
-            onClick={() => handleContinue()}
+            onClick={handleContinue}
         >
             {#if $isGettingMigrationData}
                 <Spinner

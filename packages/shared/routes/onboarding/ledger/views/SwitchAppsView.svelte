@@ -9,15 +9,16 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         busy = true
 
-        const _onCancel = () => {
+        function _onCancel(): void {
             busy = false
 
             displayNotificationForLedgerProfile('error', true, true, false, true)
         }
-        const _onConnected = () => {
+
+        function _onConnected(): void {
             if ($ledgerDeviceState !== LedgerDeviceState.LegacyConnected) _onCancel()
             else dispatch('next')
         }
@@ -25,7 +26,7 @@
         promptUserToConnectLedger(true, _onConnected, _onCancel)
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>

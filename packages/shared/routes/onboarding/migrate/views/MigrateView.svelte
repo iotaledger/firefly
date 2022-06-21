@@ -30,12 +30,10 @@
     import { SetupType } from '@lib/typings/setup'
 
     const dispatch = createEventDispatcher()
-
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     const { didComplete, bundles, data } = $migration
     const { balance } = $data
-
     const migratableBalance = balance - $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
-
     const fiatbalance = formatCurrency(
         convertToFiat(
             migratableBalance,
@@ -46,66 +44,66 @@
     )
 
     let loading = false
-
-    let timeout
-
-    let singleMigrationBundleHash
-
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
-    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
-
+    let timeout: NodeJS.Timeout
+    let singleMigrationBundleHash = ''
     let closeTransport = () => {}
 
-    const unsubscribe = confirmedBundles.subscribe((newConfirmedBundles) => {
-        newConfirmedBundles.forEach((bundle) => {
-            if (bundle.bundleHash && bundle.bundleHash === singleMigrationBundleHash && bundle.confirmed) {
-                didComplete.set(true)
-                loading = false
-                dispatch('next')
-            }
-        })
-    })
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
-    function handleContinueClick() {
+    function unsubscribe(): void {
+        confirmedBundles.subscribe((newConfirmedBundles) => {
+            newConfirmedBundles.forEach((bundle) => {
+                if (bundle.bundleHash && bundle.bundleHash === singleMigrationBundleHash && bundle.confirmed) {
+                    didComplete.set(true)
+                    loading = false
+                    dispatch('next')
+                }
+            })
+        })
+    }
+
+    function _onConnected(): void {
+        Platform.ledger
+            .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+            .then(({ iota, callback }) => {
+                closeTransport = callback
+                return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
+            })
+            .then(({ trytes, bundleHash }) => {
+                closePopup(true) // close transaction popup
+                singleMigrationBundleHash = bundleHash
+                return sendLedgerMigrationBundle(bundleHash, trytes)
+            })
+            .then(() => {
+                if ($newProfile) {
+                    // Save profile
+                    addNewProfile($newProfile)
+                    loadPersistedProfileIntoActiveProfile($newProfile.id)
+                    void login()
+                    newProfile.set(null)
+                }
+            })
+            .catch((error) => {
+                loading = false
+                closePopup(true) // close transaction popup
+                closeTransport()
+                showAppNotification({
+                    type: 'error',
+                    message: localize(getLegacyErrorMessage(error)),
+                })
+                console.error(error)
+            })
+    }
+
+    function _onCancel(): void {
+        loading = false
+    }
+
+    function handleContinueClick(): void {
         if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
             loading = true
 
             if (legacyLedger) {
-                const _onConnected = () => {
-                    Platform.ledger
-                        .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                        .then(({ iota, callback }) => {
-                            closeTransport = callback
-                            return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
-                        })
-                        .then(({ trytes, bundleHash }) => {
-                            closePopup(true) // close transaction popup
-                            singleMigrationBundleHash = bundleHash
-                            return sendLedgerMigrationBundle(bundleHash, trytes)
-                        })
-                        .then(() => {
-                            if ($newProfile) {
-                                // Save profile
-                                addNewProfile($newProfile)
-                                loadPersistedProfileIntoActiveProfile($newProfile.id)
-                                void login()
-                                newProfile.set(null)
-                            }
-                        })
-                        .catch((error) => {
-                            loading = false
-                            closePopup(true) // close transaction popup
-                            closeTransport()
-                            showAppNotification({
-                                type: 'error',
-                                message: localize(getLegacyErrorMessage(error)),
-                            })
-                            console.error(error)
-                        })
-                }
-                const _onCancel = () => {
-                    loading = false
-                }
                 promptUserToConnectLedger(true, _onConnected, _onCancel)
             } else {
                 createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
@@ -138,7 +136,7 @@
     }
 
     // TODO: complete function functionality
-    function learnAboutMigrationsClick() {
+    function learnAboutMigrationsClick(): void {
         Platform.openUrl('https://blog.iota.org/firefly-token-migration/')
     }
 
@@ -167,7 +165,7 @@
         <button on:click={learnAboutMigrationsClick}>
             <Text type="p" highlighted>{localize('views.migrate.learn')}</Text>
         </button>
-        <Button disabled={loading} classes="w-full" onClick={() => handleContinueClick()}>
+        <Button disabled={loading} classes="w-full" onClick={handleContinueClick}>
             {#if loading}
                 <Spinner busy={loading} message={localize('views.migrate.migrating')} classes="justify-center" />
             {:else}{localize('views.migrate.beginMigration')}{/if}

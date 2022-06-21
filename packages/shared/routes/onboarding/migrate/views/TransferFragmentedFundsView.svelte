@@ -27,20 +27,16 @@
     import { LedgerAppName, LedgerDeviceState } from '@lib/typings/ledger'
     import { SetupType } from '@lib/typings/setup'
 
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const { didComplete } = $migration
+    const dispatch = createEventDispatcher()
+
     let busy = false
     let migrated = false
     let migratingFundsMessage = ''
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
-
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
-    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
-
     let closeTransport = () => {}
-
     let hasBroadcastAnyBundle = false
-
-    const { didComplete } = $migration
-
     let transactions = get(unmigratedBundles).map((_bundle, index) => ({
         ..._bundle,
         name: localize('views.transferFragmentedFunds.transaction', { values: { number: index + 1 } }),
@@ -48,6 +44,9 @@
         status: 0,
         errorText: null,
     }))
+    let migratedAndUnconfirmedBundles = []
+
+    $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     $: if (
         legacyLedger &&
@@ -59,8 +58,8 @@
         busy = false
     }
 
-    const unsubscribeSelectedBundles = hasMigratedAndConfirmedAllSelectedBundles.subscribe(
-        (_hasMigratedAndConfirmedAllSelectedBundles) => {
+    function unsubscribeSelectedBundles(): void {
+        hasMigratedAndConfirmedAllSelectedBundles.subscribe((_hasMigratedAndConfirmedAllSelectedBundles) => {
             fullSuccess = _hasMigratedAndConfirmedAllSelectedBundles
 
             migrated = _hasMigratedAndConfirmedAllSelectedBundles
@@ -69,43 +68,41 @@
                 migratingFundsMessage = localize('actions.continue')
                 busy = false
             }
-        }
-    )
-
-    let migratedAndUnconfirmedBundles = []
-
-    const unsubscribeConfirmedBundles = confirmedBundles.subscribe((newConfirmedBundles) => {
-        newConfirmedBundles.forEach((bundle) => {
-            if (bundle.bundleHash && bundle.confirmed) {
-                migratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.filter(
-                    (bundleHash) => bundleHash !== bundle.bundleHash
-                )
-
-                transactions = transactions.map((item) => {
-                    if (item.bundleHash === bundle.bundleHash) {
-                        return { ...item, status: 2 }
-                    }
-
-                    return item
-                })
-            }
         })
-    })
+    }
 
-    const dispatch = createEventDispatcher()
+    function unsubscribeConfirmedBundles(): void {
+        confirmedBundles.subscribe((newConfirmedBundles) => {
+            newConfirmedBundles.forEach((bundle) => {
+                if (bundle.bundleHash && bundle.confirmed) {
+                    migratedAndUnconfirmedBundles = migratedAndUnconfirmedBundles.filter(
+                        (bundleHash) => bundleHash !== bundle.bundleHash
+                    )
 
-    function handleBackClick() {
+                    transactions = transactions.map((item) => {
+                        if (item.bundleHash === bundle.bundleHash) {
+                            return { ...item, status: 2 }
+                        }
+
+                        return item
+                    })
+                }
+            })
+        })
+    }
+
+    function handleBackClick(): void {
         if (!busy) {
             dispatch('previous')
         }
     }
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         didComplete.set(true)
         dispatch('next')
     }
 
-    function handleRerunClick() {
+    function handleRerunClick(): void {
         if (legacyLedger) {
             const _onConnected = () => rerunMigration()
             promptUserToConnectLedger(true, _onConnected)
@@ -114,7 +111,7 @@
         }
     }
 
-    function setMigratingTransaction(transaction, status) {
+    function setMigratingTransaction(transaction, status): void {
         busy = true
         migrated = false
         transactions = transactions.map((_transaction) => {
@@ -126,7 +123,7 @@
         })
     }
 
-    function rerunMigration() {
+    function rerunMigration(): void {
         const _unmigratedBundles = $unmigratedBundles
         const unmigratedBundleIndexes = _unmigratedBundles.map((_bundle) => _bundle.index)
 
@@ -267,7 +264,7 @@
         )
     }
 
-    function persistProfile() {
+    function persistProfile(): void {
         if (legacyLedger && !$newProfile) {
             return
         }
@@ -280,12 +277,7 @@
         newProfile.set(null)
     }
 
-    onDestroy(() => {
-        unsubscribeConfirmedBundles()
-        unsubscribeSelectedBundles()
-    })
-
-    function handleMigrateClick() {
+    function handleMigrateClick(): void {
         if (legacyLedger) {
             const _onConnected = () => migrateFunds()
             promptUserToConnectLedger(true, _onConnected)
@@ -294,7 +286,7 @@
         }
     }
 
-    function migrateFunds() {
+    function migrateFunds(): void {
         migratingFundsMessage = localize('views.migrate.migrating')
 
         transactions.reduce(
@@ -444,6 +436,11 @@
             Promise.resolve([])
         )
     }
+
+    onDestroy(() => {
+        unsubscribeConfirmedBundles()
+        unsubscribeSelectedBundles()
+    })
 </script>
 
 <OnboardingLayout
@@ -474,7 +471,7 @@
             <Button
                 disabled={busy}
                 classes="w-full py-3 mt-2 text-white {$popupState.active && 'opacity-20'}"
-                onClick={() => handleMigrateClick()}
+                onClick={handleMigrateClick}
             >
                 {#if !busy}
                     {localize('views.transferFragmentedFunds.migrate')}
@@ -483,11 +480,9 @@
                 {/if}
             </Button>
         {:else if fullSuccess}
-            <Button classes="w-full py-3 mt-2" onClick={() => handleContinueClick()}
-                >{localize('actions.continue')}</Button
-            >
+            <Button classes="w-full py-3 mt-2" onClick={handleContinueClick}>{localize('actions.continue')}</Button>
         {:else}
-            <Button classes="w-full py-3 mt-2 {$popupState.active && 'opacity-20'}" onClick={() => handleRerunClick()}>
+            <Button classes="w-full py-3 mt-2 {$popupState.active && 'opacity-20'}" onClick={handleRerunClick}>
                 {localize('views.transferFragmentedFunds.rerun')}
             </Button>
         {/if}

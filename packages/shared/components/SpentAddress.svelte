@@ -1,7 +1,7 @@
 <script lang="typescript">
+    import { Icon, Text, Tooltip } from 'shared/components'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { truncateString } from '@lib/helpers'
@@ -12,13 +12,13 @@
     export let address = ''
     export let balance = 0
     export let selected = false
-    export let risk = undefined
+    export let risk: RiskLevel = undefined
     export let showRiskLevel = false
 
     export let onClick = (): void => {}
 
     let showTooltip = false
-    let tooltipAnchor
+    let tooltipAnchor: HTMLElement
 
     let riskColor = 'gray'
     let localeRiskLevel = ''

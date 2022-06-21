@@ -12,8 +12,13 @@
 
     const migrateRouter = new MigrateRouter()
 
-    const next = (event: CustomEvent<FireflyEvent>): void => migrateRouter.next(event.detail)
-    const previous = (): void => migrateRouter.previous()
+    function next(event: CustomEvent<FireflyEvent>): void {
+        migrateRouter.next(event.detail)
+    }
+
+    function previous(): void {
+        migrateRouter.previous()
+    }
 </script>
 
 {#if $migrateRoute === MigrateRoute.Init}

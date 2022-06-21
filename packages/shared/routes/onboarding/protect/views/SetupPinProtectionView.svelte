@@ -8,25 +8,24 @@
 
     export let busy = false
 
+    const dispatch = createEventDispatcher()
+
     let setPinInput = ''
     let setPinInputError = ''
     let confirmPinInput = ''
     let confirmPinInputError = ''
+    let arePinInputsMatching = false
+    let arePinInputsValid = false
 
     $: setPinInput, (setPinInputError = '')
     $: confirmPinInput, (confirmPinInputError = '')
-
-    let arePinInputsMatching = false
     $: arePinInputsMatching = setPinInput === confirmPinInput
-    let arePinInputsValid = false
     $: arePinInputsValid = validatePinFormat(setPinInput) && validatePinFormat(confirmPinInput)
     $: if (arePinInputsValid && !arePinInputsMatching) {
         confirmPinInputError = localize('error.pincode.match')
     } else {
         confirmPinInputError = ''
     }
-
-    const dispatch = createEventDispatcher()
 
     async function handleBackClick(): Promise<void> {
         await resetImportState()

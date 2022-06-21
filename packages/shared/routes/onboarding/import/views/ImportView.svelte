@@ -8,12 +8,13 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(importType: ProfileImportType) {
+    function handleContinueClick(importType: ProfileImportType): void {
         const profileType = importType === ProfileImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
         setNewProfileType(profileType)
         dispatch('next', { importType })
     }
-    function handleBackClick() {
+
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>

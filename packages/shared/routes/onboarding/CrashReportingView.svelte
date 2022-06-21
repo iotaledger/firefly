@@ -7,11 +7,11 @@
     const busy = false
     let sendCrashReports = true
 
-    const handleBackClick = (): void => {
+    function handleBackClick(): void {
         $appRouter.previous()
     }
 
-    const handleContinueClick = (): void => {
+    function handleContinueClick(): void {
         appSettings.set({ ...$appSettings, sendCrashReports })
 
         if (!$isAwareOfCrashReporting) {

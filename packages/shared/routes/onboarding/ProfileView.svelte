@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { mobile } from '@core/app'
     import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
+    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'

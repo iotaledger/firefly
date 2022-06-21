@@ -10,15 +10,15 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleReadMoreClick() {
+    function handleReadMoreClick(): void {
         Platform.openUrl('https://firefly.iota.org/faq#migration')
     }
 
-    function handleNextClick() {
+    function handleNextClick(): void {
         dispatch('next')
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 

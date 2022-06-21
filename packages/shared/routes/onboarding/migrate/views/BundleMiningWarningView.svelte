@@ -7,13 +7,13 @@
     import { SetupType } from '@lib/typings/setup'
 
     const legacyLedger = $walletSetupType === SetupType.TrinityLedger
-
     const dispatch = createEventDispatcher()
 
-    const handleContinueClick = () => {
+    function handleContinueClick(): void {
         dispatch('next')
     }
-    function handleBackClick() {
+
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>
@@ -44,6 +44,6 @@
         </div>
     </div>
     <div slot="actions">
-        <Button classes="w-64 my-8" onClick={() => handleContinueClick()}>{localize('actions.continue')}</Button>
+        <Button classes="w-64 my-8" onClick={handleContinueClick}>{localize('actions.continue')}</Button>
     </div>
 </BundleMiningLayout>

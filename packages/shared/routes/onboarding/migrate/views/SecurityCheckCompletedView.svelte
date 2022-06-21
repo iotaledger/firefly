@@ -9,8 +9,8 @@
     import { SetupType } from '@lib/typings/setup'
     import { RiskLevel } from '@lib/typings/migration'
 
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     const dispatch = createEventDispatcher()
-
     const addresses = $spentAddressesFromBundles
         .map((address) =>
             Object.assign({}, address, {
@@ -22,10 +22,9 @@
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
-    function onAddressClick(address) {
+    function onAddressClick(address): void {
         const index = selectedAddresses.findIndex((_address) => _address.id === address.id)
         if (index === -1) {
             selectedAddresses.push(address)
@@ -37,17 +36,18 @@
         selectedAddresses = selectedAddresses
     }
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         if (addresses.find((address) => address?.risk > RiskLevel.MEDIUM)) {
             triggerPopup()
         } else {
             dispatch('next', { skippedMining: true })
         }
     }
-    function rerunProcess() {
+    function rerunProcess(): void {
         dispatch('previous')
     }
-    function triggerPopup(skippedMining = false) {
+
+    function triggerPopup(skippedMining = false): void {
         openPopup({
             type: 'riskFunds',
             props: {
@@ -85,10 +85,10 @@
         </div>
     </div>
     <div slot="leftpane__action" class="flex flex-col items-center">
-        <Button secondary disabled={!selectedAddresses.length} classes="w-full mt-2" onClick={() => rerunProcess()}>
+        <Button secondary disabled={!selectedAddresses.length} classes="w-full mt-2" onClick={rerunProcess}>
             {localize('views.securityCheckCompleted.rerun')}
         </Button>
-        <Button classes="w-full mt-4" onClick={() => handleContinueClick()}>
+        <Button classes="w-full mt-4" onClick={handleContinueClick}>
             {localize('views.securityCheckCompleted.continueMigration')}
         </Button>
     </div>

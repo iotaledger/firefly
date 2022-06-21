@@ -70,7 +70,7 @@
             <div class="mb-8 flex flex-col">
                 <Text type="p" secondary classes="mb-2" smaller>{locale('general.language')}</Text>
                 <Dropdown
-                    sortItems={true}
+                    sortItems
                     onSelect={handleLanguageSelectClick}
                     value={SUPPORTED_LOCALES[$appSettings.language]}
                     items={languageList}

@@ -10,21 +10,21 @@
     import {
         accountRouter,
         AppRoute,
+        appRouter,
         DashboardRoute,
         dashboardRouter,
         initRouters,
         openSettings,
-        appRouter,
     } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import {
-        setAppVersionDetails,
-        pollCheckForAppUpdate,
-        appVersionDetails,
         appSettings,
-        initAppSettings,
-        AppStage,
         appStage,
+        AppStage,
+        appVersionDetails,
+        initAppSettings,
+        pollCheckForAppUpdate,
+        setAppVersionDetails,
     } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'

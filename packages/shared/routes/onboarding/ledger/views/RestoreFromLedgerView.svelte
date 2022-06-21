@@ -7,14 +7,14 @@
     import { displayNotificationForLedgerProfile, ledgerSimulator, promptUserToConnectLedger } from '@lib/ledger'
     import { api } from '@lib/wallet'
 
-    let restoring = false
-
     const dispatch = createEventDispatcher()
 
-    function restore() {
+    let restoring = false
+
+    function restore(): void {
         restoring = true
 
-        const _onConnected = () =>
+        function _onConnected(): void {
             api.getAccounts({
                 onSuccess(accountsResponse) {
                     if (accountsResponse.payload.length === 0) {
@@ -45,12 +45,16 @@
                     console.error(error)
                 },
             })
-        const _onCancel = () => (restoring = false)
+        }
+
+        function _onCancel() {
+            restoring = false
+        }
 
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>

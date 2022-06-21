@@ -11,6 +11,7 @@
     import { MAX_PASSWORD_LENGTH } from '@lib/wallet'
 
     const existingPassword = $strongholdPassword
+
     let password = ''
     let confirmedPassword = ''
     let lastCheckedPassword = ''
@@ -67,7 +68,7 @@
         $appRouter.previous()
     }
 
-    function checkPasswordStrength(password: string): any {
+    function checkPasswordStrength(password: string): unknown {
         const NUMBER_OF_STRENGTH_VALIDATION_CHARS = 64
         const limitedPassword = password.substring(0, NUMBER_OF_STRENGTH_VALIDATION_CHARS - 1)
         const hasCheckedPasswordChanged = lastCheckedPassword !== limitedPassword

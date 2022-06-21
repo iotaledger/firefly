@@ -17,6 +17,7 @@
         }
         $appRouter.next()
     }
+
     async function onBackClick(): Promise<void> {
         await cleanupOnboarding(true)
         $appRouter.previous()

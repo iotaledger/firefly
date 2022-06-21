@@ -7,15 +7,15 @@
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         dispatch('next')
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 
-    function handlePopupOpen() {
+    function handlePopupOpen(): void {
         openPopup({
             type: 'ledgerAppGuide',
         })

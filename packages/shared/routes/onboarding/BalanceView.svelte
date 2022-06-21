@@ -1,7 +1,10 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
+    import { onDestroy } from 'svelte'
+    import { get } from 'svelte/store'
     import { mobile } from '@core/app'
+    import { appRouter } from '@core/router'
+    import { localize } from '@core/i18n'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { Platform } from '@lib/platform'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
@@ -21,22 +24,24 @@
     } from '@lib/migration'
     import { closePopup, openPopup } from '@lib/popup'
     import { formatUnitBestMatch } from '@lib/units'
-    import { onDestroy } from 'svelte'
-    import { localize } from '@core/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
     import { walletSetupType } from '@lib/wallet'
     import { SetupType } from '@lib/typings/setup'
-    import { appRouter } from '@core/router'
 
-    let isCheckingForBalance: boolean
     const legacyLedger = $walletSetupType === SetupType.TrinityLedger
-
     const { seed, data, bundles } = $migration
 
+    let isCheckingForBalance: boolean
     let _data = $data
     let _bundles = $bundles
 
-    const getFiatBalance = (balance: number) => {
+    const { balance } = _data
+
+    let fiatBalance = getFiatBalance(balance)
+    let error = getError(balance)
+    let formattedBalance = formatUnitBestMatch(balance, true, 3)
+
+    function getFiatBalance(balance: number): string {
         const balanceAsFiat = convertToFiat(
             balance,
             get(currencies)[CurrencyTypes.USD],
@@ -49,33 +54,34 @@
         return formatCurrency(balanceAsFiat, AvailableExchangeRates.USD)
     }
 
-    const hasInsufficientBalance = (balance: number) => balance < MINIMUM_MIGRATION_BALANCE
+    function hasInsufficientBalance(balance: number): boolean {
+        return balance < MINIMUM_MIGRATION_BALANCE
+    }
 
-    const { balance } = _data
+    function unsubscribeBundles(): void {
+        bundles.subscribe((updatedBundles) => {
+            _bundles = updatedBundles
+            error = getError(_data.balance)
+        })
+    }
 
-    let fiatBalance = getFiatBalance(balance)
+    function unsubscribeUnselectedInputs(): void {
+        unselectedInputs.subscribe(() => {
+            error = getError(_data.balance)
+        })
+    }
 
-    let error = getError(balance)
-    let formattedBalance = formatUnitBestMatch(balance, true, 3)
+    function unsubscribeData(): void {
+        data.subscribe((updatedData) => {
+            _data = updatedData
 
-    const unsubscribeBundles = bundles.subscribe((updatedBundles) => {
-        _bundles = updatedBundles
-        error = getError(_data.balance)
-    })
+            fiatBalance = getFiatBalance(_data.balance)
+            formattedBalance = formatUnitBestMatch(_data.balance, true, 3)
+            error = getError(_data.balance)
+        })
+    }
 
-    const unsubscribeUnselectedInputs = unselectedInputs.subscribe(() => {
-        error = getError(_data.balance)
-    })
-
-    const unsubscribeData = data.subscribe((updatedData) => {
-        _data = updatedData
-
-        fiatBalance = getFiatBalance(_data.balance)
-        formattedBalance = formatUnitBestMatch(_data.balance, true, 3)
-        error = getError(_data.balance)
-    })
-
-    function getError(_balance) {
+    function getError(_balance): { allowToProceed: boolean; text: string } {
         if (_balance === 0) {
             return {
                 allowToProceed: false,
@@ -229,11 +235,7 @@
                 />
             {:else}{localize('actions.checkAgain')}{/if}
         </Button>
-        <Button
-            classes="flex-1"
-            disabled={isCheckingForBalance || !error.allowToProceed}
-            onClick={() => handleContinueClick()}
-        >
+        <Button classes="flex-1" disabled={isCheckingForBalance || !error.allowToProceed} onClick={handleContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>

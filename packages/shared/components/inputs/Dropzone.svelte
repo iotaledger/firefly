@@ -2,17 +2,18 @@
     import { Text, Button } from 'shared/components'
     import { localize } from '@core/i18n'
 
-    export let onDrop: (event?: Event) => void
     export let extentionsLabel = ''
-    export let allowedExtensions
-    export let dropping
-    export let fileName
+    export let allowedExtensions: string[]
+    export let dropping = false
+    export let fileName = ''
 
-    const onEnter = (): void => {
+    export let onDrop: (event?: Event) => void
+
+    function onEnter(): void {
         dropping = true
     }
 
-    const onLeave = (): void => {
+    function onLeave(): void {
         dropping = false
     }
 </script>

@@ -13,16 +13,14 @@
     import { walletSetupType } from '@lib/wallet'
     import { SetupType } from '@lib/typings/setup'
 
+    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     const dispatch = createEventDispatcher()
 
     let progressBarPercent = 0
     let progressBarMessage = `${progressBarPercent} % completed`
     let timeElapsed = 0
-
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
-
-    let timeout
-    let interval
+    let timeout: NodeJS.Timeout
+    let interval: NodeJS.Timeout
 
     $: progressBarMessage = `${progressBarPercent}% completed`
 
@@ -30,7 +28,7 @@
         void $selectedBundlesToMine.reduce(
             (promise, bundle, idx) =>
                 promise.then(() => {
-                    const _updateOnSuccess = () => {
+                    function _updateOnSuccess(): void {
                         timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
                         updateProgress()
 
@@ -41,7 +39,7 @@
                         }
                     }
 
-                    const _updateOnError = () => {
+                    function _updateOnError(): void {
                         timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
                         updateProgress()
 
@@ -76,18 +74,19 @@
         )
         initiateProgressBar()
     })
-    function redirectWithTimeout(_timeout = 1500) {
+
+    function redirectWithTimeout(_timeout = 1500): void {
         timeout = setTimeout(() => {
             dispatch('next')
         }, _timeout)
     }
 
-    function updateProgress() {
+    function updateProgress(): void {
         progressBarPercent = Math.floor((timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length)) * 100)
         progressBarMessage = progressBarPercent.toString() + '% completed'
     }
 
-    function initiateProgressBar() {
+    function initiateProgressBar(): void {
         interval = setInterval(() => {
             timeElapsed += 2
 

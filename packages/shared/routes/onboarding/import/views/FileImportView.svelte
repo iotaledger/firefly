@@ -4,23 +4,26 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
 
-    let file
-    let fileName
-    let filePath
-    let dropping
+    interface FileWithPath extends File {
+        path?: string
+    }
 
     const allowedExtensions = ['kdbx', 'stronghold']
-
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick() {
+    let file: FileWithPath | ArrayBuffer | string
+    let fileName = ''
+    let filePath = ''
+    let dropping = false
+
+    function handleContinueClick(): void {
         dispatch('next', { file, fileName, filePath })
     }
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 
-    const setFile = (buffer?, name?, path?) => {
+    function setFile(buffer?: string | ArrayBuffer, name?: string, path?: string): void {
         if (!buffer) {
             file = null
             fileName = null
@@ -33,11 +36,12 @@
         filePath = path
     }
 
-    const handleFileSelect = (e) => {
-        e?.preventDefault()
+    function handleFileSelect(event: DragEvent | Event): void {
+        event?.preventDefault()
         dropping = false
 
-        const file = e?.dataTransfer?.files?.[0] ?? e?.target?.files?.[0] ?? null
+        const file: FileWithPath =
+            (event as DragEvent)?.dataTransfer?.files?.[0] ?? (event?.target as HTMLInputElement)?.files?.[0] ?? null
 
         if (!file) {
             fileName = null

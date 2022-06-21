@@ -5,10 +5,10 @@
     import { getDefaultClientOptions } from '@core/network'
     import { activeProfile } from '@core/profile'
     import {
+        displayNotificationForLedgerProfile,
         getLedgerDeviceStatus,
         ledgerDeviceState,
         ledgerSimulator,
-        displayNotificationForLedgerProfile,
         pollLedgerDeviceStatus,
         stopPollingLedgerStatus,
     } from '@lib/ledger'
@@ -17,28 +17,23 @@
     import { LedgerDeviceState } from '@lib/typings/ledger'
     import { SetupType } from '@lib/typings/setup'
 
-    let polling = false
-
+    const dispatch = createEventDispatcher()
     const legacyLedger = $walletSetupType === SetupType.TrinityLedger
-
     const newLedgerProfile = $walletSetupType === SetupType.New
-    let creatingAccount = false
-
     const LEDGER_STATUS_POLL_INTERVAL = 1500
 
+    let polling = false
     let isConnected = false
     let isAppOpen = false
+    let creatingAccount = false
 
     $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
     $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
-
     $: animation = !isConnected
         ? 'ledger-disconnected-desktop'
         : isAppOpen
         ? 'ledger-connected-desktop'
         : 'ledger-app-closed-desktop'
-
-    const dispatch = createEventDispatcher()
 
     onMount(() => {
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
@@ -47,7 +42,7 @@
 
     onDestroy(stopPollingLedgerStatus)
 
-    function createAccount() {
+    function createAccount(): void {
         creatingAccount = true
 
         // TODO: refactor this for new bindingsx
@@ -74,33 +69,36 @@
         )
     }
 
-    function handleGuidePopup() {
+    function _onCancel(): void {
+        creatingAccount = false
+        displayNotificationForLedgerProfile('error', true)
+    }
+
+    function _onConnected(): void {
+        if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
+            _onCancel()
+        } else {
+            dispatch('next')
+        }
+    }
+
+    function handleGuidePopup(): void {
         openPopup({
             type: 'ledgerConnectionGuide',
         })
     }
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         creatingAccount = true
 
         if (newLedgerProfile) {
             createAccount()
         } else {
-            const _onCancel = () => {
-                creatingAccount = false
-
-                displayNotificationForLedgerProfile('error', true)
-            }
-            const _onConnected = () => {
-                if ($ledgerDeviceState !== LedgerDeviceState.Connected) _onCancel()
-                else dispatch('next')
-            }
-
             getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
         }
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>

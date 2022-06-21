@@ -4,7 +4,7 @@
     import { BackupPasswordView, FileImportView, ImportView, LedgerView, SuccessView, TextImportView } from './views/'
     import { localize } from '@core/i18n'
     import { FireflyEvent, importRoute, ImportRouter, ImportRoute } from '@core/router'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@lib/notifications'
 
     const importRouter = new ImportRouter()
 

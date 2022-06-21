@@ -12,12 +12,11 @@
     } from '@lib/ledger'
     import { api } from '@lib/wallet'
 
-    let newAddress = null
+    const dispatch = createEventDispatcher()
 
+    let newAddress = ''
     let busy = false
     let confirmed = false
-
-    const dispatch = createEventDispatcher()
 
     $: animation = !newAddress
         ? 'ledger-generate-address-desktop'
@@ -25,11 +24,11 @@
         ? 'ledger-address-confirmed-desktop'
         : 'ledger-confirm-address-desktop'
 
-    function generateNewAddress() {
+    function generateNewAddress(): void {
         newAddress = null
         busy = true
 
-        const _createAccount = (idx) => {
+        function _createAccount(idx): void {
             api.createAccount(
                 {
                     clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
@@ -54,7 +53,7 @@
             )
         }
 
-        const _onConnected = () => {
+        function _onConnected(): void {
             api.getAccounts({
                 onSuccess(getAccountsResponse) {
                     if (getAccountsResponse.payload.length > 0) {
@@ -76,11 +75,13 @@
             })
         }
 
-        const _onCancel = () => (busy = false)
+        function _onCancel(): void {
+            busy = false
+        }
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
-    function displayAddress(accountId: string) {
+    function displayAddress(accountId: string): void {
         api.getMigrationAddress(true, accountId, {
             onSuccess() {
                 busy = false
@@ -98,15 +99,15 @@
         })
     }
 
-    function handleConfirmClick() {
+    function handleConfirmClick(): void {
         confirmed = true
     }
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         dispatch('next')
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>

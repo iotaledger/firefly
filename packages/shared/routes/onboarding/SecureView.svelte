@@ -27,10 +27,10 @@
         <Text type="p" secondary classes="mb-10">{localize('views.secure.body2')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col">
-        <Button secondary classes="flex-1 mb-4" onClick={() => handleDownloadClick()}>
+        <Button secondary classes="flex-1 mb-4" onClick={handleDownloadClick}>
             {localize('actions.downloadRecoveryKit')}
         </Button>
-        <Button classes="flex-1" onClick={() => handleContinueClick()}>{localize('actions.continue')}</Button>
+        <Button classes="flex-1" onClick={handleContinueClick}>{localize('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-orange dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="secure-desktop" />
