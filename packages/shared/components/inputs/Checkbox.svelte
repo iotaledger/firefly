@@ -16,8 +16,7 @@
     {disabled}
     on:click={() => {
         checked = !checked
-
-        onClick()
+        onClick && onClick()
     }}
 >
     <Icon
