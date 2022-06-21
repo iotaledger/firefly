@@ -2,8 +2,8 @@
     import { Text, Button } from 'shared/components'
     import { Locale } from '@core/i18n'
 
-    export let locale: Locale = undefined
-    export let onDrop = (event?: Event): void => {}
+    export let locale: Locale
+    export let onDrop: (event?: Event) => void
     export let extentionsLabel = ''
     export let allowedExtensions
     export let dropping

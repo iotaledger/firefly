@@ -2,8 +2,6 @@ import { getRandomAccountColor } from '../utils'
 import { IAccount, IAccountMetadata, IAccountState } from '../interfaces'
 import { buildAccountState } from './buildAccountState'
 import { localize } from '@core/i18n'
-import { activeAccounts } from '@core/profile'
-import { get } from 'svelte/store'
 
 export async function buildAccountStateAndMetadata(
     account: IAccount,

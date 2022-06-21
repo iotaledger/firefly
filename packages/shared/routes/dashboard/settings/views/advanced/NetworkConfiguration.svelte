@@ -39,7 +39,7 @@
         clientOptions.nodes = getNodeCandidates(clientOptions)
     }
 
-    function handleAddNodeClick() {
+    function handleAddNodeClick(): void {
         openPopup({
             type: 'addNode',
             props: {
@@ -57,7 +57,7 @@
         })
     }
 
-    function handleRemoveAllNodesClick() {
+    function handleRemoveAllNodesClick(): void {
         openPopup({
             type: 'removeNode',
             props: {

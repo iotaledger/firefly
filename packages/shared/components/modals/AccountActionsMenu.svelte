@@ -26,7 +26,7 @@
         modal.close()
     }
 
-    const handleDeleteAccountClick = () => {
+    function handleDeleteAccountClick(): void {
         openPopup({
             type: 'deleteAccount',
             props: {

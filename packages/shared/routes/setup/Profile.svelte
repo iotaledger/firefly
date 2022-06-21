@@ -8,12 +8,8 @@
     import { cleanupOnboarding } from '@contexts/onboarding'
 
     let error = ''
-    const busy = false
-
     let profileName = $newProfile?.name ?? ''
-    const isDeveloperProfile = $newProfile?.isDeveloperProfile
 
-    $: nameChanged = $newProfile?.name !== profileName.trim()
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
 

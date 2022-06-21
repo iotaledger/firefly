@@ -89,11 +89,6 @@
         nodeInfoTab = tab
     }
 
-    function handleKeyValueBoxClick(value: string): void {
-        if (!value) return
-        setClipboard(value)
-    }
-
     function handleCopyAllInformationClick(): void {
         if (!nodeInfo) return
         setClipboard(JSON.stringify(nodeInfo, null, '\t'))
