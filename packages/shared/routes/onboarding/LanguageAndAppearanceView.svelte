@@ -49,7 +49,6 @@
         <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-8'}
             >{localize('views.languageAndAppearance.body')}</Text
         >
-
         {#if $mobile}
             <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
                 {#each languageList as language}
@@ -63,12 +62,15 @@
                 {/each}
             </div>
         {:else}
-            <Dropdown
-                sortItems={true}
-                onSelect={handleLanguageSelectClick}
-                value={SUPPORTED_LOCALES[$appSettings.language]}
-                items={languageList}
-            />
+            <div class="mb-8 flex flex-col">
+                <Text type="p" secondary classes="mb-2" smaller>{localize('general.language')}</Text>
+                <Dropdown
+                    sortItems={true}
+                    onSelect={handleLanguageSelectClick}
+                    value={SUPPORTED_LOCALES[$appSettings.language]}
+                    items={languageList}
+                />
+            </div>
         {/if}
 
         <Text type="p" secondary classes="mb-2" smaller>{localize('general.appearance')}</Text>

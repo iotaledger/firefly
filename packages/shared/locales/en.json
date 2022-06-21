@@ -1263,7 +1263,16 @@
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "claimed": {
+            "success": "Claiming transaction successfully",
+            "error": "Claiming transaction failed"
+        },
+         "rejected": {
+             "success": "Rejecting transaction successfully",
+             "error": "Rejecting transaction failed"
+         }
     },
     "error": {
         "profile": {

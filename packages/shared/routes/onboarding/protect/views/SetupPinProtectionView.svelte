@@ -74,7 +74,6 @@
                 bind:value={confirmPinInput}
                 glimpse
                 classes="w-full mx-auto block"
-                autofocus
                 disabled={busy}
                 error={confirmPinInputError}
                 label={localize('actions.confirmPin')}

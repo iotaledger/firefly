@@ -132,7 +132,7 @@
 
 <div class="w-full {classes}">
     {#if label}
-        <Text type="p" secondary>{label}</Text>
+        <Text type="p" secondary classes="mb-1">{label}</Text>
     {/if}
     <pin-input
         style="--pin-input-size: {PIN_LENGTH}"
