@@ -70,8 +70,8 @@
     const headerScale = spring(1)
     const headerScaleOptions = {
         spring: headerScale,
-        start: 1,
-        end: 0,
+        upperBoundary: 1,
+        lowerBoundary: 0,
         intensityScale: 2,
         upDownThreshold: 0.5,
         active: true,

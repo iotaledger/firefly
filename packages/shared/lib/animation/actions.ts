@@ -2,18 +2,18 @@ import { TouchInterpolationConfig } from './types'
 import { spring } from 'svelte/motion'
 
 /**
- * Interpolates between the given start and end value through touch interaction with the bounded element.
- * Whether the touch movement is up or down, the value interpolates to either the start or end when the threshold is passed.
+ * Interpolates between the upper and lower boundary through touch interaction with the given element.
+ * Whether the touch movement is up or down, the value interpolates to either the upper or lower boundary when the threshold is passed.
  */
 export function touchInterpolation(node: Element, options: TouchInterpolationConfig): void {
-    const start = options.start ? options.start : 1
-    const end = options.end ? options.end : 0
+    const upperBoundary = options.upperBoundary ? options.upperBoundary : 1
+    const lowerBoundary = options.lowerBoundary ? options.lowerBoundary : 0
     const intensityScale = options.intensityScale ? options.intensityScale : 1
     const intensityThreshold = options.upDownThreshold ? options.upDownThreshold : 0.5
-    const interpolationStore = options.spring ? options.spring : spring(start)
+    const interpolationStore = options.spring ? options.spring : spring(upperBoundary)
 
     let clientYBefore = 0
-    let newScale = start
+    let newScale = upperBoundary
 
     if (options.active === undefined) {
         options.active = true
@@ -30,8 +30,8 @@ export function touchInterpolation(node: Element, options: TouchInterpolationCon
         const { clientY } = evt.touches[0]
         const touchYDelta = clientY - clientYBefore
         newScale += touchYDelta * intensityScale * 0.01
-        newScale = newScale > start ? start : newScale
-        newScale = newScale < end ? end : newScale
+        newScale = newScale > upperBoundary ? upperBoundary : newScale
+        newScale = newScale < lowerBoundary ? lowerBoundary : newScale
         void interpolationStore.set(newScale)
         clientYBefore = clientY
     }
@@ -41,9 +41,9 @@ export function touchInterpolation(node: Element, options: TouchInterpolationCon
             return
         }
         if (newScale > intensityThreshold) {
-            newScale = start
+            newScale = upperBoundary
         } else {
-            newScale = end
+            newScale = lowerBoundary
         }
         void interpolationStore.set(newScale)
     }
