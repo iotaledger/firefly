@@ -8,10 +8,16 @@
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { selectedAccount } from 'shared/lib/wallet'
     import { spring } from 'svelte/motion'
+    import { onDestroy } from 'svelte'
 
     export let classes = ''
     export let scale = spring(1)
     export let onMenuClick = (): void => {}
+
+    let unsubscribeMobileBalanceAnimation = () => {}
+    let unsubscribeMobileCurencyAnimation = () => {}
+    let unsubscribeMobileButtonsAnimation = () => {}
+    let unsubscribeMobileWalletMenuAnimation = () => {}
 
     let showPreciseBalance = false
 
@@ -31,7 +37,7 @@
     }
 
     function animateMobileBalance(node: HTMLElement): void {
-        scale.subscribe((curr) => {
+        unsubscribeMobileBalanceAnimation = scale.subscribe((curr) => {
             const scaleQuad = 0.4 * curr * curr + 0.6
             const transQuad = 1 - curr * curr
             const posX = node.getBoundingClientRect().left
@@ -44,7 +50,7 @@
 
     function animateMobileCurrency(node: HTMLElement): void {
         const opacity = 1
-        scale.subscribe((curr) => {
+        unsubscribeMobileCurencyAnimation = scale.subscribe((curr) => {
             const speedUp = curr - (1 - curr)
             const scale = getScaleStyle(curr)
             const translate = getTranslateStyle(0, -7 * (1 - curr), 'vh')
@@ -56,7 +62,7 @@
 
     function animateMobileButtons(node: HTMLElement): void {
         const opacity = 1
-        scale.subscribe((curr) => {
+        unsubscribeMobileButtonsAnimation = scale.subscribe((curr) => {
             const speedUp = curr - (1 - curr)
             const scale = getScaleStyle(curr)
             const translate = getTranslateStyle(0, -15 * (1 - curr), 'vh')
@@ -68,7 +74,7 @@
 
     function animateMobileWalletMenu(node: HTMLElement): void {
         const opacity = 1
-        scale.subscribe((curr) => {
+        unsubscribeMobileWalletMenuAnimation = scale.subscribe((curr) => {
             const speedUp = curr - (1 - curr)
             node.style.opacity = `${opacity * speedUp}`
         })
@@ -77,6 +83,13 @@
     function togglePreciseBalance() {
         showPreciseBalance = !showPreciseBalance
     }
+
+    onDestroy(() => {
+        unsubscribeMobileBalanceAnimation()
+        unsubscribeMobileCurencyAnimation()
+        unsubscribeMobileButtonsAnimation()
+        unsubscribeMobileWalletMenuAnimation()
+    })
 </script>
 
 {#if $mobile}

@@ -6,6 +6,7 @@
     import { createAccountCallback, WalletAccount } from '@lib/typings/wallet'
     import { Drawer, Icon, Text } from 'shared/components'
     import CreateAccount from 'shared/components/popups/CreateAccount.svelte'
+    import { onDestroy } from 'svelte'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount: createAccountCallback
@@ -18,6 +19,7 @@
     let drawer: Drawer
     let isDrawerOpened = false
     let drawerRoute = DrawerRoutes.Init
+    let unsubscribeAnimateTranslationLeft = () => {}
 
     function toggleAccountSwitcher(): void {
         setDrawerRoute(DrawerRoutes.Init)
@@ -30,7 +32,7 @@
     }
 
     function animateTranslationLeft(node: HTMLElement): void {
-        mobileHeaderAnimation.subscribe((curr) => {
+        unsubscribeAnimateTranslationLeft = mobileHeaderAnimation.subscribe((curr) => {
             const { width } = node.getBoundingClientRect()
             const centerPosition = window.innerWidth * 0.5 - width * 0.5
             const yOffset = 0.09
@@ -38,6 +40,10 @@
             node.style.transform = `translateX(${centerPosition * moveProgress}px)`
         })
     }
+
+    onDestroy(() => {
+        unsubscribeAnimateTranslationLeft()
+    })
 </script>
 
 <div class="flex flex-auto flex-col">

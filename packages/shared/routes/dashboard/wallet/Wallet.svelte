@@ -52,7 +52,7 @@
         wallet,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { spring } from 'svelte/motion'
     import { fade } from 'svelte/transition'
     import {
@@ -77,7 +77,10 @@
         active: true,
     }
 
-    headerScale.subscribe((curr) => mobileHeaderAnimation.set(curr))
+    const unsubscribeHeaderScale = headerScale.subscribe((curr) => mobileHeaderAnimation.set(curr))
+
+    let unsubscribeLiftDasboard = () => {}
+    let unsubscribeScrollDetection = () => {}
 
     let modal: Modal
 
@@ -436,13 +439,13 @@
 
     function liftDashboard(node: HTMLElement): void {
         node.style.zIndex = '0'
-        headerScale.subscribe((curr) => {
+        unsubscribeLiftDasboard = headerScale.subscribe((curr) => {
             node.style.transform = `translate(0, ${headerHeight * 0.75 * curr + headerHeight * 0.25}px)`
         })
     }
 
     function scrollDetection(node: HTMLElement): void {
-        headerScale.subscribe((curr) => {
+        unsubscribeScrollDetection = headerScale.subscribe((curr) => {
             if (curr <= 0 && node.scrollTop <= 0) {
                 scroll = true
                 return
@@ -459,6 +462,12 @@
             }
         })
     }
+
+    onDestroy(() => {
+        unsubscribeHeaderScale()
+        unsubscribeLiftDasboard()
+        unsubscribeScrollDetection()
+    })
 </script>
 
 {#if $selectedAccount}
