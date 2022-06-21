@@ -1,14 +1,12 @@
 import { IAccountState } from '@core/account'
 import { get } from 'svelte/store'
 import { ActivityDirection } from '../enums'
-import { allAccountActivities, updateActivity } from '../stores'
+import { allAccountActivities, updateActivityByActivityId } from '../stores'
 import { addClaimedActivity, claimedActivities } from '../stores/'
 
 export function updateActivityAsyncStateFromTransactions(account: IAccountState): void {
-    const accountActivities = get(allAccountActivities).find(
-        (accountActivities) => accountActivities?.accountId === account.id
-    )
-    const activities = accountActivities.activities.filter(
+    const accountActivities = get(allAccountActivities)[account.id]
+    const activities = accountActivities.filter(
         (activity) => activity.direction === ActivityDirection.In && activity.isAsync
     )
 
@@ -19,17 +17,16 @@ export function updateActivityAsyncStateFromTransactions(account: IAccountState)
         for (const activity of activities) {
             const claimedActivity = get(claimedActivities)?.[account.id]?.[activity.transactionId]
             if (claimedActivity && claimedActivity.claimingTransactionId === transactionId) {
-                updateActivity(account.id, {
+                updateActivityByActivityId(account.id, claimedActivity.id, {
                     ...claimedActivity,
                     claimedDate: new Date(claimedActivity.claimedTimestamp),
                 })
-                updateActivity(account.id, { id: transactionId, isHidden: true })
+                updateActivityByActivityId(account.id, transactionId, { isHidden: true })
                 break
             } else if (
                 transactionInputs.some((input) => input.transactionId === activity.transactionId && activity.isAsync)
             ) {
-                updateActivity(account.id, {
-                    id: activity.id,
+                updateActivityByActivityId(account.id, activity.id, {
                     isClaimed: true,
                     claimedDate: new Date(Number(transaction.timestamp)),
                     claimingTransactionId: transactionId,
@@ -40,7 +37,7 @@ export function updateActivityAsyncStateFromTransactions(account: IAccountState)
                     claimedTimestamp: Number(transaction.timestamp),
                     claimingTransactionId: transactionId,
                 })
-                updateActivity(account.id, { id: transactionId, isHidden: true })
+                updateActivityByActivityId(account.id, transactionId, { isHidden: true })
                 break
             }
         }

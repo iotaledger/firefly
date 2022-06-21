@@ -2,8 +2,5 @@ import { updateActivityInclusionStateByTransactionId } from '@core/wallet/stores
 import { TransactionInclusionEvent } from '../types/transactionInclusionEvent'
 
 export function handleTransactionInclusionEvent(accountId: string, event: TransactionInclusionEvent): void {
-    const transactionId = event.transaction_id
-    const inclusionState = event.inclusion_state
-
-    updateActivityInclusionStateByTransactionId(transactionId, inclusionState)
+    updateActivityInclusionStateByTransactionId(accountId, event.transaction_id, event.inclusion_state)
 }

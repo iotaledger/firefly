@@ -4,5 +4,5 @@ import { updateActivityClaimStateByTransactionId } from '@core/wallet/stores/all
 
 export async function handleSpentOutput(accountId: string, payload: { output: OutputData }): Promise<void> {
     await syncBalance(accountId)
-    updateActivityClaimStateByTransactionId(payload.output.metadata.transactionId)
+    updateActivityClaimStateByTransactionId(accountId, payload.output.metadata.transactionId)
 }
