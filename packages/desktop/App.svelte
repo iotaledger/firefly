@@ -199,7 +199,7 @@
             <CrashReportingView />
         </Route>
         <Route route={AppRoute.LanguageAndAppearance}>
-            <LanguageAndAppearanceView />
+            <LanguageAndAppearanceView locale={$_} />
         </Route>
         <Route route={AppRoute.Profile}>
             <ProfileView />
