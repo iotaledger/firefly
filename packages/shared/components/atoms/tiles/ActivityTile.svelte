@@ -78,21 +78,21 @@
                         >
                     {/if}
                 </div>
-                <div class="flex justify-end flex-row space-x-2">
+                <div class="flex flex-row justify-end w-1/2 space-x-2">
                     {#if isIncomingActivityUnclaimed}
                         <button
                             disabled={activity.isClaiming}
-                            class="action px-3 py-1 w-full text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
+                            class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
                             on:click|stopPropagation={() => hideActivity(activity?.id)}
                         >
                             {localize('actions.reject')}
                         </button>
                         <button
-                            class="action px-3 py-1 w-full text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
+                            class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
                             on:click|stopPropagation={() => claimActivity(activity)}
                         >
                             {#if activity.isClaiming}
-                                <Spinner busy={true} classes="justify-center" />
+                                <Spinner busy={true} classes="justify-center h-fit" />
                             {:else}
                                 {localize('actions.claim')}
                             {/if}
