@@ -15,7 +15,12 @@ export const backupRoute = writable<BackupRoute>(null)
 
 export class BackupRouter extends Subrouter<BackupRoute> {
     constructor() {
-        super(get(mobile) ? BackupRoute.Init : BackupRoute.Init, backupRoute)
+        if (get(mobile)) {
+            requestMnemonic()
+            super(BackupRoute.RecoveryPhrase, backupRoute)
+        } else {
+            super(BackupRoute.Init, backupRoute)
+        }
     }
 
     async next(event: FireflyEvent): Promise<void> {
@@ -24,10 +29,6 @@ export class BackupRouter extends Subrouter<BackupRoute> {
         const currentRoute = get(this.routeStore)
         if (get(mobile)) {
             switch (currentRoute) {
-                case BackupRoute.Init:
-                    await requestMnemonic()
-                    nextRoute = BackupRoute.RecoveryPhrase
-                    break
                 case BackupRoute.RecoveryPhrase:
                     nextRoute = BackupRoute.Verify
                     break
