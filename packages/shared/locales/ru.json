@@ -639,7 +639,7 @@
                 }
             },
             "votes": "голоса",
-            "manageVote": "Manage vote"
+            "manageVote": "Управлять голосованием"
         }
     },
     "popups": {
@@ -754,11 +754,11 @@
             "body": "Вы собираетесь отправить {amount}",
             "sendingFromStakedAccount": "Вы отправляете перевод с кошелька, который в настоящее время задействован в ставке. Это может привести к тому, что ваши токены не будут зачислены. Не стесняйтесь отправлять перевод, но вам может потребоваться повторный залог оставшихся токенов.",
             "sendingFromStakedAccountBelowMinReward": "Вы отправляете перевод с кошелька, который еще не достиг минимального вознаграждения за ставку. Это может разблокировать ваши токены, и вы можете потерять вознаграждение за ставку на этом кошельке.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Вы отправляете перевод с кошелька, который еще не достиг минимального вознаграждения за ставку. Это может разблокировать ваши токены, и вы можете потерять вознаграждение за ставку на этом кошельке. Вам также может потребоваться повторное голосование.",
             "sendingFromActiveParticipationAccount": {
-                "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
+                "stakeVote": "Вы отправляете перевод с кошелька, который в данный момент делает ставку и голосует. Это может разблокировать ваши токены и остановить голосование. Вы можете отправить перевод, но после этого вам, возможно, придется снова сделать ставку и проголосовать оставшимися токенами.",
                 "stake": "Вы отправляете перевод с кошелька, который в настоящее время задействован в ставке. Это может привести к тому, что ваши токены не будут зачислены. Не стесняйтесь отправлять перевод, но вам может потребоваться повторный залог оставшихся токенов.",
-                "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
+                "vote": "Вы отправляете перевод с кошелька, который в данный момент голосует. Это может остановить ваше голосование. Вы можете отправить перевод, но после этого вам, возможно, придется снова проголосовать оставшимися токенами."
             }
         },
         "balanceFinder": {
@@ -864,30 +864,30 @@
             "info": "Ставка на Shimmer завершена, и теперь будут распределяться только токены ASMB."
         },
         "governanceManager": {
-            "castYourVote": "Cast your vote",
-            "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
-            "castingVotes": "Casting votes",
-            "stopVoting": "Stop voting",
-            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
-            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
-            "stoppingVoting": "Stopping voting",
-            "changeVote": "Change vote",
-            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
-            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
-            "changingVote": "Changing vote",
-            "manageVotes": "Manage votes",
-            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
-            "mergingVotes": "Merging votes",
-            "votedSuccessfully": "You have started voting with {account}.",
-            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "castYourVote": "Отдайте свой голос",
+            "castYourVoteInfo": "Вы собираетесь проголосовать за вариант {voteValue} ({voteText}) с {amount}",
+            "castingVotes": "Подача голосов",
+            "stopVoting": "Остановить голосование",
+            "stopVotingInfo": "Вы уверены, что хотите прекратить голосовать за вариант {voteValue} ({voteText})?",
+            "stopVotingDisclaimer": "Обратите внимание, что прекращение голосования в период подсчета голосов не повлияет на уже подсчитанные голоса",
+            "stoppingVoting": "Прекращение голосования",
+            "changeVote": "Изменить голос",
+            "changeVoteDisclaimer": "Обратите внимание, что изменение вашего голоса в период подсчета не повлияет на уже подсчитанные голоса",
+            "changeVoteInfo": "Вы уверены, что хотите изменить свой голос на вариант {voteValue} ({voteText})?",
+            "changingVote": "Изменение голоса",
+            "manageVotes": "Управление голосами",
+            "partialVoteInfo": "Вы получили {amount} на {account}. Вы можете проголосовать этими средствами, объединив их с вашим текущим голосованием.",
+            "mergeVoteDisclaimer": "Пожалуйста, обратите внимание, что слияние голосов не повлияет на голоса, которые уже были подсчитаны",
+            "mergingVotes": "Слияние голосов",
+            "votedSuccessfully": "Вы начали голосование с {account}.",
+            "unvotedSuccessfully": "Вы перестали голосовать с {account}.",
             "successPopup": {
-                "castVotesTitle": "Voted successfully",
-                "stopVotesTitle": "Voting stopped",
-                "mergeVotesTitle": "Vote merged",
-                "changeVotesTitle": "Vote changed",
-                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
-                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+                "castVotesTitle": "Проголосовал успешно",
+                "stopVotesTitle": "Голосование остановлено",
+                "mergeVotesTitle": "Голосование объединено",
+                "changeVotesTitle": "Голос изменен",
+                "castBody": "Теперь вы голосуете за вариант {voteValue} ({voteText}).",
+                "stopBody": "Вы прекратили голосование. Это не влияет на голоса, которые уже были подсчитаны."
             }
         },
         "shimmer-info": {
@@ -1046,10 +1046,10 @@
         "merge": "Объединить",
         "mergeFunds": "Объединить средства",
         "done": "Выполнено",
-        "castVotes": "Cast votes",
-        "changeVotes": "Change vote",
-        "mergeVotes": "Merge vote",
-        "stopVotes": "Stop voting",
+        "castVotes": "Отдать голоса",
+        "changeVotes": "Изменить голос",
+        "mergeVotes": "Объединить голос",
+        "stopVotes": "Остановить голосование",
         "okIUnderstand": "Хорошо, я понял",
         "readMore": "Прочитать больше"
     },
@@ -1109,7 +1109,8 @@
         "profiles": "Профили",
         "dev": "Разработчик",
         "createAccount": "Создать кошелёк",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Создать новый кошелёк",
+        "switchWallet": "Переключить кошелёк",
         "accountName": "Имя кошелька",
         "latestTransactions": "Последние Транзакции",
         "transactions": "Транзакции",
@@ -1168,42 +1169,43 @@
         "creatingProfile": "Создание аккаунта, пожалуйста подожди...",
         "fundMigration": "Миграция счета",
         "accountRemoved": "Этот кошелек скрыт. Для осуществления переводов раскройте его.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
-        "votingTransaction": "Voting Transaction",
-        "unvotingTransaction": "Unvoting Transaction",
-        "participationTransaction": "Participation Transaction",
+        "receivingFrom": "Поступление с {account}",
+        "sendingTo": "Отправка на {account}",
+        "receivedFrom": "Поступило с {account}",
+        "sentTo": "Отправлено на {account}",
+        "transferringFrom": "Перевод с {account}",
+        "transferringTo": "Перевод на {account}",
+        "transferFrom": "Перевод с {account}",
+        "transferTo": "Перевести на {account}",
+        "stakingTransaction": "Транзакция ставки",
+        "unstakingTransaction": "Транзакция отмены ставки",
+        "votingTransaction": "Транзакция голосования",
+        "unvotingTransaction": "Транзакция отмены голосования",
+        "participationTransaction": "Транзакция участия",
         "receiving": "Поступление",
         "sending": "Отправление",
         "legacyNetwork": "Устаревшая сеть",
         "capsLock": "Включен Caps Lock",
         "version": "Версия {version}",
         "yourWallets": "Ваши кошельки",
+        "walletActions": "Действия с кошельком",
         "unknown": "Неизвестно",
         "none": "Отсутствует",
         "staked": "Поставлено",
-        "voted": "Voted",
+        "voted": "Проголосовал",
         "unstaked": "Выведено",
-        "unvoted": "Unvoted",
+        "unvoted": "Отозвал голос",
         "staking": "Ставки",
         "unstaking": "Выведение",
         "notStaked": "Не поставлено",
         "stakedFunds": "Ставочные средства",
         "unstakedFunds": "Выведеноные средства",
-        "voting": "Voting",
-        "unvoting": "Unvoting",
+        "voting": "Голосование",
+        "unvoting": "Отмена голосования",
         "accountColor": "Цвет кошелька",
         "myAssets": "Мои активы",
-        "option": "Option",
-        "total": "Total: {balance}"
+        "option": "Вариант",
+        "total": "Всего: {balance}"
     },
     "dates": {
         "today": "Сегодня",
@@ -1253,9 +1255,9 @@
         },
         "syncing": "Пожалуйста, дождитесь окончания синхронизации, чтобы сменить кошельки.",
         "transferring": "Пожалуйста, дождитесь завершения всех транзакций, чтобы сменить кошельки.",
-        "participating": "Please wait until you have completed staking/voting before changing wallets.",
-        "transferringCreate": "Please wait until all transactions are completed before adding a new wallet.",
-        "participatingCreate": "Please wait until you have completed staking/voting before adding a new wallet."
+        "participating": "Пожалуйста, подождите, пока вы не завершите ставку/голосование, прежде чем менять кошельки.",
+        "transferringCreate": "Пожалуйста, дождитесь завершения всех транзакций, прежде чем добавлять новый кошелек.",
+        "participatingCreate": "Перед добавлением нового кошелька, пожалуйста, подождите, пока вы не завершите ставку/голосование."
     },
     "error": {
         "profile": {
@@ -1379,7 +1381,7 @@
             "cannotFindStakingEvent": "Невозможно найти событие, связанное со ставками.",
             "cannotVisitAirdropWebsite": "Невозможно открыть веб-сайт {airdrop}.",
             "invalidStakingEventId": "Неверный ID события ставки.",
-            "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
+            "failedToFetchPreviousRewards": "Не удалось получить предыдущие вознаграждения, пожалуйста, проверьте настройки брандмауэра."
         },
         "invalidDate": "НЕДЕЙСТВИТЕЛЬНАЯ ДАТА",
         "invalidTime": "НЕДЕЙСТВИТЕЛЬНОЕ ВРЕМЯ"
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Кошелёк",
         "staking": "Ставки",
-        "governance": "Governance"
+        "governance": "Управление",
+        "tokens": "Токены",
+        "activity": "Деятельность"
     }
 }

@@ -864,7 +864,7 @@
             "info": "Shimmer-staking on nyt saatettu päätökseen ja vain ASMB-tokenit tullaan jakamaan."
         },
         "governanceManager": {
-            "castYourVote": "Anan äänesi",
+            "castYourVote": "Anna äänesi",
             "castYourVoteInfo": "Olet äänestämässä vaihtoehtoa {voteValue} ({voteText}) määrällä {amount}",
             "castingVotes": "Annetaan ääniä",
             "stopVoting": "Lopeta äänestys",
@@ -1109,7 +1109,8 @@
         "profiles": "Profiilit",
         "dev": "Kehitys",
         "createAccount": "Luo lompakko",
-        "addAWallet": "Lisää lompakko",
+        "createNewWallet": "Luo uusi lompakko",
+        "switchWallet": "Vaihda lompakkoa",
         "accountName": "Lompakon nimi",
         "latestTransactions": "Viimeisimmät transaktiot",
         "transactions": "Transaktiot",
@@ -1176,7 +1177,7 @@
         "transferringTo": "Siirretään kohteeseen {account}",
         "transferFrom": "Siirrä tililtä {account}",
         "transferTo": "Siirrä tilille {account}",
-        "stakingTransaction": "Staking Transaktio",
+        "stakingTransaction": "Staking-transaktio",
         "unstakingTransaction": "Lopeta Staking",
         "votingTransaction": "Äänestystransaktio",
         "unvotingTransaction": "Äänestyksen lopettamisen transaktio",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock on päällä",
         "version": "Versio {version}",
         "yourWallets": "Sinun lompakkosi",
+        "walletActions": "Lompakon toiminnot",
         "unknown": "Tuntematon",
         "none": "Ei mikään",
         "staked": "Stakettu",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Lompakko",
         "staking": "Staking",
-        "governance": "Hallinnointi"
+        "governance": "Hallinnointi",
+        "tokens": "Tokenit",
+        "activity": "Aktiviteetti"
     }
 }

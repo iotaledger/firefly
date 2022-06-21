@@ -1109,7 +1109,8 @@
         "profiles": "Profili",
         "dev": "Programer",
         "createAccount": "Stvori novčanik",
-        "addAWallet": "Dodaj novčanik",
+        "createNewWallet": "Stvori novi novčanik",
+        "switchWallet": "Promijeni novčanik",
         "accountName": "Ime novčanika",
         "latestTransactions": "Najnovije transakcije",
         "transactions": "Transakcije",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock je uključen",
         "version": "Verzija {version}",
         "yourWallets": "Vaši novčanici",
+        "walletActions": "Radnje novčanika",
         "unknown": "Nepoznato",
         "none": "Nijedan",
         "staked": "Staking pokrenut",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Novčanik",
         "staking": "Staking",
-        "governance": "Upravljanje"
+        "governance": "Upravljanje",
+        "tokens": "Tokeni",
+        "activity": "Aktivnost"
     }
 }

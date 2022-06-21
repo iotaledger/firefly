@@ -31,7 +31,7 @@
 </script>
 
 <div class="flex items-center justify-center w-24">
-    <div class="flex flex-col justify-between items-center space-y-3">
+    <div class="flex flex-col justify-between items-center space-y-3 w-full">
         <div
             on:click={() => handleOnClick()}
             class="h-20 w-20 {bgColor
@@ -44,7 +44,7 @@
                 <Text type="h3" classes="text-white">{getInitials()}</Text>
             {/if}
         </div>
-        <div class="flex flex-row items-baseline space-x-1.5">
+        <div class="flex flex-row items-baseline justify-center space-x-1.5 w-full">
             {#if isLedgerProfile}
                 <Icon
                     icon="ledger"
@@ -53,7 +53,7 @@
                     height={14}
                 />
             {/if}
-            <Text type="h5" classes="text-center">{name}</Text>
+            <Text type="h5" classes="text-center truncate">{name}</Text>
         </div>
         {#if isDeveloper}
             <Chip label={localize('general.dev')} />

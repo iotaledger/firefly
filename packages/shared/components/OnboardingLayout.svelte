@@ -4,6 +4,7 @@
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { openPopup } from 'shared/lib/popup'
     import { Locale } from '@core/i18n'
+    import { appRoute, AppRoute } from '@core/router'
 
     export let locale: Locale
 
@@ -17,6 +18,8 @@
 
     let mobileTopContentHeight,
         leftpaneContentHeight = 0
+
+    $: isWelcome = $mobile && AppRoute.Welcome === $appRoute
 
     function handleWatchVideoClick() {
         openPopup({
@@ -32,8 +35,11 @@
 {/if}
 <!--  -->
 {#if $mobile}
-    <div data-label="mobile-onboarding-layout" class="relative h-full px-5 flex flex-col justify-between">
-        <header class="relative w-full flex justify-center px-8 py-3">
+    <div
+        data-label="mobile-onboarding-layout"
+        class="relative h-full flex flex-col justify-between {isWelcome ? '' : 'px-5 '}"
+    >
+        <header class="relative w-full flex justify-center px-8 py-3 {isWelcome && 'hidden'}">
             <Text type="h4" classes="text-center">
                 <slot name="title" />
             </Text>
@@ -46,13 +52,13 @@
                 </button>
             {/if}
         </header>
-        <!-- TODO: fix flex-col-reverse scrolls mobile-top-content to bottom -->
         <div
             bind:clientHeight={mobileTopContentHeight}
             data-label="mobile-top-content"
-            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1 pt-5"
+            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1  {!isWelcome &&
+                'pt-5'}"
         >
-            <div style={$mobile && `max-height: ${mobileTopContentHeight - leftpaneContentHeight - 20}px;`}>
+            <div class="h-full">
                 <slot name="rightpane" />
             </div>
             <div bind:clientHeight={leftpaneContentHeight}>

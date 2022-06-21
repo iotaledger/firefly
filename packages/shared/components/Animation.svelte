@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { mobile } from '@lib/app'
     import lottie from 'lottie-web'
     import { appSettings } from 'shared/lib/appSettings'
     import { onDestroy } from 'svelte'
@@ -222,4 +223,4 @@
     })
 </script>
 
-<div class="w-full {classes}" bind:this={container} />
+<div class="w-full {classes}" style="transform: scale({scaled ? '1.8' : scale ? scale : '1'})" bind:this={container} />

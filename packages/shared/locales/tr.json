@@ -522,7 +522,7 @@
                     "holding": "{duration} staking kaldı",
                     "ended": "Staking artık sona erdi",
                     "inactive": "Staking işlemi algılanmadı",
-                    "fetching": "Fetching staking event info..."
+                    "fetching": "Stake etkinliği bilgileri alınıyor..."
                 },
                 "bodies": {
                     "upcoming": "{date} tarihinde bahis başladıktan sonra her 10 saniyede bir ödülleri otomatik olarak almak için {token} jetonlarınızı kullanın.",
@@ -542,7 +542,7 @@
                 "totalWalletRewards": "Toplam cüzdan ödülleri",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
+                    "description": "Assembly şekillendirilebilir akıllı sözleşmeler oluşturmak ve dağıtmak için izinsiz, yüksek düzeyde ölçeklenebilir çok zincirli bir ağdır. Assembly web3'ün geleceğidir."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -562,84 +562,84 @@
         },
         "governance": {
             "votingPower": {
-                "title": "My voting weight",
+                "title": "Oylama ağırlığım",
                 "info": {
-                    "title": "Your voting weight",
-                    "equality": "1000 IOTA = 1 VOTE",
-                    "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "title": "Oylama ağırlığınız",
+                    "equality": "1000 IOTA = 1 OY",
+                    "description1": "Oylama ağırlığınız cüzdan bakiyenizden hesapkanır. Bir oylama önerisi sayma aşamasındayken, aktif oylar her 10 saniyede bir sayılır ve toplanır.",
+                    "description2": "1 Ki oylama ağırlığı (1000 IOTA jetonu) her 10 saniyede 1 oy verir. Bu, tam oy ağırlığınıza ulaşmak için sayma aşamasının tamamı boyunca oy kullanmaya devam etmeniz gerektiği anlamına gelir."
                 }
             },
             "info": {
-                "title": "Governance info",
-                "description": "With the help of the IOTA Foundation, the IOTA community has developed an IOTA voting protocol, allowing you to participate in governance decisions by voting with your IOTA tokens in Firefly.",
-                "link": "Learn about voting with IOTA",
+                "title": "Yönetim bilgisi",
+                "description": "IOTA Vakfı'nın yardımıyla, IOTA topluluğu bir IOTA oylama protokolü geliştirdi ve Firefly'da IOTA jetonlarınızla oy vererek yönetim kararlarına katılmanıza izin verdi.",
+                "link": "IOTA ile ilgili oy kullanma hakkında bilgi edinin",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "votingOpen": "Voting open",
-                        "countingStarts": "Counting begins",
-                        "countingStops": "Counting ends",
-                        "votingOpened": "Voting opened",
-                        "countingStarted": "Counting began",
-                        "countingStopped": "Counting ended"
+                        "votingOpen": "Oylama açık",
+                        "countingStarts": "Sayım başlıyor",
+                        "countingStops": "Sayım bitiyor",
+                        "votingOpened": "Oylama açıldı",
+                        "countingStarted": "Sayım başladı",
+                        "countingStopped": "Sayım sona erdi"
                     },
                     "votingRate": {
-                        "title": "Voting rate",
-                        "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                        "title": "Oy oranı",
+                        "body": "{amount}, her {time, plural, one {# saniyede} other {# saniyede}} {votesPerMilestone} oy oluşturur."
                     },
                     "countedVotes": {
-                        "title": "Counted votes",
-                        "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                        "title": "Sayılan oylar",
+                        "body": "Oylar, Sayım dönemi boyunca {time, plural, one {# saniye} other {# saniye}} aralıklarla sayılır. {amount}, her {time, plural, bir {# saniye} other {# saniye}} {votesPerMilestone} oy üretir."
                     },
                     "partiallyVoted": {
-                        "title": "New unused funds: {amount}",
-                        "body": "You have received additional funds to {account}. You can vote with these tokens by merging your vote."
+                        "title": "Yeni kullanılmayan fonlar: {amount}",
+                        "body": "{account} hesabına ek fon aldınız. Oyunuzu birleştirerek bu tokenlarla oy verebilirsiniz."
                     },
                     "maximumVotes": {
-                        "title": "Maximum votes",
-                        "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
+                        "title": "Maksimum oy",
+                        "body": "Maksimum oylarınıza ulaşmak için kalan sayım dönemi için oy vermeye devam etmelisiniz."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "Oylar: {amount}"
                     }
                 }
             },
             "events": {
                 "status": {
-                    "upcoming": "Announcement",
-                    "commencing": "Voting open",
-                    "holding": "Counting",
-                    "ended": "Ended"
+                    "upcoming": "Duyuru",
+                    "commencing": "Oylama açık",
+                    "holding": "Sayma",
+                    "ended": "Bitti"
                 },
-                "button": "View proposal",
+                "button": "Teklifi görüntüle",
                 "treasury": {
                     "notFound": {
-                        "title": "Unable to load Community Treasury vote",
-                        "subtitle": "Please connect to a node that has added this vote",
-                        "buttonConnect": "Connect to default node",
-                        "buttonSettings": "View node settings",
-                        "fetching": "Fetching governance event info..."
+                        "title": "Topluluk hazine oyu yüklenemedi",
+                        "subtitle": "Lütfen bu oylamayı ekleyen bir düğüme bağlanın",
+                        "buttonConnect": "Varsayılan düğüme bağlan",
+                        "buttonSettings": "Düğüm ayarlarını görüntüle",
+                        "fetching": "Yönetim etkinliği bilgileri getiriliyor..."
                     }
                 }
             },
             "eventDetails": {
-                "votingOpens": "Voting opens on",
-                "votingProgress": "Time remaining",
-                "votingPower": "Your voting weight",
-                "votesCounted": "Your counted votes",
-                "maximumVotes": "Your maximum votes",
-                "countingStarts": "Counting begins on",
-                "currentResult": "Current result",
-                "finalResult": "Final result",
+                "votingOpens": "Oylama açılıyor",
+                "votingProgress": "Kalan süre",
+                "votingPower": "Oylama ağırlığınız",
+                "votesCounted": "Sayılan oylarınız",
+                "maximumVotes": "Maksimum oylarınız",
+                "countingStarts": "Sayım başlıyor",
+                "currentResult": "Güncel sonuç",
+                "finalResult": "Son sonuç",
                 "answerHeader": {
-                    "activeVoting": "Active voting",
-                    "selected": "Submitted",
-                    "notSelected": "Not selected",
-                    "winner": "Winner"
+                    "activeVoting": "Aktif oylama",
+                    "selected": "Gönderildi",
+                    "notSelected": "Seçilmedi",
+                    "winner": "Kazanan"
                 }
             },
-            "votes": "votes",
-            "manageVote": "Manage vote"
+            "votes": "oylar",
+            "manageVote": "Oylamayı yönet"
         }
     },
     "popups": {
@@ -754,11 +754,11 @@
             "body": "Bu kadar miktar göndermek üzeresiniz {amount}",
             "sendingFromStakedAccount": "Şu anda stake edilen bir cüzdandan transfer gönderiyorsunuz. Bu, tokenlarınızın stake durumunu iptal edebilir. Transferi göndermekten çekinmeyin, ancak daha sonra kalan tokenlarınızı yeniden stake etmeniz gerekebilir.",
             "sendingFromStakedAccountBelowMinReward": "Henüz minimum stake ödüllerine ulaşmamış bir cüzdandan transfer gönderiyorsunuz.\nBu jetonlarınızı geri alabilir ve bu cüzdandaki stake ödüllerinizi kaybedebilirsiniz.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccountBelowMinRewardVote": "Henüz minimum stake ödüllerine ulaşmamış bir cüzdandan transfer gönderiyorsunuz. Bu, tokenlarınızın stake'ini geri alabilir ve bu cüzdandaki stake ödüllerinizi kaybedebilirsiniz. Ayrıca tekrar oy vermeniz gerekebilir.",
             "sendingFromActiveParticipationAccount": {
-                "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
+                "stakeVote": "Şu anda stake yapan ve oy kullanan bir cüzdandan transfer gönderiyorsunuz. Bu, tokenlarınızın stake'ini geri alabilir ve oyunuzu durdurabilir. Transferi göndermekten çekinmeyin, ancak daha sonra kalan tokenlarınızla yeniden stake etmeniz ve tekrar oy vermeniz gerekebilir.",
                 "stake": "Şu anda stake edilen bir cüzdandan transfer gönderiyorsunuz. Bu, tokenlarınızın stake durumunu iptal edebilir. Transferi göndermekten çekinmeyin, ancak daha sonra kalan tokenlarınızı yeniden stake etmeniz gerekebilir.",
-                "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
+                "vote": "Şu anda oy kullanan bir cüzdandan transfer gönderiyorsunuz. Bu, oyunuzu durdurabilir. Transferi göndermekten çekinmeyin, ancak daha sonra kalan tokenlarınızla tekrar oy vermeniz gerekebilir."
             }
         },
         "balanceFinder": {
@@ -864,30 +864,30 @@
             "info": "Shimmer staking artık tamamlandı ve yalnızca ASMB jetonları dağıtılacak."
         },
         "governanceManager": {
-            "castYourVote": "Cast your vote",
-            "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
-            "castingVotes": "Casting votes",
-            "stopVoting": "Stop voting",
-            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
-            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
-            "stoppingVoting": "Stopping voting",
-            "changeVote": "Change vote",
-            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
-            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
-            "changingVote": "Changing vote",
-            "manageVotes": "Manage votes",
-            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
-            "mergingVotes": "Merging votes",
-            "votedSuccessfully": "You have started voting with {account}.",
-            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "castYourVote": "Oyunuzu kullanın",
+            "castYourVoteInfo": "{amount} ile {voteValue} ({voteText}) seçeneği için oy vermek üzeresiniz",
+            "castingVotes": "Oy veriliyor",
+            "stopVoting": "Oy vermeyi durdur",
+            "stopVotingInfo": "{voteValue} ({voteText}) seçeneği için oy vermeyi durdurmak istediğinizden emin misiniz?",
+            "stopVotingDisclaimer": "Sayım döneminde oylamayı durdurmanın, halihazırda sayılmış olan oyları etkilemeyeceğini lütfen unutmayın",
+            "stoppingVoting": "Oy verme durduruluyor",
+            "changeVote": "Oyu değiştir",
+            "changeVoteDisclaimer": "Sayım döneminde oyunuzu değiştirmenizin, halihazırda sayılmış olan oyları etkilemeyeceğini lütfen unutmayın",
+            "changeVoteInfo": "Oyunuzu {voteValue} ({voteText}) seçeneğine değiştirmek istediğinizden emin misiniz?",
+            "changingVote": "Oy değiştiriliyor",
+            "manageVotes": "Oyları yönet",
+            "partialVoteInfo": "{account} hesabına {amount} aldınız. Mevcut oylarınızla birleştirerek bu fonlar ile oy verebilirsiniz.",
+            "mergeVoteDisclaimer": "Oyların birleştirilmesinin, halihazırda sayılmış olan oyları etkilemeyeceğini lütfen unutmayın",
+            "mergingVotes": "Oylar birleştiriliyor",
+            "votedSuccessfully": "{account} ile oy vermeye başladınız.",
+            "unvotedSuccessfully": "{account} ile oy vermeyi durdurdunuz.",
             "successPopup": {
-                "castVotesTitle": "Voted successfully",
-                "stopVotesTitle": "Voting stopped",
-                "mergeVotesTitle": "Vote merged",
-                "changeVotesTitle": "Vote changed",
-                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
-                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+                "castVotesTitle": "Oylama başarılı",
+                "stopVotesTitle": "Oy durduruldu",
+                "mergeVotesTitle": "Oy birleştirildi",
+                "changeVotesTitle": "Oy değiştirildi",
+                "castBody": "Artık {voteValue} ({voteText}) Seçeneği için oy kullanıyorsunuz.",
+                "stopBody": "Oy vermeyi durdurdunuz. Bu, daha önce sayılmış olan oyları etkilemez."
             }
         },
         "shimmer-info": {
@@ -1046,10 +1046,10 @@
         "merge": "Birleştir",
         "mergeFunds": "Fonları birleştir",
         "done": "Tamamlandı",
-        "castVotes": "Cast votes",
-        "changeVotes": "Change vote",
-        "mergeVotes": "Merge vote",
-        "stopVotes": "Stop voting",
+        "castVotes": "Oylama yap",
+        "changeVotes": "Oyu değiştir",
+        "mergeVotes": "Oyu birleştir",
+        "stopVotes": "Oy vermeyi durdur",
         "okIUnderstand": "Tamam, anladım",
         "readMore": "Devamını oku"
     },
@@ -1109,7 +1109,8 @@
         "profiles": "Profiller",
         "dev": "Geliştirici",
         "createAccount": "Cüzdan Oluştur",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Cüzdan adı",
         "latestTransactions": "Son transferler",
         "transactions": "Transferler",
@@ -1178,15 +1179,16 @@
         "transferTo": "Genel -> transfer",
         "stakingTransaction": "Genel -> stake İşlemi",
         "unstakingTransaction": "Genel -> unstaking İşlemi",
-        "votingTransaction": "Voting Transaction",
-        "unvotingTransaction": "Unvoting Transaction",
-        "participationTransaction": "Participation Transaction",
+        "votingTransaction": "Oy Verme İşlemi",
+        "unvotingTransaction": "Oy Kaldırma İşlemi",
+        "participationTransaction": "Katılım İşlemi",
         "receiving": "Alınıyor",
         "sending": "Gönderiliyor",
         "legacyNetwork": "Eski Ağ",
         "capsLock": "Caps Lock açık",
         "version": "Sürüm {version}",
         "yourWallets": "Genel -> Cüzdanlarınız",
+        "walletActions": "Wallet Actions",
         "unknown": "Bilinmeyen",
         "none": "Hiçbiri",
         "staked": "Stake edildi",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Cüzdan",
         "staking": "Staking",
-        "governance": "Yönetim"
+        "governance": "Yönetim",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }
