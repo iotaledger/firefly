@@ -2,8 +2,15 @@
     import { onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, Dropdown, OnboardingLayout, Text } from 'shared/components'
     import { mobile, appSettings, shouldBeDarkMode } from '@core/app'
-    import { localize, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
+    import { Locale, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appRouter } from '@core/router'
+
+    /**
+     * NOTE: It is necessary to use locale directly rather than the
+     * localize function because this components must be reactive towards
+     * the language.
+     */
+    export let locale: Locale
 
     const BLINK_SEGMENTS = [[1, 200]]
     const SWITCH_SEGMENTS = [
@@ -43,12 +50,10 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.languageAndAppearance.title')}</Text>
+        <Text type="h2">{locale('views.languageAndAppearance.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-8'}
-            >{localize('views.languageAndAppearance.body')}</Text
-        >
+        <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-8'}>{locale('views.languageAndAppearance.body')}</Text>
         {#if $mobile}
             <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
                 {#each languageList as language}
@@ -63,7 +68,7 @@
             </div>
         {:else}
             <div class="mb-8 flex flex-col">
-                <Text type="p" secondary classes="mb-2" smaller>{localize('general.language')}</Text>
+                <Text type="p" secondary classes="mb-2" smaller>{locale('general.language')}</Text>
                 <Dropdown
                     sortItems={true}
                     onSelect={handleLanguageSelectClick}
@@ -73,18 +78,17 @@
             </div>
         {/if}
 
-        <Text type="p" secondary classes="mb-2" smaller>{localize('general.appearance')}</Text>
+        <Text type="p" secondary classes="mb-2" smaller>{locale('general.appearance')}</Text>
         <ButtonRadio icon="theme-light" value={'light'} bind:group={appTheme}>
-            {localize('general.lightTheme')}
+            {locale('general.lightTheme')}
         </ButtonRadio>
-        <ButtonRadio icon="theme-dark" value={'dark'} bind:group={appTheme}>{localize('general.darkTheme')}</ButtonRadio
-        >
+        <ButtonRadio icon="theme-dark" value={'dark'} bind:group={appTheme}>{locale('general.darkTheme')}</ButtonRadio>
         <ButtonRadio icon="settings" value={'system'} bind:group={appTheme}>
-            {localize('general.systemTheme')}
+            {locale('general.systemTheme')}
         </ButtonRadio>
     </div>
     <div slot="leftpane__action">
-        <Button onClick={handleContinueClick} classes="w-full">{localize('actions.continue')}</Button>
+        <Button onClick={handleContinueClick} classes="w-full">{locale('actions.continue')}</Button>
     </div>
     <div
         slot="rightpane"
