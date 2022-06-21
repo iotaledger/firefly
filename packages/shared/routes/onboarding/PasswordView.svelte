@@ -13,11 +13,12 @@
     const existingPassword = $strongholdPassword
     let password = ''
     let confirmedPassword = ''
+    let lastCheckedPassword = ''
     let error = ''
     let errorConfirm = ''
     let busy = false
 
-    $: passwordStrength = zxcvbn(password)
+    $: passwordStrength = checkPasswordStrength(password) ?? passwordStrength
     $: password, confirmedPassword, ((error = ''), (errorConfirm = ''))
 
     async function handleContinueClick(): Promise<void> {
@@ -30,10 +31,10 @@
                     length: MAX_PASSWORD_LENGTH,
                 },
             })
-        } else if (passwordStrength.score !== 4) {
+        } else if (passwordStrength?.score !== 4) {
             let errKey = 'error.password.tooWeak'
-            if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
-                errKey = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
+            if (passwordStrength?.feedback.warning && passwordInfo[passwordStrength?.feedback.warning]) {
+                errKey = `error.password.${passwordInfo[passwordStrength?.feedback.warning]}`
             }
             error = localize(errKey)
         } else if (password !== confirmedPassword) {
@@ -65,6 +66,16 @@
     function handleBackClick(): void {
         $appRouter.previous()
     }
+
+    function checkPasswordStrength(password: string): any {
+        const NUMBER_OF_STRENGTH_VALIDATION_CHARS = 64
+        const limitedPassword = password.substring(0, NUMBER_OF_STRENGTH_VALIDATION_CHARS - 1)
+        const hasCheckedPasswordChanged = lastCheckedPassword !== limitedPassword
+        if (hasCheckedPasswordChanged) {
+            lastCheckedPassword = limitedPassword
+            return zxcvbn(limitedPassword)
+        }
+    } // zxcvbn lib recommends to not validate long passwords because of performance issues https://github.com/dropbox/zxcvbn#user-content-performance
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick} {busy}>
@@ -82,7 +93,7 @@
                 strengthLevels={4}
                 showRevealToggle
                 showStrengthLevel
-                strength={passwordStrength.score}
+                strength={passwordStrength?.score}
                 autofocus
                 disabled={busy}
             />

@@ -28,7 +28,7 @@
 </script>
 
 <div class={classes} class:disabled>
-    {#if showStrengthLevel}
+    {#if showStrengthLevel && strength !== undefined}
         <strength-meter class="flex flex-row justify-between items-center mb-2">
             <div class="flex flex-row">
                 <Text smaller secondary>{localize('general.passwordStrength')}:</Text>
