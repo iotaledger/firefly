@@ -9,6 +9,8 @@
     export let autoplay = true
     export let segments = undefined
     export let renderer = 'svg'
+    export let scaled = false
+    export let scale = 1.2
 
     const animations = {
         'welcome-desktop': {
