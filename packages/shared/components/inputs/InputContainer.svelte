@@ -19,6 +19,7 @@
 <div class="w-full flex flex-col space-y-1">
     <button
         class="cursor-text w-full flex flex-row"
+        type="button"
         on:click={() => {
             inputElement && inputElement.focus()
         }}
