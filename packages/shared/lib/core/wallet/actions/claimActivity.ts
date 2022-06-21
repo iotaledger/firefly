@@ -26,14 +26,14 @@ export async function claimActivity(activity: Activity): Promise<void> {
 
             showAppNotification({
                 type: 'info',
-                message: localize('general.claimedSuccess'),
+                message: localize('notifications.claimed.success'),
             })
         }
     } catch (err) {
         console.error(err)
         showAppNotification({
             type: 'error',
-            message: localize('general.claimedFailed'),
+            message: localize('notifications.claimed.error'),
         })
     } finally {
         updateActivity(account.id, { id: activity.id, isClaiming: false })
