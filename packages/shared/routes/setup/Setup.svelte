@@ -36,12 +36,7 @@
         {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        <Button
-            icon="plus"
-            classes="w-full"
-            secondary
-            onClick={() => (handleContinueClick(SetupType.New))}
-        >
+        <Button icon="plus" classes="w-full" secondary onClick={() => handleContinueClick(SetupType.New)}>
             {locale('actions.createWallet')}
             {#if !$mobile}
                 <Text type="p" secondary smaller>{locale('actions.createWalletDescription')}</Text>
@@ -54,7 +49,10 @@
             {/if}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-blue dark:bg-gray-900'}">
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-blue dark:bg-gray-900'}"
+    >
         <Animation classes="setup-anim-aspect-ratio" animation={$mobile ? 'profile-desktop' : 'setup-desktop'} />
     </div>
 </OnboardingLayout>

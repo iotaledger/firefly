@@ -55,7 +55,8 @@
         <div
             bind:clientHeight={mobileTopContentHeight}
             data-label="mobile-top-content"
-            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1  {!isWelcome && 'pt-5'}"
+            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1  {!isWelcome &&
+                'pt-5'}"
         >
             <div class="h-full">
                 <slot name="rightpane" />
