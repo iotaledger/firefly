@@ -100,7 +100,8 @@
             loadPersistedProfileIntoActiveProfile($newProfile.id)
             newProfile.set(null)
             await createNewAccount()
-            void login(true)
+            const shouldRecoverAccounts = $walletSetupType !== SetupType.New
+            void login(shouldRecoverAccounts)
         } else {
             if ($walletSetupType === SetupType.TrinityLedger) {
                 localizedBody = 'trinityLedgerBody'
