@@ -408,15 +408,19 @@
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
     }
 
-    mobileHeaderAnimation.subscribe((curr) => {
+    const unsubscribe = mobileHeaderAnimation.subscribe((curr) => {
         mobileMainMenuOpacity = curr - (1 - curr)
+    })
+
+    onDestroy(() => {
+        unsubscribe()
     })
 </script>
 
 {#if $mobile}
     <Idle />
     <div class="flex flex-col w-full h-full">
-        <MainMenu {locale} styles="opacity: {mobileMainMenuOpacity}" />
+        <MainMenu opacity={mobileMainMenuOpacity} />
         <TopNavigation {onCreateAccount} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />

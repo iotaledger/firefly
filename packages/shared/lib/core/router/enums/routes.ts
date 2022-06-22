@@ -159,3 +159,8 @@ export enum WalletRoute {
     Assets = 'assets',
     AccountHistory = 'accountHistory',
 }
+
+export enum ProfileRoute {
+    ProfileActions = 'profileActions',
+    Settings = 'settings',
+}

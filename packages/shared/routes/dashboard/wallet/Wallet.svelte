@@ -522,7 +522,7 @@
                                     {scroll}
                                     {scrollDetection}
                                     transactions={getAccountMessages($selectedAccount)}
-                                    transactionTabsOffset="{bottomNavigation?.getHeight() * 1.3}px"
+                                    bottomOffset="{bottomNavigation?.getHeight() * 0.8}px"
                                 />
                             </div>
                         {/if}
