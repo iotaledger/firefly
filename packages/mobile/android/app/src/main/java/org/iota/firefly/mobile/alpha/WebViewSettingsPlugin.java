@@ -37,3 +37,4 @@ public class WebViewSettingsPlugin extends Plugin {
         WebView webView = getBridge().getWebView();
         webView.clearCache(true);
     }
+}

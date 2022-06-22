@@ -210,7 +210,7 @@
                 {/each}
                 {#if nodeContextMenu}
                     {#if $mobile}
-                        <Drawer dimLength={180} on:close={() => (nodeContextMenu = undefined)}>
+                        <Drawer on:close={() => (nodeContextMenu = undefined)}>
                             <NodeConfigOptions
                                 bind:nodeContextMenu
                                 bind:networkConfig

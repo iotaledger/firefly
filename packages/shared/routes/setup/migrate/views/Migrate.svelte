@@ -176,7 +176,10 @@
             {:else}{locale('views.migrate.beginMigration')}{/if}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-blue dark:bg-gray-900'}"
+    >
         <Animation classes="setup-anim-aspect-ratio" {animation} />
     </div>
 </OnboardingLayout>

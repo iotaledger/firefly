@@ -2,7 +2,7 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import { get, Readable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
-    import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
+    import { Address, Amount, Animation, Button, Dropdown, Icon, Input, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
@@ -21,6 +21,7 @@
         promptUserToConnectLedger,
     } from 'shared/lib/ledger'
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
     import { accountRouter } from '@core/router'
@@ -41,7 +42,6 @@
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
-    import { account } from '@lib/typings'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
@@ -440,6 +440,8 @@
 
     const onQRClick = (): void => {
         const onSuccess = (result: string) => {
+            selectedSendType = SEND_TYPE.EXTERNAL
+            to = null
             address = result
         }
         const onError = (): void => {
@@ -449,6 +451,33 @@
             })
         }
         void startQRScanner(onSuccess, onError)
+    }
+
+    const selectInternal = async (evt: Event): Promise<void> => {
+        const node = evt.target as HTMLElement
+        const accountItems = accountsDropdownItems.filter((item) => item.id !== $selectedAccount.id)
+        const index = await Platform.showActionSheet({
+            title: localize(`general.${SEND_TYPE.INTERNAL}`),
+            options: [...accountItems.map((item) => ({ title: item.alias })), { title: 'Cancel', style: 'CANCEL' }],
+        })
+
+        if (index == accountItems.length) {
+            node.blur()
+            return
+        }
+
+        to = accountItems[index]
+
+        selectedSendType = SEND_TYPE.INTERNAL
+    }
+
+    const showUnitActionSheet = async (units: Unit[], callback: (toUnit: Unit) => void): Promise<void> => {
+        const index = await Platform.showActionSheet({
+            title: localize('general.unit'),
+            options: [...units.map((unit) => ({ title: unit as string })), { title: 'Cancel', style: 'CANCEL' }],
+        })
+
+        callback(units[index])
     }
 
     onMount((): void => {
@@ -475,111 +504,184 @@
         }))
 </script>
 
-<div class="w-full h-full flex flex-col justify-between p-6">
-    <div>
-        <div class="flex flex-row w-full justify-between {$mobile ? 'mb-9' : 'mb-6'}">
-            <div class="flex flex-row space-x-6">
-                <button
-                    on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
-                    disabled={$isTransferring}
-                    class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
-                    class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}
-                >
-                    <Text
-                        classes="text-left"
-                        type="h5"
-                        secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}
-                    >
-                        {localize(`general.${SEND_TYPE.EXTERNAL}`)}
-                    </Text>
-                </button>
-                {#if $liveAccounts.length > 1}
+{#if $mobile}
+    <div class="w-full h-full flex flex-col justify-between p-6">
+        <div>
+            <div class="w-full mb-9 text-center">
+                <Text bold bigger>{localize('general.sendFunds')}</Text>
+                <div class="absolute right-10 top-6">
+                    <button on:click={onQRClick}>
+                        <Icon icon="qr" classes="text-blue-500" />
+                    </button>
+                </div>
+            </div>
+            <Animation classes="setup-anim-aspect-ratio" animation="balance-desktop" />
+            <div class="w-full h-full flex flex-col justify-between">
+                <div>
+                    <div class="w-full block">
+                        {#if selectedSendType === SEND_TYPE.INTERNAL}
+                            <span
+                                class="absolute right-9 mt-3.5 z-10"
+                                on:click={() => (selectedSendType = SEND_TYPE.EXTERNAL)}
+                            >
+                                <Icon
+                                    icon="close"
+                                    classes="z-10 ml-2 text-gray-500 dark:text-white"
+                                    width="22"
+                                    height="22"
+                                />
+                            </span>
+                            <div class="mb-6 w-full" on:click={selectInternal}>
+                                <Input style="text-align: left;" type="button" value={to?.label || null} />
+                            </div>
+                        {:else}
+                            {#if accountsDropdownItems.length > 1 && address.length === 0}
+                                <button
+                                    class="absolute right-10 mt-4 z-10 text-12 text-gray-500 focus:text-blue-500"
+                                    on:click={selectInternal}
+                                >
+                                    {localize('general.moveFundsButton')}
+                                </button>
+                            {/if}
+                            <Address
+                                error={addressError}
+                                bind:address
+                                label={localize('general.sendToAddress')}
+                                disabled={$isTransferring}
+                                placeholder={`${localize('general.sendToAddress')}: ${addressPrefix}...`}
+                                classes="mb-6"
+                                autofocus={false}
+                            />
+                        {/if}
+                        <Amount
+                            error={amountError}
+                            bind:amount
+                            bind:unit
+                            customUnitPresentation={showUnitActionSheet}
+                            onMaxClick={handleMaxClick}
+                            disabled={$isTransferring}
+                            autofocus={false}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#if !$isTransferring}
+            <div class="mt-8 flex flex-row justify-between px-2">
+                <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
+                    {localize('actions.cancel')}
+                </Button>
+                <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
+            </div>
+        {/if}
+        {#if $isTransferring}
+            <ProgressBar
+                classes="my-6"
+                preloading={!$transferState}
+                secondary
+                message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
+                percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent}
+            />
+        {/if}
+    </div>
+{:else}
+    <div class="w-full h-full flex flex-col justify-between p-6">
+        <div>
+            <div class="flex flex-row w-full justify-between mb-6">
+                <div class="flex flex-row space-x-6">
                     <button
-                        on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
+                        on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
                         disabled={$isTransferring}
                         class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
-                        class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}
+                        class:active={SEND_TYPE.EXTERNAL === selectedSendType && !$isTransferring}
                     >
                         <Text
                             classes="text-left"
                             type="h5"
-                            secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}
+                            secondary={SEND_TYPE.EXTERNAL !== selectedSendType || $isTransferring}
                         >
-                            {localize(`general.${SEND_TYPE.INTERNAL}`)}
+                            {localize(`general.${SEND_TYPE.EXTERNAL}`)}
                         </Text>
                     </button>
-                {/if}
-            </div>
-            <div class="flex flex-row space-x-4">
-                {#if $mobile}
-                    <button on:click={onQRClick} style={selectedSendType === SEND_TYPE.INTERNAL && 'opacity: 0'}>
-                        <Icon icon="qr" classes="text-blue-500" />
-                    </button>
-                {:else}
+                    {#if $liveAccounts.length > 1}
+                        <button
+                            on:click={() => handleSendTypeClick(SEND_TYPE.INTERNAL)}
+                            disabled={$isTransferring}
+                            class={$isTransferring ? 'cursor-auto' : 'cursor-pointer'}
+                            class:active={SEND_TYPE.INTERNAL === selectedSendType && !$isTransferring}
+                        >
+                            <Text
+                                classes="text-left"
+                                type="h5"
+                                secondary={SEND_TYPE.INTERNAL !== selectedSendType || $isTransferring}
+                            >
+                                {localize(`general.${SEND_TYPE.INTERNAL}`)}
+                            </Text>
+                        </button>
+                    {/if}
+                </div>
+                <div class="flex flex-row space-x-4">
                     <button on:click={handleBackClick}>
                         <Icon icon="close" classes="text-gray-800 dark:text-white" />
                     </button>
-                {/if}
+                </div>
             </div>
-        </div>
-        <div class="w-full h-full flex flex-col justify-between">
-            <div>
-                <div class="w-full block">
-                    {#if selectedSendType === SEND_TYPE.INTERNAL}
-                        <Dropdown
-                            value={to?.label || null}
-                            label={localize('general.to')}
-                            placeholder={localize('general.to')}
-                            items={accountsDropdownItems.filter((a) => a.id !== $selectedAccount.id)}
-                            onSelect={handleToSelect}
-                            disabled={$isTransferring || $liveAccounts.length === 2}
-                            error={toError}
-                            classes="mb-6"
-                            autofocus={$liveAccounts.length > 2}
-                        />
-                    {:else}
-                        <Address
-                            error={addressError}
-                            bind:address
-                            label={localize('general.sendToAddress')}
+            <div class="w-full h-full flex flex-col justify-between">
+                <div>
+                    <div class="w-full block">
+                        {#if selectedSendType === SEND_TYPE.INTERNAL}
+                            <Dropdown
+                                value={to?.label || null}
+                                label={localize('general.to')}
+                                placeholder={localize('general.to')}
+                                items={accountsDropdownItems.filter((a) => a.id !== $selectedAccount.id)}
+                                onSelect={handleToSelect}
+                                disabled={$isTransferring || $liveAccounts.length === 2}
+                                error={toError}
+                                classes="mb-6"
+                                autofocus={$liveAccounts.length > 2}
+                            />
+                        {:else}
+                            <Address
+                                error={addressError}
+                                bind:address
+                                label={localize('general.sendToAddress')}
+                                disabled={$isTransferring}
+                                placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
+                                classes="mb-6"
+                                autofocus={true}
+                            />
+                        {/if}
+                        <Amount
+                            error={amountError}
+                            bind:amount
+                            bind:unit
+                            onMaxClick={handleMaxClick}
                             disabled={$isTransferring}
-                            placeholder={`${localize('general.sendToAddress')}${
-                                $mobile ? ': ' : '\n'
-                            }${addressPrefix}...`}
-                            classes={$mobile ? 'mb-6' : 'mb-6'}
-                            autofocus={!$mobile}
+                            autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
                         />
-                    {/if}
-                    <Amount
-                        error={amountError}
-                        bind:amount
-                        bind:unit
-                        onMaxClick={handleMaxClick}
-                        disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2 && !$mobile}
-                    />
+                    </div>
                 </div>
             </div>
         </div>
+        {#if !$isTransferring}
+            <div class="flex flex-row justify-between px-2">
+                <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
+                    {localize('actions.cancel')}
+                </Button>
+                <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
+            </div>
+        {/if}
+        {#if $isTransferring}
+            <ProgressBar
+                preloading={!$transferState}
+                secondary
+                message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
+                percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent}
+            />
+        {/if}
     </div>
-    {#if !$isTransferring}
-        <div class="{$mobile && 'mt-8'} flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
-                {localize('actions.cancel')}
-            </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
-        </div>
-    {/if}
-    {#if $isTransferring}
-        <ProgressBar
-            classes={$mobile && 'my-6'}
-            preloading={!$transferState}
-            secondary
-            message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
-            percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent}
-        />
-    {/if}
-</div>
+{/if}
 
 <style type="text/scss">
     button.active {

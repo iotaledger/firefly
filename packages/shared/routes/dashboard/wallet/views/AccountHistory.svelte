@@ -24,10 +24,6 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let transactions: AccountMessage[] = []
-    export let classes = ''
-    export let scroll = true
-    export let scrollDetection = (node: Element): void => {}
-    export let transactionTabsOffset = '0px'
 
     let drawer: Drawer
 
@@ -172,7 +168,7 @@
 </script>
 
 {#if $mobile}
-    <div class="flex flex-row justify-items-start px-9 pt-6 -mb-6 {classes}">
+    <div class="flex flex-row justify-items-start px-6 pt-6 -mb-8">
         <Text type="h5">
             {localize('general.transactions')}
             <span class="text-gray-500 font-bold align-text-top">• {queryTransactions.length}</span>
@@ -181,20 +177,12 @@
             <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
                 <Icon
                     icon="refresh"
-                    classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white -mt-1 ml-3"
+                    classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white -mt-0.5 ml-3"
                 />
             </button>
         {/if}
     </div>
-    <TransactionTabs
-        list={queryTransactions}
-        tabs={filters}
-        filterBy={getIncomingFlag}
-        on:search={handleSearch}
-        {scrollDetection}
-        {scroll}
-        {transactionTabsOffset}
-    >
+    <TransactionTabs list={queryTransactions} tabs={filters} filterBy={getIncomingFlag} on:search={handleSearch}>
         <div slot="transaction" let:transaction>
             {#if $isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
