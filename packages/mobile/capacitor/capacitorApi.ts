@@ -324,7 +324,7 @@ export const CapacitorApi: IPlatform = {
      * Opens the native OS Share dialog
      * @param {string} text Set some text to share
      */
-    share: async (title?: string, text?: string, url?: string) => {
+    share: async (text: string = '') => {
         await Share.share({
             text,
         })
