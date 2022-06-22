@@ -5,7 +5,15 @@
     import { accountRoute, accountRouter, walletRoute } from '@core/router'
     import { AccountRoute, WalletRoute } from '@core/router/enums'
 
-    import { AccountActionsModal, BottomNavigation, DashboardPane, Drawer, Text, Modal } from 'shared/components'
+    import {
+        AccountActionsModal,
+        ActivityDetail,
+        BottomNavigation,
+        DashboardPane,
+        Drawer,
+        Text,
+        Modal,
+    } from 'shared/components'
     import {
         AccountActions,
         AddressHistory,
@@ -47,6 +55,7 @@
         removeEventListeners,
         selectedAccount,
         selectedAccountId,
+        selectedMessage,
         transferState,
         updateBalanceOverview,
         wallet,
@@ -94,6 +103,7 @@
     let isGeneratingAddress = false
 
     let drawer: Drawer
+    let activityDrawer: Drawer
 
     let headerHeight = 0
     let scroll = false
@@ -463,6 +473,10 @@
         })
     }
 
+    function handleActivityDrawerBackClick(): void {
+        selectedMessage.set(null)
+    }
+
     onDestroy(() => {
         unsubscribeHeaderScale()
         unsubscribeLiftDasboard()
@@ -522,13 +536,20 @@
                                     {scroll}
                                     {scrollDetection}
                                     transactions={getAccountMessages($selectedAccount)}
-                                    transactionTabsOffset="{bottomNavigation?.getHeight() * 1.3}px"
+                                    bottomOffset="{bottomNavigation?.getHeight() * 0.8}px"
                                 />
                             </div>
                         {/if}
                     </DashboardPane>
                 </div>
                 <BottomNavigation locale={localize} bind:this={bottomNavigation} />
+                {#if $selectedMessage}
+                    <Drawer opened bind:this={activityDrawer} onClose={handleActivityDrawerBackClick}>
+                        <div class="overflow-y-auto h-2/3 space-y-2.5">
+                            <ActivityDetail {...$selectedMessage} />
+                        </div>
+                    </Drawer>
+                {/if}
             </div>
         </div>
     {:else}
