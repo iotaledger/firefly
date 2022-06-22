@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Drawer, Icon, Text, ProfileActions } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
-    import { activeProfile, getColor } from 'shared/lib/profile'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { activeProfile, getAccountColor } from 'shared/lib/profile'
+    import { selectedAccountStore } from 'shared/lib/wallet'
     import { Settings } from 'shared/routes'
     import {
         profileRoute,
@@ -16,7 +16,7 @@
 
     export let opacity = 1
 
-    $: profileColor = getColor($activeProfile, $selectedAccount?.id) as string
+    $: profileColor = getAccountColor($selectedAccountStore?.id) as string
 
     let drawer: Drawer
 

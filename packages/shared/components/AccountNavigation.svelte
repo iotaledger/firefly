@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { AccountSwitcher } from 'shared/components/drawerContent'
     import { mobileHeaderAnimation } from '@lib/animation'
-    import { activeProfile, getColor } from '@lib/profile'
-    import { selectedAccount } from '@lib/wallet'
+    import { getAccountColor } from '@lib/profile'
+    import { selectedAccountStore } from '@lib/wallet'
     import { createAccountCallback, WalletAccount } from '@lib/typings/wallet'
     import { Drawer, Icon, Text } from 'shared/components'
     import CreateAccount from 'shared/components/popups/CreateAccount.svelte'
@@ -54,8 +54,8 @@
             "
         use:animateTranslationLeft
     >
-        <span class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)}" />
-        <Text type="h4">{$selectedAccount?.alias}</Text>
+        <span class="circle" style="--account-color: {getAccountColor($selectedAccountStore?.id)}" />
+        <Text type="h4">{$selectedAccountStore?.alias}</Text>
         <div class="transform transition-transform {isDrawerOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon icon="chevron-down" height="18" width="18" classes="text-gray-800 dark:text-white" />
         </div>

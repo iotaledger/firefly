@@ -6,7 +6,7 @@ import { activeProfile } from 'shared/lib/profile'
 import { Asset, Token } from 'shared/lib/typings/assets'
 import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
 import { UNIT_MAP } from 'shared/lib/units'
-import { selectedAccount } from 'shared/lib/wallet'
+import { selectedAccountStore } from 'shared/lib/wallet'
 import { derived } from 'svelte/store'
 import { StakingAirdrop } from 'shared/lib/participation/types'
 import { getNumberOfDecimalPlaces } from '@lib/utils'
@@ -16,7 +16,7 @@ export const assets = derived(
         exchangeRates,
         currencies,
         activeProfile,
-        selectedAccount,
+        selectedAccountStore,
         totalAssemblyStakingRewards,
         totalShimmerStakingRewards,
     ],

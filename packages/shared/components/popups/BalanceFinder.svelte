@@ -1,13 +1,14 @@
 <script lang="typescript">
+    import { Locale } from '@core/i18n'
+    import { displayErrorEventToUser } from '@lib/errors'
+    import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
+    import { currentSyncingAccountStore, isSyncing } from '@lib/wallet'
     import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { closePopup } from 'shared/lib/popup'
-    import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
-    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { Locale, localize } from '@core/i18n'
-    import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
+    import { closePopup } from 'shared/lib/popup'
+    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
+    import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { onDestroy } from 'svelte'
 
     export let locale: Locale
@@ -22,13 +23,17 @@
     let accountDiscoveryThreshold = $isLedgerProfile ? 3 : 10
     let password = ''
     let error = ''
-    let isBusy = false
+    let isBusy = $isSyncing || $currentSyncingAccountStore !== null
     let hasUsedBalanceFinder = false
+
+    $: if (isBusy && !$isSyncing && $currentSyncingAccountStore === null) {
+        isBusy = false
+        hasUsedBalanceFinder = true
+    }
 
     async function handleFindBalances() {
         try {
             error = ''
-            isBusy = true
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await asyncSetStrongholdPassword(password)
@@ -40,6 +45,7 @@
                 return
             }
 
+            isBusy = true
             await asyncSyncAccounts(startAddressIndex, currentGapLimit, accountDiscoveryThreshold, false)
 
             previousGapLimit = currentGapLimit
@@ -49,14 +55,7 @@
         } catch (err) {
             error = locale(err.error)
 
-            if ($isLedgerProfile) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, err)
-            } else {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error),
-                })
-            }
+            displayErrorEventToUser(err)
         } finally {
             isBusy = false
         }

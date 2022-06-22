@@ -7,7 +7,7 @@
     import { activeProfile, updateProfile } from 'shared/lib/profile'
     import { accountRouter, resetWalletRoute } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
-    import { asyncRemoveWalletAccount, setSelectedAccount, selectedAccount, wallet } from 'shared/lib/wallet'
+    import { asyncRemoveWalletAccount, setSelectedAccount, selectedAccountStore, wallet } from 'shared/lib/wallet'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { SettingsIcons } from 'shared/lib/typings/icons'
 
@@ -18,11 +18,11 @@
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    const hidden = hiddenAccounts.includes($selectedAccount?.id)
+    const hidden = hiddenAccounts.includes($selectedAccountStore?.id)
     const canDelete =
-        $selectedAccount.index === $accounts.length - 1 &&
-        $selectedAccount.rawIotaBalance === 0 &&
-        $selectedAccount.messages.length === 0
+        $selectedAccountStore.index === $accounts.length - 1 &&
+        $selectedAccountStore.rawIotaBalance === 0 &&
+        $selectedAccountStore.messages.length === 0
 
     const handleCustomiseAccountClick = () => {
         $accountRouter.goTo(AccountRoute.Manage)
@@ -30,12 +30,12 @@
     }
 
     const handleViewAddressHistoryClick = () => {
-        openPopup({ type: 'addressHistory', props: { account: selectedAccount } })
+        openPopup({ type: 'addressHistory', props: { account: selectedAccountStore } })
         modal.close()
     }
 
     function handleExportTransactionHistoryClick() {
-        openPopup({ type: 'exportTransactionHistory', props: { account: selectedAccount }, hideClose: false })
+        openPopup({ type: 'exportTransactionHistory', props: { account: selectedAccountStore }, hideClose: false })
         modal.close()
     }
 
@@ -43,7 +43,7 @@
         openPopup({
             type: 'hideAccount',
             props: {
-                account: selectedAccount,
+                account: selectedAccountStore,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
                 hideAccount: (id: string) => {
                     if (!hiddenAccounts.includes(id)) {
@@ -52,7 +52,8 @@
                     }
                     resetWalletRoute()
                     const nextSelectedAccount =
-                        $viewableAccounts[$selectedAccount?.index] ?? $viewableAccounts[$viewableAccounts.length - 1]
+                        $viewableAccounts[$selectedAccountStore?.index] ??
+                        $viewableAccounts[$viewableAccounts.length - 1]
                     setSelectedAccount(nextSelectedAccount?.id)
                 },
             },
@@ -64,10 +65,10 @@
         openPopup({
             type: 'deleteAccount',
             props: {
-                account: selectedAccount,
+                account: selectedAccountStore,
                 hasMultipleAccounts: $viewableAccounts.length > 1,
                 deleteAccount: async (id: string) => {
-                    await asyncRemoveWalletAccount(get(selectedAccount).id)
+                    await asyncRemoveWalletAccount(get(selectedAccountStore).id)
 
                     if (!hiddenAccounts.includes(id)) {
                         hiddenAccounts.push(id)
@@ -82,7 +83,7 @@
     }
 
     const handleShowAccountClick = () => {
-        const idx = hiddenAccounts.indexOf($selectedAccount?.id)
+        const idx = hiddenAccounts.indexOf($selectedAccountStore?.id)
         if (idx >= 0) {
             hiddenAccounts.splice(idx, 1)
             updateProfile('hiddenAccounts', hiddenAccounts)

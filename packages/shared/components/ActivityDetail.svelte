@@ -6,7 +6,7 @@
     import { formatDate, localize } from '@core/i18n'
     import { getOfficialExplorer } from 'shared/lib/network'
     import { Platform } from 'shared/lib/platform'
-    import { activeProfile, getColor } from 'shared/lib/profile'
+    import { activeProfile, getAccountColor } from 'shared/lib/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { Payload } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -128,8 +128,8 @@
         $currencies[CurrencyTypes.USD],
         $exchangeRates[$activeProfile?.settings.currency]
     )
-    $: senderColor = getColor($activeProfile, senderAccount?.id) as string
-    $: receiverColor = getColor($activeProfile, receiverAccount?.id) as string
+    $: senderColor = getAccountColor(senderAccount?.id) as string
+    $: receiverColor = getAccountColor(receiverAccount?.id) as string
 </script>
 
 {#if $mobile}

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { ActivityDetail, ActivityRow, Drawer, Icon, Text, TransactionTabs, Input } from 'shared/components'
+    import { ActivityDetail, ActivityRow, Icon, Text, Input } from 'shared/components'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -11,11 +11,13 @@
         isSyncing,
         getIncomingFlag,
         isFirstSessionSync,
-        selectedAccount,
+        selectedAccountStore,
         selectedMessage,
         sendAddressFromTransactionPayload,
         receiverAddressesFromTransactionPayload,
         walletSetupType,
+        selectedAccountIdStore,
+        currentSyncingAccountStore,
     } from 'shared/lib/wallet'
     import { Transaction } from 'shared/lib/typings/message'
     import { SetupType } from 'shared/lib/typings/setup'
@@ -36,11 +38,13 @@
         selectedMessage.set(null)
     }
 
+    $: isSelectedAccountSyncing = $currentSyncingAccountStore?.id === $selectedAccountIdStore || $isSyncing
+
     const handleSyncAccountClick = () => {
         if (!$isSyncing) {
             const _syncAccount = () => {
                 $isSyncing = true
-                api.syncAccount($selectedAccount?.id, {
+                api.syncAccount($selectedAccountStore?.id, {
                     onSuccess() {
                         $isSyncing = false
                     },
@@ -179,10 +183,10 @@
                     <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
                 </Text>
                 {#if !$selectedMessage || $mobile}
-                    <button on:click={handleSyncAccountClick} class:pointer-events-none={$isSyncing}>
+                    <button on:click={handleSyncAccountClick} class:pointer-events-none={isSelectedAccountSyncing}>
                         <Icon
                             icon="refresh"
-                            classes="{$isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                            classes="{isSelectedAccountSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
                         />
                     </button>
                 {/if}

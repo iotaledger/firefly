@@ -5,16 +5,14 @@
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
-    import { activeProfile, getColor } from '@lib/profile'
-    import { isSyncing, isTransferring, selectedAccount, setSelectedAccount, wallet } from '@lib/wallet'
-    import { formatUnitPrecision } from '@lib/units'
-    import { Unit } from '@iota/unit-converter'
+    import { getAccountColor } from '@lib/profile'
+    import { isSyncing, isTransferring, selectedAccountStore, setSelectedAccount, wallet } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
     export let handleCreateAccountPress = (): void => {}
 
     const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
-    const isSelectedAccount = (accountId) => accountId !== $selectedAccount?.id
+    const isSelectedAccount = (accountId) => accountId !== $selectedAccountStore?.id
     const { balanceOverview } = $wallet
 
     let toggleEdit = false
@@ -59,7 +57,7 @@
                 on:click={() => handleAccountClick(account.id)}
                 class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 pl-3 rounded"
             >
-                <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
+                <div class="circle" style="--account-color: {getAccountColor(account.id)};" />
                 <Text classes={isSelectedAccount(account.id) ? 'opacity-50' : ''} type="h5">
                     {account.alias}
                 </Text>

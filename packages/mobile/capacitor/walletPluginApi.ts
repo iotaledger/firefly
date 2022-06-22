@@ -21,7 +21,7 @@ import {
     startBackgroundSync as _startBackgroundSync,
     stopBackgroundSync as _stopBackgroundSync,
     syncAccount as _syncAccount,
-    SyncAccountOptions,
+    AccountSyncOptions,
     syncAccounts as _syncAccounts,
 } from '@lib/typings/account'
 import { BridgeMessage, CommunicationIds, MessageResponse } from '@lib/typings/bridge'
@@ -188,7 +188,7 @@ export const api = {
         (__ids) =>
             _latestAddress(sendMessage, __ids, accountId),
     syncAccount:
-        (accountId: AccountIdentifier, options?: SyncAccountOptions): Api =>
+        (accountId: AccountIdentifier, options?: AccountSyncOptions): Api =>
         (__ids) =>
             _syncAccount(sendMessage, __ids, accountId, options),
     isLatestAddressUnused:

@@ -38,7 +38,7 @@
     import {
         api,
         asyncCreateAccount,
-        asyncSyncAccountOffline,
+        asyncSyncAccount,
         isBackgroundSyncing,
         isFirstSessionSync,
         isSyncing,
@@ -55,6 +55,7 @@
         LAST_ASSEMBLY_STAKING_PERIOD,
         LAST_SHIMMER_STAKING_PERIOD,
     } from '@lib/participation/constants'
+    import { pendingParticipations, resetParticipation } from 'shared/lib/participation/stores'
 
     export let locale: Locale
 
@@ -88,6 +89,14 @@
         if (os) {
             openSnapshotPopup()
         }
+    })
+
+    let previousPendingParticipationsLength = 0
+    const unsubscribePendingParticipations = pendingParticipations.subscribe((participations) => {
+        if (participations?.length < previousPendingParticipationsLength && participations?.length === 0) {
+            resetParticipation()
+        }
+        previousPendingParticipationsLength = participations?.length ?? 0
     })
 
     $: if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
@@ -214,6 +223,7 @@
     onDestroy(() => {
         unsubscribeAccountsLoaded()
         unsubscribeOngoingSnapshot()
+        unsubscribePendingParticipations()
 
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
@@ -306,7 +316,7 @@
         const _create = async (): Promise<unknown> => {
             try {
                 const account = await asyncCreateAccount(alias, color)
-                await asyncSyncAccountOffline(account)
+                await asyncSyncAccount(account)
 
                 setSelectedAccount(account?.id)
                 $accountRouter.reset()

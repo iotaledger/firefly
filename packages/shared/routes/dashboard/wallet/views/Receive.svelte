@@ -6,7 +6,7 @@
     import { Button, Icon, QR, QRImage, Spinner, Text } from 'shared/components'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
-    import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccount } from 'shared/lib/wallet'
+    import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccountStore } from 'shared/lib/wallet'
 
     export let isGeneratingAddress = false
     export let onGenerateAddress: (id: string) => void = () => {}
@@ -18,7 +18,7 @@
     $: qrSize = Math.max(Math.min(wrapperWidth - 225, wrapperHeight - 225, 200), 0)
 
     const generateNewAddress = (): void => {
-        onGenerateAddress($selectedAccount.id)
+        onGenerateAddress($selectedAccountStore.id)
     }
 
     const handleCloseClick = (): void => {
@@ -39,18 +39,18 @@
             <Icon icon="close" classes="text-gray-800 dark:text-white" />
         </button>
         <div class="grid pt-44">
-            <QRImage size={5} data={$selectedAccount.depositAddress} />
+            <QRImage size={5} data={$selectedAccountStore.depositAddress} />
         </div>
         <Text secondary smaller classes="p-4">
             {$activeProfile?.isDeveloperProfile
                 ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                 : localize('general.myAddress')}
         </Text>
-        <Text type="pre">{$selectedAccount.depositAddress}</Text>
+        <Text type="pre">{$selectedAccountStore.depositAddress}</Text>
         <button
             class="flex flex-row justify-center items-start h-12 w-full text-blue-500 -mt-10"
             disabled={isGeneratingAddress}
-            on:click={() => setClipboard($selectedAccount.depositAddress)}
+            on:click={() => setClipboard($selectedAccountStore.depositAddress)}
         >
             <Icon icon="copy" classes="text-blue-500 dark:text-blue-500" />
             {localize('general.copyAddress')}
@@ -59,7 +59,7 @@
             <Button
                 disabled={isGeneratingAddress}
                 classes="w-full"
-                onClick={() => handleShareClick($selectedAccount.depositAddress)}
+                onClick={() => handleShareClick($selectedAccountStore.depositAddress)}
             >
                 {localize('general.shareAddress')}
             </Button>
@@ -103,7 +103,7 @@
             </div>
         {:else}
             <div class="flex flex-auto items-center justify-center mb-4">
-                <QR size={qrSize} data={$selectedAccount.depositAddress} />
+                <QR size={qrSize} data={$selectedAccountStore.depositAddress} />
             </div>
             <div class="mb-6">
                 <Text secondary smaller classes="mb-1">
@@ -111,12 +111,12 @@
                         ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                         : localize('general.myAddress')}
                 </Text>
-                <Text type="pre">{$selectedAccount.depositAddress}</Text>
+                <Text type="pre">{$selectedAccountStore.depositAddress}</Text>
             </div>
             <Button
                 disabled={isGeneratingAddress}
                 classes="w-full"
-                onClick={() => setClipboard($selectedAccount.depositAddress)}
+                onClick={() => setClipboard($selectedAccountStore.depositAddress)}
             >
                 {localize('general.copyAddress')}
             </Button>
