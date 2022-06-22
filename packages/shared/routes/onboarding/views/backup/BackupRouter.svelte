@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { BackupView, BackupToFileView, RecoveryPhraseView, VerifyRecoveryPhraseView } from './views/'
+    import { BackupView, BackupToFileView, RecoveryPhraseView, VerifyRecoveryPhraseView } from './views'
     import { localize } from '@core/i18n'
     import { backupRoute, BackupRouter, BackupRoute, FireflyEvent } from '@core/router'
     import { mnemonic, strongholdPassword } from '@contexts/onboarding'

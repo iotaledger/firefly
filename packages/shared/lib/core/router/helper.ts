@@ -1,6 +1,7 @@
 import { get } from 'svelte/store'
 
 import { isDeepLinkRequestActive } from '@common/deep-links'
+import { clearSendParams } from '@lib/app'
 import { closePopup } from '@lib/popup'
 import { selectedMessage } from '@lib/wallet'
 
@@ -8,15 +9,17 @@ import { appRouter, AppRouter } from './app-router'
 import { accountRouter, AccountRouter } from './account-router'
 import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
+import { onboardingRouter, OnboardingRouter } from './onboarding-router'
 import { SettingsRouter, settingsRouter } from './settings-router'
-import { ledgerRouter, LedgerRouter } from './subrouters'
-import { clearSendParams } from '@lib/app'
+import { ledgerRouter, LedgerRouter, NetworkRouter, networkRouter } from './subrouters'
 
 export const initRouters = (): void => {
     appRouter.set(new AppRouter())
     dashboardRouter.set(new DashboardRouter())
     ledgerRouter.set(new LedgerRouter())
     accountRouter.set(new AccountRouter())
+    networkRouter.set(new NetworkRouter())
+    onboardingRouter.set(new OnboardingRouter())
     settingsRouter.set(new SettingsRouter())
 }
 

@@ -3,7 +3,7 @@
     import { mobile } from '@core/app'
     import { localize, _ } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { SettingsIcons } from 'shared/lib/typings/icons'
+    import { SettingsIcons } from '@lib/typings/icons'
     import {
         AdvancedSettingsNoProfile,
         GeneralSettings,

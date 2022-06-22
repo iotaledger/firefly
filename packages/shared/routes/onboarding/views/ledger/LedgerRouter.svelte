@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
-    import { currentLedgerMigrationProgress } from 'shared/lib/migration'
+    import { currentLedgerMigrationProgress } from '@lib/migration'
     import { FireflyEvent, ledgerRoute, ledgerRouter, LedgerRoute } from '@core/router'
     import {
         AccountIndexView,
@@ -11,8 +11,8 @@
         LegacyIntroView,
         RestoreFromLedgerView,
         SwitchAppsView,
-    } from './views/'
-    import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
+    } from './views'
+    import { LedgerMigrationProgress } from '@lib/typings/migration'
 
     $: $ledgerRoute, updateMigrationProgress()
 

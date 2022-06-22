@@ -7,7 +7,7 @@
         SecuringSpentAddressesView,
         SecurityCheckCompletedView,
         TransferFragmentedFundsView,
-    } from './views/'
+    } from './views'
     import { FireflyEvent, migrateRoute, MigrateRouter, MigrateRoute } from '@core/router'
 
     const migrateRouter = new MigrateRouter()

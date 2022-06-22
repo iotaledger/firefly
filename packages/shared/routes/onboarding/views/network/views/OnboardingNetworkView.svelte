@@ -6,7 +6,7 @@
     import { localize } from '@core/i18n'
     import { NetworkType } from '@core/network'
     import { createNewProfile, newProfile, updateNewProfile } from '@core/profile'
-    import { appRouter } from '@core/router'
+    import { networkRouter } from '@core/router'
     import { cleanupOnboarding } from '@contexts/onboarding'
 
     const networkProtocol = $newProfile.networkProtocol
@@ -23,14 +23,14 @@
         } else {
             await createNewProfile($newProfile?.isDeveloperProfile, $newProfile?.networkProtocol, networkType)
         }
-        $appRouter.next({ networkType })
+        $networkRouter.next({ networkType })
     }
 
     async function onBackClick(): Promise<void> {
         const isDeveloperProfile = $newProfile.isDeveloperProfile
         await cleanupOnboarding(true)
         updateNewProfile({ isDeveloperProfile })
-        $appRouter.previous()
+        $networkRouter.previous()
     }
 </script>
 

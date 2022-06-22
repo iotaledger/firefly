@@ -1,4 +1,10 @@
 export enum AppRoute {
+    Dashboard = 'dashboard',
+    Login = 'login',
+    Onboarding = 'onboarding',
+}
+
+export enum OnboardingRoute {
     Welcome = 'welcome',
     Legal = 'legal',
     CrashReporting = 'crashReporting',
@@ -7,21 +13,17 @@ export enum AppRoute {
     Setup = 'setup',
     // TODO: ledger replace create
     Create = 'create',
-    Protocol = 'protocol',
-    Network = 'network',
-    CustomNetwork = 'customNetwork',
     Secure = 'secure',
     Password = 'password',
     LedgerSetup = 'ledgerSetup',
     Protect = 'protect',
+    Network = 'network',
     Backup = 'backup',
     Import = 'import',
     Migrate = 'migrate',
     Balance = 'balance',
     ClaimRewards = 'claimRewards',
     Congratulations = 'congratulations',
-    Dashboard = 'dashboard',
-    Login = 'login',
 }
 
 export enum LedgerRoute {
@@ -148,4 +150,10 @@ export enum MigrateRoute {
     SecureSpentAddresses = 'secureSpentAddresses',
     SecuringSpentAddresses = 'securingSpentAddresses',
     SecurityCheckCompleted = 'securityCheckCompleted',
+}
+
+export enum NetworkRoute {
+    Protocol = 'protocol',
+    Network = 'network',
+    CustomNetwork = 'customNetwork',
 }

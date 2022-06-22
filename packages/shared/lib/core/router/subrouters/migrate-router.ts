@@ -48,6 +48,7 @@ export class MigrateRouter extends Subrouter<MigrateRoute> {
                 get(appRouter).next()
                 break
         }
+
         this.setNext(nextRoute)
     }
 }

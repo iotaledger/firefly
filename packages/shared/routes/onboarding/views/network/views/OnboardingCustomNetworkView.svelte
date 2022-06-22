@@ -2,17 +2,17 @@
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
-    import { appRouter } from '@core/router'
+    import { networkRouter } from '@core/router'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
     let isBusy = false
 
     function onBackClick(): void {
-        $appRouter.previous()
+        $networkRouter.previous()
     }
     function onSuccess(): void {
-        $appRouter.next()
+        $networkRouter.next()
     }
 </script>
 
