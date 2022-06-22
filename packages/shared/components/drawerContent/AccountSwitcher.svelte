@@ -7,6 +7,8 @@
     import { participationAction } from '@lib/participation/stores'
     import { activeProfile, getColor } from '@lib/profile'
     import { isSyncing, isTransferring, selectedAccount, setSelectedAccount } from '@lib/wallet'
+    import { formatUnitPrecision } from '@lib/units'
+    import { Unit } from '@iota/unit-converter'
 
     export let accounts: WalletAccount[] = []
     export let handleCreateAccountPress = (): void => {}
@@ -38,6 +40,12 @@
 
     function handleCreateAccountClick(): void {
         handleCreateAccountPress()
+    }
+
+    function getTotal(): string {
+        let total = 0
+        accounts.forEach((account) => (total += account.rawIotaBalance))
+        return formatUnitPrecision(total, Unit.Mi, true)
     }
 </script>
 
@@ -82,18 +90,22 @@
             {/if}
         </div>
     {/each}
-    <Text classes="mt-1 pr-4" type="h5">
-        {account.balance}
-    </Text>
 </div>
-<HR />
-<button
-    class="flex flex-row w-full hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-3 pt-6"
-    on:click={handleCreateAccountClick}
->
-    <Icon icon="plus" height="16" width="16" classes="text-blue-500" />
-    <Text highlighted type="h5">{localize('general.createNewWallet')}</Text>
-</button>
+<div class="accounts flex flex-col space-y-1 overflow-auto mb-2">
+    <HR />
+    <div class="flex w-full justify-between space-y-3">
+        <button
+            class="flex flex-row pr-6 hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-3 pt-6"
+            on:click={handleCreateAccountClick}
+        >
+            <Icon icon="plus" height="16" width="16" classes="text-blue-500" />
+            <Text highlighted type="h5">{localize('general.createNewWallet')}</Text>
+        </button>
+        <Text classes="pr-4 pt-3" type="h5">
+            {getTotal()}
+        </Text>
+    </div>
+</div>
 
 <style type="text/scss">
     button {
