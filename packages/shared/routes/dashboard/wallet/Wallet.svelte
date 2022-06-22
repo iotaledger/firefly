@@ -472,7 +472,7 @@
 
 {#if $selectedAccount}
     {#if $mobile}
-        <div class="wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900">
+        <div class="wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900 overflow-hidden">
             <div class="flex flex-auto flex-col">
                 <!-- Total Balance, Accounts list & Send/Receive -->
                 <div class="absolute flex w-full" use:setHeaderHeight>
