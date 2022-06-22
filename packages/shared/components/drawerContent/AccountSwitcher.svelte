@@ -1,18 +1,23 @@
 <script lang="typescript">
-    import { resetAccountRouter } from '@core/router'
+    import { resetAccountRouter, accountRouter, AccountRoute } from '@core/router'
     import { WalletAccount } from '@lib/typings/wallet'
     import { HR, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
-    // import { openPopup } from '@lib/popup'
     import { activeProfile, getColor } from '@lib/profile'
-    import { isSyncing, isTransferring, selectedAccount, setSelectedAccount } from '@lib/wallet'
+    import { isSyncing, isTransferring, selectedAccount, setSelectedAccount, wallet } from '@lib/wallet'
+    import { formatUnitPrecision } from '@lib/units'
+    import { Unit } from '@iota/unit-converter'
 
     export let accounts: WalletAccount[] = []
-    // export let onCreateAccount = (..._: any[]): void => {}
     export let handleCreateAccountPress = (): void => {}
-    export let onAccountSelection = (): void => {}
+
+    const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
+    const isSelectedAccount = (accountId) => accountId !== $selectedAccount?.id
+    const { balanceOverview } = $wallet
+
+    let toggleEdit = false
 
     function handleAccountClick(accountId: string): void {
         if ($isSyncing) {
@@ -24,7 +29,6 @@
         } else {
             setSelectedAccount(accountId)
             resetAccountRouter(false)
-            onAccountSelection()
         }
     }
 
@@ -36,35 +40,67 @@
     }
 
     function handleCreateAccountClick(): void {
-        // Intentionally hidden to remember that we could use a popup too.
-        // openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
-        // onAccountSelection()
         handleCreateAccountPress()
     }
 </script>
 
-<div class="mb-4">
+<div class="mb-4 flex w-full justify-center">
     <Text type="h4">{localize('general.switchWallet')}</Text>
+    <button class="fixed right-5 pr-5" on:click={() => (toggleEdit = !toggleEdit)}>
+        <Text type="h5" overrideColor classes="text-blue-500 pt-1">
+            {toggleEdit ? localize('actions.cancel') : localize('actions.edit')}
+        </Text>
+    </button>
 </div>
 <div class="accounts flex flex-col space-y-1 overflow-auto mb-5">
     {#each accounts as account}
-        <button
-            on:click={() => handleAccountClick(account.id)}
-            class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 rounded"
-        >
-            <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
-            <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">{account.alias}</Text>
-        </button>
+        <div class="flex w-full justify-between space-y-3">
+            <button
+                on:click={() => handleAccountClick(account.id)}
+                class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 pl-3 rounded"
+            >
+                <div class="circle" style="--account-color: {getColor($activeProfile, account.id)};" />
+                <Text classes={isSelectedAccount(account.id) ? 'opacity-50' : ''} type="h5">
+                    {account.alias}
+                </Text>
+            </button>
+            {#if toggleEdit}
+                <button
+                    class="{isSelectedAccount(account.id)
+                        ? 'opacity-50 dark:text-white'
+                        : 'text-blue-500'} pr-4 py-3 flex flex-row space-x-1 "
+                    on:click={() => handleMenuClick()}
+                    disabled={isSelectedAccount(account.id)}
+                >
+                    {#each Array(3) as _}
+                        <svg width="4" height="4" viewBox="0 0 4 4">
+                            <circle cx="2" cy="2" r="2" class="fill-current" />
+                        </svg>
+                    {/each}
+                </button>
+            {:else}
+                <Text classes="{isSelectedAccount(account.id) ? 'opacity-50' : ''} mt-1 pr-4" type="h5">
+                    {account.balance}
+                </Text>
+            {/if}
+        </div>
     {/each}
 </div>
 <HR />
-<button
-    class="flex flex-row w-full hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-4 pt-6"
-    on:click={handleCreateAccountClick}
->
-    <Icon icon="plus" height="16" width="16" classes="text-blue-500" />
-    <Text highlighted type="h5">{localize('general.createNewWallet')}</Text>
-</button>
+<div class="accounts flex flex-col space-y-1 overflow-auto mb-2">
+    <div class="flex w-full justify-between space-y-3">
+        <button
+            class="flex flex-row pr-6 hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-3 pt-6"
+            on:click={handleCreateAccountClick}
+        >
+            <Icon icon="plus" height="16" width="16" classes="text-blue-500" />
+            <Text highlighted type="h5">{localize('general.createNewWallet')}</Text>
+        </button>
+        <Text classes="pr-4 pt-3 opacity-50" type="h5">
+            {localize('general.total', { values: { balance: $balanceOverview.balance } })}
+        </Text>
+    </div>
+</div>
 
 <style type="text/scss">
     button {
