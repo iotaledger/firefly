@@ -6,7 +6,7 @@
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
     import { activeProfile, getColor } from '@lib/profile'
-    import { isSyncing, isTransferring, selectedAccount, setSelectedAccount } from '@lib/wallet'
+    import { isSyncing, isTransferring, selectedAccount, setSelectedAccount, wallet } from '@lib/wallet'
     import { formatUnitPrecision } from '@lib/units'
     import { Unit } from '@iota/unit-converter'
 
@@ -15,6 +15,7 @@
 
     const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
     const isSelectedAccount = (accountId) => accountId !== $selectedAccount?.id
+    const { balanceOverview } = $wallet
 
     let toggleEdit = false
 
@@ -40,12 +41,6 @@
 
     function handleCreateAccountClick(): void {
         handleCreateAccountPress()
-    }
-
-    function getTotal(): string {
-        let total = 0
-        accounts.forEach((account) => (total += account.rawIotaBalance))
-        return formatUnitPrecision(total, Unit.Mi, true)
     }
 </script>
 
@@ -91,8 +86,8 @@
         </div>
     {/each}
 </div>
+<HR />
 <div class="accounts flex flex-col space-y-1 overflow-auto mb-2">
-    <HR />
     <div class="flex w-full justify-between space-y-3">
         <button
             class="flex flex-row pr-6 hover:bg-gray-50 dark:hover:bg-gray-800 items-center space-x-2 px-3 pt-6"
@@ -101,8 +96,8 @@
             <Icon icon="plus" height="16" width="16" classes="text-blue-500" />
             <Text highlighted type="h5">{localize('general.createNewWallet')}</Text>
         </button>
-        <Text classes="pr-4 pt-3" type="h5">
-            {getTotal()}
+        <Text classes="pr-4 pt-3 opacity-50" type="h5">
+            {localize('general.total', { values: { balance: $balanceOverview.balance } })}
         </Text>
     </div>
 </div>
