@@ -6,7 +6,7 @@
     import { Button, Icon, QR, QRImage, Spinner, Text } from 'shared/components'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
-    import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccount } from 'shared/lib/wallet'
+    import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccountStore } from 'shared/lib/wallet'
 
     export let isGeneratingAddress = false
     export let onGenerateAddress: (id: string) => void = () => {}
@@ -18,7 +18,7 @@
     $: qrSize = Math.max(Math.min(wrapperWidth - 225, wrapperHeight - 225, 200), 0)
 
     const generateNewAddress = (): void => {
-        onGenerateAddress($selectedAccount.id)
+        onGenerateAddress($selectedAccountStore.id)
     }
 
     const handleCloseClick = (): void => {
@@ -64,9 +64,9 @@
     {:else}
         <div class="flex flex-auto items-center justify-center mb-4">
             {#if $mobile}
-                <QRImage size={5} data={$selectedAccount.depositAddress} />
+                <QRImage size={5} data={$selectedAccountStore.depositAddress} />
             {:else}
-                <QR size={qrSize} data={$selectedAccount.depositAddress} />
+                <QR size={qrSize} data={$selectedAccountStore.depositAddress} />
             {/if}
         </div>
         <div class="mb-6">
@@ -75,12 +75,12 @@
                     ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                     : localize('general.myAddress')}
             </Text>
-            <Text type="pre">{$selectedAccount.depositAddress}</Text>
+            <Text type="pre">{$selectedAccountStore.depositAddress}</Text>
         </div>
         <Button
             disabled={isGeneratingAddress}
             classes="w-full"
-            onClick={() => setClipboard($selectedAccount.depositAddress)}
+            onClick={() => setClipboard($selectedAccountStore.depositAddress)}
         >
             {localize('general.copyAddress')}
         </Button>

@@ -5,17 +5,17 @@
     import { accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import { mobile } from 'shared/lib/app'
-    import { selectedAccount, selectedMessage, wallet } from 'shared/lib/wallet'
+    import { selectedAccountStore, selectedMessage, wallet } from 'shared/lib/wallet'
 
     const { accounts } = $wallet
 
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
-    const hidden = hiddenAccounts.includes($selectedAccount?.id)
+    const hidden = hiddenAccounts.includes($selectedAccountStore?.id)
     const canDelete =
-        $selectedAccount.index === $accounts.length - 1 &&
-        $selectedAccount.rawIotaBalance === 0 &&
-        $selectedAccount.messages.length === 0
+        $selectedAccountStore.index === $accounts.length - 1 &&
+        $selectedAccountStore.rawIotaBalance === 0 &&
+        $selectedAccountStore.messages.length === 0
 
     function handleCustomiseAccountClick() {
         $accountRouter.goTo(AccountRoute.Manage)
@@ -38,7 +38,7 @@
     }
 
     function handleShowAccountClick() {
-        const idx = hiddenAccounts.indexOf($selectedAccount?.id)
+        const idx = hiddenAccounts.indexOf($selectedAccountStore?.id)
         if (idx >= 0) {
             hiddenAccounts.splice(idx, 1)
             updateProfile('hiddenAccounts', hiddenAccounts)

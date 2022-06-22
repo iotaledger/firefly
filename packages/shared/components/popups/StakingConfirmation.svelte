@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { selectedAccountStore } from 'shared/lib/wallet'
     import { Button, Checkbox, Icon, Text, Tooltip } from 'shared/components'
     import { ledgerDeviceState } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -65,7 +65,7 @@
     }
 
     function canReachAirdropMinimum(airdrop: StakingAirdrop): boolean {
-        return canAccountReachMinimumAirdrop($selectedAccount, airdrop)
+        return canAccountReachMinimumAirdrop($selectedAccountStore, airdrop)
     }
 
     function getRewards(airdrop: StakingAirdrop): string {
@@ -74,7 +74,7 @@
         }
         return estimateStakingAirdropReward(
             airdrop,
-            $isPartiallyStaked ? getUnstakedFunds() : $selectedAccount?.rawIotaBalance,
+            $isPartiallyStaked ? getUnstakedFunds() : $selectedAccountStore?.rawIotaBalance,
             true
         )
     }
@@ -154,7 +154,7 @@
         {localize(`popups.stakingConfirmation.subtitle${$isPartiallyStaked ? 'Merge' : 'Stake'}`)}
     </Text>
     <Text type="h1">
-        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds()) : $selectedAccount.balance}
+        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds()) : $selectedAccountStore.balance}
     </Text>
 </div>
 {#if showInfoText()}

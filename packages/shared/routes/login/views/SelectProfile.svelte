@@ -66,7 +66,7 @@
                 name={localize('general.addProfile')}
                 classes="border-solid border-2 border-gray-400 cursor-pointer"
             >
-                <Icon icon="plus" classes="text-blue-500" />
+                <Icon height="15" width="15" icon="plus" classes="text-blue-500" />
             </Profile>
         </div>
     </div>

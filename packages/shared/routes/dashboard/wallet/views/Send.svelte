@@ -37,7 +37,7 @@
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
     import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { DUST_THRESHOLD, isTransferring, selectedAccount, transferState, wallet } from 'shared/lib/wallet'
+    import { DUST_THRESHOLD, isTransferring, selectedAccountStore, transferState, wallet } from 'shared/lib/wallet'
     import { mobile } from 'shared/lib/app'
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
@@ -49,7 +49,7 @@
     const { accounts } = $wallet
 
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
-    const addressPrefix = ($selectedAccount ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
+    const addressPrefix = ($selectedAccountStore ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
 
     enum SEND_TYPE {
         EXTERNAL = 'sendPayment',
@@ -301,11 +301,11 @@
          * amounts to 1 MI to compare them.
          */
         const amountAsMi = changeUnits(amountAsIota, Unit.i, Unit.Mi)
-        const balanceAsMi = changeUnits($selectedAccount.rawIotaBalance, Unit.i, Unit.Mi)
+        const balanceAsMi = changeUnits($selectedAccountStore.rawIotaBalance, Unit.i, Unit.Mi)
         const isMaxAmount = Math.round(amountAsMi) === Math.round(balanceAsMi)
 
-        const hasDustRemaining = Math.abs($selectedAccount.rawIotaBalance - amountAsIota) < DUST_THRESHOLD
-        return isMaxAmount && isFiat && hasDustRemaining ? $selectedAccount.rawIotaBalance : amountAsIota
+        const hasDustRemaining = Math.abs($selectedAccountStore.rawIotaBalance - amountAsIota) < DUST_THRESHOLD
+        return isMaxAmount && isFiat && hasDustRemaining ? $selectedAccountStore.rawIotaBalance : amountAsIota
     }
 
     const handleSendClick = (): void => {
@@ -340,7 +340,7 @@
             } else {
                 amountRaw = setRawAmount(amountAsFloat)
 
-                if (amountRaw > $selectedAccount.rawIotaBalance) {
+                if (amountRaw > $selectedAccountStore.rawIotaBalance) {
                     amountError = localize('error.send.amountTooHigh')
                 } else if (amountRaw <= 0) {
                     amountError = localize('error.send.amountZero')
@@ -370,7 +370,7 @@
             openPopup({
                 type: 'transaction',
                 props: {
-                    accountId: $selectedAccount.id,
+                    accountId: $selectedAccountStore.id,
                     internal: internal || accountAlias,
                     amount: amountRaw,
                     unit,
@@ -391,8 +391,13 @@
              * in another account. Send parameters are reset once the transfer completes.
              */
             isInternal
-                ? onInternalTransfer($selectedAccount.id, to.id, amountRaw, selectedSendType === SEND_TYPE.INTERNAL)
-                : onSend($selectedAccount.id, address, amountRaw)
+                ? onInternalTransfer(
+                      $selectedAccountStore.id,
+                      to.id,
+                      amountRaw,
+                      selectedSendType === SEND_TYPE.INTERNAL
+                  )
+                : onSend($selectedAccountStore.id, address, amountRaw)
 
         if ($isSoftwareProfile) {
             _send(isInternal)
@@ -415,9 +420,13 @@
     const handleMaxClick = (): void => {
         amount = isFiatCurrency(unit)
             ? formatNumber(
-                  convertToFiat($selectedAccount.rawIotaBalance, $currencies[CurrencyTypes.USD], $exchangeRates[unit])
+                  convertToFiat(
+                      $selectedAccountStore.rawIotaBalance,
+                      $currencies[CurrencyTypes.USD],
+                      $exchangeRates[unit]
+                  )
               )
-            : formatUnitPrecision($selectedAccount.rawIotaBalance, unit, false)
+            : formatUnitPrecision($selectedAccountStore.rawIotaBalance, unit, false)
     }
 
     const updateFromSendParams = (sendParams: SendParams): void => {
@@ -425,11 +434,11 @@
         unit = sendParams.unit ?? (Number(sendParams.amount) === 0 ? Unit.Mi : Unit.i)
         amount = sendParams.amount !== undefined ? String(sendParams.amount) : ''
         address = sendParams.address
-        to = sendParams?.toWalletAccount?.id !== $selectedAccount.id ? sendParams?.toWalletAccount : undefined
+        to = sendParams?.toWalletAccount?.id !== $selectedAccountStore.id ? sendParams?.toWalletAccount : undefined
         if (accountsDropdownItems) {
             to =
                 $liveAccounts.length === 2
-                    ? accountsDropdownItems[$selectedAccount.id === $liveAccounts[0].id ? 1 : 0]
+                    ? accountsDropdownItems[$selectedAccountStore.id === $liveAccounts[0].id ? 1 : 0]
                     : to
         }
     }
@@ -455,7 +464,7 @@
 
     const selectInternal = async (evt: Event): Promise<void> => {
         const node = evt.target as HTMLElement
-        const accountItems = accountsDropdownItems.filter((item) => item.id !== $selectedAccount.id)
+        const accountItems = accountsDropdownItems.filter((item) => item.id !== $selectedAccountStore.id)
         const index = await Platform.showActionSheet({
             title: localize(`general.${SEND_TYPE.INTERNAL}`),
             options: [...accountItems.map((item) => ({ title: item.alias })), { title: 'Cancel', style: 'CANCEL' }],
@@ -621,6 +630,11 @@
                     {/if}
                 </div>
                 <div class="flex flex-row space-x-4">
+                    {#if $mobile}
+                        <button on:click={onQRClick}>
+                            <Icon icon="qr" classes="text-blue-500" />
+                        </button>
+                    {/if}
                     <button on:click={handleBackClick}>
                         <Icon icon="close" classes="text-gray-800 dark:text-white" />
                     </button>
@@ -634,7 +648,7 @@
                                 value={to?.label || null}
                                 label={localize('general.to')}
                                 placeholder={localize('general.to')}
-                                items={accountsDropdownItems.filter((a) => a.id !== $selectedAccount.id)}
+                                items={accountsDropdownItems.filter((a) => a.id !== $selectedAccountStore.id)}
                                 onSelect={handleToSelect}
                                 disabled={$isTransferring || $liveAccounts.length === 2}
                                 error={toError}
@@ -649,7 +663,7 @@
                                 disabled={$isTransferring}
                                 placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
                                 classes="mb-6"
-                                autofocus={true}
+                                autofocus
                             />
                         {/if}
                         <Amount

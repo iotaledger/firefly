@@ -6,9 +6,9 @@
     import { accountRoute, accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import { selectedAccount } from 'shared/lib/wallet'
     import { spring } from 'svelte/motion'
     import { onDestroy } from 'svelte'
+    import { selectedAccountStore } from 'shared/lib/wallet'
 
     export let classes = ''
     export let scale = spring(1)
@@ -92,13 +92,13 @@
                 <div on:click={togglePreciseBalance} use:animateMobileBalance>
                     <Text type="h1">
                         {showPreciseBalance
-                            ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
-                            : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
+                            ? formatUnitPrecision($selectedAccountStore?.rawIotaBalance, Unit.Mi)
+                            : formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3)}
                     </Text>
                 </div>
                 <div use:animateMobileCurrency>
                     <Text type="h4" smaller overrideColor classes="text-gray-500">
-                        {$selectedAccount?.balanceEquiv}
+                        {$selectedAccountStore?.balanceEquiv}
                     </Text>
                 </div>
             </div>
@@ -132,12 +132,12 @@
                 <div on:click={togglePreciseBalance}>
                     <Text type="h2">
                         {showPreciseBalance
-                            ? formatUnitPrecision($selectedAccount?.rawIotaBalance, Unit.Mi)
-                            : formatUnitBestMatch($selectedAccount?.rawIotaBalance, true, 3)}
+                            ? formatUnitPrecision($selectedAccountStore?.rawIotaBalance, Unit.Mi)
+                            : formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3)}
                     </Text>
                 </div>
                 <Text type="p" smaller overrideColor={false}>
-                    {$selectedAccount?.balanceEquiv}
+                    {$selectedAccountStore?.balanceEquiv}
                 </Text>
             </div>
         </div>
