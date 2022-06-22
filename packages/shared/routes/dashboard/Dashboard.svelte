@@ -2,6 +2,7 @@
     import { onDestroy, onMount, setContext } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
     import { Settings, Staking, Wallet } from 'shared/routes'
+    import { mobileHeaderAnimation } from '@lib/animation'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
@@ -70,7 +71,7 @@
     let fundsSoonNotificationId
     let developerProfileNotificationId
     let showTopNav = false
-
+    let mobileMainMenuOpacity = 1
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
@@ -406,12 +407,20 @@
     $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
     }
+
+    const unsubscribe = mobileHeaderAnimation.subscribe((curr) => {
+        mobileMainMenuOpacity = curr - (1 - curr)
+    })
+
+    onDestroy(() => {
+        unsubscribe()
+    })
 </script>
 
 {#if $mobile}
     <Idle />
     <div class="flex flex-col w-full h-full">
-        <MainMenu />
+        <MainMenu opacity={mobileMainMenuOpacity} />
         <TopNavigation {onCreateAccount} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />

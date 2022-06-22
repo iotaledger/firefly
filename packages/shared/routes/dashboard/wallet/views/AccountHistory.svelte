@@ -24,14 +24,12 @@
     import { formatUnitBestMatch } from 'shared/lib/units'
 
     export let transactions: AccountMessage[] = []
-
-    let drawer: Drawer
+    export let scroll = true
+    export let scrollDetection = (node: Element): void => {}
+    export let bottomOffset = '0px'
 
     function handleTransactionClick(transaction: AccountMessage): void {
         selectedMessage.set(transaction)
-        if ($mobile) {
-            drawer.open()
-        }
     }
 
     function handleBackClick(): void {
@@ -230,7 +228,13 @@
     {#if $selectedMessage && !$mobile}
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
     {:else}
-        <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
+        <div
+            class="activity-wrapper flex-auto h-1 space-y-2.5 -mr-2 pr-2 {scroll
+                ? 'overflow-y-auto scroll-secondary'
+                : ''}"
+            style="--bottom-offset: {bottomOffset}"
+            use:scrollDetection
+        >
             {#if $isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
             {:else if queryTransactions.length}
@@ -245,10 +249,9 @@
         </div>
     {/if}
 </div>
-{#if $selectedMessage && $mobile}
-    <Drawer opened bind:this={drawer} onClose={handleBackClick}>
-        <div class="overflow-y-auto h-2/3 space-y-2.5">
-            <ActivityDetail {...$selectedMessage} />
-        </div>
-    </Drawer>
-{/if}
+
+<style>
+    .activity-wrapper {
+        padding-bottom: var(--bottom-offset);
+    }
+</style>

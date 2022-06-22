@@ -14,6 +14,8 @@
     } from '@core/router'
     import { localize } from '@core/i18n'
 
+    export let opacity = 1
+
     $: profileColor = getColor($activeProfile, $selectedAccount?.id) as string
 
     let drawer: Drawer
@@ -42,7 +44,7 @@
 
 <button
     class="menu-button fixed left-6 z-10 w-11 h-11 flex items-center justify-center rounded-full leading-100"
-    style="--background-color: {profileColor};"
+    style="--background-color: {profileColor}; --opacity: {opacity}"
     on:click={handleClick}
 >
     <Text type="h4" overrideColor classes="z-10 uppercase">{profileInitial || 'A'}</Text>
@@ -80,5 +82,6 @@
     .menu-button {
         background-color: var(--background-color);
         margin-top: calc(env(safe-area-inset-top) + 10px);
+        opacity: var(--opacity);
     }
 </style>
