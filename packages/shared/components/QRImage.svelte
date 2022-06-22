@@ -39,4 +39,4 @@
     }
 </script>
 
-<span style="background: url({QRTag}) no-repeat center; padding: {size * 1.8}ch;" />
+<span style="background: url({QRTag}) no-repeat center; padding: {size * 2}ch;" />
