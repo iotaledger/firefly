@@ -35,6 +35,12 @@ export enum AccountRoute {
     Manage = 'manage',
     Send = 'send',
     Receive = 'receive',
+    Delete = 'delete',
+    Actions = 'actions',
+    AddressHistory = 'addressHistory',
+    ExportTransactionHistory = 'exportTransactionHistory',
+    HideAccount = 'hideAccount',
+    DeleteAccount = 'deleteAccount',
 }
 
 export enum DashboardRoute {
@@ -153,4 +159,14 @@ export enum MigrateRoute {
     SecureSpentAddresses = 'secureSpentAddresses',
     SecuringSpentAddresses = 'securingSpentAddresses',
     SecurityCheckCompleted = 'securityCheckCompleted',
+}
+
+export enum WalletRoute {
+    Assets = 'assets',
+    AccountHistory = 'accountHistory',
+}
+
+export enum ProfileRoute {
+    ProfileActions = 'profileActions',
+    Settings = 'settings',
 }

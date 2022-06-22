@@ -12,6 +12,7 @@
         SettingsRoute,
         settingsRouter,
     } from '@core/router'
+    import { mobileHeaderAnimation } from '@lib/animation'
     import {
         CURRENT_ASSEMBLY_STAKING_PERIOD,
         CURRENT_SHIMMER_STAKING_PERIOD,
@@ -19,18 +20,18 @@
         LAST_SHIMMER_STAKING_PERIOD,
     } from '@lib/participation/constants'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
-    import { Idle, Sidebar, MainMenu } from 'shared/components'
+    import { Idle, MainMenu, Sidebar } from 'shared/components'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { stopNetworkPoll, pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { pollNetworkStatus, stopNetworkPoll } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
-    import { stopParticipationPoll, startParticipationPoll, updateStakingPeriodCache } from 'shared/lib/participation'
+    import { startParticipationPoll, stopParticipationPoll, updateStakingPeriodCache } from 'shared/lib/participation'
     import { pendingParticipations, resetPerformingParticipation } from 'shared/lib/participation/stores'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -67,7 +68,7 @@
     let fundsSoonNotificationId
     let developerProfileNotificationId
     let showTopNav = false
-
+    let mobileMainMenuOpacity = 1
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
@@ -356,7 +357,7 @@
                 ],
             })
         }
-        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId) {
+        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId && !$mobile) {
             // Show developer profile warning
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
@@ -405,13 +406,21 @@
     $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
     }
+
+    const unsubscribe = mobileHeaderAnimation.subscribe((curr) => {
+        mobileMainMenuOpacity = curr - (1 - curr)
+    })
+
+    onDestroy(() => {
+        unsubscribe()
+    })
 </script>
 
 {#if $mobile}
     <Idle />
     <div class="flex flex-col w-full h-full">
+        <MainMenu opacity={mobileMainMenuOpacity} />
         <TopNavigation {onCreateAccount} />
-        <MainMenu {locale} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
     </div>

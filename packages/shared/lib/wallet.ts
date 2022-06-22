@@ -1,3 +1,6 @@
+import { localize } from '@core/i18n'
+import { displayErrorEventToUser } from '@lib/errors'
+import { setProfileAccount } from 'shared/lib/profile'
 import type {
     ErrorEventPayload,
     Event,
@@ -7,9 +10,6 @@ import type {
     TransferProgressEventData,
     TransferState,
 } from 'shared/lib/typings/events'
-import { localize } from '@core/i18n'
-import { displayErrorEventToUser } from '@lib/errors'
-import { setProfileAccount } from 'shared/lib/profile'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { derived, get, Writable, writable } from 'svelte/store'
@@ -169,7 +169,7 @@ export const api: IWalletApi = new Proxy(
                     }
                 }
 
-                return originalMethod.apply(target, args)
+                return originalMethod?.apply(target, args)
             }
         },
     }

@@ -50,7 +50,7 @@
             glimpse
             classes="w-full mx-auto block"
             on:submit={onSubmit}
-            autofocus
+            autofocus={!$mobile}
             disabled={busy}
             {error}
         />
@@ -60,7 +60,10 @@
             {locale('actions.confirmPin')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-pink dark:bg-gray-900'}">
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-pink dark:bg-gray-900'}"
+    >
         <Animation classes="setup-anim-aspect-ratio" animation="repeat-pin-desktop" />
     </div>
 </OnboardingLayout>

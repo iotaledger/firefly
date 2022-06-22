@@ -1109,7 +1109,8 @@
         "profiles": "Perfils",
         "dev": "Dev",
         "createAccount": "Crea un moneder",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Crea un moneder nou",
+        "switchWallet": "Canvia de moneder",
         "accountName": "Nom del moneder",
         "latestTransactions": "Últimes transaccions",
         "transactions": "Transaccions",
@@ -1187,6 +1188,7 @@
         "capsLock": "El bloqueig de majúscules està activat",
         "version": "Versió {version}",
         "yourWallets": "Your Wallets",
+        "walletActions": "Accions del moneder",
         "unknown": "Desconegut",
         "none": "None",
         "staked": "Staked",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Cartera",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Criptoactius",
+        "activity": "Activitat"
     }
 }

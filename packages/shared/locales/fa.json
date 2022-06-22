@@ -20,7 +20,7 @@
         },
         "profile": {
             "title": "ایجاد پروفایل",
-            "profileName": "نام پروفایل",
+            "profileName": "نام حساب",
             "body1": "شما میتوانید برای نگهداری توکن های خود به صورت جداگانه و ارتقای حریم خصوصی، چندین پروفایل کاربری درست کنید.",
             "body2": {
                 "first": "فعلاً ،با اسم اولین حساب کاربری شما شروع کنیم.",
@@ -200,18 +200,18 @@
         },
         "switchLedgerApps": {
             "title": "تغییر برنامه لجر",
-            "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
+            "body": "\"لطفاً برای ادامه انتقال به برنامه {legacy} در دستگاه Ledger خود بروید. وقتی آماده شد، ادامه را فشار دهید\"."
         },
         "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
+            "title": "فهرست حساب Ledger را انتخاب کنید",
+            "body": "فهرست حساب Ledger را که با Trinity استفاده کردید انتخاب کنید. برای اکثر کاربران این شاخص پیش فرض 0 خواهد بود.",
             "accountIndex": "شاخص حساب",
             "accountPage": "صفحه حساب",
             "standard": "عادی",
             "expert": "حرفه‌ای",
             "takingAWhile": "ممکن است مدتی طول بکشد...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "notGeneratingAddresses": "آیا Ledger شما آدرس تولید می کند?",
+            "reinstallLegacy": "اگر نه، دستگاه را جدا کرده و دوباره امتحان کنید. اگر مشکل ادامه داشت، ممکن است لازم باشد برنامه {legacy} را دوباره نصب کنید."
         },
         "importBackupPassword": {
             "body1": "لطفا رمز عبور بک آپ خود را وارد کنید.",
@@ -242,7 +242,7 @@
             "miningBundle": "در حال استخراج دسته تراکنش ها",
             "problemRestoringWallet": "بازیابی کیف پول شما با مشکل مواجه شد. لطفا دوباره سعی کنید.",
             "minimumMigrationAmountSpentAddresses": "حداقل مبلغ انتقال برای هر آدرس 1 Mi است. موجودی خود را دوباره کنترل کنید.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "tooManyAddressesToMigrate": "آدرس‌های زیادی با موجودی کم برای انتقال دارید. اگر موجودی کل شما درست به نظر نمی رسد، دوباره بررسی کنید.",
             "cannotMigrateAllYourFunds": "امکان انتقال تمام وجوه شما به دلیل موجودی بسیار کم بعضی از آدرس‌ها وجود ندارد. با این حال می‌توانید ادامه دهید. مقدار {value} از دست خواهد رفت.",
             "error": "انتقال وجوه شما با مشکل مواجه شد. لطفا دوباره سعی کنید."
         },
@@ -268,12 +268,12 @@
         },
         "securingSpentAddresses": {
             "title": "درحال ایمن سازی آدرس‌ها...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "این فرایند {minutes, plural, one {1 دقیقه} other {# دقیقه}} طول خواهد کشید.",
             "body2": "کامپیوتر شما با تمام ظرفیت مشغول به کار خواهد شد، بهتر است مشغول کار دیگری شوید تا این عملیات تمام شود."
         },
         "transferFragmentedFunds": {
             "body1": "اکنون Firefly برای انتقال وجوه شما اقدام می‌کند. این کار ممکن است مدتی طول بکشد.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
+            "body2": "مطمئن شوید که Ledger شما متصل است و برنامه {legacy} همیشه در طول انتقال باز است.",
             "migrate": "انتقال وجوه",
             "transaction": "تراکنش {number}",
             "rerun": "تلاش مجدد"
@@ -287,7 +287,7 @@
             "body": "پیش از ادامه از موجودی خود مطمئن شوید. اگر مواردی صحیح نبود می‌توانید دوباره بررسی کنید.",
             "error": "حداقل مبلغ انتقال برای هر آدرس 1 Mi است. اگر موجودی شما صحیح نیست، دوباره کنترل کنید.",
             "zeroBalance": "دوباره کنترل کنید. اگر کماکان موجودی شما صحیح نیست احتمالا seed را اشتباه وارد کرده‌اید.",
-            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+            "zeroBalanceLedgerLegacy": "دوباره بررسی کنید. اگر هنوز نمی توانید موجودی خود را پیدا کنید، ممکن است فهرست حساب اشتباهی را انتخاب کرده باشید."
         },
         "settings": {
             "settings": "تنظیمات",
@@ -318,7 +318,7 @@
             "theme": {
                 "title": "تم",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "اگر تم سیستم خود را تغییر دهید، ممکن است لازم باشد Firefly را مجددا راه‌اندازی کنید تا جلوه ها را ببینید"
             },
             "language": {
                 "title": "زبان",
@@ -334,7 +334,7 @@
             },
             "networkStatus": {
                 "title": "وضعیت شبکه",
-                "description": "Displays the status of the node you are currently connected to"
+                "description": "وضعیت گره ای را که در حال حاضر به آن متصل هستید نمایش می دهد"
             },
             "exportStronghold": {
                 "title": "استخراج بک آپ",
@@ -375,28 +375,28 @@
             },
             "deepLinks": {
                 "title": "اتصالات آیوتا",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "description": "با کلیک روی لینک IOTA، به طور خودکار داده های تراکنش را در Firefly پر کنید"
             },
             "networkConfiguration": {
                 "title": "پیکربندی شبکه",
                 "title2": "پیکربندی شبکه",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "تنظیمات شبکه شما به طور خودکار مطابق با پیکربندی گره فعلی به روز می شود (تغییر شبکه منجر به تنظیم مجدد وضعیت کیف پول می شود)",
+                    "nonDev": "تنظیمات شبکه شما به طور خودکار مطابق با پیکربندی گره فعلی به روز می شود"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
+                "switchedNetworks": "شبکه با موفقیت به \"{networkName}\" تغییر یافت.",
                 "resetWallet": "کیف پول شما بازنشانی شده است.",
                 "connectedTo": "اتصال به",
                 "nodeConfiguration": {
                     "title": "انتخاب نود",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
+                    "description": "برای پیکربندی تنظیمات گره و اتصال به گره(های) خود، \"دستی\" را انتخاب کنید",
                     "automatic": "خودکار",
                     "manual": "دستی"
                 }
             },
             "configureNodeList": {
                 "title": "پیکربندی نود",
-                "description": "Manage the list of nodes you connect to",
+                "description": "لیست گره هایی که کیف پول شما به آن متصل می شود را مدیریت کنید",
                 "primaryNode": "گره اصلی",
                 "excludeNode": "حذف گره",
                 "includeNode": "اضافه کردن گره",
@@ -405,8 +405,8 @@
                 "setAsPrimary": "تنظیم به عنوان اصلی",
                 "removeNode": "حذف نود",
                 "includeOfficialNodeList": "اضافه کردن لیست گره های رسمی",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "noNodes": "هیچ گره ای وجود ندارد، قادر به اتصال به شبکه نیست",
+                "noNodesAuto": "نودی وجود ندارد، به جای آن انتخاب اتوماتیک استفاده می شود"
             },
             "proofOfWork": {
                 "title": "اثبات کار",
@@ -418,9 +418,9 @@
             },
             "crashReporting": {
                 "title": "گزارش خرابی",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
+                "body": "وقتی مشکلی روی میدهد با ارسال خودکار اطلاعات کسب شده از آن، به توسعه دهندگان نرم‌افزار فایرفلای کمک کنید",
                 "checkbox": "ارسال گزارش مشکل",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "advice": "لطفاً برنامه Firefly را مجدداً راه‌اندازی کنید تا {sendCrashReports, select, true {شروع اشتراک‌گذاری گزارش‌های خرابی} false {توقف اشتراک‌گذاری گزارش‌های خرابی} other { اعمال این تغییر}}"
             },
             "diagnostics": {
                 "title": "عیب شناسی",
@@ -428,7 +428,7 @@
             },
             "migrateLedgerIndex": {
                 "title": "انتقال شاخص لجر",
-                "description": "Migrate another Trinity account index"
+                "description": "یک فهرست حساب Trinity دیگر را انتقال دهید"
             },
             "troubleshoot": {
                 "title": "عیب یابی",
@@ -457,17 +457,17 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
-            "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
+            "pleaseWait": "لطفا {time, plural, one {1 ثانیه} other {# ثانیه}} صبر کنید",
+            "incorrectAttempts": "{attempts, plural, one {1 تلاش ناموفق} other {# تلاش ناموفق}}"
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkOperational": "شبکه عملیاتی",
+                "networkDegraded": "شبکه خراب است",
+                "networkDown": "شبکه قطع شد",
                 "status": "وضعیت",
                 "messagesPerSecond": "پیام ها در ثانیه",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "نرخ مرجع"
             },
             "profileModal": {
                 "allSettings": "همه تنظیمات",
@@ -484,7 +484,7 @@
                         "connected": "متصل شد",
                         "legacyConnected": "برنامه قدیمی باز",
                         "locked": "قفل شد",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
+                        "mnemonicMismatch": "لجر یا منمونیک اشتباه است",
                         "notDetected": "یافت نشد",
                         "otherConnected": "برنامه باز"
                     }
@@ -503,11 +503,11 @@
             }
         },
         "staking": {
-            "welcome": "Welcome to the staking dashboard!",
+            "welcome": "به فضای staking خوش آمدید!",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
+                "upcoming": "رویداد شروع نشده است",
+                "commencing": "پیش staking باز است",
+                "holdingActive": "استک staking در حال انجام است",
                 "holdingInactive": "استیکینگ باز است",
                 "inactive": "استیکینگ یافت نشد",
                 "ended": "اتمام استیکینگ"
@@ -517,36 +517,36 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected",
-                    "fetching": "Fetching staking event info..."
+                    "upcoming": "بعداً دوباره بررسی کنید",
+                    "commencing": "پیش staking باز است",
+                    "holding": "{duration} staking باقی مانده است",
+                    "ended": "در حال حاضر staking به پایان رسیده است",
+                    "inactive": "هیچ رویداد staking وجود ندارد",
+                    "fetching": "در حال پردازش اطلاعات رویداد staking..."
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "توکن‌های {token} خود را به اشتراک بگذارید تا به‌محض شروع staking در {date}، هر 10 ثانیه به‌طور خودکار پاداش دریافت کنید.",
+                    "commencing": "توکن‌های {token} خود را به اشتراک بگذارید تا به‌محض شروع staking در {date}، هر 10 ثانیه به‌طور خودکار پاداش دریافت کنید.",
+                    "holdingAndStaking": "شما هر 10 ثانیه به صورت خودکار جایزه را دریافت می کنید.",
+                    "holdingAndNotStaking": "توکن‌های {token} خود را به اشتراک بگذارید تا هر 10 ثانیه یک بار پاداش دریافت کنید.",
+                    "endedAndDidStake": "پس از راه‌اندازی شبکه، پاداش‌های {token} در کیف پول شما توزیع می‌شود.",
+                    "endedAndDidNotStake": "شما در این ایردراپ شرکت نکردید.",
+                    "endedAndDidNotReachMinRewards": "شما به اندازه کافی {token} توکن برای رسیدن به حداقل پاداش های airdrop را staking نکرده اید.",
+                    "inactive": "پیکربندی شبکه را در تنظیمات پیشرفته باز کنید و با کلیک بر روی \"مشاهده اطلاعات\" مطمئن شوید که گره فعلی دارای ویژگی \"مشارکت\" است."
                 }
             },
             "airdrops": {
                 "holding": "باقی مانده",
-                "commencing": "Until staking begins",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "commencing": "تا زمانی که staking شروع شود",
+                "currentStakingPeriod": "دوره staking فعلی",
+                "totalWalletRewards": "مجموع جوایز کیف پول",
                 "assembly": {
                     "name": "اسمبلی",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
+                    "description": "اسمبلی یک شبکه چند زنجیره ای بدون مجوز و بسیار مقیاس پذیر برای ساخت و استقرار قراردادهای هوشمند قابل ترکیب است. اسمبلی آینده web3 است."
                 },
                 "shimmer": {
                     "name": "شیمر",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "شبکه صحنه سازی با انگیزه برای پیشبرد نوآوری های عمده در IOTA. هر چه پیش آید، خوش آید. نحوه تکامل Shimmer به شما بستگی دارد."
                 }
             },
             "banners": {
@@ -562,84 +562,84 @@
         },
         "governance": {
             "votingPower": {
-                "title": "My voting weight",
+                "title": "وزن رای من",
                 "info": {
-                    "title": "Your voting weight",
-                    "equality": "1000 IOTA = 1 VOTE",
-                    "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "title": "وزن رای تو",
+                    "equality": "1000 یوتا = 1 رای",
+                    "description1": "وزن رای شما از موجودی کیف پول شما به دست می آید. هنگامی که یک پیشنهاد رأی گیری در مرحله شمارش است، آرای فعال هر 10 ثانیه شمارش و جمع می شوند.",
+                    "description2": "1 کیلو وزن رای (1000 توکن IOTA) هر 10 ثانیه یک رای می دهد. این بدان معناست که برای رسیدن به وزن کامل رای خود باید در تمام مدت مرحله شمارش رای خود را ادامه دهید."
                 }
             },
             "info": {
-                "title": "Governance info",
-                "description": "With the help of the IOTA Foundation, the IOTA community has developed an IOTA voting protocol, allowing you to participate in governance decisions by voting with your IOTA tokens in Firefly.",
-                "link": "Learn about voting with IOTA",
+                "title": "اطلاعات حاکمیتی",
+                "description": "با کمک بنیاد IOTA، جامعه IOTA یک پروتکل رای گیری IOTA ایجاد کرده است که به شما امکان می دهد با رای دادن با توکن های IOTA خود در Firefly در تصمیم گیری های حاکمیتی شرکت کنید.",
+                "link": "درباره رای دادن با IOTA بیاموزید",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "votingOpen": "Voting open",
-                        "countingStarts": "Counting begins",
-                        "countingStops": "Counting ends",
-                        "votingOpened": "Voting opened",
-                        "countingStarted": "Counting began",
-                        "countingStopped": "Counting ended"
+                        "votingOpen": "رای گیری باز است",
+                        "countingStarts": "شمارش شروع می شود",
+                        "countingStops": "شمارش به پایان می رسد",
+                        "votingOpened": "رای گیری باز شد",
+                        "countingStarted": "شمارش شروع شد",
+                        "countingStopped": "شمارش به پایان رسید"
                     },
                     "votingRate": {
-                        "title": "Voting rate",
-                        "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                        "title": "نرخ رای دادن",
+                        "body": "{amount} هر {time, plural, one {# second} other {# seconds}} {votesPerMilestone} رای ایجاد می کند."
                     },
                     "countedVotes": {
-                        "title": "Counted votes",
-                        "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
+                        "title": "آرای شمارش شده",
+                        "body": "آرا در فواصل زمانی {time, plural, one {# second} other {# seconds}} در طول دوره شمارش شمارش می شوند. {amount} هر {time, plural, one {# second} other {# seconds}} {votesPerMilestone} رای تولید می کند."
                     },
                     "partiallyVoted": {
-                        "title": "New unused funds: {amount}",
-                        "body": "You have received additional funds to {account}. You can vote with these tokens by merging your vote."
+                        "title": "وجوه استفاده نشده جدید: {amount}",
+                        "body": "وجوه اضافی به {account} دریافت کرده‌اید. با ادغام رای خود می توانید با این نشانه ها رای دهید."
                     },
                     "maximumVotes": {
-                        "title": "Maximum votes",
-                        "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
+                        "title": "حداکثر آرا",
+                        "body": "برای رسیدن به حداکثر آرای خود، باید برای دوره شمارش باقیمانده به رأی دادن ادامه دهید."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "آرا: {amount}"
                     }
                 }
             },
             "events": {
                 "status": {
-                    "upcoming": "Announcement",
-                    "commencing": "Voting open",
-                    "holding": "Counting",
-                    "ended": "Ended"
+                    "upcoming": "اطلاعيه",
+                    "commencing": "رای گیری باز است",
+                    "holding": "شمارش",
+                    "ended": "به پایان رسید"
                 },
-                "button": "View proposal",
+                "button": "مشاهده پیشنهادات",
                 "treasury": {
                     "notFound": {
-                        "title": "Unable to load Community Treasury vote",
-                        "subtitle": "Please connect to a node that has added this vote",
-                        "buttonConnect": "Connect to default node",
-                        "buttonSettings": "View node settings",
-                        "fetching": "Fetching governance event info..."
+                        "title": "بارگیری رأی خزانه داری انجمن امکان پذیر نیست",
+                        "subtitle": "لطفاً به گره ای که این رای را اضافه کرده است وصل شوید",
+                        "buttonConnect": "به گره پیش فرض متصل شوید",
+                        "buttonSettings": "تنظیمات گره را مشاهده کنید",
+                        "fetching": "در حال پردازش اطلاعات رویداد حاکمیتی..."
                     }
                 }
             },
             "eventDetails": {
-                "votingOpens": "Voting opens on",
-                "votingProgress": "Time remaining",
-                "votingPower": "Your voting weight",
-                "votesCounted": "Your counted votes",
-                "maximumVotes": "Your maximum votes",
-                "countingStarts": "Counting begins on",
-                "currentResult": "Current result",
-                "finalResult": "Final result",
+                "votingOpens": "رای گیری باز می شود در",
+                "votingProgress": "زمان باقیمانده",
+                "votingPower": "وزن رای تو",
+                "votesCounted": "آرای شمارش شده شما",
+                "maximumVotes": "حداکثر آرای شما",
+                "countingStarts": "شمارش شروع می شود",
+                "currentResult": "نتایج فعلی",
+                "finalResult": "نتایج نهایی",
                 "answerHeader": {
-                    "activeVoting": "Active voting",
-                    "selected": "Submitted",
-                    "notSelected": "Not selected",
-                    "winner": "Winner"
+                    "activeVoting": "رای گیری فعال شد",
+                    "selected": "ارسال شده",
+                    "notSelected": "انتخاب نشده است",
+                    "winner": "برنده"
                 }
             },
-            "votes": "votes",
-            "manageVote": "Manage vote"
+            "votes": "آراء",
+            "manageVote": "مدیریت رای"
         }
     },
     "popups": {
@@ -658,7 +658,7 @@
             "updateAvailable": "نسخه به روز شده Firefly قابل دسترس است",
             "updateDetails": "نسخه {version} - {date}",
             "noAutoUpdate": "بروزرسانی خودکار در این نسخه ویندوز غیرفعال است، لطفاً جهت بروزرسانی به https://firefly.iota.org مراجعه کنید.",
-            "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
+            "preReleaseDescription": "شما در حال اجرای یک نسخه پیش از انتشار Firefly هستید. به‌روزرسانی‌ها غیرفعال هستند."
         },
         "backup": {
             "title": "آخرین به روز رسانی: {date}",
@@ -706,7 +706,7 @@
             "nodeAddress": "آدرس نود",
             "optionalUsername": "نام کاربری (اختیاری)",
             "optionalPassword": "رمز عبور (اختیاری)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "توکن وب JSON (اختیاری)",
             "setAsPrimaryNode": "تنظیم به عنوان نود اصلی",
             "removeConfirmation": "آیا مطمئن به حذف این نود هستید؟",
             "removeAllConfirmation": "آیا مطمئن هستید که میخواهید همه نودها را حذف کنید؟",
@@ -716,18 +716,18 @@
                 "networkId": "شناسه شبکه",
                 "bech32HRP": "Bech32 HRP",
                 "features": "ویژگی‌ها",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
+                "confirmedMilestoneIndex": "شاخص نقطه عطف تأیید شد",
+                "pruningIndex": "شاخص کاهش هزینه ها",
                 "messagesPerSecond": "پیام ها در ثانیه",
-                "referencedRate": "Referenced rate"
+                "referencedRate": "نرخ مرجع"
             }
         },
         "switchNetwork": {
             "title": "تعویض شبکه‌",
             "newNetwork": "شبکه جدید",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
+            "resetWarning": "با تغییر شبکه‌ها، شما از سیستم خارج می‌شوید و همه حساب‌ها، موجودی‌ها و سابقه تراکنش‌ها را برای این پروفایل ریست می‌کنید.",
             "switchingNetwork": "در حال تعویض شبکه",
-            "typePassword": "Type your password to switch to:"
+            "typePassword": "رمز عبور خود را برای جابجایی وارد کنیذ:"
         },
         "errorLog": {
             "title": "گزارش خطا",
@@ -752,23 +752,23 @@
         "transaction": {
             "title": "تایید تراکنش",
             "body": "شما در حال انتقال مقدار {amount} هستید به",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccount": "شما در حال ارسال حواله از کیف پولی هستید که در حال حاضر در حال staking است. این ممکن است توکن های شما را از بین ببرد. در صورت تمایل می توانید انتقال را ارسال کنید، اما ممکن است لازم باشد که توکن های باقیمانده خود را مجدداً دریافت کنید.",
+            "sendingFromStakedAccountBelowMinReward": "شما در حال ارسال حواله از کیف پولی هستید که هنوز به حداقل پاداش های Staking نرسیده است. این ممکن است توکن های شما را از بین ببرد و ممکن است جوایز Staking خود را در این کیف پول از دست بدهید.",
+            "sendingFromStakedAccountBelowMinRewardVote": "شما در حال ارسال حواله از کیف پولی هستید که هنوز به حداقل پاداش های Staking نرسیده است. این ممکن است توکن های شما را از بین ببرد و ممکن است جوایز Staking خود را در این کیف پول از دست بدهید. همچنین ممکن است لازم باشد دوباره رای دهید.",
             "sendingFromActiveParticipationAccount": {
-                "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-                "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
+                "stakeVote": "شما در حال ارسال حواله از کیف پولی هستید که در حال حاضر در حال Staking و رای گیری است. این ممکن است توکن های شما را از بین ببرد و رای شما را متوقف کند. با خیال راحت، انتقال را ارسال کنید، اما ممکن است لازم باشد پس از آن مجدداً با توکن های باقیمانده خود رای دهید و دوباره آنها را Stake کنید.",
+                "stake": "شما در حال ارسال حواله از کیف پولی هستید که در حال حاضر در حال staking است. این ممکن است توکن های شما را از بین ببرد. در صورت تمایل می توانید انتقال را ارسال کنید، اما ممکن است لازم باشد که توکن های باقیمانده خود را مجدداً دریافت کنید.",
+                "vote": "شما در حال ارسال حواله از کیف پولی هستید که در حال حاضر در حال رای دادن است. این ممکن است رای شما را متوقف کند. با خیال راحت می توانید حواله را ارسال کنید، اما ممکن است لازم باشد دوباره با توکن های باقیمانده خود رای دهید."
             }
         },
         "balanceFinder": {
             "title": "یابنده موجودی",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
-            "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
+            "body": "جستجوی جامع‌تری در آدرس‌ها انجام دهید تا موجودی‌های گمشده و پاداش‌های ایردراپ قبلی را پیدا کنید. این ممکن است مدتی طول بکشد.",
+            "accountsSearched": "کیف پول جستجو شد",
+            "addressesSearched": "آدرس های جستجو شده در هر کیف پول",
             "accountsFound": "کیف های پیدا شده",
             "totalWalletBalance": "موجودی کل",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
+            "searchAgainHint": "آیا موجودی یا تعداد کیف پول شما نادرست است؟ دوباره جستجو را فشار دهید تا موجودی کامل شما نشان داده شود.",
             "typePassword": "برای شروع جستجو، رمز خود را وارد کنید."
         },
         "riskFunds": {
@@ -789,105 +789,105 @@
             "bodyFirefly": "Firefly تا زمان تکمیل آن غیرفعال شده است. پس از آن انتقال توکن امکان پذیر است."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA app on your Ledger device to continue",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connect": "برای ادامه، برنامه جدید IOTA را در دستگاه Ledger خود باز کنید",
+            "connectLegacy": "برای ادامه، برنامه {legacy} را در دستگاه Ledger خود باز کنید"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+            "confirm": "برای ادامه، درخواست نمایش داده شده در دستگاه Ledger خود را تأیید کنید"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the Ledger apps",
+            "title": "راهنمای نصب برنامه های Ledger",
             "steps": {
-                "0": "Install and open the Ledger Live application",
-                "1": "Ensure that your Ledger is connected",
-                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
-                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
-                "4": "Remember that it's important to close Ledger Live before returning to Firefly"
+                "0": "برنامه Ledger Live را نصب و باز کنید",
+                "1": "مطمئن شوید که Ledger شما متصل است",
+                "2": "جستجوی برنامه‌ها: {legacy} و IOTA (MIOTA)",
+                "3": "هر دو برنامه را نصب کنید: {legacy} و IOTA (MIOTA)",
+                "4": "به یاد داشته باشید که بستن Ledger Live قبل از بازگشت به Firefly بسیار مهم است"
             }
         },
         "ledgerConnectionGuide": {
             "title": "نکته هایی اگر لجر شما وصل نمی شود",
             "steps": {
-                "0": "Make sure Ledger Live is not open on your computer",
-                "1": "Ensure you have unlocked your Ledger device with your PIN",
-                "2": "Open the new IOTA app on your Ledger device",
+                "0": "مطمئن شوید که Ledger Live روی رایانه شما باز نیست",
+                "1": "مطمئن شوید که قفل دستگاه Ledger خود را با پین خود باز کرده اید",
+                "2": "برنامه جدید آیوتارا روی دستگاه لجر باز کنید",
                 "3": {
-                    "text": "Still no luck?",
-                    "link": "Try the official Ledger support page"
+                    "text": "هنوز شانسی ندارید؟",
+                    "link": "صفحه رسمی پشتیبانی لجر را امتحان کنید"
                 }
             }
         },
         "ledgerTransaction": {
             "remainderAddress": {
-                "title": "Confirm remainder address",
-                "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+                "title": "آدرس دریافت را تایید کنید",
+                "info": "تأیید کنید که آدرس دریافت نمایش داده شده در لجر شما با آدرس زیر مطابقت دارد. اگر مطابقت دارند، همانطور که از شما خواسته شده است، هر دو دکمه را در لجر خود فشار دهید."
             },
             "transaction": {
                 "title": "تایید تراکنش",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+                "info": "اطمینان حاصل کنید که اطلاعات تراکنش نمایش داده شده در دستگاه Ledger شما با اطلاعات نمایش داده شده در زیر مطابقت دارد. اگر مطابقت دارند، همانطور که از شما خواسته شده است، هر دو دکمه را در لجر خود فشار دهید."
             }
         },
         "ledgerAddress": {
             "title": "آدرس دریافت را تایید کنید",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "body": "تأیید کنید که آدرس دریافت نمایش داده شده در لجر شما با آدرس زیر مطابقت دارد. اگر مطابقت دارند، همانطور که از شما خواسته شده است، هر دو دکمه را در لجر خود فشار دهید."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "آیا باید فهرست حساب Trinity دیگری را منتقل کنید؟",
+            "body": "همچنین می‌توانید بعداً در تنظیمات پیشرفته انتقال دهید."
         },
         "exportTransactionHistory": {
             "title": "خارج کردن سابقه تراکنش ها",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
+            "body": "تاریخچه تراکنش را برای کیف پول انتخابی صادر کنید. فایل صادر شده با فرمت csv. خواهد بود.",
             "profileName": "نام حساب:",
             "accountName": "نام کیف پول:",
             "typePassword": "برای خارج کردن، رمز خود را وارد کنید"
         },
         "stakingManager": {
             "title": "مدیریت استیک",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "description": "وقتی کیف پولی را به اشتراک می گذارید، یک تراکنش برای خود ارسال می کنید که آن وجوه را به عنوان \"stake\" علامت گذاری می کند. شما می توانید توکن ها را در هر زمانی انتقال دهید، اما به دریافت پاداش های staking ادامه نخواهید داد.",
             "totalFundsStaked": "همه وجوه استیک شده",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "stakedSuccessfully": "وجوه شما برای {account} stake شده است.",
+            "unstakedSuccessfully": "وجوه شما برای {account} unstake شده است.",
+            "singleAccountHint": "به دنبال کیف پول خود هستید؟ فایرفلای تغییر کرده است. در نوار منوی بالا بین کیف پول‌های خود جستجو کنید."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "تایید شرکت",
             "subtitleStake": "شما در حال استیک کردن هستید",
             "subtitleMerge": "شما در حال ادغام هستید",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "اگر نمی‌خواهید در هر دو ایردراپ شرکت کنید، می‌توانید در زیر انصراف دهید. می‌توانید در هر زمانی که خواستید، برای انتخاب مجدد، سهام را لغو کنید و مجدداً stake کنید.",
+            "mergeStakeWarning": "سرمایه شما برای {airdrop} stake می شود. برای تغییر ایردراپ هایی که می خواهید در آن شرکت کنید، این کیف پول را بردارید و دوباره آن را stake کنید.",
             "estimatedAirdrop": "جوایز تخمین زده شده"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "title": "مرحله staking {periodNumber} از {date}",
+            "body": "استک آیوتا برای Assembly ادامه دارد... در مرحله {periodNumber} به مدت 90 روز شرکت کنید. توکن های IOTA خود را به اشتراک بگذارید و جوایز ASMB کسب کنید!",
+            "info": "استک Shimmer اکنون کامل شده است و فقط توکن های ASMB توزیع خواهند شد."
         },
         "governanceManager": {
-            "castYourVote": "Cast your vote",
-            "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
-            "castingVotes": "Casting votes",
-            "stopVoting": "Stop voting",
-            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
-            "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
-            "stoppingVoting": "Stopping voting",
-            "changeVote": "Change vote",
-            "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
-            "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
-            "changingVote": "Changing vote",
-            "manageVotes": "Manage votes",
-            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
-            "mergingVotes": "Merging votes",
-            "votedSuccessfully": "You have started voting with {account}.",
-            "unvotedSuccessfully": "You have stopped voting with {account}.",
+            "castYourVote": "رای خود را بدهید",
+            "castYourVoteInfo": "شما در حال رأی دادن به گزینه {voteValue} ({voteText}) با {amount} هستید",
+            "castingVotes": "رای دادن",
+            "stopVoting": "رای دادن را متوقف کنید",
+            "stopVotingInfo": "آیا مطمئن هستید که می خواهید به گزینه {voteValue} ({voteText}) رای ندهید؟",
+            "stopVotingDisclaimer": "لطفاً توجه داشته باشید که توقف رأی گیری در طول دوره شمارش آرایی که قبلاً شمارش شده است تأثیری نخواهد داشت.",
+            "stoppingVoting": "توقف رای دادن",
+            "changeVote": "تغییر رای",
+            "changeVoteDisclaimer": "لطفاً توجه داشته باشید که تغییر رای خود در طول دوره شمارش بر روی آرایی که قبلاً شمارش شده است تأثیری نخواهد داشت",
+            "changeVoteInfo": "آیا مطمئن هستید که می خواهید رأی خود را به گزینه {voteValue} ({voteText}) تغییر دهید؟",
+            "changingVote": "تغییر رای",
+            "manageVotes": "مدیریت رای",
+            "partialVoteInfo": "شما {amount} را به {account} دریافت کرده‌اید. شما می توانید با ادغام این وجوه با رای فعلی خود رای دهید.",
+            "mergeVoteDisclaimer": "لطفاً توجه داشته باشید که ادغام رأی‌ها بر رأی‌هایی که قبلاً شمارش شده‌اند تأثیر نمی‌گذارد",
+            "mergingVotes": "ادغام آرا",
+            "votedSuccessfully": "شما شروع به رای دادن با {account} کرده اید.",
+            "unvotedSuccessfully": "شما رای دادن با {account} را متوقف کرده اید.",
             "successPopup": {
-                "castVotesTitle": "Voted successfully",
-                "stopVotesTitle": "Voting stopped",
-                "mergeVotesTitle": "Vote merged",
-                "changeVotesTitle": "Vote changed",
-                "castBody": "You are now voting for Option {voteValue} ({voteText}).",
-                "stopBody": "You have stopped voting. This does not impact votes that have already been counted."
+                "castVotesTitle": "با موفقیت رای دادید",
+                "stopVotesTitle": "رای گیری متوقف شد",
+                "mergeVotesTitle": "آرا ادغام شدند",
+                "changeVotesTitle": "رای تغییر پیدا کرد",
+                "castBody": "شما اکنون به گزینه {voteValue} ({voteText}) رأی می دهید.",
+                "stopBody": "شما رای دادن را متوقف کرده اید. این روی آرایی که قبلاً شمارش شده اند تأثیری ندارد."
             }
         },
         "shimmer-info": {
@@ -1047,9 +1047,9 @@
         "mergeFunds": "ادغام وجوه",
         "done": "تمام",
         "castVotes": "Cast votes",
-        "changeVotes": "Change vote",
+        "changeVotes": "تغییر رای",
         "mergeVotes": "Merge vote",
-        "stopVotes": "Stop voting",
+        "stopVotes": "رای دادن را متوقف کنید",
         "okIUnderstand": "بله، متوجه شدم",
         "readMore": "بیشتر بخوانید"
     },
@@ -1109,7 +1109,8 @@
         "profiles": "پروفایل ها",
         "dev": "برنامه نویس",
         "createAccount": "ايجاد كيف پول",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "نام کیف پول",
         "latestTransactions": "آخرین تراکنش ها",
         "transactions": "تراکنش ها",
@@ -1187,6 +1188,7 @@
         "capsLock": "کلید caps lock روشن است",
         "version": "نسخه {version}",
         "yourWallets": "کیف پول های شما",
+        "walletActions": "Wallet Actions",
         "unknown": "ناشناخته",
         "none": "هیچ کدام",
         "staked": "استیک شده",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "کیف پول",
         "staking": "استیکینگ",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

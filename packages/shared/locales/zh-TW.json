@@ -10,7 +10,7 @@
             "checkbox": "我已經閱讀並且接受隱私政策和服務條款"
         },
         "crashReporting": {
-            "title": "當機錯誤回報",
+            "title": "當機錯誤報告",
             "body": "發生錯誤當下自動回報診斷資訊來協助開發者改善Firefly。",
             "checkbox": "發送當機報告給IOTA基金會"
         },
@@ -629,8 +629,8 @@
                 "votesCounted": "您被記錄的票數",
                 "maximumVotes": "您的最高票數",
                 "countingStarts": "計算開始於",
-                "currentResult": "當前成績",
-                "finalResult": "最終成績",
+                "currentResult": "當前結果",
+                "finalResult": "最終結果",
                 "answerHeader": {
                     "activeVoting": "進行中的表決",
                     "selected": "已提交",
@@ -1051,7 +1051,7 @@
         "mergeVotes": "合併選票",
         "stopVotes": "停止投票",
         "okIUnderstand": "好的，我明白",
-        "readMore": "更多"
+        "readMore": "閱讀更多"
     },
     "general": {
         "password": "密碼",
@@ -1109,7 +1109,8 @@
         "profiles": "設定檔",
         "dev": "開發者",
         "createAccount": "建立一個錢包",
-        "addAWallet": "增加錢包",
+        "createNewWallet": "建立新錢包",
+        "switchWallet": "切換錢包",
         "accountName": "錢包名稱",
         "latestTransactions": "最新交易",
         "transactions": "交易紀錄",
@@ -1187,6 +1188,7 @@
         "capsLock": "大寫鎖定已啟用",
         "version": "版本 {version}",
         "yourWallets": "您的錢包",
+        "walletActions": "Wallet Actions",
         "unknown": "未知",
         "none": "無",
         "staked": "已質押",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "錢包",
         "staking": "質押",
-        "governance": "治理"
+        "governance": "治理",
+        "tokens": "代幣",
+        "activity": "活動"
     }
 }

@@ -1109,7 +1109,8 @@
         "profiles": "Profiel",
         "dev": "Dev",
         "createAccount": "Skep 'n Beursie",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Beursie naam",
         "latestTransactions": "Nuutste transaksie",
         "transactions": "Transaksies",
@@ -1187,6 +1188,7 @@
         "capsLock": "Hoofletterslot is aan",
         "version": "Weergawe {version}",
         "yourWallets": "Your Wallets",
+        "walletActions": "Wallet Actions",
         "unknown": "Onbekend",
         "none": "Geen",
         "staked": "Stake",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Beursie",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

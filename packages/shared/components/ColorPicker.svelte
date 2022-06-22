@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { Text, Icon, Tooltip } from 'shared/components'
-    import { AccountColor } from '@lib/typings/color'
-    import { isBright } from '@lib/helpers'
-    import { clickOutside } from '@lib/actions'
     import { localize } from '@core/i18n'
+    import { clickOutside } from '@lib/actions'
+    import { isBright } from '@lib/helpers'
+    import { AccountColor } from '@lib/typings/color'
+    import { GradientPicker, Icon, Text, Tooltip } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
 
     export let active
     export let title = localize('views.picker.color.title')
@@ -60,7 +61,7 @@
     <div class="flex flex-row mb-4">
         <Text type="h5">{title}</Text>
     </div>
-    <ul class="flex flex-row flex-wrap gap-3.5">
+    <ul class="{$mobile ? 'grid grid-cols-5' : 'flex flex-row flex-wrap'} gap-3.5">
         {#each Object.keys(AccountColor).reduce((acc, val) => (/[#]/.test(val) ? acc : [...acc, val.toLowerCase()]), []) as color, i}
             <li
                 tabindex="0"
@@ -90,24 +91,28 @@
         </li>
     </ul>
     {#if showTooltip}
-        <div use:clickOutside on:clickOutside={toggleTooltip}>
-            <Tooltip anchor={tooltipAnchor} position="top">
-                <Text type="p">{localize('views.picker.color.hexCode')}</Text>
-                <input
-                    type="text"
-                    placeholder="#"
-                    pattern="[A-F0-9]{10}"
-                    maxlength="7"
-                    bind:value={inputValue}
-                    on:click={activeCustomColor}
-                    class="w-24 h-full text-16 uppercase leading-140 border border-solid mt-2 bg-white dark:bg-gray-800 border-gray-300
-                    text-gray-800 dark:text-white dark:border-gray-700
-                    hover:border-gray-500 dark:hover:border-gray-700 p-1 rounded text-center"
-                    class:ring-4={customActiveFilled}
-                    class:active={customActiveFilled}
-                />
-            </Tooltip>
-        </div>
+        {#if $mobile}
+            <GradientPicker on:input={(ev) => (inputValue = ev.detail)} />
+        {:else}
+            <div use:clickOutside on:clickOutside={toggleTooltip}>
+                <Tooltip anchor={tooltipAnchor} position="top">
+                    <Text type="p">{localize('views.picker.color.hexCode')}</Text>
+                    <input
+                        type="text"
+                        placeholder="#"
+                        pattern="[A-F0-9]{10}"
+                        maxlength="7"
+                        bind:value={inputValue}
+                        on:click={activeCustomColor}
+                        class="w-24 h-full text-16 uppercase leading-140 border border-solid mt-2 bg-white dark:bg-gray-800 border-gray-300
+                        text-gray-800 dark:text-white dark:border-gray-700
+                        hover:border-gray-500 dark:hover:border-gray-700 p-1 rounded text-center"
+                        class:ring-4={customActiveFilled}
+                        class:active={customActiveFilled}
+                    />
+                </Tooltip>
+            </div>
+        {/if}
     {/if}
 </div>
 

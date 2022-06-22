@@ -7,7 +7,8 @@
         "legal": {
             "title": "Privacy Policy & Terms of Service",
             "body": "Please review the Privacy Policy and Terms of Service.",
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -470,7 +471,10 @@
                 "referencedRate": "Referenced rate"
             },
             "profileModal": {
-                "allSettings": "All settings",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Log out",
                 "stronghold": {
                     "title": "Profile lock",
@@ -1068,6 +1072,8 @@
         "received": "Received",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Send To",
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
@@ -1111,6 +1117,8 @@
         "profiles": "Profiles",
         "dev": "Dev",
         "createAccount": "Create a Wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "addAWallet": "Add a wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
@@ -1189,6 +1197,7 @@
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
         "yourWallets": "Your Wallets",
+        "walletActions": "Wallet Actions",
         "unknown": "Unknown",
         "none": "None",
         "staked": "Staked",
@@ -1205,7 +1214,8 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer"
     },
     "dates": {
         "today": "Today",
@@ -1445,6 +1455,8 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

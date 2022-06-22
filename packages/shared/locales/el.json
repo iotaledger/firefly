@@ -1109,7 +1109,8 @@
         "profiles": "Προφίλ",
         "dev": "Προγραμματιστής",
         "createAccount": "Δημιουργία πορτοφολιού",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Όνομα πορτοφολιού",
         "latestTransactions": "Τελευταίες Συναλλαγές",
         "transactions": "Συναλλαγές",
@@ -1187,6 +1188,7 @@
         "capsLock": "Το Caps Lock είναι ενεργοποιημένο",
         "version": "Έκδοση {version}",
         "yourWallets": "Τα Πορτοφόλια Σας",
+        "walletActions": "Wallet Actions",
         "unknown": "Άγνωστο",
         "none": "Κανένα",
         "staked": "Staked",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Πορτοφόλι",
         "staking": "Staking (Ποντάρισμα)",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

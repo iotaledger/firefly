@@ -172,6 +172,7 @@
         @apply pr-8;
         @apply pl-3;
         border-radius: 0.625rem; // TODO: add to tailwind
+        font-feature-settings: 'calt' off; // disables 'x' formatting while surrounded by numbers
 
         &::placeholder {
             @apply text-gray-500;

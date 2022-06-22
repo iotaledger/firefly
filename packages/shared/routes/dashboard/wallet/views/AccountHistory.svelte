@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { ActivityDetail, ActivityRow, Icon, Input, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { getMessageParticipationAction } from 'shared/lib/participation'
@@ -28,6 +29,9 @@
     } from 'shared/lib/wallet'
 
     export let transactions: AccountMessage[] = []
+    export let scroll = true
+    export let scrollDetection = (node: Element): void => {}
+    export let bottomOffset = '0px'
 
     function handleTransactionClick(transaction: AccountMessage): void {
         selectedMessage.set(transaction)
@@ -177,11 +181,20 @@
                 return localize('general.participationTransaction')
         }
     }
+
+    function handleSearch(e) {
+        searchActive = true
+        if (e.detail === 'BACKSPACE') {
+            searchValue = searchValue.slice(0, -1)
+            return
+        }
+        searchValue += e.detail ?? ''
+    }
 </script>
 
 <div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-5">
-        {#if $selectedMessage}
+        {#if $selectedMessage && !$mobile}
             <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>
                 <Icon icon="arrow-left" classes="text-blue-500" />
                 <Text type="h5">{localize('general.transactions')}</Text>
@@ -192,12 +205,14 @@
                     {localize('general.transactions')}
                     <span class="text-gray-500 font-bold">• {queryTransactions.length}</span>
                 </Text>
-                <button on:click={handleSyncAccountClick} class:pointer-events-none={isSelectedAccountSyncing}>
-                    <Icon
-                        icon="refresh"
-                        classes="{isSelectedAccountSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                    />
-                </button>
+                {#if $mobile}
+                    <button on:click={handleSyncAccountClick} class:pointer-events-none={isSelectedAccountSyncing}>
+                        <Icon
+                            icon="refresh"
+                            classes="{isSelectedAccountSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                        />
+                    </button>
+                {/if}
             </div>
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
                 <ul class="flex flex-row justify-between space-x-8">
@@ -237,10 +252,16 @@
             </div>
         {/if}
     </div>
-    {#if $selectedMessage}
+    {#if $selectedMessage && !$mobile}
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
     {:else}
-        <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
+        <div
+            class="activity-wrapper flex-auto h-1 space-y-2.5 -mr-2 pr-2 {scroll
+                ? 'overflow-y-auto scroll-secondary'
+                : ''}"
+            style="--bottom-offset: {bottomOffset}"
+            use:scrollDetection
+        >
             {#if $isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
             {:else if queryTransactions.length}
@@ -255,3 +276,9 @@
         </div>
     {/if}
 </div>
+
+<style>
+    .activity-wrapper {
+        padding-bottom: var(--bottom-offset);
+    }
+</style>

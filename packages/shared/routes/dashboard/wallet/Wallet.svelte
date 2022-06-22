@@ -1,11 +1,27 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
     import { localize } from '@core/i18n'
-    import { accountRoute, accountRouter } from '@core/router'
-    import { AccountRoute } from '@core/router/enums'
+    import { accountRoute, accountRouter, walletRoute } from '@core/router'
+    import { AccountRoute, WalletRoute } from '@core/router/enums'
     import { asyncGetAccounts, setSelectedAccount } from '@lib/wallet'
-    import { AccountActionsModal, DashboardPane, Modal, Text } from 'shared/components'
-    import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
+    import {
+        AccountActionsModal,
+        ActivityDetail,
+        BottomNavigation,
+        DashboardPane,
+        Drawer,
+        Modal,
+        Text,
+    } from 'shared/components'
+    import {
+        AccountActions,
+        AddressHistory,
+        DeleteAccount,
+        ExportTransactionHistory,
+        HideAccount,
+    } from 'shared/components/drawerContent'
+    import { mobileHeaderAnimation, touchInterpolation } from 'shared/lib/animation'
+    import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
@@ -38,12 +54,15 @@
         removeEventListeners,
         selectedAccountIdStore,
         selectedAccountStore,
+        selectedMessage,
         transferState,
         wallet,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
-    import { getContext, onMount } from 'svelte'
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import { spring } from 'svelte/motion'
     import { get, Readable } from 'svelte/store'
+    import { fade } from 'svelte/transition'
     import {
         AccountAssets,
         AccountBalance,
@@ -56,6 +75,20 @@
     } from './views/'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
+    const headerScale = spring(1)
+    const headerScaleOptions = {
+        spring: headerScale,
+        upperBoundary: 1,
+        lowerBoundary: 0,
+        intensityScale: 2,
+        upDownThreshold: 0.5,
+        active: true,
+    }
+
+    const unsubscribeHeaderScale = headerScale.subscribe((curr) => mobileHeaderAnimation.set(curr))
+
+    let unsubscribeLiftDasboard = () => {}
+    let unsubscribeScrollDetection = () => {}
 
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
@@ -69,6 +102,13 @@
     }
 
     let isGeneratingAddress = false
+
+    let drawer: Drawer
+    let activityDrawer: Drawer
+
+    let headerHeight = 0
+    let scroll = false
+    let bottomNavigation: BottomNavigation
 
     // If account changes force regeneration of Ledger receive address
     $: if ($selectedAccountIdStore && $isLedgerProfile) {
@@ -324,6 +364,14 @@
         }
     }
 
+    $: if (mobile && drawer && $accountRoute !== AccountRoute.Init) {
+        drawer.open()
+    }
+
+    $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
+        drawer.close()
+    }
+
     onMount(() => {
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -351,48 +399,159 @@
             void addProfileCurrencyPriceData()
         }
     })
+
+    const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
+
+    function setHeaderHeight(node: HTMLElement): void {
+        headerHeight = node.clientHeight
+    }
+
+    function liftDashboard(node: HTMLElement): void {
+        node.style.zIndex = '0'
+        unsubscribeLiftDasboard = headerScale.subscribe((curr) => {
+            node.style.transform = `translate(0, ${headerHeight * 0.75 * curr + headerHeight * 0.25}px)`
+        })
+    }
+
+    function scrollDetection(node: HTMLElement): void {
+        unsubscribeScrollDetection = headerScale.subscribe((curr) => {
+            if (curr <= 0 && node.scrollTop <= 0) {
+                scroll = true
+                return
+            }
+            scroll = false
+        })
+        node.addEventListener('touchstart', () => {
+            if (node.scrollTop > 0) {
+                headerScaleOptions.active = false
+                return
+            }
+            if (node.scrollTop <= 0) {
+                headerScaleOptions.active = true
+            }
+        })
+    }
+
+    function handleActivityDrawerBackClick(): void {
+        selectedMessage.set(null)
+    }
+
+    onDestroy(() => {
+        unsubscribeHeaderScale()
+        unsubscribeLiftDasboard()
+        unsubscribeScrollDetection()
+    })
 </script>
 
 {#if $selectedAccountStore}
-    <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
-        {#key $selectedAccountStore?.id}
-            <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
-                <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
-                    {#if $accountRoute !== AccountRoute.Manage}
-                        <AccountBalance onMenuClick={modal?.toggle} />
-                    {/if}
-                    <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
-                        {#if $activeProfile?.hiddenAccounts?.includes($selectedAccountStore?.id)}
-                            <div class="px-6 my-4">
-                                <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
-                            </div>
-                        {/if}
-                        {#if $accountRoute === AccountRoute.Init}
-                            <AccountAssets />
-                        {:else if $accountRoute === AccountRoute.Send}
+    {#if $mobile}
+        <div class="wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900 overflow-hidden">
+            <div class="flex flex-auto flex-col">
+                <!-- Total Balance, Accounts list & Send/Receive -->
+                <div class="absolute flex w-full" use:setHeaderHeight>
+                    <AccountBalance classes="w-full" onMenuClick={handleMenuClick} scale={headerScale} />
+                    <Drawer
+                        opened={$accountRoute !== AccountRoute.Init}
+                        bind:this={drawer}
+                        onClose={() => accountRoute.set(AccountRoute.Init)}
+                    >
+                        {#if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
                         {:else if $accountRoute === AccountRoute.Receive}
                             <Receive {isGeneratingAddress} {onGenerateAddress} />
+                        {:else if $accountRoute === AccountRoute.Actions}
+                            <AccountActions />
                         {:else if $accountRoute === AccountRoute.Manage}
-                            <ManageAccount alias={$selectedAccountStore.alias} account={$selectedAccountStore} />
+                            <ManageAccount account={$selectedAccountStore} />
+                        {:else if $accountRoute === AccountRoute.AddressHistory}
+                            <AddressHistory account={$selectedAccountStore} />
+                        {:else if $accountRoute === AccountRoute.ExportTransactionHistory}
+                            <ExportTransactionHistory account={$selectedAccountStore} />
+                        {:else if $accountRoute === AccountRoute.HideAccount}
+                            <HideAccount account={$selectedAccountStore} />
+                        {:else if $accountRoute === AccountRoute.DeleteAccount}
+                            <DeleteAccount account={$selectedAccountStore} />
+                        {/if}
+                    </Drawer>
+                </div>
+                <div
+                    class="flex flex-1"
+                    style="will-change: transform"
+                    use:touchInterpolation={headerScaleOptions}
+                    use:liftDashboard
+                >
+                    <DashboardPane classes="w-full">
+                        {#if $walletRoute === WalletRoute.Assets}
+                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                                <AccountAssets
+                                    {scroll}
+                                    {scrollDetection}
+                                    bottomOffset="{bottomNavigation?.getHeight()}px"
+                                />
+                            </div>
+                        {:else if $walletRoute === WalletRoute.AccountHistory}
+                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                                <AccountHistory
+                                    {scroll}
+                                    {scrollDetection}
+                                    transactions={getAccountMessages($selectedAccountStore)}
+                                    bottomOffset="{bottomNavigation?.getHeight() * 0.8}px"
+                                />
+                            </div>
                         {/if}
                     </DashboardPane>
-                </DashboardPane>
-                <DashboardPane>
-                    <AccountHistory transactions={getAccountMessages($selectedAccountStore)} />
-                </DashboardPane>
-                <div class=" flex flex-col space-y-4">
-                    <DashboardPane classes="w-full h-1/2">
-                        <LineChart />
-                    </DashboardPane>
-                    <DashboardPane classes="w-full h-1/2">
-                        <BarChart />
-                    </DashboardPane>
                 </div>
+                <BottomNavigation locale={localize} bind:this={bottomNavigation} />
+                {#if $selectedMessage}
+                    <Drawer opened bind:this={activityDrawer} onClose={handleActivityDrawerBackClick}>
+                        <div class="overflow-y-auto h-2/3 space-y-2.5">
+                            <ActivityDetail {...$selectedMessage} />
+                        </div>
+                    </Drawer>
+                {/if}
             </div>
-            <AccountActionsModal bind:modal />
-        {/key}
-    </div>
+        </div>
+    {:else}
+        <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
+            {#key $selectedAccountStore?.id}
+                <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
+                    <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
+                        {#if $accountRoute !== AccountRoute.Manage}
+                            <AccountBalance onMenuClick={modal?.toggle} />
+                        {/if}
+                        <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
+                            {#if $activeProfile?.hiddenAccounts?.includes($selectedAccountStore?.id)}
+                                <div class="px-6 my-4">
+                                    <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
+                                </div>
+                            {/if}
+                            {#if $accountRoute === AccountRoute.Init}
+                                <AccountAssets />
+                            {:else if $accountRoute === AccountRoute.Send}
+                                <Send {onSend} {onInternalTransfer} />
+                            {:else if $accountRoute === AccountRoute.Receive}
+                                <Receive {isGeneratingAddress} {onGenerateAddress} />
+                            {:else if $accountRoute === AccountRoute.Manage}
+                                <ManageAccount account={$selectedAccountStore} />
+                            {/if}
+                        </DashboardPane>
+                    </DashboardPane>
+                    <DashboardPane>
+                        <AccountHistory transactions={getAccountMessages($selectedAccountStore)} />
+                    </DashboardPane>
+                    <div class=" flex flex-col space-y-4">
+                        <DashboardPane classes="w-full h-1/2">
+                            <LineChart />
+                        </DashboardPane>
+                        <DashboardPane classes="w-full h-1/2">
+                            <BarChart />
+                        </DashboardPane>
+                    </div>
+                </div>
+                <AccountActionsModal bind:modal />
+            {/key}
+        </div>
+    {/if}
 {/if}
 
 <style type="text/scss">

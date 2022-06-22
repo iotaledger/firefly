@@ -1,16 +1,19 @@
 <script lang="typescript">
-    import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
-    import { getTrimmedLength } from '@lib/helpers'
     import { localize } from '@core/i18n'
+    import { mobile } from '@lib/app'
+    import { getTrimmedLength } from '@lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
     import { showAppNotification } from '@lib/notifications'
     import { closePopup, popupState } from '@lib/popup'
     import { isLedgerProfile } from '@lib/profile'
-    import { MAX_ACCOUNT_NAME_LENGTH, wallet } from '@lib/wallet'
     import { AccountColor } from '@lib/typings/color'
+    import { createAccountCallback } from '@lib/typings/wallet'
+    import { MAX_ACCOUNT_NAME_LENGTH, wallet } from '@lib/wallet'
+    import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
 
     export let error = ''
-    export let onCreate = (..._: any[]): void => {}
+    export let onCreate: createAccountCallback
+    export let onCancel = (): void => {}
 
     const { accounts } = $wallet
 
@@ -70,6 +73,7 @@
                         }
                     } else {
                         closePopup()
+                        onCancel()
                     }
                 })
 
@@ -82,6 +86,7 @@
     }
     const handleCancelClick = () => {
         closePopup()
+        onCancel()
     }
 </script>
 
@@ -95,7 +100,7 @@
                 {error}
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
-                autofocus
+                autofocus={!$mobile}
                 submitHandler={handleCreateClick}
                 disabled={isBusy}
                 classes="mb-4"

@@ -115,7 +115,7 @@
             bind:value={profileName}
             placeholder={locale('views.profile.profileName')}
             classes="w-full mb-6"
-            autofocus
+            autofocus={!$mobile}
             disabled={busy}
             submitHandler={handleContinueClick}
         />
@@ -138,7 +138,10 @@
             {locale('actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation animation="profile-desktop" />
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-green dark:bg-gray-900'}"
+    >
+        <Animation animation={$mobile ? 'password-desktop' : 'profile-desktop'} />
     </div>
 </OnboardingLayout>

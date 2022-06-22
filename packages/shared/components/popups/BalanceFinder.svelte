@@ -1,6 +1,4 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
-    import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
     import { Locale } from '@core/i18n'
     import { displayErrorEventToUser } from '@lib/errors'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from '@lib/ledger'
@@ -14,6 +12,9 @@
         isSyncing,
         wallet,
     } from '@lib/wallet'
+    import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
+    import { onDestroy } from 'svelte'
 
     export let locale: Locale
 
@@ -110,7 +111,7 @@
             showRevealToggle
             {locale}
             placeholder={locale('general.password')}
-            autofocus
+            autofocus={!$mobile}
             submitHandler={() => handleFindBalances()}
             disabled={isBusy}
         />

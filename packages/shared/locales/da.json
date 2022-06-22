@@ -1109,7 +1109,8 @@
         "profiles": "Profiler",
         "dev": "Udvikler",
         "createAccount": "Opret ny Wallet",
-        "addAWallet": "Add a wallet",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "Wallet navn",
         "latestTransactions": "Seneste transaktioner",
         "transactions": "Transaktioner",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock er slået til",
         "version": "Version {version}",
         "yourWallets": "Your Wallets",
+        "walletActions": "Wallet Actions",
         "unknown": "Unknown",
         "none": "None",
         "staked": "Staked",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking",
-        "governance": "Governance"
+        "governance": "Governance",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }

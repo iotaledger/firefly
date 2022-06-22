@@ -4,9 +4,8 @@
 	Spans the height or width of the screen, with everything behind it visible but dimmed.
 	Uses a Svelte Action to generate custom syntetic slide, swipe and tap events.
 	
-	@prop {number} [dimLength] - Dim length in CSS pixels.
 	@prop {boolean} [opened] - Opens drawer on load.
-	@prop {boolean} [fromRight] - Slide from right side.
+	@prop {boolean} [fromLeft] - Slide from left side.
     @prop {boolean} [preventClose] - Prevent close the Drawer.
     @prop {string} [zIndex] - Main container Tailwind z-index. Ex. "z-40".
 	
@@ -16,29 +15,29 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { quintOut } from 'svelte/easing'
+    import { quintIn, quintInOut, quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
 
     $: darkModeEnabled = $appSettings.darkMode
 
-    export let dimLength = 160
     export let opened = false
-    export let fromRight = false
+    export let fromLeft = false
     export let classes = ''
     export let fullScreen = false
     export let preventClose = false
     export let zIndex = 'z-30'
+    export let onClose = (): void => {}
 
     const dispatch = createEventDispatcher()
 
-    const viewportLength = fromRight ? window.innerWidth : window.innerHeight
+    const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
 
     let isOpen = false
 
     const coords = tweened(
         {
-            x: fromRight ? viewportLength : 0,
-            y: fromRight ? 0 : viewportLength,
+            x: fromLeft ? -viewportLength : 0,
+            y: fromLeft ? 0 : viewportLength,
         },
         { duration: 350, easing: quintOut }
     )
@@ -50,7 +49,9 @@
     })
 
     function slidable(node: HTMLElement, use: boolean = true) {
-        if (!use) return
+        if (!use) {
+            return
+        }
         let x: number
         let y: number
         let init: number
@@ -105,6 +106,9 @@
     }
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
+        if ($coords.y < 0) {
+            return
+        }
         await coords.update(
             ($coords) => ({
                 x: $coords.x + event.detail.sx,
@@ -115,9 +119,7 @@
     }
 
     async function handleSlideEnd() {
-        const thresholdUnreached = fromRight
-            ? (viewportLength - dimLength) / 2 > $coords.x
-            : (viewportLength - dimLength) / 1.2 > $coords.y
+        const thresholdUnreached = fromLeft ? -viewportLength / 2 > $coords.x : viewportLength / 1.2 > $coords.y
         if (thresholdUnreached) {
             await open()
         } else {
@@ -129,8 +131,8 @@
         isOpen = true
         await coords.set(
             {
-                x: fromRight ? dimLength : 0,
-                y: fromRight ? 0 : dimLength,
+                x: 0,
+                y: 0,
             },
             { duration: 750, easing: quintOut }
         )
@@ -139,21 +141,23 @@
     export async function close(): Promise<void> {
         await coords.set(
             {
-                x: fromRight ? viewportLength : 0,
-                y: fromRight ? 0 : viewportLength,
+                x: fromLeft ? -viewportLength : 0,
+                y: fromLeft ? 0 : viewportLength,
             },
-            { duration: 350, easing: quintOut }
+            { duration: 350, easing: quintInOut }
         )
         isOpen = false
         if (!preventClose) {
             dispatch('close')
         }
+        dispatch('close')
+        onClose()
     }
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
 
-    $: dimOpacity = getScale(fromRight ? $coords.x : $coords.y, 1000)
-    $: contentOpacity = getScale(fromRight ? $coords.x : $coords.y, 100)
+    $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1000)
+    $: contentOpacity = getScale(fromLeft ? $coords.x : $coords.y, 100)
 </script>
 
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
@@ -164,19 +168,18 @@
         on:slideEnd={handleSlideEnd}
         on:tap={close}
     >
-        <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
+        <div id="dim" class="h-screen" style="--opacity: {fromLeft ? 0.1 : dimOpacity}" />
     </slide-zone>
     <main
-        class="fixed overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
+        class="fixed bottom-0 overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
         class:fullScreen
-        style="--y: {fromRight ? 0 : $coords.y}px; 
-			--x: {fromRight ? $coords.x : 0}px; 
-			--opacity: {contentOpacity}; 
-			--height: {fromRight ? '100vh' : `${viewportLength - dimLength}px`};
-			--width: {fromRight ? `${viewportLength - dimLength}px` : '100%'};
-			--border-radius: {fromRight ? '0' : '24px 24px 0 0'};
-			--display-indicator: {fromRight ? 'none' : 'block'}"
+        style="--y: {fromLeft ? 0 : $coords.y}px; 
+			--x: {fromLeft ? $coords.x : 0}px; 
+			--opacity: {fromLeft ? 1 : contentOpacity}; 
+			--height: {fromLeft && '100vh'};
+			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
+			--display-indicator: {fromLeft || preventClose ? 'none' : 'block'}"
     >
         <slot />
     </main>
@@ -188,7 +191,6 @@
         transform: translate(var(--x), var(--y));
         border-radius: var(--border-radius);
         height: var(--height);
-        width: var(--width);
         opacity: var(--opacity);
         --bg-indicator-color: #d8e3f5;
         @apply from-white;
@@ -202,24 +204,13 @@
     main:before {
         display: var(--display-indicator);
         content: '';
-        position: absolute;
+        position: sticky;
         width: 48px;
         height: 4px;
         left: calc(50% - 48px / 2 - 0.5px);
         top: 8px;
         border-radius: 8px;
         background: var(--bg-indicator-color);
-    }
-
-    // Scroll overlay gradient mask
-    main:not(.fullScreen):after {
-        content: '';
-        position: fixed;
-        top: var(--padding-top);
-        height: 30px;
-        width: 100%;
-        border-radius: var(--border-radius);
-        background: linear-gradient(to bottom, var(--tw-gradient-stops) 100%);
     }
 
     #dim {

@@ -156,7 +156,9 @@
 <div class="relative w-full h-full bg-white dark:bg-gray-900">
     <button
         data-label="back-button"
-        class="absolute top-12 left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+        class="absolute {$mobile
+            ? 'safe-area'
+            : 'top-12'} left-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
         disabled={hasReachedMaxAttempts}
         on:click={handleBackClick}
     >
@@ -166,7 +168,7 @@
         </div>
     </button>
     <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
-        <div class="w-96 flex flex-col flex-wrap items-center mb-20">
+        <div class="{$mobile ? 'w-full' : 'w-96'} flex flex-col flex-wrap items-center mb-20">
             <Profile name={$activeProfile?.name} bgColor="blue" />
             <Pin
                 bind:this={pinRef}
@@ -174,7 +176,7 @@
                 classes="mt-10 {shake && 'animate-shake'}"
                 on:submit={onSubmit}
                 disabled={hasReachedMaxAttempts || isBusy}
-                autofocus
+                autofocus={!$mobile}
             />
             <Text type="p" bold classes="mt-4 text-center">
                 {attempts > 0
@@ -189,3 +191,9 @@
         </div>
     </div>
 </div>
+
+<style type="text/scss">
+    .safe-area {
+        top: calc(env(safe-area-inset-top) + 20px);
+    }
+</style>

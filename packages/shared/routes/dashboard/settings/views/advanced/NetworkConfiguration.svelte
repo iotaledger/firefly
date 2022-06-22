@@ -186,8 +186,15 @@
                             >
                                 {node.url}
                             </Text>
-                            <Text highlighted>
-                                {node.isPrimary ? localize('views.settings.configureNodeList.primaryNode') : ''}
+                            <Text
+                                highlighted
+                                classes={$mobile &&
+                                    node.isPrimary &&
+                                    'absolute right-5 p-1 -mt-1 rounded-lg bg-pastel-green'}
+                            >
+                                {node.isPrimary && !$mobile
+                                    ? localize('views.settings.configureNodeList.primaryNode')
+                                    : ''}
                             </Text>
                         </div>
                         {#if !$mobile}
@@ -203,7 +210,7 @@
                 {/each}
                 {#if nodeContextMenu}
                     {#if $mobile}
-                        <Drawer dimLength={180} on:close={() => (nodeContextMenu = undefined)}>
+                        <Drawer on:close={() => (nodeContextMenu = undefined)}>
                             <NodeConfigOptions
                                 bind:nodeContextMenu
                                 bind:networkConfig

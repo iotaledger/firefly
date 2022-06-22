@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Logo, Password, Spinner, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
     import { getBackupWarningColor } from 'shared/lib/helpers'
     import { closePopup } from 'shared/lib/popup'
@@ -101,7 +102,7 @@
                 {locale}
                 disabled={busy}
                 placeholder={locale('general.password')}
-                autofocus
+                autofocus={!$mobile}
                 {error}
             />
             <div class="flex flex-row justify-between w-full space-x-4">

@@ -1,19 +1,19 @@
 <script lang="typescript">
-    import { Button, ColorPicker, Input, Text } from 'shared/components'
-    import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
+    import { AccountRoute, accountRouter } from '@core/router'
+    import { Button, ColorPicker, Input, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
+    import { getTrimmedLength } from 'shared/lib/helpers'
     import { activeProfile, getAccountColor, setProfileAccount } from 'shared/lib/profile'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountStore, wallet } from 'shared/lib/wallet'
-    import { accountRouter, AccountRoute } from '@core/router'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountStore, wallet } from 'shared/lib/wallet'
 
-    export let alias
     export let account
     export let error = ''
 
     const { accounts } = $wallet
 
-    let accountAlias = alias
+    let accountAlias = account.alias
     let isBusy = false
     let color = getAccountColor(account.id) as string
 
@@ -23,7 +23,7 @@
     const handleSaveClick = () => {
         setProfileAccount($activeProfile, { id: $selectedAccountStore?.id, color })
         const trimmedAccountAlias = accountAlias.trim()
-        if (trimmedAccountAlias === alias) {
+        if (trimmedAccountAlias === account?.alias) {
             $accountRouter.goTo(AccountRoute.Init)
             return
         }
@@ -72,7 +72,7 @@
         $accountRouter.previous()
     }
 
-    $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === alias
+    $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === account?.alias
     $: hasColorChanged = getAccountColor(account.id) !== color
 </script>
 
@@ -86,7 +86,7 @@
                 {error}
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
-                autofocus
+                autofocus={!$mobile}
                 submitHandler={handleSaveClick}
                 disabled={isBusy}
                 classes="mb-4"

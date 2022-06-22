@@ -1109,7 +1109,8 @@
         "profiles": "プロフィール",
         "dev": "開発者",
         "createAccount": "ウォレットを作成",
-        "addAWallet": "ウォレットを追加",
+        "createNewWallet": "Create a new wallet",
+        "switchWallet": "Switch wallet",
         "accountName": "ウォレット名",
         "latestTransactions": "最新の取引",
         "transactions": "取引履歴",
@@ -1187,6 +1188,7 @@
         "capsLock": "Caps Lock キーが有効になっています",
         "version": "バージョン {version}",
         "yourWallets": "あなたのウォレット",
+        "walletActions": "Wallet Actions",
         "unknown": "不明",
         "none": "なし",
         "staked": "ステーク済み",
@@ -1443,6 +1445,8 @@
     "tabs": {
         "wallet": "ウォレット",
         "staking": "ステーキング",
-        "governance": "ガバナンス"
+        "governance": "ガバナンス",
+        "tokens": "Tokens",
+        "activity": "Activity"
     }
 }
