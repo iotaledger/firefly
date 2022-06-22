@@ -23,6 +23,7 @@
         SetupView,
         WelcomeView,
     } from './views'
+    import { _ } from '@core/i18n'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
 </script>
 
@@ -40,7 +41,7 @@
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.LanguageAndAppearance}
     <Transition>
-        <LanguageAndAppearanceView />
+        <LanguageAndAppearanceView locale={$_} />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Profile}
     <Transition>

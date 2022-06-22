@@ -157,6 +157,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 get(appRouter).next()
                 break
         }
+
         this.setNext(nextRoute)
     }
 }

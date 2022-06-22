@@ -7,7 +7,7 @@
     import { Platform } from '@lib/platform'
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from '@lib/migration'
-    import { appRouter, ledgerRouter } from '@core/router'
+    import { onboardingRouter, ledgerRouter } from '@core/router'
     import { LedgerAppName } from '@lib/typings/ledger'
     import { formatUnitBestMatch } from '@lib/units'
     import { walletSetupType } from '@lib/wallet'
@@ -45,7 +45,7 @@
 
     function advanceView(): void {
         cleanupOnboarding()
-        $appRouter.next()
+        $onboardingRouter.next()
     }
 
     function handleContinueClick(): void {

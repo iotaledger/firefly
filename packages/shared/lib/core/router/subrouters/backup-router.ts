@@ -34,6 +34,7 @@ export class BackupRouter extends Subrouter<BackupRoute> {
                 break
             }
         }
+
         this.setNext(nextRoute)
     }
 }

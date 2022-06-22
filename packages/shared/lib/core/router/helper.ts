@@ -18,8 +18,8 @@ export const initRouters = (): void => {
     dashboardRouter.set(new DashboardRouter())
     ledgerRouter.set(new LedgerRouter())
     accountRouter.set(new AccountRouter())
-    networkRouter.set(new NetworkRouter())
     onboardingRouter.set(new OnboardingRouter())
+    networkRouter.set(new NetworkRouter())
     settingsRouter.set(new SettingsRouter())
 }
 
@@ -27,6 +27,8 @@ export const resetRouters = (): void => {
     get(appRouter).reset()
     get(dashboardRouter).reset()
     get(accountRouter).reset()
+    get(onboardingRouter).reset()
+    get(networkRouter).reset()
     get(settingsRouter).reset()
     isDeepLinkRequestActive.set(false)
 }

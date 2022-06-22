@@ -86,6 +86,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 get(appRouter).next({ importType: get(profileImportType) })
                 break
         }
+
         this.setNext(nextRoute)
     }
 }

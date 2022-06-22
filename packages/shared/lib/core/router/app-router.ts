@@ -50,6 +50,7 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
         }
+
         this.setNext(nextRoute)
     }
 

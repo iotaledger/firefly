@@ -62,6 +62,7 @@ export class LedgerRouter extends Subrouter<LedgerRoute> {
                 get(appRouter).next(event)
                 break
         }
+
         this.setNext(nextRoute)
     }
 }

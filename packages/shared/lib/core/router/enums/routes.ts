@@ -153,7 +153,7 @@ export enum MigrateRoute {
 }
 
 export enum NetworkRoute {
-    Protocol = 'protocol',
-    Network = 'network',
     CustomNetwork = 'customNetwork',
+    Network = 'network',
+    Protocol = 'protocol',
 }

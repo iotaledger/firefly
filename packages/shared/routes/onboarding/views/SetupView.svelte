@@ -5,16 +5,16 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
     import { newProfile } from '@core/profile'
-    import { appRouter } from '@core/router'
+    import { onboardingRouter } from '@core/router'
     import { Platform } from '@lib/platform'
     import { SetupType } from '@lib/typings/setup'
 
     function handleContinueClick(setupType: SetupType): void {
-        $appRouter.next({ setupType })
+        $onboardingRouter.next({ setupType })
     }
 
     function handleBackClick(): void {
-        $appRouter.previous()
+        $onboardingRouter.previous()
     }
 </script>
 

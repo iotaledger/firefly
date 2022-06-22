@@ -26,7 +26,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
     import { walletSetupType } from '@lib/wallet'
     import { SetupType } from '@lib/typings/setup'
-    import { appRouter } from '@core/router'
+    import { onboardingRouter } from '@core/router'
 
     let isCheckingForBalance: boolean
     const legacyLedger = $walletSetupType === SetupType.TrinityLedger
@@ -136,7 +136,7 @@
                 props: {
                     onProceed: () => {
                         closePopup()
-                        $appRouter.next()
+                        $onboardingRouter.next()
                     },
                     balance: `${formatUnitBestMatch(
                         spentAddressesWithNoBundleHashesTotalBalance,
@@ -146,7 +146,7 @@
                 },
             })
         } else {
-            $appRouter.next()
+            $onboardingRouter.next()
         }
     }
 
@@ -154,7 +154,7 @@
         if (!isCheckingForBalance) {
             // If a user goes back from this point, reset migration state
             resetMigrationState()
-            $appRouter.previous()
+            $onboardingRouter.previous()
         }
     }
 

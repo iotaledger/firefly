@@ -4,7 +4,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
-    import { appRouter } from '@core/router'
+    import { onboardingRouter } from '@core/router'
     import { strongholdPassword } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
@@ -50,7 +50,7 @@
                 }
 
                 $strongholdPassword = password
-                $appRouter.next({ password })
+                $onboardingRouter.next({ password })
             } catch (err) {
                 console.error(err)
                 showAppNotification({
@@ -64,7 +64,7 @@
     }
 
     function handleBackClick(): void {
-        $appRouter.previous()
+        $onboardingRouter.previous()
     }
 
     function checkPasswordStrength(password: string): any {

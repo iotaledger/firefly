@@ -2,11 +2,11 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { appRouter } from '@core/router'
+    import { onboardingRouter } from '@core/router'
     import { downloadRecoveryKit } from '@lib/utils'
 
     function handleContinueClick(): void {
-        $appRouter.next()
+        $onboardingRouter.next()
     }
 
     function handleDownloadClick() {
@@ -14,7 +14,7 @@
     }
 
     function handleBackClick(): void {
-        $appRouter.previous()
+        $onboardingRouter.previous()
     }
 </script>
 

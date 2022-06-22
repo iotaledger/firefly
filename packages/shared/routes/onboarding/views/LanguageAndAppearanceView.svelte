@@ -3,7 +3,7 @@
     import { Animation, Button, ButtonRadio, Dropdown, OnboardingLayout, Text } from 'shared/components'
     import { mobile, appSettings, shouldBeDarkMode } from '@core/app'
     import { Locale, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
-    import { appRouter } from '@core/router'
+    import { onboardingRouter } from '@core/router'
 
     /**
      * NOTE: It is necessary to use locale directly rather than the
@@ -36,11 +36,11 @@
     }
 
     function handleContinueClick(): void {
-        $appRouter.next()
+        $onboardingRouter.next()
     }
 
     function handleBackClick(): void {
-        $appRouter.previous()
+        $onboardingRouter.previous()
     }
 
     onMount(() => {

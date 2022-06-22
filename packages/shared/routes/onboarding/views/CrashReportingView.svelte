@@ -2,13 +2,13 @@
     import { Animation, Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { appSettings, isAwareOfCrashReporting } from '@core/app'
-    import { appRouter } from '@core/router'
+    import { onboardingRouter } from '@core/router'
 
     const busy = false
     let sendCrashReports = true
 
     const handleBackClick = (): void => {
-        $appRouter.previous()
+        $onboardingRouter.previous()
     }
 
     const handleContinueClick = (): void => {
@@ -17,7 +17,7 @@
         if (!$isAwareOfCrashReporting) {
             isAwareOfCrashReporting.set(true)
         }
-        $appRouter.next()
+        $onboardingRouter.next()
     }
 </script>
 
