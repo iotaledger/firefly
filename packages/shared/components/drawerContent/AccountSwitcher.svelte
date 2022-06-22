@@ -5,14 +5,11 @@
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
-    // import { openPopup } from '@lib/popup'
     import { activeProfile, getColor } from '@lib/profile'
     import { isSyncing, isTransferring, selectedAccount, setSelectedAccount } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
-    // export let onCreateAccount = (..._: any[]): void => {}
     export let handleCreateAccountPress = (): void => {}
-    // export let onAccountSelection = (): void => {}
 
     const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
     const isSelectedAccount = (accountId) => accountId !== $selectedAccount?.id
@@ -29,7 +26,6 @@
         } else {
             setSelectedAccount(accountId)
             resetAccountRouter(false)
-            // onAccountSelection()
         }
     }
 
@@ -41,9 +37,6 @@
     }
 
     function handleCreateAccountClick(): void {
-        // Intentionally hidden to remember that we could use a popup too.
-        // openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
-        // onAccountSelection()
         handleCreateAccountPress()
     }
 </script>
@@ -89,6 +82,9 @@
             {/if}
         </div>
     {/each}
+    <Text classes="mt-1 pr-4" type="h5">
+        {account.balance}
+    </Text>
 </div>
 <HR />
 <button
