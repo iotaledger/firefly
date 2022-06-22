@@ -1,8 +1,7 @@
 import { IAccountState } from '@core/account'
 import { get } from 'svelte/store'
-import { Activity } from '../classes'
 import { ActivityDirection } from '../enums'
-import { allAccountActivities } from '../stores'
+import { addClaimedActivity, allAccountActivities, claimedActivities } from '../stores'
 
 export function linkActivityAndClaimingTransaction(account: IAccountState): void {
     const accountActivities = get(allAccountActivities)[account.id]
@@ -11,18 +10,39 @@ export function linkActivityAndClaimingTransaction(account: IAccountState): void
     const activities = accountActivities.filter(
         (activity) => activity.direction === ActivityDirection.In && activity.isAsync
     )
+    const claimedAccountActivities = get(claimedActivities)?.[account.id]
 
     for (const activity of activities) {
+        const claimedActivity = claimedAccountActivities?.[activity.transactionId]
+        if (claimedActivity && claimedActivity.claimingTransactionId === activity.transactionId) {
+            updateClaimStatusAndHideClaimingActivity(
+                activity.id,
+                claimedActivity.transactionId,
+                new Date(claimedActivity.claimedTimestamp),
+                account.id
+            )
+            break
+        }
+
         // TODO: add as many restrictions for candidates to optimize the time
         const candidates = accountActivities.filter((_activity) => _activity.time > activity.time)
-
         for (const candidate of candidates) {
             const isActivityInputOfCandidate = candidate.inputs.some(
                 (input) => input.transactionId === activity.transactionId
             )
 
             if (isActivityInputOfCandidate) {
-                updateClaimStatusAndHideClaimingActivity(activity, candidate, account.id)
+                updateClaimStatusAndHideClaimingActivity(
+                    activity.id,
+                    candidate.transactionId,
+                    candidate.time,
+                    account.id
+                )
+                addClaimedActivity(account.id, activity.id, {
+                    id: activity.id,
+                    claimedTimestamp: candidate.time.getTime(),
+                    claimingTransactionId: candidate.transactionId,
+                })
                 break
             }
         }
@@ -30,20 +50,21 @@ export function linkActivityAndClaimingTransaction(account: IAccountState): void
 }
 
 function updateClaimStatusAndHideClaimingActivity(
-    claimedActivity: Activity,
-    claimingActivity: Activity,
+    claimedActivityId: string,
+    claimingActivityTransactionId: string,
+    claimingActivityTime: Date,
     accountId: string
 ) {
     allAccountActivities.update((state) => {
-        const _claimedActivity = state[accountId]?.find((_activity) => _activity.id === claimedActivity.id)
+        const _claimedActivity = state[accountId]?.find((_activity) => _activity.id === claimedActivityId)
         const _claimingActivity = state[accountId]?.find(
-            (_activity) => _activity.transactionId === claimingActivity.transactionId
+            (_activity) => _activity.transactionId === claimingActivityTransactionId
         )
 
         _claimedActivity.updateFromPartialActivity({
             isClaimed: true,
-            claimedDate: claimingActivity.time,
-            claimingTransactionId: claimingActivity.transactionId,
+            claimedDate: claimingActivityTime,
+            claimingTransactionId: claimingActivityTransactionId,
         })
         _claimingActivity.updateFromPartialActivity({ isHidden: true })
 
