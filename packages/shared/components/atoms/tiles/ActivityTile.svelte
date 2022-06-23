@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { time } from '@core/app'
-    import { openConfirmationPopup } from '@core/app/stores/confirmation-popup'
     import { localize } from '@core/i18n'
     import {
         Activity,
@@ -10,6 +9,7 @@
         hideActivity,
         InclusionState,
     } from '@core/wallet'
+    import { openPopup } from '@lib/popup'
     import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
@@ -22,12 +22,18 @@
     $: asyncStatus = activity?.getAsyncStatus($time)
     $: isIncomingActivityUnclaimed =
         activity?.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
+    $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 
     function reject() {
-        openConfirmationPopup('hoi', 'holil', () => hideActivity(activity?.id))
+        openPopup({
+            type: 'confirmationPopup',
+            props: {
+                title: localize('actions.confirmRejection.title'),
+                description: localize('actions.confirmRejection.description'),
+                onConfirm: () => hideActivity(activity?.id),
+            },
+        })
     }
-
-    $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 </script>
 
 <ClickableTile {onClick} classes={activity?.inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}>

@@ -19,6 +19,7 @@
     import { time } from '@core/app'
     import { setClipboard } from '@lib/utils'
     import { truncateString } from '@lib/helpers'
+    import { openPopup } from '@lib/popup'
 
     export let activity: Activity
 
@@ -39,6 +40,17 @@
 
     function handleTransactionIdClick(): void {
         setClipboard(activity.transactionId)
+    }
+
+    function reject() {
+        openPopup({
+            type: 'confirmationPopup',
+            props: {
+                title: localize('actions.confirmRejection.title'),
+                description: localize('actions.confirmRejection.description'),
+                onConfirm: () => hideActivity(activity.id),
+            },
+        })
     }
 </script>
 
@@ -68,7 +80,7 @@
         <div class="flex w-full justify-between space-x-4">
             <button
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"
-                on:click={() => hideActivity(activity.id)}
+                on:click={reject}
             >
                 {localize('actions.reject')}
             </button>

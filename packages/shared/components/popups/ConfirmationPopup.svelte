@@ -21,6 +21,6 @@
     <Text classes="text-left">{description}</Text>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={closePopup}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" autofocus onClick={confirmClick}>{localize('actions.confirm')}</Button>
+        <Button classes="w-full" onClick={confirmClick}>{localize('actions.confirm')}</Button>
     </popup-buttons>
 </div>
