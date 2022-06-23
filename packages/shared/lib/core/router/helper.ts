@@ -8,6 +8,7 @@ import { appRouter, AppRouter } from './app-router'
 import { accountRouter, AccountRouter } from './account-router'
 import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
+import { GovernanceRouter, governanceRouter } from './governance-router'
 import { SettingsRouter, settingsRouter } from './settings-router'
 import { ledgerRouter, LedgerRouter } from './subrouters'
 import { walletRouter, WalletRouter } from './wallet-router'
@@ -20,6 +21,7 @@ export const initRouters = (): void => {
     ledgerRouter.set(new LedgerRouter())
     accountRouter.set(new AccountRouter())
     settingsRouter.set(new SettingsRouter())
+    governanceRouter.set(new GovernanceRouter())
     walletRouter.set(new WalletRouter())
     profileRouter.set(new ProfileRouter())
 }
@@ -29,6 +31,7 @@ export const resetRouters = (): void => {
     get(dashboardRouter).reset()
     get(accountRouter).reset()
     get(settingsRouter).reset()
+    get(governanceRouter).reset()
     get(walletRouter).reset()
     get(profileRouter).reset()
     isDeepLinkRequestActive.set(false)

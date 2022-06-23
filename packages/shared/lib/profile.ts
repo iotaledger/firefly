@@ -1,5 +1,4 @@
-import { derived, get, Readable, writable } from 'svelte/store'
-import { _ } from 'svelte-i18n'
+import { Locale } from '@core/i18n'
 import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
@@ -10,17 +9,17 @@ import {
     getWalletDataPath,
     selectedAccountIdStore,
 } from 'shared/lib/wallet'
-import { Platform } from './platform'
-import { ProfileAccount, ProfileType } from './typings/profile'
-import { AccountColor } from './typings/color'
-import { HistoryDataProps } from './typings/market'
-import { AvailableExchangeRates } from './typings/currency'
+import { _ } from 'svelte-i18n'
+import { derived, get, Readable, writable } from 'svelte/store'
 import { getOfficialNetworkConfig } from './network'
+import { Platform } from './platform'
+import { AccountColor } from './typings/color'
+import { AvailableExchangeRates } from './typings/currency'
+import { HistoryDataProps } from './typings/market'
 import { NetworkConfig, NetworkType } from './typings/network'
+import { Profile, ProfileAccount, ProfileType, UserSettings } from './typings/profile'
 import { ValuesOf } from './typings/utils'
-import { Profile, UserSettings } from './typings/profile'
 import { WalletAccount } from './typings/wallet'
-import { Locale } from '@core/i18n'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 

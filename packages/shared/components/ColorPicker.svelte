@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { Text, Icon, Tooltip, GradientPicker } from 'shared/components'
-    import { AccountColor } from '@lib/typings/color'
-    import { isBright } from 'shared/lib/helpers'
-    import { clickOutside } from 'shared/lib/actions'
     import { localize } from '@core/i18n'
+    import { clickOutside } from '@lib/actions'
+    import { isBright } from '@lib/helpers'
+    import { AccountColor } from '@lib/typings/color'
+    import { GradientPicker, Icon, Text, Tooltip } from 'shared/components'
     import { mobile } from 'shared/lib/app'
 
     export let active

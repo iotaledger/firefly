@@ -1,28 +1,6 @@
 <script lang="typescript">
-    import { onDestroy, onMount, setContext } from 'svelte'
-    import { derived, get, Readable } from 'svelte/store'
-    import { Settings, Staking, Wallet } from 'shared/routes'
-    import { mobileHeaderAnimation } from '@lib/animation'
-    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
-    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
-    import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
-    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { Idle, MainMenu, Sidebar } from 'shared/components'
-    import { clearPollNetworkInterval, pollNetworkStatus } from 'shared/lib/networkStatus'
-    import {
-        NOTIFICATION_TIMEOUT_NEVER,
-        removeDisplayNotification,
-        showAppNotification,
-    } from 'shared/lib/notifications'
-    import {
-        clearPollParticipationOverviewInterval,
-        pollParticipationOverview,
-        updateStakingPeriodCache,
-    } from 'shared/lib/participation'
-    import { getParticipationEvents } from 'shared/lib/participation/api'
-    import { Platform } from 'shared/lib/platform'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
+    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
+    import { Locale } from '@core/i18n'
     import {
         AccountRoute,
         accountRouter,
@@ -34,7 +12,30 @@
         SettingsRoute,
         settingsRouter,
     } from '@core/router'
-    import { Locale } from '@core/i18n'
+    import { mobileHeaderAnimation } from '@lib/animation'
+    import {
+        CURRENT_ASSEMBLY_STAKING_PERIOD,
+        CURRENT_SHIMMER_STAKING_PERIOD,
+        LAST_ASSEMBLY_STAKING_PERIOD,
+        LAST_SHIMMER_STAKING_PERIOD,
+    } from '@lib/participation/constants'
+    import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
+    import { Idle, MainMenu, Sidebar } from 'shared/components'
+    import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
+    import { appSettings } from 'shared/lib/appSettings'
+    import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { pollNetworkStatus, stopNetworkPoll } from 'shared/lib/networkStatus'
+    import {
+        NOTIFICATION_TIMEOUT_NEVER,
+        removeDisplayNotification,
+        showAppNotification,
+    } from 'shared/lib/notifications'
+    import { startParticipationPoll, stopParticipationPoll, updateStakingPeriodCache } from 'shared/lib/participation'
+    import { pendingParticipations, resetPerformingParticipation } from 'shared/lib/participation/stores'
+    import { Platform } from 'shared/lib/platform'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
         api,
         asyncCreateAccount,
@@ -46,16 +47,10 @@
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
     } from 'shared/lib/wallet'
+    import { Governance, Settings, Staking, Wallet } from 'shared/routes'
+    import { onDestroy, onMount, setContext } from 'svelte'
+    import { derived, get, Readable } from 'svelte/store'
     import TopNavigation from './TopNavigation.svelte'
-    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
-    import { WalletAccount } from 'shared/lib/typings/wallet'
-    import {
-        CURRENT_ASSEMBLY_STAKING_PERIOD,
-        CURRENT_SHIMMER_STAKING_PERIOD,
-        LAST_ASSEMBLY_STAKING_PERIOD,
-        LAST_SHIMMER_STAKING_PERIOD,
-    } from '@lib/participation/constants'
-    import { pendingParticipations, resetParticipation } from 'shared/lib/participation/stores'
 
     export let locale: Locale
 
@@ -65,6 +60,7 @@
         wallet: Wallet,
         settings: Settings,
         staking: Staking,
+        governance: Governance,
     }
 
     let startInit
@@ -78,10 +74,7 @@
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
         if (val) {
             void pollNetworkStatus()
-            void pollParticipationOverview()
-        } else {
-            clearPollNetworkInterval()
-            clearPollParticipationOverviewInterval()
+            void startParticipationPoll()
         }
     })
 
@@ -94,7 +87,7 @@
     let previousPendingParticipationsLength = 0
     const unsubscribePendingParticipations = pendingParticipations.subscribe((participations) => {
         if (participations?.length < previousPendingParticipationsLength && participations?.length === 0) {
-            resetParticipation()
+            resetPerformingParticipation()
         }
         previousPendingParticipationsLength = participations?.length ?? 0
     })
@@ -165,8 +158,6 @@
     }
 
     onMount(() => {
-        void getParticipationEvents()
-
         if (shouldVisitStaking()) {
             updateProfile('hasVisitedStaking', false)
             updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
@@ -224,6 +215,8 @@
         unsubscribeAccountsLoaded()
         unsubscribeOngoingSnapshot()
         unsubscribePendingParticipations()
+        stopNetworkPoll()
+        stopParticipationPoll()
 
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
@@ -409,10 +402,6 @@
         pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 
-    $: if ($accountsLoaded) {
-        setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
-    }
-
     $: showSingleAccountGuide = !$activeProfile?.hasFinishedSingleAccountGuide
     $: if (!busy && $accountsLoaded && showSingleAccountGuide) {
         openPopup({ type: 'singleAccountGuide', hideClose: true, overflow: true })
@@ -445,7 +434,7 @@
             />
         {/if}
         <div class="flex flex-row flex-auto h-1">
-            <Sidebar {locale} />
+            <Sidebar />
             <!-- Dashboard Pane -->
             <div class="flex flex-col w-full h-full">
                 <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />

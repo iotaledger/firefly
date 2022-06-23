@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { getContext, onDestroy, onMount } from 'svelte'
-    import { get, Readable } from 'svelte/store'
+    import { localize } from '@core/i18n'
+    import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Animation, Button, Dropdown, Icon, Input, ProgressBar, Text } from 'shared/components'
-    import { clearSendParams, sendParams } from 'shared/lib/app'
+    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -14,7 +14,6 @@
         parseCurrency,
     } from 'shared/lib/currency'
     import { startQRScanner } from 'shared/lib/device'
-    import { localize } from '@core/i18n'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -24,24 +23,24 @@
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRouter } from '@core/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import {
-        GeneratingRemainderDepositAddressEvent,
-        PreparedTransactionEvent,
-        TransactionEventData,
-        TransferProgressEventData,
-        TransferProgressEventType,
-        TransferState,
-    } from 'shared/lib/typings/events'
+    import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
-    import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
-    import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
-    import { DUST_THRESHOLD, isTransferring, selectedAccountStore, transferState, wallet } from 'shared/lib/wallet'
-    import { mobile } from 'shared/lib/app'
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
+    import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
+    import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
+    import {
+        DUST_THRESHOLD,
+        handleTransactionEventData,
+        isTransferring,
+        selectedAccountStore,
+        transferState,
+        wallet,
+    } from 'shared/lib/wallet'
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import { get, Readable } from 'svelte/store'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
@@ -121,34 +120,6 @@
         accountsDropdownItems = $liveAccounts.map((acc) => addLabel(acc))
         if (to) {
             to = accountsDropdownItems.find((a) => a.id === to.id)
-        }
-    }
-
-    const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
-        if (!eventData) return {}
-
-        const remainderData = eventData as GeneratingRemainderDepositAddressEvent
-        if (remainderData?.address) return { remainderAddress: remainderData?.address }
-
-        const txData = eventData as PreparedTransactionEvent
-        if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
-
-        const numOutputs = txData.outputs.length
-        if (numOutputs === 1) {
-            return {
-                toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount,
-            }
-        } else if (numOutputs > 1) {
-            return {
-                toAddress: txData.outputs[0].address,
-                toAmount: txData.outputs[0].amount,
-
-                remainderAddress: txData.outputs[numOutputs - 1].address,
-                remainderAmount: txData.outputs[numOutputs - 1].amount,
-            }
-        } else {
-            return txData
         }
     }
 

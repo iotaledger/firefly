@@ -1,14 +1,19 @@
 <script lang="typescript">
     import { Locale } from '@core/i18n'
     import { displayErrorEventToUser } from '@lib/errors'
+    import { displayNotificationForLedgerProfile, isLedgerConnected } from '@lib/ledger'
     import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
-    import { currentSyncingAccountStore, isSyncing } from '@lib/wallet'
+    import { closePopup } from '@lib/popup'
+    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from '@lib/profile'
+    import {
+        asyncSetStrongholdPassword,
+        asyncSyncAccounts,
+        currentSyncingAccountStore,
+        isSyncing,
+        wallet,
+    } from '@lib/wallet'
     import { Button, Password, Spinner, Text, TextHint } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
-    import { closePopup } from 'shared/lib/popup'
-    import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from 'shared/lib/profile'
-    import { asyncSetStrongholdPassword, asyncSyncAccounts, wallet } from 'shared/lib/wallet'
     import { onDestroy } from 'svelte'
 
     export let locale: Locale

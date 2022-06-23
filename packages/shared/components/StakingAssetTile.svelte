@@ -3,30 +3,30 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { localize } from '@core/i18n'
     import { Asset, Token } from 'shared/lib/typings/assets'
-    import {
-        getFormattedMinimumRewards,
-        getTimeUntilMinimumAirdropReward,
-        getUnstakedFunds,
-        hasAccountReachedMinimumAirdrop,
-        isAccountStaked,
-        isStakingPossible,
-    } from 'shared/lib/participation/staking'
+    import { getFormattedMinimumRewards, isAccountStaked } from 'shared/lib/participation/staking'
     import {
         assemblyStakingEventState,
         assemblyStakingRemainingTime,
-        isPartiallyStaked,
         participationOverview,
-        selectedAccountParticipationOverview,
         shimmerStakingEventState,
         shimmerStakingRemainingTime,
         stakedAccounts,
     } from 'shared/lib/participation/stores'
+    import {
+        selectedAccountParticipationOverview,
+        isPartiallyStaked,
+        hasAccountReachedMinimumAirdrop,
+        getTimeUntilMinimumAirdropReward,
+        getUnstakedFunds,
+        isParticipationPossible,
+    } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
+    import { activeProfile } from 'shared/lib/profile'
     import { selectedAccountStore } from 'shared/lib/wallet'
 
     export let asset: Asset
@@ -49,14 +49,15 @@
 
     const FIAT_PLACEHOLDER = '---'
 
+    $: $activeProfile.stakingRewards
     $: isDarkModeEnabled = $appSettings.darkMode
-    $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible(stakingEventState)
-    $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible(stakingEventState)
+    $: isActivelyStaking = getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)
+    $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isParticipationPossible(stakingEventState)
     $: hasStakingEnded = stakingEventState === ParticipationEventState.Ended
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
     $: remainingTime = asset?.name === Token.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
     $: {
-        if (hasAccountReachedMinimumAirdrop() && !isStakingPossible(stakingEventState)) {
+        if (hasAccountReachedMinimumAirdrop() && !isParticipationPossible(stakingEventState)) {
             isBelowMinimumRewards = false
         } else {
             isBelowMinimumRewards =
@@ -66,7 +67,7 @@
     }
     $: showWarningState =
         isPartiallyStakedAndCanStake ||
-        (isBelowMinimumRewards && !getAccount($stakedAccounts) && isStakingPossible(stakingEventState)) ||
+        (isBelowMinimumRewards && !getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)) ||
         (isBelowMinimumRewards && hasStakingEnded)
 
     function toggleTooltip(): void {
@@ -103,7 +104,7 @@
                         }),
                     ],
                 }
-            } else if (!isAccountStaked($selectedAccountStore?.id) && isStakingPossible(stakingEventState)) {
+            } else if (!isAccountStaked($selectedAccountStore?.id) && isParticipationPossible(stakingEventState)) {
                 const timeNeeded = getTimeUntilMinimumAirdropReward(airdrop)
                 const _getBody = () => {
                     if (timeNeeded) {

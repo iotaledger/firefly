@@ -1,12 +1,12 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
+    import { AccountRoute, accountRouter } from '@core/router'
     import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { getTrimmedLength } from 'shared/lib/helpers'
-    import { localize } from '@core/i18n'
     import { activeProfile, getAccountColor, setProfileAccount } from 'shared/lib/profile'
-    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountStore, wallet } from 'shared/lib/wallet'
-    import { accountRouter, AccountRoute } from '@core/router'
     import { WalletAccount } from 'shared/lib/typings/wallet'
+    import { api, MAX_ACCOUNT_NAME_LENGTH, selectedAccountStore, wallet } from 'shared/lib/wallet'
 
     export let account
     export let error = ''

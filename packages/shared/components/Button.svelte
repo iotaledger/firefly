@@ -25,9 +25,9 @@
     export let inlineStyle = ''
     export let showHoverText = undefined
     export let iconOnly = false
-    export let unstyled = false
     export let iconHeight: string | undefined = undefined
     export let iconWidth: string | undefined = undefined
+    export let unstyled = false
 
     export let onClick = (): void | string => ''
 
@@ -134,7 +134,7 @@
                 </div>
             {/if}
         {:else}
-            <span class="text-12 leading-140"><slot /></span>
+            <span class="text-12 leading-140 w-full"><slot /></span>
         {/if}
     </button>
 {/if}
@@ -233,6 +233,7 @@
                 @apply border-blue-200;
             }
             &:active,
+            &.active,
             &:focus {
                 @apply bg-blue-100;
                 @apply border-blue-400;

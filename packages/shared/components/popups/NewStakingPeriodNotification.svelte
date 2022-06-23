@@ -6,7 +6,11 @@
     import { closePopup, openPopup } from '@lib/popup'
     import { selectedAccountStore } from '@lib/wallet'
     import { Button, Illustration, Text, TextHint } from 'shared/components'
-    import { ASSEMBLY_EVENT_START_DATE, isStakingPossible, LAST_ASSEMBLY_STAKING_PERIOD } from '@lib/participation'
+    import {
+        ASSEMBLY_EVENT_START_DATE,
+        isParticipationPossible,
+        LAST_ASSEMBLY_STAKING_PERIOD,
+    } from '@lib/participation'
 
     function getLocaleArguments(): LocaleArguments {
         return {
@@ -18,12 +22,12 @@
     }
 
     function handleOk(): void {
-        const isStakingPossibleForAssembly = isStakingPossible($assemblyStakingEventState)
-        const isStakingPossibleForShimmer = isStakingPossible($shimmerStakingEventState)
+        const isParticipationPossibleForAssembly = isParticipationPossible($assemblyStakingEventState)
+        const isParticipationPossibleForShimmer = isParticipationPossible($shimmerStakingEventState)
         const cannotStake =
             getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
 
-        if ((isStakingPossibleForAssembly || isStakingPossibleForShimmer) && !cannotStake) {
+        if ((isParticipationPossibleForAssembly || isParticipationPossibleForShimmer) && !cannotStake) {
             openPopup({
                 type: 'stakingManager',
             })

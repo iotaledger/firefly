@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { resetAccountRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
-    import { participationAction } from '@lib/participation/stores'
+    import { isChangingParticipation, participationAction } from '@lib/participation/stores'
     import { openPopup } from '@lib/popup'
     import { getAccountColor } from '@lib/profile'
     import { WalletAccount } from '@lib/typings/wallet'
@@ -24,14 +24,14 @@
     function handleAccountClick(accountId: string): void {
         if ($isTransferring) {
             showWarning(localize('notifications.transferring'))
-        } else if ($participationAction) {
+        } else if ($participationAction || $isChangingParticipation) {
             showWarning(localize('notifications.participating'))
         } else {
             setSelectedAccount(accountId)
             updateAccountSyncingQueue($selectedAccountStore)
             resetAccountRouter(false)
-            modal?.close()
         }
+        modal?.close()
     }
 
     function showWarning(message: string) {
@@ -42,8 +42,14 @@
     }
 
     function handleCreateAccountClick(): void {
+        if ($isTransferring) {
+            showWarning(localize('notifications.transferringCreate'))
+        } else if ($participationAction || $isChangingParticipation) {
+            showWarning(localize('notifications.participatingCreate'))
+        } else {
+            openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
+        }
         modal?.close()
-        openPopup({ type: 'createAccount', props: { onCreate: onCreateAccount } })
     }
 </script>
 

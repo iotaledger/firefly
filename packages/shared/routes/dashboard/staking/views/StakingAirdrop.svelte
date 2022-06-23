@@ -2,17 +2,19 @@
     import { HR, Link, StakingAirdropIndicator, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
+    import { formatStakingAirdropReward, isParticipationPossible } from 'shared/lib/participation'
     import {
         assemblyStakingEventState,
         assemblyStakingRemainingTime,
+        shimmerStakingRemainingTime,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
+    import {
         currentAssemblyStakingRewards,
         currentShimmerStakingRewards,
-        shimmerStakingEventState,
-        shimmerStakingRemainingTime,
         totalAssemblyStakingRewards,
         totalShimmerStakingRewards,
-    } from 'shared/lib/participation/stores'
+    } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { capitalize } from 'shared/lib/utils'
@@ -130,7 +132,7 @@
     <div class="w-full h-full px-6 pb-10 flex flex-col justify-end z-0">
         <!-- We check if assembly staking is possible to have both airdrops aligned -->
         <div
-            class="{isStakingPossible($assemblyStakingEventState)
+            class="{isParticipationPossible($assemblyStakingEventState)
                 ? 'apply-min-height'
                 : ''} flex flex-col flex-wrap justify-between space-y-5"
         >
@@ -153,7 +155,7 @@
                 <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
             </div>
             <div class="flex flex-col flex-wrap space-y-5">
-                {#if isStakingPossible(stakingEventState)}
+                {#if isParticipationPossible(stakingEventState)}
                     <div class="flex flex-row justify-between space-x-4">
                         <div class="flex flex-col">
                             <div>
@@ -176,7 +178,7 @@
                                 {localize('views.staking.airdrops.currentStakingPeriod')}
                             </Text>
                         </div>
-                        {#if isStakingPossible(stakingEventState)}
+                        {#if isParticipationPossible(stakingEventState)}
                             <div class="flex flex-col text-right">
                                 <div>
                                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">

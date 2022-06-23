@@ -1,18 +1,17 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
-
     import { localize } from '@core/i18n'
     import { accountRoute, accountRouter, walletRoute } from '@core/router'
     import { AccountRoute, WalletRoute } from '@core/router/enums'
-
+    import { asyncGetAccounts, setSelectedAccount } from '@lib/wallet'
     import {
         AccountActionsModal,
         ActivityDetail,
         BottomNavigation,
         DashboardPane,
         Drawer,
-        Text,
         Modal,
+        Text,
     } from 'shared/components'
     import {
         AccountActions,
@@ -21,7 +20,7 @@
         ExportTransactionHistory,
         HideAccount,
     } from 'shared/components/drawerContent'
-    import { touchInterpolation, mobileHeaderAnimation } from 'shared/lib/animation'
+    import { mobileHeaderAnimation, touchInterpolation } from 'shared/lib/animation'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -47,21 +46,22 @@
         getAccountMessages,
         getAccountSyncOptions,
         hasGeneratedALedgerReceiveAddress,
+        initializeAccountSyncingQueue,
         isFirstSessionSync,
         isTransferring,
         processAccountSyncingQueue,
         processLoadedAccounts,
         removeEventListeners,
-        selectedMessage,
-        selectedAccountStore,
         selectedAccountIdStore,
+        selectedAccountStore,
+        selectedMessage,
         transferState,
         wallet,
-        initializeAccountSyncingQueue,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
-    import { onDestroy, onMount } from 'svelte'
+    import { getContext, onDestroy, onMount } from 'svelte'
     import { spring } from 'svelte/motion'
+    import { get, Readable } from 'svelte/store'
     import { fade } from 'svelte/transition'
     import {
         AccountAssets,
@@ -73,8 +73,6 @@
         Receive,
         Send,
     } from './views/'
-    import { asyncGetAccounts } from '@lib/wallet'
-    import { get } from 'svelte/store'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
     const headerScale = spring(1)
@@ -91,6 +89,8 @@
 
     let unsubscribeLiftDasboard = () => {}
     let unsubscribeScrollDetection = () => {}
+
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
     let modal: Modal
 
@@ -133,7 +133,6 @@
 
     async function loadAccounts(): Promise<void> {
         const loadedAccounts = await asyncGetAccounts()
-        accountsLoaded.set(true)
 
         try {
             if (loadedAccounts.length <= 0) {
@@ -145,6 +144,8 @@
                 }
             } else {
                 await processLoadedAccounts(loadedAccounts)
+                setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+                accountsLoaded.set(true)
                 initializeAccountSyncingQueue()
             }
         } catch (err) {

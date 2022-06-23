@@ -4,32 +4,42 @@
     import { Button, Icon, Spinner, Text, Tooltip } from 'shared/components'
     import { hasNodePlugin, networkStatus } from 'shared/lib/networkStatus'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { getAccountParticipationAbility, isNewStakingEvent, isStakingPossible } from 'shared/lib/participation'
     import {
-        assemblyStakingEventState,
+        getAccountParticipationAbility,
+        isNewStakingEvent,
+        isParticipationPossible,
+    } from 'shared/lib/participation'
+    import {
         isPartiallyStaked,
         partiallyUnstakedAmount,
-        participationAction,
-        shimmerStakingEventState,
         stakedAmount,
         unstakedAmount,
+    } from 'shared/lib/participation/account'
+    import {
+        assemblyStakingEventState,
+        isChangingParticipation,
+        shimmerStakingEventState,
     } from 'shared/lib/participation/stores'
+    import { participationAction } from 'shared/lib/participation/stores'
     import { AccountParticipationAbility, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
     import { NodePlugin } from 'shared/lib/typings/node'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { isSyncing, selectedAccountStore } from 'shared/lib/wallet'
 
-    $: showSpinner = !!$participationAction || $isSyncing
+    $: showSpinner = !!$participationAction || $isSyncing || $isChangingParticipation
 
     $: canParticipateInEvent =
-        isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)
+        isParticipationPossible($assemblyStakingEventState) || isParticipationPossible($shimmerStakingEventState)
 
     $: cannotStake = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
 
     $: isStakedAndCanParticipate = $stakedAmount > 0 && canParticipateInEvent
 
     $: isPartiallyStakedAndCanParticipate = $isPartiallyStaked && canParticipateInEvent
+
+    let spinnerMessage: string
+    $: showSpinner, (spinnerMessage = getSpinnerMessage())
 
     let canParticipateWithNode = false
     $: $networkStatus, (canParticipateWithNode = hasNodePlugin(NodePlugin.Participation))
@@ -70,10 +80,19 @@
     }
 
     function getSpinnerMessage(): string {
-        if ($participationAction) {
-            return $participationAction === ParticipationAction.Stake ? 'general.staking' : 'general.unstaking'
-        } else if ($isSyncing) {
-            return 'general.syncingAccounts'
+        if ($isSyncing) {
+            return localize('general.syncing')
+        } else {
+            switch ($participationAction) {
+                case ParticipationAction.Stake:
+                    return localize('general.staking')
+                case ParticipationAction.Unstake:
+                    return localize('general.unstaking')
+                case ParticipationAction.Vote:
+                    return localize('general.voting')
+                case ParticipationAction.Unvote:
+                    return localize('general.unvoting')
+            }
         }
     }
 </script>
@@ -110,7 +129,7 @@
                   })}
     >
         {#if showSpinner}
-            <Spinner busy message={localize(getSpinnerMessage())} classes="mx-2 justify-center" />
+            <Spinner busy message={spinnerMessage} classes="mx-2 justify-center" />
         {:else}{localize(`actions.${isStakedAndCanParticipate ? 'manageStake' : 'stakeFunds'}`)}{/if}
     </Button>
     {#if isPartiallyStakedAndCanParticipate}

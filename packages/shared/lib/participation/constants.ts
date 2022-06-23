@@ -20,7 +20,7 @@ export const SHIMMER_EVENT_ID = ''
 /**
  * Useful array of staking event IDs.
  */
-export const STAKING_EVENT_IDS: string[] = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
+export const STAKING_EVENT_IDS = [ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID]
 
 /**
  * The array of staking participations to use for the API.
@@ -55,6 +55,10 @@ export const STAKING_RESULT_URL: string =
 
 export const BACKUP_STAKING_RESULT_URL: string = 'https://d36tzso9lqxl3c.cloudfront.net/results/staking/'
 
+export const TREASURY_VOTE_EVENT_ID = 'c8529ff64ea191b437cd625af8b02fd0173bc94aae380ea4cc3367a651536cba'
+
+export const LAST_MILESTONE_BEFORE_TREASURY_EVENT = 3395663
+
 /**
  * The GitHub URLs containing the end Assembly staking results per period.
  */
@@ -86,3 +90,15 @@ export const LAST_SHIMMER_STAKING_PERIOD = 1
  * Set to 0 if no current event
  */
 export const CURRENT_SHIMMER_STAKING_PERIOD = 0
+
+/**
+ * The amount of microASMB per 1 Mi received every milestone,
+ * which is currently 2 microASMB (0.000002 ASMB).
+ */
+export const ASSEMBLY_REWARD_MULTIPLIER = 2.0
+
+/**
+ * The amount of SMR per 1 Mi received every milestone,
+ * which is currently 1 SMR.
+ */
+export const SHIMMER_REWARD_MULTIPLIER = 1.0

@@ -102,32 +102,3 @@ export function stopParticipating(
         },
     })
 }
-
-/**
- * Participate in event(s) with additional funds
- *
- * @method participateWithRemainingFunds
- *
- * @param {Bridge} bridge
- * @param {CommunicationIds} __ids
- * @param {string} accountId
- * @param {Participation[]} participations
- *
- * @returns {Promise<string>}
- */
-export function participateWithRemainingFunds(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    accountId: string,
-    participations: Participation[]
-): Promise<string> {
-    return bridge({
-        actorId: __ids.actorId,
-        id: __ids.messageId,
-        cmd: 'ParticipateWithRemainingFunds',
-        payload: {
-            account_identifier: accountId,
-            participations,
-        },
-    })
-}

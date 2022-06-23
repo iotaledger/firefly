@@ -88,7 +88,7 @@
     >
         <!-- Balance -->
         <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
-            <div class="flex flex-col flex-wrap {$mobile ? 'items-center' : 'items-start space-y-1.5 mr-12'}">
+            <div class="flex flex-col flex-wrap items-center">
                 <div on:click={togglePreciseBalance} use:animateMobileBalance>
                     <Text type="h1">
                         {showPreciseBalance
@@ -124,26 +124,26 @@
         class="bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative p-6 pb-12 {classes}"
     >
         <!-- Balance -->
-        <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
-            <p class="text-11 leading-120 text-gray-800 dark:text-white uppercase tracking-widest">
+        <div data-label="total-balance" class="flex flex-col flex-wrap">
+            <Text type="p">
                 {localize('general.balance')}
-            </p>
-            <div class="flex flex-col flex-wrap items-start space-y-1.5 mr-12">
+            </Text>
+            <div class="flex flex-col flex-wrap items-start mt-6">
                 <div on:click={togglePreciseBalance}>
-                    <Text type="h2">
+                    <h1 class="font-600 text-32 leading-120 text-gray-800 dark:text-white break-all">
                         {showPreciseBalance
                             ? formatUnitPrecision($selectedAccountStore?.rawIotaBalance, Unit.Mi)
                             : formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3)}
-                    </Text>
+                    </h1>
                 </div>
-                <Text type="p" smaller overrideColor={false}>
+                <Text type="p">
                     {$selectedAccountStore?.balanceEquiv}
                 </Text>
             </div>
         </div>
         {#if $accountRoute === AccountRoute.Init}
             <!-- Action Send / Receive -->
-            <div class="flex flex-row justify-between space-x-4 mt-7">
+            <div class="flex flex-row justify-between space-x-4 mt-6">
                 <button
                     class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-blue-500 text-white"
                     on:click={handleReceiveClick}
@@ -160,7 +160,7 @@
         {/if}
         <button
             on:click={() => onMenuClick()}
-            class="bg-opacity-10 bg-gray-50 dark:bg-gray-900 dark:bg-opacity-50 rounded-lg px-2 py-3 flex flex-row space-x-1 text-gray-900 dark:text-white absolute top-6 right-6"
+            class="px-2 py-3 flex flex-row space-x-1 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white dark:bg-opacity-50 rounded-lg absolute top-6 right-6"
         >
             {#each Array(3) as _}
                 <svg width="4" height="4" viewBox="0 0 4 4">

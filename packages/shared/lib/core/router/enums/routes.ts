@@ -47,6 +47,7 @@ export enum DashboardRoute {
     Wallet = 'wallet',
     Settings = 'settings',
     Staking = 'staking',
+    Governance = 'governance',
 }
 
 export enum SettingsRoute {
@@ -62,6 +63,11 @@ export enum SettingsRouteNoProfile {
     GeneralSettings = 'generalSettings',
     AdvancedSettings = 'advancedSettings',
     HelpAndInfo = 'helpAndInfo',
+}
+
+export enum GovernanceRoute {
+    Init = 'init',
+    EventDetails = 'eventDetails',
 }
 
 export enum GeneralSettings {

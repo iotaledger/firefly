@@ -18,6 +18,7 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
+    import GovernanceManager from './GovernanceManager.svelte'
     import HideAccount from './HideAccount.svelte'
     import LedgerAddress from './LedgerAddress.svelte'
     import LedgerAppGuide from './LedgerAppGuide.svelte'
@@ -36,6 +37,7 @@
     import Snapshot from './Snapshot.svelte'
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
+    import Success from './Success.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import NetworkStatus from './NetworkStatus.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
@@ -130,6 +132,8 @@
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
+        governanceManager: GovernanceManager,
+        success: Success,
         singleAccountGuide: SingleAccountGuide,
     }
 

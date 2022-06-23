@@ -1,9 +1,10 @@
+import { localize } from '@core/i18n'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
     aggregateAccountActivity,
     api,
-    getAccountMetadataWithCallback,
     formatAccountWithMetadata,
+    getAccountMetadataWithCallback,
     processMigratedTransactions,
     replaceMessage,
     saveNewMessage,
@@ -12,17 +13,21 @@ import {
     wallet,
 } from 'shared/lib/wallet'
 import { get } from 'svelte/store'
-import { localize } from '@core/i18n'
 import { showAppNotification, showSystemNotification } from './notifications'
+import { ASSEMBLY_EVENT_ID } from './participation'
 import { getParticipationOverview } from './participation/api'
-import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
+import {
+    getPendingParticipation,
+    hasPendingParticipation,
+    isChangingParticipation,
+    removePendingParticipations,
+} from './participation/stores'
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
-import { openPopup } from './popup'
+import { closePopup, openPopup, popupState } from './popup'
 import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/wallet'
-import { ASSEMBLY_EVENT_ID } from './participation'
 
 /**
  * Initialises event listeners from wallet library
@@ -112,8 +117,19 @@ export const initialiseListeners = (): void => {
                 // Instantly pull in latest participation overview.
                 await getParticipationOverview(ASSEMBLY_EVENT_ID)
 
-                // If it is a message related to any participation event, display a notification
-                displayParticipationNotification(getPendingParticipation(message.id))
+                // If it is a message related to any participation event, display a notification and close any open participation popup
+                // except for unvote for when the user is changing the vote (automatic unvote & vote)
+                if (
+                    !get(isChangingParticipation) ||
+                    (get(isChangingParticipation) &&
+                        getPendingParticipation(message.id)?.action !== ParticipationAction.Unvote)
+                ) {
+                    isChangingParticipation.set(false)
+                    displayParticipationNotification(getPendingParticipation(message.id))
+                }
+                if (get(popupState).type === 'stakingManager') {
+                    closePopup()
+                }
 
                 // Remove the pending participation from local store
                 removePendingParticipations([message.id])
@@ -379,16 +395,22 @@ const updateAllMessagesState = (accounts, messageId, confirmation) => {
 export function displayParticipationNotification(pendingParticipation: PendingParticipation): void {
     if (pendingParticipation) {
         const { accounts } = get(wallet)
+        const { action } = pendingParticipation
         const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId)
-
+        let localeGroup
+        let localeAction
+        if (action === ParticipationAction.Stake || action === ParticipationAction.Unstake) {
+            localeGroup = 'stakingManager'
+            localeAction = action === ParticipationAction.Stake ? 'staked' : 'unstaked'
+        } else if (action === ParticipationAction.Vote || action === ParticipationAction.Unvote) {
+            localeGroup = 'governanceManager'
+            localeAction = action === ParticipationAction.Vote ? 'voted' : 'unvoted'
+        }
         showAppNotification({
             type: 'info',
-            message: localize(
-                `popups.stakingManager.${
-                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
-                }Successfully`,
-                { values: { account: account.alias } }
-            ),
+            message: localize(`popups.${localeGroup}.${localeAction}Successfully`, {
+                values: { account: account.alias },
+            }),
         })
     }
 }

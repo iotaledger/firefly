@@ -13,17 +13,16 @@
         isAccountStaked,
         getIotasUntilMinimumAirdropReward,
     } from 'shared/lib/participation'
-    import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
-    import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
+    import { participate, stopParticipating } from 'shared/lib/participation/api'
+    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         isPerformingParticipation,
-        isPartiallyStaked,
         participationAction,
-        stakedAccounts,
         assemblyStakingEventState,
         shimmerStakingEventState,
         resetPerformingParticipation,
     } from 'shared/lib/participation/stores'
+    import { isPartiallyStaked, currentAccountTreasuryVoteValue } from 'shared/lib/participation/account'
     import {
         AccountParticipationAbility,
         Participation,
@@ -45,8 +44,6 @@
 
     $: participationAbility = getAccountParticipationAbility($selectedAccountStore)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
-
-    $: $stakedAccounts, $selectedAccountStore, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
 
     $: isCurrentAccountStaked = isAccountStaked($selectedAccountStore?.id)
 
@@ -85,7 +82,7 @@
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                await participate($selectedAccountStore?.id, participations).catch((err) => {
+                await participate($selectedAccountStore?.id, participations, $participationAction).catch((err) => {
                     console.error(err)
 
                     displayErrorNotification(err)
@@ -94,12 +91,14 @@
                 break
             }
             case ParticipationAction.Unstake:
-                await stopParticipating($selectedAccountStore?.id, STAKING_EVENT_IDS).catch((err) => {
-                    console.error(err)
+                await stopParticipating($selectedAccountStore?.id, STAKING_EVENT_IDS, $participationAction).catch(
+                    (err) => {
+                        console.error(err)
 
-                    displayErrorNotification(err)
-                    resetPerformingParticipation()
-                })
+                        displayErrorNotification(err)
+                        resetPerformingParticipation()
+                    }
+                )
                 break
             default:
                 break
@@ -191,6 +190,17 @@
 
 <Text type="h4" classes="mb-2">{localize('popups.stakingManager.title')}</Text>
 <Text type="p" secondary classes="mb-4">{localize('popups.stakingManager.description')}</Text>
+
+{#if $currentAccountTreasuryVoteValue}
+    <TextHint
+        classes="p-4 rounded-2xl bg-blue-50 dark:bg-gray-800 mb-6"
+        icon="info"
+        iconClasses="fill-current text-blue-500 dark:text-blue-500"
+        hint={localize('popups.stakingManager.mergeStakeDisclaimerVoting')}
+        hintClasses="text-gray-500 dark:text-gray-500"
+    />
+{/if}
+
 <div class="staking flex flex-col mb-4">
     {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
         <div
@@ -319,14 +329,6 @@
         </div>
     {/if}
 </div>
-
-<TextHint
-    classes="p-4 rounded-2xl bg-blue-50 dark:bg-gray-800"
-    icon="info"
-    iconClasses="fill-current text-blue-500 dark:text-blue-500"
-    hint={localize('popups.stakingManager.singleAccountHint')}
-    hintClasses="text-gray-500 dark:text-gray-500"
-/>
 
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">

@@ -294,12 +294,4 @@ export interface IWalletApi {
             onError: (err: ErrorEventPayload) => void
         }
     )
-    participateWithRemainingFunds(
-        accountId: string,
-        participations: Participation[],
-        callbacks: {
-            onSuccess: (response: Event<ParticipateResponsePayload>) => void
-            onError: (err: ErrorEventPayload) => void
-        }
-    )
 }
