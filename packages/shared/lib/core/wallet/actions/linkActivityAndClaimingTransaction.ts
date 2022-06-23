@@ -27,7 +27,7 @@ export function linkActivityAndClaimingTransaction(account: IAccountState): void
         // TODO: add as many restrictions for candidates to optimize the time
         const candidates = accountActivities.filter((_activity) => _activity.time > activity.time)
         for (const candidate of candidates) {
-            const isActivityInputOfCandidate = candidate.inputs.some(
+            const isActivityInputOfCandidate = candidate.inputs?.some(
                 (input) => input.transactionId === activity.transactionId
             )
 
