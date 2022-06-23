@@ -13,8 +13,9 @@
 	@function {() => Promise<void>} close - Closes drawer.
 -->
 <script lang="typescript">
-    import { Icon } from 'shared/components'
+    import { Text } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
+    import { localize } from '@core/i18n'
     import { createEventDispatcher, onMount } from 'svelte'
     import { quintIn, quintInOut, quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
@@ -183,12 +184,17 @@
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-indicator: {fromLeft || preventClose ? 'none' : 'block'}"
     >
-        {#if closeButton}
-            <button on:click={close} class="absolute top-10 right-8">
-                <Icon icon="close" classes="text-gray-800 dark:text-white" />
-            </button>
-        {/if}
         <slot />
+        {#if closeButton}
+            <div class="mb-5 mx-6 flex justify-center">
+                <button
+                    class="close w-full p-3 text-center rounded-lg font-semibold text-14 bg-white dark:bg-gray-800 text-blue-500"
+                    on:click={close}
+                >
+                    <Text fontWeight="font-500" highlighted>{localize('general.close')}</Text>
+                </button>
+            </div>
+        {/if}
     </main>
 </drawer>
 
@@ -227,5 +233,10 @@
 
     .invisible {
         display: none;
+    }
+
+    .close {
+        /* Tailwind border classes doesn't have an effect */
+        border: 1px solid rgba(154, 173, 206, 0.25);
     }
 </style>

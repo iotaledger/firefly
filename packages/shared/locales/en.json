@@ -1061,6 +1061,7 @@
     },
     "general": {
         "password": "Password",
+        "close": "Close",
         "confirmPassword": "Confirm password",
         "currentPassword": "Current password",
         "newPassword": "New password",

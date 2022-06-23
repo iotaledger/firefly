@@ -1055,6 +1055,7 @@
     },
     "general": {
         "password": "Passwort",
+        "close": "Schließen",
         "confirmPassword": "Passwort bestätigen",
         "currentPassword": "Aktuelles Passwort",
         "newPassword": "Neues Passwort",
