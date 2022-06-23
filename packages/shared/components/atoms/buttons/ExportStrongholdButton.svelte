@@ -44,7 +44,7 @@
         openPopup({
             type: 'password',
             props: {
-                onSuccess: (password) => {
+                onSuccess: (password: string) => {
                     isBusy = true
                     message = localize('general.exportingStronghold')
                     exportStronghold(password, handleExportStrongholdResponse)
