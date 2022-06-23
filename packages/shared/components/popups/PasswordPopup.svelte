@@ -7,8 +7,8 @@
     export let subtitle: string
     export let returnPassword = false
 
-    export let onSuccess: (..._: any[]) => void
-    export let onCancelled: (..._: any[]) => void
+    export let onSuccess: (..._: any[]) => void = () => {}
+    export let onCancelled: (..._: any[]) => void = () => {}
 
     let password: string
     let error = ''
