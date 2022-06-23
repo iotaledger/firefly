@@ -1,4 +1,4 @@
-import { NetworkHealth, NodePlugin } from '../enums'
+import { NetworkHealth } from '../enums'
 
 export interface INetworkStatus {
     messagesPerSecond?: number
@@ -6,5 +6,4 @@ export interface INetworkStatus {
     health?: NetworkHealth
     description?: string
     currentMilestone?: number
-    nodePlugins?: NodePlugin[]
 }

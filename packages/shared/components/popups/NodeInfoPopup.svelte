@@ -28,7 +28,6 @@
             version: { localeKey: 'general.version', nodeInfoPath: 'version' },
             pruningIndex: { localeKey: 'general.pruningIndex', nodeInfoPath: 'status.pruningIndex' },
             features: { localeKey: 'general.features', nodeInfoPath: 'features' },
-            plugins: { localeKey: 'general.plugins', nodeInfoPath: 'plugins' },
         },
         [NodeInfoTab.Metrics]: {
             blocksPerSecond: { localeKey: 'metrics.blocksPerSecond', nodeInfoPath: 'metrics.blocksPerSecond' },
