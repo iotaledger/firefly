@@ -101,9 +101,7 @@
                 ? handleStakeFundsClick()
                 : showAppNotification({
                       type: 'warning',
-                      message: localize('error.node.pluginNotAvailable', {
-                          values: { nodePlugin: NodePlugin.Participation },
-                      }),
+                      message: localize('error.node.pluginNotAvailable'),
                   })}
     >
         {#if showSpinner}
