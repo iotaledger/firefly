@@ -10,10 +10,7 @@ export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
     ([$selectedAccount, $allAccountActivities]) => {
         if (selectedAccount) {
-            return (
-                $allAccountActivities.find((accountActivity) => $selectedAccount?.id === accountActivity.accountId)
-                    ?.activities ?? []
-            )
+            return $allAccountActivities[$selectedAccount?.id] ?? []
         } else {
             return []
         }

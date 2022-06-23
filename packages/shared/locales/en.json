@@ -705,8 +705,7 @@
                     "latestMilestone": "Latest milestone",
                     "confirmedMilestone": "Confirmed milestone",
                     "pruningIndex": "Pruning index",
-                    "features": "Features",
-                    "plugins": "Plugins"
+                    "features": "Features"
                 },
                 "metrics": {
                     "tab": "Metrics",

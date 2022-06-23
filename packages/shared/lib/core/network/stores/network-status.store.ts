@@ -14,7 +14,6 @@ export const networkStatus = derived([nodeInfo], ([$nodeInfo]) => {
             health: NetworkHealth.Disconnected,
             description: NetworkStatusDescription[NetworkHealth.Disconnected],
             currentMilestone: -1,
-            nodePlugins: [],
         }
     }
 })

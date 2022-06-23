@@ -6,7 +6,6 @@ import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
 import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
 import { Platform } from 'shared/lib/platform'
-import { NodePlugin } from '@core/network'
 import { IWalletApi } from 'shared/lib/typings/walletApi'
 import { IWalletActor } from '../typings/walletActor'
 
@@ -177,7 +176,7 @@ WALLET.onMessage((message: MessageResponse) => {
         const { onSuccess, onError } = callbacksStore[id]
 
         if (message.type === ResponseTypes.Error) {
-            onError(handleError(message.payload.type, message.payload.error, message.action))
+            onError(handleError(message.payload.type, message.payload.error))
         } else if (message.type === ResponseTypes.Panic) {
             onError(handleError(ErrorType.Panic, message.payload))
         } else {
@@ -222,18 +221,18 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  */
 const handleError = (
     type: ErrorType | ValidatorErrorTypes,
-    error: string,
-    action?: string
+    error: string
+    // action?: string
 ): { type: ErrorType | ValidatorErrorTypes; error: string } => {
     const newError = { type, message: error, time: Date.now() }
 
     const hasStatusCode403 = error.includes('Response error with status code 403')
 
     if (hasStatusCode403) {
-        if (action && action.includes(NodePlugin.Participation)) {
-            newError.message = `${NodePlugin.Participation} not available on your current node. Please try a different node and try again.`
-            logError(newError)
-        }
+        // if (action && action.includes(NodePlugin.Participation)) {
+        //     newError.message = `${NodePlugin.Participation} not available on your current node. Please try a different node and try again.`
+        //     logError(newError)
+        // }
     } else {
         logError(newError)
     }

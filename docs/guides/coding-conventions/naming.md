@@ -44,7 +44,6 @@ The following are some general rules about code naming that we follow:
         health?: number
         healthTxt?: NetworkStsHealthTxt
         curMilestone?: number
-        nodePlugins?: NodePlugin[]
     }
     ```
 
@@ -56,7 +55,6 @@ The following are some general rules about code naming that we follow:
         health?: number
         healthText?: NetworkStatusHealthText
         currentMilestone?: number
-        nodePlugins?: NodePlugin[]
     }
     ```
 
