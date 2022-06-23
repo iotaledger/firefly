@@ -3,7 +3,7 @@ import { ITagFeature, OutputTypes } from '@iota/types'
 import { Converter } from '@lib/converter'
 
 export function getTagFromOutput(output: OutputTypes): string {
-    if (output?.type !== OUTPUT_TYPE_TREASURY) {
+    if (output && output?.type !== OUTPUT_TYPE_TREASURY) {
         const { tag } = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG) ?? {
             tag: undefined,
         }

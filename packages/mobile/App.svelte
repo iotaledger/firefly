@@ -20,11 +20,11 @@
         Dashboard,
         Import,
         Legal,
-        Login,
+        LoginRouter,
         Migrate,
         Password,
         Profile,
-        Protect,
+        ProtectRouter,
         Secure,
         Setup,
         Welcome,
@@ -95,7 +95,7 @@
         <Password locale={$_} />
     </Route>
     <Route route={AppRoute.Protect} transition={false}>
-        <Protect locale={$_} />
+        <ProtectRouter />
     </Route>
     <Route route={AppRoute.Backup} transition={false}>
         <Backup locale={$_} />
@@ -116,7 +116,7 @@
         <Dashboard locale={$_} {goto} />
     </Route>
     <Route route={AppRoute.Login}>
-        <Login locale={$_} {goto} />
+        <LoginRouter {goto} />
     </Route>
     <ToastContainer />
 </div>

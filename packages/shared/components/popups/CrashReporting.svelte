@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { Button, Checkbox, Text, TextHint } from 'shared/components'
-    import { appSettings, IAppSettings, initAppSettings, isAwareOfCrashReporting } from '@core/app'
+    import { Button, Checkbox, Text } from 'shared/components'
+    import { appSettings, isAwareOfCrashReporting } from '@core/app'
     import { localize } from '@core/i18n'
     import { closePopup as closePopupInternal } from 'shared/lib/popup'
 

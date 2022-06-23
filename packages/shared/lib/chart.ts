@@ -183,7 +183,7 @@ export const getAccountActivityData = (
             })
         })
     } else {
-        activityTimeframes.forEach(({ start, end }) => {
+        activityTimeframes.forEach(({ start }) => {
             incoming.data.push(0)
             incoming.tooltips.unshift({
                 title: formatDate(new Date(start), {

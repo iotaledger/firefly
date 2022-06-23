@@ -1,7 +1,6 @@
 import { getAccount } from '@core/profile-manager'
-import { IBasicOutput, OutputTypes } from '@iota/types'
+import { OutputTypes } from '@iota/types'
 import { PreparedTransactionData, TransactionOptions } from '@iota/wallet'
-import { BuildBasicOutputData } from '@iota/wallet/out/types/buildOutputData'
 
 export async function prepareTransaction(
     id: string,

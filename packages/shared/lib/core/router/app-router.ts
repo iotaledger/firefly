@@ -69,9 +69,9 @@ export class AppRouter extends Router<AppRoute> {
                 nextRoute = AppRoute.CrashReporting
                 break
             case AppRoute.CrashReporting:
-                nextRoute = AppRoute.Appearance
+                nextRoute = AppRoute.LanguageAndAppearance
                 break
-            case AppRoute.Appearance:
+            case AppRoute.LanguageAndAppearance:
                 if (get(appStage) !== AppStage.PROD) {
                     updateNewProfile({ isDeveloperProfile: true })
                 }

@@ -6,7 +6,7 @@
     export let classes = ''
     export let disabled = false
     export let round = false
-    export let onClick = (..._: any[]): void => {}
+    export let onClick: (..._: any[]) => void
 </script>
 
 <button
@@ -16,8 +16,7 @@
     {disabled}
     on:click={() => {
         checked = !checked
-
-        onClick()
+        onClick && onClick()
     }}
 >
     <Icon

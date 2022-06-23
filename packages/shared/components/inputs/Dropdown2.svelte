@@ -22,7 +22,7 @@
     export let isFocused = false
     export let hasFocus = false
 
-    export let onSelect = (..._: any[]): void => {}
+    export let onSelect: (..._: any[]) => void
 
     let dropdown = false
     let navContainer

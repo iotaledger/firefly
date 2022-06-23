@@ -337,7 +337,7 @@ export const delineateNumber = (str: string, delineator: ',' | '.' | '' = ','): 
  *
  * @returns {Promise<number>}
  */
-export const sleep = (ms: number): Promise<number> => new Promise((resolve, reject) => setTimeout(resolve, ms))
+export const sleep = (ms: number): Promise<number> => new Promise((resolve) => setTimeout(resolve, ms))
 
 /**
  * Returns a random value from a list of values.

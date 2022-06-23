@@ -4,7 +4,6 @@ import { tritsToTrytes, trytesToTrits, valueToTrits } from '@iota/converter'
 import { TRANSACTION_LENGTH } from '@iota/transaction'
 import { asTransactionObject } from '@iota/transaction-converter'
 import { closePopup, openPopup } from 'shared/lib/popup'
-import { activeProfile } from '@core/profile'
 import { Address } from 'shared/lib/typings/address'
 import {
     AddressInput,
@@ -16,7 +15,6 @@ import {
     MigrationData,
     MigrationLog,
     MigrationState,
-    SendMigrationBundleResponse,
     Transfer,
 } from 'shared/lib/typings/migration'
 import { appRoute, AppRoute } from '@core/router'
@@ -360,7 +358,8 @@ export const findMigrationBundle = (bundleIndex: number): Bundle => {
  * @returns
  */
 export const mineLedgerBundle = (bundleIndex: number, offset: number): Promise<void> =>
-    new Promise((resolve, reject) => {
+    new Promise(() => {
+        // new Promise((resolve, reject) => {
         // api.getAccounts({
         //     onSuccess(getAccountsResponse) {
         //         api.getMigrationAddress(
@@ -493,7 +492,8 @@ export const createLedgerMigrationBundle = (
     prepareTransfersFn: (transfers: Transfer[], inputs: Input[]) => Promise<string[]>,
     callback: () => void
 ): Promise<MigrationBundle> =>
-    new Promise((resolve, reject) => {
+    new Promise(() => {
+        // new Promise((resolve, reject) => {
         // api.getAccounts({
         //     onSuccess(getAccountsResponse) {
         //         api.getMigrationAddress(
@@ -548,9 +548,7 @@ export const sendLedgerMigrationBundle = (bundleHash: string, trytes: string[]):
             onSuccess(response) {
                 // Store migration log so that we can export it later
                 prepareMigrationLog(bundleHash, trytes, response.payload.value)
-
-                _sendMigrationBundle(bundleHash, response.payload)
-
+                _sendMigrationBundle(bundleHash)
                 resolve()
             },
             onError(error) {
@@ -607,9 +605,8 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
             openSnapshotPopup()
         } else {
             api.sendMigrationBundle(MIGRATION_NODES, bundleHash, mwm, {
-                onSuccess(response) {
-                    _sendMigrationBundle(bundleHash, response.payload)
-
+                onSuccess() {
+                    _sendMigrationBundle(bundleHash)
                     resolve()
                 },
                 onError(error) {
@@ -619,7 +616,7 @@ export const sendMigrationBundle = (bundleHash: string, mwm = MINIMUM_WEIGHT_MAG
         }
     })
 
-const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse): void => {
+const _sendMigrationBundle = (hash: string): void => {
     const { bundles } = get(migration)
 
     // Update bundle and mark it as migrated
@@ -634,16 +631,16 @@ const _sendMigrationBundle = (hash: string, data: SendMigrationBundleResponse): 
     )
 
     // Persist these bundles in local storage
-    const _activeProfile = get(activeProfile)
+    // const _activeProfile = get(activeProfile)
 
-    const migratedTransaction = {
-        address: data.address,
-        balance: data.value,
-        tailTransactionHash: data.tailTransactionHash,
-        timestamp: new Date().toISOString(),
-        // Account index. Since we migrate funds to account at 0th index
-        account: 0,
-    }
+    // const migratedTransaction = {
+    //     address: data.address,
+    //     balance: data.value,
+    //     tailTransactionHash: data.tailTransactionHash,
+    //     timestamp: new Date().toISOString(),
+    //     // Account index. Since we migrate funds to account at 0th index
+    //     account: 0,
+    // }
 
     // updateProfile(
     //     'migratedTransactions',
@@ -1225,9 +1222,8 @@ export async function checkChrysalisSnapshot(): Promise<void> {
 /**
  * Poll the Chrysalis snapshot state at an interval
  */
-export async function pollChrysalisSnapshot(stopPoll: boolean = true): Promise<void> {
+export async function pollChrysalisSnapshot(): Promise<void> {
     await checkChrysalisSnapshot()
-    /* eslint-disable @typescript-eslint/no-misused-promises */
     setInterval(async () => checkChrysalisSnapshot(), DEFAULT_CHRYSALIS_VARIABLES_POLL_INTERVAL)
 }
 

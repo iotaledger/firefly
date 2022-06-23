@@ -2,19 +2,15 @@
     import { Text, NodeConfigurationForm, Button, Spinner } from 'shared/components'
     import { localize } from '@core/i18n'
     import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
-    import { INode, INetwork, IAuth } from '@core/network'
+    import { INode, INetwork } from '@core/network'
     import { closePopup } from '@lib/popup'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let nodes: INode[] = []
     export let network: INetwork
     export let isAddingNode: boolean = true
-    export let onSuccess = (..._: any[]): void => {}
+    export let onSuccess: (..._: any[]) => void
 
-    const optNodeAuth: IAuth = node?.auth || { username: '', password: '', jwt: '' }
-    const isNetworkSwitch = false
-
-    let newNetwork: INetwork
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
 

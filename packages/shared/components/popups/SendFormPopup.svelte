@@ -27,46 +27,32 @@
     let recipientInput: RecipientInput
 
     async function onSend(): Promise<void> {
-        let valid = true
-
-        async function validate(): Promise<void> {
-            await Promise.allSettled([
-                assetAmountInput?.validate(!!(metadata || tag)).then(
-                    () => {},
-                    () => {
-                        valid = false
-                    }
-                ),
-                recipientInput?.validate().then(
-                    () => {},
-                    () => {
-                        valid = false
-                    }
-                ),
-            ])
+        const valid = await validate()
+        if (valid) {
+            openPopup({
+                type: 'sendConfirmation',
+                props: {
+                    asset,
+                    amount,
+                    unit,
+                    rawAmount,
+                    recipient,
+                    internal: false,
+                    metadata,
+                    tag,
+                },
+                overflow: true,
+            })
         }
+    }
 
+    async function validate(): Promise<boolean> {
         try {
-            await validate()
-
-            if (valid) {
-                openPopup({
-                    type: 'sendConfirmation',
-                    props: {
-                        asset,
-                        amount,
-                        unit,
-                        rawAmount,
-                        recipient,
-                        internal: false,
-                        metadata,
-                        tag,
-                    },
-                    overflow: true,
-                })
-            }
+            await Promise.all([assetAmountInput?.validate(!!(metadata || tag)), recipientInput?.validate()])
+            return true
         } catch (error) {
-            console.error('error: ', error)
+            console.error('Error: ', error)
+            return false
         }
     }
 
