@@ -32,7 +32,6 @@
     import { openPopup, popupState } from 'shared/lib/popup'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { doesNodeHavePlugin, networkStatus, NodePlugin } from '@core/network'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { transferState } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
@@ -85,19 +84,19 @@
             previousPendingParticipationsLength = messageIds.length
         }
 
-        const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
-        if (!hasParticipationPlugin) {
-            showAppNotification({
-                type: 'error',
-                message: localize('error.node.pluginNotAvailable', {
-                    values: { nodePlugin: NodePlugin.Participation },
-                }),
-            })
+        // const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
+        // if (!hasParticipationPlugin) {
+        //     showAppNotification({
+        //         type: 'error',
+        //         message: localize('error.node.pluginNotAvailable', {
+        //             values: { nodePlugin: NodePlugin.Participation },
+        //         }),
+        //     })
 
-            resetView()
+        //     resetView()
 
-            return
-        }
+        //     return
+        // }
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {
@@ -165,18 +164,18 @@
     }
 
     onMount(async () => {
-        if (!doesNodeHavePlugin(NodePlugin.Participation)) {
-            showAppNotification({
-                type: 'warning',
-                message: localize('error.node.pluginNotAvailable', {
-                    values: { nodePlugin: NodePlugin.Participation },
-                }),
-            })
+        // if (!doesNodeHavePlugin(NodePlugin.Participation)) {
+        //     showAppNotification({
+        //         type: 'warning',
+        //         message: localize('error.node.pluginNotAvailable', {
+        //             values: { nodePlugin: NodePlugin.Participation },
+        //         }),
+        //     })
 
-            resetView()
+        //     resetView()
 
-            return
-        }
+        //     return
+        // }
 
         /**
          * NOTE: Because of Stronghold and Ledger prompts to "unlock"

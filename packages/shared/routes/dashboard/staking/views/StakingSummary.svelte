@@ -14,7 +14,6 @@
     } from 'shared/lib/participation/stores'
     import { AccountParticipationAbility, ParticipationAction } from 'shared/lib/participation/types'
     import { openPopup } from 'shared/lib/popup'
-    import { doesNodeHavePlugin, networkStatus, NodePlugin } from '@core/network'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { isSyncing } from 'shared/lib/wallet'
     import { selectedAccount } from '@core/account'
@@ -30,8 +29,8 @@
 
     $: isPartiallyStakedAndCanParticipate = $isPartiallyStaked && canParticipateInEvent
 
-    let canParticipateWithNode = false
-    $: $networkStatus, (canParticipateWithNode = doesNodeHavePlugin(NodePlugin.Participation))
+    const canParticipateWithNode = false
+    // $: $networkStatus, (canParticipateWithNode = doesNodeHavePlugin(NodePlugin.Participation))
 
     let showTooltip = false
     // hide tooltip if tooltipAnchor destroys
