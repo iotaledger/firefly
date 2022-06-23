@@ -1,19 +1,19 @@
 <script lang="typescript">
     import { Text, Button } from 'shared/components'
-    import { Locale } from '@core/i18n'
+    import { localize } from '@core/i18n'
 
-    export let locale: Locale
-    export let onDrop: (event?: Event) => void
     export let extentionsLabel = ''
-    export let allowedExtensions
-    export let dropping
-    export let fileName
+    export let allowedExtensions: string[]
+    export let dropping = false
+    export let fileName = ''
 
-    const onEnter = (): void => {
+    export let onDrop: (event?: Event) => void
+
+    function onEnter(): void {
         dropping = true
     }
 
-    const onLeave = (): void => {
+    function onLeave(): void {
         dropping = false
     }
 </script>
@@ -27,7 +27,7 @@
 >
     <content class:dropping class="flex flex-col items-center relative text-center">
         {#if dropping}
-            <Text type="p" secondary smaller>{locale('actions.dropHere')}</Text>
+            <Text type="p" secondary smaller>{localize('actions.dropHere')}</Text>
         {:else if fileName}
             <Text type="p" secondary smaller>{fileName}</Text>
         {:else}
@@ -54,9 +54,9 @@
                 on:change={onDrop}
                 accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'}
             />
-            <Text type="h4">{locale('actions.dragDrop')}</Text>
+            <Text type="h4">{localize('actions.dragDrop')}</Text>
             <Text classes="mb-12" type="p" secondary smaller>{extentionsLabel}</Text>
-            <Button secondary onClick={onDrop}>{locale('actions.chooseFile')}</Button>
+            <Button secondary onClick={onDrop}>{localize('actions.chooseFile')}</Button>
         {/if}
     </content>
 </dropzone>
