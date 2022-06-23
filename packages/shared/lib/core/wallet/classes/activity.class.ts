@@ -92,7 +92,7 @@ export class Activity implements IActivity {
         this.tag = outputOptions?.features?.tag
 
         this.storageDeposit = Number(output.amount) - Number(outputOptions.amount)
-        this.expirationDate = new Date(Number(outputOptions?.unlocks?.expiration?.unixTime) * MILLISECONDS_PER_SECOND)
+        this.expirationDate = new Date(Number(outputOptions?.unlocks?.expirationUnixTime) * MILLISECONDS_PER_SECOND)
         this.isAsync = this.storageDeposit > 0 || !!outputOptions?.unlocks?.expirationUnixTime
         this.isClaimed = false
 
