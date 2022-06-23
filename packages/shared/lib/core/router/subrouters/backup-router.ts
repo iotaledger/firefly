@@ -6,6 +6,7 @@ import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
 
 export const backupRoute = writable<BackupRoute>(null)
+export const backupRouter = writable<BackupRouter>(null)
 
 export class BackupRouter extends Subrouter<BackupRoute> {
     constructor() {

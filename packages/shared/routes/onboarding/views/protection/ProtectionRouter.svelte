@@ -2,17 +2,15 @@
     import { Transition } from 'shared/components'
     import { SetupPinProtectionView } from './views'
     import { localize } from '@core/i18n'
-    import { FireflyEvent, protectRoute, ProtectRouter, ProtectRoute } from '@core/router'
+    import { FireflyEvent, protectionRoute, protectionRouter, ProtectionRoute } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
-
-    const protectRouter = new ProtectRouter()
 
     let busy = false
 
     function next(event: CustomEvent<FireflyEvent>): void {
         busy = true
         try {
-            protectRouter.next(event?.detail)
+            $protectionRouter.next(event?.detail)
         } catch (err) {
             showAppNotification({
                 type: 'error',
@@ -23,11 +21,11 @@
     }
 
     function previous(): void {
-        protectRouter.previous()
+        $protectionRouter.previous()
     }
 </script>
 
-{#if $protectRoute === ProtectRoute.SetupPinProtection}
+{#if $protectionRoute === ProtectionRoute.SetupPinProtection}
     <Transition>
         <SetupPinProtectionView {busy} on:next={next} on:previous={previous} />
     </Transition>

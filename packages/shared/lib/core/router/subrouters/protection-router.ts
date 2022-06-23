@@ -1,32 +1,33 @@
 import { get, writable } from 'svelte/store'
 
 import { appRouter } from '../app-router'
-import { ProtectRoute } from '../enums'
+import { ProtectionRoute } from '../enums'
 import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
 
-export const protectRoute = writable<ProtectRoute>(null)
+export const protectionRoute = writable<ProtectionRoute>(null)
+export const protectionRouter = writable<ProtectionRouter>(null)
 
-export class ProtectRouter extends Subrouter<ProtectRoute> {
+export class ProtectionRouter extends Subrouter<ProtectionRoute> {
     constructor() {
-        super(ProtectRoute.SetupPinProtection, protectRoute)
+        super(ProtectionRoute.SetupPinProtection, protectionRoute)
     }
 
     next(event: FireflyEvent): void {
-        let nextRoute: ProtectRoute
+        let nextRoute: ProtectionRoute
         const { protectionType } = event || {}
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case ProtectRoute.ChooseProtectionMethod:
+            case ProtectionRoute.ChooseProtectionMethod:
                 if (protectionType === 'pin') {
-                    nextRoute = ProtectRoute.SetupPinProtection
+                    nextRoute = ProtectionRoute.SetupPinProtection
                 } else if (protectionType === 'biometric') {
-                    nextRoute = ProtectRoute.SetupBiometricProtection
+                    nextRoute = ProtectionRoute.SetupBiometricProtection
                 }
                 break
 
-            case ProtectRoute.SetupPinProtection:
+            case ProtectionRoute.SetupPinProtection:
                 get(appRouter).next(event)
                 break
         }

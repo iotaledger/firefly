@@ -3,12 +3,10 @@
     import { Transition } from 'shared/components'
     import { BackupPasswordView, FileImportView, ImportView, LedgerView, SuccessView, TextImportView } from './views'
     import { localize } from '@core/i18n'
-    import { FireflyEvent, importRoute, ImportRouter, ImportRoute } from '@core/router'
+    import { FireflyEvent, importRoute, importRouter, ImportRouter, ImportRoute } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
 
-    const importRouter = new ImportRouter()
-
-    setContext<ImportRouter>('importRouter', importRouter)
+    setContext<ImportRouter>('importRouter', $importRouter)
 
     let busy = false
     let error = ''
@@ -16,7 +14,7 @@
     async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
         busy = true
         try {
-            await importRouter.next(event.detail)
+            await $importRouter.next(event.detail)
         } catch (err) {
             if (!err.snapshot) {
                 if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
@@ -37,7 +35,7 @@
     }
 
     function previous(): void {
-        importRouter.previous()
+        $importRouter.previous()
     }
 </script>
 

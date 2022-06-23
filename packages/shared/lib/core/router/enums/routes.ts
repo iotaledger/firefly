@@ -137,13 +137,13 @@ export enum ImportRoute {
     Success = 'Success',
 }
 
-export enum ProtectRoute {
+export enum ProtectionRoute {
     ChooseProtectionMethod = 'chooseProtectionMethod',
     SetupBiometricProtection = 'setupBiometricProtection',
     SetupPinProtection = 'setupPinProtection',
 }
 
-export enum MigrateRoute {
+export enum MigrationRoute {
     Init = 'init',
     TransferFragmentedFunds = 'transferFragmentedFunds',
     BundleMiningWarning = 'bundleMiningWarning',

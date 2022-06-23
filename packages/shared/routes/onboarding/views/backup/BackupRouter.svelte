@@ -2,18 +2,16 @@
     import { Transition } from 'shared/components'
     import { BackupView, BackupToFileView, RecoveryPhraseView, VerifyRecoveryPhraseView } from './views'
     import { localize } from '@core/i18n'
-    import { backupRoute, BackupRouter, BackupRoute, FireflyEvent } from '@core/router'
+    import { backupRoute, backupRouter, BackupRoute, FireflyEvent } from '@core/router'
     import { mnemonic, strongholdPassword } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
-
-    const backupRouter = new BackupRouter()
 
     let busy = false
 
     async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
         busy = true
         try {
-            await backupRouter.next(event.detail)
+            await $backupRouter.next(event.detail)
         } catch (err) {
             console.error(err)
             showAppNotification({
@@ -26,7 +24,7 @@
     }
 
     function previous(): void {
-        backupRouter.previous()
+        $backupRouter.previous()
     }
 </script>
 

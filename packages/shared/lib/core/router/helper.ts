@@ -11,25 +11,48 @@ import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
 import { onboardingRouter, OnboardingRouter } from './onboarding-router'
 import { SettingsRouter, settingsRouter } from './settings-router'
-import { ledgerRouter, LedgerRouter, NetworkRouter, networkRouter } from './subrouters'
+import {
+    BackupRouter,
+    backupRouter,
+    ImportRouter,
+    importRouter,
+    ledgerRouter,
+    LedgerRouter,
+    MigrationRouter,
+    migrationRouter,
+    NetworkRouter,
+    networkRouter,
+    protectionRouter,
+    ProtectionRouter,
+} from './subrouters'
 
 export const initRouters = (): void => {
-    appRouter.set(new AppRouter())
-    dashboardRouter.set(new DashboardRouter())
-    ledgerRouter.set(new LedgerRouter())
     accountRouter.set(new AccountRouter())
-    onboardingRouter.set(new OnboardingRouter())
+    appRouter.set(new AppRouter())
+    backupRouter.set(new BackupRouter())
+    dashboardRouter.set(new DashboardRouter())
+    importRouter.set(new ImportRouter())
+    ledgerRouter.set(new LedgerRouter())
+    migrationRouter.set(new MigrationRouter())
     networkRouter.set(new NetworkRouter())
+    onboardingRouter.set(new OnboardingRouter())
+    protectionRouter.set(new ProtectionRouter())
     settingsRouter.set(new SettingsRouter())
 }
 
 export const resetRouters = (): void => {
     get(appRouter).reset()
-    get(dashboardRouter).reset()
     get(accountRouter).reset()
-    get(onboardingRouter).reset()
+    get(backupRouter).reset()
+    get(dashboardRouter).reset()
+    get(importRouter).reset()
+    get(ledgerRouter).reset()
+    get(migrationRouter).reset()
     get(networkRouter).reset()
+    get(onboardingRouter).reset()
+    get(protectionRouter).reset()
     get(settingsRouter).reset()
+
     isDeepLinkRequestActive.set(false)
 }
 

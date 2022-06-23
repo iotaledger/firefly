@@ -9,6 +9,7 @@ import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
 
 export const importRoute = writable<ImportRoute>(null)
+export const importRouter = writable<ImportRouter>(null)
 
 export class ImportRouter extends Subrouter<ImportRoute> {
     public importFile: Buffer
