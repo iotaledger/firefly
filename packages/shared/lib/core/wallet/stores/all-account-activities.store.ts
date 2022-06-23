@@ -1,91 +1,53 @@
-import { get, writable } from 'svelte/store'
+import { writable } from 'svelte/store'
 import { Activity } from '../classes'
-import { InclusionState } from '../enums'
-import { IAccountActivities, IActivity } from '../interfaces'
+import { IActivity } from '../interfaces'
 
-export const allAccountActivities = writable<IAccountActivities[]>([])
+export const allAccountActivities = writable<Activity[][]>([])
 
 export function addEmptyAccountActivitiesToAllAccountActivities(accountId: string): void {
-    const accountActivities = get(allAccountActivities).find(
-        (accountActivities) => accountActivities?.accountId === accountId
-    )
-
-    if (accountActivities) {
-        accountActivities.activities = []
-        replaceAccountActivitiesInAllAccountActivities(accountActivities)
-    } else {
-        allAccountActivities.update((state) => [...state, { accountId: accountId, activities: [] }])
-    }
+    replaceAccountActivitiesInAllAccountActivities(accountId, [])
 }
 
 export function addActivityToAccountActivitiesInAllAccountActivities(accountId: string, activity: Activity): void {
-    const accountActivities = get(allAccountActivities).find(
-        (accountActivities) => accountActivities?.accountId === accountId
-    )
-
-    if (accountActivities.activities) {
-        accountActivities.activities.push(activity)
-    }
-
-    replaceAccountActivitiesInAllAccountActivities(accountActivities)
+    allAccountActivities.update((state) => {
+        state[accountId].push(activity)
+        return state
+    })
 }
 
-export function replaceAccountActivitiesInAllAccountActivities(accountActivities: IAccountActivities): void {
-    allAccountActivities.update((state) =>
-        state.map((_accountActivities) =>
-            _accountActivities.accountId === accountActivities.accountId ? accountActivities : _accountActivities
-        )
-    )
+export function replaceAccountActivitiesInAllAccountActivities(accountId: string, accountActivities: Activity[]): void {
+    allAccountActivities.update((state) => {
+        state[accountId] = accountActivities
+        return state
+    })
 }
 
-export function updateActivityInclusionStateByTransactionId(
+export function updateActivityByTransactionId(
+    accountId: string,
     transactionId: string,
-    inclusionState: InclusionState
+    partialActivity: Partial<IActivity>
 ): void {
-    allAccountActivities.update((state) =>
-        state.map((_accountActivities) => {
-            const activity = _accountActivities.activities.find(
-                (_activity) => _activity.transactionId === transactionId
-            )
+    allAccountActivities.update((state) => {
+        const activity = state[accountId]?.find((_activity) => _activity.id === transactionId)
 
-            if (activity) {
-                activity.inclusionState = inclusionState
-            }
-            return _accountActivities
-        })
-    )
+        if (activity) {
+            activity.updateFromPartialActivity(partialActivity)
+        }
+        return state
+    })
 }
 
-export function updateActivityClaimStateByTransactionId(transactionId: string, isClaimed: boolean = true): void {
-    allAccountActivities.update((state) =>
-        state.map((_accountActivities) => {
-            const activity = _accountActivities.activities.find(
-                (_activity) => _activity.transactionId === transactionId
-            )
+export function updateActivityByActivityId(
+    accountId: string,
+    activityId: string,
+    partialActivity: Partial<IActivity>
+): void {
+    allAccountActivities.update((state) => {
+        const activity = state[accountId]?.find((_activity) => _activity.id === activityId)
 
-            if (activity && activity.isAsync) {
-                activity.isClaimed = isClaimed
-            }
-            return _accountActivities
-        })
-    )
-}
-
-export function updateActivity(accountId: string, partialActivity: Partial<IActivity>): void {
-    if (partialActivity?.id) {
-        allAccountActivities.update((state) =>
-            state.map((_accountActivities) => {
-                if (_accountActivities.accountId === accountId) {
-                    const activity = _accountActivities.activities.find(
-                        (_activity) => _activity.id === partialActivity.id
-                    )
-
-                    if (activity) {
-                        activity.updateFromPartialActivity(partialActivity)
-                    }
-                }
-                return _accountActivities
-            })
-        )
-    }
+        if (activity) {
+            activity.updateFromPartialActivity(partialActivity)
+        }
+        return state
+    })
 }
