@@ -1,6 +1,5 @@
 import { writable } from 'svelte/store'
 import { Activity } from '../classes'
-import { InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
 
 export const allAccountActivities = writable<Activity[][]>([])
@@ -21,22 +20,6 @@ export function replaceAccountActivitiesInAllAccountActivities(accountId: string
         state[accountId] = accountActivities
         return state
     })
-}
-
-export function updateActivityInclusionStateByTransactionId(
-    accountId: string,
-    transactionId: string,
-    inclusionState: InclusionState
-): void {
-    updateActivityByTransactionId(accountId, transactionId, { inclusionState })
-}
-
-export function updateActivityClaimStateByTransactionId(
-    accountId: string,
-    transactionId: string,
-    isClaimed: boolean = true
-): void {
-    updateActivityByTransactionId(accountId, transactionId, { isClaimed })
 }
 
 export function updateActivityByTransactionId(
