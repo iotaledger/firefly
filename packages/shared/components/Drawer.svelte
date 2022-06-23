@@ -13,6 +13,7 @@
 	@function {() => Promise<void>} close - Closes drawer.
 -->
 <script lang="typescript">
+    import { Icon } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
     import { quintIn, quintInOut, quintOut } from 'svelte/easing'
@@ -26,6 +27,7 @@
     export let fullScreen = false
     export let preventClose = false
     export let zIndex = 'z-30'
+    export let closeButton = false
     export let onClose = (): void => {}
 
     const dispatch = createEventDispatcher()
@@ -181,6 +183,11 @@
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-indicator: {fromLeft || preventClose ? 'none' : 'block'}"
     >
+        {#if closeButton}
+            <button on:click={close} class="absolute top-10 right-8">
+                <Icon icon="close" classes="text-gray-800 dark:text-white" />
+            </button>
+        {/if}
         <slot />
     </main>
 </drawer>
