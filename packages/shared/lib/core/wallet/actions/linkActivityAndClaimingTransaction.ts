@@ -21,7 +21,7 @@ export function linkActivityAndClaimingTransaction(account: IAccountState): void
                 new Date(claimedActivity.claimedTimestamp),
                 account.id
             )
-            break
+            continue
         }
 
         // TODO: add as many restrictions for candidates to optimize the time
