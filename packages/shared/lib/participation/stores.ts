@@ -249,8 +249,9 @@ function deriveParticipationEventState(
     networkStatus: INetworkStatus
 ): ParticipationEventState {
     // if (!stakingEvent || !networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
-    //     return ParticipationEventState.Inactive
-    // }
+    if (!stakingEvent) {
+        return ParticipationEventState.Inactive
+    }
 
     const { milestoneIndexCommence, milestoneIndexStart, milestoneIndexEnd } = stakingEvent?.information
     const currentMilestone = networkStatus?.currentMilestone
