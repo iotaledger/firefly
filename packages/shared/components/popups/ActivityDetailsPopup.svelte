@@ -19,7 +19,7 @@
     import { time } from '@core/app'
     import { setClipboard } from '@lib/utils'
     import { truncateString } from '@lib/helpers'
-    import { openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@lib/popup'
 
     export let activity: Activity
 
@@ -48,7 +48,15 @@
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
-                onConfirm: () => hideActivity(activity.id),
+                onConfirm: () => {
+                    hideActivity(activity.id)
+                    closePopup()
+                },
+                onCancel: () =>
+                    openPopup({
+                        type: 'activityDetails',
+                        props: { activity },
+                    }),
             },
         })
     }

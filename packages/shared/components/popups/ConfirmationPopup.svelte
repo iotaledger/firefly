@@ -6,11 +6,19 @@
 
     export let title: string
     export let description: string
-    export let onConfirm: () => void
+    export let onConfirm: () => void = undefined
+    export let onCancel: () => void = undefined
 
     function confirmClick(): void {
         onConfirm()
-        closePopup()
+    }
+
+    function cancelClick(): void {
+        if (onCancel) {
+            onCancel()
+        } else {
+            closePopup()
+        }
     }
 </script>
 
@@ -20,7 +28,7 @@
     </Text>
     <Text classes="text-left">{description}</Text>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={closePopup}>{localize('actions.cancel')}</Button>
+        <Button classes="w-full" secondary onClick={cancelClick}>{localize('actions.cancel')}</Button>
         <Button classes="w-full" onClick={confirmClick}>{localize('actions.confirm')}</Button>
     </popup-buttons>
 </div>

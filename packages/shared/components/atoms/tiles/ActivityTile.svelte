@@ -9,7 +9,7 @@
         hideActivity,
         InclusionState,
     } from '@core/wallet'
-    import { openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@lib/popup'
     import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
@@ -30,7 +30,10 @@
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
-                onConfirm: () => hideActivity(activity?.id),
+                onConfirm: () => {
+                    hideActivity(activity?.id)
+                    closePopup()
+                },
             },
         })
     }
