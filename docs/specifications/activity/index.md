@@ -7,7 +7,7 @@ expanded: true
 
 The following document explains how the Activity History is generated from IOTA's [UTXO](https://wiki.iota.org/IOTA-2.0-Research-Specifications/5.1UTXO) architecture. The main goal is to optimize UX by simplifying the complex UTXO architecture into a transaction based overview.
 
-There are some limitations to this approach, because of architectual design choices, which will be addressed in the corresponding section.
+This approach and the related architectural design choices have its limitations. The corresponding sections address these.
 
 ## Activity Initialization
 
@@ -21,7 +21,7 @@ With transactions we can build complete activities.
 
 Currently we only have _outgoing_ transactions. Soon we will also get transactions attached to the _incoming_ outputs, allowing us to add more information to these activities as well.
 
-**Important**: They are not guaranteed to be persisted on the nodes, only in wallet.rs. This means we can loose their information and therefore have some sort of fallback
+**Important**: They are guaranteed to persist in wallet.rs, but not on the nodes. This means we can lose the information and therefore need a fallback option.
 
 ### Outputs
 
