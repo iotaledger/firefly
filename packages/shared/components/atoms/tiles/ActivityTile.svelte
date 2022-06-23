@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { time } from '@core/app'
+    import { openConfirmationPopup } from '@core/app/stores/confirmation-popup'
     import { localize } from '@core/i18n'
     import {
         Activity,
@@ -21,6 +22,10 @@
     $: asyncStatus = activity?.getAsyncStatus($time)
     $: isIncomingActivityUnclaimed =
         activity?.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
+
+    function reject() {
+        openConfirmationPopup('hoi', 'holil', () => hideActivity(activity?.id))
+    }
 
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 </script>
@@ -83,7 +88,7 @@
                         <button
                             disabled={activity.isClaiming}
                             class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
-                            on:click|stopPropagation={() => hideActivity(activity?.id)}
+                            on:click|stopPropagation={reject}
                         >
                             {localize('actions.reject')}
                         </button>
