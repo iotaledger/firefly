@@ -1,15 +1,7 @@
 import { get, writable } from 'svelte/store'
 
-import { AppStage, appStage, mobile } from '@core/app'
-import {
-    activeProfile,
-    newProfile,
-    ProfileImportType,
-    profiles,
-    ProfileType,
-    setNewProfileType,
-    updateNewProfile,
-} from '@core/profile'
+import { mobile } from '@core/app'
+import { activeProfile, newProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
 import { walletSetupType } from '@lib/wallet'
 import { SetupType } from '@lib/typings/setup'
 
@@ -39,18 +31,9 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case OnboardingRoute.Welcome:
-                nextRoute = OnboardingRoute.Legal
+                nextRoute = OnboardingRoute.AppSetup
                 break
-            case OnboardingRoute.Legal:
-                nextRoute = OnboardingRoute.CrashReporting
-                break
-            case OnboardingRoute.CrashReporting:
-                nextRoute = OnboardingRoute.LanguageAndAppearance
-                break
-            case OnboardingRoute.LanguageAndAppearance:
-                if (get(appStage) !== AppStage.PROD) {
-                    updateNewProfile({ isDeveloperProfile: true })
-                }
+            case OnboardingRoute.AppSetup:
                 nextRoute = OnboardingRoute.Network
                 break
             case OnboardingRoute.Network: {

@@ -5,16 +5,16 @@
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { SettingsIcons } from '@lib/typings/icons'
     import {
-        AdvancedSettingsNoProfile,
-        GeneralSettings,
-        GeneralSettingsNoProfile,
-        HelpAndInfo,
+        AdvancedSettingsRouteNoProfile,
+        GeneralSettingsRoute,
+        GeneralSettingsRouteNoProfile,
+        HelpAndInfoRoute,
         SettingsRoute,
         SettingsRouteNoProfile,
         settingsRouter,
         settingsRoute,
-        SecuritySettings,
-        AdvancedSettings,
+        SecuritySettingsRoute,
+        AdvancedSettingsRoute,
     } from '@core/router'
     import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
@@ -28,8 +28,8 @@
 
     let settings
 
-    const securitySettings = Object.assign({}, SecuritySettings)
-    const advancedSettings = Object.assign({}, AdvancedSettings)
+    const securitySettings = Object.assign({}, SecuritySettingsRoute)
+    const advancedSettings = Object.assign({}, AdvancedSettingsRoute)
 
     // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
     $: if (!$isSoftwareProfile) {
@@ -42,16 +42,16 @@
 
     if ($loggedIn) {
         settings = {
-            general: GeneralSettings,
+            general: GeneralSettingsRoute,
             security: securitySettings,
             advanced: advancedSettings,
-            helpAndInfo: HelpAndInfo,
+            helpAndInfo: HelpAndInfoRoute,
         }
     } else {
         settings = {
-            general: GeneralSettingsNoProfile,
-            advanced: AdvancedSettingsNoProfile,
-            helpAndInfo: HelpAndInfo,
+            general: GeneralSettingsRouteNoProfile,
+            advanced: AdvancedSettingsRouteNoProfile,
+            helpAndInfo: HelpAndInfoRoute,
         }
     }
 

@@ -2,9 +2,9 @@
     import { Button, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
-    import { ExternalRoute, HelpAndInfo } from '@core/router'
+    import { ExternalRoute, HelpAndInfoRoute } from '@core/router'
 
-    export let route: HelpAndInfo
+    export let route: HelpAndInfoRoute
     export let url: ExternalRoute
     export let actionLocale: string
 

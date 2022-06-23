@@ -1,36 +1,36 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
-    import { ExternalRoute, HelpAndInfo } from '@core/router'
+    import { ExternalRoute, HelpAndInfoRoute } from '@core/router'
     import HelpSection from './HelpSection.svelte'
     import features from 'shared/features/features'
 
     const settings: {
         component: unknown
-        childRoute: HelpAndInfo
+        childRoute: HelpAndInfoRoute
         actionLocale: string
         url: ExternalRoute
     }[] = [
         {
             component: HelpSection,
-            childRoute: HelpAndInfo.Documentation,
+            childRoute: HelpAndInfoRoute.Documentation,
             url: ExternalRoute.Documentation,
             actionLocale: 'readDocumentation',
         },
         {
             component: HelpSection,
-            childRoute: HelpAndInfo.Faq,
+            childRoute: HelpAndInfoRoute.Faq,
             url: ExternalRoute.FAQ,
             actionLocale: 'visitFaq',
         },
         {
             component: HelpSection,
-            childRoute: HelpAndInfo.Discord,
+            childRoute: HelpAndInfoRoute.Discord,
             url: ExternalRoute.Discord,
             actionLocale: 'visitDiscord',
         },
         {
             component: HelpSection,
-            childRoute: HelpAndInfo.ReportAnIssue,
+            childRoute: HelpAndInfoRoute.ReportAnIssue,
             url: ExternalRoute.IssueReport,
             actionLocale: 'reportAnIssue',
         },

@@ -1,26 +1,26 @@
 <script lang="typescript">
     import { exportStronghold } from '@contexts/settings'
     import { isSoftwareProfile } from '@core/profile'
-    import { SecuritySettings } from '@core/router'
+    import { SecuritySettingsRoute } from '@core/router'
     import { HR } from 'shared/components'
     import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold } from './'
     import features from 'shared/features/features'
 
     const settings: {
         component: unknown
-        childRoute: SecuritySettings
+        childRoute: SecuritySettingsRoute
         requireSoftware?: boolean
     }[] = [
-        { component: ExportStronghold, childRoute: SecuritySettings.ExportStronghold, requireSoftware: true },
-        { component: AppLock, childRoute: SecuritySettings.AppLock },
-        { component: ChangePassword, childRoute: SecuritySettings.ChangePassword, requireSoftware: true },
-        { component: ChangePincode, childRoute: SecuritySettings.ChangePincode },
-        { component: DeleteProfile, childRoute: SecuritySettings.DeleteProfile },
+        { component: ExportStronghold, childRoute: SecuritySettingsRoute.ExportStronghold, requireSoftware: true },
+        { component: AppLock, childRoute: SecuritySettingsRoute.AppLock },
+        { component: ChangePassword, childRoute: SecuritySettingsRoute.ChangePassword, requireSoftware: true },
+        { component: ChangePincode, childRoute: SecuritySettingsRoute.ChangePincode },
+        { component: DeleteProfile, childRoute: SecuritySettingsRoute.DeleteProfile },
     ]
     const visibleSettings = settings.filter((setting) => features?.settings?.security?.[setting.childRoute]?.enabled)
 
     const props = {
-        [SecuritySettings.ChangePassword]: { exportStronghold },
+        [SecuritySettingsRoute.ChangePassword]: { exportStronghold },
     }
 </script>
 

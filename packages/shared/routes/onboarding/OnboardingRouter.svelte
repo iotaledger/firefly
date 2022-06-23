@@ -2,6 +2,7 @@
     import { Transition } from 'shared/components'
     import {
         // router
+        AppSetupRouter,
         BackupRouter,
         ImportRouter,
         LedgerRouter,
@@ -13,17 +14,13 @@
         BalanceView,
         ClaimRewardsView,
         CongratulationsView,
-        CrashReportingView,
         CreateView,
-        LanguageAndAppearanceView,
-        LegalView,
         PasswordView,
         ProfileView,
         SecureView,
         SetupView,
         WelcomeView,
     } from './views'
-    import { _ } from '@core/i18n'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
 </script>
 
@@ -31,17 +28,9 @@
     <Transition>
         <WelcomeView />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Legal}
+{:else if $onboardingRoute === OnboardingRoute.AppSetup}
     <Transition>
-        <LegalView />
-    </Transition>
-{:else if $onboardingRoute === OnboardingRoute.CrashReporting}
-    <Transition>
-        <CrashReportingView />
-    </Transition>
-{:else if $onboardingRoute === OnboardingRoute.LanguageAndAppearance}
-    <Transition>
-        <LanguageAndAppearanceView locale={$_} />
+        <AppSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Profile}
     <Transition>

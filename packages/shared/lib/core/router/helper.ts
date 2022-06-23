@@ -12,6 +12,8 @@ import { DashboardRoute } from './enums'
 import { onboardingRouter, OnboardingRouter } from './onboarding-router'
 import { SettingsRouter, settingsRouter } from './settings-router'
 import {
+    AppSetupRouter,
+    appSetupRouter,
     BackupRouter,
     backupRouter,
     ImportRouter,
@@ -29,6 +31,7 @@ import {
 export const initRouters = (): void => {
     accountRouter.set(new AccountRouter())
     appRouter.set(new AppRouter())
+    appSetupRouter.set(new AppSetupRouter())
     backupRouter.set(new BackupRouter())
     dashboardRouter.set(new DashboardRouter())
     importRouter.set(new ImportRouter())
@@ -42,6 +45,7 @@ export const initRouters = (): void => {
 
 export const resetRouters = (): void => {
     get(appRouter).reset()
+    get(appSetupRouter).reset()
     get(accountRouter).reset()
     get(backupRouter).reset()
     get(dashboardRouter).reset()

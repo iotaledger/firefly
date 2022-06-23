@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
+    import ConditionsOfUse from './ConditionsOfUse.svelte'
     import {
         mobile,
         lastAcceptedTermsOfService,
@@ -8,8 +9,7 @@
         PRIVACY_POLICY_VERSION,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { onboardingRouter } from '@core/router'
-    import ConditionsOfUse from './ConditionsOfUse.svelte'
+    import { appSetupRouter } from '@core/router'
 
     let checked = false
     let termsAccepted = false
@@ -19,10 +19,10 @@
     function handleContinueClick(): void {
         lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
-        $onboardingRouter.next()
+        $appSetupRouter.next()
     }
     function handleBackClick(): void {
-        $onboardingRouter.previous()
+        $appSetupRouter.previous()
     }
 </script>
 

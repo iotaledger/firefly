@@ -5,12 +5,12 @@
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { SettingsIcons } from 'shared/lib/typings/icons'
     import {
-        AdvancedSettings,
-        AdvancedSettingsNoProfile,
-        GeneralSettings,
-        GeneralSettingsNoProfile,
-        HelpAndInfo,
-        SecuritySettings,
+        AdvancedSettingsRoute,
+        AdvancedSettingsRouteNoProfile,
+        GeneralSettingsRoute,
+        GeneralSettingsRouteNoProfile,
+        HelpAndInfoRoute,
+        SecuritySettingsRoute,
         SettingsRoute,
         settingsRouter,
     } from '@core/router'
@@ -18,8 +18,8 @@
 
     const { loggedIn } = $activeProfile
 
-    const securitySettings = Object.assign({}, SecuritySettings)
-    const advancedSettings = Object.assign({}, AdvancedSettings)
+    const securitySettings = Object.assign({}, SecuritySettingsRoute)
+    const advancedSettings = Object.assign({}, AdvancedSettingsRoute)
 
     // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
     $: if (!$isSoftwareProfile) {
@@ -33,12 +33,12 @@
     function onSettingClick(
         route: SettingsRoute,
         childRoute:
-            | SecuritySettings
-            | AdvancedSettings
-            | GeneralSettings
-            | GeneralSettingsNoProfile
-            | AdvancedSettingsNoProfile
-            | HelpAndInfo
+            | SecuritySettingsRoute
+            | AdvancedSettingsRoute
+            | GeneralSettingsRoute
+            | GeneralSettingsRouteNoProfile
+            | AdvancedSettingsRouteNoProfile
+            | HelpAndInfoRoute
     ) {
         $settingsRouter.goToChildRoute(route, childRoute)
     }
@@ -55,8 +55,8 @@
                 iconColor="bg-blue-500"
                 icons={SettingsIcons}
                 group="general"
-                settings={GeneralSettings}
-                activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
+                settings={GeneralSettingsRoute}
+                activeSettings={$loggedIn ? GeneralSettingsRoute : GeneralSettingsRouteNoProfile}
                 title={localize('views.settings.general.title')}
                 description=""
                 onClick={(setting) => onSettingClick(SettingsRoute.General, setting)}
@@ -69,7 +69,7 @@
                 icons={SettingsIcons}
                 group="security"
                 settings={securitySettings}
-                activeSettings={$loggedIn ? SecuritySettings : undefined}
+                activeSettings={$loggedIn ? SecuritySettingsRoute : undefined}
                 title={localize('views.settings.security.title')}
                 description=""
                 onClick={(setting) => onSettingClick(SettingsRoute.Security, setting)}
@@ -82,7 +82,7 @@
                 icons={SettingsIcons}
                 group="advanced"
                 settings={advancedSettings}
-                activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
+                activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsRouteNoProfile}
                 title={localize('views.settings.advanced.title')}
                 description=""
                 onClick={(setting) => onSettingClick(SettingsRoute.Advanced, setting)}
@@ -94,8 +94,8 @@
                 iconColor="bg-purple-500"
                 icons={SettingsIcons}
                 group="helpAndInfo"
-                settings={HelpAndInfo}
-                activeSettings={HelpAndInfo}
+                settings={HelpAndInfoRoute}
+                activeSettings={HelpAndInfoRoute}
                 title={localize('views.settings.helpAndInfo.title')}
                 description=""
                 onClick={(setting) => onSettingClick(SettingsRoute.HelpAndInfo, setting)}
