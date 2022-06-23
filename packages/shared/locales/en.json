@@ -932,6 +932,10 @@
         "claim": "Claim",
         "claiming": "Claiming",
         "reject": "Reject",
+        "confirmRejection": {
+            "title": "Reject Transaction",
+            "description": "Do you want to reject this transaction"
+        },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
@@ -1265,11 +1269,11 @@
         "transferring": "Please wait until all transactions are completed to change wallets.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
-            "success": "Claiming transaction successfully",
+            "success": "Transaction claimed",
             "error": "Claiming transaction failed"
         },
          "rejected": {
-             "success": "Rejecting transaction successfully",
+             "success": "Transaction rejected",
              "error": "Rejecting transaction failed"
          }
     },

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { nativeSplash } from 'capacitor/capacitorApi'
     import { onMount } from 'svelte'
-    import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
+    import { QRScanner, Route, ToastContainer, Popup, ConfirmationPopup } from 'shared/components'
     import { popupState } from 'shared/lib/popup'
     import { appSettings, AppStage, appStage, mobile } from '@core/app'
     import { goto } from 'shared/lib/helpers'
@@ -119,6 +119,7 @@
         <LoginRouter {goto} />
     </Route>
     <ToastContainer />
+    <ConfirmationPopup />
 </div>
 <div class="scanner-ui">
     <QRScanner />
