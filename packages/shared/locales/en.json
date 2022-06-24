@@ -705,8 +705,7 @@
                     "latestMilestone": "Latest milestone",
                     "confirmedMilestone": "Confirmed milestone",
                     "pruningIndex": "Pruning index",
-                    "features": "Features",
-                    "plugins": "Plugins"
+                    "features": "Features"
                 },
                 "metrics": {
                     "tab": "Metrics",
@@ -933,6 +932,10 @@
         "claim": "Claim",
         "claiming": "Claiming",
         "reject": "Reject",
+        "confirmRejection": {
+            "title": "Hide Transaction",
+            "description": "Do you want to hide this transaction from your activity?"
+        },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
@@ -1266,13 +1269,13 @@
         "transferring": "Please wait until all transactions are completed to change wallets.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
-            "success": "Claiming transaction successfully",
+            "success": "Transaction claimed",
             "error": "Claiming transaction failed"
         },
-         "rejected": {
-             "success": "Rejecting transaction successfully",
-             "error": "Rejecting transaction failed"
-         }
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {

@@ -3,24 +3,23 @@ import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
-import { addClaimedActivity, updateActivity } from '../stores'
+import { addClaimedActivity, updateActivityByActivityId } from '../stores'
 
 export async function claimActivity(activity: Activity): Promise<void> {
     const account = get(selectedAccount)
     try {
-        updateActivity(account.id, { id: activity.id, isClaiming: true })
+        updateActivityByActivityId(account.id, activity.id, { isClaiming: true })
         const results = await account.collectOutputs([activity.outputId])
         if (results.length > 0) {
+            const transactionId = results[0].transactionId
             addClaimedActivity(account.id, activity.transactionId, {
                 id: activity.id,
-                isClaimed: true,
-                claimingTransactionId: results[0].transactionId,
+                claimingTransactionId: transactionId,
                 claimedTimestamp: new Date().getTime(),
             })
-            updateActivity(account.id, {
-                id: activity.id,
+            updateActivityByActivityId(account.id, activity.id, {
                 isClaimed: true,
-                claimingTransactionId: results[0].transactionId,
+                claimingTransactionId: transactionId,
                 claimedDate: new Date(),
             })
 
@@ -36,6 +35,6 @@ export async function claimActivity(activity: Activity): Promise<void> {
             message: localize('notifications.claimed.error'),
         })
     } finally {
-        updateActivity(account.id, { id: activity.id, isClaiming: false })
+        updateActivityByActivityId(account.id, activity.id, { isClaiming: false })
     }
 }
