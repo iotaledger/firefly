@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, PasswordInput, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { AccountIdentifier } from '@lib/typings/accountIdentifier'
     import { Locale } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { isSoftwareProfile } from '@core/profile'
