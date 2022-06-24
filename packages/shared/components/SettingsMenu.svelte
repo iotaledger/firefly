@@ -1,12 +1,35 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import {
+        AdvancedSettings,
+        AdvancedSettingsNoProfile,
+        GeneralSettings,
+        GeneralSettingsNoProfile,
+        HelpAndInfo,
+        SecuritySettings,
+        SettingsRoute,
+    } from '@core/router'
+    import { Icon, Text } from 'shared/components'
     import features from 'shared/features/features'
 
     export let group
-    export let settings
-    export let activeSettings = []
+    export let settings:
+        | AdvancedSettings
+        | AdvancedSettingsNoProfile
+        | GeneralSettings
+        | GeneralSettingsNoProfile
+        | HelpAndInfo
+        | SecuritySettings
+        | SettingsRoute
+    export let activeSettings:
+        | AdvancedSettings[]
+        | AdvancedSettingsNoProfile[]
+        | GeneralSettings[]
+        | GeneralSettingsNoProfile[]
+        | HelpAndInfo[]
+        | SecuritySettings[]
+        | SettingsRoute[] = []
     export let icons
     export let icon = undefined
     export let iconColor = undefined

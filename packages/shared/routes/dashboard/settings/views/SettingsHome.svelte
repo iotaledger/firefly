@@ -3,7 +3,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { SettingsIcons } from 'shared/lib/typings/icons'
+    import { SETTINGS_ICONS } from '@lib/auxiliary/icon'
     import {
         AdvancedSettings,
         AdvancedSettingsNoProfile,
@@ -53,7 +53,7 @@
             <SettingsMenu
                 icon="settings"
                 iconColor="bg-blue-500"
-                icons={SettingsIcons}
+                icons={SETTINGS_ICONS}
                 group="general"
                 settings={GeneralSettings}
                 activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
@@ -66,7 +66,7 @@
             <SettingsMenu
                 icon="security"
                 iconColor="bg-yellow-500"
-                icons={SettingsIcons}
+                icons={SETTINGS_ICONS}
                 group="security"
                 settings={securitySettings}
                 activeSettings={$loggedIn ? SecuritySettings : undefined}
@@ -79,7 +79,7 @@
             <SettingsMenu
                 icon="tools"
                 iconColor="bg-green-600"
-                icons={SettingsIcons}
+                icons={SETTINGS_ICONS}
                 group="advanced"
                 settings={advancedSettings}
                 activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
@@ -92,7 +92,7 @@
             <SettingsMenu
                 icon="info"
                 iconColor="bg-purple-500"
-                icons={SettingsIcons}
+                icons={SETTINGS_ICONS}
                 group="helpAndInfo"
                 settings={HelpAndInfo}
                 activeSettings={HelpAndInfo}
