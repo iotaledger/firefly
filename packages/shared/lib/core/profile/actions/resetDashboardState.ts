@@ -5,16 +5,12 @@ import {
     isFirstSessionSync,
     isSyncing,
     isTransferring,
-    selectedMessage,
-    transferState,
     walletSetupType,
 } from '@lib/wallet'
 
 // TODO: move this out of profile module
 export function resetDashboardState(): void {
-    selectedMessage.set(null)
     isTransferring.set(false)
-    transferState.set(null)
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
     isFirstSessionSync.set(true)
