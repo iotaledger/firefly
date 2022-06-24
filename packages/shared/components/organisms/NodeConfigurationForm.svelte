@@ -11,6 +11,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile, newProfile, addNode, createNewProfile } from '@core/profile'
     import { localize } from '@core/i18n'
+    import { getNodeInfo } from '@core/profile-manager'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
@@ -24,10 +25,16 @@
 
     $: node.url, (formError = { error: '' })
 
-    function validateNodeParameters(): void {
+    async function validateNodeParameters(): Promise<void> {
         const errorUrlValidity = checkNodeUrlValidity(clientOptions?.nodes, node.url, $profile.isDeveloperProfile)
         if (errorUrlValidity) {
             formError = { error: localize(errorUrlValidity) ?? '' }
+        }
+
+        try {
+            await getNodeInfo(node.url)
+        } catch (err) {
+            formError = { error: localize('error.node.invalid') }
         }
 
         if ($profile === $activeProfile) {
@@ -45,8 +52,7 @@
     export async function handleAddNode(): Promise<void> {
         isBusy = true
 
-        validateNodeParameters()
-
+        await validateNodeParameters()
         if (!formError.error) {
             try {
                 if (!$profile?.settings?.clientOptions) {
