@@ -4,7 +4,7 @@
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
+    import { AccountIdentifier } from '@lib/typings/accountIdentifier'
     import { Locale } from '@core/i18n'
     import { formatUnitPrecision, Unit } from '@lib/units'
     import { selectedAccount } from '@core/account'
