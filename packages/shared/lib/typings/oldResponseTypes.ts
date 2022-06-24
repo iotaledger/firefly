@@ -5,7 +5,6 @@ import { AccountIdentifier } from '@lib/typings/accountIdentifier'
 import { LedgerStatus } from '@lib/typings/ledger'
 import { Message } from '@lib/typings/message'
 import { MigrationAddress, MigrationBundle, MigrationData } from '@lib/typings/migration'
-import { StrongholdStatus } from '@lib/typings/wallet'
 
 export enum ResponseTypes {
     InvalidMessage = 'InvalidMessage',
@@ -42,7 +41,6 @@ export enum ResponseTypes {
     StoredMnemonic = 'StoredMnemonic',
     VerifiedMnemonic = 'VerifiedMnemonic',
     StoragePasswordSet = 'StoragePasswordSet',
-    StrongholdStatus = 'StrongholdStatus',
     UnusedAddress = 'UnusedAddress',
     IsLatestAddressUnused = 'IsLatestAddressUnused',
     AreAllLatestAddressesUnused = 'AreAllLatestAddressesUnused',
@@ -99,7 +97,6 @@ export type GenerateMnemonicResponse = Response<ResponseTypes.GeneratedMnemonic,
 export type StoreMnemonicResponse = Response<ResponseTypes.StoredMnemonic, void>
 export type VerifyMnemonicResponse = Response<ResponseTypes.VerifiedMnemonic, void>
 export type SetStoragePasswordResponse = Response<ResponseTypes.StoragePasswordSet, void>
-export type StrongholdStatusResponse = Response<ResponseTypes.StrongholdStatus, StrongholdStatus>
 export type UnusedAddressResponse = Response<ResponseTypes.UnusedAddress, Address>
 export type IsLatestAddressUnusedResponse = Response<ResponseTypes.IsLatestAddressUnused, boolean>
 export type AreLatestAddressesUnusedResponse = Response<ResponseTypes.AreAllLatestAddressesUnused, boolean>
@@ -150,7 +147,6 @@ export type MessageResponse =
     | StoreMnemonicResponse
     | VerifyMnemonicResponse
     | SetStoragePasswordResponse
-    | StrongholdStatusResponse
     | UnusedAddressResponse
     | IsLatestAddressUnusedResponse
     | AreLatestAddressesUnusedResponse

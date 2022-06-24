@@ -2,7 +2,6 @@ import { ChrysalisVariablesValidationResponse } from 'shared/lib/migration'
 import { LedgerStatus } from './typings/ledger'
 import { Message } from './typings/message'
 import { MigrationData } from './typings/migration'
-import { StrongholdStatus } from './typings/wallet'
 import { ErrorObject, ValidationResponse } from './typings/validator'
 import { ErrorTypes } from './typings/validator'
 import { MarketDataValidationResponse } from './typings/market'
@@ -267,7 +266,7 @@ class StrongholdStatusValidator extends Validator {
      * @returns {ValidationResponse}
      */
     isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as StrongholdStatus
+        const payload = response.payload
 
         if ('Locked' !== payload.snapshot.status && 'Unlocked' !== payload.snapshot.status) {
             return super.createResponse(false, {
@@ -561,9 +560,6 @@ export default class ValidatorService {
             [ResponseTypes.Ok]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.StrongholdStatus]: this.createBaseValidator()
-                .add(new StrongholdStatusValidator())
-                .getFirst(),
             [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('boolean'))
                 .getFirst(),
