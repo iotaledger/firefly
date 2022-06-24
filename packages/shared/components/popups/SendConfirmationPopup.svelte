@@ -20,9 +20,9 @@
     import { isValidExpirationDateTime } from '@core/utils'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { promptUserToConnectLedger } from '@lib/ledger'
-    import { showAppNotification } from '@lib/notifications'
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
+    import { InsufficientFundsForStorageDepositError, InvalidExpirationDateTimeError } from '@core/error'
 
     export let asset: IAsset
     export let amount = '0'
@@ -39,12 +39,27 @@
 
     let expirationDate: Date
     let storageDeposit: number
-
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
 
     $: internal = recipient.type === 'account'
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+    $: $$props, expirationDate, void _prepareOutput()
+    $: formattedFiatValue =
+        formatCurrency(
+            convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
+        ) || '-'
+    $: transactionDetails = {
+        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
+        inclusionState: InclusionState.Pending,
+        direction: ActivityDirection.Out,
+        amount: amount?.length > 0 ? amount : '0',
+        unit,
+        subject: recipient,
+        metadata,
+        tag,
+        storageDeposit: storageDeposit,
+    }
 
     async function _prepareOutput(): Promise<void> {
         outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
@@ -57,36 +72,30 @@
         storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
     }
 
-    $: $$props, expirationDate, void _prepareOutput()
+    function validate(): void {
+        if (asset?.balance?.available < rawAmount + storageDeposit) {
+            throw new InsufficientFundsForStorageDepositError(
+                storageDeposit + rawAmount - asset.balance.available,
+                unit
+            )
+        } else if (expirationDate && !isValidExpirationDateTime(expirationDate)) {
+            throw new InvalidExpirationDateTimeError()
+        }
+    }
 
     function onConfirm(): void {
-        if ($isSoftwareProfile) {
-            void sendIfValidExpirationTime()
-        } else if ($isLedgerProfile) {
-            closePopup()
-            promptUserToConnectLedger(false, () => void sendIfValidExpirationTime(false), undefined)
-        }
-    }
-
-    function sendIfValidExpirationTime(shouldClosePopup = true): Promise<void> {
-        if (expirationDate) {
-            if (isValidExpirationDateTime(expirationDate)) {
-                return closePopupAndSend(shouldClosePopup)
+        try {
+            validate()
+            if ($isSoftwareProfile) {
+                closePopup()
+                trySendOutput(outputOptions, preparedOutput)
+            } else if ($isLedgerProfile) {
+                closePopup()
+                promptUserToConnectLedger(false, () => trySendOutput(outputOptions, preparedOutput), undefined)
             }
-            showAppNotification({
-                type: 'warning',
-                message: localize('warning.transaction.invalidExpirationDateTime'),
-            })
+        } catch (error) {
             return
         }
-        return closePopupAndSend(shouldClosePopup)
-    }
-
-    function closePopupAndSend(shouldClosePopup: boolean): Promise<void> {
-        if (shouldClosePopup) {
-            closePopup()
-        }
-        return trySendOutput(outputOptions, preparedOutput)
     }
 
     function onBack(): void {
@@ -103,23 +112,6 @@
                 tag,
             },
         })
-    }
-
-    $: formattedFiatValue =
-        formatCurrency(
-            convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
-        ) || '-'
-
-    $: transactionDetails = {
-        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
-        inclusionState: InclusionState.Pending,
-        direction: ActivityDirection.Out,
-        amount: amount?.length > 0 ? amount : '0',
-        unit,
-        subject: recipient,
-        metadata,
-        tag,
-        storageDeposit: storageDeposit,
     }
 </script>
 
