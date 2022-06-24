@@ -16,7 +16,6 @@
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
-    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { Settings, Staking, Wallet } from 'shared/routes'
@@ -47,10 +46,10 @@
     const unsubscribeAccountsLoaded = hasLoadedAccounts.subscribe((val) => {
         if (val) {
             void pollNetworkStatus()
-            void pollParticipationOverview()
+            // void pollParticipationOverview()
         } else {
             clearPollNetworkInterval()
-            clearPollParticipationOverviewInterval()
+            // clearPollParticipationOverviewInterval()
         }
     })
 
