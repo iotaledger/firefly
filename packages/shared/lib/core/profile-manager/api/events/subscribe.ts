@@ -3,6 +3,7 @@ import { profileManager } from '../../stores'
 import { handleNewOutputEvent } from './newOutput'
 import { handleTransactionInclusionEvent } from './newTransactionInclusionEvent'
 import { handleSpentOutput } from './spentOutput'
+import { handleTransactionProgress } from './transactionProgress'
 
 export function subscribe(): void {
     const manager = get(profileManager)
@@ -15,6 +16,7 @@ export function subscribe(): void {
                 NewOutput: handleNewOutputEvent,
                 TransactionInclusion: handleTransactionInclusionEvent,
                 SpentOutput: handleSpentOutput,
+                TransactionProgress: handleTransactionProgress,
                 // ...
             }
 
