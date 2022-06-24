@@ -1,8 +1,4 @@
 import { ChrysalisVariablesValidationResponse } from 'shared/lib/migration'
-import { Account, SyncedAccount } from './typings/account'
-import { Address } from './typings/address'
-import { MessageResponse } from './typings/bridge'
-import { ResponseTypes } from './typings/bridge'
 import { LedgerStatus } from './typings/ledger'
 import { Message } from './typings/message'
 import { MigrationData } from './typings/migration'
@@ -11,18 +7,14 @@ import { ErrorObject, ValidationResponse } from './typings/validator'
 import { ErrorTypes } from './typings/validator'
 import { MarketDataValidationResponse } from './typings/market'
 import { INodeInfoResponse } from '@core/network/interfaces/node-info-response.interface'
+import { MessageResponse, ResponseTypes } from '@lib/typings/oldResponseTypes'
 
 type Validators =
     | IdValidator
     | ActionValidator
     | PayloadTypeValidator
-    | AccountValidator
-    | AccountListValidator
-    | SyncedAccountValidator
-    | SyncedAccountListValidator
     | MessageValidator
     | StrongholdStatusValidator
-    | AddressValidator
     | NodeInfoValidator
 
 class Validator {
@@ -184,178 +176,6 @@ class PayloadTypeValidator extends Validator {
         return super.isValid(response)
     }
 }
-
-/**
- * Validation for accounts list
- */
-class AccountListValidator extends Validator {
-    /**
-     * Checks if response is valid
-     *
-     * @method isValid
-     *
-     * @param {MessageResponse} response
-     *
-     * @returns {ValidationResponse}
-     */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as Account[]
-
-        if (!Array.isArray(payload)) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of accounts received.',
-            })
-        }
-
-        for (const account of payload) {
-            const validationResponse = new AccountValidator().isValid(
-                Object.assign({}, response, {
-                    payload: account,
-                })
-            )
-            if (!validationResponse.isValid) {
-                return validationResponse
-            }
-        }
-
-        return super.isValid(response)
-    }
-}
-
-/**
- * Validation for synced accounts list
- */
-class SyncedAccountListValidator extends Validator {
-    /**
-     * Checks if response is valid
-     *
-     * @method isValid
-     *
-     * @param {MessageResponse} response
-     *
-     * @returns {ValidationResponse}
-     */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as Account[]
-
-        if (!Array.isArray(payload)) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of synced accounts received.',
-            })
-        }
-
-        for (const account of payload) {
-            const validationResponse = new SyncedAccountValidator().isValid(
-                Object.assign({}, response, {
-                    payload: account,
-                })
-            )
-
-            if (!validationResponse.isValid) {
-                return validationResponse
-            }
-        }
-
-        return super.isValid(response)
-    }
-}
-
-/**
- * Validation for synced account
- */
-class SyncedAccountValidator extends Validator {
-    /**
-     * Checks if response is valid
-     *
-     * @method isValid
-     *
-     * @param {MessageResponse} response
-     *
-     * @returns {ValidationResponse}
-     */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as SyncedAccount
-
-        if ('string' !== typeof payload.id) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of id received.',
-            })
-        } else if ('object' !== typeof payload.depositAddress) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of depositAddress received.',
-            })
-        } else if ('boolean' !== typeof payload.isEmpty) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of isEmpty received.',
-            })
-        } else if (!Array.isArray(payload.messages)) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of messages received.',
-            })
-        } else if (!Array.isArray(payload.addresses)) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of addresses received.',
-            })
-        }
-
-        return super.isValid(response)
-    }
-}
-
-/**
- * Validation for account
- */
-class AccountValidator extends Validator {
-    /**
-     * Checks if response is valid
-     *
-     * @method isValid
-     *
-     * @param {MessageResponse} response
-     *
-     * @returns {ValidationResponse}
-     */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as Account
-
-        if ('string' !== typeof payload.id) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of id received.',
-            })
-        } else if ('string' !== typeof payload.alias) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of alias received.',
-            })
-        } else if ('string' !== typeof payload.createdAt) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of createdAt received.',
-            })
-        } else if (!Array.isArray(payload.messages)) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of messages received.',
-            })
-        } else if (!Array.isArray(payload.addresses)) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of addresses received.',
-            })
-        }
-
-        return super.isValid(response)
-    }
-}
-
 /**
  * Validation for message
  */
@@ -406,49 +226,6 @@ class MessageValidator extends Validator {
         return super.isValid(response)
     }
 }
-
-/**
- * Validator for address
- */
-class AddressValidator extends Validator {
-    /**
-     * Checks if response is valid
-     *
-     * @method isValid
-     *
-     * @param {MessageResponse} response
-     *
-     * @returns {ValidationResponse}
-     */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload as Address
-
-        if ('string' !== typeof payload.address) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of address received.',
-            })
-        } else if ('number' !== typeof payload.balance) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of balance received.',
-            })
-        } else if ('number' !== typeof payload.keyIndex) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of keyIndex received.',
-            })
-        } else if ('boolean' !== typeof payload.internal) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of internal received.',
-            })
-        }
-
-        return super.isValid(response)
-    }
-}
-
 /**
  * Validation for generated mnemonic
  */
@@ -772,10 +549,6 @@ export default class ValidatorService {
             [ResponseTypes.RemovedAccount]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('string'))
                 .getFirst(),
-            [ResponseTypes.CreatedAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
-            [ResponseTypes.ReadAccounts]: this.createBaseValidator().add(new AccountListValidator()).getFirst(),
-            [ResponseTypes.ReadAccount]: this.createBaseValidator().add(new AccountValidator()).getFirst(),
-
             [ResponseTypes.Balance]: this.createBaseValidator().add(new PayloadTypeValidator('object')).getFirst(),
             [ResponseTypes.BackupRestored]: this.createBaseValidator().getFirst(),
             [ResponseTypes.BackupSuccessful]: this.createBaseValidator().getFirst(),
@@ -785,17 +558,12 @@ export default class ValidatorService {
                 .getFirst(),
             [ResponseTypes.StoredMnemonic]: this.createBaseValidator().getFirst(),
             [ResponseTypes.VerifiedMnemonic]: this.createBaseValidator().getFirst(),
-            [ResponseTypes.SyncedAccounts]: this.createBaseValidator().add(new SyncedAccountListValidator()).getFirst(),
             [ResponseTypes.Ok]: this.createBaseValidator().getFirst(),
             [ResponseTypes.SentTransfer]: this.createBaseValidator().add(new MessageValidator()).getFirst(),
             [ResponseTypes.StoragePasswordSet]: this.createBaseValidator().getFirst(),
             [ResponseTypes.StrongholdStatus]: this.createBaseValidator()
                 .add(new StrongholdStatusValidator())
                 .getFirst(),
-            [ResponseTypes.GeneratedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
-            [ResponseTypes.LatestAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
-            [ResponseTypes.SyncedAccount]: this.createBaseValidator().add(new SyncedAccountValidator()).getFirst(),
-            [ResponseTypes.UnusedAddress]: this.createBaseValidator().add(new AddressValidator()).getFirst(),
             [ResponseTypes.IsLatestAddressUnused]: this.createBaseValidator()
                 .add(new PayloadTypeValidator('boolean'))
                 .getFirst(),
@@ -882,7 +650,7 @@ export default class ValidatorService {
      * @returns {ValidationResponse}
      */
     performValidation(
-        response: MessageResponse | MarketDataValidationResponse | ChrysalisVariablesValidationResponse
+        response: MarketDataValidationResponse | ChrysalisVariablesValidationResponse
     ): ValidationResponse {
         return this.validators[response.type].isValid(response)
     }
