@@ -2,7 +2,7 @@ import { localize } from '@core/i18n'
 
 import { Event } from '../typings/events'
 import { showAppNotification } from '../notifications'
-import { api, saveNewMessage } from '../wallet'
+import { api } from '../wallet'
 import { addNewPendingParticipation, participationEvents, participationOverview } from './stores'
 import {
     ParticipationAction,
@@ -83,7 +83,7 @@ export function participate(accountId: string, participations: Participation[]):
     return new Promise<string[]>((resolve, reject) => {
         api.participate(accountId, participations, {
             onSuccess(response: Event<ParticipateResponsePayload>) {
-                response.payload.forEach((message) => saveNewMessage(accountId, message))
+                // response.payload.forEach((message) => saveNewMessage(accountId, message))
 
                 addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)
                 resolve(response.payload.map((message) => message.id))
@@ -120,7 +120,7 @@ export function stopParticipating(accountId: string, eventIds: string[]): Promis
     return new Promise<string[]>((resolve, reject) => {
         api.stopParticipating(accountId, eventIds, {
             onSuccess(response: Event<ParticipateResponsePayload>) {
-                response.payload.forEach((message) => saveNewMessage(accountId, message))
+                // response.payload.forEach((message) => saveNewMessage(accountId, message))
 
                 addNewPendingParticipation(response.payload, accountId, ParticipationAction.Unstake)
 
@@ -149,7 +149,7 @@ export function participateWithRemainingFunds(accountId: string, participations:
     return new Promise<string[]>((resolve, reject) => {
         api.participateWithRemainingFunds(accountId, participations, {
             onSuccess(response: Event<ParticipateResponsePayload>) {
-                response.payload.forEach((message) => saveNewMessage(accountId, message))
+                // response.payload.forEach((message) => saveNewMessage(accountId, message))
 
                 addNewPendingParticipation(response.payload, accountId, ParticipationAction.Stake)
 
