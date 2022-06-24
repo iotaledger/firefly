@@ -4,7 +4,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ImportRouter } from '@core/router'
-    import { importType, restoreBackupFromFile, isGettingMigrationData } from '@contexts/onboarding'
+    import { profileRecoveryType, restoreBackupFromFile, isGettingMigrationData } from '@contexts/onboarding'
 
     export let error = ''
     export let busy = false
@@ -40,11 +40,11 @@
     <div slot="title">
         {#if $mobile}
             <Text type="h2" classes="mb-4">
-                {`${localize('general.import')} ${localize(`general.${$importType}`)}`}
+                {`${localize('general.import')} ${localize(`general.${$profileRecoveryType}`)}`}
             </Text>
         {:else}
             <Text type="h2" classes="mb-4">{localize('general.import')}</Text>
-            <Text type="h3" highlighted>{localize(`general.${$importType}`)}</Text>
+            <Text type="h3" highlighted>{localize(`general.${$profileRecoveryType}`)}</Text>
         {/if}
     </div>
     <div slot="leftpane__content">

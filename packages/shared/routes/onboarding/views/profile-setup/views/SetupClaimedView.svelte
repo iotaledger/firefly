@@ -1,20 +1,20 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import features from 'shared/features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { newProfile, ProfileImportType, ProfileType, setNewProfileType } from '@core/profile'
+    import { newProfile, ProfileType, setNewProfileType } from '@core/profile'
+    import { profileSetupRouter } from '@core/router'
+    import { ProfileRecoveryType } from '@contexts/onboarding'
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinueClick(importType: ProfileImportType) {
-        const profileType = importType === ProfileImportType.Ledger ? ProfileType.Ledger : ProfileType.Software
+    function handleContinueClick(profileRecoveryType: ProfileRecoveryType) {
+        const profileType =
+            profileRecoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
         setNewProfileType(profileType)
-        dispatch('next', { importType })
+        $profileSetupRouter.next({ profileRecoveryType })
     }
     function handleBackClick() {
-        dispatch('previous')
+        $profileSetupRouter.previous()
     }
 </script>
 
@@ -34,7 +34,7 @@
                 ?.migrateSeed?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.migrateSeed?.enabled}
-            onClick={() => handleContinueClick(ProfileImportType.Seed)}
+            onClick={() => handleContinueClick(ProfileRecoveryType.Seed)}
         >
             {localize('views.import.importSeed')}
             {#if !$mobile}
@@ -49,7 +49,7 @@
                 ?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.recoveryPhrase?.enabled}
-            onClick={() => handleContinueClick(ProfileImportType.Mnemonic)}
+            onClick={() => handleContinueClick(ProfileRecoveryType.Mnemonic)}
         >
             {localize('views.import.importMnemonic')}
             {#if !$mobile}
@@ -64,7 +64,7 @@
                 ?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.strongholdBackup?.enabled}
-            onClick={() => handleContinueClick(ProfileImportType.File)}
+            onClick={() => handleContinueClick(ProfileRecoveryType.File)}
         >
             {localize(`views.import.importFile.${$newProfile?.networkProtocol}`)}
             {#if !$mobile}
@@ -82,7 +82,7 @@
                     ?.ledgerBackup?.hidden}
                 disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]
                     ?.restoreProfile?.ledgerBackup?.enabled}
-                onClick={() => handleContinueClick(ProfileImportType.Ledger)}
+                onClick={() => handleContinueClick(ProfileRecoveryType.Ledger)}
             >
                 {localize('views.import.importLedger')}
                 {#if !$mobile}

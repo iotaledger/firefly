@@ -25,9 +25,8 @@
     import { Platform } from '@lib/platform'
     import { closePopup } from '@lib/popup'
     import { formatUnitBestMatch } from '@lib/units'
-    import { walletSetupType } from '@lib/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
-    import { SetupType } from '@lib/typings/setup'
+    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 
@@ -51,7 +50,7 @@
 
     let singleMigrationBundleHash
 
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     let closeTransport = () => {}

@@ -4,15 +4,15 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType, setNewProfileType, newProfile } from '@core/profile'
-    import { onboardingRouter } from '@core/router'
+    import { profileSetupRouter } from '@core/router'
 
     function handleContinueClick(profileType: ProfileType): void {
         setNewProfileType(profileType)
-        $onboardingRouter.next()
+        $profileSetupRouter.next()
     }
 
     function handleBackClick(): void {
-        $onboardingRouter.previous()
+        $profileSetupRouter.previous()
     }
 </script>
 

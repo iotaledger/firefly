@@ -5,16 +5,16 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
     import { newProfile } from '@core/profile'
-    import { onboardingRouter } from '@core/router'
+    import { profileSetupRouter } from '@core/router'
+    import { ProfileSetupType } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
-    import { SetupType } from '@lib/typings/setup'
 
-    function handleContinueClick(setupType: SetupType): void {
-        $onboardingRouter.next({ setupType })
+    function handleContinueClick(profileSetupType: ProfileSetupType): void {
+        $profileSetupRouter.next({ profileSetupType })
     }
 
     function handleBackClick(): void {
-        $onboardingRouter.previous()
+        $profileSetupRouter.previous()
     }
 </script>
 
@@ -49,7 +49,7 @@
                 ?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.claimRewards
                 ?.enabled}
-            onClick={() => {}}
+            onClick={() => handleContinueClick(ProfileSetupType.Claimed)}
         >
             {localize('actions.claimShimmer')}
             {#if !$mobile}
@@ -66,7 +66,7 @@
                 ?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
                 ?.enabled}
-            onClick={() => handleContinueClick(SetupType.New)}
+            onClick={() => handleContinueClick(ProfileSetupType.New)}
         >
             {localize('actions.createWallet', {
                 values: { protocol: formatProtocolName($newProfile?.networkProtocol) },
@@ -87,7 +87,7 @@
                 ?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.enabled}
-            onClick={() => handleContinueClick(SetupType.Import)}
+            onClick={() => handleContinueClick(ProfileSetupType.Restored)}
         >
             {localize(`actions.restoreWallet.${$newProfile?.networkProtocol}`)}
             {#if !$mobile}

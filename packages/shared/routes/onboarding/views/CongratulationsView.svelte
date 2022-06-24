@@ -10,10 +10,10 @@
     import { onboardingRouter, ledgerRouter } from '@core/router'
     import { LedgerAppName } from '@lib/typings/ledger'
     import { formatUnitBestMatch } from '@lib/units'
-    import { walletSetupType } from '@lib/wallet'
+    import { profileRecoveryType } from '@lib/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
     import { localize } from '@core/i18n'
-    import { SetupType } from '@lib/typings/setup'
+    import { ProfileRecoveryType } from '@contexts/onboarding'
     import {
         activeProfile,
         addNewProfile,
@@ -55,7 +55,7 @@
                  * We check for the new Ledger IOTA app to be connected after migration
                  * because the last app the user had open was the legacy one
                  */
-                if ($walletSetupType === SetupType.TrinityLedger) {
+                if ($profileRecoveryType === ProfileRecoveryType.TrinityLedger) {
                     promptUserToConnectLedger(false, advanceView)
                 } else {
                     advanceView()
@@ -64,7 +64,7 @@
             const _exportMigrationLog = () => {
                 getStorageDirectoryOfProfile($activeProfile?.id)
                     .then((source) =>
-                        $walletSetupType === SetupType.TrinityLedger
+                        $profileRecoveryType === ProfileRecoveryType.TrinityLedger
                             ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile?.id}-${LOG_FILE_NAME}`)
                             : Platform.exportMigrationLog(
                                   `${source}/${LOG_FILE_NAME}`,
@@ -91,7 +91,7 @@
 
     onMount(async () => {
         if (!wasMigrated) {
-            if ($walletSetupType === SetupType.FireflyLedger) {
+            if ($profileRecoveryType === ProfileRecoveryType.FireflyLedger) {
                 localizedBody = 'fireflyLedgerBody'
             }
             // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
@@ -100,10 +100,10 @@
             loadPersistedProfileIntoActiveProfile($newProfile.id)
             newProfile.set(null)
             await createNewAccount()
-            const shouldRecoverAccounts = $walletSetupType !== SetupType.New
+            const shouldRecoverAccounts = $profileRecoveryType !== ProfileRecoveryType.New
             void login(shouldRecoverAccounts)
         } else {
-            if ($walletSetupType === SetupType.TrinityLedger) {
+            if ($profileRecoveryType === ProfileRecoveryType.TrinityLedger) {
                 localizedBody = 'trinityLedgerBody'
                 localizedValues = { legacy: LedgerAppName.IOTALegacy }
 

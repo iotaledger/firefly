@@ -10,8 +10,7 @@
         selectedBundlesToMine,
     } from '@lib/migration'
     import { Platform } from '@lib/platform'
-    import { walletSetupType } from '@lib/wallet'
-    import { SetupType } from '@lib/typings/setup'
+    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 
@@ -19,7 +18,7 @@
     let progressBarMessage = `${progressBarPercent} % completed`
     let timeElapsed = 0
 
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
 
     let timeout
     let interval

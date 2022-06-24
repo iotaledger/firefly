@@ -3,10 +3,10 @@
     import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { Platform } from '@lib/platform'
-    import { walletSetupType } from '@lib/wallet'
-    import { SetupType } from '@lib/typings/setup'
+    import { profileRecoveryType } from '@lib/wallet'
+    import { ProfileRecoveryType } from '@contexts/onboarding'
 
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
 
     const dispatch = createEventDispatcher()
 

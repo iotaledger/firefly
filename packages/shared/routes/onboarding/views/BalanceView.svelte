@@ -24,12 +24,12 @@
     import { onDestroy } from 'svelte'
     import { localize } from '@core/i18n'
     import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
-    import { walletSetupType } from '@lib/wallet'
-    import { SetupType } from '@lib/typings/setup'
+    import { profileRecoveryType } from '@lib/wallet'
+    import { ProfileRecoveryType } from '@contexts/onboarding'
     import { onboardingRouter } from '@core/router'
 
     let isCheckingForBalance: boolean
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
 
     const { seed, data, bundles } = $migration
 

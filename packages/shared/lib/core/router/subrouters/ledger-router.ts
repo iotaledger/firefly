@@ -1,7 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { SetupType } from '@lib/typings/setup'
-import { walletSetupType } from '@lib/wallet'
+import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { appRouter } from '../app-router'
 import { LedgerRoute } from '../enums'
@@ -17,10 +16,10 @@ export class LedgerRouter extends Subrouter<LedgerRoute> {
     }
 
     restartIfNotInLedgerFlow(): void {
-        const setupType = get(walletSetupType)
+        const setupType = get(profileRecoveryType)
         // reinitialize the init view only if we are not in the middle of a ledger flow
         if (this.history.length === 0) {
-            if (setupType === SetupType.New || setupType === SetupType.FireflyLedger) {
+            if (setupType === ProfileRecoveryType.Seed || setupType === ProfileRecoveryType.FireflyLedger) {
                 this.routeStore.set(LedgerRoute.Connect)
             } else {
                 this.routeStore.set(LedgerRoute.LegacyIntro)
@@ -31,16 +30,16 @@ export class LedgerRouter extends Subrouter<LedgerRoute> {
     next(event: FireflyEvent): void {
         let nextRoute: LedgerRoute
         const currentRoute = get(this.routeStore)
-        const setupType = get(walletSetupType)
+        const setupType = get(profileRecoveryType)
 
         switch (currentRoute) {
             case LedgerRoute.Connect:
-                if (setupType === SetupType.New) {
-                    get(appRouter).next(event)
-                } else if (setupType === SetupType.FireflyLedger) {
+                if (setupType === ProfileRecoveryType.FireflyLedger) {
                     nextRoute = LedgerRoute.RestoreFromLedger
-                } else if (setupType === SetupType.TrinityLedger) {
+                } else if (setupType === ProfileRecoveryType.TrinityLedger) {
                     nextRoute = LedgerRoute.GenerateAddress
+                } else {
+                    get(appRouter).next(event)
                 }
                 break
             case LedgerRoute.RestoreFromLedger:

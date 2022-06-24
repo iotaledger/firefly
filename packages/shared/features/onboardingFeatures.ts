@@ -103,7 +103,7 @@ const onboardingFeatures = {
             enabled: false,
             claimRewards: {
                 enabled: false,
-                hidden: true,
+                hidden: false,
             },
             newProfile: {
                 enabled: false,
@@ -135,6 +135,7 @@ const onboardingFeatures = {
             enabled: false,
             claimRewards: {
                 enabled: false,
+                hidden: false,
             },
             newProfile: {
                 enabled: true,
@@ -166,7 +167,7 @@ const onboardingFeatures = {
             enabled: true,
             claimRewards: {
                 enabled: false,
-                hidden: true,
+                hidden: false,
             },
             newProfile: {
                 enabled: true,

@@ -13,9 +13,9 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
     import { openPopup } from 'shared/lib/popup'
-    import { SetupType } from 'shared/lib/typings/setup'
+    import { ProfileRecoveryType } from '@contexts/onboarding'
     import { debounce } from 'shared/lib/utils'
-    import { isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
+    import { isFirstSessionSync, profileRecoveryType } from 'shared/lib/wallet'
 
     function handleTransactionClick(activity: Activity): void {
         openPopup({
@@ -52,8 +52,8 @@
          */
         return (
             $isFirstSessionSync &&
-            $walletSetupType &&
-            $walletSetupType !== SetupType.New &&
+            $profileRecoveryType &&
+            $profileRecoveryType !== ProfileRecoveryType.New &&
             $selectedAccountActivities.length === 0
         )
     }

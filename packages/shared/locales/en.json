@@ -1,6 +1,6 @@
 {
     "views": {
-        "onboarding1": {
+        "welcome": {
             "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Firefly is the official wallet software of IOTA."
         },

@@ -1,9 +1,7 @@
 import { get, writable } from 'svelte/store'
 
-import { mobile } from '@core/app'
-import { activeProfile, newProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
-import { walletSetupType } from '@lib/wallet'
-import { SetupType } from '@lib/typings/setup'
+import { activeProfile, newProfile, profiles, ProfileType } from '@core/profile'
+import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
 import { OnboardingRoute } from './enums'
@@ -36,53 +34,27 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             case OnboardingRoute.AppSetup:
                 nextRoute = OnboardingRoute.Network
                 break
-            case OnboardingRoute.Network: {
-                nextRoute = OnboardingRoute.Setup
+            case OnboardingRoute.Network:
+                nextRoute = OnboardingRoute.ProfileSetup
                 break
-            }
-            case OnboardingRoute.Profile:
-                nextRoute = OnboardingRoute.Setup
-                break
-            case OnboardingRoute.Setup: {
-                const { setupType } = params
-                if (setupType) {
-                    walletSetupType.set(setupType)
-                    if (setupType === SetupType.New) {
-                        if (get(mobile)) {
-                            setNewProfileType(ProfileType.Software)
-                            nextRoute = OnboardingRoute.Secure
-                        } else {
-                            nextRoute = OnboardingRoute.Create
-                        }
-                    } else if (setupType === SetupType.Import) {
-                        nextRoute = OnboardingRoute.Import
+            case OnboardingRoute.ProfileSetup: {
+                const profileType = get(newProfile)?.type
+                if (profileType) {
+                    if (profileType === ProfileType.Software) {
+                        nextRoute = OnboardingRoute.Secure
+                    } else if (profileType === ProfileType.Ledger) {
+                        nextRoute = OnboardingRoute.Protection
                     }
                 }
                 break
             }
-            case OnboardingRoute.Create: {
-                const profileType = get(newProfile)?.type
-                if (profileType === ProfileType.Software) {
-                    nextRoute = OnboardingRoute.Secure
-                } else if (profileType === ProfileType.Ledger || profileType === ProfileType.LedgerSimulator) {
-                    nextRoute = OnboardingRoute.Protect
-                }
-                break
-            }
             case OnboardingRoute.Secure:
-                nextRoute = OnboardingRoute.Password
+                nextRoute = OnboardingRoute.Protection
                 break
-            case OnboardingRoute.Password: {
-                const { password } = params
-                if (password) {
-                    nextRoute = OnboardingRoute.Protect
-                }
-                break
-            }
-            case OnboardingRoute.Protect: {
+            case OnboardingRoute.Protection: {
                 const profileType = get(activeProfile)?.type
-                const setupType = get(walletSetupType)
-                if (setupType === SetupType.Mnemonic || setupType === SetupType.Stronghold) {
+                const setupType = get(profileRecoveryType)
+                if (setupType === ProfileRecoveryType.Mnemonic || setupType === ProfileRecoveryType.Stronghold) {
                     nextRoute = OnboardingRoute.Congratulations
                 } else if (profileType === ProfileType.Ledger || profileType === ProfileType.LedgerSimulator) {
                     nextRoute = OnboardingRoute.LedgerSetup
@@ -91,46 +63,57 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 }
                 break
             }
+
+            case OnboardingRoute.Password: {
+                const { password } = params
+                if (password) {
+                    nextRoute = OnboardingRoute.Protection
+                }
+                break
+            }
             case OnboardingRoute.Backup: {
-                const setupType = get(walletSetupType)
-                if (setupType === SetupType.Seed || setupType === SetupType.Seedvault) {
-                    nextRoute = OnboardingRoute.Migrate
+                const setupType = get(profileRecoveryType)
+                if (setupType === ProfileRecoveryType.Seed || setupType === ProfileRecoveryType.SeedVault) {
+                    nextRoute = OnboardingRoute.Migration
                 } else {
                     nextRoute = OnboardingRoute.Congratulations
                 }
                 break
             }
             case OnboardingRoute.Import: {
-                const { importType } = params
-                walletSetupType.set(importType as unknown as SetupType)
+                const _profileRecoveryType = params?.profileRecoveryType
+                profileRecoveryType.set(_profileRecoveryType)
                 nextRoute = OnboardingRoute.Congratulations
-                if (importType === ProfileImportType.Mnemonic) {
+                if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
                     nextRoute = OnboardingRoute.Secure
                 } else if (
                     [
-                        ProfileImportType.Stronghold,
-                        ProfileImportType.TrinityLedger,
-                        ProfileImportType.FireflyLedger,
-                    ].includes(importType)
+                        ProfileRecoveryType.Stronghold,
+                        ProfileRecoveryType.TrinityLedger,
+                        ProfileRecoveryType.FireflyLedger,
+                    ].includes(_profileRecoveryType)
                 ) {
-                    nextRoute = OnboardingRoute.Protect
-                } else if (importType === ProfileImportType.Seed || importType === ProfileImportType.SeedVault) {
+                    nextRoute = OnboardingRoute.Protection
+                } else if (
+                    _profileRecoveryType === ProfileRecoveryType.Seed ||
+                    _profileRecoveryType === ProfileRecoveryType.SeedVault
+                ) {
                     nextRoute = OnboardingRoute.Balance
                 }
                 break
             }
             case OnboardingRoute.Balance:
-                if (get(walletSetupType) === SetupType.TrinityLedger) {
-                    nextRoute = OnboardingRoute.Migrate
+                if (get(profileRecoveryType) === ProfileRecoveryType.TrinityLedger) {
+                    nextRoute = OnboardingRoute.Migration
                 } else {
                     nextRoute = OnboardingRoute.Password
                 }
                 break
-            case OnboardingRoute.Migrate:
+            case OnboardingRoute.Migration:
                 nextRoute = OnboardingRoute.Congratulations
                 break
             case OnboardingRoute.LedgerSetup:
-                if (get(walletSetupType) === SetupType.TrinityLedger) {
+                if (get(profileRecoveryType) === ProfileRecoveryType.TrinityLedger) {
                     nextRoute = OnboardingRoute.Balance
                 } else {
                     nextRoute = OnboardingRoute.Congratulations

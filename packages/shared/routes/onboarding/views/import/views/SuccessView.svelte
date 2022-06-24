@@ -3,8 +3,7 @@
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileImportType } from '@core/profile'
-    import { importType } from '@contexts/onboarding'
+    import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 
@@ -32,7 +31,8 @@
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
         <Animation
             classes="setup-anim-aspect-ratio"
-            animation={$importType === ProfileImportType.Seed || $importType === ProfileImportType.Mnemonic
+            animation={$profileRecoveryType === ProfileRecoveryType.Seed ||
+            $profileRecoveryType === ProfileRecoveryType.Mnemonic
                 ? 'import-from-text-success-desktop'
                 : 'import-from-file-success-desktop'}
         />

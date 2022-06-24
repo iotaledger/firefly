@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'
-    import { onboardingRouter } from '@core/router'
+    import { profileSetupRouter } from '@core/router'
     import { cleanupOnboarding } from '@contexts/onboarding'
 
     let error = ''
@@ -18,14 +18,14 @@
         const networkProtocol = $newProfile.networkProtocol
         await cleanupOnboarding(true)
         updateNewProfile({ isDeveloperProfile, networkProtocol })
-        $onboardingRouter.previous()
+        $profileSetupRouter.previous()
     }
 
     function handleContinueClick(): void {
         try {
             validateProfileName(profileName)
             updateNewProfile({ name: profileName })
-            $onboardingRouter.next()
+            $profileSetupRouter.next()
         } catch (err) {
             error = err.message
         }

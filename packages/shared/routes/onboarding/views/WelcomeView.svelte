@@ -18,7 +18,7 @@
                 <Logo width="64px" logo="logo-firefly" classes="mb-6" />
             {/if}
             <Text type={$mobile ? 'h3' : 'h1'}
-                >{localize('views.onboarding1.title', {
+                >{localize('views.welcome.title', {
                     values: {
                         protocol: features?.onboarding?.iota?.enabled
                             ? formatProtocolName(NetworkProtocol.IOTA)
@@ -26,7 +26,7 @@
                     },
                 })}</Text
             >
-            <Text type="p" secondary>{localize('views.onboarding1.body')}</Text>
+            <Text type="p" secondary>{localize('views.welcome.body')}</Text>
         </div>
     </div>
     <div slot="leftpane__action">

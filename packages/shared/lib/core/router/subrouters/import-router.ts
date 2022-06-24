@@ -1,8 +1,16 @@
-import { newProfile, ProfileImportType } from '@core/profile'
-import { mnemonic, importType as profileImportType, isGettingMigrationData, importFilePath } from '@contexts/onboarding'
-import { getMigrationData } from '@lib/migration'
-import { NetworkProtocol } from '@core/network'
 import { get, writable } from 'svelte/store'
+
+import { NetworkProtocol } from '@core/network'
+import { newProfile } from '@core/profile'
+import {
+    mnemonic,
+    isGettingMigrationData,
+    importFilePath,
+    profileRecoveryType,
+    ProfileRecoveryType,
+} from '@contexts/onboarding'
+import { getMigrationData } from '@lib/migration'
+
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
 import { FireflyEvent } from '../types'
@@ -25,16 +33,19 @@ export class ImportRouter extends Subrouter<ImportRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case ImportRoute.Init: {
-                const { importType } = params
-                profileImportType.set(importType)
-                if (importType === ProfileImportType.Seed || importType === ProfileImportType.Mnemonic) {
+                const _profileRecoveryType = params?.profileRecoveryType
+                profileRecoveryType.set(_profileRecoveryType)
+                if (
+                    _profileRecoveryType === ProfileRecoveryType.Seed ||
+                    _profileRecoveryType === ProfileRecoveryType.Mnemonic
+                ) {
                     nextRoute = ImportRoute.TextImport
-                } else if (importType === ProfileImportType.File) {
+                } else if (_profileRecoveryType === ProfileRecoveryType.File) {
                     nextRoute = ImportRoute.FileImport
-                } else if (importType === ProfileImportType.Ledger) {
+                } else if (_profileRecoveryType === ProfileRecoveryType.Ledger) {
                     if (get(newProfile)?.networkProtocol === NetworkProtocol.Shimmer) {
-                        profileImportType.set(ProfileImportType.FireflyLedger)
-                        get(appRouter).next({ importType: ProfileImportType.FireflyLedger })
+                        profileRecoveryType.set(ProfileRecoveryType.FireflyLedger)
+                        get(appRouter).next({ profileRecoveryType: ProfileRecoveryType.FireflyLedger })
                         break
                     }
                     nextRoute = ImportRoute.LedgerImport
@@ -43,13 +54,13 @@ export class ImportRouter extends Subrouter<ImportRoute> {
             }
             case ImportRoute.TextImport: {
                 const { migrationSeed } = params
-                const importType = get(profileImportType)
-                if (importType === ProfileImportType.Seed) {
+                const _profileRecoveryType = get(profileRecoveryType)
+                if (_profileRecoveryType === ProfileRecoveryType.Seed) {
                     isGettingMigrationData.set(true)
                     await getMigrationData(migrationSeed)
                     isGettingMigrationData.set(false)
-                    get(appRouter).next({ importType })
-                } else if (importType === ProfileImportType.Mnemonic) {
+                    get(appRouter).next({ profileRecoveryType: _profileRecoveryType })
+                } else if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
                     mnemonic.set(migrationSeed?.split(' '))
                     nextRoute = ImportRoute.Success
                 }
@@ -61,9 +72,9 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 const { file, fileName, filePath } = params
 
                 if (seedvaultRegex.test(fileName)) {
-                    profileImportType.set(ProfileImportType.SeedVault)
+                    profileRecoveryType.set(ProfileRecoveryType.SeedVault)
                 } else if (strongholdRegex.test(fileName)) {
-                    profileImportType.set(ProfileImportType.Stronghold)
+                    profileRecoveryType.set(ProfileRecoveryType.Stronghold)
                 } else {
                     throw new Error('Unsupported file extension!')
                 }
@@ -78,13 +89,13 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 break
             }
             case ImportRoute.LedgerImport: {
-                const { importType } = params
-                profileImportType.set(importType)
-                get(appRouter).next({ importType })
+                const _profileRecoveryType = params?.profileRecoveryType
+                profileRecoveryType.set(_profileRecoveryType)
+                get(appRouter).next({ profileRecoveryType: _profileRecoveryType })
                 break
             }
             case ImportRoute.Success:
-                get(appRouter).next({ importType: get(profileImportType) })
+                get(appRouter).next({ profileRecoveryType: get(profileRecoveryType) })
                 break
         }
 

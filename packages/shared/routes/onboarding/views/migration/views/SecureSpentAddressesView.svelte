@@ -6,8 +6,7 @@
     import { selectAllAddressesForMining, spentAddressesFromBundles, toggleMiningSelection } from '@lib/migration'
     import { showAppNotification } from '@lib/notifications'
     import { closePopup, openPopup } from '@lib/popup'
-    import { walletSetupType } from '@lib/wallet'
-    import { SetupType } from '@lib/typings/setup'
+    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 
@@ -15,7 +14,7 @@
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     function onAddressClick(address) {

@@ -4,11 +4,12 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
-    import { newProfile, ProfileImportType } from '@core/profile'
+    import { newProfile } from '@core/profile'
+    import { ProfileRecoveryType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 
-    function handleContinueClick(importType: ProfileImportType): void {
+    function handleContinueClick(importType: ProfileRecoveryType): void {
         dispatch('next', { importType })
     }
 
@@ -27,7 +28,7 @@
             icon="settings"
             classes="w-full mb-5"
             secondary
-            onClick={() => handleContinueClick(ProfileImportType.FireflyLedger)}
+            onClick={() => handleContinueClick(ProfileRecoveryType.FireflyLedger)}
         >
             {localize('views.importFromLedger.haveFireflyLedger')}
             <Text type="p" secondary smaller>{localize('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
@@ -37,7 +38,7 @@
             classes="w-full mb-8"
             secondary
             hidden={$newProfile.networkProtocol === NetworkProtocol.Shimmer}
-            onClick={() => handleContinueClick(ProfileImportType.TrinityLedger)}
+            onClick={() => handleContinueClick(ProfileRecoveryType.TrinityLedger)}
         >
             {localize('views.importFromLedger.haveTrinityLedger')}
             <Text type="p" secondary smaller>{localize('views.importFromLedger.haveTrinityLedgerDescription')}</Text>

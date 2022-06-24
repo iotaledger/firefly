@@ -23,16 +23,15 @@
     } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { closePopup, popupState } from '@lib/popup'
-    import { walletSetupType } from '@lib/wallet'
     import { LedgerAppName, LedgerDeviceState } from '@lib/typings/ledger'
-    import { SetupType } from '@lib/typings/setup'
+    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
     let busy = false
     let migrated = false
     let migratingFundsMessage = ''
     let fullSuccess = $hasMigratedAndConfirmedAllSelectedBundles
 
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     let closeTransport = () => {}

@@ -8,17 +8,15 @@
         LedgerRouter,
         MigrationRouter,
         NetworkRouter,
+        ProfileSetupRouter,
         ProtectionRouter,
 
         // views
         BalanceView,
         ClaimRewardsView,
         CongratulationsView,
-        CreateView,
         PasswordView,
-        ProfileView,
         SecureView,
-        SetupView,
         WelcomeView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
@@ -32,18 +30,9 @@
     <Transition>
         <AppSetupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Profile}
+{:else if $onboardingRoute === OnboardingRoute.ProfileSetup}
     <Transition>
-        <ProfileView />
-    </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Setup}
-    <Transition>
-        <SetupView />
-    </Transition>
-    <!-- TODO: fix ledger -->
-{:else if $onboardingRoute === OnboardingRoute.Create}
-    <Transition>
-        <CreateView />
+        <ProfileSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Network}
     <Transition>
@@ -62,7 +51,7 @@
     <Transition>
         <PasswordView />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Protect}
+{:else if $onboardingRoute === OnboardingRoute.Protection}
     <Transition transition={false}>
         <ProtectionRouter />
     </Transition>
@@ -82,7 +71,7 @@
     <Transition>
         <ClaimRewardsView />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Migrate}
+{:else if $onboardingRoute === OnboardingRoute.Migration}
     <Transition>
         <MigrationRouter />
     </Transition>

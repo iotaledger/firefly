@@ -5,8 +5,7 @@
     import { localize } from '@core/i18n'
     import { spentAddressesFromBundles, toggleMiningSelection } from '@lib/migration'
     import { closePopup, openPopup } from '@lib/popup'
-    import { walletSetupType } from '@lib/wallet'
-    import { SetupType } from '@lib/typings/setup'
+    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
     import { RiskLevel } from '@lib/typings/migration'
 
     const dispatch = createEventDispatcher()
@@ -22,7 +21,7 @@
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
     function onAddressClick(address) {

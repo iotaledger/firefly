@@ -24,6 +24,8 @@ import {
     migrationRouter,
     NetworkRouter,
     networkRouter,
+    ProfileSetupRouter,
+    profileSetupRouter,
     protectionRouter,
     ProtectionRouter,
 } from './subrouters'
@@ -39,6 +41,7 @@ export const initRouters = (): void => {
     migrationRouter.set(new MigrationRouter())
     networkRouter.set(new NetworkRouter())
     onboardingRouter.set(new OnboardingRouter())
+    profileSetupRouter.set(new ProfileSetupRouter())
     protectionRouter.set(new ProtectionRouter())
     settingsRouter.set(new SettingsRouter())
 }
@@ -54,6 +57,7 @@ export const resetRouters = (): void => {
     get(migrationRouter).reset()
     get(networkRouter).reset()
     get(onboardingRouter).reset()
+    get(profileSetupRouter).reset()
     get(protectionRouter).reset()
     get(settingsRouter).reset()
 

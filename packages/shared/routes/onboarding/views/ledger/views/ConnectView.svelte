@@ -13,15 +13,15 @@
         stopPollingLedgerStatus,
     } from '@lib/ledger'
     import { openPopup } from '@lib/popup'
-    import { api, walletSetupType } from '@lib/wallet'
+    import { api } from '@lib/wallet'
     import { LedgerDeviceState } from '@lib/typings/ledger'
-    import { SetupType } from '@lib/typings/setup'
+    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
     let polling = false
 
-    const legacyLedger = $walletSetupType === SetupType.TrinityLedger
+    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
 
-    const newLedgerProfile = $walletSetupType === SetupType.New
+    const newLedgerProfile = $profileRecoveryType === ProfileRecoveryType.New
     let creatingAccount = false
 
     const LEDGER_STATUS_POLL_INTERVAL = 1500

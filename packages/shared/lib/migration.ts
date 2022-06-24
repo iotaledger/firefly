@@ -19,12 +19,12 @@ import {
 } from 'shared/lib/typings/migration'
 import { appRoute, AppRoute } from '@core/router'
 import Validator from 'shared/lib/validator'
-import { api, walletSetupType } from 'shared/lib/wallet'
+import { api } from 'shared/lib/wallet'
 import { localize } from '@core/i18n'
 import { showAppNotification } from './notifications'
 import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
-import { SetupType } from 'shared/lib/typings/setup'
 import { getJsonRequestOptions } from '@lib/utils'
+import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -774,7 +774,7 @@ export const updateLedgerBundleState = (
  */
 const selectInputsForUnspentAddresses = (inputs: Input[]): Input[][] => {
     const MAX_INPUTS_PER_BUNDLE =
-        get(walletSetupType) === SetupType.TrinityLedger
+        get(profileRecoveryType) === ProfileRecoveryType.TrinityLedger
             ? HARDWARE_MAX_INPUTS_PER_BUNDLE
             : SOFTWARE_MAX_INPUTS_PER_BUNDLE
 

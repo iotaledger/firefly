@@ -2,11 +2,12 @@ import { get, writable } from 'svelte/store'
 
 import { localize } from '@core/i18n'
 import { resetWalletRoute, appRouter, AppRoute } from '@core/router'
+import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
 
 import { removeAddressChecksum } from './migration'
 import { isNewNotification, showAppNotification } from './notifications'
 import { closePopup, openPopup, popupState } from './popup'
-import { api, walletSetupType } from './wallet'
+import { api } from './wallet'
 import { Event } from './typings/events'
 import {
     LedgerApp,
@@ -17,7 +18,6 @@ import {
     LegacyLedgerErrorName,
 } from './typings/ledger'
 import { NotificationType } from './typings/notification'
-import { SetupType } from './typings/setup'
 
 const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90
@@ -277,7 +277,7 @@ export function formatAddressForLedger(address: string, removeChecksum: boolean 
 
 export function navigateToNewIndexMigration(): void {
     resetWalletRoute()
-    walletSetupType.set(SetupType.TrinityLedger)
+    profileRecoveryType.set(ProfileRecoveryType.TrinityLedger)
     get(appRouter).forceNextRoute(AppRoute.Onboarding)
     // get(onboardingRouter).(OnboardingRoute.LedgerSetup)
 }

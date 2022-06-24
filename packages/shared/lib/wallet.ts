@@ -7,7 +7,7 @@ import { TransferState } from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
-import { mnemonic } from '@contexts/onboarding'
+import { mnemonic, ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
@@ -20,7 +20,6 @@ import { CurrencyTypes } from './typings/currency'
 import { HistoryDataProps, PriceData } from './typings/market'
 import { Message } from './typings/message'
 import { RecoveryPhrase } from './typings/mnemonic'
-import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
 import { AccountBalance } from '@iota/wallet'
@@ -40,7 +39,6 @@ interface ActorState {
 /** Active actors state */
 const actors: ActorState = {}
 
-export const walletSetupType = writable<SetupType>(null)
 export const selectedMessage = writable<Message | null>(null)
 
 export const isTransferring = writable<boolean>(false)
@@ -917,27 +915,27 @@ export const findAccountWithAnyAddress = (
  */
 export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccountOptions =>
     isInitialAccountSync()
-        ? calculateInitialSyncAccountOptions(get(walletSetupType))
+        ? calculateInitialSyncAccountOptions(get(profileRecoveryType))
         : calculateRegularSyncAccountOptions(get(activeProfile).type, isManualSync)
 
 /**
  * Determines if the API call for syncing accounts is the initial one
  * @returns {boolean} The boolean value determining if this sync API call is the first ever one
  */
-export const isInitialAccountSync = (): boolean => get(walletSetupType) !== null && get(isFirstSessionSync)
+export const isInitialAccountSync = (): boolean => get(profileRecoveryType) !== null && get(isFirstSessionSync)
 
-const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
+const calculateInitialSyncAccountOptions = (setupType: ProfileRecoveryType): SyncAccountOptions => {
     let gapLimit = 1
     let accountDiscoveryThreshold = 0
 
     switch (setupType) {
-        case SetupType.Import:
-        case SetupType.Mnemonic:
-        case SetupType.Stronghold:
+        case ProfileRecoveryType.Import:
+        case ProfileRecoveryType.Mnemonic:
+        case ProfileRecoveryType.Stronghold:
             gapLimit = 25
             accountDiscoveryThreshold = 1
             break
-        case SetupType.FireflyLedger:
+        case ProfileRecoveryType.FireflyLedger:
             gapLimit = 10
             accountDiscoveryThreshold = 1
             break
