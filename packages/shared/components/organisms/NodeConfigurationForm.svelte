@@ -1,40 +1,22 @@
 <script lang="typescript">
     import { Input, PasswordInput } from 'shared/components'
-    import {
-        INode,
-        nodeInfo,
-        checkNodeUrlValidity,
-        checkNetworkId,
-        NetworkType,
-        validateAndCleanNodeData,
-    } from '@core/network'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { activeProfile, newProfile, addNode, createNewProfile } from '@core/profile'
+    import { INode, nodeInfo, checkNodeUrlValidity, checkNetworkId } from '@core/network'
+    import { activeProfile, newProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { getNodeInfo } from '@core/profile-manager'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
-    export let onSuccess: (..._: any[]) => void
+    export let formError = ''
 
     const profile = $newProfile ? newProfile : activeProfile
     const clientOptions = $profile.settings?.clientOptions
-    const isDeveloperProfile = true // TODO: use real value
 
-    let formError = { error: '' }
+    $: node.url, (formError = '')
 
-    $: node.url, (formError = { error: '' })
-
-    async function validateNodeParameters(): Promise<void> {
+    export function validate(): void {
         const errorUrlValidity = checkNodeUrlValidity(clientOptions?.nodes, node.url, $profile.isDeveloperProfile)
         if (errorUrlValidity) {
-            formError = { error: localize(errorUrlValidity) ?? '' }
-        }
-
-        try {
-            await getNodeInfo(node.url)
-        } catch (err) {
-            formError = { error: localize('error.node.invalid') }
+            formError = localize(errorUrlValidity) ?? ''
         }
 
         if ($profile === $activeProfile) {
@@ -44,41 +26,9 @@
                 $profile.isDeveloperProfile
             )
             if (errorNetworkId) {
-                formError = { error: localize(errorNetworkId?.locale, errorNetworkId?.values) ?? '' }
+                formError = localize(errorNetworkId?.locale, errorNetworkId?.values) ?? ''
             }
         }
-    }
-
-    export async function handleAddNode(): Promise<void> {
-        isBusy = true
-
-        await validateNodeParameters()
-        if (!formError.error) {
-            try {
-                if (!$profile?.settings?.clientOptions) {
-                    const cleanedNode = validateAndCleanNodeData(node)
-                    await createNewProfile(
-                        isDeveloperProfile,
-                        $newProfile.networkProtocol,
-                        NetworkType.PrivateNet,
-                        cleanedNode
-                    )
-                } else {
-                    await addNode(node, profile)
-                }
-
-                isBusy = false
-
-                onSuccess()
-            } catch (err) {
-                showAppNotification({
-                    type: 'error',
-                    message: localize(err?.error ?? 'error.global.generic'),
-                })
-            }
-        }
-
-        isBusy = false
     }
 </script>
 
@@ -86,7 +36,7 @@
     <Input
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
-        error={formError.error}
+        error={formError}
         disabled={isBusy}
         autofocus
     />
