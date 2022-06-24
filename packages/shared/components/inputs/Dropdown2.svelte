@@ -1,7 +1,8 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Icon, Text, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
-    import { onMount } from 'svelte'
+    import { isNumberLetterOrPunctuation } from '@lib/utils/isNumberLetterOrPunctuation'
 
     export let value: string
     export let label: string
@@ -21,7 +22,7 @@
     export let isFocused = false
     export let hasFocus = false
 
-    export let onSelect = (..._: any[]): void => {}
+    export let onSelect: (..._: any[]) => void
 
     let dropdown = false
     let navContainer
@@ -61,45 +62,45 @@
         focusedItem = document.getElementById(itemId)
     }
 
-    function handleKey(e): void {
+    function handleKey(event: KeyboardEvent): void {
         if (!dropdown) {
             // Note that space uses code not key, this is intentional
-            if (e.key === 'Enter' || e.key === 'ArrowDown' || e.code === 'Space') {
+            if (event.key === 'Enter' || event.key === 'ArrowDown' || event.code === 'Space') {
                 toggleDropDown()
-                e.preventDefault()
+                event.preventDefault()
             }
         } else {
-            if (e.key === 'Escape') {
+            if (event.key === 'Escape') {
                 toggleDropDown()
-                e.preventDefault()
-            } else if (e.key === 'ArrowDown') {
+                event.preventDefault()
+            } else if (event.key === 'ArrowDown') {
                 if (focusedItem) {
                     const children = [...navContainer.children]
                     const idx = children.indexOf(focusedItem)
                     if (idx < children.length - 1) {
                         children[idx + 1].focus()
-                        e.preventDefault()
+                        event.preventDefault()
                     }
                 }
-            } else if (e.key === 'ArrowUp') {
+            } else if (event.key === 'ArrowUp') {
                 if (focusedItem) {
                     const children = [...navContainer.children]
                     const idx = children.indexOf(focusedItem)
                     if (idx > 0) {
                         children[idx - 1].focus()
-                        e.preventDefault()
+                        event.preventDefault()
                     }
                 }
-            } else if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 122)) {
+            } else if (isNumberLetterOrPunctuation(event.key)) {
                 const children = [...navContainer.children]
                 const itemsValues = items.map((item) => item.label.toLowerCase())
-                search += e.key
+                search += event.key
                 const idx = itemsValues.findIndex((item) => item.includes(search.toLowerCase()))
                 if (idx >= 0) {
                     children[idx].focus()
-                    e.preventDefault()
+                    event.preventDefault()
                 }
-            } else if (e.key === 'Backspace') {
+            } else if (event.key === 'Backspace') {
                 search = search.slice(0, -1)
             }
         }

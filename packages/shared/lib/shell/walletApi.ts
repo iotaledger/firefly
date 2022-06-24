@@ -1,20 +1,11 @@
 import Validator from 'shared/lib/validator'
-import {
-    CreatedAccountResponse,
-    LatestAddressResponse,
-    MessageResponse,
-    ReadAccountsResponse,
-    SetStrongholdPasswordResponse,
-    SyncAccountsResponse,
-} from '../typings/bridge'
+import { MessageResponse } from '../typings/bridge'
 import { ResponseTypes } from '../typings/bridge'
-import { BalanceChangeEventPayload, Event, TransactionEventPayload } from '../typings/events'
 import { ErrorType } from '../typings/events'
 import { logError } from './errorLogger'
 import { getErrorMessage } from './walletErrors'
 import { ErrorTypes as ValidatorErrorTypes } from '../typings/validator'
 import { Platform } from 'shared/lib/platform'
-import { NodePlugin } from '@core/network'
 import { IWalletApi } from 'shared/lib/typings/walletApi'
 import { IWalletActor } from '../typings/walletActor'
 
@@ -109,34 +100,34 @@ const callbacksStore: CallbacksStore = {}
  */
 const defaultCallbacks = {
     StrongholdPasswordSet: {
-        onSuccess: (response: SetStrongholdPasswordResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     CreatedAccount: {
-        onSuccess: (response: CreatedAccountResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     ReadAccounts: {
-        onSuccess: (response: ReadAccountsResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     LatestAddress: {
-        onSuccess: (response: LatestAddressResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     SyncedAccounts: {
-        onSuccess: (response: SyncAccountsResponse): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
     BalanceChange: {
-        onSuccess: (response: Event<BalanceChangeEventPayload>): void => {},
+        onSuccess: (): void => {},
     },
     NewTransaction: {
-        onSuccess: (response: Event<TransactionEventPayload>): void => {},
+        onSuccess: (): void => {},
     },
     StrongholdPasswordClearIntervalSet: {
-        onSuccess: (response: Event<void>): void => {},
-        onError: (error: ErrorMessage): void => {},
+        onSuccess: (): void => {},
+        onError: (): void => {},
     },
 }
 
@@ -185,7 +176,7 @@ WALLET.onMessage((message: MessageResponse) => {
         const { onSuccess, onError } = callbacksStore[id]
 
         if (message.type === ResponseTypes.Error) {
-            onError(handleError(message.payload.type, message.payload.error, message.action))
+            onError(handleError(message.payload.type, message.payload.error))
         } else if (message.type === ResponseTypes.Panic) {
             onError(handleError(ErrorType.Panic, message.payload))
         } else {
@@ -230,18 +221,18 @@ const storeCallbacks = (__id: string, type: ResponseTypes, callbacks?: Callbacks
  */
 const handleError = (
     type: ErrorType | ValidatorErrorTypes,
-    error: string,
-    action?: string
+    error: string
+    // action?: string
 ): { type: ErrorType | ValidatorErrorTypes; error: string } => {
     const newError = { type, message: error, time: Date.now() }
 
     const hasStatusCode403 = error.includes('Response error with status code 403')
 
     if (hasStatusCode403) {
-        if (action && action.includes(NodePlugin.Participation)) {
-            newError.message = `${NodePlugin.Participation} not available on your current node. Please try a different node and try again.`
-            logError(newError)
-        }
+        // if (action && action.includes(NodePlugin.Participation)) {
+        //     newError.message = `${NodePlugin.Participation} not available on your current node. Please try a different node and try again.`
+        //     logError(newError)
+        // }
     } else {
         logError(newError)
     }

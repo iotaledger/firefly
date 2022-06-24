@@ -1,6 +1,6 @@
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@lib/time'
 import { NetworkStatusDescription } from '../constants'
-import { NetworkHealth, NodePlugin } from '../enums'
+import { NetworkHealth } from '../enums'
 import { INetworkStatus } from '../interfaces'
 import { INodeInfo } from '@iota/types'
 
@@ -31,6 +31,5 @@ export function getNetworkStatusFromNodeInfo(nodeInfo: INodeInfo): INetworkStatu
         health,
         description,
         currentMilestone: nodeInfo.status.confirmedMilestone.index,
-        nodePlugins: nodeInfo.plugins?.map((plugin) => NodePlugin[plugin]) ?? [],
     }
 }

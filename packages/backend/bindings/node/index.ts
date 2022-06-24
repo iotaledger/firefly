@@ -18,7 +18,6 @@ import {
     isLatestAddressUnused as _isLatestAddressUnused,
     areLatestAddressesUnused as _areLatestAddressesUnused,
     setAlias as _setAlias,
-    getNodeInfo as _getNodeInfo,
     startBackgroundSync as _startBackgroundSync,
     stopBackgroundSync as _stopBackgroundSync,
 } from '@lib/typings/account'
@@ -49,7 +48,6 @@ import {
     deleteStorage as _deleteStorage,
     lockStronghold as _lockStronghold,
     changeStrongholdPassword as _changeStrongholdPassword,
-    setClientOptions as _setClientOptions,
     getLedgerDeviceStatus as _getLedgerDeviceStatus,
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
     getLegacySeedChecksum as _getLegacySeedChecksum,

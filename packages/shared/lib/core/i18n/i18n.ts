@@ -64,7 +64,7 @@ export async function setupI18n(options: LocaleOptions = { fallbackLocale: 'en',
 /**
  * Translates a given dictionary path into the appropriate locale.
  */
-export const localize = get(_) as (string, values?) => string
+export const localize = get(_)
 
 /**
  * Sets the locale dictionary to a given language, resetting the dictionary

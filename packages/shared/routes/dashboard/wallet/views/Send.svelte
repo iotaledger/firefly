@@ -41,8 +41,8 @@
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { selectedAccount, IAccountState } from '@core/account'
 
-    export let onSend = (..._: any[]): void => {}
-    export let onInternalTransfer = (..._: any[]): void => {}
+    export let onSend: (..._: any[]) => void
+    export let onInternalTransfer: (..._: any[]) => void
 
     const addressPrefix = ($selectedAccount ?? $visibleActiveAccounts[0])?.depositAddress?.split('1')?.[0]
 

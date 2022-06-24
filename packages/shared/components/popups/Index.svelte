@@ -11,6 +11,7 @@
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
+    import ConfirmationPopup from './ConfirmationPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -97,6 +98,7 @@
         password: PasswordPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,
+        confirmationPopup: ConfirmationPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
         hideAccount: HideAccount,

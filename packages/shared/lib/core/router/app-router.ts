@@ -1,8 +1,16 @@
 import { get, writable } from 'svelte/store'
 
-import { mobile } from '@core/app'
+import { AppStage, appStage, mobile } from '@core/app'
 import { NetworkType } from '@core/network'
-import { activeProfile, newProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
+import {
+    activeProfile,
+    newProfile,
+    ProfileImportType,
+    profiles,
+    ProfileType,
+    setNewProfileType,
+    updateNewProfile,
+} from '@core/profile'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 
@@ -61,9 +69,12 @@ export class AppRouter extends Router<AppRoute> {
                 nextRoute = AppRoute.CrashReporting
                 break
             case AppRoute.CrashReporting:
-                nextRoute = AppRoute.Appearance
+                nextRoute = AppRoute.LanguageAndAppearance
                 break
-            case AppRoute.Appearance:
+            case AppRoute.LanguageAndAppearance:
+                if (get(appStage) !== AppStage.PROD) {
+                    updateNewProfile({ isDeveloperProfile: true })
+                }
                 nextRoute = AppRoute.Protocol
                 break
             case AppRoute.Protocol: {

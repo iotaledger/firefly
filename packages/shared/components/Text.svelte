@@ -216,6 +216,7 @@
         ...((overrideColor || _darkColor) && { darkColor: _darkColor }),
     }
 
+    let customClassesString: string
     $: customClassesString = Object.values(customClasses).join(' ')
 </script>
 

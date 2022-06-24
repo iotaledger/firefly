@@ -1387,10 +1387,10 @@
     "@types/warning" "^3.0.0"
     warning "^4.0.3"
 
-"@iota/types@^1.0.0-beta.4":
-  version "1.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.6.tgz#8d76f676ee36e059e2b5b2d18aec0f66cbb1b600"
-  integrity sha512-FTBINxg52/tkEjvGoXm4KxmY4Pljy9FYdVDErVZoGh/F/uJmoM03vr9d+aoCzW/3DTHIfMrRXc05q2GPH7AQWA==
+"@iota/types@^1.0.0-beta.8":
+  version "1.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.8.tgz#1baf79dc16c847a96704fbf8af69c0b52f2c5fb2"
+  integrity sha512-tpKBUgRrTkOQUKgY4ye9jqEiI6BNrdT/Pk6SmCMWVNdpmsMk58zu+dUHRyE1dgCasPSoxX6h0hdaC3OzT8yQ4Q==
 
 "@iota/unit-converter@^1.0.0-beta.30":
   version "1.0.0-beta.30"
@@ -1400,10 +1400,10 @@
     "@types/bignumber.js" "^5.0.0"
     bignumber.js "^7.2.1"
 
-"@iota/wallet@npm:wallet-stardust-alpha@1.0.25":
-  version "1.0.25"
-  resolved "https://registry.yarnpkg.com/wallet-stardust-alpha/-/wallet-stardust-alpha-1.0.25.tgz#b13dca79abc7d21101a48dcb4227e6942fedc946"
-  integrity sha512-kaGrvt/OmKEWucjEpJAb40/jD7837+JD3Ear11oVNlInkW3vMLQvoT1y21QF9dcmykFu4+KuZEvjOjd+qJoAhw==
+"@iota/wallet@npm:wallet-stardust-alpha@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/wallet-stardust-alpha/-/wallet-stardust-alpha-2.0.1.tgz#d836a5954e071586cd7b77355721b2d3643a9e1b"
+  integrity sha512-m0q9oDUxTJhB5ufCO11SzKnVGcHHtwl+P3bAG+XDjJEqrJRqyu9cBzvqUdSU1r5v2u4eWy+1wQApgs/vZCXWeQ==
   dependencies:
     cargo-cp-artifact "^0.1.5"
     prebuild-install "^5.3.3"

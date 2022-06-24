@@ -160,7 +160,7 @@
                                 beginAtZero: true,
                                 autoSkip: true,
                                 maxTicksLimit: 4,
-                                callback: function (value, index, values) {
+                                callback: function (value) {
                                     return formatYAxis(value)
                                 },
                             },

@@ -101,10 +101,10 @@ const handleError = (errorType, error, isRenderProcessError) => {
 
         openErrorWindow()
     } else {
-        // In dev mode there is no need to log errors from the render
-        // process as they will already appear in the dev console
-        if (!isRenderProcessError) {
+        const errorMessage = error.message || error.reason || error
+        if (!shouldReportError(errorMessage) || !isRenderProcessError) {
             console.error(error)
+            return
         }
     }
 }

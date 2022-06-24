@@ -190,7 +190,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
         },

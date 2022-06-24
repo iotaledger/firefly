@@ -33,8 +33,12 @@
     export let metadata: string
     export let tag: string
 
+    // If storage deposit is 0, then set expiration date to tomorrow
+    const defaultExpirationDate = new Date()
+    defaultExpirationDate.setDate(defaultExpirationDate.getDate() + 1)
+
     let expirationDate: Date
-    let storageDeposit = 0
+    let storageDeposit: number
 
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
@@ -42,7 +46,7 @@
     $: internal = recipient.type === 'account'
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
 
-    async function _prepareOutput() {
+    async function _prepareOutput(): Promise<void> {
         outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
         preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
             remainderValueStrategy: {
@@ -53,7 +57,7 @@
         storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
     }
 
-    $: $$props, expirationDate, _prepareOutput()
+    $: $$props, expirationDate, void _prepareOutput()
 
     function onConfirm(): void {
         if ($isSoftwareProfile) {
@@ -125,9 +129,15 @@
     >
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} {formattedFiatValue} />
-        <KeyValueBox keyText={localize('general.expirationTime')}>
-            <ExpirationTimePicker slot="value" bind:value={expirationDate} />
-        </KeyValueBox>
+        {#if storageDeposit !== undefined}
+            <KeyValueBox keyText={localize('general.expirationTime')}>
+                <ExpirationTimePicker
+                    slot="value"
+                    bind:value={expirationDate}
+                    initialSelected={storageDeposit ? '1day' : 'none'}
+                />
+            </KeyValueBox>
+        {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>

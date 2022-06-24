@@ -2,7 +2,7 @@ const notarize = require('./scripts/notarize.macos.js')
 const merge = require('lodash.merge')
 
 const baseConfig = () => ({
-    productName: 'Firefly',
+    productName: 'Firefly (Stardust)',
     artifactName: 'firefly-desktop-${version}.${ext}',
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
@@ -40,7 +40,7 @@ const baseConfig = () => ({
     linux: {
         target: ['AppImage'],
         desktop: {
-            Name: 'Firefly',
+            Name: 'Firefly (Stardust)',
             Comment: 'Desktop wallet for IOTA',
             Categories: 'Office;Network;Finance',
         },
@@ -88,10 +88,11 @@ const getIconPaths = (stage) => {
  * @param {string} stage
  * @returns
  */
-const getAppName = (stage) => (stage === 'prod' ? 'Firefly' : `Firefly ${stage.replace(/^\w/, (c) => c.toUpperCase())}`)
+const getAppName = (stage) =>
+    stage === 'prod' ? 'Firefly (Stardust)' : `Firefly (Stardust) - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
 
 const getAppId = (stage) => {
-    const defaultAppId = 'org.iota.firefly'
+    const defaultAppId = 'org.iota.firefly-stardust'
     if (stage === 'prod') {
         return defaultAppId
     }

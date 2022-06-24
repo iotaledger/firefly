@@ -22,7 +22,7 @@
     export let xsmall = false
     export let classes = ''
     export let type = 'button'
-    export let form = ''
+    export let form = undefined
     export let autofocus = false
     export let inlineStyle = ''
     export let showHoverText = undefined

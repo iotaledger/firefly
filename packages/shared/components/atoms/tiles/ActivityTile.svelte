@@ -9,6 +9,7 @@
         hideActivity,
         InclusionState,
     } from '@core/wallet'
+    import { closePopup, openPopup } from '@lib/popup'
     import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
@@ -21,8 +22,21 @@
     $: asyncStatus = activity?.getAsyncStatus($time)
     $: isIncomingActivityUnclaimed =
         activity?.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
-
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
+
+    function reject() {
+        openPopup({
+            type: 'confirmationPopup',
+            props: {
+                title: localize('actions.confirmRejection.title'),
+                description: localize('actions.confirmRejection.description'),
+                onConfirm: () => {
+                    hideActivity(activity?.id)
+                    closePopup()
+                },
+            },
+        })
+    }
 </script>
 
 <ClickableTile {onClick} classes={activity?.inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}>
@@ -78,21 +92,21 @@
                         >
                     {/if}
                 </div>
-                <div class="flex justify-end flex-row space-x-2">
+                <div class="flex flex-row justify-end w-1/2 space-x-2">
                     {#if isIncomingActivityUnclaimed}
                         <button
                             disabled={activity.isClaiming}
-                            class="action px-3 py-1 w-full text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
-                            on:click|stopPropagation={() => hideActivity(activity?.id)}
+                            class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
+                            on:click|stopPropagation={reject}
                         >
-                            {localize('actions.reject')}
+                            {localize('actions.hide')}
                         </button>
                         <button
-                            class="action px-3 py-1 w-full text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
+                            class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
                             on:click|stopPropagation={() => claimActivity(activity)}
                         >
                             {#if activity.isClaiming}
-                                <Spinner busy={true} classes="justify-center" />
+                                <Spinner busy={true} classes="justify-center h-fit" />
                             {:else}
                                 {localize('actions.claim')}
                             {/if}
