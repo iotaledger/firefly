@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <button on:click={stopQRScanner} class="absolute top-6 right-8 text-white">
+        <button on:click={stopQRScanner} class="close absolute top-6 right-8 text-white">
             <Icon icon="close" />
         </button>
     </div>
@@ -82,5 +82,9 @@
             @apply bottom-0;
             @apply border-b-blue-500;
         }
+    }
+
+    .close {
+        margin-top: calc(env(safe-area-inset-top) / 2 + 5px);
     }
 </style>
