@@ -43,6 +43,14 @@
         setClipboard(activity.transactionId)
     }
 
+    async function claim() {
+        await claimActivity(activity)
+        openPopup({
+            type: 'activityDetails',
+            props: { activity },
+        })
+    }
+
     function reject() {
         openPopup({
             type: 'confirmationPopup',
@@ -96,7 +104,7 @@
             <button
                 disabled={activity.isClaiming}
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
-                on:click={() => claimActivity(activity)}
+                on:click={claim}
             >
                 {#if activity.isClaiming}
                     <Spinner busy={true} classes="justify-center" />
