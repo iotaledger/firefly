@@ -123,7 +123,8 @@ export const getAccountActivityData = (
     const messages: Message[] =
         account.messages
             .slice()
-            ?.filter((message) => message.payload) // TODO: Remove self transactions and messages with no payload
+            // ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
+            ?.filter((message) => message.payload)
             ?.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()) ?? []
     for (let i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
         const start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime()
