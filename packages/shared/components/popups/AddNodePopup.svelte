@@ -36,34 +36,36 @@
     }
 </script>
 
-<Text type="h4" classes="mb-6">{localize(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
-<NodeConfigurationForm
-    bind:this={nodeConfigurationForm}
-    bind:isBusy
-    bind:node
-    {nodes}
-    {network}
-    isDeveloperProfile={$activeProfile.isDeveloperProfile}
-/>
-<div class="flex flex-row justify-between space-x-4 w-full">
-    <Button secondary classes="w-1/2" onClick={closePopup} disabled={isBusy}>
-        {localize('actions.cancel')}
-    </Button>
-    <Button
-        disabled={!node.url || isBusy}
-        type="submit"
-        form="node-config-form"
-        classes="w-1/2"
-        onClick={handleAddNode}
-    >
-        {#if isBusy}
-            <Spinner
-                busy={isBusy}
-                message={localize(`popups.node.${isAddingNode ? 'addingNode' : 'updatingNode'}`)}
-                classes="justify-center"
-            />
-        {:else}
-            {localize(`actions.${isAddingNode ? 'addNode' : 'updateNode'}`)}
-        {/if}
-    </Button>
+<div class="flex flex-col space-y-6">
+    <Text type="h4">{localize(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
+    <NodeConfigurationForm
+        bind:this={nodeConfigurationForm}
+        bind:isBusy
+        bind:node
+        {nodes}
+        {network}
+        isDeveloperProfile={$activeProfile.isDeveloperProfile}
+    />
+    <div class="flex flex-row justify-between space-x-4 w-full">
+        <Button secondary classes="w-1/2" onClick={closePopup} disabled={isBusy}>
+            {localize('actions.cancel')}
+        </Button>
+        <Button
+            disabled={!node.url || isBusy}
+            type="submit"
+            form="node-config-form"
+            classes="w-1/2"
+            onClick={handleAddNode}
+        >
+            {#if isBusy}
+                <Spinner
+                    busy={isBusy}
+                    message={localize(`popups.node.${isAddingNode ? 'addingNode' : 'updatingNode'}`)}
+                    classes="justify-center"
+                />
+            {:else}
+                {localize(`actions.${isAddingNode ? 'addNode' : 'updateNode'}`)}
+            {/if}
+        </Button>
+    </div>
 </div>
