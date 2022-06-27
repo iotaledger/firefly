@@ -1,8 +1,17 @@
 <script lang="typescript">
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { INode } from '@core/network'
+    import { INode, NetworkType } from '@core/network'
     import { appRouter } from '@core/router'
+    import { getStorageDirectoryOfProfile } from '@core/profile'
+    import { showAppNotification } from '@lib/notifications'
+    import { setNewProfileClientOptions, newProfile } from '@contexts/onboarding'
+    import {
+        deleteAccountsAndDatabase,
+        destroyProfileManager,
+        initialiseProfileManager,
+        getNodeInfo,
+    } from '@core/profile-manager'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
