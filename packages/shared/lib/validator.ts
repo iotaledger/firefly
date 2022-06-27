@@ -8,13 +8,7 @@ import { MarketDataValidationResponse } from './typings/market'
 import { INodeInfoResponse } from '@core/network/interfaces/node-info-response.interface'
 import { MessageResponse, ResponseTypes } from '@lib/typings/oldResponseTypes'
 
-type Validators =
-    | IdValidator
-    | ActionValidator
-    | PayloadTypeValidator
-    | MessageValidator
-    | StrongholdStatusValidator
-    | NodeInfoValidator
+type Validators = IdValidator | ActionValidator | PayloadTypeValidator | MessageValidator | NodeInfoValidator
 
 class Validator {
     nextValidator: Validators
@@ -245,33 +239,6 @@ class MnemonicValidator extends Validator {
             return super.createResponse(false, {
                 type: ErrorTypes.InvalidType,
                 error: 'Invalid mnemonic length received.',
-            })
-        }
-
-        return super.isValid(response)
-    }
-}
-
-/**
- * Validation for stronghold status
- */
-class StrongholdStatusValidator extends Validator {
-    /**
-     * Checks if response is valid
-     *
-     * @method isValid
-     *
-     * @param {MessageResponse} response
-     *
-     * @returns {ValidationResponse}
-     */
-    isValid(response: MessageResponse): ValidationResponse {
-        const payload = response.payload
-
-        if ('Locked' !== payload.snapshot.status && 'Unlocked' !== payload.snapshot.status) {
-            return super.createResponse(false, {
-                type: ErrorTypes.InvalidType,
-                error: 'Invalid type of status received.',
             })
         }
 
