@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, ExpirationTimePicker, KeyValueBox, Text } from 'shared/components'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeightText, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
@@ -22,7 +22,7 @@
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
-    import { InsufficientFundsForStorageDepositError, InvalidExpirationDateTimeError } from '@core/error'
+    import { BaseError, InsufficientFundsForStorageDepositError, InvalidExpirationDateTimeError } from '@core/error'
 
     export let asset: IAsset
     export let amount = '0'
@@ -38,9 +38,10 @@
     defaultExpirationDate.setDate(defaultExpirationDate.getDate() + 1)
 
     let expirationDate: Date
-    let storageDeposit: number
+    let storageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
+    let error: BaseError
 
     $: internal = recipient.type === 'account'
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
@@ -60,6 +61,7 @@
         tag,
         storageDeposit: storageDeposit,
     }
+    $: expirationDate, validate()
 
     async function _prepareOutput(): Promise<void> {
         outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
@@ -74,12 +76,14 @@
 
     function validate(): void {
         if (asset?.balance?.available < rawAmount + storageDeposit) {
-            throw new InsufficientFundsForStorageDepositError(
+            error = new InsufficientFundsForStorageDepositError(
                 storageDeposit + rawAmount - asset.balance.available,
                 unit
             )
         } else if (expirationDate && !isValidExpirationDateTime(expirationDate)) {
-            throw new InvalidExpirationDateTimeError()
+            error = new InvalidExpirationDateTimeError()
+        } else {
+            error = null
         }
     }
 
@@ -130,9 +134,12 @@
                 />
             </KeyValueBox>
         {/if}
+        {#if error}
+            <Error error={error?.message} />
+        {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>
-        <Button autofocus classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>
+        <Button autofocus classes="w-full" onClick={onConfirm} disabled={!!error}>{localize('actions.confirm')}</Button>
     </popup-buttons>
 </send-confirmation-popup>

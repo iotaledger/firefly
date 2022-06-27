@@ -6,7 +6,6 @@ export class InvalidExpirationDateTimeError extends BaseError {
         super({
             message: localize('error.send.invalidExpirationDateTime'),
             logError: true,
-            showNotification: true,
         })
     }
 }
