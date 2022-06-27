@@ -6,8 +6,8 @@
     import { getStorageDirectoryOfProfile, newProfile } from '@core/profile'
     import { showAppNotification } from '@lib/notifications'
     import { setNewProfileClientOptions } from '@contexts/onboarding'
-    import { initialiseProfileManager } from '@core/profile-manager'
-    import { destroyProfileManager, getNodeInfo } from '@core/profile-manager'
+    import { deleteAccountsAndDatabase, destroyProfileManager, initialiseProfileManager } from '@core/profile-manager'
+    import { getNodeInfo } from '@core/profile-manager'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
@@ -38,6 +38,7 @@
                 console.error(err?.error)
                 if (err?.error.includes('error sending request for url')) {
                     formError = localize('error.node.unabledToConnect')
+                    await deleteAccountsAndDatabase()
                     await destroyProfileManager()
                 } else {
                     showAppNotification({
