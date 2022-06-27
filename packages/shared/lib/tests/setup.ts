@@ -6,7 +6,6 @@
 import './__mocks__/api'
 import './__mocks__/matchMedia'
 import './__mocks__/platform'
-import './__mocks__/walletActor'
 
 beforeAll(async () => {})
 afterAll(async () => {})
