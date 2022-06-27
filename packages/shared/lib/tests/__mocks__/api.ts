@@ -1,12 +1,9 @@
 import { AccountId, AccountManagerOptions } from '@iota/wallet'
+import { IApi } from '../../core/profile-manager'
 import { AccountMock } from './account.mock'
 import { ProfileManagerMock } from './profileManager.mock'
 
-interface IStardustApi {
-    createAccountManager(options: AccountManagerOptions): ProfileManagerMock
-    getAccount(accountId: string): Promise<AccountMock>
-}
-const stardustApi: IStardustApi = {
+const stardustApi: IApi = {
     createAccountManager(_: AccountManagerOptions): ProfileManagerMock {
         return new ProfileManagerMock()
     },
@@ -17,4 +14,4 @@ const stardustApi: IStardustApi = {
     },
 }
 
-window['__WALLET__STARDUST__'] = stardustApi
+window['__WALLET__API__'] = stardustApi
