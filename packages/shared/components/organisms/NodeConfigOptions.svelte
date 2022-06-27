@@ -27,6 +27,7 @@
             type: 'addNode',
             props: {
                 node,
+                isEditingNode: true,
                 onSuccess: () => {
                     closePopup()
                 },

@@ -20,7 +20,7 @@
 
     async function handleAddNode(): Promise<void> {
         formError = ''
-        await nodeConfigurationForm.validate()
+        await nodeConfigurationForm.validate({ validateurl: true, checkNodeInfo: false, validateClientOptions: false })
         if (!formError) {
             isBusy = true
             try {
@@ -59,16 +59,7 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{localize('views.customNetwork.body')}</Text>
-        <NodeConfigurationForm
-            bind:this={nodeConfigurationForm}
-            bind:node
-            bind:formError
-            {isBusy}
-            hideButtons
-            hideCheckbox
-            isDeveloperProfile
-            checkNodeInfo={false}
-        />
+        <NodeConfigurationForm bind:this={nodeConfigurationForm} bind:node bind:formError {isBusy} isDeveloperProfile />
     </div>
     <div slot="leftpane__action">
         <Button

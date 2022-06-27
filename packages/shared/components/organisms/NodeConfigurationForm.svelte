@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Input, PasswordInput } from 'shared/components'
-    import { INode, nodeInfo, checkNodeUrlValidity, checkNetworkId, IClientOptions } from '@core/network'
+    import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions } from '@core/network'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
     import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
@@ -10,7 +10,6 @@
     export let formError = ''
     export let currentClientOptions: IClientOptions
     export let isDeveloperProfile: boolean
-    export let checkNodeInfo = true
 
     $: node.url, (formError = '')
     $: node.url = cleanNodeUrl(node?.url)
@@ -19,30 +18,42 @@
         return stripTrailingSlash(stripSpaces(_url))
     }
 
-    export async function validate(): Promise<void> {
-        const errorUrlValidity = checkNodeUrlValidity(currentClientOptions?.nodes, node.url, isDeveloperProfile)
-        if (errorUrlValidity) {
-            formError = localize(errorUrlValidity) ?? ''
-        }
-
-        if (checkNodeInfo) {
-            const nodeInfo = await getNodeInfo(node.url)
-            if (!nodeInfo) {
-                formError =
-                    localize('error.node.unabledToConnect', {
-                        values: { url: node.url },
-                    }) ?? ''
+    export async function validate({
+        validateUrl,
+        checkNodeInfo,
+        validateClientOptions,
+    }: {
+        validateUrl: boolean
+        checkNodeInfo: boolean
+        validateClientOptions: boolean
+    }): Promise<void> {
+        if (validateUrl) {
+            const errorUrlValidity = checkNodeUrlValidity(currentClientOptions?.nodes, node.url, isDeveloperProfile)
+            if (errorUrlValidity) {
+                formError = localize(errorUrlValidity) ?? ''
+                Promise.reject({ type: 'validationError', error: formError })
             }
         }
 
-        if (currentClientOptions) {
+        let nodeInfo
+        if (checkNodeInfo) {
+            try {
+                nodeInfo = await getNodeInfo(node.url)
+            } catch (err) {
+                formError = localize('error.node.unabledToConnect')
+                Promise.reject({ type: 'validationError', error: formError })
+            }
+        }
+
+        if (validateClientOptions && currentClientOptions) {
             const errorNetworkId = checkNetworkId(
-                $nodeInfo?.protocol?.networkName,
+                nodeInfo?.protocol?.networkName,
                 currentClientOptions.network,
                 isDeveloperProfile
             )
             if (errorNetworkId) {
                 formError = localize(errorNetworkId?.locale, errorNetworkId?.values) ?? ''
+                Promise.reject({ type: 'validationError', error: formError })
             }
         }
     }

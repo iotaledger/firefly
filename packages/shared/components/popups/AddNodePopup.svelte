@@ -9,39 +9,41 @@
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let nodes: INode[] = []
     export let network: INetwork
-    export let isAddingNode: boolean = true
+    export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
 
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
-    let formError = ''
 
     async function handleAddNode(): Promise<void> {
-        formError = ''
-        await nodeConfigurationForm.validate()
-        if (!formError) {
+        try {
             isBusy = true
-            try {
-                await addNodeToActiveProfile(node)
-                onSuccess()
-            } catch (err) {
+            await nodeConfigurationForm.validate({
+                validateUrl: true,
+                checkNodeInfo: true,
+                validateClientOptions: true,
+            })
+            await addNodeToActiveProfile(node)
+            onSuccess()
+        } catch (err) {
+            if (err.type !== 'validationError') {
                 showAppNotification({
                     type: 'error',
                     message: localize(err?.error ?? 'error.global.generic'),
                 })
-            } finally {
-                isBusy = false
             }
+        } finally {
+            isBusy = false
         }
     }
 </script>
 
 <div class="flex flex-col space-y-6">
-    <Text type="h4">{localize(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
+    <Text type="h4">{localize(`popups.node.title${isEditingNode ? 'Update' : 'Add'}`)}</Text>
     <NodeConfigurationForm
         bind:this={nodeConfigurationForm}
-        bind:isBusy
         bind:node
+        {isBusy}
         {nodes}
         {network}
         isDeveloperProfile={$activeProfile.isDeveloperProfile}
@@ -60,11 +62,11 @@
             {#if isBusy}
                 <Spinner
                     busy={isBusy}
-                    message={localize(`popups.node.${isAddingNode ? 'addingNode' : 'updatingNode'}`)}
+                    message={localize(`popups.node.${isEditingNode ? 'updatingNode' : 'addingNode'}`)}
                     classes="justify-center"
                 />
             {:else}
-                {localize(`actions.${isAddingNode ? 'addNode' : 'updateNode'}`)}
+                {localize(`actions.${isEditingNode ? 'updateNode' : 'addNode'}`)}
             {/if}
         </Button>
     </div>
