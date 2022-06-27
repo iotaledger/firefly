@@ -10,8 +10,7 @@
     export let autoplay = true
     export let segments = undefined
     export let renderer = 'svg'
-    export let scaled = false
-    export let scale = 1.2
+    export let inlineStyle = ''
 
     const animations = {
         'welcome-desktop': {
@@ -223,4 +222,4 @@
     })
 </script>
 
-<div class="w-full {classes}" style="transform: scale({scaled ? '1.8' : scale ? scale : '1'})" bind:this={container} />
+<div class="w-full {classes}" style={inlineStyle} bind:this={container} />

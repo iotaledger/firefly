@@ -30,6 +30,9 @@
         <Button classes="w-full" onClick={() => handleContinueClick()} autofocus>{locale('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="backup-desktop" />
+        <Animation
+            classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
+            animation="backup-desktop"
+        />
     </div>
 </OnboardingLayout>
