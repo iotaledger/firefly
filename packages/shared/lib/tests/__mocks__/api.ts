@@ -3,7 +3,7 @@ import { IApi } from '../../core/profile-manager'
 import { AccountMock } from './account.mock'
 import { ProfileManagerMock } from './profileManager.mock'
 
-const stardustApi: IApi = {
+const api: IApi = {
     createAccountManager(_: AccountManagerOptions): ProfileManagerMock {
         return new ProfileManagerMock()
     },
@@ -14,4 +14,4 @@ const stardustApi: IApi = {
     },
 }
 
-window['__WALLET__API__'] = stardustApi
+window['__WALLET__API__'] = api

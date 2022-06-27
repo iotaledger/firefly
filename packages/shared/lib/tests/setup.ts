@@ -3,10 +3,10 @@
  * environment as needed (e.g. a particular object must be mocked or is mocked
  * everywhere).
  */
+import './__mocks__/api'
 import './__mocks__/matchMedia'
 import './__mocks__/platform'
 import './__mocks__/walletActor'
-import './__mocks__/stardustApi'
 
 beforeAll(async () => {})
 afterAll(async () => {})
