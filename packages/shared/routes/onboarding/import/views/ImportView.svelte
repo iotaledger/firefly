@@ -4,8 +4,8 @@
     import features from 'shared/features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { newProfile, ProfileImportType, ProfileType } from '@core/profile'
-    import { setNewProfileType } from '@contexts/onboarding'
+    import { ProfileImportType, ProfileType } from '@core/profile'
+    import { setNewProfileType, newProfile } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 

@@ -1,17 +1,11 @@
 <script lang="typescript">
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { INode, NetworkType } from '@core/network'
+    import { INode } from '@core/network'
     import { appRouter } from '@core/router'
-    import { getStorageDirectoryOfProfile } from '@core/profile'
     import { showAppNotification } from '@lib/notifications'
-    import { setNewProfileClientOptions, newProfile } from '@contexts/onboarding'
-    import {
-        deleteAccountsAndDatabase,
-        destroyProfileManager,
-        initialiseProfileManager,
-        getNodeInfo,
-    } from '@core/profile-manager'
+    import { deleteAccountsAndDatabase, destroyProfileManager } from '@core/profile-manager'
+    import { initProfileManagerFromNewProfile } from '@contexts/onboarding'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
@@ -23,36 +17,30 @@
     }
 
     async function handleAddNode(): Promise<void> {
-        formError = ''
-        await nodeConfigurationForm.validate({ validateurl: true, checkNodeInfo: false, validateClientOptions: false })
-        if (!formError) {
-            isBusy = true
-            try {
-                await setNewProfileClientOptions($newProfile.networkProtocol, NetworkType.PrivateNet, node)
-
-                const path = await getStorageDirectoryOfProfile($newProfile.id)
-                initialiseProfileManager(path, $newProfile.clientOptions, {
-                    Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
-                })
-
-                await getNodeInfo(node.url)
-
-                $appRouter.next()
-            } catch (err) {
-                console.error(err?.error)
-                if (err?.error.includes('error sending request for url')) {
-                    formError = localize('error.node.unabledToConnect')
-                    await deleteAccountsAndDatabase()
-                    await destroyProfileManager()
-                } else {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err?.error ?? 'error.global.generic'),
-                    })
-                }
-            } finally {
-                isBusy = false
+        isBusy = true
+        try {
+            await nodeConfigurationForm.validate({
+                validateUrl: true,
+                checkNodeInfo: false,
+                validateClientOptions: false,
+            })
+            await initProfileManagerFromNewProfile(node)
+            $appRouter.next()
+        } catch (err) {
+            console.error(err)
+            if (err?.error?.includes('error sending request for url')) {
+                formError = localize('error.node.unabledToConnect')
+                await deleteAccountsAndDatabase()
+                await destroyProfileManager()
             }
+            if (err?.type !== 'validationError') {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(err?.error ?? 'error.global.generic'),
+                })
+            }
+        } finally {
+            isBusy = false
         }
     }
 </script>
