@@ -1,9 +1,17 @@
 <script lang="typescript">
     import { Input, PasswordInput } from 'shared/components'
-    import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions } from '@core/network'
+    import {
+        INode,
+        checkNodeUrlValidity,
+        checkNetworkId,
+        IClientOptions,
+        updateNodeInfo,
+        nodeInfo,
+    } from '@core/network'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
     import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
+    import { get } from 'svelte/store'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
@@ -21,10 +29,12 @@
     export async function validate({
         validateUrl,
         checkNodeInfo,
+        checkSameNetwork,
         validateClientOptions,
     }: {
         validateUrl: boolean
         checkNodeInfo: boolean
+        checkSameNetwork: boolean
         validateClientOptions: boolean
     }): Promise<void> {
         if (validateUrl) {
@@ -35,19 +45,30 @@
             }
         }
 
-        let nodeInfo
+        let nodeInfoResponse
         if (checkNodeInfo) {
             try {
-                nodeInfo = await getNodeInfo(node.url)
+                nodeInfoResponse = await getNodeInfo(node.url)
             } catch (err) {
                 formError = localize('error.node.unabledToConnect')
                 Promise.reject({ type: 'validationError', error: formError })
             }
         }
 
+        if (checkSameNetwork) {
+            updateNodeInfo(nodeInfoResponse.nodeInfo)
+
+            const isInSameNetwork =
+                get(nodeInfo).protocol.networkName === nodeInfoResponse.nodeInfo.protocol.networkName
+            if (!isInSameNetwork) {
+                formError = localize('error.node.differentNetwork')
+                Promise.reject({ type: 'validationError', error: formError })
+            }
+        }
+
         if (validateClientOptions && currentClientOptions) {
             const errorNetworkId = checkNetworkId(
-                nodeInfo?.protocol?.networkName,
+                nodeInfoResponse?.protocol?.networkName,
                 currentClientOptions.network,
                 isDeveloperProfile
             )

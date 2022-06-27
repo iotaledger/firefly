@@ -5,10 +5,13 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkType } from '@core/network'
-    import { getStorageDirectoryOfProfile } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { cleanupOnboarding, setNewProfileClientOptions, newProfile, updateNewProfile } from '@contexts/onboarding'
-    import { initialiseProfileManager } from '@core/profile-manager'
+    import {
+        cleanupOnboarding,
+        newProfile,
+        updateNewProfile,
+        initProfileManagerFromNewProfile,
+    } from '@contexts/onboarding'
 
     const networkProtocol = $newProfile.networkProtocol
 
@@ -23,12 +26,7 @@
             updateNewProfile({ networkType })
         } else {
             updateNewProfile({ networkProtocol, networkType: networkType })
-            await setNewProfileClientOptions(networkProtocol, networkType)
-
-            const path = await getStorageDirectoryOfProfile($newProfile.id)
-            initialiseProfileManager(path, $newProfile.clientOptions, {
-                Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
-            })
+            await initProfileManagerFromNewProfile(networkProtocol, networkType)
         }
         $appRouter.next({ networkType })
     }

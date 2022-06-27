@@ -3,22 +3,20 @@
     import features from 'shared/features/features'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { getStorageDirectoryOfProfile } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { cleanupOnboarding, setNewProfileClientOptions, newProfile, updateNewProfile } from '@contexts/onboarding'
-    import { initialiseProfileManager } from '@core/profile-manager'
+    import {
+        cleanupOnboarding,
+        newProfile,
+        updateNewProfile,
+        initProfileManagerFromNewProfile,
+    } from '@contexts/onboarding'
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
         if ($newProfile?.isDeveloperProfile) {
             updateNewProfile({ networkProtocol })
         } else {
             updateNewProfile({ networkProtocol, networkType: NetworkType.Mainnet })
-            await setNewProfileClientOptions(networkProtocol, NetworkType.Mainnet)
-
-            const path = await getStorageDirectoryOfProfile($newProfile.id)
-            initialiseProfileManager(path, $newProfile.clientOptions, {
-                Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
-            })
+            await initProfileManagerFromNewProfile(networkProtocol, NetworkType.Mainnet)
         }
         $appRouter.next()
     }

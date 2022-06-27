@@ -20,6 +20,7 @@
             isBusy = true
             await nodeConfigurationForm.validate({
                 validateUrl: true,
+                checkSameNetwork: true,
                 checkNodeInfo: true,
                 validateClientOptions: true,
             })

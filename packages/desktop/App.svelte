@@ -54,7 +54,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { createNewProfile } from '@contexts/onboarding/actions/newProfile'
+    import { createNewProfile } from '@contexts/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 

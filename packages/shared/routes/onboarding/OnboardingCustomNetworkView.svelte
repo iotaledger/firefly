@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { INode } from '@core/network'
+    import { INode, NetworkType } from '@core/network'
     import { appRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
-    import { deleteAccountsAndDatabase, destroyProfileManager } from '@core/profile-manager'
-    import { initProfileManagerFromNewProfile } from '@contexts/onboarding'
+    import { deleteAccountsAndDatabase, destroyProfileManager, getNodeInfo } from '@core/profile-manager'
+    import { initProfileManagerFromNewProfile, newProfile } from '@contexts/onboarding'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
@@ -21,10 +21,12 @@
         try {
             await nodeConfigurationForm.validate({
                 validateUrl: true,
+                checkSameNetwork: false,
                 checkNodeInfo: false,
                 validateClientOptions: false,
             })
-            await initProfileManagerFromNewProfile(node)
+            await initProfileManagerFromNewProfile($newProfile.networkProtocol, NetworkType.PrivateNet, node)
+            await getNodeInfo(node.url)
             $appRouter.next()
         } catch (err) {
             console.error(err)

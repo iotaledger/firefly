@@ -1,4 +1,4 @@
-import { deleteNewProfile } from '@contexts/onboarding/actions/newProfile'
+import { deleteNewProfile } from '@contexts/onboarding/actions/deleteNewProfile'
 
 import { cleanupOnboardingStores } from './cleanupOnboardingStores'
 
