@@ -5,9 +5,10 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkType } from '@core/network'
-    import { createNewProfile, newProfile, updateNewProfile } from '@core/profile'
+    import { getStorageDirectoryOfProfile, newProfile, updateNewProfile } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { cleanupOnboarding } from '@contexts/onboarding'
+    import { cleanupOnboarding, setNewProfileClientOptions } from '@contexts/onboarding'
+    import { initialiseProfileManager } from '@core/profile-manager'
 
     const networkProtocol = $newProfile.networkProtocol
 
@@ -21,7 +22,13 @@
         if (networkType === NetworkType.PrivateNet) {
             updateNewProfile({ networkType })
         } else {
-            await createNewProfile($newProfile?.isDeveloperProfile, $newProfile?.networkProtocol, networkType)
+            updateNewProfile({ networkProtocol, networkType: networkType })
+            await setNewProfileClientOptions(networkProtocol, networkType)
+
+            const path = await getStorageDirectoryOfProfile($newProfile.id)
+            initialiseProfileManager(path, $newProfile.clientOptions, {
+                Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
+            })
         }
         $appRouter.next({ networkType })
     }

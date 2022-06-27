@@ -1,46 +1,24 @@
-import { get } from 'svelte/store'
-import { getDefaultClientOptions, IClientOptions, INode, NetworkProtocol, NetworkType } from '@core/network'
-import { destroyProfileManager, initialiseProfileManager, profileManager } from '@core/profile-manager'
+import { destroyProfileManager, profileManager } from '@core/profile-manager'
 import { ledgerSimulator } from '@lib/ledger'
-
+import { get } from 'svelte/store'
 import { ProfileType } from '../enums'
 import { buildNewProfile } from '../helpers'
 import { newProfile, updateNewProfile } from '../stores'
-import { getStorageDirectoryOfProfile, removeProfileFolder } from '../utils'
+import { removeProfileFolder } from '../utils'
 
 /**
  * Builds a new profile and sets Svelte store variables accordingly.
  * @method createNewProfile
  * @param {boolean} isDeveloperProfile
- * @param {NetworkProtocol} networkProtocol
- * @param {NetworkType} networkType
- * @param {INode} node
  */
-export async function createNewProfile(
-    isDeveloperProfile: boolean,
-    networkProtocol: NetworkProtocol,
-    networkType: NetworkType,
-    node?: INode
-): Promise<void> {
+export function createNewProfile({ isDeveloperProfile }: { isDeveloperProfile: boolean }): Promise<void> {
     if (get(profileManager)) {
         console.error('Profile is already created')
         return
     }
 
-    let clientOptions: IClientOptions
-    if (networkType !== NetworkType.PrivateNet) {
-        clientOptions = await getDefaultClientOptions(networkProtocol, networkType)
-    } else {
-        clientOptions = { nodes: [node] }
-    }
-
-    const profile = buildNewProfile(isDeveloperProfile, networkProtocol, networkType, clientOptions)
-    newProfile.set(profile)
-    const path = await getStorageDirectoryOfProfile(get(newProfile).id)
-
-    initialiseProfileManager(path, clientOptions, {
-        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
-    })
+    const _newProfile = buildNewProfile(isDeveloperProfile)
+    newProfile.set(_newProfile)
 }
 
 /**

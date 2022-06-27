@@ -78,7 +78,7 @@
             <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
         </button>
     {/if}
-    {#if !$activeProfile?.settings?.clientOptions.automaticNodeSelection}
+    {#if !$activeProfile?.clientOptions.automaticNodeSelection}
         <button
             on:click={() => {
                 nodeContextMenu.disabled = !nodeContextMenu.disabled

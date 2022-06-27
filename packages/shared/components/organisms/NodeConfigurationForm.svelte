@@ -1,29 +1,45 @@
 <script lang="typescript">
     import { Input, PasswordInput } from 'shared/components'
-    import { INode, nodeInfo, checkNodeUrlValidity, checkNetworkId } from '@core/network'
-    import { activeProfile, newProfile } from '@core/profile'
+    import { INode, nodeInfo, checkNodeUrlValidity, checkNetworkId, IClientOptions } from '@core/network'
     import { localize } from '@core/i18n'
+    import { getNodeInfo } from '@core/profile-manager'
+    import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
     export let formError = ''
-
-    const profile = $newProfile ? newProfile : activeProfile
-    const clientOptions = $profile.settings?.clientOptions
+    export let currentClientOptions: IClientOptions
+    export let isDeveloperProfile: boolean
+    export let checkNodeInfo = true
 
     $: node.url, (formError = '')
+    $: node.url = cleanNodeUrl(node?.url)
 
-    export function validate(): void {
-        const errorUrlValidity = checkNodeUrlValidity(clientOptions?.nodes, node.url, $profile.isDeveloperProfile)
+    function cleanNodeUrl(_url: string): string {
+        return stripTrailingSlash(stripSpaces(_url))
+    }
+
+    export async function validate(): Promise<void> {
+        const errorUrlValidity = checkNodeUrlValidity(currentClientOptions?.nodes, node.url, isDeveloperProfile)
         if (errorUrlValidity) {
             formError = localize(errorUrlValidity) ?? ''
         }
 
-        if ($profile === $activeProfile) {
+        if (checkNodeInfo) {
+            const nodeInfo = await getNodeInfo(node.url)
+            if (!nodeInfo) {
+                formError =
+                    localize('error.node.unabledToConnect', {
+                        values: { url: node.url },
+                    }) ?? ''
+            }
+        }
+
+        if (currentClientOptions) {
             const errorNetworkId = checkNetworkId(
                 $nodeInfo?.protocol?.networkName,
-                clientOptions.network,
-                $profile.isDeveloperProfile
+                currentClientOptions.network,
+                isDeveloperProfile
             )
             if (errorNetworkId) {
                 formError = localize(errorNetworkId?.locale, errorNetworkId?.values) ?? ''

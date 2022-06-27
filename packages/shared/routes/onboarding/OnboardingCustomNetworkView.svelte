@@ -1,19 +1,18 @@
 <script lang="typescript">
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { INode, NetworkType, validateAndCleanNodeData } from '@core/network'
+    import { INode, NetworkType } from '@core/network'
     import { appRouter } from '@core/router'
-    import { destroyProfileManager, getNodeInfo } from '@core/profile-manager'
-    import { activeProfile, addNode, createNewProfile, newProfile } from '@core/profile'
+    import { getStorageDirectoryOfProfile, newProfile } from '@core/profile'
     import { showAppNotification } from '@lib/notifications'
+    import { setNewProfileClientOptions } from '@contexts/onboarding'
+    import { initialiseProfileManager } from '@core/profile-manager'
+    import { destroyProfileManager, getNodeInfo } from '@core/profile-manager'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
     let isBusy = false
     let formError = ''
-
-    const profile = $newProfile ? newProfile : activeProfile
-    const clientOptions = $profile.settings?.clientOptions
 
     function onBackClick(): void {
         $appRouter.previous()
@@ -25,29 +24,25 @@
             $appRouter.next()
         } catch (err) {
             await destroyProfileManager()
-            formError = localize('error.node.invalid')
+            formError = localize('error.node.unabledToConnect')
         }
     }
 
     async function handleAddNode(): Promise<void> {
         formError = ''
-        nodeConfigurationForm.validate()
+        await nodeConfigurationForm.validate()
         if (!formError) {
             isBusy = true
             try {
-                if (!clientOptions) {
-                    const cleanedNode = validateAndCleanNodeData(node)
-                    await createNewProfile(
-                        $profile.isDeveloperProfile,
-                        $newProfile.networkProtocol,
-                        NetworkType.PrivateNet,
-                        cleanedNode
-                    )
-                } else {
-                    await addNode(node, profile)
-                }
+                await setNewProfileClientOptions($newProfile.networkProtocol, NetworkType.PrivateNet, node)
+
+                const path = await getStorageDirectoryOfProfile($newProfile.id)
+                initialiseProfileManager(path, $newProfile.clientOptions, {
+                    Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
+                })
                 onSuccess()
             } catch (err) {
+                console.error(err)
                 showAppNotification({
                     type: 'error',
                     message: localize(err?.error ?? 'error.global.generic'),
@@ -72,6 +67,8 @@
             {isBusy}
             hideButtons
             hideCheckbox
+            isDeveloperProfile
+            checkNodeInfo={false}
         />
     </div>
     <div slot="leftpane__action">
