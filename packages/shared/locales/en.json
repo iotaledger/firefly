@@ -1354,7 +1354,8 @@
             "forbidden": "This node connection is forbidden.",
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
             "unabledToConnect": "Unable to connect to the node",
-            "differentNetwork": "The nodes are located on different networks"
+            "differentNetwork": "The nodes are located on different networks",
+            "duplicateNodes": "Same node already exists"
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",

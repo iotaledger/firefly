@@ -12,6 +12,7 @@
     import { getNodeInfo } from '@core/profile-manager'
     import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
     import { get } from 'svelte/store'
+    import { activeProfile } from '@core/profile'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
@@ -30,18 +31,20 @@
         validateUrl,
         checkNodeInfo,
         checkSameNetwork,
+        uniqueCheck,
         validateClientOptions,
     }: {
         validateUrl: boolean
         checkNodeInfo: boolean
         checkSameNetwork: boolean
+        uniqueCheck: boolean
         validateClientOptions: boolean
     }): Promise<void> {
         if (validateUrl) {
             const errorUrlValidity = checkNodeUrlValidity(currentClientOptions?.nodes, node.url, isDeveloperProfile)
             if (errorUrlValidity) {
                 formError = localize(errorUrlValidity) ?? ''
-                Promise.reject({ type: 'validationError', error: formError })
+                return Promise.reject({ type: 'validationError', error: formError })
             }
         }
 
@@ -51,18 +54,24 @@
                 nodeInfoResponse = await getNodeInfo(node.url)
             } catch (err) {
                 formError = localize('error.node.unabledToConnect')
-                Promise.reject({ type: 'validationError', error: formError })
+                return Promise.reject({ type: 'validationError', error: formError })
             }
         }
 
         if (checkSameNetwork) {
-            updateNodeInfo(nodeInfoResponse.nodeInfo)
-
             const isInSameNetwork =
                 get(nodeInfo).protocol.networkName === nodeInfoResponse.nodeInfo.protocol.networkName
             if (!isInSameNetwork) {
+                updateNodeInfo(nodeInfoResponse.nodeInfo)
                 formError = localize('error.node.differentNetwork')
-                Promise.reject({ type: 'validationError', error: formError })
+                return Promise.reject({ type: 'validationError', error: formError })
+            }
+        }
+
+        if (uniqueCheck) {
+            if (get(activeProfile)?.clientOptions?.nodes.some((_node) => _node.url === node.url)) {
+                formError = localize('error.node.duplicateNodes')
+                return Promise.reject({ type: 'validationError', error: formError })
             }
         }
 
@@ -74,7 +83,7 @@
             )
             if (errorNetworkId) {
                 formError = localize(errorNetworkId?.locale, errorNetworkId?.values) ?? ''
-                Promise.reject({ type: 'validationError', error: formError })
+                return Promise.reject({ type: 'validationError', error: formError })
             }
         }
     }
