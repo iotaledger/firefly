@@ -31,7 +31,10 @@
             ).includes(setting) && 'opacity-20 pointer-events-none'}"
             disabled={!Object.values(activeSettings).includes(setting)}
         >
-            <Icon icon={icons[setting]} classes="text-blue-500 ml-1 mr-3 group-hover:text-blue-500" />
+            <Icon
+                icon={icons[setting]}
+                classes="{$mobile ? 'text-blue-500' : 'text-gray-500'} ml-1 mr-3 group-hover:text-blue-500"
+            />
             <Text type="p" secondary classes="group-hover:text-blue-500">
                 {localize(`views.settings.${setting}.title`)}
             </Text>
