@@ -4,7 +4,8 @@
     import { Animation, Button, OnboardingLayout, Spinner, Text, TransactionItem } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { addNewProfile, loadPersistedProfileIntoActiveProfile, login, newProfile } from '@core/profile'
+    import { addNewProfile, loadPersistedProfileIntoActiveProfile, login } from '@core/profile'
+    import { newProfile } from '@contexts/onboarding'
     import { displayNotificationForLedgerProfile, ledgerDeviceState, promptUserToConnectLedger } from '@lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,

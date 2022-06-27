@@ -3,9 +3,9 @@
     import features from 'shared/features/features'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { getStorageDirectoryOfProfile, newProfile, updateNewProfile } from '@core/profile'
+    import { getStorageDirectoryOfProfile } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { cleanupOnboarding, setNewProfileClientOptions } from '@contexts/onboarding'
+    import { cleanupOnboarding, setNewProfileClientOptions, newProfile, updateNewProfile } from '@contexts/onboarding'
     import { initialiseProfileManager } from '@core/profile-manager'
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {

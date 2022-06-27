@@ -1,10 +1,10 @@
 import { destroyProfileManager, profileManager } from '@core/profile-manager'
 import { ledgerSimulator } from '@lib/ledger'
 import { get } from 'svelte/store'
-import { ProfileType } from '../enums'
-import { buildNewProfile } from '../helpers'
+import { ProfileType } from '@core/profile/enums'
+import { buildNewProfile } from '../helpers/buildNewProfile'
 import { newProfile, updateNewProfile } from '../stores'
-import { removeProfileFolder } from '../utils'
+import { removeProfileFolder } from '@core/profile/utils'
 
 /**
  * Builds a new profile and sets Svelte store variables accordingly.

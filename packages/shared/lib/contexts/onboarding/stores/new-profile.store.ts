@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import { IPersistedProfile, IProfileSettings } from '../interfaces'
+import { IPersistedProfile, IProfileSettings } from '../../../core/profile/interfaces'
 
 export const newProfile = writable<Partial<IPersistedProfile>>(null)
 

@@ -5,9 +5,9 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkType } from '@core/network'
-    import { getStorageDirectoryOfProfile, newProfile, updateNewProfile } from '@core/profile'
+    import { getStorageDirectoryOfProfile } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { cleanupOnboarding, setNewProfileClientOptions } from '@contexts/onboarding'
+    import { cleanupOnboarding, setNewProfileClientOptions, newProfile, updateNewProfile } from '@contexts/onboarding'
     import { initialiseProfileManager } from '@core/profile-manager'
 
     const networkProtocol = $newProfile.networkProtocol

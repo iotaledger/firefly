@@ -3,7 +3,7 @@ import { AvailableExchangeRates } from '@lib/typings/currency'
 import { HistoryDataProps } from '@lib/typings/market'
 import { generateRandomId } from '@lib/utils'
 
-import { IPersistedProfile } from '../interfaces'
+import { IPersistedProfile } from '../../../core/profile/interfaces'
 
 /**
  * Build a default profile object given a name and developer status.

@@ -3,9 +3,9 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
-    import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'
+    import { profiles, validateProfileName } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { cleanupOnboarding } from '@contexts/onboarding'
+    import { newProfile, cleanupOnboarding, updateNewProfile } from '@contexts/onboarding'
 
     let error = ''
     let profileName = $newProfile?.name ?? ''

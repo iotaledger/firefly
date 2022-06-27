@@ -1,5 +1,5 @@
 import { getDefaultClientOptions, IClientOptions, INode, NetworkProtocol, NetworkType } from '@core/network'
-import { updateNewProfile } from '@core/profile'
+import { updateNewProfile } from '../stores'
 
 export async function setNewProfileClientOptions(
     networkProtocol: NetworkProtocol,
