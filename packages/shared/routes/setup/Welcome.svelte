@@ -90,9 +90,8 @@
         class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden' : 'bg-pastel-blue dark:bg-gray-900'}"
     >
         <Animation
-            classes="setup-anim-aspect-ratio {$mobile && '-mr-52'}"
+            classes="setup-anim-aspect-ratio {$mobile ? '-mr-52 transform scale-180' : ''}"
             animation="welcome-desktop"
-            inlineStyle={$mobile ? 'transform: scale(1.8);' : ''}
         />
     </div>
 </OnboardingLayout>
