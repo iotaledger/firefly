@@ -60,17 +60,9 @@
         autofocus={!$mobile}
     />
     <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
-        {#if $mobile === false}
-            <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={busy}
-                >{locale('actions.cancel')}</Button
-            >
-        {/if}
-        <Button
-            classes={$mobile ? 'w-full' : 'w-1/2'}
-            type="submit"
-            form="password-popup-form"
-            disabled={!password || password.length === 0}
+        <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={busy}>{locale('actions.cancel')}</Button
         >
+        <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0}>
             {locale('actions.unlock')}
         </Button>
     </div>
