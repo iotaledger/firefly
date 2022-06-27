@@ -36,7 +36,8 @@
     const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
 
     let isOpen = false
-    let fadeContent = false
+    let fadeAnimations = false
+    const fadeDelay = 500
 
     const coords = tweened(
         {
@@ -160,12 +161,12 @@
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
 
-    $: if ((fromLeft === false, $coords.y === 0)) {
+    $: if ((fromLeft === false, isOpen === true)) {
         setTimeout(() => {
-            fadeContent = true
-        })
+            fadeAnimations = true
+        }, fadeDelay)
     } else {
-        fadeContent = false
+        fadeAnimations = false
     }
     $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1000)
     $: contentOpacity = getScale(fromLeft ? $coords.x : $coords.y, 100)
@@ -192,7 +193,7 @@
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-indicator: {fromLeft || preventClose ? 'none' : 'block'}"
     >
-        <slot {fadeContent} />
+        <slot {fadeAnimations} />
         {#if closeButton}
             <div class="mb-5 mx-6 flex justify-center">
                 <button

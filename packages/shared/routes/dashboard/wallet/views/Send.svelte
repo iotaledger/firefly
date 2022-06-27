@@ -65,7 +65,7 @@
         to: string,
         onConfirm: (internal: boolean) => void
     ) => void = undefined
-    export let fadeContent = false
+    export let fadeAnimation = false
 
     const { accounts } = $wallet
 
@@ -529,7 +529,7 @@
             </div>
         </div>
         <div class="w-full overflow-hidden mt-5 grid">
-            {#if fadeContent}
+            {#if fadeAnimation}
                 <div class="animation w-full" in:fade={{ duration: 1000 }}>
                     <Animation classes="relative right-2.5" animation="import-desktop" scale={1.2} />
                 </div>

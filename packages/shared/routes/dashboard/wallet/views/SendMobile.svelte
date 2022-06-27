@@ -14,7 +14,7 @@
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
     export let onComplete = (): void => {}
-    export let fadeContent = false
+    export let fadeAnimations = false
 
     const [sat] = getComputedStyle(document.documentElement).getPropertyValue('--sat').split('px')
 
@@ -37,9 +37,9 @@
     }
 
     function fadeAnimation() {
-        fadeContent = false
+        fadeAnimations = false
         setTimeout(() => {
-            fadeContent = true
+            fadeAnimations = true
         })
     }
     function confirmWithoutPopup(accountId, internal, amount, unit, to, onConfirm): void {
@@ -69,7 +69,7 @@
 <div class="grid" style="height: {height}">
     {#if state === 'SEND'}
         <div class="send" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
-            <Send {onSend} {onInternalTransfer} {fadeContent} {confirmWithoutPopup} />
+            <Send {onSend} {onInternalTransfer} fadeAnimation={fadeAnimations} {confirmWithoutPopup} />
         </div>
     {/if}
     {#if state === 'CONFIRM'}
@@ -81,7 +81,7 @@
                 unit={_unit}
                 to={_to}
                 onConfirm={_onConfirm}
-                {fadeContent}
+                fadeAnimation={fadeAnimations}
                 {handleBackButton}
                 {onComplete}
             />

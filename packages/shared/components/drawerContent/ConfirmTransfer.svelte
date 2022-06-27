@@ -23,7 +23,7 @@
     export let to = ''
     export let amount = 0
     export let unit = Unit.i
-    export let fadeContent = false
+    export let fadeAnimation = false
 
     export let handleBackButton = (..._: any[]): void => {}
     export let onConfirm = (..._: any[]): void => {}
@@ -159,7 +159,7 @@
         <Text bold bigger>{localize('popups.transaction.title')}</Text>
     </div>
     <div class="w-full overflow-hidden mt-5 grid">
-        {#if fadeContent}
+        {#if fadeAnimation}
             <div class="animation w-full" in:fade={{ duration: 1000 }}>
                 <Animation classes="relative right-2.5" animation="balance-desktop" scale={1.2} />
             </div>
