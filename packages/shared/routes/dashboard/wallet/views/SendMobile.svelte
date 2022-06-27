@@ -14,13 +14,15 @@
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
     export let onComplete = (): void => {}
-    export let fadeAnimations = false
+    export let isOpen = false
 
     const [sat] = getComputedStyle(document.documentElement).getPropertyValue('--sat').split('px')
 
     const height = `${window.innerHeight - parseInt(sat) - 10}px`
+    const fadeDelay = 500
 
     let state: 'SEND' | 'CONFIRM' | 'PASSWORD' = 'SEND'
+    let fadeAnimations = false
 
     let _accountId: string = undefined
     let _internal: boolean = false
@@ -64,16 +66,24 @@
                 break
         }
     }
+
+    $: if (isOpen) {
+        setTimeout(() => {
+            fadeAnimations = true
+        }, fadeDelay)
+    } else {
+        fadeAnimations = false
+    }
 </script>
 
 <div class="grid" style="height: {height}">
     {#if state === 'SEND'}
-        <div class="send" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
+        <div class="grid-content" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
             <Send {onSend} {onInternalTransfer} fadeAnimation={fadeAnimations} {confirmWithoutPopup} />
         </div>
     {/if}
     {#if state === 'CONFIRM'}
-        <div class="confirm" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
+        <div class="grid-content" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
             <ConfirmTransfer
                 accountId={_accountId}
                 internal={_internal}
@@ -88,7 +98,7 @@
         </div>
     {/if}
     {#if state === 'PASSWORD'}
-        <div class="confirm" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
+        <div class="grid-content" in:fade={{ duration: 400 }} out:fade={{ duration: 200 }}>
             <Password {locale} onSuccess={_onSuccess} {handleBackButton} />
         </div>
     {/if}
@@ -99,12 +109,7 @@
         --sat: env(safe-area-inset-top);
     }
 
-    .send {
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    .confirm {
+    .grid-content {
         grid-column: 1;
         grid-row: 1;
     }

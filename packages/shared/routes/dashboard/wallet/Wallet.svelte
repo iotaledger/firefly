@@ -483,7 +483,7 @@
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
                         onClose={() => accountRoute.set(AccountRoute.Init)}
-                        let:fadeAnimations
+                        let:isOpen
                     >
                         {#if $accountRoute === AccountRoute.Send}
                             <SendMobile
@@ -491,7 +491,7 @@
                                 {onSend}
                                 {onInternalTransfer}
                                 {onComplete}
-                                {fadeAnimations}
+                                {isOpen}
                                 locale={localize}
                             />
                         {:else if $accountRoute === AccountRoute.Receive}
