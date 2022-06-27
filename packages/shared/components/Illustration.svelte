@@ -4,6 +4,7 @@
     export let illustration = undefined
     export let width = undefined
     export let height = undefined
+    export let scale = undefined
     // when set "background" to true, the illustration will be displayed as a background image of a div
     // and a numeric height must be defined
     export let background = false
@@ -18,6 +19,14 @@
         'balance-desktop': {
             lightmode: 'balance-desktop.svg',
             darkmode: 'balance-desktop-darkmode.svg',
+        },
+        'import-desktop': {
+            lightmode: 'import-desktop.svg',
+            darkmode: 'import-desktop.svg',
+        },
+        'password-desktop': {
+            lightmode: 'password-desktop.svg',
+            darkmode: 'password-desktop.svg',
         },
         'single-account-guide-desktop': {
             lightmode: 'onboarding/single-account-guide-desktop.svg',
@@ -112,6 +121,7 @@
             height={height || '100%'}
             src={`assets/illustrations/${selected}`}
             alt=""
+            style="transform: scale({scale || 1}, {scale || 1})"
         />
     {/if}
 {:else}

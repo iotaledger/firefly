@@ -2,7 +2,18 @@
     import { localize } from '@core/i18n'
     import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
-    import { Address, Amount, Animation, Button, Dropdown, Icon, Input, ProgressBar, Text } from 'shared/components'
+    import {
+        Address,
+        Amount,
+        Animation,
+        Illustration,
+        Button,
+        Dropdown,
+        Icon,
+        Input,
+        ProgressBar,
+        Text,
+    } from 'shared/components'
     import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
@@ -42,8 +53,19 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import { get, Readable } from 'svelte/store'
 
+    import { fade } from 'svelte/transition'
+
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
+    export let confirmWithoutPopup: (
+        accountId: string,
+        internal: boolean,
+        amount: number,
+        unit: Unit,
+        to: string,
+        onConfirm: (internal: boolean) => void
+    ) => void = undefined
+    export let fadeContent = false
 
     const { accounts } = $wallet
 
@@ -338,6 +360,18 @@
                 }
             }
 
+            if (confirmWithoutPopup) {
+                confirmWithoutPopup(
+                    $selectedAccountStore.id,
+                    internal || accountAlias ? true : false,
+                    amountRaw,
+                    unit,
+                    accountAlias ?? address,
+                    () => triggerSend(internal)
+                )
+                return
+            }
+
             openPopup({
                 type: 'transaction',
                 props: {
@@ -485,85 +519,91 @@
 </script>
 
 {#if $mobile}
-    <div class="w-full h-full flex flex-col justify-between p-6">
-        <div>
-            <div class="w-full mb-9 text-center">
-                <Text bold bigger>{localize('general.sendFunds')}</Text>
-                <div class="absolute right-10 top-6">
-                    <button on:click={onQRClick}>
-                        <Icon icon="qr" classes="text-blue-500" />
-                    </button>
-                </div>
+    <div class="flex flex-col items-center justify-items-center p-5">
+        <div class="w-full text-center mt-3">
+            <Text bold bigger>{localize('general.sendFunds')}</Text>
+            <div class="qr-code absolute right-10 top-9">
+                <button on:click={onQRClick}>
+                    <Icon icon="qr" classes="text-blue-500" />
+                </button>
             </div>
-            <Animation classes="setup-anim-aspect-ratio" animation="balance-desktop" />
-            <div class="w-full h-full flex flex-col justify-between">
-                <div>
-                    <div class="w-full block">
-                        {#if selectedSendType === SEND_TYPE.INTERNAL}
-                            <span
-                                class="absolute right-9 mt-3.5 z-10"
-                                on:click={() => (selectedSendType = SEND_TYPE.EXTERNAL)}
-                            >
-                                <Icon
-                                    icon="close"
-                                    classes="z-10 ml-2 text-gray-500 dark:text-white"
-                                    width="22"
-                                    height="22"
-                                />
-                            </span>
-                            <div class="mb-6 w-full" on:click={selectInternal}>
-                                <Input style="text-align: left;" type="button" value={to?.label || null} />
-                            </div>
-                        {:else}
-                            {#if accountsDropdownItems.length > 1 && address.length === 0}
-                                <button
-                                    class="absolute right-10 mt-4 z-10 text-12 text-gray-500 focus:text-blue-500"
-                                    on:click={selectInternal}
-                                >
-                                    {localize('general.moveFundsButton')}
-                                </button>
-                            {/if}
-                            <Address
-                                error={addressError}
-                                bind:address
-                                label={localize('general.sendToAddress')}
-                                disabled={$isTransferring}
-                                placeholder={`${localize('general.sendToAddress')}: ${addressPrefix}...`}
-                                classes="mb-6"
-                                autofocus={false}
+        </div>
+        <div class="w-full overflow-hidden mt-5 grid">
+            {#if fadeContent}
+                <div class="animation w-full" in:fade={{ duration: 1000 }}>
+                    <Animation classes="relative right-2.5" animation="import-desktop" scale={1.2} />
+                </div>
+            {:else}
+                <div class="illustration w-full" out:fade={{ duration: 2000 }}>
+                    <Illustration classes="relative right-2.5" illustration="import-desktop" scale={1.2} />
+                </div>
+            {/if}
+        </div>
+        <div class="flex w-full flex-col flex-wrap">
+            <div>
+                <div class="w-full">
+                    {#if selectedSendType === SEND_TYPE.INTERNAL}
+                        <span
+                            class="absolute right-9 mt-3.5 z-10"
+                            on:click={() => (selectedSendType = SEND_TYPE.EXTERNAL)}
+                        >
+                            <Icon
+                                icon="close"
+                                classes="z-10 ml-2 text-gray-500 dark:text-white"
+                                width="22"
+                                height="22"
                             />
+                        </span>
+                        <div class="mb-6 w-full" on:click={selectInternal}>
+                            <Input style="text-align: left;" type="button" value={to?.label || null} />
+                        </div>
+                    {:else}
+                        {#if accountsDropdownItems.length > 1 && address.length === 0}
+                            <button
+                                class="absolute right-10 mt-4 z-10 text-12 text-gray-500 focus:text-blue-500"
+                                on:click={selectInternal}
+                            >
+                                {localize('general.moveFundsButton')}
+                            </button>
                         {/if}
-                        <Amount
-                            error={amountError}
-                            bind:amount
-                            bind:unit
-                            customUnitPresentation={showUnitActionSheet}
-                            onMaxClick={handleMaxClick}
+                        <Address
+                            error={addressError}
+                            bind:address
+                            label={localize('general.sendToAddress')}
                             disabled={$isTransferring}
+                            placeholder={`${localize('general.sendToAddress')}: ${addressPrefix}...`}
+                            classes="mb-6"
                             autofocus={false}
                         />
-                    </div>
+                    {/if}
+                    <Amount
+                        error={amountError}
+                        bind:amount
+                        bind:unit
+                        customUnitPresentation={showUnitActionSheet}
+                        onMaxClick={handleMaxClick}
+                        disabled={$isTransferring}
+                        autofocus={false}
+                    />
                 </div>
             </div>
         </div>
-        {#if !$isTransferring}
-            <div class="mt-8 flex flex-row justify-between px-2">
-                <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
-                    {localize('actions.cancel')}
-                </Button>
-                <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
-            </div>
-        {/if}
-        {#if $isTransferring}
-            <ProgressBar
-                classes="my-6"
-                preloading={!$transferState}
-                secondary
-                message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
-                percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent}
-            />
-        {/if}
     </div>
+    {#if !$isTransferring}
+        <div class="sendButton w-full absolute left-0 px-5">
+            <Button classes="w-full justify-center" onClick={() => handleSendClick()}>{localize('actions.send')}</Button
+            >
+        </div>
+    {/if}
+    {#if $isTransferring}
+        <ProgressBar
+            classes="my-6"
+            preloading={!$transferState}
+            secondary
+            message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
+            percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent}
+        />
+    {/if}
 {:else}
     <div class="w-full h-full flex flex-col justify-between p-6">
         <div>
@@ -681,5 +721,23 @@
             @apply -bottom-2.5;
             @apply left-0;
         }
+    }
+
+    .qr-code {
+        top: 40px;
+    }
+
+    .illustration {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .animation {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .sendButton {
+        bottom: calc(env(safe-area-inset-bottom) + 30px);
     }
 </style>

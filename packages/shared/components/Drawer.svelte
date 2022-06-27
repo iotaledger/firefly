@@ -36,6 +36,7 @@
     const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
 
     let isOpen = false
+    let fadeContent = false
 
     const coords = tweened(
         {
@@ -159,6 +160,13 @@
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
 
+    $: if ((fromLeft === false, $coords.y === 0)) {
+        setTimeout(() => {
+            fadeContent = true
+        })
+    } else {
+        fadeContent = false
+    }
     $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1000)
     $: contentOpacity = getScale(fromLeft ? $coords.x : $coords.y, 100)
 </script>
@@ -184,7 +192,7 @@
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-indicator: {fromLeft || preventClose ? 'none' : 'block'}"
     >
-        <slot />
+        <slot {fadeContent} />
         {#if closeButton}
             <div class="mb-5 mx-6 flex justify-center">
                 <button

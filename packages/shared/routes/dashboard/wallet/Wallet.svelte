@@ -72,6 +72,7 @@
         ManageAccount,
         Receive,
         Send,
+        SendMobile,
     } from './views/'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
@@ -105,6 +106,7 @@
 
     let drawer: Drawer
     let activityDrawer: Drawer
+    let sendMobile: SendMobile
 
     let headerHeight = 0
     let scroll = false
@@ -284,6 +286,24 @@
         }
 
         if ($isSoftwareProfile) {
+            if ($mobile) {
+                api.getStrongholdStatus({
+                    onSuccess(strongholdStatusResponse) {
+                        if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                            if ($mobile) {
+                                sendMobile.passwordRequired(checkStronghold(_send))
+                                return
+                            }
+                        } else {
+                            checkStronghold(_send)
+                        }
+                    },
+                    onError(error) {
+                        console.error(error)
+                    },
+                })
+                return
+            }
             checkStronghold(_send)
         } else {
             _send()
@@ -350,6 +370,10 @@
             api.getStrongholdStatus({
                 onSuccess(strongholdStatusResponse) {
                     if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        if ($mobile) {
+                            sendMobile.passwordRequired(_internalTransfer)
+                            return
+                        }
                         openPopup({ type: 'password', props: { onSuccess: _internalTransfer } })
                     } else {
                         _internalTransfer()
@@ -441,6 +465,11 @@
         unsubscribeLiftDasboard()
         unsubscribeScrollDetection()
     })
+
+    function onComplete() {
+        walletRoute.set(WalletRoute.AccountHistory)
+        drawer.close()
+    }
 </script>
 
 {#if $selectedAccountStore}
@@ -454,9 +483,17 @@
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
                         onClose={() => accountRoute.set(AccountRoute.Init)}
+                        let:fadeContent
                     >
                         {#if $accountRoute === AccountRoute.Send}
-                            <Send {onSend} {onInternalTransfer} />
+                            <SendMobile
+                                bind:this={sendMobile}
+                                {onSend}
+                                {onInternalTransfer}
+                                {onComplete}
+                                {fadeContent}
+                                locale={localize}
+                            />
                         {:else if $accountRoute === AccountRoute.Receive}
                             <Receive {isGeneratingAddress} {onGenerateAddress} />
                         {:else if $accountRoute === AccountRoute.Actions}
