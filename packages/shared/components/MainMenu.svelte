@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Drawer, Icon, Text, ProfileActions } from 'shared/components'
     import { getInitials } from 'shared/lib/helpers'
-    import { activeProfile, getAccountColor } from 'shared/lib/profile'
-    import { selectedAccountStore } from 'shared/lib/wallet'
+    import { activeProfile } from 'shared/lib/profile'
     import { Settings } from 'shared/routes'
     import {
         profileRoute,
@@ -13,11 +12,11 @@
         SettingsRoute,
     } from '@core/router'
     import { localize } from '@core/i18n'
+    import { AccountColor } from '@lib/typings/color'
 
     export let opacity = 1
 
-    $: profileColor = getAccountColor($selectedAccountStore?.id) as string
-
+    const profileColor = AccountColor.Blue // TODO: each profile will have a different color
     let drawer: Drawer
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
@@ -47,8 +46,7 @@
     style="--background-color: {profileColor}; --opacity: {opacity}"
     on:click={handleClick}
 >
-    <Text type="h4" overrideColor classes="z-10 uppercase">{profileInitial || 'A'}</Text>
-    <div class="w-11 h-11 flex rounded-full bg-white leading-100 opacity-20 absolute" />
+    <span class="text-14 font-600 text-center text-white uppercase">{profileInitial || 'A'}</span>
 </button>
 <Drawer bind:this={drawer} fromLeft fullScreen classes="flex">
     <div class="flex flex-col flex-1 mx-4">
