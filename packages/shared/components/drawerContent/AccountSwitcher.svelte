@@ -1,21 +1,114 @@
 <script lang="typescript">
-    import { resetAccountRouter, accountRouter, AccountRoute } from '@core/router'
-    import { WalletAccount } from '@lib/typings/wallet'
     import { HR, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { resetAccountRouter, accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
+    import { mobile } from '@lib/app'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
-    import { getAccountColor } from '@lib/profile'
-    import { isSyncing, isTransferring, selectedAccountStore, setSelectedAccount, wallet } from '@lib/wallet'
+    import { Platform } from '@lib/platform'
+    import { activeProfile, updateProfile, getAccountColor } from '@lib/profile'
+    import { WalletAccount } from '@lib/typings/wallet'
+    import {
+        isSyncing,
+        isTransferring,
+        selectedAccountStore,
+        selectedMessage,
+        setSelectedAccount,
+        wallet,
+    } from '@lib/wallet'
 
     export let accounts: WalletAccount[] = []
     export let handleCreateAccountPress = (): void => {}
 
-    const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
+    const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
+
+    const hidden = hiddenAccounts.includes($selectedAccountStore?.id)
+    const canDelete =
+        $selectedAccountStore?.index === accounts.length - 1 &&
+        $selectedAccountStore?.rawIotaBalance === 0 &&
+        $selectedAccountStore?.messages.length === 0
+
     const isSelectedAccount = (accountId) => accountId !== $selectedAccountStore?.id
     const { balanceOverview } = $wallet
 
     let toggleEdit = false
+
+    const menuActions = [
+        {
+            title: localize('actions.customizeAcount'),
+            action: handleCustomiseAccountClick,
+            style: 'DEFAULT',
+        },
+        {
+            title: localize('actions.viewAddressHistory'),
+            action: handleViewAddressHistoryClick,
+            style: 'DEFAULT',
+        },
+        {
+            title: localize('actions.exportTransactionHistory'),
+            action: handleExportTransactionHistoryClick,
+            style: 'DEFAULT',
+        },
+        {
+            title: localize(
+                canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount'
+            ),
+            action: () =>
+                canDelete ? handleDeleteAccountClick() : hidden ? handleShowAccountClick() : handleHideAccountClick(),
+            style: canDelete ? 'DESTRUCTIVE' : 'DEFAULT',
+        },
+    ]
+
+    async function handleMenuClick() {
+        if ($mobile === false) {
+            $accountRouter.goTo(AccountRoute.Actions)
+            return
+        }
+
+        const index = await Platform.showActionSheet({
+            title: localize('general.walletActions'),
+            options: [
+                ...menuActions.map((action) => ({
+                    title: action.title,
+                    style: action.style as 'DESTRUCTIVE' | 'DEFAULT',
+                })),
+                { title: 'Cancel', style: 'CANCEL' },
+            ],
+        })
+
+        menuActions[index].action()
+    }
+
+    function handleCustomiseAccountClick() {
+        $accountRouter.goTo(AccountRoute.Manage)
+    }
+
+    function handleViewAddressHistoryClick() {
+        $accountRouter.goTo(AccountRoute.AddressHistory)
+    }
+
+    function handleExportTransactionHistoryClick() {
+        $accountRouter.goTo(AccountRoute.ExportTransactionHistory)
+    }
+
+    function handleDeleteAccountClick() {
+        $accountRouter.goTo(AccountRoute.DeleteAccount)
+    }
+
+    function handleHideAccountClick() {
+        $accountRouter.goTo(AccountRoute.HideAccount)
+    }
+
+    function handleShowAccountClick() {
+        const idx = hiddenAccounts.indexOf($selectedAccountStore?.id)
+        if (idx >= 0) {
+            hiddenAccounts.splice(idx, 1)
+            updateProfile('hiddenAccounts', hiddenAccounts)
+        }
+        // TODO: handle for single wallet view
+        selectedMessage.set(null)
+        resetWalletRoute()
+    }
 
     function handleAccountClick(accountId: string): void {
         if ($isSyncing) {
