@@ -33,7 +33,6 @@
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { transferState } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
     import { activeProfile, isSoftwareProfile } from '@core/profile'
     import { selectedAccount, IAccountState } from '@core/account'
@@ -52,10 +51,6 @@
     $: isCurrentAccountStaked = isAccountStaked($selectedAccount?.id)
 
     function resetView(): void {
-        if (!isSoftwareProfile) {
-            transferState.set(null)
-        }
-
         isPerformingParticipation.set(false)
         participationAction.set(undefined)
     }
