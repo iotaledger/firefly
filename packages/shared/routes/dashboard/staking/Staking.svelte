@@ -4,9 +4,7 @@
     import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from '@lib/participation/types'
     import { closePopup, popupState } from '@lib/popup'
     import { onMount } from 'svelte'
-    import { getParticipationEvents, getParticipationOverview } from '@lib/participation/api'
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
-    import { ASSEMBLY_EVENT_ID } from '@lib/participation'
 
     // const handleNewStakingEvent = (): void => {
     //     openPopup({
@@ -109,12 +107,12 @@
         closePopup(true)
     }
 
-    onMount(async () => {
+    onMount(() => {
         // if (!$activeProfile?.hasVisitedStaking) {
         //     handleNewStakingEvent()
         // }
-        await getParticipationEvents()
-        await getParticipationOverview(ASSEMBLY_EVENT_ID)
+        // await getParticipationEvents()
+        // await getParticipationOverview(ASSEMBLY_EVENT_ID)
     })
 
     /** Subscribe to transfer state */

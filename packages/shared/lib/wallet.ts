@@ -10,8 +10,6 @@ import { RecoveryPhrase } from './typings/mnemonic'
 import { SetupType } from './typings/setup'
 import { AccountBalance } from '@iota/wallet'
 
-export const api = undefined
-
 export const MAX_PASSWORD_LENGTH = 256
 
 /**
