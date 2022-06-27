@@ -18,16 +18,6 @@
         $appRouter.previous()
     }
 
-    async function onSuccess(): Promise<void> {
-        try {
-            await getNodeInfo(node.url)
-            $appRouter.next()
-        } catch (err) {
-            await destroyProfileManager()
-            formError = localize('error.node.unabledToConnect')
-        }
-    }
-
     async function handleAddNode(): Promise<void> {
         formError = ''
         await nodeConfigurationForm.validate()
@@ -40,13 +30,21 @@
                 initialiseProfileManager(path, $newProfile.clientOptions, {
                     Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
                 })
-                onSuccess()
+
+                await getNodeInfo(node.url)
+
+                $appRouter.next()
             } catch (err) {
-                console.error(err)
-                showAppNotification({
-                    type: 'error',
-                    message: localize(err?.error ?? 'error.global.generic'),
-                })
+                console.error(err?.error)
+                if (err?.error.includes('error sending request for url')) {
+                    formError = localize('error.node.unabledToConnect')
+                    await destroyProfileManager()
+                } else {
+                    showAppNotification({
+                        type: 'error',
+                        message: localize(err?.error ?? 'error.global.generic'),
+                    })
+                }
             } finally {
                 isBusy = false
             }
