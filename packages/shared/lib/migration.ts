@@ -17,7 +17,6 @@ import {
     Transfer,
 } from 'shared/lib/typings/migration'
 import { appRoute, AppRoute } from '@core/router'
-import Validator from 'shared/lib/validator'
 import { walletSetupType } from 'shared/lib/wallet'
 import { localize } from '@core/i18n'
 import { showAppNotification } from './notifications'
@@ -1199,20 +1198,12 @@ export async function checkChrysalisSnapshot(): Promise<void> {
 
         const jsonResponse: ChrysalisVariables = await response.json()
 
-        const { isValid, payload } = new Validator().performValidation({
-            type: 'ChrysalisVariables',
-            payload: jsonResponse,
-        })
-        if (isValid) {
-            const _ongoingSnapshot = jsonResponse.snapshot
-            if (get(ongoingSnapshot) === true && _ongoingSnapshot === false) {
-                // snapshot finished
-                closePopup()
-            }
-            ongoingSnapshot.set(_ongoingSnapshot)
-        } else {
-            throw new Error(payload.error)
+        const _ongoingSnapshot = jsonResponse.snapshot
+        if (get(ongoingSnapshot) === true && _ongoingSnapshot === false) {
+            // snapshot finished
+            closePopup()
         }
+        ongoingSnapshot.set(_ongoingSnapshot)
     } catch (err) {
         console.error(err.name === 'AbortError' ? new Error(`Could not fetch from ${endpoint}.`) : err)
     }
