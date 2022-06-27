@@ -118,6 +118,9 @@
             </Text>
         </div>
     {:else}
+        <div class="illustration w-full bg-pastel-yellow dark:bg-gray-900 flex justify-center">
+            <Illustration illustration="balance-desktop" />
+        </div>
         <div class="w-full text-center my-6 px-10">
             <Text type="h4" highlighted classes="mb-2">
                 {localize('popups.transaction.body', { values: { amount: displayAmount } })}
@@ -134,3 +137,14 @@
         {/if}
     </div>
 </div>
+
+<style type="text/scss">
+    .illustration {
+        height: 250px;
+        :global(img) {
+            min-height: 280px;
+            max-width: 100%;
+            object-position: 0 -3px;
+        }
+    }
+</style>
