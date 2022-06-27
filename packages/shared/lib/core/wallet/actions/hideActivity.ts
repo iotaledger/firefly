@@ -20,13 +20,13 @@ export function hideActivity(id: string): void {
 
         showAppNotification({
             type: 'info',
-            message: localize('notifications.rejected.success'),
+            message: localize('notifications.hideActivity.success'),
         })
     } catch (err) {
         console.error(err)
         showAppNotification({
             type: 'error',
-            message: localize('notifications.rejected.error'),
+            message: localize('notifications.hideActivity.error'),
         })
     }
 }

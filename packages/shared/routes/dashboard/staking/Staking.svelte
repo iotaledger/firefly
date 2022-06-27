@@ -1,12 +1,8 @@
 <script lang="typescript">
     import { Pane } from 'shared/components'
-    import {
-        assemblyStakingEventState,
-        participationAction,
-        shimmerStakingEventState,
-    } from 'shared/lib/participation/stores'
-    import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from 'shared/lib/participation/types'
-    import { closePopup, popupState } from 'shared/lib/popup'
+    import { assemblyStakingEventState, participationAction, shimmerStakingEventState } from '@lib/participation/stores'
+    import { ParticipationEventState, StakingAirdrop as _StakingAirdrop } from '@lib/participation/types'
+    import { closePopup, popupState } from '@lib/popup'
     import { onMount } from 'svelte'
     import { getParticipationEvents, getParticipationOverview } from '@lib/participation/api'
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
@@ -81,6 +77,7 @@
     //                     hideClose: true,
     //                     preventClose: true,
     //                     props: {
+    //                         // TODO: this was duplicated in this file (see Send.svelte)
     //                         ...handleTransactionEventData(transactionEventData),
     //                         onCancel: _onCancel,
     //                     },
