@@ -1,6 +1,9 @@
 <script lang="typescript">
-    import { Button } from 'shared/components'
+    import { Button, Text } from 'shared/components'
+    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
 
+    export let primaryText = ''
+    export let secondaryText = ''
     export let icon = undefined
     export let iconColor = 'blue-500'
     export let iconHeight: '16'
@@ -28,5 +31,8 @@
     classes="w-full {classes}"
     {onClick}
 >
-    <slot />
+    <Text type={TextType.p} fontSize="14" fontWeight={FontWeightText.semibold} lineHeight="5">{primaryText}</Text>
+    {#if secondaryText}
+        <Text type={TextType.p} fontSize="12" fontWeight={FontWeightText.normal} lineHeight="3.5">{secondaryText}</Text>
+    {/if}
 </Button>

@@ -44,17 +44,14 @@
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.values(NetworkType) as networkType}
             <OnboardingButton
+                primaryText={localize(`views.network.${networkProtocol}.${networkType}.title`)}
+                secondaryText={!$mobile ? localize(`views.network.${networkProtocol}.${networkType}.body`) : ''}
                 icon={networkIcon[networkType]}
                 iconColor={networkType === NetworkType.Mainnet ? `${networkProtocol}-highlight` : 'blue-500'}
                 hidden={features?.onboarding?.[networkProtocol]?.[networkType]?.hidden}
                 disabled={!features?.onboarding?.[networkProtocol]?.[networkType]?.enabled}
                 onClick={() => onClick(networkType)}
-            >
-                {localize(`views.network.${networkProtocol}.${networkType}.title`)}
-                {#if !$mobile}
-                    <Text secondary smaller>{localize(`views.network.${networkProtocol}.${networkType}.body`)}</Text>
-                {/if}
-            </OnboardingButton>
+            />
         {/each}
     </div>
 </OnboardingLayout>

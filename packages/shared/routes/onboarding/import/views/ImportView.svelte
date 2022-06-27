@@ -28,62 +28,50 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
+            primaryText={localize('views.import.importSeed')}
+            secondaryText={!$mobile ? localize('views.import.importSeedDescription') : ''}
             icon="seed"
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.migrateSeed?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.migrateSeed?.enabled}
             onClick={() => handleContinueClick(ProfileImportType.Seed)}
-        >
-            {localize('views.import.importSeed')}
-            {#if !$mobile}
-                <Text type="p" secondary smaller>{localize('views.import.importSeedDescription')}</Text>
-            {/if}
-        </OnboardingButton>
+        />
         <OnboardingButton
+            primaryText={localize('views.import.importMnemonic')}
+            secondaryText={!$mobile ? localize('views.import.importMnemonicDescription') : ''}
             icon="language"
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.recoveryPhrase?.enabled}
             onClick={() => handleContinueClick(ProfileImportType.Mnemonic)}
-        >
-            {localize('views.import.importMnemonic')}
-            {#if !$mobile}
-                <Text type="p" secondary smaller>{localize('views.import.importMnemonicDescription')}</Text>
-            {/if}
-        </OnboardingButton>
+        />
         <OnboardingButton
+            primaryText={localize(`views.import.importFile.${$newProfile?.networkProtocol}`)}
+            secondaryText={!$mobile
+                ? localize(`views.import.importFileDescription.${$newProfile?.networkProtocol}`)
+                : ''}
             icon="file"
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.strongholdBackup?.enabled}
             onClick={() => handleContinueClick(ProfileImportType.File)}
-        >
-            {localize(`views.import.importFile.${$newProfile?.networkProtocol}`)}
-            {#if !$mobile}
-                <Text type="p" secondary smaller>
-                    {localize(`views.import.importFileDescription.${$newProfile?.networkProtocol}`)}
-                </Text>
-            {/if}
-        </OnboardingButton>
+        />
         {#if !$mobile}
             <OnboardingButton
+                primaryText={localize('views.import.importLedger')}
+                secondaryText={!$mobile
+                    ? localize(`views.import.importLedgerDescription.${$newProfile?.networkProtocol}`)
+                    : ''}
                 icon="chip"
                 hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                     ?.ledgerBackup?.hidden}
                 disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]
                     ?.restoreProfile?.ledgerBackup?.enabled}
                 onClick={() => handleContinueClick(ProfileImportType.Ledger)}
-            >
-                {localize('views.import.importLedger')}
-                {#if !$mobile}
-                    <Text type="p" secondary smaller>
-                        {localize(`views.import.importLedgerDescription.${$newProfile?.networkProtocol}`)}
-                    </Text>
-                {/if}
-            </OnboardingButton>
+            />
         {/if}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">

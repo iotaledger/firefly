@@ -34,6 +34,8 @@
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.keys(NetworkProtocol) as protocol}
             <OnboardingButton
+                primaryText={protocol}
+                secondaryText={!isDeveloperProfile ? localize(`views.protocol.${NetworkProtocol[protocol]}`) : ''}
                 icon={NetworkProtocol[protocol]}
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
                 hidden={isDeveloperProfile
@@ -45,12 +47,7 @@
                     : !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled ||
                       !features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.enabled}
                 onClick={() => onClick(NetworkProtocol[protocol])}
-            >
-                {protocol}
-                {#if !isDeveloperProfile}
-                    <Text secondary smaller>{localize(`views.protocol.${NetworkProtocol[protocol]}`)}</Text>
-                {/if}
-            </OnboardingButton>
+            />
         {/each}
     </div>
 </OnboardingLayout>

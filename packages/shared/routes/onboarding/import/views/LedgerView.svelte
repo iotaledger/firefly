@@ -25,18 +25,19 @@
         <Text type="p" secondary classes="mb-8">{localize('views.importFromLedger.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        <OnboardingButton icon="settings" onClick={() => handleContinueClick(ProfileImportType.FireflyLedger)}>
-            {localize('views.importFromLedger.haveFireflyLedger')}
-            <Text type="p" secondary smaller>{localize('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
-        </OnboardingButton>
         <OnboardingButton
+            primaryText={localize('views.importFromLedger.haveFireflyLedger')}
+            secondaryText={localize('views.importFromLedger.haveFireflyLedgerDescription')}
+            icon="settings"
+            onClick={() => handleContinueClick(ProfileImportType.FireflyLedger)}
+        />
+        <OnboardingButton
+            primaryText={localize('views.importFromLedger.haveTrinityLedger')}
+            secondaryText={localize('views.importFromLedger.haveTrinityLedgerDescription')}
             icon="settings"
             hidden={$newProfile.networkProtocol === NetworkProtocol.Shimmer}
             onClick={() => handleContinueClick(ProfileImportType.TrinityLedger)}
-        >
-            {localize('views.importFromLedger.haveTrinityLedger')}
-            <Text type="p" secondary smaller>{localize('views.importFromLedger.haveTrinityLedgerDescription')}</Text>
-        </OnboardingButton>
+        />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
