@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { EnterNameView, SetupClaimedView, SetupNewView, SetupRestoredView, SetupView } from './views'
+    import { EnterNameView, SetupClaimedView, SetupNewView, SetupRecoveredView, SetupView } from './views'
     import { ProfileSetupRoute, profileSetupRoute } from '@core/router'
 </script>
 
@@ -16,9 +16,9 @@
     <Transition>
         <SetupNewView />
     </Transition>
-{:else if $profileSetupRoute === ProfileSetupRoute.SetupRestored}
+{:else if $profileSetupRoute === ProfileSetupRoute.SetupRecovered}
     <Transition>
-        <SetupRestoredView />
+        <SetupRecoveredView />
     </Transition>
 {:else if $profileSetupRoute === ProfileSetupRoute.EnterName}
     <Transition>

@@ -30,20 +30,22 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                     } else if (_profileSetupType === ProfileSetupType.New) {
                         nextRoute = ProfileSetupRoute.SetupNew
                     } else if (_profileSetupType === ProfileSetupType.Restored) {
-                        nextRoute = ProfileSetupRoute.SetupRestored
+                        nextRoute = ProfileSetupRoute.SetupRecovered
                     }
                 }
                 break
             }
             case ProfileSetupRoute.SetupClaimed:
-            case ProfileSetupRoute.SetupRestored: {
+            case ProfileSetupRoute.SetupRecovered: {
                 const _profileRecoveryType = params?.profileRecoveryType
                 if (_profileRecoveryType) {
                     profileRecoveryType.set(_profileRecoveryType)
                     if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-                        // go to import mnemonic
+                        nextRoute = ProfileSetupRoute.EnterName
+                        get(onboardingRouter).next()
                     } else if (_profileRecoveryType === ProfileRecoveryType.Stronghold) {
-                        // go to import stronghold
+                        nextRoute = ProfileSetupRoute.EnterName
+                        get(onboardingRouter).next()
                     } else if (_profileRecoveryType === ProfileRecoveryType.Ledger) {
                         nextRoute = ProfileSetupRoute.EnterName
                     }

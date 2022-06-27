@@ -3,13 +3,13 @@
     import { Animation, Button, OnboardingLayout, PasswordInput, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ImportRouter } from '@core/router'
+    import { RecoveryRouter } from '@core/router'
     import { profileRecoveryType, restoreBackupFromFile, isGettingMigrationData } from '@contexts/onboarding'
 
     export let error = ''
     export let busy = false
 
-    const { importFile } = getContext<ImportRouter>('importRouter')
+    const { importFile } = getContext<RecoveryRouter>('importRouter')
 
     let password = ''
 

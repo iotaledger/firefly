@@ -16,8 +16,8 @@ import {
     appSetupRouter,
     BackupRouter,
     backupRouter,
-    ImportRouter,
-    importRouter,
+    RecoveryRouter,
+    recoveryRouter,
     ledgerRouter,
     LedgerRouter,
     MigrationRouter,
@@ -36,7 +36,7 @@ export const initRouters = (): void => {
     appSetupRouter.set(new AppSetupRouter())
     backupRouter.set(new BackupRouter())
     dashboardRouter.set(new DashboardRouter())
-    importRouter.set(new ImportRouter())
+    recoveryRouter.set(new RecoveryRouter())
     ledgerRouter.set(new LedgerRouter())
     migrationRouter.set(new MigrationRouter())
     networkRouter.set(new NetworkRouter())
@@ -52,7 +52,7 @@ export const resetRouters = (): void => {
     get(accountRouter).reset()
     get(backupRouter).reset()
     get(dashboardRouter).reset()
-    get(importRouter).reset()
+    get(recoveryRouter).reset()
     get(ledgerRouter).reset()
     get(migrationRouter).reset()
     get(networkRouter).reset()

@@ -4,12 +4,12 @@
         // router
         AppSetupRouter,
         BackupRouter,
-        ImportRouter,
         LedgerRouter,
         MigrationRouter,
         NetworkRouter,
         ProfileSetupRouter,
         ProtectionRouter,
+        RecoveryRouter,
 
         // views
         BalanceView,
@@ -59,9 +59,9 @@
     <Transition transition={false}>
         <BackupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Import}
+{:else if $onboardingRoute === OnboardingRoute.Recovery}
     <Transition transition={false}>
-        <ImportRouter />
+        <RecoveryRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Balance}
     <Transition>

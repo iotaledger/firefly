@@ -1,5 +1,4 @@
-export enum ImportRoute {
-    Init = 'init',
+export enum RecoveryRoute {
     TextImport = 'textImport',
     FileImport = 'fileImport',
     LedgerImport = 'ledgerImport',

@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { activeProfile, newProfile, profiles, ProfileType } from '@core/profile'
+import { newProfile, profiles, ProfileType } from '@core/profile'
 import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
@@ -12,6 +12,8 @@ export const onboardingRoute = writable<OnboardingRoute>(null)
 export const onboardingRouter = writable<OnboardingRouter>(null)
 
 export class OnboardingRouter extends Router<OnboardingRoute> {
+    hasCompletedRecovery: boolean = false
+
     constructor() {
         super(OnboardingRoute.Welcome, onboardingRoute)
         this.init()
@@ -41,10 +43,21 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 const profileType = get(newProfile)?.type
                 if (profileType) {
                     if (profileType === ProfileType.Software) {
-                        nextRoute = OnboardingRoute.Secure
+                        nextRoute = OnboardingRoute.Password
                     } else if (profileType === ProfileType.Ledger) {
                         nextRoute = OnboardingRoute.Protection
                     }
+                }
+
+                const _profileRecoveryType = get(profileRecoveryType)
+                if (
+                    !this.hasCompletedRecovery &&
+                    (_profileRecoveryType === ProfileRecoveryType.Mnemonic ||
+                        _profileRecoveryType === ProfileRecoveryType.Stronghold)
+                ) {
+                    nextRoute = OnboardingRoute.Recovery
+                } else if (_profileRecoveryType === ProfileRecoveryType.FireflyLedger) {
+                    nextRoute = OnboardingRoute.LedgerSetup
                 }
                 break
             }
@@ -52,14 +65,24 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 nextRoute = OnboardingRoute.Protection
                 break
             case OnboardingRoute.Protection: {
-                const profileType = get(activeProfile)?.type
                 const setupType = get(profileRecoveryType)
-                if (setupType === ProfileRecoveryType.Mnemonic || setupType === ProfileRecoveryType.Stronghold) {
-                    nextRoute = OnboardingRoute.Congratulations
-                } else if (profileType === ProfileType.Ledger || profileType === ProfileType.LedgerSimulator) {
-                    nextRoute = OnboardingRoute.LedgerSetup
-                } else {
+                if (setupType === ProfileRecoveryType.Mnemonic) {
                     nextRoute = OnboardingRoute.Backup
+                } else if (setupType === ProfileRecoveryType.Stronghold) {
+                    nextRoute = OnboardingRoute.Congratulations
+                } else if (setupType === ProfileRecoveryType.Ledger) {
+                    nextRoute = OnboardingRoute.Congratulations
+                }
+                break
+            }
+            case OnboardingRoute.Recovery: {
+                const _profileRecoveryType = get(profileRecoveryType)
+                if (
+                    _profileRecoveryType === ProfileRecoveryType.Mnemonic ||
+                    _profileRecoveryType === ProfileRecoveryType.Stronghold
+                ) {
+                    this.hasCompletedRecovery = true
+                    nextRoute = OnboardingRoute.ProfileSetup
                 }
                 break
             }
@@ -77,28 +100,6 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                     nextRoute = OnboardingRoute.Migration
                 } else {
                     nextRoute = OnboardingRoute.Congratulations
-                }
-                break
-            }
-            case OnboardingRoute.Import: {
-                const _profileRecoveryType = params?.profileRecoveryType
-                profileRecoveryType.set(_profileRecoveryType)
-                nextRoute = OnboardingRoute.Congratulations
-                if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-                    nextRoute = OnboardingRoute.Secure
-                } else if (
-                    [
-                        ProfileRecoveryType.Stronghold,
-                        ProfileRecoveryType.TrinityLedger,
-                        ProfileRecoveryType.FireflyLedger,
-                    ].includes(_profileRecoveryType)
-                ) {
-                    nextRoute = OnboardingRoute.Protection
-                } else if (
-                    _profileRecoveryType === ProfileRecoveryType.Seed ||
-                    _profileRecoveryType === ProfileRecoveryType.SeedVault
-                ) {
-                    nextRoute = OnboardingRoute.Balance
                 }
                 break
             }

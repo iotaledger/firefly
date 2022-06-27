@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { setContext } from 'svelte'
     import { Transition } from 'shared/components'
-    import { BackupPasswordView, FileImportView, ImportView, LedgerView, SuccessView, TextImportView } from './views'
+    import { BackupPasswordView, FileImportView, LedgerView, SuccessView, TextImportView } from './views'
     import { localize } from '@core/i18n'
-    import { FireflyEvent, importRoute, importRouter, ImportRouter, ImportRoute } from '@core/router'
+    import { FireflyEvent, recoveryRoute, recoveryRouter, RecoveryRouter, RecoveryRoute } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
 
-    setContext<ImportRouter>('importRouter', $importRouter)
+    setContext<RecoveryRouter>('importRouter', $recoveryRouter)
 
     let busy = false
     let error = ''
@@ -14,14 +14,14 @@
     async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
         busy = true
         try {
-            await $importRouter.next(event.detail)
+            await $recoveryRouter.next(event.detail)
         } catch (err) {
             if (!err.snapshot) {
                 if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
                     error = localize('views.migrate.incorrectSeedVaultPassword')
                 } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
                     error = localize('views.migrate.noDataSeedVault')
-                } else if ($importRoute === ImportRoute.TextImport) {
+                } else if ($recoveryRoute === RecoveryRoute.TextImport) {
                     showAppNotification({
                         type: 'error',
                         message: localize('views.migrate.problemRestoringWallet'),
@@ -35,31 +35,27 @@
     }
 
     function previous(): void {
-        $importRouter.previous()
+        $recoveryRouter.previous()
     }
 </script>
 
-{#if $importRoute === ImportRoute.Init}
-    <Transition>
-        <ImportView on:next={next} on:previous={previous} />
-    </Transition>
-{:else if $importRoute === ImportRoute.TextImport}
+{#if $recoveryRoute === RecoveryRoute.TextImport}
     <Transition>
         <TextImportView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $importRoute === ImportRoute.FileImport}
+{:else if $recoveryRoute === RecoveryRoute.FileImport}
     <Transition>
         <FileImportView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $importRoute === ImportRoute.LedgerImport}
-    <Transition>
-        <LedgerView on:next={next} on:previous={previous} />
-    </Transition>
-{:else if $importRoute === ImportRoute.BackupPassword}
+{:else if $recoveryRoute === RecoveryRoute.BackupPassword}
     <Transition>
         <BackupPasswordView on:next={next} on:previous={previous} {error} {busy} />
     </Transition>
-{:else if $importRoute === ImportRoute.Success}
+{:else if $recoveryRoute === RecoveryRoute.LedgerImport}
+    <Transition>
+        <LedgerView on:next={next} on:previous={previous} />
+    </Transition>
+{:else if $recoveryRoute === RecoveryRoute.Success}
     <Transition>
         <SuccessView on:next={next} on:previous={previous} />
     </Transition>

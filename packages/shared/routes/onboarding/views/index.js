@@ -1,11 +1,11 @@
 export * from './app-setup'
 export * from './backup'
-export * from './import'
 export * from './ledger'
 export * from './migration'
 export * from './network'
 export * from './protection'
 export * from './profile-setup'
+export * from './recovery'
 
 export { default as BalanceView } from './BalanceView.svelte'
 export { default as ClaimRewardsView } from './ClaimRewardsView.svelte'
