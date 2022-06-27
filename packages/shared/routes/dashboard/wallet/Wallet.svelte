@@ -52,8 +52,6 @@
             // TODO: Remove old api
             // removeEventListeners($activeProfile?.id)
 
-            // initialiseListeners()
-
             // TODO: Replace with new api when developed and move out of this file
             // if ($isSoftwareProfile) {
             //     api.getStrongholdStatus({
