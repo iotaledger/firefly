@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { INode, NetworkType } from '@core/network'
+    import { INode } from '@core/network'
     import { appRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
     import { deleteAccountsAndDatabase, destroyProfileManager, getNodeInfo } from '@core/profile-manager'
-    import { initProfileManagerFromNewProfile, updateNewProfile } from '@contexts/onboarding'
+    import { initProfileManagerFromNewProfile } from '@contexts/onboarding'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
@@ -26,7 +26,6 @@
                 checkNodeInfo: false,
                 validateClientOptions: false,
             })
-            updateNewProfile({ networkType: NetworkType.PrivateNet })
             await initProfileManagerFromNewProfile(node)
             await getNodeInfo(node.url)
             $appRouter.next()
@@ -36,8 +35,7 @@
                 formError = localize('error.node.unabledToConnect')
                 await deleteAccountsAndDatabase()
                 await destroyProfileManager()
-            }
-            if (err?.type !== 'validationError') {
+            } else if (err?.type !== 'validationError') {
                 showAppNotification({
                     type: 'error',
                     message: localize(err?.error ?? 'error.global.generic'),
