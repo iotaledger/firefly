@@ -2,17 +2,18 @@ import { get, writable } from 'svelte/store'
 
 import { profileRecoveryType, ProfileRecoveryType, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
 
-import { ProfileSetupRoute } from '../enums'
+import { ProfileSetupRoute, RecoveryRoute } from '../enums'
 import { onboardingRouter } from '../onboarding-router'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { recoveryRoute } from '@core/router'
 
 export const profileSetupRoute = writable<ProfileSetupRoute>(null)
 export const profileSetupRouter = writable<ProfileSetupRouter>(null)
 
 export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
     constructor() {
-        super(ProfileSetupRoute.Setup, profileSetupRoute)
+        super(ProfileSetupRoute.Setup, profileSetupRoute, onboardingRouter)
     }
 
     next(event?: FireflyEvent): void {
@@ -43,8 +44,13 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                     if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
                         nextRoute = ProfileSetupRoute.EnterName
                         get(onboardingRouter).next()
-                    } else if (_profileRecoveryType === ProfileRecoveryType.Stronghold) {
+                    } else if (
+                        _profileRecoveryType === ProfileRecoveryType.Stronghold ||
+                        _profileRecoveryType === ProfileRecoveryType.File
+                    ) {
                         nextRoute = ProfileSetupRoute.EnterName
+                        recoveryRoute.set(RecoveryRoute.FileImport)
+                        profileRecoveryType.set(ProfileRecoveryType.Stronghold)
                         get(onboardingRouter).next()
                     } else if (_profileRecoveryType === ProfileRecoveryType.Ledger) {
                         nextRoute = ProfileSetupRoute.EnterName

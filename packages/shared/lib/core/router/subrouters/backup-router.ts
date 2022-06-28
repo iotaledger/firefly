@@ -10,7 +10,7 @@ export const backupRouter = writable<BackupRouter>(null)
 
 export class BackupRouter extends Subrouter<BackupRoute> {
     constructor() {
-        super(BackupRoute.Init, backupRoute)
+        super(BackupRoute.Init, backupRoute, onboardingRouter)
     }
 
     next(event: FireflyEvent): void {

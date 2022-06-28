@@ -3,6 +3,7 @@ import { get, writable } from 'svelte/store'
 import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { appRouter } from '../app-router'
+import { onboardingRouter } from '../onboarding-router'
 import { LedgerRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
@@ -12,7 +13,7 @@ export const ledgerRouter = writable<LedgerRouter>(null)
 
 export class LedgerRouter extends Subrouter<LedgerRoute> {
     constructor() {
-        super(LedgerRoute.LegacyIntro, ledgerRoute)
+        super(LedgerRoute.LegacyIntro, ledgerRoute, onboardingRouter)
     }
 
     restartIfNotInLedgerFlow(): void {

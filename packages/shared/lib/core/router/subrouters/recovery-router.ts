@@ -21,7 +21,7 @@ export class RecoveryRouter extends Subrouter<RecoveryRoute> {
     public importFile: Buffer
 
     constructor() {
-        super(getInitialRoute() ?? RecoveryRoute.TextImport, recoveryRoute)
+        super(getInitialRoute() ?? RecoveryRoute.TextImport, recoveryRoute, onboardingRouter)
     }
 
     async next(event: FireflyEvent): Promise<void> {

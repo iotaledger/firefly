@@ -134,4 +134,12 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
 
         this.setNext(nextRoute)
     }
+
+    previous(): void {
+        if (this.history.length > 0) {
+            super.previous()
+        } else {
+            get(appRouter).previous()
+        }
+    }
 }

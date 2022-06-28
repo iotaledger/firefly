@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import {
-        // router
+        // routers
         AppSetupRouter,
         BackupRouter,
         LedgerRouter,

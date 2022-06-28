@@ -8,7 +8,7 @@ export const loginRoute = writable<LoginRoute>(null)
 
 export class LoginRouter extends Subrouter<LoginRoute> {
     constructor() {
-        super(LoginRoute.SelectProfile, loginRoute)
+        super(LoginRoute.SelectProfile, loginRoute, appRouter)
     }
 
     next(event?: FireflyEvent): void {

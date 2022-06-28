@@ -6,13 +6,14 @@ import { appRouter } from '../app-router'
 import { MigrationRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { onboardingRouter } from '@core/router'
 
 export const migrationRoute = writable<MigrationRoute>(null)
 export const migrationRouter = writable<MigrationRouter>(null)
 
 export class MigrationRouter extends Subrouter<MigrationRoute> {
     constructor() {
-        super(MigrationRoute.Init, migrationRoute)
+        super(MigrationRoute.Init, migrationRoute, onboardingRouter)
     }
 
     next(event: FireflyEvent): void {

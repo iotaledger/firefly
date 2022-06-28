@@ -12,7 +12,7 @@ export const networkRouter = writable<NetworkRouter>(null)
 
 export class NetworkRouter extends Subrouter<NetworkRoute> {
     constructor() {
-        super(NetworkRoute.Protocol, networkRoute)
+        super(NetworkRoute.Protocol, networkRoute, onboardingRouter)
     }
 
     next(event?: FireflyEvent): void {
