@@ -15,7 +15,7 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { quintInOut, quintOut } from 'svelte/easing'
+    import { quintIn, quintInOut, quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -131,6 +131,13 @@
     }
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
+        // Calc slide gesture velocity between events
+        const distance = event.detail._endY - event.detail._startY
+        const time = (event.detail._endTime - event.detail._initTime) / 1000
+        const velocity = Math.round(distance / time) || 0
+        // Limit velocity to adapt context
+        const slideVelocity = velocity < -8000 ? -8000 : velocity
+
         if ($coords.y < 0) {
             return
         }
@@ -170,7 +177,7 @@
                 x: fromLeft ? -viewportLength : 0,
                 y: fromLeft ? 0 : viewportLength,
             },
-            { duration: 750, easing: quintInOut }
+            { duration: fromLeft ? 750 : 450, easing: fromLeft ? quintIn : quintOut }
         )
         isOpen = false
         if (!preventClose) {
