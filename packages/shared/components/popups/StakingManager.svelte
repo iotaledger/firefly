@@ -349,12 +349,7 @@
     {/if}
 </div>
 
-<TextHint
-    classes="bg-blue-50 dark:bg-gray-800"
-    icon="info"
-    iconClasses="fill-current text-blue-500 dark:text-blue-500"
-    hint={localize('popups.stakingManager.singleAccountHint')}
-/>
+<TextHint info text={localize('popups.stakingManager.singleAccountHint')} />
 
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">

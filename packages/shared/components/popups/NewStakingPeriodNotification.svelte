@@ -38,12 +38,7 @@
 <Text type="p" secondary classes="mb-4"
     >{localize('popups.newStakingPeriodNotification.body', getLocaleArguments())}</Text
 >
-<TextHint
-    classes="mb-4 bg-blue-50 dark:bg-gray-800"
-    icon="info"
-    iconClasses="fill-current text-blue-500"
-    hint={localize('popups.newStakingPeriodNotification.info')}
-/>
+<TextHint info text={localize('popups.newStakingPeriodNotification.info')} classes="mb-4" />
 <div class="flex flex-row space-x-2">
     <Button classes="w-full" onClick={handleOk}>
         {localize('actions.okIUnderstand')}

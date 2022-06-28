@@ -30,14 +30,7 @@
         {title}
     </Text>
     <Text fontSize="14" classes="text-left">{description}</Text>
-    <TextHint
-        icon="info"
-        {hint}
-        classes="bg-blue-50 dark:bg-gray-850"
-        iconClasses="text-gray-500 h-18px"
-        hintColor="gray-700"
-        iconSize="18"
-    />
+    <TextHint info text={hint} />
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={cancelClick}>{localize('actions.cancel')}</Button>
         <Button classes="w-full" {warning} onClick={confirmClick}
