@@ -59,6 +59,11 @@
         let init: number
 
         function handleTouchstart(event: TouchEvent): void {
+            // Define arrays for calc velocity later
+            const startY = event.touches[0].pageY
+            const positionQueue = [0, 0, startY]
+            const timeQueue = [0, 0, window.performance.now()]
+
             if (preventSlide) {
                 event.preventDefault()
                 event.stopImmediatePropagation()
