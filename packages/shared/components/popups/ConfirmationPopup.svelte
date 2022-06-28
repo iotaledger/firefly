@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { Button, Text, Icon } from 'shared/components'
+    import { Button, Text, TextHint } from 'shared/components'
     import { FontWeightText, TextType } from 'shared/components/Text.svelte'
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
 
     export let title: string
     export let description: string
-    export let node: string
+    export let hint: string
     export let warning: boolean
     export let confirmText: string
     export let onConfirm: () => void = undefined
@@ -30,12 +30,14 @@
         {title}
     </Text>
     <Text fontSize="14" classes="text-left">{description}</Text>
-    {#if node}
-        <div class="flex flex-row items-center bg-blue-50 p-4">
-            <Icon height="18" width="18" icon="info" classes="text-gray-500 dark:text-white mr-4" />
-            <Text classes="text-left">{node}</Text>
-        </div>
-    {/if}
+    <TextHint
+        icon="info"
+        {hint}
+        classes="bg-blue-50 dark:bg-gray-850"
+        iconClasses="text-gray-500 h-18px"
+        hintColor="gray-700"
+        iconSize="18"
+    />
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={cancelClick}>{localize('actions.cancel')}</Button>
         <Button classes="w-full" {warning} onClick={confirmClick}
