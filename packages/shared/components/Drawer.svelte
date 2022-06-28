@@ -57,12 +57,13 @@
         let x: number
         let y: number
         let init: number
+        let startY = 0
+        // Define arrays for calc velocity later
+        const positionQueue = [0, 0, startY]
+        const timeQueue = [0, 0, window.performance.now()]
 
         function handleTouchstart(event: TouchEvent): void {
-            // Define arrays for calc velocity later
-            const startY = event.touches[0].pageY
-            const positionQueue = [0, 0, startY]
-            const timeQueue = [0, 0, window.performance.now()]
+            startY = event.touches[0].pageY
 
             if (preventSlide) {
                 event.preventDefault()
@@ -81,6 +82,11 @@
         }
 
         function handleTouchmove(event: TouchEvent) {
+            positionQueue.push(event.touches[0].pageY)
+            timeQueue.push(window.performance.now())
+            positionQueue.shift()
+            timeQueue.shift()
+
             if (event.targetTouches.length === 1) {
                 const sx = event.touches[0].pageX - x
                 const sy = event.touches[0].pageY - y
@@ -96,7 +102,15 @@
         }
 
         function handleTouchend() {
-            node.dispatchEvent(new CustomEvent('slideEnd'))
+            const startY = positionQueue[0]
+            const endY = positionQueue[positionQueue.length - 1]
+            const initTime = timeQueue[0]
+            const endTime = timeQueue[timeQueue.length - 1]
+            node.dispatchEvent(
+                new CustomEvent('slideEnd', {
+                    detail: { startY, endY, initTime, endTime },
+                })
+            )
 
             const elapsed = window.performance.now()
             if (init >= elapsed - 300) {
