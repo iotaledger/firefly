@@ -1,4 +1,3 @@
-import * as account from './accountIdentifier'
 import * as address from './address'
 import * as chart from './chart'
 import * as currency from './currency'
@@ -11,4 +10,4 @@ import * as notification from './notification'
 import * as utils from './utils'
 import * as wallet from './wallet'
 
-export { account, address, chart, currency, error, events, ledger, message, migration, notification, utils, wallet }
+export { address, chart, currency, error, events, ledger, message, migration, notification, utils, wallet }
