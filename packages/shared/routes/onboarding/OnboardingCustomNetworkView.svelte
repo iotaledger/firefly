@@ -21,6 +21,7 @@
         try {
             await nodeConfigurationForm.validate({
                 validateUrl: true,
+                uniqueCheck: false,
                 checkSameNetwork: false,
                 checkNodeInfo: false,
                 validateClientOptions: false,

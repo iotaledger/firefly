@@ -9,6 +9,6 @@ import { updateNewProfile } from '../stores'
  * @returns {void}
  */
 export function setNewProfileType(type: ProfileType): void {
-    type = ledgerSimulator && type === ProfileType.Ledger ? ProfileType.Ledger : type
+    type = ledgerSimulator ? ProfileType.Ledger : type
     updateNewProfile({ type })
 }
