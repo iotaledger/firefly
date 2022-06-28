@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { Animation, Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import { Locale } from '@core/i18n'
-    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { appRouter } from '@core/router'
+    import { Animation, Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
+    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
 
     export let locale: Locale
 
@@ -37,6 +38,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-white dark:bg-gray-900">
-        <Animation animation="secure-desktop" />
+        <Animation animation="secure-desktop" classes={$mobile ? 'transform scale-120' : ''} />
     </div>
 </OnboardingLayout>

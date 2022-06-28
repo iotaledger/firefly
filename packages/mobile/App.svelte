@@ -53,7 +53,7 @@
         nativeSplash.hide()
     }
 
-    void setupI18n()
+    void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
         initRouters()
