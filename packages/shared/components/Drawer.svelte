@@ -32,9 +32,9 @@
 
     const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
 
-    const content: HTMLElement = undefined
+    let content: HTMLElement = undefined
     let isOpen = false
-    const preventSlide = true
+    let preventSlide = true
 
     const coords = tweened(
         {
@@ -167,28 +167,33 @@
 </script>
 
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
-    <slide-zone
+    <dim-zone
         class="fixed h-screen w-screen"
         use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={close}
     >
-        <div id="dim" class="h-screen" style="--opacity: {fromLeft ? 0.1 : dimOpacity}" />
-    </slide-zone>
-    <main
-        class="fixed bottom-0 overflow-y-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
+        <div id="dim" class="h-screen" style="--opacity: {dimOpacity}" />
+    </dim-zone>
+    <content
+        bind:this={content}
+        use:slidable={!fromLeft}
+        on:slideMove={handleSlideMove}
+        on:slideEnd={handleSlideEnd}
+        on:tap={() => (preventSlide = false)}
+        class="fixed bottom-0 overflow-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
         class:fullScreen
         style="--y: {fromLeft ? 0 : $coords.y}px; 
 			--x: {fromLeft ? $coords.x : 0}px; 
-			--opacity: {fromLeft ? 1 : contentOpacity}; 
+			--opacity: {contentOpacity}; 
 			--height: {fromLeft && '100vh'};
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
-			--display-indicator: {fromLeft || preventClose ? 'none' : 'block'}"
+			--display-indicator: {fromLeft ? 'none' : 'block'}"
     >
         <slot />
-    </main>
+    </content>
 </drawer>
 
 <style type="text/scss">
