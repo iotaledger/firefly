@@ -2,7 +2,6 @@ import { get } from 'svelte/store'
 
 import { isDeepLinkRequestActive } from '@common/deep-links'
 import { closePopup } from '@lib/popup'
-import { selectedMessage } from '@lib/wallet'
 
 import { appRouter, AppRouter } from './app-router'
 import { accountRouter, AccountRouter } from './account-router'
@@ -33,7 +32,6 @@ export const resetAccountRouter = (resetPanels: boolean = true): void => {
         get(accountRouter).reset()
         clearSendParams()
     }
-    selectedMessage.set(null)
 }
 
 export const resetWalletRoute = (): void => {

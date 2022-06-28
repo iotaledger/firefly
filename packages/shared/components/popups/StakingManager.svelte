@@ -3,7 +3,6 @@
     import { Button, Icon, Spinner, Text, TextHint, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
     import {
         canParticipate,
         getAccountParticipationAbility,
@@ -12,14 +11,11 @@
         isAccountStaked,
         getIotasUntilMinimumAirdropReward,
     } from 'shared/lib/participation'
-    import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
-    import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         isPerformingParticipation,
         isPartiallyStaked,
         participationAction,
         pendingParticipations,
-        stakedAccounts,
         assemblyStakingEventState,
         shimmerStakingEventState,
     } from 'shared/lib/participation/stores'
@@ -33,7 +29,6 @@
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { transferState } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
     import { activeProfile, isSoftwareProfile } from '@core/profile'
     import { selectedAccount, IAccountState } from '@core/account'
@@ -47,42 +42,38 @@
     $: participationAbility = getAccountParticipationAbility($selectedAccount)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
 
-    $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
+    // $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
 
     $: isCurrentAccountStaked = isAccountStaked($selectedAccount?.id)
 
     function resetView(): void {
-        if (!isSoftwareProfile) {
-            transferState.set(null)
-        }
-
         isPerformingParticipation.set(false)
         participationAction.set(undefined)
     }
 
-    function displayErrorNotification(error): void {
-        showAppNotification({
-            type: 'error',
-            message: localize(error.error),
-        })
-    }
+    // function displayErrorNotification(error): void {
+    //     showAppNotification({
+    //         type: 'error',
+    //         message: localize(error.error),
+    //     })
+    // }
 
     function getFormattedFiatAmount(amount: number): string {
         const currency = $activeProfile?.settings?.currency ?? AvailableExchangeRates.USD
         return formatCurrency(convertToFiat(amount, $currencies[CurrencyTypes.USD], $exchangeRates[currency]), currency)
     }
 
-    async function handleParticipationAction(): Promise<void> {
+    function handleParticipationAction(): void {
         if (!canStake || !$participationAction) {
             return
         }
 
         isPerformingParticipation.set(true)
 
-        const _sync = (messageIds: string[]) => {
-            messageIds.forEach((id) => pendingParticipationIds.push(id))
-            previousPendingParticipationsLength = messageIds.length
-        }
+        // const _sync = (messageIds: string[]) => {
+        //     messageIds.forEach((id) => pendingParticipationIds.push(id))
+        //     previousPendingParticipationsLength = messageIds.length
+        // }
 
         // const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
         // if (!hasParticipationPlugin) {
@@ -100,25 +91,25 @@
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                await participate($selectedAccount?.id, participations)
-                    .then((messageIds) => _sync(messageIds))
-                    .catch((err) => {
-                        console.error(err)
+                // await participate($selectedAccount?.id, participations)
+                //     .then((messageIds) => _sync(messageIds))
+                //     .catch((err) => {
+                //         console.error(err)
 
-                        displayErrorNotification(err)
-                        resetView()
-                    })
+                //         displayErrorNotification(err)
+                //         resetView()
+                //     })
                 break
             }
             case ParticipationAction.Unstake:
-                await stopParticipating($selectedAccount?.id, STAKING_EVENT_IDS)
-                    .then((messageIds) => _sync(messageIds))
-                    .catch((err) => {
-                        console.error(err)
+                // await stopParticipating($selectedAccount?.id, STAKING_EVENT_IDS)
+                //     .then((messageIds) => _sync(messageIds))
+                //     .catch((err) => {
+                //         console.error(err)
 
-                        displayErrorNotification(err)
-                        resetView()
-                    })
+                //         displayErrorNotification(err)
+                //         resetView()
+                //     })
                 break
             default:
                 break
@@ -163,7 +154,7 @@
         }
     }
 
-    onMount(async () => {
+    onMount(() => {
         // if (!doesNodeHavePlugin(NodePlugin.Participation)) {
         //     showAppNotification({
         //         type: 'warning',
@@ -185,7 +176,7 @@
          * so we will perform the action (of either staking or unstaking).
          */
         if (shouldParticipateOnMount) {
-            await handleParticipationAction()
+            handleParticipationAction()
         }
 
         const unsubscribe = pendingParticipations.subscribe((participations) => {

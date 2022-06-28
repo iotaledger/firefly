@@ -1,12 +1,9 @@
 <script lang="typescript">
     import { createEventDispatcher, onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { initialiseMigrationListeners, LEDGER_MIGRATION_VIDEO } from '@lib/migration'
-    import { showAppNotification } from '@lib/notifications'
+    import { LEDGER_MIGRATION_VIDEO } from '@lib/migration'
     import { Platform } from '@lib/platform'
-    import { api, isBackgroundSyncing } from '@lib/wallet'
 
     const dispatch = createEventDispatcher()
 
@@ -24,20 +21,20 @@
 
     onMount(() => {
         // This is the first screen that mounts when a user wants to migrate additional account index
-        initialiseMigrationListeners()
-        if (get(isBackgroundSyncing)) {
-            api.stopBackgroundSync({
-                onSuccess() {
-                    isBackgroundSyncing.set(false)
-                },
-                onError() {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize('error.account.syncing'),
-                    })
-                },
-            })
-        }
+        // initialiseMigrationListeners()
+        // if (get(isBackgroundSyncing)) {
+        //     api.stopBackgroundSync({
+        //         onSuccess() {
+        //             isBackgroundSyncing.set(false)
+        //         },
+        //         onError() {
+        //             showAppNotification({
+        //                 type: 'error',
+        //                 message: localize('error.account.syncing'),
+        //             })
+        //         },
+        //     })
+        // }
     })
 </script>
 

@@ -1,7 +1,5 @@
 import { IAccountState } from '@core/account'
 import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
-import { getParticipationOverview } from './api'
-import { ASSEMBLY_EVENT_ID, PARTICIPATION_POLL_DURATION } from './constants'
 import { canAccountReachMinimumAirdrop } from './staking'
 import {
     isPerformingParticipation,
@@ -21,15 +19,14 @@ let participationPollInterval
  *
  * @returns {Promise<void>}
  */
-export async function pollParticipationOverview(): Promise<void> {
+export function pollParticipationOverview(): void {
     clearPollParticipationOverviewInterval()
     try {
-        await getParticipationOverview(ASSEMBLY_EVENT_ID)
-        /* eslint-disable @typescript-eslint/no-misused-promises */
-        participationPollInterval = setInterval(
-            async () => getParticipationOverview(ASSEMBLY_EVENT_ID),
-            PARTICIPATION_POLL_DURATION
-        )
+        // await getParticipationOverview(ASSEMBLY_EVENT_ID)
+        // participationPollInterval = setInterval(
+        //     async () => getParticipationOverview(ASSEMBLY_EVENT_ID),
+        //     PARTICIPATION_POLL_DURATION
+        // )
     } catch (error) {
         if (error && error?.error.includes('pluginNotFound')) {
             clearPollParticipationOverviewInterval()

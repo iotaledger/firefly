@@ -75,38 +75,12 @@ There are a few steps besides just creating the component file before it can wor
 Firefly uses [wallet.rs](https://github.com/iotaledger/wallet.rs) in the backend to handle functionality around value-based transfers.
 See its [REAMDE](https://github.com/iotaledger/wallet.rs#dependencies) for the required dependencies.
 
-Sometimes you'll need the latest changes or a specific commit from [`wallet.rs`](https://github.com/iotaledger/wallet.rs). For that you need to update the rev for iota-wallet in `packages/backend/Cargo.toml`. After that be sure to run `cargo check` in __both__ directories __before__ running `yarn` again:
-
-```bash
-# in packages/backend
-cargo update -p iota-wallet
-
-# in packages/backend/bindings/node/native
-cargo update -p iota-wallet
-
-# in packages/backend/bindings/node
-yarn
-```
-
-If for some reason things still are not working for you and you haven't already, try removing `cargo` cache:
-
-```bash
-# install cargo-cache package
-cargo install cargo-cache
-
-# remove the build cache from cargo
-cargo cache -a
-```
-
 #### Desktop
 
 There may be times when Firefly just won't seem to compile correctly or you're getting an uncommon error while using it. If you get a blank electron application, reloading the electron application (MacOS: `Cmd+R`, Linux/Windows: `Ctrl+R`) might solve your issue. Another approach is updating the yarn dependencies:
 
 ```bash
 # in root dir
-yarn
-
-# in packages/backend/bindings/node
 yarn
 ```
 
@@ -121,10 +95,8 @@ To debug what's going on in the backend you can add
 ```JS
 Wallet.initLogger({
     color_enabled: true,
-    outputs: [{
-        name: 'wallet.log',
-        level_filter: 'debug'
-    }]
+    name: 'wallet.log',
+    level_filter: 'debug'
 })
 ```
 

@@ -30,11 +30,6 @@ export async function deleteProfile(): Promise<void> {
         }
 
         /**
-         * CAUTION: We need to stop the background sync before we delete the profile.
-         */
-        // await asyncStopBackgroundSync()
-
-        /**
          * CAUTION: The storage for wallet.rs must also be deleted in order
          * to free the locks on the files within the profile folder (removed
          * later).
@@ -49,8 +44,7 @@ export async function deleteProfile(): Promise<void> {
 
         /**
          * CAUTION: Logout must occur before the profile is removed
-         * from the Svelte store list of profiles, otherwise the
-         * actor is not able to be destroyed.
+         * from the Svelte store list of profiles.
          */
         await logout(true, false)
 

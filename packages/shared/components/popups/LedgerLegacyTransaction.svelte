@@ -1,7 +1,6 @@
 <script lang="typescript" xmlns="http://www.w3.org/1999/html">
     import { Animation, Text } from 'shared/components'
     import { formatAddressForLedger } from 'shared/lib/ledger'
-    import { asyncGetAddressChecksum } from 'shared/lib/migration'
     import { Input, Transfer } from 'shared/lib/typings/migration'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { Locale } from '@core/i18n'
@@ -12,7 +11,7 @@
     export let inputs: Input[]
 
     // Hardcoded strings because Ledger does not translate them
-    const checksumString = (checksum): string => `Chk: ${checksum}`
+    // const checksumString = (checksum): string => `Chk: ${checksum}`
     const inputString = (index): string => `Input [${index}]`
     const outputString = 'Output'
 </script>
@@ -35,7 +34,7 @@
         <Text type="pre">{formatUnitBestMatch(transfer.value)}</Text>
         <Text type="pre">{formatAddressForLedger(transfer.address, true)}</Text>
         <Text type="pre">
-            {#await asyncGetAddressChecksum(transfer.address)}...{:then checksum}{checksumString(checksum)}{/await}
+            <!-- {#await asyncGetAddressChecksum(transfer.address)}...{:then checksum}{checksumString(checksum)}{/await} -->
         </Text>
     </div>
     {#each inputs as { address, balance, index }}
@@ -44,7 +43,7 @@
             <Text type="pre">{formatUnitBestMatch(balance)}</Text>
             <Text type="pre">{formatAddressForLedger(address)}</Text>
             <Text type="pre">
-                {#await asyncGetAddressChecksum(address, true)}...{:then checksum}{checksumString(checksum)}{/await}
+                <!-- {#await asyncGetAddressChecksum(address, true)}...{:then checksum}{checksumString(checksum)}{/await} -->
             </Text>
         </div>
     {/each}

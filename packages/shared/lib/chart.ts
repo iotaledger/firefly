@@ -3,7 +3,6 @@ import { formatDate, localize } from '@core/i18n'
 import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { formatUnitPrecision, Unit } from 'shared/lib/units'
-import { isSelfTransaction } from 'shared/lib/wallet'
 import { derived, get, writable } from 'svelte/store'
 import { formatCurrencyValue } from './currency'
 import { priceData } from './market'
@@ -124,7 +123,8 @@ export const getAccountActivityData = (
     const messages: Message[] =
         account.messages
             .slice()
-            ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
+            // ?.filter((message) => message.payload && !isSelfTransaction(message.payload, account)) // Remove self transactions and messages with no payload
+            ?.filter((message) => message.payload)
             ?.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()) ?? []
     for (let i = 0; i < BAR_CHART_ACTIVITY_MONTHS; i++) {
         const start: number = new Date(now.getFullYear(), now.getMonth() - i, 1).getTime()
