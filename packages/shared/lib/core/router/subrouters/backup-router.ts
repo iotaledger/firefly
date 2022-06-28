@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { appRouter } from '../app-router'
+import { onboardingRouter } from '../onboarding-router'
 import { BackupRoute } from '../enums'
 import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
@@ -31,7 +31,7 @@ export class BackupRouter extends Subrouter<BackupRoute> {
                 break
 
             case BackupRoute.Backup: {
-                get(appRouter).next(event)
+                get(onboardingRouter).next(event)
                 break
             }
         }

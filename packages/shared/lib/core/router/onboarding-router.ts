@@ -4,8 +4,9 @@ import { newProfile, profiles, ProfileType } from '@core/profile'
 import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
-import { OnboardingRoute } from './enums'
+import { BackupRoute, OnboardingRoute } from './enums'
 import { Router } from './router'
+import { backupRoute } from './subrouters'
 import { FireflyEvent } from './types'
 
 export const onboardingRoute = writable<OnboardingRoute>(null)
@@ -65,12 +66,18 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 nextRoute = OnboardingRoute.Protection
                 break
             case OnboardingRoute.Protection: {
-                const setupType = get(profileRecoveryType)
-                if (setupType === ProfileRecoveryType.Mnemonic) {
+                const _profileType = get(newProfile)?.type
+                if (_profileType === ProfileType.Software) {
                     nextRoute = OnboardingRoute.Backup
-                } else if (setupType === ProfileRecoveryType.Stronghold) {
-                    nextRoute = OnboardingRoute.Congratulations
-                } else if (setupType === ProfileRecoveryType.Ledger) {
+                } else if (_profileType === ProfileType.Ledger) {
+                    nextRoute = OnboardingRoute.LedgerSetup
+                }
+
+                const _profileRecoveryType = get(profileRecoveryType)
+                if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
+                    nextRoute = OnboardingRoute.Backup
+                    backupRoute.set(BackupRoute.Backup)
+                } else if (_profileRecoveryType === ProfileRecoveryType.Stronghold) {
                     nextRoute = OnboardingRoute.Congratulations
                 }
                 break

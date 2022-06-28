@@ -27,9 +27,9 @@ export class AppRouter extends Router<AppRoute> {
 
     public next(event?: FireflyEvent): void {
         const params = event || {}
-        const currentRoute = get(this.routeStore)
         let nextRoute: AppRoute
 
+        const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case AppRoute.Login: {
                 if (params.shouldAddProfile) {

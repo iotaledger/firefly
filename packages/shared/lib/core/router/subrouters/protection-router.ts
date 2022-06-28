@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { appRouter } from '../app-router'
+import { onboardingRouter } from '../onboarding-router'
 import { ProtectionRoute } from '../enums'
 import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
@@ -28,7 +28,7 @@ export class ProtectionRouter extends Subrouter<ProtectionRoute> {
                 break
 
             case ProtectionRoute.SetupPinProtection:
-                get(appRouter).next(event)
+                get(onboardingRouter).next(event)
                 break
         }
 
