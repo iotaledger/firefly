@@ -5,9 +5,13 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkType } from '@core/network'
-    import { createNewProfile, newProfile, updateNewProfile } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { cleanupOnboarding } from '@contexts/onboarding'
+    import {
+        cleanupOnboarding,
+        newProfile,
+        updateNewProfile,
+        initProfileManagerFromNewProfile,
+    } from '@contexts/onboarding'
 
     const networkProtocol = $newProfile.networkProtocol
 
@@ -21,7 +25,8 @@
         if (networkType === NetworkType.PrivateNet) {
             updateNewProfile({ networkType })
         } else {
-            await createNewProfile($newProfile?.isDeveloperProfile, $newProfile?.networkProtocol, networkType)
+            updateNewProfile({ networkProtocol, networkType: networkType })
+            await initProfileManagerFromNewProfile()
         }
         $appRouter.next({ networkType })
     }

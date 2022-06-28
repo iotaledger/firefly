@@ -4,7 +4,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
-    import { newProfile } from '@core/profile'
+    import { newProfile } from '@contexts/onboarding'
     import { appRouter } from '@core/router'
     import { Platform } from '@lib/platform'
     import { SetupType } from '@lib/typings/setup'

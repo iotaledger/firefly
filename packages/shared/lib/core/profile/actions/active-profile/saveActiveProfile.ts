@@ -16,6 +16,7 @@ export function saveActiveProfile(): void {
             lastStrongholdBackupTime: _activeProfile?.lastStrongholdBackupTime,
             settings: _activeProfile?.settings,
             isDeveloperProfile: _activeProfile?.isDeveloperProfile,
+            clientOptions: _activeProfile?.clientOptions,
             ...(_activeProfile?.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile?.hasVisitedDashboard }),
             ...(_activeProfile?.lastUsedAccountId && { lastUsedAccountId: _activeProfile?.lastUsedAccountId }),
             ...(_activeProfile?.accountMetadata && { accountMetadata: _activeProfile?.accountMetadata }),

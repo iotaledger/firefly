@@ -1,6 +1,12 @@
-import { newProfile, ProfileImportType } from '@core/profile'
-import { mnemonic, importType as profileImportType, isGettingMigrationData, importFilePath } from '@contexts/onboarding'
+import {
+    importFilePath,
+    importType as profileImportType,
+    isGettingMigrationData,
+    mnemonic,
+    newProfile,
+} from '@contexts/onboarding'
 import { NetworkProtocol } from '@core/network'
+import { ProfileImportType } from '@core/profile'
 import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'

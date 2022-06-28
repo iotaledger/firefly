@@ -1,5 +1,6 @@
 import { get } from 'svelte/store'
-import { newProfile, ProfileImportType } from '@core/profile'
+import { ProfileImportType } from '@core/profile'
+import { newProfile } from '@contexts/onboarding'
 import { importFilePath, importType, isGettingMigrationData } from '../stores'
 import { Platform } from '@lib/platform'
 import { restoreBackup } from '@core/profile-manager'

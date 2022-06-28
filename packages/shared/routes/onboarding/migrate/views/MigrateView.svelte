@@ -4,7 +4,8 @@
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { addNewProfile, newProfile, login, loadPersistedProfileIntoActiveProfile } from '@core/profile'
+    import { addNewProfile, login, loadPersistedProfileIntoActiveProfile } from '@core/profile'
+    import { newProfile } from '@contexts/onboarding'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { getLegacyErrorMessage, promptUserToConnectLedger } from '@lib/ledger'
     import {
