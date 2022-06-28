@@ -6,7 +6,6 @@
         "types": ["jest"]
     },
     "include": [
-        "packages/backend/bindings/node",
         "packages/desktop",
         "packages/mobile",
         "packages/shared/components",
