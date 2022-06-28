@@ -9,7 +9,7 @@ export async function initProfileManagerFromNewProfile(node?: INode): Promise<vo
     await setNewProfileClientOptions(profile.networkProtocol, profile.networkType, node)
 
     const path = await getStorageDirectoryOfProfile(profile.id)
-    initialiseProfileManager(path, profile.clientOptions, {
+    initialiseProfileManager(path, get(newProfile).clientOptions, {
         Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
     })
 }
