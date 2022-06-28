@@ -10,7 +10,7 @@
 {#if !open}
     <button
         bind:this={buttonElement}
-        class="py-2 px-3 w-max bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 dark:bg-gray-700 hover:dark:bg-gray-600 focus:dark:bg-gray-600 text-gray-600 dark:text-gray-500 rounded-md"
+        class="py-2 px-3 w-max bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 text-gray-600 dark:text-gray-500 rounded-md"
         on:click={onClick}
     >
         <div class="flex flex-row items-center space-x-2">
