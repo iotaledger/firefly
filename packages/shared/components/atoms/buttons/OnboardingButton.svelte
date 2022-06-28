@@ -31,8 +31,22 @@
     classes="w-full {classes}"
     {onClick}
 >
-    <Text type={TextType.p} fontSize="14" fontWeight={FontWeightText.semibold} lineHeight="5">{primaryText}</Text>
+    <Text
+        type={TextType.p}
+        color="gray-800"
+        darkColor="white"
+        fontSize="14"
+        fontWeight={FontWeightText.semibold}
+        lineHeight="5">{primaryText}</Text
+    >
     {#if secondaryText}
-        <Text type={TextType.p} fontSize="12" fontWeight={FontWeightText.normal} lineHeight="3.5">{secondaryText}</Text>
+        <Text
+            type={TextType.p}
+            color="gray-600"
+            darkColor="gray-400"
+            fontSize="12"
+            fontWeight={FontWeightText.normal}
+            lineHeight="3.5">{secondaryText}</Text
+        >
     {/if}
 </Button>

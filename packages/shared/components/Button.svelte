@@ -325,7 +325,7 @@
             @apply border-solid;
             @apply border-gray-300;
             @apply bg-white;
-            @apply p-5;
+            @apply p-5; // todo: (JASON) Change padding here
             @apply text-left;
             &.secondary.showHoverText {
                 @apply border-transparent;
@@ -402,7 +402,7 @@
                 }
                 :global(svg),
                 :global(svg.right) {
-                    @apply text-gray-500;
+                    @apply text-gray-500; // todo: (JASON) change darkmode color here
                 }
                 &:hover,
                 &:focus {
