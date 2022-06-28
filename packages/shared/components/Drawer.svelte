@@ -125,7 +125,8 @@
     }
 
     async function handleSlideEnd() {
-        const thresholdUnreached = fromLeft ? -viewportLength / 2 > $coords.x : viewportLength / 1.2 > $coords.y
+        const contentHeight = parseInt(getComputedStyle(content).height)
+        const thresholdUnreached = fromLeft ? viewportLength / 2 > $coords.x : contentHeight / 2 > $coords.y
         if (thresholdUnreached) {
             await open()
         } else {
