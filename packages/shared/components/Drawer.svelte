@@ -59,7 +59,11 @@
         let init: number
 
         function handleTouchstart(event: TouchEvent): void {
-            event.preventDefault()
+            if (preventSlide) {
+                event.preventDefault()
+                event.stopImmediatePropagation()
+                event.stopPropagation()
+            }
 
             if (event.targetTouches.length === 1) {
                 init = window.performance.now()
