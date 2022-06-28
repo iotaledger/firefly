@@ -3,7 +3,7 @@
     import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
-    import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from '@lib/migration'
+    import { ADDRESS_SECURITY_LEVEL, hardwareIndexes } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { popupState } from '@lib/popup'
     import { LedgerAppName } from '@lib/typings/ledger'
@@ -55,7 +55,7 @@
             infoTimeout = setTimeout(() => (showInfo = true), 180000)
             Platform.ledger
                 .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
-                .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
+                // .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
                 .then((data) => {
                     busy = false
 

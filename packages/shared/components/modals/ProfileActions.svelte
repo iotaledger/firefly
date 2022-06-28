@@ -3,10 +3,10 @@
     import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LocaleArguments } from '@core/i18n/types'
-    import { getLedgerDeviceStatus, getLedgerOpenedApp, ledgerDeviceState } from 'shared/lib/ledger'
+    import { ledgerDeviceState } from 'shared/lib/ledger'
     import { popupState, openPopup } from 'shared/lib/popup'
     import { openSettings } from '@core/router'
-    import { LedgerApp, LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isLedgerProfile, logout, lockStronghold } from '@core/profile'
@@ -61,8 +61,8 @@
 
     const syncLedgerDeviceStatus = (): void => {
         isCheckingLedger = true
-        const _onComplete = () => setTimeout(() => (isCheckingLedger = false), 500)
-        getLedgerDeviceStatus(false, _onComplete, _onComplete, _onComplete)
+        // const _onComplete = () => setTimeout(() => (isCheckingLedger = false), 500)
+        // getLedgerDeviceStatus(false, _onComplete, _onComplete, _onComplete)
     }
 
     const updateLedgerConnectionText = (): void => {
@@ -75,14 +75,14 @@
          * requires an app name to be prepended or else the text won't make sense.
          */
         if ($ledgerDeviceState === LedgerDeviceState.OtherConnected) {
-            getLedgerOpenedApp()
-                .then((la: LedgerApp) => {
-                    ledgerConnectionText = `${la.name} ${text}`
-                })
-                .catch((err) => {
-                    ledgerDeviceState.set(LedgerDeviceState.NotDetected)
-                    console.error(err)
-                })
+            // getLedgerOpenedApp()
+            //     .then((la: LedgerApp) => {
+            //         ledgerConnectionText = `${la.name} ${text}`
+            //     })
+            //     .catch((err) => {
+            //         ledgerDeviceState.set(LedgerDeviceState.NotDetected)
+            //         console.error(err)
+            //     })
         } else {
             ledgerConnectionText = text
         }

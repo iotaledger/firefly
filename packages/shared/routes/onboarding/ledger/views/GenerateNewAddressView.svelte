@@ -2,21 +2,13 @@
     import { createEventDispatcher } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions } from '@core/network'
-    import { activeProfile } from '@core/profile'
-    import {
-        displayNotificationForLedgerProfile,
-        formatAddressForLedger,
-        ledgerSimulator,
-        promptUserToConnectLedger,
-    } from '@lib/ledger'
-    import { api } from '@lib/wallet'
+    import { formatAddressForLedger, promptUserToConnectLedger } from '@lib/ledger'
 
     const dispatch = createEventDispatcher()
 
     let newAddress = ''
     let busy = false
-    let confirmed = false
+    const confirmed = false
 
     $: animation = !newAddress
         ? 'ledger-generate-address-desktop'
@@ -28,51 +20,51 @@
         newAddress = null
         busy = true
 
-        function _createAccount(idx): void {
-            api.createAccount(
-                {
-                    clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
-                    alias: `${localize('general.account')} ${idx}`,
-                    signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-                    allowCreateMultipleEmptyAccounts: true,
-                },
-                {
-                    onSuccess(createAccountResponse) {
-                        newAddress = createAccountResponse.payload.addresses[0].address
+        // function _createAccount(): void {
+        // api.createAccount(
+        //     {
+        //         clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
+        //         alias: `${localize('general.account')} ${idx}`,
+        //         signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+        //         allowCreateMultipleEmptyAccounts: true,
+        //     },
+        //     {
+        //         onSuccess(createAccountResponse) {
+        //             newAddress = createAccountResponse.payload.addresses[0].address
 
-                        displayAddress(createAccountResponse.payload.id)
-                    },
-                    onError(error) {
-                        busy = false
+        //             displayAddress(createAccountResponse.payload.id)
+        //         },
+        //         onError(error) {
+        //             busy = false
 
-                        console.error(error)
+        //             console.error(error)
 
-                        displayNotificationForLedgerProfile('error', true, true, false, false, error)
-                    },
-                }
-            )
-        }
+        //             displayNotificationForLedgerProfile('error', true, true, false, false, error)
+        //         },
+        //     }
+        // )
+        // }
 
         function _onConnected(): void {
-            api.getAccounts({
-                onSuccess(getAccountsResponse) {
-                    if (getAccountsResponse.payload.length > 0) {
-                        if (getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount]) {
-                            newAddress =
-                                getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].addresses[0].address
-                            displayAddress(getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].id)
-                        } else {
-                            _createAccount($activeProfile?.ledgerMigrationCount + 1)
-                        }
-                    } else {
-                        _createAccount(1)
-                    }
-                },
-                onError(getAccountsError) {
-                    busy = false
-                    console.error(getAccountsError)
-                },
-            })
+            // api.getAccounts({
+            //     onSuccess(getAccountsResponse) {
+            //         if (getAccountsResponse.payload.length > 0) {
+            //             if (getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount]) {
+            //                 newAddress =
+            //                     getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].addresses[0].address
+            //                 displayAddress(getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].id)
+            //             } else {
+            //                 _createAccount($activeProfile?.ledgerMigrationCount + 1)
+            //             }
+            //         } else {
+            //             _createAccount(1)
+            //         }
+            //     },
+            //     onError(getAccountsError) {
+            //         busy = false
+            //         console.error(getAccountsError)
+            //     },
+            // })
         }
 
         function _onCancel(): void {
@@ -81,27 +73,27 @@
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
 
-    function displayAddress(accountId: string): void {
-        api.getMigrationAddress(true, accountId, {
-            onSuccess() {
-                busy = false
+    // function displayAddress(accountId: string): void {
+    //     api.getMigrationAddress(true, accountId, {
+    //         onSuccess() {
+    //             busy = false
 
-                handleConfirmClick()
-            },
-            onError(err) {
-                newAddress = null
-                busy = false
+    //             handleConfirmClick()
+    //         },
+    //         onError(err) {
+    //             newAddress = null
+    //             busy = false
 
-                console.error(err)
+    //             console.error(err)
 
-                displayNotificationForLedgerProfile('error', true, true, false, false, err)
-            },
-        })
-    }
+    //             displayNotificationForLedgerProfile('error', true, true, false, false, err)
+    //         },
+    //     })
+    // }
 
-    function handleConfirmClick(): void {
-        confirmed = true
-    }
+    // function handleConfirmClick(): void {
+    //     confirmed = true
+    // }
 
     function handleContinueClick(): void {
         dispatch('next')

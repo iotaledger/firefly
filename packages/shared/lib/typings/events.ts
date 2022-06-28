@@ -1,5 +1,4 @@
 import { IAppUpdateDownloadProgress, IAppVersionDetails } from '@core/app/interfaces'
-import { ResponseTypes } from './bridge'
 import { Message, UTXOEventData } from './message'
 import { AccountRoute } from '@core/router/enums'
 
@@ -102,7 +101,7 @@ export type Callback<T> = (error: string, data: T) => void
 export interface Event<T> {
     action: string
     id: string
-    type: ResponseTypes
+    type: unknown
     payload: T
 }
 
