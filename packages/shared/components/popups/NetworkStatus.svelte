@@ -1,6 +1,7 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
+    import { Text, Button } from 'shared/components'
     import { activeProfile } from 'shared/lib/profile'
+    import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
 
     export let healthStatusText = 'networkOperational'
@@ -34,4 +35,5 @@
             <span class="text-12 text-gray-500">{`${Math.round(referencedRate)}%`}</span>
         </div>
     {/if}
+    <Button secondary classes="w-full" onClick={closePopup}>{localize('actions.cancel')}</Button>
 </div>
