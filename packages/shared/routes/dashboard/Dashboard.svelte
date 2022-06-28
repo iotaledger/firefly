@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { selectedAccountId } from '@core/account'
     import { localize } from '@core/i18n'
     import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
     import {
@@ -9,7 +8,6 @@
         logout,
         reflectLockedStronghold,
         saveActiveProfile,
-        updateActiveProfile,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
@@ -26,8 +24,6 @@
     const { hasLoadedAccounts, loggedIn } = $activeProfile
 
     $: $activeProfile, saveActiveProfile()
-    // TODO: Set this in switch account action
-    $: updateActiveProfile({ lastUsedAccountId: $selectedAccountId })
 
     const tabs = {
         wallet: Wallet,
