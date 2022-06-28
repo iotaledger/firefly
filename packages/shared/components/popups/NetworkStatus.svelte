@@ -5,35 +5,59 @@
     import { localize } from '@core/i18n'
 
     export let healthStatusText = 'networkOperational'
-    export let healthStatusColor = 'green'
     export let messagesPerSecond = 0
     export let referencedRate = 0
 </script>
 
 <div class="flex flex-col">
+    <Text type="h4" classes="-mt-4 mb-6 flex w-full justify-center">
+        {localize('views.settings.networkStatus.title')}
+    </Text>
     {#if $activeProfile.isDeveloperProfile}
-        <Text type="h3" classes="px-7 pt-5">{localize('general.network')}</Text>
-        <Text type="p" highlighted classes="px-7">{$activeProfile.settings.networkConfig.network.name}</Text>
+        <section class="bg-gray-50 dark:bg-gray-500 dark:bg-opacity-10 rounded-xl">
+            <Text type="p" overrideColor classes="text-gray-500">{localize('general.network')}</Text>
+            <Text type="p" overrideColor classes=" text-gray-500">
+                {$activeProfile.settings.networkConfig.network.name}
+            </Text>
+        </section>
     {/if}
-    <Text type="h3" classes="px-7 pt-{$activeProfile.isDeveloperProfile ? '2' : '5'}"
-        >{localize('views.dashboard.network.status')}</Text
-    >
-    <div class="px-7 pb-5 text-13 text-{healthStatusColor}-500">
-        {localize(`views.dashboard.network.${healthStatusText}`)}
-    </div>
+    <section class="bg-gray-50 dark:bg-gray-500 dark:bg-opacity-10 rounded-xl">
+        <Text type="p" overrideColor classes="text-gray-500">
+            {localize('views.dashboard.network.status')}
+        </Text>
+        <Text type="p" overrideColor classes="text-gray-500">
+            {localize(`views.dashboard.network.${healthStatusText}`)}
+        </Text>
+    </section>
     {#if !$activeProfile?.settings.hideNetworkStatistics}
-        <div class="flex flex-row justify-between px-7 pt-5 pb-2">
-            <span class="text-12 text-gray-800 dark:text-white"
-                >{localize('views.dashboard.network.messagesPerSecond')}</span
-            >
-            <span class="text-12 text-gray-500">{`${Math.round(messagesPerSecond)}`}</span>
-        </div>
-        <div class="flex flex-row justify-between px-7 pb-5">
-            <span class="text-12 text-gray-800 dark:text-white"
-                >{localize('views.dashboard.network.referencedRate')}</span
-            >
-            <span class="text-12 text-gray-500">{`${Math.round(referencedRate)}%`}</span>
-        </div>
+        <section class="bg-gray-50 dark:bg-gray-500 dark:bg-opacity-10 rounded-xl">
+            <Text type="p" overrideColor classes="text-gray-500">
+                {localize('views.dashboard.network.messagesPerSecond')}
+            </Text>
+            <Text type="p" overrideColor classes="text-gray-500">
+                {`${Math.round(messagesPerSecond)}`}
+            </Text>
+        </section>
+        <section class="bg-gray-50 dark:bg-gray-500 dark:bg-opacity-10 rounded-xl">
+            <Text type="p" overrideColor classes="text-gray-500">
+                {localize('views.dashboard.network.referencedRate')}
+            </Text>
+            <Text type="p" overrideColor classes="text-gray-500">
+                {`${Math.round(referencedRate)}%`}
+            </Text>
+        </section>
     {/if}
-    <Button secondary classes="w-full" onClick={closePopup}>{localize('actions.cancel')}</Button>
+    <Button classes="w-full mt-5 -mb-5" onClick={closePopup}>{localize('actions.cancel')}</Button>
 </div>
+
+<style lang="scss">
+    section {
+        display: grid;
+        grid-template-columns: 2fr;
+        grid-auto-flow: column;
+        // align-items: center;
+        // place-content: space-between;
+        padding: 1rem 1.25rem;
+        margin: 0.3rem 0;
+    }
+</style>
