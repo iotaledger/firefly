@@ -1,4 +1,0 @@
-module Wallet {
-    header "libwallet.h"
-    link "IOTAWalletInternal"
-}

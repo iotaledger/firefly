@@ -11,8 +11,6 @@
     import {
         ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
-        getLedgerMigrationData,
-        getMigrationData,
         hardwareIndexes,
         hasAnySpentAddressWithNoBundleHashes,
         hasLowBalanceOnAllSpentAddresses,
@@ -29,7 +27,7 @@
     import { SetupType } from '@lib/typings/setup'
 
     const legacyLedger = $walletSetupType === SetupType.TrinityLedger
-    const { seed, data, bundles } = $migration
+    const { data, bundles } = $migration
 
     let isCheckingForBalance: boolean
     let _data = $data
@@ -171,7 +169,7 @@
             const _onConnected = () => {
                 Platform.ledger
                     .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                    .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
+                    // .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
                     .then(() => {
                         isCheckingForBalance = false
                     })
@@ -186,14 +184,14 @@
             const _onCancel = () => (isCheckingForBalance = false)
             promptUserToConnectLedger(true, _onConnected, _onCancel)
         } else {
-            getMigrationData($seed, $data.lastCheckedAddressIndex)
-                .then(() => {
-                    isCheckingForBalance = false
-                })
-                .catch((error) => {
-                    isCheckingForBalance = false
-                    console.error(error)
-                })
+            // getMigrationData($seed, $data.lastCheckedAddressIndex)
+            //     .then(() => {
+            //         isCheckingForBalance = false
+            //     })
+            //     .catch((error) => {
+            //         isCheckingForBalance = false
+            //         console.error(error)
+            //     })
         }
     }
 

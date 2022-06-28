@@ -1,5 +1,4 @@
 import { activeProfile } from '@core/profile'
-import Validator from 'shared/lib/validator'
 import { get, writable } from 'svelte/store'
 import { HistoryDataProps, MarketData, PriceData, Timeframes } from './typings/market'
 import { CurrencyTypes } from './typings/currency'
@@ -137,39 +136,30 @@ export async function fetchMarketData(): Promise<void> {
     }
 }
 
-function processMarketData(marketData) {
-    const { isValid, payload } = new Validator().performValidation({
-        type: 'MarketData',
-        payload: marketData,
+function processMarketData(marketData): void {
+    const _priceData = {} as PriceData
+
+    Object.keys(get(priceData)).forEach((currency: CurrencyTypes) => {
+        if (marketData[`history-${currency}`]) {
+            _priceData[currency] = marketData[`history-${currency}`].data
+        }
     })
 
-    if (isValid) {
-        const _priceData = {} as PriceData
+    // Store currencies
+    currencies.set(marketData.currencies)
 
-        Object.keys(get(priceData)).forEach((currency: CurrencyTypes) => {
-            if (marketData[`history-${currency}`]) {
-                _priceData[currency] = marketData[`history-${currency}`].data
-            }
-        })
+    // Store price data
+    priceData.set(_priceData)
 
-        // Store currencies
-        currencies.set(marketData.currencies)
+    // Store exchange rates in store
+    exchangeRates.set(marketData.rates)
 
-        // Store price data
-        priceData.set(_priceData)
+    // Store market statistics
+    mcap.set(marketData.market.usd_market_cap)
+    volume.set(marketData.market.usd_24h_vol)
+    change24h.set(marketData.market.usd_24h_change)
 
-        // Store exchange rates in store
-        exchangeRates.set(marketData.rates)
-
-        // Store market statistics
-        mcap.set(marketData.market.usd_market_cap)
-        volume.set(marketData.market.usd_24h_vol)
-        change24h.set(marketData.market.usd_24h_change)
-
-        void addProfileCurrencyPriceData()
-    } else {
-        throw new Error(payload.error)
-    }
+    void addProfileCurrencyPriceData()
 }
 
 export function addProfileCurrencyPriceData(): void {

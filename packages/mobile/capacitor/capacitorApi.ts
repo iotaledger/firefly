@@ -10,10 +10,6 @@ import { hookErrorLogger } from '@lib/shell/errorLogger'
 import { IAppVersionDetails } from '@core/app'
 import { IPlatform } from '@lib/typings/platform'
 
-import * as WalletBindings from './walletPluginApi'
-
-window['__WALLET__'] = WalletBindings
-
 let activeProfileId = null
 
 export const nativeSplash = SplashScreen

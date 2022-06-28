@@ -5,7 +5,6 @@
     import { activeProfile } from '@core/profile'
     import { Platform } from '@lib/platform'
     import { PIN_LENGTH } from '@lib/utils'
-    import { api } from '@lib/wallet'
 
     let currentPincode = ''
     let newPincode = ''
@@ -48,24 +47,24 @@
                 Platform.PincodeManager.verify(get(activeProfile)?.id, currentPincode)
                     .then((valid) => {
                         if (valid) {
-                            return new Promise<void>((resolve, reject) => {
-                                api.setStoragePassword(newPincode, {
-                                    onSuccess() {
-                                        Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
-                                            .then(() => {
-                                                currentPincode = ''
-                                                newPincode = ''
-                                                confirmedPincode = ''
-                                                _clear()
-                                                resolve()
-                                            })
-                                            .catch(reject)
-                                    },
-                                    onError(err) {
-                                        _clear(localize(err.error))
-                                    },
-                                })
-                            })
+                            // return new Promise<void>((resolve, reject) => {
+                            //     api.setStoragePassword(newPincode, {
+                            //         onSuccess() {
+                            //             Platform.PincodeManager.set(get(activeProfile)?.id, newPincode)
+                            //                 .then(() => {
+                            //                     currentPincode = ''
+                            //                     newPincode = ''
+                            //                     confirmedPincode = ''
+                            //                     _clear()
+                            //                     resolve()
+                            //                 })
+                            //                 .catch(reject)
+                            //         },
+                            //         onError(err) {
+                            //             _clear(localize(err.error))
+                            //         },
+                            //     })
+                            // })
                         } else {
                             _clear(localize('error.pincode.incorrect'))
                         }

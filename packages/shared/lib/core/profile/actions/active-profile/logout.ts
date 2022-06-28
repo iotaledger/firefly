@@ -5,7 +5,7 @@ import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
 import { destroyProfileManager } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
-import { resetDashboardState } from '../unknown'
+import { resetDashboardState } from '../resetDashboardState'
 import { clearPollNetworkInterval } from '@core/network'
 import {
     resetActiveProfile,
