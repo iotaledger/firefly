@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.709662341198">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.3.0.709724618474">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.3.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/icon_firefly.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.3.0.709662341198" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.3.0.709724618474" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.3.0.709662341198" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.3.0.709724618474" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.3.0.709662341198" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.3.0.709662341198" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.3.0.709724618474" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../resources/js/prism.js?v=2.3.0.709724618474" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -390,25 +390,6 @@
 </doc-anchor-target>
 <p>Firefly uses <a href="https://github.com/iotaledger/wallet.rs">wallet.rs</a> in the backend to handle functionality around value-based transfers.
 See its <a href="https://github.com/iotaledger/wallet.rs#dependencies">REAMDE</a> for the required dependencies.</p>
-<p>Sometimes you&#x27;ll need the latest changes or a specific commit from <a href="https://github.com/iotaledger/wallet.rs"><code v-pre>wallet.rs</code></a>. For that you need to update the rev for iota-wallet in <code v-pre>packages/backend/Cargo.toml</code>. After that be sure to run <code v-pre>cargo check</code> in <strong>both</strong> directories <strong>before</strong> running <code v-pre>yarn</code> again:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># in packages/backend
-cargo update -p iota-wallet
-
-# in packages/backend/bindings/node/native
-cargo update -p iota-wallet
-
-# in packages/backend/bindings/node
-yarn</code></pre>
-</doc-codeblock></div>
-<p>If for some reason things still are not working for you and you haven&#x27;t already, try removing <code v-pre>cargo</code> cache:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash"># install cargo-cache package
-cargo install cargo-cache
-
-# remove the build cache from cargo
-cargo cache -a</code></pre>
-</doc-codeblock></div>
 <doc-anchor-target id="desktop-1">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#desktop-1">#</doc-anchor-trigger>
@@ -418,9 +399,6 @@ cargo cache -a</code></pre>
 <p>There may be times when Firefly just won&#x27;t seem to compile correctly or you&#x27;re getting an uncommon error while using it. If you get a blank electron application, reloading the electron application (MacOS: <code v-pre>Cmd+R</code>, Linux/Windows: <code v-pre>Ctrl+R</code>) might solve your issue. Another approach is updating the yarn dependencies:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash"># in root dir
-yarn
-
-# in packages/backend/bindings/node
 yarn</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="memory-usage">
@@ -440,10 +418,8 @@ yarn</code></pre>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-javascript"><code v-pre class="language-javascript">Wallet.initLogger({
     color_enabled: true,
-    outputs: [{
-        name: 'wallet.log',
-        level_filter: 'debug'
-    }]
+    name: 'wallet.log',
+    level_filter: 'debug'
 })</code></pre>
 </doc-codeblock></div>
 <p>in <code v-pre>desktop/electron/preload.js</code> after <code v-pre>const Wallet = binding</code>. Debug logs will then be added to the <code v-pre>wallet.log</code> file in the same location where Firefly or the Electron / Capacitor development instance is installed.</p>
