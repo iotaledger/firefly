@@ -1,1 +1,0 @@
-#import <IOTAWalletInternal/IOTAWalletInternal.h>

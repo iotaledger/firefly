@@ -10,6 +10,9 @@ export function addEmptyAccountActivitiesToAllAccountActivities(accountId: strin
 
 export function addActivityToAccountActivitiesInAllAccountActivities(accountId: string, activity: Activity): void {
     allAccountActivities.update((state) => {
+        if (!state[accountId]) {
+            state[accountId] = []
+        }
         state[accountId].push(activity)
         return state
     })

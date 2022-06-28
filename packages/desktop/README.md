@@ -74,9 +74,6 @@ Install yarn dependencies:
 ```bash
 ## in the root directory
 yarn
-
-## in packages/backend/bindings/node
-yarn
 ```
 
 Build desktop app:

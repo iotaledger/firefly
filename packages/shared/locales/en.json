@@ -933,8 +933,8 @@
         "claiming": "Claiming",
         "reject": "Reject",
         "confirmRejection": {
-            "title": "Reject Transaction",
-            "description": "Do you want to reject this transaction"
+            "title": "Hide Transaction",
+            "description": "Do you want to hide this transaction from your activity?"
         },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
@@ -1272,10 +1272,10 @@
             "success": "Transaction claimed",
             "error": "Claiming transaction failed"
         },
-         "rejected": {
-             "success": "Transaction rejected",
-             "error": "Rejecting transaction failed"
-         }
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {

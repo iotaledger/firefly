@@ -12,6 +12,7 @@ import { createStardustAccount, getAccount } from '@core/profile-manager'
 
 import { IAccountState } from '../interfaces'
 import { buildAccountStateAndMetadata } from './buildAccountStateAndMetadata'
+import { addEmptyAccountActivitiesToAllAccountActivities } from '@core/wallet/stores/all-account-activities.store'
 
 export async function createNewAccount(name?: string, color?: string): Promise<IAccountState> {
     const { networkProtocol } = get(activeProfile)
@@ -25,6 +26,7 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
         const [newAccount, metadata] = await buildAccountStateAndMetadata(account, name, color)
         addAccountToActiveAccounts(newAccount)
         addAccountMetadataToActiveProfile(metadata)
+        addEmptyAccountActivitiesToAllAccountActivities(`${createdAccount.meta.index}`)
         return newAccount
     } catch (err) {
         console.error(err)

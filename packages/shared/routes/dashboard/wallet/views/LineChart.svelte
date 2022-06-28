@@ -9,17 +9,17 @@
     } from 'shared/lib/chart'
     import { formatCurrencyValue } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
-    import { priceData, TIMEFRAME_MAP } from 'shared/lib/market'
+    import { TIMEFRAME_MAP } from 'shared/lib/market'
     import { ChartData, DashboardChartType, WalletChartType } from 'shared/lib/typings/chart'
     import { BalanceHistory } from 'shared/lib/typings/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { HistoryDataProps } from 'shared/lib/typings/market'
-    import { getAccountBalanceHistory } from 'shared/lib/wallet'
+    // import { getAccountBalanceHistory } from 'shared/lib/wallet'
     import { selectedAccount } from '@core/account'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 
     let balanceHistory: BalanceHistory
-    $: $selectedAccount, $priceData, (balanceHistory = getAccountBalanceHistory($selectedAccount, $priceData))
+    // $: $selectedAccount, $priceData, (balanceHistory = getAccountBalanceHistory($selectedAccount, $priceData))
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     const chartTypeDropdownItems: { value: string; label: string }[] = []
