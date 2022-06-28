@@ -2,7 +2,18 @@
     import { localize } from '@core/i18n'
     import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
-    import { Address, Amount, Animation, Button, Dropdown, Icon, Input, ProgressBar, Text } from 'shared/components'
+    import {
+        Address,
+        Amount,
+        Animation,
+        Button,
+        Dropdown,
+        Icon,
+        Input,
+        ProgressBar,
+        ResponsiveAddress,
+        Text,
+    } from 'shared/components'
     import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
@@ -64,6 +75,8 @@
     let toError = ''
     let to: LabeledWalletAccount
     let amountRaw: number
+    let showInternal = true
+    const responsiveLength = 24
 
     let ledgerAwaitingConfirmation = false
 
@@ -460,6 +473,15 @@
         callback(units[index])
     }
 
+    function onAddressChange(address: string) {
+        if (address.length > responsiveLength) {
+            showInternal = false
+            return
+        }
+
+        showInternal = true
+    }
+
     onMount((): void => {
         updateFromSendParams($sendParams)
     })
@@ -518,7 +540,7 @@
                                 <Input style="text-align: left;" type="button" value={to?.label || null} />
                             </div>
                         {:else}
-                            {#if accountsDropdownItems.length > 1 && address.length === 0}
+                            {#if accountsDropdownItems.length > 1 && showInternal}
                                 <button
                                     class="absolute right-10 mt-4 z-10 text-12 text-gray-500 focus:text-blue-500"
                                     on:click={selectInternal}
@@ -526,7 +548,7 @@
                                     {localize('general.moveFundsButton')}
                                 </button>
                             {/if}
-                            <Address
+                            <ResponsiveAddress
                                 error={addressError}
                                 bind:address
                                 label={localize('general.sendToAddress')}
@@ -534,6 +556,8 @@
                                 placeholder={`${localize('general.sendToAddress')}: ${addressPrefix}...`}
                                 classes="mb-6"
                                 autofocus={false}
+                                {onAddressChange}
+                                maxLength={responsiveLength}
                             />
                         {/if}
                         <Amount
