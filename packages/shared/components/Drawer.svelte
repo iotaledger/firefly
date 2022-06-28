@@ -15,7 +15,7 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { quintIn, quintInOut, quintOut } from 'svelte/easing'
+    import { quintInOut, quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -32,7 +32,9 @@
 
     const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
 
+    const content: HTMLElement = undefined
     let isOpen = false
+    const preventSlide = true
 
     const coords = tweened(
         {
