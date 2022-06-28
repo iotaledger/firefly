@@ -3,9 +3,9 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
-    import { newProfile, profiles, updateNewProfile, validateProfileName } from '@core/profile'
+    import { profiles, validateProfileName } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { cleanupOnboarding } from '@contexts/onboarding'
+    import { newProfile, cleanupOnboarding, updateNewProfile } from '@contexts/onboarding'
 
     let error = ''
     let profileName = $newProfile?.name ?? ''
@@ -14,10 +14,11 @@
     $: profileName, (error = '') // Error clears when profileName changes
 
     async function handleBackClick(): Promise<void> {
-        const isDeveloperProfile = $newProfile.isDeveloperProfile
-        const networkProtocol = $newProfile.networkProtocol
+        const isDeveloperProfile = $newProfile?.isDeveloperProfile
+        const networkProtocol = $newProfile?.networkProtocol
+        const networkType = $newProfile?.networkType
         await cleanupOnboarding(true)
-        updateNewProfile({ isDeveloperProfile, networkProtocol })
+        updateNewProfile({ isDeveloperProfile, networkProtocol, networkType })
         $appRouter.previous()
     }
 

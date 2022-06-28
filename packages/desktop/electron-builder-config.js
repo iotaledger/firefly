@@ -6,7 +6,7 @@ const baseConfig = () => ({
     artifactName: 'firefly-desktop-${version}.${ext}',
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
-    files: ['public/', 'package.json', '!node_modules/firefly-actor-system-nodejs-bindings/native/*'],
+    files: ['public/', 'package.json'],
     appId: 'org.iota.firefly',
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch

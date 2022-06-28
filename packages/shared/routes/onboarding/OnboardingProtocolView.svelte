@@ -3,17 +3,20 @@
     import features from 'shared/features/features'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { createNewProfile, newProfile, updateNewProfile } from '@core/profile'
     import { appRouter } from '@core/router'
-    import { cleanupOnboarding } from '@contexts/onboarding'
-
-    $: isDeveloperProfile = $newProfile?.isDeveloperProfile
+    import {
+        cleanupOnboarding,
+        newProfile,
+        updateNewProfile,
+        initProfileManagerFromNewProfile,
+    } from '@contexts/onboarding'
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
-        if (isDeveloperProfile) {
+        if ($newProfile?.isDeveloperProfile) {
             updateNewProfile({ networkProtocol })
         } else {
-            await createNewProfile(isDeveloperProfile, networkProtocol, NetworkType.Mainnet)
+            updateNewProfile({ networkProtocol, networkType: NetworkType.Mainnet })
+            await initProfileManagerFromNewProfile()
         }
         $appRouter.next()
     }
@@ -35,14 +38,16 @@
         {#each Object.keys(NetworkProtocol) as protocol}
             <OnboardingButton
                 primaryText={protocol}
-                secondaryText={!isDeveloperProfile ? localize(`views.protocol.${NetworkProtocol[protocol]}`) : ''}
+                secondaryText={!$newProfile?.isDeveloperProfile
+                    ? localize(`views.protocol.${NetworkProtocol[protocol]}`)
+                    : ''}
                 icon={NetworkProtocol[protocol]}
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
-                hidden={isDeveloperProfile
+                hidden={$newProfile?.isDeveloperProfile
                     ? features?.onboarding?.[NetworkProtocol[protocol]]?.hidden
                     : features?.onboarding?.[NetworkProtocol[protocol]]?.hidden ||
                       features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.hidden}
-                disabled={isDeveloperProfile
+                disabled={$newProfile?.isDeveloperProfile
                     ? !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled
                     : !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled ||
                       !features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.enabled}

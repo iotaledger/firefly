@@ -38,8 +38,7 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 try {
-    const WalletApi = require('firefly-actor-system-nodejs-bindings')
-    const WalletStardustApi = require('@iota/wallet')
+    const WalletApi = require('@iota/wallet')
 
     if (process.env.NODE_ENV === 'development') {
         const loggerOptions = (name = 'wallet.log') => ({
@@ -52,20 +51,17 @@ try {
             ],
         })
 
-        WalletApi.initLogger(loggerOptions())
-        WalletStardustApi.initLogger(loggerOptions('wallet-stardust.log'))
+        WalletApi.initLogger(loggerOptions('wallet-stardust.log'))
     }
-
-    contextBridge.exposeInMainWorld('__WALLET__', WalletApi)
 
     // contextBridge doesn't allow passing custom properties & methods on prototype chain
     // https://www.electronjs.org/docs/latest/api/context-bridge
     // This workaround exposes the classes through factory methods
     // The factory method also copies all the prototype methods to the object so that it gets passed through the bridge
-    contextBridge.exposeInMainWorld('__WALLET__STARDUST__', {
+    contextBridge.exposeInMainWorld('__WALLET__API__', {
         createAccountManager(options) {
-            const protoProps = Object.getOwnPropertyNames(WalletStardustApi.AccountManager.prototype)
-            manager = new WalletStardustApi.AccountManager(options)
+            const protoProps = Object.getOwnPropertyNames(WalletApi.AccountManager.prototype)
+            manager = new WalletApi.AccountManager(options)
 
             protoProps.forEach((key) => {
                 if (key !== 'constructor') {
@@ -77,7 +73,7 @@ try {
         },
         async getAccount(index) {
             const account = await manager.getAccount(index)
-            const protoProps = Object.getOwnPropertyNames(WalletStardustApi.Account.prototype)
+            const protoProps = Object.getOwnPropertyNames(WalletApi.Account.prototype)
 
             protoProps.forEach((key) => {
                 if (key !== 'constructor') {

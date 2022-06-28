@@ -76,7 +76,7 @@ export class AccountMock implements IAccount {
     }
 
     getOutput(outputId: string): Promise<OutputData> {
-        return undefined
+        throw new Error('Method not implemented.')
         // return Promise.resolve({
         //     outputId: '',
         //     outputResponse: {
@@ -174,7 +174,7 @@ export class AccountMock implements IAccount {
     }
 
     getTransaction(transactionId: string): Promise<Transaction> {
-        return Promise.resolve(null)
+        throw new Error('Method not implemented.')
     }
 
     sendAmount(
