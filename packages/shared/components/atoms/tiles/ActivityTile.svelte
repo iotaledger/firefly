@@ -32,6 +32,7 @@
                 description: localize('actions.confirmRejection.description'),
                 node: localize('actions.confirmRejection.node'),
                 warning: true,
+                confirmText: localize('actions.reject'),
                 onConfirm: () => {
                     hideActivity(activity?.id)
                     closePopup()
