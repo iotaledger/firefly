@@ -1,13 +1,6 @@
 <script lang="typescript">
     import { Input, PasswordInput } from 'shared/components'
-    import {
-        INode,
-        checkNodeUrlValidity,
-        checkNetworkId,
-        IClientOptions,
-        updateNodeInfo,
-        nodeInfo,
-    } from '@core/network'
+    import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo } from '@core/network'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
     import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
@@ -62,7 +55,6 @@
             const isInSameNetwork =
                 get(nodeInfo).protocol.networkName === nodeInfoResponse.nodeInfo.protocol.networkName
             if (!isInSameNetwork) {
-                updateNodeInfo(nodeInfoResponse.nodeInfo)
                 formError = localize('error.node.differentNetwork')
                 return Promise.reject({ type: 'validationError', error: formError })
             }

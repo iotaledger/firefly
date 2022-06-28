@@ -1,18 +1,15 @@
-import { INode, NetworkProtocol, NetworkType } from '@core/network'
+import { INode } from '@core/network'
 import { getStorageDirectoryOfProfile } from '@core/profile'
 import { setNewProfileClientOptions, newProfile } from '@contexts/onboarding'
 import { initialiseProfileManager } from '@core/profile-manager'
 import { get } from 'svelte/store'
 
-export async function initProfileManagerFromNewProfile(
-    protocol: NetworkProtocol,
-    networkType: NetworkType,
-    node?: INode
-): Promise<void> {
-    await setNewProfileClientOptions(protocol, networkType, node)
+export async function initProfileManagerFromNewProfile(node?: INode): Promise<void> {
+    const profile = get(newProfile)
+    await setNewProfileClientOptions(profile.networkProtocol, profile.networkType, node)
 
-    const path = await getStorageDirectoryOfProfile(get(newProfile).id)
-    initialiseProfileManager(path, get(newProfile).clientOptions, {
+    const path = await getStorageDirectoryOfProfile(profile.id)
+    initialiseProfileManager(path, profile.clientOptions, {
         Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
     })
 }

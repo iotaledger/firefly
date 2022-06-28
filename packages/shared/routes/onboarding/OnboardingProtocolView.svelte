@@ -16,7 +16,7 @@
             updateNewProfile({ networkProtocol })
         } else {
             updateNewProfile({ networkProtocol, networkType: NetworkType.Mainnet })
-            await initProfileManagerFromNewProfile(networkProtocol, NetworkType.Mainnet)
+            await initProfileManagerFromNewProfile()
         }
         $appRouter.next()
     }

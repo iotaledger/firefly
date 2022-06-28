@@ -26,7 +26,7 @@
             updateNewProfile({ networkType })
         } else {
             updateNewProfile({ networkProtocol, networkType: networkType })
-            await initProfileManagerFromNewProfile(networkProtocol, networkType)
+            await initProfileManagerFromNewProfile()
         }
         $appRouter.next({ networkType })
     }

@@ -5,7 +5,7 @@
     import { appRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
     import { deleteAccountsAndDatabase, destroyProfileManager, getNodeInfo } from '@core/profile-manager'
-    import { initProfileManagerFromNewProfile, newProfile } from '@contexts/onboarding'
+    import { initProfileManagerFromNewProfile, updateNewProfile } from '@contexts/onboarding'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
@@ -26,7 +26,8 @@
                 checkNodeInfo: false,
                 validateClientOptions: false,
             })
-            await initProfileManagerFromNewProfile($newProfile.networkProtocol, NetworkType.PrivateNet, node)
+            updateNewProfile({ networkType: NetworkType.PrivateNet })
+            await initProfileManagerFromNewProfile(node)
             await getNodeInfo(node.url)
             $appRouter.next()
         } catch (err) {

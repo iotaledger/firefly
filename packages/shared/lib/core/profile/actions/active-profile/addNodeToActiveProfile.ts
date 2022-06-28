@@ -1,6 +1,6 @@
 import { getNodeInfo, setClientOptions } from '@core/profile-manager'
 import { get } from 'svelte/store'
-import { buildNode, INode } from '@core/network'
+import { buildNode, INode, updateNodeInfo } from '@core/network'
 import { activeProfile, updateActiveProfile } from '@core/profile/stores'
 
 export async function addNodeToActiveProfile(node: INode): Promise<void> {
@@ -13,6 +13,7 @@ export async function addNodeToActiveProfile(node: INode): Promise<void> {
         network: nodeInfoResponse.nodeInfo.name,
     }
 
+    updateNodeInfo(nodeInfoResponse.nodeInfo)
     updateActiveProfile({ clientOptions })
     await setClientOptions(clientOptions)
 }
