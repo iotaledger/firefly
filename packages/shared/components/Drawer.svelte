@@ -197,7 +197,7 @@
 </drawer>
 
 <style type="text/scss">
-    main {
+    content {
         will-change: transform;
         transform: translate(var(--x), var(--y));
         border-radius: var(--border-radius);
@@ -212,7 +212,7 @@
     }
 
     // Rounded rectangle slide indicator
-    main:before {
+    content:before {
         display: var(--display-indicator);
         content: '';
         position: sticky;
@@ -221,6 +221,7 @@
         left: calc(50% - 48px / 2 - 0.5px);
         top: 8px;
         border-radius: 8px;
+        z-index: 100;
         background: var(--bg-indicator-color);
     }
 
