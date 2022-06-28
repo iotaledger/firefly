@@ -14,10 +14,11 @@
     $: profileName, (error = '') // Error clears when profileName changes
 
     async function handleBackClick(): Promise<void> {
-        const isDeveloperProfile = $newProfile.isDeveloperProfile
-        const networkProtocol = $newProfile.networkProtocol
+        const isDeveloperProfile = $newProfile?.isDeveloperProfile
+        const networkProtocol = $newProfile?.networkProtocol
+        const networkType = $newProfile?.networkType
         await cleanupOnboarding(true)
-        updateNewProfile({ isDeveloperProfile, networkProtocol })
+        updateNewProfile({ isDeveloperProfile, networkProtocol, networkType })
         $appRouter.previous()
     }
 
