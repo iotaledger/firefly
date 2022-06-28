@@ -142,6 +142,9 @@
         slot="rightpane"
         class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-green dark:bg-gray-900'}"
     >
-        <Animation animation={$mobile ? 'password-desktop' : 'profile-desktop'} />
+        <Animation
+            animation={$mobile ? 'password-desktop' : 'profile-desktop'}
+            classes={$mobile ? 'transform scale-120' : ''}
+        />
     </div>
 </OnboardingLayout>

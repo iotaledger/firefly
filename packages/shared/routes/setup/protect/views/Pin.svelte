@@ -52,6 +52,6 @@
         slot="rightpane"
         class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-pink dark:bg-gray-900'}"
     >
-        <Animation classes="setup-anim-aspect-ratio" animation="pin-desktop" />
+        <Animation classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}" animation="pin-desktop" />
     </div>
 </OnboardingLayout>

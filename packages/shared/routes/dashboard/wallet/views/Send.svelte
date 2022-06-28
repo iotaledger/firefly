@@ -495,7 +495,10 @@
                     </button>
                 </div>
             </div>
-            <Animation classes="setup-anim-aspect-ratio" animation="balance-desktop" />
+            <Animation
+                classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
+                animation="balance-desktop"
+            />
             <div class="w-full h-full flex flex-col justify-between">
                 <div>
                     <div class="w-full block">
