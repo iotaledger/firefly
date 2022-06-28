@@ -2,25 +2,16 @@
     import { createEventDispatcher, onDestroy, onMount } from 'svelte'
     import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions } from '@core/network'
-    import { activeProfile } from '@core/profile'
-    import {
-        displayNotificationForLedgerProfile,
-        getLedgerDeviceStatus,
-        ledgerDeviceState,
-        ledgerSimulator,
-        pollLedgerDeviceStatus,
-        stopPollingLedgerStatus,
-    } from '@lib/ledger'
+    import { ledgerDeviceState, stopPollingLedgerStatus } from '@lib/ledger'
     import { openPopup } from '@lib/popup'
-    import { api, walletSetupType } from '@lib/wallet'
+    import { walletSetupType } from '@lib/wallet'
     import { LedgerDeviceState } from '@lib/typings/ledger'
     import { SetupType } from '@lib/typings/setup'
 
     const dispatch = createEventDispatcher()
     const legacyLedger = $walletSetupType === SetupType.TrinityLedger
     const newLedgerProfile = $walletSetupType === SetupType.New
-    const LEDGER_STATUS_POLL_INTERVAL = 1500
+    // const LEDGER_STATUS_POLL_INTERVAL = 1500
 
     let polling = false
     let isConnected = false
@@ -36,7 +27,7 @@
         : 'ledger-app-closed-desktop'
 
     onMount(() => {
-        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
+        // pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
         polling = true
     })
 
@@ -46,41 +37,41 @@
         creatingAccount = true
 
         // TODO: refactor this for new bindingsx
-        api.createAccount(
-            {
-                clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
-                alias: `${localize('general.account')} 1`,
-                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-            },
-            {
-                onSuccess() {
-                    creatingAccount = false
+        // api.createAccount(
+        //     {
+        //         clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
+        //         alias: `${localize('general.account')} 1`,
+        //         signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+        //     },
+        //     {
+        //         onSuccess() {
+        //             creatingAccount = false
 
-                    dispatch('next')
-                },
-                onError(error) {
-                    creatingAccount = false
+        //             dispatch('next')
+        //         },
+        //         onError(error) {
+        //             creatingAccount = false
 
-                    console.error(error)
+        //             console.error(error)
 
-                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
-                },
-            }
-        )
+        //             displayNotificationForLedgerProfile('error', true, true, false, false, error)
+        //         },
+        //     }
+        // )
     }
 
-    function _onCancel(): void {
-        creatingAccount = false
-        displayNotificationForLedgerProfile('error', true)
-    }
+    // function _onCancel(): void {
+    //     creatingAccount = false
+    //     displayNotificationForLedgerProfile('error', true)
+    // }
 
-    function _onConnected(): void {
-        if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
-            _onCancel()
-        } else {
-            dispatch('next')
-        }
-    }
+    // function _onConnected(): void {
+    //     if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
+    //         _onCancel()
+    //     } else {
+    //         dispatch('next')
+    //     }
+    // }
 
     function handleGuidePopup(): void {
         openPopup({
@@ -94,7 +85,7 @@
         if (newLedgerProfile) {
             createAccount()
         } else {
-            getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
+            // getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
         }
     }
 

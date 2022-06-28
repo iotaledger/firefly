@@ -1,6 +1,3 @@
-import { Bridge, CommunicationIds } from './bridge'
-import { AccountIdentifier } from './account'
-
 type MessageVersion = 1
 
 export enum MessageType {
@@ -186,21 +183,4 @@ export interface ListMessageFilter {
 export interface Transfer {
     amount: number
     address: string
-}
-
-export function reattach(
-    bridge: Bridge,
-    __ids: CommunicationIds,
-    accountId: AccountIdentifier,
-    messageId: string
-): Promise<string> {
-    return bridge({
-        actorId: __ids.actorId,
-        id: __ids.messageId,
-        cmd: 'Reattach',
-        payload: {
-            accountId,
-            messageId,
-        },
-    })
 }

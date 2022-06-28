@@ -1,13 +1,12 @@
-import { ProfileImportType } from '@core/profile'
 import {
-    mnemonic,
-    newProfile,
+    importFilePath,
     importType as profileImportType,
     isGettingMigrationData,
-    importFilePath,
+    mnemonic,
+    newProfile,
 } from '@contexts/onboarding'
-import { getMigrationData } from '@lib/migration'
 import { NetworkProtocol } from '@core/network'
+import { ProfileImportType } from '@core/profile'
 import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { ImportRoute } from '../enums'
@@ -23,7 +22,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
         super(ImportRoute.Init, importRoute)
     }
 
-    async next(event: FireflyEvent): Promise<void> {
+    next(event: FireflyEvent): void {
         let nextRoute: ImportRoute
         const params = event || {}
 
@@ -51,7 +50,7 @@ export class ImportRouter extends Subrouter<ImportRoute> {
                 const importType = get(profileImportType)
                 if (importType === ProfileImportType.Seed) {
                     isGettingMigrationData.set(true)
-                    await getMigrationData(migrationSeed)
+                    // await getMigrationData(migrationSeed)
                     isGettingMigrationData.set(false)
                     get(appRouter).next({ importType })
                 } else if (importType === ProfileImportType.Mnemonic) {

@@ -4,14 +4,13 @@
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
     import { formatUnitPrecision, Unit } from '@lib/units'
     import { selectedAccount } from '@core/account'
 
     export let locale: Locale
     export let hasMultipleAccounts: boolean
-    export let hideAccount: (id: AccountIdentifier) => void = () => {}
+    export let hideAccount: (id: string) => void = () => {}
 
     $: canDelete = $selectedAccount ? Number($selectedAccount?.balances?.total) === 0 : false
 
