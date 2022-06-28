@@ -9,8 +9,8 @@ export const DEFAULT_ACTIVE_PROFILE_VALUE: IPersistedProfile = {
     name: '',
     type: ProfileType.Software,
     version: 0,
-    networkProtocol: NetworkProtocol.Shimmer,
-    networkType: NetworkType.Mainnet,
+    networkProtocol: NetworkProtocol?.Shimmer,
+    networkType: NetworkType?.Mainnet,
     lastStrongholdBackupTime: new Date(),
     settings: {
         currency: AvailableExchangeRates.USD,
