@@ -151,19 +151,18 @@
                 x: fromLeft ? -viewportLength : 0,
                 y: fromLeft ? 0 : viewportLength,
             },
-            { duration: 350, easing: quintInOut }
+            { duration: 750, easing: quintInOut }
         )
         isOpen = false
         if (!preventClose) {
             dispatch('close')
+            onClose()
         }
-        dispatch('close')
-        onClose()
     }
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
 
-    $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1000)
+    $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1200)
     $: contentOpacity = getScale(fromLeft ? $coords.x : $coords.y, 100)
 </script>
 
