@@ -48,7 +48,7 @@
 >
     <span class="text-14 font-600 text-center text-white uppercase">{profileInitial || 'A'}</span>
 </button>
-<Drawer bind:this={drawer} fromLeft fullScreen classes="flex">
+<Drawer bind:this={drawer} fromLeft classes="flex">
     <div class="flex flex-col flex-1 mx-4">
         <header
             class="w-full mt-3 py-3 px-9 mb-5 flex items-centers justify-center bg-white dark:bg-gray-800"

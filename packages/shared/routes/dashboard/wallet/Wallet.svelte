@@ -453,7 +453,8 @@
                     <Drawer
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
-                        onClose={() => accountRoute.set(AccountRoute.Init)}
+                        on:close={() => accountRoute.set(AccountRoute.Init)}
+                        fullScreen={$accountRoute === AccountRoute.Receive}
                     >
                         {#if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
@@ -503,7 +504,7 @@
                 </div>
                 <BottomNavigation locale={localize} bind:this={bottomNavigation} />
                 {#if $selectedMessage}
-                    <Drawer opened bind:this={activityDrawer} onClose={handleActivityDrawerBackClick}>
+                    <Drawer opened bind:this={activityDrawer} on:close={handleActivityDrawerBackClick}>
                         <div class="overflow-y-auto h-2/3 space-y-2.5">
                             <ActivityDetail {...$selectedMessage} />
                         </div>

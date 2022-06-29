@@ -64,7 +64,7 @@
             <Icon icon="chevron-down" height="18" width="18" classes="text-gray-800 dark:text-white" />
         </div>
     </button>
-    <Drawer bind:this={drawer} opened={isDrawerOpened} onClose={() => (isDrawerOpened = false)}>
+    <Drawer bind:this={drawer} opened={isDrawerOpened} on:close={() => (isDrawerOpened = false)}>
         <div class="flex flex-col px-6 w-full safe-area pt-7 pb-5 safe-area">
             {#if drawerRoute === 'create'}
                 <CreateAccount onCreate={onCreateAccount} onCancel={() => drawer.close()} />

@@ -26,7 +26,6 @@
     export let fullScreen = false
     export let preventClose = false
     export let zIndex = 'z-30'
-    export let onClose = (): void => {}
 
     const dispatch = createEventDispatcher()
 
@@ -133,7 +132,7 @@
         let distance = event.detail.endY - event.detail.startY
         let time = (event.detail.endTime - event.detail.initTime) / 1000
         let slideVelocity = Math.round(distance / time) || 0
-        console.error(slideVelocity)
+
         if (slideVelocity > 900) {
             distance = time = slideVelocity = 0
             return close()
@@ -183,7 +182,6 @@
         isOpen = false
         if (!preventClose) {
             dispatch('close')
-            onClose()
         }
     }
 
@@ -217,7 +215,8 @@
 			--opacity: {contentOpacity}; 
 			--height: {fromLeft && '100vh'};
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
-			--display-indicator: {fromLeft ? 'none' : 'block'}"
+			--display-mark: {fromLeft ? 'none' : 'block'};
+            --top-mark: {fullScreen ? '50px' : '8px'};"
     >
         <slot />
     </content>
@@ -230,26 +229,27 @@
         border-radius: var(--border-radius);
         height: var(--height);
         opacity: var(--opacity);
-        --bg-indicator-color: #d8e3f5;
+        --bg-mark-color: #d8e3f5;
+        --top-mark: 8px;
         @apply from-white;
         &.darkmode {
             @apply from-gray-800;
-            --bg-indicator-color: #405985;
+            --bg-mark-color: #405985;
         }
     }
 
-    // Rounded rectangle slide indicator
+    // Rounded rectangle slide mark
     content:before {
-        display: var(--display-indicator);
+        display: var(--display-mark);
         content: '';
         position: sticky;
         width: 48px;
         height: 4px;
         left: calc(50% - 48px / 2 - 0.5px);
-        top: 8px;
+        top: var(--top-mark);
         border-radius: 8px;
         z-index: 100;
-        background: var(--bg-indicator-color);
+        background: var(--bg-mark-color);
     }
 
     #dim {
