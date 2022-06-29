@@ -514,10 +514,10 @@
     "@types/bignumber.js" "^5.0.0"
     bignumber.js "^7.2.1"
 
-"@iota/wallet@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.1.tgz#352406d242e7f40b116382ad77a22985cccf915b"
-  integrity sha512-2p19DHGWqAupTx95ugXeln8WWi3N++pAthH4KUyT4LhqVWvSF7GYO4s/7s9r1yPBN+N8PaavzCcrD6uT5wqQpA==
+"@iota/wallet@2.0.2-alpha.0":
+  version "2.0.2-alpha.0"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.0.tgz#6afdee7cac1fadb24907e4c6ca58a26de46f4908"
+  integrity sha512-Ta1T2Eb7lo3dB40Mz8GqRjX9nOQNJUPmQAGUIzgXt/4uhhbYkDpCaNFM3FLM50XU6HyGrQIvItp08mYQ5NlbDA==
   dependencies:
     cargo-cp-artifact "^0.1.5"
     prebuild-install "^5.3.3"
