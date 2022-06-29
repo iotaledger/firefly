@@ -1,7 +1,6 @@
 <script lang="typescript">
-    import { Text, Button } from 'shared/components'
+    import { Text } from 'shared/components'
     import { activeProfile } from 'shared/lib/profile'
-    import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
 
     export let healthStatusText = 'networkOperational'
@@ -10,7 +9,7 @@
 </script>
 
 <div class="flex flex-col">
-    <Text type="h4" classes="-mt-4 mb-6 flex w-full justify-center">
+    <Text type="h4" classes="-mt-4 mb-4 flex w-full justify-center">
         {localize('views.settings.networkStatus.title')}
     </Text>
     {#if $activeProfile.isDeveloperProfile}
@@ -47,7 +46,6 @@
             </Text>
         </section>
     {/if}
-    <Button classes="w-full mt-5 -mb-5" onClick={closePopup}>{localize('actions.cancel')}</Button>
 </div>
 
 <style lang="scss">
@@ -55,8 +53,6 @@
         display: grid;
         grid-template-columns: 2fr;
         grid-auto-flow: column;
-        // align-items: center;
-        // place-content: space-between;
         padding: 1rem 1.25rem;
         margin: 0.3rem 0;
     }
