@@ -41,17 +41,12 @@ try {
     const WalletApi = require('@iota/wallet')
 
     if (process.env.NODE_ENV === 'development') {
-        const loggerOptions = (name = 'wallet.log') => ({
-            color_enabled: true,
-            outputs: [
-                {
-                    name,
-                    level_filter: 'debug',
-                },
-            ],
-        })
-
-        WalletApi.initLogger(loggerOptions('wallet-stardust.log'))
+        const loggerOptions = {
+            colorEnabled: true,
+            name: './wallet.log',
+            levelFilter: 'debug',
+        }
+        WalletApi.initLogger(loggerOptions)
     }
 
     // contextBridge doesn't allow passing custom properties & methods on prototype chain
