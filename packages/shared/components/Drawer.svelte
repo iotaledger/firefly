@@ -209,7 +209,6 @@
         on:tap={() => (preventSlide = false)}
         class="fixed bottom-0 overflow-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
-        class:fullScreen
         style="--y: {fromLeft ? 0 : $coords.y}px; 
 			--x: {fromLeft ? $coords.x : 0}px; 
 			--opacity: {contentOpacity}; 
