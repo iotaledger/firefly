@@ -35,9 +35,6 @@
         class="grid grid-flow-row-dense h-screen items-center justify-items-center p-5"
         style="grid-template-rows: 18fr 1fr 1fr 5fr 1fr"
     >
-        <button on:click={handleCloseClick} class="absolute top-10 right-8">
-            <Icon icon="close" classes="text-gray-800 dark:text-white" />
-        </button>
         <div class="grid pt-44">
             <QRImage size={5} data={$selectedAccountStore.depositAddress} />
         </div>
