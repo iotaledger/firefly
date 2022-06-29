@@ -38,7 +38,7 @@
         <div class="grid mt-44 rounded-xl bg-white">
             <QRImage size={5} data={$selectedAccountStore.depositAddress} />
         </div>
-        <Text secondary smaller classes="p-4">
+        <Text type="h4" classes="p-4">
             {$activeProfile?.isDeveloperProfile
                 ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                 : localize('general.myAddress')}
