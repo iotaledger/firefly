@@ -35,7 +35,7 @@
         class="grid grid-flow-row-dense h-screen items-center justify-items-center p-5"
         style="grid-template-rows: 18fr 1fr 1fr 5fr 1fr"
     >
-        <div class="grid pt-44">
+        <div class="grid mt-44 rounded-xl bg-white">
             <QRImage size={5} data={$selectedAccountStore.depositAddress} />
         </div>
         <Text secondary smaller classes="p-4">
