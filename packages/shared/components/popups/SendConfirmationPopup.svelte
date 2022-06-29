@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error } from 'shared/components'
+    import { onMount } from 'svelte'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Spinner } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeightText, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
@@ -23,6 +24,7 @@
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError, InsufficientFundsForStorageDepositError, InvalidExpirationDateTimeError } from '@core/error'
+    import { isTransferring } from '@lib/wallet'
 
     export let asset: IAsset
     export let amount = '0'
@@ -42,6 +44,7 @@
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
+    let transactionId: string
 
     $: internal = recipient.type === 'account'
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
@@ -61,7 +64,8 @@
         tag,
         storageDeposit: storageDeposit,
     }
-    $: expirationDate, validate()
+    $: storageDeposit || expirationDate, validate()
+    $: transactionId && closePopup()
 
     async function _prepareOutput(): Promise<void> {
         outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
@@ -87,18 +91,16 @@
         }
     }
 
-    function onConfirm(): void {
+    async function onConfirm(): Promise<void> {
         try {
-            validate()
             if ($isSoftwareProfile) {
-                closePopup()
-                trySendOutput(outputOptions, preparedOutput)
+                transactionId = await trySendOutput(outputOptions, preparedOutput)
             } else if ($isLedgerProfile) {
                 closePopup()
-                promptUserToConnectLedger(false, () => trySendOutput(outputOptions, preparedOutput), undefined)
+                promptUserToConnectLedger(false, () => void trySendOutput(outputOptions, preparedOutput), undefined)
             }
-        } catch (error) {
-            return
+        } catch (err) {
+            error = new BaseError({ message: err.error, logError: true })
         }
     }
 
@@ -117,6 +119,16 @@
             },
         })
     }
+
+    onMount(() => {
+        if ($isTransferring) {
+            isTransferring.subscribe((value) => {
+                if (!value) {
+                    closePopup()
+                }
+            })
+        }
+    })
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -140,6 +152,12 @@
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>
-        <Button autofocus classes="w-full" onClick={onConfirm} disabled={!!error}>{localize('actions.confirm')}</Button>
+        <Button autofocus classes="w-full" onClick={onConfirm} disabled={!!error || $isTransferring}>
+            {#if $isTransferring}
+                <Spinner busy classes="justify-center break-all" />
+            {:else}
+                {localize('actions.confirm')}
+            {/if}
+        </Button>
     </popup-buttons>
 </send-confirmation-popup>
