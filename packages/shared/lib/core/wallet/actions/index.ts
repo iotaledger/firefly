@@ -1,5 +1,5 @@
 export * from './claimActivity'
-export * from './trySendOutput'
+export * from './sendOutput'
 export * from './hideActivity'
 export * from './linkActivityAndClaimingTransaction'
 export * from './loadAccountActivies'

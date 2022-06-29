@@ -7,7 +7,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isSoftwareProfile } from '@core/profile'
     import {
         ActivityDirection,
         ActivityType,
@@ -16,15 +16,14 @@
         IAsset,
         InclusionState,
         Subject,
-        trySendOutput,
+        sendOutput,
     } from '@core/wallet'
-    import { isValidExpirationDateTime } from '@core/utils'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
-    import { promptUserToConnectLedger } from '@lib/ledger'
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
-    import { BaseError, InsufficientFundsForStorageDepositError, InvalidExpirationDateTimeError } from '@core/error'
+    import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
+    import { checkStronghold } from '@lib/stronghold'
 
     export let asset: IAsset
     export let amount = '0'
@@ -34,6 +33,7 @@
     export let internal = false
     export let metadata: string
     export let tag: string
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     // If storage deposit is 0, then set expiration date to tomorrow
     const defaultExpirationDate = new Date()
@@ -44,7 +44,6 @@
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
-    let transactionId: string
 
     $: internal = recipient.type === 'account'
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
@@ -64,8 +63,6 @@
         tag,
         storageDeposit: storageDeposit,
     }
-    $: storageDeposit || expirationDate, validate()
-    $: transactionId && closePopup()
 
     async function _prepareOutput(): Promise<void> {
         outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
@@ -78,29 +75,17 @@
         storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
     }
 
-    function validate(): void {
-        if (asset?.balance?.available < rawAmount + storageDeposit) {
-            error = new InsufficientFundsForStorageDepositError(
-                storageDeposit + rawAmount - asset.balance.available,
-                unit
-            )
-        } else if (expirationDate && !isValidExpirationDateTime(expirationDate)) {
-            error = new InvalidExpirationDateTimeError()
-        } else {
-            error = null
-        }
-    }
-
     async function onConfirm(): Promise<void> {
+        error = null
         try {
             if ($isSoftwareProfile) {
-                transactionId = await trySendOutput(outputOptions, preparedOutput)
-            } else if ($isLedgerProfile) {
-                closePopup()
-                promptUserToConnectLedger(false, () => void trySendOutput(outputOptions, preparedOutput), undefined)
+                const _send = () => sendOutput(outputOptions, preparedOutput)
+                await checkStronghold(_send, true)
             }
         } catch (err) {
-            error = new BaseError({ message: err.error, logError: true })
+            if (!error) {
+                error = err.error ? new BaseError({ message: err.error ?? err.message, logError: true }) : err
+            }
         }
     }
 
@@ -120,7 +105,14 @@
         })
     }
 
-    onMount(() => {
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            if (!error) {
+                error = err.error ? new BaseError({ message: err.error, logError: true }) : err
+            }
+        }
         if ($isTransferring) {
             isTransferring.subscribe((value) => {
                 if (!value) {
@@ -152,7 +144,7 @@
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>
-        <Button autofocus classes="w-full" onClick={onConfirm} disabled={!!error || $isTransferring}>
+        <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring}>
             {#if $isTransferring}
                 <Spinner busy classes="justify-center break-all" />
             {:else}
