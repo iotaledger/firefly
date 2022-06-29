@@ -228,7 +228,7 @@
         opacity: var(--opacity);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        --bg-mark-color: #d4d4d4;
+        --bg-mark-color: #d0d0d0;
         --top-mark: 8px;
         &.darkmode {
             --bg-mark-color: #405985;
