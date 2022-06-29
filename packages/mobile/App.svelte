@@ -7,7 +7,7 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { goto } from 'shared/lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
-    import { fetchMarketData } from 'shared/lib/market'
+    import { pollMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from 'shared/lib/networkStatus'
     import { AppRoute, initRouters } from '@core/router'
     import { Platforms } from 'shared/lib/typings/platform'
@@ -28,13 +28,14 @@
         Protect,
         Secure,
         Setup,
-        Settings,
         Welcome,
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
     stage.set(Stage[process.env.STAGE?.toUpperCase()] ?? Stage.ALPHA)
+
+    let showSplash = true
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
@@ -56,82 +57,89 @@
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
+        // Display splash screen at least for 3 seconds
+        setTimeout(() => {
+            showSplash = false
+        }, 3000)
+
         initRouters()
-        await fetchMarketData()
+        await pollMarketData()
         await pollNetworkStatus()
     })
 </script>
 
-<!-- empty div to avoid auto-purge removing dark classes -->
-<div class="scheme-dark" />
-<div class="scanner-hide">
-    {#if $popupState.active}
-        <Popup
-            type={$popupState.type}
-            props={$popupState.props}
-            hideClose={$popupState.hideClose}
-            fullScreen={$popupState.fullScreen}
-            transition={$popupState.transition}
-            overflow={$popupState.overflow}
-            locale={$_}
-        />
-    {/if}
-    <Route route={AppRoute.Welcome}>
-        <Welcome locale={$_} />
-    </Route>
-    <Route route={AppRoute.Legal}>
-        <Legal locale={$_} />
-    </Route>
-    <Route route={AppRoute.CrashReporting}>
-        <CrashReporting locale={$_} />
-    </Route>
-    <Route route={AppRoute.Appearance}>
-        <Appearance locale={$_} />
-    </Route>
-    <Route route={AppRoute.Profile}>
-        <Profile locale={$_} />
-    </Route>
-    <Route route={AppRoute.Setup}>
-        <Setup locale={$_} />
-    </Route>
-    <Route route={AppRoute.Create}>
-        <Create locale={$_} />
-    </Route>
-    <Route route={AppRoute.Secure}>
-        <Secure locale={$_} />
-    </Route>
-    <Route route={AppRoute.Password}>
-        <Password locale={$_} />
-    </Route>
-    <Route route={AppRoute.Protect} transition={false}>
-        <Protect locale={$_} />
-    </Route>
-    <Route route={AppRoute.Backup} transition={false}>
-        <Backup locale={$_} />
-    </Route>
-    <Route route={AppRoute.Import} transition={false}>
-        <Import locale={$_} />
-    </Route>
-    <Route route={AppRoute.Balance}>
-        <Balance locale={$_} />
-    </Route>
-    <Route route={AppRoute.Migrate}>
-        <Migrate locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Congratulations}>
-        <Congratulations locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Dashboard}>
-        <Dashboard locale={$_} {goto} />
-    </Route>
-    <Route route={AppRoute.Login}>
-        <Login locale={$_} {goto} />
-    </Route>
-    <ToastContainer />
-</div>
-<div class="scanner-ui">
-    <QRScanner />
-</div>
+{#if $isLocaleLoaded && !showSplash}
+    <!-- empty div to avoid auto-purge removing dark classes -->
+    <div class="scheme-dark" />
+    <div class="scanner-hide">
+        {#if $popupState.active}
+            <Popup
+                type={$popupState.type}
+                props={$popupState.props}
+                hideClose={$popupState.hideClose}
+                fullScreen={$popupState.fullScreen}
+                transition={$popupState.transition}
+                overflow={$popupState.overflow}
+                locale={$_}
+            />
+        {/if}
+        <Route route={AppRoute.Welcome}>
+            <Welcome locale={$_} />
+        </Route>
+        <Route route={AppRoute.Legal}>
+            <Legal locale={$_} />
+        </Route>
+        <Route route={AppRoute.CrashReporting}>
+            <CrashReporting locale={$_} />
+        </Route>
+        <Route route={AppRoute.Appearance}>
+            <Appearance locale={$_} />
+        </Route>
+        <Route route={AppRoute.Profile}>
+            <Profile locale={$_} />
+        </Route>
+        <Route route={AppRoute.Setup}>
+            <Setup locale={$_} />
+        </Route>
+        <Route route={AppRoute.Create}>
+            <Create locale={$_} />
+        </Route>
+        <Route route={AppRoute.Secure}>
+            <Secure locale={$_} />
+        </Route>
+        <Route route={AppRoute.Password}>
+            <Password locale={$_} />
+        </Route>
+        <Route route={AppRoute.Protect} transition={false}>
+            <Protect locale={$_} />
+        </Route>
+        <Route route={AppRoute.Backup} transition={false}>
+            <Backup locale={$_} />
+        </Route>
+        <Route route={AppRoute.Import} transition={false}>
+            <Import locale={$_} />
+        </Route>
+        <Route route={AppRoute.Balance}>
+            <Balance locale={$_} />
+        </Route>
+        <Route route={AppRoute.Migrate}>
+            <Migrate locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Congratulations}>
+            <Congratulations locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Dashboard}>
+            <Dashboard locale={$_} {goto} />
+        </Route>
+        <Route route={AppRoute.Login}>
+            <Login locale={$_} {goto} />
+        </Route>
+        <ToastContainer />
+    </div>
+    <div class="scanner-ui">
+        <QRScanner />
+    </div>
+{/if}
 
 <style global type="text/scss">
     @tailwind base;
