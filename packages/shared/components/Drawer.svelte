@@ -167,7 +167,7 @@
                 x: 0,
                 y: 0,
             },
-            { duration: 750, easing: quintOut }
+            { duration: 650, easing: quintOut }
         )
     }
 
@@ -177,7 +177,7 @@
                 x: fromLeft ? -viewportLength : 0,
                 y: fromLeft ? 0 : viewportLength,
             },
-            { duration: fromLeft ? 750 : 450, easing: fromLeft ? quintIn : quintOut }
+            { duration: fromLeft ? 750 : 450, easing: fromLeft ? quintInOut : quintOut }
         )
         isOpen = false
         if (!preventClose) {
@@ -187,7 +187,7 @@
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
 
-    $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1200)
+    $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1800)
     $: contentOpacity = getScale(fromLeft ? $coords.x : $coords.y, 100)
 </script>
 
@@ -215,7 +215,9 @@
 			--height: {fromLeft && '100vh'};
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-mark: {fromLeft ? 'none' : 'block'};
-            --top-mark: {fullScreen ? '50px' : '8px'};"
+            --top-mark: {fullScreen ? '20%' : '8px'};
+            --blur: {fullScreen ? '10px' : '0px'};
+            --tw-bg-opacity: {fullScreen ? 0.8 : 1};"
     >
         <slot />
     </content>
@@ -228,11 +230,11 @@
         border-radius: var(--border-radius);
         height: var(--height);
         opacity: var(--opacity);
-        --bg-mark-color: #d8e3f5;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        --bg-mark-color: #d4d4d4;
         --top-mark: 8px;
-        @apply from-white;
         &.darkmode {
-            @apply from-gray-800;
             --bg-mark-color: #405985;
         }
     }
