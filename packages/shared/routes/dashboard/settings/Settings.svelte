@@ -24,7 +24,9 @@
 
 <div
     class="relative h-full w-full px-6 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !==
-        SettingsRoute.Init && 'md:pt-20'} {$mobile && 'overflow-y-auto'} "
+        SettingsRoute.Init && 'md:pt-20'} {$mobile && 'overflow-y-auto'} {$settingsRoute === SettingsRoute.Init &&
+        $mobile &&
+        'settings-wrapper'}"
     in:fly={{ duration: $mobile ? 200 : 0, x: 200 }}
 >
     {#if !$mobile}
@@ -38,3 +40,9 @@
         <SettingsViewer />
     {/if}
 </div>
+
+<style>
+    .settings-wrapper {
+        margin-bottom: calc(env(safe-area-inset-bottom) + 20px);
+    }
+</style>
