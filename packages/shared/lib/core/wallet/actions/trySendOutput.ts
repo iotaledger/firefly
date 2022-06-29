@@ -1,38 +1,31 @@
 import { selectedAccount } from '@core/account'
-import { localize } from '@core/i18n'
 import { isSoftwareProfile } from '@core/profile'
 import { OutputTypes } from '@iota/types'
 import { OutputOptions, TransactionOptions } from '@iota/wallet'
-import { showAppNotification } from '@lib/notifications'
 import { checkStronghold } from '@lib/stronghold'
 import { isTransferring } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
 
-export async function trySendOutput(outputOptions: OutputOptions, output: OutputTypes): Promise<void> {
-    const _send = async () => {
-        isTransferring.set(true)
+export async function trySendOutput(outputOptions: OutputOptions, outputTypes: OutputTypes): Promise<string> {
+    async function _send(): Promise<string> {
         try {
-            await sendOutput(outputOptions, output)
+            return sendOutput(outputOptions, outputTypes)
         } catch (err) {
-            console.error(err)
-            showAppNotification({
-                type: 'error',
-                message: localize(err.error),
-            })
+            return
         }
-        isTransferring.set(false)
     }
 
     if (get(isSoftwareProfile)) {
-        await checkStronghold(_send)
+        return checkStronghold(_send, true) as Promise<string>
     } else {
-        await _send()
+        return _send()
     }
 }
 
 async function sendOutput(outputOptions: OutputOptions, output: OutputTypes): Promise<string> {
+    isTransferring.set(true)
     const account = get(selectedAccount)
     const transferOptions: TransactionOptions = {
         remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
@@ -44,5 +37,6 @@ async function sendOutput(outputOptions: OutputOptions, output: OutputTypes): Pr
         new Activity().setNewTransaction(account, transactionId, outputOptions, output)
     )
     // TODO: fetch transaction
+    isTransferring.set(false)
     return transactionId
 }
