@@ -141,7 +141,7 @@
         if ($coords.y < 0) {
             return
         }
-        coords.update(
+        await coords.update(
             ($coords) => ({
                 x: $coords.x + event.detail.sx,
                 y: $coords.y + event.detail.sy,
