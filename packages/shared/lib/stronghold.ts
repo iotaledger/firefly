@@ -3,9 +3,9 @@ import { isLedgerProfile } from '@core/profile'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { get } from 'svelte/store'
 import { showAppNotification } from './notifications'
-import { openPopup } from './popup'
+import { openPopup, popupState } from './popup'
 
-export async function checkStronghold(callback: () => unknown): Promise<void> {
+export async function checkStronghold(callback: () => unknown, reopenPopup?: boolean): Promise<unknown> {
     if (get(isLedgerProfile)) {
         showAppNotification({
             type: 'error',
@@ -18,17 +18,17 @@ export async function checkStronghold(callback: () => unknown): Promise<void> {
     try {
         const strongholdUnlocked = await isStrongholdUnlocked()
         if (strongholdUnlocked) {
-            callback()
+            return callback()
         } else {
-            openPopup(
-                {
-                    type: 'password',
-                    props: {
-                        onSuccess: callback,
-                    },
-                },
-                true
-            )
+            if (reopenPopup) {
+                const popup = get(popupState)
+                openPasswordPopup(() => {
+                    callback()
+                    openPopup(popup)
+                })
+            } else {
+                openPasswordPopup(callback)
+            }
         }
     } catch (err) {
         console.error(err)
@@ -37,4 +37,16 @@ export async function checkStronghold(callback: () => unknown): Promise<void> {
             message: localize(err?.error),
         })
     }
+}
+
+function openPasswordPopup(onSuccess: () => unknown) {
+    openPopup(
+        {
+            type: 'password',
+            props: {
+                onSuccess,
+            },
+        },
+        true
+    )
 }
