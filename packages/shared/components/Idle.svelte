@@ -3,11 +3,20 @@
     import { activeProfile } from 'shared/lib/profile'
     import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/time'
     import { debounce } from 'shared/lib/utils'
-    import { onDestroy, onMount } from 'svelte'
+    import { wallet } from 'shared/lib/wallet'
+    import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
+
+    const { accountsLoaded } = $wallet
 
     let timeout
     let isDestroyed = false
+
+    // Initialize idle time when the accounts are loaded.
+    // Important for mobile as the user can simply login and not touch the screen for a while.
+    $: if ($accountsLoaded) {
+        debounce(updateIdleTime)()
+    }
 
     function updateIdleTime(): void {
         /**
@@ -55,9 +64,6 @@
         void logout()
     }
 
-    // Initialize idle time when the component is mounted in case the user doesnt do anything at all.
-    // Important for mobile as the user can simply login and not touch the screen for a while.
-    onMount(updateIdleTime)
     onDestroy(() => {
         isDestroyed = true
         clearTimeout(timeout)
