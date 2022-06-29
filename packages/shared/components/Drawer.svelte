@@ -57,13 +57,15 @@
         let x: number
         let y: number
         let init: number
-        let startY = 0
+        let startY: number
+        let now: number
         // Define arrays for calc velocity later
         const positionQueue = [0, 0, startY]
-        const timeQueue = [0, 0, window.performance.now()]
+        const timeQueue = [0, 0, now]
 
         function handleTouchstart(event: TouchEvent): void {
             startY = event.touches[0].pageY
+            now = window.performance.now()
 
             if (preventSlide) {
                 event.preventDefault()
@@ -86,6 +88,10 @@
             timeQueue.push(window.performance.now())
             positionQueue.shift()
             timeQueue.shift()
+            const startY = positionQueue[0]
+            const endY = positionQueue[positionQueue.length - 1]
+            const initTime = timeQueue[0]
+            const endTime = timeQueue[timeQueue.length - 1]
 
             if (event.targetTouches.length === 1) {
                 const sx = event.touches[0].pageX - x
@@ -95,22 +101,14 @@
 
                 node.dispatchEvent(
                     new CustomEvent('slideMove', {
-                        detail: { x, y, sx, sy },
+                        detail: { x, y, sx, sy, startY, endY, initTime, endTime },
                     })
                 )
             }
         }
 
         function handleTouchend() {
-            const startY = positionQueue[0]
-            const endY = positionQueue[positionQueue.length - 1]
-            const initTime = timeQueue[0]
-            const endTime = timeQueue[timeQueue.length - 1]
-            node.dispatchEvent(
-                new CustomEvent('slideEnd', {
-                    detail: { startY, endY, initTime, endTime },
-                })
-            )
+            node.dispatchEvent(new CustomEvent('slideEnd'))
 
             const elapsed = window.performance.now()
             if (init >= elapsed - 300) {
@@ -132,16 +130,19 @@
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
         // Calc slide gesture velocity between events
-        const distance = event.detail._endY - event.detail._startY
-        const time = (event.detail._endTime - event.detail._initTime) / 1000
-        const velocity = Math.round(distance / time) || 0
-        // Limit velocity to adapt context
-        const slideVelocity = velocity < -8000 ? -8000 : velocity
+        let distance = event.detail.endY - event.detail.startY
+        let time = (event.detail.endTime - event.detail.initTime) / 1000
+        let slideVelocity = Math.round(distance / time) || 0
+        console.error(slideVelocity)
+        if (slideVelocity > 900) {
+            distance = time = slideVelocity = 0
+            return close()
+        }
 
         if ($coords.y < 0) {
             return
         }
-        await coords.update(
+        coords.update(
             ($coords) => ({
                 x: $coords.x + event.detail.sx,
                 y: $coords.y + event.detail.sy,
