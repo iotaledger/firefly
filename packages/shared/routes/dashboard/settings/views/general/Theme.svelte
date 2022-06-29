@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Radio, Text, TextHint } from 'shared/components'
+    import { Radio, Text, Icon } from 'shared/components'
     import { AppTheme, appSettings, shouldBeDarkMode } from '@core/app'
     import { localize } from '@core/i18n'
 
@@ -14,5 +14,8 @@
 <Radio value={'dark'} bind:group={appTheme} label={localize('general.darkTheme')} />
 <Radio value={'system'} bind:group={appTheme} label={localize('general.systemTheme')} />
 {#if appTheme === 'system'}
-    <TextHint classes="mb-5" icon="info" hint={localize('views.settings.theme.advice')} />
+    <div class="flex flex-row items-center mb-5">
+        <Icon icon="info" classes="mr-3 fill-current text-black dark:text-white" />
+        <Text fontSize="14" lineHeight="5">{localize('views.settings.theme.advice')}</Text>
+    </div>
 {/if}

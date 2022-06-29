@@ -933,8 +933,9 @@
         "claiming": "Claiming",
         "reject": "Reject",
         "confirmRejection": {
-            "title": "Hide Transaction",
-            "description": "Do you want to hide this transaction from your activity?"
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
         },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
