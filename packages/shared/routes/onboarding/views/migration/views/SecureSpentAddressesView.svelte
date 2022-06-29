@@ -9,15 +9,14 @@
     import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
-
     const addresses = $spentAddressesFromBundles.map((address) => Object.assign({}, address, { id: address.index }))
+    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
 
     let selectedAddresses = addresses.filter((address) => address.selectedToMine === true)
 
-    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
-    function onAddressClick(address) {
+    function onAddressClick(address): void {
         const index = selectedAddresses.findIndex((_address) => _address.id === address.id)
         if (index === -1) {
             selectedAddresses.push(address)
@@ -29,14 +28,14 @@
         selectedAddresses = selectedAddresses
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         // If a user goes back, automatically select all bundles with spent addresses
         selectAllAddressesForMining()
 
         dispatch('previous')
     }
 
-    function secureAddresses() {
+    function secureAddresses(): void {
         if (selectedAddresses.length) {
             if (selectedAddresses?.length < addresses?.length) {
                 triggerPopup()
@@ -48,11 +47,11 @@
         }
     }
 
-    function handleSkipClick() {
+    function handleSkipClick(): void {
         triggerPopup(true)
     }
 
-    function triggerPopup(skippedMining = false) {
+    function triggerPopup(skippedMining = false): void {
         openPopup({
             type: 'riskFunds',
             props: {
@@ -87,9 +86,7 @@
         <Link onClick={handleSkipClick} classes="absolute -top-12 right-0">{localize('actions.skip')}</Link>
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full" onClick={() => secureAddresses()}
-            >{localize('views.secureSpentAddresses.title')}</Button
-        >
+        <Button classes="w-full" onClick={secureAddresses}>{localize('views.secureSpentAddresses.title')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" {animation} />

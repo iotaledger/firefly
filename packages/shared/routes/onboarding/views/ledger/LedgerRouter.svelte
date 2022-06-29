@@ -40,8 +40,13 @@
         }
     }
 
-    const next = (event: CustomEvent<FireflyEvent>): void => $ledgerRouter.next(event.detail)
-    const previous = (): void => $ledgerRouter.previous()
+    function next(event: CustomEvent<FireflyEvent>): void {
+        $ledgerRouter.next(event.detail)
+    }
+
+    function previous(): void {
+        $ledgerRouter.previous()
+    }
 </script>
 
 {#if $ledgerRoute === LedgerRoute.Connect}

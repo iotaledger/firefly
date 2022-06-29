@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { AppStage, appStage } from '@core/app'
-import { updateNewProfile } from '@core/profile'
+import { updateNewProfile } from '@contexts/onboarding'
 
 import { AppSetupRoute } from '../enums'
 import { Subrouter } from './subrouter'
@@ -12,7 +12,7 @@ export const appSetupRouter = writable<AppSetupRouter>(null)
 
 export class AppSetupRouter extends Subrouter<AppSetupRoute> {
     constructor() {
-        super(AppSetupRoute.Legal, appSetupRoute)
+        super(AppSetupRoute.Legal, appSetupRoute, onboardingRouter)
     }
 
     next(): void {

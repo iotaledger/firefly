@@ -11,7 +11,7 @@
         $appSetupRouter.previous()
     }
 
-    const handleContinueClick = (): void => {
+    function handleContinueClick(): void {
         appSettings.set({ ...$appSettings, sendCrashReports })
 
         if (!$isAwareOfCrashReporting) {

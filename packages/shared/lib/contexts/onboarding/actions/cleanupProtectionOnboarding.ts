@@ -1,7 +1,8 @@
 import { get } from 'svelte/store'
 
 import { Platform } from '@lib/platform'
-import { newProfile } from '@core/profile'
+
+import { newProfile } from '../stores'
 
 // import { ProfileRecoveryType } from '../enums'
 // import { profileRecoveryType } from '../stores'

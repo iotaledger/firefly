@@ -2,11 +2,11 @@
     import { Button, Checkbox, OnboardingLayout, Text } from 'shared/components'
     import ConditionsOfUse from './ConditionsOfUse.svelte'
     import {
-        mobile,
-        lastAcceptedTermsOfService,
         lastAcceptedPrivacyPolicy,
-        TERMS_OF_SERVICE_VERSION,
+        lastAcceptedTermsOfService,
+        mobile,
         PRIVACY_POLICY_VERSION,
+        TERMS_OF_SERVICE_VERSION,
     } from '@core/app'
     import { localize } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
@@ -21,6 +21,7 @@
         lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
         $appSetupRouter.next()
     }
+
     function handleBackClick(): void {
         $appSetupRouter.previous()
     }
@@ -37,7 +38,7 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col {$mobile ? 'space-y-4' : 'space-y-8'}">
         <Checkbox label={localize('views.legal.checkbox')} bind:checked />
-        <Button classes="w-full" disabled={!termsAccepted} onClick={() => handleContinueClick()}>
+        <Button classes="w-full" disabled={!termsAccepted} onClick={handleContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>

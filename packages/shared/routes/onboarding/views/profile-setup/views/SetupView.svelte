@@ -4,9 +4,8 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
-    import { newProfile } from '@core/profile'
+    import { newProfile, ProfileSetupType } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
-    import { ProfileSetupType } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
 
     function handleContinueClick(profileSetupType: ProfileSetupType): void {

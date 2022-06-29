@@ -3,6 +3,7 @@
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
     import { networkRouter } from '@core/router'
+    import { initProfileManagerFromNewProfile } from '@contexts/onboarding'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
@@ -11,7 +12,10 @@
     function onBackClick(): void {
         $networkRouter.previous()
     }
-    function onSuccess(): void {
+
+    async function onSuccess(): Promise<void> {
+        // await nodeConfigurationForm.validate({ validateUrl: true, })
+        await initProfileManagerFromNewProfile(node)
         $networkRouter.next()
     }
 </script>
@@ -22,14 +26,7 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{localize('views.customNetwork.body')}</Text>
-        <NodeConfigurationForm
-            bind:this={nodeConfigurationForm}
-            bind:node
-            bind:isBusy
-            hideButtons
-            hideCheckbox
-            {onSuccess}
-        />
+        <NodeConfigurationForm bind:this={nodeConfigurationForm} bind:node bind:isBusy hideButtons hideCheckbox />
     </div>
     <div slot="leftpane__action">
         <Button
@@ -37,7 +34,7 @@
             type="submit"
             form="node-config-form"
             classes="w-full"
-            onClick={nodeConfigurationForm?.handleAddNode}
+            onClick={onSuccess}
         >
             {#if isBusy}
                 <Spinner busy={isBusy} message={localize('popups.node.addingNode')} classes="justify-center" />

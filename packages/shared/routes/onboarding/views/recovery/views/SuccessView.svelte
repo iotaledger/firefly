@@ -26,7 +26,7 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full" onClick={() => handleContinueClick()}>{localize('actions.continue')}</Button>
+        <Button classes="w-full" onClick={handleContinueClick}>{localize('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
         <Animation

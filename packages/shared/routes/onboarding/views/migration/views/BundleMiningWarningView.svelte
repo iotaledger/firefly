@@ -3,17 +3,17 @@
     import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { Platform } from '@lib/platform'
-    import { profileRecoveryType } from '@lib/wallet'
-    import { ProfileRecoveryType } from '@contexts/onboarding'
+    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
     const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
 
     const dispatch = createEventDispatcher()
 
-    const handleContinueClick = () => {
+    function handleContinueClick(): void {
         dispatch('next')
     }
-    function handleBackClick() {
+
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>
@@ -44,6 +44,6 @@
         </div>
     </div>
     <div slot="actions">
-        <Button classes="w-64 my-8" onClick={() => handleContinueClick()}>{localize('actions.continue')}</Button>
+        <Button classes="w-64 my-8" onClick={handleContinueClick}>{localize('actions.continue')}</Button>
     </div>
 </BundleMiningLayout>

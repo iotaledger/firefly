@@ -705,8 +705,7 @@
                     "latestMilestone": "Latest milestone",
                     "confirmedMilestone": "Confirmed milestone",
                     "pruningIndex": "Pruning index",
-                    "features": "Features",
-                    "plugins": "Plugins"
+                    "features": "Features"
                 },
                 "metrics": {
                     "tab": "Metrics",
@@ -933,6 +932,10 @@
         "claim": "Claim",
         "claiming": "Claiming",
         "reject": "Reject",
+        "confirmRejection": {
+            "title": "Hide Transaction",
+            "description": "Do you want to hide this transaction from your activity?"
+        },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
@@ -1266,13 +1269,13 @@
         "transferring": "Please wait until all transactions are completed to change wallets.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
-            "success": "Claiming transaction successfully",
+            "success": "Transaction claimed",
             "error": "Claiming transaction failed"
         },
-         "rejected": {
-             "success": "Rejecting transaction successfully",
-             "error": "Rejecting transaction failed"
-         }
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {
@@ -1349,7 +1352,10 @@
             "noSynced": "No synced nodes are available.",
             "answer": "Failed to get an answer from all nodes.",
             "forbidden": "This node connection is forbidden.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node"
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",

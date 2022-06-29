@@ -3,16 +3,17 @@
     import features from 'shared/features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { newProfile, ProfileType, setNewProfileType } from '@core/profile'
+    import { ProfileType } from '@core/profile'
     import { profileSetupRouter } from '@core/router'
-    import { ProfileRecoveryType } from '@contexts/onboarding'
+    import { ProfileRecoveryType, setNewProfileType, newProfile } from '@contexts/onboarding'
 
-    function handleContinueClick(profileRecoveryType: ProfileRecoveryType) {
+    function handleContinueClick(profileRecoveryType: ProfileRecoveryType): void {
         const profileType =
             profileRecoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
         setNewProfileType(profileType)
         $profileSetupRouter.next({ profileRecoveryType })
     }
+
     function handleBackClick() {
         $profileSetupRouter.previous()
     }

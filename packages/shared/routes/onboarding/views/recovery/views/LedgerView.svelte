@@ -4,8 +4,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
-    import { newProfile } from '@core/profile'
-    import { ProfileRecoveryType } from '@contexts/onboarding'
+    import { newProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 

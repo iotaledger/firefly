@@ -11,9 +11,9 @@
 
     const { importFile } = getContext<RecoveryRouter>('importRouter')
 
-    let password = ''
-
     const dispatch = createEventDispatcher()
+
+    let password = ''
 
     async function handleContinue(): Promise<void> {
         if (password) {
@@ -64,7 +64,7 @@
         <Button
             classes="flex-1"
             disabled={password.length === 0 || busy || $isGettingMigrationData}
-            onClick={() => handleContinue()}
+            onClick={handleContinue}
         >
             {#if $isGettingMigrationData}
                 <Spinner

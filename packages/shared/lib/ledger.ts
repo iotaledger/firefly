@@ -1,16 +1,12 @@
 import { get, writable } from 'svelte/store'
-
 import { localize } from '@core/i18n'
 import { resetWalletRoute, appRouter, AppRoute } from '@core/router'
 import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
 
 import { removeAddressChecksum } from './migration'
 import { isNewNotification, showAppNotification } from './notifications'
-import { closePopup, openPopup, popupState } from './popup'
-import { api } from './wallet'
-import { Event } from './typings/events'
+import { openPopup, popupState } from './popup'
 import {
-    LedgerApp,
     LedgerAppName,
     LedgerDeviceState,
     LedgerStatus,
@@ -19,7 +15,7 @@ import {
 } from './typings/ledger'
 import { NotificationType } from './typings/notification'
 
-const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
+// const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90
 
 let intervalTimer
@@ -28,34 +24,34 @@ export const ledgerSimulator = false
 export const ledgerDeviceState = writable<LedgerDeviceState>(LedgerDeviceState.NotDetected)
 export const isLedgerLegacyConnected = writable<boolean>(false)
 
-export function getLedgerDeviceStatus(
-    legacy: boolean = false,
-    onConnected: () => void = () => {},
-    onDisconnected: () => void = () => {},
-    onError: () => void = () => {}
-): void {
-    api.getLedgerDeviceStatus(ledgerSimulator, {
-        onSuccess(response: Event<LedgerStatus>) {
-            ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
+// export function getLedgerDeviceStatus(
+//     legacy: boolean = false,
+//     onConnected: () => void = () => {},
+//     onDisconnected: () => void = () => {},
+//     onError: () => void = () => {}
+// ): void {
+// api.getLedgerDeviceStatus(ledgerSimulator, {
+//     onSuccess(response: Event<LedgerStatus>) {
+//         ledgerDeviceState.set(calculateLedgerDeviceState(response.payload))
 
-            const state = get(ledgerDeviceState)
-            const isConnected =
-                (legacy && state === LedgerDeviceState.LegacyConnected) ||
-                (!legacy && state === LedgerDeviceState.Connected)
-            if (isConnected) {
-                if (get(popupState).active && get(popupState).type === 'ledgerNotConnected') {
-                    closePopup()
-                }
-                onConnected()
-            } else {
-                onDisconnected()
-            }
-        },
-        onError() {
-            onError()
-        },
-    })
-}
+//         const state = get(ledgerDeviceState)
+//         const isConnected =
+//             (legacy && state === LedgerDeviceState.LegacyConnected) ||
+//             (!legacy && state === LedgerDeviceState.Connected)
+//         if (isConnected) {
+//             if (get(popupState).active && get(popupState).type === 'ledgerNotConnected') {
+//                 closePopup()
+//             }
+//             onConnected()
+//         } else {
+//             onDisconnected()
+//         }
+//     },
+//     onError() {
+//         onError()
+//     },
+// })
+// }
 
 export function isLedgerConnected(legacy: boolean = false): boolean {
     const state = get(ledgerDeviceState)
@@ -88,18 +84,18 @@ export function calculateLedgerDeviceState(status: LedgerStatus): LedgerDeviceSt
     }
 }
 
-export function getLedgerOpenedApp(): Promise<LedgerApp> {
-    return new Promise<LedgerApp>((resolve, reject) => {
-        api.getLedgerDeviceStatus(ledgerSimulator, {
-            onSuccess(response: Event<LedgerStatus>) {
-                resolve(response.payload?.app)
-            },
-            onError(err) {
-                reject(err)
-            },
-        })
-    })
-}
+// export function getLedgerOpenedApp(): Promise<LedgerApp> {
+//     return new Promise<LedgerApp>((resolve, reject) => {
+//         api.getLedgerDeviceStatus(ledgerSimulator, {
+//             onSuccess(response: Event<LedgerStatus>) {
+//                 resolve(response.payload?.app)
+//             },
+//             onError(err) {
+//                 reject(err)
+//             },
+//         })
+//     })
+// }
 
 export function promptUserToConnectLedger(
     legacy: boolean = false,
@@ -118,19 +114,25 @@ export function promptUserToConnectLedger(
             openLedgerNotConnectedPopup(
                 legacy,
                 onCancel,
-                () =>
-                    pollLedgerDeviceStatus(
-                        legacy,
-                        LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT,
-                        _onConnected,
-                        _onDisconnected,
-                        _onCancel
-                    ),
+                // TODO: remove dummy code & replace w/ pollLedgerDeviceStatus
+                () => {
+                    _onCancel()
+                    _onConnected()
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    _onDisconnected()
+                },
+                // pollLedgerDeviceStatus(
+                //     legacy,
+                //     LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT,
+                //     _onConnected,
+                //     _onDisconnected,
+                //     _onCancel
+                // ),
                 overridePopup
             )
         }
     }
-    getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
+    // getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
 }
 
 export function displayNotificationForLedgerProfile(
@@ -171,12 +173,7 @@ export function displayNotificationForLedgerProfile(
     }
 
     if (checkDeviceStatus) {
-        getLedgerDeviceStatus(
-            false,
-            () => {},
-            () => _notify(),
-            () => _notify()
-        )
+        // getLedgerDeviceStatus()
     } else {
         _notify()
     }
@@ -202,22 +199,22 @@ export function isLedgerError(error: { name; type }): boolean {
 
 export const isPollingLedgerDeviceStatus = writable<boolean>(false)
 
-export function pollLedgerDeviceStatus(
-    legacy: boolean = false,
-    pollInterval: number = 1000,
-    _onConnected: () => void = () => {},
-    _onDisconnected: () => void = () => {},
-    _onCancel: () => void = () => {}
-): void {
-    if (!get(isPollingLedgerDeviceStatus)) {
-        getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
-        /* eslint-disable @typescript-eslint/no-misused-promises */
-        intervalTimer = setInterval(() => {
-            getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
-        }, pollInterval)
-        isPollingLedgerDeviceStatus.set(true)
-    }
-}
+// export function pollLedgerDeviceStatus(
+//     legacy: boolean = false,
+//     pollInterval: number = 1000,
+//     _onConnected: () => void = () => {},
+//     _onDisconnected: () => void = () => {},
+//     _onCancel: () => void = () => {}
+// ): void {
+//     if (!get(isPollingLedgerDeviceStatus)) {
+//         // getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
+//         /* eslint-disable @typescript-eslint/no-misused-promises */
+//         intervalTimer = setInterval(() => {
+//             // getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
+//         }, pollInterval)
+//         isPollingLedgerDeviceStatus.set(true)
+//     }
+// }
 
 function openLedgerNotConnectedPopup(
     legacy: boolean = false,

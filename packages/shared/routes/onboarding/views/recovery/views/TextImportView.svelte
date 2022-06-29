@@ -30,11 +30,7 @@
         <ImportTextfield disabled={$isGettingMigrationData} type={$profileRecoveryType} bind:value={input} />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button
-            classes="flex-1"
-            disabled={input.length === 0 || $isGettingMigrationData}
-            onClick={() => handleContinueClick()}
-        >
+        <Button classes="flex-1" disabled={input.length === 0 || $isGettingMigrationData} onClick={handleContinueClick}>
             {#if $isGettingMigrationData}
                 <Spinner
                     busy={$isGettingMigrationData}

@@ -12,13 +12,13 @@
     export let address = ''
     export let balance = 0
     export let selected = false
-    export let risk = undefined
+    export let risk: RiskLevel = undefined
     export let showRiskLevel = false
 
     export let onClick = (): void => {}
 
     let showTooltip = false
-    let tooltipAnchor
+    let tooltipAnchor: HTMLElement
 
     let riskColor = 'gray'
     let localeRiskLevel = ''

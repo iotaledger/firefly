@@ -1,6 +1,7 @@
 export * from './import-file-path.store'
 export * from './is-getting-migration-data.store'
 export * from './mnemonic.store'
+export * from './new-profile.store'
 export * from './profile-recovery-type.store'
 export * from './profile-setup-type.store'
 export * from './stronghold-password.store'

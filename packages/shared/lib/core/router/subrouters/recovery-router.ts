@@ -7,7 +7,7 @@ import {
     profileRecoveryType,
     ProfileRecoveryType,
 } from '@contexts/onboarding'
-import { getMigrationData } from '@lib/migration'
+// import { getMigrationData } from '@lib/migration'
 
 import { onboardingRouter } from '../onboarding-router'
 import { RecoveryRoute } from '../enums'
@@ -24,7 +24,7 @@ export class RecoveryRouter extends Subrouter<RecoveryRoute> {
         super(getInitialRoute() ?? RecoveryRoute.TextImport, recoveryRoute, onboardingRouter)
     }
 
-    async next(event: FireflyEvent): Promise<void> {
+    next(event: FireflyEvent): void {
         let nextRoute: RecoveryRoute
         const params = event || {}
 
@@ -35,7 +35,7 @@ export class RecoveryRouter extends Subrouter<RecoveryRoute> {
                 const _profileRecoveryType = get(profileRecoveryType)
                 if (_profileRecoveryType === ProfileRecoveryType.Seed) {
                     isGettingMigrationData.set(true)
-                    await getMigrationData(migrationSeed)
+                    // await getMigrationData(migrationSeed)
                     isGettingMigrationData.set(false)
                     get(onboardingRouter).next({ profileRecoveryType: _profileRecoveryType })
                 } else if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {

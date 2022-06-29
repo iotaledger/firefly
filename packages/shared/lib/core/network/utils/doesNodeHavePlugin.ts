@@ -1,7 +1,9 @@
-import { get } from 'svelte/store'
-import { NodePlugin } from '../enums'
-import { networkStatus } from '../stores/network-status.store'
+enum NodePlugin {
+    Participation = 'Participation',
+    ProofOfWork = 'PoW',
+}
 
 export function doesNodeHavePlugin(plugin: NodePlugin): boolean {
-    return get(networkStatus).nodePlugins.includes(plugin)
+    return Object.keys(NodePlugin).includes(plugin)
+    // return get(networkStatus).nodePlugins.includes(plugin)
 }

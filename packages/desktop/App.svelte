@@ -1,30 +1,24 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
-    import {
-        activeProfile,
-        cleanupEmptyProfiles,
-        isActiveProfileOutdated,
-        migrateActiveProfile,
-        updateNewProfile,
-    } from '@core/profile'
+    import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
     import {
         accountRouter,
         AppRoute,
+        appRouter,
         DashboardRoute,
         dashboardRouter,
         initRouters,
         openSettings,
-        appRouter,
     } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import {
-        setAppVersionDetails,
-        pollCheckForAppUpdate,
-        appVersionDetails,
         appSettings,
-        initAppSettings,
-        AppStage,
         appStage,
+        AppStage,
+        appVersionDetails,
+        initAppSettings,
+        pollCheckForAppUpdate,
+        setAppVersionDetails,
     } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
@@ -35,6 +29,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
+    import { createNewProfile } from '@contexts/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -114,12 +109,12 @@
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            updateNewProfile({ isDeveloperProfile: true })
+            createNewProfile({ isDeveloperProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            updateNewProfile({ isDeveloperProfile: false })
+            createNewProfile({ isDeveloperProfile: false })
         })
         Electron.hookErrorLogger((err) => {
             addError(err)

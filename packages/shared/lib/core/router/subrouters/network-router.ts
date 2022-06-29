@@ -1,11 +1,12 @@
 import { get, writable } from 'svelte/store'
 
+import { newProfile } from '@contexts/onboarding'
+import { NetworkType } from '@core/network'
+
+import { onboardingRouter } from '../onboarding-router'
 import { NetworkRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
-import { newProfile } from '@core/profile'
-import { onboardingRouter } from '@core/router'
-import { NetworkType } from '@core/network'
 
 export const networkRoute = writable<NetworkRoute>(null)
 export const networkRouter = writable<NetworkRouter>(null)

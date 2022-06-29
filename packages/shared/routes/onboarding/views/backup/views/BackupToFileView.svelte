@@ -6,20 +6,16 @@
     import { storeMnemonic } from '@core/profile-manager'
     import { backupInitialStronghold, mnemonic } from '@contexts/onboarding'
 
-    export let strongholdPassword
+    export let strongholdPassword = ''
     export let busy = false
 
-    let confirmPassword
+    let confirmPassword = ''
     let skipBackup = false
 
     const dispatch = createEventDispatcher()
 
     let isStrongholdPasswordValid = false
     $: isStrongholdPasswordValid = strongholdPassword === confirmPassword
-
-    function handleBackClick() {
-        dispatch('previous')
-    }
 
     async function onboardingBackupFileFunction(_skipBackup: boolean = false): Promise<void> {
         skipBackup = _skipBackup
@@ -41,6 +37,10 @@
         if (isStrongholdPasswordValid) {
             await onboardingBackupFileFunction()
         }
+    }
+
+    function handleBackClick(): void {
+        dispatch('previous')
     }
 </script>
 

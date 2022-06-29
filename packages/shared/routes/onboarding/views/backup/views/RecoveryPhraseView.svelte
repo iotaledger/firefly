@@ -6,10 +6,11 @@
     import { generateAndStoreMnemonic } from '@lib/wallet'
     import { downloadRecoveryKit } from '@lib/utils'
 
-    export let mnemonic
-    export let busy
+    export let mnemonic: string[]
+    export let busy = false
 
     const dispatch = createEventDispatcher()
+
     let hide = true
     let hasRevealedRecoveryPhrase = false
 
@@ -46,7 +47,7 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#if !$mobile}
-            <Button secondary classes="w-full" onClick={() => handleDownloadClick()}>
+            <Button secondary classes="w-full" onClick={handleDownloadClick}>
                 {localize('actions.downloadRecoveryKit')}
             </Button>
         {/if}

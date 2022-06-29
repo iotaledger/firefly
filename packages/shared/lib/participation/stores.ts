@@ -1,5 +1,5 @@
 import { IAccountState, selectedAccountId } from '@core/account'
-import { INetworkStatus, networkStatus, NodePlugin } from '@core/network'
+import { INetworkStatus, networkStatus } from '@core/network'
 import { activeAccounts } from '@core/profile'
 import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
 import { derived, get, Readable, writable } from 'svelte/store'
@@ -248,7 +248,8 @@ function deriveParticipationEventState(
     stakingEvent: ParticipationEvent,
     networkStatus: INetworkStatus
 ): ParticipationEventState {
-    if (!stakingEvent || !networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
+    // if (!stakingEvent || !networkStatus.nodePlugins.includes(NodePlugin.Participation)) {
+    if (!stakingEvent) {
         return ParticipationEventState.Inactive
     }
 

@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
+    import { onDestroy, onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { mobile } from '@core/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { Platform } from '@lib/platform'
@@ -10,27 +10,24 @@
     import { onboardingRouter, ledgerRouter } from '@core/router'
     import { LedgerAppName } from '@lib/typings/ledger'
     import { formatUnitBestMatch } from '@lib/units'
-    import { profileRecoveryType } from '@lib/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
     import { localize } from '@core/i18n'
-    import { ProfileRecoveryType } from '@contexts/onboarding'
+    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
     import {
         activeProfile,
         addNewProfile,
+        getStorageDirectoryOfProfile,
         loadPersistedProfileIntoActiveProfile,
         login,
-        newProfile,
-        getStorageDirectoryOfProfile,
     } from '@core/profile'
     import { createNewAccount } from '@core/account'
-    import { cleanupOnboarding } from '@contexts/onboarding'
+    import { newProfile, cleanupOnboarding } from '@contexts/onboarding'
 
     const { didComplete } = $migration
-
     const wasMigrated = $didComplete
 
     let localizedBody = 'body'
-    let localizedValues = {}
+    let localizedValues: { legacy: LedgerAppName }
     let logExported = false
 
     const fiatbalance = formatCurrency(

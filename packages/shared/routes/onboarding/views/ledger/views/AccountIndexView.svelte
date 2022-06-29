@@ -3,37 +3,31 @@
     import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
-    import { ADDRESS_SECURITY_LEVEL, getLedgerMigrationData, hardwareIndexes } from '@lib/migration'
+    import { ADDRESS_SECURITY_LEVEL, hardwareIndexes } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { popupState } from '@lib/popup'
     import { LedgerAppName } from '@lib/typings/ledger'
 
+    const dispatch = createEventDispatcher()
+
     let busy = false
     let expert = false
     let showInfo = false
-    let infoTimeout
-
-    const min = 0
-    const max = 2147483647
-
+    let infoTimeout: NodeJS.Timeout
     let index = 0
     let page = 0
+    let isValidAccountIndex = false
+    let isValidAccountPage = false
 
     $: index = checkNumber(index)
     $: page = checkNumber(page)
-
+    $: isValidAccountIndex = isValidNumber(index)
+    $: isValidAccountPage = isValidNumber(page)
     $: if (!busy) {
         showInfo = false
     }
 
     onDestroy(() => clearTimeout(infoTimeout))
-
-    let isValidAccountIndex = false
-    $: isValidAccountIndex = isValidNumber(index)
-    let isValidAccountPage = false
-    $: isValidAccountPage = isValidNumber(page)
-
-    const dispatch = createEventDispatcher()
 
     function checkNumber(n: number): number {
         if (!isWithinRange(n)) n = Math.min(Math.max(n, min), max)
@@ -53,20 +47,20 @@
         return n >= min && n <= max
     }
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         busy = true
-        const _onConnected = () => {
+        function _onConnected(): void {
             infoTimeout = setTimeout(() => (showInfo = true), 180000)
             Platform.ledger
                 .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
-                .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
+                // .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
                 .then((data) => {
                     busy = false
 
                     hardwareIndexes.update((_indexes) =>
                         Object.assign({}, _indexes, { accountIndex: index, pageIndex: page })
                     )
-                    dispatch('next', { balance: data.balance })
+                    dispatch('next', { balance: data?.balance })
                 })
                 .catch((error) => {
                     busy = false
@@ -76,11 +70,13 @@
                     console.error(error)
                 })
         }
-        const _onCancel = () => (busy = false)
+        function _onCancel(): void {
+            busy = false
+        }
         promptUserToConnectLedger(true, _onConnected, _onCancel)
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         dispatch('previous')
     }
 </script>

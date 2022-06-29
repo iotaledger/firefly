@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
-import { newProfile, profiles, ProfileType } from '@core/profile'
-import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
+import { profiles, ProfileType } from '@core/profile'
+import { newProfile, ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
 import { BackupRoute, OnboardingRoute } from './enums'

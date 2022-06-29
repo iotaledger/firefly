@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, RewardClaimList, Text } from 'shared/components'
+    import { onMount } from 'svelte'
     import { IAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { getAccounts } from '@core/profile-manager'
