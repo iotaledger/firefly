@@ -199,7 +199,7 @@
     </dim-zone>
     <content
         bind:this={content}
-        use:slidable={!fromLeft || !preventClose}
+        use:slidable={!fromLeft && !preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={() => (preventSlide = false)}
