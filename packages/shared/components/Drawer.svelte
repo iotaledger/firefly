@@ -27,14 +27,13 @@
     export let preventClose = false
     export let zIndex = 'z-30'
 
-    const dispatch = createEventDispatcher()
-
-    const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
-
     let content: HTMLElement = undefined
     let isOpen = false
+    let isVelocityReached = false
     let preventSlide = true
 
+    const dispatch = createEventDispatcher()
+    const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
     const coords = tweened(
         {
             x: fromLeft ? -viewportLength : 0,
@@ -56,16 +55,11 @@
         let x: number
         let y: number
         let init: number
-        let startY: number
-        let now: number
         // Define arrays for calc velocity later
-        const positionQueue = [0, 0, startY]
-        const timeQueue = [0, 0, now]
+        const positionQueue = [0, 0, 0]
+        const timeQueue = [0, 0, 0]
 
         function handleTouchstart(event: TouchEvent): void {
-            startY = event.touches[0].pageY
-            now = window.performance.now()
-
             if (preventSlide) {
                 event.preventDefault()
                 event.stopImmediatePropagation()
@@ -129,13 +123,14 @@
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
         // Calc slide gesture velocity between events
-        let distance = event.detail.endY - event.detail.startY
-        let time = (event.detail.endTime - event.detail.initTime) / 1000
-        let slideVelocity = Math.round(distance / time) || 0
+        const distance = event.detail.endY - event.detail.startY
+        const time = (event.detail.endTime - event.detail.initTime) / 1000
+        const slideVelocity = Math.round(distance / time) || 0
 
         if (slideVelocity > 900) {
-            distance = time = slideVelocity = 0
-            return close()
+            isVelocityReached = true
+        } else {
+            isVelocityReached = false
         }
 
         if ($coords.y < 0) {
@@ -152,10 +147,11 @@
 
     async function handleSlideEnd() {
         const contentHeight = parseInt(getComputedStyle(content).height)
-        const thresholdUnreached = fromLeft ? viewportLength / 2 > $coords.x : contentHeight / 2 > $coords.y
-        if (thresholdUnreached) {
+        const isThresholdUnreached = fromLeft ? viewportLength / 2 > $coords.x : contentHeight / 2 > $coords.y
+        if (isThresholdUnreached && !isVelocityReached) {
             await open()
         } else {
+            isVelocityReached = false
             await close()
         }
     }
