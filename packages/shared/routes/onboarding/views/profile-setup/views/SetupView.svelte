@@ -4,12 +4,13 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
-    import { newProfile, ProfileSetupType } from '@contexts/onboarding'
+    import { newProfile, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
     import { Platform } from '@lib/platform'
 
-    function handleContinueClick(profileSetupType: ProfileSetupType): void {
-        $profileSetupRouter.next({ profileSetupType })
+    function handleContinueClick(_profileSetupType: ProfileSetupType): void {
+        profileSetupType.set(_profileSetupType)
+        $profileSetupRouter.next({ profileSetupType: _profileSetupType })
     }
 
     function handleBackClick(): void {

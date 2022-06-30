@@ -1,10 +1,17 @@
 import { INode } from '@core/network'
 import { getStorageDirectoryOfProfile } from '@core/profile'
 import { setNewProfileClientOptions, newProfile } from '@contexts/onboarding'
-import { initialiseProfileManager } from '@core/profile-manager'
+import { initialiseProfileManager, profileManager } from '@core/profile-manager'
 import { get } from 'svelte/store'
 
-export async function initProfileManagerFromNewProfile(node?: INode): Promise<void> {
+export async function initProfileManagerFromNewProfile(
+    node?: INode,
+    checkForExistingManager: boolean = false
+): Promise<void> {
+    if (checkForExistingManager && get(profileManager)) {
+        return
+    }
+
     const profile = get(newProfile)
     await setNewProfileClientOptions(profile.networkProtocol, profile.networkType, node)
 

@@ -3,13 +3,14 @@
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { profileRecoveryType, isGettingMigrationData } from '@contexts/onboarding'
+    import { profileRecoveryType, isGettingMigrationData, mnemonic } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 
     let input = ''
 
     function handleContinueClick(): void {
+        mnemonic.set(input.split(' '))
         dispatch('next', { migrationSeed: input })
     }
 

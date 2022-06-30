@@ -3,6 +3,7 @@
     import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { setImportFile, setProfileRecoveryTypeFromFilename, validateBackupFile } from '@contexts/onboarding'
 
     interface FileWithPath extends File {
         path?: string
@@ -17,7 +18,10 @@
     let dropping = false
 
     function handleContinueClick(): void {
-        dispatch('next', { file, fileName, filePath })
+        validateBackupFile(fileName)
+        setProfileRecoveryTypeFromFilename(fileName)
+        setImportFile(file, filePath)
+        dispatch('next')
     }
     function handleBackClick(): void {
         dispatch('previous')

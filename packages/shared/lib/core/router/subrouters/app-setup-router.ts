@@ -1,8 +1,5 @@
 import { get, writable } from 'svelte/store'
 
-import { AppStage, appStage } from '@core/app'
-import { updateNewProfile } from '@contexts/onboarding'
-
 import { AppSetupRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { onboardingRouter } from '../onboarding-router'
@@ -27,9 +24,6 @@ export class AppSetupRouter extends Subrouter<AppSetupRoute> {
                 nextRoute = AppSetupRoute.LanguageAndAppearance
                 break
             case AppSetupRoute.LanguageAndAppearance:
-                if (get(appStage) !== AppStage.PROD) {
-                    updateNewProfile({ isDeveloperProfile: true })
-                }
                 this.parentRouter.next()
                 break
         }

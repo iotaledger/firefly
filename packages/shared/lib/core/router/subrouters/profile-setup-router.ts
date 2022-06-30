@@ -1,12 +1,11 @@
 import { get, writable } from 'svelte/store'
 
-import { profileRecoveryType, ProfileRecoveryType, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
+import { ProfileRecoveryType, ProfileSetupType } from '@contexts/onboarding'
 
-import { ProfileSetupRoute, RecoveryRoute } from '../enums'
+import { ProfileSetupRoute } from '../enums'
 import { onboardingRouter } from '../onboarding-router'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
-import { recoveryRoute } from '@core/router'
 
 export const profileSetupRoute = writable<ProfileSetupRoute>(null)
 export const profileSetupRouter = writable<ProfileSetupRouter>(null)
@@ -25,7 +24,6 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
             case ProfileSetupRoute.Setup: {
                 const _profileSetupType = params?.profileSetupType
                 if (_profileSetupType) {
-                    profileSetupType.set(_profileSetupType)
                     if (_profileSetupType === ProfileSetupType.Claimed) {
                         nextRoute = ProfileSetupRoute.SetupClaimed
                     } else if (_profileSetupType === ProfileSetupType.New) {
@@ -40,7 +38,6 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
             case ProfileSetupRoute.SetupRecovered: {
                 const _profileRecoveryType = params?.profileRecoveryType
                 if (_profileRecoveryType) {
-                    profileRecoveryType.set(_profileRecoveryType)
                     if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
                         nextRoute = ProfileSetupRoute.EnterName
                         this.parentRouter.next()
@@ -49,8 +46,6 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                         _profileRecoveryType === ProfileRecoveryType.File
                     ) {
                         nextRoute = ProfileSetupRoute.EnterName
-                        recoveryRoute.set(RecoveryRoute.FileImport)
-                        profileRecoveryType.set(ProfileRecoveryType.Stronghold)
                         this.parentRouter.next()
                     } else if (_profileRecoveryType === ProfileRecoveryType.Ledger) {
                         nextRoute = ProfileSetupRoute.EnterName

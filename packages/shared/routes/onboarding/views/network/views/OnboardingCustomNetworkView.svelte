@@ -26,7 +26,7 @@
                 checkNodeInfo: false,
                 validateClientOptions: false,
             })
-            await initProfileManagerFromNewProfile(node)
+            await initProfileManagerFromNewProfile(node, true)
             await getNodeInfo(node.url)
             $networkRouter.next()
         } catch (err) {
@@ -47,7 +47,7 @@
     }
 </script>
 
-<OnboardingLayout {handleBackClick}>
+<OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
         <Text type="h2">{localize('views.customNetwork.title')}</Text>
     </div>
