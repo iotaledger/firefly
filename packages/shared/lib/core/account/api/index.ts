@@ -1,5 +1,5 @@
 export * from './buildBasicOutput'
-export * from './collectOutputs'
+export * from './claimOutputs'
 export * from './generateAddress'
 export * from './generateAddresses'
 export * from './getBalance'
