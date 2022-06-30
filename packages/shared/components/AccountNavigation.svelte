@@ -7,7 +7,6 @@
     import { Drawer, Icon, Text } from 'shared/components'
     import { AccountSwitcher } from 'shared/components/drawerContent'
     import CreateAccount from 'shared/components/popups/CreateAccount.svelte'
-    import { onDestroy, onMount } from 'svelte'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount: createAccountCallback
@@ -23,21 +22,18 @@
 
     let switcherButtonWidth: number = 0
     let switcherButtonTranslateX = 0
-    let switcherTranslationModifier = 1
-
-    let unsubscribeMobileHeaderAnimation = () => {}
 
     const VIEWPORT_PADDING = 20
 
     let accountColor: string | AccountColor
 
     $: $activeProfile?.accounts, (accountColor = getAccountColor($selectedAccountStore?.id))
-    $: (switcherButtonWidth, switcherTranslationModifier), animateSwitcherButton()
+    $: (switcherButtonWidth, $mobileHeaderAnimation), animateSwitcherButton()
 
     function animateSwitcherButton(): void {
         if (!switcherButtonWidth || !window) return
         const centeredTranslate = window.innerWidth * 0.5 - switcherButtonWidth * 0.5
-        const translateX = centeredTranslate * switcherTranslationModifier
+        const translateX = centeredTranslate * $mobileHeaderAnimation
         switcherButtonTranslateX = translateX <= VIEWPORT_PADDING ? VIEWPORT_PADDING : translateX
     }
 
@@ -50,16 +46,6 @@
     function setDrawerRoute(route: DrawerRoutes): void {
         drawerRoute = route
     }
-
-    onMount(() => {
-        unsubscribeMobileHeaderAnimation = mobileHeaderAnimation.subscribe((curr) => {
-            switcherTranslationModifier = curr
-        })
-    })
-
-    onDestroy(() => {
-        unsubscribeMobileHeaderAnimation()
-    })
 </script>
 
 <div class="flex flex-auto flex-col">
