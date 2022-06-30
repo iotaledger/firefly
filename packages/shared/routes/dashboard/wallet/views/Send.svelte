@@ -485,7 +485,7 @@
 </script>
 
 {#if $mobile}
-    <div class="h-full flex flex-col justify-between p-6">
+    <div class="send-drawer h-full flex flex-col justify-between p-6">
         <div>
             <div class="w-full text-center">
                 <Text bold bigger>{localize('general.sendFunds')}</Text>
@@ -669,6 +669,9 @@
 {/if}
 
 <style type="text/scss">
+    .send-drawer {
+        height: calc(98vh - env(safe-area-inset-top));
+    }
     button.active {
         @apply relative;
         &:after {
