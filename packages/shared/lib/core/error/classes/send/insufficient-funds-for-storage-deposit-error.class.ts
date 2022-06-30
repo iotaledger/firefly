@@ -2,10 +2,10 @@ import { localize } from '@core/i18n'
 import { BaseError } from '../base-error.class'
 
 export class InsufficientFundsForStorageDepositError extends BaseError {
-    constructor(storageDeposit: number, unit: string) {
+    constructor() {
         super({
-            message: localize('error.send.insufficientFundsStorageDeposit', { values: { storageDeposit, unit } }),
-            logError: true,
+            message: localize('error.send.insufficientFundsStorageDeposit'),
+            logError: false,
         })
     }
 }

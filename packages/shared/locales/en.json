@@ -1333,7 +1333,7 @@
             "wrongAddressFormat": "The address is not correctly formatted.",
             "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This wallet has insufficient funds.",
-            "insufficientFundsStorageDeposit": "{storageDeposit} {unit} missing for storage deposit",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address.",

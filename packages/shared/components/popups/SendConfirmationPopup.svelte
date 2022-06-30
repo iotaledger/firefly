@@ -17,6 +17,7 @@
         InclusionState,
         Subject,
         sendOutput,
+        validateSendConfirmation,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
@@ -80,8 +81,8 @@
         error = null
         try {
             if ($isSoftwareProfile) {
-                const _send = () => sendOutput(outputOptions, preparedOutput)
-                await checkStronghold(_send, true)
+                validateSendConfirmation(outputOptions, preparedOutput)
+                await checkStronghold(() => sendOutput(outputOptions, preparedOutput), true)
             }
         } catch (err) {
             if (!error) {
