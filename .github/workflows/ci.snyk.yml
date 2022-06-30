@@ -1,10 +1,10 @@
 name: Snyk
 
 on:
-  pull_request:
   push:
     branches:
       - 'develop'
+      - 'stardust-develop'
 
 jobs:
   test:
