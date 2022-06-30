@@ -57,6 +57,9 @@
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
+                hint: localize('actions.confirmRejection.node'),
+                warning: true,
+                confirmText: localize('actions.reject'),
                 onConfirm: () => {
                     hideActivity(activity.id)
                     closePopup()
@@ -99,7 +102,7 @@
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"
                 on:click={reject}
             >
-                {localize('actions.hide')}
+                {localize('actions.reject')}
             </button>
             <button
                 disabled={activity.isClaiming}

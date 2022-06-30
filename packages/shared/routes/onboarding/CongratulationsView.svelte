@@ -11,10 +11,9 @@
         getStorageDirectoryOfProfile,
         loadPersistedProfileIntoActiveProfile,
         login,
-        newProfile,
     } from '@core/profile'
     import { createNewAccount } from '@core/account'
-    import { cleanupOnboarding } from '@contexts/onboarding'
+    import { newProfile, cleanupOnboarding } from '@contexts/onboarding'
     import { SetupType } from '@lib/typings/setup'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { Platform } from '@lib/platform'

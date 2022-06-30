@@ -933,8 +933,9 @@
         "claiming": "Claiming",
         "reject": "Reject",
         "confirmRejection": {
-            "title": "Hide Transaction",
-            "description": "Do you want to hide this transaction from your activity?"
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
         },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
@@ -1333,11 +1334,13 @@
             "wrongAddressFormat": "The address is not correctly formatted.",
             "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This wallet has insufficient funds.",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address.",
             "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "transaction": "There was an error sending your transaction. Please try again.",
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -1352,7 +1355,10 @@
             "noSynced": "No synced nodes are available.",
             "answer": "Failed to get an answer from all nodes.",
             "forbidden": "This node connection is forbidden.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node"
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",

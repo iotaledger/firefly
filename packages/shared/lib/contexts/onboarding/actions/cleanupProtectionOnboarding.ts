@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { Platform } from '@lib/platform'
-import { newProfile } from '@core/profile'
+import { newProfile } from '../stores'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 
