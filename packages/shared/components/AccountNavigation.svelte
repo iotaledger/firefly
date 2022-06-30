@@ -28,9 +28,9 @@
     let accountColor: string | AccountColor
 
     $: $activeProfile?.accounts, (accountColor = getAccountColor($selectedAccountStore?.id))
-    $: (switcherButtonWidth, $mobileHeaderAnimation), animateSwitcherButton()
+    $: (switcherButtonWidth, $mobileHeaderAnimation), updateSwitcherButtonTranslate()
 
-    function animateSwitcherButton(): void {
+    function updateSwitcherButtonTranslate(): void {
         if (!switcherButtonWidth || !window) return
         const centeredTranslate = window.innerWidth * 0.5 - switcherButtonWidth * 0.5
         const translateX = centeredTranslate * $mobileHeaderAnimation
