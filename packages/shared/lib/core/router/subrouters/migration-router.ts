@@ -15,7 +15,7 @@ export class MigrationRouter extends Subrouter<MigrationRoute> {
         super(MigrationRoute.Init, migrationRoute, get(onboardingRouter))
     }
 
-    next(event: FireflyEvent): void {
+    next(event?: FireflyEvent): void {
         let nextRoute: MigrationRoute
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {

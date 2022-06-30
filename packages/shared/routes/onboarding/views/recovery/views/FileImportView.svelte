@@ -20,7 +20,7 @@
     function handleContinueClick(): void {
         validateBackupFile(fileName)
         setProfileRecoveryTypeFromFilename(fileName)
-        setImportFile(file, filePath)
+        setImportFile(<ArrayBuffer>file, filePath)
         dispatch('next')
     }
     function handleBackClick(): void {

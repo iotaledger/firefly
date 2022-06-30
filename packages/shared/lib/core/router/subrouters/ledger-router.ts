@@ -27,7 +27,7 @@ export class LedgerRouter extends Subrouter<LedgerRoute> {
         }
     }
 
-    next(event: FireflyEvent): void {
+    next(event?: FireflyEvent): void {
         let nextRoute: LedgerRoute
         const currentRoute = get(this.routeStore)
         const setupType = get(profileRecoveryType)

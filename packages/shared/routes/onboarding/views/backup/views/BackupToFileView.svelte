@@ -14,7 +14,6 @@
 
     const dispatch = createEventDispatcher()
 
-    let isStrongholdPasswordValid = false
     $: isStrongholdPasswordValid = strongholdPassword === confirmPassword
 
     async function onboardingBackupFileFunction(_skipBackup: boolean = false): Promise<void> {

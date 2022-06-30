@@ -1,57 +1,50 @@
 <script type="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions } from '@core/network'
-    import { activeProfile } from '@core/profile'
-    import { displayNotificationForLedgerProfile, ledgerSimulator, promptUserToConnectLedger } from '@lib/ledger'
-    import { api } from '@lib/wallet'
+    import { ledgerRouter } from '@core/router'
+    import { promptUserToConnectLedger } from '@lib/ledger'
 
     let restoring = false
 
-    const dispatch = createEventDispatcher()
-
-    function restore() {
+    function restore(): void {
         restoring = true
-
-        const _onConnected = () =>
-            api.getAccounts({
-                onSuccess(accountsResponse) {
-                    if (accountsResponse.payload.length === 0) {
-                        api.createAccount(
-                            {
-                                clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
-                                alias: `${localize('general.account')} 1`,
-                                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-                            },
-                            {
-                                onSuccess() {
-                                    restoring = false
-                                    dispatch('next')
-                                },
-                                onError(error) {
-                                    restoring = false
-
-                                    console.error(error)
-
-                                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
-                                },
-                            }
-                        )
-                    }
-                },
-                onError(error) {
-                    restoring = false
-                    console.error(error)
-                },
-            })
-        const _onCancel = () => (restoring = false)
-
+        function _onConnected(): void {
+            // api.getAccounts({
+            //     onSuccess(accountsResponse) {
+            //         if (accountsResponse.payload.length === 0) {
+            //             api.createAccount(
+            //                 {
+            //                     clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
+            //                     alias: `${localize('general.account')} 1`,
+            //                     signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+            //                 },
+            //                 {
+            //                     onSuccess() {
+            //                         restoring = false
+            //                         dispatch('next')
+            //                     },
+            //                     onError(error) {
+            //                         restoring = false
+            //                         console.error(error)
+            //                         displayNotificationForLedgerProfile('error', true, true, false, false, error)
+            //                     },
+            //                 }
+            //             )
+            //         }
+            //     },
+            //     onError(error) {
+            //         restoring = false
+            //         console.error(error)
+            //     },
+            // })
+        }
+        function _onCancel() {
+            restoring = false
+        }
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
-
-    function handleBackClick() {
-        dispatch('previous')
+    function handleBackClick(): void {
+        $ledgerRouter.previous()
     }
 </script>
 

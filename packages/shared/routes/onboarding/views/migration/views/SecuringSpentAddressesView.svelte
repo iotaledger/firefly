@@ -1,22 +1,13 @@
 <script lang="typescript">
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { onDestroy } from 'svelte'
     import { BundleMiningLayout, Button, Icon, ProgressBar, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import {
-        createMigrationBundle,
-        getInputIndexesForBundle,
-        mineLedgerBundle,
-        MINING_TIMEOUT_SECONDS,
-        selectedBundlesToMine,
-    } from '@lib/migration'
+    import { selectedBundlesToMine } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
-    const dispatch = createEventDispatcher()
-
-    let progressBarPercent = 0
+    const progressBarPercent = 0
     let progressBarMessage = `${progressBarPercent} % completed`
-    let timeElapsed = 0
 
     const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
 
@@ -25,74 +16,75 @@
 
     $: progressBarMessage = `${progressBarPercent}% completed`
 
-    onMount(() => {
-        void $selectedBundlesToMine.reduce(
-            (promise, bundle, idx) =>
-                promise.then(() => {
-                    const _updateOnSuccess = () => {
-                        timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
-                        updateProgress()
-
-                        if (idx === $selectedBundlesToMine.length - 1) {
-                            clearInterval(interval)
-
-                            redirectWithTimeout()
-                        }
-                    }
-
-                    const _updateOnError = () => {
-                        timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
-                        updateProgress()
-
-                        if (idx === $selectedBundlesToMine.length - 1) {
-                            clearInterval(interval)
-
-                            redirectWithTimeout()
-                        }
-                    }
-
-                    if (legacyLedger) {
-                        return mineLedgerBundle(bundle.index, bundle.miningRuns * 10 ** 8)
-                            .then(() => {
-                                _updateOnSuccess()
-                            })
-                            .catch((error) => {
-                                console.error('E', error)
-                                _updateOnError()
-                            })
-                    }
-                    return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
-                        .then(() => {
-                            _updateOnSuccess()
-                        })
-                        .catch((error) => {
-                            console.error(error)
-
-                            _updateOnError()
-                        })
-                }),
-            Promise.resolve([])
-        )
-        initiateProgressBar()
-    })
-    function redirectWithTimeout(_timeout = 1500) {
-        timeout = setTimeout(() => {
-            dispatch('next')
-        }, _timeout)
-    }
-
-    function updateProgress() {
-        progressBarPercent = Math.floor((timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length)) * 100)
-        progressBarMessage = progressBarPercent.toString() + '% completed'
-    }
-
-    function initiateProgressBar() {
-        interval = setInterval(() => {
-            timeElapsed += 2
-
-            updateProgress()
-        }, 2000)
-    }
+    // onMount(() => {
+    //     void $selectedBundlesToMine.reduce(
+    //         (promise, bundle, idx) =>
+    //             promise.then(() => {
+    //                 const _updateOnSuccess = () => {
+    //                     timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
+    //                     updateProgress()
+    //
+    //                     if (idx === $selectedBundlesToMine.length - 1) {
+    //                         clearInterval(interval)
+    //
+    //                         redirectWithTimeout()
+    //                     }
+    //                 }
+    //
+    //                 const _updateOnError = () => {
+    //                     timeElapsed = (idx + 1) * MINING_TIMEOUT_SECONDS
+    //                     updateProgress()
+    //
+    //                     if (idx === $selectedBundlesToMine.length - 1) {
+    //                         clearInterval(interval)
+    //
+    //                         redirectWithTimeout()
+    //                     }
+    //                 }
+    //
+    //                 if (legacyLedger) {
+    //                     return mineLedgerBundle(bundle.index, bundle.miningRuns * 10 ** 8)
+    //                         .then(() => {
+    //                             _updateOnSuccess()
+    //                         })
+    //                         .catch((error) => {
+    //                             console.error('E', error)
+    //                             _updateOnError()
+    //                         })
+    //                 }
+    //                 return createMigrationBundle(getInputIndexesForBundle(bundle), bundle.miningRuns * 10 ** 8, true)
+    //                     .then(() => {
+    //                         _updateOnSuccess()
+    //                     })
+    //                     .catch((error) => {
+    //                         console.error(error)
+    //
+    //                         _updateOnError()
+    //                     })
+    //             }),
+    //         Promise.resolve([])
+    //     )
+    //     initiateProgressBar()
+    // })
+    //
+    // function redirectWithTimeout(_timeout = 1500) {
+    //     timeout = setTimeout(() => {
+    //         $migrationRouter.next()
+    //     }, _timeout)
+    // }
+    //
+    // function updateProgress() {
+    //     progressBarPercent = Math.floor((timeElapsed / (MINING_TIMEOUT_SECONDS * $selectedBundlesToMine.length)) * 100)
+    //     progressBarMessage = progressBarPercent.toString() + '% completed'
+    // }
+    //
+    // function initiateProgressBar() {
+    //     interval = setInterval(() => {
+    //         timeElapsed += 2
+    //
+    //         updateProgress()
+    //     }, 2000)
+    // }
 
     onDestroy(() => {
         clearTimeout(timeout)

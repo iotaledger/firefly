@@ -1,7 +1,8 @@
 import { get } from 'svelte/store'
 
-import { mnemonic } from '@contexts/onboarding'
 import { storeMnemonic, verifyMnemonic } from '@core/profile-manager'
+
+import { mnemonic } from '../stores'
 
 /**
  * Verifies, stores, then clears the mnemonic used in the onboarding flow.

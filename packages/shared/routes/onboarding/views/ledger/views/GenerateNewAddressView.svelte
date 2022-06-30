@@ -1,23 +1,12 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions } from '@core/network'
-    import { activeProfile } from '@core/profile'
-    import {
-        displayNotificationForLedgerProfile,
-        formatAddressForLedger,
-        ledgerSimulator,
-        promptUserToConnectLedger,
-    } from '@lib/ledger'
-    import { api } from '@lib/wallet'
+    import { ledgerRouter } from '@core/router'
+    import { formatAddressForLedger, promptUserToConnectLedger } from '@lib/ledger'
 
-    let newAddress = null
-
+    let newAddress = ''
     let busy = false
-    let confirmed = false
-
-    const dispatch = createEventDispatcher()
+    const confirmed = false
 
     $: animation = !newAddress
         ? 'ledger-generate-address-desktop'
@@ -25,89 +14,80 @@
         ? 'ledger-address-confirmed-desktop'
         : 'ledger-confirm-address-desktop'
 
-    function generateNewAddress() {
+    function generateNewAddress(): void {
         newAddress = null
         busy = true
-
-        const _createAccount = (idx) => {
-            api.createAccount(
-                {
-                    clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
-                    alias: `${localize('general.account')} ${idx}`,
-                    signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-                    allowCreateMultipleEmptyAccounts: true,
-                },
-                {
-                    onSuccess(createAccountResponse) {
-                        newAddress = createAccountResponse.payload.addresses[0].address
-
-                        displayAddress(createAccountResponse.payload.id)
-                    },
-                    onError(error) {
-                        busy = false
-
-                        console.error(error)
-
-                        displayNotificationForLedgerProfile('error', true, true, false, false, error)
-                    },
-                }
-            )
+        // function _createAccount(): void {
+        // api.createAccount(
+        //     {
+        //         clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
+        //         alias: `${localize('general.account')} ${idx}`,
+        //         signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
+        //         allowCreateMultipleEmptyAccounts: true,
+        //     },
+        //     {
+        //         onSuccess(createAccountResponse) {
+        //             newAddress = createAccountResponse.payload.addresses[0].address
+        //             displayAddress(createAccountResponse.payload.id)
+        //         },
+        //         onError(error) {
+        //             busy = false
+        //             console.error(error)
+        //             displayNotificationForLedgerProfile('error', true, true, false, false, error)
+        //         },
+        //     }
+        // )
+        // }
+        function _onConnected(): void {
+            // api.getAccounts({
+            //     onSuccess(getAccountsResponse) {
+            //         if (getAccountsResponse.payload.length > 0) {
+            //             if (getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount]) {
+            //                 newAddress =
+            //                     getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].addresses[0].address
+            //                 displayAddress(getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].id)
+            //             } else {
+            //                 _createAccount($activeProfile?.ledgerMigrationCount + 1)
+            //             }
+            //         } else {
+            //             _createAccount(1)
+            //         }
+            //     },
+            //     onError(getAccountsError) {
+            //         busy = false
+            //         console.error(getAccountsError)
+            //     },
+            // })
         }
-
-        const _onConnected = () => {
-            api.getAccounts({
-                onSuccess(getAccountsResponse) {
-                    if (getAccountsResponse.payload.length > 0) {
-                        if (getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount]) {
-                            newAddress =
-                                getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].addresses[0].address
-                            displayAddress(getAccountsResponse.payload[$activeProfile?.ledgerMigrationCount].id)
-                        } else {
-                            _createAccount($activeProfile?.ledgerMigrationCount + 1)
-                        }
-                    } else {
-                        _createAccount(1)
-                    }
-                },
-                onError(getAccountsError) {
-                    busy = false
-                    console.error(getAccountsError)
-                },
-            })
+        function _onCancel(): void {
+            busy = false
         }
-
-        const _onCancel = () => (busy = false)
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
+    // function displayAddress(accountId: string): void {
+    //     api.getMigrationAddress(true, accountId, {
+    //         onSuccess() {
+    //             busy = false
+    //             handleConfirmClick()
+    //         },
+    //         onError(err) {
+    //             newAddress = null
+    //             busy = false
+    //             console.error(err)
+    //             displayNotificationForLedgerProfile('error', true, true, false, false, err)
+    //         },
+    //     })
+    // }
+    // function handleConfirmClick(): void {
+    //     confirmed = true
+    // }
 
-    function displayAddress(accountId: string) {
-        api.getMigrationAddress(true, accountId, {
-            onSuccess() {
-                busy = false
-
-                handleConfirmClick()
-            },
-            onError(err) {
-                newAddress = null
-                busy = false
-
-                console.error(err)
-
-                displayNotificationForLedgerProfile('error', true, true, false, false, err)
-            },
-        })
+    function handleContinueClick(): void {
+        $ledgerRouter.next()
     }
 
-    function handleConfirmClick() {
-        confirmed = true
-    }
-
-    function handleContinueClick() {
-        dispatch('next')
-    }
-
-    function handleBackClick() {
-        dispatch('previous')
+    function handleBackClick(): void {
+        $ledgerRouter.previous()
     }
 </script>
 

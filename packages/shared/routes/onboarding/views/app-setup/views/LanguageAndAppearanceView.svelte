@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, Dropdown, OnboardingLayout, Text } from 'shared/components'
-    import { mobile, appSettings, shouldBeDarkMode, appStage, AppStage } from '@core/app'
+    import { appSettings, appStage, AppStage, mobile, shouldBeDarkMode } from '@core/app'
     import { Locale, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
     import { updateNewProfile } from '@contexts/onboarding'
@@ -37,7 +37,7 @@
     }
 
     function handleContinueClick(): void {
-        if ($appStage !== AppStage.PROD) {
+        if ($appStage === AppStage.ALPHA || $appStage === AppStage.BETA) {
             updateNewProfile({ isDeveloperProfile: true })
         }
         $appSetupRouter.next()

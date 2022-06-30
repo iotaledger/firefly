@@ -1,108 +1,70 @@
 <script lang="typescript">
-    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions } from '@core/network'
-    import { activeProfile } from '@core/profile'
-    import {
-        getLedgerDeviceStatus,
-        ledgerDeviceState,
-        ledgerSimulator,
-        displayNotificationForLedgerProfile,
-        pollLedgerDeviceStatus,
-        stopPollingLedgerStatus,
-    } from '@lib/ledger'
+    import { ledgerRouter } from '@core/router'
+    import { profileRecoveryType, ProfileRecoveryType, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
+    import { ledgerDeviceState, stopPollingLedgerStatus } from '@lib/ledger'
     import { openPopup } from '@lib/popup'
-    import { api } from '@lib/wallet'
     import { LedgerDeviceState } from '@lib/typings/ledger'
-    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
-
-    let polling = false
 
     const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
+    const newLedgerProfile = $profileSetupType === ProfileSetupType.New
+    // const LEDGER_STATUS_POLL_INTERVAL = 1500
 
-    const newLedgerProfile = $profileRecoveryType === ProfileRecoveryType.New
-    let creatingAccount = false
-
-    const LEDGER_STATUS_POLL_INTERVAL = 1500
-
+    let polling = false
     let isConnected = false
     let isAppOpen = false
-
+    let creatingAccount = false
     $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
     $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
-
     $: animation = !isConnected
         ? 'ledger-disconnected-desktop'
         : isAppOpen
         ? 'ledger-connected-desktop'
         : 'ledger-app-closed-desktop'
 
-    const dispatch = createEventDispatcher()
-
-    onMount(() => {
-        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
-        polling = true
-    })
-
-    onDestroy(stopPollingLedgerStatus)
-
-    function createAccount() {
+    function createAccount(): void {
         creatingAccount = true
-
-        // TODO: refactor this for new bindingsx
-        api.createAccount(
-            {
-                clientOptions: getDefaultClientOptions($activeProfile?.networkProtocol),
-                alias: `${localize('general.account')} 1`,
-                signerType: { type: ledgerSimulator ? 'LedgerNanoSimulator' : 'LedgerNano' },
-            },
-            {
-                onSuccess() {
-                    creatingAccount = false
-
-                    dispatch('next')
-                },
-                onError(error) {
-                    creatingAccount = false
-
-                    console.error(error)
-
-                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
-                },
-            }
-        )
     }
+    // function _onCancel(): void {
+    //     creatingAccount = false
+    //     displayNotificationForLedgerProfile('error', true)
+    // }
+    // function _onConnected(): void {
+    //     if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
+    //         _onCancel()
+    //     } else {
+    //         dispatch('next')
+    //     }
+    // }
 
-    function handleGuidePopup() {
+    function handleGuidePopup(): void {
         openPopup({
             type: 'ledgerConnectionGuide',
         })
     }
 
-    function handleContinueClick() {
+    function handleContinueClick(): void {
         creatingAccount = true
-
         if (newLedgerProfile) {
             createAccount()
         } else {
-            const _onCancel = () => {
-                creatingAccount = false
-
-                displayNotificationForLedgerProfile('error', true)
-            }
-            const _onConnected = () => {
-                if ($ledgerDeviceState !== LedgerDeviceState.Connected) _onCancel()
-                else dispatch('next')
-            }
-
-            getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
+            // getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
         }
+        $ledgerRouter.next()
     }
 
-    function handleBackClick() {
-        dispatch('previous')
+    function handleBackClick(): void {
+        $ledgerRouter.previous()
     }
+
+    onMount(() => {
+        // pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
+        polling = true
+    })
+
+    onDestroy(stopPollingLedgerStatus)
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>

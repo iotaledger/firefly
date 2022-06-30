@@ -4,33 +4,17 @@
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { addNewProfile, newProfile, login, loadPersistedProfileIntoActiveProfile } from '@core/profile'
+    import { migrationRouter } from '@core/router'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
-    import { getLegacyErrorMessage, promptUserToConnectLedger } from '@lib/ledger'
-    import {
-        ADDRESS_SECURITY_LEVEL,
-        confirmedBundles,
-        createLedgerMigrationBundle,
-        createMigrationBundle,
-        getInputIndexesForBundle,
-        hardwareIndexes,
-        hasBundlesWithSpentAddresses,
-        hasSingleBundle,
-        migration,
-        sendLedgerMigrationBundle,
-        sendMigrationBundle,
-        unselectedInputs,
-    } from '@lib/migration'
-    import { showAppNotification } from '@lib/notifications'
+    import { confirmedBundles, migration, unselectedInputs } from '@lib/migration'
     import { Platform } from '@lib/platform'
-    import { closePopup } from '@lib/popup'
     import { formatUnitBestMatch } from '@lib/units'
     import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
     import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 
-    const { didComplete, bundles, data } = $migration
+    const { didComplete, data } = $migration
     const { balance } = $data
 
     const migratableBalance = balance - $unselectedInputs.reduce((acc, input) => acc + input.balance, 0)
@@ -53,8 +37,6 @@
     const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
     $: animation = legacyLedger ? 'ledger-migrate-desktop' : 'migrate-desktop'
 
-    let closeTransport = () => {}
-
     const unsubscribe = confirmedBundles.subscribe((newConfirmedBundles) => {
         newConfirmedBundles.forEach((bundle) => {
             if (bundle.bundleHash && bundle.bundleHash === singleMigrationBundleHash && bundle.confirmed) {
@@ -66,74 +48,75 @@
     })
 
     function handleContinueClick() {
-        if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
-            loading = true
-
-            if (legacyLedger) {
-                const _onConnected = () => {
-                    Platform.ledger
-                        .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
-                        .then(({ iota, callback }) => {
-                            closeTransport = callback
-                            return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
-                        })
-                        .then(({ trytes, bundleHash }) => {
-                            closePopup(true) // close transaction popup
-                            singleMigrationBundleHash = bundleHash
-                            return sendLedgerMigrationBundle(bundleHash, trytes)
-                        })
-                        .then(() => {
-                            if ($newProfile) {
-                                // Save profile
-                                addNewProfile($newProfile)
-                                loadPersistedProfileIntoActiveProfile($newProfile.id)
-                                void login()
-                                newProfile.set(null)
-                            }
-                        })
-                        .catch((error) => {
-                            loading = false
-                            closePopup(true) // close transaction popup
-                            closeTransport()
-                            showAppNotification({
-                                type: 'error',
-                                message: localize(getLegacyErrorMessage(error)),
-                            })
-                            console.error(error)
-                        })
-                }
-                const _onCancel = () => {
-                    loading = false
-                }
-                promptUserToConnectLedger(true, _onConnected, _onCancel)
-            } else {
-                createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
-                    .then((data) => {
-                        singleMigrationBundleHash = data.bundleHash
-                        return sendMigrationBundle(data.bundleHash).then(() => {
-                            // Save profile
-                            addNewProfile($newProfile)
-                            loadPersistedProfileIntoActiveProfile($newProfile.id)
-                            void login()
-                            newProfile.set(null)
-                        })
-                    })
-                    .catch((err) => {
-                        loading = false
-                        if (!err?.snapshot) {
-                            showAppNotification({
-                                type: 'error',
-                                message: localize('views.migrate.error'),
-                            })
-                        }
-                    })
-            }
-        } else {
-            loading = true
-            timeout = setTimeout(() => {
-                dispatch('next')
-            }, 2000)
-        }
+        // if ($hasSingleBundle && !$hasBundlesWithSpentAddresses) {
+        //     loading = true
+        //
+        //     if (legacyLedger) {
+        //         const _onConnected = () => {
+        //             Platform.ledger
+        //                 .selectSeed($hardwareIndexes.accountIndex, $hardwareIndexes.pageIndex, ADDRESS_SECURITY_LEVEL)
+        //                 .then(({ iota, callback }) => {
+        //                     closeTransport = callback
+        //                     return createLedgerMigrationBundle(0, iota.prepareTransfers, callback)
+        //                 })
+        //                 .then(({ trytes, bundleHash }) => {
+        //                     closePopup(true) // close transaction popup
+        //                     singleMigrationBundleHash = bundleHash
+        //                     return sendLedgerMigrationBundle(bundleHash, trytes)
+        //                 })
+        //                 .then(() => {
+        //                     if ($newProfile) {
+        //                         // Save profile
+        //                         addNewProfile($newProfile)
+        //                         loadPersistedProfileIntoActiveProfile($newProfile.id)
+        //                         void login()
+        //                         newProfile.set(null)
+        //                     }
+        //                 })
+        //                 .catch((error) => {
+        //                     loading = false
+        //                     closePopup(true) // close transaction popup
+        //                     closeTransport()
+        //                     showAppNotification({
+        //                         type: 'error',
+        //                         message: localize(getLegacyErrorMessage(error)),
+        //                     })
+        //                     console.error(error)
+        //                 })
+        //         }
+        //         const _onCancel = () => {
+        //             loading = false
+        //         }
+        //         promptUserToConnectLedger(true, _onConnected, _onCancel)
+        //     } else {
+        //         createMigrationBundle(getInputIndexesForBundle($bundles[0]), 0, false)
+        //             .then((data) => {
+        //                 singleMigrationBundleHash = data.bundleHash
+        //                 return sendMigrationBundle(data.bundleHash).then(() => {
+        //                     // Save profile
+        //                     addNewProfile($newProfile)
+        //                     loadPersistedProfileIntoActiveProfile($newProfile.id)
+        //                     void login()
+        //                     newProfile.set(null)
+        //                 })
+        //             })
+        //             .catch((err) => {
+        //                 loading = false
+        //                 if (!err?.snapshot) {
+        //                     showAppNotification({
+        //                         type: 'error',
+        //                         message: localize('views.migrate.error'),
+        //                     })
+        //                 }
+        //             })
+        //     }
+        // } else {
+        //     loading = true
+        //     timeout = setTimeout(() => {
+        //         dispatch('next')
+        //     }, 2000)
+        // }
+        $migrationRouter.next()
     }
 
     // TODO: complete function functionality
