@@ -10,7 +10,8 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile, updateNewProfile } from '@core/profile'
+    import { createNewProfile } from '@contexts/onboarding'
+    import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
@@ -23,7 +24,7 @@
 
     function addProfile() {
         dispatch('next', { shouldAddProfile: true })
-        updateNewProfile({ isDeveloperProfile: $appStage !== AppStage.PROD })
+        createNewProfile({ isDeveloperProfile: $appStage !== AppStage.PROD })
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {

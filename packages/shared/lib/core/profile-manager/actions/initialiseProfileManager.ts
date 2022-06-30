@@ -9,8 +9,8 @@ export function initialiseProfileManager(
 ): void {
     const newProfileManager = api.createAccountManager({
         storagePath,
-        clientOptions,
-        secretManager,
+        ...(clientOptions && { clientOptions }),
+        ...(secretManager && { secretManager }),
     })
     profileManager.set(newProfileManager)
 }

@@ -118,15 +118,8 @@
         />
     </div>
 
-    {#if hasUsedWalletFinder}
-        <TextHint
-            classes="w-full rounded-2xl bg-gray-50 dark:bg-gray-850 py-4 pl-4 pr-8"
-            icon="exclamation"
-            iconClasses="w-4.5 h-4.5 fill-current text-blue-500 dark:text-blue-500 mr-4"
-            hint={localize('popups.walletFinder.searchAgainHint')}
-            hintColor="gray-600"
-            hintDarkColor="gray-500"
-        />
+    {#if true}
+        <TextHint warning text={localize('popups.walletFinder.searchAgainHint')} />
     {/if}
 </div>
 

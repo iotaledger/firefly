@@ -30,6 +30,9 @@
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
+                hint: localize('actions.confirmRejection.node'),
+                warning: true,
+                confirmText: localize('actions.reject'),
                 onConfirm: () => {
                     hideActivity(activity?.id)
                     closePopup()
@@ -99,7 +102,7 @@
                             class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
                             on:click|stopPropagation={reject}
                         >
-                            {localize('actions.hide')}
+                            {localize('actions.reject')}
                         </button>
                         <button
                             class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
