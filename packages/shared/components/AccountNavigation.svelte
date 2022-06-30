@@ -7,7 +7,7 @@
     import { Drawer, Icon, Text } from 'shared/components'
     import { AccountSwitcher } from 'shared/components/drawerContent'
     import CreateAccount from 'shared/components/popups/CreateAccount.svelte'
-    import { onDestroy } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount: createAccountCallback
@@ -20,10 +20,20 @@
     let drawer: Drawer
     let isDrawerOpened = false
     let drawerRoute = DrawerRoutes.Init
-    let unsubscribeAnimateTranslationLeft = () => {}
+    let switcherButton: HTMLElement
+    let switcherText: HTMLElement
+    let switcherPosition = 0
+    let switcherTranslationModifier = 0
+    let unsubscribeSwitcherTranslation = () => {}
 
     let accountColor: string | AccountColor
     $: $activeProfile?.accounts, (accountColor = getAccountColor($selectedAccountStore?.id))
+
+    const switcherOffsetLeft = 0.09
+    const textSizeObserver = new ResizeObserver(() => {
+        caclulateSwitcherPosition()
+        moveSwitcherButton()
+    })
 
     function toggleAccountSwitcher(): void {
         setDrawerRoute(DrawerRoutes.Init)
@@ -35,31 +45,50 @@
         drawerRoute = route
     }
 
-    function animateTranslationLeft(node: HTMLElement): void {
-        unsubscribeAnimateTranslationLeft = mobileHeaderAnimation.subscribe((curr) => {
-            const { width } = node.getBoundingClientRect()
-            const centerPosition = window.innerWidth * 0.5 - width * 0.5
-            const yOffset = 0.09
-            const moveProgress = curr * (1 - yOffset) + yOffset
-            node.style.transform = `translateX(${centerPosition * moveProgress}px)`
-        })
+    function caclulateSwitcherPosition() {
+        if (switcherText === undefined) {
+            return
+        }
+        const textWidth = switcherText.getBoundingClientRect().width
+        const textOffset = switcherText.offsetLeft
+        const initialPosition = window.innerWidth * 0.5 - textWidth * 0.5 - textOffset
+        switcherPosition = initialPosition * switcherTranslationModifier
     }
 
+    function moveSwitcherButton() {
+        if (switcherButton === undefined) {
+            return
+        }
+        switcherButton.style.transform = `translateX(${switcherPosition}px)`
+    }
+
+    onMount(() => {
+        textSizeObserver.observe(switcherText)
+
+        unsubscribeSwitcherTranslation = mobileHeaderAnimation.subscribe((curr) => {
+            switcherTranslationModifier = curr * (1 - switcherOffsetLeft) + switcherOffsetLeft
+            caclulateSwitcherPosition()
+            moveSwitcherButton()
+        })
+    })
+
     onDestroy(() => {
-        unsubscribeAnimateTranslationLeft()
+        unsubscribeSwitcherTranslation()
     })
 </script>
 
 <div class="flex flex-auto flex-col">
     <button
         on:click={toggleAccountSwitcher}
-        class="mt-3 py-2 fixed rounded-lg flex flex-row justify-center items-center space-x-2 
+        class="mt-3 py-2 px-2 absolute rounded-lg flex flex-row justify-center items-center space-x-2 
             {isDrawerOpened ? 'bg-gray-100 dark:bg-gray-900' : ''}
             "
-        use:animateTranslationLeft
+        bind:this={switcherButton}
     >
         <span class="circle" style="--account-color: {accountColor}" />
-        <Text type="h4">{$selectedAccountStore?.alias}</Text>
+        <div bind:this={switcherText}>
+            <Text type="h4">{$selectedAccountStore?.alias}</Text>
+        </div>
         <div class="transform transition-transform {isDrawerOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon icon="chevron-down" height="18" width="18" classes="text-gray-800 dark:text-white" />
         </div>
