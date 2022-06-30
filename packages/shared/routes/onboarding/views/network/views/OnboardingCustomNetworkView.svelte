@@ -26,7 +26,7 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{localize('views.customNetwork.body')}</Text>
-        <NodeConfigurationForm bind:this={nodeConfigurationForm} bind:node bind:isBusy hideButtons hideCheckbox />
+        <NodeConfigurationForm bind:this={nodeConfigurationForm} bind:node bind:isBusy />
     </div>
     <div slot="leftpane__action">
         <Button

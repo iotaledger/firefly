@@ -13,7 +13,7 @@ export const profileSetupRouter = writable<ProfileSetupRouter>(null)
 
 export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
     constructor() {
-        super(ProfileSetupRoute.Setup, profileSetupRoute, onboardingRouter)
+        super(ProfileSetupRoute.Setup, profileSetupRoute, get(onboardingRouter))
     }
 
     next(event?: FireflyEvent): void {
@@ -43,7 +43,7 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                     profileRecoveryType.set(_profileRecoveryType)
                     if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
                         nextRoute = ProfileSetupRoute.EnterName
-                        get(onboardingRouter).next()
+                        this.parentRouter.next()
                     } else if (
                         _profileRecoveryType === ProfileRecoveryType.Stronghold ||
                         _profileRecoveryType === ProfileRecoveryType.File
@@ -51,7 +51,7 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                         nextRoute = ProfileSetupRoute.EnterName
                         recoveryRoute.set(RecoveryRoute.FileImport)
                         profileRecoveryType.set(ProfileRecoveryType.Stronghold)
-                        get(onboardingRouter).next()
+                        this.parentRouter.next()
                     } else if (_profileRecoveryType === ProfileRecoveryType.Ledger) {
                         nextRoute = ProfileSetupRoute.EnterName
                     }
@@ -62,7 +62,7 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                 nextRoute = ProfileSetupRoute.EnterName
                 break
             case ProfileSetupRoute.EnterName: {
-                get(onboardingRouter).next()
+                this.parentRouter.next()
                 break
             }
         }

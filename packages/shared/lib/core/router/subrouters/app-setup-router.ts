@@ -12,7 +12,7 @@ export const appSetupRouter = writable<AppSetupRouter>(null)
 
 export class AppSetupRouter extends Subrouter<AppSetupRoute> {
     constructor() {
-        super(AppSetupRoute.Legal, appSetupRoute, onboardingRouter)
+        super(AppSetupRoute.Legal, appSetupRoute, get(onboardingRouter))
     }
 
     next(): void {
@@ -30,7 +30,7 @@ export class AppSetupRouter extends Subrouter<AppSetupRoute> {
                 if (get(appStage) !== AppStage.PROD) {
                     updateNewProfile({ isDeveloperProfile: true })
                 }
-                get(onboardingRouter).next()
+                this.parentRouter.next()
                 break
         }
 

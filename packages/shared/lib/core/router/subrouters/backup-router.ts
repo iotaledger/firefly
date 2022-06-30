@@ -10,7 +10,7 @@ export const backupRouter = writable<BackupRouter>(null)
 
 export class BackupRouter extends Subrouter<BackupRoute> {
     constructor() {
-        super(BackupRoute.Init, backupRoute, onboardingRouter)
+        super(BackupRoute.Init, backupRoute, get(onboardingRouter))
     }
 
     next(event: FireflyEvent): void {
@@ -31,7 +31,7 @@ export class BackupRouter extends Subrouter<BackupRoute> {
                 break
 
             case BackupRoute.Backup: {
-                get(onboardingRouter).next(event)
+                this.parentRouter.next(event)
                 break
             }
         }

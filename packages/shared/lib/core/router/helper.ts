@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
 
-import { isDeepLinkRequestActive } from '@common/deep-links'
 import { clearSendParams } from '@lib/app'
 import { closePopup } from '@lib/popup'
 
@@ -29,53 +28,72 @@ import {
     ProtectionRouter,
 } from './subrouters'
 
-export const initRouters = (): void => {
+export function initRouters(): void {
+    /**
+     * CAUTION: It is important that subrouters are initialized
+     * AFTER the base routers, since each subrouter relies on the
+     * its parent router's store during construction.
+     */
+    initBaseRouters()
+    initSubrouters()
+}
+
+function initBaseRouters(): void {
     accountRouter.set(new AccountRouter())
     appRouter.set(new AppRouter())
-    appSetupRouter.set(new AppSetupRouter())
-    backupRouter.set(new BackupRouter())
     dashboardRouter.set(new DashboardRouter())
-    recoveryRouter.set(new RecoveryRouter())
-    ledgerRouter.set(new LedgerRouter())
-    migrationRouter.set(new MigrationRouter())
-    networkRouter.set(new NetworkRouter())
     onboardingRouter.set(new OnboardingRouter())
-    profileSetupRouter.set(new ProfileSetupRouter())
-    protectionRouter.set(new ProtectionRouter())
     settingsRouter.set(new SettingsRouter())
 }
 
-export const resetRouters = (): void => {
-    get(appRouter).reset()
-    get(appSetupRouter).reset()
+function initSubrouters(): void {
+    appSetupRouter.set(new AppSetupRouter())
+    backupRouter.set(new BackupRouter())
+    ledgerRouter.set(new LedgerRouter())
+    migrationRouter.set(new MigrationRouter())
+    networkRouter.set(new NetworkRouter())
+    profileSetupRouter.set(new ProfileSetupRouter())
+    protectionRouter.set(new ProtectionRouter())
+    recoveryRouter.set(new RecoveryRouter())
+}
+
+export function resetRouters(): void {
+    resetSubrouters()
+    resetBaseRouters()
+}
+
+function resetBaseRouters(): void {
     get(accountRouter).reset()
-    get(backupRouter).reset()
+    get(appRouter).reset()
     get(dashboardRouter).reset()
+    get(onboardingRouter).reset()
+    get(settingsRouter).reset()
+}
+
+function resetSubrouters(): void {
+    get(appSetupRouter).reset()
+    get(backupRouter).reset()
     get(recoveryRouter).reset()
     get(ledgerRouter).reset()
     get(migrationRouter).reset()
     get(networkRouter).reset()
-    get(onboardingRouter).reset()
     get(profileSetupRouter).reset()
     get(protectionRouter).reset()
-    get(settingsRouter).reset()
-
-    isDeepLinkRequestActive.set(false)
 }
 
-export const resetAccountRouter = (resetPanels: boolean = true): void => {
+export function resetAccountRouter(resetPanels: boolean = true): void {
     if (resetPanels) {
         get(accountRouter).reset()
         clearSendParams()
     }
 }
 
-export const resetWalletRoute = (): void => {
+export function resetWalletRoute(): void {
     resetAccountRouter()
     get(dashboardRouter).reset()
 }
 
-export const openSettings = (): void => {
+export function openSettings(): void {
     closePopup()
     get(dashboardRouter).goTo(DashboardRoute.Settings)
     get(settingsRouter).reset()

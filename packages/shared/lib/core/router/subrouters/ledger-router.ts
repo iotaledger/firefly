@@ -2,7 +2,6 @@ import { get, writable } from 'svelte/store'
 
 import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
-import { appRouter } from '../app-router'
 import { onboardingRouter } from '../onboarding-router'
 import { LedgerRoute } from '../enums'
 import { Subrouter } from './subrouter'
@@ -13,7 +12,7 @@ export const ledgerRouter = writable<LedgerRouter>(null)
 
 export class LedgerRouter extends Subrouter<LedgerRoute> {
     constructor() {
-        super(LedgerRoute.LegacyIntro, ledgerRoute, onboardingRouter)
+        super(LedgerRoute.LegacyIntro, ledgerRoute, get(onboardingRouter))
     }
 
     restartIfNotInLedgerFlow(): void {
@@ -40,11 +39,11 @@ export class LedgerRouter extends Subrouter<LedgerRoute> {
                 } else if (setupType === ProfileRecoveryType.TrinityLedger) {
                     nextRoute = LedgerRoute.GenerateAddress
                 } else {
-                    get(appRouter).next(event)
+                    this.parentRouter.next(event)
                 }
                 break
             case LedgerRoute.RestoreFromLedger:
-                get(appRouter).next(event)
+                this.parentRouter.next(event)
                 break
             case LedgerRoute.LegacyIntro:
                 nextRoute = LedgerRoute.InstallationGuide
@@ -59,7 +58,7 @@ export class LedgerRouter extends Subrouter<LedgerRoute> {
                 nextRoute = LedgerRoute.AccountIndex
                 break
             case LedgerRoute.AccountIndex:
-                get(appRouter).next(event)
+                this.parentRouter.next(event)
                 break
         }
 

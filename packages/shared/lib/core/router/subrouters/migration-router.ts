@@ -2,7 +2,6 @@ import { get, writable } from 'svelte/store'
 
 import { hasBundlesWithSpentAddresses, hasSingleBundle } from '@lib/migration'
 
-import { appRouter } from '../app-router'
 import { onboardingRouter } from '../onboarding-router'
 import { MigrationRoute } from '../enums'
 import { Subrouter } from './subrouter'
@@ -13,7 +12,7 @@ export const migrationRouter = writable<MigrationRouter>(null)
 
 export class MigrationRouter extends Subrouter<MigrationRoute> {
     constructor() {
-        super(MigrationRoute.Init, migrationRoute, onboardingRouter)
+        super(MigrationRoute.Init, migrationRoute, get(onboardingRouter))
     }
 
     next(event: FireflyEvent): void {
@@ -26,7 +25,7 @@ export class MigrationRouter extends Subrouter<MigrationRoute> {
                     break
                 }
                 if (get(hasSingleBundle)) {
-                    get(appRouter).next()
+                    this.parentRouter.next()
                 } else {
                     nextRoute = MigrationRoute.TransferFragmentedFunds
                 }
@@ -47,7 +46,7 @@ export class MigrationRouter extends Subrouter<MigrationRoute> {
                 nextRoute = MigrationRoute.TransferFragmentedFunds
                 break
             case MigrationRoute.TransferFragmentedFunds:
-                get(appRouter).next()
+                this.parentRouter.next()
                 break
         }
 

@@ -21,7 +21,7 @@ export class RecoveryRouter extends Subrouter<RecoveryRoute> {
     public importFile: Buffer
 
     constructor() {
-        super(getInitialRoute() ?? RecoveryRoute.TextImport, recoveryRoute, onboardingRouter)
+        super(getInitialRoute() ?? RecoveryRoute.TextImport, recoveryRoute, get(onboardingRouter))
     }
 
     next(event: FireflyEvent): void {
@@ -37,7 +37,7 @@ export class RecoveryRouter extends Subrouter<RecoveryRoute> {
                     isGettingMigrationData.set(true)
                     // await getMigrationData(migrationSeed)
                     isGettingMigrationData.set(false)
-                    get(onboardingRouter).next({ profileRecoveryType: _profileRecoveryType })
+                    this.parentRouter.next({ profileRecoveryType: _profileRecoveryType })
                 } else if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
                     mnemonic.set(migrationSeed?.split(' '))
                     nextRoute = RecoveryRoute.Success
@@ -69,11 +69,11 @@ export class RecoveryRouter extends Subrouter<RecoveryRoute> {
             case RecoveryRoute.LedgerImport: {
                 const _profileRecoveryType = params?.profileRecoveryType
                 profileRecoveryType.set(_profileRecoveryType)
-                get(onboardingRouter).next({ profileRecoveryType: _profileRecoveryType })
+                this.parentRouter.next({ profileRecoveryType: _profileRecoveryType })
                 break
             }
             case RecoveryRoute.Success:
-                get(onboardingRouter).next({ profileRecoveryType: get(profileRecoveryType) })
+                this.parentRouter.next({ profileRecoveryType: get(profileRecoveryType) })
                 break
         }
 

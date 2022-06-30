@@ -10,7 +10,7 @@ export const protectionRouter = writable<ProtectionRouter>(null)
 
 export class ProtectionRouter extends Subrouter<ProtectionRoute> {
     constructor() {
-        super(ProtectionRoute.SetupPinProtection, protectionRoute, onboardingRouter)
+        super(ProtectionRoute.SetupPinProtection, protectionRoute, get(onboardingRouter))
     }
 
     next(event: FireflyEvent): void {
@@ -28,7 +28,7 @@ export class ProtectionRouter extends Subrouter<ProtectionRoute> {
                 break
 
             case ProtectionRoute.SetupPinProtection:
-                get(onboardingRouter).next(event)
+                this.parentRouter.next(event)
                 break
         }
 

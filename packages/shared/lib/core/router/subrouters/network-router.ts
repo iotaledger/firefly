@@ -13,7 +13,7 @@ export const networkRouter = writable<NetworkRouter>(null)
 
 export class NetworkRouter extends Subrouter<NetworkRoute> {
     constructor() {
-        super(NetworkRoute.Protocol, networkRoute, onboardingRouter)
+        super(NetworkRoute.Protocol, networkRoute, get(onboardingRouter))
     }
 
     next(event?: FireflyEvent): void {
@@ -27,7 +27,7 @@ export class NetworkRouter extends Subrouter<NetworkRoute> {
                 if (isDeveloperProfile) {
                     nextRoute = NetworkRoute.Network
                 } else {
-                    get(onboardingRouter).next()
+                    this.parentRouter.next()
                 }
                 break
             }
@@ -36,12 +36,12 @@ export class NetworkRouter extends Subrouter<NetworkRoute> {
                 if (networkType === NetworkType.PrivateNet) {
                     nextRoute = NetworkRoute.CustomNetwork
                 } else {
-                    get(onboardingRouter).next()
+                    this.parentRouter.next()
                 }
                 break
             }
             case NetworkRoute.CustomNetwork:
-                get(onboardingRouter).next()
+                this.parentRouter.next()
                 break
         }
 
