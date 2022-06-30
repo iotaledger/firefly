@@ -1,11 +1,12 @@
+import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
-import { isLedgerProfile } from '@core/profile'
+import { activeProfile, isLedgerProfile } from '@core/profile'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { get } from 'svelte/store'
 import { showAppNotification } from './notifications'
-import { openPopup } from './popup'
+import { openPopup, popupState } from './popup'
 
-export async function checkStronghold(callback: () => unknown): Promise<void> {
+export async function checkStronghold(callback: () => Promise<unknown>, reopenPopup?: boolean): Promise<unknown> {
     if (get(isLedgerProfile)) {
         showAppNotification({
             type: 'error',
@@ -17,24 +18,29 @@ export async function checkStronghold(callback: () => unknown): Promise<void> {
 
     try {
         const strongholdUnlocked = await isStrongholdUnlocked()
+
         if (strongholdUnlocked) {
-            callback()
+            return callback()
         } else {
-            openPopup(
-                {
-                    type: 'password',
-                    props: {
-                        onSuccess: callback,
-                    },
-                },
-                true
-            )
+            const popup = get(popupState)
+            openPopup({ type: 'password' }, true)
+            await isStrongholdUnlockedListener()
+            if (reopenPopup) {
+                openPopup({ ...popup, props: { ...popup.props, _onMount: callback } })
+            }
         }
     } catch (err) {
-        console.error(err)
-        showAppNotification({
-            type: 'error',
-            message: localize(err?.error),
-        })
+        new BaseError({ message: err.error ?? err.message, logError: true })
     }
+}
+
+async function isStrongholdUnlockedListener(): Promise<boolean> {
+    const { isStrongholdLocked } = get(activeProfile)
+    return new Promise((resolve) => {
+        isStrongholdLocked.subscribe((value) => {
+            if (!value) {
+                resolve(value)
+            }
+        })
+    })
 }

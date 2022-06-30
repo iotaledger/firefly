@@ -11,4 +11,5 @@ export * from './isSubjectInternal'
 export * from './parseRawAmount'
 
 export * from './outputs'
+export * from './send'
 export * from './transactions'
