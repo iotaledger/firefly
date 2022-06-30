@@ -9,8 +9,8 @@
     "license": "Apache-2.0",
     "scripts": {
         "start": "npm-run-all -p start:dev start:electron",
-        "start:dev": "cross-env NODE_ENV=development STAGE=dev PLATFORM=desktop webpack serve --content-base public",
-        "start:electron": "cross-env NODE_ENV=development STAGE=dev PLATFORM=desktop electron public/build/main.js",
+        "start:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack serve --content-base public",
+        "start:electron": "cross-env NODE_ENV=development PLATFORM=desktop electron public/build/main.js",
         "start:electron-prod": "cross-env NODE_ENV=production PLATFORM=desktop electron public/build/main.js",
         "build": "yarn build:alpha",
         "build:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack",

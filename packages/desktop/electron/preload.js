@@ -40,8 +40,8 @@ window.addEventListener('unhandledrejection', (event) => {
 try {
     const WalletApi = require('@iota/wallet')
 
-    const { STAGE } = process.env
-    if (STAGE === 'dev' || STAGE === 'alpha' || STAGE === 'beta') {
+    const { STAGE, NODE_ENV } = process.env
+    if (NODE_ENV === 'development' || STAGE === 'alpha' || STAGE === 'beta') {
         const loggerOptions = {
             colorEnabled: true,
             name: './wallet.log',
