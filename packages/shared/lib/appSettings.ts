@@ -3,19 +3,6 @@ import { persistent } from './helpers'
 import { AppSettings, AppTheme } from './typings/app'
 
 /**
- * The application settings used throughout the application code, useful for
- * global settings beyond individual profile settings.
- */
-export const appSettings = persistent<AppSettings>('settings', {
-    deepLinking: false,
-    language: 'en',
-    theme: 'light',
-    darkMode: false,
-    notifications: true,
-    sendCrashReports: false,
-})
-
-/**
  * The initial application settings, useful for things that require
  * Firefly to restart\*:
  * - Sentry diagnostic reporting for errors and crashes - the Electron
@@ -70,3 +57,16 @@ export const lastAcceptedPrivacyPolicy = persistent<number>('lastAcceptedPrivacy
  * Note: The initial value must be set to 1 to support existing users and alert them
  */
 export const lastAcceptedTos = persistent<number>('lastAcceptedTos', 1)
+
+/**
+ * The application settings used throughout the application code, useful for
+ * global settings beyond individual profile settings.
+ */
+export const appSettings = persistent<AppSettings>('settings', {
+    deepLinking: false,
+    language: 'en',
+    theme: 'system',
+    darkMode: shouldBeDarkMode('system'),
+    notifications: true,
+    sendCrashReports: false,
+})
