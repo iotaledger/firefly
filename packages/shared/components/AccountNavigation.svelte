@@ -20,20 +20,26 @@
     let drawer: Drawer
     let isDrawerOpened = false
     let drawerRoute = DrawerRoutes.Init
-    let switcherButton: HTMLElement
-    let switcherText: HTMLElement
-    let switcherPosition = 0
-    let switcherTranslationModifier = 0
-    let unsubscribeSwitcherTranslation = () => {}
+
+    let switcherButtonWidth: number = 0
+    let switcherButtonTranslateX = 0
+    let switcherTranslationModifier = 1
+
+    let unsubscribeMobileHeaderAnimation = () => {}
+
+    const VIEWPORT_PADDING = 20
 
     let accountColor: string | AccountColor
-    $: $activeProfile?.accounts, (accountColor = getAccountColor($selectedAccountStore?.id))
 
-    const switcherOffsetLeft = 0.09
-    const textSizeObserver = new ResizeObserver(() => {
-        caclulateSwitcherPosition()
-        moveSwitcherButton()
-    })
+    $: $activeProfile?.accounts, (accountColor = getAccountColor($selectedAccountStore?.id))
+    $: (switcherButtonWidth, switcherTranslationModifier), animateSwitcherButton()
+
+    function animateSwitcherButton(): void {
+        if (!switcherButtonWidth || !window) return
+        const centeredTranslate = window.innerWidth * 0.5 - switcherButtonWidth * 0.5
+        const translateX = centeredTranslate * switcherTranslationModifier
+        switcherButtonTranslateX = translateX <= VIEWPORT_PADDING ? VIEWPORT_PADDING : translateX
+    }
 
     function toggleAccountSwitcher(): void {
         setDrawerRoute(DrawerRoutes.Init)
@@ -45,35 +51,14 @@
         drawerRoute = route
     }
 
-    function caclulateSwitcherPosition() {
-        if (switcherText === undefined) {
-            return
-        }
-        const textWidth = switcherText.getBoundingClientRect().width
-        const textOffset = switcherText.offsetLeft
-        const initialPosition = window.innerWidth * 0.5 - textWidth * 0.5 - textOffset
-        switcherPosition = initialPosition * switcherTranslationModifier
-    }
-
-    function moveSwitcherButton() {
-        if (switcherButton === undefined) {
-            return
-        }
-        switcherButton.style.transform = `translateX(${switcherPosition}px)`
-    }
-
     onMount(() => {
-        textSizeObserver.observe(switcherText)
-
-        unsubscribeSwitcherTranslation = mobileHeaderAnimation.subscribe((curr) => {
-            switcherTranslationModifier = curr * (1 - switcherOffsetLeft) + switcherOffsetLeft
-            caclulateSwitcherPosition()
-            moveSwitcherButton()
+        unsubscribeMobileHeaderAnimation = mobileHeaderAnimation.subscribe((curr) => {
+            switcherTranslationModifier = curr
         })
     })
 
     onDestroy(() => {
-        unsubscribeSwitcherTranslation()
+        unsubscribeMobileHeaderAnimation()
     })
 </script>
 
@@ -83,10 +68,11 @@
         class="mt-3 py-2 px-2 absolute rounded-lg flex flex-row justify-center items-center space-x-2 
             {isDrawerOpened ? 'bg-gray-100 dark:bg-gray-900' : ''}
             "
-        bind:this={switcherButton}
+        style="transform: translateX({switcherButtonTranslateX}px);"
+        bind:clientWidth={switcherButtonWidth}
     >
         <span class="circle" style="--account-color: {accountColor}" />
-        <div bind:this={switcherText}>
+        <div>
             <Text type="h4">{$selectedAccountStore?.alias}</Text>
         </div>
         <div class="transform transition-transform {isDrawerOpened ? 'rotate-180' : 'rotate-0'}">
@@ -95,9 +81,9 @@
     </button>
     <Drawer bind:this={drawer} opened={isDrawerOpened} onClose={() => (isDrawerOpened = false)}>
         <div class="flex flex-col px-6 w-full safe-area pt-7 pb-5 safe-area">
-            {#if drawerRoute === 'create'}
+            {#if drawerRoute === DrawerRoutes.Create}
                 <CreateAccount onCreate={onCreateAccount} onCancel={() => drawer.close()} />
-            {:else if (drawerRoute = DrawerRoutes.Init)}
+            {:else if drawerRoute === DrawerRoutes.Init}
                 <AccountSwitcher
                     {accounts}
                     {onCreateAccount}
