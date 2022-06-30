@@ -12,7 +12,7 @@
 
 <button
     data-label="checkbox-input"
-    class="flex items-center text-left cursor-pointer {classes} {$mobile && 'p-2'}"
+    class="flex items-center text-left cursor-pointer {classes}"
     type="button"
     {disabled}
     on:click={() => {
