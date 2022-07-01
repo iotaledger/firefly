@@ -13,9 +13,8 @@
     // const LEDGER_STATUS_POLL_INTERVAL = 1500
 
     let polling = false
-    let isConnected = false
-    let isAppOpen = false
     let creatingAccount = false
+
     $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
     $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
     $: animation = !isConnected
@@ -27,10 +26,12 @@
     function createAccount(): void {
         creatingAccount = true
     }
+
     // function _onCancel(): void {
     //     creatingAccount = false
     //     displayNotificationForLedgerProfile('error', true)
     // }
+
     // function _onConnected(): void {
     //     if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
     //         _onCancel()

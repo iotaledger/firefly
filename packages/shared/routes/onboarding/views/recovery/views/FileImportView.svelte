@@ -22,6 +22,7 @@
         setImportFile(<ArrayBuffer>file, filePath)
         $recoveryRouter.next()
     }
+
     function handleBackClick(): void {
         $recoveryRouter.previous()
     }
@@ -47,16 +48,12 @@
             (event as DragEvent)?.dataTransfer?.files?.[0] ?? (event?.target as HTMLInputElement)?.files?.[0] ?? null
 
         if (!file) {
-            fileName = null
             return setFile()
         }
 
-        if (allowedExtensions && allowedExtensions.length > 0) {
-            const ext = /\.([0-9a-z]+)$/i.exec(file.name)
-            if (!ext || !allowedExtensions.includes(ext[1])) {
-                fileName = null
-                return setFile()
-            }
+        const ext = /\.([0-9a-z]+)$/i.exec(file.name)
+        if (!ext || !allowedExtensions.includes(ext[1])) {
+            return setFile()
         }
 
         fileName = file.name
