@@ -21,7 +21,7 @@ export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: strin
     try {
         const url = new URL(input)
 
-        if (url.protocol === 'firefly:') {
+        if (url.protocol === `${process.env.APP_PROTOCOL}:`) {
             if (url.hostname === 'wallet') {
                 return parseWalletDeepLinkRequest(url, expectedAddressPrefix)
             } else {
@@ -31,7 +31,7 @@ export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: strin
             return addError({
                 time: Date.now(),
                 type: 'deepLink',
-                message: 'Error handling deep link. Does not start with firefly://',
+                message: `Error handling deep link. Does not start with ${process.env.APP_PROTOCOL}://`,
             })
         }
     } catch (err) {
