@@ -23,7 +23,7 @@
 </script>
 
 <div
-    class="relative h-full w-full px-6 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !==
+    class="relative h-full w-full px-0 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !==
         SettingsRoute.Init && 'md:pt-20'} {$mobile && 'overflow-y-auto'} {$settingsRoute === SettingsRoute.Init &&
         $mobile &&
         'settings-wrapper'}"

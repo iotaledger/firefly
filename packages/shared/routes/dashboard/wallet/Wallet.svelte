@@ -483,7 +483,7 @@
                 >
                     <DashboardPane classes="w-full">
                         {#if $walletRoute === WalletRoute.Assets}
-                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                            <div class="h-full" in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 200 }}>
                                 <AccountAssets
                                     {scroll}
                                     {scrollDetection}
@@ -491,7 +491,7 @@
                                 />
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
-                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                            <div class="h-full" in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 200 }}>
                                 <AccountHistory
                                     {scroll}
                                     {scrollDetection}

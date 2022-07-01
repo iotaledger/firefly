@@ -49,28 +49,30 @@
             {/if}
         </div>
         {#if $mobile}
-            <div class="flex flex-row items-center space-y-4 mb-1">
-                <Checkbox bind:checked />
-                <Text type="p" secondary classes="px-1">
-                    {locale('views.legal.checkboxMobile')}
-                    <span on:click={handleLegalClick} class="text-blue-500">
-                        {locale('views.legal.title')}
-                    </span>
-                </Text>
+            <div class="flex flex-col space-y-2 mb-8">
+                <div class="flex flex-row items-center space-x-3 mb-1">
+                    <Checkbox bind:checked />
+                    <Text type="p" secondary>
+                        {locale('views.legal.checkboxMobile')}
+                        <span on:click={handleLegalClick} class="text-blue-500">
+                            {locale('views.legal.title')}
+                        </span>
+                    </Text>
+                </div>
+                <Checkbox label={locale('views.crashReporting.checkbox')} bind:checked={sendCrashReports} />
+                <!-- <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
+                    {#each languageList as language}
+                        <button
+                            class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
+                            on:click={() => handleLanguage(language)}
+                            class:active={language?.label === SUPPORTED_LOCALES[$appSettings.language]}
+                        >
+                            <Text type="p" smaller>{language?.label}</Text>
+                        </button>
+                    {/each}
+                </div> 
+            TODO use window.navigator.language to autodetect locale-->
             </div>
-            <Checkbox label={locale('views.crashReporting.checkbox')} bind:checked={sendCrashReports} classes="mb-8" />
-            <!-- <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
-                {#each languageList as language}
-                    <button
-                        class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
-                        on:click={() => handleLanguage(language)}
-                        class:active={language?.label === SUPPORTED_LOCALES[$appSettings.language]}
-                    >
-                        <Text type="p" smaller>{language?.label}</Text>
-                    </button>
-                {/each}
-            </div> 
-        TODO use window.navigator.language to autodetect locale-->
         {:else}
             <Dropdown
                 sortItems={true}

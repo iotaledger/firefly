@@ -35,18 +35,15 @@
         class="grid grid-flow-row-dense h-screen items-center justify-items-center p-5"
         style="grid-template-rows: 18fr 1fr 1fr 5fr 1fr"
     >
-        <button on:click={handleCloseClick} class="absolute top-10 right-8">
-            <Icon icon="close" classes="text-gray-800 dark:text-white" />
-        </button>
-        <div class="grid pt-44">
+        <div class="grid mt-44 rounded-xl bg-white">
             <QRImage size={5} data={$selectedAccountStore.depositAddress} />
         </div>
-        <Text secondary smaller classes="p-4">
+        <Text type="h4" classes="p-4">
             {$activeProfile?.isDeveloperProfile
                 ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                 : localize('general.myAddress')}
         </Text>
-        <Text type="pre">{$selectedAccountStore.depositAddress}</Text>
+        <Text type="pre" classes="px-4">{$selectedAccountStore.depositAddress}</Text>
         <button
             class="flex flex-row justify-center items-start h-12 w-full text-blue-500 -mt-10"
             disabled={isGeneratingAddress}
