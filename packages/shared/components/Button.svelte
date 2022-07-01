@@ -29,8 +29,6 @@
     export let iconOnly = false
     export let iconHeight: string
     export let iconWidth: string
-    export let secondaryIcon: string
-    export let secondaryIconColor = ''
 
     export let onClick: () => unknown
 
@@ -134,11 +132,6 @@
                     <div class="col-span-10 h-full flex items-center">
                         <span class="font-bold text-12 leading-140"><slot /></span>
                     </div>
-                    {#if secondaryIcon && !disabled}
-                        <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
-                            <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
-                        </div>
-                    {/if}
                     {#if !disabled}
                         <div class="absolute right-0 flex items-center h-full">
                             <Icon icon="chevron-right" classes="right" />
@@ -325,7 +318,7 @@
             @apply border-solid;
             @apply border-gray-300;
             @apply bg-white;
-            @apply p-5; // todo: (JASON) Change padding here
+            @apply p-5;
             @apply text-left;
             &.secondary.showHoverText {
                 @apply border-transparent;
@@ -402,7 +395,7 @@
                 }
                 :global(svg),
                 :global(svg.right) {
-                    @apply text-gray-500; // todo: (JASON) change darkmode color here
+                    @apply text-gray-500;
                 }
                 &:hover,
                 &:focus {
