@@ -186,7 +186,7 @@
 <svelte:window on:keydown={onKey} />
 {#if $mobile && !fullScreen}
     <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
-        <div bind:this={popupContent} class="py-10 px-6">
+        <div bind:this={popupContent} class="py-10 px-5">
             <svelte:component this={types[type]} {...props} {locale} />
         </div>
     </Drawer>

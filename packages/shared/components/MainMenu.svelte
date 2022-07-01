@@ -49,12 +49,12 @@
     <span class="text-14 font-600 text-center text-white uppercase">{profileInitial || 'A'}</span>
 </button>
 <Drawer bind:this={drawer} fromLeft fullScreen classes="flex">
-    <div class="flex flex-col flex-1 mx-4">
+    <div class="flex flex-col flex-1 px-5">
         <header
             class="w-full mt-3 py-3 px-9 mb-5 flex items-centers justify-center bg-white dark:bg-gray-800"
             on:click={handleBackClick}
         >
-            <Icon icon="arrow-left" classes="absolute mb-5 left-8 text-gray-500 text-blue-500" />
+            <Icon icon="arrow-left" classes="absolute mb-5 left-5 text-gray-500 text-blue-500" />
             <Text type="h4" classes="text-center">
                 {localize(
                     $profileRoute === ProfileRoute.ProfileActions

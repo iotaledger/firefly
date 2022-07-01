@@ -192,7 +192,7 @@
     }
 </script>
 
-<div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
+<div class="h-full p-6 {$mobile ? 'px-5' : ''} flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-5">
         {#if $selectedMessage && !$mobile}
             <button class="flex flex-row space-x-2 items-center" on:click={handleBackClick}>

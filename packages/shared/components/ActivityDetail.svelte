@@ -172,7 +172,7 @@
                 {/if}
             </div>
         </div>
-        <div class="flex flex-col px-6 h-full overflow-y-auto flex-auto">
+        <div class="flex flex-col px-5 h-full overflow-y-auto flex-auto">
             <div class="mb-5">
                 <Text secondary>{localize('general.status')}</Text>
                 <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
