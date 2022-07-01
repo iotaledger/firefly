@@ -1,15 +1,18 @@
 <script lang="typescript">
-    import { Button, OnboardingLayout, Text } from 'shared/components'
-    import features from 'shared/features/features'
+    import {
+        cleanupOnboarding,
+        createNewProfile,
+        initProfileManagerFromNewProfile,
+        newProfile,
+        updateNewProfile,
+    } from '@contexts/onboarding'
+    import { AppStage, appStage } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { appRouter } from '@core/router'
-    import {
-        cleanupOnboarding,
-        newProfile,
-        updateNewProfile,
-        initProfileManagerFromNewProfile,
-    } from '@contexts/onboarding'
+    import { Button, OnboardingLayout, Text } from 'shared/components'
+    import features from 'shared/features/features'
+    import { onMount } from 'svelte'
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
         if ($newProfile?.isDeveloperProfile) {
@@ -25,6 +28,12 @@
         await cleanupOnboarding(true)
         $appRouter.previous()
     }
+
+    onMount(() => {
+        if (!$newProfile?.id) {
+            createNewProfile({ isDeveloperProfile: $appStage !== AppStage.PROD })
+        }
+    })
 </script>
 
 <OnboardingLayout {onBackClick}>
