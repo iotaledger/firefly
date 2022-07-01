@@ -19,6 +19,10 @@
             lightmode: 'balance-desktop.svg',
             darkmode: 'balance-desktop-darkmode.svg',
         },
+        'send-mobile': {
+            lightmode: 'send-mobile.svg',
+            darkmode: 'send-mobile-darkmode.svg',
+        },
         'single-account-guide-desktop': {
             lightmode: 'onboarding/single-account-guide-desktop.svg',
             darkmode: 'onboarding/single-account-guide-desktop.svg',
