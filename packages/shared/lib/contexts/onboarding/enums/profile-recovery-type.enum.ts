@@ -1,5 +1,4 @@
 export enum ProfileRecoveryType {
-    File = 'file',
     FireflyLedger = 'fireflyLedger',
     Import = 'import',
     Mnemonic = 'mnemonic',

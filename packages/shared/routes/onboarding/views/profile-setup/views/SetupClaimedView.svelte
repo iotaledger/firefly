@@ -57,7 +57,7 @@
                 ?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.strongholdBackup?.enabled}
-            onClick={() => handleContinueClick(ProfileRecoveryType.File)}
+            onClick={() => handleContinueClick(ProfileRecoveryType.Stronghold)}
         />
         {#if !$mobile}
             <OnboardingButton
