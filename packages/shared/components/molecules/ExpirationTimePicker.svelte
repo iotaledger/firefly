@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { Text, ExpirationTimePickerMenu, Modal } from 'shared/components'
+    import { Text, ExpirationTimePickerMenu } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
 
     export let value: Date
+    export let initialSelected: 'none' | '1hour' | '1day' | '1week' = 'none'
 
     let menu: ExpirationTimePickerMenu
-    let selected: 'none' | '1hour' | '1day' | '1week' = 'none'
+    let selected: 'none' | '1hour' | '1day' | '1week' = initialSelected
     let anchor: HTMLElement
 </script>
 

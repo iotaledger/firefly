@@ -28,7 +28,6 @@
             version: { localeKey: 'general.version', nodeInfoPath: 'version' },
             pruningIndex: { localeKey: 'general.pruningIndex', nodeInfoPath: 'status.pruningIndex' },
             features: { localeKey: 'general.features', nodeInfoPath: 'features' },
-            plugins: { localeKey: 'general.plugins', nodeInfoPath: 'plugins' },
         },
         [NodeInfoTab.Metrics]: {
             blocksPerSecond: { localeKey: 'metrics.blocksPerSecond', nodeInfoPath: 'metrics.blocksPerSecond' },
@@ -87,11 +86,6 @@
     function handleNodeInfoTabClick(tab: NodeInfoTab): void {
         if (!tab) return
         nodeInfoTab = tab
-    }
-
-    function handleKeyValueBoxClick(value: string): void {
-        if (!value) return
-        setClipboard(value)
     }
 
     function handleCopyAllInformationClick(): void {

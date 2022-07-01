@@ -6,7 +6,6 @@ import {
     getAccount as _getAccount,
     getAccounts as _getAccounts,
     getBalance as _getBalance,
-    getNodeInfo as _getNodeInfo,
     getUnusedAddress as _getUnusedAddress,
     internalTransfer as _internalTransfer,
     isLatestAddressUnused as _isLatestAddressUnused,
@@ -47,7 +46,6 @@ import {
     deleteStorage as _deleteStorage,
     restoreBackup as _restoreBackup,
     send as _send,
-    setClientOptions as _setClientOptions,
     setStoragePassword as _setStoragePassword,
     setStrongholdPassword as _setStrongholdPassword,
     setStrongholdPasswordClearInterval as _setStrongholdPasswordClearInterval,
@@ -76,10 +74,7 @@ export function onMessage(cb: (payload: MessageResponse) => void): void {
 //     WalletPlugin.initLogger(JSON.stringify(config))
 // }
 
-export function init(
-    id: string,
-    storagePath?: string
-): {
+export function init(id: string): {
     destroy: () => void
     removeEventListeners: () => void
 } {
@@ -337,7 +332,7 @@ export const api = {
             id: __ids.messageId,
             event: 'TransferProgress',
         }),
-    onLedgerAddressGeneration: (): Api => (__ids) =>
+    onLedgerAddressGeneration: (): Api => () =>
         new Promise<string>((resolve) => {
             resolve('onLedgerAddressGeneration')
         }),

@@ -11,13 +11,13 @@
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeightText } from 'shared/components/Text.svelte'
-    import { IAsset, Recipient } from '@core/wallet'
+    import { IAsset, Subject } from '@core/wallet'
     import { onMount } from 'svelte'
 
     export let asset: IAsset
     export let amount: string
     export let unit: string
-    export let recipient: Recipient
+    export let recipient: Subject
     export let metadata: string
     export let tag: string
 
@@ -27,46 +27,32 @@
     let recipientInput: RecipientInput
 
     async function onSend(): Promise<void> {
-        let valid = true
-
-        async function validate(): Promise<void> {
-            await Promise.allSettled([
-                assetAmountInput?.validate(!!(metadata || tag)).then(
-                    () => {},
-                    () => {
-                        valid = false
-                    }
-                ),
-                recipientInput?.validate().then(
-                    () => {},
-                    () => {
-                        valid = false
-                    }
-                ),
-            ])
+        const valid = await validate()
+        if (valid) {
+            openPopup({
+                type: 'sendConfirmation',
+                props: {
+                    asset,
+                    amount,
+                    unit,
+                    rawAmount,
+                    recipient,
+                    internal: false,
+                    metadata,
+                    tag,
+                },
+                overflow: true,
+            })
         }
+    }
 
+    async function validate(): Promise<boolean> {
         try {
-            await validate()
-
-            if (valid) {
-                openPopup({
-                    type: 'sendConfirmation',
-                    props: {
-                        asset,
-                        amount,
-                        unit,
-                        rawAmount,
-                        recipient,
-                        internal: false,
-                        metadata,
-                        tag,
-                    },
-                    overflow: true,
-                })
-            }
+            await Promise.all([assetAmountInput?.validate(!!(metadata || tag)), recipientInput?.validate()])
+            return true
         } catch (error) {
-            console.error('error: ', error)
+            console.error('Error: ', error)
+            return false
         }
     }
 

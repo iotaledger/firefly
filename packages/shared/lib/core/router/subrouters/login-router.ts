@@ -1,4 +1,3 @@
-import { migrateActiveProfile } from '@core/profile'
 import { get, writable } from 'svelte/store'
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'
@@ -9,7 +8,7 @@ export const loginRoute = writable<LoginRoute>(null)
 
 export class LoginRouter extends Subrouter<LoginRoute> {
     constructor() {
-        super(LoginRoute.Init, loginRoute)
+        super(LoginRoute.SelectProfile, loginRoute)
     }
 
     next(event?: FireflyEvent): void {
@@ -17,7 +16,7 @@ export class LoginRouter extends Subrouter<LoginRoute> {
         const currentRoute = get(this.routeStore)
 
         switch (currentRoute) {
-            case LoginRoute.Init: {
+            case LoginRoute.SelectProfile: {
                 if (event?.shouldAddProfile) {
                     get(appRouter).next(event)
                 } else {

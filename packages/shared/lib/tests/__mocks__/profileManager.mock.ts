@@ -1,4 +1,11 @@
-import type { AccountId, CreateAccountPayload, AccountSyncOptions, ClientOptions } from '@iota/wallet'
+import type {
+    AccountId,
+    CreateAccountPayload,
+    AccountSyncOptions,
+    ClientOptions,
+    EventType,
+    WalletEvent,
+} from '@iota/wallet'
 import { IAccount } from '../../core/account'
 import { AccountMock } from './account.mock'
 import { IProfileManager } from '../../core/profile-manager'
@@ -13,6 +20,18 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve()
     }
 
+    bech32ToHex(bech32Address: string): Promise<string> {
+        throw new Error('Method not implemented.')
+    }
+
+    changeStrongholdPassword(password: string): Promise<void> {
+        throw new Error('Method not implemented.')
+    }
+
+    clearListeners(eventTypes: EventType[]): void {
+        throw new Error('Method not implemented.')
+    }
+
     clearStrongholdPassword(): Promise<void> {
         return Promise.resolve()
     }
@@ -21,7 +40,7 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve(new AccountMock())
     }
 
-    deleteStorage(): Promise<void> {
+    deleteAccountsAndDatabase(): Promise<void> {
         return Promise.resolve()
     }
 
@@ -29,19 +48,23 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve()
     }
 
+    emitTestEvent(event: WalletEvent): Promise<void> {
+        throw new Error('Method not implemented.')
+    }
+
     generateMnemonic(): Promise<string> {
         return Promise.resolve(MOCK_MNEMONIC)
     }
 
-    getAccount(accountId: AccountId) {
-        return undefined
+    getAccount(accountId: AccountId): Promise<IAccount> {
+        throw new Error('Method not implemented.')
     }
 
-    getAccounts() {
-        return undefined
+    getAccounts(): Promise<IAccount[]> {
+        throw new Error('Method not implemented.')
     }
 
-    getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
+    getNodeInfo(url: string, auth?: IAuth): Promise<INodeInfoResponse> {
         return Promise.resolve({
             nodeInfo: {
                 name: 'HORNET',
@@ -85,11 +108,16 @@ export class ProfileManagerMock implements IProfileManager {
                     referencedBlocksPerSecond: 1.3,
                     referencedRate: 100,
                 },
+                supportedProtocolVersions: [],
+                pendingProtocolParameters: [],
                 features: [],
-                plugins: ['debug/v1', 'participation/v1', 'indexer/v1', 'mqtt/v1'],
             },
             url,
         })
+    }
+
+    hexToBech32(hex: string, bech32Hrp?: string): Promise<string> {
+        throw new Error('Method not implemented.')
     }
 
     isStrongholdPasswordAvailable(): Promise<boolean> {
@@ -102,6 +130,10 @@ export class ProfileManagerMock implements IProfileManager {
 
     recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
         return Promise.resolve([])
+    }
+
+    removeLatestAccount(): Promise<void> {
+        throw new Error('Method not implemented.')
     }
 
     restoreBackup(source: string, password: string): Promise<void> {

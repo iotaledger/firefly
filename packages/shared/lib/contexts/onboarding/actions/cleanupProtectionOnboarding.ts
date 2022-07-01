@@ -1,8 +1,7 @@
 import { get } from 'svelte/store'
 
-import { walletPin } from '@contexts/onboarding'
 import { Platform } from '@lib/platform'
-import { newProfile } from '@core/profile'
+import { newProfile } from '../stores'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 
@@ -18,6 +17,4 @@ export async function cleanupProtectionOnboarding(pinInput: string): Promise<voi
     if (get(walletSetupType) === SetupType.Mnemonic) {
         await storeAndCleanMnemonic()
     }
-
-    walletPin.set(null)
 }

@@ -33,7 +33,7 @@
 </script>
 
 <div class="flex items-center justify-center w-24">
-    <div class="flex flex-col justify-between items-center">
+    <div class="flex flex-col justify-between items-center w-full">
         <div on:click={handleOnClick} class="relative cursor-pointer mb-3">
             <div
                 class="h-18 w-18 {bgColor
@@ -48,7 +48,7 @@
             </div>
             <NetworkIconBadge {networkType} {networkProtocol} />
         </div>
-        <div class="flex flex-row items-baseline space-x-1.5 mb-2">
+        <div class="flex flex-row items-baseline justify-center space-x-1.5 mb-2 w-full">
             {#if isLedgerProfile}
                 <Icon
                     icon="ledger"
@@ -57,7 +57,7 @@
                     height={14}
                 />
             {/if}
-            <Text type="h5" classes="text-center">{name}</Text>
+            <Text type="h5" classes="text-center truncate">{name}</Text>
         </div>
         {#if isDeveloper}
             <DeveloperIndicatorPill />

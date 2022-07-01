@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { selectedAccountId } from '@core/account'
     import { localize } from '@core/i18n'
     import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
     import {
@@ -9,14 +8,12 @@
         logout,
         reflectLockedStronghold,
         saveActiveProfile,
-        updateActiveProfile,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
-    import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
-    import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
+    import { isPollingLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { ongoingSnapshot } from 'shared/lib/migration'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
-    import { clearPollParticipationOverviewInterval, pollParticipationOverview } from 'shared/lib/participation'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { Settings, Staking, Wallet } from 'shared/routes'
@@ -27,8 +24,6 @@
     const { hasLoadedAccounts, loggedIn } = $activeProfile
 
     $: $activeProfile, saveActiveProfile()
-    // TODO: Set this in switch account action
-    $: updateActiveProfile({ lastUsedAccountId: $selectedAccountId })
 
     const tabs = {
         wallet: Wallet,
@@ -42,21 +37,21 @@
     let developerProfileNotificationId
     let showTopNav = false
 
-    const LEDGER_STATUS_POLL_INTERVAL = 2000
+    // const LEDGER_STATUS_POLL_INTERVAL = 2000
 
     const unsubscribeAccountsLoaded = hasLoadedAccounts.subscribe((val) => {
         if (val) {
             void pollNetworkStatus()
-            void pollParticipationOverview()
+            // void pollParticipationOverview()
         } else {
             clearPollNetworkInterval()
-            clearPollParticipationOverviewInterval()
+            // clearPollParticipationOverviewInterval()
         }
     })
 
     const unsubscribeOngoingSnapshot = ongoingSnapshot.subscribe((os) => {
         if (os) {
-            openSnapshotPopup()
+            // openSnapshotPopup()
         }
     })
 
@@ -139,6 +134,7 @@
             openPopup({
                 type: 'busy',
                 hideClose: true,
+                preventClose: true,
                 fullScreen: true,
                 transition: false,
             })
@@ -151,7 +147,7 @@
             const cancelBusyState = () => {
                 busy = false
                 if (get(popupState).type === 'busy') {
-                    closePopup()
+                    closePopup(true)
                 }
                 Platform.DeepLinkManager.checkDeepLinkRequestExists()
                 showTopNav = true
@@ -230,7 +226,7 @@
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
                 message: localize('indicators.developerProfileIndicator.warningText', {
-                    values: { networkName: $activeProfile?.settings?.clientOptions.network },
+                    values: { networkName: $activeProfile?.clientOptions.network },
                 }),
             })
         }
@@ -268,7 +264,7 @@
      * when the one which interrupted has finished
      */
     $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
-        pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
+        // pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
     }
 
     $: $hasStrongholdLocked && reflectLockedStronghold()

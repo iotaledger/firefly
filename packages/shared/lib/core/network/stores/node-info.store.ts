@@ -18,6 +18,7 @@ export const nodeInfo = writable<INodeInfo>({
         },
         pruningIndex: undefined,
     },
+    supportedProtocolVersions: undefined,
     protocol: {
         protocolVersion: undefined,
         networkName: undefined,
@@ -30,6 +31,7 @@ export const nodeInfo = writable<INodeInfo>({
         },
         tokenSupply: undefined,
     },
+    pendingProtocolParameters: undefined,
     baseToken: {
         name: undefined,
         tickerSymbol: undefined,
@@ -44,7 +46,6 @@ export const nodeInfo = writable<INodeInfo>({
         referencedRate: undefined,
     },
     features: [],
-    plugins: [],
 })
 
 export function updateNodeInfo(payload: Partial<INodeInfo>): void {

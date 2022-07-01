@@ -1,20 +1,32 @@
 import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
-import { queriedActivities } from '../stores'
+import { updateActivityByActivityId } from '../stores'
 import { hiddenActivities } from '../stores/hidden-activities.store'
+import { localize } from '@core/i18n'
+import { showAppNotification } from '@lib/notifications'
 
 export function hideActivity(id: string): void {
-    hiddenActivities.update((state) => {
-        if (!state[get(selectedAccount).id]) {
-            state[get(selectedAccount).id] = []
-        }
-        state[get(selectedAccount).id].push(id)
-        return state
-    })
+    try {
+        const accountId = get(selectedAccount).id
+        hiddenActivities.update((state) => {
+            if (!state[accountId] || !Array.isArray(state[accountId])) {
+                state[accountId] = []
+            }
+            state[accountId].push(id)
+            return state
+        })
 
-    queriedActivities.update((state) => {
-        const activity = state.find((activity) => activity.id === id)
-        activity.isHidden = true
-        return state
-    })
+        updateActivityByActivityId(accountId, id, { isHidden: true })
+
+        showAppNotification({
+            type: 'info',
+            message: localize('notifications.hideActivity.success'),
+        })
+    } catch (err) {
+        console.error(err)
+        showAppNotification({
+            type: 'error',
+            message: localize('notifications.hideActivity.error'),
+        })
+    }
 }

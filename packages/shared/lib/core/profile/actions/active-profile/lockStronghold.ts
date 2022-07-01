@@ -1,4 +1,4 @@
-import { activeProfile, clearTimeStrongholdLastUnlocked } from '@core/profile'
+import { activeProfile } from '@core/profile'
 import { clearStrongholdPassword } from '@core/profile-manager'
 import { get } from 'svelte/store'
 import { reflectLockedStronghold } from './reflectLockedStronghold'

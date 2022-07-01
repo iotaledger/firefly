@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Send, Receive & Manage your IOTA tokens",
+            "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Firefly is the official wallet software of IOTA."
         },
         "legal": {
@@ -14,12 +14,12 @@
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
-        "appearance": {
-            "title": "Appearance",
-            "body": "Choose your app theme."
+        "languageAndAppearance": {
+            "title": "Language & appearance",
+            "body": "Choose your language and theme"
         },
         "profile": {
-            "title": "Create a profile",
+            "title": "Create your {protocol} profile",
             "profileName": "Profile name",
             "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
             "body2": {
@@ -34,7 +34,7 @@
             }
         },
         "setup": {
-            "title": "Set up a wallet",
+            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
             "chrysalisTitle": "Chrysalis Network Update",
             "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Learn about the migration"
@@ -48,34 +48,50 @@
             "title": "Create a wallet",
             "body": "Create a new wallet. You can choose a regular software wallet or if you have a Ledger device you can set up a hardware wallet.",
             "softwareAccount": {
-                "title": "I want a software wallet",
-                "description": "Create a 24-word Recovery Phrase"
+                "title": "Create a software wallet",
+                "description": "Provides a Stronghold file and recovery phrase"
             },
             "ledgerAccount": {
-                "title": "I want a hardware wallet",
+                "title": "Create a hardware wallet",
                 "description": "Ledger Nano S or Nano X required"
             }
         },
         "protocol": {
             "title": "Choose protocol",
             "body": "Set the protocol for your profile",
-            "iota": "IOTA default protocol",
-            "shimmer": "Experimental IOTA staging protocol"
+            "iota": "IOTA Mainnet",
+            "shimmer": "Staging network for IOTA Mainnet"
         },
         "network": {
             "title": "Choose network",
             "body": "Set the network for your profile",
-            "mainnet": {
-                "title": "Mainnet",
-                "body": "Official network"
+            "iota": {
+                "mainnet": {
+                    "title": "Mainnet",
+                    "body": "IOTA Mainnet"
+                },
+                "devnet": {
+                    "title": "Devnet",
+                    "body": "Developer network for IOTA"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with active TIPS"
+                }
             },
-            "devnet": {
-                "title": "Devnet",
-                "body": "Network for testing and development"
-            },
-            "private-net": {
-                "title": "Private net",
-                "body": "Private network"
+            "shimmer": {
+                "mainnet": {
+                    "title": "Shimmer",
+                    "body": "Staging network for IOTA Mainnet"
+                },
+                "devnet": {
+                    "title": "Public Testnet",
+                    "body": "Beta network for IOTA Mainnet"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with draft TIPS"
+                }
             }
         },
         "customNetwork": {
@@ -106,15 +122,10 @@
             "body1": "Set up a login PIN to make sure that only you can enter your profile.",
             "body2": "Keep your PIN safe!"
         },
-        "pin": {
+        "setupPin": {
             "title": "Set up PIN code",
             "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
             "body2": "Use numbers only"
-        },
-        "confirmPin": {
-            "title": "Verify your PIN code",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
             "title": "Back up your wallet",
@@ -163,16 +174,31 @@
             "exportMigration": "Export migration log and finish setup"
         },
         "import": {
-            "title": "Recover or migrate funds",
-            "body": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+            "title": {
+                "iota": "Recover or migrate IOTA funds",
+                "shimmer": "Recover Shimmer profile"
+            },
+            "body": {
+                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
+            },
             "importSeed": "I have an 81 character seed",
             "importSeedDescription": "Enter a seed and migrate funds to Chrysalis",
-            "importMnemonic": "I have a Firefly recovery phrase",
-            "importMnemonicDescription": "Enter your recovery phrase to recover your wallets",
-            "importFile": "I have a file backup",
-            "importFileDescription": "Upload a Seedvault or Stronghold file",
-            "importLedger": "I have a Ledger backup",
-            "importLedgerDescription": "Restore or migrate a Ledger profile"
+            "importMnemonic": "Use recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase",
+            "importFile": {
+                "iota": "Use backup file",
+                "shimmer": "Use Stronghold backup file"
+            },
+            "importFileDescription": {
+                "iota": "Upload a Seedvault or Stronghold file",
+                "shimmer": "Upload Stronghold file"
+            },
+            "importLedger": "Use Ledger hardware device",
+            "importLedgerDescription": {
+                "iota": "Restore or migrate a Ledger profile",
+                "shimmer": "Restore using Nano S or Nano X devices"
+            }
         },
         "importFromText": {
             "seed": {
@@ -679,8 +705,7 @@
                     "latestMilestone": "Latest milestone",
                     "confirmedMilestone": "Confirmed milestone",
                     "pruningIndex": "Pruning index",
-                    "features": "Features",
-                    "plugins": "Plugins"
+                    "features": "Features"
                 },
                 "metrics": {
                     "tab": "Metrics",
@@ -905,19 +930,35 @@
         "close": "Close",
         "dismiss": "Dismiss",
         "claim": "Claim",
+        "claiming": "Claiming",
         "reject": "Reject",
+        "confirmRejection": {
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
-        "restoreWallet": "Migrate or restore a wallet",
-        "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
-        "createWallet": "Create new wallet",
-        "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "restoreWallet": {
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile"
+        },
+        "restoreWalletDescription": {
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile"
+        },
+        "createWallet": "Create a new {protocol} profile",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "claimShimmer": "Claim Shimmer staking rewards",
+        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
-        "setupPin": "Set up PIN code",
-        "setPin": "Set PIN code",
-        "confirmPin": "Confirm PIN code",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "Enter your PIN",
         "saveBackupFile": "Save backup file",
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
@@ -992,7 +1033,7 @@
         "hideNetworkStatistics": "Hide network statistics",
         "findWallets": "Find wallets",
         "useBalanceFinder": "Use balance finder",
-        "searchBalances": "Search for balances",
+        "search": "Search",
         "searchAgain": "Search again",
         "searching": "Searching",
         "closeFirefly": "Close Firefly",
@@ -1169,13 +1210,15 @@
         "transactionTime": "Transaction time",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
+        "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalance": "Available balance: {balance}",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
         "tag": "Tag",
-        "nodeList": "Node list"
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in"
     },
     "dates": {
         "today": "Today",
@@ -1225,7 +1268,15 @@
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
         "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "claimed": {
+            "success": "Transaction claimed",
+            "error": "Claiming transaction failed"
+        },
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {
@@ -1255,7 +1306,8 @@
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "incorrect": "Your current PIN is incorrect.",
+            "invalid": "Invalid PIN code."
         },
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
@@ -1269,7 +1321,8 @@
             "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
             "index": "Your account index must be a number between 0 and 2,147,483,647.",
             "page": "Your account page must be a number between 0 and 2,147,483,647.",
-            "syncing": "There was an error syncing your wallets."
+            "syncing": "There was an error syncing your wallets.",
+            "cannotRemove": "Unable to remove wallet."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
@@ -1281,11 +1334,13 @@
             "wrongAddressFormat": "The address is not correctly formatted.",
             "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This wallet has insufficient funds.",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address.",
             "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "transaction": "There was an error sending your transaction. Please try again.",
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -1300,7 +1355,10 @@
             "noSynced": "No synced nodes are available.",
             "answer": "Failed to get an answer from all nodes.",
             "forbidden": "This node connection is forbidden.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node"
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
@@ -1355,7 +1413,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationTime": "The chosen expiration time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."

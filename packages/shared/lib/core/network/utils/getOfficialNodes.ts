@@ -1,7 +1,6 @@
 import { NetworkProtocol, NetworkType } from '../enums'
 import { INode } from '../interfaces'
 import { OFFICIAL_NODE_URLS } from '../constants'
-import { getOfficialNetwork } from './getOfficialNetwork'
 
 /**
  * Constructs a list of the official IOTA nodes for a given network.

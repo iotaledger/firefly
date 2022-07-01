@@ -2,7 +2,7 @@
     import { Icon, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     export let group
     export let settings
@@ -12,10 +12,10 @@
     export let iconColor = undefined
     export let title
     export let description
-    export let onClick = (..._: any[]): void => {}
+    export let onClick: (..._: any[]) => void
 
-    $: Object.keys(featureFlags?.settings?.[group])?.forEach((setting) => {
-        if (!featureFlags?.settings?.[group]?.[setting]?.enabled) {
+    $: Object.keys(features?.settings?.[group])?.forEach((setting) => {
+        if (!features?.settings?.[group]?.[setting]?.enabled) {
             const settingName = setting[0].toUpperCase() + setting.slice(1)
             delete settings?.[settingName]
         }

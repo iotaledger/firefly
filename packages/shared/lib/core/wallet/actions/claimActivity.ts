@@ -1,12 +1,40 @@
 import { selectedAccount } from '@core/account/stores/selected-account.store'
+import { localize } from '@core/i18n'
+import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
-import { queriedActivities } from '../stores/selected-account-activities.store'
+import { Activity } from '../classes'
+import { addClaimedActivity, updateActivityByActivityId } from '../stores'
 
-export function claimActivity(id: string): void {
-    queriedActivities.update((state) => {
-        const activity = state.find((activity) => activity.id === id)
-        get(selectedAccount).collectOutputs([activity.id])
-        activity.isClaimed = true
-        return state
-    })
+export async function claimActivity(activity: Activity): Promise<void> {
+    const account = get(selectedAccount)
+    try {
+        updateActivityByActivityId(account.id, activity.id, { isClaiming: true })
+        const results = await account.claimOutputs([activity.outputId])
+        if (results.length > 0) {
+            const transactionId = results[0].transactionId
+            addClaimedActivity(account.id, activity.transactionId, {
+                id: activity.id,
+                claimingTransactionId: transactionId,
+                claimedTimestamp: new Date().getTime(),
+            })
+            updateActivityByActivityId(account.id, activity.id, {
+                isClaimed: true,
+                claimingTransactionId: transactionId,
+                claimedDate: new Date(),
+            })
+
+            showAppNotification({
+                type: 'info',
+                message: localize('notifications.claimed.success'),
+            })
+        }
+    } catch (err) {
+        console.error(err)
+        showAppNotification({
+            type: 'error',
+            message: localize('notifications.claimed.error'),
+        })
+    } finally {
+        updateActivityByActivityId(account.id, activity.id, { isClaiming: false })
+    }
 }

@@ -1,8 +1,9 @@
 import { get, writable } from 'svelte/store'
 
-import { mobile } from '@core/app'
+import { AppStage, appStage, mobile } from '@core/app'
 import { NetworkType } from '@core/network'
-import { activeProfile, newProfile, ProfileImportType, profiles, ProfileType, setNewProfileType } from '@core/profile'
+import { activeProfile, ProfileImportType, profiles, ProfileType } from '@core/profile'
+import { newProfile, setNewProfileType, updateNewProfile } from '@contexts/onboarding'
 import { SetupType } from '@lib/typings/setup'
 import { walletSetupType } from '@lib/wallet'
 
@@ -61,9 +62,12 @@ export class AppRouter extends Router<AppRoute> {
                 nextRoute = AppRoute.CrashReporting
                 break
             case AppRoute.CrashReporting:
-                nextRoute = AppRoute.Appearance
+                nextRoute = AppRoute.LanguageAndAppearance
                 break
-            case AppRoute.Appearance:
+            case AppRoute.LanguageAndAppearance:
+                if (get(appStage) !== AppStage.PROD) {
+                    updateNewProfile({ isDeveloperProfile: true })
+                }
                 nextRoute = AppRoute.Protocol
                 break
             case AppRoute.Protocol: {
@@ -112,7 +116,7 @@ export class AppRouter extends Router<AppRoute> {
                 const profileType = get(newProfile)?.type
                 if (profileType === ProfileType.Software) {
                     nextRoute = AppRoute.Secure
-                } else if (profileType === ProfileType.Ledger || ProfileType.LedgerSimulator) {
+                } else if (profileType === ProfileType.Ledger || profileType === ProfileType.LedgerSimulator) {
                     nextRoute = AppRoute.Protect
                 }
                 break
@@ -129,22 +133,25 @@ export class AppRouter extends Router<AppRoute> {
             }
             case AppRoute.Protect: {
                 const profileType = get(activeProfile)?.type
-                if ([SetupType.Mnemonic, SetupType.Stronghold].includes(get(walletSetupType))) {
+                const setupType = get(walletSetupType)
+                if (setupType === SetupType.Mnemonic || setupType === SetupType.Stronghold) {
                     nextRoute = AppRoute.Congratulations
-                } else if ([ProfileType.Ledger, ProfileType.LedgerSimulator].includes(profileType)) {
+                } else if (profileType === ProfileType.Ledger || profileType === ProfileType.LedgerSimulator) {
                     nextRoute = AppRoute.LedgerSetup
                 } else {
                     nextRoute = AppRoute.Backup
                 }
                 break
             }
-            case AppRoute.Backup:
-                if (get(walletSetupType) === SetupType.Seed || get(walletSetupType) === SetupType.Seedvault) {
+            case AppRoute.Backup: {
+                const setupType = get(walletSetupType)
+                if (setupType === SetupType.Seed || setupType === SetupType.Seedvault) {
                     nextRoute = AppRoute.Migrate
                 } else {
                     nextRoute = AppRoute.Congratulations
                 }
                 break
+            }
             case AppRoute.Import: {
                 const { importType } = params
                 walletSetupType.set(importType as unknown as SetupType)

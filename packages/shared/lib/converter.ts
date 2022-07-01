@@ -165,12 +165,13 @@ export class Converter {
     }
 
     /**
-     * Convert the hex text to text.
+     * Convert the hex text to text. The UTF8 string is sliced, since it is padded with a non-ut8 character.
      * @param hex The hex to convert.
      * @returns The UTF8 version of the bytes.
      */
     public static hexToUtf8(hex: string): string {
-        return Converter.bytesToUtf8(Converter.hexToBytes(hex))
+        const bytes = Converter.hexToBytes(hex)
+        return Converter.bytesToUtf8(bytes).slice(1)
     }
 
     /**

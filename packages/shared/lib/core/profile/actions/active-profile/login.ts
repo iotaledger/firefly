@@ -1,3 +1,10 @@
+import { getAndUpdateNodeInfo } from '@core/network'
+import { isStrongholdUnlocked } from '@core/profile-manager'
+import {
+    setStrongholdPasswordClearInterval,
+    startBackgroundSync,
+    subscribe as subscribeToWalletEvents,
+} from '@core/profile-manager/api'
 import { get } from 'svelte/store'
 import {
     INITIAL_ACCOUNT_GAP_LIMIT,
@@ -6,32 +13,31 @@ import {
 } from '../../constants'
 import { activeProfile, setTimeStrongholdLastUnlocked } from '../../stores'
 import { loadAccounts } from './loadAccounts'
-import { isStrongholdUnlocked } from '@core/profile-manager'
-import { profileManager } from '@core/profile-manager/stores'
-import { setStrongholdPasswordClearInterval, subscribe as subscribeToWalletEvents } from '@core/profile-manager/api'
 import { recoverAndLoadAccounts } from './recoverAndLoadAccounts'
 
-export async function login(firstTime: boolean = false): Promise<void> {
+export async function login(recoverAccounts: boolean = false): Promise<void> {
     const { loggedIn, lastActiveAt, id, isStrongholdLocked, type } = get(activeProfile)
     if (id) {
-        if (firstTime) {
+        loggedIn.set(true)
+        await getAndUpdateNodeInfo()
+
+        if (recoverAccounts) {
             void recoverAndLoadAccounts(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
         } else {
             void loadAccounts()
         }
+
         loggedIn.set(true)
         lastActiveAt.set(new Date())
-        const strongholdLocked = await isStrongholdUnlocked()
-        if (!strongholdLocked) {
-            isStrongholdLocked.set(!strongholdLocked)
+
+        const strongholdUnlocked = await isStrongholdUnlocked()
+        isStrongholdLocked.set(!strongholdUnlocked)
+        setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
+        if (strongholdUnlocked) {
             setTimeStrongholdLastUnlocked()
         }
-        setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
 
-        const manager = get(profileManager)
-
-        // start background sync
-        manager.startBackgroundSync()
+        void startBackgroundSync()
 
         // enable listeners
         subscribeToWalletEvents()

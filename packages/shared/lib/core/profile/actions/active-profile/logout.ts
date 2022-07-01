@@ -5,7 +5,7 @@ import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
 import { destroyProfileManager } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
-import { resetDashboardState } from '../unknown'
+import { resetDashboardState } from '../resetDashboardState'
 import { clearPollNetworkInterval } from '@core/network'
 import {
     resetActiveProfile,
@@ -21,7 +21,7 @@ import { resetSelectedAccount } from '@core/account'
  * Logout from active profile
  */
 export function logout(clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
-    const { isStrongholdLocked, lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
+    const { lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
 
     // (TODO): Figure out why we are using a promise here?
     return new Promise((resolve) => {

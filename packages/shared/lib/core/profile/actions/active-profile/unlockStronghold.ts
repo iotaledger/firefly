@@ -11,6 +11,7 @@ export async function unlockStronghold(password: string): Promise<void> {
             isStrongholdLocked.set(false)
             setTimeStrongholdLastUnlocked()
         } catch (err) {
+            console.error(err)
             throw new Error('error.password.incorrect')
         }
     }

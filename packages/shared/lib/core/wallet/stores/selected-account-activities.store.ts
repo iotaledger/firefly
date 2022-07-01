@@ -1,25 +1,56 @@
 import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { getMonthYear } from '@lib/utils'
+import { formatUnitBestMatch } from '@lib/units'
+import { getMonthYear, isValueInUnitRange, unitToValue } from '@lib/utils'
 import { derived, Readable, writable, Writable } from 'svelte/store'
-import { Activity } from '..'
+import { Activity, ActivityDirection } from '..'
 import { allAccountActivities } from './all-account-activities.store'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
     ([$selectedAccount, $allAccountActivities]) => {
         if (selectedAccount) {
-            return (
-                $allAccountActivities.find((accountActivity) => $selectedAccount?.id === accountActivity.accountId)
-                    ?.activities ?? []
-            )
+            return $allAccountActivities[$selectedAccount?.id] ?? []
         } else {
             return []
         }
     }
 )
 
-export const queriedActivities: Writable<Activity[]> = writable([])
+export const activityFilterIndex: Writable<number> = writable(0)
+export const activitySearchTerm: Writable<string> = writable('')
+
+export const queriedActivities: Readable<Activity[]> = derived(
+    [selectedAccountActivities, activityFilterIndex, activitySearchTerm],
+    ([$selectedAccountActivities, $activityFilterIndex, $activitySearchTerm]) => {
+        let activityList = $selectedAccountActivities
+
+        if ($activityFilterIndex === 1) {
+            activityList = activityList.filter((activity) => activity.direction === ActivityDirection.In)
+        } else if ($activityFilterIndex === 2) {
+            activityList = activityList.filter((activity) => activity.direction === ActivityDirection.Out)
+        }
+
+        if (activitySearchTerm) {
+            activityList = activityList.filter(
+                (activity) =>
+                    (activity.recipient.type === 'account' &&
+                        activity.recipient?.account?.name === $activitySearchTerm) ||
+                    (activity.recipient.type === 'address' && activity.recipient?.address === $activitySearchTerm) ||
+                    activity?.id.toLowerCase() === $activitySearchTerm ||
+                    ($activitySearchTerm[0] === '>' &&
+                        unitToValue($activitySearchTerm.substring(1)) < activity.rawAmount) ||
+                    ($activitySearchTerm[0] === '<' &&
+                        unitToValue($activitySearchTerm.substring(1)) > activity.rawAmount) ||
+                    ($activitySearchTerm[1] === 'i' && isValueInUnitRange(activity.rawAmount, $activitySearchTerm)) ||
+                    activity.rawAmount === unitToValue($activitySearchTerm) ||
+                    formatUnitBestMatch(activity.rawAmount).toString().toLowerCase()?.includes($activitySearchTerm)
+            )
+        }
+
+        return activityList
+    }
+)
 
 interface GroupedActivity {
     date: string

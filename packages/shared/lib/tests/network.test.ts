@@ -13,6 +13,7 @@ import {
     INode,
     isAuthValid,
     isOfficialNetwork,
+    NetworkProtocol,
     NetworkType,
 } from 'shared/lib/core/network'
 import { ITokenMetadata } from 'shared/lib/core/wallet'
@@ -28,11 +29,6 @@ describe('File: network.ts', () => {
 
     function _buildNodes(networkProtocol: NetworkProtocol, networkType: NetworkType) {
         return OFFICIAL_NODE_URLS?.[networkProtocol]?.[networkType]?.map((url) => _buildNode(url)) ?? []
-    }
-
-    enum NetworkProtocol {
-        IOTA = 'iota',
-        Shimmer = 'shimmer',
     }
 
     const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> = {
@@ -138,8 +134,8 @@ describe('File: network.ts', () => {
             ],
         },
         [NetworkProtocol.Shimmer]: {
-            [NetworkType.Mainnet]: ['https://api.alphanet.iotaledger.net'],
-            [NetworkType.Devnet]: ['https://api.alphanet.iotaledger.net'],
+            [NetworkType.Mainnet]: [''],
+            [NetworkType.Devnet]: [''],
         },
     }
 

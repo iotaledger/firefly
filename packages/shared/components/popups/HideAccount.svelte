@@ -1,17 +1,16 @@
 <script lang="typescript">
-    import { Button, Password, Text } from 'shared/components'
+    import { Button, PasswordInput, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from '@core/profile'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
     import { formatUnitPrecision, Unit } from '@lib/units'
     import { selectedAccount } from '@core/account'
 
     export let locale: Locale
     export let hasMultipleAccounts: boolean
-    export let hideAccount: (id: AccountIdentifier) => void = () => {}
+    export let hideAccount: (id: string) => void = () => {}
 
     $: canDelete = $selectedAccount ? Number($selectedAccount?.balances?.total) === 0 : false
 
@@ -76,12 +75,11 @@
             <Text type="p" secondary classes="mb-5">{locale('popups.hideAccount.body')}</Text>
             {#if $isSoftwareProfile}
                 <Text type="p" secondary classes="mb-3">{locale('popups.hideAccount.typePassword')}</Text>
-                <Password
+                <PasswordInput
                     {error}
                     classes="w-full mb-8"
                     bind:value={password}
                     showRevealToggle
-                    {locale}
                     placeholder={locale('general.password')}
                     autofocus
                     submitHandler={() => handleHideClick()}

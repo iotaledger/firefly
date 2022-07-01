@@ -9,7 +9,7 @@ export const protectRoute = writable<ProtectRoute>(null)
 
 export class ProtectRouter extends Subrouter<ProtectRoute> {
     constructor() {
-        super(ProtectRoute.Pin, protectRoute)
+        super(ProtectRoute.SetupPinProtection, protectRoute)
     }
 
     next(event: FireflyEvent): void {
@@ -18,19 +18,15 @@ export class ProtectRouter extends Subrouter<ProtectRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case ProtectRoute.Init:
+            case ProtectRoute.ChooseProtectionMethod:
                 if (protectionType === 'pin') {
-                    nextRoute = ProtectRoute.Pin
+                    nextRoute = ProtectRoute.SetupPinProtection
                 } else if (protectionType === 'biometric') {
-                    nextRoute = ProtectRoute.Biometric
+                    nextRoute = ProtectRoute.SetupBiometricProtection
                 }
                 break
 
-            case ProtectRoute.Pin:
-                nextRoute = ProtectRoute.RepeatPin
-                break
-
-            case ProtectRoute.RepeatPin:
+            case ProtectRoute.SetupPinProtection:
                 get(appRouter).next(event)
                 break
         }

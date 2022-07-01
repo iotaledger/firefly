@@ -11,6 +11,7 @@
     import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
+    import ConfirmationPopup from './ConfirmationPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -27,7 +28,7 @@
     import LedgerTransaction from './LedgerTransaction.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
-    import Password from './Password.svelte'
+    import PasswordPopup from './PasswordPopup.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RiskFunds from './RiskFunds.svelte'
@@ -94,9 +95,10 @@
 
     const types = {
         qr: QR,
-        password: Password,
+        password: PasswordPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,
+        confirmationPopup: ConfirmationPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
         hideAccount: HideAccount,

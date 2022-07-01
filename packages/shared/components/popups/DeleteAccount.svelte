@@ -1,14 +1,13 @@
 <script lang="typescript">
-    import { Button, Password, Text } from 'shared/components'
+    import { Button, PasswordInput, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { AccountIdentifier } from 'shared/lib/typings/account'
     import { Locale } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { isSoftwareProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
     export let locale: Locale
 
-    export let deleteAccount: (id: AccountIdentifier) => void = () => {}
+    export let deleteAccount: (id: string) => void = () => {}
     export let hasMultipleAccounts: boolean
 
     let password: string
@@ -60,12 +59,11 @@
         <Text type="p" secondary classes="mb-5">{locale('popups.deleteAccount.body')}</Text>
         {#if $isSoftwareProfile}
             <Text type="p" secondary classes="mb-3">{locale('popups.deleteAccount.typePassword')}</Text>
-            <Password
+            <PasswordInput
                 {error}
                 classes="w-full mb-8"
                 bind:value={password}
                 showRevealToggle
-                {locale}
                 placeholder={locale('general.password')}
                 autofocus
                 submitHandler={() => handleDeleteClick()}

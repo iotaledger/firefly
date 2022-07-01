@@ -4,7 +4,7 @@
     import { SecuritySettings } from '@core/router'
     import { HR } from 'shared/components'
     import { AppLock, ChangePassword, ChangePincode, DeleteProfile, ExportStronghold } from './'
-    import featureFlags from 'shared/featureFlags.config'
+    import features from 'shared/features/features'
 
     const settings: {
         component: unknown
@@ -17,9 +17,7 @@
         { component: ChangePincode, childRoute: SecuritySettings.ChangePincode },
         { component: DeleteProfile, childRoute: SecuritySettings.DeleteProfile },
     ]
-    const visibleSettings = settings.filter(
-        (setting) => featureFlags?.settings?.security?.[setting.childRoute]?.enabled
-    )
+    const visibleSettings = settings.filter((setting) => features?.settings?.security?.[setting.childRoute]?.enabled)
 
     const props = {
         [SecuritySettings.ChangePassword]: { exportStronghold },

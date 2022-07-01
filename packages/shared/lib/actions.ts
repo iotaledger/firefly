@@ -12,7 +12,7 @@ export function clickOutside(node: any, options?: { includeScroll }): { destroy 
         }
     }
 
-    const handleScroll = (event) => {
+    const handleScroll = () => {
         node.dispatchEvent(new CustomEvent('clickOutside', node))
     }
 

@@ -1,5 +1,4 @@
 import { INode } from '../interfaces'
-import { setRandomPrimaryNode } from './setRandomPrimaryNode'
 
 /**
  * Ensures that a list of nodes contains only one primary node. If none exist, one will

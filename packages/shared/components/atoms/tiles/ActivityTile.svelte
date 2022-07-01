@@ -9,7 +9,8 @@
         hideActivity,
         InclusionState,
     } from '@core/wallet'
-    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text } from 'shared/components'
+    import { closePopup, openPopup } from '@lib/popup'
+    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
     export let activity: Activity
@@ -21,8 +22,24 @@
     $: asyncStatus = activity?.getAsyncStatus($time)
     $: isIncomingActivityUnclaimed =
         activity?.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
-
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
+
+    function reject() {
+        openPopup({
+            type: 'confirmationPopup',
+            props: {
+                title: localize('actions.confirmRejection.title'),
+                description: localize('actions.confirmRejection.description'),
+                hint: localize('actions.confirmRejection.node'),
+                warning: true,
+                confirmText: localize('actions.reject'),
+                onConfirm: () => {
+                    hideActivity(activity?.id)
+                    closePopup()
+                },
+            },
+        })
+    }
 </script>
 
 <ClickableTile {onClick} classes={activity?.inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}>
@@ -31,7 +48,7 @@
             <div class="w-8 flex flex-row justify-center items-center">
                 <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
             </div>
-            <div class="flex flex-col w-full space-y-1">
+            <div class="flex flex-col w-full space-y-0.5">
                 <div class="flex flex-row justify-between space-x-1">
                     <Text
                         fontWeight={FontWeightText.semibold}
@@ -50,16 +67,16 @@
                     </Text>
                 </div>
                 <div class="flex flex-row justify-between">
-                    <Text fontWeight={FontWeightText.medium} lineHeight="140" color="gray-500">
+                    <Text fontWeight={FontWeightText.normal} lineHeight="140" color="gray-600">
                         {localize(
                             activity?.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
                             { values: { account: subject } }
                         )}
                     </Text>
                     <Text
-                        fontWeight={FontWeightText.medium}
+                        fontWeight={FontWeightText.normal}
                         lineHeight="140"
-                        color="gray-500"
+                        color="gray-600"
                         classes="whitespace-nowrap"
                     >
                         {activity?.getFiatAmount()}
@@ -73,24 +90,29 @@
                 <div class="flex flex-row justify-center items-center space-x-2">
                     {#if !activity?.isClaimed}
                         <Icon width="16" height="16" icon="timer" classes="text-gray-600" />
-                        <Text secundary fontSize="13" color="gray-600" fontWeight={FontWeightText.semibold}
+                        <Text fontSize="13" color="gray-600" fontWeight={FontWeightText.semibold}
                             >{timeDiff ?? localize('general.none')}</Text
                         >
                     {/if}
                 </div>
-                <div class="flex justify-end flex-row w-2/4 space-x-2">
+                <div class="flex flex-row justify-end w-1/2 space-x-2">
                     {#if isIncomingActivityUnclaimed}
                         <button
-                            class="action p-1 w-full text-center rounded-4 font-medium text-14 text-blue-500 bg-transparent hover:bg-blue-200"
-                            on:click|stopPropagation={() => hideActivity(activity?.id)}
+                            disabled={activity.isClaiming}
+                            class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
+                            on:click|stopPropagation={reject}
                         >
                             {localize('actions.reject')}
                         </button>
                         <button
-                            class="action p-1 w-full text-center rounded-4 font-medium text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
-                            on:click|stopPropagation={() => claimActivity(activity?.id)}
+                            class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
+                            on:click|stopPropagation={() => claimActivity(activity)}
                         >
-                            {localize('actions.claim')}
+                            {#if activity.isClaiming}
+                                <Spinner busy={true} classes="justify-center h-fit" />
+                            {:else}
+                                {localize('actions.claim')}
+                            {/if}
                         </button>
                     {:else}
                         <ActivityAsyncStatusPill {asyncStatus} />
