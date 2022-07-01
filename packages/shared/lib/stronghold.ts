@@ -27,6 +27,8 @@ export async function checkStronghold(callback: () => Promise<unknown>, reopenPo
             await isStrongholdUnlockedListener()
             if (reopenPopup) {
                 openPopup({ ...popup, props: { ...popup.props, _onMount: callback } })
+            } else {
+                return callback()
             }
         }
     } catch (err) {
