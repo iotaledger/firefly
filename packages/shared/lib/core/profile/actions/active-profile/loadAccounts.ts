@@ -14,7 +14,7 @@ export async function loadAccounts(): Promise<void> {
         }
         if (accountsResponse) {
             const loadedAccounts: IAccountState[] = []
-            // optimize this so that we can load all account async and parrallelise
+            // optimize this so that we can load all account async and parallelise
             for (const account of accountsResponse) {
                 const accountState = await loadAccount(account)
                 loadedAccounts.push(accountState)

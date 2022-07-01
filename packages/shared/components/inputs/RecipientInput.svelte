@@ -19,7 +19,7 @@
     let error: string
     let hasFocus: boolean
     let keepRecipientAccountSelectorOpen: boolean
-    let previousValue
+    let previousValue: string
 
     $: if (!selectedAccount && recipient?.type === 'account') {
         selectedAccount = recipient?.account
