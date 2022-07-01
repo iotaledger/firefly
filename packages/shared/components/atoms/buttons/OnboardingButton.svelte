@@ -1,16 +1,12 @@
 <script lang="typescript">
     import { appSettings } from '@core/app'
-    import { bindEvents } from 'shared/lib/utils'
     import { Icon, Text } from 'shared/components'
     import { FontWeightText, TextType } from 'shared/components/Text.svelte'
 
-    export let events = []
-
     export let disabled = false
     export let hidden = false
-    export let active = false
     export let icon = undefined
-    export let iconColor = ''
+    export let iconColor = 'blue-500'
     export let classes = ''
     export let iconHeight: string
     export let iconWidth: string
@@ -21,7 +17,6 @@
 
     export let onClick: () => unknown
 
-    export let buttonElement
     let darkModeEnabled
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -30,14 +25,10 @@
 <button
     type="button"
     {disabled}
-    class="cursor-pointer text-center rounded-xl px-5 py-3.5 pb-3.5 w-full {classes}"
-    use:bindEvents={events}
+    class="rounded-xl max-w-full w-98 px-5 py-3.5 cursor-pointer text-center {classes}"
     on:click|stopPropagation={onClick}
     class:hidden
-    class:custom-icon-color={iconColor}
-    class:active
     class:darkmode={darkModeEnabled}
-    bind:this={buttonElement}
 >
     {#if icon}
         <div class="grid grid-cols-12 gap-4">
@@ -45,7 +36,7 @@
                 <Icon height={iconHeight} width={iconWidth} {icon} classes="text-{iconColor}" />
             </div>
             <div class="col-span-10 h-full flex items-center">
-                <span class="font-bold text-12 leading-140">
+                <span class="flex flex-col justify-center">
                     <Text
                         type={TextType.p}
                         color="gray-800"
@@ -57,7 +48,6 @@
                     </Text>
                     {#if secondaryText}
                         <Text
-                            type={TextType.p}
                             color="gray-600"
                             darkColor="gray-400"
                             fontSize="12"
@@ -85,6 +75,9 @@
         @apply border-gray-300;
         @apply bg-white;
         @apply text-left;
+        span {
+            min-height: 36px;
+        }
 
         &:hover {
             @apply bg-blue-50;
