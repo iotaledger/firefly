@@ -25,7 +25,7 @@
         <button on:click={handleClose} class="mr-3">
             <Icon
                 icon="close"
-                classes="text-gray-500 hover:text-gray-600 dark:text-gray-400 hover:dark:text-gray-300"
+                classes="text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
             />
         </button>
     </InputContainer>
