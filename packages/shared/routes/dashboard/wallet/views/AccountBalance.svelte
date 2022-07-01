@@ -84,7 +84,7 @@
 
 {#if $mobile}
     <div
-        class="bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative p-6 'pb-0 pt-20 bg-transparent {classes}"
+        class="bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative p-5 pb-0 pt-20 bg-transparent {classes}"
     >
         <!-- Balance -->
         <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
