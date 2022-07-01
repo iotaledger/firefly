@@ -3,22 +3,22 @@
     import { Icon, Text } from 'shared/components'
     import { FontWeightText, TextType } from 'shared/components/Text.svelte'
 
-    export let disabled = false
-    export let hidden = false
-    export let icon = undefined
-    export let iconColor = 'blue-500'
-    export let classes = ''
-    export let iconHeight: string
-    export let iconWidth: string
-    export let secondaryIcon = 'chevron-right'
-    export let secondaryIconColor = 'gray-500'
     export let primaryText = ''
     export let secondaryText = ''
+    export let icon
+    export let iconColor = 'blue-500'
+    export let iconHeight: string
+    export let iconWidth: string
+    export let disabled = false
+    export let hidden = false
+    export let classes = ''
 
     export let onClick: () => unknown
 
-    let darkModeEnabled
+    const secondaryIcon = 'chevron-right'
+    const secondaryIconColor = 'gray-500'
 
+    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
 </script>
 
@@ -30,41 +30,40 @@
     class:hidden
     class:darkmode={darkModeEnabled}
 >
-    {#if icon}
-        <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
-                <Icon height={iconHeight} width={iconWidth} {icon} classes="text-{iconColor}" />
-            </div>
-            <div class="col-span-10 h-full flex items-center">
-                <span class="flex flex-col justify-center">
+    <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
+            <Icon height={iconHeight} width={iconWidth} {icon} classes="text-{iconColor}" />
+        </div>
+        <div class="col-span-10 h-full flex items-center">
+            <span class="flex flex-col justify-center">
+                <Text
+                    type={TextType.p}
+                    color="gray-800"
+                    darkColor="white"
+                    fontSize="14"
+                    fontWeight={FontWeightText.semibold}
+                    lineHeight="5"
+                    >{primaryText}
+                </Text>
+                {#if secondaryText}
                     <Text
                         type={TextType.p}
-                        color="gray-800"
-                        darkColor="white"
-                        fontSize="14"
-                        fontWeight={FontWeightText.semibold}
-                        lineHeight="5"
-                        >{primaryText}
+                        color="gray-600"
+                        darkColor="gray-400"
+                        fontSize="12"
+                        fontWeight={FontWeightText.normal}
+                        lineHeight="3.5"
+                        >{secondaryText}
                     </Text>
-                    {#if secondaryText}
-                        <Text
-                            color="gray-600"
-                            darkColor="gray-400"
-                            fontSize="12"
-                            fontWeight={FontWeightText.normal}
-                            lineHeight="3.5"
-                            >{secondaryText}
-                        </Text>
-                    {/if}
-                </span>
-            </div>
-            {#if secondaryIcon && !disabled}
-                <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
-                    <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
-                </div>
-            {/if}
+                {/if}
+            </span>
         </div>
-    {/if}
+        {#if secondaryIcon && !disabled}
+            <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
+                <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
+            </div>
+        {/if}
+    </div>
 </button>
 
 <style type="text/scss">
