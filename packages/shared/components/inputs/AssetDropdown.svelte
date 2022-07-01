@@ -39,7 +39,7 @@
             >
                 <Icon classes="text-white" icon={asset?.metadata.name.toLocaleLowerCase()} height="100%" width="100%" />
             </div>
-            <Text color="gray-600" darkColor="gray-500" fontWeight={FontWeightText.semibold} fontSize="15">
+            <Text color="gray-600" darkColor="white" fontWeight={FontWeightText.semibold} fontSize="15">
                 {asset?.metadata.name}
             </Text>
             {#if hasMultipleAssets}

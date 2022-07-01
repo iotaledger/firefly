@@ -4,7 +4,6 @@ import { Platform } from '@lib/platform'
 
 import { ProfileRecoveryType } from '../enums'
 import { newProfile, profileRecoveryType } from '../stores'
-
 import { storeAndCleanMnemonic } from './storeAndCleanMnemonic'
 
 /**

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import features from 'shared/features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -25,36 +25,26 @@
         <Text type="p" secondary classes="mb-8">{localize('views.create.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        <Button
+        <OnboardingButton
+            primaryText={localize('views.create.softwareAccount.title')}
+            secondaryText={!$mobile ? localize('views.create.softwareAccount.description') : ''}
             icon="file"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
                 ?.sofwareProfile?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
                 ?.sofwareProfile?.enabled}
             onClick={() => handleContinueClick(ProfileType.Software)}
-        >
-            {localize('views.create.softwareAccount.title')}
-            {#if !$mobile}
-                <Text type="p" secondary smaller>{localize('views.create.softwareAccount.description')}</Text>
-            {/if}
-        </Button>
-        <Button
+        />
+        <OnboardingButton
+            primaryText={localize('views.create.ledgerAccount.title')}
+            secondaryText={!$mobile ? localize('views.create.ledgerAccount.description') : ''}
             icon="chip"
-            classes="w-full mb-8"
-            secondary
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
                 ?.ledgerProfile?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
                 ?.ledgerProfile?.enabled}
             onClick={() => handleContinueClick(ProfileType.Ledger)}
-        >
-            {localize('views.create.ledgerAccount.title')}
-            {#if !$mobile}
-                <Text type="p" secondary smaller>{localize('views.create.ledgerAccount.description')}</Text>
-            {/if}
-        </Button>
+        />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />

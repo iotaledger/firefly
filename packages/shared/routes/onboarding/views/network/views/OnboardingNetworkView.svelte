@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, OnboardingLayout, Text } from 'shared/components'
+    import { OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
     import { mobile } from '@core/app'
@@ -48,20 +48,15 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.values(NetworkType) as networkType}
-            <Button
+            <OnboardingButton
+                primaryText={localize(`views.network.${networkProtocol}.${networkType}.title`)}
+                secondaryText={!$mobile ? localize(`views.network.${networkProtocol}.${networkType}.body`) : ''}
                 icon={networkIcon[networkType]}
                 iconColor={networkType === NetworkType.Mainnet ? `${networkProtocol}-highlight` : 'blue-500'}
-                classes="w-full"
-                secondary
                 hidden={features?.onboarding?.[networkProtocol]?.[networkType]?.hidden}
                 disabled={!features?.onboarding?.[networkProtocol]?.[networkType]?.enabled}
                 onClick={() => onClick(networkType)}
-            >
-                {localize(`views.network.${networkProtocol}.${networkType}.title`)}
-                {#if !$mobile}
-                    <Text secondary smaller>{localize(`views.network.${networkProtocol}.${networkType}.body`)}</Text>
-                {/if}
-            </Button>
+            />
         {/each}
     </div>
 </OnboardingLayout>
