@@ -108,8 +108,6 @@
             handleDeepLinkRequest(data)
         })
 
-        handleDeepLinkRequest('firefly://wallet/send/')
-
         /* Platform.onEvent('notification-activated', (contextData) => {
             if (contextData) {
                 if (
@@ -159,7 +157,7 @@
     }
 
     $: {
-        if ($hasLoadedAccounts) {
+        if ($hasLoadedAccounts && $loggedIn) {
             const minTimeElapsed = 3000 - (Date.now() - startInit)
             const cancelBusyState = () => {
                 busy = false

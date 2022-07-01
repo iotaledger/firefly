@@ -21,7 +21,7 @@ export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: strin
     try {
         const url = new URL(input)
 
-        if (url.protocol === 'iota:') {
+        if (url.protocol === 'firefly:') {
             if (url.hostname === 'wallet') {
                 return parseWalletDeepLinkRequest(url, expectedAddressPrefix)
             } else {
