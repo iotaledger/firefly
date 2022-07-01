@@ -133,7 +133,7 @@
             isVelocityReached = false
         }
 
-        if ($coords.y < 0) {
+        if ($coords.y < 0 || $coords.y + event.detail.sy < 0) {
             return
         }
         await coords.update(
