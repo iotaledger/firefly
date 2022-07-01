@@ -1,14 +1,14 @@
 <script lang="typescript">
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { onMount } from 'svelte'
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { backupRouter } from '@core/router'
     import { english } from '@lib/wordlists/english'
 
     export let mnemonic: string[]
     export let busy = false
 
-    const dispatch = createEventDispatcher()
     const verifyRecoveryPhrase: string[] = []
 
     let wordChoices = ['', '', '']
@@ -54,10 +54,10 @@
     }
 
     function handleContinue(): void {
-        dispatch('next')
+        $backupRouter.next()
     }
     function handleBackClick(): void {
-        dispatch('previous')
+        $backupRouter.previous()
     }
 
     onMount(() => {

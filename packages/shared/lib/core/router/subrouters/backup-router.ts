@@ -13,7 +13,7 @@ export class BackupRouter extends Subrouter<BackupRoute> {
         super(BackupRoute.Init, backupRoute, get(onboardingRouter))
     }
 
-    next(event: FireflyEvent): void {
+    next(event?: FireflyEvent): void {
         let nextRoute: BackupRoute
 
         const currentRoute = get(this.routeStore)

@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { recoveryRouter } from '@core/router'
     import { setImportFile, setProfileRecoveryTypeFromFilename, validateBackupFile } from '@contexts/onboarding'
 
     interface FileWithPath extends File {
@@ -10,7 +10,6 @@
     }
 
     const allowedExtensions = ['kdbx', 'stronghold']
-    const dispatch = createEventDispatcher()
 
     let file: FileWithPath | ArrayBuffer | string
     let fileName = ''
@@ -21,10 +20,10 @@
         validateBackupFile(fileName)
         setProfileRecoveryTypeFromFilename(fileName)
         setImportFile(<ArrayBuffer>file, filePath)
-        dispatch('next')
+        $recoveryRouter.next()
     }
     function handleBackClick(): void {
-        dispatch('previous')
+        $recoveryRouter.previous()
     }
 
     function setFile(buffer?: string | ArrayBuffer, name?: string, path?: string): void {

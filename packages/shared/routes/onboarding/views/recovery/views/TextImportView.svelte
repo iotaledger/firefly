@@ -1,22 +1,20 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { recoveryRouter } from '@core/router'
     import { profileRecoveryType, isGettingMigrationData, mnemonic } from '@contexts/onboarding'
-
-    const dispatch = createEventDispatcher()
 
     let input = ''
 
     function handleContinueClick(): void {
         mnemonic.set(input.split(' '))
-        dispatch('next', { migrationSeed: input })
+        $recoveryRouter.next({ migrationSeed: input })
     }
 
     function handleBackClick(): void {
         if (!$isGettingMigrationData) {
-            dispatch('previous')
+            $recoveryRouter.previous()
         }
     }
 </script>

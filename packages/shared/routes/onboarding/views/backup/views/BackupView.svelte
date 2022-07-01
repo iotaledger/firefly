@@ -1,19 +1,17 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { backupRouter } from '@core/router'
 
     export let busy: boolean
 
-    const dispatch = createEventDispatcher()
-
     function handleContinueClick(): void {
-        dispatch('next')
+        $backupRouter.next()
     }
 
     function handleBackClick(): void {
-        dispatch('previous')
+        $backupRouter.previous()
     }
 </script>
 

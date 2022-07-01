@@ -1,20 +1,18 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
+    import { recoveryRouter } from '@core/router'
     import { newProfile, profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
-
-    const dispatch = createEventDispatcher()
 
     function handleContinueClick(importType: ProfileRecoveryType): void {
         profileRecoveryType.set(importType)
-        dispatch('next', { profileRecoveryType })
+        $recoveryRouter.next({ profileRecoveryType: $profileRecoveryType })
     }
 
     function handleBackClick(): void {
-        dispatch('previous')
+        $recoveryRouter.previous()
     }
 </script>
 

@@ -7,6 +7,7 @@
     import { showAppNotification } from '@lib/notifications'
 
     setContext<RecoveryRouter>('importRouter', $recoveryRouter)
+    $recoveryRouter.resetRoute()
 
     let busy = false
     let error = ''

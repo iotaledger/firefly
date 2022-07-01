@@ -4,9 +4,9 @@ import { profiles, ProfileType } from '@core/profile'
 import { newProfile, ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
-import { BackupRoute, OnboardingRoute } from './enums'
+import { BackupRoute, OnboardingRoute, ProfileSetupRoute } from './enums'
 import { Router } from './router'
-import { backupRoute } from './subrouters'
+import { backupRoute, profileSetupRoute } from './subrouters'
 import { FireflyEvent } from './types'
 
 export const onboardingRoute = writable<OnboardingRoute>(null)
@@ -89,6 +89,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                     _profileRecoveryType === ProfileRecoveryType.Stronghold
                 ) {
                     this.hasCompletedRecovery = true
+                    profileSetupRoute.set(ProfileSetupRoute.EnterName)
                     nextRoute = OnboardingRoute.ProfileSetup
                 }
                 break
@@ -129,7 +130,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             case OnboardingRoute.Congratulations:
                 get(appRouter).next()
-                break
+                return
         }
 
         this.setNext(nextRoute)

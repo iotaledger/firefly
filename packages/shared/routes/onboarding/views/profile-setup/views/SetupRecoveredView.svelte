@@ -4,7 +4,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
-    import { profileSetupRouter, RecoveryRoute, recoveryRoute } from '@core/router'
+    import { profileSetupRouter } from '@core/router'
     import { newProfile, profileRecoveryType, ProfileRecoveryType, setNewProfileType } from '@contexts/onboarding'
 
     function handleContinueClick(_profileRecoveryType: ProfileRecoveryType) {
@@ -12,9 +12,7 @@
             _profileRecoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
         setNewProfileType(profileType)
 
-        recoveryRoute.set(RecoveryRoute.FileImport)
-        profileRecoveryType.set(ProfileRecoveryType.Stronghold)
-
+        profileRecoveryType.set(_profileRecoveryType)
         $profileSetupRouter.next({ profileRecoveryType: _profileRecoveryType })
     }
     function handleBackClick() {
@@ -68,7 +66,7 @@
                 ?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
                 ?.strongholdBackup?.enabled}
-            onClick={() => handleContinueClick(ProfileRecoveryType.File)}
+            onClick={() => handleContinueClick(ProfileRecoveryType.Stronghold)}
         >
             {localize(`views.import.importFile.${$newProfile?.networkProtocol}`)}
             {#if !$mobile}

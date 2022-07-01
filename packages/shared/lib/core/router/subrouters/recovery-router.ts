@@ -18,7 +18,11 @@ export class RecoveryRouter extends Subrouter<RecoveryRoute> {
         super(getInitialRoute() ?? RecoveryRoute.TextImport, recoveryRoute, get(onboardingRouter))
     }
 
-    next(event: FireflyEvent): void {
+    resetRoute(): void {
+        recoveryRoute.set(getInitialRoute() ?? RecoveryRoute.TextImport)
+    }
+
+    next(event?: FireflyEvent): void {
         let nextRoute: RecoveryRoute
         const params = event || {}
 

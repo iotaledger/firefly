@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { getContext } from 'svelte'
     import { Animation, Button, OnboardingLayout, PasswordInput, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { RecoveryRouter } from '@core/router'
+    import { recoveryRouter, RecoveryRouter } from '@core/router'
     import { profileRecoveryType, restoreBackupFromFile, isGettingMigrationData } from '@contexts/onboarding'
 
     export let error = ''
@@ -11,15 +11,13 @@
 
     const { importFile } = getContext<RecoveryRouter>('importRouter')
 
-    const dispatch = createEventDispatcher()
-
     let password = ''
 
     async function handleContinue(): Promise<void> {
         if (password) {
             try {
                 await restoreBackupFromFile(importFile, password)
-                dispatch('next')
+                $recoveryRouter.next()
             } catch (err) {
                 console.error(err)
                 error = localize('error.password.incorrect')
@@ -31,7 +29,7 @@
         // We are deliberately using "isGettingMigrationData"
         // We do not want to display the spinner if stronghold is being imported.
         if (!busy && !$isGettingMigrationData) {
-            dispatch('previous')
+            $recoveryRouter.previous()
         }
     }
 </script>

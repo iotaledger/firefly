@@ -1,14 +1,12 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { recoveryRouter } from '@core/router'
     import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
 
-    const dispatch = createEventDispatcher()
-
     function handleContinueClick(): void {
-        dispatch('next')
+        $recoveryRouter.next()
     }
 </script>
 

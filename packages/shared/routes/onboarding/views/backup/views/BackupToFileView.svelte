@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, PasswordInput, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { storeMnemonic } from '@core/profile-manager'
-    import { backupInitialStronghold, mnemonic } from '@contexts/onboarding'
+    import { backupRouter } from '@core/router'
+    import { backupInitialStronghold } from '@contexts/onboarding'
 
     export let strongholdPassword = ''
     export let busy = false
@@ -12,19 +11,16 @@
     let confirmPassword = ''
     let skipBackup = false
 
-    const dispatch = createEventDispatcher()
-
     $: isStrongholdPasswordValid = strongholdPassword === confirmPassword
 
     async function onboardingBackupFileFunction(_skipBackup: boolean = false): Promise<void> {
         skipBackup = _skipBackup
 
-        await storeMnemonic($mnemonic.join(' '))
         if (skipBackup) {
-            dispatch('next', { skip: true })
+            $backupRouter.next({ skip: true })
         } else {
             await backupInitialStronghold()
-            dispatch('next')
+            $backupRouter.next()
         }
     }
 
@@ -39,7 +35,7 @@
     }
 
     function handleBackClick(): void {
-        dispatch('previous')
+        $backupRouter.previous()
     }
 </script>
 
