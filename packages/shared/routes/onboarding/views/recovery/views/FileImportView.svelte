@@ -3,7 +3,12 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { recoveryRouter } from '@core/router'
-    import { setImportFile, setProfileRecoveryTypeFromFilename, validateBackupFile } from '@contexts/onboarding'
+    import {
+        ImportFile,
+        setImportFile,
+        setProfileRecoveryTypeFromFilename,
+        validateBackupFile,
+    } from '@contexts/onboarding'
 
     interface FileWithPath extends File {
         path?: string
@@ -11,7 +16,7 @@
 
     const allowedExtensions = ['kdbx', 'stronghold']
 
-    let file: FileWithPath | ArrayBuffer | string
+    let file: ImportFile
     let fileName = ''
     let filePath = ''
     let dropping = false
@@ -19,7 +24,7 @@
     function handleContinueClick(): void {
         validateBackupFile(fileName)
         setProfileRecoveryTypeFromFilename(fileName)
-        setImportFile(<ArrayBuffer>file, filePath)
+        setImportFile(file, filePath)
         $recoveryRouter.next()
     }
 
@@ -44,30 +49,30 @@
         event?.preventDefault()
         dropping = false
 
-        const file: FileWithPath =
+        const fileWithPath: FileWithPath =
             (event as DragEvent)?.dataTransfer?.files?.[0] ?? (event?.target as HTMLInputElement)?.files?.[0] ?? null
 
-        if (!file) {
+        if (!fileWithPath) {
             return setFile()
         }
 
-        const ext = /\.([0-9a-z]+)$/i.exec(file.name)
+        const ext = /\.([0-9a-z]+)$/i.exec(fileWithPath.name)
         if (!ext || !allowedExtensions.includes(ext[1])) {
             return setFile()
         }
 
-        fileName = file.name
+        fileName = fileWithPath.name
 
         const reader = new FileReader()
 
         reader.onload = (e) => {
-            setFile(e.target.result, file.name, file.path)
+            setFile(e.target.result, fileWithPath.name, fileWithPath.path)
             if ($mobile) {
                 handleContinueClick()
             }
         }
 
-        reader.readAsArrayBuffer(file)
+        reader.readAsArrayBuffer(fileWithPath)
     }
 </script>
 

@@ -1,3 +1,5 @@
 import { writable } from 'svelte/store'
 
-export const importFile = writable<ArrayBuffer>(null)
+import { ImportFile } from '../types'
+
+export const importFile = writable<ImportFile>(null)
