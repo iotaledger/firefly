@@ -38,7 +38,7 @@
     export type TextPropTypes = {
         type?: TextType
         fontSize?: string
-        fontWeight?: FontWeight | ''
+        fontWeight?: FontWeight
         lineHeight?: string
         secondary?: boolean
         disabled?: boolean
@@ -56,9 +56,9 @@
 </script>
 
 <script lang="typescript">
-    export let type = TextType.p
+    export let type: TextType = TextType.p
     export let fontSize = ''
-    export let fontWeight: FontWeightNumber | FontWeightText | '' = ''
+    export let fontWeight: FontWeight
     export let lineHeight = ''
     export let secondary = false
     export let disabled = false

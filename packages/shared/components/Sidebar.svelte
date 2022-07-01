@@ -74,24 +74,29 @@
                   },
               ]
             : []),
+        ...(features?.collectibles?.enabled
+            ? [
+                  {
+                      icon: 'work',
+                      label: localize('tabs.collectibles'),
+                      route: DashboardRoute.Collectibles,
+                      onClick: openCollectibles,
+                  },
+              ]
+            : []),
     ]
+
+    function openWallet() {
+        resetWalletRoute()
+    }
 
     function openStaking() {
         $dashboardRouter.goTo(DashboardRoute.Staking)
     }
 
-    // function updateSidebarNotification() {
-    //     sidebarTabs = sidebarTabs.map((tab) => {
-    //         if (DashboardRoute.Staking === tab.route) {
-    //             tab.notificationType = !$activeProfile?.hasVisitedStaking
-    //                 ? 'error'
-    //                 : showStakingNotification
-    //                 ? 'warning'
-    //                 : null
-    //         }
-    //         return tab
-    //     })
-    // }
+    function openCollectibles() {
+        $dashboardRouter.goTo(DashboardRoute.Collectibles)
+    }
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
@@ -104,10 +109,6 @@
         } else {
             showStakingNotification = false
         }
-    }
-
-    function openWallet() {
-        resetWalletRoute()
     }
 
     function handleBackClick() {

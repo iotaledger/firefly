@@ -19,6 +19,7 @@
     import { Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import Collectibles from './collectibles/Collectibles.svelte'
     import TopNavigation from './TopNavigation.svelte'
 
     const { hasLoadedAccounts, loggedIn } = $activeProfile
@@ -29,6 +30,7 @@
         wallet: Wallet,
         settings: Settings,
         staking: Staking,
+        collectibles: Collectibles,
     }
 
     let startInit
