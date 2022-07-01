@@ -65,7 +65,7 @@
         </div>
     </button>
     <Drawer bind:this={drawer} opened={isDrawerOpened} onClose={() => (isDrawerOpened = false)}>
-        <div class="flex flex-col px-6 w-full safe-area pt-7 pb-5 safe-area">
+        <div class="flex flex-col p-5 pt-7 w-full safe-area safe-area">
             {#if drawerRoute === 'create'}
                 <CreateAccount onCreate={onCreateAccount} onCancel={() => drawer.close()} />
             {:else if (drawerRoute = DrawerRoutes.Init)}
