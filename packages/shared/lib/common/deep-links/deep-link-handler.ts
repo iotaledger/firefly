@@ -2,6 +2,7 @@ import { addError } from '../../errors'
 
 import { parseWalletDeepLinkRequest } from '@common/deep-links/wallet-context-handler'
 import type { DeepLinkRequest } from '@common/deep-links/types'
+import { DeepLinkContext } from './enums'
 
 /**
  * Parses an IOTA deep link, i.e. a URL that begins with the scheme "iota://".
@@ -22,10 +23,15 @@ export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: strin
         const url = new URL(input)
 
         if (url.protocol === `${process.env.APP_PROTOCOL}:`) {
-            if (url.hostname === 'wallet') {
-                return parseWalletDeepLinkRequest(url, expectedAddressPrefix)
-            } else {
-                return addError({ time: Date.now(), type: 'deepLink', message: `Unrecognized context '${url.host}'` })
+            switch (url.hostname) {
+                case DeepLinkContext.Wallet:
+                    return parseWalletDeepLinkRequest(url, expectedAddressPrefix)
+                default:
+                    return addError({
+                        time: Date.now(),
+                        type: 'deepLink',
+                        message: `Unrecognized context '${url.host}'`,
+                    })
             }
         } else {
             return addError({
