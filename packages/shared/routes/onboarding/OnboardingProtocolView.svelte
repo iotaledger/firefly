@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import {
         cleanupOnboarding,
         createNewProfile,
@@ -10,7 +11,6 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { appRouter } from '@core/router'
-    import { Button, OnboardingLayout, Text } from 'shared/components'
     import features from 'shared/features/features'
     import { onMount } from 'svelte'
 
@@ -45,11 +45,13 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.keys(NetworkProtocol) as protocol}
-            <Button
+            <OnboardingButton
+                primaryText={protocol}
+                secondaryText={!$newProfile?.isDeveloperProfile
+                    ? localize(`views.protocol.${NetworkProtocol[protocol]}`)
+                    : ''}
                 icon={NetworkProtocol[protocol]}
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
-                classes="w-full"
-                secondary
                 hidden={$newProfile?.isDeveloperProfile
                     ? features?.onboarding?.[NetworkProtocol[protocol]]?.hidden
                     : features?.onboarding?.[NetworkProtocol[protocol]]?.hidden ||
@@ -59,12 +61,7 @@
                     : !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled ||
                       !features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.enabled}
                 onClick={() => onClick(NetworkProtocol[protocol])}
-            >
-                {protocol}
-                {#if !$newProfile?.isDeveloperProfile}
-                    <Text secondary smaller>{localize(`views.protocol.${NetworkProtocol[protocol]}`)}</Text>
-                {/if}
-            </Button>
+            />
         {/each}
     </div>
 </OnboardingLayout>
