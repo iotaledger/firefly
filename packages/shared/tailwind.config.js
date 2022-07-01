@@ -207,6 +207,7 @@ module.exports = {
                 64: pxToRem(64),
             },
             lineHeight: {
+                3.5: pxToRem(14),
                 100: '100%',
                 110: '110%',
                 120: '120%',
@@ -273,6 +274,7 @@ module.exports = {
             spacing: {
                 4.5: pxToRem('18'),
                 18: pxToRem('72'),
+                98: pxToRem('392'),
             },
             borderRadius: {
                 2: pxToRem(2),
