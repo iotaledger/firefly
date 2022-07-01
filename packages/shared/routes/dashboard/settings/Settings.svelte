@@ -43,6 +43,6 @@
 
 <style>
     .settings-wrapper {
-        margin-bottom: calc(env(safe-area-inset-bottom) + 20px);
+        padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
     }
 </style>
