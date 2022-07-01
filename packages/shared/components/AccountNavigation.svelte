@@ -58,14 +58,12 @@
         bind:clientWidth={switcherButtonWidth}
     >
         <span class="circle" style="--account-color: {accountColor}" />
-        <div>
-            <Text type="h4">{$selectedAccountStore?.alias}</Text>
-        </div>
+        <Text type="h4">{$selectedAccountStore?.alias}</Text>
         <div class="transform transition-transform {isDrawerOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon icon="chevron-down" height="18" width="18" classes="text-gray-800 dark:text-white" />
         </div>
     </button>
-    <Drawer bind:this={drawer} opened={isDrawerOpened} onClose={() => (isDrawerOpened = false)}>
+    <Drawer bind:this={drawer} opened={isDrawerOpened} on:close={() => (isDrawerOpened = false)}>
         <div class="flex flex-col w-full safe-area pt-7 p-5 safe-area">
             {#if drawerRoute === DrawerRoutes.Create}
                 <CreateAccount onCreate={onCreateAccount} onCancel={() => drawer.close()} />
