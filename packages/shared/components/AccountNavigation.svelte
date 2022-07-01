@@ -66,8 +66,7 @@
         </div>
     </button>
     <Drawer bind:this={drawer} opened={isDrawerOpened} onClose={() => (isDrawerOpened = false)}>
-        fix/center-the-account-selection
-        <div class="flex flex-col px-6 w-full safe-area pt-7 pb-5 safe-area">
+        <div class="flex flex-col w-full safe-area pt-7 p-5 safe-area">
             {#if drawerRoute === DrawerRoutes.Create}
                 <CreateAccount onCreate={onCreateAccount} onCancel={() => drawer.close()} />
             {:else if drawerRoute === DrawerRoutes.Init}
