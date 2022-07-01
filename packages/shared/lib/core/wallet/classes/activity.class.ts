@@ -29,6 +29,7 @@ import {
     isOutputAsync,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
+
 export class Activity implements IActivity {
     type: ActivityType
     id: string

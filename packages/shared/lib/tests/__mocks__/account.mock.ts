@@ -19,13 +19,6 @@ import {
     TransactionOptions,
     TransactionResult,
 } from '@iota/wallet'
-import {
-    BuildAliasOutputData,
-    BuildBasicOutputData,
-    BuildFoundryOutputData,
-    BuildNftOutputData,
-} from '@iota/wallet/out/types/buildOutputData'
-import { SignedTransactionEssence } from '@iota/wallet/out/types/signedTransactionEssence'
 import { IAccount } from '../../core/account'
 import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
 import { MOCK_ADDRESS } from './address.mock'
@@ -50,39 +43,6 @@ export class AccountMock implements IAccount {
     }
 
     constructor() {}
-    buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput> {
-        throw new Error('Method not implemented.')
-    }
-    buildBasicOutput(data: BuildBasicOutputData): Promise<IBasicOutput> {
-        throw new Error('Method not implemented.')
-    }
-    buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput> {
-        throw new Error('Method not implemented.')
-    }
-    buildNftOutput(data: BuildNftOutputData): Promise<INftOutput> {
-        throw new Error('Method not implemented.')
-    }
-    prepareSendAmount(
-        addressWithAmount: AddressWithAmount[],
-        options?: TransactionOptions
-    ): Promise<PreparedTransactionData> {
-        throw new Error('Method not implemented.')
-    }
-    prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData> {
-        throw new Error('Method not implemented.')
-    }
-    sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<TransactionResult> {
-        throw new Error('Method not implemented.')
-    }
-    setAlias(alias: string): Promise<void> {
-        throw new Error('Method not implemented.')
-    }
-    signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence> {
-        throw new Error('Method not implemented.')
-    }
-    submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<TransactionResult> {
-        throw new Error('Method not implemented.')
-    }
 
     buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput> {
         throw new Error('Method not implemented.')
