@@ -31,7 +31,7 @@ export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: strin
             return addError({
                 time: Date.now(),
                 type: 'deepLink',
-                message: 'Error handling deep link. Does not start with iota://',
+                message: 'Error handling deep link. Does not start with firefly://',
             })
         }
     } catch (err) {

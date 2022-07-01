@@ -229,11 +229,11 @@ const handleNavigation = (e, url) => {
  */
 function createWindow() {
     /**
-     * Register iota file protocol
+     * Register firefly file protocol
      */
     try {
-        protocol.registerFileProtocol('iota', (request, callback) => {
-            callback(request.url.replace('iota:/', app.getAppPath()).split('?')[0].split('#')[0])
+        protocol.registerFileProtocol('firefly', (request, callback) => {
+            callback(request.url.replace('firefly:/', app.getAppPath()).split('?')[0].split('#')[0])
         })
     } catch (error) {
         console.error(error)
@@ -508,7 +508,7 @@ if (!isFirstInstance) {
 app.on('second-instance', (_e, args) => {
     if (windows.main) {
         if (args.length > 1) {
-            const params = args.find((arg) => arg.startsWith('iota://'))
+            const params = args.find((arg) => arg.startsWith('firefly://'))
 
             if (params) {
                 windows.main.webContents.send('deep-link-params', params)
@@ -522,16 +522,16 @@ app.on('second-instance', (_e, args) => {
 })
 
 /**
- * Register iota:// protocol for deep links
- * Set Firefly as the default handler for iota:// protocol
+ * Register firefly:// protocol for deep links
+ * Set Firefly as the default handler for firefly:// protocol
  */
-protocol.registerSchemesAsPrivileged([{ scheme: 'iota', privileges: { secure: true, standard: true } }])
+protocol.registerSchemesAsPrivileged([{ scheme: 'firefly', privileges: { secure: true, standard: true } }])
 if (process.defaultApp) {
     if (process.argv.length >= 2) {
-        app.setAsDefaultProtocolClient('iota', process.execPath, [path.resolve(process.argv[1])])
+        app.setAsDefaultProtocolClient('firefly', process.execPath, [path.resolve(process.argv[1])])
     }
 } else {
-    app.setAsDefaultProtocolClient('iota')
+    app.setAsDefaultProtocolClient('firefly')
 }
 
 /**

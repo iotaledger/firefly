@@ -7,7 +7,6 @@
         ClosableTextInput,
         AddInputButton,
     } from 'shared/components'
-    import { clearSendParams } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeightText } from 'shared/components/Text.svelte'
@@ -57,7 +56,6 @@
     }
 
     function onCancel(): void {
-        clearSendParams()
         closePopup()
     }
 

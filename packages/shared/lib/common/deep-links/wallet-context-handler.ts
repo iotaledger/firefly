@@ -1,9 +1,9 @@
 import { localize } from '@core/i18n'
 import { isValidAddressAndPrefix } from '../../address'
 import { addError } from '../../errors'
-import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
-import { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
-import { Unit } from '@lib/units'
+import { DeepLinkContext, SendOperationSearchParameter, WalletOperation } from '@common/deep-links/enums'
+import { DeepLinkRequest } from '@common/deep-links/types'
+import { ISendFormParameters, Subject } from '@core/wallet'
 
 /**
  * Parses a deep link within the wallet context.
@@ -57,21 +57,20 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
  * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
  *
- * @return {void | SendOperationParameters} The formatted parameters for the send operation.
+ * @return {void | ISendFormParameters} The formatted parameters for the send operation.
  */
 const parseSendOperation = (
     address: string,
     searchParams: URLSearchParams,
     expectedAddressPrefix: string
-): void | SendOperationParameters => {
+): void | ISendFormParameters => {
     let parsedAmount: number | undefined
-    let parsedUnit: Unit | undefined
 
     // Check address exists and is valid this is not optional.
     if (!address) {
         return addError({ time: Date.now(), type: 'deepLink', message: 'No address specified in the url path' })
     }
-    if (isValidAddressAndPrefix(address, expectedAddressPrefix)) {
+    if (!isValidAddressAndPrefix(address, expectedAddressPrefix)) {
         return addError({
             time: Date.now(),
             type: 'deepLink',
@@ -81,7 +80,7 @@ const parseSendOperation = (
 
     // Optional parameter: amount
     // Check if exists and is valid or does not exist
-    const amountParam = searchParams.get(SendOperationParameter.Amount)
+    const amountParam = searchParams.get(SendOperationSearchParameter.Amount)
     if (amountParam) {
         parsedAmount = Number(amountParam)
         if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
@@ -91,32 +90,25 @@ const parseSendOperation = (
         parsedAmount = 0
     }
 
-    let unitParam = searchParams.get(SendOperationParameter.Unit)
-    if (unitParam) {
-        unitParam =
-            unitParam.length > 1
-                ? unitParam.charAt(0).toUpperCase() + unitParam.slice(1).toLowerCase()
-                : unitParam.toLowerCase()
-        parsedUnit = Unit[unitParam]
-        if (!Object.values(Unit).includes(parsedUnit)) {
-            return addError({ time: Date.now(), type: 'deepLink', message: `Unit is not recognised '${unitParam}'` })
-        }
-    } else {
-        unitParam = Unit._
-    }
+    const amount = String(Math.abs(parsedAmount))
+    const unit = searchParams.get(SendOperationSearchParameter.Unit)
+    const metadata = searchParams.get(SendOperationSearchParameter.Metadata)
+    const tag = searchParams.get(SendOperationSearchParameter.Tag)
+    const recipient: Subject = address ? { type: 'address', address } : undefined
 
-    if (parsedUnit === Unit._ && parsedAmount && !Number.isInteger(parsedAmount)) {
-        return addError({
-            time: Date.now(),
-            type: 'deepLink',
-            message: `For unit 'i' the amount must be an integer '${parsedAmount}'`,
-        })
-    }
+    // if (parsedUnit === Unit._ && parsedAmount && !Number.isInteger(parsedAmount)) {
+    //     return addError({
+    //         time: Date.now(),
+    //         type: 'deepLink',
+    //         message: `For unit 'i' the amount must be an integer '${parsedAmount}'`,
+    //     })
+    // }
 
     return {
-        address,
-        amount: String(Math.abs(parsedAmount)),
-        unit: parsedUnit,
-        message: '',
+        ...(recipient && { recipient }),
+        ...(amount && { amount }),
+        ...(unit && { unit }),
+        ...(metadata && { metadata }),
+        ...(tag && { tag }),
     }
 }

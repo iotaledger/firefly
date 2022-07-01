@@ -1,23 +1,23 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
-    import { AccountSummaryAndAssetsPane, AccountActivityPane, LineChartPane, BarChartPane } from 'shared/components'
-    import { sendParams } from 'shared/lib/app'
+    import { selectedAccount, selectedAccountId } from '@core/account'
+    import { activeProfile, isLedgerProfile } from '@core/profile'
+    import { sendFormParameters } from '@core/wallet'
+    import { AccountActivityPane, AccountSummaryAndAssetsPane, BarChartPane, LineChartPane } from 'shared/components'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { openPopup } from 'shared/lib/popup'
     import { hasGeneratedALedgerReceiveAddress } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
-    import { activeProfile } from '@core/profile'
-    import { isLedgerProfile } from '@core/profile'
-    import { selectedAccount, selectedAccountId } from '@core/account'
 
-    const { loggedIn } = $activeProfile
+    const { hasLoadedAccounts, loggedIn } = $activeProfile
 
     // TODO: move to dashboard or lib
     $: {
-        if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
+        if ($hasLoadedAccounts && $isDeepLinkRequestActive && $sendFormParameters) {
             openPopup({
                 type: 'sendForm',
                 overflow: true,
+                props: { $sendFormParameters },
             })
             isDeepLinkRequestActive.set(false)
         }

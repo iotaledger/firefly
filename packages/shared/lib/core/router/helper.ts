@@ -9,7 +9,6 @@ import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
 import { SettingsRouter, settingsRouter } from './settings-router'
 import { ledgerRouter, LedgerRouter } from './subrouters'
-import { clearSendParams } from '@lib/app'
 
 export const initRouters = (): void => {
     appRouter.set(new AppRouter())
@@ -30,7 +29,6 @@ export const resetRouters = (): void => {
 export const resetAccountRouter = (resetPanels: boolean = true): void => {
     if (resetPanels) {
         get(accountRouter).reset()
-        clearSendParams()
     }
 }
 
