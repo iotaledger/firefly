@@ -431,7 +431,7 @@
             },
             "deepLinks": {
                 "title": "Deep links",
-                "description": "Automatically fill transaction data in Firefly upon clicking a deep link"
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkConfiguration": {
                 "title": "Network config",
