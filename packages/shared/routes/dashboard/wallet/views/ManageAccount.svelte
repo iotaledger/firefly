@@ -76,7 +76,7 @@
     $: hasColorChanged = getAccountColor(account.id) !== color
 </script>
 
-<div class="w-full h-full flex flex-col justify-between {$mobile ? 'safe-area p-5' : 'p-6'}">
+<div class="w-full h-full flex flex-col justify-between {$mobile ? 'safe-area p-5 pt-6' : 'p-6'}">
     <div>
         <div class="flex flex-row mb-6 {$mobile && 'justify-center'}">
             <Text type="h5">{localize('general.manageAccount')}</Text>

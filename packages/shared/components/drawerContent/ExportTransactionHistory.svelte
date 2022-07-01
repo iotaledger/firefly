@@ -96,7 +96,7 @@
     }
 </script>
 
-<div class="safe-area flex flex-col p-5">
+<div class="safe-area flex flex-col p-5 pt-6">
     <div class="flex flex-row justify-center mb-6">
         <Text type="h4">{localize('popups.exportTransactionHistory.title')}</Text>
     </div>
