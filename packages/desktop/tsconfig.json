@@ -10,6 +10,7 @@
             "@common/*": ["../shared/lib/common/*"],
             "@contexts/*": ["../shared/lib/contexts/*"],
             "@core/*": ["../shared/lib/core/*"],
+            "@features/*": ["../shared/features/*"],
             "@lib/*": ["../shared/lib/*"]
         }
     },
