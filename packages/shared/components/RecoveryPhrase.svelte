@@ -37,7 +37,8 @@
 <style type="text/scss">
     div {
         max-width: 460px;
-
+        // Safari iOS 14, 15 needs it. It's implemented on iOS 16 as preview.
+        -webkit-user-select: none;
         &.hide {
             filter: blur(4px);
         }
