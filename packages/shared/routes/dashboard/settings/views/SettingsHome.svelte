@@ -17,6 +17,10 @@
         settingsRouter,
     } from '@core/router'
 
+    const { NetworkStatus, ...generalSettingsMobile } = GeneralSettings
+
+    const { CrashReporting, ...advancedSettingsMobile } = AdvancedSettings
+
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)
 
@@ -69,7 +73,7 @@
             icon="settings"
             iconColor="bg-blue-500"
             icons={SettingsIcons}
-            settings={GeneralSettings}
+            settings={$mobile ? generalSettingsMobile : GeneralSettings}
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
             title={localize('views.settings.generalSettings.title')}
             description=""
@@ -89,7 +93,7 @@
             icon="tools"
             iconColor="bg-green-600"
             icons={SettingsIcons}
-            settings={advancedSettings}
+            settings={$mobile ? advancedSettingsMobile : advancedSettings}
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
             title={localize('views.settings.advancedSettings.title')}
             description=""
