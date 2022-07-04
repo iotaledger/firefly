@@ -26,8 +26,8 @@
     }
 </script>
 
-<div class="flex flex-col px-6 {$mobile ? 'safe-area pt-7 pb-3' : 'py-10'}">
-    <div class="mb-5">
+<div class="flex flex-col {$mobile ? 'safe-area p-5 pt-6' : 'px-6 py-10'}">
+    <div class={$mobile ? 'flex flex-row justify-center mb-6' : 'mb-5'}>
         <Text type="h4">{localize('popups.addressHistory.title', { values: { name: account.alias } })}</Text>
     </div>
     <div class="history flex flex-row flex-wrap space-y-7 {$mobile ? 'overflow-y-auto' : 'scrollable-y'}">

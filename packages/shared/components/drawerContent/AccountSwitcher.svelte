@@ -135,7 +135,7 @@
     }
 </script>
 
-<div class="mb-4 flex w-full justify-center">
+<div class="mb-4 -mt-1 flex w-full justify-center">
     <Text type="h4">{localize('general.switchWallet')}</Text>
     <button class="fixed right-5 pr-5" on:click={() => (toggleEdit = !toggleEdit)}>
         <Text type="h5" overrideColor classes="text-blue-500 pt-1">
