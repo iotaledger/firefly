@@ -17,7 +17,7 @@
             openPopup({
                 type: 'sendForm',
                 overflow: true,
-                props: $sendFormParameters,
+                props: { ...$sendFormParameters },
             })
             isDeepLinkRequestActive.set(false)
         }
