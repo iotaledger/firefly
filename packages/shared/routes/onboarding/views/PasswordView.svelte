@@ -44,7 +44,6 @@
             try {
                 busy = true
                 if (existingPassword) {
-                    // TODO: also pass in currentPassword
                     await changeStrongholdPassword(existingPassword, password)
                 } else {
                     await setStrongholdPassword(password)
@@ -53,6 +52,7 @@
                 $strongholdPassword = password
                 $onboardingRouter.next({ password })
             } catch (err) {
+                console.error(err)
                 showAppNotification({
                     type: 'error',
                     message: localize(err?.error),
