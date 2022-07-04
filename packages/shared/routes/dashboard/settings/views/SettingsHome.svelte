@@ -18,9 +18,7 @@
     } from '@core/router'
 
     const { NetworkStatus, ...generalSettingsMobile } = GeneralSettings
-
-    const { CrashReporting, ...advancedSettingsMobile } = AdvancedSettings
-
+    const { CrashReporting, MigrateLedgerIndex, ...advancedSettingsMobile } = AdvancedSettings
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)
 
