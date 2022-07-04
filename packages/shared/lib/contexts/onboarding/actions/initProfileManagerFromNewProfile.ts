@@ -5,8 +5,9 @@ import { initialiseProfileManager } from '@core/profile-manager'
 import { get } from 'svelte/store'
 
 export async function initProfileManagerFromNewProfile(node?: INode): Promise<void> {
-    const profile = get(newProfile)
-    await setNewProfileClientOptions(profile.networkProtocol, profile.networkType, node)
+    let profile = get(newProfile)
+    setNewProfileClientOptions(profile.networkProtocol, profile.networkType, node)
+    profile = get(newProfile)
 
     const path = await getStorageDirectoryOfProfile(profile.id)
     const coinType = COIN_TYPE[profile.networkProtocol]
