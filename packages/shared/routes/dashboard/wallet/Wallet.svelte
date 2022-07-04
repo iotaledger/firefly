@@ -1,27 +1,12 @@
 <script lang="typescript">
-    import { isDeepLinkRequestActive } from '@common/deep-links'
     import { selectedAccount, selectedAccountId } from '@core/account'
     import { activeProfile, isLedgerProfile } from '@core/profile'
-    import { sendFormParameters } from '@core/wallet'
     import { AccountActivityPane, AccountSummaryAndAssetsPane, BarChartPane, LineChartPane } from 'shared/components'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
-    import { openPopup } from 'shared/lib/popup'
     import { hasGeneratedALedgerReceiveAddress } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
 
-    const { hasLoadedAccounts, loggedIn } = $activeProfile
-
-    // TODO: move to dashboard or lib
-    $: {
-        if ($hasLoadedAccounts && $isDeepLinkRequestActive && $sendFormParameters) {
-            openPopup({
-                type: 'sendForm',
-                overflow: true,
-                props: { ...$sendFormParameters },
-            })
-            isDeepLinkRequestActive.set(false)
-        }
-    }
+    const { loggedIn } = $activeProfile
 
     // TODO: move to lib
     // If account changes force regeneration of Ledger receive address

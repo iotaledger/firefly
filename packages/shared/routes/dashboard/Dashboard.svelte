@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
-    import { appSettings } from '@core/app'
+    import { handleDeepLink } from '@common/deep-links'
     import { localize } from '@core/i18n'
-    import { clearPollNetworkInterval, networkHrp, pollNetworkStatus } from '@core/network'
+    import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
     import {
         activeProfile,
         hasStrongholdLocked,
@@ -11,16 +10,7 @@
         reflectLockedStronghold,
         saveActiveProfile,
     } from '@core/profile'
-    import {
-        AdvancedSettings,
-        appRouter,
-        DashboardRoute,
-        dashboardRoute,
-        dashboardRouter,
-        SettingsRoute,
-        settingsRouter,
-    } from '@core/router'
-    import { sendFormParameters } from '@core/wallet'
+    import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
     import { isPollingLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot } from 'shared/lib/migration'
@@ -179,40 +169,8 @@
 
     // TODO: handle deep link requests for new send form
     const handleDeepLinkRequest = (data: string): void => {
-        const _redirect = (tab: DashboardRoute): void => {
-            isDeepLinkRequestActive.set(true)
-            $dashboardRouter.goTo(tab)
-        }
-        if (!$appSettings.deepLinking) {
-            _redirect(DashboardRoute.Settings)
-            $settingsRouter.goToChildRoute(SettingsRoute.Advanced, AdvancedSettings.DeepLinks)
-            showAppNotification({ type: 'warning', message: localize('notifications.deepLinkingRequest.notEnabled') })
-        } else {
-            if ($activeProfile?.hasLoadedAccounts) {
-                const addressPrefix = $networkHrp
-                const parsedDeepLink = parseDeepLinkRequest(addressPrefix, data)
-                if (
-                    parsedDeepLink &&
-                    parsedDeepLink.context === DeepLinkContext.Wallet &&
-                    parsedDeepLink.operation === WalletOperation.Send &&
-                    parsedDeepLink.parameters
-                ) {
-                    _redirect(DashboardRoute.Wallet)
-                    sendFormParameters.set({
-                        ...parsedDeepLink.parameters,
-                    })
-                    showAppNotification({
-                        type: parsedDeepLink.notification.type,
-                        message: parsedDeepLink.notification.message,
-                    })
-                } else {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize('notifications.deepLinkingRequest.invalidFormat'),
-                    })
-                }
-                Platform.DeepLinkManager.clearDeepLinkRequest()
-            }
+        if ($activeProfile?.hasLoadedAccounts) {
+            handleDeepLink(data)
         }
     }
 

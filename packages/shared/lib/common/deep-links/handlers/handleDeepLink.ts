@@ -1,21 +1,21 @@
-import { addError } from '../../errors'
-
-import { parseWalletDeepLinkRequest } from '@common/deep-links/wallet-context-handler'
-import type { DeepLinkRequest } from '@common/deep-links/types'
-import { DeepLinkContext } from './enums'
+import { DashboardRoute, dashboardRouter } from '@core/router'
+import { get } from 'svelte/store'
+import { addError } from '../../../errors'
+import { resetDeepLink } from '../actions'
+import { DeepLinkContext } from '../enums'
+import { isDeepLinkRequestActive } from '../stores'
+import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContext'
 
 /**
- * Parses an IOTA deep link, i.e. a URL that begins with the scheme "iota://".
- *
+ * Parses an IOTA deep link, i.e. a URL that begins with the app protocol i.e "firefly://".
  * @method parseDeepLinkRequest
- *
- * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
  * @param {string} input The URL that was opened by the user.
- *
- * @returns {void | DeepLinkRequest} The formatted content of a deep link request.
+ * @returns {void}
  */
-export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: string): void | DeepLinkRequest => {
+export const handleDeepLink = (input: string): void => {
+    isDeepLinkRequestActive.set(true)
     if (!input || typeof input !== 'string') {
+        isDeepLinkRequestActive.set(false)
         return
     }
 
@@ -25,8 +25,10 @@ export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: strin
         if (url.protocol === `${process.env.APP_PROTOCOL}:`) {
             switch (url.hostname) {
                 case DeepLinkContext.Wallet:
-                    return parseWalletDeepLinkRequest(url, expectedAddressPrefix)
+                    get(dashboardRouter).goTo(DashboardRoute.Wallet)
+                    return handleDeepLinkWalletContext(url)
                 default:
+                    resetDeepLink()
                     return addError({
                         time: Date.now(),
                         type: 'deepLink',
@@ -34,6 +36,7 @@ export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: strin
                     })
             }
         } else {
+            resetDeepLink()
             return addError({
                 time: Date.now(),
                 type: 'deepLink',
@@ -41,6 +44,7 @@ export const parseDeepLinkRequest = (expectedAddressPrefix: string, input: strin
             })
         }
     } catch (err) {
+        resetDeepLink()
         return addError({ time: Date.now(), type: 'deepLink', message: `Error handling deep link. ${err.message}` })
     }
 }
