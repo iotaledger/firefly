@@ -26,6 +26,9 @@ export const handleDeepLinkWalletContext = (url: URL): void => {
         case WalletOperation.Send:
             handleDeepLinkSendOperation(url.searchParams)
             break
+        case WalletOperation.ConfirmSend:
+            handleDeepLinkSendOperation(url.searchParams, true)
+            break
         default:
             resetDeepLink()
             return addError({

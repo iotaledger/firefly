@@ -1,20 +1,29 @@
 import { resetDeepLink } from '@common/deep-links/actions'
 import { SendOperationParameter } from '@common/deep-links/enums'
-import { networkHrp } from '@core/network'
+import { BASE_TOKEN, networkHrp } from '@core/network'
+import { activeProfile } from '@core/profile'
 import { ISendFormParameters, Subject } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { addError } from '@lib/errors'
 import { openPopup } from '@lib/popup'
 import { get } from 'svelte/store'
 
-export function handleDeepLinkSendOperation(searchParams: URLSearchParams): void {
+export function handleDeepLinkSendOperation(searchParams: URLSearchParams, skipForm = false): void {
+    let unit: string
     const sendFormParameters = parseSendOperation(searchParams)
+    if (skipForm) {
+        unit = BASE_TOKEN?.[get(activeProfile)?.networkProtocol]?.unit
+    }
 
     if (sendFormParameters) {
         openPopup({
-            type: 'sendForm',
+            type: skipForm ? 'sendConfirmation' : 'sendForm',
             overflow: true,
-            props: { ...sendFormParameters },
+            props: {
+                ...sendFormParameters,
+                ...(skipForm && sendFormParameters?.amount && { rawAmount: sendFormParameters?.amount }),
+                ...(unit && { unit }),
+            },
         })
     }
     resetDeepLink()

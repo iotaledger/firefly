@@ -3,4 +3,5 @@
  */
 export enum WalletOperation {
     Send = 'send',
+    ConfirmSend = 'confirmSend',
 }
