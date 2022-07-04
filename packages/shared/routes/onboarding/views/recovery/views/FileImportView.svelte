@@ -16,7 +16,7 @@
 
     const allowedExtensions = ['kdbx', 'stronghold']
 
-    let file: ImportFile
+    let importFile: ImportFile
     let fileName = ''
     let filePath = ''
     let dropping = false
@@ -24,7 +24,7 @@
     function handleContinueClick(): void {
         validateBackupFile(fileName)
         setProfileRecoveryTypeFromFilename(fileName)
-        setImportFile(file, filePath)
+        setImportFile(importFile, filePath)
         $recoveryRouter.next()
     }
 
@@ -32,7 +32,7 @@
         $recoveryRouter.previous()
     }
 
-    function setFile(buffer?: string | ArrayBuffer, name?: string, path?: string): void {
+    function setFile(buffer?: ImportFile, file?: FileWithPath): void {
         if (!buffer) {
             file = null
             fileName = null
@@ -40,9 +40,9 @@
             return
         }
 
-        file = buffer
-        fileName = name
-        filePath = path
+        importFile = buffer
+        fileName = file?.name
+        filePath = file?.path
     }
 
     function handleFileSelect(event: DragEvent | Event): void {
@@ -61,12 +61,10 @@
             return setFile()
         }
 
-        fileName = fileWithPath.name
-
         const reader = new FileReader()
 
         reader.onload = (e) => {
-            setFile(e.target.result, fileWithPath.name, fileWithPath.path)
+            setFile(e.target.result, fileWithPath)
             if ($mobile) {
                 handleContinueClick()
             }
@@ -103,7 +101,7 @@
         {/if}
         <Button
             classes="flex-1"
-            disabled={!$mobile && !file}
+            disabled={!$mobile && !importFile}
             onClick={$mobile ? handleFileSelect : handleContinueClick}
         >
             {localize(`actions.${$mobile ? 'chooseFile' : 'continue'}`)}

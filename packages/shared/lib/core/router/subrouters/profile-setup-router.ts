@@ -38,9 +38,10 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
             case ProfileSetupRoute.SetupRecovered: {
                 const _profileRecoveryType = params?.profileRecoveryType
                 if (_profileRecoveryType) {
-                    if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-                        this.parentRouter.next()
-                    } else if (_profileRecoveryType === ProfileRecoveryType.Stronghold) {
+                    if (
+                        _profileRecoveryType === ProfileRecoveryType.Mnemonic ||
+                        _profileRecoveryType === ProfileRecoveryType.Stronghold
+                    ) {
                         this.parentRouter.next()
                     } else if (_profileRecoveryType === ProfileRecoveryType.Ledger) {
                         nextRoute = ProfileSetupRoute.EnterName
