@@ -453,7 +453,8 @@
                     <Drawer
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
-                        onClose={() => accountRoute.set(AccountRoute.Init)}
+                        on:close={() => accountRoute.set(AccountRoute.Init)}
+                        fullScreen={$accountRoute === AccountRoute.Receive}
                     >
                         {#if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
@@ -482,7 +483,7 @@
                 >
                     <DashboardPane classes="w-full">
                         {#if $walletRoute === WalletRoute.Assets}
-                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                            <div class="h-full" in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 200 }}>
                                 <AccountAssets
                                     {scroll}
                                     {scrollDetection}
@@ -490,7 +491,7 @@
                                 />
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
-                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
+                            <div class="h-full" in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 200 }}>
                                 <AccountHistory
                                     {scroll}
                                     {scrollDetection}
@@ -503,7 +504,7 @@
                 </div>
                 <BottomNavigation locale={localize} bind:this={bottomNavigation} />
                 {#if $selectedMessage}
-                    <Drawer opened bind:this={activityDrawer} onClose={handleActivityDrawerBackClick}>
+                    <Drawer opened bind:this={activityDrawer} on:close={handleActivityDrawerBackClick}>
                         <div class="overflow-y-auto h-2/3 space-y-2.5">
                             <ActivityDetail {...$selectedMessage} />
                         </div>

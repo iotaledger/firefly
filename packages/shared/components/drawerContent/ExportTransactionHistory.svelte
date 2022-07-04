@@ -96,8 +96,10 @@
     }
 </script>
 
-<div class="flex flex-col px-6 py-10">
-    <Text type="h4" classes="mb-6">{localize('popups.exportTransactionHistory.title')}</Text>
+<div class="safe-area flex flex-col p-5 pt-6">
+    <div class="flex flex-row justify-center mb-6">
+        <Text type="h4">{localize('popups.exportTransactionHistory.title')}</Text>
+    </div>
     <Text type="p" secondary classes="mb-5">{localize('popups.exportTransactionHistory.body')}</Text>
     <div class="flex w-full flex-row flex-wrap">
         <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
@@ -141,3 +143,9 @@
         </div>
     </div>
 </div>
+
+<style>
+    .safe-area {
+        margin-bottom: calc(env(safe-area-inset-top) / 2);
+    }
+</style>

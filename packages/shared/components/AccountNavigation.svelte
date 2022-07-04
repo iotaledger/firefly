@@ -7,7 +7,6 @@
     import { Drawer, Icon, Text } from 'shared/components'
     import { AccountSwitcher } from 'shared/components/drawerContent'
     import CreateAccount from 'shared/components/popups/CreateAccount.svelte'
-    import { onDestroy } from 'svelte'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount: createAccountCallback
@@ -20,10 +19,23 @@
     let drawer: Drawer
     let isDrawerOpened = false
     let drawerRoute = DrawerRoutes.Init
-    let unsubscribeAnimateTranslationLeft = () => {}
+
+    let switcherButtonWidth: number = 0
+    let switcherButtonTranslateX = 0
+
+    const VIEWPORT_PADDING = 20
 
     let accountColor: string | AccountColor
+
     $: $activeProfile?.accounts, (accountColor = getAccountColor($selectedAccountStore?.id))
+    $: (switcherButtonWidth, $mobileHeaderAnimation), updateSwitcherButtonTranslate()
+
+    function updateSwitcherButtonTranslate(): void {
+        if (!switcherButtonWidth || !window) return
+        const centeredTranslate = window.innerWidth * 0.5 - switcherButtonWidth * 0.5
+        const translateX = centeredTranslate * $mobileHeaderAnimation
+        switcherButtonTranslateX = translateX <= VIEWPORT_PADDING ? VIEWPORT_PADDING : translateX
+    }
 
     function toggleAccountSwitcher(): void {
         setDrawerRoute(DrawerRoutes.Init)
@@ -34,29 +46,16 @@
     function setDrawerRoute(route: DrawerRoutes): void {
         drawerRoute = route
     }
-
-    function animateTranslationLeft(node: HTMLElement): void {
-        unsubscribeAnimateTranslationLeft = mobileHeaderAnimation.subscribe((curr) => {
-            const { width } = node.getBoundingClientRect()
-            const centerPosition = window.innerWidth * 0.5 - width * 0.5
-            const yOffset = 0.09
-            const moveProgress = curr * (1 - yOffset) + yOffset
-            node.style.transform = `translateX(${centerPosition * moveProgress}px)`
-        })
-    }
-
-    onDestroy(() => {
-        unsubscribeAnimateTranslationLeft()
-    })
 </script>
 
 <div class="flex flex-auto flex-col">
     <button
         on:click={toggleAccountSwitcher}
-        class="mt-3 py-2 px-3 fixed rounded-lg flex flex-row justify-center items-center space-x-2 
+        class="mt-3 py-2 px-2 absolute rounded-lg flex flex-row justify-center items-center space-x-2 
             {isDrawerOpened ? 'bg-gray-100 dark:bg-gray-900' : ''}
             "
-        use:animateTranslationLeft
+        style="transform: translateX({switcherButtonTranslateX}px);"
+        bind:clientWidth={switcherButtonWidth}
     >
         <span class="circle" style="--account-color: {accountColor}" />
         <Text type="h4">{$selectedAccountStore?.alias}</Text>
@@ -64,11 +63,11 @@
             <Icon icon="chevron-down" height="18" width="18" classes="text-gray-800 dark:text-white" />
         </div>
     </button>
-    <Drawer bind:this={drawer} opened={isDrawerOpened} onClose={() => (isDrawerOpened = false)}>
-        <div class="flex flex-col px-6 w-full safe-area pt-7 pb-5 safe-area">
-            {#if drawerRoute === 'create'}
+    <Drawer bind:this={drawer} opened={isDrawerOpened} on:close={() => (isDrawerOpened = false)}>
+        <div class="flex flex-col w-full safe-area pt-7 p-5 safe-area">
+            {#if drawerRoute === DrawerRoutes.Create}
                 <CreateAccount onCreate={onCreateAccount} onCancel={() => drawer.close()} />
-            {:else if (drawerRoute = DrawerRoutes.Init)}
+            {:else if drawerRoute === DrawerRoutes.Init}
                 <AccountSwitcher
                     {accounts}
                     {onCreateAccount}
