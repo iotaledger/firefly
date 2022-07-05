@@ -18,6 +18,7 @@
         Subject,
         sendOutput,
         validateSendConfirmation,
+        generateRawAmount,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
@@ -29,7 +30,6 @@
     export let asset: IAsset
     export let amount = '0'
     export let unit: string
-    export let rawAmount: number
     export let recipient: Subject
     export let internal = false
     export let metadata: string
@@ -48,7 +48,8 @@
 
     $: internal = recipient.type === 'account'
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
-    $: $$props, expirationDate, void _prepareOutput()
+    $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
+    $: $$props, expirationDate, rawAmount, void _prepareOutput()
     $: expirationDate, (error = null)
     $: formattedFiatValue =
         formatCurrency(

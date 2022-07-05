@@ -20,8 +20,6 @@
     export let metadata: string
     export let tag: string
 
-    let rawAmount: number
-
     let assetAmountInput: AssetAmountInput
     let recipientInput: RecipientInput
 
@@ -34,7 +32,6 @@
                     asset,
                     amount,
                     unit,
-                    rawAmount,
                     recipient,
                     internal: false,
                     metadata,
@@ -88,7 +85,7 @@
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">{localize('popups.sendForm.title')}</Text>
     <send-form-inputs class="flex flex-col space-y-4">
-        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:amount bind:unit />
+        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:amount bind:unit />
         <RecipientInput bind:this={recipientInput} bind:recipient />
         <ClosableTextInput
             bind:buttonElement={metadataButtonElement}
