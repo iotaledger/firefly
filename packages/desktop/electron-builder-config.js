@@ -18,7 +18,7 @@ const baseConfig = () => ({
         }
     },
     asar: true,
-    protocols: [{ name: 'IOTA URL Scheme', schemes: ['iota'] }],
+    protocols: [{ name: 'Firefly URL Scheme', schemes: [getAppProtocol(process.env.STAGE || 'alpha')] }],
     dmg: {
         iconSize: 120,
         title: '${productName}',
@@ -90,6 +90,8 @@ const getIconPaths = (stage) => {
  */
 const getAppName = (stage) =>
     stage === 'prod' ? 'Firefly (Stardust)' : `Firefly (Stardust) - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
+
+const getAppProtocol = (stage) => (stage === 'prod' ? 'firefly' : `firefly-${stage.toLowerCase()}`)
 
 const getAppId = (stage) => {
     const defaultAppId = 'org.iota.firefly-stardust'
