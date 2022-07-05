@@ -14,10 +14,9 @@
     export let isDeveloperProfile: boolean
 
     $: node.url, (formError = '')
-    $: node.url = cleanNodeUrl(node?.url)
 
-    function cleanNodeUrl(_url: string): string {
-        return stripTrailingSlash(stripSpaces(_url))
+    function cleanNodeUrl(): string {
+        return stripTrailingSlash(stripSpaces(node?.url))
     }
 
     export async function validate({
@@ -81,13 +80,14 @@
     }
 </script>
 
-<form id="node-config-form" class="w-full h-full">
+<form id="node-configuration-form" class="w-full h-full">
     <Input
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
         error={formError}
         disabled={isBusy}
         autofocus
+        on:change={cleanNodeUrl}
     />
     <Input
         classes="mt-3"

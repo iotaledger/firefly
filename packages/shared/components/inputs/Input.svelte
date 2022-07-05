@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
+    import { onMount, createEventDispatcher } from 'svelte'
     import { Text, InputContainer } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
@@ -27,6 +27,8 @@
     export let clearBorder = false
     export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
     export let textProps: TextPropTypes = { type: TextType.p, fontSize: '11', lineHeight: '140' }
+
+    const dispatch = createEventDispatcher()
 
     const allDecimalSeparators = getAllDecimalSeparators()
     const decimalSeparator = getDecimalSeparator()
@@ -151,6 +153,7 @@
                     on:contextmenu={handleContextMenu}
                     on:focus={() => (hasFocus = true)}
                     on:blur={() => (hasFocus = false)}
+                    on:change={() => dispatch('change')}
                     {disabled}
                     {placeholder}
                     {style}
