@@ -28,12 +28,16 @@
             darkmode: 'onboarding-network-desktop-darkmode.json',
         },
         'profile-desktop': {
-            lightmode: 'profile-desktop.json',
-            darkmode: 'profile-desktop-darkmode.json',
+            lightmode: 'setup-desktop.json',
+            darkmode: 'setup-desktop-darkmode.json',
         },
         'setup-desktop': {
             lightmode: 'setup-desktop.json',
             darkmode: 'setup-desktop-darkmode.json',
+        },
+        'secure-desktop': {
+            lightmode: 'secure-desktop.json',
+            darkmode: 'secure-desktop-darkmode.json',
         },
         'password-desktop': {
             lightmode: 'password-desktop.json',
