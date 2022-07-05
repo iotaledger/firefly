@@ -79,7 +79,7 @@
 
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
-        await sendOutput(outputOptions, preparedOutput)
+        await sendOutput(preparedOutput)
         closePopup()
     }
 
