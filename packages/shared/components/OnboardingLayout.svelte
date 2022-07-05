@@ -75,6 +75,7 @@
                             on:click={onBackClick}
                             class="mb-8 w-6 h-6 {busy && 'pointer-events-none opacity-50'} highlight"
                             disabled={busy}
+                            aria-label={localize('actions.back')}
                         >
                             <Icon
                                 icon="arrow-left"
