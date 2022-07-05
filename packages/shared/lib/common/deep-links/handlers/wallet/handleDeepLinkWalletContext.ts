@@ -23,10 +23,10 @@ export const handleDeepLinkWalletContext = (url: URL): void => {
     }
 
     switch (pathnameParts[0]) {
-        case WalletOperation.Send:
+        case WalletOperation.SendForm:
             handleDeepLinkSendOperation(url.searchParams)
             break
-        case WalletOperation.ConfirmSend:
+        case WalletOperation.SendConfirmation:
             handleDeepLinkSendOperation(url.searchParams, true)
             break
         default:
