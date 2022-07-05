@@ -249,6 +249,8 @@ function createWindow() {
         height: mainWindowState.height,
         minWidth: 1280,
         minHeight: 720,
+        maxWidth: 1280,
+        maxHeight: 720,
         titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
         title: app.name,
         frame: process.platform === 'linux',
@@ -260,6 +262,7 @@ function createWindow() {
             ...defaultWebPreferences,
             preload: paths.preload,
         },
+        maximizable: false,
     })
 
     if (mainWindowState.isMaximized) {
