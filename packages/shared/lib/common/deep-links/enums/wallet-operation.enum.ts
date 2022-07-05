@@ -2,6 +2,6 @@
  * The operations available within the wallet context.
  */
 export enum WalletOperation {
-    Send = 'send',
-    ConfirmSend = 'confirmSend',
+    SendForm = 'sendForm',
+    SendConfirmation = 'sendConfirmation',
 }
