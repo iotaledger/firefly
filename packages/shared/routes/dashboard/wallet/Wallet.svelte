@@ -2,24 +2,15 @@
     import { isDeepLinkRequestActive } from '@common/deep-links'
     import { AccountSummaryAndAssetsPane, AccountActivityPane, LineChartPane, BarChartPane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
-    import { localize } from '@core/i18n'
-    import { displayNotificationForLedgerProfile } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
-    import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { LedgerErrorType } from 'shared/lib/typings/events'
-    import {
-        asyncSyncAccounts,
-        getSyncAccountOptions,
-        hasGeneratedALedgerReceiveAddress,
-        isFirstSessionSync,
-    } from 'shared/lib/wallet'
+    import { hasGeneratedALedgerReceiveAddress } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
     import { activeProfile } from '@core/profile'
     import { isLedgerProfile } from '@core/profile'
     import { selectedAccount, selectedAccountId } from '@core/account'
 
-    const { hasLoadedAccounts, loggedIn } = $activeProfile
+    const { loggedIn } = $activeProfile
 
     // TODO: move to dashboard or lib
     $: {
@@ -38,33 +29,19 @@
         hasGeneratedALedgerReceiveAddress.set(false)
     }
 
-    async function _continue(): Promise<void> {
-        $hasLoadedAccounts = true
-        const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
-
-        try {
-            await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
-            if ($isFirstSessionSync) {
-                $isFirstSessionSync = false
-            }
-        } catch (err) {
-            onError(err)
-        }
-    }
-
     // TODO: move to error handling lib
-    function onError(error?: any): void {
-        if ($isLedgerProfile) {
-            if (!LedgerErrorType[error.type]) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, error)
-            }
-        } else {
-            showAppNotification({
-                type: 'error',
-                message: localize(error?.error || 'error.global.generic'),
-            })
-        }
-    }
+    // function onError(error?: any): void {
+    //     if ($isLedgerProfile) {
+    //         if (!LedgerErrorType[error.type]) {
+    //             displayNotificationForLedgerProfile('error', true, true, false, false, error)
+    //         }
+    //     } else {
+    //         showAppNotification({
+    //             type: 'error',
+    //             message: localize(error?.error || 'error.global.generic'),
+    //         })
+    //     }
+    // }
 
     onMount(() => {
         // TODO: change so settings doesn't go back to wallet??
@@ -72,11 +49,6 @@
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
         if ($activeProfile && $loggedIn) {
-            // TODO: Remove old api
-            // removeEventListeners($activeProfile?.id)
-
-            // initialiseListeners()
-
             // TODO: Replace with new api when developed and move out of this file
             // if ($isSoftwareProfile) {
             //     api.getStrongholdStatus({

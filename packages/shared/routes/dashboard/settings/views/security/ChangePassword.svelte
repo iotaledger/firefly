@@ -5,7 +5,7 @@
     import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
-    import { changePasswordAndUnlockStronghold, setStrongholdPassword } from '@core/profile-manager'
+    import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
 
     let exportStrongholdChecked: boolean
     let startOfPasswordChange: number
@@ -21,16 +21,13 @@
     $: passwordStrength = zxcvbn(newPassword)
 
     async function changePassword(): Promise<void> {
-        const isPasswordValid = await checkPassword()
-        if (isPasswordValid) {
+        if (isPasswordValid()) {
             busy = true
             changeMessageLocale = 'general.passwordUpdating'
             startOfPasswordChange = Date.now()
 
             try {
-                // TODO: also pass in currentPassword
-                await changePasswordAndUnlockStronghold(newPassword)
-
+                await changePasswordAndUnlockStronghold(currentPassword, newPassword)
                 if (exportStrongholdChecked) {
                     changeMessageLocale = 'general.exportingStronghold'
                     void exportStronghold(newPassword, cancelStrongholdExport)
@@ -39,7 +36,7 @@
                 resetPasswordsOnSuccess()
             } catch (err) {
                 console.error(err)
-                currentPasswordError = 'general.passwordFailed'
+                currentPasswordError = 'error.password.incorrect'
                 hideBusy(currentPasswordError, 0)
             }
         }
@@ -60,13 +57,11 @@
         resetPasswordsOnSuccess()
     }
 
-    async function checkPassword(): Promise<boolean> {
+    function isPasswordValid(): boolean {
         if (currentPassword && newPassword && confirmedPassword) {
             resetErrors()
 
-            if (await isCurrentPasswordIncorrect()) {
-                return false
-            } else if (newPassword.length > MAX_PASSWORD_LENGTH) {
+            if (newPassword.length > MAX_PASSWORD_LENGTH) {
                 newPasswordError = localize('error.password.length', {
                     values: {
                         length: MAX_PASSWORD_LENGTH,
@@ -88,17 +83,6 @@
             return true
         }
         return false
-    }
-
-    async function isCurrentPasswordIncorrect(): Promise<boolean> {
-        try {
-            await setStrongholdPassword(currentPassword)
-            return false
-        } catch (err) {
-            console.error(err)
-            currentPasswordError = 'error.password.incorrect'
-            return true
-        }
     }
 
     function resetErrors(): void {
@@ -144,7 +128,7 @@
         showRevealToggle
         placeholder={localize('general.currentPassword')}
         disabled={busy}
-        submitHandler={checkPassword}
+        submitHandler={isPasswordValid}
     />
     <PasswordInput
         error={newPasswordError}
@@ -156,7 +140,7 @@
         strength={passwordStrength.score}
         placeholder={localize('general.newPassword')}
         disabled={busy}
-        submitHandler={checkPassword}
+        submitHandler={isPasswordValid}
     />
     <PasswordInput
         classes="mb-5"
@@ -164,7 +148,7 @@
         showRevealToggle
         placeholder={localize('general.confirmNewPassword')}
         disabled={busy}
-        submitHandler={checkPassword}
+        submitHandler={isPasswordValid}
     />
     <Checkbox
         classes="mb-5"

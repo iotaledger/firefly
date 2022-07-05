@@ -22,7 +22,7 @@
     export let isFocused = false
     export let hasFocus = false
 
-    export let onSelect = (..._: any[]): void => {}
+    export let onSelect: (..._: any[]) => void
 
     let dropdown = false
     let navContainer
@@ -149,7 +149,7 @@
                 {search || value || placeholder}
             </Text>
         </div>
-        <Icon icon={'small-chevron-down'} width={16} height={16} classes="text-gray-500 fill-current" />
+        <Icon icon={'small-chevron-down'} width={16} height={16} classes="text-gray-500 dark:text-white fill-current" />
     </div>
     {#if error}
         <Error {error} />

@@ -1,66 +1,60 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
-    import {
-        activeProfile,
-        cleanupEmptyProfiles,
-        isActiveProfileOutdated,
-        migrateActiveProfile,
-        updateNewProfile,
-    } from '@core/profile'
+    import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
     import {
         accountRouter,
         AppRoute,
+        appRouter,
         DashboardRoute,
         dashboardRouter,
         initRouters,
         openSettings,
-        appRouter,
     } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import {
-        setAppVersionDetails,
-        pollCheckForAppUpdate,
-        appVersionDetails,
         appSettings,
-        initAppSettings,
-        AppStage,
         appStage,
+        AppStage,
+        appVersionDetails,
+        initAppSettings,
+        pollCheckForAppUpdate,
+        setAppVersionDetails,
     } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { addError } from 'shared/lib/errors'
     import { goto } from 'shared/lib/helpers'
-    import { pollMarketData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
     import {
-        Appearance,
-        Backup,
-        Balance,
-        ClaimRewards,
-        Congratulations,
-        CrashReporting,
-        Create,
+        BackupRouter,
+        BalanceView,
+        ClaimRewardsView,
+        CongratulationsView,
+        CrashReportingView,
+        CreateView,
         Dashboard,
-        Import,
-        Ledger,
-        Legal,
-        Login,
-        Migrate,
-        Password,
-        Profile,
-        Protect,
-        Secure,
+        ImportRouter,
+        LanguageAndAppearanceView,
+        LedgerRouter,
+        LegalView,
+        LoginRouter,
+        MigrateRouter,
+        OnboardingCustomNetworkView,
+        OnboardingNetworkView,
+        OnboardingProtocolView,
+        PasswordView,
+        ProfileView,
+        ProtectRouter,
+        SecureView,
         Settings,
-        Setup,
+        SetupView,
         Splash,
-        Welcome,
-        OnboardingProtocol,
-        OnboardingNetwork,
-        OnboardingCustomNetwork,
+        WelcomeView,
     } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
+    import { createNewProfile } from '@contexts/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -140,12 +134,12 @@
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            updateNewProfile({ isDeveloperProfile: true })
+            createNewProfile({ isDeveloperProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            updateNewProfile({ isDeveloperProfile: false })
+            createNewProfile({ isDeveloperProfile: false })
         })
         Electron.hookErrorLogger((err) => {
             addError(err)
@@ -191,72 +185,72 @@
             />
         {/if}
         <Route route={AppRoute.Welcome}>
-            <Welcome locale={$_} />
+            <WelcomeView />
         </Route>
         <Route route={AppRoute.Legal}>
-            <Legal locale={$_} />
+            <LegalView />
         </Route>
         <Route route={AppRoute.CrashReporting}>
-            <CrashReporting locale={$_} />
+            <CrashReportingView />
         </Route>
-        <Route route={AppRoute.Appearance}>
-            <Appearance locale={$_} />
+        <Route route={AppRoute.LanguageAndAppearance}>
+            <LanguageAndAppearanceView locale={$_} />
         </Route>
         <Route route={AppRoute.Profile}>
-            <Profile locale={$_} />
+            <ProfileView />
         </Route>
         <Route route={AppRoute.Setup}>
-            <Setup locale={$_} />
+            <SetupView />
         </Route>
         <!-- TODO: fix ledger -->
         <Route route={AppRoute.Create}>
-            <Create locale={$_} />
+            <CreateView />
         </Route>
         <Route route={AppRoute.Protocol}>
-            <OnboardingProtocol locale={$_} />
+            <OnboardingProtocolView />
         </Route>
         <Route route={AppRoute.Network}>
-            <OnboardingNetwork locale={$_} />
+            <OnboardingNetworkView />
         </Route>
         <Route route={AppRoute.CustomNetwork}>
-            <OnboardingCustomNetwork locale={$_} />
+            <OnboardingCustomNetworkView />
         </Route>
         <Route route={AppRoute.LedgerSetup}>
-            <Ledger locale={$_} />
+            <LedgerRouter />
         </Route>
         <!--  -->
         <Route route={AppRoute.Secure}>
-            <Secure locale={$_} />
+            <SecureView />
         </Route>
         <Route route={AppRoute.Password}>
-            <Password locale={$_} />
+            <PasswordView />
         </Route>
         <Route route={AppRoute.Protect} transition={false}>
-            <Protect locale={$_} />
+            <ProtectRouter />
         </Route>
         <Route route={AppRoute.Backup} transition={false}>
-            <Backup locale={$_} />
+            <BackupRouter />
         </Route>
         <Route route={AppRoute.Import} transition={false}>
-            <Import locale={$_} />
+            <ImportRouter />
         </Route>
         <Route route={AppRoute.Balance}>
-            <Balance locale={$_} />
+            <BalanceView />
         </Route>
         <Route route={AppRoute.ClaimRewards}>
-            <ClaimRewards />
+            <ClaimRewardsView />
         </Route>
         <Route route={AppRoute.Migrate}>
-            <Migrate locale={$_} {goto} />
+            <MigrateRouter {goto} />
         </Route>
         <Route route={AppRoute.Congratulations}>
-            <Congratulations locale={$_} {goto} />
+            <CongratulationsView {goto} />
         </Route>
         <Route route={AppRoute.Dashboard}>
             <Dashboard locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Login}>
-            <Login locale={$_} {goto} />
+            <LoginRouter {goto} />
         </Route>
         {#if settings}
             <Settings locale={$_} handleClose={() => (settings = false)} />

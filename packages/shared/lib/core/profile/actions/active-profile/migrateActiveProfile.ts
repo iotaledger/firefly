@@ -1,5 +1,5 @@
-import { activeProfile, IPersistedProfile, isActiveProfileOutdated, updateActiveProfile } from '@core/profile'
-import { buildNewProfile } from '@core/profile/helpers'
+import { activeProfile, IPersistedProfile, updateActiveProfile } from '@core/profile'
+import { DEFAULT_ACTIVE_PROFILE_VALUE } from '@core/profile/constants/default-active-profile-values.constant'
 import { migrateObjects } from '@lib/utils'
 import { get } from 'svelte/store'
 
@@ -11,11 +11,5 @@ import { get } from 'svelte/store'
  */
 export function migrateActiveProfile(): void {
     const _activeProfile = get(activeProfile)
-    const newProfileDefaults = buildNewProfile(
-        _activeProfile?.isDeveloperProfile,
-        _activeProfile?.networkProtocol,
-        _activeProfile?.networkType,
-        _activeProfile?.settings.clientOptions
-    )
-    updateActiveProfile(migrateObjects<IPersistedProfile>(_activeProfile, newProfileDefaults))
+    updateActiveProfile(migrateObjects<IPersistedProfile>(_activeProfile, DEFAULT_ACTIVE_PROFILE_VALUE))
 }

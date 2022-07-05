@@ -1,78 +1,83 @@
 <script lang="typescript">
     import { Input, PasswordInput } from 'shared/components'
-    import {
-        INode,
-        nodeInfo,
-        checkNodeUrlValidity,
-        checkNetworkId,
-        NetworkType,
-        validateAndCleanNodeData,
-    } from '@core/network'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { activeProfile, newProfile, addNode, createNewProfile } from '@core/profile'
+    import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo } from '@core/network'
     import { localize } from '@core/i18n'
+    import { getNodeInfo } from '@core/profile-manager'
+    import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
+    import { get } from 'svelte/store'
+    import { activeProfile } from '@core/profile'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
-    export let onSuccess = (..._: any[]): void => {}
+    export let formError = ''
+    export let currentClientOptions: IClientOptions
+    export let isDeveloperProfile: boolean
 
-    const profile = $newProfile ? newProfile : activeProfile
-    const clientOptions = $profile.settings?.clientOptions
-    const isDeveloperProfile = true // TODO: use real value
+    $: node.url, (formError = '')
+    $: node.url = cleanNodeUrl(node?.url)
 
-    let formError = { error: '' }
-
-    $: node.url, (formError = { error: '' })
-
-    function validateNodeParameters(): void {
-        const errorUrlValidity = checkNodeUrlValidity(clientOptions?.nodes, node.url, $profile.isDeveloperProfile)
-        if (errorUrlValidity) {
-            formError = { error: localize(errorUrlValidity) ?? '' }
-        }
-
-        if ($profile === $activeProfile) {
-            const errorNetworkId = checkNetworkId(
-                $nodeInfo?.protocol?.networkName,
-                clientOptions.network,
-                $profile.isDeveloperProfile
-            )
-            if (errorNetworkId) {
-                formError = { error: localize(errorNetworkId?.locale, errorNetworkId?.values) ?? '' }
-            }
-        }
+    function cleanNodeUrl(_url: string): string {
+        return stripTrailingSlash(stripSpaces(_url))
     }
 
-    export async function handleAddNode(): Promise<void> {
-        isBusy = true
-
-        validateNodeParameters()
-
-        if (!formError.error) {
-            try {
-                if (!$profile?.settings?.clientOptions) {
-                    const cleanedNode = validateAndCleanNodeData(node)
-                    await createNewProfile(
-                        isDeveloperProfile,
-                        $newProfile.networkProtocol,
-                        NetworkType.PrivateNet,
-                        cleanedNode
-                    )
-                } else {
-                    await addNode(node, profile)
-                }
-
-                isBusy = false
-
-                onSuccess()
-            } catch (err) {
-                showAppNotification({
-                    type: 'error',
-                    message: localize(err?.error ?? 'error.global.generic'),
-                })
+    export async function validate({
+        validateUrl,
+        checkNodeInfo,
+        checkSameNetwork,
+        uniqueCheck,
+        validateClientOptions,
+    }: {
+        validateUrl: boolean
+        checkNodeInfo: boolean
+        checkSameNetwork: boolean
+        uniqueCheck: boolean
+        validateClientOptions: boolean
+    }): Promise<void> {
+        if (validateUrl) {
+            const errorUrlValidity = checkNodeUrlValidity(currentClientOptions?.nodes, node.url, isDeveloperProfile)
+            if (errorUrlValidity) {
+                formError = localize(errorUrlValidity) ?? ''
+                return Promise.reject({ type: 'validationError', error: formError })
             }
         }
 
-        isBusy = false
+        let nodeInfoResponse
+        if (checkNodeInfo) {
+            try {
+                nodeInfoResponse = await getNodeInfo(node.url)
+            } catch (err) {
+                formError = localize('error.node.unabledToConnect')
+                return Promise.reject({ type: 'validationError', error: formError })
+            }
+        }
+
+        if (checkSameNetwork) {
+            const isInSameNetwork =
+                get(nodeInfo).protocol.networkName === nodeInfoResponse.nodeInfo.protocol.networkName
+            if (!isInSameNetwork) {
+                formError = localize('error.node.differentNetwork')
+                return Promise.reject({ type: 'validationError', error: formError })
+            }
+        }
+
+        if (uniqueCheck) {
+            if (get(activeProfile)?.clientOptions?.nodes.some((_node) => _node.url === node.url)) {
+                formError = localize('error.node.duplicateNodes')
+                return Promise.reject({ type: 'validationError', error: formError })
+            }
+        }
+
+        if (validateClientOptions && currentClientOptions) {
+            const errorNetworkId = checkNetworkId(
+                nodeInfoResponse?.protocol?.networkName,
+                currentClientOptions.network,
+                isDeveloperProfile
+            )
+            if (errorNetworkId) {
+                formError = localize(errorNetworkId?.locale, errorNetworkId?.values) ?? ''
+                return Promise.reject({ type: 'validationError', error: formError })
+            }
+        }
     }
 </script>
 
@@ -80,7 +85,7 @@
     <Input
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
-        error={formError.error}
+        error={formError}
         disabled={isBusy}
         autofocus
     />

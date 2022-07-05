@@ -17,7 +17,7 @@ import {
     NativeTokenOptions,
     NftOptions,
     OutputData,
-    OutputsToCollect,
+    OutputsToClaim,
     SignedTransactionEssence,
     Transaction,
     TransactionResult,
@@ -32,14 +32,14 @@ export interface IAccount {
     buildBasicOutput(data: BuildBasicOutputData): Promise<IBasicOutput>
     buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput>
     buildNftOutput(data: BuildNftOutputData): Promise<INftOutput>
-    collectOutputs(outputIds: string[]): Promise<TransactionResult[]>
+    claimOutputs(outputIds: string[]): Promise<TransactionResult[]>
     consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<TransactionResult[]>
     generateAddress(options?: AddressGenerationOptions): Promise<Address>
     generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
     getAlias(): string
     getBalance(): Promise<AccountBalance>
     getOutput(outputId: string): Promise<OutputData>
-    getOutputsWithAdditionalUnlockConditions(outputs: OutputsToCollect): Promise<string[]>
+    getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
     getTransaction(transactionId: string): Promise<Transaction>
     listAddresses(): Promise<Address[]>
     listAddressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
@@ -77,5 +77,5 @@ export interface IAccount {
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<TransactionResult>
     sync(options?: AccountSyncOptions): Promise<AccountBalance>
-    tryCollectOutputs(outputsToCollect: OutputsToCollect): Promise<TransactionResult[]>
+    tryClaimOutputs(outputsToClaim: OutputsToClaim): Promise<TransactionResult[]>
 }

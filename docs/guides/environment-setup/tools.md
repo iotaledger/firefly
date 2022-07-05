@@ -39,24 +39,6 @@ yarn lint-fix
 
 :information_source: Svelte component files (`*.svelte`) are checked in addition to regular `*.ts` source code files.
 
-### Rust
-
-The following commands are to be run from the `packages/backend` folder as this is where the Rust bindings for [wallet.rs](https://github.com/iotaledger/wallet.rs) live.
-
-We use `rustfmt` configured with the nightly toolchain to allow some features. To install:
-
-```bash
-# install the nightly toolchain
-rustup component add rustfmt --toolchain nightly
-```
-
-Then run a formatting check:
-
-```bash
-# check format in current working directory
-cargo +nightly fmt -- --check
-```
-
 ## Retype Documentation
 
 Retype makes it incredibly easy to manage documentation. Simply use the following command from the root directory:

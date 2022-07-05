@@ -12,6 +12,7 @@ import {
     BuildNftOutputData,
     OutputData,
     OutputOptions,
+    OutputsToClaim,
     PreparedTransactionData,
     SignedTransactionEssence,
     Transaction,
@@ -71,12 +72,12 @@ export class AccountMock implements IAccount {
         return Promise.resolve(MOCK_ACCOUNT_BALANCE)
     }
 
-    collectOutputs(): Promise<TransactionResult[]> {
+    claimOutputs(): Promise<TransactionResult[]> {
         return Promise.resolve([])
     }
 
     getOutput(outputId: string): Promise<OutputData> {
-        return undefined
+        throw new Error('Method not implemented.')
         // return Promise.resolve({
         //     outputId: '',
         //     outputResponse: {
@@ -174,7 +175,7 @@ export class AccountMock implements IAccount {
     }
 
     getTransaction(transactionId: string): Promise<Transaction> {
-        return Promise.resolve(null)
+        throw new Error('Method not implemented.')
     }
 
     sendAmount(
@@ -222,7 +223,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    tryCollectOutputs(outputsToCollect): Promise<TransactionResult[]> {
+    tryClaimOutputs(outputsToClaim: OutputsToClaim): Promise<TransactionResult[]> {
         throw new Error('Method not implemented.')
     }
 }

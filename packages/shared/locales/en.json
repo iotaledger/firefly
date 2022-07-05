@@ -14,9 +14,9 @@
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
-        "appearance": {
-            "title": "Appearance",
-            "body": "Choose your app theme."
+        "languageAndAppearance": {
+            "title": "Language & appearance",
+            "body": "Choose your language and theme"
         },
         "profile": {
             "title": "Create your {protocol} profile",
@@ -122,15 +122,10 @@
             "body1": "Set up a login PIN to make sure that only you can enter your profile.",
             "body2": "Keep your PIN safe!"
         },
-        "pin": {
+        "setupPin": {
             "title": "Set up PIN code",
             "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
             "body2": "Use numbers only"
-        },
-        "confirmPin": {
-            "title": "Verify your PIN code",
-            "body1": "Your PIN keeps your balance and transactions private.",
-            "body2": "Re-enter your PIN code to proceed. "
         },
         "backup": {
             "title": "Back up your wallet",
@@ -710,8 +705,7 @@
                     "latestMilestone": "Latest milestone",
                     "confirmedMilestone": "Confirmed milestone",
                     "pruningIndex": "Pruning index",
-                    "features": "Features",
-                    "plugins": "Plugins"
+                    "features": "Features"
                 },
                 "metrics": {
                     "tab": "Metrics",
@@ -938,6 +932,11 @@
         "claim": "Claim",
         "claiming": "Claiming",
         "reject": "Reject",
+        "confirmRejection": {
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
@@ -955,9 +954,11 @@
         "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
-        "setupPin": "Set up PIN code",
-        "setPin": "Set PIN code",
-        "confirmPin": "Confirm PIN code",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "Enter your PIN",
         "saveBackupFile": "Save backup file",
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
@@ -1266,7 +1267,16 @@
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "claimed": {
+            "success": "Transaction claimed",
+            "error": "Claiming transaction failed"
+        },
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {
@@ -1296,7 +1306,8 @@
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PINs do not match.",
-            "incorrect": "Your current PIN is incorrect."
+            "incorrect": "Your current PIN is incorrect.",
+            "invalid": "Invalid PIN code."
         },
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
@@ -1323,11 +1334,13 @@
             "wrongAddressFormat": "The address is not correctly formatted.",
             "invalidAddress": "The address is not valid.",
             "insufficientFunds": "This wallet has insufficient funds.",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address.",
             "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "transaction": "There was an error sending your transaction. Please try again.",
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -1342,7 +1355,10 @@
             "noSynced": "No synced nodes are available.",
             "answer": "Failed to get an answer from all nodes.",
             "forbidden": "This node connection is forbidden.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node"
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",

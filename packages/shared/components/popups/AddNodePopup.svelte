@@ -1,48 +1,75 @@
 <script lang="typescript">
     import { Text, NodeConfigurationForm, Button, Spinner } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
-    import { INode, INetwork, IAuth } from '@core/network'
+    import { INode, INetwork } from '@core/network'
     import { closePopup } from '@lib/popup'
+    import { activeProfile, addNodeToActiveProfile } from '@core/profile'
+    import { showAppNotification } from '@lib/notifications'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let nodes: INode[] = []
     export let network: INetwork
-    export let isAddingNode: boolean = true
-    export let onSuccess = (..._: any[]): void => {}
+    export let isEditingNode: boolean = false
+    export let onSuccess: (..._: any[]) => void
 
-    const optNodeAuth: IAuth = node?.auth || { username: '', password: '', jwt: '' }
-    const isNetworkSwitch = false
-
-    let newNetwork: INetwork
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
 
-    const cleanNodeUrl = (_url: string): string => stripTrailingSlash(stripSpaces(_url))
-    $: node.url = cleanNodeUrl(node?.url)
+    async function handleAddNode(): Promise<void> {
+        try {
+            isBusy = true
+            await nodeConfigurationForm.validate({
+                validateUrl: true,
+                checkSameNetwork: true,
+                uniqueCheck: !isEditingNode,
+                checkNodeInfo: true,
+                validateClientOptions: true,
+            })
+            await addNodeToActiveProfile(node)
+            onSuccess()
+        } catch (err) {
+            if (err.type !== 'validationError') {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(err?.error ?? 'error.global.generic'),
+                })
+            }
+        } finally {
+            isBusy = false
+        }
+    }
 </script>
 
-<Text type="h4" classes="mb-6">{localize(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
-<NodeConfigurationForm bind:this={nodeConfigurationForm} bind:isBusy bind:node {nodes} {network} {onSuccess} />
-<div class="flex flex-row justify-between space-x-4 w-full">
-    <Button secondary classes="w-1/2" onClick={closePopup} disabled={isBusy}>
-        {localize('actions.cancel')}
-    </Button>
-    <Button
-        disabled={!node.url || isBusy}
-        type="submit"
-        form="node-config-form"
-        classes="w-1/2"
-        onClick={nodeConfigurationForm?.handleAddNode}
-    >
-        {#if isBusy}
-            <Spinner
-                busy={isBusy}
-                message={localize(`popups.node.${isAddingNode ? 'addingNode' : 'updatingNode'}`)}
-                classes="justify-center"
-            />
-        {:else}
-            {localize(`actions.${isAddingNode ? 'addNode' : 'updateNode'}`)}
-        {/if}
-    </Button>
+<div class="flex flex-col space-y-6">
+    <Text type="h4">{localize(`popups.node.title${isEditingNode ? 'Update' : 'Add'}`)}</Text>
+    <NodeConfigurationForm
+        bind:this={nodeConfigurationForm}
+        bind:node
+        {isBusy}
+        {nodes}
+        {network}
+        isDeveloperProfile={$activeProfile.isDeveloperProfile}
+    />
+    <div class="flex flex-row justify-between space-x-4 w-full">
+        <Button secondary classes="w-1/2" onClick={closePopup} disabled={isBusy}>
+            {localize('actions.cancel')}
+        </Button>
+        <Button
+            disabled={!node.url || isBusy}
+            type="submit"
+            form="node-config-form"
+            classes="w-1/2"
+            onClick={handleAddNode}
+        >
+            {#if isBusy}
+                <Spinner
+                    busy={isBusy}
+                    message={localize(`popups.node.${isEditingNode ? 'updatingNode' : 'addingNode'}`)}
+                    classes="justify-center"
+                />
+            {:else}
+                {localize(`actions.${isEditingNode ? 'updateNode' : 'addNode'}`)}
+            {/if}
+        </Button>
+    </div>
 </div>

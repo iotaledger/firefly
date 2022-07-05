@@ -1,5 +1,5 @@
 import { IAccountMetadata } from '@core/account'
-import { NetworkProtocol, NetworkType } from '@core/network'
+import { IClientOptions, NetworkProtocol, NetworkType } from '@core/network'
 import { ProfileType } from '../enums'
 import { IProfileSettings } from './profile-settings.interface'
 
@@ -16,4 +16,5 @@ export interface IPersistedProfile {
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
     lastUsedAccountId?: string
+    clientOptions: IClientOptions
 }

@@ -34,13 +34,13 @@
                 label: 'views.settings.networkConfiguration.nodeConfiguration.title',
                 value: localize(
                     `views.settings.networkConfiguration.nodeConfiguration.${
-                        $activeProfile?.settings?.clientOptions?.automaticNodeSelection ? 'automatic' : 'manual'
+                        $activeProfile?.clientOptions?.automaticNodeSelection ? 'automatic' : 'manual'
                     }`
                 ),
             })
             appVars.push({
                 label: 'general.nodeList',
-                value: $activeProfile?.settings?.clientOptions?.nodes?.map((node) => node?.url)?.toString(),
+                value: $activeProfile?.clientOptions?.nodes?.map((node) => node?.url)?.toString(),
             })
         }
         contentApp = concatenateInfo(appVars)

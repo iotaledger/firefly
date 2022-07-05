@@ -56,15 +56,15 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve(MOCK_MNEMONIC)
     }
 
-    getAccount(accountId: AccountId) {
-        return undefined
+    getAccount(accountId: AccountId): Promise<IAccount> {
+        throw new Error('Method not implemented.')
     }
 
-    getAccounts() {
-        return undefined
+    getAccounts(): Promise<IAccount[]> {
+        throw new Error('Method not implemented.')
     }
 
-    getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
+    getNodeInfo(url: string, auth?: IAuth): Promise<INodeInfoResponse> {
         return Promise.resolve({
             nodeInfo: {
                 name: 'HORNET',
@@ -108,8 +108,9 @@ export class ProfileManagerMock implements IProfileManager {
                     referencedBlocksPerSecond: 1.3,
                     referencedRate: 100,
                 },
+                supportedProtocolVersions: [],
+                pendingProtocolParameters: [],
                 features: [],
-                plugins: ['debug/v1', 'participation/v1', 'indexer/v1', 'mqtt/v1'],
             },
             url,
         })

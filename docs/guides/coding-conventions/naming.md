@@ -44,7 +44,6 @@ The following are some general rules about code naming that we follow:
         health?: number
         healthTxt?: NetworkStsHealthTxt
         curMilestone?: number
-        nodePlugins?: NodePlugin[]
     }
     ```
 
@@ -56,7 +55,6 @@ The following are some general rules about code naming that we follow:
         health?: number
         healthText?: NetworkStatusHealthText
         currentMilestone?: number
-        nodePlugins?: NodePlugin[]
     }
     ```
 
@@ -106,7 +104,9 @@ All TypeScript filenames are in `kebab-case`, e.g. `deep-link-handler.ts`. Some 
 
 ### Svelte
 
-All Svelte component and route filenames are in `PascalCase`, e.g. `LedgerTransaction.svelte`.
+Svelte component names / filenames use the following conventions:
+- **Must** be written in `PascalCase`
+- **Must** be suffixed with the component's type, e.g. `LedgerTransactionPopup` since it is a popup component (this applies to all component types, i.e. routers, views, inputs, buttons, modals, etc.)
 
 ## Acronyms
 

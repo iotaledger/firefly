@@ -1,8 +1,8 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import { BASE_TOKEN, NETWORK, networkHrp } from '@core/network'
+import { BASE_TOKEN, networkHrp } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { OutputTypes } from '@iota/types'
+import { IUTXOInput, OutputTypes } from '@iota/types'
 import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { truncateString } from '@lib/helpers'
@@ -38,6 +38,7 @@ export class Activity implements IActivity {
     transactionId?: string
     inclusionState: InclusionState
     time: Date
+    inputs?: IUTXOInput[]
 
     sender: Subject
     recipient: Subject
@@ -75,6 +76,7 @@ export class Activity implements IActivity {
         this.transactionId = transactionId
         this.inclusionState = InclusionState.Pending
         this.time = new Date()
+        this.inputs = undefined
 
         this.sender = { type: 'account', account: senderAccount }
         this.recipient = isInternal
@@ -90,10 +92,8 @@ export class Activity implements IActivity {
         this.tag = outputOptions?.features?.tag
 
         this.storageDeposit = Number(output.amount) - Number(outputOptions.amount)
-        this.expirationDate = new Date(Number(outputOptions?.unlocks?.expiration?.unixTime) * MILLISECONDS_PER_SECOND)
-        this.isAsync =
-            this.storageDeposit > 0 ||
-            !!(outputOptions?.unlocks?.expiration?.milestoneIndex || outputOptions?.unlocks?.expiration?.unixTime)
+        this.expirationDate = new Date(Number(outputOptions?.unlocks?.expirationUnixTime) * MILLISECONDS_PER_SECOND)
+        this.isAsync = this.storageDeposit > 0 || !!outputOptions?.unlocks?.expirationUnixTime
         this.isClaimed = false
 
         return this
@@ -110,11 +110,12 @@ export class Activity implements IActivity {
 
         this.type = getActivityType(isSubjectInternal(recipient))
         this.id = transactionId
-        this.isHidden = isActivityHiddenForAccountId(account.id, this.id)
+        this.isHidden = isActivityHiddenForAccountId(account.id, transactionId)
 
         this.transactionId = transactionId
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
+        this.inputs = transaction.payload.essence.inputs
 
         this.sender = getSenderFromTransaction(transaction, account.depositAddress)
         this.recipient = recipient
@@ -149,6 +150,7 @@ export class Activity implements IActivity {
         this.transactionId = outputData?.metadata?.transactionId
         this.inclusionState = InclusionState.Confirmed
         this.time = new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
+        this.inputs = undefined
 
         this.sender = getSenderFromOutput(outputData.output)
         this.recipient = recipient
