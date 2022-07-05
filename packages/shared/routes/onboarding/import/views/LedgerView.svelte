@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
@@ -24,25 +24,21 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{localize('views.importFromLedger.body')}</Text>
-        <Button
+    </div>
+    <div slot="leftpane__action" class="flex flex-col space-y-4">
+        <OnboardingButton
+            primaryText={localize('views.importFromLedger.haveFireflyLedger')}
+            secondaryText={localize('views.importFromLedger.haveFireflyLedgerDescription')}
             icon="settings"
-            classes="w-full mb-5"
-            secondary
             onClick={() => handleContinueClick(ProfileImportType.FireflyLedger)}
-        >
-            {localize('views.importFromLedger.haveFireflyLedger')}
-            <Text type="p" secondary smaller>{localize('views.importFromLedger.haveFireflyLedgerDescription')}</Text>
-        </Button>
-        <Button
+        />
+        <OnboardingButton
+            primaryText={localize('views.importFromLedger.haveTrinityLedger')}
+            secondaryText={localize('views.importFromLedger.haveTrinityLedgerDescription')}
             icon="settings"
-            classes="w-full mb-8"
-            secondary
             hidden={$newProfile.networkProtocol === NetworkProtocol.Shimmer}
             onClick={() => handleContinueClick(ProfileImportType.TrinityLedger)}
-        >
-            {localize('views.importFromLedger.haveTrinityLedger')}
-            <Text type="p" secondary smaller>{localize('views.importFromLedger.haveTrinityLedgerDescription')}</Text>
-        </Button>
+        />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
