@@ -19,6 +19,7 @@
         sendOutput,
         validateSendConfirmation,
         generateRawAmount,
+        assets,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
@@ -46,15 +47,19 @@
     let outputOptions: OutputOptions
     let error: BaseError
 
-    $: internal = recipient.type === 'account'
-    $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+    $: asset = asset ?? $assets?.[0]
     $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
+    $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+    $: internal = recipient.type === 'account'
+
     $: $$props, expirationDate, rawAmount, void _prepareOutput()
+
     $: expirationDate, (error = null)
     $: formattedFiatValue =
         formatCurrency(
             convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
         ) || '-'
+
     $: transactionDetails = {
         type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
         inclusionState: InclusionState.Pending,
