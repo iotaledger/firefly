@@ -1,12 +1,12 @@
 import { selectedAccount } from '@core/account'
 import { OutputTypes } from '@iota/types'
-import { OutputOptions, TransactionOptions } from '@iota/wallet'
+import { TransactionOptions } from '@iota/wallet'
 import { isTransferring } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
 
-export async function sendOutput(outputOptions: OutputOptions, output: OutputTypes): Promise<void> {
+export async function sendOutput(output: OutputTypes): Promise<void> {
     try {
         isTransferring.set(true)
         const account = get(selectedAccount)
@@ -14,12 +14,11 @@ export async function sendOutput(outputOptions: OutputOptions, output: OutputTyp
             remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
             skipSync: false,
         }
-        const { transactionId } = await account.sendOutputs([output], transferOptions)
+        const { transaction, transactionId } = await account.sendOutputs([output], transferOptions)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setNewTransaction(account, transactionId, outputOptions, output)
+            new Activity().setFromTransaction(transactionId, transaction, account)
         )
-        // TODO: fetch transaction
         isTransferring.set(false)
         return
     } catch (err) {

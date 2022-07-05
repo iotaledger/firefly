@@ -83,12 +83,17 @@
         storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
     }
 
+    async function validateAndSendOutput(): Promise<void> {
+        validateSendConfirmation(outputOptions, preparedOutput)
+        await sendOutput(preparedOutput)
+        closePopup()
+    }
+
     async function onConfirm(): Promise<void> {
         error = null
         try {
             if ($isSoftwareProfile) {
-                validateSendConfirmation(outputOptions, preparedOutput)
-                await checkStronghold(() => sendOutput(outputOptions, preparedOutput), true)
+                await checkStronghold(validateAndSendOutput, true)
             }
         } catch (err) {
             if (!error) {
@@ -120,13 +125,6 @@
             if (!error) {
                 error = err.error ? new BaseError({ message: err.error, logError: true }) : err
             }
-        }
-        if ($isTransferring) {
-            isTransferring.subscribe((value) => {
-                if (!value) {
-                    closePopup()
-                }
-            })
         }
     })
 </script>
