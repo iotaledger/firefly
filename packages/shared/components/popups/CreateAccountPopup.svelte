@@ -30,6 +30,7 @@
 
             isBusy = true
             error = null
+            await validateAccountName(trimmedAccountAlias)
             updatePopupProps({ accountAlias, color, error, isBusy })
             if ($isLedgerProfile) {
                 void promptUserToConnectLedger(false, _create, _cancel)
@@ -54,7 +55,6 @@
 
     async function _create(): Promise<void> {
         if (trimmedAccountAlias && color) {
-            await validateAccountName(trimmedAccountAlias)
             await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
             closePopup()
         }
