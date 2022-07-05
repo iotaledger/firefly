@@ -91,7 +91,8 @@ public class WalletPlugin extends Plugin {
     @PluginMethod()
     public void listen(final PluginCall call) {
         if (!isInitialized) {
-            call.reject("Wallet is not initialized yet");
+            call.resolve();
+            return;
         }
         if (!call.getData().has("actorId")
                 || !call.getData().has("id")
