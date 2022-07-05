@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
-    import { AccountSummaryAndAssetsPane, AccountActivityPane, LineChartPane, BarChartPane } from 'shared/components'
+    import { AccountSummary, AccountActivity, AccountAssetsList, ReceiveAddressSection, Pane } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { openPopup } from 'shared/lib/popup'
@@ -9,6 +9,7 @@
     import { activeProfile } from '@core/profile'
     import { isLedgerProfile } from '@core/profile'
     import { selectedAccount, selectedAccountId } from '@core/account'
+    import features from '@features/features'
 
     const { loggedIn } = $activeProfile
 
@@ -67,15 +68,31 @@
 </script>
 
 {#if $selectedAccount}
-    <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
+    <div class="w-full h-full flex flex-col flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900">
         {#key $selectedAccount?.id}
             <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
-                <AccountSummaryAndAssetsPane />
-                <AccountActivityPane />
-                <div class=" flex flex-col space-y-4">
-                    <LineChartPane />
-                    <BarChartPane />
+                <div class="flex flex-col space-y-4">
+                    <Pane overflow="visible" classes="flex-none">
+                        {#if features?.wallet?.accountSummary?.enabled}
+                            <AccountSummary />
+                        {/if}
+                    </Pane>
+                    <Pane classes="h-full p-6">
+                        {#if features?.wallet?.sendAndReceive?.enabled}
+                            <ReceiveAddressSection addressFontSize="sm" />
+                        {/if}
+                    </Pane>
                 </div>
+                <Pane classes="h-full">
+                    {#if features?.wallet?.assets?.enabled}
+                        <AccountAssetsList />
+                    {/if}
+                </Pane>
+                <Pane>
+                    {#if features?.wallet?.activityHistory?.enabled}
+                        <AccountActivity />
+                    {/if}
+                </Pane>
             </div>
         {/key}
     </div>

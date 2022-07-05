@@ -88,7 +88,13 @@ const features = {
     },
     wallet: {
         enabled: true,
-        accountSummaryAndAssets: {
+        accountSummary: {
+            enabled: true,
+        },
+        sendAndReceive: {
+            enabled: true,
+        },
+        assets: {
             enabled: true,
         },
         activityHistory: {
@@ -99,12 +105,6 @@ const features = {
             search: {
                 enabled: true,
             },
-        },
-        portfolioChart: {
-            enabled: false,
-        },
-        activityChart: {
-            enabled: false,
         },
     },
     staking: {

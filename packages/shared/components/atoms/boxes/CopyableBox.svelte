@@ -14,7 +14,7 @@
     let tooltipAnchor
     let showTooltip = false
 
-    function onClick(): void {
+    export function onClick(): void {
         if (isCopyable) {
             setClipboard(value, false)
             showTooltip = true
