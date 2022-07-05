@@ -59,7 +59,7 @@
             />
         {/each}
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
         <Animation animation="onboarding-network-desktop" />
     </div>
 </OnboardingLayout>
