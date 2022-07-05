@@ -13,7 +13,7 @@ import { handleDeepLinkSendOperation } from './operations/handleDeepLinkSendOper
  *
  * @return {void | DeepLinkRequest} The formatted content of a deep link request within the wallet context.
  */
-export const handleDeepLinkWalletContext = (url: URL): void => {
+export function handleDeepLinkWalletContext(url: URL): void {
     // Remove any leading and trailing slashes
     const pathnameParts = url.pathname.replace(/^\/+|\/+$/g, '').split('/')
 

@@ -40,7 +40,7 @@ export function handleDeepLinkSendOperation(searchParams: URLSearchParams, skipF
  *
  * @return {void | ISendFormParameters} The formatted parameters for the send operation.
  */
-const parseSendOperation = (searchParams: URLSearchParams): void | ISendFormParameters => {
+function parseSendOperation(searchParams: URLSearchParams): void | ISendFormParameters {
     // Check address exists and is valid this is not optional.
     const address = searchParams.get(SendOperationParameter.Address)
     if (!address) {
@@ -58,11 +58,11 @@ const parseSendOperation = (searchParams: URLSearchParams): void | ISendFormPara
 
     // Optional parameter: amount
     // Check if exists and is valid or does not exist
-    let parsedAmount: number | undefined
+    let parsedAmount: number
     const amountParam = searchParams.get(SendOperationParameter.Amount)
     if (amountParam) {
         parsedAmount = Number(amountParam)
-        if (Number.isNaN(parsedAmount) || !Number.isFinite(parsedAmount)) {
+        if (!parsedAmount) {
             return addError({ time: Date.now(), type: 'deepLink', message: `Amount is not a number '${amountParam}'` })
         }
     } else {

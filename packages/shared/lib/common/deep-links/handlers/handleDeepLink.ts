@@ -12,7 +12,7 @@ import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContex
  * @param {string} input The URL that was opened by the user.
  * @returns {void}
  */
-export const handleDeepLink = (input: string): void => {
+export function handleDeepLink(input: string): void {
     isDeepLinkRequestActive.set(true)
     if (!input || typeof input !== 'string') {
         isDeepLinkRequestActive.set(false)
