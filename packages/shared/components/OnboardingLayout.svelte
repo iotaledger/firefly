@@ -73,7 +73,7 @@
                     {#if allowBack}
                         <button
                             on:click={onBackClick}
-                            class="mb-8 w-6 h-6 {busy && 'pointer-events-none opacity-50'}"
+                            class="mb-8 w-6 h-6 {busy && 'pointer-events-none opacity-50'} highlight"
                             disabled={busy}
                         >
                             <Icon
@@ -130,5 +130,12 @@
     }
     footer {
         margin-bottom: env(safe-area-inset-bottom);
+    }
+    .highlight {
+        transition: filter 0.2s;
+
+        &:focus {
+            filter: brightness(1.3);
+        }
     }
 </style>
