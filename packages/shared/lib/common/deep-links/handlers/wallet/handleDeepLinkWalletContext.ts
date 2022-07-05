@@ -1,4 +1,3 @@
-import { resetDeepLink } from '@common/deep-links/actions'
 import { addError } from '@lib/errors'
 import { WalletOperation } from '../../enums'
 import { handleDeepLinkSendOperation } from './operations/handleDeepLinkSendOperation'
@@ -18,7 +17,6 @@ export function handleDeepLinkWalletContext(url: URL): void {
     const pathnameParts = url.pathname.replace(/^\/+|\/+$/g, '').split('/')
 
     if (pathnameParts.length === 0) {
-        resetDeepLink()
         return addError({ time: Date.now(), type: 'deepLink', message: 'No operation specified in the url' })
     }
 
@@ -30,7 +28,6 @@ export function handleDeepLinkWalletContext(url: URL): void {
             handleDeepLinkSendOperation(url.searchParams, true)
             break
         default:
-            resetDeepLink()
             return addError({
                 time: Date.now(),
                 type: 'deepLink',

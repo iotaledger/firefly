@@ -1,4 +1,3 @@
-import { resetDeepLink } from '@common/deep-links/actions'
 import { SendOperationParameter } from '@common/deep-links/enums'
 import { BASE_TOKEN, networkHrp } from '@core/network'
 import { activeProfile } from '@core/profile'
@@ -26,7 +25,6 @@ export function handleDeepLinkSendOperation(searchParams: URLSearchParams, skipF
             },
         })
     }
-    resetDeepLink()
 }
 
 /**
@@ -44,11 +42,9 @@ function parseSendOperation(searchParams: URLSearchParams): void | ISendFormPara
     // Check address exists and is valid this is not optional.
     const address = searchParams.get(SendOperationParameter.Address)
     if (!address) {
-        resetDeepLink()
         return addError({ time: Date.now(), type: 'deepLink', message: 'No address specified in the url path' })
     }
     if (!isValidAddressAndPrefix(address, get(networkHrp))) {
-        resetDeepLink()
         return addError({
             time: Date.now(),
             type: 'deepLink',

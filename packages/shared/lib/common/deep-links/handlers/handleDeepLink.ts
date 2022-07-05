@@ -15,21 +15,20 @@ import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContex
 export function handleDeepLink(input: string): void {
     isDeepLinkRequestActive.set(true)
     if (!input || typeof input !== 'string') {
-        isDeepLinkRequestActive.set(false)
+        resetDeepLink()
         return
     }
 
     try {
         const url = new URL(input)
-
         if (url.protocol === `${process.env.APP_PROTOCOL}:`) {
             switch (url.hostname) {
                 case DeepLinkContext.Wallet:
                     get(dashboardRouter).goTo(DashboardRoute.Wallet)
-                    return handleDeepLinkWalletContext(url)
+                    handleDeepLinkWalletContext(url)
+                    break
                 default:
-                    resetDeepLink()
-                    return addError({
+                    addError({
                         time: Date.now(),
                         type: 'deepLink',
                         message: `Unrecognized context '${url.host}'`,
@@ -37,14 +36,15 @@ export function handleDeepLink(input: string): void {
             }
         } else {
             resetDeepLink()
-            return addError({
+            addError({
                 time: Date.now(),
                 type: 'deepLink',
                 message: `Error handling deep link. Does not start with ${process.env.APP_PROTOCOL}://`,
             })
         }
     } catch (err) {
+        addError({ time: Date.now(), type: 'deepLink', message: `Error handling deep link. ${err.message}` })
+    } finally {
         resetDeepLink()
-        return addError({ time: Date.now(), type: 'deepLink', message: `Error handling deep link. ${err.message}` })
     }
 }
