@@ -25,6 +25,8 @@
         }
     }
 
+    $: value.length === PIN_LENGTH && dispatch('filled')
+
     let root: HTMLElement
     const inputElements: HTMLElement[] = []
 
@@ -64,8 +66,8 @@
         }
     }
 
-    function selectFirstEmptyRoot(event: KeyboardEvent): void {
-        if (event.target === root) {
+    function selectFirstEmptyRoot(event: FocusEvent | MouseEvent): void {
+        if (event.target === root && !inputElements.some((input) => input === event.relatedTarget)) {
             selectFirstEmpty()
         }
     }
@@ -159,7 +161,7 @@
                             class:glimpse
                             {disabled}
                             on:input={(event) => (isAndroid ? changeHandlerHelper(event, i) : undefined)}
-                            on:keydown={(event) => changeHandler(event)}
+                            on:keydown={changeHandler}
                             on:contextmenu|preventDefault
                         />
                     {:else}
@@ -172,8 +174,9 @@
                             class:active={!input || input.length === 0}
                             class:glimpse
                             {disabled}
-                            on:keydown={(event) => changeHandler(event)}
+                            on:keydown={changeHandler}
                             on:contextmenu|preventDefault
+                            tabindex="-1"
                         />
                     {/if}
                 {/each}
