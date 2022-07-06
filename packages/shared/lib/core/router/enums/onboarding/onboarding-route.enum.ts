@@ -4,7 +4,7 @@ export enum OnboardingRoute {
     LedgerSetup = 'ledgerSetup',
     Migration = 'migrate',
     NetworkSetup = 'network',
-    Password = 'password',
+    PasswordSetup = 'password',
     ProfileBackup = 'backup',
     ProfileRecovery = 'recovery',
     ProfileSetup = 'profileSetup',

@@ -38,7 +38,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 const profileType = get(newProfile)?.type
                 if (profileType) {
                     if (profileType === ProfileType.Software) {
-                        nextRoute = OnboardingRoute.Password
+                        nextRoute = OnboardingRoute.PasswordSetup
                     } else if (profileType === ProfileType.Ledger) {
                         nextRoute = OnboardingRoute.Protection
                     }
@@ -86,7 +86,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
 
-            case OnboardingRoute.Password: {
+            case OnboardingRoute.PasswordSetup: {
                 const { password } = params
                 if (password) {
                     nextRoute = OnboardingRoute.Protection

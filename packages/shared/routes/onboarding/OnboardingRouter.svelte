@@ -6,6 +6,7 @@
         LedgerSetupRouter,
         MigrationRouter,
         NetworkSetupRouter,
+        PasswordSetupRouter,
         ProfileBackupRouter,
         ProfileRecoveryRouter,
         ProfileSetupRouter,
@@ -14,7 +15,6 @@
 
         // views
         CongratulationsView,
-        PasswordView,
         WelcomeView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
@@ -44,9 +44,9 @@
         <LedgerSetupRouter />
     </Transition>
     <!--  -->
-{:else if $onboardingRoute === OnboardingRoute.Password}
+{:else if $onboardingRoute === OnboardingRoute.PasswordSetup}
     <Transition>
-        <PasswordView />
+        <PasswordSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Protection}
     <Transition transition={false}>
