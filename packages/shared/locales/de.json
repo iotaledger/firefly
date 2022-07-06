@@ -1206,7 +1206,8 @@
         "accountColor": "Wallet-Farbe",
         "myAssets": "Meine Assets",
         "option": "Option",
-        "total": "Gesamt: {balance}"
+        "total": "Gesamt: {balance}",
+        "activityDetails": "Transaktionsdetails"
     },
     "dates": {
         "today": "Heute",
