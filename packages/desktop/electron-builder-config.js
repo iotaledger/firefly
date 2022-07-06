@@ -45,6 +45,7 @@ const baseConfig = () => ({
             Categories: 'Office;Network;Finance',
         },
         icon: './public/assets/icons/prod/icon1024x1024.png',
+        mimeTypes: [`x-scheme-handler/${getAppProtocol('alpha')}`],
     },
     mac: {
         icon: './public/assets/icons/prod/icon1024x1024.png',
