@@ -79,7 +79,7 @@
     } // zxcvbn lib recommends to not validate long passwords because of performance issues https://github.com/dropbox/zxcvbn#user-content-performance
 
     onMount(() => {
-        clearStrongholdPassword()
+        existingPassword && clearStrongholdPassword()
     })
 </script>
 
