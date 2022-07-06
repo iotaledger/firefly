@@ -73,7 +73,7 @@
                 {:else}
                     <button
                         on:click={handleMnemonicVisibilityClick}
-                        class="absolute top-10 right-10 flex flex-row items-center"
+                        class="absolute top-10 right-10 flex flex-row items-center highlight"
                         type="button"
                     >
                         <Text smaller overrideColor classes="text-blue-500 mr-2">
@@ -86,3 +86,13 @@
         {/if}
     </div>
 </OnboardingLayout>
+
+<style type="text/scss">
+    .highlight {
+        transition: filter 0.2s;
+
+        &:focus {
+            filter: brightness(1.3);
+        }
+    }
+</style>
