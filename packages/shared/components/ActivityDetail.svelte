@@ -27,7 +27,6 @@
     export let confirmed: boolean
     export let payload: Payload
     export let balance: number // migration tx
-    export let onBackClick = (): void => {}
 
     let date = localize('error.invalidDate')
     $: {
