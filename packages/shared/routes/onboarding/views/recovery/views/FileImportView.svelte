@@ -9,6 +9,7 @@
         setProfileRecoveryTypeFromFilename,
         validateBackupFile,
     } from '@contexts/onboarding'
+    import { onMount } from 'svelte'
 
     interface FileWithPath extends File {
         path?: string
@@ -72,6 +73,10 @@
 
         reader.readAsArrayBuffer(fileWithPath)
     }
+
+    onMount(() => {
+        setImportFile(null, null)
+    })
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick}>

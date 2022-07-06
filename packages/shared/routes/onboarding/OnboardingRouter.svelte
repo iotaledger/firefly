@@ -20,6 +20,9 @@
         WelcomeView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
+    // import { newProfile } from '../../lib/contexts/onboarding'
+
+    // $: console.log(`NEW PROFILE (${$onboardingRoute}): `, $newProfile)
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.Welcome}

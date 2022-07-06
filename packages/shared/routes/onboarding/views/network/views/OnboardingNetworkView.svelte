@@ -4,7 +4,7 @@
     import features from 'shared/features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkType } from '@core/network'
+    import { INode, NetworkType } from '@core/network'
     import { networkRouter } from '@core/router'
     import {
         cleanupOnboarding,
@@ -26,7 +26,7 @@
             updateNewProfile({ networkType })
         } else {
             updateNewProfile({ networkProtocol, networkType })
-            await initProfileManagerFromNewProfile()
+            await initProfileManagerFromNewProfile(<INode>{}, true)
         }
         $networkRouter.next({ networkType })
     }

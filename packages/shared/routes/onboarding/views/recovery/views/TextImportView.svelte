@@ -4,11 +4,12 @@
     import { localize } from '@core/i18n'
     import { recoveryRouter } from '@core/router'
     import { profileRecoveryType, isGettingMigrationData, mnemonic } from '@contexts/onboarding'
+    import { onMount } from 'svelte'
 
     let input = ''
 
     function handleContinueClick(): void {
-        mnemonic.set(input.split(' '))
+        $mnemonic = input.split(' ')
         $recoveryRouter.next({ migrationSeed: input })
     }
 
@@ -17,6 +18,10 @@
             $recoveryRouter.previous()
         }
     }
+
+    onMount(() => {
+        $mnemonic = null
+    })
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick}>

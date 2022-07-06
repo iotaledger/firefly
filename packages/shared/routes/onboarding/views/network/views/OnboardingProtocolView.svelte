@@ -9,7 +9,7 @@
     } from '@contexts/onboarding'
     import { AppStage, appStage } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { INode, NetworkProtocol, NetworkType } from '@core/network'
     import { networkRouter } from '@core/router'
     import features from 'shared/features/features'
     import { onMount } from 'svelte'
@@ -19,7 +19,7 @@
             updateNewProfile({ networkProtocol })
         } else {
             updateNewProfile({ networkProtocol, networkType: NetworkType.Mainnet })
-            await initProfileManagerFromNewProfile()
+            await initProfileManagerFromNewProfile(<INode>{}, true)
         }
         $networkRouter.next()
     }
