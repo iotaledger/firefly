@@ -14,6 +14,7 @@
     let wordChoices = ['', '', '']
     let verifyIndex = 0
     let verified = false
+    const wordElements: HTMLButtonElement[] = []
 
     function fillChoices(): void {
         const currentIndex = verifyRecoveryPhrase.length
@@ -56,14 +57,35 @@
     function handleContinue(): void {
         $backupRouter.next()
     }
+
     function handleBackClick(): void {
         $backupRouter.previous()
+    }
+
+    function handleKeyPress(event: KeyboardEvent): void {
+        if (!verified) {
+            switch (event.key) {
+                case '1':
+                    wordElements[0].click()
+                    break
+                case '2':
+                    wordElements[1].click()
+                    break
+                case '3':
+                    wordElements[2].click()
+                    break
+                default:
+                    break
+            }
+        }
     }
 
     onMount(() => {
         fillChoices()
     })
 </script>
+
+<svelte:window on:keypress={handleKeyPress} />
 
 <OnboardingLayout onBackClick={handleBackClick} {busy} reverseContent={$mobile && !verified}>
     <div slot="title">
@@ -76,13 +98,14 @@
             </Text>
             {#if !$mobile}
                 <Text type="p" classes="mb-4">{localize('views.verifyRecoveryPhrase.word')} #{verifyIndex + 1}</Text>
-                {#each wordChoices as word}
+                {#each wordChoices as word, i}
                     <button
                         type="button"
                         class="w-full flex flex-row p-4 mb-4 rounded-2xl border border-solid items-center justify-between border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-gray-500 dark:focus:border-gray-700"
                         on:click={() => handleChoice(word)}
+                        bind:this={wordElements[i]}
                     >
-                        <Text smaller classes="ml-3">{word}</Text>
+                        <Text smaller classes="ml-3">{`${i + 1}. ${word}`}</Text>
                         <Icon icon="chevron-right" classes="text-gray-800 dark:text-white" />
                     </button>
                 {/each}
@@ -99,7 +122,7 @@
     </div>
     <div slot="leftpane__action">
         {#if verified}
-            <Button classes="w-full" onClick={() => handleContinue()} disabled={busy}>
+            <Button autofocus classes="w-full" onClick={() => handleContinue()} disabled={busy}>
                 {localize('actions.continue')}
             </Button>
         {:else if $mobile && !verified}
