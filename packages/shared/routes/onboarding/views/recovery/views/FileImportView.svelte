@@ -29,6 +29,7 @@
     }
 
     function handleBackClick(): void {
+        profileRecoveryType.set(null)
         $recoveryRouter.previous()
     }
 
