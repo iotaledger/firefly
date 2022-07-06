@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Button, Link, OnboardingLayout, Text, Video } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { ledgerRouter } from '@core/router'
+    import { ledgerSetupRouter } from '@core/router'
     import { LEDGER_MIGRATION_VIDEO } from '@lib/migration'
     import { Platform } from '@lib/platform'
 
@@ -11,11 +11,11 @@
     }
 
     function handleNextClick(): void {
-        $ledgerRouter.next()
+        $ledgerSetupRouter.next()
     }
 
     function handleBackClick(): void {
-        $ledgerRouter.previous()
+        $ledgerSetupRouter.previous()
     }
 
     onMount(() => {

@@ -7,7 +7,7 @@
     import { Platform } from '@lib/platform'
     import { promptUserToConnectLedger } from '@lib/ledger'
     import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from '@lib/migration'
-    import { onboardingRouter, ledgerRouter } from '@core/router'
+    import { onboardingRouter, ledgerSetupRouter } from '@core/router'
     import { LedgerAppName } from '@lib/typings/ledger'
     import { formatUnitBestMatch } from '@lib/units'
     import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
@@ -115,7 +115,7 @@
         if (wasMigrated) {
             resetMigrationState()
         }
-        $ledgerRouter.reset()
+        $ledgerSetupRouter.reset()
     })
 </script>
 

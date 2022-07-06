@@ -2,10 +2,10 @@
     import { Animation, Box, Button, OnboardingLayout, Spinner, Text, Toast } from 'shared/components'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { mobile } from '@core/app'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
-    import { Platform } from '@lib/platform'
-    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
+    import { mobile } from '../../../../../lib/core/app'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '../../../../../lib/currency'
+    import { Platform } from '../../../../../lib/platform'
+    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '../../../../../lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
         bundlesWithUnspentAddresses,
@@ -16,13 +16,13 @@
         resetMigrationState,
         spentAddressesWithNoBundleHashes,
         unselectedInputs,
-    } from '@lib/migration'
-    import { closePopup, openPopup } from '@lib/popup'
-    import { formatUnitBestMatch } from '@lib/units'
-    import { localize } from '@core/i18n'
-    import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
-    import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
-    import { onboardingRouter } from '@core/router'
+    } from '../../../../../lib/migration'
+    import { closePopup, openPopup } from '../../../../../lib/popup'
+    import { formatUnitBestMatch } from '../../../../../lib/units'
+    import { localize } from '../../../../../lib/core/i18n'
+    import { AvailableExchangeRates, CurrencyTypes } from '../../../../../lib/typings/currency'
+    import { ProfileRecoveryType, profileRecoveryType } from '../../../../../lib/contexts/onboarding'
+    import { onboardingRouter } from '../../../../../lib/core/router'
 
     const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
 

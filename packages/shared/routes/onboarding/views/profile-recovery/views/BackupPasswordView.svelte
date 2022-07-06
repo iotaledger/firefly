@@ -3,13 +3,13 @@
     import { Animation, Button, OnboardingLayout, PasswordInput, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { recoveryRouter, RecoveryRouter } from '@core/router'
+    import { profileRecoveryRouter, ProfileRecoveryRouter } from '@core/router'
     import { profileRecoveryType, restoreBackupFromFile, isGettingMigrationData } from '@contexts/onboarding'
 
     export let error = ''
     export let busy = false
 
-    const { importFile } = getContext<RecoveryRouter>('importRouter')
+    const { importFile } = getContext<ProfileRecoveryRouter>('importRouter')
 
     let password = ''
 
@@ -17,7 +17,7 @@
         if (password) {
             try {
                 await restoreBackupFromFile(importFile, password)
-                $recoveryRouter.next()
+                $profileRecoveryRouter.next()
             } catch (err) {
                 console.error(err)
                 error = localize('error.password.incorrect')
@@ -29,7 +29,7 @@
         // We are deliberately using "isGettingMigrationData"
         // We do not want to display the spinner if stronghold is being imported.
         if (!busy && !$isGettingMigrationData) {
-            $recoveryRouter.previous()
+            $profileRecoveryRouter.previous()
         }
     }
 </script>

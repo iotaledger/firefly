@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { ledgerRouter } from '@core/router'
+    import { ledgerSetupRouter } from '@core/router'
     import { formatAddressForLedger, promptUserToConnectLedger } from '@lib/ledger'
 
     let newAddress = ''
@@ -83,11 +83,11 @@
     // }
 
     function handleContinueClick(): void {
-        $ledgerRouter.next()
+        $ledgerSetupRouter.next()
     }
 
     function handleBackClick(): void {
-        $ledgerRouter.previous()
+        $ledgerSetupRouter.previous()
     }
 </script>
 

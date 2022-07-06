@@ -2,7 +2,7 @@
     import { Animation, Button, Dropzone, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { recoveryRouter } from '@core/router'
+    import { profileRecoveryRouter } from '@core/router'
     import {
         ImportFile,
         setImportFile,
@@ -26,11 +26,11 @@
         validateBackupFile(fileName)
         setProfileRecoveryTypeFromFilename(fileName)
         setImportFile(importFile, filePath)
-        $recoveryRouter.next()
+        $profileRecoveryRouter.next()
     }
 
     function handleBackClick(): void {
-        $recoveryRouter.previous()
+        $profileRecoveryRouter.previous()
     }
 
     function setFile(buffer?: ImportFile, file?: FileWithPath): void {

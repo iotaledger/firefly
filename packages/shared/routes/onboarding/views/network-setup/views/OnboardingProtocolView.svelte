@@ -10,7 +10,7 @@
     import { AppStage, appStage } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode, NetworkProtocol, NetworkType } from '@core/network'
-    import { networkRouter } from '@core/router'
+    import { networkSetupRouter } from '@core/router'
     import features from 'shared/features/features'
     import { onMount } from 'svelte'
 
@@ -21,12 +21,12 @@
             updateNewProfile({ networkProtocol, networkType: NetworkType.Mainnet })
             await initProfileManagerFromNewProfile(<INode>{}, true)
         }
-        $networkRouter.next()
+        $networkSetupRouter.next()
     }
 
     async function onBackClick(): Promise<void> {
         await cleanupOnboarding(true)
-        $networkRouter.previous()
+        $networkSetupRouter.previous()
     }
 
     onMount(() => {

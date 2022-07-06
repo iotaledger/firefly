@@ -1,16 +1,14 @@
 export enum OnboardingRoute {
     AppSetup = 'appSetup',
     Backup = 'backup',
-    Balance = 'balance',
     ClaimRewards = 'claimRewards',
     Congratulations = 'congratulations',
     LedgerSetup = 'ledgerSetup',
     Migration = 'migrate',
-    Network = 'network',
+    NetworkSetup = 'network',
     Password = 'password',
+    ProfileRecovery = 'recovery',
     ProfileSetup = 'profileSetup',
     Protection = 'protect',
-    Recovery = 'recovery',
-    Secure = 'secure',
     Welcome = 'welcome',
 }

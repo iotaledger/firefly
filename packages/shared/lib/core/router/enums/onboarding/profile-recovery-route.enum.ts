@@ -1,4 +1,4 @@
-export enum RecoveryRoute {
+export enum ProfileRecoveryRoute {
     TextImport = 'textImport',
     FileImport = 'fileImport',
     LedgerImport = 'ledgerImport',

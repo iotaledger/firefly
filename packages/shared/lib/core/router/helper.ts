@@ -13,14 +13,14 @@ import {
     appSetupRouter,
     BackupRouter,
     backupRouter,
-    RecoveryRouter,
-    recoveryRouter,
-    ledgerRouter,
-    LedgerRouter,
+    ProfileRecoveryRouter,
+    profileRecoveryRouter,
+    ledgerSetupRouter,
+    LedgerSetupRouter,
     MigrationRouter,
     migrationRouter,
-    NetworkRouter,
-    networkRouter,
+    NetworkSetupRouter,
+    networkSetupRouter,
     ProfileSetupRouter,
     profileSetupRouter,
     protectionRouter,
@@ -48,12 +48,12 @@ function initBaseRouters(): void {
 function initSubrouters(): void {
     appSetupRouter.set(new AppSetupRouter())
     backupRouter.set(new BackupRouter())
-    ledgerRouter.set(new LedgerRouter())
+    ledgerSetupRouter.set(new LedgerSetupRouter())
     migrationRouter.set(new MigrationRouter())
-    networkRouter.set(new NetworkRouter())
+    networkSetupRouter.set(new NetworkSetupRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
     protectionRouter.set(new ProtectionRouter())
-    recoveryRouter.set(new RecoveryRouter())
+    profileRecoveryRouter.set(new ProfileRecoveryRouter())
 }
 
 export function resetRouters(): void {
@@ -72,10 +72,10 @@ function resetBaseRouters(): void {
 function resetSubrouters(): void {
     get(appSetupRouter).reset()
     get(backupRouter).reset()
-    get(recoveryRouter).reset()
-    get(ledgerRouter).reset()
+    get(profileRecoveryRouter).reset()
+    get(ledgerSetupRouter).reset()
     get(migrationRouter).reset()
-    get(networkRouter).reset()
+    get(networkSetupRouter).reset()
     get(profileSetupRouter).reset()
     get(protectionRouter).reset()
 }

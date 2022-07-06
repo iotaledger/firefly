@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
     import { currentLedgerMigrationProgress } from '@lib/migration'
-    import { FireflyEvent, ledgerRoute, ledgerRouter, LedgerRoute } from '@core/router'
+    import { FireflyEvent, ledgerSetupRoute, ledgerSetupRouter, LedgerSetupRoute } from '@core/router'
     import {
         AccountIndexView,
         ConnectView,
@@ -14,24 +14,24 @@
     } from './views'
     import { LedgerMigrationProgress } from '@lib/typings/migration'
 
-    $: $ledgerRoute, updateMigrationProgress()
+    $: $ledgerSetupRoute, updateMigrationProgress()
 
     onMount(() => {
-        $ledgerRouter.restartIfNotInLedgerFlow()
+        $ledgerSetupRouter.restartIfNotInLedgerFlow()
     })
 
     const updateMigrationProgress = (): void => {
-        switch ($ledgerRoute) {
-            case LedgerRoute.Connect:
+        switch ($ledgerSetupRoute) {
+            case LedgerSetupRoute.Connect:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.InstallLedgerApp)
                 break
-            case LedgerRoute.GenerateAddress:
+            case LedgerSetupRoute.GenerateAddress:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.GenerateAddress)
                 break
-            case LedgerRoute.SwitchApps:
+            case LedgerSetupRoute.SwitchApps:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.SwitchLedgerApp)
                 break
-            case LedgerRoute.AccountIndex:
+            case LedgerSetupRoute.AccountIndex:
                 currentLedgerMigrationProgress.set(LedgerMigrationProgress.TransferFunds)
                 break
             default:
@@ -41,39 +41,39 @@
     }
 
     function next(event: CustomEvent<FireflyEvent>): void {
-        $ledgerRouter.next(event.detail)
+        $ledgerSetupRouter.next(event.detail)
     }
 
     function previous(): void {
-        $ledgerRouter.previous()
+        $ledgerSetupRouter.previous()
     }
 </script>
 
-{#if $ledgerRoute === LedgerRoute.Connect}
+{#if $ledgerSetupRoute === LedgerSetupRoute.Connect}
     <Transition>
         <ConnectView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoute.RestoreFromLedger}
+{:else if $ledgerSetupRoute === LedgerSetupRoute.RestoreFromLedger}
     <Transition>
         <RestoreFromLedgerView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoute.LegacyIntro}
+{:else if $ledgerSetupRoute === LedgerSetupRoute.LegacyIntro}
     <Transition>
         <LegacyIntroView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoute.InstallationGuide}
+{:else if $ledgerSetupRoute === LedgerSetupRoute.InstallationGuide}
     <Transition>
         <InstallationGuideView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoute.GenerateAddress}
+{:else if $ledgerSetupRoute === LedgerSetupRoute.GenerateAddress}
     <Transition>
         <GenerateNewAddressView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoute.SwitchApps}
+{:else if $ledgerSetupRoute === LedgerSetupRoute.SwitchApps}
     <Transition>
         <SwitchAppsView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $ledgerRoute === LedgerRoute.AccountIndex}
+{:else if $ledgerSetupRoute === LedgerSetupRoute.AccountIndex}
     <Transition>
         <AccountIndexView on:next={next} on:previous={previous} />
     </Transition>

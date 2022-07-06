@@ -1,4 +1,4 @@
-export enum LedgerRoute {
+export enum LedgerSetupRoute {
     Connect = 'connect',
     RestoreFromLedger = 'restoreFromLedger',
     LegacyIntro = 'legacyIntro',

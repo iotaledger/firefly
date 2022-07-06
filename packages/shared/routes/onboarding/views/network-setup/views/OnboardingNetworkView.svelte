@@ -5,7 +5,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode, NetworkType } from '@core/network'
-    import { networkRouter } from '@core/router'
+    import { networkSetupRouter } from '@core/router'
     import {
         cleanupOnboarding,
         newProfile,
@@ -28,14 +28,14 @@
             updateNewProfile({ networkProtocol, networkType })
             await initProfileManagerFromNewProfile(<INode>{}, true)
         }
-        $networkRouter.next({ networkType })
+        $networkSetupRouter.next({ networkType })
     }
 
     async function onBackClick(): Promise<void> {
         const isDeveloperProfile = $newProfile.isDeveloperProfile
         await cleanupOnboarding(true)
         updateNewProfile({ isDeveloperProfile })
-        $networkRouter.previous()
+        $networkSetupRouter.previous()
     }
 </script>
 

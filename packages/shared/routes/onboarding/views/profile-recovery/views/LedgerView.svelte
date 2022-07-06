@@ -3,16 +3,16 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
-    import { recoveryRouter } from '@core/router'
+    import { profileRecoveryRouter } from '@core/router'
     import { newProfile, profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
 
     function handleContinueClick(importType: ProfileRecoveryType): void {
         profileRecoveryType.set(importType)
-        $recoveryRouter.next({ profileRecoveryType: $profileRecoveryType })
+        $profileRecoveryRouter.next({ profileRecoveryType: $profileRecoveryType })
     }
 
     function handleBackClick(): void {
-        $recoveryRouter.previous()
+        $profileRecoveryRouter.previous()
     }
 </script>
 

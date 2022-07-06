@@ -2,7 +2,7 @@
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { recoveryRouter } from '@core/router'
+    import { profileRecoveryRouter } from '@core/router'
     import { profileRecoveryType, isGettingMigrationData, mnemonic } from '@contexts/onboarding'
     import { onMount } from 'svelte'
 
@@ -10,12 +10,12 @@
 
     function handleContinueClick(): void {
         $mnemonic = input.split(' ')
-        $recoveryRouter.next({ migrationSeed: input })
+        $profileRecoveryRouter.next({ migrationSeed: input })
     }
 
     function handleBackClick(): void {
         if (!$isGettingMigrationData) {
-            $recoveryRouter.previous()
+            $profileRecoveryRouter.previous()
         }
     }
 

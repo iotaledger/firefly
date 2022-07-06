@@ -2,11 +2,11 @@
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { recoveryRouter } from '@core/router'
+    import { profileRecoveryRouter } from '@core/router'
     import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
 
     function handleContinueClick(): void {
-        $recoveryRouter.next()
+        $profileRecoveryRouter.next()
     }
 </script>
 

@@ -1,7 +1,7 @@
 <script type="typescript">
     import { Animation, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { ledgerRouter } from '@core/router'
+    import { ledgerSetupRouter } from '@core/router'
     import { promptUserToConnectLedger } from '@lib/ledger'
 
     let restoring = false
@@ -44,7 +44,7 @@
         promptUserToConnectLedger(false, _onConnected, _onCancel)
     }
     function handleBackClick(): void {
-        $ledgerRouter.previous()
+        $ledgerSetupRouter.previous()
     }
 </script>
 

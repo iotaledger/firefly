@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
     import { deleteAccountsAndDatabase, destroyProfileManager, getNodeInfo } from '@core/profile-manager'
-    import { networkRouter } from '@core/router'
+    import { networkSetupRouter } from '@core/router'
     import { initProfileManagerFromNewProfile } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
 
@@ -13,7 +13,7 @@
     let formError = ''
 
     function handleBackClick(): void {
-        $networkRouter.previous()
+        $networkSetupRouter.previous()
     }
 
     async function handleContinueClick(): Promise<void> {
@@ -28,7 +28,7 @@
             })
             await initProfileManagerFromNewProfile(node, true)
             await getNodeInfo(node.url)
-            $networkRouter.next()
+            $networkSetupRouter.next()
         } catch (err) {
             console.error(err)
             if (err?.error?.includes('error sending request for url')) {

@@ -2,7 +2,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { ledgerRouter } from '@core/router'
+    import { ledgerSetupRouter } from '@core/router'
     import { profileRecoveryType, ProfileRecoveryType, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
     import { ledgerDeviceState, stopPollingLedgerStatus } from '@lib/ledger'
     import { openPopup } from '@lib/popup'
@@ -53,11 +53,11 @@
         } else {
             // getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
         }
-        $ledgerRouter.next()
+        $ledgerSetupRouter.next()
     }
 
     function handleBackClick(): void {
-        $ledgerRouter.previous()
+        $ledgerSetupRouter.previous()
     }
 
     onMount(() => {

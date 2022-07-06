@@ -1,3 +1,4 @@
+export { default as BalanceView } from './BalanceView.svelte'
 export { default as BundleMiningWarningView } from './BundleMiningWarningView.svelte'
 export { default as MigrateView } from './MigrateView.svelte'
 export { default as SecureSpentAddressesView } from './SecureSpentAddressesView.svelte'

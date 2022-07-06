@@ -3,16 +3,16 @@ import { get, writable } from 'svelte/store'
 import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { onboardingRouter } from '../onboarding-router'
-import { LedgerRoute } from '../enums'
+import { LedgerSetupRoute } from '../enums'
 import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
 
-export const ledgerRoute = writable<LedgerRoute>(null)
-export const ledgerRouter = writable<LedgerRouter>(null)
+export const ledgerSetupRoute = writable<LedgerSetupRoute>(null)
+export const ledgerSetupRouter = writable<LedgerSetupRouter>(null)
 
-export class LedgerRouter extends Subrouter<LedgerRoute> {
+export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
     constructor() {
-        super(LedgerRoute.LegacyIntro, ledgerRoute, get(onboardingRouter))
+        super(LedgerSetupRoute.LegacyIntro, ledgerSetupRoute, get(onboardingRouter))
     }
 
     restartIfNotInLedgerFlow(): void {
@@ -20,44 +20,44 @@ export class LedgerRouter extends Subrouter<LedgerRoute> {
         // reinitialize the init view only if we are not in the middle of a ledger flow
         if (this.history.length === 0) {
             if (setupType === ProfileRecoveryType.Seed || setupType === ProfileRecoveryType.FireflyLedger) {
-                this.routeStore.set(LedgerRoute.Connect)
+                this.routeStore.set(LedgerSetupRoute.Connect)
             } else {
-                this.routeStore.set(LedgerRoute.LegacyIntro)
+                this.routeStore.set(LedgerSetupRoute.LegacyIntro)
             }
         }
     }
 
     next(event?: FireflyEvent): void {
-        let nextRoute: LedgerRoute
+        let nextRoute: LedgerSetupRoute
         const currentRoute = get(this.routeStore)
         const setupType = get(profileRecoveryType)
 
         switch (currentRoute) {
-            case LedgerRoute.Connect:
+            case LedgerSetupRoute.Connect:
                 if (setupType === ProfileRecoveryType.FireflyLedger) {
-                    nextRoute = LedgerRoute.RestoreFromLedger
+                    nextRoute = LedgerSetupRoute.RestoreFromLedger
                 } else if (setupType === ProfileRecoveryType.TrinityLedger) {
-                    nextRoute = LedgerRoute.GenerateAddress
+                    nextRoute = LedgerSetupRoute.GenerateAddress
                 } else {
                     this.parentRouter.next(event)
                 }
                 break
-            case LedgerRoute.RestoreFromLedger:
+            case LedgerSetupRoute.RestoreFromLedger:
                 this.parentRouter.next(event)
                 break
-            case LedgerRoute.LegacyIntro:
-                nextRoute = LedgerRoute.InstallationGuide
+            case LedgerSetupRoute.LegacyIntro:
+                nextRoute = LedgerSetupRoute.InstallationGuide
                 break
-            case LedgerRoute.InstallationGuide:
-                nextRoute = LedgerRoute.Connect
+            case LedgerSetupRoute.InstallationGuide:
+                nextRoute = LedgerSetupRoute.Connect
                 break
-            case LedgerRoute.GenerateAddress:
-                nextRoute = LedgerRoute.SwitchApps
+            case LedgerSetupRoute.GenerateAddress:
+                nextRoute = LedgerSetupRoute.SwitchApps
                 break
-            case LedgerRoute.SwitchApps:
-                nextRoute = LedgerRoute.AccountIndex
+            case LedgerSetupRoute.SwitchApps:
+                nextRoute = LedgerSetupRoute.AccountIndex
                 break
-            case LedgerRoute.AccountIndex:
+            case LedgerSetupRoute.AccountIndex:
                 this.parentRouter.next(event)
                 break
         }

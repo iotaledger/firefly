@@ -4,19 +4,17 @@
         // routers
         AppSetupRouter,
         BackupRouter,
-        LedgerRouter,
+        LedgerSetupRouter,
         MigrationRouter,
-        NetworkRouter,
+        NetworkSetupRouter,
+        ProfileRecoveryRouter,
         ProfileSetupRouter,
         ProtectionRouter,
-        RecoveryRouter,
 
         // views
-        BalanceView,
         ClaimRewardsView,
         CongratulationsView,
         PasswordView,
-        SecureView,
         WelcomeView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
@@ -37,19 +35,15 @@
     <Transition>
         <ProfileSetupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Network}
+{:else if $onboardingRoute === OnboardingRoute.NetworkSetup}
     <Transition>
-        <NetworkRouter />
+        <NetworkSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.LedgerSetup}
     <Transition>
-        <LedgerRouter />
+        <LedgerSetupRouter />
     </Transition>
     <!--  -->
-{:else if $onboardingRoute === OnboardingRoute.Secure}
-    <Transition>
-        <SecureView />
-    </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Password}
     <Transition>
         <PasswordView />
@@ -62,13 +56,9 @@
     <Transition transition={false}>
         <BackupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Recovery}
+{:else if $onboardingRoute === OnboardingRoute.ProfileRecovery}
     <Transition transition={false}>
-        <RecoveryRouter />
-    </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Balance}
-    <Transition>
-        <BalanceView />
+        <ProfileRecoveryRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.ClaimRewards}
     <Transition>

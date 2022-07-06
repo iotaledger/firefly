@@ -4,31 +4,31 @@ import { isGettingMigrationData, profileRecoveryType, ProfileRecoveryType } from
 // import { getMigrationData } from '@lib/migration'
 
 import { onboardingRouter } from '../onboarding-router'
-import { RecoveryRoute } from '../enums'
+import { ProfileRecoveryRoute } from '../enums'
 import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
 
-export const recoveryRoute = writable<RecoveryRoute>(null)
-export const recoveryRouter = writable<RecoveryRouter>(null)
+export const profileRecoveryRoute = writable<ProfileRecoveryRoute>(null)
+export const profileRecoveryRouter = writable<ProfileRecoveryRouter>(null)
 
-export class RecoveryRouter extends Subrouter<RecoveryRoute> {
+export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
     public importFile: Buffer
 
     constructor() {
-        super(getInitialRoute() ?? RecoveryRoute.TextImport, recoveryRoute, get(onboardingRouter))
+        super(getInitialRoute() ?? ProfileRecoveryRoute.TextImport, profileRecoveryRoute, get(onboardingRouter))
     }
 
     resetRoute(): void {
-        recoveryRoute.set(getInitialRoute() ?? RecoveryRoute.TextImport)
+        profileRecoveryRoute.set(getInitialRoute() ?? ProfileRecoveryRoute.TextImport)
     }
 
     next(event?: FireflyEvent): void {
-        let nextRoute: RecoveryRoute
+        let nextRoute: ProfileRecoveryRoute
         const params = event || {}
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case RecoveryRoute.TextImport: {
+            case ProfileRecoveryRoute.TextImport: {
                 const _profileRecoveryType = get(profileRecoveryType)
                 if (_profileRecoveryType === ProfileRecoveryType.Seed) {
                     isGettingMigrationData.set(true)
@@ -36,24 +36,24 @@ export class RecoveryRouter extends Subrouter<RecoveryRoute> {
                     isGettingMigrationData.set(false)
                     this.parentRouter.next({ profileRecoveryType: _profileRecoveryType })
                 } else if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-                    nextRoute = RecoveryRoute.Success
+                    nextRoute = ProfileRecoveryRoute.Success
                 }
                 break
             }
-            case RecoveryRoute.FileImport: {
-                nextRoute = RecoveryRoute.BackupPassword
+            case ProfileRecoveryRoute.FileImport: {
+                nextRoute = ProfileRecoveryRoute.BackupPassword
                 break
             }
-            case RecoveryRoute.BackupPassword: {
-                nextRoute = RecoveryRoute.Success
+            case ProfileRecoveryRoute.BackupPassword: {
+                nextRoute = ProfileRecoveryRoute.Success
                 break
             }
-            case RecoveryRoute.LedgerImport: {
+            case ProfileRecoveryRoute.LedgerImport: {
                 const _profileRecoveryType = params?.profileRecoveryType
                 this.parentRouter.next({ profileRecoveryType: _profileRecoveryType })
                 break
             }
-            case RecoveryRoute.Success:
+            case ProfileRecoveryRoute.Success:
                 this.parentRouter.next({ profileRecoveryType: get(profileRecoveryType) })
                 break
         }
@@ -62,13 +62,13 @@ export class RecoveryRouter extends Subrouter<RecoveryRoute> {
     }
 }
 
-function getInitialRoute(): RecoveryRoute {
+function getInitialRoute(): ProfileRecoveryRoute {
     switch (get(profileRecoveryType)) {
         case ProfileRecoveryType.Mnemonic:
-            return RecoveryRoute.TextImport
+            return ProfileRecoveryRoute.TextImport
         case ProfileRecoveryType.Stronghold:
-            return RecoveryRoute.FileImport
+            return ProfileRecoveryRoute.FileImport
         case ProfileRecoveryType.Ledger:
-            return RecoveryRoute.LedgerImport
+            return ProfileRecoveryRoute.LedgerImport
     }
 }

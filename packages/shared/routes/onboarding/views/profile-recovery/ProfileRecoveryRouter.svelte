@@ -3,11 +3,17 @@
     import { Transition } from 'shared/components'
     import { BackupPasswordView, FileImportView, LedgerView, SuccessView, TextImportView } from './views'
     import { localize } from '@core/i18n'
-    import { FireflyEvent, recoveryRoute, recoveryRouter, RecoveryRouter, RecoveryRoute } from '@core/router'
+    import {
+        FireflyEvent,
+        profileRecoveryRoute,
+        profileRecoveryRouter,
+        ProfileRecoveryRouter,
+        ProfileRecoveryRoute,
+    } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
 
-    setContext<RecoveryRouter>('importRouter', $recoveryRouter)
-    $recoveryRouter.resetRoute()
+    setContext<ProfileRecoveryRouter>('importRouter', $profileRecoveryRouter)
+    $profileRecoveryRouter.resetRoute()
 
     let busy = false
     let error = ''
@@ -15,14 +21,14 @@
     async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
         busy = true
         try {
-            await $recoveryRouter.next(event.detail)
+            await $profileRecoveryRouter.next(event.detail)
         } catch (err) {
             if (!err.snapshot) {
                 if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
                     error = localize('views.migrate.incorrectSeedVaultPassword')
                 } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
                     error = localize('views.migrate.noDataSeedVault')
-                } else if ($recoveryRoute === RecoveryRoute.TextImport) {
+                } else if ($profileRecoveryRoute === ProfileRecoveryRoute.TextImport) {
                     showAppNotification({
                         type: 'error',
                         message: localize('views.migrate.problemRestoringWallet'),
@@ -36,27 +42,27 @@
     }
 
     function previous(): void {
-        $recoveryRouter.previous()
+        $profileRecoveryRouter.previous()
     }
 </script>
 
-{#if $recoveryRoute === RecoveryRoute.TextImport}
+{#if $profileRecoveryRoute === ProfileRecoveryRoute.TextImport}
     <Transition>
         <TextImportView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $recoveryRoute === RecoveryRoute.FileImport}
+{:else if $profileRecoveryRoute === ProfileRecoveryRoute.FileImport}
     <Transition>
         <FileImportView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $recoveryRoute === RecoveryRoute.BackupPassword}
+{:else if $profileRecoveryRoute === ProfileRecoveryRoute.BackupPassword}
     <Transition>
         <BackupPasswordView on:next={next} on:previous={previous} {error} {busy} />
     </Transition>
-{:else if $recoveryRoute === RecoveryRoute.LedgerImport}
+{:else if $profileRecoveryRoute === ProfileRecoveryRoute.LedgerImport}
     <Transition>
         <LedgerView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $recoveryRoute === RecoveryRoute.Success}
+{:else if $profileRecoveryRoute === ProfileRecoveryRoute.Success}
     <Transition>
         <SuccessView on:next={next} on:previous={previous} />
     </Transition>
