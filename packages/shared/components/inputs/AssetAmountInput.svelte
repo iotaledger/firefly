@@ -9,7 +9,6 @@
     export let disabled = false
     export let isFocused = false
     export let asset: IAsset
-    export let rawAmount: number
     export let amount: string
     export let unit: string
 

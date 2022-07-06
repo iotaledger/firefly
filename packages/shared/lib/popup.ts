@@ -74,3 +74,8 @@ const modifyPopupState = (state: PopupState, forceClose: boolean = false): void 
         popupState.set({ ...state })
     }
 }
+
+export function updatePopupProps(props: { [key: string]: unknown }): void {
+    const popup = get(popupState)
+    popupState.set({ ...popup, props: { ...popup?.props, ...props } })
+}

@@ -91,16 +91,18 @@
             {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
             {:else if $groupedActivities.length}
-                {#each $groupedActivities as group}
-                    <div class="space-y-2">
-                        <Text fontWeight={FontWeightText.semibold} color="gray-600">
-                            {group.date} • {group.activities.length}
-                        </Text>
-                        {#each group.activities as activity}
-                            <ActivityTile onClick={() => void handleTransactionClick(activity)} {activity} />
-                        {/each}
-                    </div>
-                {/each}
+                <div class="space-y-4">
+                    {#each $groupedActivities as group}
+                        <div class="space-y-2">
+                            <Text fontWeight={FontWeightText.semibold} color="gray-600">
+                                {group.date} • {group.activities.length}
+                            </Text>
+                            {#each group.activities as activity}
+                                <ActivityTile onClick={() => void handleTransactionClick(activity)} {activity} />
+                            {/each}
+                        </div>
+                    {/each}
+                </div>
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
                     <Text secondary>{localize('general.noRecentHistory')}</Text>

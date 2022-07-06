@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
 
-import { clearSendParams } from '@lib/app'
 import { closePopup } from '@lib/popup'
 
 import { appRouter, AppRouter } from './app-router'
@@ -84,7 +83,6 @@ function resetSubrouters(): void {
 export function resetAccountRouter(resetPanels: boolean = true): void {
     if (resetPanels) {
         get(accountRouter).reset()
-        clearSendParams()
     }
 }
 
