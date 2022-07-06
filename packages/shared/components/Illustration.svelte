@@ -87,13 +87,13 @@
             lightmode: 'governance/governance-info.svg',
             darkmode: 'governance/governance-info.svg',
         },
-        'treasury-bg': {
-            lightmode: 'governance/treasury.png',
-            darkmode: 'governance/treasury.png',
-        },
         'governance-not-found': {
             lightmode: 'governance/governance-not-found.svg',
             darkmode: 'governance/governance-not-found.svg',
+        },
+        'iota-governance': {
+            lightmode: 'governance/iota-governance.png',
+            darkmode: 'governance/iota-governance.png',
         },
     }
 </script>
