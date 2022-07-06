@@ -1,10 +1,10 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
     import { Input, PasswordInput } from 'shared/components'
     import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo } from '@core/network'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
     import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
-    import { get } from 'svelte/store'
     import { activeProfile } from '@core/profile'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
@@ -15,8 +15,8 @@
 
     $: node.url, (formError = '')
 
-    function cleanNodeUrl(): string {
-        return stripTrailingSlash(stripSpaces(node?.url))
+    function cleanNodeUrl(): void {
+        node.url = stripTrailingSlash(stripSpaces(node?.url))
     }
 
     export async function validate({

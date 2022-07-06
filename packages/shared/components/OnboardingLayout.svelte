@@ -2,8 +2,8 @@
     import { localize } from '@core/i18n'
     import { Icon, ProgressFlow, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
-    import { openPopup } from 'shared/lib/popup'
+    import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from '@lib/migration'
+    import { openPopup } from '@lib/popup'
 
     export let allowBack = true
     export let busy = false
@@ -16,7 +16,7 @@
     let mobileTopContentHeight,
         leftpaneContentHeight = 0
 
-    function handleWatchVideoClick() {
+    function handleWatchVideoClick(): void {
         openPopup({
             type: 'video',
             props: { video: LEDGER_MIGRATION_VIDEO, title: localize('views.setupLedger.videoGuide') },

@@ -6,7 +6,6 @@
     import { validatePinFormat, PIN_LENGTH } from '@lib/utils'
 
     const dispatch = createEventDispatcher()
-
     const isAndroid = Platform.getOS() === 'android'
 
     export let classes = ''
@@ -19,12 +18,12 @@
     export let label: string
 
     let inputs = new Array(PIN_LENGTH)
+
     $: {
         if (!value) {
             inputs = new Array(PIN_LENGTH)
         }
     }
-
     $: value.length === PIN_LENGTH && dispatch('filled')
 
     let root: HTMLElement
@@ -35,12 +34,6 @@
         ENTER = 'Enter',
         TAB = 'Tab',
     }
-
-    onMount(() => {
-        if (autofocus) {
-            focus()
-        }
-    })
 
     export function focus(): void {
         if (!disabled) {
@@ -53,7 +46,7 @@
             inputs = new Array(PIN_LENGTH)
             selectFirstEmpty()
         } else {
-            setTimeout(() => resetAndFocus(), 100)
+            setTimeout(resetAndFocus, 100)
         }
     }
 
@@ -130,6 +123,12 @@
             inputElements[index + 1].focus()
         }
     }
+
+    onMount(() => {
+        if (autofocus) {
+            focus()
+        }
+    })
 </script>
 
 <div class="w-full {classes}">

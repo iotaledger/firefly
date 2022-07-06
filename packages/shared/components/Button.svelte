@@ -41,7 +41,7 @@
         if (!disabled) {
             buttonElement.focus()
         } else {
-            setTimeout(() => resetAndFocus(), 100)
+            setTimeout(resetAndFocus, 100)
         }
     }
 

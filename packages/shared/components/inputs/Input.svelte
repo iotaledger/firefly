@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount, createEventDispatcher } from 'svelte'
     import { Text, InputContainer } from 'shared/components'
-    import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from 'shared/lib/currency'
+    import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
     import { TextPropTypes, TextType } from 'shared/components/Text.svelte'
 
@@ -27,50 +27,53 @@
     export let clearBorder = false
     export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
     export let textProps: TextPropTypes = { type: TextType.p, fontSize: '11', lineHeight: '140' }
-
-    const dispatch = createEventDispatcher()
-
-    const allDecimalSeparators = getAllDecimalSeparators()
-    const decimalSeparator = getDecimalSeparator()
-    let capsLockOn = false
     export let hasFocus = false
 
-    const handleInput = (e) => {
-        value = e.target.value
+    const dispatch = createEventDispatcher()
+    const allDecimalSeparators = getAllDecimalSeparators()
+    const decimalSeparator = getDecimalSeparator()
+
+    let capsLockOn = false
+
+    function handleInput(event: InputEvent): void {
+        value = (event.target as HTMLInputElement).value
     }
 
-    const onKeyCaps = (e) => {
-        capsLockOn = e.getModifierState('CapsLock')
+    function onKeyCaps(event: KeyboardEvent): void {
+        capsLockOn = event.getModifierState('CapsLock')
     }
 
-    const onKeyPress = (e) => {
-        if (e.key !== 'Tab') {
-            const isEnter = e.key === 'Enter'
+    function onKeyPress(event: KeyboardEvent): void {
+        if (event.key !== 'Tab') {
+            const isEnter = event.key === 'Enter'
             if (isEnter && submitHandler) {
                 submitHandler()
             }
             if ((float || integer) && !isEnter) {
                 // if the input is float, we accept one dot or comma depending on localization
-                if (float && e.key === decimalSeparator) {
+                if (float && event.key === decimalSeparator) {
                     if (value.indexOf(decimalSeparator) >= 0) {
-                        e.preventDefault()
+                        event.preventDefault()
                     }
-                } else if ('0123456789'.indexOf(e.key) < 0) {
+                } else if ('0123456789'.indexOf(event.key) < 0) {
                     // if float or interger we accept numbers
-                    e.preventDefault()
-                } else if (float && maxDecimals !== undefined && '0123456789'.indexOf(e.key) >= 0) {
+                    event.preventDefault()
+                } else if (float && maxDecimals !== undefined && '0123456789'.indexOf(event.key) >= 0) {
                     // If max decimals are set only allow certain number after decimal separator
                     const sepPos = value.indexOf(decimalSeparator)
                     if (sepPos >= 0) {
                         // If caret position is after the separator then check
-                        if (e.target.selectionEnd > sepPos) {
+                        if ((event.target as HTMLInputElement).selectionEnd > sepPos) {
                             // If sel start and end are different that means
                             // the text has been highlighted for overwrite
                             // if they are the same then it single insertion
-                            if (e.target.selectionStart === e.target.selectionEnd) {
+                            if (
+                                (event.target as HTMLInputElement).selectionStart ===
+                                (event.target as HTMLInputElement).selectionEnd
+                            ) {
                                 const numDecimals = value.length - sepPos - 1
                                 if (numDecimals >= maxDecimals) {
-                                    e.preventDefault()
+                                    event.preventDefault()
                                 }
                             }
                         }
@@ -80,39 +83,39 @@
         }
     }
 
-    const onPaste = (e) => {
-        if (e.clipboardData && (float || integer)) {
-            const pasteVal = e.clipboardData.getData('text')
+    function onPaste(event: ClipboardEvent): void {
+        if (event.clipboardData && (float || integer)) {
+            const pasteVal = event.clipboardData.getData('text')
             // Discard scientific notation or negative
             if (pasteVal.indexOf('e') >= 0 || pasteVal.indexOf('-') >= 0) {
-                e.preventDefault()
+                event.preventDefault()
             } else if (float) {
                 const val = parseCurrency(pasteVal)
                 // Discard any numbers we can't parse as floats
                 if (Number.isNaN(val)) {
-                    e.preventDefault()
+                    event.preventDefault()
                 } else if (maxDecimals !== undefined) {
                     value = formatNumber(val, undefined, maxDecimals, 0)
-                    e.preventDefault()
+                    event.preventDefault()
                 }
             } else if (integer) {
                 // Dicard anything with a decimal separator
                 if (allDecimalSeparators.some((sep) => pasteVal.indexOf(sep) >= 0)) {
-                    e.preventDefault()
+                    event.preventDefault()
                 } else {
                     const val = Number.parseInt(pasteVal, 10)
                     // Discard any number we can't parse as integers
                     if (Number.isNaN(val)) {
-                        e.preventDefault()
+                        event.preventDefault()
                     }
                 }
             }
         }
     }
 
-    const handleContextMenu = (e) => {
+    function handleContextMenu(event: UIEvent): void {
         if (disableContextMenu) {
-            e.preventDefault()
+            event.preventDefault()
         }
     }
 
