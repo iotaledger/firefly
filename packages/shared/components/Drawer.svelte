@@ -81,7 +81,7 @@
             timeQueue.push(window.performance.now())
             positionQueue.shift()
             timeQueue.shift()
-            const startY = positionQueue[0]
+            const initY = positionQueue[0]
             const endY = positionQueue[positionQueue.length - 1]
             const initTime = timeQueue[0]
             const endTime = timeQueue[timeQueue.length - 1]
@@ -94,7 +94,7 @@
 
                 node.dispatchEvent(
                     new CustomEvent('slideMove', {
-                        detail: { x, y, sx, sy, startY, endY, initTime, endTime },
+                        detail: { x, y, sx, sy, initY, endY, initTime, endTime },
                     })
                 )
             }
@@ -123,11 +123,11 @@
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
         // Calc slide gesture velocity between events
-        const distance = event.detail.endY - event.detail.startY
+        const displacement = event.detail.endY - event.detail.initY
         const time = (event.detail.endTime - event.detail.initTime) / 1000
-        const slideVelocity = Math.round(distance / time) || 0
+        const slideVelocity = Math.round(displacement / time) || 0
 
-        if (slideVelocity > 900) {
+        if (slideVelocity > 600) {
             isVelocityReached = true
         } else {
             isVelocityReached = false
