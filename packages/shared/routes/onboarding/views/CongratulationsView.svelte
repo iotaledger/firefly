@@ -146,7 +146,7 @@
         {/if}
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full" onClick={() => handleContinueClick()}>
+        <Button autofocus classes="w-full" onClick={handleContinueClick}>
             {localize(
                 `${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`
             )}
