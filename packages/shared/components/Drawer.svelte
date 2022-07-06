@@ -15,7 +15,7 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { quintIn, quintOut } from 'svelte/easing'
+    import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -158,13 +158,7 @@
 
     export async function open(): Promise<void> {
         isOpen = true
-        await coords.set(
-            {
-                x: 0,
-                y: 0,
-            },
-            { duration: 650, easing: quintOut }
-        )
+        await coords.set({ x: 0, y: 0 }, { duration: 650, easing: quintOut })
     }
 
     export async function close(): Promise<void> {
@@ -173,7 +167,10 @@
                 x: fromLeft ? -viewportLength : 0,
                 y: fromLeft ? 0 : viewportLength,
             },
-            { duration: 450, easing: fromLeft ? quintIn : quintOut }
+            {
+                duration: 450,
+                easing: quintOut,
+            }
         )
         isOpen = false
         if (!preventClose) {
