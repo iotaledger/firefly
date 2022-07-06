@@ -11,8 +11,8 @@ import { SettingsRouter, settingsRouter } from './settings-router'
 import {
     AppSetupRouter,
     appSetupRouter,
-    BackupRouter,
-    backupRouter,
+    ProfileBackupRouter,
+    profileBackupRouter,
     ProfileRecoveryRouter,
     profileRecoveryRouter,
     ledgerSetupRouter,
@@ -25,6 +25,8 @@ import {
     profileSetupRouter,
     protectionRouter,
     ProtectionRouter,
+    shimmerClaimingRouter,
+    ShimmerClaimingRouter,
 } from './subrouters'
 
 export function initRouters(): void {
@@ -47,13 +49,14 @@ function initBaseRouters(): void {
 
 function initSubrouters(): void {
     appSetupRouter.set(new AppSetupRouter())
-    backupRouter.set(new BackupRouter())
     ledgerSetupRouter.set(new LedgerSetupRouter())
     migrationRouter.set(new MigrationRouter())
     networkSetupRouter.set(new NetworkSetupRouter())
+    profileBackupRouter.set(new ProfileBackupRouter())
+    profileRecoveryRouter.set(new ProfileRecoveryRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
     protectionRouter.set(new ProtectionRouter())
-    profileRecoveryRouter.set(new ProfileRecoveryRouter())
+    shimmerClaimingRouter.set(new ShimmerClaimingRouter())
 }
 
 export function resetRouters(): void {
@@ -71,13 +74,14 @@ function resetBaseRouters(): void {
 
 function resetSubrouters(): void {
     get(appSetupRouter).reset()
-    get(backupRouter).reset()
-    get(profileRecoveryRouter).reset()
     get(ledgerSetupRouter).reset()
     get(migrationRouter).reset()
     get(networkSetupRouter).reset()
+    get(profileBackupRouter).reset()
+    get(profileRecoveryRouter).reset()
     get(profileSetupRouter).reset()
     get(protectionRouter).reset()
+    get(shimmerClaimingRouter).reset()
 }
 
 export function resetAccountRouter(resetPanels: boolean = true): void {

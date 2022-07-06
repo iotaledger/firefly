@@ -3,7 +3,7 @@
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { backupRouter } from '@core/router'
+    import { profileBackupRouter } from '@core/router'
     import { english } from '@lib/wordlists/english'
 
     export let mnemonic: string[]
@@ -54,10 +54,10 @@
     }
 
     function handleContinue(): void {
-        $backupRouter.next()
+        $profileBackupRouter.next()
     }
     function handleBackClick(): void {
-        $backupRouter.previous()
+        $profileBackupRouter.previous()
     }
 
     onMount(() => {

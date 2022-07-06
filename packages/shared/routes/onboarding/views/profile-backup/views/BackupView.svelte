@@ -2,16 +2,16 @@
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { backupRouter } from '@core/router'
+    import { profileBackupRouter } from '@core/router'
 
     export let busy: boolean
 
     function handleContinueClick(): void {
-        $backupRouter.next()
+        $profileBackupRouter.next()
     }
 
     function handleBackClick(): void {
-        $backupRouter.previous()
+        $profileBackupRouter.previous()
     }
 </script>
 

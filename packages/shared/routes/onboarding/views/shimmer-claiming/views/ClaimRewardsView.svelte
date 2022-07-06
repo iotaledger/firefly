@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, RewardClaimList, Text } from 'shared/components'
     import { onMount } from 'svelte'
-    import { IAccount } from '@core/account'
-    import { localize } from '@core/i18n'
-    import { getAccounts } from '@core/profile-manager'
+    import { IAccount } from '../../../../../lib/core/account'
+    import { localize } from '../../../../../lib/core/i18n'
+    import { getAccounts } from '../../../../../lib/core/profile-manager'
     import { AccountMeta } from '@iota/wallet/out/types'
 
     let accounts: IAccount[] = [

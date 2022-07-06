@@ -3,16 +3,16 @@
     import {
         // routers
         AppSetupRouter,
-        BackupRouter,
         LedgerSetupRouter,
         MigrationRouter,
         NetworkSetupRouter,
+        ProfileBackupRouter,
         ProfileRecoveryRouter,
         ProfileSetupRouter,
         ProtectionRouter,
+        ShimmerClaimingRouter,
 
         // views
-        ClaimRewardsView,
         CongratulationsView,
         PasswordView,
         WelcomeView,
@@ -52,17 +52,17 @@
     <Transition transition={false}>
         <ProtectionRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Backup}
+{:else if $onboardingRoute === OnboardingRoute.ProfileBackup}
     <Transition transition={false}>
-        <BackupRouter />
+        <ProfileBackupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.ProfileRecovery}
     <Transition transition={false}>
         <ProfileRecoveryRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.ClaimRewards}
+{:else if $onboardingRoute === OnboardingRoute.ShimmerClaiming}
     <Transition>
-        <ClaimRewardsView />
+        <ShimmerClaimingRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Migration}
     <Transition>

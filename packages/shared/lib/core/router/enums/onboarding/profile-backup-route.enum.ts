@@ -1,4 +1,4 @@
-export enum BackupRoute {
+export enum ProfileBackupRoute {
     Init = 'init',
     RecoveryPhrase = 'recoveryPhrase',
     Verify = 'verify',

@@ -2,7 +2,7 @@
     import { Animation, Button, OnboardingLayout, PasswordInput, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { backupRouter } from '@core/router'
+    import { profileBackupRouter } from '@core/router'
     import { backupInitialStronghold } from '@contexts/onboarding'
 
     export let strongholdPassword = ''
@@ -17,10 +17,10 @@
         skipBackup = _skipBackup
 
         if (skipBackup) {
-            $backupRouter.next({ skip: true })
+            $profileBackupRouter.next({ skip: true })
         } else {
             await backupInitialStronghold()
-            $backupRouter.next()
+            $profileBackupRouter.next()
         }
     }
 
@@ -35,7 +35,7 @@
     }
 
     function handleBackClick(): void {
-        $backupRouter.previous()
+        $profileBackupRouter.previous()
     }
 </script>
 

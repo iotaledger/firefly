@@ -2,7 +2,7 @@
     import { Transition } from 'shared/components'
     import { BackupView, BackupToFileView, RecoveryPhraseView, VerifyRecoveryPhraseView } from './views'
     import { localize } from '@core/i18n'
-    import { backupRoute, backupRouter, BackupRoute, FireflyEvent } from '@core/router'
+    import { profileBackupRoute, profileBackupRouter, ProfileBackupRoute, FireflyEvent } from '@core/router'
     import { mnemonic, strongholdPassword } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
 
@@ -11,7 +11,7 @@
     async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
         busy = true
         try {
-            await $backupRouter.next(event.detail)
+            await $profileBackupRouter.next(event.detail)
         } catch (err) {
             console.error(err)
             showAppNotification({
@@ -24,23 +24,23 @@
     }
 
     function previous(): void {
-        $backupRouter.previous()
+        $profileBackupRouter.previous()
     }
 </script>
 
-{#if $backupRoute === BackupRoute.Init}
+{#if $profileBackupRoute === ProfileBackupRoute.Init}
     <Transition>
         <BackupView on:next={next} on:previous={previous} {busy} />
     </Transition>
-{:else if $backupRoute === BackupRoute.RecoveryPhrase}
+{:else if $profileBackupRoute === ProfileBackupRoute.RecoveryPhrase}
     <Transition>
         <RecoveryPhraseView on:next={next} on:previous={previous} {busy} mnemonic={$mnemonic} />
     </Transition>
-{:else if $backupRoute === BackupRoute.Verify}
+{:else if $profileBackupRoute === ProfileBackupRoute.Verify}
     <Transition>
         <VerifyRecoveryPhraseView on:next={next} on:previous={previous} {busy} mnemonic={$mnemonic} />
     </Transition>
-{:else if $backupRoute === BackupRoute.Backup}
+{:else if $profileBackupRoute === ProfileBackupRoute.Backup}
     <Transition>
         <BackupToFileView on:next={next} on:previous={previous} {busy} strongholdPassword={$strongholdPassword} />
     </Transition>

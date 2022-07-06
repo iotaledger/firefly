@@ -4,9 +4,9 @@ import { profiles, ProfileType } from '@core/profile'
 import { newProfile, ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
-import { BackupRoute, OnboardingRoute, ProfileSetupRoute } from './enums'
+import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from './enums'
 import { Router } from './router'
-import { backupRoute, profileSetupRoute } from './subrouters'
+import { profileBackupRoute, profileSetupRoute } from './subrouters'
 import { FireflyEvent } from './types'
 
 export const onboardingRoute = writable<OnboardingRoute>(null)
@@ -59,15 +59,15 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             case OnboardingRoute.Protection: {
                 const _profileType = get(newProfile)?.type
                 if (_profileType === ProfileType.Software) {
-                    nextRoute = OnboardingRoute.Backup
+                    nextRoute = OnboardingRoute.ProfileBackup
                 } else if (_profileType === ProfileType.Ledger) {
                     nextRoute = OnboardingRoute.LedgerSetup
                 }
 
                 const _profileRecoveryType = get(profileRecoveryType)
                 if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-                    nextRoute = OnboardingRoute.Backup
-                    backupRoute.set(BackupRoute.Backup)
+                    nextRoute = OnboardingRoute.ProfileBackup
+                    profileBackupRoute.set(ProfileBackupRoute.Backup)
                 } else if (_profileRecoveryType === ProfileRecoveryType.Stronghold) {
                     nextRoute = OnboardingRoute.Congratulations
                 }
@@ -93,7 +93,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 }
                 break
             }
-            case OnboardingRoute.Backup: {
+            case OnboardingRoute.ProfileBackup: {
                 const setupType = get(profileRecoveryType)
                 if (setupType === ProfileRecoveryType.Seed || setupType === ProfileRecoveryType.SeedVault) {
                     nextRoute = OnboardingRoute.Migration
@@ -118,6 +118,9 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 } else {
                     nextRoute = OnboardingRoute.Congratulations
                 }
+                break
+            case OnboardingRoute.ShimmerClaiming:
+                nextRoute = OnboardingRoute.Congratulations
                 break
             case OnboardingRoute.Congratulations:
                 get(appRouter).next()
