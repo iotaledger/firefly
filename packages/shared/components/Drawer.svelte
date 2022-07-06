@@ -180,8 +180,8 @@
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
 
-    $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1800)
-    $: contentOpacity = getScale(fromLeft ? $coords.x : $coords.y, 100)
+    $: dimOpacity = getScale(fromLeft ? -$coords.x : $coords.y, 1800)
+    $: contentOpacity = getScale(fromLeft ? -$coords.x : $coords.y, 100)
 </script>
 
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
