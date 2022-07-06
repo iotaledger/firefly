@@ -24,6 +24,8 @@ public class WebViewSettingsPlugin extends Plugin {
         settings.setAppCacheEnabled(false);
         settings.setJavaScriptCanOpenWindowsAutomatically(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+        // Disables accessibility text size changes
+        settings.setTextZoom(100);
     }
 
     /**
