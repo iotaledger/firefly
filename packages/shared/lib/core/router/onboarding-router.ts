@@ -16,13 +16,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
     hasCompletedRecovery: boolean = false
 
     constructor() {
-        super(OnboardingRoute.Welcome, onboardingRoute)
-        this.init()
-    }
-
-    public init(): void {
-        const hasCompletedOnboardingBefore = get(profiles).length > 0
-        this.routeStore.set(hasCompletedOnboardingBefore ? OnboardingRoute.Network : OnboardingRoute.Welcome)
+        super(hasCompletedOnboardingBefore() ? OnboardingRoute.Network : OnboardingRoute.Welcome, onboardingRoute)
     }
 
     next(event?: FireflyEvent): void {
@@ -143,4 +137,8 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             get(appRouter).previous()
         }
     }
+}
+
+function hasCompletedOnboardingBefore(): boolean {
+    return get(profiles).length > 0
 }
