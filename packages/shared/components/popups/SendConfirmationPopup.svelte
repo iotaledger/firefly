@@ -67,7 +67,7 @@
     }
 
     async function _prepareOutput(): Promise<void> {
-        outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
+        outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag, asset)
         preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
             remainderValueStrategy: {
                 strategy: 'ReuseAddress',

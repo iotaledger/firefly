@@ -1,4 +1,4 @@
-import { BASE_TOKEN } from '@core/network'
+import { BASE_TOKEN, COIN_TYPE } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { selectedAccount } from '@core/account'
 import { derived, Readable } from 'svelte/store'
@@ -13,6 +13,7 @@ export const assets: Readable<IAsset[]> = derived(
 
         const assets: IAsset[] = [
             {
+                id: COIN_TYPE[$activeProfile?.networkProtocol].toString(),
                 metadata: BASE_TOKEN[$activeProfile?.networkProtocol],
                 balance: {
                     total: Number($selectedAccount?.balances.total),
@@ -20,6 +21,17 @@ export const assets: Readable<IAsset[]> = derived(
                 },
             },
         ]
+
+        $selectedAccount?.balances?.nativeTokens?.forEach((nativeToken) => {
+            assets.push({
+                id: nativeToken.id,
+                balance: {
+                    total: Number(nativeToken.amount),
+                    available: Number(nativeToken.amount),
+                },
+            })
+        })
+
         return assets
     }
 )

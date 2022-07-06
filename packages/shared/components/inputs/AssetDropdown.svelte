@@ -1,5 +1,8 @@
 <script lang="typescript">
+    import { NetworkProtocol } from '@core/network'
+
     import { assets } from '@core/wallet'
+    import { truncateString } from '@lib/helpers'
     import { AssetTile, Icon, Text } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { clickOutside } from 'shared/lib/actions'
@@ -7,8 +10,17 @@
     export let asset = $assets?.[0]
 
     let isDropdownOpen = false
+    let icon: string
 
     $: hasMultipleAssets = $assets?.length > 1
+    $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
+        case NetworkProtocol.IOTA:
+        case NetworkProtocol.Shimmer:
+            icon = asset?.metadata?.name?.toLocaleLowerCase()
+            break
+        default:
+            icon = 'tokens'
+    }
 
     function handleDropdownClick() {
         if (hasMultipleAssets) {
@@ -34,13 +46,18 @@
             on:click={handleDropdownClick}
         >
             <div
-                class="icon icon-bg h-6 w-6 rounded-full flex items-center justify-center p-0.5"
-                style="--icon-bg-color: {asset?.metadata?.primaryColor}"
+                class="
+                    icon h-6 w-6 rounded-full flex items-center justify-center p-0.5
+                    {asset?.metadata?.primaryColor ? 'icon-bg' : 'bg-blue-500'}
+                "
+                style={asset?.metadata?.primaryColor ? `--icon-bg-color: ${asset?.metadata?.primaryColor}` : ''}
             >
-                <Icon classes="text-white" icon={asset?.metadata.name.toLocaleLowerCase()} height="100%" width="100%" />
+                <Icon classes="text-white" {icon} height="80%" width="80%" />
             </div>
             <Text color="gray-600" darkColor="white" fontWeight={FontWeightText.semibold} fontSize="15">
-                {asset?.metadata.name}
+                {asset?.metadata?.name
+                    ? truncateString(asset?.metadata?.name, 10, 0, 2)
+                    : truncateString(asset?.id, 10, 0, 2)}
             </Text>
             {#if hasMultipleAssets}
                 <div class="transform rotate-0">

@@ -89,7 +89,9 @@
             <transaction-value class="flex flex-col space-y-0.5 items-center">
                 <div class="flex flex-row items-baseline space-x-0.5">
                     <Text type="h1" fontWeight={FontWeightText.semibold}>{amount}</Text>
-                    <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
+                    {#if unit}
+                        <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
+                    {/if}
                 </div>
                 {#if formattedFiatValue}
                     <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedFiatValue}</Text>
