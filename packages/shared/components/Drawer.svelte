@@ -15,7 +15,7 @@
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { quintIn, quintOut } from 'svelte/easing'
+    import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -81,7 +81,7 @@
             timeQueue.push(window.performance.now())
             positionQueue.shift()
             timeQueue.shift()
-            const startY = positionQueue[0]
+            const initY = positionQueue[0]
             const endY = positionQueue[positionQueue.length - 1]
             const initTime = timeQueue[0]
             const endTime = timeQueue[timeQueue.length - 1]
@@ -94,7 +94,7 @@
 
                 node.dispatchEvent(
                     new CustomEvent('slideMove', {
-                        detail: { x, y, sx, sy, startY, endY, initTime, endTime },
+                        detail: { x, y, sx, sy, initY, endY, initTime, endTime },
                     })
                 )
             }
@@ -123,11 +123,11 @@
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
         // Calc slide gesture velocity between events
-        const distance = event.detail.endY - event.detail.startY
+        const displacement = event.detail.endY - event.detail.initY
         const time = (event.detail.endTime - event.detail.initTime) / 1000
-        const slideVelocity = Math.round(distance / time) || 0
+        const slideVelocity = Math.round(displacement / time) || 0
 
-        if (slideVelocity > 900) {
+        if (slideVelocity > 600) {
             isVelocityReached = true
         } else {
             isVelocityReached = false
@@ -158,13 +158,7 @@
 
     export async function open(): Promise<void> {
         isOpen = true
-        await coords.set(
-            {
-                x: 0,
-                y: 0,
-            },
-            { duration: 650, easing: quintOut }
-        )
+        await coords.set({ x: 0, y: 0 }, { duration: 650, easing: quintOut })
     }
 
     export async function close(): Promise<void> {
@@ -173,7 +167,10 @@
                 x: fromLeft ? -viewportLength : 0,
                 y: fromLeft ? 0 : viewportLength,
             },
-            { duration: 450, easing: fromLeft ? quintIn : quintOut }
+            {
+                duration: 450,
+                easing: quintOut,
+            }
         )
         isOpen = false
         if (!preventClose) {
@@ -183,8 +180,8 @@
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
 
-    $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1800)
-    $: contentOpacity = getScale(fromLeft ? $coords.x : $coords.y, 100)
+    $: dimOpacity = getScale(fromLeft ? -$coords.x : $coords.y, 1800)
+    $: contentOpacity = getScale(fromLeft ? -$coords.x : $coords.y, 100)
 </script>
 
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
