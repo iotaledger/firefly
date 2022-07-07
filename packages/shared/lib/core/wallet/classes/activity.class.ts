@@ -103,16 +103,16 @@ export class Activity implements IActivity {
         Object.assign(this, partialActivity)
     }
 
-    setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): Activity {
+    setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
         const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
 
         const recipient = getRecipientFromOutput(output)
 
         this.type = getActivityType(isSubjectInternal(recipient))
-        this.id = transactionId
-        this.isHidden = isActivityHiddenForAccountId(account.id, transactionId)
+        this.id = transaction.transactionId
+        this.isHidden = isActivityHiddenForAccountId(account.id, transaction.transactionId)
 
-        this.transactionId = transactionId
+        this.transactionId = transaction.transactionId
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
