@@ -23,7 +23,9 @@
 </script>
 
 <div
-    class="relative h-full w-full px-0 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$mobile ? '' : 'pb-10'} {$settingsRoute === SettingsRoute.Init && $mobile && 'settings-wrapper md:pt-20'}"
+    class="relative h-full w-full px-0 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$mobile
+        ? ''
+        : 'pb-10'} {$settingsRoute === SettingsRoute.Init && $mobile && 'settings-wrapper md:pt-20'}"
     in:fly={{ duration: $mobile ? 200 : 0, x: 200 }}
 >
     {#if !$mobile}
