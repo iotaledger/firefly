@@ -30,7 +30,11 @@
 
     async function handleSubmitClick(): Promise<void> {
         if (isStrongholdPasswordValid) {
-            await onboardingBackupFileFunction()
+            try {
+                await onboardingBackupFileFunction()
+            } catch (error) {
+                return
+            }
         }
     }
 
