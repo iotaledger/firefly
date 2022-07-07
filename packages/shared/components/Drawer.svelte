@@ -55,7 +55,7 @@
         let x: number
         let y: number
         let init: number
-        // Define arrays for calc velocity later
+        // Define arrays to save past / new values for calc velocity later.
         const positionQueue = [0, 0, 0]
         const timeQueue = [0, 0, 0]
 
@@ -72,17 +72,17 @@
                 y = event.touches[0].pageY
             }
 
-            node.addEventListener('touchmove', handleTouchmove)
-            node.addEventListener('touchend', handleTouchend)
+            node.addEventListener('touchmove', handleTouchmove, { capture: true, passive: true })
+            node.addEventListener('touchend', handleTouchend, { capture: true, passive: true })
         }
 
         function handleTouchmove(event: TouchEvent) {
-            positionQueue.push(event.touches[0].pageY)
+            positionQueue.push(fromLeft ? event.touches[0].pageX : event.touches[0].pageY)
             timeQueue.push(window.performance.now())
             positionQueue.shift()
             timeQueue.shift()
-            const initY = positionQueue[0]
-            const endY = positionQueue[positionQueue.length - 1]
+            const initTouch = positionQueue[0]
+            const endTouch = positionQueue[positionQueue.length - 1]
             const initTime = timeQueue[0]
             const endTime = timeQueue[timeQueue.length - 1]
 
@@ -94,7 +94,7 @@
 
                 node.dispatchEvent(
                     new CustomEvent('slideMove', {
-                        detail: { x, y, sx, sy, initY, endY, initTime, endTime },
+                        detail: { x, y, sx, sy, initTouch, endTouch, initTime, endTime },
                     })
                 )
             }
@@ -108,32 +108,34 @@
                 node.dispatchEvent(new CustomEvent('tap'))
             }
 
-            node.removeEventListener('touchmove', handleTouchmove)
-            node.removeEventListener('touchend', handleTouchend)
+            node.removeEventListener('touchmove', handleTouchmove, { capture: true })
+            node.removeEventListener('touchend', handleTouchend, { capture: true })
         }
 
-        node.addEventListener('touchstart', handleTouchstart)
+        node.addEventListener('touchstart', handleTouchstart, { capture: true, passive: true })
 
         return {
             destroy() {
-                node.removeEventListener('touchstart', handleTouchstart)
+                node.removeEventListener('touchstart', handleTouchstart, { capture: true })
             },
         }
     }
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
         // Calc slide gesture velocity between events
-        const displacement = event.detail.endY - event.detail.initY
+        const displacement = event.detail.endTouch - event.detail.initTouch
         const time = (event.detail.endTime - event.detail.initTime) / 1000
         const slideVelocity = Math.round(displacement / time) || 0
+        const velocityThreshold = fromLeft ? 600 : 600
+        const isThresholdUnreached = fromLeft ? slideVelocity < velocityThreshold : slideVelocity > velocityThreshold
 
-        if (slideVelocity > 600) {
+        if (isThresholdUnreached) {
             isVelocityReached = true
         } else {
             isVelocityReached = false
         }
 
-        if ($coords.y < 0 || $coords.y + event.detail.sy < 0) {
+        if ($coords.y < 0 || $coords.y + event.detail.sy < 0  || $coords.x + event.detail.sx > 0) {
             return
         }
         await coords.update(
@@ -196,7 +198,7 @@
     </dim-zone>
     <content
         bind:this={content}
-        use:slidable={!fromLeft && !preventClose}
+        use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={() => (preventSlide = false)}
@@ -223,8 +225,8 @@
         border-radius: var(--border-radius);
         height: var(--height);
         opacity: var(--opacity);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(var(--blur));
+        -webkit-backdrop-filter: blur(var(--blur));
         --bg-mark-color: #d0d0d0;
         --top-mark: 8px;
         &.darkmode {
