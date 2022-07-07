@@ -281,9 +281,6 @@ export function addLinkHtmlTagsToPlainText(plainText: string, classes: string = 
         return
     } else {
         const regex = /((http|https)?:\/\/[^\s]+)/g
-        return plainText.replace(regex, (url) => {
-            const link = `<a href="${url}" class="${classes}">${url}</a>`
-            return link
-        })
+        return plainText.replace(regex, (url) => `<a href=${url} class="link-from-plaintext ${classes}">${url}</a>`)
     }
 }
