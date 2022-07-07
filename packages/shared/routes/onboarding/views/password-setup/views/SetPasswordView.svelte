@@ -3,7 +3,7 @@
     import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { setStrongholdPassword } from '@core/profile-manager'
+    import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
     import { onboardingRouter } from '@core/router'
     import { strongholdPassword } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
@@ -42,7 +42,12 @@
             try {
                 busy = true
 
-                await setStrongholdPassword(password)
+                const mustChangePassword = $strongholdPassword && $strongholdPassword === password
+                if (mustChangePassword) {
+                    await changeStrongholdPassword($strongholdPassword, password)
+                } else {
+                    await setStrongholdPassword(password)
+                }
 
                 $strongholdPassword = password
                 $onboardingRouter.next({ password })
