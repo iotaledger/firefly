@@ -24,7 +24,7 @@
     } from 'shared/lib/participation/stores'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { isSyncing } from 'shared/lib/wallet'
-    import { addLinkHtmlTagToPlainText } from 'shared/lib/helpers'
+    import { addLinkHtmlTagsToPlainText } from 'shared/lib/helpers'
 
     export let event: ParticipationEvent
     export let nextVote: VotingEventAnswer = null
@@ -42,8 +42,8 @@
     $: disableVoting =
         $isChangingParticipation || $pendingParticipations?.length > 0 || !!$participationAction || $isSyncing
 
-    $: eventAdditionalInfo = addLinkHtmlTagToPlainText(event?.information?.additionalInfo, 'text-blue-500')
-    $: eventQuestionsInfo = addLinkHtmlTagToPlainText(event?.information?.payload?.questions[0]?.text, 'text-blue-500')
+    $: eventAdditionalInfo = addLinkHtmlTagsToPlainText(event?.information?.additionalInfo, 'text-blue-500')
+    $: eventQuestionsInfo = addLinkHtmlTagsToPlainText(event?.information?.payload?.questions[0]?.text, 'text-blue-500')
 
     let disableVotingMessages: {
         show?: boolean

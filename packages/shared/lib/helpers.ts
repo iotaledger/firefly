@@ -276,7 +276,7 @@ export const isBright = (color: string): boolean => {
  * @param classes the classes to add to the <a> tag
  * @returns The input plain text with <a> tags added
  */
-export function addLinkHtmlTagToPlainText(plainText: string, classes: string = ''): string {
+export function addLinkHtmlTagsToPlainText(plainText: string, classes: string = ''): string {
     if (!plainText) {
         return
     } else {
