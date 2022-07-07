@@ -44,11 +44,12 @@
             action: handleViewAddressHistoryClick,
             style: 'DEFAULT',
         },
-        {
-            title: localize('actions.exportTransactionHistory'),
-            action: handleExportTransactionHistoryClick,
-            style: 'DEFAULT',
-        },
+        // ToDo: Has to be enabled again, when the export works
+        // {
+        //     title: localize('actions.exportTransactionHistory'),
+        //     action: handleExportTransactionHistoryClick,
+        //     style: 'DEFAULT',
+        // },
         {
             title: localize(
                 canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount'
