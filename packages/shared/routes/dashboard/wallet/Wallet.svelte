@@ -15,7 +15,7 @@
                             <AccountSummary />
                         {/if}
                     </Pane>
-                    <Pane classes="flex flex-col h-full p-6 space-y-6 justify-between">
+                    <Pane classes="flex flex-col p-6 space-y-6 h-full">
                         {#if features?.wallet?.sendAndReceive?.enabled}
                             <SendButton />
                             <ReceiveAddressButton />
