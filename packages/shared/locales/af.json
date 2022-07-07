@@ -1118,7 +1118,7 @@
             "error": "Kan nie transaksiegeskiedenis vir {accountAlias} uitvoer nie"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Login om die IOTA link te begin",
+            "receivedWhileLoggedOut": "Login om die IOTA link te begin",
             "notEnabled": "IOTA links is nie geaktiveer nie",
             "invalidFormat": "Die IOTA link wat jy gevolg het, is ongeldig",
             "wallet": {
