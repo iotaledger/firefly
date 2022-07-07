@@ -191,6 +191,7 @@ function isUrlAllowed(targetUrl) {
         'wiki.iota.org',
         'explorer.iota.org',
         'iotatreasury.org',
+        'govern.iota.org',
 
         // Assembly / Shimmer
         'assembly.sc',
