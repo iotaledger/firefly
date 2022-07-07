@@ -490,7 +490,7 @@
             <div class="w-full text-center">
                 <Text bold bigger>{localize('general.sendFunds')}</Text>
                 <div class="absolute right-10 top-6">
-                    <button on:click={onQRClick}>
+                    <button class="p-3" on:click={onQRClick}>
                         <Icon icon="qr" classes="text-blue-500" />
                     </button>
                 </div>
