@@ -65,7 +65,7 @@ public class WalletPlugin: CAPPlugin {
     }
 
     @objc func listen(_ call: CAPPluginCall) {
-        guard isInitialized else { return call.reject("actor not initialized") }
+        guard !isInitialized else { return }
         guard let actorId = call.getString("actorId") else {
             return call.reject("actorId is required")
         }

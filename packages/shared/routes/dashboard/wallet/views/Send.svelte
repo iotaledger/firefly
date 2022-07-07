@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
-    import { Address, Amount, Animation, Button, Dropdown, Icon, Input, ProgressBar, Text } from 'shared/components'
+    import { Address, Amount, Button, Dropdown, Icon, Illustration, Input, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
@@ -485,9 +485,9 @@
 </script>
 
 {#if $mobile}
-    <div class="w-full h-full flex flex-col justify-between p-6">
+    <div class="send-drawer h-full flex flex-col justify-between p-6">
         <div>
-            <div class="w-full mb-9 text-center">
+            <div class="w-full text-center">
                 <Text bold bigger>{localize('general.sendFunds')}</Text>
                 <div class="absolute right-10 top-6">
                     <button on:click={onQRClick}>
@@ -495,10 +495,7 @@
                     </button>
                 </div>
             </div>
-            <Animation
-                classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
-                animation="balance-desktop"
-            />
+            <Illustration illustration="send-mobile" />
             <div class="w-full h-full flex flex-col justify-between">
                 <div>
                     <div class="w-full block">
@@ -531,7 +528,7 @@
                                 bind:address
                                 label={localize('general.sendToAddress')}
                                 disabled={$isTransferring}
-                                placeholder={`${localize('general.sendToAddress')}: ${addressPrefix}...`}
+                                placeholder={`${localize('general.sendToAddress')} \n${addressPrefix}...`}
                                 classes="mb-6"
                                 autofocus={false}
                             />
@@ -672,6 +669,9 @@
 {/if}
 
 <style type="text/scss">
+    .send-drawer {
+        height: calc(98vh - env(safe-area-inset-top));
+    }
     button.active {
         @apply relative;
         &:after {
