@@ -1,55 +1,8 @@
 <script lang="typescript">
-    import { selectedAccount, selectedAccountId } from '@core/account'
-    import { activeProfile, isLedgerProfile } from '@core/profile'
+    import { selectedAccount } from '@core/account'
     import features from '@features/features'
-    import { AccountActivity, AccountAssetsList, AccountSummary, Pane, ReceiveAddressSection } from 'shared/components'
-    import { addProfileCurrencyPriceData } from 'shared/lib/market'
-    import { hasGeneratedALedgerReceiveAddress } from 'shared/lib/wallet'
-    import { onMount } from 'svelte'
-
-    const { loggedIn } = $activeProfile
-
-    // TODO: move to lib
-    // If account changes force regeneration of Ledger receive address
-    $: if ($selectedAccountId && $isLedgerProfile) {
-        hasGeneratedALedgerReceiveAddress.set(false)
-    }
-
-    // TODO: move to error handling lib
-    // function onError(error?: any): void {
-    //     if ($isLedgerProfile) {
-    //         if (!LedgerErrorType[error.type]) {
-    //             displayNotificationForLedgerProfile('error', true, true, false, false, error)
-    //         }
-    //     } else {
-    //         showAppNotification({
-    //             type: 'error',
-    //             message: localize(error?.error || 'error.global.generic'),
-    //         })
-    //     }
-    // }
-
-    onMount(() => {
-        // TODO: change so settings doesn't go back to wallet??
-        // If we are in settings when logged out the router reset
-        // switches back to the wallet, but there is no longer
-        // an active profile, only init if there is a profile
-        if ($activeProfile && $loggedIn) {
-            // TODO: Replace with new api when developed and move out of this file
-            // if ($isSoftwareProfile) {
-            //     api.getStrongholdStatus({
-            //         onSuccess(strongholdStatusResponse) {
-            //             isStrongholdLocked.set(strongholdStatusResponse.payload.snapshot.status === 'Locked')
-            //         },
-            //         onError(err) {
-            //             console.error(err)
-            //         },
-            //     })
-            // }
-
-            void addProfileCurrencyPriceData()
-        }
-    })
+    import { ReceiveAddressButton, SendButton } from 'shared/components/atoms'
+    import { AccountActivity, AccountAssetsList, AccountSummary, Pane } from 'shared/components'
 </script>
 
 {#if $selectedAccount}
@@ -62,9 +15,10 @@
                             <AccountSummary />
                         {/if}
                     </Pane>
-                    <Pane classes="h-full p-6">
+                    <Pane classes="flex flex-col h-full p-6 space-y-6 justify-between">
                         {#if features?.wallet?.sendAndReceive?.enabled}
-                            <ReceiveAddressSection addressFontSize="sm" />
+                            <SendButton />
+                            <ReceiveAddressButton />
                         {/if}
                     </Pane>
                 </div>
