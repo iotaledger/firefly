@@ -1118,7 +1118,7 @@
             "error": "無法匯出 {accountAlias} 的交易記錄"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "請登入以發起 IOTA 連結",
+            "receivedWhileLoggedOut": "請登入以發起 IOTA 連結",
             "notEnabled": "IOTA 連結未啟用",
             "invalidFormat": "你所追蹤的 IOTA 連結無效",
             "wallet": {

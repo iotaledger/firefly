@@ -25,7 +25,7 @@
 <button
     type="button"
     {disabled}
-    class="rounded-xl max-w-full w-98 px-4 py-3.5 cursor-pointer text-center {classes}"
+    class="rounded-xl px-4 py-3.5 cursor-pointer text-center {classes}"
     on:click|stopPropagation={onClick}
     class:hidden
     class:darkmode={darkModeEnabled}

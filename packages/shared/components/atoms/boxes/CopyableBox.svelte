@@ -44,7 +44,7 @@
 {#if isCopyable && showTooltip}
     <Tooltip
         anchor={tooltipAnchor}
-        offset={15}
+        offset={clearPadding ? 25 : 15}
         position="top"
         size="small"
         backgroundColor="green-600"

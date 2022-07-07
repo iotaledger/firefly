@@ -1,21 +1,41 @@
 <script lang="typescript">
-    import { appRoute, AppRoute } from '@core/router'
+    import { appRoute, AppRoute, dashboardRoute, DashboardRoute } from '@core/router'
     import { activeProfile } from '@core/profile'
+    import { appSettings } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
-    import { onMount } from 'svelte'
+    import tailwindConfig from 'shared/tailwind.config.js'
+    import { onDestroy, onMount } from 'svelte'
+    import resolveConfig from 'tailwindcss/resolveConfig'
 
     const { hasLoadedAccounts } = $activeProfile
 
     $: showingDashboard = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.type !== 'busy'
+    $: showingSettings = $dashboardRoute === DashboardRoute.Settings
 
     let os = ''
+    let isMaximized = false
+
+    $: darkModeEnabled = $appSettings.darkMode
+
+    const fullConfig = resolveConfig(tailwindConfig)
 
     onMount(async () => {
         os = await Platform.getOS()
+        isMaximized = await Platform.isMaximized()
         document.body.classList.add(`platform-${os}`)
         /* eslint-disable @typescript-eslint/no-misused-promises */
+        window.addEventListener('resize', handleResize)
     })
+
+    onDestroy(() => {
+        /* eslint-disable @typescript-eslint/no-misused-promises */
+        window.removeEventListener('resize', handleResize)
+    })
+
+    async function handleResize() {
+        isMaximized = await Platform.isMaximized()
+    }
 </script>
 
 <div class="h-full w-full">
@@ -48,7 +68,7 @@
                         <rect x="2" y="8" width="12" height="1" rx="0.5" fill="currentColor" />
                     </svg>
                 </button>
-                <!-- <button
+                <button
                     on:click={async () => (isMaximized = await Platform.maximize())}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100 fill-current"
                 >
@@ -80,7 +100,7 @@
                             />
                         {/if}
                     </svg>
-                </button> -->
+                </button>
                 <button
                     on:click={() => Platform.close()}
                     class="p-2 mr-2 stroke-current text-gray-500 dark:text-gray-100"

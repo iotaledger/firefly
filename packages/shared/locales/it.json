@@ -1118,7 +1118,7 @@
             "error": "Impossibile esportare la cronologia delle transazioni per {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Effettua il login per avviare il link IOTA",
+            "receivedWhileLoggedOut": "Effettua il login per avviare il link IOTA",
             "notEnabled": "I link di IOTA non sono abilitati",
             "invalidFormat": "Il link di IOTA che hai seguito non è valido",
             "wallet": {
