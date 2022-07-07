@@ -4,7 +4,12 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter, ProfileRecoveryRouter } from '@core/router'
-    import { profileRecoveryType, restoreBackupFromFile, isGettingMigrationData } from '@contexts/onboarding'
+    import {
+        profileRecoveryType,
+        restoreBackupFromFile,
+        isGettingMigrationData,
+        strongholdPassword,
+    } from '@contexts/onboarding'
 
     export let error = ''
     export let busy = false
@@ -17,6 +22,7 @@
         if (password) {
             try {
                 await restoreBackupFromFile(importFile, password)
+                $strongholdPassword = password
                 $profileRecoveryRouter.next()
             } catch (err) {
                 console.error(err)
