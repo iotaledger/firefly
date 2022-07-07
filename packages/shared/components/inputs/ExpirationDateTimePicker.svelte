@@ -9,16 +9,12 @@
 
     const dispatch = createEventDispatcher()
 
-    let rawValue: string = value?.toLocaleString()
-
     function handleCancelClick(): void {
         dispatch('cancel')
     }
 
     function handleConfirmClick(): void {
-        const pickedDate = new Date(rawValue)
-        if (isValidExpirationDateTime(pickedDate)) {
-            value = pickedDate
+        if (isValidExpirationDateTime(value)) {
             dispatch('confirm')
         } else {
             showAppNotification({
@@ -29,4 +25,4 @@
     }
 </script>
 
-<DateTimePicker {...$$restProps} bind:value={rawValue} on:cancel={handleCancelClick} on:confirm={handleConfirmClick} />
+<DateTimePicker {...$$restProps} bind:value on:cancel={handleCancelClick} on:confirm={handleConfirmClick} />
