@@ -269,3 +269,21 @@ export const isBright = (color: string): boolean => {
         }
     }
 }
+
+/**
+ * Parse plain text and add <a> html tahs to every link found
+ * @param plainText The text to be parsed
+ * @param classes the classes to add to the <a> tag
+ * @returns The input plain text with <a> tags added
+ */
+export function addLinkHtmlTagToPlainText(plainText: string, classes: string = ''): string {
+    if (!plainText) {
+        return
+    } else {
+        const regex = /((http|https)?:\/\/[^\s]+)/g
+        return plainText.replace(regex, (url) => {
+            const link = `<a href="${url}" class="${classes}">${url}</a>`
+            return link
+        })
+    }
+}

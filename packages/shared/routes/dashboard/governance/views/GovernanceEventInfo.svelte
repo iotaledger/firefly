@@ -24,6 +24,7 @@
     } from 'shared/lib/participation/stores'
     import { ParticipationAction } from 'shared/lib/participation/types'
     import { isSyncing } from 'shared/lib/wallet'
+    import { addLinkHtmlTagToPlainText } from 'shared/lib/helpers'
 
     export let event: ParticipationEvent
     export let nextVote: VotingEventAnswer = null
@@ -40,6 +41,9 @@
     $: cannotVote = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
     $: disableVoting =
         $isChangingParticipation || $pendingParticipations?.length > 0 || !!$participationAction || $isSyncing
+
+    $: eventAdditionalInfo = addLinkHtmlTagToPlainText(event?.information?.additionalInfo, 'text-blue-500')
+    $: eventQuestionsInfo = addLinkHtmlTagToPlainText(event?.information?.payload?.questions[0]?.text, 'text-blue-500')
 
     let disableVotingMessages: {
         show?: boolean
@@ -206,14 +210,14 @@
     </div>
     <div class="flex flex-col space-y-4 mb-6">
         <Text type="h2">{event?.information?.name}</Text>
-        {#if event?.information?.payload?.questions[0]?.text}
+        {#if eventAdditionalInfo}
             <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500">
-                {event?.information?.additionalInfo}
+                {@html eventAdditionalInfo}
             </Text>
         {/if}
-        {#if event?.information?.additionalInfo}
+        {#if eventQuestionsInfo}
             <Text type="h3" overrideColor classes="text-gray-900 dark:text-white">
-                {event?.information?.payload?.questions[0]?.text}
+                {@html eventQuestionsInfo}
             </Text>
         {/if}
     </div>
