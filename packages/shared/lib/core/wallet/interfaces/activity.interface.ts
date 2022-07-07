@@ -3,6 +3,7 @@ import { IUTXOInput } from '@iota/types'
 import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Subject } from '../types'
+import { IAsset } from './asset.interface'
 import { ITokenMetadata } from './token-metadata.interface'
 
 export interface IActivity {
@@ -18,6 +19,7 @@ export interface IActivity {
     rawAmount: number
     sender: Subject
     recipient: Subject
+    asset: IAsset
     token: ITokenMetadata
     isAsync: boolean
     expirationDate?: Date

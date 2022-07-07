@@ -10,23 +10,25 @@ import { findAccountWithAddress } from '@lib/wallet'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
-import { IActivity } from '../interfaces'
+import { IActivity, IAsset } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
+import { assets, getNativeTokenById } from '../stores'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { Subject } from '../types'
 import {
     formatTokenAmountBestMatch,
-    getAmountFromOutput,
     getActivityType,
+    getAmountFromOutput,
     getExpirationDateFromOutput,
     getMetadataFromOutput,
+    getNativeTokenFromOutput,
     getRecipientAddressFromOutput,
     getRecipientFromOutput,
     getSenderFromOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
-    isSubjectInternal,
     isOutputAsync,
+    isSubjectInternal,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 
@@ -48,6 +50,7 @@ export class Activity implements IActivity {
 
     outputId?: string
     rawAmount: number
+    asset: IAsset
     token: ITokenMetadata
     metadata?: string
     tag?: string
@@ -99,13 +102,8 @@ export class Activity implements IActivity {
         return this
     }
 
-    updateFromPartialActivity(partialActivity: Partial<IActivity>): void {
-        Object.assign(this, partialActivity)
-    }
-
     setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): Activity {
         const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
-
         const recipient = getRecipientFromOutput(output)
 
         this.type = getActivityType(isSubjectInternal(recipient))
@@ -142,6 +140,7 @@ export class Activity implements IActivity {
         const isIncoming = recipientAddress === account.depositAddress
         // const isInternal = !!findAccountWithAddress(address)
         const isInternal = isSubjectInternal(recipient)
+        const nativeToken = getNativeTokenFromOutput(outputData.output)
 
         this.type = getActivityType(isInternal)
         this.id = outputData.outputId
@@ -159,6 +158,7 @@ export class Activity implements IActivity {
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
+        this.asset = getNativeTokenById(nativeToken?.id) ?? get(assets)?.baseCoin
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
 
         this.storageDeposit = getStorageDepositFromOutput(outputData.output)
@@ -168,6 +168,10 @@ export class Activity implements IActivity {
         this.isClaimed = false
 
         return this
+    }
+
+    updateFromPartialActivity(partialActivity: Partial<IActivity>): void {
+        Object.assign(this, partialActivity)
     }
 
     getAsyncStatus(time: Date): ActivityAsyncStatus {

@@ -1,37 +1,49 @@
-import { BASE_TOKEN, COIN_TYPE } from '@core/network'
-import { activeProfile } from '@core/profile'
-import { selectedAccount } from '@core/account'
-import { derived, Readable } from 'svelte/store'
 import { IAsset } from '@core/wallet'
+import { get, writable, Writable } from 'svelte/store'
+import { IAssetState } from '../interfaces/assets-state.interface'
 
-export const assets: Readable<IAsset[]> = derived(
-    [activeProfile, selectedAccount],
-    ([$activeProfile, $selectedAccount]) => {
-        if (!$activeProfile || !$selectedAccount) {
-            return []
-        }
+export const assets: Writable<IAssetState> = writable({
+    baseCoin: undefined,
+    nativeTokens: [],
+})
 
-        const assets: IAsset[] = [
-            {
-                id: COIN_TYPE[$activeProfile?.networkProtocol].toString(),
-                metadata: BASE_TOKEN[$activeProfile?.networkProtocol],
-                balance: {
-                    total: Number($selectedAccount?.balances.total),
-                    available: Number($selectedAccount?.balances.available),
-                },
-            },
-        ]
+export function setBaseCoin(baseCoin: IAsset): void {
+    assets.update((state) => ({
+        ...state,
+        baseCoin,
+    }))
+}
 
-        $selectedAccount?.balances?.nativeTokens?.forEach((nativeToken) => {
-            assets.push({
-                id: nativeToken.id,
-                balance: {
-                    total: Number(nativeToken.amount),
-                    available: Number(nativeToken.amount),
-                },
-            })
-        })
+export function updateBaseCoin(partialBaseCoin: Partial<IAsset>): void {
+    assets.update((state) => ({
+        ...state,
+        baseCoin: { ...state?.baseCoin, ...partialBaseCoin },
+    }))
+}
 
-        return assets
-    }
-)
+export function addNativeToken(nativeToken: IAsset): void {
+    assets.update((state) => ({
+        ...state,
+        nativeTokens: [...state.nativeTokens, nativeToken],
+    }))
+}
+
+export function updateNativeToken(partialNativeToken: Partial<IAsset>): void {
+    assets.update((state) => ({
+        ...state,
+        nativeTokens: state.nativeTokens.map((nativeToken) =>
+            partialNativeToken.id === nativeToken?.id ? { ...partialNativeToken, ...nativeToken } : nativeToken
+        ),
+    }))
+}
+
+export function clearNativeTokens(): void {
+    assets.update((state) => ({
+        ...state,
+        nativeTokens: [],
+    }))
+}
+
+export function getNativeTokenById(id: string): IAsset {
+    return get(assets).nativeTokens.find((asset) => asset.id === id)
+}
