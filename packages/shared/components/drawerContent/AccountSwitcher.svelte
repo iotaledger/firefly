@@ -33,6 +33,10 @@
 
     let toggleEdit = false
 
+    // TODO: find a better solution to avoid a crash when the action sheet is called again
+    // before the last call is finished.
+    let isActionSheetCalled = false
+
     const menuActions = [
         {
             title: localize('actions.customizeAcount'),
@@ -66,6 +70,12 @@
             return
         }
 
+        if (isActionSheetCalled) {
+            return
+        }
+
+        isActionSheetCalled = true
+
         const index = await Platform.showActionSheet({
             title: localize('general.walletActions'),
             options: [
@@ -77,6 +87,7 @@
             ],
         })
 
+        isActionSheetCalled = false
         menuActions[index].action()
     }
 
