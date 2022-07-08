@@ -1217,7 +1217,8 @@
         "myAssets": "My assets",
         "option": "Option",
         "total": "Total: {balance}",
-        "openExplorer": "View in Explorer"
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Today",

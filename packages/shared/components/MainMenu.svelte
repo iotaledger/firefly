@@ -49,9 +49,9 @@
     <span class="text-14 font-600 text-center text-white uppercase">{profileInitial || 'A'}</span>
 </button>
 <Drawer bind:this={drawer} fromLeft classes="flex">
-    <div class="flex flex-col flex-1 px-5">
+    <section class="flex flex-col w-full">
         <header
-            class="w-full mt-3 py-3 px-9 mb-5 flex items-centers justify-center bg-white dark:bg-gray-800"
+            class="w-full mt-3 py-3 px-9 mb-3 flex items-centers justify-center bg-white dark:bg-gray-800"
             on:click={handleBackClick}
         >
             <Icon icon="arrow-left" classes="absolute mb-5 left-5 text-gray-500 text-blue-500" />
@@ -65,17 +65,19 @@
                 )}
             </Text>
         </header>
-        {#if $profileRoute === ProfileRoute.ProfileActions}
-            <ProfileActions {profileColor} {profileInitial} {handleSettingsClick} />
-        {:else if $profileRoute === ProfileRoute.Settings}
-            <Settings />
-        {/if}
-    </div>
+        <main class="h-full overflow-y-auto px-5 mb-10">
+            {#if $profileRoute === ProfileRoute.ProfileActions}
+                <ProfileActions {profileColor} {profileInitial} {handleSettingsClick} />
+            {:else if $profileRoute === ProfileRoute.Settings}
+                <Settings />
+            {/if}
+        </main>
+    </section>
 </Drawer>
 
 <style>
-    header {
-        border-top: solid transparent calc(env(safe-area-inset-top) / 1.5);
+    section {
+        padding-top: env(safe-area-inset-top);
     }
     .menu-button {
         background-color: var(--background-color);
