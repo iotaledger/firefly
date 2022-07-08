@@ -1118,7 +1118,7 @@
             "error": "A(z) {accountAlias} számla korábbi tranzakcióinak mentése sikertelen"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Kérjük, jelentkezzen be az IOTA hivatkozás megnyitásához",
+            "receivedWhileLoggedOut": "Kérjük, jelentkezzen be az IOTA hivatkozás megnyitásához",
             "notEnabled": "Az IOTA hivatkozások nincsenek engedélyezve",
             "invalidFormat": "Az IOTA hivatkozás érvénytelen",
             "wallet": {

@@ -3,74 +3,78 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { promptUserToConnectLedger } from 'shared/lib/ledger'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { closePopup, updatePopupProps } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
+    import { checkStronghold } from '@lib/stronghold'
+    import { onMount } from 'svelte'
+    import { BaseError } from '@core/error'
 
-    export let error = ''
+    export let accountAlias = ''
+    export let color = getRandomAccountColor()
+    export let error: BaseError
+    export let isBusy = false
+
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     const { isStrongholdLocked } = $activeProfile
 
-    let isBusy = false
-    let accountAlias = ''
-    let color = getRandomAccountColor()
-
-    // This looks odd but sets a reactive dependency on accountAlias, so when it changes the error will clear
-    $: accountAlias, (error = '')
+    $: accountAlias, (error = null)
     $: trimmedAccountAlias = accountAlias.trim()
 
-    $: {
-        /**
-         * CAUTION: isBusy becomes true whenever the Stronghold password popup
-         * becomes active (by Wallet.svelte), so we must be sure that it gets
-         * set to false again in case the user cancels the popup. This is safe
-         * because it's within a reactive dependency.
-         */
-        if (!$popupState.active) {
-            isBusy = false
-        }
-    }
-
     async function handleCreateClick(): Promise<void> {
-        if (trimmedAccountAlias) {
-            error = ''
-            try {
-                await validateAccountName(trimmedAccountAlias)
-            } catch ({ message }) {
-                error = message
+        try {
+            if (!trimmedAccountAlias) {
                 return
             }
 
             isBusy = true
-
+            error = null
+            await validateAccountName(trimmedAccountAlias)
+            updatePopupProps({ accountAlias, color, error, isBusy })
             if ($isLedgerProfile) {
                 void promptUserToConnectLedger(false, _create, _cancel)
             } else if ($isSoftwareProfile && $isStrongholdLocked) {
-                openPopup({ type: 'password', props: { onSuccess: _create } })
+                await checkStronghold(_create, true)
             } else {
-                void _create()
+                await _create()
             }
+            isBusy = false
+        } catch (err) {
+            if (!error) {
+                error = err.error ? new BaseError({ message: err.error, logError: true }) : err
+            }
+            isBusy = false
         }
     }
 
     function handleCancelClick(): void {
+        isBusy = false
         closePopup()
     }
 
     async function _create(): Promise<void> {
-        try {
-            if (trimmedAccountAlias || color) {
-                await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
-                closePopup()
-            }
-        } finally {
-            isBusy = false
+        if (trimmedAccountAlias && color) {
+            await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
+            closePopup()
         }
     }
 
     function _cancel(): void {
         isBusy = false
     }
+
+    onMount(async () => {
+        isBusy = true
+        try {
+            await _onMount()
+        } catch (err) {
+            if (!error) {
+                error = err.error ? new BaseError({ message: err.error, logError: true }) : err
+            }
+        }
+        isBusy = false
+    })
 </script>
 
 <div class="flex flex-col h-full justify-between">
@@ -80,7 +84,7 @@
         </div>
         <div class="w-full flex flex-col justify-between">
             <Input
-                {error}
+                error={error?.message}
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
                 autofocus

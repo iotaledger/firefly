@@ -20,6 +20,8 @@ const appName =
     stage === 'prod' ? 'Firefly (Stardust)' : `Firefly (Stardust) - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
 const appId = stage === 'prod' ? 'org.iota.firefly-stardust' : `org.iota.firefly-stardust.${stage}`
 
+const appProtocol = stage === 'prod' ? 'firefly' : `firefly-${stage.toLowerCase()}`
+
 // / ------------------------ Resolve ------------------------
 
 const tsConfigOptions = {
@@ -124,6 +126,7 @@ const mainPlugins = [
         APP_NAME: JSON.stringify(appName),
         APP_ID: JSON.stringify(appId),
         'process.env.STAGE': JSON.stringify(stage),
+        'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
     }),
 ]
 
@@ -157,6 +160,7 @@ const rendererPlugins = [
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(stage),
         PRELOAD_SCRIPT: JSON.stringify(false),
+        'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
     }),
 ]
 
@@ -169,6 +173,7 @@ const preloadPlugins = [
         PRELOAD_SCRIPT: JSON.stringify(true),
         APP_NAME: JSON.stringify(appName),
         'process.env.STAGE': JSON.stringify(stage),
+        'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
     }),
 ]
 
