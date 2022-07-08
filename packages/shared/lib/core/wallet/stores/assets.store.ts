@@ -7,28 +7,28 @@ export const assets: Writable<IAssetState> = writable({
     nativeTokens: [],
 })
 
-export function setBaseCoin(baseCoin: IAsset): void {
+export function setBaseCoinAsset(baseCoin: IAsset): void {
     assets.update((state) => ({
         ...state,
         baseCoin,
     }))
 }
 
-export function updateBaseCoin(partialBaseCoin: Partial<IAsset>): void {
+export function updateBaseCoinAsset(partialBaseCoin: Partial<IAsset>): void {
     assets.update((state) => ({
         ...state,
         baseCoin: { ...state?.baseCoin, ...partialBaseCoin },
     }))
 }
 
-export function addNativeToken(nativeToken: IAsset): void {
+export function addNativeTokenAsset(nativeToken: IAsset): void {
     assets.update((state) => ({
         ...state,
         nativeTokens: [...state.nativeTokens, nativeToken],
     }))
 }
 
-export function updateNativeToken(partialNativeToken: Partial<IAsset>): void {
+export function updateNativeTokenAsset(partialNativeToken: Partial<IAsset>): void {
     assets.update((state) => ({
         ...state,
         nativeTokens: state.nativeTokens.map((nativeToken) =>
@@ -37,13 +37,13 @@ export function updateNativeToken(partialNativeToken: Partial<IAsset>): void {
     }))
 }
 
-export function clearNativeTokens(): void {
+export function clearNativeTokenAssets(): void {
     assets.update((state) => ({
         ...state,
         nativeTokens: [],
     }))
 }
 
-export function getNativeTokenById(id: string): IAsset {
+export function getNativeTokenAssetById(id: string): IAsset {
     return get(assets).nativeTokens.find((asset) => asset.id === id)
 }

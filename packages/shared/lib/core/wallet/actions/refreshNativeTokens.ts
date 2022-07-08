@@ -1,11 +1,11 @@
 import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
-import { addNativeToken, clearNativeTokens } from '../stores'
+import { addNativeTokenAsset, clearNativeTokenAssets } from '../stores'
 
 export function refreshNativeTokens(): void {
-    clearNativeTokens()
+    clearNativeTokenAssets()
     get(selectedAccount)?.balances?.nativeTokens?.forEach((nativeToken) => {
-        addNativeToken({
+        addNativeTokenAsset({
             id: nativeToken.id,
             balance: {
                 total: Number(nativeToken.amount),

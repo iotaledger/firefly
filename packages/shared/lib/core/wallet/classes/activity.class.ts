@@ -12,7 +12,7 @@ import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity, IAsset } from '../interfaces'
 import { ITokenMetadata } from '../interfaces/token-metadata.interface'
-import { assets, getNativeTokenById } from '../stores'
+import { assets, getNativeTokenAssetById } from '../stores'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { Subject } from '../types'
 import {
@@ -158,7 +158,7 @@ export class Activity implements IActivity {
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
-        this.asset = getNativeTokenById(nativeToken?.id) ?? get(assets)?.baseCoin
+        this.asset = getNativeTokenAssetById(nativeToken?.id) ?? get(assets)?.baseCoin
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
 
         this.storageDeposit = getStorageDepositFromOutput(outputData.output)
