@@ -135,7 +135,7 @@
         if (!$loggedIn) {
             showAppNotification({
                 type: 'info',
-                message: $_('notifications.deepLinkingRequest.recievedWhileLoggedOut'),
+                message: $_('notifications.deepLinkingRequest.receivedWhileLoggedOut'),
             })
         }
     }

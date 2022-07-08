@@ -1118,7 +1118,7 @@
             "error": "Ei voida viedä transaktiohistoriaa tilille {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Ole hyvä ja kirjaudu aloittaaksesi IOTA-linkin",
+            "receivedWhileLoggedOut": "Ole hyvä ja kirjaudu aloittaaksesi IOTA-linkin",
             "notEnabled": "IOTA-linkit eivät ole käytössä",
             "invalidFormat": "Seuraamasi IOTA-linkki on virheellinen",
             "wallet": {

@@ -25,15 +25,17 @@
 <button
     type="button"
     {disabled}
-    class="rounded-xl max-w-full w-98 px-5 py-3.5 cursor-pointer text-center {classes}"
+    class="rounded-xl px-4 py-3.5 cursor-pointer text-center {classes}"
     on:click|stopPropagation={onClick}
     class:hidden
     class:darkmode={darkModeEnabled}
 >
     <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
-            <Icon height={iconHeight} width={iconWidth} {icon} classes="text-{iconColor}" />
-        </div>
+        {#if icon}
+            <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
+                <Icon height={iconHeight} width={iconWidth} {icon} classes="text-{iconColor}" />
+            </div>
+        {/if}
         <div class="col-span-10 h-full flex items-center">
             <span class="flex flex-col justify-center">
                 <Text
@@ -59,7 +61,7 @@
             </span>
         </div>
         {#if secondaryIcon && !disabled}
-            <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
+            <div class="col-span-1 col-end-13 h-full flex justify-center items-center justify-items-center">
                 <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
             </div>
         {/if}

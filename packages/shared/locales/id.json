@@ -1118,7 +1118,7 @@
             "error": "Tidak dapat mengekspor riwayat transaksi untuk {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Silakan masuk untuk memulai tautan IOTA",
+            "receivedWhileLoggedOut": "Silakan masuk untuk memulai tautan IOTA",
             "notEnabled": "Tautan IOTA tidak aktif",
             "invalidFormat": "Tautan IOTA yang Anda ikuti tidak valid",
             "wallet": {

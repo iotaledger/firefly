@@ -1118,7 +1118,7 @@
             "error": "无法导出 {accountAlias} 的交易历史记录"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "请登录以启动IOTA链接",
+            "receivedWhileLoggedOut": "请登录以启动IOTA链接",
             "notEnabled": "IOTA链接未启用",
             "invalidFormat": "您遵循的 IOTA 链接无效",
             "wallet": {
