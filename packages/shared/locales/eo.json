@@ -1118,7 +1118,7 @@
             "error": "Ne eblas eksporti transakcian historion por {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Bonvolu ensaluti por komenci la IOTA ligilon",
+            "receivedWhileLoggedOut": "Bonvolu ensaluti por komenci la IOTA ligilon",
             "notEnabled": "IOTA ligiloj ne estas ebligitaj",
             "invalidFormat": "La IOTA ligo, kiun vi sekvis, estas nevalida",
             "wallet": {

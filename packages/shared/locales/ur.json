@@ -1118,7 +1118,7 @@
             "error": "{accountAlias} کے لین دین کا ریکارڈ ایکسپورٹ نہیں کیا جا سکا"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
+            "receivedWhileLoggedOut": "Please login to initiate the IOTA link",
             "notEnabled": "IOTA links are not enabled",
             "invalidFormat": "The IOTA link you followed is invalid",
             "wallet": {
