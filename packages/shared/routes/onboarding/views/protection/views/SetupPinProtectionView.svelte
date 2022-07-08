@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, PinInput, Text } from 'shared/components'
-    import { cleanupProtectionOnboarding, resetImportState } from '@contexts/onboarding'
+    import { cleanupProtectionOnboarding } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { validatePinFormat } from '@lib/utils'
@@ -29,8 +29,8 @@
         confirmPinInputError = ''
     }
 
-    async function handleBackClick(): Promise<void> {
-        await resetImportState()
+    function handleBackClick(): void {
+        // await resetImportState()
         dispatch('previous')
     }
 

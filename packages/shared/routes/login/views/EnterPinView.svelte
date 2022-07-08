@@ -8,7 +8,7 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { COIN_TYPE, NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile, getStorageDirectoryOfProfile } from '@core/profile'
     import { initialiseProfileManager } from '@core/profile-manager'
     import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
@@ -102,7 +102,7 @@
                     if (verified === true) {
                         return Platform.getMachineId().then(() =>
                             getStorageDirectoryOfProfile(profile.id).then((path) => {
-                                initialiseProfileManager(path)
+                                initialiseProfileManager(path, COIN_TYPE[profile.networkProtocol])
                                 // TODO: set storage password with profile manager api
                                 // api.setStoragePassword(pinCode, {
                                 //     onSuccess() {

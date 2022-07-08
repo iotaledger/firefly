@@ -1,22 +1,20 @@
+<!-- this is a wrapper component for svelty-picker -->
 <script lang="ts">
-    // this is a wrapper component for svelty-picker
-
-    import { createEventDispatcher } from 'svelte'
     import SveltyPicker from 'svelty-picker'
+    import { createEventDispatcher } from 'svelte'
     import { Tooltip, Button } from 'shared/components'
     import { localize } from '@core/i18n'
 
     export let value: Date
 
     const dispatch = createEventDispatcher()
-    const pickedDate = value ? new Date(value).toLocaleString('sv') : undefined
-    const startDate = getNowDate().toLocaleString('sv')
+    const sveltyPickerStartDate = convertDateToSveltyPickerFormat(new Date())
 
-    let rawValue: string = pickedDate ? pickedDate : startDate
+    let sveltyPickerDate = convertDateToSveltyPickerFormat(value) ?? sveltyPickerStartDate
     let tooltip: Tooltip
 
-    function getNowDate(): Date {
-        return new Date(Date.now())
+    function convertDateToSveltyPickerFormat(date: Date): string {
+        return date?.toLocaleString('sv')
     }
 
     function handleCancelClick(): void {
@@ -24,7 +22,7 @@
     }
 
     function handleConfirmClick(): void {
-        value = new Date(rawValue)
+        value = new Date(sveltyPickerDate)
         dispatch('confirm')
     }
 </script>
@@ -35,10 +33,10 @@
         autoclose
         clearBtn={false}
         todayBtn={false}
-        {startDate}
+        startDate={sveltyPickerStartDate}
         format="yyyy-mm-dd hh:ii"
         theme="datetime-picker-colors"
-        bind:value={rawValue}
+        bind:value={sveltyPickerDate}
         on:change={tooltip?.refreshPosition}
     />
     <div class="flex flex-row justify-center items-center space-x-4 w-full">

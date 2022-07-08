@@ -6,6 +6,7 @@
     import { ProfileType } from '@core/profile'
     import { setNewProfileType, newProfile } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
+    import { onMount } from 'svelte'
 
     function handleContinueClick(profileType: ProfileType): void {
         setNewProfileType(profileType)
@@ -15,6 +16,10 @@
     function handleBackClick(): void {
         $profileSetupRouter.previous()
     }
+
+    onMount(() => {
+        setNewProfileType(null)
+    })
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick}>

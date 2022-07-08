@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
 
-import { clearSendParams } from '@lib/app'
 import { closePopup } from '@lib/popup'
 
 import { appRouter, AppRouter } from './app-router'
@@ -12,20 +11,24 @@ import { SettingsRouter, settingsRouter } from './settings-router'
 import {
     AppSetupRouter,
     appSetupRouter,
-    BackupRouter,
-    backupRouter,
-    RecoveryRouter,
-    recoveryRouter,
-    ledgerRouter,
-    LedgerRouter,
+    ProfileBackupRouter,
+    profileBackupRouter,
+    ProfileRecoveryRouter,
+    profileRecoveryRouter,
+    ledgerSetupRouter,
+    LedgerSetupRouter,
     MigrationRouter,
     migrationRouter,
-    NetworkRouter,
-    networkRouter,
+    NetworkSetupRouter,
+    networkSetupRouter,
     ProfileSetupRouter,
     profileSetupRouter,
     protectionRouter,
     ProtectionRouter,
+    shimmerClaimingRouter,
+    ShimmerClaimingRouter,
+    passwordSetupRouter,
+    PasswordSetupRouter,
 } from './subrouters'
 
 export function initRouters(): void {
@@ -48,13 +51,15 @@ function initBaseRouters(): void {
 
 function initSubrouters(): void {
     appSetupRouter.set(new AppSetupRouter())
-    backupRouter.set(new BackupRouter())
-    ledgerRouter.set(new LedgerRouter())
+    ledgerSetupRouter.set(new LedgerSetupRouter())
     migrationRouter.set(new MigrationRouter())
-    networkRouter.set(new NetworkRouter())
+    networkSetupRouter.set(new NetworkSetupRouter())
+    passwordSetupRouter.set(new PasswordSetupRouter())
+    profileBackupRouter.set(new ProfileBackupRouter())
+    profileRecoveryRouter.set(new ProfileRecoveryRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
     protectionRouter.set(new ProtectionRouter())
-    recoveryRouter.set(new RecoveryRouter())
+    shimmerClaimingRouter.set(new ShimmerClaimingRouter())
 }
 
 export function resetRouters(): void {
@@ -72,19 +77,20 @@ function resetBaseRouters(): void {
 
 function resetSubrouters(): void {
     get(appSetupRouter).reset()
-    get(backupRouter).reset()
-    get(recoveryRouter).reset()
-    get(ledgerRouter).reset()
+    get(ledgerSetupRouter).reset()
     get(migrationRouter).reset()
-    get(networkRouter).reset()
+    get(networkSetupRouter).reset()
+    get(passwordSetupRouter).reset()
+    get(profileBackupRouter).reset()
+    get(profileRecoveryRouter).reset()
     get(profileSetupRouter).reset()
     get(protectionRouter).reset()
+    get(shimmerClaimingRouter).reset()
 }
 
 export function resetAccountRouter(resetPanels: boolean = true): void {
     if (resetPanels) {
         get(accountRouter).reset()
-        clearSendParams()
     }
 }
 

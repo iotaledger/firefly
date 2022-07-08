@@ -3,23 +3,24 @@
     import {
         // routers
         AppSetupRouter,
-        BackupRouter,
-        LedgerRouter,
+        LedgerSetupRouter,
         MigrationRouter,
-        NetworkRouter,
+        NetworkSetupRouter,
+        PasswordSetupRouter,
+        ProfileBackupRouter,
+        ProfileRecoveryRouter,
         ProfileSetupRouter,
         ProtectionRouter,
-        RecoveryRouter,
+        ShimmerClaimingRouter,
 
         // views
-        BalanceView,
-        ClaimRewardsView,
         CongratulationsView,
-        PasswordView,
-        SecureView,
         WelcomeView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
+    // import { newProfile } from '../../lib/contexts/onboarding'
+
+    // $: console.log(`NEW PROFILE (${$onboardingRoute}): `, $newProfile)
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.Welcome}
@@ -34,42 +35,34 @@
     <Transition>
         <ProfileSetupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Network}
+{:else if $onboardingRoute === OnboardingRoute.NetworkSetup}
     <Transition>
-        <NetworkRouter />
+        <NetworkSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.LedgerSetup}
     <Transition>
-        <LedgerRouter />
+        <LedgerSetupRouter />
     </Transition>
     <!--  -->
-{:else if $onboardingRoute === OnboardingRoute.Secure}
+{:else if $onboardingRoute === OnboardingRoute.PasswordSetup}
     <Transition>
-        <SecureView />
-    </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Password}
-    <Transition>
-        <PasswordView />
+        <PasswordSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Protection}
     <Transition transition={false}>
         <ProtectionRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Backup}
+{:else if $onboardingRoute === OnboardingRoute.ProfileBackup}
     <Transition transition={false}>
-        <BackupRouter />
+        <ProfileBackupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Recovery}
+{:else if $onboardingRoute === OnboardingRoute.ProfileRecovery}
     <Transition transition={false}>
-        <RecoveryRouter />
+        <ProfileRecoveryRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Balance}
+{:else if $onboardingRoute === OnboardingRoute.ShimmerClaiming}
     <Transition>
-        <BalanceView />
-    </Transition>
-{:else if $onboardingRoute === OnboardingRoute.ClaimRewards}
-    <Transition>
-        <ClaimRewardsView />
+        <ShimmerClaimingRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Migration}
     <Transition>

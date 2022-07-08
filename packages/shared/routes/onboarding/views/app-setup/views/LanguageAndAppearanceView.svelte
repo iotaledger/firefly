@@ -1,10 +1,9 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, Dropdown, OnboardingLayout, Text } from 'shared/components'
-    import { appSettings, appStage, AppStage, mobile, shouldBeDarkMode } from '@core/app'
+    import { appSettings, AppTheme, mobile, shouldBeDarkMode } from '@core/app'
     import { Locale, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
-    import { updateNewProfile } from '@contexts/onboarding'
 
     /**
      * NOTE: It is necessary to use locale directly rather than the
@@ -21,7 +20,7 @@
 
     let _clonedVariable = undefined
     let segments = BLINK_SEGMENTS
-    let appTheme = $appSettings.theme
+    let appTheme = $appSettings.theme ?? AppTheme.Light
 
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
@@ -37,9 +36,6 @@
     }
 
     function handleContinueClick(): void {
-        if ($appStage === AppStage.ALPHA || $appStage === AppStage.BETA) {
-            updateNewProfile({ isDeveloperProfile: true })
-        }
         $appSetupRouter.next()
     }
 

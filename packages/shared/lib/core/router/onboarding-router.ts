@@ -4,9 +4,9 @@ import { profiles, ProfileType } from '@core/profile'
 import { newProfile, ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
-import { BackupRoute, OnboardingRoute, ProfileSetupRoute } from './enums'
+import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from './enums'
 import { Router } from './router'
-import { backupRoute, profileSetupRoute } from './subrouters'
+import { profileBackupRoute, profileSetupRoute } from './subrouters'
 import { FireflyEvent } from './types'
 
 export const onboardingRoute = writable<OnboardingRoute>(null)
@@ -16,13 +16,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
     hasCompletedRecovery: boolean = false
 
     constructor() {
-        super(OnboardingRoute.Welcome, onboardingRoute)
-        this.init()
-    }
-
-    public init(): void {
-        const hasCompletedOnboardingBefore = get(profiles).length > 0
-        this.routeStore.set(hasCompletedOnboardingBefore ? OnboardingRoute.Network : OnboardingRoute.Welcome)
+        super(hasCompletedOnboardingBefore() ? OnboardingRoute.NetworkSetup : OnboardingRoute.Welcome, onboardingRoute)
     }
 
     next(event?: FireflyEvent): void {
@@ -35,16 +29,16 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 nextRoute = OnboardingRoute.AppSetup
                 break
             case OnboardingRoute.AppSetup:
-                nextRoute = OnboardingRoute.Network
+                nextRoute = OnboardingRoute.NetworkSetup
                 break
-            case OnboardingRoute.Network:
+            case OnboardingRoute.NetworkSetup:
                 nextRoute = OnboardingRoute.ProfileSetup
                 break
             case OnboardingRoute.ProfileSetup: {
                 const profileType = get(newProfile)?.type
                 if (profileType) {
                     if (profileType === ProfileType.Software) {
-                        nextRoute = OnboardingRoute.Password
+                        nextRoute = OnboardingRoute.PasswordSetup
                     } else if (profileType === ProfileType.Ledger) {
                         nextRoute = OnboardingRoute.Protection
                     }
@@ -56,33 +50,30 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                     (_profileRecoveryType === ProfileRecoveryType.Mnemonic ||
                         _profileRecoveryType === ProfileRecoveryType.Stronghold)
                 ) {
-                    nextRoute = OnboardingRoute.Recovery
+                    nextRoute = OnboardingRoute.ProfileRecovery
                 } else if (_profileRecoveryType === ProfileRecoveryType.FireflyLedger) {
                     nextRoute = OnboardingRoute.LedgerSetup
                 }
                 break
             }
-            case OnboardingRoute.Secure:
-                nextRoute = OnboardingRoute.Protection
-                break
             case OnboardingRoute.Protection: {
                 const _profileType = get(newProfile)?.type
                 if (_profileType === ProfileType.Software) {
-                    nextRoute = OnboardingRoute.Backup
+                    nextRoute = OnboardingRoute.ProfileBackup
                 } else if (_profileType === ProfileType.Ledger) {
                     nextRoute = OnboardingRoute.LedgerSetup
                 }
 
                 const _profileRecoveryType = get(profileRecoveryType)
                 if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-                    nextRoute = OnboardingRoute.Backup
-                    backupRoute.set(BackupRoute.Backup)
+                    nextRoute = OnboardingRoute.ProfileBackup
+                    profileBackupRoute.set(ProfileBackupRoute.Backup)
                 } else if (_profileRecoveryType === ProfileRecoveryType.Stronghold) {
                     nextRoute = OnboardingRoute.Congratulations
                 }
                 break
             }
-            case OnboardingRoute.Recovery: {
+            case OnboardingRoute.ProfileRecovery: {
                 const _profileRecoveryType = get(profileRecoveryType)
                 if (
                     _profileRecoveryType === ProfileRecoveryType.Mnemonic ||
@@ -95,14 +86,14 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
 
-            case OnboardingRoute.Password: {
+            case OnboardingRoute.PasswordSetup: {
                 const { password } = params
                 if (password) {
                     nextRoute = OnboardingRoute.Protection
                 }
                 break
             }
-            case OnboardingRoute.Backup: {
+            case OnboardingRoute.ProfileBackup: {
                 const setupType = get(profileRecoveryType)
                 if (setupType === ProfileRecoveryType.Seed || setupType === ProfileRecoveryType.SeedVault) {
                     nextRoute = OnboardingRoute.Migration
@@ -111,22 +102,25 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 }
                 break
             }
-            case OnboardingRoute.Balance:
-                if (get(profileRecoveryType) === ProfileRecoveryType.TrinityLedger) {
-                    nextRoute = OnboardingRoute.Migration
-                } else {
-                    nextRoute = OnboardingRoute.Password
-                }
-                break
+            // case OnboardingRoute.Balance:
+            //     if (get(profileRecoveryType) === ProfileRecoveryType.TrinityLedger) {
+            //         nextRoute = OnboardingRoute.Migration
+            //     } else {
+            //         nextRoute = OnboardingRoute.Password
+            //     }
+            //     break
             case OnboardingRoute.Migration:
                 nextRoute = OnboardingRoute.Congratulations
                 break
             case OnboardingRoute.LedgerSetup:
                 if (get(profileRecoveryType) === ProfileRecoveryType.TrinityLedger) {
-                    nextRoute = OnboardingRoute.Balance
+                    // nextRoute = OnboardingRoute.Balance
                 } else {
                     nextRoute = OnboardingRoute.Congratulations
                 }
+                break
+            case OnboardingRoute.ShimmerClaiming:
+                nextRoute = OnboardingRoute.Congratulations
                 break
             case OnboardingRoute.Congratulations:
                 get(appRouter).next()
@@ -143,4 +137,8 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             get(appRouter).previous()
         }
     }
+}
+
+function hasCompletedOnboardingBefore(): boolean {
+    return get(profiles).length > 0
 }

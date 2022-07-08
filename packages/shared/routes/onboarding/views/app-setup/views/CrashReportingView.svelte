@@ -5,7 +5,7 @@
     import { appSetupRouter } from '@core/router'
 
     const busy = false
-    let sendCrashReports = true
+    let sendCrashReports = $appSettings?.sendCrashReports ?? true
 
     const handleBackClick = (): void => {
         $appSetupRouter.previous()
@@ -17,6 +17,7 @@
         if (!$isAwareOfCrashReporting) {
             isAwareOfCrashReporting.set(true)
         }
+
         $appSetupRouter.next()
     }
 </script>
