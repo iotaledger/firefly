@@ -137,7 +137,7 @@
         <ToastContainer />
     </div>
     <div class="scanner-ui">
-        <QRScanner />
+        <QRScanner locale={$_} />
     </div>
 {/if}
 
