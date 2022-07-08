@@ -10,6 +10,7 @@
         InclusionState,
     } from '@core/wallet'
     import { closePopup, openPopup } from '@lib/popup'
+    import { checkStronghold } from '@lib/stronghold'
     import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
@@ -23,6 +24,14 @@
     $: isIncomingActivityUnclaimed =
         activity?.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
+
+    async function handleClaim(activity: Activity): Promise<void> {
+        try {
+            await checkStronghold(() => claimActivity(activity))
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
     function reject() {
         openPopup({
@@ -106,7 +115,7 @@
                         </button>
                         <button
                             class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
-                            on:click|stopPropagation={() => claimActivity(activity)}
+                            on:click|stopPropagation={() => handleClaim(activity)}
                         >
                             {#if activity.isClaiming}
                                 <Spinner busy={true} classes="justify-center h-fit" />
