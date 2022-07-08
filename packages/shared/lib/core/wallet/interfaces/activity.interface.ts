@@ -4,7 +4,6 @@ import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Subject } from '../types'
 import { IAsset } from './asset.interface'
-import { ITokenMetadata } from './token-metadata.interface'
 
 export interface IActivity {
     id: string
@@ -20,7 +19,6 @@ export interface IActivity {
     sender: Subject
     recipient: Subject
     asset: IAsset
-    token: ITokenMetadata
     isAsync: boolean
     expirationDate?: Date
     isHidden?: boolean

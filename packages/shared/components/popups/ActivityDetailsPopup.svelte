@@ -26,7 +26,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.token))
+    $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.asset?.metadata))
 
     $: asyncStatus = activity.getAsyncStatus($time)
 
