@@ -15,8 +15,8 @@ export const assets: Readable<IAsset[]> = derived(
             {
                 metadata: BASE_TOKEN[$activeProfile?.networkProtocol],
                 balance: {
-                    total: Number($selectedAccount?.balances.total),
-                    available: Number($selectedAccount?.balances.available),
+                    total: Number($selectedAccount?.balances.baseCoin.total),
+                    available: Number($selectedAccount?.balances.baseCoin.available),
                 },
             },
         ]
