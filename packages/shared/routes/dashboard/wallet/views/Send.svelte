@@ -495,11 +495,7 @@
                     </button>
                 </div>
             </div>
-            <Illustration 
-                background
-                height={230}
-                illustration="send-mobile"
-            />
+            <Illustration background height={230} illustration="send-mobile" />
             <div class="w-full h-full flex flex-col justify-between">
                 <div>
                     <div class="w-full block">
