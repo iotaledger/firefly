@@ -4,14 +4,21 @@
 
     export let address = ''
     export let isCopyable = false
+    export let fontSize = 'base'
+
+    let copyableBoxElement: CopyableBox
+
+    export function copyAddress(): void {
+        copyableBoxElement.onClick()
+    }
 </script>
 
 {#if address}
-    <CopyableBox col {isCopyable} value={address} {...$$restProps}>
-        <Text type="pre" fontSize="base" fontWeight={FontWeightText.medium}>
+    <CopyableBox bind:this={copyableBoxElement} col {isCopyable} value={address} {...$$restProps}>
+        <Text type="pre" {fontSize} fontWeight={FontWeightText.medium}>
             {address.slice(0, address.length / 2)}
         </Text>
-        <Text type="pre" fontSize="base" fontWeight={FontWeightText.medium}>
+        <Text type="pre" {fontSize} fontWeight={FontWeightText.medium}>
             {address.slice(address.length / 2)}
         </Text>
     </CopyableBox>

@@ -1118,7 +1118,7 @@
             "error": "Transaktionsverlauf für {accountAlias} konnte nicht exportiert werden"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Bitte melde dich an, um den IOTA-Link zu initiieren",
+            "receivedWhileLoggedOut": "Bitte melde dich an, um den IOTA-Link zu initiieren",
             "notEnabled": "IOTA-Links sind nicht aktiviert",
             "invalidFormat": "Der von dir gefolgte IOTA-Link ist ungültig",
             "wallet": {
