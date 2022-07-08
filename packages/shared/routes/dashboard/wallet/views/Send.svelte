@@ -504,7 +504,7 @@
 </script>
 
 {#if $mobile}
-    <div class="send-drawer h-full flex flex-col justify-between p-6">
+    <div class="send-drawer h-full flex flex-col justify-between p-6 overflow-hidden">
         <div>
             <div class="w-full text-center">
                 <Text bold bigger>{localize('general.sendFunds')}</Text>
@@ -514,7 +514,7 @@
                     </button>
                 </div>
             </div>
-            <Illustration illustration="send-mobile" />
+            <Illustration background height={230} illustration="send-mobile" />
             <div class="w-full h-full flex flex-col justify-between">
                 <div>
                     <div class="w-full block">
@@ -530,7 +530,7 @@
                                     height="22"
                                 />
                             </span>
-                            <div class="mb-6 w-full" on:click={selectInternal}>
+                            <div class="mb-4 w-full" on:click={selectInternal}>
                                 <Input style="text-align: left;" type="button" value={to?.label || null} />
                             </div>
                         {:else}
@@ -548,7 +548,7 @@
                                 label={localize('general.sendToAddress')}
                                 disabled={$isTransferring}
                                 placeholder={`${localize('general.sendToAddress')} \n${addressPrefix}...`}
-                                classes="mb-6"
+                                classes="mb-4"
                                 autofocus={false}
                             />
                         {/if}

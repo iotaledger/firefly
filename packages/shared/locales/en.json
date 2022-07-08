@@ -1078,6 +1078,7 @@
         "sendTo": "Send To",
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Send tokens to an address",

@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="
+            default-src 'self';
+            connect-src 'self' https://*.iota.org https://*.iota.works https://*.iota.cafe https://raw.githubusercontent.com/iotaledger/firefly/develop/packages/shared/lib/chrysalis.json https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/ https://d36tzso9lqxl3c.cloudfront.net/results/staking/ https://iotatreasury.org/how-voting-works.html;
+            object-src 'none';
+            style-src 'self' 'unsafe-inline';
+            img-src 'self' data:;
+            media-src 'self' https://d17lo1ro77zjnd.cloudfront.net/firefly/videos/ledger_integration_v12.mp4"
+        />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
         <meta name="apple-mobile-web-app-capable" content="yes">
