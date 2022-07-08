@@ -9,7 +9,7 @@ export async function claimActivity(activity: Activity): Promise<void> {
     const account = get(selectedAccount)
     try {
         updateActivityByActivityId(account.id, activity.id, { isClaiming: true })
-        const results = await account.collectOutputs([activity.outputId])
+        const results = await account.claimOutputs([activity.outputId])
         if (results.length > 0) {
             const transactionId = results[0].transactionId
             addClaimedActivity(account.id, activity.transactionId, {

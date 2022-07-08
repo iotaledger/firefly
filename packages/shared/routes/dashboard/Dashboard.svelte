@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { selectedAccountId } from '@core/account'
+    import { handleDeepLink } from '@common/deep-links'
     import { localize } from '@core/i18n'
     import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
     import {
@@ -9,7 +9,6 @@
         logout,
         reflectLockedStronghold,
         saveActiveProfile,
-        updateActiveProfile,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
@@ -26,8 +25,6 @@
     const { hasLoadedAccounts, loggedIn } = $activeProfile
 
     $: $activeProfile, saveActiveProfile()
-    // TODO: Set this in switch account action
-    $: updateActiveProfile({ lastUsedAccountId: $selectedAccountId })
 
     const tabs = {
         wallet: Wallet,
@@ -92,9 +89,15 @@
                 }
             )
         } */
+
         Platform.onEvent('menu-logout', () => {
             void logout()
         })
+
+        Platform.onEvent('deep-link-params', (data: string) => {
+            handleDeepLinkRequest(data)
+        })
+
         /* Platform.onEvent('notification-activated', (contextData) => {
             if (contextData) {
                 if (
@@ -109,8 +112,6 @@
                 }
             }
         }) */
-        /*         Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
-         */
     })
 
     onDestroy(() => {
@@ -146,7 +147,7 @@
     }
 
     $: {
-        if ($hasLoadedAccounts) {
+        if ($hasLoadedAccounts && $loggedIn) {
             const minTimeElapsed = 3000 - (Date.now() - startInit)
             const cancelBusyState = () => {
                 busy = false
@@ -167,44 +168,11 @@
     }
 
     // TODO: handle deep link requests for new send form
-    /* const handleDeepLinkRequest = (data: string): void => {
-        const _redirect = (tab: DashboardRoute): void => {
-            isDeepLinkRequestActive.set(true)
-            $dashboardRouter.goTo(tab)
+    const handleDeepLinkRequest = (data: string): void => {
+        if ($activeProfile?.hasLoadedAccounts) {
+            handleDeepLink(data)
         }
-        if (!$appSettings.deepLinking) {
-            _redirect(DashboardRoute.Settings)
-            $settingsRouter.goToChildRoute(SettingsRoute.Advanced, AdvancedSettings.DeepLinks)
-            showAppNotification({ type: 'warning', message: locale('notifications.deepLinkingRequest.notEnabled') })
-        } else {
-            if ($accounts && $accounts.length > 0) {
-                const addressPrefix = $accounts[0].depositAddress.split('1')[0]
-                const parsedDeepLink = parseDeepLinkRequest(addressPrefix, data)
-                if (
-                    parsedDeepLink &&
-                    parsedDeepLink.context === DeepLinkContext.Wallet &&
-                    parsedDeepLink.operation === WalletOperation.Send &&
-                    parsedDeepLink.parameters
-                ) {
-                    _redirect(DashboardRoute.Wallet)
-                    sendParams.set({
-                        ...parsedDeepLink.parameters,
-                        isInternal: false,
-                    })
-                    showAppNotification({
-                        type: parsedDeepLink.notification.type,
-                        message: parsedDeepLink.notification.message,
-                    })
-                } else {
-                    showAppNotification({
-                        type: 'error',
-                        message: locale('notifications.deepLinkingRequest.invalidFormat'),
-                    })
-                }
-                Platform.DeepLinkManager.clearDeepLinkRequest()
-            }
-        }
-    } */
+    }
 
     $: if (!busy && $hasLoadedAccounts) {
         /**

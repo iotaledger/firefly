@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { Button, ExpirationTimePicker, KeyValueBox, Text } from 'shared/components'
+    import { onMount } from 'svelte'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Spinner } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeightText, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isSoftwareProfile } from '@core/profile'
     import {
         ActivityDirection,
         ActivityType,
@@ -15,36 +16,61 @@
         IAsset,
         InclusionState,
         Subject,
-        trySendOutput,
+        sendOutput,
+        validateSendConfirmation,
+        generateRawAmount,
+        assets,
     } from '@core/wallet'
-    import { isValidExpirationDateTime } from '@core/utils'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
-    import { promptUserToConnectLedger } from '@lib/ledger'
-    import { showAppNotification } from '@lib/notifications'
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
+    import { BaseError } from '@core/error'
+    import { isTransferring } from '@lib/wallet'
+    import { checkStronghold } from '@lib/stronghold'
 
     export let asset: IAsset
     export let amount = '0'
     export let unit: string
-    export let rawAmount: number
     export let recipient: Subject
     export let internal = false
     export let metadata: string
     export let tag: string
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     // If storage deposit is 0, then set expiration date to tomorrow
     const defaultExpirationDate = new Date()
     defaultExpirationDate.setDate(defaultExpirationDate.getDate() + 1)
 
     let expirationDate: Date
-    let storageDeposit: number
-
+    let storageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
+    let error: BaseError
 
-    $: internal = recipient.type === 'account'
+    $: asset = asset ?? $assets?.[0]
+    $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+    $: internal = recipient.type === 'account'
+
+    $: $$props, expirationDate, rawAmount, void _prepareOutput()
+
+    $: expirationDate, (error = null)
+    $: formattedFiatValue =
+        formatCurrency(
+            convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
+        ) || '-'
+
+    $: transactionDetails = {
+        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
+        inclusionState: InclusionState.Pending,
+        direction: ActivityDirection.Out,
+        amount: amount?.length > 0 ? amount : '0',
+        unit,
+        subject: recipient,
+        metadata,
+        tag,
+        storageDeposit: storageDeposit,
+    }
 
     async function _prepareOutput(): Promise<void> {
         outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
@@ -57,36 +83,23 @@
         storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
     }
 
-    $: $$props, expirationDate, void _prepareOutput()
-
-    function onConfirm(): void {
-        if ($isSoftwareProfile) {
-            void sendIfValidExpirationTime()
-        } else if ($isLedgerProfile) {
-            closePopup()
-            promptUserToConnectLedger(false, () => void sendIfValidExpirationTime(false), undefined)
-        }
+    async function validateAndSendOutput(): Promise<void> {
+        validateSendConfirmation(outputOptions, preparedOutput)
+        await sendOutput(preparedOutput)
+        closePopup()
     }
 
-    function sendIfValidExpirationTime(shouldClosePopup = true): Promise<void> {
-        if (expirationDate) {
-            if (isValidExpirationDateTime(expirationDate)) {
-                return closePopupAndSend(shouldClosePopup)
+    async function onConfirm(): Promise<void> {
+        error = null
+        try {
+            if ($isSoftwareProfile) {
+                await checkStronghold(validateAndSendOutput, true)
             }
-            showAppNotification({
-                type: 'warning',
-                message: localize('warning.transaction.invalidExpirationDateTime'),
-            })
-            return
+        } catch (err) {
+            if (!error) {
+                error = err.error ? new BaseError({ message: err.error ?? err.message, logError: true }) : err
+            }
         }
-        return closePopupAndSend(shouldClosePopup)
-    }
-
-    function closePopupAndSend(shouldClosePopup: boolean): Promise<void> {
-        if (shouldClosePopup) {
-            closePopup()
-        }
-        return trySendOutput(outputOptions, preparedOutput)
     }
 
     function onBack(): void {
@@ -105,22 +118,15 @@
         })
     }
 
-    $: formattedFiatValue =
-        formatCurrency(
-            convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
-        ) || '-'
-
-    $: transactionDetails = {
-        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
-        inclusionState: InclusionState.Pending,
-        direction: ActivityDirection.Out,
-        amount: amount?.length > 0 ? amount : '0',
-        unit,
-        subject: recipient,
-        metadata,
-        tag,
-        storageDeposit: storageDeposit,
-    }
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            if (!error) {
+                error = err.error ? new BaseError({ message: err.error, logError: true }) : err
+            }
+        }
+    })
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -138,9 +144,18 @@
                 />
             </KeyValueBox>
         {/if}
+        {#if error}
+            <Error error={error?.message} />
+        {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>
-        <Button autofocus classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>
+        <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring}>
+            {#if $isTransferring}
+                <Spinner busy classes="justify-center break-all" />
+            {:else}
+                {localize('actions.confirm')}
+            {/if}
+        </Button>
     </popup-buttons>
 </send-confirmation-popup>
