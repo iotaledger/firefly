@@ -528,7 +528,7 @@
                                 bind:address
                                 label={localize('general.sendToAddress')}
                                 disabled={$isTransferring}
-                                placeholder={`${localize('general.sendToAddress')}: ${addressPrefix}...`}
+                                placeholder={`${localize('general.sendToAddress')} \n${addressPrefix}...`}
                                 classes="mb-6"
                                 autofocus={false}
                             />

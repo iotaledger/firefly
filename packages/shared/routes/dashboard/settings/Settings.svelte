@@ -23,10 +23,9 @@
 </script>
 
 <div
-    class="relative h-full w-full px-0 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !==
-        SettingsRoute.Init && 'md:pt-20'} {$mobile && 'overflow-y-auto'} {$settingsRoute === SettingsRoute.Init &&
-        $mobile &&
-        'settings-wrapper'}"
+    class="relative h-full w-full px-0 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$mobile
+        ? ''
+        : 'pb-10'} {$settingsRoute === SettingsRoute.Init && $mobile && 'settings-wrapper md:pt-20'}"
     in:fly={{ duration: $mobile ? 200 : 0, x: 200 }}
 >
     {#if !$mobile}
@@ -43,6 +42,6 @@
 
 <style>
     .settings-wrapper {
-        margin-bottom: calc(env(safe-area-inset-bottom) + 20px);
+        padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
     }
 </style>
