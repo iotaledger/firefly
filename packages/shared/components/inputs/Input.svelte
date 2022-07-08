@@ -7,21 +7,21 @@
 
     export let value = ''
     export let classes = ''
-    export let style = undefined
-    export let label = undefined
-    export let placeholder = undefined
+    export let style: string
+    export let label: string
+    export let placeholder: string
     export let type = 'text'
     export let error: string
-    export let maxlength = null
+    export let maxlength: number
     export let float = false
     export let integer = false
     export let autofocus = false
-    export let submitHandler = undefined
+    export let submitHandler = (): void => {}
     export let disabled = false
-    export let maxDecimals = undefined
+    export let maxDecimals: number
     export let disableContextMenu = false
     export let capsLockWarning = false
-    export let inputElement = undefined
+    export let inputElement: HTMLInputElement
     export let clearBackground = false
     export let clearPadding = false
     export let clearBorder = false
@@ -84,32 +84,25 @@
     }
 
     function onPaste(event: ClipboardEvent): void {
-        if (event.clipboardData && (float || integer)) {
-            const pasteVal = event.clipboardData.getData('text')
-            // Discard scientific notation or negative
-            if (pasteVal.indexOf('e') >= 0 || pasteVal.indexOf('-') >= 0) {
+        if (!event.clipboardData || !(float || integer)) {
+            return
+        }
+
+        const pasteValue = event.clipboardData.getData('text')
+        const number = integer ? parseInt(pasteValue, 10) : float ? parseCurrency(pasteValue) : NaN
+
+        switch (true) {
+            // scientific notation or negative
+            case ['e', '-'].some((symbol) => pasteValue.includes(symbol)):
+            case Number.isNaN(number):
+            case float && !!maxDecimals:
+            case integer && allDecimalSeparators.some((separator) => pasteValue.includes(separator)):
                 event.preventDefault()
-            } else if (float) {
-                const val = parseCurrency(pasteVal)
-                // Discard any numbers we can't parse as floats
-                if (Number.isNaN(val)) {
-                    event.preventDefault()
-                } else if (maxDecimals !== undefined) {
-                    value = formatNumber(val, undefined, maxDecimals, 0)
-                    event.preventDefault()
-                }
-            } else if (integer) {
-                // Dicard anything with a decimal separator
-                if (allDecimalSeparators.some((sep) => pasteVal.indexOf(sep) >= 0)) {
-                    event.preventDefault()
-                } else {
-                    const val = Number.parseInt(pasteVal, 10)
-                    // Discard any number we can't parse as integers
-                    if (Number.isNaN(val)) {
-                        event.preventDefault()
-                    }
-                }
-            }
+                break
+        }
+
+        if (!Number.isNaN(number) && float && !!maxDecimals) {
+            value = formatNumber(number, undefined, maxDecimals, 0)
         }
     }
 

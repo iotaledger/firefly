@@ -38,10 +38,10 @@
     $: darkModeEnabled = $appSettings.darkMode
 
     export function resetAndFocus(): void {
-        if (!disabled) {
-            buttonElement.focus()
-        } else {
+        if (disabled) {
             setTimeout(resetAndFocus, 100)
+        } else {
+            buttonElement.focus()
         }
     }
 
