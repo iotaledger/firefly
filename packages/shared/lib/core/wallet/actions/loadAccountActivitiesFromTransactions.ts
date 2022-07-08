@@ -6,7 +6,7 @@ export function loadAccountActivitiesFromTransactions(account: IAccountState): v
     Object.keys(account.meta.transactions).forEach((transactionId) => {
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setFromTransaction(transactionId, account.meta.transactions?.[transactionId], account)
+            new Activity().setFromTransaction(account.meta.transactions?.[transactionId], account)
         )
     })
 }

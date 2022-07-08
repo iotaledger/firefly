@@ -13,7 +13,8 @@
     <BalanceSummarySection
         title={localize('popups.storageDepositBreakdown.pendingTransactions.title')}
         subtitle={localize('popups.storageDepositBreakdown.pendingTransactions.subtitle')}
-        amount={(Number($selectedAccount?.balances.total) ?? 0) - Number($selectedAccount?.balances.available ?? 0)}
+        amount={(Number($selectedAccount?.balances.baseCoin.total) ?? 0) -
+            Number($selectedAccount?.balances.baseCoin.available ?? 0)}
     />
     <HR hidden />
     <BalanceSummarySection

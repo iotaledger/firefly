@@ -27,7 +27,7 @@
     {/if}
     <div class="flex flex-col flex-wrap items-start space-y-1">
         <TogglableAmountLabel
-            amount={$selectedAccount?.balances.available}
+            amount={$selectedAccount?.balances.baseCoin.available}
             tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
         />
         <Text>
