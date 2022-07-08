@@ -485,7 +485,7 @@
 </script>
 
 {#if $mobile}
-    <div class="send-drawer h-full flex flex-col justify-between p-6">
+    <div class="send-drawer h-full flex flex-col justify-between p-6 overflow-hidden">
         <div>
             <div class="w-full text-center">
                 <Text bold bigger>{localize('general.sendFunds')}</Text>
