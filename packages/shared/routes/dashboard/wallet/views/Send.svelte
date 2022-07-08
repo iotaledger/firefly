@@ -71,6 +71,10 @@
     let transactionTimeoutId = null
     let transactionNotificationId = null
 
+    // TODO: find a better solution to avoid a crash when the action sheet is called again
+    // before the last call is finished.
+    let isActionSheetCalled = false
+
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
@@ -436,11 +440,19 @@
     const selectInternal = async (evt: Event): Promise<void> => {
         const node = evt.target as HTMLElement
         const accountItems = accountsDropdownItems.filter((item) => item.id !== $selectedAccountStore.id)
+
+        if (isActionSheetCalled) {
+            return
+        }
+
+        isActionSheetCalled = true
+
         const index = await Platform.showActionSheet({
             title: localize(`general.${SEND_TYPE.INTERNAL}`),
             options: [...accountItems.map((item) => ({ title: item.alias })), { title: 'Cancel', style: 'CANCEL' }],
         })
 
+        isActionSheetCalled = false
         if (index == accountItems.length) {
             node.blur()
             return
@@ -452,11 +464,18 @@
     }
 
     const showUnitActionSheet = async (units: Unit[], callback: (toUnit: Unit) => void): Promise<void> => {
+        if (isActionSheetCalled) {
+            return
+        }
+
+        isActionSheetCalled = true
+
         const index = await Platform.showActionSheet({
             title: localize('general.unit'),
             options: [...units.map((unit) => ({ title: unit as string })), { title: 'Cancel', style: 'CANCEL' }],
         })
 
+        isActionSheetCalled = false
         callback(units[index])
     }
 
