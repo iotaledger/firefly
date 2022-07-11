@@ -7,16 +7,16 @@
     import { AccountRoute } from '@core/router/enums'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { spring } from 'svelte/motion'
-    import { onDestroy } from 'svelte'
     import { selectedAccountStore } from 'shared/lib/wallet'
 
     export let classes = ''
     export let scale = spring(1)
     export let onMenuClick = (): void => {}
 
-    let unsubscribeMobileBalanceAnimation = () => {}
-    let unsubscribeMobileCurencyAnimation = () => {}
-    let unsubscribeMobileButtonsAnimation = () => {}
+    let background: HTMLElement
+    let balance: HTMLElement
+    let conversion: HTMLElement
+    let buttons: HTMLElement
 
     let showPreciseBalance = false
 
@@ -27,76 +27,56 @@
         $accountRouter.goTo(AccountRoute.Receive)
     }
 
-    function getScaleStyle(factor: number): string {
+    function getScale(factor: number): string {
         return `scale(${factor}, ${factor})`
     }
 
-    function getTranslateStyle(x: number, y: number, unit: string) {
-        return `translate(${x}${unit}, ${y}${unit})`
+    function getTranslation(y: number) {
+        return `translateY(${y}px)`
     }
 
-    function animateMobileBalance(node: HTMLElement): void {
-        unsubscribeMobileBalanceAnimation = scale.subscribe((curr) => {
-            const scaleQuad = 0.4 * curr * curr + 0.6
-            const transQuad = 1 - curr * curr
-            const posX = node.getBoundingClientRect().left
-            const scale = getScaleStyle(scaleQuad)
-            const translate = getTranslateStyle(posX * 0.75 * transQuad, -110 * transQuad, 'px')
+    function scrollAnimation(curr: number): void {
+        if (!background || !conversion || !buttons || !window) return
 
-            node.style.transform = `${scale} ${translate}`
-        })
+        background.style.transform = getTranslation(-background.clientHeight * 0.6 * (1 - curr))
+
+        transformBalance(curr)
+        conversion.style.transform = getTranslation(background.clientHeight * (1 - curr))
+        buttons.style.transform = getTranslation(background.clientHeight * (1 - curr))
     }
 
-    function animateMobileCurrency(node: HTMLElement): void {
-        const opacity = 1
-        unsubscribeMobileCurencyAnimation = scale.subscribe((curr) => {
-            const speedUp = curr - (1 - curr)
-            const scale = getScaleStyle(curr)
-            const translate = getTranslateStyle(0, -7 * (1 - curr), 'vh')
+    function transformBalance(curr: number): void {
+        if (!balance || !window) return
 
-            node.style.transform = `${translate} ${scale}`
-            node.style.opacity = `${opacity * speedUp}`
-        })
+        const scale = getScale(0.4 * curr + 0.6)
+        const translate = getTranslation(background.clientHeight * 0.8 * (1 - curr))
+
+        balance.style.transform = `${scale} ${translate}`
     }
 
-    function animateMobileButtons(node: HTMLElement): void {
-        const opacity = 1
-        unsubscribeMobileButtonsAnimation = scale.subscribe((curr) => {
-            const speedUp = curr - (1 - curr)
-            const scale = getScaleStyle(curr)
-            const translate = getTranslateStyle(0, -15 * (1 - curr), 'vh')
-
-            node.style.transform = `${translate} ${scale}`
-            node.style.opacity = `${opacity * speedUp}`
-        })
-    }
+    $: scrollAnimation($scale)
 
     function togglePreciseBalance() {
         showPreciseBalance = !showPreciseBalance
     }
-
-    onDestroy(() => {
-        unsubscribeMobileBalanceAnimation()
-        unsubscribeMobileCurencyAnimation()
-        unsubscribeMobileButtonsAnimation()
-    })
 </script>
 
 {#if $mobile}
     <div
         class="bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative p-5 pb-0 pt-20 bg-transparent {classes}"
+        bind:this={background}
     >
         <!-- Balance -->
         <div data-label="total-balance" class="flex flex-col flex-wrap space-y-1.5">
             <div class="flex flex-col flex-wrap items-center">
-                <div on:click={togglePreciseBalance} use:animateMobileBalance>
+                <div on:click={togglePreciseBalance} bind:this={balance}>
                     <Text type="h1">
                         {showPreciseBalance
                             ? formatUnitPrecision($selectedAccountStore?.rawIotaBalance, Unit.Mi)
                             : formatUnitBestMatch($selectedAccountStore?.rawIotaBalance, true, 3)}
                     </Text>
                 </div>
-                <div use:animateMobileCurrency>
+                <div bind:this={conversion}>
                     <Text type="h4" smaller overrideColor classes="text-gray-500">
                         {$selectedAccountStore?.balanceEquiv}
                     </Text>
@@ -104,7 +84,7 @@
             </div>
         </div>
         <!-- Action Send / Receive -->
-        <div class="flex flex-row justify-between space-x-4 mt-7 mb-10" use:animateMobileButtons>
+        <div class="flex flex-row justify-between space-x-4 mt-7 mb-10" bind:this={buttons}>
             <button
                 class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-blue-500 text-white"
                 on:click={handleReceiveClick}
