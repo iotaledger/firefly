@@ -80,7 +80,7 @@
             {locale}
             {fileName}
             {allowedExtensions}
-            onDrop={$mobile ? handleFileSelectMobile : handleFileSelect}
+            onDrop={handleFileSelect}
             bind:dropping
             extensionsLabel={locale('actions.importExtentions')}
         />
