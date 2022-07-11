@@ -91,8 +91,12 @@
         {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={!fileName} onClick={handleContinueClick}>
-            {locale('actions.continue')}
+        <Button
+            classes="flex-1"
+            disabled={!$mobile && !fileName}
+            onClick={$mobile ? handleFileSelectMobile : handleFileSelect}
+        >
+            {locale($mobile ? 'actions.chooseBackupFile' : 'actions.continue')}
         </Button>
     </div>
     <div
