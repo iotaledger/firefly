@@ -12,12 +12,11 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
         const account = get(selectedAccount)
         const transferOptions: TransactionOptions = {
             remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
-            skipSync: false,
         }
-        const { transaction, transactionId } = await account.sendOutputs([output], transferOptions)
+        const transaction = await account.sendOutputs([output], transferOptions)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setFromTransaction(transactionId, transaction, account)
+            new Activity().setFromTransaction(transaction, account)
         )
         isTransferring.set(false)
         return

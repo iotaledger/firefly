@@ -9,7 +9,7 @@ import { calculateStorageDepositFromOutput } from '../outputs'
 export function validateSendConfirmation(outputOptions: OutputOptions, outputTypes: OutputTypes): void {
     const parseNumber = (value: string) => parseInt(value, 10) ?? 0
     const amount = parseNumber(outputTypes?.amount)
-    const balance = parseNumber(get(selectedAccount)?.balances?.available)
+    const balance = parseNumber(get(selectedAccount)?.balances?.baseCoin.available)
     const storageDeposit = calculateStorageDepositFromOutput(outputTypes, amount)
     const expirationDateTime = convertUnixTimestampToDate(outputOptions?.unlocks?.expirationUnixTime)
 
