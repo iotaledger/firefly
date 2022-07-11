@@ -55,7 +55,7 @@ export const STAKING_RESULT_URL: string =
 
 export const BACKUP_STAKING_RESULT_URL: string = 'https://d36tzso9lqxl3c.cloudfront.net/results/staking/'
 
-export const TREASURY_VOTE_EVENT_ID = 'c8529ff64ea191b437cd625af8b02fd0173bc94aae380ea4cc3367a651536cba'
+export const TREASURY_VOTE_EVENT_ID = '7da147938cf7d2272dd417c464561f4a34a5c519654f46b750062c90d3cd5978'
 
 export const LAST_MILESTONE_BEFORE_TREASURY_EVENT = 3395663
 
