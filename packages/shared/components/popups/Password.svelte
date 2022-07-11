@@ -14,7 +14,7 @@
     export let onError = (..._: any[]): void => {}
     export let onCancelled = (..._: any[]): void => {}
 
-    let password
+    let password = ''
     let error = ''
 
     function handleSubmit() {
@@ -42,8 +42,12 @@
 </script>
 
 <div class="mb-5">
-    <Text type="h4">{locale('popups.password.title')}</Text>
-    <Text type="p" secondary>{subtitle ?? locale('popups.password.subtitle')}</Text>
+    <Text type="h4" classes={$mobile && 'flex w-full justify-center -mt-4 mb-6'}>
+        {locale('popups.password.title')}
+    </Text>
+    <Text type="p" secondary classes={$mobile && 'flex w-full justify-center -mt-4 mb-6'}>
+        {subtitle ?? locale('popups.password.subtitle')}
+    </Text>
 </div>
 <form
     id="password-popup-form"
