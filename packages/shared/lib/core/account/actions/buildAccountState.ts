@@ -4,8 +4,10 @@ import { IAccount, IAccountMetadata, IAccountState } from '../interfaces'
 
 export async function buildAccountState(account: IAccount, metadata: IAccountMetadata): Promise<IAccountState> {
     let balances: AccountBalance = {
-        total: '0',
-        available: '0',
+        baseCoin: {
+            total: '0',
+            available: '0',
+        },
         requiredStorageDeposit: '0',
         nativeTokens: [],
         nfts: [],
