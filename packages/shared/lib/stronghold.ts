@@ -6,7 +6,7 @@ import { get } from 'svelte/store'
 import { showAppNotification } from './notifications'
 import { openPopup, popupState } from './popup'
 
-export async function checkStronghold(callback: () => Promise<unknown>, reopenPopup?: boolean): Promise<unknown> {
+export async function checkStronghold(callback?: () => Promise<unknown>, reopenPopup?: boolean): Promise<unknown> {
     if (get(isLedgerProfile)) {
         showAppNotification({
             type: 'error',
