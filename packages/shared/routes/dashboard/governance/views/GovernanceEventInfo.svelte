@@ -16,6 +16,7 @@
     import { formatUnitBestMatch } from '@lib/units'
     import { selectedAccountStore } from '@lib/wallet'
     import { DashboardPane, GovernanceInfoTooltip, Icon, Spinner, Text, Tooltip } from 'shared/components'
+    import { addLinkHtmlTagsToPlainText } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
         isChangingParticipation,
@@ -23,7 +24,9 @@
         pendingParticipations,
     } from 'shared/lib/participation/stores'
     import { ParticipationAction } from 'shared/lib/participation/types'
+    import { Platform } from 'shared/lib/platform'
     import { isSyncing } from 'shared/lib/wallet'
+    import { onMount } from 'svelte'
 
     export let event: ParticipationEvent
     export let nextVote: VotingEventAnswer = null
@@ -40,6 +43,15 @@
     $: cannotVote = getAccountParticipationAbility($selectedAccountStore) === AccountParticipationAbility.HasDustAmount
     $: disableVoting =
         $isChangingParticipation || $pendingParticipations?.length > 0 || !!$participationAction || $isSyncing
+
+    $: eventAdditionalInfo = addLinkHtmlTagsToPlainText(
+        event?.information?.additionalInfo,
+        'cursor-pointer text-blue-500'
+    )
+    $: eventQuestionsInfo = addLinkHtmlTagsToPlainText(
+        event?.information?.payload?.questions[0]?.text,
+        'cursor-pointer text-blue-500'
+    )
 
     let disableVotingMessages: {
         show?: boolean
@@ -175,6 +187,28 @@
             disableVotingMessages = disableVotingMessages
         }
     }
+
+    // We need to add event listeners to all links from plain text to make them work
+    onMount(() => {
+        const linksFromPlainText = document.querySelectorAll('.link-from-plaintext')
+        const onLinkClick = (e: MouseEvent) => {
+            e.preventDefault()
+            const href = (e.target as HTMLElement).getAttribute('href')
+            if (href) {
+                Platform.openUrl(href)
+            }
+        }
+        linksFromPlainText?.forEach((link) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault()
+                const href = link.getAttribute('href')
+                if (href) {
+                    window.open(href, '_blank')
+                }
+            })
+        })
+        return () => linksFromPlainText?.forEach((link) => link.removeEventListener('click', onLinkClick))
+    })
 </script>
 
 <DashboardPane classes="w-full h-full p-6 col-span-2 row-span-2 flex flex-col">
@@ -206,14 +240,14 @@
     </div>
     <div class="flex flex-col space-y-4 mb-6">
         <Text type="h2">{event?.information?.name}</Text>
-        {#if event?.information?.payload?.questions[0]?.text}
+        {#if eventAdditionalInfo}
             <Text type="p" overrideColor classes="text-gray-700 dark:text-gray-500">
-                {event?.information?.additionalInfo}
+                {@html eventAdditionalInfo}
             </Text>
         {/if}
-        {#if event?.information?.additionalInfo}
+        {#if eventQuestionsInfo}
             <Text type="h3" overrideColor classes="text-gray-900 dark:text-white">
-                {event?.information?.payload?.questions[0]?.text}
+                {@html eventQuestionsInfo}
             </Text>
         {/if}
     </div>
