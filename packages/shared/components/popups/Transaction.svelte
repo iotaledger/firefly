@@ -12,6 +12,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { TrackedParticipationItem } from 'shared/lib/participation/types'
+    import { mobile } from '@lib/app'
 
     export let accountId: string
     export let internal = false
@@ -96,7 +97,9 @@
     }
 </script>
 
-<Text type="h4" classes="mb-6">{localize('popups.transaction.title')}</Text>
+<Text type="h4" classes={$mobile ? 'flex w-full justify-center -mt-4 mb-6' : 'mb-6'}>
+    {localize('popups.transaction.title')}
+</Text>
 <div class="flex w-full flex-row flex-wrap">
     {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
         <div
@@ -118,7 +121,7 @@
             </Text>
         </div>
     {:else}
-        <div class="illustration w-full bg-pastel-yellow dark:bg-gray-900 flex justify-center">
+        <div class="illustration w-full {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'} flex justify-center">
             <Illustration illustration="balance-desktop" />
         </div>
         <div class="w-full text-center my-6 px-10">
