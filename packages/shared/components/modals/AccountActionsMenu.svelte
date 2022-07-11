@@ -51,6 +51,7 @@
             icon={SettingsIcons.transactionHistory}
             title={localize('actions.exportTransactionHistory')}
             onClick={handleExportTransactionHistoryClick}
+            disabled
         />
         <MenuItem icon="customize" title={localize('actions.customizeAcount')} onClick={handleCustomiseAccountClick} />
         <ToggleHiddenAccountMenuItem onClick={() => modal.close()} last />
