@@ -15,6 +15,7 @@
 
     function handleBackClick(): void {
         if (!$isGettingMigrationData) {
+            profileRecoveryType.set(null)
             $profileRecoveryRouter.previous()
         }
     }
@@ -31,10 +32,17 @@
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">{localize(`views.importFromText.${$profileRecoveryType}.body`)}</Text>
         <Text type="h5" classes="mb-3">{localize(`views.importFromText.${$profileRecoveryType}.enter`)}</Text>
-        <ImportTextfield disabled={$isGettingMigrationData} type={$profileRecoveryType} bind:value={input} />
+        <form on:submit={handleContinueClick} id="text-import-form">
+            <ImportTextfield disabled={$isGettingMigrationData} type={$profileRecoveryType} bind:value={input} />
+        </form>
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={input.length === 0 || $isGettingMigrationData} onClick={handleContinueClick}>
+        <Button
+            type="submit"
+            form="text-import-form"
+            classes="flex-1"
+            disabled={input.length === 0 || $isGettingMigrationData}
+        >
             {#if $isGettingMigrationData}
                 <Spinner
                     busy={$isGettingMigrationData}

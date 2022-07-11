@@ -16,6 +16,8 @@
     let confirmPinInputError = ''
     let arePinInputsMatching = false
     let arePinInputsValid = false
+    let confirmPinInputElement: PinInput
+    let submitButtonElement: Button
 
     $: setPinInput, (setPinInputError = '')
     $: confirmPinInput, (confirmPinInputError = '')
@@ -32,7 +34,7 @@
         dispatch('previous')
     }
 
-    async function handleSetPinClick(): Promise<void> {
+    async function handleSetPinSubmit(): Promise<void> {
         resetPinInputErrors()
         if (arePinInputsValid && arePinInputsMatching) {
             await advanceView()
@@ -59,7 +61,7 @@
             <Text type="p" secondary classes="mb-4">{localize('views.setupPin.body1')}</Text>
             <Text type="p" secondary highlighted>{localize('views.setupPin.body2')}</Text>
         </div>
-        <div class="flex flex-col">
+        <form id="setup-pin" class="flex flex-col" on:submit={handleSetPinSubmit}>
             <PinInput
                 bind:value={setPinInput}
                 glimpse
@@ -68,6 +70,8 @@
                 disabled={busy}
                 error={setPinInputError}
                 label={localize('actions.setPin')}
+                on:filled={confirmPinInputElement.focus}
+                on:submit={handleSetPinSubmit}
             />
             <PinInput
                 bind:value={confirmPinInput}
@@ -76,14 +80,19 @@
                 disabled={busy}
                 error={confirmPinInputError}
                 label={localize('actions.confirmPin')}
+                bind:this={confirmPinInputElement}
+                on:filled={submitButtonElement.resetAndFocus}
+                on:submit={handleSetPinSubmit}
             />
-        </div>
+        </form>
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
+            type="submit"
             disabled={!(arePinInputsValid && arePinInputsMatching) || busy}
-            onClick={handleSetPinClick}
+            form="setup-pin"
+            bind:this={submitButtonElement}
         >
             {localize('actions.setPinCode')}
         </Button>

@@ -1,10 +1,10 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
     import { Input, PasswordInput } from 'shared/components'
     import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo } from '@core/network'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
     import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
-    import { get } from 'svelte/store'
     import { activeProfile } from '@core/profile'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
@@ -14,10 +14,9 @@
     export let isDeveloperProfile: boolean
 
     $: node.url, (formError = '')
-    $: node.url = cleanNodeUrl(node?.url)
 
-    function cleanNodeUrl(_url: string): string {
-        return stripTrailingSlash(stripSpaces(_url))
+    function cleanNodeUrl(): void {
+        node.url = stripTrailingSlash(stripSpaces(node?.url))
     }
 
     export async function validate({
@@ -81,13 +80,14 @@
     }
 </script>
 
-<form id="node-config-form" class="w-full h-full">
+<form id="node-configuration-form" class="w-full h-full">
     <Input
         bind:value={node.url}
         placeholder={localize('popups.node.nodeAddress')}
         error={formError}
         disabled={isBusy}
         autofocus
+        on:change={cleanNodeUrl}
     />
     <Input
         classes="mt-3"

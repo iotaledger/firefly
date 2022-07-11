@@ -138,7 +138,7 @@
         },
         "verifyRecoveryPhrase": {
             "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
             "word": "Word",
             "verified": "Recovery phrase verified",
             "verifiedBody": "Remember to keep it private and safely stored."

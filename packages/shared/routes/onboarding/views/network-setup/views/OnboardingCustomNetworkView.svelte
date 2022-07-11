@@ -59,7 +59,7 @@
         <Button
             disabled={!node?.url || isBusy}
             type="submit"
-            form="node-config-form"
+            form="node-configuration-form"
             classes="w-full"
             onClick={handleContinueClick}
         >

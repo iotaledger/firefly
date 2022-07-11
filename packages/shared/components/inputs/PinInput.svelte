@@ -6,7 +6,6 @@
     import { validatePinFormat, PIN_LENGTH } from '@lib/utils'
 
     const dispatch = createEventDispatcher()
-
     const isAndroid = Platform.getOS() === 'android'
 
     export let classes = ''
@@ -19,11 +18,13 @@
     export let label: string
 
     let inputs = new Array(PIN_LENGTH)
+
     $: {
         if (!value) {
             inputs = new Array(PIN_LENGTH)
         }
     }
+    $: value.length === PIN_LENGTH && dispatch('filled')
 
     let root: HTMLElement
     const inputElements: HTMLElement[] = []
@@ -33,12 +34,6 @@
         ENTER = 'Enter',
         TAB = 'Tab',
     }
-
-    onMount(() => {
-        if (autofocus) {
-            focus()
-        }
-    })
 
     export function focus(): void {
         if (!disabled) {
@@ -51,7 +46,7 @@
             inputs = new Array(PIN_LENGTH)
             selectFirstEmpty()
         } else {
-            setTimeout(() => resetAndFocus(), 100)
+            setTimeout(resetAndFocus, 100)
         }
     }
 
@@ -64,8 +59,8 @@
         }
     }
 
-    function selectFirstEmptyRoot(event: KeyboardEvent): void {
-        if (event.target === root) {
+    function selectFirstEmptyRoot(event: FocusEvent | MouseEvent): void {
+        if (event.target === root && !inputElements.some((input) => input === event.relatedTarget)) {
             selectFirstEmpty()
         }
     }
@@ -128,6 +123,12 @@
             inputElements[index + 1].focus()
         }
     }
+
+    onMount(() => {
+        if (autofocus) {
+            focus()
+        }
+    })
 </script>
 
 <div class="w-full {classes}">
@@ -159,7 +160,7 @@
                             class:glimpse
                             {disabled}
                             on:input={(event) => (isAndroid ? changeHandlerHelper(event, i) : undefined)}
-                            on:keydown={(event) => changeHandler(event)}
+                            on:keydown={changeHandler}
                             on:contextmenu|preventDefault
                         />
                     {:else}
@@ -172,8 +173,9 @@
                             class:active={!input || input.length === 0}
                             class:glimpse
                             {disabled}
-                            on:keydown={(event) => changeHandler(event)}
+                            on:keydown={changeHandler}
                             on:contextmenu|preventDefault
+                            tabindex="-1"
                         />
                     {/if}
                 {/each}
