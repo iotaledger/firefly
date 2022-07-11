@@ -10,7 +10,6 @@
         InclusionState,
     } from '@core/wallet'
     import { closePopup, openPopup } from '@lib/popup'
-    import { checkStronghold } from '@lib/stronghold'
     import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
@@ -26,11 +25,7 @@
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 
     async function handleClaim(activity: Activity): Promise<void> {
-        try {
-            await checkStronghold(() => claimActivity(activity))
-        } catch (err) {
-            console.error(err)
-        }
+        await claimActivity(activity)
     }
 
     function reject() {
