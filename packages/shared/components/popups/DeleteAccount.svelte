@@ -31,9 +31,7 @@
             await deleteAccount($selectedAccount?.id)
             closePopup()
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logError: true }) : err
-            }
+            error = !error && err.error ? new BaseError({ message: err.error, logError: true }) : err
         }
     }
 
