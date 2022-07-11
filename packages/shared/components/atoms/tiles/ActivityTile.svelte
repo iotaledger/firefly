@@ -24,10 +24,6 @@
         activity?.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 
-    async function handleClaim(activity: Activity): Promise<void> {
-        await claimActivity(activity)
-    }
-
     function reject() {
         openPopup({
             type: 'confirmationPopup',
@@ -110,7 +106,7 @@
                         </button>
                         <button
                             class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
-                            on:click|stopPropagation={() => handleClaim(activity)}
+                            on:click|stopPropagation={() => claimActivity(activity)}
                         >
                             {#if activity.isClaiming}
                                 <Spinner busy={true} classes="justify-center h-fit" />
