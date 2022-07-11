@@ -39,7 +39,7 @@
             <Illustration
                 height={illustrationHeight}
                 background
-                illustration="treasury-bg"
+                illustration="iota-governance"
                 classes="bg-cover bg-center w-full h-full rounded-2xl"
             />
             <Text
