@@ -271,7 +271,7 @@ export const isBright = (color: string): boolean => {
 }
 
 /**
- * Parse plain text and add <a> html tahs to every link found
+ * Parse plain text and add <a> html tags to every link found
  * @param plainText The text to be parsed
  * @param classes the classes to add to the <a> tag
  * @returns The input plain text with <a> tags added
