@@ -19,6 +19,7 @@
 
     export let accounts: WalletAccount[] = []
     export let handleCreateAccountPress = (): void => {}
+    export let onAccountSelection = (): void => {}
 
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
@@ -132,6 +133,7 @@
         } else {
             setSelectedAccount(accountId)
             resetAccountRouter(false)
+            onAccountSelection()
         }
     }
 
