@@ -327,6 +327,7 @@
     .mobile-explorer-button {
         /* Tailwind border classes doesn't have an effect */
         border: 1px solid rgba(154, 173, 206, 0.25);
+        margin-bottom: env(safe-area-inset-bottom);
     }
     .visualization {
         min-height: 84px;
