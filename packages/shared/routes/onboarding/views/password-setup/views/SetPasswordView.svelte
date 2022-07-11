@@ -4,9 +4,9 @@
     import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { changeStrongholdPassword, clearStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
+    import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
     import { onboardingRouter } from '@core/router'
-    import { strongholdPassword } from '@contexts/onboarding'
+    import { clearStrongholdPasswordForOnboarding, strongholdPassword } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
     import { MAX_PASSWORD_LENGTH } from '@lib/wallet'
@@ -78,9 +78,7 @@
         }
     } // zxcvbn lib recommends to not validate long passwords because of performance issues https://github.com/dropbox/zxcvbn#user-content-performance
 
-    onMount(() => {
-        existingPassword && clearStrongholdPassword()
-    })
+    onMount(clearStrongholdPasswordForOnboarding)
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick} {busy}>
