@@ -340,6 +340,11 @@
                         type: TransferProgressEventType.Complete,
                     })
 
+                    if ($mobile) {
+                        walletRoute.set(WalletRoute.AccountHistory)
+                        accountRoute.set(AccountRoute.Init)
+                    }
+
                     setTimeout(() => {
                         clearSendParams(internal)
                         isTransferring.set(false)
@@ -347,6 +352,9 @@
                 },
                 onError(err) {
                     isTransferring.set(false)
+                    if ($mobile) {
+                        accountRoute.set(AccountRoute.Init)
+                    }
                     showAppNotification({
                         type: 'error',
                         message: localize(err.error),
