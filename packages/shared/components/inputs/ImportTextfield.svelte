@@ -63,7 +63,7 @@
     }
 
     /* eslint-disable @typescript-eslint/no-misused-promises */
-    const handleKeyDown = async () => {
+    const onContentChanged = async () => {
         value = ''
         statusMessage = ''
         error = false
@@ -104,7 +104,7 @@
         }
     }
 
-    $: content, debounce(handleKeyDown)()
+    $: content, debounce(onContentChanged)()
 </script>
 
 <div>
