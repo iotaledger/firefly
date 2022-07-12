@@ -150,6 +150,7 @@ const defaultWebPreferences = {
     nodeIntegration: false,
     contextIsolation: true,
     enableRemoteModule: false,
+    worldSafeExecuteJavaScript: true,
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
@@ -294,6 +295,7 @@ function createWindow() {
      * Only allow external navigation to allowed domains
      */
     windows.main.webContents.on('will-navigate', handleNavigation)
+    windows.main.webContents.on('new-window', handleNavigation)
 
     windows.main.on('close', () => {
         closeAboutWindow()
@@ -370,6 +372,8 @@ export const getOrInitWindow = (windowName) => {
  * Initialises the menu bar
  */
 initMenu()
+
+app.allowRendererProcessReuse = false
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
