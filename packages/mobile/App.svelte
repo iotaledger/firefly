@@ -60,7 +60,7 @@
         isDoubleBack = true
         openPopup({
             type: 'confirmCloseApp',
-            preventClose: true,
+            hideClose: true,
             props: {
                 handleContinueClick,
                 handleCancelClick: () => (isDoubleBack = false),
