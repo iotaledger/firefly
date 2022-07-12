@@ -14,7 +14,7 @@
         "iota.lib.js": "^0.5.3",
         "lottie-web": "^5.7.8",
         "qr.js": "0.0.0",
-        "svelte": "^3.47.0",
+        "svelte": "^3.49.0",
         "svelte-i18n": "^3.0.4",
         "zxcvbn": "^4.4.2"
     },
