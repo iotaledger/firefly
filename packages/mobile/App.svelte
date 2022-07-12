@@ -51,11 +51,19 @@
         void hideSplashScreen()
     }
 
+    let isDoubleBack = false
     void App.addListener('backButton', () => {
+        if (isDoubleBack) {
+            isDoubleBack = false
+            return handleContinueClick()
+        }
+        isDoubleBack = true
         openPopup({
             type: 'confirmCloseApp',
+            preventClose: true,
             props: {
                 handleContinueClick,
+                handleCancelClick: () => (isDoubleBack = false),
             },
         })
     })
