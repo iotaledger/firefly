@@ -3,8 +3,6 @@
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileImportType } from '@core/profile'
-    import { importType } from '@contexts/onboarding'
 
     const dispatch = createEventDispatcher()
 
@@ -14,9 +12,6 @@
 </script>
 
 <OnboardingLayout allowBack={false}>
-    <div slot="title">
-        <Text type="h2">{localize('views.importFromFile.title')}</Text>
-    </div>
     <div slot="leftpane__content">
         <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 pt-10 relative">
             <div class="flex items-center justify-center bg-green-500 rounded-2xl absolute -top-5 w-12 h-12 check-glow">
@@ -30,12 +25,7 @@
         <Button classes="w-full" onClick={handleContinueClick}>{localize('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation
-            classes="setup-anim-aspect-ratio"
-            animation={$importType === ProfileImportType.Seed || $importType === ProfileImportType.Mnemonic
-                ? 'import-from-text-success-desktop'
-                : 'import-from-file-success-desktop'}
-        />
+        <Animation classes="setup-anim-aspect-ratio" animation={'success-desktop'} />
     </div>
 </OnboardingLayout>
 
