@@ -60,6 +60,6 @@
         {/each}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
-        <Animation animation="onboarding-network-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation="onboarding-network-desktop" />
     </div>
 </OnboardingLayout>
