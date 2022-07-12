@@ -148,9 +148,10 @@ export class Activity implements IActivity {
     setFromOutputData(outputData: OutputData, account: IAccountState): Activity {
         const recipientAddress = getRecipientAddressFromOutput(outputData.output)
         const recipient = getRecipientFromOutput(outputData.output)
+        const sender = getSenderFromOutput(outputData.output)
         const isIncoming = recipientAddress === account.depositAddress
-        // const isInternal = !!findAccountWithAddress(address)
-        const isInternal = isSubjectInternal(recipient)
+        const subject = isIncoming ? this.sender : this.recipient
+        const isInternal = isSubjectInternal(subject)
 
         this.type = getActivityType(isInternal)
         this.id = outputData.outputId
@@ -161,9 +162,9 @@ export class Activity implements IActivity {
         this.time = new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
         this.inputs = undefined
 
-        this.sender = getSenderFromOutput(outputData.output)
+        this.sender = sender
         this.recipient = recipient
-        this.subject = isIncoming ? this.sender : this.recipient
+        this.subject = subject
         this.isInternal = isInternal
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
