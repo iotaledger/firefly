@@ -11,9 +11,6 @@
 </script>
 
 <OnboardingLayout allowBack={false}>
-    <!--    <div slot="title">-->
-    <!--        <Text type="h2">{localize('views.importFromFile.title')}</Text>-->
-    <!--    </div>-->
     <div slot="leftpane__content">
         <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 pt-10 relative">
             <div class="flex items-center justify-center bg-green-500 rounded-2xl absolute -top-5 w-12 h-12 check-glow">

@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
+    import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import {
         Activity,
@@ -7,15 +8,16 @@
         activitySearchTerm,
         activityFilterIndex,
         selectedAccountActivities,
+        setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
+    import { ProfileSetupType, profileSetupType } from '@contexts/onboarding'
     import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
     import { openPopup } from 'shared/lib/popup'
-    import { ProfileRecoveryType } from '@contexts/onboarding'
     import { debounce } from 'shared/lib/utils'
-    import { isFirstSessionSync, profileRecoveryType } from 'shared/lib/wallet'
+    import { isFirstSessionSync } from 'shared/lib/wallet'
 
     function handleTransactionClick(activity: Activity): void {
         openPopup({
@@ -31,6 +33,7 @@
     let searchValue: string
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
+    $: setAsyncStatusOfAccountActivities($time)
 
     $: if (searchActive && $selectedAccountActivities) {
         debounce(() => {
@@ -52,8 +55,8 @@
          */
         return (
             $isFirstSessionSync &&
-            $profileRecoveryType &&
-            $profileRecoveryType !== ProfileRecoveryType.New &&
+            $profileSetupType &&
+            $profileSetupType !== ProfileSetupType.New &&
             $selectedAccountActivities.length === 0
         )
     }

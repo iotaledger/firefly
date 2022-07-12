@@ -20,6 +20,7 @@ export interface IActivity {
     recipient: Subject
     token: ITokenMetadata
     isAsync: boolean
+    asyncStatus: ActivityAsyncStatus
     expirationDate?: Date
     isHidden?: boolean
     isClaiming?: boolean
