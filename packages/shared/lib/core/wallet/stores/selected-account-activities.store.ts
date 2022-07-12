@@ -37,7 +37,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
                     (activity.recipient.type === 'account' &&
                         activity.recipient?.account?.name === $activitySearchTerm) ||
                     (activity.recipient.type === 'address' && activity.recipient?.address === $activitySearchTerm) ||
-                    activity?.id.toLowerCase() === $activitySearchTerm ||
+                    activity?.id?.toLowerCase() === $activitySearchTerm ||
                     ($activitySearchTerm[0] === '>' &&
                         unitToValue($activitySearchTerm.substring(1)) < activity.rawAmount) ||
                     ($activitySearchTerm[0] === '<' &&

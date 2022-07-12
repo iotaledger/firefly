@@ -55,6 +55,7 @@ export class Activity implements IActivity {
     storageDeposit?: number
     expirationDate?: Date
     isAsync: boolean
+    asyncStatus: ActivityAsyncStatus
     isClaiming?: boolean = false
     isClaimed?: boolean
     claimingTransactionId?: string
@@ -94,6 +95,7 @@ export class Activity implements IActivity {
         this.storageDeposit = Number(output.amount) - Number(outputOptions.amount)
         this.expirationDate = new Date(Number(outputOptions?.unlocks?.expirationUnixTime) * MILLISECONDS_PER_SECOND)
         this.isAsync = this.storageDeposit > 0 || !!outputOptions?.unlocks?.expirationUnixTime
+        this.asyncStatus = undefined
         this.isClaimed = false
 
         return this
@@ -131,6 +133,7 @@ export class Activity implements IActivity {
 
         this.expirationDate = getExpirationDateFromOutput(output)
         this.isAsync = isOutputAsync(output)
+        this.asyncStatus = undefined
         this.isClaimed = false
 
         return this
@@ -165,6 +168,7 @@ export class Activity implements IActivity {
         this.rawAmount = getAmountFromOutput(outputData.output) - this.storageDeposit
         this.expirationDate = getExpirationDateFromOutput(outputData.output)
         this.isAsync = isOutputAsync(outputData.output)
+        this.asyncStatus = undefined
         this.isClaimed = false
 
         return this
@@ -208,11 +212,14 @@ export class Activity implements IActivity {
             const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24))
             const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24)
             const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60)
+            const seconds = Math.floor((elapsedTime / 1000) % 60)
 
             if (days > 0 || hours > 0) {
                 return `${days}d ${hours}h`
             } else if (minutes > 0) {
                 return `${minutes}min`
+            } else if (seconds > 0) {
+                return '<1min'
             } else {
                 return '-'
             }
