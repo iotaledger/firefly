@@ -5,12 +5,16 @@
     import { profileRecoveryRouter } from '@core/router'
     import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
 
+    function handleBackClick(): void {
+        $profileRecoveryRouter.previous()
+    }
+
     function handleContinueClick(): void {
         $profileRecoveryRouter.next()
     }
 </script>
 
-<OnboardingLayout allowBack={false}>
+<OnboardingLayout onBackClick={handleBackClick}>
     <div slot="leftpane__content">
         <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 pt-10 relative">
             <div class="flex items-center justify-center bg-green-500 rounded-2xl absolute -top-5 w-12 h-12 check-glow">
