@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { OnboardingButton, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import {
         cleanupOnboarding,
         createNewProfile,
@@ -7,7 +7,7 @@
         newProfile,
         updateNewProfile,
     } from '@contexts/onboarding'
-    import { AppStage, appStage } from '@core/app'
+    import { AppStage, appStage, mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { appRouter } from '@core/router'
@@ -63,5 +63,8 @@
                 onClick={() => onClick(NetworkProtocol[protocol])}
             />
         {/each}
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="onboarding-protocol-desktop" />
     </div>
 </OnboardingLayout>
