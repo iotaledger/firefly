@@ -105,7 +105,7 @@
             class="flex justify-center w-full flex-row flex-wrap"
             on:submit|preventDefault={handleBackupClick}
         >
-            {#if $mobile && profileUnlocked === false}
+            {#if profileUnlocked === false}
                 <Password
                     classes="w-full {$mobile ? 'mb-8' : 'mb-5'}"
                     bind:value={password}
