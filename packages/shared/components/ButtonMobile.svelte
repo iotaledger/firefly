@@ -175,10 +175,11 @@ import { text } from 'svelte/internal'
                 span {
                     @apply text-white;
                 }
-                // &:hover {
-                //     @apply bg-yellow-700;
-                // }
-                &:active {
+                &:hover {
+                    @apply bg-yellow-700;
+                }
+                &:active,
+                &:focus {
                     @apply bg-yellow-800;
                 }
                 &:disabled {
@@ -202,10 +203,11 @@ import { text } from 'svelte/internal'
                 span {
                     @apply text-white;
                 }
-                // &:hover {
-                //     @apply bg-red-600;
-                // }
-                &:active {
+                &:hover {
+                    @apply bg-red-600;
+                }
+                &:active,
+                &:focus {
                     @apply bg-red-700;
                 }
                 &:disabled {
@@ -236,12 +238,13 @@ import { text } from 'svelte/internal'
             span {
                 @apply text-blue-500;
             }
-            // &:hover {
-            //     @apply bg-blue-50;
-            //     @apply border-blue-200;
-            // }
+            &:hover {
+                @apply bg-blue-50;
+                @apply border-blue-200;
+            }
             &:active,
-            &.active {
+            &.active,
+            &:focus {
                 @apply bg-blue-100;
                 @apply border-blue-400;
                 @apply text-blue-600;
@@ -262,11 +265,11 @@ import { text } from 'svelte/internal'
                 span {
                     @apply text-white;
                 }
-                // &:hover {
-                //     @apply bg-opacity-50;
-                //     @apply border-opacity-50;
-                // }
-                // &:focus,
+                &:hover {
+                    @apply bg-opacity-50;
+                    @apply border-opacity-50;
+                }
+                &:focus,
                 &:active {
                     @apply bg-opacity-80;
                     @apply border-opacity-50;
