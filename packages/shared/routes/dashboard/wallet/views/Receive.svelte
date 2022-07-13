@@ -31,8 +31,8 @@
 </script>
 
 {#if $mobile}
-    <div
-        class="grid grid-flow-row-dense h-screen items-center justify-items-center p-5"
+    <main
+        class="grid grid-flow-row-dense items-center justify-items-center p-5"
         style="grid-template-rows: 18fr 1fr 1fr 5fr 1fr"
     >
         <div class="grid mt-44 rounded-xl bg-white">
@@ -61,7 +61,7 @@
                 {localize('general.shareAddress')}
             </Button>
         </div>
-    </div>
+    </main>
 {:else}
     <div
         class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6"
@@ -120,3 +120,10 @@
         {/if}
     </div>
 {/if}
+
+<style type="text/scss">
+    main {
+        height: calc(97vh - env(safe-area-inset-top));
+    }
+
+</style>
