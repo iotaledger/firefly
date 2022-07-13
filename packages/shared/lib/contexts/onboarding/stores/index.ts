@@ -1,5 +1,6 @@
 export * from './import-file.store'
 export * from './import-file-path.store'
+export * from './iota-profile-manager.store'
 export * from './is-getting-migration-data.store'
 export * from './mnemonic.store'
 export * from './new-profile.store'

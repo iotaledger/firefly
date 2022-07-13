@@ -1,22 +1,36 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import features from 'shared/features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
     import { profileSetupRouter } from '@core/router'
-    import { ProfileRecoveryType, setNewProfileType, newProfile } from '@contexts/onboarding'
+    import {
+        createIotaProfileManager,
+        ProfileRecoveryType,
+        setNewProfileType,
+        newProfile,
+        iotaProfileManager,
+    } from '@contexts/onboarding'
 
-    function handleContinueClick(profileRecoveryType: ProfileRecoveryType): void {
+    async function handleContinueClick(profileRecoveryType: ProfileRecoveryType): Promise<void> {
+        await createIotaProfileManager()
+
         const profileType =
             profileRecoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
         setNewProfileType(profileType)
+
         $profileSetupRouter.next({ profileRecoveryType })
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         $profileSetupRouter.previous()
     }
+
+    onMount(() => {
+        $iotaProfileManager = null
+    })
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick}>
