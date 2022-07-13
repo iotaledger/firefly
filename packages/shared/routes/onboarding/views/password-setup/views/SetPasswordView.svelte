@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
     import { onboardingRouter } from '@core/router'
-    import { strongholdPassword } from '@contexts/onboarding'
+    import { iotaProfileManager, strongholdPassword } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
     import { MAX_PASSWORD_LENGTH } from '@lib/wallet'
@@ -45,8 +45,16 @@
                 const mustChangePassword = $strongholdPassword && $strongholdPassword !== password
                 if (mustChangePassword) {
                     await changeStrongholdPassword($strongholdPassword, password)
+
+                    if ($iotaProfileManager) {
+                        await $iotaProfileManager.changeStrongholdPassword($strongholdPassword, password)
+                    }
                 } else {
                     await setStrongholdPassword(password)
+
+                    if ($iotaProfileManager) {
+                        await $iotaProfileManager.setStrongholdPassword(password)
+                    }
                 }
 
                 $strongholdPassword = password
