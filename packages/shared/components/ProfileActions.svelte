@@ -81,11 +81,25 @@
     }
 
     function handleBackupClick(): void {
-        openPopup({
-            type: 'backup',
-            props: {
-                lastBackupDate,
-                lastBackupDateFormatted,
+        api.getStrongholdStatus({
+            onSuccess(strongholdStatusResponse) {
+                let profileUnlocked = false
+
+                if (strongholdStatusResponse.payload.snapshot.status === 'Unlocked') {
+                    profileUnlocked = true
+                }
+
+                openPopup({
+                    type: 'backup',
+                    props: {
+                        lastBackupDate,
+                        lastBackupDateFormatted,
+                        profileUnlocked,
+                    },
+                })
+            },
+            onError(error) {
+                console.error(error)
             },
         })
     }
