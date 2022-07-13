@@ -454,7 +454,7 @@
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
                         on:close={() => accountRoute.set(AccountRoute.Init)}
-                        fullScreen={$accountRoute === AccountRoute.Receive}
+                        backgroundBlur={$accountRoute === AccountRoute.Receive}
                     >
                         {#if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
