@@ -1,3 +1,5 @@
+import { syncBalance } from '@core/account/actions/syncBalance'
+import { selectedAccountId } from '@core/account/stores/selected-account-id.store'
 import { selectedAccount } from '@core/account/stores/selected-account.store'
 import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
@@ -25,6 +27,8 @@ export async function claimActivity(activity: Activity): Promise<void> {
                 claimingTransactionId: transactionId,
                 claimedDate: new Date(),
             })
+
+            syncBalance(get(selectedAccountId))
 
             showAppNotification({
                 type: 'info',
