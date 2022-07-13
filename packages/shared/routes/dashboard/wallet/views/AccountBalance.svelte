@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Unit } from '@iota/unit-converter'
-    import { Text } from 'shared/components'
+    import { ButtonMobile, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { localize } from '@core/i18n'
     import { accountRoute, accountRouter } from '@core/router'
@@ -104,19 +104,21 @@
             </div>
         </div>
         <!-- Action Send / Receive -->
-        <div class="flex flex-row justify-between space-x-4 mt-7 mb-10" use:animateMobileButtons>
-            <button
-                class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-blue-500 text-white"
-                on:click={handleReceiveClick}
-            >
-                {localize('actions.receive')}
-            </button>
-            <button
-                class="action p-3 w-full text-center rounded-lg font-semibold text-14 bg-blue-500 text-white"
-                on:click={handleSendClick}
+        <div class="flex flex-row justify-between space-x-3 mt-9 mb-6" use:animateMobileButtons>
+            <ButtonMobile
+                textBig
+                classes="w-full font-semibold"
+                onClick={handleSendClick}
             >
                 {localize('actions.send')}
-            </button>
+            </ButtonMobile>
+            <ButtonMobile
+                textBig
+                classes="w-full font-semibold"
+                onClick={handleReceiveClick}
+            >
+                {localize('actions.receive')}
+            </ButtonMobile>
         </div>
     </div>
 {:else}
