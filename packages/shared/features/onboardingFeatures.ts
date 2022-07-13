@@ -166,8 +166,8 @@ const onboardingFeatures = {
         'private-net': {
             enabled: true,
             claimRewards: {
-                enabled: false,
-                hidden: true,
+                enabled: true,
+                hidden: false,
             },
             newProfile: {
                 enabled: true,
