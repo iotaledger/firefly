@@ -8,8 +8,8 @@
     export let referencedRate = 0
 </script>
 
-<div class="flex flex-col">
-    <Text type="h4" classes="-mt-4 mb-4 flex w-full justify-center">
+<div class="flex flex-col safe-area">
+    <Text type="h4" classes="flex w-full mb-4 justify-center">
         {localize('views.settings.networkStatus.title')}
     </Text>
     {#if $activeProfile.isDeveloperProfile}
@@ -55,5 +55,9 @@
         grid-auto-flow: column;
         padding: 1rem 1.25rem;
         margin: 0.3rem 0;
+    }
+
+    .safe-area {
+        margin-bottom: calc(env(safe-area-inset-bottom) / 2);
     }
 </style>
