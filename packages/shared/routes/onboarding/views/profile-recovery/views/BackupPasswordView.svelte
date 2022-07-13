@@ -9,6 +9,8 @@
         restoreBackupFromFile,
         isGettingMigrationData,
         strongholdPassword,
+        iotaProfileManager,
+        importFilePath,
     } from '@contexts/onboarding'
 
     export let error = ''
@@ -22,6 +24,10 @@
         if (password) {
             try {
                 await restoreBackupFromFile(importFile, password)
+                if ($iotaProfileManager) {
+                    await $iotaProfileManager.restoreBackup($importFilePath, password)
+                }
+
                 $strongholdPassword = password
                 $profileRecoveryRouter.next()
             } catch (err) {
