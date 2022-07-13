@@ -72,8 +72,8 @@
                 y = event.touches[0].pageY
             }
 
-            node.addEventListener('touchmove', handleTouchmove)
-            node.addEventListener('touchend', handleTouchend)
+            node.addEventListener('touchmove', handleTouchmove, { capture: true, passive: true })
+            node.addEventListener('touchend', handleTouchend, { capture: true, passive: true })
         }
 
         function handleTouchmove(event: TouchEvent) {
@@ -108,15 +108,15 @@
                 node.dispatchEvent(new CustomEvent('tap'))
             }
 
-            node.removeEventListener('touchmove', handleTouchmove)
-            node.removeEventListener('touchend', handleTouchend)
+            node.removeEventListener('touchmove', handleTouchmove, { capture: true })
+            node.removeEventListener('touchend', handleTouchend, { capture: true })
         }
 
-        node.addEventListener('touchstart', handleTouchstart)
+        node.addEventListener('touchstart', handleTouchstart, { capture: true, passive: true })
 
         return {
             destroy() {
-                node.removeEventListener('touchstart', handleTouchstart)
+                node.removeEventListener('touchstart', handleTouchstart, { capture: true })
             },
         }
     }
