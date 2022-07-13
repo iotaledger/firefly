@@ -1,7 +1,8 @@
-import { BASE_TOKEN } from '@core/network'
-import { activeProfile } from '@core/profile/stores/active-profile.store'
-import { selectedAccount } from '@core/account/stores/selected-account.store'
 import { derived, Readable } from 'svelte/store'
+
+import { selectedAccount } from '@core/account'
+import { BASE_TOKEN } from '@core/network'
+import { activeProfile } from '@core/profile'
 import { IAsset } from '@core/wallet'
 
 export const assets: Readable<IAsset[]> = derived(

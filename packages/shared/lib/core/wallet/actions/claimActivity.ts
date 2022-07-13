@@ -1,6 +1,4 @@
-import { syncBalance } from '@core/account/actions/syncBalance'
-import { selectedAccountId } from '@core/account/stores/selected-account-id.store'
-import { selectedAccount } from '@core/account/stores/selected-account.store'
+import { selectedAccount, selectedAccountId, syncBalance } from '@core/account'
 import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
