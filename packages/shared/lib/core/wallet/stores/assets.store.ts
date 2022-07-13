@@ -1,6 +1,6 @@
 import { BASE_TOKEN } from '@core/network'
-import { activeProfile } from '@core/profile'
-import { selectedAccount } from '@core/account'
+import { activeProfile } from '@core/profile/stores/active-profile.store'
+import { selectedAccount } from '@core/account/stores/selected-account.store'
 import { derived, Readable } from 'svelte/store'
 import { IAsset } from '@core/wallet'
 
