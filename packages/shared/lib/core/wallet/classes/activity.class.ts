@@ -150,7 +150,7 @@ export class Activity implements IActivity {
         const recipient = getRecipientFromOutput(outputData.output)
         const sender = getSenderFromOutput(outputData.output)
         const isIncoming = recipientAddress === account.depositAddress
-        const subject = isIncoming ? this.sender : this.recipient
+        const subject = isIncoming ? sender : recipient
         const isInternal = isSubjectInternal(subject)
 
         this.type = getActivityType(isInternal)
