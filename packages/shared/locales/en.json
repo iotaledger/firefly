@@ -430,8 +430,8 @@
                 "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkConfiguration": {
                 "title": "Network config",
@@ -1257,12 +1257,12 @@
             "error": "Unable to export transaction history for {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "receivedWhileLoggedOut": "Please login to initiate the deep link",
+            "notEnabled": "Deep links are not enabled",
+            "invalidFormat": "The deep link you followed is invalid",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "Payment details added from deep link"
                 }
             }
         },
@@ -1322,7 +1322,9 @@
             "index": "Your account index must be a number between 0 and 2,147,483,647.",
             "page": "Your account page must be a number between 0 and 2,147,483,647.",
             "syncing": "There was an error syncing your wallets.",
-            "cannotRemove": "Unable to remove wallet."
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",

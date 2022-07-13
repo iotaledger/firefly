@@ -1118,7 +1118,7 @@
             "error": "Не вдається експортувати історію трансакцій для{accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Будь ласка, увійдіть, щоб ініціювати IOTA link",
+            "receivedWhileLoggedOut": "Будь ласка, увійдіть, щоб ініціювати IOTA link",
             "notEnabled": "IOTA links не ввімкнені",
             "invalidFormat": "Посилання IOTA, за яким ви перейшли, недійсне",
             "wallet": {

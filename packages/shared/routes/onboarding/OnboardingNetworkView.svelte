@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { OnboardingButton, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
     import { mobile } from '@core/app'
@@ -58,5 +58,8 @@
                 onClick={() => onClick(networkType)}
             />
         {/each}
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="onboarding-network-desktop" />
     </div>
 </OnboardingLayout>

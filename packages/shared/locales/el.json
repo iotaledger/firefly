@@ -1118,7 +1118,7 @@
             "error": "Δεν είναι δυνατή η εξαγωγή ιστορικού συναλλαγών για {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Παρακαλούμε συνδεθείτε για να εκκινήσετε το σύνδεσμο IOTA",
+            "receivedWhileLoggedOut": "Παρακαλούμε συνδεθείτε για να εκκινήσετε το σύνδεσμο IOTA",
             "notEnabled": "Οι σύνδεσμοι IOTA δεν είναι ενεργοποιημένοι",
             "invalidFormat": "Ο σύνδεσμος IOTA που ακολουθήσατε δεν είναι έγκυρος",
             "wallet": {

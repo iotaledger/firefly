@@ -17,7 +17,6 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
-    import HideAccount from './HideAccount.svelte'
     import LedgerAddress from './LedgerAddress.svelte'
     import LedgerAppGuide from './LedgerAppGuide.svelte'
     import LedgerConfirmation from './LedgerConfirmation.svelte'
@@ -101,7 +100,6 @@
         confirmationPopup: ConfirmationPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
-        hideAccount: HideAccount,
         ledgerNotConnected: LedgerNotConnected,
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,

@@ -1,11 +1,14 @@
-import { selectedAccount } from '@core/account/stores/selected-account.store'
+import { selectedAccount, selectedAccountId, syncBalance } from '@core/account'
+import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
+import { checkStronghold } from '@lib/stronghold'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
 import { addClaimedActivity, updateActivityByActivityId } from '../stores'
 
 export async function claimActivity(activity: Activity): Promise<void> {
+    await checkStronghold()
     const account = get(selectedAccount)
     try {
         updateActivityByActivityId(account.id, activity.id, { isClaiming: true })
@@ -23,17 +26,17 @@ export async function claimActivity(activity: Activity): Promise<void> {
                 claimedDate: new Date(),
             })
 
+            syncBalance(get(selectedAccountId))
+
             showAppNotification({
                 type: 'info',
                 message: localize('notifications.claimed.success'),
             })
         }
     } catch (err) {
-        console.error(err)
-        showAppNotification({
-            type: 'error',
-            message: localize('notifications.claimed.error'),
-        })
+        if (!err.message) {
+            new BaseError({ message: localize('notifications.claimed.error'), logError: true, showNotification: true })
+        }
     } finally {
         updateActivityByActivityId(account.id, activity.id, { isClaiming: false })
     }

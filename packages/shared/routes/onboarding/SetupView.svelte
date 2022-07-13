@@ -80,7 +80,7 @@
             onClick={() => handleContinueClick(SetupType.Import)}
         />
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="setup-desktop" />
     </div>
 </OnboardingLayout>

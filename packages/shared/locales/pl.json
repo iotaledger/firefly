@@ -1118,7 +1118,7 @@
             "error": "Nie można wyeksportować historii transakcji dla {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Zaloguj się, aby zainicjować link IOTA",
+            "receivedWhileLoggedOut": "Zaloguj się, aby zainicjować link IOTA",
             "notEnabled": "Linki IOTA nie są włączone",
             "invalidFormat": "Link IOTA, który wybrałeś, jest nieprawidłowy",
             "wallet": {

@@ -1118,7 +1118,7 @@
             "error": "{accountAlias} の取引履歴を出力できません"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "IOTAリンクを開始するにはログインしてください",
+            "receivedWhileLoggedOut": "IOTAリンクを開始するにはログインしてください",
             "notEnabled": "IOTAリンクは有効になっていません",
             "invalidFormat": "あなたがフォローしたIOTAリンクは無効です",
             "wallet": {

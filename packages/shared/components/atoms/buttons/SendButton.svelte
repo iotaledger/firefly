@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { openPopup } from '@lib/popup'
+    import { OnboardingButton } from 'shared/components/atoms'
 
     function handleSendClick() {
         openPopup({
@@ -10,9 +11,8 @@
     }
 </script>
 
-<button
-    class="action p-3 w-full text-center rounded-lg font-medium text-14 bg-blue-500 text-white"
-    on:click={handleSendClick}
->
-    {localize('actions.send')}
-</button>
+<OnboardingButton
+    primaryText={localize('general.sendFunds')}
+    secondaryText={localize('general.sendTokensToAddress')}
+    onClick={handleSendClick}
+/>

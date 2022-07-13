@@ -17,7 +17,6 @@
     import { activeProfile } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import { time } from '@core/app'
     import { setClipboard } from '@lib/utils'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
@@ -27,8 +26,6 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.token))
-
-    $: asyncStatus = activity.getAsyncStatus($time)
 
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
@@ -95,8 +92,8 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {asyncStatus} {formattedFiatValue} {amount} {unit} {...activity} />
-    {#if activity.isAsync && activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed}
+    <TransactionDetails {formattedFiatValue} {amount} {unit} {...activity} />
+    {#if activity.isAsync && activity.direction === ActivityDirection.In && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"

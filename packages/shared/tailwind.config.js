@@ -22,6 +22,10 @@ module.exports = {
                 /^bg-/,
                 /^hover:bg-/,
                 /^dark:bg-/,
+                /^border-/,
+                /^hover:border-/,
+                /^dark:border-/,
+                /^dark:hover:border-/,
                 // `text-${color}`
                 /^text-/,
                 /^hover:text-/,
@@ -286,6 +290,9 @@ module.exports = {
                 16: pxToRem(16),
                 24: pxToRem(24),
             },
+            maxHeight: {
+                xl: pxToRem(648),
+            },
         },
         fontFamily: {
             'fira-mono': ['"Fira Mono"', 'monospace'],
@@ -297,7 +304,7 @@ module.exports = {
         textColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus', 'group-hover'],
         backgroundColor: ['dark', 'responsive', 'hover', 'dark-hover', 'focus', 'dark-focus', 'group-hover'],
         backgroundOpacity: ['dark'],
-        opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled'],
+        opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled', 'dark'],
         cursor: ['responsive', 'disabled'],
     },
     plugins: [

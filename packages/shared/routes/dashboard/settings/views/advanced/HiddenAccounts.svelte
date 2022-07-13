@@ -7,7 +7,7 @@
     let showHiddenAccounts = $activeProfile?.showHiddenAccounts
     $: updateActiveProfile({ showHiddenAccounts: showHiddenAccounts })
 
-    $: if (!showHiddenAccounts) {
+    $: if ($activeProfile?.hasLoadedAccounts && !showHiddenAccounts) {
         setNextSelectedAccount()
     }
 </script>

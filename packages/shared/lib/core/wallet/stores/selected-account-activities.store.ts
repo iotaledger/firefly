@@ -1,8 +1,10 @@
+import { derived, Readable, writable, Writable } from 'svelte/store'
+
 import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { formatUnitBestMatch } from '@lib/units'
 import { getMonthYear, isValueInUnitRange, unitToValue } from '@lib/utils'
-import { derived, Readable, writable, Writable } from 'svelte/store'
+
 import { Activity, ActivityDirection } from '..'
 import { allAccountActivities } from './all-account-activities.store'
 
@@ -37,7 +39,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
                     (activity.recipient.type === 'account' &&
                         activity.recipient?.account?.name === $activitySearchTerm) ||
                     (activity.recipient.type === 'address' && activity.recipient?.address === $activitySearchTerm) ||
-                    activity?.id.toLowerCase() === $activitySearchTerm ||
+                    activity?.id?.toLowerCase() === $activitySearchTerm ||
                     ($activitySearchTerm[0] === '>' &&
                         unitToValue($activitySearchTerm.substring(1)) < activity.rawAmount) ||
                     ($activitySearchTerm[0] === '<' &&

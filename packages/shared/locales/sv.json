@@ -1118,7 +1118,7 @@
             "error": "Det gick inte att exportera transaktionshistorik för {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Logga in för att initiera IOTA-länken",
+            "receivedWhileLoggedOut": "Logga in för att initiera IOTA-länken",
             "notEnabled": "IOTA-länkar är inte aktiverade",
             "invalidFormat": "IOTA-länken du följde är ogiltig",
             "wallet": {

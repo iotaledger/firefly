@@ -1,5 +1,4 @@
 import { resetRouters } from '@core/router'
-import { clearSendParams } from '@lib/app'
 import { stopPollingLedgerStatus } from '@lib/ledger'
 import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
@@ -48,7 +47,6 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
 
         // TODO: clean up the state management
         lastActiveAt.set(new Date())
-        clearSendParams()
         closePopup(true)
         loggedIn.set(false)
         hasLoadedAccounts.set(false)

@@ -9,7 +9,6 @@
     export let disabled = false
     export let isFocused = false
     export let asset: IAsset
-    export let rawAmount: number
     export let amount: string
     export let unit: string
 
@@ -23,7 +22,7 @@
     function onClickAvailableBalance(): void {
         /* eslint-disable no-extra-semi */
         /* eslint-disable @typescript-eslint/no-extra-semi */
-        ;({ amount, unit } = parseRawAmount(asset?.balance.available ?? 0, asset.metadata))
+        ;({ amount, unit } = parseRawAmount(asset?.balances?.baseCoin.available ?? 0, asset.metadata))
     }
 
     export function validate(allowZeroOrNull = false): Promise<void> {
@@ -42,7 +41,7 @@
             if (Number.isNaN(amountAsFloat)) {
                 error = localize('error.send.amountInvalidFormat')
             } else {
-                if (rawAmount > asset?.balance.available) {
+                if (rawAmount > asset?.balances?.baseCoin.available) {
                     error = localize('error.send.amountTooHigh')
                 } else if (rawAmount <= 0) {
                     error = localize('error.send.amountZero')

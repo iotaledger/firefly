@@ -14,13 +14,13 @@ import {
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
+    MintTokenTransaction,
     NativeTokenOptions,
     NftOptions,
     OutputData,
     OutputsToClaim,
     SignedTransactionEssence,
     Transaction,
-    TransactionResult,
     TransactionOptions,
     PreparedTransactionData,
     OutputOptions,
@@ -32,12 +32,13 @@ export interface IAccount {
     buildBasicOutput(data: BuildBasicOutputData): Promise<IBasicOutput>
     buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput>
     buildNftOutput(data: BuildNftOutputData): Promise<INftOutput>
-    claimOutputs(outputIds: string[]): Promise<TransactionResult[]>
-    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<TransactionResult[]>
+    claimOutputs(outputIds: string[]): Promise<Transaction[]>
+    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction[]>
     generateAddress(options?: AddressGenerationOptions): Promise<Address>
     generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
     getAlias(): string
     getBalance(): Promise<AccountBalance>
+    getFoundryOutput(tokenId: string): Promise<IFoundryOutput>
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
     getTransaction(transactionId: string): Promise<Transaction>
@@ -51,31 +52,28 @@ export interface IAccount {
     mintNativeToken(
         nativeTokenOptions: NativeTokenOptions,
         transactionOptions?: TransactionOptions
-    ): Promise<TransactionResult>
-    mintNfts(nftsOptions: NftOptions[], transactionOptions?: TransactionOptions): Promise<TransactionResult>
+    ): Promise<MintTokenTransaction>
+    mintNfts(nftsOptions: NftOptions[], transactionOptions?: TransactionOptions): Promise<Transaction>
     prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputTypes>
     prepareSendAmount(
         addressWithAmount: AddressWithAmount[],
         options?: TransactionOptions
     ): Promise<PreparedTransactionData>
     prepareTransaction(outputs: OutputTypes[], options?: TransactionOptions): Promise<PreparedTransactionData>
-    sendAmount(
-        addressesWithAmount: AddressWithAmount[],
-        transactionOptions?: TransactionOptions
-    ): Promise<TransactionResult>
+    sendAmount(addressesWithAmount: AddressWithAmount[], transactionOptions?: TransactionOptions): Promise<Transaction>
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
         transactionOptions?: TransactionOptions
-    ): Promise<TransactionResult>
+    ): Promise<Transaction>
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
         transactionOptions?: TransactionOptions
-    ): Promise<TransactionResult>
-    sendNft(addressesAndNftIds: AddressNftId[], transactionOptions?: TransactionOptions): Promise<TransactionResult>
-    sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<TransactionResult>
+    ): Promise<Transaction>
+    sendNft(addressesAndNftIds: AddressNftId[], transactionOptions?: TransactionOptions): Promise<Transaction>
+    sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction>
     setAlias(alias: string): Promise<void>
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
-    submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<TransactionResult>
+    submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
     sync(options?: AccountSyncOptions): Promise<AccountBalance>
-    tryClaimOutputs(outputsToClaim: OutputsToClaim): Promise<TransactionResult[]>
+    tryClaimOutputs(outputsToClaim: OutputsToClaim): Promise<Transaction[]>
 }
