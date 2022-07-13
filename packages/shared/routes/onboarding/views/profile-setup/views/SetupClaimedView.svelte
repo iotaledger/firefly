@@ -11,7 +11,7 @@
         ProfileRecoveryType,
         setNewProfileType,
         newProfile,
-        iotaProfileManager,
+        destroyIotaProfileManager,
     } from '@contexts/onboarding'
 
     async function handleContinueClick(profileRecoveryType: ProfileRecoveryType): Promise<void> {
@@ -24,12 +24,13 @@
         $profileSetupRouter.next({ profileRecoveryType })
     }
 
-    function handleBackClick(): void {
+    async function handleBackClick(): Promise<void> {
+        await destroyIotaProfileManager()
         $profileSetupRouter.previous()
     }
 
     onMount(() => {
-        $iotaProfileManager = null
+        void destroyIotaProfileManager()
     })
 </script>
 
