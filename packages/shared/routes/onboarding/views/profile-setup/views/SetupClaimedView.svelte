@@ -12,16 +12,18 @@
         setNewProfileType,
         newProfile,
         destroyIotaProfileManager,
+        profileRecoveryType,
     } from '@contexts/onboarding'
 
-    async function handleContinueClick(profileRecoveryType: ProfileRecoveryType): Promise<void> {
+    async function handleContinueClick(_profileRecoveryType: ProfileRecoveryType): Promise<void> {
         await createIotaProfileManager()
 
         const profileType =
-            profileRecoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
+            _profileRecoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
         setNewProfileType(profileType)
 
-        $profileSetupRouter.next({ profileRecoveryType })
+        profileRecoveryType.set(_profileRecoveryType)
+        $profileSetupRouter.next({ profileRecoveryType: _profileRecoveryType })
     }
 
     async function handleBackClick(): Promise<void> {
