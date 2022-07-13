@@ -18,13 +18,6 @@
         WelcomeView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
-    import { iotaProfileManager } from '../../lib/contexts/onboarding'
-    // import { newProfile } from '../../lib/contexts/onboarding'
-
-    // $: console.log(`NEW PROFILE (${$onboardingRoute}): `, $newProfile)
-
-    /* eslint-disable no-console */
-    $: console.log('IOTA PROFILE MANAGER: ', $iotaProfileManager)
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.Welcome}
