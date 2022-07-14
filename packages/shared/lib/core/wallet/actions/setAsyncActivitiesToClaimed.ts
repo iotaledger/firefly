@@ -24,14 +24,20 @@ export async function setAsyncActivitiesToClaimed(account: IAccountState): Promi
                 })
             }
         } catch (err) {
-            // console.log(err)
+            console.error(err)
         }
     }
 }
 
 function isOutputClaimed(output: OutputData): boolean {
     const expirationDate = getExpirationDateFromOutput(output.output)
-    return (
-        output.isSpent && output.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND < expirationDate.getTime()
-    )
+
+    if (expirationDate) {
+        return (
+            output.isSpent &&
+            output.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND < expirationDate.getTime()
+        )
+    } else {
+        return output.isSpent
+    }
 }
