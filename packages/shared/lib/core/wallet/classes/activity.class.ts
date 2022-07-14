@@ -33,6 +33,7 @@ import {
     getTagFromOutput,
     isSubjectInternal,
     isOutputAsync,
+    outputIdFromTransactionData,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 
@@ -112,7 +113,7 @@ export class Activity implements IActivity {
     }
 
     setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
-        const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
+        const { output, outputIndex } = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
 
         const recipient = getRecipientFromOutput(output)
 
@@ -130,6 +131,8 @@ export class Activity implements IActivity {
         this.subject = transaction.incoming ? this.sender : this.recipient
         this.isInternal = isSubjectInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
+
+        this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
         this.storageDeposit = getStorageDepositFromOutput(output)
         this.rawAmount = getAmountFromOutput(output) - this.storageDeposit
