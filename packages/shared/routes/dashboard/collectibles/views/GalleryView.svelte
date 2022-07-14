@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
+    import { Text, Button } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
 
@@ -13,5 +13,5 @@
 </script>
 
 <Text type={TextType.h3}>Collectibles</Text>
-<div class="w-12 h-12 bg-black" on:click={onClick}>Details</div>
-<div class="w-12 h-12 bg-black" on:click={onClick2}>Collection</div>
+<Button {onClick}>Details</Button>
+<Button onClick={onClick2}>Collection</Button>
