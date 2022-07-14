@@ -9,7 +9,6 @@ import { getExpirationDateFromOutput } from '../utils'
 export async function setAsyncActivitiesToClaimed(account: IAccountState): Promise<void> {
     const accountActivities = get(allAccountActivities)[Number(account.id)]
 
-    // TODO: find a way to determine if outgoing activities are claimed as well
     const activities = accountActivities.filter(
         (activity) => activity.direction === ActivityDirection.Out && activity.isAsync
     )
@@ -17,7 +16,13 @@ export async function setAsyncActivitiesToClaimed(account: IAccountState): Promi
     for (const activity of activities) {
         try {
             const detailedOutput = await account.getOutput(activity.outputId)
-            updateActivityByActivityId(account.id, activity.id, { isClaimed: isOutputClaimed(detailedOutput) })
+            const isClaimed = isOutputClaimed(detailedOutput)
+            if (isClaimed) {
+                updateActivityByActivityId(account.id, activity.id, {
+                    isClaimed: true,
+                    claimedDate: new Date(detailedOutput.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND),
+                })
+            }
         } catch (err) {
             // console.log(err)
         }
