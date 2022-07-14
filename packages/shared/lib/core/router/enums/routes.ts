@@ -150,3 +150,9 @@ export enum MigrateRoute {
     SecuringSpentAddresses = 'securingSpentAddresses',
     SecurityCheckCompleted = 'securityCheckCompleted',
 }
+
+export enum CollectiblesRoute {
+    Gallery = 'gallery',
+    Details = 'details',
+    Collection = 'collection',
+}

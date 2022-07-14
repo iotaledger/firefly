@@ -5,6 +5,7 @@ import { closePopup } from '@lib/popup'
 
 import { appRouter, AppRouter } from './app-router'
 import { accountRouter, AccountRouter } from './account-router'
+import { collectiblesRouter, CollectiblesRouter } from './collectibles-router'
 import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
 import { SettingsRouter, settingsRouter } from './settings-router'
@@ -16,6 +17,7 @@ export const initRouters = (): void => {
     ledgerRouter.set(new LedgerRouter())
     accountRouter.set(new AccountRouter())
     settingsRouter.set(new SettingsRouter())
+    collectiblesRouter.set(new CollectiblesRouter())
 }
 
 export const resetRouters = (): void => {
@@ -23,6 +25,7 @@ export const resetRouters = (): void => {
     get(dashboardRouter).reset()
     get(accountRouter).reset()
     get(settingsRouter).reset()
+    get(collectiblesRouter).reset()
     isDeepLinkRequestActive.set(false)
 }
 

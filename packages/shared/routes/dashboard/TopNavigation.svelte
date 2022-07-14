@@ -1,6 +1,15 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { DashboardRoute, dashboardRoute, SettingsRoute, settingsRoute, settingsRouter } from '@core/router'
+    import {
+        collectiblesRoute,
+        CollectiblesRoute,
+        collectiblesRouter,
+        DashboardRoute,
+        dashboardRoute,
+        SettingsRoute,
+        settingsRoute,
+        settingsRouter,
+    } from '@core/router'
     import { AccountSwitcher, Icon, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
@@ -9,22 +18,37 @@
     export let classes = ''
 
     let os = ''
+    let showBackButton = false
 
-    $: showBackButton = isCorrectRoute($settingsRoute)
+    $: {
+        if ($settingsRoute || $collectiblesRoute) {
+            showBackButton = isCorrectRoute()
+        }
+    }
     $: showingPopup = $popupState.active && $popupState.type !== 'busy'
 
     onMount(async () => {
         os = await Platform.getOS()
     })
 
-    function isCorrectRoute(route: SettingsRoute): boolean {
-        return route !== SettingsRoute.Init
+    function isCorrectRoute(): boolean {
+        switch ($dashboardRoute) {
+            case DashboardRoute.Settings:
+                return $settingsRoute !== SettingsRoute.Init
+            case DashboardRoute.Collectibles:
+                return $collectiblesRoute !== CollectiblesRoute.Gallery
+            default:
+                break
+        }
     }
 
     function handleBackClick(): void {
         switch ($dashboardRoute) {
             case DashboardRoute.Settings:
                 $settingsRouter.previous()
+                break
+            case DashboardRoute.Collectibles:
+                $collectiblesRouter.previous()
                 break
             default:
                 break
