@@ -8,8 +8,8 @@ export function refreshNativeTokens(): void {
         addNativeTokenAsset({
             id: nativeToken.id,
             balance: {
-                total: Number(nativeToken.amount),
-                available: Number(nativeToken.amount),
+                total: Number(nativeToken.total),
+                available: Number(nativeToken.available),
             },
         })
     })
