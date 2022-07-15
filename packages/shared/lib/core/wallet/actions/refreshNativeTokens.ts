@@ -6,7 +6,7 @@ export function refreshNativeTokens(): void {
     clearNativeTokenAssets()
     get(selectedAccount)?.balances?.nativeTokens?.forEach((nativeToken) => {
         addNativeTokenAsset({
-            id: nativeToken.id,
+            id: nativeToken.tokenId,
             balance: {
                 total: Number(nativeToken.total),
                 available: Number(nativeToken.available),
