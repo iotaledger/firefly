@@ -27,7 +27,6 @@ export async function login(recoverAccounts: boolean = false): Promise<void> {
             void loadAccounts()
         }
 
-        loggedIn.set(true)
         lastActiveAt.set(new Date())
 
         const strongholdUnlocked = await isStrongholdUnlocked()

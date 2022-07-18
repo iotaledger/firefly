@@ -132,7 +132,7 @@
         }
     })
 
-    if (!$hasLoadedAccounts && $loggedIn) {
+    $: if (!$hasLoadedAccounts && $loggedIn) {
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
