@@ -6,7 +6,6 @@ import { addClaimedActivity, allAccountActivities, claimedActivities } from '../
 export function linkActivityAndClaimingTransaction(account: IAccountState): void {
     const accountActivities = get(allAccountActivities)[account.id]
 
-    // TODO: find a way to determine if outgoing activities are claimed as well
     const activities = accountActivities.filter(
         (activity) => activity.direction === ActivityDirection.In && activity.isAsync
     )

@@ -33,6 +33,7 @@ import {
     getTagFromOutput,
     isSubjectInternal,
     isOutputAsync,
+    outputIdFromTransactionData,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 
@@ -112,7 +113,7 @@ export class Activity implements IActivity {
     }
 
     setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
-        const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
+        const { output, outputIndex } = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
 
         const recipient = getRecipientFromOutput(output)
 
@@ -131,6 +132,8 @@ export class Activity implements IActivity {
         this.isInternal = isSubjectInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
+        this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
+
         this.storageDeposit = getStorageDepositFromOutput(output)
         this.rawAmount = getAmountFromOutput(output) - this.storageDeposit
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
@@ -139,7 +142,7 @@ export class Activity implements IActivity {
 
         this.expirationDate = getExpirationDateFromOutput(output)
         this.isAsync = isOutputAsync(output)
-        this.asyncStatus = undefined
+        this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
 
         return this
@@ -175,7 +178,7 @@ export class Activity implements IActivity {
         this.rawAmount = getAmountFromOutput(outputData.output) - this.storageDeposit
         this.expirationDate = getExpirationDateFromOutput(outputData.output)
         this.isAsync = isOutputAsync(outputData.output)
-        this.asyncStatus = undefined
+        this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
 
         return this
