@@ -13,7 +13,6 @@ import {
 
 export interface IProfileManager {
     id: string
-
     backup(destination: string, password: string): Promise<void>
     bech32ToHex(bech32Address: string): Promise<string>
     changeStrongholdPassword(currentPassword: string, newPassword: string): Promise<void>
