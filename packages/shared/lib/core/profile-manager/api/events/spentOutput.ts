@@ -9,7 +9,7 @@ export async function handleSpentOutput(accountId: string, payload: { output: Ou
     const transactionId = payload.output.metadata.transactionId
     const activity = get(allAccountActivities)[accountId].find((_activity) => _activity.id === transactionId)
 
-    if (activity.asyncStatus === ActivityAsyncStatus.Unclaimed) {
+    if (activity?.asyncStatus === ActivityAsyncStatus.Unclaimed) {
         updateActivityByTransactionId(accountId, transactionId, {
             isClaimed: true,
             asyncStatus: ActivityAsyncStatus.Claimed,
