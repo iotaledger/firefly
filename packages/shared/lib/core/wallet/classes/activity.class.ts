@@ -142,7 +142,7 @@ export class Activity implements IActivity {
 
         this.expirationDate = getExpirationDateFromOutput(output)
         this.isAsync = isOutputAsync(output)
-        this.asyncStatus = undefined
+        this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
 
         return this
@@ -178,7 +178,7 @@ export class Activity implements IActivity {
         this.rawAmount = getAmountFromOutput(outputData.output) - this.storageDeposit
         this.expirationDate = getExpirationDateFromOutput(outputData.output)
         this.isAsync = isOutputAsync(outputData.output)
-        this.asyncStatus = undefined
+        this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
 
         return this
