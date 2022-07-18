@@ -6,7 +6,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
     [NetworkProtocol.IOTA]: {
         [NetworkType.Mainnet]: {
             id: 'iota-mainnet',
-            name: 'IOTA Mainnet',
+            name: 'IOTA',
             protocol: NetworkProtocol.IOTA,
             type: NetworkType.Mainnet,
             bech32Hrp: 'iota',
@@ -39,7 +39,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
     [NetworkProtocol.Shimmer]: {
         [NetworkType.Mainnet]: {
             id: 'shimmer-mainnet',
-            name: 'Shimmer Mainnet',
+            name: 'Shimmer',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.Mainnet,
             bech32Hrp: 'smr',
@@ -52,7 +52,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
         },
         [NetworkType.Devnet]: {
             id: 'testnet',
-            name: 'Public Testnet',
+            name: 'Shimmer Beta',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.Devnet,
             bech32Hrp: 'rms',
