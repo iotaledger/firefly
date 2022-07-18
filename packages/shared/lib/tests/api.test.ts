@@ -1,4 +1,9 @@
 import { MOCK_MNEMONIC, ProfileManagerMock } from './__mocks__/profileManager.mock'
+import { AccountMock } from './__mocks__/account.mock'
+import './__mocks__/crypto.mock'
+
+import { get } from 'svelte/store'
+
 import {
     destroyProfileManager,
     profileManager,
@@ -10,8 +15,7 @@ import {
     restoreBackup,
     createStardustAccount,
 } from '../core/profile-manager'
-import { get } from 'svelte/store'
-import { AccountMock } from './__mocks__/account.mock'
+import { generateRandomId } from '@lib/utils'
 
 describe('File: api.test.ts', () => {
     let profileManagerMock: ProfileManagerMock
@@ -20,7 +24,8 @@ describe('File: api.test.ts', () => {
     const password = 'password'
 
     beforeEach(() => {
-        profileManagerMock = new ProfileManagerMock()
+        const id = generateRandomId()
+        profileManagerMock = new ProfileManagerMock(id)
         profileManager.set(profileManagerMock)
     })
 

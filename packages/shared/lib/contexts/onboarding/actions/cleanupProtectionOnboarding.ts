@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { Platform } from '@lib/platform'
 
 import { ProfileRecoveryType } from '../enums'
-import { newProfile, profileRecoveryType } from '../stores'
+import { iotaProfileManager, mnemonic, newProfile, profileRecoveryType } from '../stores'
 import { storeAndCleanMnemonic } from './storeAndCleanMnemonic'
 
 /**
@@ -14,6 +14,14 @@ export async function cleanupProtectionOnboarding(pinInput: string): Promise<voi
     // TODO: replace with new api when it is implemented
     // await setStoragePassword(pinInput)
     if (get(profileRecoveryType) === ProfileRecoveryType.Mnemonic) {
+        const _iotaProfileManager = get(iotaProfileManager)
+        if (_iotaProfileManager) {
+            const _mnemonic = get(mnemonic).join(' ')
+
+            await _iotaProfileManager?.verifyMnemonic(_mnemonic)
+            await _iotaProfileManager?.storeMnemonic(_mnemonic)
+        }
+
         await storeAndCleanMnemonic()
     }
 }
