@@ -10,7 +10,7 @@ export function getSenderFromTransaction(transaction: Transaction, accountAddres
     } else if (transaction?.incoming) {
         return (
             getSenderFromTransactionInputs(transaction.payload.essence.inputs) ??
-            getSenderFromOutput(getNonRemainderOutputFromTransaction(transaction, accountAddress))
+            getSenderFromOutput(getNonRemainderOutputFromTransaction(transaction, accountAddress).output)
         )
     } else {
         return undefined
