@@ -2,9 +2,12 @@ import { getRecipientAddressFromOutput } from '../'
 import { Transaction } from '@iota/wallet'
 import { OutputTypes } from '@iota/types'
 
-export function getNonRemainderOutputFromTransaction(transaction: Transaction, accountAddress: string): OutputTypes {
+export function getNonRemainderOutputFromTransaction(
+    transaction: Transaction,
+    accountAddress: string
+): { output: OutputTypes; outputIndex: number } {
     const outputs = transaction.payload.essence.outputs
-    const nonRemainerOutputs = outputs.filter((output) => {
+    const nonRemainerOutputIndex = outputs.findIndex((output) => {
         const recipientAddress = getRecipientAddressFromOutput(output)
 
         if (transaction.incoming) {
@@ -13,5 +16,5 @@ export function getNonRemainderOutputFromTransaction(transaction: Transaction, a
             return accountAddress !== recipientAddress
         }
     })
-    return nonRemainerOutputs[0]
+    return { output: outputs[nonRemainerOutputIndex], outputIndex: nonRemainerOutputIndex }
 }
