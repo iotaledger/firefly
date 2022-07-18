@@ -1,6 +1,6 @@
 {
     "name": "desktop",
-    "productName": "Firefly (Stardust)",
+    "productName": "Firefly Stardust",
     "version": "2.0.0-alpha-0.1.3",
     "description": "Official IOTA wallet on desktop",
     "main": "public/build/main.js",
