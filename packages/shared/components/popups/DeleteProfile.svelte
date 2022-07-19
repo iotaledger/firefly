@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text } from 'shared/components'
-    import { localize } from '@core/i18n'
-    import { closePopup } from 'shared/lib/popup'
+    import { Button, PasswordInput, Text, Spinner } from 'shared/components'
     import { isSoftwareProfile } from '@core/profile'
+    import { localize } from '@core/i18n'
+    import { setStrongholdPassword } from '@core/profile-manager'
+    import { closePopup } from '@lib/popup'
     import { deleteProfile } from '@contexts/settings'
 
     let isBusy = false
@@ -14,6 +15,7 @@
         error = ''
 
         try {
+            await setStrongholdPassword(password)
             await deleteProfile()
         } catch (err) {
             error = localize(err.error)
@@ -43,6 +45,10 @@
 <div class="flex flex-row justify-between space-x-4 w-full">
     <Button secondary classes="w-1/2" onClick={closePopup} disabled={isBusy}>{localize('actions.no')}</Button>
     <Button disabled={(!password && $isSoftwareProfile) || isBusy} classes="w-1/2" onClick={handleDeleteClick} warning>
-        {localize('actions.yes')}
+        {#if isBusy}
+            <Spinner busy classes="justify-center" />
+        {:else}
+            {localize('actions.yes')}
+        {/if}
     </Button>
 </div>

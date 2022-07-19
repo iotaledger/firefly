@@ -37,10 +37,6 @@
     export let tag: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    // If storage deposit is 0, then set expiration date to tomorrow
-    const defaultExpirationDate = new Date()
-    defaultExpirationDate.setDate(defaultExpirationDate.getDate() + 1)
-
     let expirationDate: Date
     let storageDeposit = 0
     let preparedOutput: OutputTypes

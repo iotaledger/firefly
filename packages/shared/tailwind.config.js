@@ -290,6 +290,9 @@ module.exports = {
                 16: pxToRem(16),
                 24: pxToRem(24),
             },
+            maxHeight: {
+                xl: pxToRem(648),
+            },
         },
         fontFamily: {
             'fira-mono': ['"Fira Mono"', 'monospace'],

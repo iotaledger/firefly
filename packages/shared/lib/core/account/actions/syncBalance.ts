@@ -9,7 +9,9 @@ export async function syncBalance(accountId: string): Promise<void> {
     const balances = await getBalance(accountId)
     if (get(selectedAccount)?.id === accountId) {
         updateSelectedAccount({ balances })
-        updateBaseCoinAsset({ balance: { total: Number(balances.total), available: Number(balances.available) } })
+        updateBaseCoinAsset({
+            balance: { total: Number(balances?.baseCoin?.total), available: Number(balances?.baseCoin?.available) },
+        })
         refreshNativeTokens()
     } else {
         updateActiveAccount(accountId, { balances })

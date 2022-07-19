@@ -7,6 +7,7 @@
         activitySearchTerm,
         activityFilterIndex,
         selectedAccountActivities,
+        setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
     import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
@@ -16,6 +17,7 @@
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
     import { isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
+    import { time } from '@core/app'
 
     function handleTransactionClick(activity: Activity): void {
         openPopup({
@@ -31,6 +33,7 @@
     let searchValue: string
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
+    $: setAsyncStatusOfAccountActivities($time)
 
     $: if (searchActive && $selectedAccountActivities) {
         debounce(() => {

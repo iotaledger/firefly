@@ -10,6 +10,7 @@ import {
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
+    MintTokenTransaction,
     OutputData,
     OutputOptions,
     OutputsToClaim,
@@ -17,7 +18,6 @@ import {
     SignedTransactionEssence,
     Transaction,
     TransactionOptions,
-    TransactionResult,
 } from '@iota/wallet'
 import { IAccount } from '../../core/account'
 import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
@@ -43,6 +43,9 @@ export class AccountMock implements IAccount {
     }
 
     constructor() {}
+    getFoundryOutput(tokenId: string): Promise<IFoundryOutput> {
+        throw new Error('Method not implemented.')
+    }
 
     buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput> {
         throw new Error('Method not implemented.')
@@ -60,7 +63,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<TransactionResult[]> {
+    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction[]> {
         throw new Error('Method not implemented.')
     }
 
@@ -72,7 +75,7 @@ export class AccountMock implements IAccount {
         return Promise.resolve(MOCK_ACCOUNT_BALANCE)
     }
 
-    claimOutputs(): Promise<TransactionResult[]> {
+    claimOutputs(): Promise<Transaction[]> {
         return Promise.resolve([])
     }
 
@@ -162,11 +165,11 @@ export class AccountMock implements IAccount {
         return Promise.resolve([MOCK_ADDRESS])
     }
 
-    mintNativeToken(nativeTokenOptions, transferOptions): Promise<TransactionResult> {
+    mintNativeToken(nativeTokenOptions, transferOptions): Promise<MintTokenTransaction> {
         throw new Error('Method not implemented.')
     }
 
-    mintNfts(nftOptions, transferOptions): Promise<TransactionResult> {
+    mintNfts(nftOptions, transferOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -181,29 +184,29 @@ export class AccountMock implements IAccount {
     sendAmount(
         addressesWithAmount: AddressWithAmount[],
         transactionOptions?: TransactionOptions
-    ): Promise<TransactionResult> {
+    ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
     sendMicroTransaction(
         addressesWithMicroAmount: AddressWithMicroAmount[],
         transactionOptions?: TransactionOptions
-    ): Promise<TransactionResult> {
+    ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
     sendNativeTokens(
         addressesNativeTokens: AddressNativeTokens[],
         transactionOptions?: TransactionOptions
-    ): Promise<TransactionResult> {
+    ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    sendNft(addressesAndNftIds: AddressNftId[], transactionOptions?: TransactionOptions): Promise<TransactionResult> {
+    sendNft(addressesAndNftIds: AddressNftId[], transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<TransactionResult> {
+    sendOutputs(outputs: OutputTypes[], transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -215,7 +218,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<TransactionResult> {
+    submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -223,7 +226,7 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    tryClaimOutputs(outputsToClaim: OutputsToClaim): Promise<TransactionResult[]> {
+    tryClaimOutputs(outputsToClaim: OutputsToClaim): Promise<Transaction[]> {
         throw new Error('Method not implemented.')
     }
 }

@@ -70,7 +70,7 @@
         }
         return estimateStakingAirdropReward(
             airdrop,
-            $isPartiallyStaked ? getUnstakedFunds() : $selectedAccount?.balances.available,
+            $isPartiallyStaked ? getUnstakedFunds() : $selectedAccount?.balances.baseCoin.available,
             true
         )
     }
@@ -150,7 +150,7 @@
         {localize(`popups.stakingConfirmation.subtitle${$isPartiallyStaked ? 'Merge' : 'Stake'}`)}
     </Text>
     <Text type="h1">
-        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds()) : $selectedAccount?.balances?.available}
+        {$isPartiallyStaked ? formatUnitBestMatch(getUnstakedFunds()) : $selectedAccount?.balances?.baseCoin.available}
     </Text>
 </div>
 {#if showInfoText()}

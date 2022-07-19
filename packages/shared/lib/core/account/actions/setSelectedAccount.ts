@@ -15,8 +15,8 @@ export function setSelectedAccount(id: string): void {
             id: COIN_TYPE[get(activeProfile)?.networkProtocol].toString(),
             metadata: BASE_TOKEN[get(activeProfile)?.networkProtocol],
             balance: {
-                total: Number(account?.balances.total),
-                available: Number(account?.balances.available),
+                total: Number(account?.balances?.baseCoin?.total),
+                available: Number(account?.balances?.baseCoin?.available),
             },
         })
         refreshNativeTokens()

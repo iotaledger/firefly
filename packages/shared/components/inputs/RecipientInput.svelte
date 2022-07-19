@@ -21,17 +21,15 @@
     let keepRecipientAccountSelectorOpen: boolean
     let previousValue: string
 
-    $: if (!selectedAccount && recipient?.type === 'account') {
+    if (!selectedAccount && recipient?.type === 'account') {
         selectedAccount = recipient?.account
     } else if (!selectedAccount && recipient?.type === 'address' && previousValue === value) {
         value = recipient?.address
-    } else {
-        previousValue = value
-        recipient = {
-            type: selectedAccount ? 'account' : 'address',
-            ...(selectedAccount && { account: selectedAccount }),
-            ...(!selectedAccount && { address: value }),
-        }
+    }
+
+    $: recipient = {
+        ...(selectedAccount && { type: 'account', account: selectedAccount }),
+        ...(!selectedAccount && { type: 'address', address: value }),
     }
 
     $: hasFocus && (error = '')

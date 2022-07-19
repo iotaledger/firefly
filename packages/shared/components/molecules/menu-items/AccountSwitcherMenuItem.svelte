@@ -41,6 +41,9 @@
         <AccountLabel selected={account.id === $selectedAccount?.id} {account} />
     </div>
     <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
-        {formatTokenAmountBestMatch(Number(account.balances.total), BASE_TOKEN[$activeProfile.networkProtocol])}
+        {formatTokenAmountBestMatch(
+            Number(account.balances.baseCoin.total),
+            BASE_TOKEN[$activeProfile.networkProtocol]
+        )}
     </Text>
 </button>

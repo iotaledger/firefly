@@ -82,11 +82,11 @@
             "shimmer": {
                 "mainnet": {
                     "title": "Shimmer",
-                    "body": "Staging network for IOTA Mainnet"
+                    "body": "Staging network for IOTA"
                 },
                 "devnet": {
-                    "title": "Public Testnet",
-                    "body": "Beta network for IOTA Mainnet"
+                    "title": "Shimmer Beta",
+                    "body": "Beta network for Shimmer"
                 },
                 "private-net": {
                     "title": "Custom Network",
@@ -1322,7 +1322,9 @@
             "index": "Your account index must be a number between 0 and 2,147,483,647.",
             "page": "Your account page must be a number between 0 and 2,147,483,647.",
             "syncing": "There was an error syncing your wallets.",
-            "cannotRemove": "Unable to remove wallet."
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
