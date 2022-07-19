@@ -34,6 +34,7 @@ import {
     isSubjectInternal,
     isOutputAsync,
     outputIdFromTransactionData,
+    isSelfTransaction,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 
@@ -50,6 +51,7 @@ export class Activity implements IActivity {
     sender: Subject
     recipient: Subject
     subject: Subject
+    isSelfTransaction: boolean
     isInternal: boolean
     direction: ActivityDirection
 
@@ -113,7 +115,12 @@ export class Activity implements IActivity {
     }
 
     setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
-        const { output, outputIndex } = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
+        const selfTransaction = isSelfTransaction(transaction.payload.essence.outputs, account.depositAddress)
+        const { output, outputIndex } = getNonRemainderOutputFromTransaction(
+            transaction,
+            account.depositAddress,
+            selfTransaction
+        )
 
         const recipient = getRecipientFromOutput(output)
 
@@ -129,6 +136,7 @@ export class Activity implements IActivity {
         this.sender = getSenderFromTransaction(transaction, account.depositAddress)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
+        this.isSelfTransaction = selfTransaction
         this.isInternal = isSubjectInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
@@ -168,6 +176,7 @@ export class Activity implements IActivity {
         this.sender = sender
         this.recipient = recipient
         this.subject = subject
+        this.isSelfTransaction = false
         this.isInternal = isInternal
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
