@@ -56,7 +56,7 @@ describe('File: network.ts', () => {
         iota: {
             [NetworkType.Mainnet]: {
                 id: 'iota-mainnet',
-                name: 'IOTA Mainnet',
+                name: 'IOTA',
                 protocol: NetworkProtocol.IOTA,
                 type: NetworkType.Mainnet,
                 bech32Hrp: 'iota',
@@ -89,7 +89,7 @@ describe('File: network.ts', () => {
         shimmer: {
             [NetworkType.Mainnet]: {
                 id: 'shimmer-mainnet',
-                name: 'Shimmer Mainnet',
+                name: 'Shimmer',
                 protocol: NetworkProtocol.Shimmer,
                 type: NetworkType.Mainnet,
                 bech32Hrp: 'smr',
@@ -101,8 +101,8 @@ describe('File: network.ts', () => {
                 },
             },
             [NetworkType.Devnet]: {
-                id: 'shimmer-alphanet-5',
-                name: 'Shimmer Alphanet',
+                id: 'testnet',
+                name: 'Shimmer Beta',
                 protocol: NetworkProtocol.Shimmer,
                 type: NetworkType.Devnet,
                 bech32Hrp: 'rms',
@@ -135,14 +135,14 @@ describe('File: network.ts', () => {
         },
         [NetworkProtocol.Shimmer]: {
             [NetworkType.Mainnet]: [''],
-            [NetworkType.Devnet]: [''],
+            [NetworkType.Devnet]: ['https://api.testnet.shimmer.network'],
         },
     }
 
     const CONFIG: Readonly<{ [key in NetworkProtocol]: { [key in NetworkType]: IClientOptions } }> = {
         [NetworkProtocol.IOTA]: {
             [NetworkType.Mainnet]: {
-                network: NETWORK[NetworkProtocol.IOTA][NetworkType.Mainnet].id,
+                network: NETWORK[NetworkProtocol.IOTA]?.[NetworkType.Mainnet]?.id,
                 nodes: _buildNodes(NetworkProtocol.IOTA, NetworkType.Mainnet),
                 includeOfficialNodes: false,
                 automaticNodeSelection: true,
