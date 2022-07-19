@@ -2,6 +2,7 @@ import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
 
 import { IErrorParameters } from '../interfaces'
+import { addError } from '../stores'
 
 /**
  * The base error, containing logic for handling the different
@@ -16,7 +17,7 @@ export class BaseError extends Error {
         }
 
         if (params?.saveToErrorLog) {
-            // TODO: save to log
+            addError({ message })
         }
 
         if (params?.showNotification) {
