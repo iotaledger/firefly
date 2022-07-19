@@ -4,39 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.711549039960">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.711582109307">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Account Activity | Firefly Team Handbook</title>
-    <meta name="title" content="Account Activity | Firefly Team Handbook">
-    <meta name="description" content="The following document explains how the Activity History is generated from IOTA's UTXO architecture." />
+    <title>Modules | Firefly Team Handbook</title>
+    <meta name="title" content="Modules | Firefly Team Handbook">
+    <meta name="description" content="Modules are the heart of our TypeScript library; they house the various types of code components we use, namely:" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://iotaledger.github.io/firefly/specifications/activity/" />
+    <link rel="canonical" href="https://iotaledger.github.io/firefly/guides/coding-conventions/modules/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://iotaledger.github.io/firefly/specifications/activity/">
-    <meta property="og:title" content="Account Activity | Firefly Team Handbook">
-    <meta property="og:description" content="The following document explains how the Activity History is generated from IOTA's UTXO architecture.">
+    <meta property="og:url" content="https://iotaledger.github.io/firefly/guides/coding-conventions/modules/">
+    <meta property="og:title" content="Modules | Firefly Team Handbook">
+    <meta property="og:description" content="Modules are the heart of our TypeScript library; they house the various types of code components we use, namely:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://iotaledger.github.io/firefly/specifications/activity/">
-    <meta property="twitter:title" content="Account Activity | Firefly Team Handbook">
-    <meta property="twitter:description" content="The following document explains how the Activity History is generated from IOTA's UTXO architecture.">
+    <meta property="twitter:url" content="https://iotaledger.github.io/firefly/guides/coding-conventions/modules/">
+    <meta property="twitter:title" content="Modules | Firefly Team Handbook">
+    <meta property="twitter:description" content="Modules are the heart of our TypeScript library; they house the various types of code components we use, namely:">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../static/icon_firefly.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.711549039960" rel="stylesheet" />
+    <link href="../../../static/icon_firefly.png" rel="icon" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.711582109307" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.711549039960" data-turbo-eval="false" defer></script>
-    <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.711549039960" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.711582109307" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.711582109307" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.711582109307" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -51,13 +52,13 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../" class="flex items-center leading-snug text-2xl">
+                        <a id="docs-site-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="w-10 mr-2 grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../static/icon_firefly.svg">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../static/icon_firefly.svg">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/icon_firefly.svg">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/icon_firefly.svg">
                             </span>
                             <span class="dark:text-white font-semibold line-clamp-1 md:line-clamp-2">Firefly</span>
-                        </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">v2.0.0-alpha</span>
+                        </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">v2.0.0-beta</span>
                     </div>
         
                     <span class="hidden h-8 border-r md:inline-block dark:border-dark-650"></span>
@@ -68,7 +69,7 @@
                     <nav class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -194,7 +195,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="../../../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"/>
@@ -266,86 +267,321 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="account-activity" class="break-words">
+<doc-anchor-target id="modules" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#account-activity">#</doc-anchor-trigger>
-        <span>Account Activity</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#modules">#</doc-anchor-trigger>
+        <span>Modules</span>
     </h1>
 </doc-anchor-target>
-<p>The following document explains how the Activity History is generated from IOTA&#x27;s <a href="https://wiki.iota.org/IOTA-2.0-Research-Specifications/5.1UTXO">UTXO</a> architecture. The main goal is to optimize UX by simplifying the complex UTXO architecture into a transaction based overview.</p>
-<p>This approach and the related architectural design choices have its limitations. The corresponding sections address these.</p>
-<doc-anchor-target id="activity-initialization">
+<doc-anchor-target id="organization">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#activity-initialization">#</doc-anchor-trigger>
-        <span>Activity Initialization</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#organization">#</doc-anchor-trigger>
+        <span>Organization</span>
     </h2>
 </doc-anchor-target>
-<p>After syncing all of the accounts, the accounts contains <strong>outgoing transactions</strong> and <strong>incoming outputs</strong>. These objects are highly nested and too complex for a non-technical user to understand and draw simple conclusions from them (e.g. Who was the sender/receiver? Do I have to claim that first?).</p>
-<p>The first step is to transform both <strong>transactions</strong> and <strong>outputs</strong> into <strong>activities</strong>. Transactions contain the most information, so these have the highest priority for the activity overview.</p>
-<doc-anchor-target id="transactions">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#transactions">#</doc-anchor-trigger>
-        <span>Transactions</span>
-    </h3>
-</doc-anchor-target>
-<p>With transactions we can build complete activities.</p>
-<p>Currently we only have <em>outgoing</em> transactions. Soon we will also get transactions attached to the <em>incoming</em> outputs, allowing us to add more information to these activities as well.</p>
-<p><strong>Important</strong>: They are guaranteed to persist in wallet.rs, but not on the nodes. This means we can lose the information and therefore need a fallback option.</p>
-<doc-anchor-target id="outputs">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#outputs">#</doc-anchor-trigger>
-        <span>Outputs</span>
-    </h3>
-</doc-anchor-target>
-<p>If transactions were pruned on the nodes, and we restore a profile, we cannot access them anymore. For this case, we fallback on creating activities from pure outputs. These contain no information about its origin, so there&#x27;s no way to compute the sender for incoming ones.</p>
-<p>Additionally we don&#x27;t have outputs generated by transactions initialized by us.</p>
-<doc-anchor-target id="activity-post-processing">
+<p>Modules are the heart of our TypeScript library; they house the various types of code components we use, namely:</p>
+<ul>
+<li><code v-pre>actions</code> - higher-level functions that deal with state in some way</li>
+<li><code v-pre>api</code> - wrapper functions for <code v-pre>wallet.rs</code> NodeJS bindings</li>
+<li><code v-pre>constants</code> - values that are defined at compile time</li>
+<li><code v-pre>enums</code> - variants of a type grouped together</li>
+<li><code v-pre>helpers</code> - helper functions to be used inside of a module (opposite of <code v-pre>utils</code>); they <strong>MUST NOT</strong> be exported in the module&#x27;s root barrel file</li>
+<li><code v-pre>interfaces</code> - object type definitions</li>
+<li><code v-pre>stores</code> - Svelte store objects</li>
+<li><code v-pre>tests</code> - module unit tests</li>
+<li><code v-pre>types</code> - non-object type definitions</li>
+<li><code v-pre>utils</code> - utility functions to be used outside of a module (opposite of <code v-pre>helpers</code>)</li>
+</ul>
+<p>The following is a typical module structure:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">- deep-links/
+    - enums/
+        - deep-link-context.enum.ts
+        - index.ts
+        - wallet-context.enum.ts
+    - interfaces/
+        - deep-link-manager.interface.ts
+        - index.ts
+    - stores/
+        - deep-link-request.store.ts
+        - index.ts
+    - types/
+        - deep-link-request.type.ts
+        - index.ts
+        - wallet-context.type.ts
+    - deep-link-handler.ts
+    - index.ts
+    - wallet-context-handler.ts</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="barrels">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#activity-post-processing">#</doc-anchor-trigger>
-        <span>Activity Post-Processing</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#barrels">#</doc-anchor-trigger>
+        <span>Barrels</span>
     </h2>
 </doc-anchor-target>
-<p>The previous step initialized all activities. But activities on their own are missing some important UX properties, because they can only be deduced by comparing them with each other. Depending on the result of such a comparison, some activities get updated, while others get hidden to not confuse the user.</p>
-<p>Currently we have 2 post-processing steps, but this list can be expanded if new requirements arise.</p>
-<doc-anchor-target id="claimed-activity">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#claimed-activity">#</doc-anchor-trigger>
-        <span>Claimed Activity</span>
-    </h3>
-</doc-anchor-target>
-<p>Activities can be <em>claimable</em> because of different reasons: a contained storage deposit, expiration date, etc. Claiming one always results in a new transaction, consuming the claimable activity and resulting in an output to the corresponding account.</p>
-<doc-anchor-target id="incoming">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#incoming">#</doc-anchor-trigger>
-        <span>Incoming</span>
-    </h4>
-</doc-anchor-target>
-<p>We can compute incoming, claimed activities because we have all incoming outputs (which contain the claimable activities) and outgoing transactions (which includes the claiming activity).</p>
-<p><strong>Find Matching Pair</strong>: For each async activity A1 another future activity A2 is searched, that contains A1 as an input. If one is found, we have a match.</p>
-<p><strong>Result</strong>: Claimed activity A1 gets updated, claim status is set to true, claim time and claim id will be updated to the claiming transactions infos. Claiming activity A2 gets hidden</p>
-<doc-anchor-target id="outgoing">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#outgoing">#</doc-anchor-trigger>
-        <span>Outgoing</span>
-    </h4>
-</doc-anchor-target>
-<p>Currently not implemented / not possible. We can compute which of the activities result in a claimable activity for the receiver account, but we have no way to check if they consumed it.</p>
-<doc-anchor-target id="storage-deposit-return">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#storage-deposit-return">#</doc-anchor-trigger>
-        <span>Storage Deposit Return</span>
-    </h3>
-</doc-anchor-target>
-<p>Sending small funds result in a storage deposit. When the receiving account claims the funds, they send a transaction back to the original sender containing that storage deposit return (SDR).</p>
-<p><strong>Find Matching Pair</strong>: For each activity A1 with a SDR, we narrow the potential SDR activities down by some conditions (currently: Candidate happened after A1. Candidates amount needs to be the same as the storage deposit). These candidates need to be checked around 2 corners: If the input of the input of the candidate is A1, we have a match.</p>
-<p><strong>Result</strong>: Activity containing the storage deposit gets updated, storage deposit gets crossed out in detailpopup. Return activity gets hidden</p>
-<doc-anchor-target id="preparation-for-overview">
+<p>A <a href="https://basarat.gitbook.io/typescript/main-1/barrel">barrel</a> is an intermediary module that rolls up exports from other files and re-exports them. They are the <code v-pre>index.(ts|js)</code> files that live within modules.</p>
+<p><strong>The functions must be barrel-exported exported within the <code v-pre>index.ts</code> file</strong>.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">// directories
+export * from './enums'
+export * from './interfaces'
+export * from './stores'
+export * from './types'
+
+// business logic files
+export * from './deep-link-handler.ts'
+export * from './wallet-context-handler.ts'</code></pre>
+</doc-codeblock></div>
+<p><strong>Then they can be used within a UI component or another library file</strong>.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">import {
+    getParticipationEvents,
+    getParticipationOverview,
+    isAccountPartiallyStaked,
+    isAccountStaked,
+} from '@common/participation'</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="constants">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#preparation-for-overview">#</doc-anchor-trigger>
-        <span>Preparation for Overview</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#constants">#</doc-anchor-trigger>
+        <span>Constants</span>
     </h2>
 </doc-anchor-target>
-<p>After creating and post-processing the activities, they are being prepared for the UI. Depending on the selected account, inserted search term or active filter, a corresponding subset of all activities is displayed, after being grouped together by the transaction time.</p>
+<p>Constants are never-changing values that can be used throughout the entire application (i.e. Svelte UI components and other library files). For a variable to be a constant, <strong>it must be evaluated at compile-time rather than runtime</strong>.</p>
+<p><strong>Bad</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">function getMaxNumIotas(): number {
+    return someDynamicCalculation()
+}
+
+const MAX_NUM_IOTAS = getMaxNumIotas()</code></pre>
+</doc-codeblock></div>
+<p><strong>Good</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">const MAX_NUM_IOTAS = 2_779_530_283_277_761</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="enumerations">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#enumerations">#</doc-anchor-trigger>
+        <span>Enumerations</span>
+    </h2>
+</doc-anchor-target>
+<p>Enumerations are objects that define one or more variants of a certain type.</p>
+<p><strong>Defining an enumeration</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">enum ProfileType {
+    Stronghold,
+    Ledger,
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>Handling different enum cases</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">const profileType = get(active_profile)?.type
+switch(profileType) {
+    case ProfileType.Stronghold:
+        // do one thing for Stronghold profiles
+        break
+    case ProfileType.Ledger:
+        // do another thing for Ledger profiles
+        break
+    default:
+        // handle default case last
+        break
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="functions">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#functions">#</doc-anchor-trigger>
+        <span>Functions</span>
+    </h2>
+</doc-anchor-target>
+<p>Functions are callable objects that perform some type of operation; they are the building blocks of our application. As such, we have different ways that we use them.</p>
+<p>There are some general considerations we should all keep in mind when writing functions:</p>
+<ul>
+<li><strong>They should be small and contained</strong>. When functions have lots of code that is doing many different things, it is hard to navigate and reason about, ultimately making it hard to debug problems or add new features. It is most likely best that the function be refactored into multiple smaller functions within a larger one.</li>
+<li><strong>They should contain little-to-no <a href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)">side-effects</a></strong>. These also make code difficult to debug, extend or test, simply because you cannot be sure that a function did <strong>only</strong> what it said it was going to do. We should apply a more functional-style of programming, the idea being mainly that functions simply (and <em>deterministically</em>) return outputs as a result of some input (i.e. <a href="https://en.wikipedia.org/wiki/Pure_function"><em>pure functions</em></a>).</li>
+</ul>
+<doc-anchor-target id="regular-functions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#regular-functions">#</doc-anchor-trigger>
+        <span>Regular Functions</span>
+    </h3>
+</doc-anchor-target>
+<p>These are the most common type of function that we write. They are used in Svelte components, library files, and other places in our applcation.</p>
+<p>They have the following rules:</p>
+<ul>
+<li>All regular functions <strong>must</strong> be declared with the <code v-pre>function</code> keyword</li>
+<li>All regular function signatures <strong>must</strong> be explicitly typed</li>
+</ul>
+<p><strong>Bad</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">export const generateRandomInt = (lowerBound, upperBound) =&gt; {
+    return Math.floor(Math.random() * (upperBound - lowerBound) + lowerBound)
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>Good</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">export function generateRandomInteger(lowerBound: number, upperBound: number): number {
+    return Math.floor(Math.random() * (upperBound - lowerBound) + lowerBound)
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="anonymous-functions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#anonymous-functions">#</doc-anchor-trigger>
+        <span>Anonymous Functions</span>
+    </h3>
+</doc-anchor-target>
+<p>These are small, unnamed functions that we typically use as callbacks, lambdas, etc.</p>
+<p>They have the following rules:</p>
+<ul>
+<li>All anonymous functions <strong>should</strong> be in the ES6 arrow-style syntax; <strong>do NOT</strong> use the  <code v-pre>function</code> keyword*</li>
+<li>Any anonymous function <strong>may</strong> be explicitly typed (usually if a type is a non-primitive, e.g. <strong>NOT</strong> <code v-pre>string</code>, <code v-pre>number</code>, <code v-pre>boolean</code>, etc.)</li>
+</ul>
+<p>* The exception to this is when you pass a regular function to a higher-order function.</p>
+<p><strong>Bad</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">let pollInterval = setInterval(async function {
+    await pollNetworkStatusInternal()
+}, DEFAULT_NETWORK_STATUS_POLL_INTERVAL)</code></pre>
+</doc-codeblock></div>
+<p><strong>Good</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">let pollInterval = setInterval(async () =&gt; pollNetworkStatusInternal(), DEFAULT_NETWORK_STATUS_POLL_INTERVAL)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="wrapper-functions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#wrapper-functions">#</doc-anchor-trigger>
+        <span>Wrapper Functions</span>
+    </h3>
+</doc-anchor-target>
+<p>These are the functions that internally access the <code v-pre>api</code> object, which contains the API methods for <code v-pre>wallet.rs</code>.</p>
+<p>They have the following rules:</p>
+<ul>
+<li>All wrapper functions <strong>must</strong> be declared with the <code v-pre>function</code> keyword</li>
+<li>All wrapper functions <strong>must</strong> be explicitly typed</li>
+<li>All wrapper functions <strong>must</strong> return a <code v-pre>Promise</code>-based type</li>
+<li>All wrapper functions <strong>must</strong> allow for optional callbacks (e.g. <code v-pre>onSuccess</code>, <code v-pre>onError</code>)</li>
+<li>All wrapper functions <strong>must</strong> be free of side-effects</li>
+</ul>
+<p><strong>Bad</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">function getNodeInfo(
+    accountId: string,
+    url?: string,
+    auth?: NodeAuth
+): Promise&lt;NodeInfo&gt; {    
+    return new Promise&lt;NodeInfo&gt;((resolve, reject) =&gt; {
+        api.getNodeInfo(accountId, url, auth, {
+            onSuccess(response: Event&lt;NodeInfo&gt;) {
+                // BAD
+                someStore.set(response?.payload.data)
+
+                resolve(response.payload)
+            },
+            onError(err: ErrorEventPayload) {
+                reject(err)
+            }
+        })
+    })
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>Good</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">async function getNodeInfo(
+    accountId: string,
+    url?: string,
+    auth?: NodeAuth
+): Promise&lt;NodeInfo&gt; {    
+    return new Promise&lt;NodeInfo&gt;((resolve, reject) =&gt; {
+        api.getNodeInfo(accountId, url, auth, {
+            onSuccess(response: Event&lt;NodeInfo&gt;) {
+                resolve(response.payload)
+            },
+            onError(err: ErrorEventPayload) {
+                reject(err)
+            }
+        })
+    })
+}</code></pre>
+</doc-codeblock></div>
+<p>ℹ Responses are validated in the <code v-pre>onMessage</code> callback via the <code v-pre>Validator</code> class.</p>
+<doc-anchor-target id="interfaces">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#interfaces">#</doc-anchor-trigger>
+        <span>Interfaces</span>
+    </h2>
+</doc-anchor-target>
+<p>Interfaces are definitions of a complex object-based type. It may contain fields, functions, or both of these.</p>
+<p>For example, we can define a <code v-pre>INode</code> interface that describes the properties of a node.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">interface INode {
+    url: string
+    auth?: NodeAuth
+    network?: Network
+    isPrimary?: boolean
+    isDisabled?: boolean
+}</code></pre>
+</doc-codeblock></div>
+<p><span class="docs-emoji">&#x274C;</span> Interfaces <strong>should NOT</strong> be used to define a data type; instead use the <code v-pre>type</code> keyword.</p>
+<doc-anchor-target id="tests">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#tests">#</doc-anchor-trigger>
+        <span>Tests</span>
+    </h2>
+</doc-anchor-target>
+<p>Tests are files containing one or more unit tests for functions in its corresponding source code file. The tests within a module form a test suite. It is worth noting that if the filename is <code v-pre>the-file.ts</code> then its test <strong>should be</strong> named <code v-pre>the-file.test.ts</code>.</p>
+<p><span class="docs-emoji">&#x2139;&#xFE0F;</span> Please refer to the <a href="../../testing/">testing</a> guide for more info on setting up and running tests.</p>
+<doc-anchor-target id="writing">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#writing">#</doc-anchor-trigger>
+        <span>Writing</span>
+    </h3>
+</doc-anchor-target>
+<p>Most of the test files <strong>should</strong> have a structure like this:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">import { theFunctionToTest } from '../the-file.ts'
+
+/**
+ * Using a consistent testing structure like this one will increase output 
+ * readability and help you to fix things should they start breaking on you. 
+ */
+
+describe('File: the-file.ts', () =&gt; {
+    describe('Function: theFunctionToTest', () =&gt; {
+        it('should do something', () =&gt; {
+            const result = theFunctionToTest(...)
+            expect(result).toEqual('The correct value')
+        })
+    })
+})</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="mocking">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#mocking">#</doc-anchor-trigger>
+        <span>Mocking</span>
+    </h3>
+</doc-anchor-target>
+<p>Mocks are files that imitate objects or functionality for the sake of testing something. There may be different requirements per whatever it is that is being mocked or will be using the mock, so they may not necessarily all look the same.</p>
+<p>To use a mock, simply import it at the beginning of a test file.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">import './mocks/i18n'
+import './mocks/matchMedia'
+
+describe('File: ...', () =&gt; {
+ // ...
+})</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="types">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#types">#</doc-anchor-trigger>
+        <span>Types</span>
+    </h2>
+</doc-anchor-target>
+<p>Types are definitions of non-object data types, e.g. <code v-pre>boolean</code>, <code v-pre>number</code>, and <code v-pre>string</code>.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">type NftMetadataValue = boolean | number | string</code></pre>
+</doc-codeblock></div>
+<p><span class="docs-emoji">&#x2139;&#xFE0F;</span> It is good practice to explicitly define types for data even if it is simply a <code v-pre>number</code> or <code v-pre>string</code>. The largest benefit is that if the type were to change at a later point it would be much easier to implement as we would only need to change the defintion rather than all the places where it&#x27;s used.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -353,7 +589,7 @@
                             </div>
                             <footer class="clear-both">
                                 <div class="flex flex-wrap items-center justify-between mt-14">
-                                    <a class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline" href="https://github.com/iotaledger/firefly/blob/chore/create-firefly-handbook/docs/specifications/activity/index.md" target="_blank" rel="noopener">
+                                    <a class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline" href="https://github.com/iotaledger/firefly/blob/chore/create-firefly-handbook/docs/guides/coding-conventions/modules.md" target="_blank" rel="noopener">
                                         <svg class="mr-1.5" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M20 12c-.55 0-1 .45-1 1v7c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h7c.55 0 1-.45 1-1s-.45-1-1-1H4C2.35 3 1 4.35 1 6v14c0 1.65 1.35 3 3 3h14c1.65 0 3-1.35 3-3v-7c0-.55-.45-1-1-1z" /><path d="M22.21 1.79c-1.18-1.18-3.24-1.18-4.41 0l-9.5 9.5c-.13.13-.22.29-.26.46l-1 4c-.08.34.01.7.26.95.18.2.44.3.7.3.08 0 .16-.01.24-.03l4-1c.18-.04.34-.13.46-.26l9.5-9.5c1.22-1.22 1.22-3.2.01-4.42zm-1.42 3l-9.3 9.3-2.11.53.53-2.11 9.3-9.3c.42-.42 1.16-.42 1.59 0 .43.43.43 1.15-.01 1.58z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         <span>Edit this page</span>
                                     </a>
@@ -361,20 +597,20 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../specifications/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../guides/coding-conventions/internationalization/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Specifications</span>
+                                                <span class="block mt-1">Internationalization</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../glossary/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../guides/coding-conventions/naming/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Glossary</span>
+                                                <span class="block mt-1">Naming</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -418,6 +654,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Account Activity", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Modules", level: 3, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
