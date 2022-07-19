@@ -1,5 +1,7 @@
 export interface IErrorParameters {
     message: string
-    logError?: boolean
+    localizeMessage?: boolean
+    logToConsole?: boolean
+    saveToErrorLog?: boolean
     showNotification?: boolean
 }

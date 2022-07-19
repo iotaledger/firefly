@@ -5,7 +5,7 @@ export class InsufficientFundsForStorageDepositError extends BaseError {
     constructor() {
         super({
             message: localize('error.send.insufficientFundsStorageDeposit'),
-            logError: false,
+            logToConsole: false,
         })
     }
 }
