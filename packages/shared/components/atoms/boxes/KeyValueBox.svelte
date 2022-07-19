@@ -14,14 +14,14 @@
 
 <Box row clearPadding {backgroundColor} {darkBackgroundColor} classes="justify-between {padding} {classes}">
     {#if keyText}
-        <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor}>
+        <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor} classes="mr-4">
             {keyText}
         </Text>
     {:else}
         <slot name="key" />
     {/if}
     {#if valueText}
-        <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor}>
+        <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor} classes="truncate">
             {valueText}
         </Text>
     {:else}
