@@ -16,7 +16,7 @@ export function clickOutside(node: any, options?: { includeScroll }): { destroy 
         node.dispatchEvent(new CustomEvent('clickOutside', node))
     }
 
-    document.addEventListener('click', handleClick, true)
+    document.addEventListener('mousedown', handleClick, true)
 
     if (options?.includeScroll) {
         document.addEventListener('scroll', handleScroll, true)
