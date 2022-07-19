@@ -2,7 +2,7 @@
 icon: paintbrush
 ---
 
-# Svelte Components
+# Components
 
 ## Organization
 
