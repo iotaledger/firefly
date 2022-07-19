@@ -9,7 +9,7 @@
         "@iota/transaction": "^1.0.0-beta.30",
         "@iota/transaction-converter": "^1.0.0-beta.30",
         "@iota/unit-converter": "^1.0.0-beta.30",
-        "@iota/wallet": "2.0.2-alpha.6",
+        "@iota/wallet": "2.0.2-alpha.7",
         "big.js": "^6.0.3",
         "chart.js": "^2.9.3",
         "iota.lib.js": "^0.5.3",
