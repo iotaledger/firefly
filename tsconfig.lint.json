@@ -10,9 +10,9 @@
         "packages/mobile",
         "packages/shared/components",
         "packages/shared/lib",
+        "packages/shared/lib/auxiliary/wordlists",
         "packages/shared/lib/shell",
         "packages/shared/lib/typings",
-        "packages/shared/lib/wordlists",
         "packages/shared/locales/en.json",
         "packages/shared/routes",
         "packages/shared/tailwind.config.js"
