@@ -514,10 +514,10 @@
     "@types/warning" "^3.0.0"
     warning "^4.0.3"
 
-"@iota/types@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.8.tgz#1baf79dc16c847a96704fbf8af69c0b52f2c5fb2"
-  integrity sha512-tpKBUgRrTkOQUKgY4ye9jqEiI6BNrdT/Pk6SmCMWVNdpmsMk58zu+dUHRyE1dgCasPSoxX6h0hdaC3OzT8yQ4Q==
+"@iota/types@^1.0.0-beta.9":
+  version "1.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.9.tgz#6fa9137c4a5299018800c302962c938688f1b2d3"
+  integrity sha512-ikCZoQE2UIqVr5cQ7KpsF+IFmooVMywCdeJ3PDycbm8m6L6iHpXhM1DPv8ofcbw63W3Oym/DGV4Ixn56/6wAqQ==
 
 "@iota/unit-converter@^1.0.0-beta.30":
   version "1.0.0-beta.30"
@@ -527,10 +527,10 @@
     "@types/bignumber.js" "^5.0.0"
     bignumber.js "^7.2.1"
 
-"@iota/wallet@2.0.2-alpha.5":
-  version "2.0.2-alpha.5"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.5.tgz#f47af62025f0685da7988bd4c47041085eb14c8d"
-  integrity sha512-IkxgdvXtdJRbRuzBqwVAhjpOWcT33JvPRd/yzqKbENcvfOV9S8Y6KKEmSmszVfYqEJExBoU8vQ+UYxADjIISMQ==
+"@iota/wallet@2.0.2-alpha.6":
+  version "2.0.2-alpha.6"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.6.tgz#8129da4960bad5bec264a3d9adeeaef8422d6c25"
+  integrity sha512-3TmsCEGu65kM/oi3IROUJbLIjJFVw6chhSL/0xcoUQb6TEhAnHcW7PMu+FSnV5yqwkV4elL5CFrRQjDsBZfWcg==
   dependencies:
     cargo-cp-artifact "^0.1.5"
     prebuild-install "^5.3.3"
