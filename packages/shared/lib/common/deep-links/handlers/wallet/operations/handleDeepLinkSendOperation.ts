@@ -1,11 +1,12 @@
+import { get } from 'svelte/store'
+
 import { SendOperationParameter } from '@common/deep-links/enums'
+import { addError } from '@core/error'
 import { BASE_TOKEN, networkHrp } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { ISendFormParameters, Subject } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
-import { addError } from '@lib/errors'
 import { openPopup } from '@lib/popup'
-import { get } from 'svelte/store'
 
 export function handleDeepLinkSendOperation(searchParams: URLSearchParams, skipForm = false): void {
     const sendFormParameters = parseSendOperation(searchParams)

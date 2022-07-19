@@ -1,5 +1,5 @@
 import { selectedAccount } from '@core/account'
-import { InsufficientFundsForStorageDepositError, InvalidExpirationDateTimeError } from '@core/error'
+import { InsufficientFundsForStorageDepositError, InvalidExpirationDateTimeError } from '@contexts/wallet'
 import { convertUnixTimestampToDate, isValidExpirationDateTime } from '@core/utils'
 import { OutputTypes } from '@iota/types'
 import { OutputOptions } from '@iota/wallet'

@@ -1,4 +1,4 @@
-export interface Error {
+export interface IError {
     time: number
     type: string
     message: string

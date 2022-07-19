@@ -1,5 +1,5 @@
+import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
-import { BaseError } from '../base-error.class'
 
 export class InvalidExpirationDateTimeError extends BaseError {
     constructor() {

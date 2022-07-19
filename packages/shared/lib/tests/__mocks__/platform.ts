@@ -1,8 +1,8 @@
 import { IAppSettings, IAppVersionDetails } from '@core/app'
+import { IError } from '@core/error'
 
 import { IPlatform } from '../../typings/platform'
 import { EventMap } from '../../typings/events'
-import { Error } from '../../typings/error'
 
 const Platform: IPlatform = {
     BarcodeManager: undefined,
@@ -41,7 +41,7 @@ const Platform: IPlatform = {
     getAppVersionDetails(): Promise<IAppVersionDetails> {
         return Promise.resolve(undefined)
     },
-    hookErrorLogger(logger: (error: Error) => void): void {},
+    hookErrorLogger(logger: (error: IError) => void): void {},
     importLegacySeed(buffer: unknown, password: string): Promise<string> {
         return Promise.resolve('')
     },
@@ -68,7 +68,7 @@ const Platform: IPlatform = {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void> {
         return Promise.resolve(undefined)
     },
-    unhandledException(title: string, err: Error | unknown): Promise<void> {
+    unhandledException(title: string, err: IError | unknown): Promise<void> {
         return Promise.resolve(undefined)
     },
     updateActiveProfile(id: string): void {},
