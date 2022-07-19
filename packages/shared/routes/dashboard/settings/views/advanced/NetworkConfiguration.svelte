@@ -105,7 +105,7 @@
         </div>
     {/if}
     <HR classes="pb-5 mt-5 justify-center" />
-    {#if $activeProfile.networkType !== NetworkType.PrivateNet}
+    {#if $activeProfile.networkType === NetworkType.Mainnet}
         <section id="nodeConfiguration">
             <Text type="h5" classes="mb-3">
                 {localize('views.settings.networkConfiguration.nodeConfiguration.title')}
