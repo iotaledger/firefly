@@ -6,8 +6,10 @@
     export let initialSelected: 'none' | '1hour' | '1day' | '1week' = 'none'
 
     let menu: ExpirationTimePickerMenu
-    let selected: 'none' | '1hour' | '1day' | '1week' = initialSelected
     let anchor: HTMLElement
+    let selected: 'none' | '1hour' | '1day' | '1week'
+
+    $: selected = initialSelected
 </script>
 
 <button class="flex items-center justify-center cursor-pointer" on:click={menu?.tryOpen} bind:this={anchor}>

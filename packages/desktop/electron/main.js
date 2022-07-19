@@ -194,6 +194,7 @@ function isUrlAllowed(targetUrl) {
         // Assembly / Shimmer
         'assembly.sc',
         'shimmer.network',
+        'explorer.shimmer.network',
 
         // GitHub
         'github.com/iotaledger/firefly/issues',
