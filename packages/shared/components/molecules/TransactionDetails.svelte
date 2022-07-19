@@ -43,6 +43,8 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
+    let displayedAmount = amount.includes('.') ? amount.substring(0, amount.indexOf('.') + 5) : amount
+
     $: transactionTime = getDateFormat(time)
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
@@ -81,14 +83,32 @@
             ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
             : setClipboard(claimingTransactionId)
     }
+
+    function shouldDisplayEllipsis(): boolean {
+        return (
+            displayedAmount !== amount &&
+            amount.includes('.') &&
+            amount.substring(amount.indexOf('.'), amount.length - 1).length > 4
+        )
+    }
 </script>
 
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
         {#if amount}
-            <transaction-value class="flex flex-col space-y-0.5 items-center">
-                <div class="flex flex-row items-baseline space-x-0.5">
-                    <Text type="h1" fontWeight={FontWeightText.semibold}>{amount}</Text>
+            <transaction-value class="flex flex-col space-y-0.5 items-center w-full">
+                <div class="flex flex-row items-baseline space-x-0.5 w-full justify-center">
+                    <Text type="h1" fontWeight={FontWeightText.semibold} classes="truncate">
+                        {displayedAmount}
+                        {#if shouldDisplayEllipsis()}
+                            <button
+                                class="text-32 text-gray-800 hover:text-gray-900 focus:text-gray-900 dark:text-white dark:hover:text-gray-200 dark:focus:text-gray-200 -ml-2 mr-2"
+                                on:click={() => (displayedAmount = amount)}
+                            >
+                                {'...'}
+                            </button>
+                        {/if}
+                    </Text>
                     <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
                 </div>
                 {#if formattedFiatValue}
