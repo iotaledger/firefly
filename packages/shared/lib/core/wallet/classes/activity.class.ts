@@ -133,7 +133,7 @@ export class Activity implements IActivity {
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
 
-        this.sender = getSenderFromTransaction(transaction, account.depositAddress)
+        this.sender = getSenderFromTransaction(transaction, output, account.depositAddress)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
         this.isSelfTransaction = selfTransaction
