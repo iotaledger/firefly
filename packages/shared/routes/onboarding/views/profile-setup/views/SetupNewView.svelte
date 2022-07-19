@@ -35,9 +35,9 @@
             secondaryText={!$mobile ? localize('views.create.softwareAccount.description') : ''}
             icon="file"
             hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
-                ?.sofwareProfile?.hidden}
+                ?.softwareProfile?.hidden}
             disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
-                ?.sofwareProfile?.enabled}
+                ?.softwareProfile?.enabled}
             onClick={() => handleContinueClick(ProfileType.Software)}
         />
         <OnboardingButton

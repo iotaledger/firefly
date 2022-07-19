@@ -77,11 +77,11 @@
             "shimmer": {
                 "mainnet": {
                     "title": "Shimmer",
-                    "body": "Staging network for IOTA Mainnet"
+                    "body": "Staging network for IOTA"
                 },
                 "devnet": {
-                    "title": "Public Testnet",
-                    "body": "Beta network for IOTA Mainnet"
+                    "title": "Shimmer Beta",
+                    "body": "Beta network for Shimmer"
                 },
                 "private-net": {
                     "title": "Custom Network",

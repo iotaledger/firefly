@@ -10,7 +10,7 @@ const onboardingFeatures = {
             },
             newProfile: {
                 enabled: false,
-                sofwareProfile: {
+                softwareProfile: {
                     enabled: false,
                 },
                 ledgerProfile: {
@@ -42,7 +42,7 @@ const onboardingFeatures = {
             },
             newProfile: {
                 enabled: false,
-                sofwareProfile: {
+                softwareProfile: {
                     enabled: false,
                 },
                 ledgerProfile: {
@@ -73,7 +73,7 @@ const onboardingFeatures = {
             },
             newProfile: {
                 enabled: false,
-                sofwareProfile: {
+                softwareProfile: {
                     enabled: false,
                 },
                 ledgerProfile: {
@@ -107,7 +107,7 @@ const onboardingFeatures = {
             },
             newProfile: {
                 enabled: false,
-                sofwareProfile: {
+                softwareProfile: {
                     enabled: false,
                 },
                 ledgerProfile: {
@@ -132,14 +132,14 @@ const onboardingFeatures = {
             },
         },
         devnet: {
-            enabled: false,
+            enabled: true,
             claimRewards: {
                 enabled: true,
                 hidden: false,
             },
             newProfile: {
                 enabled: true,
-                sofwareProfile: {
+                softwareProfile: {
                     enabled: true,
                 },
                 ledgerProfile: {
@@ -171,7 +171,7 @@ const onboardingFeatures = {
             },
             newProfile: {
                 enabled: true,
-                sofwareProfile: {
+                softwareProfile: {
                     enabled: true,
                 },
                 ledgerProfile: {
