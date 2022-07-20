@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { activeAccounts, visibleActiveAccounts } from '@core/profile'
     import { deleteAccount } from '@core/profile-manager'
-    import { ACCOUNT_ACTIONS_ICONS } from '@lib/auxiliary/icon'
+    import { Icon } from '@lib/auxiliary/icon'
     import { openPopup } from '@lib/popup'
     import { HR, MenuItem, Modal, ToggleHiddenAccountMenuItem } from 'shared/components'
 
@@ -42,26 +42,26 @@
 <Modal bind:this={modal} position={{ top: '52px', right: '24px' }}>
     <div class="flex flex-col">
         <MenuItem
-            icon={ACCOUNT_ACTIONS_ICONS.StorageDepositBreakdown}
+            icon={Icon.Doc}
             title={localize('actions.viewStorageDeposit')}
             onClick={handleViewStorageDepositClick}
             first
         />
         <MenuItem
-            icon={ACCOUNT_ACTIONS_ICONS.TransactionHistory}
+            icon={Icon.Export}
             title={localize('actions.exportTransactionHistory')}
             onClick={handleExportTransactionHistoryClick}
             disabled
         />
         <MenuItem
-            icon={ACCOUNT_ACTIONS_ICONS.Customize}
+            icon={Icon.Customize}
             title={localize('actions.customizeAcount')}
             onClick={handleCustomiseAccountClick}
         />
         <ToggleHiddenAccountMenuItem onClick={() => modal.close()} last />
         <HR />
         <MenuItem
-            icon={ACCOUNT_ACTIONS_ICONS.Delete}
+            icon={Icon.Delete}
             title={localize('actions.deleteAccount')}
             onClick={handleDeleteAccountClick}
             first

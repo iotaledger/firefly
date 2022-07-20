@@ -3,7 +3,7 @@
     import { mobile } from '@core/app'
     import { localize, _ } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { SETTINGS_ICONS } from '@lib/auxiliary/icon'
+    import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
     import {
         AdvancedSettingsNoProfile,
         GeneralSettings,
@@ -93,7 +93,7 @@
             <SettingsNavigator
                 {routes}
                 onSettingClick={(id) => scrollIntoView(id)}
-                icons={SETTINGS_ICONS}
+                icons={SETTINGS_ICON_SVG}
                 {settings}
                 bind:route={$settingsRoute}
             />

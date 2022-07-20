@@ -1,3 +1,2 @@
-export * from './account-actions-icons'
-export * from './icons'
-export * from './settings-icons'
+export * from './icon-svg'
+export * from './settings-icon-svg'

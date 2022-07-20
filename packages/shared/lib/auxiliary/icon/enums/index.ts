@@ -1,1 +1,1 @@
-export * from './icons.enum'
+export * from './icon.enum'

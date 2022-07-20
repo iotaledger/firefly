@@ -1,2 +1,2 @@
-export * from './icon-path.interface'
-export * from './icon.interface'
+export * from './svg-path.interface'
+export * from './svg.interface'
