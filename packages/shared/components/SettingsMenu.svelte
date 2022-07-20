@@ -8,10 +8,11 @@
         GeneralSettingsNoProfile,
         HelpAndInfo,
         SecuritySettings,
-        SettingsRoute,
     } from '@core/router'
+    import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
     import { Icon, Text } from 'shared/components'
     import features from 'shared/features/features'
+    import { TextType } from 'shared/components/Text.svelte'
 
     export let group
     export let settings:
@@ -21,7 +22,6 @@
         | GeneralSettingsNoProfile
         | HelpAndInfo
         | SecuritySettings
-        | SettingsRoute
     export let activeSettings:
         | AdvancedSettings[]
         | AdvancedSettingsNoProfile[]
@@ -29,8 +29,6 @@
         | GeneralSettingsNoProfile[]
         | HelpAndInfo[]
         | SecuritySettings[]
-        | SettingsRoute[] = []
-    export let icons
     export let icon = undefined
     export let iconColor = undefined
     export let title
@@ -46,9 +44,9 @@
 </script>
 
 <div class="flex-1 {$mobile && 'w-full'}">
-    <Icon boxed {icon} classes="text-white" boxClasses={`mb-5 ${iconColor}`} />
-    <Text type="h4" classes="mb-2">{title}</Text>
-    <Text type="p" classes="mb-4" secondary>{description}</Text>
+    <Icon width="16" height="16" boxed {icon} classes="text-white" boxClasses={`mb-5 ${iconColor}`} />
+    <Text type={TextType.h4} classes="mb-2">{title}</Text>
+    <Text type={TextType.p} classes="mb-4" secondary>{description}</Text>
     {#each Object.values(settings) as setting}
         <button
             on:click={() => onClick(setting)}
@@ -58,8 +56,13 @@
             ).includes(setting) && 'opacity-20 pointer-events-none'}"
             disabled={!Object.values(activeSettings).includes(setting)}
         >
-            <Icon icon={icons[setting]} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-            <Text type="p" secondary classes="group-hover:text-blue-500">
+            <Icon
+                width="16"
+                height="16"
+                icon={SETTINGS_ICON_SVG[setting]}
+                classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500"
+            />
+            <Text type={TextType.p} secondary classes="group-hover:text-blue-500">
                 {localize(`views.settings.${setting}.title`)}
             </Text>
         </button>

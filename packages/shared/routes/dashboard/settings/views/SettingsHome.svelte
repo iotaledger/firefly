@@ -3,7 +3,6 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
     import {
         AdvancedSettings,
         AdvancedSettingsNoProfile,
@@ -15,6 +14,7 @@
         settingsRouter,
     } from '@core/router'
     import features from 'shared/features/features'
+    import { TextType } from 'shared/components/Text.svelte'
 
     const { loggedIn } = $activeProfile
 
@@ -46,14 +46,13 @@
 
 <div class="h-full w-full flex flex-col">
     {#if !$mobile}
-        <Text type="h2" classes="mb-14">{localize('views.settings.settings')}</Text>
+        <Text type={TextType.h2} classes="mb-14">{localize('views.settings.settings')}</Text>
     {/if}
     <div class="flex items-start {$mobile ? 'flex-col gap-5 md:p-6' : 'flex-row  space-x-10'}">
         {#if features?.settings?.general?.enabled}
             <SettingsMenu
                 icon="settings"
                 iconColor="bg-blue-500"
-                icons={SETTINGS_ICON_SVG}
                 group="general"
                 settings={GeneralSettings}
                 activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
@@ -66,7 +65,6 @@
             <SettingsMenu
                 icon="security"
                 iconColor="bg-yellow-500"
-                icons={SETTINGS_ICON_SVG}
                 group="security"
                 settings={securitySettings}
                 activeSettings={$loggedIn ? SecuritySettings : undefined}
@@ -79,7 +77,6 @@
             <SettingsMenu
                 icon="tools"
                 iconColor="bg-green-600"
-                icons={SETTINGS_ICON_SVG}
                 group="advanced"
                 settings={advancedSettings}
                 activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
@@ -92,7 +89,6 @@
             <SettingsMenu
                 icon="info"
                 iconColor="bg-purple-500"
-                icons={SETTINGS_ICON_SVG}
                 group="helpAndInfo"
                 settings={HelpAndInfo}
                 activeSettings={HelpAndInfo}
