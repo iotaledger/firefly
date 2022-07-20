@@ -6,6 +6,7 @@
     ],
     "devDependencies": {
         "@babel/eslint-parser": "^7.15.0",
+        "@iota/types": "^1.0.0-beta.8",
         "@typescript-eslint/eslint-plugin": "^4.29.2",
         "@typescript-eslint/parser": "^4.29.2",
         "eslint": "^7.32.0",
