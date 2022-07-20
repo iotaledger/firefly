@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text } from 'shared/components'
+    import { english } from '@auxiliary/wordlists'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import { english } from '@lib/wordlists/english'
 
     export let mnemonic: string[]
     export let busy = false

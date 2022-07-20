@@ -1201,7 +1201,6 @@
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
-        "myAssets": "My assets",
         "transactionTime": "Transaction time",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
@@ -1213,7 +1212,8 @@
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in"
+        "claimingTransactionId": "Claimed in",
+        "assets": "Assets"
     },
     "dates": {
         "today": "Today",

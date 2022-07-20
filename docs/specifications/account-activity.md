@@ -1,6 +1,5 @@
 ---
 icon: list-ordered
-expanded: true
 ---
 
 # Account Activity

@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
+    import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
     import { verifyMnemonic } from '@core/profile-manager'
     import { debounce } from '@lib/utils'
-    import { english } from '@lib/wordlists/english'
 
     enum Type {
         Seed = 'seed',
