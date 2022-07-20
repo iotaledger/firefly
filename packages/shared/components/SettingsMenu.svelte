@@ -44,7 +44,7 @@
 </script>
 
 <div class="flex-1 {$mobile && 'w-full'}">
-    <Icon width="16" height="16" boxed {icon} classes="text-white" boxClasses={`mb-5 ${iconColor}`} />
+    <Icon width="24" height="24" boxed {icon} classes="text-white" boxClasses={`mb-5 ${iconColor}`} />
     <Text type={TextType.h4} classes="mb-2">{title}</Text>
     <Text type={TextType.p} classes="mb-4" secondary>{description}</Text>
     {#each Object.values(settings) as setting}
@@ -57,8 +57,8 @@
             disabled={!Object.values(activeSettings).includes(setting)}
         >
             <Icon
-                width="16"
-                height="16"
+                width="24"
+                height="24"
                 icon={SETTINGS_ICON_SVG[setting]}
                 classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500"
             />

@@ -33,16 +33,19 @@
 <div class="flex flex-col w-1/3 h-full justify-start items-start">
     {#each routes as setting}
         <div class="flex flex-col items-start">
-            <button class="mb-1 pl-7 relative text-left" on:click={() => changeRoute(setting)}>
+            <button
+                class="mb-2 pl-7 relative text-left flex flex-row items-center"
+                on:click={() => changeRoute(setting)}
+            >
                 {#if route === setting}
                     <Icon
                         width="16"
                         height="16"
                         icon={IconEnum.SmallChevronRight}
-                        classes="text-blue-500 absolute left-1 top-0.4 text-xl"
+                        classes="text-blue-500 absolute left-1 text-xl"
                     />
                 {/if}
-                <Text type={TextType.p} classes="mb-1">{localize(`views.settings.${setting}.title`)}</Text>
+                <Text type={TextType.p}>{localize(`views.settings.${setting}.title`)}</Text>
             </button>
             {#if route === setting}
                 {#each Object.values(settings[route]) as setting, i}
@@ -55,8 +58,8 @@
                             i && 'mb-4'}"
                     >
                         <Icon
-                            width="16"
-                            height="16"
+                            width="24"
+                            height="24"
                             icon={SETTINGS_ICON_SVG[setting]}
                             classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500"
                         />
