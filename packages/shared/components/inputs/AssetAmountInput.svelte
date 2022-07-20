@@ -4,6 +4,7 @@
     import { parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, generateRawAmount, IAsset, parseRawAmount } from '@core/wallet'
+    import { UNIT_MAP } from '@lib/units'
 
     export let inputElement
     export let disabled = false
@@ -18,6 +19,17 @@
     $: isFocused && (error = '')
 
     $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
+
+    let allowedDecimals = 0
+    $: if (!asset?.metadata.useMetricPrefix) {
+        if (unit === asset?.metadata.unit) {
+            allowedDecimals = asset?.metadata.decimals
+        } else if (unit === asset?.metadata.subunit) {
+            allowedDecimals = 0
+        }
+    } else if (asset?.metadata.useMetricPrefix) {
+        allowedDecimals = UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
+    }
 
     function onClickAvailableBalance(): void {
         /* eslint-disable no-extra-semi */
@@ -36,8 +48,6 @@
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
-        } else if (rawAmount < 1 && rawAmount > 0) {
-            error = localize('error.send.amountSmallerThanSubunit')
         } else {
             const amountAsFloat = parseCurrency(amount)
             if (Number.isNaN(amountAsFloat)) {
@@ -74,6 +84,7 @@
             bind:inputElement={amountInputElement}
             bind:amount
             bind:hasFocus={isFocused}
+            maxDecimals={allowedDecimals}
             clearBackground
             clearPadding
             clearBorder
