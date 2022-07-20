@@ -1,7 +1,7 @@
 import { AdvancedSettings, GeneralSettings, HelpAndInfo, SecuritySettings } from '@lib/core/router'
 import { Icon } from '../enums'
 
-export const SETTINGS_ICONS = {
+export const SETTINGS_ICON_SVG = {
     [GeneralSettings.Theme]: Icon.Theme,
     [GeneralSettings.Language]: Icon.Language,
     [GeneralSettings.Currency]: Icon.Currency,
