@@ -55,6 +55,7 @@ export enum Icon {
     Profile = 'profile',
     Qr = 'qr',
     Radio = 'radio',
+    RadioUnchecked = 'radio-unchecked',
     Receive = 'receive',
     Refresh = 'refresh',
     Reset = 'reset',
