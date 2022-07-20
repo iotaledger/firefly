@@ -108,15 +108,15 @@
                 node.dispatchEvent(new CustomEvent('tap'))
             }
 
-            node.removeEventListener('touchmove', handleTouchmove, { capture: true})
-            node.removeEventListener('touchend', handleTouchend, { capture: true})
+            node.removeEventListener('touchmove', handleTouchmove, { capture: true })
+            node.removeEventListener('touchend', handleTouchend, { capture: true })
         }
 
         node.addEventListener('touchstart', handleTouchstart, { capture: true, passive: true })
 
         return {
             destroy() {
-                node.removeEventListener('touchstart', handleTouchstart, { capture: true})
+                node.removeEventListener('touchstart', handleTouchstart, { capture: true })
             },
         }
     }
