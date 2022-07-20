@@ -1,16 +1,18 @@
 <script lang="typescript">
     import { nativeSplash } from 'capacitor/capacitorApi'
+    import { App } from '@capacitor/app'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
-    import { popupState } from 'shared/lib/popup'
-    import { mobile, stage } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { goto } from 'shared/lib/helpers'
+    import { openPopup, popupState } from '@lib/popup'
+    import {} from '@lib/popup'
+    import { mobile, stage } from '@lib/app'
+    import { appSettings } from '@lib/appSettings'
+    import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
-    import { pollMarketData } from 'shared/lib/market'
-    import { pollNetworkStatus } from 'shared/lib/networkStatus'
+    import { pollMarketData } from '@lib/market'
+    import { pollNetworkStatus } from '@lib/networkStatus'
     import { AppRoute, initRouters } from '@core/router'
-    import { Platforms } from 'shared/lib/typings/platform'
+    import { Platforms } from '@lib/typings/platform'
     import {
         Appearance,
         Backup,
@@ -47,6 +49,27 @@
 
     $: if ($isLocaleLoaded) {
         void hideSplashScreen()
+    }
+
+    let isDoubleBack = false
+    void App.addListener('backButton', () => {
+        if (isDoubleBack) {
+            isDoubleBack = false
+            return handleContinueClick()
+        }
+        isDoubleBack = true
+        openPopup({
+            type: 'confirmCloseApp',
+            hideClose: true,
+            props: {
+                handleContinueClick,
+                handleCancelClick: () => (isDoubleBack = false),
+            },
+        })
+    })
+
+    function handleContinueClick() {
+        // void App.exitApp()
     }
 
     async function hideSplashScreen() {
