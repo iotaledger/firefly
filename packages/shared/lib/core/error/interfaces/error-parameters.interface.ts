@@ -1,5 +1,11 @@
+/**
+ * Describes the available parameters to use when
+ * creating or throwing an error.
+ */
 export interface IErrorParameters {
     message: string
-    logError?: boolean
+    localizeMessage?: boolean
+    logToConsole?: boolean
+    saveToErrorLog?: boolean
     showNotification?: boolean
 }
