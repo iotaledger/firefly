@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { handleDeepLink } from '@common/deep-links'
     import { localize } from '@core/i18n'
-    import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
+    import { clearPollNetworkInterval, pollNetworkStatus, nodeInfo } from '@core/network'
     import {
         activeProfile,
         hasStrongholdLocked,
@@ -132,7 +132,7 @@
         }
     })
 
-    if (!$hasLoadedAccounts && $loggedIn) {
+    $: if (!$hasLoadedAccounts && $loggedIn) {
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
@@ -198,7 +198,7 @@
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
                 message: localize('indicators.developerProfileIndicator.warningText', {
-                    values: { networkName: $activeProfile?.clientOptions.network },
+                    values: { networkName: $nodeInfo?.protocol?.networkName },
                 }),
             })
         }

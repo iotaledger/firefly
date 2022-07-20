@@ -1,7 +1,8 @@
-import { BASE_TOKEN } from '@core/network'
-import { activeProfile } from '@core/profile'
-import { selectedAccount } from '@core/account'
 import { derived, Readable } from 'svelte/store'
+
+import { activeProfile } from '@core/profile/stores/active-profile.store'
+import { selectedAccount } from '@core/account/stores/selected-account.store'
+import { BASE_TOKEN } from '@core/network'
 import { IAsset } from '@core/wallet'
 
 export const assets: Readable<IAsset[]> = derived(
@@ -15,8 +16,8 @@ export const assets: Readable<IAsset[]> = derived(
             {
                 metadata: BASE_TOKEN[$activeProfile?.networkProtocol],
                 balance: {
-                    total: Number($selectedAccount?.balances.total),
-                    available: Number($selectedAccount?.balances.available),
+                    total: Number($selectedAccount?.balances.baseCoin.total),
+                    available: Number($selectedAccount?.balances.baseCoin.available),
                 },
             },
         ]

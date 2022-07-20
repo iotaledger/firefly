@@ -1,35 +1,37 @@
 <script lang="typescript">
-    import { AccountActionsButton, ReceiveButton, SendButton, TogglableAmountLabel } from 'shared/components'
+    import { AccountActionsButton, Text, TogglableAmountLabel } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
+    import { formatCurrency } from '@lib/currency'
 
     export let classes = ''
 </script>
 
 <div
-    class="bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative p-6 space-y-6 {$mobile
-        ? 'pb-0 bg-transparent'
-        : 'pb-12'} {classes}"
+    class=" 
+        relative p-6 space-y-4
+        {$mobile ? 'pb-0 bg-transparent' : ''} 
+        {classes}
+    "
 >
     {#if !$mobile}
         <div class="flex flex-row items-center justify-between">
-            <p class="text-11 leading-120 text-gray-800 dark:text-white uppercase tracking-widest">
+            <Text type="h5" classes="text-left">
                 {localize('general.balance')}
-            </p>
+            </Text>
             <AccountActionsButton />
         </div>
     {/if}
-    <div class="flex flex-col flex-wrap items-start space-y-1.5">
+    <div class="flex flex-col flex-wrap items-start space-y-1">
         <TogglableAmountLabel
-            amount={$selectedAccount?.balances.available}
+            amount={$selectedAccount?.balances.baseCoin.available}
             tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
         />
-    </div>
-    <div class="flex flex-row space-x-4">
-        <ReceiveButton />
-        <SendButton />
+        <Text>
+            {formatCurrency(0)}
+        </Text>
     </div>
 </div>

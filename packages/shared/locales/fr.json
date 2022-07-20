@@ -1118,7 +1118,7 @@
             "error": "Impossible d'exporter l'historique des transactions pour {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Veuillez vous connecter pour initialiser le lien IOTA",
+            "receivedWhileLoggedOut": "Veuillez vous connecter pour initialiser le lien IOTA",
             "notEnabled": "Les liens IOTA ne sont pas activés",
             "invalidFormat": "Le lien IOTA que vous avez suivi n'est pas valide",
             "wallet": {

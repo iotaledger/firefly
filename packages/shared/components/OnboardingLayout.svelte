@@ -83,9 +83,11 @@
                         </button>
                     {/if}
                     <div data-label="leftpane-content" class="h-full flex flex-col">
-                        <div class="mb-5">
-                            <slot name="title" />
-                        </div>
+                        {#if $$slots.title}
+                            <div class="mb-5">
+                                <slot name="title" />
+                            </div>
+                        {/if}
                         <slot name="leftpane__content" />
                     </div>
                 </div>

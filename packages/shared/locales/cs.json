@@ -1118,7 +1118,7 @@
             "error": "Nelze exportovat historii transakcí pro {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Přihlaste se pro spuštění odkazu IOTA",
+            "receivedWhileLoggedOut": "Přihlaste se pro spuštění odkazu IOTA",
             "notEnabled": "IOTA odkazy nejsou povoleny",
             "invalidFormat": "Odkaz IOTA, který jste sledovali, je neplatný",
             "wallet": {

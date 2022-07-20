@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
+    import { Animation, OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
+    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
     import { appRouter } from '@core/router'
@@ -59,7 +60,7 @@
         <Button
             disabled={!node?.url || isBusy}
             type="submit"
-            form="node-config-form"
+            form="node-configuration-form"
             classes="w-full"
             onClick={handleAddNode}
         >
@@ -69,5 +70,8 @@
                 {localize('actions.continue')}
             {/if}
         </Button>
+    </div>
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+        <Animation classes="setup-anim-aspect-ratio" animation="onboarding-protocol-desktop" />
     </div>
 </OnboardingLayout>

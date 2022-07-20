@@ -19,9 +19,8 @@
     $: title = activity?.getTitle()
     $: ({ icon, iconColor } = activity?.getIcon())
     $: subject = activity?.getFormattedSubject()
-    $: asyncStatus = activity?.getAsyncStatus($time)
     $: isIncomingActivityUnclaimed =
-        activity?.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed
+        activity?.direction === ActivityDirection.In && activity.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 
     function reject() {
@@ -84,7 +83,7 @@
                 </div>
             </div>
         </div>
-        {#if activity?.isAsync && !activity?.isClaimed}
+        {#if activity?.isAsync && (activity.direction === ActivityDirection.Out || !activity?.isClaimed)}
             <HR />
             <div class="flex w-full justify-between space-x-4">
                 <div class="flex flex-row justify-center items-center space-x-2">
@@ -115,7 +114,7 @@
                             {/if}
                         </button>
                     {:else}
-                        <ActivityAsyncStatusPill {asyncStatus} />
+                        <ActivityAsyncStatusPill asyncStatus={activity.asyncStatus} />
                     {/if}
                 </div>
             </div>

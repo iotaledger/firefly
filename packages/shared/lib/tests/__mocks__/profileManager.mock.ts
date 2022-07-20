@@ -5,6 +5,7 @@ import type {
     ClientOptions,
     EventType,
     WalletEvent,
+    LedgerStatus,
 } from '@iota/wallet'
 import { IAccount } from '../../core/account'
 import { AccountMock } from './account.mock'
@@ -114,6 +115,16 @@ export class ProfileManagerMock implements IProfileManager {
             },
             url,
         })
+    }
+
+    getLedgerStatus(): Promise<LedgerStatus> {
+        return new Promise((resolve) =>
+            resolve({
+                connected: true,
+                locked: false,
+                blindSigningEnabled: false,
+            })
+        )
     }
 
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string> {

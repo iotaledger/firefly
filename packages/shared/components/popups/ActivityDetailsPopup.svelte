@@ -17,7 +17,6 @@
     import { activeProfile } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import { time } from '@core/app'
     import { setClipboard } from '@lib/utils'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
@@ -25,10 +24,9 @@
     export let activity: Activity
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
+    let isClaiming = activity.isClaiming
 
     $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.token))
-
-    $: asyncStatus = activity.getAsyncStatus($time)
 
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
@@ -44,7 +42,9 @@
     }
 
     async function claim() {
+        isClaiming = true
         await claimActivity(activity)
+        isClaiming = false
         openPopup({
             type: 'activityDetails',
             props: { activity },
@@ -95,8 +95,8 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {asyncStatus} {formattedFiatValue} {amount} {unit} {...activity} />
-    {#if activity.isAsync && activity.direction === ActivityDirection.In && asyncStatus === ActivityAsyncStatus.Unclaimed}
+    <TransactionDetails {formattedFiatValue} {amount} {unit} {...activity} />
+    {#if activity.isAsync && activity.direction === ActivityDirection.In && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"
@@ -105,11 +105,11 @@
                 {localize('actions.reject')}
             </button>
             <button
-                disabled={activity.isClaiming}
+                disabled={isClaiming}
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
                 on:click={claim}
             >
-                {#if activity.isClaiming}
+                {#if isClaiming}
                     <Spinner busy={true} classes="justify-center" />
                 {:else}
                     {localize('actions.claim')}

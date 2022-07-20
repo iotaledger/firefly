@@ -92,7 +92,7 @@ export const canParticipate = (eventState: ParticipationEventState): boolean => 
  * @returns {boolean}
  */
 export const getAccountParticipationAbility = (account: IAccountState): AccountParticipationAbility => {
-    if (Number(account?.balances.available) < DUST_THRESHOLD) {
+    if (Number(account?.balances.baseCoin.available) < DUST_THRESHOLD) {
         return AccountParticipationAbility.HasDustAmount
     } else if (hasValidPendingTransactions(account)) {
         return AccountParticipationAbility.HasPendingTransaction

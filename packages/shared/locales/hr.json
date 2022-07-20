@@ -1118,7 +1118,7 @@
             "error": "Nije moguće izvesti povijest transakcija za {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Potrebno se prijaviti za pokretanje IOTA poveznice",
+            "receivedWhileLoggedOut": "Potrebno se prijaviti za pokretanje IOTA poveznice",
             "notEnabled": "IOTA poveznice nisu omogućene",
             "invalidFormat": "IOTA poveznica koju ste slijedili nije važeća",
             "wallet": {

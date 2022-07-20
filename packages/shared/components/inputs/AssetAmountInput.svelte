@@ -22,7 +22,7 @@
     function onClickAvailableBalance(): void {
         /* eslint-disable no-extra-semi */
         /* eslint-disable @typescript-eslint/no-extra-semi */
-        ;({ amount, unit } = parseRawAmount(asset?.balance.available ?? 0, asset.metadata))
+        ;({ amount, unit } = parseRawAmount(asset?.balance?.available ?? 0, asset.metadata))
     }
 
     export function validate(allowZeroOrNull = false): Promise<void> {
@@ -41,7 +41,7 @@
             if (Number.isNaN(amountAsFloat)) {
                 error = localize('error.send.amountInvalidFormat')
             } else {
-                if (rawAmount > asset?.balance.available) {
+                if (rawAmount > asset?.balance?.available) {
                     error = localize('error.send.amountTooHigh')
                 } else if (rawAmount <= 0) {
                     error = localize('error.send.amountZero')

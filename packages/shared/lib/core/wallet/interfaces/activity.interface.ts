@@ -20,6 +20,7 @@ export interface IActivity {
     recipient: Subject
     token: ITokenMetadata
     isAsync: boolean
+    asyncStatus: ActivityAsyncStatus
     expirationDate?: Date
     isHidden?: boolean
     isClaiming?: boolean
@@ -29,7 +30,7 @@ export interface IActivity {
     claimedDate?: Date
 
     updateFromPartialActivity(partialActivity: Partial<IActivity>): void
-    setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): void
+    setFromTransaction(transaction: Transaction, account: IAccountState): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string
     getFiatAmount(fiatPrice: number, exchangeRate: number): string

@@ -51,6 +51,7 @@
             icon={ACCOUNT_ACTIONS_ICONS.TransactionHistory}
             title={localize('actions.exportTransactionHistory')}
             onClick={handleExportTransactionHistoryClick}
+            disabled
         />
         <MenuItem
             icon={ACCOUNT_ACTIONS_ICONS.Customize}

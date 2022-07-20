@@ -1118,7 +1118,7 @@
             "error": "Không thể xuất lịch sử giao dịch cho {accountAlias}"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "Vui lòng đăng nhập để bắt đầu liên kết IOTA",
+            "receivedWhileLoggedOut": "Vui lòng đăng nhập để bắt đầu liên kết IOTA",
             "notEnabled": "Các liên kết IOTA không được kích hoạt",
             "invalidFormat": "Liên kết IOTA bạn đã theo dõi không hợp lệ",
             "wallet": {

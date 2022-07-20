@@ -7,7 +7,13 @@ import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { truncateString } from '@lib/helpers'
 import { findAccountWithAddress } from '@lib/wallet'
-import { MILLISECONDS_PER_SECOND } from 'shared/lib/time'
+import {
+    HOURS_PER_DAY,
+    MILLISECONDS_PER_SECOND,
+    MINUTES_PER_HOUR,
+    SECONDS_PER_DAY,
+    SECONDS_PER_MINUTE,
+} from 'shared/lib/time'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
@@ -27,6 +33,7 @@ import {
     getTagFromOutput,
     isSubjectInternal,
     isOutputAsync,
+    outputIdFromTransactionData,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 
@@ -55,6 +62,7 @@ export class Activity implements IActivity {
     storageDeposit?: number
     expirationDate?: Date
     isAsync: boolean
+    asyncStatus: ActivityAsyncStatus
     isClaiming?: boolean = false
     isClaimed?: boolean
     claimingTransactionId?: string
@@ -94,6 +102,7 @@ export class Activity implements IActivity {
         this.storageDeposit = Number(output.amount) - Number(outputOptions.amount)
         this.expirationDate = new Date(Number(outputOptions?.unlocks?.expirationUnixTime) * MILLISECONDS_PER_SECOND)
         this.isAsync = this.storageDeposit > 0 || !!outputOptions?.unlocks?.expirationUnixTime
+        this.asyncStatus = undefined
         this.isClaimed = false
 
         return this
@@ -103,16 +112,16 @@ export class Activity implements IActivity {
         Object.assign(this, partialActivity)
     }
 
-    setFromTransaction(transactionId: string, transaction: Transaction, account: IAccountState): Activity {
-        const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
+    setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
+        const { output, outputIndex } = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
 
         const recipient = getRecipientFromOutput(output)
 
         this.type = getActivityType(isSubjectInternal(recipient))
-        this.id = transactionId
-        this.isHidden = isActivityHiddenForAccountId(account.id, transactionId)
+        this.id = transaction.transactionId
+        this.isHidden = isActivityHiddenForAccountId(account.id, transaction.transactionId)
 
-        this.transactionId = transactionId
+        this.transactionId = transaction.transactionId
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
@@ -123,6 +132,8 @@ export class Activity implements IActivity {
         this.isInternal = isSubjectInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
+        this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
+
         this.storageDeposit = getStorageDepositFromOutput(output)
         this.rawAmount = getAmountFromOutput(output) - this.storageDeposit
         this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
@@ -131,6 +142,7 @@ export class Activity implements IActivity {
 
         this.expirationDate = getExpirationDateFromOutput(output)
         this.isAsync = isOutputAsync(output)
+        this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
 
         return this
@@ -139,9 +151,10 @@ export class Activity implements IActivity {
     setFromOutputData(outputData: OutputData, account: IAccountState): Activity {
         const recipientAddress = getRecipientAddressFromOutput(outputData.output)
         const recipient = getRecipientFromOutput(outputData.output)
+        const sender = getSenderFromOutput(outputData.output)
         const isIncoming = recipientAddress === account.depositAddress
-        // const isInternal = !!findAccountWithAddress(address)
-        const isInternal = isSubjectInternal(recipient)
+        const subject = isIncoming ? sender : recipient
+        const isInternal = isSubjectInternal(subject)
 
         this.type = getActivityType(isInternal)
         this.id = outputData.outputId
@@ -152,9 +165,9 @@ export class Activity implements IActivity {
         this.time = new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
         this.inputs = undefined
 
-        this.sender = getSenderFromOutput(outputData.output)
+        this.sender = sender
         this.recipient = recipient
-        this.subject = isIncoming ? this.sender : this.recipient
+        this.subject = subject
         this.isInternal = isInternal
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
@@ -165,6 +178,7 @@ export class Activity implements IActivity {
         this.rawAmount = getAmountFromOutput(outputData.output) - this.storageDeposit
         this.expirationDate = getExpirationDateFromOutput(outputData.output)
         this.isAsync = isOutputAsync(outputData.output)
+        this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
 
         return this
@@ -205,14 +219,21 @@ export class Activity implements IActivity {
     getTimeDiffUntilExpirationTime(time: Date): string {
         if (this.isAsync && !this.isClaimed && this?.expirationDate) {
             const elapsedTime = this.expirationDate.getTime() - time.getTime()
-            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24))
-            const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24)
-            const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60)
+            const days = Math.floor(elapsedTime / (MILLISECONDS_PER_SECOND * SECONDS_PER_DAY))
+            const hours = Math.floor(
+                (elapsedTime / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * MINUTES_PER_HOUR)) % HOURS_PER_DAY
+            )
+            const minutes = Math.floor(
+                (elapsedTime / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)) % MINUTES_PER_HOUR
+            )
+            const seconds = Math.floor((elapsedTime / MILLISECONDS_PER_SECOND) % SECONDS_PER_MINUTE)
 
             if (days > 0 || hours > 0) {
                 return `${days}d ${hours}h`
             } else if (minutes > 0) {
                 return `${minutes}min`
+            } else if (seconds > 0) {
+                return '<1min'
             } else {
                 return '-'
             }

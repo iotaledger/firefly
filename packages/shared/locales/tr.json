@@ -1118,7 +1118,7 @@
             "error": "{accountAlias} için işlem geçmişi dışa aktarılamıyor"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "IOTA bağlantısını başlatmak için lütfen giriş yapın",
+            "receivedWhileLoggedOut": "IOTA bağlantısını başlatmak için lütfen giriş yapın",
             "notEnabled": "IOTA bağlantıları etkin değil",
             "invalidFormat": "İzlediğiniz IOTA bağlantısı geçersiz",
             "wallet": {

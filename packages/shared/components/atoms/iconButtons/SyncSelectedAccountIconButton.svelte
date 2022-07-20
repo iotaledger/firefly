@@ -18,6 +18,7 @@
 <button on:click={handleSyncAccountClick} class:pointer-events-none={$selectedAccount.isSyncing}>
     <Icon
         icon="refresh"
-        classes="{$selectedAccount.isSyncing && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+        classes="{$selectedAccount.isSyncing &&
+            'animate-spin-reverse'} text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100"
     />
 </button>

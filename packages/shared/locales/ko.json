@@ -1118,7 +1118,7 @@
             "error": "{accountAlias}의 거래 내역을 내보낼 수 없습니다"
         },
         "deepLinkingRequest": {
-            "recievedWhileLoggedOut": "IOTA 링크를 시작하려면 로그인하십시오",
+            "receivedWhileLoggedOut": "IOTA 링크를 시작하려면 로그인하십시오",
             "notEnabled": "IOTA 링크 비활성화됨",
             "invalidFormat": "IOTA 링크가 유효하지 않습니다",
             "wallet": {
