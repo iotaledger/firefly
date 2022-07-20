@@ -28,19 +28,18 @@
     <Transition>
         <AppSetupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.ProfileSetup}
-    <Transition>
-        <ProfileSetupRouter />
-    </Transition>
 {:else if $onboardingRoute === OnboardingRoute.NetworkSetup}
     <Transition>
         <NetworkSetupRouter />
+    </Transition>
+{:else if $onboardingRoute === OnboardingRoute.ProfileSetup}
+    <Transition>
+        <ProfileSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.LedgerSetup}
     <Transition>
         <LedgerSetupRouter />
     </Transition>
-    <!--  -->
 {:else if $onboardingRoute === OnboardingRoute.PasswordSetup}
     <Transition>
         <PasswordSetupRouter />
