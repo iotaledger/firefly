@@ -35,12 +35,12 @@
         @apply w-full;
         @apply relative;
         @apply overflow-hidden;
+        @apply rounded-xl;
         &:after {
             content: '';
             padding-bottom: 100%;
             @apply block;
             @apply top-0;
-            @apply rounded-xl;
             @apply border-2;
             @apply border-gray-700;
             @apply border-opacity-60;
