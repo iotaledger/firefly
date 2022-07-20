@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.711672422303">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.711674257836">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/icon_firefly.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.711672422303" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.711674257836" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.711672422303" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.711674257836" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.711672422303" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.711672422303" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.711674257836" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.711674257836" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -285,19 +285,32 @@
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-typescript"><code v-pre class="language-typescript">interface IErrorParameters {
     /**
-     * The message to display for the error. If it is a user-facing error,
-     * it should already be localized in the user's selected language.
+     * The message to display for the error, whether it's logged to the console,
+     * saved to the error log, or shown in a notification.
      */
     message: string
 
     /**
-     * (Opt.) If true, will log the message to the console.
+     * If true, will localize the string on the message field. If the error is 
+     * user-facing, it MUST be localized.
      */
-    logError?: boolean
+    localizeMessage?: boolean
 
     /**
-     * (Opt.) If true, will display the message in a toast notification
-     * to the user. 
+     * If true, will log the message to the developer console.
+     */
+    logToConsole?: boolean
+
+    /**
+     * If true, will save the error object to the error log Svelte store, 
+     * which is what is displayed to the user when the click on &quot;Error log&quot;
+     * from the menu bar.
+     */
+    saveToErrorLog?: boolean
+    
+    /**
+     * If true, will display the message in a toast notification
+     * to the user. The message MUST be localized.
      */
     showNotification?: boolean
 }</code></pre>
