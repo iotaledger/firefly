@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const ASSEMBLY_ICON: ISvg = {
+export const ASSEMBLY_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const SECURITY_ICON: ISvg = {
+export const SECURITY_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const LINK_ICON: ISvg = {
+export const LINK_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

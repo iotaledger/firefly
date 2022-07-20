@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const STATUS_ERROR_ICON: ISvg = {
+export const STATUS_ERROR_SVG: ISvg = {
     width: 16,
     height: 16,
     path: [

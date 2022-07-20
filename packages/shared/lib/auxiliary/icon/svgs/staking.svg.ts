@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const STAKING_ICON: ISvg = {
+export const STAKING_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const WIFI_ICON: ISvg = {
+export const WIFI_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

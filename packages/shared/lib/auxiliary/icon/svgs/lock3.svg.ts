@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const LOCK3_ICON: ISvg = {
+export const LOCK3_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

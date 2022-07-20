@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const QR_ICON: ISvg = {
+export const QR_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const BIOMETRIC_ICON: ISvg = {
+export const BIOMETRIC_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const STATUS_SUCCESS_ICON: ISvg = {
+export const STATUS_SUCCESS_SVG: ISvg = {
     width: 16,
     height: 16,
     path: [

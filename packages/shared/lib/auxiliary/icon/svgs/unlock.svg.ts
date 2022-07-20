@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const UNLOCK_ICON: ISvg = {
+export const UNLOCK_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

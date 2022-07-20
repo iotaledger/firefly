@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const SHIMMER_ICON: ISvg = {
+export const SHIMMER_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

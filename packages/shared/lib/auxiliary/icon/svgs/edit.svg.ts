@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const EDIT_ICON: ISvg = {
+export const EDIT_SVG: ISvg = {
     width: 16,
     height: 16,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const HISTORY_ICON: ISvg = {
+export const HISTORY_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

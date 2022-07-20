@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const CHIP_ICON: ISvg = {
+export const CHIP_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const SPEECH_ICON: ISvg = {
+export const SPEECH_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

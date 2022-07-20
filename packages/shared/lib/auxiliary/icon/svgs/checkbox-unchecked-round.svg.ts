@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const CHECKBOX_UNCHECKED_ROUND_ICON: ISvg = {
+export const CHECKBOX_UNCHECKED_ROUND_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

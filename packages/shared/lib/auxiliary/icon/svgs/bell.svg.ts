@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const BELL_ICON: ISvg = {
+export const BELL_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

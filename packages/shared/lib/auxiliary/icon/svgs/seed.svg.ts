@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const SEED_ICON: ISvg = {
+export const SEED_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

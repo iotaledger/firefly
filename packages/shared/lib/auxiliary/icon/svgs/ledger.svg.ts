@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const LEDGER_ICON: ISvg = {
+export const LEDGER_SVG: ISvg = {
     width: 21,
     height: 21,
     path: [

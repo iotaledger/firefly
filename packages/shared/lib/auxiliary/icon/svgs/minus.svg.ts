@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const MINUS_ICON: ISvg = {
+export const MINUS_SVG: ISvg = {
     width: 16,
     height: 16,
     path: [

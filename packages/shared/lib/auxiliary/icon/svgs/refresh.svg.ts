@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const REFRESH_ICON: ISvg = {
+export const REFRESH_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

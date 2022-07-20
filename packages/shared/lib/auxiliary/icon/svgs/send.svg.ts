@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const SEND_ICON: ISvg = {
+export const SEND_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

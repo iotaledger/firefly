@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const CLOSE_ICON: ISvg = {
+export const CLOSE_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const HIDE_ICON: ISvg = {
+export const HIDE_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

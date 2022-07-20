@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const RADIO_ICON: ISvg = {
+export const RADIO_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const EXCLAMATION_ICON: ISvg = {
+export const EXCLAMATION_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

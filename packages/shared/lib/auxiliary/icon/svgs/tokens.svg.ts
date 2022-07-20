@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const TOKENS_ICON: ISvg = {
+export const TOKENS_SVG: ISvg = {
     width: 16,
     height: 16,
     path: [

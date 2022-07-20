@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const VOTING_ICON: ISvg = {
+export const VOTING_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const PARCHMENT_ICON: ISvg = {
+export const PARCHMENT_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

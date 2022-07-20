@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const THEME_DARK_ICON: ISvg = {
+export const THEME_DARK_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

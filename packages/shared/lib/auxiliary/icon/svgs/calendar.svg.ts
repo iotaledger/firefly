@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const CALENDAR_ICON: ISvg = {
+export const CALENDAR_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

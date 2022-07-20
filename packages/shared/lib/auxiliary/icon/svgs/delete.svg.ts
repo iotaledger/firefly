@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const DELETE_ICON: ISvg = {
+export const DELETE_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

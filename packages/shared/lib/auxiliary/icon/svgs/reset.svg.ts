@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const RESET_ICON: ISvg = {
+export const RESET_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

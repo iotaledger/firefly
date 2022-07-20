@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const PROFILE_ICON: ISvg = {
+export const PROFILE_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

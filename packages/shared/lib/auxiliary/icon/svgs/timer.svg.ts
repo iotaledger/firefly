@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const TIMER_ICON: ISvg = {
+export const TIMER_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

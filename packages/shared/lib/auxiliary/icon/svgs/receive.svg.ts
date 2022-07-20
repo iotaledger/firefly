@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const RECEIVE_ICON: ISvg = {
+export const RECEIVE_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

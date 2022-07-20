@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const CHEVRON_UP_ICON: ISvg = {
+export const CHEVRON_UP_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

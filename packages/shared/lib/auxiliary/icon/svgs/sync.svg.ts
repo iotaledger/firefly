@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const SYNC_ICON: ISvg = {
+export const SYNC_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

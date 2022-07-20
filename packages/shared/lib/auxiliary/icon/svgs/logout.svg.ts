@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const LOGOUT_ICON: ISvg = {
+export const LOGOUT_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

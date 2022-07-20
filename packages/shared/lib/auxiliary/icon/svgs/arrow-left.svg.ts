@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const ARROW_LEFT_ICON: ISvg = {
+export const ARROW_LEFT_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

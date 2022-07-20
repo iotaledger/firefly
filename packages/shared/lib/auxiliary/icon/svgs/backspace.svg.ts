@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const BACKSPACE_ICON: ISvg = {
+export const BACKSPACE_SVG: ISvg = {
     width: 20,
     height: 14,
     path: [
