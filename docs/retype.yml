@@ -5,7 +5,7 @@ favicon: static/icon_firefly.png
 
 branding:
   title: Firefly
-  label: v2.0.0-alpha
+  label: v2.0.0-beta
   logo: "static/icon_firefly.svg"
 
 meta:
