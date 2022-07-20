@@ -15,6 +15,7 @@
     const handleFileSelectMobile = async () => {
         filePath = await Platform.getStrongholdBackupDestination(null)
         fileName = filePath.split('/').pop()
+        dispatch('next', { file, fileName, filePath })
     }
 
     const allowedExtensions = $mobile ? ['stronghold'] : ['kdbx', 'stronghold', 'txt']
@@ -74,20 +75,28 @@
     <div slot="title">
         <Text type="h2">{locale('views.importFromFile.title')}</Text>
     </div>
-    <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8">{locale('views.importFromFile.body')}</Text>
-        <Dropzone
-            {locale}
-            {fileName}
-            {allowedExtensions}
-            onDrop={$mobile ? handleFileSelectMobile : handleFileSelect}
-            bind:dropping
-            extensionsLabel={locale('actions.importExtentions')}
-        />
+    <div slot="leftpane__content" class={$mobile && 'min-h-screen'}>
+        <Text type="p" secondary classes="mb-8">
+            {locale($mobile ? 'views.importFromFile.bodyMobile' : 'views.importFromFile.body')}
+        </Text>
+        {#if !$mobile}
+            <Dropzone
+                {locale}
+                {fileName}
+                {allowedExtensions}
+                onDrop={handleFileSelect}
+                bind:dropping
+                extensionsLabel={locale('actions.importExtentions')}
+            />
+        {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={!fileName} onClick={handleContinueClick}>
-            {locale('actions.continue')}
+        <Button
+            classes="flex-1"
+            disabled={!$mobile && !fileName}
+            onClick={$mobile ? handleFileSelectMobile : handleFileSelect}
+        >
+            {locale($mobile ? 'actions.chooseBackupFile' : 'actions.continue')}
         </Button>
     </div>
     <div
