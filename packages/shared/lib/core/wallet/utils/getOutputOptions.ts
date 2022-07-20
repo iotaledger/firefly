@@ -1,9 +1,8 @@
-import { COIN_TYPE } from '@core/network'
-import { activeProfile } from '@core/profile'
 import { convertDateToUnixTimestamp } from '@core/utils'
 import type { OutputOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
+import { assets } from '../stores'
 
 export function getOutputOptions(
     expirationDate: Date,
@@ -14,8 +13,7 @@ export function getOutputOptions(
     asset?: IAsset
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
-    const nativeTokenId =
-        asset?.id !== get(assets).baseCoin.id ? asset?.id : undefined
+    const nativeTokenId = asset?.id !== get(assets).baseCoin.id ? asset?.id : undefined
     return {
         recipientAddress,
         amount: nativeTokenId ? '0' : String(rawAmount),
