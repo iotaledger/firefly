@@ -28,7 +28,7 @@
         | GeneralSettings[]
         | GeneralSettingsNoProfile[]
         | HelpAndInfo[]
-        | SecuritySettings[]
+        | SecuritySettings[] = []
     export let icon = undefined
     export let iconColor = undefined
     export let title
