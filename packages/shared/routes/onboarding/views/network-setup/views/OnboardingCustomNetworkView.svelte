@@ -1,11 +1,12 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
+    import { cleanupNewProfileManager, initProfileManagerFromNewProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
-    import { deleteAccountsAndDatabase, destroyProfileManager, getNodeInfo } from '@core/profile-manager'
+    import { getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
-    import { initProfileManagerFromNewProfile } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
 
     let nodeConfigurationForm: NodeConfigurationForm
@@ -34,8 +35,7 @@
             console.error(err)
             if (err?.error?.includes('error sending request for url')) {
                 formError = localize('error.node.unabledToConnect')
-                await deleteAccountsAndDatabase()
-                await destroyProfileManager()
+                await cleanupNewProfileManager()
             } else if (err?.type !== 'validationError') {
                 showAppNotification({
                     type: 'error',
@@ -46,6 +46,10 @@
             isBusy = false
         }
     }
+
+    onMount(() => {
+        void cleanupNewProfileManager()
+    })
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick}>

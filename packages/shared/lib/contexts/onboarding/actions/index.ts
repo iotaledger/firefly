@@ -1,4 +1,5 @@
 export * from './backupInitialStronghold'
+export * from './cleanupNewProfileManager'
 export * from './cleanupOnboarding'
 export * from './cleanupOnboardingStores'
 export * from './cleanupProtectionOnboarding'

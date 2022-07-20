@@ -1,17 +1,18 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
-    import features from 'shared/features/features'
+    import features from '@features/features'
+    import {
+        newProfile,
+        updateNewProfile,
+        initProfileManagerFromNewProfile,
+        cleanupNewProfileManager,
+    } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode, NetworkType } from '@core/network'
     import { networkSetupRouter } from '@core/router'
-    import {
-        cleanupOnboarding,
-        newProfile,
-        updateNewProfile,
-        initProfileManagerFromNewProfile,
-    } from '@contexts/onboarding'
 
     const networkProtocol = $newProfile.networkProtocol
 
@@ -21,7 +22,7 @@
         [NetworkType.PrivateNet]: 'settings',
     }
 
-    async function onClick(networkType: NetworkType): Promise<void> {
+    async function handleContinueClick(networkType: NetworkType): Promise<void> {
         if (networkType === NetworkType.PrivateNet) {
             updateNewProfile({ networkType })
         } else {
@@ -31,15 +32,17 @@
         $networkSetupRouter.next({ networkType })
     }
 
-    async function onBackClick(): Promise<void> {
-        const isDeveloperProfile = $newProfile.isDeveloperProfile
-        await cleanupOnboarding(true)
-        updateNewProfile({ isDeveloperProfile })
+    function handleBackClick(): void {
         $networkSetupRouter.previous()
     }
+
+    onMount(() => {
+        updateNewProfile({ networkType: null })
+        void cleanupNewProfileManager()
+    })
 </script>
 
-<OnboardingLayout {onBackClick}>
+<OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
         <Text type={TextType.h2}>{localize('views.network.title')}</Text>
     </div>
@@ -55,7 +58,7 @@
                 iconColor={networkType === NetworkType.Mainnet ? `${networkProtocol}-highlight` : 'blue-500'}
                 hidden={features?.onboarding?.[networkProtocol]?.[networkType]?.hidden}
                 disabled={!features?.onboarding?.[networkProtocol]?.[networkType]?.enabled}
-                onClick={() => onClick(networkType)}
+                onClick={() => handleContinueClick(networkType)}
             />
         {/each}
     </div>
