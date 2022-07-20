@@ -5,12 +5,12 @@ import { Participation, StakingAirdrop } from './types'
 /**
  * The starting date of the next staking period.
  */
-export const ASSEMBLY_EVENT_START_DATE = new Date('wen wen, wen')
+export const ASSEMBLY_EVENT_START_DATE = new Date('July _, 2022')
 
 /**
  * The staking event ID for Assembly.
  */
-export const ASSEMBLY_EVENT_ID = '???'
+export const ASSEMBLY_EVENT_ID = '8689731aa432c4c172e47b67f5b9017095e3fdeb782d532d03cd20d71a3c31d5'
 
 /**
  * The staking event ID for Shimmer.
