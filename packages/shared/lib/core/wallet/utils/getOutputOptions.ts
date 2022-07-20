@@ -15,7 +15,7 @@ export function getOutputOptions(
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const nativeTokenId =
-        asset?.id !== COIN_TYPE?.[get(activeProfile)?.networkProtocol]?.toString() ? asset?.id : undefined
+        asset?.id !== get(assets).baseCoin.id ? asset?.id : undefined
     return {
         recipientAddress,
         amount: nativeTokenId ? '0' : String(rawAmount),
