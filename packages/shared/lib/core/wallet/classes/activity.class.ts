@@ -34,7 +34,11 @@ import {
     isSubjectInternal,
     outputIdFromTransactionData,
 } from '../utils'
-import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
+import {
+    getNonRemainderOutputFromTransaction,
+    getSenderFromInputs,
+    getSenderFromTransaction,
+} from '../utils/transactions'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -103,24 +107,31 @@ export class Activity implements IActivity {
         return this
     }
 
-    setFromOutputData(outputData: OutputData, account: IAccountState): Activity {
-        const recipientAddress = getRecipientAddressFromOutput(outputData.output)
-        const recipient = getRecipientFromOutput(outputData.output)
-        const sender = getSenderFromOutput(outputData.output)
+    setFromOutputData(
+        outputData: OutputData,
+        account: IAccountState,
+        transaction?: unknown,
+        transactionInputs: unknown[]
+    ): Activity {
+        const output = outputData.output
+
+        const recipientAddress = getRecipientAddressFromOutput(output)
+        const recipient = getRecipientFromOutput(output)
+        const sender = transactionInputs ? getSenderFromInputs(transactionInputs) : getSenderFromOutput(output)
         const isIncoming = recipientAddress === account.depositAddress
         // const isInternal = !!findAccountWithAddress(address)
-        const nativeToken = getNativeTokenFromOutput(outputData.output)
+        const nativeToken = getNativeTokenFromOutput(output)
         const subject = isIncoming ? sender : recipient
         const isInternal = isSubjectInternal(subject)
 
         this.type = getActivityType(isInternal)
         this.id = outputData.outputId
-        this.isHidden = isActivityHiddenForAccountId(account.id, this.id)
+        this.isHidden = isActivityHiddenForAccountId(account.id, outputData.outputId)
 
         this.transactionId = outputData?.metadata?.transactionId
         this.inclusionState = InclusionState.Confirmed
         this.time = new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
-        this.inputs = undefined
+        this.inputs = transactionInputs
 
         this.sender = sender
         this.recipient = recipient
@@ -131,12 +142,13 @@ export class Activity implements IActivity {
         this.outputId = outputData.outputId
         this.asset = getNativeTokenAssetById(nativeToken?.id) ?? get(assets)?.baseCoin
 
-        this.storageDeposit = getStorageDepositFromOutput(outputData.output)
-        this.rawAmount = nativeToken
-            ? Number(nativeToken?.amount)
-            : getAmountFromOutput(outputData.output) - this.storageDeposit
-        this.expirationDate = getExpirationDateFromOutput(outputData.output)
-        this.isAsync = isOutputAsync(outputData.output)
+        this.storageDeposit = getStorageDepositFromOutput(output)
+        this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
+        this.metadata = getMetadataFromOutput(output)
+        this.tag = getTagFromOutput(output)
+
+        this.expirationDate = getExpirationDateFromOutput(output)
+        this.isAsync = isOutputAsync(output)
         this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
 
