@@ -125,5 +125,4 @@
     main {
         height: calc(97vh - env(safe-area-inset-top));
     }
-
 </style>
