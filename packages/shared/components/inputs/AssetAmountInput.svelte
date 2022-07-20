@@ -48,6 +48,8 @@
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
+        } else if (rawAmount % 1 !== 0) {
+            error = localize('error.send.amountSmallerThanSubunit')
         } else {
             const amountAsFloat = parseCurrency(amount)
             if (Number.isNaN(amountAsFloat)) {
