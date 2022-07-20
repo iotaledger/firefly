@@ -38,7 +38,7 @@
     <StakingAssetTile {asset} />
 {:else}
     <ClickableTile onClick={handleTileClick} {...$$restProps}>
-        <div class="w-full flex flex-row justify-between items-center">
+        <div class="asset w-full flex flex-row justify-between items-center">
             <div class="flex flex-row items-center text-left space-x-4">
                 <div
                     class="
@@ -76,6 +76,9 @@
 {/if}
 
 <style type="text/scss">
+    .asset {
+        font-feature-settings: 'calt' off; // disables 'x' formatting while surrounded by numbers
+    }
     .icon-bg {
         background-color: var(--icon-bg-color);
     }
