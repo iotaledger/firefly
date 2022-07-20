@@ -28,14 +28,6 @@ body:
       validations:
           required: true
 
-    - type: textarea
-      id: acceptance_criteria
-      attributes:
-          label: Acceptance criteria
-          description: What is the criteria for this task to be marked as done? This will help anyone approving any PRs related to this task.
-      validations:
-          required: true
-
     - type: checkboxes
       id: checklist
       attributes:
