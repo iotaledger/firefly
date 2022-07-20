@@ -69,7 +69,7 @@
     })
 
     function handleContinueClick() {
-        void App.exitApp()
+        // void App.exitApp()
     }
 
     async function hideSplashScreen() {
