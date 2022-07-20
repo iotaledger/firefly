@@ -21,7 +21,7 @@
         setAppVersionDetails,
     } from '@core/app'
     import { Electron } from 'shared/lib/electron'
-    import { addError } from 'shared/lib/errors'
+    import { addError } from '@core/error'
     import { goto } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'

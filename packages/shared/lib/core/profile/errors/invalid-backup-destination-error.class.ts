@@ -1,11 +1,12 @@
+import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
-import { BaseError } from '../base-error.class'
 
 export class InvalidBackupDestinationError extends BaseError {
     constructor() {
         super({
             message: localize('error.backup.destination'),
-            logError: true,
+            logToConsole: true,
+            saveToErrorLog: true,
             showNotification: true,
         })
     }
