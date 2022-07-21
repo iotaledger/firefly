@@ -19,9 +19,18 @@ export async function getTokenMetadataFromFoundryOutput(tokenId: string): Promis
 }
 
 function getHexDataFromFoundryOutput(foundry: IFoundryOutput): string {
-    for (const feature of foundry.immutableFeatures) {
-        if (feature.type === 2) {
-            return feature.data
+    if (foundry?.immutableFeatures?.length > 0) {
+        for (const feature of foundry?.immutableFeatures) {
+            if (feature.type === 2) {
+                return feature.data
+            }
+        }
+    }
+    if (foundry?.features?.length > 0) {
+        for (const feature of foundry?.features) {
+            if (feature.type === 2) {
+                return feature.data
+            }
         }
     }
     return undefined
