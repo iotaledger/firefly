@@ -26,7 +26,7 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
     let isClaiming = activity.isClaiming
 
-    $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.token))
+    $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.asset?.metadata))
 
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
