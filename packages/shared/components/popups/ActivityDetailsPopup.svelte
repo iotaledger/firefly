@@ -95,7 +95,7 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {formattedFiatValue} {amount} {unit} {...activity} />
+    <TransactionDetails amount={activity.getFormattedAmount(false)} {formattedFiatValue} {unit} {...activity} />
     {#if activity.isAsync && activity.direction === ActivityDirection.In && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
