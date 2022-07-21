@@ -1,3 +1,5 @@
+import { AccountMock } from './account.mock'
+
 import type {
     AccountId,
     CreateAccountPayload,
@@ -11,8 +13,6 @@ import type {
 import { IAccount } from '@core/account'
 import { IAuth, INodeInfoResponse } from '@core/network'
 import { IProfileManager } from '@core/profile-manager'
-
-import { AccountMock } from './account.mock'
 
 export const MOCK_MNEMONIC =
     'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'

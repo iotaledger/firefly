@@ -1,9 +1,9 @@
+import { AccountMock } from './account.mock'
+import { ProfileManagerMock } from './profile-manager.mock'
+
 import { AccountId, AccountManagerOptions } from '@iota/wallet'
 
 import { IApi } from '@core/profile-manager'
-
-import { AccountMock } from './account.mock'
-import { ProfileManagerMock } from './profile-manager.mock'
 
 const api: IApi = {
     createAccountManager(_: AccountManagerOptions): ProfileManagerMock {
