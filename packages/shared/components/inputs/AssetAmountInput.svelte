@@ -37,11 +37,12 @@
     }
 
     export function validate(allowZeroOrNull = false): Promise<void> {
-        const isAmountZeroOrNull = !Number(amount)
+        const amountAsFloat = parseCurrency(amount)
+        const isAmountZeroOrNull = !Number(amountAsFloat)
+        // Zero value transactions can still contain metadata/tags
         if (allowZeroOrNull && isAmountZeroOrNull) {
-            return Promise.resolve()
+            return
         } else if (isAmountZeroOrNull) {
-            console.log('Here is the error')
             error = localize('error.send.amountInvalidFormat')
         } else if (
             (unit === asset?.metadata?.subunit ||
@@ -49,24 +50,17 @@
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
-        } else {
-            const amountAsFloat = parseCurrency(amount)
-            if (Number.isNaN(amountAsFloat)) {
-                error = localize('error.send.amountInvalidFormat')
-            } else {
-                if (rawAmount > asset?.balance?.available) {
-                    error = localize('error.send.amountTooHigh')
-                } else if (rawAmount <= 0) {
-                    error = localize('error.send.amountZero')
-                }
-            }
+        } else if (rawAmount > asset?.balance?.available) {
+            error = localize('error.send.amountTooHigh')
+        } else if (rawAmount <= 0) {
+            error = localize('error.send.amountZero')
         }
 
         if (error) {
             return Promise.reject(error)
-        } else {
-            return Promise.resolve()
         }
+
+        amount = amountAsFloat.toString()
     }
 </script>
 
