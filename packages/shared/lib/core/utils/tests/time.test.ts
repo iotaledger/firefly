@@ -1,4 +1,4 @@
-import './__mocks__/i18n'
+import '@mocks/i18n'
 
 import {
     getBestTimeDuration,
@@ -6,7 +6,7 @@ import {
     MILLISECONDS_PER_SECOND,
     MINUTES_PER_HOUR,
     SECONDS_PER_MINUTE,
-} from '../time'
+} from '@lib/time'
 
 describe('File: time.ts', () => {
     describe('Function: getBestTimeDuration', () => {
