@@ -1,6 +1,7 @@
-import type { NotificationData } from '../../../typings/notification'
+import type { NotificationData } from '@lib/typings/notification'
 
-import type { DeepLinkContext, SendOperationParameters, WalletOperation } from '@common/deep-links'
+import type { DeepLinkContext, WalletOperation } from '../enums'
+import type { SendOperationParameters } from './wallet-context.type'
 
 /**
  * A union type of all deep link contexts' operations.

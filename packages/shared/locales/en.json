@@ -981,7 +981,7 @@
         "export": "Export",
         "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportTransactionHistory": "Export transaction history",
