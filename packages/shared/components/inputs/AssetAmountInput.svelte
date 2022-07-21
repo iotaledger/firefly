@@ -5,16 +5,16 @@
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch, generateRawAmount, IAsset, parseRawAmount } from '@core/wallet'
 
-    export let inputElement
+    export let inputElement: HTMLInputElement
     export let disabled = false
     export let isFocused = false
     export let asset: IAsset
     export let amount: string
     export let unit: string
 
-    let amountInputElement
-    let error
-    let previousAsset
+    let amountInputElement: HTMLInputElement
+    let error: string
+    let previousAsset: IAsset
 
     $: isFocused && (error = '')
     $: if (asset !== previousAsset) {
@@ -25,15 +25,15 @@
     $: rawAmount = generateRawAmount(amount, unit, asset?.metadata)
 
     function onClickAvailableBalance(): void {
-        /* eslint-disable no-extra-semi */
-        /* eslint-disable @typescript-eslint/no-extra-semi */
-        ;({ amount, unit } =
-            asset?.metadata?.decimals && asset?.metadata?.unit
-                ? parseRawAmount(asset?.balance.available ?? 0, asset?.metadata)
-                : {
-                      amount: asset?.balance.available.toString() ?? '0',
-                      unit: undefined,
-                  })
+        const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
+        if (isRawAmount) {
+            const parsedAmount = parseRawAmount(asset?.balance.available ?? 0, asset?.metadata)
+            amount = parsedAmount.amount
+            unit = parsedAmount.unit
+            return
+        }
+        amount = asset?.balance.available.toString() ?? '0'
+        unit = undefined
     }
 
     export function validate(allowZeroOrNull = false): Promise<void> {
@@ -41,6 +41,7 @@
         if (allowZeroOrNull && isAmountZeroOrNull) {
             return Promise.resolve()
         } else if (isAmountZeroOrNull) {
+            console.log('Here is the error')
             error = localize('error.send.amountInvalidFormat')
         } else if (
             (unit === asset?.metadata?.subunit ||
