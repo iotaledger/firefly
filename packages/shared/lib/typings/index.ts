@@ -1,7 +1,6 @@
 import * as address from './address'
 import * as chart from './chart'
 import * as currency from './currency'
-import * as error from './error'
 import * as events from './events'
 import * as ledger from './ledger'
 import * as message from './message'
@@ -10,4 +9,4 @@ import * as notification from './notification'
 import * as utils from './utils'
 import * as wallet from './wallet'
 
-export { address, chart, currency, error, events, ledger, message, migration, notification, utils, wallet }
+export { address, chart, currency, events, ledger, message, migration, notification, utils, wallet }

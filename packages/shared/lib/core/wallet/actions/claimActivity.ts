@@ -39,7 +39,11 @@ export async function claimActivity(activity: Activity): Promise<void> {
         }
     } catch (err) {
         if (!err.message) {
-            new BaseError({ message: localize('notifications.claimed.error'), logError: true, showNotification: true })
+            new BaseError({
+                message: localize('notifications.claimed.error'),
+                logToConsole: true,
+                showNotification: true,
+            })
         }
     } finally {
         updateActivityByActivityId(account.id, activity.id, { isClaiming: false })
