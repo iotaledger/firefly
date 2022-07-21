@@ -1,4 +1,4 @@
-import '@mocks/i18n'
+import '@mocks/i18n.mock'
 
 import {
     getBestTimeDuration,

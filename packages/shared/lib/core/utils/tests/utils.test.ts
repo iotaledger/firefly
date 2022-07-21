@@ -1,4 +1,4 @@
-import '@mocks/i18n'
+import '@mocks/i18n.mock'
 
 import { migrateObjects, range, validateBech32Address } from '@lib/utils'
 

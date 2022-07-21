@@ -19,8 +19,10 @@ import {
     Transaction,
     TransactionOptions,
 } from '@iota/wallet'
-import { IAccount } from '../../core/account'
-import { MOCK_ACCOUNT_BALANCE } from './accountBalance.mock'
+
+import { IAccount } from '@core/account'
+
+import { MOCK_ACCOUNT_BALANCE } from './account-balance.mock'
 import { MOCK_ADDRESS } from './address.mock'
 
 export class AccountMock implements IAccount {
