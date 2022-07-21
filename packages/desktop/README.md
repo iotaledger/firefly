@@ -1,6 +1,6 @@
 # Firefly - Desktop
 
-Be sure to follow the base environment setup [here](./index.md)!
+Be sure to follow the base environment setup [here](https://iotaledger.github.io/firefly/guides/environment-setup/)!
 
 ## Build
 

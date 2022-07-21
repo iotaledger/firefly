@@ -1,6 +1,6 @@
 # Firefly - Mobile
 
-Be sure to follow the base environment setup [here](./index.md)!
+Be sure to follow the base environment setup [here](https://iotaledger.github.io/firefly/guides/environment-setup/)!
 
 ## Dependencies
 
