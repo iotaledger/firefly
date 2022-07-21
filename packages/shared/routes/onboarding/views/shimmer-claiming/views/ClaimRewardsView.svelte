@@ -1,12 +1,11 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, RewardClaimList, Text } from 'shared/components'
-    import { onMount } from 'svelte'
     import { IAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { getAccounts } from '@core/profile-manager'
+    import { shimmerClaimingRouter } from '@core/router'
     import { AccountMeta } from '@iota/wallet/out/types'
 
-    let accounts: IAccount[] = [
+    const accounts: IAccount[] = [
         <IAccount>{
             meta: <AccountMeta>{
                 index: 0,
@@ -65,23 +64,15 @@
         },
     ]
 
-    function handleBackClick(): void {}
+    function handleBackClick(): void {
+        $shimmerClaimingRouter.previous()
+    }
 
     function handleUseBalanceFinderClick(): void {}
 
-    function handleClaimRewardsClick(): void {}
-
-    onMount(() => {
-        getAccounts()
-            .then((_wallets) => {
-                if (_wallets?.length > 0) {
-                    accounts = _wallets
-                }
-            })
-            .catch((err) => {
-                console.error(err)
-            })
-    })
+    function handleClaimRewardsClick(): void {
+        $shimmerClaimingRouter.next()
+    }
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick}>

@@ -1,7 +1,13 @@
 import { get, writable } from 'svelte/store'
 
 import { profiles, ProfileType } from '@core/profile'
-import { newProfile, ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
+import {
+    newProfile,
+    ProfileRecoveryType,
+    profileRecoveryType,
+    ProfileSetupType,
+    profileSetupType,
+} from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
 import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from './enums'
@@ -70,6 +76,11 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                     profileBackupRoute.set(ProfileBackupRoute.Backup)
                 } else if (_profileRecoveryType === ProfileRecoveryType.Stronghold) {
                     nextRoute = OnboardingRoute.Congratulations
+                }
+
+                const _profileSetupType = get(profileSetupType)
+                if (_profileSetupType === ProfileSetupType.Claimed) {
+                    nextRoute = OnboardingRoute.ShimmerClaiming
                 }
                 break
             }
