@@ -1,9 +1,8 @@
-import { ITokenMetadata, nativeTokenSchema } from '../interfaces'
+import { ITokenMetadata } from '../interfaces'
 import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
 import { IFoundryOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
-import Ajv from 'ajv'
 
 export async function getTokenMetadataFromFoundryOutput(tokenId: string): Promise<ITokenMetadata> {
     const foundry = await get(selectedAccount).getFoundryOutput(tokenId)
@@ -40,9 +39,38 @@ function getHexDataFromFoundryOutput(foundry: IFoundryOutput): string {
     return undefined
 }
 
-function validateNativeTokenMetadata(metadata): boolean {
-    const ajv = new Ajv()
-    const validate = ajv.compile(nativeTokenSchema)
+// TODO: add JSON Schema validation
+// this is blocked because we cannot load .json files into our env. AJV requires this to be able to validate
 
-    return !!validate(metadata)
+// function validateNativeTokenMetadata(metadata): boolean {
+//     const ajv = new Ajv()
+//     const validate = ajv.compile(nativeTokenSchema)
+
+//     return !!validate(metadata)
+// }
+
+function validateNativeTokenMetadata(metadata): boolean {
+    if (!metadata.standard || typeof metadata.standard !== 'string') {
+        return false
+    }
+    if (!metadata.name || typeof metadata.name !== 'string') {
+        return false
+    }
+    if (!metadata.symbol || typeof metadata.symbol !== 'string') {
+        return false
+    }
+    if ((!metadata.decimals && metadata.decimals !== 0) || typeof metadata.decimals !== 'number') {
+        return false
+    }
+
+    if (metadata.description && typeof metadata.description !== 'string') {
+        return false
+    }
+    if (metadata.logo && typeof metadata.logo !== 'string') {
+        return false
+    }
+    if (metadata.logoUrl && typeof metadata.logoUrl !== 'string') {
+        return false
+    }
+    return true
 }
