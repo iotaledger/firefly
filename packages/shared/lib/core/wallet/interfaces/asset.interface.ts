@@ -7,6 +7,4 @@ export interface IAsset {
     balance: IAssetBalance
     fiatPrice?: string
     fiatBalance?: string
-    verified: boolean
-    hidden?: boolean
 }

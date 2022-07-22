@@ -1,3 +1,5 @@
+import { TokenVerificationStatus } from '../enums'
+
 export interface ITokenMetadata {
     name: string
     tickerSymbol?: string
@@ -8,4 +10,5 @@ export interface ITokenMetadata {
     primaryColor?: string
     secondaryColor?: string
     url?: string
+    verification: TokenVerificationStatus
 }

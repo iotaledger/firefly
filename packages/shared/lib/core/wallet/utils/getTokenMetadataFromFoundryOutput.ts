@@ -3,6 +3,7 @@ import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
 import { IFoundryOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
+import { TokenVerificationStatus } from '../enums'
 
 export async function getTokenMetadataFromFoundryOutput(tokenId: string): Promise<ITokenMetadata> {
     const foundry = await get(selectedAccount).getFoundryOutput(tokenId)
@@ -17,6 +18,7 @@ export async function getTokenMetadataFromFoundryOutput(tokenId: string): Promis
               unit: metadata.symbol,
               decimals: metadata.decimals,
               useMetricPrefix: false,
+              verification: TokenVerificationStatus.Verified,
           }
         : undefined
 }

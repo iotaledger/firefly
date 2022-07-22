@@ -15,8 +15,6 @@ export async function refreshNativeTokens(): Promise<void> {
                     total: Number(nativeToken.total),
                     available: Number(nativeToken.available),
                 },
-                verified: false,
-                hidden: false,
             })
         }
     }
