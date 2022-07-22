@@ -2,6 +2,7 @@
     import { Dropdown2 } from 'shared/components'
     import { ITokenMetadata } from '@core/wallet'
     import { Unit } from '@lib/units'
+    import { Text } from 'shared/components'
 
     export let unit: string
     export let isFocused: boolean
@@ -17,10 +18,10 @@
 
     let items = []
     $: if (!tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
-        items = [
-            { label: tokenMetadata?.unit, value: tokenMetadata?.unit },
-            { label: tokenMetadata?.subunit, value: tokenMetadata?.subunit },
-        ]
+        items = [{ label: tokenMetadata?.unit, value: tokenMetadata?.unit }]
+        if (tokenMetadata.subunit) {
+            items.push({ label: tokenMetadata?.subunit, value: tokenMetadata?.subunit })
+        }
     } else if (tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
         items = [
             { label: tokenMetadata?.unit, value: tokenMetadata?.unit },
@@ -37,4 +38,24 @@
     }
 </script>
 
-<Dropdown2 bind:isFocused value={unit} {items} {onSelect} contentWidth small />
+{#if items.length > 1}
+    <Dropdown2 bind:isFocused value={unit} {items} {onSelect} contentWidth small />
+{:else}
+    <div class="block relative small">
+        <div
+            class="selection relative flex flex-row space-x-0 pl-1 pb-1.5 items-end w-full whitespace-nowrap bg-white dark:bg-gray-800 pr-0 border-transparent"
+        >
+            <Text fontSize="16" fontWeight="semibold" classes="text-gray-800 dark:text-white" smaller>
+                {unit}
+            </Text>
+        </div>
+    </div>
+{/if}
+
+<style type="text/scss">
+    .selection {
+        min-height: 36px;
+        @apply border-solid;
+        @apply border;
+    }
+</style>
