@@ -70,16 +70,18 @@
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 "
             >
                 <ul class="overflow-y-auto space-y-2 h-full -mr-2 pr-2 scroll-secondary">
-                    <li on:click={() => handleAssetClick($assets?.baseCoin)}>
+                    <li>
                         <AssetTile
+                            onClick={() => handleAssetClick($assets?.baseCoin)}
                             asset={$assets?.baseCoin}
                             overrideColor
                             classes="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
                         />
                     </li>
                     {#each $assets?.nativeTokens as nativeToken}
-                        <li on:click={() => handleAssetClick(nativeToken)}>
+                        <li>
                             <AssetTile
+                                onClick={() => handleAssetClick(nativeToken)}
                                 asset={nativeToken}
                                 overrideColor
                                 classes="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"

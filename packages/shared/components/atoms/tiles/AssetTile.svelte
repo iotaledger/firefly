@@ -2,12 +2,12 @@
     import { NetworkProtocol } from '@core/network'
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { isBright } from '@lib/helpers'
-    import { openPopup } from '@lib/popup'
     import { ClickableTile, Icon, StakingAssetTile, Text } from 'shared/components'
     import { FontWeightText, TextType } from 'shared/components/Text.svelte'
     import { truncateString } from 'shared/lib/helpers'
 
     export let asset: IAsset
+    export let onClick: () => unknown
 
     let icon: string
 
@@ -22,22 +22,12 @@
         default:
             icon = 'tokens'
     }
-
-    function handleTileClick(): void {
-        openPopup({
-            type: 'sendForm',
-            overflow: true,
-            props: {
-                asset,
-            },
-        })
-    }
 </script>
 
 {#if isStakingAsset}
     <StakingAssetTile {asset} />
 {:else}
-    <ClickableTile onClick={handleTileClick} {...$$restProps}>
+    <ClickableTile {onClick} {...$$restProps}>
         <div class="asset w-full flex flex-row justify-between items-center">
             <div class="flex flex-row items-center text-left space-x-4">
                 <div
