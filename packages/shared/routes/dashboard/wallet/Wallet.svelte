@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
     import { localize } from '@core/i18n'
-    import { accountRoute, accountRouter, walletRoute } from '@core/router'
+    import { accountRoute, accountRouter, backButtonStore, walletRoute } from '@core/router'
     import { AccountRoute, WalletRoute } from '@core/router/enums'
     import { asyncGetAccounts, setSelectedAccount } from '@lib/wallet'
     import {
@@ -383,13 +383,17 @@
 
     $: if (mobile && drawer && $accountRoute !== AccountRoute.Init) {
         drawer.open()
+        $backButtonStore.add(drawer.close)
     }
 
     $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
         drawer.close()
+        $backButtonStore.remove()
     }
 
     onMount(() => {
+        $backButtonStore.refresh()
+
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
@@ -451,6 +455,10 @@
 
     function handleActivityDrawerBackClick(): void {
         selectedMessage.set(null)
+    }
+
+    $: if ($selectedMessage && activityDrawer) {
+        $backButtonStore.add(activityDrawer.close)
     }
 
     onDestroy(() => {
