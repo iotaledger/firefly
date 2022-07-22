@@ -120,29 +120,23 @@ export function isAirdropAvailable(airdrop: StakingAirdrop): boolean {
  * @returns {string}
  */
 export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, decimalPlaces: number): string => {
+    if (!amount) {
+        amount = 0
+    }
+
+    if (!decimalPlaces) {
+        decimalPlaces = 0
+    }
+
     const decimalSeparator = getDecimalSeparator(get(activeProfile)?.settings?.currency)
     const thousandthSeparator = decimalSeparator === '.' ? ',' : '.'
 
-    let reward: string
-    switch (airdrop) {
-        case StakingAirdrop.Assembly: {
-            decimalPlaces = clamp(decimalPlaces, 0, 6)
+    decimalPlaces = clamp(decimalPlaces, 0, 6)
 
-            const [integer, float] = (amount / 1_000_000).toFixed(decimalPlaces).split('.')
-            reward = `${delineateNumber(integer, thousandthSeparator)}${
-                Number(float) > 0 ? decimalSeparator + float : ''
-            }`
+    const [integer, float] = (amount / 1_000_000).toFixed(decimalPlaces).split('.')
+    let reward = `${delineateNumber(integer, thousandthSeparator)}${Number(float) > 0 ? decimalSeparator + float : ''}`
 
-            break
-        }
-        case StakingAirdrop.Shimmer: {
-            reward = delineateNumber(String(Math.floor(amount)), thousandthSeparator)
-            break
-        }
-        default:
-            reward = '0'
-            break
-    }
+    reward = reward ?? '0'
 
     return `${reward} ${STAKING_AIRDROP_TOKENS[airdrop]}`
 }
