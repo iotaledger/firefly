@@ -93,7 +93,7 @@
             }
         } catch (err) {
             if (!error) {
-                error = err.error ? new BaseError({ message: err.error ?? err.message, logError: true }) : err
+                error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
             }
         }
     }
@@ -119,7 +119,7 @@
             await _onMount()
         } catch (err) {
             if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logError: true }) : err
+                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
             }
         }
     })
