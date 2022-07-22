@@ -1,5 +1,6 @@
 import { app, ipcMain, Menu, shell } from 'electron'
-import { AccountRoute, ExternalRoute } from 'shared/lib/core/router/enums'
+import { ExternalRoute } from 'shared/lib/core/router/enums'
+import features from 'shared/features/features'
 import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
 import { menuState } from './menuState'
 
@@ -110,7 +111,7 @@ const buildTemplate = () => {
         },
     ]
 
-    if (!app.isPackaged) {
+    if (!app.isPackaged || features?.electron?.developerTools?.enabled) {
         template[0].submenu.push({
             label: 'Developer Tools',
             role: 'toggleDevTools',
