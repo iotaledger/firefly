@@ -8,9 +8,9 @@ import { TokenVerificationStatus } from '../enums'
 export async function getTokenMetadataFromFoundryOutput(tokenId: string): Promise<ITokenMetadata> {
     const foundry = await get(selectedAccount).getFoundryOutput(tokenId)
     const data = getHexDataFromFoundryOutput(foundry)
-    const metadata = JSON.parse(Converter.hexToUtf8(data))
+    const metadata = data ? JSON.parse(Converter.hexToUtf8(data)) : undefined
 
-    const isValid = validateNativeTokenMetadata(metadata)
+    const isValid = metadata ? validateNativeTokenMetadata(metadata) : false
     return isValid
         ? {
               name: metadata.name,
@@ -27,14 +27,14 @@ function getHexDataFromFoundryOutput(foundry: IFoundryOutput): string {
     if (foundry?.immutableFeatures?.length > 0) {
         for (const feature of foundry?.immutableFeatures) {
             if (feature.type === 2) {
-                return feature.data
+                return feature?.data
             }
         }
     }
     if (foundry?.features?.length > 0) {
         for (const feature of foundry?.features) {
             if (feature.type === 2) {
-                return feature.data
+                return feature?.data
             }
         }
     }
@@ -52,26 +52,26 @@ function getHexDataFromFoundryOutput(foundry: IFoundryOutput): string {
 // }
 
 function validateNativeTokenMetadata(metadata): boolean {
-    if (!metadata.standard || typeof metadata.standard !== 'string') {
+    if (!metadata?.standard || typeof metadata.standard !== 'string') {
         return false
     }
-    if (!metadata.name || typeof metadata.name !== 'string') {
+    if (!metadata?.name || typeof metadata.name !== 'string') {
         return false
     }
-    if (!metadata.symbol || typeof metadata.symbol !== 'string') {
+    if (!metadata?.symbol || typeof metadata.symbol !== 'string') {
         return false
     }
-    if ((!metadata.decimals && metadata.decimals !== 0) || typeof metadata.decimals !== 'number') {
+    if ((!metadata?.decimals && metadata.decimals !== 0) || typeof metadata?.decimals !== 'number') {
         return false
     }
 
-    if (metadata.description && typeof metadata.description !== 'string') {
+    if (metadata?.description && typeof metadata.description !== 'string') {
         return false
     }
-    if (metadata.logo && typeof metadata.logo !== 'string') {
+    if (metadata?.logo && typeof metadata.logo !== 'string') {
         return false
     }
-    if (metadata.logoUrl && typeof metadata.logoUrl !== 'string') {
+    if (metadata?.logoUrl && typeof metadata.logoUrl !== 'string') {
         return false
     }
     return true

@@ -60,7 +60,7 @@
             </Button>
         {:else}
             <Button classes="w-full" onClick={handleSend}>
-                {localize('popups.tokenInformation.buttons.send')}
+                {localize('actions.send')}
             </Button>
         {/if}
     </div>

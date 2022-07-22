@@ -74,10 +74,28 @@
                   },
               ]
             : []),
+        ...(features?.developerTools?.enabled
+            ? [
+                  {
+                      icon: 'tools',
+                      label: localize('tabs.developerTools'),
+                      route: DashboardRoute.DeveloperTools,
+                      onClick: openDeveloperTools,
+                  },
+              ]
+            : []),
     ]
+
+    function openWallet() {
+        resetWalletRoute()
+    }
 
     function openStaking() {
         $dashboardRouter.goTo(DashboardRoute.Staking)
+    }
+
+    function openDeveloperTools() {
+        $dashboardRouter.goTo(DashboardRoute.DeveloperTools)
     }
 
     // function updateSidebarNotification() {
@@ -104,10 +122,6 @@
         } else {
             showStakingNotification = false
         }
-    }
-
-    function openWallet() {
-        resetWalletRoute()
     }
 
     function handleBackClick() {

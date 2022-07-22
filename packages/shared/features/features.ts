@@ -101,6 +101,9 @@ const features = {
         },
         assets: {
             enabled: true,
+            mintNativeTokens: {
+                enabled: true,
+            },
         },
         activityHistory: {
             enabled: true,
@@ -120,6 +123,9 @@ const features = {
     },
     collectibles: {
         enabled: false,
+    },
+    developerTools: {
+        enabled: true,
     },
 }
 

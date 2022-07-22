@@ -920,6 +920,25 @@
                 "verifyToken": "I verify this token",
                 "send": "send"
             }
+        },
+        "mintNativeTokenForm" : {
+            "title": "Mint native tokens",
+            "inputs": {
+                "totalSupply": "Total Supply",
+                "circulatingSupply": "Circulating Supply",
+                "standard": "Standard",
+                "name": "Name",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
+                "url": "URL",
+                "logoUrl": "Logo URL",
+                "logo": "Logo"
+            },
+            "buttons": {
+                "mint": "Mint",
+                "cancel": "Mint"
+            }
         }
     },
     "charts": {
@@ -1069,7 +1088,8 @@
         "rerunClaimProcess": "Rerun claim process",
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
-        "backup": "Backup"
+        "backup": "Backup",
+        "mintNativeTokens": "Mint native tokens"
     },
     "general": {
         "recipient": "Recipient",
@@ -1232,7 +1252,8 @@
         "tag": "Tag",
         "nodeList": "Node list",
         "claimingTransactionId": "Claimed in",
-        "assets": "Assets"
+        "assets": "Assets",
+        "nativeTokens": "Native tokens"
     },
     "dates": {
         "today": "Today",
@@ -1491,7 +1512,8 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking"
+        "staking": "Staking",
+        "developerTools": "Developer Tools"
     },
     "pills": {
         "stake": {

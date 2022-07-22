@@ -1,5 +1,6 @@
 import { ITokenMetadata } from '@core/wallet'
 import { NetworkProtocol } from '../enums'
+import { TokenVerificationStatus } from '../../wallet/enums/token-verification-status.enum'
 
 export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> = {
     [NetworkProtocol.IOTA]: {
@@ -10,6 +11,7 @@ export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> 
         subunit: null,
         useMetricPrefix: true,
         primaryColor: '#6E82A4',
+        verification: TokenVerificationStatus.Verified,
     },
     [NetworkProtocol.Shimmer]: {
         name: 'Shimmer',
@@ -19,5 +21,6 @@ export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> 
         subunit: 'glow',
         useMetricPrefix: false,
         primaryColor: '#25DFCA',
+        verification: TokenVerificationStatus.Verified,
     },
 }
