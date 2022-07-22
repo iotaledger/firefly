@@ -23,7 +23,7 @@
     export let opened = false
     export let fromLeft = false
     export let classes = ''
-    export let fullScreen = false
+    export let backgroundBlur = false
     export let preventClose = false
     export let zIndex = 'z-30'
 
@@ -208,9 +208,9 @@
 			--height: {fromLeft && '100vh'};
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-mark: {fromLeft ? 'none' : 'block'};
-            --top-mark: {fullScreen ? '20%' : '8px'};
-            --blur: {fullScreen ? '10px' : '0px'};
-            --tw-bg-opacity: {fullScreen ? 0.8 : 1};"
+            --top-mark: 8px;
+            --blur: {backgroundBlur ? '10px' : '0px'};
+            --tw-bg-opacity: {backgroundBlur ? 0.8 : 1};"
     >
         <slot />
     </content>
