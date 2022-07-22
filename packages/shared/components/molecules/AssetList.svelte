@@ -9,8 +9,7 @@
 
     function handleAssetTileClick(asset): void {
         openPopup({
-            type: 'sendForm',
-            overflow: true,
+            type: 'tokenInformation',
             props: {
                 asset,
             },

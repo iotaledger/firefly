@@ -906,6 +906,20 @@
         },
         "sendForm": {
             "title": "Send funds"
+        },
+        "tokenInformation" : {
+            "unverifiedTitle": "Unverified token",
+            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "tokenMetadata": {
+                "name": "Name",
+                "tokenId": "Token ID",
+                "url": "URL"
+            },
+            "buttons": {
+                "skipVerification": "Skip",
+                "verifyToken": "I verify this token",
+                "send": "send"
+            }
         }
     },
     "charts": {

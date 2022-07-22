@@ -18,6 +18,8 @@ export function setSelectedAccount(id: string): void {
                 total: Number(account?.balances?.baseCoin?.total),
                 available: Number(account?.balances?.baseCoin?.available),
             },
+            verified: true,
+            hidden: false,
         })
         refreshNativeTokens()
     } else {

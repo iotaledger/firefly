@@ -7,4 +7,5 @@ export interface ITokenMetadata {
     useMetricPrefix?: boolean
     primaryColor?: string
     secondaryColor?: string
+    url?: string
 }
