@@ -86,6 +86,11 @@ const features = {
             },
         },
     },
+    electron: {
+        developerTools: {
+            enabled: true,
+        },
+    },
     wallet: {
         enabled: true,
         accountSummary: {
