@@ -1,19 +1,33 @@
 <script lang="typescript">
-    import { selectedAccount } from '@core/account'
+    import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { Converter } from '@lib/converter'
-    import { closePopup } from '@lib/popup'
-    import { AddInputButton, Button, ClosableTextInput, NumberInput, Text, TextInput } from 'shared/components'
+    import { isSoftwareProfile } from '@core/profile'
+    import { mintNativeToken } from '@core/wallet'
+    import { closePopup, updatePopupProps } from '@lib/popup'
+    import { checkStronghold } from '@lib/stronghold'
+    import { isTransferring } from '@lib/wallet'
+    import {
+        AddInputButton,
+        Button,
+        ClosableTextInput,
+        Error,
+        NumberInput,
+        Spinner,
+        Text,
+        TextInput,
+    } from 'shared/components'
     import { FontWeightText } from '../Text.svelte'
+    import { onMount } from 'svelte'
 
-    let name: string
-    let totalSupply: number
-    let circulatingSupply: number
-    let decimals: number
-    let symbol: string
-    let description: string
-    let url: string
-    let logoUrl: string
+    export let name: string
+    export let totalSupply: number
+    export let circulatingSupply: number
+    export let decimals: number
+    export let symbol: string
+    export let description: string
+    export let url: string
+    export let logoUrl: string
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     let nameError: string = ''
     $: name, (nameError = '')
@@ -31,6 +45,8 @@
     $: url, (urlError = '')
     let logoUrlError: string
     $: logoUrl, (logoUrlError = '')
+
+    let error: BaseError
 
     let descriptionButtonElement: HTMLButtonElement
     let isDescriptionInputOpen = false
@@ -50,40 +66,51 @@
         isLogoUrlInputOpen = true
     }
 
+    async function mintAction() {
+        try {
+            await mintNativeToken(Number(totalSupply), Number(circulatingSupply), {
+                standard: 'IRC30',
+                name,
+                symbol,
+                decimals: Number(decimals),
+                ...(description && { description }),
+                ...(url && { url }),
+                ...(logoUrl && { logoUrl }),
+            })
+            closePopup()
+        } catch (reason) {
+            console.error(reason)
+        }
+    }
+
     function handleCancel() {
         closePopup()
     }
 
-    async function handleMint() {
+    async function handleMint(): Promise<void> {
+        error = null
         const valid = await validate()
         if (valid) {
             try {
-                await $selectedAccount.mintNativeToken(
-                    {
-                        accountAddress: $selectedAccount.depositAddress,
-                        maximumSupply: '0x' + Number(totalSupply).toString(16),
-                        circulatingSupply: '0x' + Number(circulatingSupply).toString(16),
-                        foundryMetadata: Array.from(
-                            Converter.utf8ToBytes(
-                                JSON.stringify({
-                                    standard: 'IRC30',
-                                    name,
-                                    symbol,
-                                    decimals: Number(decimals),
-                                    ...(description && { description }),
-                                    ...(url && { url }),
-                                    ...(logoUrl && { logoUrl }),
-                                })
-                            )
-                        ),
-                    },
-                    {
-                        remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
-                    }
-                )
-                closePopup()
-            } catch (reason) {
-                console.error(reason)
+                if ($isSoftwareProfile) {
+                    updatePopupProps({
+                        name,
+                        totalSupply,
+                        circulatingSupply,
+                        decimals,
+                        symbol,
+                        description,
+                        url,
+                        logoUrl,
+                    })
+                    await checkStronghold(mintAction, true)
+                }
+            } catch (err) {
+                if (!error) {
+                    error = err.error
+                        ? new BaseError({ message: err.error ?? err.message, logToConsole: true, saveToErrorLog: true })
+                        : err
+                }
             }
         }
     }
@@ -160,6 +187,18 @@
             return Promise.resolve()
         }
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            if (!error) {
+                error = err.error
+                    ? new BaseError({ message: err.error ?? err.message, logToConsole: true, saveToErrorLog: true })
+                    : err
+            }
+        }
+    })
 </script>
 
 <div class="space-y-6">
@@ -248,6 +287,9 @@
                 />
             </optional-input-buttons>
         {/if}
+        {#if error}
+            <Error error={error?.message} />
+        {/if}
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
@@ -255,7 +297,11 @@
             {localize('actions.cancel')}
         </Button>
         <Button autofocus classes="w-full" onClick={handleMint}>
-            {localize('popups.mintNativeTokenForm.buttons.mint')}
+            {#if $isTransferring}
+                <Spinner busy classes="justify-center break-all" />
+            {:else}
+                {localize('popups.mintNativeTokenForm.buttons.mint')}
+            {/if}
         </Button>
     </div>
 </div>
