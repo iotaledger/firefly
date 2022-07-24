@@ -206,7 +206,7 @@
         {localize('popups.mintNativeTokenForm.title')}
     </Text>
 
-    <div class="space-y-4">
+    <div class="space-y-4 max-h-100 scrollable-y flex-1">
         <TextInput
             bind:value={name}
             label={localize('popups.mintNativeTokenForm.inputs.name')}
