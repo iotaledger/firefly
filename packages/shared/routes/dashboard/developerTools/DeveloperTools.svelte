@@ -23,7 +23,8 @@
                         {localize('general.nativeTokens')}
                     </Text>
                     <OnboardingButton
-                        primaryText={localize('actions.mintNativeTokens')}
+                        primaryText={localize('actions.mintNativeToken')}
+                        secondaryText={localize('general.mintNativeTokenDescription')}
                         onClick={handleMintNativeTokenClick}
                     />
                 </Pane>

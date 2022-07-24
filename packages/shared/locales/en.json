@@ -1089,7 +1089,7 @@
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
-        "mintNativeTokens": "Mint native tokens"
+        "mintNativeToken": "Mint token"
     },
     "general": {
         "recipient": "Recipient",
@@ -1253,7 +1253,9 @@
         "nodeList": "Node list",
         "claimingTransactionId": "Claimed in",
         "assets": "Assets",
-        "nativeTokens": "Native tokens"
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard"
+
     },
     "dates": {
         "today": "Today",
