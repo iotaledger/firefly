@@ -1,11 +1,11 @@
 <script lang="typescript">
-    import { HR, Modal, MenuItem, ToggleHiddenAccountMenuItem } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeAccounts, visibleActiveAccounts } from '@core/profile'
     import { deleteAccount } from '@core/profile-manager'
+    import { Icon } from '@lib/auxiliary/icon'
     import { openPopup } from '@lib/popup'
-    import { SettingsIcons } from '@lib/typings/icons'
+    import { HR, MenuItem, Modal, ToggleHiddenAccountMenuItem } from 'shared/components'
 
     export let modal: Modal
 
@@ -42,22 +42,26 @@
 <Modal bind:this={modal} position={{ top: '52px', right: '24px' }}>
     <div class="flex flex-col">
         <MenuItem
-            icon={SettingsIcons.storageDepositBreakdown}
+            icon={Icon.Doc}
             title={localize('actions.viewStorageDeposit')}
             onClick={handleViewStorageDepositClick}
             first
         />
         <MenuItem
-            icon={SettingsIcons.transactionHistory}
+            icon={Icon.Export}
             title={localize('actions.exportTransactionHistory')}
             onClick={handleExportTransactionHistoryClick}
             disabled
         />
-        <MenuItem icon="customize" title={localize('actions.customizeAcount')} onClick={handleCustomiseAccountClick} />
+        <MenuItem
+            icon={Icon.Customize}
+            title={localize('actions.customizeAcount')}
+            onClick={handleCustomiseAccountClick}
+        />
         <ToggleHiddenAccountMenuItem onClick={() => modal.close()} last />
         <HR />
         <MenuItem
-            icon="delete"
+            icon={Icon.Delete}
             title={localize('actions.deleteAccount')}
             onClick={handleDeleteAccountClick}
             first

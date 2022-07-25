@@ -135,7 +135,7 @@ export class Converter {
      * @returns The array.
      */
     public static hexToBytes(hex: string, reverse?: boolean): Uint8Array {
-        const sizeof = hex.length >> 1
+        const sizeof = hex?.length >> 1
         const length = sizeof << 1
         const array = new Uint8Array(sizeof)
 
@@ -171,7 +171,7 @@ export class Converter {
      */
     public static hexToUtf8(hex: string): string {
         const bytes = Converter.hexToBytes(hex)
-        return Converter.bytesToUtf8(bytes).slice(1)
+        return Converter.bytesToUtf8(bytes)?.slice(1)
     }
 
     /**
