@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Enviar, Rebre i Gestionar eIs vostres tokens IOTA",
+            "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Firefly és el programari del moneder oficial de IOTA."
         },
         "legal": {
@@ -14,12 +14,12 @@
             "body": "Ajudeu els desenvolupadors a millorar Firefly enviant automàticament dades de diagnòstic quan es produeixi un error o bloquejos.",
             "checkbox": "Envia informes d'error a la Fundació IOTA"
         },
-        "appearance": {
-            "title": "Aspecte",
-            "body": "Trieu l'aparença de l'aplicació."
+        "languageAndAppearance": {
+            "title": "Language & appearance",
+            "body": "Choose your language and theme"
         },
         "profile": {
-            "title": "Crear un perfil",
+            "title": "Create your {protocol} profile",
             "profileName": "Nom del perfil",
             "body1": "Podeu crear diversos perfils d'usuari per gestionar els vostres moneders i millorar la privacitat.",
             "body2": {
@@ -34,7 +34,7 @@
             }
         },
         "setup": {
-            "title": "Configura un moneder",
+            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
             "chrysalisTitle": "Actualizació a la Xarxa Chrysalis",
             "chrysalisBody": "Des del 21 d'abril de 2021, tothom pot migrar els criptoactius a la nova xarxa Chrysalis. Recomanem que migreu els vostres criptoactius el més aviat possible.",
             "learnMore": "Aprendre sobre la migració"
@@ -48,13 +48,55 @@
             "title": "Crea un moneder",
             "body": "Crear un nou moneder. Podeu triar entre moneder basat en programari normal o, si teniu un dispositiu Ledger, podeu configurar un moneder de maquinari.",
             "softwareAccount": {
-                "title": "Vull un moneder de programari",
-                "description": "Crear una frase de recuperació de 24 paraules"
+                "title": "Create a software wallet",
+                "description": "Provides a Stronghold file and recovery phrase"
             },
             "ledgerAccount": {
-                "title": "Vull un moneder de maquinari",
+                "title": "Create a hardware wallet",
                 "description": "Es necessita Ledger Nano S o Nano X"
             }
+        },
+        "protocol": {
+            "title": "Choose protocol",
+            "body": "Set the protocol for your profile",
+            "iota": "IOTA Mainnet",
+            "shimmer": "Staging network for IOTA Mainnet"
+        },
+        "network": {
+            "title": "Choose network",
+            "body": "Set the network for your profile",
+            "iota": {
+                "mainnet": {
+                    "title": "Mainnet",
+                    "body": "IOTA Mainnet"
+                },
+                "devnet": {
+                    "title": "Devnet",
+                    "body": "Developer network for IOTA"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with active TIPS"
+                }
+            },
+            "shimmer": {
+                "mainnet": {
+                    "title": "Shimmer",
+                    "body": "Staging network for IOTA"
+                },
+                "devnet": {
+                    "title": "Shimmer Beta",
+                    "body": "Beta network for Shimmer"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with draft TIPS"
+                }
+            }
+        },
+        "customNetwork": {
+            "title": "Connect to a custom network",
+            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "Conecta el teu Ledger",
@@ -80,15 +122,10 @@
             "body1": "Establiu un PIN d'accés per assegurar què només vostè pot entrar al seu moneder.",
             "body2": "Guardeu el vostre PIN en un lloc segur!"
         },
-        "pin": {
-            "title": "Configureu el codi PIN",
-            "body1": "A continuació, introduïu un PIN de 6 dígits. Se us demanarà el PIN per iniciar la sessió al criptomoneder.",
-            "body2": "Utilitzeu només números"
-        },
-        "confirmPin": {
-            "title": "Verifiqueu el codi PIN",
-            "body1": "El PIN manté el saldo i les transaccions privades.",
-            "body2": "Torneu a introduir el codi PIN per continuar. "
+        "setupPin": {
+            "title": "Set up PIN code",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "backup": {
             "title": "Feu una còpia de seguretat del criptomoneder",
@@ -123,6 +160,10 @@
             "title": "La còpia de seguretat s'ha fet correctament",
             "body": "Heu fet una còpia de seguretat dels vostres moneders a Stronghold."
         },
+        "claimRewards": {
+            "title": "Your Shimmer staking rewards",
+            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+        },
         "congratulations": {
             "title": "S'ha completat la configuració del criptomoneder",
             "fundsMigrated": "Fons migrats",
@@ -133,16 +174,31 @@
             "exportMigration": "Exporta el registre de migració i finalitza la configuració"
         },
         "import": {
-            "title": "Recupera o migra els fons",
-            "body": "Si teniu una llavor o un fitxer de còpia de seguretat, podeu importar-lo des d'aquí. Si manteniu fons a la xarxa antiga, haureu de seguir les passes per migrar-los a la xarxa Chrysalis.",
+            "title": {
+                "iota": "Recover or migrate IOTA funds",
+                "shimmer": "Recover Shimmer profile"
+            },
+            "body": {
+                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
+            },
             "importSeed": "Tinc una llavor de 81 caràcters",
             "importSeedDescription": "Introduïu una llavor i migreu els fons a Chrysalis",
-            "importMnemonic": "Tinc una frase de recuperació de Firefly",
-            "importMnemonicDescription": "Introduïu la vostra frase de recuperació per recuperar els vostres moneders",
-            "importFile": "Tinc un fitxer de còpia de seguretat",
-            "importFileDescription": "Pugeu un fitxer SeedVault o Stronghold",
-            "importLedger": "Tinc una còpia de seguretat del Ledger",
-            "importLedgerDescription": "Restaurar o migrar un perfil de Ledger"
+            "importMnemonic": "Use recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase",
+            "importFile": {
+                "iota": "Use backup file",
+                "shimmer": "Use Stronghold backup file"
+            },
+            "importFileDescription": {
+                "iota": "Upload a Seedvault or Stronghold file",
+                "shimmer": "Upload Stronghold file"
+            },
+            "importLedger": "Use Ledger hardware device",
+            "importLedgerDescription": {
+                "iota": "Restore or migrate a Ledger profile",
+                "shimmer": "Restore using Nano S or Nano X devices"
+            }
         },
         "importFromText": {
             "seed": {
@@ -291,17 +347,17 @@
         },
         "settings": {
             "settings": "Preferències",
-            "generalSettings": {
+            "general": {
                 "title": "General",
-                "description": "Configureu l'aparença de l'aplicació i altres paràmetres generals"
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "Seguretat",
                 "description": "Canvieu la contrasenya i ajusteu la configuració relacionada amb la seguretat"
             },
-            "advancedSettings": {
-                "title": "Avançat",
-                "description": "Eines i configuració manual per a usuaris tècnics"
+            "advanced": {
+                "title": "Advanced",
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Informació i ajuda",
@@ -361,9 +417,9 @@
                 "description": "Canvia el nom del teu perfil de Firefly",
                 "success": "Has canviat el nom del teu perfil"
             },
-            "balanceFinder": {
-                "title": "Cercador de balanços",
-                "description": "Realitzeu una cerca extensa de criptovalors a les vostres adreces"
+            "walletFinder": {
+                "title": "Wallet finder",
+                "description": "Perform an extended search of your previously used wallets"
             },
             "hiddenAccounts": {
                 "title": "Moneders amagats",
@@ -374,8 +430,8 @@
                 "description": "Elimineu el vostre perfil complet, moneders i llistat de transaccions. Assegureu-vos de tenir una còpia de seguretat"
             },
             "deepLinks": {
-                "title": "Enllaços IOTA",
-                "description": "Ompliu automàticament dades de transaccions a Firefly clicant un enllaç IOTA"
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkConfiguration": {
                 "title": "Configuració de la xarxa",
@@ -451,6 +507,14 @@
                 "title": "Sobre",
                 "description": ""
             },
+            "createDeveloperProfile": {
+                "title": "Create Developer Profile",
+                "description": ""
+            },
+            "createNormalProfile": {
+                "title": "Create Normal Profile",
+                "description": ""
+            },
             "reportAnIssue": {
                 "title": "Notificar una incidència",
                 "description": "Notifica un error als desenvolupadors. Comproveu que no s’hagi informat de l'error anteriorment"
@@ -462,15 +526,16 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Xarxa operativa",
-                "networkDegraded": "Xarxa degradada",
-                "networkDown": "Xarxa Desconectada",
+                "operational": "Network operational",
+                "degraded": "Network degraded",
+                "down": "Network down",
+                "disconnected": "Disconnected from node",
                 "status": "Estat",
                 "messagesPerSecond": "Missatges per segon",
                 "referencedRate": "Taxa referenciada"
             },
             "profileModal": {
-                "allSettings": "Tots els paràmetres",
+                "allSettings": "All settings",
                 "logout": "Tancar sessió",
                 "stronghold": {
                     "title": "Bloqueig de perfil",
@@ -541,7 +606,7 @@
                 "totalWalletRewards": "Recompenses totals a bitlletera",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly és una xarxa multicadena altament escalable i sense permís per crear i desplegar contractes intel·ligents componibles. Assembly és el futur del web3. "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -561,9 +626,17 @@
         }
     },
     "popups": {
+        "storageDepositBreakdown": {
+            "title": "Storage deposit breakdown",
+            "totalStorageDeposit": "Total storage deposit",
+            "pendingTransactions": {
+                "title": "Locked in pending transactions",
+                "subtitle": "For sending native assets and small IOTA amounts"
+            }
+        },
         "password": {
             "title": "Es requereix la contrasenya",
-            "subtitle": "Si us plau, introduïu la vostra contrasenya per desblocar els vostres moneders",
+            "subtitle": "Please provide your password to unlock your wallets",
             "backup": "Introdueix la teva contrasenya per exportar una còpia de seguretat"
         },
         "qr": {
@@ -578,14 +651,9 @@
             "noAutoUpdate": "L'actualització automàtica està deshabilitada en aquesta versió de Windows. Si us plau, aneu a https://firefly.iota.org per baixar l'actualització.",
             "preReleaseDescription": "Esteu executant una versió prèvia al llançament de Firefly. Les actualitzacions estan desactivades."
         },
-        "backup": {
-            "title": "Darrera còpia de seguretat: {date}",
-            "lastBackup": "La teva última còpia de seguretat {date}",
-            "backupDescription": "És important fer una còpia de seguretat periòdicament per assegurar-vos que teniu una còpia dels vostres moneders i de l'historial de transaccions.",
-            "backupWarning": "Si perdeu la frase de còpia de seguretat i recuperació, perdrà l'accés als vostres fons.",
-            "notBackedUp": "No s'ha fet una còpia de seguretat",
-            "notBackedUpDescription": "No heu fet cap còpia de seguretat dels vostres moneders",
-            "saving": "Desant..."
+        "backupStronghold": {
+            "title": "Backup your stronghold file",
+            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deleteAccount": {
             "title": "Eliminar {name}?",
@@ -607,45 +675,71 @@
         },
         "addressHistory": {
             "title": "Historial d'adreces de {name}",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
+            "currentBalance": "Saldo {balance}",
+            "internal": "Adreça interna",
+            "external": "Adreça de dipòsit"
         },
         "node": {
             "titleAdd": "Afegeix un node",
             "titleUpdate": "Actualitzar el node",
             "titleRemove": "Traieu un node",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Elimina tots els nodes",
             "titleDetails": "Detalls del node",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
-            "loadingNodeInfo": "Loading node info",
+            "titleInfo": "Node information",
+            "addingNode": "Afegint node",
+            "updatingNode": "Actualitzant el node",
+            "loadingNodeInfo": "Carregant informació del node",
             "nodeAddress": "Adreça del node",
             "optionalUsername": "Nom d'usuari (opcional)",
             "optionalPassword": "Contrasenya (opcional)",
-            "optionalJwt": "JSON web token (optional)",
+            "optionalJwt": "JSON web token (opcional)\n",
             "setAsPrimaryNode": "Estableix com a node principal",
             "removeConfirmation": "Esteu segur que voleu eliminar aquest node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeAllConfirmation": "Segur que vols eliminar tots els nodes?",
             "info": {
-                "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
-                "bech32HRP": "Bech32 HRP",
-                "features": "Features",
-                "confirmedMilestoneIndex": "Confirmed milestone index",
-                "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Missatges per segon",
-                "referencedRate": "Taxa referenciada"
+                "general": {
+                    "tab": "General",
+                    "name": "Name",
+                    "url": "URL",
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index",
+                    "features": "Features"
+                },
+                "metrics": {
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
+                },
+                "protocol": {
+                    "tab": "Protocol",
+                    "network": "Network",
+                    "bech32HRP": "Bech32 HRP",
+                    "tokenSupply": "Token supply",
+                    "protocolVersion": "Version",
+                    "minPoWScore": "Min PoW Score"
+                },
+                "baseToken": {
+                    "tab": "Base token",
+                    "token": "Token",
+                    "tickerSymbol": "Ticker",
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
+                }
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "Canvia de xarxa",
+            "newNetwork": "Nova xarxa",
+            "resetWarning": "Si canvieu de xarxes, tanqueu la sessió i es restablirà tots els comptes, els saldos i l'historial de transaccions d'aquest perfil.",
+            "switchingNetwork": "Canviant xarxa",
+            "typePassword": "Escriviu la vostra contrasenya per canviar a:"
         },
         "errorLog": {
             "title": "Registre d'errors",
@@ -670,18 +764,16 @@
         "transaction": {
             "title": "Confirmar la transacció",
             "body": "Estàs a punt d'enviar {amount} a",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccount": "Esteu enviant una transferència des d'una cartera que s'està stakejant actualment. Això pot desfer l'stake. Es lliure d'enviar la transferència, però és possible que hàgiu de tornar a refer l'stake amb els tokens restants després.",
+            "sendingFromStakedAccountBelowMinReward": "Esteu enviant una transferència des d'una bitlletera que encara no ha arribat a les recompenses mínimes de staking. Això pot desfer l'stake i podeu perdre les vostres recompenses d'stake en aquesta cartera."
         },
-        "balanceFinder": {
-            "title": "Cercador de balanços",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+        "walletFinder": {
+            "title": "Wallet finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
             "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
             "accountsFound": "Wallets found",
-            "totalWalletBalance": "Balanç total",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
-            "typePassword": "Escriviu la vostra contrasenya per pemetre la cerca."
+            "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
         },
         "riskFunds": {
             "title": "Advertència: fons en risc durant la migració",
@@ -736,38 +828,38 @@
             },
             "transaction": {
                 "title": "Confirmar la transacció",
-                "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
+                "info": "Confirmeu que la informació de la transacció que es mostra al vostre dispositiu Ledger coincideix amb la que es mostra a continuació. Si coincideixen, premeu els dos botons del vostre Ledger tal com se us demani."
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "title": "Confirmeu l'adreça de recepció",
+            "body": "Confirmeu que l'adreça de recepció que es mostra al vostre Ledger coincideix amb la que es mostra a continuació. Si coincideixen, premeu els dos botons del vostre Ledger tal com se us demani."
         },
         "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
+            "title": "Necessites migrar un altre índex de compte de Trinity?",
+            "body": "També podeu migrar més tard a la configuració avançada."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Wallet name:",
-            "typePassword": "Type your password to allow exporting"
+            "title": "Exporta l'historial de transaccions",
+            "body": "Exporteu l'historial de transaccions de la bitlletera seleccionada. El fitxer exportat estarà en format .csv.",
+            "profileName": "Nom del perfil:",
+            "accountName": "Nom de la bitlletera:",
+            "typePassword": "Escriviu la vostra contrasenya per permetre l'exportació"
         },
         "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
+            "title": "Gestió de staking",
+            "description": "Quan feu stake a una bitlletera, us envieu una transacció marcant aquests fons com a \"stakejats\". Podeu transferir els tokens en qualsevol moment, però no continuareu rebent recompenses d'stake.",
+            "totalFundsStaked": "Total de fons amb stake",
+            "stakedSuccessfully": "Els vostres fons han estat stakejats {account}.",
+            "unstakedSuccessfully": "S'ha desfet l'stake dels vostres fons {account}.",
             "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
-            "subtitleStake": "You are about to stake",
-            "subtitleMerge": "You are about to merge",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "title": "Confirmeu la participació",
+            "subtitleStake": "Estàs a punt de fer stake",
+            "subtitleMerge": "Estàs a punt de combinar",
+            "multiAirdropWarning": "Si no voleu participar en els dos airdrops, podeu desactivar-lo a continuació. Podeu desactivar i tornar a activar-lo en qualsevol moment.",
+            "mergeStakeWarning": "Els vostres fons es posaran a stake per {airdrop}. Per canviar en quins airdrops vols participar, desfeu l'stake d'aquesta bitlletera i torneu-la a apostar.",
             "estimatedAirdrop": "Recompenses estimades"
         },
         "newStakingPeriodNotification": {
@@ -808,6 +900,12 @@
             "title": "La manera d'utilitzar Firefly ha canviat",
             "body": "El contingut de cada pestanya es troba ara en el context d'una única cartera. Podeu canviar la cartera seleccionada des de qualsevol lloc mitjançant el commutador de la barra de títol.",
             "hint": "No trobes una cartera? Utilitzeu el cercador de saldo a la configuració per descobrir carteres utilitzades anteriorment."
+        },
+        "transactionDetails": {
+            "title": "Transaction details"
+        },
+        "sendForm": {
+            "title": "Send funds"
         }
     },
     "charts": {
@@ -831,18 +929,36 @@
         "cancel": "Cancel·lar",
         "close": "Tancar",
         "dismiss": "Omet",
+        "claim": "Claim",
+        "claiming": "Claiming",
+        "reject": "Reject",
+        "confirmRejection": {
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        },
         "proceedAnyway": "Continuar igualment",
         "save": "Guardar",
         "importSeed": "Importeu una llavor existent",
-        "restoreWallet": "Migrar o restaurar una cartera",
-        "restoreWalletDescription": "Migrar a Chrysalis o restaurar una cartera existent",
-        "createWallet": "Crea una cartera nova",
-        "createWalletDescription": "Crea una cartera nova a la xarxa Chrysalis",
+        "restoreWallet": {
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile"
+        },
+        "restoreWalletDescription": {
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile"
+        },
+        "createWallet": "Create a new {protocol} profile",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "claimShimmer": "Claim Shimmer staking rewards",
+        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "Desa la contrasenya",
         "useBiometric": "Utilitzeu seguretat biomètrica",
-        "setupPin": "Configureu el codi PIN",
-        "setPin": "Estableix el codi PIN",
-        "confirmPin": "Confirmeu el codi PIN",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "Introdueix el teu codi PIN",
         "saveBackupFile": "Guardar còpia de seguretat",
         "iveWrittenRecoveryPhrase": "He escrit la meva frase de recuperació",
@@ -875,7 +991,6 @@
         "restartNow": "Reiniciar ara",
         "saveBackup": "Guarda una còpia de seguretat Stronghold",
         "customizeAcount": "Personalitza el moneder",
-        "viewAddressHistory": "Veure l'historial d'adreces",
         "hideAccount": "Amaga el moneder",
         "showAccount": "Mostra el moneder",
         "deleteAccount": "Esborra el moneder",
@@ -893,6 +1008,7 @@
         "redo": "Refés",
         "cut": "Tallar",
         "copy": "Copiar",
+        "copyAllInformation": "Copy all information",
         "paste": "Enganxar",
         "selectAll": "Selecciona-ho tot",
         "addAccount": "Afegeix moneder",
@@ -911,13 +1027,15 @@
         "readDocumentation": "Llegeix la documentació",
         "visitFaq": "Visita les FAQ",
         "viewStatus": "Mostra l'estat",
+        "viewStorageDeposit": "View storage deposit",
         "showHiddenAccounts": "Mostra els moneders amagats",
         "confirm": "Confirmar",
         "hideNetworkStatistics": "Amaga les estadístiques de la xarxa",
-        "findBalances": "Troba balanços",
-        "searchBalances": "Cerca balanços",
+        "findWallets": "Find wallets",
+        "useBalanceFinder": "Use balance finder",
+        "search": "Search",
         "searchAgain": "Cerca de nou",
-        "searching": "Cercant...",
+        "searching": "Searching",
         "closeFirefly": "Tanca Firefly",
         "generateAddress": "Generar adreça",
         "migrateAgain": "Migrar un altre índex",
@@ -932,9 +1050,15 @@
         "mergeFunds": "Combinar fons",
         "done": "Fet",
         "okIUnderstand": "D'acord, ho entenc",
-        "readMore": "Llegir més"
+        "readMore": "Llegir més",
+        "claimRewards": "Claim rewards",
+        "rerunClaimProcess": "Rerun claim process",
+        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
+        "addPublicNote": "Add public note",
+        "backup": "Backup"
     },
     "general": {
+        "recipient": "Recipient",
         "password": "Contrasenya",
         "confirmPassword": "Confirmar contrasenya",
         "currentPassword": "Contrasenya actual",
@@ -945,6 +1069,8 @@
         "recentActivity": "Activitat recent",
         "sent": "Enviat",
         "received": "Rebut",
+        "transfer": "Transfer",
+        "transferring": "Transferring",
         "sendPayment": "Envia el pagament",
         "moveFunds": "Transferència interna",
         "sendTo": "Envia a",
@@ -962,15 +1088,18 @@
         "reference": "Referència",
         "from": "De",
         "to": "A",
-        "receiveFunds": "Rebre fons",
+        "receiveFunds": "Receive funds",
         "address": "Adreça",
         "myAddress": "La meva adreça",
+        "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Compartir una adreça",
         "yourAddress": "La teva adreça",
         "newRemainder": "Nou recordatori",
         "remainder": "Remainder",
         "generateNewAddress": "Generar una nova adreça",
+        "copyToClipboard": "Copy to clipboard",
         "copyAddress": "Copiar l'adreça",
+        "viewOnExplorer": "View on Explorer",
         "import": "Importar",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -990,10 +1119,11 @@
         "profiles": "Perfils",
         "dev": "Dev",
         "createAccount": "Crea un moneder",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Nom del moneder",
         "latestTransactions": "Últimes transaccions",
         "transactions": "Transaccions",
+        "activity": "Activity",
         "security": "Seguretat",
         "accountAddress": "Adreça del moneder",
         "network": "Network",
@@ -1013,6 +1143,8 @@
         "loadingAccounts": "Carregant, espereu...",
         "addProfile": "Afegeix un perfil",
         "noRecentHistory": "No hi ha història recent",
+        "thisMonth": "This month",
+        "search": "Search",
         "firstSync": "Sinconitzant l'historial, això pot durar una estona...",
         "transferSyncing": "Sincronitzant moneder",
         "transferSelectingInputs": "Selecció d’entrades",
@@ -1049,14 +1181,8 @@
         "creatingProfile": "S'està creant un compte, espereu...",
         "fundMigration": "Migració de fons",
         "accountRemoved": "Aquest moneder està amagat. Mostreu-lo per realitzar transferències.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
         "stakedFor": "Staked for {account}",
         "unstakedFor": "Unstaked for {account}",
         "votedFor": "Voted for {account}",
@@ -1070,6 +1196,7 @@
         "version": "Versió {version}",
         "yourWallets": "Your Wallets",
         "unknown": "Desconegut",
+        "unknownAddress": "Unknown address",
         "none": "None",
         "staked": "Staked",
         "unstaked": "Unstaked",
@@ -1079,7 +1206,19 @@
         "stakedFunds": "Fons en stake",
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "transactionTime": "Transaction time",
+        "storageDeposit": "Storage deposit",
+        "expirationTime": "Expiration time",
+        "claimedTime": "Claimed at",
+        "copiedToClipboard": "Copied to clipboard",
+        "total": "Total: {balance}",
+        "availableBalance": "Available balance: {balance}",
+        "amountClaimed": "{amount} claimed",
+        "metadata": "Metadata",
+        "tag": "Tag",
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in",
+        "assets": "Assets"
     },
     "dates": {
         "today": "Avui",
@@ -1118,18 +1257,26 @@
             "error": "Unable to export transaction history for {accountAlias}"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "Els enllaços IOTA no estan activats",
-            "invalidFormat": "L'enllaç IOTA que has seguit no és vàlid",
+            "receivedWhileLoggedOut": "Please login to initiate the deep link",
+            "notEnabled": "Deep links are not enabled",
+            "invalidFormat": "The deep link you followed is invalid",
             "wallet": {
                 "send": {
-                    "success": "S'han afegit detalls de pagament des de l'enllaç IOTA"
+                    "success": "Payment details added from deep link"
                 }
             }
         },
         "syncing": "Espereu fins que finalitzi la sincronització per canviar les bitlleteres.",
         "transferring": "Espereu fins que es completin totes les transaccions per canviar les bitlleteres.",
-        "participating": "Si us plau, espereu fins que s'hagin completat totes les transaccions de stake/votació per canviar les bitlleteres."
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "claimed": {
+            "success": "Transaction claimed",
+            "error": "Claiming transaction failed"
+        },
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {
@@ -1159,7 +1306,8 @@
         "pincode": {
             "length": "El vostre PIN ha de tenir {length, plural, one {1 dígit} other {# dígits}}.",
             "match": "El PIN no coincideix.",
-            "incorrect": "El vostre PIN actual és incorrecte."
+            "incorrect": "El vostre PIN actual és incorrecte.",
+            "invalid": "Invalid PIN code."
         },
         "account": {
             "length": "El nom del moneder no pot superar els {length, plural, one {1 caràcter} other {# caràcters}}.",
@@ -1173,23 +1321,29 @@
             "chars": "Un nom de perfil no pot contenir els caràcters següents <>:\"/\\|?*",
             "index": "Your account index must be a number between 0 and 2,147,483,647.",
             "page": "Your account page must be a number between 0 and 2,147,483,647.",
-            "syncing": "There was an error syncing your wallets."
+            "syncing": "There was an error syncing your wallets.",
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Això és superior al saldo disponible.",
-            "amountNoFloat": "Si les unitats són `i` no podeu fer servir decimals.",
+            "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Sembla que l’import no és vàlid.",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "amountZero": "L'import ha de ser superior a 0.",
             "wrongAddressPrefix": "Les adreces comencen amb el prefix {prefix}.",
             "wrongAddressFormat": "L'adreça no està en el format correcte.",
             "invalidAddress": "L'adreça no és vàlida.",
             "insufficientFunds": "Aquest moneder no té prou fons.",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
             "noToAccount": "No heu seleccionat cap moneder on enviar els fons.",
             "sendingDust": "No es possible enviar menys d'1 Mi.",
             "leavingDust": "No és possible deixar menys d'1 Mi a la teva adreça.",
             "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "transaction": "There was an error sending your transaction. Please try again.",
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "invalid": "Si us plau, introdueix una URL vàlida.",
@@ -1204,7 +1358,10 @@
             "noSynced": "No hi ha nodes sincronitzats disponibles.",
             "answer": "Failed to get an answer from all nodes.",
             "forbidden": "This node connection is forbidden.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node"
         },
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
@@ -1258,6 +1415,9 @@
         "invalidTime": "INVALID TIME"
     },
     "warning": {
+        "transaction": {
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+        },
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
@@ -1305,6 +1465,9 @@
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        },
+        "networkIndicator": {
+            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
         }
     },
     "permissions": {
@@ -1316,5 +1479,58 @@
     "tabs": {
         "wallet": "Cartera",
         "staking": "Staking"
+    },
+    "pills": {
+        "stake": {
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
+        },
+        "internalTransaction": {
+            "in": {
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
+            },
+            "out": {
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
+            }
+        },
+        "externalTransaction": {
+            "in": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
+            },
+            "out": {
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
+            }
+        },
+        "migrate": {
+            "Pending": "migrating for",
+            "Confirmed": "migrated for",
+            "Conflicting": "failed to migrate"
+        },
+        "asyncStatus": {
+            "unclaimed": "unclaimed",
+            "claimed": "claimed",
+            "expired": "expired"
+        }
+    },
+    "menus": {
+        "expirationTimePicker": {
+            "none": "No expiration time",
+            "1hour": "In 1 hour",
+            "1day": "In 1 day",
+            "1week": "In 1 week",
+            "customDate": {
+                "title": "Custom date",
+                "subtitle": "Set custom expiry date"
+            }
+        }
     }
 }
