@@ -111,8 +111,8 @@ export const truncateString = (
     endCharCount: number = 5,
     dotCount: number = 3
 ): string => {
-    const MAX_LENGTH = 13
-    if (!str || str.length <= MAX_LENGTH) {
+    const maxLength = firstCharCount + endCharCount + dotCount
+    if (!str || str.length <= maxLength) {
         return str
     }
     let convertedStr = ''
