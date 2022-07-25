@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
     import { createEventDispatcher } from 'svelte'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let value = undefined
     export let group = undefined
@@ -27,7 +28,7 @@
     <div
         class={`mr-3 svg-container rounded-full border border-solid border-gray-300 ${value === group ? 'active' : ''}`}
     >
-        <Icon icon={value === group ? 'radio' : 'radio-unchecked'} />
+        <Icon icon={value === group ? IconEnum.Radio : IconEnum.RadioUnchecked} />
     </div>
     {label}
 </label>
