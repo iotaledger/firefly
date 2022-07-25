@@ -44,8 +44,12 @@
                 </Text>
             </div>
             {#if showTooltip}
-                <Tooltip anchor={tooltipAnchor} position="right" classes="max-h-40 overflow-y-scroll pr-0">
-                    <Text color={textColor} darkColor={darkTextColor} classes="text-left break-words">{valueText}</Text>
+                <Tooltip anchor={tooltipAnchor} position="top">
+                    <div class="max-h-40 overflow-y-scroll pr-0">
+                        <Text color={textColor} darkColor={darkTextColor} classes="text-left break-words"
+                            >{valueText}</Text
+                        >
+                    </div>
                 </Tooltip>
             {/if}
         {:else}
