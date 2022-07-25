@@ -15,14 +15,16 @@
     let tooltipAnchor: HTMLElement
     let textContainerWidth: number
 
-    function toggleTooltip(): void {
-        if ((tooltipAnchor?.firstChild as HTMLElement)?.scrollWidth > textContainerWidth) {
-            showTooltip = !showTooltip
+    $: isValueTextTruncated = (tooltipAnchor?.firstChild as HTMLElement)?.scrollWidth > textContainerWidth
+
+    function toggleTooltip(show: boolean): void {
+        if (isValueTextTruncated) {
+            showTooltip = show
         }
     }
 </script>
 
-<div on:mouseleave={toggleTooltip}>
+<div on:mouseleave={() => toggleTooltip(false)}>
     <Box row clearPadding {backgroundColor} {darkBackgroundColor} classes="justify-between {padding} {classes}">
         {#if keyText}
             <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor} classes="mr-4">
@@ -33,8 +35,8 @@
         {/if}
         {#if valueText}
             <div
-                on:focus={toggleTooltip}
-                on:mouseover={toggleTooltip}
+                on:focus={() => toggleTooltip(true)}
+                on:mouseover={() => toggleTooltip(true)}
                 class="truncate"
                 bind:this={tooltipAnchor}
                 bind:clientWidth={textContainerWidth}
