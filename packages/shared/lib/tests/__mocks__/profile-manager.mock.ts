@@ -1,3 +1,5 @@
+import { AccountMock } from './account.mock'
+
 import type {
     AccountId,
     CreateAccountPayload,
@@ -7,11 +9,10 @@ import type {
     WalletEvent,
     LedgerStatus,
 } from '@iota/wallet'
-import { IAccount } from '../../core/account'
-import { AccountMock } from './account.mock'
-import { IProfileManager } from '../../core/profile-manager'
-import { IAuth } from '../../core/network'
-import { INodeInfoResponse } from '../../core/network/interfaces/node-info-response.interface'
+
+import { IAccount } from '@core/account'
+import { IAuth, INodeInfoResponse } from '@core/network'
+import { IProfileManager } from '@core/profile-manager'
 
 export const MOCK_MNEMONIC =
     'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
