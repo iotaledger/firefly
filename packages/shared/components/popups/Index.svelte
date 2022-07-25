@@ -50,6 +50,7 @@
     import ManageAccountPopup from './ManageAccountPopup.svelte'
     import TokenInformationPopup from './TokenInformationPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
+    import FaucetRequestPopup from './FaucetRequestPopup.svelte'
 
     export let locale: Locale
 
@@ -139,6 +140,7 @@
         manageAccount: ManageAccountPopup,
         tokenInformation: TokenInformationPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,
+        faucetRequest: FaucetRequestPopup,
     }
 
     const onKey = (e) => {

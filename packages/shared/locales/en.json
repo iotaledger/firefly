@@ -936,10 +936,14 @@
                 "logo": "Logo"
             },
             "buttons": {
-                "mint": "Mint",
-                "cancel": "Mint"
+                "mint": "Mint"
             }
+        },
+        "faucetRequest": {
+            "title": "Faucet request",
+            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
+        
     },
     "charts": {
         "incomingMi": "Incoming {value}",
@@ -1089,7 +1093,8 @@
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
-        "mintNativeTokens": "Mint native tokens"
+        "mintNativeToken": "Mint token",
+        "faucetRequest": "Get {token} tokens"
     },
     "general": {
         "recipient": "Recipient",
@@ -1253,7 +1258,10 @@
         "nodeList": "Node list",
         "claimingTransactionId": "Claimed in",
         "assets": "Assets",
-        "nativeTokens": "Native tokens"
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30",
+        "faucetRequestDescription": "Request tokens from the {network} faucet"
+
     },
     "dates": {
         "today": "Today",
