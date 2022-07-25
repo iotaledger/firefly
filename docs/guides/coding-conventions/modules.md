@@ -2,21 +2,22 @@
 icon: stack
 ---
 
-# TypeScript Library
+# Modules
 
 ## Organization
 
 Modules are the heart of our TypeScript library; they house the various types of code components we use, namely:
 
-- `api` - wallet-rs wrapper and bridge functions
-- `constants` - global, never-changing values
-- `enums` - enum definitions
-- `interfaces` - module API declarations
+- `actions` - higher-level functions that deal with state in some way
+- `api` - wrapper functions for `wallet.rs` NodeJS bindings
+- `constants` - values that are defined at compile time
+- `enums` - variants of a type grouped together
+- `helpers` - helper functions to be used inside of a module (opposite of `utils`); they **MUST NOT** be exported in the module's root barrel file
+- `interfaces` - object type definitions
 - `stores` - Svelte store objects
 - `tests` - module unit tests
-- `types` - type definitions
-- various smaller business-logic files and API or bridge files
-- barrel files
+- `types` - non-object type definitions
+- `utils` - utility functions to be used outside of a module (opposite of `helpers`)
 
 The following is a typical module structure:
 
@@ -240,19 +241,17 @@ async function getNodeInfo(
 
 ## Interfaces
 
-Interfaces are objects that declare a collection of related functions.
+Interfaces are definitions of a complex object-based type. It may contain fields, functions, or both of these.
 
-For example, we can define an `IStrongholdApi` type that declares the API we will use to interact with Stronghold.
+For example, we can define a `INode` interface that describes the properties of a node.
 
 ```typescript
-interface IStrongholdApi {
-    lock(): Promise<void>
-        
-    setPassword(password: string): Promise<void>
-    changePassword(oldPassword: string, newPassword: string): Promise<void>
-        
-    backupTo(path: string, password: string): Promise<void>
-    restoreFrom(path: string, password: string): Promise<void>
+interface INode {
+    url: string
+    auth?: NodeAuth
+    network?: Network
+    isPrimary?: boolean
+    isDisabled?: boolean
 }
 ```
 
@@ -303,16 +302,10 @@ describe('File: ...', () => {
 
 ## Types
 
-Types are definitions of how some piece of data should be shaped, what is inside of it, etc.
+Types are definitions of non-object data types, e.g. `boolean`, `number`, and `string`.
 
 ```typescript
-type Node {
-    url: string  
-    auth?: NodeAuth  
-    network?: Network  
-    isPrimary?: boolean  
-    isDisabled?: boolean
-}
+type NftMetadataValue = boolean | number | string
 ```
 
-It is good practice to explicitly define types for data even if it is simply a `number` or `string`, particularly if it is something within our domain. The largest benefit is that if the type were to change at a later point it would be much easier to implement as we would only need to change the defintion rather than all the places where it's used.
+:information_source: It is good practice to explicitly define types for data even if it is simply a `number` or `string`. The largest benefit is that if the type were to change at a later point it would be much easier to implement as we would only need to change the defintion rather than all the places where it's used.

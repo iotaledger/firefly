@@ -35,7 +35,7 @@ export async function checkStronghold(
             }
         }
     } catch (err) {
-        new BaseError({ message: err.error ?? err.message, logError: true })
+        new BaseError({ message: err.error ?? err.message, logToConsole: true })
     }
 }
 

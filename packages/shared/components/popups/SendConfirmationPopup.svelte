@@ -43,8 +43,8 @@
     let outputOptions: OutputOptions
     let error: BaseError
 
-    $: asset = asset ?? $assets?.[0]
-    $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
+    $: asset = asset ?? $assets?.baseCoin
+    $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : Number(amount)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: internal = recipient.type === 'account'
 
@@ -69,7 +69,7 @@
     }
 
     async function _prepareOutput(): Promise<void> {
-        outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
+        outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag, asset)
         preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
             remainderValueStrategy: {
                 strategy: 'ReuseAddress',

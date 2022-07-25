@@ -15,10 +15,15 @@
 
     let amountInputElement
     let error
+    let previousAsset
 
     $: isFocused && (error = '')
-
-    $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
+    $: if (asset !== previousAsset) {
+        previousAsset = asset
+        amount = null
+        unit = null
+    }
+    $: rawAmount = generateRawAmount(amount, unit, asset?.metadata)
 
     let allowedDecimals = 0
     $: if (!asset?.metadata.useMetricPrefix) {
@@ -34,7 +39,13 @@
     function onClickAvailableBalance(): void {
         /* eslint-disable no-extra-semi */
         /* eslint-disable @typescript-eslint/no-extra-semi */
-        ;({ amount, unit } = parseRawAmount(asset?.balance?.available ?? 0, asset.metadata))
+        ;({ amount, unit } =
+            asset?.metadata?.decimals && asset?.metadata?.unit
+                ? parseRawAmount(asset?.balance.available ?? 0, asset?.metadata)
+                : {
+                      amount: asset?.balance.available.toString() ?? '0',
+                      unit: undefined,
+                  })
     }
 
     export function validate(allowZeroOrNull = false): Promise<void> {
@@ -44,7 +55,8 @@
         } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')
         } else if (
-            (unit === asset?.metadata.subunit || (unit === asset?.metadata.unit && asset?.metadata.decimals === 0)) &&
+            (unit === asset?.metadata?.subunit ||
+                (unit === asset?.metadata?.unit && asset?.metadata?.decimals === 0)) &&
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
@@ -92,7 +104,9 @@
             clearBorder
             {disabled}
         />
-        <UnitInput bind:unit bind:isFocused tokenMetadata={asset?.metadata} />
+        {#if asset?.metadata?.unit}
+            <UnitInput bind:unit bind:isFocused tokenMetadata={asset?.metadata} />
+        {/if}
     </div>
     <div class="flex flex-row w-full items-end justify-between">
         {#if asset}
