@@ -87,6 +87,7 @@
             bind:amount
             bind:hasFocus={isFocused}
             maxDecimals={allowedDecimals}
+            isInteger={allowedDecimals === 0}
             clearBackground
             clearPadding
             clearBorder
