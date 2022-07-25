@@ -2,48 +2,79 @@ import { IAsset } from '@core/wallet'
 import { get, writable, Writable } from 'svelte/store'
 import { IAssetState } from '../interfaces/assets-state.interface'
 
-export const assets: Writable<IAssetState> = writable({
-    baseCoin: undefined,
-    nativeTokens: [],
-})
+export const assets: Writable<IAssetState[]> = writable([])
 
-export function setBaseCoinAsset(baseCoin: IAsset): void {
-    assets.update((state) => ({
-        ...state,
-        baseCoin,
-    }))
+export function addBaseCoinAndNativeTokens(baseCoin: IAsset, nativeTokens: IAsset[], accountId: string): void {
+    assets.update((state) => {
+        state[accountId] = {
+            baseCoin,
+            nativeTokens,
+        }
+        return state
+    })
 }
 
-export function updateBaseCoinAsset(partialBaseCoin: Partial<IAsset>): void {
-    assets.update((state) => ({
-        ...state,
-        baseCoin: { ...state?.baseCoin, ...partialBaseCoin },
-    }))
+export function setBaseCoinAsset(baseCoin: IAsset, accountId: string): void {
+    assets.update((state) => {
+        state[accountId] = {
+            ...state[accountId],
+            baseCoin,
+        }
+        return state
+    })
 }
 
-export function addNativeTokenAsset(nativeToken: IAsset): void {
-    assets.update((state) => ({
-        ...state,
-        nativeTokens: [...state.nativeTokens, nativeToken],
-    }))
+export function updateBaseCoinAsset(partialBaseCoin: Partial<IAsset>, accountId: string): void {
+    assets.update((state) => {
+        state[accountId] = {
+            ...state[accountId],
+            baseCoin: { ...state[accountId]?.baseCoin, ...partialBaseCoin },
+        }
+        return state
+    })
 }
 
-export function updateNativeTokenAsset(partialNativeToken: Partial<IAsset>): void {
-    assets.update((state) => ({
-        ...state,
-        nativeTokens: state.nativeTokens.map((nativeToken) =>
+export function addNativeTokenAsset(nativeToken: IAsset, accountId: string): void {
+    assets.update((state) => {
+        const nativeTokens = state[accountId]?.nativeTokens ?? []
+        nativeTokens.push(nativeToken)
+
+        state[accountId] = {
+            ...state[accountId],
+            nativeTokens: [...nativeTokens],
+        }
+        return state
+    })
+}
+
+export function updateNativeTokenAsset(partialNativeToken: Partial<IAsset>, accountId: string): void {
+    assets.update((state) => {
+        const updatedTokens = state[accountId].nativeTokens.map((nativeToken) =>
             partialNativeToken.id === nativeToken?.id ? { ...partialNativeToken, ...nativeToken } : nativeToken
-        ),
-    }))
+        )
+
+        state[accountId] = {
+            ...state[accountId],
+            nativeTokens: updatedTokens,
+        }
+        return state
+    })
 }
 
-export function clearNativeTokenAssets(): void {
-    assets.update((state) => ({
-        ...state,
-        nativeTokens: [],
-    }))
+export function clearNativeTokenAssets(accountId: string): void {
+    assets.update((state) => {
+        state[accountId] = {
+            ...state[accountId],
+            nativeTokens: [],
+        }
+        return state
+    })
 }
 
-export function getNativeTokenAssetById(id: string): IAsset {
-    return get(assets).nativeTokens.find((asset) => asset.id === id)
+export function getNativeTokenAssetById(id: string, accountId: string): IAsset {
+    return get(assets)[accountId]?.nativeTokens?.find((asset) => asset.id === id)
+}
+
+export function getBaseCoin(accountId: string): IAsset {
+    return get(assets)[accountId]?.baseCoin
 }

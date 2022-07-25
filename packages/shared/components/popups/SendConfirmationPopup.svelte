@@ -19,7 +19,7 @@
         sendOutput,
         validateSendConfirmation,
         generateRawAmount,
-        assets,
+        selectedAssets,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
@@ -43,7 +43,7 @@
     let outputOptions: OutputOptions
     let error: BaseError
 
-    $: asset = asset ?? $assets?.baseCoin
+    $: asset = asset ?? $selectedAssets?.baseCoin
     $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : Number(amount)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: internal = recipient.type === 'account'

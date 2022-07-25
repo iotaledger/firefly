@@ -1,6 +1,7 @@
 import { IAccountState, loadAccount, setSelectedAccount } from '@core/account'
 import { getAccounts } from '@core/profile-manager'
 import { loadAccountActivities } from '@core/wallet'
+import { loadBaseCoinAndNativeTokens } from '@core/wallet/actions/loadBaseCoinAndNativeTokens'
 import { get } from 'svelte/store'
 import { activeAccounts, activeProfile } from '../../stores'
 
@@ -22,6 +23,7 @@ export async function loadAccounts(): Promise<void> {
             activeAccounts.set(loadedAccounts.sort((a, b) => a.meta.index - b.meta.index))
             setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
             for (const accountState of get(activeAccounts)) {
+                await loadBaseCoinAndNativeTokens(accountState.id)
                 await loadAccountActivities(accountState)
             }
             hasLoadedAccounts.set(true)

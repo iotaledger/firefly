@@ -15,7 +15,7 @@ import {
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity, IAsset } from '../interfaces'
-import { assets, getNativeTokenAssetById } from '../stores'
+import { getNativeTokenAssetById, getBaseCoin } from '../stores'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { Subject } from '../types'
 import {
@@ -87,7 +87,7 @@ export class Activity implements IActivity {
         this.isInternal = isSubjectInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
-        this.asset = getNativeTokenAssetById(nativeToken?.id) ?? get(assets)?.baseCoin
+        this.asset = getNativeTokenAssetById(nativeToken?.id, account.id) ?? getBaseCoin(account.id)
         this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
         this.storageDeposit = getStorageDepositFromOutput(output)
@@ -129,7 +129,7 @@ export class Activity implements IActivity {
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
-        this.asset = getNativeTokenAssetById(nativeToken?.id) ?? get(assets)?.baseCoin
+        this.asset = getNativeTokenAssetById(nativeToken?.id, account.id) ?? getBaseCoin(account.id)
 
         this.storageDeposit = getStorageDepositFromOutput(outputData.output)
         this.rawAmount = nativeToken
