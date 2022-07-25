@@ -2,6 +2,7 @@ import { Capacitor } from '@capacitor/core'
 
 import { App } from '@capacitor/app'
 import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
+import { Clipboard } from '@capacitor/clipboard'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { Share } from '@capacitor/share'
 import { BarcodeManager } from './lib/barcodeManager'
@@ -339,6 +340,25 @@ export const CapacitorApi: IPlatform = {
     showActionSheet: async (options: ActionSheetOptions) => {
         const result = await ActionSheet.showActions(options as ShowActionsOptions)
         return result.index
+    },
+
+    /**
+     * Copy to clipboard
+     * @param {string} Text to copy
+     */
+    copy: async (text: string) => {
+        await Clipboard.write({
+            string: text,
+        })
+    },
+
+    /**
+     * Paste from clipboard
+     * @returns {string} text from clipboard
+     */
+    paste: async () => {
+        const { value } = await Clipboard.read()
+        return value
     },
 }
 

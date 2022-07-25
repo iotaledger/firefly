@@ -65,4 +65,6 @@ export interface IPlatform {
     // Capacitor Interface
     share(text?: string): Promise<void>
     showActionSheet(options: ActionSheetOptions): Promise<number>
+    copy(text: string): Promise<void>
+    paste(): Promise<string>
 }

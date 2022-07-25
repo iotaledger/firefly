@@ -35,6 +35,7 @@
         "@capacitor-community/privacy-screen": "^2.1.1",
         "@capacitor/action-sheet": "^1.0.8",
         "@capacitor/app": "^1.1.1",
+        "@capacitor/clipboard": "^1.0.8",
         "@capacitor/share": "^1.1.2",
         "@capacitor/splash-screen": "^1.2.2",
         "capacitor-secure-filesystem-access": "./packages/mobile/capacitor/plugins/secure-filesystem-access/",
