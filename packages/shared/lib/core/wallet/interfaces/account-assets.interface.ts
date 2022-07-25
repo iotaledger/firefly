@@ -1,6 +1,6 @@
 import { IAsset } from './asset.interface'
 
-export interface IAssetState {
+export interface IAccountAssets{
     baseCoin: IAsset
     nativeTokens: IAsset[]
 }

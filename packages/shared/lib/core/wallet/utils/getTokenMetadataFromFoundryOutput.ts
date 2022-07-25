@@ -1,45 +1,69 @@
-import { ITokenMetadata } from '../interfaces'
+import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
 import { IFoundryOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
-import { assetMetadatas } from '../stores/asset-metadata.store'
+import { addPersistedAsset, getPersistedAsset, persistedAssets } from '../stores/persisted-assets.store'
 
-export async function getTokenMetadataFromFoundryOutput(tokenId: string): Promise<ITokenMetadata> {
-    const storedMetadata = get(assetMetadatas)[tokenId]
-    if (storedMetadata) {
-        return storedMetadata
+export function getAssetFromPersistedAssets(tokenId: string): IPersistedAsset {
+    const persistedAsset = getPersistedAsset(tokenId)
+    if (persistedAsset) {
+        return persistedAsset
+    } else {
+        return undefined
     }
+}
 
+export async function tryGetAndStoreAssetFromPersistedAssets(tokenId: string): Promise<IPersistedAsset> {
+    const persistedAsset = getPersistedAsset(tokenId)
+    if (persistedAsset) {
+        return persistedAsset
+    } else {
+        return requestAndStorePersistedAsset(tokenId)
+    }
+}
+
+export async function requestAndStorePersistedAsset(tokenId: string): Promise<IPersistedAsset> {
+    const tokenMetadata = await getTokenMetadataFromFoundryOutput(tokenId)
+    if(tokenMetadata) {
+        const persistedAsset: IPersistedAsset = buildPersistedAssetFromIrc30Metadata(tokenId, tokenMetadata)
+        addPersistedAsset(persistedAsset)
+        return persistedAsset
+    } else {
+        return undefined
+    }
+}
+
+async function getTokenMetadataFromFoundryOutput(tokenId: string): Promise<IIrc30Metadata> {
     const foundry = await get(selectedAccount).getFoundryOutput(tokenId)
     const data = getHexDataFromFoundryOutput(foundry)
     if (data) {
         const metadata = JSON.parse(Converter.hexToUtf8(data))
         const isValid = validateNativeTokenMetadata(metadata)
         if (isValid) {
-            assetMetadatas.update((state) => {
-                state[tokenId] = {
-                    name: metadata.name,
-                    tickerSymbol: metadata.symbol,
-                    unit: metadata.symbol,
-                    decimals: metadata.decimals,
-                    useMetricPrefix: false,
-                }
-                return state
-            })
-
-            return {
-                name: metadata.name,
-                tickerSymbol: metadata.symbol,
-                unit: metadata.symbol,
-                decimals: metadata.decimals,
-                useMetricPrefix: false,
-            }
+            return metadata
         } else {
             return undefined
         }
     } else {
         return undefined
+    }
+}
+
+function buildPersistedAssetFromIrc30Metadata(tokenId: string, metadata: IIrc30Metadata): IPersistedAsset {
+    return {
+        id: tokenId,
+        metadata: {
+            name: metadata.name,
+            unit: metadata.symbol,
+            decimals: metadata.decimals,
+            useMetricPrefix: false,
+            ...(metadata?.description && {description: metadata?.description}),
+            ...(metadata?.url && {description: metadata?.url}),
+            ...(metadata?.logoUrl && {description: metadata?.logoUrl}),
+            ...(metadata?.logo && {description: metadata?.logo}),
+        },
+        hidden: false
     }
 }
 
