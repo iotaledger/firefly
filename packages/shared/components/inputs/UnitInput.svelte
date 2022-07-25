@@ -2,7 +2,6 @@
     import { Dropdown2 } from 'shared/components'
     import { ITokenMetadata } from '@core/wallet'
     import { Unit } from '@lib/units'
-    import { Text } from 'shared/components'
 
     export let unit: string
     export let isFocused: boolean
@@ -38,19 +37,7 @@
     }
 </script>
 
-{#if items.length > 1}
-    <Dropdown2 bind:isFocused value={unit} {items} {onSelect} contentWidth small />
-{:else}
-    <div class="block relative small">
-        <div
-            class="selection relative flex flex-row space-x-0 pl-1 pb-1.5 items-end w-full whitespace-nowrap bg-white dark:bg-gray-800 pr-0 border-transparent"
-        >
-            <Text fontSize="16" fontWeight="semibold" classes="text-gray-800 dark:text-white" smaller>
-                {unit}
-            </Text>
-        </div>
-    </div>
-{/if}
+<Dropdown2 bind:isFocused value={unit} {items} {onSelect} contentWidth small />
 
 <style type="text/scss">
     .selection {

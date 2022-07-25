@@ -39,6 +39,9 @@
     }
 
     function toggleDropDown() {
+        if (items.length <= 1) {
+            return
+        }
         dropdown = !dropdown
         isFocused = !isFocused
         hasFocus = !hasFocus
@@ -133,9 +136,10 @@
     style={navWidth}
 >
     <div
-        class="selection relative flex flex-row space-x-0 pl-1 pb-1.5 items-end w-full whitespace-nowrap cursor-pointer
+        class="selection relative flex flex-row space-x-0 pl-1 pb-1.5 items-end w-full whitespace-nowrap
     bg-white dark:bg-gray-800 
             {hasFocus ? '-mr-1 pr-1' : 'pr-0'}
+            {items.length > 1 ? 'cursor-pointer' : ''}
             {dropdown
             ? 'border-blue-500'
             : showBorderWhenClosed
@@ -149,7 +153,14 @@
                 {search || value || placeholder}
             </Text>
         </div>
-        <Icon icon={'small-chevron-down'} width={16} height={16} classes="text-gray-500 dark:text-white fill-current" />
+        {#if items.length > 1}
+            <Icon
+                icon={'small-chevron-down'}
+                width={16}
+                height={16}
+                classes="text-gray-500 dark:text-white fill-current"
+            />
+        {/if}
     </div>
     {#if error}
         <Error {error} />
