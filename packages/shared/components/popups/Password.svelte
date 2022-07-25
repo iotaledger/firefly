@@ -62,6 +62,7 @@
         {locale}
         placeholder={locale('general.password')}
         autofocus={!$mobile}
+        copyPasteButton={$mobile}
     />
     <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>

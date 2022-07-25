@@ -1,6 +1,8 @@
 <script lang="typescript">
     import { Icon, Input, Text } from 'shared/components'
     import { Locale } from '@core/i18n'
+    import { Platform } from '@lib/platform'
+    import { showAppNotification } from 'shared/lib/notifications'
 
     export let locale: Locale
 
@@ -17,13 +19,27 @@
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
+    export let copyPasteButton = false
 
     let revealed = false
     let type = 'password'
 
+    $: showCopyPaste = copyPasteButton && (revealed || value.length === 0)
+
     const revealToggle = () => {
         type = type === 'password' ? 'text' : 'password'
         revealed = !revealed
+    }
+
+    const copyPaste = async () => {
+        if (value.length === 0) {
+            value = await Platform.paste()
+            return
+        }
+
+        await Platform.copy(value)
+        const notificationMessage = locale('notifications.copiedToClipboard')
+        showAppNotification({ type: 'info', message: notificationMessage })
     }
 
     const STRENGTH_COLORS = ['gray-300', 'orange-500', 'yellow-600', 'yellow-300', 'green-700']
@@ -45,7 +61,7 @@
             </div>
         </strength-meter>
     {/if}
-    <div class="flex  w-full relative">
+    <div class="flex w-full relative">
         <Input
             {error}
             {type}
@@ -61,12 +77,22 @@
             autocomplete="false"
             {locale}
             capsLockWarning={true}
+            style="padding-right: {showCopyPaste ? '100px' : '50px'}"
         />
-        {#if showRevealToggle === true && !disabled}
-            <button type="button" on:click={() => revealToggle()} tabindex="-1" class="absolute top-3 right-3">
-                <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
-            </button>
-        {/if}
+        <div class="flex absolute top-3 right-3 {showCopyPaste && 'w-1/4'} justify-end space-x-4">
+            {#if showCopyPaste}
+                <button type="button" on:click={() => copyPaste()} tabindex="-1">
+                    <Text overrideColor classes="text-blue-500"
+                        >{value.length > 0 ? locale('actions.copy') : locale('actions.paste')}</Text
+                    >
+                </button>
+            {/if}
+            {#if showRevealToggle === true && !disabled}
+                <button type="button" on:click={() => revealToggle()} tabindex="-1">
+                    <Icon icon={revealed ? 'view' : 'hide'} classes="text-blue-500" />
+                </button>
+            {/if}
+        </div>
     </div>
 </div>
 

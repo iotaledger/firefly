@@ -93,6 +93,7 @@
                 {locale}
                 autofocus={!$mobile}
                 disabled={busy}
+                copyPasteButton={$mobile}
             />
             <Password
                 error={errorConfirm}
@@ -102,6 +103,7 @@
                 placeholder={locale('general.confirmPassword')}
                 showRevealToggle
                 disabled={busy}
+                copyPasteButton={$mobile}
             />
         </form>
     </div>
