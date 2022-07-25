@@ -1,11 +1,26 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
+    import {
+        AdvancedSettings,
+        AdvancedSettingsNoProfile,
+        GeneralSettings,
+        GeneralSettingsNoProfile,
+        HelpAndInfo,
+        SecuritySettings,
+    } from '@core/router'
+    import { Icon as IconEnum, SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
+    import { Icon, Text } from 'shared/components'
+    import { TextType } from 'shared/components/Text.svelte'
 
-    export let settings
+    export let settings:
+        | AdvancedSettings
+        | AdvancedSettingsNoProfile
+        | GeneralSettings
+        | GeneralSettingsNoProfile
+        | HelpAndInfo
+        | SecuritySettings
     export let routes
     export let route
-    export let icons
 
     export let onSettingClick: (..._: any[]) => void
 
@@ -18,16 +33,19 @@
 <div class="flex flex-col w-1/3 h-full justify-start items-start">
     {#each routes as setting}
         <div class="flex flex-col items-start">
-            <button class="mb-1 pl-7 relative text-left" on:click={() => changeRoute(setting)}>
+            <button
+                class="mb-2 pl-7 relative text-left flex flex-row items-center"
+                on:click={() => changeRoute(setting)}
+            >
                 {#if route === setting}
                     <Icon
                         width="16"
                         height="16"
-                        icon="small-chevron-right"
-                        classes="text-blue-500 absolute left-1 top-0.4 text-xl"
+                        icon={IconEnum.SmallChevronRight}
+                        classes="text-blue-500 absolute left-1 text-xl"
                     />
                 {/if}
-                <Text type="p" classes="mb-1">{localize(`views.settings.${setting}.title`)}</Text>
+                <Text type={TextType.p}>{localize(`views.settings.${setting}.title`)}</Text>
             </button>
             {#if route === setting}
                 {#each Object.values(settings[route]) as setting, i}
@@ -39,8 +57,13 @@
                             1 ===
                             i && 'mb-4'}"
                     >
-                        <Icon icon={icons[setting]} classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500" />
-                        <Text type="p" classes="group-hover:text-blue-500">
+                        <Icon
+                            width="24"
+                            height="24"
+                            icon={SETTINGS_ICON_SVG[setting]}
+                            classes="text-gray-500 ml-1 mr-3 group-hover:text-blue-500"
+                        />
+                        <Text type={TextType.p} classes="group-hover:text-blue-500">
                             {localize(`views.settings.${setting}.title`)}
                         </Text>
                     </button>
