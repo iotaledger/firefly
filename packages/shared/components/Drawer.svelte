@@ -23,7 +23,7 @@
     export let opened = false
     export let fromLeft = false
     export let classes = ''
-    export let fullScreen = false
+    export let backgroundBlur = false
     export let preventClose = false
     export let zIndex = 'z-30'
 
@@ -72,8 +72,8 @@
                 y = event.touches[0].pageY
             }
 
-            node.addEventListener('touchmove', handleTouchmove)
-            node.addEventListener('touchend', handleTouchend)
+            node.addEventListener('touchmove', handleTouchmove, { capture: true, passive: true })
+            node.addEventListener('touchend', handleTouchend, { capture: true, passive: true })
         }
 
         function handleTouchmove(event: TouchEvent) {
@@ -108,15 +108,15 @@
                 node.dispatchEvent(new CustomEvent('tap'))
             }
 
-            node.removeEventListener('touchmove', handleTouchmove)
-            node.removeEventListener('touchend', handleTouchend)
+            node.removeEventListener('touchmove', handleTouchmove, { capture: true })
+            node.removeEventListener('touchend', handleTouchend, { capture: true })
         }
 
-        node.addEventListener('touchstart', handleTouchstart)
+        node.addEventListener('touchstart', handleTouchstart, { capture: true, passive: true })
 
         return {
             destroy() {
-                node.removeEventListener('touchstart', handleTouchstart)
+                node.removeEventListener('touchstart', handleTouchstart, { capture: true })
             },
         }
     }
@@ -208,9 +208,9 @@
 			--height: {fromLeft && '100vh'};
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-mark: {fromLeft ? 'none' : 'block'};
-            --top-mark: {fullScreen ? '20%' : '8px'};
-            --blur: {fullScreen ? '10px' : '0px'};
-            --tw-bg-opacity: {fullScreen ? 0.8 : 1};"
+            --top-mark: 8px;
+            --blur: {backgroundBlur ? '10px' : '0px'};
+            --tw-bg-opacity: {backgroundBlur ? 0.8 : 1};"
     >
         <slot />
     </content>

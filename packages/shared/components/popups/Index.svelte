@@ -45,6 +45,7 @@
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
+    import ConfirmCloseApp from './ConfirmCloseApp.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
     import { mobile } from 'shared/lib/app'
@@ -131,6 +132,7 @@
         newStakingPeriodNotification: NewStakingPeriodNotification,
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
+        confirmCloseApp: ConfirmCloseApp,
         legalUpdate: LegalUpdate,
         governanceManager: GovernanceManager,
         success: Success,
