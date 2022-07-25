@@ -92,8 +92,10 @@
 
 <div class="flex flex-col h-full justify-between">
     <div>
-        <div class="flex flex-row mb-6">
-            <Text type="h5">{localize('general.addAWallet')}</Text>
+        <div class="flex flex-row mb-6 {$mobile && 'w-full justify-center -mt-1'}">
+            <Text type={$mobile ? 'h4' : 'h5'}>
+                {localize('general.addAWallet')}
+            </Text>
         </div>
         <div class="w-full flex flex-col justify-between">
             <Input
