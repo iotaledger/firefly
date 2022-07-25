@@ -136,7 +136,7 @@ export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: numb
     const [integer, float] = (amount / 1_000_000).toFixed(decimalPlaces).split('.')
 
     let reward: string
-    const shouldModifyForGlowUnits = Number(integer) <= 0 && airdrop === StakingAirdrop.Shimmer
+    const shouldModifyForGlowUnits = Number(integer) <= 0 && Number(float) > 0 && airdrop === StakingAirdrop.Shimmer
     if (shouldModifyForGlowUnits) {
         reward = `${delineateNumber(float, thousandthSeparator)}` ?? '0'
         return `${reward} glow`
