@@ -1,7 +1,6 @@
 import { IAccountState, loadAccount, setSelectedAccount } from '@core/account'
 import { getAccounts } from '@core/profile-manager'
 import { loadAccountActivities } from '@core/wallet'
-import { loadBaseCoinAndNativeTokens } from '@core/wallet/actions/getAccountAssetsForSelectedAccount'
 import { refreshAccountAssetsForActiveProfile } from '@core/wallet/actions/refreshAccountAssetsForActiveProfile'
 import { get } from 'svelte/store'
 import { activeAccounts, activeProfile } from '../../stores'

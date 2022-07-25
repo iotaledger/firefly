@@ -15,8 +15,7 @@ import {
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity, IPersistedAsset } from '../interfaces'
-import { getBaseCoin } from '../stores'
-import { getPersistedAsset, persistedAssets } from '../stores/persisted-assets.store'
+import { getPersistedAsset } from '../stores/persisted-assets.store'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { Subject } from '../types'
 import {
@@ -131,7 +130,7 @@ export class Activity implements IActivity {
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
-        this.asset = nativeToken?.id ? get(persistedAssets)[nativeToken.id] : getBaseCoin(account.id).metadata
+        this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
 
         this.storageDeposit = getStorageDepositFromOutput(outputData.output)
         this.rawAmount = nativeToken

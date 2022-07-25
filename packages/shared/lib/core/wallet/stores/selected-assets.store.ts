@@ -1,9 +1,8 @@
 import { IAccountAssets } from '../interfaces/account-assets.interface'
 import { derived, Readable } from 'svelte/store'
-import { selectedAccount } from '../../account/stores/selected-account.store'
 import { persistedAssets } from './persisted-assets.store'
-import { activeProfile, activeProfileId } from '@core/profile'
-import { selectedAccountId } from '@core/account'
+import { activeProfileId } from '@core/profile'
+import { selectedAccountId } from '@core/account/stores/selected-account-id.store'
 import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
 
 export const selectedAccountAssets: Readable<IAccountAssets> = derived(

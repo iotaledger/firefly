@@ -3,7 +3,7 @@ import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
 import { IFoundryOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
-import { addPersistedAsset, getPersistedAsset, persistedAssets } from '../stores/persisted-assets.store'
+import { addPersistedAsset, getPersistedAsset } from '../stores/persisted-assets.store'
 
 export function getAssetFromPersistedAssets(tokenId: string): IPersistedAsset {
     const persistedAsset = getPersistedAsset(tokenId)
@@ -25,7 +25,7 @@ export async function tryGetAndStoreAssetFromPersistedAssets(tokenId: string): P
 
 export async function requestAndStorePersistedAsset(tokenId: string): Promise<IPersistedAsset> {
     const tokenMetadata = await getTokenMetadataFromFoundryOutput(tokenId)
-    if(tokenMetadata) {
+    if (tokenMetadata) {
         const persistedAsset: IPersistedAsset = buildPersistedAssetFromIrc30Metadata(tokenId, tokenMetadata)
         addPersistedAsset(persistedAsset)
         return persistedAsset
@@ -58,12 +58,12 @@ function buildPersistedAssetFromIrc30Metadata(tokenId: string, metadata: IIrc30M
             unit: metadata.symbol,
             decimals: metadata.decimals,
             useMetricPrefix: false,
-            ...(metadata?.description && {description: metadata?.description}),
-            ...(metadata?.url && {description: metadata?.url}),
-            ...(metadata?.logoUrl && {description: metadata?.logoUrl}),
-            ...(metadata?.logo && {description: metadata?.logo}),
+            ...(metadata?.description && { description: metadata?.description }),
+            ...(metadata?.url && { description: metadata?.url }),
+            ...(metadata?.logoUrl && { description: metadata?.logoUrl }),
+            ...(metadata?.logo && { description: metadata?.logo }),
         },
-        hidden: false
+        hidden: false,
     }
 }
 

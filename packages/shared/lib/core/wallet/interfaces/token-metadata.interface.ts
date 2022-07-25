@@ -3,6 +3,7 @@ export interface ITokenMetadata {
     unit: string
     decimals: number
     subunit?: string | null
+    tickerSymbol?: string
     useMetricPrefix?: boolean
     url?: string
     logo?: string
