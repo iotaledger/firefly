@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Надсилайте, отримуйте і керуйте IOTA токенами",
+            "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Firefly - офіційний гаманець IOTA."
         },
         "legal": {
@@ -10,16 +10,16 @@
             "checkbox": "Я прочитав і приймаю Політику конфіденційності та Умови надання послуг"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "Звіти про помилки",
+            "body": "Допоможіть розробникам покращити Firefly, автоматично відправляючи діагностичні дані під час помилки або аварійне завершення роботи.",
+            "checkbox": "Надсилайте звіти про аварійне завершення роботи до IOTA Foundation"
         },
-        "appearance": {
-            "title": "Зовнішній вигляд",
-            "body": "Оберіть тему"
+        "languageAndAppearance": {
+            "title": "Language & appearance",
+            "body": "Choose your language and theme"
         },
         "profile": {
-            "title": "Створити профіль",
+            "title": "Create your {protocol} profile",
             "profileName": "Ім'я профілю",
             "body1": "Ви можете створити декілька профілів користувачів для організації ваших гаманців та покращення конфіденційності.",
             "body2": {
@@ -27,14 +27,14 @@
                 "nonFirst": "Почніть з назви вашого профілю."
             },
             "addMore": "Ви можете додати більше профілів пізніше.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Розширені опції",
             "developer": {
                 "label": "Профіль розробника",
-                "info": "Connect to the devnet or a private network"
+                "info": "Приєднатися до devnet або приватної мережі"
             }
         },
         "setup": {
-            "title": "Налаштування гаманця",
+            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
             "chrysalisTitle": "Оновлення мережі Chrysalis",
             "chrysalisBody": "З 21 квітня 2021 року користувачі можуть перенести свої токени в нову мережу Chrysalis. Ми рекомендуємо якнайшвидше перенести наявні токени.",
             "learnMore": "Дізнатися про міграцію"
@@ -48,13 +48,55 @@
             "title": "Створити гаманець",
             "body": "Створіть новий гаманець. Ви можете вибрати звичайний програмний гаманець або, якщо у вас є пристрій Ledger, ви можете налаштувати апаратний гаманець.",
             "softwareAccount": {
-                "title": "Я хочу програмний гаманець",
-                "description": "Створіть фразу для відновлення з 24 слів"
+                "title": "Create a software wallet",
+                "description": "Provides a Stronghold file and recovery phrase"
             },
             "ledgerAccount": {
-                "title": "Я хочу апаратний гаманець",
+                "title": "Create a hardware wallet",
                 "description": "Потрібно Ledger Nano S або Nano X"
             }
+        },
+        "protocol": {
+            "title": "Choose protocol",
+            "body": "Set the protocol for your profile",
+            "iota": "IOTA Mainnet",
+            "shimmer": "Staging network for IOTA Mainnet"
+        },
+        "network": {
+            "title": "Choose network",
+            "body": "Set the network for your profile",
+            "iota": {
+                "mainnet": {
+                    "title": "Mainnet",
+                    "body": "IOTA Mainnet"
+                },
+                "devnet": {
+                    "title": "Devnet",
+                    "body": "Developer network for IOTA"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with active TIPS"
+                }
+            },
+            "shimmer": {
+                "mainnet": {
+                    "title": "Shimmer",
+                    "body": "Staging network for IOTA"
+                },
+                "devnet": {
+                    "title": "Shimmer Beta",
+                    "body": "Beta network for Shimmer"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with draft TIPS"
+                }
+            }
+        },
+        "customNetwork": {
+            "title": "Connect to a custom network",
+            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "Підключіть свій Ledger",
@@ -80,15 +122,10 @@
             "body1": "Налаштуйте PIN-код входу, щоб тільки ви могли використовувати свій профіль.",
             "body2": "Бережіть свій PIN-код!"
         },
-        "pin": {
-            "title": "Встановіть PIN-код",
-            "body1": "Введіть 6-значний PIN-код нижче. Вам буде запропоновано ввести PIN-код для доступу до вашого профілю.",
-            "body2": "Використовуйте лише цифри"
-        },
-        "confirmPin": {
-            "title": "Підтвердіть свій PIN-код",
-            "body1": "Ваш PIN-код забезпечує збереження балансу та трансакцій, приватними.",
-            "body2": "Повторно введіть свій PIN-код, щоб продовжити. "
+        "setupPin": {
+            "title": "Set up PIN code",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "backup": {
             "title": "Створити резервну копію вашого гаманця",
@@ -123,6 +160,10 @@
             "title": "Резервне копіювання успішно виконано",
             "body": "Ви створили резервну копію своїх гаманців для Stronghold."
         },
+        "claimRewards": {
+            "title": "Your Shimmer staking rewards",
+            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+        },
         "congratulations": {
             "title": "Налаштування гаманця завершено",
             "fundsMigrated": "Кошти мігрували",
@@ -133,16 +174,31 @@
             "exportMigration": "Експортуйте журнал міграції та завершіть налаштування"
         },
         "import": {
-            "title": "Відновити або перенести кошти",
-            "body": "Якщо у вас є файл резервної копії \"seed\" або \"wallet back up file\", ви можете імпортувати його сюди. Якщо у вас є кошти які потрібно перенести, ви пройдете кроки міграції, до мережі Chrysalis.",
+            "title": {
+                "iota": "Recover or migrate IOTA funds",
+                "shimmer": "Recover Shimmer profile"
+            },
+            "body": {
+                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
+            },
             "importSeed": "Так я маю 81 символ \"seed\"",
             "importSeedDescription": "Введіть \"seed\" та перенесіть кошти до \"Chrysalis\"",
-            "importMnemonic": "У мене є фраза для відновлення Firefly",
-            "importMnemonicDescription": "Введіть фразу для відновлення, щоб відновити гаманці",
-            "importFile": "Я маю файл \"backup\"",
-            "importFileDescription": "Завантажте файл \"Seedvault\" або \"Stronghold\"",
-            "importLedger": "У мене є резервна копія Ledger",
-            "importLedgerDescription": "Відновлення або перенесення профілю Ledger"
+            "importMnemonic": "Use recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase",
+            "importFile": {
+                "iota": "Use backup file",
+                "shimmer": "Use Stronghold backup file"
+            },
+            "importFileDescription": {
+                "iota": "Upload a Seedvault or Stronghold file",
+                "shimmer": "Upload Stronghold file"
+            },
+            "importLedger": "Use Ledger hardware device",
+            "importLedgerDescription": {
+                "iota": "Restore or migrate a Ledger profile",
+                "shimmer": "Restore using Nano S or Nano X devices"
+            }
         },
         "importFromText": {
             "seed": {
@@ -190,7 +246,7 @@
             "readMore": "Чого очікувати від процесу міграції"
         },
         "generateNewLedgerAddress": {
-            "title": "Згенерувати нову адресу",
+            "title": "Generate new address",
             "body": "Вам потрібно створити нову адресу, щоб перенести свої жетони за допомогою Firefly. Натисніть кнопку нижче, щоб продовжити.",
             "confirmTitle": "Підтвердіть нову адресу",
             "confirmBody": "З міркувань безпеки, будь ласка, порівняйте адресу, створену на вашому пристрої Ledger з адресою, показаною нижче. Якщо вони збігаються, натисніть обидві кнопки на Ledger, як буде запропоновано.",
@@ -227,7 +283,7 @@
             "body2": "Це може зайняти деякий час. Не вимикайте пристрій під час міграції.",
             "existing": "Ваш старий гаманець",
             "new": "Ваш новий гаманець",
-            "learn": "Дізнатися про міграцію",
+            "learn": "Learn about the migration",
             "beginMigration": "Почати міграцію",
             "migrating": "Перенесення коштів...",
             "migrated": "{balance} переміщено",
@@ -268,7 +324,7 @@
         },
         "securingSpentAddresses": {
             "title": "Захищаємо витрачені адреси...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "Цей процес займе {minutes, plural, one {# minute} other {# minutes}}.",
             "body2": "Ваш комп'ютер буде працювати з повною потужністю, ви можете робити щось інше, поки ви чекаєте завершення."
         },
         "transferFragmentedFunds": {
@@ -276,7 +332,7 @@
             "body2": "Переконайтеся, що ваша книга під’єднана, а додаток {legacy} завжди відкритий під час міграції.",
             "migrate": "Міграція засобів",
             "transaction": "Транзакція {number}",
-            "rerun": "Повторити"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -291,17 +347,17 @@
         },
         "settings": {
             "settings": "Налаштування",
-            "generalSettings": {
+            "general": {
                 "title": "General",
-                "description": "Оберіть зовнішній вигляд та інші загальні налаштування"
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "Безпека",
                 "description": "Зміни пароль і налаштування параметри безпеки"
             },
-            "advancedSettings": {
+            "advanced": {
                 "title": "Advanced",
-                "description": "Інструменти і налаштування для технічних користувачів"
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Допомога та інформація",
@@ -318,7 +374,7 @@
             "theme": {
                 "title": "Тема",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Якщо ви зміните тему, вам може знадобитися перезапустити Firefly"
             },
             "language": {
                 "title": "Мова",
@@ -357,13 +413,13 @@
                 "action": "Змінити PIN-код"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "Змінити назву профілю",
+                "description": "Змінити назву профілю Firefly",
+                "success": "Ви змінили назву профілю"
             },
-            "balanceFinder": {
-                "title": "Шукач балансу",
-                "description": "Виконайте розширений пошук токенів у своїх адресах"
+            "walletFinder": {
+                "title": "Wallet finder",
+                "description": "Perform an extended search of your previously used wallets"
             },
             "hiddenAccounts": {
                 "title": "Приховані гаманці",
@@ -374,8 +430,8 @@
                 "description": "Видаляє весь ваш профіль, гаманці та історію транзакцій. Переконайтеся, що у вас є резервна копія"
             },
             "deepLinks": {
-                "title": "IOTA посилання",
-                "description": "Автоматично заповнювати дані транзакції у Firefly при кліку на IOTA посилання"
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkConfiguration": {
                 "title": "Налаштування мережі",
@@ -417,10 +473,10 @@
                 "description": "Переглянути помилки для налагодження проблеми"
             },
             "crashReporting": {
-                "title": "Crash reports",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
-                "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
+                "title": "Звіти про збої",
+                "body": "Допоможіть розробникам покращити Firefly, автоматично надсилаючи діагностичні дані, коли виникає помилка чи збій",
+                "checkbox": "Надсилати звіти про збої",
+                "advice": "Перезапустіть програму Firefly, щоб {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
             },
             "diagnostics": {
                 "title": "Діагностика",
@@ -451,6 +507,14 @@
                 "title": "Про програму",
                 "description": ""
             },
+            "createDeveloperProfile": {
+                "title": "Create Developer Profile",
+                "description": ""
+            },
+            "createNormalProfile": {
+                "title": "Create Normal Profile",
+                "description": ""
+            },
             "reportAnIssue": {
                 "title": "Повідомити про помилку",
                 "description": "Повідомте розробникам про помилку. Перевірте, чи це ще не повідомлялося"
@@ -462,15 +526,16 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "operational": "Network operational",
+                "degraded": "Network degraded",
+                "down": "Network down",
+                "disconnected": "Disconnected from node",
                 "status": "Статус",
                 "messagesPerSecond": "Повідомлень в секунду",
                 "referencedRate": "Referenced rate"
             },
             "profileModal": {
-                "allSettings": "Всі налаштування",
+                "allSettings": "All settings",
                 "logout": "Вийти",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +556,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "Дата останньої резервної копії: {date}",
-                    "notBackedUp": "Резервна копія не створена",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -541,7 +606,7 @@
                 "totalWalletRewards": "Total wallet rewards",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly це багатоланцюгова мережа, відкрита для всіх та має високу масштабованість, для створення та розгортання смарт-контрактів, які можна компонувати. Асамблея - це майбутнє web3. "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -561,9 +626,17 @@
         }
     },
     "popups": {
+        "storageDepositBreakdown": {
+            "title": "Storage deposit breakdown",
+            "totalStorageDeposit": "Total storage deposit",
+            "pendingTransactions": {
+                "title": "Locked in pending transactions",
+                "subtitle": "For sending native assets and small IOTA amounts"
+            }
+        },
         "password": {
             "title": "Необхідний пароль",
-            "subtitle": "Будь ласка, введіть свій пароль, щоб розблокувати гаманці",
+            "subtitle": "Please provide your password to unlock your wallets",
             "backup": "Будь ласка, введи свій пароль для експорту резервної копії"
         },
         "qr": {
@@ -578,14 +651,9 @@
             "noAutoUpdate": "У цій версії Windows автоматичне оновлення вимкнено. Перейдіть на сторінку https://firefly.iota.org, щоб завантажити оновлення.",
             "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
-        "backup": {
-            "title": "Остання резервна копія: {date}",
-            "lastBackup": "Дата останньої резервної копії: {date}",
-            "backupDescription": "Важливо регулярно створювати резервні копії, щоб у вас була копія ваших гаманців та історії транзакцій.",
-            "backupWarning": "Якщо ти втратиш свою резервну копію і фразу відновлення, ти втратиш доступ до своїх коштів.",
-            "notBackedUp": "Резервна копія не створена",
-            "notBackedUpDescription": "Ви не зберегли свої гаманці",
-            "saving": "Збереження..."
+        "backupStronghold": {
+            "title": "Backup your stronghold file",
+            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deleteAccount": {
             "title": "Видалити {name}?",
@@ -598,7 +666,7 @@
         "hideAccount": {
             "title": "Приховати {name}?",
             "body": "Ви можете знайти цей гаманець пізніше, увімкнувши \"Показати приховані гаманці\" в Додаткових налаштуваннях.",
-            "typePassword": "Введіть пароль для підтвердження.",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Сховати гаманець",
             "errorTitle": "Не вдалося приховати {name}",
             "errorBody1": "Щоб приховати гаманець він повинен мати 0 баланс.",
@@ -617,7 +685,7 @@
             "titleRemove": "Видалити вузол",
             "titleRemoveAll": "Видалити всі вузли",
             "titleDetails": "Деталі вузла",
-            "titleInfo": "Інформація про вузол",
+            "titleInfo": "Node information",
             "addingNode": "Додати вузол",
             "updatingNode": "Оновлення вузла",
             "loadingNodeInfo": "Завантаження інформації про вузол",
@@ -629,15 +697,41 @@
             "removeConfirmation": "Ти впевнений, що хочете видалити цей вузол?",
             "removeAllConfirmation": "Ви дійсно бажаєте видалити всі вузли?",
             "info": {
-                "url": "URL",
-                "software": "Програмне забезпечення",
-                "networkId": "Ідентифікатор мережі Network ID",
-                "bech32HRP": "Bech32 HRP",
-                "features": "Особливості",
-                "confirmedMilestoneIndex": "Підтверджений етап індексу",
-                "pruningIndex": "Спрощення індексу",
-                "messagesPerSecond": "Повідомлень в секунду",
-                "referencedRate": "Referenced rate"
+                "general": {
+                    "tab": "General",
+                    "name": "Name",
+                    "url": "URL",
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index",
+                    "features": "Features"
+                },
+                "metrics": {
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
+                },
+                "protocol": {
+                    "tab": "Protocol",
+                    "network": "Network",
+                    "bech32HRP": "Bech32 HRP",
+                    "tokenSupply": "Token supply",
+                    "protocolVersion": "Version",
+                    "minPoWScore": "Min PoW Score"
+                },
+                "baseToken": {
+                    "tab": "Base token",
+                    "token": "Token",
+                    "tickerSymbol": "Ticker",
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
+                }
             }
         },
         "switchNetwork": {
@@ -652,12 +746,12 @@
             "empty": "Журнал помилок порожній."
         },
         "deleteProfile": {
-            "title": "Видалити профіль",
+            "title": "Delete profile",
             "confirmation": "Ти впевнений, що хочеш видалити цей профіль? Ця операція не може бути скасована.",
             "typePassword": "Введи свій пароль для підтвердження."
         },
         "diagnostics": {
-            "title": "Діагностика",
+            "title": "Diagnostics",
             "node": "Вузол",
             "platform": "Платформа",
             "platformVersion": "Версія платформи",
@@ -673,15 +767,13 @@
             "sendingFromStakedAccount": "Ви надсилаєте переказ з гаманця, який знаходеться в стейкінгу. Ваша ставка зупинеться. Ви можете надсилати переказ, але потім, можливо, знадобиться поставити свої токени знову.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
-        "balanceFinder": {
-            "title": "Шукач балансу",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+        "walletFinder": {
+            "title": "Wallet finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
             "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
             "accountsFound": "Wallets found",
-            "totalWalletBalance": "Загальний баланс",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
-            "typePassword": "Введіть пароль, щоб дозволити пошук."
+            "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
         },
         "riskFunds": {
             "title": "Попередження: кошти, що знаходяться під загрозою під час міграції",
@@ -689,7 +781,7 @@
             "body2": "Рекомендується перезапустити процес для адрес із середнім рівнем ризику або вище."
         },
         "missingBundle": {
-            "title": "Попередження: кошти, що знаходяться під загрозою під час міграції",
+            "title": "Warning: funds at risk during migration",
             "body": "У вас є кошти на витрачених адресах, але інформація, необхідна для їх збереження, не знайдено. Це може статися, якщо ти виконував транзакції давно. Ти можеш продовжити, але {value} знаходяться під загрозою під час міграції.",
             "learnMore": "Дізнайся більше про витрачені адреси",
             "proceed": "Я розумію ризик"
@@ -718,7 +810,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Поради, якщо Ledger не підключається",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Переконайтеся, що Ledger Live не відкритий на вашому комп'ютері",
                 "1": "Переконайтеся, що ви розблокували свій пристрій Ledger за допомогою PIN -коду",
@@ -735,7 +827,7 @@
                 "info": "Переконайтеся, що адреса залишку, відображена у Ledger, відповідає адресі, відображеній нижче. Якщо вони збігаються, натисніть обидві кнопки на Ledger, як буде запропоновано."
             },
             "transaction": {
-                "title": "Підтвердити транзакцію",
+                "title": "Confirm transaction",
                 "info": "Підтвердіть, що інформація про транзакцію, яка відображається на вашому пристрої Ledger збігається з інформацією, яка відображається нижче. Якщо вони співпадають, натисніть обидві кнопки на Ledger як під час запиту."
             }
         },
@@ -808,6 +900,12 @@
             "title": "The way you use Firefly has changed",
             "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+        },
+        "transactionDetails": {
+            "title": "Transaction details"
+        },
+        "sendForm": {
+            "title": "Send funds"
         }
     },
     "charts": {
@@ -831,18 +929,36 @@
         "cancel": "Скасувати",
         "close": "Закрити",
         "dismiss": "Відхилити",
+        "claim": "Claim",
+        "claiming": "Claiming",
+        "reject": "Reject",
+        "confirmRejection": {
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        },
         "proceedAnyway": "Все одно продовжити",
         "save": "Зберегти",
         "importSeed": "Імпортувати існуючий seed",
-        "restoreWallet": "Міграція або відновлення гаманця",
-        "restoreWalletDescription": "Міграція в Chrysalis або відновлення існуючого гаманця",
-        "createWallet": "Створити новий гаманець",
-        "createWalletDescription": "Створити новий гаманець на Chrysalis",
+        "restoreWallet": {
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile"
+        },
+        "restoreWalletDescription": {
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile"
+        },
+        "createWallet": "Create a new {protocol} profile",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "claimShimmer": "Claim Shimmer staking rewards",
+        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "Зберегти пароль",
         "useBiometric": "Використовувати біометричний захист",
-        "setupPin": "Встановіть PIN-код",
-        "setPin": "Встановіть PIN-код",
-        "confirmPin": "Підтвердьте PIN-код",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "Введіть Ваш PIN-код",
         "saveBackupFile": "Збережіть файл резервної копії",
         "iveWrittenRecoveryPhrase": "Я записав свою фразу для відновлення",
@@ -868,22 +984,21 @@
         "enableDeepLinks": "Активувати IOTA посилання",
         "enableDeveloperMode": "Активувати режим розробника",
         "enableSystemNotifications": "Увімкнути систему сповіщень",
-        "exportTransactionHistory": "Експорт історії операцій",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Локальне доказ виконання роботи",
         "unlock": "Розблокувати",
         "updateFirefly": "Оновити Firefly",
         "restartNow": "Перезавантажити зараз",
         "saveBackup": "Зберегти резервну копію Stronghold",
         "customizeAcount": "Налаштувати гаманець",
-        "viewAddressHistory": "Перегляд історії адрес",
-        "hideAccount": "Сховати гаманець",
+        "hideAccount": "Hide wallet",
         "showAccount": "Сховати гаманець",
-        "deleteAccount": "Видалити гаманець",
+        "deleteAccount": "Delete wallet",
         "max": "Максимум",
         "addNode": "Додати вузол",
         "updateNode": "Оновити вузол",
         "removeNode": "Видалити вузол",
-        "removeAllNodes": "Видалити всі вузли",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Приховати",
         "hideOthers": "Приховати інші",
         "showAll": "Показати все",
@@ -893,6 +1008,7 @@
         "redo": "Повторити",
         "cut": "Вирізати",
         "copy": "Копіювати",
+        "copyAllInformation": "Copy all information",
         "paste": "Вставити",
         "selectAll": "Обрати все",
         "addAccount": "Додати гаманець",
@@ -911,15 +1027,17 @@
         "readDocumentation": "Читати документацію",
         "visitFaq": "Відвідати FAQ",
         "viewStatus": "Перегляд статусу",
+        "viewStorageDeposit": "View storage deposit",
         "showHiddenAccounts": "Показати приховані гаманці",
         "confirm": "Підтвердити",
         "hideNetworkStatistics": "Приховати статистику мережі",
-        "findBalances": "Знайти баланси",
-        "searchBalances": "Пошук балансів",
+        "findWallets": "Find wallets",
+        "useBalanceFinder": "Use balance finder",
+        "search": "Search",
         "searchAgain": "Шукати знову",
-        "searching": "Пошук...",
+        "searching": "Searching",
         "closeFirefly": "Закрити Firefly",
-        "generateAddress": "Створити адресу",
+        "generateAddress": "Generate address",
         "migrateAgain": "Перенести інший індекс",
         "visitWebsite": "Відвідати веб-сайт",
         "howItWorks": "Як це працює",
@@ -932,9 +1050,15 @@
         "mergeFunds": "Об'єднати кошти",
         "done": "Готово",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "claimRewards": "Claim rewards",
+        "rerunClaimProcess": "Rerun claim process",
+        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
+        "addPublicNote": "Add public note",
+        "backup": "Backup"
     },
     "general": {
+        "recipient": "Recipient",
         "password": "Пароль",
         "confirmPassword": "Підтвердити пароль",
         "currentPassword": "Поточний пароль",
@@ -945,6 +1069,8 @@
         "recentActivity": "Останні дії",
         "sent": "Надіслано",
         "received": "Отримано",
+        "transfer": "Transfer",
+        "transferring": "Transferring",
         "sendPayment": "Надіслати платіж",
         "moveFunds": "Внутрішній переказ",
         "sendTo": "Відправити до",
@@ -962,15 +1088,18 @@
         "reference": "Посилання",
         "from": "Звідки",
         "to": "Кому",
-        "receiveFunds": "Отримати кошти",
+        "receiveFunds": "Receive funds",
         "address": "Address",
         "myAddress": "Моя адреса",
+        "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Поділитися адресою",
         "yourAddress": "Ваша адреса",
         "newRemainder": "Новий залишок",
         "remainder": "Залишок",
         "generateNewAddress": "Згенерувати нову адресу",
+        "copyToClipboard": "Copy to clipboard",
         "copyAddress": "Копіювати адресу",
+        "viewOnExplorer": "View on Explorer",
         "import": "Імпортувати",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -990,10 +1119,11 @@
         "profiles": "Профілі",
         "dev": "Розробник",
         "createAccount": "Створити гаманець",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Назва гаманця",
         "latestTransactions": "Останні транзакції",
         "transactions": "Транзакції",
+        "activity": "Activity",
         "security": "Безпека",
         "accountAddress": "Адреса гаманця",
         "network": "Мережа",
@@ -1013,6 +1143,8 @@
         "loadingAccounts": "Завантаження, будь ласка почекайте...",
         "addProfile": "Додати профіль",
         "noRecentHistory": "Немає недавньої історії",
+        "thisMonth": "This month",
+        "search": "Search",
         "firstSync": "Синхронізація історії може зайняти деякий час...",
         "transferSyncing": "Синхронізація гаманця",
         "transferSelectingInputs": "Вибір входів",
@@ -1049,18 +1181,12 @@
         "creatingProfile": "Створення акаунту, будь ласка почекай...",
         "fundMigration": "Міграція рахунку",
         "accountRemoved": "Цей гаманець прихований. Відкрийте його, щоб виконати перенесення.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
-        "stakedFor": "Зроблено ставку на {account}",
-        "unstakedFor": "Стейкінг знято з{account}",
-        "votedFor": "Голосувати за{account}",
-        "unvotedFor": "Скасовано голосування за{account}",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
         "receiving": "Отримання",
@@ -1070,16 +1196,29 @@
         "version": "Версія {version}",
         "yourWallets": "Your Wallets",
         "unknown": "Невідомо",
+        "unknownAddress": "Unknown address",
         "none": "Жодного",
         "staked": "Поставити",
         "unstaked": "Ставку знято",
         "staking": "Ставка",
         "unstaking": "Зняти зтавку",
         "notStaked": "Без ставки",
-        "stakedFunds": "Поставленні кошти",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Непроставлені кошти",
         "accountColor": "Wallet color",
-        "myAssets": "My assets"
+        "transactionTime": "Transaction time",
+        "storageDeposit": "Storage deposit",
+        "expirationTime": "Expiration time",
+        "claimedTime": "Claimed at",
+        "copiedToClipboard": "Copied to clipboard",
+        "total": "Загальний: {balance}",
+        "availableBalance": "Available balance: {balance}",
+        "amountClaimed": "{amount} claimed",
+        "metadata": "Metadata",
+        "tag": "Tag",
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in",
+        "assets": "Assets"
     },
     "dates": {
         "today": "Сьогодні",
@@ -1118,18 +1257,26 @@
             "error": "Не вдається експортувати історію трансакцій для{accountAlias}"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "Будь ласка, увійдіть, щоб ініціювати IOTA link",
-            "notEnabled": "IOTA links не ввімкнені",
-            "invalidFormat": "Посилання IOTA, за яким ви перейшли, недійсне",
+            "receivedWhileLoggedOut": "Please login to initiate the deep link",
+            "notEnabled": "Deep links are not enabled",
+            "invalidFormat": "The deep link you followed is invalid",
             "wallet": {
                 "send": {
-                    "success": "Платіжні дані додано з IOTA links"
+                    "success": "Payment details added from deep link"
                 }
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
         "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "claimed": {
+            "success": "Transaction claimed",
+            "error": "Claiming transaction failed"
+        },
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {
@@ -1159,7 +1306,8 @@
         "pincode": {
             "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
             "match": "PIN-код і підтвердження не збігаються.",
-            "incorrect": "Твій PIN-код невірний."
+            "incorrect": "Твій PIN-код невірний.",
+            "invalid": "Invalid PIN code."
         },
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
@@ -1173,23 +1321,29 @@
             "chars": "Ім'я профілю не може містити символи <>:\"/\\|?*",
             "index": "Індекс вашого облікового запису повинен бути числом від 0 до 2,147,483,647.",
             "page": "Сторінка вашого облікового запису повинна містити номер від 0 до 2,147,483,647.",
-            "syncing": "Під час синхронізації ваших гаманців сталася помилка."
+            "syncing": "Під час синхронізації ваших гаманців сталася помилка.",
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Це більше, ніж твій баланс.",
-            "amountNoFloat": "Якщо одиниці виміру 'i', то ви не можете використовувати знаки після коми.",
+            "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Сума є неприпустимим числом.",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "amountZero": "Сума повинна бути більше 0.",
             "wrongAddressPrefix": "Адреси починаються із префікса {prefix}.",
             "wrongAddressFormat": "Адреса невірно відформатована.",
             "invalidAddress": "Адреса недійсна.",
             "insufficientFunds": "У цього гаманця недостатньо коштів.",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
             "noToAccount": "Ви не вибрали гаманець для надсилання коштів.",
             "sendingDust": "Ви не можете надіслати менш 1 Mi.",
             "leavingDust": "Ви не можете залишити менше 1 Mi на вашій адресі.",
             "cancelled": "Транзакцію було скасовано.",
-            "transaction": "Під час відправлення транзакції сталася помилка. Будь ласка, спробуйте ще раз."
+            "transaction": "Під час відправлення транзакції сталася помилка. Будь ласка, спробуйте ще раз.",
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "invalid": "Будь ласка, введіть правильну адресу.",
@@ -1204,7 +1358,10 @@
             "noSynced": "Немає доступних синхронізованих вузлів.",
             "answer": "Не вдалося отримати відповідь від усіх вузлів.",
             "forbidden": "Підключення цього вузла заборонено.",
-            "pluginNotAvailable": "Плагін \"{nodePlugin}\" недоступний на поточному вузлі."
+            "pluginNotAvailable": "Плагін \"{nodePlugin}\" недоступний на поточному вузлі.",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node"
         },
         "network": {
             "mismatch": "Ідентифікатор мережі (ID) для цього вузла \"{networkId}\", який не відповідає поточній мережі.",
@@ -1233,7 +1390,7 @@
             "mnemonicMismatch": "Ви підключили неправильний пристрій Ledge або змінилася мнемоніка.",
             "notDetected": "Пристрій Ledger не виявлено.",
             "notFound": "Пристрій Ledger не знайдено.",
-            "otherConnected": "На вашому пристрої Ledger відкрито неправильний додаток.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "Сталася помилка при генерації адреси.",
             "timeout": "Час очікування вашого пристрою Ledger закінчився.",
             "disconnected": "Ваш пристрій Ledger було відключено.",
@@ -1258,6 +1415,9 @@
         "invalidTime": "INVALID TIME"
     },
     "warning": {
+        "transaction": {
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+        },
         "node": {
             "http": "Використання вузлів через HTTP залишає трафік незашифрованим і може становити загрозу безпеці."
         },
@@ -1294,17 +1454,20 @@
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID повідомлення",
+            "messageId": "Message ID",
             "internal": "Внутрішній",
             "rawValue": "Необроблене значення",
             "formattedValue": "Стерти значення",
-            "date": "Дата",
+            "date": "Date",
             "time": "Час"
         }
     },
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "You are currently using a developer profile and are connected to {networkName}"
+        },
+        "networkIndicator": {
+            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
         }
     },
     "permissions": {
@@ -1314,7 +1477,60 @@
         }
     },
     "tabs": {
-        "wallet": "Гаманець",
-        "staking": "Ставка"
+        "wallet": "Wallet",
+        "staking": "Staking"
+    },
+    "pills": {
+        "stake": {
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
+        },
+        "internalTransaction": {
+            "in": {
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
+            },
+            "out": {
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
+            }
+        },
+        "externalTransaction": {
+            "in": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
+            },
+            "out": {
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
+            }
+        },
+        "migrate": {
+            "Pending": "migrating for",
+            "Confirmed": "migrated for",
+            "Conflicting": "failed to migrate"
+        },
+        "asyncStatus": {
+            "unclaimed": "unclaimed",
+            "claimed": "claimed",
+            "expired": "expired"
+        }
+    },
+    "menus": {
+        "expirationTimePicker": {
+            "none": "No expiration time",
+            "1hour": "In 1 hour",
+            "1day": "In 1 day",
+            "1week": "In 1 week",
+            "customDate": {
+                "title": "Custom date",
+                "subtitle": "Set custom expiry date"
+            }
+        }
     }
 }
