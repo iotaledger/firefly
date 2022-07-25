@@ -1,15 +1,15 @@
 <script lang="typescript">
-    import { icons } from './icons'
+    import { ICON_SVG, Icon } from '@lib/auxiliary/icon'
 
-    export let icon = undefined
-    export let width = undefined
-    export let height = undefined
+    export let icon: Icon = undefined
+    export let width: number | string
+    export let height: number | string
     export let classes = ''
     export let boxed = false
     export let boxClasses = 'undefined'
     export let boxStyles = ''
 
-    $: selected = icons[icon]
+    $: selected = ICON_SVG[icon]
 </script>
 
 {#if selected}
