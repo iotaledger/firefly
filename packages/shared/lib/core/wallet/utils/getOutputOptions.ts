@@ -1,17 +1,22 @@
-import type { OutputOptions } from '@iota/wallet'
 import { convertDateToUnixTimestamp } from '@core/utils'
+import type { OutputOptions } from '@iota/wallet'
+import { get } from 'svelte/store'
+import { IAsset } from '../interfaces'
+import { assets } from '../stores'
 
 export function getOutputOptions(
     expirationDate: Date,
     recipientAddress: string,
     rawAmount: number,
     metadata: string,
-    tag: string
+    tag: string,
+    asset?: IAsset
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
+    const nativeTokenId = asset?.id !== get(assets).baseCoin.id ? asset?.id : undefined
     return {
         recipientAddress,
-        amount: String(rawAmount),
+        amount: nativeTokenId ? '0' : String(rawAmount),
         features: {
             ...(metadata && { metadata }),
             ...(tag && { tag }),
@@ -19,5 +24,15 @@ export function getOutputOptions(
         unlocks: {
             ...(unixTime && { expirationUnixTime: unixTime }),
         },
+        ...(nativeTokenId && {
+            assets: {
+                nativeTokens: [
+                    {
+                        id: nativeTokenId,
+                        amount: '0x' + rawAmount.toString(16),
+                    },
+                ],
+            },
+        }),
     }
 }
