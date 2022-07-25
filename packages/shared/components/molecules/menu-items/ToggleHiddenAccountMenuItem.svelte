@@ -2,6 +2,7 @@
     import { selectedAccount, setNextSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, nonHiddenActiveAccounts, updateActiveAccountMetadata } from '@core/profile'
+    import { Icon } from '@lib/auxiliary/icon'
     import { MenuItem } from 'shared/components'
 
     export let onClick: () => unknown
@@ -25,7 +26,7 @@
 </script>
 
 <MenuItem
-    icon={$selectedAccount.hidden ? 'view' : 'hide'}
+    icon={$selectedAccount.hidden ? Icon.View : Icon.Hide}
     title={localize($selectedAccount.hidden ? 'actions.showAccount' : 'actions.hideAccount')}
     onClick={() => ($selectedAccount.hidden ? handleShowAccountClick() : handleHideAccountClick())}
     disabled={!$selectedAccount.hidden && $nonHiddenActiveAccounts.length <= 1}
