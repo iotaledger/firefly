@@ -36,6 +36,6 @@ export function getAccountAssetsForSelectedAccount(): IAccountAssets {
 
     return {
         baseCoin,
-        nativeTokens
+        nativeTokens,
     }
 }

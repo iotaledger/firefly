@@ -10,7 +10,7 @@ export function getPersistedAsset(tokenId: string): IPersistedAsset {
     return get(persistedAssets)?.[get(activeProfile)?.id]?.[tokenId]
 }
 
-export function addPersistedAsset( persistedAsset: IPersistedAsset): void {
+export function addPersistedAsset(persistedAsset: IPersistedAsset): void {
     persistedAssets.update((state) => {
         let persistedAssetsForProfile = state[get(activeProfile).id]
         if (!persistedAssetsForProfile) {
@@ -22,7 +22,7 @@ export function addPersistedAsset( persistedAsset: IPersistedAsset): void {
 }
 
 export function clearPersistedAssetForActiveProfile(): void {
-    persistedAssets.update(state => {
+    persistedAssets.update((state) => {
         state[get(activeProfile).id] = {}
         return state
     })

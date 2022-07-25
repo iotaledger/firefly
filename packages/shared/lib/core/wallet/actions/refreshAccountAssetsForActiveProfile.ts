@@ -12,9 +12,9 @@ export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets 
     const persistedBaseCoin = {
         id: String(COIN_TYPE[networkProtocol]),
         metadata: {
-            ...baseCoin
+            ...baseCoin,
         },
-        hidden: false
+        hidden: false,
     }
 
     addPersistedAsset(persistedBaseCoin)
