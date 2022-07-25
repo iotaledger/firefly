@@ -189,6 +189,7 @@ module.exports = {
                 bg: '#08080C',
                 highlight: '#FF3FF2',
             },
+            'verification-blue': '#3897F0',
         },
         extend: {
             fontSize: {

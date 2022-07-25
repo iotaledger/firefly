@@ -8,6 +8,8 @@
     export let boxed = false
     export let boxClasses = 'undefined'
     export let boxStyles = ''
+    export let primaryColor: string
+    export let secondaryColor: string
 
     $: selected = ICON_SVG[icon]
 </script>
@@ -25,18 +27,22 @@
             >
                 {#each selected.path as path}
                     <path
-                        class:stroke={path.strokeWidth}
-                        class:fixedstrokeColor={path.strokeColor}
-                        class:fill-current={!path.strokeWidth && !path.strokeColor}
-                        class:stroke-current={path.strokeWidth && !path.strokeColor}
-                        d={path.d}
-                        fill-rule={path.fillRule || ''}
-                        clip-rule={path.clipRule || ''}
-                        stroke-width={path.strokeWidth || ''}
-                        stroke-linecap={path.strokeLinecap || ''}
-                        stroke={path.strokeColor || 'white-100'}
-                        opacity={path.opacity || 1}
-                        fill={path.fill || ''}
+                        class:stroke={path?.strokeWidth}
+                        class:fixedstrokeColor={path?.strokeColor}
+                        class:fill-current={!path?.strokeWidth && !path?.strokeColor}
+                        class:stroke-current={path?.strokeWidth && !path?.strokeColor}
+                        d={path?.d}
+                        fill-rule={path?.fillRule}
+                        clip-rule={path?.clipRule || ''}
+                        stroke-width={path?.strokeWidth || ''}
+                        stroke-linecap={path?.strokeLinecap}
+                        stroke={path?.strokeColor || 'white-100'}
+                        opacity={path?.opacity || 1}
+                        fill={path?.fillPriority === 'primary'
+                            ? primaryColor ?? path.fill ?? ''
+                            : path?.fillPriority === 'secondary'
+                            ? secondaryColor ?? path.fill ?? ''
+                            : path.fill ?? ''}
                     />
                 {/each}
             </svg>
@@ -52,18 +58,27 @@
         >
             {#each selected.path as path}
                 <path
-                    class:stroke={path.strokeWidth}
-                    class:fixedstrokeColor={path.strokeColor}
-                    class:fill-current={!path.strokeWidth && !path.strokeColor}
-                    class:stroke-current={path.strokeWidth && !path.strokeColor}
-                    d={path.d}
-                    fill-rule={path.fillRule || ''}
-                    clip-rule={path.clipRule || ''}
-                    stroke-width={path.strokeWidth || ''}
-                    stroke-linecap={path.strokeLinecap || ''}
-                    stroke={path.strokeColor || ''}
-                    opacity={path.opacity || 1}
-                    fill={path.fill || ''}
+                    class:stroke={path?.strokeWidth}
+                    class:fixedstrokeColor={path?.strokeColor}
+                    class:fill-current={!(
+                        (path?.fillPriority === 'primary' && primaryColor) ||
+                        (path?.fillPriority === 'secondary' && secondaryColor)
+                    ) &&
+                        !path?.strokeWidth &&
+                        !path?.strokeColor}
+                    class:stroke-current={path?.strokeWidth && !path?.strokeColor}
+                    d={path?.d}
+                    fill-rule={path?.fillRule}
+                    clip-rule={path?.clipRule || ''}
+                    stroke-width={path?.strokeWidth || ''}
+                    stroke-linecap={path?.strokeLinecap}
+                    stroke={path?.strokeColor || ''}
+                    opacity={path?.opacity || 1}
+                    fill={path?.fillPriority === 'primary'
+                        ? primaryColor ?? path.fill ?? ''
+                        : path?.fillPriority === 'secondary'
+                        ? secondaryColor ?? path.fill ?? ''
+                        : path.fill ?? ''}
                 />
             {/each}
         </svg>

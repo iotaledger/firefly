@@ -1,4 +1,4 @@
-import { AssetVerificationStatus } from '../enums'
+import { VerificationStatus } from '../enums'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 
 export function buildPersistedAssetFromIrc30Metadata(tokenId: string, metadata: IIrc30Metadata): IPersistedAsset {
@@ -15,6 +15,6 @@ export function buildPersistedAssetFromIrc30Metadata(tokenId: string, metadata: 
             ...(metadata?.logo && { description: metadata?.logo }),
         },
         hidden: false,
-        verification: AssetVerificationStatus.NewToken,
+        verification: VerificationStatus.New,
     }
 }

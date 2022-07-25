@@ -3,7 +3,7 @@ import { activeAccounts, activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { addPersistedAsset, clearPersistedAssetForActiveProfile } from '../stores/persisted-assets.store'
 import { tryGetAndStoreAssetFromPersistedAssets } from '../actions'
-import { AssetVerificationStatus } from '../enums'
+import { VerificationStatus } from '../enums'
 
 export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets = false): Promise<void> {
     clearPersistedAssets && clearPersistedAssetForActiveProfile()
@@ -16,7 +16,7 @@ export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets 
             ...baseCoin,
         },
         hidden: false,
-        verification: AssetVerificationStatus.Verified,
+        verification: VerificationStatus.Verified,
     }
 
     addPersistedAsset(persistedBaseCoin)
