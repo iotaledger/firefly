@@ -14,8 +14,9 @@ import {
 } from 'shared/lib/time'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
-import { IActivity, IAsset } from '../interfaces'
-import { getNativeTokenAssetById, getBaseCoin } from '../stores'
+import { IActivity, ITokenMetadata } from '../interfaces'
+import { getBaseCoin } from '../stores'
+import { assetMetadatas } from '../stores/asset-metadata.store'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { Subject } from '../types'
 import {
@@ -54,7 +55,7 @@ export class Activity implements IActivity {
 
     outputId?: string
     rawAmount: number
-    asset: IAsset
+    assetMetadata: ITokenMetadata
     metadata?: string
     tag?: string
 
@@ -87,7 +88,7 @@ export class Activity implements IActivity {
         this.isInternal = isSubjectInternal(recipient)
         this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
 
-        this.asset = getNativeTokenAssetById(nativeToken?.id, account.id) ?? getBaseCoin(account.id)
+        this.assetMetadata = nativeToken?.id ? get(assetMetadatas)[nativeToken.id] : getBaseCoin(account.id).metadata
         this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
         this.storageDeposit = getStorageDepositFromOutput(output)
@@ -129,7 +130,7 @@ export class Activity implements IActivity {
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
-        this.asset = getNativeTokenAssetById(nativeToken?.id, account.id) ?? getBaseCoin(account.id)
+        this.assetMetadata = nativeToken?.id ? get(assetMetadatas)[nativeToken.id] : getBaseCoin(account.id).metadata
 
         this.storageDeposit = getStorageDepositFromOutput(outputData.output)
         this.rawAmount = nativeToken
@@ -165,7 +166,7 @@ export class Activity implements IActivity {
     getFormattedAmount(signed: boolean): string {
         return `${this.direction !== ActivityDirection.In && signed ? '- ' : ''}${formatTokenAmountBestMatch(
             this.rawAmount,
-            this.asset?.metadata,
+            this.assetMetadata,
             2
         )}`
     }
