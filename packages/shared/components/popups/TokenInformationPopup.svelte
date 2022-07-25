@@ -40,8 +40,15 @@
             ? localize('popups.tokenInformation.newTokenTitle')
             : asset?.metadata?.name}
     </Text>
-    <div class="space-y-4 flex flex-col items-center justify-center">
+
+    <div class="space-y-3 flex flex-col items-center justify-center">
         <AssetIcon {asset} large showVerificationBadge />
+        <Text type="h2" fontWeight={FontWeightText.bold}>
+            {asset?.metadata?.tickerSymbol ?? asset?.metadata?.unit}
+        </Text>
+    </div>
+
+    <div class="space-y-4 flex flex-col items-center justify-center">
         {#if asset?.verification !== VerificationStatus.Verified}
             <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
         {/if}
