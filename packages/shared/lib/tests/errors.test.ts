@@ -1,13 +1,13 @@
 import { get } from 'svelte/store'
-import { addError, errorLog } from '../errors'
-import { Error } from '../typings/error'
+
+import { addError, errorLog, IError } from '@core/error'
 
 describe('File: errors.ts', () => {
     describe('Function: addError', () => {
         it('should append given errors to the error log', () => {
             expect(get(errorLog).length).toEqual(0)
 
-            const error: Error = {
+            const error: IError = {
                 time: Date.now(),
                 type: 'The error type',
                 message: 'The message of the error',

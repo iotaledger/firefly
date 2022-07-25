@@ -1,9 +1,9 @@
 import { IAppSettings, IAppVersionDetails } from '@core/app'
+import { IError } from '@core/error'
 import { IDeepLinkManager } from '@common/deep-links'
 import { ILedger } from './ledger'
 import { INotificationManager } from './notificationManager'
 import { IPincodeManager } from './pincodeManager'
-import { Error } from './error'
 import { EventMap } from './events'
 import { IBarcodeManager } from './barcodeManager'
 
@@ -36,7 +36,7 @@ export interface IPlatform {
     isMaximized(): Promise<boolean>
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
-    hookErrorLogger(logger: (error: Error) => void): void
+    hookErrorLogger(logger: (error: IError) => void): void
 
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined
@@ -50,7 +50,7 @@ export interface IPlatform {
     cancelAppUpdateDownload(): Promise<void>
     downloadAppUpdate(): Promise<void>
 
-    unhandledException(title: string, err: Error | unknown): Promise<void>
+    unhandledException(title: string, err: IError | unknown): Promise<void>
 
     // SeedVault API methods
     importLegacySeed(buffer: unknown, password: string): Promise<string>

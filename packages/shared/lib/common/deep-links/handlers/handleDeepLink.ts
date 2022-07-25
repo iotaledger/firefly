@@ -1,6 +1,8 @@
-import { DashboardRoute, dashboardRouter } from '@core/router'
 import { get } from 'svelte/store'
-import { addError } from '../../../errors'
+
+import { addError } from '@core/error'
+import { DashboardRoute, dashboardRouter } from '@core/router'
+
 import { resetDeepLink } from '../actions'
 import { DeepLinkContext } from '../enums'
 import { isDeepLinkRequestActive } from '../stores'

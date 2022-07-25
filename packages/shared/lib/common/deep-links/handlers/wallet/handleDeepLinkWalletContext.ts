@@ -1,4 +1,5 @@
-import { addError } from '@lib/errors'
+import { addError } from '@core/error'
+
 import { WalletOperation } from '../../enums'
 import { handleDeepLinkSendOperation } from './operations/handleDeepLinkSendOperation'
 
