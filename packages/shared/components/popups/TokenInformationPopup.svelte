@@ -43,10 +43,12 @@
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
                 valueText={truncateString(asset?.id, 15, 15, 3)}
             />
-            <KeyValueBox
-                keyText={localize('popups.tokenInformation.tokenMetadata.url')}
-                valueText={asset?.metadata?.url}
-            />
+            {#if asset?.metadata?.url}
+                <KeyValueBox
+                    keyText={localize('popups.tokenInformation.tokenMetadata.url')}
+                    valueText={asset?.metadata?.url}
+                />
+            {/if}
         </div>
     </div>
 
