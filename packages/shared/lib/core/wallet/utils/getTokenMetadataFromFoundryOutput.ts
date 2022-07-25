@@ -13,24 +13,34 @@ export async function getTokenMetadataFromFoundryOutput(tokenId: string): Promis
 
     const foundry = await get(selectedAccount).getFoundryOutput(tokenId)
     const data = getHexDataFromFoundryOutput(foundry)
-    const metadata = JSON.parse(Converter.hexToUtf8(data))
+    if (data) {
+        const metadata = JSON.parse(Converter.hexToUtf8(data))
+        const isValid = validateNativeTokenMetadata(metadata)
+        if (isValid) {
+            assetMetadatas.update((state) => {
+                state[tokenId] = {
+                    name: metadata.name,
+                    tickerSymbol: metadata.symbol,
+                    unit: metadata.symbol,
+                    decimals: metadata.decimals,
+                    useMetricPrefix: false,
+                }
+                return state
+            })
 
-    const isValid = validateNativeTokenMetadata(metadata)
-    if (isValid) {
-        assetMetadatas.update((state) => {
-            state[tokenId] = metadata
-            return state
-        })
-
-        return {
-            name: metadata.name,
-            tickerSymbol: metadata.symbol,
-            unit: metadata.symbol,
-            decimals: metadata.decimals,
-            useMetricPrefix: false,
+            return {
+                name: metadata.name,
+                tickerSymbol: metadata.symbol,
+                unit: metadata.symbol,
+                decimals: metadata.decimals,
+                useMetricPrefix: false,
+            }
+        } else {
+            return undefined
         }
+    } else {
+        return undefined
     }
-    return undefined
 }
 
 function getHexDataFromFoundryOutput(foundry: IFoundryOutput): string {
