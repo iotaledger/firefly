@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAsset, TokenVerificationStatus } from '@core/wallet'
+    import { IAsset, AssetVerificationStatus } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup } from '@lib/popup'
     import { Button, KeyValueBox, Text, TextHint } from 'shared/components'
@@ -25,13 +25,13 @@
 
 <div class="space-y-6">
     <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold}>
-        {asset?.metadata?.verification === TokenVerificationStatus.NewToken
+        {asset?.verification === AssetVerificationStatus.NewToken
             ? localize('popups.tokenInformation.unverifiedTitle')
             : asset?.metadata?.name}
     </Text>
 
     <div class="space-y-4">
-        {#if asset?.metadata?.verification !== TokenVerificationStatus.Verified}
+        {#if asset?.verification !== AssetVerificationStatus.Verified}
             <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
         {/if}
         <div class="w-full flex-col space-y-2">
@@ -51,16 +51,16 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        {#if asset?.metadata?.verification === TokenVerificationStatus.NewToken}
+        {#if asset?.verification === AssetVerificationStatus.NewToken}
             <Button secondary classes="w-full" onClick={handleSkip}>
-                {localize('popups.tokenInformation.buttons.skipVerification')}
+                {localize('actions.skip')}
             </Button>
             <Button autofocus classes="w-full" onClick={handleVerify}>
                 {localize('popups.tokenInformation.buttons.verifyToken')}
             </Button>
         {:else}
             <Button classes="w-full" onClick={handleSend}>
-                {localize('popups.tokenInformation.buttons.send')}
+                {localize('actions.send')}
             </Button>
         {/if}
     </div>

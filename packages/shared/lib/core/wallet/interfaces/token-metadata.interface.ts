@@ -1,5 +1,3 @@
-import { TokenVerificationStatus } from '../enums'
-
 export interface ITokenMetadata {
     name: string
     unit: string
@@ -12,6 +10,4 @@ export interface ITokenMetadata {
     logoUrl?: string
     primaryColor?: string
     secondaryColor?: string
-    url?: string
-    verification: TokenVerificationStatus
 }

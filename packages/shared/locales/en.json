@@ -916,9 +916,7 @@
                 "url": "URL"
             },
             "buttons": {
-                "skipVerification": "Skip",
-                "verifyToken": "I verify this token",
-                "send": "send"
+                "verifyToken": "I verify this token"
             }
         }
     },
