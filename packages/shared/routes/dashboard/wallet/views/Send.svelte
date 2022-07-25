@@ -689,7 +689,7 @@
 
 <style type="text/scss">
     .send-drawer {
-        height: calc(98vh - env(safe-area-inset-top));
+        height: calc(97vh - env(safe-area-inset-top));
     }
     button.active {
         @apply relative;

@@ -19,6 +19,7 @@
 
     export let accounts: WalletAccount[] = []
     export let handleCreateAccountPress = (): void => {}
+    export let onAccountSelection = (): void => {}
 
     const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
 
@@ -132,6 +133,7 @@
         } else {
             setSelectedAccount(accountId)
             resetAccountRouter(false)
+            onAccountSelection()
         }
     }
 
@@ -160,7 +162,7 @@
         <div class="flex w-full justify-between space-y-3">
             <button
                 on:click={() => handleAccountClick(account.id)}
-                class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row items-center space-x-4 p-4 pl-3 rounded"
+                class="hover:bg-gray-50 dark:hover:bg-gray-800 flex-1 flex flex-row items-center space-x-4 p-4 pl-3 rounded"
             >
                 <div class="circle" style="--account-color: {getAccountColor(account.id)};" />
                 <Text classes={isSelectedAccount(account.id) ? 'opacity-50' : ''} type="h5">

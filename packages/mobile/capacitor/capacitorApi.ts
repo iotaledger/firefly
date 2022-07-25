@@ -1,5 +1,6 @@
 import { Capacitor } from '@capacitor/core'
 
+import { App } from '@capacitor/app'
 import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { Share } from '@capacitor/share'
@@ -255,7 +256,7 @@ export const CapacitorApi: IPlatform = {
      * Close the app
      * @returns {undefined}
      */
-    close: () => new Promise<void>((resolve, reject) => {}),
+    close: () => new Promise<void>((resolve, reject) => resolve(App.exitApp())),
 
     /*
      * Opens url and checks against acceptlist
