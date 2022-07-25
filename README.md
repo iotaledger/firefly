@@ -34,7 +34,7 @@ It currently supports the Chyrsalis network while support for the Stardust netwo
 
 There are a few options to install Firefly:
 
-- Download from the [official Firefly website](https://firefly.iota.org)
+- Download from the official [Firefly website](https://firefly.iota.org)
 - Build from source code (start with our handbook's guide for ["Environment Setup"](https://iotaledger.github.io/firefly/guides/environment-setup/))
 
 ## Contributing
