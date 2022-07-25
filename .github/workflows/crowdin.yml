@@ -20,8 +20,8 @@ jobs:
           upload_sources: true
           download_translations: true
           localization_branch_name: 'l10n_develop'
-          pull_request_title: 'New Crowdin translations [ci skip]'
-          crowdin_branch_name: 'develop'
+          pull_request_title: 'New Stardust translations [ci skip]'
+          crowdin_branch_name: 'stardust-develop'
           config: 'crowdin.yml'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
