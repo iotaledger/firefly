@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAssetState } from '@core/wallet/interfaces/assets-state.interface'
+    import { IAccountAssets } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { AssetTile, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
 
-    export let assets: IAssetState
+    export let assets: IAccountAssets
 
     function handleAssetTileClick(asset): void {
         openPopup({

@@ -1345,6 +1345,7 @@
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
