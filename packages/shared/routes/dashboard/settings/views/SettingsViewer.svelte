@@ -1,24 +1,24 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Scroller, SettingsNavigator, Text } from 'shared/components'
+    import { TextType } from 'shared/components/Text.svelte'
+    import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize, _ } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
-    import { SettingsIcons } from '@lib/typings/icons'
     import {
+        AdvancedSettingsRoute,
         AdvancedSettingsRouteNoProfile,
         GeneralSettingsRoute,
         GeneralSettingsRouteNoProfile,
         HelpAndInfoRoute,
+        SecuritySettingsRoute,
         SettingsRoute,
+        settingsRoute,
         SettingsRouteNoProfile,
         settingsRouter,
-        settingsRoute,
-        SecuritySettingsRoute,
-        AdvancedSettingsRoute,
     } from '@core/router'
-    import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
-    import features from 'shared/features/features'
 
     const { loggedIn } = $activeProfile
 
@@ -93,14 +93,13 @@
             <SettingsNavigator
                 {routes}
                 onSettingClick={(id) => scrollIntoView(id)}
-                icons={SettingsIcons}
                 {settings}
                 bind:route={$settingsRoute}
             />
         {/if}
         <div class="h-full w-full pb-10">
             {#if !$mobile}
-                <Text type="p" secondary highlighted classes="mb-8">
+                <Text type={TextType.p} secondary highlighted classes="mb-8">
                     {localize('views.settings.settings')}
                     /
                     {localize(`views.settings.${$settingsRoute}.title`)}
@@ -109,7 +108,9 @@
             <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70}>
                 <div class="md:w-11/12">
                     {#if !$mobile}
-                        <Text type="h2" classes="mb-7">{localize(`views.settings.${$settingsRoute}.title`)}</Text>
+                        <Text type={TextType.h2} classes="mb-7"
+                            >{localize(`views.settings.${$settingsRoute}.title`)}</Text
+                        >
                     {/if}
                     {#if $settingsRoute === SettingsRoute.General}
                         <General />

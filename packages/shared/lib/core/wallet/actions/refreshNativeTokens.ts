@@ -1,16 +1,21 @@
 import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
 import { addNativeTokenAsset, clearNativeTokenAssets } from '../stores'
+import { getTokenMetadataFromFoundryOutput } from '../utils'
 
-export function refreshNativeTokens(): void {
+export async function refreshNativeTokens(): Promise<void> {
     clearNativeTokenAssets()
-    get(selectedAccount)?.balances?.nativeTokens?.forEach((nativeToken) => {
-        addNativeTokenAsset({
-            id: nativeToken.tokenId,
-            balance: {
-                total: Number(nativeToken.total),
-                available: Number(nativeToken.available),
-            },
-        })
-    })
+    for (const nativeToken of get(selectedAccount)?.balances?.nativeTokens) {
+        const metadata = await getTokenMetadataFromFoundryOutput(nativeToken.tokenId)
+        if (metadata) {
+            addNativeTokenAsset({
+                id: nativeToken.tokenId,
+                metadata,
+                balance: {
+                    total: Number(nativeToken.total),
+                    available: Number(nativeToken.available),
+                },
+            })
+        }
+    }
 }
