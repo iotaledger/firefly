@@ -3,22 +3,34 @@ import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
 import { IFoundryOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
+import { assetMetadatas } from '../stores/asset-metadata.store'
 
 export async function getTokenMetadataFromFoundryOutput(tokenId: string): Promise<ITokenMetadata> {
+    const storedMetadata = get(assetMetadatas)[tokenId]
+    if (storedMetadata) {
+        return storedMetadata
+    }
+
     const foundry = await get(selectedAccount).getFoundryOutput(tokenId)
     const data = getHexDataFromFoundryOutput(foundry)
     const metadata = JSON.parse(Converter.hexToUtf8(data))
 
     const isValid = validateNativeTokenMetadata(metadata)
-    return isValid
-        ? {
-              name: metadata.name,
-              tickerSymbol: metadata.symbol,
-              unit: metadata.symbol,
-              decimals: metadata.decimals,
-              useMetricPrefix: false,
-          }
-        : undefined
+    if (isValid) {
+        assetMetadatas.update((state) => {
+            state[tokenId] = metadata
+            return state
+        })
+
+        return {
+            name: metadata.name,
+            tickerSymbol: metadata.symbol,
+            unit: metadata.symbol,
+            decimals: metadata.decimals,
+            useMetricPrefix: false,
+        }
+    }
+    return undefined
 }
 
 function getHexDataFromFoundryOutput(foundry: IFoundryOutput): string {

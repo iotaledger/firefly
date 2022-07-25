@@ -20,6 +20,7 @@ export async function loadBaseCoinAndNativeTokens(accountId: string): Promise<vo
     const tokens = account?.balances?.nativeTokens ?? []
     for (const token of tokens) {
         const metadata = await getTokenMetadataFromFoundryOutput(token.tokenId)
+
         if (metadata) {
             nativeTokens.push({
                 id: token.tokenId,
