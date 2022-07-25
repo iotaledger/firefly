@@ -2,7 +2,7 @@ import { BASE_TOKEN, COIN_TYPE } from '@core/network'
 import { activeAccounts, activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { addPersistedAsset, clearPersistedAssetForActiveProfile } from '../stores/persisted-assets.store'
-import { tryGetAndStoreAssetFromPersistedAssets } from '../utils'
+import { tryGetAndStoreAssetFromPersistedAssets } from '../actions'
 
 export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets = false): Promise<void> {
     clearPersistedAssets && clearPersistedAssetForActiveProfile()

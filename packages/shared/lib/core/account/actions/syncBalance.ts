@@ -11,6 +11,6 @@ export async function syncBalance(accountId: string): Promise<void> {
     } else {
         updateActiveAccount(accountId, { balances })
     }
-    refreshAccountAssetsForActiveProfile(true)
+    refreshAccountAssetsForActiveProfile()
     return
 }
