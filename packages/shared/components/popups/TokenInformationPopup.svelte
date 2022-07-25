@@ -1,16 +1,27 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAsset, VerificationStatus } from '@core/wallet'
+    import { IAsset, selectedAccountAssets, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
-    import { openPopup } from '@lib/popup'
-    import { Button, KeyValueBox, Text, TextHint, AssetIcon } from 'shared/components'
+    import { openPopup, updatePopupProps } from '@lib/popup'
+    import { AssetIcon, Button, KeyValueBox, Text, TextHint } from 'shared/components'
+    import { get } from 'svelte/store'
     import { FontWeightText } from '../Text.svelte'
 
     export let asset: IAsset
 
-    function handleSkip() {}
+    function handleSkip() {
+        unverifyAsset(asset.id)
+        updatePopupProps({
+            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+        })
+    }
 
-    function handleVerify() {}
+    function handleVerify() {
+        verifyAsset(asset.id)
+        updatePopupProps({
+            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+        })
+    }
 
     function handleSend() {
         openPopup({
