@@ -21,8 +21,9 @@ export async function requestTokensFromFaucet(): Promise<void> {
         const response = await fetch(url, requestInit)
         if (response?.status === 202) {
             showAppNotification({
-                type: 'info',
+                type: 'success',
                 message: 'Faucet request sent successfully',
+                alert: true,
             })
             return Promise.resolve()
         } else if (response?.status === 400) {
