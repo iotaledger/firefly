@@ -19,7 +19,7 @@ jobs:
         with:
           upload_sources: true
           download_translations: true
-          localization_branch_name: 'l10n_develop'
+          localization_branch_name: 'l10n_stardust_develop'
           pull_request_title: 'New Stardust translations [ci skip]'
           crowdin_branch_name: 'stardust-develop'
           config: 'crowdin.yml'
