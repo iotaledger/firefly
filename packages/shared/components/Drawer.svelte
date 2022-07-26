@@ -12,6 +12,20 @@
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
 -->
+<script context="module" lang="typescript">
+    type Drawers = Set<{ close: () => Promise<void> }>
+	const drawers:Drawers = new Set()
+    
+    export function closePreviousDrawer(): void {
+		const last = [...drawers].pop()
+        last?.close()
+	}
+
+    export function closeDrawers(): void {
+        drawers.forEach(d => d.close())
+	}
+</script>
+
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
