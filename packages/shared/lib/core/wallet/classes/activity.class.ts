@@ -33,7 +33,6 @@ import {
     isOutputAsync,
     isSubjectInternal,
     outputIdFromTransactionData,
-    isSelfTransaction,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 
@@ -70,11 +69,9 @@ export class Activity implements IActivity {
     claimedDate?: Date
 
     setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
-        const selfTransaction = isSelfTransaction(transaction.payload.essence.outputs, account.depositAddress)
-        const { output, outputIndex } = getNonRemainderOutputFromTransaction(
+        const { output, outputIndex, isSelfTransaction } = getNonRemainderOutputFromTransaction(
             transaction,
-            account.depositAddress,
-            selfTransaction
+            account.depositAddress
         )
 
         const recipient = getRecipientFromOutput(output)
@@ -92,9 +89,9 @@ export class Activity implements IActivity {
         this.sender = getSenderFromTransaction(transaction, output, account.depositAddress)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
-        this.isSelfTransaction = selfTransaction
+        this.isSelfTransaction = isSelfTransaction
         this.isInternal = isSubjectInternal(recipient)
-        this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
+        this.direction = transaction.incoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
 
         this.asset = getNativeTokenAssetById(nativeToken?.id) ?? get(assets)?.baseCoin
         this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
