@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Αποστολή, Λήψη και διαχείριση των IOTA σας",
+            "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Το Firefly είναι το επίσημο πορτοφόλι της IOTA."
         },
         "legal": {
@@ -14,12 +14,12 @@
             "body": "Βοηθήστε τους προγραμματιστές να βελτιώσουν το Firefly στέλνοντας αυτόματα διαγνωστικά δεδομένα όταν συμβαίνει κάποιο σφάλμα ή συντριβή.",
             "checkbox": "Αποστολή αναφορών σφαλμάτων στο Ίδρυμα IOTA"
         },
-        "appearance": {
-            "title": "Εμφάνιση",
-            "body": "Επιλέξτε το θεματικό της εφαρμογής σας."
+        "languageAndAppearance": {
+            "title": "Language & appearance",
+            "body": "Choose your language and theme"
         },
         "profile": {
-            "title": "Δημιουργήστε ένα προφίλ",
+            "title": "Create your {protocol} profile",
             "profileName": "Όνομα προφίλ",
             "body1": "Μπορείτε να δημιουργήσετε πολλαπλά προφίλ χρηστών για να οργανώσετε τα πορτοφόλια σας και να βελτιώσετε την ιδιωτικότητά σας.",
             "body2": {
@@ -34,7 +34,7 @@
             }
         },
         "setup": {
-            "title": "Ρυθμίστε ένα πορτοφόλι",
+            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
             "chrysalisTitle": "Ενημέρωση Δικτύου Chrysalis",
             "chrysalisBody": "Από τις 21 Απριλίου, οι χρήστες μπορούν να μεταφέρουν τα νομίσματα τους στο νέο δίκτυο Chrysalis. Σας συνιστούμε να μεταφέρετε τα υπάρχοντα νομίσματα σας το συντομότερο δυνατό.",
             "learnMore": "Μάθετε για τη μετεγκατάσταση"
@@ -48,13 +48,55 @@
             "title": "Δημιουργήστε ένα πορτοφόλι",
             "body": "Δημιουργήστε ένα νέο πορτοφόλι. Μπορείτε να επιλέξετε ένα κανονικό πορτοφόλι λογισμικού ή αν έχετε μια συσκευή Ledger μπορείτε να ρυθμίσετε ένα hardware πορτοφόλι.",
             "softwareAccount": {
-                "title": "Θέλω ένα πορτοφόλι λογισμικού",
-                "description": "Δημιουργήστε 24-λέξη Φράση Επαναφοράς"
+                "title": "Create a software wallet",
+                "description": "Provides a Stronghold file and recovery phrase"
             },
             "ledgerAccount": {
-                "title": "Θέλω ένα hardware πορτοφόλι",
+                "title": "Create a hardware wallet",
                 "description": "Απαιτείται Ledger Nano S ή Nano X"
             }
+        },
+        "protocol": {
+            "title": "Choose protocol",
+            "body": "Set the protocol for your profile",
+            "iota": "IOTA Mainnet",
+            "shimmer": "Staging network for IOTA Mainnet"
+        },
+        "network": {
+            "title": "Choose network",
+            "body": "Set the network for your profile",
+            "iota": {
+                "mainnet": {
+                    "title": "Mainnet",
+                    "body": "IOTA Mainnet"
+                },
+                "devnet": {
+                    "title": "Devnet",
+                    "body": "Developer network for IOTA"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with active TIPS"
+                }
+            },
+            "shimmer": {
+                "mainnet": {
+                    "title": "Shimmer",
+                    "body": "Staging network for IOTA"
+                },
+                "devnet": {
+                    "title": "Shimmer Beta",
+                    "body": "Beta network for Shimmer"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with draft TIPS"
+                }
+            }
+        },
+        "customNetwork": {
+            "title": "Connect to a custom network",
+            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "Συνδέστε το Ledger σας",
@@ -80,15 +122,10 @@
             "body1": "Ρυθμίστε ένα PIN σύνδεσης για να βεβαιωθείτε ότι μόνο εσείς μπορείτε να έχετε πρόσβαση στο προφίλ σας.",
             "body2": "Κρατήστε το PIN σας ασφαλές!"
         },
-        "pin": {
-            "title": "Δημιουργία κωδικού PIN",
-            "body1": "Εισαγάγετε ένα 6-ψήφιο PIN παρακάτω. Θα σας ζητηθεί το PIN σας για πρόσβαση στο προφίλ σας.",
-            "body2": "Χρησιμοποιήστε μόνο αριθμούς"
-        },
-        "confirmPin": {
-            "title": "Επιβεβαιώστε τον κωδικό σας PIN",
-            "body1": "Το PIN σας κρατά προσωπικό το υπόλοιπο και τις συναλλαγές σας.",
-            "body2": "Εισάξετε ξανά τον κωδικό PIN σας για να προχωρήσετε. "
+        "setupPin": {
+            "title": "Set up PIN code",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "backup": {
             "title": "Δημιουργήστε εφεδρικό αντίγραφο του πορτοφολιού σας",
@@ -123,6 +160,10 @@
             "title": "Επιτυχές αντίγραφο ασφαλείας",
             "body": "Έχετε δημιουργήσει αντίγραφα ασφαλείας των πορτοφολιών σας σε ένα Stronghold."
         },
+        "claimRewards": {
+            "title": "Your Shimmer staking rewards",
+            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+        },
         "congratulations": {
             "title": "Η ρύθμιση του πορτοφολιού ολοκληρώθηκε",
             "fundsMigrated": "Μετεγκατάσταση κεφαλαίων",
@@ -133,16 +174,31 @@
             "exportMigration": "Εξαγωγή αρχείου καταγραφής μετεγκατάστασης και τερματισμός εγκατάστασης"
         },
         "import": {
-            "title": "Ανάκτηση ή μεταφορά κεφαλαίων",
-            "body": "Εάν έχετε ένα υπάρχον seed ή αντίγραφο ασφαλείας, μπορείτε να το εισάγετε εδώ. Αν κρατάτε κεφάλαια του παλαιότερου δικτύου, θα λάβετε βήματα μετεγκατάστασης για να μετακινηθείτε στο δίκτυο Chrysalis.",
+            "title": {
+                "iota": "Recover or migrate IOTA funds",
+                "shimmer": "Recover Shimmer profile"
+            },
+            "body": {
+                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
+            },
             "importSeed": "Έχω έναν seed 81 χαρακτήρων",
             "importSeedDescription": "Εισαγάγετε έναν seed και μεταφέρετε τα κεφάλαια στο Chrysalis",
-            "importMnemonic": "Έχω μια φράση ανάκτησης Firefly",
-            "importMnemonicDescription": "Εισάγετε τη φράση ανάκτησης για να ανακτήσετε τα πορτοφόλια σας",
-            "importFile": "Έχω εφεδρικό αρχείο",
-            "importFileDescription": "Ανεβάστε ένα αρχείο Seedvault ή Stronghold",
-            "importLedger": "Έχω ένα αντίγραφο ασφαλείας Ledger",
-            "importLedgerDescription": "Επαναφορά ή μεταγραφή ενός προφίλ Ledger"
+            "importMnemonic": "Use recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase",
+            "importFile": {
+                "iota": "Use backup file",
+                "shimmer": "Use Stronghold backup file"
+            },
+            "importFileDescription": {
+                "iota": "Upload a Seedvault or Stronghold file",
+                "shimmer": "Upload Stronghold file"
+            },
+            "importLedger": "Use Ledger hardware device",
+            "importLedgerDescription": {
+                "iota": "Restore or migrate a Ledger profile",
+                "shimmer": "Restore using Nano S or Nano X devices"
+            }
         },
         "importFromText": {
             "seed": {
@@ -190,7 +246,7 @@
             "readMore": "Τι να περιμένετε από τη διαδικασία μεταγραφής"
         },
         "generateNewLedgerAddress": {
-            "title": "Δημιουργία νέας διεύθυνσης",
+            "title": "Generate new address",
             "body": "Πρέπει να δημιουργήσετε μια νέα διεύθυνση για να μεταφέρετε τα διακριτικά σας με το Firefly. Κάντε κλικ στο παρακάτω κουμπί για να συνεχίσετε.",
             "confirmTitle": "Επιβεβαιώστε τη νέα διεύθυνση",
             "confirmBody": "Για λόγους ασφαλείας, συγκρίνετε τη διεύθυνση που δημιουργείται στη συσκευή Ledger με αυτήν που εμφανίζεται παρακάτω. Αν ταιριάζουν, πατήστε και τα δύο κουμπιά στο Ledger όπως σας ζητηθεί.",
@@ -276,7 +332,7 @@
             "body2": "Βεβαιωθείτε ότι το Ledger σας είναι συνδεδεμένο και ότι η εφαρμογή {legacy} είναι ανοιχτή ανά πάσα στιγμή κατά τη μετεγκατάσταση.",
             "migrate": "Μετεγκατάσταση κεφαλαίων",
             "transaction": "Συναλλαγή {number}",
-            "rerun": "Προσπαθήστε ξανά"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -291,17 +347,17 @@
         },
         "settings": {
             "settings": "Ρυθμίσεις",
-            "generalSettings": {
-                "title": "Γενικά",
-                "description": "Ρυθμίστε την εμφάνιση της εφαρμογής σας και άλλες γενικές ρυθμίσεις"
+            "general": {
+                "title": "General",
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "Ασφάλεια",
                 "description": "Αλλάξτε τον κωδικό πρόσβασής σας και ρυθμίστε τις ρυθμίσεις ασφαλείας"
             },
-            "advancedSettings": {
-                "title": "Αναλυτικά",
-                "description": "Εργαλεία και χειροκίνητες ρυθμίσεις για τεχνικούς χρήστες"
+            "advanced": {
+                "title": "Advanced",
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Βοήθεια και πληροφορίες",
@@ -318,7 +374,7 @@
             "theme": {
                 "title": "Θεματικό",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Αν αλλάξετε το θέμα του συστήματός σας, μπορεί να χρειαστεί να κάνετε επανεκκίνηση του Firefly για να δείτε τα εφέ"
             },
             "language": {
                 "title": "Γλώσσα",
@@ -361,9 +417,9 @@
                 "description": "Αλλάξτε το όνομα του προφίλ σας στο Firefly",
                 "success": "Αλλάξατε το όνομα του προφίλ σας"
             },
-            "balanceFinder": {
-                "title": "Εύρεση υπολοίπου",
-                "description": "Εκτελέστε μια εκτεταμένη αναζήτηση των διευθύνσεών σας για tokens"
+            "walletFinder": {
+                "title": "Wallet finder",
+                "description": "Perform an extended search of your previously used wallets"
             },
             "hiddenAccounts": {
                 "title": "Κρυφά πορτοφόλια",
@@ -374,8 +430,8 @@
                 "description": "Διαγράφει ολόκληρο το προφίλ, τα πορτοφόλια και το ιστορικό συναλλαγών. Βεβαιωθείτε ότι έχετε ένα αντίγραφο ασφαλείας"
             },
             "deepLinks": {
-                "title": "Σύνδεσμοι IOTA",
-                "description": "Αυτόματη συμπλήρωση δεδομένων συναλλαγών στο Firefly μόλις κάνετε κλικ σε έναν σύνδεσμο iota"
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkConfiguration": {
                 "title": "Ρυθμίσεις δικτύου",
@@ -403,7 +459,7 @@
                 "editDetails": "Επεξεργασία λεπτομερειών",
                 "viewInfo": "Προβολή πληροφοριών",
                 "setAsPrimary": "Ορισμός ως πρωτεύον",
-                "removeNode": "Αφαίρεση κόμβου",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "Συμπερίληψη επίσημης λίστας κόμβων",
                 "noNodes": "Δεν υπάρχουν κόμβοι, δεν είναι δυνατή η σύνδεση στο δίκτυο",
                 "noNodesAuto": "Δεν υπάρχουν κόμβοι, θα χρησιμοποιηθεί αυτόματη επιλογή"
@@ -451,6 +507,14 @@
                 "title": "Σχετικά",
                 "description": ""
             },
+            "createDeveloperProfile": {
+                "title": "Create Developer Profile",
+                "description": ""
+            },
+            "createNormalProfile": {
+                "title": "Create Normal Profile",
+                "description": ""
+            },
             "reportAnIssue": {
                 "title": "Αναφορά προβλήματος",
                 "description": "Αναφέρετε ένα σφάλμα στους προγραμματιστές. Ελέγξτε για να βεβαιωθείτε ότι δεν έχει ήδη αναφερθεί"
@@ -462,43 +526,44 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "operational": "Network operational",
+                "degraded": "Network degraded",
+                "down": "Network down",
+                "disconnected": "Disconnected from node",
                 "status": "Κατάσταση",
                 "messagesPerSecond": "Μηνύματα ανά δευτερόλεπτο",
                 "referencedRate": "Αναφερόμενη τιμή"
             },
             "profileModal": {
-                "allSettings": "Όλες οι ρυθμίσεις",
+                "allSettings": "All settings",
                 "logout": "Αποσύνδεση",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Κλείδωμα προφίλ",
+                    "locked": "Stronghold κλειδωμένο",
+                    "unlocked": "Stronghold ξεκλείδωτο"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Συσκευή",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "Η Εφαρμογή IOTA δεν είναι ανοιχτή",
+                        "connected": "Σύνδεση",
+                        "legacyConnected": "Η εφαρμογή παλαιού τύπου είναι ανοιχτή",
+                        "locked": "Κλειδωμένο",
+                        "mnemonicMismatch": "Λάθος Ledger ή μνημονικό",
+                        "notDetected": "Δεν ανιχνεύθηκε",
+                        "otherConnected": "Η εφαρμογή άνοιξε"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
-                    "lastBackup": "Τελευταία δημιουργία αντιγράφων ασφαλείας {date}",
-                    "notBackedUp": "Δεν έγιναν ακόμα τα αντίγραφα ασφαλείας",
-                    "button": "Backup"
+                    "title": "Αντίγραφο ασφαλείας των πορτοφολιών σας",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
+                    "button": "Αντίγραφα Ασφαλείας"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Νέα ενημέρωση είναι διαθέσιμη",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Αναβάθμιση"
                 }
             }
         },
@@ -517,31 +582,31 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected"
+                    "upcoming": "Επιστρέψτε αργότερα",
+                    "commencing": "Άνοιξε το Pre-staking",
+                    "holding": "Απομένουν {duration} για staking",
+                    "ended": "Το staking τελείωσε τώρα",
+                    "inactive": "Δεν ανιχνεύθηκαν συμβάντα για staking"
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "Κάνε τα {token} tokens σου για να λαμβάνεις αυτόματα ανταμοιβές κάθε 10 δευτερόλεπτα μόλις ξεκινήσεις να κάνεις staking την {date}.",
+                    "commencing": "Κάνε τα {token} tokens σου για να λαμβάνεις αυτόματα ανταμοιβές κάθε 10 δευτερόλεπτα μόλις ξεκινήσεις να κάνεις staking την {date}.",
+                    "holdingAndStaking": "Λαμβάνετε αυτόματα ανταμοιβές κάθε 10 δευτερόλεπτα.",
+                    "holdingAndNotStaking": "Κάνετε stake τα {token} tokens σας για να λαμβάνετε ανταμοιβές κάθε 10 δευτερόλεπτα.",
+                    "endedAndDidStake": "{token} ανταμοιβές θα διανεμηθούν στο πορτοφόλι σας μόλις ξεκινήσει το δίκτυο.",
+                    "endedAndDidNotStake": "Δεν συμμετείχες σε αυτό το airdrop.",
+                    "endedAndDidNotReachMinRewards": "Δεν έχετε κάνει stake αρκετά IOTA για να φτάσετε τις ελάχιστες ανταμοιβές για airdrop.",
+                    "inactive": "Ανοίξτε τις ρυθμίσεις δικτύου στις Ρυθμίσεις για προχωρημένους και βεβαιωθείτε ότι ο τρέχων κόμβος έχει τη δυνατότητα \"Συμμετοχή\" κάνοντας κλικ στο \"Πληροφορίες Προβολής\"."
                 }
             },
             "airdrops": {
                 "holding": "Απομένουν",
                 "commencing": "Μέχρι να αρχίσει το staking",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "currentStakingPeriod": "Τρέχουσα περίοδος staking",
+                "totalWalletRewards": "Σύνολο ανταμοιβών πορτοφολιού",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Το Assembly είναι ένα αυτόνομο, εξαιρετικά επεκτάσιμο multi-chain δίκτυο για την κατασκευή και ανάπτυξη έξυπνων συμβολαίων. Το Assembly είναι το μέλλον του web3. "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -549,8 +614,8 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Νέο συμβάν",
+                "complete": "Ολοκληρώθηκε"
             }
         },
         "picker": {
@@ -561,9 +626,17 @@
         }
     },
     "popups": {
+        "storageDepositBreakdown": {
+            "title": "Storage deposit breakdown",
+            "totalStorageDeposit": "Total storage deposit",
+            "pendingTransactions": {
+                "title": "Locked in pending transactions",
+                "subtitle": "For sending native assets and small IOTA amounts"
+            }
+        },
         "password": {
             "title": "Απαιτείται κωδικός",
-            "subtitle": "Παρακαλώ εισάγετε τον κωδικό σας για να ξεκλειδώσετε τα πορτοφόλια σας",
+            "subtitle": "Please provide your password to unlock your wallets",
             "backup": "Παρακαλώ εισάγετε τον κωδικό σας για να εξάγετε ένα αντίγραφο ασφαλείας"
         },
         "qr": {
@@ -578,14 +651,9 @@
             "noAutoUpdate": "Η αυτόματη ενημέρωση είναι απενεργοποιημένη σε αυτήν την έκδοση των Windows, παρακαλώ πηγαίνετε στο https://firefly.iota.org για να κατεβάσετε την ενημέρωση.",
             "preReleaseDescription": "Εκτελείτε μια έκδοση προ-κυκλοφορίας του Firefly. Οι ενημερώσεις είναι απενεργοποιημένες."
         },
-        "backup": {
-            "title": "Τελευταίο αντίγραφο ασφαλείας: {date}",
-            "lastBackup": "Τελευταία δημιουργία αντιγράφων ασφαλείας {date}",
-            "backupDescription": "Είναι σημαντικό να δημιουργείτε αντίγραφα ασφαλείας τακτικά για να διασφαλίσετε ότι έχετε ένα αντίγραφο των πορτοφολιών σας και το ιστορικό των συναλλαγών σας.",
-            "backupWarning": "Αν χάσετε το αντίγραφο ασφαλείας σας και την ανάκτησης φράσης θα χάσετε την πρόσβαση στα χρήματά σας.",
-            "notBackedUp": "Δεν έγιναν ακόμα τα αντίγραφα ασφαλείας",
-            "notBackedUpDescription": "Δεν έχετε δημιουργήσει αντίγραφα ασφαλείας των πορτοφολιών σας",
-            "saving": "Αποθήκευση..."
+        "backupStronghold": {
+            "title": "Backup your stronghold file",
+            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deleteAccount": {
             "title": "Διαγραφή {name};",
@@ -617,7 +685,7 @@
             "titleRemove": "Αφαίρεση ενός κόμβου",
             "titleRemoveAll": "Αφαίρεση όλων των κόμβων",
             "titleDetails": "Λεπτομέρειες κόμβου",
-            "titleInfo": "Πληροφορίες κόμβου",
+            "titleInfo": "Node information",
             "addingNode": "Προσθήκη κόμβου",
             "updatingNode": "Ενημέρωση κόμβου",
             "loadingNodeInfo": "Φόρτωση πληροφοριών κόμβου",
@@ -629,15 +697,41 @@
             "removeConfirmation": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον κόμβο;",
             "removeAllConfirmation": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε όλους τους κόμβους;",
             "info": {
-                "url": "Διεύθυνση URL",
-                "software": "Λογισμικό",
-                "networkId": "ID Δικτύου",
-                "bech32HRP": "Bech32 HRP",
-                "features": "Δυνατότητες",
-                "confirmedMilestoneIndex": "Επιβεβαιωμένος δείκτης ορόσημου",
-                "pruningIndex": "Δείκτης κλαδέματος",
-                "messagesPerSecond": "Μηνύματα ανά δευτερόλεπτο",
-                "referencedRate": "Αναφερόμενη τιμή"
+                "general": {
+                    "tab": "General",
+                    "name": "Name",
+                    "url": "URL",
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index",
+                    "features": "Features"
+                },
+                "metrics": {
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
+                },
+                "protocol": {
+                    "tab": "Protocol",
+                    "network": "Network",
+                    "bech32HRP": "Bech32 HRP",
+                    "tokenSupply": "Token supply",
+                    "protocolVersion": "Version",
+                    "minPoWScore": "Min PoW Score"
+                },
+                "baseToken": {
+                    "tab": "Base token",
+                    "token": "Token",
+                    "tickerSymbol": "Ticker",
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
+                }
             }
         },
         "switchNetwork": {
@@ -673,15 +767,13 @@
             "sendingFromStakedAccount": "Στέλνετε μια μεταβίβαση από ένα πορτοφόλι που βρίσκεται σε staking. Αυτό μπορεί να κάνει unstaking τα token σας. Μη διστάσετε να στείλετε τη μεταφορά, αλλά ίσως χρειαστεί να ξανακάνετε τα υπόλοιπα νομίσματά σας restake στη συνέχεια.",
             "sendingFromStakedAccountBelowMinReward": "Στέλνετε μια μεταφορά από ένα πορτοφόλι που δεν έχει ακόμη φτάσει τις ελάχιστες ανταμοιβές staking. Μπορεί να γίνει αφαίρεση του staking και να χάσετε τις ανταμοιβές staking σε αυτό το πορτοφόλι."
         },
-        "balanceFinder": {
-            "title": "Εύρεση υπολοίπου",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+        "walletFinder": {
+            "title": "Wallet finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
             "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
             "accountsFound": "Wallets found",
-            "totalWalletBalance": "Συνολικό υπόλοιπο",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
-            "typePassword": "Πληκτρολογήστε τον κωδικό πρόσβασης για να επιτρέψετε την αναζήτηση."
+            "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
         },
         "riskFunds": {
             "title": "Προειδοποίηση: τα κεφάλαια που κινδυνεύουν κατά τη μετεγκατάσταση τους",
@@ -718,7 +810,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Συμβουλές σε περίπτωση που το Ledger σας δεν συνδέεται",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Βεβαιωθείτε ότι το Ledger Live δεν είναι ανοιχτό στον υπολογιστή σας",
                 "1": "Βεβαιωθείτε ότι έχετε ξεκλειδώσει τη συσκευή Ledger με το PIN σας",
@@ -735,7 +827,7 @@
                 "info": "Επιβεβαιώστε ότι η υπόλοιπη διεύθυνση που εμφανίζεται στο Ledger ταιριάζει με αυτή που εμφανίζεται παρακάτω. Αν ταιριάζει, πατήστε και τα δύο κουμπιά στο Ledger όπως σας ζητηθεί."
             },
             "transaction": {
-                "title": "Επιβεβαίωση συναλλαγής",
+                "title": "Confirm transaction",
                 "info": "Επιβεβαιώστε ότι οι πληροφορίες συναλλαγών που εμφανίζονται στη συσκευή Ledger ταιριάζουν με τις πληροφορίες που εμφανίζονται παρακάτω. Αν ταιριάζουν, πατήστε και τα δύο κουμπιά στο Ledger όπως σας ζητηθεί."
             }
         },
@@ -751,7 +843,7 @@
             "title": "Εξαγωγή ιστορικού συναλλαγών",
             "body": "Εξαγωγή του ιστορικού συναλλαγών για το επιλεγμένο πορτοφόλι. Το εξαγόμενο αρχείο θα είναι σε μορφή .csv.",
             "profileName": "Όνομα Προφίλ:",
-            "accountName": "Wallet name:",
+            "accountName": "Όνομα πορτοφολιού:",
             "typePassword": "Πληκτρολογήστε τον κωδικό πρόσβασης για να επιτρέψετε την εξαγωγή"
         },
         "stakingManager": {
@@ -763,17 +855,17 @@
             "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "Επιβεβαίωση Συμμετοχής",
             "subtitleStake": "Πρόκειται να κάνετε staking",
             "subtitleMerge": "Πρόκειται να συγχωνεύσετε",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "Αν δεν θέλετε να συμμετάσχετε και στα δύο airdrops, μπορείτε να εξαιρεθείτε παρακάτω. Μπορείτε να αναιρέσετε και να επανακτήσετε το staking σας ανά πάσα στιγμή.",
+            "mergeStakeWarning": "Τα κεφάλαιά σας θα γίνουν stake για το {airdrop}. Για να αλλάξετε σε ποια airdrops θέλετε να συμμετάσχετε, αποδεσμεύστε αυτό το πορτοφόλι και κάνετε stake ξανά.",
             "estimatedAirdrop": "Εκτιμώμενες ανταμοιβές"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "title": "Φάση staking {periodNumber} από {date}",
+            "body": "Το IOTA staking για Assembly συνεχίζεται... Συμμετέχετε στη φάση {periodNumber} για 90 ημέρες. Κάνετε stake τα IOTA σας και κερδίστε ανταμοιβές ASMB!",
+            "info": "Το Shimmer staking είναι πλέον πλήρες και μόνο ASMB tokens θα διανεμηθεί."
         },
         "shimmer-info": {
             "title": "Σχετικά Με Shimmer",
@@ -805,9 +897,15 @@
             "privPolicyCheckbox": "Έχω διαβάσει και αποδέχομαι την ενημερωμένη Πολιτική Απορρήτου"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "Ο τρόπος που χρησιμοποιείτε το Firefly έχει αλλάξει",
+            "body": "Το περιεχόμενο κάθε καρτέλας είναι τώρα στο πλαίσιο ενός μόνο πορτοφολιού. Μπορείτε να αλλάξετε το επιλεγμένο πορτοφόλι από οπουδήποτε χρησιμοποιώντας την εναλλαγή στη γραμμή τίτλου.",
+            "hint": "Αδυναμία εύρεσης πορτοφολιού? Χρησιμοποιήστε τον ανιχνευτή υπολοίπου στις ρυθμίσεις για να ανακαλύψετε τα προηγούμενα πορτοφόλια."
+        },
+        "transactionDetails": {
+            "title": "Transaction details"
+        },
+        "sendForm": {
+            "title": "Send funds"
         }
     },
     "charts": {
@@ -831,18 +929,36 @@
         "cancel": "Ακύρωση",
         "close": "Κλείσιμο",
         "dismiss": "Απόρριψη",
+        "claim": "Claim",
+        "claiming": "Claiming",
+        "reject": "Reject",
+        "confirmRejection": {
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        },
         "proceedAnyway": "Συνεχίστε ούτως ή άλλως",
         "save": "Αποθήκευση",
         "importSeed": "Εισαγωγή υφιστάμενου seed",
-        "restoreWallet": "Μετεγκατάσταση ή επαναφορά ενός πορτοφολιού",
-        "restoreWalletDescription": "Μετεγκατάσταση σε Chrysalis ή επαναφορά ενός υπάρχοντος πορτοφολιού",
-        "createWallet": "Δημιουργία νέου πορτοφολιού",
-        "createWalletDescription": "Δημιουργήστε ένα νέο πορτοφόλι στο Chrysalis",
+        "restoreWallet": {
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile"
+        },
+        "restoreWalletDescription": {
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile"
+        },
+        "createWallet": "Create a new {protocol} profile",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "claimShimmer": "Claim Shimmer staking rewards",
+        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "Αποθήκευση κωδικού πρόσβασης",
         "useBiometric": "Χρήση Βιομετρικής Ασφάλειας",
-        "setupPin": "Δημιουργία κωδικού PIN",
-        "setPin": "Ορίστε τον κωδικό PIN",
-        "confirmPin": "Επιβεβαιώστε τον κωδικό PIN",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "Εισαγάγετε το PIN σας",
         "saveBackupFile": "Αποθήκευση εφεδρικού αρχείου",
         "iveWrittenRecoveryPhrase": "Έχω γράψει τη φράση ανάκτησης",
@@ -868,22 +984,21 @@
         "enableDeepLinks": "Ενεργοποίηση συνδέσμων IOTA",
         "enableDeveloperMode": "Ενεργοποίηση λειτουργίας προγραμματιστή",
         "enableSystemNotifications": "Ενεργοποίηση ειδοποιήσεων συστήματος",
-        "exportTransactionHistory": "Εξαγωγή ιστορικού συναλλαγών",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Τοπική απόδειξη εργασίας (proof of work)",
         "unlock": "Ξεκλείδωμα",
         "updateFirefly": "Ενημέρωση Firefly",
         "restartNow": "Επανεκκίνηση τώρα",
         "saveBackup": "Αποθήκευση αντιγράφου ασφαλείας Stronghold",
         "customizeAcount": "Προσαρμόστε το πορτοφόλι",
-        "viewAddressHistory": "Προβολή ιστορικού διευθύνσεων",
-        "hideAccount": "Απόκρυψη πορτοφολιού",
+        "hideAccount": "Hide wallet",
         "showAccount": "Απόκρυψη πορτοφολιού",
-        "deleteAccount": "Διαγραφή Πορτοφολιού",
+        "deleteAccount": "Delete wallet",
         "max": "Μέγιστο",
         "addNode": "Προσθήκη κόμβου",
         "updateNode": "Ενημέρωση κόμβου",
         "removeNode": "Αφαίρεση κόμβου",
-        "removeAllNodes": "Αφαίρεση όλων των κόμβων",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Απόκρυψη",
         "hideOthers": "Απόκρυψη Άλλων",
         "showAll": "Εμφάνιση Όλων",
@@ -893,6 +1008,7 @@
         "redo": "Επανάληψη",
         "cut": "Αποκοπή",
         "copy": "Αντιγραφή",
+        "copyAllInformation": "Copy all information",
         "paste": "Επικόλληση",
         "selectAll": "Επιλογή όλων",
         "addAccount": "Προσθήκη Πορτοφολιού",
@@ -911,15 +1027,17 @@
         "readDocumentation": "Διαβάστε την τεκμηρίωση",
         "visitFaq": "Επισκεφθείτε Τις Συχνές Ερωτήσεις",
         "viewStatus": "Προβολή κατάστασης",
+        "viewStorageDeposit": "View storage deposit",
         "showHiddenAccounts": "Εμφάνιση κρυφών πορτοφολιών",
         "confirm": "Επιβεβαίωση",
         "hideNetworkStatistics": "Απόκρυψη στατιστικών δικτύου",
-        "findBalances": "Βρείτε υπόλοιπα",
-        "searchBalances": "Αναζήτηση υπολοίπων",
+        "findWallets": "Find wallets",
+        "useBalanceFinder": "Use balance finder",
+        "search": "Search",
         "searchAgain": "Αναζήτηση Ξανά",
-        "searching": "Αναζήτηση...",
+        "searching": "Searching",
         "closeFirefly": "Κλείσιμο Του Firefly",
-        "generateAddress": "Δημιουργία διεύθυνσης",
+        "generateAddress": "Generate address",
         "migrateAgain": "Μετεγκατάσταση άλλου δείκτη",
         "visitWebsite": "Μετάβαση στην Ιστοσελίδα",
         "howItWorks": "Πώς λειτουργεί",
@@ -931,10 +1049,16 @@
         "merge": "Συγχώνευση",
         "mergeFunds": "Συγχώνευση κεφαλαίων",
         "done": "Ολοκληρώθηκε",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "okIUnderstand": "Εντάξει, καταλαβαίνω",
+        "readMore": "Διαβάστε περισσότερα",
+        "claimRewards": "Claim rewards",
+        "rerunClaimProcess": "Rerun claim process",
+        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
+        "addPublicNote": "Add public note",
+        "backup": "Backup"
     },
     "general": {
+        "recipient": "Recipient",
         "password": "Κωδικός πρόσβασης",
         "confirmPassword": "Επιβεβαίωση κωδικού πρόσβασης",
         "currentPassword": "Τρέχων κωδικός",
@@ -945,6 +1069,8 @@
         "recentActivity": "Πρόσφατη Δραστηριότητα",
         "sent": "Εστάλη",
         "received": "Ελήφθη",
+        "transfer": "Transfer",
+        "transferring": "Transferring",
         "sendPayment": "Αποστολή Πληρωμής",
         "moveFunds": "Εσωτερική Μεταφορά",
         "sendTo": "Αποστολή Σε",
@@ -955,22 +1081,25 @@
         "sendTokensToAddress": "Αποστολή κεφαλαίων σε μια διεύθυνση",
         "manageAccount": "Διαχείριση Πορτοφολιού",
         "customizeAcount": "Προσαρμόστε το πορτοφόλι σας",
-        "account": "Πορτοφόλι",
+        "account": "Wallet",
         "sendingToAddress": "Αποστολή σε διεύθυνση",
         "amount": "Ποσό",
         "addAddress": "Προσθήκη Διεύθυνσης",
         "reference": "Αναφορά",
         "from": "Από",
         "to": "Προς",
-        "receiveFunds": "Λήψη Χρημάτων",
+        "receiveFunds": "Receive funds",
         "address": "Διεύθυνση",
         "myAddress": "Η διεύθυνσή μου",
+        "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Μοιραστείτε μια διεύθυνση",
         "yourAddress": "Η διεύθυνση σας",
         "newRemainder": "Νέο Remainder",
         "remainder": "Remainder",
         "generateNewAddress": "Δημιουργία νέας διεύθυνσης",
+        "copyToClipboard": "Copy to clipboard",
         "copyAddress": "Αντιγραφή Διεύθυνσης",
+        "viewOnExplorer": "View on Explorer",
         "import": "Εισαγωγή",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -990,10 +1119,11 @@
         "profiles": "Προφίλ",
         "dev": "Προγραμματιστής",
         "createAccount": "Δημιουργία πορτοφολιού",
-        "createNewWallet": "Create a new wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Όνομα πορτοφολιού",
         "latestTransactions": "Τελευταίες Συναλλαγές",
         "transactions": "Συναλλαγές",
+        "activity": "Activity",
         "security": "Ασφάλεια",
         "accountAddress": "Διεύθυνση πορτοφολιού",
         "network": "Δίκτυο",
@@ -1013,6 +1143,8 @@
         "loadingAccounts": "Φορτώνεται, παρακαλώ περιμένετε...",
         "addProfile": "Προσθήκη Προφίλ",
         "noRecentHistory": "Κανένα πρόσφατο ιστορικό",
+        "thisMonth": "This month",
+        "search": "Search",
         "firstSync": "Συγχρονισμός ιστορικού, αυτό μπορεί να διαρκέσει λίγο...",
         "transferSyncing": "Συγχρονισμός πορτοφολιού",
         "transferSelectingInputs": "Επιλογή εισαγωγών",
@@ -1049,20 +1181,14 @@
         "creatingProfile": "Δημιουργία λογαριασμού, παρακαλώ περιμένετε...",
         "fundMigration": "Μετεγκατάσταση κεφαλαίων",
         "accountRemoved": "Αυτό το πορτοφόλι είναι κρυμμένο. Αποκρύψτε το για να εκτελέσετε μεταφορές.",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
-        "stakedFor": "Staked για {account}",
-        "unstakedFor": "Unstaked για {account}",
-        "votedFor": "Επιλέχθηκε για {account}",
-        "unvotedFor": "Δεν επιλέχθηκε για {account}",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
+        "stakingTransaction": "Συναλλαγή για Staking",
+        "unstakingTransaction": "Αποτροπή Συναλλαγής Staking",
         "receiving": "Λήψη",
         "sending": "Αποστολή σε εξέλιξη",
         "legacyNetwork": "Παλαιό Δίκτυο",
@@ -1070,16 +1196,29 @@
         "version": "Έκδοση {version}",
         "yourWallets": "Τα Πορτοφόλια Σας",
         "unknown": "Άγνωστο",
+        "unknownAddress": "Unknown address",
         "none": "Κανένα",
         "staked": "Staked",
         "unstaked": "Unstaked",
         "staking": "Staking (Ποντάρισμα)",
         "unstaking": "Unstaking",
         "notStaked": "Δεν έγινε staked",
-        "stakedFunds": "Κεφάλαιο σε staking",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked kεφάλαιο",
         "accountColor": "Χρώμα πορτοφολιού",
-        "myAssets": "My assets"
+        "transactionTime": "Transaction time",
+        "storageDeposit": "Storage deposit",
+        "expirationTime": "Expiration time",
+        "claimedTime": "Claimed at",
+        "copiedToClipboard": "Copied to clipboard",
+        "total": "Total: {balance}",
+        "availableBalance": "Available balance: {balance}",
+        "amountClaimed": "{amount} claimed",
+        "metadata": "Metadata",
+        "tag": "Tag",
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in",
+        "assets": "Assets"
     },
     "dates": {
         "today": "Σήμερα",
@@ -1118,18 +1257,26 @@
             "error": "Δεν είναι δυνατή η εξαγωγή ιστορικού συναλλαγών για {accountAlias}"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "Παρακαλούμε συνδεθείτε για να εκκινήσετε το σύνδεσμο IOTA",
-            "notEnabled": "Οι σύνδεσμοι IOTA δεν είναι ενεργοποιημένοι",
-            "invalidFormat": "Ο σύνδεσμος IOTA που ακολουθήσατε δεν είναι έγκυρος",
+            "receivedWhileLoggedOut": "Please login to initiate the deep link",
+            "notEnabled": "Deep links are not enabled",
+            "invalidFormat": "The deep link you followed is invalid",
             "wallet": {
                 "send": {
-                    "success": "Τα στοιχεία πληρωμής προστέθηκαν από το σύνδεσμο IOTA"
+                    "success": "Payment details added from deep link"
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "syncing": "Παρακαλώ περιμένετε μέχρι να ολοκληρωθεί ο συγχρονισμός για να αλλάξετε τα πορτοφόλια.",
+        "transferring": "Παρακαλώ περιμένετε μέχρι να ολοκληρωθούν όλες οι συναλλαγές για να αλλάξετε πορτοφόλια.",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "claimed": {
+            "success": "Transaction claimed",
+            "error": "Claiming transaction failed"
+        },
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {
@@ -1159,7 +1306,8 @@
         "pincode": {
             "length": "Το PIN σας πρέπει να είναι {length, plural, one {1 ψηφίο} other {# ψηφία}}.",
             "match": "Τα PIN δεν ταιριάζουν.",
-            "incorrect": "Το τρέχον PIN είναι λανθασμένο."
+            "incorrect": "Το τρέχον PIN είναι λανθασμένο.",
+            "invalid": "Invalid PIN code."
         },
         "account": {
             "length": "Το όνομα του πορτοφολιού σας δεν μπορεί να είναι μεγαλύτερο από {length, plural, one {1 χαρακτήρα} other {# χαρακτήρες}}.",
@@ -1173,23 +1321,29 @@
             "chars": "Το όνομα προφίλ δεν μπορεί να περιέχει τους ακόλουθους χαρακτήρες <>:\"/\\|?*",
             "index": "Ο δείκτης του λογαριασμού σας πρέπει να είναι ένας αριθμός μεταξύ 0 και 2,147,483,647.",
             "page": "Η σελίδα του λογαριασμού σας πρέπει να είναι ένας αριθμός μεταξύ 0 και 2.147,483,647.",
-            "syncing": "Παρουσιάστηκε σφάλμα συγχρονισμού των πορτοφολιών σας."
+            "syncing": "Παρουσιάστηκε σφάλμα συγχρονισμού των πορτοφολιών σας.",
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet."
         },
         "send": {
             "addressLength": "Οι διευθύνσεις πρέπει να έχουν {length, plural, one {1 χαρακτήρα} other {# χαρακτήρες}}.",
             "amountTooHigh": "Αυτό είναι μεγαλύτερο από το διαθέσιμο υπόλοιπο σας.",
-            "amountNoFloat": "Εάν οι μονάδες είναι `i` δεν μπορείτε να χρησιμοποιήσετε δεκαδικά ψηφία.",
+            "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Το ποσό φαίνεται να είναι άκυρος αριθμός.",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "amountZero": "Το ποσό πρέπει να είναι μεγαλύτερο από 0.",
             "wrongAddressPrefix": "Οι διευθύνσεις ξεκινούν με το πρόθεμα {prefix}.",
             "wrongAddressFormat": "Η διεύθυνση δεν έχει μορφοποιηθεί σωστά.",
             "invalidAddress": "Η διεύθυνση δεν είναι έγκυρη.",
             "insufficientFunds": "Αυτό το πορτοφόλι έχει ανεπαρκή κεφάλαια.",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
             "noToAccount": "Δεν έχετε επιλέξει ένα πορτοφόλι για να στείλετε τα κεφάλαια.",
             "sendingDust": "Δεν μπορείτε να στείλετε λιγότερο από 1 Mi.",
             "leavingDust": "Δεν μπορείτε να αφήσετε λιγότερο από 1 Mi στη διεύθυνσή σας.",
             "cancelled": "Η συναλλαγή ακυρώθηκε.",
-            "transaction": "Παρουσιάστηκε σφάλμα κατά την αποστολή της συναλλαγής σας. Παρακαλώ δοκιμάστε ξανά."
+            "transaction": "Παρουσιάστηκε σφάλμα κατά την αποστολή της συναλλαγής σας. Παρακαλώ δοκιμάστε ξανά.",
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "invalid": "Εισαγάγετε μια έγκυρη διεύθυνση URL.",
@@ -1204,7 +1358,10 @@
             "noSynced": "Δεν υπάρχουν διαθέσιμοι συγχρονισμένοι κόμβοι.",
             "answer": "Αποτυχία λήψης απάντησης από όλους τους κόμβους.",
             "forbidden": "Απαγορεύεται η σύνδεση κόμβου.",
-            "pluginNotAvailable": "Το plugin \"{nodePlugin}\" δεν είναι διαθέσιμο στον τρέχοντα κόμβο (node)."
+            "pluginNotAvailable": "Το plugin \"{nodePlugin}\" δεν είναι διαθέσιμο στον τρέχοντα κόμβο (node).",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node"
         },
         "network": {
             "mismatch": "Το ID για αυτόν τον κόμβο είναι το \"{networkId}\", το οποίο δεν ταιριάζει με το τρέχον δίκτυο.",
@@ -1233,7 +1390,7 @@
             "mnemonicMismatch": "Έχετε συνδέσει τη λάθος συσκευή Ledger ή η μνημονική έχει αλλάξει.",
             "notDetected": "Δεν εντοπίστηκε συσκευή Ledger.",
             "notFound": "Δεν βρέθηκε συσκευή Ledger.",
-            "otherConnected": "Η λάθος εφαρμογή είναι ανοιχτή στη συσκευή σας Ledger.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "Παρουσιάστηκε σφάλμα κατά τη δημιουργία μιας διεύθυνσης.",
             "timeout": "Λήξη χρονικού ορίου για τη συσκευή Ledger.",
             "disconnected": "Η συσκευή σας Ledger αποσυνδέθηκε.",
@@ -1254,15 +1411,18 @@
             "cannotVisitAirdropWebsite": "Δεν είναι δυνατό να ανοίξει η ιστοσελίδα {airdrop}.",
             "invalidStakingEventId": "Μη έγκυρη staking event ID."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidDate": "ΑΚΥΡΗ ΗΜΕΡΟΜΗΝΙΑ",
+        "invalidTime": "ΑΚΥΡΟΣ ΧΡΟΝΟΣ"
     },
     "warning": {
+        "transaction": {
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+        },
         "node": {
             "http": "Η χρήση κόμβων μέσω HTTP αφήνει την κυκλοφορία μη κρυπτογραφημένη και θα μπορούσε να θέσει σε κίνδυνο την ασφάλεια."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "Δεν έχετε κανένα IOTA."
         }
     },
     "tooltips": {
@@ -1277,7 +1437,7 @@
         "partiallyStakedFunds": {
             "title": "Νέα unstaked κεφάλαια: {amount}",
             "titleNoFunds": "Νέα unstaked κεφάλαια",
-            "preBody": "You have received tokens that are not staked.",
+            "preBody": "Έχετε λάβει tokens που δεν έχουν γίνει staked.",
             "body": "Θα πρέπει να κάνετε χειροκίνητο staking για αυτά τα νέα κεφάλαια για να μπορέσετε τα \nλαμβάνετε airdrop ανταμοιβές για αυτά."
         },
         "stakingMinRewards": {
@@ -1294,17 +1454,20 @@
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Κωδικός Μηνύματος",
+            "messageId": "Message ID",
             "internal": "Εσωτερικό",
             "rawValue": "Ανεπεξέργαστη Τιμή",
             "formattedValue": "Μορφοποιημένη Τιμή",
-            "date": "Ημερομηνία",
+            "date": "Date",
             "time": "Χρόνος"
         }
     },
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Αυτή τη στιγμή χρησιμοποιείτε ένα προφίλ προγραμματιστή και είστε συνδεδεμένοι στο {networkName}"
+        },
+        "networkIndicator": {
+            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
         }
     },
     "permissions": {
@@ -1314,7 +1477,60 @@
         }
     },
     "tabs": {
-        "wallet": "Πορτοφόλι",
-        "staking": "Staking (Ποντάρισμα)"
+        "wallet": "Wallet",
+        "staking": "Staking"
+    },
+    "pills": {
+        "stake": {
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
+        },
+        "internalTransaction": {
+            "in": {
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
+            },
+            "out": {
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
+            }
+        },
+        "externalTransaction": {
+            "in": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
+            },
+            "out": {
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
+            }
+        },
+        "migrate": {
+            "Pending": "migrating for",
+            "Confirmed": "migrated for",
+            "Conflicting": "failed to migrate"
+        },
+        "asyncStatus": {
+            "unclaimed": "unclaimed",
+            "claimed": "claimed",
+            "expired": "expired"
+        }
+    },
+    "menus": {
+        "expirationTimePicker": {
+            "none": "No expiration time",
+            "1hour": "In 1 hour",
+            "1day": "In 1 day",
+            "1week": "In 1 week",
+            "customDate": {
+                "title": "Custom date",
+                "subtitle": "Set custom expiry date"
+            }
+        }
     }
 }

@@ -1,18 +1,18 @@
 <script lang="typescript">
     import { NetworkProtocol } from '@core/network'
 
-    import { assets } from '@core/wallet'
+    import { selectedAccountAssets } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { AssetTile, Icon, Text } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { clickOutside } from 'shared/lib/actions'
 
-    export let asset = $assets?.baseCoin
+    export let asset = $selectedAccountAssets?.baseCoin
 
     let isDropdownOpen = false
     let icon: string
 
-    $: hasMultipleAssets = $assets?.nativeTokens.length >= 1
+    $: hasMultipleAssets = $selectedAccountAssets?.nativeTokens.length >= 1
     $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
         case NetworkProtocol.IOTA:
         case NetworkProtocol.Shimmer:
@@ -70,16 +70,18 @@
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 "
             >
                 <ul class="overflow-y-auto space-y-2 h-full -mr-2 pr-2 scroll-secondary">
-                    <li on:click={() => handleAssetClick($assets?.baseCoin)}>
+                    <li>
                         <AssetTile
-                            asset={$assets?.baseCoin}
+                            onClick={() => handleAssetClick($selectedAccountAssets?.baseCoin)}
+                            asset={$selectedAccountAssets?.baseCoin}
                             overrideColor
                             classes="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
                         />
                     </li>
-                    {#each $assets?.nativeTokens as nativeToken}
-                        <li on:click={() => handleAssetClick(nativeToken)}>
+                    {#each $selectedAccountAssets?.nativeTokens as nativeToken}
+                        <li>
                             <AssetTile
+                                onClick={() => handleAssetClick(nativeToken)}
                                 asset={nativeToken}
                                 overrideColor
                                 classes="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"

@@ -49,6 +49,7 @@ export enum Icon {
     Logout = 'logout',
     Minus = 'minus',
     Network = 'network',
+    NotVerified = 'not-verified',
     Parchment = 'parchment',
     Play = 'play',
     Plus = 'plus',
@@ -91,4 +92,5 @@ export enum Icon {
     WarningFilled = 'warning-filled',
     Wifi = 'wifi',
     Work = 'work',
+    Verified = 'verified',
 }

@@ -1,6 +1,6 @@
-import './__mocks__/i18n'
+import '@mocks/i18n.mock'
 
-import { migrateObjects, range, validateBech32Address } from '../utils'
+import { migrateObjects, range, validateBech32Address } from '@lib/utils'
 
 type Simple = {
     prop1?: string

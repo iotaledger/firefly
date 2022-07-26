@@ -17,10 +17,10 @@
 
     let items = []
     $: if (!tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
-        items = [
-            { label: tokenMetadata?.unit, value: tokenMetadata?.unit },
-            { label: tokenMetadata?.subunit, value: tokenMetadata?.subunit },
-        ]
+        items = [{ label: tokenMetadata?.unit, value: tokenMetadata?.unit }]
+        if (tokenMetadata.subunit) {
+            items.push({ label: tokenMetadata?.subunit, value: tokenMetadata?.subunit })
+        }
     } else if (tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
         items = [
             { label: tokenMetadata?.unit, value: tokenMetadata?.unit },
@@ -38,3 +38,11 @@
 </script>
 
 <Dropdown2 bind:isFocused value={unit} {items} {onSelect} contentWidth small />
+
+<style type="text/scss">
+    .selection {
+        min-height: 36px;
+        @apply border-solid;
+        @apply border;
+    }
+</style>

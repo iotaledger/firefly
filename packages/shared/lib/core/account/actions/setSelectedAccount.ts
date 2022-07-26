@@ -1,7 +1,4 @@
-import { BASE_TOKEN, COIN_TYPE } from '@core/network'
-import { activeAccounts, activeProfile, updateActiveProfile } from '@core/profile'
-import { setBaseCoinAsset } from '@core/wallet'
-import { refreshNativeTokens } from '@core/wallet/actions/refreshNativeTokens'
+import { activeAccounts, updateActiveProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { selectedAccount, selectedAccountId } from '../stores'
 
@@ -11,15 +8,6 @@ export function setSelectedAccount(id: string): void {
         selectedAccountId.set(id)
         selectedAccount.set(account)
         updateActiveProfile({ lastUsedAccountId: id })
-        setBaseCoinAsset({
-            id: COIN_TYPE[get(activeProfile)?.networkProtocol].toString(),
-            metadata: BASE_TOKEN[get(activeProfile)?.networkProtocol],
-            balance: {
-                total: Number(account?.balances?.baseCoin?.total),
-                available: Number(account?.balances?.baseCoin?.available),
-            },
-        })
-        refreshNativeTokens()
     } else {
         throw new Error(`Account with ID ${id} cannot be found!`)
     }

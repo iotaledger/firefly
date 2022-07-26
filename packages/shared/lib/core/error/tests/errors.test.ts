@@ -1,6 +1,7 @@
 import { get } from 'svelte/store'
 
-import { addError, errorLog, IError } from '@core/error'
+import { IError } from '../interfaces'
+import { addError, errorLog } from '../stores'
 
 describe('File: errors.ts', () => {
     describe('Function: addError', () => {
