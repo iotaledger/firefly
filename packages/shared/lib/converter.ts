@@ -161,7 +161,8 @@ export class Converter {
      * @returns The hex version of the bytes.
      */
     public static utf8ToHex(utf8: string, prefix = false): string {
-        return prefix ? '0x' + Converter.bytesToHex(Converter.utf8ToBytes(utf8))
+        return prefix
+            ? '0x' + Converter.bytesToHex(Converter.utf8ToBytes(utf8))
             : Converter.bytesToHex(Converter.utf8ToBytes(utf8))
     }
 
@@ -176,8 +177,7 @@ export class Converter {
     }
 
     public static decimalToHex(number: number, prefix = false): string {
-        return prefix ? '0x' + number.toString(16)
-            : number.toString(16)
+        return prefix ? '0x' + number.toString(16) : number.toString(16)
     }
 
     /**
