@@ -48,6 +48,7 @@
     let remainingTime: number
 
     const FIAT_PLACEHOLDER = '---'
+    const SHOW_SHIMMER_TOKEN_FORMATTING_WARNING = !isAssembly
 
     $: $activeProfile.stakingRewards
     $: isDarkModeEnabled = $appSettings.darkMode
@@ -66,6 +67,7 @@
         }
     }
     $: showWarningState =
+        SHOW_SHIMMER_TOKEN_FORMATTING_WARNING ||
         isPartiallyStakedAndCanStake ||
         (isBelowMinimumRewards && !getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)) ||
         (isBelowMinimumRewards && hasStakingEnded)
@@ -131,6 +133,11 @@
                     title: localize('tooltips.stakingMinRewards.title'),
                     body: _getBody(),
                 }
+            }
+        } else {
+            return {
+                title: localize('tooltips.shimmerTokenFormatting.title'),
+                body: [localize('tooltips.shimmerTokenFormatting.body')],
             }
         }
     }
