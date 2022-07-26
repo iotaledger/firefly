@@ -17,6 +17,7 @@
     import { createEventDispatcher, onMount } from 'svelte'
     import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
+    import { slidable } from '@lib/actions'
 
     $: darkModeEnabled = $appSettings.darkMode
 
@@ -47,79 +48,6 @@
             await open()
         }
     })
-
-    function slidable(node: HTMLElement, use: boolean = true) {
-        if (!use) {
-            return
-        }
-        let x: number
-        let y: number
-        let init: number
-        // Define arrays for calc velocity later
-        const positionQueue = [0, 0, 0]
-        const timeQueue = [0, 0, 0]
-
-        function handleTouchstart(event: TouchEvent): void {
-            if (preventSlide) {
-                event.preventDefault()
-                event.stopImmediatePropagation()
-                event.stopPropagation()
-            }
-
-            if (event.targetTouches.length === 1) {
-                init = window.performance.now()
-                x = event.touches[0].pageX
-                y = event.touches[0].pageY
-            }
-
-            node.addEventListener('touchmove', handleTouchmove, { capture: true, passive: true })
-            node.addEventListener('touchend', handleTouchend, { capture: true, passive: true })
-        }
-
-        function handleTouchmove(event: TouchEvent) {
-            positionQueue.push(event.touches[0].pageY)
-            timeQueue.push(window.performance.now())
-            positionQueue.shift()
-            timeQueue.shift()
-            const initY = positionQueue[0]
-            const endY = positionQueue[positionQueue.length - 1]
-            const initTime = timeQueue[0]
-            const endTime = timeQueue[timeQueue.length - 1]
-
-            if (event.targetTouches.length === 1) {
-                const sx = event.touches[0].pageX - x
-                const sy = event.touches[0].pageY - y
-                x = event.touches[0].pageX
-                y = event.touches[0].pageY
-
-                node.dispatchEvent(
-                    new CustomEvent('slideMove', {
-                        detail: { x, y, sx, sy, initY, endY, initTime, endTime },
-                    })
-                )
-            }
-        }
-
-        function handleTouchend() {
-            node.dispatchEvent(new CustomEvent('slideEnd'))
-
-            const elapsed = window.performance.now()
-            if (init >= elapsed - 300) {
-                node.dispatchEvent(new CustomEvent('tap'))
-            }
-
-            node.removeEventListener('touchmove', handleTouchmove, { capture: true })
-            node.removeEventListener('touchend', handleTouchend, { capture: true })
-        }
-
-        node.addEventListener('touchstart', handleTouchstart, { capture: true, passive: true })
-
-        return {
-            destroy() {
-                node.removeEventListener('touchstart', handleTouchstart, { capture: true })
-            },
-        }
-    }
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
         // Calc slide gesture velocity between events
@@ -187,7 +115,7 @@
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
     <dim-zone
         class="fixed h-screen w-screen"
-        use:slidable={!preventClose}
+        use:slidable={{ use: !preventClose }}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={close}
@@ -196,7 +124,7 @@
     </dim-zone>
     <content
         bind:this={content}
-        use:slidable={!fromLeft && !preventClose}
+        use:slidable={{ use: !fromLeft && !preventClose, preventSlide }}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={() => (preventSlide = false)}
