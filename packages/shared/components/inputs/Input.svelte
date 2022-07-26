@@ -208,7 +208,7 @@
             @apply left-3;
             @apply select-none;
             @apply whitespace-nowrap;
-            @apply w-full;
+            @apply w-auto;
             @apply transition-none;
             top: 8px;
         }
@@ -242,7 +242,7 @@
         @apply left-3;
         @apply select-none;
         @apply whitespace-nowrap;
-        @apply w-full;
+        @apply w-auto;
         @apply transition-none;
         @apply text-left;
         top: 8px;
