@@ -23,7 +23,9 @@
         <div class="flex flex-auto flex-col overflow-y-auto h-1 -mr-2 pr-2 space-y-2.5 scroll-secondary scrollable-y">
             <AssetTile onClick={() => handleAssetTileClick(assets?.baseCoin)} asset={assets?.baseCoin} />
             {#each assets?.nativeTokens as asset}
-                <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
+                {#if !asset?.hidden}
+                    <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
+                {/if}
             {/each}
         </div>
     </div>
