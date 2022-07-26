@@ -20,7 +20,8 @@
     $: ({ icon, iconColor } = activity?.getIcon())
     $: subject = activity?.getFormattedSubject()
     $: isIncomingActivityUnclaimed =
-        activity?.direction === ActivityDirection.In && activity.asyncStatus === ActivityAsyncStatus.Unclaimed
+        (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) &&
+        activity.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 
     function reject() {

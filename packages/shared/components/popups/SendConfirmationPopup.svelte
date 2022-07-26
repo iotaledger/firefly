@@ -30,7 +30,6 @@
 
     export let asset: IAsset
     export let amount = '0'
-    export let unit: string
     export let recipient: Subject
     export let internal = false
     export let metadata: string
@@ -42,6 +41,7 @@
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
+    const unit = asset?.metadata?.unit
 
     $: asset = asset ?? $selectedAccountAssets?.baseCoin
     $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : Number(amount)
@@ -57,15 +57,15 @@
         ) || '-'
 
     $: transactionDetails = {
-        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
-        inclusionState: InclusionState.Pending,
+        asset,
         direction: ActivityDirection.Out,
-        amount: amount?.length > 0 ? amount : '0',
-        unit,
-        subject: recipient,
+        inclusionState: InclusionState.Pending,
         metadata,
-        tag,
+        rawAmount,
         storageDeposit: storageDeposit,
+        subject: recipient,
+        tag,
+        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
     }
 
     async function _prepareOutput(): Promise<void> {
@@ -93,7 +93,7 @@
             }
         } catch (err) {
             if (!error) {
-                error = err.error ? new BaseError({ message: err.error ?? err.message, logError: true }) : err
+                error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
             }
         }
     }
@@ -119,7 +119,7 @@
             await _onMount()
         } catch (err) {
             if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logError: true }) : err
+                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
             }
         }
     })

@@ -18,6 +18,7 @@ export interface IActivity {
     rawAmount: number
     sender: Subject
     recipient: Subject
+    isSelfTransaction: boolean
     asset: IPersistedAsset
     isAsync: boolean
     asyncStatus: ActivityAsyncStatus
