@@ -26,13 +26,13 @@
     $: rawAmount = generateRawAmount(amount, unit, asset?.metadata)
 
     let allowedDecimals = 0
-    $: if (!asset?.metadata.useMetricPrefix) {
+    $: if (!asset?.metadata?.useMetricPrefix) {
         if (unit === asset?.metadata.unit) {
             allowedDecimals = asset?.metadata.decimals
-        } else if (unit === asset?.metadata.subunit) {
+        } else if (unit === asset?.metadata?.subunit) {
             allowedDecimals = 0
         }
-    } else if (asset?.metadata.useMetricPrefix) {
+    } else if (asset?.metadata?.useMetricPrefix) {
         allowedDecimals = UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
     }
 
