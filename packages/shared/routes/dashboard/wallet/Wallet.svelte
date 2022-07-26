@@ -388,7 +388,7 @@
 
     $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
         drawer.close()
-        $backButtonStore.remove()
+        $backButtonStore.refresh()
     }
 
     onMount(() => {
