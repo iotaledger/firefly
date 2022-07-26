@@ -50,6 +50,7 @@ export class Activity implements IActivity {
     sender: Subject
     recipient: Subject
     subject: Subject
+    isSelfTransaction: boolean
     isInternal: boolean
     direction: ActivityDirection
 
@@ -69,7 +70,11 @@ export class Activity implements IActivity {
     claimedDate?: Date
 
     setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
-        const { output, outputIndex } = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
+        const { output, outputIndex, isSelfTransaction } = getNonRemainderOutputFromTransaction(
+            transaction,
+            account.depositAddress
+        )
+
         const recipient = getRecipientFromOutput(output)
         const nativeToken = getNativeTokenFromOutput(output)
 
@@ -82,11 +87,12 @@ export class Activity implements IActivity {
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
 
-        this.sender = getSenderFromTransaction(transaction, account.depositAddress)
+        this.sender = getSenderFromTransaction(transaction, output, account.depositAddress)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
+        this.isSelfTransaction = isSelfTransaction
         this.isInternal = isSubjectInternal(recipient)
-        this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
+        this.direction = transaction.incoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
 
         this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
         this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
@@ -126,6 +132,7 @@ export class Activity implements IActivity {
         this.sender = sender
         this.recipient = recipient
         this.subject = subject
+        this.isSelfTransaction = false
         this.isInternal = isInternal
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 

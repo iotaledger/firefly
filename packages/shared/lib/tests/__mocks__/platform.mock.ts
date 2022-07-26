@@ -1,8 +1,7 @@
 import { IAppSettings, IAppVersionDetails } from '@core/app'
 import { IError } from '@core/error'
-
-import { IPlatform } from '../../typings/platform'
-import { EventMap } from '../../typings/events'
+import { EventMap } from '@lib/typings/events'
+import { IPlatform } from '@lib/typings/platform'
 
 const Platform: IPlatform = {
     BarcodeManager: undefined,

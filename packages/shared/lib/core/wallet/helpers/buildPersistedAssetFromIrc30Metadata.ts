@@ -1,8 +1,10 @@
+import { VerificationStatus } from '../enums'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 
 export function buildPersistedAssetFromIrc30Metadata(tokenId: string, metadata: IIrc30Metadata): IPersistedAsset {
     return {
         id: tokenId,
+        standard: 'IRC30',
         metadata: {
             name: metadata.name,
             unit: metadata.symbol,
@@ -14,5 +16,6 @@ export function buildPersistedAssetFromIrc30Metadata(tokenId: string, metadata: 
             ...(metadata?.logo && { description: metadata?.logo }),
         },
         hidden: false,
+        verification: VerificationStatus.New,
     }
 }

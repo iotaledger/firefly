@@ -1,7 +1,10 @@
-import { MOCK_MNEMONIC, ProfileManagerMock } from './__mocks__/profileManager.mock'
+import { AccountMock } from '@mocks/account.mock'
+import { MOCK_MNEMONIC, ProfileManagerMock } from '@mocks/profile-manager.mock'
+
+import { get } from 'svelte/store'
+
+import { destroyProfileManager } from '../actions'
 import {
-    destroyProfileManager,
-    profileManager,
     generateMnemonic,
     setStrongholdPassword,
     storeMnemonic,
@@ -9,9 +12,8 @@ import {
     backup,
     restoreBackup,
     createStardustAccount,
-} from '../core/profile-manager'
-import { get } from 'svelte/store'
-import { AccountMock } from './__mocks__/account.mock'
+} from '../api'
+import { profileManager } from '../stores'
 
 describe('File: api.test.ts', () => {
     let profileManagerMock: ProfileManagerMock
