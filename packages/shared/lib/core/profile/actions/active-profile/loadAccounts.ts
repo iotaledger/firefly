@@ -1,7 +1,6 @@
 import { IAccountState, loadAccount, setSelectedAccount } from '@core/account'
 import { getAccounts } from '@core/profile-manager'
 import { loadAccountActivities } from '@core/wallet'
-import { hideActivitiesForHiddenAssets } from '@core/wallet/actions/hideActivitiesForHiddenAssets'
 import { refreshAccountAssetsForActiveProfile } from '@core/wallet/actions/refreshAccountAssetsForActiveProfile'
 import { get } from 'svelte/store'
 import { activeAccounts, activeProfile } from '../../stores'
@@ -26,7 +25,6 @@ export async function loadAccounts(): Promise<void> {
             await refreshAccountAssetsForActiveProfile()
             for (const accountState of get(activeAccounts)) {
                 await loadAccountActivities(accountState)
-                hideActivitiesForHiddenAssets(accountState.id)
             }
             hasLoadedAccounts.set(true)
         }
