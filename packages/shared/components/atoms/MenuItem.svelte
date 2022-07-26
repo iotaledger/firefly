@@ -2,6 +2,7 @@
     import { Icon, Text } from 'shared/components'
 
     export let icon: string
+    export let iconProps: Record<string, unknown>
     export let title: string
     export let subtitle = ''
     export let onClick: () => any
@@ -30,7 +31,10 @@
     <div class="flex flex-row space-x-3 items-center">
         <Icon
             {icon}
+            height={24}
+            width={24}
             classes={disabled ? 'text-gray-400 dark:text-gray-700' : ' text-gray-600 group-hover:text-blue-500'}
+            {...iconProps}
         />
         <div class="flex flex-col text-left">
             <Text
