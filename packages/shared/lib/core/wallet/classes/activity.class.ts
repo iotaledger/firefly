@@ -96,7 +96,7 @@ export class Activity implements IActivity {
         this.direction = transaction.incoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
 
         this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
-        this.isAssetHidden = this.asset.hidden
+        this.isAssetHidden = !!this.asset?.hidden
         this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
         this.storageDeposit = getStorageDepositFromOutput(output)
@@ -140,7 +140,7 @@ export class Activity implements IActivity {
 
         this.outputId = outputData.outputId
         this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
-        this.isAssetHidden = this.asset.hidden
+        this.isAssetHidden = !!this.asset?.hidden
 
         this.storageDeposit = getStorageDepositFromOutput(outputData.output)
         this.rawAmount = nativeToken
