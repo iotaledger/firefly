@@ -22,7 +22,7 @@ export async function loadAccounts(): Promise<void> {
             }
             activeAccounts.set(loadedAccounts.sort((a, b) => a.meta.index - b.meta.index))
             setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
-            await refreshAccountAssetsForActiveProfile(true)
+            await refreshAccountAssetsForActiveProfile()
             for (const accountState of get(activeAccounts)) {
                 await loadAccountActivities(accountState)
             }

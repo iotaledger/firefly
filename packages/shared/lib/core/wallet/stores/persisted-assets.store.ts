@@ -49,3 +49,11 @@ export function verifyAsset(assetId: string): void {
 export function unverifyAsset(assetId: string): void {
     updatePersistedAsset({ id: assetId, verification: VerificationStatus.NotVerified })
 }
+
+export function hideAsset(assetId: string): void {
+    updatePersistedAsset({ id: assetId, hidden: true })
+}
+
+export function unhideAsset(assetId: string): void {
+    updatePersistedAsset({ id: assetId, hidden: false })
+}

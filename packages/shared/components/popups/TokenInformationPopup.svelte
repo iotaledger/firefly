@@ -3,7 +3,7 @@
     import { IAsset, selectedAccountAssets, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup, updatePopupProps } from '@lib/popup'
-    import { AssetIcon, Button, KeyValueBox, Text, TextHint } from 'shared/components'
+    import { AssetIcon, Button, KeyValueBox, Text, TextHint, AssetActionsButton } from 'shared/components'
     import { get } from 'svelte/store'
     import { FontWeightText } from '../Text.svelte'
 
@@ -35,11 +35,16 @@
 </script>
 
 <div class="space-y-6">
-    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold}>
-        {asset?.verification === VerificationStatus.New
-            ? localize('popups.tokenInformation.newTokenTitle')
-            : asset?.metadata?.name}
-    </Text>
+    <div class="flex flex-row items-center space-x-3">
+        <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold}>
+            {asset?.verification === VerificationStatus.New
+                ? localize('popups.tokenInformation.newTokenTitle')
+                : asset?.metadata?.name}
+        </Text>
+        {#if asset?.standard === 'IRC30'}
+            <AssetActionsButton {asset} />
+        {/if}
+    </div>
 
     <div class="space-y-3 flex flex-col items-center justify-center">
         <AssetIcon {asset} large showVerificationBadge />

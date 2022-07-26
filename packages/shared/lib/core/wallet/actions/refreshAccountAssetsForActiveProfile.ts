@@ -12,6 +12,7 @@ export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets 
     const baseCoin = BASE_TOKEN?.[networkProtocol]
     const persistedBaseCoin = {
         id: String(COIN_TYPE[networkProtocol]),
+        standard: 'BASE_COIN',
         metadata: {
             ...baseCoin,
         },
