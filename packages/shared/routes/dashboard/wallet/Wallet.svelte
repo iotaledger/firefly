@@ -383,12 +383,13 @@
 
     $: if (mobile && drawer && $accountRoute !== AccountRoute.Init) {
         drawer.open()
-        $backButtonStore.add(drawer.close)
     }
 
     $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
         drawer.close()
-        $backButtonStore.refresh()
+        if (drawer.isDrawerOpen() === false) {
+            $backButtonStore.refresh()
+        }
     }
 
     onMount(() => {
