@@ -3,7 +3,7 @@ import { IUTXOInput } from '@iota/types'
 import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Subject } from '../types'
-import { IAsset } from './asset.interface'
+import { IPersistedAsset } from './persisted-asset.interface'
 
 export interface IActivity {
     id: string
@@ -18,7 +18,8 @@ export interface IActivity {
     rawAmount: number
     sender: Subject
     recipient: Subject
-    asset: IAsset
+    isSelfTransaction: boolean
+    asset: IPersistedAsset
     isAsync: boolean
     asyncStatus: ActivityAsyncStatus
     expirationDate?: Date

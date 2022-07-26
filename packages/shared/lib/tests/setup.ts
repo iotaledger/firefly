@@ -3,9 +3,9 @@
  * environment as needed (e.g. a particular object must be mocked or is mocked
  * everywhere).
  */
-import './__mocks__/api'
-import './__mocks__/matchMedia'
-import './__mocks__/platform'
+import './__mocks__/api.mock'
+import './__mocks__/match-media.mock'
+import './__mocks__/platform.mock'
 
 beforeAll(async () => {})
 afterAll(async () => {})

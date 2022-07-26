@@ -12,17 +12,18 @@ export async function tryCreateAdditionalAccount(alias: string, color: string): 
         setSelectedAccount(account?.id)
         return Promise.resolve()
     } catch (err) {
+        const errorMessage = err?.error || err
         if (err) {
-            console.error(err?.error || err)
+            console.error(errorMessage)
             if (get(isLedgerProfile)) {
                 displayNotificationForLedgerProfile('error', true, false, false, false, err)
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: localize(err?.error || err),
+                    message: localize(errorMessage) ?? errorMessage,
                 })
             }
         }
-        return Promise.reject()
+        return Promise.reject({ error: errorMessage })
     }
 }

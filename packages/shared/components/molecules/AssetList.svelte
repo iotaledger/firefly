@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAssetState } from '@core/wallet/interfaces/assets-state.interface'
+    import { IAccountAssets } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { AssetTile, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
 
-    export let assets: IAssetState
+    export let assets: IAccountAssets
 
     function handleAssetTileClick(asset): void {
         openPopup({
@@ -23,7 +23,9 @@
         <div class="flex flex-auto flex-col overflow-y-auto h-1 -mr-2 pr-2 space-y-2.5 scroll-secondary scrollable-y">
             <AssetTile onClick={() => handleAssetTileClick(assets?.baseCoin)} asset={assets?.baseCoin} />
             {#each assets?.nativeTokens as asset}
-                <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
+                {#if !asset?.hidden}
+                    <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
+                {/if}
             {/each}
         </div>
     </div>

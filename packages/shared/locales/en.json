@@ -908,7 +908,7 @@
             "title": "Send funds"
         },
         "tokenInformation" : {
-            "unverifiedTitle": "Unverified token",
+            "newTokenTitle": "New token",
             "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
             "tokenMetadata": {
                 "name": "Name",
@@ -916,9 +916,7 @@
                 "url": "URL"
             },
             "buttons": {
-                "skipVerification": "Skip",
-                "verifyToken": "I verify this token",
-                "send": "send"
+                "verifyToken": "I verify this token"
             }
         },
         "mintNativeTokenForm" : {
@@ -1093,8 +1091,14 @@
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
-        "mintNativeToken": "Mint token",
+        "mintNativeToken": "Mint native token",
+        "verifyToken": "Verify token",
+        "unverifyToken": "Unverify token",
+        "hideToken": "Hide token",
+        "unhideToken": "Unhide token",
+        "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens"
+
     },
     "general": {
         "recipient": "Recipient",
@@ -1259,7 +1263,7 @@
         "claimingTransactionId": "Claimed in",
         "assets": "Assets",
         "nativeTokens": "Native tokens",
-        "mintNativeTokenDescription": "Mint native token following IRC30",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet"
 
     },
@@ -1374,6 +1378,7 @@
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
