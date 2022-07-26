@@ -3,6 +3,7 @@
     import { App } from '@capacitor/app'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
+    import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
     import { openPopup, popupState } from '@lib/popup'
     import {} from '@lib/popup'
     import { logout, mobile, stage } from '@lib/app'
@@ -53,20 +54,22 @@
 
     let isDoubleBack = false
     void App.addListener('backButton', (): void => {
-        if (isDoubleBack) {
-            isDoubleBack = false
-            handleContinueClick()
-            return
-        }
-        isDoubleBack = true
-        void openPopup({
-            type: 'confirmCloseApp',
-            hideClose: true,
-            props: {
-                handleContinueClick,
-                handleCancelClick: () => (isDoubleBack = false),
-            },
-        })
+        closeDrawers()
+        return
+        // if (isDoubleBack) {
+        //     isDoubleBack = false
+        //     handleContinueClick()
+        //     return
+        // }
+        // isDoubleBack = true
+        // void openPopup({
+        //     type: 'confirmCloseApp',
+        //     hideClose: true,
+        //     props: {
+        //         handleContinueClick,
+        //         handleCancelClick: () => (isDoubleBack = false),
+        //     },
+        // })
     })
 
     async function handleContinueClick() {
