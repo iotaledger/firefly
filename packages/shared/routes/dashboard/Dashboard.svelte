@@ -91,7 +91,7 @@
         previousPendingParticipationsLength = participations?.length ?? 0
     })
 
-    $: if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
+    $: if (!$isSyncing && $accountsLoaded) {
         void updateStakingPeriodCache()
     }
 
