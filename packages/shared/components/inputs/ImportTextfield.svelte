@@ -103,8 +103,6 @@
             }
         }
     }
-
-    $: content, debounce(onContentChanged)()
 </script>
 
 <div>
@@ -115,6 +113,8 @@
             : 'border-gray-300 hover:border-gray-500 dark:border-gray-700 dark:hover:border-gray-700'}
         text-gray-500 dark:text-white bg-white dark:bg-gray-800 scroll-secondary"
         bind:value={content}
+        on:input={debounce(onContentChanged)}
+        on:keydown={debounce(onContentChanged)}
         placeholder=""
         spellcheck={false}
         autofocus
