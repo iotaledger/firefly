@@ -1087,7 +1087,7 @@
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
-        "mintNativeToken": "Mint token",
+        "mintNativeToken": "Mint native token",
         "verifyToken": "Verify token",
         "unverifyToken": "Unverify token",
         "hideToken": "Hide token",
