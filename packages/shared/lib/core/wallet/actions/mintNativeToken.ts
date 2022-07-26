@@ -4,13 +4,16 @@ import { Converter } from '@lib/converter'
 import { isTransferring } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
-import { IIrc30Standard } from '../interfaces'
+import { VerificationStatus } from '../enums'
+import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
+import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
+import { addPersistedAsset } from '../stores/persisted-assets.store'
 
 export async function mintNativeToken(
     maximumSupply: number,
     circulatingSupply: number,
-    metadata: IIrc30Standard
+    metadata: IIrc30Metadata
 ): Promise<void> {
     try {
         isTransferring.set(true)
@@ -25,6 +28,12 @@ export async function mintNativeToken(
             remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
         }
         const mintTokenTransaction = await account.mintNativeToken(nativeTokenOptions, transactionOptions)
+        const persistedAsset: IPersistedAsset = buildPersistedAssetFromIrc30Metadata(
+            mintTokenTransaction.tokenId,
+            metadata,
+            VerificationStatus.Verified
+        )
+        addPersistedAsset(persistedAsset)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
             new Activity().setFromTransaction(mintTokenTransaction.transaction, account)
