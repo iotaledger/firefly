@@ -85,7 +85,15 @@
             })
             closePopup()
         } catch (reason) {
-            console.error(reason)
+            if (!error) {
+                error = reason.error
+                    ? new BaseError({
+                          message: reason.error ?? reason.message,
+                          logToConsole: true,
+                          saveToErrorLog: true,
+                      })
+                    : reason
+            }
         }
     }
 
@@ -111,11 +119,15 @@
                     })
                     await checkStronghold(mintAction, true)
                 }
-            } catch (err) {
+            } catch (reason) {
                 if (!error) {
-                    error = err.error
-                        ? new BaseError({ message: err.error ?? err.message, logToConsole: true, saveToErrorLog: true })
-                        : err
+                    error = reason.error
+                        ? new BaseError({
+                              message: reason.error ?? reason.message,
+                              logToConsole: true,
+                              saveToErrorLog: true,
+                          })
+                        : reason
                 }
             }
         }
