@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Šaljite, primajte i upravljajte svojim IOTA tokenima",
+            "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Firefly je službeni IOTA program novčanika."
         },
         "legal": {
@@ -14,12 +14,12 @@
             "body": "Pomozite developerima da poboljšaju Firefly automatskim slanjem dijagnostičkih podataka kada dođe do pogreške ili pada programa.",
             "checkbox": "Pošalji izvješća o padu programa IOTA zakladi"
         },
-        "appearance": {
-            "title": "Izgled",
-            "body": "Odaberite temu aplikacije."
+        "languageAndAppearance": {
+            "title": "Language & appearance",
+            "body": "Choose your language and theme"
         },
         "profile": {
-            "title": "Stvori novi profil",
+            "title": "Create your {protocol} profile",
             "profileName": "Ime profila",
             "body1": "Možete stvoriti više korisničkih računa kako biste organizirali svoje novčanike i poboljšali privatnost.",
             "body2": {
@@ -34,7 +34,7 @@
             }
         },
         "setup": {
-            "title": "Postavite svoj novčanik",
+            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
             "chrysalisTitle": "Chrysalis unaprijeđenje mreže",
             "chrysalisBody": "Od 21. travnja 2021. godine, korisnici mogu obaviti migraciju svojih tokena na novu Chrysalis mrežu. Preporučamo da svoje tokene migrirate čim prije.",
             "learnMore": "Saznajte detalje o migraciji"
@@ -48,13 +48,55 @@
             "title": "Stvori novčanik",
             "body": "Stvori novi novčanik. Možeš odabrati običan softver novčanik, ili postavi hardverski novčanik ukoliko imaš Ledger uređaj.",
             "softwareAccount": {
-                "title": "Želim softverski novčanik",
-                "description": "Stvori frazu za oporavak od 24 riječi"
+                "title": "Create a software wallet",
+                "description": "Provides a Stronghold file and recovery phrase"
             },
             "ledgerAccount": {
-                "title": "Želim hardverski novčanik",
+                "title": "Create a hardware wallet",
                 "description": "Potreban je Ledger Nano S ili Ledger Nano X"
             }
+        },
+        "protocol": {
+            "title": "Choose protocol",
+            "body": "Set the protocol for your profile",
+            "iota": "IOTA Mainnet",
+            "shimmer": "Staging network for IOTA Mainnet"
+        },
+        "network": {
+            "title": "Choose network",
+            "body": "Set the network for your profile",
+            "iota": {
+                "mainnet": {
+                    "title": "Mainnet",
+                    "body": "IOTA Mainnet"
+                },
+                "devnet": {
+                    "title": "Devnet",
+                    "body": "Developer network for IOTA"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with active TIPS"
+                }
+            },
+            "shimmer": {
+                "mainnet": {
+                    "title": "Shimmer",
+                    "body": "Staging network for IOTA"
+                },
+                "devnet": {
+                    "title": "Shimmer Beta",
+                    "body": "Beta network for Shimmer"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with draft TIPS"
+                }
+            }
+        },
+        "customNetwork": {
+            "title": "Connect to a custom network",
+            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "Spoji svoj Ledger",
@@ -80,15 +122,10 @@
             "body1": "Postavite PIN kako biste bili sigurni da samo vi možete ući u svoj profil.",
             "body2": "Držite svoj PIN na sigurnom!"
         },
-        "pin": {
-            "title": "Postavite PIN",
-            "body1": "Unesite PIN od šest znamenki. Za pristup računu uvijek ćete morati unijeti ovaj PIN.",
-            "body2": "Koristite samo znamenke"
-        },
-        "confirmPin": {
-            "title": "Potvrdite svoj PIN kod",
-            "body1": "Vaš PIN čuva privatnost vaših sredstava i transakcija.",
-            "body2": "Za nastavak ponovo unesite PIN. "
+        "setupPin": {
+            "title": "Set up PIN code",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "backup": {
             "title": "Napravite sigurnosnu kopiju svojeg novčanika",
@@ -123,6 +160,10 @@
             "title": "Sigurnosna kopija je uspješno napravljena",
             "body": "Napravili ste Stronghold sigurnosnu kopiju svojih novčanika."
         },
+        "claimRewards": {
+            "title": "Your Shimmer staking rewards",
+            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+        },
         "congratulations": {
             "title": "Postavljanje novčanika je završeno",
             "fundsMigrated": "Sredstva su prebačena",
@@ -133,16 +174,31 @@
             "exportMigration": "Izvezite detalje o migraciji i dovršite postupak"
         },
         "import": {
-            "title": "Oporavite ili migrirajte sredstva",
-            "body": "Ako imate seed ili datoteku za oporavak novčanika, možete ih uvesti ovdje. Ako držite sredstva sa starije mreže, provest ćemo vas kroz korake za prebacivanje na Chrysalis mrežu.",
+            "title": {
+                "iota": "Recover or migrate IOTA funds",
+                "shimmer": "Recover Shimmer profile"
+            },
+            "body": {
+                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
+            },
             "importSeed": "Imam seed koji se sastoji od 81 znaka",
             "importSeedDescription": "Unesite seed i preselite sredstva na Chrysalis",
-            "importMnemonic": "Imam Firefly frazu za oporavak",
-            "importMnemonicDescription": "Za oporavak novčanika unesite svoju frazu za oporavak",
-            "importFile": "Imam datoteku s pričuvnom kopijom",
-            "importFileDescription": "Uvezite Seedvault ili Stronghold datoteku",
-            "importLedger": "Imam Ledger sigurnosnu kopiju",
-            "importLedgerDescription": "Oporavak ili migracija Ledger profila"
+            "importMnemonic": "Use recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase",
+            "importFile": {
+                "iota": "Use backup file",
+                "shimmer": "Use Stronghold backup file"
+            },
+            "importFileDescription": {
+                "iota": "Upload a Seedvault or Stronghold file",
+                "shimmer": "Upload Stronghold file"
+            },
+            "importLedger": "Use Ledger hardware device",
+            "importLedgerDescription": {
+                "iota": "Restore or migrate a Ledger profile",
+                "shimmer": "Restore using Nano S or Nano X devices"
+            }
         },
         "importFromText": {
             "seed": {
@@ -190,7 +246,7 @@
             "readMore": "Što očekivati od postupka migracije"
         },
         "generateNewLedgerAddress": {
-            "title": "Stvorite novu adresu",
+            "title": "Generate new address",
             "body": "Za migraciju pomoću Fireflya prvo moraš generirati novu adresu. Klikni ispod za početak.",
             "confirmTitle": "Potvrdi novu adresu",
             "confirmBody": "Zbog sigurnosti te molimo da provjeriš adresu generiranu na tvojem Ledger uređaju s adresom koju ti prikazujemo ispod. Ukoliko su iste, pritisni oba gumba na svojem Ledgeru kada te uređaj to zatraži.",
@@ -276,7 +332,7 @@
             "body2": "Uvjeri se da je tvoj Ledger spojen i da je {legacy} aplikacija upaljena tijekom cijele migracije.",
             "migrate": "Prebaci sredstva",
             "transaction": "Transakcija {number}",
-            "rerun": "Pokušaj ponovo"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -291,17 +347,17 @@
         },
         "settings": {
             "settings": "Postavke",
-            "generalSettings": {
-                "title": "Opće",
-                "description": "Odredite izgled aplikacije i druge opće postavke"
+            "general": {
+                "title": "General",
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "Sigurnost",
                 "description": "Promijena lozinke i ostale postavke sigurnosti"
             },
-            "advancedSettings": {
-                "title": "Napredne",
-                "description": "Alati i ručne postavke za tehnički potkovane korisnike"
+            "advanced": {
+                "title": "Advanced",
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "Pomoć i informacije",
@@ -361,9 +417,9 @@
                 "description": "Promijeni ime svog Firefly profila",
                 "success": "Promijenili ste ime profila"
             },
-            "balanceFinder": {
-                "title": "Pronalazak sredstava",
-                "description": "Izvršite detaljnu pretragu svojih adresa kako bi pronašli tokene"
+            "walletFinder": {
+                "title": "Wallet finder",
+                "description": "Perform an extended search of your previously used wallets"
             },
             "hiddenAccounts": {
                 "title": "Skriveni novčanici",
@@ -374,8 +430,8 @@
                 "description": "Brisanje čitavog profila, svih novčanika i povijesti transakcija. Uvjerite se da imate sigurnosnu kopiju"
             },
             "deepLinks": {
-                "title": "IOTA poveznice",
-                "description": "Automatski ispuni podatke o transakciji unutar Fireflya nakon klika na IOTA poveznicu"
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkConfiguration": {
                 "title": "Mrežna konfiguracija",
@@ -403,7 +459,7 @@
                 "editDetails": "Uredi pojedinosti",
                 "viewInfo": "Pogledaj informacije",
                 "setAsPrimary": "Postavi kao primarni node",
-                "removeNode": "Ukloni node",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "Uključi popis službenih nodeova",
                 "noNodes": "Nema nodeova, nije se moguće povezati s mrežom",
                 "noNodesAuto": "Nema nodeova na raspolaganju. Upotrijebit ćemo automatski odabir."
@@ -451,6 +507,14 @@
                 "title": "O aplikaciji",
                 "description": ""
             },
+            "createDeveloperProfile": {
+                "title": "Create Developer Profile",
+                "description": ""
+            },
+            "createNormalProfile": {
+                "title": "Create Normal Profile",
+                "description": ""
+            },
             "reportAnIssue": {
                 "title": "Prijavi problem",
                 "description": "Prijavite bug developerima. Prvo provjerite je li ista greška već prijavljena"
@@ -462,15 +526,16 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Mreža je funkcionalna",
-                "networkDegraded": "Mreža je degradirana",
-                "networkDown": "Mreža nije funkcionalna",
+                "operational": "Network operational",
+                "degraded": "Network degraded",
+                "down": "Network down",
+                "disconnected": "Disconnected from node",
                 "status": "Stanje",
                 "messagesPerSecond": "Poruka u sekundi",
                 "referencedRate": "Stopa potvrđenih poruka"
             },
             "profileModal": {
-                "allSettings": "Sve postavke",
+                "allSettings": "All settings",
                 "logout": "Odjavi se",
                 "stronghold": {
                     "title": "Zaključavanje profila",
@@ -491,8 +556,8 @@
                 },
                 "backup": {
                     "title": "Napravite sigurnosne kopije svojih novčanika",
-                    "lastBackup": "Zadnja pričuvna kopija napravljena je {date}",
-                    "notBackedUp": "Nije napravljena pričuvna kopija",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Stvori sigurnosnu kopiju"
                 },
                 "version": {
@@ -541,7 +606,7 @@
                 "totalWalletRewards": "Ukupne nagrade novčanika",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly je visoko skalabilna multi-chain mreža namijenjena izgradnji te implementaciji pametnih ugovora. Assembly predstavlja budućnost za web3. "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -561,9 +626,17 @@
         }
     },
     "popups": {
+        "storageDepositBreakdown": {
+            "title": "Storage deposit breakdown",
+            "totalStorageDeposit": "Total storage deposit",
+            "pendingTransactions": {
+                "title": "Locked in pending transactions",
+                "subtitle": "For sending native assets and small IOTA amounts"
+            }
+        },
         "password": {
             "title": "Potrebna je lozinka",
-            "subtitle": "Za otključavanje novčanika molimo unesite lozinku",
+            "subtitle": "Please provide your password to unlock your wallets",
             "backup": "Unesi lozinku za izvoz pričuvne kopije"
         },
         "qr": {
@@ -578,14 +651,9 @@
             "noAutoUpdate": "Automatsko ažuriranje je onemogućeno u ovoj verziji Windowsa, molimo posjetite https://firefly.iota.org kako biste skinuli novu verziju.",
             "preReleaseDescription": "Trenutno koristite alpha/beta verziju Fireflya. Ažuriranja su onemogućena."
         },
-        "backup": {
-            "title": "Posljednja pričuvna kopija: {date}",
-            "lastBackup": "Zadnja pričuvna kopija napravljena je {date}",
-            "backupDescription": "Važno je redovito izrađivati pričuvne kopije kako biste uvijek imali kopiju svojih novčanika i povijesti transakcija.",
-            "backupWarning": "Izgubite li pričuvnu kopiju i frazu za oporavak, izgubit ćete pristup svojim sredstvima.",
-            "notBackedUp": "Nije napravljena pričuvna kopija",
-            "notBackedUpDescription": "Niste napravili pričuvnu kopiju svojih novčanika",
-            "saving": "Spremanje..."
+        "backupStronghold": {
+            "title": "Backup your stronghold file",
+            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deleteAccount": {
             "title": "Obriši {name}?",
@@ -617,7 +685,7 @@
             "titleRemove": "Ukloni node",
             "titleRemoveAll": "Ukloni sve nodeove",
             "titleDetails": "Pojedinosti nodea",
-            "titleInfo": "Informacije o nodeu",
+            "titleInfo": "Node information",
             "addingNode": "Dodajem node",
             "updatingNode": "Ažuriranje nodea",
             "loadingNodeInfo": "Učitavanje podataka o nodeu",
@@ -629,15 +697,41 @@
             "removeConfirmation": "Jeste li sigurni da želite ukloniti ovaj node?",
             "removeAllConfirmation": "Jeste li sigurni da želite ukloniti sve nodeove?",
             "info": {
-                "url": "URL",
-                "software": "Softver",
-                "networkId": "ID mreže",
-                "bech32HRP": "Bech32 HRP",
-                "features": "Značajke",
-                "confirmedMilestoneIndex": "Potvrđeni milestone indeks",
-                "pruningIndex": "Pruning indeks",
-                "messagesPerSecond": "Poruka u sekundi",
-                "referencedRate": "Stopa potvrđenih poruka"
+                "general": {
+                    "tab": "General",
+                    "name": "Name",
+                    "url": "URL",
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index",
+                    "features": "Features"
+                },
+                "metrics": {
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
+                },
+                "protocol": {
+                    "tab": "Protocol",
+                    "network": "Network",
+                    "bech32HRP": "Bech32 HRP",
+                    "tokenSupply": "Token supply",
+                    "protocolVersion": "Version",
+                    "minPoWScore": "Min PoW Score"
+                },
+                "baseToken": {
+                    "tab": "Base token",
+                    "token": "Token",
+                    "tickerSymbol": "Ticker",
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
+                }
             }
         },
         "switchNetwork": {
@@ -673,15 +767,13 @@
             "sendingFromStakedAccount": "Šaljete transfer s novčanika koji trenutno stakea. Ovo može prekinuti staking vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti staking vaših preostalih tokena.",
             "sendingFromStakedAccountBelowMinReward": "Šaljete transfer s novčanika koji još nije dostigao minimalnu staking nagradu. Ovo može prekinuti staking vaših tokena, te možete izgubiti staking nagrade na ovom novčaniku."
         },
-        "balanceFinder": {
-            "title": "Pronalazak sredstava",
-            "body": "Izvršite detaljniju pretragu adresa kako bi pronašli sredstva koja vam nedostaju i prethodne airdrop nagrade. Ovo može potrajati.",
-            "accountsSearched": "Pretraženi novčanici",
-            "addressesSearched": "Pretražene adrese po novčaniku",
-            "accountsFound": "Pronađeno novčanika",
-            "totalWalletBalance": "Ukupno stanje",
-            "searchAgainHint": "Da li je vaše stanje ili broj novčanika netočan? Molimo pretražite ponovno dok ne bude prikazano točno stanje.",
-            "typePassword": "Za pretraživanje morate unijeti lozinku."
+        "walletFinder": {
+            "title": "Wallet finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
+            "accountsSearched": "Wallets searched",
+            "accountsFound": "Wallets found",
+            "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
         },
         "riskFunds": {
             "title": "Upozorenje: sredstva su u opasnosti tijekom migracije",
@@ -689,7 +781,7 @@
             "body2": "Preporučamo da ponovite postupak za adrese sa srednjom ili višom razinom rizika."
         },
         "missingBundle": {
-            "title": "Upozorenje: sredstva su u opasnosti tijekom migracije",
+            "title": "Warning: funds at risk during migration",
             "body": "Imate sredstva na iskorištenim adresama, no informacije potrebne kako bismo ih osigurali nisu dostupne. Ovo se može dogoditi ukoliko su te transakcije izvršene prije dosta vremena. Možete nastaviti, ali tijekom migracije {value} je pod rizikom.",
             "learnMore": "Saznajte više o iskorištenim adresama",
             "proceed": "Da, razumijem rizike"
@@ -718,7 +810,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Savjeti u slučaju da se tvoj Ledger ne želi spojiti",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Pobrini se da Ledger Live aplikacija nije otvorena na tvom računalu",
                 "1": "Pobrini se da je tvoj Ledger uređaj otključan PIN-om",
@@ -735,7 +827,7 @@
                 "info": "Potvrdi da je adresa za polog ostatka, koja je trenutno prikazana na tvom Ledgeru, istovjetna onoj prikazanoj ispod. Ukoliko su obje adrese iste, pritisni oba gumba na svom Ledgeru kada te uređaj to zatraži."
             },
             "transaction": {
-                "title": "Potvrdi transakciju",
+                "title": "Confirm transaction",
                 "info": "Potvrdi da je informacija o transakciji, trenutno prikazana na tvom Ledger uređaju, istovjetna informaciji prikazanoj ispod. Ukoliko su obje informacije jednake, pritisni oba gumba na svom Ledgeru kada te uređaj to zatraži."
             }
         },
@@ -756,11 +848,11 @@
         },
         "stakingManager": {
             "title": "Upravljanje stakingom",
-            "description": "Kada pokrećete stake novčanika, šaljete sami sebi transakciju kojom obilježavate ta sredstva kao \"stakeana\". Možete obaviti transfer tih tokena u bilo koje vrijeme, ali nećete nastaviti dobivati nagrade od stakea.",
+            "description": "Kada pokrećete staking novčanika, šaljete sami sebi transakciju kojom obilježavate ta sredstva kao \"stakeana\". Možete obaviti transfer tih tokena u bilo koje vrijeme, ali nećete nastaviti dobivati nagrade od stakinga.",
             "totalFundsStaked": "Ukupna sredstva na stakingu",
             "stakedSuccessfully": "Vaša sredstva su stakeana za {account}.",
             "unstakedSuccessfully": "Vaša sredstva više nisu na stakeu za {account}.",
-            "singleAccountHint": "Tražite svoje novčanike? Firefly se promijenio. Možete mijenjati svoje novčanike u gornjoj traci izbornika."
+            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
             "title": "Potvrdite sudjelovanje",
@@ -773,7 +865,7 @@
         "newStakingPeriodNotification": {
             "title": "{periodNumber} faza stakinga od {date}",
             "body": "Staking IOTA tokena za Assembly se nastavlja... Sudjelujte u {periodNumber} fazi koja traje 90 dana. Stakeajte svoje IOTA tokene i zaradite ASMB nagrade!",
-            "info": "Shimmer staking je sada završen i samo će ASMB tokeni biti dstribuirani."
+            "info": "Shimmer staking je sada završen i samo će ASMB tokeni biti distribuirani."
         },
         "shimmer-info": {
             "title": "O Shimmeru",
@@ -808,11 +900,17 @@
             "title": "Način na koji koristite Firefly se promijenio",
             "body": "Svaka pojedina kartica sada prikazuje samo jedan novčanik. Odabrani novčanik možete promijeniti s bilo kojeg mjesta koristeći prekidač u naslovnoj traci.",
             "hint": "Ne možete pronaći novčanik? Upotrijebite \"Pronalazak sredstava\" u postavkama kako bi otkrili prethodno korištene novčanike."
+        },
+        "transactionDetails": {
+            "title": "Transaction details"
+        },
+        "sendForm": {
+            "title": "Send funds"
         }
     },
     "charts": {
-        "incomingMi": "U dolasku {value}",
-        "outgoingMi": "Šalje se {value}",
+        "incomingMi": "Dolazna transakcija {value}",
+        "outgoingMi": "Odlazna transakcija {value}",
         "portoflio": "Portfolio",
         "token": "Token",
         "holdings": "Imovina",
@@ -831,18 +929,36 @@
         "cancel": "Poništi",
         "close": "Zatvori",
         "dismiss": "Odbaci",
+        "claim": "Claim",
+        "claiming": "Claiming",
+        "reject": "Reject",
+        "confirmRejection": {
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        },
         "proceedAnyway": "Ipak nastavi",
         "save": "Spremi",
         "importSeed": "Uvezite postojeći Seed",
-        "restoreWallet": "Migriraj ili obnovi novčanik",
-        "restoreWalletDescription": "Migriraj na Chrysalis mrežu ili obnovi postojeći novčanik",
-        "createWallet": "Stvorite novi novčanik",
-        "createWalletDescription": "Napravi novi, svjež novčanik na Chrysalis mreži",
+        "restoreWallet": {
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile"
+        },
+        "restoreWalletDescription": {
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile"
+        },
+        "createWallet": "Create a new {protocol} profile",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "claimShimmer": "Claim Shimmer staking rewards",
+        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "Spremi lozinku",
         "useBiometric": "Koristi biometričku zaštitu",
-        "setupPin": "Postavite PIN",
-        "setPin": "Postavite PIN",
-        "confirmPin": "Potvrdite PIN",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "Unesite PIN",
         "saveBackupFile": "Spremite pričuvnu kopiju",
         "iveWrittenRecoveryPhrase": "Zapisao sam svoju frazu za oporavak",
@@ -868,14 +984,13 @@
         "enableDeepLinks": "Omogući IOTA poveznice",
         "enableDeveloperMode": "Umogući razvojne alate",
         "enableSystemNotifications": "Omogući obavijesti",
-        "exportTransactionHistory": "Izvezi povijest transakcija",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Lokalni Proof of Work",
         "unlock": "Otključaj",
         "updateFirefly": "Ažuriraj Firefly",
         "restartNow": "Ponovno pokreni",
         "saveBackup": "Spremi Stronghold pričuvnu kopiju",
         "customizeAcount": "Personaliziraj novčanik",
-        "viewAddressHistory": "Povijest adresa",
         "hideAccount": "Sakrij novčanik",
         "showAccount": "Prikaži novčanik",
         "deleteAccount": "Obriši novčanik",
@@ -883,7 +998,7 @@
         "addNode": "Dodaj node",
         "updateNode": "Obnovi node",
         "removeNode": "Ukloni node",
-        "removeAllNodes": "Ukloni sve nodeove",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Sakrij",
         "hideOthers": "Sakrij ostalo",
         "showAll": "Pokaži sve",
@@ -893,6 +1008,7 @@
         "redo": "Ponovi",
         "cut": "Izreži",
         "copy": "Kopiraj",
+        "copyAllInformation": "Copy all information",
         "paste": "Zalijepi",
         "selectAll": "Označi sve",
         "addAccount": "Dodaj novčanik",
@@ -911,15 +1027,17 @@
         "readDocumentation": "Pročitajte dokumentaciju",
         "visitFaq": "Posjeti često postavljana pitanja",
         "viewStatus": "Vidi status",
+        "viewStorageDeposit": "View storage deposit",
         "showHiddenAccounts": "Prikaži skrivene novčanike",
         "confirm": "Potvrdi",
         "hideNetworkStatistics": "Sakrij statistiku mreže",
-        "findBalances": "Pronalazak sredstava",
-        "searchBalances": "Traži sredstva",
+        "findWallets": "Find wallets",
+        "useBalanceFinder": "Use balance finder",
+        "search": "Search",
         "searchAgain": "Traži ponovno",
-        "searching": "Pretraga...",
+        "searching": "Searching",
         "closeFirefly": "Zatvori Firefly",
-        "generateAddress": "Generiraj adresu",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migriraj drugi index",
         "visitWebsite": "Posjeti web-stranicu",
         "howItWorks": "Kako funkcionira",
@@ -932,9 +1050,15 @@
         "mergeFunds": "Spoji sredstva",
         "done": "Izvršeno",
         "okIUnderstand": "U redu, razumijem",
-        "readMore": "Pročitajte više"
+        "readMore": "Pročitajte više",
+        "claimRewards": "Claim rewards",
+        "rerunClaimProcess": "Rerun claim process",
+        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
+        "addPublicNote": "Add public note",
+        "backup": "Backup"
     },
     "general": {
+        "recipient": "Recipient",
         "password": "Lozinka",
         "confirmPassword": "Potvrda lozinke",
         "currentPassword": "Trenutna lozinka",
@@ -945,6 +1069,8 @@
         "recentActivity": "Nedavne Aktivnosti",
         "sent": "Poslano",
         "received": "Primljeno",
+        "transfer": "Transfer",
+        "transferring": "Transferring",
         "sendPayment": "Pošalji uplatu",
         "moveFunds": "Interni prijenos",
         "sendTo": "Pošalji",
@@ -955,22 +1081,25 @@
         "sendTokensToAddress": "Šalji tokene na adresu",
         "manageAccount": "Upravljanje novčanikom",
         "customizeAcount": "Personaliziraj novčanik",
-        "account": "Novčanik",
+        "account": "Wallet",
         "sendingToAddress": "Slanje na adresu",
         "amount": "Iznos",
         "addAddress": "Dodajte adresu",
         "reference": "Referenca",
         "from": "Od",
         "to": "Za",
-        "receiveFunds": "Primi sredstva",
+        "receiveFunds": "Receive funds",
         "address": "Adresa",
         "myAddress": "Moja adresa",
+        "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Podijelite adresu",
         "yourAddress": "Vaša adresa",
         "newRemainder": "Novi ostatak",
         "remainder": "Ostatak",
         "generateNewAddress": "Stvorite novu adresu",
+        "copyToClipboard": "Copy to clipboard",
         "copyAddress": "Kopiraj adresu",
+        "viewOnExplorer": "View on Explorer",
         "import": "Uvezi",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -981,8 +1110,8 @@
         "systemTheme": "Sistemska",
         "balance": "Stanje računa",
         "all": "Sve",
-        "incoming": "Dolazni",
-        "outgoing": "Odlazni",
+        "incoming": "Dolazne transakcije",
+        "outgoing": "Odlazne transakcije",
         "totalIn": "Ukupno unutra",
         "totalOut": "Ukupno van",
         "accounts": "Novčanici",
@@ -990,10 +1119,11 @@
         "profiles": "Profili",
         "dev": "Programer",
         "createAccount": "Stvori novčanik",
-        "createNewWallet": "Stvorite novi novčanik",
+        "addAWallet": "Dodaj novčanik",
         "accountName": "Ime novčanika",
         "latestTransactions": "Najnovije transakcije",
         "transactions": "Transakcije",
+        "activity": "Activity",
         "security": "Sigurnost",
         "accountAddress": "Adresa novčanika",
         "network": "Mreža",
@@ -1006,13 +1136,15 @@
         "receiveAddress": "Adresa primatelja",
         "newAddress": "Nova adresa",
         "date": "Datum",
-        "status": "Stanje",
+        "status": "Status",
         "confirmed": "Potvrđeno",
         "pending": "U tijeku",
         "noAccounts": "Ne posjedujete niti jedan novčanik, molimo kreirajte jedan.",
         "loadingAccounts": "Učitavanje. Molimo pričekajte...",
         "addProfile": "Dodaj profil",
         "noRecentHistory": "Nema nedavnih povijesnih podataka",
+        "thisMonth": "This month",
+        "search": "Search",
         "firstSync": "Sinkronizirano povijest aktivnosti, ovo bi moglo potrajati...",
         "transferSyncing": "Sinkronizacija novčanika",
         "transferSelectingInputs": "Odabir inputa",
@@ -1049,18 +1181,12 @@
         "creatingProfile": "Stvaram račun, molim pričekajte...",
         "fundMigration": "Prebacivanje sredstava",
         "accountRemoved": "Ovaj je novčanik skriven. Kako biste mogli raditi transfere prvo ga morate prikazati.",
-        "receivingFrom": "Primanje s {account}",
-        "sendingTo": "Slanje na {account}",
-        "receivedFrom": "Primljeno s {account}",
-        "sentTo": "Poslano na {account}",
-        "transferringFrom": "Prijenos s {account}",
-        "transferringTo": "Prijenos na {account}",
-        "transferFrom": "Prijenos s {account}",
-        "transferTo": "Prijenos na {account}",
-        "stakedFor": "Staking pokrenut za {account}",
-        "unstakedFor": "Staking prekinut za {account}",
-        "votedFor": "Glasano za {account}",
-        "unvotedFor": "Glas poništen za {account}",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Staking transakcija",
         "unstakingTransaction": "Transakcija prekida stakinga",
         "receiving": "Primanje u tijeku",
@@ -1070,16 +1196,29 @@
         "version": "Verzija {version}",
         "yourWallets": "Vaši novčanici",
         "unknown": "Nepoznato",
+        "unknownAddress": "Unknown address",
         "none": "Nijedan",
         "staked": "Staking pokrenut",
         "unstaked": "Nije na stakeu",
         "staking": "Staking",
         "unstaking": "Prekid stakinga",
         "notStaked": "Staking nije pokrenut",
-        "stakedFunds": "Sredstva na stakeu",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Sredstva koja nisu na stakeu",
         "accountColor": "Boja novčanika",
-        "myAssets": "Moja imovina"
+        "transactionTime": "Transaction time",
+        "storageDeposit": "Storage deposit",
+        "expirationTime": "Expiration time",
+        "claimedTime": "Claimed at",
+        "copiedToClipboard": "Copied to clipboard",
+        "total": "Ukupno: {balance}",
+        "availableBalance": "Available balance: {balance}",
+        "amountClaimed": "{amount} claimed",
+        "metadata": "Metadata",
+        "tag": "Tag",
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in",
+        "assets": "Assets"
     },
     "dates": {
         "today": "Danas",
@@ -1118,18 +1257,26 @@
             "error": "Nije moguće izvesti povijest transakcija za {accountAlias}"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "Potrebno se prijaviti za pokretanje IOTA poveznice",
-            "notEnabled": "IOTA poveznice nisu omogućene",
-            "invalidFormat": "IOTA poveznica koju ste slijedili nije važeća",
+            "receivedWhileLoggedOut": "Please login to initiate the deep link",
+            "notEnabled": "Deep links are not enabled",
+            "invalidFormat": "The deep link you followed is invalid",
             "wallet": {
                 "send": {
-                    "success": "Podaci o plaćanju dodani s IOTA poveznice"
+                    "success": "Payment details added from deep link"
                 }
             }
         },
         "syncing": "Molimo pričekajte da sinkronizacija završi prije nego promijenite novčanik.",
         "transferring": "Molimo pričekajte da sve transakcije završe prije nego promijenite novčanik.",
-        "participating": "Molimo pričekajte da sve staking/glasačke transakcije završe prije nego promijenite novčanik."
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "claimed": {
+            "success": "Transaction claimed",
+            "error": "Claiming transaction failed"
+        },
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {
@@ -1159,7 +1306,8 @@
         "pincode": {
             "length": "Vaš PIN se mora sastojati od {length, plural, one {# znaka} few {# znaka} other {# znakova}}.",
             "match": "PINovi se ne podudaraju.",
-            "incorrect": "Vaš trenutni PIN je netočan."
+            "incorrect": "Vaš trenutni PIN je netočan.",
+            "invalid": "Invalid PIN code."
         },
         "account": {
             "length": "Ime novčanika ne smije biti dulje od {length, plural, one {# znaka} few {# znaka} other {# znakova}}.",
@@ -1173,23 +1321,29 @@
             "chars": "Ime profila ne smije uključivati neki od sljedećih znakova <>:\"/\\|?*",
             "index": "Indeks vašeg računa mora biti broj između 0 i 2,147,483,647.",
             "page": "Stranica vašeg računa mora biti broj između 0 i 2,147,483,647.",
-            "syncing": "Došlo je do greške prilikom sinkroniziranja vaših novčanika."
+            "syncing": "Došlo je do greške prilikom sinkroniziranja vaših novčanika.",
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet."
         },
         "send": {
             "addressLength": "Adrese moraju sadržavati {length, plural, one {# znak} few {# znaka} other {# znakova}}.",
             "amountTooHigh": "Ovo je više od sredstava koja su vam na raspolaganju.",
-            "amountNoFloat": "Ako je jedinica `i`, ne možete koristiti decimalna mjesta.",
+            "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Djeluje da je iznos nevažeći broj.",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "amountZero": "Iznos mora biti veći od 0.",
             "wrongAddressPrefix": "Adrese započinju prefiksom {prefix}.",
             "wrongAddressFormat": "Adresa nije u ispravnom formatu.",
             "invalidAddress": "Adresa nije valjana.",
             "insufficientFunds": "Ovaj novčanik nema dovoljno sredstava.",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
             "noToAccount": "Niste odabrali novčanik na koji želite poslati sredstva.",
             "sendingDust": "Ne možete slati manje od 1 Mi.",
             "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi.",
             "cancelled": "Transakcija je otkazana.",
-            "transaction": "Došlo je do greške prilikom slanja vaše transakcije. Molimo pokušajte ponovno."
+            "transaction": "Došlo je do greške prilikom slanja vaše transakcije. Molimo pokušajte ponovno.",
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "invalid": "Molimo unesite valjani URL.",
@@ -1204,7 +1358,10 @@
             "noSynced": "Nema dostupnih sinkroniziranih nodeova.",
             "answer": "Nije bilo moguće dobiti odgovor od svih nodeova.",
             "forbidden": "Povezivanje s ovim nodeom je zabranjeno.",
-            "pluginNotAvailable": "\"{nodePlugin}\" plugin nije dostupan na trenutnom nodeu."
+            "pluginNotAvailable": "\"{nodePlugin}\" plugin nije dostupan na trenutnom nodeu.",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node"
         },
         "network": {
             "mismatch": "Mrežni ID ovog nodea je \"{networkId}\", što se ne podudara s trenutnom mrežom.",
@@ -1258,6 +1415,9 @@
         "invalidTime": "NEVAŽEĆE VRIJEME"
     },
     "warning": {
+        "transaction": {
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+        },
         "node": {
             "http": "Korištenje nodeova preko HTTP-a ostavlja promet nešifriranim i može predstavljati sigurnosni rizik."
         },
@@ -1294,17 +1454,20 @@
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID poruke",
+            "messageId": "Message ID",
             "internal": "Interna",
             "rawValue": "Neobrađena vrijednost",
             "formattedValue": "Formatirana vrijednost",
-            "date": "Datum",
+            "date": "Date",
             "time": "Vrijeme"
         }
     },
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "Trenutno koristite developerski profil i povezani ste s {networkName}"
+        },
+        "networkIndicator": {
+            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
         }
     },
     "permissions": {
@@ -1314,7 +1477,60 @@
         }
     },
     "tabs": {
-        "wallet": "Novčanik",
+        "wallet": "Wallet",
         "staking": "Staking"
+    },
+    "pills": {
+        "stake": {
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
+        },
+        "internalTransaction": {
+            "in": {
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
+            },
+            "out": {
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
+            }
+        },
+        "externalTransaction": {
+            "in": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
+            },
+            "out": {
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
+            }
+        },
+        "migrate": {
+            "Pending": "migrating for",
+            "Confirmed": "migrated for",
+            "Conflicting": "failed to migrate"
+        },
+        "asyncStatus": {
+            "unclaimed": "unclaimed",
+            "claimed": "claimed",
+            "expired": "expired"
+        }
+    },
+    "menus": {
+        "expirationTimePicker": {
+            "none": "No expiration time",
+            "1hour": "In 1 hour",
+            "1day": "In 1 day",
+            "1week": "In 1 week",
+            "customDate": {
+                "title": "Custom date",
+                "subtitle": "Set custom expiry date"
+            }
+        }
     }
 }

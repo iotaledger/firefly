@@ -1,4 +1,5 @@
 export { default as AccountActionsButton } from './AccountActionsButton.svelte'
+export { default as AssetActionsButton } from './AssetActionsButton.svelte'
 export { default as ExportStrongholdButton } from './ExportStrongholdButton.svelte'
 export { default as AddInputButton } from './AddInputButton.svelte'
 export { default as OnboardingButton } from './OnboardingButton.svelte'

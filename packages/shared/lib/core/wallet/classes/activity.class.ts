@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import { networkHrp } from '@core/network'
+import { COIN_TYPE, networkHrp } from '@core/network'
 import { IUTXOInput } from '@iota/types'
 import { OutputData, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
@@ -14,8 +14,8 @@ import {
 } from 'shared/lib/time'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
-import { IActivity, IAsset } from '../interfaces'
-import { assets, getNativeTokenAssetById } from '../stores'
+import { IActivity, IPersistedAsset } from '../interfaces'
+import { getPersistedAsset } from '../stores/persisted-assets.store'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { Subject } from '../types'
 import {
@@ -35,6 +35,7 @@ import {
     outputIdFromTransactionData,
 } from '../utils'
 import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
+import { activeProfile } from '@core/profile'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -49,12 +50,13 @@ export class Activity implements IActivity {
     sender: Subject
     recipient: Subject
     subject: Subject
+    isSelfTransaction: boolean
     isInternal: boolean
     direction: ActivityDirection
 
     outputId?: string
     rawAmount: number
-    asset: IAsset
+    asset: IPersistedAsset
     metadata?: string
     tag?: string
 
@@ -68,7 +70,11 @@ export class Activity implements IActivity {
     claimedDate?: Date
 
     setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
-        const { output, outputIndex } = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
+        const { output, outputIndex, isSelfTransaction } = getNonRemainderOutputFromTransaction(
+            transaction,
+            account.depositAddress
+        )
+
         const recipient = getRecipientFromOutput(output)
         const nativeToken = getNativeTokenFromOutput(output)
 
@@ -81,13 +87,14 @@ export class Activity implements IActivity {
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
 
-        this.sender = getSenderFromTransaction(transaction, account.depositAddress)
+        this.sender = getSenderFromTransaction(transaction, output, account.depositAddress)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
+        this.isSelfTransaction = isSelfTransaction
         this.isInternal = isSubjectInternal(recipient)
-        this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
+        this.direction = transaction.incoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
 
-        this.asset = getNativeTokenAssetById(nativeToken?.id) ?? get(assets)?.baseCoin
+        this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
         this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
         this.storageDeposit = getStorageDepositFromOutput(output)
@@ -125,11 +132,12 @@ export class Activity implements IActivity {
         this.sender = sender
         this.recipient = recipient
         this.subject = subject
+        this.isSelfTransaction = false
         this.isInternal = isInternal
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
-        this.asset = getNativeTokenAssetById(nativeToken?.id) ?? get(assets)?.baseCoin
+        this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
 
         this.storageDeposit = getStorageDepositFromOutput(outputData.output)
         this.rawAmount = nativeToken
