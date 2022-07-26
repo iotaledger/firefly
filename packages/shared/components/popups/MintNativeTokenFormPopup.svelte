@@ -9,7 +9,7 @@
     import {
         AddInputButton,
         Button,
-        ClosableTextInput,
+        ClosableInput,
         Error,
         NumberInput,
         Spinner,
@@ -22,7 +22,7 @@
     export let name: string
     export let totalSupply: number
     export let circulatingSupply: number
-    export let decimals: number
+    export let decimals = 0
     export let symbol: string
     export let description: string
     export let url: string
@@ -47,6 +47,12 @@
     $: logoUrl, (logoUrlError = '')
 
     let error: BaseError
+
+    let decimalsButtonElement: HTMLButtonElement
+    let isDecimalsInputOpen = false
+    function openDecimalsInput() {
+        isDecimalsInputOpen = true
+    }
 
     let descriptionButtonElement: HTMLButtonElement
     let isDescriptionInputOpen = false
@@ -213,6 +219,13 @@
             placeholder={localize('popups.mintNativeTokenForm.inputs.name')}
             error={nameError}
         />
+        <TextInput
+            bind:value={symbol}
+            label={localize('popups.mintNativeTokenForm.inputs.symbol')}
+            placeholder={localize('popups.mintNativeTokenForm.inputs.symbol')}
+            maxlength={5}
+            error={symbolError}
+        />
         <NumberInput
             bind:value={totalSupply}
             isInteger
@@ -227,21 +240,17 @@
             placeholder={localize('popups.mintNativeTokenForm.inputs.circulatingSupply')}
             error={circulatingSupplyError}
         />
-        <NumberInput
+        <ClosableInput
             bind:value={decimals}
+            bind:buttonElement={decimalsButtonElement}
+            bind:open={isDecimalsInputOpen}
+            inputType="number"
             isInteger
             label={localize('popups.mintNativeTokenForm.inputs.decimals')}
             placeholder={localize('popups.mintNativeTokenForm.inputs.decimals')}
             error={decimalsError}
         />
-        <TextInput
-            bind:value={symbol}
-            label={localize('popups.mintNativeTokenForm.inputs.symbol')}
-            placeholder={localize('popups.mintNativeTokenForm.inputs.symbol')}
-            maxlength={5}
-            error={symbolError}
-        />
-        <ClosableTextInput
+        <ClosableInput
             bind:value={description}
             bind:buttonElement={descriptionButtonElement}
             bind:open={isDescriptionInputOpen}
@@ -249,7 +258,7 @@
             placeholder={localize('popups.mintNativeTokenForm.inputs.description')}
             error={descriptionError}
         />
-        <ClosableTextInput
+        <ClosableInput
             bind:value={url}
             bind:buttonElement={urlButtonElement}
             bind:open={isUrlInputOpen}
@@ -257,7 +266,7 @@
             placeholder={localize('popups.mintNativeTokenForm.inputs.url')}
             error={urlError}
         />
-        <ClosableTextInput
+        <ClosableInput
             bind:value={logoUrl}
             bind:buttonElement={logoUrlButtonElement}
             bind:open={isLogoUrlInputOpen}
@@ -266,7 +275,13 @@
             error={logoUrlError}
         />
         {#if !isDescriptionInputOpen || !isUrlInputOpen || !isLogoUrlInputOpen}
-            <optional-input-buttons class="flex flex-row space-x-4">
+            <optional-input-buttons class="flex flex-wrap space-x-4">
+                <AddInputButton
+                    bind:buttonElement={decimalsButtonElement}
+                    bind:open={isDecimalsInputOpen}
+                    text={localize('popups.mintNativeTokenForm.inputs.decimals')}
+                    onClick={openDecimalsInput}
+                />
                 <AddInputButton
                     bind:buttonElement={descriptionButtonElement}
                     bind:open={isDescriptionInputOpen}
@@ -282,7 +297,7 @@
                 <AddInputButton
                     bind:buttonElement={logoUrlButtonElement}
                     bind:open={isLogoUrlInputOpen}
-                    text={localize('popups.mintNativeTokenForm.inputs.logoUrl')}
+                    text={localize('popups.mintNativeTokenForm.inputs.logo')}
                     onClick={openLogoUrlInput}
                 />
             </optional-input-buttons>
