@@ -89,6 +89,8 @@ import {
     WARNING_SVG,
     WIFI_SVG,
     WORK_SVG,
+    VERIFIED_SVG,
+    NOT_VERIFIED_SVG,
 } from '../svgs'
 
 export const ICON_SVG = {
@@ -139,6 +141,7 @@ export const ICON_SVG = {
     [Icon.Logout]: LOGOUT_SVG,
     [Icon.Minus]: MINUS_SVG,
     [Icon.Network]: NETWORK_SVG,
+    [Icon.NotVerified]: NOT_VERIFIED_SVG,
     [Icon.Parchment]: PARCHMENT_SVG,
     [Icon.Play]: PLAY_SVG,
     [Icon.Plus]: PLUS_SVG,
@@ -174,6 +177,7 @@ export const ICON_SVG = {
     [Icon.Tools]: TOOLS_SVG,
     [Icon.Transfer]: TRANSFER_SVG,
     [Icon.Unlock]: UNLOCK_SVG,
+    [Icon.Verified]: VERIFIED_SVG,
     [Icon.View]: VIEW_SVG,
     [Icon.Voting]: VOTING_SVG,
     [Icon.Wallet]: WALLET_SVG,

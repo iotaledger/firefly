@@ -1,5 +1,5 @@
 export interface IBaseTokenMetadata {
-    standard: 'BASE'
+    standard: 'BASE_COIN'
     name: string
     tickerSymbol?: string
     unit: string
