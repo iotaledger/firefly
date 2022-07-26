@@ -5,7 +5,7 @@
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { openPopup, popupState } from '@lib/popup'
     import {} from '@lib/popup'
-    import { mobile, stage } from '@lib/app'
+    import { logout, mobile, stage } from '@lib/app'
     import { appSettings } from '@lib/appSettings'
     import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
@@ -52,13 +52,14 @@
     }
 
     let isDoubleBack = false
-    void App.addListener('backButton', () => {
+    void App.addListener('backButton', (): void => {
         if (isDoubleBack) {
             isDoubleBack = false
-            return handleContinueClick()
+            handleContinueClick()
+            return
         }
         isDoubleBack = true
-        openPopup({
+        void openPopup({
             type: 'confirmCloseApp',
             hideClose: true,
             props: {
@@ -68,8 +69,9 @@
         })
     })
 
-    function handleContinueClick() {
-        // void App.exitApp()
+    async function handleContinueClick() {
+        await logout()
+        void App.exitApp()
     }
 
     async function hideSplashScreen() {
