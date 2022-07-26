@@ -1,6 +1,8 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components'
+    import { Icon, Text } from 'shared/components'
+    import { mobile } from '@lib/app'
     import Logo from './Logo.svelte'
+    import { removeDisplayNotification } from '@lib/notifications'
 
     type Action = {
         label: string
@@ -14,6 +16,7 @@
     export let subMessage: string
     export let progress: number
     export let actions: Action[] = []
+    export let id: string
 
     const TOAST_STYLE = {
         info: {
@@ -42,6 +45,10 @@
             subMessageColor: 'gray-600',
             buttonSecondary: 'black',
         },
+    }
+
+    function onDismissClick(): void {
+        removeDisplayNotification(id)
     }
 </script>
 
@@ -80,5 +87,10 @@
                 </button>
             {/each}
         </div>
+    {/if}
+    {#if $mobile}
+        <button on:click={onDismissClick}>
+            <Text type="p" color="white" darkColor="white">Dismiss</Text>
+        </button>
     {/if}
 </div>
