@@ -160,8 +160,10 @@ export class Converter {
      * @param utf8 The text to convert.
      * @returns The hex version of the bytes.
      */
-    public static utf8ToHex(utf8: string): string {
-        return Converter.bytesToHex(Converter.utf8ToBytes(utf8))
+    public static utf8ToHex(utf8: string, prefix = false): string {
+        return prefix
+            ? '0x' + Converter.bytesToHex(Converter.utf8ToBytes(utf8))
+            : Converter.bytesToHex(Converter.utf8ToBytes(utf8))
     }
 
     /**
@@ -172,6 +174,10 @@ export class Converter {
     public static hexToUtf8(hex: string): string {
         const bytes = Converter.hexToBytes(hex)
         return Converter.bytesToUtf8(bytes)?.slice(1)
+    }
+
+    public static decimalToHex(number: number, prefix = false): string {
+        return prefix ? '0x' + number.toString(16) : number.toString(16)
     }
 
     /**

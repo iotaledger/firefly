@@ -932,9 +932,6 @@
                 "url": "URL",
                 "logoUrl": "Logo URL",
                 "logo": "Logo"
-            },
-            "buttons": {
-                "mint": "Mint"
             }
         },
         "faucetRequest": {
@@ -1091,6 +1088,7 @@
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
+        "mint": "Mint",
         "mintNativeToken": "Mint native token",
         "verifyToken": "Verify token",
         "unverifyToken": "Unverify token",

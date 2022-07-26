@@ -20,9 +20,9 @@ export async function mintNativeToken(
         const account = get(selectedAccount)
         const nativeTokenOptions: NativeTokenOptions = {
             accountAddress: account.depositAddress,
-            maximumSupply: '0x' + maximumSupply.toString(16),
-            circulatingSupply: '0x' + circulatingSupply.toString(16),
-            foundryMetadata: Array.from(Converter.utf8ToBytes(JSON.stringify(metadata))),
+            maximumSupply: Converter.decimalToHex(maximumSupply, true),
+            circulatingSupply: Converter.decimalToHex(circulatingSupply, true),
+            foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata), true),
         }
         const transactionOptions: TransactionOptions = {
             remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
@@ -39,9 +39,9 @@ export async function mintNativeToken(
             new Activity().setFromTransaction(mintTokenTransaction.transaction, account)
         )
         isTransferring.set(false)
-        return
-    } catch (err) {
+        return Promise.resolve()
+    } catch (reason) {
         isTransferring.set(false)
-        throw err
+        return Promise.reject(reason)
     }
 }
