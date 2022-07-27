@@ -7,7 +7,7 @@
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "NODE_ENV=production PLATFORM=mobile webpack && yarn assets:alpha",
+        "build": "NODE_ENV=production PLATFORM=mobile webpack && yarn assets:beta",
         "ios": "cap copy ios && cap open ios",
         "ios:update": "cap sync ios && cap open ios",
         "android": "cap copy android && cap open android",

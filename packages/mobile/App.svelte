@@ -11,7 +11,7 @@
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from '@lib/market'
     import { pollNetworkStatus } from '@lib/networkStatus'
-    import { AppRoute, initRouters } from '@core/router'
+    import { AppRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
     import { Platforms } from '@lib/typings/platform'
     import {
         Appearance,
@@ -51,26 +51,18 @@
         void hideSplashScreen()
     }
 
-    let isDoubleBack = false
-    void App.addListener('backButton', () => {
-        if (isDoubleBack) {
-            isDoubleBack = false
-            return handleContinueClick()
-        }
-        isDoubleBack = true
-        openPopup({
-            type: 'confirmCloseApp',
-            hideClose: true,
-            props: {
-                handleContinueClick,
-                handleCancelClick: () => (isDoubleBack = false),
-            },
+    backButtonStore.set(
+        new BackButtonHeap(() => {
+            App.exitApp()
         })
-    })
+    )
 
-    function handleContinueClick() {
-        // void App.exitApp()
-    }
+    void App.addListener('backButton', () => {
+        const next = $backButtonStore.remove()
+        if (next) {
+            next()
+        }
+    })
 
     async function hideSplashScreen() {
         await tick()

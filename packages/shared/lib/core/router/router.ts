@@ -1,7 +1,7 @@
 import { get, Writable } from 'svelte/store'
 
+import { backButtonStore } from './backbutton-history'
 import { FireflyEvent } from './types'
-
 export abstract class Router<Route> {
     protected history: Route[] = []
     protected readonly routeStore: Writable<Route>
@@ -18,6 +18,12 @@ export abstract class Router<Route> {
     private updateHistory(): void {
         const currentRoute = get(this.routeStore)
         this.history.push(currentRoute)
+
+        const prev = () => {
+            this.previous(true)
+        }
+
+        get(backButtonStore).add(prev as () => Promise<void>)
     }
 
     protected setNext(route: Route): void {
@@ -34,8 +40,11 @@ export abstract class Router<Route> {
         throw Error('Unimplemented state machine within custom router!')
     }
 
-    previous(): void {
+    previous(isBackButton = false): void {
         const previousRoute = this.history.pop()
+        if (isBackButton === false) {
+            get(backButtonStore).remove()
+        }
         if (previousRoute) {
             this.setRoute(previousRoute)
         }
