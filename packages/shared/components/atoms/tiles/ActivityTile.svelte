@@ -10,6 +10,9 @@
         hideActivity,
         InclusionState,
         VerificationStatus,
+        selectedAccountAssets,
+        getAssetFromPersistedAssets,
+        IPersistedAsset,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
@@ -18,6 +21,9 @@
 
     export let activity: Activity
 
+    let asset: IPersistedAsset
+
+    $: activity?.assetId, $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity?.assetId))
     $: title = activity?.getTitle()
     $: subject = activity?.getFormattedSubject()
     $: isIncomingActivityUnclaimed =
@@ -26,12 +32,12 @@
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 
     function handleTransactionClick(): void {
-        if (activity?.asset?.verification === VerificationStatus.New) {
+        if (asset?.verification === VerificationStatus.New) {
             openPopup({
                 type: 'tokenInformation',
                 props: {
                     activity,
-                    asset: activity?.asset,
+                    asset,
                 },
             })
         } else {
@@ -70,7 +76,7 @@
 >
     <div class="w-full flex flex-col space-y-4">
         <div class="flex flex-row items-center text-left space-x-4">
-            <AssetIcon asset={activity?.asset} showVerifiedBadgeOnly />
+            <AssetIcon {asset} showVerifiedBadgeOnly />
             <div class="flex flex-col w-full space-y-0.5">
                 <div class="flex flex-row justify-between space-x-1">
                     <Text
@@ -93,9 +99,9 @@
                 <div class="flex flex-row justify-between">
                     <Text fontWeight={FontWeightText.normal} lineHeight="140" color="gray-600">
                         {#if activity?.type === ActivityType.Minting}
-                            {activity?.asset?.metadata?.name
-                                ? truncateString(activity?.asset?.metadata?.name, 20, 0)
-                                : truncateString(activity?.asset?.id, 6, 7)}
+                            {asset?.metadata?.name
+                                ? truncateString(asset?.metadata?.name, 20, 0)
+                                : truncateString(asset?.id, 6, 7)}
                         {:else}
                             {localize(
                                 activity?.direction === ActivityDirection.In

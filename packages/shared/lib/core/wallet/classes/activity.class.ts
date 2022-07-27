@@ -1,6 +1,7 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
 import { COIN_TYPE, networkHrp } from '@core/network'
+import { activeProfile } from '@core/profile'
 import { IUTXOInput } from '@iota/types'
 import { OutputData, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
@@ -13,15 +14,18 @@ import {
     SECONDS_PER_MINUTE,
 } from 'shared/lib/time'
 import { get } from 'svelte/store'
+import { tryGetAndStoreAssetFromPersistedAssets } from '../actions'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
-import { IActivity, IPersistedAsset } from '../interfaces'
-import { getPersistedAsset } from '../stores/persisted-assets.store'
+import { IActivity } from '../interfaces'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
+import { getPersistedAsset } from '../stores/persisted-assets.store'
 import { Subject } from '../types'
 import {
+    containsFoundryOutput,
     formatTokenAmountBestMatch,
     getActivityType,
     getAmountFromOutput,
+    getAssetFromPersistedAssets,
     getExpirationDateFromOutput,
     getMetadataFromOutput,
     getNativeTokenFromOutput,
@@ -33,11 +37,8 @@ import {
     isOutputAsync,
     isSubjectInternal,
     outputIdFromTransactionData,
-    containsFoundryOutput,
 } from '../utils'
 import { getRelevantOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
-import { activeProfile } from '@core/profile'
-import { tryGetAndStoreAssetFromPersistedAssets } from '../actions'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -58,7 +59,7 @@ export class Activity implements IActivity {
 
     outputId?: string
     rawAmount: number
-    asset: IPersistedAsset
+    assetId: string
     isAssetHidden: boolean
     metadata?: string
     tag?: string
@@ -95,6 +96,7 @@ export class Activity implements IActivity {
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
+        this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
         this.sender = getSenderFromTransaction(transaction, output, account.depositAddress)
         this.recipient = recipient
@@ -104,16 +106,17 @@ export class Activity implements IActivity {
         this.direction =
             transaction.incoming || isSelfTransaction || isFoundry ? ActivityDirection.In : ActivityDirection.Out
 
-        this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
-        this.isAssetHidden = !this.asset || this.asset.hidden
-        this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
+        this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
+        const asset = getPersistedAsset(this.assetId)
+        this.isAssetHidden = !asset || asset.hidden
 
         this.storageDeposit = getStorageDepositFromOutput(output)
         this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
+
         this.metadata = getMetadataFromOutput(output)
         this.tag = getTagFromOutput(output)
-
         this.expirationDate = getExpirationDateFromOutput(output)
+
         this.isAsync = isOutputAsync(output)
         this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
@@ -152,8 +155,10 @@ export class Activity implements IActivity {
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
-        this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
-        this.isAssetHidden = !this.asset || this.asset.hidden
+
+        this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
+        const asset = getPersistedAsset(this.assetId)
+        this.isAssetHidden = !asset || asset.hidden
 
         this.storageDeposit = getStorageDepositFromOutput(outputData.output)
         this.rawAmount = nativeToken
@@ -187,9 +192,10 @@ export class Activity implements IActivity {
     }
 
     getFormattedAmount(signed: boolean): string {
+        const metadata = getAssetFromPersistedAssets(this?.assetId)?.metadata
         return `${this.direction !== ActivityDirection.In && signed ? '- ' : ''}${formatTokenAmountBestMatch(
             this.rawAmount,
-            this.asset?.metadata,
+            metadata,
             2
         )}`
     }

@@ -68,9 +68,9 @@
             </p>
         {/if}
     </div>
-    {#if !(showVerifiedBadgeOnly && asset.verification !== VerificationStatus.Verified)}
+    {#if !(showVerifiedBadgeOnly && asset?.verification !== VerificationStatus.Verified)}
         <span class="absolute flex justify-center items-center h-4 w-4 -bottom-0.5 -right-0.5">
-            <VerificationBadge verificationStatus={asset.verification} {large} />
+            <VerificationBadge verificationStatus={asset?.verification} {large} />
         </span>
     {/if}
 </div>
