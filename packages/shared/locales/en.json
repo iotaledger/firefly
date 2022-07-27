@@ -911,6 +911,7 @@
             "newTokenTitle": "New token",
             "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
             "tokenMetadata": {
+                "standard": "Standard",
                 "name": "Name",
                 "tokenId": "Token ID",
                 "url": "URL"

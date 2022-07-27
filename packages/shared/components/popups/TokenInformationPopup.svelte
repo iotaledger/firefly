@@ -10,7 +10,7 @@
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup, updatePopupProps } from '@lib/popup'
-    import { AssetIcon, Button, KeyValueBox, Text, TextHint, AssetActionsButton } from 'shared/components'
+    import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
     import { get } from 'svelte/store'
     import { FontWeightText } from '../Text.svelte'
 
@@ -85,19 +85,26 @@
         {#if asset?.verification !== VerificationStatus.Verified}
             <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
         {/if}
-        <div class="w-full flex-col space-y-2">
+        <div class="w-full flex flex-col space-y-2">
+            <KeyValueBox
+                keyText={localize('popups.tokenInformation.tokenMetadata.standard')}
+                valueText={asset?.standard}
+            />
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.name')}
                 valueText={asset?.metadata?.name}
             />
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
-                valueText={truncateString(asset?.id, 15, 15, 3)}
+                valueText={truncateString(asset?.id, 18, 18, 3)}
+                isCopyable={asset?.standard === 'IRC30'}
+                copyValue={asset?.id}
             />
             {#if asset?.metadata?.url}
                 <KeyValueBox
                     keyText={localize('popups.tokenInformation.tokenMetadata.url')}
                     valueText={asset?.metadata?.url}
+                    isCopyable
                 />
             {/if}
         </div>
