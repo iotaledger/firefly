@@ -10,15 +10,15 @@
         hideActivity,
         InclusionState,
     } from '@core/wallet'
+    import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
-    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
+    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner, AssetIcon } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
     export let activity: Activity
     export let onClick: () => void
 
     $: title = activity?.getTitle()
-    $: ({ icon, iconColor } = activity?.getIcon())
     $: subject = activity?.getFormattedSubject()
     $: isIncomingActivityUnclaimed =
         (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) &&
@@ -46,9 +46,7 @@
 <ClickableTile {onClick} classes={activity?.inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}>
     <div class="w-full flex flex-col space-y-4">
         <div class="flex flex-row items-center text-left space-x-4">
-            <div class="w-8 flex flex-row justify-center items-center">
-                <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
-            </div>
+            <AssetIcon asset={activity?.asset} showVerifiedBadgeOnly />
             <div class="flex flex-col w-full space-y-0.5">
                 <div class="flex flex-row justify-between space-x-1">
                     <Text
@@ -71,7 +69,7 @@
                 <div class="flex flex-row justify-between">
                     <Text fontWeight={FontWeightText.normal} lineHeight="140" color="gray-600">
                         {#if activity?.type === ActivityType.Minting}
-                            {activity.asset.metadata.name}
+                            {truncateString(activity.asset.metadata.name, 20, 0)}
                         {:else}
                             {localize(
                                 activity?.direction === ActivityDirection.In

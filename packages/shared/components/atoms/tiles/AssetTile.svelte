@@ -16,7 +16,7 @@
     <ClickableTile {onClick} {...$$restProps}>
         <div class="asset w-full flex flex-row justify-between items-center">
             <div class="flex flex-row items-center text-left space-x-4">
-                <AssetIcon {asset} showVerificationBadge />
+                <AssetIcon {asset} />
                 <div class="flex flex-col">
                     <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
                         {asset?.metadata?.name
