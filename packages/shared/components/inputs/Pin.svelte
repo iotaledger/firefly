@@ -152,6 +152,7 @@
                             maxLength="1"
                             id={`input-${i}`}
                             type="tel"
+                            inputmode="numeric"
                             bind:this={inputElements[i]}
                             class:active={!inputs[i] || inputs[i].length === 0}
                             class:glimpse
