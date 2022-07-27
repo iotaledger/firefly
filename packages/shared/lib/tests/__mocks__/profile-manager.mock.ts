@@ -88,8 +88,8 @@ export class ProfileManagerMock implements IProfileManager {
                 protocol: {
                     protocolVersion: 2,
                     networkName: 'alphanet-5',
-                    bech32HRP: 'rms',
-                    minPoWScore: 1000,
+                    bech32Hrp: 'rms',
+                    minPowScore: 1000,
                     rentStructure: {
                         vByteCost: 500,
                         vByteFactorKey: 10,

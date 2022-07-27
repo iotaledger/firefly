@@ -162,7 +162,7 @@
         if (totalSupply.toString().length < 1) {
             totalSupplyError = 'Total supply is required'
             return Promise.reject(totalSupplyError)
-        } else if (totalSupply < 1) {
+        } else if (Number(totalSupply) < 1) {
             totalSupplyError = 'Total supply must be greater than 0'
             return Promise.reject(totalSupplyError)
         } else {
@@ -174,10 +174,10 @@
         if (circulatingSupply.toString().length < 1) {
             circulatingSupplyError = 'Circulating supply is required'
             return Promise.reject(circulatingSupplyError)
-        } else if (circulatingSupply < 1) {
+        } else if (Number(circulatingSupply) < 1) {
             circulatingSupplyError = 'Circulating supply must be greater than 0'
             return Promise.reject(circulatingSupplyError)
-        } else if (circulatingSupply > totalSupply) {
+        } else if (Number(circulatingSupply) > Number(totalSupply)) {
             circulatingSupplyError = 'Circulating supply must be less than or equal to the total supply'
             return Promise.reject(circulatingSupplyError)
         } else {
@@ -189,7 +189,7 @@
         if (decimals.toString().length < 1) {
             decimalsError = 'Decimals is required'
             return Promise.reject(decimalsError)
-        } else if (decimals < 0) {
+        } else if (Number(decimals) < 0) {
             decimalsError = 'Decimals must be greater than or equal to 0'
             return Promise.reject(decimalsError)
         } else {
