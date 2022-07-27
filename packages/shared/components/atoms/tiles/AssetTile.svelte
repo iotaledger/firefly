@@ -20,7 +20,7 @@
                 <div class="flex flex-col">
                     <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
                         {asset?.metadata?.name
-                            ? truncateString(asset?.metadata?.name, 6, 6, 2)
+                            ? truncateString(asset?.metadata?.name, 13, 0)
                             : truncateString(asset?.id, 6, 7)}
                     </Text>
                     <div class="flex flex-row justify-between items-center text-left">

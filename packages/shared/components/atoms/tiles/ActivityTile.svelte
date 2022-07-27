@@ -69,7 +69,9 @@
                 <div class="flex flex-row justify-between">
                     <Text fontWeight={FontWeightText.normal} lineHeight="140" color="gray-600">
                         {#if activity?.type === ActivityType.Minting}
-                            {truncateString(activity.asset.metadata.name, 20, 0)}
+                            {activity?.asset?.metadata?.name
+                                ? truncateString(activity?.asset?.metadata?.name, 20, 0)
+                                : truncateString(activity?.asset?.id, 6, 7)}
                         {:else}
                             {localize(
                                 activity?.direction === ActivityDirection.In
