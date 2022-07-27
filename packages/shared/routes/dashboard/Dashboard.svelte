@@ -40,8 +40,6 @@
         api,
         asyncCreateAccount,
         asyncSyncAccount,
-        isBackgroundSyncing,
-        isFirstSessionSync,
         isSyncing,
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
@@ -167,27 +165,6 @@
 
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
-        }
-
-        if (!get(isBackgroundSyncing)) {
-            api.startBackgroundSync(
-                {
-                    secs: 30,
-                    nanos: 0,
-                },
-                true,
-                {
-                    onSuccess() {
-                        isBackgroundSyncing.set(true)
-                    },
-                    onError(err) {
-                        showAppNotification({
-                            type: 'error',
-                            message: locale('error.account.syncing'),
-                        })
-                    },
-                }
-            )
         }
 
         Platform.onEvent('menu-logout', () => {
