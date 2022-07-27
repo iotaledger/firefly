@@ -156,7 +156,7 @@
                             class:active={!inputs[i] || inputs[i].length === 0}
                             class:glimpse
                             {disabled}
-                            on:input={(event) => (isAndroid ? changeHandlerHelper(event, i) : undefined)}
+                            on:input={(event) => changeHandlerHelper(event, i)}
                             on:keydown={(event) => changeHandler(event, i)}
                             on:contextmenu|preventDefault
                         />
