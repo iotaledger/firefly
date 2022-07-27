@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { nativeSplash } from 'capacitor/capacitorApi'
     import { App } from '@capacitor/app'
+    import { StatusBar, Style } from '@capacitor/status-bar'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
@@ -39,9 +40,13 @@
 
     let showSplash = true
 
-    $: $appSettings.darkMode
-        ? document.body.classList.add('scheme-dark')
-        : document.body.classList.remove('scheme-dark')
+    $: if ($appSettings.darkMode) {
+        document.body.classList.add('scheme-dark')
+        StatusBar.setStyle({ style: Style.Dark })
+    } else {
+        document.body.classList.remove('scheme-dark')
+        StatusBar.setStyle({ style: Style.Light })
+    }
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
