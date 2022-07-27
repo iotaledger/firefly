@@ -255,8 +255,11 @@
         <Text type="p" classes="text-gray-900 bold mb-2 text-left"
             >{localize('tooltips.shimmerTokenFormatting.title')}</Text
         >
+        <Text type="p" secondary classes="text-left mb-2">
+            {localize('tooltips.shimmerTokenFormatting.body1')}
+        </Text>
         <Text type="p" secondary classes="text-left">
-            {localize('tooltips.shimmerTokenFormatting.body')}
+            {localize('tooltips.shimmerTokenFormatting.body2')}
         </Text>
     </Tooltip>
 {/if}

@@ -48,7 +48,7 @@
     let remainingTime: number
 
     const FIAT_PLACEHOLDER = '---'
-    const SHOW_SHIMMER_TOKEN_FORMATTING_WARNING = !isAssembly
+    $: SHOW_SHIMMER_TOKEN_FORMATTING_WARNING = asset?.name === Token.Shimmer
 
     $: $activeProfile.stakingRewards
     $: isDarkModeEnabled = $appSettings.darkMode
@@ -138,7 +138,7 @@
             return {
                 title: localize('tooltips.shimmerTokenFormatting.title'),
                 body: [
-                    localize('tooltips.shimmerTokenFormatting.body'),
+                    localize('tooltips.shimmerTokenFormatting.body1'),
                     localize('tooltips.shimmerTokenFormatting.body2'),
                 ],
             }
