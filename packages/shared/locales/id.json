@@ -718,10 +718,10 @@
                 "protocol": {
                     "tab": "Protocol",
                     "network": "Network",
-                    "bech32HRP": "Bech32 HRP",
+                    "bech32Hrp": "Bech32 HRP",
                     "tokenSupply": "Token supply",
                     "protocolVersion": "Version",
-                    "minPoWScore": "Min PoW Score"
+                    "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {
                     "tab": "Base token",
