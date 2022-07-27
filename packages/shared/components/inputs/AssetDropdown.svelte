@@ -1,8 +1,6 @@
 <script lang="typescript">
     import { NetworkProtocol } from '@core/network'
-
     import { selectedAccountAssets } from '@core/wallet'
-    import { truncateString } from '@lib/helpers'
     import { AssetTile, Icon, Text } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { clickOutside } from 'shared/lib/actions'
@@ -47,18 +45,24 @@
         >
             <div
                 class="
-                    icon h-6 w-6 rounded-full flex items-center justify-center p-0.5
+                    icon h-6 w-6 flex-shrink-0 rounded-full flex items-center justify-center p-0.5
                     {asset?.metadata?.primaryColor ? 'icon-bg' : 'bg-blue-500'}
                 "
                 style={asset?.metadata?.primaryColor ? `--icon-bg-color: ${asset?.metadata?.primaryColor}` : ''}
             >
                 <Icon classes="text-white" {icon} height="80%" width="80%" />
             </div>
-            <Text color="gray-600" darkColor="white" fontWeight={FontWeightText.semibold} fontSize="15">
-                {asset?.metadata?.name
-                    ? truncateString(asset?.metadata?.name, 10, 0, 2)
-                    : truncateString(asset?.id, 10, 0, 2)}
-            </Text>
+            <div class="w-full relative" style="max-width: 75px;">
+                <Text
+                    color="gray-600"
+                    darkColor="white"
+                    fontWeight={FontWeightText.semibold}
+                    fontSize="15"
+                    classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
+                >
+                    {asset?.metadata?.name ?? asset?.id}
+                </Text>
+            </div>
             {#if hasMultipleAssets}
                 <div class="transform rotate-0">
                     <Icon height="18" width="18" icon="chevron-down" classes="text-gray-600 dark:text-gray-500" />
