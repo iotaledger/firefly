@@ -918,6 +918,25 @@
             "buttons": {
                 "verifyToken": "I verify this token"
             }
+        },
+        "mintNativeTokenForm" : {
+            "title": "Mint native tokens",
+            "inputs": {
+                "totalSupply": "Total Supply",
+                "circulatingSupply": "Circulating Supply",
+                "standard": "Standard",
+                "name": "Name",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
+                "url": "URL",
+                "logoUrl": "Logo URL",
+                "logo": "Logo"
+            },
+            "buttons": {
+                "mint": "Mint",
+                "cancel": "Mint"
+            }
         }
     },
     "charts": {
@@ -993,7 +1012,7 @@
         "export": "Export",
         "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportTransactionHistory": "Export transaction history",
@@ -1068,6 +1087,7 @@
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
         "backup": "Backup",
+        "mintNativeToken": "Mint native token",
         "verifyToken": "Verify token",
         "unverifyToken": "Unverify token",
         "hideToken": "Hide token",
@@ -1235,7 +1255,10 @@
         "tag": "Tag",
         "nodeList": "Node list",
         "claimingTransactionId": "Claimed in",
-        "assets": "Assets"
+        "assets": "Assets",
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard"
+
     },
     "dates": {
         "today": "Today",
@@ -1496,7 +1519,8 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking"
+        "staking": "Staking",
+        "developerTools": "Developer Tools"
     },
     "pills": {
         "stake": {
