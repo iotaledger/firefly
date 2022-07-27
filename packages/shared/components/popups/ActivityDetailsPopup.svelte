@@ -45,7 +45,7 @@
 
     function reject() {
         openPopup({
-            type: 'confirmationPopup',
+            type: 'confirmation',
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
@@ -91,6 +91,7 @@
     {#if activity.isAsync && (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
+                disabled={isClaiming}
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"
                 on:click={reject}
             >
