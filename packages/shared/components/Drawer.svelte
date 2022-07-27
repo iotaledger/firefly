@@ -14,16 +14,16 @@
 -->
 <script context="module" lang="typescript">
     type Drawers = Set<{ close: () => Promise<void> }>
-	const drawers:Drawers = new Set()
-    
+    const drawers: Drawers = new Set()
+
     export function closePreviousDrawer(): void {
-		const last = [...drawers].pop()
+        const last = [...drawers].pop()
         last?.close()
-	}
+    }
 
     export function closeDrawers(): void {
-        drawers.forEach(d => d.close())
-	}
+        drawers.forEach((d) => void d.close())
+    }
 </script>
 
 <script lang="typescript">
@@ -60,6 +60,8 @@
         if (opened) {
             await open()
         }
+        const currentDrawer = { close }
+        drawers.add(currentDrawer)
     })
 
     function slidable(node: HTMLElement, use: boolean = true) {
