@@ -12,6 +12,24 @@
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
 -->
+<script context="module" lang="typescript">
+    type Drawers = Set<{ close: () => Promise<void> }>
+    const drawers: Drawers = new Set()
+
+    export function closePreviousDrawer(): void {
+        const last = [...drawers].pop()
+        last?.close()
+        drawers.delete(last)
+    }
+
+    export function closeDrawers(): void {
+        drawers.forEach((d) => {
+            void d.close()
+            drawers.delete(d)
+        })
+    }
+</script>
+
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
@@ -23,7 +41,7 @@
     export let opened = false
     export let fromLeft = false
     export let classes = ''
-    export let fullScreen = false
+    export let backgroundBlur = false
     export let preventClose = false
     export let zIndex = 'z-30'
 
@@ -46,6 +64,8 @@
         if (opened) {
             await open()
         }
+        const currentDrawer = { close }
+        drawers.add(currentDrawer)
     })
 
     function slidable(node: HTMLElement, use: boolean = true) {
@@ -156,6 +176,10 @@
         }
     }
 
+    export function isDrawerOpen(): boolean {
+        return isOpen
+    }
+
     export async function open(): Promise<void> {
         isOpen = true
         await coords.set({ x: 0, y: 0 }, { duration: 650, easing: quintOut })
@@ -208,9 +232,9 @@
 			--height: {fromLeft && '100vh'};
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-mark: {fromLeft ? 'none' : 'block'};
-            --top-mark: {fullScreen ? '20%' : '8px'};
-            --blur: {fullScreen ? '10px' : '0px'};
-            --tw-bg-opacity: {fullScreen ? 0.8 : 1};"
+            --top-mark: 8px;
+            --blur: {backgroundBlur ? '10px' : '0px'};
+            --tw-bg-opacity: {backgroundBlur ? 0.8 : 1};"
     >
         <slot />
     </content>

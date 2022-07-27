@@ -13,6 +13,8 @@ PODS:
   - CapacitorSecureStoragePlugin (0.6.2):
     - Capacitor
     - SwiftKeychainWrapper
+  - CapacitorShare (1.1.2):
+    - Capacitor
   - CapacitorSplashScreen (1.2.2):
     - Capacitor
   - FireflyActorSystemCapacitorBindings (0.0.1):
@@ -28,6 +30,7 @@ DEPENDENCIES:
   - "CapacitorCordova (from `../../../../node_modules/@capacitor/ios`)"
   - CapacitorSecureFilesystemAccess (from `../../../../node_modules/capacitor-secure-filesystem-access`)
   - CapacitorSecureStoragePlugin (from `../../../../node_modules/capacitor-secure-storage-plugin`)
+  - "CapacitorShare (from `../../../../node_modules/@capacitor/share`)"
   - "CapacitorSplashScreen (from `../../../../node_modules/@capacitor/splash-screen`)"
   - FireflyActorSystemCapacitorBindings (from `../../node_modules/firefly-actor-system-capacitor-bindings`)
   - IotaWalletInternal (from `https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/v0.2.0/IotaWalletInternal.podspec`)
@@ -51,6 +54,8 @@ EXTERNAL SOURCES:
     :path: "../../../../node_modules/capacitor-secure-filesystem-access"
   CapacitorSecureStoragePlugin:
     :path: "../../../../node_modules/capacitor-secure-storage-plugin"
+  CapacitorShare:
+    :path: "../../../../node_modules/@capacitor/share"
   CapacitorSplashScreen:
     :path: "../../../../node_modules/@capacitor/splash-screen"
   FireflyActorSystemCapacitorBindings:
@@ -66,11 +71,12 @@ SPEC CHECKSUMS:
   CapacitorCordova: 4cf19cbad01e5a9e143e2f28f66c621c362f0f79
   CapacitorSecureFilesystemAccess: 0b7ef212124316bf4dd5417c1b3f4a3121a38455
   CapacitorSecureStoragePlugin: b24477bcde4004d0536135fa265c9f3318ec9e7e
+  CapacitorShare: f1a8ffd3bba7d6113f53fb65aa47d61764c4640a
   CapacitorSplashScreen: 466ab02fdfcfc0efdb6167631386289e82efe2c6
   FireflyActorSystemCapacitorBindings: 59b64ff1b4cb89779283816f7d2c385849ee5247
   IotaWalletInternal: 7bbe592b3b946075aaa4d52a55df10ba7bfb8281
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: 50bc18718dd6a4c58098eb5f72ef74baed5ec124
+PODFILE CHECKSUM: d22bec187482d18c15e7669e75df09c8071f10e8
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2
