@@ -44,10 +44,10 @@
         },
         [NodeInfoTab.Protocol]: {
             network: { localeKey: 'protocol.network', nodeInfoPath: 'protocol.networkName' },
-            bech32HRP: { localeKey: 'protocol.bech32HRP', nodeInfoPath: 'protocol.bech32HRP' },
+            bech32Hrp: { localeKey: 'protocol.bech32Hrp', nodeInfoPath: 'protocol.bech32Hrp' },
             tokenSupply: { localeKey: 'protocol.tokenSupply', nodeInfoPath: 'protocol.tokenSupply' },
             protocolVersion: { localeKey: 'protocol.protocolVersion', nodeInfoPath: 'protocol.version' },
-            minPoWScore: { localeKey: 'protocol.minPoWScore', nodeInfoPath: 'protocol.minPoWScore' },
+            minPowScore: { localeKey: 'protocol.minPowScore', nodeInfoPath: 'protocol.minPowScore' },
         },
         [NodeInfoTab.BaseToken]: {
             token: { localeKey: 'baseToken.token', nodeInfoPath: 'baseToken.name' },
