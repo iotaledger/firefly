@@ -623,6 +623,21 @@
                 "title": "Color picker",
                 "hexCode": "Color hex code"
             }
+        },
+        "collectibles": {
+            "details": {
+                "collection": "Collection",
+                "nftId": "NFT ID",
+                "nftType": "NFT Type",
+                "storageDeposit": "Storage deposit",
+                "attributes": "Attributes",
+                "menu": {
+                    "download": "Download",
+                    "setAvatar": "Set NFT as profile avatar",
+                    "view": "View in IPFS",
+                    "burn": "Burn NFT"
+                }
+            }
         }
     },
     "popups": {
@@ -1477,7 +1492,8 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking"
+        "staking": "Staking",
+        "collectibles": "Collectibles"
     },
     "pills": {
         "stake": {
