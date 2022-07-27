@@ -13,15 +13,17 @@
     export let onCancel: () => void = undefined
 
     function confirmClick(): void {
-        onConfirm()
+        if (onConfirm) {
+            onConfirm()
+        }
+        closePopup()
     }
 
     function cancelClick(): void {
         if (onCancel) {
             onCancel()
-        } else {
-            closePopup()
         }
+        closePopup()
     }
 </script>
 
@@ -29,8 +31,14 @@
     <Text type={TextType.h3} fontWeight={FontWeightText.semibold} classes="text-left">
         {title}
     </Text>
-    <Text fontSize="14" classes="text-left">{description}</Text>
-    <TextHint info text={hint} />
+    <div class="space-y-4">
+        {#if description}
+            <Text fontSize="14" classes="text-left">{description}</Text>
+        {/if}
+        {#if hint}
+            <TextHint info text={hint} />
+        {/if}
+    </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={cancelClick}>{localize('actions.cancel')}</Button>
         <Button classes="w-full" {warning} onClick={confirmClick}

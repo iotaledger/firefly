@@ -1,22 +1,13 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { nodeInfo } from '@core/network'
-    import { openPopup } from '@lib/popup'
-    import { OnboardingButton, Pane, Text } from 'shared/components'
-
-    function handleGetTokenClick() {
-        openPopup({
-            type: 'faucetRequest',
-        })
-    }
-
-    function handleMintNativeTokenClick() {
-        openPopup({
-            type: 'mintNativeTokenForm',
-            overflow: true,
-        })
-    }
+    import {
+        FaucetRequestButton,
+        MintNativeTokenButton,
+        Pane,
+        RefreshTokenMetadataButton,
+        Text,
+    } from 'shared/components'
 </script>
 
 {#if $selectedAccount}
@@ -29,20 +20,9 @@
                     <Text type="h5" classes="text-left">
                         {localize('general.assets')}
                     </Text>
-                    <OnboardingButton
-                        primaryText={localize('actions.faucetRequest', {
-                            values: { token: $nodeInfo?.baseToken?.name },
-                        })}
-                        secondaryText={localize('general.faucetRequestDescription', {
-                            values: { network: $nodeInfo?.protocol?.networkName },
-                        })}
-                        onClick={handleGetTokenClick}
-                    />
-                    <OnboardingButton
-                        primaryText={localize('actions.mintNativeToken')}
-                        secondaryText={localize('general.mintNativeTokenDescription')}
-                        onClick={handleMintNativeTokenClick}
-                    />
+                    <FaucetRequestButton />
+                    <MintNativeTokenButton />
+                    <RefreshTokenMetadataButton />
                 </Pane>
             </div>
         {/key}

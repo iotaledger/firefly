@@ -100,7 +100,7 @@
         password: PasswordPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,
-        confirmationPopup: ConfirmationPopup,
+        confirmation: ConfirmationPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
         ledgerNotConnected: LedgerNotConnected,

@@ -1095,7 +1095,8 @@
         "hideToken": "Hide token",
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
-        "faucetRequest": "Get {token} tokens"
+        "faucetRequest": "Get {token} tokens",
+        "refreshTokenMetadata": "Refresh token metadata"
 
     },
     "general": {
@@ -1262,7 +1263,9 @@
         "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
-        "faucetRequestDescription": "Request tokens from the {network} faucet"
+        "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
+        "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets."
 
     },
     "dates": {

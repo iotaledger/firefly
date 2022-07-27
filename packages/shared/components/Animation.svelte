@@ -180,6 +180,10 @@
             lightmode: 'staking/ended.json',
             darkmode: 'staking/ended.json',
         },
+        'special-token': {
+            lightmode: 'special-token.json',
+            darkmode: 'special-token.json',
+        },
     }
 
     let container
