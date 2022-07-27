@@ -77,10 +77,6 @@ export class Activity implements IActivity {
             account.depositAddress,
             isFoundry
         )
-        // if (transaction.transactionId === '0x4d6ea41b4353f0d7e2f7fbb99c1bf2130cbbe41387ffba3ebefdd406ffb0f476') {
-        //     console.log(output)
-        //     console.log(transaction)
-        // }
 
         const recipient = getRecipientFromOutput(output)
         const nativeToken = getNativeTokenFromOutput(output)
