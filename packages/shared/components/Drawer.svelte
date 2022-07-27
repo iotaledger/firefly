@@ -19,10 +19,14 @@
     export function closePreviousDrawer(): void {
         const last = [...drawers].pop()
         last?.close()
+        drawers.delete(last)
     }
 
     export function closeDrawers(): void {
-        drawers.forEach((d) => void d.close())
+        drawers.forEach((d) => {
+            void d.close()
+            drawers.delete(d)
+        })
     }
 </script>
 
