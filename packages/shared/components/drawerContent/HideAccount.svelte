@@ -74,8 +74,8 @@
 
 <div class="flex flex-col px-6 py-10">
     {#if canDelete}
-        <div class="mb-5">
-            <Text type="h4 w-full justify-center">
+        <div class="mb-6 -mt-4">
+            <Text type="h4" classes="flex w-full justify-center">
                 {localize(`popups.hideAccount.${hasMultipleAccounts ? 'title' : 'errorTitle'}`, {
                     values: { name: account?.alias },
                 })}
