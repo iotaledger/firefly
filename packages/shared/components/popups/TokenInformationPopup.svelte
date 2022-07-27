@@ -35,8 +35,14 @@
 </script>
 
 <div class="space-y-6">
-    <div class="flex flex-row items-center space-x-3">
-        <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold}>
+    <div class="flex flex-row items-center space-x-3 mr-16">
+        <Text
+            type="h4"
+            fontSize="18"
+            lineHeight="6"
+            fontWeight={FontWeightText.semibold}
+            classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
+        >
             {asset?.verification === VerificationStatus.New
                 ? localize('popups.tokenInformation.newTokenTitle')
                 : asset?.metadata?.name}
