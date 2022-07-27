@@ -293,6 +293,7 @@ module.exports = {
             },
             maxHeight: {
                 xl: pxToRem(648),
+                100: pxToRem(400),
             },
         },
         fontFamily: {

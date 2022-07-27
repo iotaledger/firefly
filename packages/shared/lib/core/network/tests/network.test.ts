@@ -15,8 +15,8 @@ import {
     isOfficialNetwork,
     NetworkProtocol,
     NetworkType,
-} from '@core/network'
-import { ITokenMetadata } from '@core/wallet'
+} from '../'
+import { ITokenMetadata } from '../../wallet'
 
 describe('File: network.ts', () => {
     function _buildNode(url: string): INode {
