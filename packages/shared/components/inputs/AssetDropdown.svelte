@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { NetworkProtocol } from '@core/network'
     import { selectedAccountAssets } from '@core/wallet'
-    import { AssetTile, Icon, Text } from 'shared/components'
+    import { AssetTile, Icon, Text, AssetIcon } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { clickOutside } from 'shared/lib/actions'
 
@@ -43,15 +43,7 @@
             class:cursor-pointer={hasMultipleAssets}
             on:click={handleDropdownClick}
         >
-            <div
-                class="
-                    icon h-6 w-6 flex-shrink-0 rounded-full flex items-center justify-center p-0.5
-                    {asset?.metadata?.primaryColor ? 'icon-bg' : 'bg-blue-500'}
-                "
-                style={asset?.metadata?.primaryColor ? `--icon-bg-color: ${asset?.metadata?.primaryColor}` : ''}
-            >
-                <Icon classes="text-white" {icon} height="80%" width="80%" />
-            </div>
+            <AssetIcon {asset} />
             <div class="w-full relative" style="max-width: 75px;">
                 <Text
                     color="gray-600"
@@ -79,7 +71,7 @@
                             onClick={() => handleAssetClick($selectedAccountAssets?.baseCoin)}
                             asset={$selectedAccountAssets?.baseCoin}
                             overrideColor
-                            classes="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
+                            classes="bg-white hover:bg-gray-50 dark:bg-transparent"
                         />
                     </li>
                     {#each $selectedAccountAssets?.nativeTokens as nativeToken}
@@ -88,7 +80,7 @@
                                 onClick={() => handleAssetClick(nativeToken)}
                                 asset={nativeToken}
                                 overrideColor
-                                classes="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                classes="bg-white hover:bg-gray-50 dark:bg-transparent"
                             />
                         </li>
                     {/each}

@@ -4,7 +4,6 @@
     import { VerificationStatus } from '@core/wallet/enums/verification-status.enum'
     import { isBright } from '@lib/helpers'
     import { Animation, Icon, VerificationBadge } from 'shared/components'
-    import { onMount } from 'svelte'
 
     export let asset: IAsset
     export let large = false
@@ -17,8 +16,8 @@
     let assetIconWrapperWidth: number
 
     $: isAnimation = asset?.id === SPECIAL_TOKEN_ID
-
-    onMount(() => {
+    $: {
+        icon = ''
         assetIconBackgroundColor = asset?.metadata?.primaryColor
         assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
         if (
@@ -29,7 +28,7 @@
         } else {
             assetInitials = getAssetInitials(asset)
         }
-    })
+    }
 </script>
 
 <div
