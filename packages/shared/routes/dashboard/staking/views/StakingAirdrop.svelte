@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { HR, Link, StakingAirdropIndicator, Text } from 'shared/components'
+    import { HR, Icon, Link, StakingAirdropIndicator, Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { formatStakingAirdropReward, isParticipationPossible } from 'shared/lib/participation'
@@ -33,8 +33,17 @@
     $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime, parseRemainingTime()
 
     const isAssembly = airdrop === StakingAirdrop.Assembly
+
+    const SHOW_SHIMMER_TOKEN_FORMATTING_WARNING = !isAssembly
+    let showTooltip = false
+    let tooltipAnchor: HTMLElement
+
     let stakingEventState = ParticipationEventState.Inactive
     $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
+
+    function toggleTooltip(): void {
+        showTooltip = !showTooltip
+    }
 
     function getFormattedStakingAirdropRewards(forCurrentRewards: boolean, stakingRewards: number): string {
         return formatStakingAirdropReward(airdrop, stakingRewards, 6)
@@ -201,13 +210,27 @@
                 <HR />
                 <div class="flex flex-row justify-between space-x-4">
                     <div class="flex flex-col">
-                        <div>
+                        <div class="flex flex-row justify-between items-center space-x-1">
                             <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
                                 {totalStakingRewards.split(' ')[0]}
                             </Text>
                             <Text type="p" secondary classes="text-sm inline">
                                 {totalStakingRewards.split(' ')[1]}
                             </Text>
+                            {#if SHOW_SHIMMER_TOKEN_FORMATTING_WARNING}
+                                <div
+                                    bind:this={tooltipAnchor}
+                                    on:mouseenter={toggleTooltip}
+                                    on:mouseleave={toggleTooltip}
+                                >
+                                    <Icon
+                                        icon="exclamation"
+                                        width="17"
+                                        height="17"
+                                        classes="fill-current text-gray-500 group-hover:text-gray-900"
+                                    />
+                                </div>
+                            {/if}
                         </div>
                         <Text
                             type="p"
@@ -223,6 +246,17 @@
         </div>
     </div>
 </div>
+
+{#if showTooltip}
+    <Tooltip anchor={tooltipAnchor} position="right">
+        <Text type="p" classes="text-gray-900 bold mb-2 text-left"
+            >{localize('tooltips.shimmerTokenFormatting.title')}</Text
+        >
+        <Text type="p" secondary classes="text-left">
+            {localize('tooltips.shimmerTokenFormatting.body')}
+        </Text>
+    </Tooltip>
+{/if}
 
 <style type="text/scss">
     .apply-min-height {
