@@ -15,15 +15,17 @@
     function confirmClick(): void {
         if (onConfirm) {
             onConfirm()
+        } else {
+            closePopup()
         }
-        closePopup()
     }
 
     function cancelClick(): void {
         if (onCancel) {
             onCancel()
+        } else {
+            closePopup()
         }
-        closePopup()
     }
 </script>
 
