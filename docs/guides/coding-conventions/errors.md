@@ -15,19 +15,32 @@ Each error extends the `BaseError` class, which, as a constructor argument, take
 ```typescript
 interface IErrorParameters {
     /**
-     * The message to display for the error. If it is a user-facing error,
-     * it should already be localized in the user's selected language.
+     * The message to display for the error, whether it's logged to the console,
+     * saved to the error log, or shown in a notification.
      */
     message: string
 
     /**
-     * (Opt.) If true, will log the message to the console.
+     * If true, will localize the string on the message field. If the error is 
+     * user-facing, it MUST be localized.
      */
-    logError?: boolean
+    localizeMessage?: boolean
 
     /**
-     * (Opt.) If true, will display the message in a toast notification
-     * to the user. 
+     * If true, will log the message to the developer console.
+     */
+    logToConsole?: boolean
+
+    /**
+     * If true, will save the error object to the error log Svelte store, 
+     * which is what is displayed to the user when the click on "Error log"
+     * from the menu bar.
+     */
+    saveToErrorLog?: boolean
+    
+    /**
+     * If true, will display the message in a toast notification
+     * to the user. The message MUST be localized.
      */
     showNotification?: boolean
 }

@@ -5,8 +5,9 @@ import { OutputTypes } from '@iota/types'
 export function getNonRemainderOutputFromTransaction(
     transaction: Transaction,
     accountAddress: string
-): { output: OutputTypes; outputIndex: number } {
+): { output: OutputTypes; outputIndex: number; isSelfTransaction: boolean } {
     const outputs = transaction.payload.essence.outputs
+
     const nonRemainerOutputIndex = outputs.findIndex((output) => {
         const recipientAddress = getRecipientAddressFromOutput(output)
 
@@ -16,5 +17,17 @@ export function getNonRemainderOutputFromTransaction(
             return accountAddress !== recipientAddress
         }
     })
-    return { output: outputs[nonRemainerOutputIndex], outputIndex: nonRemainerOutputIndex }
+    if (nonRemainerOutputIndex >= 0) {
+        return {
+            output: outputs[nonRemainerOutputIndex],
+            outputIndex: nonRemainerOutputIndex,
+            isSelfTransaction: false,
+        }
+    } else {
+        if (outputs.every((output) => accountAddress === getRecipientAddressFromOutput(output))) {
+            const outputIndex = outputs.findIndex((output) => accountAddress === getRecipientAddressFromOutput(output))
+
+            return { output: outputs[outputIndex], outputIndex: outputIndex, isSelfTransaction: true }
+        }
+    }
 }

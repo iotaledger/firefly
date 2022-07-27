@@ -7,15 +7,14 @@
         "lib": ["DOM", "ESNext"],
         "paths": {
             "@auxiliary/*": ["./lib/auxiliary/*"],
-            "@common/*": ["./lib/common/*"],
             "@contexts/*": ["./lib/contexts/*"],
             "@core/*": ["./lib/core/*"],
             "@lib/*": ["./lib/*"],
-            "@mocks/*": ["./lib/tests/mocks/*"]
+            "@mocks/*": ["./lib/tests/__mocks__/*"]
         },
         "types": ["jest"],
         "resolveJsonModule": true
     },
-    "include": ["./lib"],
+    "include": ["./lib/**/tests"],
     "exclude": ["**/node_modules"]
 }

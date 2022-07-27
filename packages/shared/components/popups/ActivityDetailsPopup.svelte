@@ -5,14 +5,7 @@
     import { Platform } from 'shared/lib/platform'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
-    import {
-        Activity,
-        ActivityAsyncStatus,
-        ActivityDirection,
-        claimActivity,
-        hideActivity,
-        parseRawAmount,
-    } from '@core/wallet'
+    import { Activity, ActivityAsyncStatus, ActivityDirection, claimActivity, hideActivity } from '@core/wallet'
     import { Spinner } from 'shared/components'
     import { activeProfile } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
@@ -24,9 +17,8 @@
     export let activity: Activity
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
-    let isClaiming = activity.isClaiming
 
-    $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.asset?.metadata))
+    let isClaiming = activity.isClaiming
 
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
@@ -95,8 +87,8 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {formattedFiatValue} {amount} {unit} {...activity} />
-    {#if activity.isAsync && activity.direction === ActivityDirection.In && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
+    <TransactionDetails {formattedFiatValue} {...activity} />
+    {#if activity.isAsync && (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"

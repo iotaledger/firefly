@@ -18,6 +18,8 @@
         Subject,
         InclusionState,
         ActivityDirection,
+        formatTokenAmountBestMatch,
+        IAsset,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -25,23 +27,25 @@
     import { truncateString } from '@lib/helpers'
     import { setClipboard } from '@lib/utils'
 
-    export let amount: string
-    export let unit: string
-    export let type: ActivityType
-    export let direction: ActivityDirection
-    export let inclusionState: InclusionState = InclusionState.Pending
+    export let asset: IAsset
     export let asyncStatus: ActivityAsyncStatus = null
-    export let formattedFiatValue: string = null
-    export let time: Date = null
-    export let metadata: string = null
-    export let tag: string = null
-    export let storageDeposit = 0
-    export let expirationDate: Date = null
-    export let subject: Subject = null
-    export let claimingTransactionId: string = null
     export let claimedDate: Date = null
+    export let claimingTransactionId: string = null
+    export let direction: ActivityDirection
+    export let expirationDate: Date = null
+    export let formattedFiatValue: string = null
+    export let inclusionState: InclusionState = InclusionState.Pending
+    export let metadata: string = null
+    export let rawAmount: number
+
+    export let storageDeposit = 0
+    export let subject: Subject = null
+    export let tag: string = null
+    export let time: Date = null
+    export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
+    const unit = asset?.metadata?.unit
 
     $: transactionTime = getDateFormat(time)
     $: expirationTime = getDateFormat(expirationDate)
@@ -85,10 +89,12 @@
 
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
-        {#if amount}
+        {#if rawAmount}
             <transaction-value class="flex flex-col space-y-0.5 items-center">
                 <div class="flex flex-row items-baseline space-x-0.5">
-                    <Text type="h1" fontWeight={FontWeightText.semibold}>{amount}</Text>
+                    <Text type="h1" fontWeight={FontWeightText.semibold}>
+                        {formatTokenAmountBestMatch(rawAmount, asset?.metadata, undefined, false)}
+                    </Text>
                     {#if unit}
                         <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
                     {/if}

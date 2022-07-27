@@ -48,6 +48,8 @@
     import SendConfirmationPopup from './SendConfirmationPopup.svelte'
     import SendFormPopup from './SendFormPopup.svelte'
     import ManageAccountPopup from './ManageAccountPopup.svelte'
+    import TokenInformationPopup from './TokenInformationPopup.svelte'
+    import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
 
     export let locale: Locale
 
@@ -135,6 +137,8 @@
         sendConfirmation: SendConfirmationPopup,
         sendForm: SendFormPopup,
         manageAccount: ManageAccountPopup,
+        tokenInformation: TokenInformationPopup,
+        mintNativeTokenForm: MintNativeTokenFormPopup,
     }
 
     const onKey = (e) => {
