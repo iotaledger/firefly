@@ -7,7 +7,7 @@
     export let large = false
 </script>
 
-{#if verificationStatus === VerificationStatus.New || verificationStatus === VerificationStatus.NotVerified}
+{#if verificationStatus === VerificationStatus.New}
     <Icon
         width={large ? 20 : 14}
         height={large ? 20 : 14}
