@@ -7,7 +7,6 @@ export function buildPersistedAssetFromIrc30Metadata(
     metadata: IIrc30Metadata,
     verification = VerificationStatus.New
 ): IPersistedAsset {
-    const primaryColor = getIconColorFromString(metadata?.name)
     return {
         id: tokenId,
         standard: 'IRC30',
@@ -16,7 +15,7 @@ export function buildPersistedAssetFromIrc30Metadata(
             unit: metadata.symbol,
             decimals: metadata.decimals,
             useMetricPrefix: false,
-            primaryColor,
+            primaryColor: getIconColorFromString(metadata?.name),
             ...(metadata?.description && { description: metadata?.description }),
             ...(metadata?.url && { description: metadata?.url }),
             ...(metadata?.logoUrl && { description: metadata?.logoUrl }),
