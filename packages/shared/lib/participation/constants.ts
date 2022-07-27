@@ -50,8 +50,10 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
  */
 export const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
 
-export const STAKING_RESULT_URL: string =
+export const REMOTE_STAKING_RESULT_URL: string =
     'https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/'
+
+export const LOCAL_STAKING_RESULT_URL: string = '../assets/staking-results/'
 
 export const BACKUP_STAKING_RESULT_URL: string = 'https://d36tzso9lqxl3c.cloudfront.net/results/staking/'
 

@@ -21,7 +21,8 @@ import {
     SHIMMER_STAKING_RESULT_FILES,
     STAKING_AIRDROP_TOKENS,
     STAKING_EVENT_IDS,
-    STAKING_RESULT_URL,
+    REMOTE_STAKING_RESULT_URL,
+    LOCAL_STAKING_RESULT_URL,
 } from './constants'
 import { participationEvents, stakedAccounts } from './stores'
 import {
@@ -34,6 +35,7 @@ import {
     StakingPeriodJsonResponse,
     StakingPeriodRewards,
 } from './types'
+import { Platform } from '@lib/platform'
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -270,8 +272,9 @@ async function fetchStakingResult(
     const stakingResultFileName = getStakingResultFileName(airdrop, periodNumber)
 
     try {
-        const stakingResultResponse = await fetch(STAKING_RESULT_URL + stakingResultFileName, getJsonRequestOptions())
-        return await stakingResultResponse.json()
+        return (await Platform.loadJsonFile(
+            LOCAL_STAKING_RESULT_URL + stakingResultFileName
+        )) as StakingPeriodJsonResponse
     } catch (err) {
         try {
             const backupStakingResultResponse = await fetch(
