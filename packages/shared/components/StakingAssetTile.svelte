@@ -184,7 +184,7 @@
 </button>
 {#if showTooltip && tooltipText?.body.length > 0}
     <Tooltip anchor={tooltipAnchor} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
+        <Text type="h3" classes="text-left">{tooltipText?.title}</Text>
         {#each tooltipText?.body as paragraph}
             <Text
                 type="p"
