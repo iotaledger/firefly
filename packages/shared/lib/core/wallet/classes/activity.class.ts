@@ -1,7 +1,7 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
 import { COIN_TYPE, networkHrp } from '@core/network'
-import { IUTXOInput } from '@iota/types'
+import { ITransactionPayload, IUTXOInput } from '@iota/types'
 import { OutputData, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { truncateString } from '@lib/helpers'
@@ -49,7 +49,6 @@ export class Activity implements IActivity {
     transactionId?: string
     inclusionState: InclusionState
     time: Date
-    inputs?: IUTXOInput[]
 
     sender: Subject
     recipient: Subject
@@ -89,9 +88,8 @@ export class Activity implements IActivity {
         this.transactionId = transaction.transactionId
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
-        this.inputs = transaction.payload.essence.inputs
 
-        this.sender = getSenderFromTransaction(transaction, output, account.depositAddress)
+        this.sender = getSenderFromTransaction(transaction.incoming, account.depositAddress, output, undefined)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
         this.isSelfTransaction = isSelfTransaction
@@ -117,16 +115,23 @@ export class Activity implements IActivity {
     setFromOutputData(
         outputData: OutputData,
         account: IAccountState,
-        transaction: unknown,
+        transaction: ITransactionPayload,
         transactionInputs: IUTXOInput[]
     ): Activity {
         const output = outputData.output
 
         const recipientAddress = getRecipientAddressFromOutput(output)
         const recipient = getRecipientFromOutput(output)
-        const sender = transactionInputs ? getSenderFromInputs(transactionInputs) : getSenderFromOutput(output)
+        let sender = undefined
+        if (transaction) {
+            sender = getSenderFromTransaction(true, account.depositAddress, undefined, transaction)
+        } else if (transactionInputs) {
+            sender = getSenderFromInputs(transactionInputs)
+        } else {
+            sender = getSenderFromOutput(output)
+        }
         const isIncoming = recipientAddress === account.depositAddress
-        // const isInternal = !!findAccountWithAddress(address)
+
         const nativeToken = getNativeTokenFromOutput(output)
         const subject = isIncoming ? sender : recipient
         const isInternal = isSubjectInternal(subject)
@@ -138,7 +143,6 @@ export class Activity implements IActivity {
         this.transactionId = outputData?.metadata?.transactionId
         this.inclusionState = InclusionState.Confirmed
         this.time = new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
-        this.inputs = transactionInputs
 
         this.sender = sender
         this.recipient = recipient

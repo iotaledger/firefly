@@ -1,6 +1,5 @@
 export * from './getNonRemainderOutputFromTransaction'
 export * from './getSenderFromTransaction'
 export * from './getSenderFromInputs'
-export * from './getSenderFromTransactionInputs'
 export * from './receiverAddressesFromTransactionPayload'
 export * from './sendAddressFromTransactionPayload'

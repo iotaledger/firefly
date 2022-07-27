@@ -1,19 +1,25 @@
 import { Subject } from '@core/wallet/types'
-import { OutputTypes } from '@iota/types'
-import { Transaction } from '@iota/wallet'
-import { getSenderFromOutput } from '../outputs'
-import { getSenderFromTransactionInputs } from './getSenderFromTransactionInputs'
+import { ITransactionPayload, OutputTypes } from '@iota/types'
+import { getSubjectFromAddress } from '../getSubjectFromAddress'
+import { getRecipientAddressFromOutput, getSenderFromOutput } from '../outputs'
 
 export function getSenderFromTransaction(
-    transaction: Transaction,
+    isIncoming: boolean,
+    accountAddress: string,
     output: OutputTypes,
-    accountAddress: string
+    transaction: ITransactionPayload
 ): Subject {
-    if (!transaction?.incoming) {
-        return { type: 'address', address: accountAddress }
-    } else if (transaction?.incoming) {
-        return getSenderFromTransactionInputs(transaction.payload.essence.inputs) ?? getSenderFromOutput(output)
+    if (isIncoming) {
+        if (transaction) {
+            const remainderOutput = transaction.essence.outputs.find(
+                (output) => accountAddress !== getRecipientAddressFromOutput(output)
+            )
+            const address = getRecipientAddressFromOutput(remainderOutput)
+            return address ? getSubjectFromAddress(address) : getSenderFromOutput(output)
+        } else {
+            return getSenderFromOutput(output)
+        }
     } else {
-        return undefined
+        return { type: 'address', address: accountAddress }
     }
 }
