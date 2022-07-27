@@ -9,6 +9,7 @@
         ActivityType,
         hideActivity,
         InclusionState,
+        VerificationStatus,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
@@ -16,7 +17,6 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
 
     export let activity: Activity
-    export let onClick: () => void
 
     $: title = activity?.getTitle()
     $: subject = activity?.getFormattedSubject()
@@ -25,7 +25,24 @@
         activity.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 
-    function reject() {
+    function handleTransactionClick(): void {
+        if (activity?.asset?.verification === VerificationStatus.New) {
+            openPopup({
+                type: 'tokenInformation',
+                props: {
+                    activity,
+                    asset: activity?.asset,
+                },
+            })
+        } else {
+            openPopup({
+                type: 'activityDetails',
+                props: { activity },
+            })
+        }
+    }
+
+    function handleRejectClick() {
         openPopup({
             type: 'confirmation',
             props: {
@@ -41,9 +58,16 @@
             },
         })
     }
+
+    function handleClaimClick() {
+        claimActivity(activity)
+    }
 </script>
 
-<ClickableTile {onClick} classes={activity?.inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}>
+<ClickableTile
+    onClick={handleTransactionClick}
+    classes={activity?.inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}
+>
     <div class="w-full flex flex-col space-y-4">
         <div class="flex flex-row items-center text-left space-x-4">
             <AssetIcon asset={activity?.asset} showVerifiedBadgeOnly />
@@ -108,13 +132,13 @@
                         <button
                             disabled={activity.isClaiming}
                             class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
-                            on:click|stopPropagation={reject}
+                            on:click|stopPropagation={handleRejectClick}
                         >
                             {localize('actions.reject')}
                         </button>
                         <button
                             class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
-                            on:click|stopPropagation={() => claimActivity(activity)}
+                            on:click|stopPropagation={handleClaimClick}
                         >
                             {#if activity.isClaiming}
                                 <Spinner busy={true} classes="justify-center h-fit" />

@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
+    import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import {
-        Activity,
-        groupedActivities,
-        activitySearchTerm,
         activityFilterIndex,
+        activitySearchTerm,
+        groupedActivities,
         selectedAccountActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
@@ -13,28 +13,18 @@
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
-    import { openPopup } from 'shared/lib/popup'
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
     import { isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
-    import { time } from '@core/app'
-
-    function handleTransactionClick(activity: Activity): void {
-        openPopup({
-            type: 'activityDetails',
-            props: { activity },
-        })
-    }
-
-    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
 
     let searchActive = false
     let inputElement: HTMLInputElement
     let searchValue: string
+
+    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
     $: setAsyncStatusOfAccountActivities($time)
-
     $: if (searchActive && $selectedAccountActivities) {
         debounce(() => {
             $activitySearchTerm = searchValue
@@ -101,7 +91,7 @@
                                 {group.date} • {group.activities.length}
                             </Text>
                             {#each group.activities as activity}
-                                <ActivityTile onClick={() => void handleTransactionClick(activity)} {activity} />
+                                <ActivityTile {activity} />
                             {/each}
                         </div>
                     {/each}
