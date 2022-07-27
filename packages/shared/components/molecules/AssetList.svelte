@@ -18,15 +18,17 @@
 </script>
 
 {#if assets}
-    <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6">
-        <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
-        <div class="flex flex-auto flex-col overflow-y-auto h-1 -mr-2 pr-2 space-y-2.5 scroll-secondary scrollable-y">
-            <AssetTile onClick={() => handleAssetTileClick(assets?.baseCoin)} asset={assets?.baseCoin} />
-            {#each assets?.nativeTokens as asset}
-                {#if !asset?.hidden}
-                    <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
-                {/if}
-            {/each}
+    <div class="h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
+        <Text classes="text-left mb-4" type={TextType.h5}>{localize('general.assets')}</Text>
+        <div class="flex-auto overflow-y-scroll h-1 -mr-5 pr-4 scroll-secondary">
+            <div class="-mr-4 overflow-x-visible space-y-2 ">
+                <AssetTile onClick={() => handleAssetTileClick(assets?.baseCoin)} asset={assets?.baseCoin} />
+                {#each assets?.nativeTokens as asset}
+                    {#if !asset?.hidden}
+                        <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
+                    {/if}
+                {/each}
+            </div>
         </div>
     </div>
 {/if}
