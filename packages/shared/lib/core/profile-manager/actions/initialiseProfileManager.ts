@@ -1,13 +1,15 @@
 import { ClientOptions, CoinType, SecretManager } from '@iota/wallet'
 import { api } from '../api'
+import { TimeNotSyncedError } from '../errors'
 import { profileManager } from '../stores'
+import { isDeviceTimeSynced } from '../utils'
 
-export function initialiseProfileManager(
+export async function initialiseProfileManager(
     storagePath: string,
     coinType: CoinType,
     clientOptions?: ClientOptions,
     secretManager?: SecretManager
-): void {
+): Promise<void> {
     const newProfileManager = api.createAccountManager({
         storagePath,
         ...(clientOptions && { clientOptions }),
@@ -15,4 +17,8 @@ export function initialiseProfileManager(
         ...(secretManager && { secretManager }),
     })
     profileManager.set(newProfileManager)
+
+    if (!(await isDeviceTimeSynced())) {
+        throw new TimeNotSyncedError()
+    }
 }

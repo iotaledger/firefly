@@ -12,6 +12,7 @@
         updateNewProfile,
         initProfileManagerFromNewProfile,
     } from '@contexts/onboarding'
+    import { destroyProfileManager, TimeNotSyncedError } from '@core/profile-manager'
 
     const networkProtocol = $newProfile.networkProtocol
 
@@ -22,13 +23,20 @@
     }
 
     async function onClick(networkType: NetworkType): Promise<void> {
-        if (networkType === NetworkType.PrivateNet) {
-            updateNewProfile({ networkType })
-        } else {
-            updateNewProfile({ networkProtocol, networkType: networkType })
-            await initProfileManagerFromNewProfile()
+        try {
+            if (networkType === NetworkType.PrivateNet) {
+                updateNewProfile({ networkType })
+            } else {
+                updateNewProfile({ networkProtocol, networkType: networkType })
+                await initProfileManagerFromNewProfile()
+            }
+            $appRouter.next({ networkType })
+        } catch (err) {
+            if (err instanceof TimeNotSyncedError) {
+                destroyProfileManager()
+            }
+            console.error(err)
         }
-        $appRouter.next({ networkType })
     }
 
     async function onBackClick(): Promise<void> {

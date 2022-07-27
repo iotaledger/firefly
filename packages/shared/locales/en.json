@@ -1341,7 +1341,8 @@
             "syncing": "There was an error syncing your wallets.",
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "notLast": "You can only delete your last wallet.",
+            "timeDoesNotMatch": "It looks like your device time is wrong. Please ensure it is correct."
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",

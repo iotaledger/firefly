@@ -5,7 +5,12 @@
     import { INode } from '@core/network'
     import { appRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
-    import { deleteAccountsAndDatabase, destroyProfileManager, getNodeInfo } from '@core/profile-manager'
+    import {
+        deleteAccountsAndDatabase,
+        destroyProfileManager,
+        getNodeInfo,
+        TimeNotSyncedError,
+    } from '@core/profile-manager'
     import { initProfileManagerFromNewProfile } from '@contexts/onboarding'
 
     let nodeConfigurationForm: NodeConfigurationForm
@@ -36,6 +41,8 @@
                 formError = localize('error.node.unabledToConnect')
                 await deleteAccountsAndDatabase()
                 await destroyProfileManager()
+            } else if (err instanceof TimeNotSyncedError) {
+                destroyProfileManager()
             } else if (err?.type !== 'validationError') {
                 showAppNotification({
                     type: 'error',

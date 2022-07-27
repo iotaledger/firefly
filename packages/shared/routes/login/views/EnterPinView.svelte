@@ -10,7 +10,7 @@
     import { localize } from '@core/i18n'
     import { COIN_TYPE, NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile, getStorageDirectoryOfProfile } from '@core/profile'
-    import { initialiseProfileManager } from '@core/profile-manager'
+    import { destroyProfileManager, initialiseProfileManager, TimeNotSyncedError } from '@core/profile-manager'
     import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { openPopup, popupState } from '@lib/popup'
@@ -101,23 +101,32 @@
                 .then((verified) => {
                     if (verified === true) {
                         return Platform.getMachineId().then(() =>
-                            getStorageDirectoryOfProfile(profile.id).then((path) => {
-                                initialiseProfileManager(path, COIN_TYPE[profile.networkProtocol])
-                                // TODO: set storage password with profile manager api
-                                // api.setStoragePassword(pinCode, {
-                                //     onSuccess() {
-                                //         dispatch('next')
-                                //     },
-                                //     onError(err) {
-                                //         isBusy = false
-                                //         showAppNotification({
-                                //             type: 'error',
-                                //             message: locale(err.error),
-                                //         })
-                                //     },
-                                // })
-                                void login()
-                                dispatch('next')
+                            getStorageDirectoryOfProfile(profile.id).then(async (path) => {
+                                try {
+                                    await initialiseProfileManager(path, COIN_TYPE[profile.networkProtocol])
+                                    // TODO: set storage password with profile manager api
+                                    // api.setStoragePassword(pinCode, {
+                                    //     onSuccess() {
+                                    //         dispatch('next')
+                                    //     },
+                                    //     onError(err) {
+                                    //         isBusy = false
+                                    //         showAppNotification({
+                                    //             type: 'error',
+                                    //             message: locale(err.error),
+                                    //         })
+                                    //     },
+                                    // })
+                                    void login()
+                                    dispatch('next')
+                                } catch (err) {
+                                    if (err instanceof TimeNotSyncedError) {
+                                        isBusy = false
+                                        pinRef.resetAndFocus()
+                                        destroyProfileManager()
+                                    }
+                                    console.error(err)
+                                }
                             })
                         )
                     } else {

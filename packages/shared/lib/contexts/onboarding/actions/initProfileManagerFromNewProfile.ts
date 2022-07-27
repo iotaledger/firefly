@@ -11,7 +11,7 @@ export async function initProfileManagerFromNewProfile(node?: INode): Promise<vo
 
     const path = await getStorageDirectoryOfProfile(profile.id)
     const coinType = COIN_TYPE[profile.networkProtocol]
-    initialiseProfileManager(path, coinType, profile.clientOptions, {
+    await initialiseProfileManager(path, coinType, profile.clientOptions, {
         Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
     })
 }

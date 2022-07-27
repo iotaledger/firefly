@@ -13,15 +13,23 @@
     import { appRouter } from '@core/router'
     import features from 'shared/features/features'
     import { onMount } from 'svelte'
+    import { destroyProfileManager, TimeNotSyncedError } from '@core/profile-manager'
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
-        if ($newProfile?.isDeveloperProfile) {
-            updateNewProfile({ networkProtocol })
-        } else {
-            updateNewProfile({ networkProtocol, networkType: NetworkType.Mainnet })
-            await initProfileManagerFromNewProfile()
+        try {
+            if ($newProfile?.isDeveloperProfile) {
+                updateNewProfile({ networkProtocol })
+            } else {
+                updateNewProfile({ networkProtocol, networkType: NetworkType.Mainnet })
+                await initProfileManagerFromNewProfile()
+            }
+            $appRouter.next()
+        } catch (err) {
+            if (err instanceof TimeNotSyncedError) {
+                destroyProfileManager()
+            }
+            console.error(err)
         }
-        $appRouter.next()
     }
 
     async function onBackClick(): Promise<void> {
