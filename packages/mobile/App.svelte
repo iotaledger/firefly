@@ -43,9 +43,13 @@
     $: if ($appSettings.darkMode) {
         document.body.classList.add('scheme-dark')
         StatusBar.setStyle({ style: Style.Dark })
+        // Android status bar background color
+        // TODO: change the color based on routing
+        StatusBar.setBackgroundColor({ color: '#25395f' })
     } else {
         document.body.classList.remove('scheme-dark')
         StatusBar.setStyle({ style: Style.Light })
+        StatusBar.setBackgroundColor({ color: '#ffffff' })
     }
 
     $: if (document.dir !== $localeDirection) {
