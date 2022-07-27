@@ -1419,6 +1419,10 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "SMR token denomination updated",
+            "body": "The SMR token denomination has changed. 1 SMR (previously) is now represented as 0.000001 SMR"
         }
     },
     "exports": {

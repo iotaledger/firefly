@@ -48,6 +48,7 @@
     let remainingTime: number
 
     const FIAT_PLACEHOLDER = '---'
+    const SHOW_SHIMMER_TOKEN_FORMATTING_WARNING = !isAssembly
 
     $: $activeProfile.stakingRewards
     $: isDarkModeEnabled = $appSettings.darkMode
@@ -65,6 +66,7 @@
                 $selectedAccountParticipationOverview?.[`${airdrop}Rewards`] <= 0
         }
     }
+
     $: showWarningState =
         isPartiallyStakedAndCanStake ||
         (isBelowMinimumRewards && !getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)) ||
@@ -132,6 +134,11 @@
                     body: _getBody(),
                 }
             }
+        } else {
+            return {
+                title: localize('tooltips.shimmerTokenFormatting.title'),
+                body: [localize('tooltips.shimmerTokenFormatting.body')],
+            }
         }
     }
 </script>
@@ -149,13 +156,15 @@
         <div class="flex flex-col flex-wrap space-y-1 text-left">
             <div class="flex flex-row items-center space-x-1">
                 <Text classes="font-semibold">{asset?.name}</Text>
-                {#if showWarningState && tooltipText?.body.length > 0}
+                {#if (showWarningState || SHOW_SHIMMER_TOKEN_FORMATTING_WARNING) && tooltipText?.body.length > 0}
                     <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                         <Icon
                             icon="exclamation"
                             width="17"
                             height="17"
-                            classes="fill-current text-yellow-600 group-hover:text-gray-900"
+                            classes="fill-current text-{showWarningState
+                                ? 'yellow-600'
+                                : 'gray-500'} group-hover:text-gray-900"
                         />
                     </div>
                 {/if}
