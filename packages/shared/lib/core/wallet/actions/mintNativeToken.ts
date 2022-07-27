@@ -38,7 +38,7 @@ export async function mintNativeToken(
         addPersistedAsset(persistedAsset)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setFromTransaction(mintTokenTransaction.transaction, account)
+            await new Activity().setFromTransaction(mintTokenTransaction.transaction, account)
         )
         showAppNotification({
             type: 'success',

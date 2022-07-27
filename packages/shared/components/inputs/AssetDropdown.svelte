@@ -43,7 +43,7 @@
             class:cursor-pointer={hasMultipleAssets}
             on:click={handleDropdownClick}
         >
-            <AssetIcon {asset} />
+            <AssetIcon small {asset} />
             <div class="w-full relative" style="max-width: 75px;">
                 <Text
                     color="gray-600"

@@ -1,6 +1,13 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAsset, selectedAccountAssets, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
+    import {
+        IActivity,
+        IAsset,
+        selectedAccountAssets,
+        unverifyAsset,
+        VerificationStatus,
+        verifyAsset,
+    } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup, updatePopupProps } from '@lib/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
@@ -8,19 +15,34 @@
     import { FontWeightText } from '../Text.svelte'
 
     export let asset: IAsset
+    export let activity: IActivity
 
     function handleSkip() {
         unverifyAsset(asset.id)
-        updatePopupProps({
-            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
-        })
+        if (activity) {
+            openPopup({
+                type: 'activityDetails',
+                props: { activity },
+            })
+        } else {
+            updatePopupProps({
+                asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+            })
+        }
     }
 
     function handleVerify() {
         verifyAsset(asset.id)
-        updatePopupProps({
-            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
-        })
+        if (activity) {
+            openPopup({
+                type: 'activityDetails',
+                props: { activity },
+            })
+        } else {
+            updatePopupProps({
+                asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+            })
+        }
     }
 
     function handleSend() {

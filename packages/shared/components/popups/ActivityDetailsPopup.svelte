@@ -5,7 +5,14 @@
     import { Platform } from 'shared/lib/platform'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { Activity, ActivityAsyncStatus, ActivityDirection, claimActivity, hideActivity } from '@core/wallet'
+    import {
+        Activity,
+        ActivityAsyncStatus,
+        ActivityDirection,
+        claimActivity,
+        getAssetFromPersistedAssets,
+        hideActivity,
+    } from '@core/wallet'
     import { Spinner } from 'shared/components'
     import { activeProfile } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
@@ -16,6 +23,7 @@
 
     export let activity: Activity
 
+    const asset = getAssetFromPersistedAssets(activity?.assetId)
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     let isClaiming = activity.isClaiming
@@ -87,7 +95,7 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {formattedFiatValue} {...activity} />
+    <TransactionDetails {formattedFiatValue} {...activity} {asset} />
     {#if activity.isAsync && (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
