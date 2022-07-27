@@ -145,7 +145,9 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>
+        <Button classes="w-full" secondary onClick={onBack} disabled={$isTransferring}
+            >{localize('actions.back')}</Button
+        >
         <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring}>
             {#if $isTransferring}
                 <Spinner busy classes="justify-center break-all" />
