@@ -1421,8 +1421,8 @@
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         },
         "shimmerTokenFormatting": {
-            "title": "SMR unit formatting updated",
-            "body": "The SMR unit formatting has been updated. 1 SMR now has 6 decimal places rather than 0."
+            "title": "SMR token denomination updated",
+            "body": "The SMR token denomination has changed. 1 SMR (previously) is now represented as 0.000001 SMR"
         }
     },
     "exports": {
