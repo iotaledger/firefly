@@ -49,6 +49,7 @@ describe('File: network.ts', () => {
             subunit: 'glow',
             useMetricPrefix: false,
             primaryColor: '#25DFCA',
+            url: 'https://shimmer.network/',
         },
     }
 

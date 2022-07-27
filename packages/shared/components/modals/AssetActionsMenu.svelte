@@ -58,7 +58,7 @@
     }
 </script>
 
-<Modal bind:this={modal} position={{ top: '52px', right: '24px' }}>
+<Modal bind:this={modal}>
     <div class="flex flex-col">
         {#if asset?.verification === VerificationStatus.Verified}
             <MenuItem
