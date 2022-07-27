@@ -1421,8 +1421,9 @@
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         },
         "shimmerTokenFormatting": {
-            "title": "SMR token denomination updated",
-            "body": "The SMR token denomination has changed. 1 SMR (previously) is now represented as 0.000001 SMR"
+            "title": "SMR unit formatting updated",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {

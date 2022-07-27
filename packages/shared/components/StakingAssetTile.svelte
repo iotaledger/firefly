@@ -137,7 +137,10 @@
         } else {
             return {
                 title: localize('tooltips.shimmerTokenFormatting.title'),
-                body: [localize('tooltips.shimmerTokenFormatting.body')],
+                body: [
+                    localize('tooltips.shimmerTokenFormatting.body'),
+                    localize('tooltips.shimmerTokenFormatting.body2'),
+                ],
             }
         }
     }
