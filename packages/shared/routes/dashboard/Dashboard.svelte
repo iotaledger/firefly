@@ -30,7 +30,8 @@
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
-    import { stopParticipationPoll, startParticipationPoll, updateStakingPeriodCache } from 'shared/lib/participation'
+    import { stopParticipationPoll, startParticipationPoll, StakingAirdrop } from 'shared/lib/participation'
+    import { cacheAllStakingPeriods } from 'shared/lib/participation/staking'
     import { pendingParticipations, resetPerformingParticipation } from 'shared/lib/participation/stores'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -39,8 +40,6 @@
         api,
         asyncCreateAccount,
         asyncSyncAccount,
-        isBackgroundSyncing,
-        isFirstSessionSync,
         isSyncing,
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
@@ -92,7 +91,8 @@
     })
 
     $: if (!$isSyncing && $accountsLoaded) {
-        void updateStakingPeriodCache()
+        cacheAllStakingPeriods(StakingAirdrop.Shimmer)
+        cacheAllStakingPeriods(StakingAirdrop.Assembly)
     }
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
@@ -165,27 +165,6 @@
 
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
-        }
-
-        if (!get(isBackgroundSyncing)) {
-            api.startBackgroundSync(
-                {
-                    secs: 30,
-                    nanos: 0,
-                },
-                true,
-                {
-                    onSuccess() {
-                        isBackgroundSyncing.set(true)
-                    },
-                    onError(err) {
-                        showAppNotification({
-                            type: 'error',
-                            message: locale('error.account.syncing'),
-                        })
-                    },
-                }
-            )
         }
 
         Platform.onEvent('menu-logout', () => {

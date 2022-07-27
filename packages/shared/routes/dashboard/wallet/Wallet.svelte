@@ -31,7 +31,9 @@
         getAccountSyncOptions,
         hasGeneratedALedgerReceiveAddress,
         initializeAccountSyncingQueue,
+        isBackgroundSyncing,
         isFirstSessionSync,
+        isInitialAccountSync,
         isTransferring,
         processAccountSyncingQueue,
         processLoadedAccounts,
@@ -86,27 +88,44 @@
     $: if (accountSyncingQueueLength > 0) {
         void processAccountSyncingQueue()
     } else {
-        if (get(isFirstSessionSync) && $accountSyncingQueueStore !== null) {
+        if ($isFirstSessionSync && $accountSyncingQueueStore !== null) {
             isFirstSessionSync.set(false)
         }
     }
 
     async function loadAccounts(): Promise<void> {
-        const loadedAccounts = await asyncGetAccounts()
-
         try {
-            if (loadedAccounts.length <= 0) {
+            const loadedAccounts = await asyncGetAccounts()
+            await processLoadedAccounts(loadedAccounts)
+            setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+            accountsLoaded.set(true)
+
+            if (isInitialAccountSync()) {
                 const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
                 await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
-
-                if ($isFirstSessionSync) {
-                    isFirstSessionSync.set(false)
-                }
+                isFirstSessionSync.set(false)
             } else {
-                await processLoadedAccounts(loadedAccounts)
-                setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
-                accountsLoaded.set(true)
                 initializeAccountSyncingQueue()
+            }
+            if (!get(isBackgroundSyncing)) {
+                api.startBackgroundSync(
+                    {
+                        secs: 30,
+                        nanos: 0,
+                    },
+                    true,
+                    {
+                        onSuccess() {
+                            isBackgroundSyncing.set(true)
+                        },
+                        onError(err) {
+                            showAppNotification({
+                                type: 'error',
+                                message: localize('error.account.syncing'),
+                            })
+                        },
+                    }
+                )
             }
         } catch (err) {
             if ($isLedgerProfile) {
