@@ -56,8 +56,4 @@
         padding: 1rem 1.25rem;
         margin: 0.3rem 0;
     }
-
-    .safe-area {
-        margin-bottom: calc(env(safe-area-inset-bottom) / 2);
-    }
 </style>
