@@ -3,15 +3,15 @@
     import { App } from '@capacitor/app'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
+    import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
     import { openPopup, popupState } from '@lib/popup'
-    import {} from '@lib/popup'
-    import { mobile, stage } from '@lib/app'
+    import { logout, mobile, stage } from '@lib/app'
     import { appSettings } from '@lib/appSettings'
     import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from '@lib/market'
     import { pollNetworkStatus } from '@lib/networkStatus'
-    import { AppRoute, initRouters } from '@core/router'
+    import { AppRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
     import { Platforms } from '@lib/typings/platform'
     import {
         Appearance,
@@ -51,26 +51,19 @@
         void hideSplashScreen()
     }
 
-    let isDoubleBack = false
-    void App.addListener('backButton', () => {
-        if (isDoubleBack) {
-            isDoubleBack = false
-            return handleContinueClick()
-        }
-        isDoubleBack = true
-        openPopup({
-            type: 'confirmCloseApp',
-            hideClose: true,
-            props: {
-                handleContinueClick,
-                handleCancelClick: () => (isDoubleBack = false),
-            },
+    backButtonStore.set(
+        new BackButtonHeap(async () => {
+            await logout()
+            App.exitApp()
         })
-    })
+    )
 
-    function handleContinueClick() {
-        // void App.exitApp()
-    }
+    void App.addListener('backButton', () => {
+        const next = $backButtonStore.remove()
+        if (next) {
+            next()
+        }
+    })
 
     async function hideSplashScreen() {
         await tick()

@@ -1,14 +1,10 @@
 package org.iota.firefly.mobile.alpha;
 
-import android.content.Context;
-import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.getcapacitor.Plugin;
 import com.getcapacitor.annotation.CapacitorPlugin;
-
-import java.io.File;
 
 @CapacitorPlugin(name = "WebViewSettings")
 public class WebViewSettingsPlugin extends Plugin {
@@ -38,5 +34,12 @@ public class WebViewSettingsPlugin extends Plugin {
         super.handleOnStop();
         WebView webView = getBridge().getWebView();
         webView.clearCache(true);
+    }
+
+    @Override
+    public void handleOnDestroy() {
+       super.handleOnDestroy();
+       WebView webView = getBridge().getWebView();
+       webView.clearCache(true);
     }
 }
