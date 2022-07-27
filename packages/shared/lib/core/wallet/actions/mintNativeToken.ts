@@ -1,6 +1,7 @@
 import { selectedAccount } from '@core/account'
 import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
 import { Converter } from '@lib/converter'
+import { showAppNotification } from '@lib/notifications'
 import { isTransferring } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
@@ -38,6 +39,11 @@ export async function mintNativeToken(
             account.id,
             new Activity().setFromTransaction(mintTokenTransaction.transaction, account)
         )
+        showAppNotification({
+            type: 'success',
+            message: 'Token minting transaction sent',
+            alert: true,
+        })
         isTransferring.set(false)
         return Promise.resolve()
     } catch (reason) {
