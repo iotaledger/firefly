@@ -52,7 +52,7 @@
     }
 
     backButtonStore.set(
-        new BackButtonHeap(() => {
+        new BackButtonHeap(async () => {
             await logout()
             App.exitApp()
         })
