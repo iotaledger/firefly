@@ -10,7 +10,7 @@
     export let darkBackgroundColor = 'gray-850'
     export let padding = 'px-4 py-3.5'
     export let classes = ''
-    export let copyText = ''
+    export let copyValue = ''
     export let isCopyable = false
 
     let showTooltip = false
@@ -20,7 +20,7 @@
     $: isValueTextTruncated = (tooltipAnchor?.firstChild as HTMLElement)?.scrollWidth > textContainerWidth
 
     function toggleTooltip(show: boolean): void {
-        if (isValueTextTruncated) {
+        if (isValueTextTruncated && !isCopyable) {
             showTooltip = show
         }
     }
@@ -28,8 +28,9 @@
 
 <div on:mouseleave={() => toggleTooltip(false)} class="w-full">
     <CopyableBox
-        value={copyText ? copyText : valueText}
+        value={copyValue ? copyValue : valueText}
         {isCopyable}
+        offset={5}
         row
         {backgroundColor}
         {darkBackgroundColor}

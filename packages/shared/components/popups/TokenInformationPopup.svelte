@@ -65,14 +65,17 @@
         {/if}
         <div class="w-full flex flex-col space-y-2">
             <KeyValueBox
+                keyText={localize('popups.tokenInformation.tokenMetadata.standard')}
+                valueText={asset?.standard}
+            />
+            <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.name')}
                 valueText={asset?.metadata?.name}
-                isCopyable
             />
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
-                valueText={truncateString(asset?.id, 15, 15, 3)}
-                isCopyable
+                valueText={truncateString(asset?.id, 18, 18, 3)}
+                isCopyable={asset?.standard === 'IRC30'}
                 copyValue={asset?.id}
             />
             {#if asset?.metadata?.url}

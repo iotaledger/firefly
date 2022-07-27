@@ -9,6 +9,7 @@
     export let value = ''
     export let isCopyable = true
     export let clearPadding = false
+    export let offset: number
     export let classes = ''
 
     let tooltipAnchor
@@ -44,7 +45,7 @@
 {#if isCopyable && showTooltip}
     <Tooltip
         anchor={tooltipAnchor}
-        offset={clearPadding ? 25 : 15}
+        offset={clearPadding ? offset ?? 25 : offset ?? 15}
         position="top"
         size="small"
         backgroundColor="green-600"
