@@ -7,6 +7,7 @@
 
     export let asset: IAsset
     export let large = false
+    export let small = false
     export let showVerifiedBadgeOnly = false
 
     let icon: string
@@ -34,14 +35,14 @@
 <div
     class="
         relative flex
-        {large ? 'w-12 h-12' : 'w-8 h-8'}
+        {large ? 'w-12 h-12' : small ? 'w-6 h-6' : 'w-8 h-8'}
     "
 >
     <div
         class="
         rounded-full flex justify-center items-center transition-none
         {isAnimation ? 'p-0' : 'p-1'}
-        {large ? 'w-12 h-12' : 'w-8 h-8'}
+        {large ? 'w-12 h-12' : small ? 'w-6 h-6' : 'w-8 h-8'}
         {assetIconBackgroundColor ? 'icon-bg' : 'bg-blue-500'}
     "
         style={assetIconBackgroundColor ? `--icon-bg-color: ${assetIconBackgroundColor}` : ''}
@@ -49,7 +50,7 @@
     >
         {#if isAnimation}
             <Animation
-                classes={large ? 'w-12 h-12' : 'w-8 h-8'}
+                classes={large ? 'w-12 h-12' : small ? 'w-6 h-6' : 'w-8 h-8'}
                 animation="special-token"
                 loop={true}
                 renderer="canvas"
@@ -68,8 +69,13 @@
         {/if}
     </div>
     {#if !(showVerifiedBadgeOnly && asset?.verification !== VerificationStatus.Verified)}
-        <span class="absolute flex justify-center items-center h-4 w-4 -bottom-0.5 -right-0.5">
-            <VerificationBadge verificationStatus={asset?.verification} {large} />
+        <span
+            class="
+                absolute flex justify-center items-center h-4 w-4 
+                {small ? '-bottom-1 -right-1' : '-bottom-0.5 -right-0.5'}
+            "
+        >
+            <VerificationBadge verificationStatus={asset?.verification} {large} {small} />
         </span>
     {/if}
 </div>
