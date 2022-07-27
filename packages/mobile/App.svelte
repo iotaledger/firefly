@@ -3,9 +3,9 @@
     import { App } from '@capacitor/app'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
+    import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
     import { openPopup, popupState } from '@lib/popup'
-    import {} from '@lib/popup'
-    import { mobile, stage } from '@lib/app'
+    import { logout, mobile, stage } from '@lib/app'
     import { appSettings } from '@lib/appSettings'
     import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
@@ -52,7 +52,8 @@
     }
 
     backButtonStore.set(
-        new BackButtonHeap(() => {
+        new BackButtonHeap(async () => {
+            await logout()
             App.exitApp()
         })
     )
