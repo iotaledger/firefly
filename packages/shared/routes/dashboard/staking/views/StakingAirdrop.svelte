@@ -25,6 +25,9 @@
     let remainingTimeAmount: string
     let remainingTimeUnit: string
 
+    let rewardsWrapperWidth: number
+    let stakingAirdropWidth: number
+
     const video = {
         [StakingAirdrop.Assembly]: null,
         [StakingAirdrop.Shimmer]: null,
@@ -113,6 +116,7 @@
     class="relative z-0 flex w-full h-full bg-{airdrop}-bg"
     on:mouseenter={video[airdrop]?.play()}
     on:mouseleave={video[airdrop]?.pause()}
+    bind:clientWidth={stakingAirdropWidth}
 >
     <!-- svelte-ignore a11y-media-has-caption -->
     <video
@@ -209,8 +213,8 @@
                 {/if}
                 <HR />
                 <div class="flex flex-row justify-between space-x-4">
-                    <div class="flex flex-col">
-                        <div class="flex flex-row justify-between items-center space-x-1">
+                    <div class="flex flex-col" bind:clientWidth={rewardsWrapperWidth}>
+                        <div class="flex flex-row items-center space-x-1">
                             <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
                                 {totalStakingRewards.split(' ')[0]}
                             </Text>
@@ -246,9 +250,8 @@
         </div>
     </div>
 </div>
-
 {#if showTooltip}
-    <Tooltip anchor={tooltipAnchor} position="right">
+    <Tooltip anchor={tooltipAnchor} position={rewardsWrapperWidth > 0.5 * stakingAirdropWidth ? 'left' : 'right'}>
         <Text type="p" classes="text-gray-900 bold mb-2 text-left"
             >{localize('tooltips.shimmerTokenFormatting.title')}</Text
         >
