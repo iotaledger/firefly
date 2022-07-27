@@ -9,7 +9,7 @@
         refreshAccountAssetsForActiveProfile(true)
         showAppNotification({
             type: 'success',
-            message: 'All token metadata has been reset and refreshed',
+            message: localize('notifications.refreshTokenMetadata.success'),
             alert: true,
         })
     }

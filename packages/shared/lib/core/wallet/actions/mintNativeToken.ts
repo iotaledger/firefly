@@ -1,4 +1,5 @@
 import { selectedAccount } from '@core/account'
+import { localize } from '@core/i18n'
 import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
 import { Converter } from '@lib/converter'
 import { showAppNotification } from '@lib/notifications'
@@ -41,7 +42,7 @@ export async function mintNativeToken(
         )
         showAppNotification({
             type: 'success',
-            message: 'Token minting transaction sent',
+            message: localize('notifications.mintNativeToken.success'),
             alert: true,
         })
         isTransferring.set(false)

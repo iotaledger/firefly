@@ -1,4 +1,5 @@
 import { selectedAccount } from '@core/account'
+import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
 
@@ -22,7 +23,7 @@ export async function requestTokensFromFaucet(): Promise<void> {
         if (response?.status === 202) {
             showAppNotification({
                 type: 'success',
-                message: 'Faucet request sent successfully',
+                message: localize('notifications.faucetRequest.success'),
                 alert: true,
             })
             return Promise.resolve()
