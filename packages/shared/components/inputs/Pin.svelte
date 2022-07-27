@@ -153,6 +153,7 @@
                             id={`input-${i}`}
                             type="password"
                             inputmode="numeric"
+                            autocomplete="off"
                             bind:this={inputElements[i]}
                             class:active={!inputs[i] || inputs[i].length === 0}
                             class:glimpse
