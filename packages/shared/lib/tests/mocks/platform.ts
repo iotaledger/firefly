@@ -95,7 +95,7 @@ const Platform: IPlatform = {
         return Promise.resolve(false)
     },
     loadJsonFile(filepath: string): Promise<unknown> {
-        return Promise.resolve({filepath})
+        return Promise.resolve({ filepath })
     },
 }
 
