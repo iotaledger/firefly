@@ -6,6 +6,7 @@
         ActivityAsyncStatus,
         ActivityDirection,
         claimActivity,
+        ActivityType,
         hideActivity,
         InclusionState,
     } from '@core/wallet'
@@ -26,7 +27,7 @@
 
     function reject() {
         openPopup({
-            type: 'confirmationPopup',
+            type: 'confirmation',
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
@@ -66,12 +67,19 @@
                         {activity?.getFormattedAmount(true)}
                     </Text>
                 </div>
+
                 <div class="flex flex-row justify-between">
                     <Text fontWeight={FontWeightText.normal} lineHeight="140" color="gray-600">
-                        {localize(
-                            activity?.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
-                            { values: { account: subject } }
-                        )}
+                        {#if activity?.type === ActivityType.Minting}
+                            {activity.asset.metadata.name}
+                        {:else}
+                            {localize(
+                                activity?.direction === ActivityDirection.In
+                                    ? 'general.fromAddress'
+                                    : 'general.toAddress',
+                                { values: { account: subject } }
+                            )}
+                        {/if}
                     </Text>
                     <Text
                         fontWeight={FontWeightText.normal}

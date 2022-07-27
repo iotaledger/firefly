@@ -1,4 +1,5 @@
-export * from './getNonRemainderOutputFromTransaction'
+export * from './containsFoundryOutput'
+export * from './getRelevantOutputFromTransaction'
 export * from './getSenderFromTransaction'
 export * from './getSenderFromTransactionInputs'
 export * from './receiverAddressesFromTransactionPayload'
