@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Text, Tooltip } from 'shared/components'
-    import Box from './Box.svelte'
+    import CopyableBox from './CopyableBox.svelte'
 
     export let keyText = ''
     export let valueText = ''
@@ -10,6 +10,8 @@
     export let darkBackgroundColor = 'gray-850'
     export let padding = 'px-4 py-3.5'
     export let classes = ''
+    export let copyText = ''
+    export let isCopyable = false
 
     let showTooltip = false
     let tooltipAnchor: HTMLElement
@@ -24,8 +26,15 @@
     }
 </script>
 
-<div on:mouseleave={() => toggleTooltip(false)}>
-    <Box row clearPadding {backgroundColor} {darkBackgroundColor} classes="justify-between {padding} {classes}">
+<div on:mouseleave={() => toggleTooltip(false)} class="w-full">
+    <CopyableBox
+        value={copyText ? copyText : valueText}
+        {isCopyable}
+        row
+        {backgroundColor}
+        {darkBackgroundColor}
+        classes="w-full justify-between {padding} {classes}"
+    >
         {#if keyText}
             <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor} classes="mr-4">
                 {keyText}
@@ -57,5 +66,5 @@
         {:else}
             <slot name="value" />
         {/if}
-    </Box>
+    </CopyableBox>
 </div>

@@ -3,7 +3,7 @@
     import { IAsset, selectedAccountAssets, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup, updatePopupProps } from '@lib/popup'
-    import { AssetIcon, Button, Text, TextHint, AssetActionsButton, CopyableBox } from 'shared/components'
+    import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
     import { get } from 'svelte/store'
     import { FontWeightText } from '../Text.svelte'
 
@@ -57,38 +57,24 @@
         {#if asset?.verification !== VerificationStatus.Verified}
             <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
         {/if}
-        <div class="w-full flex-col space-y-2">
-            <CopyableBox value={asset?.metadata?.name} classes="justify-between">
-                <Text fontSize="14" lineHeight="5" color="gray-600" darkColor="gray-500" classes="mr-4">
-                    {localize('popups.tokenInformation.tokenMetadata.name')}
-                </Text>
-                <div class="truncate">
-                    <Text fontSize="14" lineHeight="5" color="gray-600" darkColor="gray-500" classes="truncate">
-                        {asset?.metadata?.name}
-                    </Text>
-                </div>
-            </CopyableBox>
-            <CopyableBox value={asset?.id} classes="justify-between">
-                <Text fontSize="14" lineHeight="5" color="gray-600" darkColor="gray-500" classes="mr-4">
-                    {localize('popups.tokenInformation.tokenMetadata.tokenId')}
-                </Text>
-                <div class="truncate">
-                    <Text fontSize="14" lineHeight="5" color="gray-600" darkColor="gray-500" classes="truncate">
-                        {truncateString(asset?.id, 15, 15, 3)}
-                    </Text>
-                </div>
-            </CopyableBox>
+        <div class="w-full flex flex-col space-y-2">
+            <KeyValueBox
+                keyText={localize('popups.tokenInformation.tokenMetadata.name')}
+                valueText={asset?.metadata?.name}
+                isCopyable
+            />
+            <KeyValueBox
+                keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
+                valueText={truncateString(asset?.id, 15, 15, 3)}
+                isCopyable
+                copyValue={asset?.id}
+            />
             {#if asset?.metadata?.url}
-                <CopyableBox value={asset?.metadata?.url} classes="justify-between">
-                    <Text fontSize="14" lineHeight="5" color="gray-600" darkColor="gray-500" classes="mr-4">
-                        {localize('popups.tokenInformation.tokenMetadata.url')}
-                    </Text>
-                    <div class="truncate">
-                        <Text fontSize="14" lineHeight="5" color="gray-600" darkColor="gray-500" classes="truncate">
-                            {asset?.metadata?.url}
-                        </Text>
-                    </div>
-                </CopyableBox>
+                <KeyValueBox
+                    keyText={localize('popups.tokenInformation.tokenMetadata.url')}
+                    valueText={asset?.metadata?.url}
+                    isCopyable
+                />
             {/if}
         </div>
     </div>
