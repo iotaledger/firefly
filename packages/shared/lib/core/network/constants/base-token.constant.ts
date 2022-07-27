@@ -19,5 +19,6 @@ export const BASE_TOKEN: Readonly<{ [key in NetworkProtocol]: ITokenMetadata }> 
         subunit: 'glow',
         useMetricPrefix: false,
         primaryColor: '#25DFCA',
+        url: 'https://shimmer.network/',
     },
 }
