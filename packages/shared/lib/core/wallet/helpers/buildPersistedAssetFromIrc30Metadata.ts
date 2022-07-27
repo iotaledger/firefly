@@ -1,5 +1,6 @@
 import { VerificationStatus } from '../enums'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
+import { getIconColorFromString } from '@core/account'
 
 export function buildPersistedAssetFromIrc30Metadata(
     tokenId: string,
@@ -14,6 +15,7 @@ export function buildPersistedAssetFromIrc30Metadata(
             unit: metadata.symbol,
             decimals: metadata.decimals,
             useMetricPrefix: false,
+            primaryColor: getIconColorFromString(metadata?.name),
             ...(metadata?.description && { description: metadata?.description }),
             ...(metadata?.url && { description: metadata?.url }),
             ...(metadata?.logoUrl && { description: metadata?.logoUrl }),
