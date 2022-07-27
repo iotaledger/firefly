@@ -39,7 +39,7 @@ describe('File: network.ts', () => {
     const MAINNET_URLS = [
         'https://chrysalis-nodes.iota.org',
         'https://chrysalis-nodes.iota.cafe',
-        'https://mainnet-node.tanglebay.com',
+        'https://iota-node.tanglebay.com',
     ]
     const MAINNET_NODES = MAINNET_URLS.map((url) => _buildNode(url, MAINNET))
     const MAINNET_CONFIG: NetworkConfig = {

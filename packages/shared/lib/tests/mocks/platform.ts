@@ -94,6 +94,9 @@ const Platform: IPlatform = {
     validateSeedVault(buffer: unknown): Promise<boolean> {
         return Promise.resolve(false)
     },
+    loadJsonFile(filepath: string): Promise<unknown> {
+        return Promise.resolve({filepath})
+    },
 }
 
 window['__CAPACITOR__'] = Platform
