@@ -1571,6 +1571,18 @@
                 "Conflicting": "failed to send"
             }
         },
+        "minting": {
+            "in": {
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
+            },
+            "out": {
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
+            }
+        },
         "migrate": {
             "Pending": "migrating for",
             "Confirmed": "migrated for",
