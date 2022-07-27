@@ -33,8 +33,9 @@ import {
     isOutputAsync,
     isSubjectInternal,
     outputIdFromTransactionData,
+    containsFoundryOutput,
 } from '../utils'
-import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
+import { getRelevantOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 import { activeProfile } from '@core/profile'
 
 export class Activity implements IActivity {
@@ -70,15 +71,21 @@ export class Activity implements IActivity {
     claimedDate?: Date
 
     setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
-        const { output, outputIndex, isSelfTransaction } = getNonRemainderOutputFromTransaction(
+        const isFoundry = containsFoundryOutput(transaction)
+        const { output, outputIndex, isSelfTransaction } = getRelevantOutputFromTransaction(
             transaction,
-            account.depositAddress
+            account.depositAddress,
+            isFoundry
         )
+        // if (transaction.transactionId === '0x4d6ea41b4353f0d7e2f7fbb99c1bf2130cbbe41387ffba3ebefdd406ffb0f476') {
+        //     console.log(output)
+        //     console.log(transaction)
+        // }
 
         const recipient = getRecipientFromOutput(output)
         const nativeToken = getNativeTokenFromOutput(output)
 
-        this.type = getActivityType(isSubjectInternal(recipient))
+        this.type = getActivityType(isSubjectInternal(recipient), isFoundry)
         this.id = transaction.transactionId
         this.isHidden = isActivityHiddenForAccountId(account.id, transaction.transactionId)
 
@@ -92,7 +99,8 @@ export class Activity implements IActivity {
         this.subject = transaction.incoming ? this.sender : this.recipient
         this.isSelfTransaction = isSelfTransaction
         this.isInternal = isSubjectInternal(recipient)
-        this.direction = transaction.incoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
+        this.direction =
+            transaction.incoming || isSelfTransaction || isFoundry ? ActivityDirection.In : ActivityDirection.Out
 
         this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
         this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
@@ -214,6 +222,9 @@ export class Activity implements IActivity {
 
     getTitle(): string {
         let title = ''
+        if (this.type === ActivityType.Minting) {
+            title = 'general.minting'
+        }
         if (this.type === ActivityType.InternalTransaction) {
             title = this.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
         } else if (this.type === ActivityType.ExternalTransaction) {
