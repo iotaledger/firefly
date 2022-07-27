@@ -3,6 +3,7 @@
     import { mobile } from '@core/app'
     import { displayNotifications } from 'shared/lib/notifications'
     import { fade } from 'svelte/transition'
+    import Alert from './Alert.svelte'
 
     let toasts
     $: toasts = $displayNotifications.map((notification) => ({
@@ -18,7 +19,11 @@
     <ul class="space-y-2">
         {#each toasts as toast}
             <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
-                <Toast {...toast} />
+                {#if toast?.alert}
+                    <Alert {...toast} />
+                {:else}
+                    <Toast {...toast} />
+                {/if}
             </li>
         {/each}
     </ul>
