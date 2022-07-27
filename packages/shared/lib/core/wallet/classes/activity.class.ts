@@ -222,7 +222,7 @@ export class Activity implements IActivity {
     getTitle(): string {
         let title = ''
         if (this.type === ActivityType.Minting) {
-            title = 'general.minting'
+            title = this.inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting'
         }
         if (this.type === ActivityType.InternalTransaction) {
             title = this.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'

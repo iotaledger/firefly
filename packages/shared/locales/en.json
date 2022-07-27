@@ -1113,6 +1113,7 @@
         "received": "Received",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
