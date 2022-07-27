@@ -1,6 +1,6 @@
 import { IAppSettings, IAppVersionDetails } from '@core/app'
 import { IError } from '@core/error'
-import { IDeepLinkManager } from '@common/deep-links'
+import { IDeepLinkManager } from '@auxiliary/deep-link'
 import { ILedger } from './ledger'
 import { INotificationManager } from './notificationManager'
 import { IPincodeManager } from './pincodeManager'

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { handleDeepLink } from '@common/deep-links'
+    import { handleDeepLink } from '@auxiliary/deep-link'
     import { localize } from '@core/i18n'
     import { clearPollNetworkInterval, pollNetworkStatus, nodeInfo } from '@core/network'
     import {
