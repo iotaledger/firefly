@@ -170,6 +170,10 @@
         }
     }
 
+    export function isDrawerOpen(): boolean {
+        return isOpen
+    }
+
     export async function open(): Promise<void> {
         isOpen = true
         await coords.set({ x: 0, y: 0 }, { duration: 650, easing: quintOut })
