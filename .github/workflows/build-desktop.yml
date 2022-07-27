@@ -47,7 +47,7 @@ jobs:
     needs: [setup]
     strategy:
       matrix:
-        os: [ubuntu-18.04, macos-12, windows-2019]
+        os: [ubuntu-18.04, macos-11, windows-2019]
       fail-fast: false
     env:
       VERSION: ${{ needs.setup.outputs.version }}
@@ -85,7 +85,7 @@ jobs:
 
     - name: Set deployment target (macOS)
       run: echo "MACOSX_DEPLOYMENT_TARGET=10.12" >> $GITHUB_ENV
-      if: matrix.os == 'macos-12'
+      if: matrix.os == 'macos-11'
 
     - name: Install required packages (Linux)
       run: |
@@ -117,7 +117,7 @@ jobs:
     - name: Install Sentry CLI
       # Yarn has issues putting binaries in the PATH on Windows
       run: npm i -g @sentry/cli
-      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os != 'macos-12' }}
+      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os != 'macos-11' }}
 
 #    - name: Strip backend debug info and upload to Sentry (Linux)
 #      run: |
@@ -165,7 +165,7 @@ jobs:
         FIREFLY_APPLE_ID: ${{ secrets.APPLE_ID }}
         FIREFLY_APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
       working-directory: packages/desktop
-      if: matrix.os == 'macos-12'
+      if: matrix.os == 'macos-11'
 
     - name: Build Electron app (Windows)
       run: yarn compile:${env:STAGE}:win
@@ -204,7 +204,7 @@ jobs:
     - name: Compute checksums (macOS)
       run: for i in `ls | grep 'firefly-desktop*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
       working-directory: packages/desktop/out
-      if: matrix.os == 'macos-12'
+      if: matrix.os == 'macos-11'
 
     - name: Compute checksums (Windows)
       run: Get-ChildItem "." -Filter firefly-desktop* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
@@ -244,7 +244,7 @@ jobs:
     - name: Downloading artifacts
       uses: actions/download-artifact@v2
       with:
-        name: firefly-desktop-macos-12
+        name: firefly-desktop-macos-11
         path: assets
 
     - name: Downloading artifacts
