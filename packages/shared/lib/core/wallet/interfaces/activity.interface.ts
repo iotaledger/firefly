@@ -24,6 +24,7 @@ export interface IActivity {
     asyncStatus: ActivityAsyncStatus
     expirationDate?: Date
     isHidden?: boolean
+    isAssetHidden: boolean
     isClaiming?: boolean
     isClaimed?: boolean
     publicNote?: string

@@ -1,12 +1,5 @@
 <script lang="typescript">
-    import {
-        Button,
-        Text,
-        RecipientInput,
-        AssetAmountInput,
-        ClosableTextInput,
-        AddInputButton,
-    } from 'shared/components'
+    import { Button, Text, RecipientInput, AssetAmountInput, ClosableInput, AddInputButton } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeightText } from 'shared/components/Text.svelte'
@@ -87,14 +80,14 @@
     <send-form-inputs class="flex flex-col space-y-4">
         <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:amount bind:unit />
         <RecipientInput bind:this={recipientInput} bind:recipient />
-        <ClosableTextInput
+        <ClosableInput
             bind:buttonElement={metadataButtonElement}
             bind:open={isMetadataInputOpen}
             bind:value={metadata}
             label={localize('general.metadata')}
             placeholder={localize('general.metadata')}
         />
-        <ClosableTextInput
+        <ClosableInput
             bind:buttonElement={metadataButtonElement}
             bind:open={isTagInputOpen}
             bind:value={tag}
