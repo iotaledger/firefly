@@ -51,7 +51,7 @@
 </div>
 <form
     id="password-popup-form"
-    class="flex justify-center w-full flex-row flex-wrap {$mobile && 'safe-area'}"
+    class="flex justify-center w-full flex-row flex-wrap"
     on:submit|preventDefault={handleSubmit}
 >
     <Password
@@ -70,9 +70,3 @@
         </Button>
     </div>
 </form>
-
-<style>
-    .safe-area {
-        margin-bottom: calc(env(safe-area-inset-bottom) / 2);
-    }
-</style>

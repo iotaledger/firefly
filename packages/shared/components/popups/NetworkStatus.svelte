@@ -8,8 +8,8 @@
     export let referencedRate = 0
 </script>
 
-<div class="flex flex-col safe-area">
-    <Text type="h4" classes="flex w-full mb-4 justify-center">
+<div class="flex flex-col">
+    <Text type="h4" classes="-mt-4 mb-4 flex w-full justify-center">
         {localize('views.settings.networkStatus.title')}
     </Text>
     {#if $activeProfile.isDeveloperProfile}

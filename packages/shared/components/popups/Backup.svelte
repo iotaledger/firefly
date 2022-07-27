@@ -13,7 +13,6 @@
 
     export let lastBackupDate
     export let lastBackupDateFormatted
-    export let profileUnlocked = false
 
     const color = getBackupWarningColor(lastBackupDate)
     let password = ''
@@ -63,18 +62,16 @@
 </script>
 
 <div class="flex w-full {$mobile ? 'flex-col safe-area' : 'flex-row'} flex-wrap">
-    <Text type="h4" classes={$mobile ? 'text-center' : 'mb-5'}>
+    <Text type="h4" classes="{$mobile && 'text-center -mt-4'} mb-5">
         {lastBackupDate
             ? locale('popups.backup.title', {
                   values: { date: formatDate(lastBackupDate, { format: 'long' }) },
               })
             : locale('popups.backup.notBackedUp')}
     </Text>
-    {#if $mobile === false}
-        <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
-            <Logo width="50%" logo="logo-stronghold" />
-        </div>
-    {/if}
+    <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
+        <Logo width="50%" logo="logo-stronghold" />
+    </div>
     <div class="w-full {$mobile ? 'my-5' : 'text-center my-6'} md:px-8">
         <Text overrideColor={$mobile === false} type="h5" classes="mb-2 text-{color}-600">
             {#if !lastBackupDate}
@@ -105,25 +102,23 @@
             class="flex justify-center w-full flex-row flex-wrap"
             on:submit|preventDefault={handleBackupClick}
         >
-            {#if profileUnlocked === false}
-                <Password
-                    classes="w-full {$mobile ? 'mb-8' : 'mb-5'}"
-                    bind:value={password}
-                    showRevealToggle
-                    {locale}
-                    disabled={busy}
-                    placeholder={locale('general.password')}
-                    autofocus={!$mobile}
-                    {error}
-                />
-            {/if}
+            <Password
+                classes="w-full {$mobile ? 'mb-8' : 'mb-5'}"
+                bind:value={password}
+                showRevealToggle
+                {locale}
+                disabled={busy}
+                placeholder={locale('general.password')}
+                autofocus={!$mobile}
+                {error}
+            />
             <div class="flex flex-row justify-between w-full space-x-4">
                 {#if $mobile}
                     <Button
                         classes="w-full"
                         type="submit"
                         form="password-popup-form"
-                        disabled={profileUnlocked === false && (!password || password.length === 0 || busy)}
+                        disabled={!password || password.length === 0 || busy}
                     >
                         {#if busy}
                             <Spinner busy={true} message={locale('popups.backup.saving')} classes="justify-center" />
