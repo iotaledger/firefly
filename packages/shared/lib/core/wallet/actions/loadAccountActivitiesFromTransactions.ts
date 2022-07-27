@@ -2,11 +2,11 @@ import { IAccountState } from '@core/account'
 import { Activity } from '../classes'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
 
-export function loadAccountActivitiesFromTransactions(account: IAccountState): void {
-    Object.keys(account.meta.transactions).forEach((transactionId) => {
+export async function loadAccountActivitiesFromTransactions(account: IAccountState): Promise<void> {
+    for (const transactionId of Object.keys(account.meta.transactions)) {
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setFromTransaction(account.meta.transactions?.[transactionId], account)
+            await new Activity().setFromTransaction(account.meta.transactions?.[transactionId], account)
         )
-    })
+    }
 }

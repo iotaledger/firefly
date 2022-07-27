@@ -7,8 +7,8 @@ import { linkActivityAndClaimingTransaction } from './linkActivityAndClaimingTra
 
 export async function loadAccountActivities(account: IAccountState): Promise<void> {
     addEmptyAccountActivitiesToAllAccountActivities(account.id)
-    loadAccountActivitiesFromTransactions(account)
-    loadAccountActivitiesFromOutputs(account)
+    await loadAccountActivitiesFromTransactions(account)
+    await loadAccountActivitiesFromOutputs(account)
     await setAsyncActivitiesToClaimed(account)
     linkActivityAndClaimingTransaction(account)
 }

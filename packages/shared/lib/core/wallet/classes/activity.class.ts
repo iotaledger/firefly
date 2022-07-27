@@ -37,6 +37,7 @@ import {
 } from '../utils'
 import { getRelevantOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
 import { activeProfile } from '@core/profile'
+import { tryGetAndStoreAssetFromPersistedAssets } from '../actions'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -71,7 +72,7 @@ export class Activity implements IActivity {
     claimingTransactionId?: string
     claimedDate?: Date
 
-    setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
+    async setFromTransaction(transaction: Transaction, account: IAccountState): Promise<Activity> {
         const isFoundry = containsFoundryOutput(transaction)
         const { output, outputIndex, isSelfTransaction } = getRelevantOutputFromTransaction(
             transaction,
@@ -81,6 +82,10 @@ export class Activity implements IActivity {
 
         const recipient = getRecipientFromOutput(output)
         const nativeToken = getNativeTokenFromOutput(output)
+
+        if (nativeToken) {
+            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+        }
 
         this.type = getActivityType(isSubjectInternal(recipient), isFoundry)
         this.id = transaction.transactionId
@@ -116,7 +121,7 @@ export class Activity implements IActivity {
         return this
     }
 
-    setFromOutputData(outputData: OutputData, account: IAccountState): Activity {
+    async setFromOutputData(outputData: OutputData, account: IAccountState): Promise<Activity> {
         const recipientAddress = getRecipientAddressFromOutput(outputData.output)
         const recipient = getRecipientFromOutput(outputData.output)
         const sender = getSenderFromOutput(outputData.output)
@@ -125,6 +130,10 @@ export class Activity implements IActivity {
         const nativeToken = getNativeTokenFromOutput(outputData.output)
         const subject = isIncoming ? sender : recipient
         const isInternal = isSubjectInternal(subject)
+
+        if (nativeToken) {
+            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+        }
 
         this.type = getActivityType(isInternal)
         this.id = outputData.outputId
