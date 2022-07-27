@@ -58,6 +58,7 @@ export class Activity implements IActivity {
     outputId?: string
     rawAmount: number
     asset: IPersistedAsset
+    isAssetHidden: boolean
     metadata?: string
     tag?: string
 
@@ -99,6 +100,7 @@ export class Activity implements IActivity {
             transaction.incoming || isSelfTransaction || isFoundry ? ActivityDirection.In : ActivityDirection.Out
 
         this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
+        this.isAssetHidden = !this.asset || this.asset.hidden
         this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
         this.storageDeposit = getStorageDepositFromOutput(output)
@@ -142,6 +144,7 @@ export class Activity implements IActivity {
 
         this.outputId = outputData.outputId
         this.asset = getPersistedAsset(nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol]))
+        this.isAssetHidden = !this.asset || this.asset.hidden
 
         this.storageDeposit = getStorageDepositFromOutput(outputData.output)
         this.rawAmount = nativeToken

@@ -320,14 +320,14 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button secondary classes="w-full" onClick={handleCancel}>
+        <Button secondary classes="w-full" disabled={$isTransferring} onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button autofocus classes="w-full" onClick={handleMint}>
+        <Button autofocus classes="w-full" disabled={$isTransferring} onClick={handleMint}>
             {#if $isTransferring}
                 <Spinner busy classes="justify-center break-all" />
             {:else}
-                {localize('popups.mintNativeTokenForm.buttons.mint')}
+                {localize('actions.mint')}
             {/if}
         </Button>
     </div>

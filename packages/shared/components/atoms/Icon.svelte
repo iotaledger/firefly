@@ -2,14 +2,14 @@
     import { ICON_SVG, Icon } from '@lib/auxiliary/icon'
 
     export let icon: Icon = undefined
-    export let width: number | string
-    export let height: number | string
+    export let width: number | string = undefined
+    export let height: number | string = undefined
     export let classes = ''
     export let boxed = false
     export let boxClasses = 'undefined'
     export let boxStyles = ''
-    export let primaryColor: string
-    export let secondaryColor: string
+    export let primaryColor: string = undefined
+    export let secondaryColor: string = undefined
 
     $: selected = ICON_SVG[icon]
 </script>

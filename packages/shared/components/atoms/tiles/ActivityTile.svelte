@@ -27,7 +27,7 @@
 
     function reject() {
         openPopup({
-            type: 'confirmationPopup',
+            type: 'confirmation',
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),

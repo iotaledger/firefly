@@ -1,3 +1,4 @@
+export { default as Alert } from './Alert.svelte'
 export { default as Animation } from './Animation.svelte'
 export { default as Box } from './Box.svelte'
 export { default as BundleMiningLayout } from './BundleMiningLayout.svelte'
