@@ -34,9 +34,9 @@
     <button
         bind:this={tooltipAnchor}
         on:click={onClick}
-        class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'} {classes}"
+        class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'}"
     >
-        <Box {clearPadding} {...$$restProps}>
+        <Box {clearPadding} {...$$restProps} {classes}>
             <slot />
         </Box>
     </button>
