@@ -21,7 +21,6 @@ import {
     SHIMMER_STAKING_RESULT_FILES,
     STAKING_AIRDROP_TOKENS,
     STAKING_EVENT_IDS,
-    REMOTE_STAKING_RESULT_URL,
     LOCAL_STAKING_RESULT_URL,
 } from './constants'
 import { participationEvents, stakedAccounts } from './stores'
@@ -297,15 +296,6 @@ async function fetchStakingResult(
     }
 }
 
-function getAccountStakingRewards(): AccountStakingRewards[] {
-    const cachedStakingRewards = get(activeProfile)?.stakingRewards ?? []
-    if (cachedStakingRewards.length === 0) {
-        return get(get(wallet).accounts).map((account) => ({ accountId: account.id }))
-    } else {
-        return cachedStakingRewards
-    }
-}
-
 function getStakingPeriodForAccount(
     account: WalletAccount,
     stakingResult: StakingPeriodJsonResponse,
@@ -379,13 +369,26 @@ export async function cacheStakingPeriod(airdrop: StakingAirdrop, periodNumber: 
     const stakingResult = await fetchStakingResult(airdrop, periodNumber)
     if (!stakingResult) return
 
-    const previousStakingRewards = getAccountStakingRewards()
-    const updatedStakingRewards: AccountStakingRewards[] = previousStakingRewards.map(
+    const stakingRewards = getAccountStakingRewards()
+    const updatedStakingRewards: AccountStakingRewards[] = stakingRewards.map(
         (accountStakingRewards: AccountStakingRewards) =>
             updateStakingRewardsForAccount(accountStakingRewards, stakingResult, airdrop, periodNumber)
     )
 
     updateProfile('stakingRewards', updatedStakingRewards)
+}
+
+function getAccountStakingRewards(): AccountStakingRewards[] {
+    const cachedStakingRewards = get(activeProfile)?.stakingRewards ?? []
+    const accountIds = get(get(wallet).accounts).map((account) => account?.id)
+
+    return accountIds.map((accountId, idx) => {
+        if (idx > cachedStakingRewards.length - 1) {
+            return { accountId }
+        } else {
+            return { ...cachedStakingRewards[idx], accountId }
+        }
+    })
 }
 
 function getLastStakingPeriodNumber(airdrop: StakingAirdrop): number {

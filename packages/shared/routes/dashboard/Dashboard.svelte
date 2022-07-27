@@ -30,7 +30,8 @@
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
-    import { stopParticipationPoll, startParticipationPoll, updateStakingPeriodCache } from 'shared/lib/participation'
+    import { stopParticipationPoll, startParticipationPoll, StakingAirdrop } from 'shared/lib/participation'
+    import { cacheAllStakingPeriods } from 'shared/lib/participation/staking'
     import { pendingParticipations, resetPerformingParticipation } from 'shared/lib/participation/stores'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -92,7 +93,8 @@
     })
 
     $: if (!$isSyncing && $accountsLoaded) {
-        void updateStakingPeriodCache()
+        cacheAllStakingPeriods(StakingAirdrop.Shimmer)
+        cacheAllStakingPeriods(StakingAirdrop.Assembly)
     }
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
