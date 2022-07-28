@@ -15,6 +15,7 @@
     import {
         api,
         currentSyncingAccountStore,
+        getAccountSyncOptions,
         getIncomingFlag,
         isFirstSessionSync,
         isParticipationPayload,
@@ -43,27 +44,33 @@
         if (!$isSyncing) {
             const _syncAccount = () => {
                 $isSyncing = true
-                api.syncAccount($selectedAccountStore?.id, {
-                    onSuccess() {
-                        $isSyncing = false
-                    },
-                    onError(err) {
-                        $isSyncing = false
+                const { gapLimit } = getAccountSyncOptions()
 
-                        const shouldHideErrorNotification =
-                            err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
-                        if (!shouldHideErrorNotification) {
-                            if ($isLedgerProfile) {
-                                displayNotificationForLedgerProfile('error', true, true, false, false, err)
-                            } else {
-                                showAppNotification({
-                                    type: 'error',
-                                    message: localize(err.error),
-                                })
+                api.syncAccount(
+                    $selectedAccountStore?.id,
+                    { gapLimit },
+                    {
+                        onSuccess() {
+                            $isSyncing = false
+                        },
+                        onError(err) {
+                            $isSyncing = false
+
+                            const shouldHideErrorNotification =
+                                err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
+                            if (!shouldHideErrorNotification) {
+                                if ($isLedgerProfile) {
+                                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                                } else {
+                                    showAppNotification({
+                                        type: 'error',
+                                        message: localize(err.error),
+                                    })
+                                }
                             }
-                        }
-                    },
-                })
+                        },
+                    }
+                )
             }
 
             if ($isSoftwareProfile) {
