@@ -89,7 +89,7 @@ export class Activity implements IActivity {
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
 
-        this.sender = getSenderFromTransaction(transaction.incoming, account.depositAddress, output, undefined)
+        this.sender = getSenderFromTransaction(transaction.incoming, account.depositAddress, output)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
         this.isSelfTransaction = isSelfTransaction
