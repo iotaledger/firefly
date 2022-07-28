@@ -22,8 +22,8 @@
         assetIconBackgroundColor = asset?.metadata?.primaryColor
         assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
         if (
-            asset.id === String(COIN_TYPE[NetworkProtocol.IOTA]) ||
-            asset.id === String(COIN_TYPE[NetworkProtocol.Shimmer])
+            asset?.id === String(COIN_TYPE[NetworkProtocol.IOTA]) ||
+            asset?.id === String(COIN_TYPE[NetworkProtocol.Shimmer])
         ) {
             icon = asset?.metadata?.name?.toLocaleLowerCase()
         } else {
