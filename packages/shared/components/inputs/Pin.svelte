@@ -151,12 +151,14 @@
                             bind:value={inputs[i]}
                             maxLength="1"
                             id={`input-${i}`}
-                            type="tel"
+                            type="password"
+                            inputmode="numeric"
+                            autocomplete="off"
                             bind:this={inputElements[i]}
                             class:active={!inputs[i] || inputs[i].length === 0}
                             class:glimpse
                             {disabled}
-                            on:input={(event) => (isAndroid ? changeHandlerHelper(event, i) : undefined)}
+                            on:input={(event) => changeHandlerHelper(event, i)}
                             on:keydown={(event) => changeHandler(event, i)}
                             on:contextmenu|preventDefault
                         />
