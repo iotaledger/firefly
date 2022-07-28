@@ -12,6 +12,24 @@
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
 -->
+<script context="module" lang="typescript">
+    type Drawers = Set<{ close: () => Promise<void> }>
+    const drawers: Drawers = new Set()
+
+    export function closePreviousDrawer(): void {
+        const last = [...drawers].pop()
+        last?.close()
+        drawers.delete(last)
+    }
+
+    export function closeDrawers(): void {
+        drawers.forEach((d) => {
+            void d.close()
+            drawers.delete(d)
+        })
+    }
+</script>
+
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
@@ -47,6 +65,8 @@
         if (opened) {
             await open()
         }
+        const currentDrawer = { close }
+        drawers.add(currentDrawer)
     })
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
@@ -82,6 +102,10 @@
             isVelocityReached = false
             await close()
         }
+    }
+
+    export function isDrawerOpen(): boolean {
+        return isOpen
     }
 
     export async function open(): Promise<void> {

@@ -5,6 +5,7 @@
     import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { SUPPORTED_LOCALES, setLanguage, _ } from '@core/i18n'
     import { Locale } from '@core/i18n'
+    import { backButtonStore } from '@core/router'
     import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
     import { TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
 
@@ -14,6 +15,8 @@
     let sendCrashReports = false
 
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
+
+    $backButtonStore.refresh()
 
     function handleContinueClick(): void {
         if ($mobile) {
