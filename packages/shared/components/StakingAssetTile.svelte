@@ -47,6 +47,10 @@
     let tooltipText: TooltipText
     let remainingTime: number
 
+    $: if (!tooltipAnchor) {
+        showTooltip = false
+    }
+
     const FIAT_PLACEHOLDER = '---'
     $: SHOW_SHIMMER_TOKEN_FORMATTING_WARNING = asset?.name === Token.Shimmer
 
