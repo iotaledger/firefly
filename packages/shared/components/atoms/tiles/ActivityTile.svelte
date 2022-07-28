@@ -35,6 +35,7 @@
         if (asset?.verification === VerificationStatus.New) {
             openPopup({
                 type: 'tokenInformation',
+                overflow: true,
                 props: {
                     activity,
                     asset,

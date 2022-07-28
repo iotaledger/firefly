@@ -10,6 +10,7 @@
     function handleAssetTileClick(asset): void {
         openPopup({
             type: 'tokenInformation',
+            overflow: true,
             props: {
                 asset,
             },
