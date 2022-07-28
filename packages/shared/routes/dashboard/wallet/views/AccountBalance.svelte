@@ -105,18 +105,10 @@
         </div>
         <!-- Action Send / Receive -->
         <div class="flex flex-row justify-between space-x-3 mt-9 mb-6" use:animateMobileButtons>
-            <ButtonMobile
-                textBig
-                classes="w-full font-semibold"
-                onClick={handleSendClick}
-            >
+            <ButtonMobile textBig classes="w-full font-semibold" onClick={handleSendClick}>
                 {localize('actions.send')}
             </ButtonMobile>
-            <ButtonMobile
-                textBig
-                classes="w-full font-semibold"
-                onClick={handleReceiveClick}
-            >
+            <ButtonMobile textBig classes="w-full font-semibold" onClick={handleReceiveClick}>
                 {localize('actions.receive')}
             </ButtonMobile>
         </div>

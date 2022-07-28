@@ -48,102 +48,100 @@
     <ButtonMobile {...$$props}>
         <slot />
     </ButtonMobile>
+{:else if xl}
+    <button
+        {type}
+        {form}
+        class="{unstyled
+            ? ''
+            : 'xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center'} {classes}"
+        use:bindEvents={events}
+        on:click={onClick}
+        class:secondary
+        class:active
+        class:with-icon={icon}
+        class:darkmode={darkModeEnabled}
+        style={inlineStyle}
+        class:unstyled
+        {disabled}
+        bind:this={buttonElement}
+    >
+        <Icon classes="mb-1" {icon} height={iconHeight} width={iconWidth} />
+        <span class="text-12 leading-140">
+            <slot />
+        </span>
+    </button>
 {:else}
-    {#if xl}
-        <button
-            {type}
-            {form}
-            class="{unstyled
-                ? ''
-                : 'xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center'} {classes}"
-            use:bindEvents={events}
-            on:click={onClick}
-            class:secondary
-            class:active
-            class:with-icon={icon}
-            class:darkmode={darkModeEnabled}
-            style={inlineStyle}
-            class:unstyled
-            {disabled}
-            bind:this={buttonElement}
-        >
-            <Icon classes="mb-1" {icon} height={iconHeight} width={iconWidth} />
-            <span class="text-12 leading-140">
-                <slot />
-            </span>
-        </button>
-    {:else}
-        <button
-            {type}
-            {form}
-            class="{unstyled ? '' : 'cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5'} {classes}"
-            use:bindEvents={events}
-            on:click={onClick}
-            class:secondary
-            class:caution
-            class:warning
-            class:medium
-            class:small
-            class:xsmall
-            class:outline
-            class:with-icon={icon}
-            class:iconReverse
-            class:active
-            class:darkmode={darkModeEnabled}
-            class:showHoverText
-            class:unstyled
-            style={inlineStyle}
-            {disabled}
-            bind:this={buttonElement}
-        >
-            {#if icon}
-                {#if small}
-                    {#if iconReverse}
-                        <div class="relative flex flex-row justify-between">
-                            <div class="relative flex items-center flex-1">
-                                <div class="absolute left-0 flex items-center">
-                                    <Icon width={iconWidth ?? '16'} height={iconHeight ?? '16'} classes="mr-4" {icon} />
-                                </div>
-                                <span class="font-bold text-12 leading-140"><slot /></span>
+    <button
+        {type}
+        {form}
+        class="{unstyled ? '' : 'cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5'} {classes}"
+        use:bindEvents={events}
+        on:click={onClick}
+        class:secondary
+        class:caution
+        class:warning
+        class:medium
+        class:small
+        class:xsmall
+        class:outline
+        class:with-icon={icon}
+        class:iconReverse
+        class:active
+        class:darkmode={darkModeEnabled}
+        class:showHoverText
+        class:unstyled
+        style={inlineStyle}
+        {disabled}
+        bind:this={buttonElement}
+    >
+        {#if icon}
+            {#if small}
+                {#if iconReverse}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <div class="absolute left-0 flex items-center">
+                                <Icon width={iconWidth ?? '16'} height={iconHeight ?? '16'} classes="mr-4" {icon} />
                             </div>
-                        </div>
-                    {:else}
-                        <div class="relative flex flex-row justify-between">
-                            <div class="relative flex items-center flex-1">
-                                <span class="font-bold text-12 leading-140"><slot /></span>
-                                <div class="absolute right-0 flex items-center">
-                                    <Icon
-                                        width={showHoverText ? 20 : iconWidth ?? 16}
-                                        height={showHoverText ? 20 : iconHeight ?? 16}
-                                        classes="ml-4 showHoverText"
-                                        {icon}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    {/if}
-                {:else if iconOnly}
-                    <Icon width={iconWidth ?? 24} height={iconHeight ?? 24} {icon} />
-                {:else}
-                    <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
-                            <Icon height={iconHeight} width={iconWidth} {icon} />
-                        </div>
-                        <div class="col-span-10 h-full flex items-center">
                             <span class="font-bold text-12 leading-140"><slot /></span>
                         </div>
-                        <div class="col-span-1 h-full flex items-center">
-                            {#if !disabled}
-                                <Icon icon="chevron-right" classes="right" />
-                            {/if}
+                    </div>
+                {:else}
+                    <div class="relative flex flex-row justify-between">
+                        <div class="relative flex items-center flex-1">
+                            <span class="font-bold text-12 leading-140"><slot /></span>
+                            <div class="absolute right-0 flex items-center">
+                                <Icon
+                                    width={showHoverText ? 20 : iconWidth ?? 16}
+                                    height={showHoverText ? 20 : iconHeight ?? 16}
+                                    classes="ml-4 showHoverText"
+                                    {icon}
+                                />
+                            </div>
                         </div>
                     </div>
                 {/if}
+            {:else if iconOnly}
+                <Icon width={iconWidth ?? 24} height={iconHeight ?? 24} {icon} />
             {:else}
-                <span class="text-12 leading-140 w-full"><slot /></span>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
+                        <Icon height={iconHeight} width={iconWidth} {icon} />
+                    </div>
+                    <div class="col-span-10 h-full flex items-center">
+                        <span class="font-bold text-12 leading-140"><slot /></span>
+                    </div>
+                    <div class="col-span-1 h-full flex items-center">
+                        {#if !disabled}
+                            <Icon icon="chevron-right" classes="right" />
+                        {/if}
+                    </div>
+                </div>
             {/if}
-        </button>
-    {/if}
+        {:else}
+            <span class="text-12 leading-140 w-full"><slot /></span>
+        {/if}
+    </button>
 {/if}
 
 <style type="text/scss">

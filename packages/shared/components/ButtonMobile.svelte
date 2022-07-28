@@ -3,7 +3,7 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { bindEvents } from 'shared/lib/utils'
     import { onMount } from 'svelte'
-import { text } from 'svelte/internal'
+    import { text } from 'svelte/internal'
 
     export let events = []
 
@@ -72,7 +72,9 @@ import { text } from 'svelte/internal'
     <button
         {type}
         {form}
-        class="{unstyled ? '' : 'cursor-pointer text-center rounded-xl px-3 pt-2.5'} {textBig ? 'pb-3' : 'pb-3.5'} {classes}"
+        class="{unstyled ? '' : 'cursor-pointer text-center rounded-xl px-3 pt-2.5'} {textBig
+            ? 'pb-3'
+            : 'pb-3.5'} {classes}"
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
@@ -143,9 +145,13 @@ import { text } from 'svelte/internal'
 
 <style type="text/scss">
     @keyframes active-timeout {
-		from { --tw-bg-opacity: 1 }
-		to { --tw-bg-opacity: 0.7 }
-	}
+        from {
+            --tw-bg-opacity: 1;
+        }
+        to {
+            --tw-bg-opacity: 0.7;
+        }
+    }
     button:not(.unstyled) {
         @apply bg-blue-500;
         min-width: 100px;
@@ -162,7 +168,7 @@ import { text } from 'svelte/internal'
             // &:focus {
             //     @apply bg-red-600;
             // }
-            // &:active { 
+            // &:active {
             //     @apply bg-blue-700;
             //     // animation: active-timeout 1.5s ease-out;
             // }
