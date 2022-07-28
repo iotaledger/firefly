@@ -418,7 +418,7 @@
 
 {#if $mobile}
     <Idle />
-    <div class="flex flex-col w-full h-full">
+    <div class="flex flex-col w-full h-full bg-white dark:bg-gray-800">
         <MainMenu opacity={mobileMainMenuOpacity} />
         <TopNavigation {onCreateAccount} />
         <!-- Dashboard Pane -->

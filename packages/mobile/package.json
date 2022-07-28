@@ -37,6 +37,7 @@
         "@capacitor/app": "^1.1.1",
         "@capacitor/share": "^1.1.2",
         "@capacitor/splash-screen": "^1.2.2",
+        "@capacitor/status-bar": "^1.0.8",
         "capacitor-secure-filesystem-access": "./packages/mobile/capacitor/plugins/secure-filesystem-access/",
         "capacitor-secure-storage-plugin": "^0.6.2",
         "firefly-actor-system-capacitor-bindings": "./packages/backend/bindings/capacitor/"
