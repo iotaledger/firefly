@@ -50,15 +50,15 @@
             if ((float || integer) && !isEnter) {
                 // if the input is float, we accept one dot or comma depending on localization
                 if (float && e.key === decimalSeparator) {
-                    if (value.indexOf(decimalSeparator) >= 0) {
+                    if (value?.indexOf(decimalSeparator) >= 0) {
                         e.preventDefault()
                     }
-                } else if ('0123456789'.indexOf(e.key) < 0) {
+                } else if ('0123456789'?.indexOf(e.key) < 0) {
                     // if float or interger we accept numbers
                     e.preventDefault()
-                } else if (float && maxDecimals !== undefined && '0123456789'.indexOf(e.key) >= 0) {
+                } else if (float && maxDecimals !== undefined && '0123456789'?.indexOf(e.key) >= 0) {
                     // If max decimals are set only allow certain number after decimal separator
-                    const sepPos = value.indexOf(decimalSeparator)
+                    const sepPos = value?.indexOf(decimalSeparator)
                     if (sepPos >= 0) {
                         // If caret position is after the separator then check
                         if (e.target.selectionEnd > sepPos) {
@@ -82,7 +82,7 @@
         if (e.clipboardData && (float || integer)) {
             const pasteVal = e.clipboardData.getData('text')
             // Discard scientific notation or negative
-            if (pasteVal.indexOf('e') >= 0 || pasteVal.indexOf('-') >= 0) {
+            if (pasteVal?.indexOf('e') >= 0 || pasteVal?.indexOf('-') >= 0) {
                 e.preventDefault()
             } else if (float) {
                 const val = parseCurrency(pasteVal)
@@ -95,7 +95,7 @@
                 }
             } else if (integer) {
                 // Dicard anything with a decimal separator
-                if (allDecimalSeparators.some((sep) => pasteVal.indexOf(sep) >= 0)) {
+                if (allDecimalSeparators.some((sep) => pasteVal?.indexOf(sep) >= 0)) {
                     e.preventDefault()
                 } else {
                     const val = Number.parseInt(pasteVal, 10)
