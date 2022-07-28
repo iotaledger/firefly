@@ -12,18 +12,18 @@ export async function handleNewOutputEvent(accountId: string, event: NewOutputEv
     const account = get(activeAccounts).find((account) => account.id === accountId)
 
     const address =
-        event.output.address?.type === ADDRESS_TYPE_ED25519
-            ? Bech32Helper.toBech32(0, Converter.hexToBytes(event.output.address.pubKeyHash.substring(2)), 'rms')
+        event?.output?.address?.type === ADDRESS_TYPE_ED25519
+            ? Bech32Helper.toBech32(0, Converter.hexToBytes(event?.output?.address?.pubKeyHash?.substring(2)), 'rms')
             : ''
     if (
-        event.output.address.type === ADDRESS_TYPE_ED25519 &&
-        account.depositAddress === address &&
-        !event.output.remainder
+        event?.output?.address?.type === ADDRESS_TYPE_ED25519 &&
+        account?.depositAddress === address &&
+        !event?.output?.remainder
     ) {
         syncBalance(account.id)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            await new Activity().setFromOutputData(event.output, account, event.transactionInputs)
+            await new Activity().setFromOutputData(event?.output, account, event?.transactionInputs)
         )
     }
 }
