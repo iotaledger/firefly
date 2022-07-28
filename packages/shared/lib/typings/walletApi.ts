@@ -79,6 +79,7 @@ export interface IWalletApi {
     startBackgroundSync(
         pollingInterval: Duration,
         automaticOutputConsolidation: boolean,
+        gapLimit: number,
         callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
     )
     stopBackgroundSync(callbacks: {
