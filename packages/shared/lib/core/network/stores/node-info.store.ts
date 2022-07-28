@@ -22,8 +22,8 @@ export const nodeInfo = writable<INodeInfo>({
     protocol: {
         protocolVersion: undefined,
         networkName: undefined,
-        bech32HRP: undefined,
-        minPoWScore: undefined,
+        bech32Hrp: undefined,
+        minPowScore: undefined,
         rentStructure: {
             vByteCost: undefined,
             vByteFactorKey: undefined,

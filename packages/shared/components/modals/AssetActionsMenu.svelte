@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { selectedAccountId } from '@core/account'
     import { localize } from '@core/i18n'
     import {
         hideAsset,
@@ -9,6 +10,7 @@
         VerificationStatus,
         verifyAsset,
     } from '@core/wallet'
+    import { hideActivitiesForHiddenAssets } from '@core/wallet/actions/hideActivitiesForHiddenAssets'
     import { Icon } from '@lib/auxiliary/icon'
     import { updatePopupProps } from '@lib/popup'
     import { HR, MenuItem, Modal } from 'shared/components'
@@ -35,6 +37,7 @@
 
     const handleUnhide = () => {
         unhideAsset(asset.id)
+        hideActivitiesForHiddenAssets(get(selectedAccountId))
         updatePopupProps({
             asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
         })
@@ -43,6 +46,7 @@
 
     function handleHide() {
         hideAsset(asset.id)
+        hideActivitiesForHiddenAssets(get(selectedAccountId))
         updatePopupProps({
             asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
         })
@@ -54,7 +58,7 @@
     }
 </script>
 
-<Modal bind:this={modal} position={{ top: '52px', right: '24px' }}>
+<Modal bind:this={modal}>
     <div class="flex flex-col">
         {#if asset?.verification === VerificationStatus.Verified}
             <MenuItem

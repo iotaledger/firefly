@@ -9,6 +9,7 @@
     export let value = ''
     export let isCopyable = true
     export let clearPadding = false
+    export let offset: number
     export let classes = ''
 
     let tooltipAnchor
@@ -34,9 +35,9 @@
     <button
         bind:this={tooltipAnchor}
         on:click={onClick}
-        class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'} {classes}"
+        class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'}"
     >
-        <Box {clearPadding} {...$$restProps}>
+        <Box {clearPadding} {...$$restProps} {classes}>
             <slot />
         </Box>
     </button>
@@ -44,7 +45,7 @@
 {#if isCopyable && showTooltip}
     <Tooltip
         anchor={tooltipAnchor}
-        offset={clearPadding ? 25 : 15}
+        offset={clearPadding ? offset ?? 25 : offset ?? 15}
         position="top"
         size="small"
         backgroundColor="green-600"

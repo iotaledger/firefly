@@ -2,8 +2,8 @@ import { IAccountState } from '@core/account'
 import { Activity } from '../classes'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
 
-export function loadAccountActivitiesFromOutputs(account: IAccountState): void {
-    Object.keys(account.meta.outputs).forEach((outputId) => {
+export async function loadAccountActivitiesFromOutputs(account: IAccountState): Promise<void> {
+    for (const outputId of Object.keys(account.meta.outputs)) {
         const output = account.meta.outputs?.[outputId]
         if (!output.remainder) {
             const transactionId = output?.metadata?.transactionId
@@ -12,9 +12,9 @@ export function loadAccountActivitiesFromOutputs(account: IAccountState): void {
             if (!hasTransaction) {
                 addActivityToAccountActivitiesInAllAccountActivities(
                     account.id,
-                    new Activity().setFromOutputData(output, account, incomingTransaction?.[1])
+                    await new Activity().setFromOutputData(output, account, incomingTransaction?.[1])
                 )
             }
         }
-    })
+    }
 }

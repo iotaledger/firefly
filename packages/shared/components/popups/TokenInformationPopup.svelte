@@ -1,26 +1,48 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAsset, selectedAccountAssets, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
+    import {
+        IActivity,
+        IAsset,
+        selectedAccountAssets,
+        unverifyAsset,
+        VerificationStatus,
+        verifyAsset,
+    } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup, updatePopupProps } from '@lib/popup'
-    import { AssetIcon, Button, KeyValueBox, Text, TextHint, AssetActionsButton } from 'shared/components'
+    import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
     import { get } from 'svelte/store'
     import { FontWeightText } from '../Text.svelte'
 
     export let asset: IAsset
+    export let activity: IActivity
 
     function handleSkip() {
         unverifyAsset(asset.id)
-        updatePopupProps({
-            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
-        })
+        if (activity) {
+            openPopup({
+                type: 'activityDetails',
+                props: { activity },
+            })
+        } else {
+            updatePopupProps({
+                asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+            })
+        }
     }
 
     function handleVerify() {
         verifyAsset(asset.id)
-        updatePopupProps({
-            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
-        })
+        if (activity) {
+            openPopup({
+                type: 'activityDetails',
+                props: { activity },
+            })
+        } else {
+            updatePopupProps({
+                asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+            })
+        }
     }
 
     function handleSend() {
@@ -35,8 +57,14 @@
 </script>
 
 <div class="space-y-6">
-    <div class="flex flex-row items-center space-x-3">
-        <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold}>
+    <div class="flex flex-row items-center space-x-3 mr-16">
+        <Text
+            type="h4"
+            fontSize="18"
+            lineHeight="6"
+            fontWeight={FontWeightText.semibold}
+            classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
+        >
             {asset?.verification === VerificationStatus.New
                 ? localize('popups.tokenInformation.newTokenTitle')
                 : asset?.metadata?.name}
@@ -57,19 +85,26 @@
         {#if asset?.verification !== VerificationStatus.Verified}
             <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
         {/if}
-        <div class="w-full flex-col space-y-2">
+        <div class="w-full flex flex-col space-y-2">
+            <KeyValueBox
+                keyText={localize('popups.tokenInformation.tokenMetadata.standard')}
+                valueText={asset?.standard}
+            />
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.name')}
                 valueText={asset?.metadata?.name}
             />
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
-                valueText={truncateString(asset?.id, 15, 15, 3)}
+                valueText={truncateString(asset?.id, 18, 18, 3)}
+                isCopyable={asset?.standard === 'IRC30'}
+                copyValue={asset?.id}
             />
             {#if asset?.metadata?.url}
                 <KeyValueBox
                     keyText={localize('popups.tokenInformation.tokenMetadata.url')}
                     valueText={asset?.metadata?.url}
+                    isCopyable
                 />
             {/if}
         </div>

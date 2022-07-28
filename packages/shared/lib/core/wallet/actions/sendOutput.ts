@@ -16,7 +16,7 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
         const transaction = await account.sendOutputs([output], transactionOptions)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setFromTransaction(transaction, account)
+            await new Activity().setFromTransaction(transaction, account)
         )
         isTransferring.set(false)
         return

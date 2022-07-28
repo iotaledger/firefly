@@ -8,7 +8,7 @@ import { Converter } from '@lib/converter'
 import { get } from 'svelte/store'
 import { NewOutputEvent } from '../types/newOutputEvent'
 
-export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): void {
+export async function handleNewOutputEvent(accountId: string, event: NewOutputEvent): Promise<void> {
     const account = get(activeAccounts).find((account) => account.id === accountId)
 
     const address =
@@ -23,7 +23,7 @@ export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): 
         syncBalance(account.id)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setFromOutputData(event.output, account, event.transactionInputs)
+            await new Activity().setFromOutputData(event.output, account, event.transactionInputs)
         )
     }
 }
