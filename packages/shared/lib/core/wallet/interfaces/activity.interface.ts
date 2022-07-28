@@ -1,5 +1,4 @@
 import { IAccountState } from '@core/account'
-import { IUTXOInput } from '@iota/types'
 import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Subject } from '../types'
@@ -10,7 +9,6 @@ export interface IActivity {
     transactionId?: string
     type: ActivityType
     time: Date
-    inputs?: IUTXOInput[]
     direction: ActivityDirection
     inclusionState: InclusionState
     isInternal: boolean
