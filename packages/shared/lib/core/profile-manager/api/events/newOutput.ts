@@ -23,7 +23,7 @@ export async function handleNewOutputEvent(accountId: string, event: NewOutputEv
         syncBalance(account.id)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            await new Activity().setFromOutputData(event.output, account)
+            await new Activity().setFromOutputData(event.output, account, event.transactionInputs)
         )
     }
 }

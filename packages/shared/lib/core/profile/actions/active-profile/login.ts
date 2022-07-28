@@ -37,7 +37,7 @@ export async function login(recoverAccounts: boolean = false): Promise<void> {
             setTimeStrongholdLastUnlocked()
         }
 
-        void startBackgroundSync()
+        void startBackgroundSync({ syncIncomingTransactions: true })
 
         // enable listeners
         subscribeToWalletEvents()

@@ -75,7 +75,7 @@
                 {small ? '-bottom-1 -right-1' : '-bottom-0.5 -right-0.5'}
             "
         >
-            <VerificationBadge verificationStatus={asset?.verification} {large} {small} />
+            <VerificationBadge verificationStatus={asset?.verification} {large} />
         </span>
     {/if}
 </div>
