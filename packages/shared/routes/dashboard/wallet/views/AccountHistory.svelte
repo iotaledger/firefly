@@ -242,7 +242,9 @@
     {:else}
         <div class="overflow-y-auto flex-auto h-1 space-y-2.5 -mr-2 pr-2 scroll-secondary">
             {#if $isSyncing && shouldShowFirstSync()}
-                <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
+                <div class="h-full flex flex-col items-center justify-center text-center">
+                    <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
+                </div>
             {:else if queryTransactions.length}
                 {#each queryTransactions as transaction}
                     <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
