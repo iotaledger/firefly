@@ -1,7 +1,7 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
 import { COIN_TYPE, networkHrp } from '@core/network'
-import { ITransactionPayload, IUTXOInput } from '@iota/types'
+import { IOutputResponse } from '@iota/types'
 import { OutputData, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { truncateString } from '@lib/helpers'
@@ -112,24 +112,13 @@ export class Activity implements IActivity {
         return this
     }
 
-    setFromOutputData(
-        outputData: OutputData,
-        account: IAccountState,
-        transaction: ITransactionPayload,
-        transactionInputs: IUTXOInput[]
-    ): Activity {
+    setFromOutputData(outputData: OutputData, account: IAccountState, transactionInputs: IOutputResponse[]): Activity {
         const output = outputData.output
 
         const recipientAddress = getRecipientAddressFromOutput(output)
         const recipient = getRecipientFromOutput(output)
-        let sender = undefined
-        if (transaction) {
-            sender = getSenderFromTransaction(true, account.depositAddress, undefined, transaction)
-        } else if (transactionInputs) {
-            sender = getSenderFromInputs(transactionInputs)
-        } else {
-            sender = getSenderFromOutput(output)
-        }
+        const sender = transactionInputs ? getSenderFromInputs(transactionInputs) : getSenderFromOutput(output)
+
         const isIncoming = recipientAddress === account.depositAddress
 
         const nativeToken = getNativeTokenFromOutput(output)

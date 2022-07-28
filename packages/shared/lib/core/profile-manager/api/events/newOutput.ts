@@ -23,7 +23,7 @@ export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): 
         syncBalance(account.id)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setFromOutputData(event.output, account, event.transaction, event.transactionInputs)
+            new Activity().setFromOutputData(event.output, account, event.transactionInputs)
         )
     }
 }

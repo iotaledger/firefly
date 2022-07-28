@@ -12,7 +12,7 @@ export function loadAccountActivitiesFromOutputs(account: IAccountState): void {
             if (!hasTransaction) {
                 addActivityToAccountActivitiesInAllAccountActivities(
                     account.id,
-                    new Activity().setFromOutputData(output, account, incomingTransaction?.[0], undefined)
+                    new Activity().setFromOutputData(output, account, incomingTransaction?.[1])
                 )
             }
         }
