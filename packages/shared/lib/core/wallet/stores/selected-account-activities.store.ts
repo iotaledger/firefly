@@ -5,8 +5,9 @@ import { localize } from '@core/i18n'
 import { formatUnitBestMatch } from '@lib/units'
 import { getMonthYear, isValueInUnitRange, unitToValue } from '@lib/utils'
 
-import { Activity, ActivityDirection } from '..'
+import { Activity, ActivityFilter } from '..'
 import { allAccountActivities } from './all-account-activities.store'
+import { isFilteredActivity } from '../utils/isFilteredActivity'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -19,19 +20,17 @@ export const selectedAccountActivities: Readable<Activity[]> = derived(
     }
 )
 
-export const activityFilterIndex: Writable<number> = writable(0)
+export const activityFilter: Writable<ActivityFilter> = writable({
+    showHidden: { active: false, type: 'boolean', value: false },
+})
 export const activitySearchTerm: Writable<string> = writable('')
 
 export const queriedActivities: Readable<Activity[]> = derived(
-    [selectedAccountActivities, activityFilterIndex, activitySearchTerm],
-    ([$selectedAccountActivities, $activityFilterIndex, $activitySearchTerm]) => {
+    [selectedAccountActivities, activitySearchTerm],
+    ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities
 
-        if ($activityFilterIndex === 1) {
-            activityList = activityList.filter((activity) => activity.direction === ActivityDirection.In)
-        } else if ($activityFilterIndex === 2) {
-            activityList = activityList.filter((activity) => activity.direction === ActivityDirection.Out)
-        }
+        activityList = activityList.filter((activity) => !isFilteredActivity(activity))
 
         if (activitySearchTerm) {
             activityList = activityList.filter(
@@ -61,7 +60,7 @@ interface GroupedActivity {
 
 export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedActivities], ([$queriedActivities]) => {
     const groupedActivities: GroupedActivity[] = []
-    for (const activity of $queriedActivities.filter((activity) => !(activity.isHidden || activity.isAssetHidden))) {
+    for (const activity of $queriedActivities.filter((activity) => !activity.isHidden)) {
         const activityDate = getActivityGroupTitleForTimestamp(activity.time)
         if (!groupedActivities.some((group) => group.date === activityDate)) {
             groupedActivities.push({ date: activityDate, activities: [] })
