@@ -45,11 +45,7 @@
 </script>
 
 {#if $mobile}
-    <ButtonMobile
-        {secondary} {disabled} {caution} {warning} {active} {outline}
-        {icon} {iconReverse} {xl} {medium} {small} {xsmall} {classes} 
-        {type} {form} {autofocus} {inlineStyle} {showHoverText} {iconOnly}
-        {iconHeight} {iconWidth} {unstyled} {onClick} {events}>
+    <ButtonMobile {...$$props}>
         <slot />
     </ButtonMobile>
 {:else}
