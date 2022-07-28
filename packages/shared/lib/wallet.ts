@@ -458,10 +458,11 @@ export function initializeAccountSyncingQueue(): void {
 }
 
 export function updateAccountSyncingQueue(account: WalletAccount): void {
-    if (!account) return
+    const accountSyncingQueue = get(accountSyncingQueueStore)
+    if (!account || !accountSyncingQueue) return
 
     // It can be assumed that if the account is not currently in the queue then it has already been synced.
-    const isAccountInSyncingQueue = get(accountSyncingQueueStore).some((_account) => _account.id === account.id)
+    const isAccountInSyncingQueue = accountSyncingQueue?.some((_account) => _account.id === account.id)
     if (!isAccountInSyncingQueue) return
 
     // If the account is already first in the queue then no need to update the queue.
@@ -1424,11 +1425,11 @@ const calculateInitialAccountSyncOptions = (setupType: SetupType): AccountSyncOp
         case SetupType.Mnemonic:
         case SetupType.Stronghold:
             gapLimit = 25
-            accountDiscoveryThreshold = 1
+            accountDiscoveryThreshold = 2
             break
         case SetupType.FireflyLedger:
             gapLimit = 10
-            accountDiscoveryThreshold = 1
+            accountDiscoveryThreshold = 2
             break
     }
 
