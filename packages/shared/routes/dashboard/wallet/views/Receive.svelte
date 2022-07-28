@@ -43,7 +43,7 @@
                 ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                 : localize('general.myAddress')}
         </Text>
-        <Text type="pre" classes="px-4">{$selectedAccountStore.depositAddress}</Text>
+        <Text type="p" classes="px-4 mb-10 break-all">{$selectedAccountStore.depositAddress}</Text>
         <button
             class="flex flex-row justify-center items-start h-12 w-full text-blue-500 -mt-10"
             disabled={isGeneratingAddress}
