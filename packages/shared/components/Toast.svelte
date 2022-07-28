@@ -1,7 +1,8 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { Icon, Text } from 'shared/components'
-    import { mobile } from '@lib/app'
     import Logo from './Logo.svelte'
+    import { mobile } from '@lib/app'
     import { removeDisplayNotification } from '@lib/notifications'
 
     type Action = {
@@ -90,7 +91,7 @@
     {/if}
     {#if $mobile}
         <button on:click={onDismissClick}>
-            <Text type="p" color="white" darkColor="white">Dismiss</Text>
+            <Text type="p" color="white" darkColor="white">{localize('actions.dismiss')}</Text>
         </button>
     {/if}
 </div>
