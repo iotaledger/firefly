@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { NetworkProtocol } from '@core/network'
+    import { COIN_TYPE, NetworkProtocol } from '@core/network'
     import { getAssetInitials, IAsset, SPECIAL_TOKEN_ID } from '@core/wallet'
     import { VerificationStatus } from '@core/wallet/enums/verification-status.enum'
     import { isBright } from '@lib/helpers'
@@ -22,8 +22,8 @@
         assetIconBackgroundColor = asset?.metadata?.primaryColor
         assetIconColor = isBright(assetIconBackgroundColor) ? 'gray-800' : 'white'
         if (
-            asset?.metadata?.name?.toLocaleLowerCase() === NetworkProtocol.IOTA ||
-            asset?.metadata?.name?.toLocaleLowerCase() === NetworkProtocol.Shimmer
+            asset.id === String(COIN_TYPE[NetworkProtocol.IOTA]) ||
+            asset.id === String(COIN_TYPE[NetworkProtocol.Shimmer])
         ) {
             icon = asset?.metadata?.name?.toLocaleLowerCase()
         } else {
