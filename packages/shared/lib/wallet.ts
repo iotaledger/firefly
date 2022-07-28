@@ -99,6 +99,7 @@ export const resetWallet = (): void => {
     transferState.set(null)
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
+    accountSyncingQueueStore.set(null)
     isFirstSessionSync.set(true)
     isFirstManualSync.set(true)
     isBackgroundSyncing.set(false)
