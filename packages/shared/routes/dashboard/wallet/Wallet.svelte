@@ -99,9 +99,9 @@
             await processLoadedAccounts(loadedAccounts)
             setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
             accountsLoaded.set(true)
+            const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
 
             if (isInitialAccountSync()) {
-                const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
                 await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
                 isFirstSessionSync.set(false)
             } else {
@@ -114,6 +114,7 @@
                         nanos: 0,
                     },
                     true,
+                    gapLimit,
                     {
                         onSuccess() {
                             isBackgroundSyncing.set(true)

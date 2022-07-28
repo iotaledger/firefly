@@ -99,6 +99,7 @@ export const resetWallet = (): void => {
     transferState.set(null)
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
+    accountSyncingQueueStore.set(null)
     isFirstSessionSync.set(true)
     isFirstManualSync.set(true)
     isBackgroundSyncing.set(false)
@@ -497,35 +498,41 @@ export function asyncSyncAccount(account: WalletAccount, showErrorNotification: 
     return new Promise((resolve, reject) => {
         currentSyncingAccountStore.set(account)
 
-        api.syncAccount(account.id, {
-            onSuccess(response: Event<SyncedAccount>) {
-                const syncedAccount = response.payload
-                processMigratedTransactions(syncedAccount.id, syncedAccount.messages, syncedAccount.addresses)
+        const { gapLimit } = getAccountSyncOptions()
 
-                void updateAccount(get(wallet).accounts, syncedAccount)
-                    .then(() => {
-                        currentSyncingAccountStore.set(null)
-                    })
-                    .catch((err) => {
-                        currentSyncingAccountStore.set(null)
+        api.syncAccount(
+            account.id,
+            { gapLimit },
+            {
+                onSuccess(response: Event<SyncedAccount>) {
+                    const syncedAccount = response.payload
+                    processMigratedTransactions(syncedAccount.id, syncedAccount.messages, syncedAccount.addresses)
 
-                        console.error(err)
-                        reject(err)
-                    })
+                    void updateAccount(get(wallet).accounts, syncedAccount)
+                        .then(() => {
+                            currentSyncingAccountStore.set(null)
+                        })
+                        .catch((err) => {
+                            currentSyncingAccountStore.set(null)
 
-                resolve()
-            },
-            onError(err: ErrorEventPayload) {
-                currentSyncingAccountStore.set(null)
+                            console.error(err)
+                            reject(err)
+                        })
 
-                if (showErrorNotification) {
-                    displayErrorEventToUser(err)
-                }
+                    resolve()
+                },
+                onError(err: ErrorEventPayload) {
+                    currentSyncingAccountStore.set(null)
 
-                console.error(err)
-                reject(err)
-            },
-        })
+                    if (showErrorNotification) {
+                        displayErrorEventToUser(err)
+                    }
+
+                    console.error(err)
+                    reject(err)
+                },
+            }
+        )
     })
 }
 
@@ -1431,7 +1438,6 @@ const calculateInitialAccountSyncOptions = (setupType: SetupType): AccountSyncOp
 const calculateRegularAccountSyncOptions = (profileType: ProfileType, isManualSync: boolean): AccountSyncOptions => {
     let gapLimit = 1
     let accountDiscoveryThreshold = 0
-
     const _isFirstSessionSync = get(isFirstSessionSync)
 
     switch (profileType) {
@@ -1441,7 +1447,7 @@ const calculateRegularAccountSyncOptions = (profileType: ProfileType, isManualSy
         case ProfileType.Ledger:
         case ProfileType.LedgerSimulator:
         default:
-            gapLimit = 1
+            gapLimit = 0
             break
     }
 

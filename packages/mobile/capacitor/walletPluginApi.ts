@@ -158,9 +158,9 @@ export const api = {
         (__ids) =>
             _syncAccounts(sendMessage, __ids, addressIndex, gapLimit, accountDiscoveryThreshold),
     startBackgroundSync:
-        (pollingInterval: Duration, automaticOutputConsolidation: boolean): Api =>
+        (pollingInterval: Duration, automaticOutputConsolidation: boolean, gapLimit: number): Api =>
         (__ids) =>
-            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation),
+            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation, gapLimit),
     stopBackgroundSync: (): Api => (__ids) => _stopBackgroundSync(sendMessage, __ids),
     areLatestAddressesUnused: (): Api => (__ids) => _areLatestAddressesUnused(sendMessage, __ids),
     generateAddress:
