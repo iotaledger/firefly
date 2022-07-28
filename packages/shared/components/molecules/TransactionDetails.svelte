@@ -7,7 +7,7 @@
         KeyValueBox,
         AccountLabel,
     } from 'shared/components/atoms'
-    import { Text } from 'shared/components'
+    import { AssetIcon, Text } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { FontWeightText } from 'shared/components/Text.svelte'
@@ -91,13 +91,16 @@
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
         {#if rawAmount}
             <transaction-value class="flex flex-col space-y-0.5 items-center">
-                <div class="flex flex-row items-baseline space-x-0.5">
-                    <Text type="h1" fontWeight={FontWeightText.semibold}>
-                        {formatTokenAmountBestMatch(rawAmount, asset?.metadata, undefined, false)}
-                    </Text>
-                    {#if unit}
-                        <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
-                    {/if}
+                <div class="flex flex-row space-x-3">
+                    <AssetIcon {asset} />
+                    <div class="flex flex-row items-baseline space-x-0.1">
+                        <Text type="h1" fontWeight={FontWeightText.semibold}>
+                            {formatTokenAmountBestMatch(rawAmount, asset?.metadata, undefined, false)}
+                        </Text>
+                        {#if unit}
+                            <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
+                        {/if}
+                    </div>
                 </div>
                 {#if formattedFiatValue}
                     <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedFiatValue}</Text>
