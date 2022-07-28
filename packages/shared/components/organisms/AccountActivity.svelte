@@ -3,7 +3,6 @@
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import {
-        activityFilterIndex,
         activitySearchTerm,
         groupedActivities,
         selectedAccountActivities,
@@ -29,8 +28,6 @@
         debounce(() => {
             $activitySearchTerm = searchValue
         })()
-    } else {
-        $activityFilterIndex = activeFilterIndex
     }
 
     function shouldShowFirstSync(): boolean {
@@ -61,9 +58,14 @@
                     <SyncSelectedAccountIconButton />
                 {/if}
             </div>
-            {#if features?.wallet?.activityHistory?.search?.enabled}
-                <TogglableButton icon="search" bind:active={searchActive} />
-            {/if}
+            <div class="flex flex-row">
+                {#if features?.wallet?.activityHistory?.search?.enabled}
+                    <ActivityFilter />
+                {/if}
+                {#if features?.wallet?.activityHistory?.search?.enabled}
+                    <TogglableButton icon="search" bind:active={searchActive} />
+                {/if}
+            </div>
         </div>
         {#if features?.wallet?.activityHistory?.search?.enabled && searchActive}
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
