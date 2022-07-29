@@ -306,12 +306,14 @@
                     text={localize('popups.mintNativeTokenForm.inputs.url')}
                     onClick={openUrlInput}
                 />
-                <AddInputButton
-                    bind:buttonElement={logoUrlButtonElement}
-                    bind:open={isLogoUrlInputOpen}
-                    text={localize('popups.mintNativeTokenForm.inputs.logo')}
-                    onClick={openLogoUrlInput}
-                />
+                {#if false}
+                    <AddInputButton
+                        bind:buttonElement={logoUrlButtonElement}
+                        bind:open={isLogoUrlInputOpen}
+                        text={localize('popups.mintNativeTokenForm.inputs.logo')}
+                        onClick={openLogoUrlInput}
+                    />
+                {/if}
             </optional-input-buttons>
         {/if}
         {#if error}
