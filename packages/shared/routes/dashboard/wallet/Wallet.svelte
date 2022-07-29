@@ -431,7 +431,7 @@
     function liftDashboard(node: HTMLElement): void {
         node.style.zIndex = '0'
         unsubscribeLiftDasboard = headerScale.subscribe((curr) => {
-            node.style.transform = `translate(0, ${headerHeight * 0.75 * curr + headerHeight * 0.25}px)`
+            node.style.transform = `translate(0, ${headerHeight * 0.6 * curr + headerHeight * 0.4}px)`
         })
     }
 
