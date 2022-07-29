@@ -2,7 +2,7 @@ import { localize } from '@core/i18n'
 import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { showAppNotification } from '@lib/notifications'
 import { addError } from 'shared/lib/errors'
-import { get } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
 import { networkStatus } from '../networkStatus'
 import { activeProfile, updateProfile } from '../profile'
@@ -35,6 +35,8 @@ import {
     StakingPeriodRewards,
 } from './types'
 import { Platform } from '@lib/platform'
+
+export const haveStakingResultsCached = writable<boolean>(null)
 
 /**
  * Determines whether an account is currently being staked or not.

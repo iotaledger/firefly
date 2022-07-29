@@ -10,6 +10,7 @@
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { haveStakingResultsCached } from 'shared/lib/participation/staking'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
@@ -388,7 +389,9 @@
                             </div>
                         {/if}
                         {#if $accountRoute === AccountRoute.Init}
-                            <AccountAssets />
+                            {#key $haveStakingResultsCached}
+                                <AccountAssets />
+                            {/key}
                         {:else if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
                         {:else if $accountRoute === AccountRoute.Receive}
