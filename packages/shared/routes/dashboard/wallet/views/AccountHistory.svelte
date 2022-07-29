@@ -269,7 +269,9 @@
                     <ActivityRow onClick={() => handleTransactionClick(transaction)} {...transaction} />
                 {/each}
             {:else}
-                <div class="h-full flex flex-col items-center justify-center text-center">
+                <div
+                    class="h-full flex flex-col items-center {$mobile ? 'justify-start' : 'justify-center'} text-center"
+                >
                     <Text secondary>{localize('general.noRecentHistory')}</Text>
                 </div>
             {/if}
