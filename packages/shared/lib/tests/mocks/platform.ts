@@ -101,9 +101,6 @@ const Platform: IPlatform = {
     showActionSheet(options: ActionSheetOptions): Promise<number> {
         return Promise.resolve(0)
     },
-    copy(text): Promise<void> {
-        return Promise.resolve(undefined)
-    },
     paste(): Promise<string> {
         return Promise.resolve('')
     },

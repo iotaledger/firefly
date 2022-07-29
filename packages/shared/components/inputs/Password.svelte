@@ -18,13 +18,13 @@
     export let autofocus = false
     export let submitHandler = undefined
     export let disabled = false
-    export let copyPasteButton = false
+    export let pasteButton = false
     export let autocomplete = 'on'
 
     let revealed = false
     let type = 'password'
 
-    $: showCopyPaste = copyPasteButton && value.length === 0
+    $: showPaste = pasteButton && value.length === 0
 
     const revealToggle = () => {
         type = type === 'password' ? 'text' : 'password'
@@ -73,10 +73,10 @@
             {autocomplete}
             {locale}
             capsLockWarning={true}
-            style="padding-right: {showCopyPaste ? '100px' : '50px'}"
+            style="padding-right: {showPaste ? '100px' : '50px'}"
         />
-        <div class="flex absolute top-3 right-3 {showCopyPaste && 'w-1/4'} justify-end space-x-4">
-            {#if showCopyPaste}
+        <div class="flex absolute top-3 right-3 {showPaste && 'w-1/4'} justify-end space-x-4">
+            {#if showPaste}
                 <button type="button" on:click={() => paste()} tabindex="-1">
                     <Text overrideColor classes="text-blue-500">{locale('actions.paste')}</Text>
                 </button>

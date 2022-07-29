@@ -93,7 +93,7 @@
                 {locale}
                 autofocus={!$mobile}
                 disabled={busy}
-                copyPasteButton={$mobile}
+                pasteButton={$mobile}
             />
             <Password
                 error={errorConfirm}

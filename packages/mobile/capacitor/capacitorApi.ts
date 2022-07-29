@@ -343,16 +343,6 @@ export const CapacitorApi: IPlatform = {
     },
 
     /**
-     * Copy to clipboard
-     * @param {string} Text to copy
-     */
-    copy: async (text: string) => {
-        await Clipboard.write({
-            string: text,
-        })
-    },
-
-    /**
      * Paste from clipboard
      * @returns {string} text from clipboard
      */
