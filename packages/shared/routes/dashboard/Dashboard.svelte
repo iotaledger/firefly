@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { handleDeepLink } from '@common/deep-links'
+    import { handleDeepLink } from '@auxiliary/deep-link'
     import { localize } from '@core/i18n'
     import { clearPollNetworkInterval, pollNetworkStatus, nodeInfo } from '@core/network'
     import {
@@ -17,7 +17,7 @@
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { Settings, Staking, Wallet, DeveloperTools } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import TopNavigation from './TopNavigation.svelte'
@@ -30,6 +30,7 @@
         wallet: Wallet,
         settings: Settings,
         staking: Staking,
+        developerTools: DeveloperTools,
     }
 
     let startInit

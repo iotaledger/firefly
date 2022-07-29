@@ -8,7 +8,6 @@
         "lib": ["DOM", "ESNext"],
         "paths": {
             "@auxiliary/*": ["../shared/lib/auxiliary/*"],
-            "@common/*": ["../shared/lib/common/*"],
             "@contexts/*": ["../shared/lib/contexts/*"],
             "@core/*": ["../shared/lib/core/*"],
             "@features/*": ["../shared/features/*"],

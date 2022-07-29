@@ -1,18 +1,11 @@
 import { Subject } from '@core/wallet/types'
-import { Transaction } from '@iota/wallet'
+import { OutputTypes } from '@iota/types'
 import { getSenderFromOutput } from '../outputs'
-import { getNonRemainderOutputFromTransaction } from './getNonRemainderOutputFromTransaction'
-import { getSenderFromTransactionInputs } from './getSenderFromTransactionInputs'
 
-export function getSenderFromTransaction(transaction: Transaction, accountAddress: string): Subject {
-    if (!transaction?.incoming) {
-        return { type: 'address', address: accountAddress }
-    } else if (transaction?.incoming) {
-        return (
-            getSenderFromTransactionInputs(transaction.payload.essence.inputs) ??
-            getSenderFromOutput(getNonRemainderOutputFromTransaction(transaction, accountAddress).output)
-        )
+export function getSenderFromTransaction(isIncoming: boolean, accountAddress: string, output: OutputTypes): Subject {
+    if (isIncoming) {
+        return getSenderFromOutput(output)
     } else {
-        return undefined
+        return { type: 'address', address: accountAddress }
     }
 }

@@ -3,10 +3,9 @@
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import {
-        Activity,
-        groupedActivities,
-        activitySearchTerm,
         activityFilterIndex,
+        activitySearchTerm,
+        groupedActivities,
         selectedAccountActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
@@ -15,26 +14,17 @@
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
-    import { openPopup } from 'shared/lib/popup'
     import { debounce } from 'shared/lib/utils'
     import { isFirstSessionSync } from 'shared/lib/wallet'
-
-    function handleTransactionClick(activity: Activity): void {
-        openPopup({
-            type: 'activityDetails',
-            props: { activity },
-        })
-    }
-
-    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
 
     let searchActive = false
     let inputElement: HTMLInputElement
     let searchValue: string
+
+    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
     $: setAsyncStatusOfAccountActivities($time)
-
     $: if (searchActive && $selectedAccountActivities) {
         debounce(() => {
             $activitySearchTerm = searchValue
@@ -89,7 +79,7 @@
             </div>
         {/if}
     </div>
-    <div class="overflow-y-scroll overflow-x-visible flex-auto h-1 space-y-4 -mr-5 pr-4 scroll-secondary">
+    <div class="overflow-y-scroll flex-auto h-1 space-y-4 -mr-5 pr-4 scroll-secondary">
         <div class="-mr-4 overflow-x-visible">
             {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
@@ -101,7 +91,7 @@
                                 {group.date} • {group.activities.length}
                             </Text>
                             {#each group.activities as activity}
-                                <ActivityTile onClick={() => void handleTransactionClick(activity)} {activity} />
+                                <ActivityTile {activity} />
                             {/each}
                         </div>
                     {/each}
