@@ -20,6 +20,7 @@ import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions, getDefaultClientOptions } from './network'
 import { showAppNotification } from './notifications'
 // PARTICIPATION
+import { haveStakingResultsCached } from './participation'
 import { Platform } from './platform'
 import { activeProfile, updateProfile } from './profile'
 import { WALLET, WalletApi } from './shell/walletApi'
@@ -104,6 +105,7 @@ export const resetWallet = (): void => {
     isFirstManualSync.set(true)
     isBackgroundSyncing.set(false)
     walletSetupType.set(null)
+    haveStakingResultsCached.set(null)
 }
 
 // Created to help selectedAccount reactivity.

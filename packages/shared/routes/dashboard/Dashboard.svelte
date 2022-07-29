@@ -31,7 +31,7 @@
         showAppNotification,
     } from 'shared/lib/notifications'
     import { stopParticipationPoll, startParticipationPoll, StakingAirdrop } from 'shared/lib/participation'
-    import { cacheAllStakingPeriods } from 'shared/lib/participation/staking'
+    import { cacheAllStakingPeriods, haveStakingResultsCached } from 'shared/lib/participation/staking'
     import { pendingParticipations, resetPerformingParticipation } from 'shared/lib/participation/stores'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -41,6 +41,7 @@
         asyncCreateAccount,
         asyncSyncAccount,
         isSyncing,
+        isFirstSessionSync,
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
@@ -90,9 +91,13 @@
         previousPendingParticipationsLength = participations?.length ?? 0
     })
 
-    $: if (!$isSyncing && $accountsLoaded) {
-        cacheAllStakingPeriods(StakingAirdrop.Shimmer)
-        cacheAllStakingPeriods(StakingAirdrop.Assembly)
+    $: if (!$isSyncing && !$isFirstSessionSync && $accountsLoaded) {
+        Promise.all([
+            cacheAllStakingPeriods(StakingAirdrop.Shimmer),
+            cacheAllStakingPeriods(StakingAirdrop.Assembly),
+        ]).then(() => {
+            haveStakingResultsCached.set(true)
+        })
     }
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
