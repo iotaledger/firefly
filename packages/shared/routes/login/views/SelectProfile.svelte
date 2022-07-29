@@ -6,9 +6,12 @@
     import { profiles, setActiveProfile } from 'shared/lib/profile'
     import { ProfileType } from 'shared/lib/typings/profile'
     import { localize } from '@core/i18n'
+    import { backButtonStore } from '@core/router'
     import { isAwareOfCrashReporting } from '@lib/appSettings'
 
     const dispatch = createEventDispatcher()
+
+    $backButtonStore.refresh()
 
     function handleContinueClick(id: string) {
         setActiveProfile(id)

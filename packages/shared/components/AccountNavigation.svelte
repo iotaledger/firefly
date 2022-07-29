@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { mobileHeaderAnimation } from '@lib/animation'
+    import { backButtonStore } from '@core/router'
     import { activeProfile, getAccountColor } from '@lib/profile'
     import { AccountColor } from '@lib/typings/color'
     import { createAccountCallback, WalletAccount } from '@lib/typings/wallet'
@@ -28,19 +28,21 @@
     let accountColor: string | AccountColor
 
     $: $activeProfile?.accounts, (accountColor = getAccountColor($selectedAccountStore?.id))
-    $: (switcherButtonWidth, $mobileHeaderAnimation), updateSwitcherButtonTranslate()
+    $: switcherButtonWidth, updateSwitcherButtonTranslate()
 
     function updateSwitcherButtonTranslate(): void {
         if (!switcherButtonWidth || !window) return
         const centeredTranslate = window.innerWidth * 0.5 - switcherButtonWidth * 0.5
-        const translateX = centeredTranslate * $mobileHeaderAnimation
-        switcherButtonTranslateX = translateX <= VIEWPORT_PADDING ? VIEWPORT_PADDING : translateX
+        switcherButtonTranslateX = centeredTranslate <= VIEWPORT_PADDING ? VIEWPORT_PADDING : centeredTranslate
     }
 
     function toggleAccountSwitcher(): void {
         setDrawerRoute(DrawerRoutes.Init)
         isDrawerOpened = !isDrawerOpened
-        drawer?.open()
+        if (drawer) {
+            drawer.open()
+            $backButtonStore.add(drawer.close)
+        }
     }
 
     function setDrawerRoute(route: DrawerRoutes): void {
