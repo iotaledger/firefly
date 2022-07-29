@@ -105,7 +105,10 @@
                                 initialiseProfileManager(
                                     path,
                                     COIN_TYPE[profile.networkProtocol],
-                                    $activeProfile.clientOptions
+                                    $activeProfile.clientOptions,
+                                    {
+                                        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
+                                    }
                                 )
                                 // TODO: set storage password with profile manager api
                                 // api.setStoragePassword(pinCode, {
