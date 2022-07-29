@@ -26,7 +26,7 @@ export const activityFilter: Writable<ActivityFilter> = writable({
 export const activitySearchTerm: Writable<string> = writable('')
 
 export const queriedActivities: Readable<Activity[]> = derived(
-    [selectedAccountActivities, activitySearchTerm],
+    [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities
 

@@ -61,8 +61,6 @@
             <div class="flex flex-row">
                 {#if features?.wallet?.activityHistory?.search?.enabled}
                     <ActivityFilter />
-                {/if}
-                {#if features?.wallet?.activityHistory?.search?.enabled}
                     <TogglableButton icon="search" bind:active={searchActive} />
                 {/if}
             </div>
