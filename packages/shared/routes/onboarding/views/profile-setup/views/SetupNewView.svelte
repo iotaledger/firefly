@@ -4,12 +4,14 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
-    import { setNewProfileType, newProfile } from '@contexts/onboarding'
+    import { setNewProfileType, newProfile, initProfileManagerFromNewProfile } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
     import { onMount } from 'svelte'
 
-    function handleContinueClick(profileType: ProfileType): void {
+    async function handleContinueClick(profileType: ProfileType): Promise<void> {
         setNewProfileType(profileType)
+
+        await initProfileManagerFromNewProfile()
         $profileSetupRouter.next()
     }
 

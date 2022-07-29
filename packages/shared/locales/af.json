@@ -482,7 +482,6 @@
                     "statuses": {
                         "appNotOpen": "IOTA app not open",
                         "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
                         "locked": "Locked",
                         "mnemonicMismatch": "Wrong Ledger or mnemonic",
                         "notDetected": "Not detected",

@@ -2,11 +2,10 @@
     import { fade } from 'svelte/transition'
     import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { LocaleArguments } from '@core/i18n/types'
-    import { ledgerDeviceState } from 'shared/lib/ledger'
+    import { ledgerDeviceState, isDeviceConnected, deviceStatus, getLedgerDeviceStatus } from 'shared/lib/ledger'
     import { popupState, openPopup } from 'shared/lib/popup'
     import { openSettings } from '@core/router'
-    import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isLedgerProfile, logout, lockStronghold } from '@core/profile'
@@ -18,7 +17,6 @@
 
     const { isStrongholdLocked, shouldOpenProfileModal } = $activeProfile
 
-    let isLedgerConnected = false
     let isCheckingLedger = false
     let ledgerConnectionText = ''
 
@@ -34,7 +32,6 @@
     $: isPasswordPopupOpen = $popupState?.active && $popupState?.type === 'password'
     $: if ($isLedgerProfile && $ledgerDeviceState) {
         updateLedgerConnectionText()
-        isLedgerConnected = $ledgerDeviceState === LedgerDeviceState.Connected
     }
 
     const handleSettingsClick = (): void => {
@@ -61,14 +58,12 @@
 
     const syncLedgerDeviceStatus = (): void => {
         isCheckingLedger = true
-        // const _onComplete = () => setTimeout(() => (isCheckingLedger = false), 500)
-        // getLedgerDeviceStatus(false, _onComplete, _onComplete, _onComplete)
+        const _onComplete = () => setTimeout(() => (isCheckingLedger = false), 500)
+        getLedgerDeviceStatus(_onComplete, _onComplete, _onComplete)
     }
 
     const updateLedgerConnectionText = (): void => {
-        const values: LocaleArguments =
-            $ledgerDeviceState === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
-        const text = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceState}`, { values })
+        const text = localize(`views.dashboard.profileModal.hardware.statuses.${$deviceStatus}`)
 
         /**
          * NOTE: The text for when another app (besides IOTA or IOTA Legacy) is open
@@ -205,8 +200,10 @@
                     <Icon
                         icon="chip"
                         boxed
-                        classes={isLedgerConnected ? 'text-blue-500' : 'text-gray-500 dark:text-white'}
-                        boxClasses={isLedgerConnected ? 'bg-blue-100 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-800'}
+                        classes={$isDeviceConnected ? 'text-blue-500' : 'text-gray-500 dark:text-white'}
+                        boxClasses={$isDeviceConnected
+                            ? 'bg-blue-100 dark:bg-gray-800'
+                            : 'bg-gray-100 dark:bg-gray-800'}
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.hardware.title')}</Text>

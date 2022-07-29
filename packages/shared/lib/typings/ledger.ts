@@ -32,7 +32,7 @@ export enum LedgerDeviceState {
 export enum LedgerAppName {
     BOLOS = 'BOLOS',
     IOTA = 'IOTA',
-    IOTALegacy = 'IOTA Legacy',
+    Shimmer = 'Shimmer',
 }
 
 export enum LegacyLedgerErrorName {

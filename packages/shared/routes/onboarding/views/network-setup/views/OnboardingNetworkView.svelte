@@ -6,8 +6,8 @@
     import {
         newProfile,
         updateNewProfile,
-        initProfileManagerFromNewProfile,
         cleanupNewProfileManager,
+        setNewProfileClientOptions,
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -27,7 +27,7 @@
             updateNewProfile({ networkType })
         } else {
             updateNewProfile({ networkProtocol, networkType })
-            await initProfileManagerFromNewProfile(<INode>{}, true)
+            await setNewProfileClientOptions(<INode>{})
         }
         $networkSetupRouter.next({ networkType })
     }

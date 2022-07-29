@@ -18,5 +18,6 @@ export * from './setStrongholdPasswordClearInterval'
 export * from './startBackgroundSync'
 export * from './storeMnemonic'
 export * from './verifyMnemonic'
+export * from './getLedgerStatus'
 
 export * from './events/subscribe'

@@ -16,14 +16,9 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
     }
 
     restartIfNotInLedgerFlow(): void {
-        const setupType = get(profileRecoveryType)
         // reinitialize the init view only if we are not in the middle of a ledger flow
         if (this.history.length === 0) {
-            if (setupType === ProfileRecoveryType.Seed || setupType === ProfileRecoveryType.FireflyLedger) {
-                this.routeStore.set(LedgerSetupRoute.Connect)
-            } else {
-                this.routeStore.set(LedgerSetupRoute.LegacyIntro)
-            }
+            this.routeStore.set(LedgerSetupRoute.InstallationGuide)
         }
     }
 
@@ -36,8 +31,6 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
             case LedgerSetupRoute.Connect:
                 if (setupType === ProfileRecoveryType.FireflyLedger) {
                     nextRoute = LedgerSetupRoute.RestoreFromLedger
-                } else if (setupType === ProfileRecoveryType.TrinityLedger) {
-                    nextRoute = LedgerSetupRoute.GenerateAddress
                 } else {
                     this.parentRouter.next(event)
                 }
@@ -45,20 +38,8 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
             case LedgerSetupRoute.RestoreFromLedger:
                 this.parentRouter.next(event)
                 break
-            case LedgerSetupRoute.LegacyIntro:
-                nextRoute = LedgerSetupRoute.InstallationGuide
-                break
             case LedgerSetupRoute.InstallationGuide:
                 nextRoute = LedgerSetupRoute.Connect
-                break
-            case LedgerSetupRoute.GenerateAddress:
-                nextRoute = LedgerSetupRoute.SwitchApps
-                break
-            case LedgerSetupRoute.SwitchApps:
-                nextRoute = LedgerSetupRoute.AccountIndex
-                break
-            case LedgerSetupRoute.AccountIndex:
-                this.parentRouter.next(event)
                 break
         }
 

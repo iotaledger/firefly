@@ -3,7 +3,7 @@
     import {
         cleanupOnboarding,
         createNewProfile,
-        initProfileManagerFromNewProfile,
+        setNewProfileClientOptions,
         newProfile,
         updateNewProfile,
     } from '@contexts/onboarding'
@@ -19,7 +19,7 @@
             updateNewProfile({ networkProtocol })
         } else {
             updateNewProfile({ networkProtocol, networkType: NetworkType.Mainnet })
-            await initProfileManagerFromNewProfile(<INode>{}, true)
+            await setNewProfileClientOptions(<INode>{})
         }
         $networkSetupRouter.next()
     }

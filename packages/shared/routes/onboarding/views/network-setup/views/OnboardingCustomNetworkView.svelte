@@ -5,7 +5,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
-    import { getNodeInfo } from '@core/profile-manager'
+    import { getNodeInfo, destroyProfileManager } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
 
@@ -28,8 +28,11 @@
                 checkNodeInfo: false,
                 validateClientOptions: false,
             })
+
+            // Temporarily initialise profile manager to check the connection and then destroy it
             await initProfileManagerFromNewProfile(node, true)
             await getNodeInfo(node.url)
+            await destroyProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
             console.error(err)

@@ -5,14 +5,23 @@
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
     import { profileSetupRouter } from '@core/router'
-    import { newProfile, profileRecoveryType, ProfileRecoveryType, setNewProfileType } from '@contexts/onboarding'
+    import {
+        newProfile,
+        profileRecoveryType,
+        ProfileRecoveryType,
+        setNewProfileType,
+        initProfileManagerFromNewProfile,
+    } from '@contexts/onboarding'
 
-    function handleContinueClick(_profileRecoveryType: ProfileRecoveryType) {
+    async function handleContinueClick(_profileRecoveryType: ProfileRecoveryType) {
         const profileType =
             _profileRecoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
         setNewProfileType(profileType)
 
         profileRecoveryType.set(_profileRecoveryType)
+
+        await initProfileManagerFromNewProfile()
+
         $profileSetupRouter.next({ profileRecoveryType: _profileRecoveryType })
     }
     function handleBackClick() {

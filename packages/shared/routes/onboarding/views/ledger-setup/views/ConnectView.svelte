@@ -4,7 +4,15 @@
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
     import { profileRecoveryType, ProfileRecoveryType, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
-    import { ledgerDeviceState, stopPollingLedgerStatus } from '@lib/ledger'
+    import {
+        ledgerDeviceState,
+        stopPollingLedgerStatus,
+        pollLedgerDeviceStatus,
+        getLedgerDeviceStatus,
+        isDeviceConnected,
+        isDeviceLocked,
+        isAppOpened,
+    } from '@lib/ledger'
     import { openPopup } from '@lib/popup'
     import { LedgerDeviceState } from '@lib/typings/ledger'
 
@@ -15,8 +23,8 @@
     let polling = false
     let creatingAccount = false
 
-    $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
-    $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
+    $: isConnected = $isDeviceConnected === true && $isDeviceLocked === false
+    $: isAppOpen = $isAppOpened === true
     $: animation = !isConnected
         ? 'ledger-disconnected-desktop'
         : isAppOpen
@@ -27,18 +35,18 @@
         creatingAccount = true
     }
 
-    // function _onCancel(): void {
-    //     creatingAccount = false
-    //     displayNotificationForLedgerProfile('error', true)
-    // }
+    function _onCancel(): void {
+        creatingAccount = false
+        // displayNotificationForLedgerProfile('error', true)
+    }
 
-    // function _onConnected(): void {
-    //     if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
-    //         _onCancel()
-    //     } else {
-    //         dispatch('next')
-    //     }
-    // }
+    function _onConnected(): void {
+        if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
+            _onCancel()
+        } else {
+            // dispatch('next')
+        }
+    }
 
     function handleGuidePopup(): void {
         openPopup({
@@ -51,7 +59,7 @@
         if (newLedgerProfile) {
             createAccount()
         } else {
-            // getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
+            getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
         }
         $ledgerSetupRouter.next()
     }
@@ -61,7 +69,7 @@
     }
 
     onMount(() => {
-        // pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
+        pollLedgerDeviceStatus()
         polling = true
     })
 

@@ -103,7 +103,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must find and install both the {legacy} app and the new IOTA app through Ledger Live.",
+            "body1": "Before you proceed, you must use Ledger Live to find and install Shimmer app.",
             "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
             "action": "Yes, I've installed these apps"
         },
