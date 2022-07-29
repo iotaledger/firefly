@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
     import { localize } from '@core/i18n'
-    import { accountRoute, accountRouter, walletRoute } from '@core/router'
+    import { accountRoute, accountRouter, backButtonStore, walletRoute } from '@core/router'
     import { AccountRoute, WalletRoute } from '@core/router/enums'
     import { asyncGetAccounts, setSelectedAccount } from '@lib/wallet'
     import {
@@ -267,6 +267,11 @@
                             type: TransferProgressEventType.Complete,
                         })
 
+                        if ($mobile) {
+                            walletRoute.set(WalletRoute.AccountHistory)
+                            accountRoute.set(AccountRoute.Init)
+                        }
+
                         setTimeout(() => {
                             clearSendParams()
                             isTransferring.set(false)
@@ -274,6 +279,10 @@
                     },
                     onError(err) {
                         isTransferring.set(false)
+                        if ($mobile) {
+                            walletRoute.set(WalletRoute.AccountHistory)
+                            accountRoute.set(AccountRoute.Init)
+                        }
                         showAppNotification({
                             type: 'error',
                             message: localize(err.error),
@@ -331,6 +340,11 @@
                         type: TransferProgressEventType.Complete,
                     })
 
+                    if ($mobile) {
+                        walletRoute.set(WalletRoute.AccountHistory)
+                        accountRoute.set(AccountRoute.Init)
+                    }
+
                     setTimeout(() => {
                         clearSendParams(internal)
                         isTransferring.set(false)
@@ -338,6 +352,9 @@
                 },
                 onError(err) {
                     isTransferring.set(false)
+                    if ($mobile) {
+                        accountRoute.set(AccountRoute.Init)
+                    }
                     showAppNotification({
                         type: 'error',
                         message: localize(err.error),
@@ -370,9 +387,14 @@
 
     $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
         drawer.close()
+        if (drawer.isDrawerOpen() === false) {
+            $backButtonStore.refresh()
+        }
     }
 
     onMount(() => {
+        $backButtonStore.refresh()
+
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
@@ -409,7 +431,7 @@
     function liftDashboard(node: HTMLElement): void {
         node.style.zIndex = '0'
         unsubscribeLiftDasboard = headerScale.subscribe((curr) => {
-            node.style.transform = `translate(0, ${headerHeight * 0.75 * curr + headerHeight * 0.25}px)`
+            node.style.transform = `translate(0, ${headerHeight * 0.6 * curr + headerHeight * 0.4}px)`
         })
     }
 
@@ -436,6 +458,10 @@
         selectedMessage.set(null)
     }
 
+    $: if ($selectedMessage && activityDrawer) {
+        $backButtonStore.add(activityDrawer.close)
+    }
+
     onDestroy(() => {
         unsubscribeHeaderScale()
         unsubscribeLiftDasboard()
@@ -454,7 +480,7 @@
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
                         on:close={() => accountRoute.set(AccountRoute.Init)}
-                        fullScreen={$accountRoute === AccountRoute.Receive}
+                        backgroundBlur={$accountRoute === AccountRoute.Receive}
                     >
                         {#if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />

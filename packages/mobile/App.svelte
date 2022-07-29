@@ -1,16 +1,19 @@
 <script lang="typescript">
     import { nativeSplash } from 'capacitor/capacitorApi'
+    import { App } from '@capacitor/app'
+    import { StatusBar, Style } from '@capacitor/status-bar'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
-    import { popupState } from 'shared/lib/popup'
-    import { mobile, stage } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { goto } from 'shared/lib/helpers'
+    import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
+    import { openPopup, popupState } from '@lib/popup'
+    import { logout, mobile, stage } from '@lib/app'
+    import { appSettings } from '@lib/appSettings'
+    import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
-    import { pollMarketData } from 'shared/lib/market'
-    import { pollNetworkStatus } from 'shared/lib/networkStatus'
-    import { AppRoute, initRouters } from '@core/router'
-    import { Platforms } from 'shared/lib/typings/platform'
+    import { pollMarketData } from '@lib/market'
+    import { pollNetworkStatus } from '@lib/networkStatus'
+    import { AppRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
+    import { Platforms } from '@lib/typings/platform'
     import {
         Appearance,
         Backup,
@@ -37,9 +40,17 @@
 
     let showSplash = true
 
-    $: $appSettings.darkMode
-        ? document.body.classList.add('scheme-dark')
-        : document.body.classList.remove('scheme-dark')
+    $: if ($appSettings.darkMode) {
+        document.body.classList.add('scheme-dark')
+        StatusBar.setStyle({ style: Style.Dark })
+        // Android status bar background color
+        // TODO: change the color based on routing
+        StatusBar.setBackgroundColor({ color: '#25395f' })
+    } else {
+        document.body.classList.remove('scheme-dark')
+        StatusBar.setStyle({ style: Style.Light })
+        StatusBar.setBackgroundColor({ color: '#ffffff' })
+    }
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
@@ -48,6 +59,20 @@
     $: if ($isLocaleLoaded) {
         void hideSplashScreen()
     }
+
+    backButtonStore.set(
+        new BackButtonHeap(async () => {
+            await logout()
+            App.exitApp()
+        })
+    )
+
+    void App.addListener('backButton', () => {
+        const next = $backButtonStore.remove()
+        if (next) {
+            next()
+        }
+    })
 
     async function hideSplashScreen() {
         await tick()
@@ -137,7 +162,7 @@
         <ToastContainer />
     </div>
     <div class="scanner-ui">
-        <QRScanner />
+        <QRScanner locale={$_} />
     </div>
 {/if}
 

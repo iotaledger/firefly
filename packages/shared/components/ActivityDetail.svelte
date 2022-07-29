@@ -27,7 +27,6 @@
     export let confirmed: boolean
     export let payload: Payload
     export let balance: number // migration tx
-    export let onBackClick = (): void => {}
 
     let date = localize('error.invalidDate')
     $: {
@@ -133,9 +132,12 @@
 </script>
 
 {#if $mobile}
-    <div class="flex flex-col h-full min-h-0">
+    <div class="flex flex-col h-full min-h-0 pt-6">
+        <div class="w-full text-center">
+            <Text bold bigger>{localize('general.activityDetails')}</Text>
+        </div>
         <div
-            class="p-0 mt-8 w-11/12 self-center visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
+            class="p-0 my-5 w-11/12 self-center visualization rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
                 'opacity-50'}"
         >
             <div class="flex flex-col flex-wrap justify-center items-center text-center">
@@ -325,6 +327,7 @@
     .mobile-explorer-button {
         /* Tailwind border classes doesn't have an effect */
         border: 1px solid rgba(154, 173, 206, 0.25);
+        margin-bottom: env(safe-area-inset-bottom);
     }
     .visualization {
         min-height: 84px;

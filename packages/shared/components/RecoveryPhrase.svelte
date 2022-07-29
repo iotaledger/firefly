@@ -12,7 +12,7 @@
 {#if recoveryPhrase}
     <div
         data-label="recovery-phrase"
-        class="grid w-full text-12 grid-cols-3 {$mobile && 'overflow-y-auto p-3'} gap-3 {classes}"
+        class="grid w-full text-12 select-none grid-cols-3 {$mobile && 'overflow-y-auto p-3'} gap-3 {classes}"
         class:hide
     >
         {#each recoveryPhrase as word, i}
@@ -37,7 +37,8 @@
 <style type="text/scss">
     div {
         max-width: 460px;
-
+        // Safari iOS 14, 15 needs it. It's implemented on iOS 16 as preview.
+        -webkit-user-select: none;
         &.hide {
             filter: blur(4px);
         }

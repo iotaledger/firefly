@@ -93,7 +93,7 @@
                     {localize(`views.settings.${$settingsRoute}.title`)}
                 </Text>
             {/if}
-            <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={70}>
+            <Scroller classes="w-full md:w-3/4 h-full md:pr-100 {$mobile && 'contents'}" threshold={70}>
                 <div class="md:w-11/12">
                     {#if !$mobile}
                         <Text type="h2" classes="mb-7">{localize(`views.settings.${$settingsRoute}.title`)}</Text>

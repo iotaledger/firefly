@@ -12,10 +12,28 @@
 	@function {() => Promise<viod>} open - Opens drawer.
 	@function {() => Promise<void>} close - Closes drawer.
 -->
+<script context="module" lang="typescript">
+    type Drawers = Set<{ close: () => Promise<void> }>
+    const drawers: Drawers = new Set()
+
+    export function closePreviousDrawer(): void {
+        const last = [...drawers].pop()
+        last?.close()
+        drawers.delete(last)
+    }
+
+    export function closeDrawers(): void {
+        drawers.forEach((d) => {
+            void d.close()
+            drawers.delete(d)
+        })
+    }
+</script>
+
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { quintIn, quintOut } from 'svelte/easing'
+    import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -23,7 +41,7 @@
     export let opened = false
     export let fromLeft = false
     export let classes = ''
-    export let fullScreen = false
+    export let backgroundBlur = false
     export let preventClose = false
     export let zIndex = 'z-30'
 
@@ -46,6 +64,8 @@
         if (opened) {
             await open()
         }
+        const currentDrawer = { close }
+        drawers.add(currentDrawer)
     })
 
     function slidable(node: HTMLElement, use: boolean = true) {
@@ -72,8 +92,8 @@
                 y = event.touches[0].pageY
             }
 
-            node.addEventListener('touchmove', handleTouchmove)
-            node.addEventListener('touchend', handleTouchend)
+            node.addEventListener('touchmove', handleTouchmove, { capture: true, passive: true })
+            node.addEventListener('touchend', handleTouchend, { capture: true, passive: true })
         }
 
         function handleTouchmove(event: TouchEvent) {
@@ -81,7 +101,7 @@
             timeQueue.push(window.performance.now())
             positionQueue.shift()
             timeQueue.shift()
-            const startY = positionQueue[0]
+            const initY = positionQueue[0]
             const endY = positionQueue[positionQueue.length - 1]
             const initTime = timeQueue[0]
             const endTime = timeQueue[timeQueue.length - 1]
@@ -94,7 +114,7 @@
 
                 node.dispatchEvent(
                     new CustomEvent('slideMove', {
-                        detail: { x, y, sx, sy, startY, endY, initTime, endTime },
+                        detail: { x, y, sx, sy, initY, endY, initTime, endTime },
                     })
                 )
             }
@@ -108,26 +128,26 @@
                 node.dispatchEvent(new CustomEvent('tap'))
             }
 
-            node.removeEventListener('touchmove', handleTouchmove)
-            node.removeEventListener('touchend', handleTouchend)
+            node.removeEventListener('touchmove', handleTouchmove, { capture: true })
+            node.removeEventListener('touchend', handleTouchend, { capture: true })
         }
 
-        node.addEventListener('touchstart', handleTouchstart)
+        node.addEventListener('touchstart', handleTouchstart, { capture: true, passive: true })
 
         return {
             destroy() {
-                node.removeEventListener('touchstart', handleTouchstart)
+                node.removeEventListener('touchstart', handleTouchstart, { capture: true })
             },
         }
     }
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
         // Calc slide gesture velocity between events
-        const distance = event.detail.endY - event.detail.startY
+        const displacement = event.detail.endY - event.detail.initY
         const time = (event.detail.endTime - event.detail.initTime) / 1000
-        const slideVelocity = Math.round(distance / time) || 0
+        const slideVelocity = Math.round(displacement / time) || 0
 
-        if (slideVelocity > 900) {
+        if (slideVelocity > 600) {
             isVelocityReached = true
         } else {
             isVelocityReached = false
@@ -156,15 +176,13 @@
         }
     }
 
+    export function isDrawerOpen(): boolean {
+        return isOpen
+    }
+
     export async function open(): Promise<void> {
         isOpen = true
-        await coords.set(
-            {
-                x: 0,
-                y: 0,
-            },
-            { duration: 650, easing: quintOut }
-        )
+        await coords.set({ x: 0, y: 0 }, { duration: 650, easing: quintOut })
     }
 
     export async function close(): Promise<void> {
@@ -173,7 +191,10 @@
                 x: fromLeft ? -viewportLength : 0,
                 y: fromLeft ? 0 : viewportLength,
             },
-            { duration: 450, easing: fromLeft ? quintIn : quintOut }
+            {
+                duration: 450,
+                easing: quintOut,
+            }
         )
         isOpen = false
         if (!preventClose) {
@@ -183,8 +204,8 @@
 
     const getScale = (coord: number, scale: number): number => (viewportLength - coord) / scale
 
-    $: dimOpacity = getScale(fromLeft ? $coords.x : $coords.y, 1800)
-    $: contentOpacity = getScale(fromLeft ? $coords.x : $coords.y, 100)
+    $: dimOpacity = getScale(fromLeft ? -$coords.x : $coords.y, 1800)
+    $: contentOpacity = getScale(fromLeft ? -$coords.x : $coords.y, 100)
 </script>
 
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
@@ -211,9 +232,9 @@
 			--height: {fromLeft && '100vh'};
 			--border-radius: {fromLeft ? '0' : '24px 24px 0 0'};
 			--display-mark: {fromLeft ? 'none' : 'block'};
-            --top-mark: {fullScreen ? '20%' : '8px'};
-            --blur: {fullScreen ? '10px' : '0px'};
-            --tw-bg-opacity: {fullScreen ? 0.8 : 1};"
+            --top-mark: 8px;
+            --blur: {backgroundBlur ? '10px' : '0px'};
+            --tw-bg-opacity: {backgroundBlur ? 0.8 : 1};"
     >
         <slot />
     </content>

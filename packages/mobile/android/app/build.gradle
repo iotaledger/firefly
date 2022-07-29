@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdk 30
     defaultConfig {
-        applicationId "org.iota.firefly.mobile.alpha"
+        applicationId 'org.iota.firefly.mobile.alpha'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdk 30
-        versionCode 8
+        versionCode 20
         versionName '0.1.0'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
@@ -19,6 +19,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging false
         }
     }
 }

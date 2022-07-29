@@ -17,6 +17,8 @@
         settingsRouter,
     } from '@core/router'
 
+    const { NetworkStatus, ...generalSettingsMobile } = GeneralSettings
+    const { CrashReporting, MigrateLedgerIndex, DeepLinks, ...advancedSettingsMobile } = AdvancedSettings
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)
 
@@ -64,12 +66,12 @@
     {#if !$mobile}
         <Text type="h2" classes="mb-14">{localize('views.settings.settings')}</Text>
     {/if}
-    <div class="flex items-start {$mobile ? 'flex-col gap-5 md:p-6' : 'flex-row  space-x-10'}">
+    <div class="flex items-start {$mobile ? 'flex-col space-y-10' : 'flex-row  space-x-10'}">
         <SettingsMenu
             icon="settings"
             iconColor="bg-blue-500"
             icons={SettingsIcons}
-            settings={GeneralSettings}
+            settings={$mobile ? generalSettingsMobile : GeneralSettings}
             activeSettings={$loggedIn ? GeneralSettings : GeneralSettingsNoProfile}
             title={localize('views.settings.generalSettings.title')}
             description=""
@@ -89,7 +91,7 @@
             icon="tools"
             iconColor="bg-green-600"
             icons={SettingsIcons}
-            settings={advancedSettings}
+            settings={$mobile ? advancedSettingsMobile : advancedSettings}
             activeSettings={$loggedIn ? advancedSettings : AdvancedSettingsNoProfile}
             title={localize('views.settings.advancedSettings.title')}
             description=""

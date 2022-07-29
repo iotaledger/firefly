@@ -71,6 +71,10 @@
     let transactionTimeoutId = null
     let transactionNotificationId = null
 
+    // TODO: find a better solution to avoid a crash when the action sheet is called again
+    // before the last call is finished.
+    let isActionSheetCalled = false
+
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
@@ -436,11 +440,19 @@
     const selectInternal = async (evt: Event): Promise<void> => {
         const node = evt.target as HTMLElement
         const accountItems = accountsDropdownItems.filter((item) => item.id !== $selectedAccountStore.id)
+
+        if (isActionSheetCalled) {
+            return
+        }
+
+        isActionSheetCalled = true
+
         const index = await Platform.showActionSheet({
             title: localize(`general.${SEND_TYPE.INTERNAL}`),
             options: [...accountItems.map((item) => ({ title: item.alias })), { title: 'Cancel', style: 'CANCEL' }],
         })
 
+        isActionSheetCalled = false
         if (index == accountItems.length) {
             node.blur()
             return
@@ -452,11 +464,18 @@
     }
 
     const showUnitActionSheet = async (units: Unit[], callback: (toUnit: Unit) => void): Promise<void> => {
+        if (isActionSheetCalled) {
+            return
+        }
+
+        isActionSheetCalled = true
+
         const index = await Platform.showActionSheet({
             title: localize('general.unit'),
             options: [...units.map((unit) => ({ title: unit as string })), { title: 'Cancel', style: 'CANCEL' }],
         })
 
+        isActionSheetCalled = false
         callback(units[index])
     }
 
@@ -485,17 +504,17 @@
 </script>
 
 {#if $mobile}
-    <div class="send-drawer h-full flex flex-col justify-between p-6">
+    <div class="send-drawer h-full flex flex-col justify-between p-6 overflow-hidden">
         <div>
             <div class="w-full text-center">
                 <Text bold bigger>{localize('general.sendFunds')}</Text>
-                <div class="absolute right-10 top-6">
-                    <button on:click={onQRClick}>
+                <div class="absolute right-4 top-4">
+                    <button class="p-3" on:click={onQRClick}>
                         <Icon icon="qr" classes="text-blue-500" />
                     </button>
                 </div>
             </div>
-            <Illustration illustration="send-mobile" />
+            <Illustration background height={230} illustration="send-mobile" />
             <div class="w-full h-full flex flex-col justify-between">
                 <div>
                     <div class="w-full block">
@@ -511,7 +530,7 @@
                                     height="22"
                                 />
                             </span>
-                            <div class="mb-6 w-full" on:click={selectInternal}>
+                            <div class="mb-4 w-full" on:click={selectInternal}>
                                 <Input style="text-align: left;" type="button" value={to?.label || null} />
                             </div>
                         {:else}
@@ -528,8 +547,8 @@
                                 bind:address
                                 label={localize('general.sendToAddress')}
                                 disabled={$isTransferring}
-                                placeholder={`${localize('general.sendToAddress')}: ${addressPrefix}...`}
-                                classes="mb-6"
+                                placeholder={`${localize('general.sendToAddress')} \n${addressPrefix}...`}
+                                classes="mb-4"
                                 autofocus={false}
                             />
                         {/if}
@@ -670,7 +689,7 @@
 
 <style type="text/scss">
     .send-drawer {
-        height: calc(98vh - env(safe-area-inset-top));
+        height: calc(97vh - env(safe-area-inset-top));
     }
     button.active {
         @apply relative;

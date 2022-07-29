@@ -1114,6 +1114,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.5.1.tgz#d81ec82f84ab7f0abeadb4cc100e6a3820197d65"
   integrity sha512-rjehS0+BQBlwoN8hUyrMuzexn/9QJsONb1kmN5uXcL8JuTEbv35fa7z0tSD4x1LKwUFd+3Zeuwt60QRuwijlmw==
 
+"@capacitor/app@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/app/-/app-1.1.1.tgz#bde7202faad1b47c4ae2c4a622285d7569384c5e"
+  integrity sha512-8ADkldHnoE1xkWvPUsGlERVGm6/Zvcxy6hCI80AxydIKyaCG7kbDAvUclebbnw/eFRxj2zBoVatGLjmJNvTbYw==
+
 "@capacitor/cli@^3.4.1":
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/@capacitor/cli/-/cli-3.4.3.tgz#15a14cbd9574980da5f9f04b6ce8623455784c6e"
@@ -1177,6 +1182,11 @@
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@capacitor/splash-screen/-/splash-screen-1.2.2.tgz#fabd52ffbb922c38e2b3ef605332f29c830bd508"
   integrity sha512-iGh9gc0rdS3R+Wr+bD/+tJl3qbmJZ5xVQAP5UsD6U6Y3ydCBo9KpA8DEqxaBZVsCDaLt67009hK5nxKBwjRn7Q==
+
+"@capacitor/status-bar@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@capacitor/status-bar/-/status-bar-1.0.8.tgz#a783561fb5815b30f3e75dd95c87e00aaff5450b"
+  integrity sha512-lhxa70K6vg0QjdddbT9RqFLfQ9a0Fk1OVE54MhUH30DWymv4h2LrC+mJgH6JS46WQbR2UCHRymfmVCq1PS2Qiw==
 
 "@develar/schema-utils@~2.6.5":
   version "2.6.5"

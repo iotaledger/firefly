@@ -106,7 +106,7 @@
     {#if background}
         <div
             class={classes}
-            style="--height: {height}px; background-image: url({`assets/illustrations/${selected}`})"
+            style="--height: {height}px; background-image: url(assets/illustrations/{selected}); background-size: 100%; background-position: center; padding: 5ch;"
         />
     {:else}
         <img
