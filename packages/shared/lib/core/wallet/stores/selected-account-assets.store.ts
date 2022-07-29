@@ -7,7 +7,7 @@ import { derived, Readable, writable, Writable } from 'svelte/store'
 import { AssetFilter } from '../interfaces'
 
 export const assetFilter: Writable<AssetFilter> = writable({
-    showHidden: { active: false, type: 'boolean', value: false },
+    showHidden: { active: false, type: 'boolean', label: 'filters.assets.showHidden' },
 })
 
 export const selectedAccountAssets: Readable<IAccountAssets> = derived(

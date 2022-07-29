@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { TogglableButton, FilterModal } from 'shared/components'
-    import { Modal } from 'shared/components'
-    import { Filter } from '@core/wallet/interfaces/filter.interface'
+    import { TogglableButton, FilterModal, FilterItem, Modal } from 'shared/components'
+    import { AssetFilter } from '@core/wallet/interfaces/filter.interface'
+    import { assetFilter } from '@core/wallet/stores/selected-account-assets.store'
 
-    let filter: Filter
+    let filter: AssetFilter = { ...$assetFilter }
 
     let filterActive = false
     let modal: Modal
@@ -13,15 +13,18 @@
     function onSetFilters() {
         modal?.toggle()
         filterActive = false
+        $assetFilter = filter
     }
 </script>
 
 <div class="relative">
-    <TogglableButton icon="firefly" bind:active={filterActive} />
+    <TogglableButton icon="network" bind:active={filterActive} />
 
     {#if filterActive}
         <div class="absolute right-60 top-30">
-            <FilterModal bind:modal bind:filter {onSetFilters} />
+            <FilterModal bind:modal bind:filter {onSetFilters}>
+                <FilterItem filterItem={filter.showHidden} />
+            </FilterModal>
         </div>
     {/if}
 </div>

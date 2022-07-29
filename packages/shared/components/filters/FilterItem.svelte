@@ -4,6 +4,8 @@
     export let filterItem
 </script>
 
-{#if filterItem.type === 'boolean'}
-    <Checkbox label={filterItem.label} bind:checked={filterItem.value} />
-{/if}
+<div class="px-4 py-3">
+    {#if filterItem.type === 'boolean'}
+        <Checkbox label={filterItem.label} bind:checked={filterItem.active} />
+    {/if}
+</div>

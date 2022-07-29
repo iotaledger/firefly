@@ -11,5 +11,5 @@ export interface AssetFilter {
 export type BooleanFilter = {
     type: 'boolean'
     active: boolean
-    value: boolean
+    label: string
 }

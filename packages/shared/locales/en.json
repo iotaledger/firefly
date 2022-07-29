@@ -1271,6 +1271,15 @@
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets."
 
     },
+    "filters":{
+        "title": "Filters",
+        "assets": {
+            "showHidden": "Show hidden"
+        },
+        "activity": {
+            "showHidden": "Show hidden"
+        }
+    },
     "dates": {
         "today": "Today",
         "yesterday": "Yesterday",

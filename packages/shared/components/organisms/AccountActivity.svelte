@@ -8,7 +8,7 @@
         selectedAccountActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
-    import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
+    import { ActivityTile, Text, TextInput, TogglableButton, ActivityFilter } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'

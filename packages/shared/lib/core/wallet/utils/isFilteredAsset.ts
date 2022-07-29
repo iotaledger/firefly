@@ -4,8 +4,7 @@ import { assetFilter } from '../stores'
 
 export function isFilteredAsset(asset: IPersistedAsset): boolean {
     const filter = get(assetFilter)
-
-    if (!filter.showHidden.active && filter.showHidden.active && filter.showHidden.value && asset.hidden) {
+    if (!filter.showHidden.active && asset.hidden) {
         return true
     }
     return false

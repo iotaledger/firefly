@@ -2,6 +2,7 @@
     import { FontWeightNumber } from 'shared/components/Text.svelte'
     import { Modal, Text } from 'shared/components'
     import { Filter } from '@core/wallet/interfaces/filter.interface'
+    import { localize } from '@core/i18n'
 
     export let modal: Modal
     export let filter: Filter
@@ -11,7 +12,8 @@
 
     function clear() {
         for (const key in filter) {
-            filter[key] = false
+            filter[key].active = false
+            filter[key].value = undefined
         }
         onSetFilters()
     }
@@ -29,17 +31,19 @@
                 class="action py-1 px-2 border border-solid border-gray-300 text-center rounded-4 w-fit font-normal text-13 bg-white hover:bg-blue-200"
                 on:click|stopPropagation={clear}
             >
-                Clear
+                {localize('actions.clear')}
             </button>
-            <Text fontWeight={FontWeightNumber._600} fontSize="13" classes="text-center flex grow-1">Filters</Text>
+            <Text fontWeight={FontWeightNumber._600} fontSize="13" classes="text-center flex grow-1"
+                >{localize('filters.title')}</Text
+            >
             <button
                 class="action py-1 px-3 text-center rounded-4 w-fit font-normal text-13 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
                 on:click|stopPropagation={confirm}
             >
-                Done
+                {localize('actions.done')}
             </button>
         </div>
-        <div>
+        <div class="pb-1">
             <slot />
         </div>
     </div>
