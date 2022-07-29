@@ -10,3 +10,5 @@ export * from './helper'
 export * from './profile-router'
 export * from './settings-router'
 export * from './wallet-router'
+
+export * from './backbutton-history'
