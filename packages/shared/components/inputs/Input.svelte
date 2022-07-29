@@ -24,6 +24,7 @@
     export let disableContextMenu = false
     export let capsLockWarning = false
     export let inputElement
+    export let autocomplete = 'off'
 
     const allDecimalSeparators = getAllDecimalSeparators()
     const decimalSeparator = getDecimalSeparator()
@@ -148,6 +149,7 @@
             {placeholder}
             {style}
             spellcheck={false}
+            {autocomplete}
         />
         {#if label}
             <floating-label class:floating-active={value && label}>{label}</floating-label>
