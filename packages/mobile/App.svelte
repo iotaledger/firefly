@@ -1,17 +1,18 @@
 <script lang="typescript">
     import { nativeSplash } from 'capacitor/capacitorApi'
     import { App } from '@capacitor/app'
+    import { StatusBar, Style } from '@capacitor/status-bar'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
+    import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
     import { openPopup, popupState } from '@lib/popup'
-    import {} from '@lib/popup'
-    import { mobile, stage } from '@lib/app'
+    import { logout, mobile, stage } from '@lib/app'
     import { appSettings } from '@lib/appSettings'
     import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from '@lib/market'
     import { pollNetworkStatus } from '@lib/networkStatus'
-    import { AppRoute, initRouters } from '@core/router'
+    import { AppRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
     import { Platforms } from '@lib/typings/platform'
     import {
         Appearance,
@@ -39,9 +40,17 @@
 
     let showSplash = true
 
-    $: $appSettings.darkMode
-        ? document.body.classList.add('scheme-dark')
-        : document.body.classList.remove('scheme-dark')
+    $: if ($appSettings.darkMode) {
+        document.body.classList.add('scheme-dark')
+        StatusBar.setStyle({ style: Style.Dark })
+        // Android status bar background color
+        // TODO: change the color based on routing
+        StatusBar.setBackgroundColor({ color: '#25395f' })
+    } else {
+        document.body.classList.remove('scheme-dark')
+        StatusBar.setStyle({ style: Style.Light })
+        StatusBar.setBackgroundColor({ color: '#ffffff' })
+    }
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
@@ -51,26 +60,19 @@
         void hideSplashScreen()
     }
 
-    let isDoubleBack = false
-    void App.addListener('backButton', () => {
-        if (isDoubleBack) {
-            isDoubleBack = false
-            return handleContinueClick()
-        }
-        isDoubleBack = true
-        openPopup({
-            type: 'confirmCloseApp',
-            hideClose: true,
-            props: {
-                handleContinueClick,
-                handleCancelClick: () => (isDoubleBack = false),
-            },
+    backButtonStore.set(
+        new BackButtonHeap(async () => {
+            await logout()
+            App.exitApp()
         })
-    })
+    )
 
-    function handleContinueClick() {
-        // void App.exitApp()
-    }
+    void App.addListener('backButton', () => {
+        const next = $backButtonStore.remove()
+        if (next) {
+            next()
+        }
+    })
 
     async function hideSplashScreen() {
         await tick()

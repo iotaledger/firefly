@@ -4,6 +4,7 @@
     import { activeProfile } from 'shared/lib/profile'
     import { Settings } from 'shared/routes'
     import {
+        backButtonStore,
         profileRoute,
         profileRouter,
         ProfileRoute,
@@ -31,7 +32,10 @@
 
     function handleClick(): void {
         $profileRouter.goTo(ProfileRoute.ProfileActions)
-        drawer.open()
+        if (drawer) {
+            drawer.open()
+            $backButtonStore.add(drawer.close)
+        }
     }
 
     function handleSettingsClick(): void {

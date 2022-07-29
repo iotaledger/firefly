@@ -3,6 +3,7 @@
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { Locale } from '@core/i18n'
+    import { backButtonStore } from '@core/router'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
@@ -177,6 +178,7 @@
     }
 
     onMount(async () => {
+        $backButtonStore.add(closePopup as () => Promise<void>)
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()

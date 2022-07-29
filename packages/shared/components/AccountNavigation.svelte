@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { backButtonStore } from '@core/router'
     import { activeProfile, getAccountColor } from '@lib/profile'
     import { AccountColor } from '@lib/typings/color'
     import { createAccountCallback, WalletAccount } from '@lib/typings/wallet'
@@ -38,7 +39,10 @@
     function toggleAccountSwitcher(): void {
         setDrawerRoute(DrawerRoutes.Init)
         isDrawerOpened = !isDrawerOpened
-        drawer?.open()
+        if (drawer) {
+            drawer.open()
+            $backButtonStore.add(drawer.close)
+        }
     }
 
     function setDrawerRoute(route: DrawerRoutes): void {
