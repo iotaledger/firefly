@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { mobile } from '@lib/app'
-    import { ButtonMobile, Icon } from 'shared/components'
+    import { Icon } from 'shared/components'
     import { appSettings } from 'shared/lib/appSettings'
     import { bindEvents } from 'shared/lib/utils'
     import { onMount } from 'svelte'
+    import { text } from 'svelte/internal'
 
     export let events = []
 
@@ -29,6 +29,7 @@
     export let iconHeight: string | undefined = undefined
     export let iconWidth: string | undefined = undefined
     export let unstyled = false
+    export let textBig = false
 
     export let onClick = (): void | string => ''
 
@@ -44,11 +45,7 @@
     })
 </script>
 
-{#if $mobile}
-    <ButtonMobile {...$$props}>
-        <slot />
-    </ButtonMobile>
-{:else if xl}
+{#if xl}
     <button
         {type}
         {form}
@@ -75,7 +72,9 @@
     <button
         {type}
         {form}
-        class="{unstyled ? '' : 'cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5'} {classes}"
+        class="{unstyled ? '' : 'cursor-pointer text-center rounded-xl px-3 pt-2.5'} {textBig
+            ? 'pb-3'
+            : 'pb-3.5'} {classes}"
         use:bindEvents={events}
         on:click={onClick}
         class:secondary
@@ -139,12 +138,20 @@
                 </div>
             {/if}
         {:else}
-            <span class="text-12 leading-140 w-full"><slot /></span>
+            <span class="{textBig ? 'text-14' : 'text-12'} leading-140 w-full"><slot /></span>
         {/if}
     </button>
 {/if}
 
 <style type="text/scss">
+    @keyframes active-timeout {
+        from {
+            --tw-bg-opacity: 1;
+        }
+        to {
+            --tw-bg-opacity: 0.7;
+        }
+    }
     button:not(.unstyled) {
         @apply bg-blue-500;
         min-width: 100px;
@@ -157,10 +164,14 @@
             }
         }
         &:not(.with-icon) {
-            &:hover,
-            &:focus {
-                @apply bg-blue-600;
-            }
+            // &:hover,
+            // &:focus {
+            //     @apply bg-red-600;
+            // }
+            // &:active {
+            //     @apply bg-blue-700;
+            //     // animation: active-timeout 1.5s ease-out;
+            // }
             &:active {
                 @apply bg-blue-700;
             }
