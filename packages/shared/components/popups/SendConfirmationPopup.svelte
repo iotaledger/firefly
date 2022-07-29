@@ -30,6 +30,7 @@
 
     export let asset: IAsset
     export let amount = '0'
+    export let unit: string
     export let recipient: Subject
     export let internal = false
     export let metadata: string
@@ -41,7 +42,6 @@
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
-    const unit = asset?.metadata?.unit
 
     $: asset = asset ?? $selectedAccountAssets?.baseCoin
     $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : Number(amount)
