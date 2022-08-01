@@ -42,7 +42,9 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
 
     function handleTouchstart(event: TouchEvent): void {
         if (use) {
-            event.preventDefault()
+            if (event.cancelable) {
+                event.preventDefault()
+            }
             event.stopImmediatePropagation()
             event.stopPropagation()
         }
