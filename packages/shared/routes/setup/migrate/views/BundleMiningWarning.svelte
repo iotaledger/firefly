@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
-    import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
     import { Locale } from '@core/i18n'
-    import { walletSetupType } from 'shared/lib/wallet'
+    import { BundleMiningLayout, Button, Icon, Text } from 'shared/components'
+    import { mobile } from 'shared/lib/app'
+    import { Platform } from 'shared/lib/platform'
     import { SetupType } from 'shared/lib/typings/setup'
+    import { walletSetupType } from 'shared/lib/wallet'
+    import { createEventDispatcher } from 'svelte'
 
     export let locale: Locale
 
@@ -34,8 +35,18 @@
     </div>
     <div slot="box_content">
         <Text type="h2" classes="mb-5 text-center">{locale('views.bundleMiningWarning.title')}</Text>
-        <Text type="p" secondary classes="mb-4 text-center">{locale('views.bundleMiningWarning.body1')}</Text>
-        <Text type="p" secondary classes="mb-8 text-center">{locale('views.bundleMiningWarning.body2')}</Text>
+        {#if $mobile}
+            <Text type="p" secondary classes="mb-8 text-center">
+                {locale('views.bundleMiningWarning.body2Blocked')}
+            </Text>
+        {:else}
+            <Text type="p" secondary classes="mb-4 text-center">
+                {locale('views.bundleMiningWarning.body1')}
+            </Text>
+            <Text type="p" secondary classes="mb-8 text-center">
+                {locale('views.bundleMiningWarning.body2')}
+            </Text>
+        {/if}
         <div class="flex flex-col flex-grow items-center">
             <Button
                 secondary
@@ -46,7 +57,9 @@
             </Button>
         </div>
     </div>
-    <div slot="actions">
-        <Button classes="w-64 my-8" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
+    <div slot="actions" class={$mobile ? 'w-full' : ''}>
+        <Button disabled={$mobile} classes={$mobile ? 'w-full' : 'w-64 my-8'} onClick={() => handleContinueClick()}
+            >{locale('actions.continue')}</Button
+        >
     </div>
 </BundleMiningLayout>
