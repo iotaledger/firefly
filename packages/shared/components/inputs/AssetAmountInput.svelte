@@ -3,7 +3,7 @@
     import UnitInput from './UnitInput.svelte'
     import { parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountBestMatch, generateRawAmount, IAsset, parseRawAmount } from '@core/wallet'
+    import { formatTokenAmountBestMatch, generateRawAmount, IAsset, formatTokenAmountDefault } from '@core/wallet'
     import { UNIT_MAP } from '@lib/units'
 
     export let inputElement: HTMLInputElement
@@ -23,7 +23,7 @@
         amount = null
         unit = null
     }
-    $: rawAmount = generateRawAmount(amount, unit, asset?.metadata)
+    $: rawAmount = generateRawAmount(parseCurrency(amount).toString(), unit, asset?.metadata)
 
     let allowedDecimals = 0
     $: if (!asset?.metadata?.useMetricPrefix) {
@@ -39,9 +39,9 @@
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
         if (isRawAmount) {
-            const parsedAmount = parseRawAmount(asset?.balance.available ?? 0, asset?.metadata)
-            amount = parsedAmount.amount
-            unit = parsedAmount.unit
+            const parsedAmount = formatTokenAmountDefault(asset?.balance?.available, asset?.metadata)
+            amount = parsedAmount
+            unit = asset?.metadata?.unit
             return
         }
         amount = asset?.balance.available.toString() ?? '0'
@@ -73,8 +73,6 @@
         if (error) {
             return Promise.reject(error)
         }
-
-        amount = amountAsFloat.toString()
     }
 </script>
 
