@@ -16,7 +16,7 @@ export async function tryEditSelectedAccountMetadata(metadata: Partial<IAccountM
         if (error) {
             console.error(error?.error || error)
             if (get(isLedgerProfile)) {
-                displayNotificationForLedgerProfile('error', true, false, false, false, error)
+                displayNotificationForLedgerProfile('error', true, false, error)
             } else {
                 showAppNotification({
                     type: 'error',

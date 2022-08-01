@@ -2,10 +2,9 @@
     import { fade } from 'svelte/transition'
     import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { ledgerDeviceState, isDeviceConnected, deviceStatus, getLedgerDeviceStatus } from 'shared/lib/ledger'
+    import { ledgerDeviceStatus, getLedgerDeviceStatus, LedgerConnectionState } from 'shared/lib/ledger'
     import { popupState, openPopup } from 'shared/lib/popup'
     import { openSettings } from '@core/router'
-    import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isLedgerProfile, logout, lockStronghold } from '@core/profile'
@@ -30,7 +29,7 @@
     // used to prevent the modal from closing when interacting with the password popup
     // to be able to see the stronghold toggle change
     $: isPasswordPopupOpen = $popupState?.active && $popupState?.type === 'password'
-    $: if ($isLedgerProfile && $ledgerDeviceState) {
+    $: if ($isLedgerProfile && $ledgerDeviceStatus) {
         updateLedgerConnectionText()
     }
 
@@ -63,24 +62,9 @@
     }
 
     const updateLedgerConnectionText = (): void => {
-        const text = localize(`views.dashboard.profileModal.hardware.statuses.${$deviceStatus}`)
+        const text = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceStatus.connectionState}`)
 
-        /**
-         * NOTE: The text for when another app (besides IOTA or IOTA Legacy) is open
-         * requires an app name to be prepended or else the text won't make sense.
-         */
-        if ($ledgerDeviceState === LedgerDeviceState.OtherConnected) {
-            // getLedgerOpenedApp()
-            //     .then((la: LedgerApp) => {
-            //         ledgerConnectionText = `${la.name} ${text}`
-            //     })
-            //     .catch((err) => {
-            //         ledgerDeviceState.set(LedgerDeviceState.NotDetected)
-            //         console.error(err)
-            //     })
-        } else {
-            ledgerConnectionText = text
-        }
+        ledgerConnectionText = text
     }
 
     function handleBackupClick() {
@@ -200,8 +184,10 @@
                     <Icon
                         icon="chip"
                         boxed
-                        classes={$isDeviceConnected ? 'text-blue-500' : 'text-gray-500 dark:text-white'}
-                        boxClasses={$isDeviceConnected
+                        classes={$ledgerDeviceStatus.connectionState === LedgerConnectionState.Connected
+                            ? 'text-blue-500'
+                            : 'text-gray-500 dark:text-white'}
+                        boxClasses={$ledgerDeviceStatus.connectionState === LedgerConnectionState.Connected
                             ? 'bg-blue-100 dark:bg-gray-800'
                             : 'bg-gray-100 dark:bg-gray-800'}
                     />

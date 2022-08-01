@@ -15,7 +15,7 @@
         function _onCancel(): void {
             busy = false
 
-            displayNotificationForLedgerProfile('error', true, true, false, true)
+            displayNotificationForLedgerProfile('error', true, true, false)
         }
 
         function _onConnected(): void {

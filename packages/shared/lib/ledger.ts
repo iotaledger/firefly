@@ -1,73 +1,82 @@
-import { derived, get, writable } from 'svelte/store'
-import { resetWalletRoute, appRouter, AppRoute } from '@core/router'
-import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
+import { get, writable } from 'svelte/store'
 import { getLedgerStatus } from '@core/profile-manager'
 
 import { removeAddressChecksum } from './migration'
-import { openPopup, popupState } from './popup'
+import { closePopup, openPopup, popupState } from './popup'
 import { LedgerStatus } from '@iota/wallet'
 import { NotificationType } from './typings/notification'
 
-// const LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT = 1500
+import { localize } from '@core/i18n'
+
+import { isNewNotification, showAppNotification } from './notifications'
+
 const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90
 
 let intervalTimer
 
-export const ledgerSimulator = false
-export const ledgerDeviceState = writable<LedgerStatus>({
+export interface LedgerExtendedStatus extends LedgerStatus {
+    connectionState: LedgerConnectionState
+}
+
+export enum LedgerConnectionState {
+    AppNotOpen = 'appNotOpen',
+    Connected = 'connected',
+    Locked = 'locked',
+    NotDetected = 'notDetected',
+    OtherConnected = 'otherConnected',
+    MnemonicMismatch = 'mnemonicMismatch',
+}
+
+export const USE_LEDGER_SIMULATOR = false
+
+export const ledgerDeviceStatus = writable<LedgerExtendedStatus>({
     connected: false,
     locked: false,
     blindSigningEnabled: false,
-})
-
-export const isDeviceConnected = derived(ledgerDeviceState, (state) => state.connected === true)
-export const isDeviceLocked = derived(ledgerDeviceState, (state) => state.locked === true)
-export const isAppOpened = derived(ledgerDeviceState, (state) => 'app' in state)
-export const deviceStatus = derived(ledgerDeviceState, () => {
-    if (get(isDeviceLocked)) {
-        return 'locked'
-    }
-
-    if (!get(isDeviceConnected)) {
-        return 'connected'
-    }
-
-    if (!get(isAppOpened)) {
-        return 'appNotOpen'
-    }
+    connectionState: LedgerConnectionState.NotDetected,
 })
 
 export async function getLedgerDeviceStatus(
-    /* eslint-disable @typescript-eslint/no-unused-vars */
     onConnected: () => void = () => {},
-    /* eslint-disable @typescript-eslint/no-unused-vars */
     onDisconnected: () => void = () => {},
-    /* eslint-disable @typescript-eslint/no-unused-vars */
     onError: () => void = () => {}
 ): Promise<void> {
-    const status: LedgerStatus = await getLedgerStatus()
+    try {
+        const status: LedgerStatus = await getLedgerStatus()
 
-    ledgerDeviceState.set(status)
-    // api.getLedgerDeviceStatus(ledgerSimulator, {
-    //     onSuccess(response: Event<LedgerStatus>) {
+        ledgerDeviceStatus.set(
+            Object.assign({}, status, {
+                connectionState: determineLedgerDeviceState(status),
+            })
+        )
 
-    //         const state = get(ledgerDeviceState)
-    //         const isConnected =
-    //             (legacy && state === LedgerDeviceState.LegacyConnected) ||
-    //             (!legacy && state === LedgerDeviceState.Connected)
-    //         if (isConnected) {
-    //             if (get(popupState).active && get(popupState).type === 'ledgerNotConnected') {
-    //                 closePopup()
-    //             }
-    //             onConnected()
-    //         } else {
-    //             onDisconnected()
-    //         }
-    //     },
-    //     onError() {
-    //         onError()
-    //     },
-    // })
+        if (get(ledgerDeviceStatus).connected) {
+            const isLedgerNotConnectedPopupOpened =
+                get(popupState).active && get(popupState).type === 'ledgerNotConnected'
+
+            if (isLedgerNotConnectedPopupOpened) {
+                closePopup()
+            }
+
+            onConnected()
+        } else {
+            onDisconnected()
+        }
+    } catch (error) {
+        onError()
+    }
+}
+
+export function determineLedgerDeviceState(status: LedgerStatus): LedgerConnectionState {
+    if (status.locked) {
+        return LedgerConnectionState.Locked
+    }
+
+    if (status.connected) {
+        return status?.app ? LedgerConnectionState.Connected : LedgerConnectionState.AppNotOpen
+    } else {
+        return LedgerConnectionState.NotDetected
+    }
 }
 
 export function promptUserToConnectLedger(
@@ -112,38 +121,29 @@ export function displayNotificationForLedgerProfile(
     notificationType: NotificationType = 'error',
     allowMultiple: boolean = true,
     checkDeviceStatus: boolean = false,
-    ignoreNotDetected: boolean = false,
-    legacy: boolean = false,
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    /* eslint-disable @typescript-eslint/no-unused-vars */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error: any = null
 ): string {
     let notificationId
 
     const _notify = () => {
-        // const state = get(ledgerDeviceState)
-        // const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
-        // const canNotify = allowedToNotify && (ignoreNotDetected ? state !== LedgerDeviceState.NotDetected : true)
-        // const isConnected = !legacy && state === LedgerDeviceState.Connected
-        // const isLegacyConnected = legacy && state === LedgerDeviceState.LegacyConnected
-        // const shouldNotify = (!isConnected && !isLegacyConnected) || error
-        // if (canNotify && shouldNotify) {
-        //     const stateErrorMessage = localize(`error.ledger.${state}`)
-        //     const errorMessage = legacy
-        //         ? getLegacyErrorMessage(error, true)
-        //         : error?.error
-        //             ? localize(error.error)
-        //             : error
-        //     const message = error ? (isLedgerError(error) ? stateErrorMessage : errorMessage) : stateErrorMessage
-        //     notificationId = showAppNotification({
-        //         type: notificationType,
-        //         message,
-        //     })
-        // }
+        const status = get(ledgerDeviceStatus)
+        const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
+
+        const shouldNotify = allowedToNotify
+        if (shouldNotify) {
+            const stateErrorMessage = localize(`error.ledger.${status.connectionState}`)
+            const errorMessage = error?.error ? localize(error.error) : error
+            const message = error ? errorMessage : stateErrorMessage
+            notificationId = showAppNotification({
+                type: notificationType,
+                message,
+            })
+        }
     }
 
     if (checkDeviceStatus) {
-        // getLedgerDeviceStatus()
+        getLedgerDeviceStatus()
     } else {
         _notify()
     }
@@ -212,38 +212,10 @@ export function stopPollingLedgerStatus(): void {
     }
 }
 
-// export function getLegacyErrorMessage(error: { name; statusCode }, shouldLocalize: boolean = false): string {
-//     let errorMessage = 'error.global.generic'
-//     switch (error?.name) {
-//         case LegacyLedgerErrorName.TransportStatusError:
-//             if (error?.statusCode === LegacyLedgerErrorCode.DeniedByTheUser) {
-//                 errorMessage = 'error.send.cancelled'
-//             } else if (error?.statusCode === LegacyLedgerErrorCode.TimeoutExceeded) {
-//                 errorMessage = 'error.ledger.timeout'
-//             } else if (error?.statusCode === LegacyLedgerErrorCode.Unknown) {
-//                 errorMessage = 'error.ledger.generic'
-//             }
-//             break
-//         case LegacyLedgerErrorName.DisconnectedDevice:
-//         case LegacyLedgerErrorName.DisconnectedDeviceDuringOperation:
-//             errorMessage = 'error.ledger.disconnected'
-//             break
-//     }
-
-//     return shouldLocalize ? localize(errorMessage) : errorMessage
-// }
-
 export function formatAddressForLedger(address: string, removeChecksum: boolean = false): string {
     if (address.length === LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH && removeChecksum) {
         address = removeAddressChecksum(address)
     }
     const len = address.length
     return `${address.slice(0, len / 2)}\n${address.slice(len / 2, len)}`
-}
-
-export function navigateToNewIndexMigration(): void {
-    resetWalletRoute()
-    profileRecoveryType.set(ProfileRecoveryType.TrinityLedger)
-    get(appRouter).forceNextRoute(AppRoute.Onboarding)
-    // get(onboardingRouter).(OnboardingRoute.LedgerSetup)
 }

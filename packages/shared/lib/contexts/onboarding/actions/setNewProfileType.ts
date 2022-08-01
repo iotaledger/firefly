@@ -1,4 +1,4 @@
-import { ledgerSimulator } from '@lib/ledger'
+import { USE_LEDGER_SIMULATOR } from '@lib/ledger'
 import { ProfileType } from '@core/profile/enums'
 import { updateNewProfile } from '../stores'
 
@@ -9,6 +9,6 @@ import { updateNewProfile } from '../stores'
  * @returns {void}
  */
 export function setNewProfileType(type: ProfileType): void {
-    type = ledgerSimulator ? ProfileType.Ledger : type
+    type = USE_LEDGER_SIMULATOR ? ProfileType.Ledger : type
     updateNewProfile({ type })
 }

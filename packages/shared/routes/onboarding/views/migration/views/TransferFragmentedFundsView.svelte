@@ -230,7 +230,7 @@
                         if (legacyLedger) {
                             closePopup(true) // close transaction popup
                             closeTransport()
-                            displayNotificationForLedgerProfile('error', false, true, false, true, error)
+                            displayNotificationForLedgerProfile('error', false, true, error)
                         }
 
                         transactions = transactions.map((_transaction) => {
@@ -406,7 +406,7 @@
                         if (legacyLedger) {
                             closePopup(true) // close transaction popup
                             closeTransport()
-                            displayNotificationForLedgerProfile('error', false, true, false, true, error)
+                            displayNotificationForLedgerProfile('error', false, true, error)
                         }
 
                         transactions = transactions.map((_transaction) => {

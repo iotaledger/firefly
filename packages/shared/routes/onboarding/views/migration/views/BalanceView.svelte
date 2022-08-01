@@ -175,7 +175,7 @@
 
                         console.error(error)
 
-                        displayNotificationForLedgerProfile('error', true, true, false, true, error)
+                        displayNotificationForLedgerProfile('error', true, true, error)
                     })
             }
             const _onCancel = () => (isCheckingForBalance = false)

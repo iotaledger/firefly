@@ -64,7 +64,7 @@
                 })
                 .catch((error) => {
                     busy = false
-                    displayNotificationForLedgerProfile('error', true, true, false, true, error)
+                    displayNotificationForLedgerProfile('error', true, true, error)
                     showInfo = false
                     clearTimeout(infoTimeout)
                     console.error(error)

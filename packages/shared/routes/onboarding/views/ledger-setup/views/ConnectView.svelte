@@ -1,50 +1,40 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
-    import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Button, Icon, Link, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
-    import { profileRecoveryType, ProfileRecoveryType, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
+    import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
     import {
-        ledgerDeviceState,
+        ledgerDeviceStatus,
         stopPollingLedgerStatus,
         pollLedgerDeviceStatus,
         getLedgerDeviceStatus,
-        isDeviceConnected,
-        isDeviceLocked,
-        isAppOpened,
+        displayNotificationForLedgerProfile,
+        LedgerConnectionState,
     } from '@lib/ledger'
     import { openPopup } from '@lib/popup'
-    import { LedgerDeviceState } from '@lib/typings/ledger'
 
     const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
-    const newLedgerProfile = $profileSetupType === ProfileSetupType.New
-    // const LEDGER_STATUS_POLL_INTERVAL = 1500
 
     let polling = false
-    let creatingAccount = false
 
-    $: isConnected = $isDeviceConnected === true && $isDeviceLocked === false
-    $: isAppOpen = $isAppOpened === true
+    $: isConnected = $ledgerDeviceStatus.connectionState !== LedgerConnectionState.NotDetected
+    $: isAppOpen = $ledgerDeviceStatus.connectionState === LedgerConnectionState.Connected
     $: animation = !isConnected
         ? 'ledger-disconnected-desktop'
         : isAppOpen
         ? 'ledger-connected-desktop'
         : 'ledger-app-closed-desktop'
 
-    function createAccount(): void {
-        creatingAccount = true
-    }
-
     function _onCancel(): void {
-        creatingAccount = false
-        // displayNotificationForLedgerProfile('error', true)
+        displayNotificationForLedgerProfile('error', true)
     }
 
     function _onConnected(): void {
-        if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
+        if ($ledgerDeviceStatus.connectionState !== LedgerConnectionState.Connected) {
             _onCancel()
         } else {
-            // dispatch('next')
+            $ledgerSetupRouter.next()
         }
     }
 
@@ -55,13 +45,7 @@
     }
 
     function handleContinueClick(): void {
-        creatingAccount = true
-        if (newLedgerProfile) {
-            createAccount()
-        } else {
-            getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
-        }
-        $ledgerSetupRouter.next()
+        getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
     }
 
     function handleBackClick(): void {
@@ -101,14 +85,8 @@
         <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
             {localize('popups.ledgerConnectionGuide.title')}
         </Link>
-        <Button
-            classes="w-full"
-            disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}
-            onClick={handleContinueClick}
-        >
-            {#if creatingAccount}
-                <Spinner busy message={localize('general.creatingAccount')} classes="justify-center" />
-            {:else}{localize('actions.continue')}{/if}
+        <Button classes="w-full" disabled={polling && (!isConnected || !isAppOpen)} onClick={handleContinueClick}>
+            {localize('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
