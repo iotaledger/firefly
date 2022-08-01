@@ -6,26 +6,52 @@
         ActivityAsyncStatus,
         ActivityDirection,
         claimActivity,
+        ActivityType,
         hideActivity,
         InclusionState,
+        VerificationStatus,
+        selectedAccountAssets,
+        getAssetFromPersistedAssets,
+        IPersistedAsset,
     } from '@core/wallet'
+    import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
-    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner } from 'shared/components'
+    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner, AssetIcon } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
 
     export let activity: Activity
-    export let onClick: () => void
 
+    let asset: IPersistedAsset
+
+    $: activity?.assetId, $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity?.assetId))
     $: title = activity?.getTitle()
-    $: ({ icon, iconColor } = activity?.getIcon())
     $: subject = activity?.getFormattedSubject()
     $: isIncomingActivityUnclaimed =
-        activity?.direction === ActivityDirection.In && activity.asyncStatus === ActivityAsyncStatus.Unclaimed
+        (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) &&
+        activity.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
 
-    function reject() {
+    function handleTransactionClick(): void {
+        if (asset?.verification === VerificationStatus.New) {
+            openPopup({
+                type: 'tokenInformation',
+                overflow: true,
+                props: {
+                    activity,
+                    asset,
+                },
+            })
+        } else {
+            openPopup({
+                type: 'activityDetails',
+                props: { activity },
+            })
+        }
+    }
+
+    function handleRejectClick() {
         openPopup({
-            type: 'confirmationPopup',
+            type: 'confirmation',
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
@@ -39,14 +65,19 @@
             },
         })
     }
+
+    function handleClaimClick() {
+        claimActivity(activity)
+    }
 </script>
 
-<ClickableTile {onClick} classes={activity?.inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}>
+<ClickableTile
+    onClick={handleTransactionClick}
+    classes={activity?.inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}
+>
     <div class="w-full flex flex-col space-y-4">
         <div class="flex flex-row items-center text-left space-x-4">
-            <div class="w-8 flex flex-row justify-center items-center">
-                <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
-            </div>
+            <AssetIcon {asset} showVerifiedBadgeOnly />
             <div class="flex flex-col w-full space-y-0.5">
                 <div class="flex flex-row justify-between space-x-1">
                     <Text
@@ -65,12 +96,21 @@
                         {activity?.getFormattedAmount(true)}
                     </Text>
                 </div>
+
                 <div class="flex flex-row justify-between">
                     <Text fontWeight={FontWeightText.normal} lineHeight="140" color="gray-600">
-                        {localize(
-                            activity?.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
-                            { values: { account: subject } }
-                        )}
+                        {#if activity?.type === ActivityType.Minting}
+                            {asset?.metadata?.name
+                                ? truncateString(asset?.metadata?.name, 20, 0)
+                                : truncateString(asset?.id, 6, 7)}
+                        {:else}
+                            {localize(
+                                activity?.direction === ActivityDirection.In
+                                    ? 'general.fromAddress'
+                                    : 'general.toAddress',
+                                { values: { account: subject } }
+                            )}
+                        {/if}
                     </Text>
                     <Text
                         fontWeight={FontWeightText.normal}
@@ -99,13 +139,13 @@
                         <button
                             disabled={activity.isClaiming}
                             class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
-                            on:click|stopPropagation={reject}
+                            on:click|stopPropagation={handleRejectClick}
                         >
                             {localize('actions.reject')}
                         </button>
                         <button
                             class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
-                            on:click|stopPropagation={() => claimActivity(activity)}
+                            on:click|stopPropagation={handleClaimClick}
                         >
                             {#if activity.isClaiming}
                                 <Spinner busy={true} classes="justify-center h-fit" />

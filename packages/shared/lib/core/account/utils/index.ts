@@ -1,3 +1,4 @@
+export * from './getIconColorFromString'
 export * from './getRandomAccountColor'
-export * from './validateAccountName'
 export * from './sumBalanceForAccounts'
+export * from './validateAccountName'

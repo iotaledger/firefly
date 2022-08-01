@@ -8,7 +8,6 @@
         "outDir": "out",
         "paths": {
             "@auxiliary/*": ["./lib/auxiliary/*"],
-            "@common/*": ["./lib/common/*"],
             "@contexts/*": ["./lib/contexts/*"],
             "@core/*": ["./lib/core/*"],
             "@features/*": ["./features/*"],

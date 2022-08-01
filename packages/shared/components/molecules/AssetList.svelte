@@ -1,20 +1,35 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAssetState } from '@core/wallet/interfaces/assets-state.interface'
+    import { IAccountAssets } from '@core/wallet'
+    import { openPopup } from '@lib/popup'
     import { AssetTile, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
 
-    export let assets: IAssetState
+    export let assets: IAccountAssets
+
+    function handleAssetTileClick(asset): void {
+        openPopup({
+            type: 'tokenInformation',
+            overflow: true,
+            props: {
+                asset,
+            },
+        })
+    }
 </script>
 
 {#if assets}
-    <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6">
-        <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
-        <div class="flex flex-auto flex-col overflow-y-auto h-1 -mr-2 pr-2 space-y-2.5 scroll-secondary scrollable-y">
-            <AssetTile asset={assets?.baseCoin} />
-            {#each assets?.nativeTokens as asset}
-                <AssetTile {asset} />
-            {/each}
+    <div class="h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
+        <Text classes="text-left mb-4" type={TextType.h5}>{localize('general.assets')}</Text>
+        <div class="flex-auto overflow-y-scroll h-1 -mr-5 pr-4 scroll-secondary">
+            <div class="-mr-4 overflow-x-visible space-y-2 ">
+                <AssetTile onClick={() => handleAssetTileClick(assets?.baseCoin)} asset={assets?.baseCoin} />
+                {#each assets?.nativeTokens as asset}
+                    {#if !asset?.hidden}
+                        <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
+                    {/if}
+                {/each}
+            </div>
         </div>
     </div>
 {/if}

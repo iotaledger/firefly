@@ -52,15 +52,15 @@
             if ((float || integer) && !isEnter) {
                 // if the input is float, we accept one dot or comma depending on localization
                 if (float && event.key === decimalSeparator) {
-                    if (value.indexOf(decimalSeparator) >= 0) {
+                    if (value?.indexOf(decimalSeparator) >= 0) {
                         event.preventDefault()
                     }
-                } else if ('0123456789'.indexOf(event.key) < 0) {
+                } else if ('0123456789'?.indexOf(event.key) < 0) {
                     // if float or interger we accept numbers
                     event.preventDefault()
-                } else if (float && maxDecimals !== undefined && '0123456789'.indexOf(event.key) >= 0) {
+                } else if (float && maxDecimals !== undefined && '0123456789'?.indexOf(event.key) >= 0) {
                     // If max decimals are set only allow certain number after decimal separator
-                    const sepPos = value.indexOf(decimalSeparator)
+                    const sepPos = value?.indexOf(decimalSeparator)
                     if (sepPos >= 0) {
                         // If caret position is after the separator then check
                         if ((event.target as HTMLInputElement).selectionEnd > sepPos) {
@@ -84,25 +84,32 @@
     }
 
     function onPaste(event: ClipboardEvent): void {
-        if (!event.clipboardData || !(float || integer)) {
-            return
-        }
-
-        const pasteValue = event.clipboardData.getData('text')
-        const number = integer ? parseInt(pasteValue, 10) : float ? parseCurrency(pasteValue) : NaN
-
-        switch (true) {
-            // scientific notation or negative
-            case ['e', '-'].some((symbol) => pasteValue.includes(symbol)):
-            case Number.isNaN(number):
-            case float && !!maxDecimals:
-            case integer && allDecimalSeparators.some((separator) => pasteValue.includes(separator)):
+        if (event.clipboardData && (float || integer)) {
+            const pasteVal = event.clipboardData.getData('text')
+            // Discard scientific notation or negative
+            if (pasteVal?.indexOf('e') >= 0 || pasteVal?.indexOf('-') >= 0) {
                 event.preventDefault()
-                break
-        }
-
-        if (!Number.isNaN(number) && float && !!maxDecimals) {
-            value = formatNumber(number, undefined, maxDecimals, 0)
+            } else if (float) {
+                const val = parseCurrency(pasteVal)
+                // Discard any numbers we can't parse as floats
+                if (Number.isNaN(val)) {
+                    event.preventDefault()
+                } else if (maxDecimals !== undefined) {
+                    value = formatNumber(val, undefined, maxDecimals, 0)
+                    event.preventDefault()
+                }
+            } else if (integer) {
+                // Dicard anything with a decimal separator
+                if (allDecimalSeparators.some((sep) => pasteVal?.indexOf(sep) >= 0)) {
+                    event.preventDefault()
+                } else {
+                    const val = Number.parseInt(pasteVal, 10)
+                    // Discard any number we can't parse as integers
+                    if (Number.isNaN(val)) {
+                        event.preventDefault()
+                    }
+                }
+            }
         }
     }
 
@@ -207,7 +214,7 @@
             @apply left-3;
             @apply select-none;
             @apply whitespace-nowrap;
-            @apply w-full;
+            @apply w-auto;
             @apply transition-none;
             top: 8px;
         }
@@ -241,7 +248,7 @@
         @apply left-3;
         @apply select-none;
         @apply whitespace-nowrap;
-        @apply w-full;
+        @apply w-auto;
         @apply transition-none;
         @apply text-left;
         top: 8px;
