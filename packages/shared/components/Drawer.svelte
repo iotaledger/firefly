@@ -49,7 +49,7 @@
     let content: HTMLElement = undefined
     let isOpen = false
     let isVelocityReached = false
-    let preventSlide = true
+    // let preventSlide = true
 
     const dispatch = createEventDispatcher()
     const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
@@ -71,17 +71,17 @@
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
         // Calc slide gesture velocity between events
-        const displacement = event.detail.endY - event.detail.initY
+        const displacement = fromLeft ? event.detail.endX - event.detail.initX : event.detail.endY - event.detail.initY
         const time = (event.detail.endTime - event.detail.initTime) / 1000
         const slideVelocity = Math.round(displacement / time) || 0
 
-        if (slideVelocity > 600) {
+        if (fromLeft ? slideVelocity < -600 : slideVelocity > 600) {
             isVelocityReached = true
         } else {
             isVelocityReached = false
         }
 
-        if ($coords.y < 0 || $coords.y + event.detail.sy < 0) {
+        if ($coords.y < 0 || $coords.y + event.detail.sy < 0 || $coords.x + event.detail.sx > 0) {
             return
         }
         await coords.update(
