@@ -139,7 +139,7 @@
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
     <dim-zone
         class="fixed h-screen w-screen"
-        use:slidable={{ use: !preventClose }}
+        use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={close}
@@ -148,7 +148,7 @@
     </dim-zone>
     <content
         bind:this={content}
-        use:slidable={{ use: !fromLeft && !preventClose, preventSlide }}
+        use:slidable={!fromLeft && !preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         on:tap={() => (preventSlide = false)}
