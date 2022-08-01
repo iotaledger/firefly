@@ -49,7 +49,6 @@
     let content: HTMLElement = undefined
     let isOpen = false
     let isVelocityReached = false
-    // let preventSlide = true
 
     const dispatch = createEventDispatcher()
     const viewportLength = fromLeft ? window.innerWidth : window.innerHeight
@@ -151,7 +150,6 @@
         use:slidable={!fromLeft && !preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
-        on:tap={() => (preventSlide = false)}
         class="fixed bottom-0 overflow-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
         style="--y: {fromLeft ? 0 : $coords.y}px; 
