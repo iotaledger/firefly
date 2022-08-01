@@ -32,10 +32,7 @@ export function clickOutside(node: any, options?: { includeScroll }): { destroy 
     }
 }
 
-export function slidable(
-    node: HTMLElement,
-    options: { use?: boolean; preventSlide?: boolean } = { use: true, preventSlide: true }
-): { destroy } {
+export function slidable(node: HTMLElement, use: boolean = true): { destroy: () => void } {
     let x: number
     let y: number
     let init: number
@@ -44,7 +41,7 @@ export function slidable(
     const timeQueue = [0, 0, 0]
 
     function handleTouchstart(event: TouchEvent): void {
-        if (options?.preventSlide) {
+        if (use) {
             event.preventDefault()
             event.stopImmediatePropagation()
             event.stopPropagation()
@@ -73,7 +70,6 @@ export function slidable(
         const endY = positionQueue.y[positionQueue.y.length - 1]
         const initTime = timeQueue[0]
         const endTime = timeQueue[timeQueue.length - 1]
-        const firstX = event.touches[0].pageX
 
         if (event.targetTouches.length === 1) {
             const sx = event.touches[0].pageX - x
