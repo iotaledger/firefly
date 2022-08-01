@@ -18,7 +18,6 @@
         Subject,
         InclusionState,
         ActivityDirection,
-        formatTokenAmountBestMatch,
         IAsset,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
@@ -36,7 +35,9 @@
     export let formattedFiatValue: string = null
     export let inclusionState: InclusionState = InclusionState.Pending
     export let metadata: string = null
+    export let amount: string = null
     export let rawAmount: number
+    export let unit: string
 
     export let storageDeposit = 0
     export let subject: Subject = null
@@ -45,7 +46,6 @@
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
-    const unit = asset?.metadata?.unit
 
     $: transactionTime = getDateFormat(time)
     $: expirationTime = getDateFormat(expirationDate)
@@ -95,7 +95,7 @@
                     <AssetIcon {asset} />
                     <div class="flex flex-row items-baseline space-x-0.1">
                         <Text type="h1" fontWeight={FontWeightText.semibold}>
-                            {formatTokenAmountBestMatch(rawAmount, asset?.metadata, undefined, false)}
+                            {amount}
                         </Text>
                         {#if unit}
                             <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>

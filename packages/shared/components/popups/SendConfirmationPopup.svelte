@@ -21,7 +21,7 @@
         generateRawAmount,
         selectedAccountAssets,
     } from '@core/wallet'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
@@ -44,7 +44,9 @@
     let error: BaseError
 
     $: asset = asset ?? $selectedAccountAssets?.baseCoin
-    $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : Number(amount)
+    $: rawAmount = asset?.metadata
+        ? generateRawAmount(String(parseCurrency(amount)), unit, asset.metadata)
+        : parseCurrency(amount)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: internal = recipient.type === 'account'
 
@@ -64,7 +66,9 @@
         rawAmount,
         storageDeposit: storageDeposit,
         subject: recipient,
+        amount,
         tag,
+        unit,
         type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
     }
 
