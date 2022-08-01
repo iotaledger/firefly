@@ -18,7 +18,7 @@
 </script>
 
 <div class="relative">
-    <TogglableButton icon="network" bind:active={filterActive} />
+    <TogglableButton icon="filter" bind:active={filterActive} />
 
     {#if filterActive}
         <div class="absolute right-60 top-30">

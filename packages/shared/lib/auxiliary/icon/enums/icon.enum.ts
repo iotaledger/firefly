@@ -31,6 +31,7 @@ export enum Icon {
     Exclamation = 'exclamation',
     Export = 'export',
     File = 'file',
+    Filter = 'filter',
     Firefly = 'firefly',
     Help = 'help',
     Hide = 'hide',
