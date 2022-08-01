@@ -6,6 +6,8 @@
     export let classes = ''
     export let disabled = false
     export let round = false
+    export let small = false
+    export let keepSameColor = false
     export let onClick: (..._: any[]) => void = () => {}
 </script>
 
@@ -21,10 +23,12 @@
 >
     <Icon
         icon={checked ? `checkbox${round ? '-round' : ''}` : `checkbox-unchecked${round ? '-round' : ''}`}
+        width={small ? '16px' : undefined}
+        height={small ? '16px' : undefined}
         classes={`${label ? 'mr-3' : ''} ${checked ? 'active' : ''}`}
     />
     {#if label}
-        <Text type="p" secondary={!checked || disabled}>{label}</Text>
+        <Text type="p" secondary={!keepSameColor && (!checked || disabled)}>{label}</Text>
     {/if}
 </button>
 

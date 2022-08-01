@@ -23,7 +23,9 @@
     {#if filterActive}
         <div class="absolute right-60 top-30">
             <FilterModal bind:modal bind:filter {onSetFilters}>
-                <FilterItem filterItem={filter.showHidden} />
+                {#each Object.keys(filter) as filterItem}
+                    <FilterItem filterItem={filter[filterItem]} />
+                {/each}
             </FilterModal>
         </div>
     {/if}

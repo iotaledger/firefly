@@ -27,10 +27,18 @@
         </div>
         <div class="flex-auto overflow-y-scroll h-1 -mr-5 pr-4 scroll-secondary">
             <div class="-mr-4 overflow-x-visible space-y-2 ">
-                <AssetTile onClick={() => handleAssetTileClick(assets?.baseCoin)} asset={assets?.baseCoin} />
-                {#each assets?.nativeTokens as asset}
-                    <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
-                {/each}
+                {#if assets?.baseCoin || assets?.nativeTokens?.length > 0}
+                    {#if assets?.baseCoin}
+                        <AssetTile onClick={() => handleAssetTileClick(assets?.baseCoin)} asset={assets?.baseCoin} />
+                    {/if}
+                    {#each assets?.nativeTokens as asset}
+                        <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
+                    {/each}
+                {:else}
+                    <div class="h-full flex flex-col items-center justify-center text-center">
+                        <Text secondary>{localize('general.noAssets')}</Text>
+                    </div>
+                {/if}
             </div>
         </div>
     </div>

@@ -2,6 +2,8 @@ export interface ActivityFilter {
     showHidden: BooleanFilter
 }
 
+export type Filter = BooleanFilter
+
 export interface AssetFilter {
     showHidden: BooleanFilter
 }
