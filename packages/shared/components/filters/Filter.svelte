@@ -12,7 +12,6 @@
     let modal: Modal
 
     $: filterActive && modal?.toggle()
-    // $: filterActive, filter = deepCopy($assetFilter)
 
     function onSetFilters() {
         $filterStore = deepCopy(filter)
