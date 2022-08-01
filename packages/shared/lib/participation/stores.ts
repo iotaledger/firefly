@@ -1,7 +1,7 @@
 import { IAccountState, selectedAccountId } from '@core/account'
 import { INetworkStatus, networkStatus } from '@core/network'
 import { activeAccounts } from '@core/profile'
-import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
+import { getStakingEventFromAirdrop, isAirdropAvailable } from './staking'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
 import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
