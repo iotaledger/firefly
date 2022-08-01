@@ -35,18 +35,12 @@
     </div>
     <div slot="box_content">
         <Text type="h2" classes="mb-5 text-center">{locale('views.bundleMiningWarning.title')}</Text>
-        {#if $mobile}
-            <Text type="p" secondary classes="mb-8 text-center">
-                {locale('views.bundleMiningWarning.body2Blocked')}
-            </Text>
-        {:else}
-            <Text type="p" secondary classes="mb-4 text-center">
-                {locale('views.bundleMiningWarning.body1')}
-            </Text>
-            <Text type="p" secondary classes="mb-8 text-center">
-                {locale('views.bundleMiningWarning.body2')}
-            </Text>
-        {/if}
+        <Text type="p" secondary classes="mb-4 text-center">
+            {locale('views.bundleMiningWarning.body1')}
+        </Text>
+        <Text type="p" secondary classes="mb-8 text-center">
+            {$mobile ? locale('views.bundleMiningWarning.body2Blocked') : locale('views.bundleMiningWarning.body2')}
+        </Text>
         <div class="flex flex-col flex-grow items-center">
             <Button
                 secondary
