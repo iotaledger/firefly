@@ -96,9 +96,6 @@
     .asset-dropdown {
         font-feature-settings: 'calt' off;
 
-        .icon-bg {
-            background-color: var(--icon-bg-color);
-        }
         /* odd margin needed to match the size of the upper parent box */
         .dropdown {
             margin: 0 3px;

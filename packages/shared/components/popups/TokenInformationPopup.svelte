@@ -117,29 +117,3 @@
         {/if}
     </div>
 </div>
-
-<style type="text/css">
-    #star8 {
-        @apply bg-gray-600;
-        width: 10px;
-        height: 10px;
-        position: relative;
-        -webkit-transform: rotate(20deg);
-        -moz-transform: rotate(20deg);
-        -ms-transform: rotate(20deg);
-        -o-transform: rotate(20eg);
-    }
-    #star8:before {
-        @apply bg-gray-600;
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 10px;
-        width: 10px;
-        -webkit-transform: rotate(135deg);
-        -moz-transform: rotate(135deg);
-        -ms-transform: rotate(135deg);
-        -o-transform: rotate(135deg);
-    }
-</style>
