@@ -3,11 +3,11 @@
     import { Checkbox } from 'shared/components'
     import { localize } from '@core/i18n'
 
-    export let filterItem: FilterUnit
+    export let filterUnit: FilterUnit
 </script>
 
 <div class="border-t border-solid border-gray-200 dark:border-gray-800">
     <div class="px-4 py-3">
-        <Checkbox label={localize(filterItem.label)} bind:checked={filterItem.active} small keepSameColor />
+        <Checkbox label={localize(filterUnit.label)} bind:checked={filterUnit.active} small keepSameColor />
     </div>
 </div>
