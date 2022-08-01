@@ -29,7 +29,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { createNewProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingProfile } from '@contexts/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -109,12 +109,12 @@
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            createNewProfile({ isDeveloperProfile: true })
+            initialiseOnboardingProfile({ isDeveloperProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            createNewProfile({ isDeveloperProfile: false })
+            initialiseOnboardingProfile({ isDeveloperProfile: false })
         })
         Electron.hookErrorLogger((err) => {
             addError(err)

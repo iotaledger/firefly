@@ -8,7 +8,7 @@ import { removeProfileFolder } from '@core/profile/utils'
  * @method deleteNewProfile
  * @returns {void}
  */
-export async function deleteNewProfile(): Promise<void> {
+export async function deleteOnboardingProfile(): Promise<void> {
     const profile = get(onboardingProfile)
     if (profile) {
         try {

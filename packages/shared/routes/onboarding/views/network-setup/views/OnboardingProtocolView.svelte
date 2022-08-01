@@ -1,25 +1,23 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
+    import features from '@features/features'
     import {
         cleanupOnboarding,
-        createNewProfile,
-        initProfileManagerFromNewProfile,
+        initialiseOnboardingProfile,
         onboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { AppStage, appStage, mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { INode, NetworkProtocol, NetworkType } from '@core/network'
+    import { NetworkProtocol, NetworkType } from '@core/network'
     import { networkSetupRouter } from '@core/router'
-    import features from 'shared/features/features'
-    import { onMount } from 'svelte'
 
-    async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
+    function onClick(networkProtocol: NetworkProtocol): void {
         if ($onboardingProfile?.isDeveloperProfile) {
             updateOnboardingProfile({ networkProtocol })
         } else {
             updateOnboardingProfile({ networkProtocol, networkType: NetworkType.Mainnet })
-            await initProfileManagerFromNewProfile(<INode>{}, true)
         }
         $networkSetupRouter.next()
     }
@@ -31,7 +29,8 @@
 
     onMount(() => {
         if (!$onboardingProfile?.id) {
-            createNewProfile({ isDeveloperProfile: $appStage !== AppStage.PROD })
+            const isDeveloperProfile = $appStage !== AppStage.PROD
+            initialiseOnboardingProfile(isDeveloperProfile)
         }
     })
 </script>

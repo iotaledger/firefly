@@ -1,8 +1,9 @@
 import { writable } from 'svelte/store'
-import { IPersistedProfile } from '@core/profile/interfaces'
 
-export const onboardingProfile = writable<Partial<IPersistedProfile>>(null)
+import { IOnboardingProfile } from '../interfaces'
 
-export function updateOnboardingProfile(payload: Partial<IPersistedProfile>): void {
+export const onboardingProfile = writable<Partial<IOnboardingProfile>>(null)
+
+export function updateOnboardingProfile(payload: Partial<IOnboardingProfile>): void {
     return onboardingProfile.update((state) => ({ ...state, ...payload }))
 }
