@@ -11,7 +11,7 @@
     } from '@core/wallet'
     import { ActivityTile, Text, TextInput, TogglableButton, Filter } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
     import { debounce } from 'shared/lib/utils'
     import VirtualList from '@sveltejs/svelte-virtual-list'
@@ -77,7 +77,7 @@
                     hasFocus={true}
                     placeholder={localize('general.search')}
                     fontSize="15"
-                    fontWeight={FontWeightText.medium}
+                    fontWeight={FontWeight.medium}
                     color="gray-500"
                 />
             </div>
@@ -90,7 +90,7 @@
             <VirtualList items={activityListWithTitles} let:item>
                 <div class="mb-2">
                     {#if item.title}
-                        <Text fontWeight={FontWeightText.semibold} color="gray-600" classes="my-2">
+                        <Text fontWeight={FontWeight.semibold} color="gray-600" classes="my-2">
                             {item.title} • {item.amount}
                         </Text>
                     {/if}

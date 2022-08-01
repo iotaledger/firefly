@@ -4,7 +4,7 @@
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { Icon, Text, Tile } from 'shared/components'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
     export let account: IAccount
 
@@ -21,7 +21,7 @@
                 <Text type={TextType.p}>{alias}</Text>
             </div>
             <div class="flex flex-col text-right">
-                <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
+                <Text type={TextType.p} fontWeight={FontWeight.semibold}>
                     {formatTokenAmountBestMatch(unclaimedBalance, BASE_TOKEN[NetworkProtocol.Shimmer])}
                 </Text>
                 <div class="flex flex-row items-center space-x-2">

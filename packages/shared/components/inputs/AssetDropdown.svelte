@@ -2,7 +2,7 @@
     import { NetworkProtocol } from '@core/network'
     import { visibleSelectedAccountAssets } from '@core/wallet'
     import { AssetTile, Icon, Text, AssetIcon } from 'shared/components'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import { clickOutside } from 'shared/lib/actions'
 
     export let asset = $visibleSelectedAccountAssets?.baseCoin
@@ -48,7 +48,7 @@
                 <Text
                     color="gray-600"
                     darkColor="white"
-                    fontWeight={FontWeightText.semibold}
+                    fontWeight={FontWeight.semibold}
                     fontSize="15"
                     classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
                 >
