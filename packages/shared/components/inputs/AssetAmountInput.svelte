@@ -20,7 +20,6 @@
     $: isFocused && (error = '')
     $: if (asset !== previousAsset) {
         previousAsset = asset
-        amount = null
         unit = null
     }
     $: rawAmount = generateRawAmount(parseCurrency(amount).toString(), unit, asset?.metadata)
