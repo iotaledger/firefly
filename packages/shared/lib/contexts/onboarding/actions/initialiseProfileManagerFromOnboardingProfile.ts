@@ -5,11 +5,14 @@ import { getStorageDirectoryOfProfile } from '@core/profile'
 import { initialiseProfileManager, profileManager } from '@core/profile-manager'
 
 import { onboardingProfile } from '../stores'
-import { setNewProfileClientOptions } from './setNewProfileClientOptions'
+import { setOnboardingProfileClientOptions } from './setOnboardingProfileClientOptions'
 
-export async function initProfileManagerFromNewProfile(node?: INode, checkForExistingManager?: boolean): Promise<void> {
+export async function initialiseProfileManagerFromOnboardingProfile(
+    node?: INode,
+    checkForExistingManager?: boolean
+): Promise<void> {
     let profile = get(onboardingProfile)
-    setNewProfileClientOptions(profile.networkProtocol, profile.networkType, node)
+    setOnboardingProfileClientOptions(profile.networkProtocol, profile.networkType, node)
     profile = get(onboardingProfile)
 
     if (checkForExistingManager && get(profileManager)) {

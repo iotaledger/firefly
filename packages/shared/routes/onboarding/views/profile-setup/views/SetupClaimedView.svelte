@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
-    import features from 'shared/features/features'
+    import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
@@ -9,34 +9,32 @@
     import {
         createIotaProfileManager,
         ProfileRecoveryType,
-        setNewProfileType,
         onboardingProfile,
         destroyIotaProfileManager,
-        profileRecoveryType,
+        updateOnboardingProfile,
     } from '@contexts/onboarding'
 
-    async function handleContinueClick(_profileRecoveryType: ProfileRecoveryType): Promise<void> {
+    async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
         await createIotaProfileManager()
 
-        const profileType =
-            _profileRecoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
-        setNewProfileType(profileType)
-
-        profileRecoveryType.set(_profileRecoveryType)
-        $profileSetupRouter.next({ profileRecoveryType: _profileRecoveryType })
+        const type = recoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
+        updateOnboardingProfile({ type, recoveryType })
+        // TODO: Initialise profile manager here since we have all of the necessary configuration parameters!
+        $profileSetupRouter.next()
     }
 
-    async function handleBackClick(): Promise<void> {
+    async function onBackClick(): Promise<void> {
         await destroyIotaProfileManager()
         $profileSetupRouter.previous()
     }
 
     onMount(() => {
+        updateOnboardingProfile({ type: null, recoveryType: null })
         void destroyIotaProfileManager()
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2">{localize(`views.import.title.${$onboardingProfile?.networkProtocol}`)}</Text>
     </div>
@@ -54,7 +52,7 @@
                 ?.restoreProfile?.migrateSeed?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.migrateSeed?.enabled}
-            onClick={() => handleContinueClick(ProfileRecoveryType.Seed)}
+            onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Seed)}
         />
         <OnboardingButton
             primaryText={localize('views.import.importMnemonic')}
@@ -64,7 +62,7 @@
                 ?.restoreProfile?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.recoveryPhrase?.enabled}
-            onClick={() => handleContinueClick(ProfileRecoveryType.Mnemonic)}
+            onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Mnemonic)}
         />
         <OnboardingButton
             primaryText={localize(`views.import.importFile.${$onboardingProfile?.networkProtocol}`)}
@@ -76,7 +74,7 @@
                 ?.restoreProfile?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.strongholdBackup?.enabled}
-            onClick={() => handleContinueClick(ProfileRecoveryType.Stronghold)}
+            onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Stronghold)}
         />
         {#if !$mobile}
             <OnboardingButton
@@ -90,7 +88,7 @@
                 disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[
                     $onboardingProfile?.networkType
                 ]?.restoreProfile?.ledgerBackup?.enabled}
-                onClick={() => handleContinueClick(ProfileRecoveryType.Ledger)}
+                onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Ledger)}
             />
         {/if}
     </div>

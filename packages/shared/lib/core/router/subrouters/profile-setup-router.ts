@@ -1,11 +1,10 @@
 import { get, writable } from 'svelte/store'
 
-import { ProfileRecoveryType, ProfileSetupType } from '@contexts/onboarding'
+import { onboardingProfile, ProfileRecoveryType, ProfileSetupType } from '@contexts/onboarding'
 
 import { ProfileSetupRoute } from '../enums'
 import { onboardingRouter } from '../onboarding-router'
 import { Subrouter } from './subrouter'
-import { FireflyEvent } from '../types'
 
 export const profileSetupRoute = writable<ProfileSetupRoute>(null)
 export const profileSetupRouter = writable<ProfileSetupRouter>(null)
@@ -15,20 +14,20 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
         super(ProfileSetupRoute.Setup, profileSetupRoute, get(onboardingRouter))
     }
 
-    next(event?: FireflyEvent): void {
+    next(): void {
         let nextRoute: ProfileSetupRoute
 
-        const params = event || {}
+        const _onboardingProfile = get(onboardingProfile)
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case ProfileSetupRoute.Setup: {
-                const _profileSetupType = params?.profileSetupType
-                if (_profileSetupType) {
-                    if (_profileSetupType === ProfileSetupType.Claimed) {
+                const setupType = _onboardingProfile?.setupType
+                if (setupType) {
+                    if (setupType === ProfileSetupType.Claimed) {
                         nextRoute = ProfileSetupRoute.SetupClaimed
-                    } else if (_profileSetupType === ProfileSetupType.New) {
+                    } else if (setupType === ProfileSetupType.New) {
                         nextRoute = ProfileSetupRoute.SetupNew
-                    } else if (_profileSetupType === ProfileSetupType.Restored) {
+                    } else if (setupType === ProfileSetupType.Restored) {
                         nextRoute = ProfileSetupRoute.SetupRecovered
                     }
                 }
@@ -36,14 +35,14 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
             }
             case ProfileSetupRoute.SetupClaimed:
             case ProfileSetupRoute.SetupRecovered: {
-                const _profileRecoveryType = params?.profileRecoveryType
-                if (_profileRecoveryType) {
+                const recoveryType = _onboardingProfile?.recoveryType
+                if (recoveryType) {
                     if (
-                        _profileRecoveryType === ProfileRecoveryType.Mnemonic ||
-                        _profileRecoveryType === ProfileRecoveryType.Stronghold
+                        recoveryType === ProfileRecoveryType.Mnemonic ||
+                        recoveryType === ProfileRecoveryType.Stronghold
                     ) {
                         this.parentRouter.next()
-                    } else if (_profileRecoveryType === ProfileRecoveryType.Ledger) {
+                    } else if (recoveryType === ProfileRecoveryType.Ledger) {
                         nextRoute = ProfileSetupRoute.EnterName
                     }
                 }

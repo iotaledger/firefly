@@ -3,15 +3,10 @@
     import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
     import features from '@features/features'
-    import {
-        onboardingProfile,
-        updateOnboardingProfile,
-        initProfileManagerFromNewProfile,
-        cleanupNewProfileManager,
-    } from '@contexts/onboarding'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { INode, NetworkType } from '@core/network'
+    import { NetworkType } from '@core/network'
     import { networkSetupRouter } from '@core/router'
 
     const networkProtocol = $onboardingProfile.networkProtocol
@@ -22,27 +17,21 @@
         [NetworkType.PrivateNet]: 'settings',
     }
 
-    async function handleContinueClick(networkType: NetworkType): Promise<void> {
-        if (networkType === NetworkType.PrivateNet) {
-            updateOnboardingProfile({ networkType })
-        } else {
-            updateOnboardingProfile({ networkProtocol, networkType })
-            await initProfileManagerFromNewProfile(<INode>{}, true)
-        }
-        $networkSetupRouter.next({ networkType })
+    function onNetworkSelectionClick(networkType: NetworkType): void {
+        updateOnboardingProfile({ networkType })
+        $networkSetupRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $networkSetupRouter.previous()
     }
 
     onMount(() => {
         updateOnboardingProfile({ networkType: null })
-        void cleanupNewProfileManager()
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type={TextType.h2}>{localize('views.network.title')}</Text>
     </div>
@@ -58,7 +47,7 @@
                 iconColor={networkType === NetworkType.Mainnet ? `${networkProtocol}-highlight` : 'blue-500'}
                 hidden={features?.onboarding?.[networkProtocol]?.[networkType]?.hidden}
                 disabled={!features?.onboarding?.[networkProtocol]?.[networkType]?.enabled}
-                onClick={() => handleContinueClick(networkType)}
+                onClick={() => onNetworkSelectionClick(networkType)}
             />
         {/each}
     </div>

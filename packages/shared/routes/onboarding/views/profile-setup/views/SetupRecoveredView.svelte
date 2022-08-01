@@ -1,31 +1,29 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
-    import features from 'shared/features/features'
+    import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
     import { profileSetupRouter } from '@core/router'
-    import {
-        onboardingProfile,
-        profileRecoveryType,
-        ProfileRecoveryType,
-        setNewProfileType,
-    } from '@contexts/onboarding'
+    import { onboardingProfile, ProfileRecoveryType, updateOnboardingProfile } from '@contexts/onboarding'
 
-    function handleContinueClick(_profileRecoveryType: ProfileRecoveryType) {
-        const profileType =
-            _profileRecoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
-        setNewProfileType(profileType)
-
-        profileRecoveryType.set(_profileRecoveryType)
-        $profileSetupRouter.next({ profileRecoveryType: _profileRecoveryType })
+    function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType) {
+        const type = recoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
+        updateOnboardingProfile({ type, recoveryType })
+        // TODO: Initialise profile manager here since we have all of the necessary configuration parameters!
+        $profileSetupRouter.next()
     }
-    function handleBackClick() {
+    function onBackClick() {
         $profileSetupRouter.previous()
     }
+
+    onMount(() => {
+        updateOnboardingProfile({ type: null, recoveryType: null })
+    })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2">{localize(`views.import.title.${$onboardingProfile?.networkProtocol}`)}</Text>
     </div>
@@ -43,7 +41,7 @@
                 ?.restoreProfile?.migrateSeed?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.migrateSeed?.enabled}
-            onClick={() => handleContinueClick(ProfileRecoveryType.Seed)}
+            onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Seed)}
         >
             {localize('views.import.importSeed')}
             {#if !$mobile}
@@ -58,7 +56,7 @@
                 ?.restoreProfile?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.recoveryPhrase?.enabled}
-            onClick={() => handleContinueClick(ProfileRecoveryType.Mnemonic)}
+            onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Mnemonic)}
         >
             {localize('views.import.importMnemonic')}
             {#if !$mobile}
@@ -73,7 +71,7 @@
                 ?.restoreProfile?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.strongholdBackup?.enabled}
-            onClick={() => handleContinueClick(ProfileRecoveryType.Stronghold)}
+            onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Stronghold)}
         >
             {localize(`views.import.importFile.${$onboardingProfile?.networkProtocol}`)}
             {#if !$mobile}
@@ -92,7 +90,7 @@
                 disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[
                     $onboardingProfile?.networkType
                 ]?.restoreProfile?.ledgerBackup?.enabled}
-                onClick={() => handleContinueClick(ProfileRecoveryType.Ledger)}
+                onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Ledger)}
             >
                 {localize('views.import.importLedger')}
                 {#if !$mobile}

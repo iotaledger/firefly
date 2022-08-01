@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Animation, OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
-    import { cleanupNewProfileManager, initProfileManagerFromNewProfile } from '@contexts/onboarding'
+    import { cleanupNewProfileManager, initialiseProfileManagerFromOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
@@ -28,7 +28,7 @@
                 checkNodeInfo: false,
                 validateClientOptions: false,
             })
-            await initProfileManagerFromNewProfile(node, true)
+            await initialiseProfileManagerFromOnboardingProfile(node, true)
             await getNodeInfo(node.url)
             $networkSetupRouter.next()
         } catch (err) {

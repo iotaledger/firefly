@@ -8,12 +8,12 @@
         onboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { AppStage, appStage, mobile } from '@core/app'
+    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { networkSetupRouter } from '@core/router'
 
-    function onClick(networkProtocol: NetworkProtocol): void {
+    function onProtocolSelectionClick(networkProtocol: NetworkProtocol): void {
         if ($onboardingProfile?.isDeveloperProfile) {
             updateOnboardingProfile({ networkProtocol })
         } else {
@@ -29,9 +29,9 @@
 
     onMount(() => {
         if (!$onboardingProfile?.id) {
-            const isDeveloperProfile = $appStage !== AppStage.PROD
-            initialiseOnboardingProfile(isDeveloperProfile)
+            initialiseOnboardingProfile()
         }
+        updateOnboardingProfile({ networkProtocol: null })
     })
 </script>
 
@@ -59,7 +59,7 @@
                     ? !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled
                     : !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled ||
                       !features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.enabled}
-                onClick={() => onClick(NetworkProtocol[protocol])}
+                onClick={() => onProtocolSelectionClick(NetworkProtocol[protocol])}
             />
         {/each}
     </div>

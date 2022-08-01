@@ -1,28 +1,29 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
-    import features from 'shared/features/features'
+    import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
-    import { setNewProfileType, onboardingProfile } from '@contexts/onboarding'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
-    import { onMount } from 'svelte'
 
-    function handleContinueClick(profileType: ProfileType): void {
-        setNewProfileType(profileType)
+    function onProfileTypeSelectionClick(type: ProfileType): void {
+        updateOnboardingProfile({ type })
+        // TODO: Initialise profile manager here since we have all of the necessary configuration parameters!
         $profileSetupRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $profileSetupRouter.previous()
     }
 
     onMount(() => {
-        setNewProfileType(null)
+        updateOnboardingProfile({ type: null })
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2">{localize('views.create.title')}</Text>
     </div>
@@ -38,7 +39,7 @@
                 ?.newProfile?.softwareProfile?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.newProfile?.softwareProfile?.enabled}
-            onClick={() => handleContinueClick(ProfileType.Software)}
+            onClick={() => onProfileTypeSelectionClick(ProfileType.Software)}
         />
         <OnboardingButton
             primaryText={localize('views.create.ledgerAccount.title')}
@@ -48,7 +49,7 @@
                 ?.newProfile?.ledgerProfile?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.newProfile?.ledgerProfile?.enabled}
-            onClick={() => handleContinueClick(ProfileType.Ledger)}
+            onClick={() => onProfileTypeSelectionClick(ProfileType.Ledger)}
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">

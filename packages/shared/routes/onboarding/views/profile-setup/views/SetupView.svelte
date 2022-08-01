@@ -1,29 +1,29 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, OnboardingButton, Link, Logo, OnboardingLayout, Text } from 'shared/components'
-    import features from 'shared/features/features'
+    import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
-    import { onboardingProfile, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
+    import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
     import { Platform } from '@lib/platform'
-    import { onMount } from 'svelte'
 
-    function handleContinueClick(_profileSetupType: ProfileSetupType): void {
-        $profileSetupType = _profileSetupType
-        $profileSetupRouter.next({ profileSetupType: _profileSetupType })
+    function onProfileSetupSelectionClick(setupType: ProfileSetupType): void {
+        updateOnboardingProfile({ setupType })
+        $profileSetupRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $profileSetupRouter.previous()
     }
 
     onMount(() => {
-        $profileSetupType = null
+        updateOnboardingProfile({ setupType: null })
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2"
             >{localize('views.setup.title', {
@@ -54,7 +54,7 @@
                 ?.claimRewards?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.claimRewards?.enabled}
-            onClick={() => handleContinueClick(ProfileSetupType.Claimed)}
+            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Claimed)}
         />
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
@@ -72,7 +72,7 @@
                 ?.newProfile?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.newProfile?.enabled}
-            onClick={() => handleContinueClick(ProfileSetupType.New)}
+            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.New)}
         />
         <OnboardingButton
             primaryText={localize(`actions.restoreWallet.${$onboardingProfile?.networkProtocol}`)}
@@ -84,7 +84,7 @@
                 ?.restoreProfile?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.enabled}
-            onClick={() => handleContinueClick(ProfileSetupType.Restored)}
+            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Restored)}
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">

@@ -6,7 +6,6 @@ import { NetworkType } from '@core/network'
 import { onboardingRouter } from '../onboarding-router'
 import { NetworkSetupRoute } from '../enums'
 import { Subrouter } from './subrouter'
-import { FireflyEvent } from '../types'
 
 export const networkSetupRoute = writable<NetworkSetupRoute>(null)
 export const networkSetupRouter = writable<NetworkSetupRouter>(null)
@@ -16,14 +15,14 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
         super(NetworkSetupRoute.Protocol, networkSetupRoute, get(onboardingRouter))
     }
 
-    next(event?: FireflyEvent): void {
+    next(): void {
         let nextRoute: NetworkSetupRoute
-        const params = event || {}
 
+        const _onboardingProfile = get(onboardingProfile)
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case NetworkSetupRoute.Protocol: {
-                const isDeveloperProfile = get(onboardingProfile)?.isDeveloperProfile
+                const isDeveloperProfile = _onboardingProfile?.isDeveloperProfile
                 if (isDeveloperProfile) {
                     nextRoute = NetworkSetupRoute.Network
                 } else {
@@ -32,7 +31,7 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
                 break
             }
             case NetworkSetupRoute.Network: {
-                const networkType = params?.networkType ?? NetworkType.Devnet
+                const networkType = _onboardingProfile?.networkType ?? NetworkType.Devnet
                 if (networkType === NetworkType.PrivateNet) {
                     nextRoute = NetworkSetupRoute.CustomNetwork
                 } else {
