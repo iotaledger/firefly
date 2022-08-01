@@ -6,33 +6,38 @@
 
     export let asset: IAsset
     export let onClick: () => unknown
+    export let squashed = false
 </script>
 
 <ClickableTile {onClick} {...$$restProps}>
     <div class="asset w-full flex flex-row justify-between items-center">
         <div class="flex flex-row items-center text-left space-x-4">
-            <AssetIcon {asset} />
+            <AssetIcon small={squashed} {asset} />
             <div class="flex flex-col">
                 <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
                     {asset?.metadata?.name
                         ? truncateString(asset?.metadata?.name, 13, 0)
                         : truncateString(asset?.id, 6, 7)}
                 </Text>
-                <div class="flex flex-row justify-between items-center text-left">
-                    <Text type={TextType.p} secondary smaller>{asset?.fiatPrice ?? '-'}</Text>
-                    <slot name="subLabel" />
-                </div>
+                {#if !squashed}
+                    <div class="flex flex-row justify-between items-center text-left">
+                        <Text type={TextType.p} secondary smaller>{asset?.fiatPrice ?? '-'}</Text>
+                        <slot name="subLabel" />
+                    </div>
+                {/if}
             </div>
         </div>
         <div class="flex flex-col text-right">
             <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
                 {formatTokenAmountBestMatch(asset?.balance.total, asset?.metadata)}
             </Text>
-            <div class="flex flex-row justify-between items-center text-right">
-                <Text type={TextType.p} secondary smaller classes="flex-grow">
-                    {asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : '-'}
-                </Text>
-            </div>
+            {#if !squashed}
+                <div class="flex flex-row justify-between items-center text-right">
+                    <Text type={TextType.p} secondary smaller classes="flex-grow">
+                        {asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : '-'}
+                    </Text>
+                </div>
+            {/if}
         </div>
     </div>
 </ClickableTile>

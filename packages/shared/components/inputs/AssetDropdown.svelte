@@ -63,15 +63,16 @@
         </div>
         {#if isDropdownOpen && hasMultipleAssets}
             <div
-                class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 "
+                class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 max-h-96"
             >
-                <ul class="overflow-y-auto space-y-2 h-full -mr-2 pr-2 scroll-secondary">
+                <ul class="overflow-y-auto h-full -mr-2 pr-2 scroll-secondary">
                     <li>
                         <AssetTile
                             onClick={() => handleAssetClick($selectedAccountAssets?.baseCoin)}
                             asset={$selectedAccountAssets?.baseCoin}
                             overrideColor
                             classes="bg-white hover:bg-gray-50 dark:bg-transparent"
+                            squashed
                         />
                     </li>
                     {#each $selectedAccountAssets?.nativeTokens as nativeToken}
@@ -81,6 +82,7 @@
                                 asset={nativeToken}
                                 overrideColor
                                 classes="bg-white hover:bg-gray-50 dark:bg-transparent"
+                                squashed
                             />
                         </li>
                     {/each}
@@ -100,7 +102,6 @@
         /* odd margin needed to match the size of the upper parent box */
         .dropdown {
             margin: 0 3px;
-            max-height: 233px;
         }
     }
 </style>
