@@ -9,7 +9,7 @@
     export let onSetFilters: () => void
     export let onClose: () => void
 
-    function clear() {
+    function clear(): void {
         for (const key in filter) {
             filter[key].active = false
             filter[key].value = undefined
@@ -18,7 +18,7 @@
         modal.toggle()
     }
 
-    function confirm() {
+    function confirm(): void {
         onSetFilters()
         modal.toggle()
     }

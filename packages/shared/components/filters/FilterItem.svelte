@@ -1,9 +1,9 @@
 <script lang="typescript">
-    import { ValueFilter } from '@core/wallet/interfaces/filter.interface'
+    import { FilterUnit } from '@core/wallet/interfaces/filter.interface'
     import { Checkbox } from 'shared/components'
     import { localize } from '@core/i18n'
 
-    export let filterItem: ValueFilter
+    export let filterItem: FilterUnit
 </script>
 
 <div class="border-t border-solid border-gray-200 dark:border-gray-800">

@@ -13,12 +13,12 @@
 
     $: filterActive && modal?.toggle()
 
-    function onSetFilters() {
+    function onSetFilters(): void {
         $filterStore = deepCopy(filter)
         filterActive = false
     }
 
-    function onClose() {
+    function onClose(): void {
         filter = deepCopy($filterStore)
         filterActive = false
     }

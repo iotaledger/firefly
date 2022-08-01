@@ -9,6 +9,8 @@
     export let small = false
     export let keepSameColor = false
     export let onClick: (..._: any[]) => void = () => {}
+
+    $: isSecondaryColor = !keepSameColor && (!checked || disabled)
 </script>
 
 <button
@@ -28,7 +30,7 @@
         classes={`${label ? 'mr-3' : ''} ${checked ? 'active' : ''}`}
     />
     {#if label}
-        <Text type="p" secondary={!keepSameColor && (!checked || disabled)}>{label}</Text>
+        <Text type="p" secondary={isSecondaryColor}>{label}</Text>
     {/if}
 </button>
 

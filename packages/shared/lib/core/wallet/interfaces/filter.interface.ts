@@ -1,16 +1,16 @@
 export type Filter = ActivityFilter | AssetFilter
 
 export interface ActivityFilter {
-    showHidden: BooleanFilter
+    showHidden: BooleanFilterUnit
 }
 
 export interface AssetFilter {
-    showHidden: BooleanFilter
+    showHidden: BooleanFilterUnit
 }
 
-export type ValueFilter = BooleanFilter
+export type FilterUnit = BooleanFilterUnit
 
-export type BooleanFilter = {
+export type BooleanFilterUnit = {
     type: 'boolean'
     active: boolean
     label: string

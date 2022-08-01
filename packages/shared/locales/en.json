@@ -1274,12 +1274,7 @@
     },
     "filters":{
         "title": "Filters",
-        "assets": {
-            "showHidden": "Show hidden"
-        },
-        "activity": {
-            "showHidden": "Show hidden"
-        }
+        "showHidden": "Show hidden"
     },
     "dates": {
         "today": "Today",

@@ -4,10 +4,10 @@ import { activeProfileId } from '@core/profile'
 import { selectedAccountId } from '@core/account/stores/selected-account-id.store'
 import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
 import { derived, Readable, writable, Writable } from 'svelte/store'
-import { AssetFilter } from '../interfaces'
+import { AssetFilter } from '../interfaces/filter.interface'
 
 export const assetFilter: Writable<AssetFilter> = writable({
-    showHidden: { active: false, type: 'boolean', label: 'filters.assets.showHidden' },
+    showHidden: { active: false, type: 'boolean', label: 'filters.showHidden' },
 })
 
 export const selectedAccountAssets: Readable<IAccountAssets> = derived(
