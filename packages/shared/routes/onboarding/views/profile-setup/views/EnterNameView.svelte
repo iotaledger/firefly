@@ -5,10 +5,10 @@
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
     import { profileSetupRouter } from '@core/router'
-    import { newProfile, updateNewProfile } from '@contexts/onboarding'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     let error = ''
-    let profileName = $newProfile?.name ?? ''
+    let profileName = $onboardingProfile?.name ?? ''
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
@@ -20,7 +20,7 @@
     function handleContinueClick(): void {
         try {
             validateProfileName(profileName)
-            updateNewProfile({ name: profileName })
+            updateOnboardingProfile({ name: profileName })
             $profileSetupRouter.next()
         } catch (err) {
             error = err.message
@@ -32,7 +32,7 @@
     <div slot="title">
         <Text type="h2"
             >{localize('views.profile.title', {
-                values: { protocol: formatProtocolName($newProfile?.networkProtocol) },
+                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
             })}</Text
         >
     </div>

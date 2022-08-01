@@ -21,7 +21,7 @@
         login,
     } from '@core/profile'
     import { createNewAccount } from '@core/account'
-    import { newProfile, cleanupOnboarding } from '@contexts/onboarding'
+    import { onboardingProfile, cleanupOnboarding } from '@contexts/onboarding'
 
     const { didComplete } = $migration
     const wasMigrated = $didComplete
@@ -93,9 +93,9 @@
             }
             // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
             // When this component mounts, ensure that the profile is persisted in the local storage.
-            addNewProfile($newProfile)
-            loadPersistedProfileIntoActiveProfile($newProfile.id)
-            newProfile.set(null)
+            addNewProfile($onboardingProfile)
+            loadPersistedProfileIntoActiveProfile($onboardingProfile.id)
+            onboardingProfile.set(null)
             await createNewAccount()
             const shouldRecoverAccounts = $profileRecoveryType !== ProfileRecoveryType.New
             void login(shouldRecoverAccounts)

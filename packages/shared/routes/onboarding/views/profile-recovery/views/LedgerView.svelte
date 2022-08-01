@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
     import { profileRecoveryRouter } from '@core/router'
-    import { newProfile, profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
+    import { onboardingProfile, profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
 
     function handleContinueClick(importType: ProfileRecoveryType): void {
         profileRecoveryType.set(importType)
@@ -34,7 +34,7 @@
             primaryText={localize('views.importFromLedger.haveTrinityLedger')}
             secondaryText={localize('views.importFromLedger.haveTrinityLedgerDescription')}
             icon="settings"
-            hidden={$newProfile.networkProtocol === NetworkProtocol.Shimmer}
+            hidden={$onboardingProfile.networkProtocol === NetworkProtocol.Shimmer}
             onClick={() => handleContinueClick(ProfileRecoveryType.TrinityLedger)}
         />
     </div>

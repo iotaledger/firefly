@@ -1,5 +1,5 @@
 import { getDefaultClientOptions, IClientOptions, INode, NetworkProtocol, NetworkType } from '@core/network'
-import { updateNewProfile } from '../stores'
+import { updateOnboardingProfile } from '../stores'
 
 export function setNewProfileClientOptions(
     networkProtocol: NetworkProtocol,
@@ -14,5 +14,5 @@ export function setNewProfileClientOptions(
     } else {
         clientOptions = getDefaultClientOptions(networkProtocol, networkType)
     }
-    updateNewProfile({ clientOptions })
+    updateOnboardingProfile({ clientOptions })
 }

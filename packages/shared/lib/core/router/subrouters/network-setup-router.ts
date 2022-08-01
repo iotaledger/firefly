@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { newProfile } from '@contexts/onboarding'
+import { onboardingProfile } from '@contexts/onboarding'
 import { NetworkType } from '@core/network'
 
 import { onboardingRouter } from '../onboarding-router'
@@ -23,7 +23,7 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case NetworkSetupRoute.Protocol: {
-                const isDeveloperProfile = get(newProfile)?.isDeveloperProfile
+                const isDeveloperProfile = get(onboardingProfile)?.isDeveloperProfile
                 if (isDeveloperProfile) {
                     nextRoute = NetworkSetupRoute.Network
                 } else {

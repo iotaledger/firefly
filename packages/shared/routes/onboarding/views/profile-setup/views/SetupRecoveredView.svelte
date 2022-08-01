@@ -5,7 +5,12 @@
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
     import { profileSetupRouter } from '@core/router'
-    import { newProfile, profileRecoveryType, ProfileRecoveryType, setNewProfileType } from '@contexts/onboarding'
+    import {
+        onboardingProfile,
+        profileRecoveryType,
+        ProfileRecoveryType,
+        setNewProfileType,
+    } from '@contexts/onboarding'
 
     function handleContinueClick(_profileRecoveryType: ProfileRecoveryType) {
         const profileType =
@@ -22,20 +27,22 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{localize(`views.import.title.${$newProfile?.networkProtocol}`)}</Text>
+        <Text type="h2">{localize(`views.import.title.${$onboardingProfile?.networkProtocol}`)}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8">{localize(`views.import.body.${$newProfile?.networkProtocol}`)}</Text>
+        <Text type="p" secondary classes="mb-8"
+            >{localize(`views.import.body.${$onboardingProfile?.networkProtocol}`)}</Text
+        >
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <Button
             icon="seed"
             classes="w-full"
             secondary
-            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
-                ?.migrateSeed?.hidden}
-            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
-                ?.migrateSeed?.enabled}
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.restoreProfile?.migrateSeed?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.restoreProfile?.migrateSeed?.enabled}
             onClick={() => handleContinueClick(ProfileRecoveryType.Seed)}
         >
             {localize('views.import.importSeed')}
@@ -47,10 +54,10 @@
             icon="language"
             classes="w-full"
             secondary
-            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
-                ?.recoveryPhrase?.hidden}
-            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
-                ?.recoveryPhrase?.enabled}
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.restoreProfile?.recoveryPhrase?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.restoreProfile?.recoveryPhrase?.enabled}
             onClick={() => handleContinueClick(ProfileRecoveryType.Mnemonic)}
         >
             {localize('views.import.importMnemonic')}
@@ -62,16 +69,16 @@
             icon="file"
             classes="w-full"
             secondary
-            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
-                ?.strongholdBackup?.hidden}
-            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
-                ?.strongholdBackup?.enabled}
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.restoreProfile?.strongholdBackup?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.restoreProfile?.strongholdBackup?.enabled}
             onClick={() => handleContinueClick(ProfileRecoveryType.Stronghold)}
         >
-            {localize(`views.import.importFile.${$newProfile?.networkProtocol}`)}
+            {localize(`views.import.importFile.${$onboardingProfile?.networkProtocol}`)}
             {#if !$mobile}
                 <Text type="p" secondary smaller>
-                    {localize(`views.import.importFileDescription.${$newProfile?.networkProtocol}`)}
+                    {localize(`views.import.importFileDescription.${$onboardingProfile?.networkProtocol}`)}
                 </Text>
             {/if}
         </Button>
@@ -80,16 +87,17 @@
                 icon="chip"
                 classes="w-full mb-8"
                 secondary
-                hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
-                    ?.ledgerBackup?.hidden}
-                disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]
-                    ?.restoreProfile?.ledgerBackup?.enabled}
+                hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                    ?.restoreProfile?.ledgerBackup?.hidden}
+                disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[
+                    $onboardingProfile?.networkType
+                ]?.restoreProfile?.ledgerBackup?.enabled}
                 onClick={() => handleContinueClick(ProfileRecoveryType.Ledger)}
             >
                 {localize('views.import.importLedger')}
                 {#if !$mobile}
                     <Text type="p" secondary smaller>
-                        {localize(`views.import.importLedgerDescription.${$newProfile?.networkProtocol}`)}
+                        {localize(`views.import.importLedgerDescription.${$onboardingProfile?.networkProtocol}`)}
                     </Text>
                 {/if}
             </Button>

@@ -2,7 +2,7 @@ import { get, writable } from 'svelte/store'
 
 import { profiles, ProfileType } from '@core/profile'
 import {
-    newProfile,
+    onboardingProfile,
     ProfileRecoveryType,
     profileRecoveryType,
     ProfileSetupType,
@@ -41,7 +41,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 nextRoute = OnboardingRoute.ProfileSetup
                 break
             case OnboardingRoute.ProfileSetup: {
-                const profileType = get(newProfile)?.type
+                const profileType = get(onboardingProfile)?.type
                 if (profileType) {
                     if (profileType === ProfileType.Software) {
                         nextRoute = OnboardingRoute.PasswordSetup
@@ -63,7 +63,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
             case OnboardingRoute.Protection: {
-                const _profileType = get(newProfile)?.type
+                const _profileType = get(onboardingProfile)?.type
                 if (_profileType === ProfileType.Software) {
                     nextRoute = OnboardingRoute.ProfileBackup
                 } else if (_profileType === ProfileType.Ledger) {

@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { restoreBackup } from '@core/profile-manager'
 import { Platform } from '@lib/platform'
 
-import { newProfile } from '../stores'
+import { onboardingProfile } from '../stores'
 
 import { ProfileRecoveryType } from '../enums'
 import { importFilePath, profileRecoveryType, isGettingMigrationData } from '../stores'
@@ -20,6 +20,6 @@ export async function restoreBackupFromFile(backupFile: Buffer, password: string
         isGettingMigrationData.set(false)
     } else {
         await restoreBackup(get(importFilePath), password)
-        get(newProfile).lastStrongholdBackupTime = new Date()
+        get(onboardingProfile).lastStrongholdBackupTime = new Date()
     }
 }

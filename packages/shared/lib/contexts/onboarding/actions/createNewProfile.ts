@@ -1,7 +1,7 @@
 import { profileManager } from '@core/profile-manager'
 import { get } from 'svelte/store'
 import { buildNewProfile } from '../helpers/buildNewProfile'
-import { newProfile } from '../stores'
+import { onboardingProfile } from '../stores'
 
 /**
  * Builds a new profile and sets Svelte store variables accordingly.
@@ -15,5 +15,5 @@ export function createNewProfile({ isDeveloperProfile }: { isDeveloperProfile: b
     }
 
     const _newProfile = buildNewProfile(isDeveloperProfile)
-    newProfile.set(_newProfile)
+    onboardingProfile.set(_newProfile)
 }

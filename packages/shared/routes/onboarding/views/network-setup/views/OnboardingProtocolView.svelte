@@ -4,8 +4,8 @@
         cleanupOnboarding,
         createNewProfile,
         initProfileManagerFromNewProfile,
-        newProfile,
-        updateNewProfile,
+        onboardingProfile,
+        updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { AppStage, appStage, mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -15,10 +15,10 @@
     import { onMount } from 'svelte'
 
     async function onClick(networkProtocol: NetworkProtocol): Promise<void> {
-        if ($newProfile?.isDeveloperProfile) {
-            updateNewProfile({ networkProtocol })
+        if ($onboardingProfile?.isDeveloperProfile) {
+            updateOnboardingProfile({ networkProtocol })
         } else {
-            updateNewProfile({ networkProtocol, networkType: NetworkType.Mainnet })
+            updateOnboardingProfile({ networkProtocol, networkType: NetworkType.Mainnet })
             await initProfileManagerFromNewProfile(<INode>{}, true)
         }
         $networkSetupRouter.next()
@@ -30,7 +30,7 @@
     }
 
     onMount(() => {
-        if (!$newProfile?.id) {
+        if (!$onboardingProfile?.id) {
             createNewProfile({ isDeveloperProfile: $appStage !== AppStage.PROD })
         }
     })
@@ -47,16 +47,16 @@
         {#each Object.keys(NetworkProtocol) as protocol}
             <OnboardingButton
                 primaryText={protocol}
-                secondaryText={!$newProfile?.isDeveloperProfile
+                secondaryText={!$onboardingProfile?.isDeveloperProfile
                     ? localize(`views.protocol.${NetworkProtocol[protocol]}`)
                     : ''}
                 icon={NetworkProtocol[protocol]}
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
-                hidden={$newProfile?.isDeveloperProfile
+                hidden={$onboardingProfile?.isDeveloperProfile
                     ? features?.onboarding?.[NetworkProtocol[protocol]]?.hidden
                     : features?.onboarding?.[NetworkProtocol[protocol]]?.hidden ||
                       features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.hidden}
-                disabled={$newProfile?.isDeveloperProfile
+                disabled={$onboardingProfile?.isDeveloperProfile
                     ? !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled
                     : !features?.onboarding?.[NetworkProtocol[protocol]]?.enabled ||
                       !features?.onboarding?.[NetworkProtocol[protocol]]?.[NetworkType.Mainnet]?.enabled}

@@ -4,7 +4,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
-    import { setNewProfileType, newProfile } from '@contexts/onboarding'
+    import { setNewProfileType, onboardingProfile } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
     import { onMount } from 'svelte'
 
@@ -34,20 +34,20 @@
             primaryText={localize('views.create.softwareAccount.title')}
             secondaryText={!$mobile ? localize('views.create.softwareAccount.description') : ''}
             icon="file"
-            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
-                ?.softwareProfile?.hidden}
-            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
-                ?.softwareProfile?.enabled}
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.newProfile?.softwareProfile?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.newProfile?.softwareProfile?.enabled}
             onClick={() => handleContinueClick(ProfileType.Software)}
         />
         <OnboardingButton
             primaryText={localize('views.create.ledgerAccount.title')}
             secondaryText={!$mobile ? localize('views.create.ledgerAccount.description') : ''}
             icon="chip"
-            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
-                ?.ledgerProfile?.hidden}
-            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
-                ?.ledgerProfile?.enabled}
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.newProfile?.ledgerProfile?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.newProfile?.ledgerProfile?.enabled}
             onClick={() => handleContinueClick(ProfileType.Ledger)}
         />
     </div>

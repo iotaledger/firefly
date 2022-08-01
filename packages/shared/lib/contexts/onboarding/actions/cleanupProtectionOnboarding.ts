@@ -3,14 +3,14 @@ import { get } from 'svelte/store'
 import { Platform } from '@lib/platform'
 
 import { ProfileRecoveryType } from '../enums'
-import { iotaProfileManager, mnemonic, newProfile, profileRecoveryType } from '../stores'
+import { iotaProfileManager, mnemonic, onboardingProfile, profileRecoveryType } from '../stores'
 import { storeAndCleanMnemonic } from './storeAndCleanMnemonic'
 
 /**
  * Handles the cleanup process for the protection segment of the onboarding flow.
  */
 export async function cleanupProtectionOnboarding(pinInput: string): Promise<void> {
-    await Platform.PincodeManager.set(get(newProfile)?.id, pinInput)
+    await Platform.PincodeManager.set(get(onboardingProfile)?.id, pinInput)
     // TODO: replace with new api when it is implemented
     // await setStoragePassword(pinInput)
     if (get(profileRecoveryType) === ProfileRecoveryType.Mnemonic) {

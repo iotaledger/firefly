@@ -4,8 +4,8 @@
     import { TextType } from 'shared/components/Text.svelte'
     import features from '@features/features'
     import {
-        newProfile,
-        updateNewProfile,
+        onboardingProfile,
+        updateOnboardingProfile,
         initProfileManagerFromNewProfile,
         cleanupNewProfileManager,
     } from '@contexts/onboarding'
@@ -14,7 +14,7 @@
     import { INode, NetworkType } from '@core/network'
     import { networkSetupRouter } from '@core/router'
 
-    const networkProtocol = $newProfile.networkProtocol
+    const networkProtocol = $onboardingProfile.networkProtocol
 
     const networkIcon: Readonly<{ [key in NetworkType]: string }> = {
         [NetworkType.Mainnet]: networkProtocol,
@@ -24,9 +24,9 @@
 
     async function handleContinueClick(networkType: NetworkType): Promise<void> {
         if (networkType === NetworkType.PrivateNet) {
-            updateNewProfile({ networkType })
+            updateOnboardingProfile({ networkType })
         } else {
-            updateNewProfile({ networkProtocol, networkType })
+            updateOnboardingProfile({ networkProtocol, networkType })
             await initProfileManagerFromNewProfile(<INode>{}, true)
         }
         $networkSetupRouter.next({ networkType })
@@ -37,7 +37,7 @@
     }
 
     onMount(() => {
-        updateNewProfile({ networkType: null })
+        updateOnboardingProfile({ networkType: null })
         void cleanupNewProfileManager()
     })
 </script>

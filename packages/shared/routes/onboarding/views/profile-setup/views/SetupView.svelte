@@ -4,7 +4,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
-    import { newProfile, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
+    import { onboardingProfile, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
     import { Platform } from '@lib/platform'
     import { onMount } from 'svelte'
@@ -27,11 +27,11 @@
     <div slot="title">
         <Text type="h2"
             >{localize('views.setup.title', {
-                values: { protocol: formatProtocolName($newProfile?.networkProtocol) },
+                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
             })}</Text
         >
     </div>
-    <div slot="leftpane__content" class:hidden={$newProfile?.networkProtocol !== NetworkProtocol.IOTA}>
+    <div slot="leftpane__content" class:hidden={$onboardingProfile?.networkProtocol !== NetworkProtocol.IOTA}>
         <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-16 p-8 pt-16">
             <div class="absolute -top-14">
                 <Logo width="auto" height="auto" logo="logo-chrysalis-gem" />
@@ -50,38 +50,40 @@
             icon="tokens"
             iconHeight="24"
             iconWidth="24"
-            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.claimRewards
-                ?.hidden}
-            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.claimRewards
-                ?.enabled}
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.claimRewards?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.claimRewards?.enabled}
             onClick={() => handleContinueClick(ProfileSetupType.Claimed)}
         />
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
-                values: { protocol: formatProtocolName($newProfile?.networkProtocol) },
+                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
             })}
             secondaryText={!$mobile
                 ? localize('actions.createWalletDescription', {
-                      values: { protocol: $newProfile?.networkProtocol },
+                      values: { protocol: $onboardingProfile?.networkProtocol },
                   })
                 : ''}
             icon="plus"
             iconHeight="11"
             iconWidth="11"
-            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
-                ?.hidden}
-            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.newProfile
-                ?.enabled}
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.newProfile?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.newProfile?.enabled}
             onClick={() => handleContinueClick(ProfileSetupType.New)}
         />
         <OnboardingButton
-            primaryText={localize(`actions.restoreWallet.${$newProfile?.networkProtocol}`)}
-            secondaryText={!$mobile ? localize(`actions.restoreWalletDescription.${$newProfile?.networkProtocol}`) : ''}
+            primaryText={localize(`actions.restoreWallet.${$onboardingProfile?.networkProtocol}`)}
+            secondaryText={!$mobile
+                ? localize(`actions.restoreWalletDescription.${$onboardingProfile?.networkProtocol}`)
+                : ''}
             icon="transfer"
-            hidden={features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
-                ?.hidden}
-            disabled={!features?.onboarding?.[$newProfile?.networkProtocol]?.[$newProfile?.networkType]?.restoreProfile
-                ?.enabled}
+            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.restoreProfile?.hidden}
+            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
+                ?.restoreProfile?.enabled}
             onClick={() => handleContinueClick(ProfileSetupType.Restored)}
         />
     </div>

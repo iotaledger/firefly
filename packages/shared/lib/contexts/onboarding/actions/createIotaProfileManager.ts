@@ -4,10 +4,10 @@ import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import { getStorageDirectoryOfProfiles } from '@core/profile'
 import { initialiseProfileManager } from '@core/profile-manager'
 
-import { iotaProfileManager, newProfile } from '../stores'
+import { iotaProfileManager, onboardingProfile } from '../stores'
 
 export async function createIotaProfileManager(): Promise<void> {
-    const profile = get(newProfile)
+    const profile = get(onboardingProfile)
     if (!profile) {
         return
     }

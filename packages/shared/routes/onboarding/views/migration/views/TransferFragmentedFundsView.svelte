@@ -5,7 +5,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { addNewProfile, loadPersistedProfileIntoActiveProfile, login } from '@core/profile'
-    import { newProfile } from '@contexts/onboarding'
+    import { onboardingProfile } from '@contexts/onboarding'
     import { displayNotificationForLedgerProfile, ledgerDeviceState, promptUserToConnectLedger } from '@lib/ledger'
     import {
         ADDRESS_SECURITY_LEVEL,
@@ -262,16 +262,16 @@
     }
 
     function persistProfile(): void {
-        if (legacyLedger && !$newProfile) {
+        if (legacyLedger && !$onboardingProfile) {
             return
         }
 
         // When the first migration bundle is broadcast, then persist profile
 
-        addNewProfile($newProfile)
-        loadPersistedProfileIntoActiveProfile($newProfile.id)
+        addNewProfile($onboardingProfile)
+        loadPersistedProfileIntoActiveProfile($onboardingProfile.id)
         void login()
-        newProfile.set(null)
+        onboardingProfile.set(null)
     }
 
     function handleMigrateClick(): void {

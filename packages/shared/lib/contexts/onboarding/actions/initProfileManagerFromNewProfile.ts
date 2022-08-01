@@ -4,13 +4,13 @@ import { COIN_TYPE, INode } from '@core/network'
 import { getStorageDirectoryOfProfile } from '@core/profile'
 import { initialiseProfileManager, profileManager } from '@core/profile-manager'
 
-import { newProfile } from '../stores'
+import { onboardingProfile } from '../stores'
 import { setNewProfileClientOptions } from './setNewProfileClientOptions'
 
 export async function initProfileManagerFromNewProfile(node?: INode, checkForExistingManager?: boolean): Promise<void> {
-    let profile = get(newProfile)
+    let profile = get(onboardingProfile)
     setNewProfileClientOptions(profile.networkProtocol, profile.networkType, node)
-    profile = get(newProfile)
+    profile = get(onboardingProfile)
 
     if (checkForExistingManager && get(profileManager)) {
         return

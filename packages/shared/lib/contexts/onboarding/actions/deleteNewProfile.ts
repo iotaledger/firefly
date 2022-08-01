@@ -1,6 +1,6 @@
 import { destroyProfileManager } from '@core/profile-manager'
 import { get } from 'svelte/store'
-import { newProfile } from '../stores'
+import { onboardingProfile } from '../stores'
 import { removeProfileFolder } from '@core/profile/utils'
 
 /**
@@ -9,7 +9,7 @@ import { removeProfileFolder } from '@core/profile/utils'
  * @returns {void}
  */
 export async function deleteNewProfile(): Promise<void> {
-    const profile = get(newProfile)
+    const profile = get(onboardingProfile)
     if (profile) {
         try {
             // TODO: delete storage with new api when implemented
@@ -20,5 +20,5 @@ export async function deleteNewProfile(): Promise<void> {
         }
         destroyProfileManager()
     }
-    newProfile.set(null)
+    onboardingProfile.set(null)
 }
