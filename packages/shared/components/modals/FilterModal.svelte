@@ -6,8 +6,8 @@
 
     export let modal: Modal
     export let filter: Filter
-    export let onSetFilters
-    export let onClose
+    export let onSetFilters: () => void
+    export let onClose: () => void
 
     function clear() {
         for (const key in filter) {
@@ -15,10 +15,12 @@
             filter[key].value = undefined
         }
         onSetFilters()
+        modal.toggle()
     }
 
     function confirm() {
         onSetFilters()
+        modal.toggle()
     }
 </script>
 
