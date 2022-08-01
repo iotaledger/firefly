@@ -26,9 +26,9 @@
 
 <Modal bind:this={modal} on:close={onClose} position={{ absolute: true, right: '0', top: '30px' }}>
     <div class="filter-modal">
-        <div class="flex flex-row items-center justify-between bg-gray-50 px-4 py-3">
+        <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3">
             <button
-                class="action py-1 px-2 border border-solid border-gray-300 text-center rounded-4 w-fit font-normal text-13 bg-white hover:bg-blue-200"
+                class="action py-1 px-3 border border-solid border-gray-300 text-center rounded-4 w-fit font-normal text-13 bg-white hover:bg-blue-200"
                 on:click|stopPropagation={clear}
             >
                 {localize('actions.clear')}

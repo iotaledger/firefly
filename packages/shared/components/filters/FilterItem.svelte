@@ -6,7 +6,7 @@
     export let filterItem: ValueFilter
 </script>
 
-<div class="border-t border-solid border-gray-200">
+<div class="border-t border-solid border-gray-200 dark:border-gray-800">
     <div class="px-4 py-3">
         <Checkbox label={localize(filterItem.label)} bind:checked={filterItem.active} small keepSameColor />
     </div>
