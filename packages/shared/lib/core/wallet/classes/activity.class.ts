@@ -39,6 +39,7 @@ import {
     outputIdFromTransactionData,
 } from '../utils'
 import { getRelevantOutputFromTransaction, getSenderFromTransaction, getSenderFromInputs } from '../utils/transactions'
+import { IUTXOInput } from '@iota/types'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -55,6 +56,7 @@ export class Activity implements IActivity {
     isSelfTransaction: boolean
     isInternal: boolean
     direction: ActivityDirection
+    inputs: IUTXOInput[]
 
     outputId?: string
     rawAmount: number
@@ -94,6 +96,7 @@ export class Activity implements IActivity {
         this.transactionId = transaction.transactionId
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
+        this.inputs = transaction.payload.essence.inputs
         this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
         this.sender = getSenderFromTransaction(transaction.incoming, account.depositAddress, output)
@@ -158,6 +161,12 @@ export class Activity implements IActivity {
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
+        this.inputs =
+            transactionInputs?.map((input) => ({
+                type: 0,
+                transactionId: input.metadata.transactionId,
+                transactionOutputIndex: input.metadata.outputIndex,
+            })) ?? []
 
         this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
         const asset = getPersistedAsset(this.assetId)

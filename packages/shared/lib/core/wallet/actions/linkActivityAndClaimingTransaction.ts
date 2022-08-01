@@ -4,7 +4,7 @@ import { ActivityDirection } from '../enums'
 import { addClaimedActivity, allAccountActivities, claimedActivities } from '../stores'
 
 export function linkActivityAndClaimingTransaction(account: IAccountState): void {
-    const accountActivities = get(allAccountActivities)[account.id]
+    const accountActivities = get(allAccountActivities)[Number(account.id)]
 
     const activities = accountActivities.filter(
         (activity) => activity.direction === ActivityDirection.In && activity.isAsync
