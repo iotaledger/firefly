@@ -7,8 +7,7 @@
     export let modal: Modal
     export let filter: Filter
     export let onSetFilters
-
-    const copy: Filter = { ...filter }
+    export let onClose
 
     function clear() {
         for (const key in filter) {
@@ -19,12 +18,11 @@
     }
 
     function confirm() {
-        filter = { ...copy }
         onSetFilters()
     }
 </script>
 
-<Modal bind:this={modal}>
+<Modal bind:this={modal} on:close={onClose} position={{ absolute: true, right: '0', top: '30px' }}>
     <div class="filter-modal">
         <div class="flex flex-row items-center justify-between bg-gray-50 px-4 py-3">
             <button

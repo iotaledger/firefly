@@ -487,3 +487,5 @@ export function resolveObjectPath(object: Record<string, any>, path: string, def
 
     return path.split('.').reduce((o, p) => o && o[p], object) ?? defaultValue
 }
+
+export const deepCopy = <T>(object: T): T => JSON.parse(JSON.stringify(object)) as T

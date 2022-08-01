@@ -3,12 +3,13 @@
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import {
+        activityFilter,
         activitySearchTerm,
         groupedActivities,
         selectedAccountActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
-    import { ActivityTile, Text, TextInput, TogglableButton, ActivityFilter } from 'shared/components'
+    import { ActivityTile, Text, TextInput, TogglableButton, Filter } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
@@ -60,7 +61,7 @@
             </div>
             <div class="flex flex-row">
                 {#if features?.wallet?.activityHistory?.search?.enabled}
-                    <ActivityFilter />
+                    <Filter filterStore={activityFilter} />
                     <TogglableButton icon="search" bind:active={searchActive} />
                 {/if}
             </div>

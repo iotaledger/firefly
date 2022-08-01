@@ -1,9 +1,8 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAccountAssets } from '@core/wallet'
+    import { assetFilter, IAccountAssets } from '@core/wallet'
     import { openPopup } from '@lib/popup'
-    import AssetFilter from 'shared/components/filters/AssetFilter.svelte'
-    import { AssetTile, Text } from 'shared/components'
+    import { AssetTile, Text, Filter } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
 
     export let assets: IAccountAssets
@@ -23,7 +22,7 @@
     <div class="h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
         <div class="w-full flex flex-row justify-between">
             <Text classes="text-left mb-4" type={TextType.h5}>{localize('general.assets')}</Text>
-            <AssetFilter />
+            <Filter filterStore={assetFilter} />
         </div>
         <div class="flex-auto overflow-y-scroll h-1 -mr-5 pr-4 scroll-secondary">
             <div class="-mr-4 overflow-x-visible space-y-2 ">
