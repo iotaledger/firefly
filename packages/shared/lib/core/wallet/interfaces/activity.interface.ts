@@ -2,6 +2,7 @@ import { IAccountState } from '@core/account'
 import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Subject } from '../types'
+import { IUTXOInput } from '@iota/types'
 
 export interface IActivity {
     id: string
@@ -20,6 +21,7 @@ export interface IActivity {
     isAsync: boolean
     asyncStatus: ActivityAsyncStatus
     expirationDate?: Date
+    inputs: IUTXOInput[]
     isHidden?: boolean
     isAssetHidden: boolean
     isClaiming?: boolean
