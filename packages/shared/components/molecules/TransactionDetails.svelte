@@ -89,7 +89,7 @@
 
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
-        {#if rawAmount}
+        {#if amount}
             <transaction-value class="flex flex-col space-y-0.5 items-center">
                 <div class="flex flex-row space-x-3">
                     <AssetIcon {asset} />

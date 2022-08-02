@@ -10,6 +10,7 @@
         ActivityAsyncStatus,
         ActivityDirection,
         claimActivity,
+        formatTokenAmountDefault,
         getAssetFromPersistedAssets,
         hideActivity,
     } from '@core/wallet'
@@ -27,6 +28,7 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     let isClaiming = activity.isClaiming
+    $: amount = formatTokenAmountDefault(activity?.rawAmount, asset.metadata)
 
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
@@ -95,7 +97,7 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {formattedFiatValue} {...activity} {asset} />
+    <TransactionDetails {formattedFiatValue} {...activity} {amount} unit={asset?.metadata?.unit} {asset} />
     {#if activity.isAsync && (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
