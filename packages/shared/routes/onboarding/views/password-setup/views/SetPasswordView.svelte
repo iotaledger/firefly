@@ -58,7 +58,7 @@
                 }
 
                 $strongholdPassword = password
-                $onboardingRouter.next({ password })
+                $onboardingRouter.next()
             } catch (err) {
                 console.error(err)
                 showAppNotification({

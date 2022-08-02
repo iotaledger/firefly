@@ -18,6 +18,10 @@
         WelcomeView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
+
+    import { onboardingProfile } from '../../lib/contexts/onboarding'
+    /* eslint-disable no-console */
+    $: console.log('ONBOARDING PROFILE: ', $onboardingProfile)
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.Welcome}

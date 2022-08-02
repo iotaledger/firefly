@@ -4,14 +4,20 @@
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileType } from '@core/profile'
+    import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
-    import { onboardingProfile, ProfileRecoveryType, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        getProfileTypeFromProfileRecoveryType,
+        initialiseProfileManagerFromOnboardingProfile,
+        onboardingProfile,
+        ProfileRecoveryType,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
 
-    function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType) {
-        const type = recoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
+    async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
+        const type = getProfileTypeFromProfileRecoveryType(recoveryType)
         updateOnboardingProfile({ type, recoveryType })
-        // TODO: Initialise profile manager here since we have all of the necessary configuration parameters!
+        await initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
     function onBackClick() {
@@ -20,6 +26,7 @@
 
     onMount(() => {
         updateOnboardingProfile({ type: null, recoveryType: null })
+        destroyProfileManager()
     })
 </script>
 

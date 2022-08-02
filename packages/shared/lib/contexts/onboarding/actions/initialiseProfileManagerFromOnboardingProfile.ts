@@ -1,27 +1,38 @@
 import { get } from 'svelte/store'
 
-import { COIN_TYPE, INode } from '@core/network'
+import { AccountManagerOptions } from '@iota/wallet'
+
+import { COIN_TYPE, getDefaultClientOptions } from '@core/network'
 import { getStorageDirectoryOfProfile } from '@core/profile'
 import { initialiseProfileManager, profileManager } from '@core/profile-manager'
 
 import { onboardingProfile } from '../stores'
-import { setOnboardingProfileClientOptions } from './setOnboardingProfileClientOptions'
 
-export async function initialiseProfileManagerFromOnboardingProfile(
-    node?: INode,
-    checkForExistingManager?: boolean
-): Promise<void> {
-    let profile = get(onboardingProfile)
-    setOnboardingProfileClientOptions(profile.networkProtocol, profile.networkType, node)
-    profile = get(onboardingProfile)
-
+export async function initialiseProfileManagerFromOnboardingProfile(checkForExistingManager?: boolean): Promise<void> {
     if (checkForExistingManager && get(profileManager)) {
         return
     }
 
-    const path = await getStorageDirectoryOfProfile(profile.id)
-    const coinType = COIN_TYPE[profile.networkProtocol]
-    initialiseProfileManager(path, coinType, profile.clientOptions, {
-        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
-    })
+    const { storagePath, coinType, clientOptions, secretManager } =
+        await createAccountManagerOptionsFromOnboardingProfile()
+    initialiseProfileManager(storagePath, coinType, clientOptions, secretManager)
+}
+
+async function createAccountManagerOptionsFromOnboardingProfile(): Promise<AccountManagerOptions> {
+    const _onboardingProfile = get(onboardingProfile)
+    const { id, networkProtocol } = _onboardingProfile
+    const storagePath = await getStorageDirectoryOfProfile(id)
+    const coinType = COIN_TYPE[networkProtocol]
+    const clientOptions =
+        _onboardingProfile?.clientOptions ?? getDefaultClientOptions(networkProtocol, _onboardingProfile?.networkType)
+    const secretManager = {
+        Stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
+    }
+
+    return {
+        storagePath,
+        coinType,
+        clientOptions,
+        secretManager,
+    }
 }

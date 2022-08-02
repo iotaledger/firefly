@@ -7,13 +7,13 @@ import {
     profileRecoveryType,
     ProfileSetupType,
     profileSetupType,
+    strongholdPassword,
 } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
 import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from './enums'
 import { Router } from './router'
 import { profileBackupRoute, profileSetupRoute } from './subrouters'
-import { FireflyEvent } from './types'
 
 export const onboardingRoute = writable<OnboardingRoute>(null)
 export const onboardingRouter = writable<OnboardingRouter>(null)
@@ -25,9 +25,8 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
         super(hasCompletedOnboardingBefore() ? OnboardingRoute.NetworkSetup : OnboardingRoute.Welcome, onboardingRoute)
     }
 
-    next(event?: FireflyEvent): void {
+    next(): void {
         let nextRoute: OnboardingRoute
-        const params = event || {}
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
@@ -98,9 +97,10 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             }
 
             case OnboardingRoute.PasswordSetup: {
-                const { password } = params
-                if (password) {
+                if (get(strongholdPassword)) {
                     nextRoute = OnboardingRoute.Protection
+                } else {
+                    console.error('No Stronghold password was set.')
                 }
                 break
             }

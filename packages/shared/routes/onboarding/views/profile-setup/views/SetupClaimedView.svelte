@@ -4,7 +4,6 @@
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileType } from '@core/profile'
     import { profileSetupRouter } from '@core/router'
     import {
         createIotaProfileManager,
@@ -12,14 +11,16 @@
         onboardingProfile,
         destroyIotaProfileManager,
         updateOnboardingProfile,
+        getProfileTypeFromProfileRecoveryType,
+        initialiseProfileManagerFromOnboardingProfile,
     } from '@contexts/onboarding'
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
         await createIotaProfileManager()
 
-        const type = recoveryType === ProfileRecoveryType.Ledger ? ProfileType.Ledger : ProfileType.Software
+        const type = getProfileTypeFromProfileRecoveryType(recoveryType)
         updateOnboardingProfile({ type, recoveryType })
-        // TODO: Initialise profile manager here since we have all of the necessary configuration parameters!
+        await initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
 

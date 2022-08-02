@@ -6,7 +6,7 @@
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkType } from '@core/network'
+    import { getDefaultClientOptions, NetworkType } from '@core/network'
     import { networkSetupRouter } from '@core/router'
 
     const networkProtocol = $onboardingProfile.networkProtocol
@@ -18,6 +18,10 @@
     }
 
     function onNetworkSelectionClick(networkType: NetworkType): void {
+        if (networkType !== NetworkType.PrivateNet) {
+            const clientOptions = getDefaultClientOptions($onboardingProfile?.networkProtocol, networkType)
+            updateOnboardingProfile({ clientOptions })
+        }
         updateOnboardingProfile({ networkType })
         $networkSetupRouter.next()
     }
