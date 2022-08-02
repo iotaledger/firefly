@@ -67,6 +67,7 @@
         })
     )
 
+    // Note: added hideClose condition to popups only as it is the only way we use it
     void App.addListener('backButton', () => {
         if (!$popupState.hideClose) {
             const next = $backButtonStore.pop()
