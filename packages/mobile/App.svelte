@@ -68,7 +68,7 @@
     )
 
     void App.addListener('backButton', () => {
-        const next = $backButtonStore.remove()
+        const next = $backButtonStore.pop()
         if (next) {
             next()
         }
