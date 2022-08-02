@@ -50,7 +50,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
             )
         }
 
-        return activityList
+        return activityList.sort((activity1, activity2) => activity2.time.getTime() - activity1.time.getTime())
     }
 )
 

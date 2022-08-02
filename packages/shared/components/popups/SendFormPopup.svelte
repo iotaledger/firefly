@@ -5,7 +5,6 @@
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { IAsset, Subject } from '@core/wallet'
     import { onMount } from 'svelte'
-    import { parseCurrency } from '@lib/currency'
 
     export let asset: IAsset
     export let amount: string
@@ -24,7 +23,7 @@
                 type: 'sendConfirmation',
                 props: {
                     asset,
-                    amount: String(parseCurrency(amount)),
+                    amount,
                     unit,
                     recipient,
                     internal: false,
