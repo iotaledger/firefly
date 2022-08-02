@@ -1183,6 +1183,7 @@
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
         "noRecentHistory": "No recent history",
+        "noAssets": "No assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "Syncing history, this may take a while...",
@@ -1265,6 +1266,10 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets."
 
+    },
+    "filters":{
+        "title": "Filters",
+        "showHidden": "Show hidden"
     },
     "dates": {
         "today": "Today",

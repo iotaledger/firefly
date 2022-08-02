@@ -3,14 +3,14 @@
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import {
-        activityFilterIndex,
+        activityFilter,
         activitySearchTerm,
         groupedActivities,
         selectedAccountActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
     import { ProfileSetupType, profileSetupType } from '@contexts/onboarding'
-    import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
+    import { ActivityTile, Text, TextInput, TogglableButton, Filter } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
@@ -29,8 +29,6 @@
         debounce(() => {
             $activitySearchTerm = searchValue
         })()
-    } else {
-        $activityFilterIndex = activeFilterIndex
     }
 
     function shouldShowFirstSync(): boolean {
@@ -61,9 +59,12 @@
                     <SyncSelectedAccountIconButton />
                 {/if}
             </div>
-            {#if features?.wallet?.activityHistory?.search?.enabled}
-                <TogglableButton icon="search" bind:active={searchActive} />
-            {/if}
+            <div class="flex flex-row">
+                {#if features?.wallet?.activityHistory?.search?.enabled}
+                    <Filter filterStore={activityFilter} />
+                    <TogglableButton icon="search" bind:active={searchActive} />
+                {/if}
+            </div>
         </div>
         {#if features?.wallet?.activityHistory?.search?.enabled && searchActive}
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
