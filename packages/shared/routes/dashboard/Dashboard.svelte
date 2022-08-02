@@ -19,7 +19,7 @@
         LAST_SHIMMER_STAKING_PERIOD,
     } from '@lib/participation/constants'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
-    import { Idle, MainMenu, Sidebar } from 'shared/components'
+    import { Idle, MainMenu, Sidebar, Refresher } from 'shared/components'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
@@ -45,6 +45,7 @@
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
+        selectedAccountStore,
     } from 'shared/lib/wallet'
     import { Governance, Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount, setContext } from 'svelte'
@@ -410,6 +411,7 @@
     <Idle />
     <div class="flex flex-col w-full h-full bg-white dark:bg-gray-800">
         <MainMenu />
+        <Refresher callback={() => asyncSyncAccount($selectedAccountStore)} />
         <TopNavigation {onCreateAccount} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
