@@ -9,7 +9,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { INode } from '@core/network'
-    import { getNodeInfo } from '@core/profile-manager'
+    import { destroyProfileManager, getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
 
@@ -35,11 +35,13 @@
             updateOnboardingProfile({ clientOptions: { nodes: [node] } })
             await initialiseProfileManagerFromOnboardingProfile(true)
             await getNodeInfo(node.url)
+            await destroyProfileManager()
             $networkSetupRouter.next()
         } catch (err) {
             console.error(err)
             if (err?.error?.includes('error sending request for url')) {
                 formError = localize('error.node.unabledToConnect')
+                updateOnboardingProfile({ clientOptions: null })
                 await cleanupNewProfileManager()
             } else if (err?.type !== 'validationError') {
                 showAppNotification({
@@ -53,6 +55,7 @@
     }
 
     onMount(() => {
+        updateOnboardingProfile({ clientOptions: null })
         void cleanupNewProfileManager()
     })
 </script>

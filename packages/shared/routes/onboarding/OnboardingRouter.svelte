@@ -22,6 +22,10 @@
     import { onboardingProfile } from '../../lib/contexts/onboarding'
     /* eslint-disable no-console */
     $: console.log('ONBOARDING PROFILE: ', $onboardingProfile)
+
+    import { profileManager } from '../../lib/core/profile-manager'
+    /* eslint-disable no-console */
+    $: console.log('PROFILE MANAGER: ', $profileManager)
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.Welcome}
