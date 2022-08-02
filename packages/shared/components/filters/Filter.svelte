@@ -11,7 +11,7 @@
     let filterActive = false
     let modal: Modal
 
-    $: filterActive && modal?.toggle()
+    $: isChanged = JSON.stringify($filterStore) !== JSON.stringify(filter)
 
     function onSetFilters(): void {
         $filterStore = deepCopy(filter)
@@ -25,11 +25,11 @@
 </script>
 
 <div class="h-6 relative">
-    <TogglableButton icon="filter" bind:active={filterActive} />
+    <TogglableButton icon="filter" bind:active={filterActive} onClick={() => modal?.toggle()} />
 
-    <FilterModal bind:modal bind:filter {onSetFilters} {onClose}>
+    <FilterModal bind:modal bind:filter {isChanged} {onSetFilters} {onClose}>
         {#each Object.keys(filter) as filterUnit}
-            <FilterItem filterUnit={filter[filterUnit]} />
+            <FilterItem bind:filterUnit={filter[filterUnit]} />
         {/each}
     </FilterModal>
 </div>
