@@ -24,12 +24,12 @@
     }
 </script>
 
-<div class="relative">
+<div class="h-6 relative">
     <TogglableButton icon="filter" bind:active={filterActive} />
 
     <FilterModal bind:modal bind:filter {onSetFilters} {onClose}>
-        {#each Object.keys(filter) as filterItem}
-            <FilterItem filterItem={filter[filterItem]} />
+        {#each Object.keys(filter) as filterUnit}
+            <FilterItem filterUnit={filter[filterUnit]} />
         {/each}
     </FilterModal>
 </div>

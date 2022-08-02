@@ -20,8 +20,8 @@
 
 {#if assets}
     <div class="h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
-        <div class="w-full flex flex-row justify-between">
-            <Text classes="text-left mb-4" type={TextType.h5}>{localize('general.assets')}</Text>
+        <div class="w-full flex flex-row justify-between mb-4">
+            <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
         </div>
         <div class="flex-auto overflow-y-scroll h-1 -mr-5 pr-4 scroll-secondary">
