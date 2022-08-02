@@ -70,7 +70,17 @@
             : locale('popups.backup.notBackedUp')}
     </Text>
     <div class="w-full p-4 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
-        <Logo width="50%" logo="logo-stronghold" />
+        {#if $mobile}
+            <img
+                data-label="stronghold-illustration"
+                width="100%"
+                height="100%"
+                src="assets/illustrations/export-stronghold.png"
+                alt=""
+            />
+        {:else}
+            <Logo width="50%" logo="logo-stronghold" />
+        {/if}
     </div>
     <div class="w-full {$mobile ? 'my-5' : 'text-center my-6'} md:px-8">
         <Text overrideColor={$mobile === false} type="h5" classes="mb-2 text-{color}-600">
