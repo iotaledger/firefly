@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { selectedAccountId } from '@core/account'
     import { localize } from '@core/i18n'
     import {
         hideAsset,
@@ -37,7 +36,7 @@
 
     const handleUnhide = () => {
         unhideAsset(asset.id)
-        hideActivitiesForHiddenAssets(get(selectedAccountId))
+        hideActivitiesForHiddenAssets()
         updatePopupProps({
             asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
         })
@@ -46,7 +45,7 @@
 
     function handleHide() {
         hideAsset(asset.id)
-        hideActivitiesForHiddenAssets(get(selectedAccountId))
+        hideActivitiesForHiddenAssets()
         updatePopupProps({
             asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
         })

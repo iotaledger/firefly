@@ -3,13 +3,19 @@
 
     export let active: boolean
     export let icon: string
+    export let onClick: () => void = () => {}
+
+    function clickToggle() {
+        active = !active
+        onClick && onClick()
+    }
 </script>
 
-<button on:click={() => (active = !active)}>
+<button on:click={clickToggle}>
     <Icon
         {icon}
-        classes="hover:text-gray-600 dark:hover:text-gray-100 cursor-pointer ml-2 {active
+        classes="cursor-pointer ml-2 {active
             ? 'text-blue-500 dark:text-blue-500'
-            : 'text-gray-500 dark:text-white'}"
+            : 'text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-100 '}"
     />
 </button>
