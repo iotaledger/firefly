@@ -68,9 +68,11 @@
     )
 
     void App.addListener('backButton', () => {
-        const next = $backButtonStore.pop()
-        if (next) {
-            next()
+        if (!$popupState.hideClose) {
+            const next = $backButtonStore.pop()
+            if (next) {
+                next()
+            }
         }
     })
 
