@@ -1,14 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { profiles, ProfileType } from '@core/profile'
-import {
-    onboardingProfile,
-    ProfileRecoveryType,
-    profileRecoveryType,
-    ProfileSetupType,
-    profileSetupType,
-    strongholdPassword,
-} from '@contexts/onboarding'
+import { onboardingProfile, ProfileRecoveryType, ProfileSetupType, strongholdPassword } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
 import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from './enums'
@@ -40,24 +33,16 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 nextRoute = OnboardingRoute.ProfileSetup
                 break
             case OnboardingRoute.ProfileSetup: {
-                const profileType = get(onboardingProfile)?.type
-                if (profileType) {
+                const profileName = get(onboardingProfile)?.name
+                if (profileName) {
+                    const profileType = get(onboardingProfile)?.type
                     if (profileType === ProfileType.Software) {
                         nextRoute = OnboardingRoute.PasswordSetup
-                    } else if (profileType === ProfileType.Ledger) {
+                    } else {
                         nextRoute = OnboardingRoute.Protection
                     }
-                }
-
-                const _profileRecoveryType = get(profileRecoveryType)
-                if (
-                    !this.hasCompletedRecovery &&
-                    (_profileRecoveryType === ProfileRecoveryType.Mnemonic ||
-                        _profileRecoveryType === ProfileRecoveryType.Stronghold)
-                ) {
+                } else {
                     nextRoute = OnboardingRoute.ProfileRecovery
-                } else if (_profileRecoveryType === ProfileRecoveryType.FireflyLedger) {
-                    nextRoute = OnboardingRoute.LedgerSetup
                 }
                 break
             }

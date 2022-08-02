@@ -1,11 +1,9 @@
 import { get, writable } from 'svelte/store'
 
-import { isGettingMigrationData, profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
-// import { getMigrationData } from '@lib/migration'
+import { isGettingMigrationData, onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
 import { onboardingRouter } from '../onboarding-router'
 import { ProfileRecoveryRoute } from '../enums'
-import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
 
 export const profileRecoveryRoute = writable<ProfileRecoveryRoute>(null)
@@ -22,19 +20,18 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
         profileRecoveryRoute.set(getInitialRoute() ?? ProfileRecoveryRoute.TextImport)
     }
 
-    next(event?: FireflyEvent): void {
+    next(): void {
         let nextRoute: ProfileRecoveryRoute
-        const params = event || {}
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case ProfileRecoveryRoute.TextImport: {
-                const _profileRecoveryType = get(profileRecoveryType)
+                const _profileRecoveryType = get(onboardingProfile)?.recoveryType
                 if (_profileRecoveryType === ProfileRecoveryType.Seed) {
                     isGettingMigrationData.set(true)
                     // await getMigrationData(migrationSeed)
                     isGettingMigrationData.set(false)
-                    this.parentRouter.next({ profileRecoveryType: _profileRecoveryType })
+                    this.parentRouter.next()
                 } else if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
                     nextRoute = ProfileRecoveryRoute.Success
                 }
@@ -49,12 +46,12 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
                 break
             }
             case ProfileRecoveryRoute.LedgerImport: {
-                const _profileRecoveryType = params?.profileRecoveryType
-                this.parentRouter.next({ profileRecoveryType: _profileRecoveryType })
+                // const _profileRecoveryType = get(onboardingProfile)?.recoveryType
+                // this.parentRouter.next()
                 break
             }
             case ProfileRecoveryRoute.Success:
-                this.parentRouter.next({ profileRecoveryType: get(profileRecoveryType) })
+                this.parentRouter.next()
                 break
         }
 
@@ -63,7 +60,7 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
 }
 
 function getInitialRoute(): ProfileRecoveryRoute {
-    switch (get(profileRecoveryType)) {
+    switch (get(onboardingProfile)?.recoveryType) {
         case ProfileRecoveryType.Mnemonic:
             return ProfileRecoveryRoute.TextImport
         case ProfileRecoveryType.Stronghold:
