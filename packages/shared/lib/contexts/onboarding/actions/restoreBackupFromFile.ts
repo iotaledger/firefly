@@ -6,7 +6,7 @@ import { Platform } from '@lib/platform'
 import { onboardingProfile } from '../stores'
 
 import { ProfileRecoveryType } from '../enums'
-import { importFilePath, isGettingMigrationData } from '../stores'
+import { isGettingMigrationData } from '../stores'
 
 export async function restoreBackupFromFile(backupFile: Buffer, password: string): Promise<void> {
     const profileRecoveryType = get(onboardingProfile)?.recoveryType
@@ -20,7 +20,7 @@ export async function restoreBackupFromFile(backupFile: Buffer, password: string
 
         isGettingMigrationData.set(false)
     } else {
-        await restoreBackup(get(importFilePath), password)
+        await restoreBackup(get(onboardingProfile)?.importFilePath, password)
         get(onboardingProfile).lastStrongholdBackupTime = new Date()
     }
 }

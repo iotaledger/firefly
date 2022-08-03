@@ -5,12 +5,11 @@
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter, ProfileRecoveryRouter } from '@core/router'
     import {
-        profileRecoveryType,
         restoreBackupFromFile,
         isGettingMigrationData,
         strongholdPassword,
         iotaProfileManager,
-        importFilePath,
+        onboardingProfile,
     } from '@contexts/onboarding'
 
     export let error = ''
@@ -25,7 +24,7 @@
             try {
                 await restoreBackupFromFile(importFile, password)
                 if ($iotaProfileManager) {
-                    await $iotaProfileManager.restoreBackup($importFilePath, password)
+                    await $iotaProfileManager.restoreBackup($onboardingProfile?.importFilePath, password)
                 }
 
                 $strongholdPassword = password
@@ -50,11 +49,11 @@
     <div slot="title">
         {#if $mobile}
             <Text type="h2" classes="mb-4">
-                {`${localize('general.import')} ${localize(`general.${$profileRecoveryType}`)}`}
+                {`${localize('general.import')} ${localize(`general.${$onboardingProfile?.recoveryType}`)}`}
             </Text>
         {:else}
             <Text type="h2" classes="mb-4">{localize('general.import')}</Text>
-            <Text type="h3" highlighted>{localize(`general.${$profileRecoveryType}`)}</Text>
+            <Text type="h3" highlighted>{localize(`general.${$onboardingProfile?.recoveryType}`)}</Text>
         {/if}
     </div>
     <div slot="leftpane__content">
