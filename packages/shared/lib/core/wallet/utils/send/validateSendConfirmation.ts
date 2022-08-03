@@ -4,16 +4,16 @@ import { convertUnixTimestampToDate, isValidExpirationDateTime } from '@core/uti
 import { OutputTypes } from '@iota/types'
 import { OutputOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
-import { calculateStorageDepositFromOutput } from '../outputs'
+import { getStorageDepositFromOutput } from '../outputs'
 
 export function validateSendConfirmation(outputOptions: OutputOptions, outputTypes: OutputTypes): void {
     const parseNumber = (value: string) => parseInt(value, 10) ?? 0
     const amount = parseNumber(outputTypes?.amount)
     const balance = parseNumber(get(selectedAccount)?.balances?.baseCoin.available)
-    const storageDeposit = calculateStorageDepositFromOutput(outputTypes, amount)
+    const [storageDeposit, giftedStorageDeposit] = getStorageDepositFromOutput(outputTypes)
     const expirationDateTime = convertUnixTimestampToDate(outputOptions?.unlocks?.expirationUnixTime)
 
-    if (balance < amount + storageDeposit) {
+    if (balance < amount + storageDeposit || balance < amount + giftedStorageDeposit) {
         throw new InsufficientFundsForStorageDepositError()
     } else if (expirationDateTime && !isValidExpirationDateTime(expirationDateTime)) {
         throw new InvalidExpirationDateTimeError()
