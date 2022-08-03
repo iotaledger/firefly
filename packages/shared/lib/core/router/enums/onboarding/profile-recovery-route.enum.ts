@@ -3,5 +3,5 @@ export enum ProfileRecoveryRoute {
     FileImport = 'fileImport',
     LedgerImport = 'ledgerImport',
     BackupPassword = 'backupPassword',
-    Success = 'Success',
+    Success = 'success',
 }

@@ -1,10 +1,11 @@
 import { get } from 'svelte/store'
 
-import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 import { Platform } from '@lib/platform'
 import { InvalidBackupDestinationError } from '@core/profile'
 import { backup } from '@core/profile-manager'
 import { getDefaultStrongholdName } from '@lib/utils'
+
+import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
 /**
  * Creates an initial backup for a profile's Stronghold.

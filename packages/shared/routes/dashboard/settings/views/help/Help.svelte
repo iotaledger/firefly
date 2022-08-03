@@ -1,37 +1,38 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
-    import { ExternalRoute, HelpAndInfoRoute } from '@core/router'
+    import { HelpAndInfoRoute } from '@core/router'
     import HelpSection from './HelpSection.svelte'
     import features from 'shared/features/features'
+    import { DISCORD_URL, DOCUMENTATION_URL, FAQ_URL, ISSUE_REPORT_URL } from '@contexts/settings'
 
     const settings: {
         component: unknown
         childRoute: HelpAndInfoRoute
         actionLocale: string
-        url: ExternalRoute
+        url: string
     }[] = [
         {
             component: HelpSection,
             childRoute: HelpAndInfoRoute.Documentation,
-            url: ExternalRoute.Documentation,
+            url: DOCUMENTATION_URL,
             actionLocale: 'readDocumentation',
         },
         {
             component: HelpSection,
             childRoute: HelpAndInfoRoute.Faq,
-            url: ExternalRoute.FAQ,
+            url: FAQ_URL,
             actionLocale: 'visitFaq',
         },
         {
             component: HelpSection,
             childRoute: HelpAndInfoRoute.Discord,
-            url: ExternalRoute.Discord,
+            url: DISCORD_URL,
             actionLocale: 'visitDiscord',
         },
         {
             component: HelpSection,
             childRoute: HelpAndInfoRoute.ReportAnIssue,
-            url: ExternalRoute.IssueReport,
+            url: ISSUE_REPORT_URL,
             actionLocale: 'reportAnIssue',
         },
     ]

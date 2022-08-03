@@ -2,9 +2,9 @@ import { get, writable } from 'svelte/store'
 
 import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
-import { onboardingRouter } from '../onboarding-router'
-import { LedgerSetupRoute } from '../enums'
-import { Subrouter } from './subrouter'
+import { LedgerSetupRoute } from '../../enums'
+import { onboardingRouter } from '../../onboarding-router'
+import { Subrouter } from '../subrouter'
 
 export const ledgerSetupRoute = writable<LedgerSetupRoute>(null)
 export const ledgerSetupRouter = writable<LedgerSetupRouter>(null)

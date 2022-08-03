@@ -2,9 +2,9 @@ import { get, writable } from 'svelte/store'
 
 import { isGettingMigrationData, onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
-import { onboardingRouter } from '../onboarding-router'
-import { ProfileRecoveryRoute } from '../enums'
-import { Subrouter } from './subrouter'
+import { ProfileRecoveryRoute } from '../../enums'
+import { onboardingRouter } from '../../onboarding-router'
+import { Subrouter } from '../subrouter'
 
 export const profileRecoveryRoute = writable<ProfileRecoveryRoute>(null)
 export const profileRecoveryRouter = writable<ProfileRecoveryRouter>(null)

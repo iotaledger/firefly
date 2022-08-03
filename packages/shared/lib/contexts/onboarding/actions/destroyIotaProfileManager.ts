@@ -1,9 +1,10 @@
 import { get } from 'svelte/store'
 
-import { getStorageDirectoryOfProfiles } from '@core/profile'
 import { destroyProfileManager } from '@core/profile-manager'
-import { iotaProfileManager } from '@contexts/onboarding'
 import { Platform } from '@lib/platform'
+
+import { getIotaProfileManagerStorageDirectory } from '../helpers'
+import { iotaProfileManager } from '../stores'
 
 export async function destroyIotaProfileManager(): Promise<void> {
     const _iotaProfileManager = get(iotaProfileManager)
@@ -11,6 +12,6 @@ export async function destroyIotaProfileManager(): Promise<void> {
         return
     }
     destroyProfileManager(iotaProfileManager)
-    const storageDir = await getStorageDirectoryOfProfiles()
-    await Platform.removeProfileFolder(`${storageDir}/temp`)
+    const profilePath = await getIotaProfileManagerStorageDirectory()
+    await Platform.removeProfileFolder(profilePath)
 }

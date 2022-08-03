@@ -2,10 +2,10 @@ import { get, writable } from 'svelte/store'
 
 import { hasBundlesWithSpentAddresses, hasSingleBundle } from '@lib/migration'
 
-import { onboardingRouter } from '../onboarding-router'
-import { MigrationRoute } from '../enums'
-import { Subrouter } from './subrouter'
-import { FireflyEvent } from '../types'
+import { onboardingRouter } from '../../onboarding-router'
+import { MigrationRoute } from '../../enums'
+import { FireflyEvent } from '../../types'
+import { Subrouter } from '../subrouter'
 
 export const migrationRoute = writable<MigrationRoute>(null)
 export const migrationRouter = writable<MigrationRouter>(null)

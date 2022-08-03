@@ -98,13 +98,6 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 }
                 break
             }
-            // case OnboardingRoute.Balance:
-            //     if (get(profileRecoveryType) === ProfileRecoveryType.TrinityLedger) {
-            //         nextRoute = OnboardingRoute.Migration
-            //     } else {
-            //         nextRoute = OnboardingRoute.Password
-            //     }
-            //     break
             case OnboardingRoute.Migration:
                 nextRoute = OnboardingRoute.Congratulations
                 break

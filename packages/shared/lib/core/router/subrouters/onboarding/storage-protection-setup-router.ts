@@ -2,9 +2,9 @@ import { get, writable } from 'svelte/store'
 
 import { onboardingProfile, ProfileProtectionType } from '@contexts/onboarding'
 
-import { onboardingRouter } from '../onboarding-router'
-import { ProtectionRoute } from '../enums'
-import { Subrouter } from './subrouter'
+import { onboardingRouter } from '../../onboarding-router'
+import { ProtectionRoute } from '../../enums'
+import { Subrouter } from '../subrouter'
 
 export const storageProtectionSetupRoute = writable<ProtectionRoute>(null)
 export const storageProtectionSetupRouter = writable<StorageProtectionSetupRouter>(null)

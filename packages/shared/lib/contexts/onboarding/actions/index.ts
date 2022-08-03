@@ -1,5 +1,5 @@
 export * from './backupInitialStronghold'
-export * from './cleanupNewProfileManager'
+export * from './cleanupOnboardingProfileManager'
 export * from './cleanupOnboarding'
 export * from './completeOnboardingProcess'
 export * from './clearStrongholdPasswordForOnboarding'

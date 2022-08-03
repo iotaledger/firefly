@@ -1,3 +1,3 @@
 export enum StrongholdSetupRoute {
-    SetupStrongholdPassword = 'setPassword',
+    SetupStrongholdPassword = 'setupStrongholdPassword',
 }

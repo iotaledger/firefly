@@ -114,11 +114,11 @@ graph TD;
     F -- Yes --> id13
     id9 --> id11
     id11 --> G{Is software profile?}
-    G -- Yes --> P{Is recovered profile?}
-    P -- Yes --> Q{Is Stronghold-based recovery?}
+    G -- Yes --> P{Is new profile?}
+    P -- No --> Q{Is Stronghold-based recovery?}
     Q -- Yes --> id22
     Q -- No --> id21
-    P -- No --> id21
+    P -- Yes --> id21
     
     G -- No --> id22
     
@@ -136,7 +136,7 @@ graph TD;
     I -- No --> id23 --> id24
     id24 --> J{Is claimed profile?}
     J -- Yes --> id25
-    J -- No --> N
+    J -- No --> R{Is Stronghold-based recovery?}
     H -- No --> K{Is claimed profile?}
     K -- Yes --> id25
     K -- No --> L{Is new profile?}
@@ -146,7 +146,15 @@ graph TD;
     N -- Yes --> id27
     N -- No --> id20
     
-    id25 --> id26 --> N
+    id25 --> id26 --> R
+    R -- Yes --> id28
+    R -- No --> S{Is Ledger profile?}
+    S -- Yes --> T{Is new profile?}
+    T -- Yes --> id27
+    T -- No --> U{Is claimed profile?}
+    U -- Yes --> id28
+    U -- No --> id27
+    S -- No --> id20
     
     id27 --> id28 --> id29
 ```

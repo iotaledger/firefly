@@ -3,9 +3,9 @@ import { get, writable } from 'svelte/store'
 import { ProfileType } from '@core/profile'
 import { onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 
-import { ProfileSetupRoute } from '../enums'
-import { onboardingRouter } from '../onboarding-router'
-import { Subrouter } from './subrouter'
+import { ProfileSetupRoute } from '../../enums'
+import { onboardingRouter } from '../../onboarding-router'
+import { Subrouter } from '../subrouter'
 
 export const profileSetupRoute = writable<ProfileSetupRoute>(null)
 export const profileSetupRouter = writable<ProfileSetupRouter>(null)
@@ -28,8 +28,6 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                     nextRoute = ProfileSetupRoute.SetupNew
                 } else if (setupType === ProfileSetupType.Recovered) {
                     nextRoute = ProfileSetupRoute.SetupRecovered
-                } else {
-                    console.error('No profile setup type was set.')
                 }
                 break
             }

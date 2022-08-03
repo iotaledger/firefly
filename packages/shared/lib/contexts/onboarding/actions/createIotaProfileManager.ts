@@ -1,9 +1,9 @@
 import { get } from 'svelte/store'
 
 import { COIN_TYPE, NetworkProtocol } from '@core/network'
-import { getStorageDirectoryOfProfiles } from '@core/profile'
 import { initialiseProfileManager } from '@core/profile-manager'
 
+import { getIotaProfileManagerStorageDirectory } from '../helpers'
 import { iotaProfileManager, onboardingProfile } from '../stores'
 
 export async function createIotaProfileManager(): Promise<void> {
@@ -12,8 +12,7 @@ export async function createIotaProfileManager(): Promise<void> {
         return
     }
 
-    const storageDir = await getStorageDirectoryOfProfiles()
-    const storagePath = `${storageDir}/temp`
+    const storagePath = await getIotaProfileManagerStorageDirectory()
     const coinType = COIN_TYPE[NetworkProtocol.IOTA]
     const clientOptions = profile?.clientOptions
     const secretManager = {

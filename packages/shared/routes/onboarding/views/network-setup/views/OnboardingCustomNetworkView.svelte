@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Animation, OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
     import {
-        cleanupNewProfileManager,
+        cleanupOnboardingProfileManager,
         initialiseProfileManagerFromOnboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
@@ -42,7 +42,7 @@
             if (err?.error?.includes('error sending request for url')) {
                 formError = localize('error.node.unabledToConnect')
                 updateOnboardingProfile({ clientOptions: null })
-                await cleanupNewProfileManager()
+                await cleanupOnboardingProfileManager()
             } else if (err?.type !== 'validationError') {
                 showAppNotification({
                     type: 'error',
@@ -56,7 +56,7 @@
 
     onMount(() => {
         updateOnboardingProfile({ clientOptions: null })
-        void cleanupNewProfileManager()
+        void cleanupOnboardingProfileManager()
     })
 </script>
 
