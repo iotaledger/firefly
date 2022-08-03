@@ -39,9 +39,7 @@
             <div class="-mr-4 h-full scroll-secondary">
                 {#if assets?.baseCoin || assets?.nativeTokens?.length > 0}
                     <VirtualList items={assetList} let:item>
-                        <div class="mb-2">
-                            <AssetTile onClick={() => handleAssetTileClick(item)} asset={item} />
-                        </div>
+                        <AssetTile classes="mb-2" onClick={() => handleAssetTileClick(item)} asset={item} />
                     </VirtualList>
                 {:else}
                     <div class="h-full flex flex-col items-center justify-center text-center">
