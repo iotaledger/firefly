@@ -1,7 +1,6 @@
 import { get, writable } from 'svelte/store'
 import { getLedgerStatus } from '@core/profile-manager'
 
-import { removeAddressChecksum } from './migration'
 import { closePopup, openPopup, popupState } from './popup'
 import { LedgerStatus } from '@iota/wallet'
 import { NotificationType } from './typings/notification'
@@ -9,8 +8,6 @@ import { NotificationType } from './typings/notification'
 import { localize } from '@core/i18n'
 
 import { isNewNotification, showAppNotification } from './notifications'
-
-const LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH = 90
 
 let intervalTimer
 
@@ -27,6 +24,7 @@ export enum LedgerConnectionState {
     MnemonicMismatch = 'mnemonicMismatch',
 }
 
+const LEDGER_STATUS_POLL_INTERVAL = 1500
 export const USE_LEDGER_SIMULATOR = false
 
 export const ledgerDeviceStatus = writable<LedgerExtendedStatus>({
@@ -80,7 +78,6 @@ export function determineLedgerDeviceState(status: LedgerStatus): LedgerConnecti
 }
 
 export function promptUserToConnectLedger(
-    legacy: boolean = false,
     onConnected: () => void | Promise<void> = () => {},
     onCancel: () => void = () => {},
     overridePopup: boolean = false
@@ -91,30 +88,18 @@ export function promptUserToConnectLedger(
     const _onConnected = () => {
         void onConnected()
     }
+
     const _onDisconnected = () => {
         if (!get(popupState).active || overridePopup) {
             openLedgerNotConnectedPopup(
-                legacy,
                 onCancel,
-                // TODO: remove dummy code & replace w/ pollLedgerDeviceStatus
-                () => {
-                    _onCancel()
-                    _onConnected()
-                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                    _onDisconnected()
-                },
-                // pollLedgerDeviceStatus(
-                //     legacy,
-                //     LEDGER_STATUS_POLL_INTERVAL_ON_DISCONNECT,
-                //     _onConnected,
-                //     _onDisconnected,
-                //     _onCancel
-                // ),
+                () => pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, _onConnected, _onDisconnected, _onCancel),
                 overridePopup
             )
         }
     }
-    // getLedgerDeviceStatus(legacy, _onConnected, _onDisconnected, _onCancel)
+
+    getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
 }
 
 export function displayNotificationForLedgerProfile(
@@ -170,7 +155,7 @@ export function isLedgerError(error: { name; type }): boolean {
 export const isPollingLedgerDeviceStatus = writable<boolean>(false)
 
 export function pollLedgerDeviceStatus(
-    pollInterval: number = 1000,
+    pollInterval: number = LEDGER_STATUS_POLL_INTERVAL,
     _onConnected: () => void = () => {},
     _onDisconnected: () => void = () => {},
     _onCancel: () => void = () => {}
@@ -186,7 +171,6 @@ export function pollLedgerDeviceStatus(
 }
 
 function openLedgerNotConnectedPopup(
-    legacy: boolean = false,
     cancel: () => void = () => {},
     poll: () => void = () => {},
     overridePopup: boolean = false
@@ -196,7 +180,6 @@ function openLedgerNotConnectedPopup(
             type: 'ledgerNotConnected',
             hideClose: true,
             props: {
-                legacy,
                 handleClose: () => cancel(),
                 poll,
             },
@@ -210,12 +193,4 @@ export function stopPollingLedgerStatus(): void {
         intervalTimer = null
         isPollingLedgerDeviceStatus.set(false)
     }
-}
-
-export function formatAddressForLedger(address: string, removeChecksum: boolean = false): string {
-    if (address.length === LEGACY_ADDRESS_WITH_CHECKSUM_LENGTH && removeChecksum) {
-        address = removeAddressChecksum(address)
-    }
-    const len = address.length
-    return `${address.slice(0, len / 2)}\n${address.slice(len / 2, len)}`
 }

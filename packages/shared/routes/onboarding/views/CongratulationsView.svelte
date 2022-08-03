@@ -53,7 +53,7 @@
                  * because the last app the user had open was the legacy one
                  */
                 if ($profileRecoveryType === ProfileRecoveryType.TrinityLedger) {
-                    promptUserToConnectLedger(false, advanceView)
+                    promptUserToConnectLedger(advanceView)
                 } else {
                     advanceView()
                 }

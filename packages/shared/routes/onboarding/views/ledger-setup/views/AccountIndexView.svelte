@@ -73,7 +73,7 @@
         function _onCancel(): void {
             busy = false
         }
-        promptUserToConnectLedger(true, _onConnected, _onCancel)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleBackClick(): void {

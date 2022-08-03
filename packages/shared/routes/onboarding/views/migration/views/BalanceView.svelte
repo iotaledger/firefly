@@ -179,7 +179,7 @@
                     })
             }
             const _onCancel = () => (isCheckingForBalance = false)
-            promptUserToConnectLedger(true, _onConnected, _onCancel)
+            promptUserToConnectLedger(_onConnected, _onCancel)
         } else {
             // getMigrationData($seed, $data.lastCheckedAddressIndex)
             //     .then(() => {

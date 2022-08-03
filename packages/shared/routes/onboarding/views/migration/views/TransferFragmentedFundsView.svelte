@@ -100,7 +100,7 @@
     function handleRerunClick(): void {
         if (legacyLedger) {
             const _onConnected = () => rerunMigration()
-            promptUserToConnectLedger(true, _onConnected)
+            promptUserToConnectLedger(_onConnected)
         } else {
             rerunMigration()
         }
@@ -277,7 +277,7 @@
     function handleMigrateClick(): void {
         if (legacyLedger) {
             const _onConnected = () => migrateFunds()
-            promptUserToConnectLedger(true, _onConnected)
+            promptUserToConnectLedger(_onConnected)
         } else {
             migrateFunds()
         }

@@ -127,7 +127,7 @@
         if ($isSoftwareProfile) {
             openStakingConfirmationPopup()
         } else {
-            promptUserToConnectLedger(false, () => openStakingConfirmationPopup(), undefined, true)
+            promptUserToConnectLedger(() => openStakingConfirmationPopup(), undefined, true)
         }
     }
 
@@ -150,7 +150,7 @@
         if ($isSoftwareProfile) {
             void checkStronghold(_unstake)
         } else {
-            promptUserToConnectLedger(false, () => _unstake(), undefined, true)
+            promptUserToConnectLedger(() => _unstake(), undefined, true)
         }
     }
 

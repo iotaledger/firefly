@@ -23,7 +23,7 @@
             else dispatch('next')
         }
 
-        promptUserToConnectLedger(true, _onConnected, _onCancel)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleBackClick(): void {
