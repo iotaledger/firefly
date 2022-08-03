@@ -9,13 +9,11 @@
         selectedAccountActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
-    import { ProfileSetupType, profileSetupType } from '@contexts/onboarding'
     import { ActivityTile, Text, TextInput, TogglableButton, Filter } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
     import { debounce } from 'shared/lib/utils'
-    import { isFirstSessionSync } from 'shared/lib/wallet'
 
     let searchActive = false
     let inputElement: HTMLInputElement
@@ -29,24 +27,6 @@
         debounce(() => {
             $activitySearchTerm = searchValue
         })()
-    }
-
-    function shouldShowFirstSync(): boolean {
-        /**
-         * NOTE: The following conditions must be satisfied
-         * for the "syncing history, ..." message to show:
-         *
-         *      1. It must be the first sync of the user's session
-         *      2. The wallet setup type must exist (a null value indicates an existing profile)
-         *      3. The wallet setup type cannot be new (if it's new then there's no tx history to sync)
-         *      4. Account must have no transactions (the length of $transactions must be zero)
-         */
-        return (
-            $isFirstSessionSync &&
-            $profileSetupType &&
-            $profileSetupType !== ProfileSetupType.New &&
-            $selectedAccountActivities.length === 0
-        )
     }
 </script>
 
@@ -82,7 +62,7 @@
     </div>
     <div class="overflow-y-scroll flex-auto h-1 space-y-4 -mr-5 pr-4 scroll-secondary">
         <div class="-mr-4 overflow-x-visible">
-            {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
+            {#if $selectedAccount.isSyncing && $selectedAccountActivities.length === 0}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
             {:else if $groupedActivities.length}
                 <div class="space-y-4">

@@ -80,7 +80,6 @@
                 } else {
                     statusMessage = localize('views.importFromText.seedDetected')
                     value = trimmedContent
-                    // seedChecksum = await asyncGetLegacySeedChecksum(value)
                 }
             } else if (type === Type.Mnemonic) {
                 const mnemonicValidations = isMnemonic(words)
@@ -118,12 +117,6 @@
     />
     <div class="flex flex-row items-start justify-between">
         <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
-        {#if seedChecksum}
-            <div class="flex flex-row items-center ml-2">
-                <Text type="p" secondary classes="mr-1">{localize('views.importFromText.checksum')}:</Text>
-                <Text type="p" highlighted>{seedChecksum}</Text>
-            </div>
-        {/if}
     </div>
 </div>
 
