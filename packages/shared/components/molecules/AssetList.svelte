@@ -1,11 +1,22 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { assetFilter, IAccountAssets } from '@core/wallet'
+    import { assetFilter, IAccountAssets, IAsset } from '@core/wallet'
     import { openPopup } from '@lib/popup'
+    import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text, Filter } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
 
     export let assets: IAccountAssets
+
+    let assetList: IAsset[]
+    $: {
+        const list = []
+        if (assets?.baseCoin) {
+            list.push(assets.baseCoin)
+        }
+        list.push(...assets?.nativeTokens)
+        assetList = list
+    }
 
     function handleAssetTileClick(asset): void {
         openPopup({
@@ -24,15 +35,14 @@
             <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
         </div>
-        <div class="flex-auto overflow-y-scroll h-1 -mr-5 pr-4 scroll-secondary">
-            <div class="-mr-4 overflow-x-visible space-y-2 ">
+        <div class="flex-auto h-1 -mr-5 pr-4">
+            <div class="-mr-4 h-full scroll-secondary">
                 {#if assets?.baseCoin || assets?.nativeTokens?.length > 0}
-                    {#if assets?.baseCoin}
-                        <AssetTile onClick={() => handleAssetTileClick(assets?.baseCoin)} asset={assets?.baseCoin} />
-                    {/if}
-                    {#each assets?.nativeTokens as asset}
-                        <AssetTile onClick={() => handleAssetTileClick(asset)} {asset} />
-                    {/each}
+                    <VirtualList items={assetList} let:item>
+                        <div class="mb-2">
+                            <AssetTile onClick={() => handleAssetTileClick(item)} asset={item} />
+                        </div>
+                    </VirtualList>
                 {:else}
                     <div class="h-full flex flex-col items-center justify-center text-center">
                         <Text secondary>{localize('general.noAssets')}</Text>
