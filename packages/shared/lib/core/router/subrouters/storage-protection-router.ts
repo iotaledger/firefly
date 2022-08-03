@@ -6,12 +6,12 @@ import { onboardingRouter } from '../onboarding-router'
 import { ProtectionRoute } from '../enums'
 import { Subrouter } from './subrouter'
 
-export const protectionRoute = writable<ProtectionRoute>(null)
-export const protectionRouter = writable<ProtectionRouter>(null)
+export const storageProtectionRoute = writable<ProtectionRoute>(null)
+export const storageProtectionRouter = writable<StorageProtectionRouter>(null)
 
-export class ProtectionRouter extends Subrouter<ProtectionRoute> {
+export class StorageProtectionRouter extends Subrouter<ProtectionRoute> {
     constructor() {
-        super(ProtectionRoute.SetupPinProtection, protectionRoute, get(onboardingRouter))
+        super(ProtectionRoute.SetupPinProtection, storageProtectionRoute, get(onboardingRouter))
     }
 
     next(): void {

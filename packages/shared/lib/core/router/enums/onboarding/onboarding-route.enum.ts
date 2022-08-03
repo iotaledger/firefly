@@ -4,11 +4,11 @@ export enum OnboardingRoute {
     LedgerSetup = 'ledgerSetup',
     Migration = 'migrate',
     NetworkSetup = 'network',
-    PasswordSetup = 'password',
+    StrongholdSetup = 'strongholdSetup',
     ProfileBackup = 'backup',
     ProfileRecovery = 'recovery',
     ProfileSetup = 'profileSetup',
-    Protection = 'protect',
+    StorageProtection = 'storageProtection',
     ShimmerClaiming = 'claimRewards',
     Welcome = 'welcome',
 }

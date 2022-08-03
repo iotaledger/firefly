@@ -9,11 +9,6 @@
             "body": "Please review the Privacy Policy and Terms of Service.",
             "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
         },
-        "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
-        },
         "languageAndAppearance": {
             "title": "Language & appearance",
             "body": "Choose your language and theme"
@@ -934,7 +929,7 @@
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
-        
+
     },
     "charts": {
         "incomingMi": "Incoming {value}",

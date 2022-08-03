@@ -6,12 +6,12 @@
         LedgerSetupRouter,
         MigrationRouter,
         NetworkSetupRouter,
-        PasswordSetupRouter,
         ProfileBackupRouter,
         ProfileRecoveryRouter,
         ProfileSetupRouter,
-        ProtectionRouter,
         ShimmerClaimingRouter,
+        StorageProtectionRouter,
+        StrongholdSetupRouter,
 
         // views
         CongratulationsView,
@@ -48,13 +48,13 @@
     <Transition>
         <LedgerSetupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.PasswordSetup}
+{:else if $onboardingRoute === OnboardingRoute.StrongholdSetup}
     <Transition>
-        <PasswordSetupRouter />
+        <StrongholdSetupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Protection}
+{:else if $onboardingRoute === OnboardingRoute.StorageProtection}
     <Transition transition={false}>
-        <ProtectionRouter />
+        <StorageProtectionRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.ProfileBackup}
     <Transition transition={false}>
