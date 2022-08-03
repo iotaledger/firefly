@@ -15,7 +15,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
     hasCompletedRecovery: boolean = false
 
     constructor() {
-        super(hasCompletedOnboardingBefore() ? OnboardingRoute.NetworkSetup : OnboardingRoute.Welcome, onboardingRoute)
+        super(hasCompletedOnboardingBefore() ? OnboardingRoute.NetworkSetup : OnboardingRoute.AppSetup, onboardingRoute)
     }
 
     next(): void {
@@ -23,9 +23,6 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case OnboardingRoute.Welcome:
-                nextRoute = OnboardingRoute.AppSetup
-                break
             case OnboardingRoute.AppSetup:
                 nextRoute = OnboardingRoute.NetworkSetup
                 break

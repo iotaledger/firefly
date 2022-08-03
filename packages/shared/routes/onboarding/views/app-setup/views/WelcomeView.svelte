@@ -4,10 +4,10 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
-    import { onboardingRouter } from '@core/router'
+    import { appSetupRouter } from '@core/router'
 
     function handleContinueClick(): void {
-        $onboardingRouter.next()
+        $appSetupRouter.next()
     }
 </script>
 

@@ -9,7 +9,7 @@ export const appSetupRouter = writable<AppSetupRouter>(null)
 
 export class AppSetupRouter extends Subrouter<AppSetupRoute> {
     constructor() {
-        super(AppSetupRoute.Legal, appSetupRoute, get(onboardingRouter))
+        super(AppSetupRoute.Welcome, appSetupRoute, get(onboardingRouter))
     }
 
     next(): void {
@@ -17,10 +17,10 @@ export class AppSetupRouter extends Subrouter<AppSetupRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case AppSetupRoute.Legal:
-                nextRoute = AppSetupRoute.CrashReporting
+            case AppSetupRoute.Welcome:
+                nextRoute = AppSetupRoute.Legal
                 break
-            case AppSetupRoute.CrashReporting:
+            case AppSetupRoute.Legal:
                 nextRoute = AppSetupRoute.LanguageAndAppearance
                 break
             case AppSetupRoute.LanguageAndAppearance:

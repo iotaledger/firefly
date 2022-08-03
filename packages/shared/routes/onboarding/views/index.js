@@ -10,4 +10,3 @@ export * from './storage-protection-setup'
 export * from './stronghold-setup'
 
 export { default as CongratulationsView } from './CongratulationsView.svelte'
-export { default as WelcomeView } from './WelcomeView.svelte'

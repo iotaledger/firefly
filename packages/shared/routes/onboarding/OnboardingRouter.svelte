@@ -15,7 +15,6 @@
 
         // views
         CongratulationsView,
-        WelcomeView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
 
@@ -28,11 +27,7 @@
     $: console.log('PROFILE MANAGER: ', $profileManager)
 </script>
 
-{#if $onboardingRoute === OnboardingRoute.Welcome}
-    <Transition>
-        <WelcomeView />
-    </Transition>
-{:else if $onboardingRoute === OnboardingRoute.AppSetup}
+{#if $onboardingRoute === OnboardingRoute.AppSetup}
     <Transition>
         <AppSetupRouter />
     </Transition>
