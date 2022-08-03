@@ -103,13 +103,13 @@
             </div>
         {/if}
     </div>
-    <div class="flex-auto h-1 space-y-4 -mr-5 pr-4 scroll-secondary">
-        <div class="-mr-4 h-full">
+    <div class="flex-auto h-1 space-y-4 -mr-5 pr-4">
+        <div class="-mr-4 h-full scroll-secondary">
             {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
             {:else if activityListWithTitles.length}
                 <VirtualList items={activityListWithTitles} let:item>
-                    <div class="mb-2 mr-2">
+                    <div class="mb-2">
                         {#if item.title}
                             <Text fontWeight={FontWeightText.semibold} color="gray-600" classes="my-2">
                                 {item.title} • {item.amount}
