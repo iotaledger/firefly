@@ -14,7 +14,6 @@
     $: profileName, (error = '') // Error clears when profileName changes
 
     function handleBackClick(): void {
-        updateOnboardingProfile({ name: '' })
         $profileSetupRouter.previous()
     }
 

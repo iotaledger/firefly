@@ -5,6 +5,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
+    import { destroyProfileManager } from '@core/profile-manager'
     import {
         initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
@@ -23,6 +24,7 @@
     }
 
     onMount(() => {
+        destroyProfileManager()
         updateOnboardingProfile({ type: null })
     })
 </script>

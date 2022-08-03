@@ -25,8 +25,8 @@
     }
 
     onMount(() => {
-        updateOnboardingProfile({ type: null, recoveryType: null })
         destroyProfileManager()
+        updateOnboardingProfile({ type: null, recoveryType: null })
     })
 </script>
 

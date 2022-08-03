@@ -4,6 +4,7 @@
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
     import {
         createIotaProfileManager,
@@ -30,8 +31,9 @@
     }
 
     onMount(() => {
+        destroyProfileManager()
+        destroyIotaProfileManager()
         updateOnboardingProfile({ type: null, recoveryType: null })
-        void destroyIotaProfileManager()
     })
 </script>
 
