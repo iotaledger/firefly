@@ -9,7 +9,7 @@
     } from '@core/app'
     import { localize } from '@core/i18n'
     import { COIN_TYPE, NetworkProtocol, NetworkType } from '@core/network'
-    import { activeProfile, login, resetActiveProfile, getStorageDirectoryOfProfile } from '@core/profile'
+    import { activeProfile, login, resetActiveProfile, getStorageDirectoryOfProfile, ProfileType } from '@core/profile'
     import { initialiseProfileManager } from '@core/profile-manager'
     import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
     import { Platform } from '@lib/platform'
@@ -95,6 +95,7 @@
         }
         if (!hasReachedMaxAttempts) {
             const profile = $activeProfile
+
             isBusy = true
 
             Platform.PincodeManager.verify(profile.id, pinCode)
@@ -106,9 +107,14 @@
                                     path,
                                     COIN_TYPE[profile.networkProtocol],
                                     $activeProfile.clientOptions,
-                                    {
-                                        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
-                                    }
+                                    profile.type === ProfileType.Ledger
+                                        ? {
+                                              // TODO: Use a global constant for this. This boolean determines if wallet-rs should look for simulator or device
+                                              LedgerNano: true,
+                                          }
+                                        : {
+                                              Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
+                                          }
                                 )
                                 // TODO: set storage password with profile manager api
                                 // api.setStoragePassword(pinCode, {
