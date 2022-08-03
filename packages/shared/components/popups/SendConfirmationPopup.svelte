@@ -92,7 +92,8 @@
                 value: null,
             },
         })
-        const [_storageDeposit, _giftedStorageDeposit] = getStorageDepositFromOutput(preparedOutput)
+        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
+            getStorageDepositFromOutput(preparedOutput)
         storageDeposit = _storageDeposit
         giftedStorageDeposit = _giftedStorageDeposit
     }

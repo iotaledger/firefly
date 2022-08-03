@@ -112,7 +112,7 @@ export class Activity implements IActivity {
         const asset = getPersistedAsset(this.assetId)
         this.isAssetHidden = !asset || asset.hidden
 
-        const [storageDeposit, giftedStorageDeposit] = getStorageDepositFromOutput(output)
+        const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
         this.storageDeposit = storageDeposit
         this.giftedStorageDeposit = giftedStorageDeposit
         this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
@@ -175,7 +175,7 @@ export class Activity implements IActivity {
         const asset = getPersistedAsset(this.assetId)
         this.isAssetHidden = !asset || asset.hidden
 
-        const [storageDeposit, giftedStorageDeposit] = getStorageDepositFromOutput(output)
+        const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
         this.storageDeposit = storageDeposit
         this.giftedStorageDeposit = giftedStorageDeposit
         this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
