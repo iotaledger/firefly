@@ -5,12 +5,16 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
-    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        initialiseProfileManagerFromOnboardingProfile,
+        onboardingProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
 
     function onProfileTypeSelectionClick(type: ProfileType): void {
         updateOnboardingProfile({ type })
-        // TODO: Initialise profile manager here since we have all of the necessary configuration parameters!
+        initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
 
