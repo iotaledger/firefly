@@ -32,6 +32,7 @@ export async function completeOnboardingProcess(): Promise<void> {
     }
 
     await createNewAccount()
-    void login()
+    const recoverAccounts = profileSetupType !== ProfileSetupType.New
+    void login(recoverAccounts)
     void cleanupOnboarding()
 }

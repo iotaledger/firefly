@@ -1,28 +1,20 @@
-import { getAndUpdateNodeInfo } from '@core/network'
-import { onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
-import { isStrongholdUnlocked } from '@core/profile-manager'
-import {
-    // setStrongholdPasswordClearInterval,
-    startBackgroundSync,
-    subscribe as subscribeToWalletEvents,
-} from '@core/profile-manager/api'
 import { get } from 'svelte/store'
-import {
-    INITIAL_ACCOUNT_GAP_LIMIT,
-    INITIAL_ADDRESS_GAP_LIMIT,
-    // STRONGHOLD_PASSWORD_CLEAR_INTERVAL,
-} from '../../constants'
+
+import { getAndUpdateNodeInfo } from '@core/network'
+import { isStrongholdUnlocked } from '@core/profile-manager'
+import { startBackgroundSync, subscribe as subscribeToWalletEvents } from '@core/profile-manager/api'
+
+import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT } from '../../constants'
 import { activeProfile, setTimeStrongholdLastUnlocked } from '../../stores'
 import { loadAccounts } from './loadAccounts'
 import { recoverAndLoadAccounts } from './recoverAndLoadAccounts'
 
-export async function login(): Promise<void> {
+export async function login(recoverAccounts?: boolean): Promise<void> {
     const { loggedIn, lastActiveAt, id, isStrongholdLocked, type } = get(activeProfile)
     if (id) {
         loggedIn.set(true)
         await getAndUpdateNodeInfo()
 
-        const recoverAccounts = get(onboardingProfile)?.setupType !== ProfileSetupType.New
         if (recoverAccounts) {
             void recoverAndLoadAccounts(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
         } else {
