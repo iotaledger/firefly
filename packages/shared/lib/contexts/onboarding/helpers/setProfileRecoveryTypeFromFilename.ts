@@ -1,11 +1,11 @@
-import { seedvaultRegex, strongholdRegex } from '../constants'
+import { SEEDVAULT_REGEX, STRONGHOLD_REGEX } from '../constants'
 import { ProfileRecoveryType } from '../enums'
 import { updateOnboardingProfile } from '../stores'
 
 export function setProfileRecoveryTypeFromFilename(filename: string): void {
-    if (seedvaultRegex.test(filename)) {
+    if (SEEDVAULT_REGEX.test(filename)) {
         updateOnboardingProfile({ recoveryType: ProfileRecoveryType.SeedVault })
-    } else if (strongholdRegex.test(filename)) {
+    } else if (STRONGHOLD_REGEX.test(filename)) {
         updateOnboardingProfile({ recoveryType: ProfileRecoveryType.Stronghold })
     }
 }

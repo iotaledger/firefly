@@ -1,1 +1,1 @@
-export const strongholdRegex = /\.(stronghold)$/i
+export const STRONGHOLD_REGEX = /\.(stronghold)$/i

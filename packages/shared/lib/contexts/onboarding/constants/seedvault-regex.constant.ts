@@ -1,1 +1,1 @@
-export const seedvaultRegex = /\.(kdbx)$/i
+export const SEEDVAULT_REGEX = /\.(kdbx)$/i
