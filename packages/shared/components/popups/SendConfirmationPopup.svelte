@@ -11,7 +11,6 @@
     import {
         ActivityDirection,
         ActivityType,
-        calculateStorageDepositFromOutput,
         getOutputOptions,
         IAsset,
         InclusionState,
@@ -20,6 +19,7 @@
         validateSendConfirmation,
         generateRawAmount,
         selectedAccountAssets,
+        getStorageDepositFromOutput,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
@@ -41,6 +41,7 @@
 
     let expirationDate: Date
     let storageDeposit = 0
+    let giftedStorageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
@@ -67,7 +68,7 @@
         inclusionState: InclusionState.Pending,
         metadata,
         rawAmount,
-        storageDeposit: storageDeposit,
+        storageDeposit: giftStorageDeposit ? giftedStorageDeposit : storageDeposit,
         subject: recipient,
         amount,
         tag,
@@ -91,7 +92,9 @@
                 value: null,
             },
         })
-        storageDeposit = calculateStorageDepositFromOutput(preparedOutput, rawAmount)
+        const [_storageDeposit, _giftedStorageDeposit] = getStorageDepositFromOutput(preparedOutput)
+        storageDeposit = _storageDeposit
+        giftedStorageDeposit = _giftedStorageDeposit
     }
 
     async function validateAndSendOutput(): Promise<void> {

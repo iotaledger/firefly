@@ -38,8 +38,8 @@
     export let amount: string = null
     export let rawAmount: number
     export let unit: string
-
     export let storageDeposit = 0
+    export let giftedStorageDeposit = 0
     export let subject: Subject = null
     export let tag: string = null
     export let time: Date = null
@@ -56,11 +56,19 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
+    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(
+        giftedStorageDeposit ?? 0,
+        BASE_TOKEN[$activeProfile?.networkProtocol]
+    )
+
     $: detailsList = {
         ...(transactionTime && { transactionTime }),
         ...(metadata && { metadata }),
         ...(tag && { tag }),
-        ...((storageDeposit || storageDeposit === 0) && { storageDeposit: formattedStorageDeposit }),
+        ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
+            storageDeposit: formattedStorageDeposit,
+        }),
+        ...(giftedStorageDeposit && { giftedStorageDeposit: formattedGiftedStorageDeposit }),
         ...(expirationTime && { expirationTime }),
         ...(claimedTime && { claimedTime }),
     }

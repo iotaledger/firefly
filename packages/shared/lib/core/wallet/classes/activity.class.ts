@@ -66,6 +66,7 @@ export class Activity implements IActivity {
     tag?: string
 
     storageDeposit?: number
+    giftedStorageDeposit?: number
     expirationDate?: Date
     isAsync: boolean
     asyncStatus: ActivityAsyncStatus
@@ -111,7 +112,9 @@ export class Activity implements IActivity {
         const asset = getPersistedAsset(this.assetId)
         this.isAssetHidden = !asset || asset.hidden
 
-        this.storageDeposit = getStorageDepositFromOutput(output)
+        const [storageDeposit, giftedStorageDeposit] = getStorageDepositFromOutput(output)
+        this.storageDeposit = storageDeposit
+        this.giftedStorageDeposit = giftedStorageDeposit
         this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
 
         this.metadata = getMetadataFromOutput(output)
@@ -172,7 +175,9 @@ export class Activity implements IActivity {
         const asset = getPersistedAsset(this.assetId)
         this.isAssetHidden = !asset || asset.hidden
 
-        this.storageDeposit = getStorageDepositFromOutput(output)
+        const [storageDeposit, giftedStorageDeposit] = getStorageDepositFromOutput(output)
+        this.storageDeposit = storageDeposit
+        this.giftedStorageDeposit = giftedStorageDeposit
         this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
         this.metadata = getMetadataFromOutput(output)
         this.tag = getTagFromOutput(output)
