@@ -14,6 +14,7 @@ import {
 import { activeProfile, setTimeStrongholdLastUnlocked } from '../../stores'
 import { loadAccounts } from './loadAccounts'
 import { recoverAndLoadAccounts } from './recoverAndLoadAccounts'
+import { ProfileType } from '@core/profile/enums'
 
 export async function login(recoverAccounts: boolean = false): Promise<void> {
     const { loggedIn, lastActiveAt, id, isStrongholdLocked, type } = get(activeProfile)
@@ -29,12 +30,14 @@ export async function login(recoverAccounts: boolean = false): Promise<void> {
 
         lastActiveAt.set(new Date())
 
-        const strongholdUnlocked = await isStrongholdUnlocked()
-        isStrongholdLocked.set(!strongholdUnlocked)
-        // TODO: enable once https://github.com/iotaledger/firefly/issues/3693 is resolved
-        // setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
-        if (strongholdUnlocked) {
-            setTimeStrongholdLastUnlocked()
+        if (type === ProfileType.Software) {
+            const strongholdUnlocked = await isStrongholdUnlocked()
+            isStrongholdLocked.set(!strongholdUnlocked)
+            // TODO: enable once https://github.com/iotaledger/firefly/issues/3693 is resolved
+            // setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
+            if (strongholdUnlocked) {
+                setTimeStrongholdLastUnlocked()
+            }
         }
 
         void startBackgroundSync({ syncIncomingTransactions: true })

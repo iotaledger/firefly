@@ -7,7 +7,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isSoftwareProfile, isLedgerProfile } from '@core/profile'
     import {
         ActivityDirection,
         ActivityType,
@@ -27,6 +27,7 @@
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
     import { checkStronghold } from '@lib/stronghold'
+    import { promptUserToConnectLedger } from '@lib/ledger'
 
     export let asset: IAsset
     export let amount = '0'
@@ -90,6 +91,8 @@
         try {
             if ($isSoftwareProfile) {
                 await checkStronghold(validateAndSendOutput, true)
+            } else if ($isLedgerProfile) {
+                promptUserToConnectLedger(validateAndSendOutput, undefined)
             }
         } catch (err) {
             if (!error) {
