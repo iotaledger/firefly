@@ -17,8 +17,6 @@ import {
     profileRecoveryRouter,
     ledgerSetupRouter,
     LedgerSetupRouter,
-    MigrationRouter,
-    migrationRouter,
     NetworkSetupRouter,
     networkSetupRouter,
     ProfileSetupRouter,
@@ -52,7 +50,6 @@ function initBaseRouters(): void {
 function initSubrouters(): void {
     appSetupRouter.set(new AppSetupRouter())
     ledgerSetupRouter.set(new LedgerSetupRouter())
-    migrationRouter.set(new MigrationRouter())
     networkSetupRouter.set(new NetworkSetupRouter())
     strongholdSetupRouter.set(new StrongholdSetupRouter())
     profileBackupRouter.set(new ProfileBackupRouter())
@@ -78,7 +75,6 @@ function resetBaseRouters(): void {
 function resetSubrouters(): void {
     get(appSetupRouter).reset()
     get(ledgerSetupRouter).reset()
-    get(migrationRouter).reset()
     get(networkSetupRouter).reset()
     get(strongholdSetupRouter).reset()
     get(profileBackupRouter).reset()

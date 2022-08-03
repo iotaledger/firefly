@@ -1,6 +1,5 @@
 export * from './app-setup'
 export * from './ledger-setup'
-export * from './migration'
 export * from './network-setup'
 export * from './profile-backup'
 export * from './profile-recovery'

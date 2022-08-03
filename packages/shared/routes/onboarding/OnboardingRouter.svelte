@@ -4,7 +4,6 @@
         // routers
         AppSetupRouter,
         LedgerSetupRouter,
-        MigrationRouter,
         NetworkSetupRouter,
         ProfileBackupRouter,
         ProfileRecoveryRouter,
@@ -17,14 +16,6 @@
         CongratulationsView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
-
-    import { onboardingProfile } from '../../lib/contexts/onboarding'
-    /* eslint-disable no-console */
-    $: console.log('ONBOARDING PROFILE: ', $onboardingProfile)
-
-    import { profileManager } from '../../lib/core/profile-manager'
-    /* eslint-disable no-console */
-    $: console.log('PROFILE MANAGER: ', $profileManager)
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.AppSetup}
@@ -62,10 +53,6 @@
 {:else if $onboardingRoute === OnboardingRoute.ShimmerClaiming}
     <Transition>
         <ShimmerClaimingRouter />
-    </Transition>
-{:else if $onboardingRoute === OnboardingRoute.Migration}
-    <Transition>
-        <MigrationRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.Congratulations}
     <Transition>

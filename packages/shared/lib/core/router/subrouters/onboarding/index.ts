@@ -1,7 +1,6 @@
 export * from './app-setup-router'
 export * from './profile-backup-router'
 export * from './ledger-setup-router'
-export * from './migration-router'
 export * from './network-setup-router'
 export * from './stronghold-setup-router'
 export * from './profile-setup-router'
