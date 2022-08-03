@@ -1,15 +1,16 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '@core/router'
-    import { onboardingProfile, isGettingMigrationData, mnemonic } from '@contexts/onboarding'
-    import { onMount } from 'svelte'
+    import { onboardingProfile, isGettingMigrationData, updateOnboardingProfile } from '@contexts/onboarding'
 
     let input = ''
 
     function handleContinueClick(): void {
-        $mnemonic = input.split(' ')
+        const mnemonic = input.split(' ')
+        updateOnboardingProfile({ mnemonic })
         $profileRecoveryRouter.next()
     }
 
@@ -20,7 +21,7 @@
     }
 
     onMount(() => {
-        $mnemonic = null
+        updateOnboardingProfile({ mnemonic: null })
     })
 </script>
 

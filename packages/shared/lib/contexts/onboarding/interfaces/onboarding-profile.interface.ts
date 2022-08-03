@@ -9,4 +9,5 @@ export interface IOnboardingProfile extends IPersistedProfile {
     protectionType?: ProfileProtectionType
     importFile?: ImportFile
     importFilePath?: string
+    mnemonic?: string[]
 }

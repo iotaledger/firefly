@@ -3,7 +3,7 @@ import { activeAccounts, activeProfile, IBalanceOverview } from '@core/profile'
 import { generateMnemonic } from '@core/profile-manager'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
-import { mnemonic, onboardingProfile } from '@contexts/onboarding'
+import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { CurrencyTypes } from './typings/currency'
 import { RecoveryPhrase } from './typings/mnemonic'
@@ -28,9 +28,10 @@ export const isBackgroundSyncing = writable<boolean>(false)
 export async function generateAndStoreMnemonic(): Promise<RecoveryPhrase> {
     const mnemonicString = await generateMnemonic()
     const mnemnonicList = mnemonicString?.split(' ')
-    mnemonic.set(mnemnonicList)
+    updateOnboardingProfile({ mnemonic: mnemnonicList })
     return mnemnonicList
 }
+
 /**
  * Get legacy seed checksum
  *

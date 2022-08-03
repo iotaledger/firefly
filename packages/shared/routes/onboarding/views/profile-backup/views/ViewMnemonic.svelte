@@ -4,7 +4,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import { mnemonic } from '@contexts/onboarding'
+    import { onboardingProfile } from '@contexts/onboarding'
     import { generateAndStoreMnemonic } from '@lib/wallet'
     import { downloadRecoveryKit } from '@lib/utils'
 
@@ -60,8 +60,8 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'p-0' : 'p-4'}">
-        {#if $mnemonic}
-            <RecoveryPhrase classes="mb-8" recoveryPhrase={$mnemonic} {hide} />
+        {#if $onboardingProfile?.mnemonic}
+            <RecoveryPhrase classes="mb-8" recoveryPhrase={$onboardingProfile?.mnemonic} {hide} />
             {#if !$mobile}
                 {#if !hasRevealedRecoveryPhrase}
                     {#if hide}
