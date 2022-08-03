@@ -1274,9 +1274,11 @@
     },
     "filters":{
         "title": "Filters",
-        "showHidden": "Show hidden",
+        "showHidden": {
+            "label": "Show hidden"
+        },
         "verificationStatus": {
-            "title": "Verification status",
+            "label": "Verification status",
             "new": "New",
             "notVerified": "Not verified",
             "verified": "Verified"

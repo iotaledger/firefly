@@ -22,7 +22,7 @@ export const selectedAccountActivities: Readable<Activity[]> = derived(
 )
 
 export const activityFilter: Writable<ActivityFilter> = writable({
-    showHidden: { active: false, type: 'boolean', label: 'filters.showHidden' },
+    showHidden: { active: false, type: 'boolean', localeKey: 'filters.showHidden' },
 })
 export const activitySearchTerm: Writable<string> = writable('')
 

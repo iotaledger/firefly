@@ -3,6 +3,7 @@
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
     import { isNumberLetterOrPunctuation } from '@lib/utils/isNumberLetterOrPunctuation'
+    import { DropdownChoice } from '@core/utils'
 
     export let value: string
     export let label: string
@@ -10,7 +11,7 @@
     export let disabled = false
     export let valueKey = 'label'
     export let sortItems = false
-    export let items: { label: string; value: unknown }[] = []
+    export let items: DropdownChoice[] = []
     export let small = false
     export let contentWidth = false
     export let error = ''

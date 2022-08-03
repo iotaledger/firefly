@@ -8,12 +8,11 @@ import { AssetFilter } from '../interfaces'
 import { VerificationStatus } from '../enums'
 
 export const assetFilter: Writable<AssetFilter> = writable({
-    showHidden: { active: false, type: 'boolean', label: 'filters.showHidden' },
+    showHidden: { active: false, type: 'boolean', localeKey: 'filters.showHidden' },
     verificationStatus: {
         active: false,
         type: 'selection',
-        label: 'filters.verificationStatus.title',
-        translationPrefix: 'filters.verificationStatus',
+        localeKey: 'filters.verificationStatus',
         selected: 'verified',
         choices: Object.values(VerificationStatus).map((status) => String(status)),
     },

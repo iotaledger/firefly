@@ -14,14 +14,13 @@ export type FilterUnit = BooleanFilterUnit | SelectionFilterUnit
 export type BooleanFilterUnit = {
     type: 'boolean'
     active: boolean
-    label: string
+    localeKey: string
 }
 
 export type SelectionFilterUnit = {
     type: 'selection'
     active: boolean
-    label: string
     choices: string[]
     selected: string
-    translationPrefix: string
+    localeKey: string
 }
