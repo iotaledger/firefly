@@ -20,5 +20,6 @@ export async function createIotaProfileManager(): Promise<void> {
         Stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
     }
 
-    initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, iotaProfileManager)
+    const manager = initialiseProfileManager(storagePath, coinType, clientOptions, secretManager)
+    iotaProfileManager.set(manager)
 }

@@ -15,7 +15,8 @@ export async function initialiseProfileManagerFromOnboardingProfile(checkForExis
 
     const { storagePath, coinType, clientOptions, secretManager } =
         await createAccountManagerOptionsFromOnboardingProfile()
-    initialiseProfileManager(storagePath, coinType, clientOptions, secretManager)
+    const manager = initialiseProfileManager(storagePath, coinType, clientOptions, secretManager)
+    profileManager.set(manager)
 }
 
 async function createAccountManagerOptionsFromOnboardingProfile(): Promise<AccountManagerOptions> {
