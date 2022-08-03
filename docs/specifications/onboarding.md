@@ -83,9 +83,8 @@ graph TD;
     
     id27("Congratulations")
     
-    id28("Loading View")
-    
     subgraph Dashboard
+    id28("Loading View")
     id29("Wallet Dashboard")
     end
     
