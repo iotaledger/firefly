@@ -3,15 +3,14 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import { backupInitialStronghold } from '@contexts/onboarding'
+    import { backupInitialStronghold, onboardingProfile } from '@contexts/onboarding'
 
-    export let strongholdPassword = ''
     export let busy = false
 
     let confirmPassword = ''
     let skipBackup = false
 
-    $: isStrongholdPasswordValid = strongholdPassword === confirmPassword
+    $: isStrongholdPasswordValid = $onboardingProfile?.strongholdPassword === confirmPassword
 
     async function onboardingBackupFileFunction(_skipBackup: boolean = false): Promise<void> {
         skipBackup = _skipBackup
