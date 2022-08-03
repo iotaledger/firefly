@@ -3,32 +3,32 @@ import { get, writable } from 'svelte/store'
 import { onboardingProfile, ProfileProtectionType } from '@contexts/onboarding'
 
 import { onboardingRouter } from '../../onboarding-router'
-import { ProtectionRoute } from '../../enums'
+import { StorageProtectionSetupRoute } from '../../enums'
 import { Subrouter } from '../subrouter'
 
-export const storageProtectionSetupRoute = writable<ProtectionRoute>(null)
+export const storageProtectionSetupRoute = writable<StorageProtectionSetupRoute>(null)
 export const storageProtectionSetupRouter = writable<StorageProtectionSetupRouter>(null)
 
-export class StorageProtectionSetupRouter extends Subrouter<ProtectionRoute> {
+export class StorageProtectionSetupRouter extends Subrouter<StorageProtectionSetupRoute> {
     constructor() {
-        super(ProtectionRoute.SetupPinProtection, storageProtectionSetupRoute, get(onboardingRouter))
+        super(StorageProtectionSetupRoute.SetupPinProtection, storageProtectionSetupRoute, get(onboardingRouter))
     }
 
     next(): void {
-        let nextRoute: ProtectionRoute
+        let nextRoute: StorageProtectionSetupRoute
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case ProtectionRoute.ChooseProtectionMethod: {
+            case StorageProtectionSetupRoute.ChooseProtectionMethod: {
                 const protectionType = get(onboardingProfile)?.protectionType
                 if (protectionType === ProfileProtectionType.Pin) {
-                    nextRoute = ProtectionRoute.SetupPinProtection
+                    nextRoute = StorageProtectionSetupRoute.SetupPinProtection
                 } else if (protectionType === ProfileProtectionType.Biometric) {
-                    nextRoute = ProtectionRoute.SetupBiometricProtection
+                    nextRoute = StorageProtectionSetupRoute.SetupBiometricProtection
                 }
                 break
             }
-            case ProtectionRoute.SetupPinProtection:
+            case StorageProtectionSetupRoute.SetupPinProtection:
                 this.parentRouter.next()
                 break
         }

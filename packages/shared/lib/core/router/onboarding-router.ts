@@ -92,20 +92,9 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
             case OnboardingRoute.ProfileBackup: {
-                const profileRecoveryType = get(onboardingProfile)?.recoveryType
-                if (
-                    profileRecoveryType === ProfileRecoveryType.Seed ||
-                    profileRecoveryType === ProfileRecoveryType.SeedVault
-                ) {
-                    nextRoute = OnboardingRoute.Migration
-                } else {
-                    nextRoute = OnboardingRoute.Congratulations
-                }
-                break
-            }
-            case OnboardingRoute.Migration:
                 nextRoute = OnboardingRoute.Congratulations
                 break
+            }
             case OnboardingRoute.LedgerSetup: {
                 const profileSetupType = get(onboardingProfile)?.setupType
                 if (profileSetupType === ProfileSetupType.Claimed) {
