@@ -9,6 +9,7 @@ import {
     Bundle,
     HardwareIndexes,
     Input,
+    LedgerMigrationProgress,
     MigrationAddress,
     MigrationBundle,
     MigrationData,
@@ -19,9 +20,8 @@ import {
 import { appRoute, AppRoute } from '@core/router'
 import { localize } from '@core/i18n'
 import { showAppNotification } from './notifications'
-import { LedgerMigrationProgress } from 'shared/lib/typings/migration'
 import { getJsonRequestOptions } from '@lib/utils'
-import { ProfileRecoveryType, profileRecoveryType } from '@contexts/onboarding'
+import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
 // const LEGACY_ADDRESS_WITHOUT_CHECKSUM_LENGTH = 81
 
@@ -770,10 +770,8 @@ export const updateLedgerBundleState = (
  * @returns {Input[][]}
  */
 const selectInputsForUnspentAddresses = (inputs: Input[]): Input[][] => {
-    const MAX_INPUTS_PER_BUNDLE =
-        get(profileRecoveryType) === ProfileRecoveryType.TrinityLedger
-            ? HARDWARE_MAX_INPUTS_PER_BUNDLE
-            : SOFTWARE_MAX_INPUTS_PER_BUNDLE
+    const isMigratingProfile = get(onboardingProfile)?.recoveryType === ProfileRecoveryType.TrinityLedger
+    const MAX_INPUTS_PER_BUNDLE = isMigratingProfile ? HARDWARE_MAX_INPUTS_PER_BUNDLE : SOFTWARE_MAX_INPUTS_PER_BUNDLE
 
     const totalInputsBalance: number = inputs.reduce((acc, input) => acc + input.balance, 0)
 

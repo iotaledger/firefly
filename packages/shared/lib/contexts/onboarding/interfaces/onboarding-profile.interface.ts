@@ -1,7 +1,7 @@
 import { ProfileType } from '@core/profile'
 import { IClientOptions, NetworkProtocol, NetworkType } from '@core/network'
 
-import { ProfileRecoveryType, ProfileSetupType } from '../enums'
+import { ProfileProtectionType, ProfileRecoveryType, ProfileSetupType } from '../enums'
 
 export interface IOnboardingProfile {
     id: string
@@ -13,5 +13,6 @@ export interface IOnboardingProfile {
     type: ProfileType
     setupType: ProfileSetupType
     recoveryType?: ProfileRecoveryType
+    protectionType?: ProfileProtectionType
     lastStrongholdBackupTime?: Date
 }

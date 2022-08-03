@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 import { localize } from '@core/i18n'
-import { resetWalletRoute, appRouter, AppRoute } from '@core/router'
-import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
+import { AppRoute, appRouter, resetWalletRoute } from '@core/router'
+import { ProfileRecoveryType, updateOnboardingProfile } from '@contexts/onboarding'
 
 import { removeAddressChecksum } from './migration'
 import { isNewNotification, showAppNotification } from './notifications'
@@ -274,7 +274,7 @@ export function formatAddressForLedger(address: string, removeChecksum: boolean 
 
 export function navigateToNewIndexMigration(): void {
     resetWalletRoute()
-    profileRecoveryType.set(ProfileRecoveryType.TrinityLedger)
+    updateOnboardingProfile({ recoveryType: ProfileRecoveryType.TrinityLedger })
     get(appRouter).forceNextRoute(AppRoute.Onboarding)
     // get(onboardingRouter).(OnboardingRoute.LedgerSetup)
 }

@@ -6,10 +6,11 @@ import { Platform } from '@lib/platform'
 import { onboardingProfile } from '../stores'
 
 import { ProfileRecoveryType } from '../enums'
-import { importFilePath, profileRecoveryType, isGettingMigrationData } from '../stores'
+import { importFilePath, isGettingMigrationData } from '../stores'
 
 export async function restoreBackupFromFile(backupFile: Buffer, password: string): Promise<void> {
-    if (get(profileRecoveryType) === ProfileRecoveryType.SeedVault) {
+    const profileRecoveryType = get(onboardingProfile)?.recoveryType
+    if (profileRecoveryType === ProfileRecoveryType.SeedVault) {
         isGettingMigrationData.set(true)
 
         const legacySeed = await Platform.importLegacySeed(backupFile, password)

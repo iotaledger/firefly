@@ -6,7 +6,6 @@ import {
     isSyncing,
     isTransferring,
 } from '@lib/wallet'
-import { profileRecoveryType } from '@contexts/onboarding'
 
 // TODO: move this out of profile module
 export function resetDashboardState(): void {
@@ -16,5 +15,4 @@ export function resetDashboardState(): void {
     isFirstSessionSync.set(true)
     isFirstManualSync.set(true)
     isBackgroundSyncing.set(false)
-    profileRecoveryType.set(null)
 }

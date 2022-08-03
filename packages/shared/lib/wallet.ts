@@ -3,7 +3,7 @@ import { activeAccounts, activeProfile, IBalanceOverview } from '@core/profile'
 import { generateMnemonic } from '@core/profile-manager'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
-import { mnemonic, profileRecoveryType } from '@contexts/onboarding'
+import { mnemonic, onboardingProfile } from '@contexts/onboarding'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { CurrencyTypes } from './typings/currency'
 import { RecoveryPhrase } from './typings/mnemonic'
@@ -279,7 +279,8 @@ export const findAccountWithAnyAddress = (
  * Determines if the API call for syncing accounts is the initial one
  * @returns {boolean} The boolean value determining if this sync API call is the first ever one
  */
-export const isInitialAccountSync = (): boolean => get(profileRecoveryType) !== null && get(isFirstSessionSync)
+export const isInitialAccountSync = (): boolean =>
+    get(onboardingProfile)?.recoveryType !== null && get(isFirstSessionSync)
 
 /**
  * Determines whether an account has any pending transactions.

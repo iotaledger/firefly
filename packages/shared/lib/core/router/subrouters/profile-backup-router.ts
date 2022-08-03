@@ -2,7 +2,6 @@ import { get, writable } from 'svelte/store'
 
 import { onboardingRouter } from '../onboarding-router'
 import { ProfileBackupRoute } from '../enums'
-import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
 
 export const profileBackupRoute = writable<ProfileBackupRoute>(null)
@@ -13,7 +12,7 @@ export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
         super(ProfileBackupRoute.Init, profileBackupRoute, get(onboardingRouter))
     }
 
-    next(event?: FireflyEvent): void {
+    next(): void {
         let nextRoute: ProfileBackupRoute
 
         const currentRoute = get(this.routeStore)
@@ -31,7 +30,7 @@ export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
                 break
 
             case ProfileBackupRoute.Backup: {
-                this.parentRouter.next(event)
+                this.parentRouter.next()
                 break
             }
         }

@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { profiles, ProfileType } from '@core/profile'
-import { onboardingProfile, ProfileRecoveryType, ProfileSetupType, strongholdPassword } from '@contexts/onboarding'
+import { onboardingProfile, ProfileRecoveryType, ProfileSetupType } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
 import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from './enums'
@@ -47,32 +47,33 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             }
             case OnboardingRoute.Protection: {
-                const _profileType = get(onboardingProfile)?.type
-                if (_profileType === ProfileType.Software) {
-                    nextRoute = OnboardingRoute.ProfileBackup
-                } else if (_profileType === ProfileType.Ledger) {
+                const _onboardingProfile = get(onboardingProfile)
+                const profileType = _onboardingProfile?.type
+                const profileSetupType = _onboardingProfile?.setupType
+                const profileRecoveryType = _onboardingProfile?.recoveryType
+                if (profileType === ProfileType.Ledger) {
                     nextRoute = OnboardingRoute.LedgerSetup
-                }
-
-                const _profileRecoveryType = get(profileRecoveryType)
-                if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-                    nextRoute = OnboardingRoute.ProfileBackup
-                    profileBackupRoute.set(ProfileBackupRoute.Backup)
-                } else if (_profileRecoveryType === ProfileRecoveryType.Stronghold) {
-                    nextRoute = OnboardingRoute.Congratulations
-                }
-
-                const _profileSetupType = get(profileSetupType)
-                if (_profileSetupType === ProfileSetupType.Claimed) {
-                    nextRoute = OnboardingRoute.ShimmerClaiming
+                } else {
+                    if (profileSetupType === ProfileSetupType.Claimed) {
+                        nextRoute = OnboardingRoute.ShimmerClaiming
+                    } else if (profileSetupType === ProfileSetupType.New) {
+                        nextRoute = OnboardingRoute.ProfileBackup
+                    } else {
+                        if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
+                            nextRoute = OnboardingRoute.Congratulations
+                        } else {
+                            profileBackupRoute.set(ProfileBackupRoute.Backup)
+                            nextRoute = OnboardingRoute.ProfileBackup
+                        }
+                    }
                 }
                 break
             }
             case OnboardingRoute.ProfileRecovery: {
-                const _profileRecoveryType = get(profileRecoveryType)
+                const profileRecoveryType = get(onboardingProfile)?.recoveryType
                 if (
-                    _profileRecoveryType === ProfileRecoveryType.Mnemonic ||
-                    _profileRecoveryType === ProfileRecoveryType.Stronghold
+                    profileRecoveryType === ProfileRecoveryType.Mnemonic ||
+                    profileRecoveryType === ProfileRecoveryType.Stronghold
                 ) {
                     this.hasCompletedRecovery = true
                     profileSetupRoute.set(ProfileSetupRoute.EnterName)
@@ -82,16 +83,15 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             }
 
             case OnboardingRoute.PasswordSetup: {
-                if (get(strongholdPassword)) {
-                    nextRoute = OnboardingRoute.Protection
-                } else {
-                    console.error('No Stronghold password was set.')
-                }
+                nextRoute = OnboardingRoute.Protection
                 break
             }
             case OnboardingRoute.ProfileBackup: {
-                const setupType = get(profileRecoveryType)
-                if (setupType === ProfileRecoveryType.Seed || setupType === ProfileRecoveryType.SeedVault) {
+                const profileRecoveryType = get(onboardingProfile)?.recoveryType
+                if (
+                    profileRecoveryType === ProfileRecoveryType.Seed ||
+                    profileRecoveryType === ProfileRecoveryType.SeedVault
+                ) {
                     nextRoute = OnboardingRoute.Migration
                 } else {
                     nextRoute = OnboardingRoute.Congratulations
@@ -108,13 +108,15 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             case OnboardingRoute.Migration:
                 nextRoute = OnboardingRoute.Congratulations
                 break
-            case OnboardingRoute.LedgerSetup:
-                if (get(profileRecoveryType) === ProfileRecoveryType.TrinityLedger) {
-                    // nextRoute = OnboardingRoute.Balance
+            case OnboardingRoute.LedgerSetup: {
+                const profileSetupType = get(onboardingProfile)?.setupType
+                if (profileSetupType === ProfileSetupType.Claimed) {
+                    nextRoute = OnboardingRoute.ShimmerClaiming
                 } else {
                     nextRoute = OnboardingRoute.Congratulations
                 }
                 break
+            }
             case OnboardingRoute.ShimmerClaiming:
                 nextRoute = OnboardingRoute.Congratulations
                 break
