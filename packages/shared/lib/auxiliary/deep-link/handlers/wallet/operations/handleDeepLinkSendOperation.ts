@@ -72,7 +72,7 @@ function parseSendOperation(searchParams: URLSearchParams): void | ISendFormPara
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)
     const recipient: Subject = address ? { type: 'address', address } : undefined
-    const giftStorageDeposit: boolean = Boolean(searchParams.get(SendOperationParameter.GiftStorageDeposit))
+    const giftStorageDeposit = Boolean(searchParams.get(SendOperationParameter.GiftStorageDeposit))
 
     return {
         ...(recipient && { recipient }),

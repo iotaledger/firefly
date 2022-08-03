@@ -1,5 +1,5 @@
 import { convertDateToUnixTimestamp } from '@core/utils'
-import { OutputOptions } from '@iota/wallet'
+import type { OutputOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'

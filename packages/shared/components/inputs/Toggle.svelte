@@ -4,7 +4,7 @@
     export let color = 'blue'
     export let disabled = false
 
-    export let onClick = (): void => {}
+    export let onClick: () => void
 
     function handleClick(): void {
         if (!disabled && onClick) {
