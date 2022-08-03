@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Button, ImportTextfield, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '@core/router'
-    import { onboardingProfile, isGettingMigrationData, updateOnboardingProfile } from '@contexts/onboarding'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     let input = ''
 
@@ -15,9 +15,7 @@
     }
 
     function handleBackClick(): void {
-        if (!$isGettingMigrationData) {
-            $profileRecoveryRouter.previous()
-        }
+        $profileRecoveryRouter.previous()
     }
 
     onMount(() => {
@@ -37,27 +35,12 @@
             >{localize(`views.importFromText.${$onboardingProfile?.recoveryType}.enter`)}</Text
         >
         <form on:submit={handleContinueClick} id="text-import-form">
-            <ImportTextfield
-                disabled={$isGettingMigrationData}
-                type={$onboardingProfile?.recoveryType}
-                bind:value={input}
-            />
+            <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} />
         </form>
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button
-            type="submit"
-            form="text-import-form"
-            classes="flex-1"
-            disabled={input.length === 0 || $isGettingMigrationData}
-        >
-            {#if $isGettingMigrationData}
-                <Spinner
-                    busy={$isGettingMigrationData}
-                    message={localize('views.migrate.restoringWallet')}
-                    classes="justify-center"
-                />
-            {:else}{localize('actions.continue')}{/if}
+        <Button type="submit" form="text-import-form" classes="flex-1" disabled={input.length === 0}>
+            {localize('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
