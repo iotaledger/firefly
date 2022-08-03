@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { isGettingMigrationData, onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
+import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
 import { ProfileRecoveryRoute } from '../../enums'
 import { onboardingRouter } from '../../onboarding-router'
@@ -27,12 +27,7 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
         switch (currentRoute) {
             case ProfileRecoveryRoute.TextImport: {
                 const _profileRecoveryType = get(onboardingProfile)?.recoveryType
-                if (_profileRecoveryType === ProfileRecoveryType.Seed) {
-                    isGettingMigrationData.set(true)
-                    // await getMigrationData(migrationSeed)
-                    isGettingMigrationData.set(false)
-                    this.parentRouter.next()
-                } else if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
+                if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
                     nextRoute = ProfileRecoveryRoute.Success
                 }
                 break

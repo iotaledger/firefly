@@ -12,8 +12,6 @@ export const onboardingRoute = writable<OnboardingRoute>(null)
 export const onboardingRouter = writable<OnboardingRouter>(null)
 
 export class OnboardingRouter extends Router<OnboardingRoute> {
-    hasCompletedRecovery: boolean = false
-
     constructor() {
         super(hasCompletedOnboardingBefore() ? OnboardingRoute.NetworkSetup : OnboardingRoute.AppSetup, onboardingRoute)
     }
@@ -30,11 +28,22 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 nextRoute = OnboardingRoute.ProfileSetup
                 break
             case OnboardingRoute.ProfileSetup: {
-                const profileName = get(onboardingProfile)?.name
+                const _onboardingProfile = get(onboardingProfile)
+                const profileName = _onboardingProfile?.name
                 if (profileName) {
-                    const profileType = get(onboardingProfile)?.type
+                    const profileType = _onboardingProfile?.type
                     if (profileType === ProfileType.Software) {
-                        nextRoute = OnboardingRoute.StrongholdSetup
+                        const profileSetupType = _onboardingProfile?.setupType
+                        if (profileSetupType === ProfileSetupType.New) {
+                            nextRoute = OnboardingRoute.StrongholdSetup
+                        } else {
+                            const profileRecoveryType = _onboardingProfile?.recoveryType
+                            if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
+                                nextRoute = OnboardingRoute.StorageProtectionSetup
+                            } else {
+                                nextRoute = OnboardingRoute.StrongholdSetup
+                            }
+                        }
                     } else {
                         nextRoute = OnboardingRoute.StorageProtectionSetup
                     }
@@ -46,16 +55,16 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             case OnboardingRoute.StorageProtectionSetup: {
                 const _onboardingProfile = get(onboardingProfile)
                 const profileType = _onboardingProfile?.type
-                const profileSetupType = _onboardingProfile?.setupType
-                const profileRecoveryType = _onboardingProfile?.recoveryType
                 if (profileType === ProfileType.Ledger) {
                     nextRoute = OnboardingRoute.LedgerSetup
                 } else {
+                    const profileSetupType = _onboardingProfile?.setupType
                     if (profileSetupType === ProfileSetupType.Claimed) {
                         nextRoute = OnboardingRoute.ShimmerClaiming
                     } else if (profileSetupType === ProfileSetupType.New) {
                         nextRoute = OnboardingRoute.ProfileBackup
                     } else {
+                        const profileRecoveryType = _onboardingProfile?.recoveryType
                         if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
                             nextRoute = OnboardingRoute.Congratulations
                         } else {
@@ -72,7 +81,6 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                     profileRecoveryType === ProfileRecoveryType.Mnemonic ||
                     profileRecoveryType === ProfileRecoveryType.Stronghold
                 ) {
-                    this.hasCompletedRecovery = true
                     profileSetupRoute.set(ProfileSetupRoute.EnterName)
                     nextRoute = OnboardingRoute.ProfileSetup
                 }
