@@ -1,12 +1,11 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import { BASE_TOKEN, networkHrp } from '@core/network'
+import { COIN_TYPE, networkHrp } from '@core/network'
+import { IOutputResponse } from '@iota/types'
 import { activeProfile } from '@core/profile'
-import { IUTXOInput, OutputTypes } from '@iota/types'
-import { OutputData, OutputOptions, Transaction } from '@iota/wallet'
+import { OutputData, Transaction } from '@iota/wallet'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { truncateString } from '@lib/helpers'
-import { findAccountWithAddress } from '@lib/wallet'
 import {
     HOURS_PER_DAY,
     MILLISECONDS_PER_SECOND,
@@ -15,26 +14,32 @@ import {
     SECONDS_PER_MINUTE,
 } from 'shared/lib/time'
 import { get } from 'svelte/store'
+import { tryGetAndStoreAssetFromPersistedAssets } from '../actions'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { IActivity } from '../interfaces'
-import { ITokenMetadata } from '../interfaces/token-metadata.interface'
 import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
+import { getPersistedAsset } from '../stores/persisted-assets.store'
 import { Subject } from '../types'
 import {
+    containsFoundryOutput,
     formatTokenAmountBestMatch,
-    getAmountFromOutput,
     getActivityType,
+    getAmountFromOutput,
+    getAssetFromPersistedAssets,
     getExpirationDateFromOutput,
     getMetadataFromOutput,
+    getNativeTokenFromOutput,
     getRecipientAddressFromOutput,
     getRecipientFromOutput,
     getSenderFromOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
-    isSubjectInternal,
     isOutputAsync,
+    isSubjectInternal,
+    outputIdFromTransactionData,
 } from '../utils'
-import { getNonRemainderOutputFromTransaction, getSenderFromTransaction } from '../utils/transactions'
+import { getRelevantOutputFromTransaction, getSenderFromTransaction, getSenderFromInputs } from '../utils/transactions'
+import { IUTXOInput } from '@iota/types'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -44,17 +49,19 @@ export class Activity implements IActivity {
     transactionId?: string
     inclusionState: InclusionState
     time: Date
-    inputs?: IUTXOInput[]
 
     sender: Subject
     recipient: Subject
     subject: Subject
+    isSelfTransaction: boolean
     isInternal: boolean
     direction: ActivityDirection
+    inputs: IUTXOInput[]
 
     outputId?: string
     rawAmount: number
-    token: ITokenMetadata
+    assetId: string
+    isAssetHidden: boolean
     metadata?: string
     tag?: string
 
@@ -67,56 +74,22 @@ export class Activity implements IActivity {
     claimingTransactionId?: string
     claimedDate?: Date
 
-    setNewTransaction(
-        senderAccount: IAccountState,
-        transactionId: string,
-        outputOptions: OutputOptions,
-        output: OutputTypes
-    ): Activity {
-        const account = findAccountWithAddress(outputOptions.recipientAddress)
-        const isInternal = !!account
-
-        this.type = getActivityType(isInternal)
-        this.id = transactionId
-        this.isHidden = false
-
-        this.transactionId = transactionId
-        this.inclusionState = InclusionState.Pending
-        this.time = new Date()
-        this.inputs = undefined
-
-        this.sender = { type: 'account', account: senderAccount }
-        this.recipient = isInternal
-            ? { type: 'account', account: account }
-            : { type: 'address', address: outputOptions.recipientAddress }
-        this.subject = this.recipient
-        this.isInternal = isInternal
-        this.direction = ActivityDirection.Out
-
-        this.rawAmount = Number(outputOptions.amount)
-        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
-        this.metadata = outputOptions?.features?.metadata
-        this.tag = outputOptions?.features?.tag
-
-        this.storageDeposit = Number(output.amount) - Number(outputOptions.amount)
-        this.expirationDate = new Date(Number(outputOptions?.unlocks?.expirationUnixTime) * MILLISECONDS_PER_SECOND)
-        this.isAsync = this.storageDeposit > 0 || !!outputOptions?.unlocks?.expirationUnixTime
-        this.asyncStatus = undefined
-        this.isClaimed = false
-
-        return this
-    }
-
-    updateFromPartialActivity(partialActivity: Partial<IActivity>): void {
-        Object.assign(this, partialActivity)
-    }
-
-    setFromTransaction(transaction: Transaction, account: IAccountState): Activity {
-        const output: OutputTypes = getNonRemainderOutputFromTransaction(transaction, account.depositAddress)
+    async setFromTransaction(transaction: Transaction, account: IAccountState): Promise<Activity> {
+        const isFoundry = containsFoundryOutput(transaction)
+        const { output, outputIndex, isSelfTransaction } = getRelevantOutputFromTransaction(
+            transaction,
+            account.depositAddress,
+            isFoundry
+        )
 
         const recipient = getRecipientFromOutput(output)
+        const nativeToken = getNativeTokenFromOutput(output)
 
-        this.type = getActivityType(isSubjectInternal(recipient))
+        if (nativeToken) {
+            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+        }
+
+        this.type = getActivityType(isSubjectInternal(recipient), isFoundry)
         this.id = transaction.transactionId
         this.isHidden = isActivityHiddenForAccountId(account.id, transaction.transactionId)
 
@@ -124,61 +97,96 @@ export class Activity implements IActivity {
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
+        this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
-        this.sender = getSenderFromTransaction(transaction, account.depositAddress)
+        this.sender = getSenderFromTransaction(transaction.incoming, account.depositAddress, output)
         this.recipient = recipient
         this.subject = transaction.incoming ? this.sender : this.recipient
+        this.isSelfTransaction = isSelfTransaction
         this.isInternal = isSubjectInternal(recipient)
-        this.direction = transaction.incoming ? ActivityDirection.In : ActivityDirection.Out
+        this.direction =
+            transaction.incoming || isSelfTransaction || isFoundry ? ActivityDirection.In : ActivityDirection.Out
+
+        this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
+        const asset = getPersistedAsset(this.assetId)
+        this.isAssetHidden = !asset || asset.hidden
 
         this.storageDeposit = getStorageDepositFromOutput(output)
-        this.rawAmount = getAmountFromOutput(output) - this.storageDeposit
-        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+        this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
+
         this.metadata = getMetadataFromOutput(output)
         this.tag = getTagFromOutput(output)
-
         this.expirationDate = getExpirationDateFromOutput(output)
+
         this.isAsync = isOutputAsync(output)
-        this.asyncStatus = undefined
+        this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
 
         return this
     }
 
-    setFromOutputData(outputData: OutputData, account: IAccountState): Activity {
-        const recipientAddress = getRecipientAddressFromOutput(outputData.output)
-        const recipient = getRecipientFromOutput(outputData.output)
-        const sender = getSenderFromOutput(outputData.output)
+    async setFromOutputData(
+        outputData: OutputData,
+        account: IAccountState,
+        transactionInputs: IOutputResponse[]
+    ): Promise<Activity> {
+        const output = outputData.output
+
+        const recipientAddress = getRecipientAddressFromOutput(output)
+        const recipient = getRecipientFromOutput(output)
+        const sender = transactionInputs ? getSenderFromInputs(transactionInputs) : getSenderFromOutput(output)
         const isIncoming = recipientAddress === account.depositAddress
+
+        const nativeToken = getNativeTokenFromOutput(output)
         const subject = isIncoming ? sender : recipient
         const isInternal = isSubjectInternal(subject)
 
+        if (nativeToken) {
+            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+        }
+
         this.type = getActivityType(isInternal)
         this.id = outputData.outputId
-        this.isHidden = isActivityHiddenForAccountId(account.id, this.id)
+        this.isHidden = isActivityHiddenForAccountId(account.id, outputData.outputId)
 
         this.transactionId = outputData?.metadata?.transactionId
         this.inclusionState = InclusionState.Confirmed
         this.time = new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND)
-        this.inputs = undefined
 
         this.sender = sender
         this.recipient = recipient
         this.subject = subject
+        this.isSelfTransaction = false
         this.isInternal = isInternal
         this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
-        this.token = BASE_TOKEN[get(activeProfile).networkProtocol]
+        this.inputs =
+            transactionInputs?.map((input) => ({
+                type: 0,
+                transactionId: input.metadata.transactionId,
+                transactionOutputIndex: input.metadata.outputIndex,
+            })) ?? []
 
-        this.storageDeposit = getStorageDepositFromOutput(outputData.output)
-        this.rawAmount = getAmountFromOutput(outputData.output) - this.storageDeposit
-        this.expirationDate = getExpirationDateFromOutput(outputData.output)
-        this.isAsync = isOutputAsync(outputData.output)
-        this.asyncStatus = undefined
+        this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
+        const asset = getPersistedAsset(this.assetId)
+        this.isAssetHidden = !asset || asset.hidden
+
+        this.storageDeposit = getStorageDepositFromOutput(output)
+        this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
+        this.metadata = getMetadataFromOutput(output)
+        this.tag = getTagFromOutput(output)
+
+        this.expirationDate = getExpirationDateFromOutput(output)
+        this.isAsync = isOutputAsync(output)
+        this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
         this.isClaimed = false
 
         return this
+    }
+
+    updateFromPartialActivity(partialActivity: Partial<IActivity>): void {
+        Object.assign(this, partialActivity)
     }
 
     getAsyncStatus(time: Date): ActivityAsyncStatus {
@@ -197,9 +205,10 @@ export class Activity implements IActivity {
     }
 
     getFormattedAmount(signed: boolean): string {
+        const metadata = getAssetFromPersistedAssets(this?.assetId)?.metadata
         return `${this.direction !== ActivityDirection.In && signed ? '- ' : ''}${formatTokenAmountBestMatch(
             this.rawAmount,
-            this.token,
+            metadata,
             2
         )}`
     }
@@ -240,6 +249,9 @@ export class Activity implements IActivity {
 
     getTitle(): string {
         let title = ''
+        if (this.type === ActivityType.Minting) {
+            title = this.inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting'
+        }
         if (this.type === ActivityType.InternalTransaction) {
             title = this.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
         } else if (this.type === ActivityType.ExternalTransaction) {

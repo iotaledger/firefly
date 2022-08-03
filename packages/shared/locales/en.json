@@ -82,11 +82,11 @@
             "shimmer": {
                 "mainnet": {
                     "title": "Shimmer",
-                    "body": "Staging network for IOTA Mainnet"
+                    "body": "Staging network for IOTA"
                 },
                 "devnet": {
-                    "title": "Public Testnet",
-                    "body": "Beta network for IOTA Mainnet"
+                    "title": "Shimmer Beta",
+                    "body": "Beta network for Shimmer"
                 },
                 "private-net": {
                     "title": "Custom Network",
@@ -718,10 +718,10 @@
                 "protocol": {
                     "tab": "Protocol",
                     "network": "Network",
-                    "bech32HRP": "Bech32 HRP",
+                    "bech32Hrp": "Bech32 HRP",
                     "tokenSupply": "Token supply",
                     "protocolVersion": "Version",
-                    "minPoWScore": "Min PoW Score"
+                    "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {
                     "tab": "Base token",
@@ -906,7 +906,40 @@
         },
         "sendForm": {
             "title": "Send funds"
+        },
+        "tokenInformation" : {
+            "newTokenTitle": "New token",
+            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "tokenMetadata": {
+                "standard": "Standard",
+                "name": "Name",
+                "tokenId": "Token ID",
+                "url": "URL"
+            },
+            "buttons": {
+                "verifyToken": "I verify this token"
+            }
+        },
+        "mintNativeTokenForm" : {
+            "title": "Mint native tokens",
+            "inputs": {
+                "totalSupply": "Total Supply",
+                "circulatingSupply": "Circulating Supply",
+                "standard": "Standard",
+                "name": "Name",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
+                "url": "URL",
+                "logoUrl": "Logo URL",
+                "logo": "Logo"
+            }
+        },
+        "faucetRequest": {
+            "title": "Faucet request",
+            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
+        
     },
     "charts": {
         "incomingMi": "Incoming {value}",
@@ -981,7 +1014,7 @@
         "export": "Export",
         "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportTransactionHistory": "Export transaction history",
@@ -1055,7 +1088,17 @@
         "rerunClaimProcess": "Rerun claim process",
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
-        "backup": "Backup"
+        "backup": "Backup",
+        "mint": "Mint",
+        "mintNativeToken": "Mint native token",
+        "verifyToken": "Verify token",
+        "unverifyToken": "Unverify token",
+        "hideToken": "Hide token",
+        "unhideToken": "Unhide token",
+        "burnToken": "Burn token",
+        "faucetRequest": "Get {token} tokens",
+        "refreshTokenMetadata": "Refresh token metadata"
+
     },
     "general": {
         "recipient": "Recipient",
@@ -1071,6 +1114,8 @@
         "received": "Received",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "minted": "Minted",
+        "minting": "Minting",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
@@ -1143,6 +1188,7 @@
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
         "noRecentHistory": "No recent history",
+        "noAssets": "No assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "Syncing history, this may take a while...",
@@ -1206,7 +1252,6 @@
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
-        "myAssets": "My assets",
         "transactionTime": "Transaction time",
         "storageDeposit": "Storage deposit",
         "expirationTime": "Expiration time",
@@ -1218,7 +1263,18 @@
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in"
+        "claimingTransactionId": "Claimed in",
+        "assets": "Assets",
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
+        "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets."
+
+    },
+    "filters":{
+        "title": "Filters",
+        "showHidden": "Show hidden"
     },
     "dates": {
         "today": "Today",
@@ -1276,6 +1332,15 @@
         "hideActivity": {
             "success": "Successfully hidden activity",
             "error": "Failed to hide activity"
+        },
+        "faucetRequest": {
+            "success": "Request for tokens sent to the faucet"
+        },
+        "mintNativeToken": {
+            "success": "Native token minting transaction sent"
+        },
+        "refreshTokenMetadata": {
+            "success": "All token metadata has been reset and refreshed"
         }
     },
     "error": {
@@ -1331,6 +1396,7 @@
             "amountTooHigh": "This is greater than your available balance.",
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
@@ -1477,7 +1543,8 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking"
+        "staking": "Staking",
+        "developerTools": "Developer Tools"
     },
     "pills": {
         "stake": {
@@ -1507,6 +1574,18 @@
                 "Pending": "sending to",
                 "Confirmed": "sent to",
                 "Conflicting": "failed to send"
+            }
+        },
+        "minting": {
+            "in": {
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
+            },
+            "out": {
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             }
         },
         "migrate": {

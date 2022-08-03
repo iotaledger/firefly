@@ -6,10 +6,11 @@ const config = {
     },
     moduleFileExtensions: ['ts', 'js'],
     moduleNameMapper: {
-        '@common/(.*)': '<rootDir>/lib/common/$1',
+        '@auxiliary/(.*)': '<rootDir>/lib/auxiliary/$1',
         '@contexts/(.*)': '<rootDir>/lib/contexts/$1',
         '@core/(.*)': '<rootDir>/lib/core/$1',
         '@lib/(.*)': '<rootDir>/lib/$1',
+        '@mocks/(.*)': '<rootDir>/lib/tests/__mocks__/$1',
     },
     setupFilesAfterEnv: ['./lib/tests/setup.ts'],
     testEnvironment: 'jsdom',

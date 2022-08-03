@@ -7,7 +7,7 @@
         "importsNotUsedAsValues": "remove",
         "lib": ["DOM", "ESNext"],
         "paths": {
-            "@common/*": ["../shared/lib/common/*"],
+            "@auxiliary/*": ["../shared/lib/auxiliary/*"],
             "@contexts/*": ["../shared/lib/contexts/*"],
             "@core/*": ["../shared/lib/core/*"],
             "@features/*": ["../shared/features/*"],

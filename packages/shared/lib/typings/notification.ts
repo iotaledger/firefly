@@ -1,4 +1,4 @@
-export type NotificationType = 'info' | 'warning' | 'error'
+export type NotificationType = 'info' | 'success' | 'warning' | 'error'
 
 export type NotificationAction = {
     label: string
@@ -16,4 +16,5 @@ export type NotificationData = {
     ts?: number
     timeout?: number
     contextData?: unknown
+    alert?: boolean
 }

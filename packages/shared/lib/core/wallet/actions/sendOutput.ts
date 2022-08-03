@@ -10,13 +10,13 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
     try {
         isTransferring.set(true)
         const account = get(selectedAccount)
-        const transferOptions: TransactionOptions = {
+        const transactionOptions: TransactionOptions = {
             remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
         }
-        const transaction = await account.sendOutputs([output], transferOptions)
+        const transaction = await account.sendOutputs([output], transactionOptions)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.id,
-            new Activity().setFromTransaction(transaction, account)
+            await new Activity().setFromTransaction(transaction, account)
         )
         isTransferring.set(false)
         return

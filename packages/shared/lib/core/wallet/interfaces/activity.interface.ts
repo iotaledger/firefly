@@ -1,9 +1,8 @@
 import { IAccountState } from '@core/account'
-import { IUTXOInput } from '@iota/types'
 import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Subject } from '../types'
-import { ITokenMetadata } from './token-metadata.interface'
+import { IUTXOInput } from '@iota/types'
 
 export interface IActivity {
     id: string
@@ -11,18 +10,20 @@ export interface IActivity {
     transactionId?: string
     type: ActivityType
     time: Date
-    inputs?: IUTXOInput[]
     direction: ActivityDirection
     inclusionState: InclusionState
     isInternal: boolean
     rawAmount: number
     sender: Subject
     recipient: Subject
-    token: ITokenMetadata
+    isSelfTransaction: boolean
+    assetId: string
     isAsync: boolean
     asyncStatus: ActivityAsyncStatus
     expirationDate?: Date
+    inputs: IUTXOInput[]
     isHidden?: boolean
+    isAssetHidden: boolean
     isClaiming?: boolean
     isClaimed?: boolean
     publicNote?: string

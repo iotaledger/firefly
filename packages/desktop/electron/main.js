@@ -1,3 +1,4 @@
+import features from 'shared/features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { shouldReportError } from './lib/errorHandling'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
@@ -154,7 +155,7 @@ const defaultWebPreferences = {
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
-    devTools: !app.isPackaged,
+    devTools: !app.isPackaged || features?.electron?.developerTools?.enabled,
     additionalArguments: [`--send-crash-reports=${SEND_CRASH_REPORTS}`],
 }
 
@@ -194,6 +195,7 @@ function isUrlAllowed(targetUrl) {
         // Assembly / Shimmer
         'assembly.sc',
         'shimmer.network',
+        'explorer.shimmer.network',
 
         // GitHub
         'github.com/iotaledger/firefly/issues',

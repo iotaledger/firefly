@@ -86,6 +86,11 @@ const features = {
             },
         },
     },
+    electron: {
+        developerTools: {
+            enabled: true,
+        },
+    },
     wallet: {
         enabled: true,
         accountSummary: {
@@ -96,6 +101,9 @@ const features = {
         },
         assets: {
             enabled: true,
+            mintNativeTokens: {
+                enabled: true,
+            },
         },
         activityHistory: {
             enabled: true,
@@ -114,6 +122,9 @@ const features = {
         enabled: false,
     },
     collectibles: {
+        enabled: true,
+    },
+    developerTools: {
         enabled: true,
     },
 }

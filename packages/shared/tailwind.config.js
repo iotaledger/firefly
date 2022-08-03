@@ -189,6 +189,7 @@ module.exports = {
                 bg: '#08080C',
                 highlight: '#FF3FF2',
             },
+            'verification-blue': '#3897F0',
         },
         extend: {
             fontSize: {
@@ -292,6 +293,7 @@ module.exports = {
             },
             maxHeight: {
                 xl: pxToRem(648),
+                100: pxToRem(400),
             },
         },
         fontFamily: {

@@ -7,7 +7,7 @@
         KeyValueBox,
         AccountLabel,
     } from 'shared/components/atoms'
-    import { Text } from 'shared/components'
+    import { AssetIcon, Text } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { FontWeightText } from 'shared/components/Text.svelte'
@@ -18,6 +18,7 @@
         Subject,
         InclusionState,
         ActivityDirection,
+        IAsset,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -25,21 +26,24 @@
     import { truncateString } from '@lib/helpers'
     import { setClipboard } from '@lib/utils'
 
-    export let amount: string
-    export let unit: string
-    export let type: ActivityType
-    export let direction: ActivityDirection
-    export let inclusionState: InclusionState = InclusionState.Pending
+    export let asset: IAsset
     export let asyncStatus: ActivityAsyncStatus = null
-    export let formattedFiatValue: string = null
-    export let time: Date = null
-    export let metadata: string = null
-    export let tag: string = null
-    export let storageDeposit = 0
-    export let expirationDate: Date = null
-    export let subject: Subject = null
-    export let claimingTransactionId: string = null
     export let claimedDate: Date = null
+    export let claimingTransactionId: string = null
+    export let direction: ActivityDirection
+    export let expirationDate: Date = null
+    export let formattedFiatValue: string = null
+    export let inclusionState: InclusionState = InclusionState.Pending
+    export let metadata: string = null
+    export let amount: string = null
+    export let rawAmount: number
+    export let unit: string
+
+    export let storageDeposit = 0
+    export let subject: Subject = null
+    export let tag: string = null
+    export let time: Date = null
+    export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
@@ -87,9 +91,16 @@
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
         {#if amount}
             <transaction-value class="flex flex-col space-y-0.5 items-center">
-                <div class="flex flex-row items-baseline space-x-0.5">
-                    <Text type="h1" fontWeight={FontWeightText.semibold}>{amount}</Text>
-                    <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
+                <div class="flex flex-row space-x-3">
+                    <AssetIcon {asset} />
+                    <div class="flex flex-row items-baseline space-x-0.1">
+                        <Text type="h1" fontWeight={FontWeightText.semibold}>
+                            {amount}
+                        </Text>
+                        {#if unit}
+                            <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
+                        {/if}
+                    </div>
                 </div>
                 {#if formattedFiatValue}
                     <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedFiatValue}</Text>

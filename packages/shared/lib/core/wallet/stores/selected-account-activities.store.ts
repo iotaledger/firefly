@@ -1,12 +1,14 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
+import { selectedAccount } from '../../account/stores/selected-account.store'
 
-import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { formatUnitBestMatch } from '@lib/units'
 import { getMonthYear, isValueInUnitRange, unitToValue } from '@lib/utils'
 
-import { Activity, ActivityDirection } from '..'
+import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
+import { isFilteredActivity } from '../utils/isFilteredActivity'
+import { ActivityFilter } from '../interfaces/filter.interface'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -19,19 +21,17 @@ export const selectedAccountActivities: Readable<Activity[]> = derived(
     }
 )
 
-export const activityFilterIndex: Writable<number> = writable(0)
+export const activityFilter: Writable<ActivityFilter> = writable({
+    showHidden: { active: false, type: 'boolean', label: 'filters.showHidden' },
+})
 export const activitySearchTerm: Writable<string> = writable('')
 
 export const queriedActivities: Readable<Activity[]> = derived(
-    [selectedAccountActivities, activityFilterIndex, activitySearchTerm],
-    ([$selectedAccountActivities, $activityFilterIndex, $activitySearchTerm]) => {
+    [selectedAccountActivities, activitySearchTerm, activityFilter],
+    ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities
 
-        if ($activityFilterIndex === 1) {
-            activityList = activityList.filter((activity) => activity.direction === ActivityDirection.In)
-        } else if ($activityFilterIndex === 2) {
-            activityList = activityList.filter((activity) => activity.direction === ActivityDirection.Out)
-        }
+        activityList = activityList.filter((activity) => !isFilteredActivity(activity))
 
         if (activitySearchTerm) {
             activityList = activityList.filter(
@@ -50,7 +50,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
             )
         }
 
-        return activityList
+        return activityList.sort((activity1, activity2) => activity2.time.getTime() - activity1.time.getTime())
     }
 )
 

@@ -1,8 +1,7 @@
 import { IAssetBalance } from './asset-balance.interface'
-import { ITokenMetadata } from './token-metadata.interface'
+import { IPersistedAsset } from './persisted-asset.interface'
 
-export interface IAsset {
-    metadata: ITokenMetadata
+export interface IAsset extends IPersistedAsset {
     balance: IAssetBalance
     fiatPrice?: string
     fiatBalance?: string

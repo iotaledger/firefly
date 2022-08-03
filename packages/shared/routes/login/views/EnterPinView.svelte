@@ -102,7 +102,14 @@
                     if (verified === true) {
                         return Platform.getMachineId().then(() =>
                             getStorageDirectoryOfProfile(profile.id).then((path) => {
-                                initialiseProfileManager(path, COIN_TYPE[profile.networkProtocol])
+                                initialiseProfileManager(
+                                    path,
+                                    COIN_TYPE[profile.networkProtocol],
+                                    $activeProfile.clientOptions,
+                                    {
+                                        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
+                                    }
+                                )
                                 // TODO: set storage password with profile manager api
                                 // api.setStoragePassword(pinCode, {
                                 //     onSuccess() {
