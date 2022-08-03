@@ -5,8 +5,8 @@
     import { profileRecoveryRouter } from '@core/router'
     import {
         ImportFile,
-        setImportFile,
         setProfileRecoveryTypeFromFilename,
+        updateOnboardingProfile,
         validateBackupFile,
     } from '@contexts/onboarding'
     import { onMount } from 'svelte'
@@ -18,14 +18,14 @@
     const allowedExtensions = ['kdbx', 'stronghold']
 
     let importFile: ImportFile
-    let fileName = ''
-    let filePath = ''
+    let importFileName = ''
+    let importFilePath = ''
     let dropping = false
 
     function handleContinueClick(): void {
-        validateBackupFile(fileName)
-        setProfileRecoveryTypeFromFilename(fileName)
-        setImportFile(importFile, filePath)
+        validateBackupFile(importFileName)
+        setProfileRecoveryTypeFromFilename(importFileName)
+        updateOnboardingProfile({ importFile, importFilePath })
         $profileRecoveryRouter.next()
     }
 
@@ -36,14 +36,14 @@
     function setFile(buffer?: ImportFile, file?: FileWithPath): void {
         if (!buffer) {
             file = null
-            fileName = null
-            filePath = null
+            importFileName = null
+            importFilePath = null
             return
         }
 
         importFile = buffer
-        fileName = file?.name
-        filePath = file?.path
+        importFileName = file?.name
+        importFilePath = file?.path
     }
 
     function handleFileSelect(event: DragEvent | Event): void {
@@ -75,7 +75,7 @@
     }
 
     onMount(() => {
-        setImportFile(null, null)
+        updateOnboardingProfile({ importFile: null, importFilePath: null })
     })
 </script>
 
@@ -87,7 +87,7 @@
         <Text type="p" secondary classes="mb-8">{localize('views.importFromFile.body')}</Text>
         {#if !$mobile}
             <Dropzone
-                {fileName}
+                {importFileName}
                 {allowedExtensions}
                 onDrop={handleFileSelect}
                 bind:dropping

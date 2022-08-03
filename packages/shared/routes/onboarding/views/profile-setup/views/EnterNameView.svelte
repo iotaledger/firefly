@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
-    import { profileSetupRouter } from '@core/router'
+    import { profileRecoveryRouter, profileSetupRouter } from '@core/router'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     let error = ''
@@ -14,6 +14,11 @@
     $: profileName, (error = '') // Error clears when profileName changes
 
     function handleBackClick(): void {
+        if ($onboardingProfile?.recoveryType) {
+            updateOnboardingProfile({ type: null, setupType: null, recoveryType: null })
+            $profileRecoveryRouter.reset()
+            $profileSetupRouter.reset()
+        }
         $profileSetupRouter.previous()
     }
 

@@ -16,6 +16,10 @@
         CongratulationsView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
+
+    import { onboardingProfile } from '../../lib/contexts/onboarding'
+    /* eslint-disable no-console */
+    $: console.log($onboardingProfile)
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.AppSetup}

@@ -2,10 +2,11 @@
     import { onMount } from 'svelte'
     import { Animation, OnboardingButton, Link, Logo, OnboardingLayout, Text } from 'shared/components'
     import features from '@features/features'
+    import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
-    import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
+    import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
     import { Platform } from '@lib/platform'
 
@@ -19,6 +20,7 @@
     }
 
     onMount(() => {
+        destroyProfileManager()
         updateOnboardingProfile({ setupType: null })
     })
 </script>
