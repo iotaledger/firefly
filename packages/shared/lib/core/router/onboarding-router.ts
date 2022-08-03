@@ -62,7 +62,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                         if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
                             nextRoute = OnboardingRoute.Congratulations
                         } else {
-                            profileBackupRoute.set(ProfileBackupRoute.Backup)
+                            profileBackupRoute.set(ProfileBackupRoute.BackupStronghold)
                             nextRoute = OnboardingRoute.ProfileBackup
                         }
                     }

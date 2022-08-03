@@ -5,8 +5,8 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
+    import { mnemonic } from '@contexts/onboarding'
 
-    export let mnemonic: string[]
     export let busy = false
 
     const verifyRecoveryPhrase: string[] = []
@@ -18,9 +18,9 @@
 
     function fillChoices(): void {
         const currentIndex = verifyRecoveryPhrase.length
-        const actualWord = mnemonic[currentIndex]
-        const random1 = generateRandomWord(mnemonic)
-        const random2 = generateRandomWord([...mnemonic, random1])
+        const actualWord = $mnemonic[currentIndex]
+        const random1 = generateRandomWord($mnemonic)
+        const random2 = generateRandomWord([...$mnemonic, random1])
 
         wordChoices = [actualWord, random1, random2].sort(() => 0.5 - Math.random())
     }
@@ -44,8 +44,8 @@
             wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })
         }
         verifyRecoveryPhrase[verifyIndex] = word
-        if (mnemonic[verifyIndex] === word) {
-            if (verifyIndex === mnemonic.length - 1) {
+        if ($mnemonic[verifyIndex] === word) {
+            if (verifyIndex === $mnemonic.length - 1) {
                 verified = true
             } else {
                 verifyIndex++
@@ -144,7 +144,7 @@
         class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'my-4 p-0' : 'p-4'}"
     >
         {#if ($mobile && !verified) || !$mobile}
-            <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {verifyRecoveryPhrase} disabled={busy} />
+            <RecoveryPhrase classes="mb-8" recoveryPhrase={$mnemonic} {verifyRecoveryPhrase} disabled={busy} />
         {/if}
     </div>
 </OnboardingLayout>

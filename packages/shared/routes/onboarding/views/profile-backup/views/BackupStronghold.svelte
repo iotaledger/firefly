@@ -17,7 +17,7 @@
         skipBackup = _skipBackup
 
         if (skipBackup) {
-            $profileBackupRouter.next({ skip: true })
+            $profileBackupRouter.next()
         } else {
             await backupInitialStronghold()
             $profileBackupRouter.next()

@@ -1,47 +1,23 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { BackupView, BackupToFileView, RecoveryPhraseView, VerifyRecoveryPhraseView } from './views'
-    import { localize } from '@core/i18n'
-    import { profileBackupRoute, profileBackupRouter, ProfileBackupRoute, FireflyEvent } from '@core/router'
-    import { mnemonic, strongholdPassword } from '@contexts/onboarding'
-    import { showAppNotification } from '@lib/notifications'
-
-    let busy = false
-
-    async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
-        busy = true
-        try {
-            await $profileBackupRouter.next(event.detail)
-        } catch (err) {
-            console.error(err)
-            showAppNotification({
-                type: 'error',
-                message: localize(err.error ?? 'error.global.generic'),
-            })
-        } finally {
-            busy = false
-        }
-    }
-
-    function previous(): void {
-        $profileBackupRouter.previous()
-    }
+    import { BackupMnemonic, BackupStronghold, VerifyMnemonic, ViewMnemonic } from './views'
+    import { profileBackupRoute, ProfileBackupRoute } from '@core/router'
 </script>
 
-{#if $profileBackupRoute === ProfileBackupRoute.Init}
+{#if $profileBackupRoute === ProfileBackupRoute.BackupMnemonic}
     <Transition>
-        <BackupView on:next={next} on:previous={previous} {busy} />
+        <BackupMnemonic />
     </Transition>
-{:else if $profileBackupRoute === ProfileBackupRoute.RecoveryPhrase}
+{:else if $profileBackupRoute === ProfileBackupRoute.ViewMnemonic}
     <Transition>
-        <RecoveryPhraseView on:next={next} on:previous={previous} {busy} mnemonic={$mnemonic} />
+        <ViewMnemonic />
     </Transition>
-{:else if $profileBackupRoute === ProfileBackupRoute.Verify}
+{:else if $profileBackupRoute === ProfileBackupRoute.VerifyMnemonic}
     <Transition>
-        <VerifyRecoveryPhraseView on:next={next} on:previous={previous} {busy} mnemonic={$mnemonic} />
+        <VerifyMnemonic />
     </Transition>
-{:else if $profileBackupRoute === ProfileBackupRoute.Backup}
+{:else if $profileBackupRoute === ProfileBackupRoute.BackupStronghold}
     <Transition>
-        <BackupToFileView on:next={next} on:previous={previous} {busy} strongholdPassword={$strongholdPassword} />
+        <BackupStronghold />
     </Transition>
 {/if}

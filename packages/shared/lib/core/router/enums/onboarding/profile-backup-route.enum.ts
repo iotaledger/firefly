@@ -1,6 +1,6 @@
 export enum ProfileBackupRoute {
-    Init = 'init',
-    RecoveryPhrase = 'recoveryPhrase',
-    Verify = 'verify',
-    Backup = 'backup',
+    BackupMnemonic = 'backupMnemonic',
+    BackupStronghold = 'backupStronghold',
+    VerifyMnemonic = 'verifyMnemonic',
+    ViewMnemonic = 'viewMnemonic',
 }

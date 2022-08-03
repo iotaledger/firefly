@@ -9,7 +9,7 @@ export const profileBackupRouter = writable<ProfileBackupRouter>(null)
 
 export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
     constructor() {
-        super(ProfileBackupRoute.Init, profileBackupRoute, get(onboardingRouter))
+        super(ProfileBackupRoute.BackupMnemonic, profileBackupRoute, get(onboardingRouter))
     }
 
     next(): void {
@@ -17,19 +17,19 @@ export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case ProfileBackupRoute.Init:
-                nextRoute = ProfileBackupRoute.RecoveryPhrase
+            case ProfileBackupRoute.BackupMnemonic:
+                nextRoute = ProfileBackupRoute.ViewMnemonic
                 break
 
-            case ProfileBackupRoute.RecoveryPhrase:
-                nextRoute = ProfileBackupRoute.Verify
+            case ProfileBackupRoute.ViewMnemonic:
+                nextRoute = ProfileBackupRoute.VerifyMnemonic
                 break
 
-            case ProfileBackupRoute.Verify:
-                nextRoute = ProfileBackupRoute.Backup
+            case ProfileBackupRoute.VerifyMnemonic:
+                nextRoute = ProfileBackupRoute.BackupStronghold
                 break
 
-            case ProfileBackupRoute.Backup: {
+            case ProfileBackupRoute.BackupStronghold: {
                 this.parentRouter.next()
                 break
             }

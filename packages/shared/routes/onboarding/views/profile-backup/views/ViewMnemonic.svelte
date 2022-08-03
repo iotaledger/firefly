@@ -4,17 +4,16 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
+    import { mnemonic } from '@contexts/onboarding'
     import { generateAndStoreMnemonic } from '@lib/wallet'
     import { downloadRecoveryKit } from '@lib/utils'
 
-    export let mnemonic: string[]
-    export let busy = false
-
+    const busy = false
     let hide = true
     let hasRevealedRecoveryPhrase = false
 
-    function handleContinueClick(skipVerify: boolean): void {
-        $profileBackupRouter.next({ skip: skipVerify })
+    function handleContinueClick(): void {
+        $profileBackupRouter.next()
     }
 
     function handleBackClick(): void {
@@ -53,7 +52,7 @@
         <Button
             disabled={!$mobile && !hasRevealedRecoveryPhrase}
             classes="w-full"
-            onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick(false) : handleMnemonicVisibilityClick}
+            onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick() : handleMnemonicVisibilityClick}
         >
             {localize(
                 $mobile && !hasRevealedRecoveryPhrase ? 'views.recoveryPhrase.revealRecoveryPhrase' : 'actions.continue'
@@ -61,8 +60,8 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex flex-col items-center justify-center {$mobile ? 'p-0' : 'p-4'}">
-        {#if mnemonic !== undefined && mnemonic !== null}
-            <RecoveryPhrase classes="mb-8" recoveryPhrase={mnemonic} {hide} />
+        {#if $mnemonic}
+            <RecoveryPhrase classes="mb-8" recoveryPhrase={$mnemonic} {hide} />
             {#if !$mobile}
                 {#if !hasRevealedRecoveryPhrase}
                     {#if hide}
