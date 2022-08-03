@@ -2,11 +2,11 @@ import { get } from 'svelte/store'
 
 import { clearStrongholdPassword } from '@core/profile-manager'
 
-import { strongholdPassword } from '../stores'
+import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
 export async function clearStrongholdPasswordForOnboarding(): Promise<void> {
-    if (get(strongholdPassword)) {
+    if (get(onboardingProfile)?.strongholdPassword) {
         await clearStrongholdPassword()
-        strongholdPassword.set(null)
+        updateOnboardingProfile({ strongholdPassword: null })
     }
 }

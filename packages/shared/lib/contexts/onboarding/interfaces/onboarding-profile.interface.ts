@@ -10,4 +10,5 @@ export interface IOnboardingProfile extends IPersistedProfile {
     importFile?: ImportFile
     importFilePath?: string
     mnemonic?: string[]
+    strongholdPassword?: string
 }

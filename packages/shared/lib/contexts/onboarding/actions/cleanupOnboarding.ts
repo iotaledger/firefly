@@ -1,9 +1,9 @@
-import { cleanupOnboardingStores } from './cleanupOnboardingStores'
 import { deleteOnboardingProfile } from './deleteOnboardingProfile'
 import { destroyIotaProfileManager } from './destroyIotaProfileManager'
+import { onboardingProfile } from '@contexts/onboarding'
 
 export async function cleanupOnboarding(deleteProfile: boolean = false): Promise<void> {
-    cleanupOnboardingStores()
+    onboardingProfile.set(null)
     await cleanupExtraProfileManagers()
     if (deleteProfile) {
         await deleteOnboardingProfile()

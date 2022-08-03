@@ -7,9 +7,9 @@
     import {
         restoreBackupFromFile,
         isGettingMigrationData,
-        strongholdPassword,
         iotaProfileManager,
         onboardingProfile,
+        updateOnboardingProfile,
     } from '@contexts/onboarding'
 
     export let error = ''
@@ -17,17 +17,18 @@
 
     const { importFile } = getContext<ProfileRecoveryRouter>('importRouter')
 
-    let password = ''
+    let strongholdPassword = ''
 
     async function handleContinue(): Promise<void> {
-        if (password) {
+        if (strongholdPassword) {
             try {
-                await restoreBackupFromFile(importFile, password)
+                await restoreBackupFromFile(importFile, strongholdPassword)
+
                 if ($iotaProfileManager) {
-                    await $iotaProfileManager.restoreBackup($onboardingProfile?.importFilePath, password)
+                    await $iotaProfileManager.restoreBackup($onboardingProfile?.importFilePath, strongholdPassword)
                 }
 
-                $strongholdPassword = password
+                updateOnboardingProfile({ strongholdPassword })
                 $profileRecoveryRouter.next()
             } catch (err) {
                 console.error(err)
@@ -62,7 +63,7 @@
         <PasswordInput
             classes="mb-6"
             {error}
-            bind:value={password}
+            bind:value={strongholdPassword}
             showRevealToggle
             autofocus
             disabled={busy}
@@ -72,7 +73,7 @@
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
-            disabled={password.length === 0 || busy || $isGettingMigrationData}
+            disabled={strongholdPassword.length === 0 || busy || $isGettingMigrationData}
             onClick={handleContinue}
         >
             {#if $isGettingMigrationData}

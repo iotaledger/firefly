@@ -5,7 +5,7 @@ import { addNewProfile, loadPersistedProfileIntoActiveProfile, login, ProfileTyp
 
 import { ProfileRecoveryType, ProfileSetupType } from '../enums'
 import { convertOnboardingProfileToPersistedProfile } from '../helpers'
-import { onboardingProfile, strongholdPassword } from '../stores'
+import { onboardingProfile } from '../stores'
 import { cleanupOnboarding } from './cleanupOnboarding'
 import { restoreBackupFromFile } from './restoreBackupFromFile'
 import { verifyAndStoreMnemonic } from './verifyAndStoreMnemonic'
@@ -29,7 +29,10 @@ export async function completeOnboardingProcess(): Promise<void> {
         if (profileRecoveryType === ProfileRecoveryType.Mnemonic) {
             await verifyAndStoreMnemonic()
         } else if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
-            await restoreBackupFromFile(get(onboardingProfile)?.importFile as Buffer, get(strongholdPassword))
+            await restoreBackupFromFile(
+                get(onboardingProfile)?.importFile as Buffer,
+                get(onboardingProfile)?.strongholdPassword
+            )
         }
     }
 

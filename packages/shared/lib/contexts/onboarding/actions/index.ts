@@ -1,7 +1,6 @@
 export * from './backupInitialStronghold'
 export * from './cleanupNewProfileManager'
 export * from './cleanupOnboarding'
-export * from './cleanupOnboardingStores'
 export * from './completeOnboardingProcess'
 export * from './clearStrongholdPasswordForOnboarding'
 export * from './createIotaProfileManager'

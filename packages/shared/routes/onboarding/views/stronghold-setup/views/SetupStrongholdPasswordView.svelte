@@ -5,26 +5,26 @@
     import { localize } from '@core/i18n'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
     import { onboardingRouter } from '@core/router'
-    import { iotaProfileManager, strongholdPassword } from '@contexts/onboarding'
+    import { iotaProfileManager, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
     import { MAX_PASSWORD_LENGTH } from '@lib/wallet'
 
-    let password = ''
-    let confirmedPassword = ''
-    let lastCheckedPassword = ''
+    let strongholdPassword = ''
+    let confirmedStrongholdPassword = ''
+    let lastCheckedStrongholdPassword = ''
     let error = ''
     let errorConfirm = ''
     let busy = false
 
-    $: passwordStrength = checkPasswordStrength(password) ?? passwordStrength
-    $: password, confirmedPassword, ((error = ''), (errorConfirm = ''))
+    $: passwordStrength = checkPasswordStrength(strongholdPassword) ?? passwordStrength
+    $: strongholdPassword, confirmedStrongholdPassword, ((error = ''), (errorConfirm = ''))
 
     async function handleContinueClick(): Promise<void> {
         error = ''
         errorConfirm = ''
 
-        if (password.length > MAX_PASSWORD_LENGTH) {
+        if (strongholdPassword.length > MAX_PASSWORD_LENGTH) {
             error = localize('error.password.length', {
                 values: {
                     length: MAX_PASSWORD_LENGTH,
@@ -36,28 +36,33 @@
                 errKey = `error.password.${passwordInfo[passwordStrength?.feedback.warning]}`
             }
             error = localize(errKey)
-        } else if (password !== confirmedPassword) {
+        } else if (strongholdPassword !== confirmedStrongholdPassword) {
             errorConfirm = localize('error.password.doNotMatch')
         } else {
             try {
                 busy = true
 
-                const mustChangePassword = $strongholdPassword && $strongholdPassword !== password
+                const mustChangePassword =
+                    $onboardingProfile?.strongholdPassword &&
+                    $onboardingProfile?.strongholdPassword !== strongholdPassword
                 if (mustChangePassword) {
-                    await changeStrongholdPassword($strongholdPassword, password)
+                    await changeStrongholdPassword($onboardingProfile?.strongholdPassword, strongholdPassword)
 
                     if ($iotaProfileManager) {
-                        await $iotaProfileManager.changeStrongholdPassword($strongholdPassword, password)
+                        await $iotaProfileManager.changeStrongholdPassword(
+                            $onboardingProfile?.strongholdPassword,
+                            strongholdPassword
+                        )
                     }
                 } else {
-                    await setStrongholdPassword(password)
+                    await setStrongholdPassword(strongholdPassword)
 
                     if ($iotaProfileManager) {
-                        await $iotaProfileManager.setStrongholdPassword(password)
+                        await $iotaProfileManager.setStrongholdPassword(strongholdPassword)
                     }
                 }
 
-                $strongholdPassword = password
+                updateOnboardingProfile({ strongholdPassword })
                 $onboardingRouter.next()
             } catch (err) {
                 console.error(err)
@@ -78,9 +83,9 @@
     function checkPasswordStrength(password: string): unknown {
         const NUMBER_OF_STRENGTH_VALIDATION_CHARS = 64
         const limitedPassword = password.substring(0, NUMBER_OF_STRENGTH_VALIDATION_CHARS - 1)
-        const hasCheckedPasswordChanged = lastCheckedPassword !== limitedPassword
+        const hasCheckedPasswordChanged = lastCheckedStrongholdPassword !== limitedPassword
         if (hasCheckedPasswordChanged) {
-            lastCheckedPassword = limitedPassword
+            lastCheckedStrongholdPassword = limitedPassword
             return zxcvbn(limitedPassword)
         }
     } // zxcvbn lib recommends to not validate long passwords because of performance issues https://github.com/dropbox/zxcvbn#user-content-performance
@@ -97,7 +102,7 @@
             <PasswordInput
                 {error}
                 classes="mb-4"
-                bind:value={password}
+                bind:value={strongholdPassword}
                 strengthLevels={4}
                 showRevealToggle
                 showStrengthLevel
@@ -107,7 +112,7 @@
             />
             <PasswordInput
                 error={errorConfirm}
-                bind:value={confirmedPassword}
+                bind:value={confirmedStrongholdPassword}
                 classes="mb-5"
                 placeholder={localize('general.confirmPassword')}
                 showRevealToggle
@@ -116,7 +121,12 @@
         </form>
     </div>
     <div slot="leftpane__action">
-        <Button type="submit" form="password-form" classes="w-full" disabled={!password || !confirmedPassword || busy}>
+        <Button
+            type="submit"
+            form="password-form"
+            classes="w-full"
+            disabled={!strongholdPassword || !confirmedStrongholdPassword || busy}
+        >
             {localize('actions.savePassword')}
         </Button>
     </div>
