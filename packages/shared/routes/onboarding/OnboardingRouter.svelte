@@ -10,7 +10,7 @@
         ProfileRecoveryRouter,
         ProfileSetupRouter,
         ShimmerClaimingRouter,
-        StorageProtectionRouter,
+        StorageProtectionSetupRouter,
         StrongholdSetupRouter,
 
         // views
@@ -52,9 +52,9 @@
     <Transition>
         <StrongholdSetupRouter />
     </Transition>
-{:else if $onboardingRoute === OnboardingRoute.StorageProtection}
+{:else if $onboardingRoute === OnboardingRoute.StorageProtectionSetup}
     <Transition transition={false}>
-        <StorageProtectionRouter />
+        <StorageProtectionSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.ProfileBackup}
     <Transition transition={false}>

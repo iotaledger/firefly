@@ -39,14 +39,14 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                     if (profileType === ProfileType.Software) {
                         nextRoute = OnboardingRoute.StrongholdSetup
                     } else {
-                        nextRoute = OnboardingRoute.StorageProtection
+                        nextRoute = OnboardingRoute.StorageProtectionSetup
                     }
                 } else {
                     nextRoute = OnboardingRoute.ProfileRecovery
                 }
                 break
             }
-            case OnboardingRoute.StorageProtection: {
+            case OnboardingRoute.StorageProtectionSetup: {
                 const _onboardingProfile = get(onboardingProfile)
                 const profileType = _onboardingProfile?.type
                 const profileSetupType = _onboardingProfile?.setupType
@@ -83,7 +83,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             }
 
             case OnboardingRoute.StrongholdSetup: {
-                nextRoute = OnboardingRoute.StorageProtection
+                nextRoute = OnboardingRoute.StorageProtectionSetup
                 break
             }
             case OnboardingRoute.ProfileBackup: {

@@ -8,7 +8,7 @@ export enum OnboardingRoute {
     ProfileBackup = 'backup',
     ProfileRecovery = 'recovery',
     ProfileSetup = 'profileSetup',
-    StorageProtection = 'storageProtection',
+    StorageProtectionSetup = 'storageProtectionSetup',
     ShimmerClaiming = 'claimRewards',
     Welcome = 'welcome',
 }

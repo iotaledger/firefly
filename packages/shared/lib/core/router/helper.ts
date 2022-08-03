@@ -23,8 +23,8 @@ import {
     networkSetupRouter,
     ProfileSetupRouter,
     profileSetupRouter,
-    storageProtectionRouter,
-    StorageProtectionRouter,
+    storageProtectionSetupRouter,
+    StorageProtectionSetupRouter,
     shimmerClaimingRouter,
     ShimmerClaimingRouter,
     strongholdSetupRouter,
@@ -58,7 +58,7 @@ function initSubrouters(): void {
     profileBackupRouter.set(new ProfileBackupRouter())
     profileRecoveryRouter.set(new ProfileRecoveryRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
-    storageProtectionRouter.set(new StorageProtectionRouter())
+    storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
     shimmerClaimingRouter.set(new ShimmerClaimingRouter())
 }
 
@@ -84,7 +84,7 @@ function resetSubrouters(): void {
     get(profileBackupRouter).reset()
     get(profileRecoveryRouter).reset()
     get(profileSetupRouter).reset()
-    get(storageProtectionRouter).reset()
+    get(storageProtectionSetupRouter).reset()
     get(shimmerClaimingRouter).reset()
 }
 

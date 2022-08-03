@@ -3,7 +3,7 @@
     import { initialisePincodeManager } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { storageProtectionRouter } from '@core/router'
+    import { storageProtectionSetupRouter } from '@core/router'
     import { validatePinFormat } from '@lib/utils'
 
     export let busy = false
@@ -28,12 +28,12 @@
     }
 
     function onBackClick(): void {
-        $storageProtectionRouter.previous()
+        $storageProtectionSetupRouter.previous()
     }
 
     async function onSetPinClick(): Promise<void> {
         await initialisePincodeManager(setPinInput)
-        $storageProtectionRouter.next()
+        $storageProtectionSetupRouter.next()
     }
 
     async function handleSetPinSubmit(): Promise<void> {

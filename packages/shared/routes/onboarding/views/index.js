@@ -6,7 +6,7 @@ export * from './profile-backup'
 export * from './profile-recovery'
 export * from './profile-setup'
 export * from './shimmer-claiming'
-export * from './storage-protection'
+export * from './storage-protection-setup'
 export * from './stronghold-setup'
 
 export { default as CongratulationsView } from './CongratulationsView.svelte'
