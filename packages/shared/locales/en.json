@@ -1097,8 +1097,9 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
-
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep Link"
     },
     "general": {
         "recipient": "Recipient",
@@ -1269,8 +1270,10 @@
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
-        "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets."
-
+        "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL"
     },
     "filters":{
         "title": "Filters",
@@ -1544,7 +1547,7 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking",
-        "developerTools": "Developer Tools"
+        "developerTools": "Developer"
     },
     "pills": {
         "stake": {
