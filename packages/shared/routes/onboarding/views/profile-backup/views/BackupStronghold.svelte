@@ -3,7 +3,12 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import { backupInitialStronghold, onboardingProfile } from '@contexts/onboarding'
+    import {
+        backupInitialStronghold,
+        onboardingProfile,
+        updateOnboardingProfile,
+        verifyAndStoreMnemonic,
+    } from '@contexts/onboarding'
 
     export let busy = false
 
@@ -12,42 +17,36 @@
 
     $: isStrongholdPasswordValid = $onboardingProfile?.strongholdPassword === confirmPassword
 
-    async function onboardingBackupFileFunction(_skipBackup: boolean = false): Promise<void> {
-        skipBackup = _skipBackup
-
-        if (skipBackup) {
-            $profileBackupRouter.next()
-        } else {
-            await backupInitialStronghold()
-            $profileBackupRouter.next()
-        }
+    function onSkipBackupClick(): void {
+        skipBackup = true
+        $profileBackupRouter.next()
     }
 
-    async function handleSkipBackupClick(): Promise<void> {
-        await onboardingBackupFileFunction(true)
-    }
-
-    async function handleSubmitClick(): Promise<void> {
+    async function onBackupClick(): Promise<void> {
         if (isStrongholdPasswordValid) {
             try {
-                await onboardingBackupFileFunction()
-            } catch (error) {
-                return
+                skipBackup = false
+                await verifyAndStoreMnemonic()
+                await backupInitialStronghold()
+                updateOnboardingProfile({ mnemonic: null })
+                $profileBackupRouter.next()
+            } catch (err) {
+                console.error(err)
             }
         }
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $profileBackupRouter.previous()
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} {busy}>
+<OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
         <Text type="h2">{localize('views.backupWallet.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <form on:submit|preventDefault={handleSubmitClick} id="backup-form">
+        <form on:submit|preventDefault={onBackupClick} id="backup-form">
             <Text type="p" secondary classes="mb-8">{localize('views.backupWallet.body1')}</Text>
             <PasswordInput bind:value={confirmPassword} autofocus disabled={busy} showRevealToggle classes="mb-8" />
             <Text type="p" secondary classes="mb-4">{localize('views.backupWallet.body2')}</Text>
@@ -57,7 +56,7 @@
         </form>
     </div>
     <div slot="leftpane__action">
-        <Button secondary classes="w-full mb-4" disabled={busy} onClick={handleSkipBackupClick}>
+        <Button secondary classes="w-full mb-4" disabled={busy} onClick={onSkipBackupClick}>
             {#if skipBackup && busy}
                 <Spinner busy={true} message={localize('general.creatingProfile')} classes="justify-center" />
             {:else}{localize('actions.skipBackup')}{/if}

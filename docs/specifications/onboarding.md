@@ -83,8 +83,10 @@ graph TD;
     
     id27("Congratulations")
     
+    id28("Loading View")
+    
     subgraph Dashboard
-    id28("Wallet Dashboard")
+    id29("Wallet Dashboard")
     end
     
     id0 --> A{Has complete onboarding before?}
@@ -112,7 +114,12 @@ graph TD;
     F -- Yes --> id13
     id9 --> id11
     id11 --> G{Is software profile?}
-    G -- Yes --> id21
+    G -- Yes --> P{Is recovered profile?}
+    P -- Yes --> Q{Is Stronghold-based recovery?}
+    Q -- Yes --> id22
+    Q -- No --> id21
+    P -- No --> id21
+    
     G -- No --> id22
     
     id12 --> id15
@@ -129,7 +136,7 @@ graph TD;
     I -- No --> id23 --> id24
     id24 --> J{Is claimed profile?}
     J -- Yes --> id25
-    J -- No --> id27
+    J -- No --> N
     H -- No --> K{Is claimed profile?}
     K -- Yes --> id25
     K -- No --> L{Is new profile?}
@@ -139,7 +146,7 @@ graph TD;
     N -- Yes --> id27
     N -- No --> id20
     
-    id25 --> id26 --> id27
+    id25 --> id26 --> N
     
-    id27 --> id28
+    id27 --> id28 --> id29
 ```

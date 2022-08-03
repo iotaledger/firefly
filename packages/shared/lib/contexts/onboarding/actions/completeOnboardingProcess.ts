@@ -5,39 +5,52 @@ import { addNewProfile, loadPersistedProfileIntoActiveProfile, login, ProfileTyp
 
 import { ProfileRecoveryType, ProfileSetupType } from '../enums'
 import { convertOnboardingProfileToPersistedProfile } from '../helpers'
-import { onboardingProfile } from '../stores'
+import { onboardingProfile, updateOnboardingProfile } from '../stores'
 import { cleanupOnboarding } from './cleanupOnboarding'
 import { restoreBackupFromFile } from './restoreBackupFromFile'
 import { verifyAndStoreMnemonic } from './verifyAndStoreMnemonic'
 
 export async function completeOnboardingProcess(): Promise<void> {
-    // This is the last screen in onboarding for all flows i.e., if you create a new wallet or import stronghold
-    // When this component mounts, ensure that the profile is persisted in the local storage.
-    const newProfile = convertOnboardingProfileToPersistedProfile(get(onboardingProfile))
-    addNewProfile(newProfile)
-    loadPersistedProfileIntoActiveProfile(get(onboardingProfile)?.id)
+    addOnboardingProfile()
+    await initialiseSecretManager()
+    await createNewAccount()
+    const recoverAccounts = get(onboardingProfile)?.setupType !== ProfileSetupType.New
+    void login(recoverAccounts)
+    void cleanupOnboarding()
+}
 
-    const profileType = get(onboardingProfile)?.type
-    const profileSetupType = get(onboardingProfile)?.setupType
-    const profileRecoveryType = get(onboardingProfile)?.recoveryType
+function addOnboardingProfile(): void {
+    const _onboardingProfile = get(onboardingProfile)
+    const newProfile = convertOnboardingProfileToPersistedProfile(_onboardingProfile)
+    addNewProfile(newProfile)
+    loadPersistedProfileIntoActiveProfile(_onboardingProfile?.id)
+}
+
+async function initialiseSecretManager(): Promise<void> {
+    const _onboardingProfile = get(onboardingProfile)
+
+    const profileType = _onboardingProfile?.type
+    const profileSetupType = _onboardingProfile?.setupType
+    const profileRecoveryType = _onboardingProfile?.recoveryType
 
     if (profileSetupType === ProfileSetupType.New) {
         if (profileType === ProfileType.Software) {
-            await verifyAndStoreMnemonic()
+            if (_onboardingProfile?.mnemonic) {
+                await verifyAndStoreMnemonic()
+                updateOnboardingProfile({ mnemonic: null })
+            }
         }
     } else if (profileSetupType === ProfileSetupType.Recovered) {
         if (profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-            await verifyAndStoreMnemonic()
+            if (_onboardingProfile?.mnemonic) {
+                await verifyAndStoreMnemonic()
+                updateOnboardingProfile({ mnemonic: null })
+            }
         } else if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
             await restoreBackupFromFile(
-                get(onboardingProfile)?.importFile as Buffer,
-                get(onboardingProfile)?.strongholdPassword
+                _onboardingProfile?.importFile as Buffer,
+                _onboardingProfile?.strongholdPassword
             )
         }
     }
-
-    await createNewAccount()
-    const recoverAccounts = profileSetupType !== ProfileSetupType.New
-    void login(recoverAccounts)
-    void cleanupOnboarding()
 }
