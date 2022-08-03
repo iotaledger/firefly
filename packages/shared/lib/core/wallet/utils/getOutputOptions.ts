@@ -1,5 +1,5 @@
 import { convertDateToUnixTimestamp } from '@core/utils'
-import type { OutputOptions } from '@iota/wallet'
+import { OutputOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'
@@ -10,11 +10,12 @@ export function getOutputOptions(
     rawAmount: number,
     metadata: string,
     tag: string,
-    asset?: IAsset
+    asset?: IAsset,
+    giftStorageDeposit?: boolean
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const nativeTokenId = asset?.id !== get(selectedAccountAssets).baseCoin.id ? asset?.id : undefined
-    return {
+    return <OutputOptions>{
         recipientAddress,
         amount: nativeTokenId ? '0' : String(rawAmount),
         features: {
@@ -34,5 +35,8 @@ export function getOutputOptions(
                 ],
             },
         }),
+        storageDeposit: {
+            returnStrategy: giftStorageDeposit ? 'Gift' : 'Return',
+        },
     }
 }
