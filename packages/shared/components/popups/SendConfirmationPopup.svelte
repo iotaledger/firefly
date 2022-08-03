@@ -92,7 +92,7 @@
             if ($isSoftwareProfile) {
                 await checkStronghold(validateAndSendOutput, true)
             } else if ($isLedgerProfile) {
-                promptUserToConnectLedger(validateAndSendOutput, undefined)
+                promptUserToConnectLedger(validateAndSendOutput, undefined, true)
             }
         } catch (err) {
             if (!error) {
