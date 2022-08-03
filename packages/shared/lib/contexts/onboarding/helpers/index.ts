@@ -1,4 +1,5 @@
 export * from './buildOnboardingProfile'
+export * from './convertOnboardingProfileToPersistedProfile'
 export * from './getProfileTypeFromProfileRecoveryType'
 export * from './setImportFile'
 export * from './setProfileRecoveryTypeFromFilename'

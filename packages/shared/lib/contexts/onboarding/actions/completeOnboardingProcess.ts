@@ -1,17 +1,10 @@
 import { get } from 'svelte/store'
 
 import { createNewAccount } from '@core/account'
-import {
-    addNewProfile,
-    IPersistedProfile,
-    loadPersistedProfileIntoActiveProfile,
-    login,
-    ProfileType,
-} from '@core/profile'
-import { DEFAULT_ACTIVE_PROFILE_VALUE } from '@core/profile/constants/default-active-profile-values.constant'
+import { addNewProfile, loadPersistedProfileIntoActiveProfile, login, ProfileType } from '@core/profile'
 
 import { ProfileRecoveryType, ProfileSetupType } from '../enums'
-import { IOnboardingProfile } from '../interfaces'
+import { convertOnboardingProfileToPersistedProfile } from '../helpers'
 import { importFile, onboardingProfile, strongholdPassword } from '../stores'
 import { cleanupOnboarding, restoreBackupFromFile, storeAndCleanMnemonic } from '@contexts/onboarding'
 
@@ -41,11 +34,4 @@ export async function completeOnboardingProcess(): Promise<void> {
     await createNewAccount()
     void login()
     void cleanupOnboarding()
-}
-
-function convertOnboardingProfileToPersistedProfile(onboardingProfile: Partial<IOnboardingProfile>): IPersistedProfile {
-    return {
-        ...DEFAULT_ACTIVE_PROFILE_VALUE,
-        ...onboardingProfile,
-    }
 }
