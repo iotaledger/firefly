@@ -1,4 +1,5 @@
 import { getAndUpdateNodeInfo } from '@core/network'
+import { onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import {
     // setStrongholdPasswordClearInterval,
@@ -15,12 +16,13 @@ import { activeProfile, setTimeStrongholdLastUnlocked } from '../../stores'
 import { loadAccounts } from './loadAccounts'
 import { recoverAndLoadAccounts } from './recoverAndLoadAccounts'
 
-export async function login(recoverAccounts: boolean = false): Promise<void> {
+export async function login(): Promise<void> {
     const { loggedIn, lastActiveAt, id, isStrongholdLocked, type } = get(activeProfile)
     if (id) {
         loggedIn.set(true)
         await getAndUpdateNodeInfo()
 
+        const recoverAccounts = get(onboardingProfile)?.setupType !== ProfileSetupType.New
         if (recoverAccounts) {
             void recoverAndLoadAccounts(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
         } else {

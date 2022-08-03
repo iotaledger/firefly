@@ -84,7 +84,7 @@
                 ?.restoreProfile?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.enabled}
-            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Restored)}
+            onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Recovered)}
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
