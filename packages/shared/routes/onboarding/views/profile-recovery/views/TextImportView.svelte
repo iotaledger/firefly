@@ -3,19 +3,18 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '@core/router'
-    import { profileRecoveryType, isGettingMigrationData, mnemonic } from '@contexts/onboarding'
+    import { onboardingProfile, isGettingMigrationData, mnemonic } from '@contexts/onboarding'
     import { onMount } from 'svelte'
 
     let input = ''
 
     function handleContinueClick(): void {
         $mnemonic = input.split(' ')
-        $profileRecoveryRouter.next({ migrationSeed: input })
+        $profileRecoveryRouter.next()
     }
 
     function handleBackClick(): void {
         if (!$isGettingMigrationData) {
-            profileRecoveryType.set(null)
             $profileRecoveryRouter.previous()
         }
     }
@@ -27,13 +26,21 @@
 
 <OnboardingLayout onBackClick={handleBackClick}>
     <div slot="title">
-        <Text type="h2">{localize(`views.importFromText.${$profileRecoveryType}.title`)}</Text>
+        <Text type="h2">{localize(`views.importFromText.${$onboardingProfile?.recoveryType}.title`)}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8">{localize(`views.importFromText.${$profileRecoveryType}.body`)}</Text>
-        <Text type="h5" classes="mb-3">{localize(`views.importFromText.${$profileRecoveryType}.enter`)}</Text>
+        <Text type="p" secondary classes="mb-8"
+            >{localize(`views.importFromText.${$onboardingProfile?.recoveryType}.body`)}</Text
+        >
+        <Text type="h5" classes="mb-3"
+            >{localize(`views.importFromText.${$onboardingProfile?.recoveryType}.enter`)}</Text
+        >
         <form on:submit={handleContinueClick} id="text-import-form">
-            <ImportTextfield disabled={$isGettingMigrationData} type={$profileRecoveryType} bind:value={input} />
+            <ImportTextfield
+                disabled={$isGettingMigrationData}
+                type={$onboardingProfile?.recoveryType}
+                bind:value={input}
+            />
         </form>
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">

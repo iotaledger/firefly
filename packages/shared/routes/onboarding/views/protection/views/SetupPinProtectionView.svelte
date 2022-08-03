@@ -1,14 +1,12 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, OnboardingLayout, PinInput, Text } from 'shared/components'
-    import { cleanupProtectionOnboarding } from '@contexts/onboarding'
+    import { initialisePincodeManager } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { protectionRouter } from '@core/router'
     import { validatePinFormat } from '@lib/utils'
 
     export let busy = false
-
-    const dispatch = createEventDispatcher()
 
     let setPinInput = ''
     let setPinInputError = ''
@@ -29,15 +27,19 @@
         confirmPinInputError = ''
     }
 
-    function handleBackClick(): void {
-        // await resetImportState()
-        dispatch('previous')
+    function onBackClick(): void {
+        $protectionRouter.previous()
+    }
+
+    async function onSetPinClick(): Promise<void> {
+        await initialisePincodeManager(setPinInput)
+        $protectionRouter.next()
     }
 
     async function handleSetPinSubmit(): Promise<void> {
         resetPinInputErrors()
         if (arePinInputsValid && arePinInputsMatching) {
-            await advanceView()
+            await onSetPinClick()
         }
     }
 
@@ -45,14 +47,9 @@
         setPinInputError = ''
         confirmPinInputError = ''
     }
-
-    async function advanceView(): Promise<void> {
-        await cleanupProtectionOnboarding(setPinInput)
-        dispatch('next')
-    }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} {busy}>
+<OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
         <Text type="h2">{localize('views.setupPin.title')}</Text>
     </div>

@@ -4,7 +4,6 @@
     import { BackupPasswordView, FileImportView, LedgerView, SuccessView, TextImportView } from './views'
     import { localize } from '@core/i18n'
     import {
-        FireflyEvent,
         profileRecoveryRoute,
         profileRecoveryRouter,
         ProfileRecoveryRouter,
@@ -18,10 +17,10 @@
     let busy = false
     let error = ''
 
-    async function next(event: CustomEvent<FireflyEvent>): Promise<void> {
+    async function next(): Promise<void> {
         busy = true
         try {
-            await $profileRecoveryRouter.next(event.detail)
+            await $profileRecoveryRouter.next()
         } catch (err) {
             if (!err.snapshot) {
                 if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {

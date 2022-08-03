@@ -4,11 +4,10 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
     import { profileRecoveryRouter } from '@core/router'
-    import { onboardingProfile, profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
+    import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
-    function handleContinueClick(importType: ProfileRecoveryType): void {
-        profileRecoveryType.set(importType)
-        $profileRecoveryRouter.next({ profileRecoveryType: $profileRecoveryType })
+    function handleContinueClick(): void {
+        $profileRecoveryRouter.next()
     }
 
     function handleBackClick(): void {

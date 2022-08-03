@@ -8,7 +8,6 @@
         setImportFile,
         setProfileRecoveryTypeFromFilename,
         validateBackupFile,
-        profileRecoveryType,
     } from '@contexts/onboarding'
     import { onMount } from 'svelte'
 
@@ -31,7 +30,6 @@
     }
 
     function handleBackClick(): void {
-        profileRecoveryType.set(null)
         $profileRecoveryRouter.previous()
     }
 

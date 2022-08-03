@@ -3,7 +3,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '@core/router'
-    import { profileRecoveryType, ProfileRecoveryType } from '@contexts/onboarding'
+    import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
     function handleBackClick(): void {
         $profileRecoveryRouter.previous()
@@ -30,8 +30,8 @@
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
         <Animation
             classes="setup-anim-aspect-ratio"
-            animation={$profileRecoveryType === ProfileRecoveryType.Seed ||
-            $profileRecoveryType === ProfileRecoveryType.Mnemonic
+            animation={$onboardingProfile?.recoveryType === ProfileRecoveryType.Seed ||
+            $onboardingProfile?.recoveryType === ProfileRecoveryType.Mnemonic
                 ? 'import-from-text-success-desktop'
                 : 'import-from-file-success-desktop'}
         />
