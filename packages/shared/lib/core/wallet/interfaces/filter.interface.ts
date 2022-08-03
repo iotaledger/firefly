@@ -6,6 +6,7 @@ export interface ActivityFilter {
 
 export interface AssetFilter {
     showHidden: BooleanFilterUnit
+    verificationStatus: SelectionFilterUnit
 }
 
 export type FilterUnit = BooleanFilterUnit | SelectionFilterUnit
