@@ -1,9 +1,8 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
 import { selectedAccount } from '../../account/stores/selected-account.store'
 
-import { localize } from '@core/i18n'
 import { formatUnitBestMatch } from '@lib/units'
-import { getMonthYear, isValueInUnitRange, unitToValue } from '@lib/utils'
+import { isValueInUnitRange, unitToValue } from '@lib/utils'
 
 import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
@@ -29,7 +28,7 @@ export const activitySearchTerm: Writable<string> = writable('')
 export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
-        let activityList = $selectedAccountActivities
+        let activityList = $selectedAccountActivities.filter((_activity) => !_activity.isHidden)
 
         activityList = activityList.filter((activity) => !isFilteredActivity(activity))
 
@@ -53,31 +52,3 @@ export const queriedActivities: Readable<Activity[]> = derived(
         return activityList.sort((activity1, activity2) => activity2.time.getTime() - activity1.time.getTime())
     }
 )
-
-interface GroupedActivity {
-    date: string
-    activities: Activity[]
-}
-
-export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedActivities], ([$queriedActivities]) => {
-    const groupedActivities: GroupedActivity[] = []
-    for (const activity of $queriedActivities.filter((activity) => !activity.isHidden)) {
-        const activityDate = getActivityGroupTitleForTimestamp(activity.time)
-        if (!groupedActivities.some((group) => group.date === activityDate)) {
-            groupedActivities.push({ date: activityDate, activities: [] })
-        }
-        const index = groupedActivities.findIndex((group) => group.date === activityDate)
-        groupedActivities[index].activities.push(activity)
-    }
-    for (const groupedActivitiesPerDate of groupedActivities) {
-        groupedActivitiesPerDate.activities = groupedActivitiesPerDate.activities.sort(
-            (activity1, activity2) => activity2.time.getTime() - activity1.time.getTime()
-        )
-    }
-    return groupedActivities
-})
-
-function getActivityGroupTitleForTimestamp(time: Date): string {
-    const dateString = getMonthYear(time)
-    return dateString === getMonthYear(new Date()) ? localize('general.thisMonth') : dateString
-}
