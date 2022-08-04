@@ -36,7 +36,13 @@
                 <Icon height={iconHeight} width={iconWidth} {icon} classes="text-{iconColor}" />
             </div>
         {/if}
-        <div class="col-span-10 h-full flex items-center">
+        <div
+            class="
+                h-full flex items-center
+                {icon ? 'col-start-2' : 'col-start-1'}
+                {secondaryIcon && !disabled ? 'col-end-12' : 'col-end-13'}
+            "
+        >
             <span class="flex flex-col justify-center">
                 <Text
                     type={TextType.p}

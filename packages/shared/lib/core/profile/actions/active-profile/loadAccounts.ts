@@ -1,6 +1,7 @@
 import { IAccountState, loadAccount, setSelectedAccount } from '@core/account'
 import { getAccounts } from '@core/profile-manager'
 import { loadAccountActivities } from '@core/wallet'
+import { refreshAccountAssetsForActiveProfile } from '@core/wallet/actions/refreshAccountAssetsForActiveProfile'
 import { get } from 'svelte/store'
 import { activeAccounts, activeProfile } from '../../stores'
 
@@ -21,8 +22,9 @@ export async function loadAccounts(): Promise<void> {
             }
             activeAccounts.set(loadedAccounts.sort((a, b) => a.meta.index - b.meta.index))
             setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
+            await refreshAccountAssetsForActiveProfile()
             for (const accountState of get(activeAccounts)) {
-                loadAccountActivities(accountState)
+                await loadAccountActivities(accountState)
             }
             hasLoadedAccounts.set(true)
         }

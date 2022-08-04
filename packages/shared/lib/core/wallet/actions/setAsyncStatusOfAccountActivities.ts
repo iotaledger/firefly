@@ -5,7 +5,7 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
     const balancesToUpdate = []
     allAccountActivities.update((state) => {
         state.forEach((accountActivities, accountId) => {
-            for (const activity of accountActivities) {
+            for (const activity of accountActivities.filter((_activity) => _activity.isAsync)) {
                 const oldAsyncStatus = activity.asyncStatus
                 activity.asyncStatus = activity.getAsyncStatus(time)
                 if (!balancesToUpdate.includes(accountId) && oldAsyncStatus !== activity.asyncStatus) {

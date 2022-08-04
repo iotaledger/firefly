@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { handleDeepLink } from '@common/deep-links'
+    import { handleDeepLink } from '@auxiliary/deep-link'
     import { localize } from '@core/i18n'
-    import { clearPollNetworkInterval, pollNetworkStatus } from '@core/network'
+    import { clearPollNetworkInterval, pollNetworkStatus, nodeInfo } from '@core/network'
     import {
         activeProfile,
         hasStrongholdLocked,
@@ -17,7 +17,7 @@
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { Settings, Staking, Wallet } from 'shared/routes'
+    import { Settings, Staking, Wallet, DeveloperTools } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import Collectibles from './collectibles/Collectibles.svelte'
@@ -32,6 +32,7 @@
         settings: Settings,
         staking: Staking,
         collectibles: Collectibles,
+        developerTools: DeveloperTools,
     }
 
     let startInit
@@ -134,7 +135,7 @@
         }
     })
 
-    if (!$hasLoadedAccounts && $loggedIn) {
+    $: if (!$hasLoadedAccounts && $loggedIn) {
         startInit = Date.now()
         busy = true
         if (!get(popupState).active) {
@@ -200,7 +201,7 @@
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
                 message: localize('indicators.developerProfileIndicator.warningText', {
-                    values: { networkName: $activeProfile?.clientOptions.network },
+                    values: { networkName: $nodeInfo?.protocol?.networkName },
                 }),
             })
         }

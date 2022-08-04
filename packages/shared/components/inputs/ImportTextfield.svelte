@@ -2,7 +2,7 @@
     import { Text } from 'shared/components'
     import { debounce } from 'shared/lib/utils'
     import { asyncGetLegacySeedChecksum } from 'shared/lib/wallet'
-    import { english } from 'shared/lib/wordlists/english'
+    import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
     import { verifyMnemonic } from '@core/profile-manager'
 

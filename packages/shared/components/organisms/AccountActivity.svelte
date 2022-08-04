@@ -1,46 +1,34 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
+    import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import {
-        Activity,
-        groupedActivities,
+        activityFilter,
         activitySearchTerm,
-        activityFilterIndex,
+        groupedActivities,
         selectedAccountActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
-    import { ActivityTile, Text, TextInput, TogglableButton } from 'shared/components'
+    import { ActivityTile, Text, TextInput, TogglableButton, Filter } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
-    import { openPopup } from 'shared/lib/popup'
     import { SetupType } from 'shared/lib/typings/setup'
     import { debounce } from 'shared/lib/utils'
     import { isFirstSessionSync, walletSetupType } from 'shared/lib/wallet'
-    import { time } from '@core/app'
-
-    function handleTransactionClick(activity: Activity): void {
-        openPopup({
-            type: 'activityDetails',
-            props: { activity },
-        })
-    }
-
-    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
 
     let searchActive = false
     let inputElement: HTMLInputElement
     let searchValue: string
+
+    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
     $: setAsyncStatusOfAccountActivities($time)
-
     $: if (searchActive && $selectedAccountActivities) {
         debounce(() => {
             $activitySearchTerm = searchValue
         })()
-    } else {
-        $activityFilterIndex = activeFilterIndex
     }
 
     function shouldShowFirstSync(): boolean {
@@ -71,9 +59,12 @@
                     <SyncSelectedAccountIconButton />
                 {/if}
             </div>
-            {#if features?.wallet?.activityHistory?.search?.enabled}
-                <TogglableButton icon="search" bind:active={searchActive} />
-            {/if}
+            <div class="flex flex-row">
+                {#if features?.wallet?.activityHistory?.search?.enabled}
+                    <Filter filterStore={activityFilter} />
+                    <TogglableButton icon="search" bind:active={searchActive} />
+                {/if}
+            </div>
         </div>
         {#if features?.wallet?.activityHistory?.search?.enabled && searchActive}
             <div class="relative flex flex-row items-center justify-between text-white mt-4">
@@ -89,7 +80,7 @@
             </div>
         {/if}
     </div>
-    <div class="overflow-y-scroll overflow-x-visible flex-auto h-1 space-y-4 -mr-5 pr-4 scroll-secondary">
+    <div class="overflow-y-scroll flex-auto h-1 space-y-4 -mr-5 pr-4 scroll-secondary">
         <div class="-mr-4 overflow-x-visible">
             {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
@@ -101,7 +92,7 @@
                                 {group.date} • {group.activities.length}
                             </Text>
                             {#each group.activities as activity}
-                                <ActivityTile onClick={() => void handleTransactionClick(activity)} {activity} />
+                                <ActivityTile {activity} />
                             {/each}
                         </div>
                     {/each}

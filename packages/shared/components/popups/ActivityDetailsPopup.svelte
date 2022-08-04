@@ -10,8 +10,9 @@
         ActivityAsyncStatus,
         ActivityDirection,
         claimActivity,
+        formatTokenAmountDefault,
+        getAssetFromPersistedAssets,
         hideActivity,
-        parseRawAmount,
     } from '@core/wallet'
     import { Spinner } from 'shared/components'
     import { activeProfile } from '@core/profile'
@@ -23,9 +24,11 @@
 
     export let activity: Activity
 
+    const asset = getAssetFromPersistedAssets(activity?.assetId)
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: ({ amount, unit } = parseRawAmount(activity?.rawAmount, activity?.token))
+    let isClaiming = activity.isClaiming
+    $: amount = formatTokenAmountDefault(activity?.rawAmount, asset.metadata)
 
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
@@ -41,7 +44,9 @@
     }
 
     async function claim() {
+        isClaiming = true
         await claimActivity(activity)
+        isClaiming = false
         openPopup({
             type: 'activityDetails',
             props: { activity },
@@ -50,7 +55,7 @@
 
     function reject() {
         openPopup({
-            type: 'confirmationPopup',
+            type: 'confirmation',
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
@@ -92,21 +97,22 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {formattedFiatValue} {amount} {unit} {...activity} />
-    {#if activity.isAsync && activity.direction === ActivityDirection.In && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
+    <TransactionDetails {formattedFiatValue} {...activity} {amount} unit={asset?.metadata?.unit} {asset} />
+    {#if activity.isAsync && (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
+                disabled={isClaiming}
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"
                 on:click={reject}
             >
                 {localize('actions.reject')}
             </button>
             <button
-                disabled={activity.isClaiming}
+                disabled={isClaiming}
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
                 on:click={claim}
             >
-                {#if activity.isClaiming}
+                {#if isClaiming}
                     <Spinner busy={true} classes="justify-center" />
                 {:else}
                     {localize('actions.claim')}

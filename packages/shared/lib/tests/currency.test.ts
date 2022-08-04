@@ -1,5 +1,5 @@
-import { convertFromFiat, convertToFiat, isFiatCurrency } from '../currency'
-import { AvailableExchangeRates, CurrencyTypes } from '../typings/currency'
+import { convertFromFiat, convertToFiat, isFiatCurrency } from '@lib/currency'
+import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
 
 describe('File: currency.ts', () => {
     describe('Function: convertToFiat', () => {

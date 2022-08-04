@@ -14,9 +14,7 @@ const APP_PROTOCOL = getAppProtocol()
  * @returns
  */
 function getAppName() {
-    return STAGE === 'prod'
-        ? 'Firefly (Stardust)'
-        : `Firefly (Stardust) - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
+    return STAGE === 'prod' ? 'Firefly Stardust' : `Firefly Stardust - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
 }
 
 function getAppProtocol() {

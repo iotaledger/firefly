@@ -19,9 +19,9 @@
         sendOutput,
         validateSendConfirmation,
         generateRawAmount,
-        assets,
+        selectedAccountAssets,
     } from '@core/wallet'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
@@ -37,18 +37,16 @@
     export let tag: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    // If storage deposit is 0, then set expiration date to tomorrow
-    const defaultExpirationDate = new Date()
-    defaultExpirationDate.setDate(defaultExpirationDate.getDate() + 1)
-
     let expirationDate: Date
     let storageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
 
-    $: asset = asset ?? $assets?.[0]
-    $: rawAmount = asset?.metadata ? generateRawAmount(amount, unit, asset.metadata) : 0
+    $: asset = asset ?? $selectedAccountAssets?.baseCoin
+    $: rawAmount = asset?.metadata
+        ? generateRawAmount(String(parseCurrency(amount)), unit, asset.metadata)
+        : parseCurrency(amount)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: internal = recipient.type === 'account'
 
@@ -61,19 +59,21 @@
         ) || '-'
 
     $: transactionDetails = {
-        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
-        inclusionState: InclusionState.Pending,
+        asset,
         direction: ActivityDirection.Out,
-        amount: amount?.length > 0 ? amount : '0',
-        unit,
-        subject: recipient,
+        inclusionState: InclusionState.Pending,
         metadata,
-        tag,
+        rawAmount,
         storageDeposit: storageDeposit,
+        subject: recipient,
+        amount,
+        tag,
+        unit,
+        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
     }
 
     async function _prepareOutput(): Promise<void> {
-        outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag)
+        outputOptions = getOutputOptions(expirationDate, recipientAddress, rawAmount, metadata, tag, asset)
         preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
             remainderValueStrategy: {
                 strategy: 'ReuseAddress',
@@ -97,7 +97,7 @@
             }
         } catch (err) {
             if (!error) {
-                error = err.error ? new BaseError({ message: err.error ?? err.message, logError: true }) : err
+                error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
             }
         }
     }
@@ -123,7 +123,7 @@
             await _onMount()
         } catch (err) {
             if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logError: true }) : err
+                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
             }
         }
     })
@@ -149,7 +149,9 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onBack}>{localize('actions.back')}</Button>
+        <Button classes="w-full" secondary onClick={onBack} disabled={$isTransferring}
+            >{localize('actions.back')}</Button
+        >
         <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring}>
             {#if $isTransferring}
                 <Spinner busy classes="justify-center break-all" />

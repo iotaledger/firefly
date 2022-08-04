@@ -44,6 +44,7 @@ export enum DashboardRoute {
     Settings = 'settings',
     Staking = 'staking',
     Collectibles = 'collectibles',
+    DeveloperTools = 'developerTools',
 }
 
 export enum SettingsRoute {

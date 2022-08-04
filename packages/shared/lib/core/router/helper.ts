@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { isDeepLinkRequestActive } from '@common/deep-links'
+import { isDeepLinkRequestActive } from '@auxiliary/deep-link'
 import { closePopup } from '@lib/popup'
 
 import { appRouter, AppRouter } from './app-router'

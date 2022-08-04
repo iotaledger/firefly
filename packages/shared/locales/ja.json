@@ -1,7 +1,7 @@
 {
     "views": {
         "onboarding1": {
-            "title": "IOTAトークンの送金、受取、管理",
+            "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "FireflyはIOTAの公式ウォレットソフトウェアです。"
         },
         "legal": {
@@ -14,12 +14,12 @@
             "body": "エラーやクラッシュが発生したときに診断データを自動的に送信することで、Firefly の改善のため開発者を支援します。",
             "checkbox": "クラッシュレポートをIOTA財団に送信する"
         },
-        "appearance": {
-            "title": "テーマ",
-            "body": "アプリのテーマを選択してください。"
+        "languageAndAppearance": {
+            "title": "Language & appearance",
+            "body": "Choose your language and theme"
         },
         "profile": {
-            "title": "プロフィールを作成",
+            "title": "Create your {protocol} profile",
             "profileName": "プロフィール名",
             "body1": "複数のユーザープロフィールを作成してトークンを分離し、プライバシーを向上させることができます。",
             "body2": {
@@ -34,7 +34,7 @@
             }
         },
         "setup": {
-            "title": "ウォレットを設定",
+            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
             "chrysalisTitle": "Chrysalisネットワークの更新",
             "chrysalisBody": "2021年4月21日から、ユーザーはトークンを新しいクライサリスネットワークに移行することができます。できるだけ早く既存のトークンを移行することをお勧めします。",
             "learnMore": "移行について詳しく見る"
@@ -48,13 +48,55 @@
             "title": "ウォレットを作成",
             "body": "新しいウォレットを作成します。通常のソフトウェアウォレットを選択するか、Ledgerデバイスをお持ちの場合は、ハードウェアウォレットを設定できます。",
             "softwareAccount": {
-                "title": "ソフトウェアウォレットが欲しい",
-                "description": "24単語の回復フレーズを作成する"
+                "title": "Create a software wallet",
+                "description": "Provides a Stronghold file and recovery phrase"
             },
             "ledgerAccount": {
-                "title": "ハードウェアウォレットが欲しい",
+                "title": "Create a hardware wallet",
                 "description": "Ledger Nano SまたはNano Xが必要"
             }
+        },
+        "protocol": {
+            "title": "Choose protocol",
+            "body": "Set the protocol for your profile",
+            "iota": "IOTA Mainnet",
+            "shimmer": "Staging network for IOTA Mainnet"
+        },
+        "network": {
+            "title": "Choose network",
+            "body": "Set the network for your profile",
+            "iota": {
+                "mainnet": {
+                    "title": "Mainnet",
+                    "body": "IOTA Mainnet"
+                },
+                "devnet": {
+                    "title": "Devnet",
+                    "body": "Developer network for IOTA"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with active TIPS"
+                }
+            },
+            "shimmer": {
+                "mainnet": {
+                    "title": "Shimmer",
+                    "body": "Staging network for IOTA"
+                },
+                "devnet": {
+                    "title": "Shimmer Beta",
+                    "body": "Beta network for Shimmer"
+                },
+                "private-net": {
+                    "title": "Custom Network",
+                    "body": "Support for custom networks with draft TIPS"
+                }
+            }
+        },
+        "customNetwork": {
+            "title": "Connect to a custom network",
+            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "Ledgerを接続してください",
@@ -80,15 +122,10 @@
             "body1": "ログインPINを設定して、あなただけがウォレットに入ることができるようにします。",
             "body2": "PINを安全に保管してください！"
         },
-        "pin": {
-            "title": "PIN コードを設定",
-            "body1": "以下に6桁のPINを入力してください。プロフィールにアクセスすためにPINが必要になります。",
-            "body2": "数字のみを使用してください"
-        },
-        "confirmPin": {
-            "title": "PINコードを選択します",
-            "body1": "PINは残高と取引を非公開に保ちます。",
-            "body2": "続行するにはPINコードを再入力してください。 "
+        "setupPin": {
+            "title": "Set up PIN code",
+            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+            "body2": "Use numbers only"
         },
         "backup": {
             "title": "シードをバックアップしてください。",
@@ -123,6 +160,10 @@
             "title": "バックアップが完了しました",
             "body": "ウォレットを Stronghold にバックアップしました"
         },
+        "claimRewards": {
+            "title": "Your Shimmer staking rewards",
+            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+        },
         "congratulations": {
             "title": "ウォレットのセットアップが完了しました",
             "fundsMigrated": "資金が移行されました",
@@ -133,16 +174,31 @@
             "exportMigration": "移行ログをエクスポートしてセットアップを終了します"
         },
         "import": {
-            "title": "資金の回復または移行",
-            "body": "既存のシードやウォレットをバックアップしている場合は、こちらからインポートできます。 古いネットワーク資金 を保持している場合は、移行手順を経てChrysalisネットワークに移行します。",
+            "title": {
+                "iota": "Recover or migrate IOTA funds",
+                "shimmer": "Recover Shimmer profile"
+            },
+            "body": {
+                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
+                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
+            },
             "importSeed": "私は81文字のシードを持っています",
             "importSeedDescription": "シードを入力してChrysalisに資金を移行する",
-            "importMnemonic": "Firefly の復元フレーズがあります",
-            "importMnemonicDescription": "ウォレットを復元するために復元フレーズを入力してください",
-            "importFile": "ファイルのバックアップがあります",
-            "importFileDescription": "SeedvaultまたはStrongholdをアップロード",
-            "importLedger": "Ledgerのバックアップがあります",
-            "importLedgerDescription": "Ledgerプロフィールを復元または移行する"
+            "importMnemonic": "Use recovery phrase",
+            "importMnemonicDescription": "Enter your secret phrase",
+            "importFile": {
+                "iota": "Use backup file",
+                "shimmer": "Use Stronghold backup file"
+            },
+            "importFileDescription": {
+                "iota": "Upload a Seedvault or Stronghold file",
+                "shimmer": "Upload Stronghold file"
+            },
+            "importLedger": "Use Ledger hardware device",
+            "importLedgerDescription": {
+                "iota": "Restore or migrate a Ledger profile",
+                "shimmer": "Restore using Nano S or Nano X devices"
+            }
         },
         "importFromText": {
             "seed": {
@@ -190,7 +246,7 @@
             "readMore": "移行プロセスから期待されること"
         },
         "generateNewLedgerAddress": {
-            "title": "新しいアドレスを作成する",
+            "title": "Generate new address",
             "body": "Fireflyでトークンを移行するには、新しいアドレスを作成 する必要があります。続行するには下のボタンをクリックしてください。",
             "confirmTitle": "新しいアドレスを確認します",
             "confirmBody": "セキュリティ上の理由から、Ledgerデバイスで作成 されたアドレスを以下に表示されているアドレスと比較してください。それらが一致する場合は、Ledgerの両方のボタンを押します。",
@@ -227,7 +283,7 @@
             "body2": "しばらく時間がかかる場合があります。移行中にデバイスをオフにしないでください。",
             "existing": "あなたの古いウォレット",
             "new": "あなたの新しいウォレット",
-            "learn": "移行について詳しく見る",
+            "learn": "Learn about the migration",
             "beginMigration": "移行を開始",
             "migrating": "資金を移行中...",
             "migrated": "{balance} が移行されました",
@@ -276,7 +332,7 @@
             "body2": "Ledgerが接続されており、移行中は常に {legacy} アプリが開いていることを確認してください。",
             "migrate": "資金の移行",
             "transaction": "取引 {number}",
-            "rerun": "やり直す"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -291,17 +347,17 @@
         },
         "settings": {
             "settings": "設定",
-            "generalSettings": {
-                "title": "一般設定",
-                "description": "アプリのテーマ やその他の一般的な設定をします"
+            "general": {
+                "title": "General",
+                "description": "Configure your app's appearance and other general settings"
             },
             "security": {
                 "title": "セキュリティ",
                 "description": "パスワードを変更し、セキュリティ関連の設定を調整する"
             },
-            "advancedSettings": {
-                "title": "詳細設定",
-                "description": "技術者向けツールと手動設定"
+            "advanced": {
+                "title": "Advanced",
+                "description": "Tools and manual settings for technical users"
             },
             "helpAndInfo": {
                 "title": "ヘルプ & 情報",
@@ -361,9 +417,9 @@
                 "description": "Firefly プロフィール名を変更する",
                 "success": "プロフィール名を変更しました"
             },
-            "balanceFinder": {
-                "title": "残高を検索する",
-                "description": "トークンのアドレスを拡張検索します"
+            "walletFinder": {
+                "title": "Wallet finder",
+                "description": "Perform an extended search of your previously used wallets"
             },
             "hiddenAccounts": {
                 "title": "非表示のウォレット",
@@ -374,8 +430,8 @@
                 "description": "プロフィール、ウォレット、取引履歴全体を削除します。バックアップがあることを確認してください"
             },
             "deepLinks": {
-                "title": "IOTAリンク",
-                "description": "IOTAリンクをクリックするとFireflyの取引履歴が自動的に入力されます"
+                "title": "Deep links",
+                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
             },
             "networkConfiguration": {
                 "title": "ネットワーク設定",
@@ -403,7 +459,7 @@
                 "editDetails": "詳細を編集",
                 "viewInfo": "情報を表示",
                 "setAsPrimary": "プライマリとして設定",
-                "removeNode": "ノードを削除",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "公式ノードリストを含める",
                 "noNodes": "ノードがないため、ネットワークに接続できません",
                 "noNodesAuto": "ノードがありません。自動選択が代わりに使用されます"
@@ -451,6 +507,14 @@
                 "title": "このプログラムについて",
                 "description": ""
             },
+            "createDeveloperProfile": {
+                "title": "Create Developer Profile",
+                "description": ""
+            },
+            "createNormalProfile": {
+                "title": "Create Normal Profile",
+                "description": ""
+            },
             "reportAnIssue": {
                 "title": "問題を報告",
                 "description": "バグを開発者に報告します。報告されていないことを確認してください"
@@ -462,15 +526,16 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "ネットワークが劣化しました",
-                "networkDown": "ネットワーク接続が切断されました",
+                "operational": "Network operational",
+                "degraded": "Network degraded",
+                "down": "Network down",
+                "disconnected": "Disconnected from node",
                 "status": "ステータス",
                 "messagesPerSecond": "毎秒あたりのメッセージ",
                 "referencedRate": "参照元"
             },
             "profileModal": {
-                "allSettings": "すべての設定",
+                "allSettings": "All settings",
                 "logout": "ログアウト",
                 "stronghold": {
                     "title": "プロフィールロック",
@@ -491,8 +556,8 @@
                 },
                 "backup": {
                     "title": "ウォレットをバックアップ",
-                    "lastBackup": "最後に {date} をバックアップしました",
-                    "notBackedUp": "バックアップされていません",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "バックアップ"
                 },
                 "version": {
@@ -519,7 +584,7 @@
                 "headers": {
                     "upcoming": "後で確認する",
                     "commencing": "事前ステーキングは開いています",
-                    "holding": "{duration} of staking left",
+                    "holding": "ステーキング残り{duration}",
                     "ended": "ステーキングは終了しました",
                     "inactive": "ステーキングイベントが検出されませんでした"
                 },
@@ -530,8 +595,8 @@
                     "holdingAndNotStaking": "{token} トークンをステークして10秒ごとに報酬を受け取ります。",
                     "endedAndDidStake": "ネットワークが起動すると、{token} 報酬がウォレットに配布されます。",
                     "endedAndDidNotStake": "このエアドロップに参加していません。",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "endedAndDidNotReachMinRewards": "エアドロップの最小報酬に到達するのに十分な{token}トークンをステークしていませんでした。",
+                    "inactive": "高度な設定でネットワーク構成を開き、「情報を表示」をクリックして現在のノードに「参加」機能があることを確認します。"
                 }
             },
             "airdrops": {
@@ -541,7 +606,7 @@
                 "totalWalletRewards": "ウォレット報酬の合計",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assemblyは、構成可能なスマートコントラクトを構築および展開するための権限のない、拡張性の高いマルチチェーンネットワークです。 Assemblyはweb3の未来です。 "
+                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -561,9 +626,17 @@
         }
     },
     "popups": {
+        "storageDepositBreakdown": {
+            "title": "Storage deposit breakdown",
+            "totalStorageDeposit": "Total storage deposit",
+            "pendingTransactions": {
+                "title": "Locked in pending transactions",
+                "subtitle": "For sending native assets and small IOTA amounts"
+            }
+        },
         "password": {
             "title": "パスワードが必要です",
-            "subtitle": "ウォレットのロックを解除するにはパスワードを入力してください",
+            "subtitle": "Please provide your password to unlock your wallets",
             "backup": "バックアップをエクスポートするにはパスワードを入力してください"
         },
         "qr": {
@@ -578,14 +651,9 @@
             "noAutoUpdate": "この Windows バージョンでは自動更新は無効になっています。https://phofiry.iota.org にアクセスして更新をダウンロードしてください。",
             "preReleaseDescription": "Fireflyのプレリリースバージョンを実行しています。アップデートは無効です。"
         },
-        "backup": {
-            "title": "前回のバックアップ: {date}",
-            "lastBackup": "最後に {date} をバックアップしました",
-            "backupDescription": "ウォレットとトランザクション履歴のコピーがあることを確認するために、定期的にバックアップすることが重要です。",
-            "backupWarning": "バックアップと復元フレーズを失うと、資金へのアクセスが失われます。",
-            "notBackedUp": "バックアップされていません",
-            "notBackedUpDescription": "ウォレットをバックアップしていません",
-            "saving": "保存中..."
+        "backupStronghold": {
+            "title": "Backup your stronghold file",
+            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deleteAccount": {
             "title": "{name} を削除しますか？",
@@ -598,7 +666,7 @@
         "hideAccount": {
             "title": "{name} を非表示にしますか？",
             "body": "詳細設定で「非表示のウォレットを表示」を有効にすると、後でこのウォレットを見つけることができます。",
-            "typePassword": "ウォレットパスワードを入力して確認してください。",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "ウォレットの非表示",
             "errorTitle": "{name} を非表示にできません",
             "errorBody1": "ウォレットを非表示にするには残高が0である必要があります。",
@@ -617,7 +685,7 @@
             "titleRemove": "ノードを削除",
             "titleRemoveAll": "すべてのノードを削除",
             "titleDetails": "ノードの詳細",
-            "titleInfo": "ノード情報",
+            "titleInfo": "Node information",
             "addingNode": "ノードを追加中",
             "updatingNode": "ノードを更新中",
             "loadingNodeInfo": "ノード情報を読み込み中",
@@ -629,15 +697,41 @@
             "removeConfirmation": "このノードを削除してもよろしいですか？",
             "removeAllConfirmation": "すべてのノードを削除してもよろしいですか？",
             "info": {
-                "url": "URL",
-                "software": "ソフトウェア",
-                "networkId": "ネットワークID",
-                "bech32HRP": "Bech32 HRP",
-                "features": "特徴",
-                "confirmedMilestoneIndex": "確認済みのマイルストーンインデックス",
-                "pruningIndex": "Pruningインデックス",
-                "messagesPerSecond": "毎秒あたりのメッセージ",
-                "referencedRate": "参照元"
+                "general": {
+                    "tab": "General",
+                    "name": "Name",
+                    "url": "URL",
+                    "version": "Version",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone",
+                    "pruningIndex": "Pruning index",
+                    "features": "Features"
+                },
+                "metrics": {
+                    "tab": "Metrics",
+                    "blocksPerSecond": "Blocks per second",
+                    "referencedBlocksPerSecond": "Referenced blocks per second",
+                    "referencedRate": "Referenced rate",
+                    "latestMilestone": "Latest milestone",
+                    "confirmedMilestone": "Confirmed milestone"
+                },
+                "protocol": {
+                    "tab": "Protocol",
+                    "network": "Network",
+                    "bech32Hrp": "Bech32 HRP",
+                    "tokenSupply": "Token supply",
+                    "protocolVersion": "Version",
+                    "minPowScore": "Min PoW Score"
+                },
+                "baseToken": {
+                    "tab": "Base token",
+                    "token": "Token",
+                    "tickerSymbol": "Ticker",
+                    "unit": "Unit",
+                    "subunit": "Sub-unit",
+                    "decimals": "Decimals",
+                    "useMetricPrefix": "Use metric prefix"
+                }
             }
         },
         "switchNetwork": {
@@ -652,12 +746,12 @@
             "empty": "エラーログは空です。"
         },
         "deleteProfile": {
-            "title": "プロフィールを削除",
+            "title": "Delete profile",
             "confirmation": "このプロフィールを削除してもよろしいですか？この操作を行うと元には 戻せません。",
             "typePassword": "パスワードを入力して確認してください。"
         },
         "diagnostics": {
-            "title": "診断",
+            "title": "Diagnostics",
             "node": "ノード",
             "platform": "プラットフォーム",
             "platformVersion": "プラットフォームのバージョン",
@@ -673,15 +767,13 @@
             "sendingFromStakedAccount": "現在ステークされているウォレットから送金を行っていますが、これはトークンのステークを解除する可能性があります。 送金は自由ですが、後で残りのトークンを再度 ステークする必要があるかもしれません。",
             "sendingFromStakedAccountBelowMinReward": "ステーキング報酬の最小額に達していないウォレットから送金を行っています。 これにより、トークンがステーク解除され、このウォレットにステーキング報酬が失われる可能性があります。"
         },
-        "balanceFinder": {
-            "title": "残高を検索する",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
+        "walletFinder": {
+            "title": "Wallet finder",
+            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
             "accountsSearched": "Wallets searched",
-            "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "ウォレットが見つかりました",
-            "totalWalletBalance": "合計残高",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
-            "typePassword": "検索できるようにパスワードを入力してください。"
+            "accountsFound": "Wallets found",
+            "totalWalletBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
         },
         "riskFunds": {
             "title": "警告：移行中にあなたの資金が危険にさらされています",
@@ -689,7 +781,7 @@
             "body2": "リスクレベルが中程度以上のアドレスに対してプロセスを再実行することをお勧めします。"
         },
         "missingBundle": {
-            "title": "警告：移行中にあなたの資金が危険にさらされています",
+            "title": "Warning: funds at risk during migration",
             "body": "使用済みアドレスに資金がありますが、それらを保護するために必要な情報が見つかりませんでした。この問題は、かなり前に取引を行った場合に発生する可能性があります。 続行できますが、移行中に{value}が危険にさらされます。",
             "learnMore": "使用済みアドレスについてもっと詳しく見る",
             "proceed": "はい 、リスクを理解しています。"
@@ -718,7 +810,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Ledgerが接続されていない場合の 案内",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Ledger Liveがお使いのコンピュータで開いていないことを確認してください",
                 "1": "PINを使用してLedgerデバイスのロックを解除したことを確認してください",
@@ -735,7 +827,7 @@
                 "info": "Ledgerに表示される、残っているアドレスと下に表示されるアドレスが一致していることを確認してください。それらが一致する場合は、要求に応じてLedgerの両方のボタンを押してください"
             },
             "transaction": {
-                "title": "取引を承認する",
+                "title": "Confirm transaction",
                 "info": "Ledgerに表示される、取引情報と下に表示されるアドレスが一致していることを確認してください。それらが一致する場合は、要求に応じてLedgerの両方のボタンを押してください"
             }
         },
@@ -763,16 +855,16 @@
             "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "参加します",
             "subtitleStake": "ステークしようとしています",
             "subtitleMerge": "合算しようとしています",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "両方のエアドロップに参加したくない場合は、以下からオプトアウトすることができます。 ステークを解除し、再度 ステークすることで、いつでもオプトインできます。",
+            "mergeStakeWarning": "資金は {airdrop}に投資されます。参加したいエアドロップを変更するには、このウォレットのステークを解除し、再度ステークします。",
             "estimatedAirdrop": "推定された報酬"
         },
         "newStakingPeriodNotification": {
             "title": "{periodNumber} からのステーキングフェーズ {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
+            "body": "Assembly のIOTAステーキングは続行されます...フェーズ{periodNumber}に90日間参加します。 IOTAトークンをステークして、ASMB報酬を獲得しましょう！",
             "info": "Shimmerステーキングが完了し、ASMBトークンのみが配布されます。"
         },
         "shimmer-info": {
@@ -792,7 +884,7 @@
         "crashReporting": {
             "title": "クラッシュレポート",
             "body": "エラーやクラッシュが発生したときに診断データを自動的に送信することで、Firefly の改善のため開発者を支援します。選択した場合は、Fireflyを再起動した後に有効になります。",
-            "checkbox": "クラッシュレポートをIOTA財団に送信する"
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "利用規約",
@@ -805,9 +897,15 @@
             "privPolicyCheckbox": "更新されたプライバシーポリシーに同意します"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "Firefly の使い方が変わりました",
+            "body": "各タブのコンテンツは、単一のウォレットのコンテクストになりました。 タイトルバーのスイッチャーを使用して、選択したウォレットをどこからでも変更できます。",
+            "hint": "ウォレットが見つかりませんか？設定のバランスファインダーを使用して、以前に使用したウォレットを見つけてください。"
+        },
+        "transactionDetails": {
+            "title": "Transaction details"
+        },
+        "sendForm": {
+            "title": "Send funds"
         }
     },
     "charts": {
@@ -831,23 +929,41 @@
         "cancel": "キャンセル",
         "close": "閉じる",
         "dismiss": "拒否する",
+        "claim": "Claim",
+        "claiming": "Claiming",
+        "reject": "Reject",
+        "confirmRejection": {
+            "title": "Reject transaction",
+            "description": "Are you sure you want to reject this transaction?",
+            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        },
         "proceedAnyway": "とにかく続けます",
         "save": "保存",
         "importSeed": "既存のシードをインポート",
-        "restoreWallet": "ウォレットの移行または復元",
-        "restoreWalletDescription": "Chrysalisに移行するか、既存のウォレットを復元します",
-        "createWallet": "新しいウォレットを作成",
-        "createWalletDescription": "Chrysalisで実行中の新しいウォレットを作成する",
+        "restoreWallet": {
+            "iota": "Migrate or restore a wallet",
+            "shimmer": "Restore Shimmer profile"
+        },
+        "restoreWalletDescription": {
+            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "shimmer": "Restore an existing Shimmer profile"
+        },
+        "createWallet": "Create a new {protocol} profile",
+        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "claimShimmer": "Claim Shimmer staking rewards",
+        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
         "savePassword": "パスワードの保存",
         "useBiometric": "生体認証セキュリティを使用",
-        "setupPin": "PIN コードを設定",
-        "setPin": "PIN コードを設定",
-        "confirmPin": "PINコードを確認",
+        "setupPinCode": "Setup PIN code",
+        "setPin": "Set PIN",
+        "setPinCode": "Set PIN code",
+        "confirmPin": "Confirm PIN",
+        "confirmPinCode": "Confirm PIN code",
         "enterYourPin": "PINコードを入力してください",
         "saveBackupFile": "バックアップファイルを保存",
         "iveWrittenRecoveryPhrase": "復元フレーズを書き留めました",
         "verifyRecoveryPhrase": "復元フレーズを確認",
-        "revealRecoveryPhrase": "復元フレーズを表示",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "SeedVault をインポート",
         "checkAgain": "いいえ、もう一度確認します",
         "importFromFile": "ファイルからインポート",
@@ -875,15 +991,14 @@
         "restartNow": "今すぐ再起動",
         "saveBackup": "Stronghold のバックアップを保存",
         "customizeAcount": "ウォレットをカスタマイズ",
-        "viewAddressHistory": "アドレス履歴を表示",
-        "hideAccount": "ウォレットの非表示",
+        "hideAccount": "Hide wallet",
         "showAccount": "ウォレットの表示",
-        "deleteAccount": "ウォレットを削除",
+        "deleteAccount": "Delete wallet",
         "max": "Max",
         "addNode": "ノードの追加",
         "updateNode": "ノードを更新",
         "removeNode": "ノードを削除",
-        "removeAllNodes": "すべてのノードを削除",
+        "removeAllNodes": "Remove all nodes",
         "hide": "非表示",
         "hideOthers": "その他を非表示",
         "showAll": "すべて表示",
@@ -893,6 +1008,7 @@
         "redo": "やり直す",
         "cut": "切り取り",
         "copy": "コピー",
+        "copyAllInformation": "Copy all information",
         "paste": "貼り付け",
         "selectAll": "すべてを選択",
         "addAccount": "ウォレットを追加",
@@ -911,15 +1027,17 @@
         "readDocumentation": "ドキュメントを読む",
         "visitFaq": "よくある質問を見る",
         "viewStatus": "ステータスを表示",
+        "viewStorageDeposit": "View storage deposit",
         "showHiddenAccounts": "非表示ウォレットを表示",
         "confirm": "確定",
         "hideNetworkStatistics": "ネットワークの統計情報を非表示にする",
-        "findBalances": "残高検索",
-        "searchBalances": "残高を検索",
+        "findWallets": "Find wallets",
+        "useBalanceFinder": "Use balance finder",
+        "search": "Search",
         "searchAgain": "再検索",
-        "searching": "検索しています...",
+        "searching": "Searching",
         "closeFirefly": "Firefly を閉じる",
-        "generateAddress": "アドレスを生成",
+        "generateAddress": "Generate address",
         "migrateAgain": "別のインデックスを移行",
         "visitWebsite": "ウェブサイトを開く",
         "howItWorks": "使い方",
@@ -931,10 +1049,16 @@
         "merge": "統合",
         "mergeFunds": "資金を統合",
         "done": "完了しました",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "もっと読む"
+        "okIUnderstand": "はい。分かりました",
+        "readMore": "もっと読む",
+        "claimRewards": "Claim rewards",
+        "rerunClaimProcess": "Rerun claim process",
+        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
+        "addPublicNote": "Add public note",
+        "backup": "Backup"
     },
     "general": {
+        "recipient": "Recipient",
         "password": "パスワード",
         "confirmPassword": "パスワード（確認）",
         "currentPassword": "現在のパスワード",
@@ -945,6 +1069,8 @@
         "recentActivity": "最新アクティビティー",
         "sent": "送金",
         "received": "受取り",
+        "transfer": "Transfer",
+        "transferring": "Transferring",
         "sendPayment": "支払いの送信",
         "moveFunds": "内部送金",
         "sendTo": "送信先",
@@ -955,22 +1081,25 @@
         "sendTokensToAddress": "トークンをアドレスに送金",
         "manageAccount": "ウォレットの管理",
         "customizeAcount": "ウォレットをカスタマイズする",
-        "account": "ウォレット",
+        "account": "Wallet",
         "sendingToAddress": "アドレスへ送金中",
         "amount": "合計",
         "addAddress": "アドレスの追加",
         "reference": "リファレンス",
         "from": "From",
         "to": "To",
-        "receiveFunds": "資金を受け取る",
+        "receiveFunds": "Receive funds",
         "address": "アドレス",
         "myAddress": "自分のアドレス",
+        "myNetworkAddress": "My {networkName} address",
         "shareAddress": "アドレスを共有",
         "yourAddress": "あなたのアドレス",
         "newRemainder": "新しいリマインダー",
         "remainder": "リマインダー",
         "generateNewAddress": "新しいアドレスを作成する",
+        "copyToClipboard": "Copy to clipboard",
         "copyAddress": "アドレスをコビー",
+        "viewOnExplorer": "View on Explorer",
         "import": "インポート",
         "seedvault": "Seedvault",
         "stronghold": "Stronghold",
@@ -990,10 +1119,11 @@
         "profiles": "プロフィール",
         "dev": "開発者",
         "createAccount": "ウォレットを作成",
-        "createNewWallet": "新しいウォレットを作成",
+        "addAWallet": "Add a wallet",
         "accountName": "ウォレット名",
         "latestTransactions": "最新の取引",
         "transactions": "取引履歴",
+        "activity": "Activity",
         "security": "セキュリティ",
         "accountAddress": "ウォレットアドレス",
         "network": "ネットワーク",
@@ -1013,6 +1143,8 @@
         "loadingAccounts": "読み込んでいます。お待ちください...",
         "addProfile": "プロフィールを追加",
         "noRecentHistory": "最近の履歴はありません",
+        "thisMonth": "This month",
+        "search": "Search",
         "firstSync": "履歴を同期中、しばらく時間がかかることがあります...",
         "transferSyncing": "ウォレットを同期中",
         "transferSelectingInputs": "入力を選択",
@@ -1049,20 +1181,14 @@
         "creatingProfile": "プロフィールを作成しています。お待ちください...",
         "fundMigration": "資金の移行",
         "accountRemoved": "このウォレットは非表示になっています。表示にすると転送ができます。",
-        "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
-        "stakedFor": "{account} にステークしました",
-        "unstakedFor": "{account} の解除したステーク",
-        "votedFor": "{account} に投票",
-        "unvotedFor": "{account} の投票を解除",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
+        "fromAddress": "from {account}",
+        "toAddress": "to {account}",
+        "stakedFor": "Staked for {account}",
+        "unstakedFor": "Unstaked for {account}",
+        "votedFor": "Voted for {account}",
+        "unvotedFor": "Unvoted for {account}",
+        "stakingTransaction": "ステーキング取引",
+        "unstakingTransaction": "アンステーキング取引",
         "receiving": "着金中",
         "sending": "送金中",
         "legacyNetwork": "レガシーネットワーク",
@@ -1070,6 +1196,7 @@
         "version": "バージョン {version}",
         "yourWallets": "あなたのウォレット",
         "unknown": "不明",
+        "unknownAddress": "Unknown address",
         "none": "なし",
         "staked": "ステーク済み",
         "unstaked": "解除したステーク",
@@ -1079,7 +1206,19 @@
         "stakedFunds": "ステーク資金",
         "unstakedFunds": "解除したステーク資金",
         "accountColor": "ウォレットの色",
-        "myAssets": "My assets"
+        "transactionTime": "Transaction time",
+        "storageDeposit": "Storage deposit",
+        "expirationTime": "Expiration time",
+        "claimedTime": "Claimed at",
+        "copiedToClipboard": "Copied to clipboard",
+        "total": "合計: {balance}",
+        "availableBalance": "Available balance: {balance}",
+        "amountClaimed": "{amount} claimed",
+        "metadata": "Metadata",
+        "tag": "Tag",
+        "nodeList": "Node list",
+        "claimingTransactionId": "Claimed in",
+        "assets": "Assets"
     },
     "dates": {
         "today": "今日",
@@ -1118,18 +1257,26 @@
             "error": "{accountAlias} の取引履歴を出力できません"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "IOTAリンクを開始するにはログインしてください",
-            "notEnabled": "IOTAリンクは有効になっていません",
-            "invalidFormat": "あなたがフォローしたIOTAリンクは無効です",
+            "receivedWhileLoggedOut": "Please login to initiate the deep link",
+            "notEnabled": "Deep links are not enabled",
+            "invalidFormat": "The deep link you followed is invalid",
             "wallet": {
                 "send": {
-                    "success": "IOTAリンクから追加された支払いの詳細"
+                    "success": "Payment details added from deep link"
                 }
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets."
+        "syncing": "ウォレットを変更するには、同期が完了するまでお待ちください。",
+        "transferring": "ウォレットを変更するには、すべての取引が完了するまでお待ちください。",
+        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "claimed": {
+            "success": "Transaction claimed",
+            "error": "Claiming transaction failed"
+        },
+        "hideActivity": {
+            "success": "Successfully hidden activity",
+            "error": "Failed to hide activity"
+        }
     },
     "error": {
         "profile": {
@@ -1159,7 +1306,8 @@
         "pincode": {
             "length": "PINは{length, plural, one {#  桁} other {# 桁}} でなければなりません。",
             "match": "PIN が一致しません",
-            "incorrect": "PINが正しくありません。"
+            "incorrect": "PINが正しくありません。",
+            "invalid": "Invalid PIN code."
         },
         "account": {
             "length": "ウォレット名は{length, plural, one {#  文字} other {# 文字 }}より長くすることはできません。",
@@ -1173,23 +1321,29 @@
             "chars": "プロフィール名には次の記号を含めることはできません<>:\"/\\|?*",
             "index": "あなたのアカウントインデックスは0から2,147,483,647の間の数字でなければなりません。",
             "page": "あなたのアカウントページは0から2,147,483,647の間の数字でなければなりません。",
-            "syncing": "ウォレットの同期中にエラーが発生しました。"
+            "syncing": "ウォレットの同期中にエラーが発生しました。",
+            "cannotRemove": "Unable to remove wallet.",
+            "withBalance": "You must transfer all balances before you can delete this wallet.",
+            "notLast": "You can only delete your last wallet."
         },
         "send": {
             "addressLength": "アドレスは {length, plural, one {# 文字} other {# 文字}}でなければなりません。",
             "amountTooHigh": "この金額は、利用可能な残高を超えています。",
-            "amountNoFloat": "単位が `i` の場合、小数点以下は使用できません。",
+            "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "金額には無効な数字があるようです。",
+            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
             "amountZero": "金額は0より大きくなければなりません。",
             "wrongAddressPrefix": "アドレスはプレフィックス{prefix}で始まります。",
             "wrongAddressFormat": "アドレスが正しくフォーマットされていません。",
             "invalidAddress": "アドレスが正しくありません",
             "insufficientFunds": "このウォレットの残高が不足しています。",
+            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
             "noToAccount": "資金を送金するウォレットが選択されていません。",
             "sendingDust": "1 Mi未満の送金はできません。",
             "leavingDust": "アドレスに1Mi 未満を残すことはできません。",
             "cancelled": "取引はキャンセルされました。",
-            "transaction": "取引の送信中にエラーが発生しました。もう一度やり直してください。"
+            "transaction": "取引の送信中にエラーが発生しました。もう一度やり直してください。",
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
         },
         "node": {
             "invalid": "有効なURLを入力してください。",
@@ -1204,7 +1358,10 @@
             "noSynced": "同期された利用可能なノードはありません。",
             "answer": "すべてのノードから回答を取得できませんでした。",
             "forbidden": "このノード接続は禁止されています。",
-            "pluginNotAvailable": "{nodePlugin}プラグインは現在のノードでは使用できません。"
+            "pluginNotAvailable": "{nodePlugin}プラグインは現在のノードでは使用できません。",
+            "unabledToConnect": "Unable to connect to the node",
+            "differentNetwork": "The node is located on a different network",
+            "duplicateNodes": "Unable to add duplicate node"
         },
         "network": {
             "mismatch": "このノードのネットワーク ID は \"{networkId}\" で、現在のネットワークと一致しません。",
@@ -1258,6 +1415,9 @@
         "invalidTime": "無効な時間"
     },
     "warning": {
+        "transaction": {
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+        },
         "node": {
             "http": "HTTP 経由のノードを使用すると、トラフィックは暗号化されず、セキュリティ上のリスクを引き起こす可能性があります。"
         },
@@ -1294,17 +1454,20 @@
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "メッセージ ID：",
+            "messageId": "Message ID",
             "internal": "内部",
             "rawValue": "生の値",
             "formattedValue": "フォーマットされた値",
-            "date": "日付",
+            "date": "Date",
             "time": "時間"
         }
     },
     "indicators": {
         "developerProfileIndicator": {
             "warningText": "現在開発者プロフィール を使用しており、 {networkName} に接続されています"
+        },
+        "networkIndicator": {
+            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
         }
     },
     "permissions": {
@@ -1314,7 +1477,60 @@
         }
     },
     "tabs": {
-        "wallet": "ウォレット",
-        "staking": "ステーキング"
+        "wallet": "Wallet",
+        "staking": "Staking"
+    },
+    "pills": {
+        "stake": {
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
+        },
+        "internalTransaction": {
+            "in": {
+                "Pending": "transferring from",
+                "Confirmed": "transferred from",
+                "Conflicting": "failed to transfer"
+            },
+            "out": {
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
+            }
+        },
+        "externalTransaction": {
+            "in": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
+            },
+            "out": {
+                "Pending": "sending to",
+                "Confirmed": "sent to",
+                "Conflicting": "failed to send"
+            }
+        },
+        "migrate": {
+            "Pending": "migrating for",
+            "Confirmed": "migrated for",
+            "Conflicting": "failed to migrate"
+        },
+        "asyncStatus": {
+            "unclaimed": "unclaimed",
+            "claimed": "claimed",
+            "expired": "expired"
+        }
+    },
+    "menus": {
+        "expirationTimePicker": {
+            "none": "No expiration time",
+            "1hour": "In 1 hour",
+            "1day": "In 1 day",
+            "1week": "In 1 week",
+            "customDate": {
+                "title": "Custom date",
+                "subtitle": "Set custom expiry date"
+            }
+        }
     }
 }

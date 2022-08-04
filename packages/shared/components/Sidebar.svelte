@@ -84,6 +84,16 @@
                   },
               ]
             : []),
+        ...(features?.developerTools?.enabled
+            ? [
+                  {
+                      icon: 'tools',
+                      label: localize('tabs.developerTools'),
+                      route: DashboardRoute.DeveloperTools,
+                      onClick: openDeveloperTools,
+                  },
+              ]
+            : []),
     ]
 
     function openWallet() {
@@ -97,6 +107,23 @@
     function openCollectibles() {
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
     }
+
+    function openDeveloperTools() {
+        $dashboardRouter.goTo(DashboardRoute.DeveloperTools)
+    }
+
+    // function updateSidebarNotification() {
+    //     sidebarTabs = sidebarTabs.map((tab) => {
+    //         if (DashboardRoute.Staking === tab.route) {
+    //             tab.notificationType = !$activeProfile?.hasVisitedStaking
+    //                 ? 'error'
+    //                 : showStakingNotification
+    //                 ? 'warning'
+    //                 : null
+    //         }
+    //         return tab
+    //     })
+    // }
 
     function manageUnstakedAmountNotification() {
         if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
