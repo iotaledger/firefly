@@ -1244,6 +1244,7 @@
         "accountColor": "Wallet color",
         "transactionTime": "Transaction time",
         "storageDeposit": "Storage deposit",
+        "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
@@ -1259,12 +1260,21 @@
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
-        "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets."
+        "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "giftStorageDeposit": "Gift storage deposit"
 
     },
     "filters":{
         "title": "Filters",
-        "showHidden": "Show hidden"
+        "showHidden": {
+            "label": "Show hidden"
+        },
+        "verificationStatus": {
+            "label": "Verification status",
+            "new": "New",
+            "notVerified": "Not verified",
+            "verified": "Verified"
+        }
     },
     "dates": {
         "today": "Today",

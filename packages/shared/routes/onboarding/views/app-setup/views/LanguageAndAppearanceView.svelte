@@ -4,6 +4,7 @@
     import { appSettings, AppTheme, mobile, shouldBeDarkMode } from '@core/app'
     import { Locale, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
+    import type { DropdownChoice } from '@core/utils'
 
     /**
      * NOTE: It is necessary to use locale directly rather than the
@@ -22,6 +23,7 @@
     let segments = BLINK_SEGMENTS
     let appTheme = $appSettings.theme ?? AppTheme.Light
 
+    let languageList: DropdownChoice[]
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
     $: $appSettings.theme = appTheme
@@ -31,7 +33,7 @@
         segments = SWITCH_SEGMENTS
     }
 
-    function handleLanguageSelectClick(item: { value: string }): void {
+    function handleLanguageSelectClick(item: DropdownChoice): void {
         setLanguage(item)
     }
 
