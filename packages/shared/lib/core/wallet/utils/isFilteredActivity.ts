@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
-import { ActivityAsyncStatus, InclusionState } from '../enums'
 import { activityFilter } from '../stores'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 
 export function isFilteredActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
@@ -28,6 +28,20 @@ export function isFilteredActivity(activity: Activity): boolean {
         if (
             filter.status.selected === ActivityAsyncStatus.Unclaimed &&
             (!activity.asyncStatus || activity.asyncStatus === ActivityAsyncStatus.Claimed)
+        ) {
+            return true
+        }
+    }
+    if (filter.type.active && filter.type.selected) {
+        if (filter.type.selected === ActivityDirection.In && activity.direction !== ActivityDirection.In) {
+            return true
+        }
+        if (filter.type.selected === ActivityDirection.Out && activity.direction !== ActivityDirection.Out) {
+            return true
+        }
+        if (
+            filter.type.selected === ActivityType.InternalTransaction &&
+            activity.type !== ActivityType.InternalTransaction
         ) {
             return true
         }

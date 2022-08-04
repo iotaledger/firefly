@@ -8,7 +8,7 @@ import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
 import { isFilteredActivity } from '../utils/isFilteredActivity'
 import { ActivityFilter } from '../interfaces/filter.interface'
-import { ActivityAsyncStatus, InclusionState } from '../enums'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -33,6 +33,13 @@ export const activityFilter: Writable<ActivityFilter> = writable({
             ActivityAsyncStatus.Claimed,
             ActivityAsyncStatus.Unclaimed,
         ],
+    },
+    type: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.type',
+        selected: ActivityDirection.In,
+        choices: [ActivityDirection.In, ActivityDirection.Out, ActivityType.InternalTransaction],
     },
     showHidden: { active: false, type: 'boolean', localeKey: 'filters.showHidden' },
 })

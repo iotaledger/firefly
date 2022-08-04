@@ -1291,6 +1291,12 @@
             "Pending": "pending",
             "claimed": "claimed",
             "unclaimed": "non-claimed"
+        },
+        "type": {
+            "label": "Type",
+            "in": "incoming",
+            "out": "outgoing",
+            "internalTransaction": "internal"
         }
     },
     "dates": {
