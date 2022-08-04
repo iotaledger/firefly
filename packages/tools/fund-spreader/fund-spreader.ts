@@ -119,7 +119,7 @@ async function spreadFunds(parameters: IFundSpreaderParameters): Promise<void> {
                         )
                         await makeFaucetRequest(address?.address)
                     }
-                    await sleep(100)
+                    await sleep(1000)
                 })
             )
             await sleep(1000)
