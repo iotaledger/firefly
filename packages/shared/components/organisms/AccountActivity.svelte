@@ -73,7 +73,7 @@
     }
 </script>
 
-<div class="h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
+<div class="activity-list h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
             <div class="flex flex-row">
@@ -103,7 +103,7 @@
             </div>
         {/if}
     </div>
-    <div class="flex-auto h-1 space-y-4 -mr-5 pr-4">
+    <div class="flex-auto h-1 space-y-4 -mr-5 pr-4 overflow-y-scroll">
         <div class="-mr-4 h-full scroll-secondary">
             {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
                 <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
@@ -126,3 +126,9 @@
         </div>
     </div>
 </div>
+
+<style lang="scss">
+    .activity-list :global(svelte-virtual-list-viewport) {
+        overflow-y: unset !important;
+    }
+</style>
