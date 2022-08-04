@@ -7,7 +7,8 @@ import { isValueInUnitRange, unitToValue } from '@lib/utils'
 import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
 import { isFilteredActivity } from '../utils/isFilteredActivity'
-import { ActivityFilter } from '../interfaces/filter.interface'
+import { ActivityFilter, NumberFilterType } from '../interfaces/filter.interface'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -21,8 +22,39 @@ export const selectedAccountActivities: Readable<Activity[]> = derived(
 )
 
 export const activityFilter: Writable<ActivityFilter> = writable({
+    amount: {
+        type: 'number',
+        active: false,
+        localeKey: 'filters.amount',
+        selected: NumberFilterType.Equal,
+        choices: Object.values(NumberFilterType),
+        subunit: {
+            type: 'single',
+            amount: '',
+        },
+    },
+    status: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.status',
+        selected: InclusionState.Confirmed,
+        choices: [
+            InclusionState.Confirmed,
+            InclusionState.Pending,
+            ActivityAsyncStatus.Claimed,
+            ActivityAsyncStatus.Unclaimed,
+        ],
+    },
+    type: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.type',
+        selected: ActivityDirection.In,
+        choices: [ActivityDirection.In, ActivityDirection.Out, ActivityType.InternalTransaction],
+    },
     showHidden: { active: false, type: 'boolean', localeKey: 'filters.showHidden' },
 })
+
 export const activitySearchTerm: Writable<string> = writable('')
 
 export const queriedActivities: Readable<Activity[]> = derived(
