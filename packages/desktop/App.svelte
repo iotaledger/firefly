@@ -1,15 +1,7 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
-    import {
-        accountRouter,
-        AppRoute,
-        appRouter,
-        DashboardRoute,
-        dashboardRouter,
-        initRouters,
-        openSettings,
-    } from '@core/router'
+    import { AppRoute, appRouter, DashboardRoute, dashboardRouter, initRouters, openSettings } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import {
         appSettings,
@@ -81,9 +73,8 @@
             await setAppVersionDetails()
             pollCheckForAppUpdate()
         }
-        Electron.onEvent('menu-navigate-wallet', (route) => {
+        Electron.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
-            $accountRouter.goTo(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {

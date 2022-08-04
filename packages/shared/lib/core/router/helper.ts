@@ -3,7 +3,6 @@ import { get } from 'svelte/store'
 import { closePopup } from '@lib/popup'
 
 import { appRouter, AppRouter } from './app-router'
-import { accountRouter, AccountRouter } from './account-router'
 import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
 import { onboardingRouter, OnboardingRouter } from './onboarding-router'
@@ -40,7 +39,6 @@ export function initRouters(): void {
 }
 
 function initBaseRouters(): void {
-    accountRouter.set(new AccountRouter())
     appRouter.set(new AppRouter())
     dashboardRouter.set(new DashboardRouter())
     onboardingRouter.set(new OnboardingRouter())
@@ -65,7 +63,6 @@ export function resetRouters(): void {
 }
 
 function resetBaseRouters(): void {
-    get(accountRouter).reset()
     get(appRouter).reset()
     get(dashboardRouter).reset()
     get(onboardingRouter).reset()
@@ -84,14 +81,7 @@ function resetSubrouters(): void {
     get(shimmerClaimingRouter).reset()
 }
 
-export function resetAccountRouter(resetPanels: boolean = true): void {
-    if (resetPanels) {
-        get(accountRouter).reset()
-    }
-}
-
 export function resetWalletRoute(): void {
-    resetAccountRouter()
     get(dashboardRouter).reset()
 }
 

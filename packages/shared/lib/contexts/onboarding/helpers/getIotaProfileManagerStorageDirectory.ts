@@ -1,7 +1,8 @@
 import { getStorageDirectoryOfProfiles } from '@core/profile'
 
+import { IOTA_PROFILE_MANAGER_DIRECTORY_NAME } from '../constants'
+
 export async function getIotaProfileManagerStorageDirectory(): Promise<string> {
     const storageDir = await getStorageDirectoryOfProfiles()
-    const iotaProfileManagerDirectoryName = 'temp'
-    return `${storageDir}/${iotaProfileManagerDirectoryName}`
+    return `${storageDir}/${IOTA_PROFILE_MANAGER_DIRECTORY_NAME}`
 }

@@ -1,0 +1,1 @@
+export const IOTA_PROFILE_MANAGER_DIRECTORY_NAME = 'temp'
