@@ -2,6 +2,7 @@
     import { Dropdown, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
+    import type { DropdownChoice } from '@core/utils'
 
     function updateLockTimeout(option): void {
         updateActiveProfileSettings({ lockScreenTimeoutInMinutes: option.value })
@@ -15,7 +16,7 @@
         return localize('times.minute', { values: { time: timeInMinutes } })
     }
 
-    function lockScreenTimeoutOptions(): { value: number; label: string }[] {
+    function lockScreenTimeoutOptions(): DropdownChoice[] {
         return [1, 5, 10, 30, 60].map((time) => ({
             value: time,
             label: assignTimeoutOptionLabel(time),

@@ -7,5 +7,12 @@ export function isFilteredAsset(asset: IPersistedAsset): boolean {
     if (!filter.showHidden.active && asset.hidden) {
         return true
     }
+    if (
+        filter.verificationStatus.active &&
+        filter.verificationStatus.selected &&
+        asset.verification !== filter.verificationStatus.selected
+    ) {
+        return true
+    }
     return false
 }

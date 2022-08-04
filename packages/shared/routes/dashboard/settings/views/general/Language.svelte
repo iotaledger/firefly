@@ -3,7 +3,9 @@
     import { appSettings } from '@core/app'
     import { SUPPORTED_LOCALES, localize, setLanguage } from '@core/i18n'
     import { refreshBalanceOverview } from 'shared/lib/wallet'
+    import type { DropdownChoice } from '@core/utils'
 
+    let languageList: DropdownChoice[]
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
     const handleLanguage = (item) => {

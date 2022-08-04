@@ -1,4 +1,5 @@
 export * from './arrow-left.svg'
+export * from './arrow-right.svg'
 export * from './assembly.svg'
 export * from './backspace.svg'
 export * from './bell.svg'
