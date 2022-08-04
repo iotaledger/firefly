@@ -10,11 +10,11 @@ import { IFaucetRequestData, IFaucetResponseData, IFundSpreaderParameters } from
 
 const BASE_FILE_PATH = './fund-spreader/temp'
 
-// const NODE_URL = 'https://api.testnet.shimmer.network'
-// const FAUCET_API_ENDPOINT = 'https://faucet.testnet.shimmer.network/api/enqueue'
+const NODE_URL = 'https://api.testnet.shimmer.network'
+const FAUCET_API_ENDPOINT = 'https://faucet.testnet.shimmer.network/api/enqueue'
 
-const NODE_URL = 'https://api.alphanet.iotaledger.net'
-const FAUCET_API_ENDPOINT = 'http://faucet.alphanet.iotaledger.net/api/enqueue'
+// const NODE_URL = 'https://api.alphanet.iotaledger.net'
+// const FAUCET_API_ENDPOINT = 'http://faucet.alphanet.iotaledger.net/api/enqueue'
 
 const STRONGHOLD_PASSWORD = 'hello-iota-1234'
 
@@ -40,16 +40,114 @@ const FUND_SPREADERS_PARAMETERS: IFundSpreaderParameters[] = [
     },
 
     // 3. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `0`)
+    {
+        spreaderNumber: 3,
+        mnemonic:
+            'dial member lemon fiber era eagle safe shallow latin zoo salmon all way stool that basket grid letter yard dish absorb tackle hand bike',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 4. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `1+`)
+    {
+        spreaderNumber: 4,
+        mnemonic:
+            'sunny convince wife claim capital exercise admit scheme prepare panther six buffalo humble rack deny render guitar fade dance bean wall half sunny library',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 5. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `0`) for each account
+    {
+        spreaderNumber: 5,
+        mnemonic:
+            'hello remember gentle envelope brain lock chief time jazz glare habit jelly fetch scare hour surprise chest what into away confirm come chimney bubble',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 6. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `1+`) for each account
+    {
+        spreaderNumber: 6,
+        mnemonic:
+            'bright index tortoise impact profit segment analyst year law quiz barely below baby marine half battle glimpse else cost mercy swing oyster dragon surround',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 7. Unclaimed Shimmer tokens on many accounts (index `1-n`) and one or more addresses (index `0`) for each account
+    {
+        spreaderNumber: 7,
+        mnemonic:
+            'nuclear vote book peanut wage parrot cereal control glory deer bronze select wink miss spread sunset universe sheriff broccoli pyramid keen drink virus need',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 8. Unclaimed Shimmer tokens on many accounts (index `1-n`) and one or more addresses (index `1+`) for each account
+    {
+        spreaderNumber: 8,
+        mnemonic:
+            'noble prepare reveal trigger guide area beyond dice wood bind trash jeans federal avocado parrot angle uncover crew weather order still blame master suffer',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 9. Scenarios 1-8 except some Shimmer tokens have already been claimed on only one account (random index)
+    {
+        spreaderNumber: 9,
+        mnemonic:
+            'pelican sting violin evil bridge response trophy limit veteran limit corn run hat fashion apple sick reform knife speed canoe glue dawn sunset measure',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 10. Scenarios 1-8 except some Shimmer tokens have already been claimed on more than one account
+    {
+        spreaderNumber: 10,
+        mnemonic:
+            'truth bamboo chicken skill spare perfect spell stage arrive hundred casual stem source impose cherry picnic million outside pottery half maid federal fox kick',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 11. Scenarios 1-8 except all Shimmer tokens have already been claimed on only one account (random index)
+    {
+        spreaderNumber: 11,
+        mnemonic:
+            'palace antenna sudden resource floor mechanic chimney exotic genius hint imitate swift escape wide boost tobacco world foot arrest outside enact quality onion extend',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 12. Scenarios 1-8 except all Shimmer tokens have already been claimed on all accounts
+    {
+        spreaderNumber: 12,
+        mnemonic:
+            'choice matter bus zoo wagon they weekend love urge unique pulse found coin bottom panel animal mix cactus staff orbit jar drop love artwork',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
+
     // 13. Any of the above with a Ledger device where there are too many outputs
+    {
+        spreaderNumber: 13,
+        mnemonic:
+            'juice virus tobacco total train kitchen core ability twist firm network retire cradle vehicle prison soap affair police destroy dignity cancel across horse over',
+        numberOfAccounts: 1,
+        numberOfAddressesPerAccount: 1,
+        addressIndicesWithFunds: [0],
+    },
 ]
 
 async function runFundSpreader(): Promise<void> {
