@@ -55,7 +55,11 @@ const FUND_SPREADERS_PARAMETERS: IFundSpreaderParameters[] = [
 async function runFundSpreader(): Promise<void> {
     try {
         cleanupOldAccountManagerData()
-        await Promise.all(FUND_SPREADERS_PARAMETERS.map((fsp) => spreadFunds(fsp)))
+        await Promise.all(
+            FUND_SPREADERS_PARAMETERS.map(async (fsp) => {
+                await spreadFunds(fsp)
+            })
+        )
         process.exit(0)
     } catch (error) {
         console.error(error)
