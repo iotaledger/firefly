@@ -1,6 +1,7 @@
 import { Icon } from '../enums'
 import {
     ARROW_LEFT_SVG,
+    ARROW_RIGHT_SVG,
     ASSEMBLY_SVG,
     BACKSPACE_SVG,
     BELL_SVG,
@@ -96,6 +97,7 @@ import {
 
 export const ICON_SVG = {
     [Icon.ArrowLeft]: ARROW_LEFT_SVG,
+    [Icon.ArrowRight]: ARROW_RIGHT_SVG,
     [Icon.Assembly]: ASSEMBLY_SVG,
     [Icon.Backspace]: BACKSPACE_SVG,
     [Icon.Bell]: BELL_SVG,
