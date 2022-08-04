@@ -7,7 +7,7 @@
         "fund-spreader": "ts-node fund-spreader/fund-spreader.ts"
     },
     "devDependencies": {
-        "@iota/wallet": "^2.0.2-alpha.11",
+        "@iota/wallet": "2.0.2-alpha.11",
         "@types/node": "^18.6.3",
         "axios": "^0.27.2",
         "ts-node": "^10.9.1"

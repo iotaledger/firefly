@@ -537,7 +537,7 @@
     "@types/bignumber.js" "^5.0.0"
     bignumber.js "^7.2.1"
 
-"@iota/wallet@2.0.2-alpha.11", "@iota/wallet@^2.0.2-alpha.11":
+"@iota/wallet@2.0.2-alpha.11":
   version "2.0.2-alpha.11"
   resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.11.tgz#2a03d16d59b3395c62604e5ff708f95ccde1fc49"
   integrity sha512-O/mV86+ACsBCBh6VojwJzj8zOagTUdQGCYKRxCc+FYrm29iP/dpUV1wghkCXtHU1Btmj6n8UbhT7ifj3scfCyA==

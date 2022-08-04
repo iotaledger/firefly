@@ -16,7 +16,7 @@ const MNEMONIC =
     'ecology cotton whale envelope emotion thing advance horse champion thing thought tomorrow brother erupt blame yellow curtain wasp resist town quarter pretty tell wrestle'
 const STRONGHOLD_PASSWORD = 'hello-iota-1234'
 
-async function run(): Promise<void> {
+async function spreadFunds(): Promise<void> {
     try {
         cleanupOldAccountManagerData()
 
@@ -25,6 +25,7 @@ async function run(): Promise<void> {
         const account = await manager?.createAccount({
             alias: 'Fund Spreader',
         })
+        console.log('ACCOUNT: ', account)
 
         const addressGenerationOptions: AddressGenerationOptions = {
             internal: false,
@@ -33,8 +34,10 @@ async function run(): Promise<void> {
                 network: Network.Testnet,
             },
         }
-        const addresses = await account?.generateAddresses(2, addressGenerationOptions)
-        const address = addresses[addresses.length - 1]
+        const addressAtIndexZero = account?.meta?.publicAddresses[0]
+        const addressesBeyondIndexZero = await account?.generateAddresses(1, addressGenerationOptions)
+        const addresses = [addressAtIndexZero, ...addressesBeyondIndexZero]
+        const address = addresses[0]
         console.log('ADDRESS: ', address)
 
         const faucetResponse = await makeFaucetRequest(address?.address)
@@ -68,11 +71,16 @@ async function createAccountManager(): Promise<AccountManager> {
     }
 
     const manager = new AccountManager(accountManagerOptions)
+    await manager.verifyMnemonic(MNEMONIC)
     await manager.storeMnemonic(MNEMONIC)
     return manager
 }
 
 async function makeFaucetRequest(address: string): Promise<IFaucetResponseData> {
+    if (!address) {
+        throw new Error('Invalid address')
+    }
+
     return new Promise((resolve) => {
         axios
             .post(FAUCET_URL, prepareFaucetRequestData(address))
@@ -92,4 +100,4 @@ function prepareFaucetRequestData(address: string): IFaucetRequestData {
     }
 }
 
-void run()
+void spreadFunds()
