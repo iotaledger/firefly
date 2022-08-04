@@ -109,12 +109,12 @@
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            initialiseOnboardingProfile({ isDeveloperProfile: true })
+            initialiseOnboardingProfile(true)
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            initialiseOnboardingProfile({ isDeveloperProfile: false })
+            initialiseOnboardingProfile(false)
         })
         Electron.hookErrorLogger((err) => {
             addError(err)

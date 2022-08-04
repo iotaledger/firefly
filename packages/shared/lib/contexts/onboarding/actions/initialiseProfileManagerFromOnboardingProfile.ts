@@ -1,11 +1,8 @@
 import { get } from 'svelte/store'
 
-import { AccountManagerOptions } from '@iota/wallet'
-
-import { COIN_TYPE, getDefaultClientOptions } from '@core/network'
-import { getStorageDirectoryOfProfile } from '@core/profile'
 import { initialiseProfileManager, profileManager } from '@core/profile-manager'
 
+import { buildProfileManagerOptionsFromOnboardingProfile } from '../helpers'
 import { onboardingProfile } from '../stores'
 
 export async function initialiseProfileManagerFromOnboardingProfile(checkForExistingManager?: boolean): Promise<void> {
@@ -14,26 +11,7 @@ export async function initialiseProfileManagerFromOnboardingProfile(checkForExis
     }
 
     const { storagePath, coinType, clientOptions, secretManager } =
-        await createAccountManagerOptionsFromOnboardingProfile()
+        await buildProfileManagerOptionsFromOnboardingProfile(get(onboardingProfile))
     const manager = initialiseProfileManager(storagePath, coinType, clientOptions, secretManager)
     profileManager.set(manager)
-}
-
-async function createAccountManagerOptionsFromOnboardingProfile(): Promise<AccountManagerOptions> {
-    const _onboardingProfile = get(onboardingProfile)
-    const { id, networkProtocol } = _onboardingProfile
-    const storagePath = await getStorageDirectoryOfProfile(id)
-    const coinType = COIN_TYPE[networkProtocol]
-    const clientOptions =
-        _onboardingProfile?.clientOptions ?? getDefaultClientOptions(networkProtocol, _onboardingProfile?.networkType)
-    const secretManager = {
-        Stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
-    }
-
-    return {
-        storagePath,
-        coinType,
-        clientOptions,
-        secretManager,
-    }
 }

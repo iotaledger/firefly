@@ -6,6 +6,7 @@
         cleanupOnboarding,
         initialiseOnboardingProfile,
         onboardingProfile,
+        shouldUseDeveloperProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
@@ -29,7 +30,7 @@
 
     onMount(() => {
         if (!$onboardingProfile?.id) {
-            initialiseOnboardingProfile()
+            initialiseOnboardingProfile(shouldUseDeveloperProfile())
         }
         updateOnboardingProfile({ networkProtocol: null })
     })
