@@ -36,7 +36,6 @@
     export let inclusionState: InclusionState = InclusionState.Pending
     export let metadata: string = null
     export let amount: string = null
-    export let rawAmount: number
     export let unit: string
     export let storageDeposit = 0
     export let giftedStorageDeposit = 0
