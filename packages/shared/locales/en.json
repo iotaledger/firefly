@@ -1292,6 +1292,19 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "status": {
+            "label": "Status",
+            "Confirmed": "confirmed",
+            "Pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "non-claimed"
+        },
+        "type": {
+            "label": "Type",
+            "in": "incoming",
+            "out": "outgoing",
+            "internalTransaction": "internal"
         }
     },
     "dates": {
