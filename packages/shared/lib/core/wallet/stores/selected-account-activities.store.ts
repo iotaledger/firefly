@@ -7,7 +7,7 @@ import { isValueInUnitRange, unitToValue } from '@lib/utils'
 import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
 import { isFilteredActivity } from '../utils/isFilteredActivity'
-import { ActivityFilter } from '../interfaces/filter.interface'
+import { ActivityFilter, NumberFilterType } from '../interfaces/filter.interface'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -21,6 +21,17 @@ export const selectedAccountActivities: Readable<Activity[]> = derived(
 )
 
 export const activityFilter: Writable<ActivityFilter> = writable({
+    amount: {
+        type: 'number',
+        active: false,
+        localeKey: 'filters.amount',
+        selected: NumberFilterType.Equal,
+        choices: Object.values(NumberFilterType),
+        subunit: {
+            type: 'single',
+            amount: undefined,
+        },
+    },
     showHidden: { active: false, type: 'boolean', localeKey: 'filters.showHidden' },
 })
 export const activitySearchTerm: Writable<string> = writable('')
