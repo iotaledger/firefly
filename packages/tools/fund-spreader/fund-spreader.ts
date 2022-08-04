@@ -10,7 +10,7 @@ import { IFaucetRequestData, IFaucetResponseData } from './interfaces'
 
 const BASE_FILE_PATH = './fund-spreader/temp'
 
-const FAUCET_URL = 'http://faucet.alphanet.iotaledger.net/api/enqueue'
+const FAUCET_API_ENDPOINT = 'https://faucet.testnet.shimmer.network/api/enqueue'
 
 const MNEMONIC =
     'ecology cotton whale envelope emotion thing advance horse champion thing thought tomorrow brother erupt blame yellow curtain wasp resist town quarter pretty tell wrestle'
@@ -83,7 +83,7 @@ async function makeFaucetRequest(address: string): Promise<IFaucetResponseData> 
 
     return new Promise((resolve) => {
         axios
-            .post(FAUCET_URL, prepareFaucetRequestData(address))
+            .post(FAUCET_API_ENDPOINT, prepareFaucetRequestData(address))
             .then((response: AxiosResponse<IFaucetResponseData>) => {
                 resolve(response?.data)
             })
