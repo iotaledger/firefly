@@ -8,6 +8,7 @@ import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
 import { isFilteredActivity } from '../utils/isFilteredActivity'
 import { ActivityFilter } from '../interfaces/filter.interface'
+import { ActivityAsyncStatus, InclusionState } from '../enums'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -21,8 +22,21 @@ export const selectedAccountActivities: Readable<Activity[]> = derived(
 )
 
 export const activityFilter: Writable<ActivityFilter> = writable({
+    status: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.status',
+        selected: InclusionState.Confirmed,
+        choices: [
+            InclusionState.Confirmed,
+            InclusionState.Pending,
+            ActivityAsyncStatus.Claimed,
+            ActivityAsyncStatus.Unclaimed,
+        ],
+    },
     showHidden: { active: false, type: 'boolean', localeKey: 'filters.showHidden' },
 })
+
 export const activitySearchTerm: Writable<string> = writable('')
 
 export const queriedActivities: Readable<Activity[]> = derived(
