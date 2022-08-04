@@ -4,11 +4,8 @@
     import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
     import { Error, Icon } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
 
     const dispatch = createEventDispatcher()
-
-    const isAndroid = Platform.getOS() === 'android'
 
     export let value = undefined
     export let classes = ''
@@ -92,12 +89,8 @@
      * the auto-suggest feature or other event might follow
      * the keydown event and invalidate it.
      */
-    const changeHandlerHelper = (e, i: number) => {
-        if (!/^[0-9]$/.test(e.data)) {
-            inputs[i] = ''
-        } else {
-            inputElements[i + 1].focus()
-        }
+    const changeHandlerHelper = (i: number) => {
+        inputElements[i + 1]?.focus()
     }
     const selectFirstEmpty = () => {
         for (let j = 0; j < PIN_LENGTH; j++) {
@@ -151,14 +144,15 @@
                             bind:value={inputs[i]}
                             maxLength="1"
                             id={`input-${i}`}
-                            type="password"
+                            type="number"
                             inputmode="numeric"
                             autocomplete="off"
+                            pattern="[0-9]"
                             bind:this={inputElements[i]}
                             class:active={!inputs[i] || inputs[i].length === 0}
                             class:glimpse
                             {disabled}
-                            on:input={(event) => changeHandlerHelper(event, i)}
+                            on:input={() => changeHandlerHelper(i)}
                             on:keydown={(event) => changeHandler(event, i)}
                             on:contextmenu|preventDefault
                         />
