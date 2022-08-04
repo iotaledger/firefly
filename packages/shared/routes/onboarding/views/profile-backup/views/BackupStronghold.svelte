@@ -49,7 +49,11 @@
     }
 
     function onBackClick(): void {
-        $profileBackupRouter.previous()
+        if ($onboardingProfile?.recoveryType) {
+            $profileBackupRouter.previous()
+        } else {
+            $profileBackupRouter.reset()
+        }
     }
 </script>
 
