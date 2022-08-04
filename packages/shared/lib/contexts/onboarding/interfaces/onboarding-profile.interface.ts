@@ -11,6 +11,6 @@ export interface IOnboardingProfile extends IPersistedProfile {
     importFilePath?: string
     mnemonic?: string[]
     strongholdPassword?: string
-    hasAlreadyStoredMnemonic?: boolean
     mustVisitProfileName?: boolean
+    hasStoredMnemonic?: boolean
 }

@@ -1,8 +1,10 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
+    import { onboardingProfile, resetOnboardingProfileWithAlreadyStoredMnemonic } from '@contexts/onboarding'
 
     export let busy: boolean
 
@@ -13,6 +15,12 @@
     function handleBackClick(): void {
         $profileBackupRouter.previous()
     }
+
+    onMount(() => {
+        if ($onboardingProfile?.hasStoredMnemonic) {
+            void resetOnboardingProfileWithAlreadyStoredMnemonic()
+        }
+    })
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick} {busy}>

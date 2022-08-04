@@ -5,7 +5,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import { onboardingProfile } from '@contexts/onboarding'
+    import { onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
 
     export let busy = false
 
@@ -54,7 +54,8 @@
         }
     }
 
-    function handleContinue(): void {
+    async function handleContinue(): Promise<void> {
+        await verifyAndStoreMnemonic()
         $profileBackupRouter.next()
     }
 

@@ -33,7 +33,7 @@
     onMount(() => {
         destroyProfileManager()
         destroyIotaProfileManager()
-        updateOnboardingProfile({ hasAlreadyStoredMnemonic: false, type: null, recoveryType: null })
+        updateOnboardingProfile({ type: null, recoveryType: null })
     })
 </script>
 

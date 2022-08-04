@@ -3,12 +3,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import {
-        backupInitialStronghold,
-        onboardingProfile,
-        updateOnboardingProfile,
-        verifyAndStoreMnemonic,
-    } from '@contexts/onboarding'
+    import { backupInitialStronghold, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     export let busy = false
 
@@ -18,11 +13,6 @@
     $: isStrongholdPasswordValid = $onboardingProfile?.strongholdPassword === confirmPassword
 
     async function onAdvanceView(): Promise<void> {
-        if (!$onboardingProfile?.hasAlreadyStoredMnemonic) {
-            await verifyAndStoreMnemonic()
-            updateOnboardingProfile({ hasAlreadyStoredMnemonic: true })
-        }
-
         if (!skipBackup) {
             await backupInitialStronghold()
         }

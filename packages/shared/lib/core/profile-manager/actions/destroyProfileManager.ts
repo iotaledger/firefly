@@ -9,6 +9,6 @@ export function destroyProfileManager(_profileManager: Writable<IProfileManager>
     if (!manager) return
 
     _profileManager.set(null)
-    manager.destroy()
     api.deleteAccountManager(manager?.id)
+    manager.destroy()
 }
