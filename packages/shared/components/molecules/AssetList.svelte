@@ -35,11 +35,11 @@
             <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
         </div>
-        <div class="flex-auto h-1 -mr-5 pr-4 overflow-y-scroll">
+        <div class="flex-auto h-1 -mr-5 pr-4 overflow-x-hidden overflow-y-scroll">
             <div class="-mr-5 h-full scroll-secondary">
                 {#if assets?.baseCoin || assets?.nativeTokens?.length > 0}
                     <VirtualList items={assetList} let:item>
-                        <AssetTile classes="mb-2 w-full" onClick={() => handleAssetTileClick(item)} asset={item} />
+                        <AssetTile classes="mb-2" onClick={() => handleAssetTileClick(item)} asset={item} />
                     </VirtualList>
                 {:else}
                     <div class="h-full flex flex-col items-center justify-center text-center">
