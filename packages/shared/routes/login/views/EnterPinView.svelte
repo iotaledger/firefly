@@ -8,9 +8,13 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { COIN_TYPE, NetworkProtocol, NetworkType } from '@core/network'
-    import { activeProfile, login, resetActiveProfile, getStorageDirectoryOfProfile } from '@core/profile'
-    import { initialiseProfileManager, profileManager } from '@core/profile-manager'
+    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { activeProfile, login, resetActiveProfile } from '@core/profile'
+    import {
+        buildProfileManagerOptionsFromProfileData,
+        initialiseProfileManager,
+        profileManager,
+    } from '@core/profile-manager'
     import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { openPopup, popupState } from '@lib/popup'
@@ -101,29 +105,15 @@
                 .then((verified) => {
                     if (verified === true) {
                         return Platform.getMachineId().then(() =>
-                            getStorageDirectoryOfProfile(profile.id).then((path) => {
+                            buildProfileManagerOptionsFromProfileData(profile).then((profileManagerOptions) => {
+                                const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
                                 const manager = initialiseProfileManager(
-                                    path,
-                                    COIN_TYPE[profile.networkProtocol],
-                                    $activeProfile.clientOptions,
-                                    {
-                                        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
-                                    }
+                                    storagePath,
+                                    coinType,
+                                    clientOptions,
+                                    secretManager
                                 )
                                 profileManager.set(manager)
-                                // TODO: set storage password with profile manager api
-                                // api.setStoragePassword(pinCode, {
-                                //     onSuccess() {
-                                //         dispatch('next')
-                                //     },
-                                //     onError(err) {
-                                //         isBusy = false
-                                //         showAppNotification({
-                                //             type: 'error',
-                                //             message: locale(err.error),
-                                //         })
-                                //     },
-                                // })
                                 void login()
                                 dispatch('next')
                             })

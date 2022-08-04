@@ -1,5 +1,4 @@
 export * from './buildOnboardingProfile'
-export * from './buildProfileManagerOptionsFromOnboardingProfile'
 export * from './convertOnboardingProfileToPersistedProfile'
 export * from './getIotaProfileManagerStorageDirectory'
 export * from './getProfileTypeFromProfileRecoveryType'

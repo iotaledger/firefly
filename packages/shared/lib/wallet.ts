@@ -9,8 +9,6 @@ import { CurrencyTypes } from './typings/currency'
 import { RecoveryPhrase } from './typings/mnemonic'
 import { AccountBalance } from '@iota/wallet'
 
-export const MAX_PASSWORD_LENGTH = 256
-
 /**
  * A number representing the threshold for what is considered dust, which is 1Mi or 1,000,000i.
  */

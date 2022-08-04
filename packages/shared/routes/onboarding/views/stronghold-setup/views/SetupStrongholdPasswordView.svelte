@@ -3,12 +3,12 @@
     import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
     import { onboardingRouter } from '@core/router'
     import { iotaProfileManager, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
-    import { MAX_PASSWORD_LENGTH } from '@lib/wallet'
 
     let strongholdPassword = ''
     let confirmedStrongholdPassword = ''
@@ -24,10 +24,10 @@
         error = ''
         errorConfirm = ''
 
-        if (strongholdPassword.length > MAX_PASSWORD_LENGTH) {
+        if (strongholdPassword.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
             error = localize('error.password.length', {
                 values: {
-                    length: MAX_PASSWORD_LENGTH,
+                    length: MAX_STRONGHOLD_PASSWORD_LENGTH,
                 },
             })
         } else if (passwordStrength?.score !== 4) {
