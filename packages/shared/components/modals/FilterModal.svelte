@@ -26,7 +26,12 @@
     }
 </script>
 
-<Modal bind:this={modal} on:close={onClose} position={{ absolute: true, right: '0', top: '30px' }}>
+<Modal
+    bind:this={modal}
+    on:close={onClose}
+    position={{ absolute: true, right: '0', top: '30px' }}
+    classes="overflow-visible"
+>
     <div class="filter-modal">
         <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3">
             <Button secondary xsmall onClick={clear}>{localize('actions.clear')}</Button>

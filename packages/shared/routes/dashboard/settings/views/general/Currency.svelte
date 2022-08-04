@@ -5,7 +5,9 @@
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { refreshBalanceOverview } from 'shared/lib/wallet'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
+    import type { DropdownChoice } from '@core/utils'
 
+    let currencyList: DropdownChoice[]
     $: currencyList = Object.keys($exchangeRates)
         .map((currency) => ({ value: currency, label: currency }))
         .sort()
