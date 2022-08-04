@@ -235,3 +235,6 @@ DerivedData/
 
 # Static site generations from Retype
 **/.retype
+
+# For temporary outputs by tools
+**/temp

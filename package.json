@@ -2,7 +2,8 @@
     "private": true,
     "workspaces": [
         "packages/desktop",
-        "packages/shared"
+        "packages/shared",
+        "packages/tools"
     ],
     "devDependencies": {
         "@babel/eslint-parser": "^7.15.0",
@@ -20,7 +21,7 @@
         "retypeapp": "^2.3.0"
     },
     "scripts": {
-        "docs:start": "cd docs/ && retype watch",
+        "docs:start": "cd docs && retype watch",
         "format": "prettier -w \"**/*.{ts,js,json,scss,css,svelte}\"",
         "format-check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
         "lint": "eslint . --cache",
@@ -30,7 +31,8 @@
         "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
         "test": "yarn test:shared",
-        "test:shared": "cd packages/shared && yarn test"
+        "test:shared": "cd packages/shared && yarn test",
+        "tool:fund-spreader": "cd packages/tools && yarn fund-spreader"
     },
     "resolutions": {
         "lodash": ">=4.17.21",

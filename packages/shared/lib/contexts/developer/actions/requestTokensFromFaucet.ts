@@ -1,12 +1,12 @@
 import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { FAUCET_URLS } from '@core/network'
+import { FAUCET_URL } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
 
 export async function requestTokensFromFaucet(): Promise<void> {
-    const url = FAUCET_URLS?.[get(activeProfile)?.networkProtocol]?.[get(activeProfile)?.networkType]
+    const url = FAUCET_URL?.[get(activeProfile)?.networkProtocol]?.[get(activeProfile)?.networkType]
 
     if (url) {
         const headers = new Headers()

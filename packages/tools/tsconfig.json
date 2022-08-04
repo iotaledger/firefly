@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "lib": ["ES6"],
+        "moduleResolution": "node",
+        "types": ["node"]
+    },
+    "include": ["./fund-spreader"],
+    "exclude": ["**/node_modules"]
+}
