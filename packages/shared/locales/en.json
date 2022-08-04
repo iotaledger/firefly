@@ -1123,6 +1123,7 @@
         "reference": "Reference",
         "from": "From",
         "to": "To",
+        "and": "and",
         "receiveFunds": "Receive funds",
         "address": "Address",
         "myAddress": "My Address",
@@ -1274,6 +1275,26 @@
             "new": "New",
             "notVerified": "Not verified",
             "verified": "Verified"
+        },
+        "amount": {
+            "label": "Amount",
+            "equal": "is equal to",
+            "range": "is between",
+            "greater": "is greater than",
+            "less": "is less than"
+        },
+        "status": {
+            "label": "Status",
+            "Confirmed": "confirmed",
+            "Pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "non-claimed"
+        },
+        "type": {
+            "label": "Type",
+            "in": "incoming",
+            "out": "outgoing",
+            "internalTransaction": "internal"
         }
     },
     "dates": {
