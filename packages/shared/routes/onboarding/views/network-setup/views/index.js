@@ -1,3 +1,3 @@
-export { default as OnboardingCustomNetworkView } from './OnboardingCustomNetworkView.svelte'
-export { default as OnboardingNetworkView } from './OnboardingNetworkView.svelte'
-export { default as OnboardingProtocolView } from './OnboardingProtocolView.svelte'
+export { default as ChooseNetworkView } from './ChooseNetworkView.svelte'
+export { default as ChooseProtocolView } from './ChooseProtocolView.svelte'
+export { default as SetupCustomNodeView } from './SetupCustomNodeView.svelte'

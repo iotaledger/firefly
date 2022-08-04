@@ -1,19 +1,19 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { OnboardingCustomNetworkView, OnboardingNetworkView, OnboardingProtocolView } from './views'
+    import { ChooseNetworkView, ChooseProtocolView, SetupCustomNodeView } from './views'
     import { NetworkSetupRoute, networkSetupRoute } from '@core/router'
 </script>
 
-{#if $networkSetupRoute === NetworkSetupRoute.Protocol}
+{#if $networkSetupRoute === NetworkSetupRoute.ChooseProtocol}
     <Transition>
-        <OnboardingProtocolView />
+        <ChooseProtocolView />
     </Transition>
-{:else if $networkSetupRoute === NetworkSetupRoute.Network}
+{:else if $networkSetupRoute === NetworkSetupRoute.ChooseNetwork}
     <Transition>
-        <OnboardingNetworkView />
+        <ChooseNetworkView />
     </Transition>
-{:else if $networkSetupRoute === NetworkSetupRoute.CustomNetwork}
+{:else if $networkSetupRoute === NetworkSetupRoute.SetupCustomNode}
     <Transition>
-        <OnboardingCustomNetworkView />
+        <SetupCustomNodeView />
     </Transition>
 {/if}

@@ -1,5 +1,5 @@
 export enum NetworkSetupRoute {
-    CustomNetwork = 'customNetwork',
-    Network = 'network',
-    Protocol = 'protocol',
+    SetupCustomNode = 'customNetwork',
+    ChooseNetwork = 'network',
+    ChooseProtocol = 'protocol',
 }

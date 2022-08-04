@@ -12,7 +12,7 @@ export const networkSetupRouter = writable<NetworkSetupRouter>(null)
 
 export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
     constructor() {
-        super(NetworkSetupRoute.Protocol, networkSetupRoute, get(onboardingRouter))
+        super(NetworkSetupRoute.ChooseProtocol, networkSetupRoute, get(onboardingRouter))
     }
 
     next(): void {
@@ -21,25 +21,25 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
         const _onboardingProfile = get(onboardingProfile)
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case NetworkSetupRoute.Protocol: {
+            case NetworkSetupRoute.ChooseProtocol: {
                 const isDeveloperProfile = _onboardingProfile?.isDeveloperProfile
                 if (isDeveloperProfile) {
-                    nextRoute = NetworkSetupRoute.Network
+                    nextRoute = NetworkSetupRoute.ChooseNetwork
                 } else {
                     this.parentRouter.next()
                 }
                 break
             }
-            case NetworkSetupRoute.Network: {
+            case NetworkSetupRoute.ChooseNetwork: {
                 const networkType = _onboardingProfile?.networkType ?? NetworkType.Devnet
                 if (networkType === NetworkType.PrivateNet) {
-                    nextRoute = NetworkSetupRoute.CustomNetwork
+                    nextRoute = NetworkSetupRoute.SetupCustomNode
                 } else {
                     this.parentRouter.next()
                 }
                 break
             }
-            case NetworkSetupRoute.CustomNetwork:
+            case NetworkSetupRoute.SetupCustomNode:
                 this.parentRouter.next()
                 break
         }
