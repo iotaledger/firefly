@@ -1,7 +1,7 @@
 import { ISvg } from '../interfaces'
 
 export const ARROW_RIGHT_SVG: ISvg = {
-    width: 24,
+    width: 20,
     height: 24,
     path: [
         {

@@ -65,7 +65,7 @@
 
                 {#if filterUnit.type === 'number' && filterUnit.selected}
                     <div class="flex flex-row items-center space-x-2 mt-2">
-                        <Icon height="24" width="24" icon="arrow-right" />
+                        <Icon height="24" width="20" icon="arrow-right" />
                         {#if filterUnit.subunit.type === 'range'}
                             <NumberInput bind:value={filterUnit.subunit.start} autofocus placeholder="" />
                             <Text>{localize('general.and')}</Text>
