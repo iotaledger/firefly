@@ -6,7 +6,7 @@
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
     import { onboardingRouter } from '@core/router'
-    import { iotaProfileManager, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
 
@@ -47,19 +47,8 @@
                     $onboardingProfile?.strongholdPassword !== strongholdPassword
                 if (mustChangePassword) {
                     await changeStrongholdPassword($onboardingProfile?.strongholdPassword, strongholdPassword)
-
-                    if ($iotaProfileManager) {
-                        await $iotaProfileManager.changeStrongholdPassword(
-                            $onboardingProfile?.strongholdPassword,
-                            strongholdPassword
-                        )
-                    }
                 } else {
                     await setStrongholdPassword(strongholdPassword)
-
-                    if ($iotaProfileManager) {
-                        await $iotaProfileManager.setStrongholdPassword(strongholdPassword)
-                    }
                 }
 
                 updateOnboardingProfile({ strongholdPassword })

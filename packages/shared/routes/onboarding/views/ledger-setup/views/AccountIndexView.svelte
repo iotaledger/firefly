@@ -9,6 +9,8 @@
     import { LedgerAppName } from '@lib/typings/ledger'
 
     const dispatch = createEventDispatcher()
+    const min = 0
+    const max = 2147483647
 
     let busy = false
     let expert = false

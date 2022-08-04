@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol } from '@core/network'
     import { profileRecoveryRouter } from '@core/router'
-    import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
+    import { onboardingProfile } from '@contexts/onboarding'
 
     function handleContinueClick(): void {
         $profileRecoveryRouter.next()
@@ -27,14 +27,14 @@
             primaryText={localize('views.importFromLedger.haveFireflyLedger')}
             secondaryText={localize('views.importFromLedger.haveFireflyLedgerDescription')}
             icon="settings"
-            onClick={() => handleContinueClick(ProfileRecoveryType.FireflyLedger)}
+            onClick={handleContinueClick}
         />
         <OnboardingButton
             primaryText={localize('views.importFromLedger.haveTrinityLedger')}
             secondaryText={localize('views.importFromLedger.haveTrinityLedgerDescription')}
             icon="settings"
             hidden={$onboardingProfile.networkProtocol === NetworkProtocol.Shimmer}
-            onClick={() => handleContinueClick(ProfileRecoveryType.TrinityLedger)}
+            onClick={handleContinueClick}
         />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">

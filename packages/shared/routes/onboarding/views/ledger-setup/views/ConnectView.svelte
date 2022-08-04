@@ -3,13 +3,13 @@
     import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
-    import { profileRecoveryType, ProfileRecoveryType, profileSetupType, ProfileSetupType } from '@contexts/onboarding'
+    import { onboardingProfile, ProfileRecoveryType, ProfileSetupType } from '@contexts/onboarding'
     import { ledgerDeviceState, stopPollingLedgerStatus } from '@lib/ledger'
     import { openPopup } from '@lib/popup'
     import { LedgerDeviceState } from '@lib/typings/ledger'
 
-    const legacyLedger = $profileRecoveryType === ProfileRecoveryType.TrinityLedger
-    const newLedgerProfile = $profileSetupType === ProfileSetupType.New
+    const legacyLedger = $onboardingProfile?.recoveryType === ProfileRecoveryType.TrinityLedger
+    const newLedgerProfile = $onboardingProfile?.setupType === ProfileSetupType.New
     // const LEDGER_STATUS_POLL_INTERVAL = 1500
 
     let polling = false
