@@ -29,8 +29,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 break
             case OnboardingRoute.ProfileSetup: {
                 const _onboardingProfile = get(onboardingProfile)
-                const profileName = _onboardingProfile?.name
-                if (profileName) {
+                if (!_onboardingProfile?.mustVisitProfileName) {
                     const profileType = _onboardingProfile?.type
                     if (profileType === ProfileType.Software) {
                         const profileSetupType = _onboardingProfile?.setupType

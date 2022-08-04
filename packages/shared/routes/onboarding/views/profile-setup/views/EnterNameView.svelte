@@ -4,8 +4,9 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
-    import { profileRecoveryRouter, profileSetupRouter } from '@core/router'
+    import { OnboardingRoute, onboardingRouter, profileRecoveryRouter, profileSetupRouter } from '@core/router'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import { onMount } from 'svelte'
 
     let error = ''
     let profileName = $onboardingProfile?.name ?? ''
@@ -16,10 +17,13 @@
     function handleBackClick(): void {
         if ($onboardingProfile?.recoveryType) {
             updateOnboardingProfile({ type: null, setupType: null, recoveryType: null })
+            $onboardingRouter.filterHistory(OnboardingRoute.ProfileRecovery)
             $profileRecoveryRouter.reset()
             $profileSetupRouter.reset()
+        } else {
+            $profileSetupRouter.previous()
         }
-        $profileSetupRouter.previous()
+        updateOnboardingProfile({ mustVisitProfileName: true })
     }
 
     function handleContinueClick(): void {
@@ -31,6 +35,10 @@
             error = err.message
         }
     }
+
+    onMount(() => {
+        updateOnboardingProfile({ mustVisitProfileName: false })
+    })
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick}>

@@ -4,7 +4,7 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import { onboardingProfile } from '@contexts/onboarding'
+    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { generateAndStoreMnemonic } from '@lib/wallet'
     import { downloadRecoveryKit } from '@lib/utils'
 
@@ -17,6 +17,7 @@
     }
 
     function handleBackClick(): void {
+        updateOnboardingProfile({ mnemonic: null })
         $profileBackupRouter.previous()
     }
 

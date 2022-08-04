@@ -25,7 +25,7 @@
 
     onMount(() => {
         destroyProfileManager()
-        updateOnboardingProfile({ type: null })
+        updateOnboardingProfile({ hasAlreadyStoredMnemonic: false, type: null })
     })
 </script>
 

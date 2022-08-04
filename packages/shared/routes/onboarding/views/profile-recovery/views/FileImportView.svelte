@@ -75,7 +75,7 @@
     }
 
     onMount(() => {
-        updateOnboardingProfile({ importFile: null, importFilePath: null })
+        updateOnboardingProfile({ importFile: null, importFilePath: null, strongholdPassword: null })
     })
 </script>
 

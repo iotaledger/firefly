@@ -17,19 +17,31 @@
 
     $: isStrongholdPasswordValid = $onboardingProfile?.strongholdPassword === confirmPassword
 
-    function onSkipBackupClick(): void {
-        skipBackup = true
+    async function onAdvanceView(): Promise<void> {
+        if (!$onboardingProfile?.hasAlreadyStoredMnemonic) {
+            await verifyAndStoreMnemonic()
+            updateOnboardingProfile({ hasAlreadyStoredMnemonic: true })
+        }
+
+        if (!skipBackup) {
+            await backupInitialStronghold()
+        }
+
+        updateOnboardingProfile({ mnemonic: null })
+
         $profileBackupRouter.next()
+    }
+
+    async function onSkipBackupClick(): Promise<void> {
+        skipBackup = true
+        await onAdvanceView()
     }
 
     async function onBackupClick(): Promise<void> {
         if (isStrongholdPasswordValid) {
             try {
                 skipBackup = false
-                await verifyAndStoreMnemonic()
-                await backupInitialStronghold()
-                updateOnboardingProfile({ mnemonic: null })
-                $profileBackupRouter.next()
+                await onAdvanceView()
             } catch (err) {
                 console.error(err)
             }
