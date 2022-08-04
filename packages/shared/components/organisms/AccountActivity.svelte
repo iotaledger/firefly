@@ -86,7 +86,9 @@
     <div class="flex-auto h-1 space-y-4 -mr-5 pr-4">
         <div class="-mr-4 h-full scroll-secondary">
             {#if $selectedAccount.isSyncing && $selectedAccountActivities.length === 0}
-                <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
+                <div class="h-full flex flex-col items-center justify-center text-center">
+                    <Text secondary>{localize('general.firstSync')}</Text>
+                </div>
             {:else if activityListWithTitles.length}
                 <VirtualList items={activityListWithTitles} let:item>
                     <div class="mb-2">
