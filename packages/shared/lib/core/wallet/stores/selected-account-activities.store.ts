@@ -29,7 +29,7 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         choices: Object.values(NumberFilterType),
         subunit: {
             type: 'single',
-            amount: undefined,
+            amount: '',
         },
     },
     showHidden: { active: false, type: 'boolean', localeKey: 'filters.showHidden' },

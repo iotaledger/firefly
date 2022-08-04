@@ -16,16 +16,20 @@
 
     function updateSubUnitForNumberFilter() {
         if (filterUnit.type === 'number') {
-            if (filterUnit.selected === NumberFilterType.Equal) {
+            if (
+                filterUnit.selected === NumberFilterType.Equal ||
+                filterUnit.selected === NumberFilterType.Greater ||
+                filterUnit.selected === NumberFilterType.Less
+            ) {
                 filterUnit.subunit = {
                     type: 'single',
-                    amount: undefined,
+                    amount: '',
                 }
             } else if (filterUnit.selected === NumberFilterType.Range) {
                 filterUnit.subunit = {
                     type: 'range',
-                    start: undefined,
-                    end: undefined,
+                    start: '',
+                    end: '',
                 }
             }
         }
