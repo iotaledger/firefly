@@ -1284,6 +1284,19 @@
             "new": "New",
             "notVerified": "Not verified",
             "verified": "Verified"
+        },
+        "status": {
+            "label": "Status",
+            "Confirmed": "confirmed",
+            "Pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "non-claimed"
+        },
+        "type": {
+            "label": "Type",
+            "in": "incoming",
+            "out": "outgoing",
+            "internalTransaction": "internal"
         }
     },
     "dates": {

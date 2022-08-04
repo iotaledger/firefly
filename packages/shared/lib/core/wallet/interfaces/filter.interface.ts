@@ -1,6 +1,8 @@
 export type Filter = ActivityFilter | AssetFilter
 
 export interface ActivityFilter {
+    status: SelectionFilterUnit
+    type: SelectionFilterUnit
     showHidden: BooleanFilterUnit
 }
 
