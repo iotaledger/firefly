@@ -13,7 +13,7 @@ import { getNodeUrlFromCoinType } from './node.helper'
  * Spreads funds to addresses of accounts of a particular seed.
  */
 export async function spreadFunds(parameters: IFundsSpreaderParameters, round: number = 1): Promise<void> {
-    const FUNDS_SPREADER_FILE_PATH = `${__dirname}/../../${BASE_FILE_PATH}/${round}`
+    const FUNDS_SPREADER_FILE_PATH = `${BASE_FILE_PATH}/${round}`
     const accountManagerOptions = {
         storagePath: path.resolve(FUNDS_SPREADER_FILE_PATH, 'database'),
         clientOptions: {
