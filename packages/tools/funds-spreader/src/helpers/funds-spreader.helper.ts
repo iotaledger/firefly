@@ -1,67 +1,35 @@
 /* eslint-disable no-console */
 
-import * as path from 'path'
+import { Account, AccountManager, Address, CoinType } from '@iota/wallet'
 
-import { Account, AccountManager, Address } from '@iota/wallet'
-
-import { BASE_FILE_PATH, STRONGHOLD_PASSWORD } from '../constants'
 import { IAccountFundsSpreaderParameters, IFundsSpreaderParameters } from '../interfaces'
 
-import { getNodeUrlFromCoinType } from './node.helper'
+import { initialiseAccountManager } from './account-manager.helper'
+import { getFaucetApiEndpoint, makeFaucetRequests } from './faucet.helper'
 
 /**
  * Spreads funds to addresses of accounts of a particular seed.
  */
 export async function spreadFunds(parameters: IFundsSpreaderParameters, round: number = 1): Promise<void> {
-    // build account manager
-    const manager = buildAccountManager(parameters, round)
-
-    // initialise secret manager
-    await initialiseSecretManager(parameters, manager)
-
-    // spread funds for each account
+    const manager = await initialiseAccountManager(parameters, round)
     await Promise.all(
         parameters?.accountFundsSpreaderParameters.map(async (accountFundsSpreaderParameters) => {
-            await spreadFundsForAccount(accountFundsSpreaderParameters, manager)
+            await spreadFundsForAccount(accountFundsSpreaderParameters, manager, parameters?.addressEncodingCoinType)
         })
     )
 }
 
-function buildAccountManager(parameters: IFundsSpreaderParameters, round: number): AccountManager {
-    const FUNDS_SPREADER_FILE_PATH = `${BASE_FILE_PATH}/${round}`
-    const accountManagerOptions = {
-        storagePath: path.resolve(FUNDS_SPREADER_FILE_PATH, 'database'),
-        clientOptions: {
-            nodes: [getNodeUrlFromCoinType(parameters?.addressEncodingCoinType)],
-            localPow: true,
-        },
-        coinType: parameters?.addressGenerationCoinType,
-        secretManager: {
-            Stronghold: {
-                snapshotPath: path.resolve(FUNDS_SPREADER_FILE_PATH, 'wallet.stronghold'),
-                password: STRONGHOLD_PASSWORD,
-            },
-        },
-    }
-    return new AccountManager(accountManagerOptions)
-}
-
-async function initialiseSecretManager(parameters: IFundsSpreaderParameters, manager: AccountManager): Promise<void> {
-    await manager.verifyMnemonic(parameters?.mnemonic)
-    await manager.storeMnemonic(parameters?.mnemonic)
-}
-
 async function spreadFundsForAccount(
     parameters: IAccountFundsSpreaderParameters,
-    manager: AccountManager
+    manager: AccountManager,
+    coinType: CoinType
 ): Promise<void> {
     const account = await manager?.createAccount({ alias: parameters?.accountIndex.toString() })
     const addresses = await getAddressesForAccount(parameters, account)
-    // request funds from faucet
+    await makeFaucetRequests(getFaucetApiEndpoint(coinType), addresses)
 
     console.log('Account: ', account?.meta?.index)
-    console.log('Addresses: ', addresses)
-    console.log()
+    console.log('Addresses: ', addresses, '\n')
 }
 
 async function getAddressesForAccount(

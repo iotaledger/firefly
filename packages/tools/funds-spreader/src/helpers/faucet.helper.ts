@@ -1,29 +1,37 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
-import { CoinType } from '@iota/wallet'
+import { Address, CoinType } from '@iota/wallet'
 
 import { IOTA_FAUCET_API_ENDPOINT, SHIMMER_FAUCET_API_ENDPOINT } from '../constants'
-import { IFaucetRequestData, IFaucetResponseData } from '../interfaces'
+import { IFaucetRequestData } from '../interfaces'
+import { sleep } from '../utils'
 
 /**
- * Returns a Promise of the response data from the faucet request.
+ * Requests funds from the given faucet API endpoint for all of the given addresses.
  */
-export async function makeFaucetRequest(faucetApiEndpoint: string, address: string): Promise<IFaucetResponseData> {
+export async function makeFaucetRequests(faucetApiEndpoint: string, addresses: Address[]): Promise<void> {
+    await Promise.all(
+        addresses.map(async (address) => {
+            await makeFaucetRequest(faucetApiEndpoint, address?.address)
+            await sleep(1000)
+        })
+    )
+}
+
+async function makeFaucetRequest(faucetApiEndpoint: string, address: string): Promise<void> {
     if (!address) {
         throw new Error('Invalid address')
     }
 
-    return new Promise((resolve) => {
-        axios
-            .post(faucetApiEndpoint, prepareFaucetRequestData(address))
-            .then((response: AxiosResponse<IFaucetResponseData>) => {
-                resolve(response?.data)
-            })
-            .catch((error) => {
-                console.error(error)
-                process.exit(1)
-            })
-    })
+    await axios
+        .post(faucetApiEndpoint, prepareFaucetRequestData(address))
+        .then(() => {
+            // do something with response?
+        })
+        .catch((error) => {
+            console.error(error)
+            process.exit(1)
+        })
 }
 
 function prepareFaucetRequestData(address: string): IFaucetRequestData {
