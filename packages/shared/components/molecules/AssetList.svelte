@@ -30,23 +30,33 @@
 </script>
 
 {#if assets}
-    <div class="h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
+    <div class="asset-list h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
         <div class="w-full flex flex-row justify-between mb-4">
             <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
         </div>
-        <div class="flex-auto h-1 -mr-5 pr-4">
-            <div class="-mr-4 h-full scroll-secondary">
-                {#if assets?.baseCoin || assets?.nativeTokens?.length > 0}
-                    <VirtualList items={assetList} let:item>
-                        <AssetTile classes="mb-2" onClick={() => handleAssetTileClick(item)} asset={item} />
-                    </VirtualList>
-                {:else}
-                    <div class="h-full flex flex-col items-center justify-center text-center">
-                        <Text secondary>{localize('general.noAssets')}</Text>
-                    </div>
-                {/if}
-            </div>
+        <div class="flex-auto h-full scroll-secondary pb-10">
+            {#if assets?.baseCoin || assets?.nativeTokens?.length > 0}
+                <VirtualList items={assetList} let:item>
+                    <AssetTile classes="mb-2" onClick={() => handleAssetTileClick(item)} asset={item} />
+                </VirtualList>
+            {:else}
+                <div class="h-full flex flex-col items-center justify-center text-center">
+                    <Text secondary>{localize('general.noAssets')}</Text>
+                </div>
+            {/if}
         </div>
     </div>
 {/if}
+
+<style lang="scss">
+    .asset-list :global(svelte-virtual-list-viewport) {
+        margin-right: -1.25rem !important;
+        flex: auto;
+        overflow-y: scroll;
+        padding-right: 1rem !important;
+    }
+    .asset-list :global(svelte-virtual-list-contents) {
+        margin-right: -1rem !important;
+    }
+</style>
