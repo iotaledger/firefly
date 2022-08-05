@@ -1,13 +1,16 @@
 /* eslint-disable no-console */
 
+import * as path from 'path'
+
 import { AccountManager, CoinType } from '@iota/wallet'
 
 import { BASE_FILE_PATH, NODE_URL, STRONGHOLD_PASSWORD } from '../constants'
 import { IFundsSpreaderParameters } from '../interfaces'
 
 export async function spreadFunds(parameters: IFundsSpreaderParameters, round: number = 1): Promise<void> {
+    const FUNDS_SPREADER_FILE_PATH = `${BASE_FILE_PATH}/${round}`
     const accountManagerOptions = {
-        storagePath: `${BASE_FILE_PATH}/${round}/database`,
+        storagePath: path.resolve(__dirname, '../../', FUNDS_SPREADER_FILE_PATH, 'database'),
         clientOptions: {
             nodes: [NODE_URL],
             localPow: true,
@@ -15,7 +18,7 @@ export async function spreadFunds(parameters: IFundsSpreaderParameters, round: n
         coinType: CoinType.Shimmer,
         secretManager: {
             Stronghold: {
-                snapshotPath: `${BASE_FILE_PATH}/${round}/wallet.stronghold`,
+                snapshotPath: path.resolve(__dirname, '../../', FUNDS_SPREADER_FILE_PATH, 'wallet.stronghold'),
                 password: STRONGHOLD_PASSWORD,
             },
         },
