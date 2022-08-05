@@ -103,7 +103,7 @@
             </div>
         {/if}
     </div>
-    <div class="flex-auto h-full scroll-secondary">
+    <div class="flex-auto h-full scroll-secondary pb-10">
         {#if $selectedAccount.isSyncing && shouldShowFirstSync()}
             <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
         {:else if activityListWithTitles.length}
