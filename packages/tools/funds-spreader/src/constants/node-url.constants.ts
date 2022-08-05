@@ -1,5 +1,8 @@
 /**
  * The IOTA node URL to use in the account manager's client options.
+ *
+ * NOTE: There is no node for the IOTA testnet until the Stardust
+ * upgrade has been implemented.
  */
 export const IOTA_NODE_URL = ''
 

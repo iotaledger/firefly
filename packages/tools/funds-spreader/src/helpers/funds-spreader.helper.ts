@@ -7,7 +7,7 @@ import { IAccountFundsSpreaderParameters, IFundsSpreaderParameters } from '../in
 import { sleep } from '../utils'
 
 import { initialiseAccountManager } from './account-manager.helper'
-import { getFaucetApiEndpoint, makeFaucetRequests } from './faucet.helper'
+// import { getFaucetApiEndpoint, makeFaucetRequests } from './faucet.helper'
 
 /**
  * Spreads funds to addresses of accounts of a particular seed.
@@ -35,7 +35,7 @@ async function spreadFundsForAccount(
 ): Promise<void> {
     const account = await manager?.createAccount({ alias: parameters?.accountIndex.toString() })
     const addresses = await getAddressesForAccount(parameters, account)
-    await makeFaucetRequests(getFaucetApiEndpoint(coinType), addresses)
+    // await makeFaucetRequests(getFaucetApiEndpoint(coinType), addresses)
 
     console.log('Fund Spreader: ', round)
     console.log('Account: ', account?.meta?.index)
