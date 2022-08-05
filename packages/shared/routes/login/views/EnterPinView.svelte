@@ -106,7 +106,6 @@
                     if (verified === true) {
                         return Platform.getMachineId().then(() =>
                             buildProfileManagerOptionsFromProfileData(profile).then((profileManagerOptions) => {
-                                const { storagePath, coinType, secretManager } = profileManagerOptions
                                 let { clientOptions } = profileManagerOptions
                                 const hasNoNodes = clientOptions?.nodes?.length < 1
                                 clientOptions = hasNoNodes
@@ -115,6 +114,7 @@
                                           $activeProfile?.networkType
                                       )
                                     : clientOptions
+                                const { storagePath, coinType, secretManager } = profileManagerOptions
                                 const manager = initialiseProfileManager(
                                     storagePath,
                                     coinType,
