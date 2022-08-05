@@ -15,6 +15,14 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
                 accountIndex: 0,
                 addressIndicesWithFunds: [0],
             },
+            {
+                accountIndex: 1,
+                addressIndicesWithFunds: [4, 30, 200, 1000],
+            },
+            {
+                accountIndex: 2,
+                addressIndicesWithFunds: [10_000],
+            },
         ],
     },
 
