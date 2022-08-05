@@ -32,7 +32,7 @@
         "prepare": "husky install",
         "test": "yarn test:shared",
         "test:shared": "cd packages/shared && yarn test",
-        "tool:fund-spreader": "cd packages/tools && yarn fund-spreader"
+        "tool:funds-spreader": "cd packages/tools && yarn funds-spreader"
     },
     "resolutions": {
         "lodash": ">=4.17.21",

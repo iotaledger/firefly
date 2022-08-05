@@ -5,6 +5,6 @@
         "moduleResolution": "node",
         "types": ["node"]
     },
-    "include": ["./fund-spreader"],
+    "include": ["./funds-spreader"],
     "exclude": ["**/node_modules"]
 }

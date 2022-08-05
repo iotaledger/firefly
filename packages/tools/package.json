@@ -4,7 +4,7 @@
     "description": "Set of TypeScript-based tools for Firefly",
     "license": "Apache-2.0",
     "scripts": {
-        "fund-spreader": "ts-node fund-spreader/fund-spreader.ts"
+        "funds-spreader": "ts-node funds-spreader/funds-spreader.ts"
     },
     "devDependencies": {
         "@iota/wallet": "2.0.2-alpha.11",

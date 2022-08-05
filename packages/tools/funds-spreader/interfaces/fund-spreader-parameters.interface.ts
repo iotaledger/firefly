@@ -1,4 +1,4 @@
-export interface IFundSpreaderParameters {
+export interface IFundsSpreaderParameters {
     spreaderNumber: number
     mnemonic: string
     numberOfAccounts: number
