@@ -2,23 +2,28 @@
 
 import * as path from 'path'
 
-import { AccountManager, CoinType } from '@iota/wallet'
+import { AccountManager } from '@iota/wallet'
 
-import { BASE_FILE_PATH, NODE_URL, STRONGHOLD_PASSWORD } from '../constants'
+import { BASE_FILE_PATH, STRONGHOLD_PASSWORD } from '../constants'
 import { IFundsSpreaderParameters } from '../interfaces'
 
+import { getNodeUrlFromCoinType } from './node.helper'
+
+/**
+ * Spreads funds to addresses of accounts of a particular seed.
+ */
 export async function spreadFunds(parameters: IFundsSpreaderParameters, round: number = 1): Promise<void> {
-    const FUNDS_SPREADER_FILE_PATH = `${BASE_FILE_PATH}/${round}`
+    const FUNDS_SPREADER_FILE_PATH = `${__dirname}/../../${BASE_FILE_PATH}/${round}`
     const accountManagerOptions = {
-        storagePath: path.resolve(__dirname, '../../', FUNDS_SPREADER_FILE_PATH, 'database'),
+        storagePath: path.resolve(FUNDS_SPREADER_FILE_PATH, 'database'),
         clientOptions: {
-            nodes: [NODE_URL],
+            nodes: [getNodeUrlFromCoinType(parameters?.addressEncodingCoinType)],
             localPow: true,
         },
-        coinType: CoinType.Shimmer,
+        coinType: parameters?.addressGenerationCoinType,
         secretManager: {
             Stronghold: {
-                snapshotPath: path.resolve(__dirname, '../../', FUNDS_SPREADER_FILE_PATH, 'wallet.stronghold'),
+                snapshotPath: path.resolve(FUNDS_SPREADER_FILE_PATH, 'wallet.stronghold'),
                 password: STRONGHOLD_PASSWORD,
             },
         },
