@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { Address, CoinType } from '@iota/wallet'
 
-import { IOTA_FAUCET_API_ENDPOINT, SHIMMER_FAUCET_API_ENDPOINT } from '../constants'
+import { FAUCET_REQUEST_SLEEP_INTERVAL, IOTA_FAUCET_API_ENDPOINT, SHIMMER_FAUCET_API_ENDPOINT } from '../constants'
 import { IFaucetRequestData } from '../interfaces'
 import { sleep } from '../utils'
 
@@ -13,7 +13,7 @@ export async function makeFaucetRequests(faucetApiEndpoint: string, addresses: A
     await Promise.all(
         addresses.map(async (address) => {
             await makeFaucetRequest(faucetApiEndpoint, address?.address)
-            await sleep(1000)
+            await sleep(FAUCET_REQUEST_SLEEP_INTERVAL)
         })
     )
 }
@@ -23,15 +23,10 @@ async function makeFaucetRequest(faucetApiEndpoint: string, address: string): Pr
         throw new Error('Invalid address')
     }
 
-    await axios
-        .post(faucetApiEndpoint, prepareFaucetRequestData(address))
-        .then(() => {
-            // do something with response?
-        })
-        .catch((error) => {
-            console.error(error)
-            process.exit(1)
-        })
+    await axios.post(faucetApiEndpoint, prepareFaucetRequestData(address)).catch((error) => {
+        console.error(error)
+        process.exit(1)
+    })
 }
 
 function prepareFaucetRequestData(address: string): IFaucetRequestData {

@@ -2,7 +2,9 @@
 
 import { Account, AccountManager, Address, CoinType } from '@iota/wallet'
 
+import { ACCOUNT_FUNDS_SPREADER_SLEEP_INTERVAL } from '../constants'
 import { IAccountFundsSpreaderParameters, IFundsSpreaderParameters } from '../interfaces'
+import { sleep } from '../utils'
 
 import { initialiseAccountManager } from './account-manager.helper'
 import { getFaucetApiEndpoint, makeFaucetRequests } from './faucet.helper'
@@ -14,7 +16,13 @@ export async function spreadFunds(parameters: IFundsSpreaderParameters, round: n
     const manager = await initialiseAccountManager(parameters, round)
     await Promise.all(
         parameters?.accountFundsSpreaderParameters.map(async (accountFundsSpreaderParameters) => {
-            await spreadFundsForAccount(accountFundsSpreaderParameters, manager, parameters?.addressEncodingCoinType)
+            await spreadFundsForAccount(
+                accountFundsSpreaderParameters,
+                manager,
+                parameters?.addressEncodingCoinType,
+                round
+            )
+            await sleep(ACCOUNT_FUNDS_SPREADER_SLEEP_INTERVAL)
         })
     )
 }
@@ -22,12 +30,14 @@ export async function spreadFunds(parameters: IFundsSpreaderParameters, round: n
 async function spreadFundsForAccount(
     parameters: IAccountFundsSpreaderParameters,
     manager: AccountManager,
-    coinType: CoinType
+    coinType: CoinType,
+    round: number
 ): Promise<void> {
     const account = await manager?.createAccount({ alias: parameters?.accountIndex.toString() })
     const addresses = await getAddressesForAccount(parameters, account)
     await makeFaucetRequests(getFaucetApiEndpoint(coinType), addresses)
 
+    console.log('Fund Spreader: ', round)
     console.log('Account: ', account?.meta?.index)
     console.log('Addresses: ', addresses, '\n')
 }

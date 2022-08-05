@@ -13,24 +13,23 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
         accountFundsSpreaderParameters: [
             {
                 accountIndex: 0,
-                addressIndicesWithFunds: [0],
-            },
-            {
-                accountIndex: 1,
-                addressIndicesWithFunds: [4, 30, 200, 1000],
-            },
-            {
-                accountIndex: 2,
-                addressIndicesWithFunds: [10_000],
+                addressIndicesWithFunds: [0, 2],
             },
         ],
     },
 
-    // // 2. Unclaimed Shimmer tokens on one account (index `0`) and one or more addresses (index `1+`)
-    // {
-    //     mnemonic: 'doll buffalo journey tennis second skin aerobic bridge carpet peanut demise note blind coconut parade cluster where describe dream great network cage student frost',
-    // },
-    //
+    // 2. Unclaimed Shimmer tokens on one account (index `0`) and one or more addresses (index `1+`)
+    {
+        mnemonic:
+            'doll buffalo journey tennis second skin aerobic bridge carpet peanut demise note blind coconut parade cluster where describe dream great network cage student frost',
+        accountFundsSpreaderParameters: [
+            {
+                accountIndex: 0,
+                addressIndicesWithFunds: [2, 10],
+            },
+        ],
+    },
+
     // // 3. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `0`)
     // {
     //     mnemonic: 'dial member lemon fiber era eagle safe shallow latin zoo salmon all way stool that basket grid letter yard dish absorb tackle hand bike',

@@ -1,18 +1,20 @@
-import { SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS } from './constants'
+import { FUNDS_SPREADER_SLEEP_INTERVAL, SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS } from './constants'
 import { cleanupOldAccountManagerData, spreadFunds } from './helpers'
+import { sleep } from './utils'
 
 /**
  * NOTE: Choose the particular parameters to run the funds spreader tool
  * with here!
  */
-const FUND_SPREADERS_PARAMETERS = SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS
+const FUNDS_SPREADERS_PARAMETERS = SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS
 
 async function runFundsSpreader(): Promise<void> {
     try {
         cleanupOldAccountManagerData()
         await Promise.all(
-            FUND_SPREADERS_PARAMETERS.map(async (fundsSpreaderParameters, idx) => {
+            FUNDS_SPREADERS_PARAMETERS.map(async (fundsSpreaderParameters, idx) => {
                 await spreadFunds(fundsSpreaderParameters, idx + 1)
+                await sleep(FUNDS_SPREADER_SLEEP_INTERVAL)
             })
         )
         process.exit(0)
