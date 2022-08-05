@@ -4,7 +4,6 @@ import { IOTA_NODE_URL, SHIMMER_NODE_URL } from '../constants'
 
 /**
  * Returns the corresponding node URL given the specific coin type.
- * @param coinType
  */
 export function getNodeUrlFromCoinType(coinType: CoinType): string {
     switch (coinType) {

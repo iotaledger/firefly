@@ -7,6 +7,20 @@ import { IFaucetRequestData } from '../interfaces'
 import { sleep } from '../utils'
 
 /**
+ * Returns the corresponding faucet API endpoint given a specific coin type.
+ */
+export function getFaucetApiEndpoint(coinType: CoinType): string {
+    switch (coinType) {
+        case CoinType.IOTA:
+            return IOTA_FAUCET_API_ENDPOINT
+        case CoinType.Shimmer:
+            return SHIMMER_FAUCET_API_ENDPOINT
+        default:
+            return ''
+    }
+}
+
+/**
  * Requests funds from the given faucet API endpoint for all of the given addresses.
  */
 export async function makeFaucetRequests(faucetApiEndpoint: string, addresses: Address[]): Promise<void> {
@@ -32,19 +46,5 @@ async function makeFaucetRequest(faucetApiEndpoint: string, address: string): Pr
 function prepareFaucetRequestData(address: string): IFaucetRequestData {
     return {
         address,
-    }
-}
-
-/**
- * Returns the corresponding faucet API endpoint given a specific coin type.
- */
-export function getFaucetApiEndpoint(coinType: CoinType): string {
-    switch (coinType) {
-        case CoinType.IOTA:
-            return IOTA_FAUCET_API_ENDPOINT
-        case CoinType.Shimmer:
-            return SHIMMER_FAUCET_API_ENDPOINT
-        default:
-            return ''
     }
 }
