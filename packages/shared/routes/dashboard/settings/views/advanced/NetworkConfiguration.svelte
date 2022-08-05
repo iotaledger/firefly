@@ -1,35 +1,26 @@
 <script lang="typescript">
-    import { Button, Checkbox, HR, Radio, Text, NodeConfigOptions } from 'shared/components'
     import { localize } from '@core/i18n'
     import {
         getNodeCandidates,
-        isOfficialNetwork,
-        updateClientOptions,
-        INode,
-        NETWORK_HEALTH_COLORS,
-        NetworkStatusDescription,
-        networkStatus,
-        NetworkHealth,
         getOfficialNodes,
-        nodeInfo,
+        INode,
+        isOfficialNetwork,
+        NetworkHealth,
+        networkStatus,
+        NetworkStatusDescription,
         NetworkType,
+        NETWORK_HEALTH_COLORS,
+        nodeInfo,
     } from '@core/network'
+    import { activeProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
-    import { activeProfile, updateActiveProfile } from '@core/profile'
+    import { Button, Checkbox, HR, NodeConfigOptions, Radio, Text } from 'shared/components'
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: INode
     let nodesContainer
 
     $: clientOptions = $activeProfile?.clientOptions
-
-    $: {
-        updateClientOptions(clientOptions)
-        updateActiveProfile({ clientOptions })
-        if (clientOptions?.nodes.length !== 0) {
-            clientOptions.nodes = getNodeCandidates(clientOptions)
-        }
-    }
 
     function handleIncludeOfficialNodesClick() {
         ensureValidNodeSelection()

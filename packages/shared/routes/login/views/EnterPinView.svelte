@@ -8,7 +8,7 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { COIN_TYPE, NetworkProtocol, NetworkType } from '@core/network'
+    import { COIN_TYPE, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile, getStorageDirectoryOfProfile } from '@core/profile'
     import { initialiseProfileManager } from '@core/profile-manager'
     import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
@@ -97,19 +97,19 @@
             const profile = $activeProfile
             isBusy = true
 
+            let clientOptions = $activeProfile.clientOptions
+            if (clientOptions?.nodes?.length < 1) {
+                clientOptions = getDefaultClientOptions($activeProfile.networkProtocol, $activeProfile.networkType)
+            }
+
             Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
                         return Platform.getMachineId().then(() =>
                             getStorageDirectoryOfProfile(profile.id).then((path) => {
-                                initialiseProfileManager(
-                                    path,
-                                    COIN_TYPE[profile.networkProtocol],
-                                    $activeProfile.clientOptions,
-                                    {
-                                        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
-                                    }
-                                )
+                                initialiseProfileManager(path, COIN_TYPE[profile.networkProtocol], clientOptions, {
+                                    Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
+                                })
                                 // TODO: set storage password with profile manager api
                                 // api.setStoragePassword(pinCode, {
                                 //     onSuccess() {
