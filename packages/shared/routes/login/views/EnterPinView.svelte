@@ -8,7 +8,7 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import {
         buildProfileManagerOptionsFromProfileData,
@@ -100,6 +100,11 @@
         if (!hasReachedMaxAttempts) {
             const profile = $activeProfile
             isBusy = true
+
+            let clientOptions = $activeProfile.clientOptions
+            if (clientOptions?.nodes?.length < 1) {
+                clientOptions = getDefaultClientOptions($activeProfile.networkProtocol, $activeProfile.networkType)
+            }
 
             Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
