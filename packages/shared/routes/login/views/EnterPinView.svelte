@@ -101,17 +101,20 @@
             const profile = $activeProfile
             isBusy = true
 
-            let clientOptions = $activeProfile.clientOptions
-            if (clientOptions?.nodes?.length < 1) {
-                clientOptions = getDefaultClientOptions($activeProfile.networkProtocol, $activeProfile.networkType)
-            }
-
             Platform.PincodeManager.verify(profile.id, pinCode)
                 .then((verified) => {
                     if (verified === true) {
                         return Platform.getMachineId().then(() =>
                             buildProfileManagerOptionsFromProfileData(profile).then((profileManagerOptions) => {
-                                const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
+                                const { storagePath, coinType, secretManager } = profileManagerOptions
+                                let { clientOptions } = profileManagerOptions
+                                const hasNoNodes = clientOptions?.nodes?.length < 1
+                                clientOptions = hasNoNodes
+                                    ? getDefaultClientOptions(
+                                          $activeProfile?.networkProtocol,
+                                          $activeProfile?.networkType
+                                      )
+                                    : clientOptions
                                 const manager = initialiseProfileManager(
                                     storagePath,
                                     coinType,
