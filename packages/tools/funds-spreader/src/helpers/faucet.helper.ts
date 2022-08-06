@@ -32,12 +32,25 @@ export async function makeFaucetRequests(faucetApiEndpoint: string, addresses: A
     )
 }
 
+/**
+ * Variable to keep track of whether or not faucet API requests can be made.
+ * Requests are infinitely retried until either completed or an error occurs.
+ */
+let canMakeFaucetRequest = true
+
 async function makeFaucetRequest(faucetApiEndpoint: string, address: string): Promise<void> {
     if (!address) {
         throw new Error('Invalid address')
     }
 
-    await axios.post(faucetApiEndpoint, prepareFaucetRequestData(address))
+    if (!canMakeFaucetRequest) {
+        setTimeout(() => void makeFaucetRequest(faucetApiEndpoint, address), FAUCET_REQUEST_SLEEP_INTERVAL)
+    } else {
+        canMakeFaucetRequest = false
+        await axios.post(faucetApiEndpoint, prepareFaucetRequestData(address)).then(() => {
+            canMakeFaucetRequest = true
+        })
+    }
 }
 
 function prepareFaucetRequestData(address: string): IFaucetRequestData {
