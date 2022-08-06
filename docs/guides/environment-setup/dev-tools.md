@@ -2,7 +2,7 @@
 icon: tools
 ---
 
-# Tools
+# Dev Tools
 
 ## Gitify
 

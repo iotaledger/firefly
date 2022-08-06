@@ -1,5 +1,5 @@
 ---
-icon: package-24
+icon: package
 ---
 
 # Dependencies

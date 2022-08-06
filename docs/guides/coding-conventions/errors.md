@@ -1,5 +1,5 @@
 --- 
-icon: x-24
+icon: x
 ---
 
 # Errors
