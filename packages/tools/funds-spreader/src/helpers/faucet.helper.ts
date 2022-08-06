@@ -37,10 +37,7 @@ async function makeFaucetRequest(faucetApiEndpoint: string, address: string): Pr
         throw new Error('Invalid address')
     }
 
-    await axios.post(faucetApiEndpoint, prepareFaucetRequestData(address)).catch((error) => {
-        console.error(error)
-        process.exit(1)
-    })
+    await axios.post(faucetApiEndpoint, prepareFaucetRequestData(address))
 }
 
 function prepareFaucetRequestData(address: string): IFaucetRequestData {

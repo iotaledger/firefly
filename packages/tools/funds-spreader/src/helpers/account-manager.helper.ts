@@ -1,9 +1,11 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
+import { AccountManager } from '@iota/wallet'
+
 import { BASE_FILE_PATH, STRONGHOLD_PASSWORD } from '../constants'
 import { IFundsSpreaderParameters } from '../interfaces'
-import { AccountManager } from '@iota/wallet'
+
 import { getNodeUrlFromCoinType } from './node.helper'
 
 /**
@@ -14,7 +16,7 @@ export function cleanupOldAccountManagerData(): void {
 }
 
 /**
- * Initialises the account manager for the funds spreading.
+ * Initialises the account manager (along with its secret manager) for the funds spreading.
  */
 export async function initialiseAccountManager(
     parameters: IFundsSpreaderParameters,

@@ -12,13 +12,16 @@ export interface IFundsSpreaderParameters {
     mnemonic: string
 
     /**
-     * The coin type used to generate the Ed25519 address.
+     * The coin type used to generate Ed25519 addresses.
      */
     addressGenerationCoinType: CoinType
 
     /**
-     * The coin type used for encoding the Ed25519 address to a Bech32 address with
+     * The coin type used for encoding Ed25519 addresses to Bech32 addresses with
      * either IOTA (iota/atoi) or Shimmer (smr/rms) HRPs.
+     *
+     * NOTE: IOTA will not be available until the Stardust upgrade
+     * is brought to the mainnet and testnet.
      */
     addressEncodingCoinType: CoinType
 
