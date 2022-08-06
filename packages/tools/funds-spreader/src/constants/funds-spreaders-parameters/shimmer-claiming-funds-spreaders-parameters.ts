@@ -30,26 +30,70 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
         ],
     },
 
-    // // 3. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `0`)
-    // {
-    //     mnemonic: 'dial member lemon fiber era eagle safe shallow latin zoo salmon all way stool that basket grid letter yard dish absorb tackle hand bike',
-    // },
-    //
-    // // 4. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `1+`)
-    // {
-    //     mnemonic: 'sunny convince wife claim capital exercise admit scheme prepare panther six buffalo humble rack deny render guitar fade dance bean wall half sunny library',
-    // },
-    //
-    // // 5. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `0`) for each account
-    // {
-    //     mnemonic: 'hello remember gentle envelope brain lock chief time jazz glare habit jelly fetch scare hour surprise chest what into away confirm come chimney bubble',
-    // },
-    //
-    // // 6. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `1+`) for each account
-    // {
-    //     mnemonic: 'bright index tortoise impact profit segment analyst year law quiz barely below baby marine half battle glimpse else cost mercy swing oyster dragon surround',
-    // },
-    //
+    // 3. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `0`)
+    {
+        mnemonic:
+            'dial member lemon fiber era eagle safe shallow latin zoo salmon all way stool that basket grid letter yard dish absorb tackle hand bike',
+        accountFundsSpreaderParameters: [
+            {
+                accountIndex: 2,
+                addressIndicesWithFunds: [0, 2],
+            },
+        ],
+    },
+
+    // 4. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `1+`)
+    {
+        mnemonic:
+            'sunny convince wife claim capital exercise admit scheme prepare panther six buffalo humble rack deny render guitar fade dance bean wall half sunny library',
+        accountFundsSpreaderParameters: [
+            {
+                accountIndex: 2,
+                addressIndicesWithFunds: [2, 10],
+            },
+        ],
+    },
+
+    // 5. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `0`) for each account
+    {
+        mnemonic:
+            'hello remember gentle envelope brain lock chief time jazz glare habit jelly fetch scare hour surprise chest what into away confirm come chimney bubble',
+        accountFundsSpreaderParameters: [
+            {
+                accountIndex: 0,
+                addressIndicesWithFunds: [0, 2],
+            },
+            {
+                accountIndex: 1,
+                addressIndicesWithFunds: [0, 2],
+            },
+            {
+                accountIndex: 2,
+                addressIndicesWithFunds: [0, 2],
+            },
+        ],
+    },
+
+    // 6. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `1+`) for each account
+    {
+        mnemonic:
+            'bright index tortoise impact profit segment analyst year law quiz barely below baby marine half battle glimpse else cost mercy swing oyster dragon surround',
+        accountFundsSpreaderParameters: [
+            {
+                accountIndex: 0,
+                addressIndicesWithFunds: [2, 10],
+            },
+            {
+                accountIndex: 1,
+                addressIndicesWithFunds: [2, 10],
+            },
+            {
+                accountIndex: 2,
+                addressIndicesWithFunds: [2, 10],
+            },
+        ],
+    },
+
     // // 7. Unclaimed Shimmer tokens on many accounts (index `1-n`) and one or more addresses (index `0`) for each account
     // {
     //     mnemonic: 'nuclear vote book peanut wage parrot cereal control glory deer bronze select wink miss spread sunset universe sheriff broccoli pyramid keen drink virus need',
