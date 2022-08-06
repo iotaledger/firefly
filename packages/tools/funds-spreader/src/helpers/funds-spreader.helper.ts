@@ -36,10 +36,7 @@ async function spreadFundsForAccount(
     const account = await manager?.createAccount({ alias: parameters?.accountIndex.toString() })
     const addresses = await getAddressesForAccount(parameters, account)
     await makeFaucetRequests(getFaucetApiEndpoint(coinType), addresses)
-
-    console.log('Fund Spreader: ', round)
-    console.log('Account: ', account?.meta?.index)
-    console.log('Addresses: ', addresses, '\n')
+    logInformationToConsole(round, parameters?.accountIndex, addresses)
 }
 
 async function getAddressesForAccount(
@@ -53,4 +50,19 @@ async function getAddressesForAccount(
     const addressAtIndexZero = account?.meta?.publicAddresses[0]
     const addresses = [addressAtIndexZero, ...addressesBeyondIndexZero]
     return addresses.filter((address) => parameters?.addressIndicesWithFunds.includes(address?.keyIndex))
+}
+
+/**
+ * Array to keep track of what funds spreader runds have already been logged.
+ */
+const loggedFundsSpreaderRounds: number[] = []
+
+function logInformationToConsole(round: number, accountIndex: number, addresses: Address[]): void {
+    if (!loggedFundsSpreaderRounds.includes(round)) {
+        console.log('Fund Spreader: ', round)
+        loggedFundsSpreaderRounds.push(round)
+    }
+
+    console.log('Account: ', accountIndex)
+    console.log('Addresses: ', addresses, '\n')
 }
