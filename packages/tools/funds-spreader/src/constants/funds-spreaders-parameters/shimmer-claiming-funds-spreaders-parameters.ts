@@ -18,81 +18,81 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
         ],
     },
 
-    // 2. Unclaimed Shimmer tokens on one account (index `0`) and one or more addresses (index `1+`)
-    {
-        mnemonic:
-            'doll buffalo journey tennis second skin aerobic bridge carpet peanut demise note blind coconut parade cluster where describe dream great network cage student frost',
-        accountFundsSpreaderParameters: [
-            {
-                accountIndex: 0,
-                addressIndicesWithFunds: [2, 10],
-            },
-        ],
-    },
-
-    // 3. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `0`)
-    {
-        mnemonic:
-            'dial member lemon fiber era eagle safe shallow latin zoo salmon all way stool that basket grid letter yard dish absorb tackle hand bike',
-        accountFundsSpreaderParameters: [
-            {
-                accountIndex: 2,
-                addressIndicesWithFunds: [0, 2],
-            },
-        ],
-    },
-
-    // 4. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `1+`)
-    {
-        mnemonic:
-            'sunny convince wife claim capital exercise admit scheme prepare panther six buffalo humble rack deny render guitar fade dance bean wall half sunny library',
-        accountFundsSpreaderParameters: [
-            {
-                accountIndex: 2,
-                addressIndicesWithFunds: [2, 10],
-            },
-        ],
-    },
-
-    // 5. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `0`) for each account
-    {
-        mnemonic:
-            'hello remember gentle envelope brain lock chief time jazz glare habit jelly fetch scare hour surprise chest what into away confirm come chimney bubble',
-        accountFundsSpreaderParameters: [
-            {
-                accountIndex: 0,
-                addressIndicesWithFunds: [0, 2],
-            },
-            {
-                accountIndex: 1,
-                addressIndicesWithFunds: [0, 2],
-            },
-            {
-                accountIndex: 2,
-                addressIndicesWithFunds: [0, 2],
-            },
-        ],
-    },
-
-    // 6. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `1+`) for each account
-    {
-        mnemonic:
-            'bright index tortoise impact profit segment analyst year law quiz barely below baby marine half battle glimpse else cost mercy swing oyster dragon surround',
-        accountFundsSpreaderParameters: [
-            {
-                accountIndex: 0,
-                addressIndicesWithFunds: [2, 10],
-            },
-            {
-                accountIndex: 1,
-                addressIndicesWithFunds: [2, 10],
-            },
-            {
-                accountIndex: 2,
-                addressIndicesWithFunds: [2, 10],
-            },
-        ],
-    },
+    // // 2. Unclaimed Shimmer tokens on one account (index `0`) and one or more addresses (index `1+`)
+    // {
+    //     mnemonic:
+    //         'doll buffalo journey tennis second skin aerobic bridge carpet peanut demise note blind coconut parade cluster where describe dream great network cage student frost',
+    //     accountFundsSpreaderParameters: [
+    //         {
+    //             accountIndex: 0,
+    //             addressIndicesWithFunds: [2, 10],
+    //         },
+    //     ],
+    // },
+    //
+    // // 3. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `0`)
+    // {
+    //     mnemonic:
+    //         'dial member lemon fiber era eagle safe shallow latin zoo salmon all way stool that basket grid letter yard dish absorb tackle hand bike',
+    //     accountFundsSpreaderParameters: [
+    //         {
+    //             accountIndex: 2,
+    //             addressIndicesWithFunds: [0, 2],
+    //         },
+    //     ],
+    // },
+    //
+    // // 4. Unclaimed Shimmer tokens on one account (index `1+`) and one or more addresses (index `1+`)
+    // {
+    //     mnemonic:
+    //         'sunny convince wife claim capital exercise admit scheme prepare panther six buffalo humble rack deny render guitar fade dance bean wall half sunny library',
+    //     accountFundsSpreaderParameters: [
+    //         {
+    //             accountIndex: 2,
+    //             addressIndicesWithFunds: [2, 10],
+    //         },
+    //     ],
+    // },
+    //
+    // // 5. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `0`) for each account
+    // {
+    //     mnemonic:
+    //         'hello remember gentle envelope brain lock chief time jazz glare habit jelly fetch scare hour surprise chest what into away confirm come chimney bubble',
+    //     accountFundsSpreaderParameters: [
+    //         {
+    //             accountIndex: 0,
+    //             addressIndicesWithFunds: [0, 2],
+    //         },
+    //         {
+    //             accountIndex: 1,
+    //             addressIndicesWithFunds: [0, 2],
+    //         },
+    //         {
+    //             accountIndex: 2,
+    //             addressIndicesWithFunds: [0, 2],
+    //         },
+    //     ],
+    // },
+    //
+    // // 6. Unclaimed Shimmer tokens on many accounts (index `0-n`) and one or more addresses (index `1+`) for each account
+    // {
+    //     mnemonic:
+    //         'bright index tortoise impact profit segment analyst year law quiz barely below baby marine half battle glimpse else cost mercy swing oyster dragon surround',
+    //     accountFundsSpreaderParameters: [
+    //         {
+    //             accountIndex: 0,
+    //             addressIndicesWithFunds: [2, 10],
+    //         },
+    //         {
+    //             accountIndex: 1,
+    //             addressIndicesWithFunds: [2, 10],
+    //         },
+    //         {
+    //             accountIndex: 2,
+    //             addressIndicesWithFunds: [2, 10],
+    //         },
+    //     ],
+    // },
 
     // // 7. Unclaimed Shimmer tokens on many accounts (index `1-n`) and one or more addresses (index `0`) for each account
     // {

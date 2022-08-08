@@ -1,5 +1,9 @@
 /* eslint-disable no-console */
 
+/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+// @ts-ignore
+import { Promise } from 'bluebird'
+
 import { Account, AccountManager, Address, CoinType } from '@iota/wallet'
 
 import { ACCOUNT_FUNDS_SPREADER_SLEEP_INTERVAL } from '../constants'
@@ -33,10 +37,17 @@ async function spreadFundsForAccount(
     coinType: CoinType,
     round: number
 ): Promise<void> {
-    const account = await manager?.createAccount({ alias: parameters?.accountIndex.toString() })
+    const account = await getAccountAtIndex(parameters?.accountIndex, manager)
     const addresses = await getAddressesForAccount(parameters, account)
     await makeFaucetRequests(getFaucetApiEndpoint(coinType), addresses)
-    logInformationToConsole(round, parameters?.accountIndex, addresses)
+    logInformationToConsole(round, account?.meta?.index, addresses)
+}
+
+async function getAccountAtIndex(index: number, manager: AccountManager): Promise<Account> {
+    const emptyArrayOfIndices = Array.from({ length: index + 1 })
+    return (
+        await Promise.mapSeries(emptyArrayOfIndices, async () => manager?.createAccount({}))
+    ).find((account) => account?.meta?.index === index)
 }
 
 async function getAddressesForAccount(
@@ -59,10 +70,14 @@ const loggedFundsSpreaderRounds: number[] = []
 
 function logInformationToConsole(round: number, accountIndex: number, addresses: Address[]): void {
     if (!loggedFundsSpreaderRounds.includes(round)) {
-        console.log('Fund Spreader: ', round)
+        console.log(`Fund Spreader No. ${round}`)
         loggedFundsSpreaderRounds.push(round)
     }
 
-    console.log('Account: ', accountIndex)
-    console.log('Addresses: ', addresses, '\n')
+    console.log(`\tAccount @ Index ${accountIndex}`)
+    console.log(`\tGenerated Addresses (${addresses?.length}):`)
+    addresses.forEach((address) => {
+        console.log(`\t\tAddress @ Index ${address?.keyIndex}: ${address?.address}`)
+    })
+    console.log()
 }
