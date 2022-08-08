@@ -7,7 +7,7 @@ import { isValueInUnitRange, unitToValue } from '@lib/utils'
 import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
 import { isFilteredActivity } from '../utils/isFilteredActivity'
-import { ActivityFilter, NumberFilterType } from '../interfaces/filter.interface'
+import { ActivityFilter, BooleanFilterOptions, NumberFilterType } from '../interfaces/filter.interface'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
@@ -52,7 +52,20 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         selected: ActivityDirection.In,
         choices: [ActivityDirection.In, ActivityDirection.Out, ActivityType.InternalTransaction],
     },
-    showHidden: { active: false, type: 'boolean', localeKey: 'filters.showHidden' },
+    showRejected: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.showRejected',
+        selected: BooleanFilterOptions.Yes,
+        choices: [BooleanFilterOptions.Yes, BooleanFilterOptions.No],
+    },
+    showHidden: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.showHidden',
+        selected: BooleanFilterOptions.Yes,
+        choices: [BooleanFilterOptions.Yes, BooleanFilterOptions.No],
+    },
 })
 
 export const activitySearchTerm: Writable<string> = writable('')
