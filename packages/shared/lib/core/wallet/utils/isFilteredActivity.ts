@@ -9,7 +9,16 @@ import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } 
 export function isFilteredActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
 
-    if (filter.showHidden.active && filter.showHidden.selected === BooleanFilterOptions.No && activity.isAssetHidden) {
+    if (
+        (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOptions.No) &&
+        activity.isAssetHidden
+    ) {
+        return true
+    }
+    if (
+        (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOptions.No) &&
+        activity.isRejected
+    ) {
         return true
     }
     if (filter.amount.active) {

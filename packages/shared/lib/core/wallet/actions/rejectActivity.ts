@@ -5,7 +5,7 @@ import { hiddenActivities } from '../stores/hidden-activities.store'
 import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
 
-export function hideActivity(id: string): void {
+export function rejectActivity(id: string): void {
     try {
         const accountId = get(selectedAccount).id
         hiddenActivities.update((state) => {
@@ -16,7 +16,7 @@ export function hideActivity(id: string): void {
             return state
         })
 
-        updateActivityByActivityId(accountId, id, { isHidden: true })
+        updateActivityByActivityId(accountId, id, { isRejected: true })
 
         showAppNotification({
             type: 'info',
