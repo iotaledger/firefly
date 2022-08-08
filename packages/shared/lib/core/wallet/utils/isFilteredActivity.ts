@@ -1,7 +1,7 @@
 import { parseCurrency } from '@lib/currency'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
-import { NumberFilterType } from '../interfaces'
+import { BooleanFilterOptions, NumberFilterType } from '../interfaces'
 import { activityFilter } from '../stores'
 import { getAssetFromPersistedAssets } from './getAssetFromPersistedAssets'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
@@ -9,7 +9,7 @@ import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } 
 export function isFilteredActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
 
-    if (!filter.showHidden.active && activity.isAssetHidden) {
+    if (filter.showHidden.active && filter.showHidden.selected === BooleanFilterOptions.No && activity.isAssetHidden) {
         return true
     }
     if (filter.amount.active) {
