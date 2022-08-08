@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
-/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
 // @ts-ignore
 import { Promise } from 'bluebird'
 
@@ -45,9 +45,9 @@ async function spreadFundsForAccount(
 
 async function getAccountAtIndex(index: number, manager: AccountManager): Promise<Account> {
     const emptyArrayOfIndices = Array.from({ length: index + 1 })
-    return (
-        await Promise.mapSeries(emptyArrayOfIndices, async () => manager?.createAccount({}))
-    ).find((account) => account?.meta?.index === index)
+    return (await Promise.mapSeries(emptyArrayOfIndices, async () => manager?.createAccount({}))).find(
+        (account) => account?.meta?.index === index
+    )
 }
 
 async function getAddressesForAccount(
