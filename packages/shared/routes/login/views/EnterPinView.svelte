@@ -8,7 +8,7 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+    import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import {
         buildProfileManagerOptionsFromProfileData,
@@ -106,15 +106,7 @@
                     if (verified === true) {
                         return Platform.getMachineId().then(() =>
                             buildProfileManagerOptionsFromProfileData(profile).then((profileManagerOptions) => {
-                                let { clientOptions } = profileManagerOptions
-                                const hasNoNodes = clientOptions?.nodes?.length < 1
-                                clientOptions = hasNoNodes
-                                    ? getDefaultClientOptions(
-                                          $activeProfile?.networkProtocol,
-                                          $activeProfile?.networkType
-                                      )
-                                    : clientOptions
-                                const { storagePath, coinType, secretManager } = profileManagerOptions
+                                const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
                                 const manager = initialiseProfileManager(
                                     storagePath,
                                     coinType,

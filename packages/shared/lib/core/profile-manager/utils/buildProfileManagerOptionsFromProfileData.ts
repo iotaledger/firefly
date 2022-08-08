@@ -8,8 +8,10 @@ export async function buildProfileManagerOptionsFromProfileData(
     const { id, networkProtocol } = profileData
     const storagePath = await getStorageDirectoryOfProfile(id)
     const coinType = COIN_TYPE[networkProtocol]
-    const clientOptions =
-        profileData?.clientOptions ?? getDefaultClientOptions(networkProtocol, profileData?.networkType)
+    const useDefaultClientOptions = !profileData.clientOptions || profileData?.clientOptions?.nodes?.length < 1
+    const clientOptions = useDefaultClientOptions
+        ? getDefaultClientOptions(networkProtocol, profileData?.networkType)
+        : profileData?.clientOptions
     const secretManager = {
         Stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
     }
