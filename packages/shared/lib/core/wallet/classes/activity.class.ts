@@ -82,12 +82,16 @@ export class Activity implements IActivity {
             account.depositAddress,
             isFoundry
         )
-
+        const outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
         const recipient = getRecipientFromOutput(output)
         const nativeToken = getNativeTokenFromOutput(output)
 
         if (nativeToken) {
-            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            try {
+                await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            } catch (err) {
+                console.error(err)
+            }
         }
 
         this.type = getActivityType(isSubjectInternal(recipient), isFoundry)
@@ -98,7 +102,7 @@ export class Activity implements IActivity {
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
-        this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
+        this.outputId = outputId
 
         this.sender = getSenderFromTransaction(transaction.incoming, account.depositAddress, output)
         this.recipient = recipient
@@ -145,7 +149,11 @@ export class Activity implements IActivity {
         const isInternal = isSubjectInternal(subject)
 
         if (nativeToken) {
-            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            try {
+                await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            } catch (err) {
+                console.error(err)
+            }
         }
 
         this.type = getActivityType(isInternal)
