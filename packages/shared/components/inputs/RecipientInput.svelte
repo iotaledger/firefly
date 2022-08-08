@@ -35,7 +35,7 @@
     $: value && modal?.open()
 
     $: if (hasFocus) {
-        setTimeout(() => modal.open(), 101)
+        setTimeout(() => modal?.open(), 101)
     }
 
     $: {
