@@ -32,8 +32,11 @@
     }
 
     $: hasFocus && (error = '')
-    $: hasFocus && modal?.open()
     $: value && modal?.open()
+
+    $: if (hasFocus) {
+        setTimeout(() => modal.open(), 101)
+    }
 
     $: {
         if (inputElement && selectedAccount) {
@@ -83,5 +86,10 @@
             {...$$restProps}
         />
     </InputContainer>
-    <RecipientAccountSelector bind:modal bind:selected={selectedAccount} searchValue={value} />
+    <RecipientAccountSelector
+        bind:modal
+        bind:selected={selectedAccount}
+        searchValue={value}
+        onClose={() => inputElement.blur()}
+    />
 </recipient-input>
