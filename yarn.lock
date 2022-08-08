@@ -463,10 +463,46 @@
   dependencies:
     core-js "^3.1.4"
 
+"@iota/crypto.js@^1.8.6":
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/@iota/crypto.js/-/crypto.js-1.8.6.tgz#ce480bdecc3e1a43ac701453c20f533b9472d4e7"
+  integrity sha512-bmsBL+gEJVlT1KgkOqjIkPsyNs5VV9MyrAWo9UAYdGNxfyH+KeYiiRzIaQwwhCzUkncuNzlCTbEo2qRJQoKETg==
+  dependencies:
+    "@iota/util.js" "^1.8.6"
+    big-integer "^1.6.51"
+
+"@iota/crypto.js@^1.9.0-stardust.6":
+  version "1.9.0-stardust.6"
+  resolved "https://registry.yarnpkg.com/@iota/crypto.js/-/crypto.js-1.9.0-stardust.6.tgz#a17c277e97b72352fb83d02c67a9e38220e14dd9"
+  integrity sha512-jbruSRXlEKW2dgfPFG7e42ODBp4dVu2/CAh/oZrzMjehPdyF2tgAeN1woOqOAmVONWoGVV9GViZti3nShhGF1g==
+  dependencies:
+    "@iota/util.js" "^1.9.0-stardust.5"
+    big-integer "^1.6.51"
+
 "@iota/curl@^1.0.0-beta.19":
   version "1.0.0-beta.19"
   resolved "https://registry.yarnpkg.com/@iota/curl/-/curl-1.0.0-beta.19.tgz#7c30bec4c7225eaf1a691802251c9199177a54a8"
   integrity sha512-bUr6VW8lP1XYhAkzUacc8U28qO2Ibdl6R5CSF7N34GgjO2sEkn4DnlzL1VU8cCv+8rfBlZ9qIvYGzklic49JJw==
+
+"@iota/iota.js-stardust@npm:@iota/iota.js@^1.9.0-stardust.23":
+  version "1.9.0-stardust.24"
+  resolved "https://registry.yarnpkg.com/@iota/iota.js/-/iota.js-1.9.0-stardust.24.tgz#e9cb3bc59a3118aee081fc1a6ff1af5723c786ac"
+  integrity sha512-CAki179OvQiADcuFR1+nQ45HyDbork9O2zfgdLM3JXtILGZpdTw8naQGZQ66q59olziwJ4qYBfNzoguP7MKw3w==
+  dependencies:
+    "@iota/crypto.js" "^1.9.0-stardust.6"
+    "@iota/util.js" "^1.9.0-stardust.5"
+    big-integer "^1.6.51"
+    node-fetch "2.6.7"
+
+"@iota/iota.js@^1.8.6":
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/@iota/iota.js/-/iota.js-1.8.6.tgz#ab28513afa825e4e115a3b1fb572cd40e494816f"
+  integrity sha512-KkUgYS+bde2v5ThjQsVWOECdRH1ym0atUod6TPk9YR05xNpVFq/kt4N/QBKqYv0ysLCL/EjR6mVZCrc5mE6CHA==
+  dependencies:
+    "@iota/crypto.js" "^1.8.6"
+    "@iota/util.js" "^1.8.6"
+    big-integer "^1.6.51"
+    node-fetch "2.6.7"
 
 "@iota/kerl@^1.0.0-beta.30":
   version "1.0.0-beta.30"
@@ -518,9 +554,9 @@
   integrity sha512-MU64KhEJG3KednToydQqrVvCKyA25B7SIw3wXiYHbPQP/IXbT4zJrUItRyMwHja3+9OakbczUfOvkSDawXOj8w==
 
 "@iota/types@^1.0.0-beta.9":
-  version "1.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.9.tgz#6fa9137c4a5299018800c302962c938688f1b2d3"
-  integrity sha512-ikCZoQE2UIqVr5cQ7KpsF+IFmooVMywCdeJ3PDycbm8m6L6iHpXhM1DPv8ofcbw63W3Oym/DGV4Ixn56/6wAqQ==
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.11.tgz#d3a70cc266a889222a7aa420c2ae839c7fb13fba"
+  integrity sha512-jFma7n4dpf+AikSIvY6CzrDDQ/TVnlV3HBIeOrDUDJku3oCcOkm8Jp/i0uKSD/krP2BAcDrWrNUr5Tn9MIw7+A==
 
 "@iota/unit-converter@^1.0.0-beta.30":
   version "1.0.0-beta.30"
@@ -529,6 +565,20 @@
   dependencies:
     "@types/bignumber.js" "^5.0.0"
     bignumber.js "^7.2.1"
+
+"@iota/util.js-stardust@npm:@iota/util.js@^1.9.0-stardust.5", "@iota/util.js@^1.9.0-stardust.5":
+  version "1.9.0-stardust.5"
+  resolved "https://registry.yarnpkg.com/@iota/util.js/-/util.js-1.9.0-stardust.5.tgz#7278841687d8b3c6bc6b8d449ac78593c199a645"
+  integrity sha512-BGXzzjUQQYaV/H0bXJYKW+Zgd9PIN+HLPH8BcYhubI65X4G2ID23/osmpK/za+Ds6t/MkpdPKIiBwZPGXuCUBw==
+  dependencies:
+    big-integer "^1.6.51"
+
+"@iota/util.js@^1.8.6":
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/@iota/util.js/-/util.js-1.8.6.tgz#5e320fbeea99bc16167f672607a98c5d1b488ecb"
+  integrity sha512-vQRYU0bDKORGFzeoN2zn7tO4Kjqv+h2P/J//MRspg9Kyy1TKgtGkn0j0M2ZSwJjScH6Cn2BQmRLet/ZBpg6osA==
+  dependencies:
+    big-integer "^1.6.51"
 
 "@iota/wallet@2.0.2-alpha.11":
   version "2.0.2-alpha.11"
@@ -2023,6 +2073,11 @@ batch@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
   integrity sha1-3DQxT05nkxgJP8dgJyUl+UvyXBY=
+
+big-integer@^1.6.51:
+  version "1.6.51"
+  resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.51.tgz#0df92a5d9880560d3ff2d5fd20245c889d130686"
+  integrity sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==
 
 big.js@^5.2.2:
   version "5.2.2"
@@ -6449,9 +6504,9 @@ nice-try@^1.0.4:
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
 node-abi@^2.7.0, node-abi@^3.8.0:
-  version "3.23.0"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.23.0.tgz#8e4945c35f125f6c4f8b919b14771c7b1f76a064"
-  integrity sha512-XWte/uvq7hmgY27WesfxLUAPejKUlkEbikhBFaIhxe+XkHa57rXBwYqGjsIyfVXaU8kC0Wp2p/qQroauDKs1XA==
+  version "3.24.0"
+  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.24.0.tgz#b9d03393a49f2c7e147d0c99f180e680c27c1599"
+  integrity sha512-YPG3Co0luSu6GwOBsmIdGW6Wx0NyNDLg/hriIyDllVsNwnI6UeqaWShxC3lbH4LtEQUgoLP3XR1ndXiDAWvmRw==
   dependencies:
     semver "^7.3.5"
 
@@ -6477,7 +6532,7 @@ node-emoji@^1.8.1:
   dependencies:
     lodash.toarray "^4.4.0"
 
-node-fetch@^2.6.7:
+node-fetch@2.6.7, node-fetch@^2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
