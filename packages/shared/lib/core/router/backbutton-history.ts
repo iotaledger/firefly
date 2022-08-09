@@ -13,14 +13,14 @@ export class BackButtonHeap {
         this._heap.push(func)
     }
 
-    remove(): () => Promise<void> {
+    pop(): () => Promise<void> {
         return this._heap.pop()
     }
 
     /**
      * Initializes the heap and puts the app close function as the first element
      */
-    refresh(): void {
+    reset(): void {
         this._heap = [this._closeFunc as () => Promise<void>]
     }
 }

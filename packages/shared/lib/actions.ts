@@ -41,13 +41,11 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
     const timeQueue = [0, 0, 0]
 
     function handleTouchstart(event: TouchEvent): void {
-        if (use) {
-            if (event.cancelable) {
-                event.preventDefault()
-            }
-            event.stopImmediatePropagation()
-            event.stopPropagation()
+        if (event.cancelable) {
+            event.preventDefault()
         }
+        event.stopImmediatePropagation()
+        event.stopPropagation()
 
         if (event.targetTouches.length === 1) {
             init = window.performance.now()
@@ -99,7 +97,9 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
         node.removeEventListener('touchend', handleTouchend, { capture: true })
     }
 
-    node.addEventListener('touchstart', handleTouchstart, { capture: true, passive: true })
+    if (use) {
+        node.addEventListener('touchstart', handleTouchstart, { capture: true, passive: true })
+    }
 
     return {
         destroy() {
