@@ -1286,6 +1286,9 @@
             "notVerified": "Not verified",
             "verified": "Verified"
         },
+        "asset": {
+            "label": "Assets"
+        },
         "amount": {
             "label": "Amount",
             "equal": "is equal to",

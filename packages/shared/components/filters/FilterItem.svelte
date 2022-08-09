@@ -3,15 +3,31 @@
     import { NumberInput, Checkbox, Dropdown, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { DropdownChoice } from '@core/utils'
+    import { selectedAccountAssets } from '@core/wallet'
 
     export let filterUnit: FilterUnit
 
     let choices: DropdownChoice[]
+    let value: string
     $: if (filterUnit.type === 'selection' || filterUnit.type === 'number') {
         choices = filterUnit.choices.map((choice) => ({
             label: localize(`${filterUnit.localeKey}.${choice}`),
             value: choice,
         }))
+        value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
+    } else if (filterUnit.type === 'asset') {
+        choices = [$selectedAccountAssets.baseCoin, ...$selectedAccountAssets.nativeTokens].map((choice) => ({
+            label: choice.metadata.name,
+            value: choice.metadata.name,
+        }))
+
+        const assetId = filterUnit.selected
+        if (assetId === $selectedAccountAssets.baseCoin.id) {
+            value = $selectedAccountAssets.baseCoin?.metadata.name
+        } else {
+            value = $selectedAccountAssets.nativeTokens.find((_nativeToken) => _nativeToken.id === assetId)?.metadata
+                .name
+        }
     }
 
     function updateSubUnitForNumberFilter() {
@@ -39,6 +55,16 @@
         if (filterUnit.type === 'selection' || filterUnit.type === 'number') {
             filterUnit.selected = item.value
             updateSubUnitForNumberFilter()
+        } else if (filterUnit.type === 'asset') {
+            let asset = undefined
+            if (item.value === $selectedAccountAssets.baseCoin.metadata.name) {
+                asset = $selectedAccountAssets.baseCoin
+            } else {
+                asset = $selectedAccountAssets.nativeTokens.find(
+                    (_nativeToken) => _nativeToken.metadata.name === item.value
+                )
+            }
+            filterUnit.selected = asset?.id || ''
         }
     }
 </script>
@@ -55,13 +81,8 @@
 
     {#if filterUnit.active && filterUnit.type !== 'boolean'}
         <div class="bg-gray-50 px-4 py-3">
-            {#if filterUnit.type === 'selection' || filterUnit.type === 'number'}
-                <Dropdown
-                    value={localize(`${filterUnit.localeKey}.${filterUnit.selected}`)}
-                    items={choices}
-                    {onSelect}
-                    small
-                />
+            {#if filterUnit.type === 'selection' || filterUnit.type === 'number' || filterUnit.type === 'asset'}
+                <Dropdown {value} items={choices} {onSelect} small />
 
                 {#if filterUnit.type === 'number' && filterUnit.selected}
                     <div class="flex flex-row items-center space-x-2 mt-2">
