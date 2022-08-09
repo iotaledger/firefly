@@ -38,14 +38,27 @@ export function initRouters(): void {
     initSubrouters()
 }
 
+export function initOnboardingRouters(): void {
+    initOnboardingBaseRouters()
+    initOnboardingSubrouters()
+}
+
 function initBaseRouters(): void {
     appRouter.set(new AppRouter())
     dashboardRouter.set(new DashboardRouter())
-    onboardingRouter.set(new OnboardingRouter())
     settingsRouter.set(new SettingsRouter())
+    initOnboardingBaseRouters()
+}
+
+function initOnboardingBaseRouters(): void {
+    onboardingRouter.set(new OnboardingRouter())
 }
 
 function initSubrouters(): void {
+    initOnboardingSubrouters()
+}
+
+function initOnboardingSubrouters(): void {
     appSetupRouter.set(new AppSetupRouter())
     ledgerSetupRouter.set(new LedgerSetupRouter())
     networkSetupRouter.set(new NetworkSetupRouter())

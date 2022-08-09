@@ -7,11 +7,12 @@
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { initialiseOnboardingProfile, shouldUseDeveloperProfile } from '@contexts/onboarding'
-    import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
+    import { initOnboardingRouters } from '@core/router'
+    import { initialiseOnboardingProfile, shouldUseDeveloperProfile } from '@contexts/onboarding'
+    import { openPopup, popupState } from '@lib/popup'
 
     const dispatch = createEventDispatcher()
 
@@ -22,6 +23,7 @@
 
     function addProfile() {
         dispatch('next', { shouldAddProfile: true })
+        initOnboardingRouters()
         initialiseOnboardingProfile(shouldUseDeveloperProfile())
     }
 
