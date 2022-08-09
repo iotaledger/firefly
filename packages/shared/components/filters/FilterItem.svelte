@@ -21,6 +21,10 @@
             value: choice.metadata.name,
         }))
 
+        if (!filterUnit.selected) {
+            filterUnit.selected = $selectedAccountAssets.baseCoin.id
+        }
+
         const assetId = filterUnit.selected
         if (assetId === $selectedAccountAssets.baseCoin.id) {
             value = $selectedAccountAssets.baseCoin?.metadata.name
