@@ -4,11 +4,13 @@
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
     import {
+        deleteOnboardingProfile,
         getProfileTypeFromProfileRecoveryType,
+        initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
+        IOnboardingProfile,
         onboardingProfile,
         ProfileRecoveryType,
         updateOnboardingProfile,
@@ -24,9 +26,12 @@
         $profileSetupRouter.previous()
     }
 
-    onMount(() => {
-        destroyProfileManager()
-        updateOnboardingProfile({ type: null, recoveryType: null })
+    onMount(async () => {
+        const onboardingProfileData: Partial<IOnboardingProfile> = { ...$onboardingProfile }
+        await deleteOnboardingProfile()
+        await initialiseOnboardingProfile(onboardingProfileData?.isDeveloperProfile)
+        const { id } = $onboardingProfile
+        updateOnboardingProfile({ ...onboardingProfileData, id, type: null, recoveryType: null })
     })
 </script>
 
