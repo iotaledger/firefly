@@ -39,7 +39,7 @@
             {locale('views.bundleMiningWarning.body1')}
         </Text>
         <Text type="p" secondary classes="mb-8 text-center">
-            {$mobile ? locale('views.bundleMiningWarning.body2Blocked') : locale('views.bundleMiningWarning.body2')}
+            {$mobile ? locale('views.bundleMiningWarning.body3') : locale('views.bundleMiningWarning.body2')}
         </Text>
         <div class="flex flex-col flex-grow items-center">
             <Button
@@ -52,8 +52,8 @@
         </div>
     </div>
     <div slot="actions" class={$mobile ? 'w-full' : ''}>
-        <Button disabled={$mobile} classes={$mobile ? 'w-full' : 'w-64 my-8'} onClick={() => handleContinueClick()}
-            >{locale('actions.continue')}</Button
-        >
+        <Button classes={$mobile ? 'w-full' : 'w-64 my-8'} onClick={() => handleContinueClick()}>
+            {locale('actions.continue')}
+        </Button>
     </div>
 </BundleMiningLayout>

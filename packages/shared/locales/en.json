@@ -252,8 +252,7 @@
             "title": "Warning",
             "body1": "You have funds on one or more spent addresses.",
             "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
-            "body2Blocked": "We recommend you use the Firefly desktop app to help secure and transfer these funds safely.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Learn about spent addresses"
         },
         "secureSpentAddresses": {
