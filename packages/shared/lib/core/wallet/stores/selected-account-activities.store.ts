@@ -33,6 +33,12 @@ export const activityFilter: Writable<ActivityFilter> = writable({
             amount: '',
         },
     },
+    asset: {
+        active: false,
+        type: 'asset',
+        localeKey: 'filters.asset',
+        selected: '',
+    },
     status: {
         active: false,
         type: 'selection',

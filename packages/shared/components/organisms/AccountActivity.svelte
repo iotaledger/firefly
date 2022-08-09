@@ -76,7 +76,7 @@
 <div class="activity-list h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
-            <div class="flex flex-row">
+            <div class="flex flex-row items-center">
                 <Text type="h5" classes="mr-2">{localize('general.activity')}</Text>
                 {#if features?.wallet?.activityHistory?.sync?.enabled}
                     <SyncSelectedAccountIconButton />

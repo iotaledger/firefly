@@ -1,17 +1,9 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import {
-        IActivity,
-        IAsset,
-        selectedAccountAssets,
-        unverifyAsset,
-        VerificationStatus,
-        verifyAsset,
-    } from '@core/wallet'
+    import { IActivity, IAsset, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup, updatePopupProps } from '@lib/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
-    import { get } from 'svelte/store'
     import { FontWeightText } from '../Text.svelte'
 
     export let asset: IAsset
@@ -26,7 +18,7 @@
             })
         } else {
             updatePopupProps({
-                asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+                asset: { ...asset, verification: VerificationStatus.NotVerified },
             })
         }
     }
@@ -40,7 +32,7 @@
             })
         } else {
             updatePopupProps({
-                asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+                asset: { ...asset, verification: VerificationStatus.Verified },
             })
         }
     }
