@@ -84,14 +84,41 @@
     }
 
     /**
-     * for android mobile we need both onkeydown and oninput
-     * event listeners to the input and handle the old and the new value.
-     * the auto-suggest feature or other event might follow
-     * the keydown event and invalidate it.
+     * On Android we need both on:keydown and on:input.
+     * Keydown only handles 'Backspace' since some soft-keyboards
+     * doesn't send the inputType value as 'deleteContentBackward'.
+     * Input event handle the rest, as input also could be dictated, drawed, etc.
      */
-    const changeHandlerHelper = (i: number) => {
-        inputElements[i + 1]?.focus()
+    function changeHandlerMobile(event: Event & InputEventInit, i: number): void {
+        if (!event.isTrusted || !/^[0-9]$/.test(event.data)) {
+            inputs[i] = ''
+            inputElements[i].focus()
+            return
+        }
+        if (event.inputType === 'deleteContentBackward') {
+            handleBackspace()
+        } else if (event.inputType === 'insertText') {
+            inputElements[i + 1]?.focus()
+            value = inputs.join('')
+            if (validatePinFormat(value)) {
+                dispatch('submit')
+            }
+        }
     }
+
+    function handleBackspaceMobile(event: KeyboardEvent): void {
+        if (event.key === 'Backspace') {
+            handleBackspace()
+        }
+    }
+
+    function handleNextMobile(i: number): void {
+        if (inputElements[i - 1].value === '') {
+            inputs[i] = ''
+            inputElements[i - 1].focus()
+        }
+    }
+
     const selectFirstEmpty = () => {
         for (let j = 0; j < PIN_LENGTH; j++) {
             if (!inputs[j] || j === PIN_LENGTH - 1) {
@@ -126,14 +153,14 @@
 <div class="w-full {classes}">
     <pin-input
         style="--pin-input-size: {PIN_LENGTH}"
-        class="{$mobile ? 'h-20 w-80' : 'w-full'}
+        class="{$mobile ? 'h-20 w-80 cursor-auto' : 'w-full cursor-pointer'}
             flex items-center justify-between relative z-0 rounded-xl border border-solid
             bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
             {smaller ? 'h-14 pl-6 pr-4' : $mobile ? 'h-20 pl-8 pr-8 m-auto' : 'h-20 pl-12 pr-8'}"
         class:disabled
         bind:this={root}
-        on:click={selectFirstEmptyRoot}
-        on:focus={selectFirstEmptyRoot}
+        on:click={$mobile ? selectFirstEmpty : selectFirstEmptyRoot}
+        on:focus={$mobile ? selectFirstEmpty : selectFirstEmptyRoot}
         tabindex="0"
     >
         <div class="flex flex-row inputs-wrapper">
@@ -144,16 +171,16 @@
                             bind:value={inputs[i]}
                             maxLength="1"
                             id={`input-${i}`}
-                            type="number"
+                            type="password"
                             inputmode="numeric"
                             autocomplete="off"
-                            pattern="[0-9]"
                             bind:this={inputElements[i]}
                             class:active={!inputs[i] || inputs[i].length === 0}
                             class:glimpse
                             {disabled}
-                            on:input={() => changeHandlerHelper(i)}
-                            on:keydown={(event) => changeHandler(event, i)}
+                            on:input={(event) => changeHandlerMobile(event, i)}
+                            on:keydown={handleBackspaceMobile}
+                            on:focus={() => handleNextMobile(i)}
                             on:contextmenu|preventDefault
                         />
                     {:else}
@@ -191,7 +218,6 @@
 
 <style type="text/scss">
     pin-input {
-        @apply cursor-pointer;
         @apply select-none;
 
         &:not(.disabled):focus-within,
