@@ -62,6 +62,7 @@ export class Activity implements IActivity {
     rawAmount: number
     assetId: string
     isAssetHidden: boolean
+    isRejected: boolean
     metadata?: string
     tag?: string
 
@@ -92,7 +93,7 @@ export class Activity implements IActivity {
 
         this.type = getActivityType(isSubjectInternal(recipient), isFoundry)
         this.id = transaction.transactionId
-        this.isHidden = isActivityHiddenForAccountId(account.id, transaction.transactionId)
+        this.isHidden = false
 
         this.transactionId = transaction.transactionId
         this.inclusionState = transaction.inclusionState
@@ -111,6 +112,7 @@ export class Activity implements IActivity {
         this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
         const asset = getPersistedAsset(this.assetId)
         this.isAssetHidden = !asset || asset.hidden
+        this.isRejected = isActivityHiddenForAccountId(account.id, transaction.transactionId)
 
         const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
         this.storageDeposit = storageDeposit
@@ -150,7 +152,7 @@ export class Activity implements IActivity {
 
         this.type = getActivityType(isInternal)
         this.id = outputData.outputId
-        this.isHidden = isActivityHiddenForAccountId(account.id, outputData.outputId)
+        this.isHidden = false
 
         this.transactionId = outputData?.metadata?.transactionId
         this.inclusionState = InclusionState.Confirmed
@@ -174,6 +176,7 @@ export class Activity implements IActivity {
         this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
         const asset = getPersistedAsset(this.assetId)
         this.isAssetHidden = !asset || asset.hidden
+        this.isRejected = isActivityHiddenForAccountId(account.id, outputData.outputId)
 
         const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
         this.storageDeposit = storageDeposit

@@ -24,6 +24,7 @@ export interface IActivity {
     inputs: IUTXOInput[]
     isHidden?: boolean
     isAssetHidden: boolean
+    isRejected: boolean
     isClaiming?: boolean
     isClaimed?: boolean
     publicNote?: string
