@@ -8,7 +8,7 @@
     export let callback = async (): Promise<void> => {}
 
     const SWIPE_MAX = window.screen.availHeight / 2
-    const DEFAULT_ANIMATION_DURATION = 350
+    const DEFAULT_ANIMATION_DURATION = 350 // ms
     const DEFAULT_ANIMATION_VALUES =
         platform === 'android'
             ? {
@@ -24,7 +24,7 @@
                   position: 0,
               }
             : null
-    const IOS_REFRESHER_SIZE = 54 // in px
+    const IOS_REFRESHER_SIZE = 54 // px
 
     const opacityEasing = (n: number) => Math.max(Math.min(positionEasing(n) / (SWIPE_MAX / 6) - 0.5, 1), 0.5)
     const positionEasing = (n: number) => (n * (Math.log(2 + (SWIPE_MAX - n) / SWIPE_MAX) / Math.log(2))) / 2
