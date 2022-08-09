@@ -10,7 +10,7 @@
     export let assets: IAccountAssets
 
     let assetList: IAsset[]
-    $: $assetFilter, updateFilteredAssetList()
+    $: $assetFilter, assets, updateFilteredAssetList()
 
     function updateFilteredAssetList() {
         const list = []
