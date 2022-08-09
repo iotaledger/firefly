@@ -1,4 +1,5 @@
 import { getNodeCandidates, IClientOptions } from '@core/network'
+import { updateActiveProfile } from '@core/profile'
 import { setClientOptions } from '@core/profile-manager'
 
 /**
@@ -13,21 +14,12 @@ import { setClientOptions } from '@core/profile-manager'
 
 export function updateClientOptions(clientOptions: Partial<IClientOptions>): void {
     const builtClientOptions = buildClientOptions(clientOptions)
-    if (!builtClientOptions.node) {
-        return
+    if (builtClientOptions?.nodes || builtClientOptions?.primaryNode) {
+        updateActiveProfile({ clientOptions })
+        setClientOptions(clientOptions)
+    } else {
+        throw new Error('Error: Must have at least one node set in the client options')
     }
-
-    // const hasMismatchedNetwork = clientOptions.node?.network?.id !== clientOptions.network
-    // if (hasMismatchedNetwork && isNewNotification('warning')) {
-    //     showAppNotification({
-    //         type: 'error',
-    //         message: localize('error.network.badNodes'),
-    //     })
-
-    //     return
-    // }
-
-    setClientOptions(clientOptions)
 }
 
 function buildClientOptions(clientOptions: Partial<IClientOptions>): IClientOptions {

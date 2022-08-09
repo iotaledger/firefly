@@ -79,23 +79,6 @@
             <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
         </button>
     {/if}
-    {#if !$activeProfile?.clientOptions.automaticNodeSelection}
-        <button
-            on:click={() => {
-                nodeContextMenu.disabled = !nodeContextMenu.disabled
-                clientOptions.nodes = clientOptions.nodes.map((n) => ({
-                    ...n,
-                    disabled: n.url === nodeContextMenu.url && nodeContextMenu.disabled,
-                }))
-                nodeContextMenu = undefined
-            }}
-            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-        >
-            <Text smaller>
-                {localize(`views.settings.configureNodeList.${nodeContextMenu.disabled ? 'include' : 'exclude'}Node`)}
-            </Text>
-        </button>
-    {/if}
     {#if !getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType)
         .map((n) => n.url)
         .includes(nodeContextMenu?.url)}

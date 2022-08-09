@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import {
-        getNodeCandidates,
+        addOfficialNodesToClientOptions,
         getOfficialNodes,
         INode,
         isOfficialNetwork,
@@ -14,21 +14,14 @@
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
-    import { Button, Checkbox, HR, NodeConfigOptions, Radio, Text } from 'shared/components'
+    import { Button, Checkbox, HR, NodeConfigOptions, Text } from 'shared/components'
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: INode
     let nodesContainer
 
+    const { networkType } = $activeProfile
     $: clientOptions = $activeProfile?.clientOptions
-
-    function handleIncludeOfficialNodesClick() {
-        ensureValidNodeSelection()
-    }
-
-    function ensureValidNodeSelection(): void {
-        clientOptions.nodes = getNodeCandidates(clientOptions)
-    }
 
     function handleAddNodeClick(): void {
         openPopup({
@@ -47,23 +40,6 @@
             },
         })
     }
-
-    function handleRemoveAllNodesClick(): void {
-        openPopup({
-            type: 'removeNode',
-            props: {
-                removeAll: true,
-                onSuccess: () => {
-                    clientOptions.includeOfficialNodes = false
-                    clientOptions.nodes = []
-                },
-            },
-        })
-    }
-
-    function handleManualNodeSelection() {
-        clientOptions.includeOfficialNodes = true
-    }
 </script>
 
 <div>
@@ -73,117 +49,85 @@
             `views.settings.networkConfiguration.description.${$activeProfile?.isDeveloperProfile ? 'dev' : 'nonDev'}`
         )}
     </Text>
-    {#if $activeProfile?.isDeveloperProfile}
-        <div class="flex flex-row justify-between w-3/4">
+    <div class="flex flex-row justify-between w-3/4">
+        <div>
+            <Text type="p" classes="inline" secondary>
+                {localize('views.settings.networkConfiguration.connectedTo')}:
+            </Text>
+            <Text type="p" highlighted>{$nodeInfo?.protocol?.networkName}</Text>
+        </div>
+        <div>
+            <Text type="p" classes="inline" secondary>{localize('views.dashboard.network.status')}:</Text>
             <div>
-                <Text type="p" classes="inline" secondary>
-                    {localize('views.settings.networkConfiguration.connectedTo')}:
-                </Text>
-                <Text type="p" highlighted>{$nodeInfo?.protocol?.networkName}</Text>
-            </div>
-            <div>
-                <Text type="p" classes="inline" secondary>{localize('views.dashboard.network.status')}:</Text>
-                <div>
-                    <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
-                        {localize(
-                            `views.dashboard.network.${
-                                $networkStatus.description || NetworkStatusDescription[NetworkHealth.Disconnected]
-                            }`
-                        )}
-                    </p>
-                </div>
+                <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
+                    {localize(
+                        `views.dashboard.network.${
+                            $networkStatus.description || NetworkStatusDescription[NetworkHealth.Disconnected]
+                        }`
+                    )}
+                </p>
             </div>
         </div>
-    {/if}
+    </div>
     <HR classes="pb-5 mt-5 justify-center" />
-    {#if $activeProfile.networkType === NetworkType.Mainnet}
-        <section id="nodeConfiguration">
-            <Text type="h5" classes="mb-3">
-                {localize('views.settings.networkConfiguration.nodeConfiguration.title')}
-            </Text>
-            <Text type="p" secondary classes="mb-5">
-                {localize('views.settings.networkConfiguration.nodeConfiguration.description')}
-            </Text>
-            <Radio
-                value={true}
-                bind:group={clientOptions.automaticNodeSelection}
-                label={localize('views.settings.networkConfiguration.nodeConfiguration.automatic')}
-                subLabel="Connect to official nodes from the IOTA Foundation"
-            />
-            <Radio
-                value={false}
-                bind:group={clientOptions.automaticNodeSelection}
-                label={localize('views.settings.networkConfiguration.nodeConfiguration.manual')}
-                on:change={handleManualNodeSelection}
-            />
-        </section>
-        <HR classes="pb-5 mt-5 justify-center" />
-    {/if}
-    {#if !clientOptions.automaticNodeSelection}
-        <section id="configureNodeList">
-            <Text type="h5" classes="mb-3">{localize('views.settings.configureNodeList.title')}</Text>
-            <Text type="p" secondary classes="mb-5">{localize('views.settings.configureNodeList.description')}</Text>
-            {#if isOfficialNetwork($activeProfile?.networkType) && !clientOptions.automaticNodeSelection}
-                <Checkbox
-                    label={localize('views.settings.configureNodeList.includeOfficialNodeList')}
-                    bind:checked={clientOptions.includeOfficialNodes}
-                    onClick={handleIncludeOfficialNodesClick}
-                    classes="mb-5"
-                />
-            {/if}
-            <div
-                class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
-                bind:this={nodesContainer}
-            >
-                {#if clientOptions.nodes.length === 0 && !isOfficialNetwork($activeProfile.networkType)}
-                    <Text classes="p-3">
-                        {localize('views.settings.configureNodeList.noNodes')}
-                    </Text>
-                {:else}
-                    {#each clientOptions.nodes.length === 0 ? getOfficialNodes($activeProfile.networkProtocol, $activeProfile.networkType) : clientOptions.nodes as node}
-                        <div
-                            class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                        >
-                            <div class="flex flex-row items-center space-x-4 overflow-hidden">
-                                <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
-                                    {node.url}
-                                </Text>
-                            </div>
-                            <button
-                                on:click={(e) => {
-                                    nodeContextMenu = node
-                                    contextPosition = { x: e.clientX, y: e.clientY }
-                                }}
-                                class="dark:text-white">...</button
-                            >
-                        </div>
-                    {/each}
-                {/if}
-                {#if nodeContextMenu}
-                    <NodeConfigOptions bind:nodeContextMenu bind:clientOptions {contextPosition} />
-                {/if}
-            </div>
-            {#if !clientOptions.automaticNodeSelection}
-                <div class="flex flex-row justify-between space-x-3 w-full mt-4">
-                    <Button medium inlineStyle="min-width: 156px;" classes="w-1/2" onClick={handleAddNodeClick}>
-                        {localize('actions.addNode')}
-                    </Button>
-                    <Button
-                        disabled={$activeProfile?.networkType === NetworkType.PrivateNet ||
-                            clientOptions?.nodes.length <= 1}
-                        warning
-                        medium
-                        inlineStyle="min-width: 156px;"
-                        classes="w-1/2"
-                        onClick={handleRemoveAllNodesClick}
+    <section id="configureNodeList">
+        <Text type="h5" classes="mb-3">{localize('views.settings.configureNodeList.title')}</Text>
+        <Text type="p" secondary classes="mb-5">{localize('views.settings.configureNodeList.description')}</Text>
+        <div
+            class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
+            bind:this={nodesContainer}
+        >
+            {#if clientOptions.nodes.length === 0 && !isOfficialNetwork($activeProfile.networkType)}
+                <Text classes="p-3">
+                    {localize('views.settings.configureNodeList.noNodes')}
+                </Text>
+            {:else}
+                {#each clientOptions.nodes.length === 0 ? getOfficialNodes($activeProfile.networkProtocol, $activeProfile.networkType) : clientOptions.nodes as node}
+                    <div
+                        class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
                     >
-                        {localize('actions.removeAllNodes')}
-                    </Button>
-                </div>
+                        <div class="flex flex-row items-center space-x-4 overflow-hidden">
+                            <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
+                                {node.url}
+                            </Text>
+                        </div>
+                        <button
+                            on:click={(e) => {
+                                nodeContextMenu = node
+                                contextPosition = { x: e.clientX, y: e.clientY }
+                            }}
+                            class="dark:text-white">...</button
+                        >
+                    </div>
+                {/each}
             {/if}
-        </section>
-        <HR classes="pb-5 mt-5 justify-center" />
-    {/if}
+            {#if nodeContextMenu}
+                <NodeConfigOptions bind:nodeContextMenu bind:clientOptions {contextPosition} />
+            {/if}
+        </div>
+        <div class="flex flex-row justify-between space-x-3 w-full mt-4">
+            {#if networkType !== NetworkType.PrivateNet}
+                <Button
+                    medium
+                    secondary
+                    inlineStyle="min-width: 156px;"
+                    classes="w-1/2"
+                    onClick={addOfficialNodesToClientOptions}
+                >
+                    {localize('actions.addOfficialNodes')}
+                </Button>
+            {/if}
+            <Button
+                medium
+                inlineStyle="min-width: 156px;"
+                classes={networkType === NetworkType.PrivateNet ? '' : 'w-1/2'}
+                onClick={handleAddNodeClick}
+            >
+                {localize('actions.addNode')}
+            </Button>
+        </div>
+    </section>
+    <HR classes="pb-5 mt-5 justify-center" />
     <section id="proofOfWork">
         <Text type="h5" classes="mb-3">{localize('views.settings.proofOfWork.title')}</Text>
         <Text type="p" secondary classes="mb-5">{localize('views.settings.proofOfWork.description')}</Text>
