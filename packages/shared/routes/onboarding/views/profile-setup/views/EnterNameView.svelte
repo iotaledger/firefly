@@ -4,7 +4,14 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
-    import { OnboardingRoute, onboardingRouter, profileRecoveryRouter, profileSetupRouter } from '@core/router'
+    import {
+        OnboardingRoute,
+        onboardingRouter,
+        profileRecoveryRouter,
+        ProfileSetupRoute,
+        profileSetupRoute,
+        profileSetupRouter,
+    } from '@core/router'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { onMount } from 'svelte'
 
@@ -19,7 +26,7 @@
             updateOnboardingProfile({ type: null, setupType: null, recoveryType: null })
             $onboardingRouter.filterHistory(OnboardingRoute.ProfileRecovery)
             $profileRecoveryRouter.reset()
-            $profileSetupRouter.reset()
+            profileSetupRoute.set(ProfileSetupRoute.SetupRecovered)
         } else {
             $profileSetupRouter.previous()
         }

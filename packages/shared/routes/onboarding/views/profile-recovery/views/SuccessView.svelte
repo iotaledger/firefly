@@ -2,18 +2,26 @@
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { profileRecoveryRouter } from '@core/router'
+    import {
+        OnboardingRoute,
+        onboardingRoute,
+        profileRecoveryRouter,
+        ProfileSetupRoute,
+        profileSetupRoute,
+    } from '@core/router'
 
-    function handleBackClick(): void {
-        $profileRecoveryRouter.previous()
+    function onContinueClick(): void {
+        $profileRecoveryRouter.next()
     }
 
-    function handleContinueClick(): void {
-        $profileRecoveryRouter.next()
+    function onBackClick(): void {
+        $profileRecoveryRouter.reset()
+        profileSetupRoute.set(ProfileSetupRoute.SetupRecovered)
+        onboardingRoute.set(OnboardingRoute.ProfileSetup)
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="leftpane__content">
         <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-5 pt-10 relative">
             <div class="flex items-center justify-center bg-green-500 rounded-2xl absolute -top-5 w-12 h-12 check-glow">
@@ -24,7 +32,7 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full" onClick={handleContinueClick}>{localize('actions.continue')}</Button>
+        <Button classes="w-full" onClick={onContinueClick}>{localize('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="success-desktop" />
