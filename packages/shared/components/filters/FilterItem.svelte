@@ -8,13 +8,11 @@
     export let filterUnit: FilterUnit
 
     let choices: DropdownChoice[]
-    let value: string
-    $: if (filterUnit.type === 'selection' || filterUnit.type === 'number') {
+    if (filterUnit.type === 'selection' || filterUnit.type === 'number') {
         choices = filterUnit.choices.map((choice) => ({
             label: localize(`${filterUnit.localeKey}.${choice}`),
             value: choice,
         }))
-        value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
     } else if (filterUnit.type === 'asset') {
         choices = [$selectedAccountAssets.baseCoin, ...$selectedAccountAssets.nativeTokens].map((choice) => ({
             label: choice.metadata.name,
@@ -24,7 +22,12 @@
         if (!filterUnit.selected) {
             filterUnit.selected = $selectedAccountAssets.baseCoin.id
         }
+    }
 
+    let value: string
+    $: if (filterUnit.type === 'selection' || filterUnit.type === 'number') {
+        value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
+    } else if (filterUnit.type === 'asset') {
         const assetId = filterUnit.selected
         if (assetId === $selectedAccountAssets.baseCoin.id) {
             value = $selectedAccountAssets.baseCoin?.metadata.name
