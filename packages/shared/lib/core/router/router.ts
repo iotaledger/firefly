@@ -43,7 +43,7 @@ export abstract class Router<Route> {
     previous(isBackButton = false): void {
         const previousRoute = this.history.pop()
         if (isBackButton === false) {
-            get(backButtonStore).remove()
+            get(backButtonStore).pop()
         }
         if (previousRoute) {
             this.setRoute(previousRoute)
