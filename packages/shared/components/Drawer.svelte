@@ -147,7 +147,7 @@
     </dim-zone>
     <content
         bind:this={content}
-        use:slidable={!fromLeft && !preventClose}
+        use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
         class="fixed bottom-0 overflow-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
