@@ -1,6 +1,6 @@
 export * from './claimActivity'
 export * from './getAccountAssetsForSelectedAccount'
-export * from './hideActivity'
+export * from './rejectActivity'
 export * from './linkActivityAndClaimingTransaction'
 export * from './loadAccountActivities'
 export * from './loadAccountActivitiesFromOutputs'
