@@ -411,7 +411,9 @@
     <Idle />
     <div class="flex flex-col w-full h-full bg-white dark:bg-gray-800">
         <MainMenu />
-        <Refresher callback={() => asyncSyncAccount($selectedAccountStore)} />
+        {#if $mobile}
+            <Refresher callback={() => asyncSyncAccount($selectedAccountStore)} platform={Platform.getOS()} />
+        {/if}
         <TopNavigation {onCreateAccount} />
         <!-- Dashboard Pane -->
         <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
