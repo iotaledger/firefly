@@ -38,7 +38,7 @@
         $onboardingRouter.next()
     }
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         if (wasMigrated) {
             const _continue = () => {
                 /**
@@ -79,6 +79,10 @@
         }
     }
 
+    function onBackClick(): void {
+        $onboardingRouter.previous()
+    }
+
     onMount(() => {
         if (!wasMigrated) {
             if ($onboardingProfile?.recoveryType === ProfileRecoveryType.FireflyLedger) {
@@ -104,7 +108,7 @@
     })
 </script>
 
-<OnboardingLayout allowBack={false}>
+<OnboardingLayout {onBackClick}>
     <div slot="leftpane__content">
         {#if wasMigrated}
             <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
@@ -131,7 +135,7 @@
         {/if}
     </div>
     <div slot="leftpane__action">
-        <Button autofocus classes="w-full" onClick={handleContinueClick}>
+        <Button autofocus classes="w-full" onClick={onContinueClick}>
             {localize(
                 `${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`
             )}

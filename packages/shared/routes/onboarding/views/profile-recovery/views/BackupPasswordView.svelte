@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { getContext } from 'svelte'
+    import { getContext, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -18,7 +18,7 @@
 
     let strongholdPassword = ''
 
-    async function handleContinue(): Promise<void> {
+    async function onContinueClick(): Promise<void> {
         if (strongholdPassword) {
             try {
                 await restoreBackupFromFile(importFile, strongholdPassword)
@@ -36,16 +36,20 @@
         }
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         // We are deliberately using "isGettingMigrationData"
         // We do not want to display the spinner if stronghold is being imported.
         if (!busy) {
             $profileRecoveryRouter.previous()
         }
     }
+
+    onMount(() => {
+        updateOnboardingProfile({ strongholdPassword: null, lastStrongholdBackupTime: null })
+    })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} {busy}>
+<OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
         {#if $mobile}
             <Text type="h2" classes="mb-4">
@@ -66,11 +70,11 @@
             showRevealToggle
             autofocus
             disabled={busy}
-            submitHandler={handleContinue}
+            submitHandler={onContinueClick}
         />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={strongholdPassword.length === 0 || busy} onClick={handleContinue}>
+        <Button classes="flex-1" disabled={strongholdPassword.length === 0 || busy} onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>

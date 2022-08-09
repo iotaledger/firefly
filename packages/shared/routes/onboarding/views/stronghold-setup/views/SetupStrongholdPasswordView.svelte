@@ -20,7 +20,7 @@
     $: passwordStrength = checkPasswordStrength(strongholdPassword) ?? passwordStrength
     $: strongholdPassword, confirmedStrongholdPassword, ((error = ''), (errorConfirm = ''))
 
-    async function handleContinueClick(): Promise<void> {
+    async function onContinueClick(): Promise<void> {
         error = ''
         errorConfirm = ''
 
@@ -65,7 +65,7 @@
         }
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $onboardingRouter.previous()
     }
 
@@ -80,12 +80,12 @@
     } // zxcvbn lib recommends to not validate long passwords because of performance issues https://github.com/dropbox/zxcvbn#user-content-performance
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} {busy}>
+<OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
         <Text type="h2">{localize('views.password.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <form on:submit|preventDefault={handleContinueClick} id="password-form">
+        <form on:submit|preventDefault={onContinueClick} id="password-form">
             <Text type="p" classes="mb-4" secondary>{localize('views.password.body1')}</Text>
             <Text type="p" classes="mb-10" secondary>{localize('views.password.body2')}</Text>
             <PasswordInput
