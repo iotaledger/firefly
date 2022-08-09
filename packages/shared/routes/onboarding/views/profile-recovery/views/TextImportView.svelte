@@ -4,26 +4,35 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '@core/router'
-    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        DEFAULT_STRONGHOLD_PASSWORD,
+        onboardingProfile,
+        updateOnboardingProfile,
+        verifyAndStoreMnemonic,
+    } from '@contexts/onboarding'
+    import { setStrongholdPassword } from '@core/profile-manager'
 
     let input = ''
 
-    function handleContinueClick(): void {
+    async function onContinueClick(): Promise<void> {
         const mnemonic = input.split(' ')
         updateOnboardingProfile({ mnemonic })
+        await setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
+        updateOnboardingProfile({ strongholdPassword: DEFAULT_STRONGHOLD_PASSWORD })
+        await verifyAndStoreMnemonic()
         $profileRecoveryRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $profileRecoveryRouter.previous()
     }
 
     onMount(() => {
-        updateOnboardingProfile({ mnemonic: null })
+        updateOnboardingProfile({ hasStoredMnemonic: false, mnemonic: null })
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2">{localize(`views.importFromText.${$onboardingProfile?.recoveryType}.title`)}</Text>
     </div>
@@ -34,7 +43,7 @@
         <Text type="h5" classes="mb-3"
             >{localize(`views.importFromText.${$onboardingProfile?.recoveryType}.enter`)}</Text
         >
-        <form on:submit={handleContinueClick} id="text-import-form">
+        <form on:submit={onContinueClick} id="text-import-form">
             <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} />
         </form>
     </div>

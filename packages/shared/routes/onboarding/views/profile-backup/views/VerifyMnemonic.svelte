@@ -54,16 +54,16 @@
         }
     }
 
-    async function handleContinue(): Promise<void> {
+    async function onContinueClick(): Promise<void> {
         await verifyAndStoreMnemonic()
         $profileBackupRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $profileBackupRouter.previous()
     }
 
-    function handleKeyPress(event: KeyboardEvent): void {
+    function onKeyPress(event: KeyboardEvent): void {
         if (!verified) {
             switch (event.key) {
                 case '1':
@@ -86,9 +86,9 @@
     })
 </script>
 
-<svelte:window on:keypress={handleKeyPress} />
+<svelte:window on:keypress={onKeyPress} />
 
-<OnboardingLayout onBackClick={handleBackClick} {busy} reverseContent={$mobile && !verified}>
+<OnboardingLayout {onBackClick} {busy} reverseContent={$mobile && !verified}>
     <div slot="title">
         <Text type="h2" classes={!$mobile && verified && 'hidden'}>{localize('views.verifyRecoveryPhrase.title')}</Text>
     </div>
@@ -123,7 +123,7 @@
     </div>
     <div slot="leftpane__action">
         {#if verified}
-            <Button autofocus classes="w-full" onClick={() => handleContinue()} disabled={busy}>
+            <Button autofocus classes="w-full" onClick={() => onContinueClick()} disabled={busy}>
                 {localize('actions.continue')}
             </Button>
         {:else if $mobile && !verified}
