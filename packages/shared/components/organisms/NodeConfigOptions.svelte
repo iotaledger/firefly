@@ -2,7 +2,7 @@
     import { HR, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { localize } from '@core/i18n'
-    import { getOfficialNodes, INode, IClientOptions, updateClientOptions } from '@core/network'
+    import { getOfficialNodes, INode, IClientOptions, removeNodeFromClientOptions } from '@core/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile } from '@core/profile'
 
@@ -12,6 +12,11 @@
         y: number
     }
     export let clientOptions: IClientOptions
+
+    $: isOfficialNode = getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType).some(
+        (n) => n.url === nodeContextMenu?.url
+    )
+    $: isOnlyOneNode = clientOptions?.nodes?.length === 1
 
     function handleViewNodeInfoClick(node: INode): void {
         openPopup({
@@ -23,6 +28,7 @@
     }
 
     function handleEditNodeDetailsClick(node: INode): void {
+        nodeContextMenu = undefined
         openPopup({
             type: 'addNode',
             props: {
@@ -36,13 +42,17 @@
     }
 
     function handleRemoveNodeClick(node: INode) {
+        nodeContextMenu = undefined
         openPopup({
-            type: 'removeNode',
+            type: 'confirmation',
             props: {
-                node,
-                onSuccess: (node) => {
-                    clientOptions.nodes = clientOptions.nodes.filter((n) => n.url !== node.url)
-                    updateClientOptions(clientOptions)
+                title: localize('popups.node.titleRemove'),
+                description: localize('popups.node.removeConfirmation'),
+                danger: true,
+                confirmText: localize('actions.removeNode'),
+                onConfirm: () => {
+                    removeNodeFromClientOptions(node)
+                    closePopup()
                 },
             },
         })
@@ -66,31 +76,27 @@
             <Text smaller>{localize('views.settings.configureNodeList.viewInfo')}</Text>
         </button>
     {/if}
-    {#if !getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType)
-        .map((n) => n.url)
-        .includes(nodeContextMenu?.url)}
-        <button
-            on:click={() => {
-                handleEditNodeDetailsClick(nodeContextMenu)
-                nodeContextMenu = undefined
-            }}
-            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-        >
-            <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
-        </button>
-    {/if}
-    {#if !getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType)
-        .map((n) => n.url)
-        .includes(nodeContextMenu?.url)}
-        <HR />
-        <button
-            on:click={() => {
-                handleRemoveNodeClick(nodeContextMenu)
-                nodeContextMenu = undefined
-            }}
-            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-        >
-            <Text smaller error>{localize('views.settings.configureNodeList.removeNode')}</Text>
-        </button>
-    {/if}
+
+    <button
+        disabled={isOfficialNode}
+        on:click={() => {
+            handleEditNodeDetailsClick(nodeContextMenu)
+            nodeContextMenu = undefined
+        }}
+        class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+    >
+        <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
+    </button>
+
+    <HR />
+    <button
+        disabled={isOnlyOneNode}
+        on:click={() => {
+            handleRemoveNodeClick(nodeContextMenu)
+            nodeContextMenu = undefined
+        }}
+        class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+    >
+        <Text smaller error>{localize('views.settings.configureNodeList.removeNode')}</Text>
+    </button>
 </node-config-options>

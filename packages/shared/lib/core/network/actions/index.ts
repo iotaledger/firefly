@@ -1,5 +1,6 @@
 export * from './addOfficialNodesToClientOptions'
 export * from './getAndUpdateNodeInfo'
 export * from './network-polling'
+export * from './removeNodeFromClientOptions'
 export * from './showNetworkIssueNotification'
 export * from './updateClientOptions'
