@@ -1,6 +1,7 @@
-import { getNodeCandidates, IClientOptions } from '@core/network'
-import { updateActiveProfile } from '@core/profile'
+import { IClientOptions } from '@core/network'
+import { activeProfile, updateActiveProfile } from '@core/profile'
 import { setClientOptions } from '@core/profile-manager'
+import { get } from 'svelte/store'
 
 /**
  * Update the client options for a profile.
@@ -12,21 +13,13 @@ import { setClientOptions } from '@core/profile-manager'
  * @returns {void}
  */
 
-export function updateClientOptions(clientOptions: Partial<IClientOptions>): void {
-    const builtClientOptions = buildClientOptions(clientOptions)
-    if (builtClientOptions?.nodes || builtClientOptions?.primaryNode) {
+export function updateClientOptions(clientOptionsToUpdate: Partial<IClientOptions>): Promise<void> {
+    const currentClientOptions = get(activeProfile)?.clientOptions
+    const clientOptions = { ...currentClientOptions, ...clientOptionsToUpdate }
+    if (clientOptions?.nodes || clientOptions?.primaryNode) {
         updateActiveProfile({ clientOptions })
-        setClientOptions(clientOptions)
+        return setClientOptions(clientOptions)
     } else {
-        throw new Error('Error: Must have at least one node set in the client options')
-    }
-}
-
-function buildClientOptions(clientOptions: Partial<IClientOptions>): IClientOptions {
-    const nodes = getNodeCandidates(clientOptions).map((n) => ({ ...n, network: clientOptions.network }))
-    return {
-        ...clientOptions,
-        nodes,
-        network: clientOptions.network,
+        return Promise.reject('Must have at least one node set in the client options')
     }
 }

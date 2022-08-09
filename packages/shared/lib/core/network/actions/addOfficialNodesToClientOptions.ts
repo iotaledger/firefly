@@ -9,9 +9,6 @@ export function addOfficialNodesToClientOptions(): void {
     const newOfficialNodes = officialNodes.filter(
         (officialNode) => !currentNodes.some((currentNode) => currentNode.url === officialNode.url)
     )
-    const updatedClientOptions = {
-        ...clientOptions,
-        nodes: [...currentNodes, ...newOfficialNodes],
-    }
-    updateClientOptions(updatedClientOptions)
+    const nodes = [...currentNodes, ...newOfficialNodes]
+    void updateClientOptions({ nodes })
 }

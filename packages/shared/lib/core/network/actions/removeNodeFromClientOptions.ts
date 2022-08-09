@@ -2,13 +2,12 @@ import { INode, updateClientOptions } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 
-export function removeNodeFromClientOptions(node: INode): void {
+export async function removeNodeFromClientOptions(node: INode): Promise<void> {
     const clientOptions = get(activeProfile)?.clientOptions
     if (clientOptions?.nodes?.length > 1) {
-        const newNodes = clientOptions?.nodes?.filter((n) => n.url !== node.url)
-        clientOptions.nodes = newNodes
-        updateClientOptions(clientOptions)
+        const nodes = clientOptions?.nodes?.filter((n) => n.url !== node.url)
+        await updateClientOptions({ nodes })
     } else {
-        throw Error('Cannot remove last node')
+        return Promise.reject('Cannot remove last node')
     }
 }

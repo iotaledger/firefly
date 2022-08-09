@@ -51,7 +51,7 @@
                 danger: true,
                 confirmText: localize('actions.removeNode'),
                 onConfirm: () => {
-                    removeNodeFromClientOptions(node)
+                    void removeNodeFromClientOptions(node)
                     closePopup()
                 },
             },
