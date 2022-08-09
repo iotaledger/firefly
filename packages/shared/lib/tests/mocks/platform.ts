@@ -4,6 +4,7 @@ import { EventMap } from '../../typings/events'
 import { AppSettings } from '../../typings/app'
 import { Error } from '../../typings/error'
 import { ActionSheetOptions } from '../../typings/actionSheet'
+import { KeyboardStyle } from '../../typings/keyboard'
 
 const Platform: IPlatform = {
     BarcodeManager: undefined,
@@ -100,6 +101,18 @@ const Platform: IPlatform = {
     },
     showActionSheet(options: ActionSheetOptions): Promise<number> {
         return Promise.resolve(0)
+    },
+    setKeyboardAccessoryBarVisible(isVisible: boolean): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    setKeyboardStyle(style: KeyboardStyle): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    showKeyboard(): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    hideKeyboard(): Promise<void> {
+        return Promise.resolve(undefined)
     },
 }
 

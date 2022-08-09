@@ -388,12 +388,12 @@
     $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
         drawer.close()
         if (drawer.isDrawerOpen() === false) {
-            $backButtonStore.refresh()
+            $backButtonStore.reset()
         }
     }
 
     onMount(() => {
-        $backButtonStore.refresh()
+        $backButtonStore.reset()
 
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
