@@ -3,12 +3,7 @@ import { WalletAccount } from '../typings/wallet'
 import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
 import { canAccountReachMinimumAirdrop } from './account'
 import { getParticipationOverview, getParticipationEvents } from './api'
-import {
-    ASSEMBLY_EVENT_ID,
-    LAST_MILESTONE_BEFORE_TREASURY_EVENT,
-    PARTICIPATION_POLL_DURATION,
-    SHIMMER_EVENT_ID,
-} from './constants'
+import { ASSEMBLY_EVENT_ID, LAST_MILESTONE_BEFORE_TREASURY_EVENT, PARTICIPATION_POLL_DURATION } from './constants'
 import {
     isChangingParticipation,
     isPerformingParticipation,

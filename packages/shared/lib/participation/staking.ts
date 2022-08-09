@@ -2,7 +2,7 @@ import { localize } from '@core/i18n'
 import { convertBech32AddressToEd25519Address } from '@lib/ed25519'
 import { showAppNotification } from '@lib/notifications'
 import { addError } from 'shared/lib/errors'
-import { get } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
 import { networkStatus } from '../networkStatus'
 import { activeProfile, updateProfile } from '../profile'
@@ -21,7 +21,7 @@ import {
     SHIMMER_STAKING_RESULT_FILES,
     STAKING_AIRDROP_TOKENS,
     STAKING_EVENT_IDS,
-    STAKING_RESULT_URL,
+    LOCAL_STAKING_RESULT_URL,
 } from './constants'
 import { participationEvents, stakedAccounts } from './stores'
 import {
@@ -34,6 +34,9 @@ import {
     StakingPeriodJsonResponse,
     StakingPeriodRewards,
 } from './types'
+import { Platform } from '@lib/platform'
+
+export const haveStakingResultsCached = writable<boolean>(null)
 
 /**
  * Determines whether an account is currently being staked or not.
@@ -120,31 +123,32 @@ export function isAirdropAvailable(airdrop: StakingAirdrop): boolean {
  * @returns {string}
  */
 export const formatStakingAirdropReward = (airdrop: StakingAirdrop, amount: number, decimalPlaces: number): string => {
+    if (!amount) {
+        amount = 0
+    }
+
+    if (!decimalPlaces) {
+        decimalPlaces = 0
+    }
+
     const decimalSeparator = getDecimalSeparator(get(activeProfile)?.settings?.currency)
     const thousandthSeparator = decimalSeparator === '.' ? ',' : '.'
 
+    decimalPlaces = clamp(decimalPlaces, 0, 6)
+
+    const [integer, float] = (amount / 1_000_000).toFixed(decimalPlaces).split('.')
+
     let reward: string
-    switch (airdrop) {
-        case StakingAirdrop.Assembly: {
-            decimalPlaces = clamp(decimalPlaces, 0, 6)
-
-            const [integer, float] = (amount / 1_000_000).toFixed(decimalPlaces).split('.')
-            reward = `${delineateNumber(integer, thousandthSeparator)}${
-                Number(float) > 0 ? decimalSeparator + float : ''
-            }`
-
-            break
-        }
-        case StakingAirdrop.Shimmer: {
-            reward = delineateNumber(String(Math.floor(amount)), thousandthSeparator)
-            break
-        }
-        default:
-            reward = '0'
-            break
+    const shouldModifyForGlowUnits = Number(integer) <= 0 && Number(float) > 0 && airdrop === StakingAirdrop.Shimmer
+    if (shouldModifyForGlowUnits) {
+        reward = `${delineateNumber(float, thousandthSeparator)}` ?? '0'
+        return `${reward} glow`
+    } else {
+        reward =
+            `${delineateNumber(integer, thousandthSeparator)}${Number(float) > 0 ? decimalSeparator + float : ''}` ??
+            '0'
+        return `${reward} ${STAKING_AIRDROP_TOKENS[airdrop]}`
     }
-
-    return `${reward} ${STAKING_AIRDROP_TOKENS[airdrop]}`
 }
 
 /**
@@ -269,8 +273,9 @@ async function fetchStakingResult(
     const stakingResultFileName = getStakingResultFileName(airdrop, periodNumber)
 
     try {
-        const stakingResultResponse = await fetch(STAKING_RESULT_URL + stakingResultFileName, getJsonRequestOptions())
-        return await stakingResultResponse.json()
+        return (await Platform.loadJsonFile(
+            LOCAL_STAKING_RESULT_URL + stakingResultFileName
+        )) as StakingPeriodJsonResponse
     } catch (err) {
         try {
             const backupStakingResultResponse = await fetch(
@@ -290,15 +295,6 @@ async function fetchStakingResult(
                 message: localize('error.participation.failedToFetchPreviousRewards'),
             })
         }
-    }
-}
-
-function getAccountStakingRewards(): AccountStakingRewards[] {
-    const cachedStakingRewards = get(activeProfile)?.stakingRewards ?? []
-    if (cachedStakingRewards.length === 0) {
-        return get(get(wallet).accounts).map((account) => ({ accountId: account.id }))
-    } else {
-        return cachedStakingRewards
     }
 }
 
@@ -375,13 +371,26 @@ export async function cacheStakingPeriod(airdrop: StakingAirdrop, periodNumber: 
     const stakingResult = await fetchStakingResult(airdrop, periodNumber)
     if (!stakingResult) return
 
-    const previousStakingRewards = getAccountStakingRewards()
-    const updatedStakingRewards: AccountStakingRewards[] = previousStakingRewards.map(
+    const stakingRewards = getAccountStakingRewards()
+    const updatedStakingRewards: AccountStakingRewards[] = stakingRewards.map(
         (accountStakingRewards: AccountStakingRewards) =>
             updateStakingRewardsForAccount(accountStakingRewards, stakingResult, airdrop, periodNumber)
     )
 
     updateProfile('stakingRewards', updatedStakingRewards)
+}
+
+function getAccountStakingRewards(): AccountStakingRewards[] {
+    const cachedStakingRewards = get(activeProfile)?.stakingRewards ?? []
+    const accountIds = get(get(wallet).accounts).map((account) => account?.id)
+
+    return accountIds.map((accountId, idx) => {
+        if (idx > cachedStakingRewards.length - 1) {
+            return { accountId }
+        } else {
+            return { ...cachedStakingRewards[idx], accountId }
+        }
+    })
 }
 
 function getLastStakingPeriodNumber(airdrop: StakingAirdrop): number {

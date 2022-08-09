@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       debugElectronBuilder:
-        description: "Verbose electron-builder output"     
+        description: "Verbose electron-builder output"
         required: true
         default: "false"
       stage:
@@ -47,7 +47,7 @@ jobs:
     needs: [setup]
     strategy:
       matrix:
-        os: [ubuntu-18.04, macos-10.15, windows-2019]
+        os: [ubuntu-18.04, macos-11, windows-2019]
       fail-fast: false
     env:
       VERSION: ${{ needs.setup.outputs.version }}
@@ -71,21 +71,21 @@ jobs:
       with:
         toolchain: stable
         profile: minimal
-    
+
     - name: Install LLVM and Clang (Windows) # required for bindgen to work, see https://github.com/rust-lang/rust-bindgen/issues/1797
       uses: KyleMayes/install-llvm-action@32c4866ebb71e0949e8833eb49beeebed48532bd
       if: matrix.os == 'windows-2019'
       with:
         version: "11.0"
         directory: ${{ runner.temp }}/llvm
-      
+
     - name: Set LIBCLANG_PATH (Windows)
       run: echo "LIBCLANG_PATH=$((gcm clang).source -replace "clang.exe")" >> $env:GITHUB_ENV
       if: matrix.os == 'windows-2019'
 
     - name: Set deployment target (macOS)
       run: echo "MACOSX_DEPLOYMENT_TARGET=10.12" >> $GITHUB_ENV
-      if: matrix.os == 'macos-10.15'
+      if: matrix.os == 'macos-11'
 
     - name: Install required packages (Linux)
       run: |
@@ -113,24 +113,25 @@ jobs:
       env:
         SENTRY_DSN: ${{ secrets.SENTRY_DSN_PROD_BACKEND }}
         SENTRY_ENVIRONMENT: ${{ env.STAGE }}
-    
+
     - name: Install Sentry CLI
       # Yarn has issues putting binaries in the PATH on Windows
       run: npm i -g @sentry/cli
-      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os != 'macos-10.15' }}
+      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os != 'macos-11' }}
 
-    - name: Strip backend debug info and upload to Sentry (Linux)
-      run: |
-        cp index.node index.node.dbg
-        strip -S index.node
-        objcopy --add-gnu-debuglink=index.node.dbg index.node
-        sentry-cli difutil check index.node.dbg
-        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources index.node.dbg
-        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-desktop" --include-sources index.node.dbg
-      working-directory: packages/backend/bindings/node
-      env:
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'ubuntu-18.04' }}
+#    - name: Strip backend debug info and upload to Sentry (Linux)
+#      run: |
+#        cp index.node index.node.dbg
+#        strip -S index.node
+#        objcopy --add-gnu-debuglink=index.node.dbg index.node
+#        sentry-cli difutil check index.node.dbg
+#        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-backend" --include-sources index.node.dbg
+#        sentry-cli upload-dif -o "iota-foundation-h4" -p "firefly-desktop" --include-sources index.node.dbg
+#      working-directory: packages/backend/bindings/node
+#      env:
+#        SENTRY_LOG_LEVEL: 'debug'
+#        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+#      if: ${{ startsWith(github.ref, 'refs/tags/desktop') && matrix.os == 'ubuntu-18.04' }}
 
     - name: Upload backend debug info to Sentry (Windows)
       run: |
@@ -164,7 +165,7 @@ jobs:
         FIREFLY_APPLE_ID: ${{ secrets.APPLE_ID }}
         FIREFLY_APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
       working-directory: packages/desktop
-      if: matrix.os == 'macos-10.15'
+      if: matrix.os == 'macos-11'
 
     - name: Build Electron app (Windows)
       run: yarn compile:${env:STAGE}:win
@@ -178,7 +179,7 @@ jobs:
       run: yarn compile:${STAGE}:linux
       working-directory: packages/desktop
       if: matrix.os == 'ubuntu-18.04'
-    
+
     - name: Import GPG key (Linux)
       run: |
         echo "$GPG_PRIVATE_KEY" | base64 -d > /tmp/private.key && \
@@ -187,7 +188,7 @@ jobs:
         GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
         GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       if: matrix.os == 'ubuntu-18.04'
-    
+
     - name: Sign AppImage (Linux)
       run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-desktop*.AppImage
       working-directory: packages/desktop/out
@@ -203,7 +204,7 @@ jobs:
     - name: Compute checksums (macOS)
       run: for i in `ls | grep 'firefly-desktop*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
       working-directory: packages/desktop/out
-      if: matrix.os == 'macos-10.15'
+      if: matrix.os == 'macos-11'
 
     - name: Compute checksums (Windows)
       run: Get-ChildItem "." -Filter firefly-desktop* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
@@ -243,7 +244,7 @@ jobs:
     - name: Downloading artifacts
       uses: actions/download-artifact@v2
       with:
-        name: firefly-desktop-macos-10.15
+        name: firefly-desktop-macos-11
         path: assets
 
     - name: Downloading artifacts
@@ -251,7 +252,7 @@ jobs:
       with:
         name: firefly-desktop-ubuntu-18.04
         path: assets
-    
+
     - name: Preparing release body
       run: |
         sed -i 's/\r$//' ../../assets/*.sha256 && sed -i '/^$/d' ../../assets/*.sha256 && sed -i -e 's/\(.*\)/\L\1/' ../../assets/*.sha256
@@ -283,7 +284,7 @@ jobs:
         body_path: packages/desktop/CHANGELOG.md
         draft: true
         prerelease: ${{ env.STAGE != 'prod' }}
-    
+
     - name: Upload macOS binary asset
       uses: actions/upload-release-asset@v1
       env:

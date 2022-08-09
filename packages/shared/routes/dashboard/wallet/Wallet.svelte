@@ -26,6 +26,7 @@
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { haveStakingResultsCached } from 'shared/lib/participation/staking'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import {
         activeProfile,
@@ -47,15 +48,17 @@
         getAccountSyncOptions,
         hasGeneratedALedgerReceiveAddress,
         initializeAccountSyncingQueue,
+        isBackgroundSyncing,
         isFirstSessionSync,
+        isInitialAccountSync,
         isTransferring,
         processAccountSyncingQueue,
         processLoadedAccounts,
         removeEventListeners,
         selectedAccountIdStore,
         selectedAccountStore,
-        selectedMessage,
         transferState,
+        selectedMessage,
         wallet,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
@@ -126,27 +129,45 @@
     $: if (accountSyncingQueueLength > 0) {
         void processAccountSyncingQueue()
     } else {
-        if (get(isFirstSessionSync) && $accountSyncingQueueStore !== null) {
+        if ($isFirstSessionSync && $accountSyncingQueueStore !== null) {
             isFirstSessionSync.set(false)
         }
     }
 
     async function loadAccounts(): Promise<void> {
-        const loadedAccounts = await asyncGetAccounts()
-
         try {
-            if (loadedAccounts.length <= 0) {
-                const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
-                await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+            const loadedAccounts = await asyncGetAccounts()
+            await processLoadedAccounts(loadedAccounts)
+            setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+            accountsLoaded.set(true)
+            const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
 
-                if ($isFirstSessionSync) {
-                    isFirstSessionSync.set(false)
-                }
+            if (isInitialAccountSync()) {
+                await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+                isFirstSessionSync.set(false)
             } else {
-                await processLoadedAccounts(loadedAccounts)
-                setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
-                accountsLoaded.set(true)
                 initializeAccountSyncingQueue()
+            }
+            if (!get(isBackgroundSyncing)) {
+                api.startBackgroundSync(
+                    {
+                        secs: 30,
+                        nanos: 0,
+                    },
+                    true,
+                    gapLimit,
+                    {
+                        onSuccess() {
+                            isBackgroundSyncing.set(true)
+                        },
+                        onError(err) {
+                            showAppNotification({
+                                type: 'error',
+                                message: localize('error.account.syncing'),
+                            })
+                        },
+                    }
+                )
             }
         } catch (err) {
             if ($isLedgerProfile) {
@@ -510,11 +531,13 @@
                     <DashboardPane classes="w-full">
                         {#if $walletRoute === WalletRoute.Assets}
                             <div class="h-full" in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 200 }}>
-                                <AccountAssets
-                                    {scroll}
-                                    {scrollDetection}
-                                    bottomOffset="{bottomNavigation?.getHeight()}px"
-                                />
+                                {#key $haveStakingResultsCached}
+                                    <AccountAssets
+                                        {scroll}
+                                        {scrollDetection}
+                                        bottomOffset="{bottomNavigation?.getHeight()}px"
+                                    />
+                                {/key}
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
                             <div class="h-full" in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 200 }}>
@@ -553,7 +576,9 @@
                                 </div>
                             {/if}
                             {#if $accountRoute === AccountRoute.Init}
-                                <AccountAssets />
+                                {#key $haveStakingResultsCached}
+                                    <AccountAssets />
+                                {/key}
                             {:else if $accountRoute === AccountRoute.Send}
                                 <Send {onSend} {onInternalTransfer} />
                             {:else if $accountRoute === AccountRoute.Receive}

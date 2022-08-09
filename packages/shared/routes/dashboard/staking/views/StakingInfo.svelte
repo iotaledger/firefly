@@ -150,7 +150,7 @@
     }
 
     function onClickLearnMore(): void {
-        Platform.openUrl('https://blog.iota.org/iota-staking-for-assembly-continues/')
+        Platform.openUrl('https://blog.iota.org/iota-staking-for-assembly-part-3/')
     }
 </script>
 
