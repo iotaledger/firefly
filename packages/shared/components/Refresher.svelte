@@ -3,46 +3,79 @@
     import { tweened } from 'svelte/motion'
     import { quintOut } from 'svelte/easing'
     import tailwindConfig from 'shared/tailwind.config.js'
-    import { sleep } from '@lib/utils'
 
-    export let platform = 'ios'
+    export let platform = 'android'
     export let callback = async (): Promise<void> => {}
 
-    const swipeMax = window.screen.availHeight / 2
+    const SWIPE_MAX = window.screen.availHeight / 2
+    const DEFAULT_ANIMATION_DURATION = 350
+    const DEFAULT_ANIMATION_VALUES =
+        platform === 'android'
+            ? {
+                  opacity: 0,
+                  position: 0,
+                  rotation: 0,
+                  scale: 1,
+                  draw: 0,
+                  arrowScale: 0,
+              }
+            : platform === 'ios'
+            ? {
+                  position: 0,
+              }
+            : null
+    const IOS_REFRESHER_SIZE = 54 // in px
 
-    const opacityEasing = (n: number) => Math.max(Math.min(positionEasing(n) / (swipeMax / 6) - 0.5, 1), 0.5)
-    const positionEasing = (n: number) => (n * (Math.log(2 + (swipeMax - n) / swipeMax) / Math.log(2))) / 2
-    const rotationEasing = (n: number) => (positionEasing(n) / (swipeMax / 6)) * 360 - 180
-    const drawEasing = (n: number) => (positionEasing(n) / (swipeMax / 6)) * 1000 - 500
-    const arrowScaleEasing = (n: number) => Math.min(positionEasing(n) / (swipeMax / 6) - 0.5, 1)
+    const opacityEasing = (n: number) => Math.max(Math.min(positionEasing(n) / (SWIPE_MAX / 6) - 0.5, 1), 0.5)
+    const positionEasing = (n: number) => (n * (Math.log(2 + (SWIPE_MAX - n) / SWIPE_MAX) / Math.log(2))) / 2
+    const rotationEasing = (n: number) => (positionEasing(n) / (SWIPE_MAX / 6)) * 360 - 180
+    const drawEasing = (n: number) => (positionEasing(n) / (SWIPE_MAX / 6)) * 1000 - 500
+    const arrowScaleEasing = (n: number) => Math.min(positionEasing(n) / (SWIPE_MAX / 6) - 0.5, 1)
+
+    const animationValues = tweened(DEFAULT_ANIMATION_VALUES, {
+        duration: DEFAULT_ANIMATION_DURATION,
+        easing: quintOut,
+    })
 
     let startY = 0
     let y = 0
     let isRefreshing = false
-
-    const animationValues = tweened(
-        {
-            opacity: 0,
-            position: 0,
-            rotation: 0,
-            scale: 1,
-            draw: 0,
-            arrowScale: 0,
-        },
-        {
-            duration: 350,
-            easing: quintOut,
-        }
-    )
 
     $: {
         if ($animationValues.scale === 0) {
             resetValues(0)
         }
 
-        if (platform === 'ios' && $animationValues.position >= swipeMax / 2.5) {
+        if (platform === 'ios' && $animationValues.position >= SWIPE_MAX / 2.5) {
             callRefresh().then(() => resetValues())
         }
+    }
+
+    function setAnimationValues(
+        animationValuesObject: Record<string, unknown>,
+        duration: number = DEFAULT_ANIMATION_DURATION
+    ): void {
+        animationValues.set(
+            {
+                ...$animationValues,
+                ...animationValuesObject,
+            },
+            { duration }
+        )
+    }
+
+    function resetValues(duration: number = DEFAULT_ANIMATION_DURATION): void {
+        startY = 0
+        y = 0
+        setAnimationValues(DEFAULT_ANIMATION_VALUES, duration)
+    }
+
+    async function callRefresh(): Promise<void> {
+        isRefreshing = true
+        platform === 'android' && setAnimationValues({ position: SWIPE_MAX / 3 })
+        await callback()
+        platform === 'android' && setAnimationValues({ scale: 0 })
+        isRefreshing = false
     }
 
     function onTouchStart(event: TouchEvent): void {
@@ -52,44 +85,30 @@
 
     function onTouchMove(event: TouchEvent): void {
         const clientY = event.touches[0].clientY
-        y = clientY > swipeMax ? swipeMax : clientY
+        y = clientY > SWIPE_MAX ? SWIPE_MAX : clientY
         const movedY = y - startY
 
-        switch (platform) {
-            case 'android':
-                animationValues.set(
-                    {
-                        ...$animationValues,
-                        opacity: opacityEasing(movedY),
-                        position: positionEasing(movedY),
-                        rotation: rotationEasing(movedY),
-                        draw: drawEasing(movedY),
-                        arrowScale: arrowScaleEasing(movedY),
-                    },
-                    {
-                        duration: 0,
-                    }
-                )
-                break
-            case 'ios':
-                animationValues.set(
-                    {
-                        ...$animationValues,
-                        position: positionEasing(movedY),
-                    },
-                    {
-                        duration: 0,
-                    }
-                )
-                break
+        if (platform === 'android') {
+            setAnimationValues(
+                {
+                    opacity: opacityEasing(movedY),
+                    position: positionEasing(movedY),
+                    rotation: rotationEasing(movedY),
+                    draw: drawEasing(movedY),
+                    arrowScale: arrowScaleEasing(movedY),
+                },
+                0
+            )
+        } else if (platform === 'ios') {
+            setAnimationValues({ position: positionEasing(movedY) }, 0)
         }
     }
 
     function onTouchEnd(event: TouchEvent): void {
         if (platform === 'android' && $animationValues.opacity === 1) {
-            callRefresh().then(() => resetValues(0))
+            callRefresh()
         } else if (platform === 'ios' && isRefreshing) {
-            $animationValues = { ...$animationValues, position: swipeMax / 8 }
+            setAnimationValues({ position: SWIPE_MAX / 8 })
         } else {
             resetValues()
         }
@@ -97,34 +116,6 @@
 
     function onTouchCancel(event: TouchEvent): void {
         resetValues()
-    }
-
-    function resetValues(duration: number = 350): void {
-        startY = 0
-        y = 0
-        animationValues.set(
-            {
-                opacity: 0,
-                position: 0,
-                rotation: 0,
-                scale: 1,
-                draw: 0,
-                arrowScale: 0,
-            },
-            { duration }
-        )
-    }
-
-    async function callRefresh(): Promise<void> {
-        isRefreshing = true
-        if (platform === 'android') {
-            $animationValues = { ...$animationValues, position: swipeMax / 3 }
-        }
-        await callback()
-        isRefreshing = false
-        if (platform === 'android') {
-            $animationValues = { ...$animationValues, scale: 0 }
-        }
     }
 
     onMount(() => {
@@ -145,8 +136,11 @@
 {#if platform === 'ios'}
     <ios-refresher
         class:is-refreshing={isRefreshing}
+        style:--ios-refresher-size={IOS_REFRESHER_SIZE + 'px'}
         style:--margin-bottom={$animationValues.position + 'px'}
-        style:--margin-top={($animationValues.position > 54 ? 0 : $animationValues.position - 54) + 'px'}
+        style:--margin-top={($animationValues.position > IOS_REFRESHER_SIZE
+            ? 0
+            : $animationValues.position - IOS_REFRESHER_SIZE) + 'px'}
     >
         {#each Array(12) as _, i}
             <span
@@ -154,7 +148,7 @@
                 data-index={i}
                 style:transform="rotate({i * 30}deg) translate(0, -130%)"
                 style:animation-delay={-1 + i / 12 + 's'}
-                hidden={!isRefreshing && (swipeMax / 3) * (i / 12) >= $animationValues.position - 30}
+                hidden={!isRefreshing && (SWIPE_MAX / 3) * (i / 12) >= $animationValues.position - 30}
             />
         {/each}
     </ios-refresher>
@@ -173,18 +167,18 @@
 
 <style type="text/scss">
     ios-refresher {
+        align-items: center;
         border-radius: 10px;
         display: flex;
+        height: var(--ios-refresher-size);
         justify-content: center;
-        align-items: center;
-        height: 54px;
         margin-bottom: var(--margin-bottom);
         margin-left: auto;
         margin-right: auto;
         margin-top: var(--margin-top);
         padding: 10px;
         position: relative;
-        width: 54px;
+        width: var(--ios-refresher-size);
         z-index: 999;
 
         .bar {
@@ -302,8 +296,17 @@
             }
 
             &::after {
-                animation: borderProgressInOut 1.5s linear infinite, rotate 1.5s linear infinite;
+                animation: rotate 1.5s linear infinite, borderProgressInOut 1.5s linear infinite;
                 border: 3px solid var(--color);
+            }
+
+            @keyframes rotate {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
             }
 
             @keyframes borderProgressInOut {
@@ -338,15 +341,6 @@
                     clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
                 }
             }
-        }
-    }
-
-    @keyframes rotate {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
         }
     }
 </style>
