@@ -31,7 +31,7 @@
         showAppNotification,
     } from 'shared/lib/notifications'
     import { stopParticipationPoll, startParticipationPoll, StakingAirdrop } from 'shared/lib/participation'
-    import { cacheAllStakingPeriods, haveStakingResultsCached } from 'shared/lib/participation/staking'
+    import { cacheAllStakingPeriods } from 'shared/lib/participation/staking'
     import { pendingParticipations, resetPerformingParticipation } from 'shared/lib/participation/stores'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -45,6 +45,7 @@
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
+        haveStakingResultsCached,
     } from 'shared/lib/wallet'
     import { Governance, Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount, setContext } from 'svelte'

@@ -1,3 +1,7 @@
+import { localize } from '@core/i18n'
+import { displayErrorEventToUser } from '@lib/errors'
+import { setProfileAccount } from 'shared/lib/profile'
+
 import type {
     ErrorEventPayload,
     Event,
@@ -7,9 +11,6 @@ import type {
     TransferProgressEventData,
     TransferState,
 } from 'shared/lib/typings/events'
-import { localize } from '@core/i18n'
-import { displayErrorEventToUser } from '@lib/errors'
-import { setProfileAccount } from 'shared/lib/profile'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { derived, get, Writable, writable } from 'svelte/store'
@@ -20,7 +21,6 @@ import { didInitialiseMigrationListeners } from './migration'
 import { buildClientOptions, getDefaultClientOptions } from './network'
 import { showAppNotification } from './notifications'
 // PARTICIPATION
-import { haveStakingResultsCached } from './participation'
 import { Platform } from './platform'
 import { activeProfile, updateProfile } from './profile'
 import { WALLET, WalletApi } from './shell/walletApi'
@@ -36,6 +36,8 @@ import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
+
+export const haveStakingResultsCached = writable<boolean>(null)
 
 export const MAX_ACCOUNT_NAME_LENGTH = 20
 export const MAX_PASSWORD_LENGTH = 256

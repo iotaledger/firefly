@@ -36,8 +36,6 @@ import {
 } from './types'
 import { Platform } from '@lib/platform'
 
-export const haveStakingResultsCached = writable<boolean>(null)
-
 /**
  * Determines whether an account is currently being staked or not.
  *
