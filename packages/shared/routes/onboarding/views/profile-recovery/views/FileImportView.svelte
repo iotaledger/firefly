@@ -87,7 +87,7 @@
         <Text type="p" secondary classes="mb-8">{localize('views.importFromFile.body')}</Text>
         {#if !$mobile}
             <Dropzone
-                {importFileName}
+                fileName={importFileName}
                 {allowedExtensions}
                 onDrop={handleFileSelect}
                 bind:dropping
