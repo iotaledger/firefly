@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, Button, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -40,72 +40,50 @@
         >
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
-        <Button
+        <OnboardingButton
+            primaryText={localize('views.import.importSeed')}
+            secondaryText={!$mobile ? localize('views.import.importSeedDescription') : ''}
             icon="seed"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.migrateSeed?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.migrateSeed?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Seed)}
-        >
-            {localize('views.import.importSeed')}
-            {#if !$mobile}
-                <Text type="p" secondary smaller>{localize('views.import.importSeedDescription')}</Text>
-            {/if}
-        </Button>
-        <Button
+        />
+        <OnboardingButton
+            primaryText={localize('views.import.importMnemonic')}
+            secondaryText={!$mobile ? localize('views.import.importMnemonicDescription') : ''}
             icon="language"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.recoveryPhrase?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Mnemonic)}
-        >
-            {localize('views.import.importMnemonic')}
-            {#if !$mobile}
-                <Text type="p" secondary smaller>{localize('views.import.importMnemonicDescription')}</Text>
-            {/if}
-        </Button>
-        <Button
+        />
+        <OnboardingButton
+            primaryText={localize(`views.import.importFile.${$onboardingProfile?.networkProtocol}`)}
+            secondaryText={!$mobile
+                ? localize(`views.import.importFileDescription.${$onboardingProfile?.networkProtocol}`)
+                : ''}
             icon="file"
-            classes="w-full"
-            secondary
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.strongholdBackup?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Stronghold)}
-        >
-            {localize(`views.import.importFile.${$onboardingProfile?.networkProtocol}`)}
-            {#if !$mobile}
-                <Text type="p" secondary smaller>
-                    {localize(`views.import.importFileDescription.${$onboardingProfile?.networkProtocol}`)}
-                </Text>
-            {/if}
-        </Button>
+        />
         {#if !$mobile}
-            <Button
+            <OnboardingButton
+                primaryText={localize('views.import.importLedger')}
+                secondaryText={localize(`views.import.importLedgerDescription.${$onboardingProfile?.networkProtocol}`)}
                 icon="chip"
-                classes="w-full mb-8"
-                secondary
                 hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                     ?.restoreProfile?.ledgerBackup?.hidden}
                 disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[
                     $onboardingProfile?.networkType
                 ]?.restoreProfile?.ledgerBackup?.enabled}
                 onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Ledger)}
-            >
-                {localize('views.import.importLedger')}
-                {#if !$mobile}
-                    <Text type="p" secondary smaller>
-                        {localize(`views.import.importLedgerDescription.${$onboardingProfile?.networkProtocol}`)}
-                    </Text>
-                {/if}
-            </Button>
+            />
         {/if}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
