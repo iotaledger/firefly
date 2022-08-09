@@ -1,16 +1,16 @@
 <script lang="typescript">
     import { NetworkProtocol } from '@core/network'
-    import { selectedAccountAssets } from '@core/wallet'
+    import { visibleSelectedAccountAssets } from '@core/wallet'
     import { AssetTile, Icon, Text, AssetIcon } from 'shared/components'
     import { FontWeightText } from 'shared/components/Text.svelte'
     import { clickOutside } from 'shared/lib/actions'
 
-    export let asset = $selectedAccountAssets?.baseCoin
+    export let asset = $visibleSelectedAccountAssets?.baseCoin
 
     let isDropdownOpen = false
     let icon: string
 
-    $: hasMultipleAssets = $selectedAccountAssets?.nativeTokens.length >= 1
+    $: hasMultipleAssets = $visibleSelectedAccountAssets?.nativeTokens.length >= 1
     $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
         case NetworkProtocol.IOTA:
         case NetworkProtocol.Shimmer:
@@ -68,14 +68,14 @@
                 <ul class="overflow-y-auto h-full -mr-2 pr-2 scroll-secondary">
                     <li>
                         <AssetTile
-                            onClick={() => handleAssetClick($selectedAccountAssets?.baseCoin)}
-                            asset={$selectedAccountAssets?.baseCoin}
+                            onClick={() => handleAssetClick($visibleSelectedAccountAssets?.baseCoin)}
+                            asset={$visibleSelectedAccountAssets?.baseCoin}
                             overrideColor
                             classes="bg-white hover:bg-gray-50 dark:bg-transparent"
                             squashed
                         />
                     </li>
-                    {#each $selectedAccountAssets?.nativeTokens as nativeToken}
+                    {#each $visibleSelectedAccountAssets?.nativeTokens as nativeToken}
                         <li>
                             <AssetTile
                                 onClick={() => handleAssetClick(nativeToken)}

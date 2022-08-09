@@ -4,15 +4,17 @@ export interface ActivityFilter {
     amount: NumberFilterUnit
     status: SelectionFilterUnit
     type: SelectionFilterUnit
-    showHidden: BooleanFilterUnit
+    asset: AssetFilterUnit
+    showRejected: SelectionFilterUnit
+    showHidden: SelectionFilterUnit
 }
 
 export interface AssetFilter {
     verificationStatus: SelectionFilterUnit
-    showHidden: BooleanFilterUnit
+    showHidden: SelectionFilterUnit
 }
 
-export type FilterUnit = BooleanFilterUnit | SelectionFilterUnit | NumberFilterUnit
+export type FilterUnit = SelectionFilterUnit | NumberFilterUnit | AssetFilterUnit
 
 export type BooleanFilterUnit = {
     type: 'boolean'
@@ -35,6 +37,18 @@ export type NumberFilterUnit = {
     selected: NumberFilterType
     choices: NumberFilterType[]
     subunit: NumberFilterInput
+}
+
+export enum BooleanFilterOptions {
+    Yes = 'yes',
+    No = 'no',
+}
+
+export type AssetFilterUnit = {
+    type: 'asset'
+    active: boolean
+    localeKey: string
+    selected: string
 }
 
 export type NumberFilterInput = SingleNumberFilterInput | RangeNumberFilterInput

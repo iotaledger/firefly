@@ -1268,13 +1268,23 @@
     "filters":{
         "title": "Filters",
         "showHidden": {
-            "label": "Show hidden"
+            "label": "Show hidden",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "showRejected": {
+            "label": "Show rejected",
+            "yes": "Yes",
+            "no": "No"
         },
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
             "notVerified": "Not verified",
             "verified": "Verified"
+        },
+        "asset": {
+            "label": "Assets"
         },
         "amount": {
             "label": "Amount",

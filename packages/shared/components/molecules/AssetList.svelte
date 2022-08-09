@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { assetFilter, IAccountAssets, IAsset } from '@core/wallet'
+    import { isFilteredAsset } from '@core/wallet/utils/isFilteredAsset'
     import { openPopup } from '@lib/popup'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text, Filter } from 'shared/components'
@@ -9,12 +10,14 @@
     export let assets: IAccountAssets
 
     let assetList: IAsset[]
-    $: {
+    $: $assetFilter, assets, updateFilteredAssetList()
+
+    function updateFilteredAssetList() {
         const list = []
-        if (assets?.baseCoin) {
+        if (assets?.baseCoin && !isFilteredAsset(assets?.baseCoin)) {
             list.push(assets.baseCoin)
         }
-        list.push(...assets?.nativeTokens)
+        list.push(...assets?.nativeTokens.filter((_nativeToken) => !isFilteredAsset(_nativeToken)))
         assetList = list
     }
 
@@ -31,7 +34,7 @@
 
 {#if assets}
     <div class="asset-list h-full p-6 flex flex-auto flex-col flex-grow flex-shrink-0">
-        <div class="w-full flex flex-row justify-between mb-4">
+        <div class="w-full flex flex-row justify-between items-center mb-4">
             <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
         </div>

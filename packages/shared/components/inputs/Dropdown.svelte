@@ -143,7 +143,7 @@
     >
         <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
             <Text classes="overflow-hidden" type={valueTextType} smaller>
-                {search || value || placeholder}
+                {search || value || placeholder || ''}
             </Text>
         </div>
         <Icon
