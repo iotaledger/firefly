@@ -86,25 +86,21 @@
         />
     </div>
 
-    {#if filterUnit.active && filterUnit.type !== 'boolean'}
-        <div class="bg-gray-50 px-4 py-3">
-            {#if filterUnit.type === 'selection' || filterUnit.type === 'number' || filterUnit.type === 'asset'}
-                <Dropdown {value} items={choices} {onSelect} small />
+    {#if filterUnit.active}
+        <div class="bg-gray-50 px-4 py-3 dark:bg-transparent">
+            <Dropdown {value} items={choices} {onSelect} small />
 
-                {#if filterUnit.type === 'number' && filterUnit.selected}
-                    <div class="flex flex-row items-center space-x-2 mt-2">
-                        <Icon height="24" width="20" icon="arrow-right" />
-                        {#if filterUnit.subunit.type === 'range'}
-                            <NumberInput bind:value={filterUnit.subunit.start} autofocus placeholder="" />
-                            <Text>{localize('general.and')}</Text>
-                            <NumberInput bind:value={filterUnit.subunit.end} placeholder="" />
-                        {:else}
-                            <NumberInput bind:value={filterUnit.subunit.amount} autofocus placeholder="" />
-                        {/if}
-                    </div>
-                {/if}
-            {:else}
-                <!-- else content here -->
+            {#if filterUnit.type === 'number' && filterUnit.selected}
+                <div class="flex flex-row items-center space-x-2 mt-2">
+                    <Icon height="24" width="20" icon="arrow-right" />
+                    {#if filterUnit.subunit.type === 'range'}
+                        <NumberInput bind:value={filterUnit.subunit.start} autofocus placeholder="" />
+                        <Text>{localize('general.and')}</Text>
+                        <NumberInput bind:value={filterUnit.subunit.end} placeholder="" />
+                    {:else}
+                        <NumberInput bind:value={filterUnit.subunit.amount} autofocus placeholder="" />
+                    {/if}
+                </div>
             {/if}
         </div>
     {/if}
