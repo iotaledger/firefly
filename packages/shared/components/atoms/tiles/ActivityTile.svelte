@@ -7,7 +7,7 @@
         ActivityDirection,
         claimActivity,
         ActivityType,
-        hideActivity,
+        rejectActivity,
         InclusionState,
         VerificationStatus,
         selectedAccountAssets,
@@ -59,7 +59,7 @@
                 warning: true,
                 confirmText: localize('actions.reject'),
                 onConfirm: () => {
-                    hideActivity(activity?.id)
+                    rejectActivity(activity?.id)
                     closePopup()
                 },
             },
@@ -138,8 +138,11 @@
                     <div class="flex flex-row justify-end w-1/2 space-x-2">
                         {#if isIncomingActivityUnclaimed}
                             <button
-                                disabled={activity.isClaiming}
-                                class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
+                                disabled={activity.isClaiming || activity.isRejected}
+                                class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent 
+                                {activity.isClaiming || activity.isRejected
+                                    ? 'cursor-default text-gray-500'
+                                    : 'cursor-pointer hover:bg-blue-200'}"
                                 on:click|stopPropagation={handleRejectClick}
                             >
                                 {localize('actions.reject')}
