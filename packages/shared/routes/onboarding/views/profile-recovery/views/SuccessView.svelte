@@ -3,7 +3,6 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '@core/router'
-    import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
     function handleBackClick(): void {
         $profileRecoveryRouter.previous()
@@ -28,13 +27,7 @@
         <Button classes="w-full" onClick={handleContinueClick}>{localize('actions.continue')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation
-            classes="setup-anim-aspect-ratio"
-            animation={$onboardingProfile?.recoveryType === ProfileRecoveryType.Seed ||
-            $onboardingProfile?.recoveryType === ProfileRecoveryType.Mnemonic
-                ? 'import-from-text-success-desktop'
-                : 'import-from-file-success-desktop'}
-        />
+        <Animation classes="setup-anim-aspect-ratio" animation="success-desktop" />
     </div>
 </OnboardingLayout>
 
