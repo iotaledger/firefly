@@ -68,6 +68,7 @@
     let fundsSoonNotificationId
     let developerProfileNotificationId
     let showTopNav = false
+    let os
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
@@ -156,7 +157,7 @@
         )
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (shouldVisitStaking()) {
             updateProfile('hasVisitedStaking', false)
             updateProfile('lastAssemblyPeriodVisitedStaking', CURRENT_ASSEMBLY_STAKING_PERIOD)
@@ -208,6 +209,8 @@
         })
 
         Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+
+        os = await Platform.getOS()
     })
 
     onDestroy(() => {
@@ -412,7 +415,7 @@
     <div class="flex flex-col w-full h-full bg-white dark:bg-gray-800">
         <MainMenu />
         {#if $mobile}
-            <Refresher callback={() => asyncSyncAccount($selectedAccountStore)} platform={Platform.getOS()} />
+            <Refresher callback={() => asyncSyncAccount($selectedAccountStore)} platform={os} />
         {/if}
         <TopNavigation {onCreateAccount} />
         <!-- Dashboard Pane -->

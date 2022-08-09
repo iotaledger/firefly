@@ -23,7 +23,7 @@
             ? {
                   position: 0,
               }
-            : null
+            : {}
     const IOS_REFRESHER_SIZE = 54 // px
 
     const opacityEasing = (n: number) => Math.max(Math.min(positionEasing(n) / (SWIPE_MAX / 6) - 0.5, 1), 0.5)
