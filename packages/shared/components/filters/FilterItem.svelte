@@ -3,7 +3,7 @@
     import { NumberInput, Checkbox, Dropdown, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { DropdownChoice } from '@core/utils'
-    import { selectedAccountAssets } from '@core/wallet'
+    import { visibleSelectedAccountAssets } from '@core/wallet'
 
     export let filterUnit: FilterUnit
 
@@ -14,13 +14,15 @@
             value: choice,
         }))
     } else if (filterUnit.type === 'asset') {
-        choices = [$selectedAccountAssets.baseCoin, ...$selectedAccountAssets.nativeTokens].map((choice) => ({
-            label: choice.metadata.name,
-            value: choice.metadata.name,
-        }))
+        choices = [$visibleSelectedAccountAssets.baseCoin, ...$visibleSelectedAccountAssets.nativeTokens].map(
+            (choice) => ({
+                label: choice.metadata.name,
+                value: choice.metadata.name,
+            })
+        )
 
         if (!filterUnit.selected) {
-            filterUnit.selected = $selectedAccountAssets.baseCoin.id
+            filterUnit.selected = $visibleSelectedAccountAssets.baseCoin.id
         }
     }
 
@@ -29,11 +31,11 @@
         value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
     } else if (filterUnit.type === 'asset') {
         const assetId = filterUnit.selected
-        if (assetId === $selectedAccountAssets.baseCoin.id) {
-            value = $selectedAccountAssets.baseCoin?.metadata.name
+        if (assetId === $visibleSelectedAccountAssets.baseCoin.id) {
+            value = $visibleSelectedAccountAssets.baseCoin?.metadata.name
         } else {
-            value = $selectedAccountAssets.nativeTokens.find((_nativeToken) => _nativeToken.id === assetId)?.metadata
-                .name
+            value = $visibleSelectedAccountAssets.nativeTokens.find((_nativeToken) => _nativeToken.id === assetId)
+                ?.metadata.name
         }
     }
 
@@ -64,10 +66,10 @@
             updateSubUnitForNumberFilter()
         } else if (filterUnit.type === 'asset') {
             let asset = undefined
-            if (item.value === $selectedAccountAssets.baseCoin.metadata.name) {
-                asset = $selectedAccountAssets.baseCoin
+            if (item.value === $visibleSelectedAccountAssets.baseCoin.metadata.name) {
+                asset = $visibleSelectedAccountAssets.baseCoin
             } else {
-                asset = $selectedAccountAssets.nativeTokens.find(
+                asset = $visibleSelectedAccountAssets.nativeTokens.find(
                     (_nativeToken) => _nativeToken.metadata.name === item.value
                 )
             }
