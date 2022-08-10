@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { HR, Text } from 'shared/components'
+    import { HR, MenuItem } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { localize } from '@core/i18n'
     import {
@@ -22,8 +22,7 @@
     $: isOfficialNode = getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType).some(
         (n) => n.url === nodeContextMenu?.url
     )
-    $: isOnlyOneNode = clientOptions?.nodes?.length === 1
-    $: allowToggleDisabled =
+    $: allowDisableOrRemove =
         nodeContextMenu?.disabled || clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
 
     function handleViewNodeInfoClick(node: INode): void {
@@ -95,35 +94,28 @@
     on:clickOutside={() => (nodeContextMenu = undefined)}
     style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}
 >
-    <button
-        on:click={() => handleViewNodeInfoClick(nodeContextMenu)}
-        class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-    >
-        <Text smaller>{localize('views.settings.configureNodeList.viewInfo')}</Text>
-    </button>
-
-    <button
+    <MenuItem
+        title={localize('views.settings.configureNodeList.viewInfo')}
+        onClick={() => handleViewNodeInfoClick(nodeContextMenu)}
+        first
+    />
+    <MenuItem
+        title={localize('views.settings.configureNodeList.editDetails')}
+        onClick={() => handleEditNodeDetailsClick(nodeContextMenu)}
         disabled={isOfficialNode}
-        on:click={() => handleEditNodeDetailsClick(nodeContextMenu)}
-        class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-    >
-        <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
-    </button>
-    <button
-        disabled={!allowToggleDisabled}
-        on:click={() => handleToggleDisabledNodeClick(nodeContextMenu)}
-        class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-    >
-        <Text smaller>
-            {localize(`views.settings.configureNodeList.${nodeContextMenu.disabled ? 'include' : 'exclude'}Node`)}
-        </Text>
-    </button>
+    />
+    <MenuItem
+        disabled={!allowDisableOrRemove}
+        title={localize(`views.settings.configureNodeList.${nodeContextMenu.disabled ? 'include' : 'exclude'}Node`)}
+        onClick={() => handleToggleDisabledNodeClick(nodeContextMenu)}
+        last
+    />
     <HR />
-    <button
-        disabled={isOnlyOneNode}
-        on:click={() => handleRemoveNodeClick(nodeContextMenu)}
-        class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-    >
-        <Text smaller error>{localize('views.settings.configureNodeList.removeNode')}</Text>
-    </button>
+    <MenuItem
+        disabled={!allowDisableOrRemove}
+        title={localize('views.settings.configureNodeList.removeNode')}
+        onClick={() => handleRemoveNodeClick(nodeContextMenu)}
+        first
+        last
+    />
 </node-config-options>
