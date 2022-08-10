@@ -1,7 +1,7 @@
 import { IPersistedProfile } from '@core/profile'
 
 import { ProfileProtectionType, ProfileRecoveryType, ProfileSetupType } from '../enums'
-import { ImportFile } from '../types'
+import { ImportFile, Mnemonic } from '../types'
 
 export interface IOnboardingProfile extends IPersistedProfile {
     setupType: ProfileSetupType
@@ -9,7 +9,7 @@ export interface IOnboardingProfile extends IPersistedProfile {
     protectionType?: ProfileProtectionType
     importFile?: ImportFile
     importFilePath?: string
-    mnemonic?: string[]
+    mnemonic?: Mnemonic
     strongholdPassword?: string
     mustVisitProfileName?: boolean
     hasStoredMnemonic?: boolean

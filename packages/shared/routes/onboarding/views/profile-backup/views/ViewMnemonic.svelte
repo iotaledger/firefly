@@ -4,8 +4,11 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import { generateAndStoreMnemonic } from '@lib/wallet'
+    import {
+        onboardingProfile,
+        generateMnemonicForOnboardingProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { downloadRecoveryKit } from '@lib/utils'
 
     const busy = false
@@ -31,7 +34,7 @@
     }
 
     onMount(() => {
-        generateAndStoreMnemonic()
+        generateMnemonicForOnboardingProfile()
     })
 </script>
 

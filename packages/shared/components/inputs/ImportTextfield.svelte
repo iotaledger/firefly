@@ -4,6 +4,7 @@
     import { localize } from '@core/i18n'
     import { verifyMnemonic } from '@core/profile-manager'
     import { debounce } from '@lib/utils'
+    import { Mnemonic } from '../../lib/contexts/onboarding'
 
     enum Type {
         Seed = 'seed',
@@ -32,7 +33,7 @@
         }
     }
 
-    const isMnemonic = (words: string[]): string | undefined => {
+    const isMnemonic = (words: Mnemonic): string | undefined => {
         if (words.length !== 24) {
             return localize('error.backup.phraseWordCount', {
                 values: {

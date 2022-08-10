@@ -5,11 +5,11 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
-    import { onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
+    import { Mnemonic, onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
 
     export let busy = false
 
-    const verifyRecoveryPhrase: string[] = []
+    const verifyRecoveryPhrase: Mnemonic = []
 
     let wordChoices = ['', '', '']
     let verifyIndex = 0
@@ -25,12 +25,12 @@
         wordChoices = [actualWord, random1, random2].sort(() => 0.5 - Math.random())
     }
 
-    function generateRandomWord(excludeWords: string[]): string {
+    function generateRandomWord(excludedWords: string[]): string {
         let word: string
 
         do {
             const wordIndex = Math.floor(Math.random() * english.length)
-            if (!excludeWords.includes(english[wordIndex])) {
+            if (!excludedWords.includes(english[wordIndex])) {
                 word = english[wordIndex]
             }
         } while (!word)
