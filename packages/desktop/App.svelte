@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
-    import { AppRoute, appRouter, DashboardRoute, dashboardRouter, initRouters, openSettings } from '@core/router'
+    import { AppRoute, appRouter, DashboardRoute, dashboardRouter, initialiseRouters, openSettings } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import {
         appSettings,
@@ -60,7 +60,7 @@
     onMount(async () => {
         setTimeout(() => {
             splash = false
-            initRouters()
+            initialiseRouters()
         }, 3000)
 
         initAppSettings.set($appSettings)

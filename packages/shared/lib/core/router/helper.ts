@@ -28,37 +28,37 @@ import {
     StrongholdSetupRouter,
 } from './subrouters'
 
-export function initRouters(): void {
+export function initialiseRouters(): void {
     /**
      * CAUTION: It is important that subrouters are initialized
      * AFTER the base routers, since each subrouter relies on the
      * its parent router's store during construction.
      */
-    initBaseRouters()
-    initSubrouters()
+    initialiseBaseRouters()
+    initialiseSubrouters()
 }
 
-export function initOnboardingRouters(): void {
-    initOnboardingBaseRouters()
-    initOnboardingSubrouters()
+export function initialiseOnboardingRouters(): void {
+    initialiseBaseOnboardingRouters()
+    initialiseOnboardingSubrouters()
 }
 
-function initBaseRouters(): void {
+function initialiseBaseRouters(): void {
     appRouter.set(new AppRouter())
     dashboardRouter.set(new DashboardRouter())
     settingsRouter.set(new SettingsRouter())
-    initOnboardingBaseRouters()
+    initialiseBaseOnboardingRouters()
 }
 
-function initOnboardingBaseRouters(): void {
+function initialiseBaseOnboardingRouters(): void {
     onboardingRouter.set(new OnboardingRouter())
 }
 
-function initSubrouters(): void {
-    initOnboardingSubrouters()
+function initialiseSubrouters(): void {
+    initialiseOnboardingSubrouters()
 }
 
-function initOnboardingSubrouters(): void {
+function initialiseOnboardingSubrouters(): void {
     appSetupRouter.set(new AppSetupRouter())
     ledgerSetupRouter.set(new LedgerSetupRouter())
     networkSetupRouter.set(new NetworkSetupRouter())

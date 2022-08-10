@@ -10,7 +10,7 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
-    import { initOnboardingRouters } from '@core/router'
+    import { initialiseOnboardingRouters } from '@core/router'
     import { initialiseOnboardingProfile, shouldUseDeveloperProfile } from '@contexts/onboarding'
     import { openPopup, popupState } from '@lib/popup'
 
@@ -23,7 +23,7 @@
 
     function addProfile() {
         dispatch('next', { shouldAddProfile: true })
-        initOnboardingRouters()
+        initialiseOnboardingRouters()
         initialiseOnboardingProfile(shouldUseDeveloperProfile())
     }
 
