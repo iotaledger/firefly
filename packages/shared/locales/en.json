@@ -685,7 +685,7 @@
         },
         "setAsPrimary": {
             "title": "Set as primary node",
-            "body": "Are you sure you want to set {url} as the primary node?",
+            "body": "Are you sure you want to set {url} as the primary node?"
         },
         "node": {
             "titleAdd": "Add a node",
