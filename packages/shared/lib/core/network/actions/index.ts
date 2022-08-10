@@ -1,3 +1,4 @@
+export * from './addNodeToClientOptions'
 export * from './addOfficialNodesToClientOptions'
 export * from './getAndUpdateNodeInfo'
 export * from './network-polling'
