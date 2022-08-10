@@ -10,7 +10,7 @@
     $: clientOptions = $activeProfile?.clientOptions
 
     function isPrimary(node: INode) {
-        return node.url === clientOptions?.primaryNode.url
+        return node.url === clientOptions?.primaryNode?.url
     }
 
     function handleViewNodeInfoClick(node: INode): void {
@@ -44,11 +44,11 @@
                     {#if isPrimary(node)}
                         <Pill
                             data={localize('views.settings.configureNodeList.primaryNode').toLowerCase()}
-                            backgroundColor="blue-100"
+                            textColor="blue-500"
                         />
                     {/if}
                     {#if node?.disabled}
-                        <Pill data={localize('general.excluded').toLowerCase()} backgroundColor="red-100" />
+                        <Pill data={localize('general.excluded').toLowerCase()} textColor="red-500" />
                     {/if}
                 </div>
                 <NodeActionsButton {node} {clientOptions} />

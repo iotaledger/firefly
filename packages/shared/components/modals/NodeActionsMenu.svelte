@@ -98,7 +98,7 @@
         first
     />
     <MenuItem
-        disabled={isPrimary}
+        disabled={isPrimary || node?.disabled}
         title={localize('views.settings.configureNodeList.setAsPrimary')}
         onClick={handleSetPrimaryNodeClick}
     />
