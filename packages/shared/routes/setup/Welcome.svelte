@@ -16,7 +16,7 @@
 
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
-    $backButtonStore.reset()
+    $backButtonStore?.reset()
 
     function handleContinueClick(): void {
         if ($mobile) {
