@@ -7,7 +7,7 @@
         INode,
         IClientOptions,
         removeNodeFromClientOptions,
-        toggleEnableNodeFromClientOptions,
+        toggleDisabledNodeInClientOptions,
     } from '@core/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile } from '@core/profile'
@@ -23,7 +23,8 @@
         (n) => n.url === nodeContextMenu?.url
     )
     $: isOnlyOneNode = clientOptions?.nodes?.length === 1
-    $: allowDisable = !nodeContextMenu.disabled && clientOptions?.nodes?.filter((node) => node.disabled).length > 1
+    $: allowToggleDisabled =
+        nodeContextMenu?.disabled || clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
 
     function handleViewNodeInfoClick(node: INode): void {
         openPopup({
@@ -66,25 +67,25 @@
         })
     }
 
-    function handleDisableEnableNodeClick(node: INode): void {
+    function handleToggleDisabledNodeClick(node: INode): void {
         if (node.disabled) {
-            toggleEnableNodeFromClientOptions(node)
+            toggleDisabledNodeInClientOptions(node)
         } else {
             openPopup({
                 type: 'confirmation',
                 props: {
-                    title: localize('popups.node.titleDisable'),
-                    description: localize('popups.node.disableConfirmation'),
+                    title: localize('popups.excludeNode.title'),
+                    description: localize('popups.excludeNode.body', { values: { url: node?.url } }),
                     danger: true,
-                    confirmText: localize('actions.disableNode'),
+                    confirmText: localize('views.settings.configureNodeList.excludeNode'),
                     onConfirm: () => {
-                        toggleEnableNodeFromClientOptions(node)
-                        nodeContextMenu = undefined
+                        toggleDisabledNodeInClientOptions(node)
                         closePopup()
                     },
                 },
             })
         }
+        nodeContextMenu = undefined
     }
 </script>
 
@@ -94,14 +95,12 @@
     on:clickOutside={() => (nodeContextMenu = undefined)}
     style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}
 >
-    {#if !nodeContextMenu?.disabled}
-        <button
-            on:click={() => handleViewNodeInfoClick(nodeContextMenu)}
-            class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-        >
-            <Text smaller>{localize('views.settings.configureNodeList.viewInfo')}</Text>
-        </button>
-    {/if}
+    <button
+        on:click={() => handleViewNodeInfoClick(nodeContextMenu)}
+        class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+    >
+        <Text smaller>{localize('views.settings.configureNodeList.viewInfo')}</Text>
+    </button>
 
     <button
         disabled={isOfficialNode}
@@ -111,8 +110,8 @@
         <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
     </button>
     <button
-        disabled={!allowDisable}
-        on:click={() => handleDisableEnableNodeClick(nodeContextMenu)}
+        disabled={!allowToggleDisabled}
+        on:click={() => handleToggleDisabledNodeClick(nodeContextMenu)}
         class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
     >
         <Text smaller>

@@ -679,6 +679,10 @@
             "internal": "Internal Address",
             "external": "Deposit Address"
         },
+        "excludeNode": {
+            "title": "Exclude node",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
+        },
         "node": {
             "titleAdd": "Add a node",
             "titleUpdate": "Update a node",
@@ -694,8 +698,7 @@
             "optionalPassword": "Password (optional)",
             "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeConfirmation": "Are you sure you want to remove this node?",            
             "info": {
                 "general": {
                     "tab": "General",
