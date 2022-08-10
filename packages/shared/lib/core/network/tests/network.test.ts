@@ -9,7 +9,6 @@ import {
     IClientOptions,
     INetwork,
     INode,
-    isAuthValid,
     isOfficialNetwork,
     NetworkProtocol,
     NetworkType,
@@ -273,17 +272,6 @@ describe('File: network.ts', () => {
         it('should return the entire auth configuration if the JWT exists', () => {
             expect(cleanAuth(<IAuth>{ jwt: 'SOME JWT' })).toEqual(<IAuth>{ jwt: 'SOME JWT' })
             expect(cleanAuth(FAKE_NODE_AUTH_JWT)).toEqual(FAKE_NODE_AUTH_JWT)
-        })
-    })
-
-    describe('Function: isAuthValid', () => {
-        it('should return correct result for any auth configuration', () => {
-            expect(isAuthValid(<IAuth>{})).toBe(false)
-            expect(isAuthValid(undefined)).toBe(false)
-            expect(isAuthValid(EMPTY_NODE_AUTH)).toBe(false)
-
-            expect(isAuthValid(FAKE_NODE_AUTH)).toBe(true)
-            expect(isAuthValid(FAKE_NODE_AUTH_JWT)).toBe(true)
         })
     })
 
