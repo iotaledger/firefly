@@ -3,12 +3,9 @@
     import { getOfficialNodes, INode, isOfficialNetwork } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { openPopup } from '@lib/popup'
-    import { MeatballMenuButton, NodeActionsMenu, Text } from 'shared/components'
+    import { Text, NodeActionsButton } from 'shared/components'
 
     export let nodesContainer: HTMLElement
-
-    let contextPosition = { x: 0, y: 0 }
-    let nodeContextMenu: INode
 
     $: clientOptions = $activeProfile?.clientOptions
 
@@ -19,12 +16,6 @@
                 node,
             },
         })
-        nodeContextMenu = undefined
-    }
-
-    function onMenuClick(event: HTMLFormElement, node: INode): void {
-        nodeContextMenu = node
-        contextPosition = { x: event.clientX, y: event.clientY }
     }
 </script>
 
@@ -47,11 +38,8 @@
                         {node.url}
                     </Text>
                 </div>
-                <MeatballMenuButton onClick={(event) => onMenuClick(event, node)} />
+                <NodeActionsButton {node} {clientOptions} />
             </button>
         {/each}
-    {/if}
-    {#if nodeContextMenu}
-        <NodeActionsMenu bind:node={nodeContextMenu} {clientOptions} {contextPosition} />
     {/if}
 </div>

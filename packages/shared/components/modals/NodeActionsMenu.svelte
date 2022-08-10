@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { HR, MenuItem } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
+    import { HR, MenuItem, Modal } from 'shared/components'
     import { localize } from '@core/i18n'
     import {
         getOfficialNodes,
@@ -13,11 +12,8 @@
     import { activeProfile } from '@core/profile'
 
     export let node: INode
-    export let contextPosition: {
-        x: number
-        y: number
-    }
     export let clientOptions: IClientOptions
+    export let modal: Modal
 
     $: isOfficialNode = getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType).some(
         (n) => n.url === node?.url
@@ -31,11 +27,11 @@
                 node,
                 isEditingNode: true,
                 onSuccess: () => {
-                    node = undefined
                     closePopup()
                 },
             },
         })
+        modal?.toggle()
     }
 
     function handleRemoveNodeClick(): void {
@@ -48,11 +44,11 @@
                 confirmText: localize('actions.removeNode'),
                 onConfirm: () => {
                     void removeNodeFromClientOptions(node)
-                    node = undefined
                     closePopup()
                 },
             },
         })
+        modal?.toggle()
     }
 
     function handleToggleDisabledNodeClick(): void {
@@ -73,16 +69,11 @@
                 },
             })
         }
-        node = undefined
+        modal?.toggle()
     }
 </script>
 
-<node-config-options
-    class="fixed flex flex-col border border-solid bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-lg overflow-hidden"
-    use:clickOutside={{ includeScroll: true }}
-    on:clickOutside={() => (node = undefined)}
-    style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}
->
+<Modal bind:this={modal} size="small">
     <MenuItem
         title={localize('views.settings.configureNodeList.editDetails')}
         onClick={handleEditNodeDetailsClick}
@@ -103,4 +94,4 @@
         first
         last
     />
-</node-config-options>
+</Modal>
