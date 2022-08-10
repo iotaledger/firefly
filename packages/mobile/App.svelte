@@ -8,7 +8,7 @@
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { fetchMarketData } from 'shared/lib/market'
     import { pollNetworkStatus } from '@core/network'
-    import { AppRoute, initRouters } from '@core/router'
+    import { AppRoute, initialiseRouters } from '@core/router'
     import { Platforms } from 'shared/lib/typings/platform'
     import {
         Appearance,
@@ -46,7 +46,7 @@
     void setupI18n()
 
     onMount(async () => {
-        initRouters()
+        initialiseRouters()
         await fetchMarketData()
         await pollNetworkStatus()
     })

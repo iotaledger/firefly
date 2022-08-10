@@ -2,8 +2,8 @@
     import { localize } from '@core/i18n'
     import { Icon, ProgressFlow, Text } from 'shared/components'
     import { mobile } from '@core/app'
-    import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
-    import { openPopup } from 'shared/lib/popup'
+    import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from '@lib/migration'
+    import { openPopup } from '@lib/popup'
 
     export let allowBack = true
     export let busy = false
@@ -16,7 +16,7 @@
     let mobileTopContentHeight,
         leftpaneContentHeight = 0
 
-    function handleWatchVideoClick() {
+    function handleWatchVideoClick(): void {
         openPopup({
             type: 'video',
             props: { video: LEDGER_MIGRATION_VIDEO, title: localize('views.setupLedger.videoGuide') },
@@ -73,8 +73,9 @@
                     {#if allowBack}
                         <button
                             on:click={onBackClick}
-                            class="mb-8 w-6 h-6 {busy && 'pointer-events-none opacity-50'}"
+                            class="mb-8 w-6 h-6 {busy && 'pointer-events-none opacity-50'} highlight"
                             disabled={busy}
+                            aria-label={localize('actions.back')}
                         >
                             <Icon
                                 icon="arrow-left"
@@ -132,5 +133,12 @@
     }
     footer {
         margin-bottom: env(safe-area-inset-bottom);
+    }
+    .highlight {
+        transition: filter 0.2s;
+
+        &:focus {
+            filter: brightness(1.3);
+        }
     }
 </style>

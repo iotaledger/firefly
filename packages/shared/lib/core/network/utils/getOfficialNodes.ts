@@ -4,9 +4,6 @@ import { OFFICIAL_NODE_URLS } from '../constants'
 
 /**
  * Constructs a list of the official IOTA nodes for a given network.
- * @method getOfficialNodes
- * @param {NetworkType} type
- * @returns {Node[]}
  */
 export function getOfficialNodes(protocol: NetworkProtocol, type: NetworkType): INode[] {
     return getOfficialNodeUrls(protocol, type).map((url) => buildOfficialNode(url))

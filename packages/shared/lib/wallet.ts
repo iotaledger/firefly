@@ -1,23 +1,16 @@
 import { IAccount, IAccountState } from '@core/account'
 import { activeAccounts, activeProfile, IBalanceOverview } from '@core/profile'
-import { generateMnemonic } from '@core/profile-manager'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import { get, writable } from 'svelte/store'
-import { mnemonic } from '@contexts/onboarding'
+import { onboardingProfile } from '@contexts/onboarding'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { CurrencyTypes } from './typings/currency'
-import { RecoveryPhrase } from './typings/mnemonic'
-import { SetupType } from './typings/setup'
 import { AccountBalance } from '@iota/wallet'
-
-export const MAX_PASSWORD_LENGTH = 256
 
 /**
  * A number representing the threshold for what is considered dust, which is 1Mi or 1,000,000i.
  */
 export const DUST_THRESHOLD: number = 1_000_000
-
-export const walletSetupType = writable<SetupType>(null)
 
 export const isTransferring = writable<boolean>(false)
 
@@ -28,12 +21,6 @@ export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
 
-export async function generateAndStoreMnemonic(): Promise<RecoveryPhrase> {
-    const mnemonicString = await generateMnemonic()
-    const mnemnonicList = mnemonicString?.split(' ')
-    mnemonic.set(mnemnonicList)
-    return mnemnonicList
-}
 /**
  * Get legacy seed checksum
  *
@@ -282,7 +269,8 @@ export const findAccountWithAnyAddress = (
  * Determines if the API call for syncing accounts is the initial one
  * @returns {boolean} The boolean value determining if this sync API call is the first ever one
  */
-export const isInitialAccountSync = (): boolean => get(walletSetupType) !== null && get(isFirstSessionSync)
+export const isInitialAccountSync = (): boolean =>
+    get(onboardingProfile)?.recoveryType !== null && get(isFirstSessionSync)
 
 /**
  * Determines whether an account has any pending transactions.

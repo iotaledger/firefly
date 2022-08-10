@@ -2,18 +2,17 @@
     import { createEventDispatcher } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
     import {
-        AppStage,
-        appStage,
         isAwareOfCrashReporting,
         mobile,
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
-    import { openPopup, popupState } from 'shared/lib/popup'
-    import { createNewProfile } from '@contexts/onboarding'
-    import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
+    import { initialiseOnboardingRouters } from '@core/router'
+    import { initialiseOnboardingProfile, shouldUseDeveloperProfile } from '@contexts/onboarding'
+    import { openPopup, popupState } from '@lib/popup'
 
     const dispatch = createEventDispatcher()
 
@@ -24,7 +23,8 @@
 
     function addProfile() {
         dispatch('next', { shouldAddProfile: true })
-        createNewProfile({ isDeveloperProfile: $appStage !== AppStage.PROD })
+        initialiseOnboardingRouters()
+        initialiseOnboardingProfile(shouldUseDeveloperProfile())
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {

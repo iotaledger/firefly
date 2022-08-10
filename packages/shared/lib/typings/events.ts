@@ -1,10 +1,11 @@
 import { IAppUpdateDownloadProgress, IAppVersionDetails } from '@core/app/interfaces'
+import { DashboardRoute } from '@core/router/enums'
+
 import { Message, UTXOEventData } from './message'
-import { AccountRoute } from '@core/router/enums'
 
 export interface EventMap {
     'menu-logout': void
-    'menu-navigate-wallet': AccountRoute
+    'menu-navigate-wallet': DashboardRoute
     'menu-navigate-settings': void
     'menu-check-for-update': void
     'menu-error-log': void

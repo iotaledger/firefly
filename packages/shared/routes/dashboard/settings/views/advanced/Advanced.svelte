@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { HR } from 'shared/components'
     import { activeProfile, isLedgerProfile } from '@core/profile'
-    import { AdvancedSettings } from '@core/router'
+    import { AdvancedSettingsRoute } from '@core/router'
     import {
         CrashReporting,
         DeepLinks,
@@ -16,18 +16,18 @@
 
     const settings: {
         component: unknown
-        childRoute: AdvancedSettings
+        childRoute: AdvancedSettingsRoute
         requireLogin?: boolean
         requireLedger?: boolean
     }[] = [
-        { component: NetworkConfiguration, childRoute: AdvancedSettings.NetworkConfiguration, requireLogin: true },
-        { component: DeepLinks, childRoute: AdvancedSettings.DeepLinks },
-        { component: WalletFinder, childRoute: AdvancedSettings.WalletFinder, requireLogin: true },
-        { component: HiddenAccounts, childRoute: AdvancedSettings.HiddenAccounts, requireLogin: true },
-        { component: ErrorLog, childRoute: AdvancedSettings.ErrorLog },
-        { component: CrashReporting, childRoute: AdvancedSettings.CrashReporting },
-        { component: Diagnostics, childRoute: AdvancedSettings.Diagnostics },
-        { component: MigrateLedgerIndex, childRoute: AdvancedSettings.MigrateLedgerIndex, requireLedger: true },
+        { component: NetworkConfiguration, childRoute: AdvancedSettingsRoute.NetworkConfiguration, requireLogin: true },
+        { component: DeepLinks, childRoute: AdvancedSettingsRoute.DeepLinks },
+        { component: WalletFinder, childRoute: AdvancedSettingsRoute.WalletFinder, requireLogin: true },
+        { component: HiddenAccounts, childRoute: AdvancedSettingsRoute.HiddenAccounts, requireLogin: true },
+        { component: ErrorLog, childRoute: AdvancedSettingsRoute.ErrorLog },
+        { component: CrashReporting, childRoute: AdvancedSettingsRoute.CrashReporting },
+        { component: Diagnostics, childRoute: AdvancedSettingsRoute.Diagnostics },
+        { component: MigrateLedgerIndex, childRoute: AdvancedSettingsRoute.MigrateLedgerIndex, requireLedger: true },
     ]
     const visibleSettings = settings.filter((setting) => features?.settings?.advanced?.[setting.childRoute]?.enabled)
 
