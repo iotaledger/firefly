@@ -7,7 +7,7 @@
         IClientOptions,
         removeNodeFromClientOptions,
         toggleDisabledNodeInClientOptions,
-        updateClientOptions,
+        togglePrimaryNodeInClientOptions,
     } from '@core/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile } from '@core/profile'
@@ -36,18 +36,24 @@
         modal?.toggle()
     }
 
-    function handleSetPrimaryNodeClick(): void {
-        openPopup({
-            type: 'confirmation',
-            props: {
-                title: localize('popups.setAsPrimary.title'),
-                description: localize('popups.setAsPrimary.body', { values: { url: node.url } }),
-                onConfirm: () => {
-                    void updateClientOptions({ primaryNode: node })
-                    closePopup()
+    function handleTogglePrimaryNodeClick(): void {
+        if (!isPrimary) {
+            togglePrimaryNodeInClientOptions(node)
+        } else {
+            openPopup({
+                type: 'confirmation',
+                props: {
+                    title: localize('popups.unsetAsPrimaryNode.title'),
+                    description: localize('popups.unsetAsPrimaryNode.body', { values: { url: node.url } }),
+                    danger: true,
+                    confirmText: localize('actions.clear'),
+                    onConfirm: () => {
+                        togglePrimaryNodeInClientOptions(node)
+                        closePopup()
+                    },
                 },
-            },
-        })
+            })
+        }
         modal?.toggle()
     }
 
@@ -98,9 +104,9 @@
         first
     />
     <MenuItem
-        disabled={isPrimary || node?.disabled}
-        title={localize('views.settings.configureNodeList.setAsPrimary')}
-        onClick={handleSetPrimaryNodeClick}
+        disabled={node?.disabled}
+        title={localize(`views.settings.configureNodeList.${isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'}`)}
+        onClick={handleTogglePrimaryNodeClick}
     />
     <MenuItem
         disabled={!allowDisableOrRemove}

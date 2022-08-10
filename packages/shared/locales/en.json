@@ -458,7 +458,8 @@
                 "includeNode": "Include node",
                 "editDetails": "Edit details",
                 "viewInfo": "View info",
-                "setAsPrimary": "Set as primary",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
                 "noNodes": "There are no nodes, unable to connect to the network",
@@ -683,9 +684,9 @@
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
         },
-        "setAsPrimary": {
-            "title": "Set as primary node",
-            "body": "Are you sure you want to set {url} as the primary node?"
+        "unsetAsPrimaryNode" : {
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
         },
         "node": {
             "titleAdd": "Add a node",
@@ -1105,7 +1106,6 @@
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata"
-
     },
     "general": {
         "recipient": "Recipient",

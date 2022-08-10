@@ -6,5 +6,8 @@ export async function toggleDisabledNodeInClientOptions(node: INode): Promise<vo
     const clientOptions = get(activeProfile)?.clientOptions
     const editedNode = clientOptions.nodes.find((_node) => _node.url === node.url)
     editedNode.disabled = !editedNode.disabled
-    await updateClientOptions({ nodes: clientOptions.nodes })
+    const primaryNode =
+        clientOptions?.primaryNode?.url === node.url && editedNode.disabled ? null : clientOptions?.primaryNode
+
+    await updateClientOptions({ nodes: clientOptions.nodes, primaryNode })
 }
