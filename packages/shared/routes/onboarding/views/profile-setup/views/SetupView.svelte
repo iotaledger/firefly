@@ -21,7 +21,7 @@
 
     onMount(() => {
         destroyProfileManager()
-        updateOnboardingProfile({ mustVisitProfileName: true, setupType: null })
+        updateOnboardingProfile({ mustVisitProfileName: true, setupType: null, hasInitialisedProfileManager: false })
     })
 </script>
 

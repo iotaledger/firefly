@@ -10,14 +10,14 @@
         initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
         ProfileRecoveryType,
-        resetOnboardingProfileThatAlreadyRecovered,
+        resetOnboardingProfileWithProfileManager,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
         const type = getProfileTypeFromProfileRecoveryType(recoveryType)
         updateOnboardingProfile({ type, recoveryType })
-        await initialiseProfileManagerFromOnboardingProfile()
+        await initialiseProfileManagerFromOnboardingProfile(true)
         $profileSetupRouter.next()
     }
     function onBackClick() {
@@ -25,9 +25,7 @@
     }
 
     onMount(() => {
-        if ($onboardingProfile?.hasRecoveredProfile) {
-            void resetOnboardingProfileThatAlreadyRecovered()
-        }
+        void resetOnboardingProfileWithProfileManager()
     })
 </script>
 

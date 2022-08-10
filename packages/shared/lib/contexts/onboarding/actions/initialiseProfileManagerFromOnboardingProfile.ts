@@ -6,7 +6,7 @@ import {
     profileManager,
 } from '@core/profile-manager'
 
-import { onboardingProfile } from '../stores'
+import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
 export async function initialiseProfileManagerFromOnboardingProfile(checkForExistingManager?: boolean): Promise<void> {
     if (checkForExistingManager && get(profileManager)) {
@@ -18,4 +18,5 @@ export async function initialiseProfileManagerFromOnboardingProfile(checkForExis
     const { id } = get(onboardingProfile)
     const manager = initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, id)
     profileManager.set(manager)
+    updateOnboardingProfile({ hasInitialisedProfileManager: true })
 }

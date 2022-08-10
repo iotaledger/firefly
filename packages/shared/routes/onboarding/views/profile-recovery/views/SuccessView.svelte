@@ -23,7 +23,7 @@
     }
 
     onMount(() => {
-        updateOnboardingProfile({ hasRecoveredProfile: true })
+        updateOnboardingProfile({ hasInitialisedProfileManager: true })
     })
 </script>
 
