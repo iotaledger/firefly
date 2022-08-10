@@ -3,7 +3,7 @@
     import { getOfficialNodes, INode, isOfficialNetwork } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { openPopup } from '@lib/popup'
-    import { Text, NodeActionsButton } from 'shared/components'
+    import { Text, NodeActionsButton, Pill } from 'shared/components'
 
     export let nodesContainer: HTMLElement
 
@@ -37,6 +37,9 @@
                     <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
                         {node.url}
                     </Text>
+                    {#if node?.disabled}
+                        <Pill data={localize('general.excluded').toLowerCase()} backgroundColor="red-100" />
+                    {/if}
                 </div>
                 <NodeActionsButton {node} {clientOptions} />
             </button>

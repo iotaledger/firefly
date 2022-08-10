@@ -1275,7 +1275,8 @@
         "faucetRequestDescription": "Request tokens from the {network} faucet",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
-        "giftStorageDeposit": "Gift storage deposit"
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded"
 
     },
     "filters":{
