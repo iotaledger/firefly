@@ -24,6 +24,11 @@ export const stage = writable<Stage>(Stage.ALPHA)
 export const mobile = writable<boolean>(false)
 
 /**
+ * Mobile soft leyboard height
+ */
+export const keyboardHeight = writable<number>(0)
+
+/**
  * Wallet access pin
  */
 export const walletPin = writable<string>(null)

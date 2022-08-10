@@ -31,6 +31,7 @@
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity"
             android:exported="true">
             <!-- android:requestLegacyExternalStorage="true">-->
