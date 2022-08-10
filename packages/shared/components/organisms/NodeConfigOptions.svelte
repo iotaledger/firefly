@@ -25,16 +25,6 @@
     $: allowDisableOrRemove =
         nodeContextMenu?.disabled || clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
 
-    function handleViewNodeInfoClick(node: INode): void {
-        openPopup({
-            type: 'nodeInfo',
-            props: {
-                node,
-            },
-        })
-        nodeContextMenu = undefined
-    }
-
     function handleEditNodeDetailsClick(node: INode): void {
         openPopup({
             type: 'addNode',
@@ -95,14 +85,10 @@
     style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}
 >
     <MenuItem
-        title={localize('views.settings.configureNodeList.viewInfo')}
-        onClick={() => handleViewNodeInfoClick(nodeContextMenu)}
-        first
-    />
-    <MenuItem
         title={localize('views.settings.configureNodeList.editDetails')}
         onClick={() => handleEditNodeDetailsClick(nodeContextMenu)}
         disabled={isOfficialNode}
+        first
     />
     <MenuItem
         disabled={!allowDisableOrRemove}
