@@ -1145,14 +1145,13 @@ export const formatAccountWithMetadata = (account: Account, meta: AccountMetadat
 
 export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
     const { accounts } = get(wallet)
-
+    const _activeProfile = get(activeProfile)
+    // ghetto patch: in mobile we have a race condition where account is not found, so we also look into active profile
+    const _accounts = get(accounts) ?? _activeProfile?.accounts ?? []
+    const account = _accounts?.find((account) => account.id === accountId)
     messages.forEach((message: Message) => {
         if (message.payload?.type === 'Milestone') {
-            const account = get(accounts).find((account) => account.id === accountId)
-
             if (account) {
-                const _activeProfile = get(activeProfile)
-
                 if (
                     _activeProfile &&
                     _activeProfile.migratedTransactions &&
@@ -1165,16 +1164,13 @@ export const processMigratedTransactions = (accountId: string, messages: Message
                     const updatedMigratedTransactions = _activeProfile.migratedTransactions.filter(
                         (transaction) => !tailTransactionHashes.includes(transaction.tailTransactionHash)
                     )
-
                     updateProfile('migratedTransactions', updatedMigratedTransactions)
                 }
             }
         }
     })
 
-    const _activeProfile = get(activeProfile)
-
-    if (_activeProfile.migratedTransactions && _activeProfile.migratedTransactions.length) {
+    if (_activeProfile?.migratedTransactions && _activeProfile?.migratedTransactions.length) {
         // For pre-snapshot migrations, there will be no messages
         addresses.forEach((address) => {
             const { outputs } = address
