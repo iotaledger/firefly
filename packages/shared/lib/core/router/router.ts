@@ -23,7 +23,7 @@ export abstract class Router<Route> {
             this.previous(true)
         }
 
-        get(backButtonStore).add(prev as () => Promise<void>)
+        get(backButtonStore)?.add(prev as () => Promise<void>)
     }
 
     protected setNext(route: Route): void {
@@ -43,7 +43,7 @@ export abstract class Router<Route> {
     previous(isBackButton = false): void {
         const previousRoute = this.history.pop()
         if (isBackButton === false) {
-            get(backButtonStore).pop()
+            get(backButtonStore)?.pop()
         }
         if (previousRoute) {
             this.setRoute(previousRoute)
