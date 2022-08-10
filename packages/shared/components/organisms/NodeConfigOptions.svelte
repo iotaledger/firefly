@@ -2,7 +2,13 @@
     import { HR, Text } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { localize } from '@core/i18n'
-    import { getOfficialNodes, INode, IClientOptions, removeNodeFromClientOptions } from '@core/network'
+    import {
+        getOfficialNodes,
+        INode,
+        IClientOptions,
+        removeNodeFromClientOptions,
+        toggleEnableNodeFromClientOptions,
+    } from '@core/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile } from '@core/profile'
 
@@ -17,6 +23,7 @@
         (n) => n.url === nodeContextMenu?.url
     )
     $: isOnlyOneNode = clientOptions?.nodes?.length === 1
+    $: allowDisable = !nodeContextMenu.disabled && clientOptions?.nodes?.filter((node) => node.disabled).length > 1
 
     function handleViewNodeInfoClick(node: INode): void {
         openPopup({
@@ -28,21 +35,20 @@
     }
 
     function handleEditNodeDetailsClick(node: INode): void {
-        nodeContextMenu = undefined
         openPopup({
             type: 'addNode',
             props: {
                 node,
                 isEditingNode: true,
                 onSuccess: () => {
+                    nodeContextMenu = undefined
                     closePopup()
                 },
             },
         })
     }
 
-    function handleRemoveNodeClick(node: INode) {
-        nodeContextMenu = undefined
+    function handleRemoveNodeClick(node: INode): void {
         openPopup({
             type: 'confirmation',
             props: {
@@ -52,10 +58,32 @@
                 confirmText: localize('actions.removeNode'),
                 onConfirm: () => {
                     void removeNodeFromClientOptions(node)
+                    nodeContextMenu = undefined
                     closePopup()
                 },
             },
         })
+    }
+
+    function handleDisableEnableNodeClick(node: INode): void {
+        if (node.disabled) {
+            toggleEnableNodeFromClientOptions(node)
+        } else {
+            openPopup({
+                type: 'confirmation',
+                props: {
+                    title: localize('popups.node.titleDisable'),
+                    description: localize('popups.node.disableConfirmation'),
+                    danger: true,
+                    confirmText: localize('actions.disableNode'),
+                    onConfirm: () => {
+                        toggleEnableNodeFromClientOptions(node)
+                        nodeContextMenu = undefined
+                        closePopup()
+                    },
+                },
+            })
+        }
     }
 </script>
 
@@ -87,14 +115,19 @@
     >
         <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
     </button>
-
+    <button
+        disabled={!allowDisable}
+        on:click={() => handleDisableEnableNodeClick(nodeContextMenu)}
+        class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
+    >
+        <Text smaller>
+            {localize(`views.settings.configureNodeList.${nodeContextMenu.disabled ? 'include' : 'exclude'}Node`)}
+        </Text>
+    </button>
     <HR />
     <button
         disabled={isOnlyOneNode}
-        on:click={() => {
-            handleRemoveNodeClick(nodeContextMenu)
-            nodeContextMenu = undefined
-        }}
+        on:click={() => handleRemoveNodeClick(nodeContextMenu)}
         class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
     >
         <Text smaller error>{localize('views.settings.configureNodeList.removeNode')}</Text>
