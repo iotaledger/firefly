@@ -8,6 +8,7 @@
         NetworkType,
         NETWORK_HEALTH_COLORS,
         nodeInfo,
+        toggleLocalPowInClientOptions,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
@@ -95,6 +96,10 @@
     <section id="proofOfWork">
         <Text type="h5" classes="mb-3">{localize('views.settings.proofOfWork.title')}</Text>
         <Text type="p" secondary classes="mb-5">{localize('views.settings.proofOfWork.description')}</Text>
-        <Checkbox label={localize('actions.localProofOfWork')} bind:checked={clientOptions.localPow} />
+        <Checkbox
+            label={localize('actions.localProofOfWork')}
+            checked={clientOptions?.localPow}
+            onClick={toggleLocalPowInClientOptions}
+        />
     </section>
 </div>
