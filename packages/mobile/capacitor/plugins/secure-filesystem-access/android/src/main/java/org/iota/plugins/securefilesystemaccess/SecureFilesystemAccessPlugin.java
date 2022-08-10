@@ -14,6 +14,8 @@ import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PermissionState;
