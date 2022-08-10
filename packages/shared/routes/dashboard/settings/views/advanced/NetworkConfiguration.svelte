@@ -14,7 +14,7 @@
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
-    import { Button, Checkbox, HR, NodeConfigOptions, Text } from 'shared/components'
+    import { Button, Checkbox, HR, NodeConfigOptions, Text, MeatballMenuButton } from 'shared/components'
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: INode
@@ -102,13 +102,12 @@
                                 {node.url}
                             </Text>
                         </div>
-                        <button
-                            on:click|stopPropagation={(e) => {
+                        <MeatballMenuButton
+                            onClick={(e) => {
                                 nodeContextMenu = node
                                 contextPosition = { x: e.clientX, y: e.clientY }
                             }}
-                            class="dark:text-white">...</button
-                        >
+                        />
                     </button>
                 {/each}
             {/if}
