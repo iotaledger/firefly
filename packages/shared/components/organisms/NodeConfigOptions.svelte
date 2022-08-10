@@ -32,6 +32,7 @@
                 node,
             },
         })
+        nodeContextMenu = undefined
     }
 
     function handleEditNodeDetailsClick(node: INode): void {
@@ -95,10 +96,7 @@
 >
     {#if !nodeContextMenu?.disabled}
         <button
-            on:click={() => {
-                handleViewNodeInfoClick(nodeContextMenu)
-                nodeContextMenu = undefined
-            }}
+            on:click={() => handleViewNodeInfoClick(nodeContextMenu)}
             class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
         >
             <Text smaller>{localize('views.settings.configureNodeList.viewInfo')}</Text>
@@ -107,10 +105,7 @@
 
     <button
         disabled={isOfficialNode}
-        on:click={() => {
-            handleEditNodeDetailsClick(nodeContextMenu)
-            nodeContextMenu = undefined
-        }}
+        on:click={() => handleEditNodeDetailsClick(nodeContextMenu)}
         class="flex p-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
     >
         <Text smaller>{localize('views.settings.configureNodeList.editDetails')}</Text>
