@@ -448,7 +448,8 @@
                 "includeNode": "Include node",
                 "editDetails": "Edit details",
                 "viewInfo": "View info",
-                "setAsPrimary": "Set as primary",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
                 "noNodes": "There are no nodes, unable to connect to the network",
@@ -669,6 +670,14 @@
             "internal": "Internal Address",
             "external": "Deposit Address"
         },
+        "excludeNode": {
+            "title": "Exclude node",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
+        },
+        "unsetAsPrimaryNode" : {
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
+        },
         "node": {
             "titleAdd": "Add a node",
             "titleUpdate": "Update a node",
@@ -684,8 +693,7 @@
             "optionalPassword": "Password (optional)",
             "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeConfirmation": "Are you sure you want to remove this node?",            
             "info": {
                 "general": {
                     "tab": "General",
@@ -1019,9 +1027,9 @@
         "deleteAccount": "Delete wallet",
         "max": "Max",
         "addNode": "Add node",
+        "addOfficialNodes": "Add official nodes",
         "updateNode": "Update node",
         "removeNode": "Remove node",
-        "removeAllNodes": "Remove all nodes",
         "hide": "Hide",
         "hideOthers": "Hide Others",
         "showAll": "Show All",
@@ -1088,7 +1096,6 @@
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata"
-
     },
     "general": {
         "recipient": "Recipient",
@@ -1262,7 +1269,8 @@
         "faucetRequestDescription": "Request tokens from the {network} faucet",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
-        "giftStorageDeposit": "Gift storage deposit"
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded"
 
     },
     "filters":{
