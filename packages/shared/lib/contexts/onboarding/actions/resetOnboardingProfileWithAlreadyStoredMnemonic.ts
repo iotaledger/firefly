@@ -1,18 +1,15 @@
 import { get } from 'svelte/store'
 
-import { removeProfileFolder } from '@core/profile'
-import { destroyProfileManager, setStrongholdPassword } from '@core/profile-manager'
+import { setStrongholdPassword } from '@core/profile-manager'
 
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
-import { initialiseOnboardingProfile, initialiseProfileManagerFromOnboardingProfile } from './'
+
+import { initialiseProfileManagerFromOnboardingProfile } from './initialiseProfileManagerFromOnboardingProfile'
+import { resetOnboardingProfile } from './resetOnboardingProfile'
 
 export async function resetOnboardingProfileWithAlreadyStoredMnemonic(): Promise<void> {
-    const onboardingProfileData = get(onboardingProfile)
-    destroyProfileManager()
-    await removeProfileFolder(onboardingProfileData?.id)
-    await initialiseOnboardingProfile(onboardingProfileData?.isDeveloperProfile)
-    updateOnboardingProfile({ ...onboardingProfileData })
+    await resetOnboardingProfile()
     await initialiseProfileManagerFromOnboardingProfile()
-    await setStrongholdPassword(onboardingProfileData?.strongholdPassword)
+    await setStrongholdPassword(get(onboardingProfile)?.strongholdPassword)
     updateOnboardingProfile({ hasStoredMnemonic: false })
 }
