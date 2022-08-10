@@ -683,6 +683,10 @@
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
         },
+        "setAsPrimary": {
+            "title": "Set as primary node",
+            "body": "Are you sure you want to set {url} as the primary node?",
+        },
         "node": {
             "titleAdd": "Add a node",
             "titleUpdate": "Update a node",

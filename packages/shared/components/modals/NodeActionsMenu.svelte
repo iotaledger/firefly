@@ -7,6 +7,7 @@
         IClientOptions,
         removeNodeFromClientOptions,
         toggleDisabledNodeInClientOptions,
+        updateClientOptions,
     } from '@core/network'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile } from '@core/profile'
@@ -19,6 +20,7 @@
         (n) => n.url === node?.url
     )
     $: allowDisableOrRemove = node?.disabled || clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
+    $: isPrimary = clientOptions?.primaryNode?.url === node.url
 
     function handleEditNodeDetailsClick(): void {
         openPopup({
@@ -27,6 +29,21 @@
                 node,
                 isEditingNode: true,
                 onSuccess: () => {
+                    closePopup()
+                },
+            },
+        })
+        modal?.toggle()
+    }
+
+    function handleSetPrimaryNodeClick(): void {
+        openPopup({
+            type: 'confirmation',
+            props: {
+                title: localize('popups.setAsPrimary.title'),
+                description: localize('popups.setAsPrimary.body', { values: { url: node.url } }),
+                onConfirm: () => {
+                    void updateClientOptions({ primaryNode: node })
                     closePopup()
                 },
             },
@@ -79,6 +96,11 @@
         onClick={handleEditNodeDetailsClick}
         disabled={isOfficialNode}
         first
+    />
+    <MenuItem
+        disabled={isPrimary}
+        title={localize('views.settings.configureNodeList.setAsPrimary')}
+        onClick={handleSetPrimaryNodeClick}
     />
     <MenuItem
         disabled={!allowDisableOrRemove}

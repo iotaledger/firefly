@@ -9,6 +9,10 @@
 
     $: clientOptions = $activeProfile?.clientOptions
 
+    function isPrimary(node: INode) {
+        return node.url === clientOptions?.primaryNode.url
+    }
+
     function handleViewNodeInfoClick(node: INode): void {
         openPopup({
             type: 'nodeInfo',
@@ -37,6 +41,12 @@
                     <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
                         {node.url}
                     </Text>
+                    {#if isPrimary(node)}
+                        <Pill
+                            data={localize('views.settings.configureNodeList.primaryNode').toLowerCase()}
+                            backgroundColor="blue-100"
+                        />
+                    {/if}
                     {#if node?.disabled}
                         <Pill data={localize('general.excluded').toLowerCase()} backgroundColor="red-100" />
                     {/if}
