@@ -2,9 +2,6 @@
     import { localize } from '@core/i18n'
     import {
         addOfficialNodesToClientOptions,
-        getOfficialNodes,
-        INode,
-        isOfficialNetwork,
         NetworkHealth,
         networkStatus,
         NetworkStatusDescription,
@@ -14,11 +11,9 @@
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
-    import { Button, Checkbox, HR, NodeConfigOptions, Text, MeatballMenuButton } from 'shared/components'
+    import { Button, Checkbox, HR, Text, NodeListTable } from 'shared/components'
 
-    let contextPosition = { x: 0, y: 0 }
-    let nodeContextMenu: INode
-    let nodesContainer
+    let nodesContainer: HTMLElement
 
     const { networkType } = $activeProfile
     $: clientOptions = $activeProfile?.clientOptions
@@ -39,16 +34,6 @@
                 },
             },
         })
-    }
-
-    function handleViewNodeInfoClick(node: INode): void {
-        openPopup({
-            type: 'nodeInfo',
-            props: {
-                node,
-            },
-        })
-        nodeContextMenu = undefined
     }
 </script>
 
@@ -83,38 +68,7 @@
     <section id="configureNodeList">
         <Text type="h5" classes="mb-3">{localize('views.settings.configureNodeList.title')}</Text>
         <Text type="p" secondary classes="mb-5">{localize('views.settings.configureNodeList.description')}</Text>
-        <div
-            class="nodes-container flex flex-col border border-solid border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-2xl overflow-auto"
-            bind:this={nodesContainer}
-        >
-            {#if clientOptions.nodes.length === 0 && !isOfficialNetwork($activeProfile.networkType)}
-                <Text classes="p-3">
-                    {localize('views.settings.configureNodeList.noNodes')}
-                </Text>
-            {:else}
-                {#each clientOptions.nodes.length === 0 ? getOfficialNodes($activeProfile.networkProtocol, $activeProfile.networkType) : clientOptions.nodes as node}
-                    <button
-                        class="flex flex-row items-center justify-between py-4 px-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20"
-                        on:click={() => handleViewNodeInfoClick(node)}
-                    >
-                        <div class="flex flex-row items-center space-x-4 overflow-hidden">
-                            <Text classes={'self-start overflow-hidden whitespace-nowrap overflow-ellipsis'}>
-                                {node.url}
-                            </Text>
-                        </div>
-                        <MeatballMenuButton
-                            onClick={(e) => {
-                                nodeContextMenu = node
-                                contextPosition = { x: e.clientX, y: e.clientY }
-                            }}
-                        />
-                    </button>
-                {/each}
-            {/if}
-            {#if nodeContextMenu}
-                <NodeConfigOptions bind:nodeContextMenu bind:clientOptions {contextPosition} />
-            {/if}
-        </div>
+        <NodeListTable bind:nodesContainer />
         <div class="flex flex-row justify-between space-x-3 w-full mt-4">
             {#if networkType !== NetworkType.PrivateNet}
                 <Button
@@ -144,9 +98,3 @@
         <Checkbox label={localize('actions.localProofOfWork')} bind:checked={clientOptions.localPow} />
     </section>
 </div>
-
-<style type="text/scss">
-    .nodes-container {
-        max-height: 338px;
-    }
-</style>

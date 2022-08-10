@@ -12,7 +12,7 @@
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { activeProfile } from '@core/profile'
 
-    export let nodeContextMenu: INode
+    export let node: INode
     export let contextPosition: {
         x: number
         y: number
@@ -20,26 +20,25 @@
     export let clientOptions: IClientOptions
 
     $: isOfficialNode = getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType).some(
-        (n) => n.url === nodeContextMenu?.url
+        (n) => n.url === node?.url
     )
-    $: allowDisableOrRemove =
-        nodeContextMenu?.disabled || clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
+    $: allowDisableOrRemove = node?.disabled || clientOptions?.nodes?.filter((node) => !node.disabled)?.length > 1
 
-    function handleEditNodeDetailsClick(node: INode): void {
+    function handleEditNodeDetailsClick(): void {
         openPopup({
             type: 'addNode',
             props: {
                 node,
                 isEditingNode: true,
                 onSuccess: () => {
-                    nodeContextMenu = undefined
+                    node = undefined
                     closePopup()
                 },
             },
         })
     }
 
-    function handleRemoveNodeClick(node: INode): void {
+    function handleRemoveNodeClick(): void {
         openPopup({
             type: 'confirmation',
             props: {
@@ -49,14 +48,14 @@
                 confirmText: localize('actions.removeNode'),
                 onConfirm: () => {
                     void removeNodeFromClientOptions(node)
-                    nodeContextMenu = undefined
+                    node = undefined
                     closePopup()
                 },
             },
         })
     }
 
-    function handleToggleDisabledNodeClick(node: INode): void {
+    function handleToggleDisabledNodeClick(): void {
         if (node.disabled) {
             toggleDisabledNodeInClientOptions(node)
         } else {
@@ -74,33 +73,33 @@
                 },
             })
         }
-        nodeContextMenu = undefined
+        node = undefined
     }
 </script>
 
 <node-config-options
     class="fixed flex flex-col border border-solid bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 rounded-lg overflow-hidden"
     use:clickOutside={{ includeScroll: true }}
-    on:clickOutside={() => (nodeContextMenu = undefined)}
+    on:clickOutside={() => (node = undefined)}
     style={`left: ${contextPosition.x - 10}px; top: ${contextPosition.y - 10}px`}
 >
     <MenuItem
         title={localize('views.settings.configureNodeList.editDetails')}
-        onClick={() => handleEditNodeDetailsClick(nodeContextMenu)}
+        onClick={handleEditNodeDetailsClick}
         disabled={isOfficialNode}
         first
     />
     <MenuItem
         disabled={!allowDisableOrRemove}
-        title={localize(`views.settings.configureNodeList.${nodeContextMenu.disabled ? 'include' : 'exclude'}Node`)}
-        onClick={() => handleToggleDisabledNodeClick(nodeContextMenu)}
+        title={localize(`views.settings.configureNodeList.${node.disabled ? 'include' : 'exclude'}Node`)}
+        onClick={handleToggleDisabledNodeClick}
         last
     />
     <HR />
     <MenuItem
         disabled={!allowDisableOrRemove}
         title={localize('views.settings.configureNodeList.removeNode')}
-        onClick={() => handleRemoveNodeClick(nodeContextMenu)}
+        onClick={handleRemoveNodeClick}
         first
         last
     />

@@ -1,12 +1,12 @@
 <script lang="typescript">
-    export let onClick: () => void
+    export let onClick: (event?: any) => void
     export let includeBackground = false
     export let classes = ''
     export let meatballCount = 3
 </script>
 
 <button
-    on:click|stopPropagation={onClick}
+    on:click|stopPropagation={(event) => onClick(event)}
     class="
         flex flex-row space-x-1 px-2 py-3
         text-gray-500 dark:text-white hover:text-gray-600 dark:hover:text-gray-300
