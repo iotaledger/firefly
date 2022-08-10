@@ -5,6 +5,11 @@
     import { Locale, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
     import type { DropdownChoice } from '@core/utils'
+    import {
+        initialiseOnboardingProfile,
+        onboardingProfile,
+        shouldUseDeveloperProfile,
+    } from '../../../../../lib/contexts/onboarding'
 
     /**
      * NOTE: It is necessary to use locale directly rather than the
@@ -47,6 +52,7 @@
 
     onMount(() => {
         _clonedVariable = appTheme
+        initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldUseDeveloperProfile())
     })
 </script>
 
