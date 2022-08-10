@@ -1,4 +1,3 @@
-export * from './addNodeToActiveProfile'
 export * from './isActiveProfileOutdated'
 export * from './loadAccounts'
 export * from './loadPersistedProfileIntoActiveProfile'
