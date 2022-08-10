@@ -1146,7 +1146,7 @@ export const formatAccountWithMetadata = (account: Account, meta: AccountMetadat
 export const processMigratedTransactions = (accountId: string, messages: Message[], addresses: Address[]): void => {
     const { accounts } = get(wallet)
     const _activeProfile = get(activeProfile)
-    // ghetto patch: in mobile we have a race condition where account is not found, so we also look into active profile
+    // Patch: in mobile we have a race condition where get(accounts) is not yet populated, so we also look into active profile
     const _accounts = get(accounts) ?? _activeProfile?.accounts ?? []
     const account = _accounts?.find((account) => account.id === accountId)
     messages.forEach((message: Message) => {
