@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Text, NodeConfigurationForm, Button, Spinner } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { INode, INetwork, addNodeToClientOptions } from '@core/network'
+    import { INode, INetwork, addNodeToClientOptions, editNodeInClientOptions } from '@core/network'
     import { closePopup } from '@lib/popup'
     import { activeProfile } from '@core/profile'
     import { showAppNotification } from '@lib/notifications'
@@ -11,6 +11,8 @@
     export let network: INetwork
     export let isEditingNode: boolean = false
     export let onSuccess: (..._: any[]) => void
+
+    const currentNode = node
 
     let nodeConfigurationForm: NodeConfigurationForm
     let isBusy = false
@@ -25,7 +27,11 @@
                 checkNodeInfo: true,
                 validateClientOptions: true,
             })
-            await addNodeToClientOptions(node)
+            if (isEditingNode) {
+                await editNodeInClientOptions(currentNode, node)
+            } else {
+                await addNodeToClientOptions(node)
+            }
             onSuccess()
         } catch (err) {
             if (err.type !== 'validationError') {
