@@ -5,10 +5,20 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol } from '@core/network'
     import { appSetupRouter } from '@core/router'
+    import { onMount } from 'svelte'
+    import {
+        initialiseOnboardingProfile,
+        onboardingProfile,
+        shouldUseDeveloperProfile,
+    } from '../../../../../lib/contexts/onboarding'
 
     function handleContinueClick(): void {
         $appSetupRouter.next()
     }
+
+    onMount(() => {
+        initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldUseDeveloperProfile())
+    })
 </script>
 
 <OnboardingLayout allowBack={false}>

@@ -2,13 +2,7 @@
     import { onMount } from 'svelte'
     import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import features from '@features/features'
-    import {
-        cleanupOnboarding,
-        initialiseOnboardingProfile,
-        onboardingProfile,
-        shouldUseDeveloperProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { cleanupOnboarding, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -29,9 +23,6 @@
     }
 
     onMount(() => {
-        if (!$onboardingProfile?.id) {
-            initialiseOnboardingProfile(shouldUseDeveloperProfile())
-        }
         updateOnboardingProfile({ networkProtocol: null })
     })
 </script>
