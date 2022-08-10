@@ -2,6 +2,7 @@ import { get } from 'svelte/store'
 
 import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import { initialiseProfileManager } from '@core/profile-manager'
+import { generateRandomId } from '@lib/utils'
 
 import { getIotaProfileManagerStorageDirectory } from '../helpers'
 import { iotaProfileManager, onboardingProfile } from '../stores'
@@ -19,6 +20,6 @@ export async function createIotaProfileManager(): Promise<void> {
         Stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
     }
 
-    const manager = initialiseProfileManager(storagePath, coinType, clientOptions, secretManager)
+    const manager = initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, generateRandomId())
     iotaProfileManager.set(manager)
 }

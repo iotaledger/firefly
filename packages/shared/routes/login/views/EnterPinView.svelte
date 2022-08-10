@@ -111,7 +111,8 @@
                                     storagePath,
                                     coinType,
                                     clientOptions,
-                                    secretManager
+                                    secretManager,
+                                    profile.id
                                 )
                                 profileManager.set(manager)
                                 void login()

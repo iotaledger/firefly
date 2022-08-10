@@ -1,32 +1,20 @@
 <script lang="typescript">
-    import { getContext, onMount } from 'svelte'
+    import { onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { profileRecoveryRouter, ProfileRecoveryRouter } from '@core/router'
-    import {
-        restoreBackupFromFile,
-        iotaProfileManager,
-        onboardingProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { profileRecoveryRouter } from '@core/router'
+    import { restoreBackupFromStrongholdFile, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
     export let error = ''
     export let busy = false
-
-    const { importFile } = getContext<ProfileRecoveryRouter>('importRouter')
 
     let strongholdPassword = ''
 
     async function onContinueClick(): Promise<void> {
         if (strongholdPassword) {
             try {
-                await restoreBackupFromFile(importFile, strongholdPassword)
-
-                if ($iotaProfileManager) {
-                    await $iotaProfileManager.restoreBackup($onboardingProfile?.importFilePath, strongholdPassword)
-                }
-
+                await restoreBackupFromStrongholdFile(strongholdPassword)
                 updateOnboardingProfile({ strongholdPassword })
                 $profileRecoveryRouter.next()
             } catch (err) {

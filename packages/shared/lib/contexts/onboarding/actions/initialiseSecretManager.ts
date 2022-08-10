@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { ProfileRecoveryType, ProfileSetupType } from '../enums'
 import { onboardingProfile } from '../stores'
 
-import { restoreBackupFromFile } from './restoreBackupFromFile'
+import { restoreBackupFromStrongholdFile } from './restoreBackupFromStrongholdFile'
 
 export async function initialiseSecretManager(): Promise<void> {
     const _onboardingProfile = get(onboardingProfile)
@@ -13,10 +13,7 @@ export async function initialiseSecretManager(): Promise<void> {
 
     if (profileSetupType === ProfileSetupType.Recovered) {
         if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
-            await restoreBackupFromFile(
-                _onboardingProfile?.importFile as Buffer,
-                _onboardingProfile?.strongholdPassword
-            )
+            await restoreBackupFromStrongholdFile(_onboardingProfile?.strongholdPassword)
         }
     }
 }

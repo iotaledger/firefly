@@ -6,13 +6,11 @@
     import { localize } from '@core/i18n'
     import { profileSetupRouter } from '@core/router'
     import {
-        deleteOnboardingProfile,
         getProfileTypeFromProfileRecoveryType,
-        initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
-        IOnboardingProfile,
         onboardingProfile,
         ProfileRecoveryType,
+        resetOnboardingProfileThatAlreadyRecovered,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
 
@@ -26,12 +24,10 @@
         $profileSetupRouter.previous()
     }
 
-    onMount(async () => {
-        const onboardingProfileData: Partial<IOnboardingProfile> = { ...$onboardingProfile }
-        await deleteOnboardingProfile()
-        await initialiseOnboardingProfile(onboardingProfileData?.isDeveloperProfile)
-        const { id } = $onboardingProfile
-        updateOnboardingProfile({ ...onboardingProfileData, id, type: null, recoveryType: null })
+    onMount(() => {
+        if ($onboardingProfile?.hasRecoveredProfile) {
+            void resetOnboardingProfileThatAlreadyRecovered()
+        }
     })
 </script>
 

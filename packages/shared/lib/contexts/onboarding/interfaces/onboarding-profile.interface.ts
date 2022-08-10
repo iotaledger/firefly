@@ -13,4 +13,5 @@ export interface IOnboardingProfile extends IPersistedProfile {
     strongholdPassword?: string
     mustVisitProfileName?: boolean
     hasStoredMnemonic?: boolean
+    hasRecoveredProfile?: boolean
 }

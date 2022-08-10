@@ -9,9 +9,10 @@ export function initialiseProfileManager(
     storagePath: string,
     coinType: CoinType,
     clientOptions?: ClientOptions,
-    secretManager?: SecretManager
+    secretManager?: SecretManager,
+    id?: string
 ): IProfileManager {
-    const id = generateRandomId()
+    id = id ?? generateRandomId()
     return api.createAccountManager(id, {
         storagePath,
         ...(clientOptions && { clientOptions }),

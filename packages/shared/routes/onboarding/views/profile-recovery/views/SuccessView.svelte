@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -9,6 +10,7 @@
         ProfileSetupRoute,
         profileSetupRoute,
     } from '@core/router'
+    import { updateOnboardingProfile } from '@contexts/onboarding'
 
     function onContinueClick(): void {
         $profileRecoveryRouter.next()
@@ -19,6 +21,10 @@
         profileSetupRoute.set(ProfileSetupRoute.SetupRecovered)
         onboardingRoute.set(OnboardingRoute.ProfileSetup)
     }
+
+    onMount(() => {
+        updateOnboardingProfile({ hasRecoveredProfile: true })
+    })
 </script>
 
 <OnboardingLayout {onBackClick}>
