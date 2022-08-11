@@ -367,7 +367,7 @@ const getUpdatedAccounts = (
     accountId: string,
     profileAccount: ProfileAccount
 ): ProfileAccount[] => {
-    const { accounts } = activeProfile
+    const { accounts } = activeProfile ?? {}
 
     if (accounts?.length) {
         if (accounts?.find((account) => account.id === accountId)) {

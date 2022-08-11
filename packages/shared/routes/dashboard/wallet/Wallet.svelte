@@ -409,12 +409,12 @@
     $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
         drawer.close()
         if (drawer.isDrawerOpen() === false) {
-            $backButtonStore.reset()
+            $backButtonStore?.reset()
         }
     }
 
     onMount(() => {
-        $backButtonStore.reset()
+        $backButtonStore?.reset()
 
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
@@ -480,7 +480,7 @@
     }
 
     $: if ($selectedMessage && activityDrawer) {
-        $backButtonStore.add(activityDrawer.close)
+        $backButtonStore?.add(activityDrawer.close)
     }
 
     onDestroy(() => {
