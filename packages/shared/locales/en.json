@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "setupPrivateNetwork": {
+                "setupPrivateNetworkConnection": {
                     "title": "Connect to a private network",
                     "body": "Fill the form with the node information and connect to a private network."
                 }

@@ -62,11 +62,11 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.onboarding.networkSetup.setupPrivateNetwork.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8"
-            >{localize('views.onboarding.networkSetup.setupPrivateNetwork.body')}</Text
+            >{localize('views.onboarding.networkSetup.setupPrivateNetworkConnection.body')}</Text
         >
         <NodeConfigurationForm bind:this={nodeConfigurationForm} bind:node bind:formError {isBusy} isDeveloperProfile />
     </div>
