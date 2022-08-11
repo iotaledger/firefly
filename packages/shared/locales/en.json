@@ -116,7 +116,7 @@
             },
             "profileBackup": {
                 "backupMnemonic": {
-                    "title": "Back up your wallet",
+                    "title": "Back up your recovery phrase",
                     "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
                     "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
                     "body3": "If you lose your recovery phrase, you may lose your funds."
@@ -138,7 +138,7 @@
                 },
                 "backupStronghold": {
                     "title": "Back up to a Stronghold file",
-                    "body1": "Enter your password to backup your wallets to a Stronghold file. Your password is used to encrypt the backup.",
+                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
                     "body2": "Reasons why digital backups are important:",
                     "reason1": "Easily recover your wallets without typing in your recovery phrase",
                     "reason2": "Import your wallets on other devices",
@@ -171,11 +171,10 @@
                     "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
                 }
             },
-            "ledgerSetup": {},
             "congratulations": {
-                "title": "Wallet setup completed",
+                "title": "Profile setup complete",
                 "fundsMigrated": "Funds migrated",
-                "body": "Your new wallet is ready to use.",
+                "body": "Your new profile is ready to use.",
                 "softwareMigratedBody": "You have successfully migrated your funds to the new network",
                 "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
                 "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",

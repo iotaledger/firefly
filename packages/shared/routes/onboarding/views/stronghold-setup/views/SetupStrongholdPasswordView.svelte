@@ -82,12 +82,16 @@
 
 <OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
-        <Text type="h2">{localize('views.password.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <form on:submit|preventDefault={onContinueClick} id="password-form">
-            <Text type="p" classes="mb-4" secondary>{localize('views.password.body1')}</Text>
-            <Text type="p" classes="mb-10" secondary>{localize('views.password.body2')}</Text>
+            <Text type="p" classes="mb-4" secondary
+                >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text
+            >
+            <Text type="p" classes="mb-10" secondary
+                >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body2')}</Text
+            >
             <PasswordInput
                 {error}
                 classes="mb-4"
