@@ -530,6 +530,13 @@
     "@types/bignumber.js" "^5.0.0"
     bignumber.js "^7.2.1"
 
+"@iota/util.js@^1.9.0-stardust.5":
+  version "1.9.0-stardust.5"
+  resolved "https://registry.yarnpkg.com/@iota/util.js/-/util.js-1.9.0-stardust.5.tgz#7278841687d8b3c6bc6b8d449ac78593c199a645"
+  integrity sha512-BGXzzjUQQYaV/H0bXJYKW+Zgd9PIN+HLPH8BcYhubI65X4G2ID23/osmpK/za+Ds6t/MkpdPKIiBwZPGXuCUBw==
+  dependencies:
+    big-integer "^1.6.51"
+
 "@iota/wallet@2.0.2-alpha.11":
   version "2.0.2-alpha.11"
   resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.11.tgz#2a03d16d59b3395c62604e5ff708f95ccde1fc49"
@@ -2023,6 +2030,11 @@ batch@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
   integrity sha1-3DQxT05nkxgJP8dgJyUl+UvyXBY=
+
+big-integer@^1.6.51:
+  version "1.6.51"
+  resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.51.tgz#0df92a5d9880560d3ff2d5fd20245c889d130686"
+  integrity sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==
 
 big.js@^5.2.2:
   version "5.2.2"

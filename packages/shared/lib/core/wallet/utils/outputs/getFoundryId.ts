@@ -1,5 +1,5 @@
-import { OUTPUT_TYPE_FOUNDRY } from '@core/wallet/constants'
-import { ALIAS_ADDRESS_TYPE, IFoundryOutput } from '@iota/types'
+import { ADDRESS_TYPE_ALIAS, OUTPUT_TYPE_FOUNDRY } from '@core/wallet/constants'
+import type { IFoundryOutput } from '@iota/types'
 import { HexHelper, WriteStream } from '@iota/util.js'
 
 export function buildFoundryId(foundry: IFoundryOutput): string {
@@ -7,11 +7,11 @@ export function buildFoundryId(foundry: IFoundryOutput): string {
         const immutableAliasUnlockCondition = foundry.unlockConditions[0]
         const aliasId =
             immutableAliasUnlockCondition.type === 6 &&
-            immutableAliasUnlockCondition.address.type === ALIAS_ADDRESS_TYPE
+            immutableAliasUnlockCondition.address.type === ADDRESS_TYPE_ALIAS
                 ? immutableAliasUnlockCondition.address.aliasId
                 : ''
         const typeWS = new WriteStream()
-        typeWS.writeUInt8('alias address type', ALIAS_ADDRESS_TYPE)
+        typeWS.writeUInt8('alias address type', ADDRESS_TYPE_ALIAS)
         const aliasAddress = HexHelper.addPrefix(`${typeWS.finalHex()}${HexHelper.stripPrefix(aliasId)}`)
         const serialNumberWS = new WriteStream()
         serialNumberWS.writeUInt32('serialNumber', foundry.serialNumber)
