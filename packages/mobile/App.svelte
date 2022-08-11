@@ -5,8 +5,7 @@
     import { StatusBar, Style } from '@capacitor/status-bar'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
-    import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
-    import { openPopup, popupState } from '@lib/popup'
+    import { popupState } from '@lib/popup'
     import { logout, keyboardHeight, mobile, stage } from '@lib/app'
     import { appSettings } from '@lib/appSettings'
     import { goto } from '@lib/helpers'
@@ -35,6 +34,7 @@
         Welcome,
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'
+    import { renameOldProfileFoldersToId } from '@lib/profile'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
     stage.set(Stage[process.env.STAGE?.toUpperCase()] ?? Stage.ALPHA)
@@ -100,6 +100,7 @@
         }, 3000)
 
         initRouters()
+        await renameOldProfileFoldersToId()
         await pollMarketData()
         await pollNetworkStatus()
     })
