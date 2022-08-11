@@ -95,7 +95,7 @@
             form="setup-pin"
             bind:this={submitButtonElement}
         >
-            {localize('actions.setPinCode')}
+            {localize('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-pink dark:bg-gray-900'}">

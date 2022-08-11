@@ -120,7 +120,7 @@
             classes="w-full"
             disabled={!strongholdPassword || !confirmedStrongholdPassword || busy}
         >
-            {localize('actions.savePassword')}
+            {localize('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
