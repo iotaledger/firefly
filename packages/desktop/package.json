@@ -1,7 +1,7 @@
 {
     "name": "desktop",
     "productName": "Firefly",
-    "version": "1.6.2",
+    "version": "1.6.5",
     "description": "Official IOTA wallet on desktop",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",

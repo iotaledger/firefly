@@ -99,6 +99,10 @@
             lightmode: 'governance/governance-not-found.svg',
             darkmode: 'governance/governance-not-found.svg',
         },
+        'iota-governance': {
+            lightmode: 'governance/iota-governance.png',
+            darkmode: 'governance/iota-governance.png',
+        },
     }
 </script>
 
