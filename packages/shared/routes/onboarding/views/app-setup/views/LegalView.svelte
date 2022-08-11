@@ -16,29 +16,29 @@
 
     $: termsAccepted = checked
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         lastAcceptedTermsOfService.set(TERMS_OF_SERVICE_VERSION)
         lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
         $appSetupRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $appSetupRouter.previous()
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.legal.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.appSetup.legal.title')}</Text>
     </div>
     <div slot="leftpane__content">
         {#if !$mobile}
-            <Text type="p" secondary classes="mb-8">{localize('views.legal.body')}</Text>
+            <Text type="p" secondary classes="mb-8">{localize('views.onboarding.appSetup.legal.body')}</Text>
         {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-col {$mobile ? 'space-y-4' : 'space-y-8'}">
-        <Checkbox label={localize('views.legal.checkbox')} bind:checked />
-        <Button classes="w-full" disabled={!termsAccepted} onClick={handleContinueClick}>
+        <Checkbox label={localize('views.onboarding.appSetup.legal.checkbox')} bind:checked />
+        <Button classes="w-full" disabled={!termsAccepted} onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>

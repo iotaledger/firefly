@@ -4,6 +4,7 @@
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { formatProtocolName } from '@core/network'
     import { profileSetupRouter } from '@core/router'
     import {
         getProfileTypeFromProfileRecoveryType,
@@ -31,27 +32,25 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize(`views.import.title.${$onboardingProfile?.networkProtocol}`)}</Text>
+        <Text type="h2"
+            >{localize('views.onboarding.profileSetup.setupRecovered.title', {
+                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+            })}</Text
+        >
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8"
-            >{localize(`views.import.body.${$onboardingProfile?.networkProtocol}`)}</Text
+            >{localize('views.onboarding.profileSetup.setupRecovered.body', {
+                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+            })}</Text
         >
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
-            primaryText={localize('views.import.importSeed')}
-            secondaryText={!$mobile ? localize('views.import.importSeedDescription') : ''}
-            icon="seed"
-            hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.migrateSeed?.hidden}
-            disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.migrateSeed?.enabled}
-            onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Seed)}
-        />
-        <OnboardingButton
-            primaryText={localize('views.import.importMnemonic')}
-            secondaryText={!$mobile ? localize('views.import.importMnemonicDescription') : ''}
+            primaryText={localize('views.onboarding.profileSetup.setupRecovered.importMnemonic')}
+            secondaryText={!$mobile
+                ? localize('views.onboarding.profileSetup.setupRecovered.importMnemonicDescription')
+                : ''}
             icon="language"
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.recoveryPhrase?.hidden}
@@ -60,9 +59,9 @@
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Mnemonic)}
         />
         <OnboardingButton
-            primaryText={localize(`views.import.importFile.${$onboardingProfile?.networkProtocol}`)}
+            primaryText={localize('views.onboarding.profileSetup.setupRecovered.importFile')}
             secondaryText={!$mobile
-                ? localize(`views.import.importFileDescription.${$onboardingProfile?.networkProtocol}`)
+                ? localize('views.onboarding.profileSetup.setupRecovered.importFileDescription')
                 : ''}
             icon="file"
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
@@ -73,8 +72,8 @@
         />
         {#if !$mobile}
             <OnboardingButton
-                primaryText={localize('views.import.importLedger')}
-                secondaryText={localize(`views.import.importLedgerDescription.${$onboardingProfile?.networkProtocol}`)}
+                primaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedger')}
+                secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedgerDescription')}
                 icon="chip"
                 hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                     ?.restoreProfile?.ledgerBackup?.hidden}

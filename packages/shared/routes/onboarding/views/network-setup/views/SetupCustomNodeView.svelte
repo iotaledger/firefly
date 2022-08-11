@@ -18,11 +18,11 @@
     let isBusy = false
     let formError = ''
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $networkSetupRouter.previous()
     }
 
-    async function handleContinueClick(): Promise<void> {
+    async function onContinueClick(): Promise<void> {
         isBusy = true
         try {
             await nodeConfigurationForm.validate({
@@ -60,12 +60,14 @@
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.customNetwork.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.networkSetup.setupPrivateNetwork.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8">{localize('views.customNetwork.body')}</Text>
+        <Text type="p" secondary classes="mb-8"
+            >{localize('views.onboarding.networkSetup.setupPrivateNetwork.body')}</Text
+        >
         <NodeConfigurationForm bind:this={nodeConfigurationForm} bind:node bind:formError {isBusy} isDeveloperProfile />
     </div>
     <div slot="leftpane__action">
@@ -74,10 +76,10 @@
             type="submit"
             form="node-configuration-form"
             classes="w-full"
-            onClick={handleContinueClick}
+            onClick={onContinueClick}
         >
             {#if isBusy}
-                <Spinner busy={isBusy} message={localize('popups.node.addingNode')} classes="justify-center" />
+                <Spinner busy={isBusy} message={localize('actions.addingNode')} classes="justify-center" />
             {:else}
                 {localize('actions.continue')}
             {/if}

@@ -1,6 +1,6 @@
 export enum ProfileRecoveryRoute {
-    TextImport = 'textImport',
-    FileImport = 'fileImport',
+    ImportMnemonicPhrase = 'textImport',
+    ImportStrongholdBackup = 'fileImport',
     LedgerImport = 'ledgerImport',
     BackupPassword = 'backupPassword',
     Success = 'success',
