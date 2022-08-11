@@ -36,7 +36,7 @@
                             "body": "Developer network for IOTA"
                         },
                         "private-net": {
-                            "title": "Private Net",
+                            "title": "Private net",
                             "body": "Support for custom networks with active TIPs"
                         }
                     },
@@ -50,7 +50,7 @@
                             "body": "Public beta network for Shimmer"
                         },
                         "private-net": {
-                            "title": "Private Net",
+                            "title": "Private net",
                             "body": "Support for custom networks with draft TIPs"
                         }
                     }
