@@ -52,7 +52,12 @@ export const CapacitorApi: IPlatform = {
         }))
     },
 
-    listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
+    listProfileFolders: async (profileStoragePath): Promise<string[]> => {
+        const profileFolders = await SecureFilesystemAccess.listProfileFolders({
+            folder: profileStoragePath,
+        })
+        return profileFolders?.files
+    },
 
     PincodeManager: PincodeManager,
 
