@@ -64,18 +64,18 @@
         },
     ]
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $shimmerClaimingRouter.previous()
     }
 
-    function handleUseBalanceFinderClick(): void {}
+    function onFindRewardsClick(): void {}
 
-    function handleClaimRewardsClick(): void {
+    function onClaimRewardsClick(): void {
         $shimmerClaimingRouter.next()
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2">
             {localize('views.claimRewards.title')}
@@ -88,10 +88,10 @@
         <RewardClaimList {accounts} />
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full mb-5" secondary onClick={handleUseBalanceFinderClick}
+        <Button classes="w-full mb-5" secondary onClick={onFindRewardsClick}
             >{localize('actions.useBalanceFinder')}</Button
         >
-        <Button classes="w-full" onClick={handleClaimRewardsClick}>{localize('actions.claimRewards')}</Button>
+        <Button classes="w-full" onClick={onClaimRewardsClick}>{localize('actions.claimRewards')}</Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {true && 'bg-pastel-yellow dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />

@@ -1,5 +1,14 @@
 {
     "views": {
+        "onboarding": {
+            "shimmerClaiming": {
+                "success": {
+                    "title": "Rewards claimed",
+                    "body": "You have successfully claimed Shimmer tokens for your new profile.",
+                    "totalRewards": "Total rewards"
+                }
+            }
+        },
         "welcome": {
             "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Firefly is the official wallet software of IOTA."
@@ -693,7 +702,7 @@
             "optionalPassword": "Password (optional)",
             "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?",            
+            "removeConfirmation": "Are you sure you want to remove this node?",
             "info": {
                 "general": {
                     "tab": "General",
