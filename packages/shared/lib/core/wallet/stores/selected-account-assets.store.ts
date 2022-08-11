@@ -25,7 +25,7 @@ export const assetFilter: Writable<AssetFilter> = writable({
 })
 
 export const selectedAccountAssets: Readable<IAccountAssets> = derived(
-    [activeProfileId, selectedAccountId, persistedAssets, assetFilter],
+    [activeProfileId, selectedAccountId, persistedAssets],
     ([$activeProfileId, $selectedAccountId]) => {
         if ($activeProfileId && $selectedAccountId) {
             return getAccountAssetsForSelectedAccount()
@@ -33,4 +33,12 @@ export const selectedAccountAssets: Readable<IAccountAssets> = derived(
             return { baseCoin: undefined, nativeTokens: [] }
         }
     }
+)
+
+export const visibleSelectedAccountAssets: Readable<IAccountAssets> = derived(
+    [selectedAccountAssets],
+    ([$selectedAccountAssets]) => ({
+        baseCoin: $selectedAccountAssets.baseCoin,
+        nativeTokens: $selectedAccountAssets.nativeTokens.filter((asset) => !asset.hidden),
+    })
 )

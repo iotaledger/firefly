@@ -3,14 +3,8 @@
     import { fade } from 'svelte/transition'
     import { createEventDispatcher } from 'svelte'
 
-    enum Size {
-        Small = 'small',
-        Medium = 'medium',
-        Large = 'large',
-    }
-
     export let position: { top?: string; right?: string; bottom?: string; left?: string; absolute?: boolean } = {}
-    export let size: Size = Size.Medium
+    export let size: 'small' | 'medium' | 'large' = 'medium'
     export let classes: string = ''
     export let disableOnClickOutside = false
 
@@ -65,11 +59,13 @@
 <style type="text/scss">
     modal-content {
         position: var(--modal-position);
-        min-width: 230px;
         top: var(--modal-position-top);
         right: var(--modal-position-right);
         bottom: var(--modal-position-bottom);
         left: var(--modal-position-left);
+        &.medium {
+            min-width: 230px;
+        }
         &.large {
             min-width: 420px;
         }

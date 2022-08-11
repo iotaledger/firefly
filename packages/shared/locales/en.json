@@ -1,6 +1,6 @@
 {
     "views": {
-        "onboarding1": {
+        "welcome": {
             "title": "Send, Receive & Manage your {protocol} tokens",
             "body": "Firefly is the official wallet software of IOTA."
         },
@@ -8,11 +8,6 @@
             "title": "Privacy Policy & Terms of Service",
             "body": "Please review the Privacy Policy and Terms of Service.",
             "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
-        },
-        "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "languageAndAppearance": {
             "title": "Language & appearance",
@@ -38,11 +33,6 @@
             "chrysalisTitle": "Chrysalis Network Update",
             "chrysalisBody": "From April 21st 2021, users can migrate their tokens to the new Chrysalis network. We recommend you migrate your existing tokens as soon as possible.",
             "learnMore": "Learn about the migration"
-        },
-        "secure": {
-            "title": "Secure your wallet",
-            "body1": "Save and print the Recovery Kit PDF template.",
-            "body2": "If you fill out the Recovery Kit and store it safely, you will always be able to recover your wallets."
         },
         "create": {
             "title": "Create a wallet",
@@ -143,7 +133,7 @@
         },
         "verifyRecoveryPhrase": {
             "title": "Verify recovery phrase",
-            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order.",
+            "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
             "word": "Word",
             "verified": "Recovery phrase verified",
             "verifiedBody": "Remember to keep it private and safely stored."
@@ -458,7 +448,8 @@
                 "includeNode": "Include node",
                 "editDetails": "Edit details",
                 "viewInfo": "View info",
-                "setAsPrimary": "Set as primary",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "Include official node list",
                 "noNodes": "There are no nodes, unable to connect to the network",
@@ -679,6 +670,14 @@
             "internal": "Internal Address",
             "external": "Deposit Address"
         },
+        "excludeNode": {
+            "title": "Exclude node",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
+        },
+        "unsetAsPrimaryNode" : {
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
+        },
         "node": {
             "titleAdd": "Add a node",
             "titleUpdate": "Update a node",
@@ -694,8 +693,7 @@
             "optionalPassword": "Password (optional)",
             "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "removeConfirmation": "Are you sure you want to remove this node?",            
             "info": {
                 "general": {
                     "tab": "General",
@@ -939,7 +937,7 @@
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
-        
+
     },
     "charts": {
         "incomingMi": "Incoming {value}",
@@ -1029,9 +1027,9 @@
         "deleteAccount": "Delete wallet",
         "max": "Max",
         "addNode": "Add node",
+        "addOfficialNodes": "Add official nodes",
         "updateNode": "Update node",
         "removeNode": "Remove node",
-        "removeAllNodes": "Remove all nodes",
         "hide": "Hide",
         "hideOthers": "Hide Others",
         "showAll": "Show All",
@@ -1098,7 +1096,6 @@
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata"
-
     },
     "general": {
         "recipient": "Recipient",
@@ -1272,7 +1269,8 @@
         "faucetRequestDescription": "Request tokens from the {network} faucet",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
-        "giftStorageDeposit": "Gift storage deposit"
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded"
 
     },
     "filters":{
@@ -1292,6 +1290,9 @@
             "new": "New",
             "notVerified": "Not verified",
             "verified": "Verified"
+        },
+        "asset": {
+            "label": "Assets"
         },
         "amount": {
             "label": "Amount",

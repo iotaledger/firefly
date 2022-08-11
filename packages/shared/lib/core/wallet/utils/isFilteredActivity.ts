@@ -21,6 +21,11 @@ export function isFilteredActivity(activity: Activity): boolean {
     ) {
         return true
     }
+    if (filter.asset.active && filter.asset.selected) {
+        if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
+            return true
+        }
+    }
     if (filter.amount.active) {
         const activityAmount =
             activity.rawAmount / 10 ** getAssetFromPersistedAssets(activity.assetId).metadata.decimals

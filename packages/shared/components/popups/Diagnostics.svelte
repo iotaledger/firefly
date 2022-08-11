@@ -31,14 +31,6 @@
                 value: $activeProfile?.settings?.currency,
             })
             appVars.push({
-                label: 'views.settings.networkConfiguration.nodeConfiguration.title',
-                value: localize(
-                    `views.settings.networkConfiguration.nodeConfiguration.${
-                        $activeProfile?.clientOptions?.automaticNodeSelection ? 'automatic' : 'manual'
-                    }`
-                ),
-            })
-            appVars.push({
                 label: 'general.nodeList',
                 value: $activeProfile?.clientOptions?.nodes?.map((node) => node?.url)?.toString(),
             })

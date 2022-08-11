@@ -1,18 +1,22 @@
 import { ClientOptions, CoinType, SecretManager } from '@iota/wallet'
+
+import { generateRandomId } from '@lib/utils'
+
 import { api } from '../api'
-import { profileManager } from '../stores'
+import { IProfileManager } from '../interfaces'
 
 export function initialiseProfileManager(
     storagePath: string,
     coinType: CoinType,
     clientOptions?: ClientOptions,
-    secretManager?: SecretManager
-): void {
-    const newProfileManager = api.createAccountManager({
+    secretManager?: SecretManager,
+    id?: string
+): IProfileManager {
+    id = id ?? generateRandomId()
+    return api.createAccountManager(id, {
         storagePath,
         ...(clientOptions && { clientOptions }),
         coinType,
         ...(secretManager && { secretManager }),
     })
-    profileManager.set(newProfileManager)
 }
