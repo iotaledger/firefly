@@ -1,6 +1,12 @@
 {
     "views": {
         "onboarding": {
+            "profileSetup": {
+                "setupClaimed": {
+                    "title": "Claim Shimmer staking rewards",
+                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                }
+            },
             "shimmerClaiming": {
                 "success": {
                     "title": "Rewards claimed",

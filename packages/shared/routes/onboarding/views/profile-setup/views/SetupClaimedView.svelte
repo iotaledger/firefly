@@ -35,12 +35,10 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize(`views.import.title.${$onboardingProfile?.networkProtocol}`)}</Text>
+        <Text type="h2">{localize('views.onboarding.profileSetup.setupClaimed.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8"
-            >{localize(`views.import.body.${$onboardingProfile?.networkProtocol}`)}</Text
-        >
+        <Text type="p" secondary classes="mb-8">{localize('views.onboarding.profileSetup.setupClaimed.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
