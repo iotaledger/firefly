@@ -92,7 +92,7 @@ export class ProfileManagerMock implements IProfileManager {
                     pruningIndex: 34629,
                 },
                 protocol: {
-                    protocolVersion: 2,
+                    version: 2,
                     networkName: 'alphanet-5',
                     bech32Hrp: 'rms',
                     minPowScore: 1000,
