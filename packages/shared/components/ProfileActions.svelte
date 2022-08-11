@@ -24,6 +24,7 @@
     $: backupWarningColor = getBackupWarningColor(lastBackupDate)
 
     $: healthStatusColor = NETWORK_HEALTH_COLORS[$networkStatus?.health ?? 0]
+    $: healthStatusText = $networkStatus.healthText ?? NetworkStatusHealthText.Down
 
     async function handleLogoutClick(): Promise<void> {
         // @todo on desktop uses true as param, on mobile we get errors
@@ -150,7 +151,7 @@
             {localize('views.dashboard.network.status')}
         </Text>
         <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
-            {localize('views.dashboard.network.networkOperational')}
+            {localize(`views.dashboard.network.${healthStatusText}`)}
         </Text>
         <Icon
             width={18}
