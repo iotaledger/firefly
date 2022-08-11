@@ -1,6 +1,6 @@
 import { OUTPUT_TYPE_FOUNDRY } from '@core/wallet/constants'
-import { ALIAS_ADDRESS_TYPE, IFoundryOutput } from '@iota/iota.js-stardust'
-import { HexHelper, WriteStream } from '@iota/util.js-stardust'
+import { ALIAS_ADDRESS_TYPE, IFoundryOutput } from '@iota/types'
+import { HexHelper, WriteStream } from '@iota/util.js'
 
 export function buildFoundryId(foundry: IFoundryOutput): string {
     if (foundry.type === OUTPUT_TYPE_FOUNDRY) {
