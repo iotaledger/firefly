@@ -3,6 +3,7 @@
     import { Animation, Button, ImportTextfield, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { setStrongholdPassword } from '@core/profile-manager'
     import { profileRecoveryRouter } from '@core/router'
     import {
         DEFAULT_STRONGHOLD_PASSWORD,
@@ -10,7 +11,6 @@
         updateOnboardingProfile,
         verifyAndStoreMnemonic,
     } from '@contexts/onboarding'
-    import { setStrongholdPassword } from '@core/profile-manager'
 
     let input = ''
 

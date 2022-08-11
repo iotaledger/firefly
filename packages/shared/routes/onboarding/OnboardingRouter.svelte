@@ -16,6 +16,14 @@
         CongratulationsView,
     } from './views'
     import { OnboardingRoute, onboardingRoute } from '@core/router'
+
+    import { profileManager } from '@core/profile-manager'
+    /* eslint-disable no-console */
+    $: console.log('PROFILE MANAGER: ', $profileManager)
+
+    import { shimmerClaimingProfileManager } from '@contexts/onboarding'
+    /* eslint-disable no-console */
+    $: console.log('SHIMMER CLAIMING PROFILE MANAGER: ', $shimmerClaimingProfileManager)
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.AppSetup}
