@@ -34,7 +34,7 @@
         $profileRouter.goTo(ProfileRoute.ProfileActions)
         if (drawer) {
             drawer.open()
-            $backButtonStore.add(drawer.close)
+            $backButtonStore?.add(drawer.close)
         }
     }
 

@@ -14,6 +14,8 @@ import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PermissionState;
@@ -89,18 +91,36 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 return;
             }
 
-            if (Build.VERSION.SDK_INT == 29 && resourceType.equals("folder")) {
+            if (Build.VERSION.SDK_INT <= 32 && resourceType.equals("folder")) {
+                selectedPath = getContext().getCacheDir().getPath() + File.separator + fileName;
+                String authority = getContext().getPackageName() + ".fileprovider";
+                File file = new File(Uri.parse(selectedPath).getPath());
+                Uri fileUrl = FileProvider.getUriForFile(getActivity(), authority, file);
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, fileUrl);
+                shareIntent.setData(fileUrl);
+                shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                getContext().startActivity(Intent.createChooser(shareIntent, null));
+
+                JSObject response = new JSObject();
+                response.put("selected", selectedPath);
+                call.resolve(response);
+                return;
+            }
+
+//            if (Build.VERSION.SDK_INT == 29 && resourceType.equals("folder")) {
                 // Temporary hotfix for Android 10, it's uses new storage later deprecated on API 30,
                 // We don't show the picker to export, as Stronghold can only copy on cache, then we copy
                 // on Downloads folder calling finishBackup() to give to the user an accessible location
                 // API level 29 use media collections such as MediaStore.Downloads
                 // without requesting any storage-related permissions.
-                JSObject response = new JSObject();
-                selectedPath = getContext().getCacheDir().getPath() + File.separator + fileName;
-                response.put("selected", selectedPath);
-                call.resolve(response);
-                return;
-            }
+//                JSObject response = new JSObject();
+//                selectedPath = getContext().getCacheDir().getPath() + File.separator + fileName;
+//                response.put("selected", selectedPath);
+//                call.resolve(response);
+//                return;
+//            }
 
             Intent intent = new Intent(resourceType.equals("file")
                     ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT_TREE);
