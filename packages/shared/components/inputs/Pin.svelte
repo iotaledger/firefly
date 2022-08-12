@@ -113,7 +113,7 @@
     }
 
     function handleNextMobile(i: number): void {
-        if (inputElements[i - 1].value === '') {
+        if (inputElements[i - 1]?.value === '') {
             inputs[i] = ''
             inputElements[i - 1].focus()
         }
