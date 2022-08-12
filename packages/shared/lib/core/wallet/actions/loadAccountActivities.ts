@@ -8,6 +8,7 @@ import { linkActivityAndClaimingTransaction } from './linkActivityAndClaimingTra
 import { preprocessOutput, preprocessTransaction } from '../utils'
 import { hideActivitiesForFoundries } from './hideActivitiesForFoundries'
 import { Activity } from '../classes'
+import { tryGetAndStoreAssetFromPersistedAssets } from './tryGetAndStoreAssetFromPersistedAssets'
 
 export async function loadAccountActivities(account: IAccountState): Promise<void> {
     addEmptyAccountActivitiesToAllAccountActivities(account.id)
@@ -29,6 +30,11 @@ export async function loadAccountActivities(account: IAccountState): Promise<voi
     }
     const activities = preparedActivities.map((_preparedActivity) => new Activity(_preparedActivity, account))
     replaceAccountActivitiesInAllAccountActivities(account.id, activities)
+
+    const allAssetIds = [...new Set(activities.map((activity) => activity.assetId))]
+    for (const assetId of allAssetIds) {
+        await tryGetAndStoreAssetFromPersistedAssets(assetId)
+    }
 
     hideActivitiesForFoundries(account)
     await setAsyncActivitiesToClaimed(account)
