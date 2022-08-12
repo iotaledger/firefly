@@ -332,7 +332,7 @@
 
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+        <Text type="h3" classes="text-left">
             {localize('tooltips.stakingMinRewards.titleMinBalance', { values: { amount: tooltipMinBalance } })}
         </Text>
         <Text type="p" secondary classes="text-left">{localize('tooltips.stakingMinRewards.bodyMinBalance')}</Text>
