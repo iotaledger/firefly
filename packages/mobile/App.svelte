@@ -7,7 +7,7 @@
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
     import { openPopup, popupState } from '@lib/popup'
-    import { logout, keyboardHeight, mobile, stage } from '@lib/app'
+    import { logout, keyboardHeight, isKeyboardOpened, mobile, stage } from '@lib/app'
     import { appSettings } from '@lib/appSettings'
     import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
@@ -80,10 +80,17 @@
 
     void Keyboard.addListener('keyboardDidShow', (info) => {
         // We use also didShow since in some cases the height is higher
-        $keyboardHeight = info.keyboardHeight
+        // $keyboardHeight = info.keyboardHeight
+        // $isKeyboardOpened = info.
     })
     void Keyboard.addListener('keyboardWillShow', (info) => {
+        // Listen for when the keyboard is about to be showed.
         $keyboardHeight = info.keyboardHeight
+        $isKeyboardOpened = true
+    })
+    void Keyboard.addListener('keyboardDidHide', () => {
+        // Listen for when the keyboard is about to be hidden.
+        $isKeyboardOpened = false
     })
 
     async function hideSplashScreen() {
