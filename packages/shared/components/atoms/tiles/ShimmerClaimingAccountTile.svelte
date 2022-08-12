@@ -4,9 +4,12 @@
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
     import { formatTokenAmountBestMatch } from '@core/wallet'
-    import { IShimmerClaimingAccount } from '@contexts/onboarding'
+    import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
 
     export let shimmerClaimingAccount: IShimmerClaimingAccount
+
+    $: shouldDisplayUnclaimedRewards = shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.FullyClaimed
+    $: shouldDisplayClaimedRewards = shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.Unclaimed
 </script>
 
 {#if shimmerClaimingAccount}
@@ -17,13 +20,15 @@
                 <Text type={TextType.p}>{shimmerClaimingAccount?.meta?.alias}</Text>
             </div>
             <div class="flex flex-col text-right">
-                <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
-                    {formatTokenAmountBestMatch(
-                        shimmerClaimingAccount?.unclaimedRewards,
-                        BASE_TOKEN[NetworkProtocol.Shimmer]
-                    )}
-                </Text>
-                {#if shimmerClaimingAccount?.claimedRewards > 0}
+                {#if shouldDisplayUnclaimedRewards}
+                    <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
+                        {formatTokenAmountBestMatch(
+                            shimmerClaimingAccount?.unclaimedRewards,
+                            BASE_TOKEN[NetworkProtocol.Shimmer]
+                        )}
+                    </Text>
+                {/if}
+                {#if shouldDisplayClaimedRewards}
                     <div class="flex flex-row items-center space-x-2">
                         <Icon
                             width="16"
