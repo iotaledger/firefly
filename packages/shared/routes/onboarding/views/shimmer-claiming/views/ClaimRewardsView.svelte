@@ -32,36 +32,43 @@
     }
 
     async function onUseBalanceFinderClick(): Promise<void> {
-        isSearchingForRewards = true
-        hasSearchedForRewardsBefore = true
-
-        await findShimmerRewards()
-        refreshView()
-
-        isSearchingForRewards = false
+        try {
+            isSearchingForRewards = true
+            hasSearchedForRewardsBefore = true
+            shimmerClaimingAccounts = await findShimmerRewards()
+            refreshView()
+        } catch (err) {
+            console.error(err)
+        } finally {
+            isSearchingForRewards = false
+        }
     }
 
     async function onClaimRewardsClick(): Promise<void> {
-        isClaimingRewards = true
-        hasTriedClaimingRewards = true
-
-        await claimShimmerRewards()
-        refreshView()
-
-        isClaimingRewards = false
-
-        // $shimmerClaimingRouter.next()
+        try {
+            isClaimingRewards = true
+            hasTriedClaimingRewards = true
+            await claimShimmerRewards()
+            refreshView()
+            // $shimmerClaimingRouter.next()
+        } catch (err) {
+            console.error(err)
+        } finally {
+            isClaimingRewards = false
+        }
     }
 
     async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
-        isSearchingForRewards = true
-
-        const shimmerClaimingAccount = await initialiseShimmerClaimingAccount()
-        shimmerClaimingAccounts.push(shimmerClaimingAccount)
-
-        refreshView()
-
-        isSearchingForRewards = false
+        try {
+            isSearchingForRewards = true
+            const shimmerClaimingAccount = await initialiseShimmerClaimingAccount()
+            shimmerClaimingAccounts.push(shimmerClaimingAccount)
+            refreshView()
+        } catch (err) {
+            console.error(err)
+        } finally {
+            isSearchingForRewards = false
+        }
     }
 
     onMount(() => {

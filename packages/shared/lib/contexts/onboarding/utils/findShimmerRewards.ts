@@ -20,7 +20,6 @@ export async function findShimmerRewards(): Promise<IShimmerClaimingAccount[]> {
         return Promise.all(
             accounts.map(async (account) => {
                 const boundAccount = await api?.getAccount(_shimmerClaimingProfileManager?.id, account?.meta?.index)
-                // console.log
                 const balance = await boundAccount?.getBalance()
                 return prepareShimmerClaimingAccount(boundAccount, balance)
             })
