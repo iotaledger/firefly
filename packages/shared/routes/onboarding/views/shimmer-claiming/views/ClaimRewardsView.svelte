@@ -3,7 +3,12 @@
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { shimmerClaimingRouter } from '@core/router'
-    import { initialiseShimmerClaimingAccount, IShimmerClaimingAccount } from '@contexts/onboarding'
+    import {
+        claimShimmerRewards,
+        findShimmerRewards,
+        initialiseShimmerClaimingAccount,
+        IShimmerClaimingAccount,
+    } from '@contexts/onboarding'
 
     let shimmerClaimingAccounts: IShimmerClaimingAccount[] = []
 
@@ -18,39 +23,39 @@
         shimmerClaimingAccounts = shimmerClaimingAccounts
     }
 
-    function onUseBalanceFinderClick(): void {
+    async function onUseBalanceFinderClick(): Promise<void> {
         isSearchingForRewards = true
         hasSearchedForRewardsBefore = true
 
-        // do stuff
+        await findShimmerRewards()
         refreshView()
 
-        setTimeout(() => {
-            isSearchingForRewards = false
-        }, 2000)
+        isSearchingForRewards = false
     }
 
     let isClaimingRewards = false
     let hasTriedClaimingRewards = false
 
-    function onClaimRewardsClick(): void {
+    async function onClaimRewardsClick(): Promise<void> {
         isClaimingRewards = true
         hasTriedClaimingRewards = true
 
-        // do stuff
+        await claimShimmerRewards()
         refreshView()
 
-        setTimeout(() => {
-            isClaimingRewards = false
-        }, 2000)
+        isClaimingRewards = false
 
         // $shimmerClaimingRouter.next()
     }
 
     async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
         isSearchingForRewards = true
-        shimmerClaimingAccounts.push(await initialiseShimmerClaimingAccount())
+
+        const shimmerClaimingAccount = await initialiseShimmerClaimingAccount()
+        shimmerClaimingAccounts.push(shimmerClaimingAccount)
+
         refreshView()
+
         isSearchingForRewards = false
     }
 
