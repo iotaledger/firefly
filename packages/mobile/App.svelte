@@ -78,11 +78,6 @@
         }
     })
 
-    void Keyboard.addListener('keyboardDidShow', (info) => {
-        // We use also didShow since in some cases the height is higher
-        // $keyboardHeight = info.keyboardHeight
-        // $isKeyboardOpened = info.
-    })
     void Keyboard.addListener('keyboardWillShow', (info) => {
         // Listen for when the keyboard is about to be showed.
         $keyboardHeight = info.keyboardHeight
