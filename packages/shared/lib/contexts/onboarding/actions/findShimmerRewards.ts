@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { api } from '@core/profile-manager'
+import { api, profileManager } from '@core/profile-manager'
 
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { shimmerClaimingProfileManager, updateOnboardingProfile } from '../stores'
@@ -19,9 +19,21 @@ export async function findShimmerRewards(): Promise<void> {
 
         const shimmerClaimingAccounts = await Promise.all(
             accounts.map(async (account) => {
-                const boundAccount = await api?.getAccount(_shimmerClaimingProfileManager?.id, account?.meta?.index)
-                const balance = await boundAccount?.getBalance()
-                return prepareShimmerClaimingAccount(boundAccount, balance)
+                const boundShimmerClaimingAccount = await api?.getAccount(
+                    _shimmerClaimingProfileManager?.id,
+                    account?.meta?.index
+                )
+                const boundRegularAccount = await api?.getAccount(get(profileManager)?.id, account?.meta?.index)
+                if (boundShimmerClaimingAccount?.meta?.index !== boundRegularAccount?.meta?.index) {
+                    return
+                }
+
+                const balance = await boundShimmerClaimingAccount?.getBalance()
+                return prepareShimmerClaimingAccount(
+                    boundShimmerClaimingAccount,
+                    balance,
+                    boundRegularAccount?.meta?.publicAddresses[0]?.address
+                )
             })
         )
         updateOnboardingProfile({ shimmerClaimingAccounts })

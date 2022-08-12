@@ -1,31 +1,28 @@
 import { get } from 'svelte/store'
 
 import { IAccount } from '@core/account'
-import { api } from '@core/profile-manager'
+import { api, profileManager } from '@core/profile-manager'
 
 import { MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
-import { onboardingProfile, shimmerClaimingProfileManager, updateOnboardingProfile } from '../stores'
+import { shimmerClaimingProfileManager, updateShimmerClaimingAccounts } from '../stores'
 
 export async function findShimmerRewardsForAccount(account: IAccount): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
     if (!_shimmerClaimingProfileManager) {
         throw new MissingShimmerClaimingProfileManagerError()
     }
-    const boundAccount = await api.getAccount(_shimmerClaimingProfileManager?.id, account?.meta?.index)
-    const syncedBalance = await boundAccount?.sync()
-    const syncedShimmerClaimingAccount = prepareShimmerClaimingAccount(boundAccount, syncedBalance)
+    const boundShimmerClaimingAccount = await api.getAccount(_shimmerClaimingProfileManager?.id, account?.meta?.index)
+    const boundRegularAccount = await api.getAccount(get(profileManager)?.id, account?.meta?.index)
+    if (boundShimmerClaimingAccount?.meta?.index !== boundRegularAccount?.meta?.index) {
+        return
+    }
 
-    const _onboardingProfile = get(onboardingProfile)
-    const isNewShimmerClaimingAccount = !_onboardingProfile?.shimmerClaimingAccounts.some(
-        (shimmerClaimingAccount) => shimmerClaimingAccount?.meta?.index === account?.meta?.index
+    const syncedBalance = await boundShimmerClaimingAccount?.sync()
+    const syncedShimmerClaimingAccount = prepareShimmerClaimingAccount(
+        boundShimmerClaimingAccount,
+        syncedBalance,
+        boundRegularAccount?.meta?.publicAddresses[0]?.address
     )
-    const shimmerClaimingAccounts = isNewShimmerClaimingAccount
-        ? [..._onboardingProfile?.shimmerClaimingAccounts, syncedShimmerClaimingAccount]
-        : _onboardingProfile?.shimmerClaimingAccounts?.map((shimmerClaimingAccount) =>
-              shimmerClaimingAccount?.meta?.index === account?.meta?.index
-                  ? syncedShimmerClaimingAccount
-                  : shimmerClaimingAccount
-          )
-    updateOnboardingProfile({ shimmerClaimingAccounts })
+    updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)
 }

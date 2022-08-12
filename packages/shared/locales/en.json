@@ -173,7 +173,7 @@
                 "claimRewards": {
                     "title": "Your Shimmer staking rewards",
                     "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
-                }, 
+                },
                 "success": {
                     "title": "Rewards claimed",
                     "body": "You have successfully claimed Shimmer tokens for your new profile.",
@@ -1301,6 +1301,10 @@
         },
         "refreshTokenMetadata": {
             "success": "All token metadata has been reset and refreshed"
+        },
+        "shimmerClaiming": {
+            "success": "Successfully claimed Shimmer rewards",
+            "error": "Failed to claim Shimmer rewards"
         }
     },
     "error": {
