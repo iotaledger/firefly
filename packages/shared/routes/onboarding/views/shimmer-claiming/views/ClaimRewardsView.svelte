@@ -12,12 +12,15 @@
 
     let shimmerClaimingAccounts: IShimmerClaimingAccount[] = []
 
+    let isSearchingForRewards = false
+    let hasSearchedForRewardsBefore = false
+
+    let isClaimingRewards = false
+    let hasTriedClaimingRewards = false
+
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
     }
-
-    let isSearchingForRewards = false
-    let hasSearchedForRewardsBefore = false
 
     function refreshView(): void {
         shimmerClaimingAccounts = shimmerClaimingAccounts
@@ -32,9 +35,6 @@
 
         isSearchingForRewards = false
     }
-
-    let isClaimingRewards = false
-    let hasTriedClaimingRewards = false
 
     async function onClaimRewardsClick(): Promise<void> {
         isClaimingRewards = true

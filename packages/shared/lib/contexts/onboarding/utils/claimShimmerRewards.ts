@@ -1,5 +1,9 @@
 import { sleep } from '@lib/utils'
 
 export async function claimShimmerRewards(): Promise<void> {
-    await sleep(2000)
+    try {
+        await sleep(2000)
+    } catch (err) {
+        console.error(err)
+    }
 }
