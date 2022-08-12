@@ -11,6 +11,7 @@ import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
+import { preprocessTransaction } from '../utils'
 
 export async function mintNativeToken(
     maximumSupply: number,
@@ -35,11 +36,9 @@ export async function mintNativeToken(
             metadata,
             VerificationStatus.Verified
         )
+        const processedOutput = preprocessTransaction(mintTokenTransaction.transaction, account)
         addPersistedAsset(persistedAsset)
-        addActivityToAccountActivitiesInAllAccountActivities(
-            account.id,
-            await new Activity().setFromTransaction(mintTokenTransaction.transaction, account)
-        )
+        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedOutput, account))
         showAppNotification({
             type: 'success',
             message: localize('notifications.mintNativeToken.success'),

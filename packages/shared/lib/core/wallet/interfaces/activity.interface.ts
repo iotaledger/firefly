@@ -1,5 +1,3 @@
-import { IAccountState } from '@core/account'
-import { Transaction } from '@iota/wallet'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { Subject } from '../types'
 import { IUTXOInput } from '@iota/types'
@@ -16,7 +14,6 @@ export interface IActivity {
     rawAmount: number
     sender: Subject
     recipient: Subject
-    isSelfTransaction: boolean
     assetId: string
     isAsync: boolean
     asyncStatus: ActivityAsyncStatus
@@ -32,7 +29,6 @@ export interface IActivity {
     claimedDate?: Date
 
     updateFromPartialActivity(partialActivity: Partial<IActivity>): void
-    setFromTransaction(transaction: Transaction, account: IAccountState): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string
     getFiatAmount(fiatPrice: number, exchangeRate: number): string

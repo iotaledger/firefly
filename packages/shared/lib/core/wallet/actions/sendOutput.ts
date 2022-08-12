@@ -5,6 +5,7 @@ import { isTransferring } from '@lib/wallet'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
+import { preprocessTransaction } from '../utils'
 
 export async function sendOutput(output: OutputTypes): Promise<void> {
     try {
@@ -14,10 +15,8 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
             remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
         }
         const transaction = await account.sendOutputs([output], transactionOptions)
-        addActivityToAccountActivitiesInAllAccountActivities(
-            account.id,
-            await new Activity().setFromTransaction(transaction, account)
-        )
+        const processedOutput = preprocessTransaction(transaction, account)
+        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedOutput, account))
         isTransferring.set(false)
         return
     } catch (err) {

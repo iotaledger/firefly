@@ -7,8 +7,9 @@ import { Bech32Helper } from '@lib/bech32Helper'
 import { Converter } from '@lib/converter'
 import { get } from 'svelte/store'
 import { NewOutputEvent } from '../types/newOutputEvent'
+import { preprocessOutput } from '@core/wallet'
 
-export async function handleNewOutputEvent(accountId: string, event: NewOutputEvent): Promise<void> {
+export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): void {
     const account = get(activeAccounts).find((account) => account.id === accountId)
 
     const address =
@@ -21,9 +22,8 @@ export async function handleNewOutputEvent(accountId: string, event: NewOutputEv
         !event?.output?.remainder
     ) {
         syncBalance(account.id)
-        addActivityToAccountActivitiesInAllAccountActivities(
-            account.id,
-            await new Activity().setFromOutputData(event?.output, account, event?.transactionInputs)
-        )
+
+        const processedOutput = preprocessOutput(event?.output, event?.transactionInputs)
+        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedOutput, account))
     }
 }
