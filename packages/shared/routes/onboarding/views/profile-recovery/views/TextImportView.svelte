@@ -8,6 +8,8 @@
     import {
         DEFAULT_STRONGHOLD_PASSWORD,
         onboardingProfile,
+        ProfileSetupType,
+        shimmerClaimingProfileManager,
         updateOnboardingProfile,
         verifyAndStoreMnemonic,
     } from '@contexts/onboarding'
@@ -15,11 +17,16 @@
     let input = ''
 
     async function onContinueClick(): Promise<void> {
+        const isClaimedProfileSetupType = $onboardingProfile?.setupType === ProfileSetupType.Claimed
         const mnemonic = input.split(' ')
         updateOnboardingProfile({ mnemonic })
         await setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
         updateOnboardingProfile({ strongholdPassword: DEFAULT_STRONGHOLD_PASSWORD })
         await verifyAndStoreMnemonic()
+        if (isClaimedProfileSetupType) {
+            await $shimmerClaimingProfileManager?.setStrongholdPassword(DEFAULT_STRONGHOLD_PASSWORD)
+            await $shimmerClaimingProfileManager?.storeMnemonic(mnemonic.join(' '))
+        }
         $profileRecoveryRouter.next()
     }
 
