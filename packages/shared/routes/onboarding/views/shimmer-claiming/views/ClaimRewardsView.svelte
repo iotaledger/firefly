@@ -6,11 +6,15 @@
     import {
         claimShimmerRewards,
         findShimmerRewards,
-        initialiseShimmerClaimingAccount,
+        initialiseFirstShimmerClaimingAccount,
         IShimmerClaimingAccount,
+        onboardingProfile,
     } from '@contexts/onboarding'
 
-    let shimmerClaimingAccounts: IShimmerClaimingAccount[] = []
+    // TODO: Adjust UX to show empty account first
+
+    let shimmerClaimingAccounts: IShimmerClaimingAccount[]
+    $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
     let isSearchingForRewards = false
     let hasSearchedForRewardsBefore = false
@@ -27,16 +31,11 @@
         $shimmerClaimingRouter.previous()
     }
 
-    function refreshView(): void {
-        shimmerClaimingAccounts = shimmerClaimingAccounts
-    }
-
     async function onUseBalanceFinderClick(): Promise<void> {
         try {
             isSearchingForRewards = true
             hasSearchedForRewardsBefore = true
-            shimmerClaimingAccounts = await findShimmerRewards()
-            refreshView()
+            await findShimmerRewards()
         } catch (err) {
             console.error(err)
         } finally {
@@ -49,7 +48,6 @@
             isClaimingRewards = true
             hasTriedClaimingRewards = true
             await claimShimmerRewards()
-            refreshView()
             // $shimmerClaimingRouter.next()
         } catch (err) {
             console.error(err)
@@ -58,12 +56,10 @@
         }
     }
 
-    async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
+    async function initialiseClaimRewardsView(): Promise<void> {
         try {
             isSearchingForRewards = true
-            const shimmerClaimingAccount = await initialiseShimmerClaimingAccount()
-            shimmerClaimingAccounts.push(shimmerClaimingAccount)
-            refreshView()
+            await initialiseFirstShimmerClaimingAccount()
         } catch (err) {
             console.error(err)
         } finally {
@@ -72,7 +68,7 @@
     }
 
     onMount(() => {
-        void initialiseFirstShimmerClaimingAccount()
+        void initialiseClaimRewardsView()
     })
 </script>
 

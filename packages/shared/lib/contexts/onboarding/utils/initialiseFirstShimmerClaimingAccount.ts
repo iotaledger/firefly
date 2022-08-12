@@ -5,10 +5,9 @@ import { api } from '@core/profile-manager'
 
 import { CannotInitialiseShimmerClaimingAccountError, MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
-import { IShimmerClaimingAccount } from '../interfaces'
-import { shimmerClaimingProfileManager } from '../stores'
+import { shimmerClaimingProfileManager, updateOnboardingProfile } from '../stores'
 
-export async function initialiseShimmerClaimingAccount(): Promise<IShimmerClaimingAccount> {
+export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
     if (!_shimmerClaimingProfileManager) {
         throw new MissingShimmerClaimingProfileManagerError()
@@ -20,7 +19,8 @@ export async function initialiseShimmerClaimingAccount(): Promise<IShimmerClaimi
         })
         const boundAccount = await api.getAccount(_shimmerClaimingProfileManager?.id, unboundAccount?.meta?.index)
         const balance = await boundAccount?.sync()
-        return prepareShimmerClaimingAccount(boundAccount, balance)
+        const shimmerClaimingAccount = prepareShimmerClaimingAccount(boundAccount, balance)
+        updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
     } catch (err) {
         throw new CannotInitialiseShimmerClaimingAccountError()
     }

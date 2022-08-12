@@ -5,6 +5,13 @@
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
     import { shimmerClaimingRouter } from '@core/router'
     import { formatTokenAmountBestMatch } from '@core/wallet'
+    import { onboardingProfile } from '@contexts/onboarding'
+
+    // TODO: Handle logic for displaying correct number of rewards when some have been claimed before
+    $: totalRewards = $onboardingProfile?.shimmerClaimingAccounts?.reduce(
+        (total, shimmerClaimingAccount) => (total += shimmerClaimingAccount?.claimedRewards),
+        0
+    )
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
@@ -28,7 +35,7 @@
                 {localize('views.onboarding.shimmerClaiming.success.body')}
             </Text>
             <div class="flex flex-col justify-center items-center">
-                <Text type="h3">{formatTokenAmountBestMatch(12345, BASE_TOKEN[NetworkProtocol.Shimmer])}</Text>
+                <Text type="h3">{formatTokenAmountBestMatch(totalRewards, BASE_TOKEN[NetworkProtocol.Shimmer])}</Text>
                 <Text type="p" highlighted>{localize('views.onboarding.shimmerClaiming.success.totalRewards')}</Text>
             </div>
         </div>
