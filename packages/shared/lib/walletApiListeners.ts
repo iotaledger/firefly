@@ -250,49 +250,44 @@ export const initialiseListeners = (): void => {
                 onSuccess(response) {
                     const { accounts } = get(wallet)
 
-                    let completeCount = 0
                     const totalBalance = {
                         balance: 0,
                         incoming: 0,
                         outgoing: 0,
                     }
 
-                    const latestAccounts = []
+                    const updatedAccounts = []
 
-                    // 1. Iterate on all accounts;
-                    // 2. Get latest metadata for all accounts (to compute the latest balance overview);
-                    // 3. Only update the account for which the balance change event emitted;
-                    // 4. Update balance overview & accounts
-                    for (const _account of response.payload) {
-                        getAccountMetadataWithCallback(_account.id, (metaErr, meta) => {
-                            if (!metaErr) {
-                                // Compute balance overview for each account
-                                totalBalance.balance += meta.balance
-                                totalBalance.incoming += meta.incoming
-                                totalBalance.outgoing += meta.outgoing
+                    get(accounts).forEach((account, idx) => {
+                        getAccountMetadataWithCallback(account?.id, (metaErr, meta) => {
+                            if (metaErr) {
+                                return
+                            }
 
-                                aggregateAccountActivity(_account)
+                            totalBalance.balance += meta.balance
+                            totalBalance.incoming += meta.incoming
+                            totalBalance.outgoing += meta.outgoing
 
-                                const updatedAccountInfo = formatAccountWithMetadata(_account, meta)
+                            aggregateAccountActivity(account)
+                            const updatedAccountInfo = formatAccountWithMetadata(account, meta)
 
-                                // Keep the messages as is because they get updated through a different event
-                                // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here
-                                latestAccounts.push(updatedAccountInfo)
+                            updatedAccounts.push(
+                                account?.index === updatedAccountInfo?.index
+                                    ? { ...updatedAccountInfo, alias: account?.alias }
+                                    : account
+                            )
 
-                                completeCount++
+                            if (idx === get(accounts).length - 1) {
+                                accounts.update((_accounts) => updatedAccounts.sort((a, b) => a.index - b.index))
 
-                                if (completeCount === response.payload.length) {
-                                    accounts.update((_accounts) => latestAccounts.sort((a, b) => a.index - b.index))
-
-                                    updateBalanceOverview(
-                                        totalBalance.balance,
-                                        totalBalance.incoming,
-                                        totalBalance.outgoing
-                                    )
-                                }
+                                updateBalanceOverview(
+                                    totalBalance.balance,
+                                    totalBalance.incoming,
+                                    totalBalance.outgoing
+                                )
                             }
                         })
-                    }
+                    })
                 },
                 onError(response) {},
             })
