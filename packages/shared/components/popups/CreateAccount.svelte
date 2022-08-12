@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { mobile } from '@lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight } from '@lib/app'
     import { getTrimmedLength } from '@lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
     import { showAppNotification } from '@lib/notifications'
@@ -90,7 +90,12 @@
     }
 </script>
 
-<div class="flex flex-col h-full justify-between">
+<div
+    class="flex flex-col h-full justify-between"
+    style="padding-bottom: {$mobile && $isKeyboardOpened
+        ? $keyboardHeight
+        : 0}px; transition: padding-bottom 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+>
     <div>
         <div class="flex flex-row mb-6 {$mobile && 'w-full justify-center -mt-1'}">
             <Text type={$mobile ? 'h4' : 'h5'}>
@@ -115,7 +120,7 @@
         <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center h-12" />
     {/if}
     {#if !isBusy}
-        <div class="flex flex-row justify-between px-2">
+        <div class="flex flex-row justify-between px-2 {$mobile && $isKeyboardOpened && '-mb-1'}">
             <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>
                 {localize('actions.cancel')}
             </Button>
