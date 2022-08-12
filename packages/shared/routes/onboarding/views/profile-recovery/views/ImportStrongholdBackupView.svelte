@@ -22,14 +22,14 @@
     let importFilePath = ''
     let dropping = false
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         validateBackupFile(importFileName)
         setProfileRecoveryTypeFromFilename(importFileName)
         updateOnboardingProfile({ importFile, importFilePath })
         $profileRecoveryRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $profileRecoveryRouter.previous()
     }
 
@@ -46,7 +46,7 @@
         importFilePath = file?.path
     }
 
-    function handleFileSelect(event: DragEvent | Event): void {
+    function onFileSelection(event: DragEvent | Event): void {
         event?.preventDefault()
         dropping = false
 
@@ -67,7 +67,7 @@
         reader.onload = (e) => {
             setFile(e.target.result, fileWithPath)
             if ($mobile) {
-                handleContinueClick()
+                onContinueClick()
             }
         }
 
@@ -79,17 +79,19 @@
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.importFromFile.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.profileRecovery.importStrongholdBackup.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8">{localize('views.importFromFile.body')}</Text>
+        <Text type="p" secondary classes="mb-8"
+            >{localize('views.onboarding.profileRecovery.importStrongholdBackup.body')}</Text
+        >
         {#if !$mobile}
             <Dropzone
                 fileName={importFileName}
                 {allowedExtensions}
-                onDrop={handleFileSelect}
+                onDrop={onFileSelection}
                 bind:dropping
                 extentionsLabel={localize('actions.importExtentions')}
             />
@@ -100,14 +102,14 @@
             <input
                 class="absolute opacity-0 w-full h-full"
                 type="file"
-                on:change={handleFileSelect}
+                on:change={onFileSelection}
                 accept={allowedExtensions ? allowedExtensions.map((e) => `.${e}`).join(',') : '*'}
             />
         {/if}
         <Button
             classes="flex-1"
             disabled={!$mobile && !importFile}
-            onClick={$mobile ? handleFileSelect : handleContinueClick}
+            onClick={$mobile ? onFileSelection : onContinueClick}
         >
             {localize(`actions.${$mobile ? 'chooseFile' : 'continue'}`)}
         </Button>

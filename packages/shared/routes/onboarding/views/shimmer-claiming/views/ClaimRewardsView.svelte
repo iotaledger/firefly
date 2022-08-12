@@ -62,12 +62,12 @@
 <OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2">
-            {localize('views.claimRewards.title')}
+            {localize('views.onboarding.shimmerClaiming.claimRewards.title')}
         </Text>
     </div>
     <div slot="leftpane__content" class="h-full flex flex-col">
         <Text type="p" secondary classes="mb-5">
-            {localize('views.claimRewards.body')}
+            {localize('views.onboarding.shimmerClaiming.claimRewards.body')}
         </Text>
         <ShimmerClaimingAccountList {shimmerClaimingAccounts} />
     </div>

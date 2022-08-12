@@ -51,12 +51,16 @@
 
 <OnboardingLayout {onBackClick} {busy}>
     <div slot="title">
-        <Text type="h2">{localize('views.setupPin.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.storageProtectionSetup.setupPinProtection.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <div class="flex flex-col mb-8">
-            <Text type="p" secondary classes="mb-4">{localize('views.setupPin.body1')}</Text>
-            <Text type="p" secondary highlighted>{localize('views.setupPin.body2')}</Text>
+            <Text type="p" secondary classes="mb-4"
+                >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body1')}</Text
+            >
+            <Text type="p" secondary highlighted
+                >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
+            >
         </div>
         <form id="setup-pin" class="flex flex-col" on:submit={handleSetPinSubmit}>
             <PinInput
@@ -91,7 +95,7 @@
             form="setup-pin"
             bind:this={submitButtonElement}
         >
-            {localize('actions.setPinCode')}
+            {localize('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-pink dark:bg-gray-900'}">

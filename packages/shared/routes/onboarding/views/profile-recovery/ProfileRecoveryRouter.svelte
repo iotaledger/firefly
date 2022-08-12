@@ -1,7 +1,13 @@
 <script lang="typescript">
     import { setContext } from 'svelte'
     import { Transition } from 'shared/components'
-    import { BackupPasswordView, FileImportView, LedgerView, SuccessView, TextImportView } from './views'
+    import {
+        BackupPasswordView,
+        ImportMnemonicPhraseView,
+        ImportStrongholdBackupView,
+        LedgerView,
+        SuccessView,
+    } from './views'
     import { localize } from '@core/i18n'
     import {
         profileRecoveryRoute,
@@ -27,7 +33,7 @@
                     error = localize('views.migrate.incorrectSeedVaultPassword')
                 } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
                     error = localize('views.migrate.noDataSeedVault')
-                } else if ($profileRecoveryRoute === ProfileRecoveryRoute.TextImport) {
+                } else if ($profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase) {
                     showAppNotification({
                         type: 'error',
                         message: localize('views.migrate.problemRestoringWallet'),
@@ -45,13 +51,13 @@
     }
 </script>
 
-{#if $profileRecoveryRoute === ProfileRecoveryRoute.TextImport}
+{#if $profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase}
     <Transition>
-        <TextImportView on:next={next} on:previous={previous} />
+        <ImportMnemonicPhraseView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $profileRecoveryRoute === ProfileRecoveryRoute.FileImport}
+{:else if $profileRecoveryRoute === ProfileRecoveryRoute.ImportStrongholdBackup}
     <Transition>
-        <FileImportView on:next={next} on:previous={previous} />
+        <ImportStrongholdBackupView on:next={next} on:previous={previous} />
     </Transition>
 {:else if $profileRecoveryRoute === ProfileRecoveryRoute.BackupPassword}
     <Transition>

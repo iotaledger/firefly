@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { ChooseNetworkView, ChooseProtocolView, SetupCustomNodeView } from './views'
+    import { ChooseNetworkView, ChooseProtocolView, SetupPrivateNetworkConnectionView } from './views'
     import { NetworkSetupRoute, networkSetupRoute } from '@core/router'
 </script>
 
@@ -12,8 +12,8 @@
     <Transition>
         <ChooseNetworkView />
     </Transition>
-{:else if $networkSetupRoute === NetworkSetupRoute.SetupCustomNode}
+{:else if $networkSetupRoute === NetworkSetupRoute.SetupPrivateNetworkConnection}
     <Transition>
-        <SetupCustomNodeView />
+        <SetupPrivateNetworkConnectionView />
     </Transition>
 {/if}
