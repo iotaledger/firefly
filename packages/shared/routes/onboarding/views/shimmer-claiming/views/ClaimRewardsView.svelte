@@ -18,6 +18,11 @@
     let isClaimingRewards = false
     let hasTriedClaimingRewards = false
 
+    $: shouldSearchForRewardsButtonBeDisabled = isSearchingForRewards || isClaimingRewards
+    $: shouldClaimRewardsButtonBeDisabled =
+        !shimmerClaimingAccounts.some((shimmerClaimingAccount) => shimmerClaimingAccount.unclaimedRewards > 0) ||
+        isSearchingForRewards
+
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
     }
@@ -77,14 +82,19 @@
         <ShimmerClaimingAccountList {shimmerClaimingAccounts} />
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full mb-5" secondary onClick={onUseBalanceFinderClick}>
+        <Button
+            classes="w-full mb-5"
+            disabled={shouldSearchForRewardsButtonBeDisabled}
+            secondary
+            onClick={onUseBalanceFinderClick}
+        >
             {#if isSearchingForRewards}
                 <Spinner message={localize('actions.searching')} busy={true} classes="justify-center items-center" />
             {:else}
                 {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}
             {/if}
         </Button>
-        <Button classes="w-full" onClick={onClaimRewardsClick}>
+        <Button classes="w-full" disabled={shouldClaimRewardsButtonBeDisabled} onClick={onClaimRewardsClick}>
             {#if isClaimingRewards}
                 <Spinner message={localize('actions.claiming')} busy={true} classes="justify-center items-center" />
             {:else}
