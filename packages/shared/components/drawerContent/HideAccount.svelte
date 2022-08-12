@@ -7,7 +7,7 @@
     import { localize } from '@core/i18n'
     import { accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
 
-    import { sendParams } from '@lib/app'
+    import { isKeyboardOpened, keyboardHeight, sendParams } from '@lib/app'
     import { activeProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
     import { WalletAccount } from '@lib/typings/wallet'
     import { api, selectedMessage } from '@lib/wallet'
@@ -72,7 +72,12 @@
     }
 </script>
 
-<div class="flex flex-col px-6 py-10">
+<div
+    class="flex flex-col px-6 py-10"
+    style="padding-bottom: {$isKeyboardOpened
+        ? $keyboardHeight
+        : 0}px; transition: padding-bottom 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+>
     {#if canDelete}
         <div class="mb-6 -mt-4">
             <Text type="h4" classes="flex w-full justify-center">
