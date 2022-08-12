@@ -69,7 +69,7 @@
                 },
                 "setupNew": {
                     "title": "Create a profile",
-                    "body": "You can choose a regular software wallet or if you have a Ledger device, you can set up a hardware wallet.",
+                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
                     "softwareAccount": {
                         "title": "Create a software profile",
                         "description": "Provides a Stronghold file and recovery phrase"
