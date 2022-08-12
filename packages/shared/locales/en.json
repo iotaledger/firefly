@@ -81,7 +81,7 @@
                 },
                 "setupRecovered": {
                     "title": "Recover {protocol} profile",
-                    "body": "If you have an existing seed or Stronghold backup file, you can import it here.",
+                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
                     "importMnemonic": "Use recovery phrase",
                     "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
                     "importFile": "Use Stronghold backup",
