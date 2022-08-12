@@ -1,10 +1,9 @@
-import { IAccount, IAccountBalance } from '@core/account'
+import { IAccount, sumTotalFromOutputs, syncAccountsInParallel } from '@core/account'
 
-import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
-import { OutputData } from '@iota/wallet/types/output'
 
-/* eslint-disable-next-line @typescript-eslint/require-await */
+import { deriveShimmerClaimingAccountState } from './deriveShimmerClaimingAccountState'
+
 export async function prepareShimmerClaimingAccount(
     account: IAccount,
     twinAccount?: IAccount,
@@ -15,10 +14,10 @@ export async function prepareShimmerClaimingAccount(
     }
 
     const twinUnspentOutputs = await twinAccount?.listUnspentOutputs()
-    const claimedRewards = getTotalAmountFromOutputs(twinUnspentOutputs)
+    const claimedRewards = sumTotalFromOutputs(twinUnspentOutputs)
 
     const unspentOutputs = await account?.listUnspentOutputs()
-    const unclaimedRewards = getTotalAmountFromOutputs(unspentOutputs)
+    const unclaimedRewards = sumTotalFromOutputs(unspentOutputs)
 
     const state = deriveShimmerClaimingAccountState(claimedRewards, unclaimedRewards)
 
@@ -28,28 +27,5 @@ export async function prepareShimmerClaimingAccount(
         state,
         claimedRewards,
         unclaimedRewards,
-    }
-}
-
-function getTotalAmountFromOutputs(outputs: OutputData[]): number {
-    return outputs?.reduce((total: number, curr: OutputData) => (total += Number(curr?.output?.amount)), 0)
-}
-
-async function syncAccountsInParallel(...accounts: IAccount[]): Promise<IAccountBalance[]> {
-    return Promise.all(accounts.map((account) => account?.sync()))
-}
-
-function deriveShimmerClaimingAccountState(
-    claimedRewards: number,
-    unclaimedRewards: number
-): ShimmerClaimingAccountState {
-    if (claimedRewards > 0) {
-        if (unclaimedRewards > 0) {
-            return ShimmerClaimingAccountState.PartiallyClaimed
-        } else {
-            return ShimmerClaimingAccountState.FullyClaimed
-        }
-    } else {
-        return ShimmerClaimingAccountState.Unclaimed
     }
 }

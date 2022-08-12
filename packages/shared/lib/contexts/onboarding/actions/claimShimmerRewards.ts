@@ -39,7 +39,8 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
 
     const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
         shimmerClaimingAccount,
-        shimmerClaimingAccount?.twinAccount
+        shimmerClaimingAccount?.twinAccount,
+        true
     )
     updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)
 

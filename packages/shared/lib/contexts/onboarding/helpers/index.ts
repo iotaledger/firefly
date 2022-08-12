@@ -1,5 +1,6 @@
 export * from './buildOnboardingProfile'
 export * from './convertOnboardingProfileToPersistedProfile'
+export * from './deriveShimmerClaimingAccountState'
 export * from './getProfileTypeFromProfileRecoveryType'
 export * from './getShimmerClaimingProfileManagerStorageDirectory'
 export * from './prepareShimmerClaimingAccount'
