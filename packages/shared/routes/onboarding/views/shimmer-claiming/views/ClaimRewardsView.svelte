@@ -6,12 +6,10 @@
     import {
         claimShimmerRewards,
         findShimmerRewards,
-        initialiseFirstShimmerClaimingAccount,
+        findShimmerRewardsForAccount,
         IShimmerClaimingAccount,
         onboardingProfile,
     } from '@contexts/onboarding'
-
-    // TODO: Adjust UX to show empty account first
 
     let shimmerClaimingAccounts: IShimmerClaimingAccount[]
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
@@ -56,19 +54,28 @@
         }
     }
 
-    async function initialiseClaimRewardsView(): Promise<void> {
-        try {
-            isSearchingForRewards = true
-            await initialiseFirstShimmerClaimingAccount()
-        } catch (err) {
-            console.error(err)
-        } finally {
-            isSearchingForRewards = false
+    async function onMountHelper(): Promise<void> {
+        /**
+         * NOTE: If the user only has one Shimmer claiming account,
+         * it is likely they have just navigated to this view for
+         * the first time. If they truly only have one account
+         * with unclaimed rewards, then this will just sync every
+         * time the user navigates to this view.
+         */
+        if ($onboardingProfile?.shimmerClaimingAccounts?.length === 1) {
+            try {
+                isSearchingForRewards = true
+                await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
+            } catch (err) {
+                console.error(err)
+            } finally {
+                isSearchingForRewards = false
+            }
         }
     }
 
     onMount(() => {
-        void initialiseClaimRewardsView()
+        void onMountHelper()
     })
 </script>
 

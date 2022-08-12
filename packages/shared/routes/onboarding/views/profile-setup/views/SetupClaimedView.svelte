@@ -18,7 +18,7 @@
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
         const type = getProfileTypeFromProfileRecoveryType(recoveryType)
-        updateOnboardingProfile({ type, recoveryType })
+        updateOnboardingProfile({ type, recoveryType, shimmerClaimingAccounts: [] })
         await initialiseProfileManagerFromOnboardingProfile(true)
         await createShimmerClaimingProfileManager()
         $profileSetupRouter.next()
