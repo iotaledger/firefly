@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { initAppSettings } from 'shared/lib/appSettings'
-    import { cleanupSignup, mobile, stage } from 'shared/lib/app'
+    import { cleanupSignup, mobile, isKeyboardOpened, keyboardHeight, stage } from 'shared/lib/app'
     import {
         Animation,
         Button,
@@ -104,7 +104,12 @@
     <div slot="title">
         <Text type="h2">{locale('views.profile.title')}</Text>
     </div>
-    <div slot="leftpane__content">
+    <div
+        slot="leftpane__content"
+        style="padding-bottom: {$mobile && $isKeyboardOpened
+            ? $keyboardHeight
+            : 0}px; transition: padding-bottom 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+    >
         <Text type="p" secondary classes="mb-4">{locale('views.profile.body1')}</Text>
         <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-10'}>
             {locale(`views.profile.body2.${hasNoProfiles() ? 'first' : 'nonFirst'}`)}
@@ -133,7 +138,13 @@
             </CollapsibleBlock>
         {/if}
     </div>
-    <div slot="leftpane__action" class="flex flex-col">
+    <div
+        slot="leftpane__action"
+        class="flex flex-col"
+        style="padding-bottom: {$mobile && $isKeyboardOpened
+            ? $keyboardHeight
+            : 0}px; transition: padding-bottom 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+    >
         <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
             {locale('actions.continue')}
         </Button>
@@ -141,6 +152,9 @@
     <div
         slot="rightpane"
         class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-green dark:bg-gray-900'}"
+        style="margin-top: {$mobile && $isKeyboardOpened
+            ? -$keyboardHeight
+            : 0}px; transition: margin-top 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
     >
         <Animation
             animation={$mobile ? 'password-desktop' : 'profile-desktop'}
