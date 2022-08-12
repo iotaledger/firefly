@@ -1,5 +1,5 @@
 import type { OutputTypes } from '@iota/types'
-import { InclusionState } from '@iota/wallet'
+import { InclusionState } from '@core/wallet/enums'
 import { IOutputResponse, IUTXOInput } from '@iota/types'
 
 export interface IProcessedOutput {

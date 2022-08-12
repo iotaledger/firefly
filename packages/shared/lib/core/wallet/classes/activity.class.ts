@@ -27,7 +27,6 @@ import {
     getNativeTokenFromOutput,
     getRecipientAddressFromOutput,
     getRecipientFromOutput,
-    getSenderFromOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
     isOutputAsync,
@@ -77,8 +76,11 @@ export class Activity implements IActivity {
 
         const recipientAddress = getRecipientAddressFromOutput(output)
         const recipient = getRecipientFromOutput(output)
-        const sender = transactionInputs ? getSenderFromInputs(transactionInputs) : getSenderFromOutput(output)
+
         const isIncoming = recipientAddress === account.depositAddress
+        const sender = transactionInputs
+            ? getSenderFromInputs(transactionInputs)
+            : getSenderFromTransaction(isIncoming, account.depositAddress, output)
 
         const nativeToken = getNativeTokenFromOutput(output)
         const subject = isIncoming ? sender : recipient
@@ -94,13 +96,12 @@ export class Activity implements IActivity {
         this.inputs = transactionInputs2
         this.outputId = outputId
 
-        this.sender = getSenderFromTransaction(isIncoming, account.depositAddress, output)
+        this.sender = sender
         this.recipient = recipient
-        this.subject = isIncoming ? this.sender : this.recipient
-        this.isInternal = isInternal
-        this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
+        this.subject = subject
 
-        this.outputId = outputId
+        this.isInternal = isInternal
+        this.direction = isIncoming || isFoundry ? ActivityDirection.In : ActivityDirection.Out
 
         this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
         const asset = getPersistedAsset(this.assetId)

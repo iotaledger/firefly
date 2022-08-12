@@ -1,8 +1,9 @@
 import { IProcessedOutput } from '../../interfaces'
-import { InclusionState, OutputData } from '@iota/wallet'
+import { OutputData } from '@iota/wallet'
 import { OUTPUT_TYPE_FOUNDRY } from '../../constants'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { IOutputResponse, IUTXOInput } from '@iota/types'
+import { InclusionState } from '@core/wallet/enums'
 
 export function preprocessOutput(outputData: OutputData, transactionInputs: IOutputResponse[]): IProcessedOutput {
     const output = outputData.output

@@ -11,19 +11,16 @@ import { preprocessOutput } from '@core/wallet'
 
 export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): void {
     const account = get(activeAccounts).find((account) => account.id === accountId)
+    const output = event?.output
 
     const address =
-        event?.output?.address?.type === ADDRESS_TYPE_ED25519
-            ? Bech32Helper.toBech32(0, Converter.hexToBytes(event?.output?.address?.pubKeyHash?.substring(2)), 'rms')
+        output?.address?.type === ADDRESS_TYPE_ED25519
+            ? Bech32Helper.toBech32(0, Converter.hexToBytes(output?.address?.pubKeyHash?.substring(2)), 'rms')
             : ''
-    if (
-        event?.output?.address?.type === ADDRESS_TYPE_ED25519 &&
-        account?.depositAddress === address &&
-        !event?.output?.remainder
-    ) {
+    if (output?.address?.type === ADDRESS_TYPE_ED25519 && account?.depositAddress === address && !output?.remainder) {
         syncBalance(account.id)
 
-        const processedOutput = preprocessOutput(event?.output, event?.transactionInputs)
+        const processedOutput = preprocessOutput(output, event?.transactionInputs)
         addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedOutput, account))
     }
 }

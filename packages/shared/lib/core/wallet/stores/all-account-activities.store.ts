@@ -31,7 +31,7 @@ export function updateActivityByTransactionId(
     partialActivity: Partial<IActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[accountId]?.find((_activity) => _activity.id === transactionId)
+        const activity = state[accountId]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
             activity.updateFromPartialActivity(partialActivity)
