@@ -10,6 +10,7 @@
     import { localize } from '@core/i18n'
     import { storageProtectionSetupRouter } from '@core/router'
     import { validatePinFormat } from '@lib/utils'
+    import { ProfileType } from '../../../../../lib/core/profile'
 
     export let busy = false
 
@@ -40,6 +41,7 @@
         await initialisePincodeManager(setPinInput)
 
         const shouldInitialiseFirstShimmerClaimingAccount =
+            $onboardingProfile?.type === ProfileType.Software &&
             $onboardingProfile?.setupType === ProfileSetupType.Claimed &&
             $onboardingProfile?.shimmerClaimingAccounts?.length < 1
         if (shouldInitialiseFirstShimmerClaimingAccount) {
