@@ -40,6 +40,7 @@ import {
 } from '../utils'
 import { getRelevantOutputFromTransaction, getSenderFromTransaction, getSenderFromInputs } from '../utils/transactions'
 import { IUTXOInput } from '@iota/types'
+import { OUTPUT_TYPE_FOUNDRY } from '../constants'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -83,12 +84,16 @@ export class Activity implements IActivity {
             account.depositAddress,
             isFoundry
         )
-
+        const outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
         const recipient = getRecipientFromOutput(output)
         const nativeToken = getNativeTokenFromOutput(output)
 
         if (nativeToken) {
-            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            try {
+                await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            } catch (err) {
+                console.error(err)
+            }
         }
 
         this.type = getActivityType(isSubjectInternal(recipient), isFoundry)
@@ -99,7 +104,7 @@ export class Activity implements IActivity {
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
-        this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
+        this.outputId = outputId
 
         this.sender = getSenderFromTransaction(transaction.incoming, account.depositAddress, output)
         this.recipient = recipient
@@ -136,6 +141,7 @@ export class Activity implements IActivity {
         transactionInputs: IOutputResponse[]
     ): Promise<Activity> {
         const output = outputData.output
+        const isFoundry = output.type === OUTPUT_TYPE_FOUNDRY
 
         const recipientAddress = getRecipientAddressFromOutput(output)
         const recipient = getRecipientFromOutput(output)
@@ -147,10 +153,14 @@ export class Activity implements IActivity {
         const isInternal = isSubjectInternal(subject)
 
         if (nativeToken) {
-            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            try {
+                await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            } catch (err) {
+                console.error(err)
+            }
         }
 
-        this.type = getActivityType(isInternal)
+        this.type = getActivityType(isInternal, isFoundry)
         this.id = outputData.outputId
         this.isHidden = false
 
@@ -163,7 +173,7 @@ export class Activity implements IActivity {
         this.subject = subject
         this.isSelfTransaction = false
         this.isInternal = isInternal
-        this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
+        this.direction = isIncoming || isFoundry ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
         this.inputs =
