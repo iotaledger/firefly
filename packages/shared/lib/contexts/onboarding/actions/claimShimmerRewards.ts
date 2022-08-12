@@ -31,17 +31,15 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
 async function claimShimmerRewardsForShimmerClaimingAccount(
     shimmerClaimingAccount: IShimmerClaimingAccount
 ): Promise<void> {
-    const recipientAddress = shimmerClaimingAccount?.claimDepositAddress
+    const recipientAddress = shimmerClaimingAccount?.twinAccount?.meta?.publicAddresses[0]?.address
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
     await shimmerClaimingAccount?.sendOutputs([preparedOutput])
 
-    const syncedBalance = await shimmerClaimingAccount?.sync()
-    const syncedShimmerClaimingAccount = prepareShimmerClaimingAccount(
+    const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
         shimmerClaimingAccount,
-        syncedBalance,
-        recipientAddress
+        shimmerClaimingAccount?.twinAccount
     )
     updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)
 

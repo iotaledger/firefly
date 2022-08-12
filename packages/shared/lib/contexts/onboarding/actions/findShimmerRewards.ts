@@ -28,12 +28,7 @@ export async function findShimmerRewards(): Promise<void> {
                     return
                 }
 
-                const balance = await boundShimmerClaimingAccount?.getBalance()
-                return prepareShimmerClaimingAccount(
-                    boundShimmerClaimingAccount,
-                    balance,
-                    boundRegularAccount?.meta?.publicAddresses[0]?.address
-                )
+                return prepareShimmerClaimingAccount(boundShimmerClaimingAccount, boundRegularAccount, true)
             })
         )
         updateOnboardingProfile({ shimmerClaimingAccounts })

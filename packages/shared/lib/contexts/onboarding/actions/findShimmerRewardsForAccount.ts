@@ -13,16 +13,15 @@ export async function findShimmerRewardsForAccount(account: IAccount): Promise<v
         throw new MissingShimmerClaimingProfileManagerError()
     }
     const boundShimmerClaimingAccount = await api.getAccount(_shimmerClaimingProfileManager?.id, account?.meta?.index)
-    const boundRegularAccount = await api.getAccount(get(profileManager)?.id, account?.meta?.index)
-    if (boundShimmerClaimingAccount?.meta?.index !== boundRegularAccount?.meta?.index) {
+    const boundTwinAccount = await api.getAccount(get(profileManager)?.id, account?.meta?.index)
+    if (boundShimmerClaimingAccount?.meta?.index !== boundTwinAccount?.meta?.index) {
         return
     }
 
-    const syncedBalance = await boundShimmerClaimingAccount?.sync()
-    const syncedShimmerClaimingAccount = prepareShimmerClaimingAccount(
+    const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
         boundShimmerClaimingAccount,
-        syncedBalance,
-        boundRegularAccount?.meta?.publicAddresses[0]?.address
+        boundTwinAccount,
+        true
     )
     updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)
 }

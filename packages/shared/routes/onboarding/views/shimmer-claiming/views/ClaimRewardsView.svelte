@@ -25,6 +25,7 @@
         !shimmerClaimingAccounts.some((shimmerClaimingAccount) => shimmerClaimingAccount.unclaimedRewards > 0) ||
         isSearchingForRewards ||
         isClaimingRewards
+    $: shouldDisplayContinueButton = false
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
@@ -47,12 +48,15 @@
             isClaimingRewards = true
             hasTriedClaimingRewards = true
             await claimShimmerRewards()
-            // $shimmerClaimingRouter.next()
         } catch (err) {
             console.error(err)
         } finally {
             isClaimingRewards = false
         }
+    }
+
+    function onContinueClick(): void {
+        $shimmerClaimingRouter.next()
     }
 
     async function onMountHelper(): Promise<void> {
@@ -105,9 +109,15 @@
                 {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}
             {/if}
         </Button>
-        <Button classes="w-full" disabled={shouldClaimRewardsButtonBeDisabled} onClick={onClaimRewardsClick}>
+        <Button
+            classes="w-full"
+            disabled={shouldClaimRewardsButtonBeDisabled}
+            onClick={shouldDisplayContinueButton ? onContinueClick : onClaimRewardsClick}
+        >
             {#if isClaimingRewards}
                 <Spinner message={localize('actions.claiming')} busy={true} classes="justify-center items-center" />
+            {:else if shouldDisplayContinueButton}
+                {localize('actions.continue')}
             {:else}
                 {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
             {/if}

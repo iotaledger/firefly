@@ -1,8 +1,7 @@
 import { get } from 'svelte/store'
 
-import { buildEmptyAccountBalance } from '@core/account'
 import { localize } from '@core/i18n'
-import { profileManager } from '@core/profile-manager'
+import { api, profileManager } from '@core/profile-manager'
 
 import { CannotInitialiseShimmerClaimingAccountError, MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
@@ -17,19 +16,23 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     try {
         const alias = `${localize('general.account')} 1`
         const unboundShimmerClaimingAccount = await _shimmerClaimingProfileManager?.createAccount({ alias })
-        const unboundRegularAccount = await get(profileManager)?.createAccount({ alias })
-        if (unboundShimmerClaimingAccount?.meta?.index !== unboundRegularAccount?.meta?.index) {
+        const boundShimmerClaimingAccount = await api?.getAccount(
+            _shimmerClaimingProfileManager?.id,
+            unboundShimmerClaimingAccount?.meta?.index
+        )
+        const unboundTwinAccount = await get(profileManager)?.createAccount({ alias })
+        const boundTwinAccount = await api?.getAccount(get(profileManager)?.id, unboundTwinAccount?.meta?.index)
+        if (boundShimmerClaimingAccount?.meta?.index !== boundTwinAccount?.meta?.index) {
             return
         }
 
-        const emptyAccountBalance = buildEmptyAccountBalance()
-        const emptyShimmerClaimingAccount = prepareShimmerClaimingAccount(
-            unboundShimmerClaimingAccount,
-            emptyAccountBalance,
-            unboundRegularAccount?.meta?.publicAddresses[0]?.address
+        const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
+            boundShimmerClaimingAccount,
+            boundTwinAccount
         )
-        updateOnboardingProfile({ shimmerClaimingAccounts: [emptyShimmerClaimingAccount] })
+        updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
     } catch (err) {
+        console.error(err)
         throw new CannotInitialiseShimmerClaimingAccountError()
     }
 }
