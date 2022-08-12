@@ -34,12 +34,12 @@
 </script>
 
 {#if event}
-    <div class="p-6 h-full">
+    <div class="p-6 h-full flex flex-col">
         <div bind:clientHeight={illustrationHeight} class="relative illustration-wrapper max-w-full h-full max-h-3/5">
             <Illustration
                 height={illustrationHeight}
                 background
-                illustration="treasury-bg"
+                illustration="iota-governance"
                 classes="bg-cover bg-center w-full h-full rounded-2xl"
             />
             <Text
@@ -55,13 +55,14 @@
         <div class="flex flex-col items-center flex-1 justify-between mt-8 mx-14">
             <div class="text-center">
                 <Text type="h2" classes="mb-2">{event?.information?.name}</Text>
-                <Text
+                <!-- Note: commented out for Shimmer EF Proposal -->
+                <!-- <Text
                     type="p"
                     classes="text-gray-700 dark:text-gray-500 mb-6 text-14 min-w-0 overflow-auto"
                     overrideColor
                 >
                     {event?.information?.additionalInfo}
-                </Text>
+                </Text> -->
             </div>
             <div class="relative min-w-40">
                 <Button onClick={handleViewProposalClick} disabled={!event} classes="w-full">

@@ -42,6 +42,7 @@ export interface IPlatform {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
     hookErrorLogger(logger: (error: Error) => void): void
+    loadJsonFile(filepath: string): Promise<unknown>
 
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined

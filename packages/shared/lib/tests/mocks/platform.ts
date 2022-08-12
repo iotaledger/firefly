@@ -114,6 +114,9 @@ const Platform: IPlatform = {
     hideKeyboard(): Promise<void> {
         return Promise.resolve(undefined)
     },
+    loadJsonFile(filepath: string): Promise<unknown> {
+        return Promise.resolve({ filepath })
+    },
 }
 
 window['__CAPACITOR__'] = Platform

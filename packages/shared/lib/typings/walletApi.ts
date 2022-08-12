@@ -4,7 +4,7 @@ import {
     ParticipationEvent,
     ParticipationOverviewResponse,
 } from 'shared/lib/participation/types'
-import { Account, AccountIdentifier, AccountToCreate, Balance, SyncedAccount } from './account'
+import { Account, AccountIdentifier, AccountSyncOptions, AccountToCreate, Balance, SyncedAccount } from './account'
 import { Address } from './address'
 import { GetMigrationAddressResponse } from './bridge'
 import { ClientOptions } from './client'
@@ -68,6 +68,7 @@ export interface IWalletApi {
     })
     syncAccount(
         accountId: string,
+        accountSyncOptions: AccountSyncOptions,
         callbacks: { onSuccess: (response: Event<SyncedAccount>) => void; onError: (err: ErrorEventPayload) => void }
     )
     syncAccounts(
@@ -79,6 +80,7 @@ export interface IWalletApi {
     startBackgroundSync(
         pollingInterval: Duration,
         automaticOutputConsolidation: boolean,
+        gapLimit: number,
         callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
     )
     stopBackgroundSync(callbacks: {

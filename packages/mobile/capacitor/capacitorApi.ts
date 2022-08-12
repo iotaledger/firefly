@@ -59,6 +59,16 @@ export const CapacitorApi: IPlatform = {
         return profileFolders?.files
     },
 
+    loadJsonFile: async (filepath) => {
+        try {
+            const response = await fetch(filepath)
+            const json = await response.json()
+            return json
+        } catch (e) {
+            console.error(e)
+        }
+    },
+
     PincodeManager: PincodeManager,
 
     DeepLinkManager: DeepLinkManager,
