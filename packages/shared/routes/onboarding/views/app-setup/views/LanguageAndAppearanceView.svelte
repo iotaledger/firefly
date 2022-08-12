@@ -38,15 +38,15 @@
         segments = SWITCH_SEGMENTS
     }
 
-    function handleLanguageSelectClick(item: DropdownChoice): void {
+    function onLanguageSelectionClick(item: DropdownChoice): void {
         setLanguage(item)
     }
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         $appSetupRouter.next()
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $appSetupRouter.previous()
     }
 
@@ -56,18 +56,20 @@
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{locale('views.languageAndAppearance.title')}</Text>
+        <Text type="h2">{locale('views.onboarding.appSetup.languageAndAppearance.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-8'}>{locale('views.languageAndAppearance.body')}</Text>
+        <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-8'}
+            >{locale('views.onboarding.appSetup.languageAndAppearance.body')}</Text
+        >
         {#if $mobile}
             <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
                 {#each languageList as language}
                     <button
                         class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
-                        on:click={() => handleLanguageSelectClick(language)}
+                        on:click={() => onLanguageSelectionClick(language)}
                         class:active={language?.label === SUPPORTED_LOCALES[$appSettings.language]}
                     >
                         <Text type="p" smaller>{language?.label}</Text>
@@ -79,7 +81,7 @@
                 <Text type="p" secondary classes="mb-2" smaller>{locale('general.language')}</Text>
                 <Dropdown
                     sortItems
-                    onSelect={handleLanguageSelectClick}
+                    onSelect={onLanguageSelectionClick}
                     value={SUPPORTED_LOCALES[$appSettings.language]}
                     items={languageList}
                 />
@@ -96,7 +98,7 @@
         </ButtonRadio>
     </div>
     <div slot="leftpane__action">
-        <Button onClick={handleContinueClick} classes="w-full">{locale('actions.continue')}</Button>
+        <Button onClick={onContinueClick} classes="w-full">{locale('actions.continue')}</Button>
     </div>
     <div
         slot="rightpane"

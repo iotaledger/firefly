@@ -37,16 +37,20 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type={TextType.h2}>{localize('views.network.title')}</Text>
+        <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.chooseNetwork.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text secondary classes="mb-8">{localize('views.network.body')}</Text>
+        <Text secondary classes="mb-8">{localize('views.onboarding.networkSetup.chooseNetwork.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.values(NetworkType) as networkType}
             <OnboardingButton
-                primaryText={localize(`views.network.${networkProtocol}.${networkType}.title`)}
-                secondaryText={!$mobile ? localize(`views.network.${networkProtocol}.${networkType}.body`) : ''}
+                primaryText={localize(
+                    `views.onboarding.networkSetup.chooseNetwork.${networkProtocol}.${networkType}.title`
+                )}
+                secondaryText={!$mobile
+                    ? localize(`views.onboarding.networkSetup.chooseNetwork.${networkProtocol}.${networkType}.body`)
+                    : ''}
                 icon={networkIcon[networkType]}
                 iconColor={networkType === NetworkType.Mainnet ? `${networkProtocol}-highlight` : 'blue-500'}
                 hidden={features?.onboarding?.[networkProtocol]?.[networkType]?.hidden}

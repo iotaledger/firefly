@@ -90,15 +90,19 @@
 
 <OnboardingLayout {onBackClick} {busy} reverseContent={$mobile && !verified}>
     <div slot="title">
-        <Text type="h2" classes={!$mobile && verified && 'hidden'}>{localize('views.verifyRecoveryPhrase.title')}</Text>
+        <Text type="h2" classes={!$mobile && verified && 'hidden'}
+            >{localize('views.onboarding.profileBackup.verifyMnemonic.title')}</Text
+        >
     </div>
     <div slot="leftpane__content">
         {#if !verified}
             <Text type="p" secondary classes={!$mobile ? 'mb-10' : ''}>
-                {localize('views.verifyRecoveryPhrase.body')}
+                {localize('views.onboarding.profileBackup.verifyMnemonic.body')}
             </Text>
             {#if !$mobile}
-                <Text type="p" classes="mb-4">{localize('views.verifyRecoveryPhrase.word')} #{verifyIndex + 1}</Text>
+                <Text type="p" classes="mb-4"
+                    >{localize('views.onboarding.profileBackup.verifyMnemonic.word')} #{verifyIndex + 1}</Text
+                >
                 {#each wordChoices as word, i}
                     <button
                         type="button"
@@ -116,8 +120,12 @@
                 <div class="bg-green-500 rounded-2xl relative -top-10">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-5 text-center">{localize('views.verifyRecoveryPhrase.verified')}</Text>
-                <Text type="p" secondary classes="mb-2">{localize('views.verifyRecoveryPhrase.verifiedBody')}</Text>
+                <Text type="h2" classes="mb-5 text-center"
+                    >{localize('views.onboarding.profileBackup.verifyMnemonic.verified')}</Text
+                >
+                <Text type="p" secondary classes="mb-2"
+                    >{localize('views.onboarding.profileBackup.verifyMnemonic.verifiedBody')}</Text
+                >
             </div>
         {/if}
     </div>
@@ -127,7 +135,9 @@
                 {localize('actions.continue')}
             </Button>
         {:else if $mobile && !verified}
-            <Text type="p" classes="mb-4">{localize('views.verifyRecoveryPhrase.word')} #{verifyIndex + 1}</Text>
+            <Text type="p" classes="mb-4"
+                >{localize('views.onboarding.profileBackup.verifyMnemonic.word')} #{verifyIndex + 1}</Text
+            >
             {#each wordChoices as word}
                 <button
                     type="button"

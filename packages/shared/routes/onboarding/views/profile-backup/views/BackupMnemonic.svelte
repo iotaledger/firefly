@@ -25,12 +25,14 @@
 
 <OnboardingLayout onBackClick={handleBackClick} {busy}>
     <div slot="title">
-        <Text type="h2">{localize('views.backup.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.profileBackup.backupMnemonic.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-4">{localize('views.backup.body1')}</Text>
-        <Text type="p" secondary classes="mb-4">{localize('views.backup.body2')}</Text>
-        <Text type="p" secondary highlighted classes="mb-4 font-bold">{localize('views.backup.body3')}</Text>
+        <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileBackup.backupMnemonic.body1')}</Text>
+        <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileBackup.backupMnemonic.body2')}</Text>
+        <Text type="p" secondary highlighted classes="mb-4 font-bold"
+            >{localize('views.onboarding.profileBackup.backupMnemonic.body3')}</Text
+        >
     </div>
     <div slot="leftpane__action">
         <Button classes="w-full" onClick={handleContinueClick} autofocus>{localize('actions.continue')}</Button>

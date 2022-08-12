@@ -33,8 +33,10 @@
             <div class="flex items-center justify-center bg-green-500 rounded-2xl absolute -top-5 w-12 h-12 check-glow">
                 <Icon icon="success-check" classes="text-white" />
             </div>
-            <Text type="h2" classes="mb-5 text-center">{localize('views.importSuccess.title')}</Text>
-            <Text type="p" secondary classes="mb-2">{localize('views.importSuccess.body')}</Text>
+            <Text type="h2" classes="mb-5 text-center"
+                >{localize('views.onboarding.profileRecovery.success.title')}</Text
+            >
+            <Text type="p" secondary classes="mb-2">{localize('views.onboarding.profileRecovery.success.body')}</Text>
         </div>
     </div>
     <div slot="leftpane__action">

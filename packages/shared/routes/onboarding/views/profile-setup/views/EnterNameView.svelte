@@ -21,7 +21,7 @@
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         if ($onboardingProfile?.recoveryType) {
             updateOnboardingProfile({ type: null, setupType: null, recoveryType: null })
             $onboardingRouter.filterHistory(OnboardingRoute.ProfileRecovery)
@@ -33,7 +33,7 @@
         updateOnboardingProfile({ mustVisitProfileName: true })
     }
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         try {
             validateProfileName(profileName)
             updateOnboardingProfile({ name: profileName })
@@ -48,31 +48,33 @@
     })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2"
-            >{localize('views.profile.title', {
+            >{localize('views.onboarding.profileSetup.enterName.title', {
                 values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
             })}</Text
         >
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-4">{localize('views.profile.body1')}</Text>
+        <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileSetup.enterName.body1')}</Text>
         <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-10'}>
-            {localize(`views.profile.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`)}
-            {localize('views.profile.addMore')}
+            {localize(
+                `views.onboarding.profileSetup.enterName.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`
+            )}
+            {localize('views.onboarding.profileSetup.enterName.addMore')}
         </Text>
         <Input
             {error}
             bind:value={profileName}
-            placeholder={localize('views.profile.profileName')}
+            placeholder={localize('views.onboarding.profileSetup.enterName.profileName')}
             classes="w-full mb-6"
             autofocus
-            submitHandler={handleContinueClick}
+            submitHandler={onContinueClick}
         />
     </div>
     <div slot="leftpane__action" class="flex flex-col">
-        <Button classes="w-full" disabled={!isProfileNameValid} onClick={handleContinueClick}>
+        <Button classes="w-full" disabled={!isProfileNameValid} onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>

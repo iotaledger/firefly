@@ -49,8 +49,12 @@
         {/if}
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-4">{localize('views.importBackupPassword.body1')}</Text>
-        <Text type="p" secondary classes="mb-8">{localize('views.importBackupPassword.body2')}</Text>
+        <Text type="p" secondary classes="mb-4"
+            >{localize('views.onboarding.profileRecovery.backupPassword.body1')}</Text
+        >
+        <Text type="p" secondary classes="mb-8"
+            >{localize('views.onboarding.profileRecovery.backupPassword.body2')}</Text
+        >
         <PasswordInput
             classes="mb-6"
             {error}

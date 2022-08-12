@@ -28,7 +28,7 @@
 <OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2"
-            >{localize('views.setup.title', {
+            >{localize('views.onboarding.profileSetup.setup.title', {
                 values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
             })}</Text
         >
@@ -38,10 +38,14 @@
             <div class="absolute -top-14">
                 <Logo width="auto" height="auto" logo="logo-chrysalis-gem" />
             </div>
-            <Text type="h3" classes="mb-6 text-center">{localize('views.setup.chrysalisTitle')}</Text>
-            <Text type="p" secondary classes="mb-8">{localize('views.setup.chrysalisBody')}</Text>
+            <Text type="h3" classes="mb-6 text-center"
+                >{localize('views.onboarding.profileSetup.setup.chrysalisTitle')}</Text
+            >
+            <Text type="p" secondary classes="mb-8"
+                >{localize('views.onboarding.profileSetup.setup.chrysalisBody')}</Text
+            >
             <Link onClick={() => Platform.openUrl('https://blog.iota.org/firefly-token-migration/')}>
-                {localize('views.setup.learnMore')}
+                {localize('views.onboarding.profileSetup.setup.learnMore')}
             </Link>
         </div>
     </div>

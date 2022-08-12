@@ -34,15 +34,13 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize(`views.importFromText.${$onboardingProfile?.recoveryType}.title`)}</Text>
+        <Text type="h2">{localize('views.onboarding.profileRecovery.importMnemonicPhrase.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8"
-            >{localize(`views.importFromText.${$onboardingProfile?.recoveryType}.body`)}</Text
+            >{localize('views.onboarding.profileRecovery.importMnemonicPhrase.body')}</Text
         >
-        <Text type="h5" classes="mb-3"
-            >{localize(`views.importFromText.${$onboardingProfile?.recoveryType}.enter`)}</Text
-        >
+        <Text type="h5" classes="mb-3">{localize('views.onboarding.profileRecovery.importMnemonicPhrase.enter')}</Text>
         <form on:submit={onContinueClick} id="text-import-form">
             <ImportTextfield type={$onboardingProfile?.recoveryType} bind:value={input} />
         </form>

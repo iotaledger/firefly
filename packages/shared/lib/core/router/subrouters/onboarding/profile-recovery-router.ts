@@ -13,11 +13,15 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
     public importFile: Buffer
 
     constructor() {
-        super(getInitialRoute() ?? ProfileRecoveryRoute.TextImport, profileRecoveryRoute, get(onboardingRouter))
+        super(
+            getInitialRoute() ?? ProfileRecoveryRoute.ImportMnemonicPhrase,
+            profileRecoveryRoute,
+            get(onboardingRouter)
+        )
     }
 
     resetRoute(): void {
-        profileRecoveryRoute.set(getInitialRoute() ?? ProfileRecoveryRoute.TextImport)
+        profileRecoveryRoute.set(getInitialRoute() ?? ProfileRecoveryRoute.ImportMnemonicPhrase)
     }
 
     next(): void {
@@ -25,14 +29,14 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case ProfileRecoveryRoute.TextImport: {
+            case ProfileRecoveryRoute.ImportMnemonicPhrase: {
                 const _profileRecoveryType = get(onboardingProfile)?.recoveryType
                 if (_profileRecoveryType === ProfileRecoveryType.Mnemonic) {
                     nextRoute = ProfileRecoveryRoute.Success
                 }
                 break
             }
-            case ProfileRecoveryRoute.FileImport: {
+            case ProfileRecoveryRoute.ImportStrongholdBackup: {
                 nextRoute = ProfileRecoveryRoute.BackupPassword
                 break
             }
@@ -57,9 +61,9 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
 function getInitialRoute(): ProfileRecoveryRoute {
     switch (get(onboardingProfile)?.recoveryType) {
         case ProfileRecoveryType.Mnemonic:
-            return ProfileRecoveryRoute.TextImport
+            return ProfileRecoveryRoute.ImportMnemonicPhrase
         case ProfileRecoveryType.Stronghold:
-            return ProfileRecoveryRoute.FileImport
+            return ProfileRecoveryRoute.ImportStrongholdBackup
         case ProfileRecoveryType.Ledger:
             return ProfileRecoveryRoute.LedgerImport
     }

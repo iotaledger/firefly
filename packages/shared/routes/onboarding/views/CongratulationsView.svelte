@@ -115,9 +115,11 @@
                 <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-6 text-center">{localize('views.congratulations.fundsMigrated')}</Text>
+                <Text type="h2" classes="mb-6 text-center"
+                    >{localize('views.onboarding.congratulations.fundsMigrated')}</Text
+                >
                 <Text type="p" secondary classes="mb-6 text-center">
-                    {localize(`views.congratulations.${localizedBody}`, { values: localizedValues })}
+                    {localize(`views.onboarding.congratulations.${localizedBody}`, { values: localizedValues })}
                 </Text>
                 <Text type="h2">{formatUnitBestMatch($totalMigratedBalance, true, 3)}</Text>
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
@@ -127,9 +129,9 @@
                 <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-5 text-center">{localize('views.congratulations.title')}</Text>
+                <Text type="h2" classes="mb-5 text-center">{localize('views.onboarding.congratulations.title')}</Text>
                 <Text type="p" secondary classes="mb-2 text-center"
-                    >{localize(`views.congratulations.${localizedBody}`)}</Text
+                    >{localize(`views.onboarding.congratulations.${localizedBody}`)}</Text
                 >
             </div>
         {/if}
@@ -137,7 +139,11 @@
     <div slot="leftpane__action">
         <Button autofocus classes="w-full" onClick={onContinueClick}>
             {localize(
-                `${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`
+                `${
+                    wasMigrated && !logExported
+                        ? 'views.onboarding.congratulations.exportMigration'
+                        : 'actions.finishSetup'
+                }`
             )}
         </Button>
     </div>
