@@ -19,18 +19,19 @@
         LAST_SHIMMER_STAKING_PERIOD,
     } from '@lib/participation/constants'
     import { activeProfile, isLedgerProfile, isSoftwareProfile, updateProfile } from '@lib/profile'
-    import { Idle, MainMenu, Sidebar } from 'shared/components'
+    import { Idle, Sidebar, MainMenu } from 'shared/components'
     import { loggedIn, logout, mobile, sendParams } from 'shared/lib/app'
     import { appSettings } from 'shared/lib/appSettings'
     import { isPollingLedgerDeviceStatus, pollLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
     import { ongoingSnapshot, openSnapshotPopup } from 'shared/lib/migration'
-    import { pollNetworkStatus, stopNetworkPoll } from 'shared/lib/networkStatus'
+    import { stopNetworkPoll, pollNetworkStatus } from 'shared/lib/networkStatus'
     import {
         NOTIFICATION_TIMEOUT_NEVER,
         removeDisplayNotification,
         showAppNotification,
     } from 'shared/lib/notifications'
-    import { startParticipationPoll, stopParticipationPoll, updateStakingPeriodCache } from 'shared/lib/participation'
+    import { stopParticipationPoll, startParticipationPoll, StakingAirdrop } from 'shared/lib/participation'
+    import { cacheAllStakingPeriods } from 'shared/lib/participation/staking'
     import { pendingParticipations, resetPerformingParticipation } from 'shared/lib/participation/stores'
     import { Platform } from 'shared/lib/platform'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
@@ -39,12 +40,12 @@
         api,
         asyncCreateAccount,
         asyncSyncAccount,
-        isBackgroundSyncing,
-        isFirstSessionSync,
         isSyncing,
+        isFirstSessionSync,
         setSelectedAccount,
         STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS,
         wallet,
+        haveStakingResultsCached,
     } from 'shared/lib/wallet'
     import { Governance, Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount, setContext } from 'svelte'
@@ -90,8 +91,13 @@
         previousPendingParticipationsLength = participations?.length ?? 0
     })
 
-    $: if (!$isSyncing && $isFirstSessionSync && $accountsLoaded) {
-        void updateStakingPeriodCache()
+    $: if (!$isSyncing && !$isFirstSessionSync && $accountsLoaded) {
+        Promise.all([
+            cacheAllStakingPeriods(StakingAirdrop.Shimmer),
+            cacheAllStakingPeriods(StakingAirdrop.Assembly),
+        ]).then(() => {
+            haveStakingResultsCached.set(true)
+        })
     }
 
     const viewableAccounts: Readable<WalletAccount[]> = derived(
@@ -164,27 +170,6 @@
 
         if ($isSoftwareProfile) {
             api.setStrongholdPasswordClearInterval({ secs: STRONGHOLD_PASSWORD_CLEAR_INTERVAL_SECS, nanos: 0 })
-        }
-
-        if (!get(isBackgroundSyncing)) {
-            api.startBackgroundSync(
-                {
-                    secs: 30,
-                    nanos: 0,
-                },
-                true,
-                {
-                    onSuccess() {
-                        isBackgroundSyncing.set(true)
-                    },
-                    onError(err) {
-                        showAppNotification({
-                            type: 'error',
-                            message: locale('error.account.syncing'),
-                        })
-                    },
-                }
-            )
         }
 
         Platform.onEvent('menu-logout', () => {

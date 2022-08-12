@@ -54,6 +54,16 @@ export const CapacitorApi: IPlatform = {
 
     listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
 
+    loadJsonFile: async (filepath) => {
+        try {
+            const response = await fetch(filepath)
+            const json = await response.json()
+            return json
+        } catch (e) {
+            console.error(e)
+        }
+    },
+
     PincodeManager: PincodeManager,
 
     DeepLinkManager: DeepLinkManager,

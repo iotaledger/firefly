@@ -10,7 +10,6 @@
         settingsRoute,
         settingsRouter,
     } from '@core/router'
-    import { appSettings } from '@lib/appSettings'
     import { AccountNavigation, AccountSwitcher, Icon, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
@@ -18,6 +17,7 @@
     import { createAccountCallback, WalletAccount } from 'shared/lib/typings/wallet'
     import { getContext, onMount } from 'svelte'
     import { Readable } from 'svelte/store'
+    import { appSettings } from '@lib/appSettings'
 
     export let onCreateAccount: createAccountCallback
     export let classes: string = ''
@@ -65,7 +65,7 @@
 <div
     class="flex flex-row justify-center items-center w-full z-20 {os === 'win32' && showingPopup
         ? 'opacity-50 pointer-events-none'
-        : ''} {classes} {$mobile ? 'top-navigation' : 'fixed top-0 left-20 py-2'} "
+        : ''} {classes} {!$mobile && 'fixed top-0 left-20 py-2'} "
 >
     {#if showBackButton}
         <button on:click={handleBackClick} class="absolute left-2 cursor-pointer" style="-webkit-app-region: none;">
@@ -88,8 +88,5 @@
         :global(.back-button-text) {
             word-break: keep-all;
         }
-    }
-    .top-navigation {
-        padding-top: env(safe-area-inset-top);
     }
 </style>
