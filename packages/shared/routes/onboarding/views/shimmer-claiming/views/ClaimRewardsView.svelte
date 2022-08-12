@@ -23,7 +23,8 @@
     $: shouldSearchForRewardsButtonBeDisabled = isSearchingForRewards || isClaimingRewards
     $: shouldClaimRewardsButtonBeDisabled =
         !shimmerClaimingAccounts.some((shimmerClaimingAccount) => shimmerClaimingAccount.unclaimedRewards > 0) ||
-        isSearchingForRewards
+        isSearchingForRewards ||
+        isClaimingRewards
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()

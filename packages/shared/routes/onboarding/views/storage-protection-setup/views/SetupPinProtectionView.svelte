@@ -8,9 +8,9 @@
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { ProfileType } from '@core/profile'
     import { storageProtectionSetupRouter } from '@core/router'
     import { validatePinFormat } from '@lib/utils'
-    import { ProfileType } from '../../../../../lib/core/profile'
 
     export let busy = false
 
@@ -40,11 +40,11 @@
     async function onSetPinClick(): Promise<void> {
         await initialisePincodeManager(setPinInput)
 
-        const shouldInitialiseFirstShimmerClaimingAccount =
+        const canInitialiseFirstShimmerClaimingAccount =
             $onboardingProfile?.type === ProfileType.Software &&
-            $onboardingProfile?.setupType === ProfileSetupType.Claimed &&
-            $onboardingProfile?.shimmerClaimingAccounts?.length < 1
-        if (shouldInitialiseFirstShimmerClaimingAccount) {
+            $onboardingProfile?.setupType === ProfileSetupType.Claimed
+        const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
+        if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
             await initialiseFirstShimmerClaimingAccount()
         }
 
