@@ -15,8 +15,18 @@ export async function claimShimmerRewards(): Promise<void> {
             shimmerClaimingAccounts?.filter((shimmerClaimingAccount) => shimmerClaimingAccount?.unclaimedRewards > 0) ??
             []
         await claimShimmerRewardsForShimmerClaimingAccounts(unclaimedShimmerClaimingAccounts)
+        showAppNotification({
+            type: 'success',
+            message: localize('notifications.shimmerClaiming.success'),
+            alert: true,
+        })
     } catch (err) {
         console.error(err)
+        showAppNotification({
+            type: 'error',
+            message: localize('notifications.shimmerClaiming.error'),
+            alert: true,
+        })
     }
 }
 
@@ -43,10 +53,4 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
         true
     )
     updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)
-
-    showAppNotification({
-        type: 'success',
-        message: localize('notifications.shimmerClaiming.success'),
-        alert: true,
-    })
 }
