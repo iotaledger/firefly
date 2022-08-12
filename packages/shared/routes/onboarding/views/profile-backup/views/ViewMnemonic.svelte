@@ -40,12 +40,14 @@
 
 <OnboardingLayout onBackClick={handleBackClick} {busy} reverseContent={$mobile}>
     <div slot="title">
-        <Text type="h2">{localize('views.recoveryPhrase.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.profileBackup.viewMnemonic.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-4">{localize('views.recoveryPhrase.body1')}</Text>
-        <Text type="p" secondary highlighted classes="font-bold mb-4">{localize('views.recoveryPhrase.body2')}</Text>
-        <Text type="p" secondary classes="mb-4">{localize('views.recoveryPhrase.body3')}</Text>
+        <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileBackup.viewMnemonic.body1')}</Text>
+        <Text type="p" secondary highlighted classes="font-bold mb-4"
+            >{localize('views.onboarding.profileBackup.viewMnemonic.body2')}</Text
+        >
+        <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileBackup.viewMnemonic.body3')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#if !$mobile}
@@ -59,7 +61,9 @@
             onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick() : handleMnemonicVisibilityClick}
         >
             {localize(
-                $mobile && !hasRevealedRecoveryPhrase ? 'views.recoveryPhrase.revealRecoveryPhrase' : 'actions.continue'
+                $mobile && !hasRevealedRecoveryPhrase
+                    ? 'views.onboarding.profileBackup.viewMnemonic.revealRecoveryPhrase'
+                    : 'actions.continue'
             )}
         </Button>
     </div>
@@ -70,7 +74,7 @@
                 {#if !hasRevealedRecoveryPhrase}
                     {#if hide}
                         <Button onClick={handleMnemonicVisibilityClick} classes="absolute">
-                            {localize('views.recoveryPhrase.revealRecoveryPhrase')}
+                            {localize('views.onboarding.profileBackup.viewMnemonic.revealRecoveryPhrase')}
                         </Button>
                     {/if}
                 {:else}
@@ -80,7 +84,11 @@
                         type="button"
                     >
                         <Text smaller overrideColor classes="text-blue-500 mr-2">
-                            {localize(`views.recoveryPhrase.${hide ? 'revealRecoveryPhrase' : 'hideRecoveryPhrase'}`)}
+                            {localize(
+                                `views.onboarding.profileBackup.viewMnemonic.${
+                                    hide ? 'revealRecoveryPhrase' : 'hideRecoveryPhrase'
+                                }`
+                            )}
                         </Text>
                         <Icon icon={hide ? 'view' : 'hide'} classes="text-blue-500" />
                     </button>

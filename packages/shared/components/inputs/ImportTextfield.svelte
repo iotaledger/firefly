@@ -90,7 +90,7 @@
                 } else {
                     try {
                         await verifyMnemonic(trimmedContent)
-                        statusMessage = localize('views.importFromText.phraseDetected')
+                        statusMessage = localize('views.onboarding.profileRecovery.importMnemonicPhrase.phraseDetected')
                         value = trimmedContent
                     } catch (err) {
                         error = true

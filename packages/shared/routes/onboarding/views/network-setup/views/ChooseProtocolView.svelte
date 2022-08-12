@@ -29,18 +29,16 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{localize('views.protocol.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.networkSetup.chooseProtocol.title')}</Text>
     </div>
     <div slot="leftpane__content">
-        <Text secondary classes="mb-8">{localize('views.protocol.body')}</Text>
+        <Text secondary classes="mb-8">{localize('views.onboarding.networkSetup.chooseProtocol.body')}</Text>
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.keys(NetworkProtocol) as protocol}
             <OnboardingButton
                 primaryText={protocol}
-                secondaryText={!$onboardingProfile?.isDeveloperProfile
-                    ? localize(`views.protocol.${NetworkProtocol[protocol]}`)
-                    : ''}
+                secondaryText={localize(`views.onboarding.networkSetup.chooseProtocol.${NetworkProtocol[protocol]}`)}
                 icon={NetworkProtocol[protocol]}
                 iconColor={`${NetworkProtocol[protocol]}-highlight`}
                 hidden={$onboardingProfile?.isDeveloperProfile

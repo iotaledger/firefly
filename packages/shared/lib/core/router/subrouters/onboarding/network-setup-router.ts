@@ -33,13 +33,13 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
             case NetworkSetupRoute.ChooseNetwork: {
                 const networkType = _onboardingProfile?.networkType ?? NetworkType.Devnet
                 if (networkType === NetworkType.PrivateNet) {
-                    nextRoute = NetworkSetupRoute.SetupCustomNode
+                    nextRoute = NetworkSetupRoute.SetupPrivateNetworkConnection
                 } else {
                     this.parentRouter.next()
                 }
                 break
             }
-            case NetworkSetupRoute.SetupCustomNode:
+            case NetworkSetupRoute.SetupPrivateNetworkConnection:
                 this.parentRouter.next()
                 break
         }
