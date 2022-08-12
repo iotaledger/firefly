@@ -1,7 +1,7 @@
 import { getRecipientAddressFromOutput } from '..'
 import { Transaction } from '@iota/wallet'
 import { OutputTypes } from '@iota/types'
-import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_FOUNDRY } from '@core/wallet/constants'
+import { OUTPUT_TYPE_FOUNDRY } from '@core/wallet/constants'
 
 export function getRelevantOutputFromTransaction(
     transaction: Transaction,
@@ -11,9 +11,7 @@ export function getRelevantOutputFromTransaction(
     const outputs = transaction.payload.essence.outputs
 
     if (isFoundry) {
-        const outputIndex = outputs.findIndex(
-            (output) => output.type !== OUTPUT_TYPE_FOUNDRY && output.type !== OUTPUT_TYPE_ALIAS
-        )
+        const outputIndex = outputs.findIndex((output) => output.type === OUTPUT_TYPE_FOUNDRY)
         return {
             output: outputs[outputIndex],
             outputIndex: outputIndex,
