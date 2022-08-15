@@ -76,7 +76,7 @@
     class="flex flex-col px-6 py-10"
     style="padding-bottom: {$isKeyboardOpened
         ? $keyboardHeight
-        : 0}px; transition: padding-bottom 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+        : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
 >
     {#if canDelete}
         <div class="mb-6 -mt-4">

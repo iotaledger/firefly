@@ -42,7 +42,7 @@
         slot="leftpane__content"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+            : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
     >
         <Text type="p" secondary classes="mb-4">{locale('views.importBackupPassword.body1')}</Text>
         <Text type="p" secondary classes="mb-8">{locale('views.importBackupPassword.body2')}</Text>
@@ -62,7 +62,7 @@
         class="flex flex-row flex-wrap justify-between items-center space-x-4"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+            : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
     >
         <Button
             classes="flex-1"
@@ -83,7 +83,7 @@
         class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-orange dark:bg-gray-900'}"
         style="margin-top: {$mobile && $isKeyboardOpened
             ? -$keyboardHeight
-            : 0}px; transition: margin-top 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+            : 0}px; transition: margin-top 0.2s var(--transition-scroll)"
     >
         <Animation
             classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
