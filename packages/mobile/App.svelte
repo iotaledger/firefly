@@ -13,7 +13,7 @@
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from '@lib/market'
     import { pollNetworkStatus } from '@lib/networkStatus'
-    import { AppRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
+    import { AppRoute, appRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
     import { Platforms } from '@lib/typings/platform'
     import {
         Appearance,
@@ -50,14 +50,20 @@
 
     $: if ($appSettings.darkMode) {
         document.body.classList.add('scheme-dark')
-        StatusBar.setStyle({ style: Style.Dark })
-        // Android status bar background color
-        // TODO: change the color based on routing
-        StatusBar.setBackgroundColor({ color: '#25395f' })
+
+        void StatusBar.setStyle({ style: Style.Dark })
+        // Android only status bar background color
+        void StatusBar.setBackgroundColor({ color: '#25395f' })
     } else {
         document.body.classList.remove('scheme-dark')
-        StatusBar.setStyle({ style: Style.Light })
-        StatusBar.setBackgroundColor({ color: '#ffffff' })
+        void StatusBar.setStyle({ style: Style.Light })
+        void StatusBar.setBackgroundColor({ color: '#ffffff' })
+    }
+
+    $: if ($appRoute === AppRoute.Dashboard) {
+        if ($appSettings.darkMode) {
+            void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
+        }
     }
 
     $: if (document.dir !== $localeDirection) {
