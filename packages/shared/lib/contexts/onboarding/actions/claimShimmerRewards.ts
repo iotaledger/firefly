@@ -63,7 +63,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
     const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
 
-    // TODO: Remove once logic is output-based rather than syncing-based
+    // TODO: https://github.com/iotaledger/firefly/issues/4223
     await sleep(10 * MILLISECONDS_PER_SECOND)
 
     const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
