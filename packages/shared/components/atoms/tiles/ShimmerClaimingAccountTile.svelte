@@ -8,6 +8,7 @@
 
     export let shimmerClaimingAccount: IShimmerClaimingAccount
 
+    $: shouldDisplayFailedState = shimmerClaimingAccount?.state === ShimmerClaimingAccountState.Failed
     $: shouldDisplayUnclaimedRewards = shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.FullyClaimed
     $: shouldDisplayClaimedRewards = shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.Unclaimed
 </script>
@@ -19,17 +20,27 @@
                 <Icon icon="wallet" width={24} height={24} classes="text-blue-500" />
                 <Text type={TextType.p}>{shimmerClaimingAccount?.meta?.alias}</Text>
             </div>
-            <div class="flex flex-col text-right">
+            <div class="flex flex-col">
                 {#if shouldDisplayUnclaimedRewards}
-                    <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
-                        {formatTokenAmountBestMatch(
-                            shimmerClaimingAccount?.unclaimedRewards,
-                            BASE_TOKEN[NetworkProtocol.Shimmer]
-                        )}
-                    </Text>
+                    <div class="flex flex-row justify-end items-center text-right space-x-2">
+                        {#if shouldDisplayFailedState}
+                            <Icon
+                                width="16"
+                                height="16"
+                                icon="status-error"
+                                classes="text-white bg-red-500 rounded-full"
+                            />
+                        {/if}
+                        <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
+                            {formatTokenAmountBestMatch(
+                                shimmerClaimingAccount?.unclaimedRewards,
+                                BASE_TOKEN[NetworkProtocol.Shimmer]
+                            )}
+                        </Text>
+                    </div>
                 {/if}
-                {#if shouldDisplayClaimedRewards}
-                    <div class="flex flex-row items-center space-x-2">
+                {#if shouldDisplayClaimedRewards && !shouldDisplayFailedState}
+                    <div class="flex flex-row justify-end center text-right space-x-2">
                         <Icon
                             width="16"
                             height="16"
