@@ -82,7 +82,7 @@
         slot="leftpane__content"
         style="margin-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: margin-bottom 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+            : 0}px; transition: margin-bottom 0.2s cubic-bezier(0, 0.5, 0, 1)"
     >
         <form on:submit|preventDefault={handleContinueClick} id="password-form">
             <Text type="p" classes="mb-4" secondary>{locale('views.password.body1')}</Text>
@@ -114,7 +114,7 @@
         slot="leftpane__action"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+            : 0}px; transition: padding-bottom 0.2s cubic-bezier(0, 0.5, 0, 1)"
     >
         <Button type="submit" form="password-form" classes="w-full" disabled={!password || !confirmedPassword || busy}>
             {locale('actions.savePassword')}
@@ -122,14 +122,11 @@
     </div>
     <div
         slot="rightpane"
-        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-yellow dark:bg-gray-900'}"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden' : 'bg-pastel-yellow dark:bg-gray-900'}"
         style="margin-top: {$mobile && $isKeyboardOpened
             ? -$keyboardHeight
-            : 0}px; transition: margin-top 0.2s cubic-bezier(0, 0.5, 0, 1.1)"
+            : 0}px; transition: margin-top 0.2s cubic-bezier(0, 0.5, 0, 1)"
     >
-        <Animation
-            classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
-            animation="password-desktop"
-        />
+        <Animation classes="setup-anim-aspect-ratio {$mobile ? 'transform ' : ''}" animation="password-desktop" />
     </div>
 </OnboardingLayout>
