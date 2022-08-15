@@ -40,6 +40,7 @@ import {
 } from '../utils'
 import { getRelevantOutputFromTransaction, getSenderFromTransaction, getSenderFromInputs } from '../utils/transactions'
 import { IUTXOInput } from '@iota/types'
+import { OUTPUT_TYPE_FOUNDRY } from '../constants'
 
 export class Activity implements IActivity {
     type: ActivityType
@@ -62,10 +63,12 @@ export class Activity implements IActivity {
     rawAmount: number
     assetId: string
     isAssetHidden: boolean
+    isRejected: boolean
     metadata?: string
     tag?: string
 
     storageDeposit?: number
+    giftedStorageDeposit?: number
     expirationDate?: Date
     isAsync: boolean
     asyncStatus: ActivityAsyncStatus
@@ -81,23 +84,27 @@ export class Activity implements IActivity {
             account.depositAddress,
             isFoundry
         )
-
+        const outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
         const recipient = getRecipientFromOutput(output)
         const nativeToken = getNativeTokenFromOutput(output)
 
         if (nativeToken) {
-            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            try {
+                await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            } catch (err) {
+                console.error(err)
+            }
         }
 
         this.type = getActivityType(isSubjectInternal(recipient), isFoundry)
         this.id = transaction.transactionId
-        this.isHidden = isActivityHiddenForAccountId(account.id, transaction.transactionId)
+        this.isHidden = false
 
         this.transactionId = transaction.transactionId
         this.inclusionState = transaction.inclusionState
         this.time = new Date(Number(transaction.timestamp))
         this.inputs = transaction.payload.essence.inputs
-        this.outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
+        this.outputId = outputId
 
         this.sender = getSenderFromTransaction(transaction.incoming, account.depositAddress, output)
         this.recipient = recipient
@@ -110,8 +117,11 @@ export class Activity implements IActivity {
         this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
         const asset = getPersistedAsset(this.assetId)
         this.isAssetHidden = !asset || asset.hidden
+        this.isRejected = isActivityHiddenForAccountId(account.id, transaction.transactionId)
 
-        this.storageDeposit = getStorageDepositFromOutput(output)
+        const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+        this.storageDeposit = storageDeposit
+        this.giftedStorageDeposit = giftedStorageDeposit
         this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
 
         this.metadata = getMetadataFromOutput(output)
@@ -131,6 +141,7 @@ export class Activity implements IActivity {
         transactionInputs: IOutputResponse[]
     ): Promise<Activity> {
         const output = outputData.output
+        const isFoundry = output.type === OUTPUT_TYPE_FOUNDRY
 
         const recipientAddress = getRecipientAddressFromOutput(output)
         const recipient = getRecipientFromOutput(output)
@@ -142,12 +153,16 @@ export class Activity implements IActivity {
         const isInternal = isSubjectInternal(subject)
 
         if (nativeToken) {
-            await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            try {
+                await tryGetAndStoreAssetFromPersistedAssets(nativeToken?.id)
+            } catch (err) {
+                console.error(err)
+            }
         }
 
-        this.type = getActivityType(isInternal)
+        this.type = getActivityType(isInternal, isFoundry)
         this.id = outputData.outputId
-        this.isHidden = isActivityHiddenForAccountId(account.id, outputData.outputId)
+        this.isHidden = false
 
         this.transactionId = outputData?.metadata?.transactionId
         this.inclusionState = InclusionState.Confirmed
@@ -158,7 +173,7 @@ export class Activity implements IActivity {
         this.subject = subject
         this.isSelfTransaction = false
         this.isInternal = isInternal
-        this.direction = isIncoming ? ActivityDirection.In : ActivityDirection.Out
+        this.direction = isIncoming || isFoundry ? ActivityDirection.In : ActivityDirection.Out
 
         this.outputId = outputData.outputId
         this.inputs =
@@ -171,8 +186,11 @@ export class Activity implements IActivity {
         this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
         const asset = getPersistedAsset(this.assetId)
         this.isAssetHidden = !asset || asset.hidden
+        this.isRejected = isActivityHiddenForAccountId(account.id, outputData.outputId)
 
-        this.storageDeposit = getStorageDepositFromOutput(output)
+        const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
+        this.storageDeposit = storageDeposit
+        this.giftedStorageDeposit = giftedStorageDeposit
         this.rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - this.storageDeposit
         this.metadata = getMetadataFromOutput(output)
         this.tag = getTagFromOutput(output)

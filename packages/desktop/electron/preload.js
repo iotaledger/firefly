@@ -3,11 +3,12 @@ const ElectronApi = require('./electronApi')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}
-let manager
 
 if (SEND_CRASH_REPORTS) {
     captureException = require('../sentry')(true).captureException
 }
+
+const profileManagers = {}
 
 // Hook the error handlers as early as possible
 window.addEventListener('error', (event) => {
@@ -55,9 +56,11 @@ try {
     // This workaround exposes the classes through factory methods
     // The factory method also copies all the prototype methods to the object so that it gets passed through the bridge
     contextBridge.exposeInMainWorld('__WALLET__API__', {
-        createAccountManager(options) {
+        createAccountManager(id, options) {
             const protoProps = Object.getOwnPropertyNames(WalletApi.AccountManager.prototype)
-            manager = new WalletApi.AccountManager(options)
+            const manager = new WalletApi.AccountManager(options)
+            manager.id = id
+            profileManagers[id] = manager
 
             protoProps.forEach((key) => {
                 if (key !== 'constructor') {
@@ -67,7 +70,13 @@ try {
 
             return manager
         },
-        async getAccount(index) {
+        deleteAccountManager(id) {
+            if (id && id in profileManagers) {
+                delete profileManagers[id]
+            }
+        },
+        async getAccount(id, index) {
+            const manager = profileManagers[id]
             const account = await manager.getAccount(index)
             const protoProps = Object.getOwnPropertyNames(WalletApi.Account.prototype)
 

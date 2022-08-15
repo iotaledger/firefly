@@ -3,6 +3,7 @@
  */
 export enum Icon {
     ArrowLeft = 'arrow-left',
+    ArrowRight = 'arrow-right',
     Assembly = 'assembly',
     Backspace = 'backspace',
     Bell = 'bell',

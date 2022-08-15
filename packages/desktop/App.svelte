@@ -1,15 +1,7 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
-    import {
-        accountRouter,
-        AppRoute,
-        appRouter,
-        DashboardRoute,
-        dashboardRouter,
-        initRouters,
-        openSettings,
-    } from '@core/router'
+    import { AppRoute, appRouter, DashboardRoute, dashboardRouter, initialiseRouters, openSettings } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import {
         appSettings,
@@ -25,36 +17,11 @@
     import { goto } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import {
-        BackupRouter,
-        BalanceView,
-        ClaimRewardsView,
-        CongratulationsView,
-        CrashReportingView,
-        CreateView,
-        Dashboard,
-        ImportRouter,
-        LanguageAndAppearanceView,
-        LedgerRouter,
-        LegalView,
-        LoginRouter,
-        MigrateRouter,
-        OnboardingCustomNetworkView,
-        OnboardingNetworkView,
-        OnboardingProtocolView,
-        PasswordView,
-        ProfileView,
-        ProtectRouter,
-        SecureView,
-        Settings,
-        SetupView,
-        Splash,
-        WelcomeView,
-    } from 'shared/routes'
+    import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { createNewProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingProfile } from '@contexts/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -93,7 +60,7 @@
     onMount(async () => {
         setTimeout(() => {
             splash = false
-            initRouters()
+            initialiseRouters()
         }, 3000)
 
         initAppSettings.set($appSettings)
@@ -106,9 +73,8 @@
             await setAppVersionDetails()
             pollCheckForAppUpdate()
         }
-        Electron.onEvent('menu-navigate-wallet', (route) => {
+        Electron.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
-            $accountRouter.goTo(route)
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
@@ -134,12 +100,12 @@
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            createNewProfile({ isDeveloperProfile: true })
+            initialiseOnboardingProfile(true)
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
             get(appRouter).next({ shouldAddProfile: true })
-            createNewProfile({ isDeveloperProfile: false })
+            initialiseOnboardingProfile(false)
         })
         Electron.hookErrorLogger((err) => {
             addError(err)
@@ -184,73 +150,14 @@
                 locale={$_}
             />
         {/if}
-        <Route route={AppRoute.Welcome}>
-            <WelcomeView />
-        </Route>
-        <Route route={AppRoute.Legal}>
-            <LegalView />
-        </Route>
-        <Route route={AppRoute.CrashReporting}>
-            <CrashReportingView />
-        </Route>
-        <Route route={AppRoute.LanguageAndAppearance}>
-            <LanguageAndAppearanceView locale={$_} />
-        </Route>
-        <Route route={AppRoute.Profile}>
-            <ProfileView />
-        </Route>
-        <Route route={AppRoute.Setup}>
-            <SetupView />
-        </Route>
-        <!-- TODO: fix ledger -->
-        <Route route={AppRoute.Create}>
-            <CreateView />
-        </Route>
-        <Route route={AppRoute.Protocol}>
-            <OnboardingProtocolView />
-        </Route>
-        <Route route={AppRoute.Network}>
-            <OnboardingNetworkView />
-        </Route>
-        <Route route={AppRoute.CustomNetwork}>
-            <OnboardingCustomNetworkView />
-        </Route>
-        <Route route={AppRoute.LedgerSetup}>
-            <LedgerRouter />
-        </Route>
-        <!--  -->
-        <Route route={AppRoute.Secure}>
-            <SecureView />
-        </Route>
-        <Route route={AppRoute.Password}>
-            <PasswordView />
-        </Route>
-        <Route route={AppRoute.Protect} transition={false}>
-            <ProtectRouter />
-        </Route>
-        <Route route={AppRoute.Backup} transition={false}>
-            <BackupRouter />
-        </Route>
-        <Route route={AppRoute.Import} transition={false}>
-            <ImportRouter />
-        </Route>
-        <Route route={AppRoute.Balance}>
-            <BalanceView />
-        </Route>
-        <Route route={AppRoute.ClaimRewards}>
-            <ClaimRewardsView />
-        </Route>
-        <Route route={AppRoute.Migrate}>
-            <MigrateRouter {goto} />
-        </Route>
-        <Route route={AppRoute.Congratulations}>
-            <CongratulationsView {goto} />
-        </Route>
         <Route route={AppRoute.Dashboard}>
             <Dashboard locale={$_} {goto} />
         </Route>
         <Route route={AppRoute.Login}>
             <LoginRouter {goto} />
+        </Route>
+        <Route route={AppRoute.Onboarding}>
+            <OnboardingRouter {goto} />
         </Route>
         {#if settings}
             <Settings locale={$_} handleClose={() => (settings = false)} />

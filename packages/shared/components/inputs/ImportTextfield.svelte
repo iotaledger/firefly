@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
-    import { debounce } from 'shared/lib/utils'
-    import { asyncGetLegacySeedChecksum } from 'shared/lib/wallet'
     import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
     import { verifyMnemonic } from '@core/profile-manager'
+    import { debounce } from '@lib/utils'
+    import { Mnemonic } from '../../lib/contexts/onboarding'
 
     enum Type {
         Seed = 'seed',
@@ -33,7 +33,7 @@
         }
     }
 
-    const isMnemonic = (words: string[]): string | undefined => {
+    const isMnemonic = (words: Mnemonic): string | undefined => {
         if (words.length !== 24) {
             return localize('error.backup.phraseWordCount', {
                 values: {
@@ -81,7 +81,6 @@
                 } else {
                     statusMessage = localize('views.importFromText.seedDetected')
                     value = trimmedContent
-                    seedChecksum = await asyncGetLegacySeedChecksum(value)
                 }
             } else if (type === Type.Mnemonic) {
                 const mnemonicValidations = isMnemonic(words)
@@ -91,7 +90,7 @@
                 } else {
                     try {
                         await verifyMnemonic(trimmedContent)
-                        statusMessage = localize('views.importFromText.phraseDetected')
+                        statusMessage = localize('views.onboarding.profileRecovery.importMnemonicPhrase.phraseDetected')
                         value = trimmedContent
                     } catch (err) {
                         error = true
@@ -119,12 +118,6 @@
     />
     <div class="flex flex-row items-start justify-between">
         <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
-        {#if seedChecksum}
-            <div class="flex flex-row items-center ml-2">
-                <Text type="p" secondary classes="mr-1">{localize('views.importFromText.checksum')}:</Text>
-                <Text type="p" highlighted>{seedChecksum}</Text>
-            </div>
-        {/if}
     </div>
 </div>
 

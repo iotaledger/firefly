@@ -12,7 +12,7 @@
         claimActivity,
         formatTokenAmountDefault,
         getAssetFromPersistedAssets,
-        hideActivity,
+        rejectActivity,
     } from '@core/wallet'
     import { Spinner } from 'shared/components'
     import { activeProfile } from '@core/profile'
@@ -63,7 +63,7 @@
                 warning: true,
                 confirmText: localize('actions.reject'),
                 onConfirm: () => {
-                    hideActivity(activity.id)
+                    rejectActivity(activity.id)
                     closePopup()
                 },
                 onCancel: () =>
@@ -101,8 +101,11 @@
     {#if activity.isAsync && (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
-                disabled={isClaiming}
-                class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300"
+                disabled={isClaiming || activity.isRejected}
+                class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300 {isClaiming ||
+                activity.isRejected
+                    ? 'cursor-default text-gray-500'
+                    : 'cursor-pointer'}"
                 on:click={reject}
             >
                 {localize('actions.reject')}

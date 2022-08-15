@@ -3,6 +3,7 @@
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
     import { isNumberLetterOrPunctuation } from '@lib/utils/isNumberLetterOrPunctuation'
+    import { DropdownChoice } from '@core/utils'
 
     export let value: string
     export let label: string
@@ -10,7 +11,7 @@
     export let disabled = false
     export let valueKey = 'label'
     export let sortItems = false
-    export let items: { label: string; value: unknown }[] = []
+    export let items: DropdownChoice[] = []
     export let small = false
     export let contentWidth = false
     export let error = ''
@@ -142,7 +143,7 @@
     >
         <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
             <Text classes="overflow-hidden" type={valueTextType} smaller>
-                {search || value || placeholder}
+                {search || value || placeholder || ''}
             </Text>
         </div>
         <Icon

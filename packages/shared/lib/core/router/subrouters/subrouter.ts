@@ -1,12 +1,19 @@
-import { get } from 'svelte/store'
+import { Writable } from 'svelte/store'
 
-import { appRouter } from '../app-router'
 import { Router } from '../router'
+import { ParentRouter } from '@core/router/types/parent-routers.type'
 
 export abstract class Subrouter<Route> extends Router<Route> {
+    protected parentRouter: ParentRouter
+
+    constructor(protected initialRoute: Route, storeRoute: Writable<Route>, parentRouter: ParentRouter) {
+        super(initialRoute, storeRoute)
+        this.parentRouter = parentRouter
+    }
+
     previous(): void {
         if (this.history.length === 0) {
-            get(appRouter).previous()
+            this.parentRouter.previous()
         } else {
             super.previous()
         }

@@ -1,14 +1,13 @@
 <script lang="typescript">
+    import { Text } from 'shared/components'
+    import { AccountLabel } from 'shared/components/atoms'
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { resetAccountRouter } from '@core/router'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
-    import { Text } from 'shared/components'
-    import { AccountLabel } from 'shared/components/atoms/'
 
     export let account: IAccountState
     export let onClick: () => unknown
@@ -20,7 +19,6 @@
             showWarning(localize('notifications.participating'))
         } else {
             setSelectedAccount(accountId)
-            resetAccountRouter(false)
             onClick && onClick()
         }
     }

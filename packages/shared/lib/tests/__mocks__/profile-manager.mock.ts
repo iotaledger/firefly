@@ -18,6 +18,12 @@ export const MOCK_MNEMONIC =
     'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
 
 export class ProfileManagerMock implements IProfileManager {
+    id: string
+
+    constructor(id: string) {
+        this.id = id
+    }
+
     backup(_: string, __: string): Promise<void> {
         return Promise.resolve()
     }

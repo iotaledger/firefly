@@ -2,10 +2,10 @@
     import { Button, Checkbox, PasswordInput, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import passwordInfo from 'shared/lib/password'
-    import { MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
+    import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
+    import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
-    import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
 
     let exportStrongholdChecked: boolean
     let startOfPasswordChange: number
@@ -61,10 +61,10 @@
         if (currentPassword && newPassword && confirmedPassword) {
             resetErrors()
 
-            if (newPassword.length > MAX_PASSWORD_LENGTH) {
+            if (newPassword.length > MAX_STRONGHOLD_PASSWORD_LENGTH) {
                 newPasswordError = localize('error.password.length', {
                     values: {
-                        length: MAX_PASSWORD_LENGTH,
+                        length: MAX_STRONGHOLD_PASSWORD_LENGTH,
                     },
                 })
                 return false
