@@ -4,7 +4,7 @@
         CollectibleDetailsMenu,
         Icon,
         Illustration,
-        KebabButton,
+        MeatballMenuButton,
         KeyValueBox,
         Modal,
         Pane,
@@ -62,7 +62,7 @@
     <Pane classes="flex flex-col p-6 w-full h-full">
         <div class="mb-6 flex justify-between items-center">
             <Text type="h2">{name}</Text>
-            <KebabButton onClick={modal?.toggle} />
+            <MeatballMenuButton onClick={modal?.toggle} />
             <CollectibleDetailsMenu bind:modal />
         </div>
         <div class="overflow-y-scroll h-full">

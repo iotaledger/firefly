@@ -18,7 +18,6 @@
     let value: string
     let error: string
     let hasFocus: boolean
-    let keepRecipientAccountSelectorOpen: boolean
     let previousValue: string
 
     if (!selectedAccount && recipient?.type === 'account') {
@@ -33,9 +32,11 @@
     }
 
     $: hasFocus && (error = '')
-    $: hasFocus && modal?.open()
     $: value && modal?.open()
-    $: keepRecipientAccountSelectorOpen = hasFocus
+
+    $: if (hasFocus) {
+        setTimeout(() => modal?.open(), 101)
+    }
 
     $: {
         if (inputElement && selectedAccount) {
@@ -89,6 +90,6 @@
         bind:modal
         bind:selected={selectedAccount}
         searchValue={value}
-        disableOnClickOutside={keepRecipientAccountSelectorOpen}
+        onClose={() => inputElement.blur()}
     />
 </recipient-input>

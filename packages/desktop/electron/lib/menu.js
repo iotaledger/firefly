@@ -1,5 +1,5 @@
 import { app, ipcMain, Menu, shell } from 'electron'
-import { ExternalRoute } from 'shared/lib/core/router/enums'
+import { DISCORD_URL, DOCUMENTATION_URL, FAQ_URL, ISSUE_REPORT_URL } from 'shared/lib/contexts/settings/constants'
 import features from 'shared/features/features'
 import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
 import { menuState } from './menuState'
@@ -200,25 +200,25 @@ const buildTemplate = () => {
             {
                 label: state.strings.faq,
                 click: function () {
-                    shell.openExternal(ExternalRoute.FAQ)
+                    shell.openExternal(FAQ_URL)
                 },
             },
             {
                 label: state.strings.documentation,
                 click: function () {
-                    shell.openExternal(ExternalRoute.Documentation)
+                    shell.openExternal(DOCUMENTATION_URL)
                 },
             },
             {
                 label: state.strings.discord,
                 click: function () {
-                    shell.openExternal(ExternalRoute.Discord)
+                    shell.openExternal(DISCORD_URL)
                 },
             },
             {
                 label: state.strings.reportAnIssue,
                 click: function () {
-                    shell.openExternal(ExternalRoute.IssueReport)
+                    shell.openExternal(ISSUE_REPORT_URL)
                 },
             },
         ],

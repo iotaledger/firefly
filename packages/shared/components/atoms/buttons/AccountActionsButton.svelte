@@ -1,11 +1,8 @@
 <script lang="typescript">
-    import { Modal, AccountActionsMenu } from 'shared/components'
-    import { KebabButton } from './'
-
-    export let classes = ''
+    import { Modal, AccountActionsMenu, MeatballMenuButton } from 'shared/components'
 
     let modal: Modal
 </script>
 
-<KebabButton onClick={modal?.toggle} {classes} />
+<MeatballMenuButton onClick={modal?.toggle} includeBackground />
 <AccountActionsMenu bind:modal />

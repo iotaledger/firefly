@@ -52,4 +52,10 @@ export abstract class Router<Route> {
         this.history = []
         this.setRoute(this.initialRoute)
     }
+
+    filterHistory(route: Route): void {
+        if (this.history.length && route !== get(this.routeStore)) {
+            this.history = this.history.filter((_route) => _route !== route)
+        }
+    }
 }

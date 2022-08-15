@@ -8,4 +8,5 @@ export enum SendOperationParameter {
     Unit = 'unit',
     Metadata = 'metadata',
     Tag = 'tag',
+    GiftStorageDeposit = 'giftStorageDeposit',
 }

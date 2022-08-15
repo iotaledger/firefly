@@ -9,7 +9,7 @@
     export let modal: Modal
     export let searchValue: string
     export let selected: IAccountState
-    export let disableOnClickOutside: boolean = false
+    export let onClose: () => void
 
     $: otherAccounts = $visibleActiveAccounts?.filter((account) => account.id !== $selectedAccount.id)
     $: filteredAccounts = otherAccounts?.filter(
@@ -25,7 +25,7 @@
 </script>
 
 {#if filteredAccounts?.length > 0}
-    <Modal {disableOnClickOutside} bind:this={modal} position={{ left: '0', top: '100%' }} classes="w-full p-4">
+    <Modal bind:this={modal} position={{ left: '0', top: '100%' }} classes="w-full p-4" on:close={onClose}>
         <recipient-account-picker-modal
             class="max-h-64 flex flex-col space-y-1 scrollable-y"
             in:fade={{ duration: 100 }}

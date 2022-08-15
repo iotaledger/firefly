@@ -1,14 +1,14 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
 import { selectedAccount } from '../../account/stores/selected-account.store'
 
-import { localize } from '@core/i18n'
 import { formatUnitBestMatch } from '@lib/units'
-import { getMonthYear, isValueInUnitRange, unitToValue } from '@lib/utils'
+import { isValueInUnitRange, unitToValue } from '@lib/utils'
 
 import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
 import { isFilteredActivity } from '../utils/isFilteredActivity'
-import { ActivityFilter } from '../interfaces/filter.interface'
+import { ActivityFilter, BooleanFilterOptions, NumberFilterType } from '../interfaces/filter.interface'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -22,14 +22,64 @@ export const selectedAccountActivities: Readable<Activity[]> = derived(
 )
 
 export const activityFilter: Writable<ActivityFilter> = writable({
-    showHidden: { active: false, type: 'boolean', label: 'filters.showHidden' },
+    amount: {
+        type: 'number',
+        active: false,
+        localeKey: 'filters.amount',
+        selected: NumberFilterType.Equal,
+        choices: Object.values(NumberFilterType),
+        subunit: {
+            type: 'single',
+            amount: '',
+        },
+    },
+    asset: {
+        active: false,
+        type: 'asset',
+        localeKey: 'filters.asset',
+        selected: '',
+    },
+    status: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.status',
+        selected: InclusionState.Confirmed,
+        choices: [
+            InclusionState.Confirmed,
+            InclusionState.Pending,
+            ActivityAsyncStatus.Claimed,
+            ActivityAsyncStatus.Unclaimed,
+        ],
+    },
+    type: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.type',
+        selected: ActivityDirection.In,
+        choices: [ActivityDirection.In, ActivityDirection.Out, ActivityType.InternalTransaction],
+    },
+    showRejected: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.showRejected',
+        selected: BooleanFilterOptions.Yes,
+        choices: [BooleanFilterOptions.Yes, BooleanFilterOptions.No],
+    },
+    showHidden: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.showHidden',
+        selected: BooleanFilterOptions.Yes,
+        choices: [BooleanFilterOptions.Yes, BooleanFilterOptions.No],
+    },
 })
+
 export const activitySearchTerm: Writable<string> = writable('')
 
 export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
-        let activityList = $selectedAccountActivities
+        let activityList = $selectedAccountActivities.filter((_activity) => !_activity.isHidden)
 
         activityList = activityList.filter((activity) => !isFilteredActivity(activity))
 
@@ -53,31 +103,3 @@ export const queriedActivities: Readable<Activity[]> = derived(
         return activityList.sort((activity1, activity2) => activity2.time.getTime() - activity1.time.getTime())
     }
 )
-
-interface GroupedActivity {
-    date: string
-    activities: Activity[]
-}
-
-export const groupedActivities: Readable<GroupedActivity[]> = derived([queriedActivities], ([$queriedActivities]) => {
-    const groupedActivities: GroupedActivity[] = []
-    for (const activity of $queriedActivities.filter((activity) => !activity.isHidden)) {
-        const activityDate = getActivityGroupTitleForTimestamp(activity.time)
-        if (!groupedActivities.some((group) => group.date === activityDate)) {
-            groupedActivities.push({ date: activityDate, activities: [] })
-        }
-        const index = groupedActivities.findIndex((group) => group.date === activityDate)
-        groupedActivities[index].activities.push(activity)
-    }
-    for (const groupedActivitiesPerDate of groupedActivities) {
-        groupedActivitiesPerDate.activities = groupedActivitiesPerDate.activities.sort(
-            (activity1, activity2) => activity2.time.getTime() - activity1.time.getTime()
-        )
-    }
-    return groupedActivities
-})
-
-function getActivityGroupTitleForTimestamp(time: Date): string {
-    const dateString = getMonthYear(time)
-    return dateString === getMonthYear(new Date()) ? localize('general.thisMonth') : dateString
-}
