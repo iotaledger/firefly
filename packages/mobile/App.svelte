@@ -35,11 +35,18 @@
         Welcome,
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'
+    import { Platform } from '@lib/platform'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
     stage.set(Stage[process.env.STAGE?.toUpperCase()] ?? Stage.ALPHA)
 
     let showSplash = true
+
+    /**
+     * We use !== 'ios' since Android sometimes is not detected
+     * so as default we define Android.
+     */
+    const isAndroid = Platform.getOS() !== 'ios'
 
     $: if ($appSettings.darkMode) {
         document.body.classList.add('scheme-dark')
@@ -110,7 +117,7 @@
 {#if $isLocaleLoaded && !showSplash}
     <!-- empty div to avoid auto-purge removing dark classes -->
     <div class="scheme-dark" />
-    <div class="scanner-hide">
+    <div class="scanner-hide" style="--transition-scroll: {isAndroid ? 'cubic-bezier(0, 0.3, 0, 1)' : 'ease-out'}">
         {#if $popupState.active}
             <Popup
                 type={$popupState.type}
@@ -203,7 +210,7 @@
         }
     }
     .setup-anim-aspect-ratio {
-        aspect-ratio: 19/15;
+        aspect-ratio: auto;
     }
     // QR Scanner
     .scanner-ui {
@@ -211,6 +218,7 @@
     }
     .scanner-hide {
         @apply visible;
+        --transition-scroll: cubic-bezier(0, 0.3, 0, 1);
     }
 
     button,
@@ -236,5 +244,14 @@
     button:active,
     button:focus {
         outline: 0px solid transparent;
+    }
+    /** Force Android scrolbars, iOS is not affected */
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(127, 127, 127, 0.5);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
     }
 </style>
