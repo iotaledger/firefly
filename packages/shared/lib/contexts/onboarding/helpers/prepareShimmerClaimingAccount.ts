@@ -1,3 +1,5 @@
+import { Transaction } from '@iota/wallet'
+
 import { IAccount, sumTotalFromOutputs, syncAccountsInParallel } from '@core/account'
 
 import { IShimmerClaimingAccount } from '../interfaces'
@@ -7,7 +9,8 @@ import { deriveShimmerClaimingAccountState } from './deriveShimmerClaimingAccoun
 export async function prepareShimmerClaimingAccount(
     account: IAccount,
     twinAccount?: IAccount,
-    syncAccounts?: boolean
+    syncAccounts?: boolean,
+    claimingTransaction?: Transaction
 ): Promise<IShimmerClaimingAccount> {
     if (syncAccounts) {
         await syncAccountsInParallel(account, twinAccount)
@@ -27,5 +30,6 @@ export async function prepareShimmerClaimingAccount(
         state,
         claimedRewards,
         unclaimedRewards,
+        claimingTransaction,
     }
 }

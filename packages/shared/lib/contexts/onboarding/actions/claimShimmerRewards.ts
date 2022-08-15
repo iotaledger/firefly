@@ -3,12 +3,12 @@ import { get } from 'svelte/store'
 import { localize } from '@core/i18n'
 import { DEFAULT_TRANSACTION_OPTIONS, getOutputOptions } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
+import { MILLISECONDS_PER_SECOND } from '@lib/time'
+import { sleep } from '@lib/utils'
 
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { IShimmerClaimingAccount } from '../interfaces'
 import { onboardingProfile, updateShimmerClaimingAccounts } from '../stores'
-import { sleep } from '@lib/utils'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
 
 export async function claimShimmerRewards(): Promise<void> {
     try {
@@ -47,13 +47,16 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-    await shimmerClaimingAccount?.sendOutputs([preparedOutput])
+    const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
+
+    // TODO: Remove once logic is output-based rather than syncing-based
     await sleep(10 * MILLISECONDS_PER_SECOND)
 
     const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
         shimmerClaimingAccount,
         shimmerClaimingAccount?.twinAccount,
-        true
+        true,
+        claimingTransaction
     )
     updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)
 }

@@ -5,13 +5,9 @@
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
     import { shimmerClaimingRouter } from '@core/router'
     import { formatTokenAmountBestMatch } from '@core/wallet'
-    import { onboardingProfile } from '@contexts/onboarding'
+    import { onboardingProfile, sumTotalClaimedRewards } from '@contexts/onboarding'
 
-    // TODO: Handle logic for displaying correct number of rewards when some have been claimed before
-    $: totalRewards = $onboardingProfile?.shimmerClaimingAccounts?.reduce(
-        (total, shimmerClaimingAccount) => (total += shimmerClaimingAccount?.claimedRewards),
-        0
-    )
+    $: totalRewards = sumTotalClaimedRewards($onboardingProfile?.shimmerClaimingAccounts)
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()

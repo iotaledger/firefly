@@ -8,7 +8,6 @@
         findShimmerRewardsForAccount,
         IShimmerClaimingAccount,
         onboardingProfile,
-        ShimmerClaimingAccountState,
     } from '@contexts/onboarding'
     import { sleep } from '@lib/utils'
 
@@ -28,10 +27,7 @@
     $: shouldShowContinueButton = canUserContinue(shimmerClaimingAccounts)
 
     function canUserContinue(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
-        const hasClaimedAllWallets = shimmerClaimingAccounts?.every(
-            (shimmerClaimingAccount) => shimmerClaimingAccount?.state === ShimmerClaimingAccountState.FullyClaimed
-        )
-        return shimmerClaimingAccounts?.length > 0 && hasClaimedAllWallets
+        return shimmerClaimingAccounts?.every((shimmerClaimingAccount) => shimmerClaimingAccount?.claimingTransaction)
     }
 
     function onBackClick(): void {
