@@ -514,7 +514,13 @@
                     </button>
                 </div>
             </div>
-            <Illustration classes={$isKeyboardOpened && 'hidden'} background height={230} illustration="send-mobile" />
+            <div
+                style="margin-top: {$isKeyboardOpened ? '-70%' : '0px'}; opacity: {$isKeyboardOpened
+                    ? 0
+                    : 1}; transition: opacity 0.2s var(--transition-scroll); transition: margin-top 0.2s var(--transition-scroll)"
+            >
+                <Illustration height={230} background illustration="send-mobile" />
+            </div>
             <div class="w-full h-full flex flex-col justify-between {$isKeyboardOpened && 'pt-6'}">
                 <div>
                     <div class="w-full block">
