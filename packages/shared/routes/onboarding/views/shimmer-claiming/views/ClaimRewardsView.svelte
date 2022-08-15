@@ -42,7 +42,7 @@
             hasSearchedForRewardsBefore = true
             await findShimmerRewards()
         } catch (err) {
-            console.error(err)
+            throw new FindShimmerRewardsError()
         } finally {
             isSearchingForRewards = false
         }
@@ -54,7 +54,6 @@
             hasTriedClaimingRewards = true
             await claimShimmerRewards()
         } catch (err) {
-            console.error(err)
             throw new ClaimShimmerRewardsError()
         } finally {
             isClaimingRewards = false
@@ -78,7 +77,6 @@
                 isSearchingForRewards = true
                 await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
             } catch (err) {
-                console.error(err)
                 throw new FindShimmerRewardsError()
             } finally {
                 isSearchingForRewards = false

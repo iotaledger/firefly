@@ -6,28 +6,27 @@ import { showAppNotification } from '@lib/notifications'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { sleep } from '@lib/utils'
 
+import { ShimmerClaimingAccountState } from '../enums'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { IShimmerClaimingAccount } from '../interfaces'
 import { onboardingProfile, updateShimmerClaimingAccounts } from '../stores'
 
 export async function claimShimmerRewards(): Promise<void> {
-    try {
-        const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
-        const unclaimedShimmerClaimingAccounts =
-            shimmerClaimingAccounts?.filter((shimmerClaimingAccount) => shimmerClaimingAccount?.unclaimedRewards > 0) ??
-            []
-        await claimShimmerRewardsForShimmerClaimingAccounts(unclaimedShimmerClaimingAccounts)
+    const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
+    const unclaimedShimmerClaimingAccounts =
+        shimmerClaimingAccounts?.filter((shimmerClaimingAccount) => shimmerClaimingAccount?.unclaimedRewards > 0) ?? []
+    await claimShimmerRewardsForShimmerClaimingAccounts(unclaimedShimmerClaimingAccounts)
+
+    const processedShimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
+    const shouldShowSuccessNotification = !processedShimmerClaimingAccounts?.some(
+        (processedShimmerClaimingAccount) =>
+            processedShimmerClaimingAccount?.state === ShimmerClaimingAccountState.Failed
+    )
+    if (shouldShowSuccessNotification) {
         showAppNotification({
             type: 'success',
-            message: localize('notifications.shimmerClaiming.success'),
             alert: true,
-        })
-    } catch (err) {
-        console.error(err)
-        showAppNotification({
-            type: 'error',
-            message: localize('notifications.shimmerClaiming.error'),
-            alert: true,
+            message: localize('notifications.claimShimmerRewards.success'),
         })
     }
 }
@@ -36,7 +35,23 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
     shimmerClaimingAccounts: IShimmerClaimingAccount[]
 ): Promise<void> {
     for (const shimmerClaimingAccount of shimmerClaimingAccounts) {
-        await claimShimmerRewardsForShimmerClaimingAccount(shimmerClaimingAccount)
+        try {
+            await claimShimmerRewardsForShimmerClaimingAccount(shimmerClaimingAccount)
+        } catch (err) {
+            console.error(err)
+            const failedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
+                shimmerClaimingAccount,
+                shimmerClaimingAccount?.twinAccount,
+                false,
+                ShimmerClaimingAccountState.Failed
+            )
+            updateShimmerClaimingAccounts(failedShimmerClaimingAccount)
+            showAppNotification({
+                type: 'error',
+                alert: true,
+                message: localize('notifications.claimShimmerRewards.error'),
+            })
+        }
     }
 }
 
@@ -56,6 +71,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
         shimmerClaimingAccount,
         shimmerClaimingAccount?.twinAccount,
         true,
+        null,
         claimingTransaction
     )
     updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)

@@ -2,6 +2,7 @@ import { Transaction } from '@iota/wallet'
 
 import { IAccount, sumTotalFromOutputs, syncAccountsInParallel } from '@core/account'
 
+import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
 
 import { deriveShimmerClaimingAccountState } from './deriveShimmerClaimingAccountState'
@@ -10,6 +11,7 @@ export async function prepareShimmerClaimingAccount(
     account: IAccount,
     twinAccount?: IAccount,
     syncAccounts?: boolean,
+    state?: ShimmerClaimingAccountState,
     claimingTransaction?: Transaction
 ): Promise<IShimmerClaimingAccount> {
     if (syncAccounts) {
@@ -22,7 +24,7 @@ export async function prepareShimmerClaimingAccount(
     const unspentOutputs = await account?.listUnspentOutputs()
     const unclaimedRewards = sumTotalFromOutputs(unspentOutputs)
 
-    const state = deriveShimmerClaimingAccountState(claimedRewards, unclaimedRewards)
+    state = state ?? deriveShimmerClaimingAccountState(claimedRewards, unclaimedRewards)
 
     return {
         ...account,
