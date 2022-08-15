@@ -1,44 +1,39 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
-    import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Animation, Button, Icon, Link, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
-    import { onboardingProfile, ProfileRecoveryType, ProfileSetupType } from '@contexts/onboarding'
-    import { ledgerDeviceState, stopPollingLedgerStatus } from '@lib/ledger'
+    import {
+        ledgerDeviceStatus,
+        stopPollingLedgerStatus,
+        pollLedgerDeviceStatus,
+        getLedgerDeviceStatus,
+        displayNotificationForLedgerProfile,
+    } from '@lib/ledger'
+    import { LedgerConnectionState } from '@lib/typings/ledger'
     import { openPopup } from '@lib/popup'
-    import { LedgerDeviceState } from '@lib/typings/ledger'
-
-    const legacyLedger = $onboardingProfile?.recoveryType === ProfileRecoveryType.TrinityLedger
-    const newLedgerProfile = $onboardingProfile?.setupType === ProfileSetupType.New
-    // const LEDGER_STATUS_POLL_INTERVAL = 1500
 
     let polling = false
-    let creatingAccount = false
 
-    $: isConnected = $ledgerDeviceState !== LedgerDeviceState.NotDetected
-    $: isAppOpen = $ledgerDeviceState === LedgerDeviceState.Connected
+    $: isConnected = $ledgerDeviceStatus.connectionState !== LedgerConnectionState.NotDetected
+    $: isAppOpen = $ledgerDeviceStatus.connectionState === LedgerConnectionState.Connected
     $: animation = !isConnected
         ? 'ledger-disconnected-desktop'
         : isAppOpen
         ? 'ledger-connected-desktop'
         : 'ledger-app-closed-desktop'
 
-    function createAccount(): void {
-        creatingAccount = true
+    function _onCancel(): void {
+        displayNotificationForLedgerProfile('error', true)
     }
 
-    // function _onCancel(): void {
-    //     creatingAccount = false
-    //     displayNotificationForLedgerProfile('error', true)
-    // }
-
-    // function _onConnected(): void {
-    //     if ($ledgerDeviceState !== LedgerDeviceState.Connected) {
-    //         _onCancel()
-    //     } else {
-    //         dispatch('next')
-    //     }
-    // }
+    function _onConnected(): void {
+        if ($ledgerDeviceStatus.connectionState !== LedgerConnectionState.Connected) {
+            _onCancel()
+        } else {
+            $ledgerSetupRouter.next()
+        }
+    }
 
     function handleGuidePopup(): void {
         openPopup({
@@ -47,13 +42,7 @@
     }
 
     function handleContinueClick(): void {
-        creatingAccount = true
-        if (newLedgerProfile) {
-            createAccount()
-        } else {
-            // getLedgerDeviceStatus(false, _onConnected, _onCancel, _onCancel)
-        }
-        $ledgerSetupRouter.next()
+        getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
     }
 
     function handleBackClick(): void {
@@ -61,14 +50,14 @@
     }
 
     onMount(() => {
-        // pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
+        pollLedgerDeviceStatus()
         polling = true
     })
 
     onDestroy(stopPollingLedgerStatus)
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} showLedgerProgress={legacyLedger} showLedgerVideoButton={legacyLedger}>
+<OnboardingLayout onBackClick={handleBackClick}>
     <div slot="leftpane__content">
         <Text type="h2" classes="mb-5">{localize('views.connectLedger.title')}</Text>
         <Text type="p" secondary classes="mb-5">{localize('views.connectLedger.body')}</Text>
@@ -93,14 +82,8 @@
         <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
             {localize('popups.ledgerConnectionGuide.title')}
         </Link>
-        <Button
-            classes="w-full"
-            disabled={(polling && (!isConnected || !isAppOpen)) || creatingAccount}
-            onClick={handleContinueClick}
-        >
-            {#if creatingAccount}
-                <Spinner busy message={localize('general.creatingAccount')} classes="justify-center" />
-            {:else}{localize('actions.continue')}{/if}
+        <Button classes="w-full" disabled={polling && (!isConnected || !isAppOpen)} onClick={handleContinueClick}>
+            {localize('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">

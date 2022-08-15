@@ -41,7 +41,7 @@
         function _onCancel() {
             restoring = false
         }
-        promptUserToConnectLedger(false, _onConnected, _onCancel)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
     function handleBackClick(): void {
         $ledgerSetupRouter.previous()

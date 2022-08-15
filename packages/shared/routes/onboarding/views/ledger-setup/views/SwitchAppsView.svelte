@@ -15,7 +15,7 @@
         function _onCancel(): void {
             busy = false
 
-            displayNotificationForLedgerProfile('error', true, true, false, true)
+            displayNotificationForLedgerProfile('error', true, true, true)
         }
 
         function _onConnected(): void {
@@ -23,7 +23,7 @@
             else dispatch('next')
         }
 
-        promptUserToConnectLedger(true, _onConnected, _onCancel)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleBackClick(): void {

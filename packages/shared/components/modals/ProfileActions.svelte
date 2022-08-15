@@ -2,11 +2,10 @@
     import { fade } from 'svelte/transition'
     import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { LocaleArguments } from '@core/i18n/types'
-    import { ledgerDeviceState } from 'shared/lib/ledger'
+    import { LedgerConnectionState } from '@lib/typings/ledger'
+    import { ledgerDeviceStatus, getLedgerDeviceStatus } from 'shared/lib/ledger'
     import { popupState, openPopup } from 'shared/lib/popup'
     import { openSettings } from '@core/router'
-    import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isLedgerProfile, logout, lockStronghold } from '@core/profile'
@@ -18,7 +17,6 @@
 
     const { isStrongholdLocked, shouldOpenProfileModal } = $activeProfile
 
-    let isLedgerConnected = false
     let isCheckingLedger = false
     let ledgerConnectionText = ''
 
@@ -32,9 +30,8 @@
     // used to prevent the modal from closing when interacting with the password popup
     // to be able to see the stronghold toggle change
     $: isPasswordPopupOpen = $popupState?.active && $popupState?.type === 'password'
-    $: if ($isLedgerProfile && $ledgerDeviceState) {
+    $: if ($isLedgerProfile && $ledgerDeviceStatus) {
         updateLedgerConnectionText()
-        isLedgerConnected = $ledgerDeviceState === LedgerDeviceState.Connected
     }
 
     const handleSettingsClick = (): void => {
@@ -61,31 +58,14 @@
 
     const syncLedgerDeviceStatus = (): void => {
         isCheckingLedger = true
-        // const _onComplete = () => setTimeout(() => (isCheckingLedger = false), 500)
-        // getLedgerDeviceStatus(false, _onComplete, _onComplete, _onComplete)
+        const _onComplete = () => setTimeout(() => (isCheckingLedger = false), 500)
+        getLedgerDeviceStatus(_onComplete, _onComplete, _onComplete)
     }
 
     const updateLedgerConnectionText = (): void => {
-        const values: LocaleArguments =
-            $ledgerDeviceState === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
-        const text = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceState}`, { values })
+        const text = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceStatus.connectionState}`)
 
-        /**
-         * NOTE: The text for when another app (besides IOTA or IOTA Legacy) is open
-         * requires an app name to be prepended or else the text won't make sense.
-         */
-        if ($ledgerDeviceState === LedgerDeviceState.OtherConnected) {
-            // getLedgerOpenedApp()
-            //     .then((la: LedgerApp) => {
-            //         ledgerConnectionText = `${la.name} ${text}`
-            //     })
-            //     .catch((err) => {
-            //         ledgerDeviceState.set(LedgerDeviceState.NotDetected)
-            //         console.error(err)
-            //     })
-        } else {
-            ledgerConnectionText = text
-        }
+        ledgerConnectionText = text
     }
 
     function handleBackupClick() {
@@ -205,8 +185,12 @@
                     <Icon
                         icon="chip"
                         boxed
-                        classes={isLedgerConnected ? 'text-blue-500' : 'text-gray-500 dark:text-white'}
-                        boxClasses={isLedgerConnected ? 'bg-blue-100 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-800'}
+                        classes={$ledgerDeviceStatus.connectionState === LedgerConnectionState.Connected
+                            ? 'text-blue-500'
+                            : 'text-gray-500 dark:text-white'}
+                        boxClasses={$ledgerDeviceStatus.connectionState === LedgerConnectionState.Connected
+                            ? 'bg-blue-100 dark:bg-gray-800'
+                            : 'bg-gray-100 dark:bg-gray-800'}
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.hardware.title')}</Text>

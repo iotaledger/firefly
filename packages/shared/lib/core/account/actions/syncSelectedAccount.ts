@@ -18,7 +18,7 @@ export async function syncSelectedAccount(): Promise<void> {
             err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
         if (!shouldHideErrorNotification) {
             if (get(isLedgerProfile)) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                displayNotificationForLedgerProfile('error', true, true, err)
             } else {
                 showAppNotification({
                     type: 'error',

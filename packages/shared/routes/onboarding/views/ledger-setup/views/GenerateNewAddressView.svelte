@@ -62,7 +62,7 @@
         function _onCancel(): void {
             busy = false
         }
-        promptUserToConnectLedger(false, _onConnected, _onCancel)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
     // function displayAddress(accountId: string): void {
     //     api.getMigrationAddress(true, accountId, {

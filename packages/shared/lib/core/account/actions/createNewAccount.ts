@@ -22,5 +22,6 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
         return newAccount
     } catch (err) {
         console.error(err)
+        throw err
     }
 }

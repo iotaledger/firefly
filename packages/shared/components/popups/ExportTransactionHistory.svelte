@@ -69,7 +69,7 @@
             error = localize(err.error)
 
             if ($isLedgerProfile) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                displayNotificationForLedgerProfile('error', true, true, err)
             } else {
                 showAppNotification({
                     type: 'error',

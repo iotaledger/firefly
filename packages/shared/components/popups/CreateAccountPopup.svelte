@@ -33,7 +33,7 @@
             await validateAccountName(trimmedAccountAlias)
             updatePopupProps({ accountAlias, color, error, isBusy })
             if ($isLedgerProfile) {
-                void promptUserToConnectLedger(false, _create, _cancel)
+                void promptUserToConnectLedger(_create, _cancel)
             } else if ($isSoftwareProfile && $isStrongholdLocked) {
                 await checkStronghold(_create, true)
             } else {

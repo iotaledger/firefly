@@ -34,7 +34,7 @@
             isBusy = true
 
             if ($isLedgerProfile) {
-                promptUserToConnectLedger(false, _save, _cancel)
+                promptUserToConnectLedger(_save, _cancel)
             } else if ($isSoftwareProfile && $isStrongholdLocked) {
                 openPopup({ type: 'password', props: { onSuccess: _save } })
             } else {

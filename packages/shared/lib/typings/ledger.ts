@@ -1,37 +1,21 @@
-export interface ILedger {
-    connected: boolean
-    listeners: { (...data: unknown[]): void }[]
-    selectSeed(index: number, page: number, security: number): Promise<void | null>
-    awaitConnection(): Promise<void>
-    awaitApplication(index: number, page: number, security: number): Promise<void>
-    onMessage(...data: unknown[]): void
-    addListener(...data: unknown[]): void
-    removeListener(...data: unknown[]): void
-}
-export interface LedgerApp {
-    name: string
-    version: string
+import { LedgerStatus } from '@iota/wallet'
+
+export interface LedgerExtendedStatus extends LedgerStatus {
+    connectionState: LedgerConnectionState
 }
 
-export interface LedgerStatus {
-    connected: boolean
-    locked: boolean
-    app?: LedgerApp
-}
-
-export enum LedgerDeviceState {
+export enum LedgerConnectionState {
     AppNotOpen = 'appNotOpen',
     Connected = 'connected',
-    LegacyConnected = 'legacyConnected',
     Locked = 'locked',
-    MnemonicMismatch = 'mnemonicMismatch',
     NotDetected = 'notDetected',
     OtherConnected = 'otherConnected',
+    MnemonicMismatch = 'mnemonicMismatch',
 }
 
 export enum LedgerAppName {
     BOLOS = 'BOLOS',
-    IOTA = 'IOTA',
+    SHIMMER = 'Shimmer',
     IOTALegacy = 'IOTA Legacy',
 }
 
