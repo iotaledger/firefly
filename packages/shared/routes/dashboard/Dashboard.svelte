@@ -339,6 +339,7 @@
                                     isRefreshing = true
                                     await asyncSyncAccount($selectedAccountStore)
                                     isRefreshing = false
+                                    resolve()
                                 },
                             },
                         })
@@ -346,8 +347,8 @@
                         isRefreshing = true
                         await asyncSyncAccount($selectedAccountStore)
                         isRefreshing = false
+                        resolve()
                     }
-                    resolve()
                 },
                 onError(err) {
                     showAppNotification({
@@ -435,7 +436,7 @@
     <Idle />
     <div class="flex flex-col w-full h-full bg-white dark:bg-gray-800">
         <MainMenu />
-        {#if $mobile && !$mobileHeaderAnimation}
+        {#if $mobileHeaderAnimation === 1}
             <Refresher callback={handleRefresh} bind:isRefreshing platform={os} />
         {/if}
         <TopNavigation {onCreateAccount} />

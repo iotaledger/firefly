@@ -46,8 +46,6 @@
 
         if (isRefreshing) {
             setAnimationValues({ position: SWIPE_MAX / 3 })
-        } else {
-            setAnimationValues({ scale: 0 })
         }
     }
 
@@ -91,7 +89,7 @@
             (platform === 'android' && $animationValues.opacity === 1) ||
             (platform === 'ios' && $animationValues.position >= SWIPE_MAX / 2.5)
         ) {
-            callback()
+            callback().then(() => setAnimationValues({ scale: 0 }))
         } else {
             resetValues()
         }
