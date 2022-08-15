@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Input, Text } from 'shared/components'
     import { Locale } from '@core/i18n'
+    import { mobile } from '@lib/app'
 
     export let locale: Locale
 
@@ -56,9 +57,9 @@
             {disabled}
             placeholder={placeholder || locale('general.password')}
             {submitHandler}
-            disableContextMenu={true}
-            spellcheck="false"
-            autocomplete="false"
+            disableContextMenu={!$mobile}
+            spellcheck={false}
+            autocomplete={$mobile ? 'current-password' : 'off'}
             {locale}
             capsLockWarning={true}
         />
