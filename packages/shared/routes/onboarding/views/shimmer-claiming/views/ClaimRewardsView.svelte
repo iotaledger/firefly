@@ -9,9 +9,9 @@
         findShimmerRewardsForAccount,
         IShimmerClaimingAccount,
         onboardingProfile,
+        ShimmerClaimingAccountState,
     } from '@contexts/onboarding'
 
-    let shimmerClaimingAccounts: IShimmerClaimingAccount[]
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
     let isSearchingForRewards = false
@@ -25,7 +25,14 @@
         !shimmerClaimingAccounts.some((shimmerClaimingAccount) => shimmerClaimingAccount.unclaimedRewards > 0) ||
         isSearchingForRewards ||
         isClaimingRewards
-    $: shouldDisplayContinueButton = false
+    $: shouldShowContinueButton = canUserContinue(shimmerClaimingAccounts)
+
+    function canUserContinue(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
+        const hasClaimedAllWallets = shimmerClaimingAccounts?.every(
+            (shimmerClaimingAccount) => shimmerClaimingAccount?.state === ShimmerClaimingAccountState.FullyClaimed
+        )
+        return shimmerClaimingAccounts?.length > 0 && hasClaimedAllWallets
+    }
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
@@ -111,12 +118,12 @@
         </Button>
         <Button
             classes="w-full"
-            disabled={shouldClaimRewardsButtonBeDisabled}
-            onClick={shouldDisplayContinueButton ? onContinueClick : onClaimRewardsClick}
+            disabled={shouldClaimRewardsButtonBeDisabled && !shouldShowContinueButton}
+            onClick={shouldShowContinueButton ? onContinueClick : onClaimRewardsClick}
         >
             {#if isClaimingRewards}
                 <Spinner message={localize('actions.claiming')} busy={true} classes="justify-center items-center" />
-            {:else if shouldDisplayContinueButton}
+            {:else if shouldShowContinueButton}
                 {localize('actions.continue')}
             {:else}
                 {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}

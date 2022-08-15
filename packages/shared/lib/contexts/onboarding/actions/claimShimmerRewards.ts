@@ -7,6 +7,8 @@ import { showAppNotification } from '@lib/notifications'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { IShimmerClaimingAccount } from '../interfaces'
 import { onboardingProfile, updateShimmerClaimingAccounts } from '../stores'
+import { sleep } from '@lib/utils'
+import { MILLISECONDS_PER_SECOND } from '@lib/time'
 
 export async function claimShimmerRewards(): Promise<void> {
     try {
@@ -46,6 +48,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
     await shimmerClaimingAccount?.sendOutputs([preparedOutput])
+    await sleep(10 * MILLISECONDS_PER_SECOND)
 
     const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
         shimmerClaimingAccount,
