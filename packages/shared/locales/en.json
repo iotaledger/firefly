@@ -467,6 +467,7 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
