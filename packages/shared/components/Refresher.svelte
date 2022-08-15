@@ -4,33 +4,32 @@
     import { quintOut } from 'svelte/easing'
     import tailwindConfig from 'shared/tailwind.config.js'
 
-    export let platform = 'android'
     export let callback = async (): Promise<void> => {}
+    export let eventTarget: HTMLElement | Window = window
+    export let isRefreshing = false
+    export let platform = 'android'
 
     const SWIPE_MAX = window.screen.availHeight / 2
     const DEFAULT_ANIMATION_DURATION = 350 // ms
-    const DEFAULT_ANIMATION_VALUES =
-        platform === 'android'
-            ? {
-                  opacity: 0,
-                  position: 0,
-                  rotation: 0,
-                  scale: 1,
-                  draw: 0,
-                  arrowScale: 0,
-              }
-            : platform === 'ios'
-            ? {
-                  position: 0,
-              }
-            : {}
-    const IOS_REFRESHER_SIZE = 54 // px
+    const DEFAULT_ANIMATION_VALUES = {
+        arrowScale: 0,
+        draw: 0,
+        opacity: 0,
+        position: 0,
+        rotation: 0,
+        scale: 1,
+    }
 
-    const opacityEasing = (n: number) => Math.max(Math.min(positionEasing(n) / (SWIPE_MAX / 6) - 0.5, 1), 0.5)
     const positionEasing = (n: number) => (n * (Math.log(2 + (SWIPE_MAX - n) / SWIPE_MAX) / Math.log(2))) / 2
-    const rotationEasing = (n: number) => (positionEasing(n) / (SWIPE_MAX / 6)) * 360 - 180
-    const drawEasing = (n: number) => (positionEasing(n) / (SWIPE_MAX / 6)) * 1000 - 500
-    const arrowScaleEasing = (n: number) => Math.min(positionEasing(n) / (SWIPE_MAX / 6) - 0.5, 1)
+
+    function animationValuesEasing(n: number) {
+        const position = positionEasing(n)
+        const arrowScale = Math.min(position / (SWIPE_MAX / 6) - 0.5, 1)
+        const draw = (position / (SWIPE_MAX / 6)) * 1000 - 500
+        const opacity = Math.max(Math.min(position / (SWIPE_MAX / 6) - 0.5, 1), 0.5)
+        const rotation = (position / (SWIPE_MAX / 6)) * 360 - 180
+        return { position, arrowScale, draw, opacity, rotation }
+    }
 
     const animationValues = tweened(DEFAULT_ANIMATION_VALUES, {
         duration: DEFAULT_ANIMATION_DURATION,
@@ -39,15 +38,16 @@
 
     let startY = 0
     let y = 0
-    let isRefreshing = false
 
     $: {
         if ($animationValues.scale === 0) {
             resetValues(0)
         }
 
-        if (platform === 'ios' && $animationValues.position >= SWIPE_MAX / 2.5) {
-            callRefresh().then(() => resetValues())
+        if (isRefreshing) {
+            setAnimationValues({ position: SWIPE_MAX / 3 })
+        } else {
+            setAnimationValues({ scale: 0 })
         }
     }
 
@@ -70,14 +70,6 @@
         setAnimationValues(DEFAULT_ANIMATION_VALUES, duration)
     }
 
-    async function callRefresh(): Promise<void> {
-        isRefreshing = true
-        platform === 'android' && setAnimationValues({ position: SWIPE_MAX / 3 })
-        await callback()
-        platform === 'android' && setAnimationValues({ scale: 0 })
-        isRefreshing = false
-    }
-
     function onTouchStart(event: TouchEvent): void {
         resetValues(0)
         startY = event.touches[0].clientY
@@ -87,28 +79,19 @@
         const clientY = event.touches[0].clientY
         y = clientY > SWIPE_MAX ? SWIPE_MAX : clientY
         const movedY = y - startY
-
         if (platform === 'android') {
-            setAnimationValues(
-                {
-                    opacity: opacityEasing(movedY),
-                    position: positionEasing(movedY),
-                    rotation: rotationEasing(movedY),
-                    draw: drawEasing(movedY),
-                    arrowScale: arrowScaleEasing(movedY),
-                },
-                0
-            )
+            setAnimationValues(animationValuesEasing(movedY), 0)
         } else if (platform === 'ios') {
             setAnimationValues({ position: positionEasing(movedY) }, 0)
         }
     }
 
     function onTouchEnd(event: TouchEvent): void {
-        if (platform === 'android' && $animationValues.opacity === 1) {
-            callRefresh()
-        } else if (platform === 'ios' && isRefreshing) {
-            setAnimationValues({ position: SWIPE_MAX / 8 })
+        if (
+            (platform === 'android' && $animationValues.opacity === 1) ||
+            (platform === 'ios' && $animationValues.position >= SWIPE_MAX / 2.5)
+        ) {
+            callback()
         } else {
             resetValues()
         }
@@ -119,28 +102,25 @@
     }
 
     onMount(() => {
-        window.addEventListener('touchstart', onTouchStart)
-        window.addEventListener('touchmove', onTouchMove)
-        window.addEventListener('touchend', onTouchEnd)
-        window.addEventListener('touchcancel', onTouchCancel)
+        eventTarget.addEventListener('touchstart', onTouchStart)
+        eventTarget.addEventListener('touchmove', onTouchMove)
+        eventTarget.addEventListener('touchend', onTouchEnd)
+        eventTarget.addEventListener('touchcancel', onTouchCancel)
     })
 
     onDestroy(() => {
-        window.removeEventListener('touchstart', onTouchStart)
-        window.removeEventListener('touchmove', onTouchMove)
-        window.removeEventListener('touchend', onTouchEnd)
-        window.removeEventListener('touchcancel', onTouchCancel)
+        eventTarget.removeEventListener('touchstart', onTouchStart)
+        eventTarget.removeEventListener('touchmove', onTouchMove)
+        eventTarget.removeEventListener('touchend', onTouchEnd)
+        eventTarget.removeEventListener('touchcancel', onTouchCancel)
     })
 </script>
 
 {#if platform === 'ios'}
     <ios-refresher
         class:is-refreshing={isRefreshing}
-        style:--ios-refresher-size={IOS_REFRESHER_SIZE + 'px'}
-        style:--margin-bottom={$animationValues.position + 'px'}
-        style:--margin-top={($animationValues.position > IOS_REFRESHER_SIZE
-            ? 0
-            : $animationValues.position - IOS_REFRESHER_SIZE) + 'px'}
+        style:--position={$animationValues.position + 'px'}
+        style:--scale={$animationValues.scale}
     >
         {#each Array(12) as _, i}
             <span
@@ -166,20 +146,26 @@
 {/if}
 
 <style type="text/scss">
+    android-refresher,
     ios-refresher {
         align-items: center;
-        border-radius: 10px;
+        background-color: #fbfaf8;
+        border-radius: 50%;
+        box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px;
         display: flex;
-        height: var(--ios-refresher-size);
+        height: 38px;
         justify-content: center;
-        margin-bottom: var(--margin-bottom);
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: var(--margin-top);
-        padding: 10px;
-        position: relative;
-        width: var(--ios-refresher-size);
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: -48px;
+        width: 38px;
         z-index: 999;
+    }
+
+    ios-refresher {
+        transform: translateY(var(--position)) scale(var(--scale));
 
         .bar {
             background: #888;
@@ -193,12 +179,8 @@
             width: 4%;
         }
 
-        &.is-refreshing {
-            animation: scale 0.2s linear;
-
-            .bar {
-                animation: fade 1s linear infinite;
-            }
+        &.is-refreshing .bar {
+            animation: fade 1s linear infinite;
         }
 
         @keyframes fade {
@@ -209,36 +191,10 @@
                 opacity: 0.25;
             }
         }
-
-        @keyframes scale {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.25);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
     }
 
     android-refresher {
-        align-items: center;
-        background-color: #fbfaf8;
-        border-radius: 50%;
-        box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px;
-        display: flex;
-        height: 38px;
-        justify-content: center;
-        left: 0;
-        margin: auto;
-        position: absolute;
-        right: 0;
-        top: -48px;
         transform: translateY(var(--position)) rotateZ(var(--rotation)) scale(var(--scale));
-        width: 38px;
-        z-index: 999;
 
         &::before {
             border-bottom: 5px solid var(--color);

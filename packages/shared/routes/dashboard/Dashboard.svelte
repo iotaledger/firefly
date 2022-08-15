@@ -48,6 +48,7 @@
         selectedAccountStore,
         haveStakingResultsCached,
     } from 'shared/lib/wallet'
+    import { mobileHeaderAnimation } from 'shared/lib/animation'
     import { Governance, Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount, setContext } from 'svelte'
     import { derived, get, Readable } from 'svelte/store'
@@ -69,7 +70,8 @@
     let fundsSoonNotificationId
     let developerProfileNotificationId
     let showTopNav = false
-    let os
+    let os: string
+    let isRefreshing: boolean
     const LEDGER_STATUS_POLL_INTERVAL = 2000
 
     const unsubscribeAccountsLoaded = accountsLoaded.subscribe((val) => {
@@ -325,6 +327,40 @@
         }
     }
 
+    async function handleRefresh(): Promise<void> {
+        await new Promise<void>((resolve, reject) => {
+            api.getStrongholdStatus({
+                async onSuccess(strongholdStatusResponse) {
+                    if (strongholdStatusResponse.payload.snapshot.status === 'Locked') {
+                        openPopup({
+                            type: 'password',
+                            props: {
+                                onSuccess: async () => {
+                                    isRefreshing = true
+                                    await asyncSyncAccount($selectedAccountStore)
+                                    isRefreshing = false
+                                },
+                            },
+                        })
+                    } else {
+                        isRefreshing = true
+                        await asyncSyncAccount($selectedAccountStore)
+                        isRefreshing = false
+                    }
+                    resolve()
+                },
+                onError(err) {
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err.error),
+                    })
+                    isRefreshing = false
+                    reject(err)
+                },
+            })
+        })
+    }
+
     $: if (!busy && $accountsLoaded) {
         /**
          * If the profile has dummy migration transactions,
@@ -399,8 +435,8 @@
     <Idle />
     <div class="flex flex-col w-full h-full bg-white dark:bg-gray-800">
         <MainMenu />
-        {#if $mobile}
-            <Refresher callback={() => asyncSyncAccount($selectedAccountStore)} platform={os} />
+        {#if $mobile && !$mobileHeaderAnimation}
+            <Refresher callback={handleRefresh} bind:isRefreshing platform={os} />
         {/if}
         <TopNavigation {onCreateAccount} />
         <!-- Dashboard Pane -->
