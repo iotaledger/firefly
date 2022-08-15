@@ -146,7 +146,7 @@
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
         {#if isPartiallyStakedAndCanParticipate}
-            <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+            <Text type="h3" classes="text-left">
                 {localize(
                     `tooltips.partiallyStakedFunds.title${$isPartiallyStaked ? '' : 'NoFunds'}`,
                     $isPartiallyStaked ? { values: { amount: formatUnitBestMatch($partiallyUnstakedAmount) } } : {}

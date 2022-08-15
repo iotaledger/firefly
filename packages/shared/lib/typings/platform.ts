@@ -9,6 +9,7 @@ import { EventMap } from './events'
 import { IBarcodeManager } from './barcodeManager'
 
 import { ActionSheetOptions } from '@lib/typings/actionSheet'
+import { KeyboardStyle } from '@lib/typings/keyboard'
 
 export enum Platforms {
     MOBILE = 'mobile',
@@ -41,6 +42,7 @@ export interface IPlatform {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
     hookErrorLogger(logger: (error: Error) => void): void
+    loadJsonFile(filepath: string): Promise<unknown>
 
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined
@@ -65,4 +67,8 @@ export interface IPlatform {
     // Capacitor Interface
     share(text?: string): Promise<void>
     showActionSheet(options: ActionSheetOptions): Promise<number>
+    setKeyboardAccessoryBarVisible(isVisible: boolean): Promise<void>
+    setKeyboardStyle(style: KeyboardStyle): Promise<void>
+    showKeyboard(): Promise<void>
+    hideKeyboard(): Promise<void>
 }

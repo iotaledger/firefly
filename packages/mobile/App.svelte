@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { nativeSplash } from 'capacitor/capacitorApi'
     import { App } from '@capacitor/app'
+    import { nativeSplash } from 'capacitor/capacitorApi'
+    import { Keyboard } from '@capacitor/keyboard'
     import { StatusBar, Style } from '@capacitor/status-bar'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
     import { openPopup, popupState } from '@lib/popup'
-    import { logout, mobile, stage } from '@lib/app'
+    import { logout, keyboardHeight, mobile, stage } from '@lib/app'
     import { appSettings } from '@lib/appSettings'
     import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
@@ -67,11 +68,22 @@
         })
     )
 
+    // Note: added hideClose condition to popups only as it is the only way we use it
     void App.addListener('backButton', () => {
-        const next = $backButtonStore.remove()
-        if (next) {
-            next()
+        if (!$popupState.hideClose) {
+            const next = $backButtonStore.pop()
+            if (next) {
+                next()
+            }
         }
+    })
+
+    void Keyboard.addListener('keyboardDidShow', (info) => {
+        // We use also didShow since in some cases the height is higher
+        $keyboardHeight = info.keyboardHeight
+    })
+    void Keyboard.addListener('keyboardWillShow', (info) => {
+        $keyboardHeight = info.keyboardHeight
     })
 
     async function hideSplashScreen() {

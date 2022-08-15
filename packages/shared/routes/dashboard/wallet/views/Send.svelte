@@ -3,7 +3,7 @@
     import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, Illustration, Input, ProgressBar, Text } from 'shared/components'
-    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
+    import { clearSendParams, keyboardHeight, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -531,7 +531,7 @@
                                 />
                             </span>
                             <div class="mb-4 w-full" on:click={selectInternal}>
-                                <Input style="text-align: left;" type="button" value={to?.label || null} />
+                                <Input autofocus type="button" value={to?.label || null} />
                             </div>
                         {:else}
                             {#if accountsDropdownItems.length > 1 && address.length === 0}
@@ -566,7 +566,7 @@
             </div>
         </div>
         {#if !$isTransferring}
-            <div class="mt-8 flex flex-row justify-between px-2">
+            <div class="mt-8 flex flex-row justify-between px-2" style="margin-bottom: {$keyboardHeight}px;">
                 <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
                     {localize('actions.cancel')}
                 </Button>

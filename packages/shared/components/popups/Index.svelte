@@ -178,7 +178,7 @@
     }
 
     onMount(async () => {
-        $backButtonStore.add(closePopup as () => Promise<void>)
+        $backButtonStore?.add(closePopup as () => Promise<void>)
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()

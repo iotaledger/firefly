@@ -41,7 +41,7 @@
         isDrawerOpened = !isDrawerOpened
         if (drawer) {
             drawer.open()
-            $backButtonStore.add(drawer.close)
+            $backButtonStore?.add(drawer.close)
         }
     }
 
@@ -53,7 +53,7 @@
 <div class="flex flex-auto flex-col">
     <button
         on:click={toggleAccountSwitcher}
-        class="mt-3 py-2 px-2 absolute rounded-lg flex flex-row justify-center items-center space-x-2 
+        class="safe-area-top mt-3 py-2 px-2 absolute rounded-lg flex flex-row justify-center items-center space-x-2 
             {isDrawerOpened ? 'bg-gray-100 dark:bg-gray-900' : ''}
             "
         style="transform: translateX({switcherButtonTranslateX}px);"
@@ -66,7 +66,7 @@
         </div>
     </button>
     <Drawer bind:this={drawer} opened={isDrawerOpened} on:close={() => (isDrawerOpened = false)}>
-        <div class="flex flex-col w-full pt-7 p-5 safe-area">
+        <div class="flex flex-col w-full pt-7 p-5 safe-area-bottom">
             {#if drawerRoute === DrawerRoutes.Create}
                 <CreateAccount onCreate={onCreateAccount} onCancel={() => drawer.close()} />
             {:else if drawerRoute === DrawerRoutes.Init}
@@ -90,7 +90,10 @@
             background-color: var(--account-color);
         }
     }
-    .safe-area {
+    .safe-area-bottom {
         margin-bottom: calc(env(safe-area-inset-top) / 2);
+    }
+    .safe-area-top {
+        margin-top: calc(env(safe-area-inset-top) + 12px);
     }
 </style>

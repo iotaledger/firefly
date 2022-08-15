@@ -11,7 +11,7 @@
 
     const dispatch = createEventDispatcher()
 
-    $backButtonStore.refresh()
+    $backButtonStore?.reset()
 
     function handleContinueClick(id: string) {
         setActiveProfile(id)

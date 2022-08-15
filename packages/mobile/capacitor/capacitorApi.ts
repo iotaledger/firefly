@@ -2,6 +2,7 @@ import { Capacitor } from '@capacitor/core'
 
 import { App } from '@capacitor/app'
 import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
+import { Keyboard } from '@capacitor/keyboard'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { Share } from '@capacitor/share'
 import { BarcodeManager } from './lib/barcodeManager'
@@ -15,6 +16,7 @@ import { AppSettings } from '@lib/typings/app'
 import { VersionDetails } from '@lib/typings/appUpdater'
 import { IPlatform } from '@lib/typings/platform'
 import { ActionSheetOptions } from '@lib/typings/actionSheet'
+import { KeyboardStyle } from '@lib/typings/keyboard'
 
 import * as WalletBindings from './walletPluginApi'
 
@@ -51,6 +53,16 @@ export const CapacitorApi: IPlatform = {
     },
 
     listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
+
+    loadJsonFile: async (filepath) => {
+        try {
+            const response = await fetch(filepath)
+            const json = await response.json()
+            return json
+        } catch (e) {
+            console.error(e)
+        }
+    },
 
     PincodeManager: PincodeManager,
 
@@ -339,6 +351,28 @@ export const CapacitorApi: IPlatform = {
     showActionSheet: async (options: ActionSheetOptions) => {
         const result = await ActionSheet.showActions(options as ShowActionsOptions)
         return result.index
+    },
+
+    /**
+     * @param {boolean} isVisible Show/Hide Accessory bar
+     */
+    setKeyboardAccessoryBarVisible: async (isVisible: boolean) => {
+        await Keyboard.setAccessoryBarVisible({ isVisible })
+    },
+
+    /**
+     * @param {KeyboardStyle} style (DARK, LIGHT, DEFAULT)
+     */
+    setKeyboardStyle: async (style: KeyboardStyle) => {
+        await Keyboard.setStyle({ style })
+    },
+
+    showKeyboard: async () => {
+        await Keyboard.show()
+    },
+
+    hideKeyboard: async () => {
+        await Keyboard.hide()
     },
 }
 

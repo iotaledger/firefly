@@ -66,6 +66,9 @@ const ElectronApi = {
             }
         })
     },
+    loadJsonFile(filepath) {
+        return ipcRenderer.invoke('load-json-file', filepath).then((jsonFile) => jsonFile)
+    },
     PincodeManager: PincodeManager,
     DeepLinkManager: DeepLinkManager,
     NotificationManager: NotificationManager,
