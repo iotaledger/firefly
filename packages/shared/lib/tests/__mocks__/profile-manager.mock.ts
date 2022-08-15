@@ -7,7 +7,7 @@ import type {
     ClientOptions,
     EventType,
     WalletEvent,
-    LedgerStatus,
+    LedgerNanoStatus,
 } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
@@ -124,7 +124,7 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
-    getLedgerStatus(): Promise<LedgerStatus> {
+    getLedgerStatus(): Promise<LedgerNanoStatus> {
         return new Promise((resolve) =>
             resolve({
                 connected: true,
