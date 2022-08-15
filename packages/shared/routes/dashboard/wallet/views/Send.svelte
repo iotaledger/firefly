@@ -3,7 +3,7 @@
     import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, Illustration, Input, ProgressBar, Text } from 'shared/components'
-    import { clearSendParams, keyboardHeight, mobile, sendParams } from 'shared/lib/app'
+    import { clearSendParams, keyboardHeight, isKeyboardOpened, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -514,8 +514,8 @@
                     </button>
                 </div>
             </div>
-            <Illustration background height={230} illustration="send-mobile" />
-            <div class="w-full h-full flex flex-col justify-between">
+            <Illustration classes={$isKeyboardOpened && 'hidden'} background height={230} illustration="send-mobile" />
+            <div class="w-full h-full flex flex-col justify-between {$isKeyboardOpened && 'pt-6'}">
                 <div>
                     <div class="w-full block">
                         {#if selectedSendType === SEND_TYPE.INTERNAL}
@@ -549,9 +549,10 @@
                                 disabled={$isTransferring}
                                 placeholder={`${localize('general.sendToAddress')} \n${addressPrefix}...`}
                                 classes="mb-4"
-                                autofocus={false}
+                                autofocus={address === '' ? true : false}
                             />
                         {/if}
+                        <!-- <div style="margin-top: {$isKeyboardOpened ? 60 : 0}px; transition: margin-top 0.2s"> -->
                         <Amount
                             error={amountError}
                             bind:amount
@@ -559,14 +560,20 @@
                             customUnitPresentation={showUnitActionSheet}
                             onMaxClick={handleMaxClick}
                             disabled={$isTransferring}
-                            autofocus={false}
+                            autofocus={address !== '' ? true : false}
                         />
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
         </div>
         {#if !$isTransferring}
-            <div class="mt-8 flex flex-row justify-between px-2" style="margin-bottom: {$keyboardHeight}px;">
+            <div
+                class="mt-8 flex flex-row justify-between px-2"
+                style="margin-bottom: {$isKeyboardOpened
+                    ? $keyboardHeight
+                    : 0}px; transition: margin-bottom 0.2s var(--transition-scroll)"
+            >
                 <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
                     {localize('actions.cancel')}
                 </Button>
@@ -703,5 +710,8 @@
             @apply -bottom-2.5;
             @apply left-0;
         }
+    }
+
+    @media screen and (min-height: 700px) {
     }
 </style>
