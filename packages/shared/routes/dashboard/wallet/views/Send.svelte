@@ -549,7 +549,7 @@
                                 disabled={$isTransferring}
                                 placeholder={`${localize('general.sendToAddress')} \n${addressPrefix}...`}
                                 classes="mb-4"
-                                autofocus={address === '' ? true : false}
+                                autofocus={false}
                             />
                         {/if}
                         <!-- <div style="margin-top: {$isKeyboardOpened ? 60 : 0}px; transition: margin-top 0.2s"> -->

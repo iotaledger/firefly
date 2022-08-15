@@ -60,9 +60,17 @@
         void StatusBar.setBackgroundColor({ color: '#ffffff' })
     }
 
-    $: if ($appRoute === AppRoute.Dashboard) {
+    /**
+     * Handle Android darkmode top status bar
+     * @todo remove when implement status bar overlay
+     */
+    $: if ($appRoute !== AppRoute.Dashboard) {
         if ($appSettings.darkMode) {
             void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
+        }
+    } else {
+        if ($appSettings.darkMode) {
+            void StatusBar.setBackgroundColor({ color: '#25395f' })
         }
     }
 
