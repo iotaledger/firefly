@@ -5,7 +5,9 @@
     import { shimmerClaimingRouter } from '@core/router'
     import {
         claimShimmerRewards,
+        ClaimShimmerRewardsError,
         findShimmerRewards,
+        FindShimmerRewardsError,
         findShimmerRewardsForAccount,
         IShimmerClaimingAccount,
         onboardingProfile,
@@ -53,6 +55,7 @@
             await claimShimmerRewards()
         } catch (err) {
             console.error(err)
+            throw new ClaimShimmerRewardsError()
         } finally {
             isClaimingRewards = false
         }
@@ -76,6 +79,7 @@
                 await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
             } catch (err) {
                 console.error(err)
+                throw new FindShimmerRewardsError()
             } finally {
                 isSearchingForRewards = false
             }

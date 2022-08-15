@@ -1304,11 +1304,11 @@
         },
         "findShimmerRewards": {
             "success": "Successfully found Shimmer rewards",
-            "error": "Failed to find Shimmer rewards"
+            "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
             "success": "Successfully claimed Shimmer rewards",
-            "error": "Failed to claim Shimmer rewards"
+            "error": "An error occurred while claiming rewards"
         }
     },
     "error": {
