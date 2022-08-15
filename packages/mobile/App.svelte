@@ -245,7 +245,7 @@
     button:focus {
         outline: 0px solid transparent;
     }
-    /** Force Android scrolbars, iOS is not affected */
+    /** Force Android inner divs scrolbars, iOS is not affected */
     ::-webkit-scrollbar {
         width: 3px;
     }
