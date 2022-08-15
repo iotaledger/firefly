@@ -13,7 +13,6 @@ export async function findShimmerRewards(): Promise<void> {
         const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
         const accounts = await _shimmerClaimingProfileManager?.recoverAccounts(accountGapLimit, addressGapLimit)
 
-        // TODO: Add actual logic for cleverly increasing these numbers
         accountGapLimit += 1
         addressGapLimit += 1
 
