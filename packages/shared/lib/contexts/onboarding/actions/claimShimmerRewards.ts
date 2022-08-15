@@ -38,7 +38,6 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
         try {
             await claimShimmerRewardsForShimmerClaimingAccount(shimmerClaimingAccount)
         } catch (err) {
-            console.error(err)
             const failedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
                 shimmerClaimingAccount,
                 shimmerClaimingAccount?.twinAccount,
