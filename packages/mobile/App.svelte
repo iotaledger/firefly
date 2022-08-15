@@ -99,6 +99,7 @@
         }
     })
 
+    $keyboardHeight = window.innerHeight / 2
     void Keyboard.addListener('keyboardWillShow', (info) => {
         // Listen for when the keyboard is about to be showed.
         $keyboardHeight = info.keyboardHeight
