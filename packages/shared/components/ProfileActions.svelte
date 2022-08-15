@@ -23,23 +23,8 @@
     $: lastBackupDateFormatted = diffDates(lastBackupDate, new Date())
     $: backupWarningColor = getBackupWarningColor(lastBackupDate)
 
-    let healthStatus = 2
-    let healthStatusText = 'networkOperational'
-    let messagesPerSecond = 0
-    let referencedRate = 0
-
-    const unsubscribe = networkStatus.subscribe((data) => {
-        healthStatus = data.health ?? 0
-        healthStatusText = data.healthText ?? NetworkStatusHealthText.Down
-        messagesPerSecond = data.messagesPerSecond ?? 0
-        referencedRate = data.referencedRate ?? 0
-    })
-
-    $: healthStatusColor = NETWORK_HEALTH_COLORS[healthStatus]
-
-    onDestroy(() => {
-        unsubscribe()
-    })
+    $: healthStatusColor = NETWORK_HEALTH_COLORS[$networkStatus?.health ?? 0]
+    $: healthStatusText = $networkStatus.healthText ?? NetworkStatusHealthText.Down
 
     async function handleLogoutClick(): Promise<void> {
         // @todo on desktop uses true as param, on mobile we get errors
@@ -49,13 +34,6 @@
     function handleNetworkStatusClick(): void {
         openPopup({
             type: 'networkStatus',
-            props: {
-                healthStatus,
-                healthStatusText,
-                healthStatusColor,
-                messagesPerSecond,
-                referencedRate,
-            },
         })
     }
 
@@ -173,7 +151,7 @@
             {localize('views.dashboard.network.status')}
         </Text>
         <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">
-            {localize('views.dashboard.network.networkOperational')}
+            {localize(`views.dashboard.network.${healthStatusText}`)}
         </Text>
         <Icon
             width={18}
