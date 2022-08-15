@@ -1302,6 +1302,9 @@
         "refreshTokenMetadata": {
             "success": "All token metadata has been reset and refreshed"
         },
+        "restoreFromStrongholdBackup": {
+            "notProtocolBased": "This is not {protocol, select, IOTA {an} Shimmer {a}} {protocol}-based Stronghold backup file"
+        },
         "findShimmerRewards": {
             "success": "Successfully found Shimmer rewards",
             "error": "An error occurred while searching for rewards"

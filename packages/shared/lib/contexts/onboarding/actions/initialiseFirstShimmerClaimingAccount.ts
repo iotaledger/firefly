@@ -14,23 +14,35 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     }
 
     try {
-        const alias = `${localize('general.account')} 1`
-        const unboundShimmerClaimingAccount = await _shimmerClaimingProfileManager?.createAccount({ alias })
-        const boundShimmerClaimingAccount = await api?.getAccount(
-            _shimmerClaimingProfileManager?.id,
-            unboundShimmerClaimingAccount?.meta?.index
-        )
-        const unboundTwinAccount = await get(profileManager)?.createAccount({ alias })
-        const boundTwinAccount = await api?.getAccount(get(profileManager)?.id, unboundTwinAccount?.meta?.index)
-        if (boundShimmerClaimingAccount?.meta?.index !== boundTwinAccount?.meta?.index) {
-            return
-        }
+        const accounts = await _shimmerClaimingProfileManager?.getAccounts()
+        if (accounts?.length === 0) {
+            const alias = `${localize('general.account')} 1`
+            const unboundShimmerClaimingAccount = await _shimmerClaimingProfileManager?.createAccount({ alias })
+            const boundShimmerClaimingAccount = await api?.getAccount(
+                _shimmerClaimingProfileManager?.id,
+                unboundShimmerClaimingAccount?.meta?.index
+            )
+            const unboundTwinAccount = await get(profileManager)?.createAccount({ alias })
+            const boundTwinAccount = await api?.getAccount(get(profileManager)?.id, unboundTwinAccount?.meta?.index)
+            if (boundShimmerClaimingAccount?.meta?.index !== boundTwinAccount?.meta?.index) {
+                return
+            }
 
-        const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
-            boundShimmerClaimingAccount,
-            boundTwinAccount
-        )
-        updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
+            const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
+                boundShimmerClaimingAccount,
+                boundTwinAccount
+            )
+            updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
+        } else {
+            const boundShimmerClaimingAccount = await api?.getAccount(_shimmerClaimingProfileManager?.id, 0)
+            const boundTwinAccount = await api?.getAccount(get(profileManager)?.id, 0)
+            const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
+                boundShimmerClaimingAccount,
+                boundTwinAccount,
+                true
+            )
+            updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
+        }
     } catch (err) {
         console.error(err)
         throw new CannotInitialiseShimmerClaimingAccountError()
