@@ -1302,7 +1302,11 @@
         "refreshTokenMetadata": {
             "success": "All token metadata has been reset and refreshed"
         },
-        "shimmerClaiming": {
+        "findShimmerRewards": {
+            "success": "Successfully found Shimmer rewards",
+            "error": "Failed to find Shimmer rewards"
+        },
+        "claimShimmerRewards": {
             "success": "Successfully claimed Shimmer rewards",
             "error": "Failed to claim Shimmer rewards"
         }

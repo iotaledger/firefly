@@ -5,11 +5,11 @@
     import { shimmerClaimingRouter } from '@core/router'
     import {
         claimShimmerRewards,
+        findShimmerRewards,
         findShimmerRewardsForAccount,
         IShimmerClaimingAccount,
         onboardingProfile,
     } from '@contexts/onboarding'
-    import { sleep } from '@lib/utils'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -38,8 +38,7 @@
         try {
             isSearchingForRewards = true
             hasSearchedForRewardsBefore = true
-            // await findShimmerRewards()
-            await sleep(3000)
+            await findShimmerRewards()
         } catch (err) {
             console.error(err)
         } finally {
