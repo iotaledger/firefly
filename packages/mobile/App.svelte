@@ -13,7 +13,7 @@
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from '@lib/market'
     import { pollNetworkStatus } from '@lib/networkStatus'
-    import { AppRoute, appRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
+    import { allowBackButton, AppRoute, appRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
     import { Platforms } from '@lib/typings/platform'
     import {
         Appearance,
@@ -91,7 +91,7 @@
 
     // Note: added hideClose condition to popups only as it is the only way we use it
     void App.addListener('backButton', () => {
-        if (!$popupState.hideClose) {
+        if (!$popupState.hideClose && $allowBackButton) {
             const next = $backButtonStore.pop()
             if (next) {
                 next()

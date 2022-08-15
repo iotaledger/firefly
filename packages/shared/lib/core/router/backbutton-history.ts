@@ -26,3 +26,4 @@ export class BackButtonHeap {
 }
 
 export const backButtonStore = writable<BackButtonHeap>(null)
+export const allowBackButton = writable<boolean>(true)

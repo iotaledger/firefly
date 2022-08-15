@@ -1,11 +1,13 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
-    import { activeProfile } from 'shared/lib/profile'
     import { localize } from '@core/i18n'
+    import { Text } from 'shared/components'
+    import { networkStatus } from 'shared/lib/networkStatus'
+    import { activeProfile } from 'shared/lib/profile'
+    import { NetworkStatusHealthText } from 'shared/lib/typings/network'
 
-    export let healthStatusText = 'networkOperational'
-    export let messagesPerSecond = 0
-    export let referencedRate = 0
+    $: healthStatusText = $networkStatus.healthText ?? NetworkStatusHealthText.Down
+    $: messagesPerSecond = $networkStatus.messagesPerSecond ?? 0
+    $: referencedRate = $networkStatus.referencedRate ?? 0
 </script>
 
 <div class="flex flex-col">

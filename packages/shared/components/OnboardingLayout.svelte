@@ -4,7 +4,7 @@
     import { ledgerMigrationProgresses, LEDGER_MIGRATION_VIDEO } from 'shared/lib/migration'
     import { openPopup } from 'shared/lib/popup'
     import { Locale } from '@core/i18n'
-    import { appRoute, AppRoute } from '@core/router'
+    import { allowBackButton, appRoute, AppRoute } from '@core/router'
 
     export let locale: Locale
 
@@ -17,6 +17,8 @@
     export let onBackClick = (): void => {}
 
     $: isWelcome = $mobile && AppRoute.Welcome === $appRoute
+
+    $: $allowBackButton = allowBack
 
     function handleWatchVideoClick() {
         openPopup({
