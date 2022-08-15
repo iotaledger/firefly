@@ -5,6 +5,7 @@
         AccountRoute,
         accountRouter,
         AdvancedSettings,
+        allowBackButton,
         appRouter,
         dashboardRoute,
         DashboardRoute,
@@ -192,6 +193,9 @@
         })
 
         Platform.onEvent('deep-link-params', (data: string) => handleDeepLinkRequest(data))
+
+        // NOTE: needed for mobile to be able to use the android native back button when you get into the dashbaord
+        allowBackButton.set(true)
     })
 
     onDestroy(() => {
