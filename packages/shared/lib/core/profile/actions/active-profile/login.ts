@@ -1,9 +1,7 @@
-import { get } from 'svelte/store'
-
 import { getAndUpdateNodeInfo } from '@core/network'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { startBackgroundSync, subscribe as subscribeToWalletEvents } from '@core/profile-manager/api'
-
+import { get } from 'svelte/store'
 import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT } from '../../constants'
 import { activeProfile, setTimeStrongholdLastUnlocked } from '../../stores'
 import { loadProfile } from './loadProfile'
@@ -12,16 +10,14 @@ import { recoverAndLoadProfile } from './recoverAndLoadProfile'
 export async function login(recoverAccounts?: boolean): Promise<void> {
     const { loggedIn, lastActiveAt, id, isStrongholdLocked, type } = get(activeProfile)
     if (id) {
-        loggedIn.set(true)
-
         // Step 1: get node info to check we have a synced node
         await getAndUpdateNodeInfo()
 
         // Step 2: load and build all the profile data
         if (recoverAccounts) {
-            void recoverAndLoadProfile(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
+            await recoverAndLoadProfile(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
         } else {
-            void loadProfile()
+            await loadProfile()
         }
 
         lastActiveAt.set(new Date())
@@ -37,6 +33,8 @@ export async function login(recoverAccounts?: boolean): Promise<void> {
 
         // Step 4: sync wallet
         subscribeToWalletEvents()
-        void startBackgroundSync({ syncIncomingTransactions: true })
+        await startBackgroundSync({ syncIncomingTransactions: true })
+
+        loggedIn.set(true)
     }
 }
