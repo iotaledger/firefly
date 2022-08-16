@@ -1,6 +1,7 @@
 import { Transaction } from '@iota/wallet'
 
 import { IAccount, sumTotalFromOutputs, syncAccountsInParallel } from '@core/account'
+import { filterBasicOutput } from '@core/utils'
 
 import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
@@ -18,10 +19,10 @@ export async function prepareShimmerClaimingAccount(
         await syncAccountsInParallel(account, twinAccount)
     }
 
-    const twinUnspentOutputs = await twinAccount?.listUnspentOutputs()
+    const twinUnspentOutputs = (await twinAccount?.listUnspentOutputs()).filter(filterBasicOutput)
     const claimedRewards = sumTotalFromOutputs(twinUnspentOutputs)
 
-    const unspentOutputs = await account?.listUnspentOutputs()
+    const unspentOutputs = (await account?.listUnspentOutputs()).filter(filterBasicOutput)
     const unclaimedRewards = sumTotalFromOutputs(unspentOutputs)
 
     state = state ?? deriveShimmerClaimingAccountState(claimedRewards, unclaimedRewards)
