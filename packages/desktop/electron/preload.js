@@ -47,6 +47,7 @@ try {
             colorEnabled: true,
             name: './wallet.log',
             levelFilter: 'debug',
+            targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
         }
         WalletApi.initLogger(loggerOptions)
     }
