@@ -87,7 +87,7 @@ export class Activity implements IActivity {
         const recipientAddress = getRecipientAddressFromOutput(output)
         const recipient = getRecipientFromOutput(output)
 
-        const isIncoming = recipientAddress === account.depositAddress
+        const isIncoming = recipientAddress === account.depositAddress && !isSelfTransaction
         const sender = transactionInputs
             ? getSenderFromInputs(transactionInputs)
             : getSenderFromTransaction(isIncoming, account.depositAddress, output)
