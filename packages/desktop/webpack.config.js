@@ -209,6 +209,7 @@ module.exports = [
         devtool: prod ? (SENTRY ? 'source-map' : false) : 'cheap-module-source-map',
         devServer: {
             hot: true,
+            static: path.join(__dirname, 'public'),
         },
     },
     {
