@@ -6,8 +6,8 @@ import { ActivityAsyncStatus } from '@core/wallet'
 
 export async function handleSpentOutput(accountId: string, payload: { output: OutputData }): Promise<void> {
     await syncBalance(accountId)
-    const transactionId = payload.output.metadata.transactionId
-    const activity = get(allAccountActivities)[accountId].find((_activity) => _activity.id === transactionId)
+    const transactionId = payload?.output?.metadata?.transactionId
+    const activity = get(allAccountActivities)?.[accountId]?.find((_activity) => _activity.id === transactionId)
 
     if (activity?.asyncStatus === ActivityAsyncStatus.Unclaimed) {
         updateActivityByTransactionId(accountId, transactionId, {

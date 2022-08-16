@@ -4,7 +4,7 @@ import { activeProfileId } from '@core/profile'
 import { selectedAccountId } from '@core/account/stores/selected-account-id.store'
 import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
 import { derived, Readable, writable, Writable } from 'svelte/store'
-import { AssetFilter } from '../interfaces'
+import { AssetFilter, BooleanFilterOptions } from '../interfaces'
 import { VerificationStatus } from '../enums'
 
 export const assetFilter: Writable<AssetFilter> = writable({
@@ -15,11 +15,17 @@ export const assetFilter: Writable<AssetFilter> = writable({
         selected: 'verified',
         choices: Object.values(VerificationStatus).map((status) => String(status)),
     },
-    showHidden: { active: false, type: 'boolean', localeKey: 'filters.showHidden' },
+    showHidden: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.showHidden',
+        selected: BooleanFilterOptions.Yes,
+        choices: [BooleanFilterOptions.Yes, BooleanFilterOptions.No],
+    },
 })
 
 export const selectedAccountAssets: Readable<IAccountAssets> = derived(
-    [activeProfileId, selectedAccountId, persistedAssets, assetFilter],
+    [activeProfileId, selectedAccountId, persistedAssets],
     ([$activeProfileId, $selectedAccountId]) => {
         if ($activeProfileId && $selectedAccountId) {
             return getAccountAssetsForSelectedAccount()
@@ -27,4 +33,12 @@ export const selectedAccountAssets: Readable<IAccountAssets> = derived(
             return { baseCoin: undefined, nativeTokens: [] }
         }
     }
+)
+
+export const visibleSelectedAccountAssets: Readable<IAccountAssets> = derived(
+    [selectedAccountAssets],
+    ([$selectedAccountAssets]) => ({
+        baseCoin: $selectedAccountAssets.baseCoin,
+        nativeTokens: $selectedAccountAssets.nativeTokens.filter((asset) => !asset.hidden),
+    })
 )

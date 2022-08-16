@@ -1,7 +1,4 @@
-export * from './backup-router'
-export * from './import-router'
-export * from './ledger-router'
+export * from './onboarding'
+
 export * from './login-router'
-export * from './migrate-router'
-export * from './protect-router'
 export * from './subrouter'

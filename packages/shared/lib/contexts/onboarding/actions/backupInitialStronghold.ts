@@ -1,9 +1,11 @@
 import { get } from 'svelte/store'
 
-import { strongholdPassword, updateNewProfile } from '@contexts/onboarding'
 import { Platform } from '@lib/platform'
+import { InvalidBackupDestinationError } from '@core/profile'
 import { backup } from '@core/profile-manager'
 import { getDefaultStrongholdName } from '@lib/utils'
+
+import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
 /**
  * Creates an initial backup for a profile's Stronghold.
@@ -11,7 +13,9 @@ import { getDefaultStrongholdName } from '@lib/utils'
 export async function backupInitialStronghold(): Promise<void> {
     const strongholdBackupDestination = await Platform.getStrongholdBackupDestination(getDefaultStrongholdName())
     if (strongholdBackupDestination) {
-        await backup(strongholdBackupDestination, get(strongholdPassword))
-        updateNewProfile({ lastStrongholdBackupTime: new Date() })
+        await backup(strongholdBackupDestination, get(onboardingProfile)?.strongholdPassword)
+        updateOnboardingProfile({ lastStrongholdBackupTime: new Date() })
+    } else {
+        throw new InvalidBackupDestinationError()
     }
 }

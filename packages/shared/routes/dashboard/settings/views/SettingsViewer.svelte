@@ -1,23 +1,23 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { Scroller, SettingsNavigator, Text } from 'shared/components'
+    import { TextType } from 'shared/components/Text.svelte'
+    import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize, _ } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import {
-        AdvancedSettings,
-        AdvancedSettingsNoProfile,
-        GeneralSettings,
-        GeneralSettingsNoProfile,
-        HelpAndInfo,
-        SecuritySettings,
+        AdvancedSettingsRoute,
+        AdvancedSettingsRouteNoProfile,
+        GeneralSettingsRoute,
+        GeneralSettingsRouteNoProfile,
+        HelpAndInfoRoute,
+        SecuritySettingsRoute,
         SettingsRoute,
         settingsRoute,
         SettingsRouteNoProfile,
         settingsRouter,
     } from '@core/router'
-    import { Scroller, SettingsNavigator, Text } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
-    import features from 'shared/features/features'
-    import { onMount } from 'svelte'
     import { Advanced, General, Help, Security } from './'
 
     const { loggedIn } = $activeProfile
@@ -28,8 +28,8 @@
 
     let settings
 
-    const securitySettings = Object.assign({}, SecuritySettings)
-    const advancedSettings = Object.assign({}, AdvancedSettings)
+    const securitySettings = Object.assign({}, SecuritySettingsRoute)
+    const advancedSettings = Object.assign({}, AdvancedSettingsRoute)
 
     // TODO: ledger, The operand of a 'delete' operator cannot be a read-only property
     $: if (!$isSoftwareProfile) {
@@ -42,16 +42,16 @@
 
     if ($loggedIn) {
         settings = {
-            general: GeneralSettings,
+            general: GeneralSettingsRoute,
             security: securitySettings,
             advanced: advancedSettings,
-            helpAndInfo: HelpAndInfo,
+            helpAndInfo: HelpAndInfoRoute,
         }
     } else {
         settings = {
-            general: GeneralSettingsNoProfile,
-            advanced: AdvancedSettingsNoProfile,
-            helpAndInfo: HelpAndInfo,
+            general: GeneralSettingsRouteNoProfile,
+            advanced: AdvancedSettingsRouteNoProfile,
+            helpAndInfo: HelpAndInfoRoute,
         }
     }
 

@@ -1,5 +1,7 @@
-import { getNodeCandidates, IClientOptions } from '@core/network'
+import { IClientOptions } from '@core/network'
+import { activeProfile, updateActiveProfile } from '@core/profile'
 import { setClientOptions } from '@core/profile-manager'
+import { get } from 'svelte/store'
 
 /**
  * Update the client options for a profile.
@@ -11,30 +13,13 @@ import { setClientOptions } from '@core/profile-manager'
  * @returns {void}
  */
 
-export function updateClientOptions(clientOptions: Partial<IClientOptions>): void {
-    const builtClientOptions = buildClientOptions(clientOptions)
-    if (!builtClientOptions.node) {
-        return
-    }
-
-    // const hasMismatchedNetwork = clientOptions.node?.network?.id !== clientOptions.network
-    // if (hasMismatchedNetwork && isNewNotification('warning')) {
-    //     showAppNotification({
-    //         type: 'error',
-    //         message: localize('error.network.badNodes'),
-    //     })
-
-    //     return
-    // }
-
-    setClientOptions(clientOptions)
-}
-
-function buildClientOptions(clientOptions: Partial<IClientOptions>): IClientOptions {
-    const nodes = getNodeCandidates(clientOptions).map((n) => ({ ...n, network: clientOptions.network }))
-    return {
-        ...clientOptions,
-        nodes,
-        network: clientOptions.network,
+export function updateClientOptions(clientOptionsToUpdate: Partial<IClientOptions>): Promise<void> {
+    const currentClientOptions = get(activeProfile)?.clientOptions
+    const clientOptions = { ...currentClientOptions, ...clientOptionsToUpdate }
+    if (clientOptions?.nodes || clientOptions?.primaryNode) {
+        updateActiveProfile({ clientOptions })
+        return setClientOptions(clientOptions)
+    } else {
+        return Promise.reject('Must have at least one node set in the client options')
     }
 }

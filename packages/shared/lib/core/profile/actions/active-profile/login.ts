@@ -1,34 +1,32 @@
+import { get } from 'svelte/store'
+
 import { getAndUpdateNodeInfo } from '@core/network'
 import { isStrongholdUnlocked } from '@core/profile-manager'
-import {
-    // setStrongholdPasswordClearInterval,
-    startBackgroundSync,
-    subscribe as subscribeToWalletEvents,
-} from '@core/profile-manager/api'
-import { get } from 'svelte/store'
-import {
-    INITIAL_ACCOUNT_GAP_LIMIT,
-    INITIAL_ADDRESS_GAP_LIMIT,
-    // STRONGHOLD_PASSWORD_CLEAR_INTERVAL,
-} from '../../constants'
-import { activeProfile, setTimeStrongholdLastUnlocked } from '../../stores'
-import { loadAccounts } from './loadAccounts'
-import { recoverAndLoadAccounts } from './recoverAndLoadAccounts'
+import { startBackgroundSync, subscribe as subscribeToWalletEvents } from '@core/profile-manager/api'
 
-export async function login(recoverAccounts: boolean = false): Promise<void> {
+import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT } from '../../constants'
+import { activeProfile, setTimeStrongholdLastUnlocked } from '../../stores'
+import { loadProfile } from './loadProfile'
+import { recoverAndLoadProfile } from './recoverAndLoadProfile'
+
+export async function login(recoverAccounts?: boolean): Promise<void> {
     const { loggedIn, lastActiveAt, id, isStrongholdLocked, type } = get(activeProfile)
     if (id) {
         loggedIn.set(true)
+
+        // Step 1: get node info to check we have a synced node
         await getAndUpdateNodeInfo()
 
+        // Step 2: load and build all the profile data
         if (recoverAccounts) {
-            void recoverAndLoadAccounts(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
+            void recoverAndLoadProfile(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
         } else {
-            void loadAccounts()
+            void loadProfile()
         }
 
         lastActiveAt.set(new Date())
 
+        // Step 3: set initial stronghold status
         const strongholdUnlocked = await isStrongholdUnlocked()
         isStrongholdLocked.set(!strongholdUnlocked)
         // TODO: enable once https://github.com/iotaledger/firefly/issues/3693 is resolved
@@ -37,9 +35,8 @@ export async function login(recoverAccounts: boolean = false): Promise<void> {
             setTimeStrongholdLastUnlocked()
         }
 
-        void startBackgroundSync({ syncIncomingTransactions: true })
-
-        // enable listeners
+        // Step 4: sync wallet
         subscribeToWalletEvents()
+        void startBackgroundSync({ syncIncomingTransactions: true })
     }
 }
