@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { allAccountActivities, persistedAssets } from '../stores'
+import { allAccountActivities, persistedAssets } from '../../stores'
 import { activeProfile } from '@core/profile'
 import { selectedAccountId } from '@core/account'
 

@@ -1,7 +1,7 @@
 import { IAccountState } from '@core/account'
 import { get } from 'svelte/store'
-import { ActivityType } from '../enums'
-import { allAccountActivities } from '../stores'
+import { ActivityType } from '../../enums'
+import { allAccountActivities } from '../../stores'
 
 export function hideActivitiesForFoundries(account: IAccountState): void {
     const accountActivities = get(allAccountActivities)[Number(account.id)]
