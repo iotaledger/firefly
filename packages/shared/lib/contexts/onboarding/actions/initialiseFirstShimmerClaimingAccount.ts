@@ -1,10 +1,8 @@
-import { get, Writable } from 'svelte/store'
+import { get } from 'svelte/store'
 
-import { CreateAccountPayload } from '@iota/wallet'
-
-import { IAccount } from '@core/account'
+import { createBoundAccount, IAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { api, IProfileManager, profileManager } from '@core/profile-manager'
+import { api, profileManager } from '@core/profile-manager'
 import { sortAccountsByIndex, zip } from '@core/utils'
 
 import { ProfileRecoveryType } from '../enums'
@@ -32,9 +30,6 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             )
             updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
         } else if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
-            // TODO: Move to `restoreBackupForShimmerClaimingProfileManager` (also rename?) once copy functionality is in
-            await get(profileManager)?.setStrongholdPassword(get(onboardingProfile)?.strongholdPassword)
-
             const unboundAccounts = await _shimmerClaimingProfileManager?.getAccounts()
             const boundAccounts = (
                 await Promise.all(
@@ -64,12 +59,4 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
         console.error(err)
         throw new CannotInitialiseShimmerClaimingAccountError()
     }
-}
-
-async function createBoundAccount(
-    payload: CreateAccountPayload,
-    manager: Writable<IProfileManager> = profileManager
-): Promise<IAccount> {
-    const unboundAccount = await get(manager)?.createAccount(payload)
-    return api?.getAccount(get(manager)?.id, unboundAccount?.meta?.index)
 }
