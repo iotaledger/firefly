@@ -11,6 +11,7 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
     await get(shimmerClaimingProfileManager)?.restoreBackup(importFilePath, strongholdPassword)
 
     // copy stronghold to profile managers' paths (before any accounts have been loaded)
+    // set stronghold password afterwards
 
     /**
      * NOTE: We must check that the Stronghold was an IOTA-based backup and
