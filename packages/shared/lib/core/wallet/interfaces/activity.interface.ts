@@ -11,10 +11,10 @@ export interface IActivity {
     direction: ActivityDirection
     inclusionState: InclusionState
     isInternal: boolean
-    isSelfTransaction: boolean
     rawAmount: number
     sender: Subject
     recipient: Subject
+    isSelfTransaction: boolean
     assetId: string
     isAsync: boolean
     asyncStatus: ActivityAsyncStatus

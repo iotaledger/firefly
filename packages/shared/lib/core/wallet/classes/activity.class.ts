@@ -47,8 +47,8 @@ export class Activity implements IActivity {
     sender: Subject
     recipient: Subject
     subject: Subject
-    isInternal: boolean
     isSelfTransaction: boolean
+    isInternal: boolean
     direction: ActivityDirection
     inputs: IUTXOInput[]
 
