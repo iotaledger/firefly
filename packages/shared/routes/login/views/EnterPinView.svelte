@@ -1,6 +1,4 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
-    import { Icon, PinInput, Profile, Text } from 'shared/components'
     import {
         isAwareOfCrashReporting,
         mobile,
@@ -9,17 +7,14 @@
     } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { activeProfile, resetActiveProfile } from '@core/profile'
-    import {
-        buildProfileManagerOptionsFromProfileData,
-        initialiseProfileManager,
-        profileManager,
-    } from '@core/profile-manager'
+    import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { openPopup, popupState } from '@lib/popup'
     import { validatePinFormat } from '@lib/utils'
+    import { Icon, PinInput, Profile, Text } from 'shared/components'
+    import { onDestroy } from 'svelte'
 
     let attempts = 0
     let pinCode = ''
@@ -99,16 +94,7 @@
             isBusy = true
             const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
             if (isVerified) {
-                const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
-                const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
-                const manager = initialiseProfileManager(
-                    storagePath,
-                    coinType,
-                    clientOptions,
-                    secretManager,
-                    $activeProfile?.id
-                )
-                profileManager.set(manager)
+                void login()
                 $loginRouter.next()
             } else {
                 shake = true

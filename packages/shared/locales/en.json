@@ -427,10 +427,15 @@
         },
         "loadProfile": {
             "loginSteps": {
+                "buildProfileManager": "Building profile manager",
+                "updateNodeInfo": "Updating node info",
+                "recoverAccounts": "Generating accounts",
                 "loadAccounts": "Syncing accounts",
                 "loadAssets": "Loading native assets" ,
                 "loadActivities": "Building activity history",
-                "finished": "Logging in"
+                "setStrongholdStatus": "Getting McDonald's",
+                "startBackgroundSync": "Initializing Flex Capacitor",
+                "loggingIn": "Logging in"
             }
         },
         "dashboard": {

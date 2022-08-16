@@ -1,6 +1,6 @@
+import { writable } from 'svelte/store'
 import { LOGIN_STEPS } from '../constants'
 import { ILoginProgress } from '../interfaces'
-import { writable } from 'svelte/store'
 
 export const loginProgress = writable<ILoginProgress>({ stepCount: 0, stepMessage: LOGIN_STEPS[0] })
 
