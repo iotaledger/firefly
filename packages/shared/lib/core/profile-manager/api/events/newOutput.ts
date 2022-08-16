@@ -10,7 +10,7 @@ import { NewOutputEvent } from '../types/newOutputEvent'
 import { preprocessOutput } from '@core/wallet'
 
 export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): void {
-    const account = get(activeAccounts).find((account) => account.id === accountId)
+    const account = get(activeAccounts)?.find((account) => account.id === accountId)
     const output = event?.output
 
     const address =
