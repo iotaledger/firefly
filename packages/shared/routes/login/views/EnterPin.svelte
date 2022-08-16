@@ -187,7 +187,7 @@
                 classes="mt-10 {shake && 'animate-shake'}"
                 on:submit={onSubmit}
                 disabled={hasReachedMaxAttempts || isBusy}
-                autofocus={!$mobile}
+                autofocus
             />
             <Text type="p" bold classes="mt-4 text-center">
                 {attempts > 0
