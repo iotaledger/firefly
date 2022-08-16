@@ -1,6 +1,6 @@
 export const LOGIN_STEPS = {
-    1: 'Syncing accounts...',
-    2: 'Loading all assets...',
-    3: 'Building activity history...',
-    4: 'Loading profile...',
+    1: 'loadAccounts',
+    2: 'loadAssets',
+    3: 'loadActivities',
+    4: 'finished',
 }

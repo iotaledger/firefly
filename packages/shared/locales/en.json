@@ -425,6 +425,14 @@
             "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
+        "loadProfile": {
+            "loginSteps": {
+                "loadAccounts": "Syncing accounts",
+                "loadAssets": "Loading native assets" ,
+                "loadActivities": "Building activity history",
+                "finished": "Logging in"
+            }
+        },
         "dashboard": {
             "network": {
                 "operational": "Network operational",
