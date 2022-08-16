@@ -5,7 +5,7 @@ import { CreateAccountPayload } from '@iota/wallet'
 import { IAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { api, IProfileManager, profileManager } from '@core/profile-manager'
-import { sortAccountByIndex, zip } from '@core/utils'
+import { sortAccountsByIndex, zip } from '@core/utils'
 
 import { ProfileRecoveryType } from '../enums'
 import { CannotInitialiseShimmerClaimingAccountError, MissingShimmerClaimingProfileManagerError } from '../errors'
@@ -42,21 +42,21 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
                         api?.getAccount(_shimmerClaimingProfileManager?.id, unboundAccount?.meta?.index)
                     )
                 )
-            ).sort(sortAccountByIndex)
+            ).sort(sortAccountsByIndex)
             const boundTwinAccounts = (
                 await Promise.all(
                     boundAccounts.map((boundAccount) =>
                         createBoundAccount({ alias: boundAccount?.meta?.alias ?? alias }, profileManager)
                     )
                 )
-            ).sort(sortAccountByIndex)
+            ).sort(sortAccountsByIndex)
             const shimmerClaimingAccounts = (
                 await Promise.all(
                     zip<IAccount, IAccount>(boundAccounts, boundTwinAccounts).map(([boundAccount, boundTwinAccount]) =>
                         prepareShimmerClaimingAccount(boundAccount, boundTwinAccount)
                     )
                 )
-            ).sort(sortAccountByIndex)
+            ).sort(sortAccountsByIndex)
 
             updateOnboardingProfile({ shimmerClaimingAccounts })
         }
