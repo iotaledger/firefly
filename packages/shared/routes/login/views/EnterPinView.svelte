@@ -9,7 +9,7 @@
     } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { activeProfile, login, resetActiveProfile } from '@core/profile'
+    import { activeProfile, resetActiveProfile } from '@core/profile'
     import {
         buildProfileManagerOptionsFromProfileData,
         initialiseProfileManager,
@@ -110,7 +110,6 @@
                     $activeProfile?.id
                 )
                 profileManager.set(manager)
-                void login()
                 dispatch('next')
             } else {
                 shake = true

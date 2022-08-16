@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
-    import { EnterPinView, SelectProfileView } from './views'
+    import { EnterPinView, SelectProfileView, LoadProfileView } from './views'
     import { FireflyEvent, loginRoute, LoginRouter, LoginRoute } from '@core/router'
 
     let loginRouter: LoginRouter
@@ -24,6 +24,6 @@
     </Transition>
 {:else if $loginRoute === LoginRoute.LoadProfile}
     <Transition>
-        <EnterPinView on:next={next} on:previous={previous} />
+        <LoadProfileView on:next={next} on:previous={previous} />
     </Transition>
 {/if}

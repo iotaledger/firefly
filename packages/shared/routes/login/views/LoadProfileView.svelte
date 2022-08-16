@@ -1,9 +1,21 @@
 <script lang="ts">
+    import { login } from '@core/profile'
     import { LoadingScreen } from 'shared/components'
+    import { createEventDispatcher, onMount } from 'svelte'
 
-    const statusMessage = 'Loading...?'
+    const dispatch = createEventDispatcher()
+
+    const statusMessage = 'Loading profile...'
+    const percent = 10
+
+    onMount(async () => {
+        try {
+            await login()
+            dispatch('next')
+        } catch {
+            dispatch('previous')
+        }
+    })
 </script>
 
-<div class={'flex flex-col justify-center align-center items-center'}>
-    <LoadingScreen {statusMessage} />
-</div>
+<LoadingScreen showProgressBar {statusMessage} {percent} />
