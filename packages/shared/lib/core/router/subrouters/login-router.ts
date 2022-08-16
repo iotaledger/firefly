@@ -25,6 +25,9 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 break
             }
             case LoginRoute.EnterPin:
+                nextRoute = LoginRoute.LoadProfile
+                break
+            case LoginRoute.LoadProfile:
                 this.parentRouter.next(event)
                 break
         }

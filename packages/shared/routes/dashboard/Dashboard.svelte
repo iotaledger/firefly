@@ -16,7 +16,7 @@
     import { ongoingSnapshot } from 'shared/lib/migration'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { closePopup, popupState } from 'shared/lib/popup'
     import { Settings, Staking, Wallet, DeveloperTools } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -136,15 +136,6 @@
     $: if (!$hasLoadedAccounts && $loggedIn) {
         startInit = Date.now()
         busy = true
-        if (!get(popupState).active) {
-            openPopup({
-                type: 'busy',
-                hideClose: true,
-                preventClose: true,
-                fullScreen: true,
-                transition: false,
-            })
-        }
     }
 
     $: {

@@ -22,4 +22,8 @@
     <Transition>
         <EnterPinView on:next={next} on:previous={previous} />
     </Transition>
+{:else if $loginRoute === LoginRoute.LoadProfile}
+    <Transition>
+        <EnterPinView on:next={next} on:previous={previous} />
+    </Transition>
 {/if}
