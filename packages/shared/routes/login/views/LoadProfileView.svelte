@@ -3,10 +3,21 @@
     import { localize } from '@core/i18n'
     import { loginProgress, LOGIN_STEPS } from '@core/profile'
 
+    let percent = 0
+
     $: statusMessage = $loginProgress?.stepMessage
         ? localize('views.loadProfile.loginSteps.' + $loginProgress?.stepMessage) + '...'
         : ''
-    $: percent = ($loginProgress?.stepCount / Object.keys(LOGIN_STEPS).length) * 100
+    $: $loginProgress?.stepMessage, calculatePercentage()
+
+    function calculatePercentage(): void {
+        const currentStep = $loginProgress?.stepCount
+        const totalSteps = Object.keys(LOGIN_STEPS).length
+        const totalParts = (totalSteps * (totalSteps + 1)) / 2
+        const percentageOfOnePart = 100 / totalParts
+        const cumaltivePartsSoFar = (currentStep * (currentStep + 1)) / 2
+        percent = percentageOfOnePart * cumaltivePartsSoFar
+    }
 </script>
 
 <LoadingScreen showProgressBar {statusMessage} {percent} />
