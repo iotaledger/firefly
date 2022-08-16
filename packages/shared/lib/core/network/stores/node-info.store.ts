@@ -20,7 +20,7 @@ export const nodeInfo = writable<INodeInfo>({
     },
     supportedProtocolVersions: undefined,
     protocol: {
-        protocolVersion: undefined,
+        version: undefined,
         networkName: undefined,
         bech32Hrp: undefined,
         minPowScore: undefined,

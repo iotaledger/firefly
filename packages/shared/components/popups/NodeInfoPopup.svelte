@@ -46,7 +46,7 @@
             network: { localeKey: 'protocol.network', nodeInfoPath: 'protocol.networkName' },
             bech32Hrp: { localeKey: 'protocol.bech32Hrp', nodeInfoPath: 'protocol.bech32Hrp' },
             tokenSupply: { localeKey: 'protocol.tokenSupply', nodeInfoPath: 'protocol.tokenSupply' },
-            protocolVersion: { localeKey: 'protocol.protocolVersion', nodeInfoPath: 'protocol.version' },
+            version: { localeKey: 'protocol.version', nodeInfoPath: 'protocol.version' },
             minPowScore: { localeKey: 'protocol.minPowScore', nodeInfoPath: 'protocol.minPowScore' },
         },
         [NodeInfoTab.BaseToken]: {
