@@ -1,7 +1,7 @@
 import { Transaction } from '@iota/wallet'
 
 import { IAccount, sumTotalFromOutputs, syncAccountsInParallel } from '@core/account'
-import { filterBasicOutput } from '@core/utils'
+import { filterShimmerClaimingOutputs } from '@core/utils'
 
 import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
@@ -26,7 +26,7 @@ export async function prepareShimmerClaimingAccount(
      * NOTE: We filter only the basic outputs with one unlock condition to ensure
      * that asynchronous transactions aren't considered (extremely unlikely edge case).
      */
-    const unspentOutputs = (await account?.listUnspentOutputs()).filter(filterBasicOutput)
+    const unspentOutputs = (await account?.listUnspentOutputs()).filter(filterShimmerClaimingOutputs)
     const unclaimedRewards = sumTotalFromOutputs(unspentOutputs)
 
     state = state ?? deriveShimmerClaimingAccountState(claimedRewards, unclaimedRewards)

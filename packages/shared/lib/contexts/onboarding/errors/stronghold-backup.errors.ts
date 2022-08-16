@@ -1,6 +1,5 @@
 import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
-import { formatProtocolName, NetworkProtocol } from '@core/network'
 
 export class UnsupportedBackupFileError extends BaseError {
     constructor() {
@@ -14,9 +13,7 @@ export class UnsupportedBackupFileError extends BaseError {
 export class CannotRestoreWithMismatchedCoinTypeError extends BaseError {
     constructor() {
         super({
-            message: localize('notifications.restoreFromStrongholdBackup.notProtocolBased', {
-                values: { protocol: formatProtocolName(NetworkProtocol.IOTA) },
-            }),
+            message: localize('notifications.restoreFromStrongholdBackup.wrongProtocolForClaiming'),
             localizeMessage: false,
             showNotification: true,
         })
