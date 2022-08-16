@@ -8,8 +8,6 @@
 
     const dispatch = createEventDispatcher()
 
-    const isAndroid = Platform.getOS() === 'android'
-
     export let value = undefined
     export let classes = ''
     export let disabled = false
@@ -133,10 +131,10 @@
 <div class="w-full {classes}">
     <pin-input
         style="--pin-input-size: {PIN_LENGTH}"
-        class="{$mobile ? 'h-20 w-80' : 'w-full'}
+        class="{$mobile ? (smaller ? 'h-16 w-80' : 'h-20 w-80') : 'w-full'}
             flex items-center justify-between relative z-0 rounded-xl border border-solid
             bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
-            {smaller ? 'h-14 pl-6 pr-4' : $mobile ? 'h-20 pl-8 pr-8 m-auto' : 'h-20 pl-12 pr-8'}"
+            {smaller ? 'h-14 pl-6 pr-4' : $mobile ? 'pl-8 pr-8 m-auto' : 'h-20 pl-12 pr-8'}"
         class:disabled
         bind:this={root}
         on:click={selectFirstEmptyRoot}
