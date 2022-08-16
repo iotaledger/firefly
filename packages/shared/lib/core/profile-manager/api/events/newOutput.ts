@@ -9,7 +9,7 @@ import { get } from 'svelte/store'
 import { NewOutputEvent } from '../types/newOutputEvent'
 
 export async function handleNewOutputEvent(accountId: string, event: NewOutputEvent): Promise<void> {
-    const account = get(activeAccounts).find((account) => account.id === accountId)
+    const account = get(activeAccounts)?.find((account) => account.id === accountId)
 
     const address =
         event?.output?.address?.type === ADDRESS_TYPE_ED25519
