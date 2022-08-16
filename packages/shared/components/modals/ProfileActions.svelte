@@ -63,9 +63,9 @@
     }
 
     const updateLedgerConnectionText = (): void => {
-        const text = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceStatus.connectionState}`)
-
-        ledgerConnectionText = text
+        ledgerConnectionText = localize(
+            `views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceStatus.connectionState}`
+        )
     }
 
     function handleBackupClick() {
