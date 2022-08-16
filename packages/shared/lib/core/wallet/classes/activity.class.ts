@@ -48,6 +48,7 @@ export class Activity implements IActivity {
     recipient: Subject
     subject: Subject
     isInternal: boolean
+    isSelfTransaction: boolean
     direction: ActivityDirection
     inputs: IUTXOInput[]
 
@@ -70,8 +71,17 @@ export class Activity implements IActivity {
     claimedDate?: Date
 
     constructor(processedOutput: IProcessedOutput, account: IAccountState) {
-        const { type, output, outputId, transactionId, time, inclusionState, transactionInputs, transactionInputs2 } =
-            processedOutput
+        const {
+            type,
+            output,
+            outputId,
+            transactionId,
+            time,
+            inclusionState,
+            isSelfTransaction,
+            transactionInputs,
+            transactionInputs2,
+        } = processedOutput
         const isFoundry = type === 'foundry'
 
         const recipientAddress = getRecipientAddressFromOutput(output)
@@ -101,7 +111,7 @@ export class Activity implements IActivity {
         this.subject = subject
 
         this.isInternal = isInternal
-        this.direction = isIncoming || isFoundry ? ActivityDirection.In : ActivityDirection.Out
+        this.direction = isIncoming || isSelfTransaction || isFoundry ? ActivityDirection.In : ActivityDirection.Out
 
         this.assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
         const asset = getPersistedAsset(this.assetId)

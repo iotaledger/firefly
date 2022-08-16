@@ -5,7 +5,11 @@ import { Transaction } from '@iota/wallet'
 
 export function preprocessTransaction(transaction: Transaction, account: IAccountState): IProcessedOutput {
     const isFoundry = containsFoundryOutput(transaction)
-    const { output, outputIndex } = getRelevantOutputFromTransaction(transaction, account.depositAddress, isFoundry)
+    const { output, outputIndex, isSelfTransaction } = getRelevantOutputFromTransaction(
+        transaction,
+        account.depositAddress,
+        isFoundry
+    )
     const outputId = outputIdFromTransactionData(transaction.transactionId, outputIndex)
 
     return {
@@ -15,6 +19,7 @@ export function preprocessTransaction(transaction: Transaction, account: IAccoun
         transactionId: transaction.transactionId,
         time: new Date(Number(transaction.timestamp)),
         claimingOutput: undefined,
+        isSelfTransaction,
         inclusionState: transaction.inclusionState,
         transactionInputs: [],
         transactionInputs2: transaction.payload.essence.inputs,

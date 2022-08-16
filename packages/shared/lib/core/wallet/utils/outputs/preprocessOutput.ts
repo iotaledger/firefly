@@ -26,6 +26,7 @@ export function preprocessOutput(outputData: OutputData, transactionInputs: IOut
         transactionId: outputData?.metadata?.transactionId,
         time: new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
         claimingOutput: undefined,
+        isSelfTransaction: false,
         inclusionState: InclusionState.Confirmed,
         transactionInputs: transactionInputs,
         transactionInputs2: transactionInputs2,

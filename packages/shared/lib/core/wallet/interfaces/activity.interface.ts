@@ -11,6 +11,7 @@ export interface IActivity {
     direction: ActivityDirection
     inclusionState: InclusionState
     isInternal: boolean
+    isSelfTransaction: boolean
     rawAmount: number
     sender: Subject
     recipient: Subject

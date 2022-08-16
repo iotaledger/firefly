@@ -8,6 +8,7 @@ export interface IProcessedOutput {
     outputId: string
     transactionId: string
     time: Date
+    isSelfTransaction: boolean
     claimingOutput: OutputTypes
     inclusionState: InclusionState
     transactionInputs: IOutputResponse[]
