@@ -5,7 +5,7 @@ import { api, profileManager } from '@core/profile-manager'
 
 import { CannotInitialiseShimmerClaimingAccountError, MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
-import { shimmerClaimingProfileManager, updateOnboardingProfile } from '../stores'
+import { onboardingProfile, shimmerClaimingProfileManager, updateOnboardingProfile } from '../stores'
 
 export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
@@ -14,9 +14,11 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     }
 
     try {
+        // TODO: CHANGE LOGIC BASED ON RECOVERY TYPE (mnemonic always needs to create, Stronghold should only create however many were recovered)
+
+        const alias = `${localize('general.account')} 1`
         const accounts = await _shimmerClaimingProfileManager?.getAccounts()
         if (accounts?.length === 0) {
-            const alias = `${localize('general.account')} 1`
             const unboundShimmerClaimingAccount = await _shimmerClaimingProfileManager?.createAccount({ alias })
             const boundShimmerClaimingAccount = await api?.getAccount(
                 _shimmerClaimingProfileManager?.id,
@@ -35,6 +37,8 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
         } else {
             const boundShimmerClaimingAccount = await api?.getAccount(_shimmerClaimingProfileManager?.id, 0)
+            await get(profileManager)?.setStrongholdPassword(get(onboardingProfile)?.strongholdPassword)
+            await get(profileManager)?.createAccount({ alias: boundShimmerClaimingAccount?.meta?.alias ?? alias })
             const boundTwinAccount = await api?.getAccount(get(profileManager)?.id, 0)
             const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
                 boundShimmerClaimingAccount,

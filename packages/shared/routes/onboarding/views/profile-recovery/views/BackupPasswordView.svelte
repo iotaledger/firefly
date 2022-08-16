@@ -24,9 +24,10 @@
     async function onContinueClick(): Promise<void> {
         if (strongholdPassword) {
             try {
-                await restoreBackupFromStrongholdFile(strongholdPassword)
                 if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
                     await restoreBackupForShimmerClaimingProfileManager(strongholdPassword)
+                } else {
+                    await restoreBackupFromStrongholdFile(strongholdPassword)
                 }
 
                 updateOnboardingProfile({ strongholdPassword })

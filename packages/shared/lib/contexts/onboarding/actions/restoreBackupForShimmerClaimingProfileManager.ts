@@ -7,7 +7,10 @@ import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
 
 export async function restoreBackupForShimmerClaimingProfileManager(strongholdPassword: string): Promise<void> {
     const { importFilePath } = get(onboardingProfile)
+
     await get(shimmerClaimingProfileManager)?.restoreBackup(importFilePath, strongholdPassword)
+
+    // copy stronghold to profile managers' paths (before any accounts have been loaded)
 
     /**
      * NOTE: We must check that the Stronghold was an IOTA-based backup and
