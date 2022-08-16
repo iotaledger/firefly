@@ -1,9 +1,11 @@
-import { LedgerStatus } from '@iota/wallet'
+import { LedgerStatus } from '@lib/typings/ledger'
 import { get } from 'svelte/store'
 import { profileManager } from '../stores'
 
-export async function getLedgerStatus(): Promise<LedgerStatus> {
+export function getLedgerStatus(): Promise<LedgerStatus> {
     const manager = get(profileManager)
 
-    return manager.getLedgerStatus()
+    // @ts-ignore
+    // TODO: The types probably need to get updated.
+    return manager.getLedgerNanoStatus()
 }

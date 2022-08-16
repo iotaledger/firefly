@@ -1,10 +1,9 @@
 import { get, writable } from 'svelte/store'
 import { getLedgerStatus } from '@core/profile-manager'
-import { LedgerStatus } from '@iota/wallet'
 
 import { closePopup, openPopup, popupState } from './popup'
 import { NotificationType } from './typings/notification'
-import { LedgerExtendedStatus, LedgerConnectionState, LedgerAppName } from './typings/ledger'
+import { LedgerExtendedStatus, LedgerConnectionState, LedgerAppName, LedgerStatus } from './typings/ledger'
 
 import { localize } from '@core/i18n'
 

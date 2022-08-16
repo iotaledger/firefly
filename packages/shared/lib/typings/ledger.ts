@@ -1,4 +1,12 @@
-import { LedgerStatus } from '@iota/wallet'
+export interface LedgerStatus {
+    connected: boolean
+    locked: boolean
+    blindSigningEnabled: boolean
+    app?: {
+        name: string
+        version: string
+    }
+}
 
 export interface LedgerExtendedStatus extends LedgerStatus {
     connectionState: LedgerConnectionState
