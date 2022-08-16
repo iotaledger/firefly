@@ -427,15 +427,15 @@
         },
         "loadProfile": {
             "loginSteps": {
-                "buildProfileManager": "Building profile manager",
-                "updateNodeInfo": "Updating node info",
+                "buildProfileManager": "Initialising profile manager",
+                "updateNodeInfo": "Checking node health",
                 "recoverAccounts": "Generating accounts",
                 "loadAccounts": "Syncing accounts",
                 "loadAssets": "Loading native assets" ,
                 "loadActivities": "Building activity history",
-                "setStrongholdStatus": "Getting McDonald's",
-                "startBackgroundSync": "Initializing Flex Capacitor",
-                "loggingIn": "Logging in"
+                "setStrongholdStatus": "Securing stronghold",
+                "startBackgroundSync": "Starting background sync",
+                "loggingIn": "Loading dashboard"
             }
         },
         "dashboard": {
