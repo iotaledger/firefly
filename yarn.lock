@@ -532,15 +532,14 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.2-alpha.21":
-  version "2.0.2-alpha.21"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.21.tgz#47c4de330e57e4f998a6fecd1117cd822ef3eb33"
-  integrity sha512-/LFhdLS849Ci+ZQ22rFHjS4NABuvbN5pb6PxapcEc3xGiyWdHCT5+F8aFzzy8HBy0Xj9kqvqa4CqB5J+8R0qTA==
+"@iota/wallet@2.0.2-alpha.16":
+  version "2.0.2-alpha.16"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.16.tgz#ea274c7bf42cb940013991ac0661275780e8825e"
+  integrity sha512-iNma5N+zW5nWd092nakXkATgs/H+Bz+t+dsLWEzOL7LRryO96CAhZUnSB08TYUIkcRjl5qLqQSdHSwRU9M2yag==
   dependencies:
     "@iota/types" "^1.0.0-beta.11"
     cargo-cp-artifact "^0.1.5"
-    prebuild-install "^7.1.1"
-    typescript "^4.7.4"
+    prebuild-install "^5.3.3"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -3565,10 +3564,10 @@ electron-updater@^4.3.5:
     lodash.isequal "^4.5.0"
     semver "^7.3.2"
 
-electron@13.6.9:
-  version "13.6.9"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-13.6.9.tgz#7bd83cc1662ceaaa09dcd132a7b507cec888b028"
-  integrity sha512-Es/sBy85NIuqsO9MW41PUCpwIkeinlTQ7g0ainfnmRAM2rmog3GBxVCaoV5dzEjwTF7TKG1Yr/E7Z3qHmlfWAg==
+electron@14.2.9:
+  version "14.2.9"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-14.2.9.tgz#9e1e95643ec3847592a186e8115d1ddb2e4921ee"
+  integrity sha512-7LdJFmqVzO9NLKO0hwOwPA6Kv4GSybGMcej8f2q7fVT4O8mIfL9oo/v4axVjVWm0+58ROQtHv8hYnnAs3ygG0Q==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^14.6.2"
@@ -6610,15 +6609,10 @@ node-addon-api@^3.0.2:
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-3.1.0.tgz#98b21931557466c6729e51cb77cd39c965f42239"
   integrity sha512-flmrDNB06LIl5lywUz7YlNGZH/5p0M7W28k8hzd9Lshtdh1wshD2Y+U4h9LD6KObOy1f+fEVdgprPrEymjM5uw==
 
-node-addon-api@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-4.3.0.tgz#52a1a0b475193e0928e98e0426a0d1254782b77f"
-  integrity sha512-73sE9+3UaLYYFmDsFZnqCInzPyh3MqIwZO9cw58yIqAZhONrrabrYyYe3TuIqtIiOuTXVhsGau8hcrhhwSsDIQ==
-
-node-emoji@^1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.11.0.tgz#69a0150e6946e2f115e9d7ea4df7971e2628301c"
-  integrity sha512-wo2DpQkQp7Sjm2A0cq+sN7EHKO6Sl0ctXeBdFZrL9T9+UywORbufTcTZxom8YqpLQt/FqNMUkOpkZrJVYSKD3A==
+node-emoji@^1.8.1:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.10.0.tgz#8886abd25d9c7bb61802a658523d1f8d2a89b2da"
+  integrity sha512-Yt3384If5H6BYGVHiHwTL+99OzJKHhgp82S8/dktEK73T26BazdgZ4JZh92xSVtGNJvz9UbXdNAc5hcrXV42vw==
   dependencies:
     lodash "^4.17.21"
 
