@@ -31,6 +31,10 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
         } else if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
             const unboundAccounts = await _shimmerClaimingProfileManager?.getAccounts()
+            if (unboundAccounts?.length === 0) {
+                const unboundAccount = await _shimmerClaimingProfileManager?.createAccount({ alias })
+                unboundAccounts.push(unboundAccount)
+            }
             const boundAccounts = (
                 await Promise.all(
                     unboundAccounts.map((unboundAccount) =>
