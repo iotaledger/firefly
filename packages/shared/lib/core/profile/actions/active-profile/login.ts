@@ -93,7 +93,8 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
                 resetLoginProgress()
             }, 500)
         }
-    } catch {
+    } catch (err) {
+        console.error(err)
         _loginRouter.previous()
         resetLoginProgress()
     }
