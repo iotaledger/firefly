@@ -36,9 +36,9 @@ export async function mintNativeToken(
             metadata,
             VerificationStatus.Verified
         )
-        const processedOutput = preprocessTransaction(mintTokenTransaction.transaction, account)
+        const processedTransaction = preprocessTransaction(mintTokenTransaction.transaction)
         addPersistedAsset(persistedAsset)
-        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedOutput, account))
+        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedTransaction, account))
         showAppNotification({
             type: 'success',
             message: localize('notifications.mintNativeToken.success'),

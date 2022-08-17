@@ -15,8 +15,8 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
             remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
         }
         const transaction = await account.sendOutputs([output], transactionOptions)
-        const processedOutput = preprocessTransaction(transaction, account)
-        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedOutput, account))
+        const processedTransaction = preprocessTransaction(transaction)
+        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedTransaction, account))
         isTransferring.set(false)
         return
     } catch (err) {

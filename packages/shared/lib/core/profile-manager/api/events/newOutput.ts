@@ -20,7 +20,7 @@ export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): 
     if (output?.address?.type === ADDRESS_TYPE_ED25519 && account?.depositAddress === address && !output?.remainder) {
         syncBalance(account.id)
 
-        const processedOutput = preprocessOutput(output, event?.transactionInputs)
+        const processedOutput = preprocessOutput([output], [event?.transaction, event?.transactionInputs])
         addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedOutput, account))
     }
 }

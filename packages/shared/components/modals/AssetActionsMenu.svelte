@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { hideAsset, IAsset, unhideAsset, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
-    import { hideActivitiesForHiddenAssets } from '@core/wallet/actions/hideActivitiesForHiddenAssets'
+    import { hideActivitiesForHiddenAssets } from '@core/wallet/actions'
     import { Icon } from '@lib/auxiliary/icon'
     import { updatePopupProps } from '@lib/popup'
     import { HR, MenuItem, Modal } from 'shared/components'
