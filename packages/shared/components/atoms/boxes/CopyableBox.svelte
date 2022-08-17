@@ -3,7 +3,7 @@
     import Box from './Box.svelte'
     import { Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import { onDestroy } from 'svelte'
 
     export let value = ''
@@ -51,7 +51,7 @@
         backgroundColor="green-600"
         borderColor="green-600"
     >
-        <Text type="p" fontSize="14" fontWeight={FontWeightText.semibold} color="white"
+        <Text type="p" fontSize="14" fontWeight={FontWeight.semibold} color="white"
             >{localize('general.copiedToClipboard')}</Text
         >
     </Tooltip>

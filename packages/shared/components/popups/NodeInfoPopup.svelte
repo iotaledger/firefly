@@ -161,12 +161,3 @@
 {:else}
     <Spinner busy message={localize('popups.node.loadingNodeInfo')} classes="my-12 justify-center" />
 {/if}
-
-<style type="text/scss">
-    .info {
-        max-height: 50vh;
-        @screen md {
-            max-height: 30vh;
-        }
-    }
-</style>

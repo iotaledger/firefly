@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import { Text } from 'shared/components'
     import { formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
@@ -16,13 +16,13 @@
     const PRIMARY_COLOR = 'gray-800'
     const PRIMARY_DARK_COLOR = 'white'
     const PRIMARY_FONT_SIZE = '15'
-    const PRIMARY_FONT_WEIGHT = FontWeightText.normal
+    const PRIMARY_FONT_WEIGHT = FontWeight.normal
     const PRIMARY_LINE_HEIGHT = '5'
 
     const SECONDARY_COLOR = 'gray-600'
     const SECONDARY_DARK_COLOR = 'gray-400'
     const SECONDARY_FONT_SIZE = '13'
-    const SECONDARY_FONT_WEIGHT = FontWeightText.medium
+    const SECONDARY_FONT_WEIGHT = FontWeight.medium
     const SECONDARY_LINE_HEIGHT = '4'
 </script>
 
@@ -32,7 +32,7 @@
             color={PRIMARY_COLOR}
             darkColor={PRIMARY_DARK_COLOR}
             fontSize={PRIMARY_FONT_SIZE}
-            fontWeight={totalRow ? FontWeightText.semibold : PRIMARY_FONT_WEIGHT}
+            fontWeight={totalRow ? FontWeight.semibold : PRIMARY_FONT_WEIGHT}
             lineHeight={PRIMARY_LINE_HEIGHT}
         >
             {title}
@@ -54,7 +54,7 @@
             color={PRIMARY_COLOR}
             darkColor={PRIMARY_DARK_COLOR}
             fontSize={PRIMARY_FONT_SIZE}
-            fontWeight={totalRow ? FontWeightText.semibold : PRIMARY_FONT_WEIGHT}
+            fontWeight={totalRow ? FontWeight.semibold : PRIMARY_FONT_WEIGHT}
             lineHeight={PRIMARY_LINE_HEIGHT}
         >
             {formattedAmount}
