@@ -41,11 +41,11 @@
         })
     }
 
-    function handleContinueClick(): void {
+    function onContinueClick(): void {
         getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
     }
 
-    function handleBackClick(): void {
+    function onBackClick(): void {
         $ledgerSetupRouter.previous()
     }
 
@@ -57,7 +57,7 @@
     onDestroy(stopPollingLedgerStatus)
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="leftpane__content">
         <Text type="h2" classes="mb-5">{localize('views.connectLedger.title')}</Text>
         <Text type="p" secondary classes="mb-5">{localize('views.connectLedger.body')}</Text>
@@ -82,7 +82,7 @@
         <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
             {localize('popups.ledgerConnectionGuide.title')}
         </Link>
-        <Button classes="w-full" disabled={polling && (!isConnected || !isAppOpen)} onClick={handleContinueClick}>
+        <Button classes="w-full" disabled={polling && (!isConnected || !isAppOpen)} onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>
