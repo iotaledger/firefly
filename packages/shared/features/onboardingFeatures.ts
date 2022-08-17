@@ -134,7 +134,7 @@ const onboardingFeatures = {
         devnet: {
             enabled: true,
             claimRewards: {
-                enabled: false,
+                enabled: true,
                 hidden: false,
             },
             newProfile: {

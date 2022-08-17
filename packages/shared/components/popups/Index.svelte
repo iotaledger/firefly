@@ -8,7 +8,6 @@
     import AddNodePopup from './AddNodePopup.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
-    import Busy from './Busy.svelte'
     import CrashReporting from './CrashReporting.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
     import ConfirmationPopup from './ConfirmationPopup.svelte'
@@ -115,7 +114,6 @@
         addNode: AddNodePopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
-        busy: Busy,
         errorLog: ErrorLog,
         crashReporting: CrashReporting,
         createAccount: CreateAccountPopup,

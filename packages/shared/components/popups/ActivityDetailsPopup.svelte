@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import {
         Activity,
@@ -78,7 +78,7 @@
 
 <activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <div class="flex flex-col">
-        <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">
+        <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
             {localize('popups.transactionDetails.title')}
         </Text>
         {#if explorerUrl && activity.transactionId}

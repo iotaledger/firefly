@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Text, Tile } from 'shared/components'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
     import { formatTokenAmountBestMatch } from '@core/wallet'
@@ -31,7 +31,7 @@
                                 classes="text-white bg-red-500 rounded-full"
                             />
                         {/if}
-                        <Text type={TextType.p} fontWeight={FontWeightText.semibold}>
+                        <Text type={TextType.p} fontWeight={FontWeight.semibold}>
                             {formatTokenAmountBestMatch(
                                 shimmerClaimingAccount?.unclaimedRewards,
                                 BASE_TOKEN[NetworkProtocol.Shimmer]
