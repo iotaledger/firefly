@@ -82,16 +82,19 @@
                         ? 'bg-white'
                         : ''} text-{action.isPrimary ? 'black' : TOAST_STYLE[type].buttonSecondary}"
                     style={'min-width:90px;min-height:32px'}
-                    on:click={() => action.onClick()}
+                    on:click={action.onClick}
                 >
                     {action.label}
                 </button>
             {/each}
         </div>
-    {/if}
-    {#if $mobile}
-        <button on:click={onDismissClick}>
-            <Text type="p" color="white" darkColor="white">{localize('actions.dismiss')}</Text>
+    {:else if $mobile}
+        <button
+            class="cursor-pointer text-center rounded-lg font-bold text-11 text-{TOAST_STYLE[type].buttonSecondary}"
+            style={'min-width:90px;min-height:32px'}
+            on:click={onDismissClick}
+        >
+            {localize('actions.dismiss')}
         </button>
     {/if}
 </div>
