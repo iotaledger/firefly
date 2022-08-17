@@ -2,7 +2,7 @@
     import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger } from '@core/ledger'
     import { closePopup, updatePopupProps } from 'shared/lib/popup'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'

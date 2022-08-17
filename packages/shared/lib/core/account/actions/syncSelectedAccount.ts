@@ -1,6 +1,6 @@
 import { localize } from '@core/i18n'
 import { isLedgerProfile } from '@core/profile'
-import { displayNotificationForLedgerProfile } from '@lib/ledger'
+import { displayNotificationForLedgerProfile } from '@lib/core/ledger'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
 import { updateSelectedAccount, selectedAccount } from '../stores'

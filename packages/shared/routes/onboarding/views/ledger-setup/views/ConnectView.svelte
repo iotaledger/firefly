@@ -4,13 +4,13 @@
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
     import {
+        LedgerConnectionState,
         ledgerDeviceStatus,
         stopPollingLedgerStatus,
         pollLedgerDeviceStatus,
         getLedgerDeviceStatus,
         displayNotificationForLedgerProfile,
-    } from '@lib/ledger'
-    import { LedgerConnectionState } from '@lib/typings/ledger'
+    } from '@core/ledger'
     import { openPopup } from '@lib/popup'
 
     let polling = false

@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Button, Icon, Spinner, Text, TextHint, Tooltip } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from 'shared/lib/currency'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
+    import { promptUserToConnectLedger } from '@core/ledger'
     import {
         canParticipate,
         getAccountParticipationAbility,

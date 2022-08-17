@@ -1,4 +1,4 @@
-import { LedgerStatus } from '@lib/typings/ledger'
+import { LedgerStatus } from '@lib/core/ledger'
 import { get } from 'svelte/store'
 import { profileManager } from '../stores'
 

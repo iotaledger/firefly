@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Button, Icon, Text } from 'shared/components'
-    import { stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { stopPollingLedgerStatus, LedgerAppName } from '@core/ledger'
     import { closePopup } from 'shared/lib/popup'
-    import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { onDestroy, onMount } from 'svelte'
     import { Locale } from '@core/i18n'
 

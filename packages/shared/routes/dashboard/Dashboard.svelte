@@ -12,7 +12,7 @@
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
-    import { isPollingLedgerDeviceStatus, stopPollingLedgerStatus, pollLedgerDeviceStatus } from 'shared/lib/ledger'
+    import { isPollingLedgerDeviceStatus, stopPollingLedgerStatus, pollLedgerDeviceStatus } from '@core/ledger'
     import { ongoingSnapshot } from 'shared/lib/migration'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'

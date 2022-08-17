@@ -3,7 +3,7 @@
     import { Animation, Button, Icon, Illustration, Link, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from '@lib/popup'
-    import { LedgerAppName } from '@lib/typings/ledger'
+    import { LedgerAppName } from '@core/ledger'
 
     const dispatch = createEventDispatcher()
 

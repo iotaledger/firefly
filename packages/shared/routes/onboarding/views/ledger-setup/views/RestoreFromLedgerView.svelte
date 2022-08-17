@@ -2,7 +2,7 @@
     import { Animation, Button, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
-    import { promptUserToConnectLedger } from '@lib/ledger'
+    import { promptUserToConnectLedger } from '@core/ledger'
 
     let restoring = false
 
