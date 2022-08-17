@@ -24,33 +24,18 @@ export function getFaucetApiEndpoint(coinType: CoinType): string {
  * Requests funds from the given faucet API endpoint for all of the given addresses.
  */
 export async function makeFaucetRequests(faucetApiEndpoint: string, addresses: Address[]): Promise<void> {
-    await Promise.all(
-        addresses.map(async (address) => {
-            await makeFaucetRequest(faucetApiEndpoint, address?.address)
-            await sleep(FAUCET_REQUEST_SLEEP_INTERVAL)
-        })
-    )
+    for (const address of addresses) {
+        await makeFaucetRequest(faucetApiEndpoint, address?.address)
+        await sleep(FAUCET_REQUEST_SLEEP_INTERVAL)
+    }
 }
-
-/**
- * Variable to keep track of whether or not faucet API requests can be made.
- * Requests are infinitely retried until either completed or an error occurs.
- */
-let canMakeFaucetRequest = true
 
 async function makeFaucetRequest(faucetApiEndpoint: string, address: string): Promise<void> {
     if (!address) {
         throw new Error('Invalid address')
     }
 
-    if (!canMakeFaucetRequest) {
-        setTimeout(() => void makeFaucetRequest(faucetApiEndpoint, address), FAUCET_REQUEST_SLEEP_INTERVAL)
-    } else {
-        canMakeFaucetRequest = false
-        await axios.post(faucetApiEndpoint, prepareFaucetRequestData(address)).then(() => {
-            canMakeFaucetRequest = true
-        })
-    }
+    await axios.post(faucetApiEndpoint, prepareFaucetRequestData(address))
 }
 
 function prepareFaucetRequestData(address: string): IFaucetRequestData {

@@ -29,5 +29,5 @@ export interface IFundsSpreaderParameters {
      * An array of objects describing the address space for their corresponding account,
      * what addresses hold funds, etc.
      */
-    accountFundsSpreaderParameters: IAccountFundsSpreaderParameters[]
+    accountsFundsSpreaderParameters: IAccountFundsSpreaderParameters[]
 }

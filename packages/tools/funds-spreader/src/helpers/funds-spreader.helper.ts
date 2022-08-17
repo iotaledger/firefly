@@ -18,17 +18,10 @@ import { getFaucetApiEndpoint, makeFaucetRequests } from './faucet.helper'
  */
 export async function spreadFunds(parameters: IFundsSpreaderParameters, round: number = 1): Promise<void> {
     const manager = await initialiseAccountManager(parameters, round)
-    await Promise.all(
-        parameters?.accountFundsSpreaderParameters.map(async (accountFundsSpreaderParameters) => {
-            await spreadFundsForAccount(
-                accountFundsSpreaderParameters,
-                manager,
-                parameters?.addressEncodingCoinType,
-                round
-            )
-            await sleep(ACCOUNT_FUNDS_SPREADER_SLEEP_INTERVAL)
-        })
-    )
+    for (const accountFundsSpreaderParameters of parameters?.accountsFundsSpreaderParameters) {
+        await spreadFundsForAccount(accountFundsSpreaderParameters, manager, parameters?.addressEncodingCoinType, round)
+        await sleep(ACCOUNT_FUNDS_SPREADER_SLEEP_INTERVAL)
+    }
 }
 
 async function spreadFundsForAccount(

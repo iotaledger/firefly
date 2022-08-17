@@ -10,7 +10,7 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
     {
         mnemonic:
             'ecology cotton whale envelope emotion thing advance horse champion thing thought tomorrow brother erupt blame yellow curtain wasp resist town quarter pretty tell wrestle',
-        accountFundsSpreaderParameters: [
+        accountsFundsSpreaderParameters: [
             {
                 accountIndex: 0,
                 addressIndicesWithFunds: [0, 2],
@@ -22,7 +22,7 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
     // {
     //     mnemonic:
     //         'doll buffalo journey tennis second skin aerobic bridge carpet peanut demise note blind coconut parade cluster where describe dream great network cage student frost',
-    //     accountFundsSpreaderParameters: [
+    //     accountsFundsSpreaderParameters: [
     //         {
     //             accountIndex: 0,
     //             addressIndicesWithFunds: [2, 10],
@@ -34,7 +34,7 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
     // {
     //     mnemonic:
     //         'dial member lemon fiber era eagle safe shallow latin zoo salmon all way stool that basket grid letter yard dish absorb tackle hand bike',
-    //     accountFundsSpreaderParameters: [
+    //     accountsFundsSpreaderParameters: [
     //         {
     //             accountIndex: 2,
     //             addressIndicesWithFunds: [0, 2],
@@ -46,7 +46,7 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
     // {
     //     mnemonic:
     //         'sunny convince wife claim capital exercise admit scheme prepare panther six buffalo humble rack deny render guitar fade dance bean wall half sunny library',
-    //     accountFundsSpreaderParameters: [
+    //     accountsFundsSpreaderParameters: [
     //         {
     //             accountIndex: 2,
     //             addressIndicesWithFunds: [2, 10],
@@ -58,7 +58,7 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
     // {
     //     mnemonic:
     //         'hello remember gentle envelope brain lock chief time jazz glare habit jelly fetch scare hour surprise chest what into away confirm come chimney bubble',
-    //     accountFundsSpreaderParameters: [
+    //     accountsFundsSpreaderParameters: [
     //         {
     //             accountIndex: 0,
     //             addressIndicesWithFunds: [0, 2],
@@ -78,7 +78,7 @@ export const SHIMMER_CLAIMING_FUNDS_SPREADERS_PARAMETERS: IFundsSpreaderParamete
     // {
     //     mnemonic:
     //         'bright index tortoise impact profit segment analyst year law quiz barely below baby marine half battle glimpse else cost mercy swing oyster dragon surround',
-    //     accountFundsSpreaderParameters: [
+    //     accountsFundsSpreaderParameters: [
     //         {
     //             accountIndex: 0,
     //             addressIndicesWithFunds: [2, 10],
