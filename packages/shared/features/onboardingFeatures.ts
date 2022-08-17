@@ -7,6 +7,15 @@ const onboardingFeatures = {
             claimRewards: {
                 enabled: false,
                 hidden: true,
+                recoveryPhrase: {
+                    enabled: false,
+                },
+                strongholdBackup: {
+                    enabled: false,
+                },
+                ledgerBackup: {
+                    enabled: false,
+                },
             },
             newProfile: {
                 enabled: false,
@@ -39,6 +48,15 @@ const onboardingFeatures = {
             claimRewards: {
                 enabled: false,
                 hidden: true,
+                recoveryPhrase: {
+                    enabled: false,
+                },
+                strongholdBackup: {
+                    enabled: false,
+                },
+                ledgerBackup: {
+                    enabled: false,
+                },
             },
             newProfile: {
                 enabled: false,
@@ -70,6 +88,15 @@ const onboardingFeatures = {
             claimRewards: {
                 enabled: false,
                 hidden: true,
+                recoveryPhrase: {
+                    enabled: false,
+                },
+                strongholdBackup: {
+                    enabled: false,
+                },
+                ledgerBackup: {
+                    enabled: false,
+                },
             },
             newProfile: {
                 enabled: false,
@@ -103,7 +130,16 @@ const onboardingFeatures = {
             enabled: false,
             claimRewards: {
                 enabled: false,
-                hidden: true,
+                hidden: false,
+                recoveryPhrase: {
+                    enabled: false,
+                },
+                strongholdBackup: {
+                    enabled: false,
+                },
+                ledgerBackup: {
+                    enabled: false,
+                },
             },
             newProfile: {
                 enabled: false,
@@ -136,6 +172,15 @@ const onboardingFeatures = {
             claimRewards: {
                 enabled: true,
                 hidden: false,
+                recoveryPhrase: {
+                    enabled: true,
+                },
+                strongholdBackup: {
+                    enabled: false,
+                },
+                ledgerBackup: {
+                    enabled: false,
+                },
             },
             newProfile: {
                 enabled: true,
@@ -166,8 +211,17 @@ const onboardingFeatures = {
         'private-net': {
             enabled: true,
             claimRewards: {
-                enabled: false,
+                enabled: true,
                 hidden: false,
+                recoveryPhrase: {
+                    enabled: true,
+                },
+                strongholdBackup: {
+                    enabled: false,
+                },
+                ledgerBackup: {
+                    enabled: false,
+                },
             },
             newProfile: {
                 enabled: true,

@@ -48,9 +48,9 @@
                 : ''}
             icon="language"
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.recoveryPhrase?.hidden}
+                ?.claimRewards?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.recoveryPhrase?.enabled}
+                ?.claimRewards?.recoveryPhrase?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Mnemonic)}
         />
         <OnboardingButton
@@ -60,9 +60,9 @@
                 : ''}
             icon="file"
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.strongholdBackup?.hidden}
+                ?.claimRewards?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                ?.restoreProfile?.strongholdBackup?.enabled}
+                ?.claimRewards?.strongholdBackup?.enabled}
             onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Stronghold)}
         />
         {#if !$mobile}
@@ -71,10 +71,10 @@
                 secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedgerDescription')}
                 icon="chip"
                 hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
-                    ?.restoreProfile?.ledgerBackup?.hidden}
+                    ?.claimRewards?.ledgerBackup?.hidden}
                 disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[
                     $onboardingProfile?.networkType
-                ]?.restoreProfile?.ledgerBackup?.enabled}
+                ]?.claimRewards?.ledgerBackup?.enabled}
                 onClick={() => onProfileRecoverySelectionClick(ProfileRecoveryType.Ledger)}
             />
         {/if}
