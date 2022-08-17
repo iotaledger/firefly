@@ -1,6 +1,7 @@
 import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
+import { SECONDS_PER_MILESTONE } from '@core/network'
 import { DEFAULT_TRANSACTION_OPTIONS, getOutputOptions } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
@@ -64,7 +65,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
 
     // TODO: https://github.com/iotaledger/firefly/issues/4223
-    await sleep(10 * MILLISECONDS_PER_SECOND)
+    await sleep(SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND)
 
     const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
         shimmerClaimingAccount,

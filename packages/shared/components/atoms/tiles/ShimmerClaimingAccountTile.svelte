@@ -14,10 +14,10 @@
 </script>
 
 {#if shimmerClaimingAccount}
-    <Tile isGhost>
+    <Tile isGhost classes="rounded-xl">
         <div class="w-full flex flex-row justify-between items-center space-x-4">
             <div class="flex flex-row items-center text-left space-x-2">
-                <Icon icon="wallet" width={24} height={24} classes="text-blue-500" />
+                <Icon icon="wallet" width={28} height={28} classes="text-blue-500" />
                 <Text type={TextType.p}>{shimmerClaimingAccount?.meta?.alias}</Text>
             </div>
             <div class="flex flex-col">
@@ -40,14 +40,14 @@
                     </div>
                 {/if}
                 {#if shouldDisplayClaimedRewards && !shouldDisplayFailedState}
-                    <div class="flex flex-row justify-end center text-right space-x-2">
+                    <div class="flex flex-row justify-end items-center text-right space-x-2">
                         <Icon
                             width="16"
                             height="16"
                             icon="success-check"
                             classes="text-white bg-green-500 rounded-full"
                         />
-                        <Text type={TextType.p} secondary smaller classes="flex-grow">
+                        <Text type={TextType.p} fontWeight={FontWeight.semibold} secondary classes="flex-grow">
                             {localize('general.amountClaimed', {
                                 values: {
                                     amount: formatTokenAmountBestMatch(

@@ -6,7 +6,7 @@
 </script>
 
 {#if shimmerClaimingAccounts && shimmerClaimingAccounts?.length > 0}
-    <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
+    <div class="flex-auto overflow-y-auto h-1 space-y-3 w-full scrollable-y scroll-secondary">
         {#each shimmerClaimingAccounts as shimmerClaimingAccount}
             <ShimmerClaimingAccountTile {shimmerClaimingAccount} />
         {/each}
