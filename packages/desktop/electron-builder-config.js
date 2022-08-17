@@ -34,7 +34,7 @@ const prodConfig = () => ({
     artifactName: 'firefly-desktop-${version}.${ext}',
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
-    files: ['public/', 'package.json'],
+    files: ['public/', 'package.json', '!node_modules/@iota/wallet/target/*'],
     appId: 'org.iota.firefly',
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
