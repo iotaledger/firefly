@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { appSettings } from '@core/app'
     import { Icon, Text } from 'shared/components'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
     export let primaryText = ''
     export let secondaryText = ''
@@ -49,7 +49,7 @@
                     color="gray-800"
                     darkColor="white"
                     fontSize="14"
-                    fontWeight={FontWeightText.semibold}
+                    fontWeight={FontWeight.semibold}
                     lineHeight="5"
                     >{primaryText}
                 </Text>
@@ -59,7 +59,7 @@
                         color="gray-600"
                         darkColor="gray-400"
                         fontSize="12"
-                        fontWeight={FontWeightText.normal}
+                        fontWeight={FontWeight.normal}
                         lineHeight="3.5"
                         >{secondaryText}
                     </Text>

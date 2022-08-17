@@ -17,7 +17,7 @@
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { sumBalanceForAccounts } from '@core/account'
-    import { FontWeightText } from '../Text.svelte'
+    import { FontWeight } from '../Text.svelte'
 
     export let searchForBalancesOnLoad = false
 
@@ -96,7 +96,7 @@
     }
 </script>
 
-<Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold} classes="mb-6"
+<Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold} classes="mb-6"
     >{localize('popups.walletFinder.title')}</Text
 >
 

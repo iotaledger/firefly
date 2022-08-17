@@ -104,9 +104,6 @@
 </div>
 
 <style type="text/scss">
-    img {
-        width: 196px;
-    }
     .changelog {
         max-height: 50vh;
     }

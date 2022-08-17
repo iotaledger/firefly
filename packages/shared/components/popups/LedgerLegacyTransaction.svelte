@@ -1,6 +1,6 @@
 <script lang="typescript" xmlns="http://www.w3.org/1999/html">
     import { Animation, Text } from 'shared/components'
-    import { Input, Transfer } from 'shared/lib/typings/migration'
+    import type { Input, Transfer } from 'shared/lib/typings/migration'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { Locale } from '@core/i18n'
 

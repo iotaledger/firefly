@@ -37,6 +37,7 @@ const resolve = {
     fallback: {
         path: false,
         fs: false,
+        crypto: false,
     },
     plugins: [new TsconfigPathsPlugin(tsConfigOptions)],
 }
