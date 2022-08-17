@@ -100,10 +100,10 @@
             class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
         >
             <Icon icon="warning" classes="row-span-3 text-blue-500" />
-            <Text type="h5" unwrapped classes="col-span-6" fontWeight="font-600">
+            <Text type="h5" unwrapped classes="text-left col-span-6" fontWeight="font-600">
                 {localize('views.dashboard.profileModal.version.title')}
             </Text>
-            <Text type="h5" color="gray-600" darkColor="gray-500" fontWeight="font-400">
+            <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
                 {localize('views.dashboard.profileModal.version.updateVersion', {
                     values: { version: $versionDetails.newVersion },
                 })}
@@ -118,13 +118,13 @@
     {/if}
     <button
         on:click={handleBackupClick}
-        class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white ring-2 ring-{backupWarningColor}-300 dark:ring-opacity-30"
+        class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white ring-1 ring-{backupWarningColor}-300 dark:ring-opacity-30"
     >
         <Icon icon="warning-filled" classes="row-span-3 text-{backupWarningColor}-500" />
-        <Text type="h5" unwrapped classes="col-span-3" fontWeight="font-600">
+        <Text type="h5" unwrapped classes="text-left col-span-3" fontWeight="font-600">
             {localize('views.dashboard.profileModal.backup.title')}
         </Text>
-        <Text type="h5" color="gray-600" darkColor="gray-500" fontWeight="font-400">
+        <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
             {$activeProfile?.lastStrongholdBackupTime
                 ? localize('views.dashboard.profileModal.backup.lastBackup', {
                       values: {
@@ -144,13 +144,13 @@
     </button>
     <button
         on:click={handleNetworkStatusClick}
-        class="main-button bg-{healthStatusColor}-50 dark:bg-{healthStatusColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white ring-2 ring-{healthStatusColor}-300 dark:ring-opacity-30"
+        class="main-button bg-{healthStatusColor}-50 dark:bg-{healthStatusColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white ring-1 ring-{healthStatusColor}-300 dark:ring-opacity-30"
     >
         <Icon icon="network" classes="row-span-3 text-{healthStatusColor}-500" />
-        <Text type="h5" unwrapped classes="col-span-6" fontWeight="font-600">
+        <Text type="h5" unwrapped classes="text-left col-span-6" fontWeight="font-600">
             {localize('views.dashboard.network.status')}
         </Text>
-        <Text type="h5" color="gray-600" darkColor="gray-500" fontWeight="font-400">
+        <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
             {localize(`views.dashboard.network.${healthStatusText}`)}
         </Text>
         <Icon
@@ -162,26 +162,26 @@
     </button>
     <button
         on:click={handleStrongholdToggleClick}
-        class="main-button bg-gray-50 dark:bg-gray-500 dark:bg-opacity-10 rounded-xl border-solid border-white ring-2 ring-gray-300  dark:ring-opacity-30"
+        class="main-button bg-gray-50 dark:bg-gray-500 dark:bg-opacity-10 rounded-xl border-solid border-white ring-1 ring-gray-300 dark:ring-opacity-30"
     >
         <Icon icon={$isStrongholdLocked ? 'lock' : 'unlock'} classes="row-span-3 text-blue-500" />
-        <Text type="h5" unwrapped classes="col-span-6" fontWeight="font-600">
+        <Text type="h5" unwrapped classes="text-left col-span-6" fontWeight="font-600">
             {localize('views.dashboard.profileModal.stronghold.title')}
         </Text>
-        <Text type="h5" color="gray-600" darkColor="gray-500" fontWeight="font-400">
+        <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
             {localize(`views.dashboard.profileModal.stronghold.${$isStrongholdLocked ? 'locked' : 'unlocked'}`)}
         </Text>
         <Toggle active={!$isStrongholdLocked} classes="row-span-3 justify-self-end" />
     </button>
     <button
         on:click={handleSettingsClick}
-        class="main-button bg-white dark:bg-gray-400 dark:bg-opacity-10 rounded-xl border-solid border-white ring-2 ring-gray-200  dark:ring-opacity-30"
+        class="main-button bg-white dark:bg-gray-400 dark:bg-opacity-10 rounded-xl border-solid border-white ring-1 ring-gray-200 dark:ring-opacity-30"
     >
         <Icon icon="settings" classes="row-span-3 text-blue-500" />
-        <Text type="h5" unwrapped classes="col-span-4" fontWeight="font-600">
+        <Text type="h5" unwrapped classes="text-left col-span-4" fontWeight="font-600">
             {localize('views.dashboard.profileModal.allSettings.title')}
         </Text>
-        <Text type="h5" color="gray-600" darkColor="gray-500" fontWeight="font-400">
+        <Text type="h5" classes="text-left" color="gray-600" darkColor="gray-500" fontWeight="font-400">
             {localize('views.dashboard.profileModal.allSettings.description')}
         </Text>
         <Icon
