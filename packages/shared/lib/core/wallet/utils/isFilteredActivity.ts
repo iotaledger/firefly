@@ -1,7 +1,6 @@
 import { parseCurrency } from '@lib/currency'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
-import {} from '../interfaces'
 import { activityFilter } from '../stores'
 import { getAssetFromPersistedAssets } from './getAssetFromPersistedAssets'
 import {
