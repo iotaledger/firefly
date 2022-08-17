@@ -97,7 +97,7 @@
     {#if !isUpToDate}
         <button
             on:click={handleVersionUpdateClick}
-            class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white"
+            class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid"
         >
             <Icon icon="warning" classes="row-span-3 text-blue-500" />
             <Text type="h5" unwrapped classes="text-left col-span-6" fontWeight="font-600">
@@ -118,7 +118,7 @@
     {/if}
     <button
         on:click={handleBackupClick}
-        class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid border-white ring-1 ring-{backupWarningColor}-300 dark:ring-opacity-30"
+        class="main-button bg-{backupWarningColor}-50 dark:bg-{backupWarningColor}-500 dark:bg-opacity-10 rounded-xl border-solid ring-1 ring-{backupWarningColor}-300 dark:ring-opacity-30"
     >
         <Icon icon="warning-filled" classes="row-span-3 text-{backupWarningColor}-500" />
         <Text type="h5" unwrapped classes="text-left col-span-3" fontWeight="font-600">
