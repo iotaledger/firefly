@@ -1,14 +1,16 @@
 import { IProcessedTransaction } from '../../interfaces'
 import { OutputData } from '@iota/wallet'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
-import { IOutputResponse, IUTXOInput } from '@iota/types'
+import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
 import { InclusionState } from '@core/wallet/enums'
 
 export function preprocessOutput(
-    outputData: OutputData,
-    detailedTransactionInputs: IOutputResponse[]
+    outputDatas: OutputData[],
+    incomingTransactions: [ITransactionPayload, IOutputResponse[]]
 ): IProcessedTransaction {
-    const output = outputData.output
+    const outputs = outputDatas.map((outputData) => outputData.output)
+    const transactionMetadata = outputDatas[0]?.metadata
+    const detailedTransactionInputs = incomingTransactions?.[1]
 
     const transactionInputs =
         detailedTransactionInputs?.map(
@@ -21,9 +23,9 @@ export function preprocessOutput(
         ) ?? []
 
     return {
-        outputs: [output],
-        transactionId: outputData?.metadata?.transactionId,
-        time: new Date(outputData.metadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
+        outputs: outputs,
+        transactionId: transactionMetadata?.transactionId,
+        time: new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
         inclusionState: InclusionState.Confirmed,
         transactionInputs,
         detailedTransactionInputs,
