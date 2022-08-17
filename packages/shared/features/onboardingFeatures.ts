@@ -170,10 +170,10 @@ const onboardingFeatures = {
         devnet: {
             enabled: true,
             claimRewards: {
-                enabled: true,
+                enabled: false,
                 hidden: false,
                 recoveryPhrase: {
-                    enabled: true,
+                    enabled: false,
                 },
                 strongholdBackup: {
                     enabled: false,
@@ -211,10 +211,10 @@ const onboardingFeatures = {
         'private-net': {
             enabled: true,
             claimRewards: {
-                enabled: true,
+                enabled: false,
                 hidden: false,
                 recoveryPhrase: {
-                    enabled: true,
+                    enabled: false,
                 },
                 strongholdBackup: {
                     enabled: false,
