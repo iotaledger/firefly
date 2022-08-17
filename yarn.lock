@@ -519,6 +519,11 @@
     "@types/warning" "^3.0.0"
     warning "^4.0.3"
 
+"@iota/types@^1.0.0-beta.10":
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.12.tgz#b9be412bb30e78ae264f0b78dcc077bd6935fdd9"
+  integrity sha512-GNIvPBauq8jAuOG7Xyb0W08KV9J0jeZ08igcl6sj3vSSiDb5360tON1NShdCCLfql4vr7n6U5f9Gmv0uSRuTYA==
+
 "@iota/types@^1.0.0-beta.11":
   version "1.0.0-beta.11"
   resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.11.tgz#d3a70cc266a889222a7aa420c2ae839c7fb13fba"
@@ -543,6 +548,15 @@
   integrity sha512-BGXzzjUQQYaV/H0bXJYKW+Zgd9PIN+HLPH8BcYhubI65X4G2ID23/osmpK/za+Ds6t/MkpdPKIiBwZPGXuCUBw==
   dependencies:
     big-integer "^1.6.51"
+
+"@iota/wallet@2.0.2-alpha.11":
+  version "2.0.2-alpha.11"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.11.tgz#2a03d16d59b3395c62604e5ff708f95ccde1fc49"
+  integrity sha512-O/mV86+ACsBCBh6VojwJzj8zOagTUdQGCYKRxCc+FYrm29iP/dpUV1wghkCXtHU1Btmj6n8UbhT7ifj3scfCyA==
+  dependencies:
+    "@iota/types" "^1.0.0-beta.10"
+    cargo-cp-artifact "^0.1.5"
+    prebuild-install "^5.3.3"
 
 "@iota/wallet@2.0.2-alpha.14":
   version "2.0.2-alpha.14"

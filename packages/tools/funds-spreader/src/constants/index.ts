@@ -1,5 +1,5 @@
-export * from './base-file-path.constant'
 export * from './faucet-api-endpoint.constants'
+export * from './file-path.constants'
 export * from './funds-spreaders-parameters'
 export * from './node-url.constants'
 export * from './sleep.constants'

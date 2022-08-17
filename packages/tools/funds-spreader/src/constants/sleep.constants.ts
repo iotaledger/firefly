@@ -1,7 +1,7 @@
 /**
  * The amount of time to wait in-between rounds of funds spreading.
  */
-export const FUNDS_SPREADER_SLEEP_INTERVAL = 1000
+export const FUNDS_SPREADER_SLEEP_INTERVAL = 0
 
 /**
  * The amount of time to wait in-between accounts when spreading funds.

@@ -30,4 +30,17 @@ export interface IFundsSpreaderParameters {
      * what addresses hold funds, etc.
      */
     accountsFundsSpreaderParameters: IAccountFundsSpreaderParameters[]
+
+    /**
+     * Specifies whether to actually make requests to the faucet for each generated address.
+     * This is useful to turn off if you wish to simply generate specific addresses quickly,
+     * or simply do NOT wish to spam the faucet.
+     */
+    requestFundsFromFaucet?: boolean
+
+    /**
+     * Specifies whether to backup the resulting generated accounts and addresses
+     * to a Stronghold backup file.
+     */
+    backupToStrongholdFile?: boolean
 }

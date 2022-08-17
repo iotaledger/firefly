@@ -1,9 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { AccountManager } from '@iota/wallet'
+import { AccountManager, CoinType } from '@iota/wallet'
 
-import { BASE_FILE_PATH, STRONGHOLD_PASSWORD } from '../constants'
+import { BACKUP_FILE_PATH, BASE_FILE_PATH, STRONGHOLD_PASSWORD } from '../constants'
 import { IFundsSpreaderParameters } from '../interfaces'
 
 import { getNodeUrlFromCoinType } from './node.helper'
@@ -47,4 +47,20 @@ function buildAccountManager(parameters: IFundsSpreaderParameters, round: number
         },
     }
     return new AccountManager(accountManagerOptions)
+}
+
+export async function createStrongholdBackup(
+    parameters: IFundsSpreaderParameters,
+    round: number,
+    manager: AccountManager
+): Promise<void> {
+    const prefix = String(round).padStart(3, '0')
+    const gen = deriveCoinNameFromType(parameters?.addressGenerationCoinType)
+    const enc = deriveCoinNameFromType(parameters?.addressEncodingCoinType)
+    const destination = `${BACKUP_FILE_PATH}/fs-${prefix}_gen-${gen}_enc-${enc}.stronghold`
+    await manager?.backup(destination, STRONGHOLD_PASSWORD)
+}
+
+function deriveCoinNameFromType(coinType: CoinType): 'iota' | 'shimmer' {
+    return coinType === CoinType.IOTA ? 'iota' : 'shimmer'
 }
