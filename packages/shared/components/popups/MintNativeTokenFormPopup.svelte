@@ -16,7 +16,7 @@
         Text,
         TextInput,
     } from 'shared/components'
-    import { FontWeightText } from '../Text.svelte'
+    import { FontWeight } from '../Text.svelte'
     import { onMount } from 'svelte'
 
     export let name: string
@@ -220,7 +220,7 @@
 </script>
 
 <div class="space-y-6">
-    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold}>
+    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
         {localize('popups.mintNativeTokenForm.title')}
     </Text>
 

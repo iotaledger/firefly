@@ -5,12 +5,10 @@
         assemblyStakingEventState,
         selectedAccountParticipationOverview,
         shimmerStakingEventState,
-    } from 'shared/lib/participation/stores'
-    import {
-        AccountParticipationOverview,
         ParticipationEventState,
         StakingAirdrop,
-    } from 'shared/lib/participation/types'
+    } from '@lib/participation'
+    import type { AccountParticipationOverview } from '@lib/participation'
 
     export let airdrop: StakingAirdrop
 

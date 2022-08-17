@@ -18,9 +18,8 @@
     let statusMessage = ''
     let content = ''
     let error = false
-    let seedChecksum = ''
 
-    const isSeed = (value: string): string | undefined => {
+    function checkSeed(value: string): string {
         if (value.length !== 81) {
             return localize('error.backup.seedTooShort', {
                 values: {
@@ -33,7 +32,7 @@
         }
     }
 
-    const isMnemonic = (words: Mnemonic): string | undefined => {
+    function checkMnemonic(words: Mnemonic): string {
         if (words.length !== 24) {
             return localize('error.backup.phraseWordCount', {
                 values: {
@@ -60,12 +59,10 @@
         }
     }
 
-    /* eslint-disable @typescript-eslint/no-misused-promises */
-    const handleKeyDown = async () => {
+    async function handleKeyDown(): Promise<void> {
         value = ''
         statusMessage = ''
         error = false
-        seedChecksum = ''
 
         content = content.replace(/\r/g, '').replace(/\n/g, '').replace(/  +/g, ' ')
 
@@ -74,7 +71,7 @@
         if (trimmedContent.length >= 3) {
             const words = trimmedContent?.split(' ')
             if (type === Type.Seed) {
-                const seedValidations = isSeed(trimmedContent)
+                const seedValidations = checkSeed(trimmedContent)
                 if (seedValidations) {
                     statusMessage = seedValidations
                     error = true
@@ -83,7 +80,7 @@
                     value = trimmedContent
                 }
             } else if (type === Type.Mnemonic) {
-                const mnemonicValidations = isMnemonic(words)
+                const mnemonicValidations = checkMnemonic(words)
                 if (mnemonicValidations) {
                     statusMessage = mnemonicValidations
                     error = true
@@ -104,6 +101,7 @@
 </script>
 
 <div>
+    <!-- svelte-ignore a11y-autofocus -->
     <textarea
         {disabled}
         class="text-14 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid {error
