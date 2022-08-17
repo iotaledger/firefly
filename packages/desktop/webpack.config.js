@@ -218,6 +218,7 @@ module.exports = [
         },
         resolve,
         output,
+        externals: '@iota/wallet',
         module: {
             rules: mainRules,
         },
