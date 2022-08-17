@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { FontWeightNumber } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import { Modal, Text } from 'shared/components'
     import { Filter } from '@core/wallet/interfaces/filter.interface'
     import { localize } from '@core/i18n'
@@ -35,7 +35,7 @@
     <div class="filter-modal">
         <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3">
             <Button secondary xsmall onClick={clear}>{localize('actions.clear')}</Button>
-            <Text fontWeight={FontWeightNumber._600} fontSize="14" classes="text-center flex grow-1"
+            <Text fontWeight={FontWeight.semibold} fontSize="14" classes="text-center flex grow-1"
                 >{localize('filters.title')}</Text
             >
             <Button disabled={!isChanged} xsmall onClick={confirm}>{localize('actions.done')}</Button>

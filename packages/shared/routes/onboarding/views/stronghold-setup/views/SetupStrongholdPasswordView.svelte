@@ -6,7 +6,12 @@
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
     import { onboardingRouter } from '@core/router'
-    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        onboardingProfile,
+        ProfileSetupType,
+        shimmerClaimingProfileManager,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import passwordInfo from '@lib/password'
 
@@ -42,13 +47,23 @@
             try {
                 busy = true
 
+                const isClaimedProfileSetupType = $onboardingProfile?.setupType === ProfileSetupType.Claimed
                 const mustChangePassword =
                     $onboardingProfile?.strongholdPassword &&
                     $onboardingProfile?.strongholdPassword !== strongholdPassword
                 if (mustChangePassword) {
                     await changeStrongholdPassword($onboardingProfile?.strongholdPassword, strongholdPassword)
+                    if (isClaimedProfileSetupType) {
+                        await $shimmerClaimingProfileManager?.changeStrongholdPassword(
+                            $onboardingProfile?.strongholdPassword,
+                            strongholdPassword
+                        )
+                    }
                 } else {
                     await setStrongholdPassword(strongholdPassword)
+                    if (isClaimedProfileSetupType) {
+                        await $shimmerClaimingProfileManager?.setStrongholdPassword(strongholdPassword)
+                    }
                 }
 
                 updateOnboardingProfile({ strongholdPassword })

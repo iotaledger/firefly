@@ -1,8 +1,14 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, PinInput, Text } from 'shared/components'
-    import { initialisePincodeManager } from '@contexts/onboarding'
+    import {
+        initialiseFirstShimmerClaimingAccount,
+        initialisePincodeManager,
+        onboardingProfile,
+        ProfileSetupType,
+    } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { ProfileType } from '@core/profile'
     import { storageProtectionSetupRouter } from '@core/router'
     import { validatePinFormat } from '@lib/utils'
 
@@ -33,6 +39,15 @@
 
     async function onSetPinClick(): Promise<void> {
         await initialisePincodeManager(setPinInput)
+
+        const canInitialiseFirstShimmerClaimingAccount =
+            $onboardingProfile?.type === ProfileType.Software &&
+            $onboardingProfile?.setupType === ProfileSetupType.Claimed
+        const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
+        if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
+            await initialiseFirstShimmerClaimingAccount()
+        }
+
         $storageProtectionSetupRouter.next()
     }
 
