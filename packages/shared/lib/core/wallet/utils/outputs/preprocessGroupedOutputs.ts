@@ -4,7 +4,7 @@ import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
 import { InclusionState } from '@core/wallet/enums'
 
-export function preprocessOutput(
+export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
     incomingTransactions: [ITransactionPayload, IOutputResponse[]]
 ): IProcessedTransaction {

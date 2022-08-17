@@ -1,9 +1,9 @@
 import { IAccountState } from '@core/account'
-import { preprocessOutput } from '@core/wallet/utils/outputs/preprocessOutput'
+import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
 import { OutputData } from '@iota/wallet'
 import { IProcessedTransaction } from '../../interfaces/processed-transaction.interface'
 
-export function preprocessOutputs(account: IAccountState): IProcessedTransaction[] {
+export function preprocessAccountOutputs(account: IAccountState): IProcessedTransaction[] {
     const groupedOutputs: { [key: string]: OutputData[] } = {}
 
     for (const outputId of Object.keys(account.meta.outputs)) {
@@ -15,15 +15,17 @@ export function preprocessOutputs(account: IAccountState): IProcessedTransaction
         groupedOutputs[transactionId].push(output)
     }
 
-    const preparedActivities: IProcessedTransaction[] = []
+    const processedTransactions: IProcessedTransaction[] = []
     for (const transactionId of Object.keys(groupedOutputs)) {
         const hasTransaction = !!account?.meta?.transactions?.[transactionId]
         if (!hasTransaction) {
-            // TODO: group all outputs from same transaction together
-            preparedActivities.push(
-                preprocessOutput(groupedOutputs[transactionId], account?.meta?.incomingTransactions[transactionId])
+            processedTransactions.push(
+                preprocessGroupedOutputs(
+                    groupedOutputs[transactionId],
+                    account?.meta?.incomingTransactions[transactionId]
+                )
             )
         }
     }
-    return preparedActivities
+    return processedTransactions
 }

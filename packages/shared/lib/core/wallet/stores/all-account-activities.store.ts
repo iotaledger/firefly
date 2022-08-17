@@ -5,7 +5,7 @@ import { IActivity } from '../interfaces'
 export const allAccountActivities = writable<Activity[][]>([])
 
 export function addEmptyAccountActivitiesToAllAccountActivities(accountId: string): void {
-    replaceAccountActivitiesInAllAccountActivities(accountId, [])
+    setAccountActivitiesInAllAccountActivities(accountId, [])
 }
 
 export function addActivityToAccountActivitiesInAllAccountActivities(accountId: string, activity: Activity): void {
@@ -18,7 +18,7 @@ export function addActivityToAccountActivitiesInAllAccountActivities(accountId: 
     })
 }
 
-export function replaceAccountActivitiesInAllAccountActivities(accountId: string, accountActivities: Activity[]): void {
+export function setAccountActivitiesInAllAccountActivities(accountId: string, accountActivities: Activity[]): void {
     allAccountActivities.update((state) => {
         state[accountId] = accountActivities
         return state

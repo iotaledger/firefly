@@ -1,5 +1,5 @@
 export * from './linkActivityAndClaimingTransaction'
-export * from './loadAccountActivities'
+export * from './generateAndStoreActivitiesForAccount'
 export * from './hideActivitiesForFoundries'
 export * from './hideActivitiesForHiddenAssets'
 export * from './setAsyncStatusOfAccountActivities'
