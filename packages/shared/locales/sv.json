@@ -720,7 +720,7 @@
                     "network": "Network",
                     "bech32Hrp": "Bech32 HRP",
                     "tokenSupply": "Token supply",
-                    "protocolVersion": "Version",
+                    "version": "Version",
                     "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {

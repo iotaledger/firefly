@@ -19,12 +19,7 @@
         assemblyStakingEventState,
         shimmerStakingEventState,
     } from 'shared/lib/participation/stores'
-    import {
-        AccountParticipationAbility,
-        Participation,
-        ParticipationAction,
-        StakingAirdrop,
-    } from 'shared/lib/participation/types'
+    import { AccountParticipationAbility, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { checkStronghold } from 'shared/lib/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
@@ -34,7 +29,7 @@
     import { selectedAccount, IAccountState } from '@core/account'
 
     export let shouldParticipateOnMount = false
-    export let participations: Participation[] = []
+    // export let participations: Participation[] = []
 
     let pendingParticipationIds: string[] = []
     let previousPendingParticipationsLength = 0
