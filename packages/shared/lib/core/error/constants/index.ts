@@ -1,1 +1,1 @@
-export * from './default-user-error-parameters.constant'
+export * from './default-app-error-parameters.constant'

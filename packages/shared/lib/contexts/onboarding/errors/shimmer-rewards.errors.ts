@@ -1,10 +1,10 @@
-import { BaseError, DEFAULT_USER_ERROR_PARAMETERS } from '@core/error'
+import { BaseError, DEFAULT_APP_ERROR_PARAMETERS } from '@core/error'
 
 export class ClaimShimmerRewardsError extends BaseError {
     constructor() {
         super({
             message: 'notifications.claimShimmerRewards.error',
-            ...DEFAULT_USER_ERROR_PARAMETERS,
+            ...DEFAULT_APP_ERROR_PARAMETERS,
         })
     }
 }
@@ -13,7 +13,7 @@ export class FindShimmerRewardsError extends BaseError {
     constructor() {
         super({
             message: 'notifications.findShimmerRewards.error',
-            ...DEFAULT_USER_ERROR_PARAMETERS,
+            ...DEFAULT_APP_ERROR_PARAMETERS,
         })
     }
 }

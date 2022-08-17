@@ -20,6 +20,7 @@
     export let busy = false
 
     let strongholdPassword = ''
+    $: strongholdPassword, (error = '')
 
     async function onContinueClick(): Promise<void> {
         if (strongholdPassword) {

@@ -1,25 +1,19 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
-    import { EnterPinView, SelectProfileView } from './views'
-    import { FireflyEvent, loginRoute, LoginRouter, LoginRoute } from '@core/router'
-
-    let loginRouter: LoginRouter
-
-    onMount(() => {
-        loginRouter = new LoginRouter()
-    })
-
-    const next = (event: CustomEvent<FireflyEvent>): void => loginRouter.next(event.detail)
-    const previous = (): void => loginRouter.previous()
+    import { EnterPinView, SelectProfileView, LoadProfileView } from './views'
+    import { loginRoute, LoginRoute } from '@core/router'
 </script>
 
 {#if $loginRoute === LoginRoute.SelectProfile}
     <Transition>
-        <SelectProfileView on:next={next} on:previous={previous} />
+        <SelectProfileView />
     </Transition>
 {:else if $loginRoute === LoginRoute.EnterPin}
     <Transition>
-        <EnterPinView on:next={next} on:previous={previous} />
+        <EnterPinView />
+    </Transition>
+{:else if $loginRoute === LoginRoute.LoadProfile}
+    <Transition>
+        <LoadProfileView />
     </Transition>
 {/if}

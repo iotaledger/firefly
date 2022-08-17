@@ -5,6 +5,7 @@ export class CannotInitialiseShimmerClaimingAccountError extends BaseError {
         super({
             message: 'Cannot initialise Shimmer Claiming account.',
             logToConsole: true,
+            saveToErrorLog: true,
         })
     }
 }

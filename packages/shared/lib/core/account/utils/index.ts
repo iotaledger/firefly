@@ -1,4 +1,3 @@
-export * from './buildEmptyAccountBalance'
 export * from './createBoundAccount'
 export * from './getIconColorFromString'
 export * from './getRandomAccountColor'
