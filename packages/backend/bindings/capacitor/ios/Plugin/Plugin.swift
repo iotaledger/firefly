@@ -20,6 +20,7 @@ public class WalletPlugin: CAPPlugin {
             if !fm.fileExists(atPath: path) {
                 try fm.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
             }
+            try path.setResourceValue(true, forKey: NSURLIsExcludedFromBackupKey)
             call.keepAlive = true
             // TODO: it's possible to make this better? investigate for implications
             // based on: https://vmanot.com/context-capturing-c-function-pointers-in-swift
