@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { QR, Text } from 'shared/components'
     import { AddressBox } from 'shared/components/atoms'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
 
     let addressBoxElement: AddressBox
 
@@ -21,7 +21,7 @@
     class:darkmode={darkModeEnabled}
     on:click={handlereceiveClick}
 >
-    <Text type="h5" fontWeight={FontWeightText.semibold} classes="text-left">{localize('general.receiveFunds')}</Text>
+    <Text type="h5" fontWeight={FontWeight.semibold} classes="text-left">{localize('general.receiveFunds')}</Text>
     <QR data={receiveAddress} classes="w-3/5 h-auto" />
     <AddressBox
         bind:this={addressBoxElement}
