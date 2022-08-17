@@ -7,7 +7,7 @@ import { Bech32Helper } from '@lib/bech32Helper'
 import { Converter } from '@lib/converter'
 import { get } from 'svelte/store'
 import { NewOutputEvent } from '../types/newOutputEvent'
-import { preprocessOutput } from '@core/wallet'
+import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
 
 export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): void {
     const account = get(activeAccounts)?.find((account) => account.id === accountId)
@@ -20,7 +20,7 @@ export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): 
     if (output?.address?.type === ADDRESS_TYPE_ED25519 && account?.depositAddress === address && !output?.remainder) {
         syncBalance(account.id)
 
-        const processedOutput = preprocessOutput([output], [event?.transaction, event?.transactionInputs])
+        const processedOutput = preprocessGroupedOutputs([output], [event?.transaction, event?.transactionInputs])
         addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedOutput, account))
     }
 }

@@ -80,7 +80,6 @@ export class Activity implements IActivity {
         const { outputs, transactionId, time, inclusionState, transactionInputs, detailedTransactionInputs } =
             processedOutput
 
-        // TODO: We can move this logic in the processing step, so that we can create different Activity classes for different types
         const type = getActivityType(outputs)
 
         this.type = type
@@ -99,7 +98,7 @@ export class Activity implements IActivity {
                 isIncoming
             )
 
-            this.id = outputIdFromTransactionData(transactionId, outputIndex)
+            this.id = transactionId
             this.outputId = outputIdFromTransactionData(transactionId, outputIndex) // Only required for async transactions e.g. when claimed or to get the full output with `getOutput`
 
             const recipientAddress = getRecipientAddressFromOutput(output)
