@@ -1,1 +1,5 @@
+export * from './getProfileTypeFromProfileRecoveryType'
+export * from './setProfileRecoveryTypeFromFilename'
+export * from './shouldBeDeveloperProfile'
 export * from './sumTotalClaimedRewards'
+export * from './validateBackupFile'

@@ -45,7 +45,7 @@
                             width="16"
                             height="16"
                             icon="success-check"
-                            classes="text-white bg-green-500 rounded-full"
+                            classes="text-white bg-green-600 rounded-full"
                         />
                         <Text type={TextType.p} fontWeight={FontWeight.semibold} secondary classes="flex-grow">
                             {localize('general.amountClaimed', {

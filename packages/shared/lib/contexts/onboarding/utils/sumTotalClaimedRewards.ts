@@ -1,13 +1,14 @@
 import { IShimmerClaimingAccount } from '../interfaces'
+import { OutputTypes } from '@iota/types'
 
 export function sumTotalClaimedRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): number {
-    let total = 0
-
-    shimmerClaimingAccounts?.forEach((shimmerClaimingAccount) => {
-        shimmerClaimingAccount?.claimingTransaction?.payload?.essence?.outputs?.forEach((output) => {
-            total += Number(output?.amount) ?? 0
-        })
-    })
-
-    return total
+    return shimmerClaimingAccounts?.reduce(
+        (total: number, curr: IShimmerClaimingAccount) =>
+            total +
+            curr?.claimingTransaction?.payload?.essence?.outputs?.reduce(
+                (outputsTotal: number, currentOutput: OutputTypes) => outputsTotal + Number(currentOutput?.amount) ?? 0,
+                0
+            ),
+        0
+    )
 }

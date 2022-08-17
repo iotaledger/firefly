@@ -5,6 +5,7 @@ export class MissingShimmerClaimingProfileManagerError extends BaseError {
         super({
             message: 'Missing Shimmer claiming profile manager',
             logToConsole: true,
+            saveToErrorLog: true,
         })
     }
 }
