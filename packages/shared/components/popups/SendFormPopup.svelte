@@ -2,7 +2,7 @@
     import { Button, Text, RecipientInput, AssetAmountInput, ClosableInput, AddInputButton } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import { IAsset, Subject } from '@core/wallet'
     import { onMount } from 'svelte'
 
@@ -76,7 +76,7 @@
 </script>
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">{localize('popups.sendForm.title')}</Text>
+    <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">{localize('popups.sendForm.title')}</Text>
     <send-form-inputs class="flex flex-col space-y-4">
         <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:amount bind:unit />
         <RecipientInput bind:this={recipientInput} bind:recipient />

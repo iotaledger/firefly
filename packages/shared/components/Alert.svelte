@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
     export let classes: string
     export let type: string
@@ -48,7 +48,7 @@
     <div class="flex flex-auto flex-col px-4">
         <Text
             type={TextType.p}
-            fontWeight={FontWeightText.semibold}
+            fontWeight={FontWeight.semibold}
             class="flex text-13 text text-{TOAST_STYLE[type].messageColor}">{message}</Text
         >
     </div>
