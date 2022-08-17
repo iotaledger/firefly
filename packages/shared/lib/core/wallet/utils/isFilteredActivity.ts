@@ -1,22 +1,30 @@
 import { parseCurrency } from '@lib/currency'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
-import { BooleanFilterOptions, NumberFilterType } from '../interfaces'
+import {} from '../interfaces'
 import { activityFilter } from '../stores'
 import { getAssetFromPersistedAssets } from './getAssetFromPersistedAssets'
-import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
+import {
+    ActivityAsyncStatus,
+    ActivityDirection,
+    BooleanFilterOption,
+    NumberFilterOption,
+    InclusionState,
+    TypeFilterOption,
+    StatusFilterOption,
+} from '../enums'
 
 export function isFilteredActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
 
     if (
-        (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOptions.No) &&
+        (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
         activity.isAssetHidden
     ) {
         return true
     }
     if (
-        (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOptions.No) &&
+        (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
         activity.isRejected
     ) {
         return true
@@ -29,13 +37,13 @@ export function isFilteredActivity(activity: Activity): boolean {
     if (filter.amount.active) {
         const activityAmount =
             activity.rawAmount / 10 ** getAssetFromPersistedAssets(activity.assetId).metadata.decimals
-        if (filter.amount.selected === NumberFilterType.Equal && filter.amount.subunit.type === 'single') {
+        if (filter.amount.selected === NumberFilterOption.Equal && filter.amount.subunit.type === 'single') {
             const isEqual = activityAmount === parseCurrency(filter.amount.subunit.amount)
             if (!isEqual) {
                 return true
             }
         }
-        if (filter.amount.selected === NumberFilterType.Range && filter.amount.subunit.type === 'range') {
+        if (filter.amount.selected === NumberFilterOption.Range && filter.amount.subunit.type === 'range') {
             const isInRange =
                 activityAmount <= parseCurrency(filter.amount.subunit.end) &&
                 activityAmount >= parseCurrency(filter.amount.subunit.start)
@@ -43,13 +51,13 @@ export function isFilteredActivity(activity: Activity): boolean {
                 return true
             }
         }
-        if (filter.amount.selected === NumberFilterType.Greater && filter.amount.subunit.type === 'single') {
+        if (filter.amount.selected === NumberFilterOption.Greater && filter.amount.subunit.type === 'single') {
             const isGreater = activityAmount >= parseCurrency(filter.amount.subunit.amount)
             if (!isGreater) {
                 return true
             }
         }
-        if (filter.amount.selected === NumberFilterType.Less && filter.amount.subunit.type === 'single') {
+        if (filter.amount.selected === NumberFilterOption.Less && filter.amount.subunit.type === 'single') {
             const isLess = activityAmount <= parseCurrency(filter.amount.subunit.amount)
             if (!isLess) {
                 return true
@@ -58,38 +66,38 @@ export function isFilteredActivity(activity: Activity): boolean {
     }
     if (filter.status.active && filter.status.selected) {
         if (
-            filter.status.selected === InclusionState.Confirmed &&
+            filter.status.selected === StatusFilterOption.Confirmed &&
             activity.inclusionState !== InclusionState.Confirmed
         ) {
             return true
         }
-        if (filter.status.selected === InclusionState.Pending && activity.inclusionState !== InclusionState.Pending) {
+        if (
+            filter.status.selected === StatusFilterOption.Pending &&
+            activity.inclusionState !== InclusionState.Pending
+        ) {
             return true
         }
         if (
-            filter.status.selected === ActivityAsyncStatus.Claimed &&
+            filter.status.selected === StatusFilterOption.Claimed &&
             activity.asyncStatus !== ActivityAsyncStatus.Claimed
         ) {
             return true
         }
         if (
-            filter.status.selected === ActivityAsyncStatus.Unclaimed &&
+            filter.status.selected === StatusFilterOption.Unclaimed &&
             (!activity.asyncStatus || activity.asyncStatus === ActivityAsyncStatus.Claimed)
         ) {
             return true
         }
     }
     if (filter.type.active && filter.type.selected) {
-        if (filter.type.selected === ActivityDirection.In && activity.direction !== ActivityDirection.In) {
+        if (filter.type.selected === TypeFilterOption.Incoming && activity.direction !== ActivityDirection.In) {
             return true
         }
-        if (filter.type.selected === ActivityDirection.Out && activity.direction !== ActivityDirection.Out) {
+        if (filter.type.selected === TypeFilterOption.Outgoing && activity.direction !== ActivityDirection.Out) {
             return true
         }
-        if (
-            filter.type.selected === ActivityType.InternalTransaction &&
-            activity.type !== ActivityType.InternalTransaction
-        ) {
+        if (filter.type.selected === TypeFilterOption.Internal && !activity.isInternal) {
             return true
         }
     }
