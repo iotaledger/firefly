@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Text, TextHint } from 'shared/components'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
 
@@ -33,7 +33,7 @@
 </script>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type={TextType.h3} fontWeight={FontWeightText.semibold} classes="text-left">
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {title}
     </Text>
     <div class="space-y-4">

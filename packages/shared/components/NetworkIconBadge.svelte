@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { NETWORK, NetworkProtocol, NetworkType } from '@core/network'
     import { NetworkIcon, Text, Tooltip } from 'shared/components'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
 
     export let networkType: NetworkType
     export let networkProtocol: NetworkProtocol
@@ -28,7 +28,7 @@
     </div>
     {#if showTooltip}
         <Tooltip anchor={tooltipAnchor} size="small" position="right" offset={6}>
-            <Text type="p" fontWeight={FontWeightText.semibold} color="gray-600" darkColor="gray-400" smaller>
+            <Text type="p" fontWeight={FontWeight.semibold} color="gray-600" darkColor="gray-400" smaller>
                 {tooltipText}
             </Text>
         </Tooltip>

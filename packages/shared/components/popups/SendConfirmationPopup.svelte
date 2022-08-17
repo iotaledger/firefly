@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Spinner, Toggle } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
@@ -149,7 +149,7 @@
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type={TextType.h3} fontWeight={FontWeightText.semibold} classes="text-left"
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
         >{localize('popups.transaction.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
