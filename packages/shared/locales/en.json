@@ -191,7 +191,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install Shimmer app.",
+            "body1": "Before you proceed, you must use Ledger Live to find and install {protocol} app.",
             "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
             "action": "Yes, I've installed these apps"
         },
@@ -448,7 +448,6 @@
                     "statuses": {
                         "appNotOpen": "Shimmer app not open",
                         "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
                         "locked": "Locked",
                         "mnemonicMismatch": "Wrong Ledger or mnemonic",
                         "notDetected": "Not detected",
@@ -701,8 +700,7 @@
             "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         },
         "ledgerNotConnected": {
-            "connect": "Open the Shimmer app on your Ledger device to continue",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connect": "Open the {protocol} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device"

@@ -33,8 +33,8 @@
         <Icon icon={legacy ? 'ledger-app-legacy' : 'ledger-app'} width="32" height="32" classes="text-white" />
     </div>
     <Text type="p" classes="mb-6">
-        {locale(`popups.ledgerNotConnected.${legacy ? 'connectLegacy' : 'connect'}`, {
-            values: legacy ? { legacy: LedgerAppName.IOTALegacy } : {},
+        {locale('popups.ledgerNotConnected.connect', {
+            values: { protocol: LedgerAppName.SHIMMER },
         })}
     </Text>
     <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
