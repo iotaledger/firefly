@@ -5,7 +5,7 @@
     import { nodeInfo } from '@core/network'
     import { closePopup } from '@lib/popup'
     import { Button, Error, Spinner, Text } from 'shared/components'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
     let isBusy = false
     let error: BaseError
@@ -31,7 +31,7 @@
 </script>
 
 <faucet-request-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type={TextType.h3} fontWeight={FontWeightText.semibold} classes="text-left">
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.faucetRequest.title')}
     </Text>
     <div class="w-full flex-col space-y-2">

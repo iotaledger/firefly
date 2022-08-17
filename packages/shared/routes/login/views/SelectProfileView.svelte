@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { createEventDispatcher } from 'svelte'
     import { Icon, Logo, Profile } from 'shared/components'
     import {
         isAwareOfCrashReporting,
@@ -10,19 +9,17 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
-    import { initialiseOnboardingRouters } from '@core/router'
+    import { initialiseOnboardingRouters, loginRouter } from '@core/router'
     import { initialiseOnboardingProfile, shouldUseDeveloperProfile } from '@contexts/onboarding'
     import { openPopup, popupState } from '@lib/popup'
 
-    const dispatch = createEventDispatcher()
-
-    function handleContinueClick(id: string) {
+    function onContinueClick(id: string) {
         loadPersistedProfileIntoActiveProfile(id)
-        dispatch('next')
+        $loginRouter.next()
     }
 
-    function addProfile() {
-        dispatch('next', { shouldAddProfile: true })
+    function onAddProfileClick() {
+        $loginRouter.next({ shouldAddProfile: true })
         initialiseOnboardingRouters()
         initialiseOnboardingProfile(shouldUseDeveloperProfile())
     }
@@ -58,7 +55,7 @@
             <div class="mx-7 mb-8">
                 <Profile
                     bgColor="blue"
-                    onClick={handleContinueClick}
+                    onClick={onContinueClick}
                     name={profile.name}
                     id={profile.id}
                     isDeveloper={profile.isDeveloperProfile}
@@ -72,7 +69,7 @@
         {/each}
         <div class="mx-7 mb-8">
             <Profile
-                onClick={addProfile}
+                onClick={onAddProfileClick}
                 name={localize('general.addProfile')}
                 classes="border-solid border-2 border-gray-400 cursor-pointer"
             >

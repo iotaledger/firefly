@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { NumberInput } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
 
     export let inputElement: HTMLInputElement
     export let disabled = false
@@ -17,6 +17,6 @@
     placeholder={localize('general.amount')}
     fontSize="24"
     alignment="right"
-    fontWeigth={FontWeightText.semibold}
+    fontWeigth={FontWeight.semibold}
     {...$$restProps}
 />
