@@ -278,6 +278,7 @@ module.exports = {
         backgroundOpacity: ['dark'],
         opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled'],
         cursor: ['responsive', 'disabled'],
+        ringOpacity: ['dark'],
     },
     plugins: [
         // Add individual border colors
