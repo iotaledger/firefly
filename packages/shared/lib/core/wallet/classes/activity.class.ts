@@ -75,7 +75,7 @@ export class Activity implements IActivity {
     claimingTransactionId?: string
     claimedDate?: Date
 
-    constructor(processedOutput: IProcessedTransaction, account: IAccountState) {
+    constructor(processedTransaction: IProcessedTransaction, account: IAccountState) {
         const {
             outputs,
             transactionId,
@@ -84,7 +84,7 @@ export class Activity implements IActivity {
             inclusionState,
             transactionInputs,
             detailedTransactionInputs,
-        } = processedOutput
+        } = processedTransaction
 
         const type = getActivityType(outputs)
 
