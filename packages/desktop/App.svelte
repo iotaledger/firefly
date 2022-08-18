@@ -14,7 +14,6 @@
     } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { addError } from '@core/error'
-    import { goto } from 'shared/lib/helpers'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from 'shared/routes'
@@ -151,13 +150,13 @@
             />
         {/if}
         <Route route={AppRoute.Dashboard}>
-            <Dashboard locale={$_} {goto} />
+            <Dashboard locale={$_} />
         </Route>
         <Route route={AppRoute.Login}>
-            <LoginRouter {goto} />
+            <LoginRouter />
         </Route>
         <Route route={AppRoute.Onboarding}>
-            <OnboardingRouter {goto} />
+            <OnboardingRouter />
         </Route>
         {#if settings}
             <Settings locale={$_} handleClose={() => (settings = false)} />
