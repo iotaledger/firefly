@@ -4,16 +4,16 @@ import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import { initialiseProfileManager } from '@core/profile-manager'
 import { generateRandomId } from '@lib/utils'
 
-import { getIotaProfileManagerStorageDirectory } from '../helpers'
-import { iotaProfileManager, onboardingProfile } from '../stores'
+import { getShimmerClaimingProfileManagerStorageDirectory } from '../helpers'
+import { shimmerClaimingProfileManager, onboardingProfile } from '../stores'
 
-export async function createIotaProfileManager(): Promise<void> {
+export async function createShimmerClaimingProfileManager(): Promise<void> {
     const profile = get(onboardingProfile)
     if (!profile) {
         return
     }
 
-    const storagePath = await getIotaProfileManagerStorageDirectory()
+    const storagePath = await getShimmerClaimingProfileManagerStorageDirectory()
     const coinType = COIN_TYPE[NetworkProtocol.IOTA]
     const clientOptions = profile?.clientOptions
     const secretManager = {
@@ -21,5 +21,5 @@ export async function createIotaProfileManager(): Promise<void> {
     }
 
     const manager = initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, generateRandomId())
-    iotaProfileManager.set(manager)
+    shimmerClaimingProfileManager.set(manager)
 }

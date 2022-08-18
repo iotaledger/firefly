@@ -89,6 +89,10 @@
                     "importLedger": "Use Ledger device",
                     "importLedgerDescription": "Restore from your Ledger Nano S or X device"
                 },
+                "setupClaimed": {
+                    "title": "Claim Shimmer staking rewards",
+                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                },
                 "enterName": {
                     "title": "Create your {protocol} profile",
                     "profileName": "Profile name",
@@ -169,6 +173,11 @@
                 "claimRewards": {
                     "title": "Your Shimmer staking rewards",
                     "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+                },
+                "success": {
+                    "title": "Rewards claimed",
+                    "body": "You have successfully claimed Shimmer tokens for your new profile.",
+                    "totalRewards": "Total rewards"
                 }
             },
             "congratulations": {
@@ -987,8 +996,8 @@
         "findWallets": "Find wallets",
         "useBalanceFinder": "Use balance finder",
         "search": "Search",
-        "searchAgain": "Search again",
         "searching": "Searching",
+        "searchAgain": "Search again",
         "closeFirefly": "Close Firefly",
         "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
@@ -1004,6 +1013,7 @@
         "done": "Done",
         "okIUnderstand": "OK, I understand",
         "readMore": "Read more",
+        "searchForRewards": "Search for rewards",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
@@ -1302,6 +1312,14 @@
         },
         "refreshTokenMetadata": {
             "success": "All token metadata has been reset and refreshed"
+        },
+        "findShimmerRewards": {
+            "success": "Successfully found Shimmer rewards",
+            "error": "An error occurred while searching for rewards"
+        },
+        "claimShimmerRewards": {
+            "success": "Successfully claimed Shimmer rewards",
+            "error": "An error occurred while claiming rewards"
         }
     },
     "error": {
