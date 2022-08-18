@@ -7,7 +7,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isSoftwareProfile, isLedgerProfile, ProfileType } from '@core/profile'
     import {
         ActivityDirection,
         ActivityType,
@@ -27,6 +27,7 @@
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
     import { checkStronghold } from '@lib/stronghold'
+    import { promptUserToConnectLedger, updateLedgerSendConfirmationProps } from '@core/ledger'
 
     export let asset: IAsset
     export let amount = '0'
@@ -100,6 +101,19 @@
 
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
+
+        if ($activeProfile.type === ProfileType.Ledger) {
+            updateLedgerSendConfirmationProps({
+                asset,
+                amount,
+                unit,
+                recipient,
+                internal: false,
+                metadata,
+                tag,
+            })
+        }
+
         await sendOutput(preparedOutput)
         closePopup()
     }
@@ -113,6 +127,8 @@
         try {
             if ($isSoftwareProfile) {
                 await checkStronghold(validateAndSendOutput, true)
+            } else if ($isLedgerProfile) {
+                promptUserToConnectLedger(validateAndSendOutput, undefined, true)
             }
         } catch (err) {
             if (!error) {

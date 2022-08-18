@@ -1,24 +1,22 @@
 <script lang="typescript">
     import { Animation, Text } from 'shared/components'
+    import { KeyValueBox } from 'shared/components/atoms'
+    import { formatAddressForLedger, resetLedgerSendConfirmationProps } from '@core/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, popupState } from 'shared/lib/popup'
-    import { formatUnitBestMatch } from 'shared/lib/units'
-    import { onMount } from 'svelte'
+    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
+    import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from '@core/i18n'
-    import { formatAddressForLedger } from '@core/ledger'
+    import { localize } from '@core/i18n'
 
     export let locale: Locale
 
-    export let remainderAddress = ''
-    export let remainderAmount = null
     export let toAddress = ''
     export let toAmount = null
+    export let sendConfirmationPopupProps = null
 
     export let onCancel: (..._: any[]) => void
 
-    const shouldDisplayRemainderAddress = remainderAddress?.length > 0
-    const shouldDisplayRemainderAmount = remainderAmount !== null
     const shouldDisplaySendTo = toAddress?.length > 0 && toAmount !== null
 
     const onInvalid = () => {
@@ -39,26 +37,28 @@
         return `${basePath}.${popupType}.${prop}`
     }
 
-    const formatAmount = (amountRaw: number): string => {
-        if (amountRaw <= 0) onInvalid()
-
-        return formatUnitBestMatch(amountRaw)
-    }
-
     onMount(() => {
         /**
-         * CAUTION: If neither the sendTo nor remainderAddress contain
-         * valid information then Firefly should cancel the transaction
+         * CAUTION: If sendTo valid information then Firefly should cancel the transaction
          * (to be retried) and notify the user.
          */
-        if (!shouldDisplaySendTo && !shouldDisplayRemainderAddress) onInvalid()
+        if (!shouldDisplaySendTo) onInvalid()
+    })
+
+    onDestroy(() => {
+        openPopup({
+            type: 'sendConfirmation',
+            props: sendConfirmationPopupProps,
+        })
+
+        resetLedgerSendConfirmationProps()
     })
 </script>
 
 <Text type="h4" classes="mb-6">{locale(getPopupLocaleData('title'))}</Text>
 <Text type="p" classes="mb-6" secondary>{locale(getPopupLocaleData('info'))}</Text>
 
-<div class="relative w-full h-1/2 bg-white dark:bg-gray-900 flex justify-center content-center">
+<div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Animation
         width="100%"
         animation="ledger-bg-desktop"
@@ -66,35 +66,18 @@
     />
     <Animation animation="ledger-confirm-address-desktop" />
 </div>
-
-<div class="transaction flex flex-col space-y-4 scrollable-y">
+<div class="flex flex-col space-y-2">
     {#if shouldDisplaySendTo}
-        <div
-            class={`rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center ${
-                shouldDisplayRemainderAddress ? 'mb-4' : ''
-            }`}
-        >
+        <KeyValueBox keyText={localize('general.sendTo')} valueText={formatAddressForLedger(toAddress)} />
+
+        <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
+        <!-- <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
             <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
             <Text type="pre" classes="mb-4">{formatAddressForLedger(toAddress)}</Text>
 
             <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
             <Text type="pre">{formatAmount(toAmount)}</Text>
-        </div>
-    {/if}
-    {#if shouldDisplayRemainderAddress}
-        <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
-            <Text type="h5" highlighted classes="mb-2">
-                {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
-            </Text>
-            <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-4' : ''}>
-                {remainderAddress}
-            </Text>
-
-            {#if shouldDisplayRemainderAmount}
-                <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
-                <Text type="pre">{formatAmount(remainderAmount)}</Text>
-            {/if}
-        </div>
+        </div> -->
     {/if}
 </div>
 
