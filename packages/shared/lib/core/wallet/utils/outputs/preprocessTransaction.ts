@@ -5,6 +5,7 @@ export function preprocessTransaction(transaction: Transaction): IProcessedTrans
     return {
         outputs: transaction.payload.essence.outputs,
         transactionId: transaction.transactionId,
+        isIncoming: transaction.incoming,
         time: new Date(Number(transaction.timestamp)),
         inclusionState: transaction.inclusionState,
         detailedTransactionInputs: [],

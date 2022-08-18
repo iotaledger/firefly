@@ -25,7 +25,6 @@ import {
     getExpirationDateFromOutput,
     getMetadataFromOutput,
     getNativeTokenFromOutput,
-    getRecipientAddressFromOutput,
     getRecipientFromOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
@@ -77,8 +76,15 @@ export class Activity implements IActivity {
     claimedDate?: Date
 
     constructor(processedOutput: IProcessedTransaction, account: IAccountState) {
-        const { outputs, transactionId, time, inclusionState, transactionInputs, detailedTransactionInputs } =
-            processedOutput
+        const {
+            outputs,
+            transactionId,
+            time,
+            isIncoming,
+            inclusionState,
+            transactionInputs,
+            detailedTransactionInputs,
+        } = processedOutput
 
         const type = getActivityType(outputs)
 
@@ -91,7 +97,6 @@ export class Activity implements IActivity {
         this.inputs = transactionInputs
 
         if (type === ActivityType.Transaction) {
-            let isIncoming = false
             const { output, outputIndex, isSelfTransaction } = getMainTransactionOutputFromTransaction(
                 outputs,
                 account.depositAddress,
@@ -101,10 +106,7 @@ export class Activity implements IActivity {
             this.id = transactionId
             this.outputId = outputIdFromTransactionData(transactionId, outputIndex) // Only required for async transactions e.g. when claimed or to get the full output with `getOutput`
 
-            const recipientAddress = getRecipientAddressFromOutput(output)
             const recipient = getRecipientFromOutput(output)
-
-            isIncoming = recipientAddress === account.depositAddress && !isSelfTransaction
             const sender = detailedTransactionInputs
                 ? getSenderFromInputs(detailedTransactionInputs)
                 : getSenderFromTransaction(isIncoming, account.depositAddress, output)

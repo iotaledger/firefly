@@ -5,6 +5,7 @@ import { IOutputResponse, IUTXOInput } from '@iota/types'
 export interface IProcessedTransaction {
     outputs: OutputTypes[]
     transactionId: string
+    isIncoming: boolean
     time: Date
     inclusionState: InclusionState
     transactionInputs: IUTXOInput[]

@@ -22,7 +22,8 @@ export function preprocessAccountOutputs(account: IAccountState): IProcessedTran
             processedTransactions.push(
                 preprocessGroupedOutputs(
                     groupedOutputs[transactionId],
-                    account?.meta?.incomingTransactions[transactionId]
+                    account?.meta?.incomingTransactions[transactionId],
+                    account
                 )
             )
         }
