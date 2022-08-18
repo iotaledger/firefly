@@ -191,7 +191,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Have you installed the necessary Ledger apps?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install {protocol} app.",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Make sure your Ledger firmware is up-to-date. Any pre-installed apps should be updated to their latest versions.",
             "action": "Yes, I've installed these apps"
         },
@@ -459,7 +459,7 @@
                 "hardware": {
                     "title": "Hardware Device",
                     "statuses": {
-                        "appNotOpen": "Shimmer app not open",
+                        "appNotOpen": "{protocol} app not open",
                         "connected": "Connected",
                         "locked": "Locked",
                         "mnemonicMismatch": "Wrong Ledger or mnemonic",

@@ -1,5 +1,5 @@
 import { resetRouters } from '@core/router'
-import { stopPollingLedgerStatus } from '@lib/core/ledger'
+import { stopPollingLedgerStatus } from '@core/ledger'
 import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
 import { destroyProfileManager } from '@core/profile-manager'

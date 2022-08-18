@@ -1,7 +1,7 @@
 import { getStorageDirectoryOfProfile, IPersistedProfile, ProfileType } from '@core/profile'
 import { ProfileManagerOptions } from '@core/profile-manager'
 import { COIN_TYPE, getDefaultClientOptions } from '@core/network'
-import { USE_LEDGER_SIMULATOR } from '@lib/core/ledger'
+import { USE_LEDGER_SIMULATOR } from '@core/ledger'
 
 export async function buildProfileManagerOptionsFromProfileData(
     profileData: Partial<IPersistedProfile>
