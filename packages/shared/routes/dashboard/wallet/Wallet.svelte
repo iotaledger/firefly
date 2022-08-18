@@ -13,13 +13,6 @@
         Modal,
         Text,
     } from 'shared/components'
-    import {
-        AccountActions,
-        AddressHistory,
-        DeleteAccount,
-        ExportTransactionHistory,
-        HideAccount,
-    } from 'shared/components/drawerContent'
     import { mobileHeaderAnimation, touchInterpolation } from 'shared/lib/animation'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
@@ -507,18 +500,8 @@
                             <Send {onSend} {onInternalTransfer} />
                         {:else if $accountRoute === AccountRoute.Receive}
                             <Receive {isGeneratingAddress} {onGenerateAddress} />
-                        {:else if $accountRoute === AccountRoute.Actions}
-                            <AccountActions />
                         {:else if $accountRoute === AccountRoute.Manage}
                             <ManageAccount account={$selectedAccountStore} />
-                        {:else if $accountRoute === AccountRoute.AddressHistory}
-                            <AddressHistory account={$selectedAccountStore} />
-                        {:else if $accountRoute === AccountRoute.ExportTransactionHistory}
-                            <ExportTransactionHistory account={$selectedAccountStore} />
-                        {:else if $accountRoute === AccountRoute.HideAccount}
-                            <HideAccount account={$selectedAccountStore} />
-                        {:else if $accountRoute === AccountRoute.DeleteAccount}
-                            <DeleteAccount account={$selectedAccountStore} />
                         {/if}
                     </Drawer>
                 </div>
