@@ -103,9 +103,16 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 }
                 break
             }
-            case OnboardingRoute.ShimmerClaiming:
-                nextRoute = OnboardingRoute.Congratulations
+            case OnboardingRoute.ShimmerClaiming: {
+                const profileRecoveryType = get(onboardingProfile)?.recoveryType
+                if (profileRecoveryType === ProfileRecoveryType.Mnemonic) {
+                    profileBackupRoute.set(ProfileBackupRoute.BackupStronghold)
+                    nextRoute = OnboardingRoute.ProfileBackup
+                } else {
+                    nextRoute = OnboardingRoute.Congratulations
+                }
                 break
+            }
             case OnboardingRoute.Congratulations:
                 get(appRouter).next()
                 return

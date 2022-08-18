@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
@@ -12,8 +13,7 @@
         profileSetupRoute,
         profileSetupRouter,
     } from '@core/router'
-    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import { onMount } from 'svelte'
+    import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
 
     let error = ''
     let profileName = $onboardingProfile?.name ?? ''
@@ -23,10 +23,14 @@
 
     function onBackClick(): void {
         if ($onboardingProfile?.recoveryType) {
-            updateOnboardingProfile({ type: null, setupType: null, recoveryType: null })
+            updateOnboardingProfile({ type: null, recoveryType: null })
             $onboardingRouter.filterHistory(OnboardingRoute.ProfileRecovery)
             $profileRecoveryRouter.reset()
-            profileSetupRoute.set(ProfileSetupRoute.SetupRecovered)
+            profileSetupRoute.set(
+                $onboardingProfile?.setupType === ProfileSetupType.Recovered
+                    ? ProfileSetupRoute.SetupRecovered
+                    : ProfileSetupRoute.SetupClaimed
+            )
         } else {
             $profileSetupRouter.previous()
         }
