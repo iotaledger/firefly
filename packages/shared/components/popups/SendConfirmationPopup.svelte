@@ -20,6 +20,7 @@
         generateRawAmount,
         selectedAccountAssets,
         getStorageDepositFromOutput,
+        DEFAULT_TRANSACTION_OPTIONS,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
@@ -86,12 +87,7 @@
             asset,
             giftStorageDeposit
         )
-        preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
-            remainderValueStrategy: {
-                strategy: 'ReuseAddress',
-                value: null,
-            },
-        })
+        preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
         storageDeposit = _storageDeposit

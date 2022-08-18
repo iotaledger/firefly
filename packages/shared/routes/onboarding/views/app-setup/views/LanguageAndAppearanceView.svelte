@@ -8,7 +8,7 @@
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
-        shouldUseDeveloperProfile,
+        shouldBeDeveloperProfile,
     } from '../../../../../lib/contexts/onboarding'
 
     /**
@@ -52,7 +52,7 @@
 
     onMount(() => {
         _clonedVariable = appTheme
-        initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldUseDeveloperProfile())
+        initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
     })
 </script>
 

@@ -1,9 +1,9 @@
 import { IAccountState, selectedAccount } from '@core/account'
-import { networkStatus } from '@core/network'
+import { networkStatus, SECONDS_PER_MILESTONE } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { getDecimalSeparator } from '../currency'
-import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
+import { MILLISECONDS_PER_SECOND } from '../time'
 import { formatUnitBestMatch } from '../units'
 import { clamp, delineateNumber, getJsonRequestOptions, range } from '../utils'
 import {

@@ -17,13 +17,14 @@ export class BaseError extends Error {
         }
 
         if (params?.saveToErrorLog) {
-            addError({ message })
+            addError({ ...params, message })
         }
 
         if (params?.showNotification) {
             showAppNotification({
                 type: 'error',
                 message,
+                alert: true,
             })
         }
 
