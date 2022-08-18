@@ -37,7 +37,7 @@
 
     async function validate(): Promise<boolean> {
         try {
-            await Promise.all([assetAmountInput?.validate(!!(metadata || tag)), recipientInput?.validate()])
+            await Promise.all([assetAmountInput?.validate(), recipientInput?.validate()])
             return true
         } catch (error) {
             console.error('Error: ', error)
