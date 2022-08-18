@@ -13,8 +13,7 @@ import {
     subscribe as subscribeToWalletEvents,
 } from '@core/profile-manager/api'
 import { loginRouter } from '@core/router'
-import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
-import { loadAllAccountActivities } from '@core/wallet/actions/loadAllAccountActivities'
+import { loadAllAccountActivities, refreshAccountAssetsForActiveProfile } from '@core/wallet'
 import { get } from 'svelte/store'
 import {
     INITIAL_ACCOUNT_GAP_LIMIT,
