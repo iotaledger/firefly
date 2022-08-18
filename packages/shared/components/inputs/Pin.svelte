@@ -4,7 +4,6 @@
     import { validatePinFormat, PIN_LENGTH } from 'shared/lib/utils'
     import { Error, Icon } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { Platform } from 'shared/lib/platform'
 
     const dispatch = createEventDispatcher()
 
@@ -85,18 +84,41 @@
     }
 
     /**
-     * for android mobile we need both onkeydown and oninput
-     * event listeners to the input and handle the old and the new value.
-     * the auto-suggest feature or other event might follow
-     * the keydown event and invalidate it.
+     * On Android we need both on:keydown and on:input.
+     * Keydown only handles 'Backspace' since some soft-keyboards
+     * doesn't send the inputType value as 'deleteContentBackward'.
+     * Input event handle the rest, as input also could be dictated, drawed, etc.
      */
-    const changeHandlerHelper = (e, i: number) => {
-        if (!/^[0-9]$/.test(e.data)) {
+    function changeHandlerMobile(event: Event & InputEventInit, i: number): void {
+        if (!event.isTrusted || !/^[0-9]$/.test(event.data)) {
             inputs[i] = ''
-        } else {
-            inputElements[i + 1].focus()
+            inputElements[i].focus()
+            return
+        }
+        if (event.inputType === 'deleteContentBackward') {
+            handleBackspace()
+        } else if (event.inputType === 'insertText') {
+            inputElements[i + 1]?.focus()
+            value = inputs.join('')
+            if (validatePinFormat(value)) {
+                dispatch('submit')
+            }
         }
     }
+
+    function handleBackspaceMobile(event: KeyboardEvent): void {
+        if (event.key === 'Backspace') {
+            handleBackspace()
+        }
+    }
+
+    function handleNextMobile(i: number): void {
+        if (inputElements[i - 1]?.value === '') {
+            inputs[i] = ''
+            inputElements[i - 1].focus()
+        }
+    }
+
     const selectFirstEmpty = () => {
         for (let j = 0; j < PIN_LENGTH; j++) {
             if (!inputs[j] || j === PIN_LENGTH - 1) {
@@ -137,8 +159,8 @@
             {smaller ? 'h-14 pl-6 pr-4' : $mobile ? 'pl-8 pr-8 m-auto' : 'h-20 pl-12 pr-8'}"
         class:disabled
         bind:this={root}
-        on:click={selectFirstEmptyRoot}
-        on:focus={selectFirstEmptyRoot}
+        on:click={$mobile ? selectFirstEmpty : selectFirstEmptyRoot}
+        on:focus={$mobile ? selectFirstEmpty : selectFirstEmptyRoot}
         tabindex="0"
     >
         <div class="flex flex-row inputs-wrapper">
@@ -156,8 +178,9 @@
                             class:active={!inputs[i] || inputs[i].length === 0}
                             class:glimpse
                             {disabled}
-                            on:input={(event) => changeHandlerHelper(event, i)}
-                            on:keydown={(event) => changeHandler(event, i)}
+                            on:input={(event) => changeHandlerMobile(event, i)}
+                            on:keydown={handleBackspaceMobile}
+                            on:focus={() => handleNextMobile(i)}
                             on:contextmenu|preventDefault
                         />
                     {:else}
@@ -195,7 +218,6 @@
 
 <style type="text/scss">
     pin-input {
-        @apply cursor-pointer;
         @apply select-none;
 
         &:not(.disabled):focus-within,
