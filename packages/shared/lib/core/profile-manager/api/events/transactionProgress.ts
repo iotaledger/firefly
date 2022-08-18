@@ -3,26 +3,25 @@ import { get } from 'svelte/store'
 import { activeProfile } from '@core/profile/stores'
 import { ProfileType } from '@core/profile/enums'
 import { closePopup, openPopup } from '@lib/popup'
-import { ledgerSendConfirmationProps } from '@core/ledger'
+import { ledgerSendConfirmationProps, ledgerDeviceStatus } from '@core/ledger'
 
 export function handleTransactionProgress(
     accountId: string,
-    payload: { PreparedTransactionEssenceHash: string } | 'PerformingPow' | 'SigningTransaction'
+    payload:
+        | { PreparedTransactionEssenceHash: string }
+        | { PreparedTransaction: string }
+        | 'PerformingPow'
+        | 'SigningTransaction'
 ): void {
     if (get(selectedAccountId) === accountId) {
         console.warn('Transaction progress handler unimplemented: ', payload)
 
         if (get(activeProfile).type === ProfileType.Ledger) {
-            if (payload === 'PerformingPow') {
-                // TODO: Should we double check the type of popup?
-                closePopup()
-            }
-
-            if (payload === 'SigningTransaction') {
+            const _openPopup = (type = 'ledgerTransaction') => {
                 const _props = get(ledgerSendConfirmationProps)
 
                 openPopup({
-                    type: 'ledgerTransaction',
+                    type,
                     props: {
                         toAddress:
                             _props.recipient.type === 'address'
@@ -34,8 +33,21 @@ export function handleTransactionProgress(
                 })
             }
 
-            if (typeof payload !== 'string' && 'PreparedTransactionEssenceHash' in payload) {
+            if (payload === 'PerformingPow') {
+                // TODO: Should we double check the type of popup?
                 closePopup()
+            }
+
+            if (typeof payload !== 'string' && 'PreparedTransaction' in payload) {
+                _openPopup()
+            }
+
+            if (typeof payload !== 'string' && 'PreparedTransactionEssenceHash' in payload) {
+                if (!get(ledgerDeviceStatus).blindSigningEnabled) {
+                    _openPopup('enableLedgerBlindSigning')
+                } else {
+                    _openPopup()
+                }
             }
         }
     }
