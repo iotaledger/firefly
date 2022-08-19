@@ -95,7 +95,7 @@
                 <Text type="p" secondary classes="mb-5">{localize('popups.hideAccount.errorBody3')}</Text>
             {/if}
             <div
-                class={`flex flex-row w-full space-x-4 px-8 ${
+                class={`flex flex-row w-full space-x-4 md:px-8 ${
                     hasMultipleAccounts ? 'justify-between' : 'justify-center'
                 }`}
             >
