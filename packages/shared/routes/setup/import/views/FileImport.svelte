@@ -75,7 +75,7 @@
     <div slot="title">
         <Text type="h2">{locale('views.importFromFile.title')}</Text>
     </div>
-    <div slot="leftpane__content" class={$mobile && 'min-h-screen'}>
+    <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8">
             {locale($mobile ? 'views.importFromFile.bodyMobile' : 'views.importFromFile.body')}
         </Text>
