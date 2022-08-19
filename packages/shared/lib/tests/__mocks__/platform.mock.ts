@@ -8,7 +8,6 @@ const Platform: IPlatform = {
     DeepLinkManager: undefined,
     NotificationManager: undefined,
     PincodeManager: undefined,
-    ledger: undefined,
     close(): void {},
     exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null> {
         return Promise.resolve(undefined)
