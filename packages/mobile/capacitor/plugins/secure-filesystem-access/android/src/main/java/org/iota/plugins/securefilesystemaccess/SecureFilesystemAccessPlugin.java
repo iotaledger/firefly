@@ -221,9 +221,20 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             writer.append(textContent != null ? textContent : "");
             writer.flush();
             writer.close();
+
+            String authority = getContext().getPackageName() + ".fileprovider";
+            Uri fileUrl = FileProvider.getUriForFile(getActivity(), authority, textFile);
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, fileUrl);
+            shareIntent.setData(fileUrl);
+            shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            getContext().startActivity(Intent.createChooser(shareIntent, null));
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         call.resolve();
     }
 
