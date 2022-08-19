@@ -114,7 +114,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         guard let textContent = call.getString("textContent") else {
             return call.reject("textContent is required")
         }
-        guard let fromRelativePath = call.getString("fileName") else {
+        guard let fileName = call.getString("fileName") else {
             return call.reject("fileName is required")
         }
         
@@ -133,6 +133,11 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
             try? data.write(to: file, options: .atomicWrite)
         }
         
+        let srcUrl = Capacitor.URL(fileURLWithPath: file.path, isDirectory: false)
+        var filesToShare = [Any]()
+        filesToShare.append(srcUrl)
+        let activityViewController = UIActivityViewController(activityItems: filesToShare, applicationActivities: nil)
+        self.bridge?.viewController?.present(activityViewController, animated: true, completion: nil)
         call.resolve()
     }
 }
