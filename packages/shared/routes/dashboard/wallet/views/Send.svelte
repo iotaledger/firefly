@@ -3,7 +3,7 @@
     import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, Illustration, Input, ProgressBar, Text } from 'shared/components'
-    import { clearSendParams, keyboardHeight, mobile, sendParams } from 'shared/lib/app'
+    import { clearSendParams, keyboardHeight, isKeyboardOpened, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -514,8 +514,14 @@
                     </button>
                 </div>
             </div>
-            <Illustration background height={230} illustration="send-mobile" />
-            <div class="w-full h-full flex flex-col justify-between">
+            <div
+                style="margin-top: {$isKeyboardOpened ? '-230px' : '0px'}; opacity: {$isKeyboardOpened
+                    ? 0
+                    : 1}; transition: opacity 0.2s var(--transition-scroll); transition: margin-top 0.2s var(--transition-scroll)"
+            >
+                <Illustration height={230} background illustration="send-mobile" />
+            </div>
+            <div class="w-full h-full flex flex-col justify-between {$isKeyboardOpened && 'pt-6'}">
                 <div>
                     <div class="w-full block">
                         {#if selectedSendType === SEND_TYPE.INTERNAL}
@@ -559,14 +565,19 @@
                             customUnitPresentation={showUnitActionSheet}
                             onMaxClick={handleMaxClick}
                             disabled={$isTransferring}
-                            autofocus={false}
+                            autofocus={address !== '' ? true : false}
                         />
                     </div>
                 </div>
             </div>
         </div>
         {#if !$isTransferring}
-            <div class="mt-8 flex flex-row justify-between px-2" style="margin-bottom: {$keyboardHeight}px;">
+            <div
+                class="mt-8 flex flex-row justify-between px-2"
+                style="margin-bottom: {$isKeyboardOpened
+                    ? $keyboardHeight
+                    : 0}px; transition: margin-bottom 0.2s var(--transition-scroll)"
+            >
                 <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
                     {localize('actions.cancel')}
                 </Button>

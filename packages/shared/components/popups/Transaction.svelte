@@ -100,7 +100,7 @@
 <Text type="h4" classes={$mobile ? 'flex w-full justify-center -mt-4 mb-6' : 'mb-6'}>
     {localize('popups.transaction.title')}
 </Text>
-<div class="flex w-full flex-row flex-wrap">
+<div class="flex w-full flex-row flex-wrap {$mobile && '-mb-4'}">
     {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
         <div
             class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3"

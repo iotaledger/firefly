@@ -58,7 +58,7 @@
 <div class="flex flex-auto flex-col">
     <button
         on:click={toggleAccountSwitcher}
-        class="safe-area-top mt-3 py-2 px-2 absolute rounded-lg flex flex-row justify-center items-center space-x-2 
+        class="safe-area-top py-2 px-2 absolute rounded-lg flex flex-row justify-center items-center space-x-2 
             {isDrawerOpened ? 'bg-gray-100 dark:bg-gray-900' : ''}
             "
         style="transform: translateX({switcherButtonTranslateX}px);"

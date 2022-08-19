@@ -29,6 +29,11 @@ export const mobile = writable<boolean>(false)
 export const keyboardHeight = writable<number>(0)
 
 /**
+ * Mobile soft leyboard open state
+ */
+export const isKeyboardOpened = writable<boolean>(false)
+
+/**
  * Wallet access pin
  */
 export const walletPin = writable<string>(null)
