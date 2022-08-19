@@ -103,11 +103,11 @@ export const CapacitorApi: IPlatform = {
     },
 
     exportTransactionHistory: async (fileName, content) => {
-        void (await SecureFilesystemAccess.saveTextFile({
-            fileName,
+        await SecureFilesystemAccess.saveTextFile({
             textContent: content,
-        }))
-        return null
+            fileName,
+        })
+        return ''
     },
 
     /**
