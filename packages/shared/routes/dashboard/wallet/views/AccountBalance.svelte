@@ -63,7 +63,7 @@
 
 {#if $mobile}
     <div
-        class="bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative p-5 pb-0 pt-20 bg-transparent {classes}"
+        class="safe-area bg-gradient-to-t from-gray-100 via-white to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-800 relative px-5 pb-0 bg-transparent {classes}"
         bind:this={background}
     >
         <!-- Balance -->
@@ -144,3 +144,9 @@
         </button>
     </div>
 {/if}
+
+<style>
+    .safe-area {
+        padding-top: calc(env(safe-area-inset-top) + 80px);
+    }
+</style>
