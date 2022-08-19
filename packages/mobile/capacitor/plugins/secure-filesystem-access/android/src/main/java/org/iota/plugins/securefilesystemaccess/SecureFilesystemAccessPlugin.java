@@ -51,28 +51,12 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class SecureFilesystemAccessPlugin extends Plugin {
     private String resourceType = "";
-    private String selectedPath = "";
     private String fileName = "";
 
     @PluginMethod
     public void finishBackup(PluginCall call) {
-        if (Build.VERSION.SDK_INT == 29) {
-            JSObject response = new JSObject();
-            final Mediastore implementation = new Mediastore();
-            try {
-                String finalPath = implementation.saveToDownloads(
-                        bridge.getActivity().getApplicationContext(),
-                        fileName,
-                        selectedPath
-                );
-                response.put("selected", finalPath);
-                call.setKeepAlive(false);
-                call.resolve(response);
-            } catch (Exception e) {
-                call.setKeepAlive(false);
-                call.reject(e.toString());
-            }
-        }
+        call.setKeepAlive(false);
+        call.resolve();
     }
 
     @PluginMethod
@@ -92,7 +76,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             }
 
             if (Build.VERSION.SDK_INT <= 32 && resourceType.equals("folder")) {
-                selectedPath = getContext().getCacheDir().getPath() + File.separator + fileName;
+                String selectedPath = getContext().getCacheDir().getPath() + File.separator + fileName;
                 String authority = getContext().getPackageName() + ".fileprovider";
                 File file = new File(Uri.parse(selectedPath).getPath());
                 Uri fileUrl = FileProvider.getUriForFile(getActivity(), authority, file);
@@ -158,7 +142,6 @@ public class SecureFilesystemAccessPlugin extends Plugin {
         JSObject response = new JSObject();
         Intent data = result.getData();
         int takeFlagRead = Intent.FLAG_GRANT_READ_URI_PERMISSION;
-        int takeFlagWrite = Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
         ContentResolver resolver = getContext().getContentResolver();
 
         if (resourceType.equals("file")) {
@@ -192,11 +175,6 @@ public class SecureFilesystemAccessPlugin extends Plugin {
                 response.put("selected", copiedFile.toString());
             }
 
-        } else if (resourceType.equals("folder")) {
-            if (data == null) throw new AssertionError();
-            resolver.takePersistableUriPermission(data.getData(), takeFlagWrite);
-            final Uri treeUri = data.getData();
-            response.put("selected", buildPath(treeUri.getPath()) + File.separator + fileName);
         }
         call.resolve(response);
     }
@@ -251,7 +229,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
     }
 
     @PluginMethod
-    public void saveRecoveryKit(PluginCall call) throws IOException {
+    public void saveTextFile(PluginCall call) throws IOException {
         //System.out.println("selected path :: " + data.getData().normalizeScheme());
         if (!call.getData().has("selectedPath")
                 || !call.getData().has("fromRelativePath")) {
