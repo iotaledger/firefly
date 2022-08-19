@@ -170,7 +170,7 @@ const onboardingFeatures = {
         devnet: {
             enabled: true,
             claimRewards: {
-                enabled: true,
+                enabled: false,
                 hidden: false,
                 recoveryPhrase: {
                     enabled: true,
@@ -211,7 +211,7 @@ const onboardingFeatures = {
         'private-net': {
             enabled: true,
             claimRewards: {
-                enabled: true,
+                enabled: false,
                 hidden: false,
                 recoveryPhrase: {
                     enabled: true,
