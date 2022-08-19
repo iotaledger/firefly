@@ -515,7 +515,7 @@
                 </div>
             </div>
             <div
-                style="margin-top: {$isKeyboardOpened ? '-70%' : '0px'}; opacity: {$isKeyboardOpened
+                style="margin-top: {$isKeyboardOpened ? '-60%' : '0px'}; opacity: {$isKeyboardOpened
                     ? 0
                     : 1}; transition: opacity 0.2s var(--transition-scroll); transition: margin-top 0.2s var(--transition-scroll)"
             >
@@ -558,7 +558,6 @@
                                 autofocus={false}
                             />
                         {/if}
-                        <!-- <div style="margin-top: {$isKeyboardOpened ? 60 : 0}px; transition: margin-top 0.2s"> -->
                         <Amount
                             error={amountError}
                             bind:amount
@@ -568,7 +567,6 @@
                             disabled={$isTransferring}
                             autofocus={address !== '' ? true : false}
                         />
-                        <!-- </div> -->
                     </div>
                 </div>
             </div>
@@ -716,8 +714,5 @@
             @apply -bottom-2.5;
             @apply left-0;
         }
-    }
-
-    @media screen and (min-height: 700px) {
     }
 </style>
