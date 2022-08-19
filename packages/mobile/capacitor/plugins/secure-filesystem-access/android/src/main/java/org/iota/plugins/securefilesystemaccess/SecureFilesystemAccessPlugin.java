@@ -30,6 +30,7 @@ import com.getcapacitor.annotation.PermissionCallback;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Objects;
@@ -230,46 +231,24 @@ public class SecureFilesystemAccessPlugin extends Plugin {
 
     @PluginMethod
     public void saveTextFile(PluginCall call) throws IOException {
-        //System.out.println("selected path :: " + data.getData().normalizeScheme());
-        if (!call.getData().has("selectedPath")
-                || !call.getData().has("fromRelativePath")) {
-            call.reject("selectedPath & fromRelativePath are required");
+        if (!call.getData().has("textContent")
+                || !call.getData().has("fileName")) {
+            call.reject("textContent & fileName are required");
             return;
         }
-        String selectedPath = call.getString("selectedPath");
-        String fromRelativePath = call.getString("fromRelativePath");
+        String fileName = call.getString("fileName");
+        String textContent = call.getString("textContent");
+        String selectedPath = getContext().getCacheDir().getPath() + File.separator + fileName;
 
-        assert fromRelativePath != null;
-        File srcUrl = new File(
-                Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS).toString(),
-                fromRelativePath);
-        Log.d("srcUrl", srcUrl.toString());
-        assert selectedPath != null;
-        File dstUrl = new File(selectedPath);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            try {
-                FileChannel source = new FileInputStream(srcUrl).getChannel();
-                FileChannel destination = new FileOutputStream(dstUrl).getChannel();
-                destination.transferFrom(source, 0, source.size());
-                source.close();
-                destination.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            final Mediastore implementation = new Mediastore();
-            String path = selectedPath;
-            if (path.startsWith("file:///")) {
-                path = path.substring(8);
-            }
-            Log.d("PATH!!!", path);
-            try {
-                implementation.saveToDownloads(bridge.getActivity().getApplicationContext(), fileName, path);
-            } catch (Exception e) {
-                call.reject(e.toString());
-                return;
-            }
+        try {
+            File textFile = new File(selectedPath, fileName != null ? fileName : "test");
+            File shareFile = new File(textFile, fileName != null ? fileName : "test");
+            FileWriter writer = new FileWriter(shareFile);
+            writer.append(textContent != null ? textContent : "");
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         call.resolve();
     }
