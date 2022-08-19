@@ -7,13 +7,13 @@
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
     import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
     import { openPopup, popupState } from '@lib/popup'
-    import { logout, keyboardHeight, mobile, stage } from '@lib/app'
+    import { logout, keyboardHeight, isKeyboardOpened, mobile, stage } from '@lib/app'
     import { appSettings } from '@lib/appSettings'
     import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
     import { pollMarketData } from '@lib/market'
     import { pollNetworkStatus } from '@lib/networkStatus'
-    import { allowBackButton, AppRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
+    import { allowBackButton, AppRoute, appRoute, BackButtonHeap, backButtonStore, initRouters } from '@core/router'
     import { Platforms } from '@lib/typings/platform'
     import {
         Appearance,
@@ -35,22 +35,43 @@
         Welcome,
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'
+    import { Platform } from '@lib/platform'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
     stage.set(Stage[process.env.STAGE?.toUpperCase()] ?? Stage.ALPHA)
 
     let showSplash = true
 
+    /**
+     * We use !== 'ios' since Android sometimes is not detected
+     * so as default we define Android.
+     */
+    const isAndroid = Platform.getOS() !== 'ios'
+
     $: if ($appSettings.darkMode) {
         document.body.classList.add('scheme-dark')
-        StatusBar.setStyle({ style: Style.Dark })
-        // Android status bar background color
-        // TODO: change the color based on routing
-        StatusBar.setBackgroundColor({ color: '#25395f' })
+
+        void StatusBar.setStyle({ style: Style.Dark })
+        // Android only status bar background color
+        void StatusBar.setBackgroundColor({ color: '#25395f' })
     } else {
         document.body.classList.remove('scheme-dark')
-        StatusBar.setStyle({ style: Style.Light })
-        StatusBar.setBackgroundColor({ color: '#ffffff' })
+        void StatusBar.setStyle({ style: Style.Light })
+        void StatusBar.setBackgroundColor({ color: '#ffffff' })
+    }
+
+    /**
+     * Handle Android darkmode top status bar
+     * @todo remove when implement status bar overlay
+     */
+    $: if ($appRoute !== AppRoute.Dashboard) {
+        if ($appSettings.darkMode) {
+            void StatusBar.setBackgroundColor({ color: '#1B2D4B' })
+        }
+    } else {
+        if ($appSettings.darkMode) {
+            void StatusBar.setBackgroundColor({ color: '#25395f' })
+        }
     }
 
     $: if (document.dir !== $localeDirection) {
@@ -78,12 +99,15 @@
         }
     })
 
-    void Keyboard.addListener('keyboardDidShow', (info) => {
-        // We use also didShow since in some cases the height is higher
-        $keyboardHeight = info.keyboardHeight
-    })
+    $keyboardHeight = window.innerHeight / 2
     void Keyboard.addListener('keyboardWillShow', (info) => {
+        // Listen for when the keyboard is about to be showed.
         $keyboardHeight = info.keyboardHeight
+        $isKeyboardOpened = true
+    })
+    void Keyboard.addListener('keyboardDidHide', () => {
+        // Listen for when the keyboard is about to be hidden.
+        $isKeyboardOpened = false
     })
 
     async function hideSplashScreen() {
@@ -108,7 +132,7 @@
 {#if $isLocaleLoaded && !showSplash}
     <!-- empty div to avoid auto-purge removing dark classes -->
     <div class="scheme-dark" />
-    <div class="scanner-hide">
+    <div class="scanner-hide" style="--transition-scroll: {isAndroid ? 'cubic-bezier(0, 0.3, 0, 1)' : 'ease-out'}">
         {#if $popupState.active}
             <Popup
                 type={$popupState.type}
@@ -201,7 +225,7 @@
         }
     }
     .setup-anim-aspect-ratio {
-        aspect-ratio: 19/15;
+        aspect-ratio: auto;
     }
     // QR Scanner
     .scanner-ui {
@@ -209,6 +233,7 @@
     }
     .scanner-hide {
         @apply visible;
+        --transition-scroll: cubic-bezier(0, 0.3, 0, 1);
     }
 
     button,
@@ -234,5 +259,14 @@
     button:active,
     button:focus {
         outline: 0px solid transparent;
+    }
+    /** Force Android inner divs scrolbars, iOS is not affected */
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(127, 127, 127, 0.5);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
     }
 </style>

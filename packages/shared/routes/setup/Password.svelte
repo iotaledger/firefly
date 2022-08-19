@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
-    import { mobile, strongholdPassword } from 'shared/lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight, strongholdPassword } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
@@ -78,7 +78,12 @@
     <div slot="title">
         <Text type="h2">{locale('views.password.title')}</Text>
     </div>
-    <div slot="leftpane__content">
+    <div
+        slot="leftpane__content"
+        style="margin-bottom: {$mobile && $isKeyboardOpened
+            ? $keyboardHeight
+            : 0}px; transition: margin-bottom 0.2s var(--transition-scroll)"
+    >
         <form on:submit|preventDefault={handleContinueClick} id="password-form">
             <Text type="p" classes="mb-4" secondary>{locale('views.password.body1')}</Text>
             <Text type="p" classes="mb-10" secondary>{locale('views.password.body2')}</Text>
@@ -105,18 +110,23 @@
             />
         </form>
     </div>
-    <div slot="leftpane__action">
+    <div
+        slot="leftpane__action"
+        style="padding-bottom: {$mobile && $isKeyboardOpened
+            ? $keyboardHeight
+            : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+    >
         <Button type="submit" form="password-form" classes="w-full" disabled={!password || !confirmedPassword || busy}>
             {locale('actions.savePassword')}
         </Button>
     </div>
     <div
         slot="rightpane"
-        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-yellow dark:bg-gray-900'}"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden' : 'bg-pastel-yellow dark:bg-gray-900'}"
+        style="margin-top: {$mobile && $isKeyboardOpened
+            ? -$keyboardHeight
+            : 0}px; transition: margin-top 0.2s var(--transition-scroll)"
     >
-        <Animation
-            classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
-            animation="password-desktop"
-        />
+        <Animation classes="setup-anim-aspect-ratio {$mobile ? 'transform ' : ''}" animation="password-desktop" />
     </div>
 </OnboardingLayout>
