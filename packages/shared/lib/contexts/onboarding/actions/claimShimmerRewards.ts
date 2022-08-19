@@ -10,7 +10,7 @@ import { sleep } from '@lib/utils'
 import { ShimmerClaimingAccountState } from '../enums'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { IShimmerClaimingAccount } from '../interfaces'
-import { onboardingProfile, updateShimmerClaimingAccounts } from '../stores'
+import { onboardingProfile, updateShimmerClaimingAccount } from '../stores'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
@@ -45,7 +45,7 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
                 false,
                 ShimmerClaimingAccountState.Failed
             )
-            updateShimmerClaimingAccounts(failedShimmerClaimingAccount)
+            updateShimmerClaimingAccount(failedShimmerClaimingAccount)
             showAppNotification({
                 type: 'error',
                 alert: true,
@@ -74,5 +74,5 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
         null,
         claimingTransaction
     )
-    updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)
+    updateShimmerClaimingAccount(syncedShimmerClaimingAccount)
 }

@@ -5,7 +5,7 @@ import { api, profileManager } from '@core/profile-manager'
 
 import { MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
-import { shimmerClaimingProfileManager, updateShimmerClaimingAccounts } from '../stores'
+import { shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 
 export async function findShimmerRewardsForAccount(account: IAccount): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
@@ -23,5 +23,5 @@ export async function findShimmerRewardsForAccount(account: IAccount): Promise<v
         boundTwinAccount,
         true
     )
-    updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)
+    updateShimmerClaimingAccount(syncedShimmerClaimingAccount)
 }
