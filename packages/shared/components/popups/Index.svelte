@@ -49,6 +49,7 @@
     import ConfirmCloseApp from './ConfirmCloseApp.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
+    import NodeConfigOptions from './NodeConfigOptions.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
 
@@ -138,6 +139,7 @@
         governanceManager: GovernanceManager,
         success: Success,
         singleAccountGuide: SingleAccountGuide,
+        nodeConfigOptions: NodeConfigOptions,
     }
 
     const onKey = (e) => {
