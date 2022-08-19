@@ -102,9 +102,9 @@ export const CapacitorApi: IPlatform = {
         return
     },
 
-    exportTransactionHistory: async (fileName, textContent) => {
+    exportTransactionHistory: async (fileName, content) => {
         await SecureFilesystemAccess.saveTextFile({
-            textContent,
+            textContent: content,
             fileName,
         })
         return ''
@@ -120,7 +120,13 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise<boolean>}
      */
-    exportMigrationLog: (sourcePath, defaultFileName) => new Promise<boolean>((resolve, reject) => {}),
+    exportMigrationLog: async (sourcePath, defaultFileName) => {
+        await SecureFilesystemAccess.saveTextFile({
+            textContent: sourcePath,
+            fileName: defaultFileName,
+        })
+        return true
+    },
 
     /**
      * Exports ledger migration log
