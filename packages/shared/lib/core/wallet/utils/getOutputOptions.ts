@@ -14,7 +14,7 @@ export function getOutputOptions(
     giftStorageDeposit?: boolean
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
-    const nativeTokenId = asset?.id !== get(selectedAccountAssets).baseCoin.id ? asset?.id : undefined
+    const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
     return <OutputOptions>{
         recipientAddress,
         amount: nativeTokenId ? '0' : String(rawAmount),

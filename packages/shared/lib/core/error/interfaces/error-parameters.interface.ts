@@ -8,4 +8,5 @@ export interface IErrorParameters {
     logToConsole?: boolean
     saveToErrorLog?: boolean
     showNotification?: boolean
+    originalError?: Error | unknown
 }
