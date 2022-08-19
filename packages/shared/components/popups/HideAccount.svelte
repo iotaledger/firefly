@@ -65,7 +65,7 @@
     }
 </script>
 
-<div class="flex flex-col {$mobile ? 'safe-area px-2 pt-0 items-center' : 'px-6 py-10'}">
+<div class="flex flex-col {$mobile ? 'safe-area px-2 pt-0 -mb-2 items-center' : 'px-6 py-10'}">
     {#if canDelete}
         <div class={$mobile ? 'mb-6 -mt-4' : 'mb-5'}>
             <Text type="h4" classes={$mobile ? 'classes="flex w-full justify-center' : ''}>
@@ -138,6 +138,6 @@
 
 <style type="text/scss">
     .safe-area {
-        margin-bottom: calc(env(safe-area-inset-top) * 1px);
+        padding-bottom: calc(env(safe-area-inset-bottom) / 2 * 1px);
     }
 </style>
