@@ -1,6 +1,6 @@
-import { getStorageDirectoryOfProfile, IPersistedProfile } from '@core/profile'
-import { ProfileManagerOptions } from '@core/profile-manager'
 import { COIN_TYPE, getDefaultClientOptions } from '@core/network'
+import { getStorageDirectoryOfProfile, IPersistedProfile } from '@core/profile'
+import { getSecretManagerPath, ProfileManagerOptions } from '@core/profile-manager'
 
 export async function buildProfileManagerOptionsFromProfileData(
     profileData: Partial<IPersistedProfile>
@@ -13,7 +13,7 @@ export async function buildProfileManagerOptionsFromProfileData(
         ? getDefaultClientOptions(networkProtocol, profileData?.networkType)
         : profileData?.clientOptions
     const secretManager = {
-        Stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
+        Stronghold: { snapshotPath: getSecretManagerPath(storagePath) },
     }
 
     return {
