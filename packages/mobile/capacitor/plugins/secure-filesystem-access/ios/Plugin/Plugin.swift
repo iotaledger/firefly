@@ -120,18 +120,9 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         
         let fm = FileManager.default
         let cacheFolder = fm.urls(for: .cachesDirectory, in: .userDomainMask).first!
-        let file = cacheFolder.appendingPathComponent(fileName, isDirectory: true)
-        guard let data = textContent.data(using: String.Encoding.utf8) else { return }
-
-        if FileManager.default.fileExists(atPath: file.path) {
-            if let fileHandle = try? FileHandle(forWritingTo: file) {
-                fileHandle.seekToEndOfFile()
-                fileHandle.write(data)
-                fileHandle.closeFile()
-            }
-        } else {
-            try? data.write(to: file, options: .atomicWrite)
-        }
+        let file = cacheFolder.appendingPathComponent(fileName, isDirectory: false)
+        guard let data = textContent.data(using: .utf8) else { return }
+        try? data.write(to: file, options: .atomicWrite)
         
         let srcUrl = Capacitor.URL(fileURLWithPath: file.path, isDirectory: false)
         var filesToShare = [Any]()
