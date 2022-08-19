@@ -111,7 +111,7 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
     }
     
     @objc func saveTextFile(_ call: CAPPluginCall) {
-        guard let selectedPath = call.getString("textContent") else {
+        guard let textContent = call.getString("textContent") else {
             return call.reject("textContent is required")
         }
         guard let fromRelativePath = call.getString("fileName") else {
@@ -120,12 +120,19 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         
         let fm = FileManager.default
         let cacheFolder = fm.urls(for: .cachesDirectory, in: .userDomainMask).first!
-        let path = cacheFolder.appendingPathComponent(fileName, isDirectory: true).path
+        let file = cacheFolder.appendingPathComponent(fileName, isDirectory: true)
+        guard let data = textContent.data(using: String.Encoding.utf8) else { return }
+
+        if FileManager.default.fileExists(atPath: file.path) {
+            if let fileHandle = try? FileHandle(forWritingTo: file) {
+                fileHandle.seekToEndOfFile()
+                fileHandle.write(data)
+                fileHandle.closeFile()
+            }
+        } else {
+            try? data.write(to: file, options: .atomicWrite)
+        }
         
-        let _url = (self.bridge?.config.appLocation.path)! + fromRelativePath // "/assets/docs/recovery-kit.pdf"
-        let srcUrl = Capacitor.URL(fileURLWithPath: _url, isDirectory: false)
-        let dstUrl = Capacitor.URL(fileURLWithPath: selectedPath, isDirectory: true)
-        try? FileManager.default.copyItem(at: srcUrl, to: dstUrl)
         call.resolve()
     }
 }
