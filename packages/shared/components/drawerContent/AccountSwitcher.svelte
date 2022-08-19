@@ -1,12 +1,11 @@
 <script lang="typescript">
-    import { HR, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { resetAccountRouter, accountRouter, AccountRoute, resetWalletRoute } from '@core/router'
+    import { AccountRoute, accountRouter, resetAccountRouter, resetWalletRoute } from '@core/router'
     import { mobile } from '@lib/app'
     import { showAppNotification } from '@lib/notifications'
     import { participationAction } from '@lib/participation/stores'
     import { Platform } from '@lib/platform'
-    import { activeProfile, updateProfile, getAccountColor } from '@lib/profile'
+    import { activeProfile, getAccountColor, updateProfile } from '@lib/profile'
     import { WalletAccount } from '@lib/typings/wallet'
     import {
         isSyncing,
@@ -16,21 +15,27 @@
         setSelectedAccount,
         wallet,
     } from '@lib/wallet'
+    import { HR, Icon, Text } from 'shared/components'
+    import { openPopup } from 'shared/lib/popup'
+    import { asyncRemoveWalletAccount } from 'shared/lib/wallet'
+    import { getContext } from 'svelte'
+    import { get, Readable } from 'svelte/store'
 
-    export let accounts: WalletAccount[] = []
     export let handleCreateAccountPress = (): void => {}
     export let onAccountSelection = (): void => {}
 
-    const hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
+    const { accounts, balanceOverview } = $wallet
 
-    const hidden = hiddenAccounts.includes($selectedAccountStore?.id)
-    const canDelete =
-        $selectedAccountStore?.index === accounts.length - 1 &&
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
+
+    $: hiddenAccounts = $activeProfile?.hiddenAccounts ?? []
+    $: hidden = hiddenAccounts.includes($selectedAccountStore?.id)
+    $: canDelete =
+        $selectedAccountStore?.index === $accounts?.length - 1 &&
         $selectedAccountStore?.rawIotaBalance === 0 &&
-        $selectedAccountStore?.messages.length === 0
+        $selectedAccountStore?.messages?.length === 0
 
     const isSelectedAccount = (accountId) => accountId !== $selectedAccountStore?.id
-    const { balanceOverview } = $wallet
 
     let toggleEdit = false
 
@@ -38,32 +43,38 @@
     // before the last call is finished.
     let isActionSheetCalled = false
 
-    const menuActions = [
-        {
-            title: localize('actions.customizeAcount'),
-            action: handleCustomiseAccountClick,
-            style: 'DEFAULT',
-        },
-        {
-            title: localize('actions.viewAddressHistory'),
-            action: handleViewAddressHistoryClick,
-            style: 'DEFAULT',
-        },
-        // ToDo: Has to be enabled again, when the export works
-        // {
-        //     title: localize('actions.exportTransactionHistory'),
-        //     action: handleExportTransactionHistoryClick,
-        //     style: 'DEFAULT',
-        // },
-        {
-            title: localize(
-                canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount'
-            ),
-            action: () =>
-                canDelete ? handleDeleteAccountClick() : hidden ? handleShowAccountClick() : handleHideAccountClick(),
-            style: canDelete ? 'DESTRUCTIVE' : 'DEFAULT',
-        },
-    ]
+    let menuActions = []
+    $: (canDelete, hidden),
+        (menuActions = [
+            {
+                title: localize('actions.customizeAcount'),
+                action: handleCustomiseAccountClick,
+                style: 'DEFAULT',
+            },
+            {
+                title: localize('actions.viewAddressHistory'),
+                action: handleViewAddressHistoryClick,
+                style: 'DEFAULT',
+            },
+            // ToDo: Has to be enabled again, when the export works
+            // {
+            //     title: localize('actions.exportTransactionHistory'),
+            //     action: handleExportTransactionHistoryClick,
+            //     style: 'DEFAULT',
+            // },
+            {
+                title: localize(
+                    canDelete ? 'actions.deleteAccount' : hidden ? 'actions.showAccount' : 'actions.hideAccount'
+                ),
+                action: () =>
+                    canDelete
+                        ? handleDeleteAccountClick()
+                        : hidden
+                        ? handleShowAccountClick()
+                        : handleHideAccountClick(),
+                style: canDelete ? 'DESTRUCTIVE' : 'DEFAULT',
+            },
+        ])
 
     async function handleMenuClick() {
         if ($mobile === false) {
@@ -80,7 +91,7 @@
         const index = await Platform.showActionSheet({
             title: localize('general.walletActions'),
             options: [
-                ...menuActions.map((action) => ({
+                ...menuActions?.map((action) => ({
                     title: action.title,
                     style: action.style as 'DESTRUCTIVE' | 'DEFAULT',
                 })),
@@ -89,7 +100,7 @@
         })
 
         isActionSheetCalled = false
-        menuActions[index].action()
+        menuActions?.[index].action()
     }
 
     function handleCustomiseAccountClick() {
@@ -97,19 +108,49 @@
     }
 
     function handleViewAddressHistoryClick() {
-        $accountRouter.goTo(AccountRoute.AddressHistory)
+        openPopup({ type: 'addressHistory', props: { account: selectedAccountStore } })
     }
 
-    function handleExportTransactionHistoryClick() {
-        $accountRouter.goTo(AccountRoute.ExportTransactionHistory)
-    }
+    const handleDeleteAccountClick = () => {
+        openPopup({
+            type: 'deleteAccount',
+            props: {
+                account: selectedAccountStore,
+                hasMultipleAccounts: $viewableAccounts.length > 1,
+                deleteAccount: async (id: string) => {
+                    await asyncRemoveWalletAccount(get(selectedAccountStore).id)
 
-    function handleDeleteAccountClick() {
-        $accountRouter.goTo(AccountRoute.DeleteAccount)
+                    if (!hiddenAccounts.includes(id)) {
+                        hiddenAccounts.push(id)
+                        updateProfile('hiddenAccounts', hiddenAccounts)
+                    }
+                    setSelectedAccount(get(viewableAccounts)?.[0]?.id ?? null)
+                    resetWalletRoute()
+                },
+            },
+        })
     }
 
     function handleHideAccountClick() {
-        $accountRouter.goTo(AccountRoute.HideAccount)
+        openPopup({
+            type: 'hideAccount',
+            props: {
+                account: selectedAccountStore,
+                hasMultipleAccounts: $viewableAccounts.length > 1,
+                hideAccount: (id: string) => {
+                    if (!hiddenAccounts.includes(id)) {
+                        hiddenAccounts.push(id)
+                        updateProfile('hiddenAccounts', hiddenAccounts)
+                    }
+                    resetWalletRoute()
+                    const nextSelectedAccount =
+                        $viewableAccounts[$selectedAccountStore?.index] ??
+                        $viewableAccounts[$viewableAccounts.length - 1]
+                    setSelectedAccount(nextSelectedAccount?.id)
+                },
+            },
+        })
+        $accountRouter.goTo(AccountRoute.Init)
     }
 
     function handleShowAccountClick() {
@@ -158,7 +199,7 @@
     </button>
 </div>
 <div class="accounts flex flex-col space-y-1 overflow-auto mb-5">
-    {#each accounts as account}
+    {#each $viewableAccounts as account}
         <div class="flex w-full justify-between space-y-3">
             <button
                 on:click={() => handleAccountClick(account.id)}
