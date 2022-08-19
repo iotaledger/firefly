@@ -238,7 +238,7 @@
                                 highlighted
                                 classes={$mobile &&
                                     node.isPrimary &&
-                                    'absolute right-5 p-1 -mt-1 rounded-lg bg-pastel-green'}
+                                    'absolute right-5 p-1 -mt-1 rounded-lg bg-blue-500'}
                             >
                                 {node.isPrimary && !$mobile
                                     ? localize('views.settings.configureNodeList.primaryNode')
