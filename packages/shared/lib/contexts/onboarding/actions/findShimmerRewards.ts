@@ -41,8 +41,6 @@ export async function findShimmerRewards(): Promise<void> {
         const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
         const wereRewardsFound = updatedTotalUnclaimedShimmerRewards > totalUnclaimedShimmerRewards
         if (wereRewardsFound) {
-            // notify user
-            // -------
             const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
             const foundRewardsAmountFormatted = formatTokenAmountBestMatch(
                 foundRewardsAmount,
@@ -54,8 +52,6 @@ export async function findShimmerRewards(): Promise<void> {
                 message: `Successfully found ${foundRewardsAmountFormatted}`,
             })
 
-            // update onboarding profile
-            // -------
             const boundTwinAccounts = (
                 await Promise.all(
                     boundAccounts.map((boundAccount) =>
@@ -68,11 +64,8 @@ export async function findShimmerRewards(): Promise<void> {
                 updateShimmerClaimingAccount(shimmerClaimingAccount)
             }
 
-            // reset reward finding parameters
-            // -------
             totalUnclaimedShimmerRewards = updatedTotalUnclaimedShimmerRewards
 
-            // reset gap limits
             accountGapLimit = accountGapLimitIncrement
             addressGapLimit = addressGapLimitIncrement
 
