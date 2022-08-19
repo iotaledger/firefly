@@ -211,14 +211,15 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             return;
         }
         String fileName = call.getString("fileName");
+        fileName = fileName != null ? fileName : "test";
         String textContent = call.getString("textContent");
+        textContent = textContent != null ? textContent : "test";
         String selectedPath = getContext().getCacheDir().getPath() + File.separator + fileName;
 
         try {
-            File textFile = new File(selectedPath, fileName != null ? fileName : "test");
-            File shareFile = new File(textFile, fileName != null ? fileName : "test");
-            FileWriter writer = new FileWriter(shareFile);
-            writer.append(textContent != null ? textContent : "");
+            File textFile = new File(selectedPath);
+            FileWriter writer = new FileWriter(textFile);
+            writer.append(textContent);
             writer.flush();
             writer.close();
 
@@ -230,7 +231,7 @@ public class SecureFilesystemAccessPlugin extends Plugin {
             shareIntent.setData(fileUrl);
             shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             getContext().startActivity(Intent.createChooser(shareIntent, null));
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
