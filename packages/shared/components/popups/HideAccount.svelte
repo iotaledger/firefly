@@ -3,7 +3,7 @@
     import { accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
     import { Unit } from '@iota/unit-converter'
-    import { mobile } from '@lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight } from '@lib/app'
     import { formatUnitPrecision } from '@lib/units'
     import { Button, Password, Text } from 'shared/components'
     import { sendParams } from 'shared/lib/app'
@@ -65,7 +65,12 @@
     }
 </script>
 
-<div class="flex flex-col {$mobile ? 'safe-area px-2 pt-0 -mb-2 items-center' : 'px-6 py-10'}">
+<div
+    class="flex flex-col {$mobile ? 'safe-area px-2 pt-0 -mb-2 items-center' : 'px-6 py-10'}"
+    style="padding-bottom: {$mobile && $isKeyboardOpened
+        ? $keyboardHeight
+        : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+>
     {#if canDelete}
         <div class={$mobile ? 'mb-6 -mt-4' : 'mb-5'}>
             <Text type="h4" classes={$mobile ? 'classes="flex w-full justify-center' : ''}>

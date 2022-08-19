@@ -121,6 +121,6 @@
 
 <style>
     .safe-area {
-        margin-bottom: calc(env(safe-area-inset-bottom) + 10px);
+        margin-bottom: calc(env(safe-area-inset-bottom) + 20px);
     }
 </style>
