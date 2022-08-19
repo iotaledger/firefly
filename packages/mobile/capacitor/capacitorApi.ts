@@ -102,7 +102,13 @@ export const CapacitorApi: IPlatform = {
         return
     },
 
-    exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
+    exportTransactionHistory: async (fileName, content) => {
+        void (await SecureFilesystemAccess.saveTextFile({
+            fileName,
+            textContent: content,
+        }))
+        return null
+    },
 
     /**
      * Exports migration log
@@ -316,10 +322,10 @@ export const CapacitorApi: IPlatform = {
         if (os === 'ios') {
             void (await SecureFilesystemAccess.allowAccess())
         }
-        void (await SecureFilesystemAccess.saveRecoveryKit({
-            selectedPath: `${selected}/recovery-kit.pdf`,
-            fromRelativePath: '/assets/docs/recovery-kit.pdf',
-        }))
+        // void (await SecureFilesystemAccess.saveRecoveryKit({
+        //     selectedPath: `${selected}/recovery-kit.pdf`,
+        //     fromRelativePath: '/assets/docs/recovery-kit.pdf',
+        // }))
         if (os === 'ios') {
             void SecureFilesystemAccess.revokeAccess()
         }
