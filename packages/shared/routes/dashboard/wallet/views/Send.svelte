@@ -515,7 +515,7 @@
                 </div>
             </div>
             <div
-                style="margin-top: {$isKeyboardOpened ? '-60%' : '0px'}; opacity: {$isKeyboardOpened
+                style="margin-top: {$isKeyboardOpened ? '-230px' : '0px'}; opacity: {$isKeyboardOpened
                     ? 0
                     : 1}; transition: opacity 0.2s var(--transition-scroll); transition: margin-top 0.2s var(--transition-scroll)"
             >
