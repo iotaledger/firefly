@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { Button, Password, Text } from 'shared/components'
-    import { logout } from 'shared/lib/app'
+    import { logout, mobile, keyboardHeight, isKeyboardOpened } from '@lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
@@ -94,7 +94,7 @@
     }
 </script>
 
-<Text type="h4" classes="mb-5">{locale('popups.deleteProfile.title')}</Text>
+<Text type="h4" classes="mb-5 {$mobile && 'text-center -mt-4'}">{locale('popups.deleteProfile.title')}</Text>
 <div class="w-full h-full mb-5">
     <Text classes="mb-3">{locale('popups.deleteProfile.confirmation')}</Text>
     {#if $isSoftwareProfile}
@@ -112,7 +112,12 @@
         />
     {/if}
 </div>
-<div class="flex flex-row justify-between space-x-4 w-full md:px-8">
+<div
+    class="flex flex-row justify-between space-x-4 w-full md:px-8"
+    style="padding-bottom: {$mobile && $isKeyboardOpened
+        ? $keyboardHeight
+        : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+>
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.no')}</Button>
     <Button
         disabled={(!password && $isSoftwareProfile) || isBusy}
