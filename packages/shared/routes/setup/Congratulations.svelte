@@ -87,22 +87,36 @@
                 }
             }
             const _exportMigrationLog = () => {
-                getProfileDataPath($activeProfile.id)
-                    .then((source) =>
-                        $walletSetupType === SetupType.TrinityLedger
-                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.id}-${LOG_FILE_NAME}`)
-                            : Platform.exportMigrationLog(
-                                  `${source}/${LOG_FILE_NAME}`,
-                                  `${$activeProfile.id}-${LOG_FILE_NAME}`
-                              )
-                    )
-                    .then((result) => {
-                        if (result) {
-                            logExported = true
-                            _continue()
-                        }
-                    })
-                    .catch(console.error)
+                if ($mobile) {
+                    Platform.exportMigrationLog(`${$migrationLog}`, `${$activeProfile.id}-${LOG_FILE_NAME}`)
+                        .then((result) => {
+                            if (result) {
+                                logExported = true
+                                _continue()
+                            }
+                        })
+                        .catch(console.error)
+                } else {
+                    getProfileDataPath($activeProfile.id)
+                        .then((source) =>
+                            $walletSetupType === SetupType.TrinityLedger
+                                ? Platform.exportLedgerMigrationLog(
+                                      $migrationLog,
+                                      `${$activeProfile.id}-${LOG_FILE_NAME}`
+                                  )
+                                : Platform.exportMigrationLog(
+                                      `${source}/${LOG_FILE_NAME}`,
+                                      `${$activeProfile.id}-${LOG_FILE_NAME}`
+                                  )
+                        )
+                        .then((result) => {
+                            if (result) {
+                                logExported = true
+                                _continue()
+                            }
+                        })
+                        .catch(console.error)
+                }
             }
             if (logExported) {
                 _continue()

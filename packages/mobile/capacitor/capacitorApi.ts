@@ -115,7 +115,7 @@ export const CapacitorApi: IPlatform = {
      *
      * @method exportMigrationLog
      *
-     * @param {string} sourcePath
+     * @param {string} sourcePath - needs to be passed the text content
      * @param {string} defaultFileName
      *
      * @returns {Promise<boolean>}
