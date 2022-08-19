@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { appSettings } from '@core/app'
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Spinner, Text } from 'shared/components'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
     export let primaryText = ''
@@ -9,6 +9,7 @@
     export let iconColor = 'blue-500'
     export let iconHeight: string
     export let iconWidth: string
+    export let busy = false
     export let disabled = false
     export let hidden = false
     export let classes = ''
@@ -68,7 +69,11 @@
         </div>
         {#if secondaryIcon && !disabled}
             <div class="col-span-1 col-end-13 h-full flex justify-center items-center justify-items-center">
-                <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
+                {#if busy}
+                    <Spinner busy />
+                {:else}
+                    <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
+                {/if}
             </div>
         {/if}
     </div>
