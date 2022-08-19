@@ -13,6 +13,7 @@
     import { Locale } from '@core/i18n'
     import { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
     import { Network } from 'shared/lib/typings/network'
+    import { mobile, isKeyboardOpened, keyboardHeight } from 'shared/lib/app'
 
     export let locale: Locale
 
@@ -145,7 +146,9 @@
         node={{ url: cleanNodeUrl(nodeUrl), auth: optNodeAuth, isPrimary: true }}
     />
 {:else}
-    <Text type="h4" classes="mb-6">{locale(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text>
+    <Text type="h4" classes="mb-6 {$mobile && 'text-center -mt-4'}"
+        >{locale(`popups.node.title${isAddingNode ? 'Add' : 'Update'}`)}</Text
+    >
     <form id="node-config-form" class="w-full h-full">
         <Input
             bind:value={nodeUrl}
@@ -183,7 +186,12 @@
             classes="mt-4 mb-8"
         />
     </form>
-    <div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
+    <div
+        class="flex flex-row justify-between space-x-4 w-full md:px-8 "
+        style="padding-bottom: {$mobile && $isKeyboardOpened
+            ? $keyboardHeight - 20
+            : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+    >
         <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>
             {locale('actions.cancel')}
         </Button>

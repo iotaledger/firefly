@@ -2,13 +2,12 @@
     import { backButtonStore } from '@core/router'
     import { activeProfile, getAccountColor } from '@lib/profile'
     import { AccountColor } from '@lib/typings/color'
-    import { createAccountCallback, WalletAccount } from '@lib/typings/wallet'
+    import { createAccountCallback } from '@lib/typings/wallet'
     import { selectedAccountStore } from '@lib/wallet'
     import { Drawer, Icon, Text } from 'shared/components'
     import { AccountSwitcher } from 'shared/components/drawerContent'
     import CreateAccount from 'shared/components/popups/CreateAccount.svelte'
 
-    export let accounts: WalletAccount[] = []
     export let onCreateAccount: createAccountCallback
 
     enum DrawerRoutes {
@@ -48,12 +47,17 @@
     function setDrawerRoute(route: DrawerRoutes): void {
         drawerRoute = route
     }
+
+    function onDrawerClose(): void {
+        setDrawerRoute(null) // needed to remount the child components and reset its internal variables (eg: edit/cancel state)
+        isDrawerOpened = false
+    }
 </script>
 
 <div class="flex flex-auto flex-col">
     <button
         on:click={toggleAccountSwitcher}
-        class="safe-area-top mt-3 py-2 px-2 absolute rounded-lg flex flex-row justify-center items-center space-x-2 
+        class="safe-area-top py-2 px-2 absolute rounded-lg flex flex-row justify-center items-center space-x-2 
             {isDrawerOpened ? 'bg-gray-100 dark:bg-gray-900' : ''}
             "
         style="transform: translateX({switcherButtonTranslateX}px);"
@@ -65,13 +69,12 @@
             <Icon icon="chevron-down" height="18" width="18" classes="text-gray-800 dark:text-white" />
         </div>
     </button>
-    <Drawer bind:this={drawer} opened={isDrawerOpened} on:close={() => (isDrawerOpened = false)}>
+    <Drawer bind:this={drawer} opened={isDrawerOpened} on:close={onDrawerClose}>
         <div class="flex flex-col w-full pt-7 p-5 safe-area-bottom">
             {#if drawerRoute === DrawerRoutes.Create}
                 <CreateAccount onCreate={onCreateAccount} onCancel={() => drawer.close()} />
             {:else if drawerRoute === DrawerRoutes.Init}
                 <AccountSwitcher
-                    {accounts}
                     {onCreateAccount}
                     handleCreateAccountPress={() => setDrawerRoute(DrawerRoutes.Create)}
                     onAccountSelection={() => drawer.close()}

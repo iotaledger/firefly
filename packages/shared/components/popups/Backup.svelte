@@ -3,11 +3,12 @@
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
     import { getBackupWarningColor } from 'shared/lib/helpers'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from 'shared/lib/popup'
     import { updateProfile } from 'shared/lib/profile'
     import { getDefaultStrongholdName } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
     import { formatDate, Locale } from '@core/i18n'
+    import { showAppNotification } from '@lib/notifications'
 
     export let locale: Locale
 
@@ -18,12 +19,14 @@
     let password = ''
     let busy = false
     let error = ''
+    let exportBusy = false
+    let exportMessage = ''
 
     function handleCancelClick() {
         closePopup()
     }
 
-    function handleBackupClick() {
+    function handleBackupClick(callback?: (cancelled: boolean, err?: string) => void | undefined) {
         error = ''
         api.setStrongholdPassword(password, {
             onSuccess() {
@@ -37,11 +40,13 @@
                                     Platform.saveStrongholdBackup({ allowAccess: false })
                                     updateProfile('lastStrongholdBackupTime', new Date())
                                     busy = false
+                                    callback(false)
                                     closePopup()
                                 },
                                 onError(err) {
                                     busy = false
                                     error = locale(err.error)
+                                    callback(false, err.error)
                                 },
                             })
                         } else {
@@ -58,6 +63,52 @@
                 error = locale(err.error)
             },
         })
+    }
+
+    function handleExportClick() {
+        reset()
+
+        const _callback = (cancelled, err) => {
+            setTimeout(
+                () => {
+                    exportMessage = ''
+                },
+                cancelled ? 0 : 2000
+            )
+            exportBusy = false
+            if (!cancelled) {
+                if (err) {
+                    exportMessage = locale('general.exportingStrongholdFailed')
+                    showAppNotification({
+                        type: 'error',
+                        message: locale(err),
+                    })
+                } else {
+                    exportMessage = locale('general.exportingStrongholdSuccess')
+                }
+            }
+        }
+
+        openPopup({
+            type: 'password',
+            hideClose: true,
+            preventClose: true,
+            overflow: true,
+            props: {
+                onSuccess: (_password) => {
+                    exportBusy = true
+                    exportMessage = locale('general.exportingStronghold')
+                    password = _password
+                    handleBackupClick(_callback)
+                },
+                returnPassword: true,
+                subtitle: locale('popups.password.backup'),
+            },
+        })
+    }
+    function reset() {
+        exportBusy = false
+        exportMessage = ''
     }
 </script>
 
@@ -106,37 +157,29 @@
             <Text smaller secondary>{locale('popups.backup.backupWarning')}</Text>
         {/if}
     </div>
-    <div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
-        <form
-            id="password-popup-form"
-            class="flex justify-center w-full flex-row flex-wrap"
-            on:submit|preventDefault={handleBackupClick}
-        >
-            <Password
-                classes="w-full {$mobile ? 'mb-8' : 'mb-5'}"
-                bind:value={password}
-                showRevealToggle
-                {locale}
-                disabled={busy}
-                placeholder={locale('general.password')}
-                autofocus={!$mobile}
-                {error}
-            />
-            <div class="flex flex-row justify-between w-full space-x-4">
-                {#if $mobile}
-                    <Button
-                        classes="w-full"
-                        type="submit"
-                        form="password-popup-form"
-                        disabled={!password || password.length === 0 || busy}
-                    >
-                        {#if busy}
-                            <Spinner busy={true} message={locale('popups.backup.saving')} classes="justify-center" />
-                        {:else}
-                            {locale('actions.saveBackup')}
-                        {/if}
-                    </Button>
-                {:else}
+    {#if $mobile}
+        <Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={exportBusy}>
+            {locale('actions.export')}
+        </Button>
+        <Spinner busy={exportBusy} message={exportMessage} classes="ml-2" />
+    {:else}
+        <div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
+            <form
+                id="password-popup-form"
+                class="flex justify-center w-full flex-row flex-wrap"
+                on:submit|preventDefault={() => handleBackupClick()}
+            >
+                <Password
+                    classes="w-full mb-5}"
+                    bind:value={password}
+                    showRevealToggle
+                    {locale}
+                    disabled={busy}
+                    placeholder={locale('general.password')}
+                    autofocus={false}
+                    {error}
+                />
+                <div class="flex flex-row justify-between w-full space-x-4">
                     <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={busy}
                         >{locale('actions.cancel')}</Button
                     >
@@ -152,10 +195,10 @@
                             {locale('actions.saveBackup')}
                         {/if}
                     </Button>
-                {/if}
-            </div>
-        </form>
-    </div>
+                </div>
+            </form>
+        </div>
+    {/if}
 </div>
 
 <style type="text/scss">

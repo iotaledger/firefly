@@ -11,7 +11,13 @@
     import { createEventDispatcher, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { get } from 'svelte/store'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTos } from '@lib/app'
+    import {
+        mobile,
+        isKeyboardOpened,
+        keyboardHeight,
+        needsToAcceptLatestPrivacyPolicy,
+        needsToAcceptLatestTos,
+    } from '@lib/app'
 
     export let locale: Locale
 
@@ -167,8 +173,13 @@
             <Text type="h5">{locale('general.profiles')}</Text>
         </div>
     </button>
-    <div class="pt-40 pb-16 flex w-full h-full flex-col items-center justify-between">
-        <div class="{$mobile ? 'w-full' : 'w-96'} flex flex-col flex-wrap items-center mb-20">
+    <div class="flex w-full h-full flex-col items-center {$mobile ? 'justify-end' : 'justify-between pt-40 pb-16 '}">
+        <div
+            class="flex flex-col items-center {$mobile ? 'w-full' : 'w-96 flex-wrap mb-20'}"
+            style="padding-bottom: {$mobile
+                ? $keyboardHeight + 15
+                : 0}px; ; transition: padding 0.2s var(--transition-scroll)"
+        >
             <Profile name={$activeProfile?.name} bgColor="blue" />
             <Pin
                 bind:this={pinRef}
@@ -176,7 +187,7 @@
                 classes="mt-10 {shake && 'animate-shake'}"
                 on:submit={onSubmit}
                 disabled={hasReachedMaxAttempts || isBusy}
-                autofocus={!$mobile}
+                autofocus
             />
             <Text type="p" bold classes="mt-4 text-center">
                 {attempts > 0

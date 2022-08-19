@@ -16,9 +16,6 @@
 
     export let onBackClick = (): void => {}
 
-    let mobileTopContentHeight,
-        leftpaneContentHeight = 0
-
     $: isWelcome = $mobile && AppRoute.Welcome === $appRoute
 
     $: $allowBackButton = allowBack
@@ -39,14 +36,14 @@
 {#if $mobile}
     <div
         data-label="mobile-onboarding-layout"
-        class="relative h-full flex flex-col justify-between {isWelcome ? '' : 'px-5 '}"
+        class="relative h-full flex flex-col justify-between {isWelcome ? '' : ' '}"
     >
-        <header class="relative w-full flex justify-center px-8 py-3 {isWelcome && 'hidden'}">
-            <Text type="h4" classes="text-center">
+        <header class="relative w-full flex justify-center px-8 pt-3 {isWelcome && 'hidden'}">
+            <Text type="h4" classes="text-center -mb-3 px-5">
                 <slot name="title" />
             </Text>
             {#if allowBack}
-                <button on:click={onBackClick} class="absolute top-3 left-0" disabled={busy}>
+                <button on:click={onBackClick} class="absolute top-3 left-0 pl-5" disabled={busy}>
                     <Icon
                         icon="arrow-left"
                         classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'}
@@ -55,19 +52,18 @@
             {/if}
         </header>
         <div
-            bind:clientHeight={mobileTopContentHeight}
             data-label="mobile-top-content"
             class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1  {!isWelcome &&
                 'pt-5'}"
         >
-            <div class="h-full">
+            <div class="flex-auto h-3">
                 <slot name="rightpane" />
             </div>
-            <div bind:clientHeight={leftpaneContentHeight}>
+            <div class="overflow-auto flex justify-between px-5">
                 <slot name="leftpane__content" />
             </div>
         </div>
-        <footer class="py-3">
+        <footer class="py-3 px-5">
             <slot name="leftpane__action" />
         </footer>
     </div>
