@@ -51,6 +51,7 @@
     function onDrawerClose(): void {
         setDrawerRoute(null) // needed to remount the child components and reset its internal variables (eg: edit/cancel state)
         isDrawerOpened = false
+        $backButtonStore?.reset()
     }
 </script>
 
