@@ -31,7 +31,7 @@ const config: CapacitorConfig = {
             DisableDeploy: 'true',
         },
     },
-    loggingBehavior: prod ? 'production' : 'debug',
+    loggingBehavior: prod ? 'none' : 'debug',
 }
 
 export default config
