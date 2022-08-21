@@ -71,6 +71,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): void | I
     const recipient: Subject = address ? { type: 'address', address } : undefined
     const giftStorageDeposit = Boolean(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = Boolean(searchParams.get(SendOperationParameter.DisableToggleGift))
+    const disableChangeExpiration = Boolean(searchParams.get(SendOperationParameter.DisableChangeExpiration))
 
     return {
         ...(recipient && { recipient }),
@@ -80,5 +81,6 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): void | I
         ...(tag && { tag }),
         ...(giftStorageDeposit && { giftStorageDeposit }),
         ...(disableToggleGift && { disableToggleGift }),
+        ...(disableChangeExpiration && { disableChangeExpiration }),
     }
 }

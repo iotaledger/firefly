@@ -39,6 +39,7 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let giftStorageDeposit = false
     export let disableToggleGift = false
+    export let disableChangeExpiration = false
     export let disableBack = false
 
     let expirationDate: Date
@@ -75,7 +76,7 @@
         amount,
         tag,
         unit,
-        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
+        type: ActivityType.Transaction,
     }
 
     async function _prepareOutput(): Promise<void> {
@@ -172,6 +173,7 @@
                     slot="value"
                     bind:value={expirationDate}
                     initialSelected={storageDeposit ? '1day' : 'none'}
+                    disabled={disableChangeExpiration}
                 />
             </KeyValueBox>
         {/if}
