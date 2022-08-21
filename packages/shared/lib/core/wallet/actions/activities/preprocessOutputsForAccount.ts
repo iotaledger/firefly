@@ -3,7 +3,7 @@ import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessG
 import { OutputData } from '@iota/wallet'
 import { IProcessedTransaction } from '../../interfaces/processed-transaction.interface'
 
-export function preprocessAccountOutputs(account: IAccountState): IProcessedTransaction[] {
+export function preprocessOutputsForAccount(account: IAccountState): IProcessedTransaction[] {
     const groupedOutputs: { [key: string]: OutputData[] } = {}
 
     for (const outputId of Object.keys(account.meta.outputs)) {
