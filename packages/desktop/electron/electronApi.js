@@ -323,6 +323,9 @@ const ElectronApi = {
     openUrl: (url) => {
         ipcRenderer.invoke('open-url', url)
     },
+    copyFile: (sourceFilePath, destinationFilePath) => {
+        ipcRenderer.invoke('copy-file', sourceFilePath, destinationFilePath)
+    },
     /**
      * Log unhandled exception
      * @param {string} errorType The type of eerror

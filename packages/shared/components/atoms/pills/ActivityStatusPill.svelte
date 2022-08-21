@@ -4,6 +4,7 @@
     import Pill from './Pill.svelte'
 
     export let type: ActivityType
+    export let isInternal: boolean
     export let direction: ActivityDirection
     export let inclusionState: InclusionState
 
@@ -31,6 +32,8 @@
 
 {#if type && inclusionState}
     <Pill {backgroundColor} {darkBackgroundColor} {textColor}>
-        {localize('pills.' + type + '.' + direction + '.' + inclusionState).toLowerCase()}
+        {localize(
+            'pills.' + type + '.' + (isInternal ? 'internal' : 'external') + '.' + direction + '.' + inclusionState
+        ).toLowerCase()}
     </Pill>
 {/if}

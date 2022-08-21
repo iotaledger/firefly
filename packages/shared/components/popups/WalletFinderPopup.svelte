@@ -16,7 +16,7 @@
     } from '@core/profile'
     import {
         formatTokenAmountBestMatch,
-        loadAllAccountActivities,
+        generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
@@ -105,7 +105,7 @@
     onDestroy(async () => {
         if (hasUsedWalletFinder) {
             await refreshAccountAssetsForActiveProfile()
-            await loadAllAccountActivities()
+            await generateAndStoreActivitiesForAllAccounts()
         }
     })
 </script>

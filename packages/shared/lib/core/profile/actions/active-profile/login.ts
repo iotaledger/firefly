@@ -13,7 +13,7 @@ import {
     subscribe as subscribeToWalletEvents,
 } from '@core/profile-manager/api'
 import { loginRouter } from '@core/router'
-import { loadAllAccountActivities, refreshAccountAssetsForActiveProfile } from '@core/wallet'
+import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
 import { get } from 'svelte/store'
 import {
     INITIAL_ACCOUNT_GAP_LIMIT,
@@ -64,9 +64,9 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
             incrementLoginProgress()
             await refreshAccountAssetsForActiveProfile()
 
-            // Step 6: load account activities
+            // Step 6: generate and store activities for all accounts
             incrementLoginProgress()
-            await loadAllAccountActivities()
+            await generateAndStoreActivitiesForAllAccounts()
 
             // Step 7: set initial stronghold status
             incrementLoginProgress()
