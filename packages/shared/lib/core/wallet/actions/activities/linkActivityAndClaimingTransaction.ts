@@ -1,7 +1,7 @@
 import { IAccountState } from '@core/account'
 import { get } from 'svelte/store'
-import { ActivityDirection } from '../enums'
-import { addClaimedActivity, allAccountActivities, claimedActivities } from '../stores'
+import { ActivityDirection } from '../../enums'
+import { addClaimedActivity, allAccountActivities, claimedActivities } from '../../stores'
 
 export function linkActivityAndClaimingTransaction(account: IAccountState): void {
     const accountActivities = get(allAccountActivities)[Number(account.id)]
