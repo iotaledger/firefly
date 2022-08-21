@@ -5,7 +5,7 @@
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
     import { Button, Spinner, Text, TextInput } from 'shared/components'
-    import { FontWeightText } from '../Text.svelte'
+    import { FontWeight } from '../Text.svelte'
 
     const PREFIX = process.env.APP_PROTOCOL + '://'
     let url: string = PREFIX
@@ -21,7 +21,7 @@
 </script>
 
 <div class="space-y-6">
-    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold}>
+    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
         {localize('actions.testDeepLink')}
     </Text>
 

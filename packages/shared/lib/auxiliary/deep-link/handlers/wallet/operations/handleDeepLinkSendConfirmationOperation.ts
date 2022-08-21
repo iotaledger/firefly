@@ -1,25 +1,21 @@
 import { get } from 'svelte/store'
-
 import { addError } from '@core/error'
 import { BASE_TOKEN, networkHrp } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { ISendFormParameters, Subject } from '@core/wallet'
+import { ISendConfirmationParameters, Subject } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 
 import { SendOperationParameter } from '../../../enums'
 
-export function handleDeepLinkSendOperation(searchParams: URLSearchParams, skipForm = false): void {
-    const sendFormParameters = parseSendOperation(searchParams)
+export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
+    const sendFormParameters = parseSendConfirmationOperation(searchParams)
 
-    let unit: string
-    if (skipForm) {
-        unit = BASE_TOKEN?.[get(activeProfile)?.networkProtocol]?.unit
-    }
+    const unit = BASE_TOKEN?.[get(activeProfile)?.networkProtocol]?.unit
 
     if (sendFormParameters) {
         openPopup({
-            type: skipForm ? 'sendConfirmation' : 'sendForm',
+            type: 'sendConfirmation',
             overflow: true,
             props: {
                 ...sendFormParameters,
@@ -32,15 +28,15 @@ export function handleDeepLinkSendOperation(searchParams: URLSearchParams, skipF
 /**
  * Parses a deep link for the send operation.
  *
- * @method parseSendOperation
+ * @method parseSendConfirmationOperation
  *
  * @param {string} address The recipient's Bech32 address.
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
  * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
  *
- * @return {void | ISendFormParameters} The formatted parameters for the send operation.
+ * @return {void | ISendConfirmationParameters} The formatted parameters for the send operation.
  */
-function parseSendOperation(searchParams: URLSearchParams): void | ISendFormParameters {
+function parseSendConfirmationOperation(searchParams: URLSearchParams): void | ISendConfirmationParameters {
     // Check address exists and is valid this is not optional.
     const address = searchParams.get(SendOperationParameter.Address)
     if (!address) {
