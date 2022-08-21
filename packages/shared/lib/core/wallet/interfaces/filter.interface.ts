@@ -1,3 +1,5 @@
+import { NumberFilterOption } from '../enums'
+
 export type Filter = ActivityFilter | AssetFilter
 
 export interface ActivityFilter {
@@ -34,14 +36,9 @@ export type NumberFilterUnit = {
     type: 'number'
     active: boolean
     localeKey: string
-    selected: NumberFilterType
-    choices: NumberFilterType[]
+    selected: NumberFilterOption
+    choices: NumberFilterOption[]
     subunit: NumberFilterInput
-}
-
-export enum BooleanFilterOptions {
-    Yes = 'yes',
-    No = 'no',
 }
 
 export type AssetFilterUnit = {
@@ -62,11 +59,4 @@ export type RangeNumberFilterInput = {
     type: 'range'
     start: string
     end: string
-}
-
-export enum NumberFilterType {
-    Equal = 'equal',
-    Range = 'range',
-    Less = 'less',
-    Greater = 'greater',
 }
