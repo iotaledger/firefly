@@ -6,7 +6,7 @@ android {
         applicationId 'org.iota.firefly.mobile.alpha'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdk 30
-        versionCode 22
+        versionCode 24
         versionName '0.1.0'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
