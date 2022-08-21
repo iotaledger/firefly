@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { NumberFilterType, FilterUnit } from '@core/wallet/interfaces/filter.interface'
+    import { FilterUnit } from '@core/wallet/interfaces/filter.interface'
+    import { NumberFilterOption } from '@core/wallet/enums'
     import { NumberInput, Checkbox, Dropdown, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { DropdownChoice } from '@core/utils'
@@ -42,15 +43,15 @@
     function updateSubUnitForNumberFilter() {
         if (filterUnit.type === 'number') {
             if (
-                filterUnit.selected === NumberFilterType.Equal ||
-                filterUnit.selected === NumberFilterType.Greater ||
-                filterUnit.selected === NumberFilterType.Less
+                filterUnit.selected === NumberFilterOption.Equal ||
+                filterUnit.selected === NumberFilterOption.Greater ||
+                filterUnit.selected === NumberFilterOption.Less
             ) {
                 filterUnit.subunit = {
                     type: 'single',
                     amount: '',
                 }
-            } else if (filterUnit.selected === NumberFilterType.Range) {
+            } else if (filterUnit.selected === NumberFilterOption.Range) {
                 filterUnit.subunit = {
                     type: 'range',
                     start: '',

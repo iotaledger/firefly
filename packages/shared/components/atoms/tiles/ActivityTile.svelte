@@ -100,7 +100,7 @@
 
                     <div class="flex flex-row justify-between">
                         <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
-                            {#if activity?.type === ActivityType.Minting}
+                            {#if activity?.type === ActivityType.Foundry}
                                 {asset?.metadata?.name
                                     ? truncateString(asset?.metadata?.name, 20, 0)
                                     : truncateString(asset?.id, 6, 7)}

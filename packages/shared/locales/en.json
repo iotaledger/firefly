@@ -1237,16 +1237,16 @@
         },
         "status": {
             "label": "Status",
-            "Confirmed": "confirmed",
-            "Pending": "pending",
+            "confirmed": "confirmed",
+            "pending": "pending",
             "claimed": "claimed",
             "unclaimed": "non-claimed"
         },
         "type": {
             "label": "Type",
-            "in": "incoming",
-            "out": "outgoing",
-            "internalTransaction": "internal"
+            "incoming": "incoming",
+            "outgoing": "outgoing",
+            "internal": "internal"
         }
     },
     "dates": {
@@ -1314,6 +1314,9 @@
         },
         "refreshTokenMetadata": {
             "success": "All token metadata has been reset and refreshed"
+        },
+        "restoreFromStrongholdBackup": {
+            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
             "success": "Successfully found Shimmer rewards",
@@ -1529,32 +1532,34 @@
     },
     "pills": {
         "stake": {
-                "Pending": "staking for",
-                "Confirmed": "staked for",
-                "Conflicting": "failed to stake"
+            "Pending": "staking for",
+            "Confirmed": "staked for",
+            "Conflicting": "failed to stake"
         },
-        "internalTransaction": {
-            "in": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+        "transaction": {
+            "internal": {
+                "in": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "out": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
             },
-            "out": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
-            }
-        },
-        "externalTransaction": {
-            "in": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
-            },
-            "out": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+            "external": {
+                "in": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "out": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
             }
         },
         "minting": {
