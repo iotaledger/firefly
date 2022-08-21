@@ -211,6 +211,12 @@ module.exports = [
         devServer: {
             hot: true,
             static: path.join(__dirname, 'public'),
+            client: {
+                overlay: {
+                    errors: true,
+                    warnings: false,
+                },
+            },
         },
     },
     {
