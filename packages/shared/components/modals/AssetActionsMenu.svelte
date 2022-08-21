@@ -3,17 +3,15 @@
     import {
         hideAsset,
         IAsset,
-        selectedAccountAssets,
         unhideAsset,
         unverifyAsset,
         VerificationStatus,
         verifyAsset,
+        hideActivitiesForHiddenAssets,
     } from '@core/wallet'
-    import { hideActivitiesForHiddenAssets } from '@core/wallet/actions/hideActivitiesForHiddenAssets'
     import { Icon } from '@lib/auxiliary/icon'
     import { updatePopupProps } from '@lib/popup'
     import { HR, MenuItem, Modal } from 'shared/components'
-    import { get } from 'svelte/store'
 
     export let modal: Modal
     export let asset: IAsset
@@ -21,7 +19,7 @@
     const handleUnverify = () => {
         unverifyAsset(asset.id)
         updatePopupProps({
-            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+            asset: { ...asset, verification: VerificationStatus.NotVerified },
         })
         modal.close()
     }
@@ -29,7 +27,7 @@
     function handleVerify() {
         verifyAsset(asset.id)
         updatePopupProps({
-            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+            asset: { ...asset, verification: VerificationStatus.Verified },
         })
         modal.close()
     }
@@ -38,7 +36,7 @@
         unhideAsset(asset.id)
         hideActivitiesForHiddenAssets()
         updatePopupProps({
-            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+            asset: { ...asset, hidden: false },
         })
         modal.close()
     }
@@ -47,7 +45,7 @@
         hideAsset(asset.id)
         hideActivitiesForHiddenAssets()
         updatePopupProps({
-            asset: get(selectedAccountAssets)?.nativeTokens?.find((nativeToken) => nativeToken.id === asset.id),
+            asset: { ...asset, hidden: true },
         })
         modal.close()
     }

@@ -1,7 +1,10 @@
 import { AccountMock } from '@mocks/account.mock'
+import '@mocks/crypto.mock'
 import { MOCK_MNEMONIC, ProfileManagerMock } from '@mocks/profile-manager.mock'
 
 import { get } from 'svelte/store'
+
+import { generateRandomId } from '@lib/utils'
 
 import { destroyProfileManager } from '../actions'
 import {
@@ -22,7 +25,8 @@ describe('File: api.test.ts', () => {
     const password = 'password'
 
     beforeEach(() => {
-        profileManagerMock = new ProfileManagerMock()
+        const id = generateRandomId()
+        profileManagerMock = new ProfileManagerMock(id)
         profileManager.set(profileManagerMock)
     })
 

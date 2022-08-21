@@ -7,7 +7,7 @@ import type {
     ClientOptions,
     EventType,
     WalletEvent,
-    LedgerStatus,
+    LedgerNanoStatus,
 } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
@@ -18,6 +18,12 @@ export const MOCK_MNEMONIC =
     'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
 
 export class ProfileManagerMock implements IProfileManager {
+    id: string
+
+    constructor(id: string) {
+        this.id = id
+    }
+
     backup(_: string, __: string): Promise<void> {
         return Promise.resolve()
     }
@@ -86,7 +92,7 @@ export class ProfileManagerMock implements IProfileManager {
                     pruningIndex: 34629,
                 },
                 protocol: {
-                    protocolVersion: 2,
+                    version: 2,
                     networkName: 'alphanet-5',
                     bech32Hrp: 'rms',
                     minPowScore: 1000,
@@ -118,7 +124,7 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
-    getLedgerStatus(): Promise<LedgerStatus> {
+    getLedgerStatus(): Promise<LedgerNanoStatus> {
         return new Promise((resolve) =>
             resolve({
                 connected: true,

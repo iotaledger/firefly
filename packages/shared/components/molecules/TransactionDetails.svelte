@@ -10,7 +10,7 @@
     import { AssetIcon, Text } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import {
         formatTokenAmountPrecise,
         ActivityAsyncStatus,
@@ -36,10 +36,9 @@
     export let inclusionState: InclusionState = InclusionState.Pending
     export let metadata: string = null
     export let amount: string = null
-    export let rawAmount: number
     export let unit: string
-
     export let storageDeposit = 0
+    export let giftedStorageDeposit = 0
     export let subject: Subject = null
     export let tag: string = null
     export let time: Date = null
@@ -56,11 +55,19 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
+    $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(
+        giftedStorageDeposit ?? 0,
+        BASE_TOKEN[$activeProfile?.networkProtocol]
+    )
+
     $: detailsList = {
         ...(transactionTime && { transactionTime }),
         ...(metadata && { metadata }),
         ...(tag && { tag }),
-        ...((storageDeposit || storageDeposit === 0) && { storageDeposit: formattedStorageDeposit }),
+        ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
+            storageDeposit: formattedStorageDeposit,
+        }),
+        ...(giftedStorageDeposit && { giftedStorageDeposit: formattedGiftedStorageDeposit }),
         ...(expirationTime && { expirationTime }),
         ...(claimedTime && { claimedTime }),
     }
@@ -94,11 +101,11 @@
                 <div class="flex flex-row space-x-3">
                     <AssetIcon {asset} />
                     <div class="flex flex-row items-baseline space-x-0.1">
-                        <Text type="h1" fontWeight={FontWeightText.semibold}>
+                        <Text type="h1" fontWeight={FontWeight.semibold}>
                             {amount}
                         </Text>
                         {#if unit}
-                            <Text type="h4" classes="ml-1" fontWeight={FontWeightText.medium}>{unit}</Text>
+                            <Text type="h4" classes="ml-1" fontWeight={FontWeight.medium}>{unit}</Text>
                         {/if}
                     </div>
                 </div>
@@ -123,7 +130,7 @@
             <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
         {:else}
             <Box col clearBackground clearPadding>
-                <Text type="pre" fontSize="base" fontWeight={FontWeightText.medium}>
+                <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
                     {localize('general.unknownAddress')}
                 </Text>
             </Box>

@@ -1,6 +1,4 @@
 <script lang="typescript">
-    import { createEventDispatcher, onDestroy } from 'svelte'
-    import { Icon, PinInput, Profile, Text } from 'shared/components'
     import {
         isAwareOfCrashReporting,
         mobile,
@@ -8,13 +6,15 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { COIN_TYPE, NetworkProtocol, NetworkType } from '@core/network'
-    import { activeProfile, login, resetActiveProfile, getStorageDirectoryOfProfile } from '@core/profile'
-    import { initialiseProfileManager } from '@core/profile-manager'
+    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { activeProfile, login, resetActiveProfile } from '@core/profile'
+    import { loginRouter } from '@core/router'
     import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { openPopup, popupState } from '@lib/popup'
     import { validatePinFormat } from '@lib/utils'
+    import { Icon, PinInput, Profile, Text } from 'shared/components'
+    import { onDestroy } from 'svelte'
 
     let attempts = 0
     let pinCode = ''
@@ -53,7 +53,7 @@
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (validatePinFormat(pinCode)) {
-            void onSubmit()
+            void onSubmitClick()
         }
     }
     $: {
@@ -68,12 +68,10 @@
         return localize('views.login.pleaseWait', { values: { time: time.toString() } })
     }
 
-    const dispatch = createEventDispatcher()
-
     let maxAttemptsTimer = null
     let shakeTimeout = null
 
-    function countdown() {
+    function countdown(): void {
         if (!hasReachedMaxAttempts) {
             return
         }
@@ -89,70 +87,36 @@
         }
     }
 
-    function onSubmit() {
+    async function onSubmitClick(): Promise<void> {
         if ($ongoingSnapshot === true) {
-            return openSnapshotPopup()
-        }
-        if (!hasReachedMaxAttempts) {
-            const profile = $activeProfile
+            openSnapshotPopup()
+        } else if (!hasReachedMaxAttempts) {
             isBusy = true
-
-            Platform.PincodeManager.verify(profile.id, pinCode)
-                .then((verified) => {
-                    if (verified === true) {
-                        return Platform.getMachineId().then(() =>
-                            getStorageDirectoryOfProfile(profile.id).then((path) => {
-                                initialiseProfileManager(
-                                    path,
-                                    COIN_TYPE[profile.networkProtocol],
-                                    $activeProfile.clientOptions,
-                                    {
-                                        Stronghold: { snapshotPath: `${path}/wallet.stronghold` },
-                                    }
-                                )
-                                // TODO: set storage password with profile manager api
-                                // api.setStoragePassword(pinCode, {
-                                //     onSuccess() {
-                                //         dispatch('next')
-                                //     },
-                                //     onError(err) {
-                                //         isBusy = false
-                                //         showAppNotification({
-                                //             type: 'error',
-                                //             message: locale(err.error),
-                                //         })
-                                //     },
-                                // })
-                                void login()
-                                dispatch('next')
-                            })
-                        )
-                    } else {
-                        shake = true
-                        shakeTimeout = setTimeout(() => {
-                            shake = false
-                            isBusy = false
-                            attempts++
-                            if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
-                                clearInterval(maxAttemptsTimer)
-                                maxAttemptsTimer = setInterval(countdown, 1000)
-                            } else {
-                                pinRef.resetAndFocus()
-                            }
-                        }, 1000)
-                    }
-                })
-                .catch((error) => {
-                    console.error(error)
+            const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
+            if (isVerified) {
+                void login()
+                $loginRouter.next()
+            } else {
+                shake = true
+                shakeTimeout = setTimeout(() => {
+                    shake = false
                     isBusy = false
-                })
+                    attempts++
+                    if (attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS) {
+                        clearInterval(maxAttemptsTimer)
+                        maxAttemptsTimer = setInterval(countdown, 1000)
+                    } else {
+                        pinRef.resetAndFocus()
+                    }
+                }, 1000)
+            }
         }
     }
 
-    function handleBackClick() {
+    function onBackClick(): void {
         if (!hasReachedMaxAttempts) {
             resetActiveProfile()
-            dispatch('previous')
+            $loginRouter.previous()
         }
     }
 
@@ -177,7 +141,7 @@
                         data-label="back-button"
                         class="absolute right-5 disabled:opacity-50 cursor-pointer disabled:cursor-auto"
                         disabled={hasReachedMaxAttempts}
-                        on:click={handleBackClick}
+                        on:click={onBackClick}
                     >
                         <Icon icon="arrow-left" classes="text-gray-500 dark:text-gray-100" />
                     </button>
@@ -186,7 +150,7 @@
                     bind:this={pinRef}
                     bind:value={pinCode}
                     classes={shake && 'animate-shake'}
-                    on:submit={onSubmit}
+                    on:submit={onSubmitClick}
                     disabled={hasReachedMaxAttempts || isBusy}
                     autofocus
                 />

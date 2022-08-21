@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import { Icon, Text, Tooltip } from 'shared/components'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { Icon, Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { truncateString } from '@lib/helpers'

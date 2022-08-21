@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Text } from 'shared/components'
-    import { debounce } from 'shared/lib/utils'
-    import { asyncGetLegacySeedChecksum } from 'shared/lib/wallet'
     import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
     import { verifyMnemonic } from '@core/profile-manager'
+    import { debounce } from '@lib/utils'
+    import { Mnemonic } from '../../lib/contexts/onboarding'
 
     enum Type {
         Seed = 'seed',
@@ -18,9 +18,8 @@
     let statusMessage = ''
     let content = ''
     let error = false
-    let seedChecksum = ''
 
-    const isSeed = (value: string): string | undefined => {
+    function checkSeed(value: string): string {
         if (value.length !== 81) {
             return localize('error.backup.seedTooShort', {
                 values: {
@@ -33,7 +32,7 @@
         }
     }
 
-    const isMnemonic = (words: string[]): string | undefined => {
+    function checkMnemonic(words: Mnemonic): string {
         if (words.length !== 24) {
             return localize('error.backup.phraseWordCount', {
                 values: {
@@ -60,12 +59,10 @@
         }
     }
 
-    /* eslint-disable @typescript-eslint/no-misused-promises */
-    const handleKeyDown = async () => {
+    async function handleKeyDown(): Promise<void> {
         value = ''
         statusMessage = ''
         error = false
-        seedChecksum = ''
 
         content = content.replace(/\r/g, '').replace(/\n/g, '').replace(/  +/g, ' ')
 
@@ -74,24 +71,23 @@
         if (trimmedContent.length >= 3) {
             const words = trimmedContent?.split(' ')
             if (type === Type.Seed) {
-                const seedValidations = isSeed(trimmedContent)
+                const seedValidations = checkSeed(trimmedContent)
                 if (seedValidations) {
                     statusMessage = seedValidations
                     error = true
                 } else {
                     statusMessage = localize('views.importFromText.seedDetected')
                     value = trimmedContent
-                    seedChecksum = await asyncGetLegacySeedChecksum(value)
                 }
             } else if (type === Type.Mnemonic) {
-                const mnemonicValidations = isMnemonic(words)
+                const mnemonicValidations = checkMnemonic(words)
                 if (mnemonicValidations) {
                     statusMessage = mnemonicValidations
                     error = true
                 } else {
                     try {
                         await verifyMnemonic(trimmedContent)
-                        statusMessage = localize('views.importFromText.phraseDetected')
+                        statusMessage = localize('views.onboarding.profileRecovery.importMnemonicPhrase.phraseDetected')
                         value = trimmedContent
                     } catch (err) {
                         error = true
@@ -105,6 +101,7 @@
 </script>
 
 <div>
+    <!-- svelte-ignore a11y-autofocus -->
     <textarea
         {disabled}
         class="text-14 leading-140 resize-none w-full p-4 pb-3 rounded-xl border border-solid {error
@@ -119,12 +116,6 @@
     />
     <div class="flex flex-row items-start justify-between">
         <Text type="p" secondary {error}>{statusMessage}&nbsp;</Text>
-        {#if seedChecksum}
-            <div class="flex flex-row items-center ml-2">
-                <Text type="p" secondary classes="mr-1">{localize('views.importFromText.checksum')}:</Text>
-                <Text type="p" highlighted>{seedChecksum}</Text>
-            </div>
-        {/if}
     </div>
 </div>
 

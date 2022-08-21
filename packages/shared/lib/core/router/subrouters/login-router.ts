@@ -5,10 +5,11 @@ import { FireflyEvent } from '../types'
 import { Subrouter } from './subrouter'
 
 export const loginRoute = writable<LoginRoute>(null)
+export const loginRouter = writable<LoginRouter>(null)
 
 export class LoginRouter extends Subrouter<LoginRoute> {
     constructor() {
-        super(LoginRoute.SelectProfile, loginRoute)
+        super(LoginRoute.SelectProfile, loginRoute, get(appRouter))
     }
 
     next(event?: FireflyEvent): void {
@@ -18,15 +19,19 @@ export class LoginRouter extends Subrouter<LoginRoute> {
         switch (currentRoute) {
             case LoginRoute.SelectProfile: {
                 if (event?.shouldAddProfile) {
-                    get(appRouter).next(event)
+                    this.parentRouter.next(event)
+                    return
                 } else {
                     nextRoute = LoginRoute.EnterPin
                 }
                 break
             }
             case LoginRoute.EnterPin:
-                get(appRouter).next(event)
+                nextRoute = LoginRoute.LoadProfile
                 break
+            case LoginRoute.LoadProfile:
+                this.parentRouter.next(event)
+                return
         }
 
         this.setNext(nextRoute)

@@ -7,7 +7,7 @@
         ActivityDirection,
         claimActivity,
         ActivityType,
-        hideActivity,
+        rejectActivity,
         InclusionState,
         VerificationStatus,
         selectedAccountAssets,
@@ -17,7 +17,7 @@
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
     import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner, AssetIcon } from 'shared/components'
-    import { FontWeightText } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
 
     export let activity: Activity
 
@@ -59,7 +59,7 @@
                 warning: true,
                 confirmText: localize('actions.reject'),
                 onConfirm: () => {
-                    hideActivity(activity?.id)
+                    rejectActivity(activity?.id)
                     closePopup()
                 },
             },
@@ -82,14 +82,14 @@
                 <div class="flex flex-col w-full space-y-0.5">
                     <div class="flex flex-row justify-between space-x-1">
                         <Text
-                            fontWeight={FontWeightText.semibold}
+                            fontWeight={FontWeight.semibold}
                             lineHeight="140"
                             classes="overflow-hidden overflow-ellipsis multiwrap-line2"
                         >
                             {localize(title)}
                         </Text>
                         <Text
-                            fontWeight={FontWeightText.semibold}
+                            fontWeight={FontWeight.semibold}
                             lineHeight="140"
                             color={activity?.direction === ActivityDirection.In ? 'blue-700' : ''}
                             classes="whitespace-nowrap"
@@ -99,8 +99,8 @@
                     </div>
 
                     <div class="flex flex-row justify-between">
-                        <Text fontWeight={FontWeightText.normal} lineHeight="140" color="gray-600">
-                            {#if activity?.type === ActivityType.Minting}
+                        <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
+                            {#if activity?.type === ActivityType.Foundry}
                                 {asset?.metadata?.name
                                     ? truncateString(asset?.metadata?.name, 20, 0)
                                     : truncateString(asset?.id, 6, 7)}
@@ -114,7 +114,7 @@
                             {/if}
                         </Text>
                         <Text
-                            fontWeight={FontWeightText.normal}
+                            fontWeight={FontWeight.normal}
                             lineHeight="140"
                             color="gray-600"
                             classes="whitespace-nowrap"
@@ -130,7 +130,7 @@
                     <div class="flex flex-row justify-center items-center space-x-2">
                         {#if !activity?.isClaimed}
                             <Icon width="16" height="16" icon="timer" classes="text-gray-600" />
-                            <Text fontSize="13" color="gray-600" fontWeight={FontWeightText.semibold}
+                            <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}
                                 >{timeDiff ?? localize('general.none')}</Text
                             >
                         {/if}
@@ -138,8 +138,11 @@
                     <div class="flex flex-row justify-end w-1/2 space-x-2">
                         {#if isIncomingActivityUnclaimed}
                             <button
-                                disabled={activity.isClaiming}
-                                class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent hover:bg-blue-200"
+                                disabled={activity.isClaiming || activity.isRejected}
+                                class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent 
+                                {activity.isClaiming || activity.isRejected
+                                    ? 'cursor-default text-gray-500'
+                                    : 'cursor-pointer hover:bg-blue-200'}"
                                 on:click|stopPropagation={handleRejectClick}
                             >
                                 {localize('actions.reject')}

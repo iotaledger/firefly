@@ -247,27 +247,5 @@
                 @apply pb-2;
             }
         }
-
-        floating-label {
-            transform: translateY(3px);
-            transition: all 0.2s ease-out;
-            @apply block;
-            @apply text-gray-500;
-            @apply text-11;
-            @apply leading-120;
-            @apply overflow-hidden;
-            @apply opacity-0;
-            @apply pointer-events-none;
-            @apply absolute;
-            @apply left-3;
-            @apply select-none;
-            @apply whitespace-nowrap;
-            @apply w-full;
-            top: 8px;
-            &.floating-active {
-                @apply opacity-100;
-                transform: none;
-            }
-        }
     }
 </style>

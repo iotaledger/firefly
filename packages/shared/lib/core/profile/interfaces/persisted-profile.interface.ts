@@ -1,5 +1,6 @@
 import { IAccountMetadata } from '@core/account'
 import { IClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+
 import { ProfileType } from '../enums'
 import { IProfileSettings } from './profile-settings.interface'
 

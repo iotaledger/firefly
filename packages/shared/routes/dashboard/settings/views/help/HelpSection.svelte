@@ -2,10 +2,10 @@
     import { Button, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
-    import { ExternalRoute, HelpAndInfo } from '@core/router'
+    import { HelpAndInfoRoute } from '@core/router'
 
-    export let route: HelpAndInfo
-    export let url: ExternalRoute
+    export let route: HelpAndInfoRoute
+    export let url: string
     export let actionLocale: string
 
     const handleClick = () => {

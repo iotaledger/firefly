@@ -426,6 +426,13 @@ ipcMain.handle('get-path', (_e, path) => {
 })
 ipcMain.handle('get-version-details', (_e) => versionDetails)
 
+ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
+    const src = path.resolve(sourceFilePath)
+    const srcFileBuffer = fs.readFileSync(src)
+    const dest = path.resolve(destinationFilePath)
+    fs.writeFileSync(dest, srcFileBuffer)
+})
+
 // Diagnostics
 const getDiagnostics = () => {
     const osXNameMap = new Map([

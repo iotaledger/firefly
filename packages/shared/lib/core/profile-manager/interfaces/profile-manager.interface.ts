@@ -6,12 +6,13 @@ import {
     ClientOptions,
     CreateAccountPayload,
     EventType,
-    LedgerStatus,
+    LedgerNanoStatus,
     NodeInfoWrapper,
     WalletEvent,
 } from '@iota/wallet'
 
 export interface IProfileManager {
+    id: string
     backup(destination: string, password: string): Promise<void>
     bech32ToHex(bech32Address: string): Promise<string>
     changeStrongholdPassword(currentPassword: string, newPassword: string): Promise<void>
@@ -24,7 +25,7 @@ export interface IProfileManager {
     getAccount(accountId: AccountId): Promise<IAccount>
     getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
-    getLedgerStatus(): Promise<LedgerStatus>
+    getLedgerStatus(): Promise<LedgerNanoStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     isStrongholdPasswordAvailable(): Promise<boolean>
     listen(eventTypes: EventType[], callback: (error: Error, result: string) => void): void
