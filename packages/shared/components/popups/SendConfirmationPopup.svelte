@@ -39,6 +39,7 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let giftStorageDeposit = false
     export let disableToggleGift = false
+    export let disableBack = false
 
     let expirationDate: Date
     let storageDeposit = 0
@@ -133,6 +134,10 @@
         })
     }
 
+    function onCancel(): void {
+        closePopup()
+    }
+
     onMount(async () => {
         try {
             await _onMount()
@@ -175,9 +180,16 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onBack} disabled={$isTransferring}
-            >{localize('actions.back')}</Button
-        >
+        {#if disableBack}
+            <Button classes="w-full" secondary onClick={onCancel} disabled={$isTransferring}>
+                {localize('actions.cancel')}
+            </Button>
+        {:else}
+            <Button classes="w-full" secondary onClick={onBack} disabled={$isTransferring}>
+                {localize('actions.back')}
+            </Button>
+        {/if}
+
         <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring}>
             {#if $isTransferring}
                 <Spinner busy classes="justify-center break-all" />

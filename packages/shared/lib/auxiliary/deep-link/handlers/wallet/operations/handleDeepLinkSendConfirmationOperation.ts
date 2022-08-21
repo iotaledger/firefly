@@ -18,6 +18,7 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
             type: 'sendConfirmation',
             overflow: true,
             props: {
+                disableBack: true,
                 ...sendFormParameters,
                 ...(unit && { unit }),
             },
@@ -69,6 +70,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): void | I
     const tag = searchParams.get(SendOperationParameter.Tag)
     const recipient: Subject = address ? { type: 'address', address } : undefined
     const giftStorageDeposit = Boolean(searchParams.get(SendOperationParameter.GiftStorageDeposit))
+    const disableToggleGift = Boolean(searchParams.get(SendOperationParameter.DisableToggleGift))
 
     return {
         ...(recipient && { recipient }),
@@ -77,5 +79,6 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): void | I
         ...(metadata && { metadata }),
         ...(tag && { tag }),
         ...(giftStorageDeposit && { giftStorageDeposit }),
+        ...(disableToggleGift && { disableToggleGift }),
     }
 }
