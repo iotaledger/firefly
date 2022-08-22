@@ -27,7 +27,7 @@ export function updateClaimingTransactionInclusion(
                 })
 
                 showAppNotification({
-                    type: 'info',
+                    type: 'success',
                     alert: true,
                     message: localize('notifications.claimed.success'),
                 })
