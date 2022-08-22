@@ -1,5 +1,5 @@
-export * from './containsFoundryOutput'
-export * from './getRelevantOutputFromTransaction'
+export * from './getFoundryOutputFromTransaction'
+export * from './getMainTransactionOutputFromTransaction'
 export * from './getSenderFromTransaction'
 export * from './getSenderFromInputs'
 export * from './receiverAddressesFromTransactionPayload'
