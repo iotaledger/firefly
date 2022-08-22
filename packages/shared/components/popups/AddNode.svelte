@@ -195,13 +195,7 @@
         <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>
             {locale('actions.cancel')}
         </Button>
-        <Button
-            disabled={!nodeUrl || isBusy}
-            type="submit"
-            form="node-config-form"
-            classes="w-1/2"
-            onClick={handleAddNodeClick}
-        >
+        <Button disabled={!nodeUrl || isBusy} classes="w-1/2" onClick={handleAddNodeClick}>
             {#if isBusy}
                 <Spinner
                     busy={isBusy}
