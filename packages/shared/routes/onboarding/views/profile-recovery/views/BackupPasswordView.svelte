@@ -4,22 +4,44 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '@core/router'
-    import { restoreBackupFromStrongholdFile, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        CannotRestoreWithMismatchedCoinTypeError,
+        createShimmerClaimingProfileManager,
+        destroyShimmerClaimingProfileManager,
+        initialiseProfileManagerFromOnboardingProfile,
+        onboardingProfile,
+        ProfileSetupType,
+        restoreBackupForShimmerClaimingProfileManager,
+        restoreBackupFromStrongholdFile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
 
     export let error = ''
     export let busy = false
 
     let strongholdPassword = ''
+    $: strongholdPassword, (error = '')
 
     async function onContinueClick(): Promise<void> {
         if (strongholdPassword) {
             try {
-                await restoreBackupFromStrongholdFile(strongholdPassword)
+                if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
+                    await restoreBackupForShimmerClaimingProfileManager(strongholdPassword)
+                } else {
+                    await restoreBackupFromStrongholdFile(strongholdPassword)
+                }
+
                 updateOnboardingProfile({ strongholdPassword })
                 $profileRecoveryRouter.next()
             } catch (err) {
-                console.error(err)
-                error = localize('error.password.incorrect')
+                if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
+                    await initialiseProfileManagerFromOnboardingProfile(false)
+                    await destroyShimmerClaimingProfileManager()
+                    await createShimmerClaimingProfileManager()
+                } else {
+                    console.error(err)
+                    error = localize('error.password.incorrect')
+                }
             }
         }
     }

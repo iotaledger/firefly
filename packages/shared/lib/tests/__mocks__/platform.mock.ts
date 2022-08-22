@@ -90,6 +90,9 @@ const Platform: IPlatform = {
     validateSeedVault(buffer: unknown): Promise<boolean> {
         return Promise.resolve(false)
     },
+    copyFile(copyFilePath: string, destinationFilePath: string): Promise<void> {
+        return Promise.resolve()
+    },
 }
 
 window['__CAPACITOR__'] = Platform

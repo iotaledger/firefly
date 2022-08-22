@@ -30,7 +30,7 @@ export async function setAsyncActivitiesToClaimed(account: IAccountState): Promi
 }
 
 function isOutputClaimed(output: OutputData): boolean {
-    const expirationDate = getExpirationDateFromOutput(output.output)
+    const expirationDate = getExpirationDateFromOutput(output?.output)
 
     if (expirationDate) {
         return (
@@ -38,6 +38,6 @@ function isOutputClaimed(output: OutputData): boolean {
             output.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND < expirationDate.getTime()
         )
     } else {
-        return output.isSpent
+        return output?.isSpent
     }
 }
