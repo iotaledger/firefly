@@ -12,7 +12,7 @@
     export let locale: Locale
 
     let checked = false
-    let sendCrashReports = false
+    const sendCrashReports = false
 
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
@@ -41,7 +41,7 @@
 </script>
 
 <OnboardingLayout allowBack={false}>
-    <div slot="leftpane__content" class={$mobile && 'px-4'}>
+    <div slot="leftpane__content" class={$mobile && 'px-2'}>
         <div class="flex flex-col {$mobile && 'items-center text-center px-10'} space-y-4 mb-8">
             {#if !$mobile}
                 <Logo width="64px" logo="logo-firefly" classes="mb-6" />
@@ -62,19 +62,7 @@
                         </span>
                     </Text>
                 </div>
-                <Checkbox label={locale('views.crashReporting.checkbox')} bind:checked={sendCrashReports} />
-                <!-- <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
-                    {#each languageList as language}
-                        <button
-                            class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
-                            on:click={() => handleLanguage(language)}
-                            class:active={language?.label === SUPPORTED_LOCALES[$appSettings.language]}
-                        >
-                            <Text type="p" smaller>{language?.label}</Text>
-                        </button>
-                    {/each}
-                </div> 
-            TODO use window.navigator.language to autodetect locale-->
+                <!-- <Checkbox label={locale('views.crashReporting.checkbox')} bind:checked={sendCrashReports} /> -->
             </div>
         {:else}
             <Dropdown
@@ -85,7 +73,7 @@
             />
         {/if}
     </div>
-    <div slot="leftpane__action" class={$mobile && 'px-4'}>
+    <div slot="leftpane__action">
         <Button onClick={() => handleContinueClick()} classes="w-full" disabled={!checked}
             >{locale('actions.continue')}</Button
         >
