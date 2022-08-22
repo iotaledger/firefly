@@ -11,6 +11,7 @@ import { showAppNotification } from '@lib/notifications'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
+import { localize } from '@core/i18n'
 
 let accountGapLimitIncrement = 1
 let accountGapLimit = accountGapLimitIncrement
@@ -33,9 +34,13 @@ export async function findShimmerRewards(): Promise<void> {
         const accountMetadatas = await _shimmerClaimingProfileManager?.recoverAccounts(accountGapLimit, addressGapLimit)
         const boundAccounts = (
             await Promise.all(
-                accountMetadatas.map((metadata) =>
-                    getBoundAccount(metadata?.index, true, shimmerClaimingProfileManager)
-                )
+                accountMetadatas.map(async (metadata) => {
+                    const account = await getBoundAccount(metadata?.index, true, shimmerClaimingProfileManager)
+                    account.meta.alias = Number.isNaN(metadata?.alias)
+                        ? metadata?.alias
+                        : `${localize('general.account')} ${metadata?.index + 1}`
+                    return account
+                })
             )
         ).sort(sortAccountsByIndex)
         const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
@@ -43,9 +48,13 @@ export async function findShimmerRewards(): Promise<void> {
         if (wereRewardsFound) {
             const boundTwinAccounts = (
                 await Promise.all(
-                    boundAccounts.map((boundAccount) =>
-                        getBoundAccount(boundAccount?.meta?.index, true, profileManager)
-                    )
+                    boundAccounts.map(async (boundAccount) => {
+                        const account = await getBoundAccount(boundAccount?.meta?.index, true, profileManager)
+                        account.meta.alias = Number.isNaN(boundAccount?.meta?.alias)
+                            ? boundAccount?.meta?.alias
+                            : `${localize('general.account')} ${boundAccount?.meta?.index + 1}`
+                        return account
+                    })
                 )
             ).sort(sortAccountsByIndex)
             for (const [boundAccount, boundTwinAccount] of zip(boundAccounts, boundTwinAccounts)) {
