@@ -14,7 +14,6 @@
         "@sveltejs/svelte-virtual-list": "^3.0.1",
         "big.js": "^6.0.3",
         "chart.js": "^2.9.3",
-        "iota.lib.js": "^0.5.3",
         "lottie-web": "^5.7.8",
         "qr.js": "0.0.0",
         "svelte": "^3.49.0",
