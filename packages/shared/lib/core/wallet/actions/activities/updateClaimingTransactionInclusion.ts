@@ -38,7 +38,7 @@ export function updateClaimingTransactionInclusion(
                     asyncStatus: ActivityAsyncStatus.Unclaimed,
                 })
                 showAppNotification({
-                    type: 'info',
+                    type: 'error',
                     alert: true,
                     message: localize('notifications.claimed.error'),
                 })
