@@ -128,7 +128,11 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         var filesToShare = [Any]()
         filesToShare.append(srcUrl)
         let activityViewController = UIActivityViewController(activityItems: filesToShare, applicationActivities: nil)
-        self.bridge?.viewController?.present(activityViewController, animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+            self.bridge?.viewController?.present(activityViewController, animated: true, completion: nil)
+        }
+        
         call.resolve()
     }
 }
