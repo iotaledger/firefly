@@ -10,7 +10,9 @@
 
     $: shouldDisplayFailedState = shimmerClaimingAccount?.state === ShimmerClaimingAccountState.Failed
     $: shouldDisplayUnclaimedRewards = shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.FullyClaimed
-    $: shouldDisplayClaimedRewards = shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.Unclaimed
+    $: shouldDisplayClaimedRewards =
+        shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.UnclaimedWithRewards &&
+        shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.UnclaimedWithoutRewards
 </script>
 
 {#if shimmerClaimingAccount}

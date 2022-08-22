@@ -1,5 +1,6 @@
 export enum ShimmerClaimingAccountState {
-    Unclaimed = 'unclaimed',
+    UnclaimedWithRewards = 'unclaimedWithRewards',
+    UnclaimedWithoutRewards = 'unclaimedWithoutRewards',
     FullyClaimed = 'fullyClaimed',
     PartiallyClaimed = 'partiallyClaimed',
     Failed = 'failed',

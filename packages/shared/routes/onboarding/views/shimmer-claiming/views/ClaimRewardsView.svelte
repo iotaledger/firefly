@@ -11,6 +11,7 @@
         findShimmerRewardsForAccount,
         IShimmerClaimingAccount,
         onboardingProfile,
+        ShimmerClaimingAccountState,
     } from '@contexts/onboarding'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
@@ -21,15 +22,30 @@
     let isClaimingRewards = false
     let hasTriedClaimingRewards = false
 
-    $: shouldSearchForRewardsButtonBeDisabled = isSearchingForRewards || isClaimingRewards
-    $: shouldClaimRewardsButtonBeDisabled =
-        !shimmerClaimingAccounts.some((shimmerClaimingAccount) => shimmerClaimingAccount.unclaimedRewards > 0) ||
-        isSearchingForRewards ||
-        isClaimingRewards
+    $: shouldSearchForRewardsButtonBeEnabled = !isSearchingForRewards && !isClaimingRewards
+    $: shouldClaimRewardsButtonBeEnabled =
+        canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
     $: shouldShowContinueButton = canUserContinue(shimmerClaimingAccounts)
 
+    function canUserClaimRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
+        return shimmerClaimingAccounts?.some((shimmerClaimingAccount) => {
+            const { state } = shimmerClaimingAccount
+            return (
+                state === ShimmerClaimingAccountState.UnclaimedWithRewards ||
+                state === ShimmerClaimingAccountState.PartiallyClaimed ||
+                state === ShimmerClaimingAccountState.Failed
+            )
+        })
+    }
+
     function canUserContinue(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
-        return shimmerClaimingAccounts?.every((shimmerClaimingAccount) => shimmerClaimingAccount?.claimingTransaction)
+        return shimmerClaimingAccounts.every((shimmerClaimingAccount) => {
+            const { state } = shimmerClaimingAccount
+            return (
+                state === ShimmerClaimingAccountState.UnclaimedWithoutRewards ||
+                state === ShimmerClaimingAccountState.FullyClaimed
+            )
+        })
     }
 
     function onBackClick(): void {
@@ -104,7 +120,7 @@
     <div slot="leftpane__action">
         <Button
             classes="w-full mb-5"
-            disabled={shouldSearchForRewardsButtonBeDisabled}
+            disabled={!shouldSearchForRewardsButtonBeEnabled}
             secondary
             onClick={onUseBalanceFinderClick}
         >
@@ -114,19 +130,19 @@
                 {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}
             {/if}
         </Button>
-        <Button
-            classes="w-full"
-            disabled={shouldClaimRewardsButtonBeDisabled && !shouldShowContinueButton}
-            onClick={shouldShowContinueButton ? onContinueClick : onClaimRewardsClick}
-        >
-            {#if isClaimingRewards}
-                <Spinner message={localize('actions.claiming')} busy={true} classes="justify-center items-center" />
-            {:else if shouldShowContinueButton}
+        {#if shouldShowContinueButton}
+            <Button classes="w-full" onClick={onContinueClick}>
                 {localize('actions.continue')}
-            {:else}
-                {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
-            {/if}
-        </Button>
+            </Button>
+        {:else}
+            <Button classes="w-full" disabled={!shouldClaimRewardsButtonBeEnabled} onClick={onClaimRewardsClick}>
+                {#if isClaimingRewards}
+                    <Spinner message={localize('actions.claiming')} busy={true} classes="justify-center items-center" />
+                {:else}
+                    {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
+                {/if}
+            </Button>
+        {/if}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {true && 'bg-pastel-yellow dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />

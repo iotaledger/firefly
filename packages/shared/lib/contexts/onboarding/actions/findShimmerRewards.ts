@@ -60,7 +60,7 @@ export async function findShimmerRewards(): Promise<void> {
                 )
             ).sort(sortAccountsByIndex)
             for (const [boundAccount, boundTwinAccount] of zip(boundAccounts, boundTwinAccounts)) {
-                const shimmerClaimingAccount = await prepareShimmerClaimingAccount(boundAccount, boundTwinAccount)
+                const shimmerClaimingAccount = await prepareShimmerClaimingAccount(boundAccount, boundTwinAccount, true)
                 updateShimmerClaimingAccount(shimmerClaimingAccount)
             }
 
