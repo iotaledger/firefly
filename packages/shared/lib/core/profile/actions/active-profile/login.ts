@@ -52,7 +52,18 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
             if (isOnboardingFlow && shouldRecoverAccounts) {
-                await recoverAccounts(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
+                const accountMetadatas = await recoverAccounts(
+                    INITIAL_ACCOUNT_GAP_LIMIT[type],
+                    INITIAL_ADDRESS_GAP_LIMIT[type]
+                )
+
+                /**
+                 * NOTE: In the case no accounts with funds were recovered, we must
+                 * create one for the new profile.
+                 */
+                if (accountMetadatas?.length === 0) {
+                    await createNewAccount()
+                }
             } else if (isOnboardingFlow) {
                 await createNewAccount()
             }
