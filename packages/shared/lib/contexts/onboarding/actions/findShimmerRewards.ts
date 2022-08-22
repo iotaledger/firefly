@@ -41,17 +41,6 @@ export async function findShimmerRewards(): Promise<void> {
         const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
         const wereRewardsFound = updatedTotalUnclaimedShimmerRewards > totalUnclaimedShimmerRewards
         if (wereRewardsFound) {
-            const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
-            const foundRewardsAmountFormatted = formatTokenAmountBestMatch(
-                foundRewardsAmount,
-                BASE_TOKEN[NetworkProtocol.Shimmer]
-            )
-            showAppNotification({
-                type: 'success',
-                alert: true,
-                message: `Successfully found ${foundRewardsAmountFormatted}`,
-            })
-
             const boundTwinAccounts = (
                 await Promise.all(
                     boundAccounts.map((boundAccount) =>
@@ -64,12 +53,23 @@ export async function findShimmerRewards(): Promise<void> {
                 updateShimmerClaimingAccount(shimmerClaimingAccount)
             }
 
+            const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
+            const foundRewardsAmountFormatted = formatTokenAmountBestMatch(
+                foundRewardsAmount,
+                BASE_TOKEN[NetworkProtocol.Shimmer]
+            )
+            showAppNotification({
+                type: 'success',
+                alert: true,
+                message: `Successfully found ${foundRewardsAmountFormatted}`,
+            })
+
             totalUnclaimedShimmerRewards = updatedTotalUnclaimedShimmerRewards
 
             accountGapLimit = accountGapLimitIncrement
             addressGapLimit = addressGapLimitIncrement
 
-            // TODO: add logic to get highest account and address indices with funds
+            // TODO: https://github.com/iotaledger/firefly/issues/4297
             // startAccountIndex = 0
             // startAddressIndex = 0
         } else {
@@ -79,6 +79,10 @@ export async function findShimmerRewards(): Promise<void> {
     } catch (err) {
         console.error(err)
     }
+}
+
+export function setTotalUnclaimedShimmerRewards(initialTotalUnclaimedShimmerRewards: number): void {
+    totalUnclaimedShimmerRewards = initialTotalUnclaimedShimmerRewards
 }
 
 function setGapLimitIncrements(): void {

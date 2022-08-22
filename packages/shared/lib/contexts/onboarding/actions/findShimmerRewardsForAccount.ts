@@ -6,6 +6,10 @@ import { api, profileManager } from '@core/profile-manager'
 import { MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
+import { setTotalUnclaimedShimmerRewards } from '@contexts/onboarding'
+import { formatTokenAmountBestMatch } from '@core/wallet'
+import { BASE_TOKEN, NetworkProtocol } from '@core/network'
+import { showAppNotification } from '@lib/notifications'
 
 export async function findShimmerRewardsForAccount(account: IAccount): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
@@ -23,5 +27,21 @@ export async function findShimmerRewardsForAccount(account: IAccount): Promise<v
         boundTwinAccount,
         true
     )
+
+    if (syncedShimmerClaimingAccount?.unclaimedRewards > 0) {
+        const foundRewardsAmount = syncedShimmerClaimingAccount?.unclaimedRewards
+        const foundRewardsAmountFormatted = formatTokenAmountBestMatch(
+            foundRewardsAmount,
+            BASE_TOKEN[NetworkProtocol.Shimmer]
+        )
+
+        showAppNotification({
+            type: 'success',
+            alert: true,
+            message: `Successfully found ${foundRewardsAmountFormatted}`,
+        })
+        setTotalUnclaimedShimmerRewards(syncedShimmerClaimingAccount?.unclaimedRewards)
+    }
+
     updateShimmerClaimingAccount(syncedShimmerClaimingAccount)
 }
