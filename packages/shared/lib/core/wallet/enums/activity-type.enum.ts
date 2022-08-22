@@ -1,7 +1,6 @@
 export enum ActivityType {
     Stake = 'stake',
-    InternalTransaction = 'internalTransaction',
-    ExternalTransaction = 'externalTransaction',
-    Minting = 'minting',
+    Transaction = 'transaction',
+    Foundry = 'foundry',
     Migrate = 'migrate',
 }

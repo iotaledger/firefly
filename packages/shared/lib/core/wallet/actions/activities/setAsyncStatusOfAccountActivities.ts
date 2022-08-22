@@ -1,5 +1,5 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { allAccountActivities } from '../stores'
+import { allAccountActivities } from '../../stores'
 
 export function setAsyncStatusOfAccountActivities(time: Date): void {
     const balancesToUpdate = []
