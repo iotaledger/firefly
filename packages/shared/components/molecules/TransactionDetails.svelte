@@ -42,6 +42,7 @@
     export let subject: Subject = null
     export let tag: string = null
     export let time: Date = null
+    export let isInternal: boolean
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
@@ -116,7 +117,7 @@
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if inclusionState}
-                <ActivityStatusPill {type} {direction} {inclusionState} />
+                <ActivityStatusPill {type} {direction} {isInternal} {inclusionState} />
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />
