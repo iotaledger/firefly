@@ -70,7 +70,7 @@
         {#if secondaryIcon && !disabled}
             <div class="col-span-1 col-end-13 h-full flex justify-center items-center justify-items-center">
                 {#if busy}
-                    <Spinner busy />
+                    <Spinner busy color="gray-600" darkColor="gray-400" />
                 {:else}
                     <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
                 {/if}
