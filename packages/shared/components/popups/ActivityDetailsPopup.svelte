@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
+    import { Text, Spinner } from 'shared/components'
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
@@ -14,7 +14,6 @@
         getAssetFromPersistedAssets,
         rejectActivity,
     } from '@core/wallet'
-    import { Spinner } from 'shared/components'
     import { activeProfile } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
@@ -24,16 +23,36 @@
 
     export let activity: Activity
 
-    const asset = getAssetFromPersistedAssets(activity?.assetId)
+    const asset = getAssetFromPersistedAssets(activity?.data.assetId)
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    let isClaiming = activity.isClaiming
-    $: amount = formatTokenAmountDefault(activity?.rawAmount, asset.metadata)
+    let isClaiming = activity.data.type === 'transaction' && activity.data.isClaiming
+    $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset.metadata)
 
-    $: formattedFiatValue = activity.getFiatAmount(
-        $currencies[CurrencyTypes.USD],
-        $exchangeRates[$activeProfile?.settings?.currency]
-    )
+    $: transactionDetails = {
+        asset,
+        time: activity.time,
+        direction: ActivityDirection.Out,
+        inclusionState: activity?.inclusionState,
+        rawAmount: activity?.data.rawAmount,
+        formattedFiatValue: activity.getFiatAmount(
+            $currencies[CurrencyTypes.USD],
+            $exchangeRates[$activeProfile?.settings?.currency]
+        ),
+        storageDeposit: activity.data.storageDeposit,
+        giftedStorageDeposit: activity.data.giftedStorageDeposit,
+        amount,
+        unit: asset?.metadata?.unit,
+        ...(activity?.data.type === 'transaction' && {
+            asyncStatus: activity.data.asyncStatus,
+            claimedDate: activity.data.claimedDate,
+            claimingTransactionId: activity.data.claimingTransactionId,
+            expirationDate: activity.data.expirationDate,
+            subject: activity?.data?.subject,
+            tag: activity?.data?.tag,
+            metadata: activity?.data?.metadata,
+        }),
+    }
 
     function handleExplorerClick(): void {
         Platform.openUrl(`${explorerUrl}/block/${activity.transactionId}`)
@@ -97,13 +116,13 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {formattedFiatValue} {...activity} {amount} unit={asset?.metadata?.unit} {asset} />
-    {#if activity.isAsync && (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
+    <TransactionDetails {...transactionDetails} {...activity} />
+    {#if activity.data.type === 'transaction' && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
-                disabled={isClaiming || activity.isRejected}
+                disabled={isClaiming || activity.data.isRejected}
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300 {isClaiming ||
-                activity.isRejected
+                activity.data.isRejected
                     ? 'cursor-default text-gray-500'
                     : 'cursor-pointer'}"
                 on:click={reject}

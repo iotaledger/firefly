@@ -7,7 +7,10 @@ export function linkActivityAndClaimingTransaction(account: IAccountState): void
     const accountActivities = get(allAccountActivities)[Number(account.id)]
 
     const activities = accountActivities.filter(
-        (activity) => activity.direction === ActivityDirection.In && activity.isAsync
+        (activity) =>
+            activity.data.type === 'transaction' &&
+            activity.data.direction === ActivityDirection.In &&
+            activity.data.isAsync
     )
     const claimedAccountActivities = get(claimedActivities)?.[account.id]
 
@@ -55,12 +58,13 @@ function updateClaimStatusAndHideClaimingActivity(
     accountId: string
 ) {
     allAccountActivities.update((state) => {
-        const _claimedActivity = state[accountId]?.find((_activity) => _activity.id === claimedActivityId)
-        const _claimingActivity = state[accountId]?.find(
+        const _claimedActivity = state[Number(accountId)]?.find((_activity) => _activity.id === claimedActivityId)
+        const _claimingActivity = state[Number(accountId)]?.find(
             (_activity) => _activity.transactionId === claimingActivityTransactionId
         )
 
-        _claimedActivity.updateFromPartialActivity({
+        _claimedActivity.updateDataFromPartialActivity({
+            type: 'transaction',
             isClaimed: true,
             claimedDate: claimingActivityTime,
             claimingTransactionId: claimingActivityTransactionId,

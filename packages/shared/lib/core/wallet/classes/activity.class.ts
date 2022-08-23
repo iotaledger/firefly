@@ -45,8 +45,6 @@ export class Activity implements IActivity {
     type: ActivityType
     time: Date
     inclusionState: InclusionState
-    rawAmount: number
-    assetId: string
     inputs: IUTXOInput[]
     isHidden?: boolean
     isAssetHidden: boolean
@@ -104,8 +102,8 @@ export class Activity implements IActivity {
     }
 
     getFormattedAmount(signed: boolean): string {
-        const metadata = getAssetFromPersistedAssets(this?.assetId)?.metadata
-        const amount = formatTokenAmountBestMatch(this.rawAmount, metadata, 2)
+        const metadata = getAssetFromPersistedAssets(this.data.assetId)?.metadata
+        const amount = formatTokenAmountBestMatch(this.data.rawAmount, metadata, 2)
         if (this.data.type === 'transaction') {
             return `${this.data.direction !== ActivityDirection.In && signed ? '- ' : ''}${amount}`
         } else {
@@ -115,7 +113,7 @@ export class Activity implements IActivity {
 
     getFiatAmount(fiatPrice?: number, exchangeRate?: number): string {
         if (fiatPrice && exchangeRate) {
-            const fiatValue = formatCurrency(convertToFiat(this.rawAmount, fiatPrice, exchangeRate))
+            const fiatValue = formatCurrency(convertToFiat(this.data.rawAmount, fiatPrice, exchangeRate))
             return fiatValue ? fiatValue : '-'
         } else {
             return '-'

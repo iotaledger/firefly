@@ -9,8 +9,6 @@ export interface IActivity {
     type: ActivityType
     time: Date
     inclusionState: InclusionState
-    rawAmount: number
-    assetId: string
     inputs: IUTXOInput[]
     isHidden?: boolean
     isAssetHidden: boolean
