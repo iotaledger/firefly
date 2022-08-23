@@ -27,9 +27,11 @@
     $: title = activity?.getTitle()
     $: subject = activity?.getFormattedSubject()
     $: isIncomingActivityUnclaimed =
-        (activity?.direction === ActivityDirection.In || activity?.isSelfTransaction) &&
-        activity?.asyncStatus === ActivityAsyncStatus.Unclaimed
+        activity?.data.type === 'transaction' &&
+        (activity?.data.direction === ActivityDirection.In || activity?.data.isSelfTransaction) &&
+        activity?.data.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
+    $: description = getDescription(activity)
 
     function handleTransactionClick(): void {
         if (asset?.verification === VerificationStatus.New) {
@@ -69,6 +71,19 @@
     function handleClaimClick(): void {
         claimActivity(activity)
     }
+
+    function getDescription(activity: Activity): string {
+        if (activity?.type === ActivityType.Foundry) {
+            return asset?.metadata?.name
+                ? truncateString(asset?.metadata?.name, 20, 0)
+                : truncateString(asset?.id, 6, 7)
+        } else if (activity?.data.type === 'transaction') {
+            return localize(
+                activity?.data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
+                { values: { account: subject } }
+            )
+        }
+    }
 </script>
 
 {#if activity}
@@ -91,7 +106,10 @@
                         <Text
                             fontWeight={FontWeight.semibold}
                             lineHeight="140"
-                            color={activity?.direction === ActivityDirection.In ? 'blue-700' : ''}
+                            color={activity?.data.type === 'transaction' &&
+                            activity?.data.direction === ActivityDirection.In
+                                ? 'blue-700'
+                                : ''}
                             classes="whitespace-nowrap"
                         >
                             {activity?.getFormattedAmount(true)}
@@ -100,18 +118,7 @@
 
                     <div class="flex flex-row justify-between">
                         <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
-                            {#if activity?.type === ActivityType.Foundry}
-                                {asset?.metadata?.name
-                                    ? truncateString(asset?.metadata?.name, 20, 0)
-                                    : truncateString(asset?.id, 6, 7)}
-                            {:else}
-                                {localize(
-                                    activity?.direction === ActivityDirection.In
-                                        ? 'general.fromAddress'
-                                        : 'general.toAddress',
-                                    { values: { account: subject } }
-                                )}
-                            {/if}
+                            {description}
                         </Text>
                         <Text
                             fontWeight={FontWeight.normal}
@@ -124,11 +131,11 @@
                     </div>
                 </div>
             </div>
-            {#if activity?.isAsync && (activity.direction === ActivityDirection.Out || !activity?.isClaimed)}
+            {#if activity.data.type === 'transaction' && activity?.data.isAsync && (activity.data.direction === ActivityDirection.Out || !activity?.data.isClaimed)}
                 <HR />
                 <div class="flex w-full justify-between space-x-4">
                     <div class="flex flex-row justify-center items-center space-x-2">
-                        {#if !activity?.isClaimed}
+                        {#if !activity?.data.isClaimed}
                             <Icon width="16" height="16" icon="timer" classes="text-gray-600" />
                             <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}
                                 >{timeDiff ?? localize('general.none')}</Text
@@ -138,9 +145,9 @@
                     <div class="flex flex-row justify-end w-1/2 space-x-2">
                         {#if isIncomingActivityUnclaimed}
                             <button
-                                disabled={activity.isClaiming || activity.isRejected}
+                                disabled={activity.data.isClaiming || activity.data.isRejected}
                                 class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent 
-                                {activity.isClaiming || activity.isRejected
+                                {activity.data.isClaiming || activity.data.isRejected
                                     ? 'cursor-default text-gray-500'
                                     : 'cursor-pointer hover:bg-blue-200'}"
                                 on:click|stopPropagation={handleRejectClick}
@@ -151,14 +158,14 @@
                                 class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
                                 on:click|stopPropagation={handleClaimClick}
                             >
-                                {#if activity.isClaiming}
+                                {#if activity.data.isClaiming}
                                     <Spinner busy={true} classes="justify-center h-fit" />
                                 {:else}
                                     {localize('actions.claim')}
                                 {/if}
                             </button>
                         {:else}
-                            <ActivityAsyncStatusPill asyncStatus={activity.asyncStatus} />
+                            <ActivityAsyncStatusPill asyncStatus={activity.data.asyncStatus} />
                         {/if}
                     </div>
                 </div>

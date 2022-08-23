@@ -24,7 +24,8 @@ export function isFilteredActivity(activity: Activity): boolean {
     }
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
-        activity.isRejected
+        activity.data.type === 'transaction' &&
+        activity.data.isRejected
     ) {
         return true
     }
@@ -78,25 +79,39 @@ export function isFilteredActivity(activity: Activity): boolean {
         }
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
-            activity.asyncStatus !== ActivityAsyncStatus.Claimed
+            activity.data.type === 'transaction' &&
+            activity.data.asyncStatus !== ActivityAsyncStatus.Claimed
         ) {
             return true
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
-            (!activity.asyncStatus || activity.asyncStatus === ActivityAsyncStatus.Claimed)
+            activity.data.type === 'transaction' &&
+            (!activity.data.asyncStatus || activity.data.asyncStatus === ActivityAsyncStatus.Claimed)
         ) {
             return true
         }
     }
     if (filter.type.active && filter.type.selected) {
-        if (filter.type.selected === TypeFilterOption.Incoming && activity.direction !== ActivityDirection.In) {
+        if (
+            filter.type.selected === TypeFilterOption.Incoming &&
+            activity.data.type === 'transaction' &&
+            activity.data.direction !== ActivityDirection.In
+        ) {
             return true
         }
-        if (filter.type.selected === TypeFilterOption.Outgoing && activity.direction !== ActivityDirection.Out) {
+        if (
+            filter.type.selected === TypeFilterOption.Outgoing &&
+            activity.data.type === 'transaction' &&
+            activity.data.direction !== ActivityDirection.Out
+        ) {
             return true
         }
-        if (filter.type.selected === TypeFilterOption.Internal && !activity.isInternal) {
+        if (
+            filter.type.selected === TypeFilterOption.Internal &&
+            activity.data.type === 'transaction' &&
+            !activity.data.isInternal
+        ) {
             return true
         }
     }

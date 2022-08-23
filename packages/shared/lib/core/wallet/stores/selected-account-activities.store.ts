@@ -86,9 +86,11 @@ export const queriedActivities: Readable<Activity[]> = derived(
         if (activitySearchTerm) {
             activityList = activityList.filter(
                 (activity) =>
-                    (activity.recipient?.type === 'account' &&
-                        activity.recipient?.account?.name === $activitySearchTerm) ||
-                    (activity.recipient?.type === 'address' && activity.recipient?.address === $activitySearchTerm) ||
+                    (activity.data.type === 'transaction' &&
+                        ((activity.data.recipient?.type === 'account' &&
+                            activity.data.recipient?.account?.name === $activitySearchTerm) ||
+                            (activity.data.recipient?.type === 'address' &&
+                                activity.data.recipient?.address === $activitySearchTerm))) ||
                     activity?.id?.toLowerCase() === $activitySearchTerm ||
                     ($activitySearchTerm[0] === '>' &&
                         unitToValue($activitySearchTerm.substring(1)) < activity.rawAmount) ||
