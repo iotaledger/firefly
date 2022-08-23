@@ -33,7 +33,7 @@
     export let amount = '0'
     export let unit: string
     export let recipient: Subject
-    export let internal = false
+    export let isInternal = false
     export let metadata: string
     export let tag: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -52,7 +52,7 @@
         ? generateRawAmount(String(parseCurrency(amount)), unit, asset.metadata)
         : parseCurrency(amount)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
-    $: internal = recipient.type === 'account'
+    $: isInternal = recipient.type === 'account'
     $: isNativeToken = asset?.id !== $selectedAccountAssets?.baseCoin?.id
 
     $: $$props, expirationDate, rawAmount, void _prepareOutput()
@@ -74,7 +74,8 @@
         amount,
         tag,
         unit,
-        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
+        isInternal,
+        type: ActivityType.Transaction,
     }
 
     async function _prepareOutput(): Promise<void> {

@@ -1,14 +1,10 @@
-import { selectedAccountId } from '@core/account'
-import { syncBalance } from '@core/account/actions/syncBalance'
 import { selectedAccount } from '@core/account/stores/selected-account.store'
 import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
-import { showAppNotification } from '@lib/notifications'
 import { checkStronghold } from '@lib/stronghold'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
-import { ActivityAsyncStatus } from '../enums'
-import { addClaimedActivity, updateActivityByActivityId } from '../stores'
+import { updateActivityByActivityId } from '../stores'
 
 export async function claimActivity(activity: Activity): Promise<void> {
     await checkStronghold()
@@ -18,24 +14,7 @@ export async function claimActivity(activity: Activity): Promise<void> {
         const results = await account.claimOutputs([activity.outputId])
         if (results.length > 0) {
             const transactionId = results[0].transactionId
-            addClaimedActivity(account.id, activity.transactionId, {
-                id: activity.id,
-                claimingTransactionId: transactionId,
-                claimedTimestamp: new Date().getTime(),
-            })
-            updateActivityByActivityId(account.id, activity.id, {
-                isClaimed: true,
-                claimingTransactionId: transactionId,
-                asyncStatus: ActivityAsyncStatus.Claimed,
-                claimedDate: new Date(),
-            })
-
-            syncBalance(get(selectedAccountId))
-
-            showAppNotification({
-                type: 'info',
-                message: localize('notifications.claimed.success'),
-            })
+            updateActivityByActivityId(account.id, activity.id, { claimingTransactionId: transactionId })
         }
     } catch (err) {
         if (!err.message) {
@@ -45,7 +24,6 @@ export async function claimActivity(activity: Activity): Promise<void> {
                 showNotification: true,
             })
         }
-    } finally {
         updateActivityByActivityId(account.id, activity.id, { isClaiming: false })
     }
 }
