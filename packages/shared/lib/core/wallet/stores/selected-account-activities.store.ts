@@ -93,12 +93,13 @@ export const queriedActivities: Readable<Activity[]> = derived(
                                 activity.data.recipient?.address === $activitySearchTerm))) ||
                     activity?.id?.toLowerCase() === $activitySearchTerm ||
                     ($activitySearchTerm[0] === '>' &&
-                        unitToValue($activitySearchTerm.substring(1)) < activity.rawAmount) ||
+                        unitToValue($activitySearchTerm.substring(1)) < activity.data.rawAmount) ||
                     ($activitySearchTerm[0] === '<' &&
-                        unitToValue($activitySearchTerm.substring(1)) > activity.rawAmount) ||
-                    ($activitySearchTerm[1] === 'i' && isValueInUnitRange(activity.rawAmount, $activitySearchTerm)) ||
-                    activity.rawAmount === unitToValue($activitySearchTerm) ||
-                    formatUnitBestMatch(activity.rawAmount).toString().toLowerCase()?.includes($activitySearchTerm)
+                        unitToValue($activitySearchTerm.substring(1)) > activity.data.rawAmount) ||
+                    ($activitySearchTerm[1] === 'i' &&
+                        isValueInUnitRange(activity.data.rawAmount, $activitySearchTerm)) ||
+                    activity.data.rawAmount === unitToValue($activitySearchTerm) ||
+                    formatUnitBestMatch(activity.data.rawAmount).toString().toLowerCase()?.includes($activitySearchTerm)
             )
         }
 

@@ -30,13 +30,13 @@ export function isFilteredActivity(activity: Activity): boolean {
         return true
     }
     if (filter.asset.active && filter.asset.selected) {
-        if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
+        if (filter.asset.selected && activity.data.assetId !== filter.asset.selected) {
             return true
         }
     }
     if (filter.amount.active) {
         const activityAmount =
-            activity.rawAmount / 10 ** getAssetFromPersistedAssets(activity.assetId).metadata.decimals
+            activity.data.rawAmount / 10 ** getAssetFromPersistedAssets(activity.data.assetId).metadata.decimals
         if (filter.amount.selected === NumberFilterOption.Equal && filter.amount.subunit.type === 'single') {
             const isEqual = activityAmount === parseCurrency(filter.amount.subunit.amount)
             if (!isEqual) {

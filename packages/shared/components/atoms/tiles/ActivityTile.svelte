@@ -23,7 +23,7 @@
 
     let asset: IPersistedAsset
 
-    $: activity?.assetId, $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity?.assetId))
+    $: activity?.data.assetId, $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity?.data.assetId))
     $: title = activity?.getTitle()
     $: subject = activity?.getFormattedSubject()
     $: isIncomingActivityUnclaimed =
