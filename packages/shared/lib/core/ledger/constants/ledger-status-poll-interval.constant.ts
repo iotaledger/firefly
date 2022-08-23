@@ -1,0 +1,1 @@
+export const LEDGER_STATUS_POLL_INTERVAL = 1500
