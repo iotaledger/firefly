@@ -5,5 +5,6 @@ import { profileManager } from '../stores'
 
 export function createStardustAccount(payload: CreateAccountPayload): Promise<IAccount> {
     const manager = get(profileManager)
+
     return manager.createAccount(payload)
 }

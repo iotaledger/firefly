@@ -2,11 +2,10 @@
     import { onDestroy, createEventDispatcher } from 'svelte'
     import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
     import { ADDRESS_SECURITY_LEVEL, hardwareIndexes } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { popupState } from '@lib/popup'
-    import { LedgerAppName } from '@lib/typings/ledger'
+    import { LedgerAppName, displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@core/ledger'
 
     const dispatch = createEventDispatcher()
     const min = 0
@@ -66,7 +65,7 @@
                 })
                 .catch((error) => {
                     busy = false
-                    displayNotificationForLedgerProfile('error', true, true, false, true, error)
+                    displayNotificationForLedgerProfile('error', true, true, error)
                     showInfo = false
                     clearTimeout(infoTimeout)
                     console.error(error)
@@ -75,7 +74,7 @@
         function _onCancel(): void {
             busy = false
         }
-        promptUserToConnectLedger(true, _onConnected, _onCancel)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleBackClick(): void {

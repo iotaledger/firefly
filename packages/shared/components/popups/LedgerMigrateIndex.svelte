@@ -1,14 +1,12 @@
 <script lang="typescript">
     import { Button, Text, Animation } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { navigateToNewIndexMigration } from 'shared/lib/ledger'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale
 
     function handleMigrateClick() {
         closePopup(true)
-        navigateToNewIndexMigration()
     }
 
     function handleCloseClick() {

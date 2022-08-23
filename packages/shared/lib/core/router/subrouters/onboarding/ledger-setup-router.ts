@@ -15,14 +15,9 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
     }
 
     restartIfNotInLedgerFlow(): void {
-        const recoveryType = get(onboardingProfile)?.recoveryType
         // reinitialize the init view only if we are not in the middle of a ledger flow
         if (this.history.length === 0) {
-            if (recoveryType === ProfileRecoveryType.Seed || recoveryType === ProfileRecoveryType.FireflyLedger) {
-                this.routeStore.set(LedgerSetupRoute.Connect)
-            } else {
-                this.routeStore.set(LedgerSetupRoute.LegacyIntro)
-            }
+            this.routeStore.set(LedgerSetupRoute.InstallationGuide)
         }
     }
 
@@ -35,31 +30,20 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
                 const recoveryType = get(onboardingProfile)?.recoveryType
                 if (recoveryType === ProfileRecoveryType.FireflyLedger) {
                     nextRoute = LedgerSetupRoute.RestoreFromLedger
-                } else if (recoveryType === ProfileRecoveryType.TrinityLedger) {
-                    nextRoute = LedgerSetupRoute.GenerateAddress
                 } else {
                     this.parentRouter.next()
                 }
                 break
             }
-            case LedgerSetupRoute.RestoreFromLedger:
+
+            case LedgerSetupRoute.RestoreFromLedger: {
                 this.parentRouter.next()
                 break
-            case LedgerSetupRoute.LegacyIntro:
-                nextRoute = LedgerSetupRoute.InstallationGuide
-                break
-            case LedgerSetupRoute.InstallationGuide:
+            }
+            case LedgerSetupRoute.InstallationGuide: {
                 nextRoute = LedgerSetupRoute.Connect
                 break
-            case LedgerSetupRoute.GenerateAddress:
-                nextRoute = LedgerSetupRoute.SwitchApps
-                break
-            case LedgerSetupRoute.SwitchApps:
-                nextRoute = LedgerSetupRoute.AccountIndex
-                break
-            case LedgerSetupRoute.AccountIndex:
-                this.parentRouter.next()
-                break
+            }
         }
 
         this.setNext(nextRoute)

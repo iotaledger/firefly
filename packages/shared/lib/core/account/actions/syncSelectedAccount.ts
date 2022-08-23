@@ -1,6 +1,6 @@
 import { localize } from '@core/i18n'
 import { isLedgerProfile } from '@core/profile'
-import { displayNotificationForLedgerProfile } from '@lib/ledger'
+import { displayNotificationForLedgerProfile } from '@core/ledger'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
 import { updateSelectedAccount, selectedAccount } from '../stores'
@@ -18,7 +18,7 @@ export async function syncSelectedAccount(): Promise<void> {
             err && err.type === 'ClientError' && err.error === 'error.node.chrysalisNodeInactive'
         if (!shouldHideErrorNotification) {
             if (get(isLedgerProfile)) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                displayNotificationForLedgerProfile('error', true, true, err)
             } else {
                 showAppNotification({
                     type: 'error',

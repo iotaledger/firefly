@@ -1,6 +1,6 @@
 import { localize } from '@core/i18n'
 import { isLedgerProfile } from '@core/profile'
-import { displayNotificationForLedgerProfile } from '@lib/ledger'
+import { displayNotificationForLedgerProfile } from '@core/ledger'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
 import { createNewAccount } from './createNewAccount'
@@ -16,7 +16,7 @@ export async function tryCreateAdditionalAccount(alias: string, color: string): 
         if (err) {
             console.error(errorMessage)
             if (get(isLedgerProfile)) {
-                displayNotificationForLedgerProfile('error', true, false, false, false, err)
+                displayNotificationForLedgerProfile('error', true, false, err)
             } else {
                 showAppNotification({
                     type: 'error',
