@@ -31,7 +31,11 @@ export interface IProfileManager {
     isStrongholdPasswordAvailable(): Promise<boolean>
     listen(eventTypes: EventType[], callback: (error: Error, result: string) => void): void
     clearListeners(eventTypes: EventType[]): void
-    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<AccountMeta[]>
+    recoverAccounts(
+        accountGapLimit: number,
+        addressGapLimit: number,
+        syncOptions?: AccountSyncOptions
+    ): Promise<AccountMeta[]>
     removeLatestAccount(): Promise<void>
     restoreBackup(source: string, password: string): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>

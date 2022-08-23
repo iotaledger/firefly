@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { Animation, Text } from 'shared/components'
-    import { formatAddressForLedger } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Locale } from '@core/i18n'
+    import { formatAddressForLedger } from '@core/ledger'
 
     export let locale: Locale
 
@@ -87,7 +87,7 @@
                 {locale(`general.${shouldDisplayRemainderAmount ? 'r' : 'newR'}emainder`)}
             </Text>
             <Text type="pre" classes={shouldDisplayRemainderAmount ? 'mb-4' : ''}>
-                {formatAddressForLedger(remainderAddress)}
+                {remainderAddress}
             </Text>
 
             {#if shouldDisplayRemainderAmount}

@@ -13,6 +13,7 @@ export function initialiseProfileManager(
     id?: string
 ): IProfileManager {
     id = id ?? generateRandomId()
+
     return api.createAccountManager(id, {
         storagePath,
         ...(clientOptions && { clientOptions }),

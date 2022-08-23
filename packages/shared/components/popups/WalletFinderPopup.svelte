@@ -1,6 +1,10 @@
 <script lang="typescript">
+    import { onDestroy } from 'svelte'
     import { Button, KeyValueBox, Spinner, Text, TextHint } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
+    import { closePopup, openPopup } from '@lib/popup'
+    import { showAppNotification } from '@lib/notifications'
+    import { displayNotificationForLedgerProfile, ledgerDeviceStatus } from '@core/ledger'
     import { sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
@@ -15,10 +19,11 @@
         visibleActiveAccounts,
     } from '@core/profile'
     import { recoverAccounts } from '@core/profile-manager'
-    import { formatTokenAmountBestMatch } from '@core/wallet'
-    import { displayNotificationForLedgerProfile, isLedgerConnected } from '@lib/ledger'
-    import { showAppNotification } from '@lib/notifications'
-    import { closePopup, openPopup } from '@lib/popup'
+    import {
+        formatTokenAmountBestMatch,
+        generateAndStoreActivitiesForAllAccounts,
+        refreshAccountAssetsForActiveProfile,
+    } from '@core/wallet'
 
     export let searchForBalancesOnLoad = false
 
@@ -60,7 +65,7 @@
                 error = ''
                 isBusy = true
 
-                if ($isLedgerProfile && !isLedgerConnected()) {
+                if ($isLedgerProfile && !$ledgerDeviceStatus.connected) {
                     isBusy = false
 
                     displayNotificationForLedgerProfile('warning')
@@ -81,7 +86,7 @@
                 error = localize(err.error)
 
                 if ($isLedgerProfile) {
-                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                    displayNotificationForLedgerProfile('error', true, true, err)
                 } else {
                     showAppNotification({
                         type: 'error',
@@ -97,6 +102,13 @@
     function handleCancelClick() {
         closePopup()
     }
+
+    onDestroy(async () => {
+        if (hasUsedWalletFinder) {
+            await refreshAccountAssetsForActiveProfile()
+            await generateAndStoreActivitiesForAllAccounts()
+        }
+    })
 </script>
 
 <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold} classes="mb-6"
@@ -121,7 +133,7 @@
         />
     </div>
 
-    {#if true}
+    {#if hasUsedWalletFinder}
         <TextHint warning text={localize('popups.walletFinder.searchAgainHint')} />
     {/if}
 </div>
