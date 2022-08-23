@@ -31,7 +31,7 @@ jobs:
                   node-version: 16.4
 
             - name: Install Dependencies
-              run: yarn --ignore-script
+              run: yarn --ignore-scripts
 
             - name: Format
               run: yarn format-check
