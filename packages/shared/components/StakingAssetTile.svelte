@@ -84,8 +84,6 @@
     }
 
     function handleTileClick(): void {
-        let popupTitle
-        let popupBody
         let popupInfoBox
         if ($mobile) {
             if (SHOW_SHIMMER_TOKEN_FORMATTING_WARNING) {
@@ -97,13 +95,23 @@
                     ],
                 }
             }
-            popupTitle = tooltipText?.title
-            popupBody = tooltipText?.body
+            if (tooltipText?.body.length > 0) {
+                openPopup({
+                    type: 'airdropNetworkWarning',
+                    props: { title: tooltipText?.title, body: tooltipText?.body },
+                })
+            } else {
+                openPopup({
+                    type: 'airdropNetworkInfo',
+                    props: { airdrop, infoBox: popupInfoBox },
+                })
+            }
+        } else {
+            openPopup({
+                type: 'airdropNetworkInfo',
+                props: { airdrop, infoBox: popupInfoBox },
+            })
         }
-        openPopup({
-            type: 'airdropNetworkInfo',
-            props: { airdrop, infoBox: popupInfoBox, title: popupTitle, body: popupBody },
-        })
     }
 
     function getAccount(accounts: WalletAccount[]): WalletAccount {

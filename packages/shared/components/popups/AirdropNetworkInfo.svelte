@@ -7,8 +7,6 @@
     import { capitalize } from 'shared/lib/utils'
 
     export let airdrop: StakingAirdrop
-    export let title: string
-    export let body: string[]
     export let infoBox: { title?: string; body?: string[] }
 
     const handleLearnMoreClick = (): void => {
@@ -36,11 +34,9 @@
 </script>
 
 <div class="mb-5 text-center">
-    <Text type="h4">{title ?? localize(`popups.${airdrop}-info.title`)}</Text>
+    <Text type="h4">{localize(`popups.${airdrop}-info.title`)}</Text>
 </div>
-{#if !title && !body?.length}
-    <Illustration illustration="{airdrop}-info-bg" classes="relative w-full rounded-2xl mb-7" />
-{/if}
+<Illustration illustration="{airdrop}-info-bg" classes="relative w-full rounded-2xl mb-7" />
 <div class="flex flex-col flex-wrap space-y-3">
     {#if infoBox}
         <div class="text-left p-2 rounded-lg flex flex-col space-y-2 bg-gray-50 dark:bg-gray-700">
@@ -52,15 +48,7 @@
             {/each}
         </div>
     {/if}
-    {#if body?.length}
-        {#each body as paragraph}
-            <Text type="p">
-                {paragraph}
-            </Text>
-        {/each}
-    {:else}
-        <Text type="p">{localize(`popups.${airdrop}-info.body1`)}</Text>
-        <Text type="p">{localize(`popups.${airdrop}-info.body2`)}</Text>
-        <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
-    {/if}
+    <Text type="p">{localize(`popups.${airdrop}-info.body1`)}</Text>
+    <Text type="p">{localize(`popups.${airdrop}-info.body2`)}</Text>
+    <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
 </div>
