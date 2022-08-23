@@ -47,7 +47,9 @@
                     state === ShimmerClaimingAccountState.FullyClaimed
                 )
             }) &&
-            shimmerClaimingAccounts?.some((shimmerClaimingAccount) => Boolean(shimmerClaimingAccount?.claimingTransaction))
+            shimmerClaimingAccounts?.some((shimmerClaimingAccount) =>
+                Boolean(shimmerClaimingAccount?.claimingTransaction)
+            )
         )
     }
 
