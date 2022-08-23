@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Animation, Button, Illustration, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
-    import { LedgerAppName } from 'shared/lib/typings/ledger'
+    import { LedgerAppName } from '@core/ledger'
     import { Locale } from '@core/i18n'
 
     export let locale: Locale
@@ -34,7 +34,7 @@
     </div>
     <div class="w-full text-center my-9 px-10">
         <Text secondary>
-            {locale(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.IOTALegacy } })}
+            {locale(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.SHIMMER } })}
         </Text>
     </div>
     <div class="w-full flex flex-row flex-nowrap space-x-4">

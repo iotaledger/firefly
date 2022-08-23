@@ -1,6 +1,6 @@
 import { onboardingProfile } from '../stores'
 import { deleteOnboardingProfile } from './deleteOnboardingProfile'
-import { destroyIotaProfileManager } from './destroyIotaProfileManager'
+import { destroyShimmerClaimingProfileManager } from './destroyShimmerClaimingProfileManager'
 
 export async function cleanupOnboarding(deleteProfile: boolean = false): Promise<void> {
     onboardingProfile.set(null)
@@ -11,5 +11,5 @@ export async function cleanupOnboarding(deleteProfile: boolean = false): Promise
 }
 
 async function cleanupExtraProfileManagers(): Promise<void> {
-    await destroyIotaProfileManager()
+    await destroyShimmerClaimingProfileManager()
 }

@@ -13,14 +13,18 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
         const createdAccount = await createStardustAccount({
             alias: name || `${localize('general.account')} ${(get(activeAccounts)?.length ?? 0) + 1}`,
         })
+
         const account = await getAccount(createdAccount.meta.index)
         await account.sync()
+
         const [newAccount, metadata] = await buildAccountStateAndMetadata(account, name, color)
         addAccountToActiveAccounts(newAccount)
         addAccountMetadataToActiveProfile(metadata)
         addEmptyAccountActivitiesToAllAccountActivities(`${createdAccount.meta.index}`)
+
         return newAccount
     } catch (err) {
         console.error(err)
+        throw err
     }
 }

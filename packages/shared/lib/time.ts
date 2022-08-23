@@ -8,9 +8,6 @@ export const HOURS_PER_DAY = 24
 export const DAYS_PER_WEEK = 7
 export const MONTHS_PER_YEAR = 12
 
-// DOMAIN-SPECIFIC
-export const SECONDS_PER_MILESTONE = 10
-
 // DERIVED
 export const SECONDS_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE
 

@@ -2,7 +2,7 @@
     import { Animation, Button, Icon, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
-    import { formatAddressForLedger, promptUserToConnectLedger } from '@lib/ledger'
+    import { formatAddressForLedger, promptUserToConnectLedger } from '@core/ledger'
 
     let newAddress = ''
     let busy = false
@@ -62,7 +62,7 @@
         function _onCancel(): void {
             busy = false
         }
-        promptUserToConnectLedger(false, _onConnected, _onCancel)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
     // function displayAddress(accountId: string): void {
     //     api.getMigrationAddress(true, accountId, {

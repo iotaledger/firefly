@@ -8,7 +8,6 @@ const Platform: IPlatform = {
     DeepLinkManager: undefined,
     NotificationManager: undefined,
     PincodeManager: undefined,
-    ledger: undefined,
     close(): void {},
     exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null> {
         return Promise.resolve(undefined)
@@ -89,6 +88,9 @@ const Platform: IPlatform = {
     updateMenu(attribute: string, value: unknown): void {},
     validateSeedVault(buffer: unknown): Promise<boolean> {
         return Promise.resolve(false)
+    },
+    copyFile(copyFilePath: string, destinationFilePath: string): Promise<void> {
+        return Promise.resolve()
     },
 }
 

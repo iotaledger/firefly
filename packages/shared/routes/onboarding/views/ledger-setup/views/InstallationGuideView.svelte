@@ -3,7 +3,7 @@
     import { Animation, Button, Icon, Illustration, Link, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from '@lib/popup'
-    import { LedgerAppName } from '@lib/typings/ledger'
+    import { LedgerAppName } from '@core/ledger'
 
     const dispatch = createEventDispatcher()
 
@@ -26,22 +26,15 @@
     <div slot="leftpane__content">
         <Text type="h2" classes="mb-5">{localize('views.ledgerInstallationGuide.title')}</Text>
         <Text type="p" secondary classes="mb-5">
-            {localize('views.ledgerInstallationGuide.body1', { values: { legacy: LedgerAppName.IOTALegacy } })}
+            {localize('views.ledgerInstallationGuide.body1', { values: { protocol: LedgerAppName.SHIMMER } })}
         </Text>
         <Text type="p" secondary classes="mb-5">{localize('views.ledgerInstallationGuide.body2')}</Text>
         <div class="flex flex-row flex-nowrap items-center justify-center space-x-4 text-center mt-28">
             <div class="flex flex-col flex-wrap space-y-2">
                 <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center">
-                    <Icon icon="ledger-app-legacy" width="32" height="32" classes="text-white" />
+                    <Icon icon="shimmer" width="32" height="32" classes="text-white" />
                 </div>
-                <Text type="p" secondary>{LedgerAppName.IOTALegacy}</Text>
-            </div>
-            <Icon icon="plus" height="15" width="15" classes="-mt-6 text-blue-400" />
-            <div class="flex flex-col flex-wrap space-y-2">
-                <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center">
-                    <Icon icon="ledger-app" width="32" height="32" classes="text-white" />
-                </div>
-                <Text type="p" secondary>{LedgerAppName.IOTA}</Text>
+                <Text type="p" secondary>{LedgerAppName.SHIMMER}</Text>
             </div>
         </div>
     </div>

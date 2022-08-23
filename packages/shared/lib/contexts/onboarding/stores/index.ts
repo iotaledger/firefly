@@ -1,2 +1,2 @@
-export * from './iota-profile-manager.store'
 export * from './onboarding-profile.store'
+export * from './shimmer-claiming-profile-manager'

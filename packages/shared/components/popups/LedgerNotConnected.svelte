@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { Button, Icon, Text } from 'shared/components'
-    import { stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { stopPollingLedgerStatus, LedgerAppName } from '@core/ledger'
     import { closePopup } from 'shared/lib/popup'
-    import { LedgerAppName } from 'shared/lib/typings/ledger'
     import { onDestroy, onMount } from 'svelte'
     import { Locale } from '@core/i18n'
 
@@ -34,8 +33,8 @@
         <Icon icon={legacy ? 'ledger-app-legacy' : 'ledger-app'} width="32" height="32" classes="text-white" />
     </div>
     <Text type="p" classes="mb-6">
-        {locale(`popups.ledgerNotConnected.${legacy ? 'connectLegacy' : 'connect'}`, {
-            values: legacy ? { legacy: LedgerAppName.IOTALegacy } : {},
+        {locale('popups.ledgerNotConnected.connect', {
+            values: { protocol: LedgerAppName.SHIMMER },
         })}
     </Text>
     <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>

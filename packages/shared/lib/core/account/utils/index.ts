@@ -1,4 +1,7 @@
+export * from './createBoundAccount'
 export * from './getIconColorFromString'
 export * from './getRandomAccountColor'
 export * from './sumBalanceForAccounts'
+export * from './sumTotalFromOutputs'
+export * from './syncAccountsInParallel'
 export * from './validateAccountName'

@@ -13,6 +13,7 @@ export async function resetOnboardingProfileWithProfileManager(): Promise<void> 
             type: null,
             recoveryType: null,
             hasInitialisedProfileManager: false,
+            shimmerClaimingAccounts: [],
         })
     }
 }
