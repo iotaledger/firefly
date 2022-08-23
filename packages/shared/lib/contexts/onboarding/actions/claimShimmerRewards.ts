@@ -51,15 +51,15 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
     }
 }
 
-let hasThrownTestError = false
+// let hasThrownTestError = false
 
 async function claimShimmerRewardsForShimmerClaimingAccount(
     shimmerClaimingAccount: IShimmerClaimingAccount
 ): Promise<void> {
-    if (shimmerClaimingAccount?.meta?.index === 1 && !hasThrownTestError) {
-        hasThrownTestError = true
-        throw new Error('TEST')
-    }
+    // if (shimmerClaimingAccount?.meta?.index === 1 && !hasThrownTestError) {
+    //     hasThrownTestError = true
+    //     throw new Error('TEST')
+    // }
     const recipientAddress = shimmerClaimingAccount?.twinAccount?.meta?.publicAddresses[0]?.address
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
