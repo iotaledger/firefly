@@ -30,6 +30,7 @@
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
+    export let isClaiming: boolean = null
     export let direction: ActivityDirection
     export let expirationDate: Date = null
     export let formattedFiatValue: string = null
@@ -42,6 +43,7 @@
     export let subject: Subject = null
     export let tag: string = null
     export let time: Date = null
+    export let isInternal: boolean
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
@@ -116,7 +118,7 @@
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if inclusionState}
-                <ActivityStatusPill {type} {direction} {inclusionState} />
+                <ActivityStatusPill {type} {direction} {isInternal} {inclusionState} />
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />
@@ -142,7 +144,7 @@
                 <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
             {/each}
             {#if claimingTransactionId}
-                <KeyValueBox keyText={localize('general.claimingTransactionId')}>
+                <KeyValueBox keyText={localize(isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
                     <button
                         slot="value"
                         class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
