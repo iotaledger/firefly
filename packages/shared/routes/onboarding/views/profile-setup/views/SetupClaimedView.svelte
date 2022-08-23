@@ -16,14 +16,14 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
 
-    const isBusy = {
+    let isBusy = {
         [ProfileRecoveryType.Mnemonic]: false,
         [ProfileRecoveryType.Stronghold]: false,
         [ProfileRecoveryType.Ledger]: false,
     }
 
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
-        isBusy[recoveryType] = true
+        isBusy = { ...isBusy, [recoveryType]: true }
         const type = getProfileTypeFromProfileRecoveryType(recoveryType)
         updateOnboardingProfile({ type, recoveryType, shimmerClaimingAccounts: [] })
         await initialiseProfileManagerFromOnboardingProfile(true)
