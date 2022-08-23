@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { mobile } from '@lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight } from 'shared/lib/app'
     import { Button, Password, Spinner, Text } from 'shared/components'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -89,7 +89,12 @@
     }
 </script>
 
-<div class="flex flex-col {$mobile ? 'safe-area p-5 pt-6' : 'px-6 py-10'}">
+<div
+    class="flex flex-col {$mobile ? 'safe-area px-2' : 'px-6 py-10'}"
+    style="padding-bottom: {$mobile && $isKeyboardOpened
+        ? $keyboardHeight - 20
+        : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+>
     <div class="{$mobile ? 'flex flex-row justify-center' : ''} mb-6">
         <Text type="h4">{localize('popups.exportTransactionHistory.title')}</Text>
     </div>
