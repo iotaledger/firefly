@@ -88,7 +88,10 @@
             }
             const _exportMigrationLog = () => {
                 if ($mobile) {
-                    Platform.exportMigrationLog(`${$migrationLog}`, `${$activeProfile.id}-${LOG_FILE_NAME}`)
+                    Platform.exportMigrationLog(
+                        `${JSON.stringify(migrationLog)}`,
+                        `${$activeProfile.id}-${LOG_FILE_NAME}`
+                    )
                         .then((result) => {
                             if (result) {
                                 logExported = true
