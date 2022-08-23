@@ -50,7 +50,7 @@
 >
     <span class="text-14 font-600 text-center text-white uppercase">{profileInitial || 'A'}</span>
 </button>
-<Drawer bind:this={drawer} fromLeft classes="flex">
+<Drawer bind:this={drawer} fromLeft classes="flex" on:close={$backButtonStore?.reset()}>
     <section class="flex flex-col w-full">
         <header
             class="w-full mt-3 py-3 px-9 mb-3 flex items-centers justify-center bg-white dark:bg-gray-800"

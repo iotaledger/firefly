@@ -127,6 +127,9 @@
         await pollMarketData()
         await pollNetworkStatus()
     })
+
+    // TODO: Has to be enabled again when system notifications are implemented
+    $appSettings.notifications = false
 </script>
 
 {#if $isLocaleLoaded && !showSplash}

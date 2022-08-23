@@ -401,9 +401,6 @@
 
     $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
         drawer.close()
-        if (drawer.isDrawerOpen() === false) {
-            $backButtonStore?.reset()
-        }
     }
 
     onMount(() => {
@@ -468,8 +465,14 @@
         })
     }
 
+    function handleDrawerClose(): void {
+        accountRoute.set(AccountRoute.Init)
+        $backButtonStore?.reset()
+    }
+
     function handleActivityDrawerBackClick(): void {
         selectedMessage.set(null)
+        $backButtonStore?.pop()
     }
 
     $: if ($selectedMessage && activityDrawer) {
@@ -493,7 +496,7 @@
                     <Drawer
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
-                        on:close={() => accountRoute.set(AccountRoute.Init)}
+                        on:close={handleDrawerClose}
                         backgroundBlur={$accountRoute === AccountRoute.Receive}
                     >
                         {#if $accountRoute === AccountRoute.Send}
