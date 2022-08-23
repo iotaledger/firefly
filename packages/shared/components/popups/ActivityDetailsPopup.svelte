@@ -116,7 +116,7 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {...transactionDetails} {...activity} />
+    <TransactionDetails {...transactionDetails} />
     {#if activity.data.type === 'transaction' && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button

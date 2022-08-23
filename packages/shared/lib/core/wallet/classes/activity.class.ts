@@ -1,7 +1,6 @@
 import { IAccountState } from '@core/account'
 import { localize } from '@core/i18n'
-import { COIN_TYPE, networkHrp } from '@core/network'
-import { activeProfile } from '@core/profile'
+import { networkHrp } from '@core/network'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { truncateString } from '@lib/helpers'
 import {
@@ -14,29 +13,14 @@ import {
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { FoundryActivityData, IActivity, IProcessedTransaction, TransactionActivityData } from '../interfaces'
-import { isActivityHiddenForAccountId } from '../stores/hidden-activities.store'
 import { getPersistedAsset } from '../stores/persisted-assets.store'
 import {
     formatTokenAmountBestMatch,
     getActivityType,
-    getAmountFromOutput,
     getAssetFromPersistedAssets,
-    getExpirationDateFromOutput,
-    getMetadataFromOutput,
-    getNativeTokenFromOutput,
-    getRecipientFromOutput,
-    getStorageDepositFromOutput,
-    getTagFromOutput,
-    isOutputAsync,
-    isSubjectInternal,
-    outputIdFromTransactionData,
+    getFoundryActivityData,
+    getTransactionActivityData,
 } from '../utils'
-import {
-    getSenderFromTransaction,
-    getSenderFromInputs,
-    getMainTransactionOutputFromTransaction,
-    getFoundryOutputFromTransaction,
-} from '../utils/transactions'
 import { IUTXOInput } from '@iota/types'
 
 export class Activity implements IActivity {
@@ -182,94 +166,5 @@ export class Activity implements IActivity {
         } else {
             return ''
         }
-    }
-}
-
-function getTransactionActivityData(
-    processedTransaction: IProcessedTransaction,
-    account: IAccountState
-): TransactionActivityData {
-    const { outputs, transactionId, isIncoming, detailedTransactionInputs } = processedTransaction
-
-    const { output, outputIndex, isSelfTransaction } = getMainTransactionOutputFromTransaction(
-        outputs,
-        account.depositAddress,
-        isIncoming
-    )
-    const outputId = outputIdFromTransactionData(transactionId, outputIndex) // Only required for async transactions e.g. when claimed or to get the full output with `getOutput`
-
-    const recipient = getRecipientFromOutput(output)
-    const sender = detailedTransactionInputs
-        ? getSenderFromInputs(detailedTransactionInputs)
-        : getSenderFromTransaction(isIncoming, account.depositAddress, output)
-
-    const subject = isIncoming ? sender : recipient
-    const isInternal = isSubjectInternal(subject)
-
-    const direction = isIncoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
-
-    const isAsync = isOutputAsync(output)
-    const asyncStatus = isAsync ? ActivityAsyncStatus.Unclaimed : null
-    const isClaimed = false
-    const isClaiming = false
-    const claimingTransactionId = undefined
-    const claimedDate = undefined
-
-    const nativeToken = getNativeTokenFromOutput(output)
-
-    const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
-    const isRejected = isActivityHiddenForAccountId(account.id, transactionId)
-
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
-    const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit
-
-    const metadata = getMetadataFromOutput(output)
-    const tag = getTagFromOutput(output)
-    const expirationDate = getExpirationDateFromOutput(output)
-    const publicNote = ''
-
-    return {
-        type: 'transaction',
-        direction,
-        outputId,
-        isInternal,
-        storageDeposit,
-        giftedStorageDeposit,
-        rawAmount,
-        sender,
-        recipient,
-        subject,
-        isSelfTransaction,
-        isAsync,
-        asyncStatus,
-        expirationDate,
-        isRejected,
-        isClaiming,
-        isClaimed,
-        publicNote,
-        claimingTransactionId,
-        claimedDate,
-        metadata,
-        tag,
-        assetId,
-    }
-}
-
-function getFoundryActivityData(processedTransaction: IProcessedTransaction): FoundryActivityData {
-    const { outputs } = processedTransaction
-    const { output } = getFoundryOutputFromTransaction(outputs)
-
-    const nativeToken = getNativeTokenFromOutput(output)
-    const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
-
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output) // probably we need to sum up all storage deposits
-    const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit
-
-    return {
-        type: 'foundry',
-        assetId,
-        storageDeposit,
-        giftedStorageDeposit,
-        rawAmount,
     }
 }
