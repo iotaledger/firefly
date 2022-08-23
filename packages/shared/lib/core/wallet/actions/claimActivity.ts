@@ -14,10 +14,7 @@ export async function claimActivity(activity: Activity): Promise<void> {
         const results = await account.claimOutputs([activity.outputId])
         if (results.length > 0) {
             const transactionId = results[0].transactionId
-            updateActivityByActivityId(account.id, activity.id, {
-                claimingTransactionId: transactionId,
-                claimedDate: new Date(),
-            })
+            updateActivityByActivityId(account.id, activity.id, { claimingTransactionId: transactionId })
         }
     } catch (err) {
         if (!err.message) {

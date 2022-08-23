@@ -18,6 +18,7 @@ export function updateClaimingTransactionInclusion(
                 activity.updateFromPartialActivity({
                     isClaimed: true,
                     isClaiming: false,
+                    claimedDate: new Date(),
                     asyncStatus: ActivityAsyncStatus.Claimed,
                 })
                 addClaimedActivity(accountId, activity.transactionId, {
