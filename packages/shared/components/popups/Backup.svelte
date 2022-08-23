@@ -92,7 +92,6 @@
         openPopup({
             type: 'password',
             hideClose: true,
-            preventClose: true,
             overflow: true,
             props: {
                 onSuccess: (_password) => {
