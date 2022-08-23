@@ -1031,7 +1031,7 @@
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
         "test": "Test",
-        "testDeepLink": "Test deep Link"
+        "testDeepLink": "Test deep link"
     },
     "general": {
         "recipient": "Recipient",
