@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { AccountSyncOptions } from '@iota/wallet'
+import type { AccountSyncOptions } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
 
