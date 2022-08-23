@@ -36,6 +36,7 @@ export function updateClaimingTransactionInclusion(
                 activity.updateFromPartialActivity({
                     isClaimed: false,
                     isClaiming: false,
+                    claimingTransactionId: undefined,
                     asyncStatus: ActivityAsyncStatus.Unclaimed,
                 })
                 showAppNotification({
