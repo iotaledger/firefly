@@ -20,7 +20,7 @@ export function addActivityToAccountActivitiesInAllAccountActivities(accountId: 
 
 export function setAccountActivitiesInAllAccountActivities(accountId: string, accountActivities: Activity[]): void {
     allAccountActivities.update((state) => {
-        state[accountId] = accountActivities
+        state[Number(accountId)] = accountActivities
         return state
     })
 }
@@ -31,7 +31,7 @@ export function updateActivityByTransactionId(
     partialActivity: Partial<IActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[accountId]?.find((_activity) => _activity.transactionId === transactionId)
+        const activity = state[Number(accountId)]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
             activity.updateFromPartialActivity(partialActivity)
@@ -46,7 +46,7 @@ export function updateActivityByActivityId(
     partialActivity: Partial<IActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[accountId]?.find((_activity) => _activity.id === activityId)
+        const activity = state[Number(accountId)]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
             activity.updateFromPartialActivity(partialActivity)
