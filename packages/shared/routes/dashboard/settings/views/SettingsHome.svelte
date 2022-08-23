@@ -17,7 +17,8 @@
         settingsRouter,
     } from '@core/router'
 
-    const { NetworkStatus, ...generalSettingsMobile } = GeneralSettings
+    // TODO: Notification settings have to be enabled again when system notifications are implemented for mobile
+    const { NetworkStatus, Notifications, ...generalSettingsMobile } = GeneralSettings
     const { CrashReporting, MigrateLedgerIndex, DeepLinks, ...advancedSettingsMobile } = AdvancedSettings
     const securitySettings = Object.assign({}, SecuritySettings)
     const advancedSettings = Object.assign({}, AdvancedSettings)
