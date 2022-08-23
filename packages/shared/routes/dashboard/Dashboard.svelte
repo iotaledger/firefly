@@ -12,7 +12,7 @@
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
-    import { isPollingLedgerDeviceStatus, stopPollingLedgerStatus } from 'shared/lib/ledger'
+    import { isPollingLedgerDeviceStatus, stopPollingLedgerStatus, pollLedgerDeviceStatus } from '@core/ledger'
     import { ongoingSnapshot } from 'shared/lib/migration'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
@@ -33,8 +33,6 @@
 
     let fundsSoonNotificationId
     let developerProfileNotificationId
-
-    // const LEDGER_STATUS_POLL_INTERVAL = 2000
 
     const unsubscribeAccountsLoaded = hasLoadedAccounts.subscribe((val) => {
         if (val) {
@@ -110,7 +108,7 @@
      * when the one which interrupted has finished
      */
     $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
-        // pollLedgerDeviceStatus(false, LEDGER_STATUS_POLL_INTERVAL)
+        pollLedgerDeviceStatus()
     }
 
     $: $hasStrongholdLocked && reflectLockedStronghold()
