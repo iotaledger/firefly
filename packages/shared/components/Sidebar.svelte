@@ -74,13 +74,13 @@
                   },
               ]
             : []),
-        ...(features?.developerTools?.enabled
+        ...(features?.developer?.enabled
             ? [
                   {
                       icon: 'tools',
-                      label: localize('tabs.developerTools'),
-                      route: DashboardRoute.DeveloperTools,
-                      onClick: openDeveloperTools,
+                      label: localize('tabs.developer'),
+                      route: DashboardRoute.Developer,
+                      onClick: openDeveloper,
                   },
               ]
             : []),
@@ -94,8 +94,8 @@
         $dashboardRouter.goTo(DashboardRoute.Staking)
     }
 
-    function openDeveloperTools() {
-        $dashboardRouter.goTo(DashboardRoute.DeveloperTools)
+    function openDeveloper() {
+        $dashboardRouter.goTo(DashboardRoute.Developer)
     }
 
     // function updateSidebarNotification() {

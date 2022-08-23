@@ -1530,7 +1530,7 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking",
-        "developerTools": "Developer"
+        "developer": "Developer"
     },
     "pills": {
         "stake": {
