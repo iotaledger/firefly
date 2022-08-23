@@ -28,6 +28,7 @@
     import { capitalize } from 'shared/lib/utils'
     import { activeProfile } from 'shared/lib/profile'
     import { selectedAccountStore } from 'shared/lib/wallet'
+    import { mobile } from 'shared/lib/app'
 
     export let asset: Asset
 
@@ -77,11 +78,32 @@
         (isBelowMinimumRewards && hasStakingEnded)
 
     function toggleTooltip(): void {
-        showTooltip = !showTooltip
+        if (!$mobile) {
+            showTooltip = !showTooltip
+        }
     }
 
     function handleTileClick(): void {
-        openPopup({ type: 'airdropNetworkInfo', props: { airdrop } })
+        let popupTitle
+        let popupBody
+        let popupInfoBox
+        if ($mobile) {
+            if (SHOW_SHIMMER_TOKEN_FORMATTING_WARNING) {
+                popupInfoBox = {
+                    title: localize('tooltips.shimmerTokenFormatting.title'),
+                    body: [
+                        localize('tooltips.shimmerTokenFormatting.body1'),
+                        localize('tooltips.shimmerTokenFormatting.body2'),
+                    ],
+                }
+            }
+            popupTitle = tooltipText?.title
+            popupBody = tooltipText?.body
+        }
+        openPopup({
+            type: 'airdropNetworkInfo',
+            props: { airdrop, infoBox: popupInfoBox, title: popupTitle, body: popupBody },
+        })
     }
 
     function getAccount(accounts: WalletAccount[]): WalletAccount {
@@ -89,7 +111,7 @@
     }
 
     function getLocalizedTooltipText(): TooltipText {
-        if (isPartiallyStakedAndCanStake) {
+        if (isPartiallyStakedAndCanStake && !$mobile) {
             return {
                 title: localize('tooltips.partiallyStakedFunds.title', {
                     values: { amount: formatUnitBestMatch(getUnstakedFunds()) },
@@ -138,7 +160,7 @@
                     body: _getBody(),
                 }
             }
-        } else {
+        } else if (SHOW_SHIMMER_TOKEN_FORMATTING_WARNING && !$mobile) {
             return {
                 title: localize('tooltips.shimmerTokenFormatting.title'),
                 body: [
