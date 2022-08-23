@@ -1332,7 +1332,8 @@
             "duplicate": "A profile with this name already exists.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
-            }
+            },
+            "type": "Unable to determine the profile type"
         },
         "password": {
             "doNotMatch": "Passwords do not match.",
@@ -1373,7 +1374,8 @@
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
             "notLast": "You can only delete your last wallet.",
-            "notFound": "Unable to find account"
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",

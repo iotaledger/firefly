@@ -83,9 +83,11 @@ export async function findShimmerRewards(): Promise<void> {
             accountGapLimit = accountGapLimitIncrement
             addressGapLimit = addressGapLimitIncrement
 
+            // TODO: https://github.com/iotaledger/firefly/issues/4297
             // startAccountIndex = 0
             // startAddressIndex = 0
         } else {
+            // TODO: https://github.com/iotaledger/firefly/issues/4297
             // startAccountIndex += accountGapLimitIncrement
             // startAddressIndex += addressGapLimitIncrement
         }
