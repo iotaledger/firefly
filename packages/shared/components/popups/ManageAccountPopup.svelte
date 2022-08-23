@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
-    import { promptUserToConnectLedger } from '@lib/ledger'
+    import { promptUserToConnectLedger } from '@core/ledger'
     import { closePopup, openPopup } from '@lib/popup'
 
     export let error = ''
@@ -34,7 +34,7 @@
             isBusy = true
 
             if ($isLedgerProfile) {
-                promptUserToConnectLedger(false, _save, _cancel)
+                promptUserToConnectLedger(_save, _cancel)
             } else if ($isSoftwareProfile && $isStrongholdLocked) {
                 openPopup({ type: 'password', props: { onSuccess: _save } })
             } else {

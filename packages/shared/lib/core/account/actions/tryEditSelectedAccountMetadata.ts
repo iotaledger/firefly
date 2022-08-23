@@ -1,6 +1,6 @@
 import { localize } from '@core/i18n'
 import { isLedgerProfile, updateActiveAccountMetadata } from '@core/profile'
-import { displayNotificationForLedgerProfile } from '@lib/ledger'
+import { displayNotificationForLedgerProfile } from '@core/ledger'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
 import { IAccountMetadata } from '../interfaces'
@@ -16,7 +16,7 @@ export async function tryEditSelectedAccountMetadata(metadata: Partial<IAccountM
         if (error) {
             console.error(error?.error || error)
             if (get(isLedgerProfile)) {
-                displayNotificationForLedgerProfile('error', true, false, false, false, error)
+                displayNotificationForLedgerProfile('error', true, false, error)
             } else {
                 showAppNotification({
                     type: 'error',

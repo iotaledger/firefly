@@ -2,8 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { promptUserToConnectLedger, displayNotificationForLedgerProfile, ledgerDeviceState } from '@lib/ledger'
-    import { LedgerAppName, LedgerDeviceState } from '@lib/typings/ledger'
+    import { promptUserToConnectLedger, displayNotificationForLedgerProfile, LedgerAppName } from '@core/ledger'
 
     export let busy = false
 
@@ -15,15 +14,14 @@
         function _onCancel(): void {
             busy = false
 
-            displayNotificationForLedgerProfile('error', true, true, false, true)
+            displayNotificationForLedgerProfile('error', true, true, true)
         }
 
         function _onConnected(): void {
-            if ($ledgerDeviceState !== LedgerDeviceState.LegacyConnected) _onCancel()
-            else dispatch('next')
+            dispatch('next')
         }
 
-        promptUserToConnectLedger(true, _onConnected, _onCancel)
+        promptUserToConnectLedger(_onConnected, _onCancel)
     }
 
     function handleBackClick(): void {
