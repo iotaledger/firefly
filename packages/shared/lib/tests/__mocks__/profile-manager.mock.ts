@@ -146,7 +146,11 @@ export class ProfileManagerMock implements IProfileManager {
         return
     }
 
-    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
+    recoverAccounts(
+        accountGapLimit: number,
+        addressGapLimit: number,
+        syncOptions: AccountSyncOptions
+    ): Promise<IAccount[]> {
         return Promise.resolve([])
     }
 

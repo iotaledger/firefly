@@ -12,5 +12,5 @@ export async function recoverAccounts(
     syncOptions?: AccountSyncOptions
 ): Promise<IAccount[]> {
     const manager = get(profileManager)
-    return manager.recoverAccounts(accountGapLimit, addressGapLimit, syncOptions ?? : {})
+    return manager.recoverAccounts(accountGapLimit, addressGapLimit, syncOptions ?? {})
 }
