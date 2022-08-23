@@ -537,14 +537,15 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.2-alpha.16":
-  version "2.0.2-alpha.16"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.16.tgz#ea274c7bf42cb940013991ac0661275780e8825e"
-  integrity sha512-iNma5N+zW5nWd092nakXkATgs/H+Bz+t+dsLWEzOL7LRryO96CAhZUnSB08TYUIkcRjl5qLqQSdHSwRU9M2yag==
+"@iota/wallet@2.0.2-alpha.19":
+  version "2.0.2-alpha.19"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.19.tgz#e10d76c4f6ac47ed06c08f22da03c3b1b5089c3a"
+  integrity sha512-JL26AaRM0T6kuReSXZvvyUwvaygW+rLJy6NvVYza3LEiFzUkz7AJw3dYXo2YlTYa/kCewROYpdarVvScAASwCA==
   dependencies:
     "@iota/types" "^1.0.0-beta.11"
     cargo-cp-artifact "^0.1.5"
     prebuild-install "^5.3.3"
+    typescript "^4.7.4"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -8987,6 +8988,11 @@ typescript@^3.9.5:
   version "3.9.7"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
   integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
+
+typescript@^4.7.4:
+  version "4.7.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
+  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
 union-value@^1.0.0:
   version "1.0.1"
