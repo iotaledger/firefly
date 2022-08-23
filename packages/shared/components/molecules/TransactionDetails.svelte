@@ -30,6 +30,7 @@
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
+    export let isClaiming: boolean = null
     export let direction: ActivityDirection
     export let expirationDate: Date = null
     export let formattedFiatValue: string = null
@@ -143,7 +144,7 @@
                 <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
             {/each}
             {#if claimingTransactionId}
-                <KeyValueBox keyText={localize('general.claimingTransactionId')}>
+                <KeyValueBox keyText={localize(isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
                     <button
                         slot="value"
                         class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
