@@ -8,14 +8,15 @@ import { checkStronghold } from '@lib/stronghold'
 import { get } from 'svelte/store'
 import { Activity } from '../classes'
 import { ActivityAsyncStatus } from '../enums'
-import { addClaimedActivity, updateActivityByActivityId } from '../stores'
+import { addClaimedActivity, updateActivityDataByActivityId } from '../stores'
 
 export async function claimActivity(activity: Activity): Promise<void> {
     await checkStronghold()
     const account = get(selectedAccount)
     try {
-        updateActivityByActivityId(account.id, activity.id, { isClaiming: true })
-        const results = await account.claimOutputs([activity.outputId])
+        const outputId = activity.data.type === 'transaction' ? activity.data.outputId : undefined
+        updateActivityDataByActivityId(account.id, activity.id, { type: 'transaction', isClaiming: true })
+        const results = await account.claimOutputs([outputId])
         if (results.length > 0) {
             const transactionId = results[0].transactionId
             addClaimedActivity(account.id, activity.transactionId, {
@@ -23,7 +24,8 @@ export async function claimActivity(activity: Activity): Promise<void> {
                 claimingTransactionId: transactionId,
                 claimedTimestamp: new Date().getTime(),
             })
-            updateActivityByActivityId(account.id, activity.id, {
+            updateActivityDataByActivityId(account.id, activity.id, {
+                type: 'transaction',
                 isClaimed: true,
                 claimingTransactionId: transactionId,
                 asyncStatus: ActivityAsyncStatus.Claimed,
@@ -46,6 +48,6 @@ export async function claimActivity(activity: Activity): Promise<void> {
             })
         }
     } finally {
-        updateActivityByActivityId(account.id, activity.id, { isClaiming: false })
+        updateActivityDataByActivityId(account.id, activity.id, { type: 'transaction', isClaiming: false })
     }
 }

@@ -82,6 +82,12 @@ export class Activity implements IActivity {
         Object.assign(this, partialActivity)
     }
 
+    updateDataFromPartialActivity(partialData: Partial<TransactionActivityData | FoundryActivityData>): void {
+        if (partialData.type === this.data.type) {
+            Object.assign(this.data, partialData)
+        }
+    }
+
     getAsyncStatus(time: Date): ActivityAsyncStatus {
         if (this.data.type === 'transaction' && this.data.isAsync) {
             if (this.data.isClaimed) {
