@@ -29,9 +29,12 @@ jobs:
               uses: actions/setup-node@v2
               with:
                   node-version: 16.4
+
             - name: Install Dependencies
-              run: yarn --ignore-scrip
+              run: yarn --ignore-script
+
             - name: Format
-              run: yarn format-che
+              run: yarn format-check
+
             - name: Lint
               run: yarn lint
