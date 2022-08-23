@@ -8,4 +8,6 @@ export interface ISendConfirmationParameters {
     metadata?: string
     tag?: string
     giftStorageDeposit?: boolean
+    disableToggleGift?: boolean
+    disableChangeExpiration?: boolean
 }
