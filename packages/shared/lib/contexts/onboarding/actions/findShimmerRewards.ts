@@ -1,6 +1,7 @@
 import { get } from 'svelte/store'
 
 import { getBoundAccount } from '@core/account'
+import { localize } from '@core/i18n'
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
 import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT, UnableToFindProfileTypeError } from '@core/profile'
 import { profileManager } from '@core/profile-manager'
@@ -8,10 +9,10 @@ import { sortAccountsByIndex, zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 
+import { DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS } from '../constants'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
-import { localize } from '@core/i18n'
 
 let accountGapLimitIncrement = 1
 let accountGapLimit = accountGapLimitIncrement
@@ -31,14 +32,18 @@ export async function findShimmerRewards(): Promise<void> {
         }
 
         const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
-        const accountMetadatas = await _shimmerClaimingProfileManager?.recoverAccounts(accountGapLimit, addressGapLimit)
+        const accountMetadataList = await _shimmerClaimingProfileManager?.recoverAccounts(
+            accountGapLimit,
+            addressGapLimit,
+            DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS
+        )
         const boundAccounts = (
             await Promise.all(
-                accountMetadatas.map(async (metadata) => {
-                    const account = await getBoundAccount(metadata?.index, true, shimmerClaimingProfileManager)
-                    account.meta.alias = Number.isNaN(metadata?.alias)
-                        ? metadata?.alias
-                        : `${localize('general.account')} ${metadata?.index + 1}`
+                accountMetadataList.map(async (accountMetadata) => {
+                    const account = await getBoundAccount(accountMetadata?.index, true, shimmerClaimingProfileManager)
+                    account.meta.alias = Number.isNaN(accountMetadata?.alias)
+                        ? accountMetadata?.alias
+                        : `${localize('general.account')} ${accountMetadata?.index + 1}`
                     return account
                 })
             )
@@ -78,7 +83,6 @@ export async function findShimmerRewards(): Promise<void> {
             accountGapLimit = accountGapLimitIncrement
             addressGapLimit = addressGapLimitIncrement
 
-            // TODO: https://github.com/iotaledger/firefly/issues/4297
             // startAccountIndex = 0
             // startAddressIndex = 0
         } else {
