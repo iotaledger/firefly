@@ -6,11 +6,11 @@
     import { FontWeight } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import {
-        Activity,
         ActivityAsyncStatus,
         ActivityDirection,
         claimActivity,
         formatTokenAmountDefault,
+        selectedAccountActivities,
         getAssetFromPersistedAssets,
         rejectActivity,
     } from '@core/wallet'
@@ -22,13 +22,13 @@
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
 
-    export let activity: Activity
+    export let activityId: string
 
-    const asset = getAssetFromPersistedAssets(activity?.assetId)
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    let isClaiming = activity.isClaiming
-    $: amount = formatTokenAmountDefault(activity?.rawAmount, asset.metadata)
+    $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
+    $: asset = getAssetFromPersistedAssets(activity?.assetId)
+    $: amount = formatTokenAmountDefault(activity?.rawAmount, asset?.metadata)
 
     $: formattedFiatValue = activity.getFiatAmount(
         $currencies[CurrencyTypes.USD],
@@ -44,12 +44,10 @@
     }
 
     async function claim() {
-        isClaiming = true
         await claimActivity(activity)
-        isClaiming = false
         openPopup({
             type: 'activityDetails',
-            props: { activity },
+            props: { activityId: activity.id },
         })
     }
 
@@ -69,7 +67,7 @@
                 onCancel: () =>
                     openPopup({
                         type: 'activityDetails',
-                        props: { activity },
+                        props: { activityId: activity.id },
                     }),
             },
         })
@@ -101,8 +99,8 @@
     {#if activity.isAsync && (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
-                disabled={isClaiming || activity.isRejected}
-                class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300 {isClaiming ||
+                disabled={activity.isClaiming || activity.isRejected}
+                class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300 {activity.isClaiming ||
                 activity.isRejected
                     ? 'cursor-default text-gray-500'
                     : 'cursor-pointer'}"
@@ -111,11 +109,11 @@
                 {localize('actions.reject')}
             </button>
             <button
-                disabled={isClaiming}
+                disabled={activity.isClaiming}
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
                 on:click={claim}
             >
-                {#if isClaiming}
+                {#if activity.isClaiming}
                     <Spinner busy={true} classes="justify-center" />
                 {:else}
                     {localize('actions.claim')}

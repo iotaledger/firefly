@@ -122,8 +122,8 @@ export class Activity implements IActivity {
             this.direction = isIncoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
 
             this.isAsync = isOutputAsync(output)
-            this.asyncStatus = this.isAsync ? ActivityAsyncStatus.Unclaimed : null
             this.isClaimed = false
+            this.asyncStatus = this.isAsync ? this.getAsyncStatus(new Date()) : null
 
             const nativeToken = getNativeTokenFromOutput(output)
 
@@ -171,11 +171,7 @@ export class Activity implements IActivity {
             if (this.isClaimed) {
                 return ActivityAsyncStatus.Claimed
             } else {
-                if (time > this.expirationDate) {
-                    return ActivityAsyncStatus.Expired
-                } else {
-                    return ActivityAsyncStatus.Unclaimed
-                }
+                return time > this.expirationDate ? ActivityAsyncStatus.Expired : ActivityAsyncStatus.Unclaimed
             }
         }
         return null
@@ -236,24 +232,6 @@ export class Activity implements IActivity {
             }
         }
         return title
-    }
-
-    getIcon(): { icon: string; iconColor: string } {
-        let icon = ''
-        let iconColor = ''
-        if (this.isInternal) {
-            icon = 'transfer'
-            iconColor = 'gray-600'
-        } else {
-            if (this.direction === ActivityDirection.In) {
-                icon = 'chevron-down'
-                iconColor = 'blue-700'
-            } else if (this.direction === ActivityDirection.Out) {
-                icon = 'chevron-up'
-                iconColor = 'blue-500'
-            }
-        }
-        return { icon, iconColor }
     }
 
     getFormattedSubject(): string {
