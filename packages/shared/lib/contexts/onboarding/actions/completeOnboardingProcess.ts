@@ -11,8 +11,10 @@ import { cleanupOnboarding } from './cleanupOnboarding'
 export async function completeOnboardingProcess(): Promise<void> {
     addOnboardingProfile()
 
-    const shouldRecoverAccounts = get(onboardingProfile)?.setupType === ProfileSetupType.Recovered
-    void login(true, shouldRecoverAccounts)
+    const { setupType } = get(onboardingProfile)
+    const shouldRecoverAccounts = setupType === ProfileSetupType.Recovered
+    const shouldCreateAccount = setupType === ProfileSetupType.New
+    void login(true, shouldRecoverAccounts, shouldCreateAccount)
 
     await cleanupOnboarding()
 }

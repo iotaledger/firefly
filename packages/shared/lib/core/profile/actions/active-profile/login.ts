@@ -30,7 +30,11 @@ import {
 } from '../../stores'
 import { loadAccounts } from './loadAccounts'
 
-export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: boolean): Promise<void> {
+export async function login(
+    isOnboardingFlow?: boolean,
+    shouldRecoverAccounts?: boolean,
+    shouldCreateAccount?: boolean
+): Promise<void> {
     const _loginRouter = get(loginRouter)
     try {
         const _activeProfile = get(activeProfile)
@@ -64,7 +68,7 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
                 if (accountMetadatas?.length === 0) {
                     await createNewAccount()
                 }
-            } else if (isOnboardingFlow) {
+            } else if (isOnboardingFlow && shouldCreateAccount) {
                 await createNewAccount()
             }
 
