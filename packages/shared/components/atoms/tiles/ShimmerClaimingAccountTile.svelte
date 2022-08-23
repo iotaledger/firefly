@@ -23,43 +23,49 @@
                 <Text type={TextType.p} fontWeight={FontWeight.medium}>{shimmerClaimingAccount?.meta?.alias}</Text>
             </div>
             <div class="flex flex-col">
-                {#if shouldDisplayUnclaimedRewards}
-                    <div class="flex flex-row justify-end items-center text-right space-x-2">
-                        {#if shouldDisplayFailedState}
+                {#if shimmerClaimingAccount?.state === ShimmerClaimingAccountState.Claiming}
+                    <Text type={TextType.p} secondary fontWeight={FontWeight.semibold}>
+                        {`${localize('actions.claimingRewards')}...`}
+                    </Text>
+                {:else}
+                    {#if shouldDisplayUnclaimedRewards}
+                        <div class="flex flex-row justify-end items-center text-right space-x-2">
+                            {#if shouldDisplayFailedState}
+                                <Icon
+                                    width="16"
+                                    height="16"
+                                    icon="status-error"
+                                    classes="text-white bg-red-500 rounded-full"
+                                />
+                            {/if}
+                            <Text type={TextType.p} fontWeight={FontWeight.semibold}>
+                                {formatTokenAmountBestMatch(
+                                    shimmerClaimingAccount?.unclaimedRewards,
+                                    BASE_TOKEN[NetworkProtocol.Shimmer]
+                                )}
+                            </Text>
+                        </div>
+                    {/if}
+                    {#if shouldDisplayClaimedRewards && !shouldDisplayFailedState}
+                        <div class="flex flex-row justify-end items-center text-right space-x-2">
                             <Icon
                                 width="16"
                                 height="16"
-                                icon="status-error"
-                                classes="text-white bg-red-500 rounded-full"
+                                icon="success-check"
+                                classes="text-white bg-green-600 rounded-full"
                             />
-                        {/if}
-                        <Text type={TextType.p} fontWeight={FontWeight.semibold}>
-                            {formatTokenAmountBestMatch(
-                                shimmerClaimingAccount?.unclaimedRewards,
-                                BASE_TOKEN[NetworkProtocol.Shimmer]
-                            )}
-                        </Text>
-                    </div>
-                {/if}
-                {#if shouldDisplayClaimedRewards && !shouldDisplayFailedState}
-                    <div class="flex flex-row justify-end items-center text-right space-x-2">
-                        <Icon
-                            width="16"
-                            height="16"
-                            icon="success-check"
-                            classes="text-white bg-green-600 rounded-full"
-                        />
-                        <Text type={TextType.p} fontWeight={FontWeight.semibold} secondary classes="flex-grow">
-                            {localize('general.amountClaimed', {
-                                values: {
-                                    amount: formatTokenAmountBestMatch(
-                                        shimmerClaimingAccount?.claimedRewards,
-                                        BASE_TOKEN[NetworkProtocol.Shimmer]
-                                    ),
-                                },
-                            })}
-                        </Text>
-                    </div>
+                            <Text type={TextType.p} fontWeight={FontWeight.semibold} secondary classes="flex-grow">
+                                {localize('general.amountClaimed', {
+                                    values: {
+                                        amount: formatTokenAmountBestMatch(
+                                            shimmerClaimingAccount?.claimedRewards,
+                                            BASE_TOKEN[NetworkProtocol.Shimmer]
+                                        ),
+                                    },
+                                })}
+                            </Text>
+                        </div>
+                    {/if}
                 {/if}
             </div>
         </div>

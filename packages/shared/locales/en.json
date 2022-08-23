@@ -892,6 +892,7 @@
         "dismiss": "Dismiss",
         "claim": "Claim",
         "claiming": "Claiming",
+        "claimingRewards": "Claiming rewards",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -1321,7 +1322,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
