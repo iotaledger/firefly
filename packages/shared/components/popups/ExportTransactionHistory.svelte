@@ -48,7 +48,7 @@
                 time: true,
             })
             try {
-                const filePath = await Platform.exportTransactionHistory(fileName, contents)
+                const filePath = await Platform.exportTransactionHistory(contents, fileName)
                 if (filePath) {
                     closePopup()
                     showAppNotification({
