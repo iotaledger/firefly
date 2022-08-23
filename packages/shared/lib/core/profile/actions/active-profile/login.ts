@@ -12,6 +12,7 @@ import {
     startBackgroundSync,
     subscribe as subscribeToWalletEvents,
 } from '@core/profile-manager/api'
+import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
 import { get } from 'svelte/store'
@@ -51,7 +52,18 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
             if (isOnboardingFlow && shouldRecoverAccounts) {
-                await recoverAccounts(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
+                const accountMetadatas = await recoverAccounts(
+                    INITIAL_ACCOUNT_GAP_LIMIT[type],
+                    INITIAL_ADDRESS_GAP_LIMIT[type]
+                )
+
+                /**
+                 * NOTE: In the case no accounts with funds were recovered, we must
+                 * create one for the new profile.
+                 */
+                if (accountMetadatas?.length === 0) {
+                    await createNewAccount()
+                }
             } else if (isOnboardingFlow) {
                 await createNewAccount()
             }
@@ -68,13 +80,17 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
             incrementLoginProgress()
             await generateAndStoreActivitiesForAllAccounts()
 
-            // Step 7: set initial stronghold status
-            incrementLoginProgress()
-            const strongholdUnlocked = await isStrongholdUnlocked()
-            isStrongholdLocked.set(!strongholdUnlocked)
-            setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
-            if (strongholdUnlocked) {
-                setTimeStrongholdLastUnlocked()
+            if (type === ProfileType.Software) {
+                // Step 7: set initial stronghold status
+                incrementLoginProgress()
+                const strongholdUnlocked = await isStrongholdUnlocked()
+                isStrongholdLocked.set(!strongholdUnlocked)
+                setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
+                if (strongholdUnlocked) {
+                    setTimeStrongholdLastUnlocked()
+                }
+            } else {
+                incrementLoginProgress(2)
             }
 
             // Step 8: start background sync

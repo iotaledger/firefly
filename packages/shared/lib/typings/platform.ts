@@ -1,7 +1,6 @@
 import { IAppSettings, IAppVersionDetails } from '@core/app'
 import { IError } from '@core/error'
 import { IDeepLinkManager } from '@auxiliary/deep-link'
-import { ILedger } from './ledger'
 import { INotificationManager } from './notificationManager'
 import { IPincodeManager } from './pincodeManager'
 import { EventMap } from './events'
@@ -13,7 +12,6 @@ export enum Platforms {
 }
 
 export interface IPlatform {
-    ledger: ILedger
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
     exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>

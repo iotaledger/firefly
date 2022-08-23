@@ -2,7 +2,7 @@
     import { Button, KeyValueBox, Spinner, Text, TextHint } from 'shared/components'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, ledgerDeviceStatus } from '@core/ledger'
     import { localize } from '@core/i18n'
     import {
         activeAccounts,
@@ -65,7 +65,7 @@
                 error = ''
                 isBusy = true
 
-                if ($isLedgerProfile && !isLedgerConnected()) {
+                if ($isLedgerProfile && !$ledgerDeviceStatus.connected) {
                     isBusy = false
 
                     displayNotificationForLedgerProfile('warning')
@@ -85,7 +85,7 @@
                 error = localize(err.error)
 
                 if ($isLedgerProfile) {
-                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                    displayNotificationForLedgerProfile('error', true, true, err)
                 } else {
                     showAppNotification({
                         type: 'error',
