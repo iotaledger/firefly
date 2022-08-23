@@ -1,97 +1,132 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, RewardClaimList, Text } from 'shared/components'
-    import { IAccount } from '@core/account'
+    import { onMount } from 'svelte'
+    import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { shimmerClaimingRouter } from '@core/router'
-    import { AccountMeta } from '@iota/wallet/out/types'
+    import {
+        claimShimmerRewards,
+        ClaimShimmerRewardsError,
+        findShimmerRewards,
+        FindShimmerRewardsError,
+        findShimmerRewardsForAccount,
+        IShimmerClaimingAccount,
+        onboardingProfile,
+    } from '@contexts/onboarding'
 
-    const accounts: IAccount[] = [
-        <IAccount>{
-            meta: <AccountMeta>{
-                index: 0,
-                coinType: 4219,
-                alias: 'A',
-            },
-        },
-        <IAccount>{
-            meta: <AccountMeta>{
-                index: 1,
-                coinType: 4219,
-                alias: 'B',
-            },
-        },
-        <IAccount>{
-            meta: <AccountMeta>{
-                index: 2,
-                coinType: 4219,
-                alias: 'C',
-            },
-        },
-        <IAccount>{
-            meta: <AccountMeta>{
-                index: 3,
-                coinType: 4219,
-                alias: 'D',
-            },
-        },
-        <IAccount>{
-            meta: <AccountMeta>{
-                index: 2,
-                coinType: 4219,
-                alias: 'E',
-            },
-        },
-        <IAccount>{
-            meta: <AccountMeta>{
-                index: 3,
-                coinType: 4219,
-                alias: 'F',
-            },
-        },
-        <IAccount>{
-            meta: <AccountMeta>{
-                index: 2,
-                coinType: 4219,
-                alias: 'G',
-            },
-        },
-        <IAccount>{
-            meta: <AccountMeta>{
-                index: 3,
-                coinType: 4219,
-                alias: 'H',
-            },
-        },
-    ]
+    $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
-    function handleBackClick(): void {
+    let isSearchingForRewards = false
+    let hasSearchedForRewardsBefore = false
+
+    let isClaimingRewards = false
+    let hasTriedClaimingRewards = false
+
+    $: shouldSearchForRewardsButtonBeDisabled = isSearchingForRewards || isClaimingRewards
+    $: shouldClaimRewardsButtonBeDisabled =
+        !shimmerClaimingAccounts.some((shimmerClaimingAccount) => shimmerClaimingAccount.unclaimedRewards > 0) ||
+        isSearchingForRewards ||
+        isClaimingRewards
+    $: shouldShowContinueButton = canUserContinue(shimmerClaimingAccounts)
+
+    function canUserContinue(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
+        return shimmerClaimingAccounts?.every((shimmerClaimingAccount) => shimmerClaimingAccount?.claimingTransaction)
+    }
+
+    function onBackClick(): void {
         $shimmerClaimingRouter.previous()
     }
 
-    function handleUseBalanceFinderClick(): void {}
+    async function onUseBalanceFinderClick(): Promise<void> {
+        try {
+            isSearchingForRewards = true
+            hasSearchedForRewardsBefore = true
+            await findShimmerRewards()
+        } catch (err) {
+            throw new FindShimmerRewardsError()
+        } finally {
+            isSearchingForRewards = false
+        }
+    }
 
-    function handleClaimRewardsClick(): void {
+    async function onClaimRewardsClick(): Promise<void> {
+        try {
+            isClaimingRewards = true
+            hasTriedClaimingRewards = true
+            await claimShimmerRewards()
+        } catch (err) {
+            throw new ClaimShimmerRewardsError()
+        } finally {
+            isClaimingRewards = false
+        }
+    }
+
+    function onContinueClick(): void {
         $shimmerClaimingRouter.next()
     }
+
+    async function onMountHelper(): Promise<void> {
+        /**
+         * NOTE: If the user only has one Shimmer claiming account,
+         * it is likely they have just navigated to this view for
+         * the first time. If they truly only have one account
+         * with unclaimed rewards, then this will just sync every
+         * time the user navigates to this view.
+         */
+        if ($onboardingProfile?.shimmerClaimingAccounts?.length === 1) {
+            try {
+                isSearchingForRewards = true
+                await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
+            } catch (err) {
+                throw new FindShimmerRewardsError()
+            } finally {
+                isSearchingForRewards = false
+            }
+        }
+    }
+
+    onMount(() => {
+        void onMountHelper()
+    })
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick}>
+<OnboardingLayout {onBackClick}>
     <div slot="title">
         <Text type="h2">
-            {localize('views.claimRewards.title')}
+            {localize('views.onboarding.shimmerClaiming.claimRewards.title')}
         </Text>
     </div>
     <div slot="leftpane__content" class="h-full flex flex-col">
         <Text type="p" secondary classes="mb-5">
-            {localize('views.claimRewards.body')}
+            {localize('views.onboarding.shimmerClaiming.claimRewards.body')}
         </Text>
-        <RewardClaimList {accounts} />
+        <ShimmerClaimingAccountList {shimmerClaimingAccounts} />
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full mb-5" secondary onClick={handleUseBalanceFinderClick}
-            >{localize('actions.useBalanceFinder')}</Button
+        <Button
+            classes="w-full mb-5"
+            disabled={shouldSearchForRewardsButtonBeDisabled}
+            secondary
+            onClick={onUseBalanceFinderClick}
         >
-        <Button classes="w-full" onClick={handleClaimRewardsClick}>{localize('actions.claimRewards')}</Button>
+            {#if isSearchingForRewards}
+                <Spinner message={localize('actions.searching')} busy={true} classes="justify-center items-center" />
+            {:else}
+                {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}
+            {/if}
+        </Button>
+        <Button
+            classes="w-full"
+            disabled={shouldClaimRewardsButtonBeDisabled && !shouldShowContinueButton}
+            onClick={shouldShowContinueButton ? onContinueClick : onClaimRewardsClick}
+        >
+            {#if isClaimingRewards}
+                <Spinner message={localize('actions.claiming')} busy={true} classes="justify-center items-center" />
+            {:else if shouldShowContinueButton}
+                {localize('actions.continue')}
+            {:else}
+                {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
+            {/if}
+        </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {true && 'bg-pastel-yellow dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />

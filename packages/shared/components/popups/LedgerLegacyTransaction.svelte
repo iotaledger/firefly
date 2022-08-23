@@ -1,6 +1,5 @@
 <script lang="typescript" xmlns="http://www.w3.org/1999/html">
     import { Animation, Text } from 'shared/components'
-    import { formatAddressForLedger } from 'shared/lib/ledger'
     import type { Input, Transfer } from 'shared/lib/typings/migration'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { Locale } from '@core/i18n'
@@ -32,7 +31,7 @@
     <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
         <Text type="h5" highlighted classes="mb-2">{outputString}</Text>
         <Text type="pre">{formatUnitBestMatch(transfer.value)}</Text>
-        <Text type="pre">{formatAddressForLedger(transfer.address, true)}</Text>
+        <Text type="pre">{transfer.address}</Text>
         <Text type="pre">
             <!-- {#await asyncGetAddressChecksum(transfer.address)}...{:then checksum}{checksumString(checksum)}{/await} -->
         </Text>
@@ -41,7 +40,7 @@
         <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
             <Text type="h5" highlighted classes="mb-2">{inputString(index)}</Text>
             <Text type="pre">{formatUnitBestMatch(balance)}</Text>
-            <Text type="pre">{formatAddressForLedger(address)}</Text>
+            <Text type="pre">{address}</Text>
             <Text type="pre">
                 <!-- {#await asyncGetAddressChecksum(address, true)}...{:then checksum}{checksumString(checksum)}{/await} -->
             </Text>

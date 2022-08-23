@@ -10,7 +10,7 @@
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { initialiseOnboardingRouters, loginRouter } from '@core/router'
-    import { initialiseOnboardingProfile, shouldUseDeveloperProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import { openPopup, popupState } from '@lib/popup'
 
     function onContinueClick(id: string) {
@@ -21,7 +21,7 @@
     function onAddProfileClick() {
         $loginRouter.next({ shouldAddProfile: true })
         initialiseOnboardingRouters()
-        initialiseOnboardingProfile(shouldUseDeveloperProfile())
+        initialiseOnboardingProfile(shouldBeDeveloperProfile())
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {

@@ -5,10 +5,9 @@
     import { mobile } from '@core/app'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { Platform } from '@lib/platform'
-    import { promptUserToConnectLedger } from '@lib/ledger'
     import { LOG_FILE_NAME, migration, migrationLog, resetMigrationState, totalMigratedBalance } from '@lib/migration'
     import { onboardingRouter, ledgerSetupRouter } from '@core/router'
-    import { LedgerAppName } from '@lib/typings/ledger'
+    import { LedgerAppName, promptUserToConnectLedger } from '@core/ledger'
     import { formatUnitBestMatch } from '@lib/units'
     import { AvailableExchangeRates, CurrencyTypes } from '@lib/typings/currency'
     import { localize } from '@core/i18n'
@@ -46,7 +45,7 @@
                  * because the last app the user had open was the legacy one
                  */
                 if ($onboardingProfile?.recoveryType === ProfileRecoveryType.TrinityLedger) {
-                    promptUserToConnectLedger(false, advanceView)
+                    promptUserToConnectLedger(advanceView)
                 } else {
                     advanceView()
                 }
@@ -79,24 +78,9 @@
         }
     }
 
-    function onBackClick(): void {
-        $onboardingRouter.previous()
-    }
-
     onMount(() => {
-        if (!wasMigrated) {
-            if ($onboardingProfile?.recoveryType === ProfileRecoveryType.FireflyLedger) {
-                localizedBody = 'fireflyLedgerBody'
-            }
-        } else {
-            if ($onboardingProfile?.recoveryType === ProfileRecoveryType.TrinityLedger) {
-                localizedBody = 'trinityLedgerBody'
-                localizedValues = { legacy: LedgerAppName.IOTALegacy }
-
-                // updateProfile('ledgerMigrationCount', $activeProfile?.ledgerMigrationCount + 1)
-            } else {
-                localizedBody = 'softwareMigratedBody'
-            }
+        if ($onboardingProfile?.recoveryType === ProfileRecoveryType.FireflyLedger) {
+            localizedBody = 'fireflyLedgerBody'
         }
     })
 
@@ -108,7 +92,7 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick}>
+<OnboardingLayout allowBack={false}>
     <div slot="leftpane__content">
         {#if wasMigrated}
             <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
