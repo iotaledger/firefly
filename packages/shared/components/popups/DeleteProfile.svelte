@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { Button, Password, Text } from 'shared/components'
-    import { logout, mobile, keyboardHeight, isKeyboardOpened } from '@lib/app'
+    import { logout, mobile, keyboardHeight, isKeyboardOpened, getKeyboardTransitionSpeed } from '@lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isSoftwareProfile, profiles, removeProfile, removeProfileFolder } from 'shared/lib/profile'
@@ -116,7 +116,7 @@
     class="flex flex-row justify-between space-x-4 w-full md:px-8"
     style="padding-bottom: {$mobile && $isKeyboardOpened
         ? $keyboardHeight - 20
-        : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
 >
     <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>{locale('actions.no')}</Button>
     <Button
