@@ -80,7 +80,8 @@
     class="w-full h-full flex flex-col justify-between {$mobile ? 'safe-area px-5 pt-6' : 'p-6'}"
     style="padding-bottom: {$mobile && $isKeyboardOpened
         ? $keyboardHeight
-        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)}  (--transition-scroll)"
+        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+        'ms'}  var(--transition-scroll)"
 >
     <div>
         <div class="flex flex-row mb-6 {$mobile && 'justify-center'}">

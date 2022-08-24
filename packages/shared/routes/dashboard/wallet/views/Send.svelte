@@ -524,11 +524,10 @@
             <div
                 style="margin-top: {$isKeyboardOpened ? '-230px' : '0px'}; opacity: {$isKeyboardOpened
                     ? 0
-                    : 1}; transition: opacity {getKeyboardTransitionSpeed(
+                    : 1}; transition: opacity {getKeyboardTransitionSpeed($isKeyboardOpened) +
+                    'ms'} var(--transition-scroll); transition: margin-top {getKeyboardTransitionSpeed(
                     $isKeyboardOpened
-                )} (--transition-scroll); transition: margin-top {getKeyboardTransitionSpeed(
-                    $isKeyboardOpened
-                )} (--transition-scroll)"
+                ) + 'ms'} var(--transition-scroll)"
             >
                 <Illustration height={230} background illustration="send-mobile" />
             </div>
@@ -587,9 +586,8 @@
                 class="mt-8 flex flex-row justify-between px-2"
                 style="margin-bottom: {$isKeyboardOpened
                     ? $keyboardHeight
-                    : 0}px; transition: margin-bottom {getKeyboardTransitionSpeed(
-                    $isKeyboardOpened
-                )} (--transition-scroll)"
+                    : 0}px; transition: margin-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+                    'ms'} var(--transition-scroll)"
             >
                 <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
                     {localize('actions.cancel')}
