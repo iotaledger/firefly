@@ -168,5 +168,5 @@ export const needsToAcceptLatestTos = (): boolean => get(lastAcceptedTos) < TOS_
 
 export const isAndroid = writable<boolean>(false)
 
-export const getKeyboardTransitionSpeed = (isKeyboardOpened: boolean): string =>
-    isKeyboardOpened ? (get(isAndroid) ? '0.2s' : '0.4s') : '0.25s'
+export const getKeyboardTransitionSpeed = (isKeyboardOpened: boolean): number =>
+    isKeyboardOpened ? (get(isAndroid) ? 200 : 400) : 250 // ms

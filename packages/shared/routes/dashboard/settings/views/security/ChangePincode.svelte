@@ -93,7 +93,8 @@
     id="pincode-change-form"
     style="margin-top: {$mobile && $isKeyboardOpened
         ? '-20%'
-        : '0px'}; transition: margin-top {getKeyboardTransitionSpeed($isKeyboardOpened)}  (--transition-scroll)"
+        : '0px'}; transition: margin-top {getKeyboardTransitionSpeed($isKeyboardOpened) +
+        'ms'} var(--transition-scroll)"
 >
     <Text type="h4" classes="mb-3">{localize('views.settings.changePincode.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePincode.description')}</Text>
