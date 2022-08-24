@@ -3,7 +3,14 @@
     import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, Illustration, Input, ProgressBar, Text } from 'shared/components'
-    import { clearSendParams, keyboardHeight, isKeyboardOpened, mobile, sendParams } from 'shared/lib/app'
+    import {
+        clearSendParams,
+        keyboardHeight,
+        isKeyboardOpened,
+        mobile,
+        sendParams,
+        getKeyboardTransitionSpeed,
+    } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -517,7 +524,10 @@
             <div
                 style="margin-top: {$isKeyboardOpened ? '-230px' : '0px'}; opacity: {$isKeyboardOpened
                     ? 0
-                    : 1}; transition: opacity 0.2s var(--transition-scroll); transition: margin-top 0.2s var(--transition-scroll)"
+                    : 1}; transition: opacity {getKeyboardTransitionSpeed($isKeyboardOpened) +
+                    'ms'} var(--transition-scroll); transition: margin-top {getKeyboardTransitionSpeed(
+                    $isKeyboardOpened
+                ) + 'ms'} var(--transition-scroll)"
             >
                 <Illustration height={230} background illustration="send-mobile" />
             </div>
@@ -576,7 +586,8 @@
                 class="mt-8 flex flex-row justify-between px-2"
                 style="margin-bottom: {$isKeyboardOpened
                     ? $keyboardHeight
-                    : 0}px; transition: margin-bottom 0.2s var(--transition-scroll)"
+                    : 0}px; transition: margin-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+                    'ms'} var(--transition-scroll)"
             >
                 <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
                     {localize('actions.cancel')}
