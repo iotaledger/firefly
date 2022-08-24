@@ -30,6 +30,7 @@ import {
     setTimeStrongholdLastUnlocked,
 } from '../../stores'
 import { loadAccounts } from './loadAccounts'
+import { logout } from './logout'
 
 export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: boolean): Promise<void> {
     const _loginRouter = get(loginRouter)
@@ -115,6 +116,7 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
         } else {
             handleGenericError(err)
         }
+        await logout()
         _loginRouter.previous()
         resetLoginProgress()
     }
