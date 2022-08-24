@@ -93,7 +93,8 @@
     class="flex flex-col {$mobile ? 'safe-area px-2' : 'px-6 py-10'}"
     style="padding-bottom: {$mobile && $isKeyboardOpened
         ? $keyboardHeight - 20
-        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
+        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+        'ms'} var(--transition-scroll)"
 >
     <div class="{$mobile ? 'flex flex-row justify-center' : ''} mb-6">
         <Text type="h4">{localize('popups.exportTransactionHistory.title')}</Text>
