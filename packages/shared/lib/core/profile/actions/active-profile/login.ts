@@ -1,6 +1,5 @@
 import { createNewAccount, setSelectedAccount } from '@core/account'
-import { addError, IError } from '@core/error'
-import { localize } from '@core/i18n'
+import { ErrorFromApi, handleErrorFromApi, handleGenericError } from '@core/error'
 import { getAndUpdateNodeInfo } from '@core/network'
 import {
     buildProfileManagerOptionsFromProfileData,
@@ -17,7 +16,6 @@ import {
 import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
-import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
 import {
     INITIAL_ACCOUNT_GAP_LIMIT,
@@ -112,118 +110,12 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
             }, 500)
         }
     } catch (err) {
-        handleErrorFromApi({ ...err, message: err?.message ?? err?.error })
+        if (err?.type in ErrorFromApi) {
+            handleErrorFromApi({ ...err, message: err?.message ?? err?.error })
+        } else {
+            handleGenericError(err)
+        }
         _loginRouter.previous()
         resetLoginProgress()
     }
-}
-
-function handleErrorFromApi(error: IError): void {
-    if (error?.type) {
-        switch (error?.type) {
-            case 'ClientError':
-                handleClientError(error)
-                break
-            default:
-                handleGenericError(error)
-        }
-    } else {
-        handleGenericError(error)
-    }
-}
-
-function handleGenericError(error: IError) {
-    handleError({
-        message: error?.message,
-        logToConsole: true,
-        saveToErrorLog: true,
-        showNotification: true,
-    })
-}
-
-function handleClientError(error: IError) {
-    let errorKey
-    if (error?.message) {
-        switch (true) {
-            case CLIENT_ERROR_REGEXES[ClientErrorKey.NoSyncedNode].test(error?.message):
-                errorKey = ClientErrorKey.NoSyncedNode
-                break
-            case CLIENT_ERROR_REGEXES[ClientErrorKey.TimeNotSynced].test(error?.message):
-                errorKey = ClientErrorKey.TimeNotSynced
-                break
-        }
-        if (errorKey) {
-            const errorObject = API_ERROR?.[error?.type]?.[errorKey]
-            if (errorObject) {
-                handleError({ ...errorObject, message: error?.message })
-            } else {
-                handleGenericError(error)
-            }
-        } else {
-            handleGenericError(error)
-        }
-    } else {
-        handleGenericError(error)
-    }
-}
-
-function handleError(errorParameters: IErrorParameters) {
-    const localisedMessage = errorParameters?.localisationKey
-        ? localize(errorParameters?.localisationKey)
-        : localize('error.global.generic')
-
-    if (errorParameters?.logToConsole) {
-        console.error(errorParameters?.message)
-    }
-
-    if (errorParameters?.saveToErrorLog) {
-        addError(errorParameters)
-    }
-
-    if (errorParameters?.showNotification) {
-        showAppNotification({
-            alert: true,
-            type: 'error',
-            message: localisedMessage,
-        })
-    }
-}
-
-enum ApiErrorGroupKey {
-    ClientError = 'ClientError',
-}
-
-enum ClientErrorKey {
-    NoSyncedNode = 'noSyncedNode',
-    TimeNotSynced = 'timeNotSynced',
-}
-
-const CLIENT_ERROR_REGEXES = {
-    [ClientErrorKey.NoSyncedNode]: /`No synced node available`/,
-    [ClientErrorKey.TimeNotSynced]: /`Local time \d* doesn't match the time of the latest milestone timestamp: \d*`/,
-}
-
-const API_ERROR: Readonly<{ [key in ApiErrorGroupKey]?: { [key in ClientErrorKey]?: Partial<IErrorParameters> } }> = {
-    [ApiErrorGroupKey.ClientError]: {
-        [ClientErrorKey.NoSyncedNode]: {
-            localisationKey: `error.node.${ClientErrorKey.NoSyncedNode}`,
-            logToConsole: true,
-            saveToErrorLog: true,
-            showNotification: true,
-        },
-        [ClientErrorKey.TimeNotSynced]: {
-            localisationKey: `error.node.${ClientErrorKey.TimeNotSynced}`,
-            logToConsole: true,
-            saveToErrorLog: true,
-            showNotification: true,
-        },
-    },
-}
-
-export interface IErrorParameters {
-    message: string
-    localisationKey?: string
-    logToConsole?: boolean
-    saveToErrorLog?: boolean
-    showNotification?: boolean
 }
