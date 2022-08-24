@@ -179,7 +179,8 @@
             class="flex flex-col items-center {$mobile ? 'w-80' : 'w-96 flex-wrap mb-20'}"
             style="padding-bottom: {$mobile
                 ? $keyboardHeight + 15
-                : 0}px; ; transition: padding {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
+                : 0}px; ; transition: padding {getKeyboardTransitionSpeed($isKeyboardOpened) +
+                'ms'} var(--transition-scroll)"
         >
             <Profile name={$activeProfile?.name} bgColor="blue" />
             <Pin

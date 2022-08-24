@@ -115,7 +115,8 @@
         slot="leftpane__content"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
     >
         <Text type="p" secondary classes="mb-4">{locale('views.profile.body1')}</Text>
         <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-10'}>
@@ -150,7 +151,8 @@
         class="flex flex-col"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
     >
         <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
             {locale('actions.continue')}
@@ -161,7 +163,8 @@
         class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-green dark:bg-gray-900'}"
         style="margin-top: {$mobile && $isKeyboardOpened
             ? -$keyboardHeight
-            : 0}px; transition: margin-top {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
+            : 0}px; transition: margin-top {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
     >
         <Animation
             animation={$mobile ? 'password-desktop' : 'profile-desktop'}

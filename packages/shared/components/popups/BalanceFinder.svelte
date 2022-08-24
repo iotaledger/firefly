@@ -132,7 +132,8 @@
     class="flex flex-row flex-nowrap w-full space-x-4"
     style="padding-bottom: {$mobile && $isKeyboardOpened
         ? $keyboardHeight - 20
-        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
+        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+        'ms'} var(--transition-scroll)"
 >
     <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>
         {locale('actions.done')}
