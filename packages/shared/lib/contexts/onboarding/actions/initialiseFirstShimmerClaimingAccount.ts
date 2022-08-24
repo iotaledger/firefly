@@ -19,7 +19,10 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     try {
         const alias = `${localize('general.account')} 1`
         const profileRecoveryType = get(onboardingProfile)?.recoveryType
-        if (profileRecoveryType === ProfileRecoveryType.Mnemonic) {
+        if (
+            profileRecoveryType === ProfileRecoveryType.Mnemonic ||
+            profileRecoveryType === ProfileRecoveryType.Ledger
+        ) {
             /**
              * NOTE: We can safely assume that mnemonic-based recoveries
              * will NOT have any accounts, so we create one.

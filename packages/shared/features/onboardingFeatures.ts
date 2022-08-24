@@ -179,7 +179,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
             newProfile: {
@@ -220,7 +220,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
             newProfile: {

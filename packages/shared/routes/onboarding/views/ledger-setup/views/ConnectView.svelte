@@ -12,6 +12,11 @@
         displayNotificationForLedgerProfile,
     } from '@core/ledger'
     import { openPopup } from '@lib/popup'
+    import {
+        initialiseFirstShimmerClaimingAccount,
+        onboardingProfile,
+        ProfileSetupType,
+    } from '../../../../../lib/contexts/onboarding'
 
     let polling = false
 
@@ -27,10 +32,15 @@
         displayNotificationForLedgerProfile('error', true)
     }
 
-    function _onConnected(): void {
+    async function _onConnected(): Promise<void> {
         if ($ledgerDeviceStatus.connectionState !== LedgerConnectionState.Connected) {
             _onCancel()
         } else {
+            const canInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.setupType === ProfileSetupType.Claimed
+            const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
+            if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
+                await initialiseFirstShimmerClaimingAccount()
+            }
             $ledgerSetupRouter.next()
         }
     }
