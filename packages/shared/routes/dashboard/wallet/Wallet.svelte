@@ -499,7 +499,6 @@
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
                         on:close={handleDrawerClose}
-                        backgroundBlur={$accountRoute === AccountRoute.Receive}
                     >
                         {#if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
