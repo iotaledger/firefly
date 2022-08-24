@@ -14,7 +14,7 @@ export async function completeOnboardingProcess(): Promise<void> {
     const { setupType } = get(onboardingProfile)
     const shouldRecoverAccounts = setupType === ProfileSetupType.Recovered
     const shouldCreateAccount = setupType === ProfileSetupType.New
-    void login(true, shouldRecoverAccounts, shouldCreateAccount)
+    void login({ fromOnboardingFlow: true, shouldRecoverAccounts, shouldCreateAccount })
 
     await cleanupOnboarding()
 }

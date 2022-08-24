@@ -29,12 +29,9 @@ import {
     setTimeStrongholdLastUnlocked,
 } from '../../stores'
 import { loadAccounts } from './loadAccounts'
+import { ILoginOptions } from '../../interfaces'
 
-export async function login(
-    isOnboardingFlow?: boolean,
-    shouldRecoverAccounts?: boolean,
-    shouldCreateAccount?: boolean
-): Promise<void> {
+export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
     try {
         const _activeProfile = get(activeProfile)
@@ -55,21 +52,24 @@ export async function login(
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
-            if (isOnboardingFlow && shouldRecoverAccounts) {
-                const accountMetadatas = await recoverAccounts(
-                    INITIAL_ACCOUNT_GAP_LIMIT[type],
-                    INITIAL_ADDRESS_GAP_LIMIT[type]
-                )
+            if (loginOptions) {
+                const { fromOnboardingFlow, shouldRecoverAccounts, shouldCreateAccount } = loginOptions
+                if (fromOnboardingFlow && shouldRecoverAccounts) {
+                    const accountMetadatas = await recoverAccounts(
+                        INITIAL_ACCOUNT_GAP_LIMIT[type],
+                        INITIAL_ADDRESS_GAP_LIMIT[type]
+                    )
 
-                /**
-                 * NOTE: In the case no accounts with funds were recovered, we must
-                 * create one for the new profile.
-                 */
-                if (accountMetadatas?.length === 0) {
+                    /**
+                     * NOTE: In the case no accounts with funds were recovered, we must
+                     * create one for the new profile.
+                     */
+                    if (accountMetadatas?.length === 0) {
+                        await createNewAccount()
+                    }
+                } else if (fromOnboardingFlow && shouldCreateAccount) {
                     await createNewAccount()
                 }
-            } else if (isOnboardingFlow && shouldCreateAccount) {
-                await createNewAccount()
             }
 
             // Step 4: load accounts
