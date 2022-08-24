@@ -5,15 +5,15 @@
     import { displayNotificationForLedgerProfile, getLedgerDeviceStatus } from '@core/ledger'
     import { shimmerClaimingRouter } from '@core/router'
     import {
+        canUserClaimRewards,
         claimShimmerRewards,
         ClaimShimmerRewardsError,
         findShimmerRewards,
         FindShimmerRewardsError,
         findShimmerRewardsForAccount,
-        IShimmerClaimingAccount,
+        hasUserClaimedRewards,
         isOnboardingLedgerProfile,
         onboardingProfile,
-        ShimmerClaimingAccountState,
     } from '@contexts/onboarding'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
@@ -27,33 +27,7 @@
     $: shouldSearchForRewardsButtonBeEnabled = !isSearchingForRewards && !isClaimingRewards
     $: shouldClaimRewardsButtonBeEnabled =
         canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
-    $: shouldShowContinueButton = canUserContinue(shimmerClaimingAccounts)
-
-    function canUserClaimRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
-        return shimmerClaimingAccounts?.some((shimmerClaimingAccount) => {
-            const { state } = shimmerClaimingAccount
-            return (
-                state === ShimmerClaimingAccountState.UnclaimedWithRewards ||
-                state === ShimmerClaimingAccountState.PartiallyClaimed ||
-                state === ShimmerClaimingAccountState.Failed
-            )
-        })
-    }
-
-    function canUserContinue(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
-        return (
-            shimmerClaimingAccounts.every((shimmerClaimingAccount) => {
-                const { state } = shimmerClaimingAccount
-                return (
-                    state === ShimmerClaimingAccountState.UnclaimedWithoutRewards ||
-                    state === ShimmerClaimingAccountState.FullyClaimed
-                )
-            }) &&
-            shimmerClaimingAccounts?.some((shimmerClaimingAccount) =>
-                Boolean(shimmerClaimingAccount?.claimingTransaction)
-            )
-        )
-    }
+    $: shouldShowContinueButton = hasUserClaimedRewards(shimmerClaimingAccounts)
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
@@ -69,7 +43,6 @@
             hasSearchedForRewardsBefore = true
             await findShimmerRewards()
         } catch (err) {
-            console.error(err)
             throw new FindShimmerRewardsError()
         } finally {
             isSearchingForRewards = false
