@@ -1334,7 +1334,8 @@
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
             },
-            "type": "Unable to determine the profile type"
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "Passwords do not match.",

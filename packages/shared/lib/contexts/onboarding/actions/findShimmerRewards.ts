@@ -11,19 +11,19 @@ import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '..
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
 
-let accountGapLimitIncrement = 1
+let accountGapLimitIncrement
 let accountGapLimit = accountGapLimitIncrement
 // let startAccountIndex = 0
-let addressGapLimitIncrement = 1
+let addressGapLimitIncrement
 let addressGapLimit = addressGapLimitIncrement
 // let startAddressIndex = 0
 
 let totalUnclaimedShimmerRewards = 0
 
-let haveGapLimitIncrementsBeenSet = false
+let hasSetGapLimitIncrements = false
 
 export async function findShimmerRewards(): Promise<void> {
-    if (!haveGapLimitIncrementsBeenSet) {
+    if (!hasSetGapLimitIncrements) {
         setGapLimitIncrements()
     }
 
@@ -35,8 +35,8 @@ export async function findShimmerRewards(): Promise<void> {
     )
     const boundAccounts = await getSortedRenamedBoundAccounts(accountMetadataList, shimmerClaimingProfileManager)
     const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
-    const wereRewardsFound = updatedTotalUnclaimedShimmerRewards > totalUnclaimedShimmerRewards
-    if (wereRewardsFound) {
+    const hasNewRewards = updatedTotalUnclaimedShimmerRewards > totalUnclaimedShimmerRewards
+    if (hasNewRewards) {
         const boundTwinAccounts = await getSortedRenamedBoundAccounts(
             boundAccounts?.map((boundAccount) => boundAccount?.meta)
         )
@@ -49,7 +49,7 @@ export async function findShimmerRewards(): Promise<void> {
         setTotalUnclaimedShimmerRewards(updatedTotalUnclaimedShimmerRewards)
     }
 
-    updateRewardsFinderParameters(wereRewardsFound)
+    updateRewardsFinderParameters(hasNewRewards)
 }
 
 function setGapLimitIncrements(): void {
@@ -61,7 +61,7 @@ function setGapLimitIncrements(): void {
     accountGapLimitIncrement = INITIAL_ACCOUNT_GAP_LIMIT[profileType]
     addressGapLimitIncrement = INITIAL_ADDRESS_GAP_LIMIT[profileType]
 
-    haveGapLimitIncrementsBeenSet = true
+    hasSetGapLimitIncrements = true
 }
 
 export function setTotalUnclaimedShimmerRewards(_totalUnclaimedShimmerRewards: number): void {

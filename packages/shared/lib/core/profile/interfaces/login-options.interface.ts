@@ -1,5 +1,5 @@
 export interface ILoginOptions {
-    fromOnboardingFlow?: boolean
+    isFromOnboardingFlow?: boolean
     shouldRecoverAccounts?: boolean
     shouldCreateAccount?: boolean
 }

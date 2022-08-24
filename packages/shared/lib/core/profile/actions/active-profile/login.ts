@@ -53,8 +53,8 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 3: load and build all the profile data
             incrementLoginProgress()
             if (loginOptions) {
-                const { fromOnboardingFlow, shouldRecoverAccounts, shouldCreateAccount } = loginOptions
-                if (fromOnboardingFlow && shouldRecoverAccounts) {
+                const { isFromOnboardingFlow, shouldRecoverAccounts, shouldCreateAccount } = loginOptions
+                if (isFromOnboardingFlow && shouldRecoverAccounts) {
                     const accountMetadatas = await recoverAccounts(
                         INITIAL_ACCOUNT_GAP_LIMIT[type],
                         INITIAL_ADDRESS_GAP_LIMIT[type]
@@ -67,7 +67,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                     if (accountMetadatas?.length === 0) {
                         await createNewAccount()
                     }
-                } else if (fromOnboardingFlow && shouldCreateAccount) {
+                } else if (isFromOnboardingFlow && shouldCreateAccount) {
                     await createNewAccount()
                 }
             }
