@@ -16,7 +16,14 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
 
+    let isBusy = {
+        [ProfileRecoveryType.Mnemonic]: false,
+        [ProfileRecoveryType.Stronghold]: false,
+        [ProfileRecoveryType.Ledger]: false,
+    }
+
     async function onProfileRecoverySelectionClick(recoveryType: ProfileRecoveryType): Promise<void> {
+        isBusy = { ...isBusy, [recoveryType]: true }
         const type = getProfileTypeFromProfileRecoveryType(recoveryType)
         updateOnboardingProfile({ type, recoveryType, shimmerClaimingAccounts: [] })
         await initialiseProfileManagerFromOnboardingProfile(true)
@@ -47,6 +54,7 @@
                 ? localize('views.onboarding.profileSetup.setupRecovered.importMnemonicDescription')
                 : ''}
             icon="language"
+            busy={isBusy[ProfileRecoveryType.Mnemonic]}
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.claimRewards?.recoveryPhrase?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
@@ -59,6 +67,7 @@
                 ? localize('views.onboarding.profileSetup.setupRecovered.importFileDescription')
                 : ''}
             icon="file"
+            busy={isBusy[ProfileRecoveryType.Stronghold]}
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.claimRewards?.strongholdBackup?.hidden}
             disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
@@ -70,6 +79,7 @@
                 primaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedger')}
                 secondaryText={localize('views.onboarding.profileSetup.setupRecovered.importLedgerDescription')}
                 icon="chip"
+                busy={isBusy[ProfileRecoveryType.Ledger]}
                 hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                     ?.claimRewards?.ledgerBackup?.hidden}
                 disabled={!features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[
