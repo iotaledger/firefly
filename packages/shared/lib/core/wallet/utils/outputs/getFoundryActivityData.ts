@@ -1,15 +1,16 @@
 import { COIN_TYPE } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
-import { IProcessedTransaction, FoundryActivityData } from '../../interfaces'
+import { IProcessedTransaction, IFoundryActivityData } from '../../interfaces'
 import {
     getAmountFromOutput,
     getNativeTokenFromOutput,
     getStorageDepositFromOutput,
     getFoundryOutputFromTransaction,
 } from '..'
+import { ActivityType } from '@core/wallet/enums'
 
-export function getFoundryActivityData(processedTransaction: IProcessedTransaction): FoundryActivityData {
+export function getFoundryActivityData(processedTransaction: IProcessedTransaction): IFoundryActivityData {
     const { outputs } = processedTransaction
     const { output } = getFoundryOutputFromTransaction(outputs)
 
@@ -20,7 +21,7 @@ export function getFoundryActivityData(processedTransaction: IProcessedTransacti
     const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit
 
     return {
-        type: 'foundry',
+        type: ActivityType.Foundry,
         assetId,
         storageDeposit,
         giftedStorageDeposit,

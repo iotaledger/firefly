@@ -1,4 +1,5 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
+import { ActivityType } from '@core/wallet/enums'
 import { allAccountActivities } from '../../stores'
 
 export function setAsyncStatusOfAccountActivities(time: Date): void {
@@ -6,9 +7,9 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
     allAccountActivities.update((state) => {
         state.forEach((accountActivities, accountId) => {
             for (const activity of accountActivities.filter(
-                (_activity) => _activity.data.type === 'transaction' && _activity.data.isAsync
+                (_activity) => _activity.data.type === ActivityType.Transaction && _activity.data.isAsync
             )) {
-                if (activity.data.type === 'transaction') {
+                if (activity.data.type === ActivityType.Transaction) {
                     const oldAsyncStatus = activity.data.asyncStatus
                     activity.data.asyncStatus = activity.getAsyncStatus(time)
                     if (!balancesToUpdate.includes(accountId) && oldAsyncStatus !== activity.data.asyncStatus) {

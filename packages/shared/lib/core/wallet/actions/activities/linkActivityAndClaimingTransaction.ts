@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
 import { get } from 'svelte/store'
-import { ActivityDirection } from '../../enums'
+import { ActivityDirection, ActivityType } from '../../enums'
 import { addClaimedActivity, allAccountActivities, claimedActivities } from '../../stores'
 
 export function linkActivityAndClaimingTransaction(account: IAccountState): void {
@@ -8,7 +8,7 @@ export function linkActivityAndClaimingTransaction(account: IAccountState): void
 
     const activities = accountActivities.filter(
         (activity) =>
-            activity.data.type === 'transaction' &&
+            activity.data.type === ActivityType.Transaction &&
             activity.data.direction === ActivityDirection.In &&
             activity.data.isAsync
     )
@@ -64,7 +64,7 @@ function updateClaimStatusAndHideClaimingActivity(
         )
 
         _claimedActivity.updateDataFromPartialActivity({
-            type: 'transaction',
+            type: ActivityType.Transaction,
             isClaimed: true,
             claimedDate: claimingActivityTime,
             claimingTransactionId: claimingActivityTransactionId,

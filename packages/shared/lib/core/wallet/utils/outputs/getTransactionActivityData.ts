@@ -2,8 +2,8 @@ import { IAccountState } from '@core/account'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
-import { ActivityAsyncStatus, ActivityDirection } from '../../enums'
-import { IProcessedTransaction, TransactionActivityData } from '../../interfaces'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '../../enums'
+import { IProcessedTransaction, ITransactionActivityData } from '../../interfaces'
 import { isActivityHiddenForAccountId } from '../../stores/hidden-activities.store'
 import {
     getAmountFromOutput,
@@ -24,7 +24,7 @@ import {
 export function getTransactionActivityData(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
-): TransactionActivityData {
+): ITransactionActivityData {
     const { outputs, transactionId, isIncoming, detailedTransactionInputs } = processedTransaction
 
     const { output, outputIndex, isSelfTransaction } = getMainTransactionOutputFromTransaction(
@@ -65,7 +65,7 @@ export function getTransactionActivityData(
     const publicNote = ''
 
     return {
-        type: 'transaction',
+        type: ActivityType.Transaction,
         direction,
         outputId,
         isInternal,

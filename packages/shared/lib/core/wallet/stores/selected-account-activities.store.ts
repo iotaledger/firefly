@@ -8,7 +8,7 @@ import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
 import { isFilteredActivity } from '../utils/isFilteredActivity'
 import { ActivityFilter } from '../interfaces/filter.interface'
-import { NumberFilterOption, BooleanFilterOption, TypeFilterOption, StatusFilterOption } from '../enums'
+import { NumberFilterOption, BooleanFilterOption, TypeFilterOption, StatusFilterOption, ActivityType } from '../enums'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -86,7 +86,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
         if (activitySearchTerm) {
             activityList = activityList.filter(
                 (activity) =>
-                    (activity.data.type === 'transaction' &&
+                    (activity.data.type === ActivityType.Transaction &&
                         ((activity.data.recipient?.type === 'account' &&
                             activity.data.recipient?.account?.name === $activitySearchTerm) ||
                             (activity.data.recipient?.type === 'address' &&

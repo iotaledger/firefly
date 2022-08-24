@@ -11,6 +11,7 @@ import {
     InclusionState,
     TypeFilterOption,
     StatusFilterOption,
+    ActivityType,
 } from '../enums'
 
 export function isFilteredActivity(activity: Activity): boolean {
@@ -24,7 +25,7 @@ export function isFilteredActivity(activity: Activity): boolean {
     }
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
-        activity.data.type === 'transaction' &&
+        activity.data.type === ActivityType.Transaction &&
         activity.data.isRejected
     ) {
         return true
@@ -79,14 +80,14 @@ export function isFilteredActivity(activity: Activity): boolean {
         }
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
-            activity.data.type === 'transaction' &&
+            activity.data.type === ActivityType.Transaction &&
             activity.data.asyncStatus !== ActivityAsyncStatus.Claimed
         ) {
             return true
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
-            activity.data.type === 'transaction' &&
+            activity.data.type === ActivityType.Transaction &&
             (!activity.data.asyncStatus || activity.data.asyncStatus === ActivityAsyncStatus.Claimed)
         ) {
             return true
@@ -95,21 +96,21 @@ export function isFilteredActivity(activity: Activity): boolean {
     if (filter.type.active && filter.type.selected) {
         if (
             filter.type.selected === TypeFilterOption.Incoming &&
-            activity.data.type === 'transaction' &&
+            activity.data.type === ActivityType.Transaction &&
             activity.data.direction !== ActivityDirection.In
         ) {
             return true
         }
         if (
             filter.type.selected === TypeFilterOption.Outgoing &&
-            activity.data.type === 'transaction' &&
+            activity.data.type === ActivityType.Transaction &&
             activity.data.direction !== ActivityDirection.Out
         ) {
             return true
         }
         if (
             filter.type.selected === TypeFilterOption.Internal &&
-            activity.data.type === 'transaction' &&
+            activity.data.type === ActivityType.Transaction &&
             !activity.data.isInternal
         ) {
             return true

@@ -1,12 +1,6 @@
 import { writable } from 'svelte/store'
 import { Activity } from '../classes'
-import {
-    FoundryActivityData,
-    IActivity,
-    IPartialFoundryActivityDataWithType,
-    IPartialTransactionActivityDataWithType,
-    TransactionActivityData,
-} from '../interfaces'
+import { IActivity, IPartialFoundryActivityDataWithType, IPartialTransactionActivityDataWithType } from '../interfaces'
 
 export const allAccountActivities = writable<Activity[][]>([])
 
@@ -79,7 +73,7 @@ export function updateActivityDataByActivityId(
 export function updateActivityDataByTransactionId(
     accountId: string,
     transactionId: string,
-    partialData: Partial<FoundryActivityData | TransactionActivityData>
+    partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
 ): void {
     allAccountActivities.update((state) => {
         const activity = state[Number(accountId)]?.find((_activity) => _activity.transactionId === transactionId)

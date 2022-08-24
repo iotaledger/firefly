@@ -13,6 +13,7 @@
         selectedAccountActivities,
         getAssetFromPersistedAssets,
         rejectActivity,
+        ActivityType,
     } from '@core/wallet'
     import { activeProfile } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
@@ -43,7 +44,7 @@
         giftedStorageDeposit: activity.data.giftedStorageDeposit,
         amount,
         unit: asset?.metadata?.unit,
-        ...(activity?.data.type === 'transaction' && {
+        ...(activity?.data.type === ActivityType.Transaction && {
             asyncStatus: activity.data.asyncStatus,
             claimedDate: activity.data.claimedDate,
             claimingTransactionId: activity.data.claimingTransactionId,
@@ -115,7 +116,7 @@
         {/if}
     </div>
     <TransactionDetails {...transactionDetails} />
-    {#if activity.data.type === 'transaction' && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
+    {#if activity.data.type === ActivityType.Transaction && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
                 disabled={activity.data.isClaiming || activity.data.isRejected}

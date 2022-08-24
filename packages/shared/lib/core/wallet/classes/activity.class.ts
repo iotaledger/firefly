@@ -13,12 +13,12 @@ import {
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import {
-    FoundryActivityData,
+    IFoundryActivityData,
     IActivity,
     IPartialFoundryActivityDataWithType,
     IPartialTransactionActivityDataWithType,
     IProcessedTransaction,
-    TransactionActivityData,
+    ITransactionActivityData,
 } from '../interfaces'
 import {
     formatTokenAmountBestMatch,
@@ -39,7 +39,7 @@ export class Activity implements IActivity {
     isHidden?: boolean
     isAssetHidden: boolean
 
-    data: TransactionActivityData | FoundryActivityData
+    data: ITransactionActivityData | IFoundryActivityData
 
     constructor(processedTransaction: IProcessedTransaction, account: IAccountState) {
         const { outputs, transactionId, time, inclusionState, transactionInputs } = processedTransaction
@@ -70,15 +70,15 @@ export class Activity implements IActivity {
     updateDataFromPartialActivity(
         partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
     ): void {
-        if (partialData.type === 'transaction' && this.data.type === 'transaction') {
+        if (partialData.type === ActivityType.Transaction && this.data.type === ActivityType.Transaction) {
             this.data = { ...this.data, ...partialData }
-        } else if (partialData.type === 'foundry' && this.data.type === 'foundry') {
+        } else if (partialData.type === ActivityType.Foundry && this.data.type === ActivityType.Foundry) {
             this.data = { ...this.data, ...partialData }
         }
     }
 
     getAsyncStatus(time: Date): ActivityAsyncStatus {
-        if (this.data.type === 'transaction' && this.data.isAsync) {
+        if (this.data.type === ActivityType.Transaction && this.data.isAsync) {
             if (this.data.isClaimed) {
                 return ActivityAsyncStatus.Claimed
             } else {
@@ -95,7 +95,7 @@ export class Activity implements IActivity {
     getFormattedAmount(signed: boolean): string {
         const metadata = getAssetFromPersistedAssets(this.data.assetId)?.metadata
         const amount = formatTokenAmountBestMatch(this.data.rawAmount, metadata, 2)
-        if (this.data.type === 'transaction') {
+        if (this.data.type === ActivityType.Transaction) {
             return `${this.data.direction !== ActivityDirection.In && signed ? '- ' : ''}${amount}`
         } else {
             return amount
@@ -113,7 +113,7 @@ export class Activity implements IActivity {
 
     getTimeDiffUntilExpirationTime(time: Date): string {
         if (
-            this.data.type === 'transaction' &&
+            this.data.type === ActivityType.Transaction &&
             this.data.isAsync &&
             !this.data.isClaimed &&
             this.data?.expirationDate
@@ -143,7 +143,7 @@ export class Activity implements IActivity {
 
     getTitle(): string {
         let title = ''
-        if (this.data.type === 'transaction') {
+        if (this.data.type === ActivityType.Transaction) {
             if (this.data.isInternal) {
                 title = this.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
             } else {
@@ -160,7 +160,7 @@ export class Activity implements IActivity {
     }
 
     getFormattedSubject(): string {
-        if (this.data.type === 'transaction') {
+        if (this.data.type === ActivityType.Transaction) {
             let subject = ''
             if (this.data.subject?.type === 'account') {
                 subject = truncateString(this.data.subject?.account?.name, 13, 0)

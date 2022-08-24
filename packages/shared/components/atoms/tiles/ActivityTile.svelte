@@ -27,7 +27,7 @@
     $: title = activity?.getTitle()
     $: subject = activity?.getFormattedSubject()
     $: isIncomingActivityUnclaimed =
-        activity?.data.type === 'transaction' &&
+        activity?.data.type === ActivityType.Transaction &&
         (activity?.data.direction === ActivityDirection.In || activity?.data.isSelfTransaction) &&
         activity?.data.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = activity?.getTimeDiffUntilExpirationTime($time)
@@ -77,7 +77,7 @@
             return asset?.metadata?.name
                 ? truncateString(asset?.metadata?.name, 20, 0)
                 : truncateString(asset?.id, 6, 7)
-        } else if (activity?.data.type === 'transaction') {
+        } else if (activity?.data.type === ActivityType.Transaction) {
             return localize(
                 activity?.data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
                 { values: { account: subject } }
@@ -106,7 +106,7 @@
                         <Text
                             fontWeight={FontWeight.semibold}
                             lineHeight="140"
-                            color={activity?.data.type === 'transaction' &&
+                            color={activity?.data.type === ActivityType.Transaction &&
                             activity?.data.direction === ActivityDirection.In
                                 ? 'blue-700'
                                 : ''}
@@ -131,7 +131,7 @@
                     </div>
                 </div>
             </div>
-            {#if activity.data.type === 'transaction' && activity?.data.isAsync && (activity.data.direction === ActivityDirection.Out || !activity?.data.isClaimed)}
+            {#if activity.data.type === ActivityType.Transaction && activity?.data.isAsync && (activity.data.direction === ActivityDirection.Out || !activity?.data.isClaimed)}
                 <HR />
                 <div class="flex w-full justify-between space-x-4">
                     <div class="flex flex-row justify-center items-center space-x-2">
