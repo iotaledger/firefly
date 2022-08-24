@@ -28,8 +28,8 @@
         "compile:prod:win": "cross-env STAGE=prod electron-builder --win --x64 --config electron-builder-config.js"
     },
     "dependencies": {
-        "@ledgerhq/hw-transport-node-hid": "^5.13.0",
-        "@ledgerhq/hw-transport-node-speculos": "^6.1.0",
+        "@ledgerhq/hw-transport-node-hid": "^6.27.2",
+        "@ledgerhq/hw-transport-node-speculos": "^6.27.2",
         "@sentry/electron": "^2.5.4",
         "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
