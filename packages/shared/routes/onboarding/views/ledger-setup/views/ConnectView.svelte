@@ -12,11 +12,7 @@
         displayNotificationForLedgerProfile,
     } from '@core/ledger'
     import { openPopup } from '@lib/popup'
-    import {
-        initialiseFirstShimmerClaimingAccount,
-        onboardingProfile,
-        ProfileSetupType,
-    } from '../../../../../lib/contexts/onboarding'
+    import { initialiseFirstShimmerClaimingAccount, onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 
     let polling = false
 

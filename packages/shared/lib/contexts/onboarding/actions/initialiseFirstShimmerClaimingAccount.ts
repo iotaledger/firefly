@@ -24,7 +24,7 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             profileRecoveryType === ProfileRecoveryType.Ledger
         ) {
             /**
-             * NOTE: We can safely assume that mnemonic-based recoveries
+             * NOTE: We can safely assume that mnemonic- and Ledger-based recoveries
              * will NOT have any accounts, so we create one.
              */
             const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
