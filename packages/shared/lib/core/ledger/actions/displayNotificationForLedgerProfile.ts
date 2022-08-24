@@ -28,6 +28,7 @@ export function displayNotificationForLedgerProfile(
             const message = error ? errorMessage : stateErrorMessage
             notificationId = showAppNotification({
                 type: notificationType,
+                alert: true,
                 message,
             })
         }

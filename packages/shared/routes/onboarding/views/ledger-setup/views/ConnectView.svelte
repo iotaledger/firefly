@@ -52,7 +52,7 @@
     }
 
     function onContinueClick(): void {
-        getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
+        void getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
     }
 
     function onBackClick(): void {

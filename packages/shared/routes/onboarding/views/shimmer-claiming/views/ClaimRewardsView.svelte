@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { displayNotificationForLedgerProfile, getLedgerDeviceStatus } from '@core/ledger'
     import { shimmerClaimingRouter } from '@core/router'
     import {
         claimShimmerRewards,
@@ -10,6 +11,7 @@
         FindShimmerRewardsError,
         findShimmerRewardsForAccount,
         IShimmerClaimingAccount,
+        isOnboardingLedgerProfile,
         onboardingProfile,
         ShimmerClaimingAccountState,
     } from '@contexts/onboarding'
@@ -57,7 +59,11 @@
         $shimmerClaimingRouter.previous()
     }
 
-    async function onUseBalanceFinderClick(): Promise<void> {
+    function _onLedgerNotConnected(): void {
+        displayNotificationForLedgerProfile('error', true)
+    }
+
+    async function onUseBalanceFinderClickHelper(): Promise<void> {
         try {
             isSearchingForRewards = true
             hasSearchedForRewardsBefore = true
@@ -70,7 +76,15 @@
         }
     }
 
-    async function onClaimRewardsClick(): Promise<void> {
+    async function onUseBalanceFinderClick(): Promise<void> {
+        if ($isOnboardingLedgerProfile) {
+            await getLedgerDeviceStatus(onUseBalanceFinderClickHelper, _onLedgerNotConnected, _onLedgerNotConnected)
+        } else {
+            await onUseBalanceFinderClickHelper()
+        }
+    }
+
+    async function onClaimRewardsClickHelper(): Promise<void> {
         try {
             isClaimingRewards = true
             hasTriedClaimingRewards = true
@@ -79,6 +93,14 @@
             throw new ClaimShimmerRewardsError()
         } finally {
             isClaimingRewards = false
+        }
+    }
+
+    async function onClaimRewardsClick(): Promise<void> {
+        if ($isOnboardingLedgerProfile) {
+            await getLedgerDeviceStatus(onClaimRewardsClickHelper, _onLedgerNotConnected, _onLedgerNotConnected)
+        } else {
+            await onClaimRewardsClickHelper()
         }
     }
 
