@@ -46,7 +46,7 @@
         } else {
             openPopup({
                 type: 'activityDetails',
-                props: { activity },
+                props: { activityId: activity.id },
             })
         }
     }

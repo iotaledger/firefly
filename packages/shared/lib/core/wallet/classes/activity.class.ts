@@ -13,7 +13,6 @@ import {
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import { FoundryActivityData, IActivity, IProcessedTransaction, TransactionActivityData } from '../interfaces'
-import { getPersistedAsset } from '../stores/persisted-assets.store'
 import {
     formatTokenAmountBestMatch,
     getActivityType,
@@ -55,9 +54,6 @@ export class Activity implements IActivity {
         } else if (type === ActivityType.Foundry) {
             this.data = getFoundryActivityData(processedTransaction)
         }
-
-        const asset = getPersistedAsset(this.data.assetId)
-        this.isAssetHidden = !asset || asset.hidden
     }
 
     updateFromPartialActivity(partialActivity: Partial<IActivity>): void {

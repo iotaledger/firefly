@@ -6,7 +6,7 @@ import { ActivityDirection } from '../enums'
 import { allAccountActivities, updateActivityDataByActivityId } from '../stores'
 import { getExpirationDateFromOutput } from '../utils'
 
-export async function setAsyncActivitiesToClaimed(account: IAccountState): Promise<void> {
+export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState): Promise<void> {
     const accountActivities = get(allAccountActivities)[Number(account.id)]
 
     const activities = accountActivities.filter(

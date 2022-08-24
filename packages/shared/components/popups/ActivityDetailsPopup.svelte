@@ -6,11 +6,11 @@
     import { FontWeight } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import {
-        Activity,
         ActivityAsyncStatus,
         ActivityDirection,
         claimActivity,
         formatTokenAmountDefault,
+        selectedAccountActivities,
         getAssetFromPersistedAssets,
         rejectActivity,
     } from '@core/wallet'
@@ -21,13 +21,13 @@
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
 
-    export let activity: Activity
+    export let activityId: string
 
-    const asset = getAssetFromPersistedAssets(activity?.data.assetId)
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    let isClaiming = activity.data.type === 'transaction' && activity.data.isClaiming
-    $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset.metadata)
+    $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
+    $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
+    $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
 
     $: transactionDetails = {
         asset,
@@ -63,12 +63,10 @@
     }
 
     async function claim() {
-        isClaiming = true
         await claimActivity(activity)
-        isClaiming = false
         openPopup({
             type: 'activityDetails',
-            props: { activity },
+            props: { activityId: activity.id },
         })
     }
 
@@ -88,7 +86,7 @@
                 onCancel: () =>
                     openPopup({
                         type: 'activityDetails',
-                        props: { activity },
+                        props: { activityId: activity.id },
                     }),
             },
         })
@@ -120,7 +118,7 @@
     {#if activity.data.type === 'transaction' && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
-                disabled={isClaiming || activity.data.isRejected}
+                disabled={activity.isClaiming || activity.data.isRejected}
                 class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300 {isClaiming ||
                 activity.data.isRejected
                     ? 'cursor-default text-gray-500'
@@ -130,11 +128,11 @@
                 {localize('actions.reject')}
             </button>
             <button
-                disabled={isClaiming}
+                disabled={activity.isClaiming}
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
                 on:click={claim}
             >
-                {#if isClaiming}
+                {#if activity.isClaiming}
                     <Spinner busy={true} classes="justify-center" />
                 {:else}
                     {localize('actions.claim')}
