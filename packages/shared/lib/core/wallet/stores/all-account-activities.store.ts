@@ -76,7 +76,7 @@ export function updateActivityDataByTransactionId(
     partialData: Partial<FoundryActivityData | TransactionActivityData>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[accountId]?.find((_activity) => _activity.transactionId === transactionId)
+        const activity = state[Number(accountId)]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
             activity.updateDataFromPartialActivity(partialData)

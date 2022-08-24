@@ -61,8 +61,10 @@ export class Activity implements IActivity {
     }
 
     updateDataFromPartialActivity(partialData: Partial<TransactionActivityData | FoundryActivityData>): void {
-        if (partialData.type === this.data.type) {
-            Object.assign(this.data, partialData)
+        if (partialData.type === 'transaction' && this.data.type === 'transaction') {
+            this.data = { ...this.data, ...partialData }
+        } else if (partialData.type === 'foundry' && this.data.type === 'foundry') {
+            this.data = { ...this.data, ...partialData }
         }
     }
 
