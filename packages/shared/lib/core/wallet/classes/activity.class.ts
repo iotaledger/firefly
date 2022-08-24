@@ -1,16 +1,5 @@
 import { IAccountState } from '@core/account'
-import { localize } from '@core/i18n'
-import { networkHrp } from '@core/network'
 import { convertToFiat, formatCurrency } from '@lib/currency'
-import { truncateString } from '@lib/helpers'
-import {
-    HOURS_PER_DAY,
-    MILLISECONDS_PER_SECOND,
-    MINUTES_PER_HOUR,
-    SECONDS_PER_DAY,
-    SECONDS_PER_MINUTE,
-} from 'shared/lib/time'
-import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import {
     IFoundryActivityData,
@@ -108,70 +97,6 @@ export class Activity implements IActivity {
             return fiatValue ? fiatValue : '-'
         } else {
             return '-'
-        }
-    }
-
-    getTimeDiffUntilExpirationTime(time: Date): string {
-        if (
-            this.data.type === ActivityType.Transaction &&
-            this.data.isAsync &&
-            !this.data.isClaimed &&
-            this.data?.expirationDate
-        ) {
-            const elapsedTime = this.data.expirationDate.getTime() - time.getTime()
-            const days = Math.floor(elapsedTime / (MILLISECONDS_PER_SECOND * SECONDS_PER_DAY))
-            const hours = Math.floor(
-                (elapsedTime / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * MINUTES_PER_HOUR)) % HOURS_PER_DAY
-            )
-            const minutes = Math.floor(
-                (elapsedTime / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)) % MINUTES_PER_HOUR
-            )
-            const seconds = Math.floor((elapsedTime / MILLISECONDS_PER_SECOND) % SECONDS_PER_MINUTE)
-
-            if (days > 0 || hours > 0) {
-                return `${days}d ${hours}h`
-            } else if (minutes > 0) {
-                return `${minutes}min`
-            } else if (seconds > 0) {
-                return '<1min'
-            } else {
-                return '-'
-            }
-        }
-        return undefined
-    }
-
-    getTitle(): string {
-        let title = ''
-        if (this.data.type === ActivityType.Transaction) {
-            if (this.data.isInternal) {
-                title = this.inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
-            } else {
-                if (this.data.direction === ActivityDirection.In) {
-                    title = this.inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
-                } else if (this.data.direction === ActivityDirection.Out) {
-                    title = this.inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
-                }
-            }
-        } else {
-            title = this.inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting'
-        }
-        return title
-    }
-
-    getFormattedSubject(): string {
-        if (this.data.type === ActivityType.Transaction) {
-            let subject = ''
-            if (this.data.subject?.type === 'account') {
-                subject = truncateString(this.data.subject?.account?.name, 13, 0)
-            } else if (this.data.subject?.type === 'address') {
-                subject = truncateString(this.data.subject?.address, get(networkHrp).length, 6)
-            } else {
-                subject = localize('general.unknownAddress')
-            }
-            return subject
-        } else {
-            return ''
         }
     }
 }

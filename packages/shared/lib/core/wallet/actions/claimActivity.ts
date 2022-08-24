@@ -3,20 +3,19 @@ import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
 import { checkStronghold } from '@lib/stronghold'
 import { get } from 'svelte/store'
-import { Activity } from '../classes'
 import { ActivityType } from '../enums'
+import { ITransactionActivityData } from '../interfaces'
 import { updateActivityDataByActivityId } from '../stores'
 
-export async function claimActivity(activity: Activity): Promise<void> {
+export async function claimActivity(activityId: string, data: ITransactionActivityData): Promise<void> {
     await checkStronghold()
     const account = get(selectedAccount)
     try {
-        const outputId = activity.data.type === ActivityType.Transaction ? activity.data.outputId : undefined
-        updateActivityDataByActivityId(account.id, activity.id, { type: ActivityType.Transaction, isClaiming: true })
-        const results = await account.claimOutputs([outputId])
+        updateActivityDataByActivityId(account.id, activityId, { type: ActivityType.Transaction, isClaiming: true })
+        const results = await account.claimOutputs([data.outputId])
         if (results.length > 0) {
             const transactionId = results[0].transactionId
-            updateActivityDataByActivityId(account.id, activity.id, {
+            updateActivityDataByActivityId(account.id, activityId, {
                 type: ActivityType.Transaction,
                 claimingTransactionId: transactionId,
             })
@@ -29,6 +28,6 @@ export async function claimActivity(activity: Activity): Promise<void> {
                 showNotification: true,
             })
         }
-        updateActivityDataByActivityId(account.id, activity.id, { type: ActivityType.Transaction, isClaiming: false })
+        updateActivityDataByActivityId(account.id, activityId, { type: ActivityType.Transaction, isClaiming: false })
     }
 }

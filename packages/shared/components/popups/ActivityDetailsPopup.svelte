@@ -64,11 +64,13 @@
     }
 
     async function claim() {
-        await claimActivity(activity)
-        openPopup({
-            type: 'activityDetails',
-            props: { activityId: activity.id },
-        })
+        if (activity.data.type === ActivityType.Transaction) {
+            await claimActivity(activity.id, activity.data)
+            openPopup({
+                type: 'activityDetails',
+                props: { activityId },
+            })
+        }
     }
 
     function reject() {
@@ -81,13 +83,13 @@
                 warning: true,
                 confirmText: localize('actions.reject'),
                 onConfirm: () => {
-                    rejectActivity(activity.id)
+                    rejectActivity(activityId)
                     closePopup()
                 },
                 onCancel: () =>
                     openPopup({
                         type: 'activityDetails',
-                        props: { activityId: activity.id },
+                        props: { activityId },
                     }),
             },
         })
