@@ -42,7 +42,7 @@
         <Pin
             bind:value={pinInput}
             glimpse
-            classes="w-full mx-auto block"
+            classes="w-full mx-auto block mb-5"
             on:submit={onSubmit}
             autofocus
             disabled={busy}
