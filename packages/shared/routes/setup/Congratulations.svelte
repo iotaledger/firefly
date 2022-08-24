@@ -123,9 +123,9 @@
 </script>
 
 <OnboardingLayout allowBack={false}>
-    <div slot="leftpane__content" class:w-full={$mobile}>
+    <div slot="leftpane__content" class:w-full={$mobile} style={$mobile ? 'min-height: 40vh;' : ''}>
         {#if wasMigrated}
-            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
+            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-800 rounded-2xl mt-10 p-10 pb-6">
                 <div
                     class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center shadow-green"
                 >
@@ -139,7 +139,7 @@
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
             </div>
         {:else}
-            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
+            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-800 rounded-2xl mt-10 p-10 pb-6">
                 <div
                     class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center shadow-green"
                 >
