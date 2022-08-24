@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { AccountRoute, accountRouter } from '@core/router'
     import { Button, ColorPicker, Input, Text } from 'shared/components'
-    import { mobile, isKeyboardOpened, keyboardHeight } from 'shared/lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from 'shared/lib/app'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { activeProfile, getAccountColor, setProfileAccount } from 'shared/lib/profile'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -80,7 +80,7 @@
     class="w-full h-full flex flex-col justify-between {$mobile ? 'safe-area px-5 pt-6' : 'p-6'}"
     style="padding-bottom: {$mobile && $isKeyboardOpened
         ? $keyboardHeight
-        : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)}  (--transition-scroll)"
 >
     <div>
         <div class="flex flex-row mb-6 {$mobile && 'justify-center'}">
