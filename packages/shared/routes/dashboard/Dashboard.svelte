@@ -16,7 +16,7 @@
     import { ongoingSnapshot } from 'shared/lib/migration'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
-    import { DeveloperTools, Settings, Staking, Wallet } from 'shared/routes'
+    import { Developer, Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import TopNavigation from './TopNavigation.svelte'
 
@@ -28,7 +28,7 @@
         wallet: Wallet,
         settings: Settings,
         staking: Staking,
-        developerTools: DeveloperTools,
+        developer: Developer,
     }
 
     let fundsSoonNotificationId

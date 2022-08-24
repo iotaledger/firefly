@@ -1028,7 +1028,9 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link"
     },
     "general": {
         "recipient": "Recipient",
@@ -1204,8 +1206,10 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
-
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL"
     },
     "filters":{
         "title": "Filters",
@@ -1532,7 +1536,7 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking",
-        "developerTools": "Developer Tools"
+        "developer": "Developer"
     },
     "pills": {
         "stake": {
