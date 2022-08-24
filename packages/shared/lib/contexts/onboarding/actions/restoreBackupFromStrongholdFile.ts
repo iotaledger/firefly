@@ -1,28 +1,19 @@
 import { get } from 'svelte/store'
 
-import { localize } from '@core/i18n'
-import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import { profileManager, restoreBackup } from '@core/profile-manager'
 
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
-import { CannotRestoreWithMismatchedCoinTypeError } from '../errors'
+import { validateStrongholdCoinType } from '../helpers'
 
-export async function restoreBackupFromStrongholdFile(
-    strongholdPassword: string,
-    networkProtocol: NetworkProtocol
-): Promise<void> {
-    const { importFilePath } = get(onboardingProfile)
+export async function restoreBackupFromStrongholdFile(strongholdPassword: string): Promise<void> {
+    const { importFilePath, networkProtocol } = get(onboardingProfile)
     await restoreBackup(importFilePath, strongholdPassword)
 
-    const accounts = await get(profileManager).getAccounts()
-    if (accounts.length === 0) {
-        const alias = `${localize('general.account')} 1`
-        const account = await get(profileManager)?.createAccount({ alias })
-        accounts.push(account)
-    }
-    if (accounts[0]?.meta?.coinType !== COIN_TYPE[networkProtocol]) {
-        throw new CannotRestoreWithMismatchedCoinTypeError()
-    }
+    /**
+     * NOTE: We must check that the Stronghold file's coin_type matches the current networkProtocol
+     * and is not based on an alternate protocol.
+     */
+    await validateStrongholdCoinType(get(profileManager), networkProtocol)
 
     updateOnboardingProfile({ lastStrongholdBackupTime: new Date() })
 }
