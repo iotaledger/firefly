@@ -3,7 +3,7 @@
     import { NumberInput, Checkbox, Dropdown, Icon, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { DropdownChoice } from '@core/utils'
-    import { visibleSelectedAccountAssets, NumberFilterType } from '@core/wallet'
+    import { visibleSelectedAccountAssets, NumberFilterOption } from '@core/wallet'
 
     export let filterUnit: FilterUnit
 
