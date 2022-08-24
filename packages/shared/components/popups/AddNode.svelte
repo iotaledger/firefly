@@ -190,7 +190,7 @@
         class="flex flex-row justify-between space-x-4 w-full md:px-8 "
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight - 20
-            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
     >
         <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>
             {locale('actions.cancel')}

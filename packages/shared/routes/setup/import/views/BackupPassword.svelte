@@ -42,7 +42,7 @@
         slot="leftpane__content"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
     >
         <Text type="p" secondary classes="mb-4">{locale('views.importBackupPassword.body1')}</Text>
         <Text type="p" secondary classes="mb-8">{locale('views.importBackupPassword.body2')}</Text>
@@ -62,7 +62,7 @@
         class="flex flex-row flex-wrap justify-between items-center space-x-4"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
     >
         <Button
             classes="flex-1"

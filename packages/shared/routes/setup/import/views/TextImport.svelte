@@ -31,7 +31,7 @@
         slot="leftpane__content"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
     >
         <Text type="p" secondary classes="mb-8">{locale(`views.importFromText.${$importType}.body`)}</Text>
         <Text type="h5" classes="mb-3">{locale(`views.importFromText.${$importType}.enter`)}</Text>
@@ -42,7 +42,7 @@
         class="flex flex-row flex-wrap justify-between items-center space-x-4"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
     >
         <Button
             classes="flex-1"

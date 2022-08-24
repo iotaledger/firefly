@@ -35,7 +35,7 @@
         class={$mobile && 'overflow-hidden'}
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
     >
         <Text type="p" secondary classes="mb-4">{locale('views.pin.body1')}</Text>
         <Text type="p" secondary highlighted classes="mb-8 font-bold">{locale('views.pin.body2')}</Text>
@@ -54,7 +54,7 @@
         class="flex flex-row flex-wrap justify-between items-center space-x-4"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
     >
         <Button classes="flex-1" disabled={!validatePinFormat(pinInput) || busy} onClick={() => onSubmit()}>
             {locale('actions.setPin')}
