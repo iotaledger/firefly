@@ -548,6 +548,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",

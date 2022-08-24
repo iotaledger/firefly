@@ -19,9 +19,12 @@ export function handleTransactionProgress(
         if (get(activeProfile).type === ProfileType.Ledger) {
             const _openPopup = (type = 'ledgerTransaction') => {
                 const _props = get(ledgerSendConfirmationProps)
+                const shouldPreventClose = type === 'enableLedgerBlindSigning'
 
                 openPopup({
                     type,
+                    hideClose: shouldPreventClose,
+                    preventClose: shouldPreventClose,
                     props: {
                         toAddress:
                             _props.recipient.type === 'address'
