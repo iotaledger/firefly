@@ -125,9 +125,9 @@
             "body": "You have backed up your wallets to a Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Funds migrated",
-            "body": "Your new wallet is ready to use.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "You have successfully migrated your funds to the new network",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
@@ -965,6 +965,7 @@
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Create new wallet",
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPin": "Set up PIN code",

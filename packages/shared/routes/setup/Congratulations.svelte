@@ -123,13 +123,15 @@
 </script>
 
 <OnboardingLayout allowBack={false}>
-    <div slot="leftpane__content">
+    <div slot="leftpane__content" class:w-full={$mobile}>
         {#if wasMigrated}
             <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
-                <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                <div
+                    class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center shadow-green"
+                >
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
+                <Text type="h2" classes="mt-3 mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
                 <Text type="p" secondary classes="mb-6 text-center">
                     {locale(`views.congratulations.${localizedBody}`, { values: localizedValues })}
                 </Text>
@@ -138,10 +140,12 @@
             </div>
         {:else}
             <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
-                <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+                <div
+                    class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center shadow-green"
+                >
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
+                <Text type="h2" classes="mt-3 mb-5 text-center">{locale('views.congratulations.title')}</Text>
                 <Text type="p" secondary classes="mb-2 text-center"
                     >{locale(`views.congratulations.${localizedBody}`)}</Text
                 >
@@ -149,8 +153,10 @@
         {/if}
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full" onClick={() => handleContinueClick()}>
-            {locale(`${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`)}
+        <Button classes="w-full" onClick={handleContinueClick}>
+            {locale(
+                `${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.exploreWallet'}`
+            )}
         </Button>
     </div>
     <div
@@ -159,7 +165,13 @@
     >
         <Animation
             classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
-            animation="congratulations-desktop"
+            animation="butterfly-chrysalis"
         />
     </div>
 </OnboardingLayout>
+
+<style>
+    .shadow-green {
+        box-shadow: 0px 4px 8px rgba(97, 232, 132, 0.3);
+    }
+</style>
