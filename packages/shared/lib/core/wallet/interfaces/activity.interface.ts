@@ -13,7 +13,7 @@ export interface IActivity {
     isHidden?: boolean
     isAssetHidden: boolean
 
-    data: TransactionActivityData | FoundryActivityData
+    data: ITransactionActivityData | IFoundryActivityData
 
     updateFromPartialActivity(partialActivity: Partial<IActivity>): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
@@ -21,7 +21,11 @@ export interface IActivity {
     getFiatAmount(fiatPrice: number, exchangeRate: number): string
 }
 
-export type TransactionActivityData = {
+export interface IPartialActivityWithType extends Omit<Partial<IActivity>, 'data'> {
+    data: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
+}
+
+export interface ITransactionActivityData {
     type: 'transaction'
     direction: ActivityDirection
     isInternal: boolean
@@ -47,10 +51,18 @@ export type TransactionActivityData = {
     assetId: string
 }
 
-export type FoundryActivityData = {
+export interface IPartialTransactionActivityDataWithType extends Omit<Partial<ITransactionActivityData>, 'type'> {
+    type: 'transaction'
+}
+
+export interface IFoundryActivityData {
     type: 'foundry'
     assetId: string
     storageDeposit: number
     giftedStorageDeposit: number
     rawAmount: number
+}
+
+export interface IPartialFoundryActivityDataWithType extends Omit<Partial<IFoundryActivityData>, 'type'> {
+    type: 'foundry'
 }

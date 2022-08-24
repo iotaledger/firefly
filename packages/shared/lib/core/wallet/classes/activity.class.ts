@@ -12,7 +12,14 @@ import {
 } from 'shared/lib/time'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
-import { FoundryActivityData, IActivity, IProcessedTransaction, TransactionActivityData } from '../interfaces'
+import {
+    FoundryActivityData,
+    IActivity,
+    IPartialFoundryActivityDataWithType,
+    IPartialTransactionActivityDataWithType,
+    IProcessedTransaction,
+    TransactionActivityData,
+} from '../interfaces'
 import {
     formatTokenAmountBestMatch,
     getActivityType,
@@ -60,7 +67,9 @@ export class Activity implements IActivity {
         Object.assign(this, partialActivity)
     }
 
-    updateDataFromPartialActivity(partialData: Partial<TransactionActivityData | FoundryActivityData>): void {
+    updateDataFromPartialActivity(
+        partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
+    ): void {
         if (partialData.type === 'transaction' && this.data.type === 'transaction') {
             this.data = { ...this.data, ...partialData }
         } else if (partialData.type === 'foundry' && this.data.type === 'foundry') {
