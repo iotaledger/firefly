@@ -10,7 +10,7 @@
     "scripts": {
         "start": "npm-run-all -p start:dev start:electron",
         "start:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack-dev-server",
-        "start:electron": "cross-env NODE_ENV=development PLATFORM=desktop electron --no-sandbox public/build/main.js",
+        "start:electron": "cross-env NODE_ENV=development PLATFORM=desktop electron --enable-logging --no-sandbox public/build/main.js",
         "start:electron-prod": "cross-env NODE_ENV=production PLATFORM=desktop electron public/build/main.js",
         "build": "yarn build:alpha",
         "build:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack",
@@ -47,7 +47,7 @@
         "copy-webpack-plugin": "^7.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.1",
-        "electron": "14.2.9",
+        "electron": "15.0.0",
         "electron-builder": "^23.3.3",
         "electron-notarize": "^1.0.0",
         "lodash.merge": "^4.6.2",
