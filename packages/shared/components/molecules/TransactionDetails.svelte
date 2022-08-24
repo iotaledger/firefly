@@ -124,18 +124,20 @@
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
         </transaction-status>
-        {#if subject?.type === 'account'}
-            <Box row clearBackground clearPadding classes="justify-center">
-                <AccountLabel account={subject.account} />
-            </Box>
-        {:else if subject?.type === 'address'}
-            <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
-        {:else}
-            <Box col clearBackground clearPadding>
-                <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
-                    {localize('general.unknownAddress')}
-                </Text>
-            </Box>
+        {#if type === ActivityType.Transaction}
+            {#if subject?.type === 'account'}
+                <Box row clearBackground clearPadding classes="justify-center">
+                    <AccountLabel account={subject.account} />
+                </Box>
+            {:else if subject?.type === 'address'}
+                <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
+            {:else}
+                <Box col clearBackground clearPadding>
+                    <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
+                        {localize('general.unknownAddress')}
+                    </Text>
+                </Box>
+            {/if}
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}
