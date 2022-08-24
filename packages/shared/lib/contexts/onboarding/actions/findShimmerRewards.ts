@@ -11,10 +11,10 @@ import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '..
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
 
-let accountGapLimitIncrement
+let accountGapLimitIncrement = 0
 let accountGapLimit = accountGapLimitIncrement
 // let startAccountIndex = 0
-let addressGapLimitIncrement
+let addressGapLimitIncrement = 0
 let addressGapLimit = addressGapLimitIncrement
 // let startAddressIndex = 0
 
@@ -58,8 +58,8 @@ function setGapLimitIncrements(): void {
         throw new UnableToFindProfileTypeError()
     }
 
-    accountGapLimitIncrement = INITIAL_ACCOUNT_GAP_LIMIT[profileType]
-    addressGapLimitIncrement = INITIAL_ADDRESS_GAP_LIMIT[profileType]
+    accountGapLimitIncrement = INITIAL_ACCOUNT_GAP_LIMIT[profileType] || 1
+    addressGapLimitIncrement = INITIAL_ADDRESS_GAP_LIMIT[profileType] || 10
 
     hasSetGapLimitIncrements = true
 }
@@ -81,8 +81,8 @@ function showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards: numbe
     })
 }
 
-function updateRewardsFinderParameters(wereRewardsFound: boolean): void {
-    if (wereRewardsFound) {
+function updateRewardsFinderParameters(hasNewRewards: boolean): void {
+    if (hasNewRewards) {
         accountGapLimit = accountGapLimitIncrement
         addressGapLimit = addressGapLimitIncrement
 
@@ -90,6 +90,9 @@ function updateRewardsFinderParameters(wereRewardsFound: boolean): void {
         // startAccountIndex = 0
         // startAddressIndex = 0
     } else {
+        accountGapLimit += accountGapLimitIncrement
+        addressGapLimit += addressGapLimitIncrement
+
         // TODO: https://github.com/iotaledger/firefly/issues/4297
         // startAccountIndex += accountGapLimitIncrement
         // startAddressIndex += addressGapLimitIncrement

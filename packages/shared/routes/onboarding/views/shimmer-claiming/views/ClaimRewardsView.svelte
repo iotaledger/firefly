@@ -63,6 +63,7 @@
             hasSearchedForRewardsBefore = true
             await findShimmerRewards()
         } catch (err) {
+            console.error(err)
             throw new FindShimmerRewardsError()
         } finally {
             isSearchingForRewards = false
