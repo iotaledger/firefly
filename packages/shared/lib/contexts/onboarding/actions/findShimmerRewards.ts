@@ -1,16 +1,13 @@
 import { get } from 'svelte/store'
 
-import { getBoundAccount } from '@core/account'
-import { localize } from '@core/i18n'
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
 import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT, UnableToFindProfileTypeError } from '@core/profile'
-import { profileManager } from '@core/profile-manager'
-import { sortAccountsByIndex, zip } from '@core/utils'
+import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 
 import { DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS } from '../constants'
-import { prepareShimmerClaimingAccount } from '../helpers'
+import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
 
@@ -21,83 +18,38 @@ let addressGapLimitIncrement = 1
 let addressGapLimit = addressGapLimitIncrement
 // let startAddressIndex = 0
 
-let haveGapLimitIncrementsBeenSet = false
-
 let totalUnclaimedShimmerRewards = 0
 
+let haveGapLimitIncrementsBeenSet = false
+
 export async function findShimmerRewards(): Promise<void> {
-    try {
-        if (!haveGapLimitIncrementsBeenSet) {
-            setGapLimitIncrements()
-        }
-
-        const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
-        const accountMetadataList = await _shimmerClaimingProfileManager?.recoverAccounts(
-            accountGapLimit,
-            addressGapLimit,
-            DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS
-        )
-        const boundAccounts = (
-            await Promise.all(
-                accountMetadataList.map(async (accountMetadata) => {
-                    const account = await getBoundAccount(accountMetadata?.index, true, shimmerClaimingProfileManager)
-                    account.meta.alias = Number.isNaN(accountMetadata?.alias)
-                        ? accountMetadata?.alias
-                        : `${localize('general.account')} ${accountMetadata?.index + 1}`
-                    return account
-                })
-            )
-        ).sort(sortAccountsByIndex)
-        const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
-        const wereRewardsFound = updatedTotalUnclaimedShimmerRewards > totalUnclaimedShimmerRewards
-        if (wereRewardsFound) {
-            const boundTwinAccounts = (
-                await Promise.all(
-                    boundAccounts.map(async (boundAccount) => {
-                        const account = await getBoundAccount(boundAccount?.meta?.index, true, profileManager)
-                        account.meta.alias = Number.isNaN(boundAccount?.meta?.alias)
-                            ? boundAccount?.meta?.alias
-                            : `${localize('general.account')} ${boundAccount?.meta?.index + 1}`
-                        return account
-                    })
-                )
-            ).sort(sortAccountsByIndex)
-            for (const [boundAccount, boundTwinAccount] of zip(boundAccounts, boundTwinAccounts)) {
-                const shimmerClaimingAccount = await prepareShimmerClaimingAccount(boundAccount, boundTwinAccount, true)
-                updateShimmerClaimingAccount(shimmerClaimingAccount)
-            }
-
-            const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
-            const foundRewardsAmountFormatted = formatTokenAmountBestMatch(
-                foundRewardsAmount,
-                BASE_TOKEN[NetworkProtocol.Shimmer]
-            )
-            showAppNotification({
-                type: 'success',
-                alert: true,
-                message: `Successfully found ${foundRewardsAmountFormatted}`,
-            })
-
-            totalUnclaimedShimmerRewards = updatedTotalUnclaimedShimmerRewards
-
-            accountGapLimit = accountGapLimitIncrement
-            addressGapLimit = addressGapLimitIncrement
-
-            // TODO: https://github.com/iotaledger/firefly/issues/4297
-            // startAccountIndex = 0
-            // startAddressIndex = 0
-        } else {
-            // TODO: https://github.com/iotaledger/firefly/issues/4297
-            // startAccountIndex += accountGapLimitIncrement
-            // startAddressIndex += addressGapLimitIncrement
-        }
-    } catch (err) {
-        console.error(err)
+    if (!haveGapLimitIncrementsBeenSet) {
+        setGapLimitIncrements()
     }
-}
 
-export function setTotalUnclaimedShimmerRewards(initialTotalUnclaimedShimmerRewards: number): void {
-    totalUnclaimedShimmerRewards = initialTotalUnclaimedShimmerRewards
+    const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
+    const accountMetadataList = await _shimmerClaimingProfileManager?.recoverAccounts(
+        accountGapLimit,
+        addressGapLimit,
+        DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS
+    )
+    const boundAccounts = await getSortedRenamedBoundAccounts(accountMetadataList, shimmerClaimingProfileManager)
+    const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
+    const wereRewardsFound = updatedTotalUnclaimedShimmerRewards > totalUnclaimedShimmerRewards
+    if (wereRewardsFound) {
+        const boundTwinAccounts = await getSortedRenamedBoundAccounts(
+            boundAccounts?.map((boundAccount) => boundAccount?.meta)
+        )
+        for (const [boundAccount, boundTwinAccount] of zip(boundAccounts, boundTwinAccounts)) {
+            const shimmerClaimingAccount = await prepareShimmerClaimingAccount(boundAccount, boundTwinAccount, true)
+            updateShimmerClaimingAccount(shimmerClaimingAccount)
+        }
+
+        showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards)
+        setTotalUnclaimedShimmerRewards(updatedTotalUnclaimedShimmerRewards)
+    }
+
+    updateRewardsFinderParameters(wereRewardsFound)
 }
 
 function setGapLimitIncrements(): void {
@@ -110,4 +62,36 @@ function setGapLimitIncrements(): void {
     addressGapLimitIncrement = INITIAL_ADDRESS_GAP_LIMIT[profileType]
 
     haveGapLimitIncrementsBeenSet = true
+}
+
+export function setTotalUnclaimedShimmerRewards(_totalUnclaimedShimmerRewards: number): void {
+    totalUnclaimedShimmerRewards = _totalUnclaimedShimmerRewards
+}
+
+function showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards: number): void {
+    const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
+    const foundRewardsAmountFormatted = formatTokenAmountBestMatch(
+        foundRewardsAmount,
+        BASE_TOKEN[NetworkProtocol.Shimmer]
+    )
+    showAppNotification({
+        type: 'success',
+        alert: true,
+        message: `Successfully found ${foundRewardsAmountFormatted}`,
+    })
+}
+
+function updateRewardsFinderParameters(wereRewardsFound: boolean): void {
+    if (wereRewardsFound) {
+        accountGapLimit = accountGapLimitIncrement
+        addressGapLimit = addressGapLimitIncrement
+
+        // TODO: https://github.com/iotaledger/firefly/issues/4297
+        // startAccountIndex = 0
+        // startAddressIndex = 0
+    } else {
+        // TODO: https://github.com/iotaledger/firefly/issues/4297
+        // startAccountIndex += accountGapLimitIncrement
+        // startAddressIndex += addressGapLimitIncrement
+    }
 }
