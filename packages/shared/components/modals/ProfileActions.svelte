@@ -2,7 +2,7 @@
     import { fade } from 'svelte/transition'
     import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { LedgerConnectionState, ledgerDeviceStatus, getLedgerDeviceStatus } from '@core/ledger'
+    import { LedgerConnectionState, ledgerDeviceStatus, getLedgerDeviceStatus, LedgerAppName } from '@core/ledger'
     import { popupState, openPopup } from 'shared/lib/popup'
     import { openSettings } from '@core/router'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
@@ -63,7 +63,10 @@
 
     const updateLedgerConnectionText = (): void => {
         ledgerConnectionText = localize(
-            `views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceStatus.connectionState}`
+            `views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceStatus.connectionState}`,
+            $ledgerDeviceStatus.connectionState === LedgerConnectionState.AppNotOpen
+                ? { values: { protocol: LedgerAppName.SHIMMER } }
+                : {}
         )
     }
 

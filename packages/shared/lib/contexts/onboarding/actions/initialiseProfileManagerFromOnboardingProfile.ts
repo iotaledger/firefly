@@ -2,6 +2,7 @@ import { get } from 'svelte/store'
 
 import {
     buildProfileManagerOptionsFromProfileData,
+    deleteAccountsAndDatabase,
     initialiseProfileManager,
     profileManager,
 } from '@core/profile-manager'
@@ -9,8 +10,13 @@ import {
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
 export async function initialiseProfileManagerFromOnboardingProfile(checkForExistingManager?: boolean): Promise<void> {
-    if (checkForExistingManager && get(profileManager)) {
-        return
+    if (get(profileManager)) {
+        if (!checkForExistingManager) {
+            await deleteAccountsAndDatabase()
+            await get(profileManager)?.destroy()
+        } else {
+            return
+        }
     }
 
     const profileManagerOptions = await buildProfileManagerOptionsFromProfileData(get(onboardingProfile))

@@ -35,6 +35,7 @@ export interface IPlatform {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
     hookErrorLogger(logger: (error: IError) => void): void
+    copyFile(sourceFilePath: string, destinationFilePath: string): Promise<void>
 
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined

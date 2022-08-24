@@ -173,10 +173,10 @@ const onboardingFeatures = {
                 enabled: false,
                 hidden: false,
                 recoveryPhrase: {
-                    enabled: false,
+                    enabled: true,
                 },
                 strongholdBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
                 ledgerBackup: {
                     enabled: false,
@@ -214,10 +214,10 @@ const onboardingFeatures = {
                 enabled: false,
                 hidden: false,
                 recoveryPhrase: {
-                    enabled: false,
+                    enabled: true,
                 },
                 strongholdBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
                 ledgerBackup: {
                     enabled: false,

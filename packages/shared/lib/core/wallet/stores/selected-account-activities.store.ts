@@ -7,8 +7,8 @@ import { isValueInUnitRange, unitToValue } from '@lib/utils'
 import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
 import { isFilteredActivity } from '../utils/isFilteredActivity'
-import { ActivityFilter, BooleanFilterOptions, NumberFilterType } from '../interfaces/filter.interface'
-import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
+import { ActivityFilter } from '../interfaces/filter.interface'
+import { NumberFilterOption, BooleanFilterOption, TypeFilterOption, StatusFilterOption } from '../enums'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -26,8 +26,8 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         type: 'number',
         active: false,
         localeKey: 'filters.amount',
-        selected: NumberFilterType.Equal,
-        choices: Object.values(NumberFilterType),
+        selected: NumberFilterOption.Equal,
+        choices: Object.values(NumberFilterOption),
         subunit: {
             type: 'single',
             amount: '',
@@ -43,34 +43,34 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         active: false,
         type: 'selection',
         localeKey: 'filters.status',
-        selected: InclusionState.Confirmed,
+        selected: StatusFilterOption.Confirmed,
         choices: [
-            InclusionState.Confirmed,
-            InclusionState.Pending,
-            ActivityAsyncStatus.Claimed,
-            ActivityAsyncStatus.Unclaimed,
+            StatusFilterOption.Confirmed,
+            StatusFilterOption.Pending,
+            StatusFilterOption.Claimed,
+            StatusFilterOption.Unclaimed,
         ],
     },
     type: {
         active: false,
         type: 'selection',
         localeKey: 'filters.type',
-        selected: ActivityDirection.In,
-        choices: [ActivityDirection.In, ActivityDirection.Out, ActivityType.InternalTransaction],
+        selected: TypeFilterOption.Incoming,
+        choices: [TypeFilterOption.Incoming, TypeFilterOption.Outgoing, TypeFilterOption.Internal],
     },
     showRejected: {
         active: false,
         type: 'selection',
         localeKey: 'filters.showRejected',
-        selected: BooleanFilterOptions.Yes,
-        choices: [BooleanFilterOptions.Yes, BooleanFilterOptions.No],
+        selected: BooleanFilterOption.Yes,
+        choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
     },
     showHidden: {
         active: false,
         type: 'selection',
         localeKey: 'filters.showHidden',
-        selected: BooleanFilterOptions.Yes,
-        choices: [BooleanFilterOptions.Yes, BooleanFilterOptions.No],
+        selected: BooleanFilterOption.Yes,
+        choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
     },
 })
 
@@ -86,9 +86,9 @@ export const queriedActivities: Readable<Activity[]> = derived(
         if (activitySearchTerm) {
             activityList = activityList.filter(
                 (activity) =>
-                    (activity.recipient.type === 'account' &&
+                    (activity.recipient?.type === 'account' &&
                         activity.recipient?.account?.name === $activitySearchTerm) ||
-                    (activity.recipient.type === 'address' && activity.recipient?.address === $activitySearchTerm) ||
+                    (activity.recipient?.type === 'address' && activity.recipient?.address === $activitySearchTerm) ||
                     activity?.id?.toLowerCase() === $activitySearchTerm ||
                     ($activitySearchTerm[0] === '>' &&
                         unitToValue($activitySearchTerm.substring(1)) < activity.rawAmount) ||
