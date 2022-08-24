@@ -17,6 +17,7 @@
         keyboardHeight,
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTos,
+        getKeyboardTransitionSpeed,
     } from '@lib/app'
 
     export let locale: Locale
@@ -178,7 +179,7 @@
             class="flex flex-col items-center {$mobile ? 'w-80' : 'w-96 flex-wrap mb-20'}"
             style="padding-bottom: {$mobile
                 ? $keyboardHeight + 15
-                : 0}px; ; transition: padding 0.2s var(--transition-scroll)"
+                : 0}px; ; transition: padding {getKeyboardTransitionSpeed($isKeyboardOpened)} (--transition-scroll)"
         >
             <Profile name={$activeProfile?.name} bgColor="blue" />
             <Pin

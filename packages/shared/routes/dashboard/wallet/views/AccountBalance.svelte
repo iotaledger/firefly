@@ -20,6 +20,9 @@
 
     let showPreciseBalance = false
 
+    const [safeAreaPx] = getComputedStyle(document.documentElement).getPropertyValue('--sat').split('px')
+    const safeArea = parseInt(safeAreaPx)
+
     function handleSendClick() {
         $accountRouter.goTo(AccountRoute.Send)
     }
@@ -38,7 +41,7 @@
     function scrollAnimation(curr: number): void {
         if (!background || !conversion || !buttons || !window) return
 
-        background.style.transform = getTranslation(-background.clientHeight * 0.6 * (1 - curr))
+        background.style.transform = getTranslation(-(background.clientHeight - safeArea) * 0.6 * (1 - curr))
 
         transformBalance(curr)
         conversion.style.transform = getTranslation(background.clientHeight * (1 - curr))
@@ -49,7 +52,7 @@
         if (!balance || !window) return
 
         const scale = getScale(0.4 * curr + 0.6)
-        const translate = getTranslation(background.clientHeight * 0.8 * (1 - curr))
+        const translate = getTranslation((background.clientHeight - safeArea) * 0.8 * (1 - curr))
 
         balance.style.transform = `${scale} ${translate}`
     }
@@ -146,6 +149,9 @@
 {/if}
 
 <style>
+    :root {
+        --sat: env(safe-area-inset-top);
+    }
     .safe-area {
         padding-top: calc(env(safe-area-inset-top) + 80px);
     }

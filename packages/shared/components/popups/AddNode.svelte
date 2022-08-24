@@ -13,7 +13,7 @@
     import { Locale } from '@core/i18n'
     import { Node, NodeAuth, NodeInfo } from 'shared/lib/typings/node'
     import { Network } from 'shared/lib/typings/network'
-    import { mobile, isKeyboardOpened, keyboardHeight } from 'shared/lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from 'shared/lib/app'
 
     export let locale: Locale
 
@@ -190,7 +190,7 @@
         class="flex flex-row justify-between space-x-4 w-full md:px-8 "
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight - 20
-            : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened)} var(--transition-scroll)"
     >
         <Button secondary classes="w-1/2" onClick={() => closePopup()} disabled={isBusy}>
             {locale('actions.cancel')}

@@ -165,3 +165,8 @@ export const TOS_VERSION = 2
 
 export const needsToAcceptLatestPrivacyPolicy = (): boolean => get(lastAcceptedPrivacyPolicy) < PRIVACY_POLICY_VERSION
 export const needsToAcceptLatestTos = (): boolean => get(lastAcceptedTos) < TOS_VERSION
+
+export const isAndroid = writable<boolean>(false)
+
+export const getKeyboardTransitionSpeed = (isKeyboardOpened: boolean): string =>
+    isKeyboardOpened ? (get(isAndroid) ? '0.2s' : '0.4s') : '0.25s'
