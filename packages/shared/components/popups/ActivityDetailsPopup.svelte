@@ -118,9 +118,9 @@
     {#if activity.data.type === 'transaction' && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
-                disabled={activity.isClaiming || activity.data.isRejected}
-                class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300 {isClaiming ||
-                activity.data.isRejected
+                disabled={activity.data.isClaiming || activity.data.isRejected}
+                class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300 {activity
+                    .data.isClaiming || activity.data.isRejected
                     ? 'cursor-default text-gray-500'
                     : 'cursor-pointer'}"
                 on:click={reject}
@@ -128,11 +128,11 @@
                 {localize('actions.reject')}
             </button>
             <button
-                disabled={activity.isClaiming}
+                disabled={activity.data.isClaiming}
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
                 on:click={claim}
             >
-                {#if activity.isClaiming}
+                {#if activity.data.isClaiming}
                     <Spinner busy={true} classes="justify-center" />
                 {:else}
                     {localize('actions.claim')}
