@@ -11,7 +11,7 @@ export function handleLedgerErrors(error: string): void {
             (_popupState.type === 'ledgerTransaction' || _popupState.type === 'enableLedgerBlindSigning')
         ) {
             // TODO: Probably a good idea to also display a notification here?
-            closePopup()
+            closePopup(_popupState.type === 'enableLedgerBlindSigning')
         }
     }
 }
