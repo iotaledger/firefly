@@ -11,11 +11,13 @@ export class UnsupportedBackupFileError extends BaseError {
 }
 
 export class CannotRestoreWithMismatchedCoinTypeError extends BaseError {
-    constructor() {
+    constructor(isClaiming: boolean = false) {
         super({
-            message: localize('notifications.restoreFromStrongholdBackup.wrongProtocolForClaiming'),
+            message: isClaiming
+                ? localize('notifications.restoreFromStrongholdBackup.wrongProtocolForClaiming')
+                : localize('notifications.restoreFromStrongholdBackup.wrongProtocol'),
             localizeMessage: false,
-            showNotification: true,
+            showNotification: false,
         })
     }
 }
