@@ -36,8 +36,13 @@
             } catch (err) {
                 if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
                     await initialiseProfileManagerFromOnboardingProfile(false)
-                    await destroyShimmerClaimingProfileManager()
-                    await createShimmerClaimingProfileManager()
+                    if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
+                        await destroyShimmerClaimingProfileManager()
+                        await createShimmerClaimingProfileManager()
+                        error = localize('error.stronghold.wrongProtocolForClaiming')
+                    } else {
+                        error = localize('error.stronghold.wrongProtocol')
+                    }
                 } else {
                     console.error(err)
                     error = localize('error.password.incorrect')
