@@ -1,9 +1,13 @@
 <script lang="typescript">
+    import { onDestroy } from 'svelte'
     import { Button, KeyValueBox, Spinner, Text, TextHint } from 'shared/components'
-    import { closePopup, openPopup } from 'shared/lib/popup'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { FontWeight } from '../Text.svelte'
+    import { closePopup, openPopup } from '@lib/popup'
+    import { showAppNotification } from '@lib/notifications'
     import { displayNotificationForLedgerProfile, ledgerDeviceStatus } from '@core/ledger'
+    import { sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
+    import { BASE_TOKEN } from '@core/network'
     import {
         activeAccounts,
         activeProfile,
@@ -14,16 +18,12 @@
         loadAccounts,
         visibleActiveAccounts,
     } from '@core/profile'
+    import { recoverAccounts } from '@core/profile-manager'
     import {
         formatTokenAmountBestMatch,
         generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
-    import { BASE_TOKEN } from '@core/network'
-    import { sumBalanceForAccounts } from '@core/account'
-    import { FontWeight } from '../Text.svelte'
-    import { recoverAccounts } from '@core/profile-manager'
-    import { onDestroy } from 'svelte'
 
     export let searchForBalancesOnLoad = false
 
@@ -80,6 +80,7 @@
                 previousAddressGapLimit = currentAddressGapLimit
                 currentAccountGapLimit += accountGapLimitIncrement
                 currentAddressGapLimit += addressGapLimitIncrement
+
                 hasUsedWalletFinder = true
             } catch (err) {
                 error = localize(err.error)
