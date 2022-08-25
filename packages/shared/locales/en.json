@@ -1440,10 +1440,6 @@
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case"
         },
-        "stronghold": {
-            "wrongProtocol": "You must use {protocol, select, IOTA {an} Shimmer {a}} {protocol}-based Stronghold backup",
-            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
-        },
         "ledger": {
             "appNotOpen": "You must open the IOTA app on your Ledger device.",
             "generic": "There was an error connecting to your Ledger device.",

@@ -17,7 +17,7 @@ export class CannotRestoreWithMismatchedCoinTypeError extends BaseError {
                 ? localize('notifications.restoreFromStrongholdBackup.wrongProtocolForClaiming')
                 : localize('notifications.restoreFromStrongholdBackup.wrongProtocol'),
             localizeMessage: false,
-            showNotification: false,
+            showNotification: true,
         })
     }
 }

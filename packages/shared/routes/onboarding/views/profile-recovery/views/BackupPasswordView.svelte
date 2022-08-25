@@ -3,7 +3,6 @@
     import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName } from '@core/network'
     import { profileRecoveryRouter } from '@core/router'
     import {
         CannotRestoreWithMismatchedCoinTypeError,
@@ -37,14 +36,10 @@
             } catch (err) {
                 if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
                     await initialiseProfileManagerFromOnboardingProfile(false)
+
                     if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
                         await destroyShimmerClaimingProfileManager()
                         await createShimmerClaimingProfileManager()
-                        error = localize('error.stronghold.wrongProtocolForClaiming')
-                    } else {
-                        error = localize('error.stronghold.wrongProtocol', {
-                            values: { protocol: formatProtocolName($onboardingProfile.networkProtocol) },
-                        })
                     }
                 } else if (err?.error.match(/`invalid stronghold password`/)) {
                     error = localize('error.password.incorrect')
