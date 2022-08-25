@@ -10,26 +10,13 @@ import { sleep } from '@lib/utils'
 import { ShimmerClaimingAccountState } from '../enums'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { IShimmerClaimingAccount } from '../interfaces'
-import { onboardingProfile, persistShimmerClaimingTransaction, updateShimmerClaimingAccounts } from '../stores'
+import { onboardingProfile, persistShimmerClaimingTransaction, updateShimmerClaimingAccount } from '../stores'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
     const unclaimedShimmerClaimingAccounts =
         shimmerClaimingAccounts?.filter((shimmerClaimingAccount) => shimmerClaimingAccount?.unclaimedRewards > 0) ?? []
     await claimShimmerRewardsForShimmerClaimingAccounts(unclaimedShimmerClaimingAccounts)
-
-    const processedShimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
-    const shouldShowSuccessNotification = !processedShimmerClaimingAccounts?.some(
-        (processedShimmerClaimingAccount) =>
-            processedShimmerClaimingAccount?.state === ShimmerClaimingAccountState.Failed
-    )
-    if (shouldShowSuccessNotification) {
-        showAppNotification({
-            type: 'success',
-            alert: true,
-            message: localize('notifications.claimShimmerRewards.success'),
-        })
-    }
 }
 
 async function claimShimmerRewardsForShimmerClaimingAccounts(
@@ -37,15 +24,23 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
 ): Promise<void> {
     for (const shimmerClaimingAccount of shimmerClaimingAccounts) {
         try {
+            updateShimmerClaimingAccount({
+                ...shimmerClaimingAccount,
+                state: ShimmerClaimingAccountState.Claiming,
+            })
             await claimShimmerRewardsForShimmerClaimingAccount(shimmerClaimingAccount)
+            showAppNotification({
+                type: 'success',
+                alert: true,
+                message: localize('notifications.claimShimmerRewards.success', {
+                    values: { accountAlias: shimmerClaimingAccount?.meta?.alias },
+                }),
+            })
         } catch (err) {
-            const failedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
-                shimmerClaimingAccount,
-                shimmerClaimingAccount?.twinAccount,
-                false,
-                ShimmerClaimingAccountState.Failed
-            )
-            updateShimmerClaimingAccounts(failedShimmerClaimingAccount)
+            updateShimmerClaimingAccount({
+                ...shimmerClaimingAccount,
+                state: ShimmerClaimingAccountState.Failed,
+            })
             showAppNotification({
                 type: 'error',
                 alert: true,
@@ -75,5 +70,5 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
         null,
         claimingTransaction
     )
-    updateShimmerClaimingAccounts(syncedShimmerClaimingAccount)
+    updateShimmerClaimingAccount(syncedShimmerClaimingAccount)
 }

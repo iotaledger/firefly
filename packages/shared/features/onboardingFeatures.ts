@@ -211,7 +211,7 @@ const onboardingFeatures = {
         'private-net': {
             enabled: true,
             claimRewards: {
-                enabled: false,
+                enabled: true,
                 hidden: false,
                 recoveryPhrase: {
                     enabled: true,
