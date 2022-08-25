@@ -1,6 +1,6 @@
 import { get, Writable } from 'svelte/store'
 
-import { InvalidTransactionIdError } from '@core/wallet'
+import { MissingTransactionIdError } from '@core/wallet'
 import { persistent } from '@lib/helpers'
 
 import { IShimmerClaimingTransactionStore } from '../interfaces'
@@ -15,12 +15,12 @@ export const shimmerClaimingTransactions: Writable<IShimmerClaimingTransactionSt
 export function isShimmerClaimingTransaction(transactionId: string, profileId?: string): boolean {
     const _shimmerClaimingTransactions = get(shimmerClaimingTransactions)
     profileId = profileId ? profileId : get(onboardingProfile)?.id
-    return profileId in _shimmerClaimingTransactions && _shimmerClaimingTransactions[profileId][transactionId]
+    return !!_shimmerClaimingTransactions?.[profileId]?.[transactionId]
 }
 
 export function persistShimmerClaimingTransaction(transactionId: string, profileId?: string): void {
     if (!transactionId) {
-        throw new InvalidTransactionIdError()
+        throw new MissingTransactionIdError()
     }
 
     profileId = profileId ? profileId : get(onboardingProfile)?.id
@@ -37,8 +37,6 @@ export function persistShimmerClaimingTransaction(transactionId: string, profile
 export function removePersistedShimmerClaimingTransactions(profileId?: string): void {
     profileId = profileId ? profileId : get(onboardingProfile)?.id
     const _shimmerClaimingTransactions = get(shimmerClaimingTransactions)
-    if (profileId in _shimmerClaimingTransactions) {
-        delete _shimmerClaimingTransactions[profileId]
-        shimmerClaimingTransactions.set(_shimmerClaimingTransactions)
-    }
+    delete _shimmerClaimingTransactions[profileId]
+    shimmerClaimingTransactions.set(_shimmerClaimingTransactions)
 }

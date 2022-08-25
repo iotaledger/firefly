@@ -1,1 +1,1 @@
-export * from './invalid-transaction-id.error'
+export * from './missing-transaction-id.error'
