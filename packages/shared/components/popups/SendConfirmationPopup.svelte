@@ -41,10 +41,10 @@
     export let disableToggleGift = false
     export let disableChangeExpiration = false
     export let disableBack = false
+    export let storageDeposit = 0
+    export let expirationDate: Date
+    export let giftedStorageDeposit = 0
 
-    let expirationDate: Date
-    let storageDeposit = 0
-    let giftedStorageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
