@@ -8,6 +8,7 @@ import type {
     EventType,
     WalletEvent,
     LedgerNanoStatus,
+    AccountMeta,
 } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
@@ -146,7 +147,11 @@ export class ProfileManagerMock implements IProfileManager {
         return
     }
 
-    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
+    recoverAccounts(
+        accountGapLimit: number,
+        addressGapLimit: number,
+        syncOptions: AccountSyncOptions
+    ): Promise<AccountMeta[]> {
         return Promise.resolve([])
     }
 

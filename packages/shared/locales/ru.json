@@ -1,102 +1,194 @@
 {
     "views": {
-        "onboarding1": {
-            "title": "Send, Receive & Manage your {protocol} tokens",
-            "body": "Firefly - это официальное программное обеспечение кошелька IOTA."
-        },
-        "legal": {
-            "title": "Политика конфиденциальности и Условия предоставления услуг",
-            "body": "Пожалуйста, ознакомьтесь с Политикой конфиденциальности и Условиями предоставления услуг.",
-            "checkbox": "Я прочитал и принимаю Политику конфиденциальности и Условия предоставления услуг"
-        },
-        "crashReporting": {
-            "title": "Отчет о сбое",
-            "body": "Помогите разработчикам улучшить Firefly, автоматически отправляя диагностические данные при возникновении ошибки или сбоя.",
-            "checkbox": "Отправить отчеты об авариях в Фонд IOTA"
-        },
-        "languageAndAppearance": {
-            "title": "Language & appearance",
-            "body": "Choose your language and theme"
-        },
-        "profile": {
-            "title": "Create your {protocol} profile",
-            "profileName": "Имя профиля",
-            "body1": "Вы можете создать несколько профилей пользователей, чтобы организовать свои кошельки и повысить уровень секретности.",
-            "body2": {
-                "first": "А сейчас, давайте начнем с вашего первого имени профиля.",
-                "nonFirst": "А сейчас, давайте начнем с вашего имени профиля."
-            },
-            "addMore": "Вы можете добавить больше профилей позже.",
-            "advancedOptions": "Дополнительные настройки",
-            "developer": {
-                "label": "Профиль разработчика",
-                "info": "Подключиться к devnet или частной сети"
-            }
-        },
-        "setup": {
-            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-            "chrysalisTitle": "Обновление сети Chrysalis",
-            "chrysalisBody": "С 21 апреля 2021 года пользователи могут перевести свои токены в новую сеть Chrysalis. Мы рекомендуем вам перевести имеющиеся токены как можно скорее.",
-            "learnMore": "Узнайте о миграции"
-        },
-        "secure": {
-            "title": "Защити твой кошелек",
-            "body1": "Сохраните и распечатайте образец восстановления в формате PDF.",
-            "body2": "Если вы заполните Recovery Kit и будете хранить его в защищенном месте, вы всегда сможете восстановить свои кошельки."
-        },
-        "create": {
-            "title": "Создайте кошелек",
-            "body": "Создайте новый кошелек. Вы можете выбрать обычный программный кошелек или, если у вас есть устройство Ledger, настроить аппаратный кошелек.",
-            "softwareAccount": {
-                "title": "Create a software wallet",
-                "description": "Provides a Stronghold file and recovery phrase"
-            },
-            "ledgerAccount": {
-                "title": "Create a hardware wallet",
-                "description": "Требуется Ledger Nano S или Nano X"
-            }
-        },
-        "protocol": {
-            "title": "Choose protocol",
-            "body": "Set the protocol for your profile",
-            "iota": "IOTA Mainnet",
-            "shimmer": "Staging network for IOTA Mainnet"
-        },
-        "network": {
-            "title": "Choose network",
-            "body": "Set the network for your profile",
-            "iota": {
-                "mainnet": {
-                    "title": "Mainnet",
-                    "body": "IOTA Mainnet"
+        "onboarding": {
+            "appSetup": {
+                "welcome": {
+                    "title": "Send, Receive & Manage your {protocol} tokens",
+                    "body": "Firefly is the official wallet software for {protocol}."
                 },
-                "devnet": {
-                    "title": "Devnet",
-                    "body": "Developer network for IOTA"
+                "legal": {
+                    "title": "Privacy Policy & Terms of Service",
+                    "body": "Please review the Privacy Policy and Terms of Service.",
+                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with active TIPS"
+                "languageAndAppearance": {
+                    "title": "Language & appearance",
+                    "body": "Choose your language and theme."
                 }
             },
-            "shimmer": {
-                "mainnet": {
-                    "title": "Shimmer",
-                    "body": "Staging network for IOTA"
+            "networkSetup": {
+                "chooseProtocol": {
+                    "title": "Choose protocol",
+                    "body": "Set the protocol for your profile.",
+                    "iota": "Default IOTA network",
+                    "shimmer": "Experimental IOTA staging network"
                 },
-                "devnet": {
-                    "title": "Shimmer Beta",
-                    "body": "Beta network for Shimmer"
+                "chooseNetwork": {
+                    "title": "Choose network",
+                    "body": "Set the network for your profile.",
+                    "iota": {
+                        "mainnet": {
+                            "title": "Mainnet",
+                            "body": "IOTA Mainnet"
+                        },
+                        "devnet": {
+                            "title": "Devnet",
+                            "body": "Developer network for IOTA"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with active TIPs"
+                        }
+                    },
+                    "shimmer": {
+                        "mainnet": {
+                            "title": "Shimmer",
+                            "body": "Staging network for IOTA"
+                        },
+                        "devnet": {
+                            "title": "Testnet",
+                            "body": "Public beta network for Shimmer"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with draft TIPs"
+                        }
+                    }
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with draft TIPS"
+                "setupPrivateNetworkConnection": {
+                    "title": "Connect to a private network",
+                    "body": "Fill the form with the node information and connect to a private network."
                 }
+            },
+            "profileSetup": {
+                "setup": {
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "chrysalisTitle": "TODO TODO TODO",
+                    "chrysalisBody": "TODO TODO TODO TODO TODO",
+                    "learnMore": "Learn about the Shimmer network"
+                },
+                "setupNew": {
+                    "title": "Create a profile",
+                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "softwareAccount": {
+                        "title": "Create a software profile",
+                        "description": "Provides a Stronghold file and recovery phrase"
+                    },
+                    "ledgerAccount": {
+                        "title": "Create a hardware profile",
+                        "description": "Ledger Nano S or Nano X required"
+                    }
+                },
+                "setupRecovered": {
+                    "title": "Recover {protocol} profile",
+                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
+                    "importMnemonic": "Use recovery phrase",
+                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
+                    "importFile": "Use Stronghold backup",
+                    "importFileDescription": "Import your Stronghold backup file",
+                    "importLedger": "Use Ledger device",
+                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                },
+                "setupClaimed": {
+                    "title": "Claim Shimmer staking rewards",
+                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                },
+                "enterName": {
+                    "title": "Create your {protocol} profile",
+                    "profileName": "Profile name",
+                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "body2": {
+                        "first": "For now, let's start with your first profile name.",
+                        "nonFirst": "For now, let's start with your profile name."
+                    },
+                    "addMore": "You can add more profiles later."
+                }
+            },
+            "strongholdSetup": {
+                "setupStrongholdPassword": {
+                    "title": "Create a password",
+                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                }
+            },
+            "storageProtectionSetup": {
+                "setupPinProtection": {
+                    "title": "Set up PIN code",
+                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+                    "body2": "Use numbers only"
+                }
+            },
+            "profileBackup": {
+                "backupMnemonic": {
+                    "title": "Back up your recovery phrase",
+                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                },
+                "viewMnemonic": {
+                    "title": "Recovery phrase",
+                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+                    "body2": "Keep this private and safely stored.",
+                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+                    "revealRecoveryPhrase": "Reveal recovery phrase",
+                    "hideRecoveryPhrase": "Hide recovery phrase"
+                },
+                "verifyMnemonic": {
+                    "title": "Verify recovery phrase",
+                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
+                    "word": "Word",
+                    "verified": "Recovery phrase verified",
+                    "verifiedBody": "Remember to keep it private and safely stored."
+                },
+                "backupStronghold": {
+                    "title": "Back up to a Stronghold file",
+                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
+                    "body2": "Reasons why digital backups are important:",
+                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
+                    "reason2": "Import your wallets on other devices",
+                    "reason3": "Recover your full transaction history"
+                }
+            },
+            "profileRecovery": {
+                "importMnemonicPhrase": {
+                    "title": "Enter your recovery phrase",
+                    "body": "A recovery phrase is 24 words long, all lower case, with sapces between. This is used to recover existing Firefly profiles.",
+                    "enter": "Enter your secret recovery phrase",
+                    "phraseDetected": "24 word recovery phrase detected"
+                },
+                "importStrongholdBackup": {
+                    "title": "Import your Stronghold backup",
+                    "body": "Import a Stronghold backup file to restore your profile."
+                },
+                "backupPassword": {
+                    "body1": "Please enter your backup password.",
+                    "body2": "This is the password you set when you first created your backup."
+                },
+                "success": {
+                    "title": "You have successfully recovered your backup",
+                    "body": "You can now set up your new profile."
+                }
+            },
+            "shimmerClaiming": {
+                "claimRewards": {
+                    "title": "Your Shimmer staking rewards",
+                    "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+                },
+                "success": {
+                    "title": "Rewards claimed",
+                    "body": "You have successfully claimed Shimmer tokens for your new profile.",
+                    "totalRewards": "Total rewards"
+                }
+            },
+            "congratulations": {
+                "title": "Profile setup complete",
+                "fundsMigrated": "Funds migrated",
+                "body": "Your new profile is ready to use.",
+                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+                "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+                "exportMigration": "Export migration log and finish setup"
             }
-        },
-        "customNetwork": {
-            "title": "Connect to a custom network",
-            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "Подключите ваш Ledger",
@@ -108,116 +200,9 @@
         },
         "ledgerInstallationGuide": {
             "title": "Вы установили необходимые Ledger приложения?",
-            "body1": "Прежде чем продолжить, необходимо найти и установить как приложение {legacy}, так и новое приложение IOTA через Ledger Live.",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Убедитесь, что прошивка Ledger актуальна. Любые предварительно установленные приложения должны быть обновлены до их последних версий.",
             "action": "Да, я установил эти приложения"
-        },
-        "password": {
-            "title": "Придумайте пароль",
-            "body1": "Тебе нужен надежный пароль для защиты твоих средств. Используй комбинацию слов и избегай распространенных фраз, имен или дат.",
-            "body2": "Рекомендуется записать пароль в документ для востоновлениею."
-        },
-        "protect": {
-            "title": "Protect your wallet",
-            "body1": "Установите PIN-код для доступа, чтобы убедиться, что только вы можете войти в свой профиль.",
-            "body2": "Держи PIN-код в безопасности!"
-        },
-        "setupPin": {
-            "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
-        },
-        "backup": {
-            "title": "Сделайте резервную копию вашего кошелька",
-            "body1": "Теперь тебе будет показана фраза восстановления. Запиши её в документ для восстановления.",
-            "body2": "Не передавай твою фразу восстановления никому. Она может быть использована для доступа к твоему токенам отовсюду.",
-            "body3": "Если вы потеряете фразу восстановления, вы можете потерять свои средства."
-        },
-        "recoveryPhrase": {
-            "title": "Фраза восстановления",
-            "body1": "В твоём документе для восстановления запиши слова в точном порядке.",
-            "body2": "Храни этот доумент приватно и безопасно.",
-            "body3": "Важно иметь резервную копию. Компьютеры часто не работают и файлы могут быть повреждены.",
-            "revealRecoveryPhrase": "Показать фразу восстановлению",
-            "hideRecoveryPhrase": "Скрыть восстановительную фразу"
-        },
-        "verifyRecoveryPhrase": {
-            "title": "Проверьте фразу восстановления",
-            "body": "Давай проверим правильность записи фразы. Пожалуйста, выбери каждое слово в нумерованном порядке.",
-            "word": "Слово",
-            "verified": "Ключевая фраза подтверждена",
-            "verifiedBody": "Не забудь хранить его приватно и безопасно."
-        },
-        "backupWallet": {
-            "title": "Сделайте резервную копию в файл Stronghold",
-            "body1": "Введите пароль для резервного копирования кошельков в файл Stronghold. Ваш пароль будет использован для шифрования резервной копии.",
-            "body2": "Причины, по которым важны цифровые резервные копии:",
-            "reason1": "Просто восстанавливайте кошельки, без ввода фразы восстановления",
-            "reason2": "Импортируйте свои кошельки на другие устройства",
-            "reason3": "Восстановление всей историй транзакций"
-        },
-        "recoveryPhraseSaved": {
-            "title": "Резервная копия сделано успешно",
-            "body": "Вы сделали резервную копию своих кошельков в Stronghold."
-        },
-        "claimRewards": {
-            "title": "Your Shimmer staking rewards",
-            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
-        },
-        "congratulations": {
-            "title": "Настройка кошелька завершена",
-            "fundsMigrated": "Средства перенесены",
-            "body": "Твой новый кошелек готов к использованию.",
-            "softwareMigratedBody": "Вы успешно мигрировали свои средства в новую сеть",
-            "fireflyLedgerBody": "Ваш Ledger аккаунт успешно восстановлен, и вы можете продолжить.",
-            "trinityLedgerBody": "Вы успешно перевели свой Ledger в новую сеть.",
-            "exportMigration": "Экспорт журнала миграции и завершение настройки"
-        },
-        "import": {
-            "title": {
-                "iota": "Recover or migrate IOTA funds",
-                "shimmer": "Recover Shimmer profile"
-            },
-            "body": {
-                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
-            },
-            "importSeed": "У меня 81 символ seed",
-            "importSeedDescription": "Ввести seed и перевести средства в Chrysalis",
-            "importMnemonic": "Use recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase",
-            "importFile": {
-                "iota": "Use backup file",
-                "shimmer": "Use Stronghold backup file"
-            },
-            "importFileDescription": {
-                "iota": "Upload a Seedvault or Stronghold file",
-                "shimmer": "Upload Stronghold file"
-            },
-            "importLedger": "Use Ledger hardware device",
-            "importLedgerDescription": {
-                "iota": "Restore or migrate a Ledger profile",
-                "shimmer": "Restore using Nano S or Nano X devices"
-            }
-        },
-        "importFromText": {
-            "seed": {
-                "title": "Введите свой seed для начала миграции",
-                "body": "Seed состоит из 81 символа. Он используется для восстановления из старого приложения Trinity.",
-                "enter": "Введите свой seed"
-            },
-            "mnemonic": {
-                "title": "Введите вашу фразу восстановления",
-                "body": "Фраза для восстановления состоит из 24 слов, все слова в строчном формате, с пробелами между ними. Она используется для восстановления существующих кошельков Firefly.",
-                "enter": "Введите вашу секретную фразу восстановления"
-            },
-            "seedDetected": "Обнаружено 81 символ seed",
-            "phraseDetected": "Обнаружена фраза восстановления 24 слов",
-            "checksum": "Контрольная сумма"
-        },
-        "importFromFile": {
-            "title": "Восстановите свои кошельки с помощью файла резервной копии",
-            "body": "Импортируйте файл резервной копии для восстановления кошельков. Резервные копии могут быть либо в формате Stronghold (.stronghold), либо в формате Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
             "title": "Восстановить или мигрировать ваш Ledger",
@@ -246,7 +231,7 @@
             "readMore": "Что ожидать от процесса миграции"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "Сгенерировать новый адрес",
             "body": "Вам нужно сгенерировать новый адрес для миграции токенов с Firefly. Нажмите кнопку ниже, чтобы продолжить.",
             "confirmTitle": "Подтвердите новый адрес",
             "confirmBody": "В целях безопасности сравните адрес, сгенерированный на вашем устройстве Ledger, с адресом, указанным ниже. Если они совпадают, нажмите обе кнопки на устройстве Ledger в соответствии с запросом.",
@@ -269,95 +254,19 @@
             "notGeneratingAddresses": "Генерирует ли ваш Ledger адреса?",
             "reinstallLegacy": "Если нет, отсоедините устройство и попробуйте снова. Если проблема сохраняется, возможно, вам потребуется переустановить приложение {legacy}."
         },
-        "importBackupPassword": {
-            "body1": "Пожалуйста, введите ваш пароль от резервной копии.",
-            "body2": "Это пароль, который вы установили при первом создании резервной копии."
-        },
-        "importSuccess": {
-            "title": "Вы успешно восстановили вашу резервную копию",
-            "body": "Теперь вы можете настроить свой новый профиль."
-        },
-        "migrate": {
-            "title": "Мигрируйте свои средства",
-            "body1": "Это автоматизированный процесс перевода ваших средств на новый кошелек.",
-            "body2": "Это может занять некоторое время. Не выключайте устройство во время миграции.",
-            "existing": "Ваш старый кошелёк",
-            "new": "Ваш новый кошелёк",
-            "learn": "Узнайте о миграции",
-            "beginMigration": "Начать миграцию",
-            "migrating": "Перевод средств...",
-            "migrated": "{баланс} перенесён",
-            "migrationFailed": "Сбой переноса данных",
-            "noAddressesForMigration": "Пожалуйста, выберите адреса, которые вы хотите использовать.",
-            "restoringWallet": "Восстановление кошелька...",
-            "findingBalance": "Поиск баланса...",
-            "incorrectSeedVaultPassword": "Неправильный пароль сида.",
-            "noDataSeedVault": "В SeedVault не удалось найти никаких данных.",
-            "signingBundle": "Пакет подписи",
-            "broadcastingBundle": "Передача пакета",
-            "miningBundle": "Майнинг данных",
-            "problemRestoringWallet": "Произошла сетевая ошибка при восстановлении вашего кошелька. Пожалуйста, попробуйте еще раз.",
-            "minimumMigrationAmountSpentAddresses": "Минимальная сумма миграции для каждого потраченного адреса составляет 1 мега айота. Проверьте снова, если ваш баланс неправильный.",
-            "tooManyAddressesToMigrate": "У вас слишком много адресов с низким балансом для миграции. Проверьте еще раз правильность отображения полного баланса.",
-            "cannotMigrateAllYourFunds": "Мы не можем перенести все ваши средства, потому что некоторые адреса слишком низки. Вы все равно можете продолжить. {value} будет потерян.",
-            "error": "Произошла ошибка при миграции ваших средств. Пожалуйста, попробуйте еще раз."
-        },
-        "bundleMiningWarning": {
-            "title": "Предупреждение",
-            "body1": "У вас есть средства на одном или несколько потраченных адресов.",
-            "body2": "Мы рекомендуем вам запустить автоматизированный процесс для безопасного и надёжного перевода средств.",
-            "body3": "Если вы закроете приложение, вам нужно будет перезапустить весь процесс миграции.",
-            "learn": "Узнайте о потраченных адресах"
-        },
-        "secureSpentAddresses": {
-            "title": "Безопасные потраченные адреса",
-            "body1": "Обнаружены ваши средства {number, plural, one {# потраченный адрес} other {# потраченные адреса}}.",
-            "body2": "Мы рекомендуем вам запустить автоматизированный процесс для безопасного и надёжного перевода средств.",
-            "error": "Вы не можете мигрировать потраченные адреса с менее чем 1 Mi"
-        },
-        "securityCheckCompleted": {
-            "title": "Проверка безопасности завершена",
-            "body1": "Мы рассчитали уровень риска безопасности. Перезапуск этого процесса может снизить уровень вашего риска.",
-            "body2": "Когда вы довольны уровнем риска, нажмите продолжить.",
-            "rerun": "Перезапусти процесс для выбранный адресов",
-            "continueMigration": "Продолжить миграцию"
-        },
-        "securingSpentAddresses": {
-            "title": "Защищаем потраченные адреса...",
-            "body1": "Этот процесс займет {minutes, plural, one {1 минуту} other {# минут}}.",
-            "body2": "Ваш компьютер будет работать с полной мощностью, вы можете делать что-то другое, пока вы ждёте завершения."
-        },
-        "transferFragmentedFunds": {
-            "body1": "Фаерфлай приступает к миграции ваших средств. Это может занять некоторое время.",
-            "body2": "Во время миграции убедитесь, что ваш Ledger подключен и приложение {legacy} постоянно открыто.",
-            "migrate": "Миграция средств",
-            "transaction": "Транзакция {number}",
-            "rerun": "Try again"
-        },
-        "migrateFailed": {
-            "title": "To do",
-            "body": "To do"
-        },
-        "balance": {
-            "title": "Ваш баланс",
-            "body": "Убедитесь, что баланс правильный, прежде чем продолжить. Вы можете проверить ещё раз, если что-то выглядит неправильно.",
-            "error": "Минимальная сумма миграции составляет 1 мега айота. Проверьте снова, если ваш баланс неправильный.",
-            "zeroBalance": "Попробуйте проверить снова. Если вы все ещё не нашли ваш баланс, возможно, вы ввели ваш сид неправильно.",
-            "zeroBalanceLedgerLegacy": "Попробуйте проверить еще раз. Если вы все еще не можете найти свой баланс, возможно, вы выбрали неправильный индекс счета."
-        },
         "settings": {
             "settings": "Настройки",
             "general": {
-                "title": "General",
-                "description": "Configure your app's appearance and other general settings"
+                "title": "Общее",
+                "description": "Настройте внешний вид приложения и другие общие настройки"
             },
             "security": {
                 "title": "Настройки Безопасности",
                 "description": "Измени пароль и настрой параметры безопасности"
             },
             "advanced": {
-                "title": "Advanced",
-                "description": "Tools and manual settings for technical users"
+                "title": "Расширенные",
+                "description": "Инструменты и ручные настройки для технических пользователей"
             },
             "helpAndInfo": {
                 "title": "Помощь и Информация",
@@ -418,8 +327,8 @@
                 "success": "Вы изменили имя своего профиля"
             },
             "walletFinder": {
-                "title": "Wallet finder",
-                "description": "Perform an extended search of your previously used wallets"
+                "title": "Поисковик кошелька",
+                "description": "Выполнить расширенный поиск по ранее использованным кошелькам"
             },
             "hiddenAccounts": {
                 "title": "Скрытые кошельки",
@@ -430,8 +339,8 @@
                 "description": "Удаляет весь ваш профиль, кошельки и историю транзакций. Убедитесь, что у вас есть резервная копия"
             },
             "deepLinks": {
-                "title": "Deep links",
-                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
+                "title": "Глубокие ссылки",
+                "description": "Автоматически заполнять данные транзакций в Firefly при нажатии на глубокую ссылку, начинающуюся с {appProtocol}://"
             },
             "networkConfiguration": {
                 "title": "Конфигурация сети",
@@ -458,7 +367,8 @@
                 "includeNode": "Включить узел",
                 "editDetails": "Изменить детали",
                 "viewInfo": "Посмотреть информацию",
-                "setAsPrimary": "Установить как основной",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
                 "removeNode": "Удалить узел",
                 "includeOfficialNodeList": "Включить список официальных узлов",
                 "noNodes": "Нет узлов, не удается подключиться к сети",
@@ -508,11 +418,11 @@
                 "description": ""
             },
             "createDeveloperProfile": {
-                "title": "Create Developer Profile",
+                "title": "Создать профиль разработчика",
                 "description": ""
             },
             "createNormalProfile": {
-                "title": "Create Normal Profile",
+                "title": "Создать обычный профиль",
                 "description": ""
             },
             "reportAnIssue": {
@@ -524,18 +434,31 @@
             "pleaseWait": "Пожалуйста подождите {time, plural, one {# секунду} other {# секунд}}",
             "incorrectAttempts": "{attempts, plural, one {# неправильная попытка} other {# неправильные попытки}}"
         },
+        "loadProfile": {
+            "loginSteps": {
+                "buildProfileManager": "Initialising profile manager",
+                "updateNodeInfo": "Checking node health",
+                "recoverAccounts": "Generating accounts",
+                "loadAccounts": "Syncing accounts",
+                "loadAssets": "Loading native assets",
+                "loadActivities": "Building activity history",
+                "setStrongholdStatus": "Securing stronghold",
+                "startBackgroundSync": "Starting background sync",
+                "loggingIn": "Loading dashboard"
+            }
+        },
         "dashboard": {
             "network": {
-                "operational": "Network operational",
-                "degraded": "Network degraded",
-                "down": "Network down",
-                "disconnected": "Disconnected from node",
+                "operational": "Сеть исправна",
+                "degraded": "Сеть нарушена",
+                "down": "Сеть отключена",
+                "disconnected": "Отключен от узла",
                 "status": "Статус",
                 "messagesPerSecond": "Сообщений в секунду",
                 "referencedRate": "Базовая скорость"
             },
             "profileModal": {
-                "allSettings": "All settings",
+                "allSettings": "Все настройки",
                 "logout": "Выйти",
                 "stronghold": {
                     "title": "Блокировка профиля",
@@ -545,9 +468,8 @@
                 "hardware": {
                     "title": "Аппаратное устройство",
                     "statuses": {
-                        "appNotOpen": "Приложение IOTA не открыто",
+                        "appNotOpen": "{protocol} app not open",
                         "connected": "Подключено",
-                        "legacyConnected": "Старое приложение открыто",
                         "locked": "Заблокировано",
                         "mnemonicMismatch": "Неправильный Ledger или Mnemonic",
                         "notDetected": "Не обнаружено",
@@ -556,8 +478,8 @@
                 },
                 "backup": {
                     "title": "Сделайте резервную копию вашего кошелька",
-                    "lastBackup": "You last backed up {date}",
-                    "notBackedUp": "Not backed up",
+                    "lastBackup": "Вы выполнили последнее резервное копирование {date}",
+                    "notBackedUp": "Не резервируется",
                     "button": "Резервная копия"
                 },
                 "version": {
@@ -590,7 +512,7 @@
                 },
                 "bodies": {
                     "upcoming": "Разместите свои токены {token}, чтобы автоматически получать вознаграждение каждые 10 секунд после начала размещения ставок в {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "Ставьте свои токены {token}, чтобы автоматически получать вознаграждение каждые 10 секунд после начала ставок в {date}",
                     "holdingAndStaking": "Вы будете получать вознаграждение каждые 10 секунд.",
                     "holdingAndNotStaking": "Ставьте свои {token} токены, чтобы получать вознаграждение каждые 10 секунд.",
                     "endedAndDidStake": "Вознаграждения {token} будут распределены на ваш кошелек после запуска сети.",
@@ -606,7 +528,7 @@
                 "totalWalletRewards": "Общее вознаграждение кошелька",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly - это открытая, высокомасштабируемая многоцепочечная сеть для создания и развертывания составных смарт-контрактов. Assembly - это будущее web3. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -627,16 +549,16 @@
     },
     "popups": {
         "storageDepositBreakdown": {
-            "title": "Storage deposit breakdown",
-            "totalStorageDeposit": "Total storage deposit",
+            "title": "Разбивка депозита для хранения",
+            "totalStorageDeposit": "Общий депозит для хранения",
             "pendingTransactions": {
-                "title": "Locked in pending transactions",
-                "subtitle": "For sending native assets and small IOTA amounts"
+                "title": "Заблокировано в ожидании транзакций",
+                "subtitle": "Для отправки местных активов и небольших сумм IOTA"
             }
         },
         "password": {
             "title": "Требуется пароль",
-            "subtitle": "Please provide your password to unlock your wallets",
+            "subtitle": "Пожалуйста, введите свой пароль для разблокировки кошельков",
             "backup": "Пожалуйста, введи свой пароль для экспорта резервной копии"
         },
         "qr": {
@@ -652,8 +574,8 @@
             "preReleaseDescription": "У вас запущена предварительная версия Firefly. Обновления отключены."
         },
         "backupStronghold": {
-            "title": "Backup your stronghold file",
-            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
+            "title": "Создайте запасную копию stronghold файла",
+            "body": "Важно регулярно создавать запасные копии своего кошелька, чтобы быть уверенным, что у вас есть копия вашего кошелька и истории транзакций. Если вы потеряете запасную копию и фразу для восстановления, вы потеряете доступ к своим средствам."
         },
         "deleteAccount": {
             "title": "Удалить {name}?",
@@ -679,13 +601,21 @@
             "internal": "Внутренний адрес",
             "external": "Адрес пополнения счета"
         },
+        "excludeNode": {
+            "title": "Exclude node",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
+        },
+        "unsetAsPrimaryNode": {
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
+        },
         "node": {
             "titleAdd": "Добавить узел",
             "titleUpdate": "Обновить узел",
             "titleRemove": "Удалить узел",
             "titleRemoveAll": "Удалить все узлы",
             "titleDetails": "Детали узла",
-            "titleInfo": "Node information",
+            "titleInfo": "Информация об узле",
             "addingNode": "Добавление узла",
             "updatingNode": "Обновление узла",
             "loadingNodeInfo": "Загрузка информации об узле",
@@ -695,42 +625,41 @@
             "optionalJwt": "JSON веб-токен (необязательно)",
             "setAsPrimaryNode": "Установить как основной узел",
             "removeConfirmation": "Ты уверен, что хотешь удалить этот узел?",
-            "removeAllConfirmation": "Вы уверены, что хотите удалить все узлы?",
             "info": {
                 "general": {
-                    "tab": "General",
-                    "name": "Name",
-                    "url": "URL",
-                    "version": "Version",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone",
-                    "pruningIndex": "Pruning index",
-                    "features": "Features"
+                    "tab": "Основное",
+                    "name": "Имя",
+                    "url": "Ссылка",
+                    "version": "Версия",
+                    "latestMilestone": "Последний этап",
+                    "confirmedMilestone": "Подтвержденный этап",
+                    "pruningIndex": "Индекс обрезки",
+                    "features": "Функции"
                 },
                 "metrics": {
-                    "tab": "Metrics",
-                    "blocksPerSecond": "Blocks per second",
-                    "referencedBlocksPerSecond": "Referenced blocks per second",
-                    "referencedRate": "Referenced rate",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone"
+                    "tab": "Показатели",
+                    "blocksPerSecond": "Блоков в секунду",
+                    "referencedBlocksPerSecond": "Отмеченные блоки в секунду",
+                    "referencedRate": "Ориентированная скорость",
+                    "latestMilestone": "Последний этап",
+                    "confirmedMilestone": "Подтвержденный этап"
                 },
                 "protocol": {
-                    "tab": "Protocol",
-                    "network": "Network",
+                    "tab": "Протокол",
+                    "network": "Сеть",
                     "bech32Hrp": "Bech32 HRP",
-                    "tokenSupply": "Token supply",
+                    "tokenSupply": "Обеспечение токенами",
                     "version": "Version",
                     "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {
-                    "tab": "Base token",
-                    "token": "Token",
-                    "tickerSymbol": "Ticker",
-                    "unit": "Unit",
-                    "subunit": "Sub-unit",
-                    "decimals": "Decimals",
-                    "useMetricPrefix": "Use metric prefix"
+                    "tab": "Основной токен",
+                    "token": "Токен",
+                    "tickerSymbol": "Бегущая строка",
+                    "unit": "Единица",
+                    "subunit": "Субъединица",
+                    "decimals": "Десятичные числа",
+                    "useMetricPrefix": "Использовать префикс показателя"
                 }
             }
         },
@@ -768,12 +697,12 @@
             "sendingFromStakedAccountBelowMinReward": "Вы отправляете перевод с кошелька, который еще не достиг минимального вознаграждения за ставку. Это может разблокировать ваши токены, и вы можете потерять вознаграждение за ставку на этом кошельке."
         },
         "walletFinder": {
-            "title": "Wallet finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
-            "accountsSearched": "Wallets searched",
-            "accountsFound": "Wallets found",
-            "totalWalletBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "title": "Поисковик кошелька",
+            "body": "Проведите более тщательный поиск адресов, чтобы найти недостающие балансы.",
+            "accountsSearched": "Осмотренные кошельки",
+            "accountsFound": "Кошельки найдены",
+            "totalWalletBalance": "Общий баланс",
+            "searchAgainHint": "Ваш баланс или количество кошельков неверны? Повторите поиск, пока не отобразится полный баланс."
         },
         "riskFunds": {
             "title": "Предупреждение: средства, находящиеся под угрозой во время миграции",
@@ -793,8 +722,7 @@
             "bodyFirefly": "Firefly отключён до завершения. После этого миграция токенов будет по-прежнему возможна."
         },
         "ledgerNotConnected": {
-            "connect": "Откройте новое приложение IOTA на вашем устройстве Ledger, чтобы продолжить работу",
-            "connectLegacy": "Откройте приложение {legacy} на вашем устройстве Ledger, чтобы продолжить"
+            "connect": "Open the {protocol} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "Чтобы продолжить, подтвердите запрос, отображаемый на вашем устройстве Ledger"
@@ -810,7 +738,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Советы, если ваш Ledger не подключается",
             "steps": {
                 "0": "Убедитесь, что на вашем компьютере не открыта программа Ledger Live",
                 "1": "Убедитесь, что вы разблокировали свое устройство Ledger с помощью PIN-кода",
@@ -827,7 +755,7 @@
                 "info": "Убедитесь, что адрес остатка, отображаемый в вашем Ledger, совпадает с адресом, показанным ниже. Если они совпадают, нажмите обе кнопки на Ledger в соответствии с запросом."
             },
             "transaction": {
-                "title": "Confirm transaction",
+                "title": "Подтвердить транзакцию",
                 "info": "Убедитесь, что информация о транзакции, отображаемая на вашем устройстве Ledger, совпадает с информацией, отображаемой ниже. Если они совпадают, нажмите обе кнопки на Ledger в соответствии с запросом."
             }
         },
@@ -852,7 +780,7 @@
             "totalFundsStaked": "Общая сумма поставленных средств",
             "stakedSuccessfully": "Ваши средства теперь участвуют в стейкинге на {account}.",
             "unstakedSuccessfully": "Ваши средства были сняты со стейкинга на {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "singleAccountHint": "Ищете свои кошельки? Firefly изменился. Переключайтесь между своими кошельками в верхней строке меню."
         },
         "stakingConfirmation": {
             "title": "Подтвердить участие",
@@ -884,7 +812,7 @@
         "crashReporting": {
             "title": "Отчёты о сбоях",
             "body": "Помогите разработчикам улучшить Firefly, автоматически отправляя диагностические данные при возникновении ошибки или сбоя. Если выбрано, это вступит в силу после перезапуска Firefly.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "checkbox": "Отправляйте сообщения об авариях в Фонд IOTA"
         },
         "legalUpdate": {
             "tosTitle": "Условия предоставления услуг",
@@ -902,10 +830,42 @@
             "hint": "Не можете найти кошелек? Воспользуйтесь функцией поиска баланса в настройках, чтобы обнаружить ранее использовавшиеся кошельки."
         },
         "transactionDetails": {
-            "title": "Transaction details"
+            "title": "Детали транзакции"
         },
         "sendForm": {
-            "title": "Send funds"
+            "title": "Отправить средства"
+        },
+        "tokenInformation": {
+            "newTokenTitle": "New token",
+            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "tokenMetadata": {
+                "standard": "Standard",
+                "name": "Name",
+                "tokenId": "Token ID",
+                "url": "URL"
+            },
+            "buttons": {
+                "verifyToken": "I verify this token"
+            }
+        },
+        "mintNativeTokenForm": {
+            "title": "Mint native tokens",
+            "inputs": {
+                "totalSupply": "Total Supply",
+                "circulatingSupply": "Circulating Supply",
+                "standard": "Standard",
+                "name": "Name",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
+                "url": "URL",
+                "logoUrl": "Logo URL",
+                "logo": "Logo"
+            }
+        },
+        "faucetRequest": {
+            "title": "Faucet request",
+            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
     },
     "charts": {
@@ -929,36 +889,36 @@
         "cancel": "Отменить",
         "close": "Закрыть",
         "dismiss": "Отклонить",
-        "claim": "Claim",
-        "claiming": "Claiming",
-        "reject": "Reject",
+        "claim": "Запросить",
+        "claiming": "Запрос",
+        "reject": "Отклонить",
         "confirmRejection": {
-            "title": "Reject transaction",
-            "description": "Are you sure you want to reject this transaction?",
-            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+            "title": "Отклонить транзакцию",
+            "description": "Вы уверены, что хотите отклонить эту транзакцию?",
+            "node": "Обратите внимание, что отклонение транзакции только скрывает ее из вашей ленты активности"
         },
         "proceedAnyway": "Все равно продолжить",
         "save": "Сохранить",
         "importSeed": "Импортировать существующую мнемонику",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
-            "shimmer": "Restore Shimmer profile"
+            "iota": "Перенос или восстановление кошелька",
+            "shimmer": "Восстановить профиль Shimmer"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
-            "shimmer": "Restore an existing Shimmer profile"
+            "iota": "Перенос на Chrysalis или восстановление существующего кошелька",
+            "shimmer": "Восстановить существующий профиль Shimmer"
         },
-        "createWallet": "Create a new {protocol} profile",
-        "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
-        "claimShimmer": "Claim Shimmer staking rewards",
-        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
+        "createWallet": "Создать новый профиль {protocol}",
+        "createWalletDescription": "Создайте новый профиль, запускающийся в {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
+        "claimShimmer": "Запросить вознаграждение за ставки в Shimmer",
+        "claimShimmerDescription": "Перенести профиль IOTA и запросить вознаграждение по ставке",
         "savePassword": "Сохранить пароль",
         "useBiometric": "Использовать биометрическую защиту",
-        "setupPinCode": "Setup PIN code",
-        "setPin": "Set PIN",
-        "setPinCode": "Set PIN code",
-        "confirmPin": "Confirm PIN",
-        "confirmPinCode": "Confirm PIN code",
+        "setupPinCode": "Установить PIN-код",
+        "setPin": "Установить PIN",
+        "setPinCode": "Установить PIN-код",
+        "confirmPin": "Подтвердить PIN",
+        "confirmPinCode": "Подтвердить PIN-код",
         "enterYourPin": "Введите ваш PIN",
         "saveBackupFile": "Сохранить файл резервной копии",
         "iveWrittenRecoveryPhrase": "Я записал фразу восстановления",
@@ -981,24 +941,25 @@
         "export": "Экспортировать",
         "exporting": "Экспортирование",
         "exportNewStronghold": "Экспортировать новый Stronghold",
-        "enableDeepLinks": "Включить ссылки IOTA",
+        "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Включить режим разработчика",
         "enableSystemNotifications": "Включить систему уведомлений",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "Экспорт истории транзакций",
         "localProofOfWork": "Локальное доказательство выполнения работы",
         "unlock": "Разблокировать",
         "updateFirefly": "Обновить Firefly",
         "restartNow": "Перезагрузить сейчас",
         "saveBackup": "Сохранить резервную копию Stronghold",
         "customizeAcount": "Персонализация кошелька",
-        "hideAccount": "Hide wallet",
+        "hideAccount": "Спрятать кошелек",
         "showAccount": "Раскрыть кошелёк",
-        "deleteAccount": "Delete wallet",
+        "deleteAccount": "Удалить кошелек",
         "max": "Максимум",
         "addNode": "Добавить узел",
+        "addingNode": "Adding node",
+        "addOfficialNodes": "Add official nodes",
         "updateNode": "Обновить узел",
         "removeNode": "Удалить узел",
-        "removeAllNodes": "Remove all nodes",
         "hide": "Скрыть",
         "hideOthers": "Скрыть остальные",
         "showAll": "Показать всё",
@@ -1008,7 +969,7 @@
         "redo": "Повторить",
         "cut": "Вырезать",
         "copy": "Копировать",
-        "copyAllInformation": "Copy all information",
+        "copyAllInformation": "Скопировать всю информацию",
         "paste": "Вставить",
         "selectAll": "Выбрать все",
         "addAccount": "Добавить кошелёк",
@@ -1027,17 +988,17 @@
         "readDocumentation": "Читать документацию",
         "visitFaq": "Посетить FAQ",
         "viewStatus": "Просмотр статуса",
-        "viewStorageDeposit": "View storage deposit",
+        "viewStorageDeposit": "Просмотр депозита для хранения",
         "showHiddenAccounts": "Показать скрытые кошельки",
         "confirm": "Подтвердить",
         "hideNetworkStatistics": "Скрыть статистику сети",
-        "findWallets": "Find wallets",
-        "useBalanceFinder": "Use balance finder",
-        "search": "Search",
+        "findWallets": "Найти кошельки",
+        "useBalanceFinder": "Использовать поиск баланса",
+        "search": "Искать",
+        "searching": "Поиск",
         "searchAgain": "Повторный поиск",
-        "searching": "Searching",
         "closeFirefly": "Закрыть Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "Сгенерировать адрес",
         "migrateAgain": "Мигрировать другой индекс",
         "visitWebsite": "Посетить сайт",
         "howItWorks": "Как это работает",
@@ -1051,14 +1012,24 @@
         "done": "Выполнено",
         "okIUnderstand": "Хорошо, я понял",
         "readMore": "Прочитать больше",
-        "claimRewards": "Claim rewards",
-        "rerunClaimProcess": "Rerun claim process",
-        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
-        "addPublicNote": "Add public note",
-        "backup": "Backup"
+        "searchForRewards": "Search for rewards",
+        "claimRewards": "Запросить вознаграждения",
+        "rerunClaimProcess": "Перезапустить процесс запроса",
+        "finishProfileSetupWithProtocol": "Завершить настройку профиля {protocol}",
+        "addPublicNote": "Добавить публичную заметку",
+        "backup": "Резервное копирование",
+        "mint": "Mint",
+        "mintNativeToken": "Mint native token",
+        "verifyToken": "Verify token",
+        "unverifyToken": "Unverify token",
+        "hideToken": "Hide token",
+        "unhideToken": "Unhide token",
+        "burnToken": "Burn token",
+        "faucetRequest": "Get {token} tokens",
+        "refreshTokenMetadata": "Refresh token metadata"
     },
     "general": {
-        "recipient": "Recipient",
+        "recipient": "Получатель",
         "password": "Пароль",
         "confirmPassword": "Подтвердите пароль",
         "currentPassword": "Текущий пароль",
@@ -1069,8 +1040,10 @@
         "recentActivity": "Последние действия",
         "sent": "Отправлено",
         "received": "Получено",
-        "transfer": "Transfer",
-        "transferring": "Transferring",
+        "transfer": "Перевести",
+        "transferring": "Передача",
+        "minted": "Minted",
+        "minting": "Minting",
         "sendPayment": "Отправить платёж",
         "moveFunds": "Внутренний перевод",
         "sendTo": "Отправить на",
@@ -1081,25 +1054,26 @@
         "sendTokensToAddress": "Отправить токены на адрес",
         "manageAccount": "Управление кошельками",
         "customizeAcount": "Персонализируйте свой кошелек",
-        "account": "Wallet",
+        "account": "Кошелёк",
         "sendingToAddress": "Отправляется на адрес",
         "amount": "Сумма",
         "addAddress": "Добавить Адрес",
         "reference": "Ссылка",
         "from": "От",
         "to": "Кому",
-        "receiveFunds": "Receive funds",
+        "and": "and",
+        "receiveFunds": "Получить средства",
         "address": "Адрес",
         "myAddress": "Мой адрес",
-        "myNetworkAddress": "My {networkName} address",
+        "myNetworkAddress": "Мой адрес {networkName}",
         "shareAddress": "Поделиться адресом",
         "yourAddress": "Ваш адрес",
         "newRemainder": "Новый оставшийся адрес",
         "remainder": "Оставшийся адрес",
         "generateNewAddress": "Создать новый адрес",
-        "copyToClipboard": "Copy to clipboard",
+        "copyToClipboard": "Скопировать в буфер обмена",
         "copyAddress": "Скопировать адрес",
-        "viewOnExplorer": "View on Explorer",
+        "viewOnExplorer": "Посмотреть в проводнике",
         "import": "Импорт",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -1123,7 +1097,7 @@
         "accountName": "Имя кошелька",
         "latestTransactions": "Последние Транзакции",
         "transactions": "Транзакции",
-        "activity": "Activity",
+        "activity": "Активность",
         "security": "Настройки Безопасности",
         "accountAddress": "Адрес кошелька",
         "network": "Сеть",
@@ -1136,15 +1110,16 @@
         "receiveAddress": "Адрес получателя",
         "newAddress": "Новый адрес",
         "date": "Дата",
-        "status": "Status",
+        "status": "Статус",
         "confirmed": "Подтверждено",
         "pending": "В ожидании",
         "noAccounts": "У вас нет кошельков, пожалуйста, создайте один.",
         "loadingAccounts": "Загрузка, пожалуйста подожди...",
         "addProfile": "Добавить профиль",
         "noRecentHistory": "Нет недавней истории",
-        "thisMonth": "This month",
-        "search": "Search",
+        "noAssets": "No assets",
+        "thisMonth": "Этот месяц",
+        "search": "Искать",
         "firstSync": "Синхронизация истории, это может занять некоторое время...",
         "transferSyncing": "Синхронизация кошелька",
         "transferSelectingInputs": "Выбор входов",
@@ -1181,12 +1156,12 @@
         "creatingProfile": "Создание аккаунта, пожалуйста подожди...",
         "fundMigration": "Миграция счета",
         "accountRemoved": "Этот кошелек скрыт. Для осуществления переводов раскройте его.",
-        "fromAddress": "from {account}",
-        "toAddress": "to {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "fromAddress": "с {account}",
+        "toAddress": "по {account}",
+        "stakedFor": "Ставка для {account}",
+        "unstakedFor": "Непоставленно для {account}",
+        "votedFor": "Проголосовано за {account}",
+        "unvotedFor": "За {account} голос отменён",
         "stakingTransaction": "Транзакция ставки",
         "unstakingTransaction": "Транзакция отмены ставки",
         "receiving": "Поступление",
@@ -1196,29 +1171,79 @@
         "version": "Версия {version}",
         "yourWallets": "Ваши кошельки",
         "unknown": "Неизвестно",
-        "unknownAddress": "Unknown address",
+        "unknownAddress": "Неизвестный адрес",
         "none": "Отсутствует",
         "staked": "Поставлено",
         "unstaked": "Выведено",
         "staking": "Ставки",
         "unstaking": "Выведение",
         "notStaked": "Не поставлено",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Поставленные средства",
         "unstakedFunds": "Выведеноные средства",
         "accountColor": "Цвет кошелька",
-        "transactionTime": "Transaction time",
-        "storageDeposit": "Storage deposit",
-        "expirationTime": "Expiration time",
-        "claimedTime": "Claimed at",
-        "copiedToClipboard": "Copied to clipboard",
+        "transactionTime": "Время транзакции",
+        "storageDeposit": "Депозит для хранения",
+        "giftedStorageDeposit": "Gifted storage deposit",
+        "expirationTime": "Окончание срока действия",
+        "claimedTime": "Востребовано",
+        "copiedToClipboard": "Скопировано в буфер обмена",
         "total": "Всего: {balance}",
-        "availableBalance": "Available balance: {balance}",
-        "amountClaimed": "{amount} claimed",
-        "metadata": "Metadata",
-        "tag": "Tag",
-        "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
-        "assets": "Assets"
+        "availableBalance": "Доступный баланс: {balance}",
+        "amountClaimed": "{amount} запрошено",
+        "metadata": "Полезные данные",
+        "tag": "Пометка",
+        "nodeList": "Список узлов",
+        "claimingTransactionId": "Востребовано",
+        "assets": "Активы",
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
+        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded"
+    },
+    "filters": {
+        "title": "Filters",
+        "showHidden": {
+            "label": "Show hidden",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "showRejected": {
+            "label": "Show rejected",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "verificationStatus": {
+            "label": "Verification status",
+            "new": "New",
+            "notVerified": "Not verified",
+            "verified": "Verified"
+        },
+        "asset": {
+            "label": "Assets"
+        },
+        "amount": {
+            "label": "Amount",
+            "equal": "is equal to",
+            "range": "is between",
+            "greater": "is greater than",
+            "less": "is less than"
+        },
+        "status": {
+            "label": "Status",
+            "confirmed": "confirmed",
+            "pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "non-claimed"
+        },
+        "type": {
+            "label": "Type",
+            "incoming": "incoming",
+            "outgoing": "outgoing",
+            "internal": "internal"
+        }
     },
     "dates": {
         "today": "Сегодня",
@@ -1257,25 +1282,45 @@
             "error": "Невозможно экспортировать историю транзакций для {accountAlias}"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "Please login to initiate the deep link",
-            "notEnabled": "Deep links are not enabled",
-            "invalidFormat": "The deep link you followed is invalid",
+            "receivedWhileLoggedOut": "Пожалуйста, войдите, чтобы открыть глубокую ссылку",
+            "notEnabled": "Глубокие ссылки не включены",
+            "invalidFormat": "Глубокая ссылка, по которой вы перешли, недействительна",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from deep link"
+                    "success": "Платежные реквизиты добавлены из глубокой ссылки"
                 }
             }
         },
         "syncing": "Пожалуйста, дождитесь окончания синхронизации, чтобы сменить кошельки.",
         "transferring": "Пожалуйста, дождитесь завершения всех транзакций, чтобы сменить кошельки.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "participating": "Пожалуйста, дождитесь завершения всех операций по ставке/голосованию, чтобы сменить кошельки.",
         "claimed": {
-            "success": "Transaction claimed",
-            "error": "Claiming transaction failed"
+            "success": "Транзакция востребована",
+            "error": "Востребование трансакции не удалось"
         },
         "hideActivity": {
-            "success": "Successfully hidden activity",
-            "error": "Failed to hide activity"
+            "success": "Успешно скрытая деятельность",
+            "error": "Не удалось скрыть деятельность"
+        },
+        "faucetRequest": {
+            "success": "Request for tokens sent to the faucet"
+        },
+        "mintNativeToken": {
+            "success": "Native token minting transaction sent"
+        },
+        "refreshTokenMetadata": {
+            "success": "All token metadata has been reset and refreshed"
+        },
+        "restoreFromStrongholdBackup": {
+            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+        },
+        "findShimmerRewards": {
+            "success": "Successfully found Shimmer rewards",
+            "error": "An error occurred while searching for rewards"
+        },
+        "claimShimmerRewards": {
+            "success": "Successfully claimed Shimmer rewards",
+            "error": "An error occurred while claiming rewards"
         }
     },
     "error": {
@@ -1307,7 +1352,7 @@
             "length": "Твой PIN-код должен быть {length, plural, one {# цифра} other {# цифр}}.",
             "match": "PIN-код и подтверждение не совпадают.",
             "incorrect": "Твой PIN-код неверен.",
-            "invalid": "Invalid PIN code."
+            "invalid": "Неверный PIN код."
         },
         "account": {
             "length": "Имя твоего профиля не может быть длиннее {length, plural, one {# символ} other {# символов}}.",
@@ -1322,28 +1367,28 @@
             "index": "Индекс вашего аккаунта должен быть числом от 0 до 2,147,483,647.",
             "page": "Страница вашего аккаунта должна быть числом от 0 до 2,147,483,647.",
             "syncing": "Произошла ошибка при синхронизации ваших кошельков.",
-            "cannotRemove": "Unable to remove wallet.",
-            "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "cannotRemove": "Невозможно удалить кошелёк.",
+            "withBalance": "Вы должны перевести все суммы, прежде чем сможете удалить этот кошелек.",
+            "notLast": "Вы можете удалить только ваш последний кошелек."
         },
         "send": {
             "addressLength": "Длина адресов должна быть {length, plural, one {# символ} other {# символов}}.",
             "amountTooHigh": "Это больше, чем твой баланс.",
-            "amountNoFloat": "Can not use decimal places with the smallest unit selected",
+            "amountNoFloat": "Невозможно использовать десятичные знаки при выбранной наименьшей единице измерения",
             "amountInvalidFormat": "Сумма является недопустимым числом.",
-            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "amountSmallerThanSubunit": "Сумма должна быть больше, чем наименьшая субъединица.",
             "amountZero": "Сумма должна быть больше 0.",
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
             "invalidAddress": "Адрес недействителен.",
             "insufficientFunds": "На этом кошельке недостаточно средств.",
-            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "insufficientFundsStorageDeposit": "Недостаточно средств для покрытия депозита для хранения",
             "noToAccount": "Вы не выбрали кошелек для отправки средств.",
             "sendingDust": "Вы не можете отправить менее 1 Mi.",
             "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе.",
             "cancelled": "Транзакция была отменена.",
             "transaction": "Произошла ошибка при отправке вашей транзакции. Пожалуйста, попробуйте еще раз.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "Выбранная дата/время истечения срока действия недопустима."
         },
         "node": {
             "invalid": "Пожалуйста, введите правильный адрес.",
@@ -1359,9 +1404,9 @@
             "answer": "Не удалось получить ответ от всех узлов.",
             "forbidden": "Соединение с этим узлом запрещено.",
             "pluginNotAvailable": "Плагин \"{nodePlugin}\" недоступен на текущем узле.",
-            "unabledToConnect": "Unable to connect to the node",
-            "differentNetwork": "The node is located on a different network",
-            "duplicateNodes": "Unable to add duplicate node"
+            "unabledToConnect": "Не удается подключиться к узлу",
+            "differentNetwork": "Узел расположен в другой сети",
+            "duplicateNodes": "Невозможно добавить дублированный узел"
         },
         "network": {
             "mismatch": "Идентификатор сети для этого узла - это \" {networkId}\", что не соответствует текущей сети.",
@@ -1390,7 +1435,7 @@
             "mnemonicMismatch": "Вы подключили не то устройство Ledger или изменилась мнемоника.",
             "notDetected": "Устройство Ledger не обнаружено.",
             "notFound": "Ledger устройство не найдено.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
+            "otherConnected": "На вашем устройстве Ledger открыто неправильное приложение.",
             "generateAddress": "Произошла ошибка при генерировании адреса.",
             "timeout": "Время работы вашего устройства Ledger истекло.",
             "disconnected": "Ваше устройство Ledger было отключено.",
@@ -1416,7 +1461,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "Выбранная дата/время истечения срока действия недопустима."
         },
         "node": {
             "http": "Использование узлов через HTTP оставляет трафик незашифрованным и может представлять угрозу безопасности."
@@ -1454,11 +1499,11 @@
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Message ID",
+            "messageId": "Идентификатор сообщения",
             "internal": "Внутренний",
             "rawValue": "Необработанное значение",
             "formattedValue": "Обработанное значение",
-            "date": "Date",
+            "date": "Дата",
             "time": "Время"
         }
     },
@@ -1467,7 +1512,7 @@
             "warningText": "Вы используете профиль разработчика и подключены к {networkName}"
         },
         "networkIndicator": {
-            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
+            "warningText": "Снижена производительность сети. Подтверждение сообщения может занять немного больше времени, чем обычно."
         }
     },
     "permissions": {
@@ -1477,59 +1522,74 @@
         }
     },
     "tabs": {
-        "wallet": "Wallet",
-        "staking": "Staking"
+        "wallet": "Кошелёк",
+        "staking": "Ставка",
+        "developer": "Developer"
     },
     "pills": {
         "stake": {
-            "Pending": "staking for",
-            "Confirmed": "staked for",
-            "Conflicting": "failed to stake"
+            "Pending": "размещение ставки для",
+            "Confirmed": "сделанная ставка для",
+            "Conflicting": "не удалось сделать ставку"
         },
-        "internalTransaction": {
-            "in": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+        "transaction": {
+            "internal": {
+                "in": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "out": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
             },
-            "out": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+            "external": {
+                "in": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "out": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
             }
         },
-        "externalTransaction": {
+        "minting": {
             "in": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             },
             "out": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             }
         },
         "migrate": {
-            "Pending": "migrating for",
-            "Confirmed": "migrated for",
-            "Conflicting": "failed to migrate"
+            "Pending": "перевод на",
+            "Confirmed": "переводены для",
+            "Conflicting": "не удалось перевести"
         },
         "asyncStatus": {
-            "unclaimed": "unclaimed",
-            "claimed": "claimed",
-            "expired": "expired"
+            "unclaimed": "невостребовано",
+            "claimed": "востребовано",
+            "expired": "истекло"
         }
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "No expiration time",
-            "1hour": "In 1 hour",
-            "1day": "In 1 day",
-            "1week": "In 1 week",
+            "none": "Без срока истечения",
+            "1hour": "Через 1 час",
+            "1day": "Через 1 день",
+            "1week": "Через 1 неделю",
             "customDate": {
-                "title": "Custom date",
-                "subtitle": "Set custom expiry date"
+                "title": "Настраиваемая дата",
+                "subtitle": "Установите настраиваемый срок истечения"
             }
         }
     }

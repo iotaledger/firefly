@@ -1,5 +1,5 @@
 import { IAccountState } from '@core/account'
-import { setAsyncActivitiesToClaimed } from '../setAsyncActivitiesToClaimed'
+import { setOutgoingAsyncActivitiesToClaimed } from '../setOutgoingAsyncActivitiesToClaimed'
 import { preprocessTransactionsForAccount } from './preprocessTransactionsForAccount'
 import { preprocessOutputsForAccount } from './preprocessOutputsForAccount'
 import { linkActivityAndClaimingTransaction } from './linkActivityAndClaimingTransaction'
@@ -21,6 +21,6 @@ export async function generateAndStoreActivitiesForAccount(account: IAccountStat
     setAccountActivitiesInAllAccountActivities(account.id, activities)
 
     hideActivitiesForFoundries(account)
-    await setAsyncActivitiesToClaimed(account)
+    await setOutgoingAsyncActivitiesToClaimed(account)
     linkActivityAndClaimingTransaction(account)
 }

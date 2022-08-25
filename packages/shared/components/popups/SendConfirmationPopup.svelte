@@ -34,12 +34,14 @@
     export let amount = '0'
     export let unit: string
     export let recipient: Subject
-    export let internal = false
+    export let isInternal = false
     export let metadata: string
     export let tag: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let giftStorageDeposit = false
     export let disableToggleGift = false
+    export let disableChangeExpiration = false
+    export let disableBack = false
 
     let expirationDate: Date
     let storageDeposit = 0
@@ -53,7 +55,7 @@
         ? generateRawAmount(String(parseCurrency(amount)), unit, asset.metadata)
         : parseCurrency(amount)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
-    $: internal = recipient.type === 'account'
+    $: isInternal = recipient.type === 'account'
     $: isNativeToken = asset?.id !== $selectedAccountAssets?.baseCoin?.id
 
     $: $$props, expirationDate, rawAmount, void _prepareOutput()
@@ -75,7 +77,8 @@
         amount,
         tag,
         unit,
-        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
+        isInternal,
+        type: ActivityType.Transaction,
     }
 
     async function _prepareOutput(): Promise<void> {
@@ -149,6 +152,10 @@
         })
     }
 
+    function onCancel(): void {
+        closePopup()
+    }
+
     onMount(async () => {
         try {
             await _onMount()
@@ -183,6 +190,7 @@
                     slot="value"
                     bind:value={expirationDate}
                     initialSelected={storageDeposit ? '1day' : 'none'}
+                    disabled={disableChangeExpiration}
                 />
             </KeyValueBox>
         {/if}
@@ -191,9 +199,16 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onBack} disabled={$isTransferring}
-            >{localize('actions.back')}</Button
-        >
+        {#if disableBack}
+            <Button classes="w-full" secondary onClick={onCancel} disabled={$isTransferring}>
+                {localize('actions.cancel')}
+            </Button>
+        {:else}
+            <Button classes="w-full" secondary onClick={onBack} disabled={$isTransferring}>
+                {localize('actions.back')}
+            </Button>
+        {/if}
+
         <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring}>
             {#if $isTransferring}
                 <Spinner busy classes="justify-center break-all" />

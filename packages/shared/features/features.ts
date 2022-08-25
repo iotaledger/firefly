@@ -124,7 +124,7 @@ const features = {
     collectibles: {
         enabled: false,
     },
-    developerTools: {
+    developer: {
         enabled: true,
     },
 }

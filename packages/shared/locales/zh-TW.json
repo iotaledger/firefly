@@ -1,102 +1,194 @@
 {
     "views": {
-        "onboarding1": {
-            "title": "Send, Receive & Manage your {protocol} tokens",
-            "body": "Firefly 是 IOTA 的官方錢包。"
-        },
-        "legal": {
-            "title": "隱私政策和服務條款",
-            "body": "請仔細檢閱「隱私權政策」與「服務條款」",
-            "checkbox": "我已經閱讀並且接受隱私政策和服務條款"
-        },
-        "crashReporting": {
-            "title": "當機錯誤報告",
-            "body": "發生錯誤當下自動回報診斷資訊來協助開發者改善Firefly。",
-            "checkbox": "發送當機報告給IOTA基金會"
-        },
-        "languageAndAppearance": {
-            "title": "Language & appearance",
-            "body": "Choose your language and theme"
-        },
-        "profile": {
-            "title": "Create your {protocol} profile",
-            "profileName": "設定檔名稱",
-            "body1": "您可以創建多個使用者設定檔來整理您的錢包並加強隱私。",
-            "body2": {
-                "first": "現在，讓我們從您的第一個設定檔名稱開始。",
-                "nonFirst": "現在，讓我們從您的設定檔名稱開始。"
-            },
-            "addMore": "您稍後可以添加更多設定檔。",
-            "advancedOptions": "進階選項",
-            "developer": {
-                "label": "開發者設定檔",
-                "info": "連接至開發網或私人網絡"
-            }
-        },
-        "setup": {
-            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-            "chrysalisTitle": "Chrysalis網路升級",
-            "chrysalisBody": "從 2021 年 4 月 21 日開始，使用者可以將他們的代幣遷移到新的 Chrysalis 網路。我們建議您把現有的代幣儘早遷移。",
-            "learnMore": "深入瞭解「遷移」"
-        },
-        "secure": {
-            "title": "保護你的錢包",
-            "body1": "存檔並列印 Recovery Kit PDF 範本。",
-            "body2": "如果您有填好並妥善保存助記套件，你就隨時都能夠恢復您的錢包。"
-        },
-        "create": {
-            "title": "建立錢包",
-            "body": "建立新錢包。您可以選擇一般的軟體錢包，或是假如您有 Ledger 裝置的話，可以改用硬體錢包。",
-            "softwareAccount": {
-                "title": "Create a software wallet",
-                "description": "Provides a Stronghold file and recovery phrase"
-            },
-            "ledgerAccount": {
-                "title": "Create a hardware wallet",
-                "description": "需要Ledger Nano S或是Nano X"
-            }
-        },
-        "protocol": {
-            "title": "Choose protocol",
-            "body": "Set the protocol for your profile",
-            "iota": "IOTA Mainnet",
-            "shimmer": "Staging network for IOTA Mainnet"
-        },
-        "network": {
-            "title": "Choose network",
-            "body": "Set the network for your profile",
-            "iota": {
-                "mainnet": {
-                    "title": "Mainnet",
-                    "body": "IOTA Mainnet"
+        "onboarding": {
+            "appSetup": {
+                "welcome": {
+                    "title": "Send, Receive & Manage your {protocol} tokens",
+                    "body": "Firefly is the official wallet software for {protocol}."
                 },
-                "devnet": {
-                    "title": "Devnet",
-                    "body": "Developer network for IOTA"
+                "legal": {
+                    "title": "Privacy Policy & Terms of Service",
+                    "body": "Please review the Privacy Policy and Terms of Service.",
+                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with active TIPS"
+                "languageAndAppearance": {
+                    "title": "Language & appearance",
+                    "body": "Choose your language and theme."
                 }
             },
-            "shimmer": {
-                "mainnet": {
-                    "title": "Shimmer",
-                    "body": "Staging network for IOTA"
+            "networkSetup": {
+                "chooseProtocol": {
+                    "title": "Choose protocol",
+                    "body": "Set the protocol for your profile.",
+                    "iota": "Default IOTA network",
+                    "shimmer": "Experimental IOTA staging network"
                 },
-                "devnet": {
-                    "title": "Shimmer Beta",
-                    "body": "Beta network for Shimmer"
+                "chooseNetwork": {
+                    "title": "Choose network",
+                    "body": "Set the network for your profile.",
+                    "iota": {
+                        "mainnet": {
+                            "title": "Mainnet",
+                            "body": "IOTA Mainnet"
+                        },
+                        "devnet": {
+                            "title": "Devnet",
+                            "body": "Developer network for IOTA"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with active TIPs"
+                        }
+                    },
+                    "shimmer": {
+                        "mainnet": {
+                            "title": "Shimmer",
+                            "body": "Staging network for IOTA"
+                        },
+                        "devnet": {
+                            "title": "Testnet",
+                            "body": "Public beta network for Shimmer"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with draft TIPs"
+                        }
+                    }
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with draft TIPS"
+                "setupPrivateNetworkConnection": {
+                    "title": "Connect to a private network",
+                    "body": "Fill the form with the node information and connect to a private network."
                 }
+            },
+            "profileSetup": {
+                "setup": {
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "chrysalisTitle": "TODO TODO TODO",
+                    "chrysalisBody": "TODO TODO TODO TODO TODO",
+                    "learnMore": "Learn about the Shimmer network"
+                },
+                "setupNew": {
+                    "title": "Create a profile",
+                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "softwareAccount": {
+                        "title": "Create a software profile",
+                        "description": "Provides a Stronghold file and recovery phrase"
+                    },
+                    "ledgerAccount": {
+                        "title": "Create a hardware profile",
+                        "description": "Ledger Nano S or Nano X required"
+                    }
+                },
+                "setupRecovered": {
+                    "title": "Recover {protocol} profile",
+                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
+                    "importMnemonic": "Use recovery phrase",
+                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
+                    "importFile": "Use Stronghold backup",
+                    "importFileDescription": "Import your Stronghold backup file",
+                    "importLedger": "Use Ledger device",
+                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                },
+                "setupClaimed": {
+                    "title": "Claim Shimmer staking rewards",
+                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                },
+                "enterName": {
+                    "title": "Create your {protocol} profile",
+                    "profileName": "Profile name",
+                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "body2": {
+                        "first": "For now, let's start with your first profile name.",
+                        "nonFirst": "For now, let's start with your profile name."
+                    },
+                    "addMore": "You can add more profiles later."
+                }
+            },
+            "strongholdSetup": {
+                "setupStrongholdPassword": {
+                    "title": "Create a password",
+                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                }
+            },
+            "storageProtectionSetup": {
+                "setupPinProtection": {
+                    "title": "Set up PIN code",
+                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+                    "body2": "Use numbers only"
+                }
+            },
+            "profileBackup": {
+                "backupMnemonic": {
+                    "title": "Back up your recovery phrase",
+                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                },
+                "viewMnemonic": {
+                    "title": "Recovery phrase",
+                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+                    "body2": "Keep this private and safely stored.",
+                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+                    "revealRecoveryPhrase": "Reveal recovery phrase",
+                    "hideRecoveryPhrase": "Hide recovery phrase"
+                },
+                "verifyMnemonic": {
+                    "title": "Verify recovery phrase",
+                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
+                    "word": "Word",
+                    "verified": "Recovery phrase verified",
+                    "verifiedBody": "Remember to keep it private and safely stored."
+                },
+                "backupStronghold": {
+                    "title": "Back up to a Stronghold file",
+                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
+                    "body2": "Reasons why digital backups are important:",
+                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
+                    "reason2": "Import your wallets on other devices",
+                    "reason3": "Recover your full transaction history"
+                }
+            },
+            "profileRecovery": {
+                "importMnemonicPhrase": {
+                    "title": "Enter your recovery phrase",
+                    "body": "A recovery phrase is 24 words long, all lower case, with sapces between. This is used to recover existing Firefly profiles.",
+                    "enter": "Enter your secret recovery phrase",
+                    "phraseDetected": "24 word recovery phrase detected"
+                },
+                "importStrongholdBackup": {
+                    "title": "Import your Stronghold backup",
+                    "body": "Import a Stronghold backup file to restore your profile."
+                },
+                "backupPassword": {
+                    "body1": "Please enter your backup password.",
+                    "body2": "This is the password you set when you first created your backup."
+                },
+                "success": {
+                    "title": "You have successfully recovered your backup",
+                    "body": "You can now set up your new profile."
+                }
+            },
+            "shimmerClaiming": {
+                "claimRewards": {
+                    "title": "Your Shimmer staking rewards",
+                    "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+                },
+                "success": {
+                    "title": "Rewards claimed",
+                    "body": "You have successfully claimed Shimmer tokens for your new profile.",
+                    "totalRewards": "Total rewards"
+                }
+            },
+            "congratulations": {
+                "title": "Profile setup complete",
+                "fundsMigrated": "Funds migrated",
+                "body": "Your new profile is ready to use.",
+                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+                "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+                "exportMigration": "Export migration log and finish setup"
             }
-        },
-        "customNetwork": {
-            "title": "Connect to a custom network",
-            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "連接您的 Ledger",
@@ -108,116 +200,9 @@
         },
         "ledgerInstallationGuide": {
             "title": "你是否已安裝必須的 Ledger apps？",
-            "body1": "您必須先經由Ledger Live同時安裝 {legacy} app 和新版的IOTA app，才能繼續。",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "請確認您的Ledger韌體是最新版本。所有已安裝的軟體都必須更新至最新版本。",
             "action": "是，我已安裝這些 apps。"
-        },
-        "password": {
-            "title": "建立密碼",
-            "body1": "您需要強密碼來保護您的資金。請使用字詞組合，並避免常見的短語、名稱或日期。",
-            "body2": "建議您在 Recovery Kit 中寫下密碼。"
-        },
-        "protect": {
-            "title": "Protect your wallet",
-            "body1": "設置登錄 PIN 碼，以確保只有您可以登入您的檔案。",
-            "body2": "確保您的 PIN 碼安全！"
-        },
-        "setupPin": {
-            "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
-        },
-        "backup": {
-            "title": "備份您的錢包",
-            "body1": "您現在會看到一組助記詞。請把它寫到您的 Recovery Kit 裡。",
-            "body2": "不要與任何人分享您的助記詞。它可用於從任何地方存提您的代幣。",
-            "body3": "一旦遺失了助記詞，您的資金也可能隨之遺失。"
-        },
-        "recoveryPhrase": {
-            "title": "助記詞",
-            "body1": "在 Recovery Kit 中，按照顯示的確切順序寫下單字。",
-            "body2": "將此內容保密並安全地存儲。",
-            "body3": "進行書面備份很重要。電腦往往會故障，文件亦可能會損壞。",
-            "revealRecoveryPhrase": "顯示助記詞",
-            "hideRecoveryPhrase": "隱藏助記詞"
-        },
-        "verifyRecoveryPhrase": {
-            "title": "驗證助記詞",
-            "body": "讓我們檢查一下您是否正確記錄助記詞。 請按編號順序選擇每個單字。",
-            "word": "單字",
-            "verified": "助記詞已驗證",
-            "verifiedBody": "請記住將其保密並安全地存儲。"
-        },
-        "backupWallet": {
-            "title": "備份至一個 Stronghold 檔案",
-            "body1": "輸入密碼以將您的錢包備份至 Stronghold 檔案。您的密碼將用於加密此備份檔案。",
-            "body2": "數位備份之所以重要的原因：",
-            "reason1": "無需輸入助記詞即可輕鬆還原錢包",
-            "reason2": "將您的錢包導入其他設備",
-            "reason3": "還原您的完整交易記錄"
-        },
-        "recoveryPhraseSaved": {
-            "title": "備份成功",
-            "body": "您的錢包已備份至 Stronghold。"
-        },
-        "claimRewards": {
-            "title": "Your Shimmer staking rewards",
-            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
-        },
-        "congratulations": {
-            "title": "錢包設置完成",
-            "fundsMigrated": "資金遷移完成",
-            "body": "您的新錢包可以使用了。",
-            "softwareMigratedBody": "您已成功將資金遷移到新網路",
-            "fireflyLedgerBody": "您的 Ledgar 帳號已成功復原，現在可繼續使用。",
-            "trinityLedgerBody": "您已經成功把 Ledger 遷移到新網路。",
-            "exportMigration": "導出遷移紀錄檔並結束設定"
-        },
-        "import": {
-            "title": {
-                "iota": "Recover or migrate IOTA funds",
-                "shimmer": "Recover Shimmer profile"
-            },
-            "body": {
-                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
-            },
-            "importSeed": "我有一個 81 字符的種子",
-            "importSeedDescription": "輸入種子並將資金遷移到 Chrysalis",
-            "importMnemonic": "Use recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase",
-            "importFile": {
-                "iota": "Use backup file",
-                "shimmer": "Use Stronghold backup file"
-            },
-            "importFileDescription": {
-                "iota": "Upload a Seedvault or Stronghold file",
-                "shimmer": "Upload Stronghold file"
-            },
-            "importLedger": "Use Ledger hardware device",
-            "importLedgerDescription": {
-                "iota": "Restore or migrate a Ledger profile",
-                "shimmer": "Restore using Nano S or Nano X devices"
-            }
-        },
-        "importFromText": {
-            "seed": {
-                "title": "輸入您的種子開始遷移",
-                "body": "種子由 81 個字符組成。這用來把錢包內容從舊版的 Trinity app 還原。",
-                "enter": "輸入您的助記詞"
-            },
-            "mnemonic": {
-                "title": "輸入您的還原助記詞",
-                "body": "還原助記詞的長度為 24 個單字，全部小寫並以空格相隔。這用於恢復現有的 Firefly 錢包。",
-                "enter": "輸入您的秘密還原註記詞"
-            },
-            "seedDetected": "檢測到81個字符的種子",
-            "phraseDetected": "檢測到 24 個單字的助記詞",
-            "checksum": "檢查碼"
-        },
-        "importFromFile": {
-            "title": "使用備份文件還原您的錢包",
-            "body": "輸入備份檔案以恢復您的錢包。備份可以是 Stronghold（.stronghold）或 Trinity SeedVault（.kdbx）。"
         },
         "importFromLedger": {
             "title": "還原或遷移您的Ledger",
@@ -246,7 +231,7 @@
             "readMore": "遷移過程應該預期的事項"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "產生新地址",
             "body": "您必須產生一個新的地址以便用Firefly來遷移您的代幣。點選下方按鍵以繼續進行。",
             "confirmTitle": "確認新的地址",
             "confirmBody": "安全起見，請把Ledger裝置產生的地址和下方顯示的地址交互比對。如果相同，依提示把Ledger上的兩個按鈕一起按下。",
@@ -269,95 +254,19 @@
             "notGeneratingAddresses": "您的 Ledger 是否正在生成地址？",
             "reinstallLegacy": "如果沒有，請斷開裝置連接並重試。如果問題仍然存在，您可能需要重新安裝 {legacy} app。"
         },
-        "importBackupPassword": {
-            "body1": "請輸入您的備份密碼。",
-            "body2": "這是您首次備份時設置的密碼。"
-        },
-        "importSuccess": {
-            "title": "您已成功恢復備份",
-            "body": "現在，您可以設置新的個人檔案。"
-        },
-        "migrate": {
-            "title": "遷移您的資金",
-            "body1": "這個自動程序會將資金轉移到您的新錢包。",
-            "body2": "可能會花些時間。遷移過程中請勿關掉你的裝置。",
-            "existing": "您的舊錢包",
-            "new": "您的新錢包",
-            "learn": "Learn about the migration",
-            "beginMigration": "遷移開始",
-            "migrating": "遷移資金中...",
-            "migrated": "{balance} 遷移完成",
-            "migrationFailed": "遷移失敗",
-            "noAddressesForMigration": "請選擇您要保護的地址。",
-            "restoringWallet": "錢包還原中...",
-            "findingBalance": "正在尋找餘額...",
-            "incorrectSeedVaultPassword": "SeedVault 密碼錯誤。",
-            "noDataSeedVault": "在 SeedVault 中找不到資料。",
-            "signingBundle": "交易組簽發中",
-            "broadcastingBundle": "交易組廣播中",
-            "miningBundle": "交易組挖掘中",
-            "problemRestoringWallet": "還原您的錢包時出現網路錯誤。 請再試一次。",
-            "minimumMigrationAmountSpentAddresses": "每個「已支出地址」的最小遷移數量是 1Mi。如果您的餘額看起來不對，請再次檢查。",
-            "tooManyAddressesToMigrate": "您有太多小額地址需要遷移。若您的餘額看起來不對，請再次檢查。",
-            "cannotMigrateAllYourFunds": "我們無法遷移您所有的資金，因為有些地址的金額太低。您仍舊可以進行遷移，但是 {value} 將會遺失。",
-            "error": "遷移您的資金時發生錯誤，請重試。"
-        },
-        "bundleMiningWarning": {
-            "title": "警告",
-            "body1": "您在一個或更多「已支出地址」上擁有資金。",
-            "body2": "我們建議您運行自動化過程，來幫您保護並安全地轉移這些資金。",
-            "body3": "如果您關閉應用程式，您將必須重新開始整個遷移過程。",
-            "learn": "深入瞭解「已支出地址」"
-        },
-        "secureSpentAddresses": {
-            "title": "保護「已支出地址」",
-            "body1": "已偵測到您在 {number, plural, one {# spent address} other {# 個「已支出地址」}}上留有資金。",
-            "body2": "我們建議您運行自動化過程，來幫您保護並安全地轉移這些資金。",
-            "error": "您無法遷移低於1Mi的「已支出地址」"
-        },
-        "securityCheckCompleted": {
-            "title": "安全檢查已完成",
-            "body1": "我們已經計算出安全風險層級，再度運行這個程序可以降低您的風險層級。",
-            "body2": "當您對各項風險層級滿意時，請按「繼續」。",
-            "rerun": "重新評定所選的地址",
-            "continueMigration": "繼續遷移"
-        },
-        "securingSpentAddresses": {
-            "title": "正在保護「已支出地址」...",
-            "body1": "這個步驟將花費 {minutes, plural, one {# 分鐘} other {# 分鐘}}。",
-            "body2": "您的電腦將會全速運轉，您在等待期間可以做些其他事情。"
-        },
-        "transferFragmentedFunds": {
-            "body1": "Firefly 現在要開始遷移您的資金，這可能要花點時間。",
-            "body2": "在遷移過程中，確保您的 Ledger 保持連接和 {legacy} app 保持打開。",
-            "migrate": "遷移資金",
-            "transaction": "交易編號 {number}",
-            "rerun": "Try again"
-        },
-        "migrateFailed": {
-            "title": "To do",
-            "body": "To do"
-        },
-        "balance": {
-            "title": "您的餘額",
-            "body": "繼續前請先確認您的帳戶餘額正確。如果有誤，您可以再次檢查。",
-            "error": "最小遷移數量是 1Mi。如果您的餘額有誤，請再次檢查。",
-            "zeroBalance": "請再次檢查。若仍無法找到您的餘額，您可能輸入了錯誤的種子碼。",
-            "zeroBalanceLedgerLegacy": "請再次檢查。若仍無法找到您的餘額，您可能選擇了錯誤的帳戶索引。"
-        },
         "settings": {
             "settings": "設定",
             "general": {
-                "title": "General",
-                "description": "Configure your app's appearance and other general settings"
+                "title": "一般設定",
+                "description": "設定您的應用程式外觀和其他一般設定"
             },
             "security": {
                 "title": "安全性",
                 "description": "更改密碼並調整與安全性相關的設置"
             },
             "advanced": {
-                "title": "Advanced",
-                "description": "Tools and manual settings for technical users"
+                "title": "進階設定",
+                "description": "技術人員專用之工具與設定"
             },
             "helpAndInfo": {
                 "title": "幫助及資訊",
@@ -418,8 +327,8 @@
                 "success": "您已更換您的設定檔名稱"
             },
             "walletFinder": {
-                "title": "Wallet finder",
-                "description": "Perform an extended search of your previously used wallets"
+                "title": "搜尋錢包",
+                "description": "執行進階的搜尋以尋找您之前用過的錢包"
             },
             "hiddenAccounts": {
                 "title": "隱藏錢包",
@@ -430,8 +339,8 @@
                 "description": "刪除您全部的設定檔、錢包和交易記錄。請確認您已經備份。"
             },
             "deepLinks": {
-                "title": "Deep links",
-                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
+                "title": "深層連結",
+                "description": "當點擊以 {appProtocol}:// 為開頭的連結時，自動填入交易資訊"
             },
             "networkConfiguration": {
                 "title": "網路設定",
@@ -458,8 +367,9 @@
                 "includeNode": "加入節點",
                 "editDetails": "編輯(節點)資料",
                 "viewInfo": "檢視(節點)資訊",
-                "setAsPrimary": "設為主要節點",
-                "removeNode": "Remove node",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
+                "removeNode": "移除節點",
                 "includeOfficialNodeList": "加入官方節點列表",
                 "noNodes": "目前找不到結點，無法連上網絡",
                 "noNodesAuto": "找不到節點，將改採自動選擇方式"
@@ -508,11 +418,11 @@
                 "description": ""
             },
             "createDeveloperProfile": {
-                "title": "Create Developer Profile",
+                "title": "建立開發者檔案",
                 "description": ""
             },
             "createNormalProfile": {
-                "title": "Create Normal Profile",
+                "title": "建立一般檔案",
                 "description": ""
             },
             "reportAnIssue": {
@@ -524,18 +434,31 @@
             "pleaseWait": "請等候 {time, plural, one {# 秒} other {# 秒}}",
             "incorrectAttempts": "{attempts, plural, one {錯誤輸入 # 次} other {輸入錯誤 # 次}}"
         },
+        "loadProfile": {
+            "loginSteps": {
+                "buildProfileManager": "Initialising profile manager",
+                "updateNodeInfo": "Checking node health",
+                "recoverAccounts": "Generating accounts",
+                "loadAccounts": "Syncing accounts",
+                "loadAssets": "Loading native assets",
+                "loadActivities": "Building activity history",
+                "setStrongholdStatus": "Securing stronghold",
+                "startBackgroundSync": "Starting background sync",
+                "loggingIn": "Loading dashboard"
+            }
+        },
         "dashboard": {
             "network": {
-                "operational": "Network operational",
-                "degraded": "Network degraded",
-                "down": "Network down",
-                "disconnected": "Disconnected from node",
+                "operational": "網路正常運行",
+                "degraded": "網路效能較差",
+                "down": "網路已斷線",
+                "disconnected": "已中斷與節點的連線",
                 "status": "狀態",
                 "messagesPerSecond": "每秒訊息量",
                 "referencedRate": "參照率"
             },
             "profileModal": {
-                "allSettings": "All settings",
+                "allSettings": "所有設定",
                 "logout": "登出",
                 "stronghold": {
                     "title": "設定檔鎖定",
@@ -545,9 +468,8 @@
                 "hardware": {
                     "title": "硬體裝置",
                     "statuses": {
-                        "appNotOpen": "尚未開啟 IOTA App",
+                        "appNotOpen": "{protocol} app not open",
                         "connected": "已連接",
-                        "legacyConnected": "舊版應用程式已開啟",
                         "locked": "鎖定",
                         "mnemonicMismatch": "Ledger 或助記詞錯誤",
                         "notDetected": "未偵測到",
@@ -556,8 +478,8 @@
                 },
                 "backup": {
                     "title": "備份您的錢包",
-                    "lastBackup": "You last backed up {date}",
-                    "notBackedUp": "Not backed up",
+                    "lastBackup": "您上次的備份是在 {date}",
+                    "notBackedUp": "尚未備份",
                     "button": "備份"
                 },
                 "version": {
@@ -590,7 +512,7 @@
                 },
                 "bodies": {
                     "upcoming": "質押您的 {token} 代幣。當質押於{date} 開始，就能每10秒獲得獎勵。",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "質押您的 {token} 代幣。質押於 {date} 開始，在此之後每 10 秒皆能獲得獎勵。",
                     "holdingAndStaking": "您將自動每10秒獲得獎勵。",
                     "holdingAndNotStaking": "質押您的 {token} 代幣以獲得每10秒一次的獎勵。",
                     "endedAndDidStake": "一旦主網啟動，{token} 獎勵將分發至您的錢包。",
@@ -606,7 +528,7 @@
                 "totalWalletRewards": "錢包獎勵總額",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly 是一個無須授權、高擴展性的多鏈網絡，用來建置和佈署組合式的智能合約。Assembly 是 Web3 的未來。 "
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -630,13 +552,13 @@
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
             "pendingTransactions": {
-                "title": "Locked in pending transactions",
+                "title": "已鎖定在待確認的交易",
                 "subtitle": "For sending native assets and small IOTA amounts"
             }
         },
         "password": {
             "title": "必須輸入密碼",
-            "subtitle": "Please provide your password to unlock your wallets",
+            "subtitle": "請輸入密碼以解鎖您的錢包",
             "backup": "請輸入密碼以匯出備份"
         },
         "qr": {
@@ -652,8 +574,8 @@
             "preReleaseDescription": "您在運行的是Firefly的先行發布版，更新已停用。"
         },
         "backupStronghold": {
-            "title": "Backup your stronghold file",
-            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
+            "title": "備份您的stronghold檔案",
+            "body": "定期備份錢包您的錢包很重要，以確保擁有錢包備份與交易記錄。若您遺失備份檔與助記詞，將失去資金權限。"
         },
         "deleteAccount": {
             "title": "刪除 {name}?",
@@ -666,7 +588,7 @@
         "hideAccount": {
             "title": "隱藏 {name}？",
             "body": "您可以稍後通過在“進階設定”中啟用“顯示隱藏的錢包”來找到此錢包。",
-            "typePassword": "Type your wallet password to confirm.",
+            "typePassword": "請輸入您的錢包密碼以確認。",
             "hideAccount": "隱藏錢包",
             "errorTitle": "無法隱藏 {name}",
             "errorBody1": "要隱藏一個帳戶，它必須要有 0 餘額。",
@@ -679,13 +601,21 @@
             "internal": "內部地址",
             "external": "存款地址"
         },
+        "excludeNode": {
+            "title": "Exclude node",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
+        },
+        "unsetAsPrimaryNode": {
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
+        },
         "node": {
             "titleAdd": "增加節點",
             "titleUpdate": "更新節點",
             "titleRemove": "刪除節點",
             "titleRemoveAll": "移除所有節點",
             "titleDetails": "節點詳細資訊",
-            "titleInfo": "Node information",
+            "titleInfo": "節點資訊",
             "addingNode": "增加節點",
             "updatingNode": "更新節點",
             "loadingNodeInfo": "節點資訊讀取中...",
@@ -695,41 +625,40 @@
             "optionalJwt": "JSON web token (選填)",
             "setAsPrimaryNode": "設定為主要節點",
             "removeConfirmation": "您確定要刪除此節點嗎？",
-            "removeAllConfirmation": "您確定要刪除所有節點?",
             "info": {
                 "general": {
-                    "tab": "General",
-                    "name": "Name",
-                    "url": "URL",
-                    "version": "Version",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone",
+                    "tab": "一般設定",
+                    "name": "名稱",
+                    "url": "網址",
+                    "version": "版本",
+                    "latestMilestone": "最新的里程碑",
+                    "confirmedMilestone": "已確認的里程碑",
                     "pruningIndex": "Pruning index",
-                    "features": "Features"
+                    "features": "功能"
                 },
                 "metrics": {
-                    "tab": "Metrics",
-                    "blocksPerSecond": "Blocks per second",
-                    "referencedBlocksPerSecond": "Referenced blocks per second",
-                    "referencedRate": "Referenced rate",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone"
+                    "tab": "指標",
+                    "blocksPerSecond": "每秒區塊數",
+                    "referencedBlocksPerSecond": "每秒參照的區塊數",
+                    "referencedRate": "參照率",
+                    "latestMilestone": "最新的里程碑",
+                    "confirmedMilestone": "已確認的里程碑"
                 },
                 "protocol": {
-                    "tab": "Protocol",
-                    "network": "Network",
+                    "tab": "協定",
+                    "network": "網路",
                     "bech32Hrp": "Bech32 HRP",
-                    "tokenSupply": "Token supply",
+                    "tokenSupply": "代幣供應",
                     "version": "Version",
                     "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {
                     "tab": "Base token",
-                    "token": "Token",
-                    "tickerSymbol": "Ticker",
-                    "unit": "Unit",
-                    "subunit": "Sub-unit",
-                    "decimals": "Decimals",
+                    "token": "代幣",
+                    "tickerSymbol": "代幣代號",
+                    "unit": "單位",
+                    "subunit": "子單位",
+                    "decimals": "小數點",
                     "useMetricPrefix": "Use metric prefix"
                 }
             }
@@ -751,7 +680,7 @@
             "typePassword": "請輸入您的密碼以便確認。"
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "應用診斷",
             "node": "節點",
             "platform": "平台",
             "platformVersion": "平台版本",
@@ -768,12 +697,12 @@
             "sendingFromStakedAccountBelowMinReward": "您正從未達質押門檻的錢包傳送交易。這將解除錢包內的代幣質押，並將使您錯失質押獎勵。"
         },
         "walletFinder": {
-            "title": "Wallet finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
-            "accountsSearched": "Wallets searched",
-            "accountsFound": "Wallets found",
-            "totalWalletBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "title": "搜尋錢包",
+            "body": "對地址執行更詳盡的搜索，以尋找遺漏的資金與錢包。",
+            "accountsSearched": "已搜尋錢包",
+            "accountsFound": "錢包尋獲",
+            "totalWalletBalance": "總餘額",
+            "searchAgainHint": "您的錢包餘額或數字是否有誤？請重新搜尋直至顯示所有餘額。"
         },
         "riskFunds": {
             "title": "警告：資金在遷移過程中有風險",
@@ -781,7 +710,7 @@
             "body2": "此地址為中級風險以上，建議您重新運行此步驟"
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
+            "title": "警告：資金在遷移過程中有風險",
             "body": "您有資金處於「已支出地址」中，但是無法搜尋到能確保它們安全所需的資訊。這可能發生於您很久之前所發起的交易。您仍舊可以繼續，但{value} 在遷移過程中具有風險。",
             "learnMore": "瞭解更多關於「已支出地址」",
             "proceed": "我了解此風險"
@@ -793,8 +722,7 @@
             "bodyFirefly": "Firefly 在網路更新完成前將無法使用。網路更新後仍可進行資金遷移。"
         },
         "ledgerNotConnected": {
-            "connect": "在您的 Ledger 裝置上開啟新版 IOTA app 來接續下一步",
-            "connectLegacy": "在您的 Ledger 裝置上開啟 {legacy} app 以繼續"
+            "connect": "Open the {protocol} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "請確認在 Ledger 裝置上的通知再繼續"
@@ -810,7 +738,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Ledger無法連結時的處理技巧",
             "steps": {
                 "0": "確保 Ledger Live 尚未於您的電腦上開啟",
                 "1": "確認您已經輸入 PIN 碼來解鎖您的 Ledger 裝置",
@@ -827,7 +755,7 @@
                 "info": "請確認Ledger顯示的餘額地址和下方顯示的地址相同。若相同，請依提示把Ledger上的兩個按鈕一起按下。"
             },
             "transaction": {
-                "title": "Confirm transaction",
+                "title": "確認交易",
                 "info": "請確認Ledger顯示的交易明細和下方顯示的明細相同。若相同，請依提示把Ledger上的兩個按鈕一起按下。"
             }
         },
@@ -852,7 +780,7 @@
             "totalFundsStaked": "質押資金總額",
             "stakedSuccessfully": "您的資金已爲 {account} 質押。",
             "unstakedSuccessfully": "您的資金已從 {account} 解除質押。",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "singleAccountHint": "正在尋找您的錢包嗎？Firefly已變更。在上方的菜單欄切換您的錢包。"
         },
         "stakingConfirmation": {
             "title": "確認參與",
@@ -884,7 +812,7 @@
         "crashReporting": {
             "title": "當機回報",
             "body": "自動回報錯誤診斷資訊，以協助開發者改善Firefly。若選取，將於重啟Firefly後生效。",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "checkbox": "發送當機報告給IOTA基金會"
         },
         "legalUpdate": {
             "tosTitle": "服務條款",
@@ -902,10 +830,42 @@
             "hint": "無法找到錢包？使用設定裡的餘額查詢，搜尋之前使用的錢包。"
         },
         "transactionDetails": {
-            "title": "Transaction details"
+            "title": "交易明細"
         },
         "sendForm": {
-            "title": "Send funds"
+            "title": "發送資金"
+        },
+        "tokenInformation": {
+            "newTokenTitle": "New token",
+            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "tokenMetadata": {
+                "standard": "Standard",
+                "name": "Name",
+                "tokenId": "Token ID",
+                "url": "URL"
+            },
+            "buttons": {
+                "verifyToken": "I verify this token"
+            }
+        },
+        "mintNativeTokenForm": {
+            "title": "Mint native tokens",
+            "inputs": {
+                "totalSupply": "Total Supply",
+                "circulatingSupply": "Circulating Supply",
+                "standard": "Standard",
+                "name": "Name",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
+                "url": "URL",
+                "logoUrl": "Logo URL",
+                "logo": "Logo"
+            }
+        },
+        "faucetRequest": {
+            "title": "Faucet request",
+            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
     },
     "charts": {
@@ -929,36 +889,36 @@
         "cancel": "取消",
         "close": "關閉",
         "dismiss": "取消",
-        "claim": "Claim",
-        "claiming": "Claiming",
-        "reject": "Reject",
+        "claim": "領取",
+        "claiming": "領取中",
+        "reject": "拒絕",
         "confirmRejection": {
-            "title": "Reject transaction",
-            "description": "Are you sure you want to reject this transaction?",
-            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+            "title": "拒絕交易",
+            "description": "您是否確實要拒絕這筆交易？",
+            "node": "請注意，拒絕交易僅只是將它從您的活動提要中隱藏"
         },
         "proceedAnyway": "不論如何，就是執行",
         "save": "儲存",
         "importSeed": "匯入現有的種子",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
-            "shimmer": "Restore Shimmer profile"
+            "iota": "遷移或復原錢包",
+            "shimmer": "復原Shimmer設定檔"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
-            "shimmer": "Restore an existing Shimmer profile"
+            "iota": "遷移至Chrysalis或恢復一個既存錢包",
+            "shimmer": "復原既有的Shimmer檔"
         },
-        "createWallet": "Create a new {protocol} profile",
+        "createWallet": "建立一個新的 {protocol} 檔案",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
-        "claimShimmer": "Claim Shimmer staking rewards",
-        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
+        "claimShimmer": "領取Shimmer質押獎勵",
+        "claimShimmerDescription": "遷移IOTA檔與領取質押獎勵",
         "savePassword": "儲存密碼",
         "useBiometric": "使用生物識別安全機制",
-        "setupPinCode": "Setup PIN code",
-        "setPin": "Set PIN",
-        "setPinCode": "Set PIN code",
-        "confirmPin": "Confirm PIN",
-        "confirmPinCode": "Confirm PIN code",
+        "setupPinCode": "設定PIN碼",
+        "setPin": "設定PIN",
+        "setPinCode": "設定PIN碼",
+        "confirmPin": "確認PIN",
+        "confirmPinCode": "確認PIN碼",
         "enterYourPin": "請輸入您的 PIN",
         "saveBackupFile": "儲存備份檔案",
         "iveWrittenRecoveryPhrase": "我已寫下助記詞了",
@@ -981,7 +941,7 @@
         "export": "匯出",
         "exporting": "正在匯出",
         "exportNewStronghold": "輸出一個新的 Stronghold",
-        "enableDeepLinks": "啟用 IOTA 連結",
+        "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "開啟開發者模式",
         "enableSystemNotifications": "啟用系統通知",
         "exportTransactionHistory": "匯出交易記錄",
@@ -991,14 +951,15 @@
         "restartNow": "立即重新啟動",
         "saveBackup": "保存 Stronghold 備份",
         "customizeAcount": "自訂錢包",
-        "hideAccount": "Hide wallet",
+        "hideAccount": "隱藏錢包",
         "showAccount": "取消隱藏錢包",
-        "deleteAccount": "Delete wallet",
+        "deleteAccount": "刪除錢包",
         "max": "最大",
         "addNode": "增加節點",
+        "addingNode": "Adding node",
+        "addOfficialNodes": "Add official nodes",
         "updateNode": "更新節點",
         "removeNode": "移除節點",
-        "removeAllNodes": "Remove all nodes",
         "hide": "隱藏",
         "hideOthers": "隱藏其他",
         "showAll": "全部顯示",
@@ -1008,7 +969,7 @@
         "redo": "重做",
         "cut": "剪下",
         "copy": "複製",
-        "copyAllInformation": "Copy all information",
+        "copyAllInformation": "複製所有資訊",
         "paste": "貼上",
         "selectAll": "全選",
         "addAccount": "新增錢包",
@@ -1031,13 +992,13 @@
         "showHiddenAccounts": "顯示隱藏錢包",
         "confirm": "確認",
         "hideNetworkStatistics": "隱藏網路統計數據",
-        "findWallets": "Find wallets",
-        "useBalanceFinder": "Use balance finder",
-        "search": "Search",
+        "findWallets": "尋找錢包",
+        "useBalanceFinder": "資金查詢",
+        "search": "搜尋",
+        "searching": "搜尋中",
         "searchAgain": "重新搜尋",
-        "searching": "Searching",
         "closeFirefly": "關閉 Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "產生新地址",
         "migrateAgain": "遷移另一個索引",
         "visitWebsite": "前往網站",
         "howItWorks": "運作方式",
@@ -1051,14 +1012,24 @@
         "done": "完成",
         "okIUnderstand": "好的，我明白",
         "readMore": "閱讀更多",
-        "claimRewards": "Claim rewards",
-        "rerunClaimProcess": "Rerun claim process",
-        "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
-        "addPublicNote": "Add public note",
-        "backup": "Backup"
+        "searchForRewards": "Search for rewards",
+        "claimRewards": "領取報酬",
+        "rerunClaimProcess": "重新執行領取程序",
+        "finishProfileSetupWithProtocol": "完成 {protocol} 檔案的設定",
+        "addPublicNote": "增加公共節點",
+        "backup": "備份",
+        "mint": "Mint",
+        "mintNativeToken": "Mint native token",
+        "verifyToken": "Verify token",
+        "unverifyToken": "Unverify token",
+        "hideToken": "Hide token",
+        "unhideToken": "Unhide token",
+        "burnToken": "Burn token",
+        "faucetRequest": "Get {token} tokens",
+        "refreshTokenMetadata": "Refresh token metadata"
     },
     "general": {
-        "recipient": "Recipient",
+        "recipient": "接收方",
         "password": "密碼",
         "confirmPassword": "確認密碼",
         "currentPassword": "當前密碼",
@@ -1069,8 +1040,10 @@
         "recentActivity": "近期活動",
         "sent": "已發送",
         "received": "已接收",
-        "transfer": "Transfer",
-        "transferring": "Transferring",
+        "transfer": "傳送",
+        "transferring": "傳送中",
+        "minted": "Minted",
+        "minting": "Minting",
         "sendPayment": "發送付款",
         "moveFunds": "內部傳送",
         "sendTo": "發送至",
@@ -1081,25 +1054,26 @@
         "sendTokensToAddress": "發送代幣至另一個地址",
         "manageAccount": "管理錢包",
         "customizeAcount": "自訂您的錢包",
-        "account": "Wallet",
+        "account": "錢包",
         "sendingToAddress": "正傳送到地址",
         "amount": "數量",
         "addAddress": "添加地址",
         "reference": "參照",
         "from": "由",
         "to": "至",
-        "receiveFunds": "Receive funds",
+        "and": "and",
+        "receiveFunds": "接收資金",
         "address": "地址",
         "myAddress": "我的地址",
-        "myNetworkAddress": "My {networkName} address",
+        "myNetworkAddress": "我的{networkName} 地址",
         "shareAddress": "分享地址",
         "yourAddress": "您的地址",
         "newRemainder": "新的餘額",
         "remainder": "餘額",
         "generateNewAddress": "產生新地址",
-        "copyToClipboard": "Copy to clipboard",
+        "copyToClipboard": "複製到剪貼簿",
         "copyAddress": "複製地址",
-        "viewOnExplorer": "View on Explorer",
+        "viewOnExplorer": "在區塊鏈瀏覽器上查看",
         "import": "匯入",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -1123,7 +1097,7 @@
         "accountName": "錢包名稱",
         "latestTransactions": "最新交易",
         "transactions": "交易紀錄",
-        "activity": "Activity",
+        "activity": "活動",
         "security": "安全性",
         "accountAddress": "錢包位址",
         "network": "網路",
@@ -1136,15 +1110,16 @@
         "receiveAddress": "收款地址",
         "newAddress": "新地址",
         "date": "日期",
-        "status": "Status",
+        "status": "狀態",
         "confirmed": "已確認",
         "pending": "等待中",
         "noAccounts": "您沒有錢包，請創建一個。",
         "loadingAccounts": "載入中，請稍候...",
         "addProfile": "添加個人檔案",
         "noRecentHistory": "沒有最近的歷史紀錄",
-        "thisMonth": "This month",
-        "search": "Search",
+        "noAssets": "No assets",
+        "thisMonth": "本月",
+        "search": "搜尋",
         "firstSync": "正在同步歷史記錄，這可能需要一段時間...",
         "transferSyncing": "同步錢包",
         "transferSelectingInputs": "選擇輸入",
@@ -1181,12 +1156,12 @@
         "creatingProfile": "正在創建設定檔，請稍候...",
         "fundMigration": "資金遷移",
         "accountRemoved": "此錢包是隱藏的。 取消隱藏即可執行傳送。",
-        "fromAddress": "from {account}",
-        "toAddress": "to {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "fromAddress": "來自{account}",
+        "toAddress": "至{account}",
+        "stakedFor": "已為{account} 質押",
+        "unstakedFor": "已為 {account} 解除質押",
+        "votedFor": "已為 {account} 投票",
+        "unvotedFor": "已為 {account} 取消投票",
         "stakingTransaction": "質押交易",
         "unstakingTransaction": "解質押交易",
         "receiving": "收款中",
@@ -1196,29 +1171,79 @@
         "version": "版本 {version}",
         "yourWallets": "您的錢包",
         "unknown": "未知",
-        "unknownAddress": "Unknown address",
+        "unknownAddress": "未知地址",
         "none": "無",
         "staked": "已質押",
         "unstaked": "已解除質押",
         "staking": "質押",
         "unstaking": "正在解除質押",
         "notStaked": "未質押",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "已質押的資金",
         "unstakedFunds": "未質押的資金",
         "accountColor": "錢包顏色",
-        "transactionTime": "Transaction time",
+        "transactionTime": "交易時間",
         "storageDeposit": "Storage deposit",
-        "expirationTime": "Expiration time",
-        "claimedTime": "Claimed at",
-        "copiedToClipboard": "Copied to clipboard",
+        "giftedStorageDeposit": "Gifted storage deposit",
+        "expirationTime": "逾期時間",
+        "claimedTime": "已收取於",
+        "copiedToClipboard": "複製到剪貼簿",
         "total": "總額： {balance}",
-        "availableBalance": "Available balance: {balance}",
-        "amountClaimed": "{amount} claimed",
+        "availableBalance": "可用餘額：{balance}",
+        "amountClaimed": "已領取{amount}",
         "metadata": "Metadata",
         "tag": "Tag",
-        "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
-        "assets": "Assets"
+        "nodeList": "節點清單",
+        "claimingTransactionId": "領取於",
+        "assets": "資產",
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
+        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded"
+    },
+    "filters": {
+        "title": "Filters",
+        "showHidden": {
+            "label": "Show hidden",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "showRejected": {
+            "label": "Show rejected",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "verificationStatus": {
+            "label": "Verification status",
+            "new": "New",
+            "notVerified": "Not verified",
+            "verified": "Verified"
+        },
+        "asset": {
+            "label": "Assets"
+        },
+        "amount": {
+            "label": "Amount",
+            "equal": "is equal to",
+            "range": "is between",
+            "greater": "is greater than",
+            "less": "is less than"
+        },
+        "status": {
+            "label": "Status",
+            "confirmed": "confirmed",
+            "pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "non-claimed"
+        },
+        "type": {
+            "label": "Type",
+            "incoming": "incoming",
+            "outgoing": "outgoing",
+            "internal": "internal"
+        }
     },
     "dates": {
         "today": "今天",
@@ -1271,11 +1296,31 @@
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
-            "error": "Claiming transaction failed"
+            "error": "領取交易失敗"
         },
         "hideActivity": {
-            "success": "Successfully hidden activity",
-            "error": "Failed to hide activity"
+            "success": "成功隱藏活動",
+            "error": "隱藏活動失敗"
+        },
+        "faucetRequest": {
+            "success": "Request for tokens sent to the faucet"
+        },
+        "mintNativeToken": {
+            "success": "Native token minting transaction sent"
+        },
+        "refreshTokenMetadata": {
+            "success": "All token metadata has been reset and refreshed"
+        },
+        "restoreFromStrongholdBackup": {
+            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+        },
+        "findShimmerRewards": {
+            "success": "Successfully found Shimmer rewards",
+            "error": "An error occurred while searching for rewards"
+        },
+        "claimShimmerRewards": {
+            "success": "Successfully claimed Shimmer rewards",
+            "error": "An error occurred while claiming rewards"
         }
     },
     "error": {
@@ -1307,7 +1352,7 @@
             "length": "您的 PIN 碼必須符合長度 {length, plural, one {# 位數} other {# 位數}}",
             "match": "PIN 碼不相符",
             "incorrect": "您輸入的 PIN 碼不正確",
-            "invalid": "Invalid PIN code."
+            "invalid": "無效的 PIN 碼"
         },
         "account": {
             "length": "您的錢包名稱長度不能超過 {length, plural, one {# 字元} other {# 字元}}。",
@@ -1322,9 +1367,9 @@
             "index": "您的帳戶索引必須是0至2,147,483,647之間的數字。",
             "page": "您的帳戶頁面必須是0至2,147,483,647之間的數字。",
             "syncing": "同步您的錢包時發生錯誤。",
-            "cannotRemove": "Unable to remove wallet.",
-            "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "cannotRemove": "無法移除錢包。",
+            "withBalance": "您必須先轉出全部餘額，然後才能刪除此錢包。",
+            "notLast": "您只能刪除最後一個錢包。"
         },
         "send": {
             "addressLength": "地址長度應符合 {length, plural, one {# 字元} other {# 字元}}。",
@@ -1343,7 +1388,7 @@
             "leavingDust": "您的地址不能少於1Mi。",
             "cancelled": "交易取消。",
             "transaction": "交易發生錯誤，請重試。",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "您選擇的 失效日期/時間 為無效的"
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
@@ -1359,9 +1404,9 @@
             "answer": "無法向所有節點取得回應。",
             "forbidden": "此節點連結已被禁用。",
             "pluginNotAvailable": "在目前的節點上無法使用 \"{nodePlugin}\" 插件。",
-            "unabledToConnect": "Unable to connect to the node",
-            "differentNetwork": "The node is located on a different network",
-            "duplicateNodes": "Unable to add duplicate node"
+            "unabledToConnect": "無法連接至節點",
+            "differentNetwork": "此節點位於其他網路",
+            "duplicateNodes": "無法添加重複的節點"
         },
         "network": {
             "mismatch": "此節點的Network ID為: \"{networkId}\"`，與當前網路不相符。",
@@ -1390,7 +1435,7 @@
             "mnemonicMismatch": "您似乎連到錯的 Ledger 裝置或是已更改註記詞",
             "notDetected": "偵測不到 Ledger 裝置",
             "notFound": "找不到 Ledger 裝置",
-            "otherConnected": "The wrong app is open on your Ledger device.",
+            "otherConnected": "您在 Ledger裝置 開啟了錯誤的應用程式",
             "generateAddress": "產生地址時發生錯誤",
             "timeout": "您的 Ledger 裝置已逾時。",
             "disconnected": "您的 Ledger 裝置已斷線。",
@@ -1416,7 +1461,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "您選擇的 失效日期/時間 為無效的"
         },
         "node": {
             "http": "透過 HTTP 未加密連接來使用節點，可能會造成安全性風險。"
@@ -1458,7 +1503,7 @@
             "internal": "内部的",
             "rawValue": "原始數值",
             "formattedValue": "格式化數值",
-            "date": "Date",
+            "date": "日期",
             "time": "時間"
         }
     },
@@ -1467,7 +1512,7 @@
             "warningText": "您正在使用開發者設定檔連結至 {networkName}"
         },
         "networkIndicator": {
-            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
+            "warningText": "現在網路運作效能較差，訊息、交易可能會花較久時間確認。"
         }
     },
     "permissions": {
@@ -1477,59 +1522,74 @@
         }
     },
     "tabs": {
-        "wallet": "Wallet",
-        "staking": "Staking"
+        "wallet": "錢包",
+        "staking": "質押",
+        "developer": "Developer"
     },
     "pills": {
         "stake": {
             "Pending": "staking for",
             "Confirmed": "staked for",
-            "Conflicting": "failed to stake"
+            "Conflicting": "質押失敗"
         },
-        "internalTransaction": {
-            "in": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+        "transaction": {
+            "internal": {
+                "in": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "out": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
             },
-            "out": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+            "external": {
+                "in": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "out": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
             }
         },
-        "externalTransaction": {
+        "minting": {
             "in": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             },
             "out": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             }
         },
         "migrate": {
             "Pending": "migrating for",
             "Confirmed": "migrated for",
-            "Conflicting": "failed to migrate"
+            "Conflicting": "遷移失敗"
         },
         "asyncStatus": {
-            "unclaimed": "unclaimed",
-            "claimed": "claimed",
-            "expired": "expired"
+            "unclaimed": "未領取",
+            "claimed": "已領取",
+            "expired": "逾期"
         }
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "No expiration time",
-            "1hour": "In 1 hour",
-            "1day": "In 1 day",
-            "1week": "In 1 week",
+            "none": "沒有期限",
+            "1hour": "1小時內",
+            "1day": "1天內",
+            "1week": "1週內",
             "customDate": {
-                "title": "Custom date",
-                "subtitle": "Set custom expiry date"
+                "title": "自訂時限",
+                "subtitle": "自訂逾期時間"
             }
         }
     }

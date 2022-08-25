@@ -1,102 +1,194 @@
 {
     "views": {
-        "onboarding1": {
-            "title": "Send, Receive & Manage your {protocol} tokens",
-            "body": "Firefly là phần mềm ví chính thức của IOTA."
-        },
-        "legal": {
-            "title": "Chính sách Riêng tư & Điều khoản Dịch vụ",
-            "body": "Vui lòng xem lại Chính sách Bảo mật và Điều khoản Dịch vụ.",
-            "checkbox": "Tôi đã đọc và tôi chấp nhận Chính sách Riêng tư & Điều khoản Dịch vụ"
-        },
-        "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Giúp những nhà phát triển cải thiên Firefly bằng cách tự động gửi dữ liệu chẩn đoán khi một lỗi hoặc sự cố xảy ra.",
-            "checkbox": "Gửi các báo cáo sự cố đến IOTA Foundation"
-        },
-        "languageAndAppearance": {
-            "title": "Language & appearance",
-            "body": "Choose your language and theme"
-        },
-        "profile": {
-            "title": "Create your {protocol} profile",
-            "profileName": "Tên hồ sơ",
-            "body1": "Bạn có thể tạo nhiều hồ sơ người dùng để giữ các mã token của bạn riêng biệt và cải thiện quyền riêng tư.",
-            "body2": {
-                "first": "Bây giờ, hãy bắt đầu với tên hồ sơ đầu tiên của bạn",
-                "nonFirst": "Bây giờ, hãy bắt đầu với tên hồ sơ của bạn"
-            },
-            "addMore": "Bạn có thể thêm nhiều hồ sơ sau này.",
-            "advancedOptions": "Tùy chọn nâng cao",
-            "developer": {
-                "label": "Hồ sơ nhà phát triển",
-                "info": "Kết nối đến devnet hoặc một mạng riêng tư"
-            }
-        },
-        "setup": {
-            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-            "chrysalisTitle": "Cập nhật mạng lưới Chrysalis",
-            "chrysalisBody": "Từ ngày 21 tháng 4 năm 2021, người dùng có thể di chuyển token của họ tới mạng lưới mới Chrysalis. Chúng tôi khuyến nghị bạn di chuyển những token của bạn sớm nhất có thể.",
-            "learnMore": "Tìm hiểu về quá trình di chuyển token"
-        },
-        "secure": {
-            "title": "Bảo mật ví của bạn",
-            "body1": "Lưu và in mẫu PDF của Bộ Khôi phục.",
-            "body2": "Nếu bạn đã điền vào Bộ Khôi phục và cất giữ nó một cách an toàn, bạn sẽ luôn luôn có thể khôi phục các ví của bạn."
-        },
-        "create": {
-            "title": "Khởi tạo ví",
-            "body": "Khởi tạo một ví mới. Bạn có thể chọn một phần mềm ví thông thường hoặc nếu bạn có thiết bị Ledger bạn có thể thiết lập một ví cứng.",
-            "softwareAccount": {
-                "title": "Create a software wallet",
-                "description": "Provides a Stronghold file and recovery phrase"
-            },
-            "ledgerAccount": {
-                "title": "Create a hardware wallet",
-                "description": "Ledger Nano S hoặc Nano X được yêu cầu"
-            }
-        },
-        "protocol": {
-            "title": "Choose protocol",
-            "body": "Set the protocol for your profile",
-            "iota": "IOTA Mainnet",
-            "shimmer": "Staging network for IOTA Mainnet"
-        },
-        "network": {
-            "title": "Choose network",
-            "body": "Set the network for your profile",
-            "iota": {
-                "mainnet": {
-                    "title": "Mainnet",
-                    "body": "IOTA Mainnet"
+        "onboarding": {
+            "appSetup": {
+                "welcome": {
+                    "title": "Send, Receive & Manage your {protocol} tokens",
+                    "body": "Firefly is the official wallet software for {protocol}."
                 },
-                "devnet": {
-                    "title": "Devnet",
-                    "body": "Developer network for IOTA"
+                "legal": {
+                    "title": "Privacy Policy & Terms of Service",
+                    "body": "Please review the Privacy Policy and Terms of Service.",
+                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with active TIPS"
+                "languageAndAppearance": {
+                    "title": "Language & appearance",
+                    "body": "Choose your language and theme."
                 }
             },
-            "shimmer": {
-                "mainnet": {
-                    "title": "Shimmer",
-                    "body": "Staging network for IOTA"
+            "networkSetup": {
+                "chooseProtocol": {
+                    "title": "Choose protocol",
+                    "body": "Set the protocol for your profile.",
+                    "iota": "Default IOTA network",
+                    "shimmer": "Experimental IOTA staging network"
                 },
-                "devnet": {
-                    "title": "Shimmer Beta",
-                    "body": "Beta network for Shimmer"
+                "chooseNetwork": {
+                    "title": "Choose network",
+                    "body": "Set the network for your profile.",
+                    "iota": {
+                        "mainnet": {
+                            "title": "Mainnet",
+                            "body": "IOTA Mainnet"
+                        },
+                        "devnet": {
+                            "title": "Devnet",
+                            "body": "Developer network for IOTA"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with active TIPs"
+                        }
+                    },
+                    "shimmer": {
+                        "mainnet": {
+                            "title": "Shimmer",
+                            "body": "Staging network for IOTA"
+                        },
+                        "devnet": {
+                            "title": "Testnet",
+                            "body": "Public beta network for Shimmer"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with draft TIPs"
+                        }
+                    }
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with draft TIPS"
+                "setupPrivateNetworkConnection": {
+                    "title": "Connect to a private network",
+                    "body": "Fill the form with the node information and connect to a private network."
                 }
+            },
+            "profileSetup": {
+                "setup": {
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "chrysalisTitle": "TODO TODO TODO",
+                    "chrysalisBody": "TODO TODO TODO TODO TODO",
+                    "learnMore": "Learn about the Shimmer network"
+                },
+                "setupNew": {
+                    "title": "Create a profile",
+                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "softwareAccount": {
+                        "title": "Create a software profile",
+                        "description": "Provides a Stronghold file and recovery phrase"
+                    },
+                    "ledgerAccount": {
+                        "title": "Create a hardware profile",
+                        "description": "Ledger Nano S or Nano X required"
+                    }
+                },
+                "setupRecovered": {
+                    "title": "Recover {protocol} profile",
+                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
+                    "importMnemonic": "Use recovery phrase",
+                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
+                    "importFile": "Use Stronghold backup",
+                    "importFileDescription": "Import your Stronghold backup file",
+                    "importLedger": "Use Ledger device",
+                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                },
+                "setupClaimed": {
+                    "title": "Claim Shimmer staking rewards",
+                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                },
+                "enterName": {
+                    "title": "Create your {protocol} profile",
+                    "profileName": "Profile name",
+                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "body2": {
+                        "first": "For now, let's start with your first profile name.",
+                        "nonFirst": "For now, let's start with your profile name."
+                    },
+                    "addMore": "You can add more profiles later."
+                }
+            },
+            "strongholdSetup": {
+                "setupStrongholdPassword": {
+                    "title": "Create a password",
+                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                }
+            },
+            "storageProtectionSetup": {
+                "setupPinProtection": {
+                    "title": "Set up PIN code",
+                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+                    "body2": "Use numbers only"
+                }
+            },
+            "profileBackup": {
+                "backupMnemonic": {
+                    "title": "Back up your recovery phrase",
+                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                },
+                "viewMnemonic": {
+                    "title": "Recovery phrase",
+                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+                    "body2": "Keep this private and safely stored.",
+                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+                    "revealRecoveryPhrase": "Reveal recovery phrase",
+                    "hideRecoveryPhrase": "Hide recovery phrase"
+                },
+                "verifyMnemonic": {
+                    "title": "Verify recovery phrase",
+                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
+                    "word": "Word",
+                    "verified": "Recovery phrase verified",
+                    "verifiedBody": "Remember to keep it private and safely stored."
+                },
+                "backupStronghold": {
+                    "title": "Back up to a Stronghold file",
+                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
+                    "body2": "Reasons why digital backups are important:",
+                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
+                    "reason2": "Import your wallets on other devices",
+                    "reason3": "Recover your full transaction history"
+                }
+            },
+            "profileRecovery": {
+                "importMnemonicPhrase": {
+                    "title": "Enter your recovery phrase",
+                    "body": "A recovery phrase is 24 words long, all lower case, with sapces between. This is used to recover existing Firefly profiles.",
+                    "enter": "Enter your secret recovery phrase",
+                    "phraseDetected": "24 word recovery phrase detected"
+                },
+                "importStrongholdBackup": {
+                    "title": "Import your Stronghold backup",
+                    "body": "Import a Stronghold backup file to restore your profile."
+                },
+                "backupPassword": {
+                    "body1": "Please enter your backup password.",
+                    "body2": "This is the password you set when you first created your backup."
+                },
+                "success": {
+                    "title": "You have successfully recovered your backup",
+                    "body": "You can now set up your new profile."
+                }
+            },
+            "shimmerClaiming": {
+                "claimRewards": {
+                    "title": "Your Shimmer staking rewards",
+                    "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+                },
+                "success": {
+                    "title": "Rewards claimed",
+                    "body": "You have successfully claimed Shimmer tokens for your new profile.",
+                    "totalRewards": "Total rewards"
+                }
+            },
+            "congratulations": {
+                "title": "Profile setup complete",
+                "fundsMigrated": "Funds migrated",
+                "body": "Your new profile is ready to use.",
+                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+                "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+                "exportMigration": "Export migration log and finish setup"
             }
-        },
-        "customNetwork": {
-            "title": "Connect to a custom network",
-            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "Kết nối Ledger của bạn",
@@ -108,116 +200,9 @@
         },
         "ledgerInstallationGuide": {
             "title": "Bạn đã cài đặt một ứng dụng Ledger cần thiết chưa?",
-            "body1": "Trước khi bạn tiếp tục, bạn phải tìm và cài đặt cả ứng dụng {legacy} và ứng dụng IOTA mới thông qua Ledger Live.",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Đảm bảo rằng phần mềm Ledger của bạn được cật nhật. Mọi ứng dụng được cài đặt sẵn nên được cật nhật lên phiên bản mới nhất.",
             "action": "Có, tôi đã cài đặt những ứng dụng này"
-        },
-        "password": {
-            "title": "Tạo mật khẩu",
-            "body1": "Bạn cần một mật khẩu mạnh để bảo vệ tiền của mình. Sử dụng kết hợp giữa các từ, và tránh dùng những cụm từ phổ biến, tên hoặc ngày tháng.",
-            "body2": "Nên viết mật khẩu của bạn xuống trong Bộ Khôi phục."
-        },
-        "protect": {
-            "title": "Protect your wallet",
-            "body1": "Thiết lập mật mã cá nhân (PIN) để chắc chắn rằng chỉ có bạn mới có thể vào hồ sơ của mình.",
-            "body2": "Giữ mã PIN của bạn an toàn!"
-        },
-        "setupPin": {
-            "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
-        },
-        "backup": {
-            "title": "Sao lưu ví của bạn",
-            "body1": "Bây giờ bạn sẽ được xem cụm từ khôi phục. Viết chúng xuống trong Bộ Khôi phục của bạn.",
-            "body2": "Không chia sẻ cụm từ khôi phục của bạn với bất kỳ ai. Cụm từ này được sử dụng để truy cập vào token của bạn từ bất kỳ nơi nào.",
-            "body3": "Nếu bạn làm mất cụm từ khôi phục tài khoản ví, bạn có thể sẽ bị mất tiền của mình."
-        },
-        "recoveryPhrase": {
-            "title": "Cụm từ hồi phục tài khoản ví",
-            "body1": "Trong Bộ Khôi phục, viết các từ xuống chính xác theo đúng thứ tự của chúng.",
-            "body2": "Cất giữ cụm từ này một cách riêng tư và an toàn.",
-            "body3": "Rất là quan trọng để viết tay các sao lưu xuống. Máy tính đôi khi bị hỏng hóc và các tập tin có thể bị hư hại.",
-            "revealRecoveryPhrase": "Hiển thị cụm từ khôi phục ví",
-            "hideRecoveryPhrase": "Ẩn cụm từ khôi phục ví"
-        },
-        "verifyRecoveryPhrase": {
-            "title": "Xác thực cụm từ phục hồi tài khoản ví",
-            "body": "Hãy kiểm tra lại cụm từ đã được viết xuống một cách chính xác. Chọn các từ theo đúng thứ tự của chúng.",
-            "word": "Từ",
-            "verified": "Cụm từ khôi phục đã được xác thực",
-            "verifiedBody": "Nhớ lưu giữ nó ở nơi riêng tư và được lưu trữ an toàn."
-        },
-        "backupWallet": {
-            "title": "Sao lưu vào tập tin Stronghold",
-            "body1": "Nhập mật khẩu ví của bạn để sao lưu các ví của bạn vào tập tin Stronghold. Mật khẩu của bạn sẽ được sử dụng để mã hóa bản sao lưu.",
-            "body2": "Những lý do tại sao những bản sao lưu kỹ thuật số là quan trọng:",
-            "reason1": "Dễ dàng khôi phục các ví của bạn mà không cần phải nhập cụm ký tự khôi phục",
-            "reason2": "Nhập các ví của bạn trên những thiết bị khác",
-            "reason3": "Khôi phục toàn bộ lịch sử giao dịch của bạn"
-        },
-        "recoveryPhraseSaved": {
-            "title": "Sao lưu thành công",
-            "body": "Bạn đã sao lưu các ví của bạn vào Stronghold."
-        },
-        "claimRewards": {
-            "title": "Your Shimmer staking rewards",
-            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
-        },
-        "congratulations": {
-            "title": "Ví đã được thiết lập hoàn tất",
-            "fundsMigrated": "Tài sản đã được chuyển",
-            "body": "Ví mới của bạn đã sẵn sàng để sử dụng.",
-            "softwareMigratedBody": "Bạn đã chuyển thành công tài sản của bạn lên mạng mới",
-            "fireflyLedgerBody": "Tài khoản Ledger của bạn đã được khôi phục thành công và bạn có thể tiếp tục bây giờ.",
-            "trinityLedgerBody": "Bạn đã chuyển thành công Ledger của bạn lên mạng mới.",
-            "exportMigration": "Xuất nhật ký di chuyển và hoàn tất thiết lập"
-        },
-        "import": {
-            "title": {
-                "iota": "Recover or migrate IOTA funds",
-                "shimmer": "Recover Shimmer profile"
-            },
-            "body": {
-                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
-            },
-            "importSeed": "Tôi có một cụm 81 ký tự",
-            "importSeedDescription": "Nhập cụm ký tự và chuyển tài sản tới Chrysalis",
-            "importMnemonic": "Use recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase",
-            "importFile": {
-                "iota": "Use backup file",
-                "shimmer": "Use Stronghold backup file"
-            },
-            "importFileDescription": {
-                "iota": "Upload a Seedvault or Stronghold file",
-                "shimmer": "Upload Stronghold file"
-            },
-            "importLedger": "Use Ledger hardware device",
-            "importLedgerDescription": {
-                "iota": "Restore or migrate a Ledger profile",
-                "shimmer": "Restore using Nano S or Nano X devices"
-            }
-        },
-        "importFromText": {
-            "seed": {
-                "title": "Nhập ký tự của bạn để bắt đầu chuyển",
-                "body": "Một cụm ký tự bao gồm 81 ký tự. Nó được dùng để khôi phục từ ứng dụng Trinity cũ.",
-                "enter": "Nhập cụm ký tự của bạn"
-            },
-            "mnemonic": {
-                "title": "Nhập cụm từ khôi phục của bạn",
-                "body": "Cụm từ khôi phục dài 24 từ, tất cả đều là chữ thường, có khoảng cách giữa. Cái này được sử dụng để khôi phục ví Firefly hiện có.",
-                "enter": "Nhập cụm từ khôi phục bí mật của bạn"
-            },
-            "seedDetected": "Đã phát hiện cụm 81 ký tự",
-            "phraseDetected": "24 cụm từ khôi phục được phát hiện",
-            "checksum": "Tổng kiểm tra"
-        },
-        "importFromFile": {
-            "title": "Khôi phục ví của bạn bằng tệp sao lưu",
-            "body": "Nhập tệp sao lưu để khôi phục ví của bạn. Bản sao lưu có thể là Stronghold (.stronghold) hoặc Trinity SeedVault (.kdbx)."
         },
         "importFromLedger": {
             "title": "Khôi phục hoặc di chuyển Ledger của bạn",
@@ -268,82 +253,6 @@
             "takingAWhile": "Việc này sẽ mất một lúc ...",
             "notGeneratingAddresses": "Ledger của bạn có đang tạo địa chỉ không?",
             "reinstallLegacy": "Nếu không, hãy ngắt kết nối thiết bị và thử lại. Nếu sự cố vẫn tiếp diễn, bạn có thể cần phải cài đặt lại ứng dụng {legacy}."
-        },
-        "importBackupPassword": {
-            "body1": "Vui lòng nhập mật khẩu sao lưu của bạn.",
-            "body2": "Đây là mật khẩu bạn đã đặt khi tạo bản sao lưu lần đầu tiên."
-        },
-        "importSuccess": {
-            "title": "Bạn đã khôi phục sao lưu của mình thành công",
-            "body": "Bây giờ bạn có thể thiết lập hồ sơ mới của mình."
-        },
-        "migrate": {
-            "title": "Chuyền tài sản của bạn",
-            "body1": "Đây là một quy trình tự động để chuyển tài sản của bạn sang ví mới của bạn.",
-            "body2": "Nó có thể mất một khoảng thời gian. Không tắt thiết bị của bạn trong quá trình chuyển tiền.",
-            "existing": "Ví cũ của bạn",
-            "new": "Ví mới của bạn",
-            "learn": "Learn about the migration",
-            "beginMigration": "Bắt đầu di chuyển",
-            "migrating": "Đang chuyển tài sản...",
-            "migrated": "{balance} đã chuyển",
-            "migrationFailed": "Chuyển không thành công",
-            "noAddressesForMigration": "Vui lòng chọn địa chỉ bạn muốn bảo mật.",
-            "restoringWallet": "Đang khôi phục ví...",
-            "findingBalance": "Đang tìm kiếm số dư ví...",
-            "incorrectSeedVaultPassword": "Sai mật khẩu SeedVault.",
-            "noDataSeedVault": "Không có dữ liệu được tìm thấy trong SeedVault.",
-            "signingBundle": "Đang ký gói",
-            "broadcastingBundle": "Đang phát gói",
-            "miningBundle": "Đang khai khác gói",
-            "problemRestoringWallet": "Có một mạng lỗi khi đang khôi phục lại ví của bạn. Xin vui lòng thử lại.",
-            "minimumMigrationAmountSpentAddresses": "Số lượng tối thiểu để chuyển cho mỗi địa chỉ đã chi tiêu là 1 Mi. Kiểm tra lại nếu số dư ví không đúng.",
-            "tooManyAddressesToMigrate": "Bạn có quá nhiều địa chỉ với số dư ví thấp để chuyển. Kiểm tra lại nếu tổng số dư của bạn không đúng.",
-            "cannotMigrateAllYourFunds": "Chúng tôi không thể di chuyển toàn bộ tài sản của bạn vì một số địa chỉ có giá trị quá thấp. Bạn có thể tiếp tục. {value} sẽ bị mất.",
-            "error": "Đã có lỗi khi đang chuyển tài sản của bạn. Xin vui lòng thử lại."
-        },
-        "bundleMiningWarning": {
-            "title": "Cảnh báo",
-            "body1": "Bạn có tài sản trên một hoặc nhiều địa chỉ đã chi tiêu.",
-            "body2": "Chúng tôi khuyến nghị bạn chạy một quy trình tự động để giúp bảo mật và di chuyển những tài sản này an toàn.",
-            "body3": "Nếu bạn đóng ứng dụng bạn sẽ cần khởi chạy lại toàn bộ quá trình chuyển.",
-            "learn": "Tìm hiểu về các địa chỉ ví đã chi tiêu"
-        },
-        "secureSpentAddresses": {
-            "title": "Bảo mật các địa chỉ ví đã chi tiêu",
-            "body1": "Bạn có những tài sản được phát hiện trên  {number, plural, one {# các địa chỉ ví đã chi tiêu} other {# các địa chỉ ví đã chi tiêu}}.",
-            "body2": "Chúng tôi khuyến nghị bạn chạy một quy trình tự động để giúp bảo mật và di chuyển những tài sản của bạn an toàn.",
-            "error": "Bạn không thể chuyển các địa chỉ ví đã chi tiêu với ít hơn 1 Mi"
-        },
-        "securityCheckCompleted": {
-            "title": "Xác minh bảo mật thành công",
-            "body1": "Chúng tôi đã tính toán mức độ rủi ro bảo mật. Khởi chạy quy trình này lần nữa có thể làm giảm mức độ rủi ro của bạn.",
-            "body2": "Khi bạn hài lòng với mức độ rủi ro (s) nhấn tiếp tục.",
-            "rerun": "Chạy lại quy trình cho các địa chỉ đã lựa chọn",
-            "continueMigration": "Tiếp tục chuyển"
-        },
-        "securingSpentAddresses": {
-            "title": "Bảo mật các địa chỉ ví đã chi tiêu...",
-            "body1": "Quy trình này sẽ mất {minutes, plural, one {1 phút} other {# phút}}.",
-            "body2": "Máy tính của bạn sẽ chạy hết công suất, bạn có thể làm việc khác trong khi bạn đợi quá trình này hoàn tất."
-        },
-        "transferFragmentedFunds": {
-            "body1": "Ví Firefly sẽ tiến hành chuyển các tài sản của bạn bây giờ. Quá trình này có thể mất một lát.",
-            "body2": "Đảm bảo Ledger của bạn đã được kết nối và ứng dụng {legacy} luôn mở trong quá trình chuyển.",
-            "migrate": "Chuyển tài sản",
-            "transaction": "Giao dịch {number}",
-            "rerun": "Try again"
-        },
-        "migrateFailed": {
-            "title": "To do",
-            "body": "To do"
-        },
-        "balance": {
-            "title": "Số dư của bạn",
-            "body": "Đảm bảo số dư ví của bạn chính xác trước khi tiếp tục. Bạn có thể kiểm tra lại nếu những điều này không chính xác.",
-            "error": "Số lượng tối thiểu để chuyển cho mỗi địa chỉ đã chi tiêu là 1 Mi. Kiểm tra lại nếu số dư ví không đúng.",
-            "zeroBalance": "Hãy thử kiểm tra lại. Nếu bạn vẫn không tìm thấy số dư của mình, bạn có thể nhập cụm ký tự không chính xác.",
-            "zeroBalanceLedgerLegacy": "Hãy thử kiểm tra lại. Nếu bạn vẫn không tìm thấy số dư của mình, bạn có thể chọn sai mục tài khoản."
         },
         "settings": {
             "settings": "Cấu hình",
@@ -458,7 +367,8 @@
                 "includeNode": "Nút bao gồm",
                 "editDetails": "Chỉnh sửa chi tiết",
                 "viewInfo": "Xem thông tin",
-                "setAsPrimary": "Đặt làm chính",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
                 "removeNode": "Xóa nút",
                 "includeOfficialNodeList": "Bao gồm danh sách nút chính thức",
                 "noNodes": "Không có nút, không thể kết nối với mạng",
@@ -524,6 +434,19 @@
             "pleaseWait": "Vui lòng đợi {time, plural, one {# giây} other {# giây}}",
             "incorrectAttempts": "{attempts, plural, one {# lần thử sai} other {# lần thử sai}}"
         },
+        "loadProfile": {
+            "loginSteps": {
+                "buildProfileManager": "Initialising profile manager",
+                "updateNodeInfo": "Checking node health",
+                "recoverAccounts": "Generating accounts",
+                "loadAccounts": "Syncing accounts",
+                "loadAssets": "Loading native assets",
+                "loadActivities": "Building activity history",
+                "setStrongholdStatus": "Securing stronghold",
+                "startBackgroundSync": "Starting background sync",
+                "loggingIn": "Loading dashboard"
+            }
+        },
         "dashboard": {
             "network": {
                 "operational": "Network operational",
@@ -545,9 +468,8 @@
                 "hardware": {
                     "title": "Thiết bị phần cứng",
                     "statuses": {
-                        "appNotOpen": "Ứng dụng IOTA không mở",
+                        "appNotOpen": "{protocol} app not open",
                         "connected": "Đã kết nối",
-                        "legacyConnected": "Ứng dụng phiên bản cũ đang mở",
                         "locked": "Đã khóa",
                         "mnemonicMismatch": "Sai Ledger hoặc Mnemonic",
                         "notDetected": "Không phát hiện được",
@@ -679,6 +601,14 @@
             "internal": "Địa chỉ nội bộ",
             "external": "Địa chỉ nạp"
         },
+        "excludeNode": {
+            "title": "Exclude node",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
+        },
+        "unsetAsPrimaryNode": {
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
+        },
         "node": {
             "titleAdd": "Thêm Node",
             "titleUpdate": "Cật nhật một nút",
@@ -695,7 +625,6 @@
             "optionalJwt": "Token web JSON (tùy chọn)",
             "setAsPrimaryNode": "Thiết lập node chính",
             "removeConfirmation": "Bạn có chắc chắn muốn xóa nút này không?",
-            "removeAllConfirmation": "Bạn có chắc chắn muốn xóa tất cả các nút không?",
             "info": {
                 "general": {
                     "tab": "General",
@@ -793,8 +722,7 @@
             "bodyFirefly": "Firefly bị vô hiệu hóa cho tới khi hoàn tất. Token vẫn có thể di chuyển sau đó."
         },
         "ledgerNotConnected": {
-            "connect": "Mở ứng dụng IOTA mới trên thiết bị Ledger của bạn để tiếp tục",
-            "connectLegacy": "Mở ứng dụng {legacy} trên thiết bị Ledger của bạn để tiếp tục"
+            "connect": "Open the {protocol} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "Để tiến hành, xác nhận lời nhắc được hiển thị trên thiết bị Ledger"
@@ -906,6 +834,38 @@
         },
         "sendForm": {
             "title": "Send funds"
+        },
+        "tokenInformation": {
+            "newTokenTitle": "New token",
+            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "tokenMetadata": {
+                "standard": "Standard",
+                "name": "Name",
+                "tokenId": "Token ID",
+                "url": "URL"
+            },
+            "buttons": {
+                "verifyToken": "I verify this token"
+            }
+        },
+        "mintNativeTokenForm": {
+            "title": "Mint native tokens",
+            "inputs": {
+                "totalSupply": "Total Supply",
+                "circulatingSupply": "Circulating Supply",
+                "standard": "Standard",
+                "name": "Name",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
+                "url": "URL",
+                "logoUrl": "Logo URL",
+                "logo": "Logo"
+            }
+        },
+        "faucetRequest": {
+            "title": "Faucet request",
+            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
     },
     "charts": {
@@ -981,7 +941,7 @@
         "export": "Xuất",
         "exporting": "Đang xuất",
         "exportNewStronghold": "Xuất ra Stronghold",
-        "enableDeepLinks": "Thiết lập các liên kết IOTA",
+        "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "Bật chế độ nhà phát triển",
         "enableSystemNotifications": "Cho phép thông báo",
         "exportTransactionHistory": "Export transaction history",
@@ -996,9 +956,10 @@
         "deleteAccount": "Delete wallet",
         "max": "Tối đa",
         "addNode": "Thêm Node",
+        "addingNode": "Adding node",
+        "addOfficialNodes": "Add official nodes",
         "updateNode": "Cập nhật Nút",
         "removeNode": "Xóa nút",
-        "removeAllNodes": "Remove all nodes",
         "hide": "Ẩn",
         "hideOthers": "Ẩn các mục khác",
         "showAll": "Hiện tất cả",
@@ -1034,8 +995,8 @@
         "findWallets": "Find wallets",
         "useBalanceFinder": "Use balance finder",
         "search": "Search",
-        "searchAgain": "Tìm kiếm lại",
         "searching": "Searching",
+        "searchAgain": "Tìm kiếm lại",
         "closeFirefly": "Đóng Firefly",
         "generateAddress": "Generate address",
         "migrateAgain": "Chuyển danh mục khác",
@@ -1051,11 +1012,21 @@
         "done": "Hoàn thành",
         "okIUnderstand": "OK, I understand",
         "readMore": "Read more",
+        "searchForRewards": "Search for rewards",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
-        "backup": "Backup"
+        "backup": "Backup",
+        "mint": "Mint",
+        "mintNativeToken": "Mint native token",
+        "verifyToken": "Verify token",
+        "unverifyToken": "Unverify token",
+        "hideToken": "Hide token",
+        "unhideToken": "Unhide token",
+        "burnToken": "Burn token",
+        "faucetRequest": "Get {token} tokens",
+        "refreshTokenMetadata": "Refresh token metadata"
     },
     "general": {
         "recipient": "Recipient",
@@ -1071,6 +1042,8 @@
         "received": "Đã nhận",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "minted": "Minted",
+        "minting": "Minting",
         "sendPayment": "Gửi thanh toán",
         "moveFunds": "Chuyển khoản nội bộ",
         "sendTo": "Gửi đến",
@@ -1088,6 +1061,7 @@
         "reference": "Tham chiếu",
         "from": "Từ",
         "to": "Đến",
+        "and": "and",
         "receiveFunds": "Receive funds",
         "address": "Address",
         "myAddress": "Địa chỉ của tôi",
@@ -1143,6 +1117,7 @@
         "loadingAccounts": "Đang tải, vui lòng chờ...",
         "addProfile": "Thêm cấu hình",
         "noRecentHistory": "Không có lịch sử gần đây",
+        "noAssets": "No assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "Đang đồng bộ hóa lịch sử, quá trình này có thể mất một lúc...",
@@ -1208,6 +1183,7 @@
         "accountColor": "Wallet color",
         "transactionTime": "Transaction time",
         "storageDeposit": "Storage deposit",
+        "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
@@ -1218,7 +1194,56 @@
         "tag": "Tag",
         "nodeList": "Node list",
         "claimingTransactionId": "Claimed in",
-        "assets": "Assets"
+        "assets": "Assets",
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
+        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded"
+    },
+    "filters": {
+        "title": "Filters",
+        "showHidden": {
+            "label": "Show hidden",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "showRejected": {
+            "label": "Show rejected",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "verificationStatus": {
+            "label": "Verification status",
+            "new": "New",
+            "notVerified": "Not verified",
+            "verified": "Verified"
+        },
+        "asset": {
+            "label": "Assets"
+        },
+        "amount": {
+            "label": "Amount",
+            "equal": "is equal to",
+            "range": "is between",
+            "greater": "is greater than",
+            "less": "is less than"
+        },
+        "status": {
+            "label": "Status",
+            "confirmed": "confirmed",
+            "pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "non-claimed"
+        },
+        "type": {
+            "label": "Type",
+            "incoming": "incoming",
+            "outgoing": "outgoing",
+            "internal": "internal"
+        }
     },
     "dates": {
         "today": "Ngày hôm nay",
@@ -1276,6 +1301,26 @@
         "hideActivity": {
             "success": "Successfully hidden activity",
             "error": "Failed to hide activity"
+        },
+        "faucetRequest": {
+            "success": "Request for tokens sent to the faucet"
+        },
+        "mintNativeToken": {
+            "success": "Native token minting transaction sent"
+        },
+        "refreshTokenMetadata": {
+            "success": "All token metadata has been reset and refreshed"
+        },
+        "restoreFromStrongholdBackup": {
+            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+        },
+        "findShimmerRewards": {
+            "success": "Successfully found Shimmer rewards",
+            "error": "An error occurred while searching for rewards"
+        },
+        "claimShimmerRewards": {
+            "success": "Successfully claimed Shimmer rewards",
+            "error": "An error occurred while claiming rewards"
         }
     },
     "error": {
@@ -1478,7 +1523,8 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking"
+        "staking": "Staking",
+        "developer": "Developer"
     },
     "pills": {
         "stake": {
@@ -1486,28 +1532,42 @@
             "Confirmed": "staked for",
             "Conflicting": "failed to stake"
         },
-        "internalTransaction": {
-            "in": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+        "transaction": {
+            "internal": {
+                "in": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "out": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
             },
-            "out": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+            "external": {
+                "in": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "out": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
             }
         },
-        "externalTransaction": {
+        "minting": {
             "in": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             },
             "out": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             }
         },
         "migrate": {

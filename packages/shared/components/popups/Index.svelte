@@ -51,6 +51,7 @@
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
     import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
+    import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
 
     export let locale: Locale
 
@@ -141,6 +142,7 @@
         mintNativeTokenForm: MintNativeTokenFormPopup,
         faucetRequest: FaucetRequestPopup,
         enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
+        testDeepLinkForm: TestDeepLinkFormPopup,
     }
 
     const onKey = (e) => {

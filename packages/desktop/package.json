@@ -36,7 +36,7 @@
         "electron-updater": "^4.3.5",
         "hw-app-iota": "0.6.5",
         "kdbxweb": "^1.14.4",
-        "keytar": "^7.3.0",
+        "keytar": "^7.9.0",
         "node-machine-id": "^1.1.12",
         "shared": "0.0.0"
     },

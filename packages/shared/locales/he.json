@@ -1,102 +1,194 @@
 {
     "views": {
-        "onboarding1": {
-            "title": "Send, Receive & Manage your {protocol} tokens",
-            "body": "Firefly הוא הארנק הרשמי של IOTA."
-        },
-        "legal": {
-            "title": "מדיניות הפרטיות ותנאי השירות",
-            "body": "אנא קראו בעיון את מסמכי מדיניות הפרטיות שלנו.",
-            "checkbox": "קראתי, הבנתי והסכמתי עם מדיניות הפרטיות ותנאי השירות"
-        },
-        "crashReporting": {
-            "title": "דיווח תקלות",
-            "body": "עזור למפתחים לשפר את הארנק על ידי שליחת נתונים כשתקלות מתרחשות",
-            "checkbox": "שלח דוח תקלות לצוות איוטה"
-        },
-        "languageAndAppearance": {
-            "title": "Language & appearance",
-            "body": "Choose your language and theme"
-        },
-        "profile": {
-            "title": "Create your {protocol} profile",
-            "profileName": "שם הפרופיל",
-            "body1": "ניתן ליצור פרופילים מרובים כדי לארגן את הארנקים שלך ולשפר פרטיות.",
-            "body2": {
-                "first": "בתור התחלה, נא ציין את השם הפרטי לפרופיל שלך.",
-                "nonFirst": "כעת, נא ציין את שם הפרופיל שלך."
-            },
-            "addMore": "תוכל להוסיף פרופילים נוספים בהמשך.",
-            "advancedOptions": "אפשרויות מתקדמות",
-            "developer": {
-                "label": "פרופיל מפתח",
-                "info": "התחבר לרשת המפתחים או לרשת פרטית"
-            }
-        },
-        "setup": {
-            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-            "chrysalisTitle": "עדכון רשת הChrysalis",
-            "chrysalisBody": "החל מאפריל 21, משתמשים יכולים לבצע העברה של המטבעות שלהם לרשת הקריסליס החדשה. אנו ממליצים להעביר את כל המטבעות שלך בהקדם האפשרי.",
-            "learnMore": "למד אודות ההגירה"
-        },
-        "secure": {
-            "title": "אבטח את הארנק שלך",
-            "body1": "שמור והדפס את תבנית מסמך הPDF של ערכת השחזור.",
-            "body2": "אם תמלא את פרטי ערכת השחזור ותשמור אותם בבטחה, תוכל תמיד לשחזר את הארנקים שלך."
-        },
-        "create": {
-            "title": "צור ארנק",
-            "body": "צור ארנק חדש. תוכל לבחור בארנקים תוכנתיים או אם ברשותך מכשיר Ledger תוכל להתקין ארנק חומרתי.",
-            "softwareAccount": {
-                "title": "Create a software wallet",
-                "description": "Provides a Stronghold file and recovery phrase"
-            },
-            "ledgerAccount": {
-                "title": "Create a hardware wallet",
-                "description": "דרוש Ledger Nano s או Ledger Nano X"
-            }
-        },
-        "protocol": {
-            "title": "Choose protocol",
-            "body": "Set the protocol for your profile",
-            "iota": "IOTA Mainnet",
-            "shimmer": "Staging network for IOTA Mainnet"
-        },
-        "network": {
-            "title": "Choose network",
-            "body": "Set the network for your profile",
-            "iota": {
-                "mainnet": {
-                    "title": "Mainnet",
-                    "body": "IOTA Mainnet"
+        "onboarding": {
+            "appSetup": {
+                "welcome": {
+                    "title": "Send, Receive & Manage your {protocol} tokens",
+                    "body": "Firefly is the official wallet software for {protocol}."
                 },
-                "devnet": {
-                    "title": "Devnet",
-                    "body": "Developer network for IOTA"
+                "legal": {
+                    "title": "Privacy Policy & Terms of Service",
+                    "body": "Please review the Privacy Policy and Terms of Service.",
+                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with active TIPS"
+                "languageAndAppearance": {
+                    "title": "Language & appearance",
+                    "body": "Choose your language and theme."
                 }
             },
-            "shimmer": {
-                "mainnet": {
-                    "title": "Shimmer",
-                    "body": "Staging network for IOTA"
+            "networkSetup": {
+                "chooseProtocol": {
+                    "title": "Choose protocol",
+                    "body": "Set the protocol for your profile.",
+                    "iota": "Default IOTA network",
+                    "shimmer": "Experimental IOTA staging network"
                 },
-                "devnet": {
-                    "title": "Shimmer Beta",
-                    "body": "Beta network for Shimmer"
+                "chooseNetwork": {
+                    "title": "Choose network",
+                    "body": "Set the network for your profile.",
+                    "iota": {
+                        "mainnet": {
+                            "title": "Mainnet",
+                            "body": "IOTA Mainnet"
+                        },
+                        "devnet": {
+                            "title": "Devnet",
+                            "body": "Developer network for IOTA"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with active TIPs"
+                        }
+                    },
+                    "shimmer": {
+                        "mainnet": {
+                            "title": "Shimmer",
+                            "body": "Staging network for IOTA"
+                        },
+                        "devnet": {
+                            "title": "Testnet",
+                            "body": "Public beta network for Shimmer"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with draft TIPs"
+                        }
+                    }
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with draft TIPS"
+                "setupPrivateNetworkConnection": {
+                    "title": "Connect to a private network",
+                    "body": "Fill the form with the node information and connect to a private network."
                 }
+            },
+            "profileSetup": {
+                "setup": {
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "chrysalisTitle": "TODO TODO TODO",
+                    "chrysalisBody": "TODO TODO TODO TODO TODO",
+                    "learnMore": "Learn about the Shimmer network"
+                },
+                "setupNew": {
+                    "title": "Create a profile",
+                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "softwareAccount": {
+                        "title": "Create a software profile",
+                        "description": "Provides a Stronghold file and recovery phrase"
+                    },
+                    "ledgerAccount": {
+                        "title": "Create a hardware profile",
+                        "description": "Ledger Nano S or Nano X required"
+                    }
+                },
+                "setupRecovered": {
+                    "title": "Recover {protocol} profile",
+                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
+                    "importMnemonic": "Use recovery phrase",
+                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
+                    "importFile": "Use Stronghold backup",
+                    "importFileDescription": "Import your Stronghold backup file",
+                    "importLedger": "Use Ledger device",
+                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                },
+                "setupClaimed": {
+                    "title": "Claim Shimmer staking rewards",
+                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                },
+                "enterName": {
+                    "title": "Create your {protocol} profile",
+                    "profileName": "Profile name",
+                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "body2": {
+                        "first": "For now, let's start with your first profile name.",
+                        "nonFirst": "For now, let's start with your profile name."
+                    },
+                    "addMore": "You can add more profiles later."
+                }
+            },
+            "strongholdSetup": {
+                "setupStrongholdPassword": {
+                    "title": "Create a password",
+                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                }
+            },
+            "storageProtectionSetup": {
+                "setupPinProtection": {
+                    "title": "Set up PIN code",
+                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+                    "body2": "Use numbers only"
+                }
+            },
+            "profileBackup": {
+                "backupMnemonic": {
+                    "title": "Back up your recovery phrase",
+                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                },
+                "viewMnemonic": {
+                    "title": "Recovery phrase",
+                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+                    "body2": "Keep this private and safely stored.",
+                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+                    "revealRecoveryPhrase": "Reveal recovery phrase",
+                    "hideRecoveryPhrase": "Hide recovery phrase"
+                },
+                "verifyMnemonic": {
+                    "title": "Verify recovery phrase",
+                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
+                    "word": "Word",
+                    "verified": "Recovery phrase verified",
+                    "verifiedBody": "Remember to keep it private and safely stored."
+                },
+                "backupStronghold": {
+                    "title": "Back up to a Stronghold file",
+                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
+                    "body2": "Reasons why digital backups are important:",
+                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
+                    "reason2": "Import your wallets on other devices",
+                    "reason3": "Recover your full transaction history"
+                }
+            },
+            "profileRecovery": {
+                "importMnemonicPhrase": {
+                    "title": "Enter your recovery phrase",
+                    "body": "A recovery phrase is 24 words long, all lower case, with sapces between. This is used to recover existing Firefly profiles.",
+                    "enter": "Enter your secret recovery phrase",
+                    "phraseDetected": "24 word recovery phrase detected"
+                },
+                "importStrongholdBackup": {
+                    "title": "Import your Stronghold backup",
+                    "body": "Import a Stronghold backup file to restore your profile."
+                },
+                "backupPassword": {
+                    "body1": "Please enter your backup password.",
+                    "body2": "This is the password you set when you first created your backup."
+                },
+                "success": {
+                    "title": "You have successfully recovered your backup",
+                    "body": "You can now set up your new profile."
+                }
+            },
+            "shimmerClaiming": {
+                "claimRewards": {
+                    "title": "Your Shimmer staking rewards",
+                    "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+                },
+                "success": {
+                    "title": "Rewards claimed",
+                    "body": "You have successfully claimed Shimmer tokens for your new profile.",
+                    "totalRewards": "Total rewards"
+                }
+            },
+            "congratulations": {
+                "title": "Profile setup complete",
+                "fundsMigrated": "Funds migrated",
+                "body": "Your new profile is ready to use.",
+                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+                "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
+                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+                "exportMigration": "Export migration log and finish setup"
             }
-        },
-        "customNetwork": {
-            "title": "Connect to a custom network",
-            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "חבר את הLedger שברשותך",
@@ -108,116 +200,9 @@
         },
         "ledgerInstallationGuide": {
             "title": "האם התקנת את אפליקציות הLedger הדרושות?",
-            "body1": "לפני שתמשיך, תגרש להתקין את אפליקציית {legacy} ואת האפליקציה החדשה של IOTA באמצעות Ledger Live.",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "ודא כי קושחת הLedger מעודכנת. כל אפליקציה שהותקנה צריכה להיות מעודכנת בגירסתה.",
             "action": "כן, התקנתי את האפליקציות האלו"
-        },
-        "password": {
-            "title": "צור סיסמא",
-            "body1": "בחר סיסמה חזקה על מנת לאבטח את הארנק. מומלץ להימנע משימוש של מילים, שמות או תאריכים מוכרים.",
-            "body2": "מומלץ שתרשום את הסיסמה ושמור אותה במקום בטוח."
-        },
-        "protect": {
-            "title": "Protect your wallet",
-            "body1": "הגדר קוד גישה להתחברות כדי לוודא שרק אתה תוכל להיכנס לארנק.",
-            "body2": "שמור את קוד הגישה שלך חסוי!"
-        },
-        "setupPin": {
-            "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
-        },
-        "backup": {
-            "title": "גבה את הארנק שלך",
-            "body1": "כעט יוצג לך ביטוי שחזור. רשום אותו בערכת השחזור שלך.",
-            "body2": "אל תשתף את ביטוי השחזור שלך עם אף אחד. ניתן להשתמש בו כדי לגשת למטבעות שלך מכל מקום.",
-            "body3": "אם תאבד את ביטוי השחזור שלך, אתה עלול לאבד את כספים שלך."
-        },
-        "recoveryPhrase": {
-            "title": "ביטוי שחזור",
-            "body1": "בערכת השחזור שלך, רשום את המילים בסדר המדויק המוצג.",
-            "body2": "אחסן את זה באופן פרטי ובטוח.",
-            "body3": "חשוב שיהיה גיבוי בכתב יד. מחשבים עשויים לפשל וקבצים עשויים להיפגם.",
-            "revealRecoveryPhrase": "חשוף את ביטוי השחזור",
-            "hideRecoveryPhrase": "הסתר את ביטוי השחזור"
-        },
-        "verifyRecoveryPhrase": {
-            "title": "אמת את ביטוי השחזור",
-            "body": "נבדוק שכתבת את הביטוי בצורה הנכונה. נא לבחור כל מילה לפי הסדר הממוספר שלה.",
-            "word": "מילה",
-            "verified": "ביטוי השחזור אומת",
-            "verifiedBody": "זכור לאחסן אותו במקום פרטי ובטוח."
-        },
-        "backupWallet": {
-            "title": "גבה לקובץ מבצר (Stronghold)",
-            "body1": "הזן את הסיסמה שלך כדי לגבות את הארנקים שלך לקובץ מבצר (Stronghold). יבוצע שימוש בסיסמא שלך כדי להצפין את הגיבוי.",
-            "body2": "סיבות לכך שגיבויים דיגיטליים הם חשובים:",
-            "reason1": "שחזר את הארנקים שלך בקלות מבלי לרשום את ביטויי השחזור שלך",
-            "reason2": "יבא את הארנקים שלך למכשירים אחרים",
-            "reason3": "שחזר את היסטוריית הטרנזקציות המלאה שלך"
-        },
-        "recoveryPhraseSaved": {
-            "title": "הגיבוי בוצע בהצלחה",
-            "body": "ביצעת גיבוי של הארנקים שלך למבצר (Stronghold)."
-        },
-        "claimRewards": {
-            "title": "Your Shimmer staking rewards",
-            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
-        },
-        "congratulations": {
-            "title": "הגדרת הארנק הושלמה",
-            "fundsMigrated": "הגירת הכספים בוצעה",
-            "body": "הארנק שלך מוכן לשימוש.",
-            "softwareMigratedBody": "הצלחת להעביר את כספך לרשת החדשה",
-            "fireflyLedgerBody": "משתמש הLedger שלך שוחזר בהצלחה, תוכל להמשיך כעת.",
-            "trinityLedgerBody": "הצלחת להעביר את הLedger ברשותך לרשת החדשה.",
-            "exportMigration": "יצא דוח הגירה וסיים את התהליך"
-        },
-        "import": {
-            "title": {
-                "iota": "Recover or migrate IOTA funds",
-                "shimmer": "Recover Shimmer profile"
-            },
-            "body": {
-                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
-            },
-            "importSeed": "יש ברשותי גרעין(seed) באורך 81 תווים",
-            "importSeedDescription": "הכנס גרעין (seed) והגר כספים לChrysalis",
-            "importMnemonic": "Use recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase",
-            "importFile": {
-                "iota": "Use backup file",
-                "shimmer": "Use Stronghold backup file"
-            },
-            "importFileDescription": {
-                "iota": "Upload a Seedvault or Stronghold file",
-                "shimmer": "Upload Stronghold file"
-            },
-            "importLedger": "Use Ledger hardware device",
-            "importLedgerDescription": {
-                "iota": "Restore or migrate a Ledger profile",
-                "shimmer": "Restore using Nano S or Nano X devices"
-            }
-        },
-        "importFromText": {
-            "seed": {
-                "title": "הזן את הגרעין (seed) שלך כדי להתחיל הגירה",
-                "body": "Seed מכיל 81 תווים. זה משמש לשחזר מארנק Trinity הישן יותר.",
-                "enter": "הזן את הסיד שלך"
-            },
-            "mnemonic": {
-                "title": "הזן את ביטוי השחזור שלך",
-                "body": "ביטוי שחזר הינו באורך 24 מילים, כולן באותיות קטנות, עם רווחים ביניהם. זה משמש בכדי לשחזר ארנקי Firefly קיימים.",
-                "enter": "הזן את הגרעיון (seed) או ביטוי השחזור שלך"
-            },
-            "seedDetected": "זוהה seed באורך 81 תווים",
-            "phraseDetected": "זוהה ביטוי שחזור באורך 24 מילים",
-            "checksum": "סיכום ביקורת"
-        },
-        "importFromFile": {
-            "title": "שחזר את הארנקים שלך בעזרת קובץ גיבוי",
-            "body": "יבא קובץ גיבוי כדי לשחזר את הארנקים שלך. גיבויים יכולים להיות קבצי (stronghold.) או (kdbx.)."
         },
         "importFromLedger": {
             "title": "שחזר או העבר את פרופיל הLedger שלך",
@@ -268,82 +253,6 @@
             "takingAWhile": "זה לוקח זמן...",
             "notGeneratingAddresses": "האם הארנק הקר שלך מייצר כתובות?",
             "reinstallLegacy": "אם לא, תתנתק מהארנק הקר ותנסה שוב. אם הבעיה חוזרת, יש צורך בהתקנה חוזרת."
-        },
-        "importBackupPassword": {
-            "body1": "בבקשה הזן את סיסמאת הגיבוי שלך.",
-            "body2": "זו הסיסמא שהגדרת כאשר יצרת את הגיבוי שלך לראשונה."
-        },
-        "importSuccess": {
-            "title": "שחזרת את הגיבוי שלך בהצלחה",
-            "body": "תוכל כעט להגדיר את הפרופיל החדש שלך."
-        },
-        "migrate": {
-            "title": "הגר את הכספים שלך",
-            "body1": "זה הוא תהליך אוטומטי להעברת כספים לארנק החדש שלך.",
-            "body2": "זה עשוי לקחת זמן. אל תכבה את המכשיר בזמן ההגירה.",
-            "existing": "הארנק הישן שלך",
-            "new": "הארנק החדש שלך",
-            "learn": "Learn about the migration",
-            "beginMigration": "התחל הגירה",
-            "migrating": "מבצע הגירת כספים...",
-            "migrated": "הוגרו {balance}",
-            "migrationFailed": "הגירה נכשלה",
-            "noAddressesForMigration": "אנא בחר את הכתובות שתרצה לאבטח.",
-            "restoringWallet": "משחזר ארנק...",
-            "findingBalance": "מוצא מאזן...",
-            "incorrectSeedVaultPassword": "סיסמאת SeedVault שגויה.",
-            "noDataSeedVault": "לא ניתן למצוא מידע בSeedVault.",
-            "signingBundle": "חותם חבילה",
-            "broadcastingBundle": "משדר חבילה",
-            "miningBundle": "כורה חבילה",
-            "problemRestoringWallet": "הרעה שגיאת רשת בזמן שחזור הארנק. אנא נסה שוב.",
-            "minimumMigrationAmountSpentAddresses": "הסכום המינימלי לביצוע הגירה עבור כתובת אחת הוא 1 Mi. בדוק שוב שהמאזן תקין.",
-            "tooManyAddressesToMigrate": "יש לך יותר מדי כתובות ואין מספיק יתרות על מנת לבצע. תבדוק שוב אם היתרות שלך לא נראות נכון.",
-            "cannotMigrateAllYourFunds": "איננו יכולים להגר את כל הכספים שלך בגלל שחלק מהכתובות שלך מכילות ערך נמוך מדי. תוכל להמשיך בכל מקרה. אך {value} יאבדו.",
-            "error": "הרעה שגיאה בהגירת הכספים, אנא נסה/י שוב."
-        },
-        "bundleMiningWarning": {
-            "title": "אזהרה",
-            "body1": "יש לך כספים על אחד או כמה כתובות משומשות (\"spent addresses\").",
-            "body2": "אנו ממליצים לך לבצע תהליך אוטומטי כדי לעזור לאבטח ולהעביר את הכספים האלו בבטחה.",
-            "body3": "אם תסגור את האפלקציה תצטרך להתחיל מחדש את כל תהליך ההגירה.",
-            "learn": "למד עוד אודות כתובות משומשות (\"spent addresses\")"
-        },
-        "secureSpentAddresses": {
-            "title": "אבטח כתובות משומשות (\"spent addresses\")",
-            "body1": "יש לך כספים שגולו ב {number, plural, one {# spent address} other {# spent addresses}}.",
-            "body2": "אנו ממליצים לך לבצע תהליך אוטומטי כדי לעזור לאבטח ולהעביר את הכספים שלך בבטחה.",
-            "error": "לא לניתן להגר כתובות משומשות (\"spent addresses\") עם פחות מ 1MI"
-        },
-        "securityCheckCompleted": {
-            "title": "בדיקת האבטחה הסתיימה",
-            "body1": "אנו חישבנו את רמת סיכון האבטחה. תריץ שוב ואולי הסיכון ירד אף יותר.",
-            "body2": "אם אתה מקבל את רמ(ות) הסיכון תלחץ המשך.",
-            "rerun": "הרץ שוב את התהליך לכתובות הנבחרות.",
-            "continueMigration": "המשך הגירה"
-        },
-        "securingSpentAddresses": {
-            "title": "מבצע אבטחת ארנקים...",
-            "body1": "התהליך הזה לוקח\nדקה דקות",
-            "body2": "המחשב שלך פועל בקיבולת מקסימלית, אנא המתן לסיום הפעולה."
-        },
-        "transferFragmentedFunds": {
-            "body1": "ארנק הפיירפליי כעת מבצע את הגירת הכספים שלך. זה לוקח קצת זמן.",
-            "body2": "וודא שהארנק הקר שלך מחובר וה אפליקציה {legacy} פתוחה בזמן כל ביצוע ההגירה.",
-            "migrate": "הגירת כספים",
-            "transaction": "העברה {number}",
-            "rerun": "נסה שנית"
-        },
-        "migrateFailed": {
-            "title": "To do",
-            "body": "To do"
-        },
-        "balance": {
-            "title": "היתרה שלך:",
-            "body": "אנא בדוק כי היתרה נכונה לפני ההתחלה. אתה יכול לבדוק שוב אם היא נכונה.",
-            "error": "הסכום המינימלי לביצוע הגירה הוא 1 Mi. אנא בדוק שוב.",
-            "zeroBalance": "נסה לבדוק שוב. אם אתה עדיין לא רואה את היתרה שלך כנראה שהסיד שהכנסת לא נכון.",
-            "zeroBalanceLedgerLegacy": "נסה לבדוק שוב. אם אתה עדיין לא רואה את היתרה שלך כנראה שבחרת בחשבון הלא נכון."
         },
         "settings": {
             "settings": "הגדרות",
@@ -458,7 +367,8 @@
                 "includeNode": "צומת רשת כלולה",
                 "editDetails": "ערוך פרטים",
                 "viewInfo": "ראה מידע",
-                "setAsPrimary": "הגדר כראשי",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
                 "removeNode": "Remove node",
                 "includeOfficialNodeList": "כלול רשימה רישמית של צומת רשת",
                 "noNodes": "לא נמצאו צומתי רשת, לא ניתן להתחבר לתקשורת",
@@ -524,6 +434,19 @@
             "pleaseWait": "בבקשה המתן {time, plural, one {# שנייה} other {# שניות}}",
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
+        "loadProfile": {
+            "loginSteps": {
+                "buildProfileManager": "Initialising profile manager",
+                "updateNodeInfo": "Checking node health",
+                "recoverAccounts": "Generating accounts",
+                "loadAccounts": "Syncing accounts",
+                "loadAssets": "Loading native assets",
+                "loadActivities": "Building activity history",
+                "setStrongholdStatus": "Securing stronghold",
+                "startBackgroundSync": "Starting background sync",
+                "loggingIn": "Loading dashboard"
+            }
+        },
         "dashboard": {
             "network": {
                 "operational": "Network operational",
@@ -545,9 +468,8 @@
                 "hardware": {
                     "title": "התקן חומרה",
                     "statuses": {
-                        "appNotOpen": "אפליקצית איוטה לא נפתחת",
+                        "appNotOpen": "{protocol} app not open",
                         "connected": "מחובר",
-                        "legacyConnected": "Legacy app open",
                         "locked": "נעול",
                         "mnemonicMismatch": "Wrong Ledger or mnemonic",
                         "notDetected": "לא מזוהה",
@@ -679,6 +601,14 @@
             "internal": "Internal Address",
             "external": "כתובת לתקבול"
         },
+        "excludeNode": {
+            "title": "Exclude node",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
+        },
+        "unsetAsPrimaryNode": {
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
+        },
         "node": {
             "titleAdd": "הוסף צומת",
             "titleUpdate": "עדכן צומת",
@@ -695,7 +625,6 @@
             "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "הגדר כצומת רשת ראשי",
             "removeConfirmation": "האם ברצונך למחוק את צומת הרשת הזו?",
-            "removeAllConfirmation": "האם ברצונך למחוק את כל צומתי הרשת?",
             "info": {
                 "general": {
                     "tab": "General",
@@ -793,8 +722,7 @@
             "bodyFirefly": "ארנק הפיירפלי מושבת עד להשלמה. הגירת המטבעות עדיין תהא זמינה לאחר מכן."
         },
         "ledgerNotConnected": {
-            "connect": "פתח את האפליקציה החדשה של איוטה בחומרת ארנק הקר שלך כדי למשיך",
-            "connectLegacy": "פתח את אפליקציית {legacy} על הארנק הקר שלך כדי להמשיך"
+            "connect": "Open the {protocol} app on your Ledger device to continue"
         },
         "ledgerConfirmation": {
             "confirm": "כדי להמשיך, אשר את הפעולה המוצגת בארנק הקר שלך"
@@ -906,6 +834,38 @@
         },
         "sendForm": {
             "title": "Send funds"
+        },
+        "tokenInformation": {
+            "newTokenTitle": "New token",
+            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "tokenMetadata": {
+                "standard": "Standard",
+                "name": "Name",
+                "tokenId": "Token ID",
+                "url": "URL"
+            },
+            "buttons": {
+                "verifyToken": "I verify this token"
+            }
+        },
+        "mintNativeTokenForm": {
+            "title": "Mint native tokens",
+            "inputs": {
+                "totalSupply": "Total Supply",
+                "circulatingSupply": "Circulating Supply",
+                "standard": "Standard",
+                "name": "Name",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
+                "url": "URL",
+                "logoUrl": "Logo URL",
+                "logo": "Logo"
+            }
+        },
+        "faucetRequest": {
+            "title": "Faucet request",
+            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
     },
     "charts": {
@@ -981,7 +941,7 @@
         "export": "ייצא",
         "exporting": "מייצא",
         "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "אשר קישורי איוטה",
+        "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "הפעל מצב מפתח",
         "enableSystemNotifications": "אפשר התראות מערכת",
         "exportTransactionHistory": "Export transaction history",
@@ -996,9 +956,10 @@
         "deleteAccount": "Delete wallet",
         "max": "מקסימום",
         "addNode": "הוסף צומת",
+        "addingNode": "Adding node",
+        "addOfficialNodes": "Add official nodes",
         "updateNode": "עדכן צומת",
         "removeNode": "הסר צומת",
-        "removeAllNodes": "הסר צומתי רשת",
         "hide": "הסתר",
         "hideOthers": "הסתר אחרים",
         "showAll": "הצג הכל",
@@ -1034,8 +995,8 @@
         "findWallets": "Find wallets",
         "useBalanceFinder": "Use balance finder",
         "search": "Search",
-        "searchAgain": "חפש שוב",
         "searching": "Searching",
+        "searchAgain": "חפש שוב",
         "closeFirefly": "סגור ארנק פיירפלי",
         "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
@@ -1051,11 +1012,21 @@
         "done": "בוצע",
         "okIUnderstand": "הבנתי, אני מאשר",
         "readMore": "קרא עוד",
+        "searchForRewards": "Search for rewards",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
-        "backup": "Backup"
+        "backup": "Backup",
+        "mint": "Mint",
+        "mintNativeToken": "Mint native token",
+        "verifyToken": "Verify token",
+        "unverifyToken": "Unverify token",
+        "hideToken": "Hide token",
+        "unhideToken": "Unhide token",
+        "burnToken": "Burn token",
+        "faucetRequest": "Get {token} tokens",
+        "refreshTokenMetadata": "Refresh token metadata"
     },
     "general": {
         "recipient": "Recipient",
@@ -1071,6 +1042,8 @@
         "received": "התקבל",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "minted": "Minted",
+        "minting": "Minting",
         "sendPayment": "שלח תשלום",
         "moveFunds": "העברה פנימית",
         "sendTo": "שלח אל",
@@ -1088,6 +1061,7 @@
         "reference": "התייחסות",
         "from": "מ־",
         "to": "ל-",
+        "and": "and",
         "receiveFunds": "Receive funds",
         "address": "כתובת",
         "myAddress": "הכתובת שלי",
@@ -1143,6 +1117,7 @@
         "loadingAccounts": "טוען, אנא המתן...",
         "addProfile": "הוסף פרופיל",
         "noRecentHistory": "אין היסטורית תקבולים",
+        "noAssets": "No assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "מסנכרן היסטוריה, זה יכול לקחת קצת זמן...",
@@ -1208,6 +1183,7 @@
         "accountColor": "צבע ארנק",
         "transactionTime": "Transaction time",
         "storageDeposit": "Storage deposit",
+        "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
@@ -1218,7 +1194,56 @@
         "tag": "Tag",
         "nodeList": "Node list",
         "claimingTransactionId": "Claimed in",
-        "assets": "Assets"
+        "assets": "Assets",
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
+        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded"
+    },
+    "filters": {
+        "title": "Filters",
+        "showHidden": {
+            "label": "Show hidden",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "showRejected": {
+            "label": "Show rejected",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "verificationStatus": {
+            "label": "Verification status",
+            "new": "New",
+            "notVerified": "Not verified",
+            "verified": "Verified"
+        },
+        "asset": {
+            "label": "Assets"
+        },
+        "amount": {
+            "label": "Amount",
+            "equal": "is equal to",
+            "range": "is between",
+            "greater": "is greater than",
+            "less": "is less than"
+        },
+        "status": {
+            "label": "Status",
+            "confirmed": "confirmed",
+            "pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "non-claimed"
+        },
+        "type": {
+            "label": "Type",
+            "incoming": "incoming",
+            "outgoing": "outgoing",
+            "internal": "internal"
+        }
     },
     "dates": {
         "today": "היום",
@@ -1276,6 +1301,26 @@
         "hideActivity": {
             "success": "Successfully hidden activity",
             "error": "Failed to hide activity"
+        },
+        "faucetRequest": {
+            "success": "Request for tokens sent to the faucet"
+        },
+        "mintNativeToken": {
+            "success": "Native token minting transaction sent"
+        },
+        "refreshTokenMetadata": {
+            "success": "All token metadata has been reset and refreshed"
+        },
+        "restoreFromStrongholdBackup": {
+            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+        },
+        "findShimmerRewards": {
+            "success": "Successfully found Shimmer rewards",
+            "error": "An error occurred while searching for rewards"
+        },
+        "claimShimmerRewards": {
+            "success": "Successfully claimed Shimmer rewards",
+            "error": "An error occurred while claiming rewards"
         }
     },
     "error": {
@@ -1478,7 +1523,8 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "סטייקינג"
+        "staking": "סטייקינג",
+        "developer": "Developer"
     },
     "pills": {
         "stake": {
@@ -1486,28 +1532,42 @@
             "Confirmed": "staked for",
             "Conflicting": "failed to stake"
         },
-        "internalTransaction": {
-            "in": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+        "transaction": {
+            "internal": {
+                "in": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "out": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
             },
-            "out": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+            "external": {
+                "in": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "out": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
             }
         },
-        "externalTransaction": {
+        "minting": {
             "in": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             },
             "out": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             }
         },
         "migrate": {

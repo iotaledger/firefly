@@ -14,7 +14,7 @@
         if (activity) {
             openPopup({
                 type: 'activityDetails',
-                props: { activity },
+                props: { activityId: activity.id },
             })
         } else {
             updatePopupProps({
@@ -28,7 +28,7 @@
         if (activity) {
             openPopup({
                 type: 'activityDetails',
-                props: { activity },
+                props: { activityId: activity.id },
             })
         } else {
             updatePopupProps({
