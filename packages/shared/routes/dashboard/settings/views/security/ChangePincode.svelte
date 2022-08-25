@@ -2,7 +2,7 @@
     import { Button, Pin, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
-    import { mobile, isKeyboardOpened } from '@lib/app'
+    import { mobile, isKeyboardOpened, getKeyboardTransitionSpeed } from '@lib/app'
     import { activeProfile } from 'shared/lib/profile'
     import { PIN_LENGTH } from 'shared/lib/utils'
     import { api } from 'shared/lib/wallet'
@@ -93,7 +93,8 @@
     id="pincode-change-form"
     style="margin-top: {$mobile && $isKeyboardOpened
         ? '-20%'
-        : '0px'}; transition: margin-top 0.2s var(--transition-scroll)"
+        : '0px'}; transition: margin-top {getKeyboardTransitionSpeed($isKeyboardOpened) +
+        'ms'} var(--transition-scroll)"
 >
     <Text type="h4" classes="mb-3">{localize('views.settings.changePincode.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePincode.description')}</Text>
