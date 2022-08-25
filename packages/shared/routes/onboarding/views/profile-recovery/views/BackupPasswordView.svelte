@@ -43,9 +43,11 @@
                     } else {
                         error = localize('error.stronghold.wrongProtocol')
                     }
+                } else if (err?.error.match(/`invalid stronghold password`/)) {
+                    error = localize('error.password.incorrect')
                 } else {
                     console.error(err)
-                    error = localize('error.password.incorrect')
+                    error = localize('error.global.generic')
                 }
             }
         }
