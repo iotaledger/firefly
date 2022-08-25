@@ -8,6 +8,7 @@ import type {
     EventType,
     WalletEvent,
     LedgerNanoStatus,
+    AccountMeta,
 } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
@@ -150,7 +151,7 @@ export class ProfileManagerMock implements IProfileManager {
         accountGapLimit: number,
         addressGapLimit: number,
         syncOptions: AccountSyncOptions
-    ): Promise<IAccount[]> {
+    ): Promise<AccountMeta[]> {
         return Promise.resolve([])
     }
 
