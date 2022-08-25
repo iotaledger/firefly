@@ -13,11 +13,11 @@
         getAssetFromPersistedAssets,
         IPersistedAsset,
         ITransactionActivityData,
-        getTimeDifferenceUntilExpirationTime,
+        getTimeDifference,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
-    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner, AssetIcon } from 'shared/components'
+    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner, AssetIcon, Pill } from 'shared/components'
     import { FontWeight } from 'shared/components/Text.svelte'
 
     export let activityId: string
@@ -32,7 +32,16 @@
     $: isIncomingActivityUnclaimed =
         (data.direction === ActivityDirection.In || data.isSelfTransaction) &&
         data.asyncStatus === ActivityAsyncStatus.Unclaimed
-    $: timeDiff = getTimeDifferenceUntilExpirationTime(data, $time)
+    $: isTimelocked = data.timelockDate > $time
+
+    let timeDiff: string
+    $: if (isTimelocked) {
+        timeDiff = getTimeDifference(data.timelockDate, $time)
+    } else if (data.isAsync && !data.isClaimed && data?.expirationDate) {
+        timeDiff = getTimeDifference(data.expirationDate, $time)
+    } else {
+        timeDiff = localize('general.none')
+    }
 
     let title: string
     $: if (data.isInternal) {
@@ -133,19 +142,21 @@
                 </div>
             </div>
         </div>
-        {#if data.isAsync && (data.direction === ActivityDirection.Out || !data.isClaimed)}
+        {#if isTimelocked || (data.isAsync && (data.direction === ActivityDirection.Out || !data.isClaimed))}
             <HR />
             <div class="flex w-full justify-between space-x-4">
                 <div class="flex flex-row justify-center items-center space-x-2">
-                    {#if !data.isClaimed}
+                    {#if !data.isClaimed || isTimelocked}
                         <Icon width="16" height="16" icon="timer" classes="text-gray-600" />
-                        <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}
-                            >{timeDiff ?? localize('general.none')}</Text
-                        >
+                        <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
                     {/if}
                 </div>
                 <div class="flex flex-row justify-end w-1/2 space-x-2">
-                    {#if isIncomingActivityUnclaimed}
+                    {#if isTimelocked}
+                        <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
+                            {localize('pills.locked')}
+                        </Pill>
+                    {:else if isIncomingActivityUnclaimed}
                         <button
                             disabled={data.isClaiming || data.isRejected}
                             class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent 

@@ -21,6 +21,7 @@
     import { setClipboard } from '@lib/utils'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
+    import { time } from '@core/app'
 
     export let activityId: string
 
@@ -29,10 +30,11 @@
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
     $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
+    $: isTimelocked = activity.data.type === ActivityType.Transaction && activity.data.timelockDate > $time
 
     $: transactionDetails = {
         asset,
-        time: activity.time,
+        transactionTime: activity.time,
         direction: ActivityDirection.Out,
         inclusionState: activity?.inclusionState,
         rawAmount: activity?.data.rawAmount,
@@ -49,6 +51,7 @@
             claimedDate: activity.data.claimedDate,
             claimingTransactionId: activity.data.claimingTransactionId,
             expirationDate: activity.data.expirationDate,
+            timelockDate: activity.data.timelockDate,
             subject: activity?.data?.subject,
             tag: activity?.data?.tag,
             metadata: activity?.data?.metadata,
@@ -118,7 +121,7 @@
         {/if}
     </div>
     <TransactionDetails {...transactionDetails} />
-    {#if activity.data.type === ActivityType.Transaction && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
+    {#if !isTimelocked && activity.data.type === ActivityType.Transaction && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
                 disabled={activity.data.isClaiming || activity.data.isRejected}

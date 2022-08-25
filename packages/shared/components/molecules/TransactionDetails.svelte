@@ -7,7 +7,7 @@
         KeyValueBox,
         AccountLabel,
     } from 'shared/components/atoms'
-    import { AssetIcon, Text } from 'shared/components'
+    import { AssetIcon, Text, Pill } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { FontWeight } from 'shared/components/Text.svelte'
@@ -25,6 +25,7 @@
     import { Platform } from 'shared/lib/platform'
     import { truncateString } from '@lib/helpers'
     import { setClipboard } from '@lib/utils'
+    import { time } from '@core/app'
 
     export let asset: IAsset
     export let asyncStatus: ActivityAsyncStatus = null
@@ -33,6 +34,7 @@
     export let isClaiming: boolean = null
     export let direction: ActivityDirection
     export let expirationDate: Date = null
+    export let timelockDate: Date = null
     export let formattedFiatValue: string = null
     export let inclusionState: InclusionState = InclusionState.Pending
     export let metadata: string = null
@@ -42,15 +44,17 @@
     export let giftedStorageDeposit = 0
     export let subject: Subject = null
     export let tag: string = null
-    export let time: Date = null
+    export let transactionTime: Date = null
     export let isInternal: boolean
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: transactionTime = getDateFormat(time)
+    $: formattedTransactionTime = getDateFormat(transactionTime)
+    $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
+    $: isTimelocked = timelockDate > $time
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -63,7 +67,7 @@
     )
 
     $: detailsList = {
-        ...(transactionTime && { transactionTime }),
+        ...(formattedTransactionTime && { transactionTime: formattedTransactionTime }),
         ...(metadata && { metadata }),
         ...(tag && { tag }),
         ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
@@ -71,6 +75,7 @@
         }),
         ...(giftedStorageDeposit && { giftedStorageDeposit: formattedGiftedStorageDeposit }),
         ...(expirationTime && { expirationTime }),
+        ...(timelockDate && { timelockDate: formattedTimelockDate }),
         ...(claimedTime && { claimedTime }),
     }
 
@@ -122,6 +127,11 @@
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />
+            {/if}
+            {#if isTimelocked}
+                <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
+                    {localize('pills.locked')}
+                </Pill>
             {/if}
         </transaction-status>
         {#if type === ActivityType.Transaction}
