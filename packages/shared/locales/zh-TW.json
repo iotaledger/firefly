@@ -1524,7 +1524,7 @@
     "tabs": {
         "wallet": "錢包",
         "staking": "質押",
-        "developerTools": "Developer Tools"
+        "developer": "Developer"
     },
     "pills": {
         "stake": {
