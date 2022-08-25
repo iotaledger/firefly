@@ -12,10 +12,10 @@ import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaiming
 import { sumTotalUnclaimedRewards } from '../utils'
 
 let accountGapLimitIncrement = 0
-let accountGapLimit = accountGapLimitIncrement
+let accountGapLimit = 3
 // let startAccountIndex = 0
 let addressGapLimitIncrement = 0
-let addressGapLimit = addressGapLimitIncrement
+let addressGapLimit = 10
 // let startAddressIndex = 0
 
 let totalUnclaimedShimmerRewards = 0
