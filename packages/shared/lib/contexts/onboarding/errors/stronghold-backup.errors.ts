@@ -1,4 +1,4 @@
-import { BaseError } from '@core/error'
+import { BaseError, DEFAULT_APP_ERROR_PARAMETERS } from '@core/error'
 import { localize } from '@core/i18n'
 
 export class UnsupportedBackupFileError extends BaseError {
@@ -17,6 +17,7 @@ export class CannotRestoreWithMismatchedCoinTypeError extends BaseError {
                 ? localize('notifications.restoreFromStrongholdBackup.wrongProtocolForClaiming')
                 : localize('notifications.restoreFromStrongholdBackup.wrongProtocol'),
             ...DEFAULT_APP_ERROR_PARAMETERS,
+            localizeMessage: false,
         })
     }
 }
