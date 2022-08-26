@@ -33,25 +33,28 @@
         (data.direction === ActivityDirection.In || data.isSelfTransaction) &&
         data.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = getTimeDifferenceUntilExpirationTime(data, $time)
+    $: title = getTitle(data, inclusionState)
+    $: subject = getSubject(data.subject)
 
-    let title: string
-    $: if (data.isInternal) {
-        title = inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
-    } else {
-        if (data.direction === ActivityDirection.In) {
-            title = inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
-        } else if (data.direction === ActivityDirection.Out) {
-            title = inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+    function getTitle(txData, inclusionState): string {
+        if (txData.isInternal) {
+            return inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
+        } else {
+            if (txData.direction === ActivityDirection.In) {
+                return inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
+            } else if (txData.direction === ActivityDirection.Out) {
+                return inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+            }
         }
     }
-
-    let subject: string
-    $: if (data.subject?.type === 'account') {
-        subject = truncateString(data.subject?.account?.name, 13, 0)
-    } else if (data.subject?.type === 'address') {
-        subject = truncateString(data.subject?.address, $networkHrp.length, 6)
-    } else {
-        subject = localize('general.unknownAddress')
+    function getSubject(subject): string {
+        if (subject?.type === 'account') {
+            return truncateString(subject?.account?.name, 13, 0)
+        } else if (subject?.type === 'address') {
+            return truncateString(subject?.address, $networkHrp.length, 6)
+        } else {
+            return localize('general.unknownAddress')
+        }
     }
 
     function handleTransactionClick(): void {
@@ -96,7 +99,7 @@
 
 <ClickableTile
     onClick={handleTransactionClick}
-    classes={inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}
+    classes={inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}
 >
     <div class="w-full flex flex-col space-y-4">
         <div class="flex flex-row items-center text-left space-x-4">

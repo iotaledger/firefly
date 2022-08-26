@@ -29,26 +29,30 @@
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
     $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
-
+    $: isActivityIncomingAndUnclaimed =
+        activity.data.type === ActivityType.Transaction &&
+        activity.data.isAsync &&
+        (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) &&
+        activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: transactionDetails = {
         asset,
-        time: activity.time,
+        time: activity?.time,
         direction: ActivityDirection.Out,
         inclusionState: activity?.inclusionState,
         rawAmount: activity?.data.rawAmount,
-        formattedFiatValue: activity.getFiatAmount(
+        formattedFiatValue: activity?.getFiatAmount(
             $currencies[CurrencyTypes.USD],
             $exchangeRates[$activeProfile?.settings?.currency]
         ),
-        storageDeposit: activity.data.storageDeposit,
-        giftedStorageDeposit: activity.data.giftedStorageDeposit,
+        storageDeposit: activity?.data.storageDeposit,
+        giftedStorageDeposit: activity?.data.giftedStorageDeposit,
         amount,
         unit: asset?.metadata?.unit,
         ...(activity?.data.type === ActivityType.Transaction && {
-            asyncStatus: activity.data.asyncStatus,
-            claimedDate: activity.data.claimedDate,
-            claimingTransactionId: activity.data.claimingTransactionId,
-            expirationDate: activity.data.expirationDate,
+            asyncStatus: activity?.data.asyncStatus,
+            claimedDate: activity?.data.claimedDate,
+            claimingTransactionId: activity?.data.claimingTransactionId,
+            expirationDate: activity?.data.expirationDate,
             subject: activity?.data?.subject,
             tag: activity?.data?.tag,
             metadata: activity?.data?.metadata,
@@ -63,7 +67,7 @@
         setClipboard(activity.transactionId)
     }
 
-    async function claim() {
+    async function claim(): Promise<void> {
         if (activity.data.type === ActivityType.Transaction) {
             await claimActivity(activity.id, activity.data)
             openPopup({
@@ -118,7 +122,7 @@
         {/if}
     </div>
     <TransactionDetails {...transactionDetails} />
-    {#if activity.data.type === ActivityType.Transaction && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
+    {#if activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
                 disabled={activity.data.isClaiming || activity.data.isRejected}

@@ -21,7 +21,7 @@
 
     let asset: IPersistedAsset
 
-    $: data.assetId, $selectedAccountAssets, (asset = getAssetFromPersistedAssets(data.assetId))
+    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(data.assetId))
 
     function handleTransactionClick(): void {
         if (asset?.verification === VerificationStatus.New) {
@@ -44,7 +44,7 @@
 
 <ClickableTile
     onClick={handleTransactionClick}
-    classes={inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}
+    classes={inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}
 >
     <div class="w-full flex flex-col space-y-4">
         <div class="flex flex-row items-center text-left space-x-4">
