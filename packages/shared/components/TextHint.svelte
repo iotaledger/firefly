@@ -39,8 +39,8 @@
             _iconClasses = 'text-yellow-700 dark:text-yellow-700'
         } else if (info) {
             _classes = 'bg-blue-50 dark:bg-blue-500'
-            _icon = 'info'
-            _iconClasses = 'text-blue-500 dark:text-blue-500'
+            _icon = 'info-filled'
+            _iconClasses = 'text-blue-600 dark:text-blue-600'
         }
     }
 
@@ -53,6 +53,7 @@
             icon={icon ?? _icon}
             height={iconSize}
             width={iconSize}
+            primaryColor="white"
             classes="mr-3 fill-current {_iconClasses} {iconClasses}"
         />
         <Text fontSize="14" lineHeight="5" color={textColor} darkColor={textDarkColor} classes={textClasses}>
