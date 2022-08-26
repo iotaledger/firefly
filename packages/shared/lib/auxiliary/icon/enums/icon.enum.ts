@@ -29,6 +29,7 @@ export enum Icon {
     Doc = 'doc',
     DoubleChevronRight = 'double-chevron-right',
     Edit = 'edit',
+    ErrorFilled = 'error-filled',
     ExclamationFilled = 'exclamation-filled',
     Exclamation = 'exclamation',
     Export = 'export',

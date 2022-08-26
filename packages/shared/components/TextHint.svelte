@@ -31,7 +31,7 @@
             _iconClasses = 'text-green-700 dark:text-green-700'
         } else if (danger) {
             _classes = 'bg-red-50 dark:bg-red-500'
-            _icon = 'success-error'
+            _icon = 'error-filled'
             _iconClasses = 'text-red-500 dark:text-red-500'
         } else if (warning) {
             _classes = 'bg-yellow-50 dark:bg-yellow-500'
