@@ -43,6 +43,7 @@
     </div>
     <div
         slot="leftpane__content"
+        class={$mobile && 'overflow-hidden w-full'}
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
             : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
@@ -54,9 +55,9 @@
             bind:value={pinInput}
             bind:this={pinRef}
             glimpse
-            classes="w-full mx-auto block"
+            classes="w-full mx-auto block mb-5"
             on:submit={onSubmit}
-            autofocus={!$mobile}
+            autofocus
             disabled={busy}
             {error}
         />

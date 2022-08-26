@@ -176,7 +176,7 @@
     </button>
     <div class="flex w-full h-full flex-col items-center {$mobile ? 'justify-end' : 'justify-between pt-40 pb-16 '}">
         <div
-            class="flex flex-col items-center {$mobile ? 'w-full' : 'w-96 flex-wrap mb-20'}"
+            class="flex flex-col items-center {$mobile ? 'w-80' : 'w-96 flex-wrap mb-20'}"
             style="padding-bottom: {$mobile
                 ? $keyboardHeight + 15
                 : 0}px; ; transition: padding {getKeyboardTransitionSpeed($isKeyboardOpened) +
