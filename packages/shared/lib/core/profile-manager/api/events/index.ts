@@ -1,0 +1,6 @@
+export * from './newOutput'
+export * from './newTransactionInclusionEvent'
+export * from './spentOutput'
+export * from './subscribeToWalletEvents'
+export * from './transactionProgress'
+export * from './unsubscribeFromWalletEvents'

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, getLedgerDeviceStatus } from '@core/ledger'
@@ -14,7 +14,9 @@
         hasUserClaimedRewards,
         isOnboardingLedgerProfile,
         onboardingProfile,
+        shimmerClaimingProfileManager,
     } from '@contexts/onboarding'
+    import { subscribeToWalletEvents, unsubscribeFromWalletEvents } from '../../../../../lib/core/profile-manager'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -43,6 +45,7 @@
             hasSearchedForRewardsBefore = true
             await findShimmerRewards()
         } catch (err) {
+            console.error(err)
             throw new FindShimmerRewardsError()
         } finally {
             isSearchingForRewards = false
@@ -63,6 +66,7 @@
             hasTriedClaimingRewards = true
             await claimShimmerRewards()
         } catch (err) {
+            console.error(err)
             throw new ClaimShimmerRewardsError()
         } finally {
             isClaimingRewards = false
@@ -82,6 +86,16 @@
     }
 
     async function onMountHelper(): Promise<void> {
+        if ($isOnboardingLedgerProfile) {
+            /**
+             * NOTE: We have to register and event handler for transaction
+             * progress specifically for Ledger profiles, since the user
+             * MUST confirm what is displayed in the UI matches what is prompted
+             * on the actual Ledger device.
+             */
+            subscribeToWalletEvents(shimmerClaimingProfileManager)
+        }
+
         /**
          * NOTE: If the user only has one Shimmer claiming account,
          * it is likely they have just navigated to this view for
@@ -94,6 +108,7 @@
                 isSearchingForRewards = true
                 await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
             } catch (err) {
+                console.error(err)
                 throw new FindShimmerRewardsError()
             } finally {
                 isSearchingForRewards = false
@@ -103,6 +118,12 @@
 
     onMount(() => {
         void onMountHelper()
+    })
+
+    onDestroy(() => {
+        if ($isOnboardingLedgerProfile) {
+            unsubscribeFromWalletEvents(shimmerClaimingProfileManager)
+        }
     })
 </script>
 

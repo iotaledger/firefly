@@ -10,7 +10,7 @@ import {
 import {
     setStrongholdPasswordClearInterval,
     startBackgroundSync,
-    subscribe as subscribeToWalletEvents,
+    subscribeToWalletEvents,
 } from '@core/profile-manager/api'
 import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'

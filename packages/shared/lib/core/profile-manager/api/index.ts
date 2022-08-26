@@ -21,4 +21,4 @@ export * from './verifyMnemonic'
 
 export * from './getLedgerStatus'
 
-export * from './events/subscribe'
+export * from './events'

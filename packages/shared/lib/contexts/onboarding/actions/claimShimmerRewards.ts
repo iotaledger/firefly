@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
 import { SECONDS_PER_MILESTONE } from '@core/network'
-import { DEFAULT_TRANSACTION_OPTIONS, getOutputOptions } from '@core/wallet'
+import { DEFAULT_TRANSACTION_OPTIONS, getOutputOptions, validateSendConfirmation } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { sleep } from '@lib/utils'
@@ -37,6 +37,7 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
                 }),
             })
         } catch (err) {
+            console.error(err)
             updateShimmerClaimingAccount({
                 ...shimmerClaimingAccount,
                 state: ShimmerClaimingAccountState.Failed,
@@ -57,6 +58,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+    validateSendConfirmation(outputOptions, preparedOutput)
     const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     persistShimmerClaimingTransaction(claimingTransaction?.transactionId)
 

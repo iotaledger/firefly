@@ -1,11 +1,14 @@
-import { get } from 'svelte/store'
-import { profileManager } from '../../stores'
+import { get, Writable } from 'svelte/store'
+
+import { IProfileManager } from '../../interfaces'
+import { profileManager as _profileManager } from '../../stores'
+
 import { handleNewOutputEvent } from './newOutput'
 import { handleTransactionInclusionEvent } from './newTransactionInclusionEvent'
 import { handleSpentOutput } from './spentOutput'
 import { handleTransactionProgress } from './transactionProgress'
 
-export function subscribe(): void {
+export function subscribeToWalletEvents(profileManager: Writable<IProfileManager> = _profileManager): void {
     const manager = get(profileManager)
 
     manager.listen([], (error, result) => {

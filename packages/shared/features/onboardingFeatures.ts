@@ -127,7 +127,7 @@ const onboardingFeatures = {
     shimmer: {
         enabled: true,
         mainnet: {
-            enabled: true,
+            enabled: false,
             claimRewards: {
                 enabled: false,
                 hidden: true,
@@ -168,7 +168,7 @@ const onboardingFeatures = {
             },
         },
         devnet: {
-            enabled: false,
+            enabled: true,
             claimRewards: {
                 enabled: true,
                 hidden: false,
