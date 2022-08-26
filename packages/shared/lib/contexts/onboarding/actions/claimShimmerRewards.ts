@@ -10,7 +10,7 @@ import { sleep } from '@lib/utils'
 import { ShimmerClaimingAccountState } from '../enums'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { IShimmerClaimingAccount } from '../interfaces'
-import { onboardingProfile, updateShimmerClaimingAccount } from '../stores'
+import { onboardingProfile, persistShimmerClaimingTransaction, updateShimmerClaimingAccount } from '../stores'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
@@ -58,6 +58,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
     const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
+    persistShimmerClaimingTransaction(claimingTransaction?.transactionId)
 
     // TODO: https://github.com/iotaledger/firefly/issues/4223
     await sleep(SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND)
