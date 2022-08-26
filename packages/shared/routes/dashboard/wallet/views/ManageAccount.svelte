@@ -77,7 +77,7 @@
 </script>
 
 <div
-    class="w-full h-full flex flex-col justify-between {$mobile ? 'safe-area px-5 pt-6' : 'p-6'}"
+    class="w-full h-full flex flex-col justify-between {$mobile ? 'px-5 pt-6 mb-8' : 'p-6'}"
     style="padding-bottom: {$mobile && $isKeyboardOpened
         ? $keyboardHeight
         : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
@@ -119,9 +119,3 @@
         </div>
     {/if}
 </div>
-
-<style>
-    .safe-area {
-        margin-bottom: calc(env(safe-area-inset-bottom) + 20px);
-    }
-</style>
