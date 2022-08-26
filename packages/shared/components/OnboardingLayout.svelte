@@ -63,7 +63,7 @@
                 <slot name="leftpane__content" />
             </div>
         </div>
-        <footer class="py-3 px-5">
+        <footer class="pt-3 pb-8 px-5">
             <slot name="leftpane__action" />
         </footer>
     </div>
@@ -132,8 +132,5 @@
             @apply text-16;
             @apply leading-140;
         }
-    }
-    footer {
-        margin-bottom: env(safe-area-inset-bottom);
     }
 </style>
