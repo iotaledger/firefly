@@ -111,7 +111,7 @@
     }
 </script>
 
-<div class="flex w-full {$mobile ? 'flex-col safe-area' : 'flex-row'} flex-wrap">
+<div class="flex w-full {$mobile ? 'flex-col' : 'flex-row'} flex-wrap">
     <Text type="h4" classes="{$mobile && 'text-center -mt-4'} mb-5">
         {lastBackupDate
             ? locale('popups.backup.title', {
@@ -203,8 +203,5 @@
 <style type="text/scss">
     img {
         width: 196px;
-    }
-    .safe-area {
-        margin-bottom: calc(env(safe-area-inset-bottom) / 2);
     }
 </style>

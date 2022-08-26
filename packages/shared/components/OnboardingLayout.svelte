@@ -17,6 +17,7 @@
     export let onBackClick = (): void => {}
 
     $: isWelcome = $mobile && AppRoute.Welcome === $appRoute
+    $: isLegal = $mobile && AppRoute.Legal === $appRoute
 
     $: $allowBackButton = allowBack
 
@@ -38,7 +39,7 @@
         data-label="mobile-onboarding-layout"
         class="relative h-full flex flex-col justify-between {isWelcome ? '' : ' '}"
     >
-        <header class="relative w-full flex justify-center px-8 pt-3 {isWelcome && 'hidden'}">
+        <header class="relative w-full flex justify-center px-8 pt-3 {isLegal && 'pb-6'} {isWelcome && 'hidden'}">
             <Text type="h4" classes="text-center -mb-3 px-5">
                 <slot name="title" />
             </Text>
@@ -53,7 +54,7 @@
         </header>
         <div
             data-label="mobile-top-content"
-            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1  {!isWelcome &&
+            class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto flex-auto h-1 {!isWelcome &&
                 'pt-5'}"
         >
             <div class="flex-auto h-3">
@@ -63,7 +64,7 @@
                 <slot name="leftpane__content" />
             </div>
         </div>
-        <footer class="py-3 px-5">
+        <footer class="pt-3 pb-8 px-5">
             <slot name="leftpane__action" />
         </footer>
     </div>
@@ -132,8 +133,5 @@
             @apply text-16;
             @apply leading-140;
         }
-    }
-    footer {
-        margin-bottom: env(safe-area-inset-bottom);
     }
 </style>
