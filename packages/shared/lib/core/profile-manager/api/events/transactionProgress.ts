@@ -1,67 +1,76 @@
 import { selectedAccountId } from '@core/account'
 import { get } from 'svelte/store'
-import { activeProfile } from '@core/profile/stores'
-import { ProfileType } from '@core/profile/enums'
+import { isActiveLedgerProfile } from '@core/profile/stores'
 import { closePopup, openPopup } from '@lib/popup'
-import { ledgerSendConfirmationProps, ledgerDeviceStatus, ledgerMintNativeTokenProps } from '@core/ledger'
+import { ledgerDeviceStatus, ledgerMintNativeTokenProps, ledgerSendConfirmationProps } from '@core/ledger'
+import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 
-export function handleTransactionProgress(
-    accountId: string,
-    payload:
-        | { PreparedTransactionEssenceHash: string }
-        | { PreparedTransaction: string }
-        | 'PerformingPow'
-        | 'SigningTransaction'
-): void {
-    if (get(selectedAccountId) === accountId) {
+type BlindTransaction = { PreparedTransactionEssenceHash: string }
+type RegularTransaction = { PreparedTransaction: string }
+
+type TransactionProgressPayload = 'PerformingPow' | 'SigningTransaction' | RegularTransaction | BlindTransaction
+
+export function handleTransactionProgress(accountId: string, payload: TransactionProgressPayload): void {
+    if (get(isOnboardingLedgerProfile)) {
+        handleTransactionProgressInternal(payload)
+    } else if (get(isActiveLedgerProfile)) {
+        if (get(selectedAccountId) === accountId) {
+            handleTransactionProgressInternal(payload)
+        }
+    } else {
         console.warn('Transaction progress handler unimplemented: ', payload)
+    }
+}
 
-        if (get(activeProfile).type === ProfileType.Ledger) {
-            const _sendConfirmationProps = get(ledgerSendConfirmationProps)
-            const _mintNativeTokenProps = get(ledgerMintNativeTokenProps)
+function handleTransactionProgressInternal(payload: TransactionProgressPayload): void {
+    const _sendConfirmationProps = get(ledgerSendConfirmationProps)
+    const _mintNativeTokenProps = get(ledgerMintNativeTokenProps)
 
-            const _openPopup = (type = 'ledgerTransaction') => {
-                const shouldPreventClose = type === 'enableLedgerBlindSigning'
+    const _openPopup = (type = 'ledgerTransaction') => {
+        const shouldPreventClose = type === 'enableLedgerBlindSigning'
 
-                openPopup({
-                    type,
-                    hideClose: shouldPreventClose,
-                    preventClose: shouldPreventClose,
-                    ...(_sendConfirmationProps
-                        ? {
-                              props: {
-                                  toAddress:
-                                      _sendConfirmationProps.recipient.type === 'address'
-                                          ? _sendConfirmationProps.recipient.address
-                                          : _sendConfirmationProps.recipient.account.depositAddress,
-                                  toAmount: `${_sendConfirmationProps.amount} ${_sendConfirmationProps.unit}`,
-                                  sendConfirmationPopupProps: _sendConfirmationProps,
-                              },
-                          }
-                        : {
-                              props: {
-                                  mintNativeTokenPopupProps: _mintNativeTokenProps,
-                              },
-                          }),
-                })
-            }
+        openPopup({
+            type,
+            hideClose: shouldPreventClose,
+            preventClose: shouldPreventClose,
+            ...(_sendConfirmationProps
+                ? {
+                      props: {
+                          toAddress:
+                              _sendConfirmationProps.recipient.type === 'address'
+                                  ? _sendConfirmationProps.recipient.address
+                                  : _sendConfirmationProps.recipient.account.depositAddress,
+                          toAmount: `${_sendConfirmationProps.amount} ${_sendConfirmationProps.unit}`,
+                          sendConfirmationPopupProps: _sendConfirmationProps,
+                      },
+                  }
+                : {
+                      props: {
+                          mintNativeTokenPopupProps: _mintNativeTokenProps,
+                      },
+                  }),
+        })
+    }
 
-            if (payload === 'PerformingPow') {
-                // TODO: Should we double check the type of popup?
-                closePopup()
-            }
+    if (payload === 'PerformingPow') {
+        /**
+         * NOTE: This is necessary so that the transaction
+         * confirmation popup is closed since we can assume
+         * the user confirmed the prompt on the actual Ledger
+         * device.
+         */
+        closePopup(true)
+    }
 
-            if (typeof payload !== 'string' && 'PreparedTransaction' in payload) {
-                _openPopup()
-            }
+    if (typeof payload !== 'string' && 'PreparedTransaction' in payload) {
+        _openPopup()
+    }
 
-            if (typeof payload !== 'string' && 'PreparedTransactionEssenceHash' in payload) {
-                if (!get(ledgerDeviceStatus).blindSigningEnabled) {
-                    _openPopup('enableLedgerBlindSigning')
-                } else {
-                    _openPopup()
-                }
-            }
+    if (typeof payload !== 'string' && 'PreparedTransactionEssenceHash' in payload) {
+        if (!get(ledgerDeviceStatus).blindSigningEnabled) {
+            _openPopup('enableLedgerBlindSigning')
+        } else {
+            _openPopup()
         }
     }
 }

@@ -1,8 +1,14 @@
 import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
-import { SECONDS_PER_MILESTONE } from '@core/network'
-import { DEFAULT_TRANSACTION_OPTIONS, getOutputOptions, validateSendConfirmation } from '@core/wallet'
+import { BASE_TOKEN, COIN_TYPE, NetworkProtocol, SECONDS_PER_MILESTONE } from '@core/network'
+import {
+    DEFAULT_TRANSACTION_OPTIONS,
+    formatTokenAmountBestMatch,
+    getAssetFromPersistedAssets,
+    getOutputOptions,
+    validateSendConfirmation,
+} from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { sleep } from '@lib/utils'
@@ -10,7 +16,13 @@ import { sleep } from '@lib/utils'
 import { ShimmerClaimingAccountState } from '../enums'
 import { prepareShimmerClaimingAccount } from '../helpers'
 import { IShimmerClaimingAccount } from '../interfaces'
-import { onboardingProfile, persistShimmerClaimingTransaction, updateShimmerClaimingAccount } from '../stores'
+import {
+    isOnboardingLedgerProfile,
+    onboardingProfile,
+    persistShimmerClaimingTransaction,
+    updateShimmerClaimingAccount,
+} from '../stores'
+import { handleLedgerErrors, resetLedgerSendConfirmationProps, updateLedgerSendConfirmationProps } from '@core/ledger'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
@@ -42,11 +54,15 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
                 ...shimmerClaimingAccount,
                 state: ShimmerClaimingAccountState.Failed,
             })
-            showAppNotification({
-                type: 'error',
-                alert: true,
-                message: localize('notifications.claimShimmerRewards.error'),
-            })
+            if (get(isOnboardingLedgerProfile)) {
+                handleLedgerErrors(err?.error ?? err)
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    alert: true,
+                    message: localize('notifications.claimShimmerRewards.error'),
+                })
+            }
         }
     }
 }
@@ -59,7 +75,32 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
     validateSendConfirmation(outputOptions, preparedOutput)
-    const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
+
+    let claimingTransaction
+    if (get(isOnboardingLedgerProfile)) {
+        const shimmerTokenMetadata = BASE_TOKEN[NetworkProtocol.Shimmer]
+        updateLedgerSendConfirmationProps({
+            asset: {
+                ...getAssetFromPersistedAssets(COIN_TYPE[NetworkProtocol.Shimmer].toString()),
+                balance: {
+                    total: rawAmount,
+                },
+            },
+            amount: formatTokenAmountBestMatch(rawAmount, shimmerTokenMetadata),
+            unit: '',
+            recipient: {
+                type: 'address',
+                address: recipientAddress,
+            },
+            internal: false,
+            metadata: '',
+            tag: '',
+        })
+        claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
+        resetLedgerSendConfirmationProps()
+    } else {
+        claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
+    }
     persistShimmerClaimingTransaction(claimingTransaction?.transactionId)
 
     // TODO: https://github.com/iotaledger/firefly/issues/4223

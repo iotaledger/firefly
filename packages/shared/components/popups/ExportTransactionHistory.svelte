@@ -8,7 +8,7 @@
     import { displayNotificationForLedgerProfile, ledgerDeviceStatus } from '@core/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { selectedAccount } from '@core/account'
@@ -27,7 +27,7 @@
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await setStrongholdPassword(password)
-            } else if ($isLedgerProfile && !$ledgerDeviceStatus.connected) {
+            } else if ($isActiveLedgerProfile && !$ledgerDeviceStatus.connected) {
                 isBusy = false
 
                 displayNotificationForLedgerProfile('warning')
@@ -68,7 +68,7 @@
         } catch (err) {
             error = localize(err.error)
 
-            if ($isLedgerProfile) {
+            if ($isActiveLedgerProfile) {
                 displayNotificationForLedgerProfile('error', true, true, err)
             } else {
                 showAppNotification({

@@ -8,7 +8,13 @@ import { sortAccountsByIndex, zip } from '@core/utils'
 import { ProfileRecoveryType } from '../enums'
 import { CannotInitialiseShimmerClaimingAccountError, MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
-import { onboardingProfile, shimmerClaimingProfileManager, updateOnboardingProfile } from '../stores'
+import {
+    isOnboardingLedgerProfile,
+    onboardingProfile,
+    shimmerClaimingProfileManager,
+    updateOnboardingProfile,
+} from '../stores'
+import { handleLedgerErrors } from '@core/ledger'
 
 export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
@@ -63,7 +69,12 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             updateOnboardingProfile({ shimmerClaimingAccounts })
         }
     } catch (err) {
+        if (get(isOnboardingLedgerProfile)) {
+            handleLedgerErrors(err?.error ?? err)
+        }
+
         console.error(err)
+
         throw new CannotInitialiseShimmerClaimingAccountError()
     }
 }

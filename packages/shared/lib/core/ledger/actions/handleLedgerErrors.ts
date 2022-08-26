@@ -1,17 +1,39 @@
-import { get } from 'svelte/store'
-import { popupState, closePopup } from '@lib/popup'
+import { localize } from '@core/i18n'
+import { showAppNotification } from '@lib/notifications'
+import { closePopup } from '@lib/popup'
+
+import { LEDGER_ERROR_LOCALES } from '../constants'
+import { LedgerError } from '../enums'
 
 export function handleLedgerErrors(error: string): void {
-    const _popupState = get(popupState)
+    console.error(error)
 
-    // Transaction rejected by user on ledger device
-    if (error.includes('denied')) {
-        if (
-            _popupState.active &&
-            (_popupState.type === 'ledgerTransaction' || _popupState.type === 'enableLedgerBlindSigning')
-        ) {
-            // TODO: Probably a good idea to also display a notification here?
-            closePopup(_popupState.type === 'enableLedgerBlindSigning')
+    let ledgerError: LedgerError
+    const _includes = (_: LedgerError) => {
+        if (error?.includes(_)) {
+            ledgerError = _
+            return true
         }
+        return false
+    }
+
+    let isLedgerError = true
+    switch (true) {
+        case _includes(LedgerError.DeniedByUser):
+        case _includes(LedgerError.DeviceNotFound):
+        case _includes(LedgerError.Transport):
+            closePopup(true)
+            break
+        default:
+            isLedgerError = false
+            break
+    }
+
+    if (isLedgerError) {
+        showAppNotification({
+            type: 'error',
+            alert: true,
+            message: localize(LEDGER_ERROR_LOCALES[ledgerError]),
+        })
     }
 }

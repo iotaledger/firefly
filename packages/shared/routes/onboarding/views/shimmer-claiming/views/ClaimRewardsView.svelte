@@ -17,6 +17,7 @@
         shimmerClaimingProfileManager,
     } from '@contexts/onboarding'
     import { subscribeToWalletEvents, unsubscribeFromWalletEvents } from '../../../../../lib/core/profile-manager'
+    import { closePopup } from '../../../../../lib/popup'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -69,6 +70,9 @@
             console.error(err)
             throw new ClaimShimmerRewardsError()
         } finally {
+            if ($isOnboardingLedgerProfile) {
+                closePopup(true)
+            }
             isClaimingRewards = false
         }
     }
