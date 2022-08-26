@@ -8,7 +8,7 @@
     export let warning = false
     export let info = false
     export let classes: string = ''
-    export let icon: 'info' | 'exclamation' | 'none' = 'none'
+    export let icon: 'info' | 'exclamation' | undefined = undefined
     export let iconClasses: string = ''
     export let iconSize: string
     export let text: string = ''
@@ -40,7 +40,7 @@
         } else if (info) {
             _classes = 'bg-blue-50 dark:bg-blue-500'
             _icon = 'info'
-            _iconClasses = 'text-blue-600 dark:text-blue-600'
+            _iconClasses = 'text-blue-500 dark:text-blue-500'
         }
     }
 
@@ -49,14 +49,12 @@
 
 {#if text}
     <div class="flex flex-row items-center p-4 rounded-lg dark:bg-opacity-10 {_classes} {classes}">
-        {#if icon}
-            <Icon
-                icon={_icon}
-                height={iconSize}
-                width={iconSize}
-                classes="mr-3 fill-current {_iconClasses} {iconClasses}"
-            />
-        {/if}
+        <Icon
+            icon={icon ?? _icon}
+            height={iconSize}
+            width={iconSize}
+            classes="mr-3 fill-current {_iconClasses} {iconClasses}"
+        />
         <Text fontSize="14" lineHeight="5" color={textColor} darkColor={textDarkColor} classes={textClasses}>
             {text}
         </Text>
