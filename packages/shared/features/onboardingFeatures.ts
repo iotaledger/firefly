@@ -168,7 +168,7 @@ const onboardingFeatures = {
             },
         },
         devnet: {
-            enabled: true,
+            enabled: false,
             claimRewards: {
                 enabled: true,
                 hidden: false,
