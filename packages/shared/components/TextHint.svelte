@@ -27,7 +27,7 @@
             _classes = 'bg-gray-50 dark:bg-gray-800'
         } else if (success) {
             _classes = 'bg-green-50 dark:bg-green-500'
-            _icon = 'checkmark'
+            _icon = 'checkmark-filled'
             _iconClasses = 'text-green-700 dark:text-green-700'
         } else if (danger) {
             _classes = 'bg-red-50 dark:bg-red-500'

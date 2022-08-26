@@ -14,6 +14,7 @@ export enum Icon {
     CheckboxUnchecked = 'checkbox-unchecked',
     CheckboxUncheckedRound = 'checkbox-unchecked-round',
     Checkmark = 'checkmark',
+    CheckmarkFilled = 'checkmark-filled',
     ChevronDown = 'chevron-down',
     ChevronLeft = 'chevron-left',
     ChevronRight = 'chevron-right',
