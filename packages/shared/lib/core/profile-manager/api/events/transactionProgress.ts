@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { activeProfile } from '@core/profile/stores'
 import { ProfileType } from '@core/profile/enums'
 import { closePopup, openPopup } from '@lib/popup'
-import { ledgerSendConfirmationProps, ledgerDeviceStatus } from '@core/ledger'
+import { ledgerSendConfirmationProps, ledgerDeviceStatus, ledgerMintNativeTokenProps } from '@core/ledger'
 
 export function handleTransactionProgress(
     accountId: string,
@@ -17,22 +17,32 @@ export function handleTransactionProgress(
         console.warn('Transaction progress handler unimplemented: ', payload)
 
         if (get(activeProfile).type === ProfileType.Ledger) {
+            const _sendConfirmationProps = get(ledgerSendConfirmationProps)
+            const _mintNativeTokenProps = get(ledgerMintNativeTokenProps)
+
             const _openPopup = (type = 'ledgerTransaction') => {
-                const _props = get(ledgerSendConfirmationProps)
                 const shouldPreventClose = type === 'enableLedgerBlindSigning'
 
                 openPopup({
                     type,
                     hideClose: shouldPreventClose,
                     preventClose: shouldPreventClose,
-                    props: {
-                        toAddress:
-                            _props.recipient.type === 'address'
-                                ? _props.recipient.address
-                                : _props.recipient.account.depositAddress,
-                        toAmount: `${_props.amount} ${_props.unit}`,
-                        sendConfirmationPopupProps: _props,
-                    },
+                    ...(_sendConfirmationProps
+                        ? {
+                              props: {
+                                  toAddress:
+                                      _sendConfirmationProps.recipient.type === 'address'
+                                          ? _sendConfirmationProps.recipient.address
+                                          : _sendConfirmationProps.recipient.account.depositAddress,
+                                  toAmount: `${_sendConfirmationProps.amount} ${_sendConfirmationProps.unit}`,
+                                  sendConfirmationPopupProps: _sendConfirmationProps,
+                              },
+                          }
+                        : {
+                              props: {
+                                  mintNativeTokenPopupProps: _mintNativeTokenProps,
+                              },
+                          }),
                 })
             }
 

@@ -1,11 +1,13 @@
 <script lang="typescript">
     import { Animation, Text } from 'shared/components'
     import { KeyValueBox } from 'shared/components/atoms'
-    import { formatAddressForLedger, resetLedgerSendConfirmationProps } from '@core/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup, openPopup, popupState } from 'shared/lib/popup'
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import {
+        formatAddressForLedger,
+        resetLedgerSendConfirmationProps,
+        resetLedgerMintNativeTokenProps,
+    } from '@core/ledger'
+    import { openPopup } from 'shared/lib/popup'
+    import { onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { localize } from '@core/i18n'
 
@@ -14,49 +16,32 @@
     export let toAddress = ''
     export let toAmount = null
     export let sendConfirmationPopupProps = null
-
-    export let onCancel: (..._: any[]) => void
-
-    const shouldDisplaySendTo = toAddress?.length > 0 && toAmount !== null
-
-    const onInvalid = () => {
-        showAppNotification({
-            type: 'error',
-            message: locale('error.send.transaction'),
-        })
-
-        onCancel()
-
-        if (get(popupState).active) closePopup(true)
-    }
+    export let mintNativeTokenPopupProps = null
 
     const getPopupLocaleData = (prop: string): string => {
         const basePath = 'popups.ledgerTransaction'
-        const popupType = shouldDisplaySendTo ? 'transaction' : 'remainderAddress'
-
-        return `${basePath}.${popupType}.${prop}`
+        return `${basePath}.${prop}`
     }
 
-    onMount(() => {
-        /**
-         * CAUTION: If sendTo valid information then Firefly should cancel the transaction
-         * (to be retried) and notify the user.
-         */
-        if (!shouldDisplaySendTo) onInvalid()
-    })
-
     onDestroy(() => {
-        openPopup({
-            type: 'sendConfirmation',
-            props: sendConfirmationPopupProps,
-        })
-
-        resetLedgerSendConfirmationProps()
+        if (sendConfirmationPopupProps) {
+            openPopup({
+                type: 'sendConfirmation',
+                props: sendConfirmationPopupProps,
+            })
+            resetLedgerSendConfirmationProps()
+        } else if (mintNativeTokenPopupProps) {
+            openPopup({
+                type: 'mintNativeTokenForm',
+                props: mintNativeTokenPopupProps,
+            })
+            resetLedgerMintNativeTokenProps()
+        }
     })
 </script>
 
-<Text type="h4" classes="mb-6">{locale(getPopupLocaleData('title'))}</Text>
-<Text type="p" classes="mb-6" secondary>{locale(getPopupLocaleData('info'))}</Text>
+<Text type="h4" classes="mb-4">{locale(getPopupLocaleData('title'))}</Text>
+<Text type="p" classes="mb-4" secondary>{locale(getPopupLocaleData('info'))}</Text>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Animation
@@ -67,7 +52,7 @@
     <Animation animation="ledger-confirm-address-desktop" />
 </div>
 <div class="flex flex-col space-y-2">
-    {#if shouldDisplaySendTo}
+    {#if sendConfirmationPopupProps}
         <KeyValueBox keyText={localize('general.sendTo')} valueText={formatAddressForLedger(toAddress)} />
 
         <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
@@ -78,6 +63,9 @@
             <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
             <Text type="pre">{formatAmount(toAmount)}</Text>
         </div> -->
+    {:else if mintNativeTokenPopupProps}
+        <KeyValueBox keyText="Name" valueText={mintNativeTokenPopupProps.name} />
+        <KeyValueBox keyText="Symbol" valueText={mintNativeTokenPopupProps.symbol} />
     {/if}
 </div>
 

@@ -5,12 +5,20 @@
     import { onDestroy } from 'svelte'
 
     export let sendConfirmationPopupProps = null
+    export let mintNativeTokenPopupProps = null
 
     onDestroy(() => {
-        openPopup({
-            type: 'sendConfirmation',
-            props: sendConfirmationPopupProps,
-        })
+        if (sendConfirmationPopupProps) {
+            openPopup({
+                type: 'sendConfirmation',
+                props: sendConfirmationPopupProps,
+            })
+        } else if (mintNativeTokenPopupProps) {
+            openPopup({
+                type: 'mintNativeTokenForm',
+                props: mintNativeTokenPopupProps,
+            })
+        }
     })
 
     const steps = Array.from(Array(4), (_, i) => `step_${i + 1}`)
