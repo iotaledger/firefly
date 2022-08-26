@@ -1,10 +1,12 @@
+import { get } from 'svelte/store'
 import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
 import { Converter } from '@lib/converter'
 import { showAppNotification } from '@lib/notifications'
+import { activeProfile, ProfileType } from '@core/profile'
 import { isTransferring } from '@lib/wallet'
-import { get } from 'svelte/store'
+import { handleLedgerErrors } from '@core/ledger'
 import { Activity } from '../classes'
 import { VerificationStatus } from '../enums'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
@@ -48,6 +50,12 @@ export async function mintNativeToken(
         return Promise.resolve()
     } catch (reason) {
         isTransferring.set(false)
+
+        const _activeProfile = get(activeProfile)
+        if (_activeProfile.type === ProfileType.Ledger) {
+            handleLedgerErrors(reason.error)
+        }
+
         return Promise.reject(reason)
     }
 }

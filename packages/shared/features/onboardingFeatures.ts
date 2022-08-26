@@ -23,7 +23,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerProfile: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
             restoreProfile: {
@@ -38,7 +38,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
         },
@@ -64,7 +64,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerProfile: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
             restoreProfile: {
@@ -79,7 +79,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
         },
@@ -104,7 +104,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerProfile: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
             restoreProfile: {
@@ -119,7 +119,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
         },
@@ -127,7 +127,7 @@ const onboardingFeatures = {
     shimmer: {
         enabled: true,
         mainnet: {
-            enabled: false,
+            enabled: true,
             claimRewards: {
                 enabled: false,
                 hidden: true,
@@ -147,7 +147,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerProfile: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
             restoreProfile: {
@@ -163,12 +163,12 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
         },
         devnet: {
-            enabled: true,
+            enabled: false,
             claimRewards: {
                 enabled: true,
                 hidden: false,
@@ -188,7 +188,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerProfile: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
             restoreProfile: {
@@ -204,7 +204,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
         },
@@ -229,7 +229,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerProfile: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
             restoreProfile: {
@@ -245,7 +245,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
         },

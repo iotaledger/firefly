@@ -13,6 +13,7 @@ import {
 } from '@core/profile'
 import { deleteAccountsAndDatabase } from '@core/profile-manager'
 import { appRouter } from '@core/router'
+import { removePersistedShimmerClaimingTransactions } from '@contexts/onboarding/stores'
 
 /**
  * Deletes the currently active profile.
@@ -49,10 +50,11 @@ export async function deleteProfile(): Promise<void> {
         await logout(true, false)
 
         /**
-         * CAUTION: The profile must be removed from the
+         * CAUTION: The profile and its data must be removed from the
          * app's list of profiles that lives as a Svelte store.
          */
         removeProfile(_activeProfile?.id)
+        removePersistedShimmerClaimingTransactions(_activeProfile?.id)
 
         /**
          * NOTE: If there are no more profiles then the user should be
