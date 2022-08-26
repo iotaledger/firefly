@@ -35,7 +35,7 @@
             _iconClasses = 'text-red-500 dark:text-red-500'
         } else if (warning) {
             _classes = 'bg-yellow-50 dark:bg-yellow-500'
-            _icon = 'exclamation'
+            _icon = 'exclamation-filled'
             _iconClasses = 'text-yellow-700 dark:text-yellow-700'
         } else if (info) {
             _classes = 'bg-blue-50 dark:bg-blue-500'
