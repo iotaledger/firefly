@@ -55,8 +55,12 @@
 
     async function _create(): Promise<void> {
         if (trimmedAccountAlias && color) {
-            await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
-            closePopup()
+            try {
+                await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
+                closePopup()
+            } catch (err) {
+                isBusy = false
+            }
         }
     }
 
