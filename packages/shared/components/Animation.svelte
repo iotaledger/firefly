@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { mobile } from '@lib/app'
     import lottie from 'lottie-web'
     import { appSettings } from 'shared/lib/appSettings'
     import { onDestroy } from 'svelte'
@@ -9,6 +10,7 @@
     export let autoplay = true
     export let segments = undefined
     export let renderer = 'svg'
+    export let inlineStyle = ''
 
     const animations = {
         'welcome-desktop': {
@@ -82,6 +84,10 @@
         'congratulations-desktop': {
             lightmode: 'congratulations-desktop.json',
             darkmode: 'congratulations-desktop-darkmode.json',
+        },
+        'butterfly-chrysalis': {
+            lightmode: 'butterfly-chrysalis.json',
+            darkmode: 'butterfly-chrysalis-darkmode.json',
         },
         'migrate-desktop': {
             lightmode: 'migrate-desktop.json',
@@ -220,4 +226,4 @@
     })
 </script>
 
-<div class="w-full {classes}" bind:this={container} />
+<div class="w-full {classes}" style={inlineStyle} bind:this={container} />

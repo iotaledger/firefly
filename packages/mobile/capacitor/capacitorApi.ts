@@ -1,6 +1,8 @@
 import { Capacitor } from '@capacitor/core'
 
+import { App } from '@capacitor/app'
 import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
+import { Keyboard } from '@capacitor/keyboard'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { Share } from '@capacitor/share'
 import { BarcodeManager } from './lib/barcodeManager'
@@ -14,6 +16,7 @@ import { AppSettings } from '@lib/typings/app'
 import { VersionDetails } from '@lib/typings/appUpdater'
 import { IPlatform } from '@lib/typings/platform'
 import { ActionSheetOptions } from '@lib/typings/actionSheet'
+import { KeyboardStyle } from '@lib/typings/keyboard'
 
 import * as WalletBindings from './walletPluginApi'
 
@@ -50,6 +53,16 @@ export const CapacitorApi: IPlatform = {
     },
 
     listProfileFolders: (profileStoragePath) => new Promise<string[]>((resolve, reject) => {}),
+
+    loadJsonFile: async (filepath) => {
+        try {
+            const response = await fetch(filepath)
+            const json = await response.json()
+            return json
+        } catch (e) {
+            console.error(e)
+        }
+    },
 
     PincodeManager: PincodeManager,
 
@@ -89,19 +102,41 @@ export const CapacitorApi: IPlatform = {
         return
     },
 
-    exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
+    /**
+     * Exports transaction history
+     *
+     * @method exportTransactionHistory
+     *
+     * @param {string} textContent
+     * @param {string} fileName
+     *
+     * @returns {Promise<string>}
+     */
+    exportTransactionHistory: async (textContent, fileName) => {
+        await SecureFilesystemAccess.saveTextFile({
+            textContent,
+            fileName,
+        })
+        return ''
+    },
 
     /**
      * Exports migration log
      *
      * @method exportMigrationLog
      *
-     * @param {string} sourcePath
-     * @param {string} defaultFileName
+     * @param {string} textContent
+     * @param {string} fileName
      *
      * @returns {Promise<boolean>}
      */
-    exportMigrationLog: (sourcePath, defaultFileName) => new Promise<boolean>((resolve, reject) => {}),
+    exportMigrationLog: async (textContent, fileName) => {
+        await SecureFilesystemAccess.saveTextFile({
+            textContent,
+            fileName,
+        })
+        return true
+    },
 
     /**
      * Exports ledger migration log
@@ -255,7 +290,7 @@ export const CapacitorApi: IPlatform = {
      * Close the app
      * @returns {undefined}
      */
-    close: () => new Promise<void>((resolve, reject) => {}),
+    close: () => new Promise<void>((resolve, reject) => resolve(App.exitApp())),
 
     /*
      * Opens url and checks against acceptlist
@@ -303,10 +338,6 @@ export const CapacitorApi: IPlatform = {
         if (os === 'ios') {
             void (await SecureFilesystemAccess.allowAccess())
         }
-        void (await SecureFilesystemAccess.saveRecoveryKit({
-            selectedPath: `${selected}/recovery-kit.pdf`,
-            fromRelativePath: '/assets/docs/recovery-kit.pdf',
-        }))
         if (os === 'ios') {
             void SecureFilesystemAccess.revokeAccess()
         }
@@ -324,7 +355,7 @@ export const CapacitorApi: IPlatform = {
      * Opens the native OS Share dialog
      * @param {string} text Set some text to share
      */
-    share: async (title?: string, text?: string, url?: string) => {
+    share: async (text: string = '') => {
         await Share.share({
             text,
         })
@@ -338,6 +369,28 @@ export const CapacitorApi: IPlatform = {
     showActionSheet: async (options: ActionSheetOptions) => {
         const result = await ActionSheet.showActions(options as ShowActionsOptions)
         return result.index
+    },
+
+    /**
+     * @param {boolean} isVisible Show/Hide Accessory bar
+     */
+    setKeyboardAccessoryBarVisible: async (isVisible: boolean) => {
+        await Keyboard.setAccessoryBarVisible({ isVisible })
+    },
+
+    /**
+     * @param {KeyboardStyle} style (DARK, LIGHT, DEFAULT)
+     */
+    setKeyboardStyle: async (style: KeyboardStyle) => {
+        await Keyboard.setStyle({ style })
+    },
+
+    showKeyboard: async () => {
+        await Keyboard.show()
+    },
+
+    hideKeyboard: async () => {
+        await Keyboard.hide()
     },
 }
 

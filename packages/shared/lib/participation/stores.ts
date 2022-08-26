@@ -1,24 +1,25 @@
+import { getStakingEventFromAirdrop } from '@lib/participation/staking'
+import { isSoftwareProfile } from '@lib/profile'
+import { NetworkStatus } from '@lib/typings/network'
+import { persistent } from 'shared/lib/helpers'
 import { derived, get, Readable, writable } from 'svelte/store'
 import { networkStatus } from '../networkStatus'
-import { NodePlugin } from '../typings/node'
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MILESTONE } from '../time'
-import { selectedAccount, selectedAccountId, wallet } from '../wallet'
+import { NodePlugin } from '../typings/node'
 import { WalletAccount } from '../typings/wallet'
-
-import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID } from './constants'
+import { transferState, wallet } from '../wallet'
+import { ASSEMBLY_EVENT_ID, SHIMMER_EVENT_ID, TREASURY_VOTE_EVENT_ID } from './constants'
 import {
-    AccountParticipationOverview,
     ParticipateResponsePayload,
+    Participation,
     ParticipationAction,
     ParticipationEvent,
     ParticipationEventState,
+    ParticipationHistoryItem,
     ParticipationOverview,
     PendingParticipation,
     StakingAirdrop,
 } from './types'
-import { NetworkStatus } from '@lib/typings/network'
-import { getStakingEventFromAirdrop, isAirdropAvailable } from '@lib/participation/staking'
-import { activeProfile } from '@lib/profile'
 
 /**
  * The store for keeping track of pending participations.
@@ -35,6 +36,11 @@ export const pendingParticipations = writable<PendingParticipation[]>([])
 export const participationAction = writable<ParticipationAction>(null)
 
 /**
+ * Store used to keep track when the user has excplicitly requested to change a participation (eg, governance vote).
+ */
+export const isChangingParticipation = writable<boolean>(false)
+
+/**
  * The overview / statistics about participation. See #AccountParticipationOverview for more details.
  */
 export const participationOverview = writable<ParticipationOverview>([])
@@ -45,13 +51,17 @@ export const participationOverview = writable<ParticipationOverview>([])
 export const isPerformingParticipation = writable<boolean>(false)
 
 /**
+ * Whether participation overview and events are being fetched
+ */
+export const isFetchingParticipationInfo = writable<boolean>(false)
+
+/**
  * The store for accounts that are currently staked. This is NOT to hold accounts
  * that have been selected for staking / unstaking or have staked in the past.
  *
  * This is updated regularly by the polling
  * in `wallet.rs`.
  */
-// TODO: remove this
 export const stakedAccounts: Readable<WalletAccount[]> = derived(
     [participationOverview],
     ([$participationOverview]) => {
@@ -68,177 +78,6 @@ export const stakedAccounts: Readable<WalletAccount[]> = derived(
         if (!get(accounts)) return []
         else return get(accounts).filter((wa) => activeAccountIndices.includes(wa.index))
     }
-)
-
-export const selectedAccountParticipationOverview = derived(
-    [participationOverview, selectedAccount],
-    ([$participationOverview, $selectedAccount]) =>
-        $participationOverview?.find(({ accountIndex }) => accountIndex === $selectedAccount?.index) ?? null
-)
-
-/**
- * The amount of funds that are currently staked on the selected account. This amount may differ
- * between airdrops, so we pick the highest number (this is only possible
- * because the same funds may be staked for both airdrops).
- */
-export const stakedAmount: Readable<number> = derived(
-    selectedAccountParticipationOverview,
-    ($selectedAccountParticipationOverview) => {
-        let total = 0
-        if ($selectedAccountParticipationOverview) {
-            const { shimmerStakedFunds, assemblyStakedFunds } = $selectedAccountParticipationOverview
-            if (shimmerStakedFunds > 0 && assemblyStakedFunds > 0) {
-                total += Math.max(shimmerStakedFunds, assemblyStakedFunds)
-            } else {
-                total += shimmerStakedFunds
-                total += assemblyStakedFunds
-            }
-        }
-        return total
-    }
-)
-
-/**
- * The amount of funds that are currently unstaked on the selected account. This amount may differ
- * between airdrops, so we pick the lowest number (this is only possible
- * because the same funds may be staked for both airdrops).
- */
-export const unstakedAmount: Readable<number> = derived(
-    selectedAccountParticipationOverview,
-    ($selectedAccountParticipationOverview) => {
-        let total = 0
-        if ($selectedAccountParticipationOverview) {
-            const { shimmerUnstakedFunds, assemblyUnstakedFunds } = $selectedAccountParticipationOverview
-            total += Math.min(shimmerUnstakedFunds, assemblyUnstakedFunds)
-        }
-        return total
-    }
-)
-
-// TODO: replace its old use partiallyStakedAccounts
-export const isPartiallyStaked: Readable<boolean> = derived(
-    selectedAccountParticipationOverview,
-    ($selectedAccountParticipationOverview) =>
-        ($selectedAccountParticipationOverview?.assemblyStakedFunds > 0 &&
-            $selectedAccountParticipationOverview?.assemblyUnstakedFunds > 0) ||
-        ($selectedAccountParticipationOverview?.shimmerStakedFunds > 0 &&
-            $selectedAccountParticipationOverview?.shimmerUnstakedFunds > 0)
-)
-
-/**
- * The store for the total amount of funds that are partially (un)staked for
- * the selected account.
- */
-export const partiallyUnstakedAmount: Readable<number> = derived(
-    selectedAccountParticipationOverview,
-    ($selectedAccountParticipationOverview) => {
-        const assemblyPartialFunds =
-            $selectedAccountParticipationOverview?.assemblyStakedFunds > 0 &&
-            $selectedAccountParticipationOverview?.assemblyUnstakedFunds > 0
-                ? $selectedAccountParticipationOverview?.assemblyUnstakedFunds
-                : 0
-        const shimmerPartialFunds =
-            $selectedAccountParticipationOverview?.shimmerStakedFunds > 0 &&
-            $selectedAccountParticipationOverview?.shimmerUnstakedFunds > 0
-                ? $selectedAccountParticipationOverview?.shimmerUnstakedFunds
-                : 0
-
-        return Math.max(assemblyPartialFunds, shimmerPartialFunds)
-    }
-)
-
-function getCurrentStakingRewards(airdrop: StakingAirdrop, accountOverview: AccountParticipationOverview): number {
-    if (!airdrop || !isAirdropAvailable(airdrop) || !accountOverview) {
-        return 0
-    }
-
-    const rewardsKey = `${airdrop}Rewards`
-    const rewardsBelowMinimumKey = `${airdrop}RewardsBelowMinimum`
-
-    /**
-     * NOTE: We return the sum of rewards and rewardsBelowMinimum here because it is possible that an
-     * account has accumulated more than min rewards for an airdrop, but has unstaked and moved the funds
-     * to another address that has NOT reach the minimum.
-     */
-    return accountOverview[rewardsKey] <= 0
-        ? accountOverview[rewardsBelowMinimumKey]
-        : accountOverview[rewardsKey] + accountOverview[rewardsBelowMinimumKey]
-}
-
-function getCachedStakingRewards(airdrop: StakingAirdrop, accountId: string): number {
-    if (!airdrop || !accountId) return 0
-
-    const stakingRewards = get(activeProfile)?.stakingRewards
-    if (!stakingRewards) return 0
-
-    const accountStakingRewards = stakingRewards.find((_stakingRewards) => _stakingRewards.accountId === accountId)
-    if (!accountStakingRewards) return 0
-
-    return accountStakingRewards[airdrop]?.totalAirdropRewards || 0
-}
-
-/**
- * The current accumulated Assembly rewards for the selected
- * account that have been staked at some point (even
- * if they are currently unstaked) in the current staking period.
- *
- * Be cautious that this value is in microASMB, so it is likely to be larger.
- */
-export const currentAssemblyStakingRewards: Readable<number> = derived(
-    [selectedAccountParticipationOverview],
-    ([$selectedAccountParticipationOverview]) =>
-        getCurrentStakingRewards(StakingAirdrop.Assembly, $selectedAccountParticipationOverview)
-)
-
-/**
- * The current accumulated Assembly rewards for the selected account
- * that are below the minimum rewards requirement.
- */
-export const currentAssemblyStakingRewardsBelowMinimum: Readable<number> = derived(
-    [selectedAccountParticipationOverview],
-    ([$selectedAccountParticipationOverview]) =>
-        getCurrentStakingRewards(StakingAirdrop.Assembly, $selectedAccountParticipationOverview) -
-        ($selectedAccountParticipationOverview?.assemblyRewards ?? 0)
-)
-
-/**
- * The total accumulated Assembly rewards for the selected account.
- */
-export const totalAssemblyStakingRewards: Readable<number> = derived(
-    [currentAssemblyStakingRewards, selectedAccountId],
-    ([$currentAssemblyStakingRewards, $selectedAccountId]) =>
-        $currentAssemblyStakingRewards + getCachedStakingRewards(StakingAirdrop.Assembly, $selectedAccountId)
-)
-
-/**
- * The current accumulated Shimmer rewards for the selected
- * account that have been staked at some point (even
- * if they are currently unstaked) in the current staking period.
- */
-export const currentShimmerStakingRewards: Readable<number> = derived(
-    [selectedAccountParticipationOverview],
-    ([$selectedAccountParticipationOverview]) =>
-        getCurrentStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview)
-)
-
-/**
- * The current accumulated Shimmer rewards for the selected account
- * that are below the minimum rewards requirement.
- */
-export const currentShimmerStakingRewardsBelowMinimum: Readable<number> = derived(
-    [selectedAccountParticipationOverview],
-    ([$selectedAccountParticipationOverview]) =>
-        getCurrentStakingRewards(StakingAirdrop.Shimmer, $selectedAccountParticipationOverview) -
-        ($selectedAccountParticipationOverview?.shimmerRewards ?? 0)
-)
-
-/**
- * The total accumulated Shimmer rewards for the selected account.
- */
-export const totalShimmerStakingRewards: Readable<number> = derived(
-    [currentShimmerStakingRewards, selectedAccountId],
-    ([$currentShimmerStakingRewards, $selectedAccountId]) =>
-        $currentShimmerStakingRewards + getCachedStakingRewards(StakingAirdrop.Shimmer, $selectedAccountId)
 )
 
 /**
@@ -281,6 +120,14 @@ export const shimmerStakingEventState: Readable<ParticipationEventState> = deriv
     ([$networkStatus]) => {
         const stakingEvent = getStakingEventFromAirdrop(StakingAirdrop.Shimmer)
         return deriveParticipationEventState(stakingEvent, $networkStatus)
+    }
+)
+
+export const treasuryEventState: Readable<ParticipationEventState> = derived(
+    [networkStatus, participationEvents],
+    ([$networkStatus, $participationEvents]) => {
+        const treasuryEvent = $participationEvents?.find((p) => p?.eventId === TREASURY_VOTE_EVENT_ID)
+        return deriveParticipationEventState(treasuryEvent, $networkStatus)
     }
 )
 
@@ -343,15 +190,17 @@ export const shimmerStakingRemainingTime: Readable<number> = derived(
 export const addNewPendingParticipation = (
     payload: ParticipateResponsePayload,
     accountId: string,
-    action: ParticipationAction
+    action: ParticipationAction,
+    participations?: Participation[]
 ): void => {
     const _pendingParticipation = {
         accountId,
         action,
+        participations,
     }
 
-    pendingParticipations.update((participations) => [
-        ...participations,
+    pendingParticipations.update((_participations) => [
+        ..._participations,
         ...payload.map((tx) => Object.assign({}, _pendingParticipation, { messageId: tx.id })),
     ])
 }
@@ -372,15 +221,15 @@ export const removePendingParticipations = (ids: string[]): void => {
 }
 
 /**
- * Determines if has a pending participation
+ * Determines if a participation message is attached to the Tangle
  *
- * @method hasPendingParticipation
+ * @method isParticipationPending
  *
  * @param {string} id
  *
  * @returns {boolean}
  */
-export const hasPendingParticipation = (id: string): boolean =>
+export const isParticipationPending = (id: string): boolean =>
     get(pendingParticipations).some((participation) => participation.messageId === id)
 
 /**
@@ -394,3 +243,25 @@ export const hasPendingParticipation = (id: string): boolean =>
  */
 export const getPendingParticipation = (id: string): PendingParticipation | undefined =>
     get(pendingParticipations).find((participation) => participation.messageId === id)
+
+/**
+ * Determines if has a pending participation
+ *
+ * @method hasPendingParticipation
+ *
+ * @param {string} id
+ *
+ * @returns {boolean}
+ */
+export const hasPendingParticipation = (id: string): boolean =>
+    get(pendingParticipations).some((participation) => participation.messageId === id)
+
+export const resetPerformingParticipation = (): void => {
+    if (!get(isSoftwareProfile)) {
+        transferState.set(null)
+    }
+    isPerformingParticipation.set(false)
+    participationAction.set(undefined)
+}
+
+export const participationHistory = persistent<ParticipationHistoryItem[]>('participationHistory', [])

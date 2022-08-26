@@ -6,7 +6,7 @@
     import { formatDate, localize } from '@core/i18n'
     import { getOfficialExplorer } from 'shared/lib/network'
     import { Platform } from 'shared/lib/platform'
-    import { activeProfile, getColor } from 'shared/lib/profile'
+    import { activeProfile, getAccountColor } from 'shared/lib/profile'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { Payload } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
@@ -27,7 +27,6 @@
     export let confirmed: boolean
     export let payload: Payload
     export let balance: number // migration tx
-    export let onBackClick = (): void => {}
 
     let date = localize('error.invalidDate')
     $: {
@@ -128,14 +127,17 @@
         $currencies[CurrencyTypes.USD],
         $exchangeRates[$activeProfile?.settings.currency]
     )
-    $: senderColor = getColor($activeProfile, senderAccount?.id) as string
-    $: receiverColor = getColor($activeProfile, receiverAccount?.id) as string
+    $: senderColor = getAccountColor(senderAccount?.id) as string
+    $: receiverColor = getAccountColor(receiverAccount?.id) as string
 </script>
 
 {#if $mobile}
-    <div class="flex flex-col h-full min-h-0">
+    <div class="flex flex-col h-full min-h-0 pt-6 pb-8">
+        <div class="w-full text-center">
+            <Text bold bigger>{localize('general.activityDetails')}</Text>
+        </div>
         <div
-            class="p-0 mt-8 w-11/12 self-center visualization mb-5 rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
+            class="p-0 my-5 w-11/12 self-center visualization rounded-xl text-center items-center justify-center flex flex-row bg-gray-100 dark:bg-gray-900 dark:bg-opacity-50 {!confirmed &&
                 'opacity-50'}"
         >
             <div class="flex flex-col flex-wrap justify-center items-center text-center">
@@ -172,7 +174,7 @@
                 {/if}
             </div>
         </div>
-        <div class="flex flex-col px-6 h-full overflow-y-auto flex-auto">
+        <div class="flex flex-col px-5 h-full overflow-y-auto flex-auto">
             <div class="mb-5">
                 <Text secondary>{localize('general.status')}</Text>
                 <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
@@ -209,7 +211,7 @@
                     {/each}
                 </div>
             {/if}
-            <div class="mb-5 flex justify-center">
+            <div class="flex justify-center">
                 <button
                     class="mobile-explorer-button action p-3 w-full text-center rounded-lg font-semibold text-14 bg-white dark:bg-gray-800 text-blue-500"
                     on:click={() => Platform.openUrl(`${explorerLink}/message/${id}`)}

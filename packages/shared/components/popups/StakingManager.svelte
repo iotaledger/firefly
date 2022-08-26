@@ -13,18 +13,16 @@
         isAccountStaked,
         getIotasUntilMinimumAirdropReward,
     } from 'shared/lib/participation'
-    import { getParticipationOverview, participate, stopParticipating } from 'shared/lib/participation/api'
-    import { ASSEMBLY_EVENT_ID, STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
+    import { participate, stopParticipating } from 'shared/lib/participation/api'
+    import { STAKING_EVENT_IDS } from 'shared/lib/participation/constants'
     import {
         isPerformingParticipation,
-        isPartiallyStaked,
         participationAction,
-        participationOverview,
-        pendingParticipations,
-        stakedAccounts,
         assemblyStakingEventState,
         shimmerStakingEventState,
+        resetPerformingParticipation,
     } from 'shared/lib/participation/stores'
+    import { isPartiallyStaked, currentAccountTreasuryVoteValue } from 'shared/lib/participation/account'
     import {
         AccountParticipationAbility,
         Participation,
@@ -38,44 +36,16 @@
     import { NodePlugin } from 'shared/lib/typings/node'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
-    import { selectedAccount, selectedAccountId, transferState, wallet } from 'shared/lib/wallet'
+    import { selectedAccountStore } from 'shared/lib/wallet'
     import { localize } from '@core/i18n'
 
     export let shouldParticipateOnMount = false
     export let participations: Participation[] = []
 
-    let pendingParticipationIds: string[] = []
-    let previousPendingParticipationsLength = 0
-    let { accounts } = $wallet
-
-    $: participationAbility = getAccountParticipationAbility($selectedAccount)
+    $: participationAbility = getAccountParticipationAbility($selectedAccountStore)
     $: canStake = canParticipate($assemblyStakingEventState) || canParticipate($shimmerStakingEventState)
 
-    $: $participationOverview, resetAccounts()
-    $: $stakedAccounts, $selectedAccount, async () => getParticipationOverview(ASSEMBLY_EVENT_ID)
-
-    $: isCurrentAccountStaked = isAccountStaked($selectedAccount?.id)
-
-    function resetAccounts(): void {
-        /**
-         * NOTE: This is necessary for the page
-         * to be re-rendered because updating arrays
-         * in place will not update the UI (requires
-         * variable re-assignment).
-         */
-        accounts = accounts
-    }
-
-    function resetView(): void {
-        if (!isSoftwareProfile) {
-            transferState.set(null)
-        }
-
-        isPerformingParticipation.set(false)
-        participationAction.set(undefined)
-
-        resetAccounts()
-    }
+    $: isCurrentAccountStaked = isAccountStaked($selectedAccountStore?.id)
 
     function displayErrorNotification(error): void {
         showAppNotification({
@@ -96,11 +66,6 @@
 
         isPerformingParticipation.set(true)
 
-        const _sync = (messageIds: string[]) => {
-            messageIds.forEach((id) => pendingParticipationIds.push(id))
-            previousPendingParticipationsLength = messageIds.length
-        }
-
         const hasParticipationPlugin = $networkStatus.nodePlugins.includes(NodePlugin.Participation)
         if (!hasParticipationPlugin) {
             showAppNotification({
@@ -110,32 +75,30 @@
                 }),
             })
 
-            resetView()
+            resetPerformingParticipation()
 
             return
         }
 
         switch ($participationAction) {
             case ParticipationAction.Stake: {
-                await participate($selectedAccount?.id, participations)
-                    .then((messageIds) => _sync(messageIds))
-                    .catch((err) => {
-                        console.error(err)
+                await participate($selectedAccountStore?.id, participations, $participationAction).catch((err) => {
+                    console.error(err)
 
-                        displayErrorNotification(err)
-                        resetView()
-                    })
+                    displayErrorNotification(err)
+                    resetPerformingParticipation()
+                })
                 break
             }
             case ParticipationAction.Unstake:
-                await stopParticipating($selectedAccount?.id, STAKING_EVENT_IDS)
-                    .then((messageIds) => _sync(messageIds))
-                    .catch((err) => {
+                await stopParticipating($selectedAccountStore?.id, STAKING_EVENT_IDS, $participationAction).catch(
+                    (err) => {
                         console.error(err)
 
                         displayErrorNotification(err)
-                        resetView()
-                    })
+                        resetPerformingParticipation()
+                    }
+                )
                 break
             default:
                 break
@@ -189,7 +152,7 @@
                 }),
             })
 
-            resetView()
+            resetPerformingParticipation()
 
             return
         }
@@ -203,25 +166,6 @@
          */
         if (shouldParticipateOnMount) {
             await handleParticipationAction()
-        }
-
-        const usubscribe = pendingParticipations.subscribe((participations) => {
-            const currentParticipationsLength = participations.length
-
-            if (currentParticipationsLength < previousPendingParticipationsLength) {
-                const latestParticipationIds = participations.map((participation) => participation.messageId)
-
-                if (latestParticipationIds.length === 0) {
-                    resetView()
-                }
-
-                pendingParticipationIds = latestParticipationIds
-                previousPendingParticipationsLength = currentParticipationsLength
-            }
-        })
-
-        return () => {
-            usubscribe()
         }
     })
 
@@ -246,6 +190,17 @@
 
 <Text type="h4" classes="mb-2">{localize('popups.stakingManager.title')}</Text>
 <Text type="p" secondary classes="mb-4">{localize('popups.stakingManager.description')}</Text>
+
+{#if $currentAccountTreasuryVoteValue}
+    <TextHint
+        classes="p-4 rounded-2xl bg-blue-50 dark:bg-gray-800 mb-6"
+        icon="info"
+        iconClasses="fill-current text-blue-500 dark:text-blue-500"
+        hint={localize('popups.stakingManager.mergeStakeDisclaimerVoting')}
+        hintClasses="text-gray-500 dark:text-gray-500"
+    />
+{/if}
+
 <div class="staking flex flex-col mb-4">
     {#if participationAbility !== AccountParticipationAbility.HasDustAmount}
         <div
@@ -263,9 +218,9 @@
                     </div>
                 {:else if participationAbility === AccountParticipationAbility.WillNotReachMinAirdrop}
                     <div
-                        bind:this={tooltipAnchors[$selectedAccount?.index]}
-                        on:mouseenter={() => toggleTooltip($selectedAccount)}
-                        on:mouseleave={() => toggleTooltip($selectedAccount)}
+                        bind:this={tooltipAnchors[$selectedAccountStore?.index]}
+                        on:mouseenter={() => toggleTooltip($selectedAccountStore)}
+                        on:mouseleave={() => toggleTooltip($selectedAccountStore)}
                     >
                         <Icon icon="exclamation" width="20" height="20" classes="text-orange-500" />
                     </div>
@@ -287,7 +242,7 @@
                         disabled={$isPerformingParticipation ||
                             participationAbility === AccountParticipationAbility.HasPendingTransaction}
                     >
-                        {$selectedAccount.alias}
+                        {$selectedAccountStore.alias}
                     </Text>
                     {#if $isPartiallyStaked}
                         <Text
@@ -297,7 +252,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccount.balance}
+                            {$isPartiallyStaked ? formatUnitBestMatch(getStakedFunds()) : $selectedAccountStore.balance}
                             •
                             <Text
                                 type="p"
@@ -308,7 +263,7 @@
                             >
                                 {$isPartiallyStaked
                                     ? getFormattedFiatAmount(getStakedFunds())
-                                    : $selectedAccount.balanceEquiv}
+                                    : $selectedAccountStore.balanceEquiv}
                             </Text>
                         </Text>
                     {:else}
@@ -319,7 +274,7 @@
                                 participationAbility === AccountParticipationAbility.HasPendingTransaction}
                             classes="font-extrabold"
                         >
-                            {$selectedAccount.balance}
+                            {$selectedAccountStore.balance}
                             •
                             <Text
                                 type="p"
@@ -328,7 +283,7 @@
                                     participationAbility === AccountParticipationAbility.HasPendingTransaction}
                                 classes="inline"
                             >
-                                {$selectedAccount.balanceEquiv}
+                                {$selectedAccountStore.balanceEquiv}
                             </Text>
                         </Text>
                     {/if}
@@ -375,17 +330,9 @@
     {/if}
 </div>
 
-<TextHint
-    classes="p-4 rounded-2xl bg-blue-50 dark:bg-gray-800"
-    icon="info"
-    iconClasses="fill-current text-blue-500 dark:text-blue-500"
-    hint={localize('popups.stakingManager.singleAccountHint')}
-    hintClasses="text-gray-500 dark:text-gray-500"
-/>
-
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-1 text-left">
+        <Text type="h3" classes="text-left">
             {localize('tooltips.stakingMinRewards.titleMinBalance', { values: { amount: tooltipMinBalance } })}
         </Text>
         <Text type="p" secondary classes="text-left">{localize('tooltips.stakingMinRewards.bodyMinBalance')}</Text>

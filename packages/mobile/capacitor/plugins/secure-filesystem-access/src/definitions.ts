@@ -11,5 +11,5 @@ export interface SecureFilesystemAccessTypes {
     removeProfileFolder(options: { folder: string }): Promise<void>
     renameProfileFolder(options: { oldName: string; newName: string }): Promise<void>
     listProfileFolders(options: { folder: string }): Promise<{ files: [string] }>
-    saveRecoveryKit(options: { selectedPath: string; fromRelativePath: string }): Promise<void>
+    saveTextFile(options: { textContent: string; fileName: string }): Promise<void>
 }

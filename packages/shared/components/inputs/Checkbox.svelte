@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { mobile } from '@lib/app'
     import { Icon, Text } from 'shared/components'
 
     export let label = undefined

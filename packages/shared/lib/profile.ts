@@ -1,5 +1,4 @@
-import { derived, get, Readable, writable } from 'svelte/store'
-import { _ } from 'svelte-i18n'
+import { Locale } from '@core/i18n'
 import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
@@ -8,19 +7,19 @@ import {
     destroyActor,
     getProfileDataPath,
     getWalletDataPath,
-    AccountColors,
-    selectedAccountId,
+    selectedAccountIdStore,
 } from 'shared/lib/wallet'
-import { Platform } from './platform'
-import { ProfileAccount, ProfileType } from './typings/profile'
-import { HistoryDataProps } from './typings/market'
-import { AvailableExchangeRates } from './typings/currency'
+import { _ } from 'svelte-i18n'
+import { derived, get, Readable, writable } from 'svelte/store'
 import { getOfficialNetworkConfig } from './network'
+import { Platform } from './platform'
+import { AccountColor } from './typings/color'
+import { AvailableExchangeRates } from './typings/currency'
+import { HistoryDataProps } from './typings/market'
 import { NetworkConfig, NetworkType } from './typings/network'
+import { Profile, ProfileAccount, ProfileType, UserSettings } from './typings/profile'
 import { ValuesOf } from './typings/utils'
-import { Profile, UserSettings } from './typings/profile'
 import { WalletAccount } from './typings/wallet'
-import { Locale } from '@core/i18n'
 
 const MAX_PROFILE_NAME_LENGTH = 20
 
@@ -41,7 +40,7 @@ activeProfileId.subscribe((profileId) => {
     Platform.updateActiveProfile(profileId)
 })
 
-selectedAccountId?.subscribe((accountId) => {
+selectedAccountIdStore?.subscribe((accountId) => {
     if (accountId) {
         updateProfile('lastUsedAccountId', accountId)
     }
@@ -368,7 +367,7 @@ const getUpdatedAccounts = (
     accountId: string,
     profileAccount: ProfileAccount
 ): ProfileAccount[] => {
-    const { accounts } = activeProfile
+    const { accounts } = activeProfile ?? {}
 
     if (accounts?.length) {
         if (accounts?.find((account) => account.id === accountId)) {
@@ -392,7 +391,7 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
     if (profileAccount.color) {
         updateProfile('accounts', getUpdatedAccounts(activeProfile, profileAccount.id, profileAccount))
     } else if (profileAccount.id) {
-        const accountColors = Object.values(AccountColors).filter((_, i) => !(i % 2))
+        const accountColors = Object.values(AccountColor).filter((_, i) => !(i % 2))
         const randomColor = accountColors[Math.floor(Math.random() * accountColors.length)].toString()
         updateProfile(
             'accounts',
@@ -404,23 +403,17 @@ export const setProfileAccount = (activeProfile: Profile, profileAccount: Profil
 /**
  * Gets account color from activeProfile using account id
  *
- * @method getColor
+ * @method getAccountColor
  *
  * @returns {string}
  */
-export const getColor = (activeProfile: Profile, accountId: string): string | AccountColors => {
-    const { accounts } = activeProfile || {}
-
-    if (accounts?.length) {
-        const foundAccountColor = accounts.find((account) => account.id === accountId)?.color
-        if (foundAccountColor) return foundAccountColor
+export function getAccountColor(accountId: string): string | AccountColor {
+    const _activeProfile = get(activeProfile)
+    const accounts = _activeProfile?.accounts
+    if (!accounts?.length && accountId) {
+        setProfileAccount(_activeProfile, { id: accountId, color: '' })
     }
-
-    if (accountId) {
-        const profileAccount: ProfileAccount = { id: accountId, color: '' }
-        setProfileAccount(activeProfile, profileAccount)
-        return getColor(activeProfile, accountId)
-    }
+    return accounts?.find((account) => account.id === accountId)?.color ?? AccountColor.Blue
 }
 
 /**

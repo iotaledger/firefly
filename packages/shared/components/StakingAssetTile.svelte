@@ -3,31 +3,31 @@
     import { appSettings } from 'shared/lib/appSettings'
     import { localize } from '@core/i18n'
     import { Asset, Token } from 'shared/lib/typings/assets'
-    import {
-        getFormattedMinimumRewards,
-        getTimeUntilMinimumAirdropReward,
-        getUnstakedFunds,
-        hasAccountReachedMinimumAirdrop,
-        isAccountStaked,
-        isStakingPossible,
-    } from 'shared/lib/participation/staking'
+    import { getFormattedMinimumRewards, isAccountStaked } from 'shared/lib/participation/staking'
     import {
         assemblyStakingEventState,
         assemblyStakingRemainingTime,
-        isPartiallyStaked,
         participationOverview,
-        selectedAccountParticipationOverview,
         shimmerStakingEventState,
         shimmerStakingRemainingTime,
         stakedAccounts,
     } from 'shared/lib/participation/stores'
+    import {
+        selectedAccountParticipationOverview,
+        isPartiallyStaked,
+        hasAccountReachedMinimumAirdrop,
+        getTimeUntilMinimumAirdropReward,
+        getUnstakedFunds,
+        isParticipationPossible,
+    } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { openPopup } from 'shared/lib/popup'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
-    import { selectedAccount } from 'shared/lib/wallet'
+    import { activeProfile } from 'shared/lib/profile'
+    import { selectedAccountStore } from 'shared/lib/wallet'
 
     export let asset: Asset
 
@@ -47,16 +47,22 @@
     let tooltipText: TooltipText
     let remainingTime: number
 
-    const FIAT_PLACEHOLDER = '---'
+    $: if (!tooltipAnchor) {
+        showTooltip = false
+    }
 
+    const FIAT_PLACEHOLDER = '---'
+    $: SHOW_SHIMMER_TOKEN_FORMATTING_WARNING = asset?.name === Token.Shimmer
+
+    $: $activeProfile.stakingRewards
     $: isDarkModeEnabled = $appSettings.darkMode
-    $: isActivelyStaking = getAccount($stakedAccounts) && isStakingPossible(stakingEventState)
-    $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isStakingPossible(stakingEventState)
+    $: isActivelyStaking = getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)
+    $: isPartiallyStakedAndCanStake = $isPartiallyStaked && isParticipationPossible(stakingEventState)
     $: hasStakingEnded = stakingEventState === ParticipationEventState.Ended
     $: $participationOverview, (tooltipText = getLocalizedTooltipText())
     $: remainingTime = asset?.name === Token.Assembly ? $assemblyStakingRemainingTime : $shimmerStakingRemainingTime
     $: {
-        if (hasAccountReachedMinimumAirdrop() && !isStakingPossible(stakingEventState)) {
+        if (hasAccountReachedMinimumAirdrop() && !isParticipationPossible(stakingEventState)) {
             isBelowMinimumRewards = false
         } else {
             isBelowMinimumRewards =
@@ -64,9 +70,10 @@
                 $selectedAccountParticipationOverview?.[`${airdrop}Rewards`] <= 0
         }
     }
+
     $: showWarningState =
         isPartiallyStakedAndCanStake ||
-        (isBelowMinimumRewards && !getAccount($stakedAccounts) && isStakingPossible(stakingEventState)) ||
+        (isBelowMinimumRewards && !getAccount($stakedAccounts) && isParticipationPossible(stakingEventState)) ||
         (isBelowMinimumRewards && hasStakingEnded)
 
     function toggleTooltip(): void {
@@ -78,7 +85,7 @@
     }
 
     function getAccount(accounts: WalletAccount[]): WalletAccount {
-        return accounts?.find((account) => account.alias === $selectedAccount?.alias)
+        return accounts?.find((account) => account.alias === $selectedAccountStore?.alias)
     }
 
     function getLocalizedTooltipText(): TooltipText {
@@ -103,7 +110,7 @@
                         }),
                     ],
                 }
-            } else if (!isAccountStaked($selectedAccount?.id) && isStakingPossible(stakingEventState)) {
+            } else if (!isAccountStaked($selectedAccountStore?.id) && isParticipationPossible(stakingEventState)) {
                 const timeNeeded = getTimeUntilMinimumAirdropReward(airdrop)
                 const _getBody = () => {
                     if (timeNeeded) {
@@ -131,6 +138,14 @@
                     body: _getBody(),
                 }
             }
+        } else {
+            return {
+                title: localize('tooltips.shimmerTokenFormatting.title'),
+                body: [
+                    localize('tooltips.shimmerTokenFormatting.body1'),
+                    localize('tooltips.shimmerTokenFormatting.body2'),
+                ],
+            }
         }
     }
 </script>
@@ -148,13 +163,15 @@
         <div class="flex flex-col flex-wrap space-y-1 text-left">
             <div class="flex flex-row items-center space-x-1">
                 <Text classes="font-semibold">{asset?.name}</Text>
-                {#if showWarningState && tooltipText?.body.length > 0}
+                {#if (showWarningState || SHOW_SHIMMER_TOKEN_FORMATTING_WARNING) && tooltipText?.body.length > 0}
                     <div bind:this={tooltipAnchor} on:mouseenter={toggleTooltip} on:mouseleave={toggleTooltip}>
                         <Icon
                             icon="exclamation"
                             width="17"
                             height="17"
-                            classes="fill-current text-yellow-600 group-hover:text-gray-900"
+                            classes="fill-current text-{showWarningState
+                                ? 'yellow-600'
+                                : 'gray-500'} group-hover:text-gray-900"
                         />
                     </div>
                 {/if}
@@ -171,7 +188,7 @@
 </button>
 {#if showTooltip && tooltipText?.body.length > 0}
     <Tooltip anchor={tooltipAnchor} position="right">
-        <Text type="p" classes="text-gray-900 bold mb-2 text-left">{tooltipText?.title}</Text>
+        <Text type="h3" classes="text-left">{tooltipText?.title}</Text>
         {#each tooltipText?.body as paragraph}
             <Text
                 type="p"

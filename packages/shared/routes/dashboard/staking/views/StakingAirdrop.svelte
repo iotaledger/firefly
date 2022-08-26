@@ -1,18 +1,20 @@
 <script lang="typescript">
-    import { HR, Link, StakingAirdropIndicator, Text } from 'shared/components'
+    import { HR, Icon, Link, StakingAirdropIndicator, Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { formatStakingAirdropReward, isStakingPossible } from 'shared/lib/participation'
+    import { formatStakingAirdropReward, isParticipationPossible } from 'shared/lib/participation'
     import {
         assemblyStakingEventState,
         assemblyStakingRemainingTime,
+        shimmerStakingRemainingTime,
+        shimmerStakingEventState,
+    } from 'shared/lib/participation/stores'
+    import {
         currentAssemblyStakingRewards,
         currentShimmerStakingRewards,
-        shimmerStakingEventState,
-        shimmerStakingRemainingTime,
         totalAssemblyStakingRewards,
         totalShimmerStakingRewards,
-    } from 'shared/lib/participation/stores'
+    } from 'shared/lib/participation/account'
     import { ParticipationEventState, StakingAirdrop } from 'shared/lib/participation/types'
     import { getBestTimeDuration } from 'shared/lib/time'
     import { capitalize } from 'shared/lib/utils'
@@ -23,6 +25,9 @@
     let remainingTimeAmount: string
     let remainingTimeUnit: string
 
+    let rewardsWrapperWidth: number
+    let stakingAirdropWidth: number
+
     const video = {
         [StakingAirdrop.Assembly]: null,
         [StakingAirdrop.Shimmer]: null,
@@ -31,8 +36,17 @@
     $: $assemblyStakingRemainingTime, $shimmerStakingRemainingTime, parseRemainingTime()
 
     const isAssembly = airdrop === StakingAirdrop.Assembly
+
+    const SHOW_SHIMMER_TOKEN_FORMATTING_WARNING = !isAssembly
+    let showTooltip = false
+    let tooltipAnchor: HTMLElement
+
     let stakingEventState = ParticipationEventState.Inactive
     $: stakingEventState = isAssembly ? $assemblyStakingEventState : $shimmerStakingEventState
+
+    function toggleTooltip(): void {
+        showTooltip = !showTooltip
+    }
 
     function getFormattedStakingAirdropRewards(forCurrentRewards: boolean, stakingRewards: number): string {
         return formatStakingAirdropReward(airdrop, stakingRewards, 6)
@@ -102,6 +116,7 @@
     class="relative z-0 flex w-full h-full bg-{airdrop}-bg"
     on:mouseenter={video[airdrop]?.play()}
     on:mouseleave={video[airdrop]?.pause()}
+    bind:clientWidth={stakingAirdropWidth}
 >
     <!-- svelte-ignore a11y-media-has-caption -->
     <video
@@ -130,7 +145,7 @@
     <div class="w-full h-full px-6 pb-10 flex flex-col justify-end z-0">
         <!-- We check if assembly staking is possible to have both airdrops aligned -->
         <div
-            class="{isStakingPossible($assemblyStakingEventState)
+            class="{isParticipationPossible($assemblyStakingEventState)
                 ? 'apply-min-height'
                 : ''} flex flex-col flex-wrap justify-between space-y-5"
         >
@@ -153,7 +168,7 @@
                 <Link onClick={handleLearnMoreClick} classes="text-14">{localize('actions.visitWebsite')}</Link>
             </div>
             <div class="flex flex-col flex-wrap space-y-5">
-                {#if isStakingPossible(stakingEventState)}
+                {#if isParticipationPossible(stakingEventState)}
                     <div class="flex flex-row justify-between space-x-4">
                         <div class="flex flex-col">
                             <div>
@@ -176,7 +191,7 @@
                                 {localize('views.staking.airdrops.currentStakingPeriod')}
                             </Text>
                         </div>
-                        {#if isStakingPossible(stakingEventState)}
+                        {#if isParticipationPossible(stakingEventState)}
                             <div class="flex flex-col text-right">
                                 <div>
                                     <Text type="p" classes="font-bold text-lg inline text-white dark:text-white">
@@ -198,14 +213,28 @@
                 {/if}
                 <HR />
                 <div class="flex flex-row justify-between space-x-4">
-                    <div class="flex flex-col">
-                        <div>
+                    <div class="flex flex-col" bind:clientWidth={rewardsWrapperWidth}>
+                        <div class="flex flex-row items-center space-x-1">
                             <Text type="p" classes="font-bold text-lg inline text-white dark:text-gray-400 break-all">
                                 {totalStakingRewards.split(' ')[0]}
                             </Text>
                             <Text type="p" secondary classes="text-sm inline">
                                 {totalStakingRewards.split(' ')[1]}
                             </Text>
+                            {#if SHOW_SHIMMER_TOKEN_FORMATTING_WARNING}
+                                <div
+                                    bind:this={tooltipAnchor}
+                                    on:mouseenter={toggleTooltip}
+                                    on:mouseleave={toggleTooltip}
+                                >
+                                    <Icon
+                                        icon="exclamation"
+                                        width="17"
+                                        height="17"
+                                        classes="fill-current text-gray-500 group-hover:text-gray-900"
+                                    />
+                                </div>
+                            {/if}
                         </div>
                         <Text
                             type="p"
@@ -221,6 +250,17 @@
         </div>
     </div>
 </div>
+{#if showTooltip}
+    <Tooltip anchor={tooltipAnchor} position={rewardsWrapperWidth > 0.5 * stakingAirdropWidth ? 'left' : 'right'}>
+        <Text type="h3" classes="text-left">{localize('tooltips.shimmerTokenFormatting.title')}</Text>
+        <Text type="p" classes="text-left mb-2">
+            {localize('tooltips.shimmerTokenFormatting.body1')}
+        </Text>
+        <Text type="p" classes="text-left">
+            {localize('tooltips.shimmerTokenFormatting.body2')}
+        </Text>
+    </Tooltip>
+{/if}
 
 <style type="text/scss">
     .apply-min-height {

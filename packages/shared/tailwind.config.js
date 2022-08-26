@@ -261,6 +261,10 @@ module.exports = {
                 'elevation-3': '0px 4px 6px rgba(0, 0, 0, 0.08)',
                 'elevation-4': '0px 4px 12px rgba(0, 0, 0, 0.12)',
             },
+            scale: {
+                120: '1.2',
+                180: '1.8',
+            },
         },
         fontFamily: {
             'fira-mono': ['"Fira Mono"', 'monospace'],
@@ -274,6 +278,7 @@ module.exports = {
         backgroundOpacity: ['dark'],
         opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'disabled'],
         cursor: ['responsive', 'disabled'],
+        ringOpacity: ['dark'],
     },
     plugins: [
         // Add individual border colors

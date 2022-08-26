@@ -1,7 +1,14 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { initAppSettings } from 'shared/lib/appSettings'
-    import { cleanupSignup, mobile, stage } from 'shared/lib/app'
+    import {
+        cleanupSignup,
+        mobile,
+        isKeyboardOpened,
+        keyboardHeight,
+        stage,
+        getKeyboardTransitionSpeed,
+    } from 'shared/lib/app'
     import {
         Animation,
         Button,
@@ -104,7 +111,13 @@
     <div slot="title">
         <Text type="h2">{locale('views.profile.title')}</Text>
     </div>
-    <div slot="leftpane__content">
+    <div
+        slot="leftpane__content"
+        style="padding-bottom: {$mobile && $isKeyboardOpened
+            ? $keyboardHeight
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
+    >
         <Text type="p" secondary classes="mb-4">{locale('views.profile.body1')}</Text>
         <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-10'}>
             {locale(`views.profile.body2.${hasNoProfiles() ? 'first' : 'nonFirst'}`)}
@@ -133,12 +146,29 @@
             </CollapsibleBlock>
         {/if}
     </div>
-    <div slot="leftpane__action" class="flex flex-col">
+    <div
+        slot="leftpane__action"
+        class="flex flex-col"
+        style="padding-bottom: {$mobile && $isKeyboardOpened
+            ? $keyboardHeight
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
+    >
         <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
             {locale('actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation animation="profile-desktop" />
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-green dark:bg-gray-900'}"
+        style="margin-top: {$mobile && $isKeyboardOpened
+            ? -$keyboardHeight
+            : 0}px; transition: margin-top {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
+    >
+        <Animation
+            animation={$mobile ? 'password-desktop' : 'profile-desktop'}
+            classes={$mobile ? 'transform scale-120' : ''}
+        />
     </div>
 </OnboardingLayout>

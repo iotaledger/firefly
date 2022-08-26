@@ -27,6 +27,7 @@
     export let autofocus = false
 
     export let onMaxClick = (): void => {}
+    export let customUnitPresentation: (units: AmountUnit[], callback: (toUnit: AmountUnit) => void) => void
 
     const currency = $activeProfile?.settings.currency ?? (AvailableExchangeRates.USD as AmountUnit)
     const units: AmountUnit[] = [currency].concat(Object.values(Unit).filter((u) => u !== 'Pi'))
@@ -165,7 +166,8 @@
 <svelte:window on:click={onOutsideClick} />
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
-        type={$mobile ? 'tel' : 'text'}
+        type={$mobile ? 'number' : 'text'}
+        inputmode="decimal"
         {error}
         label={amountForLabel || localize('general.amount')}
         placeholder={placeholder || localize('general.amount')}
@@ -192,6 +194,10 @@
             on:click={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
+                if (customUnitPresentation) {
+                    customUnitPresentation(units, onUnitClick)
+                    return
+                }
                 toggleDropDown()
             }}
             bind:this={unitsButton}

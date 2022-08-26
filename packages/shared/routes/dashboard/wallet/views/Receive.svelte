@@ -6,7 +6,7 @@
     import { Button, Icon, QR, QRImage, Spinner, Text } from 'shared/components'
     import { activeProfile, isLedgerProfile } from 'shared/lib/profile'
     import { setClipboard } from 'shared/lib/utils'
-    import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccount } from 'shared/lib/wallet'
+    import { hasGeneratedALedgerReceiveAddress, isSyncing, selectedAccountStore } from 'shared/lib/wallet'
 
     export let isGeneratingAddress = false
     export let onGenerateAddress: (id: string) => void = () => {}
@@ -18,7 +18,7 @@
     $: qrSize = Math.max(Math.min(wrapperWidth - 225, wrapperHeight - 225, 200), 0)
 
     const generateNewAddress = (): void => {
-        onGenerateAddress($selectedAccount.id)
+        onGenerateAddress($selectedAccountStore.id)
     }
 
     const handleCloseClick = (): void => {
@@ -30,59 +30,103 @@
     }
 </script>
 
-<div
-    class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6"
-    bind:clientHeight={wrapperHeight}
-    bind:clientWidth={wrapperWidth}
->
-    <div class="w-full flex flex-row justify-between items-center">
-        <div class="w-full flex flex-row space-x-4 items-center">
-            <Text classes="text-left" type="h5">{localize('general.receiveFunds')}</Text>
-            <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
-                <Icon
-                    icon="refresh"
-                    classes="{isGeneratingAddress && 'animate-spin-reverse'} text-gray-500 dark:text-white"
-                />
-            </button>
+{#if $mobile}
+    <main
+        class="grid grid-flow-row-dense items-center justify-items-center p-5"
+        style="grid-template-rows: 1fr 1fr 20fr 5fr"
+    >
+        <div class="w-full text-center">
+            <Text bold bigger>{localize('general.receiveFunds')}</Text>
         </div>
-        <button on:click={handleCloseClick}>
-            <Icon icon="close" classes="text-gray-800 dark:text-white" />
-        </button>
-    </div>
-    {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
-        <div class="flex w-full h-full justify-center items-end">
-            <Button disabled={isGeneratingAddress || $isSyncing} classes="w-full" onClick={() => generateNewAddress()}>
-                {#if isGeneratingAddress}
-                    <Spinner
-                        busy={isGeneratingAddress}
-                        message={localize('general.generatingReceiveAddress')}
-                        classes="justify-center"
-                    />
-                {:else}{localize('actions.generateAddress')}{/if}
-            </Button>
+        <div class="grid mt-44 rounded-xl bg-white">
+            <QRImage size={5} data={$selectedAccountStore.depositAddress} />
         </div>
-    {:else}
-        <div class="flex flex-auto items-center justify-center mb-4">
-            {#if $mobile}
-                <QRImage size={5} data={$selectedAccount.depositAddress} />
-            {:else}
-                <QR size={qrSize} data={$selectedAccount.depositAddress} />
-            {/if}
-        </div>
-        <div class="mb-6">
-            <Text secondary smaller classes="mb-1">
+        <div class="w-full">
+            <Text type="h4" classes="p-4 text-center">
                 {$activeProfile?.isDeveloperProfile
                     ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                     : localize('general.myAddress')}
             </Text>
-            <Text type="pre">{$selectedAccount.depositAddress}</Text>
+            <Text
+                type="pre"
+                overrideColor
+                classes="text-13 px-4 mb-10 text-blue-500"
+                on:click={() => setClipboard($selectedAccountStore.depositAddress)}
+            >
+                {$selectedAccountStore.depositAddress}
+            </Text>
         </div>
-        <Button
-            disabled={isGeneratingAddress}
-            classes="w-full"
-            onClick={() => setClipboard($selectedAccount.depositAddress)}
-        >
-            {localize('general.copyAddress')}
-        </Button>
-    {/if}
-</div>
+        <div class="flex flex-col space-y-4 justify-center items-center h-12 w-full">
+            <Button
+                disabled={isGeneratingAddress}
+                classes="w-full"
+                onClick={() => handleShareClick($selectedAccountStore.depositAddress)}
+            >
+                {localize('general.shareAddress')}
+            </Button>
+        </div>
+    </main>
+{:else}
+    <div
+        class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0 p-6"
+        bind:clientHeight={wrapperHeight}
+        bind:clientWidth={wrapperWidth}
+    >
+        <div class="w-full flex flex-row justify-between items-center">
+            <div class="w-full flex flex-row space-x-4 items-center">
+                <Text classes="text-left" type="h5">{localize('general.receiveFunds')}</Text>
+                <button on:click={generateNewAddress} class:pointer-events-none={isGeneratingAddress}>
+                    <Icon
+                        icon="refresh"
+                        classes="{isGeneratingAddress && 'animate-spin-reverse'} text-gray-500 dark:text-white"
+                    />
+                </button>
+            </div>
+            <button on:click={handleCloseClick}>
+                <Icon icon="close" classes="text-gray-800 dark:text-white" />
+            </button>
+        </div>
+        {#if $isLedgerProfile && !$hasGeneratedALedgerReceiveAddress}
+            <div class="flex w-full h-full justify-center items-end">
+                <Button
+                    disabled={isGeneratingAddress || $isSyncing}
+                    classes="w-full"
+                    onClick={() => generateNewAddress()}
+                >
+                    {#if isGeneratingAddress}
+                        <Spinner
+                            busy={isGeneratingAddress}
+                            message={localize('general.generatingReceiveAddress')}
+                            classes="justify-center"
+                        />
+                    {:else}{localize('actions.generateAddress')}{/if}
+                </Button>
+            </div>
+        {:else}
+            <div class="flex flex-auto items-center justify-center mb-4">
+                <QR size={qrSize} data={$selectedAccountStore.depositAddress} />
+            </div>
+            <div class="mb-6">
+                <Text secondary smaller classes="mb-1">
+                    {$activeProfile?.isDeveloperProfile
+                        ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
+                        : localize('general.myAddress')}
+                </Text>
+                <Text type="pre">{$selectedAccountStore.depositAddress}</Text>
+            </div>
+            <Button
+                disabled={isGeneratingAddress}
+                classes="w-full"
+                onClick={() => setClipboard($selectedAccountStore.depositAddress)}
+            >
+                {localize('general.copyAddress')}
+            </Button>
+        {/if}
+    </div>
+{/if}
+
+<style type="text/scss">
+    main {
+        height: calc(97vh - env(safe-area-inset-top));
+    }
+</style>

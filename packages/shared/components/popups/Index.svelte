@@ -3,6 +3,7 @@
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { Locale } from '@core/i18n'
+    import { backButtonStore } from '@core/router'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNode from './AddNode.svelte'
@@ -18,6 +19,7 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
+    import GovernanceManager from './GovernanceManager.svelte'
     import HideAccount from './HideAccount.svelte'
     import LedgerAddress from './LedgerAddress.svelte'
     import LedgerAppGuide from './LedgerAppGuide.svelte'
@@ -36,14 +38,18 @@
     import Snapshot from './Snapshot.svelte'
     import StakingConfirmation from './StakingConfirmation.svelte'
     import StakingManager from './StakingManager.svelte'
+    import Success from './Success.svelte'
     import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
+    import NetworkStatus from './NetworkStatus.svelte'
     import SwitchNetwork from './SwitchNetwork.svelte'
     import Transaction from './Transaction.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
+    import ConfirmCloseApp from './ConfirmCloseApp.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
+    import NodeConfigOptions from './NodeConfigOptions.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
 
@@ -106,6 +112,7 @@
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,
         nodeInfo: NodeInfo,
+        networkStatus: NetworkStatus,
         addNode: AddNode,
         removeNode: RemoveNode,
         switchNetwork: SwitchNetwork,
@@ -127,8 +134,12 @@
         newStakingPeriodNotification: NewStakingPeriodNotification,
         airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
+        confirmCloseApp: ConfirmCloseApp,
         legalUpdate: LegalUpdate,
+        governanceManager: GovernanceManager,
+        success: Success,
         singleAccountGuide: SingleAccountGuide,
+        nodeConfigOptions: NodeConfigOptions,
     }
 
     const onKey = (e) => {
@@ -168,7 +179,13 @@
         e.preventDefault()
     }
 
+    const handleDrawerClose = () => {
+        closePopup($popupState?.preventClose)
+        $backButtonStore?.pop()
+    }
+
     onMount(async () => {
+        $backButtonStore?.add(closePopup as () => Promise<void>)
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
@@ -179,8 +196,8 @@
 
 <svelte:window on:keydown={onKey} />
 {#if $mobile && !fullScreen}
-    <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
-        <div bind:this={popupContent} class="py-10 px-6">
+    <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={handleDrawerClose}>
+        <div bind:this={popupContent} class="pt-10 pb-8 px-5">
             <svelte:component this={types[type]} {...props} {locale} />
         </div>
     </Drawer>

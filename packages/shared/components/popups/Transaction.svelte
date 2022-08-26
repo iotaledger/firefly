@@ -1,20 +1,18 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { Unit } from '@iota/unit-converter'
     import { Button, Icon, Illustration, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
-    import { isAccountStaked, isStakingPossible } from 'shared/lib/participation'
+    import { isAccountStaked, isParticipationPossible } from 'shared/lib/participation'
+    import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
+    import { TREASURY_VOTE_EVENT_ID } from 'shared/lib/participation/constants'
+    import { assemblyStakingEventState, shimmerStakingEventState } from 'shared/lib/participation/stores'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile } from 'shared/lib/profile'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
-    import { Locale } from '@core/i18n'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
-    import {
-        assemblyStakingEventState,
-        selectedAccountParticipationOverview,
-        shimmerStakingEventState,
-    } from 'shared/lib/participation/stores'
-
-    export let locale: Locale
+    import { TrackedParticipationItem } from 'shared/lib/participation/types'
+    import { mobile } from '@lib/app'
 
     export let accountId: string
     export let internal = false
@@ -25,6 +23,51 @@
     export let onConfirm = (..._: any[]): void => {}
 
     const displayAmount = getFormattedAmount()
+
+    enum ActiveParticipationType {
+        StakeVote = 'stakeVote',
+        Stake = 'stake',
+        Vote = 'vote',
+    }
+
+    let treasuryVoteParticipations: TrackedParticipationItem[]
+    $: treasuryVoteParticipations =
+        Object.values($selectedAccountParticipationOverview?.trackedParticipations?.[TREASURY_VOTE_EVENT_ID] || {}) ??
+        []
+    $: isAccountVoting =
+        !!treasuryVoteParticipations?.find((trackedParticipation) => trackedParticipation?.endMilestoneIndex === 0) ??
+        false
+
+    let activeParticipationType: ActiveParticipationType | ''
+    $: {
+        if (isAccountStaked(accountId) && isAccountVoting) {
+            activeParticipationType = ActiveParticipationType.StakeVote
+        } else if (isAccountStaked(accountId)) {
+            activeParticipationType = ActiveParticipationType.Stake
+        } else if (isAccountVoting) {
+            activeParticipationType = ActiveParticipationType.Vote
+        } else {
+            activeParticipationType = ''
+        }
+    }
+
+    $: mustAcknowledgeGenericParticipationWarning =
+        (isAccountStaked(accountId) &&
+            (isParticipationPossible($assemblyStakingEventState) ||
+                isParticipationPossible($shimmerStakingEventState))) ||
+        isAccountVoting
+
+    let mustAcknowledgeBelowMinRewardParticipationWarning: boolean
+    $: {
+        const accountOverview = $selectedAccountParticipationOverview
+        mustAcknowledgeBelowMinRewardParticipationWarning =
+            (accountOverview?.assemblyRewardsBelowMinimum > 0 &&
+                accountOverview?.assemblyRewards <= 0 &&
+                isParticipationPossible($assemblyStakingEventState)) ||
+            (accountOverview?.shimmerRewardsBelowMinimum > 0 &&
+                accountOverview?.shimmerRewards <= 0 &&
+                isParticipationPossible($shimmerStakingEventState))
+    }
 
     function getFormattedAmount() {
         const isFiat = isFiatCurrency(unit)
@@ -37,22 +80,6 @@
         )
 
         return isFiat ? `${fiatAmount} (${iotaAmount})` : `${iotaAmount} (${fiatAmount})`
-    }
-
-    $: mustAcknowledgeGenericParticipationWarning =
-        isAccountStaked(accountId) &&
-        (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState))
-
-    let mustAcknowledgeBelowMinRewardParticipationWarning: boolean
-    $: {
-        const accountOverview = $selectedAccountParticipationOverview
-        mustAcknowledgeBelowMinRewardParticipationWarning =
-            (accountOverview?.assemblyRewardsBelowMinimum > 0 &&
-                accountOverview?.assemblyRewards <= 0 &&
-                isStakingPossible($assemblyStakingEventState)) ||
-            (accountOverview?.shimmerRewardsBelowMinimum > 0 &&
-                accountOverview?.shimmerRewards <= 0 &&
-                isStakingPossible($shimmerStakingEventState))
     }
 
     function handleNextClick() {
@@ -70,8 +97,10 @@
     }
 </script>
 
-<Text type="h4" classes="mb-6">{locale('popups.transaction.title')}</Text>
-<div class="flex w-full flex-row flex-wrap">
+<Text type="h4" classes={$mobile ? 'flex w-full justify-center -mt-4 mb-6' : 'mb-6'}>
+    {localize('popups.transaction.title')}
+</Text>
+<div class="flex w-full flex-row flex-wrap {$mobile && '-mb-4'}">
     {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
         <div
             class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3"
@@ -80,30 +109,34 @@
                 <Icon icon="warning" classes="text-white" />
             </div>
             <Text type="p" classes="dark:text-white mx-4 mb-4 mt-6">
-                {locale(
+                {localize(
                     mustAcknowledgeBelowMinRewardParticipationWarning
-                        ? 'popups.transaction.sendingFromStakedAccountBelowMinReward'
-                        : 'popups.transaction.sendingFromStakedAccount'
+                        ? `popups.transaction.${
+                              activeParticipationType === ActiveParticipationType.Stake
+                                  ? 'sendingFromStakedAccountBelowMinReward'
+                                  : 'sendingFromStakedAccountBelowMinRewardVote'
+                          }`
+                        : `popups.transaction.sendingFromActiveParticipationAccount.${activeParticipationType}`
                 )}
             </Text>
         </div>
     {:else}
-        <div class="illustration w-full bg-pastel-yellow dark:bg-gray-900 flex justify-center">
+        <div class="illustration w-full {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'} flex justify-center">
             <Illustration illustration="balance-desktop" />
         </div>
         <div class="w-full text-center my-6 px-10">
             <Text type="h4" highlighted classes="mb-2">
-                {locale('popups.transaction.body', { values: { amount: displayAmount } })}
+                {localize('popups.transaction.body', { values: { amount: displayAmount } })}
             </Text>
             <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
         </div>
     {/if}
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={() => handleCancelClick()}>{locale('actions.cancel')}</Button>
+        <Button classes="w-full" secondary onClick={() => handleCancelClick()}>{localize('actions.cancel')}</Button>
         {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
-            <Button classes="w-full" onClick={handleNextClick}>{locale('actions.next')}</Button>
+            <Button classes="w-full" onClick={handleNextClick}>{localize('actions.next')}</Button>
         {:else}
-            <Button classes="w-full" onClick={onConfirm}>{locale('actions.confirm')}</Button>
+            <Button classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>
         {/if}
     </div>
 </div>

@@ -57,7 +57,11 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.Welcome:
-                nextRoute = AppRoute.Legal
+                if (get(mobile)) {
+                    nextRoute = AppRoute.Profile
+                } else {
+                    nextRoute = AppRoute.Legal
+                }
                 break
             case AppRoute.Legal:
                 nextRoute = AppRoute.CrashReporting
@@ -78,7 +82,7 @@ export class AppRouter extends Router<AppRoute> {
                     if (setupType === SetupType.New) {
                         if (get(mobile)) {
                             setProfileType(ProfileType.Software)
-                            nextRoute = AppRoute.Secure
+                            nextRoute = AppRoute.Password
                         } else {
                             nextRoute = AppRoute.Create
                         }

@@ -1,17 +1,37 @@
 <script lang="typescript">
-    import { appRouter } from '@core/router'
-    import { Animation, Button, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { AppRoute, appRouter } from '@core/router'
+    import { Animation, Button, Checkbox, Dropdown, Logo, OnboardingLayout, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
-    import { appSettings } from 'shared/lib/appSettings'
+    import { appSettings, isAwareOfCrashReporting } from 'shared/lib/appSettings'
     import { SUPPORTED_LOCALES, setLanguage, _ } from '@core/i18n'
     import { Locale } from '@core/i18n'
+    import { backButtonStore } from '@core/router'
+    import { lastAcceptedTos, lastAcceptedPrivacyPolicy } from 'shared/lib/appSettings'
+    import { TOS_VERSION, PRIVACY_POLICY_VERSION } from 'shared/lib/app'
 
     export let locale: Locale
 
+    let checked = false
+    const sendCrashReports = false
+
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
+    $backButtonStore?.reset()
+
     function handleContinueClick(): void {
+        if ($mobile) {
+            lastAcceptedTos.set(TOS_VERSION)
+            lastAcceptedPrivacyPolicy.set(PRIVACY_POLICY_VERSION)
+            appSettings.set({ ...$appSettings, sendCrashReports })
+            if (!$isAwareOfCrashReporting) {
+                isAwareOfCrashReporting.set(true)
+            }
+        }
         $appRouter.next()
+    }
+
+    function handleLegalClick(): void {
+        $appRouter.goTo(AppRoute.Legal)
     }
 
     function handleLanguage(item: { value: string }): void {
@@ -21,25 +41,28 @@
 </script>
 
 <OnboardingLayout allowBack={false}>
-    <div slot="leftpane__content">
+    <div slot="leftpane__content" class={$mobile && 'px-2'}>
         <div class="flex flex-col {$mobile && 'items-center text-center px-10'} space-y-4 mb-8">
             {#if !$mobile}
                 <Logo width="64px" logo="logo-firefly" classes="mb-6" />
             {/if}
             <Text type={$mobile ? 'h3' : 'h1'}>{locale('views.onboarding1.title')}</Text>
-            <Text type="p" secondary>{locale('views.onboarding1.body')}</Text>
+            {#if !$mobile}
+                <Text type="p" secondary>{locale('views.onboarding1.body')}</Text>
+            {/if}
         </div>
         {#if $mobile}
-            <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
-                {#each languageList as language}
-                    <button
-                        class="relative flex items-center p-2 w-full whitespace-nowrap rounded-md"
-                        on:click={() => handleLanguage(language)}
-                        class:active={language?.label === SUPPORTED_LOCALES[$appSettings.language]}
-                    >
-                        <Text type="p" smaller>{language?.label}</Text>
-                    </button>
-                {/each}
+            <div class="flex flex-col space-y-2 mb-8">
+                <div class="flex flex-row items-center space-x-3 mb-1">
+                    <Checkbox bind:checked />
+                    <Text type="p" secondary>
+                        {locale('views.legal.checkboxMobile')}
+                        <span on:click={handleLegalClick} class="text-blue-500">
+                            {locale('views.legal.title')}
+                        </span>
+                    </Text>
+                </div>
+                <!-- <Checkbox label={locale('views.crashReporting.checkbox')} bind:checked={sendCrashReports} /> -->
             </div>
         {:else}
             <Dropdown
@@ -51,10 +74,18 @@
         {/if}
     </div>
     <div slot="leftpane__action">
-        <Button onClick={() => handleContinueClick()} classes="w-full">{locale('actions.continue')}</Button>
+        <Button onClick={() => handleContinueClick()} classes="w-full" disabled={!checked}
+            >{locale('actions.continue')}</Button
+        >
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="welcome-desktop" />
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden' : 'bg-pastel-blue dark:bg-gray-900'}"
+    >
+        <Animation
+            classes="setup-anim-aspect-ratio {$mobile ? '-mr-52 transform scale-180' : ''}"
+            animation="welcome-desktop"
+        />
     </div>
 </OnboardingLayout>
 

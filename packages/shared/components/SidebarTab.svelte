@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip, PingingBadge } from 'shared/components'
     import { SidebarTab, dashboardRoute } from '@core/router'
+    import { localize } from '@core/i18n'
 
     export let tab: SidebarTab = undefined
 
@@ -34,6 +35,6 @@
 </button>
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right" size="small">
-        <Text type="p">{tab?.label}</Text>
+        <Text type="p">{localize(`tabs.${tab?.label}`)}</Text>
     </Tooltip>
 {/if}

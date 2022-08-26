@@ -1,19 +1,30 @@
-import { ErrorEventPayload, TransferState } from 'shared/lib/typings/events'
+import { localize } from '@core/i18n'
+import { displayErrorEventToUser } from '@lib/errors'
+import { setProfileAccount } from 'shared/lib/profile'
+
+import type {
+    ErrorEventPayload,
+    Event,
+    GeneratingRemainderDepositAddressEvent,
+    PreparedTransactionEvent,
+    TransactionEventData,
+    TransferProgressEventData,
+    TransferState,
+} from 'shared/lib/typings/events'
 import { Payload } from 'shared/lib/typings/message'
 import { formatUnitBestMatch } from 'shared/lib/units'
-import { derived, get, writable } from 'svelte/store'
+import { derived, get, Writable, writable } from 'svelte/store'
 import { mnemonic } from './app'
 import { convertToFiat, currencies, exchangeRates, formatCurrency } from './currency'
 import { deepCopy } from './helpers'
-import { localize } from '@core/i18n'
-import { displayNotificationForLedgerProfile } from './ledger'
 import { didInitialiseMigrationListeners } from './migration'
-import { buildClientOptions } from './network'
+import { buildClientOptions, getDefaultClientOptions } from './network'
 import { showAppNotification } from './notifications'
+// PARTICIPATION
 import { Platform } from './platform'
-import { activeProfile, isLedgerProfile, updateProfile } from './profile'
+import { activeProfile, updateProfile } from './profile'
 import { WALLET, WalletApi } from './shell/walletApi'
-import { Account, SignerType, SyncAccountOptions, SyncedAccount } from './typings/account'
+import { Account, AccountMetadata, AccountSyncOptions, Balance, SignerType, SyncedAccount } from './typings/account'
 import { Address } from './typings/address'
 import { IActorHandler } from './typings/bridge'
 import { CurrencyTypes } from './typings/currency'
@@ -25,23 +36,8 @@ import { ProfileType } from './typings/profile'
 import { SetupType } from './typings/setup'
 import { AccountMessage, BalanceHistory, BalanceOverview, WalletAccount, WalletState } from './typings/wallet'
 import { IWalletApi } from './typings/walletApi'
-import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from 'shared/tailwind.config.js'
-import { setProfileAccount } from 'shared/lib/profile'
 
-const configColors = resolveConfig(tailwindConfig).theme.colors
-
-export enum AccountColors {
-    Blue = configColors['blue']['500'],
-    LightBlue = configColors['lightblue']['500'],
-    Purple = configColors['purple']['500'],
-    Turquoise = configColors['turquoise']['500'],
-    Green = configColors['green']['500'],
-    Yellow = configColors['yellow']['500'],
-    Orange = configColors['orange']['500'],
-    Red = configColors['red']['500'],
-    Pink = configColors['pink']['500'],
-}
+export const haveStakingResultsCached = writable<boolean>(null)
 
 export const MAX_ACCOUNT_NAME_LENGTH = 20
 export const MAX_PASSWORD_LENGTH = 256
@@ -106,20 +102,23 @@ export const resetWallet = (): void => {
     transferState.set(null)
     hasGeneratedALedgerReceiveAddress.set(false)
     isSyncing.set(null)
+    accountSyncingQueueStore.set(null)
     isFirstSessionSync.set(true)
     isFirstManualSync.set(true)
     isBackgroundSyncing.set(false)
     walletSetupType.set(null)
+    haveStakingResultsCached.set(null)
 }
 
 // Created to help selectedAccount reactivity.
 // Use it to detected switches on selectedAccount
-export const selectedAccountId = writable<string | null>(null)
+export const selectedAccountIdStore = writable<string | null>(null)
 
-export const selectedAccount = derived([selectedAccountId, get(wallet).accounts], ([$selectedAccountId, $accounts]) =>
-    $accounts.find((acc) => acc.id === $selectedAccountId)
+export const selectedAccountStore = derived(
+    [selectedAccountIdStore, get(wallet).accounts],
+    ([$selectedAccountId, $accounts]) => $accounts.find((acc) => acc.id === $selectedAccountId)
 )
-export const setSelectedAccount = (id: string): void => selectedAccountId.set(id)
+export const setSelectedAccount = (id: string): void => selectedAccountIdStore.set(id)
 
 export const walletSetupType = writable<SetupType>(null)
 export const selectedMessage = writable<Message | null>(null)
@@ -133,6 +132,9 @@ export const isSyncing = writable<boolean>(false)
 export const isFirstSessionSync = writable<boolean>(true)
 export const isFirstManualSync = writable<boolean>(true)
 export const isBackgroundSyncing = writable<boolean>(false)
+
+export const accountSyncingQueueStore = writable<WalletAccount[] | null>(null)
+export const currentSyncingAccountStore = writable<WalletAccount>(null)
 
 export const api: IWalletApi = new Proxy(
     { ...WalletApi },
@@ -383,7 +385,7 @@ export const asyncCreateAccount = (alias?: string, color?: string): Promise<Wall
             },
             {
                 onSuccess(response) {
-                    const preparedAccount = prepareAccountInfo(response.payload, {
+                    const preparedAccount = formatAccountWithMetadata(response.payload, {
                         balance: 0,
                         incoming: 0,
                         outgoing: 0,
@@ -449,6 +451,96 @@ export const asyncDeleteStorage = (): Promise<void> =>
         })
     })
 
+export function initializeAccountSyncingQueue(): void {
+    const accounts = get(get(wallet).accounts)
+    if (!accounts || accounts.length <= 0) return
+
+    const selectedAccount = get(selectedAccountStore)
+    if (!selectedAccount) return
+
+    accountSyncingQueueStore.set([selectedAccount, ...accounts.filter((account) => account.id !== selectedAccount.id)])
+}
+
+export function updateAccountSyncingQueue(account: WalletAccount): void {
+    const accountSyncingQueue = get(accountSyncingQueueStore)
+    if (!account || !accountSyncingQueue) return
+
+    // It can be assumed that if the account is not currently in the queue then it has already been synced.
+    const isAccountInSyncingQueue = accountSyncingQueue?.some((_account) => _account.id === account.id)
+    if (!isAccountInSyncingQueue) return
+
+    // If the account is already first in the queue then no need to update the queue.
+    const accountIndexInSyncingQueue = get(accountSyncingQueueStore).findIndex((_account) => _account.id === account.id)
+    if (accountIndexInSyncingQueue === 0) return
+
+    accountSyncingQueueStore.update((accountSyncingQueue) =>
+        accountSyncingQueue.sort((a: WalletAccount, b: WalletAccount) =>
+            a.id === account.id ? -1 : b.id === account.id ? 1 : 0
+        )
+    )
+}
+
+export async function processAccountSyncingQueue(): Promise<void> {
+    const accountSyncingQueue = get(accountSyncingQueueStore)
+    if (!accountSyncingQueue || accountSyncingQueue.length <= 0) return
+
+    try {
+        if (get(currentSyncingAccountStore)) return
+
+        const accountToSync = accountSyncingQueue.shift()
+        currentSyncingAccountStore.set(accountToSync)
+
+        await asyncSyncAccount(accountToSync)
+
+        currentSyncingAccountStore.set(null)
+        accountSyncingQueueStore.set(accountSyncingQueue)
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export function asyncSyncAccount(account: WalletAccount, showErrorNotification: boolean = true): Promise<void> {
+    return new Promise((resolve, reject) => {
+        currentSyncingAccountStore.set(account)
+
+        const { gapLimit } = getAccountSyncOptions()
+
+        api.syncAccount(
+            account.id,
+            { gapLimit },
+            {
+                onSuccess(response: Event<SyncedAccount>) {
+                    const syncedAccount = response.payload
+                    processMigratedTransactions(syncedAccount.id, syncedAccount.messages, syncedAccount.addresses)
+
+                    void updateAccount(get(wallet).accounts, syncedAccount)
+                        .then(() => {
+                            currentSyncingAccountStore.set(null)
+                        })
+                        .catch((err) => {
+                            currentSyncingAccountStore.set(null)
+
+                            console.error(err)
+                            reject(err)
+                        })
+
+                    resolve()
+                },
+                onError(err: ErrorEventPayload) {
+                    currentSyncingAccountStore.set(null)
+
+                    if (showErrorNotification) {
+                        displayErrorEventToUser(err)
+                    }
+
+                    console.error(err)
+                    reject(err)
+                },
+            }
+        )
+    })
+}
+
 export const asyncSyncAccounts = (
     addressIndex?: number,
     gapLimit?: number,
@@ -459,64 +551,54 @@ export const asyncSyncAccounts = (
         isSyncing.set(true)
 
         api.syncAccounts(addressIndex, gapLimit, accountDiscoveryThreshold, {
-            onSuccess(response) {
+            onSuccess(response: Event<SyncedAccount[]>) {
                 const syncedAccounts = response.payload
 
                 syncedAccounts.forEach((account) => {
                     processMigratedTransactions(account.id, account.messages, account.addresses)
                 })
 
-                updateAccounts(syncedAccounts)
+                void updateAccounts(syncedAccounts)
+                    .then(() => {
+                        isSyncing.set(false)
+                    })
+                    .catch((err) => {
+                        isSyncing.set(false)
 
-                isSyncing.set(false)
+                        console.error(err)
+                        reject(err)
+                    })
 
                 resolve()
             },
-            onError(err) {
+            onError(err: ErrorEventPayload) {
                 isSyncing.set(false)
 
                 if (showErrorNotification) {
-                    if (get(isLedgerProfile)) {
-                        displayNotificationForLedgerProfile('error', true, true, false, false, err)
-                    } else {
-                        showAppNotification({
-                            type: 'error',
-                            message: localize(err.error),
-                        })
-                    }
-
-                    resolve()
-                } else {
-                    reject(err)
+                    displayErrorEventToUser(err)
                 }
+
+                console.error(err)
+                reject(err)
             },
         })
     })
 
-export const asyncSyncAccountOffline = (account: WalletAccount): Promise<void> =>
-    new Promise((resolve) => {
-        api.syncAccount(account.id, {
-            onSuccess(response) {
-                getAccountMeta(account.id, (err, meta) => {
-                    if (!err) {
-                        const _account = prepareAccountInfo(account, meta)
-                        get(wallet)?.accounts.update((_accounts) =>
-                            _accounts.map((a) => (a.id === _account.id ? _account : a))
-                        )
-                        updateProfile(
-                            'hiddenAccounts',
-                            (get(activeProfile)?.hiddenAccounts || []).filter((id) => id !== _account.id)
-                        )
-                    }
+export function asyncSetAlias(accountId: string, alias: string): Promise<void> {
+    if (!accountId || !alias) return
 
-                    resolve()
-                })
-            },
-            onError(err) {
+    return new Promise((resolve, reject) => {
+        api.setAlias(accountId, alias, {
+            onSuccess(response: Event<void>) {
                 resolve()
             },
+            onError(err: ErrorEventPayload) {
+                console.error(err)
+                reject(err)
+            },
         })
     })
+}
 
 export const asyncGetNodeInfo = (accountId: string, url?: string, auth?: NodeAuth): Promise<NodeInfo> => {
     if (!url || (!url && !auth)) {
@@ -558,14 +640,8 @@ export const asyncStopBackgroundSync = (): Promise<void> =>
 /**
  * NOTE: This method mutates account object
  * Creates a message pair for internal messages and adds it to the account messages
- *
- * @method addMessagesPair
- *
- * @param {Account} account
- *
- * @returns {void}
  */
-export function addMessagesPair(account: Account): void {
+export function aggregateAccountActivity(account: Account): void {
     // Only keep messages with a payload
     account.messages = account.messages.filter((m) => m.payload)
 
@@ -700,22 +776,15 @@ export const getAccountMessages = (account: WalletAccount): AccountMessage[] => 
 }
 
 /**
- * Updates balance overview
- *
- * @method updateBalanceOverview
- *
- * @param {number} balance
- * @param {number} incoming
- * @param {number} outgoing
- *
- * @returns {void}
+ * Updates the balance overview store.
  */
 export const updateBalanceOverview = (balance: number, incoming: number, outgoing: number): void => {
-    const { balanceOverview } = get(wallet)
+    const balanceOverviewStore = get(wallet).balanceOverview
+    if (!balanceOverviewStore) return
 
     const activeCurrency = get(activeProfile)?.settings.currency ?? CurrencyTypes.USD
 
-    balanceOverview.update((overview) =>
+    balanceOverviewStore.update((overview) =>
         Object.assign<BalanceOverview, BalanceOverview, Partial<BalanceOverview>>({} as BalanceOverview, overview, {
             incoming: formatUnitBestMatch(incoming, true, 3),
             incomingRaw: incoming,
@@ -731,11 +800,7 @@ export const updateBalanceOverview = (balance: number, incoming: number, outgoin
 }
 
 /**
- * Updates balance overview fiat value
- *
- * @method refreshBalanceOverview
- *
- * @returns {void}
+ * Refreshes the balance overview store by updating it with its current values.
  */
 export const refreshBalanceOverview = (): void => {
     const { balanceOverview } = get(wallet)
@@ -743,136 +808,125 @@ export const refreshBalanceOverview = (): void => {
     updateBalanceOverview(bo.balanceRaw, bo.incomingRaw, bo.outgoingRaw)
 }
 
-/**
- * Updates accounts information after a successful sync accounts operation
- *
- * @method updateAccounts
- *
- * @param {SyncedAccount[]} syncedAccounts
- *
- * @returns {void}
- */
-export const updateAccounts = (syncedAccounts: SyncedAccount[]): void => {
-    const { accounts } = get(wallet)
+function combineAccountAddresses(oldAccountAddresses: Address[], newAccountAddresses: Address[]): Address[] {
+    const combinedAccountAddresses: Address[] = oldAccountAddresses
 
-    const existingAccountIds = get(accounts).map((account) => account.id)
+    for (const newAccountAddress of newAccountAddresses) {
+        const addressIndex = oldAccountAddresses.findIndex(
+            (oldAccountAddress) => oldAccountAddress.address === newAccountAddress.address
+        )
+        if (addressIndex < 0) {
+            combinedAccountAddresses.push(newAccountAddress)
+        } else {
+            combinedAccountAddresses[addressIndex] = newAccountAddress
+        }
+    }
 
-    const { newAccounts, existingAccounts } = syncedAccounts.reduce(
-        (acc, syncedAccount: SyncedAccount) => {
-            if (existingAccountIds.includes(syncedAccount.id)) {
-                acc.existingAccounts.push(syncedAccount)
-            } else {
-                acc.newAccounts.push(syncedAccount)
-            }
+    return combinedAccountAddresses
+}
 
-            return acc
-        },
-        { newAccounts: [], existingAccounts: [] }
+function combineAccountMessages(oldAccountMessages: Message[], newAccountMessages: Message[]): Message[] {
+    const combinedAccountMessages: Message[] = oldAccountMessages
+
+    for (const message of newAccountMessages) {
+        const messageIndex = newAccountMessages.findIndex(
+            (m) => m.id === message.id && getIncomingFlag(m.payload) === getIncomingFlag(message.payload)
+        )
+        if (messageIndex < 0) {
+            combinedAccountMessages.push(message)
+        } else {
+            combinedAccountMessages[messageIndex] = message
+        }
+    }
+
+    return combinedAccountMessages
+}
+
+function updateStoredAccount(
+    accountsStore: Writable<WalletAccount[]>,
+    storedAccount: WalletAccount,
+    syncedAccount: SyncedAccount
+): void {
+    if (!accountsStore || !get(accountsStore) || !storedAccount || !syncedAccount) return
+
+    const newAccount = <WalletAccount>{}
+
+    newAccount.depositAddress = syncedAccount.depositAddress.address
+    newAccount.addresses = combineAccountAddresses(storedAccount.addresses, syncedAccount.addresses)
+    newAccount.messages = combineAccountMessages(storedAccount.messages, syncedAccount.messages)
+
+    accountsStore.update((accounts) =>
+        accounts.map((account) => (account.id === storedAccount.id ? { ...account, ...newAccount } : account))
+    )
+}
+
+async function updateNewAccount(accountsStore: Writable<WalletAccount[]>, syncedAccount: SyncedAccount): Promise<void> {
+    const accounts = get(accountsStore)
+    if (!accountsStore || !accounts || accounts.length <= 0 || !syncedAccount) return
+
+    const accountMetadata = await asyncGetAccountMetadata(syncedAccount.id)
+    const newAccount = formatAccountWithMetadata(
+        Object.assign<WalletAccount, SyncedAccount, Partial<WalletAccount>>({} as WalletAccount, syncedAccount, {
+            alias: `${localize('general.account')} ${syncedAccount.index + 1}`,
+            clientOptions: getDefaultClientOptions(),
+            createdAt: new Date().toISOString(),
+            signerType: accounts[0]?.signerType,
+            depositAddress: syncedAccount.depositAddress.address,
+        }),
+        accountMetadata
     )
 
-    const updatedStoredAccounts = get(accounts).map((storedAccount) => {
-        const syncedAccount = existingAccounts.find((_account) => _account.id === storedAccount.id)
+    await asyncSetAlias(newAccount?.id, newAccount?.alias)
 
-        // Update deposit address
-        storedAccount.depositAddress = syncedAccount.depositAddress.address
+    accountsStore.update((_accounts) => _accounts.concat([newAccount]))
+}
 
-        // If we have received a new address, simply add it;
-        // If we have received an existing address, update the properties.
-        for (const addr of syncedAccount.addresses) {
-            const addressIndex = storedAccount.addresses.findIndex((a) => a.address === addr.address)
-            if (addressIndex < 0) {
-                storedAccount.addresses.push(addr)
-            } else {
-                storedAccount.addresses[addressIndex] = addr
-            }
-        }
+/**
+ * Updates the accounts store with data from a freshly synced account.
+ */
+export async function updateAccount(
+    accountsStore: Writable<WalletAccount[]>,
+    syncedAccount: SyncedAccount
+): Promise<void> {
+    if (!accountsStore || !get(accountsStore) || !syncedAccount) return
 
-        // If we have received a new message, simply add it;
-        // If we have received an existing message, update the properties.
-        for (const msg of syncedAccount.messages) {
-            const msgIndex = storedAccount.messages.findIndex(
-                (m) => m.id === msg.id && getIncomingFlag(m.payload) === getIncomingFlag(msg.payload)
-            )
-            if (msgIndex < 0) {
-                storedAccount.messages.push(msg)
-            } else {
-                storedAccount.messages[msgIndex] = msg
-            }
-        }
-
-        return storedAccount
-    })
-
-    if (newAccounts.length) {
-        const totalBalance = {
-            balance: 0,
-            incoming: 0,
-            outgoing: 0,
-        }
-
-        const _accounts = []
-        let completeCount = 0
-
-        for (const newAccount of newAccounts) {
-            getAccountMeta(newAccount.id, (err, meta) => {
-                if (!err) {
-                    totalBalance.balance += meta.balance
-                    totalBalance.incoming += meta.incoming
-                    totalBalance.outgoing += meta.outgoing
-
-                    const account = prepareAccountInfo(
-                        Object.assign<WalletAccount, WalletAccount, Partial<WalletAccount>>(
-                            {} as WalletAccount,
-                            newAccount,
-                            {
-                                alias: `${localize('general.account')} ${newAccount.index + 1}`,
-                                clientOptions: existingAccounts[0]?.clientOptions,
-                                createdAt: new Date().toISOString(),
-                                signerType: existingAccounts[0]?.signerType,
-                                depositAddress: newAccount.depositAddress.address,
-                            }
-                        ),
-                        meta
-                    )
-
-                    api.setAlias(account?.id, account?.alias, {
-                        onSuccess() {},
-                        onError(err) {
-                            console.error(err)
-                        },
-                    })
-
-                    _accounts.push(account)
-                } else {
-                    console.error(err)
-                }
-
-                completeCount++
-                if (completeCount === newAccounts.length) {
-                    const { balanceOverview } = get(wallet)
-                    const overview = get(balanceOverview)
-
-                    accounts.update(() => [...updatedStoredAccounts, ..._accounts].sort((a, b) => a.index - b.index))
-
-                    updateBalanceOverview(
-                        overview.balanceRaw + totalBalance.balance,
-                        overview.incomingRaw + totalBalance.incoming,
-                        overview.outgoingRaw + totalBalance.outgoing
-                    )
-                }
-            })
-        }
+    const accountToUpdate = get(accountsStore).find((a) => a.id === syncedAccount.id)
+    if (accountToUpdate) {
+        updateStoredAccount(accountsStore, accountToUpdate, syncedAccount)
     } else {
-        accounts.update(() => updatedStoredAccounts.sort((a, b) => a.index - b.index))
+        await updateNewAccount(accountsStore, syncedAccount)
     }
 }
 
 /**
- * Updates balance fiat value for every account
- *
- * @method updateAccountBalanceEquiv
- *
- * @returns {void}
+ * Updates the accounts store with data from freshly synced accounts.
+ */
+export async function updateAccounts(syncedAccounts: SyncedAccount[]): Promise<void[]> {
+    if (!syncedAccounts || syncedAccounts.length <= 0) return
+
+    const { accounts } = get(wallet)
+    if (!accounts) return
+
+    const totalBalanceOverview = <BalanceOverview>{ balanceRaw: 0, incomingRaw: 0, outgoingRaw: 0 }
+    await Promise.all(
+        syncedAccounts.map(async (syncedAccount) => {
+            const accountMetadata = await asyncGetAccountMetadata(syncedAccount.id)
+            totalBalanceOverview.balanceRaw += accountMetadata.balance
+            totalBalanceOverview.incomingRaw += accountMetadata.incoming
+            totalBalanceOverview.outgoingRaw += accountMetadata.outgoing
+
+            return updateAccount(accounts, syncedAccount)
+        })
+    )
+    updateBalanceOverview(
+        totalBalanceOverview.balanceRaw,
+        totalBalanceOverview.incomingRaw,
+        totalBalanceOverview.outgoingRaw
+    )
+}
+
+/**
+ * Updates an account balance with fiat conversions.
  */
 export const updateAccountsBalanceEquiv = (): void => {
     const { accounts } = get(wallet)
@@ -895,14 +949,7 @@ export const updateAccountsBalanceEquiv = (): void => {
 }
 
 /**
- * Gets balance history for each account in market data timestamps
- *
- * @method getAccountBalanceHistory
- *
- * @param {Account} accounts
- * @param {number} balanceRaw
- * @param {PriceData} [priceData]
- *
+ * Gets balance history for each account in market data timestamps.
  */
 export const getAccountBalanceHistory = (account: WalletAccount, priceData: PriceData): BalanceHistory => {
     const balanceHistory: BalanceHistory = {
@@ -972,17 +1019,54 @@ export const getAccountBalanceHistory = (account: WalletAccount, priceData: Pric
     return balanceHistory
 }
 
-export const getAccountMeta = (
+/**
+ * Retrieves the list of accounts belonging to a profile.
+ */
+export function asyncGetAccounts(): Promise<Account[]> {
+    return new Promise((resolve, reject) => {
+        api.getAccounts({
+            onSuccess(response: Event<Account[]>) {
+                resolve(response.payload)
+            },
+            onError(err) {
+                console.error(err)
+                reject(err)
+            },
+        })
+    })
+}
+
+/**
+ * Retrieves the metadata (i.e. balance information and deposit address) from an account.
+ */
+export function asyncGetAccountMetadata(accountId: string): Promise<AccountMetadata> {
+    return new Promise((resolve, reject) => {
+        api.getBalance(accountId, {
+            onSuccess(balanceResponse: Event<Balance>) {
+                api.latestAddress(accountId, {
+                    onSuccess(latestAddressResponse: Event<Address>) {
+                        resolve({
+                            balance: balanceResponse.payload.total,
+                            incoming: balanceResponse.payload.incoming,
+                            outgoing: balanceResponse.payload.outgoing,
+                            depositAddress: latestAddressResponse.payload.address,
+                        })
+                    },
+                    onError(err: ErrorEventPayload) {
+                        reject(err)
+                    },
+                })
+            },
+            onError(err: ErrorEventPayload) {
+                reject(err)
+            },
+        })
+    })
+}
+
+export const getAccountMetadataWithCallback = (
     accountId: string,
-    callback: (
-        error: ErrorEventPayload,
-        meta?: {
-            balance: number
-            incoming: number
-            outgoing: number
-            depositAddress: string
-        }
-    ) => void
+    callback: (error: ErrorEventPayload, metadata?: AccountMetadata) => void
 ): void => {
     api.getBalance(accountId, {
         onSuccess(balanceResponse) {
@@ -1006,15 +1090,52 @@ export const getAccountMeta = (
     })
 }
 
-export const prepareAccountInfo = (
-    account: Account,
-    meta: {
-        balance: number
-        incoming: number
-        outgoing: number
-        depositAddress: string
-    }
-): WalletAccount => {
+// process migration transactions
+// aggregate messages pairs / transactions
+// prepare as WalletAccount
+// update specific account in the store
+// update the balance overview accordingly
+// begin account sync
+
+export async function processLoadedAccounts(accounts: Account[]): Promise<void> {
+    if (!accounts || accounts.length <= 0) return
+
+    const accountsStore = get(wallet).accounts
+    if (!accountsStore || !get(accountsStore)) return
+
+    const totalBalanceOverview = <BalanceOverview>{ balanceRaw: 0, incomingRaw: 0, outgoingRaw: 0 }
+    await Promise.all(
+        accounts.map(async (account) => {
+            aggregateAccountActivity(account)
+            processMigratedTransactions(account.id, account.messages, account.addresses)
+
+            const accountMetadata = await asyncGetAccountMetadata(account.id)
+            const preparedAccount = formatAccountWithMetadata(account, accountMetadata)
+            // we first need to check if the store is already populated with this account
+            const indexExistingAccountInStore = get(accountsStore).findIndex(
+                (_account) => _account.id === preparedAccount.id
+            )
+            if (indexExistingAccountInStore !== -1) {
+                accountsStore.update((_accounts) => _accounts.splice(indexExistingAccountInStore, 1, preparedAccount))
+            } else {
+                accountsStore.update((_accounts) => _accounts.concat([preparedAccount]))
+            }
+            totalBalanceOverview.balanceRaw += accountMetadata.balance
+            totalBalanceOverview.incomingRaw += accountMetadata.incoming
+            totalBalanceOverview.outgoingRaw += accountMetadata.outgoing
+        })
+    )
+    updateBalanceOverview(
+        totalBalanceOverview.balanceRaw,
+        totalBalanceOverview.incomingRaw,
+        totalBalanceOverview.outgoingRaw
+    )
+}
+
+/**
+ * Prepares a base account object with extra metadata.
+ */
+export const formatAccountWithMetadata = (account: Account, meta: AccountMetadata): WalletAccount => {
     const { id, index, alias, signerType } = account
     const { balance, depositAddress } = meta
 
@@ -1286,12 +1407,12 @@ export const findAccountWithAnyAddress = (
 /**
  * Get the sync options for an account
  * @param {boolean} isManualSync A boolean value indicating if a user (via the UI) invoked this function
- * @returns {SyncAccountOptions} The sync options for an account, which contains data for the gap limit and account discovery threshold
+ * @returns {AccountSyncOptions} The sync options for an account, which contains data for the gap limit and account discovery threshold
  */
-export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccountOptions =>
+export const getAccountSyncOptions = (isManualSync: boolean = false): AccountSyncOptions =>
     isInitialAccountSync()
-        ? calculateInitialSyncAccountOptions(get(walletSetupType))
-        : calculateRegularSyncAccountOptions(get(activeProfile).type, isManualSync)
+        ? calculateInitialAccountSyncOptions(get(walletSetupType))
+        : calculateRegularAccountSyncOptions(get(activeProfile).type, isManualSync)
 
 /**
  * Determines if the API call for syncing accounts is the initial one
@@ -1299,7 +1420,7 @@ export const getSyncAccountOptions = (isManualSync: boolean = false): SyncAccoun
  */
 export const isInitialAccountSync = (): boolean => get(walletSetupType) !== null && get(isFirstSessionSync)
 
-const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOptions => {
+const calculateInitialAccountSyncOptions = (setupType: SetupType): AccountSyncOptions => {
     let gapLimit = 1
     let accountDiscoveryThreshold = 0
 
@@ -1308,21 +1429,20 @@ const calculateInitialSyncAccountOptions = (setupType: SetupType): SyncAccountOp
         case SetupType.Mnemonic:
         case SetupType.Stronghold:
             gapLimit = 25
-            accountDiscoveryThreshold = 1
+            accountDiscoveryThreshold = 2
             break
         case SetupType.FireflyLedger:
             gapLimit = 10
-            accountDiscoveryThreshold = 1
+            accountDiscoveryThreshold = 2
             break
     }
 
     return { gapLimit, accountDiscoveryThreshold }
 }
 
-const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSync: boolean): SyncAccountOptions => {
+const calculateRegularAccountSyncOptions = (profileType: ProfileType, isManualSync: boolean): AccountSyncOptions => {
     let gapLimit = 1
     let accountDiscoveryThreshold = 0
-
     const _isFirstSessionSync = get(isFirstSessionSync)
 
     switch (profileType) {
@@ -1332,7 +1452,7 @@ const calculateRegularSyncAccountOptions = (profileType: ProfileType, isManualSy
         case ProfileType.Ledger:
         case ProfileType.LedgerSimulator:
         default:
-            gapLimit = 1
+            gapLimit = 0
             break
     }
 
@@ -1377,4 +1497,41 @@ export const hasValidPendingTransactions = (account: WalletAccount): boolean => 
     const unspentOutputs = account?.addresses.filter((a) => a.balance > 0).flatMap((a) => Object.values(a.outputs))
 
     return pendingInputs.some((i) => unspentOutputs.some((o) => o.transactionId === i.data?.metadata?.transactionId))
+}
+
+/**
+ * Handles transaction event data, converting TransferProgressEventData into TransactionEventData
+ *
+ * @method handleTransactionEventData
+ *
+ * @param {TransferProgressEventData} eventData
+ *
+ * @returns {TransactionEventData}
+ */
+export const handleTransactionEventData = (eventData: TransferProgressEventData): TransactionEventData => {
+    if (!eventData) return {}
+
+    const remainderData = eventData as GeneratingRemainderDepositAddressEvent
+    if (remainderData?.address) return { remainderAddress: remainderData?.address }
+
+    const txData = eventData as PreparedTransactionEvent
+    if (!(txData?.inputs && txData?.outputs) || txData?.inputs.length <= 0 || txData?.outputs.length <= 0) return {}
+
+    const numOutputs = txData.outputs.length
+    if (numOutputs === 1) {
+        return {
+            toAddress: txData.outputs[0].address,
+            toAmount: txData.outputs[0].amount,
+        }
+    } else if (numOutputs > 1) {
+        return {
+            toAddress: txData.outputs[0].address,
+            toAmount: txData.outputs[0].amount,
+
+            remainderAddress: txData.outputs[numOutputs - 1].address,
+            remainderAmount: txData.outputs[numOutputs - 1].amount,
+        }
+    } else {
+        return txData
+    }
 }

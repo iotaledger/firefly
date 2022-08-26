@@ -1,13 +1,22 @@
 <script lang="typescript">
     import { lastActiveAt, logout } from 'shared/lib/app'
     import { activeProfile } from 'shared/lib/profile'
+    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/time'
     import { debounce } from 'shared/lib/utils'
+    import { wallet } from 'shared/lib/wallet'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/time'
+
+    const { accountsLoaded } = $wallet
 
     let timeout
     let isDestroyed = false
+
+    // Initialize idle time when the accounts are loaded.
+    // Important for mobile as the user can simply login and not touch the screen for a while.
+    $: if ($accountsLoaded) {
+        debounce(updateIdleTime)()
+    }
 
     function updateIdleTime(): void {
         /**

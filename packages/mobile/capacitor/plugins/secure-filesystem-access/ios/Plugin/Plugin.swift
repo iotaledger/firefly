@@ -110,17 +110,29 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         call.resolve(["result": result!])
     }
     
-    @objc func saveRecoveryKit(_ call: CAPPluginCall) {
-        guard let selectedPath = call.getString("selectedPath") else {
-            return call.reject("selectedPath is required")
+    @objc func saveTextFile(_ call: CAPPluginCall) {
+        guard let textContent = call.getString("textContent") else {
+            return call.reject("textContent is required")
         }
-        guard let fromRelativePath = call.getString("fromRelativePath") else {
-            return call.reject("fromRelativePath is required")
+        guard let fileName = call.getString("fileName") else {
+            return call.reject("fileName is required")
         }
-        let _url = (self.bridge?.config.appLocation.path)! + fromRelativePath // "/assets/docs/recovery-kit.pdf"
-        let srcUrl = Capacitor.URL(fileURLWithPath: _url, isDirectory: false)
-        let dstUrl = Capacitor.URL(fileURLWithPath: selectedPath, isDirectory: true)
-        try? FileManager.default.copyItem(at: srcUrl, to: dstUrl)
+        
+        let fm = FileManager.default
+        let cacheFolder = fm.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let file = cacheFolder.appendingPathComponent(fileName, isDirectory: false)
+        guard let data = textContent.data(using: .utf8) else { return }
+        try? data.write(to: file, options: .atomicWrite)
+        
+        let srcUrl = Capacitor.URL(fileURLWithPath: file.path, isDirectory: false)
+        var filesToShare = [Any]()
+        filesToShare.append(srcUrl)
+        let activityViewController = UIActivityViewController(activityItems: filesToShare, applicationActivities: nil)
+        
+        DispatchQueue.main.async {
+            self.bridge?.viewController?.present(activityViewController, animated: true, completion: nil)
+        }
+        
         call.resolve()
     }
 }

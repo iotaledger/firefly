@@ -1099,6 +1099,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor-community/privacy-screen/-/privacy-screen-2.1.1.tgz#501b939ec832d0f03d43d196ca4b33683d995f5f"
   integrity sha512-KhUyMNOSHPXKpDF4HBU4T8mfLnbq6owMCZHt6Q2SAHn2zT7Zsl9Nkv6paFrgUD+WUD+iHERqsFJNbpmWzkdBtg==
 
+"@capacitor/action-sheet@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@capacitor/action-sheet/-/action-sheet-1.0.8.tgz#8b53954e4d045c71cc1f00d3fecb654203fdd387"
+  integrity sha512-mC3/LhVMgdeJesB8iN/Kjd0QUDjVj8KKEaPm1baqn3VAZWY4JssdMHVox3l4m6zEmGt4+YyD4g6fijq07RZdbQ==
+
 "@capacitor/android@3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.4.1.tgz#d4accc41c843927853d27c7f638487bd52633486"
@@ -1108,6 +1113,11 @@
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.5.1.tgz#d81ec82f84ab7f0abeadb4cc100e6a3820197d65"
   integrity sha512-rjehS0+BQBlwoN8hUyrMuzexn/9QJsONb1kmN5uXcL8JuTEbv35fa7z0tSD4x1LKwUFd+3Zeuwt60QRuwijlmw==
+
+"@capacitor/app@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/app/-/app-1.1.1.tgz#bde7202faad1b47c4ae2c4a622285d7569384c5e"
+  integrity sha512-8ADkldHnoE1xkWvPUsGlERVGm6/Zvcxy6hCI80AxydIKyaCG7kbDAvUclebbnw/eFRxj2zBoVatGLjmJNvTbYw==
 
 "@capacitor/cli@^3.4.1":
   version "3.4.3"
@@ -1158,6 +1168,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.5.1.tgz#976de8909487c0ca35b8f1616ce8837bb19ff8c6"
   integrity sha512-295L9dHe/QaejUpGI8Pxwb1i2yVgick1ExIDK26xk+tk1km3B1HVjsIS8qkf2SOp7tuwP9+W5T5p7rLMNN4v5g==
 
+"@capacitor/keyboard@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@capacitor/keyboard/-/keyboard-1.2.3.tgz#8046d8256e1c72ed3a2dad6ff01dc37a0c415077"
+  integrity sha512-KTSzJkMa6CrmDIDhWfswNPqS7gvYlL25E1gqXbY7w/EhyBjJhEdF0bc6QUFufS+ZVMlcPafc0/E5P+pTfLnKiA==
+
 "@capacitor/share@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@capacitor/share/-/share-1.1.2.tgz#7e35c2c3bccc9955e852d3dd401afe7bd5a69b7e"
@@ -1167,6 +1182,11 @@
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@capacitor/splash-screen/-/splash-screen-1.2.2.tgz#fabd52ffbb922c38e2b3ef605332f29c830bd508"
   integrity sha512-iGh9gc0rdS3R+Wr+bD/+tJl3qbmJZ5xVQAP5UsD6U6Y3ydCBo9KpA8DEqxaBZVsCDaLt67009hK5nxKBwjRn7Q==
+
+"@capacitor/status-bar@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@capacitor/status-bar/-/status-bar-1.0.8.tgz#a783561fb5815b30f3e75dd95c87e00aaff5450b"
+  integrity sha512-lhxa70K6vg0QjdddbT9RqFLfQ9a0Fk1OVE54MhUH30DWymv4h2LrC+mJgH6JS46WQbR2UCHRymfmVCq1PS2Qiw==
 
 "@develar/schema-utils@~2.6.5":
   version "2.6.5"

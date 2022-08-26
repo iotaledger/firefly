@@ -4,6 +4,9 @@
     export let illustration = undefined
     export let width = undefined
     export let height = undefined
+    // when set "background" to true, the illustration will be displayed as a background image of a div
+    // and a numeric height must be defined
+    export let background = false
     export let classes = ''
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -15,6 +18,10 @@
         'balance-desktop': {
             lightmode: 'balance-desktop.svg',
             darkmode: 'balance-desktop-darkmode.svg',
+        },
+        'send-mobile': {
+            lightmode: 'send-mobile.svg',
+            darkmode: 'send-mobile-darkmode.svg',
         },
         'single-account-guide-desktop': {
             lightmode: 'onboarding/single-account-guide-desktop.svg',
@@ -79,18 +86,48 @@
             lightmode: 'staking/staking-notification.svg',
             darkmode: 'staking/staking-notification.svg',
         },
+        // Governance
+        'governance-info': {
+            lightmode: 'governance/governance-info.svg',
+            darkmode: 'governance/governance-info.svg',
+        },
+        'treasury-bg': {
+            lightmode: 'governance/treasury.png',
+            darkmode: 'governance/treasury.png',
+        },
+        'governance-not-found': {
+            lightmode: 'governance/governance-not-found.svg',
+            darkmode: 'governance/governance-not-found.svg',
+        },
+        'iota-governance': {
+            lightmode: 'governance/iota-governance.png',
+            darkmode: 'governance/iota-governance.png',
+        },
     }
 </script>
 
 {#if selected}
-    <img
-        data-label="illustration"
-        class={classes}
-        width={width || '100%'}
-        height={height || '100%'}
-        src={`assets/illustrations/${selected}`}
-        alt=""
-    />
+    {#if background}
+        <div
+            class={classes}
+            style="--height: {height}px; background-image: url(assets/illustrations/{selected}); background-size: 100%; background-position: center; padding: 5ch;"
+        />
+    {:else}
+        <img
+            data-label="illustration"
+            class={classes}
+            width={width || '100%'}
+            height={height || '100%'}
+            src={`assets/illustrations/${selected}`}
+            alt=""
+        />
+    {/if}
 {:else}
     <div class={`${classes}`} width={width || '100%'} height={height || '100%'} />
 {/if}
+
+<style type="text/scss">
+    div {
+        height: var(--height);
+    }
+</style>

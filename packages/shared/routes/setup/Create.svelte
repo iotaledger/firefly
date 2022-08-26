@@ -35,14 +35,25 @@
                 <Text type="p" secondary smaller>{locale('views.create.softwareAccount.description')}</Text>
             {/if}
         </Button>
-        <Button icon="settings" classes="w-full mb-8" secondary onClick={() => handleContinueClick(ProfileType.Ledger)}>
-            {locale('views.create.ledgerAccount.title')}
-            {#if !$mobile}
+        {#if !$mobile}
+            <Button
+                icon="settings"
+                classes="w-full mb-8"
+                secondary
+                onClick={() => handleContinueClick(ProfileType.Ledger)}
+            >
+                {locale('views.create.ledgerAccount.title')}
                 <Text type="p" secondary smaller>{locale('views.create.ledgerAccount.description')}</Text>
-            {/if}
-        </Button>
+            </Button>
+        {/if}
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-purple dark:bg-gray-900'}"
+    >
+        <Animation
+            classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
+            animation="import-desktop"
+        />
     </div>
 </OnboardingLayout>

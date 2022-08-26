@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { Button, Checkbox, Drawer, HR, Radio, Text } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { Button, Checkbox, HR, Radio, Text } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import {
         ensureSinglePrimaryNode,
@@ -32,6 +32,19 @@
 
     $: canRemoveAllNodes = networkConfig.nodes.length !== 0
     $: canConfigureNodes = isOfficialNetwork(networkConfig.network.type)
+
+    $: if (nodeContextMenu && $mobile) {
+        openPopup({
+            type: 'nodeConfigOptions',
+            props: {
+                networkConfig,
+                nodeContextMenu,
+                ensureOnePrimaryNode,
+                onPopupDestroy: onNodeConfigOptionsClose,
+                handleEditNodeDetailsClick,
+            },
+        })
+    }
 
     let contextPosition = { x: 0, y: 0 }
     let nodeContextMenu: Node = undefined
@@ -92,6 +105,41 @@
                 },
             },
         })
+    }
+
+    function handleEditNodeDetailsClick(node) {
+        openPopup({
+            type: 'addNode',
+            props: {
+                isAddingNode: false,
+                node,
+                nodes: networkConfig.nodes,
+                network: networkConfig.network,
+                onSuccess: (_isNetworkSwitch: boolean, node: Node, oldNodeUrl: string) => {
+                    const idx = networkConfig.nodes.findIndex((n) => n.url === oldNodeUrl)
+                    if (idx >= 0) {
+                        if (node.isPrimary) {
+                            networkConfig.nodes = networkConfig.nodes.map((n) => ({
+                                ...n,
+                                isPrimary: n.url === oldNodeUrl,
+                            }))
+                        } else if (!networkConfig.nodes.some((n) => n.isPrimary)) {
+                            node.isPrimary = true
+                        }
+
+                        networkConfig.nodes[idx] = node
+
+                        updateClientOptions(networkConfig)
+                        updateProfile('settings.networkConfig', networkConfig)
+                    }
+                },
+            },
+        })
+    }
+
+    function onNodeConfigOptionsClose(nodes: Node[]) {
+        nodeContextMenu = undefined
+        networkConfig.nodes = nodes
     }
 </script>
 
@@ -190,7 +238,7 @@
                                 highlighted
                                 classes={$mobile &&
                                     node.isPrimary &&
-                                    'absolute right-5 p-1 -mt-1 rounded-lg bg-pastel-green'}
+                                    'absolute right-5 p-1 -mt-1 rounded-lg bg-blue-500'}
                             >
                                 {node.isPrimary && !$mobile
                                     ? localize('views.settings.configureNodeList.primaryNode')
@@ -208,24 +256,13 @@
                         {/if}
                     </div>
                 {/each}
-                {#if nodeContextMenu}
-                    {#if $mobile}
-                        <Drawer dimLength={180} on:close={() => (nodeContextMenu = undefined)}>
-                            <NodeConfigOptions
-                                bind:nodeContextMenu
-                                bind:networkConfig
-                                {contextPosition}
-                                {ensureOnePrimaryNode}
-                            />
-                        </Drawer>
-                    {:else}
-                        <NodeConfigOptions
-                            bind:nodeContextMenu
-                            bind:networkConfig
-                            {contextPosition}
-                            {ensureOnePrimaryNode}
-                        />
-                    {/if}
+                {#if nodeContextMenu && !$mobile}
+                    <NodeConfigOptions
+                        bind:nodeContextMenu
+                        bind:networkConfig
+                        {contextPosition}
+                        {ensureOnePrimaryNode}
+                    />
                 {/if}
             </div>
             <div class="flex flex-row justify-between space-x-3 w-full mt-4">

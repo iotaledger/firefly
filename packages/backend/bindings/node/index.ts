@@ -3,7 +3,7 @@ import {
     AccountToCreate,
     AccountIdentifier,
     ListMessagesFilter,
-    SyncAccountOptions,
+    AccountSyncOptions,
     createAccount as _createAccount,
     removeAccount as _removeAccount,
     getAccount as _getAccount,
@@ -64,7 +64,6 @@ import {
     getParticipationEvents as _getParticipationEvents,
     getParticipationOverview as _getParticipationOverview,
     participate as _participate,
-    participateWithRemainingFunds as _participateWithRemainingFunds,
     stopParticipating as _stopParticipating,
 } from '@lib/participation/bridge'
 import { Participation } from '@lib/participation/types'
@@ -177,10 +176,11 @@ export const api = {
     },
     startBackgroundSync: function (
         pollingInterval: Duration,
-        automaticOutputConsolidation: boolean
+        automaticOutputConsolidation: boolean,
+        gapLimit: number
     ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) =>
-            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation)
+            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation, gapLimit)
     },
     stopBackgroundSync: function (): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _stopBackgroundSync(sendMessage, __ids)
@@ -214,7 +214,7 @@ export const api = {
     },
     syncAccount: function (
         accountId: AccountIdentifier,
-        options?: SyncAccountOptions
+        options?: AccountSyncOptions
     ): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _syncAccount(sendMessage, __ids, accountId, options)
     },
@@ -368,13 +368,6 @@ export const api = {
     },
     stopParticipating: function (accountId: string, eventIds: string[]): (__ids: CommunicationIds) => Promise<string> {
         return (__ids: CommunicationIds) => _stopParticipating(sendMessage, __ids, accountId, eventIds)
-    },
-    participateWithRemainingFunds: function (
-        accountId: string,
-        participations: Participation[]
-    ): (__ids: CommunicationIds) => Promise<string> {
-        return (__ids: CommunicationIds) =>
-            _participateWithRemainingFunds(sendMessage, __ids, accountId, participations)
     },
 
     // Event emitters

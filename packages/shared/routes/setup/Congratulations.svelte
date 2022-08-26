@@ -87,22 +87,39 @@
                 }
             }
             const _exportMigrationLog = () => {
-                getProfileDataPath($activeProfile.id)
-                    .then((source) =>
-                        $walletSetupType === SetupType.TrinityLedger
-                            ? Platform.exportLedgerMigrationLog($migrationLog, `${$activeProfile.id}-${LOG_FILE_NAME}`)
-                            : Platform.exportMigrationLog(
-                                  `${source}/${LOG_FILE_NAME}`,
-                                  `${$activeProfile.id}-${LOG_FILE_NAME}`
-                              )
+                if ($mobile) {
+                    Platform.exportMigrationLog(
+                        `${JSON.stringify(migrationLog)}`,
+                        `${$activeProfile.id}-${LOG_FILE_NAME}`
                     )
-                    .then((result) => {
-                        if (result) {
-                            logExported = true
-                            _continue()
-                        }
-                    })
-                    .catch(console.error)
+                        .then((result) => {
+                            if (result) {
+                                logExported = true
+                                _continue()
+                            }
+                        })
+                        .catch(console.error)
+                } else {
+                    getProfileDataPath($activeProfile.id)
+                        .then((source) =>
+                            $walletSetupType === SetupType.TrinityLedger
+                                ? Platform.exportLedgerMigrationLog(
+                                      $migrationLog,
+                                      `${$activeProfile.id}-${LOG_FILE_NAME}`
+                                  )
+                                : Platform.exportMigrationLog(
+                                      `${source}/${LOG_FILE_NAME}`,
+                                      `${$activeProfile.id}-${LOG_FILE_NAME}`
+                                  )
+                        )
+                        .then((result) => {
+                            if (result) {
+                                logExported = true
+                                _continue()
+                            }
+                        })
+                        .catch(console.error)
+                }
             }
             if (logExported) {
                 _continue()
@@ -123,13 +140,15 @@
 </script>
 
 <OnboardingLayout allowBack={false}>
-    <div slot="leftpane__content">
+    <div slot="leftpane__content" class:w-full={$mobile} style={$mobile ? 'min-height: 40vh;' : ''}>
         {#if wasMigrated}
-            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
-                <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-800 rounded-2xl mt-10 p-10 pb-6">
+                <div
+                    class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center shadow-green"
+                >
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
+                <Text type="h2" classes="mt-3 mb-6 text-center">{locale('views.congratulations.fundsMigrated')}</Text>
                 <Text type="p" secondary classes="mb-6 text-center">
                     {locale(`views.congratulations.${localizedBody}`, { values: localizedValues })}
                 </Text>
@@ -137,11 +156,13 @@
                 <Text type="p" highlighted classes="py-1 uppercase">{fiatbalance}</Text>
             </div>
         {:else}
-            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
-                <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
+            <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-800 rounded-2xl mt-10 p-10 pb-6">
+                <div
+                    class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center shadow-green"
+                >
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-5 text-center">{locale('views.congratulations.title')}</Text>
+                <Text type="h2" classes="mt-3 mb-5 text-center">{locale('views.congratulations.title')}</Text>
                 <Text type="p" secondary classes="mb-2 text-center"
                     >{locale(`views.congratulations.${localizedBody}`)}</Text
                 >
@@ -149,11 +170,25 @@
         {/if}
     </div>
     <div slot="leftpane__action">
-        <Button classes="w-full" onClick={() => handleContinueClick()}>
-            {locale(`${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.finishSetup'}`)}
+        <Button classes="w-full" onClick={handleContinueClick}>
+            {locale(
+                `${wasMigrated && !logExported ? 'views.congratulations.exportMigration' : 'actions.exploreWallet'}`
+            )}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="congratulations-desktop" />
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-yellow dark:bg-gray-900'}"
+    >
+        <Animation
+            classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
+            animation="butterfly-chrysalis"
+        />
     </div>
 </OnboardingLayout>
+
+<style>
+    .shadow-green {
+        box-shadow: 0px 4px 8px rgba(97, 232, 132, 0.3);
+    }
+</style>

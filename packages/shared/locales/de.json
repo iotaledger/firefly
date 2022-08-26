@@ -1055,6 +1055,7 @@
     },
     "general": {
         "password": "Passwort",
+        "close": "Schließen",
         "confirmPassword": "Passwort bestätigen",
         "currentPassword": "Aktuelles Passwort",
         "newPassword": "Neues Passwort",
@@ -1205,7 +1206,8 @@
         "accountColor": "Wallet-Farbe",
         "myAssets": "Meine Assets",
         "option": "Option",
-        "total": "Gesamt: {balance}"
+        "total": "Gesamt: {balance}",
+        "activityDetails": "Transaktionsdetails"
     },
     "dates": {
         "today": "Heute",

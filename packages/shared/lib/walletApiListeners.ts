@@ -1,9 +1,10 @@
+import { localize } from '@core/i18n'
 import { formatUnitBestMatch } from 'shared/lib/units'
 import {
-    addMessagesPair,
+    aggregateAccountActivity,
     api,
-    getAccountMeta,
-    prepareAccountInfo,
+    formatAccountWithMetadata,
+    getAccountMetadataWithCallback,
     processMigratedTransactions,
     replaceMessage,
     saveNewMessage,
@@ -12,17 +13,21 @@ import {
     wallet,
 } from 'shared/lib/wallet'
 import { get } from 'svelte/store'
-import { localize } from '@core/i18n'
 import { showAppNotification, showSystemNotification } from './notifications'
+import { ASSEMBLY_EVENT_ID } from './participation'
 import { getParticipationOverview } from './participation/api'
-import { getPendingParticipation, hasPendingParticipation, removePendingParticipations } from './participation/stores'
+import {
+    getPendingParticipation,
+    hasPendingParticipation,
+    isChangingParticipation,
+    removePendingParticipations,
+} from './participation/stores'
 // PARTICIPATION
 import { ParticipationAction, PendingParticipation } from './participation/types'
-import { openPopup } from './popup'
+import { closePopup, openPopup, popupState } from './popup'
 import { isStrongholdLocked, updateProfile } from './profile'
 import type { Message } from './typings/message'
 import type { WalletAccount } from './typings/wallet'
-import { ASSEMBLY_EVENT_ID } from './participation'
 
 /**
  * Initialises event listeners from wallet library
@@ -112,8 +117,19 @@ export const initialiseListeners = (): void => {
                 // Instantly pull in latest participation overview.
                 await getParticipationOverview(ASSEMBLY_EVENT_ID)
 
-                // If it is a message related to any participation event, display a notification
-                displayParticipationNotification(getPendingParticipation(message.id))
+                // If it is a message related to any participation event, display a notification and close any open participation popup
+                // except for unvote for when the user is changing the vote (automatic unvote & vote)
+                if (
+                    !get(isChangingParticipation) ||
+                    (get(isChangingParticipation) &&
+                        getPendingParticipation(message.id)?.action !== ParticipationAction.Unvote)
+                ) {
+                    isChangingParticipation.set(false)
+                    displayParticipationNotification(getPendingParticipation(message.id))
+                }
+                if (get(popupState).type === 'stakingManager') {
+                    closePopup()
+                }
 
                 // Remove the pending participation from local store
                 removePendingParticipations([message.id])
@@ -234,49 +250,44 @@ export const initialiseListeners = (): void => {
                 onSuccess(response) {
                     const { accounts } = get(wallet)
 
-                    let completeCount = 0
                     const totalBalance = {
                         balance: 0,
                         incoming: 0,
                         outgoing: 0,
                     }
 
-                    const latestAccounts = []
+                    const updatedAccounts = []
 
-                    // 1. Iterate on all accounts;
-                    // 2. Get latest metadata for all accounts (to compute the latest balance overview);
-                    // 3. Only update the account for which the balance change event emitted;
-                    // 4. Update balance overview & accounts
-                    for (const _account of response.payload) {
-                        getAccountMeta(_account.id, (metaErr, meta) => {
-                            if (!metaErr) {
-                                // Compute balance overview for each account
-                                totalBalance.balance += meta.balance
-                                totalBalance.incoming += meta.incoming
-                                totalBalance.outgoing += meta.outgoing
+                    get(accounts).forEach((account, idx) => {
+                        getAccountMetadataWithCallback(account?.id, (metaErr, meta) => {
+                            if (metaErr) {
+                                return
+                            }
 
-                                addMessagesPair(_account)
+                            totalBalance.balance += meta.balance
+                            totalBalance.incoming += meta.incoming
+                            totalBalance.outgoing += meta.outgoing
 
-                                const updatedAccountInfo = prepareAccountInfo(_account, meta)
+                            aggregateAccountActivity(account)
+                            const updatedAccountInfo = formatAccountWithMetadata(account, meta)
 
-                                // Keep the messages as is because they get updated through a different event
-                                // Also, we create pairs for internal messages, so best to keep those rather than reimplementing the logic here
-                                latestAccounts.push(updatedAccountInfo)
+                            updatedAccounts.push(
+                                account?.index === updatedAccountInfo?.index
+                                    ? { ...updatedAccountInfo, alias: account?.alias }
+                                    : account
+                            )
 
-                                completeCount++
+                            if (idx === get(accounts).length - 1) {
+                                accounts.update((_accounts) => updatedAccounts.sort((a, b) => a.index - b.index))
 
-                                if (completeCount === response.payload.length) {
-                                    accounts.update((_accounts) => latestAccounts.sort((a, b) => a.index - b.index))
-
-                                    updateBalanceOverview(
-                                        totalBalance.balance,
-                                        totalBalance.incoming,
-                                        totalBalance.outgoing
-                                    )
-                                }
+                                updateBalanceOverview(
+                                    totalBalance.balance,
+                                    totalBalance.incoming,
+                                    totalBalance.outgoing
+                                )
                             }
                         })
-                    }
+                    })
                 },
                 onError(response) {},
             })
@@ -379,16 +390,22 @@ const updateAllMessagesState = (accounts, messageId, confirmation) => {
 export function displayParticipationNotification(pendingParticipation: PendingParticipation): void {
     if (pendingParticipation) {
         const { accounts } = get(wallet)
+        const { action } = pendingParticipation
         const account = get(accounts).find((_account) => _account.id === pendingParticipation.accountId)
-
+        let localeGroup
+        let localeAction
+        if (action === ParticipationAction.Stake || action === ParticipationAction.Unstake) {
+            localeGroup = 'stakingManager'
+            localeAction = action === ParticipationAction.Stake ? 'staked' : 'unstaked'
+        } else if (action === ParticipationAction.Vote || action === ParticipationAction.Unvote) {
+            localeGroup = 'governanceManager'
+            localeAction = action === ParticipationAction.Vote ? 'voted' : 'unvoted'
+        }
         showAppNotification({
             type: 'info',
-            message: localize(
-                `popups.stakingManager.${
-                    pendingParticipation.action === ParticipationAction.Stake ? 'staked' : 'unstaked'
-                }Successfully`,
-                { values: { account: account.alias } }
-            ),
+            message: localize(`popups.${localeGroup}.${localeAction}Successfully`, {
+                values: { account: account.alias },
+            }),
         })
     }
 }

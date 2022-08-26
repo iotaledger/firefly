@@ -1,18 +1,19 @@
 <script lang="typescript">
     import { isDeepLinkRequestActive } from '@common/deep-links'
-
     import { localize } from '@core/i18n'
-    import { accountRoute, accountRouter, walletRoute } from '@core/router'
+    import { accountRoute, accountRouter, backButtonStore, walletRoute } from '@core/router'
     import { AccountRoute, WalletRoute } from '@core/router/enums'
-
-    import { AccountActionsModal, BottomNavigation, DashboardPane, Drawer, Text, Modal } from 'shared/components'
+    import { asyncGetAccounts, setSelectedAccount } from '@lib/wallet'
     import {
-        AccountActions,
-        AddressHistory,
-        DeleteAccount,
-        ExportTransactionHistory,
-        HideAccount,
-    } from 'shared/components/drawerContent'
+        AccountActionsModal,
+        ActivityDetail,
+        BottomNavigation,
+        DashboardPane,
+        Drawer,
+        Modal,
+        Text,
+    } from 'shared/components'
+    import { mobileHeaderAnimation, touchInterpolation } from 'shared/lib/animation'
     import { clearSendParams, loggedIn, mobile, sendParams } from 'shared/lib/app'
     import { deepCopy } from 'shared/lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from 'shared/lib/ledger'
@@ -32,26 +33,31 @@
     import { Message, Transaction } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import {
-        addMessagesPair,
+        accountSyncingQueueStore,
         api,
         asyncSyncAccounts,
         getAccountMessages,
-        getAccountMeta,
-        getSyncAccountOptions,
+        getAccountSyncOptions,
         hasGeneratedALedgerReceiveAddress,
+        initializeAccountSyncingQueue,
+        isBackgroundSyncing,
         isFirstSessionSync,
+        isInitialAccountSync,
         isTransferring,
-        prepareAccountInfo,
-        processMigratedTransactions,
+        processAccountSyncingQueue,
+        processLoadedAccounts,
         removeEventListeners,
-        selectedAccount,
-        selectedAccountId,
+        selectedAccountIdStore,
+        selectedAccountStore,
         transferState,
-        updateBalanceOverview,
+        selectedMessage,
         wallet,
+        haveStakingResultsCached,
     } from 'shared/lib/wallet'
     import { initialiseListeners } from 'shared/lib/walletApiListeners'
-    import { onMount } from 'svelte'
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import { spring } from 'svelte/motion'
+    import { get, Readable } from 'svelte/store'
     import { fade } from 'svelte/transition'
     import {
         AccountAssets,
@@ -65,6 +71,22 @@
     } from './views/'
 
     const { accounts, accountsLoaded, internalTransfersInProgress } = $wallet
+    const headerScale = spring(1)
+    const headerScaleOptions = {
+        spring: headerScale,
+        upperBoundary: 1,
+        lowerBoundary: 0,
+        intensityScale: 2,
+        upDownThreshold: 0.5,
+        active: true,
+    }
+
+    const unsubscribeHeaderScale = headerScale.subscribe((curr) => mobileHeaderAnimation.set(curr))
+
+    let unsubscribeLiftDasboard = () => {}
+    let unsubscribeScrollDetection = () => {}
+
+    const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
     let modal: Modal
 
@@ -78,9 +100,14 @@
     let isGeneratingAddress = false
 
     let drawer: Drawer
+    let activityDrawer: Drawer
+
+    let headerHeight = 0
+    let scroll = false
+    let bottomNavigation: BottomNavigation
 
     // If account changes force regeneration of Ledger receive address
-    $: if ($selectedAccountId && $isLedgerProfile) {
+    $: if ($selectedAccountIdStore && $isLedgerProfile) {
         hasGeneratedALedgerReceiveAddress.set(false)
     }
 
@@ -91,86 +118,62 @@
         }
     }
 
-    function loadAccounts() {
-        const _onError = (error: any = null) => {
+    $: accountSyncingQueueLength = $accountSyncingQueueStore?.length || 0
+    $: if (accountSyncingQueueLength > 0) {
+        void processAccountSyncingQueue()
+    } else {
+        if ($isFirstSessionSync && $accountSyncingQueueStore !== null) {
+            isFirstSessionSync.set(false)
+        }
+    }
+
+    async function loadAccounts(): Promise<void> {
+        try {
+            const loadedAccounts = await asyncGetAccounts()
+            await processLoadedAccounts(loadedAccounts)
+            setSelectedAccount($activeProfile.lastUsedAccountId ?? $viewableAccounts?.[0]?.id ?? null)
+            accountsLoaded.set(true)
+            const { gapLimit, accountDiscoveryThreshold } = getAccountSyncOptions()
+
+            if (isInitialAccountSync()) {
+                await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
+                isFirstSessionSync.set(false)
+            } else {
+                initializeAccountSyncingQueue()
+            }
+            if (!get(isBackgroundSyncing)) {
+                api.startBackgroundSync(
+                    {
+                        secs: 30,
+                        nanos: 0,
+                    },
+                    true,
+                    gapLimit,
+                    {
+                        onSuccess() {
+                            isBackgroundSyncing.set(true)
+                        },
+                        onError(err) {
+                            showAppNotification({
+                                type: 'error',
+                                message: localize('error.account.syncing'),
+                            })
+                        },
+                    }
+                )
+            }
+        } catch (err) {
             if ($isLedgerProfile) {
-                if (!LedgerErrorType[error.type]) {
-                    displayNotificationForLedgerProfile('error', true, true, false, false, error)
+                if (!LedgerErrorType[err.type]) {
+                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
                 }
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: localize(error?.error || 'error.global.generic'),
+                    message: localize(err?.error || 'error.global.generic'),
                 })
             }
         }
-
-        api.getAccounts({
-            onSuccess(accountsResponse) {
-                const _continue = async () => {
-                    accountsLoaded.set(true)
-
-                    const { gapLimit, accountDiscoveryThreshold } = getSyncAccountOptions()
-
-                    try {
-                        await asyncSyncAccounts(0, gapLimit, accountDiscoveryThreshold, false)
-
-                        if ($isFirstSessionSync) isFirstSessionSync.set(false)
-                    } catch (err) {
-                        _onError(err)
-                    }
-                }
-
-                if (accountsResponse.payload.length === 0) {
-                    void _continue()
-                } else {
-                    const totalBalance = {
-                        balance: 0,
-                        incoming: 0,
-                        outgoing: 0,
-                    }
-
-                    let completeCount = 0
-                    const newAccounts = []
-                    for (const payloadAccount of accountsResponse.payload) {
-                        addMessagesPair(payloadAccount)
-
-                        getAccountMeta(payloadAccount.id, (err, meta) => {
-                            if (!err) {
-                                totalBalance.balance += meta.balance
-                                totalBalance.incoming += meta.incoming
-                                totalBalance.outgoing += meta.outgoing
-
-                                const account = prepareAccountInfo(payloadAccount, meta)
-                                newAccounts.push(account)
-                            } else {
-                                _onError(err)
-                            }
-
-                            completeCount++
-
-                            if (completeCount === accountsResponse.payload.length) {
-                                accounts.update((_accounts) => newAccounts.sort((a, b) => a.index - b.index))
-                                processMigratedTransactions(
-                                    payloadAccount.id,
-                                    payloadAccount.messages,
-                                    payloadAccount.addresses
-                                )
-                                updateBalanceOverview(
-                                    totalBalance.balance,
-                                    totalBalance.incoming,
-                                    totalBalance.outgoing
-                                )
-                                void _continue()
-                            }
-                        })
-                    }
-                }
-            },
-            onError(err) {
-                _onError(err)
-            },
-        })
     }
 
     function onGenerateAddress(accountId: AccountIdentifier) {
@@ -278,6 +281,11 @@
                             type: TransferProgressEventType.Complete,
                         })
 
+                        if ($mobile) {
+                            walletRoute.set(WalletRoute.AccountHistory)
+                            accountRoute.set(AccountRoute.Init)
+                        }
+
                         setTimeout(() => {
                             clearSendParams()
                             isTransferring.set(false)
@@ -285,6 +293,10 @@
                     },
                     onError(err) {
                         isTransferring.set(false)
+                        if ($mobile) {
+                            walletRoute.set(WalletRoute.AccountHistory)
+                            accountRoute.set(AccountRoute.Init)
+                        }
                         showAppNotification({
                             type: 'error',
                             message: localize(err.error),
@@ -342,6 +354,11 @@
                         type: TransferProgressEventType.Complete,
                     })
 
+                    if ($mobile) {
+                        walletRoute.set(WalletRoute.AccountHistory)
+                        accountRoute.set(AccountRoute.Init)
+                    }
+
                     setTimeout(() => {
                         clearSendParams(internal)
                         isTransferring.set(false)
@@ -349,6 +366,9 @@
                 },
                 onError(err) {
                     isTransferring.set(false)
+                    if ($mobile) {
+                        accountRoute.set(AccountRoute.Init)
+                    }
                     showAppNotification({
                         type: 'error',
                         message: localize(err.error),
@@ -384,12 +404,14 @@
     }
 
     onMount(() => {
+        $backButtonStore?.reset()
+
         // If we are in settings when logged out the router reset
         // switches back to the wallet, but there is no longer
         // an active profile, only init if there is a profile
         if ($activeProfile && $loggedIn) {
             if (!$accountsLoaded) {
-                loadAccounts()
+                void loadAccounts()
             }
 
             removeEventListeners($activeProfile.id)
@@ -412,82 +434,149 @@
     })
 
     const handleMenuClick = () => $accountRouter.goTo(AccountRoute.Actions)
+
+    function setHeaderHeight(node: HTMLElement): void {
+        headerHeight = node.clientHeight
+    }
+
+    function liftDashboard(node: HTMLElement): void {
+        const [safeArea] = getComputedStyle(document.documentElement).getPropertyValue('--sat').split('px')
+        node.style.zIndex = '0'
+        unsubscribeLiftDasboard = headerScale.subscribe((curr) => {
+            const topOffset = parseInt(safeArea) * (1 - curr)
+            node.style.transform = `translate(0, ${headerHeight * 0.6 * curr + (headerHeight + topOffset) * 0.4}px)`
+        })
+    }
+
+    function scrollDetection(node: HTMLElement): void {
+        unsubscribeScrollDetection = headerScale.subscribe((curr) => {
+            if (curr <= 0 && node.scrollTop <= 0) {
+                scroll = true
+                return
+            }
+            scroll = false
+        })
+        node.addEventListener('touchstart', () => {
+            if (node.scrollTop > 0) {
+                headerScaleOptions.active = false
+                return
+            }
+            if (node.scrollTop <= 0) {
+                headerScaleOptions.active = true
+            }
+        })
+    }
+
+    function handleDrawerClose(): void {
+        accountRoute.set(AccountRoute.Init)
+        $backButtonStore?.reset()
+    }
+
+    function handleActivityDrawerBackClick(): void {
+        selectedMessage.set(null)
+        $backButtonStore?.pop()
+    }
+
+    $: if ($selectedMessage && activityDrawer) {
+        $backButtonStore?.add(activityDrawer.close)
+    }
+
+    onDestroy(() => {
+        unsubscribeHeaderScale()
+        unsubscribeLiftDasboard()
+        unsubscribeScrollDetection()
+    })
 </script>
 
-{#if $selectedAccount}
+{#if $selectedAccountStore}
     {#if $mobile}
-        <div class="wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900">
+        <div class="wallet-wrapper w-full h-full flex flex-col bg-gray-50 dark:bg-gray-900 overflow-hidden">
             <div class="flex flex-auto flex-col">
                 <!-- Total Balance, Accounts list & Send/Receive -->
-                <div class="flex">
-                    <AccountBalance classes="w-full" onMenuClick={handleMenuClick} />
+                <div class="absolute flex w-full" use:setHeaderHeight>
+                    <AccountBalance classes="w-full" onMenuClick={handleMenuClick} scale={headerScale} />
                     <Drawer
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
-                        onClose={() => accountRoute.set(AccountRoute.Init)}
+                        on:close={handleDrawerClose}
                     >
                         {#if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
                         {:else if $accountRoute === AccountRoute.Receive}
                             <Receive {isGeneratingAddress} {onGenerateAddress} />
-                        {:else if $accountRoute === AccountRoute.Actions}
-                            <AccountActions />
                         {:else if $accountRoute === AccountRoute.Manage}
-                            <ManageAccount account={$selectedAccount} />
-                        {:else if $accountRoute === AccountRoute.AddressHistory}
-                            <AddressHistory account={$selectedAccount} />
-                        {:else if $accountRoute === AccountRoute.ExportTransactionHistory}
-                            <ExportTransactionHistory account={$selectedAccount} />
-                        {:else if $accountRoute === AccountRoute.HideAccount}
-                            <HideAccount account={$selectedAccount} />
-                        {:else if $accountRoute === AccountRoute.DeleteAccount}
-                            <DeleteAccount account={$selectedAccount} />
+                            <ManageAccount account={$selectedAccountStore} />
                         {/if}
                     </Drawer>
                 </div>
-                <div class="flex flex-1">
+                <div
+                    class="flex flex-1"
+                    style="will-change: transform"
+                    use:touchInterpolation={headerScaleOptions}
+                    use:liftDashboard
+                >
                     <DashboardPane classes="w-full">
                         {#if $walletRoute === WalletRoute.Assets}
-                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
-                                <AccountAssets classes="pb-0" />
+                            <div class="h-full" in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 200 }}>
+                                {#key $haveStakingResultsCached}
+                                    <AccountAssets
+                                        {scroll}
+                                        {scrollDetection}
+                                        bottomOffset="{bottomNavigation?.getHeight()}px"
+                                    />
+                                {/key}
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
-                            <div class="h-full" in:fade={{ duration: 200 }} out:fade={{ duration: 200 }}>
-                                <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                            <div class="h-full" in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 200 }}>
+                                <AccountHistory
+                                    {scroll}
+                                    {scrollDetection}
+                                    transactions={getAccountMessages($selectedAccountStore)}
+                                    bottomOffset="{bottomNavigation?.getHeight() * 0.8}px"
+                                />
                             </div>
                         {/if}
                     </DashboardPane>
                 </div>
-                <BottomNavigation locale={localize} />
+                <BottomNavigation locale={localize} bind:this={bottomNavigation} />
+                {#if $selectedMessage}
+                    <Drawer opened bind:this={activityDrawer} on:close={handleActivityDrawerBackClick}>
+                        <div class="overflow-y-auto h-2/3 space-y-2.5">
+                            <ActivityDetail {...$selectedMessage} />
+                        </div>
+                    </Drawer>
+                {/if}
             </div>
         </div>
     {:else}
         <div class="w-full h-full flex flex-col flex-nowrap p-10 relative flex-1 bg-gray-50 dark:bg-gray-900">
-            {#key $selectedAccount?.id}
+            {#key $selectedAccountStore?.id}
                 <div class="w-full h-full grid grid-cols-3 gap-x-4 min-h-0">
                     <DashboardPane classes=" h-full flex flex-auto flex-col flex-shrink-0">
                         {#if $accountRoute !== AccountRoute.Manage}
                             <AccountBalance onMenuClick={modal?.toggle} />
                         {/if}
                         <DashboardPane classes="h-full {$accountRoute !== AccountRoute.Manage ? '-mt-5' : ''} z-0">
-                            {#if $activeProfile?.hiddenAccounts?.includes($selectedAccount?.id)}
+                            {#if $activeProfile?.hiddenAccounts?.includes($selectedAccountStore?.id)}
                                 <div class="px-6 my-4">
                                     <Text type="p" secondary>{localize('general.accountRemoved')}</Text>
                                 </div>
                             {/if}
                             {#if $accountRoute === AccountRoute.Init}
-                                <AccountAssets />
+                                {#key $haveStakingResultsCached}
+                                    <AccountAssets />
+                                {/key}
                             {:else if $accountRoute === AccountRoute.Send}
                                 <Send {onSend} {onInternalTransfer} />
                             {:else if $accountRoute === AccountRoute.Receive}
                                 <Receive {isGeneratingAddress} {onGenerateAddress} />
                             {:else if $accountRoute === AccountRoute.Manage}
-                                <ManageAccount account={$selectedAccount} />
+                                <ManageAccount account={$selectedAccountStore} />
                             {/if}
                         </DashboardPane>
                     </DashboardPane>
                     <DashboardPane>
-                        <AccountHistory transactions={getAccountMessages($selectedAccount)} />
+                        <AccountHistory transactions={getAccountMessages($selectedAccountStore)} />
                     </DashboardPane>
                     <div class=" flex flex-col space-y-4">
                         <DashboardPane classes="w-full h-1/2">
@@ -505,6 +594,9 @@
 {/if}
 
 <style type="text/scss">
+    :root {
+        --sat: env(safe-area-inset-top);
+    }
     :global(body.platform-win32) .wallet-wrapper {
         @apply pt-0;
     }

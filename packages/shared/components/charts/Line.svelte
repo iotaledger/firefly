@@ -1,18 +1,18 @@
 <script lang="typescript">
     import Chart from 'chart.js'
-    import { appSettings } from 'shared/lib/appSettings'
-    import { convertHexToRGBA } from 'shared/lib/helpers'
+    import { appSettings } from '@lib/appSettings'
+    import { convertHexToRGBA } from '@lib/helpers'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { afterUpdate, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
-    import { AccountColors } from 'shared/lib/wallet'
+    import { AccountColor } from '@lib/typings/color'
 
     export let labels = []
     export let datasets = []
     export let xMaxTicks = 7
     export let yMaxTicks = 6
     export let formatYAxis = (value: unknown): number => Number(value.toString())
-    export let color = AccountColors.Blue.toString()
+    export let color = AccountColor.Blue.toString()
     export let beginAtZero = false
     export let inlineStyle = 'height: calc(50vh - 140px);'
 

@@ -1,17 +1,17 @@
 name: Snyk
 
 on:
-  pull_request:
   push:
     branches:
       - 'develop'
+      - 'stardust-develop'
 
 jobs:
   test:
     # Only run on push events or PRs from iotaledger/firefly, skip on PRs from forks
     # Secret variables cannot be exposed to PRs from forks
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-18.04
+    if: github.event_name == 'push'
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 

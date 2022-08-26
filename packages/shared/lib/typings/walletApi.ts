@@ -4,7 +4,7 @@ import {
     ParticipationEvent,
     ParticipationOverviewResponse,
 } from 'shared/lib/participation/types'
-import { Account, AccountIdentifier, AccountToCreate, Balance, SyncedAccount } from './account'
+import { Account, AccountIdentifier, AccountSyncOptions, AccountToCreate, Balance, SyncedAccount } from './account'
 import { Address } from './address'
 import { GetMigrationAddressResponse } from './bridge'
 import { ClientOptions } from './client'
@@ -66,19 +66,21 @@ export interface IWalletApi {
         onSuccess: (response: Event<StrongholdStatus>) => void
         onError: (err: ErrorEventPayload) => void
     })
+    syncAccount(
+        accountId: string,
+        accountSyncOptions: AccountSyncOptions,
+        callbacks: { onSuccess: (response: Event<SyncedAccount>) => void; onError: (err: ErrorEventPayload) => void }
+    )
     syncAccounts(
         addressIndex: number,
         gapLimit: number,
         accountDiscoveryThreshold: number,
         callbacks: { onSuccess: (response: Event<SyncedAccount[]>) => void; onError: (err: ErrorEventPayload) => void }
     )
-    syncAccount(
-        accountId: string,
-        callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
-    )
     startBackgroundSync(
         pollingInterval: Duration,
         automaticOutputConsolidation: boolean,
+        gapLimit: number,
         callbacks: { onSuccess: (response: Event<void>) => void; onError: (err: ErrorEventPayload) => void }
     )
     stopBackgroundSync(callbacks: {
@@ -289,14 +291,6 @@ export interface IWalletApi {
     stopParticipating(
         accountId: string,
         eventIds: string[],
-        callbacks: {
-            onSuccess: (response: Event<ParticipateResponsePayload>) => void
-            onError: (err: ErrorEventPayload) => void
-        }
-    )
-    participateWithRemainingFunds(
-        accountId: string,
-        participations: Participation[],
         callbacks: {
             onSuccess: (response: Event<ParticipateResponsePayload>) => void
             onError: (err: ErrorEventPayload) => void

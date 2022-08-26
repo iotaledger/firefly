@@ -5,6 +5,7 @@
     export let width = undefined
     export let height = undefined
     export let classes = ''
+    export let inlineStyle = ''
     export let boxed = false
     export let boxClasses = 'undefined'
     export let boxStyles = ''
@@ -22,6 +23,7 @@
                 height={height || selected.height || '100%'}
                 viewBox="0 0 {selected.width} {selected.height}"
                 xmlns="http://www.w3.org/2000/svg"
+                style={inlineStyle}
             >
                 {#each selected.path as path}
                     <path
@@ -49,6 +51,7 @@
             height={height || selected.height || '100%'}
             viewBox="0 0 {selected.width} {selected.height}"
             xmlns="http://www.w3.org/2000/svg"
+            style={inlineStyle}
         >
             {#each selected.path as path}
                 <path

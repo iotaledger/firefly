@@ -20,14 +20,14 @@ export interface ListMessagesFilter {
     from: number
 }
 
-export interface SyncAccountOptions {
+export interface AccountSyncOptions {
     addressIndex?: number
     gapLimit?: number
     accountDiscoveryThreshold?: number
     skipPersistance?: boolean
 }
 
-export interface Account {
+export type Account = {
     id: string
     alias: string
     createdAt: string
@@ -38,6 +38,13 @@ export interface Account {
     storagePath: string
     messages: Message[]
     addresses: Address[]
+}
+
+export type AccountMetadata = {
+    balance: number
+    incoming: number
+    outgoing: number
+    depositAddress: string
 }
 
 export type AccountIdentifier = number | string
@@ -117,13 +124,14 @@ export function startBackgroundSync(
     bridge: Bridge,
     __ids: CommunicationIds,
     pollingInterval: Duration,
-    automaticOutputConsolidation: boolean
+    automaticOutputConsolidation: boolean,
+    gapLimit: number
 ): Promise<string> {
     return bridge({
         actorId: __ids.actorId,
         id: __ids.messageId,
         cmd: 'StartBackgroundSync',
-        payload: { pollingInterval, automaticOutputConsolidation },
+        payload: { pollingInterval, automaticOutputConsolidation, gapLimit },
     })
 }
 
@@ -258,7 +266,7 @@ export function syncAccount(
     bridge: Bridge,
     __ids: CommunicationIds,
     accountId: AccountIdentifier,
-    options?: SyncAccountOptions
+    options?: AccountSyncOptions
 ): Promise<string> {
     return _callAccountMethod(bridge, __ids, AccountMethod.SyncAccount, accountId, options || {})
 }

@@ -20,6 +20,11 @@ public class WalletPlugin: CAPPlugin {
             if !fm.fileExists(atPath: path) {
                 try fm.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
             }
+            // Exclude folder from auto-backup
+            var urlPath = URL(fileURLWithPath: path, isDirectory: true)
+            var values = URLResourceValues()
+            values.isExcludedFromBackup = true
+            try urlPath.setResourceValues(values)
             call.keepAlive = true
             // TODO: it's possible to make this better? investigate for implications
             // based on: https://vmanot.com/context-capturing-c-function-pointers-in-swift
@@ -40,7 +45,10 @@ public class WalletPlugin: CAPPlugin {
     }
 
     @objc func destroy(_ call: CAPPluginCall) {
-        guard !isInitialized else { return }
+        guard isInitialized else {
+            call.resolve()
+            return
+        }
         guard let actorId = call.getString("actorId") else {
             return call.reject("actorId is required")
         }
@@ -65,7 +73,10 @@ public class WalletPlugin: CAPPlugin {
     }
 
     @objc func listen(_ call: CAPPluginCall) {
-        guard isInitialized else { return call.reject("actor not initialized") }
+        guard isInitialized else {
+            call.resolve()
+            return
+        }
         guard let actorId = call.getString("actorId") else {
             return call.reject("actorId is required")
         }

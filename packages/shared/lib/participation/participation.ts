@@ -1,52 +1,83 @@
-import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
+import { get } from 'svelte/store'
 import { WalletAccount } from '../typings/wallet'
-
-import { getParticipationOverview } from './api'
-import { ASSEMBLY_EVENT_ID, PARTICIPATION_POLL_DURATION } from './constants'
-import { canAccountReachMinimumAirdrop } from './staking'
+import { DUST_THRESHOLD, hasValidPendingTransactions } from '../wallet'
+import { canAccountReachMinimumAirdrop } from './account'
+import { getParticipationOverview, getParticipationEvents } from './api'
+import { ASSEMBLY_EVENT_ID, LAST_MILESTONE_BEFORE_TREASURY_EVENT, PARTICIPATION_POLL_DURATION } from './constants'
 import {
+    isChangingParticipation,
     isPerformingParticipation,
     participationAction,
     participationEvents,
+    participationHistory,
     participationOverview,
     pendingParticipations,
+    isFetchingParticipationInfo,
 } from './stores'
-import { AccountParticipationAbility, ParticipationEventState, StakingAirdrop } from './types'
+import { AccountParticipationAbility, ParticipationAction, ParticipationEventState, StakingAirdrop } from './types'
+import { getDurationString, milestoneToDate } from '@lib/time'
 
-let participationPollInterval
+let shouldPollParticipation = true
+let participationPollTimeout
 
 /**
- * Begins polling of the participation overview.
+ * Get participation overview data and latest events.
  *
- * @method pollParticipationOverview
+ * @method fetchParticipationInfo
  *
  * @returns {Promise<void>}
  */
-export async function pollParticipationOverview(): Promise<void> {
-    clearPollParticipationOverviewInterval()
+export async function fetchParticipationInfo(): Promise<void> {
+    isFetchingParticipationInfo.set(true)
+    await Promise.all([getParticipationOverview(ASSEMBLY_EVENT_ID), getParticipationEvents()])
+    isFetchingParticipationInfo.set(false)
+}
+
+/**
+ * Polls participation events 10s after the last poll completes.
+ *
+ * @method pollParticipation
+ *
+ * @returns {Promise<void>}
+ */
+export async function pollParticipation(): Promise<void> {
     try {
-        await getParticipationOverview(ASSEMBLY_EVENT_ID)
+        if (get(isFetchingParticipationInfo) || !shouldPollParticipation) return
+        await fetchParticipationInfo()
         /* eslint-disable @typescript-eslint/no-misused-promises */
-        participationPollInterval = setInterval(
-            async () => getParticipationOverview(ASSEMBLY_EVENT_ID),
-            PARTICIPATION_POLL_DURATION
-        )
+        participationPollTimeout = setTimeout(async () => {
+            await pollParticipation()
+        }, PARTICIPATION_POLL_DURATION)
     } catch (error) {
+        isFetchingParticipationInfo.set(false)
         if (error && error?.error.includes('pluginNotFound')) {
-            clearPollParticipationOverviewInterval()
+            stopParticipationPoll()
         }
     }
 }
 
 /**
- * Clears the polling interval for the participation overview.
+ * Begins polling of the participation events.
  *
- * @method clearPollParticipationOverviewInterval
+ * @method startParticipationPoll
  *
  * @returns {void}
  */
-export function clearPollParticipationOverviewInterval(): void {
-    clearInterval(participationPollInterval)
+export function startParticipationPoll(): void {
+    shouldPollParticipation = true
+    pollParticipation()
+}
+
+/**
+ * Clears the polling interval for the participation overview.
+ *
+ * @method clearPollParticipationTimeout
+ *
+ * @returns {void}
+ */
+export function stopParticipationPoll(): void {
+    shouldPollParticipation = false
+    clearTimeout(participationPollTimeout)
 }
 
 /**
@@ -57,8 +88,10 @@ export function clearPollParticipationOverviewInterval(): void {
  * @returns {void}
  */
 export const resetParticipation = (): void => {
+    isFetchingParticipationInfo.set(false)
     isPerformingParticipation.set(false)
     participationAction.set(null)
+    isChangingParticipation.set(false)
     participationEvents.set([])
     participationOverview.set([])
     pendingParticipations.set([])
@@ -74,17 +107,8 @@ export const resetParticipation = (): void => {
  *
  * @returns {boolean}
  */
-export const canParticipate = (eventState: ParticipationEventState): boolean => {
-    switch (eventState) {
-        case ParticipationEventState.Commencing:
-        case ParticipationEventState.Holding:
-            return true
-        case ParticipationEventState.Upcoming:
-        case ParticipationEventState.Ended:
-        default:
-            return false
-    }
-}
+export const canParticipate = (eventState: ParticipationEventState): boolean =>
+    eventState === ParticipationEventState.Commencing || eventState === ParticipationEventState.Holding
 
 /**
  * Determines whether an account can participate in an event.
@@ -93,7 +117,7 @@ export const canParticipate = (eventState: ParticipationEventState): boolean => 
  *
  * @param {WalletAccount} account
  *
- * @returns {boolean}
+ * @returns {AccountParticipationAbility}
  */
 export const getAccountParticipationAbility = (account: WalletAccount): AccountParticipationAbility => {
     if (account?.rawIotaBalance < DUST_THRESHOLD) {
@@ -104,5 +128,28 @@ export const getAccountParticipationAbility = (account: WalletAccount): AccountP
         return AccountParticipationAbility.WillNotReachMinAirdrop
     } else {
         return AccountParticipationAbility.Ok
+    }
+}
+
+/**
+ * Returns ParticipationAction for transaction message
+ *
+ * @method getMessageParticipationAction
+ *
+ * @param {WalletAccount} account
+ *
+ * @returns {ParticipationAction}
+ */
+export const getMessageParticipationAction = (messageId: string, timestamp: string): ParticipationAction => {
+    const matchedHistoryItem = get(participationHistory)?.find((item) => item.messageId === messageId)
+    if (matchedHistoryItem?.action) {
+        return matchedHistoryItem.action
+    }
+    if (timestamp) {
+        const lastDateBeforeTreasuryEvent = milestoneToDate(LAST_MILESTONE_BEFORE_TREASURY_EVENT)
+        const messageDate = new Date(timestamp)
+        if (messageDate <= lastDateBeforeTreasuryEvent) {
+            return ParticipationAction.Stake
+        }
     }
 }

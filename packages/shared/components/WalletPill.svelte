@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { isBright } from 'shared/lib/helpers'
     import { WalletAccount } from 'shared/lib/typings/wallet'
-    import { activeProfile, getColor } from 'shared/lib/profile'
+    import { getAccountColor } from 'shared/lib/profile'
 
     export let account: WalletAccount
     export let size: 's' | 'm' = 'm'
@@ -21,7 +21,7 @@
         showTooltip = !showTooltip
     }
 
-    $: backgroundColor = getColor($activeProfile, account.id)
+    $: backgroundColor = getAccountColor(account.id)
     $: bright = isBright(backgroundColor.toString())
     $: textColor = bright ? 'gray-800' : 'white'
 </script>

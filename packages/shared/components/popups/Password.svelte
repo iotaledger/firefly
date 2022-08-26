@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Password, Text } from 'shared/components'
-    import { mobile } from 'shared/lib/app'
+    import { keyboardHeight, isKeyboardOpened, mobile, getKeyboardTransitionSpeed } from 'shared/lib/app'
     import { closePopup } from 'shared/lib/popup'
     import { api } from 'shared/lib/wallet'
     import { Locale } from '@core/i18n'
@@ -14,7 +14,7 @@
     export let onError = (..._: any[]): void => {}
     export let onCancelled = (..._: any[]): void => {}
 
-    let password
+    let password = ''
     let error = ''
 
     function handleSubmit() {
@@ -42,8 +42,12 @@
 </script>
 
 <div class="mb-5">
-    <Text type="h4">{locale('popups.password.title')}</Text>
-    <Text type="p" secondary>{subtitle ?? locale('popups.password.subtitle')}</Text>
+    <Text type="h4" classes={$mobile && 'flex w-full justify-center -mt-4 mb-6'}>
+        {locale('popups.password.title')}
+    </Text>
+    <Text type="p" secondary classes={$mobile && 'flex w-full justify-center -mt-4 mb-6'}>
+        {subtitle ?? locale('popups.password.subtitle')}
+    </Text>
 </div>
 <form
     id="password-popup-form"
@@ -57,9 +61,15 @@
         showRevealToggle
         {locale}
         placeholder={locale('general.password')}
-        autofocus={!$mobile}
+        autofocus
     />
-    <div class="flex flex-row justify-between w-full space-x-4 md:px-8">
+    <div
+        class="flex flex-row justify-between w-full space-x-4 md:px-8 {$mobile && $isKeyboardOpened && '-mb-6'}"
+        style="padding-bottom: {$mobile && $isKeyboardOpened
+            ? $keyboardHeight
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
+    >
         <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
         <Button classes="w-1/2" type="submit" form="password-popup-form" disabled={!password || password.length === 0}>
             {locale('actions.unlock')}

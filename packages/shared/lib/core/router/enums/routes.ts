@@ -37,16 +37,13 @@ export enum AccountRoute {
     Receive = 'receive',
     Delete = 'delete',
     Actions = 'actions',
-    AddressHistory = 'addressHistory',
-    ExportTransactionHistory = 'exportTransactionHistory',
-    HideAccount = 'hideAccount',
-    DeleteAccount = 'deleteAccount',
 }
 
 export enum DashboardRoute {
     Wallet = 'wallet',
     Settings = 'settings',
     Staking = 'staking',
+    Governance = 'governance',
 }
 
 export enum SettingsRoute {
@@ -62,6 +59,11 @@ export enum SettingsRouteNoProfile {
     GeneralSettings = 'generalSettings',
     AdvancedSettings = 'advancedSettings',
     HelpAndInfo = 'helpAndInfo',
+}
+
+export enum GovernanceRoute {
+    Init = 'init',
+    EventDetails = 'eventDetails',
 }
 
 export enum GeneralSettings {
@@ -158,4 +160,9 @@ export enum MigrateRoute {
 export enum WalletRoute {
     Assets = 'assets',
     AccountHistory = 'accountHistory',
+}
+
+export enum ProfileRoute {
+    ProfileActions = 'profileActions',
+    Settings = 'settings',
 }

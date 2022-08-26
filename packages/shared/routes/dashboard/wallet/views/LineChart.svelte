@@ -14,11 +14,11 @@
     import { BalanceHistory } from 'shared/lib/typings/wallet'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { HistoryDataProps } from 'shared/lib/typings/market'
-    import { getAccountBalanceHistory, selectedAccount } from 'shared/lib/wallet'
+    import { getAccountBalanceHistory, selectedAccountStore } from 'shared/lib/wallet'
     import { onMount } from 'svelte'
 
     let balanceHistory: BalanceHistory
-    $: $selectedAccount, $priceData, (balanceHistory = getAccountBalanceHistory($selectedAccount, $priceData))
+    $: $selectedAccountStore, $priceData, (balanceHistory = getAccountBalanceHistory($selectedAccountStore, $priceData))
 
     let chartData: ChartData = { labels: [], data: [], tooltips: [] }
     const chartTypeDropdownItems: { value: string; label: string }[] = []
@@ -39,14 +39,14 @@
 
     /** Chart data */
     $: {
-        if (localize || $selectedDashboardChart || $activeProfile?.settings.chartSelectors || $selectedAccount) {
+        if (localize || $selectedDashboardChart || $activeProfile?.settings.chartSelectors || $selectedAccountStore) {
             if ($activeProfile?.settings) {
                 // Account value chart
                 switch ($selectedWalletChart) {
                     case WalletChartType.HOLDINGS:
                         chartData = getChartDataFromBalanceHistory({
                             balanceHistory,
-                            currentBalance: $selectedAccount.rawIotaBalance,
+                            currentBalance: $selectedAccountStore.rawIotaBalance,
                             tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
                             convertToSelectedCurrency: false,
                         })
@@ -54,7 +54,7 @@
                     case WalletChartType.PORTFOLIO:
                         chartData = getChartDataFromBalanceHistory({
                             balanceHistory,
-                            currentBalance: $selectedAccount.rawIotaBalance,
+                            currentBalance: $selectedAccountStore.rawIotaBalance,
                             tokenType: CurrencyTypes.IOTA.toLocaleLowerCase(),
                             convertToSelectedCurrency: true,
                         })
@@ -117,7 +117,7 @@
     function formatYAxis(value) {
         return formatCurrencyValue(
             value,
-            $selectedAccount && $selectedWalletChart === WalletChartType.HOLDINGS
+            $selectedAccountStore && $selectedWalletChart === WalletChartType.HOLDINGS
                 ? CurrencyTypes.IOTA
                 : $activeProfile?.settings.chartSelectors.currency
                 ? $activeProfile?.settings.chartSelectors.currency
@@ -184,11 +184,11 @@
     <Chart
         type="line"
         {datasets}
-        beginAtZero={$selectedAccount || $selectedDashboardChart !== DashboardChartType.TOKEN}
+        beginAtZero={$selectedAccountStore || $selectedDashboardChart !== DashboardChartType.TOKEN}
         {labels}
         {xMaxTicks}
         {formatYAxis}
-        inlineStyle={$selectedAccount && `height: calc(50vh - ${hasTitleBar ? '190' : '160'}px);`}
+        inlineStyle={$selectedAccountStore && `height: calc(50vh - ${hasTitleBar ? '190' : '160'}px);`}
     />
 </div>
 

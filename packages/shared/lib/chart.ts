@@ -3,7 +3,7 @@ import { convertToFiat, currencies, exchangeRates } from 'shared/lib/currency'
 import { localize } from '@core/i18n'
 import { activeProfile, updateProfile } from 'shared/lib/profile'
 import { formatUnitPrecision } from 'shared/lib/units'
-import { isSelfTransaction, wallet, AccountColors } from 'shared/lib/wallet'
+import { isSelfTransaction } from 'shared/lib/wallet'
 import { formatDate } from '@core/i18n'
 import { derived, get, writable } from 'svelte/store'
 import { formatCurrencyValue } from './currency'
@@ -13,6 +13,7 @@ import { ActivityTimeframe, ChartData, DashboardChartType, Tooltip, WalletChartT
 import { AvailableExchangeRates, CurrencyTypes } from './typings/currency'
 import { HistoryDataProps } from './typings/market'
 import { BalanceHistory, WalletAccount } from './typings/wallet'
+import { AccountColor } from './typings/color'
 
 const BAR_CHART_ACTIVITY_MONTHS = 6
 
@@ -113,7 +114,7 @@ export const getAccountActivityData = (
         data: [],
         tooltips: [],
         label: localize('general.incoming'),
-        color: account.color || AccountColors.Blue,
+        color: account.color || AccountColor.Blue,
     } // TODO: profile colors
     const outgoing: ChartData = {
         data: [],

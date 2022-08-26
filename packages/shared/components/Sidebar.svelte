@@ -1,42 +1,71 @@
 <script lang="typescript">
-    import { Icon, Modal, NetworkIndicator, ProfileActionsModal, PingingBadge, SidebarTab } from 'shared/components'
-    import { getInitials, isRecentDate } from 'shared/lib/helpers'
-    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
-    import { isStakingPossible } from 'shared/lib/participation'
-    import {
-        assemblyStakingEventState,
-        partiallyUnstakedAmount,
-        shimmerStakingEventState,
-    } from 'shared/lib/participation/stores'
-    import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
     import {
         dashboardRoute,
-        dashboardRouter,
         DashboardRoute,
+        dashboardRouter,
+        governanceRouter,
         resetWalletRoute,
         SidebarTab as SidebarTabType,
     } from '@core/router'
-    import { Locale } from '@core/i18n'
     import { versionDetails } from '@lib/appUpdater'
-
-    export let locale: Locale
+    import {
+        Icon,
+        Modal,
+        PingingBadge,
+        NetworkIndicatorModal,
+        ProfileActionsModal,
+        SidebarTab,
+    } from 'shared/components'
+    import { getInitials, isRecentDate } from 'shared/lib/helpers'
+    import { networkStatus, NETWORK_HEALTH_COLORS } from 'shared/lib/networkStatus'
+    import {
+        currentAccountTreasuryVotePartiallyUnvotedAmount,
+        isParticipationPossible,
+        partiallyUnstakedAmount,
+    } from 'shared/lib/participation/account'
+    import {
+        assemblyStakingEventState,
+        shimmerStakingEventState,
+        treasuryEventState,
+    } from 'shared/lib/participation/stores'
+    import { activeProfile, hasEverOpenedProfileModal } from 'shared/lib/profile'
+    import { selectedAccountIdStore } from 'shared/lib/wallet'
 
     let networkModal: Modal
     let profileModal: Modal
     let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
     let showStakingNotification = false
+    let prevCurrentAccountTreasuryVotePartiallyUnvotedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
+    let showGovernanceNotification = false
 
     const profileColor = 'blue' // TODO: each profile has a different color
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
     $: healthStatus = $networkStatus.health ?? 0
+
+    // reset previously tracked amounts on wallet change
+    $: if ($selectedAccountIdStore) {
+        prevCurrentAccountTreasuryVotePartiallyUnvotedAmount = 0
+        prevPartiallyUnstakedAmount = 0
+        showStakingNotification = false
+        showGovernanceNotification = false
+        manageUnstakedAmountNotification()
+        managePartialVoteNotification()
+    }
     $: $dashboardRoute,
         $assemblyStakingEventState,
         $shimmerStakingEventState,
         $partiallyUnstakedAmount,
         manageUnstakedAmountNotification()
+    $: $dashboardRoute,
+        $treasuryEventState,
+        $currentAccountTreasuryVotePartiallyUnvotedAmount,
+        managePartialVoteNotification()
 
-    $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
+    $: $activeProfile?.hasVisitedStaking,
+        showStakingNotification,
+        showGovernanceNotification,
+        updateSidebarNotification()
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
@@ -44,41 +73,67 @@
     let sidebarTabs: SidebarTabType[] = [
         {
             icon: 'wallet',
-            label: locale('tabs.wallet'),
+            label: 'wallet',
             route: DashboardRoute.Wallet,
             onClick: openWallet,
         },
         {
             icon: 'tokens',
-            label: locale('tabs.staking'),
+            label: 'staking',
             route: DashboardRoute.Staking,
             onClick: openStaking,
+        },
+        {
+            icon: 'voting',
+            label: 'governance',
+            route: DashboardRoute.Governance,
+            onClick: openGovernance,
         },
     ]
 
     function updateSidebarNotification() {
         sidebarTabs = sidebarTabs.map((tab) => {
-            if (DashboardRoute.Staking === tab.route) {
-                tab.notificationType = !$activeProfile?.hasVisitedStaking
-                    ? 'error'
-                    : showStakingNotification
-                    ? 'warning'
-                    : null
+            switch (tab.route) {
+                case DashboardRoute.Staking:
+                    tab.notificationType = !$activeProfile?.hasVisitedStaking
+                        ? 'error'
+                        : showStakingNotification
+                        ? 'warning'
+                        : null
+                    break
+                case DashboardRoute.Governance:
+                    tab.notificationType = showGovernanceNotification ? 'warning' : null
+                    break
             }
             return tab
         })
     }
 
     function manageUnstakedAmountNotification() {
-        if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
-            if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
-                showStakingNotification = true
-            } else {
+        if (isParticipationPossible($assemblyStakingEventState) || isParticipationPossible($shimmerStakingEventState)) {
+            if ($dashboardRoute === DashboardRoute.Staking || !$partiallyUnstakedAmount) {
                 showStakingNotification = false
+            } else if ($partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
+                showStakingNotification = true
             }
             prevPartiallyUnstakedAmount = $partiallyUnstakedAmount
         } else {
             showStakingNotification = false
+        }
+    }
+
+    function managePartialVoteNotification() {
+        if (isParticipationPossible($treasuryEventState)) {
+            if ($dashboardRoute === DashboardRoute.Governance || !$currentAccountTreasuryVotePartiallyUnvotedAmount) {
+                showGovernanceNotification = false
+            } else if (
+                $currentAccountTreasuryVotePartiallyUnvotedAmount > prevCurrentAccountTreasuryVotePartiallyUnvotedAmount
+            ) {
+                showGovernanceNotification = true
+            }
+            prevCurrentAccountTreasuryVotePartiallyUnvotedAmount = $currentAccountTreasuryVotePartiallyUnvotedAmount
+        } else {
+            showGovernanceNotification = false
         }
     }
 
@@ -88,6 +143,14 @@
 
     function openStaking() {
         $dashboardRouter.goTo(DashboardRoute.Staking)
+    }
+
+    function openGovernance() {
+        // reset router only if you are already on governance, act like a home button
+        if ($dashboardRoute === DashboardRoute.Governance) {
+            $governanceRouter.reset()
+        }
+        $dashboardRouter.goTo(DashboardRoute.Governance)
     }
 </script>
 
@@ -117,8 +180,8 @@
             </button>
         </span>
     </nav>
-    <NetworkIndicator bind:modal={networkModal} {locale} />
-    <ProfileActionsModal bind:modal={profileModal} {locale} />
+    <NetworkIndicatorModal bind:modal={networkModal} />
+    <ProfileActionsModal bind:modal={profileModal} />
 </aside>
 
 <style type="text/scss">

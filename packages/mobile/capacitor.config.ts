@@ -21,6 +21,9 @@ const config: CapacitorConfig = {
             launchAutoHide: false,
             backgroundColor: '#ffffffff',
         },
+        Keyboard: {
+            resize: 'none',
+        },
     },
     server: prod ? undefined : serverConfig,
     cordova: {
@@ -28,6 +31,7 @@ const config: CapacitorConfig = {
             DisableDeploy: 'true',
         },
     },
+    loggingBehavior: prod ? 'none' : 'debug',
 }
 
 export default config

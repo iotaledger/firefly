@@ -1,4 +1,3 @@
-import { AccountColors } from '../wallet'
 import { Account, AccountIdentifier } from './account'
 import { Bridge, CommunicationIds } from './bridge'
 import { ClientOptions } from './client'
@@ -34,11 +33,7 @@ export type BalanceOverview = {
     balanceFiat: string
 }
 
-export type createAccountCallback = (
-    alias: string,
-    color: string | AccountColors,
-    callback: (err: ErrorEvent) => void
-) => void
+export type createAccountCallback = (alias: string, color: string, callback: (err: ErrorEvent) => void) => void
 
 export type WalletState = {
     balanceOverview: Writable<BalanceOverview>

@@ -21,7 +21,7 @@ import {
     startBackgroundSync as _startBackgroundSync,
     stopBackgroundSync as _stopBackgroundSync,
     syncAccount as _syncAccount,
-    SyncAccountOptions,
+    AccountSyncOptions,
     syncAccounts as _syncAccounts,
 } from '@lib/typings/account'
 import { BridgeMessage, CommunicationIds, MessageResponse } from '@lib/typings/bridge'
@@ -158,9 +158,9 @@ export const api = {
         (__ids) =>
             _syncAccounts(sendMessage, __ids, addressIndex, gapLimit, accountDiscoveryThreshold),
     startBackgroundSync:
-        (pollingInterval: Duration, automaticOutputConsolidation: boolean): Api =>
+        (pollingInterval: Duration, automaticOutputConsolidation: boolean, gapLimit: number): Api =>
         (__ids) =>
-            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation),
+            _startBackgroundSync(sendMessage, __ids, pollingInterval, automaticOutputConsolidation, gapLimit),
     stopBackgroundSync: (): Api => (__ids) => _stopBackgroundSync(sendMessage, __ids),
     areLatestAddressesUnused: (): Api => (__ids) => _areLatestAddressesUnused(sendMessage, __ids),
     generateAddress:
@@ -188,7 +188,7 @@ export const api = {
         (__ids) =>
             _latestAddress(sendMessage, __ids, accountId),
     syncAccount:
-        (accountId: AccountIdentifier, options?: SyncAccountOptions): Api =>
+        (accountId: AccountIdentifier, options?: AccountSyncOptions): Api =>
         (__ids) =>
             _syncAccount(sendMessage, __ids, accountId, options),
     isLatestAddressUnused:

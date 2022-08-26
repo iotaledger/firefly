@@ -34,7 +34,13 @@
         </Button>
         <Button classes="flex-1" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-white dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="secure-desktop" />
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-white dark:bg-gray-900'}"
+    >
+        <Animation
+            classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
+            animation="secure-desktop"
+        />
     </div>
 </OnboardingLayout>

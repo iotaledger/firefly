@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
-    import { truncateString, isBright } from 'shared/lib/helpers'
     import { formatDate, localize } from '@core/i18n'
-    import { Payload } from 'shared/lib/typings/message'
+    import { Icon, Text } from 'shared/components'
+    import { truncateString } from 'shared/lib/helpers'
+    import { getMessageParticipationAction } from 'shared/lib/participation'
     import { ParticipationAction } from 'shared/lib/participation/types'
+    import { Payload, Transaction } from 'shared/lib/typings/message'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import {
         findAccountWithAddress,
@@ -17,16 +18,21 @@
         wallet,
     } from 'shared/lib/wallet'
 
-    export let timestamp
-    export let confirmed
+    export let id: string
+    export let timestamp: string
+    export let confirmed: boolean
     export let payload: Payload
     export let balance // migration tx
     export let onClick = (): void => {}
 
     const { accounts } = $wallet
 
+    let accountAlias = ''
+    let direction: string
     let messageValue = ''
     let date = localize('error.invalidDate')
+    let txPayload: Transaction
+
     $: {
         try {
             date = formatDate(new Date(timestamp), {
@@ -40,27 +46,13 @@
             date = localize('error.invalidDate')
         }
     }
-
     $: hasCachedMigrationTx = !payload
     $: milestonePayload = payload?.type === 'Milestone' ? payload : undefined
     $: txPayload = payload?.type === 'Transaction' ? payload : undefined
     $: hasCachedMigrationTx, milestonePayload, txPayload, (messageValue = getMessageValue())
-
-    const getMessageValue = () => {
-        if (hasCachedMigrationTx) {
-            return formatUnitBestMatch(balance, true, 3)
-        }
-        if (milestonePayload) {
-            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
-        }
-
-        return `${
-            !txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload) ? '-' : ''
-        }${formatUnitBestMatch(txPayload.data.essence.data.value, true, 2)}`
-    }
-
     $: senderAddress = sendAddressFromTransactionPayload(payload)
     $: receiverAddresses = receiverAddressesFromTransactionPayload(payload)
+    $: participationAction = getMessageParticipationAction(id, timestamp)
 
     // There can only be one sender address
     $: senderAccount = findAccountWithAddress(senderAddress)
@@ -72,9 +64,6 @@
         getIncomingFlag(txPayload) || getInternalFlag(txPayload)
             ? findAccountWithAnyAddress(receiverAddresses, senderAccount)
             : null
-
-    let accountAlias = ''
-
     $: {
         if (txPayload) {
             const acc = txPayload.data.essence.data.incoming ? senderAccount : receiverAccount
@@ -93,8 +82,6 @@
             }
         }
     }
-
-    let direction: string
     $: {
         if (txPayload) {
             if (isParticipationPayload(txPayload)) {
@@ -119,6 +106,18 @@
         }
     }
 
+    function getMessageValue(): string {
+        if (hasCachedMigrationTx) {
+            return formatUnitBestMatch(balance, true, 3)
+        }
+        if (milestonePayload) {
+            return formatUnitBestMatch(getMilestoneMessageValue(milestonePayload, $accounts), true, 3)
+        }
+        return `${
+            !txPayload.data.essence.data.incoming && !isParticipationPayload(txPayload) ? '-' : ''
+        }${formatUnitBestMatch(txPayload.data.essence.data.value, true, 2)}`
+    }
+
     let icon: string
     let iconColor: string
     $: {
@@ -126,7 +125,7 @@
             icon = 'double-chevron-right'
             iconColor = 'gray-600'
         } else if (isParticipationPayload(txPayload)) {
-            icon = getParticipationIcon(ParticipationAction.Stake)
+            icon = getParticipationIcon(participationAction)
             iconColor = 'gray-600'
         } else if (txPayload.data.essence.data.internal) {
             icon = 'transfer'
@@ -149,7 +148,21 @@
             case ParticipationAction.Unvote:
                 return 'voting'
             default:
-                return ''
+                return 'participation'
+        }
+    }
+    function getParticipationActionLocaleKey(action: ParticipationAction): string {
+        switch (action) {
+            case ParticipationAction.Stake:
+                return 'stakingTransaction'
+            case ParticipationAction.Vote:
+                return 'votingTransaction'
+            case ParticipationAction.Unstake:
+                return 'unstakingTransaction'
+            case ParticipationAction.Unvote:
+                return 'unvotingTransaction'
+            default:
+                return 'participationTransaction'
         }
     }
 </script>
@@ -171,7 +184,7 @@
             {#if hasCachedMigrationTx || milestonePayload}
                 {localize('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
-                {localize('general.stakingTransaction')}
+                {localize(`general.${getParticipationActionLocaleKey(participationAction)}`)}
             {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
         <p class="text-10 leading-120 text-gray-500">{date}</p>

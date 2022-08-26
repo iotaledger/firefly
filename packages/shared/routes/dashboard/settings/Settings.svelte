@@ -5,8 +5,9 @@
     import { dashboardRouter, settingsRouter, settingsRoute, SettingsRoute } from '@core/router'
     import { onDestroy } from 'svelte'
     import { SettingsHome, SettingsViewer } from './views'
+    import { fly } from 'svelte/transition'
 
-    export let handleClose: () => void
+    export let handleClose = (): void => {}
 
     function closeSettings(): void {
         $dashboardRouter.previous()
@@ -22,8 +23,10 @@
 </script>
 
 <div
-    class="relative h-full w-full px-6 pb-10 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$settingsRoute !==
-        SettingsRoute.Init && 'md:pt-20'} {$mobile && 'overflow-y-auto'} "
+    class="relative h-full w-full px-0 md:px-16 md:py-12 md:bg-white md:dark:bg-gray-900 flex flex-1 {$mobile
+        ? ''
+        : 'pb-10'} {$settingsRoute === SettingsRoute.Init && $mobile && 'settings-wrapper md:pt-20'}"
+    in:fly={{ duration: $mobile ? 200 : 0, x: 200 }}
 >
     {#if !$mobile}
         <button on:click={handleClose || closeSettings} class="absolute top-8 right-8">
@@ -36,3 +39,9 @@
         <SettingsViewer />
     {/if}
 </div>
+
+<style>
+    .settings-wrapper {
+        padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+    }
+</style>

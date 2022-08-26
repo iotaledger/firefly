@@ -26,22 +26,24 @@
         <textarea
             bind:this={textAreaElement}
             bind:value={address}
-            class="w-full text-12 border border-solid resize-none {!$mobile && 'leading-140'}
+            class="w-full text-12 border border-solid resize-none
                 {disabled
                 ? 'text-gray-400 dark:text-gray-700'
                 : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800 
                 {error
                 ? 'border-red-300 hover:border-red-500 focus:border-red-500'
                 : 'border-gray-300 dark:border-gray-700 hover:border-gray-500 dark:hover:border-gray-700 focus:border-blue-500 dark:focus:border-gray-600'} "
-            class:floating-active={address && label}
+            class:floating-active={address && label && $mobile === false}
             {placeholder}
             {disabled}
             spellcheck={false}
+            autocapitalize="off"
+            autocorrect="off"
+            autocomplete="off"
             maxlength={ADDRESS_LENGTH}
-            rows={$mobile ? 1 : 2}
             class:mobile={$mobile}
         />
-        {#if label}
+        {#if label && $mobile === false}
             <floating-label class:floating-active={address && label}>{label}</floating-label>
         {/if}
     </address-input>
@@ -58,7 +60,7 @@
         border-radius: 0.625rem; // TODO: add to tailwind
 
         &.mobile {
-            @apply leading-9;
+            @apply px-3;
             @apply py-1.5;
         }
 
@@ -77,10 +79,6 @@
         &.floating-active {
             @apply pt-6;
             @apply pb-2;
-            &.mobile {
-                @apply pt-3;
-                @apply pb-0;
-            }
         }
 
         + floating-label {

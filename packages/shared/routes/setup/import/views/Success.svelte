@@ -36,9 +36,12 @@
     <div slot="leftpane__action">
         <Button classes="w-full" onClick={() => handleContinueClick()}>{locale('actions.continue')}</Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
+    <div
+        slot="rightpane"
+        class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-green dark:bg-gray-900'}"
+    >
         <Animation
-            classes="setup-anim-aspect-ratio"
+            classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"
             animation={$importType === ImportType.Seed || $importType === ImportType.Mnemonic
                 ? 'import-from-text-success-desktop'
                 : 'import-from-file-success-desktop'}

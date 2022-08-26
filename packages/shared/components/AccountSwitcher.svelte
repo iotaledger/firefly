@@ -1,14 +1,21 @@
 <script lang="typescript">
-    import { WalletAccount } from '@lib/typings/wallet'
     import { AccountSwitcherModal, Icon, Text, Modal } from 'shared/components'
-    import { activeProfile, getColor, updateProfile } from '@lib/profile'
-    import { selectedAccount } from '@lib/wallet'
+    import { activeProfile, getAccountColor, updateProfile } from '@lib/profile'
+    import { selectedAccountStore } from '@lib/wallet'
+    import { WalletAccount } from '@lib/typings/wallet'
+    import { AccountColor } from '@lib/typings/color'
 
     export let accounts: WalletAccount[] = []
     export let onCreateAccount = (..._: any[]): void => {}
 
     let modal: Modal
     let isModalOpened: boolean
+
+    let lastSelectedAccount: WalletAccount = null
+    $: if ($selectedAccountStore) lastSelectedAccount = $selectedAccountStore
+
+    let accountColor: string | AccountColor
+    $: $activeProfile?.accounts, (accountColor = getAccountColor(lastSelectedAccount?.id))
 
     function onClick() {
         modal?.toggle()
@@ -19,8 +26,8 @@
 <svelte:window on:click={() => (isModalOpened = modal?.isOpened())} />
 <div class="relative left-8" style="-webkit-app-region: none;">
     <button on:click={onClick} class="flex flex-row justify-center items-center space-x-2">
-        <div class="circle" style="--account-color: {getColor($activeProfile, $selectedAccount?.id)};" />
-        <Text type="h5">{$selectedAccount?.alias}</Text>
+        <div class="circle" style="--account-color: {accountColor};" />
+        <Text type="h5">{lastSelectedAccount?.alias ?? '---'}</Text>
         <div class="transform {isModalOpened ? 'rotate-180' : 'rotate-0'}">
             <Icon height="18" width="18" icon="chevron-down" classes="text-gray-800 dark:text-white" />
         </div>

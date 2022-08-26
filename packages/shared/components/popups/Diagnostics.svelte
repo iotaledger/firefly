@@ -18,7 +18,7 @@
     const appVars = [
         {
             label: '',
-            value: locale('views.dashboard.security.version.title', {
+            value: locale('general.version', {
                 values: { version: $versionDetails.currentVersion },
             }),
         },

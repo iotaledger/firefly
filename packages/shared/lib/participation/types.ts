@@ -45,6 +45,13 @@ export enum ParticipationEventType {
     Staking = 1,
 }
 
+export enum VotingAction {
+    Cast = 'castVotes',
+    Merge = 'mergeVotes',
+    Stop = 'stopVotes',
+    Change = 'changeVotes',
+}
+
 /**
  * The status of a participation event.
  */
@@ -57,6 +64,23 @@ export type ParticipationEventStatus = {
      */
     status: ParticipationEventState
     checksum: string
+    questions: ParticipationEventStatusQuestion[]
+}
+
+/**
+ * The question of a participation event status.
+ */
+export type ParticipationEventStatusQuestion = {
+    answers: ParticipationEventStatusQuestionAnswer[]
+}
+
+/**
+ * The answer of a participation event status question.
+ */
+export type ParticipationEventStatusQuestionAnswer = {
+    value: number
+    current: number
+    accumulated: number
 }
 
 /**
@@ -65,16 +89,29 @@ export type ParticipationEventStatus = {
  */
 export type ParticipationEventInformationPayload = {
     type: ParticipationEventType
-    numerator: number
-    denominator: number
-    requiredMinimumRewards: number
-    symbol: string
+    numerator?: number
+    denominator?: number
+    requiredMinimumRewards?: number
+    symbol?: string
+    text?: string
+    additionalInfo?: string
+    questions?: VotingEventQuestion[]
+}
+
+export type VotingEventQuestion = {
     text: string
     additionalInfo: string
+    answers: VotingEventAnswer[]
+}
+
+export type VotingEventAnswer = {
+    text: string
+    additionalInfo: string
+    value: string
 }
 
 /**
- * The more specific particiaption event information, indicating
+ * The more specific participation event information, indicating
  * the event's specific phase milestone transitions, and some more data.
  */
 export type ParticipationEventInformation = {
@@ -83,6 +120,7 @@ export type ParticipationEventInformation = {
     milestoneIndexEnd: number
     additionalInfo: string
     payload: ParticipationEventInformationPayload
+    name?: string
 }
 
 /**
@@ -115,6 +153,21 @@ export type Participation = {
 }
 
 /**
+ * Tracked participation content
+ */
+export type TrackedParticipation = TrackedParticipationItem[]
+
+/**
+ * An individual tracked participation item struct.
+ */
+export type TrackedParticipationItem = {
+    messageId: string
+    amount: number
+    startMilestoneIndex: number
+    endMilestoneIndex: number
+}
+
+/**
  * The struct containing all account-specific information
  * regarding staking, airdrop, rewards, participations
  * (including voting), and so on.
@@ -130,6 +183,7 @@ export type AccountParticipationOverview = {
     shimmerStakedFunds: number
     shimmerUnstakedFunds: number
     participations: Participation[]
+    trackedParticipations: TrackedParticipation[]
 }
 
 /**
@@ -149,10 +203,11 @@ export type ParticipationOverviewResponse = {
  * Pending participations type, useful for distinguishing between participations
  * that have or have not been confirmed yet.
  */
-export interface PendingParticipation {
+export type PendingParticipation = {
     messageId: string
     accountId: string
     action: ParticipationAction
+    participations?: Participation[]
 }
 
 /**
@@ -198,4 +253,11 @@ export type StakingPeriod = {
     periodNumber: number
     totalPeriodRewards: number
     rewards: StakingPeriodRewards
+}
+
+export type ParticipationHistoryItem = {
+    accountId: string
+    action: ParticipationAction
+    eventId: string
+    messageId: string
 }

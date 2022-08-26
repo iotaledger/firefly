@@ -9,10 +9,15 @@ install! 'cocoapods', :disable_input_output_paths => true
 def capacitor_pods
   pod 'Capacitor', :path => '../../../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../../../node_modules/@capacitor/ios'
-  pod 'CapacitorSecureFilesystemAccess', :path => '../../../../node_modules/capacitor-secure-filesystem-access'
-  pod 'CapacitorSplashScreen', :path => '../../../../node_modules/@capacitor/splash-screen'
   pod 'CapacitorCommunityBarcodeScanner', :path => '../../../../node_modules/@capacitor-community/barcode-scanner'
   pod 'CapacitorCommunityPrivacyScreen', :path => '../../../../node_modules/@capacitor-community/privacy-screen'
+  pod 'CapacitorActionSheet', :path => '../../../../node_modules/@capacitor/action-sheet'
+  pod 'CapacitorKeyboard', :path => '../../../../node_modules/@capacitor/keyboard'
+  pod 'CapacitorApp', :path => '../../../../node_modules/@capacitor/app'
+  pod 'CapacitorShare', :path => '../../../../node_modules/@capacitor/share'
+  pod 'CapacitorSplashScreen', :path => '../../../../node_modules/@capacitor/splash-screen'
+  pod 'CapacitorStatusBar', :path => '../../../../node_modules/@capacitor/status-bar'
+  pod 'CapacitorSecureFilesystemAccess', :path => '../../../../node_modules/capacitor-secure-filesystem-access'
   pod 'CapacitorSecureStoragePlugin', :path => '../../../../node_modules/capacitor-secure-storage-plugin'
   pod 'FireflyActorSystemCapacitorBindings', :path => '../../node_modules/firefly-actor-system-capacitor-bindings'
 end
