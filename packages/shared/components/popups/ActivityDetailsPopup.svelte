@@ -47,6 +47,7 @@
         storageDeposit: activity?.data.storageDeposit,
         giftedStorageDeposit: activity?.data.giftedStorageDeposit,
         amount,
+        type: activity?.data.type,
         unit: asset?.metadata?.unit,
         ...(activity?.data.type === ActivityType.Transaction && {
             asyncStatus: activity?.data.asyncStatus,
@@ -56,6 +57,7 @@
             subject: activity?.data?.subject,
             tag: activity?.data?.tag,
             metadata: activity?.data?.metadata,
+            isInternal: activity?.data?.isInternal,
         }),
     }
 
