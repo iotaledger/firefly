@@ -14,6 +14,7 @@
         IPersistedAsset,
         ITransactionActivityData,
         getTimeDifferenceUntilExpirationTime,
+        Subject,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
@@ -33,10 +34,11 @@
         (data.direction === ActivityDirection.In || data.isSelfTransaction) &&
         data.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = getTimeDifferenceUntilExpirationTime(data, $time)
-    $: title = getTitle(data, inclusionState)
-    $: subject = getSubject(data.subject)
 
-    function getTitle(txData, inclusionState): string {
+    $: title = getTitle(data, inclusionState)
+    $: subjectLocale = getSubjectLocale(data.subject)
+
+    function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
         if (txData.isInternal) {
             return inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
         } else {
@@ -47,7 +49,7 @@
             }
         }
     }
-    function getSubject(subject): string {
+    function getSubjectLocale(subject: Subject): string {
         if (subject?.type === 'account') {
             return truncateString(subject?.account?.name, 13, 0)
         } else if (subject?.type === 'address') {
@@ -127,7 +129,7 @@
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
                         {localize(
                             data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
-                            { values: { account: subject } }
+                            { values: { account: subjectLocale } }
                         )}
                     </Text>
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
