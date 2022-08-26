@@ -3,6 +3,7 @@ import { Transaction } from '@iota/wallet'
 import { IAccount, sumTotalFromOutputs, syncAccountsInParallel } from '@core/account'
 import { filterShimmerClaimingOutputs } from '@core/utils'
 
+import { DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS } from '../constants'
 import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
 
@@ -16,7 +17,7 @@ export async function prepareShimmerClaimingAccount(
     claimingTransaction?: Transaction
 ): Promise<IShimmerClaimingAccount> {
     if (syncAccounts) {
-        await syncAccountsInParallel(account, twinAccount)
+        await syncAccountsInParallel(DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS, account, twinAccount)
     }
 
     const twinUnspentOutputs = await twinAccount?.listUnspentOutputs()

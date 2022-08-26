@@ -19,6 +19,7 @@ const errorMessages: {
     InsufficientFunds: 'error.send.amountTooHigh',
     MnemonicEncode: 'error.global.generic',
     InvalidMnemonic: 'error.backup.mnemonic',
+    AccountNotFound: 'error.account.notFound',
     // Address
     InvalidAddress: 'error.send.wrongAddressFormat',
     InvalidAddressLength: 'error.send.generic',
