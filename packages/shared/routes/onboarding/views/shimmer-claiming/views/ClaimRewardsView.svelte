@@ -67,7 +67,6 @@
             hasTriedClaimingRewards = true
             await claimShimmerRewards()
         } catch (err) {
-            console.error(err)
             throw new ClaimShimmerRewardsError()
         } finally {
             if ($isOnboardingLedgerProfile) {

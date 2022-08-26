@@ -4,20 +4,23 @@
     import { openPopup } from 'shared/lib/popup'
     import { onDestroy } from 'svelte'
 
+    export let needsToShowPopupAfterwards = true
     export let sendConfirmationPopupProps = null
     export let mintNativeTokenPopupProps = null
 
     onDestroy(() => {
-        if (sendConfirmationPopupProps) {
-            openPopup({
-                type: 'sendConfirmation',
-                props: sendConfirmationPopupProps,
-            })
-        } else if (mintNativeTokenPopupProps) {
-            openPopup({
-                type: 'mintNativeTokenForm',
-                props: mintNativeTokenPopupProps,
-            })
+        if (needsToShowPopupAfterwards) {
+            if (sendConfirmationPopupProps) {
+                openPopup({
+                    type: 'sendConfirmation',
+                    props: sendConfirmationPopupProps,
+                })
+            } else if (mintNativeTokenPopupProps) {
+                openPopup({
+                    type: 'mintNativeTokenForm',
+                    props: mintNativeTokenPopupProps,
+                })
+            }
         }
     })
 

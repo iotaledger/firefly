@@ -15,6 +15,7 @@
 
     export let toAddress = ''
     export let toAmount = null
+    export let needsToShowPopupAfterwards = true
     export let sendConfirmationPopupProps = null
     export let mintNativeTokenPopupProps = null
 
@@ -24,18 +25,20 @@
     }
 
     onDestroy(() => {
-        if (sendConfirmationPopupProps) {
-            openPopup({
-                type: 'sendConfirmation',
-                props: sendConfirmationPopupProps,
-            })
-            resetLedgerSendConfirmationProps()
-        } else if (mintNativeTokenPopupProps) {
-            openPopup({
-                type: 'mintNativeTokenForm',
-                props: mintNativeTokenPopupProps,
-            })
-            resetLedgerMintNativeTokenProps()
+        if (needsToShowPopupAfterwards) {
+            if (sendConfirmationPopupProps) {
+                openPopup({
+                    type: 'sendConfirmation',
+                    props: sendConfirmationPopupProps,
+                })
+                resetLedgerSendConfirmationProps()
+            } else if (mintNativeTokenPopupProps) {
+                openPopup({
+                    type: 'mintNativeTokenForm',
+                    props: mintNativeTokenPopupProps,
+                })
+                resetLedgerMintNativeTokenProps()
+            }
         }
     })
 </script>

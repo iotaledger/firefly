@@ -14,7 +14,7 @@ import {
     shimmerClaimingProfileManager,
     updateOnboardingProfile,
 } from '../stores'
-import { handleLedgerErrors } from '@core/ledger'
+import { handleLedgerError } from '@core/ledger'
 
 export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
@@ -70,7 +70,7 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
         }
     } catch (err) {
         if (get(isOnboardingLedgerProfile)) {
-            handleLedgerErrors(err?.error ?? err)
+            handleLedgerError(err?.error ?? err)
         }
 
         console.error(err)

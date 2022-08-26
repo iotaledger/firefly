@@ -12,7 +12,7 @@ type TransactionProgressPayload = 'PerformingPow' | 'SigningTransaction' | Regul
 
 export function handleTransactionProgress(accountId: string, payload: TransactionProgressPayload): void {
     if (get(isOnboardingLedgerProfile)) {
-        handleTransactionProgressInternal(payload)
+        handleTransactionProgressInternal(payload, true)
     } else if (get(isActiveLedgerProfile)) {
         if (get(selectedAccountId) === accountId) {
             handleTransactionProgressInternal(payload)
@@ -22,7 +22,10 @@ export function handleTransactionProgress(accountId: string, payload: Transactio
     }
 }
 
-function handleTransactionProgressInternal(payload: TransactionProgressPayload): void {
+function handleTransactionProgressInternal(
+    payload: TransactionProgressPayload,
+    isDuringOnboarding: boolean = false
+): void {
     const _sendConfirmationProps = get(ledgerSendConfirmationProps)
     const _mintNativeTokenProps = get(ledgerMintNativeTokenProps)
 
@@ -41,6 +44,7 @@ function handleTransactionProgressInternal(payload: TransactionProgressPayload):
                                   ? _sendConfirmationProps.recipient.address
                                   : _sendConfirmationProps.recipient.account.depositAddress,
                           toAmount: `${_sendConfirmationProps.amount} ${_sendConfirmationProps.unit}`,
+                          needsToShowPopupAfterwards: !isDuringOnboarding,
                           sendConfirmationPopupProps: _sendConfirmationProps,
                       },
                   }

@@ -5,9 +5,7 @@ import { closePopup } from '@lib/popup'
 import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
 
-export function handleLedgerErrors(error: string): void {
-    console.error(error)
-
+export function handleLedgerError(error: string): void {
     let ledgerError: LedgerError
     const _includes = (_: LedgerError) => {
         if (error?.includes(_)) {
@@ -34,6 +32,12 @@ export function handleLedgerErrors(error: string): void {
             type: 'error',
             alert: true,
             message: localize(LEDGER_ERROR_LOCALES[ledgerError]),
+        })
+    } else {
+        showAppNotification({
+            type: 'error',
+            alert: true,
+            message: error,
         })
     }
 }

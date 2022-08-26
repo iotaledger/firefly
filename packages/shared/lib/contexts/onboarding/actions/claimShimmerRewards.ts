@@ -22,7 +22,7 @@ import {
     persistShimmerClaimingTransaction,
     updateShimmerClaimingAccount,
 } from '../stores'
-import { handleLedgerErrors, resetLedgerSendConfirmationProps, updateLedgerSendConfirmationProps } from '@core/ledger'
+import { handleLedgerError, resetLedgerSendConfirmationProps, updateLedgerSendConfirmationProps } from '@core/ledger'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
@@ -55,7 +55,7 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
                 state: ShimmerClaimingAccountState.Failed,
             })
             if (get(isOnboardingLedgerProfile)) {
-                handleLedgerErrors(err?.error ?? err)
+                handleLedgerError(err?.error ?? err)
             } else {
                 showAppNotification({
                     type: 'error',

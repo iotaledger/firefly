@@ -6,7 +6,7 @@ import { Converter } from '@lib/converter'
 import { showAppNotification } from '@lib/notifications'
 import { activeProfile, ProfileType } from '@core/profile'
 import { isTransferring } from '@lib/wallet'
-import { handleLedgerErrors } from '@core/ledger'
+import { handleLedgerError } from '@core/ledger'
 import { Activity } from '../classes'
 import { VerificationStatus } from '../enums'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
@@ -53,7 +53,7 @@ export async function mintNativeToken(
 
         const _activeProfile = get(activeProfile)
         if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerErrors(reason.error)
+            handleLedgerError(reason.error)
         }
 
         return Promise.reject(reason)

@@ -7,7 +7,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile, isLedgerProfile, ProfileType } from '@core/profile'
+    import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, ProfileType } from '@core/profile'
     import {
         ActivityDirection,
         ActivityType,
@@ -126,7 +126,7 @@
         try {
             if ($isSoftwareProfile) {
                 await checkStronghold(validateAndSendOutput, true)
-            } else if ($isLedgerProfile) {
+            } else if ($isActiveLedgerProfile) {
                 promptUserToConnectLedger(validateAndSendOutput, undefined, true)
             }
         } catch (err) {
