@@ -1,11 +1,11 @@
 import { get, writable } from 'svelte/store'
 
+import { mobile } from '@lib/app'
 import { hasBundlesWithSpentAddresses, hasSingleBundle } from '@lib/migration'
-
 import { appRouter } from '../app-router'
 import { MigrateRoute } from '../enums'
-import { Subrouter } from './subrouter'
 import { FireflyEvent } from '../types'
+import { Subrouter } from './subrouter'
 
 export const migrateRoute = writable<MigrateRoute>(null)
 
@@ -30,7 +30,11 @@ export class MigrateRouter extends Subrouter<MigrateRoute> {
                 }
                 break
             case MigrateRoute.BundleMiningWarning:
-                nextRoute = MigrateRoute.SecureSpentAddresses
+                if (get(mobile)) {
+                    nextRoute = MigrateRoute.TransferFragmentedFunds
+                } else {
+                    nextRoute = MigrateRoute.SecureSpentAddresses
+                }
                 break
             case MigrateRoute.SecureSpentAddresses: {
                 nextRoute = event?.skippedMining
