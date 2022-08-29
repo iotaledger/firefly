@@ -1,7 +1,9 @@
 import onboardingFeatures from './onboardingFeatures'
+import developerToolsFeatures from './developerToolsFeatures'
 
 const features = {
     onboarding: onboardingFeatures,
+    developerTools: developerToolsFeatures,
     settings: {
         enabled: true,
         general: {
@@ -101,9 +103,6 @@ const features = {
         },
         assets: {
             enabled: true,
-            mintNativeTokens: {
-                enabled: true,
-            },
         },
         activityHistory: {
             enabled: true,
@@ -123,9 +122,6 @@ const features = {
     },
     collectibles: {
         enabled: false,
-    },
-    developer: {
-        enabled: true,
     },
 }
 
