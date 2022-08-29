@@ -401,9 +401,6 @@
 
     $: if (mobile && drawer && $accountRoute === AccountRoute.Init) {
         drawer.close()
-        if (drawer.isDrawerOpen() === false) {
-            $backButtonStore?.reset()
-        }
     }
 
     onMount(() => {
@@ -443,9 +440,11 @@
     }
 
     function liftDashboard(node: HTMLElement): void {
+        const [safeArea] = getComputedStyle(document.documentElement).getPropertyValue('--sat').split('px')
         node.style.zIndex = '0'
         unsubscribeLiftDasboard = headerScale.subscribe((curr) => {
-            node.style.transform = `translate(0, ${headerHeight * 0.6 * curr + headerHeight * 0.4}px)`
+            const topOffset = parseInt(safeArea) * (1 - curr)
+            node.style.transform = `translate(0, ${headerHeight * 0.6 * curr + (headerHeight + topOffset) * 0.4}px)`
         })
     }
 
@@ -468,8 +467,14 @@
         })
     }
 
+    function handleDrawerClose(): void {
+        accountRoute.set(AccountRoute.Init)
+        $backButtonStore?.reset()
+    }
+
     function handleActivityDrawerBackClick(): void {
         selectedMessage.set(null)
+        $backButtonStore?.pop()
     }
 
     $: if ($selectedMessage && activityDrawer) {
@@ -493,8 +498,7 @@
                     <Drawer
                         opened={$accountRoute !== AccountRoute.Init}
                         bind:this={drawer}
-                        on:close={() => accountRoute.set(AccountRoute.Init)}
-                        backgroundBlur={$accountRoute === AccountRoute.Receive}
+                        on:close={handleDrawerClose}
                     >
                         {#if $accountRoute === AccountRoute.Send}
                             <Send {onSend} {onInternalTransfer} />
@@ -590,6 +594,9 @@
 {/if}
 
 <style type="text/scss">
+    :root {
+        --sat: env(safe-area-inset-top);
+    }
     :global(body.platform-win32) .wallet-wrapper {
         @apply pt-0;
     }

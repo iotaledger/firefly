@@ -49,6 +49,7 @@
     import ConfirmCloseApp from './ConfirmCloseApp.svelte'
     import LegalUpdate from './LegalUpdate.svelte'
     import SingleAccountGuide from './SingleAccountGuide.svelte'
+    import NodeConfigOptions from './NodeConfigOptions.svelte'
     import { mobile } from 'shared/lib/app'
     import { Platform } from 'shared/lib/platform'
 
@@ -138,6 +139,7 @@
         governanceManager: GovernanceManager,
         success: Success,
         singleAccountGuide: SingleAccountGuide,
+        nodeConfigOptions: NodeConfigOptions,
     }
 
     const onKey = (e) => {
@@ -177,6 +179,11 @@
         e.preventDefault()
     }
 
+    const handleDrawerClose = () => {
+        closePopup($popupState?.preventClose)
+        $backButtonStore?.pop()
+    }
+
     onMount(async () => {
         $backButtonStore?.add(closePopup as () => Promise<void>)
         const elems = focusableElements()
@@ -189,8 +196,8 @@
 
 <svelte:window on:keydown={onKey} />
 {#if $mobile && !fullScreen}
-    <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
-        <div bind:this={popupContent} class="py-10 px-5">
+    <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={handleDrawerClose}>
+        <div bind:this={popupContent} class="pt-10 pb-8 px-5">
             <svelte:component this={types[type]} {...props} {locale} />
         </div>
     </Drawer>

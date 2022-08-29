@@ -43,8 +43,9 @@
     </div>
     <div slot="rightpane" class={!$mobile && 'w-full h-full flex items-center px-40 py-20'}>
         <div
-            class="legal-content {!$mobile &&
-                'block relative max-h-full overflow-y-auto w-full text-justify pr-10 scroll-quaternary'}"
+            class="legal-content {!$mobile
+                ? 'block relative max-h-full overflow-y-auto w-full text-justify pr-10'
+                : 'px-6'}"
         >
             <Content />
         </div>

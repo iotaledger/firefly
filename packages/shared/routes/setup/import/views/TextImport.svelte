@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
-    import { mobile, isKeyboardOpened, keyboardHeight } from 'shared/lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from 'shared/lib/app'
     import { createEventDispatcher, getContext } from 'svelte'
     import { Locale } from '@core/i18n'
     import { ImportRouter } from '@core/router'
@@ -31,7 +31,8 @@
         slot="leftpane__content"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
     >
         <Text type="p" secondary classes="mb-8">{locale(`views.importFromText.${$importType}.body`)}</Text>
         <Text type="h5" classes="mb-3">{locale(`views.importFromText.${$importType}.enter`)}</Text>
@@ -42,7 +43,8 @@
         class="flex flex-row flex-wrap justify-between items-center space-x-4"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
     >
         <Button
             classes="flex-1"
@@ -63,7 +65,8 @@
         class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden ' : 'bg-pastel-blue dark:bg-gray-900'}"
         style="margin-top: {$mobile && $isKeyboardOpened
             ? -$keyboardHeight
-            : 0}px; transition: margin-top 0.2s var(--transition-scroll)"
+            : 0}px; transition: margin-top {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
     >
         <Animation
             classes="setup-anim-aspect-ratio {$mobile ? 'transform scale-120' : ''}"

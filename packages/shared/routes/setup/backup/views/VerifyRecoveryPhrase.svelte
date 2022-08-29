@@ -39,6 +39,7 @@
     }
 
     function handleChoice(word: string): void {
+        if (verified) return
         if ($mobile) {
             const wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
             wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })

@@ -58,6 +58,10 @@ import {
     storeMnemonic as _storeMnemonic,
     verifyMnemonic as _verifyMnemonic,
 } from '@lib/typings/wallet'
+import {
+    getParticipationOverview as _getParticipationOverview,
+    getParticipationEvents as _getParticipationEvents,
+} from '@lib/participation/bridge'
 
 const onMessageListeners: ((payload: MessageResponse) => void)[] = []
 
@@ -303,6 +307,12 @@ export const api = {
         (address: string): Api =>
         (__ids) =>
             _getLegacyAddressChecksum(sendMessage, __ids, address),
+    // participation
+    getParticipationOverview:
+        (assemblyEventId: string): Api =>
+        (__ids) =>
+            _getParticipationOverview(sendMessage, __ids, assemblyEventId),
+    getParticipationEvents: (): Api => (__ids) => _getParticipationEvents(sendMessage, __ids),
 
     // Event emitters
     onError: (): Api => (__ids) =>
