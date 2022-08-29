@@ -1,4 +1,4 @@
-import { ActivityAsyncStatus, InclusionState } from '@core/wallet/enums'
+import { ActivityAsyncStatus, ActivityType, InclusionState } from '@core/wallet/enums'
 import { addClaimedActivity, allAccountActivities } from '@core/wallet/stores'
 import { showAppNotification } from '@lib/notifications'
 import { localize } from '@core/i18n'
@@ -10,12 +10,15 @@ export function updateClaimingTransactionInclusion(
 ): void {
     allAccountActivities.update((state) => {
         const activity = state[Number(accountId)]?.find(
-            (_activity) => _activity.claimingTransactionId === transactionId
+            (_activity) =>
+                _activity.data.type === ActivityType.Transaction &&
+                _activity.data.claimingTransactionId === transactionId
         )
 
         if (activity) {
             if (inclusionState === InclusionState.Confirmed) {
-                activity.updateFromPartialActivity({
+                activity.updateDataFromPartialActivity({
+                    type: ActivityType.Transaction,
                     isClaimed: true,
                     isClaiming: false,
                     claimedDate: new Date(),
@@ -33,7 +36,8 @@ export function updateClaimingTransactionInclusion(
                     message: localize('notifications.claimed.success'),
                 })
             } else if (inclusionState === InclusionState.Conflicting) {
-                activity.updateFromPartialActivity({
+                activity.updateDataFromPartialActivity({
+                    type: ActivityType.Transaction,
                     isClaimed: false,
                     isClaiming: false,
                     claimingTransactionId: undefined,

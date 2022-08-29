@@ -30,11 +30,10 @@
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
-    export let isClaiming: boolean = null
     export let direction: ActivityDirection
     export let expirationDate: Date = null
     export let formattedFiatValue: string = null
-    export let inclusionState: InclusionState = InclusionState.Pending
+    export let inclusionState = InclusionState.Pending
     export let metadata: string = null
     export let amount: string = null
     export let unit: string
@@ -43,7 +42,8 @@
     export let subject: Subject = null
     export let tag: string = null
     export let time: Date = null
-    export let isInternal: boolean
+    export let isInternal = false
+    export let isClaiming = false
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
@@ -124,18 +124,20 @@
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
         </transaction-status>
-        {#if subject?.type === 'account'}
-            <Box row clearBackground clearPadding classes="justify-center">
-                <AccountLabel account={subject.account} />
-            </Box>
-        {:else if subject?.type === 'address'}
-            <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
-        {:else}
-            <Box col clearBackground clearPadding>
-                <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
-                    {localize('general.unknownAddress')}
-                </Text>
-            </Box>
+        {#if type === ActivityType.Transaction}
+            {#if subject?.type === 'account'}
+                <Box row clearBackground clearPadding classes="justify-center">
+                    <AccountLabel account={subject.account} />
+                </Box>
+            {:else if subject?.type === 'address'}
+                <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
+            {:else}
+                <Box col clearBackground clearPadding>
+                    <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
+                        {localize('general.unknownAddress')}
+                    </Text>
+                </Box>
+            {/if}
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}
