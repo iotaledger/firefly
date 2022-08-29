@@ -1,11 +1,7 @@
 <script lang="typescript">
     import { Animation, Text } from 'shared/components'
     import { KeyValueBox } from 'shared/components/atoms'
-    import {
-        formatAddressForLedger,
-        resetLedgerSendConfirmationProps,
-        resetLedgerMintNativeTokenConfirmationProps,
-    } from '@core/ledger'
+    import { resetLedgerSendConfirmationProps, resetLedgerMintNativeTokenConfirmationProps } from '@core/ledger'
     import { openPopup } from 'shared/lib/popup'
     import { onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
@@ -53,8 +49,7 @@
 </div>
 <div class="flex flex-col space-y-2">
     {#if sendConfirmationPopupProps}
-        <KeyValueBox keyText={localize('general.sendTo')} valueText={formatAddressForLedger(toAddress)} />
-
+        <KeyValueBox keyText={localize('general.sendTo')} valueText={toAddress} />
         <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
         <!-- <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
             <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>

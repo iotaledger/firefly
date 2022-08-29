@@ -28,7 +28,7 @@
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
     import { checkStronghold } from '@lib/stronghold'
-    import { promptUserToConnectLedger, updateLedgerSendConfirmationProps } from '@core/ledger'
+    import { promptUserToConnectLedger, setLedgerSendConfirmationProps } from '@core/ledger'
 
     export let asset: IAsset
     export let amount = '0'
@@ -102,7 +102,7 @@
         validateSendConfirmation(outputOptions, preparedOutput)
 
         if ($activeProfile.type === ProfileType.Ledger) {
-            updateLedgerSendConfirmationProps({
+            setLedgerSendConfirmationProps({
                 asset,
                 amount,
                 unit,

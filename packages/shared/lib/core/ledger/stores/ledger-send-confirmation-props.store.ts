@@ -4,7 +4,7 @@ import { LedgerSendConfirmationProps } from '../interfaces'
 
 export const ledgerSendConfirmationProps = writable<LedgerSendConfirmationProps>(null)
 
-export function updateLedgerSendConfirmationProps(payload: LedgerSendConfirmationProps): void {
+export function setLedgerSendConfirmationProps(payload: LedgerSendConfirmationProps): void {
     ledgerSendConfirmationProps.set(payload)
 }
 
