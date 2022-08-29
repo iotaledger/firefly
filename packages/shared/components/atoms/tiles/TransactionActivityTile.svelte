@@ -109,7 +109,7 @@
 
 <ClickableTile
     onClick={handleTransactionClick}
-    classes={inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}
+    classes={inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}
 >
     <div class="w-full flex flex-col space-y-4">
         <div class="flex flex-row items-center text-left space-x-4">
@@ -137,7 +137,7 @@
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
                         {localize(
                             data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
-                            { values: { account: subject } }
+                            { values: { account: subjectLocale } }
                         )}
                     </Text>
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="whitespace-nowrap">

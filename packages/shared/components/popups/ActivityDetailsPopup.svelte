@@ -71,7 +71,7 @@
         setClipboard(activity.transactionId)
     }
 
-    async function claim() {
+    async function claim(): Promise<void> {
         if (activity.data.type === ActivityType.Transaction) {
             await claimActivity(activity.id, activity.data)
             openPopup({
@@ -81,7 +81,7 @@
         }
     }
 
-    function reject() {
+    function reject(): void {
         openPopup({
             type: 'confirmation',
             props: {
