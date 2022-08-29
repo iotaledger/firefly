@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { mobile, isKeyboardOpened, keyboardHeight } from '@lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from '@lib/app'
     import { getTrimmedLength } from '@lib/helpers'
     import { displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@lib/ledger'
     import { showAppNotification } from '@lib/notifications'
@@ -94,7 +94,8 @@
     class="flex flex-col h-full justify-between"
     style="padding-bottom: {$mobile && $isKeyboardOpened
         ? $keyboardHeight
-        : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+        : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+        'ms'} var(--transition-scroll)"
 >
     <div>
         <div class="flex flex-row mb-6 {$mobile && 'w-full justify-center -mt-1'}">

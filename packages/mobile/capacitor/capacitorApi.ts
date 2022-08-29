@@ -102,19 +102,41 @@ export const CapacitorApi: IPlatform = {
         return
     },
 
-    exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
+    /**
+     * Exports transaction history
+     *
+     * @method exportTransactionHistory
+     *
+     * @param {string} textContent
+     * @param {string} fileName
+     *
+     * @returns {Promise<string>}
+     */
+    exportTransactionHistory: async (textContent, fileName) => {
+        await SecureFilesystemAccess.saveTextFile({
+            textContent,
+            fileName,
+        })
+        return ''
+    },
 
     /**
      * Exports migration log
      *
      * @method exportMigrationLog
      *
-     * @param {string} sourcePath
-     * @param {string} defaultFileName
+     * @param {string} textContent
+     * @param {string} fileName
      *
      * @returns {Promise<boolean>}
      */
-    exportMigrationLog: (sourcePath, defaultFileName) => new Promise<boolean>((resolve, reject) => {}),
+    exportMigrationLog: async (textContent, fileName) => {
+        await SecureFilesystemAccess.saveTextFile({
+            textContent,
+            fileName,
+        })
+        return true
+    },
 
     /**
      * Exports ledger migration log
@@ -316,10 +338,6 @@ export const CapacitorApi: IPlatform = {
         if (os === 'ios') {
             void (await SecureFilesystemAccess.allowAccess())
         }
-        void (await SecureFilesystemAccess.saveRecoveryKit({
-            selectedPath: `${selected}/recovery-kit.pdf`,
-            fromRelativePath: '/assets/docs/recovery-kit.pdf',
-        }))
         if (os === 'ios') {
             void SecureFilesystemAccess.revokeAccess()
         }

@@ -1,6 +1,12 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, Password, Text } from 'shared/components'
-    import { mobile, isKeyboardOpened, keyboardHeight, strongholdPassword } from 'shared/lib/app'
+    import {
+        mobile,
+        isKeyboardOpened,
+        keyboardHeight,
+        strongholdPassword,
+        getKeyboardTransitionSpeed,
+    } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
     import passwordInfo from 'shared/lib/password'
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
@@ -17,9 +23,15 @@
     let error = ''
     let errorConfirm = ''
     let busy = false
+    let passwordContainer: HTMLElement
 
     $: passwordStrength = checkPasswordStrength(password) ?? passwordStrength
     $: password, confirmedPassword, ((error = ''), (errorConfirm = ''))
+    $: if ($isKeyboardOpened || error || errorConfirm) {
+        setTimeout(() => {
+            passwordContainer?.parentElement?.scrollTo(0, passwordContainer?.parentElement?.scrollHeight)
+        }, getKeyboardTransitionSpeed($isKeyboardOpened))
+    }
 
     async function handleContinueClick(): Promise<void> {
         error = ''
@@ -82,7 +94,9 @@
         slot="leftpane__content"
         style="margin-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: margin-bottom 0.2s var(--transition-scroll)"
+            : 0}px; transition: margin-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
+        bind:this={passwordContainer}
     >
         <form on:submit|preventDefault={handleContinueClick} id="password-form">
             <Text type="p" classes="mb-4" secondary>{locale('views.password.body1')}</Text>
@@ -114,7 +128,8 @@
         slot="leftpane__action"
         style="padding-bottom: {$mobile && $isKeyboardOpened
             ? $keyboardHeight
-            : 0}px; transition: padding-bottom 0.2s var(--transition-scroll)"
+            : 0}px; transition: padding-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
     >
         <Button type="submit" form="password-form" classes="w-full" disabled={!password || !confirmedPassword || busy}>
             {locale('actions.savePassword')}
@@ -125,7 +140,8 @@
         class="w-full h-full flex justify-center {$mobile ? 'overflow-hidden' : 'bg-pastel-yellow dark:bg-gray-900'}"
         style="margin-top: {$mobile && $isKeyboardOpened
             ? -$keyboardHeight
-            : 0}px; transition: margin-top 0.2s var(--transition-scroll)"
+            : 0}px; transition: margin-top {getKeyboardTransitionSpeed($isKeyboardOpened) +
+            'ms'} var(--transition-scroll)"
     >
         <Animation classes="setup-anim-aspect-ratio {$mobile ? 'transform ' : ''}" animation="password-desktop" />
     </div>
