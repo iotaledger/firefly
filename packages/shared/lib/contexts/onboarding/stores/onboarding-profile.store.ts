@@ -8,7 +8,7 @@ export function updateOnboardingProfile(payload: Partial<IOnboardingProfile>): v
     return onboardingProfile.update((state) => ({ ...state, ...payload }))
 }
 
-export function updateShimmerClaimingAccounts(shimmerClaimingAccount: IShimmerClaimingAccount): void {
+export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerClaimingAccount): void {
     const _onboardingProfile = get(onboardingProfile)
     const isNewShimmerClaimingAccount = !_onboardingProfile?.shimmerClaimingAccounts?.some(
         (_shimmerClaimingAccount) => _shimmerClaimingAccount?.meta?.index === shimmerClaimingAccount?.meta?.index

@@ -14,6 +14,7 @@
         IPersistedAsset,
         ITransactionActivityData,
         getTimeDifference,
+        Subject,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
@@ -28,11 +29,13 @@
 
     let asset: IPersistedAsset
 
-    $: data.assetId, $selectedAccountAssets, (asset = getAssetFromPersistedAssets(data.assetId))
+    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(data.assetId))
     $: isIncomingActivityUnclaimed =
         (data.direction === ActivityDirection.In || data.isSelfTransaction) &&
         data.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: isTimelocked = data.timelockDate > $time
+    $: title = getTitle(data, inclusionState)
+    $: subjectLocale = getSubjectLocale(data.subject)
 
     let timeDiff: string
     $: if (isTimelocked) {
@@ -43,26 +46,27 @@
         timeDiff = localize('general.none')
     }
 
-    let title: string
-    $: if (data.isInternal) {
-        title = inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
-    } else {
-        if (data.direction === ActivityDirection.In) {
-            title = inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
-        } else if (data.direction === ActivityDirection.Out) {
-            title = inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+    function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
+        if (txData.isInternal) {
+            return inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
+        } else {
+            if (txData.direction === ActivityDirection.In) {
+                return inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
+            } else if (txData.direction === ActivityDirection.Out) {
+                return inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+            }
         }
     }
 
-    let subject: string
-    $: if (data.subject?.type === 'account') {
-        subject = truncateString(data.subject?.account?.name, 13, 0)
-    } else if (data.subject?.type === 'address') {
-        subject = truncateString(data.subject?.address, $networkHrp.length, 6)
-    } else {
-        subject = localize('general.unknownAddress')
+    function getSubjectLocale(subject: Subject): string {
+        if (subject?.type === 'account') {
+            return truncateString(subject?.account?.name, 13, 0)
+        } else if (subject?.type === 'address') {
+            return truncateString(subject?.address, $networkHrp.length, 6)
+        } else {
+            return localize('general.unknownAddress')
+        }
     }
-
     function handleTransactionClick(): void {
         if (asset?.verification === VerificationStatus.New) {
             openPopup({

@@ -41,6 +41,7 @@ export enum ErrorType {
     InsufficientFunds = 'InsufficientFunds',
     MnemonicEncode = 'MnemonicEncode',
     InvalidMnemonic = 'InvalidMnemonic',
+    AccountNotFound = 'AccountNotFound',
 
     // Address
     InvalidAddress = 'InvalidAddress',

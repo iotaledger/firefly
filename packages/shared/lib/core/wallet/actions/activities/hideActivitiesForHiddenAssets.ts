@@ -7,7 +7,7 @@ export function hideActivitiesForHiddenAssets(): void {
     const assets = get(persistedAssets)?.[get(activeProfile)?.id]
     allAccountActivities.update((state) => {
         state[Number(get(selectedAccountId))].forEach((_activity) => {
-            const isAssetHidden = !assets[_activity?.data.assetId] || assets[_activity?.data.assetId]?.hidden
+            const isAssetHidden = !assets[_activity?.data?.assetId] || assets[_activity?.data?.assetId]?.hidden
             _activity.updateFromPartialActivity({ isAssetHidden })
         })
         return state

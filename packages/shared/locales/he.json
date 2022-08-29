@@ -1524,7 +1524,7 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "סטייקינג",
-        "developerTools": "Developer Tools"
+        "developer": "Developer"
     },
     "pills": {
         "stake": {

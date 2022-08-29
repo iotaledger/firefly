@@ -31,6 +31,11 @@
     $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
     $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
     $: isTimelocked = activity.data.type === ActivityType.Transaction && activity.data.timelockDate > $time
+    $: isActivityIncomingAndUnclaimed =
+        activity.data.type === ActivityType.Transaction &&
+        activity.data.isAsync &&
+        (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) &&
+        activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     $: transactionDetails = {
         asset,
@@ -83,7 +88,7 @@
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
                 hint: localize('actions.confirmRejection.node'),
-                warning: true,
+                info: true,
                 confirmText: localize('actions.reject'),
                 onConfirm: () => {
                     rejectActivity(activityId)
@@ -121,7 +126,7 @@
         {/if}
     </div>
     <TransactionDetails {...transactionDetails} />
-    {#if !isTimelocked && activity.data.type === ActivityType.Transaction && activity.data.isAsync && (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) && activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed}
+    {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
                 disabled={activity.data.isClaiming || activity.data.isRejected}
