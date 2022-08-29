@@ -1,7 +1,6 @@
 export * from './displayNotificationForLedgerProfile'
 export * from './formatAddressForLedger'
 export * from './getLedgerDeviceStatus'
-export * from './handleLedgerError'
 export * from './openLedgerNotConnectedPopup'
 export * from './pollLedgerDeviceStatus'
 export * from './promptUserToConnectLedger'
