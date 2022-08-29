@@ -23,7 +23,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerProfile: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
             restoreProfile: {
@@ -38,7 +38,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerBackup: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
         },
@@ -64,7 +64,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerProfile: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
             restoreProfile: {
@@ -79,7 +79,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerBackup: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
         },
@@ -104,7 +104,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerProfile: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
             restoreProfile: {
@@ -119,7 +119,7 @@ const onboardingFeatures = {
                     enabled: false,
                 },
                 ledgerBackup: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
         },
@@ -127,7 +127,7 @@ const onboardingFeatures = {
     shimmer: {
         enabled: true,
         mainnet: {
-            enabled: true,
+            enabled: false,
             claimRewards: {
                 enabled: false,
                 hidden: true,
@@ -168,7 +168,7 @@ const onboardingFeatures = {
             },
         },
         devnet: {
-            enabled: false,
+            enabled: true,
             claimRewards: {
                 enabled: true,
                 hidden: false,

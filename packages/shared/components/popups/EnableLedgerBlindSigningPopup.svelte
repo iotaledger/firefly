@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
-    import { Text, Icon } from 'shared/components'
-    import { openPopup } from 'shared/lib/popup'
     import { onDestroy } from 'svelte'
+    import { Text, Icon } from 'shared/components'
+    import { localize } from '@core/i18n'
+    import { openPopup } from '@lib/popup'
 
     export let sendConfirmationPopupProps = null
     export let mintNativeTokenPopupProps = null
