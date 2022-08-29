@@ -1,3 +1,4 @@
+import { versionDetails } from "./../../shared/lib/appUpdater"
 import { Capacitor } from '@capacitor/core'
 
 import { App } from '@capacitor/app'
@@ -13,7 +14,7 @@ import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 
 import { hookErrorLogger } from '@lib/shell/errorLogger'
 import { AppSettings } from '@lib/typings/app'
-import { VersionDetails } from '@lib/typings/appUpdater'
+import { VersionDetails, versionDetails } from '@lib/typings/appUpdater'
 import { IPlatform } from '@lib/typings/platform'
 import { ActionSheetOptions } from '@lib/typings/actionSheet'
 import { KeyboardStyle } from '@lib/typings/keyboard'
@@ -252,7 +253,24 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    getVersionDetails: () => new Promise<VersionDetails>((resolve, reject) => {}),
+    getVersionDetails: async () => {
+        const { version, build } = await App.getInfo()
+        const details = {
+            upToDate: undefined,
+            currentVersion: `${version}(${build})`,
+            newVersion: undefined,
+            newVersionReleaseDate: undefined,
+            changelog: '',
+        }
+        versionDetails.set(details)
+        return {
+            upToDate: undefined,
+            currentVersion: `${version}(${build})`,
+            newVersion: undefined,
+            newVersionReleaseDate: undefined,
+            changelog: '',
+        }
+    },
 
     /**
      * Change menu state to determine what menu items to display
