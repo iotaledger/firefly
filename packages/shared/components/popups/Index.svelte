@@ -9,6 +9,7 @@
     import AddNode from './AddNode.svelte'
     import AddressHistory from './AddressHistory.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
+    import AirdropNetworkWarning from './AirdropNetworkWarning.svelte'
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
@@ -133,6 +134,7 @@
         stakingManager: StakingManager,
         newStakingPeriodNotification: NewStakingPeriodNotification,
         airdropNetworkInfo: AirdropNetworkInfo,
+        airdropNetworkWarning: AirdropNetworkWarning,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         confirmCloseApp: ConfirmCloseApp,
         legalUpdate: LegalUpdate,
