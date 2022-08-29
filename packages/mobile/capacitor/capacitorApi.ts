@@ -13,7 +13,6 @@ import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 
 import { hookErrorLogger } from '@lib/shell/errorLogger'
 import { AppSettings } from '@lib/typings/app'
-import { versionDetails } from '@lib/appUpdater'
 import { IPlatform } from '@lib/typings/platform'
 import { ActionSheetOptions } from '@lib/typings/actionSheet'
 import { KeyboardStyle } from '@lib/typings/keyboard'
@@ -254,15 +253,13 @@ export const CapacitorApi: IPlatform = {
      */
     getVersionDetails: async () => {
         const { version, build } = await App.getInfo()
-        const details = {
-            upToDate: undefined,
-            currentVersion: `${version}(${build})`,
-            newVersion: undefined,
-            newVersionReleaseDate: undefined,
+        return {
+            upToDate: true,
+            currentVersion: `${version} (${build})`,
+            newVersion: '',
+            newVersionReleaseDate: new Date(),
             changelog: '',
         }
-        versionDetails.set(details)
-        return details
     },
 
     /**
