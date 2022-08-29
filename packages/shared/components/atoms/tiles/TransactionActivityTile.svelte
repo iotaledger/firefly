@@ -14,6 +14,7 @@
         IPersistedAsset,
         ITransactionActivityData,
         getTimeDifferenceUntilExpirationTime,
+        Subject,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
@@ -34,24 +35,28 @@
         data.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: timeDiff = getTimeDifferenceUntilExpirationTime(data, $time)
 
-    let title: string
-    $: if (data.isInternal) {
-        title = inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
-    } else {
-        if (data.direction === ActivityDirection.In) {
-            title = inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
-        } else if (data.direction === ActivityDirection.Out) {
-            title = inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+    $: title = getTitle(data, inclusionState)
+    $: subjectLocale = getSubjectLocale(data.subject)
+
+    function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
+        if (txData.isInternal) {
+            return inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
+        } else {
+            if (txData.direction === ActivityDirection.In) {
+                return inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
+            } else if (txData.direction === ActivityDirection.Out) {
+                return inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
+            }
         }
     }
-
-    let subject: string
-    $: if (data.subject?.type === 'account') {
-        subject = truncateString(data.subject?.account?.name, 13, 0)
-    } else if (data.subject?.type === 'address') {
-        subject = truncateString(data.subject?.address, $networkHrp.length, 6)
-    } else {
-        subject = localize('general.unknownAddress')
+    function getSubjectLocale(subject: Subject): string {
+        if (subject?.type === 'account') {
+            return truncateString(subject?.account?.name, 13, 0)
+        } else if (subject?.type === 'address') {
+            return truncateString(subject?.address, $networkHrp.length, 6)
+        } else {
+            return localize('general.unknownAddress')
+        }
     }
 
     function handleTransactionClick(): void {
@@ -96,7 +101,7 @@
 
 <ClickableTile
     onClick={handleTransactionClick}
-    classes={inclusionState !== InclusionState.Confirmed ? 'opacity-50' : ''}
+    classes={inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}
 >
     <div class="w-full flex flex-col space-y-4">
         <div class="flex flex-row items-center text-left space-x-4">
@@ -124,7 +129,7 @@
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
                         {localize(
                             data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
-                            { values: { account: subject } }
+                            { values: { account: subjectLocale } }
                         )}
                     </Text>
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="whitespace-nowrap">

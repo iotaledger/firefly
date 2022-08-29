@@ -1524,7 +1524,7 @@
     "tabs": {
         "wallet": "Tárca",
         "staking": "Letétbe helyezés",
-        "developerTools": "Developer Tools"
+        "developer": "Developer"
     },
     "pills": {
         "stake": {

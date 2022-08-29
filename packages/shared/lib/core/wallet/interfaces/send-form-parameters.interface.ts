@@ -7,5 +7,4 @@ export interface ISendFormParameters {
     recipient?: Subject
     metadata?: string
     tag?: string
-    giftStorageDeposit?: boolean
 }

@@ -2,6 +2,7 @@ import { IAccount } from '@core/account'
 import { IAuth } from '@core/network'
 import {
     AccountId,
+    AccountMeta,
     AccountSyncOptions,
     ClientOptions,
     CreateAccountPayload,
@@ -33,8 +34,8 @@ export interface IProfileManager {
     recoverAccounts(
         accountGapLimit: number,
         addressGapLimit: number,
-        syncOptions: AccountSyncOptions
-    ): Promise<IAccount[]>
+        syncOptions?: AccountSyncOptions
+    ): Promise<AccountMeta[]>
     removeLatestAccount(): Promise<void>
     restoreBackup(source: string, password: string): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>

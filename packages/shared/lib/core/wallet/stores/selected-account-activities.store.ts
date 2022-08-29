@@ -6,7 +6,7 @@ import { isValueInUnitRange, unitToValue } from '@lib/utils'
 
 import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
-import { isFilteredActivity } from '../utils/isFilteredActivity'
+import { isVisibleActivity } from '../utils/isVisibleActivity'
 import { ActivityFilter } from '../interfaces/filter.interface'
 import { NumberFilterOption, BooleanFilterOption, TypeFilterOption, StatusFilterOption, ActivityType } from '../enums'
 
@@ -81,7 +81,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => !_activity.isHidden)
 
-        activityList = activityList.filter((activity) => !isFilteredActivity(activity))
+        activityList = activityList.filter((activity) => isVisibleActivity(activity))
 
         if (activitySearchTerm) {
             activityList = activityList.filter(

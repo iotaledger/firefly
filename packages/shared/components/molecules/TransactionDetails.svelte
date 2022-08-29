@@ -30,11 +30,10 @@
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
-    export let isClaiming: boolean = null
     export let direction: ActivityDirection
     export let expirationDate: Date = null
     export let formattedFiatValue: string = null
-    export let inclusionState: InclusionState = InclusionState.Pending
+    export let inclusionState = InclusionState.Pending
     export let metadata: string = null
     export let amount: string = null
     export let unit: string
@@ -43,7 +42,8 @@
     export let subject: Subject = null
     export let tag: string = null
     export let time: Date = null
-    export let isInternal: boolean
+    export let isInternal = false
+    export let isClaiming = false
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
