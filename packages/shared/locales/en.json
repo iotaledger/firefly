@@ -1211,7 +1211,8 @@
         "excluded": "Excluded",
         "developerTools": "Developer tools",
         "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
-        "url": "URL"
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters":{
         "title": "Filters",
