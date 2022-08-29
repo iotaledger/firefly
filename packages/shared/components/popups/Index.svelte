@@ -50,6 +50,7 @@
     import TokenInformationPopup from './TokenInformationPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
+    import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
 
     export let locale: Locale
 
@@ -139,6 +140,7 @@
         tokenInformation: TokenInformationPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,
         faucetRequest: FaucetRequestPopup,
+        testDeepLinkForm: TestDeepLinkFormPopup,
     }
 
     const onKey = (e) => {
