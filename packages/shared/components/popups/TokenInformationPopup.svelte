@@ -1,20 +1,20 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IActivity, IAsset, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
+    import { IAsset, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup, updatePopupProps } from '@lib/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
 
     export let asset: IAsset
-    export let activity: IActivity
+    export let activityId: string
 
     function handleSkip() {
         unverifyAsset(asset.id)
-        if (activity) {
+        if (activityId) {
             openPopup({
                 type: 'activityDetails',
-                props: { activityId: activity.id },
+                props: { activityId },
             })
         } else {
             updatePopupProps({
@@ -25,10 +25,10 @@
 
     function handleVerify() {
         verifyAsset(asset.id)
-        if (activity) {
+        if (activityId) {
             openPopup({
                 type: 'activityDetails',
-                props: { activityId: activity.id },
+                props: { activityId },
             })
         } else {
             updatePopupProps({

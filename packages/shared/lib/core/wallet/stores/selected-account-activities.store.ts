@@ -6,9 +6,9 @@ import { isValueInUnitRange, unitToValue } from '@lib/utils'
 
 import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
-import { isFilteredActivity } from '../utils/isFilteredActivity'
+import { isVisibleActivity } from '../utils/isVisibleActivity'
 import { ActivityFilter } from '../interfaces/filter.interface'
-import { NumberFilterOption, BooleanFilterOption, TypeFilterOption, StatusFilterOption } from '../enums'
+import { NumberFilterOption, BooleanFilterOption, TypeFilterOption, StatusFilterOption, ActivityType } from '../enums'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -81,22 +81,25 @@ export const queriedActivities: Readable<Activity[]> = derived(
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => !_activity.isHidden)
 
-        activityList = activityList.filter((activity) => !isFilteredActivity(activity))
+        activityList = activityList.filter((activity) => isVisibleActivity(activity))
 
         if (activitySearchTerm) {
             activityList = activityList.filter(
                 (activity) =>
-                    (activity.recipient?.type === 'account' &&
-                        activity.recipient?.account?.name === $activitySearchTerm) ||
-                    (activity.recipient?.type === 'address' && activity.recipient?.address === $activitySearchTerm) ||
+                    (activity.data.type === ActivityType.Transaction &&
+                        ((activity.data.recipient?.type === 'account' &&
+                            activity.data.recipient?.account?.name === $activitySearchTerm) ||
+                            (activity.data.recipient?.type === 'address' &&
+                                activity.data.recipient?.address === $activitySearchTerm))) ||
                     activity?.id?.toLowerCase() === $activitySearchTerm ||
                     ($activitySearchTerm[0] === '>' &&
-                        unitToValue($activitySearchTerm.substring(1)) < activity.rawAmount) ||
+                        unitToValue($activitySearchTerm.substring(1)) < activity.data.rawAmount) ||
                     ($activitySearchTerm[0] === '<' &&
-                        unitToValue($activitySearchTerm.substring(1)) > activity.rawAmount) ||
-                    ($activitySearchTerm[1] === 'i' && isValueInUnitRange(activity.rawAmount, $activitySearchTerm)) ||
-                    activity.rawAmount === unitToValue($activitySearchTerm) ||
-                    formatUnitBestMatch(activity.rawAmount).toString().toLowerCase()?.includes($activitySearchTerm)
+                        unitToValue($activitySearchTerm.substring(1)) > activity.data.rawAmount) ||
+                    ($activitySearchTerm[1] === 'i' &&
+                        isValueInUnitRange(activity.data.rawAmount, $activitySearchTerm)) ||
+                    activity.data.rawAmount === unitToValue($activitySearchTerm) ||
+                    formatUnitBestMatch(activity.data.rawAmount).toString().toLowerCase()?.includes($activitySearchTerm)
             )
         }
 
