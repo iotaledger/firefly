@@ -1046,6 +1046,8 @@
         "received": "Received",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "claimedShimmer": "Claimed Shimmer",
+        "claimingShimmer": "Claiming Shimmer",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "Send Payment",

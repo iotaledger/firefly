@@ -39,7 +39,9 @@
     $: subjectLocale = getSubjectLocale(data.subject)
 
     function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
-        if (txData.isInternal) {
+        if (txData.isShimmerClaiming) {
+            return inclusionState === InclusionState.Confirmed ? 'general.claimedShimmer' : 'general.claimingShimmer'
+        } else if (txData.isInternal) {
             return inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
         } else {
             if (txData.direction === ActivityDirection.In) {
@@ -127,10 +129,12 @@
 
                 <div class="flex flex-row justify-between">
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
-                        {localize(
-                            data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
-                            { values: { account: subjectLocale } }
-                        )}
+                        {#if !data.isShimmerClaiming}
+                            {localize(
+                                data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
+                                { values: { account: subjectLocale } }
+                            )}
+                        {/if}
                     </Text>
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
                         {fiatAmount}
