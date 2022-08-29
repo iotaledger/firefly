@@ -1,4 +1,3 @@
-import { versionDetails } from "./../../shared/lib/appUpdater"
 import { Capacitor } from '@capacitor/core'
 
 import { App } from '@capacitor/app'
@@ -14,7 +13,7 @@ import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 
 import { hookErrorLogger } from '@lib/shell/errorLogger'
 import { AppSettings } from '@lib/typings/app'
-import { VersionDetails, versionDetails } from '@lib/typings/appUpdater'
+import { versionDetails } from '@lib/appUpdater'
 import { IPlatform } from '@lib/typings/platform'
 import { ActionSheetOptions } from '@lib/typings/actionSheet'
 import { KeyboardStyle } from '@lib/typings/keyboard'
@@ -263,13 +262,7 @@ export const CapacitorApi: IPlatform = {
             changelog: '',
         }
         versionDetails.set(details)
-        return {
-            upToDate: undefined,
-            currentVersion: `${version}(${build})`,
-            newVersion: undefined,
-            newVersionReleaseDate: undefined,
-            changelog: '',
-        }
+        return details
     },
 
     /**
