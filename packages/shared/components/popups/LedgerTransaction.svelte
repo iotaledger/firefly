@@ -4,7 +4,7 @@
     import {
         formatAddressForLedger,
         resetLedgerSendConfirmationProps,
-        resetLedgerMintNativeTokenProps,
+        resetLedgerMintNativeTokenConfirmationProps,
     } from '@core/ledger'
     import { openPopup } from 'shared/lib/popup'
     import { onDestroy } from 'svelte'
@@ -16,7 +16,7 @@
     export let toAddress = ''
     export let toAmount = null
     export let sendConfirmationPopupProps = null
-    export let mintNativeTokenPopupProps = null
+    export let mintNativeTokenConfirmationPopupProps = null
 
     const getPopupLocaleData = (prop: string): string => {
         const basePath = 'popups.ledgerTransaction'
@@ -30,12 +30,12 @@
                 props: sendConfirmationPopupProps,
             })
             resetLedgerSendConfirmationProps()
-        } else if (mintNativeTokenPopupProps) {
+        } else if (mintNativeTokenConfirmationPopupProps) {
             openPopup({
                 type: 'mintNativeTokenForm',
-                props: mintNativeTokenPopupProps,
+                props: mintNativeTokenConfirmationPopupProps,
             })
-            resetLedgerMintNativeTokenProps()
+            resetLedgerMintNativeTokenConfirmationProps()
         }
     })
 </script>
@@ -63,9 +63,9 @@
             <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
             <Text type="pre">{formatAmount(toAmount)}</Text>
         </div> -->
-    {:else if mintNativeTokenPopupProps}
-        <KeyValueBox keyText="Name" valueText={mintNativeTokenPopupProps.name} />
-        <KeyValueBox keyText="Symbol" valueText={mintNativeTokenPopupProps.symbol} />
+    {:else if mintNativeTokenConfirmationPopupProps}
+        <KeyValueBox keyText="Name" valueText={mintNativeTokenConfirmationPopupProps.name} />
+        <KeyValueBox keyText="Symbol" valueText={mintNativeTokenConfirmationPopupProps.symbol} />
     {/if}
 </div>
 
