@@ -86,7 +86,7 @@
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
                 hint: localize('actions.confirmRejection.node'),
-                warning: true,
+                info: true,
                 confirmText: localize('actions.reject'),
                 onConfirm: () => {
                     rejectActivity(activityId)
