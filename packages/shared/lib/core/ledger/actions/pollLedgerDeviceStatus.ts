@@ -1,4 +1,5 @@
 import { get } from 'svelte/store'
+
 import { LEDGER_STATUS_POLL_INTERVAL } from '../constants'
 import { isPollingLedgerDeviceStatus } from '../stores'
 

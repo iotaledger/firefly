@@ -6,6 +6,7 @@ import { LEDGER_ERROR_LOCALES } from '../constants'
 import { deriveLedgerError } from '../helpers'
 
 export function handleLedgerError(error: string): void {
+    console.error('ERROR:\n', error)
     const ledgerError = deriveLedgerError(error)
     if (ledgerError in LEDGER_ERROR_LOCALES) {
         closePopup(true)

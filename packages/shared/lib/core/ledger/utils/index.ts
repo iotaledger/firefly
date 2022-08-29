@@ -1,3 +1,5 @@
 export * from './determineLedgerDeviceState'
+export * from './formatAddressForLedger'
 export * from './handleLedgerError'
 export * from './isLedgerError'
+export * from './openLedgerNotConnectedPopup'
