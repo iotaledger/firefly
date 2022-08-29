@@ -26,7 +26,7 @@ end
 target 'App' do
   capacitor_pods
   # Add your Pods here
-  pod 'IotaWalletInternal', :podspec => 'https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/v0.3.4/IotaWalletInternal.podspec'
+  pod 'IotaWalletInternal', :podspec => 'https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/test-podspec/IotaWalletInternal.podspec'
 
 end
 
