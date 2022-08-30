@@ -35,7 +35,7 @@ function handleTransactionProgressInternal(
     const mintNativeTokenConfirmationProps = get(ledgerMintNativeTokenConfirmationProps)
 
     const _openPopup = (type = 'ledgerTransaction') => {
-        const shouldPreventClose = type === 'enableLedgerBlindSigning'
+        const shouldPreventClose = type === 'enableLedgerBlindSigning' || type === 'ledgerTransaction'
 
         const isBlindSigningTransaction = typeof payload !== 'string' && 'PreparedTransactionEssenceHash' in payload
         const toAddress = isBlindSigningTransaction

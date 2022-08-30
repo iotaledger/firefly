@@ -15,7 +15,7 @@ export function handleLedgerError(error: string): void {
     if (ledgerError in LEDGER_ERROR_LOCALES) {
         const popupType = get(popupState)?.type
 
-        closePopup()
+        closePopup(true)
 
         /**
          * NOTE: Because the device has a warning prompt about blind signing when trying it
