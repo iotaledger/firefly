@@ -106,8 +106,8 @@
 </script>
 
 <!-- TODO: improve UX for mobile, 3 step screen -->
-<form 
-    id="form-change-password" 
+<form
+    id="form-change-password"
     on:submit|preventDefault={changePassword}
     style="margin-top: {$mobile && $isKeyboardOpened
         ? '-25%'
