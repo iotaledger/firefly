@@ -41,8 +41,18 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
     const timeQueue = [0, 0, 0]
 
     function handleTouchstart(event: TouchEvent): void {
-        if (event.cancelable) {
-            event.preventDefault()
+        if (!event.cancelable) {
+            /**
+             * Test with transaction history drawer
+             * Aims to allow scrolling without closing the drawer
+             * When the event could be prevented could means there is a scroll?
+             *
+             * As we use a passive event listener we should not to use
+             * a preventDefault() in that listener to disable scrolling.
+             * https://developer.chrome.com/blog/scrolling-intervention/
+             */
+            return
+            // event.preventDefault()
         }
         event.stopImmediatePropagation()
         event.stopPropagation()
