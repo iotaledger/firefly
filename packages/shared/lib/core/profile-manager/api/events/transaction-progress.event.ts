@@ -6,7 +6,7 @@ import { ledgerDeviceStatus, ledgerMintNativeTokenConfirmationProps, ledgerSendC
 
 import { TransactionProgressPayload } from '../types'
 
-export function handleTransactionProgress(accountId: string, payload: TransactionProgressPayload): void {
+export function handleTransactionProgressEvent(accountId: string, payload: TransactionProgressPayload): void {
     if (get(isLedgerProfile)) {
         if (get(selectedAccountId) === accountId) {
             handleTransactionProgressInternal(payload)
@@ -15,8 +15,6 @@ export function handleTransactionProgress(accountId: string, payload: Transactio
         console.warn('Transaction progress handler unimplemented: ', payload)
     }
 }
-
-// TODO: Should we uppercase the hash to match the Ledger device?
 
 function handleTransactionProgressInternal(
     payload: TransactionProgressPayload,

@@ -1,11 +1,13 @@
 import { get } from 'svelte/store'
-import { profileManager } from '../../stores'
-import { handleNewOutputEvent } from './newOutput'
-import { handleTransactionInclusionEvent } from './newTransactionInclusionEvent'
-import { handleSpentOutput } from './spentOutput'
-import { handleTransactionProgress } from './transactionProgress'
+import { profileManager } from '../stores'
+import {
+    handleNewOutputEvent,
+    handleSpentOutputEvent,
+    handleTransactionInclusionEvent,
+    handleTransactionProgressEvent,
+} from '../api/events'
 
-export function subscribe(): void {
+export function subscribeToWalletApiEvents(): void {
     const manager = get(profileManager)
 
     manager.listen([], (error, result) => {
@@ -15,9 +17,8 @@ export function subscribe(): void {
             const events = {
                 NewOutput: handleNewOutputEvent,
                 TransactionInclusion: handleTransactionInclusionEvent,
-                SpentOutput: handleSpentOutput,
-                TransactionProgress: handleTransactionProgress,
-                // ...
+                SpentOutput: handleSpentOutputEvent,
+                TransactionProgress: handleTransactionProgressEvent,
             }
 
             // do we need to handle the parsing?
