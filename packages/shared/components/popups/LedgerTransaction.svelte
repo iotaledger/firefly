@@ -1,13 +1,10 @@
 <script lang="typescript">
-    import { Animation, Text } from 'shared/components'
-    import { KeyValueBox } from 'shared/components/atoms'
-    import { resetLedgerSendConfirmationProps, resetLedgerMintNativeTokenConfirmationProps } from '@core/ledger'
-    import { openPopup } from 'shared/lib/popup'
     import { onDestroy } from 'svelte'
-    import { Locale } from '@core/i18n'
+    import { Animation, KeyValueBox, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-
-    export let locale: Locale
+    import { resetLedgerSendConfirmationProps, resetLedgerMintNativeTokenConfirmationProps } from '@core/ledger'
+    import { formatHexString } from '@core/utils'
+    import { openPopup } from '@lib/popup'
 
     export let toAddress = ''
     export let toAmount = null
@@ -38,8 +35,8 @@
     })
 </script>
 
-<Text type="h4" classes="mb-4">{locale(getPopupLocaleData('title'))}</Text>
-<Text type="p" classes="mb-4" secondary>{locale(getPopupLocaleData('info'))}</Text>
+<Text type="h4" classes="mb-4">{localize(getPopupLocaleData('title'))}</Text>
+<Text type="p" classes="mb-4" secondary>{localize(getPopupLocaleData('info'))}</Text>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Animation
@@ -52,7 +49,7 @@
 <div class="flex flex-col space-y-2">
     {#if sendConfirmationPopupProps}
         {#if hash}
-            <KeyValueBox keyText={localize('general.hash')} valueText={hash} />
+            <KeyValueBox keyText={localize('general.hash')} valueText={formatHexString(hash)} />
         {:else}
             <KeyValueBox keyText={localize('general.sendTo')} valueText={toAddress} />
             <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
@@ -69,9 +66,3 @@
         <KeyValueBox keyText="Symbol" valueText={mintNativeTokenConfirmationPopupProps.symbol} />
     {/if}
 </div>
-
-<style>
-    .transaction {
-        max-height: 30vh;
-    }
-</style>

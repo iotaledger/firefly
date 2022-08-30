@@ -15,6 +15,7 @@
             openPopup({
                 type: 'sendConfirmation',
                 props: sendConfirmationPopupProps,
+                overflow: true,
             })
         } else if (mintNativeTokenPopupProps) {
             openPopup({
