@@ -7,7 +7,8 @@
         "legal": {
             "title": "Politique de Confidentialité et Conditions d'Utilisation",
             "body": "Veuillez consulter la politique de confidentialité et les conditions d'utilisation.",
-            "checkbox": "J'ai lu et j'accepte la politique de confidentialité et les conditions d'utilisation"
+            "checkbox": "J'ai lu et j'accepte la politique de confidentialité et les conditions d'utilisation",
+            "checkboxMobile": "J'ai lu et j'accepte les"
         },
         "crashReporting": {
             "title": "Rapport de plantage",
@@ -124,9 +125,9 @@
             "body": "Vous avez sauvegardé vos portefeuilles dans un fichier Stronghold."
         },
         "congratulations": {
-            "title": "Configuration du portefeuille terminée",
+            "title": "Configuration du profil terminée !",
             "fundsMigrated": "Actifs déplacés",
-            "body": "Votre nouveau portefeuille est prêt à être utilisé.",
+            "body": "Votre nouveau profil est prêt à être utilisé.",
             "softwareMigratedBody": "Vous avez déplacé vos fonds vers le nouveau réseau avec succès",
             "fireflyLedgerBody": "Votre compte Ledger a été récupéré avec succès et vous pouvez maintenant continuer.",
             "trinityLedgerBody": "Vous avez fait migrer votre Ledger vers le nouveau réseau.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Restaurez vos portefeuilles à partir d'un fichier de sauvegarde",
-            "body": "Importez un fichier de sauvegarde pour restaurer vos portefeuilles. Les sauvegardes peuvent être de type Stronghold (.stronghold) ou Trinity SeedVault (.kdbx)."
+            "body": "Importez un fichier de sauvegarde pour restaurer vos portefeuilles. Les sauvegardes peuvent être de type Stronghold (.stronghold) ou Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Télécharger un fichier pour restaurer les fonds d'un portefeuille existant. Seule la sauvegarde Firefly Stronghold est prise en charge sur mobile. Pour la sauvegarde Trinity SeedVault, veuillez utiliser le portefeuille de bureau."
         },
         "importFromLedger": {
             "title": "Restaurer ou faire migrer votre Ledger",
@@ -250,7 +252,7 @@
             "title": "Attention",
             "body1": "Vous avez des fonds sur une ou plusieurs adresses ayant déjà servi à envoyer des fonds.",
             "body2": "Nous vous recommandons d'exécuter un processus automatisé pour vous aider à sécuriser et à transférer ces fonds en toute sécurité.",
-            "body3": "Si vous fermez l'application, vous devrez redémarrer tout le transfert.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "En savoir plus sur les adresses ayant déjà servi à envoyer des fonds"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Assurez-vous que votre Ledger est connecté et que l'application {legacy} est ouverte à tout moment pendant la migration.",
             "migrate": "Migrer les fonds",
             "transaction": "Transaction {number}",
-            "rerun": "Réessayez"
+            "rerun": "Réessayer"
         },
         "migrateFailed": {
             "title": "To do",
@@ -465,12 +467,16 @@
                 "networkOperational": "Réseau Opérationnel",
                 "networkDegraded": "Réseau dégradé",
                 "networkDown": "Réseau déconnecté",
+                "networkUnreachable": "Réseau inaccessible",
                 "status": "Statut",
                 "messagesPerSecond": "Messages par seconde",
                 "referencedRate": "Taux référencé"
             },
             "profileModal": {
-                "allSettings": "Tous les paramètres",
+                "allSettings": {
+                    "title": "Tous les paramètres",
+                    "description": "Profil, application, sécurité"
+                },
                 "logout": "Déconnexion",
                 "stronghold": {
                     "title": "Verrouillage du profil",
@@ -719,7 +725,7 @@
                 "confirmedMilestoneIndex": "Index des jalons confirmés",
                 "pruningIndex": "Index d'avancement de l'effacement",
                 "messagesPerSecond": "Messages par seconde",
-                "referencedRate": "Taux référencé"
+                "referencedRate": "Taux de référencement"
             }
         },
         "switchNetwork": {
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total des fonds placés",
             "stakedSuccessfully": "Vos fonds ont été placés pour {account}.",
             "unstakedSuccessfully": "Vos fonds ont été déverrouillé pour {account}.",
-            "singleAccountHint": "Vous cherchez vos portefeuilles ? Firefly a changé. Basculer entre vos portefeuilles dans la barre de menu supérieure."
+            "mergeStakeDisclaimerVoting": "Fusionner votre mise fusionnera également vos votes."
         },
         "stakingConfirmation": {
             "title": "Confirmer la Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changement du vote",
             "manageVotes": "Gérer les votes",
             "partialVoteInfo": "Vous avez reçu {amount} vers {account}. Vous pouvez voter avec ces fonds en les fusionnant avec votre vote actuel.",
-            "mergeVoteDisclaimer": "Veuillez noter que la fusion des votes n'affectera pas les votes qui ont déjà été comptés",
+            "mergeVoteDisclaimer": "Veuillez noter que la fusion des votes n'affectera pas les votes qui ont déjà été comptés.",
+            "mergeVoteDisclaimerStaking": "Fusionner votre vote fusionnera également vos fonds staked.",
             "mergingVotes": "Fusion des votes",
             "votedSuccessfully": "Vous avez commencé à voter avec {account}.",
             "unvotedSuccessfully": "Vous avez arrêté de voter avec {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Vous êtes en train de créer un profil développeur",
             "body": "Par défaut, vous serez connecté au réseau Chrysalis Devnet et pourrez changer de réseau manuellement. Ne continuez que si vous savez ce que vous faites."
+        },
+        "confirmCloseApp": {
+            "title": "Vous êtes sur le point de fermer l'application",
+            "body": "Êtes-vous sûr? Revenez en arrière pour fermer l'application."
         },
         "crashReporting": {
             "title": "Rapport de plantage",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrer vers Chrysalis ou restaurer un portefeuille existant",
         "createWallet": "Créer un nouveau portefeuille",
         "createWalletDescription": "Créez un nouveau portefeuille fonctionnant sur Chrysalis",
+        "exploreWallet": "Explorer le portefeuille",
         "savePassword": "Sauvegarder le mot de passe",
         "useBiometric": "Utiliser la sécurité biométrique",
         "setupPin": "Configurer le code PIN",
@@ -991,7 +1003,7 @@
         "saveBackup": "Enregistrer la sauvegarde de Stronghold",
         "customizeAcount": "Personnaliser le portefeuille",
         "viewAddressHistory": "Voir l'historique des adresses",
-        "hideAccount": "Cacher le portefeuille",
+        "hideAccount": "Masquer le portefeuille",
         "showAccount": "Afficher le portefeuille",
         "deleteAccount": "Supprimer le portefeuille",
         "max": "Maximum",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Fusionner le vote",
         "stopVotes": "Arrêter de voter",
         "okIUnderstand": "OK, je comprends",
-        "readMore": "Lire plus"
+        "readMore": "Lire plus",
+        "chooseBackupFile": "Choisir le fichier de sauvegarde"
     },
     "general": {
         "password": "Mot de passe",
+        "close": "Fermer",
         "confirmPassword": "Confirmez le mot de passe",
         "currentPassword": "Mot de passe actuel",
         "newPassword": "Nouveau mot de passe",
@@ -1066,9 +1080,12 @@
         "received": "Reçu",
         "sendPayment": "Envoyer le paiement",
         "moveFunds": "Transfert interne",
+        "moveFundsButton": "Interne",
+        "unit": "Unité",
         "sendTo": "Envoyer à",
         "sendFunds": "Envoyer des fonds",
         "sendToAddress": "Envoyer à l'adresse",
+        "scanQr": "Scanner le code QR",
         "scanQrOrPaste": "Scannez un QR code ou collez une Adresse",
         "moveFundsBetweenAccounts": "Déplacer des fonds entre portefeuilles",
         "sendTokensToAddress": "Envoyer des jetons à une adresse",
@@ -1111,6 +1128,7 @@
         "createAccount": "Créer un Portefeuille",
         "createNewWallet": "Créer un nouveau portefeuille",
         "switchWallet": "Changer de portefeuille",
+        "addAWallet": "Ajouter un portefeuille",
         "accountName": "Nom du portefeuille",
         "latestTransactions": "Dernières Transactions",
         "transactions": "Transactions",
@@ -1205,7 +1223,9 @@
         "accountColor": "Couleur du portefeuille",
         "myAssets": "Mes actifs",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "Afficher dans l'explorer",
+        "activityDetails": "Détails de la transaction"
     },
     "dates": {
         "today": "Aujourd'hui",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "Vous n'atteindrez pas la valeur minimale de la récompense sur la période restante, à moins que vous n'ajoutiez plus de IOTA.",
             "bodyDidNotReachMin": "Vous n'avez pas engagé assez de IOTA pour atteindre la valeur de récompense minimale pour {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Ce portefeuille ne possède pas assez de jetons IOTA pour atteindre la récompense minimale et ne peut donc pas être engagé pour {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {

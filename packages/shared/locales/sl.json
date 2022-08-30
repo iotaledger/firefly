@@ -7,7 +7,8 @@
         "legal": {
             "title": "Pravilnik o zasebnosti in pogoji storitve",
             "body": "Prosimo, preglejte politiko zasebnosti in pogoje storitve.",
-            "checkbox": "Prebral sem in sprejemam politiko zasebnosti in pogoje storitve"
+            "checkbox": "Prebral sem in sprejemam politiko zasebnosti in pogoje storitve",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -124,9 +125,9 @@
             "body": "Svoje denarnice ste varnostno kopirali v Stronghold."
         },
         "congratulations": {
-            "title": "Nastavitev denarnice je končana",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Migracija žetona",
-            "body": "Nova denarnica je pripravljena za uporabo.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Sredstva ste uspešno prenesli v novo omrežje",
             "fireflyLedgerBody": "Račun Ledger je uspešno obnovljen in zdaj lahko nadaljujete.",
             "trinityLedgerBody": "Uspešno ste prenesli knjigo Ledger v novo omrežje.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Obnovitev denarnic z uporabo datoteke z varnostno kopijo",
-            "body": "Uvozite varnostno datoteko in obnovite svoje denarnice. Varnostne kopije so lahko Stronghold (.stronghold) ali Trinity SeedVault (.kdbx)."
+            "body": "Uvozite varnostno datoteko in obnovite svoje denarnice. Varnostne kopije so lahko Stronghold (.stronghold) ali Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Obnovitev ali migracija glavne knjige",
@@ -227,7 +229,7 @@
             "body2": "It may take some time. Do not turn off your device during the migration.",
             "existing": "Vaša stara denarnica",
             "new": "Vaša nova denarnica",
-            "learn": "Podučite se o migraciji",
+            "learn": "Learn about the migration",
             "beginMigration": "Begin Migration",
             "migrating": "Migrating funds...",
             "migrated": "{balance} migrated",
@@ -250,7 +252,7 @@
             "title": "Opozorilo",
             "body1": "You have funds on one or more spent addresses.",
             "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Learn about spent addresses"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "Stanje",
                 "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
             },
             "profileModal": {
-                "allSettings": "All settings",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Odjava",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "Nazadnje ste naredili varnostno kopijo {datum}",
-                    "notBackedUp": "Ni varnostnih kopij",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -734,12 +740,12 @@
             "empty": "The error log is empty."
         },
         "deleteProfile": {
-            "title": "Izbriši profil",
+            "title": "Delete profile",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
             "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
-            "title": "Diagnostika",
+            "title": "Diagnostics",
             "node": "Node",
             "platform": "Platform",
             "platformVersion": "Platform Version",
@@ -762,7 +768,7 @@
             }
         },
         "balanceFinder": {
-            "title": "Iskalnik ravnotežja",
+            "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Nasveti, če se vaša knjiga Ledger ne poveže",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Skupna vložena sredstva",
             "stakedSuccessfully": "Vaša sredstva so bila staked na {account}.",
             "unstakedSuccessfully": "Vaša sredstva so bila preklicana za {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,16 +964,17 @@
         "restoreWalletDescription": "Selitev v Chrysalis ali obnovitev obstoječe denarnice",
         "createWallet": "Ustvari novo denarnico",
         "createWalletDescription": "Ustvarite novo denarnico v Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Shrani geslo",
         "useBiometric": "Uporabite biometrično varnost",
-        "setupPin": "Nastavi PIN kodo",
+        "setupPin": "Set up PIN code",
         "setPin": "Nastavi PIN kodo",
         "confirmPin": "Potrdi PIN kodo",
         "enterYourPin": "Vnesi PIN kodo",
         "saveBackupFile": "Shrani varnostno kopijo datoteke",
         "iveWrittenRecoveryPhrase": "Zapisal sem svoj stavek za okrevanje",
-        "verifyRecoveryPhrase": "Kontrola frázy pre obnovenie",
-        "revealRecoveryPhrase": "Razkriti stavek za okrevanje",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "Uvoz shrambe SeedVault",
         "checkAgain": "Preveri Znova",
         "importFromFile": "Uvoz iz datoteke",
@@ -983,7 +995,7 @@
         "enableDeepLinks": "Omogočite povezave IOTA",
         "enableDeveloperMode": "Omogočite način razvijalca",
         "enableSystemNotifications": "Omogočite sistemska obvestila",
-        "exportTransactionHistory": "Izvoz zgodovine transakcij",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Local proof of work",
         "unlock": "Odkleni",
         "updateFirefly": "Posodobi Firefly",
@@ -991,14 +1003,14 @@
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
         "viewAddressHistory": "View address history",
-        "hideAccount": "Skrij denarnico",
+        "hideAccount": "Hide wallet",
         "showAccount": "Prikaži denarnico",
-        "deleteAccount": "Izbriši denarnico",
+        "deleteAccount": "Delete wallet",
         "max": "Največ",
         "addNode": "Dodaj Node",
         "updateNode": "Posodobi Node",
         "removeNode": "Izbriši node",
-        "removeAllNodes": "Odstranitev vseh vozlišč",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Skrij",
         "hideOthers": "Skrij ostale",
         "showAll": "Prikaži vse",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Search again",
         "searching": "Searching...",
         "closeFirefly": "Close Firefly",
-        "generateAddress": "Generiraj naslov",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Password",
+        "close": "Close",
         "confirmPassword": "Confirm password",
         "currentPassword": "Current password",
         "newPassword": "New password",
@@ -1066,9 +1080,12 @@
         "received": "Prejeto",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Send To",
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Send tokens to an address",
@@ -1111,10 +1128,11 @@
         "createAccount": "Ustvari denarnico",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Ime denarnice",
         "latestTransactions": "Zadnje transakcije",
         "transactions": "Transakcije",
-        "security": "Varnost",
+        "security": "Security",
         "accountAddress": "Naslov Denarnice",
         "network": "Omrežje",
         "nodes": "Nodes",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "Naslov prejema",
         "newAddress": "Nov naslov",
         "date": "Datum",
-        "status": "Stanje",
+        "status": "Status",
         "confirmed": "Potrjeno",
         "pending": "Na čakanju",
         "noAccounts": "Nimate denarnice, zato jo ustvarite.",
@@ -1205,7 +1223,9 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Today",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID sporočila",
+            "messageId": "Message ID",
             "internal": "Internal",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "Datum",
+            "date": "Date",
             "time": "Time"
         }
     },
@@ -1443,7 +1468,7 @@
         }
     },
     "tabs": {
-        "wallet": "Denarnica",
+        "wallet": "Wallet",
         "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",

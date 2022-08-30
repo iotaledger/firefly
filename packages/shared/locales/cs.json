@@ -7,7 +7,8 @@
         "legal": {
             "title": "Zásady ochrany osobních údajů a smluvní podmínky",
             "body": "Zkontrolujte Zásady ochrany osobních údajů a Smluvní podmínky.",
-            "checkbox": "Četl jsem a souhlasím se Zásadami ochrany osobních údajů a Smluvními podmínkami"
+            "checkbox": "Četl jsem a souhlasím se Zásadami ochrany osobních údajů a Smluvními podmínkami",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Hlášení o chybě",
@@ -15,7 +16,7 @@
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "appearance": {
-            "title": "Vzhled",
+            "title": "Appearance",
             "body": "Vyberte vzhled aplikace."
         },
         "profile": {
@@ -124,9 +125,9 @@
             "body": "Zálohovali jste peněženku jako Stronghold soubor."
         },
         "congratulations": {
-            "title": "Nastavení peněženky dokončeno",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Převedené prostředky",
-            "body": "Vaše peněženka je připravena k použití.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Úspěšně jste převedli své prostředky do nové sítě",
             "fireflyLedgerBody": "Váš účet Ledger byl úspěšně obnoven a nyní můžete pokračovat.",
             "trinityLedgerBody": "Úspěšně jste převedli svůj Ledger do nové sítě.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Obnovit peněženku ze zálohy",
-            "body": "Importujte zálohu pro obnovení Vaší peněženky. Zálohy jsou soubory typu Stronghold (.stronghold) nebo Trinity SeedVault (.kdbx)."
+            "body": "Importujte zálohu pro obnovení Vaší peněženky. Zálohy jsou soubory typu Stronghold (.stronghold) nebo Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Obnovit nebo migrovat váš Ledger",
@@ -190,7 +192,7 @@
             "readMore": "Co čekat od procesu migrace"
         },
         "generateNewLedgerAddress": {
-            "title": "Vytvořit novou adresu",
+            "title": "Generate new address",
             "body": "Pro migraci tokenů s Firefly, potřebujete vygenerovat novou adresu. Pro pokračování klikněte na tlačítko níže.",
             "confirmTitle": "Potvrdit novou adresu",
             "confirmBody": "Z důvodu bezpečnosti porovnejte adresu vygenerovanou na zařízení Ledger s adresou zobrazenou níže. Pokud se shodují, stiskněte na Vašem Ledgeru obě tlačítka, jak jste vyzváni.",
@@ -227,7 +229,7 @@
             "body2": "Toto může nějakou dobu trvat. Během migrace nevypínejte zařízení.",
             "existing": "Vaše předchozí peněženka",
             "new": "Vaše nová peněženka",
-            "learn": "Přečtěte si o migraci",
+            "learn": "Learn about the migration",
             "beginMigration": "Zahájit migraci",
             "migrating": "Migrace prostředků...",
             "migrated": "{balance} zmigrováno",
@@ -250,7 +252,7 @@
             "title": "Varování",
             "body1": "Máte prostředky na jedné nebo více utracených adresách.",
             "body2": "Doporučujeme spustit automatizovaný proces, který pomuze s bezpečnym převedem Vasich prostředku.",
-            "body3": "Pokud zavřete aplikaci, budete muset celou migraci restartovat.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Další informace o utracených adresách"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Ujistěte se, že je váš Ledger připojen a aplikace {legacy} je během migrace vždy otevřena.",
             "migrate": "Migrace tokenů",
             "transaction": "Transakce {number}",
-            "rerun": "Zkuste to znovu"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -403,7 +405,7 @@
                 "editDetails": "Upravit podrobnosti",
                 "viewInfo": "Zobrazit informace",
                 "setAsPrimary": "Nastavit jako hlavní",
-                "removeNode": "Odstranit uzel",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "Zahrnout oficiální seznam node",
                 "noNodes": "Nejsou k dispozici žádné uzly, nelze se připojit k síti",
                 "noNodesAuto": "Nejsou k dispozici žádné uzly, místo toho bude použit automatický výběr"
@@ -465,12 +467,16 @@
                 "networkOperational": "Síť v provozu",
                 "networkDegraded": "Zhoršená funkčnost sítě",
                 "networkDown": "Síť odpojena",
+                "networkUnreachable": "Network unreachable",
                 "status": "Stav",
                 "messagesPerSecond": "Zprávy za sekundu",
                 "referencedRate": "Odkazovaná míra"
             },
             "profileModal": {
-                "allSettings": "Všechna nastavení",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Odhlásit se",
                 "stronghold": {
                     "title": "Zámek profilu",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Zálohujte peněženku",
-                    "lastBackup": "Naposledy jste zálohovali {date}",
-                    "notBackedUp": "Zatím nezálohováno",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Záloha"
                 },
                 "version": {
@@ -607,7 +613,7 @@
             "events": {
                 "status": {
                     "upcoming": "Oznámení",
-                    "commencing": "Hlasování je otevřené",
+                    "commencing": "Voting open",
                     "holding": "Počítání",
                     "ended": "Ukončeno"
                 },
@@ -625,7 +631,7 @@
             "eventDetails": {
                 "votingOpens": "Hlasování začíná",
                 "votingProgress": "Zbývající čas",
-                "votingPower": "Vaše hlasovací váha",
+                "votingPower": "Your voting weight",
                 "votesCounted": "Vaše započtené hlasy",
                 "maximumVotes": "Maximální počet Vašich hlasů",
                 "countingStarts": "Přepočet začíná dnem",
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "Skrýt {name}?",
             "body": "Později můžete najít tuto peněženku povolením \"Zobrazit skryté peněženky\" v Pokročilém nastavení.",
-            "typePassword": "Zadejte heslo peněženky pro potvrzení.",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Skrýt peněženku",
             "errorTitle": "Nelze skrýt {name}",
             "errorBody1": "Chcete-li skrýt peněženku, musí mít nulový zůstatek.",
@@ -718,8 +724,8 @@
                 "features": "Vlastnosti",
                 "confirmedMilestoneIndex": "Potvrzený index milníků",
                 "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Zprávy za sekundu",
-                "referencedRate": "Odkazovaná míra"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -757,7 +763,7 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "Posíláte transfer z peněženky, na které jsou v současné době tokeny stakovány. To může zrušit stakování vašich tokenů. Nebojte se odeslat transfer, ale bude potřeba znovu začít stakovat zbývající tokeny.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tipy, pokud se váš Ledger nepřipojuje",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Ujistěte se, že Ledger Live není na Vašem počítači otevřen",
                 "1": "Ujistěte se, že jste odemkli své zařízení Ledger pomocí vašeho PIN",
@@ -823,7 +829,7 @@
                 "info": "Potvrdit, že adresa zůstatku, zobrazená na Vašem Ledger zařízení, odpovídá adrese, zobrazené níže. Pokud se shodují, stiskněte na Vašem Ledgeru obě tlačítka podle vyzvání."
             },
             "transaction": {
-                "title": "Potvrdit transakci",
+                "title": "Confirm transaction",
                 "info": "Potvrďte, že informace o transakci zobrazené na vašem zařízení Ledger odpovídají níže uvedeným informacím. Pokud se shodují, stiskněte na Vašem Ledgeru obě tlačítka, podle vyzvání."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Celkem stakovaných prostředků",
             "stakedSuccessfully": "Vaše finanční prostředky byly stakovány do {account}.",
             "unstakedSuccessfully": "Vaše finanční prostředky byly odstakovány z {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Potvrdit účast",
@@ -877,7 +883,8 @@
             "changingVote": "Změna hlasu",
             "manageVotes": "Spravovat hlas",
             "partialVoteInfo": "Obdrželi jste {amount} na {account}. S těmito prostředky můžete hlasovat sloučením s aktuálním hlasem.",
-            "mergeVoteDisclaimer": "Vezměte prosím na vědomí, že sloučení hlasů nebude mít vliv na žádné hlasy, které již byly započteny",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Spojení hlasů",
             "votedSuccessfully": "Začali jste hlasovat s {account}.",
             "unvotedSuccessfully": "Přestali jste hlasovat s {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Vytváříte nový developerský profil",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Zprávy o selhání",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Přenést na Chrysalis nebo obnovit existující peněženku",
         "createWallet": "Vytvořit novou peněženku",
         "createWalletDescription": "Vytvořit novou peněženku na Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Uložit heslo",
         "useBiometric": "Použít biometrické zabezpečení",
         "setupPin": "Nastavení PIN kódu",
@@ -991,14 +1003,14 @@
         "saveBackup": "Uložit Stronghold zálohu",
         "customizeAcount": "Přizpůsobit peněženku",
         "viewAddressHistory": "Zobrazit historii adresy",
-        "hideAccount": "Skrýt peněženku",
+        "hideAccount": "Hide wallet",
         "showAccount": "Zobrazit peněženku",
-        "deleteAccount": "Smazat peněženku",
+        "deleteAccount": "Delete wallet",
         "max": "Max",
         "addNode": "Přidat uzel",
         "updateNode": "Aktualizovat Node",
         "removeNode": "Odstranit uzel",
-        "removeAllNodes": "Odstranit všechny uzly",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Skrýt",
         "hideOthers": "Skrýt ostatní",
         "showAll": "Zobrazit vše",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Hledat znovu",
         "searching": "Hledání...",
         "closeFirefly": "Zavřít Firefly",
-        "generateAddress": "Vygenerovat adresu",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrovat jiný index",
         "visitWebsite": "Navštívit webové stránky",
         "howItWorks": "Jak to funguje",
@@ -1047,14 +1059,16 @@
         "mergeFunds": "Sloučit prostředky",
         "done": "Hotovo",
         "castVotes": "Hlasovat",
-        "changeVotes": "Změnit hlas",
+        "changeVotes": "Change vote",
         "mergeVotes": "Sloučit hlas",
-        "stopVotes": "Zastavit hlasování",
+        "stopVotes": "Stop voting",
         "okIUnderstand": "Ano, rozumím",
-        "readMore": "Zobrazit více"
+        "readMore": "Zobrazit více",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Heslo",
+        "close": "Close",
         "confirmPassword": "Potvrďte heslo",
         "currentPassword": "Současné heslo",
         "newPassword": "Nové heslo",
@@ -1066,15 +1080,18 @@
         "received": "Přijato",
         "sendPayment": "Odeslat platbu",
         "moveFunds": "Interní převod",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Poslat",
         "sendFunds": "Poslat tokeny",
         "sendToAddress": "Odeslat na adresu",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Naskenujte QR kód nebo vložte adresu",
         "moveFundsBetweenAccounts": "Převod mezi účty",
         "sendTokensToAddress": "Poslat tokeny na adresu",
         "manageAccount": "Spravovat peněženku",
         "customizeAcount": "Přizpůsobit peněženku",
-        "account": "Peněženka",
+        "account": "Wallet",
         "sendingToAddress": "Odeslání na adresu",
         "amount": "Částka",
         "addAddress": "Přidat adresu",
@@ -1111,6 +1128,7 @@
         "createAccount": "Vytvořit peněženku",
         "createNewWallet": "Vytvořit novou peněženku",
         "switchWallet": "Přepnout peněženku",
+        "addAWallet": "Add a wallet",
         "accountName": "Název peněženky",
         "latestTransactions": "Poslední transakce",
         "transactions": "Transakce",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "Adresa příjemce",
         "newAddress": "Nová adresa",
         "date": "Datum",
-        "status": "Stav",
+        "status": "Status",
         "confirmed": "Potvrzeno",
         "pending": "Čekající",
         "noAccounts": "Nemáte žádné peněženky, prosím vytvořte alespoň jednu.",
@@ -1198,14 +1216,16 @@
         "staking": "Stakování",
         "unstaking": "Zrušení stakování",
         "notStaked": "Nestakováno",
-        "stakedFunds": "Stakované prostředky",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Prostředky, které byly stakovány",
         "voting": "Hlasování",
         "unvoting": "Odebrat hlas",
         "accountColor": "Barva peněženky",
         "myAssets": "Má aktiva",
         "option": "Možnost",
-        "total": "Celkový zůstatek: {balance}"
+        "total": "Celkový zůstatek: {balance}",
+        "openExplorer": "Prohlédnout v průzkumníku",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Dnes",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "Během zbývajícího období stakování nedosáhnete minimální hodnoty odměny, pokud nepřidáte další IOTA tokeny.",
             "bodyDidNotReachMin": "Nestakovali jste dostatek IOTA tokenů k dosažení minimální hodnoty odměny za {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Tato peněženka nemá dostatek IOTA tokenů, aby dosáhla minimální odměny za {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
@@ -1427,7 +1452,7 @@
             "internal": "Interní",
             "rawValue": "Nezpracovaná hodnota",
             "formattedValue": "Formátovaná hodnota",
-            "date": "Datum",
+            "date": "Date",
             "time": "Čas"
         }
     },
@@ -1443,8 +1468,8 @@
         }
     },
     "tabs": {
-        "wallet": "Peněženka",
-        "staking": "Stakování",
+        "wallet": "Wallet",
+        "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokeny",
         "activity": "Aktivita"

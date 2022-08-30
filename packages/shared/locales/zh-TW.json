@@ -7,7 +7,8 @@
         "legal": {
             "title": "隱私政策和服務條款",
             "body": "請仔細檢閱「隱私權政策」與「服務條款」",
-            "checkbox": "我已經閱讀並且接受隱私政策和服務條款"
+            "checkbox": "我已經閱讀並且接受隱私政策和服務條款",
+            "checkboxMobile": "我已閱讀並接受"
         },
         "crashReporting": {
             "title": "當機錯誤報告",
@@ -124,9 +125,9 @@
             "body": "您的錢包已備份至 Stronghold。"
         },
         "congratulations": {
-            "title": "錢包設置完成",
+            "title": "Profile setup complete!",
             "fundsMigrated": "資金遷移完成",
-            "body": "您的新錢包可以使用了。",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "您已成功將資金遷移到新網路",
             "fireflyLedgerBody": "您的 Ledgar 帳號已成功復原，現在可繼續使用。",
             "trinityLedgerBody": "您已經成功把 Ledger 遷移到新網路。",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "使用備份文件還原您的錢包",
-            "body": "輸入備份檔案以恢復您的錢包。備份可以是 Stronghold（.stronghold）或 Trinity SeedVault（.kdbx）。"
+            "body": "輸入備份檔案以恢復您的錢包。備份可以是 Stronghold（.stronghold）或 Trinity SeedVault（.kdbx）。",
+            "bodyMobile": "載入一個檔案以恢復錢包。在手機上僅支援 Firefly Stronghold 的備份檔。若要恢復 Trinity SeedVault 的備份，請使用電腦版的 Firefly 程式。"
         },
         "importFromLedger": {
             "title": "還原或遷移您的Ledger",
@@ -250,7 +252,7 @@
             "title": "警告",
             "body1": "您在一個或更多「已支出地址」上擁有資金。",
             "body2": "我們建議您運行自動化過程，來幫您保護並安全地轉移這些資金。",
-            "body3": "如果您關閉應用程式，您將必須重新開始整個遷移過程。",
+            "body3": "我們無法保證在行動裝置上安全的遷移你的資金。我們建議使用桌機版本的 Firefly 執行遷移工作。",
             "learn": "深入瞭解「已支出地址」"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "在遷移過程中，確保您的 Ledger 保持連接和 {legacy} app 保持打開。",
             "migrate": "遷移資金",
             "transaction": "交易編號 {number}",
-            "rerun": "重新嘗試"
+            "rerun": "再試一次"
         },
         "migrateFailed": {
             "title": "To do",
@@ -465,12 +467,16 @@
                 "networkOperational": "網路正常運行",
                 "networkDegraded": "網路訊號不佳",
                 "networkDown": "未連接網路",
+                "networkUnreachable": "網路無法連線",
                 "status": "狀態",
                 "messagesPerSecond": "每秒訊息量",
                 "referencedRate": "參照率"
             },
             "profileModal": {
-                "allSettings": "所有設定",
+                "allSettings": {
+                    "title": "所有設定",
+                    "description": "設定檔、應用程式、安全性"
+                },
                 "logout": "登出",
                 "stronghold": {
                     "title": "設定檔鎖定",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "備份您的錢包",
-                    "lastBackup": "您上次備份在 {date}",
-                    "notBackedUp": "沒有備份",
+                    "lastBackup": "您上次的備份是在 {date}",
+                    "notBackedUp": "尚未備份",
                     "button": "備份"
                 },
                 "version": {
@@ -526,7 +532,7 @@
                 },
                 "bodies": {
                     "upcoming": "質押您的 {token} 代幣。當質押於{date} 開始，就能每10秒獲得獎勵。",
-                    "commencing": "質押您的 {token} 代幣。當質押於{date} 開始，就能每10秒獲得獎勵。",
+                    "commencing": "質押您的 {token} 代幣。質押於 {date} 開始，在此之後每 10 秒皆能獲得獎勵。",
                     "holdingAndStaking": "您將自動每10秒獲得獎勵。",
                     "holdingAndNotStaking": "質押您的 {token} 代幣以獲得每10秒一次的獎勵。",
                     "endedAndDidStake": "一旦主網啟動，{token} 獎勵將分發至您的錢包。",
@@ -607,7 +613,7 @@
             "events": {
                 "status": {
                     "upcoming": "公告",
-                    "commencing": "開放投票",
+                    "commencing": "已開放投票",
                     "holding": "計算中",
                     "ended": "已結束"
                 },
@@ -625,7 +631,7 @@
             "eventDetails": {
                 "votingOpens": "表決開放",
                 "votingProgress": "剩餘時間",
-                "votingPower": "你的投票權重",
+                "votingPower": "您的投票權重",
                 "votesCounted": "您被記錄的票數",
                 "maximumVotes": "您的最高票數",
                 "countingStarts": "計算開始於",
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "隱藏 {name}？",
             "body": "您可以稍後通過在“進階設定”中啟用“顯示隱藏的錢包”來找到此錢包。",
-            "typePassword": "輸入您的錢包密碼進行確認。",
+            "typePassword": "請輸入您的錢包密碼以確認。",
             "hideAccount": "隱藏錢包",
             "errorTitle": "無法隱藏 {name}",
             "errorBody1": "要隱藏一個帳戶，它必須要有 0 餘額。",
@@ -718,7 +724,7 @@
                 "features": "功能",
                 "confirmedMilestoneIndex": "已確認的里程碑指標",
                 "pruningIndex": "修剪指標",
-                "messagesPerSecond": "每秒訊息量",
+                "messagesPerSecond": "訊息/秒",
                 "referencedRate": "參照率"
             }
         },
@@ -757,7 +763,7 @@
             "sendingFromStakedAccountBelowMinRewardVote": "您正從未達質押門檻的錢包發送交易。這將解除錢包內的代幣質押，並錯失質押獎勵。您也必須重新投票。",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "您正從質押與投票中的錢包，發送交易。這將解除您的代幣質押與停止投票。交易可繼續進行。完成交易後，您需為剩餘的代幣重新質押和投票。",
-                "stake": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
+                "stake": "您正在從質押中的錢包發送交易，這將解除您的代幣質押。交易可繼續進行，但在交易後您將需要重新質押剩餘的代幣。",
                 "vote": "您正在從投票中的錢包發送交易。這將停止您的投票。交易可繼續進行，但交易後您將需要重新以剩餘的代幣投票。"
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "質押資金總額",
             "stakedSuccessfully": "您的資金已爲 {account} 質押。",
             "unstakedSuccessfully": "您的資金已從 {account} 解除質押。",
-            "singleAccountHint": "在尋找您的錢包嗎？Firefly已變更。在上方的菜單欄切換您的錢包。"
+            "mergeStakeDisclaimerVoting": "合併你的質押同時也會合併你的選票"
         },
         "stakingConfirmation": {
             "title": "確認參與",
@@ -877,7 +883,8 @@
             "changingVote": "正在更改投票",
             "manageVotes": "管理投票",
             "partialVoteInfo": "您已收到 {amount} 至 {account}。您可以將這些資金合併來參與您當前的投票。",
-            "mergeVoteDisclaimer": "請注意，合併選票不會影響任何已計票的選票",
+            "mergeVoteDisclaimer": "請注意，合併選票不會影響任何已計票的選票.",
+            "mergeVoteDisclaimerStaking": "合併你的選票同時也會合併你的質押",
             "mergingVotes": "合併投票",
             "votedSuccessfully": "你已開始使用 {account} 進行投票。",
             "unvotedSuccessfully": "你已停止使用 {account} 投票。",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "您正在建立開發者設定檔。",
             "body": "您將連結至預設的 Chrysalis 開發網，並且可以手動切換網路。在開始前請先確定您具備相關的知識。"
+        },
+        "confirmCloseApp": {
+            "title": "您將要離開此程式",
+            "body": "再按一次以關閉程式"
         },
         "crashReporting": {
             "title": "當機回報",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "遷移至Chrysalis 或恢復一個既存錢包",
         "createWallet": "建立新錢包",
         "createWalletDescription": "創建一個運行在Chrysalis的新錢包",
+        "exploreWallet": "Explore wallet",
         "savePassword": "儲存密碼",
         "useBiometric": "使用生物識別安全機制",
         "setupPin": "設置 PIN 碼",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "合併選票",
         "stopVotes": "停止投票",
         "okIUnderstand": "好的，我明白",
-        "readMore": "閱讀更多"
+        "readMore": "閱讀更多",
+        "chooseBackupFile": "選擇備份檔案"
     },
     "general": {
         "password": "密碼",
+        "close": "關閉",
         "confirmPassword": "確認密碼",
         "currentPassword": "當前密碼",
         "newPassword": "新密碼",
@@ -1066,9 +1080,12 @@
         "received": "已接收",
         "sendPayment": "發送付款",
         "moveFunds": "內部傳送",
+        "moveFundsButton": "内部的",
+        "unit": "單位",
         "sendTo": "發送至",
         "sendFunds": "發送資金",
         "sendToAddress": "發送到地址",
+        "scanQr": "掃描 QR Code",
         "scanQrOrPaste": "掃描QR碼 或 貼上地址",
         "moveFundsBetweenAccounts": "在錢包間轉移資金",
         "sendTokensToAddress": "發送代幣至另一個地址",
@@ -1111,6 +1128,7 @@
         "createAccount": "建立一個錢包",
         "createNewWallet": "建立新錢包",
         "switchWallet": "切換錢包",
+        "addAWallet": "新增錢包",
         "accountName": "錢包名稱",
         "latestTransactions": "最新交易",
         "transactions": "交易紀錄",
@@ -1188,7 +1206,7 @@
         "capsLock": "大寫鎖定已啟用",
         "version": "版本 {version}",
         "yourWallets": "您的錢包",
-        "walletActions": "Wallet Actions",
+        "walletActions": "錢包活動",
         "unknown": "未知",
         "none": "無",
         "staked": "已質押",
@@ -1205,7 +1223,9 @@
         "accountColor": "錢包顏色",
         "myAssets": "我的資產",
         "option": "選項",
-        "total": "總額： {balance}"
+        "total": "總額： {balance}",
+        "openExplorer": "在區塊鏈瀏覽器上查看",
+        "activityDetails": "交易明細"
     },
     "dates": {
         "today": "今天",
@@ -1361,7 +1381,7 @@
             "mnemonicMismatch": "您似乎連到錯的 Ledger 裝置或是已更改註記詞",
             "notDetected": "偵測不到 Ledger 裝置",
             "notFound": "找不到 Ledger 裝置",
-            "otherConnected": "您的Ledger裝置開啟了錯誤的應用程式",
+            "otherConnected": "您在 Ledger裝置 開啟了錯誤的應用程式",
             "generateAddress": "產生地址時發生錯誤",
             "timeout": "您的 Ledger 裝置已逾時。",
             "disconnected": "您的 Ledger 裝置已斷線。",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "除非您增加更多 IOTA，在剩餘的質押期間內您將無法達到最低的獎勵門檻。",
             "bodyDidNotReachMin": "您沒有質押足夠的IOTA來達到 {airdrop} ({airdropRewardMin}) 的最低獎勵。",
             "bodyMinBalanceAirdrop": "這個錢包的 IOTA 代幣數量未達 {airdrop} 空投獎勵的最低門檻。"
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
