@@ -56,9 +56,7 @@
                         lineHeight="140"
                         classes="overflow-hidden overflow-ellipsis multiwrap-line2"
                     >
-                        {localize(
-                            this.inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting'
-                        )}
+                        {localize(inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting')}
                     </Text>
                     <Text
                         fontWeight={FontWeight.semibold}
