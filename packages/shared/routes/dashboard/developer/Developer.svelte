@@ -25,10 +25,10 @@
                     {#if features.developerTools.faucet.enabled}
                         <FaucetRequestButton />
                     {/if}
-                    {#if features.developerTools.faucet.enabled}
+                    {#if features.developerTools.minting.enabled}
                         <MintNativeTokenButton />
                     {/if}
-                    {#if features.developerTools.faucet.enabled}
+                    {#if features.developerTools.refreshTokens.enabled}
                         <RefreshTokenMetadataButton />
                     {/if}
                 </Pane>
@@ -36,7 +36,7 @@
                     <Text type="h5" classes="text-left">
                         {localize('general.developerTools')}
                     </Text>
-                    {#if features.developerTools.faucet.enabled}
+                    {#if features.developerTools.deeplink.enabled}
                         <TestDeepLinkButton />
                     {/if}
                 </Pane>

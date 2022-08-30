@@ -1,5 +1,5 @@
-import onboardingFeatures from './onboardingFeatures'
-import developerToolsFeatures from './developerToolsFeatures'
+import onboardingFeatures from './onboarding.features'
+import developerToolsFeatures from './developer-tools.features'
 
 const features = {
     onboarding: onboardingFeatures,
