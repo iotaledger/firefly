@@ -16,16 +16,7 @@ export function handleTransactionProgress(accountId: string, payload: Transactio
     }
 }
 
-// TODO: Fix bug where you can click outside of transaction confirmation prompt without confirming, causing
-// it to try sending a transaction. Need to prevent the Ledger transaction popup from being closed (can only be closed
-// by an action on the Ledger device from the user).
-
 // TODO: Should we uppercase the hash to match the Ledger device?
-
-// TODO: Fix weird popup shit (see what Bego said)
-
-// TODO: Confirm that blind signing transactions don't fuck with your funds (see what happened
-// with devnet wallet 1 (988 SMR) and wallet 2 (12 SMR)
 
 function handleTransactionProgressInternal(
     payload: TransactionProgressPayload,

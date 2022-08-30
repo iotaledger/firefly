@@ -25,6 +25,7 @@
             openPopup({
                 type: 'sendConfirmation',
                 props: sendConfirmationPopupProps,
+                overflow: true,
             })
             resetLedgerSendConfirmationProps()
         } else if (mintNativeTokenConfirmationPopupProps) {
