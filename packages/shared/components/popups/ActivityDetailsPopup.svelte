@@ -30,7 +30,7 @@
     $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
     $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
     $: isTimelocked =
-        activity.data.type === ActivityType.Transaction && activity.data.async === ActivityAsyncStatus.Timelocked
+        activity.data.type === ActivityType.Transaction && activity.data.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         activity.data.type === ActivityType.Transaction &&
         activity.data.isAsync &&
