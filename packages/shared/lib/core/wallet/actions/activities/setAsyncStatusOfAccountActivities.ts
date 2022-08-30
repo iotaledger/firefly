@@ -7,7 +7,9 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
     allAccountActivities.update((state) => {
         state.forEach((accountActivities, accountId) => {
             for (const activity of accountActivities.filter(
-                (_activity) => _activity.data.type === ActivityType.Transaction && _activity.data.isAsync
+                (_activity) =>
+                    _activity.data.type === ActivityType.Transaction &&
+                    (_activity.data.isAsync || _activity.data.timelockDate)
             )) {
                 if (activity.data.type === ActivityType.Transaction) {
                     const oldAsyncStatus = activity.data.asyncStatus

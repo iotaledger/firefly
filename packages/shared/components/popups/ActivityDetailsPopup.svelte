@@ -21,7 +21,6 @@
     import { setClipboard } from '@lib/utils'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
-    import { time } from '@core/app'
 
     export let activityId: string
 
@@ -30,7 +29,8 @@
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
     $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
-    $: isTimelocked = activity.data.type === ActivityType.Transaction && activity.data.timelockDate > $time
+    $: isTimelocked =
+        activity.data.type === ActivityType.Transaction && activity.data.async === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         activity.data.type === ActivityType.Transaction &&
         activity.data.isAsync &&

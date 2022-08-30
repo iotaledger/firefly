@@ -67,14 +67,21 @@ export class Activity implements IActivity {
     }
 
     getAsyncStatus(time: Date): ActivityAsyncStatus {
-        if (this.data.type === ActivityType.Transaction && this.data.isAsync) {
-            if (this.data.isClaimed) {
-                return ActivityAsyncStatus.Claimed
-            } else {
-                if (time > this.data.expirationDate) {
-                    return ActivityAsyncStatus.Expired
+        if (this.data.type === ActivityType.Transaction) {
+            if (this.data.timelockDate) {
+                if (this.data.timelockDate.getTime() > time.getTime()) {
+                    return ActivityAsyncStatus.Timelocked
+                }
+            }
+            if (this.data.isAsync) {
+                if (this.data.isClaimed) {
+                    return ActivityAsyncStatus.Claimed
                 } else {
-                    return ActivityAsyncStatus.Unclaimed
+                    if (time > this.data.expirationDate) {
+                        return ActivityAsyncStatus.Expired
+                    } else {
+                        return ActivityAsyncStatus.Unclaimed
+                    }
                 }
             }
         }

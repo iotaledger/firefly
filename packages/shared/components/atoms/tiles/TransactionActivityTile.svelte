@@ -33,7 +33,7 @@
     $: isIncomingActivityUnclaimed =
         (data.direction === ActivityDirection.In || data.isSelfTransaction) &&
         data.asyncStatus === ActivityAsyncStatus.Unclaimed
-    $: isTimelocked = data.timelockDate > $time
+    $: isTimelocked = data.asyncStatus === ActivityAsyncStatus.Timelocked
     $: title = getTitle(data, inclusionState)
     $: subjectLocale = getSubjectLocale(data.subject)
     $: timeDiff = getTimeDiff(data)
