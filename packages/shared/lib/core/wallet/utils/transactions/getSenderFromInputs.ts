@@ -17,6 +17,7 @@ export function getSenderFromInputs(inputs: IOutputResponse[]): Subject {
         if (output.type !== OUTPUT_TYPE_TREASURY) {
             const { unlockConditions } = output
 
+            // A transaction with an expiration unlock condition is included if the transaction expired
             const expirationUnlockCondition = unlockConditions.find(
                 ({ type }) => type === UNLOCK_CONDITION_EXPIRATION
             ) as IExpirationUnlockCondition
