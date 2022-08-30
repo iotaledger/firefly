@@ -47,14 +47,11 @@
                     ? `${$activeProfile.settings.networkConfig.network.name} ${localize('general.address')}`
                     : localize('general.myAddress')}
             </Text>
-            <Text
-                type="pre"
-                overrideColor
-                classes="text-13 px-4 mb-10 text-blue-500"
-                on:click={() => setClipboard($selectedAccountStore.depositAddress)}
-            >
-                {$selectedAccountStore.depositAddress}
-            </Text>
+            <div on:click={() => setClipboard($selectedAccountStore.depositAddress)}>
+                <Text type="pre" overrideColor classes="text-13 px-4 mb-10 text-blue-500">
+                    {$selectedAccountStore.depositAddress}
+                </Text>
+            </div>
         </div>
         <div class="flex flex-col space-y-4 justify-center items-center h-12 w-full">
             <Button

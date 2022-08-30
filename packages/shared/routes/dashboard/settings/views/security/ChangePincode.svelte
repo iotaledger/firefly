@@ -89,7 +89,7 @@
 
 <!-- TODO: improve UX for mobile, 3 step screen -->
 <form
-    on:submit={changePincode}
+    on:submit|preventDefault={changePincode}
     id="pincode-change-form"
     style="margin-top: {$mobile && $isKeyboardOpened
         ? '-20%'
