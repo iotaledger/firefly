@@ -67,7 +67,7 @@
                 )}
             </Text>
         </header>
-        <main class="h-full overflow-y-auto px-5 mb-10">
+        <main class="h-full overflow-y-auto overflow-x-hidden px-5 mb-10">
             {#if $profileRoute === ProfileRoute.ProfileActions}
                 <ProfileActions {profileColor} {profileInitial} {handleSettingsClick} />
             {:else if $profileRoute === ProfileRoute.Settings}
