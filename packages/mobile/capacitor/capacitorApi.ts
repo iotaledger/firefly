@@ -200,7 +200,7 @@ export const CapacitorApi: IPlatform = {
             { label: 'Manufacturer', value: info.manufacturer },
             { label: 'Webview version', value: info.webViewVersion },
             { label: 'Memory used', value: `${(info.memUsed / 1024 / 1024).toFixed(2)} MB` },
-            { label: 'Disk free', value: `${(info.realDiskFree / 1024 / 1024).toFixed((2))} MB` },
+            { label: 'Disk free', value: `${(info.realDiskFree / 1024 / 1024).toFixed(2)} MB` },
         ]
     },
 
