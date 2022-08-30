@@ -35,6 +35,7 @@
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'
     import { Platform } from '@lib/platform'
+    import { getVersionDetails } from '@lib/appUpdater'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
     stage.set(Stage[process.env.STAGE?.toUpperCase()] ?? Stage.ALPHA)
@@ -118,6 +119,7 @@
         }, 3000)
 
         initRouters()
+        await getVersionDetails()
         await pollMarketData()
         await pollNetworkStatus()
     })
