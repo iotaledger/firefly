@@ -14,6 +14,7 @@ export interface ITransactionActivityData {
     isSelfTransaction: boolean
     isAsync: boolean
     asyncStatus: ActivityAsyncStatus
+    timelockDate: Date
     expirationDate: Date
     isRejected: boolean
     isClaiming: boolean

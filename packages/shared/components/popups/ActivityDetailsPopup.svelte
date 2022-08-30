@@ -29,14 +29,17 @@
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
     $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
+    $: isTimelocked =
+        activity.data.type === ActivityType.Transaction && activity.data.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         activity.data.type === ActivityType.Transaction &&
         activity.data.isAsync &&
         (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) &&
         activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
+
     $: transactionDetails = {
         asset,
-        time: activity?.time,
+        transactionTime: activity?.time,
         direction: ActivityDirection.Out,
         inclusionState: activity?.inclusionState,
         rawAmount: activity?.data.rawAmount,
@@ -47,17 +50,16 @@
         storageDeposit: activity?.data.storageDeposit,
         giftedStorageDeposit: activity?.data.giftedStorageDeposit,
         amount,
-        type: activity?.data.type,
         unit: asset?.metadata?.unit,
         ...(activity?.data.type === ActivityType.Transaction && {
             asyncStatus: activity?.data.asyncStatus,
             claimedDate: activity?.data.claimedDate,
             claimingTransactionId: activity?.data.claimingTransactionId,
             expirationDate: activity?.data.expirationDate,
+            timelockDate: activity?.data.timelockDate,
             subject: activity?.data?.subject,
             tag: activity?.data?.tag,
             metadata: activity?.data?.metadata,
-            isInternal: activity?.data?.isInternal,
         }),
     }
 
@@ -79,7 +81,7 @@
         }
     }
 
-    function reject() {
+    function reject(): void {
         openPopup({
             type: 'confirmation',
             props: {
@@ -124,7 +126,7 @@
         {/if}
     </div>
     <TransactionDetails {...transactionDetails} />
-    {#if activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
+    {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
         <div class="flex w-full justify-between space-x-4">
             <button
                 disabled={activity.data.isClaiming || activity.data.isRejected}
