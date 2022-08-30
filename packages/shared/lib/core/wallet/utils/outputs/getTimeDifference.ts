@@ -6,8 +6,8 @@ import {
     SECONDS_PER_MINUTE,
 } from 'shared/lib/time'
 
-export function getTimeDifference(date: Date, time: Date): string {
-    const elapsedTime = date.getTime() - time.getTime()
+export function getTimeDifference(earlyDate: Date, lateDate: Date): string {
+    const elapsedTime = earlyDate.getTime() - lateDate.getTime()
     const days = Math.floor(elapsedTime / (MILLISECONDS_PER_SECOND * SECONDS_PER_DAY))
     const hours = Math.floor(
         (elapsedTime / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE * MINUTES_PER_HOUR)) % HOURS_PER_DAY

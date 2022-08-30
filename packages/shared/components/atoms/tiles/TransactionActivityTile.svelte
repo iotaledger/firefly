@@ -36,14 +36,16 @@
     $: isTimelocked = data.timelockDate > $time
     $: title = getTitle(data, inclusionState)
     $: subjectLocale = getSubjectLocale(data.subject)
+    $: timeDiff = getTimeDiff(data)
 
-    let timeDiff: string
-    $: if (isTimelocked) {
-        timeDiff = getTimeDifference(data.timelockDate, $time)
-    } else if (data.isAsync && !data.isClaimed && data?.expirationDate) {
-        timeDiff = getTimeDifference(data.expirationDate, $time)
-    } else {
-        timeDiff = localize('general.none')
+    function getTimeDiff(txData: ITransactionActivityData): string {
+        if (isTimelocked) {
+            return getTimeDifference(txData.timelockDate, $time)
+        } else if (txData.isAsync && !txData.isClaimed && txData?.expirationDate) {
+            return getTimeDifference(txData.expirationDate, $time)
+        } else {
+            return localize('general.none')
+        }
     }
 
     function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {

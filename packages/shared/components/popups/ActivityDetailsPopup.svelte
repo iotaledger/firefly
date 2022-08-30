@@ -39,24 +39,24 @@
 
     $: transactionDetails = {
         asset,
-        transactionTime: activity.time,
+        transactionTime: activity?.time,
         direction: ActivityDirection.Out,
         inclusionState: activity?.inclusionState,
         rawAmount: activity?.data.rawAmount,
-        formattedFiatValue: activity.getFiatAmount(
+        formattedFiatValue: activity?.getFiatAmount(
             $currencies[CurrencyTypes.USD],
             $exchangeRates[$activeProfile?.settings?.currency]
         ),
-        storageDeposit: activity.data.storageDeposit,
-        giftedStorageDeposit: activity.data.giftedStorageDeposit,
+        storageDeposit: activity?.data.storageDeposit,
+        giftedStorageDeposit: activity?.data.giftedStorageDeposit,
         amount,
         unit: asset?.metadata?.unit,
         ...(activity?.data.type === ActivityType.Transaction && {
-            asyncStatus: activity.data.asyncStatus,
-            claimedDate: activity.data.claimedDate,
-            claimingTransactionId: activity.data.claimingTransactionId,
-            expirationDate: activity.data.expirationDate,
-            timelockDate: activity.data.timelockDate,
+            asyncStatus: activity?.data.asyncStatus,
+            claimedDate: activity?.data.claimedDate,
+            claimingTransactionId: activity?.data.claimingTransactionId,
+            expirationDate: activity?.data.expirationDate,
+            timelockDate: activity?.data.timelockDate,
             subject: activity?.data?.subject,
             tag: activity?.data?.tag,
             metadata: activity?.data?.metadata,
