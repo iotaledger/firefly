@@ -64,7 +64,7 @@ const prodConfig = () => ({
             { x: 170, y: 250, type: 'file' },
         ],
     },
-    nsis: { oneClick: true, deleteAppDataOnUninstall: false },
+    nsis: { oneClick: true, deleteAppDataOnUninstall: false, perMachine: true },
     win: {
         icon: './public/assets/icons/prod/icon1024x1024.png',
         publisherName: 'IOTA Stiftung',

@@ -1,3 +1,7 @@
+!addincludedir build
+
+!addplugindir /x86-unicode "build\x86-unicode"
+!addplugindir /x86-ansi "build\x86-ansi"
 !include LogicLib.nsh
 
 !macro customInstall
