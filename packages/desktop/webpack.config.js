@@ -148,6 +148,11 @@ const rendererPlugins = [
                     return 'locales/[name].[ext]'
                 },
             },
+            {
+                from: '**/*',
+                context: path.resolve(__dirname, 'nsis'),
+                to: 'build',
+            },
         ],
     }),
     new MiniCssExtractPlugin({
