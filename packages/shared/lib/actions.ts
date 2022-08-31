@@ -1,5 +1,7 @@
-import { isAndroid } from '@lib/app'
+import { isAndroid as is_android } from '@lib/app'
 
+let isAndroid
+is_android.subscribe((value) => (isAndroid = value))
 /**
  * Dispatch event on click outside of node
  * source: https://svelte.dev/repl/0ace7a508bd843b798ae599940a91783?version=3.16.7
