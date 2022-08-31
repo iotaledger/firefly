@@ -51,7 +51,7 @@
             </Button>
         </div>
     </div>
-    <div slot="actions" class={$mobile ? 'w-full' : ''}>
+    <div slot="actions" class={$mobile ? 'pb-8 w-full' : ''}>
         <Button classes={$mobile ? 'w-full' : 'w-64 my-8'} onClick={() => handleContinueClick()}>
             {locale('actions.continue')}
         </Button>
