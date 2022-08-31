@@ -1,13 +1,16 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { AssetTile, Text } from 'shared/components'
+    import { AssetTile, Text, Spinner } from 'shared/components'
     import { mobile } from 'shared/lib/app'
     import { assets } from 'shared/lib/assets'
+    import { isSyncing, currentSyncingAccountStore, selectedAccountIdStore } from '@lib/wallet'
 
     export let classes = ''
     export let scroll = true
     export let bottomOffset = '1.5rem'
     export let scrollDetection = (node: Element): void => {}
+
+    $: isSelectedAccountSyncing = $currentSyncingAccountStore?.id === $selectedAccountIdStore || $isSyncing
 </script>
 
 <div
@@ -16,7 +19,12 @@
         : 'p-6'} {classes}"
     style="--bottom-offset: {bottomOffset}"
 >
-    <Text classes="text-left" type="h5">{localize('general.myAssets')}</Text>
+    <div class="flex relative">
+        <Text classes="text-left mr-2" type="h5">{localize('general.myAssets')}</Text>
+        {#if isSelectedAccountSyncing && $mobile}
+            <Spinner busy={true} classes="absolute right-0" />
+        {/if}
+    </div>
     <div
         class="flex flex-auto flex-col h-0 -mr-2 pr-2 {scroll ? 'overflow-y-auto scroll-secondary' : ''}"
         use:scrollDetection
