@@ -16,10 +16,6 @@
 
     const dispatch = createEventDispatcher()
 
-    onMount(() => {
-        pinRef.resetAndFocus()
-    })
-
     $: pinInput, (error = '')
 
     function onSubmit(): void {
@@ -57,7 +53,7 @@
             glimpse
             classes="w-full mx-auto block mb-5"
             on:submit={onSubmit}
-            autofocus
+            autofocus={!$mobile}
             disabled={busy}
             {error}
         />
