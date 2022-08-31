@@ -1,10 +1,10 @@
 import { writable } from 'svelte/store'
 
-import { LedgerMintNativeTokenConfirmationProps } from '../interfaces'
+import { ILedgerMintNativeTokenConfirmationProps } from '../interfaces'
 
-export const ledgerMintNativeTokenConfirmationProps = writable<LedgerMintNativeTokenConfirmationProps>(null)
+export const ledgerMintNativeTokenConfirmationProps = writable<ILedgerMintNativeTokenConfirmationProps>(null)
 
-export function updateLedgerMintNativeTokenConfirmationProps(payload: LedgerMintNativeTokenConfirmationProps): void {
+export function updateLedgerMintNativeTokenConfirmationProps(payload: ILedgerMintNativeTokenConfirmationProps): void {
     ledgerMintNativeTokenConfirmationProps.set(payload)
 }
 

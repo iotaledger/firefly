@@ -28,6 +28,29 @@ The organization of a Svelte component **must** start with the script, followed 
 <style></style>
 ```
 
+## Props
+
+Each Svelte component can contain an arbitrary number of "prop" variables, useful for passing data between components easily without the direct use of stores.
+
+When initializing props, we use the following conventions:
+
+- Every prop **MUST** be typed
+- Props without a default value should not be initialized at all, resulting in an `undefined` value
+
+**Bad**
+
+```typescript
+export let myPropObject: IPropObject = {} // this will be truthy in conditionals
+export let showSomething: boolean = false
+```
+
+**Good**
+
+```typescript
+export let myPropObject: IPropObject
+export let showSomething: boolean
+```
+
 ## Reactivity
 
 At the heart of Svelte is a powerful system of reactivity for keeping the DOM in sync with the application state — for example, in response to an event. This section describes our approach to  throughout the codebase. Reactive stores (a language feature) assign a store value (app state) to a local variable, and thanks to Svelte reactivity all the markup and reactive dependencies are updated in **Svelte Components**.

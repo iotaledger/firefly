@@ -2,25 +2,26 @@
     import { onDestroy } from 'svelte'
     import { Text, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { ledgerDeviceStatus } from '@core/ledger'
+    import {
+        ledgerDeviceStatus,
+        ledgerMintNativeTokenConfirmationProps,
+        ledgerSendConfirmationProps,
+    } from '@core/ledger'
     import { closePopup, openPopup } from '@lib/popup'
 
-    export let sendConfirmationPopupProps = null
-    export let mintNativeTokenPopupProps = null
-
-    const STEPS = Array.from(Array(4), (_, i) => `step_${i + 1}`)
+    const STEPS = [1, 2, 3, 4]
 
     function onClosePopup(): void {
-        if (sendConfirmationPopupProps) {
+        if ($ledgerSendConfirmationProps) {
             openPopup({
                 type: 'sendConfirmation',
-                props: sendConfirmationPopupProps,
+                props: $ledgerSendConfirmationProps,
                 overflow: true,
             })
-        } else if (mintNativeTokenPopupProps) {
+        } else if ($ledgerMintNativeTokenConfirmationProps) {
             openPopup({
                 type: 'mintNativeTokenForm',
-                props: mintNativeTokenPopupProps,
+                props: $ledgerMintNativeTokenConfirmationProps,
             })
         }
     }
@@ -42,9 +43,9 @@
         </span>
     </div>
     <div>
-        {#each STEPS as step, i}
+        {#each STEPS as step}
             <Text type="p" fontSize="15" color="gray-600" classes="my-2">
-                {i + 1}. {localize(`popups.enableLedgerBlindSigning.${step}`)}
+                {step}. {localize(`popups.enableLedgerBlindSigning.step_${step}`)}
             </Text>
         {/each}
     </div>

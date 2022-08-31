@@ -5,7 +5,7 @@ export function formatHexString(
     shouldBeUppercase: boolean = true,
     shouldIncludePrefix: boolean = true
 ): string {
-    if (!hex || typeof hex !== 'string' || !HEXADECIMAL_REGEXP.test(hex)) {
+    if (!hex || !HEXADECIMAL_REGEXP.test(hex)) {
         return '00'
     }
 

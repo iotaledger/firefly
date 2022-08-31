@@ -1,8 +1,8 @@
-import { BlindLedgerTransaction } from './blind-ledger-transaction.type'
-import { RegularTransaction } from './regular-transaction.type'
+import { PreparedTransaction } from './prepared-transaction.type'
+import { PreparedTransactionEssenceHashType } from './prepared-transaction-essence-hash.type'
 
-export type TransactionProgressPayload =
+export type TransactionProgressEventPayload =
     | 'PerformingPow'
     | 'SigningTransaction'
-    | RegularTransaction
-    | BlindLedgerTransaction
+    | PreparedTransaction
+    | PreparedTransactionEssenceHashType

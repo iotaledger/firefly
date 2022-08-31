@@ -188,7 +188,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerProfile: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
             restoreProfile: {
@@ -204,7 +204,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
         },
@@ -229,7 +229,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerProfile: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
             restoreProfile: {
@@ -245,7 +245,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: true,
+                    enabled: false,
                 },
             },
         },

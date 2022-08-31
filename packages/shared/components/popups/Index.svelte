@@ -23,7 +23,7 @@
     import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
     import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
-    import LedgerTransaction from './LedgerTransaction.svelte'
+    import LedgerTransactionPopup from './LedgerTransactionPopup.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import PasswordPopup from './PasswordPopup.svelte'
@@ -108,7 +108,7 @@
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
         ledgerConnectionGuide: LedgerConnectionGuide,
-        ledgerTransaction: LedgerTransaction,
+        ledgerTransaction: LedgerTransactionPopup,
         ledgerLegacyTransaction: LedgerLegacyTransaction,
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,

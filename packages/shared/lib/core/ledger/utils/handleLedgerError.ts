@@ -3,29 +3,39 @@ import { get } from 'svelte/store'
 import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
 import { closePopup, popupState } from '@lib/popup'
-import { PopupType } from '@auxiliary/popup'
 
 import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
 import { deriveLedgerError } from '../helpers'
+import { resetLedgerMintNativeTokenConfirmationProps, resetLedgerSendConfirmationProps } from '../stores'
 
-export function handleLedgerError(error: string): void {
+export function handleLedgerError(error: string, resetConfirmationPropsOnDenial: boolean = true): void {
     const ledgerError = deriveLedgerError(error)
     if (ledgerError in LEDGER_ERROR_LOCALES) {
         const popupType = get(popupState)?.type
 
-        closePopup(true)
+        const wasDeniedByUser = ledgerError === LedgerError.DeniedByUser
+
+        /**
+         * NOTE: We may wish to reset the confirmation props to avoid
+         * re-opening the popup if the user manually rejected the prompt
+         * on the device.
+         */
+        if (wasDeniedByUser && resetConfirmationPropsOnDenial) {
+            resetLedgerSendConfirmationProps()
+            resetLedgerMintNativeTokenConfirmationProps()
+        }
 
         /**
          * NOTE: Because the device has a warning prompt about blind signing when trying it
          * while it's disabled, the user has to manually reject it on the device. This results in
          * an error, however it is bad UX to display it to the user when they meant to do it.
          */
-        const hadToEnableBlindSinging =
-            popupType === PopupType.EnableLedgerBlindSigning && ledgerError === LedgerError.DeniedByUser
+        const hadToEnableBlindSinging = popupType === 'enableLedgerBlindSigning' && wasDeniedByUser
         if (!hadToEnableBlindSinging) {
+            closePopup(true)
             showAppNotification({
-                type: 'error',
+                type: wasDeniedByUser ? 'warning' : 'error',
                 alert: true,
                 message: localize(LEDGER_ERROR_LOCALES[ledgerError]),
             })

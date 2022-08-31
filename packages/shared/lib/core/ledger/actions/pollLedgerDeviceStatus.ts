@@ -14,9 +14,9 @@ export function pollLedgerDeviceStatus(
     _onCancel: () => void = () => {}
 ): void {
     if (!get(isPollingLedgerDeviceStatus)) {
-        getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+        void getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
         intervalTimer = setInterval(() => {
-            getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+            void getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
         }, pollInterval)
 
         isPollingLedgerDeviceStatus.set(true)

@@ -1,4 +1,4 @@
-export interface LedgerMintNativeTokenConfirmationProps {
+export interface ILedgerMintNativeTokenConfirmationProps {
     name: string
     totalSupply: number
     circulatingSupply: number

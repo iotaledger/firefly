@@ -1,5 +1,5 @@
-export * from './blind-ledger-transaction.type'
 export * from './new-output-event.type'
-export * from './regular-transaction.type'
+export * from './prepared-transaction.type'
+export * from './prepared-transaction-essence-hash.type'
 export * from './transaction-inclusion-event.type'
 export * from './transaction-progress-payload.type'
