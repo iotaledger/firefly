@@ -36,11 +36,16 @@
             } catch (err) {
                 if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
                     await initialiseProfileManagerFromOnboardingProfile(false)
-                    await destroyShimmerClaimingProfileManager()
-                    await createShimmerClaimingProfileManager()
+
+                    if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
+                        await destroyShimmerClaimingProfileManager()
+                        await createShimmerClaimingProfileManager()
+                    }
+                } else if (err?.error.match(/`invalid stronghold password`/)) {
+                    error = localize('error.password.incorrect')
                 } else {
                     console.error(err)
-                    error = localize('error.password.incorrect')
+                    error = localize('error.global.generic')
                 }
             }
         }

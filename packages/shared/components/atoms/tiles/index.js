@@ -1,4 +1,5 @@
-export { default as ActivityTile } from './ActivityTile.svelte'
+export { default as TransactionActivityTile } from './TransactionActivityTile.svelte'
+export { default as FoundryActivityTile } from './FoundryActivityTile.svelte'
 export { default as AssetTile } from './AssetTile.svelte'
 export { default as ClickableTile } from './ClickableTile.svelte'
 export { default as ShimmerClaimingAccountTile } from './ShimmerClaimingAccountTile.svelte'

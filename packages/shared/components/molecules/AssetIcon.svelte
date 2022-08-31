@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { COIN_TYPE, NetworkProtocol } from '@core/network'
-    import { getAssetInitials, IAsset, SPECIAL_TOKEN_ID } from '@core/wallet'
+    import { getAssetInitials, IPersistedAsset, SPECIAL_TOKEN_ID } from '@core/wallet'
     import { VerificationStatus } from '@core/wallet/enums/verification-status.enum'
     import { isBright } from '@lib/helpers'
     import { Animation, Icon, VerificationBadge } from 'shared/components'
 
-    export let asset: IAsset
+    export let asset: IPersistedAsset
     export let large = false
     export let small = false
     export let showVerifiedBadgeOnly = false

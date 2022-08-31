@@ -5,11 +5,19 @@
     import {
         activityFilter,
         activitySearchTerm,
+        ActivityType,
         queriedActivities,
         selectedAccountActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
-    import { ActivityTile, Text, TextInput, TogglableButton, Filter } from 'shared/components'
+    import {
+        TransactionActivityTile,
+        FoundryActivityTile,
+        Text,
+        TextInput,
+        TogglableButton,
+        Filter,
+    } from 'shared/components'
     import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeight } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
@@ -94,7 +102,23 @@
                             {item.title} • {item.amount}
                         </Text>
                     {/if}
-                    <ActivityTile activity={item.activity} />
+                    {#if item.activity.data.type === ActivityType.Transaction}
+                        <TransactionActivityTile
+                            activityId={item.activity.id}
+                            inclusionState={item.activity.inclusionState}
+                            fiatAmount={item.activity.getFiatAmount()}
+                            amount={item.activity.getFormattedAmount()}
+                            data={item.activity.data}
+                        />
+                    {:else}
+                        <FoundryActivityTile
+                            activityId={item.activity.id}
+                            inclusionState={item.activity.inclusionState}
+                            fiatAmount={item.activity.getFiatAmount()}
+                            amount={item.activity.getFormattedAmount()}
+                            data={item.activity.data}
+                        />
+                    {/if}
                 </div>
             </VirtualList>
         {:else}

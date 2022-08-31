@@ -1,7 +1,7 @@
 import { addError } from '@core/error'
 
 import { WalletOperation } from '../../enums'
-import { handleDeepLinkSendOperation } from './operations/handleDeepLinkSendOperation'
+import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperation } from './operations'
 
 /**
  * Parses a deep link within the wallet context.
@@ -23,10 +23,10 @@ export function handleDeepLinkWalletContext(url: URL): void {
 
     switch (pathnameParts[0]) {
         case WalletOperation.SendForm:
-            handleDeepLinkSendOperation(url.searchParams)
+            handleDeepLinkSendFormOperation(url.searchParams)
             break
         case WalletOperation.SendConfirmation:
-            handleDeepLinkSendOperation(url.searchParams, true)
+            handleDeepLinkSendConfirmationOperation(url.searchParams)
             break
         default:
             return addError({
