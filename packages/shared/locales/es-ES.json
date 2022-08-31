@@ -7,7 +7,8 @@
         "legal": {
             "title": "Política de Privacidad & Términos de Servicio",
             "body": "Por favor revisa la Política de Privacidad y los Términos de Servicio.",
-            "checkbox": "He leído y acepto la Política de Privacidad y los Términos de Servicio"
+            "checkbox": "He leído y acepto la Política de Privacidad y los Términos de Servicio",
+            "checkboxMobile": "He leido y acepto"
         },
         "crashReporting": {
             "title": "Informe de fallos",
@@ -124,9 +125,9 @@
             "body": "Has realizado una copia de seguridad de tus carteras a un Stronghold."
         },
         "congratulations": {
-            "title": "Configuración de la cartera completada",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Fondos migrados",
-            "body": "Tu nueva cartera está lista para usar.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Tus fondos han sido migrados con éxito a la nueva red",
             "fireflyLedgerBody": "Tu cuenta de Ledger se ha recuperado con éxito y ahora puedes continuar.",
             "trinityLedgerBody": "Has migrado con éxito tu Ledger a la nueva red.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Restaura tus carteras usando una copia de seguridad",
-            "body": "Importa un archivo de copia de seguridad para restaurar tus carteras. Las copias de seguridad pueden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx)."
+            "body": "Importa un archivo de copia de seguridad para restaurar tus carteras. Las copias de seguridad pueden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Subir un archivo para restaurar los fondos de la cartera existente. Sólo la copia de seguridad de Firefly Stronghold es compatible con el móvil. Para la copia de seguridad de Trinity SeedVault, por favor utilice la cartera de escritorio."
         },
         "importFromLedger": {
             "title": "Restaurar o Migrar tú Ledger",
@@ -250,7 +252,7 @@
             "title": "Advertencia",
             "body1": "Tienes fondos en una o más direcciones gastadas.",
             "body2": "Te recomendamos que ejecutes un proceso automatizado para ayudar a proteger y transferir estos fondos de forma segura.",
-            "body3": "Si cierras la aplicación tendrás que reiniciar toda la migración.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Aprende sobre las direcciones gastadas"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Red operativa",
                 "networkDegraded": "Red degradada",
                 "networkDown": "Red desconectada",
+                "networkUnreachable": "Red no disponible",
                 "status": "Estado",
                 "messagesPerSecond": "Mensajes por segundo",
                 "referencedRate": "Tasa referenciada"
             },
             "profileModal": {
-                "allSettings": "Todos los ajustes",
+                "allSettings": {
+                    "title": "Todos los ajustes",
+                    "description": "Perfil, aplicación, seguridad"
+                },
                 "logout": "Cerrar sesión",
                 "stronghold": {
                     "title": "Perfil bloqueado",
@@ -491,7 +497,7 @@
                 },
                 "backup": {
                     "title": "Respalda tus carteras",
-                    "lastBackup": "La última vez que hiciste una copia de seguridad {date}",
+                    "lastBackup": "Tu última copia de seguridad {date}",
                     "notBackedUp": "No está respaldado",
                     "button": "Respaldo"
                 },
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "¿Ocultar {name}?",
             "body": "Puedes encontrar esta cartera más tarde activando \"Mostrar carteraras ocultas\" en Configuración Avanzada.",
-            "typePassword": "Escribe la contraseña de tu cartera para confirmar.",
+            "typePassword": "Escriba la contraseña de su cartera para confirmar.",
             "hideAccount": "Ocultar cartera",
             "errorTitle": "Incapaz de ocultar {name}",
             "errorBody1": "Para ocultar una cartera debe tener balance 0.",
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total de fondos en Staking",
             "stakedSuccessfully": "Tus fondos se han Stakeado para {account}.",
             "unstakedSuccessfully": "Tus fondos han sido quitados de Staking para {account}.",
-            "singleAccountHint": "¿Buscas tus carteras? Firefly ha cambiado. Alterne tus carteras en la barra de menú superior."
+            "mergeStakeDisclaimerVoting": "Fusionar tu stake también fusionará tus votos."
         },
         "stakingConfirmation": {
             "title": "Confirmar participación",
@@ -877,7 +883,8 @@
             "changingVote": "Cambiando voto",
             "manageVotes": "Gestionar votos",
             "partialVoteInfo": "Has recibido {amount} a {account}. Puedes votar con estos fondos combinándolos con tu voto actual.",
-            "mergeVoteDisclaimer": "Tenga en cuenta que los votos combinados no afectarán a ningún voto que ya haya sido contado",
+            "mergeVoteDisclaimer": "Tenga en cuenta que la fusión de votos no afectará a ningún voto que ya haya sido contado.",
+            "mergeVoteDisclaimerStaking": "Fusionar tus votos también fusionará tus fondos en stake.",
             "mergingVotes": "Votos combinados",
             "votedSuccessfully": "Has comenzado a votar con {account}.",
             "unvotedSuccessfully": "Has dejado de votar con {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Estas creando un perfil para desarrolladores",
             "body": "Te conectarás a Chrysalis Devnet por defecto y podrás cambiar de red manualmente. Continúa sólo si sabes lo que estas haciendo."
+        },
+        "confirmCloseApp": {
+            "title": "Estás a punto de cerrar la app",
+            "body": "¿Estás seguro? Vuelve atrás para cerrar la aplicación."
         },
         "crashReporting": {
             "title": "Informes de fallos",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrar a Chrysalis o restaurar una cartera existente",
         "createWallet": "Crear nueva cartera",
         "createWalletDescription": "Crear una nueva cartera en Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Guardar contraseña",
         "useBiometric": "Usar seguridad biométrica",
         "setupPin": "Establecer código PIN",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Fusionar voto",
         "stopVotes": "Dejar de votar",
         "okIUnderstand": "Vale, lo entiendo",
-        "readMore": "Leer más"
+        "readMore": "Leer más",
+        "chooseBackupFile": "Elegir copia de seguridad"
     },
     "general": {
         "password": "Contraseña",
+        "close": "Cerrar",
         "confirmPassword": "Confirmar contraseña",
         "currentPassword": "Contraseña actual",
         "newPassword": "Nueva contraseña",
@@ -1066,9 +1080,12 @@
         "received": "Recibido",
         "sendPayment": "Enviar Pago",
         "moveFunds": "Transferencia Interna",
+        "moveFundsButton": "Interno",
+        "unit": "Unidad",
         "sendTo": "Enviar a",
         "sendFunds": "Enviar fondos",
         "sendToAddress": "Enviar a una dirección",
+        "scanQr": "Escanear código QR",
         "scanQrOrPaste": "Escanea un código QR o pega una dirección",
         "moveFundsBetweenAccounts": "Mover fondos entre carteras",
         "sendTokensToAddress": "Enviar tokens a una dirección",
@@ -1111,6 +1128,7 @@
         "createAccount": "Crear una Cartera",
         "createNewWallet": "Crear una nueva cartera",
         "switchWallet": "Cambiar cartera",
+        "addAWallet": "Añadir una cartera",
         "accountName": "Nombre de cartera",
         "latestTransactions": "Últimas Transacciones",
         "transactions": "Transacciones",
@@ -1205,7 +1223,9 @@
         "accountColor": "Color de la billetera",
         "myAssets": "Mis activos",
         "option": "Opción",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "Ver en el Explorador",
+        "activityDetails": "Detalles de la transacción"
     },
     "dates": {
         "today": "Hoy",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "No alcanzarás la cantidad mínima de recompensas durante el periodo restante de Stake a menos que añadas más IOTA.",
             "bodyDidNotReachMin": "No has hecho Stake con la suficiente cantidad de IOTA para alcanzar las recompensas mínimas de {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Esta cartera no tiene suficientes tokens IOTA para alcanzar la recompensa mínima de airdrop de {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Actualización de unidad de Shimmer",
+            "body1": "Las unidades de SMR han cambiado después de una decisión de gobernanza. Los tokens de Shimmer se muestran ahora con 6 decimales; 1 SMR = 1,000.000 glow.",
+            "body2": "Aún tienes la misma cantidad de recompensas SMR, Firefly sólo formatea el valor de manera diferente."
         }
     },
     "exports": {

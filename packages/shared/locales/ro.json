@@ -7,7 +7,8 @@
         "legal": {
             "title": "Politica de confidențialitate & Termenii de utilizare",
             "body": "Te rog să revizuiești Politica de Confidențialitate și Termeni și Condiții.",
-            "checkbox": "Am citit și sunt de acord cu Politica de confidențialitate și Termenii de utilizare"
+            "checkbox": "Am citit și sunt de acord cu Politica de confidențialitate și Termenii de utilizare",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -15,7 +16,7 @@
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "appearance": {
-            "title": "Afișare",
+            "title": "Appearance",
             "body": "Alegeți tema aplicației."
         },
         "profile": {
@@ -124,9 +125,9 @@
             "body": "Ați făcut o copie de rezervă a portofelelor personale în Stronghold."
         },
         "congratulations": {
-            "title": "Configurarea portofelului finalizată",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Fonduri migrate",
-            "body": "Noul tău portofel este gata de utilizare.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Ați migrat cu succes fondurile către noua rețea",
             "fireflyLedgerBody": "Contul dvs Ledger a fost recuperat cu succes și acum puteți continua.",
             "trinityLedgerBody": "Ați migrat cu succes Ledger în noua rețea.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Restaurați portofelele personale folosind un fișier de rezerva",
-            "body": "Importă un fişier de rezervă pentru a restaura portofelele personale. Fisierele de rezervă pot fi Stronghold (.stronghold) sau Trinity SeedVault (.kdbx)."
+            "body": "Importă un fişier de rezervă pentru a restaura portofelele personale. Fisierele de rezervă pot fi Stronghold (.stronghold) sau Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Restaurați sau migrați Ledger-ul dvs",
@@ -190,7 +192,7 @@
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
-            "title": "Generează o adresă nouă",
+            "title": "Generate new address",
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
             "confirmTitle": "Confirm the new address",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
@@ -227,7 +229,7 @@
             "body2": "Poate dura ceva timp. Nu opri dispozitivul în timpul migrării.",
             "existing": "Vechiul tău portofel",
             "new": "Noul tău portofel",
-            "learn": "Află mai multe despre migrație",
+            "learn": "Learn about the migration",
             "beginMigration": "Începe migrarea",
             "migrating": "Migrarea fondurilor...",
             "migrated": "{balance} a migrat",
@@ -250,7 +252,7 @@
             "title": "Atenţie",
             "body1": "Ai fonduri pentru una sau mai multe adrese cheltuite.",
             "body2": "Îți recomandăm să rulezi un proces automatizat pentru a ajuta la securizarea și transferul acestor fonduri în siguranță.",
-            "body3": "Dacă închideți aplicația, va trebui să reporniți întreaga migrare.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Învață despre adresele cheltuite"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Migrate funds",
             "transaction": "Transaction {number}",
-            "rerun": "Încearcă din nou"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "Stare",
                 "messagesPerSecond": "Mesaje pe secundă",
                 "referencedRate": "Referenced rate"
             },
             "profileModal": {
-                "allSettings": "Toate setările",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Deconectează-te",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "Ultima {date} a copiei de rezervă",
-                    "notBackedUp": "Fara copie de rezerva",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "Ascunde {name}?",
             "body": "Poți găsi acest portofel mai târziu activând \"Arată portofelele ascunse\" în Setări Avansate.",
-            "typePassword": "Introduceți parola portofelului pentru a confirma.",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Ascunde portofelul",
             "errorTitle": "Imposibil de ascuns {name}",
             "errorBody1": "Pentru a ascunde un portofel trebuie să aibă sold 0.",
@@ -718,7 +724,7 @@
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Mesaje pe secundă",
+                "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
             }
         },
@@ -734,12 +740,12 @@
             "empty": "The error log is empty."
         },
         "deleteProfile": {
-            "title": "Șterge profilul",
+            "title": "Delete profile",
             "confirmation": "Are you sure you want to delete this profile? This operation cannot be undone.",
             "typePassword": "Type your password to confirm."
         },
         "diagnostics": {
-            "title": "Diagnostice",
+            "title": "Diagnostics",
             "node": "Node",
             "platform": "Platformă",
             "platformVersion": "Versiunea platformei",
@@ -823,7 +829,7 @@
                 "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
-                "title": "Confirmați tranzacția",
+                "title": "Confirm transaction",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total fonduri mizate",
             "stakedSuccessfully": "Fondurile dumneavoastra au fost mizate din contul {account}.",
             "unstakedSuccessfully": "Fondurile dumneavoastra au fost scoase din mizare din contul {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Creează portofel nou",
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Salvează parola",
         "useBiometric": "Utilizează securitatea biometrică",
         "setupPin": "Setează-ți un cod PIN",
@@ -991,9 +1003,9 @@
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
         "viewAddressHistory": "View address history",
-        "hideAccount": "Ascunde portofelul",
+        "hideAccount": "Hide wallet",
         "showAccount": "Unhide wallet",
-        "deleteAccount": "Ștergere portofel",
+        "deleteAccount": "Delete wallet",
         "max": "Max",
         "addNode": "Add node",
         "updateNode": "Update node",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Caută din nou",
         "searching": "Căutare...",
         "closeFirefly": "Close Firefly",
-        "generateAddress": "Generează adresa",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Parolă",
+        "close": "Close",
         "confirmPassword": "Confirmă parola",
         "currentPassword": "Current password",
         "newPassword": "New password",
@@ -1066,9 +1080,12 @@
         "received": "Primit",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Send To",
         "sendFunds": "Trimite fonduri",
         "sendToAddress": "Send to address",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Scanează un cod QR sau lipește o Adresă",
         "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Send tokens to an address",
@@ -1111,6 +1128,7 @@
         "createAccount": "Create a Wallet",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "Receive Address",
         "newAddress": "New Address",
         "date": "Date",
-        "status": "Stare",
+        "status": "Status",
         "confirmed": "Confirmed",
         "pending": "Pending",
         "noAccounts": "You have no wallets, please create one.",
@@ -1198,14 +1216,16 @@
         "staking": "Mizare",
         "unstaking": "Oprirea mizarii",
         "notStaked": "Not staked",
-        "stakedFunds": "Fonduri mizate",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
         "voting": "Voting",
         "unvoting": "Unvoting",
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Today",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
@@ -1444,7 +1469,7 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Mizare",
+        "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",
         "activity": "Activity"

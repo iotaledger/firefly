@@ -7,7 +7,8 @@
         "legal": {
             "title": "Privacy beleid & Algemene voorwaarden",
             "body": "Lees het privacybeleid en de algemene voorwaarden.",
-            "checkbox": "Ik heb het privacy beleid en de algemene voorwaarden gelezen en ga hier mee akkoord"
+            "checkbox": "Ik heb het privacy beleid en de algemene voorwaarden gelezen en ga hier mee akkoord",
+            "checkboxMobile": "Ik heb gelezen en ik accepteer de"
         },
         "crashReporting": {
             "title": "Crash rapportering",
@@ -42,17 +43,17 @@
         "secure": {
             "title": "Beveilig uw portemonnee",
             "body1": "Sla op en print de PDF herstelkit.",
-            "body2": "Als je de herstelkit vult en deze veilig opslaat, kunt je jouw wallet altijd herstellen."
+            "body2": "Als je de herstelkit vult en deze veilig opslaat, kunt je jouw portemonnee altijd herstellen."
         },
         "create": {
-            "title": "Maak een wallet",
-            "body": "Maak een nieuwe wallet. Je kan kiezen voor een reguliere software wallet of, als je een Ledger apparaat hebt, een hardware wallet instellen.",
+            "title": "Maak een portemonnee",
+            "body": "Maak een nieuwe portemonnee. Je kan kiezen voor een reguliere software portemonnee of, als je een Ledger apparaat hebt, een hardware portemonnee instellen.",
             "softwareAccount": {
-                "title": "Ik wil een software wallet",
+                "title": "Ik wil een software portemonnee",
                 "description": "Maak een 24-woord Recovery Phrase"
             },
             "ledgerAccount": {
-                "title": "Ik wil een hardware wallet",
+                "title": "Ik wil een hardware portemonnee",
                 "description": "Ledger Nano S of Nano X vereist"
             }
         },
@@ -113,7 +114,7 @@
         },
         "backupWallet": {
             "title": "Maak een back-up naar een Stronghold bestand",
-            "body1": "Voer uw wachtwoord in om een back-up van uw wallet te maken naar een Stronghold bestand. Uw wachtwoord wordt gebruikt om de back-up te versleutelen.",
+            "body1": "Voer uw wachtwoord in om een back-up van uw portemonnee te maken naar een Stronghold bestand. Uw wachtwoord wordt gebruikt om de back-up te versleutelen.",
             "body2": "Redenen waarom digitale back-up's belangrijk zijn:",
             "reason1": "Herstel gemakkelijk uw portemonnee zonder uw herstelzin in te typen",
             "reason2": "Importeer uw portemonnees naar andere apparaten",
@@ -124,9 +125,9 @@
             "body": "Je hebt een back-up van je wallets gemaakt naar een Stronghold."
         },
         "congratulations": {
-            "title": "Portemonnee installatie voltooid",
+            "title": "Instellen van profiel voltooid!",
             "fundsMigrated": "Saldo gemigreerd",
-            "body": "Uw nieuwe portemonnee is klaar voor gebruik.",
+            "body": "Je nieuwe profiel is klaar voor gebruik.",
             "softwareMigratedBody": "Je hebt je saldo met succes gemigreerd naar het nieuwe netwerk",
             "fireflyLedgerBody": "Je Ledger-account is succesvol hersteld en je kan nu verdergaan.",
             "trinityLedgerBody": "Je hebt je saldo met succes overgezet naar het nieuwe netwerk.",
@@ -147,7 +148,7 @@
         "importFromText": {
             "seed": {
                 "title": "Voer uw seed in om de migratie te starten",
-                "body": "Een seed bestaat uit 81 tekens. Deze wordt gebruikt om een eerdere Trinity wallet te herstellen.",
+                "body": "Een seed bestaat uit 81 tekens. Deze wordt gebruikt om een eerdere Trinity portemonnee te herstellen.",
                 "enter": "Voer uw seed in"
             },
             "mnemonic": {
@@ -160,8 +161,9 @@
             "checksum": "Controlesom"
         },
         "importFromFile": {
-            "title": "Herstel uw wallet met een back-upbestand",
-            "body": "Importeer een back-upbestand om uw wallet te herstellen. Back-ups kunnen een Stronghold bestand (.stronghold) of een Trinity SeedVault bestand (.kdbx) zijn."
+            "title": "Herstel uw portemonnee met een back-upbestand",
+            "body": "Importeer een back-upbestand om uw portemonnee te herstellen. Back-ups kunnen een Stronghold bestand (.stronghold) of een Trinity SeedVault bestand (.kdbx) zijn.",
+            "bodyMobile": "Upload een bestand om bestaande portemonnee saldi te herstellen. Alleen Firefly Stronghold backup wordt op mobiel ondersteund. Voor een back-up van Trinity SeedVault, gebruik de desktop portemonnee."
         },
         "importFromLedger": {
             "title": "Herstel of Migreer uw Ledger",
@@ -250,7 +252,7 @@
             "title": "Waarschuwing",
             "body1": "Je hebt tokens op een of meer uitgegeven adressen.",
             "body2": "Wij raden je aan een geautomatiseerd proces te starten om te helpen deze tokens veilig te stellen en over te zetten.",
-            "body3": "Als u de app sluit moet u de hele migratie herstarten.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Leer meer over uitgegeven adressen"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Zorg ervoor dat uw Ledger is aangesloten en de {legacy} app te allen tijde open is tijdens migratie.",
             "migrate": "Saldo migreren",
             "transaction": "Transactie {number}",
-            "rerun": "Probeer opnieuw"
+            "rerun": "Opnieuw proberen"
         },
         "migrateFailed": {
             "title": "To do",
@@ -465,12 +467,16 @@
                 "networkOperational": "Netwerk operationeel",
                 "networkDegraded": "Netwerk gedegradeerd",
                 "networkDown": "Netwerk verbroken",
+                "networkUnreachable": "Netwerk onbereikbaar",
                 "status": "Status",
                 "messagesPerSecond": "Berichten per seconde",
                 "referencedRate": "Bevestigings percentage"
             },
             "profileModal": {
-                "allSettings": "Alle instellingen",
+                "allSettings": {
+                    "title": "Alle instellingen",
+                    "description": "Profiel, applicatie, beveiliging"
+                },
                 "logout": "Uitloggen",
                 "stronghold": {
                     "title": "Profiel vergrendeling",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup uw portemonnees",
-                    "lastBackup": "U hebt voor het laatst een back-up gemaakt op {date}",
-                    "notBackedUp": "Geen back-up gemaakt",
+                    "lastBackup": "Je hebt voor het laatst een back-up gemaakt op {date}",
+                    "notBackedUp": "Nog niet geback-upt",
                     "button": "Backup"
                 },
                 "version": {
@@ -607,7 +613,7 @@
             "events": {
                 "status": {
                     "upcoming": "Aankondiging",
-                    "commencing": "Stemmen open",
+                    "commencing": "Stemmen geopend",
                     "holding": "Telling",
                     "ended": "Afgelopen"
                 },
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "{name} verbergen?",
             "body": "U kunt deze portemonnee later vinden door \"Verborgen portemonnees weergeven\" in te schakelen in Geavanceerde Instellingen.",
-            "typePassword": "Voer uw portemonnee wachtwoord in om te bevestigen.",
+            "typePassword": "Voer je wallet wachtwoord in om te bevestigen.",
             "hideAccount": "Verberg portemonnee",
             "errorTitle": "{name} kan niet worden verborgen",
             "errorBody1": "Om een portemonnee te verbergen moet het 0 saldo hebben.",
@@ -752,12 +758,12 @@
         "transaction": {
             "title": "Bevestig transactie",
             "body": "U staat op het punt {amount} te sturen naar",
-            "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
+            "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een portemonnee die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
             "sendingFromStakedAccountBelowMinReward": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest.",
             "sendingFromStakedAccountBelowMinRewardVote": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest. Je zal misschien ook opnieuw moeten stemmen.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "U wilt een transactie versturen vanuit een portomonee die op dit moment ook gebruikt wordt om te staken en/of te stemmen. Dit zou uw staking en uw stemming kunnen stoppen. U kunt de transactie versturen, maar daarna zult u uw overgebleven tokens zelf weer opnieuw moeten activeren voor het staken en/of het stemmen.",
-                "stake": "U wilt een transactie versturen vanuit een wallet die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
+                "stake": "U wilt een transactie versturen vanuit een wallet die op dit moment gestaked word. Dit zou uw staking kunnen stopzetten. Voel u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw staken.",
                 "vote": "Je verstuurt een overschrijving vanuit een portemonnee die momenteel aan het stemmen is. Dit kan je stem stoppen. Voel je vrij om de transfer te verzenden, maar je moet misschien later opnieuw stemmen met je resterende tokens achteraf."
             }
         },
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips als uw Ledger geen verbinding kan maken",
+            "title": "Tips als uw Ledger geen verbinding maakt",
             "steps": {
                 "0": "Zorg ervoor dat Ledger Live niet open is op uw computer",
                 "1": "Zorg ervoor dat u uw Ledger apparaat hebt ontgrendeld met uw pincode",
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Totale hoeveelheid gestaket",
             "stakedSuccessfully": "Uw tokens zijn gestaket voor {account}.",
             "unstakedSuccessfully": "U bent gestopt met staken voor {account}.",
-            "singleAccountHint": "Op zoek naar je portemonnees? Firefly is veranderd. Schakel tussen je portemonnees in de bovenste menubalk."
+            "mergeStakeDisclaimerVoting": "Het samenvoegen van je stake zal ook je stemmen samenvoegen."
         },
         "stakingConfirmation": {
             "title": "Bevestig Deelname",
@@ -877,7 +883,8 @@
             "changingVote": "Veranderen van stem",
             "manageVotes": "Beheer stemmen",
             "partialVoteInfo": "Je hebt {amount} in {account} ontvangen. Je kunt met deze fondsen stemmen door ze samen te voegen met je huidige stem.",
-            "mergeVoteDisclaimer": "Let op dat het samenvoegen van stemmen geen invloed heeft op de stemmen die al geteld zijn",
+            "mergeVoteDisclaimer": "Let op dat het samenvoegen van stemmen geen invloed heeft op de stemmen die al geteld zijn.",
+            "mergeVoteDisclaimerStaking": "Het samenvoegen van je stem zal ook je ge-stake-te saldo samenvoegen.",
             "mergingVotes": "Stemmen samenvoegen",
             "votedSuccessfully": "Je bent begonnen te stemmen met {account}.",
             "unvotedSuccessfully": "Je bent gestopt met stemmen met {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Je maakt een ontwikkelaarsprofiel aan",
             "body": "Je wordt standaard verbonden met het Chrysalis Devnet en kunt handmatig van netwerk wisselen. Ga alleen verder als je weet wat je doet."
+        },
+        "confirmCloseApp": {
+            "title": "U staat op het punt de app te sluiten",
+            "body": "Weet je het zeker? Ga terug om de app te sluiten."
         },
         "crashReporting": {
             "title": "Crashrapportage",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migreren naar Chrysalis of een bestaande portemonnee herstellen",
         "createWallet": "Nieuwe portemonnee maken",
         "createWalletDescription": "Maak een nieuwe portemonnee die wordt uitgevoerd op Chrysalis",
+        "exploreWallet": "Verken portemonnee",
         "savePassword": "Wachtwoord opslaan",
         "useBiometric": "Biometrische beveiliging gebruiken",
         "setupPin": "PIN-code instellen",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Opnieuw zoeken",
         "searching": "Zoeken...",
         "closeFirefly": "Sluit Firefly",
-        "generateAddress": "Genereer een adres",
+        "generateAddress": "Genereer adres",
         "migrateAgain": "Migreer een andere index",
         "visitWebsite": "Bezoek website",
         "howItWorks": "Hoe het werkt",
@@ -1047,14 +1059,16 @@
         "mergeFunds": "Samenvoegen saldo",
         "done": "Voltooid",
         "castVotes": "Uitbrengen stemmen",
-        "changeVotes": "Verander je stem",
+        "changeVotes": "Verander stem",
         "mergeVotes": "Stem samenvoegen",
-        "stopVotes": "Stoppen met stemmen",
+        "stopVotes": "Stop stemmen",
         "okIUnderstand": "OK, ik begrijp het",
-        "readMore": "Lees meer"
+        "readMore": "Lees meer",
+        "chooseBackupFile": "Kies back-up bestand"
     },
     "general": {
         "password": "Wachtwoord",
+        "close": "Sluiten",
         "confirmPassword": "Bevestig wachtwoord",
         "currentPassword": "Huidig wachtwoord",
         "newPassword": "Nieuw wachtwoord",
@@ -1066,9 +1080,12 @@
         "received": "Ontvangen",
         "sendPayment": "Verstuur betaling",
         "moveFunds": "Interne overdracht",
+        "moveFundsButton": "Intern",
+        "unit": "Eenheid",
         "sendTo": "Verzend naar",
         "sendFunds": "Verstuur tokens",
         "sendToAddress": "Stuur naar rekening",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Scan een QR-code of plak een adres",
         "moveFundsBetweenAccounts": "Verplaats tegoeden tussen portemonnees",
         "sendTokensToAddress": "Verstuur tokens naar een adres",
@@ -1111,6 +1128,7 @@
         "createAccount": "Maak een portemonnee aan",
         "createNewWallet": "Maak een nieuwe portemonnee aan",
         "switchWallet": "Wissel portemonnee",
+        "addAWallet": "Portemonnee toevoegen",
         "accountName": "Naam portemonnee",
         "latestTransactions": "Meest recente transacties",
         "transactions": "Transacties",
@@ -1198,14 +1216,16 @@
         "staking": "Staken",
         "unstaking": "Stoppen met staken",
         "notStaked": "Niet gestaked",
-        "stakedFunds": "Gestaketet saldo",
+        "stakedFunds": "Gestakete saldo",
         "unstakedFunds": "Niet ingezet saldo",
         "voting": "Stemmen",
         "unvoting": "Niet stemmen",
         "accountColor": "Kleur portemonnee",
         "myAssets": "Mijn bezittingen",
         "option": "Optie",
-        "total": "Totaal: {balance}"
+        "total": "Totaal: {balance}",
+        "openExplorer": "Weergeven in Verkenner",
+        "activityDetails": "Transactie details"
     },
     "dates": {
         "today": "Vandaag",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "Je zal de minimumbeloning niet behalen gedurende de resterend periode tenzij je meer IOTA toevoegt.",
             "bodyDidNotReachMin": "Je hebt niet genoeg IOTA gestaket om de minimumbeloning te halen voor {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Deze wallet heeft niet genoeg IOTA tokens om de minimumbeloning te behalen voor airdrop {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer eenheid aanpassing",
+            "body1": "SMR eenheden zijn gewijzigd na een governance besluit. Shimmer tokens worden nu weergegeven met 6 decimalen plaatsen; 1 SMR = 1.000.000 gloed.",
+            "body2": "Je hebt nog steeds hetzelfde aantal SMR beloningen, Firefly formatteert alleen de waarde anders."
         }
     },
     "exports": {

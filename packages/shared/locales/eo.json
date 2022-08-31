@@ -7,7 +7,8 @@
         "legal": {
             "title": "Privacy Policy & Terms of Service",
             "body": "Please review the Privacy Policy and Terms of Service.",
-            "checkbox": "Mi legis kaj akceptas la regularon pri privateco kaj kondiĉojn de uzado"
+            "checkbox": "Mi legis kaj akceptas la regularon pri privateco kaj kondiĉojn de uzado",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -124,9 +125,9 @@
             "body": "Vi faris savkopion de via monujo al Stronghold dosiero."
         },
         "congratulations": {
-            "title": "La agordado de la monujo estas farita",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Fonduso estas migrigita",
-            "body": "Via nova monujo estas preta por uzi.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Vi sukcese migris vian monon al la nova reto",
             "fireflyLedgerBody": "Via Ledger-konto estas sukcese rekuperita kaj vi nun povas daŭrigi.",
             "trinityLedgerBody": "Vi sukcese migris vian Ledger al la nova reto.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Restaŭru viajn monujojn uzante savkopio-dosieron",
-            "body": "Importu savkopio-dosieron por restaŭri viajn monujojn. Savkopioj povas esti kaj Stronghold (.stronghold) kaj Trinity SeedVault (.kdbx)."
+            "body": "Importu savkopio-dosieron por restaŭri viajn monujojn. Savkopioj povas esti kaj Stronghold (.stronghold) kaj Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Restarigu aŭ migru vian Ledger",
@@ -227,7 +229,7 @@
             "body2": "Ĉi tiu eble iom daŭros. Ne malŝaltu vian aparaton dum la migrado.",
             "existing": "Via malnova monujo",
             "new": "Niva nova monujo",
-            "learn": "Lernu pri la migrado",
+            "learn": "Learn about the migration",
             "beginMigration": "Komencu migri",
             "migrating": "Migrigante fonduson...",
             "migrated": "{balance} estas migrigita",
@@ -250,7 +252,7 @@
             "title": "Averto",
             "body1": "Vi havas monon por unu aŭ pluraj elspezitaj adresoj.",
             "body2": "Ni rekomendas ke vi rulu aŭtomatigitan procezon por helpi sekurecon kaj transpagi ĉi tiun fonduson sekure.",
-            "body3": "Se vi fermu la apon, vi bezonos rekomenci la tutan migradon.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Lernu pri elspezitaj adresoj"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Certigu, ke via Ledger estas konektita kaj la programo {legacy} estas ĉiam malfermita dum migrado.",
             "migrate": "Migru bonhavojn",
             "transaction": "Transakcio {number}",
-            "rerun": "Reprovi"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -321,7 +323,7 @@
                 "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
-                "title": "Lingvo",
+                "title": "Language",
                 "description": ""
             },
             "currency": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "Stato",
                 "messagesPerSecond": "Mesaĝoj po sekundo",
                 "referencedRate": "Referencita indico"
             },
             "profileModal": {
-                "allSettings": "Ĉiuj agordoj",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Elsaluti",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "Vi savis la lastan fojon la {date}",
-                    "notBackedUp": "Ne sekurkopiita",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -718,8 +724,8 @@
                 "features": "Karakterizaĵoj",
                 "confirmedMilestoneIndex": "Konfirmita ĵetono indekso",
                 "pruningIndex": "Forviŝa progresindekso",
-                "messagesPerSecond": "Mesaĝoj po sekundo",
-                "referencedRate": "Referencita indico"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -734,12 +740,12 @@
             "empty": "La erarregistro estas malplena."
         },
         "deleteProfile": {
-            "title": "Forigi profilon",
+            "title": "Delete profile",
             "confirmation": "Ĉu vi certas, ke vi volas forigi tiun ĉi profilon? Tiu ĉi ago ne estas malfarebla.",
             "typePassword": "Tajpu vian pasvorton por konfirmi."
         },
         "diagnostics": {
-            "title": "Diagnozoj",
+            "title": "Diagnostics",
             "node": "Nodo",
             "platform": "Platformo",
             "platformVersion": "Platformversio",
@@ -757,12 +763,12 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "Vi sendas banka ĝiro de monujo, kiu nuntempe estas stakigita. Ĉi tio povas malakcepti viajn ĵetonojn. Bonvolu sendi la ĝiro, sed vi eble bezonos repreni viajn ceterajn ĵetonojn poste.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
         "balanceFinder": {
-            "title": "Enhavo serĉilo",
+            "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
@@ -777,7 +783,7 @@
             "body2": "Oni rekomendas rekomenci la procezon por adresoj kun meza riska nivelo aŭ pli."
         },
         "missingBundle": {
-            "title": "Averto: fundusoj en risko dum migrado",
+            "title": "Warning: funds at risk during migration",
             "body": "Vi havas fundusojn en adresoj, kiuj antaŭe estis uzataj por sendi fundusojn, sed la informoj necesaj por sekurigi ilin ne estis trovitaj. Ĉi tio povas okazi se vi faris transakciojn delonge. Vi povas daŭrigi, sed vi eble perdos {value} dum la migrado.",
             "learnMore": "Lernu pri elspezitaj adresoj",
             "proceed": "Jes, mi komprenas la riskojn"
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Konsiloj se via Ledger ne konektas",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Certigu, ke Ledger Live ne estas malfermita en via komputilo",
                 "1": "Certigu, ke vi malŝlosis vian Ledger-aparaton per via PIN",
@@ -823,7 +829,7 @@
                 "info": "Pro sekurecaj kialoj, bonvolu kompari la adreson generitan sur via Ledger-aparato kun tiu montrita sube. Se ili kongruas, premu ambaŭ butonojn de via Ledger kiel petite."
             },
             "transaction": {
-                "title": "Konfirmu transakcion",
+                "title": "Confirm transaction",
                 "info": "Pro sekurecaj kialoj, bonvolu kompari la informojn generitajn en via Ledger kun tiuj montritaj sube. Se ili kongruas, premu ambaŭ butonojn de via Ledger kiel petite."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Totalaj bonhavoj stakita",
             "stakedSuccessfully": "Viaj bonhavoj estis rezervitaj por {account}.",
             "unstakedSuccessfully": "Viaj bonhavoj estis malŝlositaj por {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Vi kreas programistan profilon",
             "body": "Vi estos konektita al la Chrysalis Devnet defaŭlte, kaj povas ŝanĝi retojn permane. Daŭru nur se vi scias, kion vi faras."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,16 +964,17 @@
         "restoreWalletDescription": "Migri al Chrysalis aŭ restarigi ekzistantan monujon",
         "createWallet": "Krei novan monujon",
         "createWalletDescription": "Kreu novan monujon funkciantan per Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Konservu pasvorton",
         "useBiometric": "Uzu biometrikan sekurecon",
-        "setupPin": "Agordu PIN-kodon",
+        "setupPin": "Set up PIN code",
         "setPin": "Agordi PIN-kodon",
         "confirmPin": "Konfirmu PIN-kodon",
         "enterYourPin": "Enmetu vian PIN",
         "saveBackupFile": "Konservu savkopian dosieron",
         "iveWrittenRecoveryPhrase": "Mi notis mian retrovan frazon",
-        "verifyRecoveryPhrase": "Konfirmu frazo-restarigon",
-        "revealRecoveryPhrase": "Malkaŝu restarigo-frazon",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "Importu SeedVault",
         "checkAgain": "Rekontroli",
         "importFromFile": "Enporti el dosiero",
@@ -991,9 +1003,9 @@
         "saveBackup": "Konservu Stronghold savkopion",
         "customizeAcount": "Personecigi monujon",
         "viewAddressHistory": "Vidi adresan historion",
-        "hideAccount": "Kaŝitaj monujoj",
+        "hideAccount": "Hide wallet",
         "showAccount": "Malkaŝi monujon",
-        "deleteAccount": "Forigu monujon",
+        "deleteAccount": "Delete wallet",
         "max": "Maksimume",
         "addNode": "Aldoni nodon",
         "updateNode": "Ĝisdatigu la nodon",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Serĉi denove",
         "searching": "Serĉante...",
         "closeFirefly": "Fermu Firefly",
-        "generateAddress": "Generi adreson",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrigu alian Indekson",
         "visitWebsite": "Vizitu retejon",
         "howItWorks": "Kiel ĝi funkcias",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Pasvorto",
+        "close": "Close",
         "confirmPassword": "Konfirmi Pasvorton",
         "currentPassword": "Aktuala pasvorto",
         "newPassword": "Nova pasvorto",
@@ -1066,15 +1080,18 @@
         "received": "Ricevita",
         "sendPayment": "Sendi pagon",
         "moveFunds": "Interna Transakcio",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Sendi al",
         "sendFunds": "Sendu bonhavojn",
         "sendToAddress": "Sendu al adreso",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Skanu QR-kodon aŭ alglui adreson",
         "moveFundsBetweenAccounts": "Movi bonhavojn inter monujoj",
         "sendTokensToAddress": "Sendu ĵetonojn al adreso",
         "manageAccount": "Administri monujon",
         "customizeAcount": "Agordu vian monujon",
-        "account": "Monujo",
+        "account": "Wallet",
         "sendingToAddress": "Sendante al adreso",
         "amount": "Kvanto",
         "addAddress": "Aldoni adreson",
@@ -1111,10 +1128,11 @@
         "createAccount": "Krei monujon",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Nomo de la monujo",
         "latestTransactions": "La lastaj transakcioj",
         "transactions": "Transakcioj",
-        "security": "Sekureco",
+        "security": "Security",
         "accountAddress": "Monujo-adreso",
         "network": "Reto",
         "nodes": "Nodo",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "Ricevanta Adreso",
         "newAddress": "Nova Adreso",
         "date": "Dato",
-        "status": "Stato",
+        "status": "Status",
         "confirmed": "Konfirmita",
         "pending": "En progreso",
         "noAccounts": "Vi ne havas monujojn, bonvolu krei unu.",
@@ -1198,14 +1216,16 @@
         "staking": "Stakigante",
         "unstaking": "Malŝlosu",
         "notStaked": "Ne engaĝita",
-        "stakedFunds": "Stakitaj bonhavojn",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Bonhavoj ne investitaj",
         "voting": "Voting",
         "unvoting": "Unvoting",
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Hodiaŭ",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID de la mesaĝo",
+            "messageId": "Message ID",
             "internal": "Internal",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "Dato",
+            "date": "Date",
             "time": "Time"
         }
     },
@@ -1443,8 +1468,8 @@
         }
     },
     "tabs": {
-        "wallet": "Monujo",
-        "staking": "Stakigante",
+        "wallet": "Wallet",
+        "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",
         "activity": "Activity"

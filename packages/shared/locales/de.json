@@ -7,7 +7,8 @@
         "legal": {
             "title": "Datenschutzerklärung & Nutzungsbedingungen",
             "body": "Bitte lies die Datenschutzerklärung und die Nutzungsbedingungen.",
-            "checkbox": "Ich habe die Datenschutzerklärung und Nutzungsbedingungen gelesen und akzeptiere diese"
+            "checkbox": "Ich habe die Datenschutzerklärung und Nutzungsbedingungen gelesen und akzeptiere diese",
+            "checkboxMobile": "Ich habe gelesen und akzeptiere die"
         },
         "crashReporting": {
             "title": "Fehler- und Absturzberichte",
@@ -124,9 +125,9 @@
             "body": "Du hast deine Wallets in einem Stronghold-Backup gesichert."
         },
         "congratulations": {
-            "title": "Einrichten der Wallet abgeschlossen",
+            "title": "Profil-Einrichtung abgeschlossen!",
             "fundsMigrated": "Guthaben migriert",
-            "body": "Deine neue Wallet ist nun einsatzbereit.",
+            "body": "Dein neues Profil ist bereit zur Nutzung.",
             "softwareMigratedBody": "Du hast dein Guthaben erfolgreich ins neue Netzwerk übertragen",
             "fireflyLedgerBody": "Dein Ledger-Konto wurde erfolgreich wiederhergestellt und du kannst nun fortfahren.",
             "trinityLedgerBody": "Du hast deinen Ledger erfolgreich in das neue Netzwerk migriert.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Wallets aus einer Backup-Datei wiederherstellen",
-            "body": "Importiere ein Backup, um deine Wallets wiederherzustellen. Backups können entweder eine Stronghold (.stronghold) oder eine Trinity SeedVault (.kdbx) Datei sein."
+            "body": "Importiere ein Backup, um deine Wallets wiederherzustellen. Backups können entweder eine Stronghold (.stronghold) oder eine Trinity SeedVault (.kdbx) Datei sein.",
+            "bodyMobile": "Lade eine Datei hoch, um bestehende Wallet-Guthaben wiederherzustellen. Nur Firefly Stronghold-Backups werden auf dem Smartphone unterstützt. Für Trinity SeedVault-Backups verwende bitte die Firefly Desktop-Wallet."
         },
         "importFromLedger": {
             "title": "Ledger wiederherstellen oder migrieren",
@@ -190,7 +192,7 @@
             "readMore": "Was du vom Migrationsprozess erwarten kannst"
         },
         "generateNewLedgerAddress": {
-            "title": "Neue Adresse erstellen",
+            "title": "Neue Adresse generieren",
             "body": "Du musst eine neue Adresse generieren, um deine Token mit Firefly zu migrieren. Klicke auf die Schaltfläche unten, um fortzufahren.",
             "confirmTitle": "Bestätige die neue Adresse",
             "confirmBody": "Vergleiche bitte zur Sicherheit die auf deinem Ledger-Gerät generierte mit der unten angezeigten Adresse. Wenn beide übereinstimmen, drücke zur Bestätigung beide Tasten auf deinem Ledger-Gerät.",
@@ -250,7 +252,7 @@
             "title": "Warnung",
             "body1": "Du hast Guthaben auf einer oder mehreren wiederverwendeten Adressen.",
             "body2": "Wir empfehlen, dass du einen automatisierten Vorgang durchführst, um diese Guthaben abzusichern.",
-            "body3": "Solltest du die App vorzeitig schließen, muss die Migration erneut durchgeführt werden.",
+            "body3": "Es ist nicht möglich zu garantieren, dass dein Guthaben auf dem Smartphone sicher migriert wird. Wir empfehlen dir, die Firefly Desktop-App zu verwenden.",
             "learn": "Erfahre mehr über wiederverwendete Adressen"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Netzwerk funktionsfähig",
                 "networkDegraded": "Netzwerk eingeschränkt",
                 "networkDown": "Netzwerk nicht verbunden",
+                "networkUnreachable": "Netzwerk nicht verfügbar",
                 "status": "Status",
                 "messagesPerSecond": "Nachrichten pro Sekunde",
                 "referencedRate": "Bestätigungsrate"
             },
             "profileModal": {
-                "allSettings": "Alle Einstellungen",
+                "allSettings": {
+                    "title": "Alle Einstellungen",
+                    "description": "Profil, Anwendung, Sicherheit"
+                },
                 "logout": "Abmelden",
                 "stronghold": {
                     "title": "Profil sperren",
@@ -492,7 +498,7 @@
                 "backup": {
                     "title": "Erstelle ein Backup deiner Wallets",
                     "lastBackup": "Letztes Backup erstellt: {date}",
-                    "notBackedUp": "Kein Backup erstellt",
+                    "notBackedUp": "Noch kein Backup erstellt",
                     "button": "Backup"
                 },
                 "version": {
@@ -526,7 +532,7 @@
                 },
                 "bodies": {
                     "upcoming": "Stake deine {token} Token, um alle 10 Sekunden automatisch Belohnungen zu erhalten, sobald das Staking am {date} beginnt.",
-                    "commencing": "Stake deine {token} Token, um alle 10 Sekunden automatisch Belohnungen zu erhalten, sobald das Staking am {date} beginnt.",
+                    "commencing": "Stake deine {token} Token, um alle 10 Sekunden Rewards zu erhalten, sobald das Staking am {date} beginnt.",
                     "holdingAndStaking": "Du wirst nun alle 10 Sekunden Staking-Rewards erhalten.",
                     "holdingAndNotStaking": "Stake deine {token} Token, um alle 10 Sekunden Rewards zu erhalten.",
                     "endedAndDidStake": "{token}-Rewards werden an deine Wallet verteilt sobald das Netzwerk startet.",
@@ -757,7 +763,7 @@
             "sendingFromStakedAccountBelowMinRewardVote": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und evtl. verfallen. Gegebenfalls musst du auch erneut Abstimmen.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked oder zur Abstimmung verwendet werden. Dies kann zur Aufhebung des Stakings und zur Beendung des Abstimmens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken und an Abstimmungen erneut teilnehmen musst.",
-                "stake": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst.",
+                "stake": "Du versendest Token von einer Wallet, mit der du gerade stakest. Das kann zur Aufhebung des Stakings führen. Du kannst die Transaktion durchführen, aber es kann sein, dass du deine Token erneut staken musst.",
                 "vote": "Du versendest Token von einer Wallet, welche an einer Abstimmung teilnimmt. Dies kann zur Beendigung des Abstimmens führen. Du kannst diese Token versenden aber es kann sein, dass du mit dem verbleibenden Guthaben erneut abstimmen musst."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Gestaktes Guthaben (gesamt)",
             "stakedSuccessfully": "Dein Guthaben aus {account} wurde gestaked.",
             "unstakedSuccessfully": "Dein Guthaben in {account} wird nicht mehr gestaked.",
-            "singleAccountHint": "Du suchst deine Wallets? Firefly hat sich verändert. Wechsle oben in der Menüleiste zwischen den Wallets."
+            "mergeStakeDisclaimerVoting": "Das Zusammenführen deines Stakes wird auch deine Stimmen zusammenführen."
         },
         "stakingConfirmation": {
             "title": "Teilnahme bestätigen",
@@ -877,7 +883,8 @@
             "changingVote": "Stimme ändern",
             "manageVotes": "Stimmen verwalten",
             "partialVoteInfo": "Du hast {amount} in {account} erhalten. Du kannst mit diesem Guthaben abstimmen, indem du es mit deiner aktuellen Stimme zusammenführst.",
-            "mergeVoteDisclaimer": "Bitte beachte, dass das Zusammenführen von Stimmen keine Auswirkungen auf bereits gezählte Stimmen hat",
+            "mergeVoteDisclaimer": "Bitte beachte, dass das Zusammenführen von Stimmen keine Auswirkungen auf bereits gezählte Stimmen hat.",
+            "mergeVoteDisclaimerStaking": "Das Zusammenführen deiner Stimmen wird auch deine gestakten Guthaben zusammenführen.",
             "mergingVotes": "Stimmen zusammenführen",
             "votedSuccessfully": "Du hast die Abstimmung mit {account} begonnen.",
             "unvotedSuccessfully": "Du hast die Abstimmung mit {account} gestoppt.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Du erstellst ein Entwicklerprofil",
             "body": "Du wirst standardmäßig mit dem Chrysalis-Devnet verbunden, kannst das Netzwerk jedoch manuell wechseln. Fahre nur fort, wenn du weißt, was du tust."
+        },
+        "confirmCloseApp": {
+            "title": "Du bist dabei, die App zu schließen",
+            "body": "Bist du sicher? Gehe zurück, um die App zu schließen."
         },
         "crashReporting": {
             "title": "Fehler- und Absturzberichte",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Zu Chrysalis migrieren oder vorhandene Wallet wiederherstellen",
         "createWallet": "Neue Wallet erstellen",
         "createWalletDescription": "Erstelle eine neue Wallet auf dem Chrysalis-Netzwerk",
+        "exploreWallet": "Wallet einsehen",
         "savePassword": "Passwort speichern",
         "useBiometric": "Biometrische Sicherheitsmerkmale verwenden",
         "setupPin": "PIN-Code festlegen",
@@ -1051,7 +1063,8 @@
         "mergeVotes": "Stimmen zusammenführen",
         "stopVotes": "Abstimmung stoppen",
         "okIUnderstand": "OK, ich verstehe",
-        "readMore": "Weiterlesen"
+        "readMore": "Weiterlesen",
+        "chooseBackupFile": "Backup-Datei auswählen"
     },
     "general": {
         "password": "Passwort",
@@ -1067,9 +1080,12 @@
         "received": "Empfangen",
         "sendPayment": "Zahlung senden",
         "moveFunds": "Interner Transfer",
+        "moveFundsButton": "Intern",
+        "unit": "Einheit",
         "sendTo": "Senden an",
         "sendFunds": "Guthaben senden",
         "sendToAddress": "An Adresse senden",
+        "scanQr": "QR Code scannen",
         "scanQrOrPaste": "Scanne einen QR-Code ein oder füge eine Adresse hinzu",
         "moveFundsBetweenAccounts": "Guthaben zwischen Wallets verschieben",
         "sendTokensToAddress": "Token an eine Adresse senden",
@@ -1112,6 +1128,7 @@
         "createAccount": "Wallet erstellen",
         "createNewWallet": "Neue Wallet erstellen",
         "switchWallet": "Wallet wechseln",
+        "addAWallet": "Wallet hinzufügen",
         "accountName": "Wallet-Name",
         "latestTransactions": "Neueste Transaktionen",
         "transactions": "Transaktionen",
@@ -1207,6 +1224,7 @@
         "myAssets": "Meine Assets",
         "option": "Option",
         "total": "Gesamt: {balance}",
+        "openExplorer": "Im Explorer ansehen",
         "activityDetails": "Transaktionsdetails"
     },
     "dates": {
@@ -1421,6 +1439,11 @@
             "bodyWillNotReachMin": "Du wirst das Minimum an Rewards während der verbleibenden Staking-Periode nicht erreichen, wenn du keine weiteren IOTA Token hinzufügst.",
             "bodyDidNotReachMin": "Du hast nicht ausreichend IOTA Token gestaked, um das Minimum an {airdrop}-Rewards ({airdropRewardMin}) zu erhalten.",
             "bodyMinBalanceAirdrop": "Diese Wallet besitzt nicht ausreichend IOTA Token, um das Minimum an Airdrop-Rewards für {airdrop} zu erhalten."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer Einheiten Update",
+            "body1": "SMR Einheiten haben sich nach einer Governance Entscheidung geändert: Shimmer Token werden nun mit 6 Dezimalstellen dargestellt; 1 SMR = 1.000.000 Glow.",
+            "body2": "Du hast immer noch die gleiche Menge an SMR Rewards, Firefly formatiert den Wert jetzt nur anders."
         }
     },
     "exports": {

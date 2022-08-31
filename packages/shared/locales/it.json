@@ -7,7 +7,8 @@
         "legal": {
             "title": "Politica sulla Privacy e Termini di Servizio",
             "body": "Si prega di prendere visione dell'Informativa sulla privacy e i termini di servizio.",
-            "checkbox": "Ho letto e accetto la Politica sulla Privacy e i Termini di Servizio"
+            "checkbox": "Ho letto e accetto la Politica sulla Privacy e i Termini di Servizio",
+            "checkboxMobile": "Ho letto e accetto il"
         },
         "crashReporting": {
             "title": "Segnalazione di malfunzionamenti",
@@ -124,9 +125,9 @@
             "body": "Hai eseguito il backup dei tuoi portafogli in uno Stronghold."
         },
         "congratulations": {
-            "title": "Configurazione del portafoglio completata",
+            "title": "Configurazione del profilo completata!",
             "fundsMigrated": "Fondi migrati",
-            "body": "Il tuo nuovo portafoglio è pronto all'uso.",
+            "body": "Il tuo nuovo profilo è pronto all'uso.",
             "softwareMigratedBody": "Hai migrato correttamente i tuoi fondi alla nuova rete",
             "fireflyLedgerBody": "Il tuo conto Ledger è stato recuperato correttamente e puoi ora continuare.",
             "trinityLedgerBody": "Hai migrato con successo i fondi sul Ledger alla nuova rete.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Ripristina i tuoi portafogli da un backup su file",
-            "body": "Importa un backup su file per ripristinare i tuoi portafogli. I backup possono essere Stronghold (.stronghold) o un SeedVault di Trinity (.kdbx)."
+            "body": "Importa un backup su file per ripristinare i tuoi portafogli. I backup possono essere Stronghold (.stronghold) o un SeedVault di Trinity (.kdbx).",
+            "bodyMobile": "Carica un file per ripristinare i fondi del portafoglio esistenti. Solo il backup di Firefly Stronghold è supportato su dispositivi mobili. Per il backup di Trinity SeedVault, si prega di utilizzare il portafoglio desktop."
         },
         "importFromLedger": {
             "title": "Ripristina o Migra il tuo Ledger",
@@ -250,7 +252,7 @@
             "title": "Attenzione",
             "body1": "Hai fondi su uno o più indirizzi spesi.",
             "body2": "Ti consigliamo di eseguire un processo automatizzato per aiutare a proteggere e trasferire in sicurezza questi fondi.",
-            "body3": "Se chiudi l'app, dovrai riavviare l'intera migrazione.",
+            "body3": "Non è possibile garantire che i tuoi fondi siano migrati in modo sicuro sul cellulare. Si consiglia di utilizzare l'app desktop Firefly per migrare.",
             "learn": "Impara sugli indirizzi spesi"
         },
         "secureSpentAddresses": {
@@ -338,7 +340,7 @@
             },
             "exportStronghold": {
                 "title": "Esporta il backup",
-                "description": "Esporta in un file Stronghold; un backup crittografato compleot dei tuoi portafogli e lo storico delle transazioni più recenti"
+                "description": "Esporta in un file Stronghold - un backup crittografato completo del tuo wallet e l'ultima cronologia delle transazioni"
             },
             "appLock": {
                 "title": "Blocco Automatico",
@@ -403,7 +405,7 @@
                 "editDetails": "Modifica i dettagli",
                 "viewInfo": "Visualizza informazioni",
                 "setAsPrimary": "Imposta come primario",
-                "removeNode": "Rimuovi Nodo",
+                "removeNode": "Rimuovi il nodo",
                 "includeOfficialNodeList": "Includi la lista dei nodi ufficiali",
                 "noNodes": "Non ci sono nodi, impossibile connettersi alla rete",
                 "noNodesAuto": "Non ci sono nodi, verrà utilizzata la selezione automatica"
@@ -465,12 +467,16 @@
                 "networkOperational": "Stato della rete",
                 "networkDegraded": "Rete degradata",
                 "networkDown": "Rete disconnessa",
+                "networkUnreachable": "Rete irraggiungibile",
                 "status": "Stato",
                 "messagesPerSecond": "Messaggi al secondo",
                 "referencedRate": "Tasso di riferimento"
             },
             "profileModal": {
-                "allSettings": "Tutte le impostazioni",
+                "allSettings": {
+                    "title": "Tutte le impostazioni",
+                    "description": "Profilo, applicazione, sicurezza"
+                },
                 "logout": "Esci",
                 "stronghold": {
                     "title": "Profilo bloccato",
@@ -491,7 +497,7 @@
                 },
                 "backup": {
                     "title": "Esegui il backup del tuo portafoglio",
-                    "lastBackup": "L'ultimo backup risale al {date}",
+                    "lastBackup": "Ultimo backup effettuato il {date}",
                     "notBackedUp": "Backup non eseguito",
                     "button": "Backup"
                 },
@@ -526,7 +532,7 @@
                 },
                 "bodies": {
                     "upcoming": "Metti in stake i tuoi {token} token per ricevere automaticamente ricompense ogni 10 secondi una volta che lo staking inizia il {date}.",
-                    "commencing": "Metti in stake i tuoi {token} token per ricevere automaticamente ricompense ogni 10 secondi una volta che lo staking inizia il {date}.",
+                    "commencing": "Metti i tuoi {token} token in staking per ricevere automaticamente ricompense ogni 10 secondi dall'inizio dello staking il {date}.",
                     "holdingAndStaking": "Ricevi automaticamente ricompense ogni 10 secondi.",
                     "holdingAndNotStaking": "Metti in stake i {token} token per ricevere ricompense ogni 10 secondi.",
                     "endedAndDidStake": "La ricompensa di {token} token sarà inviata al tuo portafoglio una volta che la rete verrà lanciata.",
@@ -625,7 +631,7 @@
             "eventDetails": {
                 "votingOpens": "Le votazioni iniziano il",
                 "votingProgress": "Tempo residuo",
-                "votingPower": "Il peso del tuo voto",
+                "votingPower": "Il tuo peso di voto",
                 "votesCounted": "Contateggio dei tuoi voti",
                 "maximumVotes": "I tuoi voti massimi",
                 "countingStarts": "Il conteggio inizia il",
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "Nascondere {name}?",
             "body": "Puoi trovare questo wallet in seguito abilitando \"Mostra wallet nascosti\" in Impostazioni avanzate.",
-            "typePassword": "Digita la password del tuo wallet per confermare.",
+            "typePassword": "Digita la password del tuo portafoglio per confermare.",
             "hideAccount": "Nascondi wallet",
             "errorTitle": "Impossibile nascondere {name}",
             "errorBody1": "Per nascondere un wallet, deve avere il saldo a 0.",
@@ -734,12 +740,12 @@
             "empty": "Il log degli errori è vuoto."
         },
         "deleteProfile": {
-            "title": "Elimina il profilo",
+            "title": "Elimina profilo",
             "confirmation": "Si è sicuri di voler eliminare questo profilo? Questa azione non può essere annullata.",
             "typePassword": "Digita la password per confermare."
         },
         "diagnostics": {
-            "title": "Diagnostiche",
+            "title": "Diagnostica",
             "node": "Nodo",
             "platform": "Piattaforma",
             "platformVersion": "Versione della piattaforma",
@@ -757,7 +763,7 @@
             "sendingFromStakedAccountBelowMinRewardVote": "Stai inviando un trasferimento da un portafoglio che non ha ancora raggiunto la ricompensa di staking minima. Questo potrebbe dismettere i tuoi token e potresti perdere le tue ricompense di staking su questo portafoglio.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
-                "stake": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
+                "stake": "Stai inviando un trasferimento da un portafoglio correntemente in staking. Questo potrebbe rimuovere i tuoi token dallo staking. Sentiti libero di inviare il trasferimento, ma potresti dover rimettere in staking i tuoi token rimanenti in seguito.",
                 "vote": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti."
             }
         },
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Suggerimenti se il tuo Ledger non si connette",
+            "title": "Consigli se il tuo Ledger non si connette",
             "steps": {
                 "0": "Assicurati che Ledger Live non sia aperto sul tuo computer",
                 "1": "Assicurati di aver sbloccato il tuo dispositivo Ledger con il PIN",
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Totale fondi in staking",
             "stakedSuccessfully": "I fondi sono stati messi in stake per {account}.",
             "unstakedSuccessfully": "I fondi sono stati tolti dallo stake per {account}.",
-            "singleAccountHint": "Stai cercando i tuoi portafogli? Firefly è cambiato. Commuta tra i tuoi portafogli nella barra dei menu in alto."
+            "mergeStakeDisclaimerVoting": "Unire la tua partecipazione fonderà anche i tuoi voti."
         },
         "stakingConfirmation": {
             "title": "Conferma la tua partecipazione",
@@ -877,7 +883,8 @@
             "changingVote": "Cambia voto",
             "manageVotes": "Gestisci voti",
             "partialVoteInfo": "Hai ricevuto {amount} su {account}. Puoi votare con questi fondi unendoli con il tuo voto attuale.",
-            "mergeVoteDisclaimer": "Si prega di notare che la fusione dei voti non influisce su tutti i voti già contati",
+            "mergeVoteDisclaimer": "Si prega di notare che la fusione dei voti non influisce su tutti i voti che sono già stati contati.",
+            "mergeVoteDisclaimerStaking": "Unire il tuo voto fonderà anche i tuoi fondi in stake.",
             "mergingVotes": "Unione dei voti",
             "votedSuccessfully": "Hai iniziato a votare con {account}.",
             "unvotedSuccessfully": "Hai smesso di votare con {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Stai creando un profilo sviluppatore",
             "body": "Sarai connesso al Chrysalis Devnet di default e puoi passare manualmente tra le reti. Continua solo se sai cosa stai facendo."
+        },
+        "confirmCloseApp": {
+            "title": "Stai per chiudere l'app",
+            "body": "Premi di nuovo Indietro per chiudere la app."
         },
         "crashReporting": {
             "title": "Segnalazione di malfunzionamenti",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrare a Chrysalis o ripristinare un portafoglio esistente",
         "createWallet": "Crea nuovo portafoglio",
         "createWalletDescription": "Crea un nuovo wallet per la rete Chrysalis",
+        "exploreWallet": "Esplora il portafoglio",
         "savePassword": "Salva password",
         "useBiometric": "Usa sicurezza biometrica",
         "setupPin": "Imposta un codice PIN",
@@ -998,7 +1010,7 @@
         "addNode": "Aggiungi nodo",
         "updateNode": "Aggiorna nodo",
         "removeNode": "Rimuovi Nodo",
-        "removeAllNodes": "Rimuovere tutti i nodi",
+        "removeAllNodes": "Rimuovi tutti i nodi",
         "hide": "Nascondi",
         "hideOthers": "Nascondi altri",
         "showAll": "Mostra tutto",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Unisci il voto",
         "stopVotes": "Interrompi la votazione",
         "okIUnderstand": "OK, ho capito",
-        "readMore": "Leggi di più"
+        "readMore": "Leggi di più",
+        "chooseBackupFile": "Scegliere il file di backup"
     },
     "general": {
         "password": "Password",
+        "close": "Chiudi",
         "confirmPassword": "Conferma la password",
         "currentPassword": "Password attuale",
         "newPassword": "Nuova Password",
@@ -1066,9 +1080,12 @@
         "received": "Ricevuto",
         "sendPayment": "Invia Pagamento",
         "moveFunds": "Trasferimento Interno",
+        "moveFundsButton": "Interno",
+        "unit": "Unità",
         "sendTo": "Invia a",
         "sendFunds": "Invia fondi",
         "sendToAddress": "Invia all’indirizzo",
+        "scanQr": "Scansiona codice QR",
         "scanQrOrPaste": "Scansiona un codice QR o incolla un indirizzo",
         "moveFundsBetweenAccounts": "Sposta fondi tra wallet",
         "sendTokensToAddress": "Invia token ad un indirizzo",
@@ -1111,6 +1128,7 @@
         "createAccount": "Crea un wallet",
         "createNewWallet": "Crea un nuovo wallet",
         "switchWallet": "Cambia portafoglio",
+        "addAWallet": "Aggiungi un portfolio",
         "accountName": "Nome wallet",
         "latestTransactions": "Ultime Transazioni",
         "transactions": "Transazioni",
@@ -1205,7 +1223,9 @@
         "accountColor": "Colore Wallet",
         "myAssets": "I miei Asset",
         "option": "Opzione",
-        "total": "Saldo totale"
+        "total": "Saldo totale",
+        "openExplorer": "Visualizza sull'Explorer",
+        "activityDetails": "Dettagli della transazione"
     },
     "dates": {
         "today": "Oggi",
@@ -1361,7 +1381,7 @@
             "mnemonicMismatch": "Hai connesso il dispositivo Ledger sbagliato o la mnemonica da 24 parole è cambiata.",
             "notDetected": "Nessun dispositivo Ledger rilevato.",
             "notFound": "Dispositivo Ledger non trovato.",
-            "otherConnected": "Sul tuo dispositivo Ledger è aperta l'app IOTA sbagliata.",
+            "otherConnected": "L'app errata è aperta sul tuo dispositivo Ledger.",
             "generateAddress": "Si è verificato un errore nel generare un indirizzo.",
             "timeout": "Il tuo dispositivo Ledger è scaduto.",
             "disconnected": "Il dispositivo è stato disconnesso.",
@@ -1419,11 +1439,16 @@
             "bodyWillNotReachMin": "Non raggiungerai il minimo valore per la ricompensa durante il periodo rimanente di stake a meno che si aggiungano più IOTA.",
             "bodyDidNotReachMin": "Non sono stati messi in stake abbastanza IOTA per raggiungere le ricompense minime per {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Questo wallet non ha abbastanza token IOTA per raggiungere la ricompensa minima per {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Aggiornamento dell'unità di Shimmer",
+            "body1": "Le unità SMR sono cambiate in seguito a una decisione di governance. I token di Shimmer sono ora mostrati con 6 decimali; 1 SMR = 1.000.000 glow.",
+            "body2": "Hai ancora lo stesso importo di ricompense SMR, Firefly semplicemente formatta il valore diversamente."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID messaggio",
+            "messageId": "ID del Messaggio",
             "internal": "Interno",
             "rawValue": "Valore grezzo",
             "formattedValue": "Valore formattato",

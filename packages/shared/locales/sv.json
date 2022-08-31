@@ -1,13 +1,14 @@
 {
     "views": {
         "onboarding1": {
-            "title": "Skicka, ta emot och hantera dina IOTA",
+            "title": "Skicka, ta emot och hantera dina IOTA tokens",
             "body": "Firefly är den officiella plånboken för IOTA."
         },
         "legal": {
             "title": "Integritetspolicy och användarvillkor",
             "body": "Läs igenom sekretesspolicyn och användarvillkoren.",
-            "checkbox": "Jag har läst och accepterar integritetspolicyn och användarvillkoren"
+            "checkbox": "Jag har läst och accepterar integritetspolicyn och användarvillkoren",
+            "checkboxMobile": "Jag har läst och accepterat"
         },
         "crashReporting": {
             "title": "Kraschrapportering",
@@ -60,7 +61,7 @@
             "progress1": "Anslut din Ledger",
             "progress2": "Generera adress",
             "progress3": "Växla Ledger app",
-            "progress4": "Överför IOTA",
+            "progress4": "Överför tillgångar",
             "watchVideo": "Titta på videoguide",
             "videoGuide": "Video guide för Ledger migrering"
         },
@@ -124,9 +125,9 @@
             "body": "Du har säkerhetskopierat dina plånböcker till en Stronghold."
         },
         "congratulations": {
-            "title": "Installationen av plånboken slutförd",
+            "title": "Profilkonfigurationen slutförd!",
             "fundsMigrated": "Tokens migrerade",
-            "body": "Din nya plånbok är redo att användas.",
+            "body": "Din nya profil är redo att användas.",
             "softwareMigratedBody": "Du har framgångsrikt migrerat dina IOTA till det nya nätverket",
             "fireflyLedgerBody": "Ditt Ledger-konto har återställts och du kan nu fortsätta.",
             "trinityLedgerBody": "Du har framgångsrikt migrerat din Ledger till det nya nätverket.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Återställ dina plånböcker från en säkerhetskopia",
-            "body": "Importera en säkerhetskopia för att återställa dina plånböcker. Säkerhetskopior kan antingen vara en Stronghold (.stronghold) eller en Trinity SeedVault (.kdbx)."
+            "body": "Importera en säkerhetskopia för att återställa dina plånböcker. Säkerhetskopior kan antingen vara en Stronghold (.stronghold) eller en Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Ladda upp en fil för att återställa befintliga plånbokstillgångar. Endast Firefly Stronghold säkerhetskopior stöds på mobilen. För Trinity SeedVault-säkerhetskopior kan du använda datorversionen av Firefly."
         },
         "importFromLedger": {
             "title": "Återställ eller migrera din Ledger",
@@ -186,7 +188,7 @@
         "legacyLedgerIntro": {
             "title": "Starta din Ledger migrering med Firefly",
             "body1": "Firefly hjälper dig att överföra dina IOTA till det nya Chrysalis nätverket.",
-            "body2": "Efter du migrerat, kommer du att kunna skicka och ta emot IOTA med din Ledger och Firefly.",
+            "body2": "Efter du migrerat, kommer du att kunna skicka och ta emot tokens med din Ledger i Firefly.",
             "readMore": "Vad man kan förvänta sig av migrationsprocessen"
         },
         "generateNewLedgerAddress": {
@@ -248,9 +250,9 @@
         },
         "bundleMiningWarning": {
             "title": "Varning",
-            "body1": "Du har IOTA på en eller flera förbrukade adresser.",
+            "body1": "Du har tillgångar på en eller flera förbrukade adresser.",
             "body2": "Vi rekommenderar att du kör en automatiserad process för att säkra och överföra dessa IOTA på ett säkert sätt.",
-            "body3": "Om du stänger appen måste du starta om hela migreringen.",
+            "body3": "Det är inte möjligt att garantera att dina tillgångar migreras på ett säkert sätt på mobilen. Vi rekommenderar att du använder desktop-versionen av Firefly för att migrera.",
             "learn": "Läs mer om förbrukade adresser"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Nätverk i drift",
                 "networkDegraded": "Nätverk försämrat",
                 "networkDown": "Nätverk frånkopplat",
+                "networkUnreachable": "Nätverket kan inte nås",
                 "status": "Status",
                 "messagesPerSecond": "Meddelanden per sekund",
                 "referencedRate": "Bekräftade meddelanden"
             },
             "profileModal": {
-                "allSettings": "Alla inställningar",
+                "allSettings": {
+                    "title": "Alla inställningar",
+                    "description": "Profil, applikation, säkerhet"
+                },
                 "logout": "Logga ut",
                 "stronghold": {
                     "title": "Profillås",
@@ -684,7 +690,7 @@
             "hideAccount": "Dölj plånbok",
             "errorTitle": "Det går inte att dölja {name}",
             "errorBody1": "För att dölja en plånbok måste den ha 0 i saldo.",
-            "errorBody2": "Du har för närvarande {balance} kvar i denna plånbok. Vänligen flytta dessa IOTA till en annan plånbok och försök igen.",
+            "errorBody2": "Du har för närvarande {balance} kvar i denna plånbok. Vänligen flytta dessa tillgångar till en annan plånbok och försök igen.",
             "errorBody3": "Du kan inte dölja denna plånbok, du måste ha minst en."
         },
         "addressHistory": {
@@ -778,7 +784,7 @@
         },
         "missingBundle": {
             "title": "Varning: Tillgångar i riskzonen vid migrering",
-            "body": "Du har IOTA på förbrukade adresser, men den information som behövdes för att säkra dem hittades inte. Detta kan hända om du gjorde transaktioner för länge sedan. Du kan fortsätta men {value} är i riskzonen vid migrering.",
+            "body": "Du har tillgångar på förbrukade adresser, men den information som behövdes för att säkra dem hittades inte. Detta kan hända om du gjorde transaktioner för länge sedan. Du kan fortsätta men {value} är i riskzonen vid migrering.",
             "learnMore": "Läs mer om förbrukade adresser",
             "proceed": "Jag förstår riskerna"
         },
@@ -844,11 +850,11 @@
         },
         "stakingManager": {
             "title": "Staking-hantering",
-            "description": "När du stakar en plånbok skickar du en transaktion till dig själv som markerar dessa tillgångar som \"stakade\". Du kan överföra dessa IOTA när som helst, men du kommer inte fortsätta att få belöningar för dem.",
+            "description": "När du stakar en plånbok skickar du en transaktion till dig själv som markerar dessa tillgångar som \"stakade\". Du kan överföra dessa tokens när som helst, men du kommer inte fortsätta att få belöningar för dem.",
             "totalFundsStaked": "Totala tillgångar för staking",
             "stakedSuccessfully": "Dina tillgångar har blivit stakade för {account}.",
             "unstakedSuccessfully": "Din tillgångar är inte längre stakade för {account}.",
-            "singleAccountHint": "Letar du efter dina plånböcker? Firefly har ändrats. Växla mellan dina plånböcker i den övre menyraden."
+            "mergeStakeDisclaimerVoting": "Sammanslagningen av din staking kommer också att slå samman dina röster."
         },
         "stakingConfirmation": {
             "title": "Bekräfta medverkan",
@@ -877,7 +883,8 @@
             "changingVote": "Ändrar röst",
             "manageVotes": "Hantera röster",
             "partialVoteInfo": "Du har fått {amount} till {account}. Du kan rösta med dessa tillgångar genom att slå ihop dem med din nuvarande röst.",
-            "mergeVoteDisclaimer": "Observera att sammanslagning av röster inte påverkar röster som redan har räknats",
+            "mergeVoteDisclaimer": "Vänligen observera att sammanslagning av röster inte påverkar röster som redan har räknats.",
+            "mergeVoteDisclaimerStaking": "Sammanslagning av rösterna kommer också att slå samman dina stakade tillgångar.",
             "mergingVotes": "Slår samman röster",
             "votedSuccessfully": "Du har börjat rösta med {account}.",
             "unvotedSuccessfully": "Du har slutat rösta med {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Du skapar en utvecklarprofil",
             "body": "Du kommer att vara ansluten till Chrysalis Devnet som standard, och kan byta nätverk manuellt. Fortsätt bara om du vet vad du gör."
+        },
+        "confirmCloseApp": {
+            "title": "Du är på väg att stänga appen",
+            "body": "Är du säker? Gå tillbaka igen för att stänga appen."
         },
         "crashReporting": {
             "title": "Kraschrapportering",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrera till Chrysalis eller återställ en befintlig plånbok",
         "createWallet": "Skapa ny plånbok",
         "createWalletDescription": "Skapa en ny plånbok som körs på Chrysalis",
+        "exploreWallet": "Utforska plånbok",
         "savePassword": "Spara lösenord",
         "useBiometric": "Använd biometrisk säkerhet",
         "setupPin": "Ställ in PIN-kod",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Sammanfoga röst",
         "stopVotes": "Sluta rösta",
         "okIUnderstand": "OK, jag förstår",
-        "readMore": "Läs mer"
+        "readMore": "Läs mer",
+        "chooseBackupFile": "Välj backupfil"
     },
     "general": {
         "password": "Lösenord",
+        "close": "Stäng",
         "confirmPassword": "Bekräfta lösenord",
         "currentPassword": "Nuvarande lösenord",
         "newPassword": "Nytt lösenord",
@@ -1064,11 +1078,14 @@
         "recentActivity": "Senaste aktivitet",
         "sent": "Skickat",
         "received": "Mottaget",
-        "sendPayment": "Skicka IOTA",
+        "sendPayment": "Skicka tokens",
         "moveFunds": "Intern överföring",
+        "moveFundsButton": "Intern",
+        "unit": "Enhet",
         "sendTo": "Skicka till",
-        "sendFunds": "Skicka IOTA",
+        "sendFunds": "Skicka tillgångar",
         "sendToAddress": "Skicka till adress",
+        "scanQr": "Skanna QR-kod",
         "scanQrOrPaste": "Skanna en QR-kod eller klistra in en adress",
         "moveFundsBetweenAccounts": "Flytta IOTA mellan dina plånböcker",
         "sendTokensToAddress": "Skicka tokens till en adress",
@@ -1081,7 +1098,7 @@
         "reference": "Referens",
         "from": "Från",
         "to": "Till",
-        "receiveFunds": "Ta emot IOTA",
+        "receiveFunds": "Ta emot tillgångar",
         "address": "Adress",
         "myAddress": "Min adress",
         "shareAddress": "Dela en adress",
@@ -1111,6 +1128,7 @@
         "createAccount": "Skapa en plånbok",
         "createNewWallet": "Skapa en ny plånbok",
         "switchWallet": "Växla plånbok",
+        "addAWallet": "Lägg till en plånbok",
         "accountName": "Plånboksnamn",
         "latestTransactions": "Senaste transaktionerna",
         "transactions": "Transaktioner",
@@ -1205,7 +1223,9 @@
         "accountColor": "Plånboksfärg",
         "myAssets": "Mina tillgångar",
         "option": "Alternativ",
-        "total": "Totalt: {balance}"
+        "total": "Totalt: {balance}",
+        "openExplorer": "Visa i utforskaren",
+        "activityDetails": "Transaktionsdetaljer"
     },
     "dates": {
         "today": "Idag",
@@ -1238,7 +1258,7 @@
         "minutesRemaining": "{minutes, plural, one {# kvarvarande minut} other {# kvarvarande minuter}}",
         "copiedToClipboard": "Kopierad till urklipp",
         "accountsSynchronized": "Plånbokssynkronisering slutförd",
-        "fundsAvailableSoon": "Dina IOTA kommer inom kort att bli tillgängliga",
+        "fundsAvailableSoon": "Dina tillgångar kommer inom kort att bli tillgängliga",
         "exportTransactionHistory": {
             "success": "Transaktionshistorik för {accountAlias} har sparats till {filePath}",
             "error": "Det gick inte att exportera transaktionshistorik för {accountAlias}"
@@ -1313,7 +1333,7 @@
             "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
             "invalidAddress": "Adressen är inte giltig.",
             "insufficientFunds": "Denna plånbok har inte tillräckligt med tillgångar.",
-            "noToAccount": "Du har inte valt en plånbok att skicka IOTA till.",
+            "noToAccount": "Du har inte valt en plånbok att skicka tillgångarna till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
             "leavingDust": "Du kan inte lämna mindre än 1 Mi på din adress.",
             "cancelled": "Transaktionen avbröts.",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "Du kommer inte att nå den lägsta belöningsnivån under den återstående stakingperioden om du inte lägger till mer IOTA.",
             "bodyDidNotReachMin": "Du stakade inte tillräckligt med IOTA för att nå den lägsta belöningen för {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Denna plånbok har inte tillräckligt med IOTA tokens för att nå den lägsta belöningsnivån för {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer enhetsuppdatering",
+            "body1": "SMR-enheten har ändrats efter ett styrningsbeslut. Shimmer tokens visas nu med 6 decimaler; 1 SMR = 1,000,000 glow.",
+            "body2": "Du har fortfarande samma mängd SMR-tokens, Firefly har endast formaterat värdet annorlunda."
         }
     },
     "exports": {
