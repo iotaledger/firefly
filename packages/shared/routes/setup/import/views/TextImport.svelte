@@ -15,7 +15,10 @@
 
     $: if ($mobile && input?.length > 0) {
         setTimeout(() => {
-            textFieldContainter?.parentElement?.scrollTo(0, textFieldContainter?.parentElement?.scrollHeight)
+            textFieldContainter?.parentElement?.parentElement?.scrollTo(
+                0,
+                textFieldContainter?.parentElement?.parentElement?.scrollHeight
+            )
         }, getKeyboardTransitionSpeed($isKeyboardOpened))
     }
 
@@ -43,13 +46,9 @@
     >
         <Text type="p" secondary classes="mb-8">{locale(`views.importFromText.${$importType}.body`)}</Text>
         <Text type="h5" classes="mb-3">{locale(`views.importFromText.${$importType}.enter`)}</Text>
-        <ImportTextfield
-            bind:this={textFieldContainter}
-            disabled={$isGettingMigrationData}
-            type={$importType}
-            bind:value={input}
-            {locale}
-        />
+        <div bind:this={textFieldContainter}>
+            <ImportTextfield disabled={$isGettingMigrationData} type={$importType} bind:value={input} {locale} />
+        </div>
     </div>
     <div
         slot="leftpane__action"
