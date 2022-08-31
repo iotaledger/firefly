@@ -31,6 +31,7 @@ import {
 } from '../../stores'
 import { loadAccounts } from './loadAccounts'
 import { ILoginOptions } from '../../interfaces'
+import { logout } from './logout'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
