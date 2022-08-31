@@ -1,3 +1,5 @@
+import { isAndroid } from '@lib/app'
+
 /**
  * Dispatch event on click outside of node
  * source: https://svelte.dev/repl/0ace7a508bd843b798ae599940a91783?version=3.16.7
@@ -41,7 +43,7 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
     const timeQueue = [0, 0, 0]
 
     function handleTouchstart(event: TouchEvent): void {
-        if (!event.cancelable) {
+        if (!event.cancelable && isAndroid) {
             /**
              * Test with transaction history drawer
              * Aims to allow scrolling without closing the drawer
@@ -53,6 +55,8 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
              */
             return
             // event.preventDefault()
+        } else {
+            event.preventDefault()
         }
         event.stopImmediatePropagation()
         event.stopPropagation()
