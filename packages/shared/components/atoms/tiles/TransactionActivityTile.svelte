@@ -36,12 +36,10 @@
     $: timeDiff = getTimeDifferenceUntilExpirationTime(data, $time)
 
     $: title = getTitle(data, inclusionState)
-    $: subjectLocale = getSubjectLocale(data.subject)
+    $: subjectLocale = getSubjectLocale(data.subject, data.isShimmerClaiming)
 
     function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
-        if (txData.isShimmerClaiming) {
-            return inclusionState === InclusionState.Confirmed ? 'general.claimedShimmer' : 'general.claimingShimmer'
-        } else if (txData.isInternal) {
+        if (txData.isInternal) {
             return inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
         } else {
             if (txData.direction === ActivityDirection.In) {
@@ -51,8 +49,10 @@
             }
         }
     }
-    function getSubjectLocale(subject: Subject): string {
-        if (subject?.type === 'account') {
+    function getSubjectLocale(subject: Subject, isShimmerClaiming: boolean): string {
+        if (isShimmerClaiming) {
+            return truncateString(localize('general.shimmerStaking'), 13, 0)
+        } else if (subject?.type === 'account') {
             return truncateString(subject?.account?.name, 13, 0)
         } else if (subject?.type === 'address') {
             return truncateString(subject?.address, $networkHrp.length, 6)
@@ -129,12 +129,10 @@
 
                 <div class="flex flex-row justify-between">
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
-                        {#if !data.isShimmerClaiming}
-                            {localize(
-                                data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
-                                { values: { account: subjectLocale } }
-                            )}
-                        {/if}
+                        {localize(
+                            data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
+                            { values: { account: subjectLocale } }
+                        )}
                     </Text>
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
                         {fiatAmount}
