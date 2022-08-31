@@ -17,7 +17,6 @@ export function linkTransactionsAndClaimingTransaction(
         if (transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)) {
             continue
         } else if (transaction.outputs.some((_output) => !isOutputAsync(_output))) {
-            // TODO: also include condition if it is outgoing
             resultingTransactions.push(transaction)
         } else {
             let claimingData = undefined
@@ -60,9 +59,9 @@ function searchClaimingTransactionInAllTransactions(
     transaction: IProcessedTransaction
 ): IProcessedTransaction {
     // TODO: add as many restrictions for candidates to optimize the time
-    const candidates = allTransaction.filter((_activity) => _activity.time > transaction.time)
-
-    return candidates.find((candidate) =>
-        candidate.transactionInputs?.some((input) => input.transactionId === transaction.transactionId)
+    return allTransaction.find(
+        (candidate) =>
+            candidate.time > transaction.time &&
+            candidate.transactionInputs?.some((input) => input.transactionId === transaction.transactionId)
     )
 }
