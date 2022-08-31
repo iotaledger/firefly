@@ -20,6 +20,7 @@ import {
     getSenderFromTransaction,
     getSenderFromInputs,
     getMainTransactionOutputFromTransaction,
+    getTimelockDateFromOutput,
 } from '../../utils'
 
 export function getTransactionActivityData(
@@ -64,6 +65,7 @@ export function getTransactionActivityData(
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
     const expirationDate = getExpirationDateFromOutput(output)
+    const timelockDate = getTimelockDateFromOutput(output)
     const publicNote = ''
 
     return {
@@ -81,6 +83,7 @@ export function getTransactionActivityData(
         isAsync,
         asyncStatus,
         expirationDate,
+        timelockDate,
         isRejected,
         isClaiming,
         isClaimed,
