@@ -13,15 +13,11 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
     public importFile: Buffer
 
     constructor() {
-        super(
-            getInitialRoute() ?? ProfileRecoveryRoute.ImportMnemonicPhrase,
-            profileRecoveryRoute,
-            get(onboardingRouter)
-        )
+        super(getInitialRoute(), profileRecoveryRoute, get(onboardingRouter))
     }
 
     resetRoute(): void {
-        profileRecoveryRoute.set(getInitialRoute() ?? ProfileRecoveryRoute.ImportMnemonicPhrase)
+        profileRecoveryRoute.set(getInitialRoute())
     }
 
     next(): void {
@@ -60,11 +56,12 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
 
 function getInitialRoute(): ProfileRecoveryRoute {
     switch (get(onboardingProfile)?.recoveryType) {
-        case ProfileRecoveryType.Mnemonic:
-            return ProfileRecoveryRoute.ImportMnemonicPhrase
         case ProfileRecoveryType.Stronghold:
             return ProfileRecoveryRoute.ImportStrongholdBackup
         case ProfileRecoveryType.Ledger:
             return ProfileRecoveryRoute.LedgerImport
+        case ProfileRecoveryType.Mnemonic:
+        default:
+            return ProfileRecoveryRoute.ImportMnemonicPhrase
     }
 }
