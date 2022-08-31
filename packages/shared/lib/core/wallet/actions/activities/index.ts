@@ -1,4 +1,4 @@
-export * from './linkTransactionsAndClaimingTransaction'
+export * from './linkTransactionsWithClaimingTransactions'
 export * from './generateAndStoreActivitiesForAccount'
 export * from './hideActivitiesForFoundries'
 export * from './hideActivitiesForHiddenAssets'

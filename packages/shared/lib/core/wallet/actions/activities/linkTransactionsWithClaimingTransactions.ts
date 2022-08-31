@@ -4,7 +4,7 @@ import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
 import { get } from 'svelte/store'
 import { addClaimedActivity, claimedActivities } from '../../stores'
 
-export function linkTransactionsAndClaimingTransaction(
+export function linkTransactionsWithClaimingTransactions(
     transactions: IProcessedTransaction[],
     account: IAccountState
 ): IProcessedTransaction[] {

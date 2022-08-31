@@ -2,7 +2,7 @@ import { IAccountState } from '@core/account'
 import { setOutgoingAsyncActivitiesToClaimed } from '../setOutgoingAsyncActivitiesToClaimed'
 import { preprocessTransactionsForAccount } from './preprocessTransactionsForAccount'
 import { preprocessOutputsForAccount } from './preprocessOutputsForAccount'
-import { linkTransactionsAndClaimingTransaction } from './linkTransactionsAndClaimingTransaction'
+import { linkTransactionsWithClaimingTransactions } from './linkTransactionsWithClaimingTransactions'
 import { hideActivitiesForFoundries } from './hideActivitiesForFoundries'
 import { generateActivitiesFromProcessedTransactions } from './generateActivitiesFromProcessedTransactions'
 import { setAccountActivitiesInAllAccountActivities } from '@core/wallet/stores'
@@ -15,12 +15,12 @@ export async function generateAndStoreActivitiesForAccount(account: IAccountStat
     ]
 
     // Step 2: link transactions with corresponding claiming transactions
-    const linkedTransactions = linkTransactionsAndClaimingTransaction(processedTransactions, account)
+    const linkedProcessedTransactions = linkTransactionsWithClaimingTransactions(processedTransactions, account)
 
-    // Step 2: generate activities from processed transactions
-    const activities = generateActivitiesFromProcessedTransactions(linkedTransactions, account)
+    // Step 3: generate activities from processed transactions
+    const activities = generateActivitiesFromProcessedTransactions(linkedProcessedTransactions, account)
 
-    // Step 3: set account activities with generated activities
+    // Step 4: set account activities with generated activities
     setAccountActivitiesInAllAccountActivities(account.id, activities)
 
     hideActivitiesForFoundries(account)
