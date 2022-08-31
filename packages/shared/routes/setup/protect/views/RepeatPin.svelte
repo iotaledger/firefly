@@ -16,10 +16,6 @@
 
     const dispatch = createEventDispatcher()
 
-    onMount(() => {
-        pinRef.resetAndFocus()
-    })
-
     $: pinInput, (error = '')
 
     function onSubmit(): void {
