@@ -362,7 +362,7 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.2.tgz#8f03a22a04de437254e8ce8cc84ba39689288752"
   integrity sha512-HyYEUDeIj5rRQU2Hk5HTB2uHsbRQpF70nvMhVzi+VJR0X+xNEhjPui4/kBf3VeH/wqD28PT4sVOm8qqLjBrSZg==
 
-"@electron/get@^1.0.1":
+"@electron/get@^1.13.0":
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/@electron/get/-/get-1.14.1.tgz#16ba75f02dffb74c23965e72d617adc721d27f40"
   integrity sha512-BrZYyL/6m0ZXz/lDxy/nlVhQz+WF+iPS6qXolEU8atw7h6v1aYkjwJZ63m+bJMBTxDE66X+r2tPS4a/8C82sZw==
@@ -1236,10 +1236,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.25.tgz#15967a7b577ff81383f9b888aa6705d43fbbae93"
   integrity sha512-EPpXLOVqDvisVxtlbvzfyqSsFeQxltFbluZNRndIb8tr9KiBnYNLzrc1N3pyKUCww2RNrfHDViqDWWE1LCJQtQ==
 
-"@types/node@^14.6.2":
-  version "14.18.26"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.26.tgz#239e19f8b4ea1a9eb710528061c1d733dc561996"
-  integrity sha512-0b+utRBSYj8L7XAp0d+DX7lI4cSmowNaaTkk6/1SKzbKkG+doLuPusB9EOvzLJ8ahJSk03bTLIL6cWaEd4dBKA==
+"@types/node@^16.11.26":
+  version "16.11.56"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.56.tgz#dcbb617669481e158e0f1c6204d1c768cd675901"
+  integrity sha512-aFcUkv7EddxxOa/9f74DINReQ/celqH8DiB3fRYgVDM2Xm5QJL8sl80QKuAnGvwAsMn+H3IFA6WCrQh1CY7m1A==
 
 "@types/node@^18.7.9":
   version "18.7.9"
@@ -3402,13 +3402,13 @@ electron-updater@^4.3.5:
     lodash.isequal "^4.5.0"
     semver "^7.3.2"
 
-electron@13.6.9:
-  version "13.6.9"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-13.6.9.tgz#7bd83cc1662ceaaa09dcd132a7b507cec888b028"
-  integrity sha512-Es/sBy85NIuqsO9MW41PUCpwIkeinlTQ7g0ainfnmRAM2rmog3GBxVCaoV5dzEjwTF7TKG1Yr/E7Z3qHmlfWAg==
+electron@18.3.6:
+  version "18.3.6"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-18.3.6.tgz#33739f44cb0a74e45c3efd879485af53c7c531c5"
+  integrity sha512-o1cArbCDkRKOJRKk+UXiBv7/wVa0jA0k0U3LGfMcYaq+M3m20EQ5hUxC5xCHxyLYSdkriAjEp3VDaGP9EwjBsQ==
   dependencies:
-    "@electron/get" "^1.0.1"
-    "@types/node" "^14.6.2"
+    "@electron/get" "^1.13.0"
+    "@types/node" "^16.11.26"
     extract-zip "^1.0.3"
 
 emittery@^0.8.1:
