@@ -1,5 +1,5 @@
 import { createNewAccount, setSelectedAccount } from '@core/account'
-import { ErrorFromApi, handleErrorFromApi, handleGenericError } from '@core/error'
+import { handleError } from '@core/error/handlers/handleError'
 import { getAndUpdateNodeInfo } from '@core/network'
 import {
     buildProfileManagerOptionsFromProfileData,
@@ -111,11 +111,7 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
             }, 500)
         }
     } catch (err) {
-        if (err?.type in ErrorFromApi) {
-            handleErrorFromApi({ ...err, message: err?.message ?? err?.error })
-        } else {
-            handleGenericError(err)
-        }
+        handleError(err)
         await logout()
         _loginRouter.previous()
         resetLoginProgress()

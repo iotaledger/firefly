@@ -4,7 +4,7 @@ import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
 import { addError } from '../stores'
 
-export function handleError(errorParameters: IErrorParameters): void {
+export function logAndNotifyError(errorParameters: IErrorParameters): void {
     const localisedMessage = errorParameters?.localizationKey
         ? localize(errorParameters?.localizationKey)
         : localize('error.global.generic')

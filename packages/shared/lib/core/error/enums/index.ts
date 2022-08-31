@@ -1,2 +1,2 @@
 export * from './client-error.enum'
-export * from './error-from-api.enum'
+export * from './wallet-rs-error.enum'

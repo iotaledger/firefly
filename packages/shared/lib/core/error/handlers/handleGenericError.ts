@@ -1,8 +1,8 @@
 import { IError } from '../interfaces'
-import { handleError } from './handleError'
+import { logAndNotifyError } from '../actions'
 
 export function handleGenericError(error: IError): void {
-    handleError({
+    logAndNotifyError({
         message: 'Error: ' + error?.message,
         logToConsole: true,
         saveToErrorLog: true,

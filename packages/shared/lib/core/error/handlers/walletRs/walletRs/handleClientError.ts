@@ -1,8 +1,8 @@
-import { API_ERROR_PARAMETERS, CLIENT_ERROR_REGEXES } from '../constants'
-import { ClientError } from '../enums'
-import { IError } from '../interfaces'
-import { handleError } from './handleError'
-import { handleGenericError } from './handleGenericError'
+import { WALLET_RS_ERROR_PARAMETERS, CLIENT_ERROR_REGEXES } from '../../../constants'
+import { ClientError } from '../../../enums'
+import { IError } from '../../../interfaces'
+import { logAndNotifyError } from '../../../actions'
+import { handleGenericError } from '../../handleGenericError'
 
 export function handleClientError(error: IError): void {
     if (error?.type !== 'ClientError') {
@@ -20,9 +20,9 @@ export function handleClientError(error: IError): void {
                 break
         }
         if (errorKey) {
-            const errorObject = API_ERROR_PARAMETERS?.[error?.type]?.[errorKey]
+            const errorObject = WALLET_RS_ERROR_PARAMETERS?.[error?.type]?.[errorKey]
             if (errorObject) {
-                handleError({ ...errorObject, message: error?.message })
+                logAndNotifyError({ ...errorObject, message: error?.message })
             } else {
                 handleGenericError(error)
             }
