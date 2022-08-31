@@ -42,8 +42,6 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
             documentPicker!.modalPresentationStyle = UIModalPresentationStyle.formSheet
             self.bridge?.viewController?.present(documentPicker!, animated: true, completion: nil)
         }
-
-        call.resolve()
     }
     
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt url: [URL]) {
@@ -136,5 +134,9 @@ public class SecureFilesystemAccess: CAPPlugin, UIDocumentPickerDelegate {
         }
         
         call.resolve()
+    }
+
+    @objc public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        _call?.resolve()
     }
 }
