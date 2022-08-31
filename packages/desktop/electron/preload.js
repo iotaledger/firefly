@@ -51,7 +51,7 @@ try {
         WalletApi.initLogger(loggerOptions)
     }
 } catch (error) {
-    ipcRenderer.invoke('handle-error', '[Preload Context] Logger already initialized', error)
+    console.warn('[Preload Context] Error:', error)
 }
 
 try {
