@@ -7,7 +7,8 @@
         "legal": {
             "title": "Personvernerklæring & Vilkår for Bruk",
             "body": "Vennligst gå gjennom Personvernerklæring og Vilkår for Bruk.",
-            "checkbox": "Jeg har lest og godtar tjenestevilkårene og retningslinjene for personvern"
+            "checkbox": "Jeg har lest og godtar tjenestevilkårene og retningslinjene for personvern",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -15,7 +16,7 @@
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "appearance": {
-            "title": "Utseende",
+            "title": "Appearance",
             "body": "Velg app-tema."
         },
         "profile": {
@@ -124,9 +125,9 @@
             "body": "Du har sikkerhetskopiert lommebøkene dine til et Stronghold."
         },
         "congratulations": {
-            "title": "Oppsett av lommebok fullført",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Midlene er migrert",
-            "body": "Din nye lommebok er klar til bruk.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Migreringen av dine midler til det nye nettverket var vellykket",
             "fireflyLedgerBody": "Din Ledger konto er bekreftet gjenopprettet, og du kan nå fortsette.",
             "trinityLedgerBody": "Du har vellykket overført din Ledger til det nye nettverket.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Gjenopprett lommebøkene dine ved hjelp av en sikkerhetskopi-fil",
-            "body": "Importer en sikkerhetskopi-fil for å gjenopprette lommebøkene dine. Sikkerhetskopier kan enten være et Stronghold (.stronghold) eller et Trinity SeedVault (.kdbx)."
+            "body": "Importer en sikkerhetskopi-fil for å gjenopprette lommebøkene dine. Sikkerhetskopier kan enten være et Stronghold (.stronghold) eller et Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Gjenopprett eller migrer din Ledger",
@@ -190,7 +192,7 @@
             "readMore": "Hva du kan forvente fra migrasjonsprosessen"
         },
         "generateNewLedgerAddress": {
-            "title": "Generer en ny adresse",
+            "title": "Generate new address",
             "body": "Du må generere en ny adresse for å migrere din tokens med Firefly. Klikk på knappen nedenfor for å fortsette.",
             "confirmTitle": "Bekreft den nye adressen",
             "confirmBody": "For sikkerhets skyld, sammenlign adressen generert på Ledger-enheten med adressen nedenfor. Hvis de er like, trykk begge knappene på Ledger-enheten som forespurt.",
@@ -250,7 +252,7 @@
             "title": "Advarsel",
             "body1": "Du har midler på én eller flere brukte adresser.",
             "body2": "Vi anbefaler deg å kjøre en automatisert prosess for å hjelpe deg med å sikre og overføre disse midlene på en trygg måte.",
-            "body3": "Hvis du lukker appen, må du starte hele migreringen på nytt.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Lær om brukte adresser"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Sørg for at din Ledger er tilkoblet og at {legacy}-appen alltid er åpen under migrering.",
             "migrate": "Migrer midler",
             "transaction": "Transaksjon {number}",
-            "rerun": "Prøv på nytt"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -403,7 +405,7 @@
                 "editDetails": "Rediger detaljer",
                 "viewInfo": "Vis informasjon",
                 "setAsPrimary": "Sett som primær",
-                "removeNode": "Fjern node",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "Inkluder offisiell liste over noder",
                 "noNodes": "Det er ingen noder, og klarer derfor ikke å koble til nettverket",
                 "noNodesAuto": "Ingen noder, automatisk selektering av noder brukes i stedet"
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "Status",
                 "messagesPerSecond": "Meldinger per sekund",
                 "referencedRate": "Referert-rate"
             },
             "profileModal": {
-                "allSettings": "Alle innstillinger",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Logg ut",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "Du sikkerhetskopierte sist {date}",
-                    "notBackedUp": "Ikke sikkerhetskopiert",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -718,8 +724,8 @@
                 "features": "Funksjoner",
                 "confirmedMilestoneIndex": "Bekreftet milestone indeks",
                 "pruningIndex": "Ryddeeindeks",
-                "messagesPerSecond": "Meldinger per sekund",
-                "referencedRate": "Referert-rate"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -757,12 +763,12 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "Du sender en transaksjon fra en lommebok som for tiden blir staket. Dette kan stanse stakingen av dine tokens. Du kan gjennomføre transaksjonen, men du må kanskje starte staking på nytt for gjenværende tokens.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
         "balanceFinder": {
-            "title": "Saldo-finner",
+            "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
@@ -777,7 +783,7 @@
             "body2": "Det anbefales at du gjentar prosessen for adresser med et middels risikonivå eller høyere."
         },
         "missingBundle": {
-            "title": "Advarsel: Midler er utsatt for risiko under migreringen",
+            "title": "Warning: funds at risk during migration",
             "body": "Du har tilgjengelige midler på brukte adresser, men nødvendig informasjon for å sikre dem ble ikke funnet. Dette kan skje hvis du har utført transaksjoner for lenge siden. Du kan fortsette, men {value} er utsatt for risiko under migrasjonen.",
             "learnMore": "Lær mer om brukte adresser",
             "proceed": "Jeg forstår risikoen"
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips hvis din Ledger ikke kobler til",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Sørg for at Ledger Live ikke er åpen på datamaskinen",
                 "1": "Sørg for at du har låst opp din Ledger-enhet med PIN-koden",
@@ -823,7 +829,7 @@
                 "info": "Bekreft at den resterende adressen som vises på Ledger-enheten samsvarer med visningen nedenfor. Dersom den er lik, trykk på begge knappene på Ledger-enheten som forespurt."
             },
             "transaction": {
-                "title": "Bekreft transaksjon",
+                "title": "Confirm transaction",
                 "info": "Bekreft at transaksjonsinformasjonen som vises på Ledger-enheten samsvarer med visningen nedenfor. Dersom den er lik, trykk på begge knappene på Ledger-enheten som forespurt."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Totalt antall stakede midler",
             "stakedSuccessfully": "Dine tokens har blitt staket for {account}.",
             "unstakedSuccessfully": "Staking av tokens er avsluttet for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrer til Chrysalis eller gjenopprett en eksisterende lommebok",
         "createWallet": "Opprett en ny lommebok",
         "createWalletDescription": "Lag en fersk lommebok som kjører på Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Lagre passord",
         "useBiometric": "Bruk biometrisk sikkerhet",
         "setupPin": "Opprett PIN-kode",
@@ -991,14 +1003,14 @@
         "saveBackup": "Lagre Stronghold sikkerhetskopi",
         "customizeAcount": "Tilpass lommebok",
         "viewAddressHistory": "Vis adressehistorikk",
-        "hideAccount": "Skjul lommebok",
+        "hideAccount": "Hide wallet",
         "showAccount": "Vis lommebok",
-        "deleteAccount": "Slett lommebok",
+        "deleteAccount": "Delete wallet",
         "max": "Maks",
         "addNode": "Legg til node",
         "updateNode": "Oppdater node",
         "removeNode": "Fjern node",
-        "removeAllNodes": "Fjern alle noder",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Skjul",
         "hideOthers": "Skjul andre",
         "showAll": "Vis alle",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Søk på nytt",
         "searching": "Søker...",
         "closeFirefly": "Lukk Firefly",
-        "generateAddress": "Generer adresse",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrer en annen indeks",
         "visitWebsite": "Besøk nettside",
         "howItWorks": "Hvordan det fungerer",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Passord",
+        "close": "Close",
         "confirmPassword": "Bekreft passord",
         "currentPassword": "Nåværende passord",
         "newPassword": "Nytt passord",
@@ -1066,15 +1080,18 @@
         "received": "Mottatt",
         "sendPayment": "Send betaling",
         "moveFunds": "Intern Overføring",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Send Til",
         "sendFunds": "Send midler",
         "sendToAddress": "Send til adresse",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Skann en QR-kode eller lim inn en adresse",
         "moveFundsBetweenAccounts": "Flytt midler mellom lommebøker",
         "sendTokensToAddress": "Send tokens til en adresse",
         "manageAccount": "Administrere lommebok",
         "customizeAcount": "Tilpass lommebok",
-        "account": "Lommebok",
+        "account": "Wallet",
         "sendingToAddress": "Sender til adresse",
         "amount": "Beløp",
         "addAddress": "Legg til adresse",
@@ -1111,6 +1128,7 @@
         "createAccount": "Opprette lommebok",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Navn på lommebok",
         "latestTransactions": "Siste transaksjoner",
         "transactions": "Transaksjoner",
@@ -1198,14 +1216,16 @@
         "staking": "Staking",
         "unstaking": "Avslutter staking",
         "notStaked": "Ikke staket",
-        "stakedFunds": "Stakede midler",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Ikke-stakede midler",
         "voting": "Voting",
         "unvoting": "Unvoting",
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "I dag",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "Du vil ikke nå minimumsbelønningen i løpet av gjenværende staking periode med mindre du staker mer IOTA.",
             "bodyDidNotReachMin": "Du staket ikke nok IOTA for å oppnå minimum gevinst for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Denne lommeboken har ikke nok IOTA tokens til å nå den minimale airdrop belønningen for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Meldings-ID",
+            "messageId": "Message ID",
             "internal": "Intern",
             "rawValue": "Rå verdi",
             "formattedValue": "Formatert verdi",
-            "date": "Dato",
+            "date": "Date",
             "time": "Tid"
         }
     },
@@ -1443,7 +1468,7 @@
         }
     },
     "tabs": {
-        "wallet": "Lommebok",
+        "wallet": "Wallet",
         "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",

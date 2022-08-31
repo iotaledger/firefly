@@ -7,7 +7,8 @@
         "legal": {
             "title": "سياسة الخصوصية وشروط الاستخدام",
             "body": "الرجاء مراجعة سياسة الخصوصية وشروط الاستخدام.",
-            "checkbox": "لقد قرأت سياسة الخصوصية وشروط الاستخدام و أوافق على ما فيها"
+            "checkbox": "لقد قرأت سياسة الخصوصية وشروط الاستخدام و أوافق على ما فيها",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "الإبلاغ عن الأعطال",
@@ -15,7 +16,7 @@
             "checkbox": "إرسال تقارير الأعطال إلى مؤسسة IOTA"
         },
         "appearance": {
-            "title": "المظهر",
+            "title": "Appearance",
             "body": "يرجى اختيار المظهر المفضل لك."
         },
         "profile": {
@@ -124,9 +125,9 @@
             "body": "لقد قمت بعمل نسخة إحتياطية لمحفظتك الى الملف المُحصَّن."
         },
         "congratulations": {
-            "title": "اكتمل إعداد المحفظة",
+            "title": "Profile setup complete!",
             "fundsMigrated": "تم ترحيل الأموال",
-            "body": "محفظتك الجديدة جاهزة للاستخدام.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "مبروك, لقد قمت بنقل أرصدتك الى الشبكة الجديدة بنجاح",
             "fireflyLedgerBody": "مبروك, لقد تم استرداد حساب لِدْجرْ الخاص بك بنجاح, يمكنك المتابعة الآن.",
             "trinityLedgerBody": "مبروك, لقد قمت بنقل أرصدتك من جهاز لِدْجرْ الخاص بك الى الشبكة الجديدة.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "استعادة محفظتك باستخدام ملف النسخ الاحتياطي",
-            "body": "لاسترداد محفظتك قم باستيراد نسخة احتياطية من الملف المُحصَّن ذو الاحقة (.....) أو من مخزن الرموز السرية لمحفظة تْرَنِتْي ذو الاحقة (.....)."
+            "body": "لاسترداد محفظتك قم باستيراد نسخة احتياطية من الملف المُحصَّن ذو الاحقة (.....) أو من مخزن الرموز السرية لمحفظة تْرَنِتْي ذو الاحقة (.....).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "إستعادة محتويات جهاز لِدْجرْ الخاص بك",
@@ -190,7 +192,7 @@
             "readMore": "ما يمكن توقعه من عملية نقل الارصدة"
         },
         "generateNewLedgerAddress": {
-            "title": "إنشاء عنوان جديد",
+            "title": "Generate new address",
             "body": "يجب عليك أن تنشأ حساب جديد لنقل الارصدة من العملات الرقمية باستخدام محفظة فايَرْفلاَي. انقر على الزر أدناه للمتابعة.",
             "confirmTitle": "أكد حسابك الجديد",
             "confirmBody": "للأمان، يرجى مقارنة الحساب الذي تم إنشاؤه على جهاز لِدْجرْ الخاص بك مع الحساب المعروض أدناه. إذا كان متطابق ، اضغط كلا الزرين على جهاز لِدْجرْ بذات الوقت, كما هو موضح.",
@@ -250,7 +252,7 @@
             "title": "تحذير",
             "body1": "لديك أموال منفقة على عنوان واحد أو أكثر.",
             "body2": "ننصحك بتشغيل عملية آلية للمساعدة في تأمين وتحويل هذه الأموال بأمان.",
-            "body3": "إذا أغلقت التطبيق، ستحتاج إلى إعادة تشغيل الترحيل بأكمله.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "تعرف على العناوين المنفقة"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "تأكد من أن جهاز Ledger الخاص بك متصل وأن تطبيق {legacy} مفتوح تتم عملية الترحيل بالكامل.",
             "migrate": "ترحيل الأموال",
             "transaction": "المعاملة {number}",
-            "rerun": "حاول مرة اخرى"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -403,7 +405,7 @@
                 "editDetails": "تعديل التفاصيل",
                 "viewInfo": "عرض المعلومات",
                 "setAsPrimary": "تعيين كعقدة أساسية",
-                "removeNode": "إزالة الوسيط البرمجي",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "تضمين قائمة الوسطاء البرمجيين الرسمية",
                 "noNodes": "نأسف لذلك, لا يمكن الاتصال بالشبكة حاليا لعدم توفر وسطاء برمجيون",
                 "noNodesAuto": "لا يوجد وسطاء برمجيون, سيتم استخدام خاصية الاختيار الآلي للوسطاء بدلا من اليدوي"
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "الحالة",
                 "messagesPerSecond": "عدد الرسائل في الثانية",
                 "referencedRate": "المعدل المشار إليه"
             },
             "profileModal": {
-                "allSettings": "جميع الإعدادات",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "تسجيل الخروج",
                 "stronghold": {
                     "title": "الملف الشخصي مقفل",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "آخر نسخة احتياطية من {date}",
-                    "notBackedUp": "لم يتم النسخ الاحتياطي",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "إخفاء {name}؟",
             "body": "يمكنك العثور على هذه المحفظة في وقت لاحق عن طريق تمكين \"إظهار المحافظ المخفية\" في الإعدادات المتقدمة.",
-            "typePassword": "اكتب كلمة مرور محفظتك للتأكيد.",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "إخفاء المحفظة",
             "errorTitle": "لا يمكن إخفاء {name}",
             "errorBody1": "لإخفاء محفظة يجب أن يكون بها رصيد صفر.",
@@ -718,8 +724,8 @@
                 "features": "خصائص",
                 "confirmedMilestoneIndex": "التفاصيل الرئيسية المؤكدة في صندوق المؤشرات",
                 "pruningIndex": "إختصارات صندوق المؤشرات",
-                "messagesPerSecond": "عدد الرسائل في الثانية",
-                "referencedRate": "المعدل المشار إليه"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -734,12 +740,12 @@
             "empty": "سجل الأخطاء فارغ."
         },
         "deleteProfile": {
-            "title": "حذف الملف الشخصي",
+            "title": "Delete profile",
             "confirmation": "هل أنت متأكد من أنك تريد حذف هذا الملف الشخصي؟ لا يمكن التراجع عن هذه العملية.",
             "typePassword": "أدخل كلمة السر الخاصة بك للتأكيد."
         },
         "diagnostics": {
-            "title": "التشخيص",
+            "title": "Diagnostics",
             "node": "الوسيط البرمجي",
             "platform": "المنصة",
             "platformVersion": "إصدار المنصة",
@@ -757,12 +763,12 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "تنبيه: أنت تقوم بتحويل أرصدة من حساب مشارك في فعالية الربح من التخزين في محفظتك, الاستمرار بذلك سيؤدي الى الغاء اشتراكك والخروج من الفعالية. لك كامل الحرية للقيام بذلك. ملاحظة: يمكنك المشاركة بالفعالية لاحقا بالارصدة المتبقية من العملة الرقمية في حسابك وذلك من خلال طلب مشاركة جديد.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
         "balanceFinder": {
-            "title": "كشف الرصيد",
+            "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "إذا لم تستطع ربط جهاز لِدْجرْ الخاص بك أو لم يتم التعرف عليه, إتبع الارشادات التالية",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "تأكد من أن برنامج لِدْجرْ الرئيسي غير مفتوح على جهاز الكمبيوتر الخاص بك",
                 "1": "تأكد من فتح جهاز لِدْجرْ الخاص بك باستخدام رمز التعريف الشخصي الخاص بك",
@@ -823,7 +829,7 @@
                 "info": "يرجى التأكد من أن حسابك الفائض الظاهر على شاشة جهاز لِدْجرْ الخاص بك مطابق مع الحساب المعروض أدناه. إذا كان متطابق ، اضغط على كلا الزرين على جهاز لِدْجرْ كما هو موضح."
             },
             "transaction": {
-                "title": "تأكيد المعاملة",
+                "title": "Confirm transaction",
                 "info": "يرجى التأكد من أن معلومات تحويل الارصدة الظاهرة على شاشة جهاز لِدْجرْ الخاص بك مطابقة للمعلومات المعروض أدناه. إذا كانت متطابقة ، اضغط على كلا الزرين على جهاز لِدْجرْ الخاص بك كما هو موضح."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "إجمالي رصبد الاموال المشاركة في فعالية الربح من التخزين",
             "stakedSuccessfully": "تم إشراك العملة الرقمية الخاصة بك في حساب {account} الخاص بفعالية الربح من التخزين بنجاح.",
             "unstakedSuccessfully": "تم سحب العملة الرقمية الخاصة بك من حساب {account} الخاص بفعالية الربح من التخزين بنجاح.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -904,10 +911,14 @@
             "title": "أنت تقوم بإنشاء ملف تعريف شخصي خاص بالمطورين",
             "body": "سوف يتم الاتصال بشبكة كرِسَالِس التجريبية بشكل تلقائي, ويمكنك الانتقال لشبكات أخرى يدويا.\nيرجى المتابعة فقط إذا كنت تعلم ما تفعل."
         },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
+        },
         "crashReporting": {
             "title": "الإبلاغ عن الأعطال",
             "body": "ساعد المطورين على تحسين Firefly بإرسال بيانات التشخيص تلقائيًا عند حدوث خطأ أو عطل. إذا تم تحديده ، فسيصبح هذا ساري المفعول بعد إعادة تشغيل Firefly.",
-            "checkbox": "إرسال تقارير الأعطال إلى مؤسسة IOTA"
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "شروط الخدمة",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "قم بالتحويل إلى شبكة كرِسَالِس أو قم باستعادة محفظة موجودة مسبقا",
         "createWallet": "إنشاء محفظة جديدة",
         "createWalletDescription": "إنشاء محفظة جديدة تعمل على شبكة كرِسَالِس",
+        "exploreWallet": "Explore wallet",
         "savePassword": "حفظ كلمة المرور",
         "useBiometric": "استخدام الأمن بالبصمة",
         "setupPin": "إعداد رمز التعريف الشخصي",
@@ -961,8 +973,8 @@
         "enterYourPin": "أدخل رمز التعريف الشخصي",
         "saveBackupFile": "حفظ ملف النسخ الاحتياطي",
         "iveWrittenRecoveryPhrase": "لقد كتبت عبارة الاسترداد الخاصة بي",
-        "verifyRecoveryPhrase": "تحقق من عبارة الاسترداد",
-        "revealRecoveryPhrase": "إظهار عبارة الاسترداد",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "استيراد مخزن الرموز السرية",
         "checkAgain": "تحقق مرة أخرى",
         "importFromFile": "استيراد من ملف",
@@ -983,7 +995,7 @@
         "enableDeepLinks": "تفعيل الروابط المتشعبة الخاصة بشبكة أَيُوتاَ",
         "enableDeveloperMode": "تمكين وضع المبرمج",
         "enableSystemNotifications": "تمكين إشعارات النظام",
-        "exportTransactionHistory": "تصدير سجل المعاملات",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "إثباث العمل محليّاً",
         "unlock": "فتح",
         "updateFirefly": "يرجى تحديث برنامج محفظة فايَرْفلاَي",
@@ -998,7 +1010,7 @@
         "addNode": "إضافة الوسيط البرمجي",
         "updateNode": "تحديث بيانات الوسيط البرمجي",
         "removeNode": "إزالة الوسيط البرمجي",
-        "removeAllNodes": "الغاء الاتصال بجميع الوسطاء البرمجيون",
+        "removeAllNodes": "Remove all nodes",
         "hide": "إخفاء",
         "hideOthers": "إخفاء الآخرين",
         "showAll": "إظهار الكل",
@@ -1034,7 +1046,7 @@
         "searchAgain": "البحث مرة أخرى",
         "searching": "جاري البحث...",
         "closeFirefly": "إغلاق محفظة فايَرْفلاَي",
-        "generateAddress": "إنشاء رقم حساب خاص بك",
+        "generateAddress": "Generate address",
         "migrateAgain": "ربط صندوق مؤشرات آخر",
         "visitWebsite": "يرجى زيارة الموقع الالكتروني",
         "howItWorks": "كيفية عملها",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "حسنا، فهمت",
-        "readMore": "قراءة المزيد"
+        "readMore": "قراءة المزيد",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "كلمة المرور",
+        "close": "Close",
         "confirmPassword": "تأكيد كلمة المرور",
         "currentPassword": "كلمة المرور الحالية",
         "newPassword": "كلمة مرور جديدة",
@@ -1066,15 +1080,18 @@
         "received": "تم الاستلام",
         "sendPayment": "إرسال الدفع",
         "moveFunds": "نقل داخلي",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "أرسل إلى",
         "sendFunds": "إرسال الأموال",
         "sendToAddress": "إرسال إلى العنوان",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "قراءة رمز QR أو لصق عنوان",
         "moveFundsBetweenAccounts": "نقل الأموال بين المحافظ",
         "sendTokensToAddress": "إرسال التوكينز إلى عنوان",
         "manageAccount": "إدارة المحفظة",
         "customizeAcount": "تخصيص محفظتك",
-        "account": "المحفظة",
+        "account": "Wallet",
         "sendingToAddress": "إرسال إلى العنوان",
         "amount": "المبلغ",
         "addAddress": "إضافة عنوان",
@@ -1111,6 +1128,7 @@
         "createAccount": "إنشاء محفظة",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "اسم المحفظة",
         "latestTransactions": "آخر المعاملات",
         "transactions": "المعاملات",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "عنوان الاستلام",
         "newAddress": "حساب جديد",
         "date": "التاريخ",
-        "status": "الحالة",
+        "status": "Status",
         "confirmed": "مؤكد",
         "pending": "قيد الانتظار",
         "noAccounts": "ليس لديك محفظة، يرجى إنشاء محفظة.",
@@ -1198,14 +1216,16 @@
         "staking": "فعالية الربح من التخزين",
         "unstaking": "إلغاء تخزين أموالك",
         "notStaked": "غير مشترك بفعالية الربح من التخزين",
-        "stakedFunds": "الارصدة المخزنة",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "الارصدة غير المخزنة",
         "voting": "Voting",
         "unvoting": "Unvoting",
         "accountColor": "لون المحفظة",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "اليوم",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "لن تصل إلى الحد الأدنى من قيمة الجوائز خلال الفترة المتبقية من فعالية الربح من التخزين إلا إذ ضممت المزيد من عملة أَيُوتاَ الرقمية الى الفعالية.",
             "bodyDidNotReachMin": "نأسف لذلك، ولكنك لم تقم بتخزين الكمية الكافية من عملة أَيُوتاَ الرقمية للحصول على أدنى حد من قيمة جوائز فعاليات {airdrop} و ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "نأسف لذلك، ولكن لا يوجد رصيد كاف من عملة أَيُوتاَ الرقمية في محفظتك للحصول على أدنى حد من جوائز فعالية {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
@@ -1427,7 +1452,7 @@
             "internal": "داخلي",
             "rawValue": "القيمة الصافية",
             "formattedValue": "يرجى تحديد قيمة ملف سجل المعاملات التي ترغب بتصديره بصيغة Csv",
-            "date": "التاريخ",
+            "date": "Date",
             "time": "الزمن"
         }
     },
@@ -1443,8 +1468,8 @@
         }
     },
     "tabs": {
-        "wallet": "المحفظة",
-        "staking": "فعالية الربح من التخزين",
+        "wallet": "Wallet",
+        "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",
         "activity": "Activity"

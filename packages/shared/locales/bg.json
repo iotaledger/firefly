@@ -7,7 +7,8 @@
         "legal": {
             "title": "Privacy Policy & Terms of Service",
             "body": "Моля прегледайте Политика за поверителност и Общи условия за ползване.",
-            "checkbox": "Прочетох и приемам Privacy Policy & Terms of Service"
+            "checkbox": "Прочетох и приемам Privacy Policy & Terms of Service",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Докладване за срива",
@@ -124,9 +125,9 @@
             "body": "Създадохте резервно копие на Вашите портфейли в Stronghold."
         },
         "congratulations": {
-            "title": "Настройка на портфейла завършена",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Средставата са мигрирани",
-            "body": "Вашият нов портфейл е готов за използване.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Успешно мигрирахте средствата си в новата мрежа",
             "fireflyLedgerBody": "Вашият Ledger акаунт е успешно възстановен и можете да продължите.",
             "trinityLedgerBody": "Успешно мигрирахте Ledger в новата мрежа.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Възстановяване на портфейл чрез бекъп файл",
-            "body": "Импортиране на резервно копие от файл за възстановяване на портфейл. Резервните копия могат да бъдат файлове Stronghold (.stronghold) или Trinity SeedVault (.kdbx)."
+            "body": "Импортиране на резервно копие от файл за възстановяване на портфейл. Резервните копия могат да бъдат файлове Stronghold (.stronghold) или Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Възстановяване или миграране на Ledger",
@@ -190,7 +192,7 @@
             "readMore": "Какво да очаквате от процеса по миграция"
         },
         "generateNewLedgerAddress": {
-            "title": "Генериране на нов адрес",
+            "title": "Generate new address",
             "body": "Трябва да генерирате нов адрес за мигриране на средствата към Firefly. Натиснете долния бутон, за да продължите.",
             "confirmTitle": "Потвърдете новия адрес",
             "confirmBody": "За сигурност моля сверете адреса, който е генериран от Ledger устройството, с адреса визуализиран долу. Ако адресите съвпадат натиснете двата бутона на Ledger устройството, когато го изисква.",
@@ -227,7 +229,7 @@
             "body2": "Може да отнеме време. Моля не изключвайте устройството по време на миграцията.",
             "existing": "Стар портфейл",
             "new": "Нов портфейл",
-            "learn": "Научете повече за миграцията",
+            "learn": "Learn about the migration",
             "beginMigration": "Започни миграция",
             "migrating": "Мигриране на средствата...",
             "migrated": "{balance} мигрирани",
@@ -250,7 +252,7 @@
             "title": "Внимание",
             "body1": "Имате средства в един или повече преизползвани адреси.",
             "body2": "Препоръчваме да пуснете автоматичен процес за подсигуряване и трансфер на средствата безопасно.",
-            "body3": "Ако затворите приложението, ще трябва на започнете от начало цялата миграция.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Научи повече за преизползваните адреси"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Отлична свързаност в мрежата",
                 "networkDegraded": "Липса на свързаност в мрежата",
                 "networkDown": "Мрежата е прекъсната",
+                "networkUnreachable": "Network unreachable",
                 "status": "Статус",
                 "messagesPerSecond": "Съобщения/трансакции в секунда",
                 "referencedRate": "Referenced rate"
             },
             "profileModal": {
-                "allSettings": "Всички настройки",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Отписване",
                 "stronghold": {
                     "title": "Профил заключен",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Бекъп на портфейлите",
-                    "lastBackup": "Последно създаване на резервно копие {date}",
-                    "notBackedUp": "Няма резервно копие",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Резервно копие"
                 },
                 "version": {
@@ -607,7 +613,7 @@
             "events": {
                 "status": {
                     "upcoming": "Announcement",
-                    "commencing": "Гласуването отворено",
+                    "commencing": "Voting open",
                     "holding": "Преброяване",
                     "ended": "Приключено"
                 },
@@ -625,7 +631,7 @@
             "eventDetails": {
                 "votingOpens": "Гласуването започва на",
                 "votingProgress": "Оставащо време",
-                "votingPower": "Твоята тежест на вота",
+                "votingPower": "Your voting weight",
                 "votesCounted": "Your counted votes",
                 "maximumVotes": "Твоите максимални гласове",
                 "countingStarts": "Отброяването започва на",
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "Скриване {name}?",
             "body": "Можете да намерите този портфейл по-късно чрез \"Покажи скрити портфейли\" в Разширени Настройки.",
-            "typePassword": "Въведете своята парола за потвърждение.",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Скрий портфейл",
             "errorTitle": "Неуспешно скриване {name}",
             "errorBody1": "За да скриете портфейл, трябва да има 0 наличност.",
@@ -718,7 +724,7 @@
                 "features": "Характеристики",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Съобщения/трансакции в секунда",
+                "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
             }
         },
@@ -734,12 +740,12 @@
             "empty": "Регистърът с грешки е празен."
         },
         "deleteProfile": {
-            "title": "Изтриване на профила",
+            "title": "Delete profile",
             "confirmation": "Наистина ли искате да изтриете този профил? Това действие не може да бъде отменено.",
             "typePassword": "Въведете своята парола за потвърждение."
         },
         "diagnostics": {
-            "title": "Диагностика",
+            "title": "Diagnostics",
             "node": "Node сървър",
             "platform": "Платформа",
             "platformVersion": "Версия на платформата",
@@ -757,7 +763,7 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "Изпращате трансфер от портфейл, който в момента е заложен. Това може да спре залагането на средствата. Можете да изпратите трансфера, но след това може да се наложи да заложите отново останалите средства.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
@@ -823,7 +829,7 @@
                 "info": "Потвърдете, че остатъчния адрес визуализиран на Ledger устройството съвпада с този визуализиран долу. Ако адресите съвпадат, натиснете двата бутона на Ledger устройството, когато го изисква."
             },
             "transaction": {
-                "title": "Потвърдете Транзакция",
+                "title": "Confirm transaction",
                 "info": "Потвърдете, че информацията за транзакцията визуализирана на Ledger устройството съвпада с тази визуализирана долу. Ако съвпадат, натиснете двата бутона на Ledger устройството, когато го изисква."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Всички заложени средства",
             "stakedSuccessfully": "Твоите средства са заложени за {account}.",
             "unstakedSuccessfully": "Твоите средства вече не са заложени за {account}.",
-            "singleAccountHint": "Търсите своите портфейли? Firefly е променен. Превключете между портфейлите в менюто най-горе."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Потвърдете участието",
@@ -877,7 +883,8 @@
             "changingVote": "Промяна на вот",
             "manageVotes": "Управление на вот",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Сливане на вот",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -904,10 +911,14 @@
             "title": "Създавате профил за девелопър",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
+        },
         "crashReporting": {
             "title": "Докладване за сривове",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "Изпращане на доклади за сривове към IOTA Foundation"
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Условия за ползване",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Миграция към Chrysalis или възстановяване от съществуващ портфейл",
         "createWallet": "Създаване на нов портфейл",
         "createWalletDescription": "Създаване на нов портфейл в мрежата Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Запазване на паролата",
         "useBiometric": "Използване на биометрична сигурност",
         "setupPin": "Задаване на ПИН код",
@@ -962,7 +974,7 @@
         "saveBackupFile": "Запази бекъп файл",
         "iveWrittenRecoveryPhrase": "Записах моята възстановяваща фраза",
         "verifyRecoveryPhrase": "Верифициране на фраза за възстановяване",
-        "revealRecoveryPhrase": "Разкриване на фраза за възстановяване",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "Импортиране от SeedVault",
         "checkAgain": "Провери отново",
         "importFromFile": "Импорт от файл",
@@ -991,14 +1003,14 @@
         "saveBackup": "Запази резервно копие в Stronghold",
         "customizeAcount": "Настройка на портфейла",
         "viewAddressHistory": "Покажи история на адресите",
-        "hideAccount": "Скрий портфейл",
+        "hideAccount": "Hide wallet",
         "showAccount": "Покажи скрити портфейли",
-        "deleteAccount": "Изтриване на портфейл",
+        "deleteAccount": "Delete wallet",
         "max": "Макс",
         "addNode": "Добави Node сървър",
         "updateNode": "Обнови Node сървър",
         "removeNode": "Премахни Node сървър",
-        "removeAllNodes": "Премахни всички node сървъри",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Скриване",
         "hideOthers": "Скриване на другите",
         "showAll": "Показване на всички",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Повторно търсене",
         "searching": "Търсене...",
         "closeFirefly": "Затвори Firefly",
-        "generateAddress": "Генериране на адрес",
+        "generateAddress": "Generate address",
         "migrateAgain": "Мигриране на друг индекс",
         "visitWebsite": "Посети уебсайта",
         "howItWorks": "Как работи",
@@ -1047,14 +1059,16 @@
         "mergeFunds": "Обедини средства",
         "done": "Готово",
         "castVotes": "Гласувай",
-        "changeVotes": "Промяна на вот",
+        "changeVotes": "Change vote",
         "mergeVotes": "Сливане на вот",
-        "stopVotes": "Спиране на гласуване",
+        "stopVotes": "Stop voting",
         "okIUnderstand": "ОК, разбирам",
-        "readMore": "Прочетете повече"
+        "readMore": "Прочетете повече",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Парола",
+        "close": "Close",
         "confirmPassword": "Потвърди паролата",
         "currentPassword": "Текуща парола",
         "newPassword": "Нова парола",
@@ -1066,9 +1080,12 @@
         "received": "Получен",
         "sendPayment": "Изпрати плащане",
         "moveFunds": "Вътрешен трансфер",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Изпрати до",
         "sendFunds": "Изпрати средства",
         "sendToAddress": "Изпращане към адрес",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Сканирайте QR код или въведете адрес",
         "moveFundsBetweenAccounts": "Преместване на средства между портфейли",
         "sendTokensToAddress": "Изпрати средства към адрес",
@@ -1111,10 +1128,11 @@
         "createAccount": "Създаване на портфейл",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Име на портфейла",
         "latestTransactions": "Последни трансакции",
         "transactions": "Транзакции",
-        "security": "Сигурност",
+        "security": "Security",
         "accountAddress": "Адрес на портфейла",
         "network": "Мрежа",
         "nodes": "Node сървъри",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "Адрес за получаване",
         "newAddress": "Нов адрес",
         "date": "Дата",
-        "status": "Статус",
+        "status": "Status",
         "confirmed": "Потвърден",
         "pending": "Изчаква",
         "noAccounts": "Нямате портфейл, моля създайте един.",
@@ -1198,14 +1216,16 @@
         "staking": "Залагане",
         "unstaking": "Спиране на стейкване",
         "notStaked": "Not staked",
-        "stakedFunds": "Стейкнати средства",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Не стейкнати средства",
         "voting": "Гласуване",
         "unvoting": "Unvoting",
         "accountColor": "Wallet color",
         "myAssets": "Моите активи",
         "option": "Опция",
-        "total": "Общо: {balance}"
+        "total": "Общо: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Днес",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID на съобщението",
+            "messageId": "Message ID",
             "internal": "Вътрешна",
             "rawValue": "Неформатирана Стойност",
             "formattedValue": "Форматирана стойност",
-            "date": "Дата",
+            "date": "Date",
             "time": "Време"
         }
     },
@@ -1443,8 +1468,8 @@
         }
     },
     "tabs": {
-        "wallet": "Портфейл",
-        "staking": "Залагане",
+        "wallet": "Wallet",
+        "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",
         "activity": "Activity"

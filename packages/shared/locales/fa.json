@@ -7,7 +7,8 @@
         "legal": {
             "title": "حریم خصوصی و شرایط استفاده",
             "body": "لطفا قوانین استفاده از خدمات و سیاست حریم خصوصی را بررسی نمایید.",
-            "checkbox": "من سیاست حریم خصوصی و شرایط استفاده را مطالعه کرده و میپذیرم"
+            "checkbox": "من سیاست حریم خصوصی و شرایط استفاده را مطالعه کرده و میپذیرم",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "گزارش دادن مشکل",
@@ -124,9 +125,9 @@
             "body": "شما از کیف پول خود یک بک آپ به صورت فایل Stronghold گرفته اید."
         },
         "congratulations": {
-            "title": "راه اندازی کیف پول کامل شد",
+            "title": "Profile setup complete!",
             "fundsMigrated": "وجوه منتقل شد",
-            "body": "کیف پول جدید شما آماده استفاده میباشد.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "شما با موفقیت وجوه خود را به شبکه جدید منتقل کردید",
             "fireflyLedgerBody": "حساب لجر شما با موفقیت بازیابی شد و شما میتوانید ادامه دهید.",
             "trinityLedgerBody": "لجر و حساب شما با موفقیت به شبکه جدید منتقل شد.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "بازگردانی کیف پول توسط فایل بک آپ",
-            "body": "جهت بازگردانی کیف پول های خود، فایل بک آپ را وارد کنید. فایل بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد."
+            "body": "جهت بازگردانی کیف پول های خود، فایل بک آپ را وارد کنید. فایل بک آپ میتواند یک استرانگ هُلد (stronghold.) و یا ترینیتی سیدوالت (kdbx.) باشد.",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "بازیابی یا انتقال لجر شما",
@@ -190,7 +192,7 @@
             "readMore": "از فرآیند انتقال چه انتظاراتی می توان داشت"
         },
         "generateNewLedgerAddress": {
-            "title": "تولید آدرس جدید",
+            "title": "Generate new address",
             "body": "شما برای انتقال توکن های خود با فایرفلای باید یک آدرس جدید بسازید. برای ادامه روی دکمه زیر کلیک کنید.",
             "confirmTitle": "آدرس جدید را تایید کنید",
             "confirmBody": "برای امنیت، لطفاً آدرس تولید شده در لجر خود را با آدرس زیر مقایسه کنید. اگر مطابقت دارند، همانطور که از شما خواسته شده است، هر دو دکمه لجر خود فشار دهید.",
@@ -250,7 +252,7 @@
             "title": "هشدار",
             "body1": "شما در یک یا چند آدرس وجوهی دارید.",
             "body2": "پیشنهاد میشود از فرایند خودکار برای انتقال امن این وجوه استفاده کنید.",
-            "body3": "اگر برنامه را ببندید، لازم اسم که تمام فرایند انتقال را دوباره از اول شروع کنید.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "کسب اطلاعات در مورد آدرس‌ها"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "مطمئن شوید که Ledger شما متصل است و برنامه {legacy} همیشه در طول انتقال باز است.",
             "migrate": "انتقال وجوه",
             "transaction": "تراکنش {number}",
-            "rerun": "تلاش مجدد"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -403,7 +405,7 @@
                 "editDetails": "تغییر جزئیات",
                 "viewInfo": "نمایش اطلاعات",
                 "setAsPrimary": "تنظیم به عنوان اصلی",
-                "removeNode": "حذف نود",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "اضافه کردن لیست گره های رسمی",
                 "noNodes": "هیچ گره ای وجود ندارد، قادر به اتصال به شبکه نیست",
                 "noNodesAuto": "نودی وجود ندارد، به جای آن انتخاب اتوماتیک استفاده می شود"
@@ -465,12 +467,16 @@
                 "networkOperational": "شبکه عملیاتی",
                 "networkDegraded": "شبکه خراب است",
                 "networkDown": "شبکه قطع شد",
+                "networkUnreachable": "Network unreachable",
                 "status": "وضعیت",
                 "messagesPerSecond": "پیام ها در ثانیه",
                 "referencedRate": "نرخ مرجع"
             },
             "profileModal": {
-                "allSettings": "همه تنظیمات",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "خروج از حساب",
                 "stronghold": {
                     "title": "قفل حساب",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "بک آپ گیری از کیف پول ها",
-                    "lastBackup": "آخرین به روز رسانی در تاریخ {date}",
-                    "notBackedUp": "بک آپ گرفته نشده",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "پشتیبان گیری"
                 },
                 "version": {
@@ -718,8 +724,8 @@
                 "features": "ویژگی‌ها",
                 "confirmedMilestoneIndex": "شاخص نقطه عطف تأیید شد",
                 "pruningIndex": "شاخص کاهش هزینه ها",
-                "messagesPerSecond": "پیام ها در ثانیه",
-                "referencedRate": "نرخ مرجع"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -739,7 +745,7 @@
             "typePassword": "جهت تایید رمز خود را وارد کنید."
         },
         "diagnostics": {
-            "title": "عیب شناسی",
+            "title": "Diagnostics",
             "node": "نود",
             "platform": "پلتفرم",
             "platformVersion": "نسخه پلتفرم",
@@ -757,7 +763,7 @@
             "sendingFromStakedAccountBelowMinRewardVote": "شما در حال ارسال حواله از کیف پولی هستید که هنوز به حداقل پاداش های Staking نرسیده است. این ممکن است توکن های شما را از بین ببرد و ممکن است جوایز Staking خود را در این کیف پول از دست بدهید. همچنین ممکن است لازم باشد دوباره رای دهید.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "شما در حال ارسال حواله از کیف پولی هستید که در حال حاضر در حال Staking و رای گیری است. این ممکن است توکن های شما را از بین ببرد و رای شما را متوقف کند. با خیال راحت، انتقال را ارسال کنید، اما ممکن است لازم باشد پس از آن مجدداً با توکن های باقیمانده خود رای دهید و دوباره آنها را Stake کنید.",
-                "stake": "شما در حال ارسال حواله از کیف پولی هستید که در حال حاضر در حال staking است. این ممکن است توکن های شما را از بین ببرد. در صورت تمایل می توانید انتقال را ارسال کنید، اما ممکن است لازم باشد که توکن های باقیمانده خود را مجدداً دریافت کنید.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "شما در حال ارسال حواله از کیف پولی هستید که در حال حاضر در حال رای دادن است. این ممکن است رای شما را متوقف کند. با خیال راحت می توانید حواله را ارسال کنید، اما ممکن است لازم باشد دوباره با توکن های باقیمانده خود رای دهید."
             }
         },
@@ -777,7 +783,7 @@
             "body2": "پیشنهاد میشود این فرایند را برای تمامی آدرس‌هایی که سطح خطر متوسط و بالاتر دارند، تکرار شود."
         },
         "missingBundle": {
-            "title": "هشدار: خطر از دست رفتن موجودی",
+            "title": "Warning: funds at risk during migration",
             "body": "شما وجوهی در آدرسهای خرج شده داريد، اما اطلاعات مورد نياز برای امنيت آنها يافت نشد. اين اتفاق ممکن است به دليل اينکه شما تراکنشی را در گذشته ی دور انجام داديد افتاده باشد. شما ميتوانيد ادامه دهيد اما مقدار {value} در هنگام انتقال در خطر قرار ميگيرد.",
             "learnMore": "کسب اطلاعات بيشتر درباره آدرسهای خرج شده",
             "proceed": "از این ریسک اطلاع دارم"
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "نکته هایی اگر لجر شما وصل نمی شود",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "مطمئن شوید که Ledger Live روی رایانه شما باز نیست",
                 "1": "مطمئن شوید که قفل دستگاه Ledger خود را با پین خود باز کرده اید",
@@ -823,7 +829,7 @@
                 "info": "تأیید کنید که آدرس دریافت نمایش داده شده در لجر شما با آدرس زیر مطابقت دارد. اگر مطابقت دارند، همانطور که از شما خواسته شده است، هر دو دکمه را در لجر خود فشار دهید."
             },
             "transaction": {
-                "title": "تایید تراکنش",
+                "title": "Confirm transaction",
                 "info": "اطمینان حاصل کنید که اطلاعات تراکنش نمایش داده شده در دستگاه Ledger شما با اطلاعات نمایش داده شده در زیر مطابقت دارد. اگر مطابقت دارند، همانطور که از شما خواسته شده است، هر دو دکمه را در لجر خود فشار دهید."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "همه وجوه استیک شده",
             "stakedSuccessfully": "وجوه شما برای {account} stake شده است.",
             "unstakedSuccessfully": "وجوه شما برای {account} unstake شده است.",
-            "singleAccountHint": "به دنبال کیف پول خود هستید؟ فایرفلای تغییر کرده است. در نوار منوی بالا بین کیف پول‌های خود جستجو کنید."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "تایید شرکت",
@@ -877,7 +883,8 @@
             "changingVote": "تغییر رای",
             "manageVotes": "مدیریت رای",
             "partialVoteInfo": "شما {amount} را به {account} دریافت کرده‌اید. شما می توانید با ادغام این وجوه با رای فعلی خود رای دهید.",
-            "mergeVoteDisclaimer": "لطفاً توجه داشته باشید که ادغام رأی‌ها بر رأی‌هایی که قبلاً شمارش شده‌اند تأثیر نمی‌گذارد",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "ادغام آرا",
             "votedSuccessfully": "شما شروع به رای دادن با {account} کرده اید.",
             "unvotedSuccessfully": "شما رای دادن با {account} را متوقف کرده اید.",
@@ -904,10 +911,14 @@
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
+        },
         "crashReporting": {
             "title": "گزارش دادن مشکل",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "ارسال گزارش مشکل ایجاد شده به بنیاد آیوتا"
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "شرایط خدمات",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "انتقال به Chrysalis یا بازگردانی کیف پول فعلی",
         "createWallet": "ایجاد کیف پول جدید",
         "createWalletDescription": "يک کيف پول جديد بر پايه Chrysalis درست کن",
+        "exploreWallet": "Explore wallet",
         "savePassword": "ذخیره رمزعبور",
         "useBiometric": "استفاده از امنیت بیومتریک",
         "setupPin": "تنظیم PIN کد",
@@ -991,9 +1003,9 @@
         "saveBackup": "ذخیره بک آپ Stronghold",
         "customizeAcount": "کیف پول سفارشی",
         "viewAddressHistory": "نمایش سوابق آدرس",
-        "hideAccount": "کیف پول مخفی",
+        "hideAccount": "Hide wallet",
         "showAccount": "کیف پول آشکار",
-        "deleteAccount": "حذف کیف پول",
+        "deleteAccount": "Delete wallet",
         "max": "حداکثر",
         "addNode": "اضافه کردن نود",
         "updateNode": "بروزرسانی نود",
@@ -1034,7 +1046,7 @@
         "searchAgain": "جستجوی مجدد",
         "searching": "درحال جستجو...",
         "closeFirefly": "بستن Firefly",
-        "generateAddress": "تولید آدرس",
+        "generateAddress": "Generate address",
         "migrateAgain": "انتقال شاخصی دیگر",
         "visitWebsite": "مشاهده‌ سایت",
         "howItWorks": "نحوه عملکرد",
@@ -1047,14 +1059,16 @@
         "mergeFunds": "ادغام وجوه",
         "done": "تمام",
         "castVotes": "Cast votes",
-        "changeVotes": "تغییر رای",
+        "changeVotes": "Change vote",
         "mergeVotes": "Merge vote",
-        "stopVotes": "رای دادن را متوقف کنید",
+        "stopVotes": "Stop voting",
         "okIUnderstand": "بله، متوجه شدم",
-        "readMore": "بیشتر بخوانید"
+        "readMore": "بیشتر بخوانید",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "رمز عبور",
+        "close": "Close",
         "confirmPassword": "تأیید رمز عبور",
         "currentPassword": "رمز عبور فعلی",
         "newPassword": "رمز عبور جدید",
@@ -1066,15 +1080,18 @@
         "received": "دریافت شده",
         "sendPayment": "ارسال پرداخت",
         "moveFunds": "انتقال داخلی",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "ارسال به",
         "sendFunds": "ارسال وجه",
         "sendToAddress": "ارسال به آدرس",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "کد QR یا آدرس را وارد کنید",
         "moveFundsBetweenAccounts": "جابجایی وجه بین حساب ها",
         "sendTokensToAddress": "ارسال توکن به یک آدرس",
         "manageAccount": "مدیریت کیف پول",
         "customizeAcount": "شخصی سازی حساب خود",
-        "account": "کیف پول",
+        "account": "Wallet",
         "sendingToAddress": "ارسال به آدرس",
         "amount": "مقدار",
         "addAddress": "اضافه کردن آدرس",
@@ -1111,6 +1128,7 @@
         "createAccount": "ايجاد كيف پول",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "نام کیف پول",
         "latestTransactions": "آخرین تراکنش ها",
         "transactions": "تراکنش ها",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "آدرس گیرنده",
         "newAddress": "آدرس جدید",
         "date": "تاریخ",
-        "status": "وضعیت",
+        "status": "Status",
         "confirmed": "تایید شده",
         "pending": "در حال بررسی",
         "noAccounts": "شما حساب کاربری ندارید. لطفا یکی بسازید.",
@@ -1205,7 +1223,9 @@
         "accountColor": "رنگ کیف پول",
         "myAssets": "دارایی های من",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "امروز",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "شناسه پیام",
+            "messageId": "Message ID",
             "internal": "داخلی",
             "rawValue": "مقدار خام",
             "formattedValue": "Formatted Value",
-            "date": "تاریخ",
+            "date": "Date",
             "time": "زمان"
         }
     },
@@ -1443,7 +1468,7 @@
         }
     },
     "tabs": {
-        "wallet": "کیف پول",
+        "wallet": "Wallet",
         "staking": "استیکینگ",
         "governance": "Governance",
         "tokens": "Tokens",
