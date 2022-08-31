@@ -11,6 +11,13 @@
     const { importType, isGettingMigrationData } = getContext<ImportRouter>('importRouter')
 
     let input = ''
+    let textFieldContainter: HTMLElement
+
+    $: if ($mobile && input?.length > 0) {
+        setTimeout(() => {
+            textFieldContainter?.parentElement?.scrollTo(0, textFieldContainter?.parentElement?.scrollHeight)
+        }, getKeyboardTransitionSpeed($isKeyboardOpened))
+    }
 
     function handleContinueClick(): void {
         dispatch('next', { migrationSeed: input })
@@ -36,7 +43,13 @@
     >
         <Text type="p" secondary classes="mb-8">{locale(`views.importFromText.${$importType}.body`)}</Text>
         <Text type="h5" classes="mb-3">{locale(`views.importFromText.${$importType}.enter`)}</Text>
-        <ImportTextfield disabled={$isGettingMigrationData} type={$importType} bind:value={input} {locale} />
+        <ImportTextfield
+            bind:this={textFieldContainter}
+            disabled={$isGettingMigrationData}
+            type={$importType}
+            bind:value={input}
+            {locale}
+        />
     </div>
     <div
         slot="leftpane__action"
