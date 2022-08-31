@@ -8,7 +8,7 @@
             "title": "Política de Privacidade e Termos de Serviço",
             "body": "Por favor, revise a Política de Privacidade e os Termos de Serviço.",
             "checkbox": "Eu li e aceito a Política de Privacidade e os Termos de Serviço",
-            "checkboxMobile": "I've read and I accept the"
+            "checkboxMobile": "Eu li e aceito os"
         },
         "crashReporting": {
             "title": "Reportando falha",
@@ -16,7 +16,7 @@
             "checkbox": "Enviar relatórios de falha para a Fundação IOTA"
         },
         "appearance": {
-            "title": "Appearance",
+            "title": "Aparência",
             "body": "Escolha o tema do seu aplicativo."
         },
         "profile": {
@@ -125,9 +125,9 @@
             "body": "Você fez o backup de suas carteiras para um arquivo Stronghold."
         },
         "congratulations": {
-            "title": "Profile setup complete!",
+            "title": "Configuração de perfil concluída!",
             "fundsMigrated": "Fundos migrados",
-            "body": "Your new profile is ready to use.",
+            "body": "O seu novo perfil já pode ser usado.",
             "softwareMigratedBody": "Você migrou seus fundos com sucesso para a nova rede",
             "fireflyLedgerBody": "Sua conta Ledger foi recuperada com sucesso e você pode continuar agora.",
             "trinityLedgerBody": "Você migrou com sucesso sua Ledger para a nova rede.",
@@ -163,7 +163,7 @@
         "importFromFile": {
             "title": "Restaure suas carteiras usando um arquivo de backup",
             "body": "Importe um arquivo de backup para restaurar suas carteiras. Os backups podem ser ou arquivo Stronghold (.stronghold) ou Trinity SeedVault (.kdbx).",
-            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
+            "bodyMobile": "Envie um arquivo para restaurar os fundos existentes da carteira. Apenas o backup do Firefly Stronghold é suportado no celular. Para o backup de Trinity Seedvault, use a carteira desktop."
         },
         "importFromLedger": {
             "title": "Restaure ou migre sua Ledger",
@@ -192,7 +192,7 @@
             "readMore": "O que esperar do processo de migração"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "Gerar novo endereço",
             "body": "Você precisa gerar um novo endereço para migrar seus tokens com a Firefly. Clique no botão abaixo para continuar.",
             "confirmTitle": "Confirme o novo endereço",
             "confirmBody": "Por segurança, favor comparar o endereço gerado no seu dispositivo Ledger com o exibido abaixo. Se eles coincidirem, pressione ambos os botões na sua Ledger como exposto.",
@@ -229,7 +229,7 @@
             "body2": "Isto pode levar algum tempo. Não desligue seu dispositivo durante a migração.",
             "existing": "Sua carteira antiga",
             "new": "Sua nova carteira",
-            "learn": "Learn about the migration",
+            "learn": "Saiba mais sobre a migração",
             "beginMigration": "Começar a Migração",
             "migrating": "Migrando fundos...",
             "migrated": "{balance} migrado",
@@ -252,7 +252,7 @@
             "title": "Alerta",
             "body1": "Você tem fundos em um ou mais endereços usados.",
             "body2": "Recomendamos que você execute um processo automatizado para ajudar a proteger e transferir esses fundos de forma segura.",
-            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
+            "body3": "Não é possível garantir que seus fundos serão migrados com segurança no celular. Recomendamos que você use o aplicativo Firefly desktop para migrar.",
             "learn": "Saiba mais sobre os endereços gastos"
         },
         "secureSpentAddresses": {
@@ -278,7 +278,7 @@
             "body2": "Certifique-se de que sua Ledger esteja conectada e de que o aplicativo {legacy} esteja aberto durante toda a migração.",
             "migrate": "Migrar fundos",
             "transaction": "Transação {number}",
-            "rerun": "Try again"
+            "rerun": "Tente novamente"
         },
         "migrateFailed": {
             "title": "To do",
@@ -320,7 +320,7 @@
             "theme": {
                 "title": "Tema",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "Se você alterar seu tema do sistema, talvez seja necessário reiniciar o Firefly para ver os efeitos"
             },
             "language": {
                 "title": "Idioma",
@@ -464,47 +464,47 @@
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
-                "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
-                "networkUnreachable": "Network unreachable",
+                "networkOperational": "Rede operacional",
+                "networkDegraded": "Rede degradada",
+                "networkDown": "Rede desconectada",
+                "networkUnreachable": "Rede inacessível",
                 "status": "Status",
                 "messagesPerSecond": "Mensagens por segundo",
                 "referencedRate": "Taxa de referência"
             },
             "profileModal": {
                 "allSettings": {
-                    "title": "All settings",
-                    "description": "Profile, application, security"
+                    "title": "Todas configurações",
+                    "description": "Perfil, aplicativo, segurança"
                 },
                 "logout": "Sair",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Bloqueio de perfil",
+                    "locked": "Stronghold trancada",
+                    "unlocked": "Stronghold aberta"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Dispositivo físico",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "Aplicativo IOTA não aberto",
+                        "connected": "Conectado",
+                        "legacyConnected": "Aplicativo legado aberto",
+                        "locked": "Bloqueado",
+                        "mnemonicMismatch": "Ledger ou mnemônico incorreto",
+                        "notDetected": "Não detectado",
+                        "otherConnected": "App aberto"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
-                    "lastBackup": "You last backed up {date}",
-                    "notBackedUp": "Not backed up",
+                    "title": "Fazer backup de suas carteiras",
+                    "lastBackup": "Seu último backup {date}",
+                    "notBackedUp": "Backup não realizado",
                     "button": "Backup"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "Nova atualização disponível",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Atualizar"
                 }
             }
         },
@@ -523,8 +523,8 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
+                    "upcoming": "Volte mais tarde",
+                    "commencing": "Pré-staking aberto",
                     "holding": "{duration} of staking left",
                     "ended": "Staking has now ended",
                     "inactive": "No staking events detected",
