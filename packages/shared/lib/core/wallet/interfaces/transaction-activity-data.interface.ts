@@ -19,6 +19,7 @@ export interface ITransactionActivityData {
     isRejected: boolean
     isClaiming: boolean
     isClaimed: boolean
+    isShimmerClaiming: boolean
     publicNote: string
     outputId: string
     claimingTransactionId: string
