@@ -49,7 +49,9 @@
     }
 
     function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
-        if (txData.isInternal) {
+        if (txData.isShimmerClaiming) {
+            return inclusionState === InclusionState.Confirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
+        } else if (txData.isInternal) {
             return inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
         } else {
             if (txData.direction === ActivityDirection.In) {
@@ -62,7 +64,7 @@
 
     function getSubjectLocale(subject: Subject, isShimmerClaiming: boolean): string {
         if (isShimmerClaiming) {
-            return truncateString(localize('general.shimmerStaking'), 13, 0)
+            return localize('general.shimmerGenesis')
         } else if (subject?.type === 'account') {
             return truncateString(subject?.account?.name, 13, 0)
         } else if (subject?.type === 'address') {
