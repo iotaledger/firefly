@@ -1,9 +1,10 @@
 import { writable } from 'svelte/store'
-import { LedgerSendConfirmationProps } from '../interfaces'
 
-export const ledgerSendConfirmationProps = writable<LedgerSendConfirmationProps>(null)
+import { ILedgerSendConfirmationProps } from '../interfaces'
 
-export function updateLedgerSendConfirmationProps(payload: LedgerSendConfirmationProps): void {
+export const ledgerSendConfirmationProps = writable<ILedgerSendConfirmationProps>(null)
+
+export function setLedgerSendConfirmationProps(payload: ILedgerSendConfirmationProps): void {
     ledgerSendConfirmationProps.set(payload)
 }
 

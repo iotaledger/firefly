@@ -134,7 +134,7 @@
     </div>
 
     {#if hasUsedWalletFinder}
-        <TextHint warning text={localize('popups.walletFinder.searchAgainHint')} />
+        <TextHint info icon="exclamation" text={localize('popups.walletFinder.searchAgainHint')} />
     {/if}
 </div>
 

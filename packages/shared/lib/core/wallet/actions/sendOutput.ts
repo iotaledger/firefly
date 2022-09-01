@@ -20,13 +20,13 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
         isTransferring.set(false)
         return
     } catch (err) {
+        isTransferring.set(false)
         const _activeProfile = get(activeProfile)
 
         if (_activeProfile.type === ProfileType.Ledger) {
             handleLedgerError(err.error)
         }
 
-        isTransferring.set(false)
         throw err
     }
 }

@@ -22,7 +22,7 @@ import {
     persistShimmerClaimingTransaction,
     updateShimmerClaimingAccount,
 } from '../stores'
-import { handleLedgerError, resetLedgerSendConfirmationProps, updateLedgerSendConfirmationProps } from '@core/ledger'
+import { handleLedgerError, resetLedgerSendConfirmationProps, setLedgerSendConfirmationProps } from '@core/ledger'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
@@ -79,7 +79,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     let claimingTransaction
     if (get(isOnboardingLedgerProfile)) {
         const shimmerTokenMetadata = BASE_TOKEN[NetworkProtocol.Shimmer]
-        updateLedgerSendConfirmationProps({
+        setLedgerSendConfirmationProps({
             asset: {
                 ...getAssetFromPersistedAssets(COIN_TYPE[NetworkProtocol.Shimmer].toString()),
                 balance: {

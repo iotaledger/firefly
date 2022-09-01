@@ -1,30 +1,14 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
     import { Text, Icon } from 'shared/components'
-    import { openPopup } from 'shared/lib/popup'
-    import { onDestroy } from 'svelte'
+    import { localize } from '@core/i18n'
+    import { ledgerDeviceStatus } from '@core/ledger'
+    import { closePopup } from '@lib/popup'
 
-    export let needsToShowPopupAfterwards = true
-    export let sendConfirmationPopupProps = null
-    export let mintNativeTokenPopupProps = null
+    const STEPS = [1, 2, 3, 4]
 
-    onDestroy(() => {
-        if (needsToShowPopupAfterwards) {
-            if (sendConfirmationPopupProps) {
-                openPopup({
-                    type: 'sendConfirmation',
-                    props: sendConfirmationPopupProps,
-                })
-            } else if (mintNativeTokenPopupProps) {
-                openPopup({
-                    type: 'mintNativeTokenForm',
-                    props: mintNativeTokenPopupProps,
-                })
-            }
-        }
-    })
-
-    const steps = Array.from(Array(4), (_, i) => `step_${i + 1}`)
+    $: if ($ledgerDeviceStatus.blindSigningEnabled) {
+        closePopup(true)
+    }
 </script>
 
 <Text type="h3" classes="mb-6">{localize('popups.enableLedgerBlindSigning.title')}</Text>
@@ -37,9 +21,9 @@
         </span>
     </div>
     <div>
-        {#each steps as step, i}
+        {#each STEPS as step}
             <Text type="p" fontSize="15" color="gray-600" classes="my-2">
-                {i + 1}. {localize(`popups.enableLedgerBlindSigning.${step}`)}
+                {step}. {localize(`popups.enableLedgerBlindSigning.step_${step}`)}
             </Text>
         {/each}
     </div>

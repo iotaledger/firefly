@@ -1,4 +1,5 @@
 import { createNewAccount, setSelectedAccount } from '@core/account'
+import { handleError } from '@core/error/handlers/handleError'
 import { getAndUpdateNodeInfo } from '@core/network'
 import {
     buildProfileManagerOptionsFromProfileData,
@@ -6,12 +7,9 @@ import {
     isStrongholdUnlocked,
     profileManager,
     recoverAccounts,
+    subscribeToWalletApiEvents,
 } from '@core/profile-manager'
-import {
-    setStrongholdPasswordClearInterval,
-    startBackgroundSync,
-    subscribeToWalletEvents,
-} from '@core/profile-manager/api'
+import { setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
 import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
@@ -30,6 +28,7 @@ import {
 } from '../../stores'
 import { loadAccounts } from './loadAccounts'
 import { ILoginOptions } from '../../interfaces'
+import { logout } from './logout'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
@@ -48,7 +47,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 2: get node info to check we have a synced node
             incrementLoginProgress()
-            await getAndUpdateNodeInfo()
+            await getAndUpdateNodeInfo(true)
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
@@ -99,7 +98,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 8: start background sync
             incrementLoginProgress()
-            subscribeToWalletEvents()
+            subscribeToWalletApiEvents()
             await startBackgroundSync({ syncIncomingTransactions: true })
 
             // Step 9: finish login
@@ -113,7 +112,8 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             }, 500)
         }
     } catch (err) {
-        console.error(err)
+        handleError(err)
+        await logout()
         _loginRouter.previous()
         resetLoginProgress()
     }

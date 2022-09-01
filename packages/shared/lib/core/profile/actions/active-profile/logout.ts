@@ -2,7 +2,7 @@ import { resetRouters } from '@core/router'
 import { stopPollingLedgerStatus } from '@core/ledger'
 import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
-import { destroyProfileManager, unsubscribeFromWalletEvents } from '@core/profile-manager'
+import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
 import { resetDashboardState } from '../resetDashboardState'
 import { clearPollNetworkInterval } from '@core/network'
@@ -35,7 +35,7 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
         if (_activeProfile) {
             const manager = get(profileManager)
 
-            unsubscribeFromWalletEvents()
+            unsubscribeFromWalletApiEvents()
 
             // stop background sync
             // TODO: Make sure we need this. Would destroying the profile manager also stop background syncing automatically?

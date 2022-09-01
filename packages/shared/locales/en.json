@@ -1048,6 +1048,9 @@
         "received": "Received",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "Send Payment",
@@ -1191,6 +1194,7 @@
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
+        "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
@@ -1211,7 +1215,8 @@
         "excluded": "Excluded",
         "developerTools": "Developer tools",
         "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
-        "url": "URL"
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters":{
         "title": "Filters",
@@ -1404,7 +1409,8 @@
             "cancelled": "The transaction was cancelled.",
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
-            "missingTransactionId": "The transaction ID is missing"
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -1416,7 +1422,8 @@
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Failed to get an answer from all nodes.",
             "forbidden": "This node connection is forbidden.",
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
@@ -1595,7 +1602,8 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {

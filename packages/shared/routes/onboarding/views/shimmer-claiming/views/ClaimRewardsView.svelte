@@ -3,6 +3,7 @@
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, getLedgerDeviceStatus } from '@core/ledger'
+    import { subscribeToWalletApiEvents, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { shimmerClaimingRouter } from '@core/router'
     import {
         canUserClaimRewards,
@@ -16,8 +17,7 @@
         onboardingProfile,
         shimmerClaimingProfileManager,
     } from '@contexts/onboarding'
-    import { subscribeToWalletEvents, unsubscribeFromWalletEvents } from '../../../../../lib/core/profile-manager'
-    import { closePopup } from '../../../../../lib/popup'
+    import { closePopup } from '@lib/popup'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -96,7 +96,7 @@
              * MUST confirm what is displayed in the UI matches what is prompted
              * on the actual Ledger device.
              */
-            subscribeToWalletEvents(shimmerClaimingProfileManager)
+            subscribeToWalletApiEvents(shimmerClaimingProfileManager)
         }
 
         /**
@@ -125,7 +125,7 @@
 
     onDestroy(() => {
         if ($isOnboardingLedgerProfile) {
-            unsubscribeFromWalletEvents(shimmerClaimingProfileManager)
+            unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
         }
     })
 </script>

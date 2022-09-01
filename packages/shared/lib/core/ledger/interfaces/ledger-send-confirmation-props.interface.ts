@@ -1,6 +1,6 @@
 import { IAsset, Subject } from '@core/wallet'
 
-export interface LedgerSendConfirmationProps {
+export interface ILedgerSendConfirmationProps {
     asset: IAsset
     amount: string
     unit: string

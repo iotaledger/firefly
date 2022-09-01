@@ -1,3 +1,3 @@
-import { IAccountState } from '@core/account'
+import { IAccountSubject, IAddressSubject } from '../interfaces'
 
-export type Subject = { type: 'address'; address: string } | { type: 'account'; account: IAccountState }
+export type Subject = IAccountSubject | IAddressSubject
