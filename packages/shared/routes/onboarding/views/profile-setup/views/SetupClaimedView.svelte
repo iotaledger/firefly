@@ -26,7 +26,7 @@
         isBusy = { ...isBusy, [recoveryType]: true }
         const type = getProfileTypeFromProfileRecoveryType(recoveryType)
         updateOnboardingProfile({ type, recoveryType, shimmerClaimingAccounts: [] })
-        await initialiseProfileManagerFromOnboardingProfile(true)
+        await initialiseProfileManagerFromOnboardingProfile()
         await createShimmerClaimingProfileManager()
         $profileSetupRouter.next()
     }

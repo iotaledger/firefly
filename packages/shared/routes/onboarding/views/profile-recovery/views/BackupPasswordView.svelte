@@ -7,7 +7,6 @@
     import {
         CannotRestoreWithMismatchedCoinTypeError,
         createShimmerClaimingProfileManager,
-        destroyShimmerClaimingProfileManager,
         initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
         ProfileSetupType,
@@ -35,10 +34,9 @@
                 $profileRecoveryRouter.next()
             } catch (err) {
                 if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
-                    await initialiseProfileManagerFromOnboardingProfile(false)
+                    await initialiseProfileManagerFromOnboardingProfile()
 
                     if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
-                        await destroyShimmerClaimingProfileManager()
                         await createShimmerClaimingProfileManager()
                     }
                 } else if (err?.error.match(/`invalid stronghold password`/)) {

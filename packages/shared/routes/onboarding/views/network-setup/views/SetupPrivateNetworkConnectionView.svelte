@@ -33,7 +33,7 @@
                 validateClientOptions: false,
             })
             updateOnboardingProfile({ clientOptions: { nodes: [node] } })
-            await initialiseProfileManagerFromOnboardingProfile(true)
+            await initialiseProfileManagerFromOnboardingProfile()
             await getNodeInfo(node.url)
             destroyProfileManager()
             $networkSetupRouter.next()

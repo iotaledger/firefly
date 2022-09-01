@@ -25,7 +25,7 @@
         isBusy = { ...isBusy, [recoveryType]: true }
         const type = getProfileTypeFromProfileRecoveryType(recoveryType)
         updateOnboardingProfile({ type, recoveryType })
-        await initialiseProfileManagerFromOnboardingProfile(true)
+        await initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
     function onBackClick() {
