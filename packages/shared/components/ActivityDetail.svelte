@@ -150,13 +150,13 @@
                     >
                         {getInitials(senderAccount.alias, 2)}
                     </div>
-                    <Text smaller>{localize('general.you')}</Text>
+                    <Text>{localize('general.you')}</Text>
                 {:else}
-                    <Text smaller>{truncateString(senderAddress, 3, 3, 3) || localize('general.unknown')}</Text>
+                    <Text>{truncateString(senderAddress, 3, 3, 3) || localize('general.unknown')}</Text>
                 {/if}
             </div>
             <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
-            <Text bold smaller>{formatUnitBestMatch(value, true, 2)}</Text>
+            <Text bold>{formatUnitBestMatch(value, true, 2)}</Text>
             <Icon icon="small-chevron-right" classes="mx-4 text-gray-500 dark:text-white" />
             <div class="flex flex-col flex-wrap justify-center items-center text-center">
                 {#if receiverAccount}
@@ -167,10 +167,10 @@
                     >
                         {getInitials(receiverAccount.alias, 2)}
                     </div>
-                    <Text smaller>{localize('general.you')}</Text>
+                    <Text>{localize('general.you')}</Text>
                 {:else}
                     {#each receiverAddresses as address}
-                        <Text smaller>{truncateString(address, 3, 3, 3) || localize('general.unknown')}</Text>
+                        <Text>{truncateString(address, 3, 3, 3) || localize('general.unknown')}</Text>
                     {/each}
                 {/if}
             </div>
@@ -178,12 +178,12 @@
         <div class="flex flex-col px-5 h-full overflow-y-auto flex-auto">
             <div class="mb-5">
                 <Text secondary>{localize('general.status')}</Text>
-                <Text smaller>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
+                <Text>{localize(`general.${confirmed ? 'confirmed' : 'pending'}`)}</Text>
             </div>
             {#if date}
                 <div class="mb-5">
                     <Text secondary>{localize('general.date')}</Text>
-                    <Text smaller>{date}</Text>
+                    <Text>{date}</Text>
                 </div>
             {/if}
             {#if senderAddress}
