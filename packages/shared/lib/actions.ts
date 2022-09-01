@@ -1,7 +1,3 @@
-import { isAndroid as is_android } from '@lib/app'
-
-let isAndroid
-is_android.subscribe((value) => (isAndroid = value))
 /**
  * Dispatch event on click outside of node
  * source: https://svelte.dev/repl/0ace7a508bd843b798ae599940a91783?version=3.16.7
@@ -45,21 +41,7 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
     const timeQueue = [0, 0, 0]
 
     function handleTouchstart(event: TouchEvent): void {
-        if (!event.cancelable && isAndroid) {
-            /**
-             * Test with transaction history drawer
-             * Aims to allow scrolling without closing the drawer
-             * When the event could be prevented could means there is a scroll?
-             *
-             * As we use a passive event listener we should not to use
-             * a preventDefault() in that listener to disable scrolling.
-             * https://developer.chrome.com/blog/scrolling-intervention/
-             */
-            return
-            // event.preventDefault()
-        } else {
-            event.preventDefault()
-        }
+        event.preventDefault()
         event.stopImmediatePropagation()
         event.stopPropagation()
 
