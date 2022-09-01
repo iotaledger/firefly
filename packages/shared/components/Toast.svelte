@@ -91,7 +91,7 @@
         </div>
     {:else if $mobile && !hideDismiss}
         <button
-            class="cursor-pointer text-center rounded-lg font-bold text-11 text-{TOAST_STYLE[type].buttonSecondary}"
+            class="cursor-pointer text-center rounded-lg font-bold text-11 text-{TOAST_STYLE[type].messageColor}"
             style={'min-width:90px;min-height:32px'}
             on:click={onDismissClick}
         >
