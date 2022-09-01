@@ -15,7 +15,7 @@
         restoreBackupFromStrongholdFile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { showAppNotification } from '../../../../../lib/notifications'
+    import { showAppNotification } from '@lib/notifications'
 
     export let error = ''
     export let busy = false
