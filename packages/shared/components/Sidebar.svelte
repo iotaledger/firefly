@@ -74,7 +74,7 @@
                   },
               ]
             : []),
-        ...(features?.developer?.enabled
+        ...(features?.developerTools?.enabled
             ? [
                   {
                       icon: 'tools',
