@@ -51,7 +51,7 @@ try {
         WalletApi.initLogger(loggerOptions)
     }
 } catch (error) {
-    console.warn('[Preload Context] Error:', error)
+    console.error('[Preload Context] Error:', error)
 }
 
 try {
