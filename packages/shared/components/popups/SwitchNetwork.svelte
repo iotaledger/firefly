@@ -1,12 +1,7 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
 
-    import {
-        mobile,
-        isKeyboardOpened,
-        keyboardHeight,
-        getKeyboardTransitionSpeed,
-    } from 'shared/lib/app'
+    import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from 'shared/lib/app'
     import { Button, Icon, Password, Spinner, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import {
@@ -159,7 +154,7 @@
         />
     </form>
 {/if}
-<div 
+<div
     class="flex flex-row justify-between space-x-4 w-full md:px-8"
     style="margin-bottom: {$mobile && $isKeyboardOpened
         ? $keyboardHeight
