@@ -30,13 +30,9 @@ function handleTransactionProgressInternal(
          * device.
          */
         closePopup(true)
-    }
-
-    if (isPreparedTransaction(payload)) {
+    } else if (isPreparedTransaction(payload)) {
         openLedgerConfirmationPopup(payload, isDuringOnboarding)
-    }
-
-    if (isPreparedTransactionEssenceHash(payload)) {
+    } else if (isPreparedTransactionEssenceHash(payload)) {
         if (get(ledgerDeviceStatus)?.blindSigningEnabled) {
             openLedgerConfirmationPopup(payload, isDuringOnboarding)
         } else {
