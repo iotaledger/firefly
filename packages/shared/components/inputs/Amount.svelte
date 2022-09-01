@@ -166,7 +166,7 @@
 <svelte:window on:click={onOutsideClick} />
 <amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
-        type={$mobile ? 'number' : 'text'}
+        type={'text'}
         inputmode="decimal"
         {error}
         label={amountForLabel || localize('general.amount')}
