@@ -1,6 +1,7 @@
+import { isShimmerClaimingTransaction } from '@contexts/onboarding'
 import { IAccountState } from '@core/account'
 import { COIN_TYPE } from '@core/network'
-import { activeProfile } from '@core/profile'
+import { activeProfile, activeProfileId } from '@core/profile'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '../../enums'
 import { IProcessedTransaction, ITransactionActivityData } from '../../interfaces'
@@ -52,8 +53,9 @@ export function getTransactionActivityData(
     const claimingTransactionId = undefined
     const claimedDate = undefined
 
-    const nativeToken = getNativeTokenFromOutput(output)
+    const isShimmerClaiming = isShimmerClaimingTransaction(transactionId, get(activeProfileId))
 
+    const nativeToken = getNativeTokenFromOutput(output)
     const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
     const isRejected = isActivityHiddenForAccountId(account.id, transactionId)
 
@@ -85,6 +87,7 @@ export function getTransactionActivityData(
         isRejected,
         isClaiming,
         isClaimed,
+        isShimmerClaiming,
         publicNote,
         claimingTransactionId,
         claimedDate,
