@@ -145,7 +145,7 @@
                 {#if senderAccount}
                     <div
                         style="--account-color: {senderColor}"
-                        class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold text-center account-color
+                        class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-1 text-12 leading-100 font-bold text-center account-color
                         {isBright(senderColor) ? 'text-gray-900' : 'text-white'}"
                     >
                         {getInitials(senderAccount.alias, 2)}
@@ -162,7 +162,7 @@
                 {#if receiverAccount}
                     <div
                         style="--account-color: {receiverColor}"
-                        class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-2 text-12 leading-100 font-bold account-color
+                        class="flex items-center justify-center w-8 h-8 rounded-xl p-2 mb-1 text-12 leading-100 font-bold account-color
                         {isBright(receiverColor) ? 'text-gray-900' : 'text-white'}"
                     >
                         {getInitials(receiverAccount.alias, 2)}
