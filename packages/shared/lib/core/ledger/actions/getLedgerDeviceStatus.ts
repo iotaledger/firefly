@@ -5,7 +5,7 @@ import { closePopup, popupState } from '@lib/popup'
 
 import { LedgerStatus } from '../interfaces'
 import { ledgerDeviceStatus } from '../stores'
-import { determineLedgerDeviceState } from '../utils/determineLedgerDeviceState'
+import { determineLedgerDeviceState } from '../utils'
 
 export async function getLedgerDeviceStatus(
     onConnected: () => void = () => {},

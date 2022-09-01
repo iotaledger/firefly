@@ -6,7 +6,7 @@ import { ADDRESS_TYPE_ED25519 } from '@core/wallet/constants'
 import { Bech32Helper } from '@lib/bech32Helper'
 import { Converter } from '@lib/converter'
 import { get } from 'svelte/store'
-import { NewOutputEvent } from '../types/newOutputEvent'
+import { NewOutputEvent } from '../types'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
 
 export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): void {

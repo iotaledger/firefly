@@ -7,12 +7,9 @@ import {
     isStrongholdUnlocked,
     profileManager,
     recoverAccounts,
+    subscribeToWalletApiEvents,
 } from '@core/profile-manager'
-import {
-    setStrongholdPasswordClearInterval,
-    startBackgroundSync,
-    subscribe as subscribeToWalletEvents,
-} from '@core/profile-manager/api'
+import { setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
 import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
@@ -101,7 +98,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 8: start background sync
             incrementLoginProgress()
-            subscribeToWalletEvents()
+            subscribeToWalletApiEvents()
             await startBackgroundSync({ syncIncomingTransactions: true })
 
             // Step 9: finish login
