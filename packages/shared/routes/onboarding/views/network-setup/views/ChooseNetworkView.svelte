@@ -18,11 +18,12 @@
     }
 
     function onNetworkSelectionClick(networkType: NetworkType): void {
-        if (networkType !== NetworkType.PrivateNet) {
+        if (networkType === NetworkType.PrivateNet) {
+            updateOnboardingProfile({ networkType })
+        } else {
             const clientOptions = getDefaultClientOptions($onboardingProfile?.networkProtocol, networkType)
-            updateOnboardingProfile({ clientOptions })
+            updateOnboardingProfile({ clientOptions, networkType })
         }
-        updateOnboardingProfile({ networkType })
         $networkSetupRouter.next()
     }
 
