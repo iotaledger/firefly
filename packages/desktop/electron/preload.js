@@ -1,5 +1,6 @@
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
+const WalletApi = require('@iota/wallet')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}
@@ -39,8 +40,6 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 try {
-    const WalletApi = require('@iota/wallet')
-
     const { STAGE, NODE_ENV } = process.env
     if (NODE_ENV === 'development' || STAGE === 'alpha' || STAGE === 'beta') {
         const loggerOptions = {
@@ -51,7 +50,11 @@ try {
         }
         WalletApi.initLogger(loggerOptions)
     }
+} catch (error) {
+    console.error('[Preload Context] Error:', error)
+}
 
+try {
     // contextBridge doesn't allow passing custom properties & methods on prototype chain
     // https://www.electronjs.org/docs/latest/api/context-bridge
     // This workaround exposes the classes through factory methods
