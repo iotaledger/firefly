@@ -11,35 +11,38 @@ import {
     InclusionState,
     TypeFilterOption,
     StatusFilterOption,
+    ActivityType,
 } from '../enums'
 
-export function isFilteredActivity(activity: Activity): boolean {
+// Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
+export function isVisibleActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
 
     if (
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
         activity.isAssetHidden
     ) {
-        return true
+        return false
     }
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
-        activity.isRejected
+        activity.data.type === ActivityType.Transaction &&
+        activity.data.isRejected
     ) {
-        return true
+        return false
     }
     if (filter.asset.active && filter.asset.selected) {
-        if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
-            return true
+        if (filter.asset.selected && activity.data.assetId !== filter.asset.selected) {
+            return false
         }
     }
     if (filter.amount.active) {
         const activityAmount =
-            activity.rawAmount / 10 ** getAssetFromPersistedAssets(activity.assetId).metadata.decimals
+            activity.data.rawAmount / 10 ** getAssetFromPersistedAssets(activity.data.assetId).metadata.decimals
         if (filter.amount.selected === NumberFilterOption.Equal && filter.amount.subunit.type === 'single') {
             const isEqual = activityAmount === parseCurrency(filter.amount.subunit.amount)
             if (!isEqual) {
-                return true
+                return false
             }
         }
         if (filter.amount.selected === NumberFilterOption.Range && filter.amount.subunit.type === 'range') {
@@ -47,19 +50,19 @@ export function isFilteredActivity(activity: Activity): boolean {
                 activityAmount <= parseCurrency(filter.amount.subunit.end) &&
                 activityAmount >= parseCurrency(filter.amount.subunit.start)
             if (!isInRange) {
-                return true
+                return false
             }
         }
         if (filter.amount.selected === NumberFilterOption.Greater && filter.amount.subunit.type === 'single') {
             const isGreater = activityAmount >= parseCurrency(filter.amount.subunit.amount)
             if (!isGreater) {
-                return true
+                return false
             }
         }
         if (filter.amount.selected === NumberFilterOption.Less && filter.amount.subunit.type === 'single') {
             const isLess = activityAmount <= parseCurrency(filter.amount.subunit.amount)
             if (!isLess) {
-                return true
+                return false
             }
         }
     }
@@ -68,37 +71,51 @@ export function isFilteredActivity(activity: Activity): boolean {
             filter.status.selected === StatusFilterOption.Confirmed &&
             activity.inclusionState !== InclusionState.Confirmed
         ) {
-            return true
+            return false
         }
         if (
             filter.status.selected === StatusFilterOption.Pending &&
             activity.inclusionState !== InclusionState.Pending
         ) {
-            return true
+            return false
         }
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
-            activity.asyncStatus !== ActivityAsyncStatus.Claimed
+            activity.data.type === ActivityType.Transaction &&
+            activity.data.asyncStatus !== ActivityAsyncStatus.Claimed
         ) {
-            return true
+            return false
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
-            (!activity.asyncStatus || activity.asyncStatus === ActivityAsyncStatus.Claimed)
+            activity.data.type === ActivityType.Transaction &&
+            (!activity.data.asyncStatus || activity.data.asyncStatus === ActivityAsyncStatus.Claimed)
         ) {
-            return true
+            return false
         }
     }
     if (filter.type.active && filter.type.selected) {
-        if (filter.type.selected === TypeFilterOption.Incoming && activity.direction !== ActivityDirection.In) {
-            return true
+        if (
+            filter.type.selected === TypeFilterOption.Incoming &&
+            activity.data.type === ActivityType.Transaction &&
+            activity.data.direction !== ActivityDirection.In
+        ) {
+            return false
         }
-        if (filter.type.selected === TypeFilterOption.Outgoing && activity.direction !== ActivityDirection.Out) {
-            return true
+        if (
+            filter.type.selected === TypeFilterOption.Outgoing &&
+            activity.data.type === ActivityType.Transaction &&
+            activity.data.direction !== ActivityDirection.Out
+        ) {
+            return false
         }
-        if (filter.type.selected === TypeFilterOption.Internal && !activity.isInternal) {
-            return true
+        if (
+            filter.type.selected === TypeFilterOption.Internal &&
+            activity.data.type === ActivityType.Transaction &&
+            !activity.data.isInternal
+        ) {
+            return false
         }
     }
-    return false
+    return true
 }

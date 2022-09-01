@@ -7,7 +7,7 @@
         KeyValueBox,
         AccountLabel,
     } from 'shared/components/atoms'
-    import { AssetIcon, Text } from 'shared/components'
+    import { AssetIcon, Text, Pill } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { FontWeight } from 'shared/components/Text.svelte'
@@ -25,16 +25,17 @@
     import { Platform } from 'shared/lib/platform'
     import { truncateString } from '@lib/helpers'
     import { setClipboard } from '@lib/utils'
+    import { time } from '@core/app'
 
     export let asset: IAsset
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
-    export let isClaiming: boolean = null
     export let direction: ActivityDirection
     export let expirationDate: Date = null
+    export let timelockDate: Date = null
     export let formattedFiatValue: string = null
-    export let inclusionState: InclusionState = InclusionState.Pending
+    export let inclusionState = InclusionState.Pending
     export let metadata: string = null
     export let amount: string = null
     export let unit: string
@@ -42,15 +43,18 @@
     export let giftedStorageDeposit = 0
     export let subject: Subject = null
     export let tag: string = null
-    export let time: Date = null
-    export let isInternal: boolean
+    export let transactionTime: Date = null
+    export let isInternal = false
+    export let isClaiming = false
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: transactionTime = getDateFormat(time)
+    $: formattedTransactionTime = getDateFormat(transactionTime)
+    $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
+    $: isTimelocked = timelockDate > $time
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -63,7 +67,7 @@
     )
 
     $: detailsList = {
-        ...(transactionTime && { transactionTime }),
+        ...(formattedTransactionTime && { transactionTime: formattedTransactionTime }),
         ...(metadata && { metadata }),
         ...(tag && { tag }),
         ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
@@ -71,6 +75,7 @@
         }),
         ...(giftedStorageDeposit && { giftedStorageDeposit: formattedGiftedStorageDeposit }),
         ...(expirationTime && { expirationTime }),
+        ...(timelockDate && { timelockDate: formattedTimelockDate }),
         ...(claimedTime && { claimedTime }),
     }
 
@@ -123,19 +128,26 @@
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
+            {#if isTimelocked}
+                <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
+                    {localize('pills.locked')}
+                </Pill>
+            {/if}
         </transaction-status>
-        {#if subject?.type === 'account'}
-            <Box row clearBackground clearPadding classes="justify-center">
-                <AccountLabel account={subject.account} />
-            </Box>
-        {:else if subject?.type === 'address'}
-            <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
-        {:else}
-            <Box col clearBackground clearPadding>
-                <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
-                    {localize('general.unknownAddress')}
-                </Text>
-            </Box>
+        {#if type === ActivityType.Transaction}
+            {#if subject?.type === 'account'}
+                <Box row clearBackground clearPadding classes="justify-center">
+                    <AccountLabel account={subject.account} />
+                </Box>
+            {:else if subject?.type === 'address'}
+                <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
+            {:else}
+                <Box col clearBackground clearPadding>
+                    <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
+                        {localize('general.unknownAddress')}
+                    </Text>
+                </Box>
+            {/if}
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}
