@@ -1,36 +1,14 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
     import { Text, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
-    import {
-        ledgerDeviceStatus,
-        ledgerMintNativeTokenConfirmationProps,
-        ledgerSendConfirmationProps,
-    } from '@core/ledger'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { ledgerDeviceStatus } from '@core/ledger'
+    import { closePopup } from '@lib/popup'
 
     const STEPS = [1, 2, 3, 4]
-
-    function onClosePopup(): void {
-        if ($ledgerSendConfirmationProps) {
-            openPopup({
-                type: 'sendConfirmation',
-                props: $ledgerSendConfirmationProps,
-                overflow: true,
-            })
-        } else if ($ledgerMintNativeTokenConfirmationProps) {
-            openPopup({
-                type: 'mintNativeTokenForm',
-                props: $ledgerMintNativeTokenConfirmationProps,
-            })
-        }
-    }
 
     $: if ($ledgerDeviceStatus.blindSigningEnabled) {
         closePopup(true)
     }
-
-    onDestroy(onClosePopup)
 </script>
 
 <Text type="h3" classes="mb-6">{localize('popups.enableLedgerBlindSigning.title')}</Text>

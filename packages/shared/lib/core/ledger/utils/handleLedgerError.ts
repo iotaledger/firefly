@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
-import { closePopup, popupState } from '@lib/popup'
+import { closePopup, openPopup, popupState } from '@lib/popup'
 
 import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
@@ -26,14 +26,20 @@ export function handleLedgerError(error: string, resetConfirmationPropsOnDenial:
             resetLedgerMintNativeTokenConfirmationProps()
         }
 
+        closePopup(true)
+
         /**
          * NOTE: Because the device has a warning prompt about blind signing when trying it
          * while it's disabled, the user has to manually reject it on the device. This results in
          * an error, however it is bad UX to display it to the user when they meant to do it.
          */
         const hadToEnableBlindSinging = popupType === 'enableLedgerBlindSigning' && wasDeniedByUser
-        if (!hadToEnableBlindSinging) {
-            closePopup(true)
+        if (hadToEnableBlindSinging) {
+            openPopup({
+                type: 'enableLedgerBlindSigning',
+                hideClose: true,
+            })
+        } else {
             showAppNotification({
                 type: wasDeniedByUser ? 'warning' : 'error',
                 alert: true,

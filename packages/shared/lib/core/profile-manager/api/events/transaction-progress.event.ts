@@ -41,7 +41,7 @@ function handleTransactionProgressInternal(
             if (get(ledgerDeviceStatus)?.blindSigningEnabled) {
                 openLedgerConfirmationPopup(payload, isDuringOnboarding)
             } else {
-                openPopup({ type: 'enableLedgerBlindSigning' })
+                openPopup({ type: 'enableLedgerBlindSigning', hideClose: true, preventClose: true })
             }
         }
     } else {
