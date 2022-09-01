@@ -32,7 +32,7 @@ export function linkTransactionsWithClaimingTransactions(
             }
             resultingTransactions.push(transaction)
         } else {
-            const claimedTransaction = searchClaimedTransactionInAllTransactions(asyncTransactions, transaction)
+            const claimedTransaction = searchClaimedTransactionInAsyncTransactions(asyncTransactions, transaction)
 
             if (claimedTransaction) {
                 claimedTransaction.claimingData = {
@@ -54,11 +54,10 @@ export function linkTransactionsWithClaimingTransactions(
     return resultingTransactions
 }
 
-function searchClaimedTransactionInAllTransactions(
+function searchClaimedTransactionInAsyncTransactions(
     allAsyncTransaction: IProcessedTransaction[],
     transaction: IProcessedTransaction
 ): IProcessedTransaction {
-    // TODO: add as many restrictions for candidates to optimize the time
     return allAsyncTransaction.find((candidate) =>
         transaction.transactionInputs?.some((input) => input.transactionId === candidate.transactionId)
     )
