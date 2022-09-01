@@ -9,7 +9,7 @@
         Text,
         TestDeepLinkButton,
     } from 'shared/components'
-    import features from 'shared/features/features'
+    import features from '@features/features'
 </script>
 
 {#if $selectedAccount}
