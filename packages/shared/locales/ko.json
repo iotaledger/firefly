@@ -7,7 +7,8 @@
         "legal": {
             "title": "개인정보 보호 정책 & 이용 약관",
             "body": "개인정보 보호 정책과 서비스 약관을 검토바랍니다.",
-            "checkbox": "개인정보 보호 정책과 서비스 약관을 읽었으며 이에 동의합니다"
+            "checkbox": "개인정보 보호 정책과 서비스 약관을 읽었으며 이에 동의합니다",
+            "checkboxMobile": "모두 읽었고 동의합니다"
         },
         "crashReporting": {
             "title": "충돌 보고",
@@ -15,7 +16,7 @@
             "checkbox": "IOTA 재단으로 충돌 보고서 전송"
         },
         "appearance": {
-            "title": "모양새",
+            "title": "표시",
             "body": "앱 테마를 선택해주세요."
         },
         "profile": {
@@ -124,9 +125,9 @@
             "body": "Stronghold로 지갑을 백업하였습니다."
         },
         "congratulations": {
-            "title": "지갑 설정 완료",
+            "title": "Profile setup complete!",
             "fundsMigrated": "이전 된 자금",
-            "body": "이제 새로 설정된 지갑을 사용할 수 있습니다.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "여러분의 자금을 새로운 네트워크로 무사히 이동시켰습니다.",
             "fireflyLedgerBody": "Ledger 계정이 성공적으로 복원되어 이제 계속할 수 있습니다.",
             "trinityLedgerBody": "여러분의 Ledger를 새로운 네트워크로 무사히 이동시켰습니다.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "백업 파일로부터 지갑 복원",
-            "body": "지갑을 복구하는 데 사용할 백업 파일을 불러옵니다. Stronghold (.stronghold) 또는 Trinity 지갑의 SeedVault (.kdbx) 파일을 선택해 주세요."
+            "body": "지갑을 복구하는 데 사용할 백업 파일을 불러옵니다. Stronghold (.stronghold) 또는 Trinity 지갑의 SeedVault (.kdbx) 파일을 선택해 주세요.",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "여러분의 Ledger를 복원하거나 마이그레이션하세요.",
@@ -190,7 +192,7 @@
             "readMore": "마이그레이션 과정에서 기대할 수 있는 것"
         },
         "generateNewLedgerAddress": {
-            "title": "새 주소 생성하기",
+            "title": "새 주소 생성",
             "body": "Firefly와 함께 토큰을 마이그레이션하려면 새로운 주소를 생성해야 합니다. 계속하려면 아래의 버튼을 클릭하세요.",
             "confirmTitle": "새로운 주소를 확인하세요.",
             "confirmBody": "보안을 위해서 Ledger 장치에 생성된 주소를 아래에 표시된 주소와 비교해주세요. 만약 일치한다면, Ledger의 두 버튼을 안내된대로 누르세요.",
@@ -250,7 +252,7 @@
             "title": "경고",
             "body1": "하나 이상의 지출 주소에 자금이 있습니다.",
             "body2": "이러한 자금을 안전하게 보호하고 이체 할 수 있도록 자동화 된 프로세스를 실행하는 것이 좋습니다.",
-            "body3": "앱을 닫으면 전체 마이그레이션을 다시 시작해야합니다.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "지출 주소에 대해 알아보기"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "네트워크 정상",
                 "networkDegraded": "네트워크 성능 저하됨",
                 "networkDown": "네트워크 연결 끊김",
+                "networkUnreachable": "네트워크에 연결할 수 없습니다",
                 "status": "상태",
                 "messagesPerSecond": "초당 메세지",
                 "referencedRate": "참조 비율"
             },
             "profileModal": {
-                "allSettings": "전체 설정",
+                "allSettings": {
+                    "title": "모든 설정",
+                    "description": "프로필, 앱, 보안"
+                },
                 "logout": "로그아웃",
                 "stronghold": {
                     "title": "프로필 잠금",
@@ -538,8 +544,8 @@
             "airdrops": {
                 "holding": "잔여수량",
                 "commencing": "Staking이 시작될때까지",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "currentStakingPeriod": "현재 스테이킹 주기",
+                "totalWalletRewards": "총 지갑 보상",
                 "assembly": {
                     "name": "Assembly",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
@@ -550,7 +556,7 @@
                 }
             },
             "banners": {
-                "new": "New Event",
+                "new": "새 이벤트",
                 "complete": "Complete"
             }
         },
@@ -600,24 +606,24 @@
                         "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "투표 수: {amount}"
                     }
                 }
             },
             "events": {
                 "status": {
-                    "upcoming": "Announcement",
-                    "commencing": "Voting open",
-                    "holding": "Counting",
-                    "ended": "Ended"
+                    "upcoming": "공지",
+                    "commencing": "투표 중",
+                    "holding": "개표 중",
+                    "ended": "종료"
                 },
-                "button": "View proposal",
+                "button": "제안 보기",
                 "treasury": {
                     "notFound": {
                         "title": "Unable to load Community Treasury vote",
                         "subtitle": "Please connect to a node that has added this vote",
-                        "buttonConnect": "Connect to default node",
-                        "buttonSettings": "View node settings",
+                        "buttonConnect": "기본 노드로 연결",
+                        "buttonSettings": "노드 설정 보기",
                         "fetching": "Fetching governance event info..."
                     }
                 }
@@ -633,9 +639,9 @@
                 "finalResult": "Final result",
                 "answerHeader": {
                     "activeVoting": "Active voting",
-                    "selected": "Submitted",
-                    "notSelected": "Not selected",
-                    "winner": "Winner"
+                    "selected": "제출됨",
+                    "notSelected": "선택하지 않음",
+                    "winner": "승자"
                 }
             },
             "votes": "votes",
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "{name} 계정을 숨길까요?",
             "body": "숨겨진 지갑은 고급설정의 \"숨긴 지갑 표시\"를 활성화하면 다시 찾을 수 있습니다.",
-            "typePassword": "계정을 삭제하려면 지갑 비밀번호를 입력하세요.",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "지갑 숨기기",
             "errorTitle": "{name} 계정을 숨길 수 없습니다",
             "errorBody1": "지갑을 숨기기 위해서는 잔액이 0이어야 합니다.",
@@ -718,8 +724,8 @@
                 "features": "기능",
                 "confirmedMilestoneIndex": "승인한 마일스톤 지수",
                 "pruningIndex": "절약 지수",
-                "messagesPerSecond": "초당 메세지",
-                "referencedRate": "참조 비율"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -757,18 +763,18 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "현재 staking중인 지갑에서 이체를 하고 있습니다. 이로 인해 여러분의 토큰 staking이 취소될 수 있습니다. 자유로이 이체하시되 그후에 남은 토큰을 다시 staking할 필요가 있을 수 있다는 점을 알아두세요.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
         "balanceFinder": {
-            "title": "잔고 찾기",
+            "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
-            "accountsSearched": "Wallets searched",
+            "accountsSearched": "지갑 검색됨",
             "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "Wallets found",
+            "accountsFound": "지갑 찾음",
             "totalWalletBalance": "총 잔고",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
+            "searchAgainHint": "잔액이나 지갑 수가 올바르지 않나요? 전체 잔액이 보일 때까지 다시 검색을 눌러주세요.",
             "typePassword": "검색을 허용하려면 암호를 입력해주세요."
         },
         "riskFunds": {
@@ -777,7 +783,7 @@
             "body2": "위험 수준이 보통 이상인 주소에 대해서는 프로세스를 다시 실행하는 것이 좋습니다."
         },
         "missingBundle": {
-            "title": "경고: 마이그레이션 중 위험에 처한 자금",
+            "title": "Warning: funds at risk during migration",
             "body": "사용한 주소에 대한 자금이 있지만 보안에 필요한 정보를 찾을 수 없습니다. 이것은 오래 전에 거래를 한 경우 발생할 수 있습니다. 계속할 수 있지만 마이그레이션 중에 {value} 이 위험합니다.",
             "learnMore": "사용한 주소에 대해 자세히 알아보기",
             "proceed": "네, 위험 사항을 이해했습니다"
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Ledger 연결이 잘 되지 않을 때 참고할 도움말",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Ledger Live가 열려있지 않도록 확인하세요.",
                 "1": "Ledger 장치를 PIN 번호로 잠금해제 했는지 확인하세요.",
@@ -823,7 +829,7 @@
                 "info": "Ledger에 표시된 나머지 주소가 아래에 표시된 것과 일치하는지 확인하세요. 만약 일치한다면 Ledger의 두 버튼을 안내된대로 누르세요."
             },
             "transaction": {
-                "title": "트랜잭션 확인",
+                "title": "Confirm transaction",
                 "info": "Ledger 장치에 표시된 거래 정보가 아래에 표시된 정보와 일치하는지 확인하세요. 만약 일치한다면 Ledger의 두 버튼을 안내된대로 누르세요."
             }
         },
@@ -839,7 +845,7 @@
             "title": "거래 내역 내보내기",
             "body": "선택한 지갑의 거래 기록을 내보내세요. 내보낸 파일은 .csv 파일형식으로 저장합니다.",
             "profileName": "프로필 이름:",
-            "accountName": "Wallet name:",
+            "accountName": "지갑 이름:",
             "typePassword": "내보내기를 허용하려면 암호를 입력해주세요"
         },
         "stakingManager": {
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Staking 총 자금",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -904,10 +911,14 @@
             "title": "개발자 프로필을 생성하고 있습니다",
             "body": "기본적으로 Chrysalis Devnet에 연결될 것이며, 수동으로 네트워크를 전환할 수 있습니다. 무엇을 하고 있는지 잘 알고 있는 경우에만 계속 진행하십시오."
         },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
+        },
         "crashReporting": {
             "title": "충돌 보고",
             "body": "오류 또는 충돌이 발생할 때 진단 데이터를 자동으로 보내면 개발자가 Firefly를 개선하는 데 도움이 됩니다. 설정은 Firefly가 다시 시작된 후에 적용됩니다.",
-            "checkbox": "IOTA 재단으로 충돌 보고서 전송"
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "서비스 약관",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Chrysalis로 마이그레이션하거나 기존 지갑 복원",
         "createWallet": "새 지갑 만들기",
         "createWalletDescription": "Chrysalis에서 실행되는 새로운 지갑 만들기",
+        "exploreWallet": "Explore wallet",
         "savePassword": "비밀번호 저장하기",
         "useBiometric": "생체 인증 사용하기",
         "setupPin": "PIN 번호 설정하기",
@@ -983,7 +995,7 @@
         "enableDeepLinks": "IOTA 링크 활성화",
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
-        "exportTransactionHistory": "거래 내역 내보내기",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "내 기기로 작업증명",
         "unlock": "잠금 해제",
         "updateFirefly": "Firefly 업데이트",
@@ -991,14 +1003,14 @@
         "saveBackup": "Stronghold 백업 저장하기",
         "customizeAcount": "취향대로 지갑 설정하기",
         "viewAddressHistory": "주소 이력 보기",
-        "hideAccount": "지갑 숨기기",
+        "hideAccount": "Hide wallet",
         "showAccount": "지갑 숨김 해제",
-        "deleteAccount": "지갑 삭제",
+        "deleteAccount": "Delete wallet",
         "max": "최대",
         "addNode": "노드 추가",
         "updateNode": "노드 변경",
         "removeNode": "노드 삭제",
-        "removeAllNodes": "모든 노드 삭제",
+        "removeAllNodes": "Remove all nodes",
         "hide": "숨기기",
         "hideOthers": "나머지 숨기기",
         "showAll": "모두 보기",
@@ -1034,7 +1046,7 @@
         "searchAgain": "다시 검색",
         "searching": "검색 중...",
         "closeFirefly": "Firefly 닫기",
-        "generateAddress": "주소 생성",
+        "generateAddress": "Generate address",
         "migrateAgain": "다른 인덱스 마이그레이션",
         "visitWebsite": "웹 사이트 방문",
         "howItWorks": "작동 방식",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "비밀번호",
+        "close": "Close",
         "confirmPassword": "비밀번호 확인하기",
         "currentPassword": "현재 비밀번호",
         "newPassword": "새 비밀번호",
@@ -1066,15 +1080,18 @@
         "received": "받음",
         "sendPayment": "보내기",
         "moveFunds": "내부 전송",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "전송",
         "sendFunds": "자금 보내기",
         "sendToAddress": "주소로 보내기",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
         "moveFundsBetweenAccounts": "지갑간 자금 이체하기",
         "sendTokensToAddress": "주소로 토큰 보내기",
         "manageAccount": "지갑 관리",
         "customizeAcount": "취향대로 지갑 설정하기",
-        "account": "지갑",
+        "account": "Wallet",
         "sendingToAddress": "주소로 보내는 중",
         "amount": "수량",
         "addAddress": "주소 추가하기",
@@ -1111,6 +1128,7 @@
         "createAccount": "지갑 만들기",
         "createNewWallet": "새로운 지갑 만들기",
         "switchWallet": "지갑 전환",
+        "addAWallet": "Add a wallet",
         "accountName": "지갑 이름",
         "latestTransactions": "최근 거래",
         "transactions": "거래내역",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "받은 주소",
         "newAddress": "새 주소",
         "date": "날짜",
-        "status": "상태",
+        "status": "Status",
         "confirmed": "승인됨",
         "pending": "처리 중",
         "noAccounts": "지갑이 없습니다. 생성해 주세요.",
@@ -1198,14 +1216,16 @@
         "staking": "스테이킹",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "Staking 자금",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
         "voting": "Voting",
         "unvoting": "Unvoting",
         "accountColor": "지갑 색상",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "총액: {balance}"
+        "total": "총액: {balance}",
+        "openExplorer": "탐색기에서 보기",
+        "activityDetails": "거래 세부 정보"
     },
     "dates": {
         "today": "오늘",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "메시지 ID",
+            "messageId": "Message ID",
             "internal": "Internal",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "날짜",
+            "date": "Date",
             "time": "Time"
         }
     },
@@ -1443,8 +1468,8 @@
         }
     },
     "tabs": {
-        "wallet": "지갑",
-        "staking": "스테이킹",
+        "wallet": "Wallet",
+        "staking": "Staking",
         "governance": "Governance",
         "tokens": "토큰",
         "activity": "활동"

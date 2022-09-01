@@ -7,7 +7,8 @@
         "legal": {
             "title": "隐私政策和服务条款",
             "body": "请查看隐私政策和服务条款。",
-            "checkbox": "我已通读并接受隐私政策和服务条款"
+            "checkbox": "我已通读并接受隐私政策和服务条款",
+            "checkboxMobile": "我已仔细阅读并接受"
         },
         "crashReporting": {
             "title": "崩溃报告",
@@ -124,9 +125,9 @@
             "body": "你已经将你的钱包备份到了一个Stronghold文件。"
         },
         "congratulations": {
-            "title": "钱包设置完成",
+            "title": "Profile setup complete!",
             "fundsMigrated": "资金已迁移",
-            "body": "您的新钱包已准备使用。",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
             "fireflyLedgerBody": "您的Ledger 账号已成功恢复，您现在可以继续。",
             "trinityLedgerBody": "您已成功地从Ledger 迁移到新的网络。",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "使用备份文件恢复你的钱包",
-            "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。"
+            "body": "导入备份文件以恢复您的钱包。备份可以是 Stronghold (.stronghold) 或 Trinity SeedVault (.kdbx)格式。",
+            "bodyMobile": "上传文件以恢复现有的钱包资金。在移动端只支持Firefly Stronghold的备份。对于Trinity SeedVault备份，请使用桌面钱包。"
         },
         "importFromLedger": {
             "title": "还原或迁移您的Ledger",
@@ -250,7 +252,7 @@
             "title": "警告！",
             "body1": "您在一个或多个已花费的地址上存有资金。",
             "body2": "我们建议你执行一个自动化程序，以帮助您保护和安全地转移这些资金。",
-            "body3": "如果您关闭了应用程序，您将需要重新启动整个迁移。",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "了解已花费的地址"
         },
         "secureSpentAddresses": {
@@ -403,7 +405,7 @@
                 "editDetails": "编辑详情",
                 "viewInfo": "查看信息",
                 "setAsPrimary": "设为主要节点",
-                "removeNode": "删除节点",
+                "removeNode": "移除节点",
                 "includeOfficialNodeList": "包含官方节点列表",
                 "noNodes": "没有节点，无法连接到网络",
                 "noNodesAuto": "尚未配置节点，将使用节点自动选择功能"
@@ -465,12 +467,16 @@
                 "networkOperational": "网络运行情况",
                 "networkDegraded": "网络已降级",
                 "networkDown": "网络已断开",
+                "networkUnreachable": "无法访问网络",
                 "status": "状态",
                 "messagesPerSecond": "每秒信息数",
                 "referencedRate": "确认率"
             },
             "profileModal": {
-                "allSettings": "所有设置",
+                "allSettings": {
+                    "title": "所有设置",
+                    "description": "档案、应用、安全"
+                },
                 "logout": "退出账号",
                 "stronghold": {
                     "title": "配置文件锁定",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "备份您的钱包",
-                    "lastBackup": "您上次的备份 {date}",
-                    "notBackedUp": "没有备份",
+                    "lastBackup": "你上次备份 {date}",
+                    "notBackedUp": "未备份",
                     "button": "备份"
                 },
                 "version": {
@@ -718,8 +724,8 @@
                 "features": "技术特性",
                 "confirmedMilestoneIndex": "已确认的里程碑索引",
                 "pruningIndex": "裁剪索引",
-                "messagesPerSecond": "每秒信息数",
-                "referencedRate": "确认率"
+                "messagesPerSecond": "每秒消息数",
+                "referencedRate": "引用率"
             }
         },
         "switchNetwork": {
@@ -734,7 +740,7 @@
             "empty": "错误日志为空。"
         },
         "deleteProfile": {
-            "title": "删除个人档案",
+            "title": "删除配置文件",
             "confirmation": "您确定要删除此配置文件吗？此操作无法撤消。",
             "typePassword": "请输入您的密码以确认。"
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "总质押资金",
             "stakedSuccessfully": "您的资金已经为 {account} 进行质押。",
             "unstakedSuccessfully": "您已经为 {account} 的资金取消了质押。",
-            "singleAccountHint": "寻找您的钱包？Firefly 已经改版。请在顶部菜单栏中切换您的钱包。"
+            "mergeStakeDisclaimerVoting": "合并您的质押将同样会合并您的投票。"
         },
         "stakingConfirmation": {
             "title": "确认参与",
@@ -877,7 +883,8 @@
             "changingVote": "投票变更中...",
             "manageVotes": "管理投票",
             "partialVoteInfo": "您已经收到 {amount} 到 {account}。您可以通过合并这些资金与您当前的投票进行投票。",
-            "mergeVoteDisclaimer": "请注意，合并投票不会影响任何已经计算过的投票。",
+            "mergeVoteDisclaimer": "请注意，合并投票不会影响任何已经统计过的投票。",
+            "mergeVoteDisclaimerStaking": "合并您的投票也会合并您的质押的资金。",
             "mergingVotes": "合并投票",
             "votedSuccessfully": "您已经开始用 {account} 进行投票。",
             "unvotedSuccessfully": "您已停止用 {account} 投票。",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "您正在创建一个开发者配置",
             "body": "你将被默认连接到Chrysalis Devnet，你可以手动切换网络。你需要知道自己在做什么的情况下才能继续。"
+        },
+        "confirmCloseApp": {
+            "title": "您即将关闭应用程序",
+            "body": "您确定吗？再次返回以关闭应用程序。"
         },
         "crashReporting": {
             "title": "崩溃报告",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "迁移到 Chrysalis 或恢复现有钱包",
         "createWallet": "创建新钱包",
         "createWalletDescription": "在 Chrysalis 上创建一个新的钱包",
+        "exploreWallet": "Explore wallet",
         "savePassword": "保存密码",
         "useBiometric": "使用生物特征安全机制",
         "setupPin": "设置PIN码",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "合并投票",
         "stopVotes": "停止投票",
         "okIUnderstand": "好的，我知道了。",
-        "readMore": "了解更多"
+        "readMore": "了解更多",
+        "chooseBackupFile": "选择备份文件"
     },
     "general": {
         "password": "密码",
+        "close": "关闭",
         "confirmPassword": "确认密码",
         "currentPassword": "当前使用的密码",
         "newPassword": "新的密码",
@@ -1066,9 +1080,12 @@
         "received": "已收到",
         "sendPayment": "发送资金",
         "moveFunds": "内部转账",
+        "moveFundsButton": "内部",
+        "unit": "单位",
         "sendTo": "发送到",
         "sendFunds": "发送资金",
         "sendToAddress": "发送至地址",
+        "scanQr": "扫描二维码",
         "scanQrOrPaste": "扫描二维码或粘贴地址",
         "moveFundsBetweenAccounts": "钱包间资金互转",
         "sendTokensToAddress": "发送Token到另一个地址",
@@ -1109,8 +1126,9 @@
         "profiles": "用户配置",
         "dev": "开发者",
         "createAccount": "创建钱包",
-        "createNewWallet": "Create a new wallet",
-        "switchWallet": "Switch wallet",
+        "createNewWallet": "创建新钱包",
+        "switchWallet": "切换钱包",
+        "addAWallet": "添加新钱包",
         "accountName": "钱包名称",
         "latestTransactions": "最新交易",
         "transactions": "交易",
@@ -1188,7 +1206,7 @@
         "capsLock": "大写锁定键已开启",
         "version": "版本 {version}",
         "yourWallets": "您的钱包",
-        "walletActions": "Wallet Actions",
+        "walletActions": "钱包操作",
         "unknown": "未知",
         "none": "无",
         "staked": "已质押",
@@ -1205,7 +1223,9 @@
         "accountColor": "钱包颜色",
         "myAssets": "我的资产",
         "option": "选项",
-        "total": "总计: {balance}"
+        "total": "总计: {balance}",
+        "openExplorer": "在浏览器上查看",
+        "activityDetails": "交易详情"
     },
     "dates": {
         "today": "今日",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "您需要质押更多的IOTA，否则您将无法达到最低奖励值。",
             "bodyDidNotReachMin": "您没有质押足够的IOTA来达到 {airdrop} 的最低奖励 ({airdropRewardMin})。",
             "bodyMinBalanceAirdrop": "这个钱包的 IOTA 代币不足以达到 {airdrop} 的最小空投奖励。"
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer 代币单位更新",
+            "body1": "在进行治理决定后，SMR单位发生了变化。Shimmer 代币现在以6位小数显示；1 SMR = 1,000,000 glow。",
+            "body2": "你仍然有相同数量的SMR奖励，Firefly 只是以不同的格式来显示价值。"
         }
     },
     "exports": {
@@ -1446,7 +1471,7 @@
         "wallet": "钱包",
         "staking": "质押",
         "governance": "治理",
-        "tokens": "Tokens",
-        "activity": "Activity"
+        "tokens": "代币",
+        "activity": "活动"
     }
 }

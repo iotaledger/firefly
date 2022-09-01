@@ -29,7 +29,7 @@
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick} {busy} reverseContent={$mobile}>
-    <div slot="title">
+    <div slot="title" class:pb-2={$mobile}>
         <Text type="h2">{locale('views.recoveryPhrase.title')}</Text>
     </div>
     <div slot="leftpane__content">

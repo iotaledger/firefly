@@ -1,6 +1,7 @@
 import { Capacitor } from '@capacitor/core'
 
 import { App } from '@capacitor/app'
+import { Device } from '@capacitor/device'
 import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
 import { Keyboard } from '@capacitor/keyboard'
 import { SplashScreen } from '@capacitor/splash-screen'
@@ -11,9 +12,9 @@ import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
 import { NotificationManager } from '../../mobile/capacitor/lib/notificationManager'
 import { PincodeManager } from '../../mobile/capacitor/lib/pincodeManager'
 
+import { VersionDetails } from '@lib/typings/appUpdater'
 import { hookErrorLogger } from '@lib/shell/errorLogger'
 import { AppSettings } from '@lib/typings/app'
-import { VersionDetails } from '@lib/typings/appUpdater'
 import { IPlatform } from '@lib/typings/platform'
 import { ActionSheetOptions } from '@lib/typings/actionSheet'
 import { KeyboardStyle } from '@lib/typings/keyboard'
@@ -102,19 +103,41 @@ export const CapacitorApi: IPlatform = {
         return
     },
 
-    exportTransactionHistory: async (defaultPath, content) => new Promise<string>((resolve, reject) => {}),
+    /**
+     * Exports transaction history
+     *
+     * @method exportTransactionHistory
+     *
+     * @param {string} textContent
+     * @param {string} fileName
+     *
+     * @returns {Promise<string>}
+     */
+    exportTransactionHistory: async (textContent, fileName) => {
+        await SecureFilesystemAccess.saveTextFile({
+            textContent,
+            fileName,
+        })
+        return ''
+    },
 
     /**
      * Exports migration log
      *
      * @method exportMigrationLog
      *
-     * @param {string} sourcePath
-     * @param {string} defaultFileName
+     * @param {string} textContent
+     * @param {string} fileName
      *
      * @returns {Promise<boolean>}
      */
-    exportMigrationLog: (sourcePath, defaultFileName) => new Promise<boolean>((resolve, reject) => {}),
+    exportMigrationLog: async (textContent, fileName) => {
+        await SecureFilesystemAccess.saveTextFile({
+            textContent,
+            fileName,
+        })
+        return true
+    },
 
     /**
      * Exports ledger migration log
@@ -167,7 +190,19 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns {Promise}
      */
-    getDiagnostics: () => new Promise<{ label: string; value: string }[]>((resolve, reject) => {}),
+    getDiagnostics: async (): Promise<{ label: string; value: string }[]> => {
+        const info = await Device.getInfo()
+        return [
+            { label: 'Name', value: info.name },
+            { label: 'Model', value: info.model },
+            { label: 'OS', value: info.operatingSystem },
+            { label: 'OS version', value: info.osVersion },
+            { label: 'Manufacturer', value: info.manufacturer },
+            { label: 'Webview version', value: info.webViewVersion },
+            { label: 'Memory used', value: `${(info.memUsed / 1024 / 1024).toFixed(2)} MB` },
+            { label: 'Disk free', value: `${(info.realDiskFree / 1024 / 1024).toFixed(2)} MB` },
+        ]
+    },
 
     /**
      * Gets os information for the system
@@ -230,7 +265,16 @@ export const CapacitorApi: IPlatform = {
      *
      * @returns void
      */
-    getVersionDetails: () => new Promise<VersionDetails>((resolve, reject) => {}),
+    getVersionDetails: async (): Promise<VersionDetails> => {
+        const { version, build } = await App.getInfo()
+        return {
+            upToDate: true,
+            currentVersion: `${version} (${build})`,
+            newVersion: '',
+            newVersionReleaseDate: new Date(),
+            changelog: '',
+        }
+    },
 
     /**
      * Change menu state to determine what menu items to display
@@ -316,10 +360,6 @@ export const CapacitorApi: IPlatform = {
         if (os === 'ios') {
             void (await SecureFilesystemAccess.allowAccess())
         }
-        void (await SecureFilesystemAccess.saveRecoveryKit({
-            selectedPath: `${selected}/recovery-kit.pdf`,
-            fromRelativePath: '/assets/docs/recovery-kit.pdf',
-        }))
         if (os === 'ios') {
             void SecureFilesystemAccess.revokeAccess()
         }

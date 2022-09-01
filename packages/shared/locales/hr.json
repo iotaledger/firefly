@@ -2,12 +2,13 @@
     "views": {
         "onboarding1": {
             "title": "Šaljite, primajte i upravljajte svojim IOTA tokenima",
-            "body": "Firefly je službeni IOTA program novčanika."
+            "body": "Firefly je službeni IOTA novčanik."
         },
         "legal": {
             "title": "Politika privatnosti i Uvjeti korištenja",
             "body": "Molimo Vas da proučite Politiku privatnosti i Uvjete korištenja.",
-            "checkbox": "Pročitao sam i prihvaćam Politiku privatnosti i Uvjete korištenja"
+            "checkbox": "Pročitao sam i prihvaćam Politiku privatnosti i Uvjete korištenja",
+            "checkboxMobile": "Pročitao sam i prihvaćam"
         },
         "crashReporting": {
             "title": "Izvješća o padu programa",
@@ -86,9 +87,9 @@
             "body2": "Koristite samo znamenke"
         },
         "confirmPin": {
-            "title": "Potvrdite svoj PIN kod",
+            "title": "Potvrdite svoj PIN kȏd",
             "body1": "Vaš PIN čuva privatnost vaših sredstava i transakcija.",
-            "body2": "Za nastavak ponovo unesite PIN."
+            "body2": "Za nastavak ponovno unesite PIN."
         },
         "backup": {
             "title": "Napravite sigurnosnu kopiju svojeg novčanika",
@@ -112,8 +113,8 @@
             "verifiedBody": "Držite ju na sigurnom, izvan dosega drugih."
         },
         "backupWallet": {
-            "title": "Spremite sigurnosnu kopiju u Stronghold datoteku",
-            "body1": "Unesi svoju lozinku kako bi spremio sigurnosne kopije svojih novčanika u Stronghold datoteku. Tu lozinku koristimo za enkripciju sigurnosne kopije.",
+            "title": "Spremi sigurnosnu kopiju Stronghold datoteke",
+            "body1": "Unesite svoju lozinku kako bi spremili sigurnosne kopije svojih novčanika u Stronghold datoteku. Tu lozinku koristimo za enkripciju sigurnosne kopije.",
             "body2": "Razlozi zašto su digitalne sigurnosne kopije tako važne:",
             "reason1": "Jednostavno oporavi svoje novčanike bez upisivanja fraze za oporavak",
             "reason2": "Uvezite svoje novčanike s drugih uređaja",
@@ -124,9 +125,9 @@
             "body": "Napravili ste Stronghold sigurnosnu kopiju svojih novčanika."
         },
         "congratulations": {
-            "title": "Postavljanje novčanika je završeno",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Sredstva su prebačena",
-            "body": "Vaš novi novčanik spreman je za upotrebu.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Sredstva su uspješno prebačena na novu mrežu",
             "fireflyLedgerBody": "Tvoj Ledger račun uspješno je oporavljen te stoga možeš nastaviti.",
             "trinityLedgerBody": "Tvoj je Ledger uspješno migriran na novu mrežu.",
@@ -139,7 +140,7 @@
             "importSeedDescription": "Unesite seed i preselite sredstva na Chrysalis",
             "importMnemonic": "Imam Firefly frazu za oporavak",
             "importMnemonicDescription": "Za oporavak novčanika unesite svoju frazu za oporavak",
-            "importFile": "Imam datoteku s pričuvnom kopijom",
+            "importFile": "Imam datoteku sa sigurnosnom kopijom",
             "importFileDescription": "Uvezite Seedvault ili Stronghold datoteku",
             "importLedger": "Imam Ledger sigurnosnu kopiju",
             "importLedgerDescription": "Oporavak ili migracija Ledger profila"
@@ -160,15 +161,16 @@
             "checksum": "Kontrolni zbroj"
         },
         "importFromFile": {
-            "title": "Obnovite svoje novčanike iz datoteke s pričuvnom kopijom",
-            "body": "Za obnovu svojih novčanika uvezite datoteku s pričuvnom kopijom. To može biti Stronghold (.stronghold) ili Trinity SeedVault (.kdbx) datoteka."
+            "title": "Obnovite svoje novčanike iz datoteke sa sigurnosnom kopijom",
+            "body": "Za obnovu svojih novčanika uvezite datoteku sa sigurnosnom kopijom. To može biti Stronghold (.stronghold) ili Trinity SeedVault (.kdbx) datoteka.",
+            "bodyMobile": "Prenesite datoteku da biste vratili postojeća sredstva novčanika. Na mobilnim uređajima podržana je samo sigurnosna kopija Firefly Strongholda. Za sigurnosnu kopiju Trinity SeedVault, molimo koristite desktop novčanik."
         },
         "importFromLedger": {
             "title": "Oporavi ili migriraj svoj Ledger",
             "body": "Oporavi postojeći Firefly Ledger profil ili migriraj sredstva s Trinitya.",
-            "haveFireflyLedger": "Imam Firefly Ledger pričuvnu kopiju",
+            "haveFireflyLedger": "Imam Firefly Ledger sigurnosnu kopiju",
             "haveFireflyLedgerDescription": "Oporavi Firefly profil",
-            "haveTrinityLedger": "Imam Trinity Ledger pričuvnu kopiju",
+            "haveTrinityLedger": "Imam Trinity Ledger sigurnosnu kopiju",
             "haveTrinityLedgerDescription": "Migriraj Trinity profil"
         },
         "connectLedger": {
@@ -176,7 +178,7 @@
             "body": "Kako bi Firefly mogao pronaći tvoj Ledger uređaj, prvo se uvjeri da je službena Ledger Live aplikacija zatvorena.",
             "trafficLight1": "Spoji svoj Ledger i otključaj ga PINom",
             "trafficLight2": "Otvori novu IOTA aplikaciju na svom Ledgeru",
-            "tips": "Savjeti u slučaju da se tvoj Ledger ne želi spojiti"
+            "tips": "Savjeti u slučaju da se vaš Ledger ne želi spojiti"
         },
         "restoreFromFireflyLedger": {
             "title": "Oporavi svoj Ledger profil",
@@ -190,7 +192,7 @@
             "readMore": "Što očekivati od postupka migracije"
         },
         "generateNewLedgerAddress": {
-            "title": "Stvorite novu adresu",
+            "title": "Generiraj novu adresu",
             "body": "Za migraciju pomoću Fireflya prvo moraš generirati novu adresu. Klikni ispod za početak.",
             "confirmTitle": "Potvrdi novu adresu",
             "confirmBody": "Zbog sigurnosti te molimo da provjeriš adresu generiranu na tvojem Ledger uređaju s adresom koju ti prikazujemo ispod. Ukoliko su iste, pritisni oba gumba na svojem Ledgeru kada te uređaj to zatraži.",
@@ -210,15 +212,15 @@
             "standard": "Standardno",
             "expert": "Ekspert",
             "takingAWhile": "Ovo bi moglo potrajati...",
-            "notGeneratingAddresses": "Generira li tvoj Ledger adrese?",
-            "reinstallLegacy": "Ukoliko ne, odspoji uređaj i pokušaj ponovo. Ukoliko se problem ponavlja, možda ćeš morati ponovo instalirati {legacy} aplikaciju."
+            "notGeneratingAddresses": "Generira li vaš Ledger adrese?",
+            "reinstallLegacy": "Ukoliko ne, odspojite uređaj i pokušajte ponovno. Ako se problem nastavi pojavljivati, možda ćete morati ponovno instalirati {legacy} aplikaciju."
         },
         "importBackupPassword": {
-            "body1": "Molimo vas da unesete svoju lozinku za pričuvnu kopiju.",
-            "body2": "Ovo je lozinka koju ste postavili kada ste izradili pričuvnu kopiju."
+            "body1": "Molimo unesite lozinku za sigurnosnu kopiju.",
+            "body2": "Ovo je lozinka koju ste postavili kada ste izradili sigurnosnu kopiju."
         },
         "importSuccess": {
-            "title": "Uspješno ste obnovili pričuvnu kopiju",
+            "title": "Uspješno ste obnovili sigurnosnu kopiju",
             "body": "Sada možete postaviti svoj novi profil."
         },
         "migrate": {
@@ -241,7 +243,7 @@
             "broadcastingBundle": "Odašiljem skup",
             "miningBundle": "Rudarim skup",
             "problemRestoringWallet": "Došlo je do greške mreže prilikom oporavka vašeg novčanika. Molimo pokušajte ponovno.",
-            "minimumMigrationAmountSpentAddresses": "Najmanji mogući iznos za migraciju je 1 Mi po iskorištenoj adresi. Provjerite još jednom izgleda li iznos ispravno.",
+            "minimumMigrationAmountSpentAddresses": "Najmanji mogući iznos za migraciju je 1 Mi po iskorištenoj adresi. Ukoliko iznos ne izgleda ispravno, provjerite ponovno.",
             "tooManyAddressesToMigrate": "Imaš previše adresa s malim iznosima za migraciju. Provjeri još jednom izgleda li ukupan iznos ispravno.",
             "cannotMigrateAllYourFunds": "Ne možemo migrirati sve vaše adrese jer neke imaju premalo sredstava. Možete nastaviti ali nepovratno ćete izgubiti {value}.",
             "error": "Došlo je pogreške u migraciji vaših sredstava. Molimo Vas, pokušajte ponovno."
@@ -250,7 +252,7 @@
             "title": "Upozorenje",
             "body1": "Imate sredstva na jednoj ili više iskorištenih adresa.",
             "body2": "Preporučamo da pokrenete automatski postupak kako biste uspješno osigurali i prebacili svoja sredstva.",
-            "body3": "Ako zatvorite aplikaciju, postupak migracije morat ćete pokrenuti ispočetka.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Saznajte više o iskorištenim adresama"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Uvjeri se da je tvoj Ledger spojen i da je {legacy} aplikacija upaljena tijekom cijele migracije.",
             "migrate": "Prebaci sredstva",
             "transaction": "Transakcija {number}",
-            "rerun": "Pokušaj ponovo"
+            "rerun": "Pokušaj ponovno"
         },
         "migrateFailed": {
             "title": "To do",
@@ -285,7 +287,7 @@
         "balance": {
             "title": "Vaš saldo",
             "body": "Uvjerite se da je stanje sredstava ispravno prije no što započete. Ako stvari ne izgledaju točno, možete provjeriti još jednom.",
-            "error": "Najmanji mogući iznos za migraciju je 1 Mi po adresi. Ukoliko iznos ne izgleda ispravno, provjerite ponovo.",
+            "error": "Najmanji mogući iznos za migraciju je 1 Mi po adresi. Ukoliko iznos ne izgleda ispravno, provjerite ponovno.",
             "zeroBalance": "Provjerite još jednom. Ukoliko i dalje ne vidite ispravan iznos, možda ste krivo unijeli seed.",
             "zeroBalanceLedgerLegacy": "Provjeri još jednom. Ukoliko i dalje ne vidiš ispravan iznos, možda je odabran krivi index računa."
         },
@@ -337,7 +339,7 @@
                 "description": "Prikazuje status nodea s kojim ste trenutno spojeni"
             },
             "exportStronghold": {
-                "title": "Izvezi pričuvnu kopiju",
+                "title": "Izvezi sigurnosnu kopiju",
                 "description": "Izvoz u Stronghold datoteku - potpunu enkriptiranu kopiju vaših novčanika i najnovijih transakcija"
             },
             "appLock": {
@@ -349,7 +351,7 @@
                 "description": "Lozinka služi za zaštitu novčanika. Upotrijebite jaku lozinku kako biste zaštitili svoja sredstva"
             },
             "changePincode": {
-                "title": "Promijenite PIN kod",
+                "title": "Promijenite PIN kȏd",
                 "description": "Vaš PIN čuva privatnost vaših sredstava i transakcija",
                 "currentPincode": "Trenutni PIN",
                 "newPincode": "Novi PIN",
@@ -465,12 +467,16 @@
                 "networkOperational": "Mreža je funkcionalna",
                 "networkDegraded": "Mreža je degradirana",
                 "networkDown": "Mreža nije funkcionalna",
+                "networkUnreachable": "Mreža nedostupna",
                 "status": "Stanje",
                 "messagesPerSecond": "Poruka u sekundi",
                 "referencedRate": "Stopa potvrđenih poruka"
             },
             "profileModal": {
-                "allSettings": "Sve postavke",
+                "allSettings": {
+                    "title": "Sve postavke",
+                    "description": "Profil, aplikacija, sigurnost"
+                },
                 "logout": "Odjavi se",
                 "stronghold": {
                     "title": "Zaključavanje profila",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Napravite sigurnosne kopije svojih novčanika",
-                    "lastBackup": "Zadnja pričuvna kopija napravljena je {date}",
-                    "notBackedUp": "Nije napravljena pričuvna kopija",
+                    "lastBackup": "Zadnja sigurnosna kopija napravljena je {date}",
+                    "notBackedUp": "Nije napravljena sigurnosna kopija",
                     "button": "Stvori sigurnosnu kopiju"
                 },
                 "version": {
@@ -557,14 +563,14 @@
         "picker": {
             "color": {
                 "title": "Birač boje",
-                "hexCode": "Hex kod boje"
+                "hexCode": "Hex kȏd boje"
             }
         },
         "governance": {
             "votingPower": {
                 "title": "Moja glasačka težina",
                 "info": {
-                    "title": "Tvoja glasačka težina",
+                    "title": "Vaša glasačka težina",
                     "equality": "1000 IOTA = 1 GLAS",
                     "description1": "Vaša glasačka težina proizlazi iz stanja vašeg novčanika. Kada je prijedlog za glasanje u fazi prebrojavanja, aktivni glasovi se broje i akumuliraju svakih 10 sekundi.",
                     "description2": "1 Ki glasačke težine (1000 IOTA tokena) daje 1 glas svakih 10 sekundi. To znači da morate nastaviti glasati tijekom cijelog trajanja faze prebrojavanja kako biste postigli punu glasačku težinu."
@@ -625,7 +631,7 @@
             "eventDetails": {
                 "votingOpens": "Glasanje se otvara",
                 "votingProgress": "Preostalo vrijeme",
-                "votingPower": "Tvoja glasačka težina",
+                "votingPower": "Vaša glasačka težina",
                 "votesCounted": "Vaši prebrojani glasovi",
                 "maximumVotes": "Vaši maksimalni glasovi",
                 "countingStarts": "Brojanje počinje",
@@ -646,10 +652,10 @@
         "password": {
             "title": "Potrebna je lozinka",
             "subtitle": "Za otključavanje novčanika molimo unesite lozinku",
-            "backup": "Unesi lozinku za izvoz pričuvne kopije"
+            "backup": "Unesite lozinku za izvoz sigurnosne kopije"
         },
         "qr": {
-            "title": "Tvoj QR kod"
+            "title": "Tvoj QR kȏd"
         },
         "version": {
             "title": "Trenutna verzija: {version}",
@@ -661,12 +667,12 @@
             "preReleaseDescription": "Trenutno koristite alpha/beta verziju Fireflya. Ažuriranja su onemogućena."
         },
         "backup": {
-            "title": "Posljednja pričuvna kopija: {date}",
-            "lastBackup": "Zadnja pričuvna kopija napravljena je {date}",
-            "backupDescription": "Važno je redovito izrađivati pričuvne kopije kako biste uvijek imali kopiju svojih novčanika i povijesti transakcija.",
-            "backupWarning": "Izgubite li pričuvnu kopiju i frazu za oporavak, izgubit ćete pristup svojim sredstvima.",
-            "notBackedUp": "Nije napravljena pričuvna kopija",
-            "notBackedUpDescription": "Niste napravili pričuvnu kopiju svojih novčanika",
+            "title": "Posljednja sigurnosna kopija: {date}",
+            "lastBackup": "Zadnja sigurnosna kopija napravljena je {date}",
+            "backupDescription": "Važno je redovito izrađivati sigurnosne kopije kako biste uvijek imali kopiju svojih novčanika i povijesti transakcija.",
+            "backupWarning": "Izgubite li sigurnosnu kopiju i frazu za oporavak, izgubit ćete pristup svojim sredstvima.",
+            "notBackedUp": "Nije napravljena sigurnosna kopija",
+            "notBackedUpDescription": "Niste napravili sigurnosnu kopiju svojih novčanika",
             "saving": "Spremanje..."
         },
         "deleteAccount": {
@@ -684,7 +690,7 @@
             "hideAccount": "Sakrij novčanik",
             "errorTitle": "Nije moguće sakriti {name}",
             "errorBody1": "Kako biste sakrili novčanik, na njemu ne smije biti sredstava.",
-            "errorBody2": "Trenutno u ovom novčaniku imate {balance}. Molimo prenesite sredstva u neki drugi novčanik i pokušajte ponovo.",
+            "errorBody2": "Trenutno u ovom novčaniku imate {balance}. Molimo prenesite sredstva u neki drugi novčanik i pokušajte ponovno.",
             "errorBody3": "Ne možete obrisati ovaj novčanik. Mora postojati barem jedan."
         },
         "addressHistory": {
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Savjeti u slučaju da se tvoj Ledger ne želi spojiti",
+            "title": "Savjeti u slučaju da se vaš Ledger ne želi spojiti",
             "steps": {
                 "0": "Pobrini se da Ledger Live aplikacija nije otvorena na tvom računalu",
                 "1": "Pobrini se da je tvoj Ledger uređaj otključan PIN-om",
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Ukupna sredstva na stakingu",
             "stakedSuccessfully": "Vaša sredstva su stakeana za {account}.",
             "unstakedSuccessfully": "Vaša sredstva više nisu na stakeu za {account}.",
-            "singleAccountHint": "Tražite svoje novčanike? Firefly se promijenio. Možete mijenjati svoje novčanike u gornjoj traci izbornika."
+            "mergeStakeDisclaimerVoting": "Spajanjem stakeanih sredstava također ćete spojiti vaše glasove."
         },
         "stakingConfirmation": {
             "title": "Potvrdite sudjelovanje",
@@ -877,7 +883,8 @@
             "changingVote": "Promjena glasa u tijeku",
             "manageVotes": "Upravljaj glasanjem",
             "partialVoteInfo": "Primili ste {amount} na {account}. Možete glasati s tim sredstvima tako da ih spojite sa svojim trenutnim glasom.",
-            "mergeVoteDisclaimer": "Molimo imajte na umu da spajanje glasova neće imati utjecaj na glasove koji su već prebrojani",
+            "mergeVoteDisclaimer": "Molimo imajte na umu da spajanje glasova neće imati utjecaj na glasove koji su već prebrojani.",
+            "mergeVoteDisclaimerStaking": "Spajanjem glasova također ćete spojiti vaša stakeana sredstva.",
             "mergingVotes": "Spajanje glasova",
             "votedSuccessfully": "Počeli ste glasati s {account}.",
             "unvotedSuccessfully": "Prestali ste glasati s {account}.",
@@ -904,6 +911,10 @@
             "title": "Trenutno kreirate developerski profil",
             "body": "Prema zadanim postavkama bit ćete spojeni na Chrysalis Devnet, te možete ručno mijenjati mreže. Nastavite samo ako znate što radite."
         },
+        "confirmCloseApp": {
+            "title": "Upravo ćete zatvoriti aplikaciju",
+            "body": "Jeste li sigurni? Ponovno pritisnite natrag da biste zatvorili aplikaciju."
+        },
         "crashReporting": {
             "title": "Izvješća o padu programa",
             "body": "Pomozite developerima da poboljšaju Firefly automatskim slanjem dijagnostičkih podataka kada dođe do pogreške ili pada programa. Ako je ova opcija odabrana, stupiti će na snagu nakon ponovnog pokretanja Fireflya.",
@@ -926,8 +937,8 @@
         }
     },
     "charts": {
-        "incomingMi": "U dolasku {value}",
-        "outgoingMi": "Šalje se {value}",
+        "incomingMi": "Dolazna transakcija {value}",
+        "outgoingMi": "Odlazna transakcija {value}",
         "portoflio": "Portfolio",
         "token": "Token",
         "holdings": "Imovina",
@@ -953,24 +964,25 @@
         "restoreWalletDescription": "Migriraj na Chrysalis mrežu ili obnovi postojeći novčanik",
         "createWallet": "Stvorite novi novčanik",
         "createWalletDescription": "Napravi novi, svjež novčanik na Chrysalis mreži",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Spremi lozinku",
         "useBiometric": "Koristi biometričku zaštitu",
         "setupPin": "Postavite PIN",
         "setPin": "Postavite PIN",
         "confirmPin": "Potvrdite PIN",
         "enterYourPin": "Unesite PIN",
-        "saveBackupFile": "Spremite pričuvnu kopiju",
+        "saveBackupFile": "Spremi sigurnosnu kopiju",
         "iveWrittenRecoveryPhrase": "Zapisao sam svoju frazu za oporavak",
         "verifyRecoveryPhrase": "Potvrdite frazu za oporavak",
         "revealRecoveryPhrase": "Prikaži frazu za oporavak",
         "importSeedvault": "Uvezi SeedVault",
-        "checkAgain": "Ne, provjeri ponovo",
+        "checkAgain": "Ne, provjeri ponovno",
         "importFromFile": "Uvezi iz datoteke",
         "send": "Pošalji",
         "receive": "Primi",
         "create": "Stvori",
         "beginTransfer": "Započni transfer",
-        "tryAgain": "Pokušaj ponovo",
+        "tryAgain": "Pokušaj ponovno",
         "visitDiscord": "Posjetite Discord",
         "dragDrop": "Vuci i ispusti",
         "importExtentions": ".kdbx ili .stronghold datoteka",
@@ -988,7 +1000,7 @@
         "unlock": "Otključaj",
         "updateFirefly": "Ažuriraj Firefly",
         "restartNow": "Ponovno pokreni",
-        "saveBackup": "Spremi Stronghold pričuvnu kopiju",
+        "saveBackup": "Spremi Stronghold sigurnosnu kopiju",
         "customizeAcount": "Personaliziraj novčanik",
         "viewAddressHistory": "Povijest adresa",
         "hideAccount": "Sakrij novčanik",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Spoji glas",
         "stopVotes": "Prestani glasati",
         "okIUnderstand": "U redu, razumijem",
-        "readMore": "Pročitajte više"
+        "readMore": "Pročitajte više",
+        "chooseBackupFile": "Odaberite datoteku sigurnosne kopije"
     },
     "general": {
         "password": "Lozinka",
+        "close": "Zatvori",
         "confirmPassword": "Potvrda lozinke",
         "currentPassword": "Trenutna lozinka",
         "newPassword": "Nova lozinka",
@@ -1066,10 +1080,13 @@
         "received": "Primljeno",
         "sendPayment": "Pošalji uplatu",
         "moveFunds": "Interni prijenos",
+        "moveFundsButton": "Interni prijenos",
+        "unit": "Jedinica",
         "sendTo": "Pošalji",
-        "sendFunds": "Pošaljite sredstva",
+        "sendFunds": "Pošalji sredstva",
         "sendToAddress": "Slanje na adresu",
-        "scanQrOrPaste": "Skenirajte QR kod ili zalijepite Adresu",
+        "scanQr": "Skeniraj QR kȏd",
+        "scanQrOrPaste": "Skenirajte QR kȏd ili zalijepite Adresu",
         "moveFundsBetweenAccounts": "Prebacite sredstva između svojih novčanika",
         "sendTokensToAddress": "Šalji tokene na adresu",
         "manageAccount": "Upravljanje novčanikom",
@@ -1100,8 +1117,8 @@
         "systemTheme": "Sistemska",
         "balance": "Stanje računa",
         "all": "Sve",
-        "incoming": "Dolazne",
-        "outgoing": "Odlazne",
+        "incoming": "Dolazne transakcije",
+        "outgoing": "Odlazne transakcije",
         "totalIn": "Ukupno unutra",
         "totalOut": "Ukupno van",
         "accounts": "Novčanici",
@@ -1111,6 +1128,7 @@
         "createAccount": "Stvori novčanik",
         "createNewWallet": "Stvori novi novčanik",
         "switchWallet": "Promijeni novčanik",
+        "addAWallet": "Dodaj novčanik",
         "accountName": "Ime novčanika",
         "latestTransactions": "Najnovije transakcije",
         "transactions": "Transakcije",
@@ -1157,9 +1175,9 @@
         "exportingStronghold": "Izvozim Stronghold...",
         "exportingStrongholdSuccess": "Stronghold je uspješno izvezen",
         "exportingStrongholdFailed": "Izvoz Strongholda nije uspio",
-        "pinCodeUpdating": "Mijenjam PIN kod...",
+        "pinCodeUpdating": "Mijenjam PIN kȏd...",
         "pinCodeSuccess": "PIN uspiješno promijenjen",
-        "pinCodeFailed": "Promjena PIN koda nije uspjela",
+        "pinCodeFailed": "Promjena PIN kȏda nije uspjela",
         "passwordStrength": "Snaga lozinke",
         "passwordStrength0": "Loše",
         "passwordStrength1": "Slabo",
@@ -1205,7 +1223,9 @@
         "accountColor": "Boja novčanika",
         "myAssets": "Moja imovina",
         "option": "Opcija",
-        "total": "Ukupno: {balance}"
+        "total": "Ukupno: {balance}",
+        "openExplorer": "Prikaži u pretraživaču",
+        "activityDetails": "Detalji transakcije"
     },
     "dates": {
         "today": "Danas",
@@ -1227,13 +1247,13 @@
     "notifications": {
         "valueTx": "Primanje {{value}} na {{account}} u tijeku",
         "confirmed": "Odlazna transakcija od {{value}} s {{account}} je potvrđena",
-        "confirmedInternal": "{{value}} od {{senderAccount}} prema {{receiverAccount}} je potvrđena",
-        "confirmedInternalNoAccounts": "Interni transfer {{value}} je potvrđen",
+        "confirmedInternal": "{{value}} od {{senderAccount}} prema {{receiverAccount}} je potvrđen",
+        "confirmedInternalNoAccounts": "Interni prijenos {{value}} je potvrđen",
         "failed": "Odlazna transakcija od {{value}} s {{account}} nije uspjela",
         "downloadingUpdate": "Preuzimanje ažuriranja",
         "updateReady": "Ažuriranje je spremno",
-        "updateError": "Došlo je do pogreške tijekom ažuriranja. Molimo, pokušajte ponovo",
-        "restartInstall": "Za instalaciju ponovo pokreni aplikaciju",
+        "updateError": "Došlo je do pogreške tijekom ažuriranja. Molimo, pokušajte ponovno",
+        "restartInstall": "Za instalaciju ponovno pokrenite aplikaciju",
         "calcMinutesRemaining": "Računam preostalo vrijeme...",
         "minutesRemaining": "{minutes, plural, one {preostala još # minuta} few {preostale još # minute} other {preostalo još # minuta}}",
         "copiedToClipboard": "Kopirano u međuspremnik",
@@ -1419,12 +1439,17 @@
             "bodyWillNotReachMin": "Nećete dosegnuti minimalni iznos nagrade tijekom preostalog razdoblja stakinga osim ako ne pridodate još IOTA tokena.",
             "bodyDidNotReachMin": "Niste stakeali dovoljno IOTA tokena da bi dosegnuli minimalnu vrijednost nagrade za {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Ovaj novčanik nema dovoljno IOTA tokena za postizanje minimalne airdrop nagrade za {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Ažuriranje prikaza Shimmer jedinica",
+            "body1": "SMR jedinice promijenile su se nakon odluke o upravljanju. Shimmer tokeni sada se prikazuju sa 6 decimalnih mjesta; 1 SMR = 1.000.000 glow.",
+            "body2": "Još uvijek imate istu količinu SMR nagrada, Firefly samo formatira vrijednost drugačije."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
             "messageId": "ID poruke",
-            "internal": "Interna",
+            "internal": "Interni prijenos",
             "rawValue": "Neobrađena vrijednost",
             "formattedValue": "Formatirana vrijednost",
             "date": "Datum",
@@ -1438,8 +1463,8 @@
     },
     "permissions": {
         "camera": {
-            "request": "Trebamo vaše dopuštenje za korištenje kamere kako bi mogli skenirati QR kodove.",
-            "requestInAppSettings": "Ako želite dati dopuštenje za korištenje vaše kamere za skeniranje QR kodova, omogućite to u postavkama aplikacije."
+            "request": "Trebamo vaše dopuštenje za korištenje kamere kako bi mogli skenirati QR kȏdove.",
+            "requestInAppSettings": "Ako želite dati dopuštenje za korištenje vaše kamere za skeniranje QR kȏdova, omogućite to u postavkama aplikacije."
         }
     },
     "tabs": {

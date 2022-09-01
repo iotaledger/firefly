@@ -1,5 +1,7 @@
 #import <UIKit/UIKit.h>
-#import "libwallet.h"
+// TODO remove then of full test
+// to use the walllet-ios-internal 0.2.2 unhide next line
+// #import "libwallet.h"
 
 //! Project version number for Plugin.
 FOUNDATION_EXPORT double PluginVersionNumber;

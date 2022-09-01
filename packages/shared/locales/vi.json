@@ -7,7 +7,8 @@
         "legal": {
             "title": "Chính sách Riêng tư & Điều khoản Dịch vụ",
             "body": "Vui lòng xem lại Chính sách Bảo mật và Điều khoản Dịch vụ.",
-            "checkbox": "Tôi đã đọc và tôi chấp nhận Chính sách Riêng tư & Điều khoản Dịch vụ"
+            "checkbox": "Tôi đã đọc và tôi chấp nhận Chính sách Riêng tư & Điều khoản Dịch vụ",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -15,7 +16,7 @@
             "checkbox": "Gửi các báo cáo sự cố đến IOTA Foundation"
         },
         "appearance": {
-            "title": "Giao diện",
+            "title": "Appearance",
             "body": "Chọn chủ đề cho ứng dụng của bạn."
         },
         "profile": {
@@ -124,9 +125,9 @@
             "body": "Bạn đã sao lưu các ví của bạn vào Stronghold."
         },
         "congratulations": {
-            "title": "Ví đã được thiết lập hoàn tất",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Tài sản đã được chuyển",
-            "body": "Ví mới của bạn đã sẵn sàng để sử dụng.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Bạn đã chuyển thành công tài sản của bạn lên mạng mới",
             "fireflyLedgerBody": "Tài khoản Ledger của bạn đã được khôi phục thành công và bạn có thể tiếp tục bây giờ.",
             "trinityLedgerBody": "Bạn đã chuyển thành công Ledger của bạn lên mạng mới.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Khôi phục ví của bạn bằng tệp sao lưu",
-            "body": "Nhập tệp sao lưu để khôi phục ví của bạn. Bản sao lưu có thể là Stronghold (.stronghold) hoặc Trinity SeedVault (.kdbx)."
+            "body": "Nhập tệp sao lưu để khôi phục ví của bạn. Bản sao lưu có thể là Stronghold (.stronghold) hoặc Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Khôi phục hoặc di chuyển Ledger của bạn",
@@ -190,7 +192,7 @@
             "readMore": "Điều gì sẽ xảy ra từ quá trình di chuyển"
         },
         "generateNewLedgerAddress": {
-            "title": "Tạo địa chỉ ví mới",
+            "title": "Generate new address",
             "body": "Bạn cần tạo một địa chỉ mới để di chuyển các token của mình với Firefly. Nhấn vào nút bên dưới để tiếp tục.",
             "confirmTitle": "Xác nhận địa chỉ mới",
             "confirmBody": "Để bảo mật, vui lòng so sánh địa chỉ được tạo trên thiết bị Ledger của bạn với địa chỉ được hiển thị bên dưới. Nếu chúng khớp, hãy nhấn cả hai nút trên Ledger của bạn như được đề cập.",
@@ -227,7 +229,7 @@
             "body2": "Nó có thể mất một khoảng thời gian. Không tắt thiết bị của bạn trong quá trình chuyển tiền.",
             "existing": "Ví cũ của bạn",
             "new": "Ví mới của bạn",
-            "learn": "Tìm hiểu về quá trình di chuyển token",
+            "learn": "Learn about the migration",
             "beginMigration": "Bắt đầu di chuyển",
             "migrating": "Đang chuyển tài sản...",
             "migrated": "{balance} đã chuyển",
@@ -250,7 +252,7 @@
             "title": "Cảnh báo",
             "body1": "Bạn có tài sản trên một hoặc nhiều địa chỉ đã chi tiêu.",
             "body2": "Chúng tôi khuyến nghị bạn chạy một quy trình tự động để giúp bảo mật và di chuyển những tài sản này an toàn.",
-            "body3": "Nếu bạn đóng ứng dụng bạn sẽ cần khởi chạy lại toàn bộ quá trình chuyển.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Tìm hiểu về các địa chỉ ví đã chi tiêu"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Đảm bảo Ledger của bạn đã được kết nối và ứng dụng {legacy} luôn mở trong quá trình chuyển.",
             "migrate": "Chuyển tài sản",
             "transaction": "Giao dịch {number}",
-            "rerun": "Thử lại"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -465,12 +467,16 @@
                 "networkOperational": "Mạng lưới hoạt động",
                 "networkDegraded": "Mạng yếu",
                 "networkDown": "Mạng đã ngắt kết nối",
+                "networkUnreachable": "Network unreachable",
                 "status": "Trạng thái",
                 "messagesPerSecond": "Số tin nhắn trên giây",
                 "referencedRate": "Tỷ lệ tham chiếu"
             },
             "profileModal": {
-                "allSettings": "Tất cả tùy chọn cài đặt",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Đăng xuất",
                 "stronghold": {
                     "title": "Khóa hồ sơ",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Sao lưu ví của bạn",
-                    "lastBackup": "Bạn đã thực hiện sau lưu lần cuối vào ngày {date}",
-                    "notBackedUp": "Chưa được sao lưu",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Sao lưu"
                 },
                 "version": {
@@ -526,7 +532,7 @@
                 },
                 "bodies": {
                     "upcoming": "Đặt cọc {token} token của bạn để tự động nhận phần thưởng mỗi 10 giây khi đặt cọc bắt đầu vào ngày {date}.",
-                    "commencing": "Đặt cọc {token} token của bạn để tự động nhận phần thưởng mỗi 10 giây khi đặt cọc bắt đầu vào ngày {date}.",
+                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
                     "holdingAndStaking": "Bạn sẽ tự động nhận được phần thưởng sau mỗi 10 giây.",
                     "holdingAndNotStaking": "Đặt cọc các {token} token của bạn để nhận phần thưởng sau mỗi 10 giây.",
                     "endedAndDidStake": "{token} phần thưởng sẽ được phân phối vào ví của bạn khi mạng lưới ra mắt.",
@@ -607,7 +613,7 @@
             "events": {
                 "status": {
                     "upcoming": "Announcement",
-                    "commencing": "Đang Mở Bầu Chọn",
+                    "commencing": "Voting open",
                     "holding": "Counting",
                     "ended": "Ended"
                 },
@@ -625,7 +631,7 @@
             "eventDetails": {
                 "votingOpens": "Voting opens on",
                 "votingProgress": "Time remaining",
-                "votingPower": "Cân nặng phiếu bầu của bạn",
+                "votingPower": "Your voting weight",
                 "votesCounted": "Your counted votes",
                 "maximumVotes": "Your maximum votes",
                 "countingStarts": "Counting begins on",
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "Ẩn {name}?",
             "body": "Bạn có thể tìm thấy ví này sau bằng cách bật \"Hiển thị ví ẩn\" trong Cài đặt nâng cao.",
-            "typePassword": "Nhập mật khẩu ví của bạn để xác nhận.",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Ví ẩn",
             "errorTitle": "Không thể ẩn {name}",
             "errorBody1": "Để ẩn một chiếc ví, nó phải có số dư bằng 0.",
@@ -718,8 +724,8 @@
                 "features": "Tính năng",
                 "confirmedMilestoneIndex": "Danh mục cột mốc được xác nhận",
                 "pruningIndex": "Danh mục sơ lược",
-                "messagesPerSecond": "Số tin nhắn trên giây",
-                "referencedRate": "Tỷ lệ tham chiếu"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -734,12 +740,12 @@
             "empty": "Nhật ký lỗi trống."
         },
         "deleteProfile": {
-            "title": "Xóa hồ sơ",
+            "title": "Delete profile",
             "confirmation": "Bạn có chắc chắn muốn xóa hồ sơ này không? Không thể hoàn tác thao tác này.",
             "typePassword": "Nhập mật khẩu của bạn để xác nhận."
         },
         "diagnostics": {
-            "title": "Chuẩn đoán",
+            "title": "Diagnostics",
             "node": "Nút",
             "platform": "Nền tảng",
             "platformVersion": "Phiên bản nền tảng",
@@ -757,7 +763,7 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "Bạn đang gửi một lệnh chuyển từ một ví đang thực hiện đặt đọc. Việc này có thể làm hủy đặt cọc các token của bạn. Hoàn toàn có thể gửi lệnh chuyển tuy nhiên bạn phải cần đặt cọc lại số Token còn lại sau đó.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
@@ -777,7 +783,7 @@
             "body2": "Chúng tôi khuyên bạn chạy lại quy trình với các địa chỉ ví với mức độ rủi ro trung bình hoặc cao hơn."
         },
         "missingBundle": {
-            "title": "Cảnh báo: Tài sản gặp rủi ro trong quá trình chuyển",
+            "title": "Warning: funds at risk during migration",
             "body": "Bạn có tài sản trong các ví đã chi tiêu, nhưng không tìm thấy thông tin cần thiết để bảo mật chúng. Điều này có thể xảy nếu bạn thực hiện giao dịch cách đây khá lâu. Bạn có thể tiến hành nhưng {value} gặp rủi ro trong quá trình chuyển.",
             "learnMore": "Tìm hiểu thêm về các địa chỉ ví đã chi tiêu",
             "proceed": "Tôi hiểu rủi ro"
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Tổng tài sản đã đặt cọc",
             "stakedSuccessfully": "Tài sản của bạn đã được đặt cọc cho {account}.",
             "unstakedSuccessfully": "Tài sản của bạn đã hủy đặt cọc cho {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -904,10 +911,14 @@
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
+        },
         "crashReporting": {
             "title": "Crash reporting",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
-            "checkbox": "Gửi các báo cáo sự cố đến IOTA Foundation"
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Terms of Service",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Di chuyển sang Chrysalis hoặc khôi phục ví hiện có",
         "createWallet": "Khởi tạo ví mới",
         "createWalletDescription": "Tạo một ví mới chạy trên Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Lưu mật khẩu",
         "useBiometric": "Sử dụng bảo mật sinh trắc học",
         "setupPin": "Thiết lập mã PIN",
@@ -983,7 +995,7 @@
         "enableDeepLinks": "Thiết lập các liên kết IOTA",
         "enableDeveloperMode": "Bật chế độ nhà phát triển",
         "enableSystemNotifications": "Cho phép thông báo",
-        "exportTransactionHistory": "Xuất lịch sử giao dịch",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Bằng chứng công việc tại địa phương",
         "unlock": "Mở khóa",
         "updateFirefly": "Cập nhật ví Firefly",
@@ -991,14 +1003,14 @@
         "saveBackup": "Sao lưu Stronghold",
         "customizeAcount": "Tùy chỉnh Ví",
         "viewAddressHistory": "Hiển thị lịch sử địa chỉ ví",
-        "hideAccount": "Ví ẩn",
+        "hideAccount": "Hide wallet",
         "showAccount": "Hủy ẩn Ví",
-        "deleteAccount": "Xóa ví",
+        "deleteAccount": "Delete wallet",
         "max": "Tối đa",
         "addNode": "Thêm Node",
         "updateNode": "Cập nhật Nút",
         "removeNode": "Xóa nút",
-        "removeAllNodes": "Xóa tất cả nút",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Ẩn",
         "hideOthers": "Ẩn các mục khác",
         "showAll": "Hiện tất cả",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Tìm kiếm lại",
         "searching": "Đang tìm kiếm...",
         "closeFirefly": "Đóng Firefly",
-        "generateAddress": "Tạo địa chỉ mới",
+        "generateAddress": "Generate address",
         "migrateAgain": "Chuyển danh mục khác",
         "visitWebsite": "Truy cập Website",
         "howItWorks": "Cách thức hoạt động",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Mật khẩu",
+        "close": "Close",
         "confirmPassword": "Xác nhận mật khẩu",
         "currentPassword": "Mật khẩu hiện tại",
         "newPassword": "Mật khẩu mới",
@@ -1066,15 +1080,18 @@
         "received": "Đã nhận",
         "sendPayment": "Gửi thanh toán",
         "moveFunds": "Chuyển khoản nội bộ",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Gửi đến",
         "sendFunds": "Gửi tiền",
         "sendToAddress": "Gửi đến địa chỉ",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Quét mã QR hoặc dán vào một địa chỉ ví",
         "moveFundsBetweenAccounts": "Chuyển tài sản giữa các ví",
         "sendTokensToAddress": "Gửi các token tới một địa chỉ ví",
         "manageAccount": "Quản lý ví",
         "customizeAcount": "Tùy chỉnh ví của bạn",
-        "account": "Ví tiền",
+        "account": "Wallet",
         "sendingToAddress": "Gửi đến địa chỉ",
         "amount": "Số tiền",
         "addAddress": "Thêm địa chỉ",
@@ -1111,6 +1128,7 @@
         "createAccount": "Khởi tạo ví",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Tên ví",
         "latestTransactions": "Các giao dịch mới nhất",
         "transactions": "Các giao dịch",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "Địa chỉ nhận",
         "newAddress": "Địa chỉ mới",
         "date": "Thời điểm",
-        "status": "Trạng thái",
+        "status": "Status",
         "confirmed": "Đã xác nhận",
         "pending": "Đang chờ xử lý",
         "noAccounts": "Bạn không có ví, vui lòng tạo một ví.",
@@ -1198,14 +1216,16 @@
         "staking": "Đặt cọc",
         "unstaking": "Đang hủy đặt cọc",
         "notStaked": "Không đặt cọc",
-        "stakedFunds": "Tài sản đã đặt cọc",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Tài sản không đặt cọc",
         "voting": "Voting",
         "unvoting": "Unvoting",
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Ngày hôm nay",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "Bạn sẽ không đạt được giá trị phần thưởng tối thiểu trong thời gian đặt cọc còn lại trừ khi bạn thêm nhiều IOTA hơn.",
             "bodyDidNotReachMin": "Bạn đã không đặt cọc đủ IOTA để đạt được giá trị phần thưởng tối thiểu cho {airdrop}({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Ví này không có đủ các token IOTA để đạt được phần thưởng airdrop tối thiểu cho {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID tin nhắn",
+            "messageId": "Message ID",
             "internal": "Nội bộ",
             "rawValue": "Giá trị thô",
             "formattedValue": "Giá trị đã định dạng",
-            "date": "Thời điểm",
+            "date": "Date",
             "time": "Thời gian"
         }
     },
@@ -1443,8 +1468,8 @@
         }
     },
     "tabs": {
-        "wallet": "Ví tiền",
-        "staking": "Đặt cọc",
+        "wallet": "Wallet",
+        "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",
         "activity": "Activity"

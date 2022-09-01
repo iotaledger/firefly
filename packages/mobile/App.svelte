@@ -5,9 +5,8 @@
     import { StatusBar, Style } from '@capacitor/status-bar'
     import { onMount, tick } from 'svelte'
     import { QRScanner, Route, ToastContainer, Popup } from 'shared/components'
-    import { closeDrawers, closePreviousDrawer } from 'shared/components/Drawer.svelte'
-    import { openPopup, popupState } from '@lib/popup'
-    import { logout, keyboardHeight, isKeyboardOpened, mobile, stage } from '@lib/app'
+    import { popupState } from '@lib/popup'
+    import { logout, keyboardHeight, isKeyboardOpened, mobile, stage, isAndroid } from '@lib/app'
     import { appSettings } from '@lib/appSettings'
     import { goto } from '@lib/helpers'
     import { localeDirection, isLocaleLoaded, setupI18n, _ } from '@core/i18n'
@@ -36,17 +35,12 @@
     } from 'shared/routes'
     import { Stage } from 'shared/lib/typings/stage'
     import { Platform } from '@lib/platform'
+    import { getVersionDetails } from '@lib/appUpdater'
 
     mobile.set(process.env.PLATFORM == Platforms.MOBILE)
     stage.set(Stage[process.env.STAGE?.toUpperCase()] ?? Stage.ALPHA)
 
     let showSplash = true
-
-    /**
-     * We use !== 'ios' since Android sometimes is not detected
-     * so as default we define Android.
-     */
-    const isAndroid = Platform.getOS() !== 'ios'
 
     $: if ($appSettings.darkMode) {
         document.body.classList.add('scheme-dark')
@@ -105,7 +99,7 @@
         $keyboardHeight = info.keyboardHeight
         $isKeyboardOpened = true
     })
-    void Keyboard.addListener('keyboardDidHide', () => {
+    void Keyboard.addListener('keyboardWillHide', () => {
         // Listen for when the keyboard is about to be hidden.
         $isKeyboardOpened = false
     })
@@ -118,21 +112,26 @@
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
+        isAndroid.set((await Platform.getOS()) !== 'ios')
         // Display splash screen at least for 3 seconds
         setTimeout(() => {
             showSplash = false
         }, 3000)
 
         initRouters()
+        await getVersionDetails()
         await pollMarketData()
         await pollNetworkStatus()
     })
+
+    // TODO: Has to be enabled again when system notifications are implemented
+    $appSettings.notifications = false
 </script>
 
 {#if $isLocaleLoaded && !showSplash}
     <!-- empty div to avoid auto-purge removing dark classes -->
     <div class="scheme-dark" />
-    <div class="scanner-hide" style="--transition-scroll: {isAndroid ? 'cubic-bezier(0, 0.3, 0, 1)' : 'ease-out'}">
+    <div class="scanner-hide" style="--transition-scroll: cubic-bezier(0, 0.3, 0, 1)">
         {#if $popupState.active}
             <Popup
                 type={$popupState.type}

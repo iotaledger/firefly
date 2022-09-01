@@ -7,7 +7,8 @@
         "legal": {
             "title": "Política de Privacidade e Termos de Serviço",
             "body": "Por favor, reveja a Política de Privacidade e os Termos do Serviço.",
-            "checkbox": "Eu li e aceito a Política de Privacidade e Termos de Serviço"
+            "checkbox": "Eu li e aceito a Política de Privacidade e Termos de Serviço",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -124,9 +125,9 @@
             "body": "Fez o backup da sua carteira para um arquivo Stronghold."
         },
         "congratulations": {
-            "title": "Configuração da carteira concluída",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Fundos migrados",
-            "body": "A sua nova carteira está pronta para ser usada.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Migrou os seus fundos com sucesso para a nova rede",
             "fireflyLedgerBody": "A sua conta Ledger foi recuperada com sucesso e pode continuar agora.",
             "trinityLedgerBody": "Migrou os seus fundos com sucesso para a nova rede.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Restaure as suas carteiras usando um arquivo de backup",
-            "body": "Importe um arquivo de backup para restaurar as suas carteiras. Backups podem ser arquivos Stronghold (.stronghold) ou Trinity SeedVault (.kdbx)."
+            "body": "Importe um arquivo de backup para restaurar as suas carteiras. Backups podem ser arquivos Stronghold (.stronghold) ou Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Restaurar ou migrar o seu Ledger",
@@ -190,7 +192,7 @@
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
-            "title": "Gerar novo endereço",
+            "title": "Generate new address",
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
             "confirmTitle": "Confirm the new address",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
@@ -227,7 +229,7 @@
             "body2": "Poderá demorar algum tempo. Não desligue o seu dispositivo durante a migração.",
             "existing": "A sua carteira antiga",
             "new": "A sua nova carteira",
-            "learn": "Saiba mais sobre a migração",
+            "learn": "Learn about the migration",
             "beginMigration": "Começar a Migração",
             "migrating": "A migrar fundos...",
             "migrated": "{balance} migrado",
@@ -250,7 +252,7 @@
             "title": "Alerta",
             "body1": "Tem fundos em um ou mais endereços usados.",
             "body2": "Recomendamos que execute um processo automático para ajudar a proteger e transferir esses fundos de forma segura.",
-            "body3": "Se fechar a aplicação, precisará de reiniciar toda a migração.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Saiba mais sobre endereços usados"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "Estado",
                 "messagesPerSecond": "Mensagens por segundo",
                 "referencedRate": "Taxa referenciada"
             },
             "profileModal": {
-                "allSettings": "Todas as configurações",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Sair",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "O seu último backup {date}",
-                    "notBackedUp": "Backup ainda não realizado",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -718,8 +724,8 @@
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Mensagens por segundo",
-                "referencedRate": "Taxa referenciada"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -734,12 +740,12 @@
             "empty": "O relatório de erros está vazio."
         },
         "deleteProfile": {
-            "title": "Excluir perfil",
+            "title": "Delete profile",
             "confirmation": "Tem certeza de que deseja excluir este perfil? Esta ação não pode ser desfeita.",
             "typePassword": "Digite a sua palavra-passe para confirmar."
         },
         "diagnostics": {
-            "title": "Diagnósticos",
+            "title": "Diagnostics",
             "node": "Servidor",
             "platform": "Plataforma",
             "platformVersion": "Versão da Plataforma",
@@ -762,7 +768,7 @@
             }
         },
         "balanceFinder": {
-            "title": "Localizador de saldo",
+            "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Dicas caso a sua Ledger não esteja a conectar",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
@@ -823,7 +829,7 @@
                 "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
-                "title": "Confirmar transação",
+                "title": "Confirm transaction",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrar para Chrysalis ou restaurar uma carteira existente",
         "createWallet": "Criar nova carteira",
         "createWalletDescription": "Criar uma carteira nova na Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Guardar palavra-passe",
         "useBiometric": "Utilizar segurança biométrica",
         "setupPin": "Configurar o código PIN",
@@ -962,7 +974,7 @@
         "saveBackupFile": "Guardar arquivo de backup",
         "iveWrittenRecoveryPhrase": "Eu anotei a minha frase de recuperação",
         "verifyRecoveryPhrase": "Verifique a frase de recuperação",
-        "revealRecoveryPhrase": "Revelar a frase de recuperação",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "Importar SeedVault",
         "checkAgain": "Verificar novamente",
         "importFromFile": "Importar de um arquivo",
@@ -991,9 +1003,9 @@
         "saveBackup": "Salvar backup Stronghold",
         "customizeAcount": "Personalizar carteira",
         "viewAddressHistory": "Ver histórico de endereços",
-        "hideAccount": "Ocultar carteira",
+        "hideAccount": "Hide wallet",
         "showAccount": "Mostrar carteira",
-        "deleteAccount": "Eliminar carteira",
+        "deleteAccount": "Delete wallet",
         "max": "Máx",
         "addNode": "Adicionar servidor",
         "updateNode": "Atualizar servidor",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Pesquisar novamente",
         "searching": "Pesquisando...",
         "closeFirefly": "Fechar Firefly",
-        "generateAddress": "Gerar endereço",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Palavra-passe",
+        "close": "Close",
         "confirmPassword": "Confirmar a palavra-passe",
         "currentPassword": "Palavra-passe atual",
         "newPassword": "Nova palavra-passe",
@@ -1066,9 +1080,12 @@
         "received": "Recebido",
         "sendPayment": "Enviar Pagamento",
         "moveFunds": "Transferência Interna",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Send To",
         "sendFunds": "Enviar fundos",
         "sendToAddress": "Enviar para o endereço",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Faça scan de um código QR ou insira um endereço",
         "moveFundsBetweenAccounts": "Mover fundos entre carteiras",
         "sendTokensToAddress": "Enviar tokens para um endereço",
@@ -1111,10 +1128,11 @@
         "createAccount": "Criar uma Carteira",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Nome da carteira",
         "latestTransactions": "Últimas transações",
         "transactions": "Transações",
-        "security": "Segurança",
+        "security": "Security",
         "accountAddress": "Endereço da carteira",
         "network": "Network",
         "nodes": "Servidores",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "Endereço de receção",
         "newAddress": "New Address",
         "date": "Data",
-        "status": "Estado",
+        "status": "Status",
         "confirmed": "Confirmado",
         "pending": "Pendente",
         "noAccounts": "Não possui carteiras, por favor crie uma.",
@@ -1205,7 +1223,9 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Hoje",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID da Mensagem",
+            "messageId": "Message ID",
             "internal": "Internal",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "Data",
+            "date": "Date",
             "time": "Time"
         }
     },
@@ -1443,7 +1468,7 @@
         }
     },
     "tabs": {
-        "wallet": "Carteira",
+        "wallet": "Wallet",
         "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",

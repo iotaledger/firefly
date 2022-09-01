@@ -9,6 +9,7 @@
     import AddNode from './AddNode.svelte'
     import AddressHistory from './AddressHistory.svelte'
     import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
+    import AirdropNetworkWarning from './AirdropNetworkWarning.svelte'
     import Backup from './Backup.svelte'
     import BalanceFinder from './BalanceFinder.svelte'
     import Busy from './Busy.svelte'
@@ -133,6 +134,7 @@
         stakingManager: StakingManager,
         newStakingPeriodNotification: NewStakingPeriodNotification,
         airdropNetworkInfo: AirdropNetworkInfo,
+        airdropNetworkWarning: AirdropNetworkWarning,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         confirmCloseApp: ConfirmCloseApp,
         legalUpdate: LegalUpdate,
@@ -179,6 +181,11 @@
         e.preventDefault()
     }
 
+    const handleDrawerClose = () => {
+        closePopup($popupState?.preventClose)
+        $backButtonStore?.pop()
+    }
+
     onMount(async () => {
         $backButtonStore?.add(closePopup as () => Promise<void>)
         const elems = focusableElements()
@@ -191,8 +198,8 @@
 
 <svelte:window on:keydown={onKey} />
 {#if $mobile && !fullScreen}
-    <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
-        <div bind:this={popupContent} class="py-10 px-5">
+    <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={handleDrawerClose}>
+        <div bind:this={popupContent} class="pt-10 pb-8 px-5">
             <svelte:component this={types[type]} {...props} {locale} />
         </div>
     </Drawer>

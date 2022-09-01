@@ -7,7 +7,8 @@
         "legal": {
             "title": "गोपनीयता नीति और सेवा की शर्तें",
             "body": "कृपया समीक्षा करे प्राइवेसी पॉलिसी तथा सेवा की शर्तें|",
-            "checkbox": "मैंने पढ़ा है और मैं गोपनीयता नीति और सेवा की शर्तें स्वीकार करता हूं"
+            "checkbox": "मैंने पढ़ा है और मैं गोपनीयता नीति और सेवा की शर्तें स्वीकार करता हूं",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -15,7 +16,7 @@
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "appearance": {
-            "title": "दिखावट",
+            "title": "Appearance",
             "body": "अपनी ऐप थीम चुनें"
         },
         "profile": {
@@ -124,9 +125,9 @@
             "body": "आपने अपना वॉलेट स्ट्रॉन्गहोल्ड में बैकअप कर लिया है"
         },
         "congratulations": {
-            "title": "वॉलेट सेटअप पूरा हुआ",
+            "title": "Profile setup complete!",
             "fundsMigrated": "फंड्स माइग्रेट हुए",
-            "body": "आपका वॉलेट उपयोग के लिए तैयार है",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "आपने अपने धन को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है",
             "fireflyLedgerBody": "आपका लेजर खाता सफलतापूर्वक पुनर्प्राप्त कर लिया गया है और अब आप जारी रख सकते हैं।",
             "trinityLedgerBody": "आपने अपने लेजर को नए नेटवर्क में सफलतापूर्वक स्थानांतरित कर दिया है।",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "एक बैकअप फ़ाइल से अपने वॉलेट को पुनर्स्थापित करें",
-            "body": "अपने वॉलेट को पुनर्स्थापित करने के लिए एक बैकअप फ़ाइल आयात करें। बैकअप या तो एक स्ट्रॉन्गहोल्ड फाइल (.stronghold) या एक ट्रिनिटी सीड़वॉल्ट फाइल (.kdbx) हो सकते हैं।"
+            "body": "अपने वॉलेट को पुनर्स्थापित करने के लिए एक बैकअप फ़ाइल आयात करें। बैकअप या तो एक स्ट्रॉन्गहोल्ड फाइल (.stronghold) या एक ट्रिनिटी सीड़वॉल्ट फाइल (.kdbx) हो सकते हैं।",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "अपने लेजर को पुनर्स्थापित या माइग्रेट करें",
@@ -190,7 +192,7 @@
             "readMore": "माइग्रेशन प्रक्रिया से क्या अपेक्षा करें"
         },
         "generateNewLedgerAddress": {
-            "title": "नया पता उत्पन्न करें",
+            "title": "Generate new address",
             "body": "फायरफ्लाई के साथ अपने टोकन माइग्रेट करने के लिए आपको एक नया पता जेनरेट करना होगा। जारी रखने के लिए नीचे के बटन पर क्लिक करें।",
             "confirmTitle": "नए पते की पुष्टि करें",
             "confirmBody": "सुरक्षा के लिए, कृपया अपने लेजर डिवाइस पर उत्पन्न पते की तुलना नीचे प्रदर्शित पते से करें। यदि वे मेल खाते हैं, तो संकेत के अनुसार अपने लेजर पर दोनों बटन दबाएं।",
@@ -227,7 +229,7 @@
             "body2": "इसमें कुछ समय लग सकता है। प्रवास के दौरान अपने डिवाइस को बंद न करें।",
             "existing": "आपका पराना वालेट",
             "new": "आपका नए वालेट",
-            "learn": "प्रवास के बारे में जानें",
+            "learn": "Learn about the migration",
             "beginMigration": "प्रवास शुरू करें",
             "migrating": "माइग्रेटिंग फंड...",
             "migrated": "{balance} मीग्रेटेड",
@@ -250,7 +252,7 @@
             "title": "चेतावनी",
             "body1": "आपके पास एक या अधिक खर्च किए गए पते पर धन है।",
             "body2": "हम आपको इन निधियों को सुरक्षित रूप से स्थानांतरित करने और सुरक्षित रूप से स्थानांतरित करने में मदद करने के लिए एक स्वचालित प्रक्रिया चलाने की सलाह देते हैं।",
-            "body3": "यदि आप ऐप को बंद करते हैं तो आपको संपूर्ण माइग्रेशन को पुनरारंभ करना होगा।",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "खर्च किए गए पतों के बारे में जानें"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "सुनिश्चित करें कि आपका लेज़र कनेक्ट है और माइग्रेशन के दौरान {legacy} ऐप हर समय खुला रहता है।",
             "migrate": "मीग्रेटेड फंड",
             "transaction": "ट्रांसक्शन {number}",
-            "rerun": "फिर कोशिश करें"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "स्टेटस",
                 "messagesPerSecond": "मेस्सगेस प्रति सेकंड",
                 "referencedRate": "संदर्भित दर"
             },
             "profileModal": {
-                "allSettings": "सभी सेटिंग्स",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "लॉग आउट",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "आपका पिछला बैकअप {date}",
-                    "notBackedUp": "बैकअप नहीं है",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -718,8 +724,8 @@
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "छंटाई अनुक्रमणिका",
-                "messagesPerSecond": "मेस्सगेस प्रति सेकंड",
-                "referencedRate": "संदर्भित दर"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "युक्तियाँ यदि आपका लेजर कनेक्ट नहीं हो रहा है",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "सुनिश्चित करें कि आपके कंप्यूटर पर लेजर लाइव नहीं खुला है",
                 "1": "सुनिश्चित करें कि आपने अपने लेजर डिवाइस को अपने पिन के साथ अनलॉक कर दिया है",
@@ -823,7 +829,7 @@
                 "info": "पुष्टि करें कि आपके लेजर पर प्रदर्शित शेष पता नीचे प्रदर्शित पते से मेल खाता है। यदि वे मेल खाते हैं, तो संकेत के अनुसार अपने लेजर पर दोनों बटन दबाएं।"
             },
             "transaction": {
-                "title": "ट्रांसक्शन कन्फर्म करे",
+                "title": "Confirm transaction",
                 "info": "पुष्टि करें कि आपके लेजर डिवाइस पर प्रदर्शित लेनदेन जानकारी नीचे प्रदर्शित जानकारी से मेल खाती है। यदि वे मेल खाते हैं, तो संकेत के अनुसार अपने लेजर पर दोनों बटन दबाएं।"
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "क्रिसलिस में प्रवास करें या किसी मौजूदा वॉलेट को पुनर्स्थापित करें",
         "createWallet": "नया वॉलेट बनाएं",
         "createWalletDescription": "क्रिसलिस पर चलने वाला एक ताजा वॉलेट बनाएं",
+        "exploreWallet": "Explore wallet",
         "savePassword": "पासवर्ड सहेजें",
         "useBiometric": "बायोमेट्रिक सुरक्षा का उपयोग करें",
         "setupPin": "पिन कोड सेट करें",
@@ -991,9 +1003,9 @@
         "saveBackup": "स्ट्रॉन्गहोल्ड बैकअप को सेव करे",
         "customizeAcount": "अनुकूलित करें अपना खाता",
         "viewAddressHistory": "एड्रेस का इतिहास देखें",
-        "hideAccount": "वॉलेट छुपाये",
+        "hideAccount": "Hide wallet",
         "showAccount": "वॉलेट अनहाइड करें",
-        "deleteAccount": "वॉलेट नष्ट करें",
+        "deleteAccount": "Delete wallet",
         "max": "अधिकतम",
         "addNode": "नया नोड जोड़ें",
         "updateNode": "अपडेट नोड",
@@ -1034,7 +1046,7 @@
         "searchAgain": "फिर से सर्च करें",
         "searching": "खोज रहे हैं...",
         "closeFirefly": "फायरफ्लाई बंद करे",
-        "generateAddress": "नया पता उत्पन्न करें",
+        "generateAddress": "Generate address",
         "migrateAgain": "एक और इंडेक्स माइग्रेट करें",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "पासवर्ड",
+        "close": "Close",
         "confirmPassword": "पासवर्ड की पुष्टि करें",
         "currentPassword": "वर्तमान पासवर्ड",
         "newPassword": "नया पासवर्ड",
@@ -1066,9 +1080,12 @@
         "received": "प्राप्त हुआ",
         "sendPayment": "भुगतान भेजें",
         "moveFunds": "आंतरिक स्थानांतरण",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "भेजना",
         "sendFunds": "धनराशि भेजें",
         "sendToAddress": "पते पर भेजें",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "QR कोड स्कैन करें या एक पता पेस्ट करें",
         "moveFundsBetweenAccounts": "अपने खातों के बीच धन ले जाएँ",
         "sendTokensToAddress": "एक पते पर टोकन भेजें",
@@ -1111,6 +1128,7 @@
         "createAccount": "वॉलेट बनाएं",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "वॉलेट का नाम",
         "latestTransactions": "नवीनतम ट्रांसक्शन्स",
         "transactions": "ट्रांसक्शन्स",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "प्राप्त करने वाला पता",
         "newAddress": "नया एड्रेस",
         "date": "तिथि",
-        "status": "स्टेटस",
+        "status": "Status",
         "confirmed": "पूर्ण पुष्टि",
         "pending": "अपूर्ण",
         "noAccounts": "आपके पास कोई वॉलेट नहीं है, कृपया एक बनाएं।",
@@ -1198,14 +1216,16 @@
         "staking": "Staking",
         "unstaking": "Unstaking",
         "notStaked": "Not staked",
-        "stakedFunds": "जमा धन",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
         "voting": "Voting",
         "unvoting": "Unvoting",
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "आज",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "संदेश ID",
+            "messageId": "Message ID",
             "internal": "Internal",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "तिथि",
+            "date": "Date",
             "time": "Time"
         }
     },
@@ -1443,7 +1468,7 @@
         }
     },
     "tabs": {
-        "wallet": "वॉलेट",
+        "wallet": "Wallet",
         "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",

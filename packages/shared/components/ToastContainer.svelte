@@ -18,15 +18,13 @@
 {#if $mobile}
     <toast-container class="flex flex-col relative z-60 mobile-container">
         <ul class="space-y-2">
-            {#key toasts}
-                {#each toasts as toast}
-                    <li>
-                        <Swiper on:close={() => removeDisplayNotification(toast.id)}>
-                            <Toast {...toast} />
-                        </Swiper>
-                    </li>
-                {/each}
-            {/key}
+            {#each toasts as toast (toast.id)}
+                <li>
+                    <Swiper on:close={() => removeDisplayNotification(toast.id)}>
+                        <Toast {...toast} />
+                    </Swiper>
+                </li>
+            {/each}
         </ul>
     </toast-container>
 {:else}

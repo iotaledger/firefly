@@ -7,7 +7,8 @@
         "legal": {
             "title": "Tietosuojakäytäntö ja käyttöehdot",
             "body": "Ole hyvä ja tutustu tietosuojakäytäntöön ja käyttöehtoihin.",
-            "checkbox": "Olen lukenut ja hyväksyn tietosuojakäytännön ja käyttöehdot"
+            "checkbox": "Olen lukenut ja hyväksyn tietosuojakäytännön ja käyttöehdot",
+            "checkboxMobile": "Olen lukenut ja hyväksynyt"
         },
         "crashReporting": {
             "title": "Kaatumisraportointi",
@@ -124,9 +125,9 @@
             "body": "Olet varmuuskopioinut lompakkosi Strongholdiin."
         },
         "congratulations": {
-            "title": "Lompakon määritys valmis",
+            "title": "Profiilin määritys valmis!",
             "fundsMigrated": "Varat siirretty",
-            "body": "Uusi lompakkosi on käyttövalmis.",
+            "body": "Uusi profiiilisi on käyttövalmis.",
             "softwareMigratedBody": "Olet onnistuneesti siirtänyt varasi uuteen verkkoon",
             "fireflyLedgerBody": "Ledger-tilisi on onnistuneesti palautettu ja voit nyt jatkaa.",
             "trinityLedgerBody": "Olet onnistuneesti siirtänyt Ledger-laitteesi uuteen verkkoon.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Palauta lompakkosi varmuuskopiotiedostosta",
-            "body": "Tuo varmuuskopiotiedosto lompakkojesi palauttamiseksi. Varmuuskopiot voivat olla joko Stronghold-tiedosto (.stronghold) tai Trinity SeedVault -tiedosto (.kdbx)."
+            "body": "Tuo varmuuskopiotiedosto lompakkojesi palauttamiseksi. Varmuuskopiot voivat olla joko Stronghold-tiedosto (.stronghold) tai Trinity SeedVault -tiedosto (.kdbx).",
+            "bodyMobile": "Lataa tiedosto palauttaaksesi olemassaolevat lompakon varat. Vain Firefly Stronghold-varmuuskopio on tuettu mobiilissa. Käytä työpöytälompakkoa Trinity Seedvault-varmuuskopiota varten."
         },
         "importFromLedger": {
             "title": "Palauta tai siirrä Ledger-laitteesi",
@@ -250,7 +252,7 @@
             "title": "Varoitus",
             "body1": "Sinulla on varoja yhdessä tai useammassa käytetyssä osoitteessa.",
             "body2": "Suosittelemme, että suoritat automatisoidun prosessin suojaamaan ja siirtämään nämä varat turvallisesti.",
-            "body3": "Jos suljet sovelluksen, joudut aloittamaan koko migraation alusta.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Lue lisää käytetyistä osoitteista"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Verkko toiminnassa",
                 "networkDegraded": "Verkko vajaatoiminnassa",
                 "networkDown": "Verkko katkaistu",
+                "networkUnreachable": "Ei yhteyttä verkkoon",
                 "status": "Tila",
                 "messagesPerSecond": "Viestejä sekunnissa",
                 "referencedRate": "Viittausaste"
             },
             "profileModal": {
-                "allSettings": "Kaikki asetukset",
+                "allSettings": {
+                    "title": "Kaikki asetukset",
+                    "description": "Profiili, sovellus, turvallisuus"
+                },
                 "logout": "Kirjaudu ulos",
                 "stronghold": {
                     "title": "Profiilin lukitus",
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Staketut varat yhteensä",
             "stakedSuccessfully": "Sinun varasi ovat stakettu tilille {account}.",
             "unstakedSuccessfully": "Sinun varasi eivät ole enää stakettu tilille {account}.",
-            "singleAccountHint": "Etsitkö lompakoitasi? Firefly on muuttunut. Vaihda lompakkojesi välillä ylävalikkopalkissa."
+            "mergeStakeDisclaimerVoting": "Stakesi yhdistäminen yhdistää myös äänesi."
         },
         "stakingConfirmation": {
             "title": "Vahvista osallistuminen",
@@ -877,7 +883,8 @@
             "changingVote": "Vaihdetaan ääntä",
             "manageVotes": "Hallitse ääniä",
             "partialVoteInfo": "Olet vastaanottanut {amount} tilille {account}. Voit äänestää näillä varoilla yhdistämällä ne nykyiseen ääneesi.",
-            "mergeVoteDisclaimer": "Huomioithan, että äänten yhdistäminen ei vaikuta ääniin, jotka on jo laskettu",
+            "mergeVoteDisclaimer": "Huomioithan, että äänten yhdistäminen ei vaikuta ääniin, jotka on jo laskettu.",
+            "mergeVoteDisclaimerStaking": "Äänesi yhdistäminen yhdistää myös staketut varasi.",
             "mergingVotes": "Yhdistetään ääniä",
             "votedSuccessfully": "Olet aloittanut äänestyksen tilillä {account}.",
             "unvotedSuccessfully": "Olet lopettanut äänestyksen tilillä {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Olet luomassa kehittäjäprofiilia",
             "body": "Sinut yhdistetään oletuksena Chrysalis Devnetiin, ja voit vaihtaa verkkoa manuaalisesti. Jatka vain, jos tiedät mitä olet tekemässä."
+        },
+        "confirmCloseApp": {
+            "title": "Olet sulkemassa sovelluksen",
+            "body": "Oletko varma? Mene takaisin uudelleen sulkeaksesi sovelluksen."
         },
         "crashReporting": {
             "title": "Kaatumisraportointi",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Siirry Chrysalis-verkkoon tai palauta olemassaoleva lompakko",
         "createWallet": "Luo uusi lompakko",
         "createWalletDescription": "Luo uusi lompakko Chrysalis-verkkoon",
+        "exploreWallet": "Tutustu lompakkoon",
         "savePassword": "Tallenna salasana",
         "useBiometric": "Käytä biometristä suojausta",
         "setupPin": "Määritä PIN-koodi",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Yhdistä ääni",
         "stopVotes": "Lopeta äänestys",
         "okIUnderstand": "OK, ymmärrän",
-        "readMore": "Lue lisää"
+        "readMore": "Lue lisää",
+        "chooseBackupFile": "Valitse varmuuskopiotiedosto"
     },
     "general": {
         "password": "Salasana",
+        "close": "Sulje",
         "confirmPassword": "Vahvista salasana",
         "currentPassword": "Nykyinen salasana",
         "newPassword": "Uusi salasana",
@@ -1066,9 +1080,12 @@
         "received": "Vastaanotettu",
         "sendPayment": "Lähetä maksu",
         "moveFunds": "Sisäinen siirto",
+        "moveFundsButton": "Sisäinen",
+        "unit": "Yksikkö",
         "sendTo": "Lähetä",
         "sendFunds": "Lähetä varoja",
         "sendToAddress": "Lähetä osoitteeseen",
+        "scanQr": "Skannaa QR-koodi",
         "scanQrOrPaste": "Skannaa QR-koodi tai liitä osoite",
         "moveFundsBetweenAccounts": "Siirrä varoja lompakkojen välillä",
         "sendTokensToAddress": "Lähetä tokenit osoitteeseen",
@@ -1111,6 +1128,7 @@
         "createAccount": "Luo lompakko",
         "createNewWallet": "Luo uusi lompakko",
         "switchWallet": "Vaihda lompakkoa",
+        "addAWallet": "Lisää lompakko",
         "accountName": "Lompakon nimi",
         "latestTransactions": "Viimeisimmät transaktiot",
         "transactions": "Transaktiot",
@@ -1178,7 +1196,7 @@
         "transferFrom": "Siirrä tililtä {account}",
         "transferTo": "Siirrä tilille {account}",
         "stakingTransaction": "Staking-transaktio",
-        "unstakingTransaction": "Lopeta Staking",
+        "unstakingTransaction": "Stakingin lopetustransaktio",
         "votingTransaction": "Äänestystransaktio",
         "unvotingTransaction": "Äänestyksen lopettamisen transaktio",
         "participationTransaction": "Osallistumistransaktio",
@@ -1205,7 +1223,9 @@
         "accountColor": "Lompakon väri",
         "myAssets": "Minun varani",
         "option": "Vaihtoehto",
-        "total": "Yhteensä: {balance}"
+        "total": "Yhteensä: {balance}",
+        "openExplorer": "Näytä Explorerissa",
+        "activityDetails": "Transaktion tiedot"
     },
     "dates": {
         "today": "Tänään",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "Et tule saavuttamaan vähimmäispalkkioarvoa jäljellä olevan staking-jakson aikana, ellet lisää IOTA:a.",
             "bodyDidNotReachMin": "Et stakennut tarpeeksi IOTA:a saavuttaaksesi vähimmäispalkkioarvoa airdropille {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Tässä lompakossa ei ole riittävästi IOTA-tokeneita vähimmäispalkkion saavuttamiseksi airdropille {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer-yksikön päivitys",
+            "body1": "SMR-yksiköt ovat muuttuneet hallinnointipäätöksen seurauksena. Shimmer-tokenit näytetään nyt 6 desimaalin tarkkuudella; 1 SMR = 1,000,000 glow.",
+            "body2": "Sinulla on edelleen sama määrä SMR-palkkioita, Firefly vain muotoilee arvon eri tavalla."
         }
     },
     "exports": {

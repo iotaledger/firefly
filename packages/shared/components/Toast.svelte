@@ -18,6 +18,7 @@
     export let progress: number
     export let actions: Action[] = []
     export let id: string
+    export let hideDismiss: boolean = false
 
     const TOAST_STYLE = {
         info: {
@@ -88,7 +89,7 @@
                 </button>
             {/each}
         </div>
-    {:else if $mobile}
+    {:else if $mobile && !hideDismiss}
         <button
             class="cursor-pointer text-center rounded-lg font-bold text-11 text-{TOAST_STYLE[type].buttonSecondary}"
             style={'min-width:90px;min-height:32px'}

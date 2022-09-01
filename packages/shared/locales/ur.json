@@ -7,7 +7,8 @@
         "legal": {
             "title": "رازداری کی پالیسی اور خدمات کی شرائط",
             "body": "براہ کرم رازداری کی پالیسی اور خدمات کی شرائط کا جائزہ لیں.",
-            "checkbox": "میں نے نجی معلومات کی حفاظتی پالیسی اور خدمات کی شرائط کو قبول کرلیا ہے"
+            "checkbox": "میں نے نجی معلومات کی حفاظتی پالیسی اور خدمات کی شرائط کو قبول کرلیا ہے",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -124,9 +125,9 @@
             "body": "آپ نے اہنے والیٹس کو ایک سٹرانگ ہولڈ پر بیک اپ کر لیا ہے."
         },
         "congratulations": {
-            "title": "والیٹ کا سیٹ اپ مکمل ہوگیا",
+            "title": "Profile setup complete!",
             "fundsMigrated": "فنڈز منتقل ہو چکے",
-            "body": "آپ کا نیا والیٹ استعمال کرنے کے لئے تیار ہے.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "آپ نے اپنے فنڈز کو کامیابی کے ساتھ نئے نیٹ ورک پر منتقل کردیا ہے",
             "fireflyLedgerBody": "آپکا لیجر اکاونٹ کامیابی کیساتھ ریکور ہو گیا ہے اور اب آپ آگے بڑھ سکتے ہیں۔",
             "trinityLedgerBody": "آپ نے اپنے لیجر کو کامیابی کے ساتھ نئے نیٹ ورک پر منتقل کردیا ہے.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "بیک اپ فائل کا استعمال کرتے ہوئے اپنے والیٹس کو ریکور کریں",
-            "body": "اپنے والیٹس کو بحال کرنے کے لئے بیک اپ فائل درآمد کریں۔ بیک اپ یا تو ایک سٹرانگ ہوالذ (stronghold.) یا ٹرینیٹی سیڈ والٹ (kbdx.) ہوسکتے ہیں."
+            "body": "اپنے والیٹس کو بحال کرنے کے لئے بیک اپ فائل درآمد کریں۔ بیک اپ یا تو ایک سٹرانگ ہوالذ (stronghold.) یا ٹرینیٹی سیڈ والٹ (kbdx.) ہوسکتے ہیں.",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Restore or Migrate your Ledger",
@@ -190,7 +192,7 @@
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
-            "title": "نیا ایڈریس بنائیں",
+            "title": "Generate new address",
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
             "confirmTitle": "Confirm the new address",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
@@ -227,7 +229,7 @@
             "body2": "اس میں کچھ وقت لگ سکتا ہے۔ منتقلی کے دوران اپنے آلے کو بند نہ کریں.",
             "existing": "آپکا پرانا والیٹ",
             "new": "آپکا نیا والیٹ",
-            "learn": "منتقلی کے عمل کے بارے میں جانیں",
+            "learn": "Learn about the migration",
             "beginMigration": "منتقلی شروع کریں",
             "migrating": "فنڈز منتقل ہو رہے ہیں...",
             "migrated": "{balance} منتقل ہوچکا",
@@ -250,7 +252,7 @@
             "title": "انتباہ",
             "body1": "آپ کے پاس ایک یا زیادہ خرچ شدہ ایڈریس پر فنڈز ہیں.",
             "body2": "ہماری تجویز ہے کہ آپ ان فنڈز کو محفوظ طریقے سے منتقل کرنے میں مدد کے لئے ایک خودکار عمل چلائیں.",
-            "body3": "اگر آپ ایپ کو بند کرتے ہیں تو آپ کو پوری منتقلی دوبارہ شروع کرنے کی ضرورت ہوگی.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "خرچ شدہ ایڈریسز کے بارے میں جانیں"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "حالت",
                 "messagesPerSecond": "میسجز فی سیکنڈ",
                 "referencedRate": "ریفرینسڈ ریٹ"
             },
             "profileModal": {
-                "allSettings": "تمام ترتیبات",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "لاگ آؤٹ",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "آپ نے آخری بیک اپ {date} کو کیا",
-                    "notBackedUp": "بیک اپ نہیں بنایا گیا",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "{name} چھبائیں؟",
             "body": "اعلی درجے کی ترتیبات میں \"خفیہ والٹس دکھائیں\" کو چالو کرکے ، آپ یہ والٹ بعد میں ڈھونڈ سکتے ہیں.",
-            "typePassword": "تصدیق کے لئے اپنے والٹ کا پاس ورڈ ٹائپ کریں.",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "والٹ چھپائیں",
             "errorTitle": "{name} کو پوشیدہ نہیں کیا جا سکا",
             "errorBody1": "والٹ چھپانے کے لئے اس میں 0 بیلنس ہونا ضروری ہے.",
@@ -718,8 +724,8 @@
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "Pruning index",
-                "messagesPerSecond": "میسجز فی سیکنڈ",
-                "referencedRate": "ریفرینسڈ ریٹ"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -734,7 +740,7 @@
             "empty": "خرابی کا لاگ خالی ہے."
         },
         "deleteProfile": {
-            "title": "پروفائل حذف کریں",
+            "title": "Delete profile",
             "confirmation": "کیا آپ مطمئن ہیں کہ آپ اس پروفائل کو حذف کرنا چاہتے ہیں؟ یہ حرکت واپس نہیں ہو سکتی.",
             "typePassword": "تصدیق کے لئے اپنا پاس ورڈ ٹائپ کریں."
         },
@@ -762,7 +768,7 @@
             }
         },
         "balanceFinder": {
-            "title": "بلینس کا متلاشی",
+            "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
@@ -777,7 +783,7 @@
             "body2": "یہ تجویز کی جاتی ہے کہ آپ درمیانے درجے یا اس سے اوپر کے خطرے والے ایڈریس کے لئے یہ عمل دوبارہ انجام دیں."
         },
         "missingBundle": {
-            "title": "انتباہ: منتقلی کے دوران فنڈز خطرے میں ہیں",
+            "title": "Warning: funds at risk during migration",
             "body": "آپ کے پاس خرچ شدہ ایڈریسز پر فنڈز موجود ہیں ، لیکن انہیں محفوظ رکھنے کے لئے درکار معلومات نہیں ملیں۔ یہ اس صورت ہوتا ہے جب آپ نے بہت عرصہ پہلے کوئی ٹرانزیکشن کی ہو۔ آپ آگے بڑھ سکتے ہیں لیکن منتقلی کے دوران {value} کو خطرہ ہے.",
             "learnMore": "خرچ شدہ ایڈریسز کے بارے میں مزید جانیں",
             "proceed": "میں خطرے کو سمجھتا ہوں"
@@ -823,7 +829,7 @@
                 "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
-                "title": "ٹرانزیکشن کی تصدیق",
+                "title": "Confirm transaction",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,16 +964,17 @@
         "restoreWalletDescription": "کریسالس منتقل کریں یا موجودہ والیٹ کو بحال کریں",
         "createWallet": "نیا والیٹ بنائیں",
         "createWalletDescription": "کرسالیس پر چلنے والا ایک تازہ والیٹ بنائیں",
+        "exploreWallet": "Explore wallet",
         "savePassword": "پاس ورڈ محفوظ کریں",
         "useBiometric": "بائیو میٹرک سیکیورٹی استعمال کریں",
-        "setupPin": "پن کوڈ مرتب کریں",
+        "setupPin": "Set up PIN code",
         "setPin": "پن کوڈ سیٹ کریں",
         "confirmPin": "پن کوڈ کی تصدیق کریں",
         "enterYourPin": "اپنا پن داخل کریں",
         "saveBackupFile": "بیک اپ فائل محفوظ کریں",
         "iveWrittenRecoveryPhrase": "میں نے اپنا ریکوری کا فقرا لکھ لیا ہے",
-        "verifyRecoveryPhrase": "ریکوری کے جملے کی تصدیق کریں",
-        "revealRecoveryPhrase": "ریکوری کا جملہ افشا کریں",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "سیڈ والٹ درآمد کریں",
         "checkAgain": "دوبارہ چیک کریں",
         "importFromFile": "ایک فائل سے امپورٹ کریں",
@@ -983,7 +995,7 @@
         "enableDeepLinks": "Enable IOTA links",
         "enableDeveloperMode": "ڈیولپر موڈ میں فعال کریں",
         "enableSystemNotifications": "اطلاعات کو فعال بنائیں",
-        "exportTransactionHistory": "لین دین کے ریکارڈ کو ایکسپورٹ کریں",
+        "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "مقامی پروف آف ورک",
         "unlock": "ان لاک کریں",
         "updateFirefly": "فائر فلائی اپ ڈیٹ کریں",
@@ -991,9 +1003,9 @@
         "saveBackup": "سٹرانگ ہولڈ کا بیک اپ محفوظ کریں",
         "customizeAcount": "اپنے والٹ کو اپنی مرضی کے مطابق بنائیں",
         "viewAddressHistory": "ایڈریسس کی تاریخ دیکھیں",
-        "hideAccount": "والٹ چھپائیں",
+        "hideAccount": "Hide wallet",
         "showAccount": "والٹ ظاہر کریں",
-        "deleteAccount": "والٹ حذف کریں",
+        "deleteAccount": "Delete wallet",
         "max": "حد",
         "addNode": "نوڈ شامل کریں",
         "updateNode": "نوڈ اپ ڈیٹ کریں",
@@ -1034,7 +1046,7 @@
         "searchAgain": "دوبارہ تلاش کریں",
         "searching": "تلاش ہو رہا ہے...",
         "closeFirefly": "فائر فلائی بند کریں",
-        "generateAddress": "ایڈریس بنائیں",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "پاس ورڈ",
+        "close": "Close",
         "confirmPassword": "پاس ورڈ کی تصدیق کریں",
         "currentPassword": "موجودہ پاس ورڈ",
         "newPassword": "نیا پاس ورڈ",
@@ -1066,9 +1080,12 @@
         "received": "موصول شدہ",
         "sendPayment": "ادائیگی کریں",
         "moveFunds": "اندرونی منتقلی",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Send To",
         "sendFunds": "فنڈز بھیجیں",
         "sendToAddress": "اس ایڈریس پر بھیجیں",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "ایک QR کوڈ اسکین کریں یا ایڈریس پیسٹ کریں",
         "moveFundsBetweenAccounts": "والٹس کے مابین فنڈز منتقل کریں",
         "sendTokensToAddress": "کسی ایڈریس پر ٹوکن بھیجیں",
@@ -1111,10 +1128,11 @@
         "createAccount": "ایک نیا والیٹ بنائیں",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "والیٹ کا نام",
         "latestTransactions": "تازہ ترین ٹرانزیکشن",
         "transactions": "ٹرانزیکشنز",
-        "security": "سیکورٹی",
+        "security": "Security",
         "accountAddress": "والیٹ کا ایڈریس",
         "network": "Network",
         "nodes": "نوڈذ",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "ایڈریس وصول کریں",
         "newAddress": "New Address",
         "date": "تاریخ",
-        "status": "حالت",
+        "status": "Status",
         "confirmed": "تصدیق شدہ",
         "pending": "زیر التواء",
         "noAccounts": "آپ کے پاس کوئی بٹوے نہیں ہیں ، براہ کرم ایک بٹوا بنائیں.",
@@ -1205,7 +1223,9 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "آج",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "پیغام کی ID",
+            "messageId": "Message ID",
             "internal": "Internal",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "تاریخ",
+            "date": "Date",
             "time": "Time"
         }
     },
@@ -1443,7 +1468,7 @@
         }
     },
     "tabs": {
-        "wallet": "والیٹ",
+        "wallet": "Wallet",
         "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",
