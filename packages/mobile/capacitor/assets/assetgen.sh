@@ -1,6 +1,7 @@
 #!/bin/sh
 base_dark="capacitor/assets/dark/$1"
 base_light="capacitor/assets/light/$1"
+base_light_ios="capacitor/assets/$1"
 dest_ios="ios/App/App/Assets.xcassets/AppIcon.appiconset"
 dest_ios_splash="ios/App/App/Assets.xcassets/Splash.imageset"
 dest_android="android/app/src/main/res"
@@ -12,25 +13,25 @@ if [ -z $1 ]
   then
     echo No argument given
 else
-  ## iOS files 
-  convert "$base_light" $icon_opts -resize 20x20!         "$dest_ios/AppIcon-20x20@1x.png"
-  convert "$base_light" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-20x20@2x.png"
-  convert "$base_light" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-20x20@2x-1.png"
-  convert "$base_light" $icon_opts -resize 60x60!         "$dest_ios/AppIcon-20x20@3x.png"
-  convert "$base_light" $icon_opts -resize 29x29!         "$dest_ios/AppIcon-29x29@1x.png"
-  convert "$base_light" $icon_opts -resize 58x58!         "$dest_ios/AppIcon-29x29@2x.png"
-  convert "$base_light" $icon_opts -resize 58x58!         "$dest_ios/AppIcon-29x29@2x-1.png"
-  convert "$base_light" $icon_opts -resize 87x87!         "$dest_ios/AppIcon-29x29@3x.png"
-  convert "$base_light" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-40x40@1x.png"
-  convert "$base_light" $icon_opts -resize 80x80!         "$dest_ios/AppIcon-40x40@2x.png"
-  convert "$base_light" $icon_opts -resize 80x80!         "$dest_ios/AppIcon-40x40@2x-1.png"
-  convert "$base_light" $icon_opts -resize 120x120!       "$dest_ios/AppIcon-40x40@3x.png"
-  convert "$base_light" $icon_opts -resize 120x120!       "$dest_ios/AppIcon-60x60@2x.png"
-  convert "$base_light" $icon_opts -resize 180x180!       "$dest_ios/AppIcon-60x60@3x.png"
-  convert "$base_light" $icon_opts -resize 76x76!         "$dest_ios/AppIcon-76x76@1x.png"
-  convert "$base_light" $icon_opts -resize 152x152!       "$dest_ios/AppIcon-76x76@2x.png"
-  convert "$base_light" $icon_opts -resize 167x167!       "$dest_ios/AppIcon-83.5x83.5@2x.png"
-  convert "$base_light" $icon_opts -resize 1024x1024!     "$dest_ios/AppIcon-512@2x.png"
+  ## iOS icon files 
+  convert "$base_light_ios" $icon_opts -resize 20x20!         "$dest_ios/AppIcon-20x20@1x.png"
+  convert "$base_light_ios" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-20x20@2x.png"
+  convert "$base_light_ios" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-20x20@2x-1.png"
+  convert "$base_light_ios" $icon_opts -resize 60x60!         "$dest_ios/AppIcon-20x20@3x.png"
+  convert "$base_light_ios" $icon_opts -resize 29x29!         "$dest_ios/AppIcon-29x29@1x.png"
+  convert "$base_light_ios" $icon_opts -resize 58x58!         "$dest_ios/AppIcon-29x29@2x.png"
+  convert "$base_light_ios" $icon_opts -resize 58x58!         "$dest_ios/AppIcon-29x29@2x-1.png"
+  convert "$base_light_ios" $icon_opts -resize 87x87!         "$dest_ios/AppIcon-29x29@3x.png"
+  convert "$base_light_ios" $icon_opts -resize 40x40!         "$dest_ios/AppIcon-40x40@1x.png"
+  convert "$base_light_ios" $icon_opts -resize 80x80!         "$dest_ios/AppIcon-40x40@2x.png"
+  convert "$base_light_ios" $icon_opts -resize 80x80!         "$dest_ios/AppIcon-40x40@2x-1.png"
+  convert "$base_light_ios" $icon_opts -resize 120x120!       "$dest_ios/AppIcon-40x40@3x.png"
+  convert "$base_light_ios" $icon_opts -resize 120x120!       "$dest_ios/AppIcon-60x60@2x.png"
+  convert "$base_light_ios" $icon_opts -resize 180x180!       "$dest_ios/AppIcon-60x60@3x.png"
+  convert "$base_light_ios" $icon_opts -resize 76x76!         "$dest_ios/AppIcon-76x76@1x.png"
+  convert "$base_light_ios" $icon_opts -resize 152x152!       "$dest_ios/AppIcon-76x76@2x.png"
+  convert "$base_light_ios" $icon_opts -resize 167x167!       "$dest_ios/AppIcon-83.5x83.5@2x.png"
+  convert "$base_light_ios" $icon_opts -resize 1024x1024!     "$dest_ios/AppIcon-512@2x.png"
   
   ## Android files
   ### Ensure needed directories exist
