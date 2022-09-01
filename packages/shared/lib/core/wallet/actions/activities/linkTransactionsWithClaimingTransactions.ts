@@ -48,7 +48,7 @@ export function linkTransactionsWithClaimingTransactions(
         } else {
             // For 'normal' transactions we search through the async transactions to check if one is the claiming transaction from the other one
             // If we find a match, we update the async transaction and ignore the current one
-            const claimedTransaction = searchClaimedTransactionInincomingAsyncTransactions(
+            const claimedTransaction = searchClaimedTransactionInIncomingAsyncTransactions(
                 incomingAsyncTransactions,
                 transaction
             )
@@ -73,7 +73,7 @@ export function linkTransactionsWithClaimingTransactions(
     return resultingTransactions
 }
 
-function searchClaimedTransactionInincomingAsyncTransactions(
+function searchClaimedTransactionInIncomingAsyncTransactions(
     allAsyncTransaction: IProcessedTransaction[],
     transaction: IProcessedTransaction
 ): IProcessedTransaction {
