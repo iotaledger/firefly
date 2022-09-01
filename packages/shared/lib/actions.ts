@@ -41,7 +41,6 @@ export function slidable(node: HTMLElement, use: boolean = true): { destroy: () 
     const timeQueue = [0, 0, 0]
 
     function handleTouchstart(event: TouchEvent): void {
-        event.preventDefault()
         event.stopImmediatePropagation()
         event.stopPropagation()
 
