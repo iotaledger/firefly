@@ -7,7 +7,8 @@
         "legal": {
             "title": "Privacy Policy & Terms of Service",
             "body": "Please review the Privacy Policy and Terms of Service.",
-            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service"
+            "checkbox": "I've read and I accept the Privacy Policy & Terms of Service",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -124,9 +125,9 @@
             "body": "You have backed up your wallets to a Stronghold."
         },
         "congratulations": {
-            "title": "Wallet setup completed",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Funds migrated",
-            "body": "Your new wallet is ready to use.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "You have successfully migrated your funds to the new network",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Restore your wallets using a backup file",
-            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx)."
+            "body": "Import a backup file to restore your wallets. Backups can either be a Stronghold (.stronghold) or a Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Restore or Migrate your Ledger",
@@ -250,7 +252,7 @@
             "title": "Warning",
             "body1": "You have funds on one or more spent addresses.",
             "body2": "We recommend you run an automated process to help secure and transfer these funds safely.",
-            "body3": "If you close the app you will need to restart the whole migration.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Learn about spent addresses"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
             },
             "profileModal": {
-                "allSettings": "All settings",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Log out",
                 "stronghold": {
                     "title": "Profile lock",
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
         "createWallet": "Create new wallet",
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPin": "Set up PIN code",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Password",
+        "close": "Close",
         "confirmPassword": "Confirm password",
         "currentPassword": "Current password",
         "newPassword": "New password",
@@ -1066,9 +1080,12 @@
         "received": "Received",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Send To",
         "sendFunds": "Send funds",
         "sendToAddress": "Send to address",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between wallets",
         "sendTokensToAddress": "Send tokens to an address",
@@ -1111,6 +1128,7 @@
         "createAccount": "Create a Wallet",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",
         "transactions": "Transactions",
@@ -1205,7 +1223,9 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Today",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {

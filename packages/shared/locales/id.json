@@ -7,7 +7,8 @@
         "legal": {
             "title": "Kebijakan Privasi dan Persyaratan Layanan",
             "body": "Harap mereviu Kebijakan Privasi dan Persyaratan Layanan.",
-            "checkbox": "Saya telah membaca dan saya menerima Kebijakan Privasi & Persyaratan Layanan"
+            "checkbox": "Saya telah membaca dan saya menerima Kebijakan Privasi & Persyaratan Layanan",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Laporan Kerusakan",
@@ -15,7 +16,7 @@
             "checkbox": "Kirim laporan kerusakan ke IOTA Foundation"
         },
         "appearance": {
-            "title": "Tampilan",
+            "title": "Appearance",
             "body": "Pilihlah tema aplikasi Anda."
         },
         "profile": {
@@ -124,9 +125,9 @@
             "body": "Anda telah mencadangkan dompet anda ke Stronghold."
         },
         "congratulations": {
-            "title": "Penyiapan dompet selesai",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Dana dipindahkan",
-            "body": "Dompet baru Anda siap digunakan.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Anda telah berhasil memigrasikan dana Anda ke jaringan yang baru",
             "fireflyLedgerBody": "Akun Ledger Anda telah berhasil dipulihkan dan Anda sekarang dapat melanjutkan.",
             "trinityLedgerBody": "Anda telah berhasil memigrasikan Ledger Anda ke jaringan yang baru.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Kembalikan dompet Anda menggunakan file cadangan",
-            "body": "Impor cadangan buat memulihkan dompet. Pencadangan bisa berupa file Stronghold (.stronghold) atau SeedVault Trinity (.kdbx)."
+            "body": "Impor cadangan buat memulihkan dompet. Pencadangan bisa berupa file Stronghold (.stronghold) atau SeedVault Trinity (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Memulihkan atau memigrasikan Ledger Anda",
@@ -190,7 +192,7 @@
             "readMore": "Apa yang diharapkan dari proses migrasi"
         },
         "generateNewLedgerAddress": {
-            "title": "Buatkan alamat baru",
+            "title": "Generate new address",
             "body": "Anda perlu untuk men-generate sebuah alamat baru untuk memigrasikan token Anda dengan Firefly. Klik tombol dibawah ini untuk melanjutkan.",
             "confirmTitle": "Konfirmasi alamat baru",
             "confirmBody": "Untuk keamanan, mohon bandingkan alamat yang telah Anda generate pada perangkat Ledger Anda dengan alamat yang ditampilkan di bawah ini. Jika cocok, tekan kedua tombol pada Ledger Anda seperti yang diminta.",
@@ -250,7 +252,7 @@
             "title": "Peringatan",
             "body1": "Anda memiliki dana untuk satu atau lebih alamat yang dibelanjakan.",
             "body2": "Kami menyarankan Anda menjalankan proses otomatis untuk membantu mengamankan dan mentransfer dana ini dengan aman.",
-            "body3": "Jika Anda menutup aplikasi, Anda perlu memulai ulang seluruh migrasi.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Pelajari tentang alamat yang dibelanjakan"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Pastikan Ledger Anda terhubung dan aplikasi {legacy} terbuka selama proses migrasi berlangsung.",
             "migrate": "Migrasikan dana",
             "transaction": "Transaksi {number}",
-            "rerun": "Coba kembali"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -403,7 +405,7 @@
                 "editDetails": "Edit Rincian",
                 "viewInfo": "Lihat info",
                 "setAsPrimary": "Set sebagai utama",
-                "removeNode": "Menghapus Node",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "Sertakan daftar node resmi",
                 "noNodes": "Tidak ada nodes, tidak dapat terhubung ke jaringan",
                 "noNodesAuto": "Tidak ada node, pilihan otomatis akan digunakan sebagai gantinya"
@@ -465,12 +467,16 @@
                 "networkOperational": "Operasional jaringan",
                 "networkDegraded": "Jaringan terdegradasi",
                 "networkDown": "Jaringan terputus",
+                "networkUnreachable": "Network unreachable",
                 "status": "Status",
                 "messagesPerSecond": "Pesan per detik",
                 "referencedRate": "Konten yang Direferensikan"
             },
             "profileModal": {
-                "allSettings": "Semua pengaturan",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Keluar",
                 "stronghold": {
                     "title": "Kunci profil",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Cadangkan dompet Anda",
-                    "lastBackup": "Anda melakukan backup terakhir {date}",
-                    "notBackedUp": "Tidak dicadangkan",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Cadangan"
                 },
                 "version": {
@@ -718,8 +724,8 @@
                 "features": "Fitur",
                 "confirmedMilestoneIndex": "Milestone indeks terkonfirmasi",
                 "pruningIndex": "Pemangkasan indeks",
-                "messagesPerSecond": "Pesan per detik",
-                "referencedRate": "Konten yang Direferensikan"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -757,12 +763,12 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "Anda mengirimkan dana dari dompet yang saat ini sedang di-stake. Proses ini akan meng-unstake token Anda. Anda tetap bebas untuk melakukan transfer tetapi Anda mungkin perlu untuk men-stake kembali token yang tersisa setelahnya.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
         "balanceFinder": {
-            "title": "Pencari saldo",
+            "title": "Balance finder",
             "body": "Lakukan pencarian alamat yang lebih lengkap untuk menemukan saldo yang hilang dan hadiah airdrop sebelumnya. Ini mungkin memakan waktu cukup lama.",
             "accountsSearched": "Dompet sudah dicari",
             "addressesSearched": "Alamat dicari per dompet",
@@ -777,7 +783,7 @@
             "body2": "Disarankan agar Anda menjalankan kembali proses untuk alamat dengan tingkat risiko sedang atau lebih tinggi."
         },
         "missingBundle": {
-            "title": "Peringatan: Dana beresiko selama migrasi",
+            "title": "Warning: funds at risk during migration",
             "body": "Anda memiliki dana pada alamat terpakai, tetapi informasi yang diperlukan untuk mengamankannya tidak ditemukan. Ini bisa terjadi apabila Anda melakukan transaksi sejak lama. Anda dapat melanjutkan proses akan tetapi {value} berisiko selama migrasi.",
             "learnMore": "Pelajari tentang alamat yang terpakai",
             "proceed": "Saya mengerti risikonya"
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips apabila Ledger Anda tidak dapat terhubung",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Pastikan bahwa Live Ledger tidak terbuka pada komputer Anda",
                 "1": "Pastikan bahwa Anda sudah membuka perangkat Ledger Anda dengan PIN Anda",
@@ -823,7 +829,7 @@
                 "info": "Mohon konfirmasi alamat pada perangkat Ledger Anda cocok dengan alamat yang ditampilkan di bawah ini. Jika cocok, tekan kedua tombol pada Ledger Anda seperti yang diminta."
             },
             "transaction": {
-                "title": "Konfirmasi transaksi",
+                "title": "Confirm transaction",
                 "info": "Mohon konfirmasi transaksi pada perangkat Ledger Anda cocok dengan informasi yang ditampilkan di bawah ini. Jika cocok, tekan kedua tombol pada Ledger Anda seperti yang diminta."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total dana yang di-stake",
             "stakedSuccessfully": "Dana Anda telah di-stake untuk {account}.",
             "unstakedSuccessfully": "Dana Anda telah di-unstake untuk {account}.",
-            "singleAccountHint": "Mencari dompet Anda? Kunang-kunang telah berubah. Beralih di antara dompet Anda di bilah menu atas."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Konfirmasi Partisipasi",
@@ -877,7 +883,8 @@
             "changingVote": "Ubah pemungutan suara",
             "manageVotes": "Kelola suara",
             "partialVoteInfo": "Anda telah menerima {amount} ke {account}. Anda dapat memilih dengan dana ini dengan menggabungkannya dengan suara Anda saat ini.",
-            "mergeVoteDisclaimer": "Harap perhatikan bahwa menggabungkan suara tidak akan memengaruhi suara apa pun yang telah dihitung",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Menggabungkan suara",
             "votedSuccessfully": "Anda telah mulai memberikan suara dengan {account}.",
             "unvotedSuccessfully": "Anda telah berhenti memberikan suara dengan {account}.",
@@ -904,10 +911,14 @@
             "title": "Anda sedang membuat akun pengembang",
             "body": "Anda akan terhubung ke Chrysalis Devnet dalam pengaturan bawaan, dan dapat berpindah jaringan secara manual. Hanya lanjutkan jika Anda tahu apa yang Anda lakukan."
         },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
+        },
         "crashReporting": {
             "title": "Pelaporan kerusakan",
             "body": "Bantu pengembang meningkatkan Firefly dengan mengirimkan data diagnostik secara otomatis saat terjadi kesalahan atau crash. Jika dipilih, ini akan berlaku setelah memulai ulang Firefly.",
-            "checkbox": "Kirim laporan kerusakan ke IOTA Foundation"
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "Persyaratan Layanan",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrasi ke Chrysalis atau memulihkan dompet yang sudah ada",
         "createWallet": "Buat dompet baru",
         "createWalletDescription": "Membuat dompet/akun baru dalam Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Simpan kata sandi",
         "useBiometric": "Pakai keamanan biometrik",
         "setupPin": "Atur kode PIN",
@@ -993,12 +1005,12 @@
         "viewAddressHistory": "Lihat riwayat alamat",
         "hideAccount": "Sembunyikan dompet",
         "showAccount": "Munculkan dompet",
-        "deleteAccount": "Hapus dompet",
+        "deleteAccount": "Delete wallet",
         "max": "Maksimal",
         "addNode": "Tambah Node",
         "updateNode": "Perbarui node",
         "removeNode": "Menghapus Node",
-        "removeAllNodes": "Menghapus semua node",
+        "removeAllNodes": "Remove all nodes",
         "hide": "Menyembunyikan",
         "hideOthers": "Sembunyikan Lainnya",
         "showAll": "Tunjukkan Semua",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Cari kembali",
         "searching": "Mencari...",
         "closeFirefly": "Tutup Firefly",
-        "generateAddress": "Membuat alamat",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrasi indeks Ledger",
         "visitWebsite": "Kunjungi situs web",
         "howItWorks": "Bagaimana cara kerjanya",
@@ -1047,14 +1059,16 @@
         "mergeFunds": "Menggabungkan dana",
         "done": "Selesai",
         "castVotes": "Melaksanakan pemungutan suara",
-        "changeVotes": "Ubah pemungutan suara",
+        "changeVotes": "Change vote",
         "mergeVotes": "Merge vote",
-        "stopVotes": "Selesai \npemungutan suara",
+        "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Kata sandi",
+        "close": "Close",
         "confirmPassword": "Setujui kata sandi",
         "currentPassword": "Sandi saat ini",
         "newPassword": "Kata Sandi Baru",
@@ -1066,15 +1080,18 @@
         "received": "Diterima",
         "sendPayment": "Kirim Pembayaran",
         "moveFunds": "Transfer internal",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Kirim ke",
         "sendFunds": "Kirim dana",
         "sendToAddress": "Kirim ke alamat",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Pindai kode QR atau salin sebuah Alamat",
         "moveFundsBetweenAccounts": "Pemindahan dana antar dompet",
         "sendTokensToAddress": "Kirim token ke suatu alamat",
         "manageAccount": "Kelola Dompet",
         "customizeAcount": "Menyesuaikan dompet Anda",
-        "account": "Dompet",
+        "account": "Wallet",
         "sendingToAddress": "Mengirim ke alamat",
         "amount": "Jumlah",
         "addAddress": "Tambah Alamat",
@@ -1111,6 +1128,7 @@
         "createAccount": "Buat dompet",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Nama Dompet",
         "latestTransactions": "Transaksi terbaru",
         "transactions": "Transaksi",
@@ -1198,14 +1216,16 @@
         "staking": "Staking",
         "unstaking": "Di-Unstake",
         "notStaked": "Tidak di-stake",
-        "stakedFunds": "Dana yang di-stake",
+        "stakedFunds": "Staked funds",
         "unstakedFunds": "Dana yang tidak di-stake",
         "voting": "Voting",
         "unvoting": "Unvoting",
         "accountColor": "Warna dompet",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Hari ini",
@@ -1361,7 +1381,7 @@
             "mnemonicMismatch": "Anda telah terhubung dengan perangkat Ledger yang salah atau mnemoniknya telah diubah.",
             "notDetected": "Tidak ada perangkat Ledger yang terdeteksi.",
             "notFound": "Perangkat Ledger tidak ditemukan.",
-            "otherConnected": "Aplikasi yang salah telah terbuka pada perangkat Ledger Anda.",
+            "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "Terjadi kesalahan saat membuat alamat.",
             "timeout": "Perangkat Ledger Anda kehabisan waktu.",
             "disconnected": "Perangkat Ledger Anda tidak terhubung.",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "Anda tidak akan mencapai nilai hadiah minimum selama periode staking yang tersisa, kecuali Anda menambahkan IOTA lebih banyak.",
             "bodyDidNotReachMin": "Anda tidak meng-stake cukup IOTA untuk mencapai nilai minimum hadiah untuk {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Dompet ini tidak memiliki cukup IOTA untuk mencapai nilai hadiah minimum untuk {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID Pesan",
+            "messageId": "Message ID",
             "internal": "Internal",
             "rawValue": "Nilai mentah",
             "formattedValue": "Nilai terformat",
-            "date": "Tanggal",
+            "date": "Date",
             "time": "Waktu"
         }
     },
@@ -1443,7 +1468,7 @@
         }
     },
     "tabs": {
-        "wallet": "Dompet",
+        "wallet": "Wallet",
         "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",

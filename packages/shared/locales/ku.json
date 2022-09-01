@@ -7,7 +7,8 @@
         "legal": {
             "title": "Polîtîkayên Veşartinê û Mercên Bikaranînê",
             "body": "Ji kerema xwe polîtîqaya taybetîtiyê û Mercên Karûbar binirxînin.",
-            "checkbox": "Min Polîtîkayên Veşartinê û Mercên Bikaranînê xwendin û dipêjirînim."
+            "checkbox": "Min Polîtîkayên Veşartinê û Mercên Bikaranînê xwendin û dipêjirînim.",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -124,9 +125,9 @@
             "body": "We cuzdanka xwe li Stronghold'ê hiland."
         },
         "congratulations": {
-            "title": "Sazkirina cuzdankê dawî nehat",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Mayîn hat barkirin",
-            "body": "Cuzdank amadeye jibo bikaranînê.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "We mayînên xwe bi serkeftî barkirin tora nû",
             "fireflyLedgerBody": "Hesaba we ya Ledgerê bi serkeftî hat rizgar kirin û hûn dikarin bidomînin.",
             "trinityLedgerBody": "We mayînên xwe bi serkeftî barkirin tora nû.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Bikaranîna dosya cîgirî cuzdanka xwe rizgar bikin",
-            "body": "Pelê hilanînê ji bo vegerandina berîka xwe têxin hundurê. Piştgirî dikarin bibin Stronghold (.stronghold) an Trinity SeedVault (.kdbx)."
+            "body": "Pelê hilanînê ji bo vegerandina berîka xwe têxin hundurê. Piştgirî dikarin bibin Stronghold (.stronghold) an Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Restore or Migrate your Ledger",
@@ -190,7 +192,7 @@
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
-            "title": "Navnîşanek nû çêke",
+            "title": "Generate new address",
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
             "confirmTitle": "Confirm the new address",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
@@ -227,7 +229,7 @@
             "body2": "Dibe ku demek bikişîne. Di dema barkirinê de amûrê xwe qut nekin.",
             "existing": "Berîka tê a kevin",
             "new": "Cizdan a te ya nu",
-            "learn": "Jibo barkirinê zanyarî bistînin",
+            "learn": "Learn about the migration",
             "beginMigration": "Dest Barkirinê Bikin",
             "migrating": "Mayîn tê barkirin...",
             "migrated": "{balance} barbû",
@@ -250,7 +252,7 @@
             "title": "Hişyarî",
             "body1": "Di yek an çend navnîşanên ku we berê lê derbas kirî de hevsengiyek we heye.",
             "body2": "Em pêşniyar dikin ku pêvajoyek xweser bimeşînin da ku alîkariya ewledariyê û ewlehiya veguheztina van dravî bikin.",
-            "body3": "Ger hûn sepanê dadin, dê pêdiviya barkirina jinûve bike.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Zêdetir zanyarî yê navnîşanên karhatî agahdar bibin"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
             "migrate": "Mayînê barbike",
             "transaction": "Kirarî {number}",
-            "rerun": "Dîsa biceribîne"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "Hal",
                 "messagesPerSecond": "Peyam di sanîyek de",
                 "referencedRate": "Referenced rate"
             },
             "profileModal": {
-                "allSettings": "Hemu dilkirin",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Derkeve",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "Cîhgira dawî we standî {date}",
-                    "notBackedUp": "Nehat cîhgirkirin",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -718,7 +724,7 @@
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Peyam di sanîyek de",
+                "messagesPerSecond": "Messages per second",
                 "referencedRate": "Referenced rate"
             }
         },
@@ -734,12 +740,12 @@
             "empty": "Bûyerên çewtîyê valane."
         },
         "deleteProfile": {
-            "title": "Profîlê jêbibe",
+            "title": "Delete profile",
             "confirmation": "Ma hûn pê ewle ne ku hûn dixwazin vê profîlê jê bibin? Ev operasyon nayê paşve xistin.",
             "typePassword": "Jibo pêjirandinê pêborîna xwe binivîse."
         },
         "diagnostics": {
-            "title": "Pêderk",
+            "title": "Diagnostics",
             "node": "Girê",
             "platform": "Platform",
             "platformVersion": "Versîyona Platformê",
@@ -762,7 +768,7 @@
             }
         },
         "balanceFinder": {
-            "title": "Gerdîta mayîna",
+            "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
@@ -777,7 +783,7 @@
             "body2": "Tête pêşniyar kirin ku pêvajo ji bo navnîşanên bi asta xetereya navîn an mezintir ji nû ve werin destpêkirin."
         },
         "missingBundle": {
-            "title": "Hişyarî: demê barkirinê mayîn dibin metirsî yê de ye",
+            "title": "Warning: funds at risk during migration",
             "body": "Di navnîşanên karanîn de hevsengiyek we heye, lê ji bo ewlehiya wê ji bo agahdariyê hewce nake. Heke we demek dirêj berê bazirganî kiribe ev dikare pêk were. Hûn dikarin berdewam bikin lê dê {value} di dema barkirinê de bikeve bin metirsiyê.",
             "learnMore": "Zêdetir zanyarî yê navnîşanên karhatî agahdar bibin",
             "proceed": "Ez metirsî yê didim berçav"
@@ -823,7 +829,7 @@
                 "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
-                "title": "Kirarê bipêjirîn",
+                "title": "Confirm transaction",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Derbasê Chrysalis'ê bibin an jî cuzdankelê vegerînin",
         "createWallet": "Cuzdanek nû çêke",
         "createWalletDescription": "Cuzdankeke nû çêbikin ku bi Chrysalis'ê de bixebite",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Pêborînê tomar bike",
         "useBiometric": "Ewlehîya bîyometrîk bikarbînin",
         "setupPin": "Qoda PIN saz bike",
@@ -962,7 +974,7 @@
         "saveBackupFile": "Dosya cîhgir tomar bike",
         "iveWrittenRecoveryPhrase": "Min peyvên rizgarkirinê not stand",
         "verifyRecoveryPhrase": "Şîfra Xilaskirinê rastke. ",
-        "revealRecoveryPhrase": "Hevoka rizgarkirinê nîşanbide",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "SeedVault barbikê hundir",
         "checkAgain": "Dîsa kontrol bike",
         "importFromFile": "Ji dosyayê barbikê hundir",
@@ -993,7 +1005,7 @@
         "viewAddressHistory": "Bûyera navnîşanê nîşan bide",
         "hideAccount": "Cuzdankê veşêre",
         "showAccount": "Veşartina cuzdankê rake",
-        "deleteAccount": "Cuzdankê jêbibe",
+        "deleteAccount": "Delete wallet",
         "max": "Herî zêde",
         "addNode": "Girêkê zêde bike",
         "updateNode": "Girêk nûjen",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Dîsa lê bigere",
         "searching": "Lêdigere...",
         "closeFirefly": "Firefly bigire",
-        "generateAddress": "Navnîşanekê çêke",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
         "visitWebsite": "Visit website",
         "howItWorks": "How it works",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Şîfre",
+        "close": "Close",
         "confirmPassword": "Tesdîqkirin\nŞîfre",
         "currentPassword": "Şîfreya heyî",
         "newPassword": "Şîfreya nû",
@@ -1066,9 +1080,12 @@
         "received": "Wergirtin",
         "sendPayment": "Dravê bişînin",
         "moveFunds": "Transfera dahîl",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Send To",
         "sendFunds": "Diraw hinêre",
         "sendToAddress": "Navnîşana xwe hinêre",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Qodek QR-ê Scan bikin an navnîşanekê pêve bide",
         "moveFundsBetweenAccounts": "Navbera Cuzdankê xwe diraw hinêre",
         "sendTokensToAddress": "Tokena hinêre navnîşanekê",
@@ -1111,6 +1128,7 @@
         "createAccount": "Cuzdanek nû çêke",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Navê Cuzdankê",
         "latestTransactions": "Transferên Dawî",
         "transactions": "Lîsteya Transferan",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "Navnîşana Standinê",
         "newAddress": "New Address",
         "date": "Rojmêr",
-        "status": "Hal",
+        "status": "Status",
         "confirmed": "Hat Pejirandin",
         "pending": "Bendê ye",
         "noAccounts": "Cuzdankê we tune, ji kerema xwe yêk çêbikin.",
@@ -1205,7 +1223,9 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Evro",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Nasnameya Peyamê",
+            "messageId": "Message ID",
             "internal": "Internal",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "Rojmêr",
+            "date": "Date",
             "time": "Time"
         }
     },
@@ -1443,7 +1468,7 @@
         }
     },
     "tabs": {
-        "wallet": "Cuzdank",
+        "wallet": "Wallet",
         "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",

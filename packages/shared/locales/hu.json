@@ -2,12 +2,13 @@
     "views": {
         "onboarding1": {
             "title": "Küldje, fogadja és kezelje IOTA tokenjeit",
-            "body": "A Firefly a hivatalos IOTA tárca."
+            "body": "A Firefly az IOTA hivatalos pénztárca szoftvere."
         },
         "legal": {
             "title": "Adatvédelmi irányelvek és Felhasználási feltételek",
             "body": "Kérjük, figyelmesen olvassa el az Adatvédelmi irányelveket és a Felhasználási feltételeket.",
-            "checkbox": "Elolvastam és elfogadom az Adatvédelmi irányelveket és a Felhasználási feltételeket"
+            "checkbox": "Elolvastam és elfogadom az Adatvédelmi irányelveket és a Felhasználási feltételeket",
+            "checkboxMobile": "Elolvastam és elfogadom a(z)"
         },
         "crashReporting": {
             "title": "Hbajelentés",
@@ -41,15 +42,15 @@
         },
         "secure": {
             "title": "Tárca biztonsága",
-            "body1": "Mentse el és nyomtassa ki a helyreállítási lap PDF-sablonját.",
-            "body2": "Ha kitölti és biztonságosan tárolja a helyreállítási lapot, akkor mindig helyre tudja állítani a tárcáit."
+            "body1": "Mentse el és nyomtassa ki a helyreállító lap PDF-sablonját.",
+            "body2": "Ha kitölti és biztonságosan tárolja a helyreállító lapot, akkor mindig helyre tudja állítani a tárcáit."
         },
         "create": {
             "title": "Tárca létrehozása",
             "body": "Tárca létrehozása. Választhatja a hagyományos szoftver tárcát vagy ha van Ledger eszköze, létrehozhat egy hardver tárcát.",
             "softwareAccount": {
                 "title": "Szoftver tárcát szeretnék",
-                "description": "24 szóból álló helyreállítási szavak létrehozása"
+                "description": "24 szóból álló helyreállító kódszólista létrehozása"
             },
             "ledgerAccount": {
                 "title": "Hardver tárcát szeretnék",
@@ -73,7 +74,7 @@
         "password": {
             "title": "Jelszó létrehozása",
             "body1": "A számláján lévő összeg biztonságos tárolásának érdekében egy erős jelszóra van szüksége. Használja szavak kombinációját és kerülje az általános kifejezéseket, neveket vagy dátumokat.",
-            "body2": "Javasoljuk, hogy írja le jelszavát a helyreállítási lapra."
+            "body2": "Javasoljuk, hogy írja le jelszavát a helyreállító lapra."
         },
         "protect": {
             "title": "Protect your wallet",
@@ -92,30 +93,30 @@
         },
         "backup": {
             "title": "Tárca biztonsági mentése",
-            "body1": "Most meg fogjuk mutatni a tárcája helyreállításához szükséges szavakat. Írja le őket a helyreállítási lapra.",
-            "body2": "Ne ossza meg senkivel a helyreállítási szavakat! Azokkal bárki bárhonnan hozzáférhet a tokenjeihez.",
-            "body3": "Ha elveszíti a helyreállítási szavakat, örökre elveszítheti számlájának teljes egyenlegét."
+            "body1": "Most meg fogjuk mutatni a tárcája helyreállításához szükséges szavakat. Írja le őket a helyreállító lapra.",
+            "body2": "Ne ossza meg senkivel a helyreállító kódszólistát. Azokkal bárki bárhonnan hozzáférhet a tokenjeihez.",
+            "body3": "Ha elveszíti a helyreállító kódszólistát, örökre elveszítheti számlájának teljes egyenlegét."
         },
         "recoveryPhrase": {
-            "title": "Helyreállítási szavak",
-            "body1": "Írja le a szavakat a helyreállítási lapra azok pontos sorrendjében!",
-            "body2": "A helyreállítási lapot tárolja biztonságos helyen.",
+            "title": "Helyreállító kódszólista",
+            "body1": "Írja le a szavakat a helyreállító lapra azok pontos sorrendjében.",
+            "body2": "A helyreállító lapot tárolja biztonságos helyen.",
             "body3": "Fontos, hogy legyen írásos biztonsági mentése. A számítógépek meghibásodhatnak és a fájlok megsérülhetnek.",
-            "revealRecoveryPhrase": "Helyreállítási szavak megjelenítése",
-            "hideRecoveryPhrase": "Helyreállítási szavak elrejtése"
+            "revealRecoveryPhrase": "Helyreállító kódszólista megjelenítése",
+            "hideRecoveryPhrase": "Helyreállító kódszólista elrejtése"
         },
         "verifyRecoveryPhrase": {
-            "title": "Helyreállítási szavak ellenőrzése",
-            "body": "Most leellenőrizzük a leírt helyreállítási szavakat. Kérjük, válassza ki az egyes szavakat a sorszámuk alapján!",
+            "title": "Helyreállító kódszólista ellenőrzése",
+            "body": "Most leellenőrizzük a leírt helyreállító kódszólistát. Kérjük, válassza ki az egyes szavakat a sorszámuk alapján.",
             "word": "Szó",
-            "verified": "A helyreállítási szavak ellenőrizve",
+            "verified": "A helyreállító kódszólista ellenőrizve",
             "verifiedBody": "Ne feledje mindig biztonságos helyen tárolni!"
         },
         "backupWallet": {
             "title": "Stronghold biztonsági mentés",
             "body1": "Tárcáinak Stronghold fájlba történő mentéséhez adja meg jelszavát. A jelszó a biztonsági mentés titkosítására szolgál.",
             "body2": "A digitális biztonsági mentés az alábbiak miatt fontos:",
-            "reason1": "Egyszerűen helyreállíthatja tárcáit anélkül, hogy beírná a helyreállítási szavakat",
+            "reason1": "Egyszerűen helyreállíthatja tárcáit anélkül, hogy beírná a helyreállító kódszólistát",
             "reason2": "Könnyen importálhatja tárcáit más eszközökre",
             "reason3": "Helyreállíthatja tranzakcióinak előzményeit"
         },
@@ -124,9 +125,9 @@
             "body": "A tárcáiról biztonsági mentést készített a Stronghold-ba."
         },
         "congratulations": {
-            "title": "A tárca beállítása elkészült",
+            "title": "Profilbeállítás kész!",
             "fundsMigrated": "Egyenleg migrálva",
-            "body": "Az új tárcája használatra kész.",
+            "body": "Az új profilja használatra kész.",
             "softwareMigratedBody": "Sikeresen migrálta tokenjeit az új hálózatra",
             "fireflyLedgerBody": "A Ledger számlája sikeresen helyreállt és továbbléphet a folyamatban.",
             "trinityLedgerBody": "Sikeresen migrálta Ledger eszközét az új hálózatra.",
@@ -137,8 +138,8 @@
             "body": "Ha rendelkezik tárca biztonsági mentéssel vagy seed-del, itt importálhatja. Ha van tokenje a régi hálózatról, migrálhatja őket az új Chrysalis hálózatra.",
             "importSeed": "81 karakter hosszú seed-em van",
             "importSeedDescription": "Adja meg seed-jét és migrálja tokenjeit a Chrysalis hálózatra",
-            "importMnemonic": "Firefly helyreállítási szavakkal rendelkezem",
-            "importMnemonicDescription": "Adja meg a helyreállítási szavakat tárcái helyreállításához",
+            "importMnemonic": "Firefly helyreállító kódszólistával rendelkezem",
+            "importMnemonicDescription": "Adja meg a helyreállító kódszólistát tárcái helyreállításához",
             "importFile": "Biztonsági mentésem van",
             "importFileDescription": "Importálja Seedvault vagy Stronghold mentését",
             "importLedger": "Ledger biztonsági mentésem van",
@@ -151,17 +152,18 @@
                 "enter": "Adja meg seed-jét"
             },
             "mnemonic": {
-                "title": "Adja meg a helyreállítási szavakat",
-                "body": "A helyreállítási szavak 24 kisbetűs, szóközökkel elválasztott szóból állnak, melyek már meglévő Firefly tárcák helyreállítására szolgálnak.",
-                "enter": "Adja meg a titkos helyreállítási szavakat"
+                "title": "Adja meg a helyreállító kódszólistát",
+                "body": "A helyreállító kódszólista 24 kisbetűs, szóközökkel elválasztott szóból áll, amely már meglévő Firefly tárcák helyreállítására szolgál.",
+                "enter": "Adja meg a titkos helyreállító kódszólistát"
             },
             "seedDetected": "81 karakterből álló seed észlelve",
-            "phraseDetected": "24 szóból álló helyreállítási szavak észlelve",
+            "phraseDetected": "24 szóból álló helyreállító kódszólista észlelve",
             "checksum": "Ellenőrző összeg"
         },
         "importFromFile": {
             "title": "Tárcák helyreállítása biztonsági mentésből",
-            "body": "Tárcáit importálhatja egy meglévő biztonsági mentésből, mely lehet Stronghold (.stronghold) vagy Trinity SeedVault (.kdbx)."
+            "body": "Tárcáit importálhatja egy meglévő biztonsági mentésből, mely lehet Stronghold (.stronghold) vagy Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Töltsön fel egy fájlt a már meglévő tárcája helyreállításához. Kizárólag a Firefly Stronghold biztonsági mentés támogatott mobil eszközökön. A Trinity Seedvault biztonsági mentést csak a számítógépén futó Firefly-ban tudja importálni."
         },
         "importFromLedger": {
             "title": "Ledger helyreállítása vagy migrálása",
@@ -227,7 +229,7 @@
             "body2": "Ez hosszabb időt vehet igénybe. Ne kapcsolja ki az eszközét, amíg az átvezetés be nem fejeződik.",
             "existing": "Régi tárca",
             "new": "Új tárca",
-            "learn": "Tudjon meg többet a migrálásról",
+            "learn": "Tudjon meg többet a költöztetésről",
             "beginMigration": "Migráció kezdése",
             "migrating": "Egyenleg migrálása...",
             "migrated": "{balance} migrálva",
@@ -250,7 +252,7 @@
             "title": "Figyelem",
             "body1": "Egy vagy több olyan címén is van egyenlege, amelyről korábban költött már.",
             "body2": "Azt javasoljuk, hogy egy automatizált folyamat révén küldje át ezt az összeget egy másik, biztonságos címre.",
-            "body3": "Ha bezárja az applikációt, a teljes migrációs folyamatat elölről kell kezdenie.",
+            "body3": "Sajnos nem garantálható, hogy mobil készülékén a régi hálózatról biztonságosan átköltöztethetőek tokenjei. Ezért javasoljuk, hogy a tokenek költöztetéséhez a Firefly asztali gépekre szánt verzióját használja.",
             "learn": "Tudjon meg többet a címekről, amelyekről korábban már költött"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Hálózat elérhető",
                 "networkDegraded": "Hálózati problémák",
                 "networkDown": "A hálózat nem elérhető",
+                "networkUnreachable": "A hálózat nem érhető el",
                 "status": "Állapot",
                 "messagesPerSecond": "Üzenet / másodperc",
                 "referencedRate": "Hivatkozási arány"
             },
             "profileModal": {
-                "allSettings": "Beállítások",
+                "allSettings": {
+                    "title": "Beállítások",
+                    "description": "Profil, applikáció, biztonság"
+                },
                 "logout": "Kijelentkezés",
                 "stronghold": {
                     "title": "Profilzár",
@@ -484,7 +490,7 @@
                         "connected": "Csatlakozva",
                         "legacyConnected": "Régi alkalmazás megnyitva",
                         "locked": "Lezárva",
-                        "mnemonicMismatch": "Rossz Ledger eszköz vagy emlékeztető mondat",
+                        "mnemonicMismatch": "Rossz Ledger eszköz vagy helyreállító kódszólista",
                         "notDetected": "Nem található",
                         "otherConnected": "Alkalmazás megnyitva"
                     }
@@ -625,7 +631,7 @@
             "eventDetails": {
                 "votingOpens": "Szavazás kezdete",
                 "votingProgress": "Hátralévő idő",
-                "votingPower": "Szavazatának súlya",
+                "votingPower": "Szavazatom súlya",
                 "votesCounted": "Eddig megszámolt szavazatainak száma",
                 "maximumVotes": "Szavazatainak maximimális száma",
                 "countingStarts": "Szavazatok számlálásának kezdete",
@@ -664,7 +670,7 @@
             "title": "Utolsó biztonsági mentés: {date}",
             "lastBackup": "Utolsó biztonsági mentés ideje: {date}",
             "backupDescription": "Fontos a rendszeres biztonsági mentés, hogy tárcáiról és tranzakcióiról legyen másolata.",
-            "backupWarning": "Ha elveszíti a biztonsági mentést és a helyreállítási szavakat, többé nem tud a számlájához hozzáférni.",
+            "backupWarning": "Ha elveszíti a biztonsági mentést és a helyreállító kódszólistát, többé nem tud a számlájához hozzáférni.",
             "notBackedUp": "Nincs biztonsági mentés",
             "notBackedUpDescription": "Tárcáiról még nem készült biztonsági mentés",
             "saving": "Mentés folyamatban..."
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "{name} elrejthető?",
             "body": "A tárcát később megtalálja a haladó beállításokban lévő \"Rejtett tárcák megjelenítése\" engedélyezésével.",
-            "typePassword": "Adja meg tárcájának jelszavát a törléshez.",
+            "typePassword": "Írja be tárcája jelszavát a megerősítéshez.",
             "hideAccount": "Tárca elrejtése",
             "errorTitle": "{name} számla nem rejthető el",
             "errorBody1": "Tárcája addig nem rejthető el, amíg egyenlege nem nulla.",
@@ -823,7 +829,7 @@
                 "info": "Hasonlítsa össze a Ledger eszközén megjelenített maradvány címet a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri."
             },
             "transaction": {
-                "title": "Küldés jóváhagyása",
+                "title": "Tranzakció jóváhagyása",
                 "info": "Hasonlítsa össze a Ledger eszközén megjelenített tranzakciós adatokat a lent megjelenítettel. Ha megegyeznek, nyomja meg mindkét gombot a Ledger-en, amikor az kéri."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Teljes letétbe helyezett összeg",
             "stakedSuccessfully": "A(z) {account} számlán lévő tokenjei letétbe lettek helyezve.",
             "unstakedSuccessfully": "A(z) {account} számlán lévő tokenjei ki lettek véve a letétből.",
-            "singleAccountHint": "A tárcáit keresi? A Firefly megváltozott. A tárcák közötti váltáshoz használja a felső menüsort."
+            "mergeStakeDisclaimerVoting": "Az újonnan letétbe helyezett tokenek meglévőkkel való összevonása egyúttal az új szavazatokat is összevonja a meglévő szavazatokkal."
         },
         "stakingConfirmation": {
             "title": "Részvétel megerősítése",
@@ -877,7 +883,8 @@
             "changingVote": "Szavazás megváltoztatása",
             "manageVotes": "Szavazatok kezelése",
             "partialVoteInfo": "{amount} összeg érkezett a(z) {account} számlájára. Az új összeggel úgy tud szavazni, hogy azt hozzáadja jelenlegi szavazatához.",
-            "mergeVoteDisclaimer": "Kérjük vegye figyelembe, hogy az újonnan hozzáadott összeg a korábban már összeszámolt szavazatokat nem fogja érinteni",
+            "mergeVoteDisclaimer": "Kérjük vegye figyelembe, hogy az új szavazatok összevonása a régiekkel nem érinti az eddig már összeszámolt szavazatait.",
+            "mergeVoteDisclaimerStaking": "Az új szavazatok meglévőkkel való összevonása egyúttal az újonnan letétbe helyezett tokeneket is összevonja a meglévő letétbe helyezett tokenjeivel.",
             "mergingVotes": "Szavazatok összevonása",
             "votedSuccessfully": "A szavazást sikeresen megkezdte a(z) {account} számláján.",
             "unvotedSuccessfully": "A szavazást befejezte a(z) {account} számláján.",
@@ -904,10 +911,14 @@
             "title": "Egy fejlesztői profilt hoz létre",
             "body": "Alapértelmezetten a Chrysalis fejlesztői hálózatra csatlakozik és kézzel válthat a hálózatok között. Csak akkor folytassa, ha pontosan tudja mit csinál."
         },
+        "confirmCloseApp": {
+            "title": "Az applikációt be fogja zárni",
+            "body": "Biztosan be szeretné zárni? Nyomja meg ismét a vissza gombot a bezáráshoz."
+        },
         "crashReporting": {
             "title": "Hibajelentés",
             "body": "Segítse a Firefly szoftver fejlesztését azzal, hogy automatikus diagnosztikai adatokat küld hiba vagy szoftverösszeomlás esetén. A beállítás csak a Firefly újraindítása után lép életbe.",
-            "checkbox": "Hibajelentés elküldése az IOTA Foundation-nek"
+            "checkbox": "Hibajelentések küldése az IOTA Foundation-nek"
         },
         "legalUpdate": {
             "tosTitle": "Szolgáltatási feltételek",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrálás Chrysalis hálózatra vagy létező tárca helyreállítása",
         "createWallet": "Új tárca létrehozása",
         "createWalletDescription": "Új tárca készítése a Chrysalis hálózaton",
+        "exploreWallet": "Tárca felfedezése",
         "savePassword": "Jelszó mentése",
         "useBiometric": "Biometrikus azonosítás használata",
         "setupPin": "PIN-kód beállítása",
@@ -960,9 +972,9 @@
         "confirmPin": "PIN-kód megerősítése",
         "enterYourPin": "Adja meg a PIN-kódját",
         "saveBackupFile": "Biztonsági mentés készítése",
-        "iveWrittenRecoveryPhrase": "Leírtam a helyreállítási szavakat",
-        "verifyRecoveryPhrase": "Helyreállítási szavak ellenőrzése",
-        "revealRecoveryPhrase": "Helyreállítási szavak megjelenítése",
+        "iveWrittenRecoveryPhrase": "Leírtam a helyreállító kódszólistát",
+        "verifyRecoveryPhrase": "Helyreállító kódszólista ellenőrzése",
+        "revealRecoveryPhrase": "Helyreállító kódszólista megjelenítése",
         "importSeedvault": "SeedVault importálása",
         "checkAgain": "Ellenőrizze újra",
         "importFromFile": "Importálás fájlból",
@@ -983,7 +995,7 @@
         "enableDeepLinks": "IOTA hivatkozások engedélyezése",
         "enableDeveloperMode": "Fejlesztői mód engedélyezése",
         "enableSystemNotifications": "Rendszer értesítések engedélyezése",
-        "exportTransactionHistory": "Korábbi tranzakciók exportálása",
+        "exportTransactionHistory": "Tranzakciós előzmények exportálása",
         "localProofOfWork": "Számítás elvégzése helyben",
         "unlock": "Felold",
         "updateFirefly": "Firefly frissítése",
@@ -1020,7 +1032,7 @@
         "no": "Nem",
         "skip": "Kihagyás",
         "reset": "Visszaállítás",
-        "downloadRecoveryKit": "Helyreállítási sablon mentése",
+        "downloadRecoveryKit": "Helyreállító kódszólista sablon mentése",
         "skipBackup": "Biztonsági mentés kihagyása",
         "finishSetup": "Beállítás befejezése",
         "readDocumentation": "Dokumentáció elolvasása",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Keresés újra",
         "searching": "Keresés...",
         "closeFirefly": "Firefly bezárása",
-        "generateAddress": "Új cím létrehozása",
+        "generateAddress": "Új cím generálása",
         "migrateAgain": "Másik számlasorszám migrálása",
         "visitWebsite": "Weboldal megnyitása",
         "howItWorks": "Hogy működik",
@@ -1047,28 +1059,33 @@
         "mergeFunds": "Egyenlegek összevonása",
         "done": "Kész",
         "castVotes": "Szavazás",
-        "changeVotes": "Szavazás megváltoztatása",
+        "changeVotes": "Szavazat megváltoztatása",
         "mergeVotes": "Szavazatok összevonása",
         "stopVotes": "Szavazat felfüggesztése",
         "okIUnderstand": "Rendben, értem",
-        "readMore": "Bővebben"
+        "readMore": "Bővebben",
+        "chooseBackupFile": "Biztonsági mentés fájl választása"
     },
     "general": {
         "password": "Jelszó",
+        "close": "Bezár",
         "confirmPassword": "Jelszó megerősítése",
         "currentPassword": "Jelenlegi jelszó",
         "newPassword": "Új jelszó",
         "confirmNewPassword": "Új jelszó megerősítése",
         "yourSeed": "Az Ön seed-je",
-        "recoveryPhrase": "Helyreállítási szavak",
+        "recoveryPhrase": "Helyreállító kódszólista",
         "recentActivity": "Legutóbbi tevékenységek",
         "sent": "Elküldött",
         "received": "Fogadott",
         "sendPayment": "Átutalás",
         "moveFunds": "Küldés saját számlák közt",
+        "moveFundsButton": "Privát",
+        "unit": "Mértékegység",
         "sendTo": "Küldés",
         "sendFunds": "Átutalás",
         "sendToAddress": "Küldés a következő címre",
+        "scanQr": "QR-kód beolvasása",
         "scanQrOrPaste": "QR-kód beolvasása vagy cím beillesztése",
         "moveFundsBetweenAccounts": "Egyenleg átvezetése tárcák között",
         "sendTokensToAddress": "Tokenek küldése",
@@ -1111,6 +1128,7 @@
         "createAccount": "Tárca létrehozása",
         "createNewWallet": "Új tárca létrehozása",
         "switchWallet": "Tárcaváltás",
+        "addAWallet": "Tárca hozzáadása",
         "accountName": "Tárca neve",
         "latestTransactions": "Legutóbbi tranzakciók",
         "transactions": "Tranzakciók",
@@ -1203,9 +1221,11 @@
         "voting": "Szavazás",
         "unvoting": "Szavazás felfüggesztés",
         "accountColor": "Tárcaszín",
-        "myAssets": "Pénzügyi eszközeim",
+        "myAssets": "Pénzeszközeim",
         "option": "Lehetőségek",
-        "total": "Összes egyenleg: {balance}"
+        "total": "Összes egyenleg: {balance}",
+        "openExplorer": "Megnyitás Explorerben",
+        "activityDetails": "Tranzakció részletei"
     },
     "dates": {
         "today": "Ma",
@@ -1349,8 +1369,8 @@
             "mnemonic": "Érvénytelen jelszóemlékeztető.",
             "seedTooShort": "A seed-nek 81 karakter hosszúnak kell lennie, de a megadott seed csak {length, plural, one {#} other {#}} karakter hosszú",
             "seedCharacters": "A seed csak A-Z vagy 9 karaktereket tartalmazhat",
-            "phraseWordCount": "24 helyett csak {length, plural, one {#} other {#}} helyreállítási szót adott meg.",
-            "phraseUnrecognizedWord": "Ismeretlen szó \"{word}\" található a helyreállítási szavak között",
+            "phraseWordCount": "24 helyett csak {length, plural, one {#} other {#}} helyreállító kódszót adott meg.",
+            "phraseUnrecognizedWord": "Ismeretlen szó \"{word}\" található a helyreállító kódszólistában",
             "phraseCaseWord": "A “{word}” szó csak kisbetűkből állhat"
         },
         "ledger": {
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "Nem fogja elérni a minimálisan jóváírható jutalmat a staking esemény végéig, hacsak nem helyez letétbe még több IOTA tokent.",
             "bodyDidNotReachMin": "Nem helyezett letétbe elegendő IOTA tokent ahhoz, hogy elérje a minimálisan jóváírható {airdrop} jutalmat ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "A tárcában nincs elegendő IOTA token ahhoz, hogy a minimálisan jóváírható {airdrop} jutalmat megkapja."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer mértékegységének frissítése",
+            "body1": "Az SMR-egységek egy DAO döntést követően megváltoztak. A Shimmer tokenek mostantól 6 tizedesjegy pontossággal jelennek meg; 1 SMR = 1,000,000 glow.",
+            "body2": "Az SMR jutalmak mértéke ugyanannyi, a Firefly csak másképp jeleníti meg az értéket."
         }
     },
     "exports": {
@@ -1438,13 +1463,13 @@
     },
     "permissions": {
         "camera": {
-            "request": "Az Ön engedélye szükséges ahhoz, hogy a kamerát a QR kódok olvasáshoz használni tudja.",
+            "request": "Az Ön engedélye szükséges ahhoz, hogy a kamerát a QR kódok olvasásához használni tudja.",
             "requestInAppSettings": "Ha szeretné engedélyezni a kamerával a QR kódok olvasását, azt az applikáció beallításainál megteheti."
         }
     },
     "tabs": {
         "wallet": "Tárca",
-        "staking": "Staking",
+        "staking": "Letétbe helyezés",
         "governance": "Kormányzás",
         "tokens": "Tokenek",
         "activity": "Előzmények"

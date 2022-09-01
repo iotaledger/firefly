@@ -7,7 +7,8 @@
         "legal": {
             "title": "Política de Privacitat i Condicions de Servei",
             "body": "Consulteu la Política de Privacitat i les Condicions del Servei.",
-            "checkbox": "He llegit i accepto la Política de Privadesa i les Condicions de Servei"
+            "checkbox": "He llegit i accepto la Política de Privadesa i les Condicions de Servei",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Informe d'errors",
@@ -124,9 +125,9 @@
             "body": "Heu fet una còpia de seguretat dels vostres moneders a Stronghold."
         },
         "congratulations": {
-            "title": "S'ha completat la configuració del criptomoneder",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Fons migrats",
-            "body": "Ja es pot utilitzar el criptomoneder nou.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "Has migrat els vostres fons amb èxit a la nova xarxa",
             "fireflyLedgerBody": "El teu compte de Ledger s'ha recuperat correctament i ara podeu continuar.",
             "trinityLedgerBody": "Heu migrat el vostre Ledger amb èxit a la nova xarxa.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Recupereu els vostres moneders utilitzant un fitxer de còpia de seguretat",
-            "body": "Importeu un fitxer de còpia de seguretat per recuperar el moneder. Les còpies de seguretat poden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx)."
+            "body": "Importeu un fitxer de còpia de seguretat per recuperar el moneder. Les còpies de seguretat poden ser Stronghold (.stronghold) o Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Restaurar o migrar el meu Ledger",
@@ -250,7 +252,7 @@
             "title": "Alerta",
             "body1": "Teniu fons en una o més adreces usades.",
             "body2": "Et recomanem que executis un procés automatitzat per protegir i transferir aquests fons amb seguretat.",
-            "body3": "Si tanqueu l'aplicació, haureu de reiniciar tota la migració.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Obteniu més informació sobre les adreces usades"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Xarxa operativa",
                 "networkDegraded": "Xarxa degradada",
                 "networkDown": "Xarxa Desconectada",
+                "networkUnreachable": "Network unreachable",
                 "status": "Estat",
                 "messagesPerSecond": "Missatges per segon",
                 "referencedRate": "Taxa referenciada"
             },
             "profileModal": {
-                "allSettings": "Tots els paràmetres",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Tancar sessió",
                 "stronghold": {
                     "title": "Bloqueig de perfil",
@@ -757,7 +763,7 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "Esteu enviant una transferència des d'una cartera que s'està stakejant actualment. Això pot desfer l'stake. Es lliure d'enviar la transferència, però és possible que hàgiu de tornar a refer l'stake amb els tokens restants després.",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total de fons amb stake",
             "stakedSuccessfully": "Els vostres fons han estat stakejats {account}.",
             "unstakedSuccessfully": "S'ha desfet l'stake dels vostres fons {account}.",
-            "singleAccountHint": "Busques les teves bitlleteres? Firefly ha canviat. Canvia entre les teves bitlleteres a la barra de menú superior."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirmeu la participació",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Esteu creant un perfil de desenvolupador",
             "body": "Estaràs connectat a Chrysalis Devnet de manera predeterminada i podràs canviar de xarxa manualment. Només continua si saps el que estàs fent."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Informe d'errors",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migrar a Chrysalis o restaurar una cartera existent",
         "createWallet": "Crea una cartera nova",
         "createWalletDescription": "Crea una cartera nova a la xarxa Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Desa la contrasenya",
         "useBiometric": "Utilitzeu seguretat biomètrica",
         "setupPin": "Configureu el codi PIN",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "D'acord, ho entenc",
-        "readMore": "Llegir més"
+        "readMore": "Llegir més",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Contrasenya",
+        "close": "Close",
         "confirmPassword": "Confirmar contrasenya",
         "currentPassword": "Contrasenya actual",
         "newPassword": "Nova contrasenya",
@@ -1066,9 +1080,12 @@
         "received": "Rebut",
         "sendPayment": "Envia el pagament",
         "moveFunds": "Transferència interna",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Envia a",
         "sendFunds": "Enviar fons",
         "sendToAddress": "Enviar a l’adreça",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Escaneja un codi QR o enganxa una adreça",
         "moveFundsBetweenAccounts": "Mou fons entre moneders",
         "sendTokensToAddress": "Enviar fitxes a una adreça",
@@ -1111,6 +1128,7 @@
         "createAccount": "Crea un moneder",
         "createNewWallet": "Crea un moneder nou",
         "switchWallet": "Canvia de moneder",
+        "addAWallet": "Add a wallet",
         "accountName": "Nom del moneder",
         "latestTransactions": "Últimes transaccions",
         "transactions": "Transaccions",
@@ -1205,7 +1223,9 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Avui",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
