@@ -11,6 +11,7 @@
     import { Payload } from 'shared/lib/typings/message'
     import { WalletAccount } from 'shared/lib/typings/wallet'
     import { formatUnitBestMatch } from 'shared/lib/units'
+    import { setClipboard } from 'shared/lib/utils'
     import {
         findAccountWithAddress,
         findAccountWithAnyAddress,
@@ -189,8 +190,11 @@
                 <div class="mb-5">
                     <Text secondary>{localize('general.inputAddress')}</Text>
                     <div class="flex flex-row justify-between items-center">
-                        <Text type="pre">{senderAddress}</Text>
-                        <CopyButton itemToCopy={senderAddress} />
+                        <div on:click={() => setClipboard(senderAddress)}>
+                            <Text type="pre" overrideColor classes="text-blue-500">
+                                {senderAddress}
+                            </Text>
+                        </div>
                     </div>
                     <Text type="pre">
                         {#if senderAccount}({senderAccount.alias}){/if}
@@ -202,8 +206,11 @@
                     <Text secondary>{localize('general.receiveAddress')}</Text>
                     {#each receiverAddresses as receiver, idx}
                         <div class="flex flex-row justify-between items-center">
-                            <Text type="pre">{receiver}</Text>
-                            <CopyButton itemToCopy={receiver} />
+                            <div on:click={() => setClipboard(receiver)}>
+                                <Text type="pre" overrideColor classes="text-blue-500">
+                                    {receiver}
+                                </Text>
+                            </div>
                         </div>
                         <Text type="pre" classes="mb-2 mt-0">
                             {#if receiverAddressesYou[idx]}({receiverAddressesYou[idx].alias}){/if}
