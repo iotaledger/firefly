@@ -4,6 +4,13 @@ import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
 import { get } from 'svelte/store'
 import { addClaimedActivity, claimedActivities } from '../../stores'
 
+/**
+ * It takes a list of transactions and links the transactions that are claiming async transactions
+ * @param {IProcessedTransaction[]} transactions - IProcessedTransaction[]
+ * @param {IAccountState} account - IAccountState - the account for which we are processing
+ * transactions
+ * @returns An array of processed transactions
+ */
 export function linkTransactionsWithClaimingTransactions(
     transactions: IProcessedTransaction[],
     account: IAccountState
