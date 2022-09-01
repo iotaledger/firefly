@@ -4,6 +4,8 @@
     import { Icon, StakingAssetTile, Text } from 'shared/components'
     import { isBright } from 'shared/lib/helpers'
     import { Asset, Token } from 'shared/lib/typings/assets'
+    import { mobile } from '@lib/app'
+
     export let asset: Asset
 
     const isStakingAsset = asset?.name === Token.Assembly || asset?.name === Token.Shimmer
@@ -32,17 +34,17 @@
                     width="100%"
                 />
             </div>
-            <div class="flex flex-col flex-wrap space-y-1">
+            <div class="flex flex-col flex-wrap {$mobile ? 'space-y-1/2' : 'space-y-1'}">
                 <Text classes="font-semibold">{asset?.name}</Text>
                 {#if asset?.fiatPrice}
-                    <Text secondary smaller>{asset?.fiatPrice}</Text>
+                    <Text secondary smaller={!$mobile}>{asset?.fiatPrice}</Text>
                 {/if}
             </div>
         </div>
-        <div class="flex flex-col flex-wrap space-y-1 text-right">
+        <div class="flex flex-col flex-wrap {$mobile ? 'space-y-1/2' : 'space-y-1'} text-right">
             <Text classes="font-semibold">{asset?.balance}</Text>
             {#if asset?.fiatBalance}
-                <Text secondary smaller>{`≈ ${asset?.fiatBalance}`}</Text>
+                <Text secondary smaller={!$mobile}>{`≈ ${asset?.fiatBalance}`}</Text>
             {/if}
         </div>
     </button>
