@@ -1,5 +1,7 @@
 import { get, writable } from 'svelte/store'
 
+import { PopupProps } from '@auxiliary/popup'
+
 interface PopupState {
     active: boolean
     type: string
@@ -7,7 +9,7 @@ interface PopupState {
     preventClose?: boolean
     fullScreen?: boolean
     transition?: boolean
-    props?: Record<string, unknown>
+    props?: PopupProps
     overflow?: boolean
     relative?: boolean
 }

@@ -1,10 +1,12 @@
 import { get } from 'svelte/store'
+
 import { popupState } from '@lib/popup'
 
-import { openLedgerNotConnectedPopup } from './openLedgerNotConnectedPopup'
+import { LEDGER_STATUS_POLL_INTERVAL } from '../constants'
+import { openLedgerNotConnectedPopup } from '../utils'
+
 import { getLedgerDeviceStatus } from './getLedgerDeviceStatus'
 import { pollLedgerDeviceStatus } from './pollLedgerDeviceStatus'
-import { LEDGER_STATUS_POLL_INTERVAL } from '../constants'
 
 export function promptUserToConnectLedger(
     onConnected: () => void | Promise<void> = () => {},

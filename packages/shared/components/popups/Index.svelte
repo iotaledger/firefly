@@ -23,7 +23,7 @@
     import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
     import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
-    import LedgerTransaction from './LedgerTransaction.svelte'
+    import LedgerTransactionPopup from './LedgerTransactionPopup.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import PasswordPopup from './PasswordPopup.svelte'
@@ -50,6 +50,7 @@
     import TokenInformationPopup from './TokenInformationPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
+    import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
     import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
 
     export let locale: Locale
@@ -107,7 +108,7 @@
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
         ledgerConnectionGuide: LedgerConnectionGuide,
-        ledgerTransaction: LedgerTransaction,
+        ledgerTransaction: LedgerTransactionPopup,
         ledgerLegacyTransaction: LedgerLegacyTransaction,
         ledgerAddress: LedgerAddress,
         ledgerMigrateIndex: LedgerMigrateIndex,
@@ -140,6 +141,7 @@
         tokenInformation: TokenInformationPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,
         faucetRequest: FaucetRequestPopup,
+        enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
         testDeepLinkForm: TestDeepLinkFormPopup,
     }
 

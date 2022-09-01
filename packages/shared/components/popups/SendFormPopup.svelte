@@ -3,6 +3,7 @@
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeight } from 'shared/components/Text.svelte'
+    import { resetLedgerSendConfirmationProps } from '@core/ledger'
     import { IAsset, Subject } from '@core/wallet'
     import { onMount } from 'svelte'
 
@@ -72,6 +73,8 @@
         if (amount && recipient) {
             sendButtonElement.focus()
         }
+
+        resetLedgerSendConfirmationProps()
     })
 </script>
 

@@ -7,7 +7,7 @@ import {
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
 
-export async function handleSpentOutput(accountId: string, payload: { output: OutputData }): Promise<void> {
+export async function handleSpentOutputEvent(accountId: string, payload: { output: OutputData }): Promise<void> {
     await syncBalance(accountId)
     const transactionId = payload?.output?.metadata?.transactionId
     const activity = get(allAccountActivities)?.[Number(accountId)]?.find((_activity) => _activity.id === transactionId)
