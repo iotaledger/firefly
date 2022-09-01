@@ -8,6 +8,7 @@ import {
     isPreparedTransaction,
     isPreparedTransactionEssenceHash,
 } from '@core/profile-manager'
+import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 import { closePopup, openPopup } from '@lib/popup'
 
 import { TransactionProgressEventPayload } from '../types'
@@ -17,6 +18,8 @@ export function handleTransactionProgressEvent(accountId: string, payload: Trans
         if (get(selectedAccountId) === accountId) {
             handleTransactionProgressInternal(payload)
         }
+    } else if (get(isOnboardingLedgerProfile)) {
+        handleTransactionProgressInternal(payload, true)
     } else {
         console.warn('Transaction progress handler unimplemented: ', payload)
     }
