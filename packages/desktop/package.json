@@ -28,13 +28,10 @@
         "compile:prod:win": "cross-env STAGE=prod electron-builder --win --x64 --config electron-builder-config.js"
     },
     "dependencies": {
-        "@ledgerhq/hw-transport-node-hid": "^5.13.0",
-        "@ledgerhq/hw-transport-node-speculos": "^6.1.0",
         "@sentry/electron": "^2.5.4",
         "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
         "electron-updater": "^4.3.5",
-        "hw-app-iota": "0.6.5",
         "kdbxweb": "^1.14.4",
         "keytar": "^7.9.0",
         "node-machine-id": "^1.1.12",
@@ -47,7 +44,7 @@
         "copy-webpack-plugin": "^7.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.1",
-        "electron": "13.6.9",
+        "electron": "18.3.6",
         "electron-builder": "^23.3.3",
         "electron-notarize": "^1.0.0",
         "lodash.merge": "^4.6.2",

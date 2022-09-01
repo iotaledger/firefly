@@ -1,4 +1,5 @@
 import { createNewAccount, setSelectedAccount } from '@core/account'
+import { handleError } from '@core/error/handlers/handleError'
 import { getAndUpdateNodeInfo } from '@core/network'
 import {
     buildProfileManagerOptionsFromProfileData,
@@ -30,6 +31,7 @@ import {
 } from '../../stores'
 import { loadAccounts } from './loadAccounts'
 import { ILoginOptions } from '../../interfaces'
+import { logout } from './logout'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
@@ -48,7 +50,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 2: get node info to check we have a synced node
             incrementLoginProgress()
-            await getAndUpdateNodeInfo()
+            await getAndUpdateNodeInfo(true)
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
@@ -113,7 +115,8 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             }, 500)
         }
     } catch (err) {
-        console.error(err)
+        handleError(err)
+        await logout()
         _loginRouter.previous()
         resetLoginProgress()
     }

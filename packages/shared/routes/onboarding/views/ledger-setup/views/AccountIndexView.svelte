@@ -2,10 +2,8 @@
     import { onDestroy, createEventDispatcher } from 'svelte'
     import { Animation, Button, Number, OnboardingLayout, Spinner, Text, Toggle, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { ADDRESS_SECURITY_LEVEL, hardwareIndexes } from '@lib/migration'
-    import { Platform } from '@lib/platform'
     import { popupState } from '@lib/popup'
-    import { LedgerAppName, displayNotificationForLedgerProfile, promptUserToConnectLedger } from '@core/ledger'
+    import { LedgerAppName, promptUserToConnectLedger } from '@core/ledger'
 
     const dispatch = createEventDispatcher()
     const min = 0
@@ -52,24 +50,24 @@
         busy = true
         function _onConnected(): void {
             infoTimeout = setTimeout(() => (showInfo = true), 180000)
-            Platform.ledger
-                .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
-                // .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
-                .then((data) => {
-                    busy = false
+            // Platform.ledger
+            //     .selectSeed(index, page, ADDRESS_SECURITY_LEVEL)
+            //     .then(({ iota, callback }) => getLedgerMigrationData(iota.getAddress, callback))
+            //     .then((data) => {
+            //         busy = false
 
-                    hardwareIndexes.update((_indexes) =>
-                        Object.assign({}, _indexes, { accountIndex: index, pageIndex: page })
-                    )
-                    dispatch('next', { balance: data?.balance })
-                })
-                .catch((error) => {
-                    busy = false
-                    displayNotificationForLedgerProfile('error', true, true, error)
-                    showInfo = false
-                    clearTimeout(infoTimeout)
-                    console.error(error)
-                })
+            //         hardwareIndexes.update((_indexes) =>
+            //             Object.assign({}, _indexes, { accountIndex: index, pageIndex: page })
+            //         )
+            //         dispatch('next', { balance: data?.balance })
+            //     })
+            //     .catch((error) => {
+            //         busy = false
+            //         displayNotificationForLedgerProfile('error', true, true, error)
+            //         showInfo = false
+            //         clearTimeout(infoTimeout)
+            //         console.error(error)
+            //     })
         }
         function _onCancel(): void {
             busy = false
