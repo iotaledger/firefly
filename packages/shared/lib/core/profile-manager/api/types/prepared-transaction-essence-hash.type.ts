@@ -1,1 +1,1 @@
-export type PreparedTransactionEssenceHashType = { PreparedTransactionEssenceHash: string }
+export type PreparedTransactionEssenceHash = { PreparedTransactionEssenceHash: string }

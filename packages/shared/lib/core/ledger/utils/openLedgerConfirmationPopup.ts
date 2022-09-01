@@ -6,27 +6,20 @@ import { openPopup } from '@lib/popup'
 import { deconstructLedgerSendConfirmationProps } from '../helpers'
 
 export function openLedgerConfirmationPopup(
-    payload?: TransactionProgressEventPayload,
+    payload: TransactionProgressEventPayload,
     isDuringOnboarding?: boolean
 ): void {
-    if (!payload) {
-        return
-    } else {
-        let props: PopupProps
-        switch (true) {
-            case isPreparedTransaction(payload):
-                props = {
-                    ...deconstructLedgerSendConfirmationProps(),
-                    needsToShowPopupAfterwards: !isDuringOnboarding,
-                }
-                break
-            case isPreparedTransactionEssenceHash(payload):
-                props = { hash: payload?.['PreparedTransactionEssenceHash'] }
-                break
-            default:
-                break
+    let props: PopupProps
+    if (isPreparedTransaction(payload)) {
+        props = {
+            ...deconstructLedgerSendConfirmationProps(),
+            needsToShowPopupAfterwards: !isDuringOnboarding,
         }
+    } else if (isPreparedTransactionEssenceHash(payload)) {
+        props = { hash: payload['PreparedTransactionEssenceHash'] }
+    }
 
+    if (props) {
         openPopup({
             type: 'ledgerTransaction',
             hideClose: true,

@@ -37,10 +37,10 @@ function handleTransactionProgressInternal(
     }
 
     if (isPreparedTransactionEssenceHash(payload)) {
-        if (!get(ledgerDeviceStatus).blindSigningEnabled) {
-            openPopup({ type: 'enableLedgerBlindSigning' })
-        } else {
+        if (get(ledgerDeviceStatus)?.blindSigningEnabled) {
             openLedgerConfirmationPopup(payload, isDuringOnboarding)
+        } else {
+            openPopup({ type: 'enableLedgerBlindSigning' })
         }
     }
 }

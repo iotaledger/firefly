@@ -1,4 +1,5 @@
 export * from './events'
+export * from './types'
 
 export * from './api'
 export * from './backup'
