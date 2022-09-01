@@ -151,7 +151,6 @@ const defaultWebPreferences = {
     nodeIntegration: false,
     contextIsolation: true,
     enableRemoteModule: false,
-    worldSafeExecuteJavaScript: true,
     disableBlinkFeatures: 'Auxclick',
     webviewTag: false,
     enableWebSQL: false,
@@ -355,7 +354,6 @@ export const getWindow = function (windowName) {
  * @returns {BrowserWindow} Requested window
  */
 export const getOrInitWindow = (windowName) => {
-    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (!windows[windowName]) {
         if (windowName === 'main') {
             return createWindow()
@@ -374,8 +372,6 @@ export const getOrInitWindow = (windowName) => {
  * Initialises the menu bar
  */
 initMenu()
-
-app.allowRendererProcessReuse = false
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -586,7 +582,6 @@ ipcMain.on('notification-activated', (ev, contextData) => {
  * @returns {BrowserWindow} About window
  */
 export const openAboutWindow = () => {
-    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.about !== null) {
         windows.about.focus()
         return windows.about
@@ -623,7 +618,6 @@ export const openAboutWindow = () => {
 }
 
 export const closeAboutWindow = () => {
-    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.about) {
         windows.about.close()
         windows.about = null
@@ -635,7 +629,6 @@ export const closeAboutWindow = () => {
  * @returns {BrowserWindow} Error window
  */
 export const openErrorWindow = () => {
-    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.error !== null) {
         windows.error.focus()
         return windows.error
@@ -670,7 +663,6 @@ export const openErrorWindow = () => {
 }
 
 export const closeErrorWindow = () => {
-    /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
     if (windows.error) {
         windows.error.close()
         windows.error = null

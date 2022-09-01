@@ -9,6 +9,7 @@
         Text,
         TestDeepLinkButton,
     } from 'shared/components'
+    import features from '@features/features'
 </script>
 
 {#if $selectedAccount}
@@ -21,15 +22,23 @@
                     <Text type="h5" classes="text-left">
                         {localize('general.assets')}
                     </Text>
-                    <FaucetRequestButton />
-                    <MintNativeTokenButton />
-                    <RefreshTokenMetadataButton />
+                    {#if features.developerTools.faucet.enabled}
+                        <FaucetRequestButton />
+                    {/if}
+                    {#if features.developerTools.minting.enabled}
+                        <MintNativeTokenButton />
+                    {/if}
+                    {#if features.developerTools.refreshTokens.enabled}
+                        <RefreshTokenMetadataButton />
+                    {/if}
                 </Pane>
                 <Pane classes="flex flex-col p-6 space-y-6">
                     <Text type="h5" classes="text-left">
                         {localize('general.developerTools')}
                     </Text>
-                    <TestDeepLinkButton />
+                    {#if features.developerTools.deeplink.enabled}
+                        <TestDeepLinkButton />
+                    {/if}
                 </Pane>
             </div>
         {/key}
