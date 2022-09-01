@@ -73,8 +73,6 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             handleLedgerError(err?.error ?? err)
         }
 
-        console.error(err)
-
         throw new CannotInitialiseShimmerClaimingAccountError()
     }
 }

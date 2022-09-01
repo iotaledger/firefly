@@ -49,7 +49,6 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
                 }),
             })
         } catch (err) {
-            console.error(err)
             updateShimmerClaimingAccount({
                 ...shimmerClaimingAccount,
                 state: ShimmerClaimingAccountState.Failed,
