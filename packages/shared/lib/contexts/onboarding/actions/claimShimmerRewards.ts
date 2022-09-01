@@ -61,7 +61,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     persistShimmerClaimingTransaction(claimingTransaction?.transactionId)
 
     // TODO: https://github.com/iotaledger/firefly/issues/4223
-    await sleep(SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND)
+    await sleep((5 + SECONDS_PER_MILESTONE) * MILLISECONDS_PER_SECOND)
 
     const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
         shimmerClaimingAccount,
