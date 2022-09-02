@@ -65,7 +65,7 @@
         ledgerConnectionText = localize(
             `views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceStatus.connectionState}`,
             $ledgerDeviceStatus.connectionState === LedgerConnectionState.AppNotOpen
-                ? { values: { protocol: LedgerAppName.SHIMMER } }
+                ? { values: { protocol: LedgerAppName.Shimmer } }
                 : {}
         )
     }

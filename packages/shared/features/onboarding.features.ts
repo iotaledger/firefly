@@ -204,7 +204,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
         },
@@ -245,7 +245,7 @@ const onboardingFeatures = {
                     enabled: true,
                 },
                 ledgerBackup: {
-                    enabled: false,
+                    enabled: true,
                 },
             },
         },

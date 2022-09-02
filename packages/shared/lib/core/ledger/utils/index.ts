@@ -1,4 +1,4 @@
-export * from './determineLedgerDeviceState'
+export * from './deriveLedgerConnectionState'
 export * from './formatAddressForLedger'
 export * from './handleLedgerError'
 export * from './isLedgerError'

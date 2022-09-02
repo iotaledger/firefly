@@ -26,7 +26,7 @@
     <div slot="leftpane__content">
         <Text type="h2" classes="mb-5">{localize('views.ledgerInstallationGuide.title')}</Text>
         <Text type="p" secondary classes="mb-5">
-            {localize('views.ledgerInstallationGuide.body1', { values: { protocol: LedgerAppName.SHIMMER } })}
+            {localize('views.ledgerInstallationGuide.body1', { values: { protocol: LedgerAppName.Shimmer } })}
         </Text>
         <Text type="p" secondary classes="mb-5">{localize('views.ledgerInstallationGuide.body2')}</Text>
         <div class="flex flex-row flex-nowrap items-center justify-center space-x-4 text-center mt-28">
@@ -34,7 +34,7 @@
                 <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center">
                     <Icon icon="shimmer" width="32" height="32" classes="text-white" />
                 </div>
-                <Text type="p" secondary>{LedgerAppName.SHIMMER}</Text>
+                <Text type="p" secondary>{LedgerAppName.Shimmer}</Text>
             </div>
         </div>
     </div>

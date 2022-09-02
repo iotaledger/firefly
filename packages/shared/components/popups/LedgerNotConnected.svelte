@@ -34,7 +34,7 @@
     </div>
     <Text type="p" classes="mb-6">
         {locale('popups.ledgerNotConnected.connect', {
-            values: { protocol: LedgerAppName.SHIMMER },
+            values: { protocol: LedgerAppName.Shimmer },
         })}
     </Text>
     <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>

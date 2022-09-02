@@ -5,7 +5,7 @@ import { closePopup, popupState } from '@lib/popup'
 
 import { LedgerStatus } from '../interfaces'
 import { ledgerDeviceStatus } from '../stores'
-import { determineLedgerDeviceState } from '../utils'
+import { deriveLedgerConnectionState } from '../utils'
 
 export async function getLedgerDeviceStatus(
     onConnected: () => void = () => {},
@@ -17,7 +17,7 @@ export async function getLedgerDeviceStatus(
 
         ledgerDeviceStatus.set(
             Object.assign({}, status, {
-                connectionState: determineLedgerDeviceState(status),
+                connectionState: deriveLedgerConnectionState(status),
             })
         )
 
