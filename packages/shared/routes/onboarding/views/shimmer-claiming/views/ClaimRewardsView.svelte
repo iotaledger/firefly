@@ -40,7 +40,7 @@
         displayNotificationForLedgerProfile('error', true)
     }
 
-    async function searchRewards(): Promise<void> {
+    async function searchForRewards(): Promise<void> {
         try {
             isSearchingForRewards = true
             hasSearchedForRewardsBefore = true
@@ -52,11 +52,11 @@
         }
     }
 
-    async function onUseBalanceFinderClick(): Promise<void> {
+    async function onSearchForRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            await getLedgerDeviceStatus(searchRewards, _onLedgerNotConnected, _onLedgerNotConnected)
+            await getLedgerDeviceStatus(searchForRewards, _onLedgerNotConnected, _onLedgerNotConnected)
         } else {
-            await searchRewards()
+            await searchForRewards()
         }
     }
 
@@ -145,7 +145,7 @@
             classes="w-full mb-5"
             disabled={!shouldSearchForRewardsButtonBeEnabled}
             secondary
-            onClick={onUseBalanceFinderClick}
+            onClick={onSearchForRewardsClick}
         >
             {#if isSearchingForRewards}
                 <Spinner message={localize('actions.searching')} busy={true} classes="justify-center items-center" />
