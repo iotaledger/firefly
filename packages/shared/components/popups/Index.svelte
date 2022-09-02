@@ -16,10 +16,9 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
-    import LedgerAppGuide from './LedgerAppGuide.svelte'
-    import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
-    import LedgerNotConnected from './LedgerNotConnected.svelte'
-    import LedgerTransactionPopup from './LedgerTransactionPopup.svelte'
+    import LedgerAppGuide from './LedgerAppGuidePopup.svelte'
+    import LedgerConnectionGuide from './LedgerConnectionGuidePopup.svelte'
+    import LedgerNotConnected from './LedgerNotConnectedPopup.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import PasswordPopup from './PasswordPopup.svelte'
@@ -103,7 +102,7 @@
         ledgerNotConnected: LedgerNotConnected,
         ledgerAppGuide: LedgerAppGuide,
         ledgerConnectionGuide: LedgerConnectionGuide,
-        ledgerTransaction: LedgerTransactionPopup,
+        verifyLedgerTransaction: VerifyLedgerTransactionPopup,
         nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
         removeNode: RemoveNode,
