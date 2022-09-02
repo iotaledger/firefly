@@ -17,6 +17,7 @@
         sendAddressFromTransactionPayload,
         wallet,
     } from 'shared/lib/wallet'
+    import { mobile } from '@lib/app'
 
     export let id: string
     export let timestamp: string
@@ -179,17 +180,21 @@
     <div class="w-8 flex flex-row justify-center items-center">
         <Icon width="22" height="22" boxed classes="text-white" boxClasses="bg-{iconColor}" {icon} />
     </div>
-    <div class="flex flex-col ml-3.5 space-y-1.5 overflow-hidden">
-        <Text type="p" bold smaller classes="overflow-hidden overflow-ellipsis multiwrap-line2">
+    <div class="flex flex-col ml-3.5 {$mobile ? '' : 'space-y-1.5'} overflow-hidden">
+        <Text type="p" bold smaller={!$mobile} classes="overflow-hidden overflow-ellipsis multiwrap-line2">
             {#if hasCachedMigrationTx || milestonePayload}
                 {localize('general.fundMigration')}
             {:else if isParticipationPayload(txPayload)}
                 {localize(`general.${getParticipationActionLocaleKey(participationAction)}`)}
             {:else}{localize(direction, { values: { account: accountAlias } })}{/if}
         </Text>
-        <p class="text-10 leading-120 text-gray-500">{date}</p>
+        {#if $mobile}
+            <Text type="p" color="gray-500" darkColor="gray-500">{date}</Text>
+        {:else}
+            <p class="text-10 leading-120 text-gray-500">{date}</p>
+        {/if}
     </div>
     <div class="flex-1 items-end flex flex-col ml-4">
-        <Text type="p" smaller classes="whitespace-nowrap">{messageValue}</Text>
+        <Text type="p" smaller={!$mobile} classes="whitespace-nowrap">{messageValue}</Text>
     </div>
 </button>
