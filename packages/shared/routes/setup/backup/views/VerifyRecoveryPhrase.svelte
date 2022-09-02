@@ -117,7 +117,7 @@
                     class:opacity-40={verified}
                     on:click={() => handleChoice(word)}
                 >
-                    <Text smaller classes="ml-3">{word}</Text>
+                    <Text classes="ml-3">{word}</Text>
                     <Icon icon="chevron-right" classes="text-gray-800 dark:text-white" />
                 </button>
             {/each}
