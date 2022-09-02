@@ -12,6 +12,7 @@ import {
 import { showAppNotification } from '@lib/notifications'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { sleep } from '@lib/utils'
+import type { Transaction } from '@iota/wallet'
 
 import { ShimmerClaimingAccountState } from '../enums'
 import { prepareShimmerClaimingAccount } from '../helpers'
@@ -75,7 +76,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
     validateSendConfirmation(outputOptions, preparedOutput)
 
-    let claimingTransaction
+    let claimingTransaction: Transaction
     if (get(isOnboardingLedgerProfile)) {
         const shimmerTokenMetadata = BASE_TOKEN[NetworkProtocol.Shimmer]
         setLedgerSendConfirmationProps({

@@ -12,10 +12,9 @@ export function getSecretManagerFromProfileType(type: ProfileType, storagePath?:
     }
 
     switch (type) {
-        case ProfileType.Software:
-            return strongholdSecretManager
         case ProfileType.Ledger:
             return ledgerSecretManager
+        case ProfileType.Software:
         default:
             return strongholdSecretManager
     }
