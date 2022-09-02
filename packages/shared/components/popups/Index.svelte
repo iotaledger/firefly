@@ -22,7 +22,7 @@
     import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
     import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
     import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
-    import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
+    import PromptLedgerConnectionPopup from './PromptLedgerConnectionPopup.svelte'
     import LedgerTransactionPopup from './LedgerTransactionPopup.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
@@ -104,7 +104,7 @@
         confirmation: ConfirmationPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
-        connectLedger: ConnectLedgerPopup,
+        promptLedgerConnection: PromptLedgerConnectionPopup,
         ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
         ledgerConnectionGuide: LedgerConnectionGuide,
