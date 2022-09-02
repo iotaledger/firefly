@@ -232,4 +232,4 @@
     })
 </script>
 
-<div class="w-full {classes}" bind:this={container} />
+<animation class="w-full {classes}" bind:this={container} />
