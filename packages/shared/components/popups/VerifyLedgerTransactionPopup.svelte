@@ -58,15 +58,5 @@
             <KeyValueBox keyText={localize('general.sendTo')} valueText={toAddress} />
             <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
         {/if}
-        <!-- <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-5 text-center">
-            <Text type="h5" highlighted classes="mb-2">{locale('general.sendTo')}</Text>
-            <Text type="pre" classes="mb-4">{formatAddressForLedger(toAddress)}</Text>
-
-            <Text type="h5" highlighted classes="mb-2">{locale('general.amount')}</Text>
-            <Text type="pre">{formatAmount(toAmount)}</Text>
-        </div> -->
-        <!-- {:else if hasMintNativeTokenConfirmationProps} -->
-        <!--     <KeyValueBox keyText="Name" valueText={mintNativeTokenConfirmationPopupProps.name} /> -->
-        <!--     <KeyValueBox keyText="Symbol" valueText={mintNativeTokenConfirmationPopupProps.symbol} /> -->
     {/if}
 </div>
