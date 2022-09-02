@@ -15,13 +15,23 @@
 
     const networkProtocol = $activeProfile?.networkProtocol ?? $onboardingProfile?.networkProtocol
 
-    $: isConnected = $ledgerDeviceStatus.connectionState !== LedgerConnectionState.NotDetected
-    $: isAppOpen = $ledgerDeviceStatus.connectionState === LedgerConnectionState.Connected
-    $: animation = !isConnected
-        ? 'ledger-disconnected-desktop'
-        : isAppOpen
-        ? 'ledger-connected-desktop'
-        : 'ledger-app-closed-desktop'
+    $: isUndetected = $ledgerDeviceStatus?.connectionState === LedgerConnectionState.NotDetected
+    $: isLocked = $ledgerDeviceStatus?.connectionState === LedgerConnectionState.Locked
+    $: isAppOpen = $ledgerDeviceStatus?.connectionState === LedgerConnectionState.Connected
+
+    $: animation = getAnimation(isUndetected, isLocked, isAppOpen)
+
+    function getAnimation(isUndetected: boolean, isLocked: boolean, isAppOpen: boolean): string {
+        if (isUndetected) {
+            return 'ledger-disconnected-desktop'
+        } else if (isLocked) {
+            return 'ledger-disconnected-desktop'
+        } else if (!isAppOpen) {
+            return 'ledger-app-closed-desktop'
+        } else {
+            return 'ledger-connected-desktop'
+        }
+    }
 
     function onCancelClick(): void {
         if (isFunction(onClose)) {
@@ -47,11 +57,17 @@
         {localize('popups.ledgerNotConnected.title')}
     </Text>
     <LedgerAnimation {animation} />
-    <TextHint
-        info
-        text={localize('popups.ledgerNotConnected.connect', {
-            values: { protocol: formatProtocolName(networkProtocol) },
-        })}
-    />
+    {#if isUndetected}
+        <TextHint danger text={localize('popups.ledgerNotConnected.notDetected')} />
+    {:else if isLocked}
+        <TextHint warning text={localize('popups.ledgerNotConnected.locked')} />
+    {:else if !isAppOpen}
+        <TextHint
+            info
+            text={localize('popups.ledgerNotConnected.appNotOpen', {
+                values: { protocol: formatProtocolName(networkProtocol) },
+            })}
+        />
+    {/if}
     <Button secondary classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
 </connect-ledger-popup>

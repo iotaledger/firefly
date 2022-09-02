@@ -731,7 +731,9 @@
         },
         "ledgerNotConnected": {
             "title": "Connect your Ledger",
-            "connect": "Open the {protocol} app on your Ledger device to continue."
+            "notDetected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue."
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
