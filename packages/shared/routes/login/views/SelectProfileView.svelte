@@ -61,8 +61,7 @@
                     isDeveloper={profile.isDeveloperProfile}
                     networkType={profile?.networkType ?? NetworkType.Devnet}
                     networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
-                    isLedgerProfile={profile?.type === ProfileType.Ledger ||
-                        profile?.type === ProfileType.LedgerSimulator}
+                    isLedgerProfile={profile?.type === ProfileType.Ledger}
                     classes="cursor-pointer"
                 />
             </div>

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
-    import { Animation, Button, Icon, Link, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
     import {
@@ -12,8 +12,10 @@
         displayNotificationForLedgerProfile,
     } from '@core/ledger'
     import { openPopup } from '@lib/popup'
+    import { initialiseFirstShimmerClaimingAccount, onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 
     let polling = false
+    let isBusy = false
 
     $: isConnected = $ledgerDeviceStatus.connectionState !== LedgerConnectionState.NotDetected
     $: isAppOpen = $ledgerDeviceStatus.connectionState === LedgerConnectionState.Connected
@@ -27,10 +29,17 @@
         displayNotificationForLedgerProfile('error', true)
     }
 
-    function _onConnected(): void {
+    async function _onConnected(): Promise<void> {
         if ($ledgerDeviceStatus.connectionState !== LedgerConnectionState.Connected) {
             _onCancel()
         } else {
+            isBusy = true
+            const canInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.setupType === ProfileSetupType.Claimed
+            const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
+            if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
+                await initialiseFirstShimmerClaimingAccount()
+            }
+            isBusy = false
             $ledgerSetupRouter.next()
         }
     }
@@ -42,7 +51,7 @@
     }
 
     function onContinueClick(): void {
-        getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
+        void getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
     }
 
     function onBackClick(): void {
@@ -82,8 +91,16 @@
         <Link icon="info" onClick={handleGuidePopup} classes="mb-10 justify-center">
             {localize('popups.ledgerConnectionGuide.title')}
         </Link>
-        <Button classes="w-full" disabled={polling && (!isConnected || !isAppOpen)} onClick={onContinueClick}>
-            {localize('actions.continue')}
+        <Button
+            classes="w-full flex flex-row justify-center items-center"
+            disabled={polling && (!isConnected || !isAppOpen)}
+            onClick={onContinueClick}
+        >
+            {#if isBusy}
+                <Spinner busy={isBusy} message={`${localize('actions.initializing')}...`} />
+            {:else}
+                {localize('actions.continue')}
+            {/if}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">

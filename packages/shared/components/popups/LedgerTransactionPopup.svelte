@@ -8,6 +8,7 @@
         ledgerSendConfirmationProps,
         ledgerMintNativeTokenConfirmationProps,
     } from '@core/ledger'
+    import { isActiveLedgerProfile } from '@core/profile'
     import { formatHexString } from '@core/utils'
     import { openPopup } from '@lib/popup'
 
@@ -19,19 +20,21 @@
     // const hasMintNativeTokenConfirmationProps = false
 
     onDestroy(() => {
-        if ($ledgerSendConfirmationProps) {
-            openPopup({
-                type: 'sendConfirmation',
-                props: $ledgerSendConfirmationProps,
-                overflow: true,
-            })
-            resetLedgerSendConfirmationProps()
-        } else if ($ledgerMintNativeTokenConfirmationProps) {
-            openPopup({
-                type: 'mintNativeTokenForm',
-                props: $ledgerMintNativeTokenConfirmationProps,
-            })
-            resetLedgerMintNativeTokenConfirmationProps()
+        if ($isActiveLedgerProfile) {
+            if ($ledgerSendConfirmationProps) {
+                openPopup({
+                    type: 'sendConfirmation',
+                    props: $ledgerSendConfirmationProps,
+                    overflow: true,
+                })
+                resetLedgerSendConfirmationProps()
+            } else if ($ledgerMintNativeTokenConfirmationProps) {
+                openPopup({
+                    type: 'mintNativeTokenForm',
+                    props: $ledgerMintNativeTokenConfirmationProps,
+                })
+                resetLedgerMintNativeTokenConfirmationProps()
+            }
         }
     })
 </script>

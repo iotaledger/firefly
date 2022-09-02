@@ -5,7 +5,7 @@
     import {
         activeProfile,
         hasStrongholdLocked,
-        isLedgerProfile,
+        isActiveLedgerProfile,
         logout,
         reflectLockedStronghold,
         saveActiveProfile,
@@ -91,7 +91,7 @@
         if (developerProfileNotificationId) {
             removeDisplayNotification(developerProfileNotificationId)
         }
-        if ($isLedgerProfile) {
+        if ($isActiveLedgerProfile) {
             stopPollingLedgerStatus()
         }
     })
@@ -107,7 +107,7 @@
      * Reactive statement to resume ledger poll if it was interrupted
      * when the one which interrupted has finished
      */
-    $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
+    $: if ($activeProfile && $isActiveLedgerProfile && !$isPollingLedgerDeviceStatus) {
         pollLedgerDeviceStatus()
     }
 

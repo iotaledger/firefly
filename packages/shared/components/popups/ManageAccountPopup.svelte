@@ -2,7 +2,7 @@
     import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
     import { promptUserToConnectLedger } from '@core/ledger'
     import { closePopup, openPopup } from '@lib/popup'
@@ -33,7 +33,7 @@
 
             isBusy = true
 
-            if ($isLedgerProfile) {
+            if ($isActiveLedgerProfile) {
                 promptUserToConnectLedger(_save, _cancel)
             } else if ($isSoftwareProfile && $isStrongholdLocked) {
                 openPopup({ type: 'password', props: { onSuccess: _save } })

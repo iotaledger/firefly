@@ -6,7 +6,7 @@
     import { profileBackupRouter } from '@core/router'
     import { onboardingProfile, resetOnboardingProfileWithAlreadyStoredMnemonic } from '@contexts/onboarding'
 
-    export let busy: boolean
+    export let busy = false
 
     function handleContinueClick(): void {
         $profileBackupRouter.next()

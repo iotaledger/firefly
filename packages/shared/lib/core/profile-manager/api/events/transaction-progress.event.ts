@@ -2,21 +2,24 @@ import { get } from 'svelte/store'
 
 import { selectedAccountId } from '@core/account'
 import { ledgerDeviceStatus, openLedgerConfirmationPopup } from '@core/ledger'
-import { isLedgerProfile } from '@core/profile'
+import { isActiveLedgerProfile } from '@core/profile'
 import {
     MissingTransactionProgressEventPayloadError,
     isPreparedTransaction,
     isPreparedTransactionEssenceHash,
 } from '@core/profile-manager'
+import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 import { closePopup, openPopup } from '@lib/popup'
 
 import { TransactionProgressEventPayload } from '../types'
 
 export function handleTransactionProgressEvent(accountId: string, payload: TransactionProgressEventPayload): void {
-    if (get(isLedgerProfile)) {
+    if (get(isActiveLedgerProfile)) {
         if (get(selectedAccountId) === accountId) {
             handleTransactionProgressInternal(payload)
         }
+    } else if (get(isOnboardingLedgerProfile)) {
+        handleTransactionProgressInternal(payload, true)
     } else {
         console.warn('Transaction progress handler unimplemented: ', payload)
     }

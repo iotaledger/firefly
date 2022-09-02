@@ -9,7 +9,7 @@ import { clearPollNetworkInterval } from '@core/network'
 import {
     resetActiveProfile,
     activeProfile,
-    isLedgerProfile,
+    isActiveLedgerProfile,
     isSoftwareProfile,
     activeAccounts,
     lockStronghold,
@@ -26,7 +26,7 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
     return new Promise((resolve) => {
         if (_lockStronghold && get(isSoftwareProfile)) {
             lockStronghold()
-        } else if (get(isLedgerProfile)) {
+        } else if (get(isActiveLedgerProfile)) {
             stopPollingLedgerStatus()
         }
 
