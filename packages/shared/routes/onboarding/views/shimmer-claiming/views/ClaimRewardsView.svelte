@@ -40,7 +40,7 @@
         displayNotificationForLedgerProfile('error', true)
     }
 
-    async function onUseBalanceFinderClickInternal(): Promise<void> {
+    async function searchRewards(): Promise<void> {
         try {
             isSearchingForRewards = true
             hasSearchedForRewardsBefore = true
@@ -54,13 +54,13 @@
 
     async function onUseBalanceFinderClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            await getLedgerDeviceStatus(onUseBalanceFinderClickInternal, _onLedgerNotConnected, _onLedgerNotConnected)
+            await getLedgerDeviceStatus(searchRewards, _onLedgerNotConnected, _onLedgerNotConnected)
         } else {
-            await onUseBalanceFinderClickInternal()
+            await searchRewards()
         }
     }
 
-    async function onClaimRewardsClickInternal(): Promise<void> {
+    async function claimRewards(): Promise<void> {
         try {
             isClaimingRewards = true
             hasTriedClaimingRewards = true
@@ -77,9 +77,9 @@
 
     async function onClaimRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            await getLedgerDeviceStatus(onClaimRewardsClickInternal, _onLedgerNotConnected, _onLedgerNotConnected)
+            await getLedgerDeviceStatus(claimRewards, _onLedgerNotConnected, _onLedgerNotConnected)
         } else {
-            await onClaimRewardsClickInternal()
+            await claimRewards()
         }
     }
 
