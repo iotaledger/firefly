@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Radio, Text } from 'shared/components'
     import { onMount } from 'svelte'
+    import { mobile } from '@lib/app'
 
     export let icon
     export let value
@@ -25,7 +26,7 @@
 >
     <div class="flex flex-row items-center">
         <Icon {icon} classes="text-blue-500" />
-        <Text smaller classes="ml-3">
+        <Text smaller={!$mobile} classes="ml-3">
             <slot />
         </Text>
     </div>
