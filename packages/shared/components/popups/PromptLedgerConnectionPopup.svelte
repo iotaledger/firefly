@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, Icon, Text } from 'shared/components'
-    import { stopPollingLedgerStatus, LedgerAppName } from '@core/ledger'
+    import { stopPollingLedgerNanoStatus, LedgerAppName } from '@core/ledger'
     import { closePopup } from 'shared/lib/popup'
     import { onDestroy, onMount } from 'svelte'
     import { Locale } from '@core/i18n'
@@ -19,12 +19,12 @@
     }
 
     onMount(() => {
-        stopPollingLedgerStatus()
+        stopPollingLedgerNanoStatus()
         poll()
     })
 
     onDestroy(() => {
-        stopPollingLedgerStatus()
+        stopPollingLedgerNanoStatus()
     })
 </script>
 
@@ -34,7 +34,7 @@
     </div>
     <Text type="p" classes="mb-6">
         {locale('popups.ledgerNotConnected.connect', {
-            values: { protocol: LedgerAppName.SHIMMER },
+            values: { protocol: LedgerAppName.Shimmer },
         })}
     </Text>
     <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>

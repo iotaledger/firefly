@@ -6,7 +6,7 @@ import { LEDGER_STATUS_POLL_INTERVAL } from '../constants'
 import { openLedgerNotConnectedPopup } from '../utils'
 
 import { getLedgerDeviceStatus } from './getLedgerDeviceStatus'
-import { pollLedgerDeviceStatus } from './pollLedgerDeviceStatus'
+import { pollLedgerNanoStatus } from './pollLedgerNanoStatus'
 
 export function promptUserToConnectLedger(
     onConnected: () => void | Promise<void> = () => {},
@@ -24,7 +24,7 @@ export function promptUserToConnectLedger(
         if (!get(popupState).active || overridePopup) {
             openLedgerNotConnectedPopup(
                 onCancel,
-                () => pollLedgerDeviceStatus(LEDGER_STATUS_POLL_INTERVAL, _onConnected, _onDisconnected, _onCancel),
+                () => pollLedgerNanoStatus(LEDGER_STATUS_POLL_INTERVAL, _onConnected, _onDisconnected, _onCancel),
                 overridePopup
             )
         }

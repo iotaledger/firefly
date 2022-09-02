@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
     import { Button, Checkbox, Icon, Text, Tooltip } from 'shared/components'
-    import { ledgerDeviceStatus, LedgerConnectionState } from '@core/ledger'
+    import { ledgerConnectionState, LedgerConnectionState } from '@core/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
         canAccountReachMinimumAirdrop,
@@ -92,7 +92,7 @@
         if ($isSoftwareProfile) {
             void checkStronghold(openStakingManager)
         } else {
-            if ($ledgerDeviceStatus.connectionState !== LedgerConnectionState.Connected) {
+            if ($ledgerConnectionState !== LedgerConnectionState.CorrectAppOpen) {
                 showAppNotification({
                     type: 'warning',
                     message: localize('error.ledger.appNotOpen'),

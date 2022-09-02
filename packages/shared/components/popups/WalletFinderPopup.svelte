@@ -4,7 +4,7 @@
     import { FontWeight } from '../Text.svelte'
     import { closePopup, openPopup } from '@lib/popup'
     import { showAppNotification } from '@lib/notifications'
-    import { displayNotificationForLedgerProfile, ledgerDeviceStatus } from '@core/ledger'
+    import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
@@ -65,11 +65,9 @@
                 error = ''
                 isBusy = true
 
-                if ($isActiveLedgerProfile && !$ledgerDeviceStatus.connected) {
+                if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
                     isBusy = false
-
                     displayNotificationForLedgerProfile('warning')
-
                     return
                 }
 

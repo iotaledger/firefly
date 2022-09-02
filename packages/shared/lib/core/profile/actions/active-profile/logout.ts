@@ -1,5 +1,5 @@
 import { resetRouters } from '@core/router'
-import { stopPollingLedgerStatus } from '@core/ledger'
+import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
 import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
@@ -9,10 +9,10 @@ import { clearPollNetworkInterval } from '@core/network'
 import {
     resetActiveProfile,
     activeProfile,
-    isActiveLedgerProfile,
     isSoftwareProfile,
     activeAccounts,
     lockStronghold,
+    isLedgerProfile,
 } from '@core/profile'
 import { resetSelectedAccount } from '@core/account'
 
@@ -20,14 +20,16 @@ import { resetSelectedAccount } from '@core/account'
  * Logout from active profile
  */
 export function logout(clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
-    const { lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
+    const { lastActiveAt, loggedIn, hasLoadedAccounts, type } = get(activeProfile)
 
     // (TODO): Figure out why we are using a promise here?
     return new Promise((resolve) => {
         if (_lockStronghold && get(isSoftwareProfile)) {
             lockStronghold()
-        } else if (get(isActiveLedgerProfile)) {
-            stopPollingLedgerStatus()
+        }
+
+        if (isLedgerProfile(type) && !isPollingLedgerDeviceStatus) {
+            stopPollingLedgerNanoStatus()
         }
 
         clearPollNetworkInterval()
