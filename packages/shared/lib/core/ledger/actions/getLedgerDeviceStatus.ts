@@ -23,7 +23,7 @@ export async function getLedgerDeviceStatus(
 
         if (get(ledgerDeviceStatus).connected) {
             const isLedgerNotConnectedPopupOpened =
-                get(popupState).active && get(popupState).type === 'ledgerNotConnected'
+                get(popupState).active && get(popupState).type === 'promptLedgerConnection'
 
             if (isLedgerNotConnectedPopupOpened) {
                 closePopup()

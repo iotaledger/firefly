@@ -21,7 +21,7 @@ export function openLedgerConfirmationPopup(
 
     if (props) {
         openPopup({
-            type: 'ledgerTransaction',
+            type: 'verifyLedgerTransaction',
             hideClose: true,
             preventClose: true,
             props,
