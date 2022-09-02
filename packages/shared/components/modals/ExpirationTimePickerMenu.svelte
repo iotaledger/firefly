@@ -1,5 +1,11 @@
 <script lang="typescript" context="module">
-    export type ExpirationTimeSelection = 'none' | '1hour' | '1day' | '1week' | 'custom'
+    export enum ExpirationTime {
+        None,
+        OneHour,
+        OneDay,
+        OneWeek,
+        Custom,
+    }
 </script>
 
 <script lang="typescript">
@@ -8,7 +14,7 @@
     import { fade } from 'svelte/transition'
 
     export let value: Date
-    export let selected: ExpirationTimeSelection = 'none'
+    export let selected = ExpirationTime.None
     export let anchor: HTMLElement
 
     export function tryOpen(): void {
@@ -21,7 +27,7 @@
 
     const DATE_NOW = Date.now()
 
-    let previouslySelected: ExpirationTimeSelection = selected
+    let previouslySelected: ExpirationTime = selected
     let customDate: Date
     let canShowDateTimePicker = false
     let modal: Modal
@@ -37,27 +43,26 @@
 
     $: {
         switch (selected) {
-            case 'none':
-                value = null
-                break
-            case '1hour':
+            case ExpirationTime.OneHour:
                 value = dateIn1Hour
                 break
-            case '1day':
+            case ExpirationTime.OneDay:
                 value = dateIn1Day
                 break
-            case '1week':
+            case ExpirationTime.OneWeek:
                 value = dateIn1Week
                 break
-            case 'custom':
-                break
-            default:
+            case ExpirationTime.None:
                 value = null
+                break
+            case ExpirationTime.Custom:
+            default:
+                break
         }
     }
 
-    function handleChooseExpirationTimeClick(_selected: ExpirationTimeSelection): void {
-        if (_selected === 'custom') {
+    function handleChooseExpirationTimeClick(_selected: ExpirationTime): void {
+        if (_selected === ExpirationTime.Custom) {
             canShowDateTimePicker = !canShowDateTimePicker
         } else {
             customDate = undefined
@@ -85,10 +90,10 @@
         <MenuItem
             icon="calendar"
             title={localize('menus.expirationTimePicker.none')}
-            onClick={() => handleChooseExpirationTimeClick('none')}
+            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.None)}
             first
             last
-            selected={selected === 'none'}
+            selected={selected === ExpirationTime.None}
         />
         <HR />
         <MenuItem
@@ -98,9 +103,9 @@
                 dateStyle: 'long',
                 timeStyle: 'medium',
             })}
-            onClick={() => handleChooseExpirationTimeClick('1hour')}
+            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneHour)}
             first
-            selected={selected === '1hour'}
+            selected={selected === ExpirationTime.OneHour}
         />
         <MenuItem
             icon="calendar"
@@ -109,8 +114,8 @@
                 dateStyle: 'long',
                 timeStyle: 'medium',
             })}
-            onClick={() => handleChooseExpirationTimeClick('1day')}
-            selected={selected === '1day'}
+            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneDay)}
+            selected={selected === ExpirationTime.OneDay}
         />
         <MenuItem
             icon="calendar"
@@ -119,9 +124,9 @@
                 dateStyle: 'long',
                 timeStyle: 'medium',
             })}
-            onClick={() => handleChooseExpirationTimeClick('1week')}
+            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneWeek)}
             last
-            selected={selected === '1week'}
+            selected={selected === ExpirationTime.OneWeek}
         />
         <HR />
         <MenuItem
@@ -130,10 +135,10 @@
             subtitle={customDate
                 ? formatDate(customDate, { dateStyle: 'long', timeStyle: 'medium' })
                 : localize('menus.expirationTimePicker.customDate.subtitle')}
-            onClick={() => handleChooseExpirationTimeClick('custom')}
+            onClick={() => handleChooseExpirationTimeClick(ExpirationTime.Custom)}
             first
             last
-            selected={selected === 'custom'}
+            selected={selected === ExpirationTime.Custom}
         />
     </expiration-time-picker-modal>
 </Modal>

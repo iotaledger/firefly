@@ -1,6 +1,15 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Spinner, Toggle } from 'shared/components'
+    import {
+        Button,
+        ExpirationTime,
+        ExpirationTimePicker,
+        KeyValueBox,
+        Text,
+        Error,
+        Spinner,
+        Toggle,
+    } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
@@ -75,6 +84,18 @@
         type: ActivityType.Transaction,
     }
 
+    $: initialExpirationDate = getInitialExpirationDate()
+
+    function getInitialExpirationDate(): ExpirationTime {
+        if (expirationDate) {
+            return ExpirationTime.Custom
+        } else if (storageDeposit) {
+            return ExpirationTime.OneDay
+        } else {
+            return ExpirationTime.None
+        }
+    }
+
     async function _prepareOutput(): Promise<void> {
         outputOptions = getOutputOptions(
             expirationDate,
@@ -95,6 +116,7 @@
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
         updateNewTransactionDetails({ expirationDate })
+        // TODO: We need to replace ledgerSendConfirmationProps with newTransactionDetails
         if ($activeProfile.type === ProfileType.Ledger) {
             setLedgerSendConfirmationProps({
                 asset,
@@ -174,7 +196,7 @@
                 <ExpirationTimePicker
                     slot="value"
                     bind:value={expirationDate}
-                    initialSelected={storageDeposit ? '1day' : 'none'}
+                    initialSelected={initialExpirationDate}
                     disabled={disableChangeExpiration}
                 />
             </KeyValueBox>

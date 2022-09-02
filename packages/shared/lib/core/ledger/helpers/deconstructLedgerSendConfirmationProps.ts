@@ -1,12 +1,10 @@
 import { get } from 'svelte/store'
 
 import { PopupProps } from '@auxiliary/popup'
-import { IAccountSubject, IAddressSubject } from '@core/wallet'
-
-import { ledgerSendConfirmationProps } from '../stores'
+import { IAccountSubject, IAddressSubject, newTransactionDetails } from '@core/wallet'
 
 export function deconstructLedgerSendConfirmationProps(): PopupProps {
-    const sendConfirmationProps = get(ledgerSendConfirmationProps)
+    const sendConfirmationProps = get(newTransactionDetails)
     const isAddressRecipientType = sendConfirmationProps?.recipient?.type === 'address'
 
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
