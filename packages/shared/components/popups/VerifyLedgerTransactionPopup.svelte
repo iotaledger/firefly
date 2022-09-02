@@ -3,6 +3,7 @@
     import { Animation, KeyValueBox, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import {
+        formatAddressForLedger,
         resetLedgerSendConfirmationProps,
         resetLedgerMintNativeTokenConfirmationProps,
         ledgerSendConfirmationProps,
@@ -53,10 +54,10 @@
 <div class="flex flex-col space-y-2">
     {#if hasSendConfirmationProps}
         {#if hash}
-            <KeyValueBox keyText={localize('general.hash')} valueText={formatHexString(hash)} />
+            <KeyValueBox vertical keyText={localize('general.hash')} valueText={formatHexString(hash)} />
         {:else}
-            <KeyValueBox keyText={localize('general.sendTo')} valueText={toAddress} />
-            <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
+            <KeyValueBox vertical keyText={localize('general.sendTo')} valueText={formatAddressForLedger(toAddress)} />
+            <KeyValueBox vertical keyText={localize('general.amount')} valueText={toAmount} />
         {/if}
     {/if}
 </div>

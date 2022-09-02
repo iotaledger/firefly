@@ -1,17 +1,19 @@
 <script lang="typescript">
     import { Text, Tooltip } from 'shared/components'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import CopyableBox from './CopyableBox.svelte'
 
-    export let keyText = ''
-    export let valueText = ''
-    export let textColor = 'gray-600'
-    export let darkTextColor = 'gray-500'
-    export let backgroundColor = 'gray-50'
-    export let darkBackgroundColor = 'gray-850'
-    export let padding = 'px-4 py-3.5'
-    export let classes = ''
-    export let copyValue = ''
-    export let isCopyable = false
+    export let keyText: string = ''
+    export let valueText: string = ''
+    export let textColor: string = 'gray-600'
+    export let darkTextColor: string = 'gray-500'
+    export let backgroundColor: string = 'gray-50'
+    export let darkBackgroundColor: string = 'gray-850'
+    export let padding: string = 'px-4 py-3.5'
+    export let classes: string = ''
+    export let copyValue: string = ''
+    export let isCopyable: boolean = false
+    export let vertical: boolean = false
 
     let showTooltip = false
     let tooltipAnchor: HTMLElement
@@ -34,10 +36,17 @@
         row
         {backgroundColor}
         {darkBackgroundColor}
-        classes="w-full justify-between {padding} {classes}"
+        classes="w-full {padding} {classes} flex flex-{vertical ? 'col' : 'row'} justify-between"
     >
         {#if keyText}
-            <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor} classes="mr-4">
+            <Text
+                fontSize="14"
+                lineHeight="5"
+                color={textColor}
+                darkColor={darkTextColor}
+                fontWeight={FontWeight.semibold}
+                classes="mr-4"
+            >
                 {keyText}
             </Text>
         {:else}
