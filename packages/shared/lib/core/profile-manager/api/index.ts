@@ -1,3 +1,6 @@
+export * from './events'
+export * from './types'
+
 export * from './api'
 export * from './backup'
 export * from './changeStrongholdPassword'
@@ -7,6 +10,7 @@ export * from './deleteAccountAndDatabase'
 export * from './generateMnemonic'
 export * from './getAccount'
 export * from './getAccounts'
+export * from './getLedgerStatus'
 export * from './getNodeInfo'
 export * from './isStrongholdUnlocked'
 export * from './recoverAccounts'
@@ -18,7 +22,3 @@ export * from './setStrongholdPasswordClearInterval'
 export * from './startBackgroundSync'
 export * from './storeMnemonic'
 export * from './verifyMnemonic'
-
-export * from './getLedgerStatus'
-
-export * from './events/subscribe'

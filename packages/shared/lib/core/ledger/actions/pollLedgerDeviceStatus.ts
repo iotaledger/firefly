@@ -1,4 +1,5 @@
 import { get } from 'svelte/store'
+
 import { LEDGER_STATUS_POLL_INTERVAL } from '../constants'
 import { isPollingLedgerDeviceStatus } from '../stores'
 
@@ -13,9 +14,9 @@ export function pollLedgerDeviceStatus(
     _onCancel: () => void = () => {}
 ): void {
     if (!get(isPollingLedgerDeviceStatus)) {
-        getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+        void getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
         intervalTimer = setInterval(() => {
-            getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+            void getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
         }, pollInterval)
 
         isPollingLedgerDeviceStatus.set(true)

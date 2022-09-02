@@ -1,8 +1,14 @@
-import { get, writable } from 'svelte/store'
+import { derived, get, Readable, writable } from 'svelte/store'
+
+import { isLedgerProfile } from '@core/profile'
 
 import { IOnboardingProfile, IShimmerClaimingAccount } from '../interfaces'
 
 export const onboardingProfile = writable<Partial<IOnboardingProfile>>(null)
+
+export const isOnboardingLedgerProfile: Readable<boolean> = derived(onboardingProfile, ($onboardingProfile) =>
+    isLedgerProfile($onboardingProfile?.type)
+)
 
 export function updateOnboardingProfile(payload: Partial<IOnboardingProfile>): void {
     return onboardingProfile.update((state) => ({ ...state, ...payload }))

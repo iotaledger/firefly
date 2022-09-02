@@ -27,7 +27,7 @@ export function getTransactionActivityData(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): ITransactionActivityData {
-    const { outputs, transactionId, isIncoming, detailedTransactionInputs } = processedTransaction
+    const { outputs, transactionId, isIncoming, detailedTransactionInputs, claimingData } = processedTransaction
 
     const { output, outputIndex, isSelfTransaction } = getMainTransactionOutputFromTransaction(
         outputs,
@@ -48,10 +48,10 @@ export function getTransactionActivityData(
 
     const isAsync = isOutputAsync(output)
     const asyncStatus = isAsync ? ActivityAsyncStatus.Unclaimed : null
-    const isClaimed = false
+    const isClaimed = !!claimingData
     const isClaiming = false
-    const claimingTransactionId = undefined
-    const claimedDate = undefined
+    const claimingTransactionId = claimingData?.claimingTransactionId
+    const claimedDate = claimingData?.claimedDate
 
     const isShimmerClaiming = isShimmerClaimingTransaction(transactionId, get(activeProfileId))
 

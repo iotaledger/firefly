@@ -5,7 +5,7 @@ import { closePopup, popupState } from '@lib/popup'
 
 import { LedgerStatus } from '../interfaces'
 import { ledgerDeviceStatus } from '../stores'
-import { determineLedgerDeviceState } from '../utils/determineLedgerDeviceState'
+import { determineLedgerDeviceState } from '../utils'
 
 export async function getLedgerDeviceStatus(
     onConnected: () => void = () => {},
@@ -23,7 +23,7 @@ export async function getLedgerDeviceStatus(
 
         if (get(ledgerDeviceStatus).connected) {
             const isLedgerNotConnectedPopupOpened =
-                get(popupState).active && get(popupState).type === 'ledgerNotConnected'
+                get(popupState).active && get(popupState).type === 'promptLedgerConnection'
 
             if (isLedgerNotConnectedPopupOpened) {
                 closePopup()

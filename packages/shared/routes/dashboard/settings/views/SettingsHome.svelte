@@ -2,7 +2,7 @@
     import { SettingsMenu, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import {
         AdvancedSettingsRoute,
         AdvancedSettingsRouteNoProfile,
@@ -26,7 +26,7 @@
         delete securitySettings.ExportStronghold
         delete securitySettings.ChangePassword
     }
-    $: if (!$isLedgerProfile) {
+    $: if (!$isActiveLedgerProfile) {
         delete advancedSettings.MigrateLedgerIndex
     }
 

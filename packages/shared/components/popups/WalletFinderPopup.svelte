@@ -13,7 +13,7 @@
         activeProfile,
         INITIAL_ACCOUNT_GAP_LIMIT,
         INITIAL_ADDRESS_GAP_LIMIT,
-        isLedgerProfile,
+        isActiveLedgerProfile,
         isSoftwareProfile,
         loadAccounts,
         visibleActiveAccounts,
@@ -65,7 +65,7 @@
                 error = ''
                 isBusy = true
 
-                if ($isLedgerProfile && !$ledgerDeviceStatus.connected) {
+                if ($isActiveLedgerProfile && !$ledgerDeviceStatus.connected) {
                     isBusy = false
 
                     displayNotificationForLedgerProfile('warning')
@@ -85,7 +85,7 @@
             } catch (err) {
                 error = localize(err.error)
 
-                if ($isLedgerProfile) {
+                if ($isActiveLedgerProfile) {
                     displayNotificationForLedgerProfile('error', true, true, err)
                 } else {
                     showAppNotification({

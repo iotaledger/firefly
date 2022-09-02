@@ -1,7 +1,6 @@
-import { getStorageDirectoryOfProfile, IPersistedProfile, ProfileType } from '@core/profile'
-import { ProfileManagerOptions } from '@core/profile-manager'
+import { getStorageDirectoryOfProfile, IPersistedProfile } from '@core/profile'
+import { getSecretManagerFromProfileType, ProfileManagerOptions } from '@core/profile-manager'
 import { COIN_TYPE, getDefaultClientOptions } from '@core/network'
-import { USE_LEDGER_SIMULATOR } from '@core/ledger'
 
 export async function buildProfileManagerOptionsFromProfileData(
     profileData: Partial<IPersistedProfile>
@@ -13,15 +12,7 @@ export async function buildProfileManagerOptionsFromProfileData(
     const clientOptions = useDefaultClientOptions
         ? getDefaultClientOptions(networkProtocol, profileData?.networkType)
         : profileData?.clientOptions
-
-    const secretManager =
-        type === ProfileType.Ledger
-            ? {
-                  LedgerNano: USE_LEDGER_SIMULATOR,
-              }
-            : {
-                  Stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
-              }
+    const secretManager = getSecretManagerFromProfileType(type, storagePath)
 
     return {
         storagePath,

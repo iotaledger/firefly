@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { isSoftwareProfile } from '@core/profile'
+    import { isSoftwareProfile, activeProfile, ProfileType, isActiveLedgerProfile } from '@core/profile'
+    import { promptUserToConnectLedger, updateLedgerMintNativeTokenConfirmationProps } from '@core/ledger'
     import { mintNativeToken } from '@core/wallet'
     import { closePopup, updatePopupProps } from '@lib/popup'
     import { checkStronghold } from '@lib/stronghold'
@@ -118,6 +119,20 @@
                         logoUrl,
                     })
                     await checkStronghold(mintAction, true)
+                } else if ($isActiveLedgerProfile) {
+                    if ($activeProfile.type === ProfileType.Ledger) {
+                        updateLedgerMintNativeTokenConfirmationProps({
+                            name,
+                            totalSupply,
+                            circulatingSupply,
+                            decimals,
+                            symbol,
+                            description,
+                            url,
+                            logoUrl,
+                        })
+                    }
+                    void promptUserToConnectLedger(mintAction)
                 }
             } catch (reason) {
                 if (!error) {

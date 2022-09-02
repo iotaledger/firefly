@@ -1,6 +1,6 @@
 import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
-import { activeProfile, isLedgerProfile } from '@core/profile'
+import { activeProfile, isActiveLedgerProfile } from '@core/profile'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { get } from 'svelte/store'
 import { showAppNotification } from './notifications'
@@ -10,7 +10,7 @@ export async function checkStronghold(
     callback: () => Promise<unknown> = async () => {},
     reopenPopup?: boolean
 ): Promise<unknown> {
-    if (get(isLedgerProfile)) {
+    if (get(isActiveLedgerProfile)) {
         showAppNotification({
             type: 'error',
             message: localize('error.ledger.noStronghold'),

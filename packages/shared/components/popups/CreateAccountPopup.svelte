@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { promptUserToConnectLedger } from '@core/ledger'
     import { closePopup, updatePopupProps } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
     import { checkStronghold } from '@lib/stronghold'
     import { onMount } from 'svelte'
@@ -32,7 +32,7 @@
             error = null
             await validateAccountName(trimmedAccountAlias)
             updatePopupProps({ accountAlias, color, error, isBusy })
-            if ($isLedgerProfile) {
+            if ($isActiveLedgerProfile) {
                 void promptUserToConnectLedger(_create, _cancel)
             } else if ($isSoftwareProfile && $isStrongholdLocked) {
                 await checkStronghold(_create, true)
@@ -55,8 +55,12 @@
 
     async function _create(): Promise<void> {
         if (trimmedAccountAlias && color) {
-            await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
-            closePopup()
+            try {
+                await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
+                closePopup()
+            } catch (err) {
+                isBusy = false
+            }
         }
     }
 
