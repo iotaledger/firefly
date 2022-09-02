@@ -35,13 +35,6 @@ const prodConfig = () => ({
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/@iota/wallet/target/*'],
-    extraFiles: [
-        {
-            from: 'nsis/',
-            to: '.',
-            filter: ['**/*'],
-        },
-    ],
     appId: 'org.iota.firefly',
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
