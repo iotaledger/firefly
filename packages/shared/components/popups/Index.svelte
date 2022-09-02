@@ -16,12 +16,8 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
-    import LedgerAddress from './LedgerAddress.svelte'
     import LedgerAppGuide from './LedgerAppGuide.svelte'
-    import LedgerConfirmation from './LedgerConfirmation.svelte'
     import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
-    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
-    import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
     import LedgerNotConnected from './LedgerNotConnected.svelte'
     import LedgerTransactionPopup from './LedgerTransactionPopup.svelte'
     import MissingBundle from './MissingBundle.svelte'
@@ -105,13 +101,9 @@
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
         ledgerNotConnected: LedgerNotConnected,
-        ledgerConfirmation: LedgerConfirmation,
         ledgerAppGuide: LedgerAppGuide,
         ledgerConnectionGuide: LedgerConnectionGuide,
         ledgerTransaction: LedgerTransactionPopup,
-        ledgerLegacyTransaction: LedgerLegacyTransaction,
-        ledgerAddress: LedgerAddress,
-        ledgerMigrateIndex: LedgerMigrateIndex,
         nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
         removeNode: RemoveNode,
