@@ -7,7 +7,7 @@
     } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { activeProfile, login, resetActiveProfile } from '@core/profile'
+    import { activeProfile, login, ProfileType, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
     import { Platform } from '@lib/platform'
@@ -133,6 +133,7 @@
                 name={$activeProfile?.name}
                 networkType={$activeProfile?.networkType ?? NetworkType.Devnet}
                 networkProtocol={$activeProfile?.networkProtocol ?? NetworkProtocol.Shimmer}
+                isLedgerProfile={$activeProfile?.type === ProfileType.Ledger}
                 bgColor="blue"
             />
             <div class="flex mt-18 w-full items-center">
