@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Checkbox, Icon, Text } from 'shared/components'
     import { onMount } from 'svelte'
+    import { mobile } from '@lib/app'
 
     export let icon
     export let value
@@ -24,7 +25,7 @@
     style="height: 72px"
 >
     <Checkbox bind:checked={value} {round} classes="ml-1 mr-1 pointer-events-none" tabindex={-1} />
-    <Text smaller classes="mr-3 flex-grow">
+    <Text smaller={!$mobile} classes="mr-3 flex-grow">
         <slot />
     </Text>
     <Icon {icon} classes="text-blue-500" />
