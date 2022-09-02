@@ -2,12 +2,16 @@
     import { Text, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerDeviceStatus } from '@core/ledger'
-    import { closePopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@lib/popup'
 
     const STEPS = [1, 2, 3, 4]
 
     $: if ($ledgerDeviceStatus.blindSigningEnabled) {
         closePopup(true)
+        openPopup({
+            type: 'sendConfirmation',
+            overflow: true,
+        })
     }
 </script>
 
