@@ -43,7 +43,7 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-8'}>{locale('views.appearance.body')}</Text>
-        <Text type="p" secondary classes="mb-2" smaller>{locale('general.appearance')}</Text>
+        <Text type="p" secondary classes="mb-2" smaller={!$mobile}>{locale('general.appearance')}</Text>
         <ButtonRadio icon="theme-light" value={'light'} bind:group={appTheme}>
             {locale('general.lightTheme')}
         </ButtonRadio>
