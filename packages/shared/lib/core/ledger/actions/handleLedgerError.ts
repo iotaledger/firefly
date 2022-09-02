@@ -6,38 +6,28 @@ import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
 
 export function handleLedgerError(error: string): void {
-    let ledgerError: LedgerError
-    const _includes = (_: LedgerError) => {
-        if (error?.includes(_)) {
-            ledgerError = _
+    let message: string
+    const hasSetErrorMessage = (ledgerError: LedgerError): boolean => {
+        if (error?.includes(ledgerError)) {
+            message = localize(LEDGER_ERROR_LOCALES[ledgerError])
             return true
         }
         return false
     }
 
-    let isLedgerError = true
     switch (true) {
-        case _includes(LedgerError.DeniedByUser):
-        case _includes(LedgerError.DeviceNotFound):
-        case _includes(LedgerError.Transport):
+        case hasSetErrorMessage(LedgerError.DeniedByUser):
+        case hasSetErrorMessage(LedgerError.DeviceNotFound):
+        case hasSetErrorMessage(LedgerError.Transport):
             closePopup(true)
             break
         default:
-            isLedgerError = false
-            break
+            message = error
     }
 
-    if (isLedgerError) {
-        showAppNotification({
-            type: 'error',
-            alert: true,
-            message: localize(LEDGER_ERROR_LOCALES[ledgerError]),
-        })
-    } else {
-        showAppNotification({
-            type: 'error',
-            alert: true,
-            message: error,
-        })
-    }
+    showAppNotification({
+        type: 'error',
+        alert: true,
+        message,
+    })
 }
