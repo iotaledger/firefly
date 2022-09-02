@@ -80,7 +80,7 @@
                     </Text>
                 </div>
                 <div bind:this={conversion}>
-                    <Text type="h4" smaller overrideColor classes="text-gray-500">
+                    <Text type="h4" overrideColor classes="text-gray-500">
                         {$selectedAccountStore?.balanceEquiv}
                     </Text>
                 </div>
