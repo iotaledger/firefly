@@ -97,10 +97,10 @@
     }
 </script>
 
-<Text type="h4" classes={$mobile ? 'flex w-full justify-center -mt-4 mb-6' : 'mb-6'}>
+<Text type="h4" classes={$mobile ? 'flex w-full justify-center -mt-4' : 'mb-6'}>
     {localize('popups.transaction.title')}
 </Text>
-<div class="flex w-full flex-row flex-wrap {$mobile && '-mb-4'}">
+<div class="flex w-full flex-row flex-wrap">
     {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
         <div
             class="relative flex flex-col items-center bg-red-500 dark:bg-gray-800 bg-opacity-10 rounded-2xl mt-6 mb-9 p-3"
@@ -131,14 +131,27 @@
             <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
         </div>
     {/if}
-    <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={() => handleCancelClick()}>{localize('actions.cancel')}</Button>
-        {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
-            <Button classes="w-full" onClick={handleNextClick}>{localize('actions.next')}</Button>
-        {:else}
-            <Button classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>
-        {/if}
-    </div>
+    {#if $mobile}
+        <div class="flex flex-row justify-between w-full px-3 space-x-8">
+            <Button classes="-ml-1 w-1/2" secondary onClick={() => handleCancelClick()}
+                >{localize('actions.cancel')}</Button
+            >
+            {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
+                <Button classes="-ml-1 w-1/2" onClick={handleNextClick}>{localize('actions.next')}</Button>
+            {:else}
+                <Button classes="-ml-1 w-1/2" onClick={onConfirm}>{localize('actions.confirm')}</Button>
+            {/if}
+        </div>
+    {:else}
+        <div class="flex flex-row flex-nowrap w-full space-x-4">
+            <Button classes="w-full" secondary onClick={() => handleCancelClick()}>{localize('actions.cancel')}</Button>
+            {#if mustAcknowledgeGenericParticipationWarning || mustAcknowledgeBelowMinRewardParticipationWarning}
+                <Button classes="w-full" onClick={handleNextClick}>{localize('actions.next')}</Button>
+            {:else}
+                <Button classes="w-full" onClick={onConfirm}>{localize('actions.confirm')}</Button>
+            {/if}
+        </div>
+    {/if}
 </div>
 
 <style type="text/scss">

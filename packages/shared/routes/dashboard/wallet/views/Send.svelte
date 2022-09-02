@@ -583,16 +583,16 @@
         </div>
         {#if !$isTransferring}
             <div
-                class="mt-8 flex flex-row justify-between px-2"
+                class="mt-8 flex flex-row justify-between px-2 space-x-8"
                 style="margin-bottom: {$isKeyboardOpened
                     ? $keyboardHeight
                     : 0}px; transition: margin-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
                     'ms'} var(--transition-scroll)"
             >
-                <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
+                <Button secondary classes="-ml-1 w-1/2" onClick={() => handleBackClick()}>
                     {localize('actions.cancel')}
                 </Button>
-                <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
+                <Button classes="-mr-1 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
             </div>
         {/if}
         {#if $isTransferring}
