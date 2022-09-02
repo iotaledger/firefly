@@ -98,7 +98,9 @@
 >
     <Text type="h4" classes="mb-3">{localize('views.settings.changePincode.title')}</Text>
     <Text type="p" secondary classes="mb-5">{localize('views.settings.changePincode.description')}</Text>
-    <Text type="p" secondary smaller={!$mobile} classes="mb-2">{localize('views.settings.changePincode.currentPincode')}</Text>
+    <Text type="p" secondary smaller={!$mobile} classes="mb-2"
+        >{localize('views.settings.changePincode.currentPincode')}</Text
+    >
     <Pin
         smaller
         error={currentPincodeError}
@@ -107,7 +109,9 @@
         disabled={pinCodeBusy}
         on:submit={changePincode}
     />
-    <Text type="p" secondary smaller={!$mobile} classes="mb-2">{localize('views.settings.changePincode.newPincode')}</Text>
+    <Text type="p" secondary smaller={!$mobile} classes="mb-2"
+        >{localize('views.settings.changePincode.newPincode')}</Text
+    >
     <Pin
         smaller
         error={newPincodeError}
@@ -116,7 +120,9 @@
         disabled={pinCodeBusy}
         on:submit={changePincode}
     />
-    <Text type="p" secondary smaller={!$mobile} classes="mb-2">{localize('views.settings.changePincode.confirmNewPincode')}</Text>
+    <Text type="p" secondary smaller={!$mobile} classes="mb-2"
+        >{localize('views.settings.changePincode.confirmNewPincode')}</Text
+    >
     <Pin
         smaller
         error={confirmationPincodeError}
