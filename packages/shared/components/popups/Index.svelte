@@ -16,14 +16,10 @@
     import Diagnostics from './Diagnostics.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
-    import LedgerAddress from './LedgerAddress.svelte'
-    import LedgerAppGuide from './LedgerAppGuide.svelte'
-    import LedgerConfirmation from './LedgerConfirmation.svelte'
-    import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
-    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
-    import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
+    import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
+    import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
     import PromptLedgerConnectionPopup from './PromptLedgerConnectionPopup.svelte'
-    import LedgerTransactionPopup from './LedgerTransactionPopup.svelte'
+    import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import PasswordPopup from './PasswordPopup.svelte'
@@ -75,7 +71,7 @@
     let os = ''
 
     $: switch (type) {
-        case 'ledgerNotConnected':
+        case 'promptLedgerConnection':
         case 'createAccount':
         case 'manageAccount':
             size = PopupSize.Small
@@ -105,13 +101,9 @@
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
         promptLedgerConnection: PromptLedgerConnectionPopup,
-        ledgerConfirmation: LedgerConfirmation,
-        ledgerAppGuide: LedgerAppGuide,
-        ledgerConnectionGuide: LedgerConnectionGuide,
-        ledgerTransaction: LedgerTransactionPopup,
-        ledgerLegacyTransaction: LedgerLegacyTransaction,
-        ledgerAddress: LedgerAddress,
-        ledgerMigrateIndex: LedgerMigrateIndex,
+        ledgerAppGuide: LedgerAppGuidePopup,
+        ledgerConnectionGuide: LedgerConnectionGuidePopup,
+        verifyLedgerTransaction: VerifyLedgerTransactionPopup,
         nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
         removeNode: RemoveNode,
