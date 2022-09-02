@@ -12,15 +12,15 @@
         ActivityDirection,
         ActivityType,
         getOutputOptions,
-        IAsset,
         InclusionState,
-        Subject,
         sendOutput,
         validateSendConfirmation,
         generateRawAmount,
         selectedAccountAssets,
         getStorageDepositFromOutput,
         DEFAULT_TRANSACTION_OPTIONS,
+        newTransactionDetails,
+        updateNewTransactionDetails,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
@@ -29,38 +29,32 @@
     import { isTransferring } from '@lib/wallet'
     import { checkStronghold } from '@lib/stronghold'
     import { promptUserToConnectLedger, setLedgerSendConfirmationProps } from '@core/ledger'
+    import { get } from 'svelte/store'
 
-    export let asset: IAsset
-    export let amount = '0'
-    export let unit: string
-    export let recipient: Subject
-    export let isInternal = false
-    export let metadata: string
-    export let tag: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let giftStorageDeposit = false
     export let disableToggleGift = false
     export let disableChangeExpiration = false
     export let disableBack = false
 
-    let expirationDate: Date
+    let { asset, amount, expirationDate, unit, recipient, metadata, tag } = get(newTransactionDetails)
+
     let storageDeposit = 0
     let giftedStorageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
 
-    $: asset = asset ?? $selectedAccountAssets?.baseCoin
-    $: rawAmount = asset?.metadata
+    const rawAmount = asset.metadata
         ? generateRawAmount(String(parseCurrency(amount)), unit, asset.metadata)
         : parseCurrency(amount)
-    $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
-    $: isInternal = recipient.type === 'account'
-    $: isNativeToken = asset?.id !== $selectedAccountAssets?.baseCoin?.id
+    const recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+    const isInternal = recipient.type === 'account'
+    const isNativeToken = asset.id !== $selectedAccountAssets?.baseCoin?.id
 
-    $: $$props, expirationDate, rawAmount, void _prepareOutput()
-
+    $: expirationDate, void _prepareOutput()
     $: expirationDate, (error = null)
+
     $: formattedFiatValue =
         formatCurrency(
             convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
@@ -100,7 +94,7 @@
 
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
-
+        updateNewTransactionDetails({ expirationDate })
         if ($activeProfile.type === ProfileType.Ledger) {
             setLedgerSendConfirmationProps({
                 asset,
@@ -112,7 +106,6 @@
                 tag,
             })
         }
-
         await sendOutput(preparedOutput)
         closePopup()
     }
@@ -141,14 +134,6 @@
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                asset,
-                amount,
-                unit,
-                recipient,
-                metadata,
-                tag,
-            },
         })
     }
 

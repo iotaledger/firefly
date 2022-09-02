@@ -1,6 +1,6 @@
 import { addError } from '@core/error'
 import { networkHrp } from '@core/network'
-import { ISendFormParameters, Subject } from '@core/wallet'
+import { INewTransactionDetails, Subject } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 import { get } from 'svelte/store'
@@ -30,9 +30,9 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
  * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
  *
- * @return {void | ISendFormParameters} The formatted parameters for the send operation.
+ * @return {void | INewTransactionDetails} The formatted parameters for the send operation.
  */
-function parseSendFormOperation(searchParams: URLSearchParams): void | ISendFormParameters {
+function parseSendFormOperation(searchParams: URLSearchParams): void | INewTransactionDetails {
     // Check address exists and is valid this is not optional.
     const address = searchParams.get(SendOperationParameter.Address)
     if (!address) {

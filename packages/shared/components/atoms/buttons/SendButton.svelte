@@ -1,9 +1,11 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
+    import { resetNewTransactionDetails } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { OnboardingButton } from 'shared/components/atoms'
 
-    function handleSendClick() {
+    function handleSendClick(): void {
+        resetNewTransactionDetails()
         openPopup({
             type: 'sendForm',
             overflow: true,

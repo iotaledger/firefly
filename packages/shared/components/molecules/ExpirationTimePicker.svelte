@@ -4,7 +4,7 @@
 
     export let value: Date
     export let initialSelected: 'none' | '1hour' | '1day' | '1week' = 'none'
-    export let disabled
+    export let disabled = false
 
     let menu: ExpirationTimePickerMenu
     let anchor: HTMLElement

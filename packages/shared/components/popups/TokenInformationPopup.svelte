@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAsset, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
+    import { IAsset, setNewTransactionDetails, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup, updatePopupProps } from '@lib/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
@@ -9,7 +9,7 @@
     export let asset: IAsset
     export let activityId: string
 
-    function handleSkip() {
+    function handleSkip(): void {
         unverifyAsset(asset.id)
         if (activityId) {
             openPopup({
@@ -23,7 +23,7 @@
         }
     }
 
-    function handleVerify() {
+    function handleVerify(): void {
         verifyAsset(asset.id)
         if (activityId) {
             openPopup({
@@ -37,13 +37,11 @@
         }
     }
 
-    function handleSend() {
+    function handleSend(): void {
+        setNewTransactionDetails({ asset })
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                asset,
-            },
         })
     }
 </script>
