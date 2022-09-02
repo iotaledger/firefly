@@ -12,6 +12,7 @@ const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 const SENTRY = process.env.SENTRY === 'true'
 const stage = process.env.STAGE || 'alpha'
+const os = process.env.OS || 'ubuntu-20.04'
 /**
  * If stage = 'prod' -> 'Firefly'
  * If stage = 'alpha' -> 'Firefly Alpha'
@@ -148,11 +149,15 @@ const rendererPlugins = [
                     return 'locales/[name].[ext]'
                 },
             },
-            {
-                from: '**/*',
-                context: path.resolve(__dirname, 'nsis'),
-                to: 'build',
-            },
+            ...(os === 'windows-2019'
+                ? [
+                      {
+                          from: '**/*',
+                          context: path.resolve(__dirname, 'nsis'),
+                          to: 'build',
+                      },
+                  ]
+                : []),
         ],
     }),
     new MiniCssExtractPlugin({
