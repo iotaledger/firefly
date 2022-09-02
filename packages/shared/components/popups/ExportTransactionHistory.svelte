@@ -59,7 +59,7 @@
                 showAppNotification({
                     type: 'error',
                     message: localize('notifications.exportTransactionHistory.error', {
-                        value: { accountAlias: $selectedAccount.getAlias() },
+                        values: { accountAlias: $selectedAccount.getAlias() },
                     }),
                 })
             }
