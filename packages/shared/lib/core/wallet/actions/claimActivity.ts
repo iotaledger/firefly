@@ -1,14 +1,12 @@
 import { selectedAccount } from '@core/account/stores/selected-account.store'
 import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
-import { checkActiveProfileAuth } from '@core/profile'
 import { get } from 'svelte/store'
 import { ActivityType } from '../enums'
 import { ITransactionActivityData } from '../interfaces'
 import { updateActivityDataByActivityId } from '../stores'
 
 export async function claimActivity(activityId: string, data: ITransactionActivityData): Promise<void> {
-    await checkActiveProfileAuth()
     const account = get(selectedAccount)
     try {
         updateActivityDataByActivityId(account.id, activityId, { type: ActivityType.Transaction, isClaiming: true })
