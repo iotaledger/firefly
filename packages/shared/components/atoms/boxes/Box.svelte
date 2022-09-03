@@ -10,7 +10,7 @@
 
 <box
     class={`
-        w-full flex items-center rounded-lg
+        w-full flex rounded-lg
         ${col ? 'flex-col' : ''}
         ${row ? 'flex-row' : ''}
         ${clearPadding ? '' : 'px-4 py-4'}

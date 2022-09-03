@@ -33,10 +33,11 @@
         value={copyValue ? copyValue : valueText}
         {isCopyable}
         offset={5}
-        row
+        row={!vertical}
+        col={vertical}
         {backgroundColor}
         {darkBackgroundColor}
-        classes="w-full {padding} {classes} flex flex-{vertical ? 'col' : 'row'} justify-between"
+        classes="w-full text-left break-words {padding} {classes} justify-between space-y-1"
     >
         {#if keyText}
             <Text
@@ -44,7 +45,7 @@
                 lineHeight="5"
                 color={textColor}
                 darkColor={darkTextColor}
-                fontWeight={FontWeight.semibold}
+                fontWeight={FontWeight.medium}
                 classes="mr-4"
             >
                 {keyText}
@@ -56,11 +57,16 @@
             <div
                 on:focus={() => toggleTooltip(true)}
                 on:mouseover={() => toggleTooltip(true)}
-                class="truncate"
                 bind:this={tooltipAnchor}
                 bind:clientWidth={textContainerWidth}
             >
-                <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor} classes="truncate">
+                <Text
+                    fontSize="14"
+                    lineHeight="5"
+                    color={textColor}
+                    darkColor={darkTextColor}
+                    classes={vertical ? '' : 'truncate'}
+                >
                     {valueText}
                 </Text>
             </div>
