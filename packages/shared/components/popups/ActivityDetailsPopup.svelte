@@ -15,14 +15,16 @@
         rejectActivity,
         ActivityType,
     } from '@core/wallet'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { setClipboard } from '@lib/utils'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
+    import { onMount } from 'svelte'
 
     export let activityId: string
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
@@ -81,6 +83,10 @@
         }
     }
 
+    async function onClaimClick(): Promise<void> {
+        await checkActiveProfileAuth(claim, { stronghold: true, ledger: false })
+    }
+
     function reject(): void {
         openPopup({
             type: 'confirmation',
@@ -102,6 +108,14 @@
             },
         })
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            console.error(err)
+        }
+    })
 </script>
 
 <activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -141,7 +155,7 @@
             <button
                 disabled={activity.data.isClaiming}
                 class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
-                on:click={claim}
+                on:click={onClaimClick}
             >
                 {#if activity.data.isClaiming}
                     <Spinner busy={true} classes="justify-center" />
