@@ -45,7 +45,7 @@
     async function handleFindBalances() {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
-                type: 'password',
+                type: 'unlockStronghold',
                 props: {
                     onSuccess: function () {
                         openPopup({

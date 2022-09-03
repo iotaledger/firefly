@@ -22,7 +22,7 @@ export async function checkOrUnlockStronghold(
             return callback()
         } else {
             openPopup({
-                type: 'password',
+                type: 'unlockStronghold',
                 props: {
                     onSuccess: _callback,
                 },

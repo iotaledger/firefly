@@ -22,7 +22,7 @@
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
-    import PasswordPopup from './PasswordPopup.svelte'
+    import UnlockStrongholdPopup from './UnlockStrongholdPopup.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RiskFunds from './RiskFunds.svelte'
@@ -94,7 +94,7 @@
 
     const types = {
         qr: QR,
-        password: PasswordPopup,
+        unlockStronghold: UnlockStrongholdPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,
         confirmation: ConfirmationPopup,
