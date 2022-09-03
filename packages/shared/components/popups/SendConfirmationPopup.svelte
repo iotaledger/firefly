@@ -28,7 +28,7 @@
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
     import { checkStronghold } from '@lib/stronghold'
-    import { promptUserToConnectLedger, setLedgerSendConfirmationProps } from '@core/ledger'
+    import { checkLedgerConnection, setLedgerSendConfirmationProps } from '@core/ledger'
 
     export let asset: IAsset
     export let amount = '0'
@@ -127,7 +127,7 @@
             if ($isSoftwareProfile) {
                 await checkStronghold(validateAndSendOutput, true)
             } else if ($isActiveLedgerProfile) {
-                promptUserToConnectLedger(validateAndSendOutput, undefined, true)
+                await checkLedgerConnection(validateAndSendOutput, undefined, true)
             }
         } catch (err) {
             if (!error) {

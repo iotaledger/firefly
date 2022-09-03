@@ -1,3 +1,4 @@
+export * from './checkLedgerConnection'
 export * from './displayNotificationForLedgerProfile'
 export * from './getLedgerDeviceStatus'
 export * from './pollLedgerNanoStatus'

@@ -24,7 +24,7 @@ export function promptUserToConnectLedger(
         if (!get(popupState).active || overridePopup) {
             openLedgerNotConnectedPopup(
                 onCancel,
-                () => pollLedgerNanoStatus(LEDGER_STATUS_POLL_INTERVAL, _onConnected, _onDisconnected, _onCancel),
+                () => pollLedgerNanoStatus(LEDGER_STATUS_POLL_INTERVAL),
                 overridePopup
             )
         }
