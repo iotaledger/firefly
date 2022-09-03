@@ -13,7 +13,9 @@ export function checkLedgerConnection(callback: () => Promise<unknown> = async (
             openPopup({
                 type: 'promptLedgerConnection',
                 hideClose: true,
-                props: {},
+                props: {
+                    onContinue: callback,
+                },
             })
         }
     } catch (err) {

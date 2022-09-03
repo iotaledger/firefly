@@ -9,7 +9,8 @@
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { closePopup } from 'shared/lib/popup'
 
-    export let onClose: () => void
+    export let onCancel: () => void
+    export let onContinue: () => void
 
     const networkProtocol = $activeProfile?.networkProtocol ?? $onboardingProfile?.networkProtocol
 
@@ -35,8 +36,15 @@
     }
 
     function onCancelClick(): void {
-        if (isFunction(onClose)) {
-            onClose()
+        if (isFunction(onCancel)) {
+            onCancel()
+        }
+        closePopup()
+    }
+
+    function onContinueClick(): void {
+        if (isFunction(onContinue)) {
+            onContinue()
         }
         closePopup()
     }
@@ -65,7 +73,7 @@
         <Button classes="w-full" secondary onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" disabled={!isCorrectAppOpen}>
+        <Button classes="w-full" disabled={!isCorrectAppOpen} onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </popup-buttons>
