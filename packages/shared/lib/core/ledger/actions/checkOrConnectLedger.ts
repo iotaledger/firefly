@@ -19,7 +19,7 @@ export function checkOrConnectLedger(
     try {
         const ledgerConnected = get(ledgerConnectionState) === LedgerConnectionState.CorrectAppOpen
         if (ledgerConnected) {
-            return _callback()
+            return callback()
         } else {
             openPopup({
                 type: 'promptLedgerConnection',
