@@ -9,6 +9,9 @@ const Platform: IPlatform = {
     NotificationManager: undefined,
     PincodeManager: undefined,
     close(): void {},
+    exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null> {
+        return Promise.resolve(undefined)
+    },
     getActiveProfile(): string {
         return ''
     },
@@ -31,9 +34,6 @@ const Platform: IPlatform = {
         return Promise.resolve(undefined)
     },
     hookErrorLogger(logger: (error: IError) => void): void {},
-    importLegacySeed(buffer: unknown, password: string): Promise<string> {
-        return Promise.resolve('')
-    },
     isMaximized(): Promise<boolean> {
         return Promise.resolve(false)
     },
