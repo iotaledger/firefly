@@ -8,6 +8,7 @@
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, logout, lockStronghold } from '@core/profile'
+    import { checkOrUnlockStronghold } from '@core/stronghold'
 
     export let modal: Modal
 
@@ -43,12 +44,7 @@
 
     const handleStrongholdToggleClick = (): void => {
         if ($isStrongholdLocked) {
-            openPopup({
-                type: 'password',
-                props: {
-                    isStrongholdLocked: $isStrongholdLocked,
-                },
-            })
+            checkOrUnlockStronghold()
         } else {
             lockStronghold()
         }
