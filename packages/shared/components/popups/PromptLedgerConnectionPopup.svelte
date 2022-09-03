@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { onboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
     import { formatProtocolName } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint } from 'shared/components'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { closePopup } from 'shared/lib/popup'
 
     export let onClose: () => void
