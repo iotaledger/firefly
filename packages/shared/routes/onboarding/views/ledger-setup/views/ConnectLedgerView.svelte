@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Button, Icon, LedgerAnimation, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
     import {
@@ -14,16 +14,28 @@
     import { openPopup } from '@lib/popup'
     import { initialiseFirstShimmerClaimingAccount, onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 
-    let polling = false
     let isBusy = false
 
-    $: isConnected = $ledgerConnectionState !== LedgerConnectionState.NotConnected
-    $: isAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
-    $: animation = !isConnected
-        ? 'ledger-disconnected-desktop'
-        : isAppOpen
-        ? 'ledger-connected-desktop'
-        : 'ledger-app-closed-desktop'
+    $: isNotConnected = $ledgerConnectionState === LedgerConnectionState.NotConnected
+    $: isLocked = isNotConnected || $ledgerConnectionState === LedgerConnectionState.Locked
+    $: isAppNotOpen = isLocked || $ledgerConnectionState === LedgerConnectionState.AppNotOpen
+    $: isCorrectAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
+
+    let animation: string
+    $: $ledgerConnectionState, setAnimation()
+    function setAnimation(): void {
+        if (isNotConnected) {
+            animation = 'ledger-disconnected-desktop'
+        } else if (isLocked) {
+            animation = undefined
+        } else if (isAppNotOpen) {
+            animation = 'ledger-app-closed-desktop'
+        } else if (isCorrectAppOpen) {
+            animation = 'ledger-connected-desktop'
+        } else {
+            animation = 'ledger-disconnected-desktop'
+        }
+    }
 
     function _onCancel(): void {
         displayNotificationForLedgerProfile('error', true)
@@ -61,7 +73,6 @@
 
     onMount(() => {
         pollLedgerNanoStatus()
-        polling = true
     })
 </script>
 
@@ -72,17 +83,24 @@
         <div class="flex flex-col flex-nowrap space-y-2">
             <div class="flex flex-row items-center space-x-2">
                 <Icon
-                    icon={`status-${isConnected ? 'success' : 'error'}`}
-                    classes={`text-white bg-${isConnected ? 'green' : 'red'}-600 rounded-full`}
+                    icon={`status-${isNotConnected ? 'error' : 'success'}`}
+                    classes={`text-white bg-${isNotConnected ? 'red' : 'green'}-600 rounded-full`}
                 />
-                <Text type="p" secondary>{localize('views.connectLedger.trafficLight1')}</Text>
+                <Text type="p" secondary>{localize('views.connectLedger.connect')}</Text>
             </div>
             <div class="flex flex-row items-center space-x-2">
                 <Icon
-                    icon={`status-${isAppOpen ? 'success' : 'error'}`}
-                    classes={`text-white bg-${isAppOpen ? 'green' : 'red'}-600 rounded-full`}
+                    icon={`status-${isLocked ? 'error' : 'success'}`}
+                    classes={`text-white bg-${isLocked ? 'red' : 'green'}-600 rounded-full`}
                 />
-                <Text type="p" secondary>{localize('views.connectLedger.trafficLight2')}</Text>
+                <Text type="p" secondary>{localize('views.connectLedger.unlock')}</Text>
+            </div>
+            <div class="flex flex-row items-center space-x-2">
+                <Icon
+                    icon={`status-${isAppNotOpen ? 'error' : 'success'}`}
+                    classes={`text-white bg-${isAppNotOpen ? 'red' : 'green'}-600 rounded-full`}
+                />
+                <Text type="p" secondary>{localize('views.connectLedger.openApp')}</Text>
             </div>
         </div>
     </div>
@@ -92,7 +110,7 @@
         </Link>
         <Button
             classes="w-full flex flex-row justify-center items-center"
-            disabled={polling && (!isConnected || !isAppOpen)}
+            disabled={!isCorrectAppOpen}
             onClick={onContinueClick}
         >
             {#if isBusy}
@@ -103,11 +121,6 @@
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
-        <Animation
-            width="100%"
-            animation="ledger-bg-desktop"
-            classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
-        <Animation width="100%" {animation} />
+        <LedgerAnimation {animation} />
     </div>
 </OnboardingLayout>
