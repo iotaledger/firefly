@@ -1,26 +1,50 @@
 <script lang="typescript">
-    import { Button, Icon, Text } from 'shared/components'
-    import { stopPollingLedgerStatus, LedgerAppName } from '@core/ledger'
-    import { closePopup } from 'shared/lib/popup'
     import { onDestroy, onMount } from 'svelte'
-    import { Locale } from '@core/i18n'
+    import { Button, LedgerAnimation, Text, TextHint } from 'shared/components'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { localize } from '@core/i18n'
+    import { LedgerConnectionState, ledgerDeviceStatus, stopPollingLedgerStatus } from '@core/ledger'
+    import { isFunction } from '@core/utils'
+    import { formatProtocolName } from '@core/network'
+    import { activeProfile } from '@core/profile'
+    import { onboardingProfile } from '@contexts/onboarding'
+    import { closePopup } from '@lib/popup'
 
-    export let locale: Locale
+    export let onClose: () => void
+    export let onPoll: () => void
 
-    export let legacy
-    export let handleClose
-    export let poll
+    const networkProtocol = $activeProfile?.networkProtocol ?? $onboardingProfile?.networkProtocol
 
-    function handleCancelClick(): void {
-        if ('function' === typeof handleClose) {
-            handleClose()
+    $: isUndetected = $ledgerDeviceStatus?.connectionState === LedgerConnectionState.NotDetected
+    $: isLocked = $ledgerDeviceStatus?.connectionState === LedgerConnectionState.Locked
+    $: isAppOpen = $ledgerDeviceStatus?.connectionState === LedgerConnectionState.Connected
+
+    $: animation = getAnimation(isUndetected, isLocked, isAppOpen)
+
+    function getAnimation(isUndetected: boolean, isLocked: boolean, isAppOpen: boolean): string {
+        if (isUndetected) {
+            return 'ledger-disconnected-desktop'
+        } else if (isLocked) {
+            return 'ledger-disconnected-desktop'
+        } else if (!isAppOpen) {
+            return 'ledger-app-closed-desktop'
+        } else {
+            return 'ledger-connected-desktop'
+        }
+    }
+
+    function onCancelClick(): void {
+        if (isFunction(onClose)) {
+            onClose()
         }
         closePopup()
     }
 
     onMount(() => {
         stopPollingLedgerStatus()
-        poll()
+        if (isFunction(onPoll)) {
+            onPoll()
+        }
     })
 
     onDestroy(() => {
@@ -28,14 +52,22 @@
     })
 </script>
 
-<div class="p-8 flex flex-col w-full items-center justify-center text-center">
-    <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center mb-7">
-        <Icon icon={legacy ? 'ledger-app-legacy' : 'ledger-app'} width="32" height="32" classes="text-white" />
-    </div>
-    <Text type="p" classes="mb-6">
-        {locale('popups.ledgerNotConnected.connect', {
-            values: { protocol: LedgerAppName.SHIMMER },
-        })}
+<connect-ledger-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
+        {localize('popups.ledgerNotConnected.title')}
     </Text>
-    <Button secondary classes="w-1/2" onClick={handleCancelClick}>{locale('actions.cancel')}</Button>
-</div>
+    <LedgerAnimation {animation} />
+    {#if isUndetected}
+        <TextHint danger text={localize('popups.ledgerNotConnected.notDetected')} />
+    {:else if isLocked}
+        <TextHint warning text={localize('popups.ledgerNotConnected.locked')} />
+    {:else if !isAppOpen}
+        <TextHint
+            info
+            text={localize('popups.ledgerNotConnected.appNotOpen', {
+                values: { protocol: formatProtocolName(networkProtocol) },
+            })}
+        />
+    {/if}
+    <Button secondary classes="w-full" onClick={onCancelClick}>{localize('actions.cancel')}</Button>
+</connect-ledger-popup>
