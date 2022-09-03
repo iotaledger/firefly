@@ -4,7 +4,7 @@ import { get } from 'svelte/store'
 import { LedgerConnectionState } from '../interfaces'
 import { ledgerConnectionState } from '../stores'
 
-export function checkLedgerConnection(
+export function checkOrConnectLedger(
     callback: () => Promise<unknown> = async () => {},
     reopenPopup?: boolean
 ): Promise<unknown> {
