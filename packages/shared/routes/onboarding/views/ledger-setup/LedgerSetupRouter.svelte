@@ -2,15 +2,7 @@
     import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
     import { FireflyEvent, ledgerSetupRoute, ledgerSetupRouter, LedgerSetupRoute } from '@core/router'
-    import {
-        AccountIndexView,
-        ConnectView,
-        GenerateNewAddressView,
-        InstallationGuideView,
-        LegacyIntroView,
-        RestoreFromLedgerView,
-        SwitchAppsView,
-    } from './views'
+    import { ConnectLedgerView, LedgerInstallationGuideView } from './views'
 
     onMount(() => {
         $ledgerSetupRouter.restartIfNotInLedgerFlow()
@@ -25,32 +17,12 @@
     }
 </script>
 
-{#if $ledgerSetupRoute === LedgerSetupRoute.Connect}
+{#if $ledgerSetupRoute === LedgerSetupRoute.ConnectLedger}
     <Transition>
-        <ConnectView on:next={next} on:previous={previous} />
+        <ConnectLedgerView on:next={next} on:previous={previous} />
     </Transition>
-{:else if $ledgerSetupRoute === LedgerSetupRoute.RestoreFromLedger}
+{:else if $ledgerSetupRoute === LedgerSetupRoute.LedgerInstallationGuide}
     <Transition>
-        <RestoreFromLedgerView on:next={next} on:previous={previous} />
-    </Transition>
-{:else if $ledgerSetupRoute === LedgerSetupRoute.LegacyIntro}
-    <Transition>
-        <LegacyIntroView on:next={next} on:previous={previous} />
-    </Transition>
-{:else if $ledgerSetupRoute === LedgerSetupRoute.InstallationGuide}
-    <Transition>
-        <InstallationGuideView on:next={next} on:previous={previous} />
-    </Transition>
-{:else if $ledgerSetupRoute === LedgerSetupRoute.GenerateAddress}
-    <Transition>
-        <GenerateNewAddressView on:next={next} on:previous={previous} />
-    </Transition>
-{:else if $ledgerSetupRoute === LedgerSetupRoute.SwitchApps}
-    <Transition>
-        <SwitchAppsView on:next={next} on:previous={previous} />
-    </Transition>
-{:else if $ledgerSetupRoute === LedgerSetupRoute.AccountIndex}
-    <Transition>
-        <AccountIndexView on:next={next} on:previous={previous} />
+        <LedgerInstallationGuideView on:next={next} on:previous={previous} />
     </Transition>
 {/if}

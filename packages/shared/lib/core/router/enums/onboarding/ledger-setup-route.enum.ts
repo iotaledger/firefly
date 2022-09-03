@@ -1,9 +1,5 @@
 export enum LedgerSetupRoute {
-    Connect = 'connect',
+    LedgerInstallationGuide = 'ledgerInstallationGuide',
+    ConnectLedger = 'connectLedger',
     RestoreFromLedger = 'restoreFromLedger',
-    LegacyIntro = 'legacyIntro',
-    InstallationGuide = 'installationGuide',
-    GenerateAddress = 'generateAddress',
-    SwitchApps = 'switchApps',
-    AccountIndex = 'accountIndex',
 }

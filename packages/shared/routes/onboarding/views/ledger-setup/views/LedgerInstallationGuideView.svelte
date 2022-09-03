@@ -22,7 +22,7 @@
     }
 </script>
 
-<OnboardingLayout onBackClick={handleBackClick} showLedgerVideoButton>
+<OnboardingLayout onBackClick={handleBackClick}>
     <div slot="leftpane__content">
         <Text type="h2" classes="mb-5">{localize('views.ledgerInstallationGuide.title')}</Text>
         <Text type="p" secondary classes="mb-5">

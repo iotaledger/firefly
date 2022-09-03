@@ -11,13 +11,13 @@ export const ledgerSetupRouter = writable<LedgerSetupRouter>(null)
 
 export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
     constructor() {
-        super(LedgerSetupRoute.LegacyIntro, ledgerSetupRoute, get(onboardingRouter))
+        super(LedgerSetupRoute.LedgerInstallationGuide, ledgerSetupRoute, get(onboardingRouter))
     }
 
     restartIfNotInLedgerFlow(): void {
         // reinitialize the init view only if we are not in the middle of a ledger flow
         if (this.history.length === 0) {
-            this.routeStore.set(LedgerSetupRoute.InstallationGuide)
+            this.routeStore.set(LedgerSetupRoute.LedgerInstallationGuide)
         }
     }
 
@@ -26,7 +26,7 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
         const currentRoute = get(this.routeStore)
 
         switch (currentRoute) {
-            case LedgerSetupRoute.Connect: {
+            case LedgerSetupRoute.ConnectLedger: {
                 const recoveryType = get(onboardingProfile)?.recoveryType
                 if (recoveryType === ProfileRecoveryType.FireflyLedger) {
                     nextRoute = LedgerSetupRoute.RestoreFromLedger
@@ -35,13 +35,12 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
                 }
                 break
             }
-
             case LedgerSetupRoute.RestoreFromLedger: {
                 this.parentRouter.next()
                 break
             }
-            case LedgerSetupRoute.InstallationGuide: {
-                nextRoute = LedgerSetupRoute.Connect
+            case LedgerSetupRoute.LedgerInstallationGuide: {
+                nextRoute = LedgerSetupRoute.ConnectLedger
                 break
             }
         }
