@@ -38,15 +38,17 @@
     function onCancelClick(): void {
         if (isFunction(onCancel)) {
             onCancel()
+        } else {
+            closePopup()
         }
-        closePopup()
     }
 
     function onContinueClick(): void {
         if (isFunction(onContinue)) {
             onContinue()
+        } else {
+            closePopup()
         }
-        closePopup()
     }
 </script>
 

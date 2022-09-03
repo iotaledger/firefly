@@ -8,8 +8,8 @@ export function checkLedgerConnection(
     callback: () => Promise<unknown> = async () => {},
     reopenPopup?: boolean
 ): Promise<unknown> {
+    const previousPopup = get(popupState)
     function _callback(): Promise<unknown> {
-        const previousPopup = get(popupState)
         if (reopenPopup) {
             openPopup({ ...previousPopup, props: { ...previousPopup.props, _onMount: callback } })
         } else {
