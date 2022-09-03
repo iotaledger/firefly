@@ -1,12 +1,8 @@
 <script lang="typescript">
     import { onboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import {
-        LedgerAppName,
-        LedgerConnectionState,
-        ledgerConnectionState,
-        stopPollingLedgerNanoStatus,
-    } from '@core/ledger'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { LedgerConnectionState, ledgerConnectionState, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { formatProtocolName } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isFunction } from '@core/utils'
@@ -57,10 +53,8 @@
 </script>
 
 <connect-ledger-popup class="p-8 flex flex-col w-full items-center justify-center text-center">
-    <Text type="p" classes="mb-6">
-        {locale('popups.ledgerNotConnected.connect', {
-            values: { protocol: LedgerAppName.Shimmer },
-        })}
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
+        {localize('popups.ledgerNotConnected.title')}
     </Text>
     <LedgerAnimation {animation} />
     {#if isUndetected}
