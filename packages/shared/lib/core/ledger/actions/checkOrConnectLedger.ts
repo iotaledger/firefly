@@ -22,7 +22,7 @@ export function checkOrConnectLedger(
             return callback()
         } else {
             openPopup({
-                type: 'promptLedgerConnection',
+                type: 'connectLedger',
                 hideClose: true,
                 props: {
                     onContinue: _callback,

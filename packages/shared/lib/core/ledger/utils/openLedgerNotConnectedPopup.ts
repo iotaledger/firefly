@@ -8,7 +8,7 @@ export function openLedgerNotConnectedPopup(
 ): void {
     if (!get(popupState).active || overridePopup) {
         openPopup({
-            type: 'promptLedgerConnection',
+            type: 'connectLedger',
             props: {
                 onClose: () => cancel(),
                 onPoll: () => poll(),

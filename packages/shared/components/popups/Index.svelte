@@ -18,7 +18,7 @@
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
-    import PromptLedgerConnectionPopup from './PromptLedgerConnectionPopup.svelte'
+    import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
@@ -71,7 +71,7 @@
     let os = ''
 
     $: switch (type) {
-        case 'promptLedgerConnection':
+        case 'connectLedger':
         case 'createAccount':
         case 'manageAccount':
             size = PopupSize.Small
@@ -100,7 +100,7 @@
         confirmation: ConfirmationPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
-        promptLedgerConnection: PromptLedgerConnectionPopup,
+        connectLedger: ConnectLedgerPopup,
         ledgerAppGuide: LedgerAppGuidePopup,
         ledgerConnectionGuide: LedgerConnectionGuidePopup,
         verifyLedgerTransaction: VerifyLedgerTransactionPopup,

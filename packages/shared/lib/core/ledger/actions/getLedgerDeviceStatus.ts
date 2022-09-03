@@ -13,8 +13,7 @@ export async function getLedgerDeviceStatus(
         updateLedgerNanoStatus(status)
 
         if (get(ledgerNanoStatus).connected) {
-            const isLedgerNotConnectedPopupOpened =
-                get(popupState).active && get(popupState).type === 'promptLedgerConnection'
+            const isLedgerNotConnectedPopupOpened = get(popupState).active && get(popupState).type === 'connectLedger'
 
             if (isLedgerNotConnectedPopupOpened) {
                 closePopup()
