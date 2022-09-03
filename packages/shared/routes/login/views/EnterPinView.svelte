@@ -9,7 +9,6 @@
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, ProfileType, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
-    import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
     import { Platform } from '@lib/platform'
     import { openPopup, popupState } from '@lib/popup'
     import { validatePinFormat } from '@lib/utils'
@@ -88,9 +87,7 @@
     }
 
     async function onSubmitClick(): Promise<void> {
-        if ($ongoingSnapshot === true) {
-            openSnapshotPopup()
-        } else if (!hasReachedMaxAttempts) {
+        if (!hasReachedMaxAttempts) {
             isBusy = true
             const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
             if (isVerified) {

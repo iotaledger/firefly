@@ -7,7 +7,6 @@ export type FireflyEvent = {
     file?: Buffer
     fileName?: string
     filePath?: string
-    migrationSeed?: string
     password?: string
     pin?: string
     protectionType?: string

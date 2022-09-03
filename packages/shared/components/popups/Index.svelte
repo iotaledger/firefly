@@ -6,7 +6,6 @@
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
     import AddNodePopup from './AddNodePopup.svelte'
-    import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
     import CrashReporting from './CrashReporting.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
@@ -26,11 +25,7 @@
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RiskFunds from './RiskFunds.svelte'
-    import Snapshot from './Snapshot.svelte'
-    import StakingConfirmation from './StakingConfirmation.svelte'
-    import StakingManager from './StakingManager.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
-    import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
@@ -81,7 +76,6 @@
         case 'ledgerConnectionGuide':
             size = PopupSize.Large
             break
-        case 'stakingManager':
         case 'transactionDetails':
             autofocusContent = false
             break
@@ -116,13 +110,7 @@
         riskFunds: RiskFunds,
         missingBundle: MissingBundle,
         walletFinder: WalletFinderPopup,
-        snapshot: Snapshot,
         video: Video,
-        // Participation (voting / staking)
-        stakingConfirmation: StakingConfirmation,
-        stakingManager: StakingManager,
-        newStakingPeriodNotification: NewStakingPeriodNotification,
-        airdropNetworkInfo: AirdropNetworkInfo,
         confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
         receiveAddress: ReceiveAddressPopup,

@@ -7,7 +7,6 @@
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { showAppNotification } from '@lib/notifications'
-    import { participationAction } from '@lib/participation/stores'
 
     export let account: IAccountState
     export let onClick: () => unknown
@@ -15,8 +14,6 @@
     function handleAccountClick(accountId: string): void {
         if (account.isSyncing) {
             showWarning(localize('notifications.syncing'))
-        } else if ($participationAction) {
-            showWarning(localize('notifications.participating'))
         } else {
             setSelectedAccount(accountId)
             onClick && onClick()

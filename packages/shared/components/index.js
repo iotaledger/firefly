@@ -30,7 +30,6 @@ export { default as SecurityTile } from './SecurityTile.svelte'
 export { default as SettingsMenu } from './SettingsMenu.svelte'
 export { default as SettingsNavigator } from './SettingsNavigator.svelte'
 export { default as Sidebar } from './Sidebar.svelte'
-export { default as SpentAddress } from './SpentAddress.svelte'
 export { default as Spinner } from './Spinner.svelte'
 export { default as Text } from './Text.svelte'
 export { default as TextHint } from './TextHint.svelte'
@@ -38,7 +37,6 @@ export { default as TitleBar } from './TitleBar.svelte'
 export { default as Toast } from './Toast.svelte'
 export { default as ToastContainer } from './ToastContainer.svelte'
 export { default as Tooltip } from './Tooltip.svelte'
-export { default as TransactionItem } from './TransactionItem.svelte'
 export { default as Transition } from './Transition.svelte'
 export { default as Video } from './Video.svelte'
 export { default as TransactionTabs } from './TransactionTabs.svelte'
@@ -52,16 +50,6 @@ export { default as NetworkIndicator } from './NetworkIndicator.svelte'
 export { default as NotificationBadge } from './NotificationBadge.svelte'
 
 export * from './modals'
-// Charts
-export { default as Chart } from './charts/Index.svelte'
-export { default as BarChart } from './charts/Bar.svelte'
-export { default as LineChart } from './charts/Line.svelte'
-export * as ChartDefaults from './charts/defaults'
-
-// Staking
-export { default as StakingAirdropIndicator } from './StakingAirdropIndicator.svelte'
-export { default as StakingAssetTile } from './StakingAssetTile.svelte'
-
 export * from './inputs'
 export * from './panes'
 

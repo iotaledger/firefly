@@ -9,15 +9,6 @@ const Platform: IPlatform = {
     NotificationManager: undefined,
     PincodeManager: undefined,
     close(): void {},
-    exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null> {
-        return Promise.resolve(undefined)
-    },
-    exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null> {
-        return Promise.resolve(undefined)
-    },
-    exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null> {
-        return Promise.resolve(undefined)
-    },
     getActiveProfile(): string {
         return ''
     },
