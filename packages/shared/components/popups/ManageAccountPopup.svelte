@@ -2,7 +2,6 @@
     import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
     import { closePopup } from '@lib/popup'
 
@@ -29,7 +28,7 @@
             }
 
             isBusy = true
-            await checkActiveProfileAuth(_save, { stronghold: true, ledger: true })
+            _save()
         }
     }
 
