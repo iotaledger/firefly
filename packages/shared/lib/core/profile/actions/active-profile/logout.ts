@@ -28,7 +28,7 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
             lockStronghold()
         }
 
-        if (isLedgerProfile(type) && !isPollingLedgerDeviceStatus) {
+        if (isLedgerProfile(type) && isPollingLedgerDeviceStatus) {
             stopPollingLedgerNanoStatus()
         }
 
