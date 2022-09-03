@@ -1,7 +1,4 @@
 import { get, writable } from 'svelte/store'
-
-import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
-
 import { LedgerSetupRoute } from '../../enums'
 import { onboardingRouter } from '../../onboarding-router'
 import { Subrouter } from '../subrouter'
@@ -26,21 +23,12 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
         const currentRoute = get(this.routeStore)
 
         switch (currentRoute) {
-            case LedgerSetupRoute.ConnectLedger: {
-                const recoveryType = get(onboardingProfile)?.recoveryType
-                if (recoveryType === ProfileRecoveryType.FireflyLedger) {
-                    nextRoute = LedgerSetupRoute.RestoreFromLedger
-                } else {
-                    this.parentRouter.next()
-                }
-                break
-            }
-            case LedgerSetupRoute.RestoreFromLedger: {
-                this.parentRouter.next()
-                break
-            }
             case LedgerSetupRoute.LedgerInstallationGuide: {
                 nextRoute = LedgerSetupRoute.ConnectLedger
+                break
+            }
+            case LedgerSetupRoute.ConnectLedger: {
+                this.parentRouter.next()
                 break
             }
         }
