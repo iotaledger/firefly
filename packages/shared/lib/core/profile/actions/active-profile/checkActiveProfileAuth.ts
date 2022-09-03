@@ -1,6 +1,6 @@
 import { checkLedgerConnection } from '@core/ledger'
 import { isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
-import { checkStronghold } from '@lib/stronghold'
+import { checkOrUnlockStronghold } from '@core/stronghold'
 import { get } from 'svelte/store'
 
 export function checkActiveProfileAuth(
@@ -8,7 +8,7 @@ export function checkActiveProfileAuth(
     reopenPopup?: { stronghold?: boolean; ledger?: boolean }
 ): Promise<unknown> {
     if (get(isSoftwareProfile)) {
-        return checkStronghold(callback, reopenPopup?.stronghold)
+        return checkOrUnlockStronghold(callback, reopenPopup?.stronghold)
     } else if (get(isActiveLedgerProfile)) {
         return checkLedgerConnection(callback, reopenPopup?.ledger)
     }

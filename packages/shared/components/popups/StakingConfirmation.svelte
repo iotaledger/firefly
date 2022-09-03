@@ -17,7 +17,7 @@
     import type { Participation } from '@lib/participation'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from '@core/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
+    import { checkOrUnlockStronghold } from '@core/stronghold'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
     import { localize } from '@core/i18n'
@@ -90,7 +90,7 @@
 
     function handleConfirmClick(): void {
         if ($isSoftwareProfile) {
-            void checkStronghold(openStakingManager)
+            void checkOrUnlockStronghold(openStakingManager)
         } else {
             if ($ledgerConnectionState !== LedgerConnectionState.CorrectAppOpen) {
                 showAppNotification({

@@ -1,24 +1,13 @@
 import { BaseError } from '@core/error'
-import { localize } from '@core/i18n'
-import { activeProfile, isActiveLedgerProfile } from '@core/profile'
+import { activeProfile } from '@core/profile'
 import { isStrongholdUnlocked } from '@core/profile-manager'
+import { openPopup, popupState } from '@lib/popup'
 import { get } from 'svelte/store'
-import { showAppNotification } from './notifications'
-import { openPopup, popupState } from './popup'
 
-export async function checkStronghold(
+export async function checkOrUnlockStronghold(
     callback: () => Promise<unknown> = async () => {},
     reopenPopup?: boolean
 ): Promise<unknown> {
-    if (get(isActiveLedgerProfile)) {
-        showAppNotification({
-            type: 'error',
-            message: localize('error.ledger.noStronghold'),
-        })
-
-        return
-    }
-
     try {
         const strongholdUnlocked = await isStrongholdUnlocked()
 
