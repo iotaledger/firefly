@@ -18,7 +18,7 @@
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.7.0",
         "retypeapp": "^2.3.0",
-        "@types/node": "^18.7.14"
+        "@types/node": "^14.11.1"
     },
     "scripts": {
         "docs:start": "cd docs/ && retype watch",
@@ -44,8 +44,5 @@
     "lint-staged": {
         "*.{ts,js,svelte}": "eslint --cache --fix",
         "*.{ts,js,json,scss,css,svelte}": "prettier --write"
-    },
-    "dependencies": {
-        "@types/node": "^18.7.14"
     }
 }

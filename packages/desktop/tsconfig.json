@@ -12,7 +12,8 @@
             "@core/*": ["../shared/lib/core/*"],
             "@features/*": ["../shared/features/*"],
             "@lib/*": ["../shared/lib/*"]
-        }
+        },
+        "types": ["node"]
     },
     "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"]
 }
