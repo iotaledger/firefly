@@ -127,7 +127,7 @@
             if ($isSoftwareProfile) {
                 await checkStronghold(validateAndSendOutput, true)
             } else if ($isActiveLedgerProfile) {
-                await checkLedgerConnection(validateAndSendOutput, undefined, true)
+                await checkLedgerConnection(validateAndSendOutput)
             }
         } catch (err) {
             if (!error) {
