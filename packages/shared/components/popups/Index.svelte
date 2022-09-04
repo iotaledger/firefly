@@ -31,7 +31,6 @@
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
-    import RiskFunds from './RiskFunds.svelte'
     import SendConfirmationPopup from './SendConfirmationPopup.svelte'
     import SendFormPopup from './SendFormPopup.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
