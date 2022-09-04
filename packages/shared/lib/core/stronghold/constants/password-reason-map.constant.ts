@@ -1,4 +1,4 @@
-const passwordReasons = {
+export const PASSWORD_REASON_MAP = {
     'Straight rows of keys are easy to guess': 'row',
     'Short keyboard patterns are easy to guess': 'pattern',
     'Names and surnames by themselves are easy to guess': 'names',
@@ -14,5 +14,3 @@ const passwordReasons = {
     'This is a top-10 common password': 'common',
     'This is a top-100 common password': 'common',
 }
-
-export default passwordReasons
