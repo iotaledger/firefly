@@ -53,9 +53,9 @@
 <div class="flex flex-col space-y-2">
     {#if hasSendConfirmationProps}
         {#if hash}
-            <KeyValueBox vertical keyText={localize('general.hash')} valueText={formatHexString(hash)} />
+            <KeyValueBox keyText={localize('general.hash')} valueText={formatHexString(hash)} />
         {:else}
-            <KeyValueBox vertical keyText={localize('general.sendTo')} valueText={toAddress} />
+            <KeyValueBox keyText={localize('general.sendTo')} valueText={toAddress} />
             <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
         {/if}
     {/if}
