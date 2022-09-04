@@ -1,10 +1,5 @@
 <script lang="typescript">
-    import {
-        isAwareOfCrashReporting,
-        mobile,
-        needsToAcceptLatestPrivacyPolicy,
-        needsToAcceptLatestTermsOfService,
-    } from '@core/app'
+    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, ProfileType, resetActiveProfile } from '@core/profile'
@@ -32,18 +27,6 @@
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
             type: 'legalUpdate',
-            hideClose: true,
-            preventClose: true,
-        })
-    }
-
-    /**
-     * NOTE: We check for mobile because it's only necessary
-     * for existing desktop installation.
-     */
-    $: if ($popupState?.type === null && !$popupState?.active && !$mobile && !$isAwareOfCrashReporting) {
-        openPopup({
-            type: 'crashReporting',
             hideClose: true,
             preventClose: true,
         })

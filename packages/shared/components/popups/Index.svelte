@@ -1,48 +1,47 @@
 <script lang="typescript">
+    import { mobile } from '@core/app'
+    import { Locale } from '@core/i18n'
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
+    import { Platform } from 'shared/lib/platform'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
+
+    // Popups
+    import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
+    import ConfirmationPopup from './ConfirmationPopup.svelte'
+    import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
     import CrashReporting from './CrashReporting.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
-    import ConfirmationPopup from './ConfirmationPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
+    import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
+    import FaucetRequestPopup from './FaucetRequestPopup.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
-    import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
-    import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
-    import MissingBundle from './MissingBundle.svelte'
+    import LegalUpdate from './LegalUpdate.svelte'
+    import ManageAccountPopup from './ManageAccountPopup.svelte'
+    import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
-    import UnlockStrongholdPopup from './UnlockStrongholdPopup.svelte'
-    import QR from './QR.svelte'
+    import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RiskFunds from './RiskFunds.svelte'
+    import SendConfirmationPopup from './SendConfirmationPopup.svelte'
+    import SendFormPopup from './SendFormPopup.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
+    import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
+    import TokenInformationPopup from './TokenInformationPopup.svelte'
+    import UnlockStrongholdPopup from './UnlockStrongholdPopup.svelte'
+    import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
-    import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
-    import LegalUpdate from './LegalUpdate.svelte'
-    import { mobile } from '@core/app'
-    import { Platform } from 'shared/lib/platform'
-    import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
-    import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
-    import SendConfirmationPopup from './SendConfirmationPopup.svelte'
-    import SendFormPopup from './SendFormPopup.svelte'
-    import ManageAccountPopup from './ManageAccountPopup.svelte'
-    import TokenInformationPopup from './TokenInformationPopup.svelte'
-    import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
-    import FaucetRequestPopup from './FaucetRequestPopup.svelte'
-    import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
-    import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
 
     export let locale: Locale
 
@@ -87,7 +86,6 @@
     let popupContent
 
     const types = {
-        qr: QR,
         unlockStronghold: UnlockStrongholdPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,
@@ -108,10 +106,8 @@
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         riskFunds: RiskFunds,
-        missingBundle: MissingBundle,
         walletFinder: WalletFinderPopup,
         video: Video,
-        confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
         receiveAddress: ReceiveAddressPopup,
         activityDetails: ActivityDetailsPopup,
