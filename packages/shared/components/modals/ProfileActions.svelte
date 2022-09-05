@@ -102,7 +102,7 @@
                 {/if}
             </div>
             {#if $isActiveLedgerProfile}
-                <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
+                <Icon icon="ledger" classes="text-gray-900 dark:text-gray-100 w-4 h-4" />
             {/if}
         </div>
         <HR />
