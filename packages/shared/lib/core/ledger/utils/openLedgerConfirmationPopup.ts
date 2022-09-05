@@ -3,7 +3,7 @@ import { isPreparedTransaction, isPreparedTransactionEssenceHash } from '@core/p
 import { TransactionProgressEventPayload } from '@core/profile-manager/api/types'
 import { openPopup } from '@lib/popup'
 
-import { deconstructLedgerSendConfirmationProps } from '../helpers'
+import { deconstructLedgerVerificationProps } from '../helpers'
 
 export function openLedgerConfirmationPopup(
     payload: TransactionProgressEventPayload,
@@ -12,7 +12,7 @@ export function openLedgerConfirmationPopup(
     let props: PopupProps
     if (isPreparedTransaction(payload)) {
         props = {
-            ...deconstructLedgerSendConfirmationProps(),
+            ...deconstructLedgerVerificationProps(),
             needsToShowPopupAfterwards: !isDuringOnboarding,
         }
     } else if (isPreparedTransactionEssenceHash(payload)) {
