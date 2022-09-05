@@ -1,7 +1,7 @@
 import { writable, Writable } from 'svelte/store'
 import type { INewTransactionDetails } from '..'
 
-const defaultTransactionDetails: INewTransactionDetails = {
+export const defaultTransactionDetails: INewTransactionDetails = {
     amount: '0',
 }
 

@@ -2,15 +2,11 @@
     import { onDestroy } from 'svelte'
     import { Animation, KeyValueBox, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import {
-        resetLedgerSendConfirmationProps,
-        resetLedgerMintNativeTokenConfirmationProps,
-        ledgerSendConfirmationProps,
-        ledgerMintNativeTokenConfirmationProps,
-    } from '@core/ledger'
+    import { resetLedgerMintNativeTokenConfirmationProps, ledgerMintNativeTokenConfirmationProps } from '@core/ledger'
     import { isActiveLedgerProfile } from '@core/profile'
     import { formatHexString } from '@core/utils'
     import { openPopup } from '@lib/popup'
+    import { defaultTransactionDetails, newTransactionDetails } from '@core/wallet'
 
     export let toAddress: string
     export let toAmount: string
@@ -21,19 +17,17 @@
 
     onDestroy(() => {
         if ($isActiveLedgerProfile) {
-            if ($ledgerSendConfirmationProps) {
-                openPopup({
-                    type: 'sendConfirmation',
-                    props: $ledgerSendConfirmationProps,
-                    overflow: true,
-                })
-                resetLedgerSendConfirmationProps()
-            } else if ($ledgerMintNativeTokenConfirmationProps) {
+            if ($ledgerMintNativeTokenConfirmationProps) {
                 openPopup({
                     type: 'mintNativeTokenForm',
                     props: $ledgerMintNativeTokenConfirmationProps,
                 })
                 resetLedgerMintNativeTokenConfirmationProps()
+            } else if ($newTransactionDetails !== defaultTransactionDetails) {
+                openPopup({
+                    type: 'sendConfirmation',
+                    overflow: true,
+                })
             }
         }
     })

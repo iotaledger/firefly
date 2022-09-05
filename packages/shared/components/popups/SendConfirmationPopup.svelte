@@ -7,7 +7,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, ProfileType } from '@core/profile'
+    import { activeProfile, isSoftwareProfile, isActiveLedgerProfile } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
@@ -29,24 +29,15 @@
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
     import { checkStronghold } from '@lib/stronghold'
-    import { promptUserToConnectLedger, setLedgerSendConfirmationProps } from '@core/ledger'
+    import { promptUserToConnectLedger } from '@core/ledger'
     import { get } from 'svelte/store'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
 
-    let {
-        asset,
-        amount,
-        giftStorageDeposit,
-        expirationDate,
-        unit,
-        recipient,
-        metadata,
-        tag,
-        disableChangeExpiration,
-        disableToggleGift,
-    } = get(newTransactionDetails)
+    const { asset, amount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift } =
+        get(newTransactionDetails)
+    let { expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
     let storageDeposit = 0
     let giftedStorageDeposit = 0
@@ -115,18 +106,6 @@
 
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
-        // TODO: We need to replace ledgerSendConfirmationProps with newTransactionDetails
-        if ($activeProfile.type === ProfileType.Ledger) {
-            setLedgerSendConfirmationProps({
-                asset,
-                amount,
-                unit,
-                recipient,
-                internal: false,
-                metadata,
-                tag,
-            })
-        }
         await sendOutput(preparedOutput)
         closePopup()
     }
