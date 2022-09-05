@@ -115,7 +115,6 @@
 
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
-        updateNewTransactionDetails({ expirationDate, giftStorageDeposit })
         // TODO: We need to replace ledgerSendConfirmationProps with newTransactionDetails
         if ($activeProfile.type === ProfileType.Ledger) {
             setLedgerSendConfirmationProps({
@@ -139,6 +138,7 @@
     async function onConfirm(): Promise<void> {
         error = null
         try {
+            updateNewTransactionDetails({ expirationDate, giftStorageDeposit })
             if ($isSoftwareProfile) {
                 await checkStronghold(validateAndSendOutput, true)
             } else if ($isActiveLedgerProfile) {
