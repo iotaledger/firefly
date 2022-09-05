@@ -1,8 +1,6 @@
 export enum LedgerConnectionState {
     AppNotOpen = 'appNotOpen',
-    Connected = 'connected',
+    CorrectAppOpen = 'correctAppOpen',
     Locked = 'locked',
-    NotDetected = 'notDetected',
-    OtherConnected = 'otherConnected',
-    MnemonicMismatch = 'mnemonicMismatch',
+    NotConnected = 'notConnected',
 }

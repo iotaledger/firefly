@@ -468,11 +468,11 @@
                 "hardware": {
                     "title": "Hardware Device",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "Connected",
-                        "locked": "Locked",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "App open"
                     }
                 },
@@ -731,9 +731,10 @@
         },
         "ledgerNotConnected": {
             "title": "Connect your Ledger",
-            "notDetected": "Connect your Ledger device to continue.",
+            "notConnected": "Connect your Ledger device to continue.",
             "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the {protocol} app on your Ledger device to continue."
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device"

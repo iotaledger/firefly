@@ -21,7 +21,7 @@
     } from 'shared/lib/participation/stores'
     import { AccountParticipationAbility, ParticipationAction, StakingAirdrop } from 'shared/lib/participation/types'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { checkStronghold } from 'shared/lib/stronghold'
+    import { checkOrUnlockStronghold } from '@core/stronghold'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { localize } from '@core/i18n'
@@ -143,7 +143,7 @@
         }
 
         if ($isSoftwareProfile) {
-            void checkStronghold(_unstake)
+            void checkOrUnlockStronghold(_unstake)
         } else {
             promptUserToConnectLedger(() => _unstake(), undefined, true)
         }

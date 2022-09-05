@@ -1,11 +1,16 @@
 <script lang="typescript">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { isSoftwareProfile, activeProfile, ProfileType, isActiveLedgerProfile } from '@core/profile'
+    import {
+        isSoftwareProfile,
+        activeProfile,
+        ProfileType,
+        isActiveLedgerProfile,
+        checkActiveProfileAuth,
+    } from '@core/profile'
     import { promptUserToConnectLedger, updateLedgerMintNativeTokenConfirmationProps } from '@core/ledger'
     import { mintNativeToken } from '@core/wallet'
     import { closePopup, updatePopupProps } from '@lib/popup'
-    import { checkStronghold } from '@lib/stronghold'
     import { isTransferring } from '@lib/wallet'
     import {
         AddInputButton,
@@ -118,7 +123,7 @@
                         url,
                         logoUrl,
                     })
-                    await checkStronghold(mintAction, true)
+                    await checkActiveProfileAuth(mintAction, { stronghold: true, ledger: false })
                 } else if ($isActiveLedgerProfile) {
                     if ($activeProfile.type === ProfileType.Ledger) {
                         updateLedgerMintNativeTokenConfirmationProps({
