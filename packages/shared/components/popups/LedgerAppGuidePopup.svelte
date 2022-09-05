@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, Illustration, Text } from 'shared/components'
+    import { LedgerAnimation, Button, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { LedgerAppName } from '@core/ledger'
     import { Locale } from '@core/i18n'
@@ -26,12 +26,7 @@
 
 <Text type="h4" classes="mb-6">{locale('popups.ledgerAppGuide.title')}</Text>
 <div class="w-full flex flex-row flex-wrap">
-    <div class="illustration-wrapper relative w-full bg-white dark:bg-gray-900 flex justify-center items-center">
-        <div class="animation absolute transform top-2 left-1/2 -translate-x-1/2 z-0">
-            <Animation animation="ledger-bg-desktop" />
-        </div>
-        <Illustration illustration={stepAnimations[stepIndex]} />
-    </div>
+    <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" />
     <div class="w-full text-center my-9 px-10">
         <Text secondary>
             {locale(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.Shimmer } })}

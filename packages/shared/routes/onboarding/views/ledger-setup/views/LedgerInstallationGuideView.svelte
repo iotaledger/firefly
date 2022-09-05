@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { createEventDispatcher } from 'svelte'
-    import { Animation, Button, Icon, Illustration, Link, OnboardingLayout, Text } from 'shared/components'
+    import { LedgerAnimation, Button, Icon, Link, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from '@lib/popup'
     import { LedgerAppName } from '@core/ledger'
@@ -46,12 +46,6 @@
             >{localize('views.ledgerInstallationGuide.action')}</Button
         >
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
-        <Animation
-            width="100%"
-            animation="ledger-bg-desktop"
-            classes="absolute z-0 transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
-        <Illustration width="100%" illustration="ledger-install-new-app-desktop" classes="z-0" />
-    </div>
+    aaa
+    <LedgerAnimation slot="rightpane" illustration="ledger-install-new-app-desktop" />
 </OnboardingLayout>
