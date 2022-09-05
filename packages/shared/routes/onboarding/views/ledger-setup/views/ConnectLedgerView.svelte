@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { LedgerAnimation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
     import {
@@ -102,12 +102,5 @@
             {/if}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
-        <Animation
-            width="100%"
-            animation="ledger-bg-desktop"
-            classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
-        <Animation width="100%" {animation} />
-    </div>
+    <LedgerAnimation slot="rightpane" {animation} />
 </OnboardingLayout>
