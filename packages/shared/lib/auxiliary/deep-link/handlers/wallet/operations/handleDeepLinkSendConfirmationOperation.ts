@@ -2,7 +2,12 @@ import { get } from 'svelte/store'
 import { addError } from '@core/error'
 import { BASE_TOKEN, networkHrp } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { INewTransactionDetails, Subject, updateNewTransactionDetails } from '@core/wallet'
+import {
+    INewTransactionDetails,
+    Subject,
+    updateNewTransactionDetails,
+    visibleSelectedAccountAssets,
+} from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 
@@ -65,6 +70,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         parsedAmount = 0
     }
 
+    const asset = get(visibleSelectedAccountAssets)?.baseCoin
     const amount = String(Math.abs(parsedAmount))
     const unit = searchParams.get(SendOperationParameter.Unit)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
@@ -75,6 +81,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     const disableChangeExpiration = Boolean(searchParams.get(SendOperationParameter.DisableChangeExpiration))
 
     return {
+        ...(asset && { asset }),
         ...(recipient && { recipient }),
         ...(amount && { amount }),
         ...(unit && { unit }),

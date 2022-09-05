@@ -1,9 +1,8 @@
-import { get, writable, Writable } from 'svelte/store'
-import { INewTransactionDetails, visibleSelectedAccountAssets } from '..'
+import { writable, Writable } from 'svelte/store'
+import type { INewTransactionDetails } from '..'
 
 const defaultTransactionDetails: INewTransactionDetails = {
     amount: '0',
-    asset: get(visibleSelectedAccountAssets)?.baseCoin,
 }
 
 export const newTransactionDetails: Writable<INewTransactionDetails> = writable(defaultTransactionDetails)
