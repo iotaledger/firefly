@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { selectedAccount } from '@core/account'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import {
@@ -91,10 +90,8 @@
             </div>
         {/if}
     </div>
-    <div class="flex-auto h-full scroll-secondary pb-10">
-        {#if $selectedAccount.isSyncing && $selectedAccountActivities.length === 0}
-            <Text secondary classes="text-center">{localize('general.firstSync')}</Text>
-        {:else if activityListWithTitles.length}
+    <div class="flex-auto h-full pb-10">
+        {#if activityListWithTitles.length}
             <VirtualList items={activityListWithTitles} let:item>
                 <div class="mb-2">
                     {#if item.title}
@@ -131,10 +128,10 @@
 
 <style lang="scss">
     .activity-list :global(svelte-virtual-list-viewport) {
-        margin-right: -1.25rem !important;
+        margin-right: -1rem !important;
         flex: auto;
         overflow-y: scroll;
-        padding-right: 1rem !important;
+        padding-right: 1.5rem !important;
     }
     .activity-list :global(svelte-virtual-list-contents) {
         margin-right: -1rem !important;
