@@ -107,21 +107,9 @@
             lightmode: 'loading-desktop.json',
             darkmode: 'loading-desktop.json',
         },
-        'ledger-choose-index-desktop': {
-            lightmode: 'ledger/ledger-choose-index-desktop.json',
-            darkmode: 'ledger/ledger-choose-index-desktop-darkmode.json',
-        },
         'ledger-bg-desktop': {
             lightmode: 'ledger/ledger-bg-desktop.json',
             darkmode: 'ledger/ledger-bg-desktop-darkmode.json',
-        },
-        'ledger-switch-app-desktop': {
-            lightmode: 'ledger/ledger-switch-app-desktop.json',
-            darkmode: 'ledger/ledger-switch-app-desktop.json',
-        },
-        'ledger-generate-address-desktop': {
-            lightmode: 'ledger/ledger-generate-address-desktop.json',
-            darkmode: 'ledger/ledger-generate-address-desktop.json',
         },
         'ledger-prompt-confirmed-desktop': {
             lightmode: 'ledger/ledger-prompt-confirmed-desktop.json',
