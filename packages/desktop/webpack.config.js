@@ -12,7 +12,6 @@ const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 const SENTRY = process.env.SENTRY === 'true'
 const stage = process.env.STAGE || 'alpha'
-const os = process.env.OS || 'ubuntu-20.04'
 /**
  * If stage = 'prod' -> 'Firefly'
  * If stage = 'alpha' -> 'Firefly Alpha'
@@ -149,7 +148,7 @@ const rendererPlugins = [
                     return 'locales/[name].[ext]'
                 },
             },
-            ...(os === 'windows-2019'
+            ...(process.platform === 'win32'
                 ? [
                       {
                           from: '**/*',
