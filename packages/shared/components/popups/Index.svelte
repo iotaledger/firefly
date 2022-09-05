@@ -104,7 +104,6 @@
         createAccount: CreateAccountPopup,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
-        riskFunds: RiskFunds,
         walletFinder: WalletFinderPopup,
         video: Video,
         legalUpdate: LegalUpdate,
