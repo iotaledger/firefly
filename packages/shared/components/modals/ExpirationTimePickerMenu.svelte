@@ -14,7 +14,7 @@
     import { fade } from 'svelte/transition'
 
     export let value: Date
-    export let selected = ExpirationTime.None
+    export let selected: ExpirationTime = ExpirationTime.None
     export let anchor: HTMLElement
 
     export function tryOpen(): void {

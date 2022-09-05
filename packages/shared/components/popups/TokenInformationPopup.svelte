@@ -9,7 +9,7 @@
     export let asset: IAsset
     export let activityId: string
 
-    function handleSkip(): void {
+    function onSkipClick(): void {
         unverifyAsset(asset.id)
         if (activityId) {
             openPopup({
@@ -23,7 +23,7 @@
         }
     }
 
-    function handleVerify(): void {
+    function onVerifyClick(): void {
         verifyAsset(asset.id)
         if (activityId) {
             openPopup({
@@ -37,7 +37,7 @@
         }
     }
 
-    function handleSend(): void {
+    function onSendClick(): void {
         setNewTransactionDetails({ asset })
         openPopup({
             type: 'sendForm',
@@ -102,14 +102,14 @@
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         {#if asset?.verification === VerificationStatus.New}
-            <Button secondary classes="w-full" onClick={handleSkip}>
+            <Button secondary classes="w-full" onClick={onSkipClick}>
                 {localize('actions.skip')}
             </Button>
-            <Button autofocus classes="w-full" onClick={handleVerify}>
+            <Button autofocus classes="w-full" onClick={onVerifyClick}>
                 {localize('popups.tokenInformation.buttons.verifyToken')}
             </Button>
         {:else}
-            <Button classes="w-full" onClick={handleSend}>
+            <Button classes="w-full" onClick={onSendClick}>
                 {localize('actions.send')}
             </Button>
         {/if}

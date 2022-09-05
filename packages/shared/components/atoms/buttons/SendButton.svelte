@@ -4,7 +4,7 @@
     import { openPopup } from '@lib/popup'
     import { OnboardingButton } from 'shared/components/atoms'
 
-    function handleSendClick(): void {
+    function onSendClick(): void {
         resetNewTransactionDetails()
         openPopup({
             type: 'sendForm',
@@ -16,5 +16,5 @@
 <OnboardingButton
     primaryText={localize('general.sendFunds')}
     secondaryText={localize('general.sendTokensToAddress')}
-    onClick={handleSendClick}
+    onClick={onSendClick}
 />

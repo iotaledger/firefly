@@ -4,8 +4,8 @@
     import { ExpirationTime } from 'components/modals/ExpirationTimePickerMenu.svelte'
 
     export let value: Date
-    export let initialSelected = ExpirationTime.None
-    export let disabled = false
+    export let initialSelected: ExpirationTime = ExpirationTime.None
+    export let disabled: boolean = false
 
     let menu: ExpirationTimePickerMenu
     let anchor: HTMLElement
