@@ -26,6 +26,8 @@ export const popupState = writable<PopupState>({
     relative: true,
 })
 
+export const lastPopup = writable<string>('')
+
 export const openPopup = (
     {
         type,
@@ -44,7 +46,8 @@ export const openPopup = (
         forceClose
     )
 
-export const closePopup = (forceClose: boolean = false): void =>
+export function closePopup(forceClose: boolean = false): void {
+    lastPopup.set(get(popupState).type)
     modifyPopupState(
         {
             active: false,
@@ -58,6 +61,7 @@ export const closePopup = (forceClose: boolean = false): void =>
         },
         forceClose
     )
+}
 
 const modifyPopupState = (state: PopupState, forceClose: boolean = false): void => {
     /**

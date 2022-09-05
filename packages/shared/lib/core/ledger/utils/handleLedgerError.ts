@@ -7,8 +7,7 @@ import { closePopup, openPopup, popupState } from '@lib/popup'
 import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
 import { deriveLedgerError } from '../helpers'
-import { resetLedgerMintNativeTokenConfirmationProps } from '../stores'
-import { resetNewTransactionDetails } from '@core/wallet'
+import { resetNewTransactionDetails, resetMintTokenDetails } from '@core/wallet'
 
 export function handleLedgerError(error: string, resetConfirmationPropsOnDenial: boolean = true): void {
     const ledgerError = deriveLedgerError(error)
@@ -24,7 +23,7 @@ export function handleLedgerError(error: string, resetConfirmationPropsOnDenial:
          */
         if (wasDeniedByUser && resetConfirmationPropsOnDenial) {
             resetNewTransactionDetails()
-            resetLedgerMintNativeTokenConfirmationProps()
+            resetMintTokenDetails()
         }
 
         closePopup(true)

@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { isSoftwareProfile, activeProfile, ProfileType, isActiveLedgerProfile } from '@core/profile'
-    import { promptUserToConnectLedger, updateLedgerMintNativeTokenConfirmationProps } from '@core/ledger'
+    import { isSoftwareProfile, isActiveLedgerProfile } from '@core/profile'
+    import { promptUserToConnectLedger } from '@core/ledger'
     import { mintNativeToken } from '@core/wallet'
-    import { closePopup, updatePopupProps } from '@lib/popup'
+    import { closePopup } from '@lib/popup'
     import { checkStronghold } from '@lib/stronghold'
     import { isTransferring } from '@lib/wallet'
     import {
@@ -19,19 +19,23 @@
     } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
     import { onMount } from 'svelte'
+    import { updateMintTokenDetails, mintTokenDetails } from '@core/wallet/stores/mint-token-details.store'
 
-    export let name: string
-    export let totalSupply: number
-    export let circulatingSupply: number
-    export let decimals = 0
-    export let symbol: string
-    export let description: string
-    export let url: string
-    export let logoUrl: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
+    let {
+        name: tokenName,
+        totalSupply,
+        circulatingSupply,
+        decimals,
+        symbol,
+        description,
+        url,
+        logoUrl,
+    } = $mintTokenDetails
+
     let nameError: string = ''
-    $: name, (nameError = '')
+    $: tokenName, (nameError = '')
     let totalSupplyError: string
     $: totalSupply, (totalSupplyError = '')
     let circulatingSupplyError: string
@@ -77,7 +81,7 @@
         try {
             await mintNativeToken(Number(totalSupply), Number(circulatingSupply), {
                 standard: 'IRC30',
-                name,
+                name: tokenName,
                 symbol,
                 decimals: Number(decimals),
                 ...(description && { description }),
@@ -107,31 +111,19 @@
         const valid = await validate()
         if (valid) {
             try {
+                updateMintTokenDetails({
+                    name: tokenName,
+                    totalSupply,
+                    circulatingSupply,
+                    decimals,
+                    symbol,
+                    description,
+                    url,
+                    logoUrl,
+                })
                 if ($isSoftwareProfile) {
-                    updatePopupProps({
-                        name,
-                        totalSupply,
-                        circulatingSupply,
-                        decimals,
-                        symbol,
-                        description,
-                        url,
-                        logoUrl,
-                    })
                     await checkStronghold(mintAction, true)
                 } else if ($isActiveLedgerProfile) {
-                    if ($activeProfile.type === ProfileType.Ledger) {
-                        updateLedgerMintNativeTokenConfirmationProps({
-                            name,
-                            totalSupply,
-                            circulatingSupply,
-                            decimals,
-                            symbol,
-                            description,
-                            url,
-                            logoUrl,
-                        })
-                    }
                     void promptUserToConnectLedger(mintAction)
                 }
             } catch (reason) {
@@ -165,7 +157,7 @@
     }
 
     function isNameValid(): Promise<void> {
-        if (!name) {
+        if (!tokenName) {
             nameError = 'Name is required'
             return Promise.reject(nameError)
         } else {
@@ -241,7 +233,7 @@
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
         <TextInput
-            bind:value={name}
+            bind:value={tokenName}
             label={localize('popups.mintNativeTokenForm.inputs.name')}
             placeholder={localize('popups.mintNativeTokenForm.inputs.name')}
             error={nameError}
