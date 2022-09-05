@@ -465,7 +465,7 @@ export const createMinedLedgerMigrationBundle = (
         })
     })
 
-    openLedgerLegacyTransactionPopup(transfer, inputs)
+    // openLedgerLegacyTransactionPopup(transfer, inputs)
 
     return prepareTransfersFn([transfer], inputs, undefined, () => txs[0].timestamp * 1000).then((trytes) => {
         updateLedgerBundleState(bundleIndex, trytes, false)
@@ -518,7 +518,7 @@ export const createLedgerMigrationBundle = (
             tag: 'U'.repeat(27),
         }
 
-        openLedgerLegacyTransactionPopup(transfer, bundle.inputs)
+        // openLedgerLegacyTransactionPopup(transfer, bundle.inputs)
 
         return prepareTransfersFn(
             [transfer],
@@ -1275,15 +1275,3 @@ export function openSnapshotPopup(): void {
 //         }
 //     })
 // }
-
-function openLedgerLegacyTransactionPopup(transfer: Transfer, inputs: Input[]): void {
-    openPopup({
-        type: 'ledgerLegacyTransaction',
-        hideClose: true,
-        preventClose: true,
-        props: {
-            transfer,
-            inputs,
-        },
-    })
-}

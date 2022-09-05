@@ -730,7 +730,10 @@
             "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notDetected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue."
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
@@ -1032,7 +1035,9 @@
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
         "test": "Test",
-        "testDeepLink": "Test deep link"
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Recipient",

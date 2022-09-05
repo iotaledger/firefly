@@ -1,13 +1,15 @@
-import { get } from 'svelte/store'
-import { profileManager } from '../stores'
+import { get, Writable } from 'svelte/store'
+
 import {
     handleNewOutputEvent,
     handleSpentOutputEvent,
     handleTransactionInclusionEvent,
     handleTransactionProgressEvent,
-} from '../api/events'
+} from '../api'
+import { IProfileManager } from '../interfaces'
+import { profileManager as _profileManager } from '../stores'
 
-export function subscribeToWalletApiEvents(): void {
+export function subscribeToWalletApiEvents(profileManager: Writable<IProfileManager> = _profileManager): void {
     const manager = get(profileManager)
 
     manager.listen([], (error, result) => {
@@ -32,38 +34,3 @@ export function subscribeToWalletApiEvents(): void {
         }
     })
 }
-
-// TODO: Are those required?
-
-// /**
-//  * Event listener for reattachment
-//  */
-//  api.onReattachment({
-//     onSuccess(response) {
-//         // Replace original message with reattachment
-//         replaceMessage(response.payload.accountId, response.payload.reattachedMessageId, response.payload.message)
-//     },
-//     onError(error) {
-//         console.error(error)
-//     },
-// })
-
-// /**
-//  * Event listener for Ledger receive address generation
-//  */
-// api.onLedgerAddressGeneration({
-//     onSuccess(response) {
-//         const { event } = response.payload
-//         openPopup({
-//             type: 'ledgerAddress',
-//             hideClose: true,
-//             preventClose: true,
-//             props: {
-//                 address: event.address,
-//             },
-//         })
-//     },
-//     onError(error) {
-//         console.error(error)
-//     },
-// })

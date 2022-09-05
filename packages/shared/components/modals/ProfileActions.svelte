@@ -7,7 +7,7 @@
     import { openSettings } from '@core/router'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { appVersionDetails } from '@core/app'
-    import { activeProfile, isSoftwareProfile, isLedgerProfile, logout, lockStronghold } from '@core/profile'
+    import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, logout, lockStronghold } from '@core/profile'
 
     export let modal: Modal
 
@@ -29,7 +29,7 @@
     // used to prevent the modal from closing when interacting with the password popup
     // to be able to see the stronghold toggle change
     $: isPasswordPopupOpen = $popupState?.active && $popupState?.type === 'password'
-    $: if ($isLedgerProfile && $ledgerDeviceStatus) {
+    $: if ($isActiveLedgerProfile && $ledgerDeviceStatus) {
         updateLedgerConnectionText()
     }
 
@@ -101,8 +101,8 @@
                     <DeveloperIndicatorPill />
                 {/if}
             </div>
-            {#if $isLedgerProfile}
-                <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
+            {#if $isActiveLedgerProfile}
+                <Icon icon="ledger" classes="text-gray-900 dark:text-gray-100 w-4 h-4" />
             {/if}
         </div>
         <HR />
