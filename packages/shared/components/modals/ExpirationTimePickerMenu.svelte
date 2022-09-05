@@ -1,15 +1,6 @@
-<script lang="typescript" context="module">
-    export enum ExpirationTime {
-        None,
-        OneHour,
-        OneDay,
-        OneWeek,
-        Custom,
-    }
-</script>
-
 <script lang="typescript">
     import { formatDate, localize } from '@core/i18n'
+    import { ExpirationTime } from '@core/utils'
     import { HR, Modal, MenuItem, ExpirationDateTimePicker } from 'shared/components'
     import { fade } from 'svelte/transition'
 
