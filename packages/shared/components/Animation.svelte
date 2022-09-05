@@ -108,44 +108,40 @@
             darkmode: 'loading-desktop.json',
         },
         'ledger-choose-index-desktop': {
-            lightmode: 'ledger-choose-index-desktop.json',
-            darkmode: 'ledger-choose-index-desktop-darkmode.json',
-        },
-        'ledger-migrate-desktop': {
-            lightmode: 'ledger-migrate-desktop.json',
-            darkmode: 'ledger-migrate-desktop-darkmode.json',
+            lightmode: 'ledger/ledger-choose-index-desktop.json',
+            darkmode: 'ledger/ledger-choose-index-desktop-darkmode.json',
         },
         'ledger-bg-desktop': {
-            lightmode: 'ledger-bg-desktop.json',
-            darkmode: 'ledger-bg-desktop-darkmode.json',
+            lightmode: 'ledger/ledger-bg-desktop.json',
+            darkmode: 'ledger/ledger-bg-desktop-darkmode.json',
         },
         'ledger-switch-app-desktop': {
-            lightmode: 'ledger-switch-app-desktop.json',
-            darkmode: 'ledger-switch-app-desktop.json',
+            lightmode: 'ledger/ledger-switch-app-desktop.json',
+            darkmode: 'ledger/ledger-switch-app-desktop.json',
         },
         'ledger-generate-address-desktop': {
-            lightmode: 'ledger-generate-address-desktop.json',
-            darkmode: 'ledger-generate-address-desktop.json',
+            lightmode: 'ledger/ledger-generate-address-desktop.json',
+            darkmode: 'ledger/ledger-generate-address-desktop.json',
         },
-        'ledger-address-confirmed-desktop': {
-            lightmode: 'ledger-address-confirmed-desktop.json',
-            darkmode: 'ledger-address-confirmed-desktop.json',
+        'ledger-prompt-confirmed-desktop': {
+            lightmode: 'ledger/ledger-prompt-confirmed-desktop.json',
+            darkmode: 'ledger/ledger-prompt-confirmed-desktop.json',
         },
-        'ledger-confirm-address-desktop': {
-            lightmode: 'ledger-confirm-address-desktop.json',
-            darkmode: 'ledger-confirm-address-desktop.json',
+        'ledger-confirm-prompt-desktop': {
+            lightmode: 'ledger/ledger-confirm-prompt-desktop.json',
+            darkmode: 'ledger/ledger-confirm-prompt-desktop.json',
         },
         'ledger-connected-desktop': {
-            lightmode: 'ledger-connected-desktop.json',
-            darkmode: 'ledger-connected-desktop.json',
+            lightmode: 'ledger/ledger-connected-desktop.json',
+            darkmode: 'ledger/ledger-connected-desktop.json',
         },
         'ledger-disconnected-desktop': {
-            lightmode: 'ledger-disconnected-desktop.json',
-            darkmode: 'ledger-disconnected-desktop.json',
+            lightmode: 'ledger/ledger-disconnected-desktop.json',
+            darkmode: 'ledger/ledger-disconnected-desktop.json',
         },
         'ledger-app-closed-desktop': {
-            lightmode: 'ledger-app-closed-desktop.json',
-            darkmode: 'ledger-app-closed-desktop.json',
+            lightmode: 'ledger/ledger-app-closed-desktop.json',
+            darkmode: 'ledger/ledger-app-closed-desktop.json',
         },
         // Staking
         'staking-prestaking': {
