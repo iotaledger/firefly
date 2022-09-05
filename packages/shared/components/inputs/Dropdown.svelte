@@ -165,7 +165,7 @@
         bg-white dark:bg-gray-800
             border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700"
     >
-        <div class="inner overflow-y-auto scroll-secondary" bind:this={navContainer}>
+        <div class="inner overflow-y-auto" bind:this={navContainer}>
             {#each items as item}
                 <button
                     class="relative flex items-center p-4 w-full whitespace-nowrap

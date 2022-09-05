@@ -52,7 +52,7 @@
             {#if isLedgerProfile}
                 <Icon
                     icon="ledger"
-                    classes="text-gray-400 dark:text-gray-700 relative top-0.5"
+                    classes="text-gray-900 dark:text-gray-100 relative top-0.5"
                     width={14}
                     height={14}
                 />
