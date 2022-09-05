@@ -38,7 +38,7 @@
     }
 
     function onSendClick(): void {
-        setNewTransactionDetails({ asset })
+        setNewTransactionDetails({ asset, amount: '0' })
         openPopup({
             type: 'sendForm',
             overflow: true,
