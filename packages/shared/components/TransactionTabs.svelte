@@ -44,7 +44,7 @@
         <Icon icon="search" classes="text-blue-500 dark:text-white" width="22" height="22" />
     </button>
 </nav>
-<main class="overflow-y-auto h-full space-y-2.5 -mr-2 pr-2 scroll-secondary">
+<main class="overflow-y-auto h-full space-y-2.5 -mr-2 pr-2">
     {#if filtered.length > 0}
         {#each filtered as item (item.id)}
             <div in:fly={{ y: 40, duration: 357, easing: easing.quadIn }} animate:flip={{ duration: 757 }}>

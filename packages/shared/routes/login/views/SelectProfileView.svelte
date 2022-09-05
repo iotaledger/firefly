@@ -49,7 +49,7 @@
     <Logo width="64px" logo="logo-firefly" classes="absolute top-20" />
     <div
         class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile &&
-            'overflow-y-auto'} flex flex-row flex-wrap"
+            'overlay-scrollbar'} flex flex-row flex-wrap"
     >
         {#each $profiles as profile}
             <div class="mx-7 mb-8">

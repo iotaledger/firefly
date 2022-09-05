@@ -1,4 +1,4 @@
 export enum LedgerAppName {
-    BOLOS = 'BOLOS',
-    SHIMMER = 'Shimmer',
+    Bolos = 'BOLOS',
+    Shimmer = 'Shimmer',
 }

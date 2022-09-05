@@ -4,7 +4,7 @@ import { localize } from '@core/i18n'
 import { NotificationType } from '@lib/typings/notification'
 import { isNewNotification, showAppNotification } from '@lib/notifications'
 
-import { ledgerDeviceStatus } from '../stores'
+import { ledgerConnectionState } from '../stores'
 import { getLedgerDeviceStatus } from './getLedgerDeviceStatus'
 
 export function displayNotificationForLedgerProfile(
@@ -17,12 +17,12 @@ export function displayNotificationForLedgerProfile(
     let notificationId
 
     const _notify = () => {
-        const status = get(ledgerDeviceStatus)
+        const _ledgerConnectionState = get(ledgerConnectionState)
         const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
 
         const shouldNotify = allowedToNotify
         if (shouldNotify) {
-            const stateErrorMessage = localize(`error.ledger.${status.connectionState}`)
+            const stateErrorMessage = localize(`error.ledger.${_ledgerConnectionState}`)
             const errorMessage = error?.error ? localize(error.error) : error
             const message = error ? errorMessage : stateErrorMessage
             notificationId = showAppNotification({
@@ -34,7 +34,7 @@ export function displayNotificationForLedgerProfile(
     }
 
     if (checkDeviceStatus) {
-        getLedgerDeviceStatus()
+        void getLedgerDeviceStatus()
     } else {
         _notify()
     }

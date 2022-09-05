@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
     import { Button, Checkbox, Icon, Text, Tooltip } from 'shared/components'
-    import { ledgerDeviceStatus, LedgerConnectionState } from '@core/ledger'
+    import { ledgerConnectionState, LedgerConnectionState } from '@core/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
         canAccountReachMinimumAirdrop,
@@ -17,7 +17,7 @@
     import type { Participation } from '@lib/participation'
     import { openPopup } from 'shared/lib/popup'
     import { isSoftwareProfile } from '@core/profile'
-    import { checkStronghold } from 'shared/lib/stronghold'
+    import { checkOrUnlockStronghold } from '@core/stronghold'
     import { formatUnitBestMatch } from 'shared/lib/units'
     import { capitalize } from 'shared/lib/utils'
     import { localize } from '@core/i18n'
@@ -90,9 +90,9 @@
 
     function handleConfirmClick(): void {
         if ($isSoftwareProfile) {
-            void checkStronghold(openStakingManager)
+            void checkOrUnlockStronghold(openStakingManager)
         } else {
-            if ($ledgerDeviceStatus.connectionState !== LedgerConnectionState.Connected) {
+            if ($ledgerConnectionState !== LedgerConnectionState.CorrectAppOpen) {
                 showAppNotification({
                     type: 'warning',
                     message: localize('error.ledger.appNotOpen'),

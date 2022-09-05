@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Spinner, Toggle } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
@@ -7,7 +8,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile, isActiveLedgerProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
@@ -28,9 +29,6 @@
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
-    import { checkStronghold } from '@lib/stronghold'
-    import { promptUserToConnectLedger } from '@core/ledger'
-    import { get } from 'svelte/store'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -48,9 +46,9 @@
     const rawAmount = asset.metadata
         ? generateRawAmount(String(parseCurrency(amount)), unit, asset.metadata)
         : parseCurrency(amount)
-    const recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
-    const isInternal = recipient.type === 'account'
-    const isNativeToken = asset.id !== $selectedAccountAssets?.baseCoin?.id
+    $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+    $: isInternal = recipient.type === 'account'
+    $: isNativeToken = asset?.id !== $selectedAccountAssets?.baseCoin?.id
 
     $: expirationDate, void _prepareOutput()
     $: expirationDate, (error = null)
@@ -118,11 +116,7 @@
         error = null
         try {
             updateNewTransactionDetails({ expirationDate, giftStorageDeposit })
-            if ($isSoftwareProfile) {
-                await checkStronghold(validateAndSendOutput, true)
-            } else if ($isActiveLedgerProfile) {
-                promptUserToConnectLedger(validateAndSendOutput, undefined, true)
-            }
+            await checkActiveProfileAuth(validateAndSendOutput, { stronghold: true, ledger: false })
         } catch (err) {
             if (!error) {
                 error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err

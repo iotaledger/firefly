@@ -2,14 +2,10 @@
     import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
-    import { promptUserToConnectLedger } from '@core/ledger'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup } from '@lib/popup'
 
     export let error = ''
-
-    const { isStrongholdLocked } = $activeProfile
 
     let isBusy = false
     let accountAlias = $selectedAccount.name
@@ -32,14 +28,7 @@
             }
 
             isBusy = true
-
-            if ($isActiveLedgerProfile) {
-                promptUserToConnectLedger(_save, _cancel)
-            } else if ($isSoftwareProfile && $isStrongholdLocked) {
-                openPopup({ type: 'password', props: { onSuccess: _save } })
-            } else {
-                void _save()
-            }
+            await _save()
         }
     }
 
@@ -56,10 +45,6 @@
         } finally {
             isBusy = false
         }
-    }
-
-    function _cancel(): void {
-        isBusy = false
     }
 </script>
 

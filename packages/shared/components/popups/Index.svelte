@@ -18,11 +18,11 @@
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
-    import PromptLedgerConnectionPopup from './PromptLedgerConnectionPopup.svelte'
+    import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
     import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import MissingBundle from './MissingBundle.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
-    import PasswordPopup from './PasswordPopup.svelte'
+    import UnlockStrongholdPopup from './UnlockStrongholdPopup.svelte'
     import QR from './QR.svelte'
     import RemoveNode from './RemoveNode.svelte'
     import RiskFunds from './RiskFunds.svelte'
@@ -71,7 +71,7 @@
     let os = ''
 
     $: switch (type) {
-        case 'promptLedgerConnection':
+        case 'connectLedger':
         case 'createAccount':
         case 'manageAccount':
             size = PopupSize.Small
@@ -94,13 +94,13 @@
 
     const types = {
         qr: QR,
-        password: PasswordPopup,
+        unlockStronghold: UnlockStrongholdPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,
         confirmation: ConfirmationPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
-        promptLedgerConnection: PromptLedgerConnectionPopup,
+        connectLedger: ConnectLedgerPopup,
         ledgerAppGuide: LedgerAppGuidePopup,
         ledgerConnectionGuide: LedgerConnectionGuidePopup,
         verifyLedgerTransaction: VerifyLedgerTransactionPopup,

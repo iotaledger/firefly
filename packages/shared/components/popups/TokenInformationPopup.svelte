@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { IAsset, setNewTransactionDetails, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
-    import { truncateString } from '@lib/helpers'
     import { openPopup, updatePopupProps } from '@lib/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
@@ -86,7 +85,7 @@
             />
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
-                valueText={truncateString(asset?.id, 18, 18, 3)}
+                valueText={asset?.id}
                 isCopyable={asset?.standard === 'IRC30'}
                 copyValue={asset?.id}
             />
