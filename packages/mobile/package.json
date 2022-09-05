@@ -7,7 +7,12 @@
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "NODE_ENV=production PLATFORM=mobile webpack && yarn assets:beta",
+        "build": "STAGE=beta NODE_ENV=production PLATFORM=mobile webpack && yarn assets:beta",
+        "build:prod": "STAGE=prod NODE_ENV=production PLATFORM=mobile webpack && yarn assets:prod",
+        "build:beta:android": "yarn build:beta && yarn android:update",
+        "build:beta:ios": "yarn build:beta && yarn ios:update",
+        "build:prod:android": "yarn build:prod && yarn android:update",
+        "build:prod:ios": "yarn build:prod && yarn ios:update",
         "ios": "cap copy ios && cap open ios",
         "ios:update": "cap sync ios && cap open ios",
         "android": "cap copy android && cap open android",
