@@ -2,7 +2,9 @@ import { getUnit, UNIT_MAP } from '@lib/units'
 import { ITokenMetadata } from '../interfaces'
 
 export function parseRawAmount(rawAmount: number, tokenMetadata: ITokenMetadata): { amount: string; unit: string } {
-    let amount, unit: string
+    let amount: string
+    let unit: string
+
     if (tokenMetadata) {
         if (tokenMetadata?.useMetricPrefix) {
             const metricUnit = getUnit(rawAmount)
@@ -15,7 +17,7 @@ export function parseRawAmount(rawAmount: number, tokenMetadata: ITokenMetadata)
             unit = tokenMetadata.unit
         }
     } else {
-        amount = rawAmount
+        amount = rawAmount.toString()
     }
     return { amount, unit }
 }

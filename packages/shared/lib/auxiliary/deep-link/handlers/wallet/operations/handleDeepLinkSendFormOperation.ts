@@ -1,5 +1,4 @@
-import { AmountNotANumberError } from '@auxiliary/deep-link/errors'
-import { addError } from '@core/error'
+import { AmountNotANumberError, InvalidAddressError, NoAddressSpecifiedError } from '@auxiliary/deep-link/errors'
 import { networkHrp } from '@core/network'
 import { INewTransactionDetails, Subject, updateNewTransactionDetails } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
@@ -25,24 +24,18 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
  *
  * @method parseSendFormOperation
  *
- * @param {string} address The recipient's Bech32 address.
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
- * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
  *
- * @return {void | INewTransactionDetails} The formatted parameters for the send operation.
+ * @return {INewTransactionDetails} The formatted parameters for the send operation.
  */
-function parseSendFormOperation(searchParams: URLSearchParams): void | INewTransactionDetails {
+function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionDetails {
     // Check address exists and is valid this is not optional.
     const address = searchParams.get(SendOperationParameter.Address)
     if (!address) {
-        return addError({ time: Date.now(), type: 'deepLink', message: 'No address specified in the url path' })
+        throw new NoAddressSpecifiedError()
     }
     if (!isValidAddressAndPrefix(address, get(networkHrp))) {
-        return addError({
-            time: Date.now(),
-            type: 'deepLink',
-            message: `Address or prefix is not valid for ${address}`,
-        })
+        throw new InvalidAddressError(address)
     }
 
     // Optional parameter: amount
