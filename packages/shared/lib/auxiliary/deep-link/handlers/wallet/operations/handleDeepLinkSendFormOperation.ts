@@ -1,6 +1,7 @@
+import { AmountNotANumberError } from '@auxiliary/deep-link/errors'
 import { addError } from '@core/error'
 import { networkHrp } from '@core/network'
-import { INewTransactionDetails, Subject } from '@core/wallet'
+import { INewTransactionDetails, Subject, updateNewTransactionDetails } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 import { get } from 'svelte/store'
@@ -8,15 +9,13 @@ import { get } from 'svelte/store'
 import { SendOperationParameter } from '../../../enums'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
-    const sendFormParameters = parseSendFormOperation(searchParams)
+    const transactionDetails = parseSendFormOperation(searchParams)
 
-    if (sendFormParameters) {
+    if (transactionDetails) {
+        updateNewTransactionDetails({ ...transactionDetails })
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                ...sendFormParameters,
-            },
         })
     }
 }
@@ -53,7 +52,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): void | INewTrans
     if (amountParam) {
         parsedAmount = Number(amountParam)
         if (!parsedAmount) {
-            return addError({ time: Date.now(), type: 'deepLink', message: `Amount is not a number '${amountParam}'` })
+            throw new AmountNotANumberError(amountParam)
         }
     } else {
         parsedAmount = 0

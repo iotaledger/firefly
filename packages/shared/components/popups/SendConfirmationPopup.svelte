@@ -1,15 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import {
-        Button,
-        ExpirationTime,
-        ExpirationTimePicker,
-        KeyValueBox,
-        Text,
-        Error,
-        Spinner,
-        Toggle,
-    } from 'shared/components'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Spinner, Toggle } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
@@ -17,6 +8,7 @@
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, ProfileType } from '@core/profile'
+    import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
         ActivityType,
@@ -41,12 +33,20 @@
     import { get } from 'svelte/store'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
-    export let giftStorageDeposit = false
-    export let disableToggleGift = false
-    export let disableChangeExpiration = false
     export let disableBack = false
 
-    let { asset, amount, expirationDate, unit, recipient, metadata, tag } = get(newTransactionDetails)
+    let {
+        asset,
+        amount,
+        giftStorageDeposit,
+        expirationDate,
+        unit,
+        recipient,
+        metadata,
+        tag,
+        disableChangeExpiration,
+        disableToggleGift,
+    } = get(newTransactionDetails)
 
     let storageDeposit = 0
     let giftedStorageDeposit = 0
@@ -115,7 +115,7 @@
 
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
-        updateNewTransactionDetails({ expirationDate })
+        updateNewTransactionDetails({ expirationDate, giftStorageDeposit })
         // TODO: We need to replace ledgerSendConfirmationProps with newTransactionDetails
         if ($activeProfile.type === ProfileType.Ledger) {
             setLedgerSendConfirmationProps({
