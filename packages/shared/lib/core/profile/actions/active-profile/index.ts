@@ -1,3 +1,4 @@
+export * from './checkActiveProfileAuth'
 export * from './isActiveProfileOutdated'
 export * from './loadAccounts'
 export * from './loadPersistedProfileIntoActiveProfile'

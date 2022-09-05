@@ -2,6 +2,7 @@
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
+    import { checkActiveProfileAuth } from '@core/profile'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -109,7 +110,7 @@
     }
 
     function handleClaimClick(): void {
-        claimActivity(activityId, data)
+        checkActiveProfileAuth(() => claimActivity(activityId, data))
     }
 </script>
 

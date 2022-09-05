@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { selectedAccountId } from '@core/account'
-import { ledgerDeviceStatus, openLedgerConfirmationPopup } from '@core/ledger'
+import { ledgerNanoStatus, openLedgerConfirmationPopup } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import {
     MissingTransactionProgressEventPayloadError,
@@ -41,7 +41,7 @@ function handleTransactionProgressInternal(
         } else if (isPreparedTransaction(payload)) {
             openLedgerConfirmationPopup(payload, isDuringOnboarding)
         } else if (isPreparedTransactionEssenceHash(payload)) {
-            if (get(ledgerDeviceStatus)?.blindSigningEnabled) {
+            if (get(ledgerNanoStatus)?.blindSigningEnabled) {
                 openLedgerConfirmationPopup(payload, isDuringOnboarding)
             } else {
                 openPopup({ type: 'enableLedgerBlindSigning', hideClose: true, preventClose: true })

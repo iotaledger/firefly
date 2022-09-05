@@ -29,6 +29,8 @@ import {
 import { loadAccounts } from './loadAccounts'
 import { ILoginOptions } from '../../interfaces'
 import { logout } from './logout'
+import { pollLedgerNanoStatus } from '@core/ledger'
+import { isLedgerProfile } from '@core/profile/utils'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
@@ -103,6 +105,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 9: finish login
             incrementLoginProgress()
+            if (isLedgerProfile(type)) {
+                pollLedgerNanoStatus()
+            }
             setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)

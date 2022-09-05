@@ -12,7 +12,7 @@
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
-    import { isPollingLedgerDeviceStatus, stopPollingLedgerStatus, pollLedgerDeviceStatus } from '@core/ledger'
+    import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ongoingSnapshot } from 'shared/lib/migration'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
@@ -92,7 +92,7 @@
             removeDisplayNotification(developerProfileNotificationId)
         }
         if ($isActiveLedgerProfile) {
-            stopPollingLedgerStatus()
+            stopPollingLedgerNanoStatus()
         }
     })
 
@@ -101,14 +101,6 @@
         if ($activeProfile?.hasLoadedAccounts) {
             handleDeepLink(data)
         }
-    }
-
-    /**
-     * Reactive statement to resume ledger poll if it was interrupted
-     * when the one which interrupted has finished
-     */
-    $: if ($activeProfile && $isActiveLedgerProfile && !$isPollingLedgerDeviceStatus) {
-        pollLedgerDeviceStatus()
     }
 
     $: $hasStrongholdLocked && reflectLockedStronghold()

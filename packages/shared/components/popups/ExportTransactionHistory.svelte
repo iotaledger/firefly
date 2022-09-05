@@ -5,7 +5,7 @@
     } from 'shared/lib/transactionHistory'
     import { Button, PasswordInput, Spinner, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { displayNotificationForLedgerProfile, ledgerDeviceStatus } from '@core/ledger'
+    import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
     import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
@@ -27,11 +27,9 @@
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await setStrongholdPassword(password)
-            } else if ($isActiveLedgerProfile && !$ledgerDeviceStatus.connected) {
+            } else if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
                 isBusy = false
-
                 displayNotificationForLedgerProfile('warning')
-
                 return
             }
 

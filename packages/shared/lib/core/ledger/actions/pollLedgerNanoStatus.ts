@@ -1,29 +1,21 @@
 import { get } from 'svelte/store'
-
 import { LEDGER_STATUS_POLL_INTERVAL } from '../constants'
 import { isPollingLedgerDeviceStatus } from '../stores'
-
-import { getLedgerDeviceStatus } from './getLedgerDeviceStatus'
+import { getAndUpdateLedgerNanoStatus } from './getAndUpdateLedgerNanoStatus'
 
 let intervalTimer
 
-export function pollLedgerDeviceStatus(
-    pollInterval: number = LEDGER_STATUS_POLL_INTERVAL,
-    _onConnected: () => void = () => {},
-    _onDisconnected: () => void = () => {},
-    _onCancel: () => void = () => {}
-): void {
+export function pollLedgerNanoStatus(pollInterval: number = LEDGER_STATUS_POLL_INTERVAL): void {
     if (!get(isPollingLedgerDeviceStatus)) {
-        void getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+        void getAndUpdateLedgerNanoStatus()
         intervalTimer = setInterval(() => {
-            void getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+            void getAndUpdateLedgerNanoStatus()
         }, pollInterval)
-
         isPollingLedgerDeviceStatus.set(true)
     }
 }
 
-export function stopPollingLedgerStatus(): void {
+export function stopPollingLedgerNanoStatus(): void {
     if (get(isPollingLedgerDeviceStatus)) {
         clearInterval(intervalTimer)
         intervalTimer = null

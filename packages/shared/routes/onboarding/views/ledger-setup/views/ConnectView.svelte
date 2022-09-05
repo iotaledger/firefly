@@ -1,13 +1,13 @@
 <script lang="typescript">
-    import { onDestroy, onMount } from 'svelte'
+    import { onMount } from 'svelte'
     import { Animation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
     import {
         LedgerConnectionState,
-        ledgerDeviceStatus,
-        stopPollingLedgerStatus,
-        pollLedgerDeviceStatus,
+        ledgerConnectionState,
+        stopPollingLedgerNanoStatus,
+        pollLedgerNanoStatus,
         getLedgerDeviceStatus,
         displayNotificationForLedgerProfile,
     } from '@core/ledger'
@@ -17,8 +17,8 @@
     let polling = false
     let isBusy = false
 
-    $: isConnected = $ledgerDeviceStatus.connectionState !== LedgerConnectionState.NotDetected
-    $: isAppOpen = $ledgerDeviceStatus.connectionState === LedgerConnectionState.Connected
+    $: isConnected = $ledgerConnectionState !== LedgerConnectionState.NotConnected
+    $: isAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
     $: animation = !isConnected
         ? 'ledger-disconnected-desktop'
         : isAppOpen
@@ -30,7 +30,7 @@
     }
 
     async function _onConnected(): Promise<void> {
-        if ($ledgerDeviceStatus.connectionState !== LedgerConnectionState.Connected) {
+        if ($ledgerConnectionState !== LedgerConnectionState.CorrectAppOpen) {
             _onCancel()
         } else {
             isBusy = true
@@ -55,15 +55,14 @@
     }
 
     function onBackClick(): void {
+        stopPollingLedgerNanoStatus()
         $ledgerSetupRouter.previous()
     }
 
     onMount(() => {
-        pollLedgerDeviceStatus()
+        pollLedgerNanoStatus()
         polling = true
     })
-
-    onDestroy(stopPollingLedgerStatus)
 </script>
 
 <OnboardingLayout {onBackClick}>

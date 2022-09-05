@@ -125,7 +125,7 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
-    getLedgerStatus(): Promise<LedgerNanoStatus> {
+    getLedgerNanoStatus(): Promise<LedgerNanoStatus> {
         return new Promise((resolve) =>
             resolve({
                 connected: true,

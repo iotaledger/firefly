@@ -7,7 +7,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, ProfileType } from '@core/profile'
+    import { activeProfile, ProfileType, checkActiveProfileAuth } from '@core/profile'
     import {
         ActivityDirection,
         ActivityType,
@@ -27,8 +27,7 @@
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
-    import { checkStronghold } from '@lib/stronghold'
-    import { promptUserToConnectLedger, setLedgerSendConfirmationProps } from '@core/ledger'
+    import { setLedgerSendConfirmationProps } from '@core/ledger'
 
     export let asset: IAsset
     export let amount = '0'
@@ -124,11 +123,7 @@
     async function onConfirm(): Promise<void> {
         error = null
         try {
-            if ($isSoftwareProfile) {
-                await checkStronghold(validateAndSendOutput, true)
-            } else if ($isActiveLedgerProfile) {
-                promptUserToConnectLedger(validateAndSendOutput, undefined, true)
-            }
+            await checkActiveProfileAuth(validateAndSendOutput, { stronghold: true, ledger: false })
         } catch (err) {
             if (!error) {
                 error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
