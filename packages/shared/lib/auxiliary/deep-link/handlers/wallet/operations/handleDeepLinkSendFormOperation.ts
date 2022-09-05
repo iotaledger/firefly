@@ -1,6 +1,12 @@
-import { AmountNotANumberError, InvalidAddressError, NoAddressSpecifiedError } from '@auxiliary/deep-link/errors'
+import { InvalidAddressError, NoAddressSpecifiedError } from '@auxiliary/deep-link/errors'
+import { getAmountFromSearchParam } from '@auxiliary/deep-link/handlers/wallet/operations/getAmountFromSearchParam'
 import { networkHrp } from '@core/network'
-import { INewTransactionDetails, Subject, updateNewTransactionDetails } from '@core/wallet'
+import {
+    INewTransactionDetails,
+    Subject,
+    updateNewTransactionDetails,
+    visibleSelectedAccountAssets,
+} from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 import { get } from 'svelte/store'
@@ -38,20 +44,9 @@ function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionD
         throw new InvalidAddressError(address)
     }
 
-    // Optional parameter: amount
-    // Check if exists and is valid or does not exist
-    let parsedAmount: number
-    const amountParam = searchParams.get(SendOperationParameter.Amount)
-    if (amountParam) {
-        parsedAmount = Number(amountParam)
-        if (!parsedAmount) {
-            throw new AmountNotANumberError(amountParam)
-        }
-    } else {
-        parsedAmount = 0
-    }
+    const asset = get(visibleSelectedAccountAssets)?.baseCoin
+    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
 
-    const amount = String(Math.abs(parsedAmount))
     const unit = searchParams.get(SendOperationParameter.Unit)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)
