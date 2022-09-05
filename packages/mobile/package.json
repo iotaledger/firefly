@@ -22,7 +22,8 @@
         "assets:alpha": "capacitor/assets/assetgen.sh alpha.png",
         "assets:beta": "capacitor/assets/assetgen.sh beta.png",
         "assets:prod": "capacitor/assets/assetgen.sh prod.png",
-        "rename:appid:android": "mv android/app/src/main/java/org/iota/firefly/alpha/mobile/* android/app/src/main/java/org/iota/firefly/mobile/"
+        "rename:appid:android": "mv android/app/src/main/java/org/iota/firefly/alpha/mobile/* android/app/src/main/java/org/iota/firefly/mobile/",
+        "force:install:pods": "cd ios/App && rm -rf ~/Library/Caches/CocoaPods Pods ~/Library/Developer/Xcode/DerivedData && pod deintegrate && pod install"
     },
     "devDependencies": {
         "@capacitor/android": "3.4.1",
