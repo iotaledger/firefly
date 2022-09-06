@@ -19,7 +19,7 @@ export function handleClientError(error: IError): void {
         if (errorKey) {
             const errorObject = WALLET_RS_ERROR_PARAMETERS?.[WalletRsError.ClientError]?.[errorKey]
             if (errorObject) {
-                logAndNotifyError({ ...errorObject, message: errorMessage })
+                logAndNotifyError({ ...errorObject, message: errorMessage, type: error.type })
             } else {
                 handleGenericError(error)
             }

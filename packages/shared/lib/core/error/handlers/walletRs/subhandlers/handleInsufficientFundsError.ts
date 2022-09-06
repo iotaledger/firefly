@@ -3,7 +3,7 @@ import { WalletRsError } from '../../../enums'
 import { IError } from '../../../interfaces'
 import { logAndNotifyError } from '../../../actions'
 
-export function handleInsufficientFunds(error: IError): void {
+export function handleInsufficientFundsError(error: IError): void {
     const errorObject = WALLET_RS_ERROR_PARAMETERS?.[WalletRsError.InsufficientFunds]
-    logAndNotifyError({ ...errorObject, message: error?.message })
+    logAndNotifyError({ ...errorObject, message: error?.error, type: error.type })
 }

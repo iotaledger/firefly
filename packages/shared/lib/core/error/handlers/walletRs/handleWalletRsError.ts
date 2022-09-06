@@ -1,6 +1,6 @@
 import { IError } from '../../interfaces'
 import { WalletRsError } from '../../enums'
-import { handleClientError } from './subhandlers'
+import { handleClientError, handleInsufficientFundsError } from './subhandlers'
 import { handleGenericError } from '../handleGenericError'
 
 export function handleWalletRsError(error: IError): void {

@@ -14,7 +14,7 @@ export function logAndNotifyError(errorParameters: IErrorParameters): void {
     }
 
     if (errorParameters?.saveToErrorLog) {
-        addError(errorParameters)
+        addError({ ...errorParameters, time: Date.now() })
     }
 
     if (errorParameters?.showNotification) {

@@ -20,7 +20,7 @@ export const WALLET_RS_ERROR_PARAMETERS: Readonly<{
         },
     },
     [WalletRsError.InsufficientFunds]: {
-        localizationKey: `error.node.${ClientError.TimeNotSynced}`,
+        localizationKey: 'error.send.insufficientFundsStorageDeposit',
         logToConsole: true,
         saveToErrorLog: true,
         showNotification: true,
