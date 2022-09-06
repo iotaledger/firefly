@@ -47,7 +47,6 @@ export const openPopup = (
     )
 
 export function closePopup(forceClose: boolean = false): void {
-    lastPopup.set(get(popupState).type)
     modifyPopupState(
         {
             active: false,
