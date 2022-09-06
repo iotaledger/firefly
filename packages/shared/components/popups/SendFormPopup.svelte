@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text, RecipientInput, AssetAmountInput, ClosableInput, AddInputButton } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { closePopup, lastPopup, openPopup } from 'shared/lib/popup'
     import { FontWeight } from 'shared/components/Text.svelte'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { onMount } from 'svelte'
@@ -50,6 +50,7 @@
 
     let sendButtonElement: HTMLButtonElement
     onMount(() => {
+        lastPopup.set('sendForm')
         if (metadata) {
             openMetadataInput()
         }
