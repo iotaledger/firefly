@@ -39,7 +39,7 @@
             >
             <Button disabled={!isChanged} xsmall onClick={confirm}>{localize('actions.done')}</Button>
         </div>
-        <div class="pb-1">
+        <div>
             <slot />
         </div>
     </div>
@@ -47,6 +47,8 @@
 
 <style type="text/scss">
     .filter-modal {
+        border-radius: inherit;
+        overflow: hidden;
         width: 254px;
     }
 </style>
