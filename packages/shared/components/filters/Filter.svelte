@@ -13,10 +13,12 @@
 
     function onSetFilters(): void {
         $filterStore = deepCopy(filter)
+        filterActive = false
     }
 
     function onClose(): void {
         filter = deepCopy($filterStore)
+        filterActive = false
     }
 
     $: isChanged = JSON.stringify($filterStore) !== JSON.stringify(filter)
