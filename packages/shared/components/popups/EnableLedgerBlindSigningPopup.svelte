@@ -9,7 +9,10 @@
 
     $: if ($ledgerNanoStatus.blindSigningEnabled) {
         closePopup()
-        checkOrConnectLedger(() => sendOutput($ledgerPreparedOutput))
+        checkOrConnectLedger(async () => {
+            await sendOutput($ledgerPreparedOutput)
+            $ledgerPreparedOutput = null
+        })
     }
 </script>
 
