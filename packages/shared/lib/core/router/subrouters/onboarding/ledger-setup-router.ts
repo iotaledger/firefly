@@ -1,7 +1,4 @@
 import { get, writable } from 'svelte/store'
-
-import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
-
 import { LedgerSetupRoute } from '../../enums'
 import { onboardingRouter } from '../../onboarding-router'
 import { Subrouter } from '../subrouter'
@@ -11,13 +8,13 @@ export const ledgerSetupRouter = writable<LedgerSetupRouter>(null)
 
 export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
     constructor() {
-        super(LedgerSetupRoute.LegacyIntro, ledgerSetupRoute, get(onboardingRouter))
+        super(LedgerSetupRoute.LedgerInstallationGuide, ledgerSetupRoute, get(onboardingRouter))
     }
 
     restartIfNotInLedgerFlow(): void {
         // reinitialize the init view only if we are not in the middle of a ledger flow
         if (this.history.length === 0) {
-            this.routeStore.set(LedgerSetupRoute.InstallationGuide)
+            this.routeStore.set(LedgerSetupRoute.LedgerInstallationGuide)
         }
     }
 
@@ -26,22 +23,12 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
         const currentRoute = get(this.routeStore)
 
         switch (currentRoute) {
-            case LedgerSetupRoute.Connect: {
-                const recoveryType = get(onboardingProfile)?.recoveryType
-                if (recoveryType === ProfileRecoveryType.FireflyLedger) {
-                    nextRoute = LedgerSetupRoute.RestoreFromLedger
-                } else {
-                    this.parentRouter.next()
-                }
+            case LedgerSetupRoute.LedgerInstallationGuide: {
+                nextRoute = LedgerSetupRoute.ConnectLedger
                 break
             }
-
-            case LedgerSetupRoute.RestoreFromLedger: {
+            case LedgerSetupRoute.ConnectLedger: {
                 this.parentRouter.next()
-                break
-            }
-            case LedgerSetupRoute.InstallationGuide: {
-                nextRoute = LedgerSetupRoute.Connect
                 break
             }
         }

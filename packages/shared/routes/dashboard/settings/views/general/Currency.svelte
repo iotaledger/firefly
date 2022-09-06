@@ -3,7 +3,6 @@
     import { exchangeRates } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { addProfileCurrencyPriceData } from 'shared/lib/market'
-    import { refreshBalanceOverview } from 'shared/lib/wallet'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { DropdownChoice } from '@core/utils'
 
@@ -15,7 +14,6 @@
     const handleCurrencySelect = (item) => {
         updateActiveProfileSettings({ currency: item.value })
         void addProfileCurrencyPriceData()
-        refreshBalanceOverview()
     }
 </script>
 

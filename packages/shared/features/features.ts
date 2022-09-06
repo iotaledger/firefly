@@ -114,9 +114,6 @@ const features = {
             },
         },
     },
-    staking: {
-        enabled: false,
-    },
     governance: {
         enabled: false,
     },

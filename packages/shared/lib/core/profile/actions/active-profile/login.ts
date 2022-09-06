@@ -1,6 +1,6 @@
 import { createNewAccount, setSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
-import { getAndUpdateNodeInfo } from '@core/network'
+import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
 import {
     buildProfileManagerOptionsFromProfileData,
     initialiseProfileManager,
@@ -50,6 +50,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 2: get node info to check we have a synced node
             incrementLoginProgress()
             await getAndUpdateNodeInfo(true)
+            void pollNetworkStatus()
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
