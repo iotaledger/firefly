@@ -4,13 +4,19 @@
     import { ledgerNanoStatus } from '@core/ledger'
     import { closePopup, openPopup } from '@lib/popup'
 
+    export let hash: string
+
     const STEPS = [1, 2, 3, 4]
 
     $: if ($ledgerNanoStatus.blindSigningEnabled) {
-        closePopup(true)
+        closePopup()
         openPopup({
-            type: 'sendConfirmation',
-            overflow: true,
+            type: 'verifyLedgerTransaction',
+            hideClose: true,
+            preventClose: true,
+            props: {
+                hash,
+            },
         })
     }
 </script>

@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { mintNativeToken } from '@core/wallet'
-    import { closePopup, lastPopup } from '@lib/popup'
+    import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
     import {
         AddInputButton,
@@ -208,7 +208,6 @@
     }
 
     onMount(async () => {
-        lastPopup.set('mintNativeTokenForm')
         try {
             await _onMount()
         } catch (err) {

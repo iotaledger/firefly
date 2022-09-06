@@ -26,8 +26,6 @@ export const popupState = writable<PopupState>({
     relative: true,
 })
 
-export const lastPopup = writable<string>('')
-
 export const openPopup = (
     {
         type,

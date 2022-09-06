@@ -25,7 +25,7 @@
         updateNewTransactionDetails,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
-    import { closePopup, lastPopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
@@ -137,7 +137,6 @@
     }
 
     onMount(async () => {
-        lastPopup.set('sendConfirmation')
         try {
             await _onMount()
         } catch (err) {

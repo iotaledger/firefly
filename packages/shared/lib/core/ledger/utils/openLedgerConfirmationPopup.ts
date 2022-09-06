@@ -5,7 +5,7 @@ import { openPopup } from '@lib/popup'
 
 import { deconstructLedgerVerificationProps } from '../helpers'
 
-export function openLedgerConfirmationPopup(
+export function openVerifyLedgerTransactionPopup(
     payload: TransactionProgressEventPayload,
     isDuringOnboarding?: boolean
 ): void {

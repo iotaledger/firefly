@@ -1,7 +1,6 @@
 import { get } from 'svelte/store'
-
 import { selectedAccountId } from '@core/account'
-import { ledgerNanoStatus, openLedgerConfirmationPopup } from '@core/ledger'
+import { ledgerNanoStatus } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import {
     MissingTransactionProgressEventPayloadError,
@@ -9,49 +8,55 @@ import {
     isPreparedTransactionEssenceHash,
 } from '@core/profile-manager'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
-import { closePopup, lastPopup, openPopup } from '@lib/popup'
-
+import { closePopup, openPopup } from '@lib/popup'
 import { TransactionProgressEventPayload } from '../types'
+import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 
 export function handleTransactionProgressEvent(accountId: string, payload: TransactionProgressEventPayload): void {
     if (get(isActiveLedgerProfile)) {
         if (get(selectedAccountId) === accountId) {
-            handleTransactionProgressInternal(payload)
+            TransactionProgressEventForLedger(payload)
         }
     } else if (get(isOnboardingLedgerProfile)) {
-        handleTransactionProgressInternal(payload, true)
+        TransactionProgressEventForLedger(payload)
     } else {
         console.warn('Transaction progress handler unimplemented: ', payload)
     }
 }
 
-function handleTransactionProgressInternal(
-    payload: TransactionProgressEventPayload,
-    isDuringOnboarding?: boolean
-): void {
+function TransactionProgressEventForLedger(payload: TransactionProgressEventPayload): void {
     if (payload) {
-        if (payload === 'PerformingPow') {
-            /**
-             * NOTE: This is necessary so that the transaction
-             * confirmation popup is closed since we can assume
-             * the user confirmed the prompt on the actual Ledger
-             * device.
-             */
-            closePopup(true)
-            if (get(isActiveLedgerProfile)) {
-                openPopup({
-                    type: get(lastPopup),
-                    overflow: true,
-                })
-            }
-        } else if (isPreparedTransaction(payload)) {
-            openLedgerConfirmationPopup(payload, isDuringOnboarding)
+        if (isPreparedTransaction(payload)) {
+            openPopup({
+                type: 'verifyLedgerTransaction',
+                hideClose: true,
+                preventClose: true,
+                props: {
+                    ...deconstructLedgerVerificationProps(),
+                },
+            })
         } else if (isPreparedTransactionEssenceHash(payload)) {
             if (get(ledgerNanoStatus)?.blindSigningEnabled) {
-                openLedgerConfirmationPopup(payload, isDuringOnboarding)
+                openPopup({
+                    type: 'verifyLedgerTransaction',
+                    hideClose: true,
+                    preventClose: true,
+                    props: {
+                        hash: payload?.['PreparedTransactionEssenceHash'],
+                    },
+                })
             } else {
-                openPopup({ type: 'enableLedgerBlindSigning', hideClose: true, preventClose: true })
+                openPopup({
+                    type: 'enableLedgerBlindSigning',
+                    hideClose: true,
+                    preventClose: true,
+                    props: {
+                        hash: payload?.['PreparedTransactionEssenceHash'],
+                    },
+                })
             }
+        } else if (payload === 'PerformingPow') {
+            closePopup(true)
         }
     } else {
         throw new MissingTransactionProgressEventPayloadError()
