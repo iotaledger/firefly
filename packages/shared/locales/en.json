@@ -890,6 +890,7 @@
         "timeframe1Month": "1 month"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Continue",
         "back": "Back",
         "previous": "Previous",

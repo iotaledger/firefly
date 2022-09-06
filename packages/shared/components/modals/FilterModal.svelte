@@ -37,7 +37,7 @@
             <Text fontWeight={FontWeight.semibold} fontSize="14" classes="text-center flex grow-1"
                 >{localize('filters.title')}</Text
             >
-            <Button disabled={!isChanged} xsmall onClick={confirm}>{localize('actions.done')}</Button>
+            <Button disabled={!isChanged} xsmall onClick={confirm}>{localize('actions.apply')}</Button>
         </div>
         <div>
             <slot />
