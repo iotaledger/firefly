@@ -46,6 +46,5 @@
             >{localize('views.ledgerInstallationGuide.action')}</Button
         >
     </div>
-    aaa
     <LedgerAnimation slot="rightpane" illustration="ledger-install-new-app-desktop" />
 </OnboardingLayout>
