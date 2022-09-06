@@ -3,7 +3,7 @@
  * creating or throwing an error.
  */
 export interface IErrorParameters {
-    type: string
+    type?: string
     message: string
     localizationKey?: string
     localizeMessage?: boolean

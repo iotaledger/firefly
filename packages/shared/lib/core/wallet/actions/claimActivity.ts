@@ -1,5 +1,6 @@
 import { selectedAccount } from '@core/account/stores/selected-account.store'
 import { handleError } from '@core/error/handlers/handleError'
+import { localize } from '@core/i18n'
 import { get } from 'svelte/store'
 import { ActivityType } from '../enums'
 import { ITransactionActivityData } from '../interfaces'
@@ -16,6 +17,8 @@ export async function claimActivity(activityId: string, data: ITransactionActivi
                 type: ActivityType.Transaction,
                 claimingTransactionId: transactionId,
             })
+        } else {
+            throw Error(localize('error.send.cannotClaimTwice'))
         }
     } catch (err) {
         handleError(err)

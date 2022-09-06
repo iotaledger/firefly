@@ -7,6 +7,8 @@ import { addError } from '../stores'
 export function logAndNotifyError(errorParameters: IErrorParameters): void {
     const localisedMessage = errorParameters?.localizationKey
         ? localize(errorParameters?.localizationKey)
+        : errorParameters?.message
+        ? errorParameters.message
         : localize('error.global.generic')
 
     if (errorParameters?.logToConsole) {
