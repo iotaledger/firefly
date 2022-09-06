@@ -18,13 +18,13 @@
     style="--bottom-offset: {bottomOffset}"
 >
     <div class="flex relative">
-        <Text classes="text-left mr-2 mt-1 mb-3" type="h5">{localize('general.myAssets')}</Text>
+        <Text classes="text-left mr-2 {$mobile && 'mt-1 mb-3'}" type="h5">{localize('general.myAssets')}</Text>
         {#if isSelectedAccountSyncing && $mobile}
             <Spinner busy={true} classes="absolute right-0" />
         {/if}
     </div>
     <div
-        class="account-assets flex flex-auto flex-col h-0 -mr-2 pr-2 py-4 {scroll
+        class="flex flex-auto flex-col h-0 -mr-2 pr-2 {$mobile && 'account-assets py-4'} {scroll
             ? 'overflow-y-auto scroll-secondary'
             : ''}"
         use:scrollDetection

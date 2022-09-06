@@ -261,7 +261,7 @@
         <ActivityDetail onBackClick={handleBackClick} {...$selectedMessage} />
     {:else}
         <div
-            class="activity-wrapper flex-auto h-1 space-y-2.5 -mr-2 pr-2 pb-4 {scroll
+            class="flex-auto h-1 space-y-2.5 -mr-2 pr-2 {$mobile && 'activity-wrapper pb-4'} {scroll
                 ? 'overflow-y-auto scroll-secondary'
                 : ''}"
             style="--bottom-offset: {bottomOffset}"
