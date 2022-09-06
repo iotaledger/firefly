@@ -40,7 +40,7 @@
     "devDependencies": {
         "@sentry/webpack-plugin": "^1.18.5",
         "@tsconfig/svelte": "^1.0.10",
-        "@types/node": "^14.11.1",
+        "@types/node": "^18.7.9",
         "copy-webpack-plugin": "^7.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.1",
