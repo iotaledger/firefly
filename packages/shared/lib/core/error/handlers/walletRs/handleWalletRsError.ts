@@ -9,6 +9,10 @@ export function handleWalletRsError(error: IError): void {
             case WalletRsError.ClientError:
                 handleClientError(error)
                 break
+            case WalletRsError.InsufficientFunds:
+                handleInsufficientFundsError(error)
+                break
+
             default:
                 handleGenericError(error)
         }

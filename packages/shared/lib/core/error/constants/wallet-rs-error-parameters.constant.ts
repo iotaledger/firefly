@@ -3,6 +3,7 @@ import { IErrorParameters } from '../interfaces'
 
 export const WALLET_RS_ERROR_PARAMETERS: Readonly<{
     [WalletRsError.ClientError]?: { [key in ClientError]?: Partial<IErrorParameters> }
+    [WalletRsError.InsufficientFunds]?: Partial<IErrorParameters>
 }> = {
     [WalletRsError.ClientError]: {
         [ClientError.NoSyncedNode]: {
@@ -17,5 +18,11 @@ export const WALLET_RS_ERROR_PARAMETERS: Readonly<{
             saveToErrorLog: true,
             showNotification: true,
         },
+    },
+    [WalletRsError.InsufficientFunds]: {
+        localizationKey: `error.node.${ClientError.TimeNotSynced}`,
+        logToConsole: true,
+        saveToErrorLog: true,
+        showNotification: true,
     },
 }

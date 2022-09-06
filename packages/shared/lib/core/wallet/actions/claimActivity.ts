@@ -1,6 +1,5 @@
 import { selectedAccount } from '@core/account/stores/selected-account.store'
-import { BaseError } from '@core/error'
-import { localize } from '@core/i18n'
+import { handleError } from '@core/error/handlers/handleError'
 import { get } from 'svelte/store'
 import { ActivityType } from '../enums'
 import { ITransactionActivityData } from '../interfaces'
@@ -19,13 +18,7 @@ export async function claimActivity(activityId: string, data: ITransactionActivi
             })
         }
     } catch (err) {
-        if (!err.message) {
-            new BaseError({
-                message: localize('notifications.claimed.error'),
-                logToConsole: true,
-                showNotification: true,
-            })
-        }
+        handleError(err)
         updateActivityDataByActivityId(account.id, activityId, { type: ActivityType.Transaction, isClaiming: false })
     }
 }
