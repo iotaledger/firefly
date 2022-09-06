@@ -26,13 +26,12 @@
         if (isNotConnected) {
             animation = 'ledger-disconnected-desktop'
         } else if (isLocked) {
+            // TODO: Get animation for locked ledger
             animation = undefined
         } else if (isAppNotOpen) {
             animation = 'ledger-app-closed-desktop'
         } else if (isCorrectAppOpen) {
             animation = 'ledger-connected-desktop'
-        } else {
-            animation = 'ledger-disconnected-desktop'
         }
     }
 
