@@ -5,6 +5,7 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import { StakingAirdrop } from 'shared/lib/participation/types'
     import { capitalize } from 'shared/lib/utils'
+    import { mobile } from 'shared/lib/app'
 
     export let airdrop: StakingAirdrop
     export let infoBox: { title?: string; body?: string[] }
@@ -34,7 +35,9 @@
 </script>
 
 <div class="mb-5 text-center">
-    <Text type="h4">{localize(`popups.${airdrop}-info.title`)}</Text>
+    <Text type="h4" classes={$mobile && 'flex w-full justify-center -mt-4 mb-6'}>
+        {localize(`popups.${airdrop}-info.title`)}
+    </Text>
 </div>
 <Illustration illustration="{airdrop}-info-bg" classes="relative w-full rounded-2xl mb-7" />
 <div class="flex flex-col flex-wrap space-y-3">
