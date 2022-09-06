@@ -8,39 +8,30 @@
         ledgerConnectionState,
         stopPollingLedgerNanoStatus,
         pollLedgerNanoStatus,
-        getLedgerDeviceStatus,
         displayNotificationForLedgerProfile,
     } from '@core/ledger'
     import { openPopup } from '@lib/popup'
     import { initialiseFirstShimmerClaimingAccount, onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 
-    let polling = false
     let isBusy = false
 
-    $: isConnected = $ledgerConnectionState !== LedgerConnectionState.NotConnected
-    $: isAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
-    $: animation = !isConnected
-        ? 'ledger-disconnected-desktop'
-        : isAppOpen
-        ? 'ledger-connected-desktop'
-        : 'ledger-app-closed-desktop'
+    $: isNotConnected = $ledgerConnectionState === LedgerConnectionState.NotConnected
+    $: isLocked = isNotConnected || $ledgerConnectionState === LedgerConnectionState.Locked
+    $: isAppNotOpen = isLocked || $ledgerConnectionState === LedgerConnectionState.AppNotOpen
+    $: isCorrectAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
 
-    function _onCancel(): void {
-        displayNotificationForLedgerProfile('error', true)
-    }
-
-    async function _onConnected(): Promise<void> {
-        if ($ledgerConnectionState !== LedgerConnectionState.CorrectAppOpen) {
-            _onCancel()
-        } else {
-            isBusy = true
-            const canInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.setupType === ProfileSetupType.Claimed
-            const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
-            if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
-                await initialiseFirstShimmerClaimingAccount()
-            }
-            isBusy = false
-            $ledgerSetupRouter.next()
+    let animation: string
+    $: $ledgerConnectionState, setAnimation()
+    function setAnimation(): void {
+        if (isNotConnected) {
+            animation = 'ledger-disconnected-desktop'
+        } else if (isLocked) {
+            // TODO: Get animation for locked ledger
+            animation = undefined
+        } else if (isAppNotOpen) {
+            animation = 'ledger-app-closed-desktop'
+        } else if (isCorrectAppOpen) {
+            animation = 'ledger-connected-desktop'
         }
     }
 
@@ -50,8 +41,21 @@
         })
     }
 
-    function onContinueClick(): void {
-        void getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
+    async function onContinueClick(): Promise<void> {
+        try {
+            isBusy = true
+            const canInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.setupType === ProfileSetupType.Claimed
+            const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
+            if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
+                await initialiseFirstShimmerClaimingAccount()
+            }
+            $ledgerSetupRouter.next()
+        } catch (err) {
+            displayNotificationForLedgerProfile('error', true, true, err)
+            console.error(err)
+        } finally {
+            isBusy = false
+        }
     }
 
     function onBackClick(): void {
@@ -61,7 +65,6 @@
 
     onMount(() => {
         pollLedgerNanoStatus()
-        polling = true
     })
 </script>
 
@@ -72,17 +75,24 @@
         <div class="flex flex-col flex-nowrap space-y-2">
             <div class="flex flex-row items-center space-x-2">
                 <Icon
-                    icon={`status-${isConnected ? 'success' : 'error'}`}
-                    classes={`text-white bg-${isConnected ? 'green' : 'red'}-600 rounded-full`}
+                    icon={`status-${isNotConnected ? 'error' : 'success'}`}
+                    classes={`text-white bg-${isNotConnected ? 'red' : 'green'}-600 rounded-full`}
                 />
-                <Text type="p" secondary>{localize('views.connectLedger.trafficLight1')}</Text>
+                <Text type="p" secondary>{localize('views.connectLedger.connect')}</Text>
             </div>
             <div class="flex flex-row items-center space-x-2">
                 <Icon
-                    icon={`status-${isAppOpen ? 'success' : 'error'}`}
-                    classes={`text-white bg-${isAppOpen ? 'green' : 'red'}-600 rounded-full`}
+                    icon={`status-${isLocked ? 'error' : 'success'}`}
+                    classes={`text-white bg-${isLocked ? 'red' : 'green'}-600 rounded-full`}
                 />
-                <Text type="p" secondary>{localize('views.connectLedger.trafficLight2')}</Text>
+                <Text type="p" secondary>{localize('views.connectLedger.unlock')}</Text>
+            </div>
+            <div class="flex flex-row items-center space-x-2">
+                <Icon
+                    icon={`status-${isAppNotOpen ? 'error' : 'success'}`}
+                    classes={`text-white bg-${isAppNotOpen ? 'red' : 'green'}-600 rounded-full`}
+                />
+                <Text type="p" secondary>{localize('views.connectLedger.openApp')}</Text>
             </div>
         </div>
     </div>
@@ -92,7 +102,7 @@
         </Link>
         <Button
             classes="w-full flex flex-row justify-center items-center"
-            disabled={polling && (!isConnected || !isAppOpen)}
+            disabled={!isCorrectAppOpen || isBusy}
             onClick={onContinueClick}
         >
             {#if isBusy}
@@ -102,5 +112,7 @@
             {/if}
         </Button>
     </div>
-    <LedgerAnimation slot="rightpane" {animation} />
+    <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">
+        <LedgerAnimation {animation} />
+    </div>
 </OnboardingLayout>
