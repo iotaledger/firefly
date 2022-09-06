@@ -8,7 +8,6 @@
         ledgerConnectionState,
         stopPollingLedgerNanoStatus,
         pollLedgerNanoStatus,
-        getLedgerDeviceStatus,
         displayNotificationForLedgerProfile,
     } from '@core/ledger'
     import { openPopup } from '@lib/popup'
@@ -37,33 +36,27 @@
         }
     }
 
-    function _onCancel(): void {
-        displayNotificationForLedgerProfile('error', true)
-    }
-
-    async function _onConnected(): Promise<void> {
-        if ($ledgerConnectionState !== LedgerConnectionState.CorrectAppOpen) {
-            _onCancel()
-        } else {
-            isBusy = true
-            const canInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.setupType === ProfileSetupType.Claimed
-            const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
-            if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
-                await initialiseFirstShimmerClaimingAccount()
-            }
-            isBusy = false
-            $ledgerSetupRouter.next()
-        }
-    }
-
     function handleGuidePopup(): void {
         openPopup({
             type: 'ledgerConnectionGuide',
         })
     }
 
-    function onContinueClick(): void {
-        void getLedgerDeviceStatus(_onConnected, _onCancel, _onCancel)
+    async function onContinueClick(): Promise<void> {
+        try {
+            isBusy = true
+            const canInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.setupType === ProfileSetupType.Claimed
+            const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
+            if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
+                await initialiseFirstShimmerClaimingAccount()
+            }
+            $ledgerSetupRouter.next()
+        } catch (err) {
+            displayNotificationForLedgerProfile('error', true, true, err)
+            console.error(err)
+        } finally {
+            isBusy = false
+        }
     }
 
     function onBackClick(): void {
@@ -110,7 +103,7 @@
         </Link>
         <Button
             classes="w-full flex flex-row justify-center items-center"
-            disabled={!isCorrectAppOpen}
+            disabled={!isCorrectAppOpen || isBusy}
             onClick={onContinueClick}
         >
             {#if isBusy}
