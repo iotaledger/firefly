@@ -11,8 +11,6 @@
     let filterActive = false
     let modal: Modal
 
-    $: isChanged = JSON.stringify($filterStore) !== JSON.stringify(filter)
-
     function onSetFilters(): void {
         $filterStore = deepCopy(filter)
     }
@@ -21,6 +19,7 @@
         filter = deepCopy($filterStore)
     }
 
+    $: isChanged = JSON.stringify($filterStore) !== JSON.stringify(filter)
     $: filterActive = modal?.isOpened()
 </script>
 

@@ -4,6 +4,7 @@
     import type { Filter } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { Button } from 'shared/components'
+    import { activeProfileId } from '@core/profile'
 
     export let modal: Modal
     export let filter: Filter
@@ -23,6 +24,8 @@
         onSetFilters()
         modal.toggle()
     }
+
+    $: $activeProfileId, clear()
 </script>
 
 <Modal
