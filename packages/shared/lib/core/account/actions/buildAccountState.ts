@@ -30,7 +30,6 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         signerType: SignerType.Stronghold,
         // TODO: refactor or remove these below
         messages: [],
-        addresses: [],
         isSyncing: false,
     }
 }

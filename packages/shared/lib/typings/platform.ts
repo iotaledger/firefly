@@ -14,8 +14,6 @@ export enum Platforms {
 export interface IPlatform {
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
-    exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>
-    exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string> | string
@@ -52,7 +50,6 @@ export interface IPlatform {
     unhandledException(title: string, err: IError | unknown): Promise<void>
 
     // SeedVault API methods
-    importLegacySeed(buffer: unknown, password: string): Promise<string>
     validateSeedVault(buffer: unknown): Promise<boolean>
 
     onEvent<K extends keyof EventMap>(eventName: K, callback: (param: EventMap[K]) => void)

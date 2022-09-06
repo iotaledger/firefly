@@ -1,5 +1,4 @@
 import { AccountBalance } from '@iota/wallet'
-import { Address } from '@lib/typings/address'
 import { Message } from '@lib/typings/message'
 import { SignerType } from '../enums'
 import { IAccountMetadata } from './account-metadata.interface'
@@ -11,6 +10,5 @@ export interface IAccountState extends IAccount, IAccountMetadata {
     // TODO: refactor or remove these below
     signerType: SignerType
     messages: Message[]
-    addresses: Address[]
     isSyncing: boolean
 }

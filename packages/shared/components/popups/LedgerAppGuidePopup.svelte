@@ -34,7 +34,7 @@
     </div>
     <div class="w-full text-center my-9 px-10">
         <Text secondary>
-            {locale(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.SHIMMER } })}
+            {locale(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.Shimmer } })}
         </Text>
     </div>
     <div class="w-full flex flex-row flex-nowrap space-x-4">

@@ -211,31 +211,6 @@ export interface LedgerAddressGenerationEvent {
     address: string
 }
 
-export enum MigrationProgressEventType {
-    // Syncing account.
-    SyncingAccount = 'SyncingAccount',
-    // / Performing input selection.
-    SelectingInputs = 'SelectingInputs',
-    // / Generating remainder value deposit address.
-    GeneratingRemainderDepositAddress = 'GeneratingRemainderDepositAddress',
-    // / Signing the transaction.
-    SigningTransaction = 'SigningTransaction',
-    // / Performing PoW.
-    PerformingPoW = 'PerformingPoW',
-    // / Broadcasting.
-    Broadcasting = 'Broadcasting',
-    // Transaction confirmed (through promotion & reattachment)
-    TransactionConfirmed = 'TransactionConfirmed',
-}
-
-export interface FetchingMigrationDataEvent {
-    type: 'FetchingMigrationData'
-    data: {
-        initialAddresIndex: number
-        finalAddressIndex: number
-    }
-}
-
 export interface MiningEvent {
     type: 'MiningBundle'
     data: {
@@ -255,20 +230,4 @@ export interface BroadcastingBundleEvent {
     data: {
         bundleHash: string
     }
-}
-
-export interface LegacyTransactionConfirmedEvent {
-    type: 'TransactionConfirmed'
-    data: {
-        bundleHash: string
-    }
-}
-
-export interface MigrationProgressEventPayload {
-    event:
-        | FetchingMigrationDataEvent
-        | MiningEvent
-        | SigningBundleEvent
-        | BroadcastingBundleEvent
-        | LegacyTransactionConfirmedEvent
 }

@@ -9,12 +9,6 @@ const Platform: IPlatform = {
     NotificationManager: undefined,
     PincodeManager: undefined,
     close(): void {},
-    exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null> {
-        return Promise.resolve(undefined)
-    },
-    exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null> {
-        return Promise.resolve(undefined)
-    },
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null> {
         return Promise.resolve(undefined)
     },
@@ -40,9 +34,6 @@ const Platform: IPlatform = {
         return Promise.resolve(undefined)
     },
     hookErrorLogger(logger: (error: IError) => void): void {},
-    importLegacySeed(buffer: unknown, password: string): Promise<string> {
-        return Promise.resolve('')
-    },
     isMaximized(): Promise<boolean> {
         return Promise.resolve(false)
     },
