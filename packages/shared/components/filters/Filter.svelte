@@ -15,17 +15,17 @@
 
     function onSetFilters(): void {
         $filterStore = deepCopy(filter)
-        filterActive = false
     }
 
     function onClose(): void {
         filter = deepCopy($filterStore)
-        filterActive = false
     }
+
+    $: filterActive = modal?.isOpened()
 </script>
 
 <div class="h-6 relative">
-    <TogglableButton icon="filter" bind:active={filterActive} onClick={() => modal?.toggle()} />
+    <TogglableButton icon="filter" bind:active={filterActive} onClick={modal?.toggle} />
 
     <FilterModal bind:modal bind:filter {isChanged} {onSetFilters} {onClose}>
         {#each Object.keys(filter) as filterUnit}
