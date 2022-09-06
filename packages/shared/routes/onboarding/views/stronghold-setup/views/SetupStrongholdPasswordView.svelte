@@ -13,7 +13,7 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
-    import passwordInfo from '@lib/password'
+    import { PASSWORD_REASON_MAP } from '@core/stronghold'
 
     let strongholdPassword = ''
     let confirmedStrongholdPassword = ''
@@ -37,8 +37,8 @@
             })
         } else if (passwordStrength?.score !== 4) {
             let errKey = 'error.password.tooWeak'
-            if (passwordStrength?.feedback.warning && passwordInfo[passwordStrength?.feedback.warning]) {
-                errKey = `error.password.${passwordInfo[passwordStrength?.feedback.warning]}`
+            if (passwordStrength?.feedback.warning && PASSWORD_REASON_MAP[passwordStrength?.feedback.warning]) {
+                errKey = `error.password.${PASSWORD_REASON_MAP[passwordStrength?.feedback.warning]}`
             }
             error = localize(errKey)
         } else if (strongholdPassword !== confirmedStrongholdPassword) {
