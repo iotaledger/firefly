@@ -1,7 +1,7 @@
 import { IAsset, Subject } from '@core/wallet'
 
 export interface INewTransactionDetails {
-    amount: string
+    amount?: string
     asset?: IAsset
     expirationDate?: Date
     metadata?: string

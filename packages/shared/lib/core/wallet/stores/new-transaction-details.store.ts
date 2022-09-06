@@ -1,14 +1,10 @@
 import { writable, Writable } from 'svelte/store'
 import type { INewTransactionDetails } from '..'
 
-export const defaultTransactionDetails: INewTransactionDetails = {
-    amount: '0',
-}
-
-export const newTransactionDetails: Writable<INewTransactionDetails> = writable(defaultTransactionDetails)
+export const newTransactionDetails: Writable<INewTransactionDetails> = writable({})
 
 export function resetNewTransactionDetails(): void {
-    newTransactionDetails.set(defaultTransactionDetails)
+    newTransactionDetails.set({})
 }
 
 export function updateNewTransactionDetails(payload: Partial<INewTransactionDetails>): void {
