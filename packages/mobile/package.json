@@ -7,7 +7,12 @@
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "NODE_ENV=production PLATFORM=mobile webpack && yarn assets:beta",
+        "build": "STAGE=beta NODE_ENV=production PLATFORM=mobile webpack && yarn assets:beta",
+        "build:prod": "STAGE=prod NODE_ENV=production PLATFORM=mobile webpack && yarn assets:prod",
+        "build:beta:android": "yarn build:beta && NODE_ENV=production yarn android:update",
+        "build:beta:ios": "yarn build:beta && NODE_ENV=production yarn ios:update",
+        "build:prod:android": "yarn build:prod && NODE_ENV=production yarn android:update",
+        "build:prod:ios": "yarn build:prod && NODE_ENV=production yarn ios:update",
         "ios": "cap copy ios && cap open ios",
         "ios:update": "cap sync ios && cap open ios",
         "android": "cap copy android && cap open android",
@@ -16,7 +21,9 @@
         "dev:device": "NODE_ENV=development PLATFORM=mobile webpack --stats && cap copy",
         "assets:alpha": "capacitor/assets/assetgen.sh alpha.png",
         "assets:beta": "capacitor/assets/assetgen.sh beta.png",
-        "assets:prod": "capacitor/assets/assetgen.sh prod.png"
+        "assets:prod": "capacitor/assets/assetgen.sh prod.png",
+        "rename:appid:android": "mv android/app/src/main/java/org/iota/firefly/alpha/mobile/* android/app/src/main/java/org/iota/firefly/mobile/",
+        "force:install:pods": "cd ios/App && rm -rf ~/Library/Caches/CocoaPods Pods ~/Library/Developer/Xcode/DerivedData && pod deintegrate && pod install"
     },
     "devDependencies": {
         "@capacitor/android": "3.4.1",
