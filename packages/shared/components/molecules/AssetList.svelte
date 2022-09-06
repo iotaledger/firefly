@@ -38,7 +38,7 @@
             <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
         </div>
-        <div class="flex-auto h-full scroll-secondary pb-10">
+        <div class="flex-auto h-full pb-10">
             {#if assets?.baseCoin || assets?.nativeTokens?.length > 0}
                 <VirtualList items={assetList} let:item>
                     <AssetTile classes="mb-2" onClick={() => handleAssetTileClick(item)} asset={item} />
@@ -54,10 +54,10 @@
 
 <style lang="scss">
     .asset-list :global(svelte-virtual-list-viewport) {
-        margin-right: -1.25rem !important;
+        margin-right: -1rem !important;
         flex: auto;
         overflow-y: scroll;
-        padding-right: 1rem !important;
+        padding-right: 1.5rem !important;
     }
     .asset-list :global(svelte-virtual-list-contents) {
         margin-right: -1rem !important;

@@ -1,71 +1,77 @@
 <script lang="typescript">
-    import { Text, Tooltip } from 'shared/components'
+    import { Text } from 'shared/components'
+    import { FontWeight } from 'shared/components/Text.svelte'
+    import { onMount } from 'svelte'
     import CopyableBox from './CopyableBox.svelte'
 
-    export let keyText = ''
-    export let valueText = ''
-    export let textColor = 'gray-600'
-    export let darkTextColor = 'gray-500'
-    export let backgroundColor = 'gray-50'
-    export let darkBackgroundColor = 'gray-850'
-    export let padding = 'px-4 py-3.5'
-    export let classes = ''
-    export let copyValue = ''
-    export let isCopyable = false
+    export let keyText: string = ''
+    export let valueText: string = ''
+    export let textColor: string = 'gray-600'
+    export let darkTextColor: string = 'gray-500'
+    export let backgroundColor: string = 'gray-50'
+    export let darkBackgroundColor: string = 'gray-850'
+    export let padding: string = 'px-4 py-3.5'
+    export let classes: string = ''
+    export let copyValue: string = ''
+    export let isCopyable: boolean = false
 
-    let showTooltip = false
-    let tooltipAnchor: HTMLElement
-    let textContainerWidth: number
+    let isVertical: boolean = false
+    let valueContainer: HTMLElement
+    let valueContainerWidth: number
 
-    $: isValueTextTruncated = (tooltipAnchor?.firstChild as HTMLElement)?.scrollWidth > textContainerWidth
-
-    function toggleTooltip(show: boolean): void {
-        if (isValueTextTruncated && !isCopyable) {
-            showTooltip = show
-        }
-    }
+    onMount(() => {
+        isVertical = (valueContainer?.firstChild as HTMLElement)?.scrollWidth > valueContainerWidth
+    })
 </script>
 
-<div on:mouseleave={() => toggleTooltip(false)} class="w-full">
+<div class="w-full">
     <CopyableBox
         value={copyValue ? copyValue : valueText}
         {isCopyable}
         offset={5}
-        row
+        row={!isVertical}
+        col={isVertical}
         {backgroundColor}
         {darkBackgroundColor}
-        classes="w-full justify-between {padding} {classes}"
+        classes="w-full overflow-hidden {padding} {classes}"
     >
-        {#if keyText}
-            <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor} classes="mr-4">
-                {keyText}
-            </Text>
-        {:else}
-            <slot name="key" />
-        {/if}
-        {#if valueText}
-            <div
-                on:focus={() => toggleTooltip(true)}
-                on:mouseover={() => toggleTooltip(true)}
-                class="truncate"
-                bind:this={tooltipAnchor}
-                bind:clientWidth={textContainerWidth}
-            >
-                <Text fontSize="14" lineHeight="5" color={textColor} darkColor={darkTextColor} classes="truncate">
-                    {valueText}
+        <div
+            class="w-full flex text-left  {isVertical
+                ? 'max-h-20 flex-col space-y-1 overflow-y-auto'
+                : 'flex-row space-x-2 justify-between'}"
+        >
+            {#if keyText}
+                <Text
+                    fontSize="14"
+                    lineHeight="5"
+                    color={textColor}
+                    darkColor={darkTextColor}
+                    fontWeight={FontWeight.medium}
+                >
+                    {keyText}
                 </Text>
-            </div>
-            {#if showTooltip}
-                <Tooltip anchor={tooltipAnchor} position="top">
-                    <div class="max-h-40 overflow-y-scroll pr-0">
-                        <Text color={textColor} darkColor={darkTextColor} classes="text-left break-words"
-                            >{valueText}</Text
-                        >
-                    </div>
-                </Tooltip>
+            {:else}
+                <slot name="key" />
             {/if}
-        {:else}
-            <slot name="value" />
-        {/if}
+            {#if valueText}
+                <div
+                    bind:this={valueContainer}
+                    bind:clientWidth={valueContainerWidth}
+                    class={isVertical ? 'break-words' : 'truncate'}
+                >
+                    <Text
+                        fontSize="14"
+                        lineHeight="16"
+                        color={textColor}
+                        darkColor={darkTextColor}
+                        classes={isVertical ? '' : 'truncate'}
+                    >
+                        {valueText}
+                    </Text>
+                </div>
+            {:else}
+                <slot name="value" />
+            {/if}
+        </div>
     </CopyableBox>
 </div>

@@ -1,17 +1,12 @@
 <script lang="typescript">
     import { Icon, Logo, Profile } from 'shared/components'
-    import {
-        isAwareOfCrashReporting,
-        mobile,
-        needsToAcceptLatestPrivacyPolicy,
-        needsToAcceptLatestTermsOfService,
-    } from '@core/app'
+    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { initialiseOnboardingRouters, loginRouter } from '@core/router'
     import { initialiseOnboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
-    import { openPopup, popupState } from '@lib/popup'
+    import { openPopup } from '@lib/popup'
 
     function onContinueClick(id: string) {
         loadPersistedProfileIntoActiveProfile(id)
@@ -31,25 +26,13 @@
             preventClose: true,
         })
     }
-
-    /**
-     * NOTE: We check for mobile because it's only necessary
-     * for existing desktop installation.
-     */
-    $: if ($popupState?.type === null && !$popupState?.active && !$mobile && !$isAwareOfCrashReporting) {
-        openPopup({
-            type: 'crashReporting',
-            hideClose: true,
-            preventClose: true,
-        })
-    }
 </script>
 
 <section class="flex flex-col justify-center items-center h-full bg-white dark:bg-gray-900 px-40 pt-48 pb-20">
     <Logo width="64px" logo="logo-firefly" classes="absolute top-20" />
     <div
         class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile &&
-            'overflow-y-auto'} flex flex-row flex-wrap"
+            'overlay-scrollbar'} flex flex-row flex-wrap"
     >
         {#each $profiles as profile}
             <div class="mx-7 mb-8">
