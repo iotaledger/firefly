@@ -1,23 +1,15 @@
 <script lang="typescript">
     import { Text, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { ledgerNanoStatus } from '@core/ledger'
-    import { closePopup, openPopup } from '@lib/popup'
-
-    export let hash: string
+    import { checkOrConnectLedger, ledgerNanoStatus, ledgerPreparedOutput } from '@core/ledger'
+    import { closePopup } from '@lib/popup'
+    import { sendOutput } from '@core/wallet'
 
     const STEPS = [1, 2, 3, 4]
 
     $: if ($ledgerNanoStatus.blindSigningEnabled) {
         closePopup()
-        openPopup({
-            type: 'verifyLedgerTransaction',
-            hideClose: true,
-            preventClose: true,
-            props: {
-                hash,
-            },
-        })
+        checkOrConnectLedger(() => sendOutput($ledgerPreparedOutput))
     }
 </script>
 

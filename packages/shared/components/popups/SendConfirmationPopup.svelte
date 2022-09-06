@@ -8,7 +8,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, isSoftwareProfile } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
@@ -29,6 +29,7 @@
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
+    import { ledgerPreparedOutput } from '@core/ledger'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -104,6 +105,9 @@
 
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
+        if (!get(isSoftwareProfile)) {
+            ledgerPreparedOutput.set(preparedOutput)
+        }
         await sendOutput(preparedOutput)
         closePopup()
     }
