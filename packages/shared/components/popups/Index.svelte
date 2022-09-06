@@ -14,7 +14,6 @@
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
     import ConfirmationPopup from './ConfirmationPopup.svelte'
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
-    import CrashReporting from './CrashReporting.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
@@ -100,7 +99,6 @@
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
         errorLog: ErrorLog,
-        crashReporting: CrashReporting,
         createAccount: CreateAccountPopup,
         deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
