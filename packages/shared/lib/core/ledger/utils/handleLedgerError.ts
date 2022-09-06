@@ -37,7 +37,6 @@ export function handleLedgerError(error: string, resetConfirmationPropsOnDenial:
         if (hadToEnableBlindSinging) {
             openPopup({
                 type: 'enableLedgerBlindSigning',
-                hideClose: true,
             })
         } else {
             showAppNotification({
