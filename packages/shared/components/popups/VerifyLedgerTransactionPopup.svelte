@@ -1,26 +1,13 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
     import { Animation, KeyValueBox, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { isActiveLedgerProfile } from '@core/profile'
     import { formatHexString } from '@core/utils'
-    import { lastPopup, openPopup } from '@lib/popup'
-    import { get } from 'svelte/store'
 
     export let toAddress: string
     export let toAmount: string
     export let hash: string
 
     const hasSendConfirmationProps = (toAddress && toAmount) || hash
-
-    onDestroy(() => {
-        if ($isActiveLedgerProfile) {
-            openPopup({
-                type: get(lastPopup),
-                overflow: true,
-            })
-        }
-    })
 </script>
 
 <Text type="h4" classes="mb-4">{localize('popups.ledgerTransaction.title')}</Text>

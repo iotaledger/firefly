@@ -9,7 +9,7 @@ import {
     isPreparedTransactionEssenceHash,
 } from '@core/profile-manager'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
-import { closePopup, openPopup } from '@lib/popup'
+import { closePopup, lastPopup, openPopup } from '@lib/popup'
 
 import { TransactionProgressEventPayload } from '../types'
 
@@ -38,6 +38,12 @@ function handleTransactionProgressInternal(
              * device.
              */
             closePopup(true)
+            if (get(isActiveLedgerProfile)) {
+                openPopup({
+                    type: get(lastPopup),
+                    overflow: true,
+                })
+            }
         } else if (isPreparedTransaction(payload)) {
             openLedgerConfirmationPopup(payload, isDuringOnboarding)
         } else if (isPreparedTransactionEssenceHash(payload)) {
