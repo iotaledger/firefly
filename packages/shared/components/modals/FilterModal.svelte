@@ -17,7 +17,6 @@
             filter[key].value = undefined
         }
         onSetFilters()
-        modal.toggle()
     }
 
     function confirm(): void {
