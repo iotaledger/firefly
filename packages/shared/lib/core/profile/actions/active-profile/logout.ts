@@ -24,12 +24,10 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
 
     // (TODO): Figure out why we are using a promise here?
     return new Promise((resolve) => {
-        if (_lockStronghold && get(isSoftwareProfile)) {
-            lockStronghold()
-        }
-
-        if (isLedgerProfile(type) && isPollingLedgerDeviceStatus) {
-            stopPollingLedgerNanoStatus()
+        if (get(isSoftwareProfile)) {
+            _lockStronghold && lockStronghold()
+        } else if (isLedgerProfile(type)) {
+            get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
         }
 
         clearPollNetworkInterval()
