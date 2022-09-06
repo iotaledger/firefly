@@ -4,10 +4,11 @@
     export let animation: string
     export let illustration: string
     export let classes: string = ''
+    export let bgClasses: string = ''
 </script>
 
 <ledger-animation class="w-full h-full relative flex {classes}">
-    <Animation animation="ledger-bg-desktop" classes="w-full h-full z-0 absolute " />
+    <Animation animation="ledger-bg-desktop" classes="w-full h-full z-0 absolute {bgClasses}" />
     {#if animation}
         <Animation {animation} classes="z-10" />
     {/if}

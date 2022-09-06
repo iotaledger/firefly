@@ -25,7 +25,7 @@
 
 <Text type="h4" classes="mb-6">{locale('popups.ledgerConnectionGuide.title')}</Text>
 <div class="w-full flex flex-row flex-wrap relative z-0">
-    <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" />
+    <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" bgClasses="top-7" />
     <div class="w-full text-center my-9 px-10 z-10">
         {#if typeof locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`) === 'string'}
             <Text secondary classes="inline-block">{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`)}</Text>

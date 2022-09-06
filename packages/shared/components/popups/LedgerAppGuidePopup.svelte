@@ -26,7 +26,7 @@
 
 <Text type="h4" classes="mb-6">{locale('popups.ledgerAppGuide.title')}</Text>
 <div class="w-full flex flex-row flex-wrap">
-    <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" />
+    <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" bgClasses="top-6" />
     <div class="w-full text-center my-9 px-10">
         <Text secondary>
             {locale(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.Shimmer } })}
