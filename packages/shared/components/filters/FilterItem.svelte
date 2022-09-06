@@ -39,7 +39,7 @@
         }
     }
 
-    function updateSubUnitForNumberFilter() {
+    function updateSubUnitForNumberFilter(): void {
         if (filterUnit.type === 'number') {
             if (
                 filterUnit.selected === NumberFilterOption.Equal ||
@@ -60,7 +60,7 @@
         }
     }
 
-    function onSelect(item) {
+    function onSelect(item): void {
         if (filterUnit.type === 'selection' || filterUnit.type === 'number') {
             filterUnit.selected = item.value
             updateSubUnitForNumberFilter()
@@ -90,7 +90,7 @@
 
     {#if filterUnit.active}
         <div class="bg-gray-50 px-4 py-3 dark:bg-transparent">
-            <Dropdown {value} items={choices} {onSelect} small />
+            <Dropdown {value} items={choices} {onSelect} small disableTyping />
 
             {#if filterUnit.type === 'number' && filterUnit.selected}
                 <div class="flex flex-row items-center space-x-2 mt-2">
