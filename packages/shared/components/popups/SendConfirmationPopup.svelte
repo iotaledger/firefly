@@ -8,7 +8,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
@@ -24,7 +24,7 @@
         newTransactionDetails,
         updateNewTransactionDetails,
     } from '@core/wallet'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
@@ -44,9 +44,9 @@
     let outputOptions: OutputOptions
     let error: BaseError
 
-    const rawAmount = asset.metadata
-        ? generateRawAmount(String(parseCurrency(amount)), unit, asset.metadata)
-        : parseCurrency(amount)
+    const rawAmount = generateRawAmount(amount, unit, asset.metadata)
+    const initialExpirationDate = getInitialExpirationDate()
+
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
     $: isNativeToken = asset?.id !== $selectedAccountAssets?.baseCoin?.id
@@ -73,8 +73,6 @@
         isInternal,
         type: ActivityType.Transaction,
     }
-
-    $: initialExpirationDate = getInitialExpirationDate()
 
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
@@ -105,7 +103,7 @@
 
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
-        if (!get(isSoftwareProfile)) {
+        if ($isActiveLedgerProfile) {
             ledgerPreparedOutput.set(preparedOutput)
         }
         await sendOutput(preparedOutput)
