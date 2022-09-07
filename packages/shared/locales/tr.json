@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "Ledger'ınızı Firefly'a bağlayın",
             "body": "Ledger cihazınızın Firefly tarafından bulunabilmesi için lütfen resmi Ledger Live uygulamasının kapalı olduğundan emin olunuz.",
-            "trafficLight1": "Ledger'ınızı bağlayın ve PIN'inizle kilidi açın",
-            "trafficLight2": "Ledger'ınızdaki yeni IOTA uygulamasını açın",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Ledger'ınız bağlanmadığı durumlar için ipuçları"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "Donanım Aygıtı",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "Bağlı",
-                        "locked": "Kilitli",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "Yanlış Defter veya anımsatıcı",
-                        "notDetected": "Algılanmadı",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "Uygulama açık"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
@@ -722,7 +731,11 @@
             "bodyFirefly": "İşlem tamamlanana kadar Firefly devre dışı bırakıldı. Token taşıma daha sonra hala mümkün olacak."
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "Devam etmek için Ledger cihazınızda görüntülenen istemi onaylayın"
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "Kalan adresi doğrula",
-                "info": "Ledgerınızda görüntülenen kalan adresin aşağıda görüntülenenle eşleştiğini onaylayın. Eşleşirlerse, gösterildiği gibi Ledger'ınızdaki her iki düğmeye de basın."
-            },
-            "transaction": {
-                "title": "Confirm transaction",
-                "info": "Ledger cihazınızda görüntülenen işlem bilgilerinin aşağıda görüntülenen bilgilerle eşleştiğini onaylayın. Eşleşirlerse, istendiği gibi Ledger'ınızdaki her iki düğmeye de basın."
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "Alma adresini onayla",
@@ -891,6 +898,7 @@
         "dismiss": "Vazgeç",
         "claim": "Claim",
         "claiming": "Claiming",
+        "claimingRewards": "Claiming rewards",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -1026,7 +1034,11 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Recipient",
@@ -1042,6 +1054,9 @@
         "received": "Alındı",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "Ödemeyi Gönder",
@@ -1185,6 +1200,7 @@
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
+        "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Toplam: {balance}",
@@ -1193,7 +1209,8 @@
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
@@ -1201,7 +1218,11 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
         "title": "Filters",
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "Cüzdanları değiştirmek için lütfen senkronizasyon bitene kadar bekleyin.",
@@ -1312,6 +1335,7 @@
             "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
             "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
@@ -1319,7 +1343,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
@@ -1329,7 +1353,9 @@
             "duplicate": "Bu isimde bir profil zaten var.",
             "delete": {
                 "nonEmptyAccounts": "Profilinizi silmeden önce tüm bakiyeleri transfer etmelisiniz."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "Parolalar eşleşmiyor.",
@@ -1369,7 +1395,9 @@
             "syncing": "Cüzdanlarınız senkronize edilirken bir hata oluştu.",
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "notLast": "You can only delete your last wallet.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "Adresler şu şekilde olmalıdır {length, plural, one {# karakter} other {# karakterler}} long.",
@@ -1388,7 +1416,9 @@
             "leavingDust": "Adresinizde 1 Mi'den az bırakamazsınız.",
             "cancelled": "İşlem iptal edildi.",
             "transaction": "İşleminiz gönderilirken bir hata oluştu. Lütfen tekrar deneyin.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "Lütfen geçerli bir URL giriniz.",
@@ -1400,7 +1430,8 @@
             "https": "HTTPS gereklidir; HTTP üzerinden güvenli olmayan bağlantılar şu anda desteklenmemektedir.",
             "duplicate": "Bu sunucu zaten eklenmiş.",
             "unsynced": "Ağ senkronize değil.",
-            "noSynced": "Senkronize node bulunamadı.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Tüm nodelardan yanıt alınamadı.",
             "forbidden": "Bu node bağlantısı yasaktır.",
             "pluginNotAvailable": "\"{nodePlugin}\" eklentisi bu node'da mevcut değil.",
@@ -1579,7 +1610,8 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {
