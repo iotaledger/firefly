@@ -21,7 +21,7 @@
     $: selectedDateUnit =
         filterUnit.subunit.type === 'unit' ? localize(`${filterUnit.localeKey}.${filterUnit.subunit.unit}`) : ''
 
-    function onSelect(item: DropdownChoice): void {
+    function onSelect(item): void {
         filterUnit.selected = item.value
 
         if (
@@ -49,7 +49,7 @@
         }
     }
 
-    function onUnitSelect(item: DropdownChoice): void {
+    function onUnitSelect(item): void {
         if (filterUnit.subunit.type === 'unit') {
             filterUnit.subunit.unit = item.value
         }
