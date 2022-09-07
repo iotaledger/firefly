@@ -21,7 +21,7 @@
     export let itemTextType = 'p'
     export let showBorderWhenClosed = true
     export let isFocused = false
-    export let disableTyping = false
+    export let enableTyping = false
 
     export let onSelect: (..._: any[]) => void
 
@@ -63,7 +63,7 @@
     }
 
     function handleKey(event: KeyboardEvent): void {
-        if (disableTyping) {
+        if (!enableTyping) {
             return
         }
 

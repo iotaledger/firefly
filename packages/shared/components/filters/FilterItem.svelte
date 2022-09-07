@@ -90,7 +90,7 @@
 
     {#if filterUnit.active}
         <div class="bg-gray-50 px-4 py-3 dark:bg-transparent">
-            <Dropdown {value} items={choices} {onSelect} small disableTyping />
+            <Dropdown {value} items={choices} {onSelect} small />
 
             {#if filterUnit.type === 'number' && filterUnit.selected}
                 <div class="flex flex-row items-center space-x-2 mt-2">

@@ -24,4 +24,5 @@
     onSelect={handleCurrencySelect}
     value={$activeProfile?.settings.currency}
     items={currencyList}
+    enableTyping
 />
