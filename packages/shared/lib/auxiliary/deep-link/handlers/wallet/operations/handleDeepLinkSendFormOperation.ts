@@ -1,5 +1,3 @@
-import { InvalidAddressError, NoAddressSpecifiedError } from '@auxiliary/deep-link/errors'
-import { getAmountFromSearchParam } from '@auxiliary/deep-link/handlers/wallet/operations/getAmountFromSearchParam'
 import { networkHrp } from '@core/network'
 import {
     INewTransactionDetails,
@@ -12,6 +10,8 @@ import { openPopup } from '@lib/popup'
 import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'
+import { InvalidAddressError, NoAddressSpecifiedError } from '../../../errors'
+import { getAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendFormOperation(searchParams)
