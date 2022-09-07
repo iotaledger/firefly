@@ -83,6 +83,7 @@
     {isFocused}
     {error}
     classes="space-y-2"
+    on:clickOutside={() => (isFocused = false)}
 >
     <div class="flex flex-row w-full items-center space-x-0.5 relative">
         <AssetDropdown bind:asset />
