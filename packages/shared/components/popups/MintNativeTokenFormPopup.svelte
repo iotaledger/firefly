@@ -2,7 +2,7 @@
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import { mintNativeToken } from '@core/wallet'
+    import { mintNativeToken, updateMintTokenDetails, mintTokenDetails, AssetStandard } from '@core/wallet'
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
     import {
@@ -17,7 +17,6 @@
     } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
     import { onMount } from 'svelte'
-    import { updateMintTokenDetails, mintTokenDetails } from '@core/wallet/stores/mint-token-details.store'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -78,7 +77,7 @@
     async function mintAction() {
         try {
             await mintNativeToken(Number(totalSupply), Number(circulatingSupply), {
-                standard: 'IRC30',
+                standard: AssetStandard.IRC30,
                 name: tokenName,
                 symbol,
                 decimals: Number(decimals),

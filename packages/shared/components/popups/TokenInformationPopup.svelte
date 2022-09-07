@@ -1,6 +1,13 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAsset, setNewTransactionDetails, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
+    import {
+        AssetStandard,
+        IAsset,
+        setNewTransactionDetails,
+        unverifyAsset,
+        VerificationStatus,
+        verifyAsset,
+    } from '@core/wallet'
     import { openPopup, updatePopupProps } from '@lib/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
@@ -58,7 +65,7 @@
                 ? localize('popups.tokenInformation.newTokenTitle')
                 : asset?.metadata?.name}
         </Text>
-        {#if asset?.standard === 'IRC30'}
+        {#if asset?.standard === AssetStandard.IRC30}
             <AssetActionsButton {asset} />
         {/if}
     </div>
@@ -86,7 +93,7 @@
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
                 valueText={asset?.id}
-                isCopyable={asset?.standard === 'IRC30'}
+                isCopyable={asset?.standard === AssetStandard.IRC30}
                 copyValue={asset?.id}
             />
             {#if asset?.metadata?.url}

@@ -1,4 +1,4 @@
-import { VerificationStatus } from '../enums'
+import { AssetStandard, VerificationStatus } from '../enums'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { getIconColorFromString } from '@core/account'
 
@@ -9,7 +9,7 @@ export function buildPersistedAssetFromIrc30Metadata(
 ): IPersistedAsset {
     return {
         id: tokenId,
-        standard: 'IRC30',
+        standard: AssetStandard.IRC30,
         metadata: {
             name: metadata.name,
             unit: metadata.symbol,
