@@ -50,9 +50,6 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
                     type: 'enableLedgerBlindSigning',
                     hideClose: true,
                     preventClose: true,
-                    props: {
-                        hash: payload?.['PreparedTransactionEssenceHash'],
-                    },
                 })
             }
         } else if (payload === 'PerformingPow') {
