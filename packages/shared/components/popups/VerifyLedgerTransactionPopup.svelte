@@ -25,7 +25,7 @@
 <Text type="p" classes="mb-4" secondary>{localize(`${locale}.info`)}</Text>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <LedgerAnimation animation="ledger-confirm-address-desktop" />
+    <LedgerAnimation animation="ledger-confirm-prompt-desktop" />
 </div>
 <div class="flex flex-col space-y-2">
     {#if hasSendConfirmationProps}

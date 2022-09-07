@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import {
-        AssetStandard,
+        TokenStandard,
         IAsset,
         setNewTransactionDetails,
         unverifyAsset,
@@ -65,7 +65,7 @@
                 ? localize('popups.tokenInformation.newTokenTitle')
                 : asset?.metadata?.name}
         </Text>
-        {#if asset?.standard === AssetStandard.IRC30}
+        {#if asset?.standard === TokenStandard.IRC30}
             <AssetActionsButton {asset} />
         {/if}
     </div>
@@ -93,7 +93,7 @@
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
                 valueText={asset?.id}
-                isCopyable={asset?.standard === AssetStandard.IRC30}
+                isCopyable={asset?.standard === TokenStandard.IRC30}
                 copyValue={asset?.id}
             />
             {#if asset?.metadata?.url}
