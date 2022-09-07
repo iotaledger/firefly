@@ -1,7 +1,7 @@
-import { AssetStandard } from '@core/wallet/enums'
+import { TokenStandard } from '@core/wallet/enums'
 
 export interface IIrc30Metadata {
-    standard: AssetStandard.IRC30
+    standard: TokenStandard.IRC30
     name: string
     description?: string
     symbol: string

@@ -2,7 +2,7 @@
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import { mintNativeToken, setMintTokenDetails, mintTokenDetails, AssetStandard } from '@core/wallet'
+    import { mintNativeToken, setMintTokenDetails, mintTokenDetails, TokenStandard } from '@core/wallet'
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
     import {
@@ -77,7 +77,7 @@
     async function mintAction() {
         try {
             await mintNativeToken(Number(totalSupply), Number(circulatingSupply), {
-                standard: AssetStandard.IRC30,
+                standard: TokenStandard.IRC30,
                 name: tokenName,
                 symbol,
                 decimals: Number(decimals),
