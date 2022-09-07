@@ -34,7 +34,7 @@ export function displayNotificationForLedgerProfile(
     }
 
     if (checkDeviceStatus) {
-        getLedgerDeviceStatus()
+        void getLedgerDeviceStatus()
     } else {
         _notify()
     }

@@ -1,2 +1,2 @@
-export * from './deconstructLedgerSendConfirmationProps'
+export * from './deconstructLedgerVerificationProps'
 export * from './deriveLedgerError'

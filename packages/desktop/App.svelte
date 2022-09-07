@@ -66,8 +66,8 @@
 
         // await pollMarketData()
 
-        // @ts-ignore: This value is replaced by Webpack DefinePlugin
         /* eslint-disable no-undef */
+        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
         if (!devMode && get(appStage) === AppStage.PROD) {
             await setAppVersionDetails()
             pollCheckForAppUpdate()

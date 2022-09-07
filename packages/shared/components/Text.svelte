@@ -35,7 +35,7 @@
         error?: boolean
         overrideColor?: boolean
         color?: string
-        darkColoe?: string
+        darkColor?: string
         overrideLeading?: boolean
         classes?: string
     }

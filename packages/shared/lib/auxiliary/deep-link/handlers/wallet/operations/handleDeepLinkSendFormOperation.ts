@@ -1,22 +1,26 @@
-import { addError } from '@core/error'
 import { networkHrp } from '@core/network'
-import { ISendFormParameters, Subject } from '@core/wallet'
+import {
+    INewTransactionDetails,
+    Subject,
+    updateNewTransactionDetails,
+    visibleSelectedAccountAssets,
+} from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'
+import { InvalidAddressError, NoAddressSpecifiedError } from '../../../errors'
+import { getAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
-    const sendFormParameters = parseSendFormOperation(searchParams)
+    const transactionDetails = parseSendFormOperation(searchParams)
 
-    if (sendFormParameters) {
+    if (transactionDetails) {
+        updateNewTransactionDetails({ ...transactionDetails })
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                ...sendFormParameters,
-            },
         })
     }
 }
@@ -26,40 +30,23 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
  *
  * @method parseSendFormOperation
  *
- * @param {string} address The recipient's Bech32 address.
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
- * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
  *
- * @return {void | ISendFormParameters} The formatted parameters for the send operation.
+ * @return {INewTransactionDetails} The formatted parameters for the send operation.
  */
-function parseSendFormOperation(searchParams: URLSearchParams): void | ISendFormParameters {
+function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionDetails {
     // Check address exists and is valid this is not optional.
     const address = searchParams.get(SendOperationParameter.Address)
     if (!address) {
-        return addError({ time: Date.now(), type: 'deepLink', message: 'No address specified in the url path' })
+        throw new NoAddressSpecifiedError()
     }
     if (!isValidAddressAndPrefix(address, get(networkHrp))) {
-        return addError({
-            time: Date.now(),
-            type: 'deepLink',
-            message: `Address or prefix is not valid for ${address}`,
-        })
+        throw new InvalidAddressError()
     }
 
-    // Optional parameter: amount
-    // Check if exists and is valid or does not exist
-    let parsedAmount: number
-    const amountParam = searchParams.get(SendOperationParameter.Amount)
-    if (amountParam) {
-        parsedAmount = Number(amountParam)
-        if (!parsedAmount) {
-            return addError({ time: Date.now(), type: 'deepLink', message: `Amount is not a number '${amountParam}'` })
-        }
-    } else {
-        parsedAmount = 0
-    }
+    const asset = get(visibleSelectedAccountAssets)?.baseCoin
+    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
 
-    const amount = String(Math.abs(parsedAmount))
     const unit = searchParams.get(SendOperationParameter.Unit)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)

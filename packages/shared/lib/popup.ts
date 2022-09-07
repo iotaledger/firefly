@@ -44,7 +44,7 @@ export const openPopup = (
         forceClose
     )
 
-export const closePopup = (forceClose: boolean = false): void =>
+export function closePopup(forceClose: boolean = false): void {
     modifyPopupState(
         {
             active: false,
@@ -58,6 +58,7 @@ export const closePopup = (forceClose: boolean = false): void =>
         },
         forceClose
     )
+}
 
 const modifyPopupState = (state: PopupState, forceClose: boolean = false): void => {
     /**
