@@ -9,7 +9,7 @@
     let anchor: HTMLElement
     let canShowDateTimePicker: boolean = false
 
-    $: formattedDate = formatDate(value, { dateStyle: 'short', locale: $appSettings.language })
+    $: formattedDate = value ? formatDate(value, { dateStyle: 'short', locale: $appSettings.language }) : ''
 
     function handleExpirationTimeCancelClick(): void {
         canShowDateTimePicker = false
@@ -26,8 +26,8 @@
     on:click={() => (canShowDateTimePicker = true)}
     class="flex flex-row justify-between border border-solid border-gray-300 bg-white text-center rounded-xl px-2 py-1"
 >
-    <Icon primaryColor="gray-500" icon="calendar" />
-    <Text>{formattedDate}</Text>
+    <Icon width="20" height="20" classes="text-gray-500" icon="calendar" />
+    <Text fontSize="11">{formattedDate}</Text>
 </button>
 {#if canShowDateTimePicker}
     <DateTimePicker

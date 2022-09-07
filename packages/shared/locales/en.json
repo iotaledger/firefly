@@ -1253,6 +1253,15 @@
             "greater": "is greater than",
             "less": "is less than"
         },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before"
+        },
         "status": {
             "label": "Status",
             "confirmed": "confirmed",
