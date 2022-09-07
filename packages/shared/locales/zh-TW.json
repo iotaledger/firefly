@@ -3,55 +3,55 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Send, Receive & Manage your {protocol} tokens",
-                    "body": "Firefly is the official wallet software for {protocol}."
+                    "title": "傳送、接受、管理您的 {protocol} 代幣",
+                    "body": "Firefly 是 {protocol} 的官方錢包軟體"
                 },
                 "legal": {
-                    "title": "Privacy Policy & Terms of Service",
-                    "body": "Please review the Privacy Policy and Terms of Service.",
-                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
+                    "title": "隱私政策和服務條款",
+                    "body": "請仔細檢閱「隱私權政策」與「服務條款」",
+                    "checkbox": "我已經閱讀並且接受隱私政策和服務條款"
                 },
                 "languageAndAppearance": {
-                    "title": "Language & appearance",
-                    "body": "Choose your language and theme."
+                    "title": "語言與外觀",
+                    "body": "選擇介面的 語言 與 外觀主題."
                 }
             },
             "networkSetup": {
                 "chooseProtocol": {
-                    "title": "Choose protocol",
-                    "body": "Set the protocol for your profile.",
-                    "iota": "Default IOTA network",
-                    "shimmer": "Experimental IOTA staging network"
+                    "title": "選擇協議",
+                    "body": "設定您的個人檔案之協議.",
+                    "iota": "預設的 IOTA 網路",
+                    "shimmer": "IOTA 的實驗網路"
                 },
                 "chooseNetwork": {
-                    "title": "Choose network",
-                    "body": "Set the network for your profile.",
+                    "title": "選擇網路",
+                    "body": "設定您的個人檔案之網路.",
                     "iota": {
                         "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
+                            "title": "主網",
+                            "body": "IOTA 主網路"
                         },
                         "devnet": {
-                            "title": "Devnet",
-                            "body": "Developer network for IOTA"
+                            "title": "開發用網絡",
+                            "body": "IOTA之開發者網路"
                         },
                         "private-net": {
                             "title": "Private net",
-                            "body": "Support for custom networks with active TIPs"
+                            "body": "支援具動態TIPS的客製化網絡"
                         }
                     },
                     "shimmer": {
                         "mainnet": {
                             "title": "Shimmer",
-                            "body": "Staging network for IOTA"
+                            "body": "IOTA的測試網路"
                         },
                         "devnet": {
-                            "title": "Testnet",
-                            "body": "Public beta network for Shimmer"
+                            "title": "測試網",
+                            "body": "Beta版本的Shimmer網絡"
                         },
                         "private-net": {
                             "title": "Private net",
-                            "body": "Support for custom networks with draft TIPs"
+                            "body": "支援具動態TIPS的客製化網絡"
                         }
                     }
                 },
@@ -65,14 +65,14 @@
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
                     "chrysalisTitle": "TODO TODO TODO",
                     "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Learn about the Shimmer network"
+                    "learnMore": "學習關於 Shimmer 網路"
                 },
                 "setupNew": {
-                    "title": "Create a profile",
+                    "title": "建立個人設定檔",
                     "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
                     "softwareAccount": {
                         "title": "Create a software profile",
-                        "description": "Provides a Stronghold file and recovery phrase"
+                        "description": "提供一個 Stronghold 檔案 與 恢復詞"
                     },
                     "ledgerAccount": {
                         "title": "Create a hardware profile",
@@ -90,12 +90,12 @@
                     "importLedgerDescription": "Restore from your Ledger Nano S or X device"
                 },
                 "setupClaimed": {
-                    "title": "Claim Shimmer staking rewards",
+                    "title": "領取 Shimmer 質押獎勵",
                     "body": "Import your IOTA profile and claim your Shimmer staking rewards."
                 },
                 "enterName": {
-                    "title": "Create your {protocol} profile",
-                    "profileName": "Profile name",
+                    "title": "建立您的 {protocol} 設定檔",
+                    "profileName": "設定檔名稱",
                     "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
                     "body2": {
                         "first": "For now, let's start with your first profile name.",
@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "將您的Ledger連結至Firefly。",
             "body": "請確定官方Ledger Live軟體已關閉，使Firefly能找到您的Ledger裝置。",
-            "trafficLight1": "使用PIN碼連接並解鎖您的Ledger。",
-            "trafficLight2": "在您的Ledger上啟動新版的IOTA app",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Ledger無法連結時的處理技巧"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "硬體裝置",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "已連接",
-                        "locked": "鎖定",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "Ledger 或助記詞錯誤",
-                        "notDetected": "未偵測到",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "App 已開啟"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
@@ -722,7 +731,11 @@
             "bodyFirefly": "Firefly 在網路更新完成前將無法使用。網路更新後仍可進行資金遷移。"
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "請確認在 Ledger 裝置上的通知再繼續"
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "確認餘額地址",
-                "info": "請確認Ledger顯示的餘額地址和下方顯示的地址相同。若相同，請依提示把Ledger上的兩個按鈕一起按下。"
-            },
-            "transaction": {
-                "title": "確認交易",
-                "info": "請確認Ledger顯示的交易明細和下方顯示的明細相同。若相同，請依提示把Ledger上的兩個按鈕一起按下。"
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "確認接收地址",
@@ -891,6 +898,7 @@
         "dismiss": "取消",
         "claim": "領取",
         "claiming": "領取中",
+        "claimingRewards": "Claiming rewards",
         "reject": "拒絕",
         "confirmRejection": {
             "title": "拒絕交易",
@@ -1026,7 +1034,11 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "接收方",
@@ -1042,6 +1054,9 @@
         "received": "已接收",
         "transfer": "傳送",
         "transferring": "傳送中",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "發送付款",
@@ -1185,6 +1200,7 @@
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "逾期時間",
+        "timelockDate": "Timelock",
         "claimedTime": "已收取於",
         "copiedToClipboard": "複製到剪貼簿",
         "total": "總額： {balance}",
@@ -1193,7 +1209,8 @@
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "節點清單",
-        "claimingTransactionId": "領取於",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "資產",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
@@ -1201,7 +1218,11 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
         "title": "Filters",
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "請等待同步完成才更換錢包。",
@@ -1312,6 +1335,7 @@
             "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
             "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
@@ -1319,7 +1343,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
@@ -1329,7 +1353,9 @@
             "duplicate": "相同名稱的設定檔已存在。",
             "delete": {
                 "nonEmptyAccounts": "您必須先轉出全部餘額，然後才能刪除您的設定檔。"
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "密碼不吻合。",
@@ -1369,7 +1395,9 @@
             "syncing": "同步您的錢包時發生錯誤。",
             "cannotRemove": "無法移除錢包。",
             "withBalance": "您必須先轉出全部餘額，然後才能刪除此錢包。",
-            "notLast": "您只能刪除最後一個錢包。"
+            "notLast": "您只能刪除最後一個錢包。",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "地址長度應符合 {length, plural, one {# 字元} other {# 字元}}。",
@@ -1388,7 +1416,9 @@
             "leavingDust": "您的地址不能少於1Mi。",
             "cancelled": "交易取消。",
             "transaction": "交易發生錯誤，請重試。",
-            "invalidExpirationDateTime": "您選擇的 失效日期/時間 為無效的"
+            "invalidExpirationDateTime": "您選擇的 失效日期/時間 為無效的",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
@@ -1400,7 +1430,8 @@
             "https": "必須由 HTTPS 安全連線，目前尚未支援以 HTTP 進行的不安全連線。",
             "duplicate": "該節點已被添加。",
             "unsynced": "此節點尚未同步。",
-            "noSynced": "沒有可用的同步節點。",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "無法向所有節點取得回應。",
             "forbidden": "此節點連結已被禁用。",
             "pluginNotAvailable": "在目前的節點上無法使用 \"{nodePlugin}\" 插件。",
@@ -1579,7 +1610,8 @@
             "unclaimed": "未領取",
             "claimed": "已領取",
             "expired": "逾期"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {
