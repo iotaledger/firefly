@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
+    import { isInternalTransaction } from '@core/ledger'
     import { networkHrp } from '@core/network'
-    import { checkActiveProfileAuth } from '@core/profile'
+    import { checkActiveProfileAuth, isSoftwareProfile } from '@core/profile'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -110,6 +111,9 @@
     }
 
     function handleClaimClick(): void {
+        if (!$isSoftwareProfile) {
+            $isInternalTransaction = true
+        }
         checkActiveProfileAuth(() => claimActivity(activityId, data))
     }
 </script>
