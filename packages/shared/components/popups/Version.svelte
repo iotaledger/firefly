@@ -31,7 +31,7 @@
     }
 
     onMount(async () => {
-        // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
             await setAppVersionDetails()
             if (get(appStage) === AppStage.PROD) {

@@ -3,34 +3,20 @@
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeight } from 'shared/components/Text.svelte'
-    import { resetLedgerSendConfirmationProps } from '@core/ledger'
-    import { IAsset, Subject } from '@core/wallet'
+    import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
-    export let asset: IAsset
-    export let amount: string
-    export let unit: string
-    export let recipient: Subject
-    export let metadata: string
-    export let tag: string
-
+    let { asset, amount, unit, recipient, metadata, tag } = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput
     let recipientInput: RecipientInput
 
     async function onSend(): Promise<void> {
         const valid = await validate()
         if (valid) {
+            updateNewTransactionDetails({ asset, amount, unit, recipient, metadata, tag })
             openPopup({
                 type: 'sendConfirmation',
-                props: {
-                    asset,
-                    amount,
-                    unit,
-                    recipient,
-                    internal: false,
-                    metadata,
-                    tag,
-                },
                 overflow: true,
             })
         }
@@ -73,8 +59,6 @@
         if (amount && recipient) {
             sendButtonElement.focus()
         }
-
-        resetLedgerSendConfirmationProps()
     })
 </script>
 

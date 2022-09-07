@@ -1,54 +1,30 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
-    import { Animation, KeyValueBox, Text } from 'shared/components'
+    import { KeyValueBox, Text, TextHint, LedgerAnimation } from 'shared/components'
     import { localize } from '@core/i18n'
-    import {
-        resetLedgerSendConfirmationProps,
-        resetLedgerMintNativeTokenConfirmationProps,
-        ledgerSendConfirmationProps,
-        ledgerMintNativeTokenConfirmationProps,
-    } from '@core/ledger'
-    import { isActiveLedgerProfile } from '@core/profile'
     import { formatHexString } from '@core/utils'
-    import { openPopup } from '@lib/popup'
+    import { onDestroy } from 'svelte'
+    import { showInternalVerificationPopup, resetShowInternalVerificationPopup } from '@core/ledger'
 
     export let toAddress: string
     export let toAmount: string
     export let hash: string
 
     const hasSendConfirmationProps = (toAddress && toAmount) || hash
-    // const hasMintNativeTokenConfirmationProps = false
+
+    const locale = $showInternalVerificationPopup
+        ? 'popups.verifyInternalLedgerTransaction'
+        : 'popups.verifyLedgerTransaction'
 
     onDestroy(() => {
-        if ($isActiveLedgerProfile) {
-            if ($ledgerSendConfirmationProps) {
-                openPopup({
-                    type: 'sendConfirmation',
-                    props: $ledgerSendConfirmationProps,
-                    overflow: true,
-                })
-                resetLedgerSendConfirmationProps()
-            } else if ($ledgerMintNativeTokenConfirmationProps) {
-                openPopup({
-                    type: 'mintNativeTokenForm',
-                    props: $ledgerMintNativeTokenConfirmationProps,
-                })
-                resetLedgerMintNativeTokenConfirmationProps()
-            }
-        }
+        resetShowInternalVerificationPopup()
     })
 </script>
 
-<Text type="h4" classes="mb-4">{localize('popups.ledgerTransaction.title')}</Text>
-<Text type="p" classes="mb-4" secondary>{localize('popups.ledgerTransaction.info')}</Text>
+<Text type="h4" classes="mb-4">{localize(`${locale}.title`)}</Text>
+<Text type="p" classes="mb-4" secondary>{localize(`${locale}.info`)}</Text>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Animation
-        width="100%"
-        animation="ledger-bg-desktop"
-        classes="absolute transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-    />
-    <Animation animation="ledger-confirm-address-desktop" />
+    <LedgerAnimation animation="ledger-confirm-prompt-desktop" />
 </div>
 <div class="flex flex-col space-y-2">
     {#if hasSendConfirmationProps}
@@ -58,5 +34,7 @@
             <KeyValueBox keyText={localize('general.sendTo')} valueText={toAddress} />
             <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
         {/if}
+    {:else if $showInternalVerificationPopup}
+        <TextHint info text={localize('popups.verifyInternalLedgerTransaction.hint')} />
     {/if}
 </div>

@@ -1,4 +1,4 @@
-export interface ILedgerMintNativeTokenConfirmationProps {
+export interface IMintTokenDetails {
     name: string
     totalSupply: number
     circulatingSupply: number

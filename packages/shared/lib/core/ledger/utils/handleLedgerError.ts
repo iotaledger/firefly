@@ -7,7 +7,7 @@ import { closePopup, openPopup, popupState } from '@lib/popup'
 import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
 import { deriveLedgerError } from '../helpers'
-import { resetLedgerMintNativeTokenConfirmationProps, resetLedgerSendConfirmationProps } from '../stores'
+import { resetNewTransactionDetails, resetMintTokenDetails } from '@core/wallet'
 
 export function handleLedgerError(error: string, resetConfirmationPropsOnDenial: boolean = true): void {
     const ledgerError = deriveLedgerError(error)
@@ -22,8 +22,8 @@ export function handleLedgerError(error: string, resetConfirmationPropsOnDenial:
          * on the device.
          */
         if (wasDeniedByUser && resetConfirmationPropsOnDenial) {
-            resetLedgerSendConfirmationProps()
-            resetLedgerMintNativeTokenConfirmationProps()
+            resetNewTransactionDetails()
+            resetMintTokenDetails()
         }
 
         closePopup(true)
@@ -37,7 +37,6 @@ export function handleLedgerError(error: string, resetConfirmationPropsOnDenial:
         if (hadToEnableBlindSinging) {
             openPopup({
                 type: 'enableLedgerBlindSigning',
-                hideClose: true,
             })
         } else {
             showAppNotification({
