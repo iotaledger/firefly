@@ -12,7 +12,7 @@ export const mintTokenDetails = writable<IMintTokenDetails>({
     logoUrl: undefined,
 })
 
-export function updateMintTokenDetails(payload: IMintTokenDetails): void {
+export function setMintTokenDetails(payload: IMintTokenDetails): void {
     mintTokenDetails.set(payload)
 }
 

@@ -2,7 +2,7 @@
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import { mintNativeToken, updateMintTokenDetails, mintTokenDetails, AssetStandard } from '@core/wallet'
+    import { mintNativeToken, setMintTokenDetails, mintTokenDetails, AssetStandard } from '@core/wallet'
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
     import {
@@ -108,7 +108,7 @@
         const valid = await validate()
         if (valid) {
             try {
-                updateMintTokenDetails({
+                setMintTokenDetails({
                     name: tokenName,
                     totalSupply,
                     circulatingSupply,
