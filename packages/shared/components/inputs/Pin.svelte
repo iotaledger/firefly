@@ -14,6 +14,7 @@
     export let glimpse = false
     export let smaller = false
     export let error
+    export let onSubmit: () => void
 
     let inputs = new Array(PIN_LENGTH)
     $: {
@@ -91,7 +92,6 @@
      */
     function changeHandlerMobile(event: Event & InputEventInit, i: number): void {
         if (!event.isTrusted || !/^[0-9]$/.test(event.data)) {
-            inputs[i] = ''
             inputElements[i].focus()
             return
         }
@@ -132,6 +132,10 @@
         if (e.target === root) {
             selectFirstEmpty()
         }
+    }
+
+    export function blur(): void {
+        inputElements.forEach((input) => input.blur())
     }
 
     export function focus(): void {

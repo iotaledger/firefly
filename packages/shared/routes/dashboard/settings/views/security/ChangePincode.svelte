@@ -17,6 +17,10 @@
     let pinCodeBusy = false
     let pinCodeMessage = ''
 
+    let currentPinInput: Pin
+    let newPinInput: Pin
+    let confirmedPinInput: Pin
+
     function changePincode() {
         if (currentPincode && newPincode && confirmedPincode) {
             reset()
@@ -34,6 +38,9 @@
                 pinCodeMessage = localize('general.pinCodeUpdating')
 
                 const _clear = (err?) => {
+                    currentPinInput.blur()
+                    newPinInput.blur()
+                    confirmedPinInput.blur()
                     setTimeout(() => {
                         pinCodeMessage = ''
                     }, 2000)
@@ -103,6 +110,7 @@
         smaller
         error={currentPincodeError}
         classes="mb-4"
+        bind:this={currentPinInput}
         bind:value={currentPincode}
         disabled={pinCodeBusy}
         on:submit={changePincode}
@@ -112,6 +120,7 @@
         smaller
         error={newPincodeError}
         classes="mb-4"
+        bind:this={newPinInput}
         bind:value={newPincode}
         disabled={pinCodeBusy}
         on:submit={changePincode}
@@ -121,6 +130,7 @@
         smaller
         error={confirmationPincodeError}
         classes="mb-4"
+        bind:this={confirmedPinInput}
         bind:value={confirmedPincode}
         disabled={pinCodeBusy}
         on:submit={changePincode}
