@@ -1,10 +1,14 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup, popupState } from 'shared/lib/popup'
+
+    function onBusyChanged(isBusy: boolean) {
+        $popupState.hideClose = isBusy
+    }
 
     function handleBalanceFinderClick() {
-        openPopup({ type: 'balanceFinder', hideClose: true })
+        openPopup({ type: 'balanceFinder', hideClose: false, props: { onBusyChanged } })
     }
 </script>
 

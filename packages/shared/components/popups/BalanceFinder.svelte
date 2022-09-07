@@ -17,6 +17,7 @@
     import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from 'shared/lib/app'
 
     export let locale: Locale
+    export let onBusyChanged = (isBusy: boolean): void => {}
 
     const { balanceOverview, accounts } = $wallet
 
@@ -33,6 +34,7 @@
 
     $: if (isBusy && !$isSyncing && $currentSyncingAccountStore === null) {
         isBusy = false
+        onBusyChanged(isBusy)
         hasUsedBalanceFinder = true
     }
 
@@ -51,6 +53,7 @@
             }
 
             isBusy = true
+            onBusyChanged(isBusy)
             await asyncSyncAccounts(startAddressIndex, currentGapLimit, accountDiscoveryThreshold, false)
 
             previousGapLimit = currentGapLimit
@@ -63,6 +66,7 @@
             displayErrorEventToUser(err)
         } finally {
             isBusy = false
+            onBusyChanged(isBusy)
         }
     }
 
