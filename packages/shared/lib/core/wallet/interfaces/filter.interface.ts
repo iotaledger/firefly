@@ -75,7 +75,7 @@ export type DateFilterInput = SingleDateFilterInput | RangeDateFilterInput | Uni
 
 export type SingleDateFilterInput = {
     type: 'single'
-    value: Date
+    value: string
 }
 
 export type UnitDateFilterInput = {
@@ -86,6 +86,6 @@ export type UnitDateFilterInput = {
 
 export type RangeDateFilterInput = {
     type: 'range'
-    start: Date
-    end: Date
+    start: string
+    end: string
 }

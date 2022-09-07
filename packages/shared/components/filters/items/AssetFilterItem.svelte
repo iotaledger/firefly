@@ -29,7 +29,7 @@
         }
     }
 
-    function onSelect(item) {
+    function onSelect(item): void {
         let asset = undefined
         if (item.value === $visibleSelectedAccountAssets.baseCoin.metadata.name) {
             asset = $visibleSelectedAccountAssets.baseCoin

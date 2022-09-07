@@ -13,7 +13,7 @@
 
     $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
 
-    function onSelect(item) {
+    function onSelect(item): void {
         filterUnit.selected = item.value
     }
 </script>

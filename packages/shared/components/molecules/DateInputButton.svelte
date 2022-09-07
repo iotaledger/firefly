@@ -3,20 +3,20 @@
     import { Text, DateTimePicker, Icon } from 'shared/components'
     import { appSettings } from '@core/app'
 
-    export let value: Date
+    export let value: string
 
     let customDate: Date
     let anchor: HTMLElement
     let canShowDateTimePicker: boolean = false
 
-    $: formattedDate = value ? formatDate(value, { dateStyle: 'short', locale: $appSettings.language }) : ''
+    $: formattedDate = value ? formatDate(new Date(value), { dateStyle: 'short', locale: $appSettings.language }) : ''
 
     function handleExpirationTimeCancelClick(): void {
         canShowDateTimePicker = false
     }
 
     function handleExpirationTimeConfirmClick(): void {
-        value = customDate
+        value = customDate.toString()
         canShowDateTimePicker = false
     }
 </script>
@@ -27,15 +27,22 @@
     class="flex flex-row justify-between border border-solid border-gray-300 bg-white text-center rounded-xl px-2 py-1"
 >
     <Icon width="20" height="20" classes="text-gray-500" icon="calendar" />
-    <Text fontSize="11">{formattedDate}</Text>
+    <Text>{formattedDate}</Text>
 </button>
 {#if canShowDateTimePicker}
     <DateTimePicker
         position="top"
         {anchor}
         mode="date"
+        initialDate={value}
         bind:value={customDate}
         on:cancel={() => handleExpirationTimeCancelClick()}
         on:confirm={() => handleExpirationTimeConfirmClick()}
     />
 {/if}
+
+<style lang="scss">
+    button {
+        width: 93px;
+    }
+</style>

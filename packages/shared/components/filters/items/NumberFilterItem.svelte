@@ -14,7 +14,8 @@
 
     $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
 
-    function updateSubUnitForNumberFilter() {
+    function onSelect(item): void {
+        filterUnit.selected = item.value
         if (
             filterUnit.selected === NumberFilterOption.Equal ||
             filterUnit.selected === NumberFilterOption.Greater ||
@@ -31,11 +32,6 @@
                 end: '',
             }
         }
-    }
-
-    function onSelect(item) {
-        filterUnit.selected = item.value
-        updateSubUnitForNumberFilter()
     }
 </script>
 

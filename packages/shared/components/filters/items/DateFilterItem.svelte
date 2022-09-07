@@ -14,7 +14,9 @@
 
     $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
 
-    function updateSubUnitForNumberFilter() {
+    function onSelect(item): void {
+        filterUnit.selected = item.value
+
         if (
             filterUnit.selected === DateFilterOption.Equals ||
             filterUnit.selected === DateFilterOption.After ||
@@ -39,24 +41,21 @@
             }
         }
     }
-
-    function onSelect(item) {
-        filterUnit.selected = item.value
-        updateSubUnitForNumberFilter()
-    }
 </script>
 
 <Dropdown {value} items={choices} {onSelect} small />
 
 {#if filterUnit.selected}
     <div class="flex flex-row items-center space-x-2 mt-2">
-        <Icon height="24" width="20" icon="arrow-right" />
+        {#if filterUnit.selected !== DateFilterOption.Range}
+            <Icon height="24" width="20" icon="arrow-right" />
+        {/if}
         {#if filterUnit.subunit.type === 'range'}
-            <DateInputButton bind:value={filterUnit.subunit.start} autofocus placeholder="" />
+            <DateInputButton bind:value={filterUnit.subunit.start} />
             <Text>{localize('general.and')}</Text>
-            <DateInputButton bind:value={filterUnit.subunit.end} placeholder="" />
+            <DateInputButton bind:value={filterUnit.subunit.end} />
         {:else if filterUnit.subunit.type === 'single'}
-            <DateInputButton bind:value={filterUnit.subunit.value} autofocus placeholder="" />
+            <DateInputButton bind:value={filterUnit.subunit.value} />
         {/if}
     </div>
 {/if}
