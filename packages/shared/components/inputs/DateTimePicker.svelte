@@ -6,10 +6,11 @@
     import { localize } from '@core/i18n'
 
     export let value: Date
+    export let startDate: Date = undefined
     export let mode: string = 'auto'
 
     const dispatch = createEventDispatcher()
-    const sveltyPickerStartDate = convertDateToSveltyPickerFormat(new Date())
+    const sveltyPickerStartDate = convertDateToSveltyPickerFormat(startDate)
 
     let sveltyPickerDate = convertDateToSveltyPickerFormat(value) ?? sveltyPickerStartDate
     let tooltip: Tooltip

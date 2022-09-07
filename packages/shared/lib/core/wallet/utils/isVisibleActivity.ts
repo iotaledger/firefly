@@ -12,7 +12,9 @@ import {
     TypeFilterOption,
     StatusFilterOption,
     ActivityType,
+    DateFilterOption,
 } from '../enums'
+import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@lib/utils/dateUtils'
 
 // Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
 export function isVisibleActivity(activity: Activity): boolean {
@@ -62,6 +64,45 @@ export function isVisibleActivity(activity: Activity): boolean {
         if (filter.amount.selected === NumberFilterOption.Less && filter.amount.subunit.type === 'single') {
             const isLess = activityAmount <= parseCurrency(filter.amount.subunit.amount)
             if (!isLess) {
+                return false
+            }
+        }
+    }
+    if (filter.date.active) {
+        if (filter.date.selected === DateFilterOption.Equals && filter.date.subunit.type === 'single') {
+            const filterDate = new Date(filter.date.subunit.value)
+            if (!datesOnSameDay(activity.time, filterDate)) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.Before && filter.date.subunit.type === 'single') {
+            const filterDate = new Date(filter.date.subunit.value)
+            if (!dateIsBeforeOtherDate(activity.time, filterDate)) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.After && filter.date.subunit.type === 'single') {
+            const filterDate = new Date(filter.date.subunit.value)
+            if (!dateIsAfterOtherDate(activity.time, filterDate)) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.AfterOrEquals && filter.date.subunit.type === 'single') {
+            const filterDate = new Date(filter.date.subunit.value)
+            if (!(dateIsAfterOtherDate(activity.time, filterDate) || datesOnSameDay(activity.time, filterDate))) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.Range && filter.date.subunit.type === 'range') {
+            const starFilterDate = new Date(filter.date.subunit.start)
+            const endFilterDate = new Date(filter.date.subunit.end)
+
+            const isInRange =
+                dateIsAfterOtherDate(activity.time, starFilterDate) &&
+                dateIsBeforeOtherDate(activity.time, endFilterDate)
+            const isOnBoundries =
+                datesOnSameDay(activity.time, starFilterDate) || datesOnSameDay(activity.time, endFilterDate)
+            if (!(isInRange || isOnBoundries)) {
                 return false
             }
         }
