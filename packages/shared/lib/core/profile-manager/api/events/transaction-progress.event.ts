@@ -15,16 +15,16 @@ import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 export function handleTransactionProgressEvent(accountId: string, payload: TransactionProgressEventPayload): void {
     if (get(isActiveLedgerProfile)) {
         if (get(selectedAccountId) === accountId) {
-            TransactionProgressEventForLedger(payload)
+            openPopupIfVerificationNeeded(payload)
         }
     } else if (get(isOnboardingLedgerProfile)) {
-        TransactionProgressEventForLedger(payload)
+        openPopupIfVerificationNeeded(payload)
     } else {
         console.warn('Transaction progress handler unimplemented: ', payload)
     }
 }
 
-function TransactionProgressEventForLedger(payload: TransactionProgressEventPayload): void {
+function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload): void {
     if (payload) {
         if (isPreparedTransaction(payload)) {
             openPopup({
