@@ -1,5 +1,7 @@
+import { TokenStandard } from '@core/wallet/enums'
+
 export interface IIrc30Metadata {
-    standard: 'IRC30'
+    standard: TokenStandard.IRC30
     name: string
     description?: string
     symbol: string

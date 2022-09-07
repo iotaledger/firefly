@@ -1,14 +1,15 @@
 <script lang="typescript">
     import { Text, ExpirationTimePickerMenu, Icon } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
+    import { ExpirationTime } from '@core/utils'
 
     export let value: Date
-    export let initialSelected: 'none' | '1hour' | '1day' | '1week' = 'none'
-    export let disabled
+    export let initialSelected: ExpirationTime = ExpirationTime.None
+    export let disabled: boolean = false
 
     let menu: ExpirationTimePickerMenu
     let anchor: HTMLElement
-    let selected: 'none' | '1hour' | '1day' | '1week'
+    let selected: ExpirationTime
 
     $: selected = initialSelected
 </script>

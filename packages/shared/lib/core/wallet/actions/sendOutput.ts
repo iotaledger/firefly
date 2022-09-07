@@ -6,7 +6,7 @@ import { get } from 'svelte/store'
 
 import { Activity } from '../classes'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
-import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
+import { addActivityToAccountActivitiesInAllAccountActivities, resetNewTransactionDetails } from '../stores'
 import { handleLedgerError } from '@core/ledger'
 import { preprocessTransaction } from '../utils'
 
@@ -15,6 +15,8 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
         isTransferring.set(true)
         const account = get(selectedAccount)
         const transaction = await account.sendOutputs([output], DEFAULT_TRANSACTION_OPTIONS)
+        // Reset transaction details state, since the transaction has been sent
+        resetNewTransactionDetails()
         const processedTransaction = preprocessTransaction(transaction)
         addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedTransaction, account))
         isTransferring.set(false)

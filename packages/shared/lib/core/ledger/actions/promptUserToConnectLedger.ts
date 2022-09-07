@@ -30,5 +30,5 @@ export function promptUserToConnectLedger(
         }
     }
 
-    getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+    void getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
 }
