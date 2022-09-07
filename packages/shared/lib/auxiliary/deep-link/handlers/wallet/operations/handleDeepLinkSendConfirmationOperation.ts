@@ -46,7 +46,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         throw new NoAddressSpecifiedError()
     }
     if (!isValidAddressAndPrefix(address, get(networkHrp))) {
-        throw new InvalidAddressError(address)
+        throw new InvalidAddressError()
     }
 
     const asset = get(visibleSelectedAccountAssets)?.baseCoin

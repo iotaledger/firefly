@@ -1,8 +1,9 @@
 import { BaseError } from '@core/error'
+import { localize } from '@core/i18n'
 
 export class InvalidAddressError extends BaseError {
-    constructor(address: string) {
-        const message = `Address or prefix is not valid for ${address}`
+    constructor() {
+        const message = localize('error.send.invalidAddress')
         super({
             message,
             showNotification: true,

@@ -1,8 +1,9 @@
 import { BaseError } from '@core/error'
+import { localize } from '@core/i18n'
 
 export class AmountNotANumberError extends BaseError {
-    constructor(amountParam: string) {
-        const message = `Amount in deep link is not a number '${amountParam}'`
+    constructor(amount: string) {
+        const message = localize('notifications.deepLinkingRequest.invalidNumber', { values: { amount } })
         super({
             message,
             showNotification: true,

@@ -1,4 +1,5 @@
 import { addError } from '@core/error'
+import { localize } from '@core/i18n'
 
 import { WalletOperation } from '../../enums'
 import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperation } from './operations'
@@ -28,7 +29,9 @@ export function handleDeepLinkWalletContext(url: URL): void {
             handleDeepLinkSendConfirmationOperation(url.searchParams)
             break
         default: {
-            const message = `Unrecognized wallet operation '${pathnameParts[0]}'`
+            const message = localize('notifications.deepLinkingRequest.wallet.unrecognizedOperation', {
+                values: { operation: pathnameParts[0] },
+            })
             console.error(message)
             return addError({
                 time: Date.now(),
