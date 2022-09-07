@@ -17,7 +17,7 @@
     $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === $selectedAccount.name
     $: hasColorChanged = $selectedAccount.color !== color
 
-    async function handleSaveClick(): Promise<void> {
+    async function onSaveClick(): Promise<void> {
         if (trimmedAccountAlias) {
             error = ''
             try {
@@ -28,15 +28,15 @@
             }
 
             isBusy = true
-            await _save()
+            await saveAccountMetadata()
         }
     }
 
-    function handleCancelClick(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
-    async function _save(): Promise<void> {
+    async function saveAccountMetadata(): Promise<void> {
         try {
             if (trimmedAccountAlias || color) {
                 await tryEditSelectedAccountMetadata({ name: trimmedAccountAlias, color })
@@ -59,7 +59,7 @@
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
                 autofocus
-                submitHandler={handleSaveClick}
+                submitHandler={onSaveClick}
                 disabled={isBusy}
                 classes="mb-4"
             />
@@ -72,12 +72,12 @@
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between mt-2 px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()} disbled={isBusy}>
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => onCancelClick()} disbled={isBusy}>
                 {localize('actions.cancel')}
             </Button>
             <Button
                 classes="-mx-2 w-1/2"
-                onClick={() => handleSaveClick()}
+                onClick={() => onSaveClick()}
                 disabled={invalidAliasUpdate && !hasColorChanged}
             >
                 {localize('actions.save')}
