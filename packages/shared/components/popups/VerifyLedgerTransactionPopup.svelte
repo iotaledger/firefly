@@ -35,6 +35,6 @@
             <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
         {/if}
     {:else if $showInternalVerificationPopup}
-        <TextHint info text={localize('popups.verifyInternalLedgerTransaction.hint')} classes="pt-2" />
+        <TextHint info text={localize('popups.verifyInternalLedgerTransaction.hint')} />
     {/if}
 </div>
