@@ -1,7 +1,12 @@
 <script lang="typescript">
     import { Text, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { checkOrConnectLedger, ledgerNanoStatus, ledgerPreparedOutput } from '@core/ledger'
+    import {
+        checkOrConnectLedger,
+        ledgerNanoStatus,
+        ledgerPreparedOutput,
+        resetLedgerPreparedOutput,
+    } from '@core/ledger'
     import { closePopup } from '@lib/popup'
     import { sendOutput } from '@core/wallet'
 
@@ -9,7 +14,10 @@
 
     $: if ($ledgerNanoStatus.blindSigningEnabled) {
         closePopup()
-        checkOrConnectLedger(() => sendOutput($ledgerPreparedOutput))
+        checkOrConnectLedger(async () => {
+            await sendOutput($ledgerPreparedOutput)
+            resetLedgerPreparedOutput()
+        })
     }
 </script>
 

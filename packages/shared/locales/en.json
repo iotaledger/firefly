@@ -762,9 +762,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Confirm receive address",
