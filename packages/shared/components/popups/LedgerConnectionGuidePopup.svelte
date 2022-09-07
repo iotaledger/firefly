@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, Illustration, Link, Text } from 'shared/components'
+    import { LedgerAnimation, Button, Link, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { closePopup } from 'shared/lib/popup'
     import { Locale } from '@core/i18n'
@@ -25,12 +25,7 @@
 
 <Text type="h4" classes="mb-6">{locale('popups.ledgerConnectionGuide.title')}</Text>
 <div class="w-full flex flex-row flex-wrap relative z-0">
-    <div class="illustration-wrapper relative w-full bg-white dark:bg-gray-900 flex justify-center items-center z-0">
-        <div class="animation absolute transform top-2.5 left-1/2 -translate-x-1/2 z-0">
-            <Animation animation="ledger-bg-desktop" />
-        </div>
-        <Illustration illustration={stepAnimations[stepIndex]} />
-    </div>
+    <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" bgClasses="top-7" />
     <div class="w-full text-center my-9 px-10 z-10">
         {#if typeof locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`) === 'string'}
             <Text secondary classes="inline-block">{locale(`popups.ledgerConnectionGuide.steps.${stepIndex}`)}</Text>
