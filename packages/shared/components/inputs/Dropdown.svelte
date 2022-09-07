@@ -22,7 +22,7 @@
     export let showBorderWhenClosed = true
     export let isFocused = false
 
-    export let onSelect: (..._: any[]) => void
+    export let onSelect: (..._: DropdownChoice[]) => void
 
     let dropdown = false
     let navContainer

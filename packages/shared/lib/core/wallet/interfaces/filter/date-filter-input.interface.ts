@@ -1,3 +1,5 @@
+import { DateUnit } from '@core/wallet/enums'
+
 export type DateFilterInput = SingleDateFilterInput | RangeDateFilterInput | UnitDateFilterInput
 
 export type SingleDateFilterInput = {
@@ -8,7 +10,7 @@ export type SingleDateFilterInput = {
 export type UnitDateFilterInput = {
     type: 'unit'
     amount: string
-    unit: 'hours' | 'days' | 'months' | 'years'
+    unit: DateUnit
 }
 
 export type RangeDateFilterInput = {

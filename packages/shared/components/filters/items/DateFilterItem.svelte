@@ -1,9 +1,9 @@
 <script lang="typescript">
     import type { DateFilterUnit } from '@core/wallet/interfaces'
-    import { DateInputButton, Dropdown, Icon, Text } from 'shared/components'
+    import { DateInputButton, Dropdown, Icon, Text, NumberInput } from 'shared/components'
     import { localize } from '@core/i18n'
     import type { DropdownChoice } from '@core/utils'
-    import { DateFilterOption } from '@core/wallet'
+    import { DateFilterOption, DateUnit } from '@core/wallet'
 
     export let filterUnit: DateFilterUnit
 
@@ -12,9 +12,16 @@
         value: choice,
     }))
 
-    $: value = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
+    const unitChoices: DropdownChoice[] = Object.keys(DateUnit).map((val) => ({
+        label: localize(`${filterUnit.localeKey}.${val}`),
+        value: val,
+    }))
 
-    function onSelect(item): void {
+    $: selectedDateFilterOption = localize(`${filterUnit.localeKey}.${filterUnit.selected}`)
+    $: selectedDateUnit =
+        filterUnit.subunit.type === 'unit' ? localize(`${filterUnit.localeKey}.${filterUnit.subunit.unit}`) : ''
+
+    function onSelect(item: DropdownChoice): void {
         filterUnit.selected = item.value
 
         if (
@@ -36,14 +43,20 @@
         } else if (filterUnit.selected === DateFilterOption.Last) {
             filterUnit.subunit = {
                 type: 'unit',
-                amount: '',
-                unit: 'days',
+                amount: '0',
+                unit: DateUnit.Days,
             }
+        }
+    }
+
+    function onUnitSelect(item: DropdownChoice): void {
+        if (filterUnit.subunit.type === 'unit') {
+            filterUnit.subunit.unit = item.value
         }
     }
 </script>
 
-<Dropdown {value} items={choices} {onSelect} small />
+<Dropdown value={selectedDateFilterOption} items={choices} {onSelect} small />
 
 {#if filterUnit.selected}
     <div class="flex flex-row items-center space-x-2 mt-2">
@@ -56,6 +69,9 @@
             <DateInputButton bind:value={filterUnit.subunit.end} />
         {:else if filterUnit.subunit.type === 'single'}
             <DateInputButton bind:value={filterUnit.subunit.value} />
+        {:else if filterUnit.subunit.type === 'unit'}
+            <NumberInput bind:value={filterUnit.subunit.amount} placeholder="" />
+            <Dropdown value={selectedDateUnit} items={unitChoices} onSelect={onUnitSelect} small />
         {/if}
     </div>
 {/if}

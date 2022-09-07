@@ -13,6 +13,7 @@ import {
     StatusFilterOption,
     ActivityType,
     DateFilterOption,
+    DateUnit,
 } from '../enums'
 import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@lib/utils/dateUtils'
 
@@ -94,14 +95,38 @@ export function isVisibleActivity(activity: Activity): boolean {
             }
         }
         if (filter.date.selected === DateFilterOption.Range && filter.date.subunit.type === 'range') {
-            const starFilterDate = new Date(filter.date.subunit.start)
+            const startFilterDate = new Date(filter.date.subunit.start)
             const endFilterDate = new Date(filter.date.subunit.end)
 
             const isInRange =
-                dateIsAfterOtherDate(activity.time, starFilterDate) &&
+                dateIsAfterOtherDate(activity.time, startFilterDate) &&
                 dateIsBeforeOtherDate(activity.time, endFilterDate)
             const isOnBoundries =
-                datesOnSameDay(activity.time, starFilterDate) || datesOnSameDay(activity.time, endFilterDate)
+                datesOnSameDay(activity.time, startFilterDate) || datesOnSameDay(activity.time, endFilterDate)
+            if (!(isInRange || isOnBoundries)) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.Last && filter.date.subunit.type === 'unit') {
+            const startFilterDate = new Date()
+            const endFilterDate = new Date()
+            switch (filter.date.subunit.unit) {
+                case DateUnit.Days:
+                    startFilterDate.setDate(startFilterDate.getDate() - Number(filter.date.subunit.amount))
+                    break
+                case DateUnit.Months:
+                    startFilterDate.setMonth(startFilterDate.getMonth() - Number(filter.date.subunit.amount))
+                    break
+                case DateUnit.Years:
+                    startFilterDate.setFullYear(startFilterDate.getFullYear() - Number(filter.date.subunit.amount))
+                    break
+            }
+
+            const isInRange =
+                dateIsAfterOtherDate(activity.time, startFilterDate) &&
+                dateIsBeforeOtherDate(activity.time, endFilterDate)
+            const isOnBoundries =
+                datesOnSameDay(activity.time, startFilterDate) || datesOnSameDay(activity.time, endFilterDate)
             if (!(isInRange || isOnBoundries)) {
                 return false
             }
