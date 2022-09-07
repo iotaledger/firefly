@@ -1,7 +1,12 @@
 <script lang="typescript">
     import { Text, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { checkOrConnectLedger, ledgerNanoStatus, ledgerPreparedOutput } from '@core/ledger'
+    import {
+        checkOrConnectLedger,
+        ledgerNanoStatus,
+        ledgerPreparedOutput,
+        resetLedgerPreparedOutput,
+    } from '@core/ledger'
     import { closePopup } from '@lib/popup'
     import { sendOutput } from '@core/wallet'
 
@@ -11,7 +16,7 @@
         closePopup()
         checkOrConnectLedger(async () => {
             await sendOutput($ledgerPreparedOutput)
-            $ledgerPreparedOutput = null
+            resetLedgerPreparedOutput()
         })
     }
 </script>
