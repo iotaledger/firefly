@@ -3,10 +3,7 @@
     import { localize } from '@core/i18n'
     import { formatHexString } from '@core/utils'
     import { onDestroy } from 'svelte'
-    import {
-        isInternalTransaction,
-        resetIsInternalTransaction,
-    } from '@core/ledger/stores/is-internal-transaction.store'
+    import { showInternalVerificationPopup, resetShowInternalVerificationPopup } from '@core/ledger'
 
     export let toAddress: string
     export let toAmount: string
@@ -14,10 +11,12 @@
 
     const hasSendConfirmationProps = (toAddress && toAmount) || hash
 
-    const locale = $isInternalTransaction ? 'popups.verifyInternalLedgerTransaction' : 'popups.verifyLedgerTransaction'
+    const locale = $showInternalVerificationPopup
+        ? 'popups.verifyInternalLedgerTransaction'
+        : 'popups.verifyLedgerTransaction'
 
     onDestroy(() => {
-        resetIsInternalTransaction()
+        resetShowInternalVerificationPopup()
     })
 </script>
 
@@ -35,7 +34,7 @@
             <KeyValueBox keyText={localize('general.sendTo')} valueText={toAddress} />
             <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
         {/if}
-    {:else if $isInternalTransaction}
+    {:else if $showInternalVerificationPopup}
         <TextHint info text={localize('popups.verifyInternalLedgerTransaction.hint')} classes="pt-2" />
     {/if}
 </div>

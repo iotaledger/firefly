@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
-    import { isInternalTransaction } from '@core/ledger'
+    import { showInternalVerificationPopup } from '@core/ledger'
     import { networkHrp } from '@core/network'
-    import { checkActiveProfileAuth, isSoftwareProfile } from '@core/profile'
+    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -111,8 +111,8 @@
     }
 
     function handleClaimClick(): void {
-        if (!$isSoftwareProfile) {
-            $isInternalTransaction = true
+        if ($isActiveLedgerProfile) {
+            $showInternalVerificationPopup = true
         }
         checkActiveProfileAuth(() => claimActivity(activityId, data))
     }
