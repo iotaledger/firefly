@@ -26,7 +26,7 @@ export async function claimActivity(activityId: string, data: ITransactionActivi
             // it's possible for some to fail and others to succeed.
             throw new Error(LedgerError.DeniedByUser)
         } else {
-            throw Error(localize('error.send.cannotClaimTwice'))
+            throw new Error(localize('error.send.cannotClaimTwice'))
         }
     } catch (err) {
         if (_activeProfile.type === ProfileType.Ledger) {
