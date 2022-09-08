@@ -21,6 +21,8 @@ export async function claimActivity(activityId: string, data: ITransactionActivi
                 claimingTransactionId: transactionId,
             })
         } else if (_activeProfile.type === ProfileType.Ledger) {
+            // TODO: remove these clauses after wallet.rs implemented errors
+
             // Wallet.rs doesn't throw an error for claiming (multiple) outputs.
             // Multiple outputs could be claimed in multiple transactions and
             // it's possible for some to fail and others to succeed.
@@ -29,7 +31,7 @@ export async function claimActivity(activityId: string, data: ITransactionActivi
             throw new Error(localize('error.send.cannotClaimTwice'))
         }
     } catch (err) {
-        if (_activeProfile.type === ProfileType.Ledger) {
+        if (err.message === LedgerError.DeniedByUser) {
             handleLedgerError(err.message)
         } else {
             handleError(err)
