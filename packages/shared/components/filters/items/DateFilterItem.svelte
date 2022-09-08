@@ -24,28 +24,30 @@
     function onSelect(item): void {
         filterUnit.selected = item.value
 
-        if (
-            filterUnit.selected === DateFilterOption.Equals ||
-            filterUnit.selected === DateFilterOption.After ||
-            filterUnit.selected === DateFilterOption.AfterOrEquals ||
-            filterUnit.selected === DateFilterOption.Before
-        ) {
-            filterUnit.subunit = {
-                type: 'single',
-                value: undefined,
-            }
-        } else if (filterUnit.selected === DateFilterOption.Range) {
-            filterUnit.subunit = {
-                type: 'range',
-                start: undefined,
-                end: undefined,
-            }
-        } else if (filterUnit.selected === DateFilterOption.Last) {
-            filterUnit.subunit = {
-                type: 'unit',
-                amount: '0',
-                unit: DateUnit.Days,
-            }
+        switch (filterUnit.selected) {
+            case DateFilterOption.Equals:
+            case DateFilterOption.After:
+            case DateFilterOption.AfterOrEquals:
+            case DateFilterOption.Before:
+                filterUnit.subunit = {
+                    type: 'single',
+                    value: undefined,
+                }
+                break
+            case DateFilterOption.Range:
+                filterUnit.subunit = {
+                    type: 'range',
+                    start: undefined,
+                    end: undefined,
+                }
+                break
+            case DateFilterOption.Last:
+                filterUnit.subunit = {
+                    type: 'unit',
+                    amount: '0',
+                    unit: DateUnit.Days,
+                }
+                break
         }
     }
 

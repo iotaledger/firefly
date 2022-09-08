@@ -6,8 +6,8 @@
     import { localize } from '@core/i18n'
 
     export let value: Date
-    export let startDate: Date = undefined
-    export let mode: string = 'auto'
+    export let startDate: Date = null
+    export let mode: 'auto' | 'datetime' | 'date' | 'time' = 'auto'
 
     const dispatch = createEventDispatcher()
     const sveltyPickerStartDate = convertDateToSveltyPickerFormat(startDate)

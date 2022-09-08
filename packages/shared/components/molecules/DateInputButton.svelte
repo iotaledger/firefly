@@ -36,8 +36,8 @@
         mode="date"
         initialDate={value}
         bind:value={customDate}
-        on:cancel={() => handleExpirationTimeCancelClick()}
-        on:confirm={() => handleExpirationTimeConfirmClick()}
+        on:cancel={handleExpirationTimeCancelClick}
+        on:confirm={handleExpirationTimeConfirmClick}
     />
 {/if}
 

@@ -16,21 +16,23 @@
 
     function onSelect(item): void {
         filterUnit.selected = item.value
-        if (
-            filterUnit.selected === NumberFilterOption.Equal ||
-            filterUnit.selected === NumberFilterOption.Greater ||
-            filterUnit.selected === NumberFilterOption.Less
-        ) {
-            filterUnit.subunit = {
-                type: 'single',
-                amount: '',
-            }
-        } else if (filterUnit.selected === NumberFilterOption.Range) {
-            filterUnit.subunit = {
-                type: 'range',
-                start: '',
-                end: '',
-            }
+
+        switch (filterUnit.selected) {
+            case NumberFilterOption.Equal:
+            case NumberFilterOption.Greater:
+            case NumberFilterOption.Less:
+                filterUnit.subunit = {
+                    type: 'single',
+                    amount: '',
+                }
+                break
+            case NumberFilterOption.Range:
+                filterUnit.subunit = {
+                    type: 'range',
+                    start: '',
+                    end: '',
+                }
+                break
         }
     }
 </script>
