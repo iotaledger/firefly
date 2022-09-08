@@ -1,5 +1,6 @@
 export { default as AssetIcon } from './AssetIcon.svelte'
 export { default as AssetList } from './AssetList.svelte'
+export { default as DateInputButton } from './DateInputButton.svelte'
 export { default as ExpirationTimePicker } from './ExpirationTimePicker.svelte'
 export { default as TransactionDetails } from './TransactionDetails.svelte'
 export { default as ShimmerClaimingAccountList } from './ShimmerClaimingAccountList.svelte'
