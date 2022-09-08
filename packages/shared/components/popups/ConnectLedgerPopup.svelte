@@ -71,7 +71,7 @@
         <TextHint success text={localize('popups.ledgerNotConnected.correctAppOpen')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onCancelClick}>
+        <Button classes="w-full" outline onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
         <Button classes="w-full" disabled={!isCorrectAppOpen} onClick={onContinueClick}>

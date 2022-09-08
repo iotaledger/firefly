@@ -15,4 +15,4 @@
 
 <Text type="h4" classes="mb-3">{localize(`views.settings.${route}.title`)}</Text>
 <Text type="p" secondary classes="mb-5">{localize(`views.settings.${route}.description`)}</Text>
-<Button medium inlineStyle="min-width: 156px;" onClick={handleClick}>{localize(`actions.${actionLocale}`)}</Button>
+<Button inlineStyle="min-width: 156px;" onClick={handleClick}>{localize(`actions.${actionLocale}`)}</Button>

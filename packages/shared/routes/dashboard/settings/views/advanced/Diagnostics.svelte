@@ -10,6 +10,6 @@
 
 <Text type="h4" classes="mb-3">{localize('views.settings.diagnostics.title')}</Text>
 <Text type="p" secondary classes="mb-5">{localize('views.settings.diagnostics.description')}</Text>
-<Button medium inlineStyle="min-width: 156px;" onClick={handleDiagnosticsClick}>
+<Button inlineStyle="min-width: 156px;" onClick={handleDiagnosticsClick}>
     {localize('views.settings.diagnostics.title')}
 </Button>

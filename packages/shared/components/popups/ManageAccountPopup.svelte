@@ -72,14 +72,10 @@
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between mt-2 px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => onCancelClick()} disbled={isBusy}>
+            <Button outline classes="-mx-2 w-1/2" onClick={onCancelClick} disabled={isBusy}>
                 {localize('actions.cancel')}
             </Button>
-            <Button
-                classes="-mx-2 w-1/2"
-                onClick={() => onSaveClick()}
-                disabled={invalidAliasUpdate && !hasColorChanged}
-            >
+            <Button classes="-mx-2 w-1/2" onClick={onSaveClick} disabled={invalidAliasUpdate && !hasColorChanged}>
                 {localize('actions.save')}
             </Button>
         </div>

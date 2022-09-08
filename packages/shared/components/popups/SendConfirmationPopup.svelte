@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Spinner, Toggle } from 'shared/components'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Toggle } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
@@ -182,21 +182,17 @@
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}
-            <Button classes="w-full" secondary onClick={onCancel} disabled={$isTransferring}>
+            <Button classes="w-full" outline onClick={onCancel} disabled={$isTransferring}>
                 {localize('actions.cancel')}
             </Button>
         {:else}
-            <Button classes="w-full" secondary onClick={onBack} disabled={$isTransferring}>
+            <Button classes="w-full" outline onClick={onBack} disabled={$isTransferring}>
                 {localize('actions.back')}
             </Button>
         {/if}
 
-        <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring}>
-            {#if $isTransferring}
-                <Spinner busy classes="justify-center break-all" />
-            {:else}
-                {localize('actions.confirm')}
-            {/if}
+        <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring} isBusy={$isTransferring}>
+            {localize('actions.confirm')}
         </Button>
     </popup-buttons>
 </send-confirmation-popup>

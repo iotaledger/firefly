@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
-    import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, getLedgerDeviceStatus } from '@core/ledger'
     import { subscribeToWalletApiEvents, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
@@ -144,26 +144,26 @@
         <Button
             classes="w-full mb-5"
             disabled={!shouldSearchForRewardsButtonBeEnabled}
-            secondary
+            outline
             onClick={onSearchForRewardsClick}
+            isBusy={isSearchingForRewards}
+            busyMessage={localize('actions.searching')}
         >
-            {#if isSearchingForRewards}
-                <Spinner message={localize('actions.searching')} busy={true} classes="justify-center items-center" />
-            {:else}
-                {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}
-            {/if}
+            {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}
         </Button>
         {#if shouldShowContinueButton}
             <Button classes="w-full" onClick={onContinueClick}>
                 {localize('actions.continue')}
             </Button>
         {:else}
-            <Button classes="w-full" disabled={!shouldClaimRewardsButtonBeEnabled} onClick={onClaimRewardsClick}>
-                {#if isClaimingRewards}
-                    <Spinner message={localize('actions.claiming')} busy={true} classes="justify-center items-center" />
-                {:else}
-                    {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
-                {/if}
+            <Button
+                classes="w-full"
+                disabled={!shouldClaimRewardsButtonBeEnabled}
+                onClick={onClaimRewardsClick}
+                isBusy={isClaimingRewards}
+                busyMessage={localize('actions.claiming')}
+            >
+                {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
             </Button>
         {/if}
     </div>

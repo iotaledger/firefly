@@ -89,13 +89,13 @@
     {/if}
     {#if !isBusy}
         <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>
+            <Button outline classes="-mx-2 w-1/2" onClick={handleCancelClick}>
                 {localize('actions.cancel')}
             </Button>
             <Button
                 disabled={!getTrimmedLength(accountAlias) || isBusy}
                 classes="-mx-2 w-1/2"
-                onClick={() => handleCreateClick()}
+                onClick={handleCreateClick}
             >
                 {localize('actions.create')}
             </Button>

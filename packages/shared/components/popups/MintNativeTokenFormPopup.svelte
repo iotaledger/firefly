@@ -5,16 +5,7 @@
     import { mintNativeToken, setMintTokenDetails, mintTokenDetails, TokenStandard } from '@core/wallet'
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
-    import {
-        AddInputButton,
-        Button,
-        ClosableInput,
-        Error,
-        NumberInput,
-        Spinner,
-        Text,
-        TextInput,
-    } from 'shared/components'
+    import { AddInputButton, Button, ClosableInput, Error, NumberInput, Text, TextInput } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
     import { onMount } from 'svelte'
 
@@ -322,15 +313,11 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button secondary classes="w-full" disabled={$isTransferring} onClick={handleCancel}>
+        <Button outline classes="w-full" disabled={$isTransferring} onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button autofocus classes="w-full" disabled={$isTransferring} onClick={handleMint}>
-            {#if $isTransferring}
-                <Spinner busy classes="justify-center break-all" />
-            {:else}
-                {localize('actions.mint')}
-            {/if}
+        <Button autofocus classes="w-full" disabled={$isTransferring} onClick={handleMint} isBusy={$isTransferring}>
+            {localize('actions.mint')}
         </Button>
     </div>
 </div>

@@ -157,11 +157,7 @@
         disabled={busy}
     />
     <div class="flex flex-row items-center">
-        <Button
-            medium
-            disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
-            onClick={changePassword}
-        >
+        <Button disabled={!currentPassword || !newPassword || !confirmedPassword || busy} onClick={changePassword}>
             {localize('views.settings.changePassword.title')}
         </Button>
         <Spinner {busy} message={localize(changeMessageLocale)} classes="ml-2" />

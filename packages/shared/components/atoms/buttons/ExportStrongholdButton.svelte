@@ -56,6 +56,6 @@
     }
 </script>
 
-<Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={isBusy} {...$$restProps}>
+<Button inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={isBusy} {...$$restProps}>
     {overrideTitle || localize('actions.export')}
 </Button>

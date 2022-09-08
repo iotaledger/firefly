@@ -73,8 +73,7 @@
         <div class="flex flex-row justify-between space-x-3 w-full mt-4">
             {#if networkType !== NetworkType.PrivateNet}
                 <Button
-                    medium
-                    secondary
+                    outline
                     inlineStyle="min-width: 156px;"
                     classes="w-1/2"
                     onClick={addOfficialNodesToClientOptions}
@@ -83,7 +82,6 @@
                 </Button>
             {/if}
             <Button
-                medium
                 inlineStyle="min-width: 156px;"
                 classes={networkType === NetworkType.PrivateNet ? '' : 'w-1/2'}
                 onClick={handleAddNodeClick}

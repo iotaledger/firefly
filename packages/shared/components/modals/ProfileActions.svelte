@@ -9,6 +9,7 @@
     import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, logout, lockStronghold } from '@core/profile'
     import { checkOrUnlockStronghold } from '@core/stronghold'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let modal: Modal
 
@@ -104,7 +105,7 @@
                             </Text>
                         </div>
                     </div>
-                    <Button secondary xsmall onClick={() => handleVersionUpdateClick()}>
+                    <Button size={ButtonSize.Small} onClick={handleVersionUpdateClick}>
                         <Text type="p">{localize('views.dashboard.profileModal.version.button')}</Text>
                     </Button>
                 </div>
@@ -134,7 +135,7 @@
                                 </Text>
                             </div>
                         </div>
-                        <Button secondary xsmall onClick={() => handleBackupClick()}>
+                        <Button outline size={ButtonSize.Small} onClick={handleBackupClick}>
                             <Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text>
                         </Button>
                     </div>

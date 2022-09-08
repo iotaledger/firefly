@@ -73,7 +73,7 @@
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
-            <Button secondary onClick={() => handleCloseClick()}>{localize('actions.close')}</Button>
+            <Button outline onClick={handleCloseClick}>{localize('actions.close')}</Button>
         </div>
     {:else}
         <div class="my-6">
@@ -96,8 +96,8 @@
             {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
-            <Button secondary classes="w-1/2" onClick={() => handleCloseClick()}>{localize('actions.cancel')}</Button>
-            <Button classes="w-1/2" onClick={() => handleDownload()} disabled={$appUpdateBusy}>
+            <Button outline classes="w-1/2" onClick={handleCloseClick}>{localize('actions.cancel')}</Button>
+            <Button classes="w-1/2" onClick={handleDownload} disabled={$appUpdateBusy}>
                 {localize('actions.updateFirefly')}
             </Button>
         </div>

@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { Text, NodeConfigurationForm, Button, Spinner } from 'shared/components'
+    import { Text, NodeConfigurationForm, Button } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode, INetwork, addNodeToClientOptions, editNodeInClientOptions } from '@core/network'
     import { closePopup } from '@lib/popup'
     import { activeProfile } from '@core/profile'
     import { showAppNotification } from '@lib/notifications'
+    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let nodes: INode[] = []
@@ -57,25 +58,19 @@
         isDeveloperProfile={$activeProfile.isDeveloperProfile}
     />
     <div class="flex flex-row justify-between space-x-4 w-full">
-        <Button secondary classes="w-1/2" onClick={closePopup} disabled={isBusy}>
+        <Button outline classes="w-1/2" onClick={closePopup} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>
         <Button
             disabled={!node.url || isBusy}
-            type="submit"
+            type={HTMLButtonType.Submit}
             form="node-configuration-form"
             classes="w-1/2"
             onClick={handleAddNode}
+            {isBusy}
+            busyMessage={localize(`popups.node.${isEditingNode ? 'updatingNode' : 'addingNode'}`)}
         >
-            {#if isBusy}
-                <Spinner
-                    busy={isBusy}
-                    message={localize(`popups.node.${isEditingNode ? 'updatingNode' : 'addingNode'}`)}
-                    classes="justify-center"
-                />
-            {:else}
-                {localize(`actions.${isEditingNode ? 'updateNode' : 'addNode'}`)}
-            {/if}
+            {localize(`actions.${isEditingNode ? 'updateNode' : 'addNode'}`)}
         </Button>
     </div>
 </div>

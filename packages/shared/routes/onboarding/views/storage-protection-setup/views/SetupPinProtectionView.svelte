@@ -11,6 +11,7 @@
     import { ProfileType } from '@core/profile'
     import { storageProtectionSetupRouter } from '@core/router'
     import { validatePinFormat } from '@lib/utils'
+    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let busy = false
 
@@ -105,7 +106,7 @@
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
-            type="submit"
+            type={HTMLButtonType.Submit}
             disabled={!(arePinInputsValid && arePinInputsMatching) || busy}
             form="setup-pin"
             bind:this={submitButtonElement}

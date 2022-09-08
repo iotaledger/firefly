@@ -108,7 +108,7 @@
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         {#if asset?.verification === VerificationStatus.New}
-            <Button secondary classes="w-full" onClick={onSkipClick}>
+            <Button outline classes="w-full" onClick={onSkipClick}>
                 {localize('actions.skip')}
             </Button>
             <Button autofocus classes="w-full" onClick={onVerifyClick}>

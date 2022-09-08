@@ -54,5 +54,5 @@
 <Text type="pre" secondary>{contentApp}</Text>
 <Text type="pre" secondary>{contentSystem}</Text>
 <div class="flex w-full justify-center mt-8">
-    <Button classes="w-full" onClick={() => handleCopyClick()}>{localize('actions.copy')}</Button>
+    <Button classes="w-full" onClick={handleCopyClick}>{localize('actions.copy')}</Button>
 </div>
