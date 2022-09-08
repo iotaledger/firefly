@@ -16,17 +16,46 @@ import {
     DateUnit,
 } from '../enums'
 import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@lib/utils/dateUtils'
+import { ActivityFilter } from '../interfaces'
 
 // Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
 export function isVisibleActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
 
+    if (!isVisibleWithActiveHiddenFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveRejectedFilter(activity, filter)) {
+        return false
+    }
+    if (isVisibleWithActiveAssetFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveAmountFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveDateFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveStatusFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveTypeFilter(activity, filter)) {
+        return false
+    }
+    return true
+}
+
+function isVisibleWithActiveHiddenFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
         activity.isAssetHidden
     ) {
         return false
     }
+}
+
+function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
         activity.data.type === ActivityType.Transaction &&
@@ -34,11 +63,17 @@ export function isVisibleActivity(activity: Activity): boolean {
     ) {
         return false
     }
+}
+
+function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.asset.active && filter.asset.selected) {
         if (filter.asset.selected && activity.data.assetId !== filter.asset.selected) {
             return false
         }
     }
+}
+
+function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.amount.active) {
         const activityAmount =
             activity.data.rawAmount / 10 ** getAssetFromPersistedAssets(activity.data.assetId).metadata.decimals
@@ -69,6 +104,9 @@ export function isVisibleActivity(activity: Activity): boolean {
             }
         }
     }
+}
+
+function isVisibleWithActiveDateFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.date.active) {
         if (filter.date.selected === DateFilterOption.Equals && filter.date.subunit.type === 'single') {
             const filterDate = new Date(filter.date.subunit.value)
@@ -132,6 +170,9 @@ export function isVisibleActivity(activity: Activity): boolean {
             }
         }
     }
+}
+
+function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.status.active && filter.status.selected) {
         if (
             filter.status.selected === StatusFilterOption.Confirmed &&
@@ -160,6 +201,9 @@ export function isVisibleActivity(activity: Activity): boolean {
             return false
         }
     }
+}
+
+function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.type.active && filter.type.selected) {
         if (
             filter.type.selected === TypeFilterOption.Incoming &&
@@ -183,5 +227,4 @@ export function isVisibleActivity(activity: Activity): boolean {
             return false
         }
     }
-    return true
 }
