@@ -28,7 +28,7 @@ export function isVisibleActivity(activity: Activity): boolean {
     if (!isVisibleWithActiveRejectedFilter(activity, filter)) {
         return false
     }
-    if (isVisibleWithActiveAssetFilter(activity, filter)) {
+    if (!isVisibleWithActiveAssetFilter(activity, filter)) {
         return false
     }
     if (!isVisibleWithActiveAmountFilter(activity, filter)) {
@@ -53,6 +53,7 @@ function isVisibleWithActiveHiddenFilter(activity: Activity, filter: ActivityFil
     ) {
         return false
     }
+    return true
 }
 
 function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityFilter): boolean {
@@ -63,6 +64,7 @@ function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityF
     ) {
         return false
     }
+    return true
 }
 
 function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
@@ -71,6 +73,7 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
             return false
         }
     }
+    return true
 }
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
@@ -104,6 +107,7 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             }
         }
     }
+    return true
 }
 
 function isVisibleWithActiveDateFilter(activity: Activity, filter: ActivityFilter): boolean {
@@ -170,6 +174,7 @@ function isVisibleWithActiveDateFilter(activity: Activity, filter: ActivityFilte
             }
         }
     }
+    return true
 }
 
 function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFilter): boolean {
@@ -201,6 +206,7 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
             return false
         }
     }
+    return true
 }
 
 function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilter): boolean {
@@ -227,4 +233,5 @@ function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilte
             return false
         }
     }
+    return true
 }
