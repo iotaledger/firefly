@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "يرجى توصيل جهاز لِدْجرْ الخاص بك بمحفظة فايَرْفلاَي",
             "body": "لكي يتم العثور على جهاز لِدْجرْ الخاص بك بواسطة محفظة فايَرْفلاَي ، يرجى التأكد من إغلاق تطبيق لِدْجرْ المباشر الرسمي.",
-            "trafficLight1": "يرجى توصيل جهاز لِدْجرْ الخاص بك وإدخال رمز التعريف الشخصي",
-            "trafficLight2": "يرجى فتح تطبيق أَيُوتاَ الجديد على جهاز لِدْجرْ الخاص بك",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "إذا لم تستطع ربط جهاز لِدْجرْ الخاص بك أو لم يتم التعرف عليه, إتبع الارشادات التالية"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "Hardware Device",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "Connected",
-                        "locked": "Locked",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "App open"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
@@ -722,7 +731,11 @@
             "bodyFirefly": "تم توقيف محفظة فايَرْفلاَي حتى يتم اكتمال عملية التطوير. سيكون تحويل العملات الرقمية ممكنا بعد فترة وجيزة."
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "للمتابعة، قم بتأكيد الطلب الظاهر على جهاز لِدْجرْ الخاص بك"
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "أكد حساب الفائض الخاص بك",
-                "info": "يرجى التأكد من أن حسابك الفائض الظاهر على شاشة جهاز لِدْجرْ الخاص بك مطابق مع الحساب المعروض أدناه. إذا كان متطابق ، اضغط على كلا الزرين على جهاز لِدْجرْ كما هو موضح."
-            },
-            "transaction": {
-                "title": "Confirm transaction",
-                "info": "يرجى التأكد من أن معلومات تحويل الارصدة الظاهرة على شاشة جهاز لِدْجرْ الخاص بك مطابقة للمعلومات المعروض أدناه. إذا كانت متطابقة ، اضغط على كلا الزرين على جهاز لِدْجرْ الخاص بك كما هو موضح."
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "أكد حساب الاستقبال الخاص بك",
@@ -891,6 +898,7 @@
         "dismiss": "تجاهل",
         "claim": "Claim",
         "claiming": "Claiming",
+        "claimingRewards": "Claiming rewards",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -1026,7 +1034,11 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Recipient",
@@ -1042,6 +1054,9 @@
         "received": "تم الاستلام",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "إرسال الدفع",
@@ -1185,6 +1200,7 @@
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
+        "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
@@ -1193,7 +1209,8 @@
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
@@ -1201,7 +1218,11 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
         "title": "Filters",
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "الرجاء الانتظار حتى انتهاء المزامنة لتغيير المحافظ.",
@@ -1312,6 +1335,7 @@
             "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
             "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
@@ -1319,7 +1343,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
@@ -1329,7 +1353,9 @@
             "duplicate": "يوجد بالفعل حساب بهذا الاسم.",
             "delete": {
                 "nonEmptyAccounts": "يجب عليك نقل جميع الأرصدة قبل أن تتمكن من حذف ملفك الشخصي."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "كلمة المرور غير متطابقة.",
@@ -1369,7 +1395,9 @@
             "syncing": "نأسف لذلك, ولكن حدث خطأ أثناء عملية الربط مع المحفظة الخاصة بك.",
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "notLast": "You can only delete your last wallet.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "يجب أن تتكون الحسابات من {length, plural, one {# رمز } other {# رموز}}.",
@@ -1388,7 +1416,9 @@
             "leavingDust": "لا يمكنك ترك أقل من 1 مَايُوتاَ في حسابك.",
             "cancelled": "تم إلغاء المعاملة.",
             "transaction": "حدث خطأ قي عملية الارسال التي قمت بها. الرجاء المحاولة مرة أخرى.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "الرجاء إدخال عنوان URL صالح.",
@@ -1400,7 +1430,8 @@
             "https": "HTTPS مطلوب؛ الاتصالات الغير آمنة عبر HTTP غير مدعومة في هذا الوقت.",
             "duplicate": "هذا الوسيط البرمجي مضاف مسبقا.",
             "unsynced": "هذا الوسيط البرمجي غير متزامن مع الشبكة.",
-            "noSynced": "لا يوجد وسطاء برمجيين متزامنين مع الشبكة حاليا.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "لم نستطع الحصول على رد من جميع الوسطاء البرمجيون.",
             "forbidden": "الاتصال بهذا الوسيط الرمجي محظور.",
             "pluginNotAvailable": "الميزة \"{nodePlugin}\" غير متوفرة في الوسيط البرمجي الحالي.",
@@ -1579,7 +1610,8 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {

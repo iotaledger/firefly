@@ -3,29 +3,29 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Send, Receive & Manage your {protocol} tokens",
-                    "body": "Firefly is the official wallet software for {protocol}."
+                    "title": "Wysyłaj, odbieraj i zarządzaj swoimi tokenami {protocol}",
+                    "body": "Firefly jest oficjalnym portfelem {protocol}."
                 },
                 "legal": {
-                    "title": "Privacy Policy & Terms of Service",
-                    "body": "Please review the Privacy Policy and Terms of Service.",
-                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
+                    "title": "Polityka prywatności i Warunki świadczenia usług",
+                    "body": "Zapoznaj się z Polityką prywatności oraz Warunkami świadczenia usług.",
+                    "checkbox": "Przeczytałem i akceptuję Politykę prywatności oraz Warunki korzystania z usług"
                 },
                 "languageAndAppearance": {
-                    "title": "Language & appearance",
-                    "body": "Choose your language and theme."
+                    "title": "Język i wygląd",
+                    "body": "Wybierz język i motyw portfela."
                 }
             },
             "networkSetup": {
                 "chooseProtocol": {
-                    "title": "Choose protocol",
-                    "body": "Set the protocol for your profile.",
-                    "iota": "Default IOTA network",
-                    "shimmer": "Experimental IOTA staging network"
+                    "title": "Wybierz protokół",
+                    "body": "Ustaw protokół dla swojego profilu.",
+                    "iota": "Domyślna sieć IOTA",
+                    "shimmer": "Eksperymentalna sieć stagingowa IOTA"
                 },
                 "chooseNetwork": {
-                    "title": "Choose network",
-                    "body": "Set the network for your profile.",
+                    "title": "Wybierz sieć",
+                    "body": "Ustaw sieć dla swojego profilu.",
                     "iota": {
                         "mainnet": {
                             "title": "Mainnet",
@@ -33,161 +33,161 @@
                         },
                         "devnet": {
                             "title": "Devnet",
-                            "body": "Developer network for IOTA"
+                            "body": "Sieć deweloperska IOTA"
                         },
                         "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with active TIPs"
+                            "title": "Sieć prywatna",
+                            "body": "Wsparcie dla niestandardowych sieci (active TIPs)"
                         }
                     },
                     "shimmer": {
                         "mainnet": {
                             "title": "Shimmer",
-                            "body": "Staging network for IOTA"
+                            "body": "Sieć stagingowa dla IOTA"
                         },
                         "devnet": {
                             "title": "Testnet",
-                            "body": "Public beta network for Shimmer"
+                            "body": "Publiczna sieć beta dla Shimmer"
                         },
                         "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with draft TIPs"
+                            "title": "Sieć prywatna",
+                            "body": "Wsparcie dla niestandardowych sieci (draft TIPs)"
                         }
                     }
                 },
                 "setupPrivateNetworkConnection": {
-                    "title": "Connect to a private network",
-                    "body": "Fill the form with the node information and connect to a private network."
+                    "title": "Połącz się z siecią prywatną",
+                    "body": "Wypełnij formularz informacjami o serwerze i połącz się z prywatną siecią."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "title": "Skonfiguruj profil {protocol, select, IOTA {} Shimmer {}} {protocol}",
                     "chrysalisTitle": "TODO TODO TODO",
                     "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Learn about the Shimmer network"
+                    "learnMore": "Dowiedz się więcej o sieci Shimmer"
                 },
                 "setupNew": {
-                    "title": "Create a profile",
-                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "title": "Utwórz profil",
+                    "body": "Możesz wybrać standardowy portfel lokalny lub jeśli posiadasz urządzenie Ledger, możesz skonfigurować portfel sprzętowy.",
                     "softwareAccount": {
-                        "title": "Create a software profile",
-                        "description": "Provides a Stronghold file and recovery phrase"
+                        "title": "Utwórz profil standardowy",
+                        "description": "Zawiera plik Stronghold i wyrazy ratunkowe"
                     },
                     "ledgerAccount": {
-                        "title": "Create a hardware profile",
-                        "description": "Ledger Nano S or Nano X required"
+                        "title": "Utwórz profil sprzętowy",
+                        "description": "Wymagany Ledger Nano S lub Nano X"
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {protocol} profile",
-                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
-                    "importMnemonic": "Use recovery phrase",
-                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
-                    "importFile": "Use Stronghold backup",
-                    "importFileDescription": "Import your Stronghold backup file",
-                    "importLedger": "Use Ledger device",
-                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                    "title": "Odzyskaj profil {protocol}",
+                    "body": "Jeśli posiadasz wyrazy ratunkowe lub kopię zapasową Stronghold, możesz zaimportować je tutaj.",
+                    "importMnemonic": "Użyj wyrazów ratunkowych",
+                    "importMnemonicDescription": "Wprowadź swoje 24 wyrazy ratunkowe",
+                    "importFile": "Użyj kopii zapasowej Stronghold",
+                    "importFileDescription": "Importuj plik kopii zapasowej Stronghold",
+                    "importLedger": "Użyj urządzenia Ledger",
+                    "importLedgerDescription": "Przywróć ze swojego urządzenia Ledger Nano S lub X"
                 },
                 "setupClaimed": {
-                    "title": "Claim Shimmer staking rewards",
-                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                    "title": "Odbierz nagrody Shimmer ze stakingu",
+                    "body": "Importuj swój profil IOTA i odbierz nagrody za staking Shimmer."
                 },
                 "enterName": {
-                    "title": "Create your {protocol} profile",
-                    "profileName": "Profile name",
-                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "title": "Utwórz swój profil {protocol}",
+                    "profileName": "Nazwa profilu",
+                    "body1": "Możesz tworzyć wiele profili użytkownika w celu organizacji swoich portfeli i zwiększenia prywatności.",
                     "body2": {
-                        "first": "For now, let's start with your first profile name.",
-                        "nonFirst": "For now, let's start with your profile name."
+                        "first": "Zacznijmy od Twojej pierwszej nazwy profilu.",
+                        "nonFirst": "Zacznijmy od Twojej nazwy profilu."
                     },
-                    "addMore": "You can add more profiles later."
+                    "addMore": "Będziesz mógł dodać więcej profili później."
                 }
             },
             "strongholdSetup": {
                 "setupStrongholdPassword": {
-                    "title": "Create a password",
-                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                    "title": "Create a password for your wallet",
+                    "body1": "Potrzebujesz silnego hasła, aby chronić swoje środki. Użyj kombinacji słów oraz unikaj używania powszechnych zwrotów, nazw lub dat.",
+                    "body2": "Zaleca się zapisanie hasła w swoim szablonie odzyskiwania."
                 }
             },
             "storageProtectionSetup": {
                 "setupPinProtection": {
-                    "title": "Set up PIN code",
-                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-                    "body2": "Use numbers only"
+                    "title": "Ustaw kod PIN",
+                    "body1": "Ustaw poniżej 6-cyfrowy kod PIN. Będziesz proszony o wprowadzanie tego kodu PIN, aby logować się do portfela.",
+                    "body2": "Używaj tylko liczb"
                 }
             },
             "profileBackup": {
                 "backupMnemonic": {
-                    "title": "Back up your recovery phrase",
-                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                    "title": "Utwórz kopię swoich wyrazów ratunkowych",
+                    "body1": "W następnym oknie zobaczysz wyrazy ratunkowe. Zapisz je w swoim szablonie odzyskiwania.",
+                    "body2": "Nie udostępniaj swoich wyrazów ratunkowych nikomu. Mogą być one użyte w celu uzyskania dostępu do Twoich środków z dowolnego miejsca.",
+                    "body3": "Jeśli stracisz swoje wyrazy ratunkowe, narazisz się na utratę swoich środków."
                 },
                 "viewMnemonic": {
-                    "title": "Recovery phrase",
-                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-                    "body2": "Keep this private and safely stored.",
-                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
-                    "revealRecoveryPhrase": "Reveal recovery phrase",
-                    "hideRecoveryPhrase": "Hide recovery phrase"
+                    "title": "Wyrazy ratunkowe",
+                    "body1": "Słowa w Twoim szablonie odzyskiwania muszą być zapisane dokładnie, w ukazanej kolejności.",
+                    "body2": "Zachowaj te wyrazy dla siebie i bezpiecznie je przechowuj.",
+                    "body3": "Fizyczna (pisemna) kopia zapasowa jest bardzo ważna. Komputery często zawodzą, a pliki mogą ulec uszkodzeniu.",
+                    "revealRecoveryPhrase": "Pokaż wyrazy ratunkowe",
+                    "hideRecoveryPhrase": "Ukryj wyrazy ratunkowe"
                 },
                 "verifyMnemonic": {
-                    "title": "Verify recovery phrase",
-                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
-                    "word": "Word",
-                    "verified": "Recovery phrase verified",
-                    "verifiedBody": "Remember to keep it private and safely stored."
+                    "title": "Zweryfikuj wyrazy ratunkowe",
+                    "body": "Sprawdźmy, czy poprawnie zapisałeś te wyrazy. Proszę wybrać każde słowo w numerowanej kolejności. Wskazówka: Możesz nacisnąć numer obok słowa na klawiaturze, aby je wybrać.",
+                    "word": "Słowo",
+                    "verified": "Wyrazy ratunkowe zostały zweryfikowane",
+                    "verifiedBody": "Pamiętaj, aby zachować te wyrazy wyłącznie dla siebie oraz przechowywać je w bezpiecznym miejscu."
                 },
                 "backupStronghold": {
-                    "title": "Back up to a Stronghold file",
-                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
-                    "body2": "Reasons why digital backups are important:",
-                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
-                    "reason2": "Import your wallets on other devices",
-                    "reason3": "Recover your full transaction history"
+                    "title": "Kopia zapasowa do pliku Stronghold",
+                    "body1": "Wpisz swoje hasło, aby utworzyć kopię zapasową Stronghold profilu. Twoje hasło jest używane do szyfrowania pliku kopii zapasowej.",
+                    "body2": "Powody, dla których cyfrowe kopie zapasowe są ważne:",
+                    "reason1": "Łatwe odzyskiwanie portfeli bez wpisywania wyrazów ratunkowych",
+                    "reason2": "Możliwość importu swoich portfeli do innych urządzeń",
+                    "reason3": "Zachowanie pełnej historii transakcji"
                 }
             },
             "profileRecovery": {
                 "importMnemonicPhrase": {
-                    "title": "Enter your recovery phrase",
-                    "body": "A recovery phrase is 24 words long, all lower case, with sapces between. This is used to recover existing Firefly profiles.",
-                    "enter": "Enter your secret recovery phrase",
-                    "phraseDetected": "24 word recovery phrase detected"
+                    "title": "Wpisz swoje wyrazy ratunkowe",
+                    "body": "Wyrazy ratunkowe składają się z 24 słów pisanych małymi literami oraz oddzielonych od siebie spacją. Są one używane w celu odzyskania istniejących profili Firefly.",
+                    "enter": "Wprowadź swoje tajne wyrazy ratunkowe",
+                    "phraseDetected": "Wykryto wyrazy ratunkowe (24 słowa)"
                 },
                 "importStrongholdBackup": {
-                    "title": "Import your Stronghold backup",
-                    "body": "Import a Stronghold backup file to restore your profile."
+                    "title": "Importuj plik kopii zapasowej Stronghold",
+                    "body": "Importuj plik kopii zapasowej Stronghold aby przywrócić swój profil."
                 },
                 "backupPassword": {
-                    "body1": "Please enter your backup password.",
-                    "body2": "This is the password you set when you first created your backup."
+                    "body1": "Wprowadź hasło kopii zapasowej.",
+                    "body2": "To jest hasło, które ustawiłeś w przeszłości podczas tworzenia tego konkretnego pliku kopii zapasowej."
                 },
                 "success": {
-                    "title": "You have successfully recovered your backup",
-                    "body": "You can now set up your new profile."
+                    "title": "Pomyślnie odzyskałeś kopię zapasową",
+                    "body": "Możesz teraz skonfigurować swój nowy profil."
                 }
             },
             "shimmerClaiming": {
                 "claimRewards": {
-                    "title": "Your Shimmer staking rewards",
-                    "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+                    "title": "Twoje nagrody Shimmer ze stakingu",
+                    "body": "Sprawdź, czy ilość nagród Shimmer ze stakingu jest poprawna. Jeśli nie, użyj wyszukiwarki środków."
                 },
                 "success": {
-                    "title": "Rewards claimed",
-                    "body": "You have successfully claimed Shimmer tokens for your new profile.",
-                    "totalRewards": "Total rewards"
+                    "title": "Zdobyte nagrody",
+                    "body": "Pomyślnie odebrałeś tokeny Shimmer dla Twojego nowego profilu.",
+                    "totalRewards": "Całkowita ilość nagród"
                 }
             },
             "congratulations": {
-                "title": "Profile setup complete",
-                "fundsMigrated": "Funds migrated",
-                "body": "Your new profile is ready to use.",
-                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-                "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
-                "exportMigration": "Export migration log and finish setup"
+                "title": "Konfiguracja profilu zakończona",
+                "fundsMigrated": "Środki zostały przeniesione",
+                "body": "Twój nowy profil jest gotowy do użycia.",
+                "softwareMigratedBody": "Twoje środki zostały pomyślnie przeniesione do nowej sieci",
+                "fireflyLedgerBody": "Twoje konto Ledger zostało pomyślnie odzyskane. Możesz kontynuować.",
+                "trinityLedgerBody": "Pomyślnie migrowałeś swój portfel Ledger do nowej sieci.",
+                "exportMigration": "Eksportuj dziennik migracji i zakończ konfigurację"
             }
         },
         "setupLedger": {
@@ -200,7 +200,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Czy zainstalowałeś niezbędne aplikacje na urządzeniu Ledger?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
+            "body1": "Zanim przejdziesz dalej, musisz użyć aplikacji Ledger Live aby wyszukać i zainstalować aplikację {protocol}.",
             "body2": "Upewnij się, że oprogramowanie Ledger jest aktualne. Wszystkie zainstalowane aplikacje powinny być zaktualizowane do najnowszych wersji.",
             "action": "Tak, zainstalowałem te aplikacje"
         },
@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "Połącz swój Ledger z Firefly",
             "body": "Aby Twoje urządzenie Ledger zostało znalezione przez Firefly, upewnij się, że oficjalna aplikacja Ledger Live jest zamknięta.",
-            "trafficLight1": "Podłącz i odblokuj swój Ledger kodem PIN",
-            "trafficLight2": "Otwórz nową aplikację IOTA na swoim urządzeniu Ledger",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Mój Ledger nie może się połączyć. Co robić?"
         },
         "restoreFromFireflyLedger": {
@@ -367,8 +368,8 @@
                 "includeNode": "Uwzględnij serwer",
                 "editDetails": "Edytuj szczegóły",
                 "viewInfo": "Wyświetl informacje",
-                "setAsPrimary": "Set primary node",
-                "unsetAsPrimary": "Clear primary node",
+                "setAsPrimary": "Ustaw jako serwer główny",
+                "unsetAsPrimary": "Wyczyść serwer główny",
                 "removeNode": "Usuń serwer",
                 "includeOfficialNodeList": "Uwzględnij oficjalną listę serwerów",
                 "noNodes": "Brak serwerów, nie można połączyć się z siecią",
@@ -436,15 +437,15 @@
         },
         "loadProfile": {
             "loginSteps": {
-                "buildProfileManager": "Initialising profile manager",
-                "updateNodeInfo": "Checking node health",
-                "recoverAccounts": "Generating accounts",
-                "loadAccounts": "Syncing accounts",
-                "loadAssets": "Loading native assets",
-                "loadActivities": "Building activity history",
-                "setStrongholdStatus": "Securing stronghold",
-                "startBackgroundSync": "Starting background sync",
-                "loggingIn": "Loading dashboard"
+                "buildProfileManager": "Inicjowanie menedżera profili",
+                "updateNodeInfo": "Sprawdzanie kondycji serwera",
+                "recoverAccounts": "Generowanie kont",
+                "loadAccounts": "Synchronizacja kont",
+                "loadAssets": "Ładowanie natywnych aktywów",
+                "loadActivities": "Budowanie historii aktywności",
+                "setStrongholdStatus": "Zabezpieczenie stronghold",
+                "startBackgroundSync": "Uruchamianie synchronizacji w tle",
+                "loggingIn": "Wczytywanie panelu"
             }
         },
         "dashboard": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "Portfel sprzętowy",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "Połączony",
-                        "locked": "Zablokowany",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "Nieprawidłowy Ledger lub wyrazy ratunkowe",
-                        "notDetected": "Nie wykryto",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "Aplikacja otwarta"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Zestawienie depozytów",
             "totalStorageDeposit": "Całkowity depozyt",
@@ -602,12 +611,12 @@
             "external": "Adres odbiorcy"
         },
         "excludeNode": {
-            "title": "Exclude node",
-            "body": "Are you sure you want to exclude {url} from the available node pool?"
+            "title": "Wyklucz serwer",
+            "body": "Czy na pewno chcesz wykluczyć {url} z dostępnej puli serwerów?"
         },
         "unsetAsPrimaryNode": {
-            "title": "Clear primary node",
-            "body": "Are you sure you want to clear {url} as the primary node?"
+            "title": "Wyczyść serwer główny",
+            "body": "Czy na pewno chcesz wyczyścić {url} jako węzeł główny?"
         },
         "node": {
             "titleAdd": "Dodaj serwer",
@@ -649,8 +658,8 @@
                     "network": "Sieć",
                     "bech32Hrp": "Bech32 HRP",
                     "tokenSupply": "Zasoby tokenu",
-                    "version": "Version",
-                    "minPowScore": "Min PoW Score"
+                    "version": "Wersja",
+                    "minPowScore": "Min. wynik PoW"
                 },
                 "baseToken": {
                     "tab": "Token podstawowy",
@@ -722,7 +731,11 @@
             "bodyFirefly": "Firefly pozostanie nieaktywny do czasu zakończenia operacji. Migracja tokenów będzie nadal możliwa w późniejszym czasie."
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "Aby kontynuować, potwierdź informację wyświetlaną na urządzeniu Ledger"
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "Potwierdź adres zwrotny",
-                "info": "Potwierdź, że adres zwrotny wyświetlany na Twoim urządzeniu Ledger pasuje do adresu podanego poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
-            },
-            "transaction": {
-                "title": "Potwierdzanie transakcji",
-                "info": "Potwierdź, że informacje o transakcji wyświetlane na Twoim urządzeniu Ledger pasują do informacji wyświetlanych poniżej. Jeśli wszystko się zgadza, naciśnij oba przyciski na Ledger zgodnie z instrukcją."
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "Potwierdź adres odbiorcy",
@@ -836,36 +843,36 @@
             "title": "Wyślij środki"
         },
         "tokenInformation": {
-            "newTokenTitle": "New token",
-            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "newTokenTitle": "Nowy token",
+            "verificationWarning": "Ten token jest niezweryfikowany. Porównaj metadane tokena z oficjalną stroną internetową danego tokenu. Weryfikuj jedynie te tokeny, którym ufasz.",
             "tokenMetadata": {
                 "standard": "Standard",
-                "name": "Name",
+                "name": "Nazwa",
                 "tokenId": "Token ID",
-                "url": "URL"
+                "url": "Adres URL"
             },
             "buttons": {
-                "verifyToken": "I verify this token"
+                "verifyToken": "Weryfikuję ten token"
             }
         },
         "mintNativeTokenForm": {
-            "title": "Mint native tokens",
+            "title": "Mintuj natywne tokeny",
             "inputs": {
-                "totalSupply": "Total Supply",
-                "circulatingSupply": "Circulating Supply",
+                "totalSupply": "Łączna ilość",
+                "circulatingSupply": "Ilość w obiegu",
                 "standard": "Standard",
-                "name": "Name",
-                "description": "Description",
+                "name": "Nazwa",
+                "description": "Opis",
                 "symbol": "Symbol",
-                "decimals": "Decimals",
+                "decimals": "Miejsca po przecinku",
                 "url": "URL",
                 "logoUrl": "Logo URL",
                 "logo": "Logo"
             }
         },
         "faucetRequest": {
-            "title": "Faucet request",
-            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
+            "title": "Prośba o token z faucetu",
+            "body": "Czy na pewno chcesz zażądać tokenu {token} z faucetu {network}?"
         }
     },
     "charts": {
@@ -891,6 +898,7 @@
         "dismiss": "Zamknij",
         "claim": "Odbierz",
         "claiming": "Odbieranie",
+        "claimingRewards": "Claiming rewards",
         "reject": "Odrzuć",
         "confirmRejection": {
             "title": "Odrzuć transakcję",
@@ -941,7 +949,7 @@
         "export": "Eksportuj",
         "exporting": "Eksportowanie",
         "exportNewStronghold": "Eksportuj zaktualizowany plik Stronghold",
-        "enableDeepLinks": "Enable deep links",
+        "enableDeepLinks": "Włącz deep linki",
         "enableDeveloperMode": "Włącz tryb deweloperski",
         "enableSystemNotifications": "Włącz powiadomienia systemowe",
         "exportTransactionHistory": "Eksportuj historię transakcji",
@@ -956,8 +964,8 @@
         "deleteAccount": "Usuń portfel",
         "max": "Maks.",
         "addNode": "Dodaj serwer",
-        "addingNode": "Adding node",
-        "addOfficialNodes": "Add official nodes",
+        "addingNode": "Dodawanie serwera",
+        "addOfficialNodes": "Dodaj oficjalne serwery",
         "updateNode": "Aktualizuj serwer",
         "removeNode": "Usuń serwer",
         "hide": "Ukryj",
@@ -1012,21 +1020,25 @@
         "done": "Gotowe",
         "okIUnderstand": "OK, rozumiem",
         "readMore": "Czytaj więcej",
-        "searchForRewards": "Search for rewards",
+        "searchForRewards": "Szukaj nagród",
         "claimRewards": "Odbierz nagrody",
         "rerunClaimProcess": "Powtórz proces odbioru",
         "finishProfileSetupWithProtocol": "Zakończ konfigurację profilu {protocol}",
         "addPublicNote": "Dodaj notatkę publiczną",
         "backup": "Kopia zapasowa",
-        "mint": "Mint",
-        "mintNativeToken": "Mint native token",
-        "verifyToken": "Verify token",
-        "unverifyToken": "Unverify token",
-        "hideToken": "Hide token",
-        "unhideToken": "Unhide token",
-        "burnToken": "Burn token",
-        "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "mint": "Mintuj",
+        "mintNativeToken": "Mintuj natywne tokeny",
+        "verifyToken": "Weryfikuj token",
+        "unverifyToken": "Cofnij weryfikację tokenu",
+        "hideToken": "Ukryj token",
+        "unhideToken": "Odkryj token",
+        "burnToken": "Spal token",
+        "faucetRequest": "Uzyskaj tokeny {token}",
+        "refreshTokenMetadata": "Odśwież metadane tokenu",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -1042,8 +1054,11 @@
         "received": "Odebrano",
         "transfer": "Transfer",
         "transferring": "Przesyłanie",
-        "minted": "Minted",
-        "minting": "Minting",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
+        "minted": "Mintowane",
+        "minting": "Mintowanie",
         "sendPayment": "Wyślij płatność",
         "moveFunds": "Transfer wewnętrzny",
         "sendTo": "Wyślij do",
@@ -1061,7 +1076,7 @@
         "reference": "Odniesienie",
         "from": "Od",
         "to": "Do",
-        "and": "and",
+        "and": "i",
         "receiveFunds": "Odbierz środki",
         "address": "Adres",
         "myAddress": "Mój adres",
@@ -1117,7 +1132,7 @@
         "loadingAccounts": "Wczytywanie, proszę czekać...",
         "addProfile": "Dodaj profil",
         "noRecentHistory": "Brak ostatniej aktywności",
-        "noAssets": "No assets",
+        "noAssets": "Brak aktywów",
         "thisMonth": "W tym miesiącu",
         "search": "Szukaj",
         "firstSync": "Synchronizowanie historii, może to chwilę potrwać...",
@@ -1183,8 +1198,9 @@
         "accountColor": "Kolor portfela",
         "transactionTime": "Czas transakcji",
         "storageDeposit": "Depozyt",
-        "giftedStorageDeposit": "Gifted storage deposit",
+        "giftedStorageDeposit": "Podarowany depozyt",
         "expirationTime": "Czas wygaśnięcia",
+        "timelockDate": "Timelock",
         "claimedTime": "Odebrano",
         "copiedToClipboard": "Skopiowano do schowka",
         "total": "Suma: {balance}",
@@ -1193,56 +1209,61 @@
         "metadata": "Metadane",
         "tag": "Tag",
         "nodeList": "Lista serwerów",
-        "claimingTransactionId": "Odebrano w",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "Aktywa",
-        "nativeTokens": "Native tokens",
-        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
-        "faucetRequestDescription": "Request tokens from the {network} faucet",
-        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
-        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
-        "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "nativeTokens": "Natywne tokeny",
+        "mintNativeTokenDescription": "Mintuj natywny token zgodny ze standardem IRC30",
+        "faucetRequestDescription": "Zażądaj tokenów z faucetu sieci {network}",
+        "refreshTokenMetadataDescription": "Resetuj i odśwież wszystkie metadane tokenu",
+        "refreshTokenMetadataHint": "Spowoduje to zresetowanie wszystkich metadanych twoich tokenów, w tym statusu weryfikacji, i odkrycie wszelkich ukrytych aktywów.",
+        "giftStorageDeposit": "Podaruj depozyt",
+        "excluded": "Wykluczone",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
-        "title": "Filters",
+        "title": "Filtry",
         "showHidden": {
-            "label": "Show hidden",
-            "yes": "Yes",
-            "no": "No"
+            "label": "Pokaż ukryte",
+            "yes": "Tak",
+            "no": "Nie"
         },
         "showRejected": {
-            "label": "Show rejected",
-            "yes": "Yes",
-            "no": "No"
+            "label": "Pokaż odrzucone",
+            "yes": "Tak",
+            "no": "Nie"
         },
         "verificationStatus": {
-            "label": "Verification status",
-            "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "label": "Status weryfikacji",
+            "new": "Nowy",
+            "notVerified": "Nie zweryfikowano",
+            "verified": "Zweryfikowano"
         },
         "asset": {
-            "label": "Assets"
+            "label": "Aktywa"
         },
         "amount": {
-            "label": "Amount",
-            "equal": "is equal to",
-            "range": "is between",
-            "greater": "is greater than",
-            "less": "is less than"
+            "label": "Ilość",
+            "equal": "jest równe",
+            "range": "jest między",
+            "greater": "jest większe od",
+            "less": "jest mniejsze niż"
         },
         "status": {
             "label": "Status",
-            "confirmed": "confirmed",
-            "pending": "pending",
-            "claimed": "claimed",
-            "unclaimed": "non-claimed"
+            "confirmed": "potwierdzono",
+            "pending": "przetwarzanie",
+            "claimed": "odebrano",
+            "unclaimed": "nieodebrane"
         },
         "type": {
-            "label": "Type",
-            "incoming": "incoming",
-            "outgoing": "outgoing",
-            "internal": "internal"
+            "label": "Typ",
+            "incoming": "odebrano",
+            "outgoing": "wysłano",
+            "internal": "transfer wewnętrzny"
         }
     },
     "dates": {
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Zaloguj się, aby zainicjować deep link",
             "notEnabled": "Deep linki nie są włączone",
             "invalidFormat": "Deep link, który wybrałeś, jest nieprawidłowy",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Szczegóły płatności zostały wypełnione przy użyciu deep linku"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "Poczekaj na zakończenie synchronizacji, aby zmienić portfele.",
@@ -1303,24 +1326,25 @@
             "error": "Nie udało się ukryć aktywności"
         },
         "faucetRequest": {
-            "success": "Request for tokens sent to the faucet"
+            "success": "Prośba o tokeny wysłana do faucetu"
         },
         "mintNativeToken": {
-            "success": "Native token minting transaction sent"
+            "success": "Transakcja mintowania natywnego tokenu wysłana"
         },
         "refreshTokenMetadata": {
-            "success": "All token metadata has been reset and refreshed"
+            "success": "Wszystkie metadane tokenu zostały zresetowane i odświeżone"
         },
         "restoreFromStrongholdBackup": {
-            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
+            "wrongProtocolForClaiming": "Musisz użyć kopii zapasowej Stronghold opartej na IOTA, aby odebrać nagrody Shimmer"
         },
         "findShimmerRewards": {
-            "success": "Successfully found Shimmer rewards",
-            "error": "An error occurred while searching for rewards"
+            "success": "Pomyślnie odnaleziono nagrody Shimmer",
+            "error": "Wystąpił błąd podczas wyszukiwania nagród"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
-            "error": "An error occurred while claiming rewards"
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
+            "error": "Wystąpił błąd podczas odbierania nagród"
         }
     },
     "error": {
@@ -1329,7 +1353,9 @@
             "duplicate": "Profil o takiej nazwie już istnieje.",
             "delete": {
                 "nonEmptyAccounts": "Musisz przetransferować wszystkie środki zanim będziesz mógł usunąć swój profil."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "Hasła nie są zgodne.",
@@ -1369,7 +1395,9 @@
             "syncing": "Wystąpił błąd podczas synchronizacji portfeli.",
             "cannotRemove": "Nie można usunąć portfela.",
             "withBalance": "Musisz przetransferować wszystkie środki zanim będziesz mógł usunąć ten portfel.",
-            "notLast": "Możesz usunąć tylko ostatni portfel."
+            "notLast": "Możesz usunąć tylko ostatni portfel.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "Adresy powinny składać się z {length, plural, one {# znaku} few {# znaków} many {# znaków} other {# znaków}}.",
@@ -1388,7 +1416,9 @@
             "leavingDust": "Na Twoim adresie nie może pozostać mniej niż 1 Mi.",
             "cancelled": "Transakcja została anulowana.",
             "transaction": "Wystąpił błąd podczas wysyłania transakcji. Spróbuj ponownie.",
-            "invalidExpirationDateTime": "Wybrany czas wygaśnięcia jest nieprawidłowy."
+            "invalidExpirationDateTime": "Wybrany czas wygaśnięcia jest nieprawidłowy.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",
@@ -1400,7 +1430,8 @@
             "https": "HTTPS jest wymagany; niezabezpieczone połączenia przez HTTP nie są obecnie obsługiwane.",
             "duplicate": "Ten serwer został już wcześniej dodany.",
             "unsynced": "Serwer nie jest zsynchronizowany.",
-            "noSynced": "Brak zsynchronizowanych serwerów.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Nie udało się uzyskać odpowiedzi od wszystkich serwerów.",
             "forbidden": "Połączenie z tym serwerem jest zabronione.",
             "pluginNotAvailable": "Wtyczka \"{nodePlugin}\" nie jest dostępna na bieżącym serwerze.",
@@ -1535,39 +1566,39 @@
         "transaction": {
             "internal": {
                 "in": {
-                    "Pending": "transferring from",
-                    "Confirmed": "transferred from",
-                    "Conflicting": "failed to transfer"
+                    "Pending": "przesyłanie z",
+                    "Confirmed": "przesłano z",
+                    "Conflicting": "nie udało się przesłać"
                 },
                 "out": {
-                    "Pending": "transferring to",
-                    "Confirmed": "transferred to",
-                    "Conflicting": "failed to transfer"
+                    "Pending": "przesyłanie do",
+                    "Confirmed": "przesłano do",
+                    "Conflicting": "nie udało się przesłać"
                 }
             },
             "external": {
                 "in": {
-                    "Pending": "receiving from",
-                    "Confirmed": "received from",
-                    "Conflicting": "failed to receive"
+                    "Pending": "odbieranie od",
+                    "Confirmed": "odebrano od",
+                    "Conflicting": "nie udało się odebrać"
                 },
                 "out": {
-                    "Pending": "sending to",
-                    "Confirmed": "sent to",
-                    "Conflicting": "failed to send"
+                    "Pending": "wysyłanie do",
+                    "Confirmed": "wysłano do",
+                    "Conflicting": "nie udało się wysłać"
                 }
             }
         },
         "minting": {
             "in": {
-                "Pending": "minting",
-                "Confirmed": "minted",
-                "Conflicting": "failed to mint"
+                "Pending": "mintowanie",
+                "Confirmed": "mintowano",
+                "Conflicting": "mintowanie nieudane"
             },
             "out": {
-                "Pending": "minting",
-                "Confirmed": "minted",
-                "Conflicting": "failed to mint"
+                "Pending": "mintowanie",
+                "Confirmed": "mintowano",
+                "Conflicting": "mintowanie nieudane"
             }
         },
         "migrate": {
@@ -1579,7 +1610,8 @@
             "unclaimed": "nieodebrano",
             "claimed": "odebrano",
             "expired": "wygasło"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {

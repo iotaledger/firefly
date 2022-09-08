@@ -10,7 +10,7 @@
     export let classes: string = ''
     export let icon: 'info' | 'exclamation' | undefined = undefined
     export let iconClasses: string = ''
-    export let iconSize: string
+    export let iconSize: string = ''
     export let text: string = ''
     export let textClasses: string = ''
     export let textColor = 'gray-700'

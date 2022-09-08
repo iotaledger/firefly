@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "Verbind uw Ledger met Firefly",
             "body": "Om Firefly uw Ledger apparaat te laten vinden, moet u ervoor zorgen dat de officiële Ledger Live app wordt gesloten.",
-            "trafficLight1": "Verbind en ontgrendel uw Ledger met uw pincode",
-            "trafficLight2": "Open de nieuwe IOTA app op uw Ledger",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Tips als uw Ledger geen verbinding kan maken"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "Hardware Apparaat",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "Verbonden",
-                        "locked": "Vergrendeld",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "Verkeerde Ledger of mnemonic",
-                        "notDetected": "Niet gedetecteerd",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "App open"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Opslag borg uitsplitsing",
             "totalStorageDeposit": "Totale opslag borg",
@@ -722,7 +731,11 @@
             "bodyFirefly": "Firefly is uitgeschakeld totdat het is voltooid. Token migratie zal later nog steeds mogelijk zijn."
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "Om door te gaan, bevestig de prompt die wordt weergegeven op uw Ledger apparaat"
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "Bevestig adres voor restant",
-                "info": "Bevestig dat het resterende adres op uw Ledger overeenkomt met het adres dat hieronder wordt weergegeven. Als beide overeenkomen, druk dan op beide knoppen op uw Ledger zoals gevraagd."
-            },
-            "transaction": {
-                "title": "Bevestig transactie",
-                "info": "Bevestig dat de transactieinformatie die op uw Ledger wordt getoond overeenkomt met de onderstaande informatie. Als ze overeenkomen, druk dan op beide knoppen op uw Ledger zoals gevraagd."
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "Ontvangstadres bevestigen",
@@ -891,6 +898,7 @@
         "dismiss": "Sluiten",
         "claim": "Claim",
         "claiming": "Claimen",
+        "claimingRewards": "Claiming rewards",
         "reject": "Afwijzen",
         "confirmRejection": {
             "title": "Transactie afwijzen",
@@ -1026,7 +1034,11 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Ontvanger",
@@ -1042,6 +1054,9 @@
         "received": "Ontvangen",
         "transfer": "Overdracht",
         "transferring": "Overzetten",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "Verstuur betaling",
@@ -1185,6 +1200,7 @@
         "storageDeposit": "Opslag borg",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
+        "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Totaal: {balance}",
@@ -1193,7 +1209,8 @@
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
@@ -1201,7 +1218,11 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
         "title": "Filters",
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "Wacht tot de synchronisatie is voltooid om portemonnees te wijzigen.",
@@ -1312,6 +1335,7 @@
             "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
             "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
@@ -1319,7 +1343,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
@@ -1329,7 +1353,9 @@
             "duplicate": "Een account met deze naam bestaat al.",
             "delete": {
                 "nonEmptyAccounts": "U moet eerst alle saldo's overdragen voordat u uw profiel kunt verwijderen."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "Wachtwoorden komen niet overeen.",
@@ -1369,7 +1395,9 @@
             "syncing": "Er is een fout opgetreden bij het synchroniseren van uw portemonnees.",
             "cannotRemove": "Kan portemonnee niet verwijderen.",
             "withBalance": "U moet uw saldo overmaken voordat u deze portemonnee kunt verwijderen.",
-            "notLast": "U kunt alleen uw laatste portemonnee verwijderen."
+            "notLast": "U kunt alleen uw laatste portemonnee verwijderen.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "Adressen moeten {length, plural, one {1 teken} other {# tekens}} lang zijn.",
@@ -1388,7 +1416,9 @@
             "leavingDust": "U kunt niet minder dan 1 Mi op uw rekening achterlaten.",
             "cancelled": "De transactie is geannuleerd.",
             "transaction": "Er is een fout opgetreden bij het verzenden van uw transactie. Probeer het opnieuw.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "Voer een geldige URL in.",
@@ -1400,7 +1430,8 @@
             "https": "HTTPS is vereist; onveilige verbindingen over HTTP worden op dit moment niet ondersteund.",
             "duplicate": "Deze node is reeds toegevoegd.",
             "unsynced": "De node is niet gesynchroniseerd.",
-            "noSynced": "Er zijn geen gesynchroniseerde nodes beschikbaar.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Het ophalen van een antwoord van alle knooppunten is mislukt.",
             "forbidden": "Deze node verbinding is verboden.",
             "pluginNotAvailable": "De \"{nodePlugin}\" plugin is niet beschikbaar op de huidige node.",
@@ -1579,7 +1610,8 @@
             "unclaimed": "niet geclaimed",
             "claimed": "geclaimed",
             "expired": "verlopen"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {

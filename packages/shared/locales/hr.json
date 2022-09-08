@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "Spoji svoj Ledger s Firefly novčanikom",
             "body": "Kako bi Firefly mogao pronaći tvoj Ledger uređaj, prvo se uvjeri da je službena Ledger Live aplikacija zatvorena.",
-            "trafficLight1": "Spoji svoj Ledger i otključaj ga PINom",
-            "trafficLight2": "Otvori novu IOTA aplikaciju na svom Ledgeru",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Savjeti u slučaju da se vaš Ledger ne želi spojiti"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "Hardverski uređaj",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "Povezano",
-                        "locked": "Zaključano",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "Krivi Ledger ili fraza za oporavak (mnemonic)",
-                        "notDetected": "Nije detektiran",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "Aplikacija otvorena"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Raščlamba depozita za pohranu",
             "totalStorageDeposit": "Ukupno depozita za pohranu",
@@ -722,7 +731,11 @@
             "bodyFirefly": "Firefly je onemogućen tijekom unaprijeđenja mreže. Migracija tokens opet će biti moguća po završetku."
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "Za nastavak potvrdi ovaj korak na svojem Ledger uređaju"
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "Potvrdi adresu za polog ostatka",
-                "info": "Potvrdi da je adresa za polog ostatka, koja je trenutno prikazana na tvom Ledgeru, istovjetna onoj prikazanoj ispod. Ukoliko su obje adrese iste, pritisni oba gumba na svom Ledgeru kada te uređaj to zatraži."
-            },
-            "transaction": {
-                "title": "Potvrdi transakciju",
-                "info": "Potvrdi da je informacija o transakciji, trenutno prikazana na tvom Ledger uređaju, istovjetna informaciji prikazanoj ispod. Ukoliko su obje informacije jednake, pritisni oba gumba na svom Ledgeru kada te uređaj to zatraži."
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "Potvrdi adresu primatelja",
@@ -891,6 +898,7 @@
         "dismiss": "Odbaci",
         "claim": "Preuzmi",
         "claiming": "Preuzimanje",
+        "claimingRewards": "Claiming rewards",
         "reject": "Odbij",
         "confirmRejection": {
             "title": "Odbij transakciju",
@@ -1026,7 +1034,11 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Primatelj",
@@ -1042,6 +1054,9 @@
         "received": "Primljeno",
         "transfer": "Prijenos",
         "transferring": "Prijenos u tijeku",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "Pošalji uplatu",
@@ -1185,6 +1200,7 @@
         "storageDeposit": "Depozit za pohranu",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Vrijeme isteka",
+        "timelockDate": "Timelock",
         "claimedTime": "Preuzeto u",
         "copiedToClipboard": "Kopirano u međuspremnik",
         "total": "Ukupno: {balance}",
@@ -1193,7 +1209,8 @@
         "metadata": "Metapodaci",
         "tag": "Tag",
         "nodeList": "Lista nodeova",
-        "claimingTransactionId": "Preuzeto za",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "Imovina",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
@@ -1201,7 +1218,11 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
         "title": "Filters",
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Potrebno se prijaviti za pokretanje deep linka",
             "notEnabled": "Deep linkovi nisu omogućeni",
             "invalidFormat": "Deep link koji ste slijedili nije važeći",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Podaci o plaćanju dodani s deep linka"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "Molimo pričekajte da sinkronizacija završi prije nego promijenite novčanik.",
@@ -1312,6 +1335,7 @@
             "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
             "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
@@ -1319,7 +1343,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
@@ -1329,7 +1353,9 @@
             "duplicate": "Profil s ovim imenom već postoji.",
             "delete": {
                 "nonEmptyAccounts": "Potrebno je prebaciti sva sredstva prije brisanja profila."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "Lozinke nisu iste.",
@@ -1369,7 +1395,9 @@
             "syncing": "Došlo je do greške prilikom sinkroniziranja vaših novčanika.",
             "cannotRemove": "Nije moguće ukloniti novčanik.",
             "withBalance": "Potrebno je prebaciti sva sredstva prije brisanja novčanika.",
-            "notLast": "Možete izbrisati samo svoj zadnji novčanik."
+            "notLast": "Možete izbrisati samo svoj zadnji novčanik.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "Adrese moraju sadržavati {length, plural, one {# znak} few {# znaka} other {# znakova}}.",
@@ -1388,7 +1416,9 @@
             "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi.",
             "cancelled": "Transakcija je otkazana.",
             "transaction": "Došlo je do greške prilikom slanja vaše transakcije. Molimo pokušajte ponovno.",
-            "invalidExpirationDateTime": "Odabrani datum/vrijeme isteka nije važeći."
+            "invalidExpirationDateTime": "Odabrani datum/vrijeme isteka nije važeći.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "Molimo unesite valjani URL.",
@@ -1400,7 +1430,8 @@
             "https": "HTTPS je obavezan; nesigurne veze putem HTTP-a trenutno nisu podržane.",
             "duplicate": "Ovaj je node već dodan.",
             "unsynced": "Node nije sinkroniziran.",
-            "noSynced": "Nema dostupnih sinkroniziranih nodeova.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Nije bilo moguće dobiti odgovor od svih nodeova.",
             "forbidden": "Povezivanje s ovim nodeom je zabranjeno.",
             "pluginNotAvailable": "\"{nodePlugin}\" plugin nije dostupan na trenutnom nodeu.",
@@ -1579,7 +1610,8 @@
             "unclaimed": "Nije preuzeta",
             "claimed": "Preuzeta",
             "expired": "isteklo"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {
