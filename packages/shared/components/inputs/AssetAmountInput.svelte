@@ -106,7 +106,7 @@
         {#if asset}
             <button on:click={onClickAvailableBalance}>
                 <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
-                    {localize('general.balance', {
+                    {localize('general.balanceWithValue', {
                         values: { balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata) },
                     })}
                 </Text>

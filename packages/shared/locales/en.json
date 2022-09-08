@@ -1099,6 +1099,7 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Balance",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
