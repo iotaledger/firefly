@@ -24,6 +24,7 @@
     $: isChanged = JSON.stringify($filterStore) !== JSON.stringify(filter)
     $: filterActive = modal?.isOpened()
     $: activeFilterCount = Object.keys($filterStore).filter((f) => $filterStore[f].active).length
+    $: totalFilterCount = Object.keys($filterStore).length
 </script>
 
 <div class="h-6 relative">
@@ -37,8 +38,8 @@
     {/if}
 
     <FilterModal bind:modal bind:filter {isChanged} {onSetFilters} {onClose}>
-        {#each Object.keys(filter) as filterUnit}
-            <FilterItem bind:filterUnit={filter[filterUnit]} />
+        {#each Object.keys(filter) as filterUnit, index}
+            <FilterItem bind:filterUnit={filter[filterUnit]} last={index === totalFilterCount - 1} />
         {/each}
     </FilterModal>
 </div>

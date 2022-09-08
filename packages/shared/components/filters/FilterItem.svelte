@@ -6,6 +6,7 @@
     import { visibleSelectedAccountAssets, NumberFilterOption } from '@core/wallet'
 
     export let filterUnit: FilterUnit
+    export let last: boolean = false
 
     let choices: DropdownChoice[]
     if (filterUnit.type === 'selection' || filterUnit.type === 'number') {
@@ -78,7 +79,12 @@
     }
 </script>
 
-<div class="filter-item border-t border-solid border-gray-200 dark:border-gray-800">
+<div
+    class="
+        filter-item border-t border-solid border-gray-200 dark:border-gray-800 
+        {last ? 'rounded-b-xl' : ''}
+    "
+>
     <div class="px-4 py-3">
         <Checkbox
             label={localize(filterUnit.localeKey + '.label')}
@@ -89,7 +95,7 @@
     </div>
 
     {#if filterUnit.active}
-        <div class="bg-gray-50 px-4 py-3 dark:bg-transparent">
+        <div class="bg-gray-50 px-4 py-3 dark:bg-transparent {last ? 'rounded-b-xl' : ''}">
             <Dropdown {value} items={choices} {onSelect} small />
 
             {#if filterUnit.type === 'number' && filterUnit.selected}
