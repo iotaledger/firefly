@@ -84,6 +84,7 @@
                     onSelect={onLanguageSelectionClick}
                     value={SUPPORTED_LOCALES[$appSettings.language]}
                     items={languageList}
+                    enableTyping
                 />
             </div>
         {/if}

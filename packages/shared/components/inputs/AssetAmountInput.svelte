@@ -83,6 +83,7 @@
     {isFocused}
     {error}
     classes="space-y-2"
+    on:clickOutside={() => (isFocused = false)}
 >
     <div class="flex flex-row w-full items-center space-x-0.5 relative">
         <AssetDropdown bind:asset />
@@ -105,7 +106,7 @@
         {#if asset}
             <button on:click={onClickAvailableBalance}>
                 <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
-                    {localize('general.availableBalance', {
+                    {localize('general.balanceWithValue', {
                         values: { balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata) },
                     })}
                 </Text>

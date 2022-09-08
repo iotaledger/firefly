@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "Ledger를 Firefly에 연결하세요.",
             "body": "Firefly가 Ledger 장치를 발견하려면, 공식 Ledger Live 애플리케이션이 반드시 종료된 상태여야 합니다.",
-            "trafficLight1": "Ledger을 연결하고 PIN 번호를 입력하여 잠금을 해제하세요.",
-            "trafficLight2": "Ledger에서 새로운 IOTA 앱을 여세요.",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Ledger 연결이 잘 되지 않을 때 참고할 도움말"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "하드웨어 장치",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "연결됨",
-                        "locked": "잠김",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "잘못된 Ledger 또는 Mnemonic",
-                        "notDetected": "감지되지 않음",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "앱 열림"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
@@ -722,7 +731,11 @@
             "bodyFirefly": "Firefly는 완료 될 때까지 비활성화됩니다. 이후에도 토큰 마이그레이션이 가능합니다."
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "진행하기 위해서 Ledger 장치에 표시된 안내를 확인하세요."
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "나머지 주소를 확인하세요.",
-                "info": "Ledger에 표시된 나머지 주소가 아래에 표시된 것과 일치하는지 확인하세요. 만약 일치한다면 Ledger의 두 버튼을 안내된대로 누르세요."
-            },
-            "transaction": {
-                "title": "Confirm transaction",
-                "info": "Ledger 장치에 표시된 거래 정보가 아래에 표시된 정보와 일치하는지 확인하세요. 만약 일치한다면 Ledger의 두 버튼을 안내된대로 누르세요."
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "받는 주소를 확인하세요.",
@@ -891,6 +898,7 @@
         "dismiss": "무시하기",
         "claim": "Claim",
         "claiming": "Claiming",
+        "claimingRewards": "Claiming rewards",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -1026,7 +1034,11 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Recipient",
@@ -1042,6 +1054,9 @@
         "received": "받음",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "보내기",
@@ -1185,6 +1200,7 @@
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
+        "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "총액: {balance}",
@@ -1193,7 +1209,8 @@
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
@@ -1201,7 +1218,11 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
         "title": "Filters",
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
@@ -1312,6 +1335,7 @@
             "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
             "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
@@ -1319,7 +1343,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
@@ -1329,7 +1353,9 @@
             "duplicate": "같은 이름의 사용자가 이미 존재합니다",
             "delete": {
                 "nonEmptyAccounts": "프로필을 삭제하기 전 모든 잔액을 전송해야 합니다."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "비밀번호가 맞지 않습니다.",
@@ -1369,7 +1395,9 @@
             "syncing": "지갑을 동기화하는 중 에러가 발생했습니다.",
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "notLast": "You can only delete your last wallet.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "주소는 {length, plural, other {#자}}여야 합니다.",
@@ -1388,7 +1416,9 @@
             "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다.",
             "cancelled": "거래가 취소되었습니다.",
             "transaction": "거래를 보내는 중 에러가 발생했습니다. 다시 시도하세요.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "유효한 URL을 입력하세요.",
@@ -1400,7 +1430,8 @@
             "https": "HTTPS 연결이 필요합니다. 현재 HTTP로 안전하지 않은 연결을 하는 것은 지원하지 않습니다.",
             "duplicate": "이미 추가된 노드입니다.",
             "unsynced": "동기화되지 않은 노드입니다.",
-            "noSynced": "사용할 수 있는 동기화된 노드가 없습니다.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "모든 노드로부터 응답을 받을 수 없습니다.",
             "forbidden": "이 노드 연결은 금지되었습니다.",
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
@@ -1579,7 +1610,8 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {

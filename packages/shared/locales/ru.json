@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "Подключите вашу Ledger к Firefly",
             "body": "Чтобы ваше устройство Ledger было найдено Firefly, убедитесь, что официальное приложение Ledger Live закрыто.",
-            "trafficLight1": "Подключите и разблокируйте свой Ledger с помощью PIN-кода",
-            "trafficLight2": "Откройте новое приложение IOTA в вашем Ledger",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Советы, если ваш Ledger не подключается"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "Аппаратное устройство",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "Подключено",
-                        "locked": "Заблокировано",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "Неправильный Ledger или Mnemonic",
-                        "notDetected": "Не обнаружено",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "Приложение открыто"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Разбивка депозита для хранения",
             "totalStorageDeposit": "Общий депозит для хранения",
@@ -722,7 +731,11 @@
             "bodyFirefly": "Firefly отключён до завершения. После этого миграция токенов будет по-прежнему возможна."
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "Чтобы продолжить, подтвердите запрос, отображаемый на вашем устройстве Ledger"
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "Подтвердите адрес остатка",
-                "info": "Убедитесь, что адрес остатка, отображаемый в вашем Ledger, совпадает с адресом, показанным ниже. Если они совпадают, нажмите обе кнопки на Ledger в соответствии с запросом."
-            },
-            "transaction": {
-                "title": "Подтвердить транзакцию",
-                "info": "Убедитесь, что информация о транзакции, отображаемая на вашем устройстве Ledger, совпадает с информацией, отображаемой ниже. Если они совпадают, нажмите обе кнопки на Ledger в соответствии с запросом."
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "Подтверждение адреса приема",
@@ -891,6 +898,7 @@
         "dismiss": "Отклонить",
         "claim": "Запросить",
         "claiming": "Запрос",
+        "claimingRewards": "Claiming rewards",
         "reject": "Отклонить",
         "confirmRejection": {
             "title": "Отклонить транзакцию",
@@ -1026,7 +1034,11 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Получатель",
@@ -1042,6 +1054,9 @@
         "received": "Получено",
         "transfer": "Перевести",
         "transferring": "Передача",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "Отправить платёж",
@@ -1185,6 +1200,7 @@
         "storageDeposit": "Депозит для хранения",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Окончание срока действия",
+        "timelockDate": "Timelock",
         "claimedTime": "Востребовано",
         "copiedToClipboard": "Скопировано в буфер обмена",
         "total": "Всего: {balance}",
@@ -1193,7 +1209,8 @@
         "metadata": "Полезные данные",
         "tag": "Пометка",
         "nodeList": "Список узлов",
-        "claimingTransactionId": "Востребовано",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "Активы",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
@@ -1201,7 +1218,11 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
         "title": "Filters",
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Пожалуйста, войдите, чтобы открыть глубокую ссылку",
             "notEnabled": "Глубокие ссылки не включены",
             "invalidFormat": "Глубокая ссылка, по которой вы перешли, недействительна",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Платежные реквизиты добавлены из глубокой ссылки"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "Пожалуйста, дождитесь окончания синхронизации, чтобы сменить кошельки.",
@@ -1312,6 +1335,7 @@
             "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
             "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
@@ -1319,7 +1343,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
@@ -1329,7 +1353,9 @@
             "duplicate": "Профиль с таким именем уже существует.",
             "delete": {
                 "nonEmptyAccounts": "Перед удалением профиля вы должны перевести все остатки средств."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "Пароли не совпадают.",
@@ -1369,7 +1395,9 @@
             "syncing": "Произошла ошибка при синхронизации ваших кошельков.",
             "cannotRemove": "Невозможно удалить кошелёк.",
             "withBalance": "Вы должны перевести все суммы, прежде чем сможете удалить этот кошелек.",
-            "notLast": "Вы можете удалить только ваш последний кошелек."
+            "notLast": "Вы можете удалить только ваш последний кошелек.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "Длина адресов должна быть {length, plural, one {# символ} other {# символов}}.",
@@ -1388,7 +1416,9 @@
             "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе.",
             "cancelled": "Транзакция была отменена.",
             "transaction": "Произошла ошибка при отправке вашей транзакции. Пожалуйста, попробуйте еще раз.",
-            "invalidExpirationDateTime": "Выбранная дата/время истечения срока действия недопустима."
+            "invalidExpirationDateTime": "Выбранная дата/время истечения срока действия недопустима.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "Пожалуйста, введите правильный адрес.",
@@ -1400,7 +1430,8 @@
             "https": "Требуется HTTPS; небезопасные соединения по HTTP в настоящее время не поддерживаются.",
             "duplicate": "Этот узел уже был добавлен.",
             "unsynced": "Узел не синхронизирован.",
-            "noSynced": "Нет доступных синхронизированных узлов.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Не удалось получить ответ от всех узлов.",
             "forbidden": "Соединение с этим узлом запрещено.",
             "pluginNotAvailable": "Плагин \"{nodePlugin}\" недоступен на текущем узле.",
@@ -1579,7 +1610,8 @@
             "unclaimed": "невостребовано",
             "claimed": "востребовано",
             "expired": "истекло"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {

@@ -10,7 +10,7 @@
 
     // Text Props
     export let type = TextType.p
-    export let fontSize = '11'
+    export let fontSize = 'sm'
     export let lineHeight = '140'
     export let fontWeight = FontWeight.normal
     export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'

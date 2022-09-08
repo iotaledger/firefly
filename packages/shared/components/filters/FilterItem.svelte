@@ -7,7 +7,7 @@
     export let filterUnit: FilterUnit
 </script>
 
-<div class="filter-item border-t border-solid border-gray-200 dark:border-gray-800">
+<div class="filter-item border-t border-solid border-gray-200 dark:border-gray-800 ">
     <div class="px-4 py-3">
         <Checkbox
             label={localize(filterUnit.localeKey + '.label')}
@@ -18,7 +18,7 @@
     </div>
 
     {#if filterUnit.active}
-        <div class="bg-gray-50 px-4 py-3 dark:bg-transparent">
+        <div class="expanded bg-gray-50 px-4 py-3 dark:bg-transparent">
             {#if filterUnit.type === 'number'}
                 <NumberFilterItem bind:filterUnit />
             {:else if filterUnit.type === 'date'}
@@ -36,6 +36,12 @@
     .filter-item {
         :global(box) {
             padding: 0.5rem !important;
+        }
+
+        &:last-child {
+            .expanded {
+                @apply rounded-b-xl;
+            }
         }
     }
 </style>
