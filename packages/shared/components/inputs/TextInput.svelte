@@ -30,4 +30,6 @@
     }}
     {alignment}
     {...$$restProps}
-/>
+>
+    <slot />
+</Input>

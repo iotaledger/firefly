@@ -24,7 +24,12 @@
 
     async function validate(): Promise<boolean> {
         try {
-            await Promise.all([assetAmountInput?.validate(), recipientInput?.validate()])
+            await Promise.all([
+                assetAmountInput?.validate(),
+                recipientInput?.validate(),
+                validateTag(),
+                validateMetadata(),
+            ])
             return true
         } catch (error) {
             console.error('Error: ', error)
@@ -46,6 +51,22 @@
     let isTagInputOpen = false
     function openTagInput() {
         isTagInputOpen = true
+    }
+
+    let tagError: string = ''
+    function validateTag(): Promise<void> {
+        if (tag.length > 64) {
+            tagError = localize('error.send.tagTooLong')
+            return Promise.reject(tagError)
+        }
+    }
+
+    let metadataError: string = ''
+    function validateMetadata(): Promise<void> {
+        if (metadata.length > 8192) {
+            metadataError = localize('error.send.metadataTooLong')
+            return Promise.reject(metadataError)
+        }
     }
 
     let sendButtonElement: HTMLButtonElement
@@ -71,15 +92,21 @@
             bind:buttonElement={metadataButtonElement}
             bind:open={isMetadataInputOpen}
             bind:value={metadata}
+            error={metadataError}
             label={localize('general.metadata')}
             placeholder={localize('general.metadata')}
+            fontSize="15"
+            fontWeight={FontWeight.medium}
         />
         <ClosableInput
-            bind:buttonElement={metadataButtonElement}
+            bind:buttonElement={tagButtonElement}
             bind:open={isTagInputOpen}
             bind:value={tag}
+            error={tagError}
             label={localize('general.tag')}
             placeholder={localize('general.tag')}
+            fontSize="15"
+            fontWeight={FontWeight.medium}
         />
         {#if !isMetadataInputOpen || !isTagInputOpen}
             <optional-input-buttons class="flex flex-row space-x-4">

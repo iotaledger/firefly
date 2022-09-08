@@ -19,4 +19,6 @@
     float={!isInteger}
     integer={isInteger}
     {...$$restProps}
-/>
+>
+    <slot />
+</TextInput>
