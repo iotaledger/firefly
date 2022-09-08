@@ -1,12 +1,13 @@
 import { IAsset, Subject } from '@core/wallet'
 
-export interface ISendConfirmationParameters {
+export interface INewTransactionDetails {
+    amount?: string
     asset?: IAsset
-    amount?: string | undefined
-    unit?: string
-    recipient?: Subject
+    expirationDate?: Date
     metadata?: string
+    recipient?: Subject
     tag?: string
+    unit?: string
     giftStorageDeposit?: boolean
     disableToggleGift?: boolean
     disableChangeExpiration?: boolean

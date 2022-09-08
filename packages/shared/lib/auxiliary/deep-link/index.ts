@@ -1,5 +1,6 @@
 export * from './actions'
 export * from './enums'
+export * from './errors'
 export * from './handlers'
 export * from './interfaces'
 export * from './stores'

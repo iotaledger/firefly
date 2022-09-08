@@ -39,7 +39,7 @@
         }
     }
 
-    function updateSubUnitForNumberFilter() {
+    function updateSubUnitForNumberFilter(): void {
         if (filterUnit.type === 'number') {
             if (
                 filterUnit.selected === NumberFilterOption.Equal ||
@@ -60,7 +60,7 @@
         }
     }
 
-    function onSelect(item) {
+    function onSelect(item): void {
         if (filterUnit.type === 'selection' || filterUnit.type === 'number') {
             filterUnit.selected = item.value
             updateSubUnitForNumberFilter()
@@ -78,7 +78,7 @@
     }
 </script>
 
-<div class="filter-item border-t border-solid border-gray-200 dark:border-gray-800">
+<div class="filter-item border-t border-solid border-gray-200 dark:border-gray-800 ">
     <div class="px-4 py-3">
         <Checkbox
             label={localize(filterUnit.localeKey + '.label')}
@@ -89,7 +89,7 @@
     </div>
 
     {#if filterUnit.active}
-        <div class="bg-gray-50 px-4 py-3 dark:bg-transparent">
+        <div class="expanded bg-gray-50 px-4 py-3 dark:bg-transparent">
             <Dropdown {value} items={choices} {onSelect} small />
 
             {#if filterUnit.type === 'number' && filterUnit.selected}
@@ -112,6 +112,12 @@
     .filter-item {
         :global(box) {
             padding: 0.5rem !important;
+        }
+
+        &:last-child {
+            .expanded {
+                @apply rounded-b-xl;
+            }
         }
     }
 </style>

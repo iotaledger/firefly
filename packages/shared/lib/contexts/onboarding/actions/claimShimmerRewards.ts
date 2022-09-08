@@ -7,6 +7,8 @@ import {
     formatTokenAmountBestMatch,
     getAssetFromPersistedAssets,
     getOutputOptions,
+    resetNewTransactionDetails,
+    setNewTransactionDetails,
     validateSendConfirmation,
 } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
@@ -23,7 +25,7 @@ import {
     persistShimmerClaimingTransaction,
     updateShimmerClaimingAccount,
 } from '../stores'
-import { handleLedgerError, resetLedgerSendConfirmationProps, setLedgerSendConfirmationProps } from '@core/ledger'
+import { handleLedgerError } from '@core/ledger'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
@@ -79,7 +81,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     let claimingTransaction: Transaction
     if (get(isOnboardingLedgerProfile)) {
         const shimmerTokenMetadata = BASE_TOKEN[NetworkProtocol.Shimmer]
-        setLedgerSendConfirmationProps({
+        setNewTransactionDetails({
             asset: {
                 ...getAssetFromPersistedAssets(COIN_TYPE[NetworkProtocol.Shimmer].toString()),
                 balance: {
@@ -92,12 +94,11 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
                 type: 'address',
                 address: recipientAddress,
             },
-            internal: false,
             metadata: '',
             tag: '',
         })
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
-        resetLedgerSendConfirmationProps()
+        resetNewTransactionDetails()
     } else {
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     }

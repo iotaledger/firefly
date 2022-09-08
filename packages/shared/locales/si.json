@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "ඔබේ ලෙජරය Firefly වෙත සම්බන්ධ කරන්න",
             "body": "Firefly විසින් ඔබගේ Ledger උපාංගය සොයා ගැනීම සඳහා, කරුණාකර නිල Ledger Live යෙදුම වසා ඇති බව සහතික කර ගන්න.",
-            "trafficLight1": "ඔබගේ PIN අංකය සමඟ ඔබගේ ලෙජරය සම්බන්ධ කර අගුළු හරින්න",
-            "trafficLight2": "ඔබගේ ලෙජරයේ නව IOTA යෙදුම විවෘත කරන්න",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "ඔබේ ලෙජරය සම්බන්ධ නොවන්නේ නම් ඉඟි"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "දෘඪාංග උපාංගය",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "සම්බන්ධයි",
-                        "locked": "අගුලු දමා ඇත",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "වැරදි ලෙජරය හෝ සිහිවටනය",
-                        "notDetected": "අනාවරණය නොවිණි",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "යෙදුම විවෘතයි"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
@@ -722,7 +731,11 @@
             "bodyFirefly": "එය සම්පූර්ණ වන තුරු Firefly අක්‍රීය කර ඇත. ටෝකන් සංක්‍රමණයට පසුවද හැකි වනු ඇත."
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "ඉදිරියට යාමට, ඔබගේ ලෙජර් උපාංගයේ දිස්වන විමසුම තහවුරු කරන්න"
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "ඉතිරි ලිපිනය තහවුරු කරන්න",
-                "info": "ඔබගේ ලෙජරයේ දිස්වන ඉතිරි ලිපිනය පහත දැක්වෙන ලිපිනයට ගැලපෙන බව තහවුරු කරන්න. ඒවා ගැලපෙන්නේ නම්, විමසූ පරිදි ඔබේ ලෙජරයේ බොත්තම් දෙකම ඔබන්න."
-            },
-            "transaction": {
-                "title": "ගනුදෙනුව තහවුරු කරන්න",
-                "info": "ඔබගේ ලෙජර් උපාංගයේ සංදර්ශණය වන ගණුදෙණු තොරතුරු පහත දැක්වෙන තොරතුරු වලට ගැලපෙන බව තහවුරු කරන්න. ඒවා ගැලපෙන්නේ නම්, විමසූ පරිදි ඔබේ ලෙජරයේ බොත්තම් දෙකම ඔබන්න."
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "ලැබෙන ලිපිනය තහවුරු කරන්න",
@@ -891,6 +898,7 @@
         "dismiss": "අස් කරන්න",
         "claim": "Claim",
         "claiming": "Claiming",
+        "claimingRewards": "Claiming rewards",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -1026,7 +1034,11 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Recipient",
@@ -1042,6 +1054,9 @@
         "received": "ලැබුනා",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "ගෙවීම් යවන්න",
@@ -1185,6 +1200,7 @@
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
+        "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "එකතුව: {balance}",
@@ -1193,7 +1209,8 @@
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
@@ -1201,7 +1218,11 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
         "title": "Filters",
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "පසුම්බි වෙනස් කිරීමට සමමුහුර්තකරණය අවසන් වන තෙක් රැඳී සිටින්න.",
@@ -1312,6 +1335,7 @@
             "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
             "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
@@ -1319,7 +1343,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
@@ -1329,7 +1353,9 @@
             "duplicate": "මෙම නම සහිත පැතිකඩක් දැනටමත් පවතී.",
             "delete": {
                 "nonEmptyAccounts": "ඔබගේ පැතිකඩ මකා දැමීමට පෙර ඔබ සියලු ශේෂයන් මාරු කළ යුතුය."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "මුරපද නොගැලපේ.",
@@ -1369,7 +1395,9 @@
             "syncing": "ඔබගේ පසුම්බි සමමුහුර්ත කිරීමේදී දෝෂයක් ඇති විය.",
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "notLast": "You can only delete your last wallet.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "ලිපිනයන් විය යුතුය {length, plural, one {# ස්වභාවය} other {අක්ෂර #}} දිගු.",
@@ -1388,7 +1416,9 @@
             "leavingDust": "ඔබට ඔබගේ ලිපිනයෙහි 1 Mi ට වඩා අඩුවෙන් තැබිය නොහැක.",
             "cancelled": "ගනුදෙනුව අවලංගු විය.",
             "transaction": "ඔබේ ගනුදෙනුව යැවීමේ දෝෂයක් ඇති විය. කරුණාකර නැවත උත්සාහ කරන්න.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "වලංගු URL එක ඇතුලත් කරන්න.",
@@ -1400,7 +1430,8 @@
             "https": "HTTPS අවශ්‍යයි; HTTP හරහා අනාරක්ෂිත සම්බන්ධතා මෙම අවස්ථාවේදී සහාය නොදක්වයි.",
             "duplicate": "මෙම නෝඩය දැනටමත් එකතු කර ඇත.",
             "unsynced": "නෝඩය සමමුහුර්ත නොවේ.",
-            "noSynced": "සමමුහුර්ත නෝඩ් නොමැත.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "සියලුම නෝඩ් වලින් පිළිතුරක් ලබා ගැනීමට අපොහොසත් විය.",
             "forbidden": "මෙම නෝඩ් සම්බන්ධතාවය තහනම්ය.",
             "pluginNotAvailable": "\"{nodePlugin}\" ප්ලගිනය වත්මන් නෝඩයේ නොමැත.",
@@ -1579,7 +1610,8 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {

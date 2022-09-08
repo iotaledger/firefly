@@ -22,7 +22,7 @@
         previousAsset = asset
         unit = null
     }
-    $: rawAmount = generateRawAmount(parseCurrency(amount).toString(), unit, asset?.metadata)
+    $: rawAmount = generateRawAmount(amount, unit, asset?.metadata)
 
     let allowedDecimals = 0
     $: if (!asset?.metadata?.useMetricPrefix) {
