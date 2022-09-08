@@ -1,4 +1,5 @@
 import { addError } from '@core/error'
+import { localize } from '@core/i18n'
 
 import { WalletOperation } from '../../enums'
 import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperation } from './operations'
@@ -9,9 +10,8 @@ import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperatio
  * @method parseWalletDeepLinkRequest
  *
  * @param {URL} url The URL that was opened by the user.
- * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
  *
- * @return {void | DeepLinkRequest} The formatted content of a deep link request within the wallet context.
+ * @return {void} The formatted content of a deep link request within the wallet context.
  */
 export function handleDeepLinkWalletContext(url: URL): void {
     // Remove any leading and trailing slashes
@@ -28,11 +28,16 @@ export function handleDeepLinkWalletContext(url: URL): void {
         case WalletOperation.SendConfirmation:
             handleDeepLinkSendConfirmationOperation(url.searchParams)
             break
-        default:
+        default: {
+            const message = localize('notifications.deepLinkingRequest.wallet.unrecognizedOperation', {
+                values: { operation: pathnameParts[0] },
+            })
+            console.error(message)
             return addError({
                 time: Date.now(),
                 type: 'deepLink',
-                message: `Unrecognized wallet operation '${pathnameParts[0]}'`,
+                message,
             })
+        }
     }
 }

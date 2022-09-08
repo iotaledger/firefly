@@ -1236,6 +1236,11 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-18.7.14.tgz"
   integrity sha512-6bbDaETVi8oyIARulOE9qF1/Qdi/23z6emrUh0fNJRUmjznqrixD4MpGDdgOFk5Xb0m2H6Xu42JGdvAxaJR/wA==
 
+"@types/node@^14.11.1":
+  version "14.18.27"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.27.tgz#940c1d419143fd9fbdc46ae1320b86077aef8155"
+  integrity sha512-DcTUcwT9xEcf4rp2UHyGAcmlqG4Mhe7acozl5vY2xzSrwP1z19ZVyjzQ6DsNUrvIadpiyZoQCTHFt4t2omYIZQ==
+
 "@types/node@^16.11.26":
   version "16.11.56"
   resolved "https://registry.npmjs.org/@types/node/-/node-16.11.56.tgz"

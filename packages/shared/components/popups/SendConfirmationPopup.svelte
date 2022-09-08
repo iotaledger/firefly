@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Spinner, Toggle } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
@@ -7,59 +8,52 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, ProfileType, checkActiveProfileAuth } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
         ActivityType,
         getOutputOptions,
-        IAsset,
         InclusionState,
-        Subject,
         sendOutput,
         validateSendConfirmation,
         generateRawAmount,
         selectedAccountAssets,
         getStorageDepositFromOutput,
         DEFAULT_TRANSACTION_OPTIONS,
+        newTransactionDetails,
+        updateNewTransactionDetails,
     } from '@core/wallet'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
-    import { setLedgerSendConfirmationProps } from '@core/ledger'
+    import { ledgerPreparedOutput } from '@core/ledger'
 
-    export let asset: IAsset
-    export let amount = '0'
-    export let unit: string
-    export let recipient: Subject
-    export let isInternal = false
-    export let metadata: string
-    export let tag: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
-    export let giftStorageDeposit = false
-    export let disableToggleGift = false
-    export let disableChangeExpiration = false
     export let disableBack = false
 
-    let expirationDate: Date
+    const { asset, amount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift } =
+        get(newTransactionDetails)
+    let { expirationDate, giftStorageDeposit } = get(newTransactionDetails)
+
     let storageDeposit = 0
     let giftedStorageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
 
-    $: asset = asset ?? $selectedAccountAssets?.baseCoin
-    $: rawAmount = asset?.metadata
-        ? generateRawAmount(String(parseCurrency(amount)), unit, asset.metadata)
-        : parseCurrency(amount)
+    const rawAmount = generateRawAmount(amount, unit, asset.metadata)
+    const initialExpirationDate = getInitialExpirationDate()
+
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
     $: isNativeToken = asset?.id !== $selectedAccountAssets?.baseCoin?.id
 
-    $: $$props, expirationDate, rawAmount, void _prepareOutput()
-
+    $: expirationDate, void _prepareOutput()
     $: expirationDate, (error = null)
+
     $: formattedFiatValue =
         formatCurrency(
             convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
@@ -78,6 +72,16 @@
         unit,
         isInternal,
         type: ActivityType.Transaction,
+    }
+
+    function getInitialExpirationDate(): ExpirationTime {
+        if (expirationDate) {
+            return ExpirationTime.Custom
+        } else if (storageDeposit) {
+            return ExpirationTime.OneDay
+        } else {
+            return ExpirationTime.None
+        }
     }
 
     async function _prepareOutput(): Promise<void> {
@@ -99,19 +103,9 @@
 
     async function validateAndSendOutput(): Promise<void> {
         validateSendConfirmation(outputOptions, preparedOutput)
-
-        if ($activeProfile.type === ProfileType.Ledger) {
-            setLedgerSendConfirmationProps({
-                asset,
-                amount,
-                unit,
-                recipient,
-                internal: false,
-                metadata,
-                tag,
-            })
+        if ($isActiveLedgerProfile) {
+            ledgerPreparedOutput.set(preparedOutput)
         }
-
         await sendOutput(preparedOutput)
         closePopup()
     }
@@ -123,6 +117,7 @@
     async function onConfirm(): Promise<void> {
         error = null
         try {
+            updateNewTransactionDetails({ expirationDate, giftStorageDeposit })
             await checkActiveProfileAuth(validateAndSendOutput, { stronghold: true, ledger: false })
         } catch (err) {
             if (!error) {
@@ -136,14 +131,6 @@
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                asset,
-                amount,
-                unit,
-                recipient,
-                metadata,
-                tag,
-            },
         })
     }
 
@@ -184,7 +171,7 @@
                 <ExpirationTimePicker
                     slot="value"
                     bind:value={expirationDate}
-                    initialSelected={storageDeposit ? '1day' : 'none'}
+                    initialSelected={initialExpirationDate}
                     disabled={disableChangeExpiration}
                 />
             </KeyValueBox>

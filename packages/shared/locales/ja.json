@@ -215,8 +215,9 @@
         "connectLedger": {
             "title": "LedgerをFireflyに接続する",
             "body": "FireflyでLedgerデバイスを見つけるには、公式のLedger Liveアプリケーションが閉じていることを確認してください。",
-            "trafficLight1": "Ledgerを接続して、PINで使用してロックを解除します",
-            "trafficLight2": "Ledgerで新しいIOTAアプリを開く",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Ledgerが接続されていない場合の 案内"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +469,11 @@
                 "hardware": {
                     "title": "ハードウェアデバイス",
                     "statuses": {
-                        "appNotOpen": "{protocol} app not open",
-                        "connected": "接続しました",
-                        "locked": "ロック済み",
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
                         "mnemonicMismatch": "間違ったLedgerまたはニーモニックです",
-                        "notDetected": "検出されませんでした",
+                        "notConnected": "Ledger not connected",
                         "otherConnected": "アプリを開いています"
                     }
                 },
@@ -548,6 +549,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
@@ -722,7 +731,11 @@
             "bodyFirefly": "Firefly は完了するまで無効になります。トークンの移行はその後も可能です。"
         },
         "ledgerNotConnected": {
-            "connect": "Open the {protocol} app on your Ledger device to continue"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "続行するには、Ledgerデバイスに表示されている要求を確認してください"
@@ -750,14 +763,8 @@
             }
         },
         "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "残っているアドレスの確認",
-                "info": "Ledgerに表示される、残っているアドレスと下に表示されるアドレスが一致していることを確認してください。それらが一致する場合は、要求に応じてLedgerの両方のボタンを押してください"
-            },
-            "transaction": {
-                "title": "Confirm transaction",
-                "info": "Ledgerに表示される、取引情報と下に表示されるアドレスが一致していることを確認してください。それらが一致する場合は、要求に応じてLedgerの両方のボタンを押してください"
-            }
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "入金アドレスの確認",
@@ -891,6 +898,7 @@
         "dismiss": "拒否する",
         "claim": "Claim",
         "claiming": "Claiming",
+        "claimingRewards": "Claiming rewards",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -1026,7 +1034,11 @@
         "unhideToken": "Unhide token",
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata"
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing"
     },
     "general": {
         "recipient": "Recipient",
@@ -1042,6 +1054,9 @@
         "received": "受取り",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "sendPayment": "支払いの送信",
@@ -1185,6 +1200,7 @@
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
+        "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "合計: {balance}",
@@ -1193,7 +1209,8 @@
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
         "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
@@ -1201,7 +1218,11 @@
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded"
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash"
     },
     "filters": {
         "title": "Filters",
@@ -1285,10 +1306,12 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
+            "invalidNumber": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "ウォレットを変更するには、同期が完了するまでお待ちください。",
@@ -1312,6 +1335,7 @@
             "success": "All token metadata has been reset and refreshed"
         },
         "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
             "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
         },
         "findShimmerRewards": {
@@ -1319,7 +1343,7 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards",
+            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
             "error": "An error occurred while claiming rewards"
         }
     },
@@ -1329,7 +1353,9 @@
             "duplicate": "この名前のプロフィールは既に存在します。",
             "delete": {
                 "nonEmptyAccounts": "プロフィールを削除する前に、すべての残高を転送する必要があります。"
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "パスワードが一致しません。",
@@ -1369,7 +1395,9 @@
             "syncing": "ウォレットの同期中にエラーが発生しました。",
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "notLast": "You can only delete your last wallet.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "アドレスは {length, plural, one {# 文字} other {# 文字}}でなければなりません。",
@@ -1388,7 +1416,9 @@
             "leavingDust": "アドレスに1Mi 未満を残すことはできません。",
             "cancelled": "取引はキャンセルされました。",
             "transaction": "取引の送信中にエラーが発生しました。もう一度やり直してください。",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "有効なURLを入力してください。",
@@ -1400,7 +1430,8 @@
             "https": "HTTPS が必要です。現時点では、HTTP 経由の安全でない接続はサポートされていません。",
             "duplicate": "このノードは既に追加されています。",
             "unsynced": "ノードは同期されていません。",
-            "noSynced": "同期された利用可能なノードはありません。",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "すべてのノードから回答を取得できませんでした。",
             "forbidden": "このノード接続は禁止されています。",
             "pluginNotAvailable": "{nodePlugin}プラグインは現在のノードでは使用できません。",
@@ -1579,7 +1610,8 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {
