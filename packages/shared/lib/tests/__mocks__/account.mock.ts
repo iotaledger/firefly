@@ -10,6 +10,7 @@ import {
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
+    FilterOptions,
     MintTokenTransaction,
     OutputData,
     OutputOptions,
@@ -129,11 +130,11 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    listOutputs(): Promise<[]> {
+    listOutputs(filterOptions?: FilterOptions): Promise<[]> {
         return Promise.resolve([])
     }
 
-    listUnspentOutputs(): Promise<[]> {
+    listUnspentOutputs(filterOptions?: FilterOptions): Promise<[]> {
         return Promise.resolve([])
     }
 
