@@ -21,6 +21,7 @@
     $: if (asset !== previousAsset) {
         previousAsset = asset
         unit = null
+        amount = ''
     }
     $: rawAmount = generateRawAmount(amount, unit, asset?.metadata)
 
