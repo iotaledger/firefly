@@ -10,6 +10,8 @@
         appVersionDetails,
         AppStage,
         appStage,
+        PlatformOption,
+        platform,
     } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { formatDate, localize } from '@core/i18n'
@@ -39,8 +41,7 @@
                 checkForAppUpdate()
             }
         }
-        const os = await Platform.getOS()
-        hasAutoUpdate = os !== 'win32'
+        hasAutoUpdate = $platform !== PlatformOption.Windows
     })
 </script>
 

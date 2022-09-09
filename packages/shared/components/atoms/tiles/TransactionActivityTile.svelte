@@ -145,13 +145,13 @@
                 </div>
 
                 <div class="flex flex-row justify-between">
-                    <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
+                    <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
                         {localize(
                             data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
                             { values: { account: subjectLocale } }
                         )}
                     </Text>
-                    <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
+                    <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
                         {fiatAmount}
                     </Text>
                 </div>

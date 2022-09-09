@@ -41,8 +41,8 @@
 
     $: transactionDetails = {
         asset,
+        type: activity?.type,
         transactionTime: activity?.time,
-        direction: ActivityDirection.Out,
         inclusionState: activity?.inclusionState,
         rawAmount: activity?.data.rawAmount,
         formattedFiatValue: activity?.getFiatAmount(
@@ -55,6 +55,8 @@
         unit: asset?.metadata?.unit,
         ...(activity?.data.type === ActivityType.Transaction && {
             asyncStatus: activity?.data.asyncStatus,
+            direction: activity?.data.direction,
+            isInternal: activity?.data.isInternal,
             claimedDate: activity?.data.claimedDate,
             claimingTransactionId: activity?.data.claimingTransactionId,
             expirationDate: activity?.data.expirationDate,

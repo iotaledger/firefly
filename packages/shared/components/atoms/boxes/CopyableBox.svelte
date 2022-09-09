@@ -9,6 +9,7 @@
     export let value = ''
     export let isCopyable = true
     export let clearPadding = false
+    export let clearBoxPadding = false
     export let offset: number
     export let classes = ''
 
@@ -37,7 +38,7 @@
         on:click={onClick}
         class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'}"
     >
-        <Box {clearPadding} {...$$restProps} {classes}>
+        <Box clearPadding={clearBoxPadding} {...$$restProps} {classes}>
             <slot />
         </Box>
     </button>

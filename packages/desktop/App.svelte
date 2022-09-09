@@ -21,6 +21,8 @@
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { initialiseOnboardingProfile } from '@contexts/onboarding'
+    import { Platform } from '@lib/platform'
+    import { setPlatform } from '@core/app/stores/platform.store'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -114,6 +116,9 @@
 
         await cleanupEmptyProfiles()
         // loadPersistedProfileIntoActiveProfile($activeProfileId)
+
+        const platform = await Platform.getOS()
+        setPlatform(platform)
     })
 
     onDestroy(() => {
