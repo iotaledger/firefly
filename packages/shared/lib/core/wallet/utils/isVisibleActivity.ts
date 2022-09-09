@@ -17,6 +17,7 @@ import {
 } from '../enums'
 import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@lib/utils/dateUtils'
 import { ActivityFilter } from '../interfaces'
+import { generateRawAmount } from '.'
 
 // Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
 export function isVisibleActivity(activity: Activity): boolean {
@@ -78,8 +79,12 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.amount.active) {
-        const activityAmount =
-            activity.data.rawAmount / 10 ** getAssetFromPersistedAssets(activity.data.assetId).metadata.decimals
+        const asset = getAssetFromPersistedAssets(activity.data.assetId)
+        const activityAmount = generateRawAmount(
+            String(activity.data.rawAmount),
+            asset?.metadata?.unit,
+            asset?.metadata
+        )
         if (filter.amount.selected === NumberFilterOption.Equal && filter.amount.subunit.type === 'single') {
             const isEqual = activityAmount === parseCurrency(filter.amount.subunit.amount)
             if (!isEqual) {

@@ -171,6 +171,7 @@
                 <floating-label {disabled} class:hasFocus class:floating-active={value && label}>{label}</floating-label
                 >
             {/if}
+            <slot />
         </InputContainer>
     </div>
     {#if capsLockWarning && hasFocus && capsLockOn}
