@@ -7,8 +7,15 @@ import { isValueInUnitRange, unitToValue } from '@lib/utils'
 import { Activity } from '../classes/activity.class'
 import { allAccountActivities } from './all-account-activities.store'
 import { isVisibleActivity } from '../utils/isVisibleActivity'
-import { ActivityFilter } from '../interfaces/filter.interface'
-import { NumberFilterOption, BooleanFilterOption, TypeFilterOption, StatusFilterOption, ActivityType } from '../enums'
+import { ActivityFilter } from '../interfaces/filter/filter.interface'
+import {
+    NumberFilterOption,
+    BooleanFilterOption,
+    TypeFilterOption,
+    StatusFilterOption,
+    ActivityType,
+    DateFilterOption,
+} from '../enums'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -57,6 +64,17 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         localeKey: 'filters.type',
         selected: TypeFilterOption.Incoming,
         choices: [TypeFilterOption.Incoming, TypeFilterOption.Outgoing, TypeFilterOption.Internal],
+    },
+    date: {
+        active: false,
+        type: 'date',
+        localeKey: 'filters.date',
+        selected: DateFilterOption.Equals,
+        choices: Object.values(DateFilterOption),
+        subunit: {
+            type: 'single',
+            value: undefined,
+        },
     },
     showRejected: {
         active: false,
