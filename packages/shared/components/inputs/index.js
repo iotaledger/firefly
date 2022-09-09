@@ -1,3 +1,4 @@
+export { default as AccountInput } from './AccountInput.svelte'
 export { default as AmountInput } from './AmountInput.svelte'
 export { default as AssetAmountInput } from './AssetAmountInput.svelte'
 export { default as AssetDropdown } from './AssetDropdown.svelte'

@@ -9,6 +9,7 @@
     import { fade } from 'svelte/transition'
 
     // Popups
+    import AccountSwitcherPopup from './AccountSwitcherPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
@@ -84,6 +85,7 @@
     let popupContent
 
     const types = {
+        accountSwitcher: AccountSwitcherPopup,
         unlockStronghold: UnlockStrongholdPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,

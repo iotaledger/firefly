@@ -18,6 +18,7 @@
     import { Developer, Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import TopNavigation from './TopNavigation.svelte'
+    import { closePopup, openPopup } from '@lib/popup'
 
     $: $activeProfile, saveActiveProfile()
 
@@ -71,7 +72,16 @@
     // TODO: handle deep link requests for new send form
     const handleDeepLinkRequest = (data: string): void => {
         if ($activeProfile?.hasLoadedAccounts) {
-            handleDeepLink(data)
+            openPopup({
+                type: 'accountSwitcher',
+                overflow: true,
+                props: {
+                    onConfirm: () => {
+                        closePopup()
+                        handleDeepLink(data)
+                    },
+                },
+            })
         }
     }
 
