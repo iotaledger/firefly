@@ -56,6 +56,7 @@
 
     let tagError: string = ''
     function validateTag(): Promise<void> {
+        tagError = ''
         if (getByteLengthOfString(tag) > 64) {
             tagError = localize('error.send.tagTooLong')
             return Promise.reject(tagError)
@@ -64,6 +65,7 @@
 
     let metadataError: string = ''
     function validateMetadata(): Promise<void> {
+        metadataError = ''
         if (getByteLengthOfString(metadata) > 8192) {
             metadataError = localize('error.send.metadataTooLong')
             return Promise.reject(metadataError)
