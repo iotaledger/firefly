@@ -13,6 +13,7 @@ import {
     StatusFilterOption,
     ActivityType,
 } from '../enums'
+import { generateRawAmount } from '.'
 
 // Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
 export function isVisibleActivity(activity: Activity): boolean {
@@ -37,8 +38,12 @@ export function isVisibleActivity(activity: Activity): boolean {
         }
     }
     if (filter.amount.active) {
-        const activityAmount =
-            activity.data.rawAmount / 10 ** getAssetFromPersistedAssets(activity.data.assetId).metadata.decimals
+        const asset = getAssetFromPersistedAssets(activity.data.assetId)
+        const activityAmount = generateRawAmount(
+            String(activity.data.rawAmount),
+            asset?.metadata?.unit,
+            asset?.metadata
+        )
         if (filter.amount.selected === NumberFilterOption.Equal && filter.amount.subunit.type === 'single') {
             const isEqual = activityAmount === parseCurrency(filter.amount.subunit.amount)
             if (!isEqual) {
