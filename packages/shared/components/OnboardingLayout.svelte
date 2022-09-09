@@ -2,6 +2,8 @@
     import { localize } from '@core/i18n'
     import { Icon, Text } from 'shared/components'
     import { mobile } from '@core/app'
+    import { Platform } from '@lib/platform'
+    import { onMount } from 'svelte/types/runtime/internal/lifecycle'
 
     export let allowBack = true
     export let busy = false
@@ -12,6 +14,11 @@
     // TODO: Separate mobile
     let mobileTopContentHeight,
         leftpaneContentHeight = 0
+
+    let isMacOs = false
+    onMount(async () => {
+        isMacOs = (await Platform.getOS()) === 'darwin'
+    })
 </script>
 
 <!-- https://github.com/sveltejs/svelte/issues/4546 -->
@@ -63,7 +70,9 @@
                     {#if allowBack}
                         <button
                             on:click={onBackClick}
-                            class="mb-8 w-6 h-6 {busy && 'pointer-events-none opacity-50'} highlight"
+                            class="mb-8 w-6 h-6 {busy && 'pointer-events-none opacity-50'} highlight {isMacOs
+                                ? 'mt-9'
+                                : ''}"
                             disabled={busy}
                             aria-label={localize('actions.back')}
                         >
