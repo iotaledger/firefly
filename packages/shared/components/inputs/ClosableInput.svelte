@@ -16,7 +16,7 @@
         buttonElement.focus()
     }
 
-    function handleClose() {
+    function onCloseClick(): void {
         open = false
         value = ''
     }
@@ -35,7 +35,7 @@
             {placeholder}
             {...$$restProps}
         >
-            <button on:click={handleClose}>
+            <button on:click={onCloseClick}>
                 <Icon
                     icon="close"
                     classes="text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"

@@ -13,6 +13,7 @@ import { openPopup } from '@lib/popup'
 import { SendOperationParameter } from '../../../enums'
 import { InvalidAddressError, MetadataLengthError, NoAddressSpecifiedError, TagLengthError } from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
+import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -50,12 +51,12 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     }
 
     const metadata = searchParams.get(SendOperationParameter.Metadata)
-    if (metadata.length > 8192) {
+    if (getByteLengthOfString(metadata) > 8192) {
         throw new MetadataLengthError()
     }
 
     const tag = searchParams.get(SendOperationParameter.Tag)
-    if (tag.length > 64) {
+    if (getByteLengthOfString(tag) > 64) {
         throw new TagLengthError()
     }
     const asset = get(visibleSelectedAccountAssets)?.baseCoin
