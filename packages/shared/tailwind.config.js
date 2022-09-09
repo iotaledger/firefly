@@ -193,6 +193,8 @@ module.exports = {
         },
         extend: {
             fontSize: {
+                8: pxToRem(8),
+                9: pxToRem(9),
                 10: pxToRem(10),
                 11: pxToRem(11),
                 12: pxToRem(12),

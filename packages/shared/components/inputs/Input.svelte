@@ -170,6 +170,7 @@
                 <floating-label {disabled} class:hasFocus class:floating-active={value && label}>{label}</floating-label
                 >
             {/if}
+            <slot />
         </InputContainer>
     </div>
     {#if capsLockWarning && hasFocus && capsLockOn}
@@ -206,7 +207,7 @@
         @apply opacity-0;
         @apply pointer-events-none;
         @apply absolute;
-        @apply left-3;
+        @apply left-4;
         @apply select-none;
         @apply whitespace-nowrap;
         @apply w-auto;

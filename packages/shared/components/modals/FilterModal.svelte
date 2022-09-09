@@ -4,6 +4,7 @@
     import type { Filter } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { Button } from 'shared/components'
+    import { activeProfileId } from '@core/profile'
 
     export let modal: Modal
     export let filter: Filter
@@ -17,13 +18,14 @@
             filter[key].value = undefined
         }
         onSetFilters()
-        modal.toggle()
     }
 
     function confirm(): void {
         onSetFilters()
         modal.toggle()
     }
+
+    $: $activeProfileId, clear()
 </script>
 
 <Modal
@@ -33,14 +35,14 @@
     classes="overflow-visible"
 >
     <div class="filter-modal">
-        <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3">
+        <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3 rounded-t-xl">
             <Button secondary xsmall onClick={clear}>{localize('actions.clear')}</Button>
             <Text fontWeight={FontWeight.semibold} fontSize="14" classes="text-center flex grow-1"
                 >{localize('filters.title')}</Text
             >
-            <Button disabled={!isChanged} xsmall onClick={confirm}>{localize('actions.done')}</Button>
+            <Button disabled={!isChanged} xsmall onClick={confirm}>{localize('actions.apply')}</Button>
         </div>
-        <div class="pb-1">
+        <div>
             <slot />
         </div>
     </div>
@@ -48,6 +50,7 @@
 
 <style type="text/scss">
     .filter-modal {
+        border-radius: inherit;
         width: 254px;
     }
 </style>

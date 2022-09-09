@@ -11,8 +11,9 @@ import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 
 import { SendOperationParameter } from '../../../enums'
-import { InvalidAddressError, NoAddressSpecifiedError } from '../../../errors'
+import { InvalidAddressError, MetadataLengthError, NoAddressSpecifiedError, TagLengthError } from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
+import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -49,13 +50,20 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         throw new InvalidAddressError()
     }
 
+    const metadata = searchParams.get(SendOperationParameter.Metadata)
+    if (getByteLengthOfString(metadata) > 8192) {
+        throw new MetadataLengthError()
+    }
+
+    const tag = searchParams.get(SendOperationParameter.Tag)
+    if (getByteLengthOfString(tag) > 64) {
+        throw new TagLengthError()
+    }
     const asset = get(visibleSelectedAccountAssets)?.baseCoin
 
     const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
 
     const unit = searchParams.get(SendOperationParameter.Unit)
-    const metadata = searchParams.get(SendOperationParameter.Metadata)
-    const tag = searchParams.get(SendOperationParameter.Tag)
     const recipient: Subject = { type: 'address', address }
     const giftStorageDeposit = Boolean(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = Boolean(searchParams.get(SendOperationParameter.DisableToggleGift))
