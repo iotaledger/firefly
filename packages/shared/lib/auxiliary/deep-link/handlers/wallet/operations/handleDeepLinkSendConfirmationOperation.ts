@@ -2,16 +2,17 @@ import { get } from 'svelte/store'
 import { BASE_TOKEN, networkHrp } from '@core/network'
 import { activeProfile } from '@core/profile'
 import {
+    getAssetById,
     INewTransactionDetails,
+    selectedAccountAssets,
     Subject,
     updateNewTransactionDetails,
-    visibleSelectedAccountAssets,
 } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 
 import { SendOperationParameter } from '../../../enums'
-import { InvalidAddressError, NoAddressSpecifiedError } from '../../../errors'
+import { InvalidAddressError, NoAddressSpecifiedError, UnknownAssetError } from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
@@ -49,7 +50,11 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         throw new InvalidAddressError()
     }
 
-    const asset = get(visibleSelectedAccountAssets)?.baseCoin
+    const assetId = searchParams.get(SendOperationParameter.AssetId)
+    const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
+    if (!asset) {
+        throw new UnknownAssetError()
+    }
 
     const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
 

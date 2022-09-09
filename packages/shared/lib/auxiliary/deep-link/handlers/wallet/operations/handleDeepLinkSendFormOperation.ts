@@ -3,14 +3,15 @@ import {
     INewTransactionDetails,
     Subject,
     updateNewTransactionDetails,
-    visibleSelectedAccountAssets,
+    selectedAccountAssets,
+    getAssetById,
 } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'
-import { InvalidAddressError, NoAddressSpecifiedError } from '../../../errors'
+import { InvalidAddressError, NoAddressSpecifiedError, UnknownAssetError } from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
@@ -44,7 +45,12 @@ function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionD
         throw new InvalidAddressError()
     }
 
-    const asset = get(visibleSelectedAccountAssets)?.baseCoin
+    const assetId = searchParams.get(SendOperationParameter.AssetId)
+    const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
+    if (!asset) {
+        throw new UnknownAssetError()
+    }
+
     const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
 
     const unit = searchParams.get(SendOperationParameter.Unit)

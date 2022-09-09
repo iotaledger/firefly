@@ -3,8 +3,8 @@ import { persistedAssets } from './persisted-assets.store'
 import { activeProfileId } from '@core/profile'
 import { selectedAccountId } from '@core/account/stores/selected-account-id.store'
 import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
-import { derived, Readable, writable, Writable } from 'svelte/store'
-import { AssetFilter } from '../interfaces'
+import { derived, get, Readable, writable, Writable } from 'svelte/store'
+import { AssetFilter, IAsset } from '../interfaces'
 import { VerificationStatus, BooleanFilterOption } from '../enums'
 
 export const assetFilter: Writable<AssetFilter> = writable({
@@ -42,3 +42,13 @@ export const visibleSelectedAccountAssets: Readable<IAccountAssets> = derived(
         nativeTokens: $selectedAccountAssets.nativeTokens.filter((asset) => !asset.hidden),
     })
 )
+
+export function getAssetById(assetId: string): IAsset {
+    const { baseCoin, nativeTokens } = get(selectedAccountAssets)
+
+    if (assetId === baseCoin.id) {
+        return baseCoin
+    } else {
+        return nativeTokens?.find((token) => token.id === assetId)
+    }
+}
