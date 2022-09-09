@@ -1,6 +1,8 @@
 <script lang="typescript">
     import { Box } from 'shared/components/atoms'
     import { Error } from 'shared/components/'
+    import { clickOutside } from '@lib/actions'
+    import { createEventDispatcher } from 'svelte'
 
     export let inputElement: HTMLInputElement
 
@@ -14,9 +16,14 @@
     export let clearBorder = false
 
     const tabindex = Object.keys($$slots) ? -1 : 0 // if the slot is not empty then makes the button not tabbable
+    const dispatch = createEventDispatcher()
+
+    function handleClickOutside(): void {
+        dispatch('clickOutside')
+    }
 </script>
 
-<div class="w-full flex flex-col space-y-1">
+<div class="w-full flex flex-col space-y-1" use:clickOutside on:clickOutside={handleClickOutside}>
     <button
         class="cursor-text w-full flex flex-row"
         type="button"

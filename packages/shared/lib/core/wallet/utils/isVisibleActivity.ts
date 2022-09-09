@@ -12,19 +12,52 @@ import {
     TypeFilterOption,
     StatusFilterOption,
     ActivityType,
+    DateFilterOption,
+    DateUnit,
 } from '../enums'
+import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@lib/utils/dateUtils'
+import { ActivityFilter } from '../interfaces'
 import { generateRawAmount } from '.'
 
 // Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
 export function isVisibleActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
 
+    if (!isVisibleWithActiveHiddenFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveRejectedFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveAssetFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveAmountFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveDateFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveStatusFilter(activity, filter)) {
+        return false
+    }
+    if (!isVisibleWithActiveTypeFilter(activity, filter)) {
+        return false
+    }
+    return true
+}
+
+function isVisibleWithActiveHiddenFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
         activity.isAssetHidden
     ) {
         return false
     }
+    return true
+}
+
+function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
         activity.data.type === ActivityType.Transaction &&
@@ -32,11 +65,19 @@ export function isVisibleActivity(activity: Activity): boolean {
     ) {
         return false
     }
+    return true
+}
+
+function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.asset.active && filter.asset.selected) {
         if (filter.asset.selected && activity.data.assetId !== filter.asset.selected) {
             return false
         }
     }
+    return true
+}
+
+function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.amount.active) {
         const asset = getAssetFromPersistedAssets(activity.data.assetId)
         const activityAmount = generateRawAmount(
@@ -71,6 +112,77 @@ export function isVisibleActivity(activity: Activity): boolean {
             }
         }
     }
+    return true
+}
+
+function isVisibleWithActiveDateFilter(activity: Activity, filter: ActivityFilter): boolean {
+    if (filter.date.active) {
+        if (filter.date.selected === DateFilterOption.Equals && filter.date.subunit.type === 'single') {
+            const filterDate = new Date(filter.date.subunit.value)
+            if (!datesOnSameDay(activity.time, filterDate)) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.Before && filter.date.subunit.type === 'single') {
+            const filterDate = new Date(filter.date.subunit.value)
+            if (!dateIsBeforeOtherDate(activity.time, filterDate)) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.After && filter.date.subunit.type === 'single') {
+            const filterDate = new Date(filter.date.subunit.value)
+            if (!dateIsAfterOtherDate(activity.time, filterDate)) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.AfterOrEquals && filter.date.subunit.type === 'single') {
+            const filterDate = new Date(filter.date.subunit.value)
+            if (!(dateIsAfterOtherDate(activity.time, filterDate) || datesOnSameDay(activity.time, filterDate))) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.Range && filter.date.subunit.type === 'range') {
+            const startFilterDate = new Date(filter.date.subunit.start)
+            const endFilterDate = new Date(filter.date.subunit.end)
+
+            const isInRange =
+                dateIsAfterOtherDate(activity.time, startFilterDate) &&
+                dateIsBeforeOtherDate(activity.time, endFilterDate)
+            const isOnBoundries =
+                datesOnSameDay(activity.time, startFilterDate) || datesOnSameDay(activity.time, endFilterDate)
+            if (!(isInRange || isOnBoundries)) {
+                return false
+            }
+        }
+        if (filter.date.selected === DateFilterOption.Last && filter.date.subunit.type === 'unit') {
+            const startFilterDate = new Date()
+            const endFilterDate = new Date()
+            switch (filter.date.subunit.unit) {
+                case DateUnit.Days:
+                    startFilterDate.setDate(startFilterDate.getDate() - Number(filter.date.subunit.amount))
+                    break
+                case DateUnit.Months:
+                    startFilterDate.setMonth(startFilterDate.getMonth() - Number(filter.date.subunit.amount))
+                    break
+                case DateUnit.Years:
+                    startFilterDate.setFullYear(startFilterDate.getFullYear() - Number(filter.date.subunit.amount))
+                    break
+            }
+
+            const isInRange =
+                dateIsAfterOtherDate(activity.time, startFilterDate) &&
+                dateIsBeforeOtherDate(activity.time, endFilterDate)
+            const isOnBoundries =
+                datesOnSameDay(activity.time, startFilterDate) || datesOnSameDay(activity.time, endFilterDate)
+            if (!(isInRange || isOnBoundries)) {
+                return false
+            }
+        }
+    }
+    return true
+}
+
+function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.status.active && filter.status.selected) {
         if (
             filter.status.selected === StatusFilterOption.Confirmed &&
@@ -99,6 +211,10 @@ export function isVisibleActivity(activity: Activity): boolean {
             return false
         }
     }
+    return true
+}
+
+function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.type.active && filter.type.selected) {
         if (
             filter.type.selected === TypeFilterOption.Incoming &&

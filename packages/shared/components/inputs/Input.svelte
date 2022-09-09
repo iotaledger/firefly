@@ -207,7 +207,7 @@
         @apply opacity-0;
         @apply pointer-events-none;
         @apply absolute;
-        @apply left-3;
+        @apply left-4;
         @apply select-none;
         @apply whitespace-nowrap;
         @apply w-auto;

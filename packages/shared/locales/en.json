@@ -1105,6 +1105,7 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Balance",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
@@ -1258,6 +1259,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",

@@ -6,9 +6,11 @@
     import { localize } from '@core/i18n'
 
     export let value: Date
+    export let startDate: Date = null
+    export let mode: 'auto' | 'datetime' | 'date' | 'time' = 'auto'
 
     const dispatch = createEventDispatcher()
-    const sveltyPickerStartDate = convertDateToSveltyPickerFormat(new Date())
+    const sveltyPickerStartDate = convertDateToSveltyPickerFormat(startDate)
 
     let sveltyPickerDate = convertDateToSveltyPickerFormat(value) ?? sveltyPickerStartDate
     let tooltip: Tooltip
@@ -31,6 +33,7 @@
     <SveltyPicker
         pickerOnly
         autoclose
+        {mode}
         clearBtn={false}
         todayBtn={false}
         startDate={sveltyPickerStartDate}
