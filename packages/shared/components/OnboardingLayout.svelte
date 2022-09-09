@@ -3,7 +3,7 @@
     import { Icon, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { Platform } from '@lib/platform'
-    import { onMount } from 'svelte/types/runtime/internal/lifecycle'
+    import { onMount } from 'svelte'
 
     export let allowBack = true
     export let busy = false
