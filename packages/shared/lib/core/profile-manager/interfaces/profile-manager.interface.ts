@@ -11,6 +11,7 @@ import {
     NodeInfoWrapper,
     WalletEvent,
 } from '@iota/wallet'
+import { WalletApiEventHandler } from '@core/profile-manager'
 
 export interface IProfileManager {
     id: string
@@ -29,7 +30,7 @@ export interface IProfileManager {
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     isStrongholdPasswordAvailable(): Promise<boolean>
-    listen(eventTypes: EventType[], callback: (error: Error, result: string) => void): void
+    listen(eventTypes: EventType[], callback: WalletApiEventHandler): void
     clearListeners(eventTypes: EventType[]): void
     recoverAccounts(
         accountGapLimit: number,

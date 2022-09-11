@@ -1,7 +1,7 @@
 import { IOutputResponse, ITransactionPayload } from '@iota/types'
 import { OutputData } from '@iota/wallet/types/output'
 
-export type NewOutputEvent = {
+export interface INewOutputEvent {
     output: OutputData
     transaction: ITransactionPayload
     transactionInputs: IOutputResponse[]

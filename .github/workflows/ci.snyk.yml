@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    # Only run on push events or PRs from iotaledger/firefly, skip on PRs from forks
+    # Only run on push events-handlers or PRs from iotaledger/firefly, skip on PRs from forks
     # Secret variables cannot be exposed to PRs from forks
     if: github.event_name == 'push'
     runs-on: ubuntu-20.04

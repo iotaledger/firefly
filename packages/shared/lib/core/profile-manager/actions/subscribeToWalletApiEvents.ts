@@ -1,15 +1,25 @@
 import { get, Writable } from 'svelte/store'
 
+import { EventType } from '@iota/wallet'
+
 import {
     handleNewOutputEvent,
     handleSpentOutputEvent,
     handleTransactionInclusionEvent,
     handleTransactionProgressEvent,
-} from '../api'
-import { IProfileManager } from '../interfaces'
+} from '../helpers/events-handlers'
+import { IProfileManager, IWalletApiEventSubscriptionConfiguration } from '../interfaces'
 import { profileManager as _profileManager } from '../stores'
 
-export function subscribeToWalletApiEvents(profileManager: Writable<IProfileManager> = _profileManager): void {
+export function subscribeToWalletApiEvents(configuration: IWalletApiEventSubscriptionConfiguration): void {
+    const { eventMap, profileManager } = configuration
+    const manager = profileManager ? profileManager : get(_profileManager)
+    Object.entries(eventMap).forEach(([event, callback]) => {
+        manager.listen([event as EventType], callback)
+    })
+}
+
+export function subscribeToWalletApiEventsV1(profileManager: Writable<IProfileManager> = _profileManager): void {
     const manager = get(profileManager)
 
     manager.listen([], (error, result) => {

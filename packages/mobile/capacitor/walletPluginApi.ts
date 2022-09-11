@@ -106,7 +106,7 @@ export function init(id: string): {
             // we cant remove listener because we are working with plugin listener, not with polls
             // investigate what liseners must to be stopped on load at node api
             // void walletListener.remove()
-            // we must use here capacitor events kinda app states??
+            // we must use here capacitor events-handlers kinda app states??
         },
     }
 }
