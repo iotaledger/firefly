@@ -1,9 +1,6 @@
+export * from './events-payloads'
+
 export * from './api.interface'
-export * from './new-output-event.interface'
-export * from './prepared-transaction.interface'
-export * from './prepared-transaction-essence-hash.interface'
 export * from './profile-manager.interface'
-export * from './spent-output-event.interface'
-export * from './transaction-inclusion-event.interface'
 export * from './wallet-api-event-payload-wrapper.interface'
 export * from './wallet-api-event-subscription-configuration.interface'

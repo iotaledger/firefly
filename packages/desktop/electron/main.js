@@ -210,7 +210,7 @@ function isUrlAllowed(targetUrl) {
 }
 
 /**
- * Handles url navigation events-handlers
+ * Handles url navigation events
  */
 const handleNavigation = (e, url) => {
     e.preventDefault()

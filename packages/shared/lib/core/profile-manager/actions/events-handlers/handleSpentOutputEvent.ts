@@ -6,16 +6,20 @@ import {
     updateActivityDataByTransactionId,
 } from '@core/wallet/stores/all-account-activities.store'
 import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
-import { validateWalletApiEvent } from '@core/profile-manager/helpers'
-import { ISpentOutputEvent } from '@core/profile-manager'
+
+import { ISpentOutputEventPayload } from '../../interfaces'
+import { validateWalletApiEvent } from '../../utils'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: string): Promise<void> {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent)
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-    await handleSpentOutputEventInternal(accountIndex, payload as ISpentOutputEvent)
+    await handleSpentOutputEventInternal(accountIndex, payload as ISpentOutputEventPayload)
 }
 
-export async function handleSpentOutputEventInternal(accountIndex: number, payload: ISpentOutputEvent): Promise<void> {
+export async function handleSpentOutputEventInternal(
+    accountIndex: number,
+    payload: ISpentOutputEventPayload
+): Promise<void> {
     await syncBalance(accountIndex.toString())
     const transactionId = payload?.output?.metadata?.transactionId
     const activity = get(allAccountActivities)?.[Number(accountIndex.toString())]?.find(

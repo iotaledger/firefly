@@ -9,16 +9,16 @@ import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessG
 import { Bech32Helper } from '@lib/bech32Helper'
 import { Converter } from '@lib/converter'
 
-import { validateWalletApiEvent } from '../../helpers'
-import { INewOutputEvent } from '../../interfaces'
+import { INewOutputEventPayload } from '../../interfaces'
+import { validateWalletApiEvent } from '../../utils'
 
 export function handleNewOutputEvent(error: Error, rawEvent: string): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent)
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-    handleNewOutputEventInternal(accountIndex, payload as INewOutputEvent)
+    handleNewOutputEventInternal(accountIndex, payload as INewOutputEventPayload)
 }
 
-export function handleNewOutputEventInternal(accountIndex: number, payload: INewOutputEvent): void {
+export function handleNewOutputEventInternal(accountIndex: number, payload: INewOutputEventPayload): void {
     const account = get(activeAccounts)?.find((account) => account.id === accountIndex.toString())
     const output = payload?.output
 

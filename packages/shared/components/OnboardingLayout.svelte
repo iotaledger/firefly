@@ -29,7 +29,7 @@
                 <button on:click={onBackClick} class="absolute top-3 left-0" disabled={busy}>
                     <Icon
                         icon="arrow-left"
-                        classes={busy ? 'pointer-events-handlers-none text-gray-500' : 'cursor-pointer text-blue-500'}
+                        classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'}
                     />
                 </button>
             {/if}
@@ -69,9 +69,7 @@
                         >
                             <Icon
                                 icon="arrow-left"
-                                classes={busy
-                                    ? 'pointer-events-handlers-none text-gray-500'
-                                    : 'cursor-pointer text-blue-500'}
+                                classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'}
                             />
                         </button>
                     {/if}

@@ -1,11 +1,10 @@
-import { BaseError } from '@core/error'
+import { BaseError, DEFAULT_APP_ERROR_PARAMETERS } from '@core/error'
 
 export class MissingShimmerClaimingProfileManagerError extends BaseError {
     constructor() {
         super({
-            message: 'Missing Shimmer claiming profile manager',
-            logToConsole: true,
-            saveToErrorLog: true,
+            ...DEFAULT_APP_ERROR_PARAMETERS,
+            message: 'error.shimmerClaiming.missingProfileManager',
         })
     }
 }

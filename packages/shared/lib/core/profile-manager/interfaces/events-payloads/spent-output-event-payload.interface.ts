@@ -1,5 +1,5 @@
 import { OutputData } from '@iota/wallet'
 
-export interface ISpentOutputEvent {
+export interface ISpentOutputEventPayload {
     output: OutputData
 }

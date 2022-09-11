@@ -1,8 +1,12 @@
-import { INewOutputEvent, ISpentOutputEvent, ITransactionInclusionEvent } from '@core/profile-manager/interfaces'
-import { TransactionProgressEvent } from './transaction-progress-event.type'
+import {
+    INewOutputEventPayload,
+    ISpentOutputEventPayload,
+    ITransactionInclusionEventPayload,
+} from '@core/profile-manager/interfaces'
+import { TransactionProgressEventPayload } from './transaction-progress-event.type'
 
 export type WalletApiEventPayload =
-    | INewOutputEvent
-    | ISpentOutputEvent
-    | ITransactionInclusionEvent
-    | TransactionProgressEvent
+    | INewOutputEventPayload
+    | ISpentOutputEventPayload
+    | ITransactionInclusionEventPayload
+    | TransactionProgressEventPayload

@@ -54,7 +54,7 @@ export interface UTXOInput {
 }
 
 /**
- * UTXO data as it is used in the events-handlers of
+ * UTXO data as it is used in the events of
  * transferring funds between addresses.
  */
 export interface UTXOEventData {

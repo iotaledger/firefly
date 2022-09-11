@@ -30,7 +30,8 @@ import { ILoginOptions } from '../../interfaces'
 import { logout } from './logout'
 import { pollLedgerNanoStatus } from '@core/ledger'
 import { isLedgerProfile } from '@core/profile/utils'
-import { subscribeToWalletApiEventsForActiveProfile } from '@core/profile-manager/actions/subscribeToWalletApiEventsForActiveProfile'
+
+import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)

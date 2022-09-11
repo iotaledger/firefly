@@ -2,7 +2,7 @@
 	@component Drawer, slides in-out from the bottom or right and contains
 	the route contents handling scroll.
 	Spans the height or width of the screen, with everything behind it visible but dimmed.
-	Uses a Svelte Action to generate custom syntetic slide, swipe and tap events-handlers.
+	Uses a Svelte Action to generate custom syntetic slide, swipe and tap events.
 
 	@prop {number} [dimLength] - Dim length in CSS pixels.
 	@prop {boolean} [opened] - Opens drawer on load.
