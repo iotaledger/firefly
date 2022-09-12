@@ -51,9 +51,8 @@ function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionD
         throw new UnknownAssetError()
     }
 
+    const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
     const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
-
-    const unit = searchParams.get(SendOperationParameter.Unit)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)
     const recipient: Subject = address ? { type: 'address', address } : undefined
