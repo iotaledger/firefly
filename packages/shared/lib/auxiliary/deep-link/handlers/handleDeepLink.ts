@@ -24,36 +24,27 @@ export function handleDeepLink(input: string): void {
 
     try {
         const url = new URL(input)
-        if (url.protocol === `${process.env.APP_PROTOCOL}:`) {
-            openPopup({
-                type: 'accountSwitcher',
-                overflow: true,
-                props: {
-                    onConfirm: () => {
-                        closePopup()
-                        switch (url.hostname) {
-                            case DeepLinkContext.Wallet:
-                                get(dashboardRouter).goTo(DashboardRoute.Wallet)
-                                handleDeepLinkWalletContext(url)
-                                break
-                            default:
-                                addError({
-                                    time: Date.now(),
-                                    type: 'deepLink',
-                                    message: `Unrecognized context '${url.host}'`,
-                                })
-                        }
-                    },
-                },
-            })
-        } else {
-            resetDeepLink()
-            addError({
-                time: Date.now(),
-                type: 'deepLink',
-                message: `Error handling deep link. Does not start with ${process.env.APP_PROTOCOL}://`,
-            })
+        if (url.protocol !== `${process.env.APP_PROTOCOL}:`) {
+            throw new Error(`Does not start with ${process.env.APP_PROTOCOL}://`)
         }
+
+        openPopup({
+            type: 'accountSwitcher',
+            overflow: true,
+            props: {
+                onConfirm: () => {
+                    closePopup()
+                    switch (url.hostname) {
+                        case DeepLinkContext.Wallet:
+                            get(dashboardRouter).goTo(DashboardRoute.Wallet)
+                            handleDeepLinkWalletContext(url)
+                            break
+                        default:
+                            throw new Error(`Unrecognized context '${url.host}'`)
+                    }
+                },
+            },
+        })
     } catch (err) {
         addError({ time: Date.now(), type: 'deepLink', message: `Error handling deep link. ${err.message}` })
     } finally {
