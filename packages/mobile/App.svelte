@@ -109,8 +109,6 @@
         nativeSplash.hide()
     }
 
-    void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
-
     onMount(async () => {
         isAndroid.set((await Platform.getOS()) !== 'ios')
         // Display splash screen at least for 3 seconds
@@ -122,6 +120,9 @@
         await getVersionDetails()
         await pollMarketData()
         await pollNetworkStatus()
+
+        const initialLocale = $appRoute === AppRoute.Welcome ? null : $appSettings.language
+        void setupI18n({ fallbackLocale: 'en', initialLocale })
     })
 
     // TODO: Has to be enabled again when system notifications are implemented
