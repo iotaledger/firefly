@@ -590,6 +590,10 @@
             "title": "Select a wallet",
             "body": "You just followed a deep link. Please select the wallet with which you want to continue."
         },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Delete {name}?",
             "body": "This wallet has no transaction history. It can safely be deleted.",

@@ -1,5 +1,6 @@
 import { addError } from '@core/error'
 import { localize } from '@core/i18n'
+import { openPopup } from '@lib/popup'
 
 import { WalletOperation } from '../../enums'
 import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperation } from './operations'
@@ -20,24 +21,30 @@ export function handleDeepLinkWalletContext(url: URL): void {
     if (pathnameParts.length === 0) {
         return addError({ time: Date.now(), type: 'deepLink', message: 'No operation specified in the url' })
     }
-
-    switch (pathnameParts[0]) {
-        case WalletOperation.SendForm:
-            handleDeepLinkSendFormOperation(url.searchParams)
-            break
-        case WalletOperation.SendConfirmation:
-            handleDeepLinkSendConfirmationOperation(url.searchParams)
-            break
-        default: {
-            const message = localize('notifications.deepLinkingRequest.wallet.unrecognizedOperation', {
-                values: { operation: pathnameParts[0] },
-            })
-            console.error(message)
-            return addError({
-                time: Date.now(),
-                type: 'deepLink',
-                message,
-            })
+    try {
+        switch (pathnameParts[0]) {
+            case WalletOperation.SendForm:
+                handleDeepLinkSendFormOperation(url.searchParams)
+                break
+            case WalletOperation.SendConfirmation:
+                handleDeepLinkSendConfirmationOperation(url.searchParams)
+                break
+            default: {
+                const message = localize('notifications.deepLinkingRequest.wallet.unrecognizedOperation', {
+                    values: { operation: pathnameParts[0] },
+                })
+                console.error(message)
+                return addError({
+                    time: Date.now(),
+                    type: 'deepLink',
+                    message,
+                })
+            }
         }
+    } catch (err) {
+        openPopup({
+            type: 'deepLinkError',
+            props: { error: err, url },
+        })
     }
 }

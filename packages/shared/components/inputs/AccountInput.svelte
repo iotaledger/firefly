@@ -14,5 +14,5 @@
     >
         <AccountLabel {account} />
     </button>
-    <RecipientAccountSelector bind:modal bind:selected={account} showBalance />
+    <RecipientAccountSelector bind:modal bind:selected={account} showBalance includeSelectedAccount />
 </account-input>

@@ -16,6 +16,7 @@
     import ConfirmationPopup from './ConfirmationPopup.svelte'
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
+    import DeepLinkErrorPopup from './DeepLinkErrorPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
     import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
@@ -90,6 +91,7 @@
         version: Version,
         backupStronghold: BackupStrongholdPopup,
         confirmation: ConfirmationPopup,
+        deepLinkError: DeepLinkErrorPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
         connectLedger: ConnectLedgerPopup,

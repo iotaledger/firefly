@@ -12,10 +12,13 @@
     export let searchValue: string
     export let selected: IAccountState
     export let showBalance: boolean = false
+    export let includeSelectedAccount: boolean = false
     export let onClose: () => void
 
-    $: otherAccounts = $visibleActiveAccounts?.filter((account) => account.id !== $selectedAccount.id)
-    $: filteredAccounts = otherAccounts?.filter(
+    $: accounts = $visibleActiveAccounts?.filter(
+        (account) => account.id !== $selectedAccount.id || includeSelectedAccount
+    )
+    $: filteredAccounts = accounts?.filter(
         (account) =>
             account.name.toLowerCase().includes(searchValue?.toLowerCase() ?? '') ||
             account.depositAddress.toLowerCase().includes(searchValue?.toLowerCase() ?? '')
