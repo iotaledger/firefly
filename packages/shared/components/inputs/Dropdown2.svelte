@@ -21,6 +21,7 @@
     export let showBorderWhenClosed = false
     export let isFocused = false
     export let hasFocus = false
+    export let enableTyping = false
 
     export let onSelect: (..._: any[]) => void
 
@@ -66,6 +67,10 @@
     }
 
     function handleKey(event: KeyboardEvent): void {
+        if (!enableTyping) {
+            return
+        }
+
         if (!dropdown) {
             // Note that space uses code not key, this is intentional
             if (event.key === 'Enter' || event.key === 'ArrowDown' || event.code === 'Space') {
