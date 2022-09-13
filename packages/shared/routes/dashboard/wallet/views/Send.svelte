@@ -2,7 +2,18 @@
     import { localize } from '@core/i18n'
     import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
-    import { Address, Amount, Button, Dropdown, Icon, Illustration, Input, ProgressBar, Text } from 'shared/components'
+    import {
+        Address,
+        Amount,
+        Button,
+        Dropdown,
+        Icon,
+        Illustration,
+        Input,
+        KeyValueBox,
+        ProgressBar,
+        Text,
+    } from 'shared/components'
     import {
         clearSendParams,
         keyboardHeight,
@@ -51,6 +62,9 @@
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
+
+    export let bridgeAddress = '0xF65e3cCbe04D4784EDa9CC4a33F84A6162aC9EB6'
+    export let chainId = '4002'
 
     const { accounts } = $wallet
 
@@ -685,7 +699,11 @@
                             onMaxClick={handleMaxClick}
                             disabled={$isTransferring}
                             autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+                            classes="mb-6"
                         />
+                        <KeyValueBox value={'swapOut'} key={'Index'} />
+                        <KeyValueBox bind:value={chainId} key={'Chain ID'} />
+                        <KeyValueBox bind:value={bridgeAddress} key={'Recipient Address'} />
                     </div>
                 </div>
             </div>
