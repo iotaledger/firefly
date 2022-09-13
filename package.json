@@ -39,7 +39,8 @@
         "ansi-regex": "5.0.1",
         "glob-parent": " >=5.1.2",
         "node-abi": "^3.8.0",
-        "selfsigned": "^2.0.1"
+        "selfsigned": "^2.0.1",
+        "shell-quote": "1.7.3"
     },
     "lint-staged": {
         "*.{ts,js,svelte}": "eslint --cache --fix",
