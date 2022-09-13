@@ -1,31 +1,33 @@
 PODS:
-  - Capacitor (3.4.1):
+  - Capacitor (4.2.0):
     - CapacitorCordova
-  - CapacitorActionSheet (1.0.8):
+  - CapacitorActionSheet (4.0.1):
     - Capacitor
-  - CapacitorApp (1.1.1):
+  - CapacitorApp (4.0.1):
     - Capacitor
   - CapacitorCommunityBarcodeScanner (2.0.1):
     - Capacitor
   - CapacitorCommunityPrivacyScreen (2.1.1):
     - Capacitor
-  - CapacitorCordova (3.4.1)
-  - CapacitorKeyboard (1.2.3):
+  - CapacitorCordova (4.2.0)
+  - CapacitorDevice (4.0.1):
+    - Capacitor
+  - CapacitorKeyboard (4.0.1):
     - Capacitor
   - CapacitorSecureFilesystemAccess (0.0.1):
     - Capacitor
   - CapacitorSecureStoragePlugin (0.6.2):
     - Capacitor
     - SwiftKeychainWrapper
-  - CapacitorShare (1.1.2):
+  - CapacitorShare (4.0.1):
     - Capacitor
-  - CapacitorSplashScreen (1.2.2):
+  - CapacitorSplashScreen (4.0.1):
     - Capacitor
-  - CapacitorStatusBar (1.0.8):
+  - CapacitorStatusBar (4.0.1):
     - Capacitor
   - FireflyActorSystemCapacitorBindings (0.0.1):
     - Capacitor
-  - IotaWalletInternal (0.2.0)
+  - IotaWalletInternal (0.3.5)
   - SwiftKeychainWrapper (4.0.1)
 
 DEPENDENCIES:
@@ -35,6 +37,7 @@ DEPENDENCIES:
   - "CapacitorCommunityBarcodeScanner (from `../../../../node_modules/@capacitor-community/barcode-scanner`)"
   - "CapacitorCommunityPrivacyScreen (from `../../../../node_modules/@capacitor-community/privacy-screen`)"
   - "CapacitorCordova (from `../../../../node_modules/@capacitor/ios`)"
+  - "CapacitorDevice (from `../../../../node_modules/@capacitor/device`)"
   - "CapacitorKeyboard (from `../../../../node_modules/@capacitor/keyboard`)"
   - CapacitorSecureFilesystemAccess (from `../../../../node_modules/capacitor-secure-filesystem-access`)
   - CapacitorSecureStoragePlugin (from `../../../../node_modules/capacitor-secure-storage-plugin`)
@@ -42,7 +45,7 @@ DEPENDENCIES:
   - "CapacitorSplashScreen (from `../../../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../../../node_modules/@capacitor/status-bar`)"
   - FireflyActorSystemCapacitorBindings (from `../../node_modules/firefly-actor-system-capacitor-bindings`)
-  - IotaWalletInternal (from `https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/v0.2.0/IotaWalletInternal.podspec`)
+  - IotaWalletInternal (from `https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/test-podspec/IotaWalletInternal.podspec`)
 
 SPEC REPOS:
   trunk:
@@ -61,6 +64,8 @@ EXTERNAL SOURCES:
     :path: "../../../../node_modules/@capacitor-community/privacy-screen"
   CapacitorCordova:
     :path: "../../../../node_modules/@capacitor/ios"
+  CapacitorDevice:
+    :path: "../../../../node_modules/@capacitor/device"
   CapacitorKeyboard:
     :path: "../../../../node_modules/@capacitor/keyboard"
   CapacitorSecureFilesystemAccess:
@@ -76,25 +81,26 @@ EXTERNAL SOURCES:
   FireflyActorSystemCapacitorBindings:
     :path: "../../node_modules/firefly-actor-system-capacitor-bindings"
   IotaWalletInternal:
-    :podspec: https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/v0.2.0/IotaWalletInternal.podspec
+    :podspec: https://raw.githubusercontent.com/iotaledger/wallet-ios-internal/test-podspec/IotaWalletInternal.podspec
 
 SPEC CHECKSUMS:
-  Capacitor: 9ff0758671daabc97247c8c57a981379bc30bb5f
-  CapacitorActionSheet: a32d0c1dd152d324a7c9b20b8998d7ecc0742b13
-  CapacitorApp: 6539a37b671391147dd0180e1483c051077254bf
+  Capacitor: 1dc8dbe3b5ffb9fd085739dbec754180975a7d37
+  CapacitorActionSheet: addfd7a5680c40ddba677c6a2a0896b644996fa2
+  CapacitorApp: 70ea773d069c24ab188ae7a01237b951920ffacf
   CapacitorCommunityBarcodeScanner: fb5a4e2bae89f0a0203cb4809c2f1bfd21579791
   CapacitorCommunityPrivacyScreen: e5c4100887b28805918f92c28d3948b41cb8cc37
-  CapacitorCordova: 4cf19cbad01e5a9e143e2f28f66c621c362f0f79
-  CapacitorKeyboard: 353a520309166f6cc26b3aa154a6c46c289aa40e
+  CapacitorCordova: 8de8340fa4fe8f93523a8884ef7024069b44d794
+  CapacitorDevice: 70e6a1993d309d5e77c47072ba144e2dd3d5a503
+  CapacitorKeyboard: 3b49a9d517641c123fb691713f99a89d6ebf3a37
   CapacitorSecureFilesystemAccess: 0b7ef212124316bf4dd5417c1b3f4a3121a38455
   CapacitorSecureStoragePlugin: b24477bcde4004d0536135fa265c9f3318ec9e7e
-  CapacitorShare: f1a8ffd3bba7d6113f53fb65aa47d61764c4640a
-  CapacitorSplashScreen: 466ab02fdfcfc0efdb6167631386289e82efe2c6
-  CapacitorStatusBar: 2f4da63c505cfdecdbff4d4345dac24c11e7f699
+  CapacitorShare: d5da7b440281d2eaef9c4af7e913548fb060a7bc
+  CapacitorSplashScreen: 4fc967486a75ae5ef6f0fe154f60f68fd83e5ac3
+  CapacitorStatusBar: e6cf2a9ed07f92ddae9ca101be36d08c61866b35
   FireflyActorSystemCapacitorBindings: 59b64ff1b4cb89779283816f7d2c385849ee5247
-  IotaWalletInternal: 7bbe592b3b946075aaa4d52a55df10ba7bfb8281
+  IotaWalletInternal: 3f001c0af43466eaed5f0a52bddc9a3d5e9a70bb
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: ca11b82b83447028373f003120921f4635f1ac34
+PODFILE CHECKSUM: 20e5182d1d36e93969bd483375b5a099af466033
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
