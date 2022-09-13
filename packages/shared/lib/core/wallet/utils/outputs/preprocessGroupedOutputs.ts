@@ -7,12 +7,11 @@ import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { IAccountState } from '@core/account'
 
 export function preprocessGroupedOutputs(
-    outputDatas: OutputData[],
+    outputs: { outputId: string; outputData: OutputData }[],
     incomingTransactions: [ITransactionPayload, IOutputResponse[]],
     account: IAccountState
 ): IProcessedTransaction {
-    const outputs = outputDatas.map((outputData) => outputData.output)
-    const transactionMetadata = outputDatas[0]?.metadata
+    const transactionMetadata = outputs[0]?.outputData.metadata
     const detailedTransactionInputs = incomingTransactions?.[1]
 
     const transactionInputs =
@@ -25,10 +24,13 @@ export function preprocessGroupedOutputs(
                 } as IUTXOInput)
         ) ?? []
 
-    const isIncoming = isTransactionIncoming(outputDatas, account.depositAddress)
+    const isIncoming = isTransactionIncoming(
+        outputs.map((output) => output.outputData),
+        account.depositAddress
+    )
 
     return {
-        outputs: outputs,
+        outputs: outputs.map((output) => ({ outputId: output.outputId, output: output.outputData.output })),
         transactionId: transactionMetadata?.transactionId,
         isIncoming,
         time: new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),

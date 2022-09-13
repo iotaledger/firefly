@@ -28,7 +28,7 @@ export function linkTransactionsWithClaimingTransactions(
         if (transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)) {
             continue
         } else if (
-            transaction.outputs.some((_output) => isOutputAsync(_output)) &&
+            transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
             getDirectionFromTransaction(transaction, account.depositAddress) === ActivityDirection.In
         ) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
