@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.716395607486">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.716398650579">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -32,12 +32,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../../static/icon_firefly.png" rel="icon" />
-    <link href="../../../resources/css/retype.css?v=2.4.0.716395607486" rel="stylesheet" />
+    <link href="../../../resources/css/retype.css?v=2.4.0.716398650579" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.716395607486" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../../resources/js/config.js?v=2.4.0.716398650579" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.716395607486" data-turbo-eval="false" defer></script>
-    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.716395607486" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../../resources/js/lunr.js?v=2.4.0.716398650579" data-turbo-eval="false" defer></script>
+    <script id="prism-js" type="text/javascript" src="../../../resources/js/prism.js?v=2.4.0.716398650579" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -291,7 +291,7 @@
     message: string
 
     /**
-     * If true, will localize the string on the message field. If the error is 
+     * If true, will localize the string on the message field. If the error is
      * user-facing, it MUST be localized.
      */
     localizeMessage?: boolean
@@ -302,12 +302,12 @@
     logToConsole?: boolean
 
     /**
-     * If true, will save the error object to the error log Svelte store, 
+     * If true, will save the error object to the error log Svelte store,
      * which is what is displayed to the user when the click on &quot;Error log&quot;
      * from the menu bar.
      */
     saveToErrorLog?: boolean
-    
+
     /**
      * If true, will display the message in a toast notification
      * to the user. The message MUST be localized.
@@ -342,6 +342,30 @@
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-typescript"><code v-pre class="language-typescript">if (isStrongholdPasswordValid(password)) {
     throw new InvalidStrongholdPasswordError()
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="errors-from-walletrs">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#errors-from-walletrs">#</doc-anchor-trigger>
+        <span>Errors from wallet.rs</span>
+    </h2>
+</doc-anchor-target>
+<p>We handle errors from wallet.rs by using the <code v-pre>handleError</code> function, e.g.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">try {
+    ...
+} catch (err) {
+    handleError(err)
+}</code></pre>
+</doc-codeblock></div>
+<p>This automatically checks, if the error comes from wallet.rs or not. Step-by-step the handlers for the corresponding errors (e.g. <code v-pre>ClientError</code>, <code v-pre>InsufficientFunds</code>, ...) are added to this function. If you encounter an unhandled error, create the handler and add the type and the corresponding handlers in the following position in the <code v-pre>handleWalletRsError.ts</code> :</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-typescript"><code v-pre class="language-typescript">switch (error?.type) {
+    ...
+    case WalletRsError.InsufficientFunds:
+        handleInsufficientFundsError(error)
+        break
+    ...
 }</code></pre>
 </doc-codeblock></div>
 
