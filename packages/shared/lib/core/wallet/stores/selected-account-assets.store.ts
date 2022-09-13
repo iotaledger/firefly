@@ -12,10 +12,10 @@ export const assetFilter: Writable<AssetFilter> = writable({
         active: false,
         type: 'selection',
         localeKey: 'filters.verificationStatus',
-        selected: 'verified',
-        choices: Object.values(VerifiedStatus)
+        selected: 'new',
+        choices: Object.values(NotVerifiedStatus)
             .map((status) => String(status))
-            .concat(Object.values(NotVerifiedStatus).map((status) => String(status))),
+            .concat(Object.values(VerifiedStatus).map((status) => String(status))),
     },
     showHidden: {
         active: false,
