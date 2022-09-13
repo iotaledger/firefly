@@ -84,6 +84,8 @@
                     hasFocus={true}
                     placeholder={localize('general.search')}
                     fontSize="15"
+                    clearPadding
+                    containerClasses="p-3"
                     fontWeight={FontWeight.medium}
                     color="gray-500"
                 />

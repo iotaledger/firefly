@@ -1105,6 +1105,7 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Balance",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
@@ -1259,6 +1260,18 @@
             "greater": "is greater than",
             "less": "is less than"
         },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
+        },
         "status": {
             "label": "Status",
             "confirmed": "confirmed",
@@ -1412,6 +1425,8 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
