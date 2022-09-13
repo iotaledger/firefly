@@ -17,7 +17,7 @@ export class BaseError extends Error {
         }
 
         if (params?.saveToErrorLog) {
-            addError({ ...params, message })
+            addError({ ...params, message, type: 'BaseError', time: Date.now() })
         }
 
         if (params?.showNotification) {
