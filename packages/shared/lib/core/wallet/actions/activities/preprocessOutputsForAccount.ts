@@ -4,7 +4,7 @@ import { OutputData } from '@iota/wallet/out/types'
 import { IProcessedTransaction } from '../../interfaces'
 
 export function preprocessOutputsForAccount(account: IAccountState): IProcessedTransaction[] {
-    const groupedOutputs: { [key: string]: { outputId: string; outputData: OutputData }[] } = {}
+    const groupedOutputs: { [key: string]: OutputData[] } = {}
 
     for (const outputId of Object.keys(account.meta.outputs)) {
         const output = account.meta.outputs?.[outputId]
@@ -12,7 +12,7 @@ export function preprocessOutputsForAccount(account: IAccountState): IProcessedT
         if (!groupedOutputs[transactionId]) {
             groupedOutputs[transactionId] = []
         }
-        groupedOutputs[transactionId].push({ outputId, outputData: output })
+        groupedOutputs[transactionId].push(output)
     }
 
     const processedTransactions: IProcessedTransaction[] = []

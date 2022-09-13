@@ -21,7 +21,7 @@ export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): 
         syncBalance(account.id)
 
         const processedOutput = preprocessGroupedOutputs(
-            [{ outputId: undefined, outputData: output }],
+            [output],
             [event?.transaction, event?.transactionInputs],
             account
         )

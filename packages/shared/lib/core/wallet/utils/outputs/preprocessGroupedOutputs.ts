@@ -1,4 +1,4 @@
-import { IProcessedTransaction } from '../../interfaces'
+import { IOutput, IProcessedTransaction } from '../../interfaces'
 import { OutputData } from '@iota/wallet'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
@@ -7,11 +7,15 @@ import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { IAccountState } from '@core/account'
 
 export function preprocessGroupedOutputs(
-    outputs: { outputId: string; outputData: OutputData }[],
+    outputDatas: OutputData[],
     incomingTransactions: [ITransactionPayload, IOutputResponse[]],
     account: IAccountState
 ): IProcessedTransaction {
-    const transactionMetadata = outputs[0]?.outputData.metadata
+    const outputs: IOutput[] = outputDatas.map((outputData) => ({
+        outputId: outputData.outputId,
+        output: outputData.output,
+    }))
+    const transactionMetadata = outputDatas[0]?.metadata
     const detailedTransactionInputs = incomingTransactions?.[1]
 
     const transactionInputs =
@@ -24,13 +28,10 @@ export function preprocessGroupedOutputs(
                 } as IUTXOInput)
         ) ?? []
 
-    const isIncoming = isTransactionIncoming(
-        outputs.map((output) => output.outputData),
-        account.depositAddress
-    )
+    const isIncoming = isTransactionIncoming(outputDatas, account.depositAddress)
 
     return {
-        outputs: outputs.map((output) => ({ outputId: output.outputId, output: output.outputData.output })),
+        outputs,
         transactionId: transactionMetadata?.transactionId,
         isIncoming,
         time: new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
