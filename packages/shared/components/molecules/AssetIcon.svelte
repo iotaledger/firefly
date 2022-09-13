@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { COIN_TYPE, NetworkProtocol } from '@core/network'
-    import { getAssetInitials, IPersistedAsset, SPECIAL_TOKEN_ID } from '@core/wallet'
-    import { VerificationStatus } from '@core/wallet/enums/verification-status.enum'
+    import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, SPECIAL_TOKEN_ID } from '@core/wallet'
     import { isBright } from '@lib/helpers'
     import { Animation, Icon, VerificationBadge } from 'shared/components'
 
@@ -30,6 +29,10 @@
             assetInitials = getAssetInitials(asset)
         }
     }
+
+    $: shouldShowBadge = showVerifiedBadgeOnly
+        ? asset?.verification?.verified
+        : asset?.verification?.status !== NotVerifiedStatus.Skipped
 </script>
 
 <div
@@ -68,14 +71,14 @@
             </p>
         {/if}
     </div>
-    {#if !(showVerifiedBadgeOnly && asset?.verification !== VerificationStatus.Verified)}
+    {#if shouldShowBadge}
         <span
             class="
                 absolute flex justify-center items-center h-4 w-4 
                 {small ? '-bottom-1 -right-1' : '-bottom-0.5 -right-0.5'}
             "
         >
-            <VerificationBadge verificationStatus={asset?.verification} {large} />
+            <VerificationBadge status={asset?.verification?.status} {large} />
         </span>
     {/if}
 </div>

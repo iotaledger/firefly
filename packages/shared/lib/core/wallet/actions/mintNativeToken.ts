@@ -8,12 +8,12 @@ import { activeProfile, ProfileType } from '@core/profile'
 import { isTransferring } from '@lib/wallet'
 import { handleLedgerError } from '@core/ledger'
 import { Activity } from '../classes'
-import { VerificationStatus } from '../enums'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { preprocessTransaction } from '../utils'
+import { VerifiedStatus } from '../enums'
 
 export async function mintNativeToken(
     maximumSupply: number,
@@ -36,7 +36,7 @@ export async function mintNativeToken(
         const persistedAsset: IPersistedAsset = buildPersistedAssetFromIrc30Metadata(
             mintTokenTransaction.tokenId,
             metadata,
-            VerificationStatus.Verified
+            { verified: true, status: VerifiedStatus.SelfVerified }
         )
         const processedTransaction = preprocessTransaction(mintTokenTransaction.transaction)
         addPersistedAsset(persistedAsset)

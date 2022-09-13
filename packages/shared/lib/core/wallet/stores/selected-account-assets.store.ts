@@ -5,7 +5,7 @@ import { selectedAccountId } from '@core/account/stores/selected-account-id.stor
 import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
 import { derived, Readable, writable, Writable } from 'svelte/store'
 import { AssetFilter } from '../interfaces'
-import { VerificationStatus, BooleanFilterOption } from '../enums'
+import { BooleanFilterOption, NotVerifiedStatus, VerifiedStatus } from '../enums'
 
 export const assetFilter: Writable<AssetFilter> = writable({
     verificationStatus: {
@@ -13,7 +13,9 @@ export const assetFilter: Writable<AssetFilter> = writable({
         type: 'selection',
         localeKey: 'filters.verificationStatus',
         selected: 'verified',
-        choices: Object.values(VerificationStatus).map((status) => String(status)),
+        choices: Object.values(VerifiedStatus)
+            .map((status) => String(status))
+            .concat(Object.values(NotVerifiedStatus).map((status) => String(status))),
     },
     showHidden: {
         active: false,
