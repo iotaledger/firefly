@@ -11,23 +11,17 @@
     <Icon
         width={large ? 20 : 14}
         height={large ? 20 : 14}
-        icon={Icons.NotVerified}
+        icon={Icons.VerificationStatusNew}
         classes="text-gray-600"
         secondaryColor="white"
     />
+{:else if status === VerifiedStatus.SelfVerified}
+    <Icon width={large ? 20 : 14} height={large ? 20 : 14} icon={Icons.VerificationStatusSelf} secondaryColor="white" />
 {:else if status === VerifiedStatus.Official}
     <Icon
         width={large ? 20 : 14}
         height={large ? 20 : 14}
-        icon={Icons.Verified}
-        classes="text-verification-blue"
-        secondaryColor="white"
-    />
-{:else if status === VerifiedStatus.SelfVerified}
-    <Icon
-        width={large ? 20 : 14}
-        height={large ? 20 : 14}
-        icon={Icons.Verified}
+        icon={Icons.VerificationStatusOfficial}
         classes="text-verification-blue"
         secondaryColor="white"
     />

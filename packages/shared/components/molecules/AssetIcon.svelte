@@ -74,7 +74,7 @@
     {#if shouldShowBadge}
         <span
             class="
-                absolute flex justify-center items-center h-4 w-4 
+                absolute flex justify-center items-center
                 {small ? '-bottom-1 -right-1' : '-bottom-0.5 -right-0.5'}
             "
         >
