@@ -83,13 +83,13 @@ try {
 }
 ```
 
-This will automatically check, if the error comes from wallet.rs or not. Step-by-step the handlers for the corresponding errors (e.g. `ClientError`, `InsufficientFunds`, ...) will be added to this function. If you encounter a not-handled error, create the handler and add the type and the corresponding handlers in the following position in the `handleWalletRsError.ts` :
+This automatically checks, if the error comes from wallet.rs or not. Step-by-step the handlers for the corresponding errors (e.g. `ClientError`, `InsufficientFunds`, ...) are added to this function. If you encounter an unhandled error, create the handler and add the type and the corresponding handlers in the following position in the `handleWalletRsError.ts` :
 
 ```typescript
 switch (error?.type) {
     ...
-    case WalletRsError.XXXXXXX:
-        handleXXXXXXXXError(error)
+    case WalletRsError.InsufficientFunds:
+        handleInsufficientFundsError(error)
         break
     ...
 }
