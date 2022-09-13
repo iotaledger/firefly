@@ -156,7 +156,8 @@
             </button>
             <button
                 disabled={activity.data.isClaiming}
-                class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
+                class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white 
+                {activity.data.isClaiming ? 'cursor-default' : 'cursor-pointer'}"
                 on:click={onClaimClick}
             >
                 {#if activity.data.isClaiming}
