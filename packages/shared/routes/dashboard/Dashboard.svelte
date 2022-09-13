@@ -262,12 +262,7 @@
             if ($accounts && $accounts.length > 0) {
                 const addressPrefix = $accounts[0].depositAddress.split('1')[0]
                 const parsedDeepLink = parseDeepLinkRequest(addressPrefix, data)
-                if (
-                    parsedDeepLink &&
-                    parsedDeepLink.context === DeepLinkContext.Wallet &&
-                    parsedDeepLink.operation === WalletOperation.Send &&
-                    parsedDeepLink.parameters
-                ) {
+                if (parsedDeepLink && parsedDeepLink.context === DeepLinkContext.Wallet && parsedDeepLink.parameters) {
                     _redirect(DashboardRoute.Wallet)
                     sendParams.set({
                         ...parsedDeepLink.parameters,
