@@ -1,4 +1,4 @@
-import { SPECIAL_TOKEN_ID } from '../constants'
+import { OFFICIAL_TOKEN_IDS } from '../constants'
 import { NotVerifiedStatus, VerifiedStatus } from '../enums'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IPersistedAsset } from '../interfaces'
@@ -9,10 +9,9 @@ import { getIrc30MetadataFromFoundryOutput } from '../utils/getIrc30MetadataFrom
 export async function requestAndStorePersistedAsset(tokenId: string): Promise<IPersistedAsset> {
     const tokenMetadata = await getIrc30MetadataFromFoundryOutput(tokenId)
     if (tokenMetadata) {
-        const verification: AssetVerification =
-            tokenId === SPECIAL_TOKEN_ID
-                ? { verified: true, status: VerifiedStatus.Official }
-                : { verified: false, status: NotVerifiedStatus.New }
+        const verification: AssetVerification = OFFICIAL_TOKEN_IDS.includes(tokenId)
+            ? { verified: true, status: VerifiedStatus.Official }
+            : { verified: false, status: NotVerifiedStatus.New }
         const persistedAsset: IPersistedAsset = buildPersistedAssetFromIrc30Metadata(
             tokenId,
             tokenMetadata,

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { COIN_TYPE, NetworkProtocol } from '@core/network'
-    import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, SPECIAL_TOKEN_ID } from '@core/wallet'
+    import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, SPECIAL_TOKEN_IDS } from '@core/wallet'
     import { isBright } from '@lib/helpers'
     import { Animation, Icon, VerificationBadge } from 'shared/components'
 
@@ -15,7 +15,7 @@
     let assetInitials: string
     let assetIconWrapperWidth: number
 
-    $: isAnimation = asset?.id === SPECIAL_TOKEN_ID
+    $: isAnimation = SPECIAL_TOKEN_IDS.includes(asset?.id)
     $: {
         icon = ''
         assetIconBackgroundColor = asset?.metadata?.primaryColor
