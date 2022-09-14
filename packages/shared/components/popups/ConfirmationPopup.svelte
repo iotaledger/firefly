@@ -6,12 +6,12 @@
 
     export let title: string
     export let description: string
-    export let hint: string
-    export let info: boolean
-    export let success: boolean
-    export let warning: boolean
-    export let danger: boolean
-    export let confirmText: string
+    export let hint: string = ''
+    export let info: boolean = false
+    export let success: boolean = false
+    export let warning: boolean = false
+    export let danger: boolean = false
+    export let confirmText: string = localize('actions.confirm')
     export let onConfirm: () => void = undefined
     export let onCancel: () => void = undefined
 
@@ -46,8 +46,6 @@
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" secondary onClick={cancelClick}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" warning={warning || danger} onClick={confirmClick}
-            >{confirmText ? confirmText : localize('actions.confirm')}</Button
-        >
+        <Button classes="w-full" warning={warning || danger} onClick={confirmClick}>{confirmText}</Button>
     </popup-buttons>
 </div>
