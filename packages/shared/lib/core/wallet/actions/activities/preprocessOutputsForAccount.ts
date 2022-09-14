@@ -1,32 +1,44 @@
 import { IAccountState } from '@core/account'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
-import { OutputData } from '@iota/wallet'
+import { OutputData, Transaction } from '@iota/wallet'
 import { IProcessedTransaction } from '../../interfaces/processed-transaction.interface'
 
-export function preprocessOutputsForAccount(account: IAccountState): IProcessedTransaction[] {
-    const groupedOutputs: { [key: string]: OutputData[] } = {}
+export async function preprocessOutputsForAccount(account: IAccountState): Promise<IProcessedTransaction[]> {
+    const outputs = await account.listOutputs()
 
-    for (const outputId of Object.keys(account.meta.outputs)) {
-        const output = account.meta.outputs?.[outputId]
+    const transactions = await account.listTransactions()
+    const transactionMap = getTransactionsMapFromList(transactions)
+    // TODO: uncomment this when `account.listIncomingTransactions()` is implemented
+    // const incomingTransactions = await account.listIncomingTransactions()
+    // const incomingTransactionMap = getTransactionsMapFromList(incomingTransactions)
+    const incomingTransactionMap = account?.meta?.incomingTransactions
+
+    const groupedOutputs: { [key: string]: OutputData[] } = {}
+    for (const output of outputs) {
         const transactionId = output?.metadata?.transactionId
-        if (!groupedOutputs[transactionId]) {
-            groupedOutputs[transactionId] = []
+
+        const hasTransaction = !!transactionMap[transactionId]
+        if (!hasTransaction) {
+            if (!groupedOutputs[transactionId]) {
+                groupedOutputs[transactionId] = []
+            }
+            groupedOutputs[transactionId].push(output)
         }
-        groupedOutputs[transactionId].push(output)
     }
 
     const processedTransactions: IProcessedTransaction[] = []
     for (const transactionId of Object.keys(groupedOutputs)) {
-        const hasTransaction = !!account?.meta?.transactions?.[transactionId]
-        if (!hasTransaction) {
-            processedTransactions.push(
-                preprocessGroupedOutputs(
-                    groupedOutputs[transactionId],
-                    account?.meta?.incomingTransactions[transactionId],
-                    account
-                )
-            )
-        }
+        processedTransactions.push(
+            preprocessGroupedOutputs(groupedOutputs[transactionId], incomingTransactionMap[transactionId], account)
+        )
     }
     return processedTransactions
+}
+
+function getTransactionsMapFromList(transactions: Transaction[]): { [transactionId: string]: boolean } {
+    const transactionMap = {}
+    for (const transaction of transactions) {
+        transactionMap[transaction.transactionId] = true
+    }
+    return transactionMap
 }
