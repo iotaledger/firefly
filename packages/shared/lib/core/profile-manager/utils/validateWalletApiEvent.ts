@@ -1,4 +1,7 @@
+import { localize } from '@core/i18n'
+
 import { WalletApiEvent } from '../enums'
+import { WalletApiEventError, WalletApiEventValidationError } from '../errors'
 import { IWalletApiEventPayloadWrapper } from '../interfaces'
 
 export function validateWalletApiEvent(
@@ -7,19 +10,22 @@ export function validateWalletApiEvent(
     apiEvent: WalletApiEvent
 ): IWalletApiEventPayloadWrapper {
     if (error) {
-        console.error(error)
-        // TODO: make WalletApiEventValidation error and throw it here
+        throw new WalletApiEventError(error)
     } else {
         let { accountIndex, event } = JSON.parse(rawEvent)
 
         accountIndex = Number(accountIndex)
         if (Number.isNaN(accountIndex)) {
-            console.error('Invalid event handler account index')
+            throw new WalletApiEventValidationError(
+                localize('error.walletApiEvent.invalidAccountIndex', { values: { eventName: apiEvent } })
+            )
         }
 
         const payload = event[apiEvent]
         if (!payload) {
-            console.error('Invalid event payload type')
+            throw new WalletApiEventValidationError(
+                localize('error.walletApiEvent.invalidPayload', { values: { eventName: apiEvent } })
+            )
         }
 
         return {

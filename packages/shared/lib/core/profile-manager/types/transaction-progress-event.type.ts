@@ -1,4 +1,4 @@
-import { IPreparedTransaction, IPreparedTransactionEssenceHash } from '@core/profile-manager'
+import { IPreparedTransaction, IPreparedTransactionEssenceHash } from '../interfaces'
 
 export type TransactionProgressEventPayload =
     | 'SelectingInputs'

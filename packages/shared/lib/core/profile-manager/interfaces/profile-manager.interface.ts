@@ -11,7 +11,8 @@ import {
     NodeInfoWrapper,
     WalletEvent,
 } from '@iota/wallet'
-import { WalletApiEventHandler } from '@core/profile-manager'
+
+import { WalletApiEventHandler } from '../types'
 
 export interface IProfileManager {
     id: string

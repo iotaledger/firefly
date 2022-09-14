@@ -1516,6 +1516,10 @@
             "missingProfileManager": "Unable to find Shimmer claiming profile manager",
             "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
             "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
         }
     },
     "warning": {

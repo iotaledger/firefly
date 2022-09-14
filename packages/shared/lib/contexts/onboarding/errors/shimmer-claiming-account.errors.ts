@@ -3,8 +3,8 @@ import { BaseError, DEFAULT_APP_ERROR_PARAMETERS } from '@core/error'
 export class CannotInitialiseShimmerClaimingAccountError extends BaseError {
     constructor() {
         super({
-            ...DEFAULT_APP_ERROR_PARAMETERS,
             message: 'error.shimmerClaiming.cannotInitialiseAccount',
+            ...DEFAULT_APP_ERROR_PARAMETERS,
         })
     }
 }
@@ -12,8 +12,8 @@ export class CannotInitialiseShimmerClaimingAccountError extends BaseError {
 export class MissingShimmerClaimingAccountError extends BaseError {
     constructor() {
         super({
-            ...DEFAULT_APP_ERROR_PARAMETERS,
             message: 'error.shimmerClaiming.missingAccount',
+            ...DEFAULT_APP_ERROR_PARAMETERS,
         })
     }
 }
