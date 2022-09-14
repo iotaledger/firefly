@@ -701,9 +701,9 @@
                             autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
                             classes="mb-6"
                         />
-                        <KeyValueBox value={'swapOut'} key={'Index'} />
-                        <KeyValueBox bind:value={chainId} key={'Chain ID'} />
-                        <KeyValueBox bind:value={bridgeAddress} key={'Recipient Address'} />
+                        <KeyValueBox value={'swapOut'} key={localize('general.index')} />
+                        <KeyValueBox bind:value={chainId} key={localize('general.chainId')} />
+                        <KeyValueBox bind:value={bridgeAddress} key={localize('general.bridgeToAddress')} />
                     </div>
                 </div>
             </div>
