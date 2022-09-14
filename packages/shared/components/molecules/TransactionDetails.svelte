@@ -80,6 +80,9 @@
         ...(expirationTime && { expirationTime }),
         ...(timelockDate && { timelockDate: formattedTimelockDate }),
         ...(claimedTime && { claimedTime }),
+    }
+
+    $: copyableDetailsList = {
         ...(aliasId && { aliasId }),
         ...(governorAddress && { governorAddress }),
         ...(stateControllerAddress && { stateControllerAddress }),
@@ -160,6 +163,9 @@
         <details-list class="flex flex-col space-y-2">
             {#each Object.entries(detailsList) as [key, value]}
                 <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
+            {/each}
+            {#each Object.entries(copyableDetailsList) as [key, value]}
+                <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} isCopyable />
             {/each}
             {#if claimingTransactionId}
                 <KeyValueBox keyText={localize(isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>

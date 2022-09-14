@@ -1,7 +1,7 @@
 import { IOutput, IProcessedTransaction } from '../../interfaces'
 import { OutputData } from '@iota/wallet'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
-import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
+import { IOutputResponse, ITransactionPayload, IUTXOInput, IAliasOutput } from '@iota/types'
 import { InclusionState } from '@core/wallet/enums'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { IAccountState } from '@core/account'
@@ -54,8 +54,11 @@ function splitOutputs(outputDatas: OutputData[]): IOutput[][] {
         outputId: outputData.outputId,
         output: outputData.output,
     }))
-    const containsAliasOutput = outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS)
-    if (containsAliasOutput) {
+
+    const aliasOutput = outputs.find((output) => output.output.type === OUTPUT_TYPE_ALIAS)
+    const containsNewAliasOutput = (aliasOutput?.output as IAliasOutput)?.stateIndex === 0
+
+    if (containsNewAliasOutput) {
         const aliasOutputIndex = outputs.findIndex((output) => output.output.type === OUTPUT_TYPE_ALIAS)
 
         const aliasOutput = [outputs[aliasOutputIndex]]
