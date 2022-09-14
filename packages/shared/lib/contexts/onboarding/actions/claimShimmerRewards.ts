@@ -91,4 +91,9 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     }
     persistShimmerClaimingTransaction(claimingTransaction?.transactionId)
+    updateShimmerClaimingAccount({
+        ...shimmerClaimingAccount,
+        state: ShimmerClaimingAccountState.Claiming,
+        claimingTransaction,
+    })
 }

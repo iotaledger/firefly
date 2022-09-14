@@ -7,8 +7,8 @@ import { showAppNotification } from '@lib/notifications'
 
 import { ShimmerClaimingAccountState } from '../enums'
 import { MissingShimmerClaimingAccountError } from '../errors'
+import { IShimmerClaimingAccount } from '../interfaces'
 import { onboardingProfile, shimmerClaimingTransactions, updateShimmerClaimingAccount } from '../stores'
-import { IShimmerClaimingAccount } from '@contexts/onboarding'
 
 export function handleTransactionInclusionEventForShimmerClaiming(error: Error, rawEvent: string): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionInclusion)

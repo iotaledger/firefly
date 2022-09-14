@@ -1,14 +1,22 @@
 import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
 
 export function hasUserClaimedRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
+    let hasAtLeastOneClaimingTransaction = false
     return (
         shimmerClaimingAccounts.every((shimmerClaimingAccount) => {
-            const { state } = shimmerClaimingAccount
-            return (
-                state === ShimmerClaimingAccountState.UnclaimedWithoutRewards ||
-                state === ShimmerClaimingAccountState.FullyClaimed
-            )
-        }) &&
-        shimmerClaimingAccounts?.some((shimmerClaimingAccount) => Boolean(shimmerClaimingAccount?.claimingTransaction))
+            const { state, claimingTransaction } = shimmerClaimingAccount
+            if (state === ShimmerClaimingAccountState.UnclaimedWithoutRewards) {
+                return true
+            } else if (state === ShimmerClaimingAccountState.FullyClaimed && claimingTransaction) {
+                /**
+                 * NOTE: This side effect is here to avoid iterating more than once in
+                 * the case that no account has any unclaimed rewards.
+                 */
+                hasAtLeastOneClaimingTransaction = true
+                return true
+            } else {
+                return false
+            }
+        }) && hasAtLeastOneClaimingTransaction
     )
 }

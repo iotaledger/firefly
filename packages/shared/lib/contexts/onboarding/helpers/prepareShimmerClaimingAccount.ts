@@ -38,6 +38,6 @@ export async function prepareShimmerClaimingAccount(
         state,
         claimedRewards,
         unclaimedRewards,
-        claimingTransaction,
+        ...(claimingTransaction && { claimingTransaction }),
     }
 }
