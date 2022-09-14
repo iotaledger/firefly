@@ -1,4 +1,4 @@
---- 
+---
 icon: x-24
 ---
 
@@ -21,7 +21,7 @@ interface IErrorParameters {
     message: string
 
     /**
-     * If true, will localize the string on the message field. If the error is 
+     * If true, will localize the string on the message field. If the error is
      * user-facing, it MUST be localized.
      */
     localizeMessage?: boolean
@@ -32,12 +32,12 @@ interface IErrorParameters {
     logToConsole?: boolean
 
     /**
-     * If true, will save the error object to the error log Svelte store, 
+     * If true, will save the error object to the error log Svelte store,
      * which is what is displayed to the user when the click on "Error log"
      * from the menu bar.
      */
     saveToErrorLog?: boolean
-    
+
     /**
      * If true, will display the message in a toast notification
      * to the user. The message MUST be localized.
@@ -68,5 +68,29 @@ To use one of these errors, it is simply a matter of throwing it like a normal `
 ```typescript
 if (isStrongholdPasswordValid(password)) {
     throw new InvalidStrongholdPasswordError()
+}
+```
+
+## Errors from wallet.rs
+
+We handle errors from wallet.rs by using the `handleError` function, e.g.
+
+```typescript
+try {
+    ...
+} catch (err) {
+    handleError(err)
+}
+```
+
+This automatically checks, if the error comes from wallet.rs or not. Step-by-step the handlers for the corresponding errors (e.g. `ClientError`, `InsufficientFunds`, ...) are added to this function. If you encounter an unhandled error, create the handler and add the type and the corresponding handlers in the following position in the `handleWalletRsError.ts` :
+
+```typescript
+switch (error?.type) {
+    ...
+    case WalletRsError.InsufficientFunds:
+        handleInsufficientFundsError(error)
+        break
+    ...
 }
 ```
