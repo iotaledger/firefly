@@ -1,9 +1,11 @@
 export * from './constants'
 export * from './types'
+export * from './enums'
 
 export * from './convert.utils'
 export * from './filter.utils'
 export * from './format.utils'
+export * from './function.utils'
 export * from './iter.utils'
 export * from './number.utils'
 export * from './sort.utils'

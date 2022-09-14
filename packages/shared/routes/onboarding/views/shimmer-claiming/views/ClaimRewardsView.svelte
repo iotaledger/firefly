@@ -1,7 +1,9 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { displayNotificationForLedgerProfile, getLedgerDeviceStatus } from '@core/ledger'
+    import { subscribeToWalletApiEvents, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { shimmerClaimingRouter } from '@core/router'
     import {
         canUserClaimRewards,
@@ -11,8 +13,11 @@
         FindShimmerRewardsError,
         findShimmerRewardsForAccount,
         hasUserClaimedRewards,
+        isOnboardingLedgerProfile,
         onboardingProfile,
+        shimmerClaimingProfileManager,
     } from '@contexts/onboarding'
+    import { closePopup } from '@lib/popup'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -31,7 +36,11 @@
         $shimmerClaimingRouter.previous()
     }
 
-    async function onUseBalanceFinderClick(): Promise<void> {
+    function _onLedgerNotConnected(): void {
+        displayNotificationForLedgerProfile('error', true)
+    }
+
+    async function searchForRewards(): Promise<void> {
         try {
             isSearchingForRewards = true
             hasSearchedForRewardsBefore = true
@@ -43,7 +52,15 @@
         }
     }
 
-    async function onClaimRewardsClick(): Promise<void> {
+    async function onSearchForRewardsClick(): Promise<void> {
+        if ($isOnboardingLedgerProfile) {
+            await getLedgerDeviceStatus(searchForRewards, _onLedgerNotConnected, _onLedgerNotConnected)
+        } else {
+            await searchForRewards()
+        }
+    }
+
+    async function claimRewards(): Promise<void> {
         try {
             isClaimingRewards = true
             hasTriedClaimingRewards = true
@@ -51,7 +68,18 @@
         } catch (err) {
             throw new ClaimShimmerRewardsError()
         } finally {
+            if ($isOnboardingLedgerProfile) {
+                closePopup(true)
+            }
             isClaimingRewards = false
+        }
+    }
+
+    async function onClaimRewardsClick(): Promise<void> {
+        if ($isOnboardingLedgerProfile) {
+            await getLedgerDeviceStatus(claimRewards, _onLedgerNotConnected, _onLedgerNotConnected)
+        } else {
+            await claimRewards()
         }
     }
 
@@ -60,6 +88,16 @@
     }
 
     async function onMountHelper(): Promise<void> {
+        if ($isOnboardingLedgerProfile) {
+            /**
+             * NOTE: We have to register and event handler for transaction
+             * progress specifically for Ledger profiles, since the user
+             * MUST confirm what is displayed in the UI matches what is prompted
+             * on the actual Ledger device.
+             */
+            subscribeToWalletApiEvents(shimmerClaimingProfileManager)
+        }
+
         /**
          * NOTE: If the user only has one Shimmer claiming account,
          * it is likely they have just navigated to this view for
@@ -82,6 +120,12 @@
     onMount(() => {
         void onMountHelper()
     })
+
+    onDestroy(() => {
+        if ($isOnboardingLedgerProfile) {
+            unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
+        }
+    })
 </script>
 
 <OnboardingLayout {onBackClick}>
@@ -101,7 +145,7 @@
             classes="w-full mb-5"
             disabled={!shouldSearchForRewardsButtonBeEnabled}
             secondary
-            onClick={onUseBalanceFinderClick}
+            onClick={onSearchForRewardsClick}
         >
             {#if isSearchingForRewards}
                 <Spinner message={localize('actions.searching')} busy={true} classes="justify-center items-center" />

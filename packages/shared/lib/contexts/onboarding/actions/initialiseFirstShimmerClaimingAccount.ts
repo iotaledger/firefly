@@ -8,7 +8,13 @@ import { sortAccountsByIndex, zip } from '@core/utils'
 import { ProfileRecoveryType } from '../enums'
 import { CannotInitialiseShimmerClaimingAccountError, MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
-import { onboardingProfile, shimmerClaimingProfileManager, updateOnboardingProfile } from '../stores'
+import {
+    isOnboardingLedgerProfile,
+    onboardingProfile,
+    shimmerClaimingProfileManager,
+    updateOnboardingProfile,
+} from '../stores'
+import { handleLedgerError } from '@core/ledger'
 
 export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
@@ -19,9 +25,12 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     try {
         const alias = `${localize('general.account')} 1`
         const profileRecoveryType = get(onboardingProfile)?.recoveryType
-        if (profileRecoveryType === ProfileRecoveryType.Mnemonic) {
+        if (
+            profileRecoveryType === ProfileRecoveryType.Mnemonic ||
+            profileRecoveryType === ProfileRecoveryType.Ledger
+        ) {
             /**
-             * NOTE: We can safely assume that mnemonic-based recoveries
+             * NOTE: We can safely assume that mnemonic- and Ledger-based recoveries
              * will NOT have any accounts, so we create one.
              */
             const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
@@ -60,7 +69,10 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             updateOnboardingProfile({ shimmerClaimingAccounts })
         }
     } catch (err) {
-        console.error(err)
+        if (get(isOnboardingLedgerProfile)) {
+            handleLedgerError(err?.error ?? err)
+        }
+
         throw new CannotInitialiseShimmerClaimingAccountError()
     }
 }

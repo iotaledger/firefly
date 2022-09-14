@@ -1,26 +1,23 @@
 <script lang="typescript">
     import { handleDeepLink } from '@auxiliary/deep-link'
     import { localize } from '@core/i18n'
-    import { clearPollNetworkInterval, nodeInfo, pollNetworkStatus } from '@core/network'
+    import { nodeInfo } from '@core/network'
     import {
         activeProfile,
         hasStrongholdLocked,
-        isLedgerProfile,
+        isActiveLedgerProfile,
         logout,
         reflectLockedStronghold,
         saveActiveProfile,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
-    import { isPollingLedgerDeviceStatus, stopPollingLedgerStatus, pollLedgerDeviceStatus } from '@core/ledger'
-    import { ongoingSnapshot } from 'shared/lib/migration'
+    import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
     import { Developer, Settings, Staking, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import TopNavigation from './TopNavigation.svelte'
-
-    const { hasLoadedAccounts } = $activeProfile
 
     $: $activeProfile, saveActiveProfile()
 
@@ -33,28 +30,6 @@
 
     let fundsSoonNotificationId
     let developerProfileNotificationId
-
-    const unsubscribeAccountsLoaded = hasLoadedAccounts.subscribe((val) => {
-        if (val) {
-            void pollNetworkStatus()
-            // void pollParticipationOverview()
-        } else {
-            clearPollNetworkInterval()
-            // clearPollParticipationOverviewInterval()
-        }
-    })
-
-    const unsubscribeOngoingSnapshot = ongoingSnapshot.subscribe((os) => {
-        if (os) {
-            // openSnapshotPopup()
-        }
-    })
-
-    /* $: {
-        if (!$isSyncing && $isFirstSessionSync && $hasLoadedAccounts) {
-            void updateStakingPeriodCache()
-        }
-    } */
 
     onMount(() => {
         Platform.onEvent('menu-logout', () => {
@@ -79,9 +54,6 @@
     })
 
     onDestroy(() => {
-        unsubscribeAccountsLoaded()
-        unsubscribeOngoingSnapshot()
-
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
 
@@ -91,8 +63,8 @@
         if (developerProfileNotificationId) {
             removeDisplayNotification(developerProfileNotificationId)
         }
-        if ($isLedgerProfile) {
-            stopPollingLedgerStatus()
+        if ($isActiveLedgerProfile) {
+            stopPollingLedgerNanoStatus()
         }
     })
 
@@ -101,14 +73,6 @@
         if ($activeProfile?.hasLoadedAccounts) {
             handleDeepLink(data)
         }
-    }
-
-    /**
-     * Reactive statement to resume ledger poll if it was interrupted
-     * when the one which interrupted has finished
-     */
-    $: if ($activeProfile && $isLedgerProfile && !$isPollingLedgerDeviceStatus) {
-        pollLedgerDeviceStatus()
     }
 
     $: $hasStrongholdLocked && reflectLockedStronghold()

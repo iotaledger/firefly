@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { appRoute, AppRoute, dashboardRoute, DashboardRoute } from '@core/router'
     import { activeProfile } from '@core/profile'
-    import { appSettings } from '@core/app'
+    import { appSettings, PlatformOption, platform } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
     import tailwindConfig from 'shared/tailwind.config.js'
@@ -13,7 +13,6 @@
     $: showingDashboard = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.type !== 'busy'
     $: showingSettings = $dashboardRoute === DashboardRoute.Settings
 
-    let os = ''
     let isMaximized = false
 
     $: darkModeEnabled = $appSettings.darkMode
@@ -21,9 +20,8 @@
     const fullConfig = resolveConfig(tailwindConfig)
 
     onMount(async () => {
-        os = await Platform.getOS()
         isMaximized = await Platform.isMaximized()
-        document.body.classList.add(`platform-${os}`)
+        document.body.classList.add(`platform-${$platform}`)
         /* eslint-disable @typescript-eslint/no-misused-promises */
         window.addEventListener('resize', handleResize)
     })
@@ -45,7 +43,7 @@
             : 'bg-transparent'}"
         style="-webkit-app-region: drag"
     >
-        {#if os === 'win32'}
+        {#if $platform === PlatformOption.Windows}
             <!-- We need to add this div to allow fix the windows resize area issue due to -webkit-app-region: drag -->
             <div class="h-1 absolute top-0 left-20" style="width: calc(100% - 14rem); -webkit-app-region: none" />
             <button
@@ -119,7 +117,11 @@
             </div>
         {/if}
     </nav>
-    <div class="fixed {os === 'win32' || showingDashboard ? 'top-9' : 'top-0'} left-0 right-0 bottom-0 z-10">
+    <div
+        class="fixed {$platform === PlatformOption.Windows || showingDashboard
+            ? 'top-9'
+            : 'top-0'} left-0 right-0 bottom-0 z-10"
+    >
         <slot />
     </div>
 </div>

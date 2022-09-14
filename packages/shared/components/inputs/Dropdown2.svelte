@@ -21,6 +21,7 @@
     export let showBorderWhenClosed = false
     export let isFocused = false
     export let hasFocus = false
+    export let enableTyping = false
 
     export let onSelect: (..._: any[]) => void
 
@@ -66,6 +67,10 @@
     }
 
     function handleKey(event: KeyboardEvent): void {
+        if (!enableTyping) {
+            return
+        }
+
         if (!dropdown) {
             // Note that space uses code not key, this is intentional
             if (event.key === 'Enter' || event.key === 'ArrowDown' || event.code === 'Space') {
@@ -171,7 +176,7 @@
         bg-white dark:bg-gray-800
             border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700"
     >
-        <div class="flex flex-col items-center inner overflow-y-auto scroll-secondary" bind:this={navContainer}>
+        <div class="flex flex-col items-center inner overflow-y-auto" bind:this={navContainer}>
             {#each items as item}
                 <button
                     class="relative flex items-center p-2 pl-1 w-full whitespace-nowrap

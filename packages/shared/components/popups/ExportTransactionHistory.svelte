@@ -5,10 +5,10 @@
     } from 'shared/lib/transactionHistory'
     import { Button, PasswordInput, Spinner, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { displayNotificationForLedgerProfile, ledgerDeviceStatus } from '@core/ledger'
+    import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { selectedAccount } from '@core/account'
@@ -27,11 +27,9 @@
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await setStrongholdPassword(password)
-            } else if ($isLedgerProfile && !$ledgerDeviceStatus.connected) {
+            } else if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
                 isBusy = false
-
                 displayNotificationForLedgerProfile('warning')
-
                 return
             }
 
@@ -59,7 +57,7 @@
                 showAppNotification({
                     type: 'error',
                     message: localize('notifications.exportTransactionHistory.error', {
-                        value: { accountAlias: $selectedAccount.getAlias() },
+                        values: { accountAlias: $selectedAccount.getAlias() },
                     }),
                 })
             }
@@ -68,7 +66,7 @@
         } catch (err) {
             error = localize(err.error)
 
-            if ($isLedgerProfile) {
+            if ($isActiveLedgerProfile) {
                 displayNotificationForLedgerProfile('error', true, true, err)
             } else {
                 showAppNotification({

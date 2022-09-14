@@ -1,6 +1,6 @@
 import { createNewAccount, setSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
-import { getAndUpdateNodeInfo } from '@core/network'
+import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
 import {
     buildProfileManagerOptionsFromProfileData,
     initialiseProfileManager,
@@ -29,6 +29,8 @@ import {
 import { loadAccounts } from './loadAccounts'
 import { ILoginOptions } from '../../interfaces'
 import { logout } from './logout'
+import { pollLedgerNanoStatus } from '@core/ledger'
+import { isLedgerProfile } from '@core/profile/utils'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
@@ -48,6 +50,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 2: get node info to check we have a synced node
             incrementLoginProgress()
             await getAndUpdateNodeInfo(true)
+            void pollNetworkStatus()
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
@@ -103,6 +106,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 9: finish login
             incrementLoginProgress()
+            if (isLedgerProfile(type)) {
+                pollLedgerNanoStatus()
+            }
             setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)

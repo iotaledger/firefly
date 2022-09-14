@@ -1,7 +1,13 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IAsset, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
-    import { truncateString } from '@lib/helpers'
+    import {
+        TokenStandard,
+        IAsset,
+        setNewTransactionDetails,
+        unverifyAsset,
+        VerificationStatus,
+        verifyAsset,
+    } from '@core/wallet'
     import { openPopup, updatePopupProps } from '@lib/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
@@ -9,7 +15,7 @@
     export let asset: IAsset
     export let activityId: string
 
-    function handleSkip() {
+    function onSkipClick(): void {
         unverifyAsset(asset.id)
         if (activityId) {
             openPopup({
@@ -23,7 +29,7 @@
         }
     }
 
-    function handleVerify() {
+    function onVerifyClick(): void {
         verifyAsset(asset.id)
         if (activityId) {
             openPopup({
@@ -37,13 +43,11 @@
         }
     }
 
-    function handleSend() {
+    function onSendClick(): void {
+        setNewTransactionDetails({ asset })
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                asset,
-            },
         })
     }
 </script>
@@ -61,7 +65,7 @@
                 ? localize('popups.tokenInformation.newTokenTitle')
                 : asset?.metadata?.name}
         </Text>
-        {#if asset?.standard === 'IRC30'}
+        {#if asset?.standard === TokenStandard.IRC30}
             <AssetActionsButton {asset} />
         {/if}
     </div>
@@ -88,8 +92,8 @@
             />
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
-                valueText={truncateString(asset?.id, 18, 18, 3)}
-                isCopyable={asset?.standard === 'IRC30'}
+                valueText={asset?.id}
+                isCopyable={asset?.standard === TokenStandard.IRC30}
                 copyValue={asset?.id}
             />
             {#if asset?.metadata?.url}
@@ -104,14 +108,14 @@
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         {#if asset?.verification === VerificationStatus.New}
-            <Button secondary classes="w-full" onClick={handleSkip}>
+            <Button secondary classes="w-full" onClick={onSkipClick}>
                 {localize('actions.skip')}
             </Button>
-            <Button autofocus classes="w-full" onClick={handleVerify}>
+            <Button autofocus classes="w-full" onClick={onVerifyClick}>
                 {localize('popups.tokenInformation.buttons.verifyToken')}
             </Button>
         {:else}
-            <Button classes="w-full" onClick={handleSend}>
+            <Button classes="w-full" onClick={onSendClick}>
                 {localize('actions.send')}
             </Button>
         {/if}

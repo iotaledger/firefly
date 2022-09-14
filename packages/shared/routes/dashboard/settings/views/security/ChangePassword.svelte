@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Button, Checkbox, PasswordInput, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import passwordInfo from 'shared/lib/password'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
+    import { PASSWORD_REASON_MAP } from '@core/stronghold'
 
     let exportStrongholdChecked: boolean
     let startOfPasswordChange: number
@@ -73,8 +73,8 @@
                 return false
             } else if (passwordStrength.score !== 4) {
                 let errorLocale = 'error.password.tooWeak'
-                if (passwordStrength.feedback.warning && passwordInfo[passwordStrength.feedback.warning]) {
-                    errorLocale = `error.password.${passwordInfo[passwordStrength.feedback.warning]}`
+                if (passwordStrength.feedback.warning && PASSWORD_REASON_MAP[passwordStrength.feedback.warning]) {
+                    errorLocale = `error.password.${PASSWORD_REASON_MAP[passwordStrength.feedback.warning]}`
                 }
                 newPasswordError = localize(errorLocale)
                 return false

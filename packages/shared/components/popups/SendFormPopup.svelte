@@ -3,34 +3,21 @@
     import { localize } from '@core/i18n'
     import { closePopup, openPopup } from 'shared/lib/popup'
     import { FontWeight } from 'shared/components/Text.svelte'
-    import { resetLedgerSendConfirmationProps } from '@core/ledger'
-    import { IAsset, Subject } from '@core/wallet'
+    import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
+    import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
 
-    export let asset: IAsset
-    export let amount: string
-    export let unit: string
-    export let recipient: Subject
-    export let metadata: string
-    export let tag: string
-
+    let { asset, amount, unit, recipient, metadata, tag } = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput
     let recipientInput: RecipientInput
 
     async function onSend(): Promise<void> {
         const valid = await validate()
         if (valid) {
+            updateNewTransactionDetails({ asset, amount, unit, recipient, metadata, tag })
             openPopup({
                 type: 'sendConfirmation',
-                props: {
-                    asset,
-                    amount,
-                    unit,
-                    recipient,
-                    internal: false,
-                    metadata,
-                    tag,
-                },
                 overflow: true,
             })
         }
@@ -38,7 +25,12 @@
 
     async function validate(): Promise<boolean> {
         try {
-            await Promise.all([assetAmountInput?.validate(), recipientInput?.validate()])
+            await Promise.all([
+                assetAmountInput?.validate(),
+                recipientInput?.validate(),
+                validateTag(),
+                validateMetadata(),
+            ])
             return true
         } catch (error) {
             console.error('Error: ', error)
@@ -62,6 +54,24 @@
         isTagInputOpen = true
     }
 
+    let tagError: string = ''
+    function validateTag(): Promise<void> {
+        tagError = ''
+        if (getByteLengthOfString(tag) > 64) {
+            tagError = localize('error.send.tagTooLong')
+            return Promise.reject(tagError)
+        }
+    }
+
+    let metadataError: string = ''
+    function validateMetadata(): Promise<void> {
+        metadataError = ''
+        if (getByteLengthOfString(metadata) > 8192) {
+            metadataError = localize('error.send.metadataTooLong')
+            return Promise.reject(metadataError)
+        }
+    }
+
     let sendButtonElement: HTMLButtonElement
     onMount(() => {
         if (metadata) {
@@ -73,8 +83,6 @@
         if (amount && recipient) {
             sendButtonElement.focus()
         }
-
-        resetLedgerSendConfirmationProps()
     })
 </script>
 
@@ -87,15 +95,21 @@
             bind:buttonElement={metadataButtonElement}
             bind:open={isMetadataInputOpen}
             bind:value={metadata}
+            error={metadataError}
             label={localize('general.metadata')}
             placeholder={localize('general.metadata')}
+            fontSize="15"
+            fontWeight={FontWeight.medium}
         />
         <ClosableInput
-            bind:buttonElement={metadataButtonElement}
+            bind:buttonElement={tagButtonElement}
             bind:open={isTagInputOpen}
             bind:value={tag}
+            error={tagError}
             label={localize('general.tag')}
             placeholder={localize('general.tag')}
+            fontSize="15"
+            fontWeight={FontWeight.medium}
         />
         {#if !isMetadataInputOpen || !isTagInputOpen}
             <optional-input-buttons class="flex flex-row space-x-4">

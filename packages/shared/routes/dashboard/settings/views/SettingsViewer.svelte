@@ -5,7 +5,7 @@
     import features from '@features/features'
     import { mobile } from '@core/app'
     import { localize, _ } from '@core/i18n'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import {
         AdvancedSettingsRoute,
         AdvancedSettingsRouteNoProfile,
@@ -36,7 +36,7 @@
         delete securitySettings.ExportStronghold
         delete securitySettings.ChangePassword
     }
-    $: if (!$isLedgerProfile) {
+    $: if (!$isActiveLedgerProfile) {
         delete advancedSettings.MigrateLedgerIndex
     }
 

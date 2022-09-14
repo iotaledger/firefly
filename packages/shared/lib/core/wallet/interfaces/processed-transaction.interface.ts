@@ -10,4 +10,10 @@ export interface IProcessedTransaction {
     inclusionState: InclusionState
     transactionInputs: IUTXOInput[]
     detailedTransactionInputs: IOutputResponse[]
+    claimingData?: IClaimData
+}
+
+interface IClaimData {
+    claimedDate: Date
+    claimingTransactionId: string
 }

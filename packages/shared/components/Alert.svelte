@@ -2,9 +2,9 @@
     import { Icon, Text } from 'shared/components'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
-    export let classes: string
     export let type: string
     export let message: string
+    export let classes: string = ''
 
     const TOAST_STYLE = {
         info: {

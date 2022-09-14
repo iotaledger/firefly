@@ -10,6 +10,8 @@
         appVersionDetails,
         AppStage,
         appStage,
+        PlatformOption,
+        platform,
     } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { formatDate, localize } from '@core/i18n'
@@ -31,7 +33,7 @@
     }
 
     onMount(async () => {
-        // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
             await setAppVersionDetails()
             if (get(appStage) === AppStage.PROD) {
@@ -39,8 +41,7 @@
                 checkForAppUpdate()
             }
         }
-        const os = await Platform.getOS()
-        hasAutoUpdate = os !== 'win32'
+        hasAutoUpdate = $platform !== PlatformOption.Windows
     })
 </script>
 

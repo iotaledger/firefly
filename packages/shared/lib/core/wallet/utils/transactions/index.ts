@@ -1,3 +1,4 @@
+export * from './getDirectionFromTransaction'
 export * from './getFoundryOutputFromTransaction'
 export * from './getMainTransactionOutputFromTransaction'
 export * from './getSenderFromTransaction'
