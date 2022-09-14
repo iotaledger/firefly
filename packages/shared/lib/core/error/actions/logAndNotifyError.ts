@@ -7,6 +7,8 @@ import { addError } from '../stores'
 export function logAndNotifyError(errorParameters: IErrorParameters): void {
     const localisedMessage = errorParameters?.localizationKey
         ? localize(errorParameters?.localizationKey)
+        : errorParameters?.message
+        ? errorParameters.message
         : localize('error.global.generic')
 
     if (errorParameters?.logToConsole) {
@@ -14,7 +16,7 @@ export function logAndNotifyError(errorParameters: IErrorParameters): void {
     }
 
     if (errorParameters?.saveToErrorLog) {
-        addError(errorParameters)
+        addError({ ...errorParameters, time: Date.now() })
     }
 
     if (errorParameters?.showNotification) {

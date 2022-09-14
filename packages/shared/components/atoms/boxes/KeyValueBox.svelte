@@ -10,7 +10,7 @@
     export let darkTextColor: string = 'gray-500'
     export let backgroundColor: string = 'gray-50'
     export let darkBackgroundColor: string = 'gray-850'
-    export let padding: string = 'px-4 py-3.5'
+    export let padding: string = 'px-4 py-2.5'
     export let classes: string = ''
     export let copyValue: string = ''
     export let isCopyable: boolean = false
@@ -33,6 +33,7 @@
         col={isVertical}
         {backgroundColor}
         {darkBackgroundColor}
+        clearBoxPadding
         classes="w-full overflow-hidden {padding} {classes}"
     >
         <div
@@ -42,7 +43,7 @@
         >
             {#if keyText}
                 <Text
-                    fontSize="14"
+                    fontSize="13"
                     lineHeight="5"
                     color={textColor}
                     darkColor={darkTextColor}
@@ -60,7 +61,7 @@
                     class={isVertical ? 'break-words' : 'truncate'}
                 >
                     <Text
-                        fontSize="14"
+                        fontSize="13"
                         lineHeight="16"
                         color={textColor}
                         darkColor={darkTextColor}

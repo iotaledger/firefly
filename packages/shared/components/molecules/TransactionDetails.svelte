@@ -102,9 +102,9 @@
 </script>
 
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
+    <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
         {#if amount}
-            <transaction-value class="flex flex-col space-y-0.5 items-center">
+            <transaction-value class="flex flex-col items-center">
                 <div class="flex flex-row space-x-3">
                     <AssetIcon {asset} />
                     <div class="flex flex-row items-baseline space-x-0.1">
@@ -122,7 +122,7 @@
             </transaction-value>
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
-            {#if inclusionState}
+            {#if inclusionState && direction}
                 <ActivityStatusPill {type} {direction} {isInternal} {inclusionState} />
             {/if}
             {#if asyncStatus}
@@ -142,7 +142,7 @@
             {:else if subject?.type === 'address'}
                 <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
             {:else}
-                <Box col clearBackground clearPadding>
+                <Box row clearBackground clearPadding classes="justify-center">
                     <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
                         {localize('general.unknownAddress')}
                     </Text>

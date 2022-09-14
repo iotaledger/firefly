@@ -23,7 +23,7 @@
     export let isFocused = false
     export let enableTyping = false
 
-    export let onSelect: (..._: any[]) => void
+    export let onSelect: (..._: DropdownChoice[]) => void
 
     let dropdown = false
     let navContainer

@@ -57,7 +57,7 @@
     $: formattedFiatValue =
         formatCurrency(
             convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
-        ) || '-'
+        ) || ''
 
     $: transactionDetails = {
         asset,
