@@ -9,7 +9,6 @@ import {
     getOutputOptions,
     resetNewTransactionDetails,
     setNewTransactionDetails,
-    validateSendConfirmation,
 } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 import type { Transaction } from '@iota/wallet'
@@ -66,7 +65,6 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-    validateSendConfirmation(outputOptions, preparedOutput)
 
     let claimingTransaction: Transaction
     if (get(isOnboardingLedgerProfile)) {

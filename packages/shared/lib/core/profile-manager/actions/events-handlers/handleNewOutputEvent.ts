@@ -9,11 +9,12 @@ import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessG
 import { Bech32Helper } from '@lib/bech32Helper'
 import { Converter } from '@lib/converter'
 
+import { WalletApiEvent } from '../../enums'
 import { INewOutputEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
 
 export function handleNewOutputEvent(error: Error, rawEvent: string): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent)
+    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.NewOutput)
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
     handleNewOutputEventInternal(accountIndex, payload as INewOutputEventPayload)
 }

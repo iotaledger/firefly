@@ -7,11 +7,12 @@ import {
 } from '@core/wallet/stores/all-account-activities.store'
 import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
 
+import { WalletApiEvent } from '../../enums'
 import { ISpentOutputEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: string): Promise<void> {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent)
+    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.SpentOutput)
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
     await handleSpentOutputEventInternal(accountIndex, payload as ISpentOutputEventPayload)
 }

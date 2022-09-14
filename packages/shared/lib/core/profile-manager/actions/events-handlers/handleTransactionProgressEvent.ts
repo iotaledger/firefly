@@ -6,13 +6,14 @@ import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 import { closePopup, openPopup } from '@lib/popup'
 import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 
+import { WalletApiEvent } from '../../enums'
 import { MissingTransactionProgressEventPayloadError } from '../../errors'
 import { isPreparedTransaction, isPreparedTransactionEssenceHash } from '../../helpers'
 import { TransactionProgressEventPayload } from '../../types'
 import { validateWalletApiEvent } from '../../utils'
 
 export function handleTransactionProgressEvent(error: Error, rawEvent: string): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent)
+    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionProgress)
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
     handleTransactionProgressEventInternal(accountIndex, payload as TransactionProgressEventPayload)
 }

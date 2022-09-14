@@ -1,8 +1,14 @@
-import { IWalletApiEventPayloadWrapper, WalletApiEventPayload } from '@core/profile-manager'
+import { WalletApiEvent } from '../enums'
+import { IWalletApiEventPayloadWrapper } from '../interfaces'
 
-export function validateWalletApiEvent(error: Error, rawEvent: string): IWalletApiEventPayloadWrapper {
+export function validateWalletApiEvent(
+    error: Error,
+    rawEvent: string,
+    apiEvent: WalletApiEvent
+): IWalletApiEventPayloadWrapper {
     if (error) {
         console.error(error)
+        // TODO: make WalletApiEventValidation error and throw it here
     } else {
         let { accountIndex, event } = JSON.parse(rawEvent)
 
@@ -11,14 +17,14 @@ export function validateWalletApiEvent(error: Error, rawEvent: string): IWalletA
             console.error('Invalid event handler account index')
         }
 
-        // TODO: Handle runtime type validation?
-        if (!event) {
-            console.error('Invalid event type')
+        const payload = event[apiEvent]
+        if (!payload) {
+            console.error('Invalid event payload type')
         }
 
         return {
-            accountIndex: <number>accountIndex,
-            payload: <WalletApiEventPayload>event,
+            accountIndex,
+            payload,
         }
     }
 }

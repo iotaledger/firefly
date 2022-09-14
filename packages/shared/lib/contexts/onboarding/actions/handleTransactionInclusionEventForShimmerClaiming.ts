@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
-import { ITransactionInclusionEventPayload, validateWalletApiEvent } from '@core/profile-manager'
+import { ITransactionInclusionEventPayload, validateWalletApiEvent, WalletApiEvent } from '@core/profile-manager'
 import { InclusionState, MissingTransactionIdError } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 
@@ -11,7 +11,7 @@ import { onboardingProfile, shimmerClaimingTransactions, updateShimmerClaimingAc
 import { IShimmerClaimingAccount } from '@contexts/onboarding'
 
 export function handleTransactionInclusionEventForShimmerClaiming(error: Error, rawEvent: string): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent)
+    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionInclusion)
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
     handleTransactionInclusionEventForShimmerClaimingInternal(
         accountIndex,
