@@ -1,9 +1,8 @@
 <script lang="typescript">
-    import { mobile } from '@core/app'
+    import { mobile, PlatformOption, platform } from '@core/app'
     import { Locale } from '@core/i18n'
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
-    import { Platform } from 'shared/lib/platform'
     import { closePopup, popupState } from 'shared/lib/popup'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
@@ -62,7 +61,6 @@
     }
 
     let size: PopupSize = PopupSize.Medium
-    let os = ''
 
     $: switch (type) {
         case 'connectLedger':
@@ -158,12 +156,11 @@
         e.preventDefault()
     }
 
-    onMount(async () => {
+    onMount(() => {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
         }
-        os = await Platform.getOS()
     })
 </script>
 
@@ -177,9 +174,9 @@
 {:else}
     <popup
         in:fade={{ duration: transition ? 100 : 0 }}
-        class={`flex items-center justify-center fixed ${os === 'win32' ? 'top-9' : 'top-0'} left-0 w-screen p-6 ${
-            overflow ? '' : 'overflow-hidden'
-        }
+        class={`flex items-center justify-center fixed ${
+            $platform === PlatformOption.Windows ? 'top-9' : 'top-0'
+        } left-0 w-screen p-6 ${overflow ? '' : 'overflow-hidden'}
                 h-full z-20 ${
                     fullScreen
                         ? 'bg-white dark:bg-gray-900'

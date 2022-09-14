@@ -101,9 +101,9 @@ export class Activity implements IActivity {
     getFiatAmount(fiatPrice?: number, exchangeRate?: number): string {
         if (fiatPrice && exchangeRate) {
             const fiatValue = formatCurrency(convertToFiat(this.data.rawAmount, fiatPrice, exchangeRate))
-            return fiatValue ? fiatValue : '-'
+            return fiatValue ? fiatValue : ''
         } else {
-            return '-'
+            return ''
         }
     }
 }

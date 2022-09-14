@@ -10,8 +10,8 @@ import { setAccountActivitiesInAllAccountActivities } from '@core/wallet/stores'
 export async function generateAndStoreActivitiesForAccount(account: IAccountState): Promise<void> {
     // Step 1: process account transactions and outputs into processed transactions
     const processedTransactions = [
-        ...preprocessTransactionsForAccount(account),
-        ...preprocessOutputsForAccount(account),
+        ...(await preprocessTransactionsForAccount(account)),
+        ...(await preprocessOutputsForAccount(account)),
     ]
 
     // Step 2: link transactions with corresponding claiming transactions

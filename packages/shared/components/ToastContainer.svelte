@@ -20,7 +20,7 @@
         {#each toasts as toast}
             <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
                 {#if toast?.alert}
-                    <Alert {...toast} />
+                    <Alert classes={toast.classes} type={toast.type} message={toast.message} />
                 {:else}
                     <Toast {...toast} />
                 {/if}
