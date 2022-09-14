@@ -1,2 +1,2 @@
 export * from './ledger-connection-state.interface'
-export * from './ledger-status-polling-configuration.interface'
+export * from './ledger-nano-status-polling-configuration.interface'
