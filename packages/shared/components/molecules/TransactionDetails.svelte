@@ -117,9 +117,7 @@
                 <div class="flex flex-row space-x-3">
                     <AssetIcon {asset} />
                     <div class="flex flex-row items-baseline space-x-0.1">
-                        <Text type="h1" fontWeight={FontWeight.semibold}>
-                            {amount}
-                        </Text>
+                        <Text type="h1" fontWeight={FontWeight.semibold}>{amount}</Text>
                         {#if unit}
                             <Text type="h4" classes="ml-1" fontWeight={FontWeight.medium}>{unit}</Text>
                         {/if}
