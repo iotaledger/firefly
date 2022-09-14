@@ -67,17 +67,18 @@
         </div>
     </div>
     <!-- Action -->
-    {#if isBusy && !error}
-        <Text secondary classes="mb-3 text-center">{localize('general.updatingAccount')}</Text>
-    {/if}
-    {#if !isBusy}
-        <div class="flex flex-row justify-between mt-2 px-2">
-            <Button outline classes="-mx-2 w-1/2" onClick={onCancelClick} disabled={isBusy}>
-                {localize('actions.cancel')}
-            </Button>
-            <Button classes="-mx-2 w-1/2" onClick={onSaveClick} disabled={invalidAliasUpdate && !hasColorChanged}>
-                {localize('actions.save')}
-            </Button>
-        </div>
-    {/if}
+    <div class="flex flex-row justify-between mt-2 px-2">
+        <Button outline classes="-mx-2 w-1/2" onClick={onCancelClick} disabled={isBusy}>
+            {localize('actions.cancel')}
+        </Button>
+        <Button
+            classes="-mx-2 w-1/2"
+            onClick={onSaveClick}
+            disabled={invalidAliasUpdate && !hasColorChanged}
+            {isBusy}
+            busyMessage={localize('general.updating')}
+        >
+            {localize('actions.save')}
+        </Button>
+    </div>
 </div>

@@ -126,6 +126,10 @@
         @apply pointer-events-none;
         @apply bg-gray-200;
         @apply text-gray-500;
+
+        :global(spinner-container svg) {
+            @apply text-gray-500;
+        }
     }
 
     button.dark:disabled {
