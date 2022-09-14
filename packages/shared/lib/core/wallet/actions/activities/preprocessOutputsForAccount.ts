@@ -20,7 +20,7 @@ export function preprocessOutputsForAccount(account: IAccountState): IProcessedT
         const hasTransaction = !!account?.meta?.transactions?.[transactionId]
         if (!hasTransaction) {
             processedTransactions.push(
-                preprocessGroupedOutputs(
+                ...preprocessGroupedOutputs(
                     groupedOutputs[transactionId],
                     account?.meta?.incomingTransactions[transactionId],
                     account

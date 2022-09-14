@@ -12,6 +12,7 @@
     import {
         TransactionActivityTile,
         FoundryActivityTile,
+        AliasActivityTile,
         Text,
         TextInput,
         TogglableButton,
@@ -107,6 +108,12 @@
                             inclusionState={item.activity.inclusionState}
                             fiatAmount={item.activity.getFiatAmount()}
                             amount={item.activity.getFormattedAmount()}
+                            data={item.activity.data}
+                        />
+                    {:else if item.activity.data.type === ActivityType.Alias}
+                        <AliasActivityTile
+                            activityId={item.activity.id}
+                            inclusionState={item.activity.inclusionState}
                             data={item.activity.data}
                         />
                     {:else}

@@ -30,7 +30,10 @@
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
-    $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
+    $: amount =
+        activity && activity.data.type !== ActivityType.Alias
+            ? formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
+            : undefined
     $: isTimelocked =
         activity.data.type === ActivityType.Transaction && activity.data.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
@@ -44,16 +47,16 @@
         type: activity?.type,
         transactionTime: activity?.time,
         inclusionState: activity?.inclusionState,
-        rawAmount: activity?.data.rawAmount,
         formattedFiatValue: activity?.getFiatAmount(
             $currencies[CurrencyTypes.USD],
             $exchangeRates[$activeProfile?.settings?.currency]
         ),
         storageDeposit: activity?.data.storageDeposit,
-        giftedStorageDeposit: activity?.data.giftedStorageDeposit,
         amount,
         unit: asset?.metadata?.unit,
         ...(activity?.data.type === ActivityType.Transaction && {
+            rawAmount: activity?.data.rawAmount,
+            giftedStorageDeposit: activity?.data.giftedStorageDeposit,
             asyncStatus: activity?.data.asyncStatus,
             direction: activity?.data.direction,
             isInternal: activity?.data.isInternal,
@@ -64,6 +67,15 @@
             subject: activity?.data?.subject,
             tag: activity?.data?.tag,
             metadata: activity?.data?.metadata,
+        }),
+        ...(activity?.data.type === ActivityType.Foundry && {
+            rawAmount: activity?.data.rawAmount,
+            giftedStorageDeposit: activity?.data.giftedStorageDeposit,
+        }),
+        ...(activity?.data.type === ActivityType.Alias && {
+            aliasId: activity.data.aliasId,
+            governorAddress: activity.data.governorAddress,
+            stateControllerAddress: activity.data.stateControllerAddress,
         }),
     }
 

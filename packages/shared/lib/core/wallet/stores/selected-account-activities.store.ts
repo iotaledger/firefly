@@ -101,7 +101,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
 
         activityList = activityList.filter((activity) => isVisibleActivity(activity))
 
-        if (activitySearchTerm) {
+        if ($activitySearchTerm) {
             activityList = activityList.filter(
                 (activity) =>
                     (activity.data.type === ActivityType.Transaction &&
@@ -110,14 +110,18 @@ export const queriedActivities: Readable<Activity[]> = derived(
                             (activity.data.recipient?.type === 'address' &&
                                 activity.data.recipient?.address === $activitySearchTerm))) ||
                     activity?.id?.toLowerCase() === $activitySearchTerm ||
-                    ($activitySearchTerm[0] === '>' &&
-                        unitToValue($activitySearchTerm.substring(1)) < activity.data.rawAmount) ||
-                    ($activitySearchTerm[0] === '<' &&
-                        unitToValue($activitySearchTerm.substring(1)) > activity.data.rawAmount) ||
-                    ($activitySearchTerm[1] === 'i' &&
-                        isValueInUnitRange(activity.data.rawAmount, $activitySearchTerm)) ||
-                    activity.data.rawAmount === unitToValue($activitySearchTerm) ||
-                    formatUnitBestMatch(activity.data.rawAmount).toString().toLowerCase()?.includes($activitySearchTerm)
+                    ((activity.data.type === ActivityType.Foundry || activity.data.type === ActivityType.Transaction) &&
+                        (($activitySearchTerm[0] === '>' &&
+                            unitToValue($activitySearchTerm.substring(1)) < activity.data.rawAmount) ||
+                            ($activitySearchTerm[0] === '<' &&
+                                unitToValue($activitySearchTerm.substring(1)) > activity.data.rawAmount) ||
+                            ($activitySearchTerm[1] === 'i' &&
+                                isValueInUnitRange(activity.data.rawAmount, $activitySearchTerm)) ||
+                            activity.data.rawAmount === unitToValue($activitySearchTerm) ||
+                            formatUnitBestMatch(activity.data.rawAmount)
+                                .toString()
+                                .toLowerCase()
+                                ?.includes($activitySearchTerm)))
             )
         }
 

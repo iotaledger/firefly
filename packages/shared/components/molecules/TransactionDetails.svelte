@@ -18,7 +18,7 @@
         Subject,
         InclusionState,
         ActivityDirection,
-        IAsset,
+        IPersistedAsset,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -27,7 +27,7 @@
     import { setClipboard } from '@lib/utils'
     import { time } from '@core/app'
 
-    export let asset: IAsset
+    export let asset: IPersistedAsset
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
@@ -43,6 +43,9 @@
     export let giftedStorageDeposit = 0
     export let subject: Subject = null
     export let tag: string = null
+    export let aliasId: string = null
+    export let governorAddress: string = null
+    export let stateControllerAddress: string = null
     export let transactionTime: Date = null
     export let isInternal = false
     export let isClaiming = false
@@ -77,6 +80,9 @@
         ...(expirationTime && { expirationTime }),
         ...(timelockDate && { timelockDate: formattedTimelockDate }),
         ...(claimedTime && { claimedTime }),
+        ...(aliasId && { aliasId }),
+        ...(governorAddress && { governorAddress }),
+        ...(stateControllerAddress && { stateControllerAddress }),
     }
 
     function getDateFormat(date: Date): string {

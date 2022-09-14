@@ -78,7 +78,7 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 }
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.amount.active) {
+    if (filter.amount.active && activity.data.type !== ActivityType.Alias) {
         const asset = getAssetFromPersistedAssets(activity.data.assetId)
         const activityAmount = generateRawAmount(
             String(activity.data.rawAmount),

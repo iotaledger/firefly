@@ -7,7 +7,7 @@ export function getActivityType(outputs: IOutput[]): ActivityType {
         return ActivityType.Foundry
     }
     if (outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS)) {
-        return ActivityType.Foundry
+        return ActivityType.Alias
     } else {
         return ActivityType.Transaction
     }

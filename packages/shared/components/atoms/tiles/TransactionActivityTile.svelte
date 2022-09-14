@@ -75,6 +75,7 @@
             return localize('general.unknownAddress')
         }
     }
+
     function handleTransactionClick(): void {
         if (asset?.verification === VerificationStatus.New) {
             openPopup({

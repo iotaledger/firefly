@@ -24,7 +24,7 @@ export function handleNewOutputEvent(accountId: string, event: NewOutputEvent): 
             [output],
             [event?.transaction, event?.transactionInputs],
             account
-        )
+        )[0]
         addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedOutput, account))
     }
 }

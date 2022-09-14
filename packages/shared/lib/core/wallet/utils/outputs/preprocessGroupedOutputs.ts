@@ -5,16 +5,13 @@ import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
 import { InclusionState } from '@core/wallet/enums'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { IAccountState } from '@core/account'
+import { OUTPUT_TYPE_ALIAS } from '@core/wallet/constants/output-type.constants'
 
 export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
     incomingTransactions: [ITransactionPayload, IOutputResponse[]],
     account: IAccountState
-): IProcessedTransaction {
-    const outputs: IOutput[] = outputDatas.map((outputData) => ({
-        outputId: outputData.outputId,
-        output: outputData.output,
-    }))
+): IProcessedTransaction[] {
     const transactionMetadata = outputDatas[0]?.metadata
     const detailedTransactionInputs = incomingTransactions?.[1]
 
@@ -30,7 +27,8 @@ export function preprocessGroupedOutputs(
 
     const isIncoming = isTransactionIncoming(outputDatas, account.depositAddress)
 
-    return {
+    const outputGroups: IOutput[][] = splitOutputs(outputDatas)
+    const processedTransactions = outputGroups.map((outputs) => ({
         outputs,
         transactionId: transactionMetadata?.transactionId,
         isIncoming,
@@ -38,7 +36,8 @@ export function preprocessGroupedOutputs(
         inclusionState: InclusionState.Confirmed,
         transactionInputs,
         detailedTransactionInputs,
-    }
+    }))
+    return processedTransactions
 }
 
 function isTransactionIncoming(outputs: OutputData[], accountAddress: string): boolean {
@@ -48,4 +47,21 @@ function isTransactionIncoming(outputs: OutputData[], accountAddress: string): b
     }
     const address = getRecipientAddressFromOutput(nonRemainderOutputs[0].output)
     return address === accountAddress
+}
+
+function splitOutputs(outputDatas: OutputData[]): IOutput[][] {
+    const outputs = outputDatas.map((outputData) => ({
+        outputId: outputData.outputId,
+        output: outputData.output,
+    }))
+    const containsAliasOutput = outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS)
+    if (containsAliasOutput) {
+        const aliasOutputIndex = outputs.findIndex((output) => output.output.type === OUTPUT_TYPE_ALIAS)
+
+        const aliasOutput = [outputs[aliasOutputIndex]]
+        const otherOutputs = outputs.slice(aliasOutputIndex)
+        return [aliasOutput, otherOutputs]
+    } else {
+        return [outputs]
+    }
 }
