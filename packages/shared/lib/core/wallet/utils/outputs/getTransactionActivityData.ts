@@ -33,7 +33,7 @@ export function getTransactionActivityData(
         account.depositAddress,
         isIncoming
     )
-    const outputId = wrappedOutput.outputId // Only required for async transactions e.g. when claimed or to get the full output with `getOutput`
+    const outputId = wrappedOutput.outputId
 
     const { output } = wrappedOutput
     const recipient = getRecipientFromOutput(output)

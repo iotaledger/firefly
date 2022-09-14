@@ -43,13 +43,12 @@ export class Activity implements IActivity {
         this.time = time
         this.inputs = transactionInputs
 
-        this.id = transactionId
-
         if (type === ActivityType.Transaction) {
             this.data = getTransactionActivityData(processedTransaction, account)
         } else if (type === ActivityType.Foundry) {
             this.data = getFoundryActivityData(processedTransaction)
         }
+        this.id = this.data.outputId || transactionId
     }
 
     updateFromPartialActivity(partialActivity: Partial<IActivity>): void {
