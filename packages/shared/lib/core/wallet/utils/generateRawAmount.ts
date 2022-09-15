@@ -1,26 +1,25 @@
+import Big from 'big.js'
 import { parseCurrency } from '@lib/currency'
 import { UNIT_MAP } from '@lib/units'
 import { ITokenMetadata } from '../interfaces'
 
-export function generateRawAmount(amount: string, unit: string, tokenMetadata?: ITokenMetadata): number {
-    const parsedAmount = parseCurrency(amount)
-    if (tokenMetadata) {
+export function generateRawAmount(amount: string, unit: string, tokenMetadata?: ITokenMetadata): Big {
+    if (amount) {
+        const parsedAmount = parseCurrency(amount)
         return generateRawAmountFromMetadata(parsedAmount, unit, tokenMetadata)
     } else {
-        return parsedAmount
+        return undefined
     }
 }
 
-function generateRawAmountFromMetadata(amount: number, unit: string, tokenMetadata: ITokenMetadata): number {
-    if (!tokenMetadata?.useMetricPrefix) {
-        if (unit && unit === tokenMetadata?.unit) {
-            return amount * 10 ** tokenMetadata?.decimals
-        } else if (unit === tokenMetadata?.subunit) {
-            return amount
-        }
-    } else if (tokenMetadata?.useMetricPrefix) {
-        return amount * UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
+function generateRawAmountFromMetadata(amount: number, unit: string, tokenMetadata: ITokenMetadata): Big {
+    if (tokenMetadata.useMetricPrefix) {
+        return Big(amount * UNIT_MAP?.[unit?.substring(0, 1)] ?? 0)
     } else {
-        return amount
+        if (unit && unit === tokenMetadata.unit) {
+            return Big(amount).mul(Big(10).pow(tokenMetadata.decimals))
+        } else if (unit === tokenMetadata.subunit) {
+            return Big(amount)
+        }
     }
 }

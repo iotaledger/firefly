@@ -1,15 +1,22 @@
 <script lang="typescript">
+    import Big from 'big.js'
     import { Text, AssetDropdown, InputContainer, AmountInput } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
     import { parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountBestMatch, generateRawAmount, IAsset, formatTokenAmountDefault } from '@core/wallet'
+    import {
+        formatTokenAmountBestMatch,
+        generateRawAmount,
+        IAsset,
+        formatTokenAmountDefault,
+        visibleSelectedAccountAssets,
+    } from '@core/wallet'
     import { UNIT_MAP } from '@lib/units'
 
     export let inputElement: HTMLInputElement
     export let disabled = false
     export let isFocused = false
-    export let asset: IAsset
+    export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
     export let amount: string
     export let unit: string
 
@@ -61,11 +68,11 @@
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
-        } else if (rawAmount > asset?.balance?.available) {
+        } else if (rawAmount.gt(Big(asset?.balance?.available))) {
             error = localize('error.send.amountTooHigh')
-        } else if (rawAmount <= 0) {
+        } else if (rawAmount.lte(Big(0))) {
             error = localize('error.send.amountZero')
-        } else if (rawAmount % 1 !== 0) {
+        } else if (!rawAmount.mod(1).eq(Big(0))) {
             error = localize('error.send.amountSmallerThanSubunit')
         }
 
