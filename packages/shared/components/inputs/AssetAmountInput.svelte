@@ -34,7 +34,7 @@
     let allowedDecimals = 0
     $: if (!asset?.metadata?.useMetricPrefix) {
         if (unit === asset?.metadata.unit) {
-            allowedDecimals = asset?.metadata.decimals
+            allowedDecimals = Math.min(asset?.metadata.decimals, 18)
         } else if (unit === asset?.metadata?.subunit) {
             allowedDecimals = 0
         }
