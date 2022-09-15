@@ -6,6 +6,7 @@ import { ActionSheet, ShowActionsOptions } from '@capacitor/action-sheet'
 import { Keyboard } from '@capacitor/keyboard'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { Share } from '@capacitor/share'
+import { PrivacyScreen } from '@capacitor-community/privacy-screen'
 import { BarcodeManager } from './lib/barcodeManager'
 import { SecureFilesystemAccess } from 'capacitor-secure-filesystem-access'
 import { DeepLinkManager } from '../../mobile/capacitor/lib/deepLinkManager'
@@ -413,6 +414,14 @@ export const CapacitorApi: IPlatform = {
 
     hideKeyboard: async () => {
         await Keyboard.hide()
+    },
+
+    enablePrivacy: async () => {
+        await PrivacyScreen.enable()
+    },
+
+    disablePrivacy: async () => {
+        await PrivacyScreen.disable()
     },
 }
 

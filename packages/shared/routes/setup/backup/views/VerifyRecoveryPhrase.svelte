@@ -1,7 +1,8 @@
 <script lang="typescript">
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher, onMount, onDestroy } from 'svelte'
     import { Button, Icon, OnboardingLayout, RecoveryPhrase, Text, Spinner } from 'shared/components'
     import { mobile } from 'shared/lib/app'
+    import { Platform } from 'shared/lib/platform'
     import { english } from 'shared/lib/wordlists/english'
     import { Locale } from '@core/i18n'
 
@@ -67,7 +68,12 @@
     }
 
     onMount(() => {
+        Platform.enablePrivacy()
         fillChoices()
+    })
+
+    onDestroy(() => {
+        Platform.disablePrivacy()
     })
 </script>
 

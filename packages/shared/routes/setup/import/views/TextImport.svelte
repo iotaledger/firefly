@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Animation, Button, ImportTextfield, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from 'shared/lib/app'
-    import { createEventDispatcher, getContext } from 'svelte'
+    import { Platform } from 'shared/lib/platform'
+    import { createEventDispatcher, getContext, onMount, onDestroy } from 'svelte'
     import { Locale } from '@core/i18n'
     import { ImportRouter } from '@core/router'
 
@@ -31,6 +32,14 @@
             dispatch('previous')
         }
     }
+
+    onMount(() => {
+        Platform.enablePrivacy()
+    })
+
+    onDestroy(() => {
+        Platform.disablePrivacy()
+    })
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick}>
