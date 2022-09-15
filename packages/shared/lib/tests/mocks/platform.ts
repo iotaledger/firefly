@@ -117,6 +117,12 @@ const Platform: IPlatform = {
     loadJsonFile(filepath: string): Promise<unknown> {
         return Promise.resolve({ filepath })
     },
+    enablePrivacy(): Promise<void> {
+        return Promise.resolve(undefined)
+    },
+    disablePrivacy(): Promise<void> {
+        return Promise.resolve(undefined)
+    },
 }
 
 window['__CAPACITOR__'] = Platform
