@@ -61,9 +61,23 @@ describe('File: formatTokenAmountDefault.ts', () => {
         const amount = 42069
         decimalToken.decimals = 30
         const formattedAmount = formatTokenAmountDefault(amount, decimalToken)
-        expect(formattedAmount).toBe('4.2069e-26')
+        expect(formattedAmount).toBe('4.2068999999999996e-26')
     })
-    it('should work with big number and no decimals', () => {})
-    it('should work with big number and normal decimal amount', () => {})
-    it('should work with big number and big decimal amount', () => {})
+    it('should work with big number and no decimals', () => {
+        const amount = 4.2e69
+        const formattedAmount = formatTokenAmountDefault(amount, decimalToken)
+        expect(formattedAmount).toBe('4.2e+69')
+    })
+    it('should work with big number and normal decimal amount', () => {
+        const amount = 4.2e69
+        decimalToken.decimals = 30
+        const formattedAmount = formatTokenAmountDefault(amount, decimalToken)
+        expect(formattedAmount).toBe('4.2000000000000003e+39')
+    })
+    it('should work with big number and big decimal amount', () => {
+        const amount = 4.2e24
+        decimalToken.decimals = 2e100
+        const formattedAmount = formatTokenAmountDefault(amount, decimalToken)
+        expect(formattedAmount).toEqual('0')
+    })
 })
