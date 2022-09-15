@@ -59,9 +59,9 @@ describe('File: formatTokenAmountDefault.ts', () => {
     })
     it('should work with normal number and big decimal amount', () => {
         const amount = 42069
-        decimalToken.decimals = 20
+        decimalToken.decimals = 30
         const formattedAmount = formatTokenAmountDefault(amount, decimalToken)
-        expect(formattedAmount).toBe('0')
+        expect(formattedAmount).toBe('4.2069e-26')
     })
     it('should work with big number and no decimals', () => {})
     it('should work with big number and normal decimal amount', () => {})
