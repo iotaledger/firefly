@@ -1464,7 +1464,7 @@
             "legacyConnected": "La mauvaise application est ouverte sur votre Ledger.",
             "locked": "Veuillez déverrouiller votre Ledger.",
             "mnemonicMismatch": "Vous avez connecté le mauvais Ledger ou le mnémonique a changé.",
-            "notDetected": "Aucun appareil Ledger détecté.",
+            "notConnected": "Aucun appareil Ledger détecté.",
             "notFound": "Appareil Ledger introuvable.",
             "otherConnected": "La mauvaise application est ouverte sur votre Ledger.",
             "generateAddress": "Une erreur s'est produite lors de la génération d'une adresse.",
