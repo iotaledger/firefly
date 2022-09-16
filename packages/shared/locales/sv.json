@@ -1464,7 +1464,7 @@
             "legacyConnected": "Fel app är öppen på din Ledger-enhet.",
             "locked": "Lås upp din Ledger-enhet genom att ange PIN-koden.",
             "mnemonicMismatch": "Du har anslutit fel Ledger-enhet eller så har din mnemonik ändrats.",
-            "notDetected": "Ingen Ledger-enhet upptäckt.",
+            "notConnected": "Ingen Ledger-enhet upptäckt.",
             "notFound": "Ledger-enheten hittades inte.",
             "otherConnected": "Fel app är öppen på din Ledger-enhet.",
             "generateAddress": "Det gick inte att generera en adress.",

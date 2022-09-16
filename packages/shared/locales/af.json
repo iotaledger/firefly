@@ -1464,7 +1464,7 @@
             "legacyConnected": "Die verkeerde app is oop op Ledger toestel.",
             "locked": "Ontsluit jou Ledger toestel deur die PIN in te voer.",
             "mnemonicMismatch": "Jy het die verkeerde Ledger toestel gekoppel of die geheueverandering het verander.",
-            "notDetected": "Geen Ledger toestel bespeur nie.",
+            "notConnected": "Geen Ledger toestel bespeur nie.",
             "notFound": "Ledger toestel nie gevind nie.",
             "otherConnected": "Die verkeerde app is oop op Ledger toestel.",
             "generateAddress": "Kon nie 'n adres genereer nie.",

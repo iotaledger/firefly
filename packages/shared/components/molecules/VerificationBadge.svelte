@@ -1,25 +1,27 @@
 <script lang="typescript">
     import { Icon as Icons } from '@auxiliary/icon'
-    import { VerificationStatus } from '@core/wallet'
+    import { NotVerifiedStatus, VerifiedStatus } from '@core/wallet'
     import { Icon } from 'shared/components'
 
-    export let verificationStatus: VerificationStatus
+    export let status: VerifiedStatus | NotVerifiedStatus
     export let large = false
 </script>
 
-{#if verificationStatus === VerificationStatus.New}
+{#if status === NotVerifiedStatus.New}
     <Icon
         width={large ? 20 : 14}
         height={large ? 20 : 14}
-        icon={Icons.NotVerified}
+        icon={Icons.VerificationStatusNew}
         classes="text-gray-600"
         secondaryColor="white"
     />
-{:else if verificationStatus === VerificationStatus.Verified}
+{:else if status === VerifiedStatus.SelfVerified}
+    <Icon width={large ? 20 : 14} height={large ? 20 : 14} icon={Icons.VerificationStatusSelf} secondaryColor="white" />
+{:else if status === VerifiedStatus.Official}
     <Icon
         width={large ? 20 : 14}
         height={large ? 20 : 14}
-        icon={Icons.Verified}
+        icon={Icons.VerificationStatusOfficial}
         classes="text-verification-blue"
         secondaryColor="white"
     />

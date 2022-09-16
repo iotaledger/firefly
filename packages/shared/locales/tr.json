@@ -1464,7 +1464,7 @@
             "legacyConnected": "Ledger cihazınızda yanlış uygulama açık.",
             "locked": "Lütfen PIN'i girerek Ledger cihazınızın kilidini açın.",
             "mnemonicMismatch": "Yanlış Ledger cihazını bağladınız veya anımsatıcı değişti.",
-            "notDetected": "Ledger cihazı algılanamadı.",
+            "notConnected": "Ledger cihazı algılanamadı.",
             "notFound": "Ledger cihazı bulunamadı.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "Adres oluşturulurken bir hata oluştu.",

@@ -1464,7 +1464,7 @@
             "legacyConnected": "Pogrešna aplikacija je otvorena na Ledger uređaju.",
             "locked": "Otključaj svoj Ledger uređaj PIN-om.",
             "mnemonicMismatch": "Povezali ste krivi Ledger uređaj ili je fraza za oporavak promijenjena.",
-            "notDetected": "Ledger uređaj nije detektiran.",
+            "notConnected": "Ledger uređaj nije detektiran.",
             "notFound": "Ledger uređaj nije pronađen.",
             "otherConnected": "Pogrešna aplikacija je otvorena na Ledger uređaju.",
             "generateAddress": "Došlo je do greške prilikom generiranja adrese.",

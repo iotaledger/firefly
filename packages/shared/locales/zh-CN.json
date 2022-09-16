@@ -1464,7 +1464,7 @@
             "legacyConnected": "Ledger设备上打开的应用程序不正确。",
             "locked": "请输入 PIN 码来解锁您的Ledger设备。",
             "mnemonicMismatch": "您连接了错误的Ledger设备或助记符已更改。",
-            "notDetected": "没有检测到Ledger设备。",
+            "notConnected": "没有检测到Ledger设备。",
             "notFound": "未找到Ledger设备",
             "otherConnected": "Ledger设备上打开的应用程序不正确。",
             "generateAddress": "地址生成出错。",
