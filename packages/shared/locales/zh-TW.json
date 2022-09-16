@@ -1464,7 +1464,7 @@
             "legacyConnected": "您的Ledger裝置開啟了錯誤的應用程式",
             "locked": "請輸入 PIN 碼來解鎖您的 Ledger 裝置",
             "mnemonicMismatch": "您似乎連到錯的 Ledger 裝置或是已更改註記詞",
-            "notDetected": "偵測不到 Ledger 裝置",
+            "notConnected": "偵測不到 Ledger 裝置",
             "notFound": "找不到 Ledger 裝置",
             "otherConnected": "您在 Ledger裝置 開啟了錯誤的應用程式",
             "generateAddress": "產生地址時發生錯誤",

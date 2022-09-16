@@ -1464,7 +1464,7 @@
             "legacyConnected": "Nesprávna aplikácia je otvorená vo vašom Ledger zariadení.",
             "locked": "Prosím, odomknite vaše Ledger zariadenie zadaním PIN kódu.",
             "mnemonicMismatch": "Pripojili ste nesprávne zariadenie Ledger alebo mnemotechnická pomôcka bola zmenená.",
-            "notDetected": "Nebolo detegované zariadenie Ledger.",
+            "notConnected": "Nebolo detegované zariadenie Ledger.",
             "notFound": "Zariadenie Ledger nenájdené.",
             "otherConnected": "Nesprávna aplikácia je otvorená vo vašom Ledger zariadení.",
             "generateAddress": "Pri generovaní adresy sa vyskytla chyba.",

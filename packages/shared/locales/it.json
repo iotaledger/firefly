@@ -1464,7 +1464,7 @@
             "legacyConnected": "Sul tuo dispositivo Ledger è aperta l'app IOTA sbagliata.",
             "locked": "Per favore sblocca il tuo dispositivo Ledger inserendo il PIN.",
             "mnemonicMismatch": "Hai connesso il dispositivo Ledger sbagliato o la mnemonica da 24 parole è cambiata.",
-            "notDetected": "Nessun dispositivo Ledger rilevato.",
+            "notConnected": "Nessun dispositivo Ledger rilevato.",
             "notFound": "Dispositivo Ledger non trovato.",
             "otherConnected": "L'app errata è aperta sul tuo dispositivo Ledger.",
             "generateAddress": "Si è verificato un errore nel generare un indirizzo.",
