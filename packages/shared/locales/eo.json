@@ -1464,7 +1464,7 @@
             "legacyConnected": "La malĝusta programo estas malfermita sur via Ledger-aparato.",
             "locked": "Bonvolu malŝlosi vian Ledger-aparaton enigante la PIN.",
             "mnemonicMismatch": "Vi konektis la malĝustan Ledger-aparaton aŭ la mnemoniko ŝanĝiĝis.",
-            "notDetected": "Neniu Ledger-aparato detektita.",
+            "notConnected": "Neniu Ledger-aparato detektita.",
             "notFound": "Ledger-aparato ne trovita.",
             "otherConnected": "La malĝusta programo estas malfermita sur via Ledger-aparato.",
             "generateAddress": "Estis eraro dum generado de adreso.",

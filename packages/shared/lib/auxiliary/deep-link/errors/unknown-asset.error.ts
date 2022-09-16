@@ -1,13 +1,13 @@
 import { BaseError } from '@core/error'
 import { localize } from '@core/i18n'
 
-export class InvalidAddressError extends BaseError {
+export class UnknownAssetError extends BaseError {
     constructor() {
-        const message = localize('error.send.invalidAddress')
+        const message = localize('error.send.unknownAsset')
         super({
             message,
             showNotification: true,
-            saveToErrorLog: false,
+            saveToErrorLog: true,
             logToConsole: true,
         })
     }

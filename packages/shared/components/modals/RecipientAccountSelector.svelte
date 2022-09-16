@@ -1,6 +1,8 @@
 <script lang="typescript">
     import { IAccountState, selectedAccount } from '@core/account'
-    import { visibleActiveAccounts } from '@core/profile'
+    import { BASE_TOKEN } from '@core/network'
+    import { visibleActiveAccounts, activeProfile } from '@core/profile'
+    import { formatTokenAmountBestMatch } from '@core/wallet'
     import { AccountLabel, Modal, Text } from 'shared/components'
     import { TextType } from 'shared/components/Text.svelte'
     import { truncateString } from 'shared/lib/helpers'
@@ -9,14 +11,27 @@
     export let modal: Modal
     export let searchValue: string
     export let selected: IAccountState
+    export let showBalance: boolean = false
+    export let includeSelectedAccount: boolean = false
     export let onClose: () => void
 
-    $: otherAccounts = $visibleActiveAccounts?.filter((account) => account.id !== $selectedAccount.id)
-    $: filteredAccounts = otherAccounts?.filter(
+    $: accounts = $visibleActiveAccounts?.filter(
+        (account) => account.id !== $selectedAccount.id || includeSelectedAccount
+    )
+    $: filteredAccounts = accounts?.filter(
         (account) =>
             account.name.toLowerCase().includes(searchValue?.toLowerCase() ?? '') ||
             account.depositAddress.toLowerCase().includes(searchValue?.toLowerCase() ?? '')
     )
+
+    function getSuffixForAccount(account: IAccountState): string {
+        return showBalance
+            ? formatTokenAmountBestMatch(
+                  Number(account.balances.baseCoin.available),
+                  BASE_TOKEN[$activeProfile.networkProtocol]
+              )
+            : truncateString(account?.depositAddress, 10, 10)
+    }
 
     function onClick(_selected: IAccountState): void {
         modal?.close()
@@ -36,9 +51,7 @@
                     class="w-full flex flex-row flex-1 justify-between px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                 >
                     <AccountLabel {account} />
-                    <Text type={TextType.pre} fontSize="sm" color="gray-600"
-                        >{truncateString(account?.depositAddress, 10, 10)}</Text
-                    >
+                    <Text type={TextType.pre} fontSize="sm" color="gray-600">{getSuffixForAccount(account)}</Text>
                 </button>
             {/each}
         </recipient-account-picker-modal>

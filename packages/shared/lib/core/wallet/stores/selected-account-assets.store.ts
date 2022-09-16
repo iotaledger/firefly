@@ -3,17 +3,19 @@ import { persistedAssets } from './persisted-assets.store'
 import { activeProfileId } from '@core/profile'
 import { selectedAccountId } from '@core/account/stores/selected-account-id.store'
 import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
-import { derived, Readable, writable, Writable } from 'svelte/store'
-import { AssetFilter } from '../interfaces'
-import { VerificationStatus, BooleanFilterOption } from '../enums'
+import { derived, get, Readable, writable, Writable } from 'svelte/store'
+import { AssetFilter, IAsset } from '../interfaces'
+import { BooleanFilterOption, NotVerifiedStatus, VerifiedStatus } from '../enums'
 
 export const assetFilter: Writable<AssetFilter> = writable({
     verificationStatus: {
         active: false,
         type: 'selection',
         localeKey: 'filters.verificationStatus',
-        selected: 'verified',
-        choices: Object.values(VerificationStatus).map((status) => String(status)),
+        selected: 'new',
+        choices: Object.values(NotVerifiedStatus)
+            .map((status) => String(status))
+            .concat(Object.values(VerifiedStatus).map((status) => String(status))),
     },
     showHidden: {
         active: false,
@@ -42,3 +44,13 @@ export const visibleSelectedAccountAssets: Readable<IAccountAssets> = derived(
         nativeTokens: $selectedAccountAssets.nativeTokens.filter((asset) => !asset.hidden),
     })
 )
+
+export function getAssetById(assetId: string): IAsset {
+    const { baseCoin, nativeTokens } = get(selectedAccountAssets)
+
+    if (assetId === baseCoin.id) {
+        return baseCoin
+    } else {
+        return nativeTokens?.find((token) => token.id === assetId)
+    }
+}

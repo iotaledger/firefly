@@ -1,26 +1,31 @@
 import { get } from 'svelte/store'
-import { BASE_TOKEN, networkHrp } from '@core/network'
-import { activeProfile } from '@core/profile'
+import { networkHrp } from '@core/network'
 import {
+    getAssetById,
     INewTransactionDetails,
+    selectedAccountAssets,
     Subject,
     updateNewTransactionDetails,
-    visibleSelectedAccountAssets,
 } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 
 import { SendOperationParameter } from '../../../enums'
-import { InvalidAddressError, MetadataLengthError, NoAddressSpecifiedError, TagLengthError } from '../../../errors'
+import {
+    InvalidAddressError,
+    MetadataLengthError,
+    NoAddressSpecifiedError,
+    TagLengthError,
+    UnknownAssetError,
+} from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
 import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
-    const unit = BASE_TOKEN?.[get(activeProfile)?.networkProtocol]?.unit
 
     if (transactionDetails) {
-        updateNewTransactionDetails({ ...transactionDetails, unit })
+        updateNewTransactionDetails({ ...transactionDetails })
         openPopup({
             type: 'sendConfirmation',
             overflow: true,
@@ -59,11 +64,14 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     if (getByteLengthOfString(tag) > 64) {
         throw new TagLengthError()
     }
-    const asset = get(visibleSelectedAccountAssets)?.baseCoin
+    const assetId = searchParams.get(SendOperationParameter.AssetId)
+    const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
+    if (!asset) {
+        throw new UnknownAssetError()
+    }
 
+    const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
     const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
-
-    const unit = searchParams.get(SendOperationParameter.Unit)
     const recipient: Subject = { type: 'address', address }
     const giftStorageDeposit = Boolean(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = Boolean(searchParams.get(SendOperationParameter.DisableToggleGift))
