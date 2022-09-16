@@ -21,7 +21,7 @@
     }
 </script>
 
-<activity-switcher-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<account-switcher-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.deeplinkAccountSwitch.title')}
     </Text>
@@ -33,4 +33,4 @@
         <Button classes="w-full" secondary onClick={onCancelClick}>{localize('actions.cancel')}</Button>
         <Button classes="w-full" onClick={onConfirmClick}>{localize('actions.confirm')}</Button>
     </popup-buttons>
-</activity-switcher-popup>
+</account-switcher-popup>
