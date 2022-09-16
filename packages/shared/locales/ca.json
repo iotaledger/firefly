@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Eliminar {name}?",
             "body": "Aquest moneder no té historial de transaccions. Es pot esborrar amb seguretat.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Confirmeu l'adreça de recepció",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 mes"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Continuar",
         "back": "Tornar",
         "previous": "Anterior",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Balanç",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Entrant",
         "outgoing": "Sortint",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Sembla que l’import no és vàlid.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "L'import ha de ser superior a 0.",
             "wrongAddressPrefix": "Les adreces comencen amb el prefix {prefix}.",
             "wrongAddressFormat": "L'adreça no està en el format correcte.",
             "invalidAddress": "L'adreça no és vàlida.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Aquest moneder no té prou fons.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "No heu seleccionat cap moneder on enviar els fons.",
             "sendingDust": "No es possible enviar menys d'1 Mi.",
             "leavingDust": "No és possible deixar menys d'1 Mi a la teva adreça.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "L'aplicació incorrecta està oberta al teu dispositu Ledger.",
             "locked": "Si us plau, desbloqueja el teu dispositiu Ledger utilitzant el PIN.",
             "mnemonicMismatch": "Has connectat un dispositiu Ledger equivocat or el mnemonic ha canviat.",
-            "notConnected": "Cap dispositiu Ledger detectat.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "No s'ha trobat el dispositiu Ledger.",
             "otherConnected": "L'aplicació incorrecta està oberta al teu dispositu Ledger.",
             "generateAddress": "Hi ha hagut un error generant l'adreça.",
