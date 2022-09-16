@@ -48,6 +48,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionD
     const recipient: Subject = address ? { type: 'address', address } : undefined
 
     return {
+        ...(asset && { asset }),
         ...(recipient && { recipient }),
         ...(amount && { amount }),
         ...(unit && { unit }),
