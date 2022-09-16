@@ -1464,7 +1464,7 @@
             "legacyConnected": "L'aplicació incorrecta està oberta al teu dispositu Ledger.",
             "locked": "Si us plau, desbloqueja el teu dispositiu Ledger utilitzant el PIN.",
             "mnemonicMismatch": "Has connectat un dispositiu Ledger equivocat or el mnemonic ha canviat.",
-            "notDetected": "Cap dispositiu Ledger detectat.",
+            "notConnected": "Cap dispositiu Ledger detectat.",
             "notFound": "No s'ha trobat el dispositiu Ledger.",
             "otherConnected": "L'aplicació incorrecta està oberta al teu dispositu Ledger.",
             "generateAddress": "Hi ha hagut un error generant l'adreça.",

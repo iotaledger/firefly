@@ -1464,7 +1464,7 @@
             "legacyConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
             "locked": "Ole hyvä ja avaa Ledger-laitteesi lukitus syöttämällä PIN-koodisi.",
             "mnemonicMismatch": "Olet yhdistänyt väärän Ledger-laitteen tai mnemonic-fraasi on muuttunut.",
-            "notDetected": "Ledger-laitetta ei havaittu.",
+            "notConnected": "Ledger-laitetta ei havaittu.",
             "notFound": "Ledger-laitetta ei löydy.",
             "otherConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
             "generateAddress": "Osoitetta luotaessa tapahtui virhe.",
