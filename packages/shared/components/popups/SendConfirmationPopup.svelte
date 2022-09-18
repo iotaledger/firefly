@@ -51,8 +51,8 @@
     $: isInternal = recipient.type === 'account'
     $: isNativeToken = asset?.id !== $selectedAccountAssets?.baseCoin?.id
 
-    $: expirationDate, void _prepareOutput()
-    $: expirationDate, (error = null)
+    $: expirationDate, giftStorageDeposit, void _prepareOutput()
+    $: expirationDate, giftStorageDeposit, (error = null)
 
     $: formattedFiatValue =
         formatCurrency(
