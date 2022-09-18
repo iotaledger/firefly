@@ -2,11 +2,11 @@
     import { localize } from '@core/i18n'
     import {
         InclusionState,
-        VerificationStatus,
         selectedAccountAssets,
         getAssetFromPersistedAssets,
         IPersistedAsset,
         IFoundryActivityData,
+        NotVerifiedStatus,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup } from '@lib/popup'
@@ -24,7 +24,7 @@
     $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(data.assetId))
 
     function handleTransactionClick(): void {
-        if (asset?.verification === VerificationStatus.New) {
+        if (asset?.verification?.status === NotVerifiedStatus.New) {
             openPopup({
                 type: 'tokenInformation',
                 overflow: true,

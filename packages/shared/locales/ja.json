@@ -1464,7 +1464,7 @@
             "legacyConnected": "間違ったアプリがLedgerデバイスで開いています。",
             "locked": "PINを入力してLedgerデバイスのロックを解除してください。",
             "mnemonicMismatch": "間違ったLedgerデバイスを接続しているか、またはmnemonic が変更されました。",
-            "notDetected": "Ledgerデバイスが検出されません。",
+            "notConnected": "Ledgerデバイスが検出されません。",
             "notFound": "Ledgerデバイスが見つかりません。",
             "otherConnected": "間違ったアプリがLedgerデバイスで開いています。",
             "generateAddress": "アドレスの作成 中にエラーが発生しました。",

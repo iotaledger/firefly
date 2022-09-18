@@ -1464,7 +1464,7 @@
             "legacyConnected": "Ứng dụng sai đang mở trên thiết bị Ledger của bạn.",
             "locked": "Vui lòng mở khóa thiết bị Ledger của bạn bằng cách nhập mã PIN.",
             "mnemonicMismatch": "Bạn đã kết nối sai thiết bị Ledger hoặc Mnemonic đã thay đổi.",
-            "notDetected": "Không phát hiện thấy thiết bị Ledger nào.",
+            "notConnected": "Không phát hiện thấy thiết bị Ledger nào.",
             "notFound": "Không tìm thấy thiết bị Ledger.",
             "otherConnected": "Ứng dụng sai đang mở trên thiết bị Ledger của bạn.",
             "generateAddress": "Đã xảy ra lỗi khi tạo địa chỉ.",
