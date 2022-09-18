@@ -17,7 +17,6 @@
         TogglableButton,
         Filter,
     } from 'shared/components'
-    import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeight } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
     import { debounce } from 'shared/lib/utils'
@@ -63,12 +62,7 @@
 <div class="activity-list h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
-            <div class="flex flex-row items-center">
-                <Text type="h5" classes="mr-2">{localize('general.activity')}</Text>
-                {#if features?.wallet?.activityHistory?.sync?.enabled}
-                    <SyncSelectedAccountIconButton />
-                {/if}
-            </div>
+            <Text type="h5" classes="mr-2">{localize('general.activity')}</Text>
             <div class="flex flex-row">
                 {#if features?.wallet?.activityHistory?.search?.enabled}
                     <Filter filterStore={activityFilter} />
