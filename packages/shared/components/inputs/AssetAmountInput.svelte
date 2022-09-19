@@ -6,7 +6,7 @@
     import { localize } from '@core/i18n'
     import {
         formatTokenAmountBestMatch,
-        generateRawAmount,
+        convertToRawAmount,
         IAsset,
         formatTokenAmountDefault,
         visibleSelectedAccountAssets,
@@ -29,7 +29,7 @@
         previousAsset = asset
         unit = null
     }
-    $: rawAmount = generateRawAmount(amount, unit, asset?.metadata)
+    $: rawAmount = convertToRawAmount(amount, unit, asset?.metadata)
 
     let allowedDecimals = 0
     $: if (!asset?.metadata?.useMetricPrefix) {

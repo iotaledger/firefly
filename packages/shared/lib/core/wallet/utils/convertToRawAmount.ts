@@ -3,25 +3,22 @@ import { parseCurrency } from '@lib/currency'
 import { UNIT_MAP } from '@lib/units'
 import { ITokenMetadata } from '../interfaces'
 
-export function generateRawAmount(amount: string, unit: string, tokenMetadata?: ITokenMetadata): Big {
+export function convertToRawAmount(amount: string, unit: string, tokenMetadata?: ITokenMetadata): Big {
     if (amount) {
         const parsedAmount = parseCurrency(amount)
-        return generateRawAmountFromMetadata(parsedAmount, unit, tokenMetadata)
+        return convertToRawAmountFromMetadata(parsedAmount, unit, tokenMetadata)
     } else {
         return undefined
     }
 }
 
-function generateRawAmountFromMetadata(amount: number, unit: string, tokenMetadata: ITokenMetadata): Big {
+function convertToRawAmountFromMetadata(amount: number, unit: string, tokenMetadata: ITokenMetadata): Big {
     if (tokenMetadata.useMetricPrefix) {
         return Big(amount * UNIT_MAP?.[unit?.substring(0, 1)] ?? 0)
     } else {
         if (unit && unit === tokenMetadata.unit) {
-            if (tokenMetadata.decimals < Number.MAX_SAFE_INTEGER) {
-                return Big(amount).div(Big(10).pow(tokenMetadata.decimals))
-            } else {
-                return Big(0)
-            }
+            const decimals = Math.min(tokenMetadata.decimals, 20)
+            return Big(amount).mul(Big(10).pow(decimals))
         } else if (unit === tokenMetadata.subunit) {
             return Big(amount)
         }
