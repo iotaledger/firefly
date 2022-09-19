@@ -53,10 +53,10 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
                  * a component for some reason.
                  */
             } else {
-                handleFailureForTransactionInclusionEvent(shimmerClaimingAccount)
+                handleShimmerClaimingTransactionInclusionEventFailure(shimmerClaimingAccount)
             }
         } else {
-            handleFailureForTransactionInclusionEvent(shimmerClaimingAccount, false)
+            handleShimmerClaimingTransactionInclusionEventFailure(shimmerClaimingAccount, false)
             throw new MissingTransactionIdError()
         }
     } else {
@@ -64,7 +64,7 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
     }
 }
 
-function handleFailureForTransactionInclusionEvent(
+function handleShimmerClaimingTransactionInclusionEventFailure(
     shimmerClaimingAccount: IShimmerClaimingAccount,
     displayNotification = true
 ): void {

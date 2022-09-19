@@ -1,12 +1,10 @@
-import { Writable } from 'svelte/store'
-
-import { IProfileManager, profileManager as _profileManager } from '@core/profile-manager'
+import { profileManager as _profileManager } from '@core/profile-manager'
 import { getLedgerNanoStatus } from '@lib/core/profile-manager/api'
 
 import { resetLedgerNanoStatus, updateLedgerNanoStatus } from '../stores'
 
 export async function getAndUpdateLedgerNanoStatus(
-    profileManager: Writable<IProfileManager> = _profileManager,
+    profileManager = _profileManager,
     forwardErrors = false
 ): Promise<void> {
     try {
