@@ -82,7 +82,6 @@
     {type}
     {form}
     style={inlineStyle}
-    style:--icon-width={icon ? iconWidth ?? ICON_DEFAULT_SIZE[size] : 0}
     class={`${size} ${variant} ${classes}`}
     class:dark
     class:outline
@@ -94,7 +93,7 @@
         <Spinner busy message={busyMessage} classes="items-center justify-center w-full" />
     {:else}
         <div
-            class="flex flex-row items-center justify-center w-full text-12 leading-140"
+            class="flex flex-row items-center justify-center w-full"
             class:flex-row-reverse={iconReverse}
         >
             {#if icon}
@@ -120,6 +119,9 @@
         @apply box-border;
         @apply text-center;
         @apply font-500;
+        @apply text-15;
+        @apply leading-4;
+        @apply rounded-lg;
     }
 
     button:disabled {
@@ -138,31 +140,20 @@
         @apply text-gray-700;
     }
 
-    button {
-        --lg-min-width: 7rem;
-        --md-min-width: 6rem;
-        --sm-min-width: 5rem;
-    }
-
     .lg {
-        min-width: calc(var(--lg-min-width) + var(--icon-width) px);
-        @apply h-12;
-        @apply p-4;
-        @apply rounded-xl;
+        @apply py-4;
+        @apply px-8;
     }
 
     .md {
-        min-width: calc(var(--md-min-width) + var(--icon-width) px);
-        @apply h-8;
-        @apply p-3;
-        @apply rounded-xl;
+        @apply py-3;
+        @apply px-8;
     }
 
     .sm {
-        min-width: calc(var(--sm-min-width) + var(--icon-width) px);
-        @apply h-4;
-        @apply p-2;
-        @apply rounded-lg;
+        @apply py-2;
+        @apply px-3;
+        @apply text-13;
     }
 
     @mixin button-variant($color) {
