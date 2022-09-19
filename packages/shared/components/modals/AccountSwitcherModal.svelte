@@ -2,15 +2,23 @@
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
-    import { sumBalanceForAccounts } from '@core/account'
+    import { selectedAccount, sumBalanceForAccounts } from '@core/account'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { AccountSwitcherMenuItem } from 'shared/components/molecules'
     import { HR, Icon, Modal, Text } from 'shared/components'
+    import { tick } from 'svelte'
 
     export let modal: Modal
 
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
+
+    function scrollToSelectedAccount() {
+        tick().then(() => {
+            const el = document.getElementById(`account-${$selectedAccount.id}`)
+            el?.scrollIntoView({ behavior: 'auto' })
+        })
+    }
 
     function handleCreateAccountClick(): void {
         modal?.close()
@@ -18,11 +26,17 @@
     }
 </script>
 
-<Modal bind:this={modal} classes="transform -translate-x-1/2" size="large" position={{ top: '30px', left: '50%' }}>
+<Modal
+    bind:this={modal}
+    on:open={scrollToSelectedAccount}
+    classes="transform -translate-x-1/2"
+    size="large"
+    position={{ top: '30px', left: '50%' }}
+>
     <div class="p-4">
         <div class="accounts flex flex-col space-y-1 max-h-96 scrollable-y">
             {#each $visibleActiveAccounts as account}
-                <AccountSwitcherMenuItem {account} onClick={() => modal?.close()} />
+                <AccountSwitcherMenuItem id="account-{account.id}" {account} onClick={() => modal?.close()} />
             {/each}
         </div>
     </div>
