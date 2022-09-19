@@ -24,7 +24,8 @@ export async function prepareShimmerClaimingAccount(
             /**
              * CAUTION: To avoid possible freezes / hanging
              * on Ledger devices (due to simultaneously accessing
-             * the device from multiple profile managers at once).
+             * the device from multiple profile managers at once),
+             * we sync the accounts in series.
              */
             await syncAccountsInSeries(DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS, account, twinAccount)
         } else {
