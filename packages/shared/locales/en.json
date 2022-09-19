@@ -1205,7 +1205,12 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details",
+        "index": "Index",
+        "chainId": "Chain ID",
+        "bridgeToAddress": "Bridge to address"
     },
     "dates": {
         "today": "Today",

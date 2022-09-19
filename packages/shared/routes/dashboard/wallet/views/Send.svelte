@@ -2,8 +2,8 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import { get, Readable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
-    import { Address, Amount, Button, Dropdown, Icon, ProgressBar, Text } from 'shared/components'
-    import { clearSendParams, sendParams } from 'shared/lib/app'
+    import { Address, Amount, Button, Dropdown, Icon, KeyValueBox, ProgressBar, Text } from 'shared/components'
+    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -37,13 +37,15 @@
         wallet,
         handleTransactionEventData,
     } from 'shared/lib/wallet'
-    import { mobile } from 'shared/lib/app'
     import { NotificationType } from 'shared/lib/typings/notification'
     import { SendParams } from 'shared/lib/typings/sendParams'
     import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
+
+    export let bridgeAddress = '0xF65e3cCbe04D4784EDa9CC4a33F84A6162aC9EB6'
+    export let chainId = '4002'
 
     const { accounts } = $wallet
 
@@ -534,7 +536,11 @@
                         onMaxClick={handleMaxClick}
                         disabled={$isTransferring}
                         autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+                        classes="mb-6"
                     />
+                    <KeyValueBox value={'swapOut'} key={localize('general.index')} />
+                    <KeyValueBox bind:value={chainId} key={localize('general.chainId')} />
+                    <KeyValueBox bind:value={bridgeAddress} key={localize('general.bridgeToAddress')} />
                 </div>
             </div>
         </div>

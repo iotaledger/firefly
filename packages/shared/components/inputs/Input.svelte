@@ -127,7 +127,7 @@
             {maxlength}
             class="w-full text-12 leading-140 border border-solid
                 {disabled
-                ? 'text-gray-400 dark:text-gray-700'
+                ? 'text-gray-600 dark:text-gray-400'
                 : 'text-gray-800 dark:text-white'} bg-white dark:bg-gray-800
                 {isFocused
                 ? 'border-blue-500'
