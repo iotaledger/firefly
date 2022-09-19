@@ -44,10 +44,10 @@
         on:change={tooltip?.refreshPosition}
     />
     <div class="flex flex-row justify-center items-center space-x-4 w-full">
-        <Button size={ButtonSize.Small} outline onClick={handleCancelClick} classes="w-full"
+        <Button size={ButtonSize.Medium} outline onClick={handleCancelClick} classes="w-full"
             >{localize('actions.cancel')}</Button
         >
-        <Button size={ButtonSize.Small} onClick={handleConfirmClick} classes="w-full"
+        <Button size={ButtonSize.Medium} onClick={handleConfirmClick} classes="w-full"
             >{localize('actions.confirm')}</Button
         >
     </div>

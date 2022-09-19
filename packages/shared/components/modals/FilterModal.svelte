@@ -37,11 +37,12 @@
 >
     <div class="filter-modal">
         <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3 rounded-t-xl">
-            <Button outline size={ButtonSize.Small} onClick={clear}>{localize('actions.clear')}</Button>
+            <Button outline size={ButtonSize.Medium} onClick={clear}>{localize('actions.clear')}</Button>
             <Text fontWeight={FontWeight.semibold} fontSize="14" classes="text-center flex grow-1"
                 >{localize('filters.title')}</Text
             >
-            <Button disabled={!isChanged} size={ButtonSize.Small} onClick={confirm}>{localize('actions.apply')}</Button>
+            <Button disabled={!isChanged} size={ButtonSize.Medium} onClick={confirm}>{localize('actions.apply')}</Button
+            >
         </div>
         <div>
             <slot />

@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
-    import { HTMLButtonType } from 'shared/components/Button.svelte'
+    import { HTMLButtonType, ButtonSize } from 'shared/components/Button.svelte'
 
     let newName = $activeProfile?.name
     let error = ''
@@ -40,7 +40,7 @@
         {localize('views.settings.changeProfileName.description')}
     </Text>
     <Input {error} placeholder={$activeProfile?.name} bind:value={newName} classes="mb-5" />
-    <Button form="form-change-profile-name" type={HTMLButtonType.Submit} {disabled}>
+    <Button size={ButtonSize.Medium} form="form-change-profile-name" type={HTMLButtonType.Submit} {disabled}>
         {localize('views.settings.changeProfileName.title')}
     </Button>
 </form>

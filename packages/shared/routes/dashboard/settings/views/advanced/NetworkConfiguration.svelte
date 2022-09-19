@@ -13,6 +13,7 @@
     import { activeProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
     import { Button, Checkbox, HR, Text, NodeListTable } from 'shared/components'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     let nodesContainer: HTMLElement
 
@@ -74,6 +75,7 @@
             {#if networkType !== NetworkType.PrivateNet}
                 <Button
                     outline
+                    size={ButtonSize.Medium}
                     inlineStyle="min-width: 156px;"
                     classes="w-1/2"
                     onClick={addOfficialNodesToClientOptions}
@@ -83,6 +85,7 @@
             {/if}
             <Button
                 inlineStyle="min-width: 156px;"
+                size={ButtonSize.Medium}
                 classes={networkType === NetworkType.PrivateNet ? '' : 'w-1/2'}
                 onClick={handleAddNodeClick}
             >

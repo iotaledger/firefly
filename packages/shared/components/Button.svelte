@@ -231,7 +231,7 @@
 
     .dark.outline.primary {
         @apply bg-gray-700;
-        @apply bg-opacity-0;
+        @apply bg-opacity-10;
         @apply border-gray-600;
         @apply border-opacity-40;
         @apply text-gray-400;

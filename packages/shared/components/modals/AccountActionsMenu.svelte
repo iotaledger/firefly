@@ -60,7 +60,7 @@
         />
         <ToggleHiddenAccountMenuItem onClick={() => modal.close()} last />
         <HR />
-        {#if hideDelete}
+        {#if !hideDelete}
             <MenuItem
                 icon={Icon.Delete}
                 title={localize('actions.deleteAccount')}
