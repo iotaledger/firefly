@@ -85,17 +85,18 @@
     class={`${size} ${variant} ${classes}`}
     class:dark
     class:outline
+    class:is-busy={isBusy}
     use:bindEvents={events}
     on:click|stopPropagation={onClick}
     bind:this={buttonElement}
 >
     {#if isBusy}
-        <Spinner busy message={busyMessage} classes="items-center justify-center w-full" />
+        <div class="relative flex justify-center items-center h-4 w-4 flex-shrink-0" class:mr-3={busyMessage}>
+            <Spinner busy classes="absolute items-center justify-center" />
+        </div>
+        {busyMessage}
     {:else}
-        <div
-            class="flex flex-row items-center justify-center w-full"
-            class:flex-row-reverse={iconReverse}
-        >
+        <div class="flex flex-row items-center justify-center w-full" class:flex-row-reverse={iconReverse}>
             {#if icon}
                 <Icon
                     {icon}
@@ -122,6 +123,10 @@
         @apply text-15;
         @apply leading-4;
         @apply rounded-lg;
+
+        &.is-busy {
+            @apply text-left;
+        }
     }
 
     button:disabled {
@@ -143,17 +148,35 @@
     .lg {
         @apply py-4;
         @apply px-8;
+
+        &.outline {
+            // hacky way to make sure the outline button is the same height as the non-outline button
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
     }
 
     .md {
         @apply py-3;
         @apply px-8;
+
+        &.outline {
+            // hacky way to make sure the outline button is the same height as the non-outline button
+            padding-top: 11px;
+            padding-bottom: 11px;
+        }
     }
 
     .sm {
         @apply py-2;
         @apply px-3;
         @apply text-13;
+
+        &.outline {
+            // hacky way to make sure the outline button is the same height as the non-outline button
+            padding-top: 7px;
+            padding-bottom: 7px;
+        }
     }
 
     @mixin button-variant($color) {
@@ -222,20 +245,20 @@
 
     .dark.outline.primary {
         @apply bg-gray-700;
-        @apply bg-opacity-10;
+        @apply bg-opacity-20;
         @apply border-gray-600;
         @apply border-opacity-40;
         @apply text-gray-400;
 
         &:hover {
-            @apply bg-opacity-25;
+            @apply bg-opacity-40;
             @apply border-opacity-60;
             @apply text-white;
         }
 
         &:active,
         &:focus {
-            @apply bg-opacity-25;
+            @apply bg-opacity-40;
             @apply border-blue-400;
             @apply border-opacity-100;
             @apply text-white;

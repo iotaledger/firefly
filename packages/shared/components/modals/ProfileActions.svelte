@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <Button size={ButtonSize.Small} onClick={handleVersionUpdateClick}>
-                        <Text type="p">{localize('views.dashboard.profileModal.version.button')}</Text>
+                        {localize('views.dashboard.profileModal.version.button')}
                     </Button>
                 </div>
             </div>
