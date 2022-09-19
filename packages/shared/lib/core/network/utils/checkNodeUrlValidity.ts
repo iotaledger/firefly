@@ -15,12 +15,6 @@ export function checkNodeUrlValidity(nodesList: INode[], newUrl: string, allowIn
         return 'error.node.invalid'
     }
 
-    /**
-     * CAUTION: We are going to wait for HTTP support to
-     * be audited. Until then this assignment statement
-     * must stay.
-     */
-    allowInsecure = false
     if (!allowInsecure && !isValidHttpsUrl(newUrl)) {
         return 'error.node.https'
     }

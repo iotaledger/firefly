@@ -1,15 +1,8 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
     import { LedgerAnimation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { ledgerSetupRouter } from '@core/router'
-    import {
-        LedgerConnectionState,
-        ledgerConnectionState,
-        stopPollingLedgerNanoStatus,
-        pollLedgerNanoStatus,
-        displayNotificationForLedgerProfile,
-    } from '@core/ledger'
+    import { LedgerConnectionState, ledgerConnectionState, displayNotificationForLedgerProfile } from '@core/ledger'
     import { openPopup } from '@lib/popup'
     import { initialiseFirstShimmerClaimingAccount, onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 
@@ -59,13 +52,8 @@
     }
 
     function onBackClick(): void {
-        stopPollingLedgerNanoStatus()
         $ledgerSetupRouter.previous()
     }
-
-    onMount(() => {
-        pollLedgerNanoStatus()
-    })
 </script>
 
 <OnboardingLayout {onBackClick}>
