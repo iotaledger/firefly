@@ -12,6 +12,7 @@
         findShimmerRewards,
         FindShimmerRewardsError,
         findShimmerRewardsForAccount,
+        hasNoUnclaimedRewards,
         hasUserClaimedRewards,
         isOnboardingLedgerProfile,
         onboardingProfile,
@@ -30,7 +31,9 @@
     $: shouldSearchForRewardsButtonBeEnabled = !isSearchingForRewards && !isClaimingRewards
     $: shouldClaimRewardsButtonBeEnabled =
         canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
-    $: shouldShowContinueButton = hasUserClaimedRewards(shimmerClaimingAccounts)
+    $: shouldShowContinueButton =
+        hasUserClaimedRewards(shimmerClaimingAccounts) ||
+        (hasSearchedForRewardsBefore && hasNoUnclaimedRewards(shimmerClaimingAccounts))
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
@@ -43,12 +46,12 @@
     async function searchForRewards(): Promise<void> {
         try {
             isSearchingForRewards = true
-            hasSearchedForRewardsBefore = true
             await findShimmerRewards()
         } catch (err) {
             throw new FindShimmerRewardsError()
         } finally {
             isSearchingForRewards = false
+            hasSearchedForRewardsBefore = true
         }
     }
 
@@ -63,7 +66,6 @@
     async function claimRewards(): Promise<void> {
         try {
             isClaimingRewards = true
-            hasTriedClaimingRewards = true
             await claimShimmerRewards()
         } catch (err) {
             throw new ClaimShimmerRewardsError()
@@ -72,6 +74,7 @@
                 closePopup(true)
             }
             isClaimingRewards = false
+            hasTriedClaimingRewards = true
         }
     }
 
@@ -154,7 +157,7 @@
             {/if}
         </Button>
         {#if shouldShowContinueButton}
-            <Button classes="w-full" onClick={onContinueClick}>
+            <Button classes="w-full" disabled={isSearchingForRewards} onClick={onContinueClick}>
                 {localize('actions.continue')}
             </Button>
         {:else}
