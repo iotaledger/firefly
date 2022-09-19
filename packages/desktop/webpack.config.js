@@ -17,8 +17,8 @@ const stage = process.env.STAGE || 'alpha'
  * If stage = 'alpha' -> 'Firefly Alpha'
  */
 const appName =
-    stage === 'prod' ? 'Firefly Stardust' : `Firefly Stardust - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
-const appId = stage === 'prod' ? 'org.iota.firefly-stardust' : `org.iota.firefly-stardust.${stage}`
+    stage === 'prod' ? 'Firefly Shimmer' : `Firefly Shimmer - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
+const appId = stage === 'prod' ? 'org.iota.firefly-shimmer' : `org.iota.firefly-shimmer.${stage}`
 
 const appProtocol = stage === 'prod' ? 'firefly' : `firefly-${stage.toLowerCase()}`
 
