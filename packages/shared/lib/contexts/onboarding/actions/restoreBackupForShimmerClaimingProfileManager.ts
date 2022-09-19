@@ -1,16 +1,15 @@
-import { get, Writable } from 'svelte/store'
+import { get } from 'svelte/store'
 
 import { NetworkProtocol } from '@core/network'
-import { IProfileManager, profileManager } from '@core/profile-manager'
+import { getStorageDirectoryOfProfile } from '@core/profile'
+import { profileManager } from '@core/profile-manager'
 
 import {
-    copyStrongholdFileToProfileDirectory,
     getShimmerClaimingProfileManagerStorageDirectory,
+    restoreBackupForShimmerClaimingProfileManagerHelper,
     validateStrongholdCoinType,
 } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
-import { getStorageDirectoryOfProfile } from '@core/profile'
-import { ClientOptions } from '@iota/wallet'
 
 export async function restoreBackupForShimmerClaimingProfileManager(strongholdPassword: string): Promise<void> {
     const { id, importFilePath, clientOptions } = get(onboardingProfile)
@@ -38,16 +37,4 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
         clientOptions,
         profileManager
     )
-}
-
-async function restoreBackupForShimmerClaimingProfileManagerHelper(
-    importFilePath: string,
-    storageDirectory: string,
-    strongholdPassword: string,
-    clientOptions: ClientOptions,
-    manager: Writable<IProfileManager>
-): Promise<void> {
-    await copyStrongholdFileToProfileDirectory(storageDirectory, importFilePath)
-    await get(manager)?.setStrongholdPassword(strongholdPassword)
-    await get(manager)?.setClientOptions(clientOptions)
 }
