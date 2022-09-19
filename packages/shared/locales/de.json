@@ -1464,7 +1464,7 @@
             "legacyConnected": "Auf deinem Ledger-Gerät ist die falsche App geöffnet.",
             "locked": "Bitte entsperre dein Ledger-Gerät durch Eingabe der PIN.",
             "mnemonicMismatch": "Du hast das falsche Ledger-Gerät angeschlossen oder das Mnemonic hat sich geändert.",
-            "notDetected": "Kein Ledger-Gerät erkannt.",
+            "notConnected": "Kein Ledger-Gerät erkannt.",
             "notFound": "Ledger-Gerät nicht gefunden.",
             "otherConnected": "Auf deinem Ledger-Gerät ist die falsche App geöffnet.",
             "generateAddress": "Beim Generieren der Adresse ist ein Fehler aufgetreten.",

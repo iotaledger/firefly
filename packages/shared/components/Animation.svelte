@@ -20,16 +20,16 @@
             darkmode: 'appearance-desktop-darkmode.json',
         },
         'onboarding-protocol-desktop': {
-            lightmode: '',
-            darkmode: '',
+            lightmode: 'onboarding-desktop.json',
+            darkmode: 'onboarding-desktop-darkmode.json',
         },
         'onboarding-network-desktop': {
-            lightmode: '',
-            darkmode: '',
+            lightmode: 'onboarding-desktop.json',
+            darkmode: 'onboarding-desktop-darkmode.json',
         },
         'onboarding-custom-network-desktop': {
-            lightmode: '',
-            darkmode: '',
+            lightmode: 'onboarding-desktop.json',
+            darkmode: 'onboarding-desktop-darkmode.json',
         },
         'profile-desktop': {
             lightmode: 'setup-desktop.json',
