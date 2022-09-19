@@ -102,7 +102,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
         if ($activitySearchTerm) {
             activityList = activityList.filter((activity) => {
                 const fieldsToSearch = getFieldsToSearchFromActivity(activity)
-                return fieldsToSearch?.find((field) =>
+                return fieldsToSearch.find((field) =>
                     field?.toLowerCase()?.includes($activitySearchTerm?.toLowerCase())
                 )
             })
@@ -115,41 +115,41 @@ export const queriedActivities: Readable<Activity[]> = derived(
 function getFieldsToSearchFromActivity(activity: IActivity): string[] {
     const fieldsToSearch: string[] = []
 
-    if (activity?.transactionId) {
-        fieldsToSearch.push(activity?.transactionId)
+    if (activity.transactionId) {
+        fieldsToSearch.push(activity.transactionId)
     }
 
-    if (activity?.data?.assetId) {
-        fieldsToSearch.push(activity?.data?.assetId)
-        fieldsToSearch.push(getAssetFromPersistedAssets(activity?.data?.assetId)?.metadata?.name)
+    if (activity.data.assetId) {
+        fieldsToSearch.push(activity.data.assetId)
+        fieldsToSearch.push(getAssetFromPersistedAssets(activity.data.assetId)?.metadata?.name)
     }
 
-    if (activity?.data?.rawAmount) {
-        fieldsToSearch.push(activity?.data?.rawAmount?.toString())
-        fieldsToSearch.push(activity?.getFormattedAmount(false)?.toLowerCase())
+    if (activity.data.rawAmount) {
+        fieldsToSearch.push(activity.data.rawAmount?.toString())
+        fieldsToSearch.push(activity.getFormattedAmount(false)?.toLowerCase())
     }
 
-    if (activity?.data?.type === ActivityType.Transaction) {
-        if (activity?.data?.subject?.type === 'account') {
-            fieldsToSearch.push(activity.data?.subject?.account.name)
-        } else if (activity.data?.subject?.type === 'address') {
-            fieldsToSearch.push(activity.data?.subject?.address)
+    if (activity.data.type === ActivityType.Transaction) {
+        if (activity.data.subject?.type === 'account') {
+            fieldsToSearch.push(activity.data.subject.account?.name)
+        } else if (activity.data.subject?.type === 'address') {
+            fieldsToSearch.push(activity.data.subject.address)
         }
 
-        if (activity?.data?.claimingTransactionId) {
-            fieldsToSearch.push(activity?.data?.claimingTransactionId)
+        if (activity.data.claimingTransactionId) {
+            fieldsToSearch.push(activity.data.claimingTransactionId)
         }
 
-        if (activity?.data?.metadata) {
-            fieldsToSearch.push(activity?.data?.metadata)
+        if (activity.data.metadata) {
+            fieldsToSearch.push(activity.data.metadata)
         }
 
-        if (activity?.data?.tag) {
-            fieldsToSearch.push(activity?.data?.tag)
+        if (activity.data.tag) {
+            fieldsToSearch.push(activity.data.tag)
         }
 
-        if (activity?.data?.outputId) {
-            fieldsToSearch.push(activity?.data?.outputId)
+        if (activity.data.outputId) {
+            fieldsToSearch.push(activity.data.outputId)
         }
     }
 
