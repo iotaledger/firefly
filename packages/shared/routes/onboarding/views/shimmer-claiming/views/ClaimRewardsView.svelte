@@ -5,6 +5,7 @@
     import {
         displayNotificationForLedgerProfile,
         getLedgerDeviceStatus,
+        pollLedgerNanoStatus,
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
@@ -53,11 +54,19 @@
         try {
             isSearchingForRewards = true
             hasSearchedForRewardsBefore = true
+            if ($isOnboardingLedgerProfile) {
+                stopPollingLedgerNanoStatus()
+            }
             await findShimmerRewards()
         } catch (err) {
             throw new FindShimmerRewardsError()
         } finally {
             isSearchingForRewards = false
+            if ($isOnboardingLedgerProfile) {
+                pollLedgerNanoStatus({
+                    profileManager: shimmerClaimingProfileManager,
+                })
+            }
         }
     }
 
