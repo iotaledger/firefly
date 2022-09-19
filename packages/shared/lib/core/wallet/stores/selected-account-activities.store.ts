@@ -131,9 +131,9 @@ function getFieldsToSearchFromActivity(activity: IActivity): string[] {
 
     if (activity.data.type === ActivityType.Transaction) {
         if (activity.data.subject?.type === 'account') {
-            fieldsToSearch.push(activity.data.subject.account?.name)
+            fieldsToSearch.push(activity.data.subject?.account?.name)
         } else if (activity.data.subject?.type === 'address') {
-            fieldsToSearch.push(activity.data.subject.address)
+            fieldsToSearch.push(activity.data.subject?.address)
         }
 
         if (activity.data.claimingTransactionId) {
