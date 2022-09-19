@@ -1,7 +1,7 @@
 import { activeProfile } from '@core/profile'
 import { persistent } from '@lib/helpers'
 import { get } from 'svelte/store'
-import { VerificationStatus } from '../enums'
+import { NotVerifiedStatus, VerifiedStatus } from '../enums'
 import { IPersistedAsset } from '../interfaces'
 import { IPersistedAssets } from '../interfaces/persisted-assets.interface'
 
@@ -40,12 +40,12 @@ export function updatePersistedAsset(partialPersistedAsset: Partial<IPersistedAs
     }
 }
 
-export function verifyAsset(assetId: string): void {
-    updatePersistedAsset({ id: assetId, verification: VerificationStatus.Verified })
+export function verifyAsset(assetId: string, status: VerifiedStatus): void {
+    updatePersistedAsset({ id: assetId, verification: { verified: true, status } })
 }
 
-export function unverifyAsset(assetId: string): void {
-    updatePersistedAsset({ id: assetId, verification: VerificationStatus.NotVerified })
+export function unverifyAsset(assetId: string, status: NotVerifiedStatus): void {
+    updatePersistedAsset({ id: assetId, verification: { verified: false, status } })
 }
 
 export function hideAsset(assetId: string): void {

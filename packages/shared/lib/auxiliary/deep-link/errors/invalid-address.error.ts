@@ -7,7 +7,7 @@ export class InvalidAddressError extends BaseError {
         super({
             message,
             showNotification: true,
-            saveToErrorLog: true,
+            saveToErrorLog: false,
             logToConsole: true,
         })
     }
