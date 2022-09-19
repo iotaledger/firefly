@@ -43,19 +43,3 @@
         {/if}
     </div>
 </div>
-
-<style type="text/scss">
-    .illustration-wrapper {
-        height: 320px;
-        .animation {
-            width: 117%;
-            height: 117%;
-        }
-        :global(img) {
-            min-height: 280px;
-            max-width: 100%;
-            object-position: 0 -3px;
-            z-index: 1;
-        }
-    }
-</style>
