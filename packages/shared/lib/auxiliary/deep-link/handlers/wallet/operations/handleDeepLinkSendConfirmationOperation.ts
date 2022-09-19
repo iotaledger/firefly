@@ -20,6 +20,7 @@ import {
 } from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
 import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
+import { isStringTrue } from '@lib/utils/isStringTrue'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -73,9 +74,9 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
     const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
     const recipient: Subject = { type: 'address', address }
-    const giftStorageDeposit = Boolean(searchParams.get(SendOperationParameter.GiftStorageDeposit))
-    const disableToggleGift = Boolean(searchParams.get(SendOperationParameter.DisableToggleGift))
-    const disableChangeExpiration = Boolean(searchParams.get(SendOperationParameter.DisableChangeExpiration))
+    const giftStorageDeposit = isStringTrue(searchParams.get(SendOperationParameter.GiftStorageDeposit))
+    const disableToggleGift = isStringTrue(searchParams.get(SendOperationParameter.DisableToggleGift))
+    const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
 
     return {
         ...(asset && { asset }),
