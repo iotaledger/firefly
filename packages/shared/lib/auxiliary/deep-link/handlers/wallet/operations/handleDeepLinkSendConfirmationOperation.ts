@@ -20,7 +20,7 @@ import {
 } from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
 import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
-import { isStringTrue } from '@lib/utils/isStringTrue'
+import { isStringTrue } from '@core/utils'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
