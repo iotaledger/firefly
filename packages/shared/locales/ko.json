@@ -1464,7 +1464,7 @@
             "legacyConnected": "Ledger 장치에서 잘못된 앱이 열려있습니다.",
             "locked": "PIN 전호를 입력하여 Ledger 장치의 잠금을 해제하세요.",
             "mnemonicMismatch": "잘못된 Ledger 장치를 연결하였거나 mnemonic이 바뀌었습니다.",
-            "notDetected": "Ledger 장치가 발견되지 않았습니다.",
+            "notConnected": "Ledger 장치가 발견되지 않았습니다.",
             "notFound": "Ledger 장치를 찾을 수 없습니다.",
             "otherConnected": "Ledger 장치에서 잘못된 앱을 열었습니다.",
             "generateAddress": "주소를 생성하는 중 에러가 있었습니다.",

@@ -1,4 +1,4 @@
-import { VerificationStatus } from '../enums'
+import { AssetVerification } from '../types'
 import { ITokenMetadata } from './token-metadata.interface'
 
 export interface IPersistedAsset {
@@ -6,5 +6,5 @@ export interface IPersistedAsset {
     standard: string
     metadata?: ITokenMetadata
     hidden: boolean
-    verification: VerificationStatus
+    verification: AssetVerification
 }
