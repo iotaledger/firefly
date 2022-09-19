@@ -91,9 +91,19 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     }
     persistShimmerClaimingTransaction(claimingTransaction?.transactionId)
+
+    const claimedRewards = shimmerClaimingAccount?.claimedRewards + rawAmount
+    const unclaimedRewards = shimmerClaimingAccount?.unclaimedRewards - rawAmount
     updateShimmerClaimingAccount({
         ...shimmerClaimingAccount,
+        /**
+         * NOTE: We still explicitly set the state here to
+         * display as "claiming" to user until it's updated
+         * later by the transaction inclusion event handler.
+         */
         state: ShimmerClaimingAccountState.Claiming,
         claimingTransaction,
+        claimedRewards,
+        unclaimedRewards,
     })
 }
