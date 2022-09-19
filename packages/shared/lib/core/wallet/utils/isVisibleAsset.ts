@@ -12,7 +12,7 @@ export function isVisibleAsset(asset: IPersistedAsset): boolean {
     if (
         filter.verificationStatus.active &&
         filter.verificationStatus.selected &&
-        asset.verification !== filter.verificationStatus.selected
+        asset.verification?.status !== filter.verificationStatus.selected
     ) {
         return false
     }
