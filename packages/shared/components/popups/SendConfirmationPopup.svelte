@@ -77,7 +77,7 @@
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
             return ExpirationTime.Custom
-        } else if (storageDeposit) {
+        } else if (storageDeposit && !giftStorageDeposit) {
             return ExpirationTime.OneDay
         } else {
             return ExpirationTime.None
