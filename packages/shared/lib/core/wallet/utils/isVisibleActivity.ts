@@ -86,27 +86,27 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
             asset?.metadata
         )
         if (filter.amount.selected === NumberFilterOption.Equal && filter.amount.subunit.type === 'single') {
-            const isEqual = activityAmount === parseCurrency(filter.amount.subunit.amount)
+            const isEqual = activityAmount.eq(parseCurrency(filter.amount.subunit.amount))
             if (!isEqual) {
                 return false
             }
         }
         if (filter.amount.selected === NumberFilterOption.Range && filter.amount.subunit.type === 'range') {
             const isInRange =
-                activityAmount <= parseCurrency(filter.amount.subunit.end) &&
-                activityAmount >= parseCurrency(filter.amount.subunit.start)
+                activityAmount.lte(parseCurrency(filter.amount.subunit.end)) &&
+                activityAmount.gte(parseCurrency(filter.amount.subunit.start))
             if (!isInRange) {
                 return false
             }
         }
         if (filter.amount.selected === NumberFilterOption.Greater && filter.amount.subunit.type === 'single') {
-            const isGreater = activityAmount >= parseCurrency(filter.amount.subunit.amount)
+            const isGreater = activityAmount.gte(parseCurrency(filter.amount.subunit.amount))
             if (!isGreater) {
                 return false
             }
         }
         if (filter.amount.selected === NumberFilterOption.Less && filter.amount.subunit.type === 'single') {
-            const isLess = activityAmount <= parseCurrency(filter.amount.subunit.amount)
+            const isLess = activityAmount.lte(parseCurrency(filter.amount.subunit.amount))
             if (!isLess) {
                 return false
             }

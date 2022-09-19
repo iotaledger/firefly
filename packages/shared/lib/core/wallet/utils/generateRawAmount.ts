@@ -17,7 +17,11 @@ function generateRawAmountFromMetadata(amount: number, unit: string, tokenMetada
         return Big(amount * UNIT_MAP?.[unit?.substring(0, 1)] ?? 0)
     } else {
         if (unit && unit === tokenMetadata.unit) {
-            return Big(amount).mul(Big(10).pow(tokenMetadata.decimals))
+            if (tokenMetadata.decimals < Number.MAX_SAFE_INTEGER) {
+                return Big(amount).div(Big(10).pow(tokenMetadata.decimals))
+            } else {
+                return Big(0)
+            }
         } else if (unit === tokenMetadata.subunit) {
             return Big(amount)
         }
