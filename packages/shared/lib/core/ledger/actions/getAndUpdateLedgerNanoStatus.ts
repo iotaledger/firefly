@@ -6,8 +6,8 @@ import { getLedgerNanoStatus } from '@lib/core/profile-manager/api'
 import { resetLedgerNanoStatus, updateLedgerNanoStatus } from '../stores'
 
 export async function getAndUpdateLedgerNanoStatus(
-    forwardErrors = false,
-    profileManager: Writable<IProfileManager> = _profileManager
+    profileManager: Writable<IProfileManager> = _profileManager,
+    forwardErrors = false
 ): Promise<void> {
     try {
         const ledgerNanoStatusResponse = await getLedgerNanoStatus(profileManager)

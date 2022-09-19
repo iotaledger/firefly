@@ -23,20 +23,6 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
     accountIndex: number,
     payload: ITransactionInclusionEventPayload
 ): void {
-    function onError(shimmerClaimingAccount: IShimmerClaimingAccount, displayNotification: boolean = true): void {
-        updateShimmerClaimingAccount({
-            ...shimmerClaimingAccount,
-            state: ShimmerClaimingAccountState.Failed,
-        })
-        if (displayNotification) {
-            showAppNotification({
-                type: 'error',
-                alert: true,
-                message: localize('notifications.claimShimmerRewards.error'),
-            })
-        }
-    }
-
     const _shimmerClaimingTransactions = get(shimmerClaimingTransactions)
     const profileId = get(onboardingProfile)?.id
     const { transactionId, inclusionState } = payload
@@ -57,14 +43,40 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
                         values: { accountAlias: shimmerClaimingAccount?.meta?.alias },
                     }),
                 })
+            } else if (inclusionState === InclusionState.Pending) {
+                /**
+                 * NOTE: If the transaction is still pending, it's
+                 * likely we'll eventually receive another event when
+                 * it's either a confirmed or conflicting, so we do
+                 * nothing here. Optionally we can update the account
+                 * with the same information if we need to re-render
+                 * a component for some reason.
+                 */
             } else {
-                onError(shimmerClaimingAccount)
+                handleFailureForTransactionInclusionEvent(shimmerClaimingAccount)
             }
         } else {
-            onError(shimmerClaimingAccount, false)
+            handleFailureForTransactionInclusionEvent(shimmerClaimingAccount, false)
             throw new MissingTransactionIdError()
         }
     } else {
         throw new MissingShimmerClaimingAccountError()
+    }
+}
+
+function handleFailureForTransactionInclusionEvent(
+    shimmerClaimingAccount: IShimmerClaimingAccount,
+    displayNotification = true
+): void {
+    updateShimmerClaimingAccount({
+        ...shimmerClaimingAccount,
+        state: ShimmerClaimingAccountState.Failed,
+    })
+    if (displayNotification) {
+        showAppNotification({
+            type: 'error',
+            alert: true,
+            message: localize('notifications.claimShimmerRewards.error'),
+        })
     }
 }

@@ -7,7 +7,7 @@ import { profileManager as _profileManager } from '../stores'
 
 export function subscribeToWalletApiEvents(configuration: IWalletApiEventSubscriptionConfiguration): void {
     const { eventMap, profileManager } = configuration
-    const manager = profileManager ? profileManager : get(_profileManager)
+    const manager = profileManager ?? get(_profileManager)
     Object.entries(eventMap).forEach(([event, callback]) => {
         manager.listen([event as EventType], callback)
     })

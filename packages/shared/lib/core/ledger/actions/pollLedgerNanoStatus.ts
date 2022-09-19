@@ -12,9 +12,9 @@ export function pollLedgerNanoStatus(config?: ILedgerNanoStatusPollingConfigurat
     const { pollInterval, profileManager } = deconstructLedgerNanoStatusPollingConfiguration(config)
 
     if (!get(isPollingLedgerDeviceStatus)) {
-        void getAndUpdateLedgerNanoStatus(false, profileManager)
+        void getAndUpdateLedgerNanoStatus(profileManager)
         intervalTimer = setInterval(() => {
-            void getAndUpdateLedgerNanoStatus(false, profileManager)
+            void getAndUpdateLedgerNanoStatus(profileManager)
         }, pollInterval)
         isPollingLedgerDeviceStatus.set(true)
     }

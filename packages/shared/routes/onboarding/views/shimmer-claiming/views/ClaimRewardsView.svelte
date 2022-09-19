@@ -2,7 +2,11 @@
     import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { displayNotificationForLedgerProfile, getLedgerDeviceStatus } from '@core/ledger'
+    import {
+        displayNotificationForLedgerProfile,
+        getLedgerDeviceStatus,
+        stopPollingLedgerNanoStatus,
+    } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { shimmerClaimingRouter } from '@core/router'
     import {
@@ -120,6 +124,9 @@
     async function onDestroyHelper(): Promise<void> {
         unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
         await $shimmerClaimingProfileManager?.stopBackgroundSync()
+        if ($isOnboardingLedgerProfile) {
+            stopPollingLedgerNanoStatus()
+        }
     }
 
     onDestroy(() => {

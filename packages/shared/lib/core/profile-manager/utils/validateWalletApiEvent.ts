@@ -12,6 +12,7 @@ export function validateWalletApiEvent(
     if (error) {
         throw new WalletApiEventError(error)
     } else {
+        /* eslint-disable-next-line prefer-const */
         let { accountIndex, event } = JSON.parse(rawEvent)
 
         accountIndex = Number(accountIndex)
