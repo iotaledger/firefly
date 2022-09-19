@@ -1464,7 +1464,7 @@
             "legacyConnected": "На вашому пристрої Ledger відкрито неправильний додаток.",
             "locked": "Будь ласка, розблокуйте пристрій Ledger, ввівши PIN -код.",
             "mnemonicMismatch": "Ви підключили неправильний пристрій Ledge або змінилася мнемоніка.",
-            "notDetected": "Пристрій Ledger не виявлено.",
+            "notConnected": "Пристрій Ledger не виявлено.",
             "notFound": "Пристрій Ledger не знайдено.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "Сталася помилка при генерації адреси.",

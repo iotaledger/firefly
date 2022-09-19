@@ -1464,7 +1464,7 @@
             "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "لطفاً با وارد کردن پین، قفل دستگاه لجر را باز کنید.",
             "mnemonicMismatch": "دستگاه لجر اشتباهی را وصل کرده اید یا تغییر کرده است.",
-            "notDetected": "دستگاه لجری شناسایی نشد.",
+            "notConnected": "دستگاه لجری شناسایی نشد.",
             "notFound": "دستگاه لجر پیدا نشد.",
             "otherConnected": "برنامه اشتباهی در دستگاه لجر شما باز است.",
             "generateAddress": "There was an error generating an address.",

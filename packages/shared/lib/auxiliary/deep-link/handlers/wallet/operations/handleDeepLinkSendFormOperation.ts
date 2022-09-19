@@ -1,16 +1,15 @@
-import { networkHrp } from '@core/network'
 import {
     INewTransactionDetails,
     Subject,
     updateNewTransactionDetails,
-    visibleSelectedAccountAssets,
+    selectedAccountAssets,
+    getAssetById,
 } from '@core/wallet'
-import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'
-import { InvalidAddressError, NoAddressSpecifiedError } from '../../../errors'
+import { UnknownAssetError } from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
@@ -35,24 +34,21 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
  * @return {INewTransactionDetails} The formatted parameters for the send operation.
  */
 function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionDetails {
-    // Check address exists and is valid this is not optional.
+    const assetId = searchParams.get(SendOperationParameter.AssetId)
+    const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
+    if (!asset) {
+        throw new UnknownAssetError()
+    }
+
     const address = searchParams.get(SendOperationParameter.Address)
-    if (!address) {
-        throw new NoAddressSpecifiedError()
-    }
-    if (!isValidAddressAndPrefix(address, get(networkHrp))) {
-        throw new InvalidAddressError()
-    }
-
-    const asset = get(visibleSelectedAccountAssets)?.baseCoin
+    const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
     const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
-
-    const unit = searchParams.get(SendOperationParameter.Unit)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)
     const recipient: Subject = address ? { type: 'address', address } : undefined
 
     return {
+        ...(asset && { asset }),
         ...(recipient && { recipient }),
         ...(amount && { amount }),
         ...(unit && { unit }),

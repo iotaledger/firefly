@@ -10,13 +10,13 @@
         claimActivity,
         rejectActivity,
         InclusionState,
-        VerificationStatus,
         selectedAccountAssets,
         getAssetFromPersistedAssets,
         IPersistedAsset,
         ITransactionActivityData,
         getTimeDifference,
         Subject,
+        NotVerifiedStatus,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
@@ -76,7 +76,7 @@
         }
     }
     function handleTransactionClick(): void {
-        if (asset?.verification === VerificationStatus.New) {
+        if (asset?.verification?.status === NotVerifiedStatus.New) {
             openPopup({
                 type: 'tokenInformation',
                 overflow: true,

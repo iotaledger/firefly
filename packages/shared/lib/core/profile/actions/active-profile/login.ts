@@ -59,7 +59,8 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 if (isFromOnboardingFlow && shouldRecoverAccounts) {
                     const accountMetadatas = await recoverAccounts(
                         INITIAL_ACCOUNT_GAP_LIMIT[type],
-                        INITIAL_ADDRESS_GAP_LIMIT[type]
+                        INITIAL_ADDRESS_GAP_LIMIT[type],
+                        { syncIncomingTransactions: true }
                     )
 
                     /**
