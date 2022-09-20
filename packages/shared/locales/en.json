@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Learn about the Shimmer network"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Create a profile",
@@ -1149,7 +1147,9 @@
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
         "noRecentHistory": "No recent history",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "No assets",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "Syncing history, this may take a while...",

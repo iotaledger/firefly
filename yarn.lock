@@ -520,10 +520,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.2-alpha.23":
-  version "2.0.2-alpha.23"
-  resolved "https://registry.npmjs.org/@iota/wallet/-/wallet-2.0.2-alpha.23.tgz"
-  integrity sha512-V3s7NfmRO7vgVJAxfvPtpvCjqERAHilPf/223hKOLhgMrIOP+HhB8TaIc/PXS5fRpz5TzJs9o9VgwHU75TcfqQ==
+"@iota/wallet@2.0.2-alpha.24":
+  version "2.0.2-alpha.24"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.24.tgz#c601361d9249f7bc78adf54ef32ba968bec33fee"
+  integrity sha512-qIOxapo1XOvPmYhSLXZqXwKgAVljLWjXM+Nn6CZ/kcIkeQfToHR0wMpy6HAKGWZen6lJvTcqq1ldT2T3QvxWMQ==
   dependencies:
     "@iota/types" "^1.0.0-beta.11"
     cargo-cp-artifact "^0.1.5"
@@ -1237,9 +1237,9 @@
   integrity sha512-6bbDaETVi8oyIARulOE9qF1/Qdi/23z6emrUh0fNJRUmjznqrixD4MpGDdgOFk5Xb0m2H6Xu42JGdvAxaJR/wA==
 
 "@types/node@^14.11.1":
-  version "14.18.27"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.27.tgz#940c1d419143fd9fbdc46ae1320b86077aef8155"
-  integrity sha512-DcTUcwT9xEcf4rp2UHyGAcmlqG4Mhe7acozl5vY2xzSrwP1z19ZVyjzQ6DsNUrvIadpiyZoQCTHFt4t2omYIZQ==
+  version "14.18.28"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.28.tgz#ddb82da2fff476a8e827e8773c84c19d9c235278"
+  integrity sha512-CK2fnrQlIgKlCV3N2kM+Gznb5USlwA1KFX3rJVHmgVk6NJxFPuQ86pAcvKnu37IA4BGlSRz7sEE1lHL1aLZ/eQ==
 
 "@types/node@^16.11.26":
   version "16.11.56"

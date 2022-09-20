@@ -10,8 +10,13 @@
     export let assets: IAccountAssets
 
     let assetList: IAsset[]
-    $: $assetFilter, assets, updateFilteredAssetList()
+    $: $assetFilter, assets, updateFilteredAssetList(), scrollToTop()
+    $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
 
+    function scrollToTop() {
+        const listElement = document.querySelector('.asset-list')?.querySelector('svelte-virtual-list-viewport')
+        if (listElement) listElement.scroll(0, 0)
+    }
     function updateFilteredAssetList() {
         const list = []
         if (assets?.baseCoin && isVisibleAsset(assets?.baseCoin)) {
@@ -39,13 +44,15 @@
             <Filter filterStore={assetFilter} />
         </div>
         <div class="flex-auto h-full pb-10">
-            {#if assets?.baseCoin || assets?.nativeTokens?.length > 0}
+            {#if assetList.length > 0}
                 <VirtualList items={assetList} let:item>
                     <AssetTile classes="mb-2" onClick={() => handleAssetTileClick(item)} asset={item} />
                 </VirtualList>
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
-                    <Text secondary>{localize('general.noAssets')}</Text>
+                    <Text secondary
+                        >{localize(`general.${isEmptyBecauseOfFilter ? 'noFilteredAsset' : 'noAssets'}`)}</Text
+                    >
                 </div>
             {/if}
         </div>
