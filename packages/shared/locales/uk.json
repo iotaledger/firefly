@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Видалити {name}?",
             "body": "У цьому гаманці немає історії транзакцій. Його можна сміливо видаляти.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Підтвердьте адресу отримання",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 місяць"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Продовжити",
         "back": "Назад",
         "previous": "Назад",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Темний",
         "systemTheme": "Система",
         "balance": "Баланс",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Вхідні",
         "outgoing": "Вихідні",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Сума є неприпустимим числом.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Сума повинна бути більше 0.",
             "wrongAddressPrefix": "Адреси починаються із префікса {prefix}.",
             "wrongAddressFormat": "Адреса невірно відформатована.",
             "invalidAddress": "Адреса недійсна.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "У цього гаманця недостатньо коштів.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Ви не вибрали гаманець для надсилання коштів.",
             "sendingDust": "Ви не можете надіслати менш 1 Mi.",
             "leavingDust": "Ви не можете залишити менше 1 Mi на вашій адресі.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "На вашому пристрої Ledger відкрито неправильний додаток.",
             "locked": "Будь ласка, розблокуйте пристрій Ledger, ввівши PIN -код.",
             "mnemonicMismatch": "Ви підключили неправильний пристрій Ledge або змінилася мнемоніка.",
-            "notConnected": "Пристрій Ledger не виявлено.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Пристрій Ledger не знайдено.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "Сталася помилка при генерації адреси.",

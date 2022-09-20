@@ -98,92 +98,92 @@
                     "profileName": "Nombre de perfil",
                     "body1": "Puedes crear múltiples perfiles de usuario para organizar tus carteras y mejorar la privacidad.",
                     "body2": {
-                        "first": "For now, let's start with your first profile name.",
-                        "nonFirst": "For now, let's start with your profile name."
+                        "first": "Por ahora, empecemos con el nombre de tu primer perfil.",
+                        "nonFirst": "Por ahora, empecemos con el nombre de tu primer perfil."
                     },
-                    "addMore": "You can add more profiles later."
+                    "addMore": "Puedes añadir más perfiles después."
                 }
             },
             "strongholdSetup": {
                 "setupStrongholdPassword": {
-                    "title": "Create a password",
-                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                    "title": "Crear una contraseña",
+                    "body1": "Necesitas una contraseña robusta para proteger tus fondos. Usa una combinación de palabras y evita frases, nombres o fechas comunes.",
+                    "body2": "Es recomendable que escribas tu contraseña en tu Kit de Recuperación."
                 }
             },
             "storageProtectionSetup": {
                 "setupPinProtection": {
-                    "title": "Set up PIN code",
-                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-                    "body2": "Use numbers only"
+                    "title": "Establecer código PIN",
+                    "body1": "Introduce un PIN de 6 dígitos. Se te pedirá el PIN para acceder a tu perfil.",
+                    "body2": "Usa sólo números"
                 }
             },
             "profileBackup": {
                 "backupMnemonic": {
-                    "title": "Back up your recovery phrase",
-                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                    "title": "Respaldar tu frase de recuperación",
+                    "body1": "Ahora se te mostrará una frase de recuperación. Escríbela en tu Kit de Recuperación.",
+                    "body2": "No compartas tu frase de recuperación con nadie. Puede utilizarse para acceder a tus tokens desde cualquier lugar.",
+                    "body3": "Si pierdes tu frase de recuperación, puedes perder tus fondos."
                 },
                 "viewMnemonic": {
-                    "title": "Recovery phrase",
-                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-                    "body2": "Keep this private and safely stored.",
-                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
-                    "revealRecoveryPhrase": "Reveal recovery phrase",
-                    "hideRecoveryPhrase": "Hide recovery phrase"
+                    "title": "Frase de recuperación",
+                    "body1": "En tu Kit de Recuperación, escribe las palabras en el orden exacto en el que se muestran.",
+                    "body2": "Mantén esto en privado y almacenado de forma segura.",
+                    "body3": "Es importante tener una copia de seguridad por escrito. Los ordenadores a menudo fallan y los archivos pueden corromperse.",
+                    "revealRecoveryPhrase": "Mostrar frase de recuperación",
+                    "hideRecoveryPhrase": "Ocultar frase de recuperación"
                 },
                 "verifyMnemonic": {
-                    "title": "Verify recovery phrase",
-                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
-                    "word": "Word",
-                    "verified": "Recovery phrase verified",
-                    "verifiedBody": "Remember to keep it private and safely stored."
+                    "title": "Verificar frase de recuperación",
+                    "body": "Vamos a comprobar que escribiste correctamente la frase. Por favor, selecciona cada palabra en orden numerado. Consejo: Puedes pulsar el número junto a la palabra en tu teclado para seleccionarlo.",
+                    "word": "Palabra",
+                    "verified": "Frase de recuperación verificada",
+                    "verifiedBody": "Recuerda mantenerla en privado y almacenada de forma segura."
                 },
                 "backupStronghold": {
-                    "title": "Back up to a Stronghold file",
-                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
-                    "body2": "Reasons why digital backups are important:",
-                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
-                    "reason2": "Import your wallets on other devices",
-                    "reason3": "Recover your full transaction history"
+                    "title": "Hacer copia de seguridad a un archivo Stronghold",
+                    "body1": "Introduzca su contraseña para crear una copia de seguridad Stronghold de su perfil. Su contraseña se utiliza para cifrar el archivo de copia de seguridad.",
+                    "body2": "Razones por las que las copias de seguridad digitales son importantes:",
+                    "reason1": "Recupera fácilmente tus carteras sin escribir tu frase de recuperación",
+                    "reason2": "Importa tus carteras a otros dispositivos",
+                    "reason3": "Recuperar todo tu historial de transacciones"
                 }
             },
             "profileRecovery": {
                 "importMnemonicPhrase": {
-                    "title": "Enter your recovery phrase",
-                    "body": "A recovery phrase is 24 words long, all lower case, with sapces between. This is used to recover existing Firefly profiles.",
-                    "enter": "Enter your secret recovery phrase",
-                    "phraseDetected": "24 word recovery phrase detected"
+                    "title": "Ingresa tu frase de recuperación",
+                    "body": "Una frase de recuperación tiene 24 palabras, todas minúsculas, con espacios intermedios. Esto se utiliza para recuperar perfiles de Firefly existentes.",
+                    "enter": "Introduce tu frase de recuperación secreta",
+                    "phraseDetected": "Frase de recuperación de 24 palabras detectada"
                 },
                 "importStrongholdBackup": {
-                    "title": "Import your Stronghold backup",
-                    "body": "Import a Stronghold backup file to restore your profile."
+                    "title": "Importar tu copia de seguridad de Stronghold",
+                    "body": "Importa una copia de seguridad de Stronghold para restaurar tu perfil."
                 },
                 "backupPassword": {
-                    "body1": "Please enter your backup password.",
-                    "body2": "This is the password you set when you first created your backup."
+                    "body1": "Por favor, introduce la contraseña de tu copia de seguridad.",
+                    "body2": "Esta es la contraseña que pusiste cuando por primera vez creaste tu copia de seguridad."
                 },
                 "success": {
-                    "title": "You have successfully recovered your backup",
-                    "body": "You can now set up your new profile."
+                    "title": "Has recuperado con éxito tu copia de seguridad",
+                    "body": "Ahora puede configurar su nuevo perfil."
                 }
             },
             "shimmerClaiming": {
                 "claimRewards": {
-                    "title": "Your Shimmer staking rewards",
-                    "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+                    "title": "Tus recompensas de staking de Shimmer",
+                    "body": "Por favor, comprueba que tus recompensas de staking de Shimmer son correctas. Si no, por favor usa el buscador de saldo."
                 },
                 "success": {
-                    "title": "Rewards claimed",
-                    "body": "You have successfully claimed Shimmer tokens for your new profile.",
-                    "totalRewards": "Total rewards"
+                    "title": "Recompensas recibidas",
+                    "body": "Has reclamado con éxito tokens Shimmer para tu nuevo perfil.",
+                    "totalRewards": "Total de recompensas"
                 }
             },
             "congratulations": {
-                "title": "Profile setup complete",
-                "fundsMigrated": "Funds migrated",
-                "body": "Your new profile is ready to use.",
+                "title": "Configuración de perfil completa",
+                "fundsMigrated": "Fondos migrados",
+                "body": "Tu nuevo perfil está listo para usar.",
                 "softwareMigratedBody": "Has migrado correctamente tus fondos a la nueva red",
                 "fireflyLedgerBody": "Tu cuenta de Ledger se ha recuperado con éxito y ahora puedes continuar.",
                 "trinityLedgerBody": "Has migrado con éxito tu Ledger a la nueva red.",
@@ -586,6 +586,14 @@
             "title": "Copia de seguridad de su archivo Stronghold",
             "body": "Es importante hacer una copia de seguridad de su cartera regularmente para asegurarse de que tiene una copia de tus billeteras e historial de transacciones. Si pierde su copia de seguridad y su frase de recuperación perderá el acceso a sus fondos."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "¿Eliminar {name}?",
             "body": "Esta cartera no tiene historial de transacciones. Puede ser eliminada con seguridad.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Confirmar dirección de recepción",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 mes"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Continuar",
         "back": "Atrás",
         "previous": "Anterior",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Oscuro",
         "systemTheme": "Sistema",
         "balance": "Balance",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Todos",
         "incoming": "Entrante",
         "outgoing": "Saliente",
@@ -1216,7 +1231,7 @@
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
-        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "refreshTokenMetadataHint": "Esto restablecerá todos los metadatos de sus tokens, incluyendo el estado de verificación y desocultará cualquier recurso oculto.",
         "giftStorageDeposit": "Gift storage deposit",
         "excluded": "Excluded",
         "developerTools": "Developer tools",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "No se pueden usar decimales con la unidad más pequeña seleccionada",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
             "amountSmallerThanSubunit": "La cantidad debe ser mayor que la subunidad más pequeña.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "La cantidad debe ser mayor que 0.",
             "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",
             "wrongAddressFormat": "La dirección no tiene el formato correcto.",
             "invalidAddress": "La dirección no es válida.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Esta cartera tiene fondos insuficientes.",
             "insufficientFundsStorageDeposit": "Fondos insuficientes para cubrir el depósito de almacenamiento",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "No has seleccionado una cartera a la que enviar los fondos.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
             "leavingDust": "No puedes dejar menos de 1 Mi en tu dirección.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Está abierta la aplicación incorrecta en tu dispositivo Ledger.",
             "locked": "Por favor, desbloquea tu dispositivo Ledger ingresando el PIN.",
             "mnemonicMismatch": "Has conectado un dispositivo Ledger incorrecto o el mnemónico ha cambiado.",
-            "notConnected": "Ningún dispositivo Ledger detectado.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Dispositivo Ledger no encontrado.",
             "otherConnected": "Está abierta la aplicación incorrecta en tu dispositivo Ledger.",
             "generateAddress": "Hubo un error al generar una dirección.",
