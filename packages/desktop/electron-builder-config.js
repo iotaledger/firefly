@@ -14,7 +14,7 @@ const APP_PROTOCOL = getAppProtocol()
  * @returns
  */
 function getAppName() {
-    return STAGE === 'prod' ? 'Firefly Stardust' : `Firefly Stardust - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
+    return STAGE === 'prod' ? 'Firefly Shimmer' : `Firefly Shimmer - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
 }
 
 function getAppProtocol() {
@@ -22,7 +22,7 @@ function getAppProtocol() {
 }
 
 function getAppId() {
-    const defaultAppId = 'org.iota.firefly-stardust'
+    const defaultAppId = 'org.iota.firefly-shimmer'
     if (STAGE === 'prod') {
         return defaultAppId
     }

@@ -1148,7 +1148,9 @@
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
         "noRecentHistory": "No recent history",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "No assets",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "Syncing history, this may take a while...",
@@ -1521,7 +1523,16 @@
             "invalidStakingEventId": "Invalid staking event ID."
         },
         "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidTime": "INVALID TIME",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {

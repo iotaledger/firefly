@@ -1,11 +1,14 @@
+import { get } from 'svelte/store'
+
 import { Transaction } from '@iota/wallet'
 
-import { IAccount, sumTotalFromOutputs, syncAccountsInParallel } from '@core/account'
+import { IAccount, sumTotalFromOutputs, syncAccountsInParallel, syncAccountsInSeries } from '@core/account'
 import { filterShimmerClaimingOutputs } from '@core/utils'
 
 import { DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS } from '../constants'
 import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
+import { isOnboardingLedgerProfile } from '../stores'
 
 import { deriveShimmerClaimingAccountState } from './deriveShimmerClaimingAccountState'
 
@@ -17,7 +20,17 @@ export async function prepareShimmerClaimingAccount(
     claimingTransaction?: Transaction
 ): Promise<IShimmerClaimingAccount> {
     if (syncAccounts) {
-        await syncAccountsInParallel(DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS, account, twinAccount)
+        if (get(isOnboardingLedgerProfile)) {
+            /**
+             * CAUTION: To avoid possible freezes / hanging
+             * on Ledger devices (due to simultaneously accessing
+             * the device from multiple profile managers at once),
+             * we sync the accounts in series.
+             */
+            await syncAccountsInSeries(DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS, account, twinAccount)
+        } else {
+            await syncAccountsInParallel(DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS, account, twinAccount)
+        }
     }
 
     const twinUnspentOutputs = await twinAccount?.listUnspentOutputs()
@@ -38,6 +51,6 @@ export async function prepareShimmerClaimingAccount(
         state,
         claimedRewards,
         unclaimedRewards,
-        claimingTransaction,
+        ...(claimingTransaction && { claimingTransaction }),
     }
 }
