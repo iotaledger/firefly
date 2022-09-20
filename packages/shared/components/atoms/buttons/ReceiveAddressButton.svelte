@@ -17,12 +17,12 @@
 </script>
 
 <div
-    class="flex flex-col px-4 py-4 space-y-4 rounded-xl cursor-pointer"
+    class="flex flex-col px-4 py-4 space-y-2 rounded-xl cursor-pointer"
     class:darkmode={darkModeEnabled}
     on:click={handlereceiveClick}
 >
     <Text type="h5" fontWeight={FontWeight.semibold} classes="text-left">{localize('general.receiveFunds')}</Text>
-    <inner-box class="flex flex-col space-y-4 py-10">
+    <inner-box class="flex flex-col space-y-6.75 py-10">
         <QR data={receiveAddress} classes="w-32 h-auto" />
         <AddressBox
             bind:this={addressBoxElement}
