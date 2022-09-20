@@ -2,7 +2,6 @@
     import { Button, PasswordInput, Text, Spinner } from 'shared/components'
     import { isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { setStrongholdPassword } from '@core/profile-manager'
     import { closePopup } from '@lib/popup'
     import { deleteProfile } from '@contexts/settings'
 
@@ -15,7 +14,6 @@
         error = ''
 
         try {
-            await setStrongholdPassword(password)
             await deleteProfile()
         } catch (err) {
             error = localize(err.error)
