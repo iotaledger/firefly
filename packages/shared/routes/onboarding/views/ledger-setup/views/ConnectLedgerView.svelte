@@ -1,10 +1,24 @@
 <script lang="typescript">
-    import { LedgerAnimation, Button, Icon, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { onMount } from 'svelte'
+    import { Button, Icon, LedgerAnimation, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
+    import {
+        displayNotificationForLedgerProfile,
+        isPollingLedgerDeviceStatus,
+        ledgerConnectionState,
+        LedgerConnectionState,
+        pollLedgerNanoStatus,
+        stopPollingLedgerNanoStatus,
+    } from '@core/ledger'
+    import { profileManager } from '@core/profile-manager'
     import { ledgerSetupRouter } from '@core/router'
-    import { LedgerConnectionState, ledgerConnectionState, displayNotificationForLedgerProfile } from '@core/ledger'
+    import {
+        initialiseFirstShimmerClaimingAccount,
+        onboardingProfile,
+        ProfileSetupType,
+        shimmerClaimingProfileManager,
+    } from '@contexts/onboarding'
     import { openPopup } from '@lib/popup'
-    import { initialiseFirstShimmerClaimingAccount, onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 
     let isBusy = false
 
@@ -40,6 +54,7 @@
             const canInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.setupType === ProfileSetupType.Claimed
             const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
             if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
+                stopPollingLedgerNanoStatus()
                 await initialiseFirstShimmerClaimingAccount()
             }
             $ledgerSetupRouter.next()
@@ -47,6 +62,9 @@
             displayNotificationForLedgerProfile('error', true, true, err)
             console.error(err)
         } finally {
+            if (!$isPollingLedgerDeviceStatus) {
+                initiatePolling()
+            }
             isBusy = false
         }
     }
@@ -54,6 +72,17 @@
     function onBackClick(): void {
         $ledgerSetupRouter.previous()
     }
+
+    function initiatePolling(): void {
+        const isInShimmerClaimingFlow = $onboardingProfile?.setupType === ProfileSetupType.Claimed
+        pollLedgerNanoStatus({
+            profileManager: isInShimmerClaimingFlow ? shimmerClaimingProfileManager : profileManager,
+        })
+    }
+
+    onMount(() => {
+        initiatePolling()
+    })
 </script>
 
 <OnboardingLayout {onBackClick}>
