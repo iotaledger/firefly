@@ -5,6 +5,7 @@ import { ClientOptions } from '@iota/wallet'
 import { IProfileManager } from '@core/profile-manager'
 
 import { copyStrongholdFileToProfileDirectory } from './copyStrongholdFileToProfileDirectory'
+import { UnableToRestoreBackupForProfileManagerError } from '../errors'
 
 export async function restoreBackupForShimmerClaimingProfileManagerHelper(
     importFilePath: string,
@@ -13,7 +14,12 @@ export async function restoreBackupForShimmerClaimingProfileManagerHelper(
     clientOptions: ClientOptions,
     manager: Writable<IProfileManager>
 ): Promise<void> {
-    await copyStrongholdFileToProfileDirectory(storageDirectory, importFilePath)
-    await get(manager)?.setStrongholdPassword(strongholdPassword)
-    await get(manager)?.setClientOptions(clientOptions)
+    try {
+        await copyStrongholdFileToProfileDirectory(storageDirectory, importFilePath)
+        await get(manager)?.setStrongholdPassword(strongholdPassword)
+        await get(manager)?.setClientOptions(clientOptions)
+    } catch (err) {
+        console.error(err)
+        throw new UnableToRestoreBackupForProfileManagerError()
+    }
 }
