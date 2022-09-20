@@ -10,9 +10,13 @@
     export let assets: IAccountAssets
 
     let assetList: IAsset[]
-    $: $assetFilter, assets, updateFilteredAssetList()
+    $: $assetFilter, assets, updateFilteredAssetList(), scrollToTop()
     $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
 
+    function scrollToTop() {
+        const listElement = document.querySelector('.asset-list')?.querySelector('svelte-virtual-list-viewport')
+        if (listElement) listElement.scroll(0, 0)
+    }
     function updateFilteredAssetList() {
         const list = []
         if (assets?.baseCoin && isVisibleAsset(assets?.baseCoin)) {
