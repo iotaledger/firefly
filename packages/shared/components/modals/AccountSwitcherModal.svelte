@@ -13,11 +13,10 @@
 
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 
-    function scrollToSelectedAccount() {
-        tick().then(() => {
-            const el = document.getElementById(`account-${$selectedAccount.id}`)
-            el?.scrollIntoView({ behavior: 'auto' })
-        })
+    async function scrollToSelectedAccount(): Promise<void> {
+        await tick()
+        const el = document.getElementById(`account-${$selectedAccount.id}`)
+        el?.scrollIntoView({ behavior: 'auto' })
     }
 
     function handleCreateAccountClick(): void {

@@ -57,9 +57,11 @@
         $selectedAccountActivities.filter((_activity) => !_activity.isHidden).length > 0 &&
         activityListWithTitles.length === 0
 
-    function scrollToTop() {
+    function scrollToTop(): void {
         const listElement = document.querySelector('.activity-list')?.querySelector('svelte-virtual-list-viewport')
-        if (listElement) listElement.scroll(0, 0)
+        if (listElement) {
+            listElement.scroll(0, 0)
+        }
     }
 
     function getActivityGroupTitleForTimestamp(time: Date): string {
