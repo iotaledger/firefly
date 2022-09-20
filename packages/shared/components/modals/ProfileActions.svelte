@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <Button outline size={ButtonSize.Small} onClick={handleBackupClick}>
-                            <Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text>
+                            {localize('views.dashboard.profileModal.backup.button')}
                         </Button>
                     </div>
                 </div>
