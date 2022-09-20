@@ -82,7 +82,11 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
         const asset = getAssetFromPersistedAssets(activity.data.assetId)
         const activityAmount = Big(activity.data.rawAmount)
 
-        if (filter.amount.selected === NumberFilterOption.Equal && filter.amount.subunit.type === 'single') {
+        if (
+            filter.amount.selected === NumberFilterOption.Equal &&
+            filter.amount.subunit.type === 'single' &&
+            filter.amount.subunit.amount
+        ) {
             const amount = convertToRawAmount(
                 String(filter.amount.subunit.amount),
                 asset?.metadata?.unit,
@@ -93,7 +97,12 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
                 return false
             }
         }
-        if (filter.amount.selected === NumberFilterOption.Range && filter.amount.subunit.type === 'range') {
+        if (
+            filter.amount.selected === NumberFilterOption.Range &&
+            filter.amount.subunit.type === 'range' &&
+            filter.amount.subunit.start &&
+            filter.amount.subunit.end
+        ) {
             const startAmount = convertToRawAmount(
                 String(filter.amount.subunit.start),
                 asset?.metadata?.unit,
@@ -109,7 +118,11 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
                 return false
             }
         }
-        if (filter.amount.selected === NumberFilterOption.Greater && filter.amount.subunit.type === 'single') {
+        if (
+            filter.amount.selected === NumberFilterOption.Greater &&
+            filter.amount.subunit.type === 'single' &&
+            filter.amount.subunit.amount
+        ) {
             const amount = convertToRawAmount(
                 String(filter.amount.subunit.amount),
                 asset?.metadata?.unit,
@@ -120,7 +133,11 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
                 return false
             }
         }
-        if (filter.amount.selected === NumberFilterOption.Less && filter.amount.subunit.type === 'single') {
+        if (
+            filter.amount.selected === NumberFilterOption.Less &&
+            filter.amount.subunit.type === 'single' &&
+            filter.amount.subunit.amount
+        ) {
             const amount = convertToRawAmount(
                 String(filter.amount.subunit.amount),
                 asset?.metadata?.unit,
