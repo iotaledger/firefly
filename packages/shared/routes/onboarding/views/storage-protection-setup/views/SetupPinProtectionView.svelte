@@ -1,13 +1,16 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, PinInput, Text } from 'shared/components'
+    import { onMount } from 'svelte'
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
+        isOnboardingLedgerProfile,
         onboardingProfile,
         ProfileSetupType,
     } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ProfileType } from '@core/profile'
     import { storageProtectionSetupRouter } from '@core/router'
     import { validatePinFormat } from '@lib/utils'
@@ -35,10 +38,29 @@
     }
 
     function onBackClick(): void {
+        if ($isOnboardingLedgerProfile) {
+            /**
+             * CAUTION: We must make sure to stop polling if the user
+             * goes back as we've started it when this view is mounted.
+             */
+            stopPollingLedgerNanoStatus()
+        }
         $storageProtectionSetupRouter.previous()
     }
 
     async function onSetPinClick(): Promise<void> {
+        resetPinInputErrors()
+        if (arePinInputsValid && arePinInputsMatching) {
+            await handleSetPin()
+        }
+    }
+
+    function resetPinInputErrors(): void {
+        setPinInputError = ''
+        confirmPinInputError = ''
+    }
+
+    async function handleSetPin(): Promise<void> {
         await initialisePincodeManager(setPinInput)
 
         const canInitialiseFirstShimmerClaimingAccount =
@@ -52,17 +74,19 @@
         $storageProtectionSetupRouter.next()
     }
 
-    async function handleSetPinSubmit(): Promise<void> {
-        resetPinInputErrors()
-        if (arePinInputsValid && arePinInputsMatching) {
-            await onSetPinClick()
+    onMount(() => {
+        /**
+         * NOTE: We begin Ledger Nano status polling
+         * here because it's the closest common view between
+         * all Ledger flows that comes before the status
+         * check page, improving the UX as the status will
+         * already have been set by that point rather than setting
+         * it on mount.
+         */
+        if ($isOnboardingLedgerProfile) {
+            pollLedgerNanoStatus()
         }
-    }
-
-    function resetPinInputErrors(): void {
-        setPinInputError = ''
-        confirmPinInputError = ''
-    }
+    })
 </script>
 
 <OnboardingLayout {onBackClick} {busy}>
@@ -78,7 +102,7 @@
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
-        <form id="setup-pin" class="flex flex-col" on:submit={handleSetPinSubmit}>
+        <form id="setup-pin" class="flex flex-col" on:submit={onSetPinClick}>
             <PinInput
                 bind:value={setPinInput}
                 glimpse
@@ -88,7 +112,7 @@
                 error={setPinInputError}
                 label={localize('actions.setPin')}
                 on:filled={confirmPinInputElement.focus}
-                on:submit={handleSetPinSubmit}
+                on:submit={onSetPinClick}
             />
             <PinInput
                 bind:value={confirmPinInput}
@@ -99,7 +123,7 @@
                 label={localize('actions.confirmPin')}
                 bind:this={confirmPinInputElement}
                 on:filled={submitButtonElement.resetAndFocus}
-                on:submit={handleSetPinSubmit}
+                on:submit={onSetPinClick}
             />
         </form>
     </div>
