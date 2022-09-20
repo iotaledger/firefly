@@ -10,6 +10,7 @@
 
     export let account: IAccountState
     export let onClick: () => unknown
+    export let id: string = ''
 
     function handleAccountClick(accountId: string): void {
         if (account.isSyncing) {
@@ -29,6 +30,7 @@
 </script>
 
 <button
+    {id}
     on:click={() => handleAccountClick(account.id)}
     class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row justify-between p-4 rounded"
 >
