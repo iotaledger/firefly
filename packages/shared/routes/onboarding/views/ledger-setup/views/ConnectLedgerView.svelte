@@ -70,7 +70,6 @@
     }
 
     function onBackClick(): void {
-        stopPollingLedgerNanoStatus()
         $ledgerSetupRouter.previous()
     }
 
