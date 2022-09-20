@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Learn about the Shimmer network"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Create a profile",
