@@ -9,8 +9,7 @@
 
     export let modal: Modal
 
-    const hideDelete =
-        $selectedAccount.meta.index !== $activeAccounts?.length - 1 && $visibleActiveAccounts?.length <= 1
+    const shouldDisableDelete = $selectedAccount.meta.index !== $activeAccounts?.length - 1
 
     const handleCustomiseAccountClick = () => {
         openPopup({ type: 'manageAccount' })
@@ -32,6 +31,7 @@
             type: 'deleteAccount',
             props: {
                 account: selectedAccount,
+                hasMultipleAccounts: $visibleActiveAccounts?.length > 1,
                 deleteAccount,
             },
         })
@@ -60,14 +60,13 @@
         />
         <ToggleHiddenAccountMenuItem onClick={() => modal.close()} last />
         <HR />
-        {#if !hideDelete}
-            <MenuItem
-                icon={Icon.Delete}
-                title={localize('actions.deleteAccount')}
-                onClick={handleDeleteAccountClick}
-                first
-                last
-            />
-        {/if}
+        <MenuItem
+            icon={Icon.Delete}
+            title={localize('actions.deleteAccount')}
+            onClick={handleDeleteAccountClick}
+            first
+            last
+            disabled={shouldDisableDelete}
+        />
     </div>
 </Modal>
