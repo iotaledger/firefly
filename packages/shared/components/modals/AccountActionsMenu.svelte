@@ -9,15 +9,11 @@
 
     export let modal: Modal
 
-    const showDelete = $selectedAccount.meta.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
+    const showDeleteAccount =
+        $selectedAccount.meta.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
     const handleCustomiseAccountClick = () => {
         openPopup({ type: 'manageAccount' })
-        modal.close()
-    }
-
-    function handleExportTransactionHistoryClick() {
-        openPopup({ type: 'exportTransactionHistory', props: { account: selectedAccount }, hideClose: false })
         modal.close()
     }
 
@@ -47,19 +43,13 @@
             first
         />
         <MenuItem
-            icon={Icon.Export}
-            title={localize('actions.exportTransactionHistory')}
-            onClick={handleExportTransactionHistoryClick}
-            disabled
-        />
-        <MenuItem
             icon={Icon.Customize}
             title={localize('actions.customizeAcount')}
             onClick={handleCustomiseAccountClick}
         />
         <ToggleHiddenAccountMenuItem onClick={() => modal.close()} last />
         <HR />
-        {#if showDelete}
+        {#if showDeleteAccount}
             <MenuItem
                 icon={Icon.Delete}
                 title={localize('actions.deleteAccount')}
