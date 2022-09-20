@@ -1,6 +1,6 @@
 import { InclusionState } from '@core/wallet'
 
-export type TransactionInclusionEvent = {
+export interface ITransactionInclusionEventPayload {
     transactionId: string
     inclusionState: InclusionState
 }
