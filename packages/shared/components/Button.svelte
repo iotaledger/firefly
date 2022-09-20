@@ -86,6 +86,7 @@
     class:dark
     class:outline
     class:is-busy={isBusy}
+    style:--border-width={outline && '1px'}
     use:bindEvents={events}
     on:click|stopPropagation={onClick}
     bind:this={buttonElement}
@@ -146,37 +147,25 @@
     }
 
     .lg {
-        @apply py-4;
         @apply px-8;
-
-        &.outline {
-            // hacky way to make sure the outline button is the same height as the non-outline button
-            padding-top: 15px;
-            padding-bottom: 15px;
-        }
+        --lg-py: 1rem;
+        padding-top: calc(var(--lg-py) - var(--border-width, 0));
+        padding-bottom: calc(var(--lg-py) - var(--border-width, 0));
     }
 
     .md {
-        @apply py-3;
         @apply px-8;
-
-        &.outline {
-            // hacky way to make sure the outline button is the same height as the non-outline button
-            padding-top: 11px;
-            padding-bottom: 11px;
-        }
+        --md-py: 0.75rem;
+        padding-top: calc(var(--md-py) - var(--border-width, 0));
+        padding-bottom: calc(var(--md-py) - var(--border-width, 0));
     }
 
     .sm {
-        @apply py-2;
         @apply px-3;
         @apply text-13;
-
-        &.outline {
-            // hacky way to make sure the outline button is the same height as the non-outline button
-            padding-top: 7px;
-            padding-bottom: 7px;
-        }
+        --sm-py: 0.5rem;
+        padding-top: calc(var(--sm-py) - var(--border-width, 0));
+        padding-bottom: calc(var(--sm-py) - var(--border-width, 0));
     }
 
     @mixin button-variant($color) {
