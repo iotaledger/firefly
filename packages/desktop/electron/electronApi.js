@@ -21,8 +21,8 @@ const ElectronApi = {
     updateActiveProfile(id) {
         activeProfileId = id
     },
-    renameProfileFolder(oldPath, newPath) {
-        ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
+    async renameProfileFolder(oldPath, newPath) {
+        return ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
             if (oldPath.startsWith(userDataPath)) {
                 try {
                     fs.renameSync(oldPath, newPath)
@@ -32,8 +32,8 @@ const ElectronApi = {
             }
         })
     },
-    removeProfileFolder(profilePath) {
-        ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
+    async removeProfileFolder(profilePath) {
+        return ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
             // Check that the removing profile path matches the user data path
             // so that we don't try and remove things outside our scope
             if (profilePath.startsWith(userDataPath)) {
@@ -47,7 +47,7 @@ const ElectronApi = {
             }
         })
     },
-    listProfileFolders(profileStoragePath) {
+    async listProfileFolders(profileStoragePath) {
         return ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
             // Check that the profile path matches the user data path
             // so that we don't try and remove things outside our scope
@@ -68,8 +68,8 @@ const ElectronApi = {
     PincodeManager: PincodeManager,
     DeepLinkManager: DeepLinkManager,
     NotificationManager: NotificationManager,
-    getStrongholdBackupDestination: (defaultPath) =>
-        ipcRenderer
+    async getStrongholdBackupDestination(defaultPath) {
+        return ipcRenderer
             .invoke('show-save-dialog', {
                 properties: ['createDirectory', 'showOverwriteConfirmation'],
                 defaultPath,
@@ -81,10 +81,10 @@ const ElectronApi = {
                 }
 
                 return result.filePath
-            }),
-
-    exportTransactionHistory: async (defaultPath, contents) =>
-        ipcRenderer
+            })
+    },
+    async exportTransactionHistory(defaultPath, contents) {
+        return ipcRenderer
             .invoke('show-save-dialog', {
                 properties: ['createDirectory', 'showOverwriteConfirmation'],
                 defaultPath,
@@ -102,7 +102,8 @@ const ElectronApi = {
                         reject(err)
                     }
                 })
-            }),
+            })
+    },
 
     /**
      * Validates Seed Vault
@@ -113,8 +114,9 @@ const ElectronApi = {
      *
      * @returns {boolean}
      */
-    validateSeedVault: (buffer) => kdbx.checkFormat(buffer),
-
+    validateSeedVault(buffer) {
+        return kdbx.checkFormat(buffer)
+    },
     /**
      * Gets directory for app's configuration files
      *
@@ -122,7 +124,9 @@ const ElectronApi = {
      *
      * @returns {Promise}
      */
-    getUserDataPath: () => ipcRenderer.invoke('get-path', 'userData'),
+    getUserDataPath() {
+        return ipcRenderer.invoke('get-path', 'userData')
+    },
     /**
      * Gets diagnostics information for the system
      *
@@ -130,7 +134,9 @@ const ElectronApi = {
      *
      * @returns {Promise}
      */
-    getDiagnostics: () => ipcRenderer.invoke('diagnostics'),
+    getDiagnostics() {
+        return ipcRenderer.invoke('diagnostics')
+    },
     /**
      * Gets os information for the system
      *
@@ -138,7 +144,9 @@ const ElectronApi = {
      *
      * @returns {Promise}
      */
-    getOS: () => ipcRenderer.invoke('get-os'),
+    getOS() {
+        return ipcRenderer.invoke('get-os')
+    },
     /**
      * Gets machine ID
      *
@@ -146,7 +154,9 @@ const ElectronApi = {
      *
      * @returns {Promise}
      */
-    getMachineId: () => ipcRenderer.invoke('get-machine-id'),
+    getMachineId() {
+        return ipcRenderer.invoke('get-machine-id')
+    },
     /**
      * Starts an update of the application
      *
@@ -154,7 +164,9 @@ const ElectronApi = {
      *
      * @returns void
      */
-    updateDownload: () => ipcRenderer.invoke('update-download'),
+    updateDownload() {
+        return ipcRenderer.invoke('update-download')
+    },
     /**
      * Cancels an update of the application
      *
@@ -162,7 +174,9 @@ const ElectronApi = {
      *
      * @returns void
      */
-    updateCancel: () => ipcRenderer.invoke('update-cancel'),
+    updateCancel() {
+        return ipcRenderer.invoke('update-cancel')
+    },
     /**
      * Install an update of the application
      *
@@ -170,7 +184,9 @@ const ElectronApi = {
      *
      * @returns void
      */
-    updateInstall: () => ipcRenderer.invoke('update-install'),
+    updateInstall() {
+        return ipcRenderer.invoke('update-install')
+    },
     /**
      * Check for an update of the application
      *
@@ -178,7 +194,9 @@ const ElectronApi = {
      *
      * @returns void
      */
-    updateCheck: () => ipcRenderer.invoke('update-check'),
+    updateCheck() {
+        return ipcRenderer.invoke('update-check')
+    },
     /**
      * Get version details
      *
@@ -186,16 +204,18 @@ const ElectronApi = {
      *
      * @returns void
      */
-    getVersionDetails: () => ipcRenderer.invoke('get-version-details'),
+    getVersionDetails() {
+        return ipcRenderer.invoke('get-version-details')
+    },
     /**
      * Change menu state to determine what menu items to display
      * @param {string} Attribute - Target attribute
      * @param {any} Value - Target attribute value
      * @returns {undefined}
      */
-    updateMenu: (attribute, value) => {
+    updateMenu(attribute, value) {
         if (Object.keys(menuState).includes(attribute)) {
-            ipcRenderer.invoke('menu-update', {
+            return ipcRenderer.invoke('menu-update', {
                 [attribute]: value,
             })
         }
@@ -204,47 +224,55 @@ const ElectronApi = {
      * Show the popup menu
      * @returns {undefined}
      */
-    popupMenu: () => {
-        ipcRenderer.invoke('menu-popup')
+    popupMenu() {
+        return ipcRenderer.invoke('menu-popup')
     },
     /**
      * Minimize the app
      * @returns {undefined}
      */
-    minimize: () => ipcRenderer.invoke('minimize'),
+    minimize() {
+        return ipcRenderer.invoke('minimize')
+    },
     /**
      * Maximize the app
      * @returns {undefined}
      */
-    maximize: () => ipcRenderer.invoke('maximize'),
+    maximize() {
+        return ipcRenderer.invoke('maximize')
+    },
     /**
      * Is the app maximized
      * @returns {boolean}
      */
-    isMaximized: () => ipcRenderer.invoke('isMaximized'),
+    isMaximized() {
+        return ipcRenderer.invoke('isMaximized')
+    },
     /**
      * Close the app
      * @returns {undefined}
      */
-    close: () => ipcRenderer.invoke('close'),
+    close() {
+        return ipcRenderer.invoke('close')
+    },
     /*
      * Opens url and checks against acceptlist
      * @param {string} url - Target url
      * @returns {undefined}
      */
-    openUrl: (url) => {
-        ipcRenderer.invoke('open-url', url)
+    openUrl(url) {
+        return ipcRenderer.invoke('open-url', url)
     },
-    copyFile: (sourceFilePath, destinationFilePath) => {
-        ipcRenderer.invoke('copy-file', sourceFilePath, destinationFilePath)
+    copyFile(sourceFilePath, destinationFilePath) {
+        return ipcRenderer.invoke('copy-file', sourceFilePath, destinationFilePath)
     },
     /**
      * Log unhandled exception
      * @param {string} errorType The type of eerror
      * @param {Errir} error The error
      */
-    unhandledException: (errorType, error) => {
-        ipcRenderer.invoke('handle-error', errorType, error)
+    unhandledException(errorType, error) {
+        return ipcRenderer.invoke('handle-error', errorType, error)
     },
     /**
      * Add native window wallet event listener
@@ -252,7 +280,7 @@ const ElectronApi = {
      * @param {function} callback - Event trigger callback
      * @returns {undefined}
      */
-    onEvent: (event, callback) => {
+    onEvent(event, callback) {
         let listeners = eventListeners[event]
         if (!listeners) {
             listeners = eventListeners[event] = []
@@ -271,16 +299,16 @@ const ElectronApi = {
      * @param {function} callback - Event trigger callback
      * @returns {undefined}
      */
-    removeListenersForEvent: (event) => {
+    removeListenersForEvent(event) {
         eventListeners[event] = []
-        ipcRenderer.removeAllListeners(event)
+        return ipcRenderer.removeAllListeners(event)
     },
     /**
      * Save the recovery kit
      * @returns
      */
-    saveRecoveryKit: (recoverKitData) =>
-        ipcRenderer
+    async saveRecoveryKit(recoverKitData) {
+        return ipcRenderer
             .invoke('show-save-dialog', {
                 properties: ['createDirectory', 'showOverwriteConfirmation'],
                 defaultPath: 'firefly-recovery-kit.pdf',
@@ -299,7 +327,8 @@ const ElectronApi = {
                 } catch (err) {
                     console.error(err)
                 }
-            }),
+            })
+    },
     /**
      * Hook the logger
      * @returns

@@ -10,13 +10,13 @@
         claimActivity,
         rejectActivity,
         InclusionState,
-        VerificationStatus,
         selectedAccountAssets,
         getAssetFromPersistedAssets,
         IPersistedAsset,
         ITransactionActivityData,
         getTimeDifference,
         Subject,
+        NotVerifiedStatus,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
@@ -76,7 +76,7 @@
         }
     }
     function handleTransactionClick(): void {
-        if (asset?.verification === VerificationStatus.New) {
+        if (asset?.verification?.status === NotVerifiedStatus.New) {
             openPopup({
                 type: 'tokenInformation',
                 overflow: true,
@@ -145,13 +145,13 @@
                 </div>
 
                 <div class="flex flex-row justify-between">
-                    <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
+                    <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
                         {localize(
                             data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
                             { values: { account: subjectLocale } }
                         )}
                     </Text>
-                    <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
+                    <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
                         {fiatAmount}
                     </Text>
                 </div>
@@ -185,6 +185,7 @@
                         <button
                             class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
                             on:click|stopPropagation={handleClaimClick}
+                            disabled={data.isClaiming}
                         >
                             {#if data.isClaiming}
                                 <Spinner busy={true} classes="justify-center h-fit" />

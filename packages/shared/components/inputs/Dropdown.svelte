@@ -21,8 +21,9 @@
     export let itemTextType = 'p'
     export let showBorderWhenClosed = true
     export let isFocused = false
+    export let enableTyping = false
 
-    export let onSelect: (..._: any[]) => void
+    export let onSelect: (..._: DropdownChoice[]) => void
 
     let dropdown = false
     let navContainer
@@ -62,6 +63,10 @@
     }
 
     function handleKey(event: KeyboardEvent): void {
+        if (!enableTyping) {
+            return
+        }
+
         if (!dropdown) {
             // Note that space uses code not key, this is intentional
             if (event.key === 'Enter' || event.key === 'ArrowDown' || event.code === 'Space') {

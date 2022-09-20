@@ -15,7 +15,7 @@
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { Platform } from 'shared/lib/platform'
-    import { Developer, Settings, Staking, Wallet } from 'shared/routes'
+    import { Developer, Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import TopNavigation from './TopNavigation.svelte'
 
@@ -24,7 +24,6 @@
     const tabs = {
         wallet: Wallet,
         settings: Settings,
-        staking: Staking,
         developer: Developer,
     }
 

@@ -18,4 +18,5 @@
     onSelect={handleLanguage}
     value={SUPPORTED_LOCALES[$appSettings.language]}
     items={languageList}
+    enableTyping
 />

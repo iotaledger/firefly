@@ -96,7 +96,10 @@ import {
     WORK_SVG,
     VERIFIED_SVG,
     NOT_VERIFIED_SVG,
+    VERIFICATION_STATUS_SELF,
+    VERIFICATION_STATUS_NEW,
 } from '../svgs'
+import { VERIFICATION_STATUS_OFFICIAL } from '../svgs/verification-status-official.svg'
 
 export const ICON_SVG = {
     [Icon.ArrowLeft]: ARROW_LEFT_SVG,
@@ -187,6 +190,9 @@ export const ICON_SVG = {
     [Icon.Tools]: TOOLS_SVG,
     [Icon.Transfer]: TRANSFER_SVG,
     [Icon.Unlock]: UNLOCK_SVG,
+    [Icon.VerificationStatusNew]: VERIFICATION_STATUS_NEW,
+    [Icon.VerificationStatusOfficial]: VERIFICATION_STATUS_OFFICIAL,
+    [Icon.VerificationStatusSelf]: VERIFICATION_STATUS_SELF,
     [Icon.Verified]: VERIFIED_SVG,
     [Icon.View]: VIEW_SVG,
     [Icon.Voting]: VOTING_SVG,

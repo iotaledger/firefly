@@ -1464,7 +1464,7 @@
             "legacyConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
             "locked": "Kérem oldja fel Ledger eszközét a PIN-kóddal.",
             "mnemonicMismatch": "Rossz Ledger eszközt csatlakozatott vagy az emlékeztető megváltozott.",
-            "notDetected": "Nem észlelhető Ledger eszköz.",
+            "notConnected": "Nem észlelhető Ledger eszköz.",
             "notFound": "Nem található Ledger eszköz.",
             "otherConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
             "generateAddress": "Hiba történt a cím generálása közben.",

@@ -1,25 +1,32 @@
 import { get } from 'svelte/store'
-import { BASE_TOKEN, networkHrp } from '@core/network'
-import { activeProfile } from '@core/profile'
+import { networkHrp } from '@core/network'
 import {
+    getAssetById,
     INewTransactionDetails,
+    selectedAccountAssets,
     Subject,
     updateNewTransactionDetails,
-    visibleSelectedAccountAssets,
 } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 
 import { SendOperationParameter } from '../../../enums'
-import { InvalidAddressError, NoAddressSpecifiedError } from '../../../errors'
+import {
+    InvalidAddressError,
+    MetadataLengthError,
+    NoAddressSpecifiedError,
+    TagLengthError,
+    UnknownAssetError,
+} from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
+import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
+import { isStringTrue } from '@core/utils'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
-    const unit = BASE_TOKEN?.[get(activeProfile)?.networkProtocol]?.unit
 
     if (transactionDetails) {
-        updateNewTransactionDetails({ ...transactionDetails, unit })
+        updateNewTransactionDetails({ ...transactionDetails })
         openPopup({
             type: 'sendConfirmation',
             overflow: true,
@@ -49,17 +56,27 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         throw new InvalidAddressError()
     }
 
-    const asset = get(visibleSelectedAccountAssets)?.baseCoin
-
-    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
-
-    const unit = searchParams.get(SendOperationParameter.Unit)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
+    if (getByteLengthOfString(metadata) > 8192) {
+        throw new MetadataLengthError()
+    }
+
     const tag = searchParams.get(SendOperationParameter.Tag)
+    if (getByteLengthOfString(tag) > 64) {
+        throw new TagLengthError()
+    }
+    const assetId = searchParams.get(SendOperationParameter.AssetId)
+    const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
+    if (!asset) {
+        throw new UnknownAssetError()
+    }
+
+    const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
+    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
     const recipient: Subject = { type: 'address', address }
-    const giftStorageDeposit = Boolean(searchParams.get(SendOperationParameter.GiftStorageDeposit))
-    const disableToggleGift = Boolean(searchParams.get(SendOperationParameter.DisableToggleGift))
-    const disableChangeExpiration = Boolean(searchParams.get(SendOperationParameter.DisableChangeExpiration))
+    const giftStorageDeposit = isStringTrue(searchParams.get(SendOperationParameter.GiftStorageDeposit))
+    const disableToggleGift = isStringTrue(searchParams.get(SendOperationParameter.DisableToggleGift))
+    const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
 
     return {
         ...(asset && { asset }),

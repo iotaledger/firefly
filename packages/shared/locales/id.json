@@ -1464,7 +1464,7 @@
             "legacyConnected": "Aplikasi yang salah telah terbuka pada perangkat Ledger Anda.",
             "locked": "Silakan membuka perangkat Ledger Anda dengan memasukkan PIN.",
             "mnemonicMismatch": "Anda telah terhubung dengan perangkat Ledger yang salah atau mnemoniknya telah diubah.",
-            "notDetected": "Tidak ada perangkat Ledger yang terdeteksi.",
+            "notConnected": "Tidak ada perangkat Ledger yang terdeteksi.",
             "notFound": "Perangkat Ledger tidak ditemukan.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "Terjadi kesalahan saat membuat alamat.",

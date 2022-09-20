@@ -1464,7 +1464,7 @@
             "legacyConnected": "Η λάθος εφαρμογή είναι ανοιχτή στη συσκευή σας Ledger.",
             "locked": "Παρακαλώ ξεκλειδώστε τη συσκευή Ledger εισάγοντας το PIN.",
             "mnemonicMismatch": "Έχετε συνδέσει τη λάθος συσκευή Ledger ή η μνημονική έχει αλλάξει.",
-            "notDetected": "Δεν εντοπίστηκε συσκευή Ledger.",
+            "notConnected": "Δεν εντοπίστηκε συσκευή Ledger.",
             "notFound": "Δεν βρέθηκε συσκευή Ledger.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "Παρουσιάστηκε σφάλμα κατά τη δημιουργία μιας διεύθυνσης.",

@@ -25,4 +25,10 @@
     }
 </script>
 
-<DateTimePicker {...$$restProps} bind:value on:cancel={handleCancelClick} on:confirm={handleConfirmClick} />
+<DateTimePicker
+    {...$$restProps}
+    bind:value
+    on:cancel={handleCancelClick}
+    on:confirm={handleConfirmClick}
+    startTime={new Date()}
+/>

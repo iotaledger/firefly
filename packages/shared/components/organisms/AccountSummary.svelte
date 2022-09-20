@@ -5,7 +5,6 @@
     import { selectedAccount } from '@core/account'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { formatCurrency } from '@lib/currency'
 
     export let classes = ''
 </script>
@@ -30,8 +29,5 @@
             amount={$selectedAccount?.balances.baseCoin.available}
             tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
         />
-        <Text>
-            {formatCurrency(0)}
-        </Text>
     </div>
 </div>

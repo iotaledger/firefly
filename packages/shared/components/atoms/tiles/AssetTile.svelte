@@ -21,7 +21,7 @@
                 </Text>
                 {#if !squashed}
                     <div class="flex flex-row justify-between items-center text-left">
-                        <Text type={TextType.p} secondary smaller>{asset?.fiatPrice ?? '-'}</Text>
+                        <Text type={TextType.p} secondary smaller>{asset?.fiatPrice ?? ''}</Text>
                         <slot name="subLabel" />
                     </div>
                 {/if}
@@ -34,7 +34,7 @@
             {#if !squashed}
                 <div class="flex flex-row justify-between items-center text-right">
                     <Text type={TextType.p} secondary smaller classes="flex-grow">
-                        {asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : '-'}
+                        {asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : ''}
                     </Text>
                 </div>
             {/if}
@@ -44,6 +44,6 @@
 
 <style type="text/scss">
     .asset {
-        font-feature-settings: 'calt' off; // disables 'x' formatting while surrounded by numbers
+        fontfeature-settings: 'calt' off; // disables 'x' formatting while surrounded by numbers
     }
 </style>

@@ -6,8 +6,9 @@
     import { TextType } from 'shared/components/Text.svelte'
     import type { TextPropTypes } from 'shared/components/Text.svelte'
 
-    export let value = ''
-    export let classes = ''
+    export let value: string = ''
+    export let classes: string = ''
+    export let containerClasses: string = ''
     export let style: string
     export let label: string
     export let placeholder: string
@@ -138,7 +139,7 @@
             {clearBackground}
             {clearPadding}
             {clearBorder}
-            classes="relative"
+            classes="relative {containerClasses}"
         >
             <Text {...textProps} classes="flex w-full">
                 <input
@@ -170,6 +171,7 @@
                 <floating-label {disabled} class:hasFocus class:floating-active={value && label}>{label}</floating-label
                 >
             {/if}
+            <slot />
         </InputContainer>
     </div>
     {#if capsLockWarning && hasFocus && capsLockOn}
@@ -206,7 +208,7 @@
         @apply opacity-0;
         @apply pointer-events-none;
         @apply absolute;
-        @apply left-3;
+        @apply left-4;
         @apply select-none;
         @apply whitespace-nowrap;
         @apply w-auto;

@@ -1,14 +1,19 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
 import { selectedAccount } from '../../account/stores/selected-account.store'
-
-import { formatUnitBestMatch } from '@lib/units'
-import { isValueInUnitRange, unitToValue } from '@lib/utils'
-
 import { Activity } from '../classes/activity.class'
-import { allAccountActivities } from './all-account-activities.store'
+import {
+    ActivityType,
+    BooleanFilterOption,
+    DateFilterOption,
+    NumberFilterOption,
+    StatusFilterOption,
+    TypeFilterOption,
+} from '../enums'
+import { IActivity } from '../interfaces'
+import { ActivityFilter } from '../interfaces/filter/filter.interface'
+import { getAssetFromPersistedAssets } from '../utils'
 import { isVisibleActivity } from '../utils/isVisibleActivity'
-import { ActivityFilter } from '../interfaces/filter.interface'
-import { NumberFilterOption, BooleanFilterOption, TypeFilterOption, StatusFilterOption, ActivityType } from '../enums'
+import { allAccountActivities } from './all-account-activities.store'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -58,6 +63,17 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         selected: TypeFilterOption.Incoming,
         choices: [TypeFilterOption.Incoming, TypeFilterOption.Outgoing, TypeFilterOption.Internal],
     },
+    date: {
+        active: false,
+        type: 'date',
+        localeKey: 'filters.date',
+        selected: DateFilterOption.Equals,
+        choices: Object.values(DateFilterOption),
+        subunit: {
+            type: 'single',
+            value: undefined,
+        },
+    },
     showRejected: {
         active: false,
         type: 'selection',
@@ -83,26 +99,59 @@ export const queriedActivities: Readable<Activity[]> = derived(
 
         activityList = activityList.filter((activity) => isVisibleActivity(activity))
 
-        if (activitySearchTerm) {
-            activityList = activityList.filter(
-                (activity) =>
-                    (activity.data.type === ActivityType.Transaction &&
-                        ((activity.data.recipient?.type === 'account' &&
-                            activity.data.recipient?.account?.name === $activitySearchTerm) ||
-                            (activity.data.recipient?.type === 'address' &&
-                                activity.data.recipient?.address === $activitySearchTerm))) ||
-                    activity?.id?.toLowerCase() === $activitySearchTerm ||
-                    ($activitySearchTerm[0] === '>' &&
-                        unitToValue($activitySearchTerm.substring(1)) < activity.data.rawAmount) ||
-                    ($activitySearchTerm[0] === '<' &&
-                        unitToValue($activitySearchTerm.substring(1)) > activity.data.rawAmount) ||
-                    ($activitySearchTerm[1] === 'i' &&
-                        isValueInUnitRange(activity.data.rawAmount, $activitySearchTerm)) ||
-                    activity.data.rawAmount === unitToValue($activitySearchTerm) ||
-                    formatUnitBestMatch(activity.data.rawAmount).toString().toLowerCase()?.includes($activitySearchTerm)
-            )
+        if ($activitySearchTerm) {
+            activityList = activityList.filter((activity) => {
+                const fieldsToSearch = getFieldsToSearchFromActivity(activity)
+                return fieldsToSearch.find((field) =>
+                    field?.toLowerCase()?.includes($activitySearchTerm?.toLowerCase())
+                )
+            })
         }
 
         return activityList.sort((activity1, activity2) => activity2.time.getTime() - activity1.time.getTime())
     }
 )
+
+function getFieldsToSearchFromActivity(activity: IActivity): string[] {
+    const fieldsToSearch: string[] = []
+
+    if (activity.transactionId) {
+        fieldsToSearch.push(activity.transactionId)
+    }
+
+    if (activity.data.assetId) {
+        fieldsToSearch.push(activity.data.assetId)
+        fieldsToSearch.push(getAssetFromPersistedAssets(activity.data.assetId)?.metadata?.name)
+    }
+
+    if (activity.data.rawAmount) {
+        fieldsToSearch.push(activity.data.rawAmount?.toString())
+        fieldsToSearch.push(activity.getFormattedAmount(false)?.toLowerCase())
+    }
+
+    if (activity.data.type === ActivityType.Transaction) {
+        if (activity.data.subject?.type === 'account') {
+            fieldsToSearch.push(activity.data.subject?.account?.name)
+        } else if (activity.data.subject?.type === 'address') {
+            fieldsToSearch.push(activity.data.subject?.address)
+        }
+
+        if (activity.data.claimingTransactionId) {
+            fieldsToSearch.push(activity.data.claimingTransactionId)
+        }
+
+        if (activity.data.metadata) {
+            fieldsToSearch.push(activity.data.metadata)
+        }
+
+        if (activity.data.tag) {
+            fieldsToSearch.push(activity.data.tag)
+        }
+
+        if (activity.data.outputId) {
+            fieldsToSearch.push(activity.data.outputId)
+        }
+    }
+
+    return fieldsToSearch
+}

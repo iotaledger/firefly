@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Delete {name}?",
             "body": "This wallet has no transaction history. It can safely be deleted.",
@@ -895,6 +903,7 @@
         "timeframe1Month": "1 month"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Continue",
         "back": "Back",
         "previous": "Previous",
@@ -1104,6 +1113,7 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Balance",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
@@ -1138,7 +1148,9 @@
         "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
         "noRecentHistory": "No recent history",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "No assets",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "Syncing history, this may take a while...",
@@ -1245,8 +1257,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1257,6 +1270,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1411,12 +1436,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
             "invalidAddress": "The address is not valid.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "This wallet has insufficient funds.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address.",
@@ -1470,7 +1499,7 @@
             "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
             "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "No Ledger device detected.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Ledger device not found.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
@@ -1494,7 +1523,16 @@
             "invalidStakingEventId": "Invalid staking event ID."
         },
         "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidTime": "INVALID TIME",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {

@@ -5,8 +5,9 @@
         IAsset,
         setNewTransactionDetails,
         unverifyAsset,
-        VerificationStatus,
         verifyAsset,
+        NotVerifiedStatus,
+        VerifiedStatus,
     } from '@core/wallet'
     import { openPopup, updatePopupProps } from '@lib/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
@@ -16,7 +17,7 @@
     export let activityId: string
 
     function onSkipClick(): void {
-        unverifyAsset(asset.id)
+        unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
         if (activityId) {
             openPopup({
                 type: 'activityDetails',
@@ -24,13 +25,13 @@
             })
         } else {
             updatePopupProps({
-                asset: { ...asset, verification: VerificationStatus.NotVerified },
+                asset: { ...asset, verification: { verified: false, status: NotVerifiedStatus.Skipped } },
             })
         }
     }
 
     function onVerifyClick(): void {
-        verifyAsset(asset.id)
+        verifyAsset(asset.id, VerifiedStatus.SelfVerified)
         if (activityId) {
             openPopup({
                 type: 'activityDetails',
@@ -38,13 +39,13 @@
             })
         } else {
             updatePopupProps({
-                asset: { ...asset, verification: VerificationStatus.Verified },
+                asset: { ...asset, verification: { verified: true, status: VerifiedStatus.SelfVerified } },
             })
         }
     }
 
     function onSendClick(): void {
-        setNewTransactionDetails({ asset, amount: '0' })
+        setNewTransactionDetails({ asset })
         openPopup({
             type: 'sendForm',
             overflow: true,
@@ -61,7 +62,7 @@
             fontWeight={FontWeight.semibold}
             classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
         >
-            {asset?.verification === VerificationStatus.New
+            {asset?.verification?.status === NotVerifiedStatus.New
                 ? localize('popups.tokenInformation.newTokenTitle')
                 : asset?.metadata?.name}
         </Text>
@@ -78,7 +79,7 @@
     </div>
 
     <div class="space-y-4 flex flex-col items-center justify-center">
-        {#if asset?.verification !== VerificationStatus.Verified}
+        {#if !asset?.verification?.verified}
             <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
         {/if}
         <div class="w-full flex flex-col space-y-2">
@@ -107,7 +108,7 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        {#if asset?.verification === VerificationStatus.New}
+        {#if asset?.verification?.status === NotVerifiedStatus.New}
             <Button secondary classes="w-full" onClick={onSkipClick}>
                 {localize('actions.skip')}
             </Button>

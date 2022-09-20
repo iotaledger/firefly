@@ -45,7 +45,7 @@
     let error: BaseError
 
     const rawAmount = generateRawAmount(amount, unit, asset.metadata)
-    const initialExpirationDate = getInitialExpirationDate()
+    let initialExpirationDate
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
@@ -57,7 +57,7 @@
     $: formattedFiatValue =
         formatCurrency(
             convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
-        ) || '-'
+        ) || ''
 
     $: transactionDetails = {
         asset,
@@ -77,7 +77,7 @@
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
             return ExpirationTime.Custom
-        } else if (storageDeposit) {
+        } else if (storageDeposit && !giftStorageDeposit) {
             return ExpirationTime.OneDay
         } else {
             return ExpirationTime.None
@@ -99,6 +99,9 @@
             getStorageDepositFromOutput(preparedOutput)
         storageDeposit = _storageDeposit
         giftedStorageDeposit = _giftedStorageDeposit
+        if (!initialExpirationDate) {
+            initialExpirationDate = getInitialExpirationDate()
+        }
     }
 
     async function validateAndSendOutput(): Promise<void> {
@@ -166,7 +169,7 @@
                 />
             </KeyValueBox>
         {/if}
-        {#if storageDeposit !== undefined}
+        {#if initialExpirationDate !== undefined}
             <KeyValueBox keyText={localize('general.expirationTime')}>
                 <ExpirationTimePicker
                     slot="value"
