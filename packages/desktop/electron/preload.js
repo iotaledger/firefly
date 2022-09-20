@@ -42,9 +42,10 @@ window.addEventListener('unhandledrejection', (event) => {
 try {
     const { STAGE, NODE_ENV } = process.env
     if (NODE_ENV === 'development' || STAGE === 'alpha' || STAGE === 'beta') {
+        const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
         const loggerOptions = {
             colorEnabled: true,
-            name: './wallet.log',
+            name: `./log/wallet-${today}.log`,
             levelFilter: 'debug',
             targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
         }
