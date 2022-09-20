@@ -27,7 +27,6 @@
     let inputElement: HTMLInputElement
     let searchValue: string
 
-    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
     $: setAsyncStatusOfAccountActivities($time)
@@ -52,6 +51,10 @@
             return { title: undefined, amount: undefined, activity }
         }
     })
+
+    $: isEmptyBecauseOfFilter =
+        $selectedAccountActivities.filter((_activity) => !_activity.isHidden).length > 0 &&
+        activityListWithTitles.length === 0
 
     function getActivityGroupTitleForTimestamp(time: Date): string {
         const dateString = getMonthYear(time)
@@ -87,7 +90,7 @@
         {/if}
     </div>
     <div class="flex-auto h-full pb-10">
-        {#if activityListWithTitles.length}
+        {#if activityListWithTitles.length > 0}
             <VirtualList items={activityListWithTitles} let:item>
                 <div class="mb-2">
                     {#if item.title}
@@ -100,7 +103,7 @@
                             activityId={item.activity.id}
                             inclusionState={item.activity.inclusionState}
                             fiatAmount={item.activity.getFiatAmount()}
-                            amount={item.activity.getFormattedAmount()}
+                            amount={item.activity.getFormattedAmount(false)}
                             data={item.activity.data}
                         />
                     {:else}
@@ -108,7 +111,7 @@
                             activityId={item.activity.id}
                             inclusionState={item.activity.inclusionState}
                             fiatAmount={item.activity.getFiatAmount()}
-                            amount={item.activity.getFormattedAmount()}
+                            amount={item.activity.getFormattedAmount(false)}
                             data={item.activity.data}
                         />
                     {/if}
@@ -116,7 +119,9 @@
             </VirtualList>
         {:else}
             <div class="h-full flex flex-col items-center justify-center text-center">
-                <Text secondary>{localize('general.noRecentHistory')}</Text>
+                <Text secondary
+                    >{localize(`general.${isEmptyBecauseOfFilter ? 'noFilteredActivity' : 'noRecentHistory'}`)}</Text
+                >
             </div>
         {/if}
     </div>
