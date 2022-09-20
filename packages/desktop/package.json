@@ -1,6 +1,6 @@
 {
     "name": "desktop",
-    "productName": "Firefly Stardust",
+    "productName": "Firefly Shimmer",
     "version": "2.0.0-beta-6",
     "description": "Official wallet application of Shimmer",
     "main": "public/build/main.js",

@@ -24,6 +24,7 @@ import {
     TransactionOptions,
     PreparedTransactionData,
     OutputOptions,
+    FilterOptions,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -44,10 +45,10 @@ export interface IAccount {
     getTransaction(transactionId: string): Promise<Transaction>
     listAddresses(): Promise<Address[]>
     listAddressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
-    listOutputs(): Promise<OutputData[]>
+    listOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     listPendingTransactions(): Promise<Transaction[]>
     listTransactions(): Promise<Transaction[]>
-    listUnspentOutputs(): Promise<OutputData[]>
+    listUnspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string>
     mintNativeToken(
         nativeTokenOptions: NativeTokenOptions,

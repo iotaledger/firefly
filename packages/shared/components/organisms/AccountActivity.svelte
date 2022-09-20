@@ -17,7 +17,6 @@
         TogglableButton,
         Filter,
     } from 'shared/components'
-    import { SyncSelectedAccountIconButton } from 'shared/components/atoms'
     import { FontWeight } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
     import { debounce } from 'shared/lib/utils'
@@ -28,7 +27,6 @@
     let inputElement: HTMLInputElement
     let searchValue: string
 
-    $: activeFilterIndex = searchActive ? 0 : activeFilterIndex || 0
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
     $: setAsyncStatusOfAccountActivities($time)
@@ -54,6 +52,18 @@
         }
     })
 
+    $: $activityFilter, $activitySearchTerm, scrollToTop()
+    $: isEmptyBecauseOfFilter =
+        $selectedAccountActivities.filter((_activity) => !_activity.isHidden).length > 0 &&
+        activityListWithTitles.length === 0
+
+    function scrollToTop(): void {
+        const listElement = document.querySelector('.activity-list')?.querySelector('svelte-virtual-list-viewport')
+        if (listElement) {
+            listElement.scroll(0, 0)
+        }
+    }
+
     function getActivityGroupTitleForTimestamp(time: Date): string {
         const dateString = getMonthYear(time)
         return dateString === getMonthYear(new Date()) ? localize('general.thisMonth') : dateString
@@ -63,12 +73,7 @@
 <div class="activity-list h-full p-6 flex flex-col flex-auto flex-grow flex-shrink-0">
     <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
-            <div class="flex flex-row items-center">
-                <Text type="h5" classes="mr-2">{localize('general.activity')}</Text>
-                {#if features?.wallet?.activityHistory?.sync?.enabled}
-                    <SyncSelectedAccountIconButton />
-                {/if}
-            </div>
+            <Text type="h5">{localize('general.activity')}</Text>
             <div class="flex flex-row">
                 {#if features?.wallet?.activityHistory?.search?.enabled}
                     <Filter filterStore={activityFilter} />
@@ -93,7 +98,7 @@
         {/if}
     </div>
     <div class="flex-auto h-full pb-10">
-        {#if activityListWithTitles.length}
+        {#if activityListWithTitles.length > 0}
             <VirtualList items={activityListWithTitles} let:item>
                 <div class="mb-2">
                     {#if item.title}
@@ -106,7 +111,7 @@
                             activityId={item.activity.id}
                             inclusionState={item.activity.inclusionState}
                             fiatAmount={item.activity.getFiatAmount()}
-                            amount={item.activity.getFormattedAmount()}
+                            amount={item.activity.getFormattedAmount(false)}
                             data={item.activity.data}
                         />
                     {:else}
@@ -114,7 +119,7 @@
                             activityId={item.activity.id}
                             inclusionState={item.activity.inclusionState}
                             fiatAmount={item.activity.getFiatAmount()}
-                            amount={item.activity.getFormattedAmount()}
+                            amount={item.activity.getFormattedAmount(false)}
                             data={item.activity.data}
                         />
                     {/if}
@@ -122,7 +127,9 @@
             </VirtualList>
         {:else}
             <div class="h-full flex flex-col items-center justify-center text-center">
-                <Text secondary>{localize('general.noRecentHistory')}</Text>
+                <Text secondary
+                    >{localize(`general.${isEmptyBecauseOfFilter ? 'noFilteredActivity' : 'noRecentHistory'}`)}</Text
+                >
             </div>
         {/if}
     </div>
