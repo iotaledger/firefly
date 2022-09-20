@@ -6,7 +6,7 @@ const configColors = resolveConfig(tailwindConfig).theme.colors
 export function getIconColorFromString(string: string = ''): string {
     const hash = Array.from(string).reduce((arr, next) => arr + next.charCodeAt(0), 0)
     const iconColors = []
-    // Keep only colors in 500-800 range
+    delete configColors?.['gray']
     Object.values(configColors)
         .filter((colorSet) => colorSet['500'])
         .forEach((color) => {
