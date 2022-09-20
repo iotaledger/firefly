@@ -586,6 +586,14 @@
             "title": "Spremi sigurnosnu kopiju Stronghold datoteke",
             "body": "Važno je redovito izrađivati sigurnosne kopije kako biste uvijek imali kopiju svojih novčanika i povijesti transakcija. Izgubite li sigurnosnu kopiju i frazu za oporavak, izgubit ćete pristup svojim sredstvima."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Obriši {name}?",
             "body": "Ovaj novčanik nema povijest transakcija i zato ga je sigurno obrisati.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Potvrdi adresu primatelja",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 mjesec"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Nastavi",
         "back": "Natrag",
         "previous": "Prethodno",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Tamna",
         "systemTheme": "Sistemska",
         "balance": "Stanje računa",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Sve",
         "incoming": "Dolazne transakcije",
         "outgoing": "Odlazne transakcije",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Nije moguće koristiti decimalna mjesta s odabranom najmanjom jedinicom",
             "amountInvalidFormat": "Djeluje da je iznos nevažeći broj.",
             "amountSmallerThanSubunit": "Iznos mora biti veći od najmanje podjedinice.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Iznos mora biti veći od 0.",
             "wrongAddressPrefix": "Adrese započinju prefiksom {prefix}.",
             "wrongAddressFormat": "Adresa nije u ispravnom formatu.",
             "invalidAddress": "Adresa nije valjana.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Ovaj novčanik nema dovoljno sredstava.",
             "insufficientFundsStorageDeposit": "Nedovoljno sredstava za pokrivanje depozita za pohranu",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Niste odabrali novčanik na koji želite poslati sredstva.",
             "sendingDust": "Ne možete slati manje od 1 Mi.",
             "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Pogrešna aplikacija je otvorena na Ledger uređaju.",
             "locked": "Otključaj svoj Ledger uređaj PIN-om.",
             "mnemonicMismatch": "Povezali ste krivi Ledger uređaj ili je fraza za oporavak promijenjena.",
-            "notConnected": "Ledger uređaj nije detektiran.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Ledger uređaj nije pronađen.",
             "otherConnected": "Pogrešna aplikacija je otvorena na Ledger uređaju.",
             "generateAddress": "Došlo je do greške prilikom generiranja adrese.",

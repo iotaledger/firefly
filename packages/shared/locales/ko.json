@@ -217,7 +217,7 @@
             "body": "Firefly가 Ledger 장치를 발견하려면, 공식 Ledger Live 애플리케이션이 반드시 종료된 상태여야 합니다.",
             "connect": "Connect your Ledger device",
             "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "openApp": "Ledger에서 새로운 Shimmer 앱을 여세요.",
             "tips": "Ledger 연결이 잘 되지 않을 때 참고할 도움말"
         },
         "restoreFromFireflyLedger": {
@@ -469,11 +469,11 @@
                 "hardware": {
                     "title": "하드웨어 장치",
                     "statuses": {
-                        "appNotOpen": "Ledger unlocked but app not open",
-                        "correctAppOpen": "Ledger unlocked and app open ",
-                        "locked": "Ledger securely locked",
+                        "appNotOpen": "Ledger의 잠금이 풀렸으나 앱이 열리지 않았습니다",
+                        "correctAppOpen": "Ledger 잠금이 풀렸으며 앱이 열렸습니다 ",
+                        "locked": "Ledger가 안전하게 잠겼습니다",
                         "mnemonicMismatch": "잘못된 Ledger 또는 Mnemonic",
-                        "notConnected": "Ledger not connected",
+                        "notConnected": "Ledger에 연결되지 않았습니다",
                         "otherConnected": "앱 열림"
                     }
                 },
@@ -508,7 +508,7 @@
                     "upcoming": "나중에 다시 확인",
                     "commencing": "Pre-staking 시작",
                     "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
+                    "ended": "스테이킹이 이제 종료되었습니다",
                     "inactive": "No staking events detected"
                 },
                 "bodies": {
@@ -585,6 +585,14 @@
         "backupStronghold": {
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
+        },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
         "deleteAccount": {
             "title": "{name} 계정을 삭제할까요?",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "받는 주소를 확인하세요.",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1달"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "계속하기",
         "back": "뒤로가기",
         "previous": "이전",
@@ -898,7 +912,7 @@
         "dismiss": "무시하기",
         "claim": "Claim",
         "claiming": "Claiming",
-        "claimingRewards": "Claiming rewards",
+        "claimingRewards": "보상 요청 중",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -1035,10 +1049,10 @@
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
-        "test": "Test",
-        "testDeepLink": "Test deep link",
-        "initialize": "Initialize",
-        "initializing": "Initializing"
+        "test": "테스트",
+        "testDeepLink": "딥 링크 테스트",
+        "initialize": "초기화",
+        "initializing": "초기화 중"
     },
     "general": {
         "recipient": "Recipient",
@@ -1054,8 +1068,8 @@
         "received": "받음",
         "transfer": "Transfer",
         "transferring": "Transferring",
-        "shimmerClaimed": "Claimed",
-        "shimmerClaiming": "Claiming",
+        "shimmerClaimed": "받음",
+        "shimmerClaiming": "받는 중",
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
@@ -1098,6 +1112,7 @@
         "darkTheme": "어둡게",
         "systemTheme": "시스템",
         "balance": "잔고",
+        "balanceWithValue": "Balance: {balance}",
         "all": "전부",
         "incoming": "받음",
         "outgoing": "보냄",
@@ -1222,7 +1237,7 @@
         "developerTools": "Developer tools",
         "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "해시"
     },
     "filters": {
         "title": "Filters",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "금액에 잘못된 내용이 있습니다.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "보내는 양은 0보다 커야 합니다.",
             "wrongAddressPrefix": "주소는 {prefix}로 시작합니다.",
             "wrongAddressFormat": "주소가 형식에 맞지 않습니다.",
             "invalidAddress": "주소가 유효하지 않습니다.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "지갑에 자금이 부족합니다.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "보낼 지갑을 선택하지 않았습니다.",
             "sendingDust": "1 Mi 미만은 보낼 수 없습니다.",
             "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Ledger 장치에서 잘못된 앱이 열려있습니다.",
             "locked": "PIN 전호를 입력하여 Ledger 장치의 잠금을 해제하세요.",
             "mnemonicMismatch": "잘못된 Ledger 장치를 연결하였거나 mnemonic이 바뀌었습니다.",
-            "notConnected": "Ledger 장치가 발견되지 않았습니다.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Ledger 장치를 찾을 수 없습니다.",
             "otherConnected": "Ledger 장치에서 잘못된 앱을 열었습니다.",
             "generateAddress": "주소를 생성하는 중 에러가 있었습니다.",
@@ -1555,7 +1587,7 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking",
-        "developer": "Developer"
+        "developer": "개발자"
     },
     "pills": {
         "stake": {
