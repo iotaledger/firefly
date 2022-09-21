@@ -1,8 +1,5 @@
-import { IAccount } from '@core/account'
-import { IAuth } from '@core/network'
 import {
     AccountId,
-    AccountMeta,
     AccountSyncOptions,
     ClientOptions,
     CreateAccountPayload,
@@ -11,6 +8,9 @@ import {
     NodeInfoWrapper,
     WalletEvent,
 } from '@iota/wallet'
+
+import { IAccount } from '@core/account'
+import { IAuth } from '@core/network'
 
 import { WalletApiEventHandler } from '../types'
 
@@ -37,7 +37,7 @@ export interface IProfileManager {
         accountGapLimit: number,
         addressGapLimit: number,
         syncOptions?: AccountSyncOptions
-    ): Promise<AccountMeta[]>
+    ): Promise<IAccount[]>
     removeLatestAccount(): Promise<void>
     restoreBackup(source: string, password: string): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>
