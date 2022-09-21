@@ -41,7 +41,7 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
     }
 
     const address = pathnameParts[1] ?? ''
-    if (isValidAddress(address, expectedAddressPrefix)) {
+    if (!isValidAddress(address, expectedAddressPrefix)) {
         return addError({
             time: Date.now(),
             type: 'deepLink',
@@ -174,11 +174,9 @@ const parseSwapOutOperation = (
 }
 
 const isValidAddress = (address: string, expectedAddressPrefix: string): boolean => {
-    if (!address) {
-        return false
-    } else if (isValidAddressAndPrefix(address, expectedAddressPrefix)) {
-        return false
-    } else {
+    if (address && isValidAddressAndPrefix(address, expectedAddressPrefix)) {
         return true
+    } else {
+        return false
     }
 }
