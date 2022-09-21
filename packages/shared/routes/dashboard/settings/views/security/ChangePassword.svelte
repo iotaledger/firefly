@@ -6,6 +6,7 @@
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     let exportStrongholdChecked: boolean
     let startOfPasswordChange: number
@@ -158,7 +159,7 @@
     />
     <div class="flex flex-row items-center">
         <Button
-            medium
+            size={ButtonSize.Medium}
             disabled={!currentPassword || !newPassword || !confirmedPassword || busy}
             onClick={changePassword}
         >

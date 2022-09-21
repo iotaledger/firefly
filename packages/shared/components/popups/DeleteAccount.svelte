@@ -1,11 +1,12 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text, Error, Spinner } from 'shared/components'
+    import { Button, PasswordInput, Text, Error } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { isSoftwareProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { BaseError } from '@core/error'
+    import { ButtonVariant, HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let deleteAccount: (id: string) => Promise<void> = async () => {}
 
@@ -62,21 +63,18 @@
         <Error error={error.message} />
     {/if}
     <div class="flex flex-row w-full space-x-4 justify-center mt-5">
-        <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={isBusy}>
+        <Button outline classes="w-1/2" onClick={handleCancelClick} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>
         <Button
-            warning
+            variant={ButtonVariant.Warning}
             classes="w-1/2"
             onClick={handleDeleteClick}
-            type="submit"
+            type={HTMLButtonType.Submit}
             disabled={(!password && $isSoftwareProfile) || isBusy}
+            {isBusy}
         >
-            {#if isBusy}
-                <Spinner busy classes="justify-center" />
-            {:else}
-                {localize('actions.deleteAccount')}
-            {/if}
+            {localize('actions.deleteAccount')}
         </Button>
     </div>
 </div>

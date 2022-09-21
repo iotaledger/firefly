@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Icon, LedgerAnimation, Link, OnboardingLayout, Spinner, Text } from 'shared/components'
+    import { Button, Icon, LedgerAnimation, Link, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import {
         displayNotificationForLedgerProfile,
@@ -121,12 +121,10 @@
             classes="w-full flex flex-row justify-center items-center"
             disabled={!isCorrectAppOpen || isBusy}
             onClick={onContinueClick}
+            {isBusy}
+            busyMessage={`${localize('actions.initializing')}...`}
         >
-            {#if isBusy}
-                <Spinner busy={isBusy} message={`${localize('actions.initializing')}...`} />
-            {:else}
-                {localize('actions.continue')}
-            {/if}
+            {localize('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center items-center bg-gray-50 dark:bg-gray-900">

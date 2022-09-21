@@ -109,7 +109,7 @@ module.exports = {
                 100: '#FFF4DF',
                 200: '#FFE9C0',
                 300: '#FFDFA0',
-                400: '#0F4CEB',
+                400: '#FFD481',
                 500: '#FFCA62',
                 600: '#FFB526',
                 700: '#FFA800',
@@ -280,6 +280,7 @@ module.exports = {
             },
             spacing: {
                 4.5: pxToRem('18'),
+                6.75: pxToRem('27'),
                 18: pxToRem('72'),
                 98: pxToRem('392'),
             },
