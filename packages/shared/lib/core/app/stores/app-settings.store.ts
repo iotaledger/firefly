@@ -1,18 +1,7 @@
-import { writable } from 'svelte/store'
-
 import { persistent } from '@lib/helpers'
-
-import { AppTheme } from '../enums'
+import { writable } from 'svelte/store'
+import { DEFAULT_APP_SETTINGS } from '../constants'
 import { IAppSettings } from '../interfaces'
-
-const DEFAULT_APP_SETTINGS: IAppSettings = {
-    deepLinking: false,
-    language: 'en',
-    theme: AppTheme.Light,
-    darkMode: false,
-    notifications: true,
-    sendCrashReports: false,
-}
 
 /**
  * The store containing the application settings used throughout the entire app.

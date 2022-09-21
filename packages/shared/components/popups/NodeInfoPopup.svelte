@@ -154,7 +154,7 @@
         {/each}
     </div>
     <div class="flex w-full justify-center pt-6">
-        <Button classes="w-full" secondary onClick={handleCopyAllInformationClick} disabled={!nodeInfo}>
+        <Button classes="w-full" outline onClick={handleCopyAllInformationClick} disabled={!nodeInfo}>
             {localize('actions.copyAllInformation')}
         </Button>
     </div>

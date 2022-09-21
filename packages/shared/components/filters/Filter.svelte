@@ -10,6 +10,7 @@
 
     let filterActive = false
     let modal: Modal
+    let openFilterItemIndex = -1
 
     function onSetFilters(): void {
         $filterStore = deepCopy(filter)
@@ -19,6 +20,18 @@
     function onClose(): void {
         filter = deepCopy($filterStore)
         filterActive = false
+    }
+
+    function toggleFilterItem(index: number): void {
+        if (openFilterItemIndex === index) {
+            openFilterItemIndex = -1
+        } else {
+            openFilterItem(index)
+        }
+    }
+
+    function openFilterItem(index: number): void {
+        openFilterItemIndex = index
     }
 
     $: isChanged = JSON.stringify($filterStore) !== JSON.stringify(filter)
@@ -37,8 +50,13 @@
     {/if}
 
     <FilterModal bind:modal bind:filter {isChanged} {onSetFilters} {onClose}>
-        {#each Object.keys(filter) as filterUnit}
-            <FilterItem bind:filterUnit={filter[filterUnit]} />
+        {#each Object.keys(filter) as filterUnit, index}
+            <FilterItem
+                bind:filterUnit={filter[filterUnit]}
+                on:toggle={() => toggleFilterItem(index)}
+                on:open={() => openFilterItem(index)}
+                isOpen={openFilterItemIndex === index}
+            />
         {/each}
     </FilterModal>
 </div>

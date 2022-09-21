@@ -51,14 +51,14 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#if !$mobile}
-            <Button secondary classes="w-full" onClick={handleDownloadClick}>
+            <Button outline classes="w-full" onClick={handleDownloadClick}>
                 {localize('actions.downloadRecoveryKit')}
             </Button>
         {/if}
         <Button
             disabled={!$mobile && !hasRevealedRecoveryPhrase}
             classes="w-full"
-            onClick={hasRevealedRecoveryPhrase ? () => handleContinueClick() : handleMnemonicVisibilityClick}
+            onClick={hasRevealedRecoveryPhrase ? handleContinueClick : handleMnemonicVisibilityClick}
         >
             {localize(
                 $mobile && !hasRevealedRecoveryPhrase

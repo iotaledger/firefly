@@ -36,6 +36,7 @@
 
     function onCancelClick(): void {
         if (isFunction(onCancel)) {
+            closePopup()
             onCancel()
         } else {
             closePopup()
@@ -44,6 +45,7 @@
 
     function onContinueClick(): void {
         if (isFunction(onContinue)) {
+            closePopup()
             onContinue()
         } else {
             closePopup()
@@ -71,7 +73,7 @@
         <TextHint success text={localize('popups.ledgerNotConnected.correctAppOpen')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onCancelClick}>
+        <Button classes="w-full" outline onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
         <Button classes="w-full" disabled={!isCorrectAppOpen} onClick={onContinueClick}>

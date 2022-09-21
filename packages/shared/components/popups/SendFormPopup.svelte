@@ -129,7 +129,7 @@
         {/if}
     </send-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onCancel}>
+        <Button classes="w-full" outline onClick={onCancel}>
             {localize('actions.cancel')}
         </Button>
         <Button bind:buttonElement={sendButtonElement} classes="w-full" onClick={onSend}>
