@@ -73,9 +73,9 @@
             await initialiseFirstShimmerClaimingAccount()
         }
 
-        $storageProtectionSetupRouter.next()
-
         busy = false
+
+        $storageProtectionSetupRouter.next()
     }
 
     onMount(() => {
