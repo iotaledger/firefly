@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
+    import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { closePopup, updatePopupProps } from 'shared/lib/popup'
@@ -84,21 +84,18 @@
             <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
         </div>
     </div>
-    {#if isBusy && !error}
-        <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center h-12" />
-    {/if}
-    {#if !isBusy}
-        <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>
-                {localize('actions.cancel')}
-            </Button>
-            <Button
-                disabled={!getTrimmedLength(accountAlias) || isBusy}
-                classes="-mx-2 w-1/2"
-                onClick={() => handleCreateClick()}
-            >
-                {localize('actions.create')}
-            </Button>
-        </div>
-    {/if}
+    <div class="flex flex-row justify-between px-2">
+        <Button outline classes="-mx-2 w-1/2" onClick={handleCancelClick} disabled={isBusy}>
+            {localize('actions.cancel')}
+        </Button>
+        <Button
+            disabled={!getTrimmedLength(accountAlias) || isBusy}
+            classes="-mx-2 w-1/2"
+            onClick={handleCreateClick}
+            {isBusy}
+            busyMessage={localize('general.creating')}
+        >
+            {localize('actions.create')}
+        </Button>
+    </div>
 </div>

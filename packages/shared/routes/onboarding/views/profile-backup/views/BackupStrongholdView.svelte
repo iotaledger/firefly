@@ -1,9 +1,10 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, PasswordInput, Spinner, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
     import { backupInitialStronghold, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let busy = false
 
@@ -72,15 +73,25 @@
         </form>
     </div>
     <div slot="leftpane__action">
-        <Button secondary classes="w-full mb-4" disabled={busy} onClick={onSkipBackupClick}>
-            {#if skipBackup && busy}
-                <Spinner busy={true} message={localize('general.creatingProfile')} classes="justify-center" />
-            {:else}{localize('actions.skipBackup')}{/if}
+        <Button
+            outline
+            classes="w-full mb-4"
+            disabled={busy}
+            onClick={onSkipBackupClick}
+            isBusy={skipBackup && busy}
+            busyMessage={localize('general.creatingProfile')}
+        >
+            {localize('actions.skipBackup')}
         </Button>
-        <Button type="submit" form="backup-form" classes="w-full" disabled={!isStrongholdPasswordValid || busy}>
-            {#if !skipBackup && busy}
-                <Spinner busy={true} message={localize('general.creatingProfile')} classes="justify-center" />
-            {:else}{localize('actions.saveBackup')}{/if}
+        <Button
+            type={HTMLButtonType.Submit}
+            form="backup-form"
+            classes="w-full"
+            disabled={!isStrongholdPasswordValid || busy}
+            isBusy={!skipBackup && busy}
+            busyMessage={localize('general.creatingProfile')}
+        >
+            {localize('actions.saveBackup')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-blue dark:bg-gray-900'}">

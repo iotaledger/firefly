@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Избриши го {name}?",
             "body": "Овој паричник нема историја на трансакции. Може да биде безбедно избришан.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Confirm receive address",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 месец"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Продолжи",
         "back": "Назад",
         "previous": "Previous",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Баланс",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Дојдовни",
         "outgoing": "Појдовни",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Износот изгледа како невалиден број.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Износот мора да биде поголем од 0.",
             "wrongAddressPrefix": "Адресите почнуваат со префиксот {prefix}.",
             "wrongAddressFormat": "Адресата не е форматирана точно.",
             "invalidAddress": "Адресата не е валидна.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Паричникот нема доволно средства.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Немате одбрано паричник за испраќање на средствата.",
             "sendingDust": "Не можете да испратите помалку од 1 Mi.",
             "leavingDust": "Не можете да оставите помалку од 1 Mi на вашата адреса.",

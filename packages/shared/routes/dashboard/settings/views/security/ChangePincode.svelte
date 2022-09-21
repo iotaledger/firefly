@@ -5,6 +5,7 @@
     import { activeProfile } from '@core/profile'
     import { Platform } from '@lib/platform'
     import { PIN_LENGTH } from '@lib/utils'
+    import { HTMLButtonType, ButtonSize } from 'shared/components/Button.svelte'
 
     let currentPincode = ''
     let newPincode = ''
@@ -117,8 +118,8 @@
     />
     <div class="flex flex-row items-center">
         <Button
-            medium
-            type="submit"
+            size={ButtonSize.Medium}
+            type={HTMLButtonType.Submit}
             form="pincode-change-form"
             disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}
         >

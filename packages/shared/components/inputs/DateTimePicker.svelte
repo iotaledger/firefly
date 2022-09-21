@@ -4,6 +4,7 @@
     import { createEventDispatcher } from 'svelte'
     import { Tooltip, Button } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let value: Date
     export let startDate: Date = null
@@ -43,8 +44,12 @@
         on:change={tooltip?.refreshPosition}
     />
     <div class="flex flex-row justify-center items-center space-x-4 w-full">
-        <Button small secondary onClick={handleCancelClick} classes="w-full">{localize('actions.cancel')}</Button>
-        <Button small onClick={handleConfirmClick} classes="w-full">{localize('actions.confirm')}</Button>
+        <Button size={ButtonSize.Small} outline onClick={handleCancelClick} classes="w-full"
+            >{localize('actions.cancel')}</Button
+        >
+        <Button size={ButtonSize.Small} onClick={handleConfirmClick} classes="w-full"
+            >{localize('actions.confirm')}</Button
+        >
     </div>
 </Tooltip>
 

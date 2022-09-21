@@ -215,9 +215,9 @@
         "connectLedger": {
             "title": "Połącz swój Ledger z Firefly",
             "body": "Aby Twoje urządzenie Ledger zostało znalezione przez Firefly, upewnij się, że oficjalna aplikacja Ledger Live jest zamknięta.",
-            "connect": "Connect your Ledger device",
-            "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "connect": "Podłącz swoje urządzenie Ledger",
+            "unlock": "Odblokuj swój Ledger za pomocą pinu",
+            "openApp": "Otwórz aplikację Shimmer na swoim urządzeniu Ledger",
             "tips": "Mój Ledger nie może się połączyć. Co robić?"
         },
         "restoreFromFireflyLedger": {
@@ -469,11 +469,11 @@
                 "hardware": {
                     "title": "Portfel sprzętowy",
                     "statuses": {
-                        "appNotOpen": "Ledger unlocked but app not open",
-                        "correctAppOpen": "Ledger unlocked and app open ",
-                        "locked": "Ledger securely locked",
+                        "appNotOpen": "Ledger odblokowany, ale aplikacja nie otwarta",
+                        "correctAppOpen": "Ledger odblokowany, aplikacja otwarta ",
+                        "locked": "Ledger bezpiecznie zablokowany",
                         "mnemonicMismatch": "Nieprawidłowy Ledger lub wyrazy ratunkowe",
-                        "notConnected": "Ledger not connected",
+                        "notConnected": "Ledger nie podłączony",
                         "otherConnected": "Aplikacja otwarta"
                     }
                 },
@@ -550,12 +550,12 @@
     },
     "popups": {
         "enableLedgerBlindSigning": {
-            "title": "Enable Blind Signing",
-            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
-            "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
-            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
-            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+            "title": "Włącz Blind Signing",
+            "info": "W celu potwierdzenia tej transakcji należy włączyć Blind Signing na urządzeniu ledger.",
+            "step_1": "Połącz i odblokuj swoje urządzenie Ledger",
+            "step_2": "Otwórz aplikację Shimmer",
+            "step_3": "Naciśnij prawy przycisk, aby przejść do opcji Ustawienia. Następnie naciśnij oba przyciski, aby zatwierdzić. Na urządzeniu Ledger pojawi się komunikat Blind Signing.",
+            "step_4": "Naciśnij oba przyciski, aby włączyć Bling Signing transakcji. Na urządzeniu wyświetli się komunikat Enabled. Gotowe."
         },
         "storageDepositBreakdown": {
             "title": "Zestawienie depozytów",
@@ -585,6 +585,14 @@
         "backupStronghold": {
             "title": "Kopia zapasowa pliku stronghold",
             "body": "Ważne jest, aby regularnie wykonywać kopie zapasowe swojego portfela, aby upewnić się, że masz kopię swoich portfeli i historię transakcji. Jeśli stracisz kopię zapasową i wyrazy ratunkowe, stracisz dostęp do swoich środków."
+        },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
         "deleteAccount": {
             "title": "Usunąć {name}?",
@@ -731,11 +739,11 @@
             "bodyFirefly": "Firefly pozostanie nieaktywny do czasu zakończenia operacji. Migracja tokenów będzie nadal możliwa w późniejszym czasie."
         },
         "ledgerNotConnected": {
-            "title": "Connect your Ledger",
-            "notConnected": "Connect your Ledger device to continue.",
-            "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
-            "correctAppOpen": "Ledger successfully connected, please continue."
+            "title": "Podłącz swój Ledger",
+            "notConnected": "Podłącz swoje urządzenie Ledger, aby kontynuować.",
+            "locked": "Odblokuj swoje urządzenie Ledger, aby kontynuować.",
+            "appNotOpen": "Otwórz aplikację {protocol} na urządzeniu Ledger, aby kontynuować.",
+            "correctAppOpen": "Ledger pomyślnie podłączony, proszę kontynuować."
         },
         "ledgerConfirmation": {
             "confirm": "Aby kontynuować, potwierdź informację wyświetlaną na urządzeniu Ledger"
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Potwierdź adres odbiorcy",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 miesiąc"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Kontynuuj",
         "back": "Wstecz",
         "previous": "Wstecz",
@@ -898,7 +912,7 @@
         "dismiss": "Zamknij",
         "claim": "Odbierz",
         "claiming": "Odbieranie",
-        "claimingRewards": "Claiming rewards",
+        "claimingRewards": "Odbieranie nagród",
         "reject": "Odrzuć",
         "confirmRejection": {
             "title": "Odrzuć transakcję",
@@ -1036,9 +1050,9 @@
         "faucetRequest": "Uzyskaj tokeny {token}",
         "refreshTokenMetadata": "Odśwież metadane tokenu",
         "test": "Test",
-        "testDeepLink": "Test deep link",
-        "initialize": "Initialize",
-        "initializing": "Initializing"
+        "testDeepLink": "Testuj deep link",
+        "initialize": "Zainicjuj",
+        "initializing": "Inicjowanie"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -1054,8 +1068,8 @@
         "received": "Odebrano",
         "transfer": "Transfer",
         "transferring": "Przesyłanie",
-        "shimmerClaimed": "Claimed",
-        "shimmerClaiming": "Claiming",
+        "shimmerClaimed": "Odebrano",
+        "shimmerClaiming": "Odbieranie",
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Mintowane",
         "minting": "Mintowanie",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Ciemny",
         "systemTheme": "Systemowy",
         "balance": "Saldo",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Wszystko",
         "incoming": "Odebrano",
         "outgoing": "Wysłano",
@@ -1209,8 +1224,8 @@
         "metadata": "Metadane",
         "tag": "Tag",
         "nodeList": "Lista serwerów",
-        "claimedIn": "Claimed in",
-        "claimingIn": "Claiming in",
+        "claimedIn": "Odebrano w",
+        "claimingIn": "Odbieranie w",
         "assets": "Aktywa",
         "nativeTokens": "Natywne tokeny",
         "mintNativeTokenDescription": "Mintuj natywny token zgodny ze standardem IRC30",
@@ -1219,8 +1234,8 @@
         "refreshTokenMetadataHint": "Spowoduje to zresetowanie wszystkich metadanych twoich tokenów, w tym statusu weryfikacji, i odkrycie wszelkich ukrytych aktywów.",
         "giftStorageDeposit": "Podaruj depozyt",
         "excluded": "Wykluczone",
-        "developerTools": "Developer tools",
-        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "developerTools": "Narzędzia deweloperskie",
+        "testDeepLinkDescription": "Symulacja deep linku wysłanego do firefly",
         "url": "URL",
         "hash": "Hash"
     },
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Status weryfikacji",
             "new": "Nowy",
-            "notVerified": "Nie zweryfikowano",
-            "verified": "Zweryfikowano"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Aktywa"
@@ -1251,6 +1267,18 @@
             "range": "jest między",
             "greater": "jest większe od",
             "less": "jest mniejsze niż"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1306,12 +1334,12 @@
             "receivedWhileLoggedOut": "Zaloguj się, aby zainicjować deep link",
             "notEnabled": "Deep linki nie są włączone",
             "invalidFormat": "Deep link, który wybrałeś, jest nieprawidłowy",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidNumber": "Podana ilość w deep linku nie jest liczbą {amount}",
             "wallet": {
                 "send": {
                     "success": "Szczegóły płatności zostały wypełnione przy użyciu deep linku"
                 },
-                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
+                "unrecognizedOperation": "Nierozpoznana operacja w portfelu: {operation}"
             }
         },
         "syncing": "Poczekaj na zakończenie synchronizacji, aby zmienić portfele.",
@@ -1335,7 +1363,7 @@
             "success": "Wszystkie metadane tokenu zostały zresetowane i odświeżone"
         },
         "restoreFromStrongholdBackup": {
-            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
+            "wrongProtocol": "Protokół nie pasuje do typu tokenu znalezionego w kopii Stronghold",
             "wrongProtocolForClaiming": "Musisz użyć kopii zapasowej Stronghold opartej na IOTA, aby odebrać nagrody Shimmer"
         },
         "findShimmerRewards": {
@@ -1343,7 +1371,7 @@
             "error": "Wystąpił błąd podczas wyszukiwania nagród"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
+            "success": "Pomyślnie odebrano nagrody Shimmer przez {accountAlias}",
             "error": "Wystąpił błąd podczas odbierania nagród"
         }
     },
@@ -1354,8 +1382,8 @@
             "delete": {
                 "nonEmptyAccounts": "Musisz przetransferować wszystkie środki zanim będziesz mógł usunąć swój profil."
             },
-            "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "type": "Nie można określić typu profilu",
+            "setupType": "Nie można określić typu konfiguracji profilu"
         },
         "password": {
             "doNotMatch": "Hasła nie są zgodne.",
@@ -1396,8 +1424,8 @@
             "cannotRemove": "Nie można usunąć portfela.",
             "withBalance": "Musisz przetransferować wszystkie środki zanim będziesz mógł usunąć ten portfel.",
             "notLast": "Możesz usunąć tylko ostatni portfel.",
-            "notFound": "Unable to find account",
-            "cannotGetBoundAccount": "Unable to get bound account"
+            "notFound": "Nie można znaleźć konta",
+            "cannotGetBoundAccount": "Nie można uzyskać powiązanego konta"
         },
         "send": {
             "addressLength": "Adresy powinny składać się z {length, plural, one {# znaku} few {# znaków} many {# znaków} other {# znaków}}.",
@@ -1405,20 +1433,24 @@
             "amountNoFloat": "Nie można używać miejsc dziesiętnych, kiedy wybrana jest najmniejsza jednostka",
             "amountInvalidFormat": "Wartość wydaje się być niepoprawna.",
             "amountSmallerThanSubunit": "Ilość musi być większa niż najmniejsza podjednostka.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Wartość musi być większa niż 0.",
             "wrongAddressPrefix": "Adresy zaczynają się od prefiksu {prefix}.",
             "wrongAddressFormat": "Adres nie jest poprawnie sformatowany.",
             "invalidAddress": "Adres jest nieprawidłowy.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Brak wystarczających środków na tym portfelu.",
             "insufficientFundsStorageDeposit": "Niewystarczające środki na pokrycie depozytu",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Nie wybrano portfela docelowego na który chcesz wysłać środki.",
             "sendingDust": "Nie możesz wysłać mniej niż 1 Mi.",
             "leavingDust": "Na Twoim adresie nie może pozostać mniej niż 1 Mi.",
             "cancelled": "Transakcja została anulowana.",
             "transaction": "Wystąpił błąd podczas wysyłania transakcji. Spróbuj ponownie.",
             "invalidExpirationDateTime": "Wybrany czas wygaśnięcia jest nieprawidłowy.",
-            "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
+            "missingTransactionId": "Brak ID transakcji",
+            "missingTransactionProgressEventPayload": "Brakuje danych \"transaction progress event payload\""
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",
@@ -1430,8 +1462,8 @@
             "https": "HTTPS jest wymagany; niezabezpieczone połączenia przez HTTP nie są obecnie obsługiwane.",
             "duplicate": "Ten serwer został już wcześniej dodany.",
             "unsynced": "Serwer nie jest zsynchronizowany.",
-            "noSyncedNode": "No synced node is available.",
-            "timeNotSynced": "Device time is incorrect, unable to sync node.",
+            "noSyncedNode": "Brak zsynchronizowanego węzła.",
+            "timeNotSynced": "Czas urządzenia jest nieprawidłowy, nie można zsynchronizować z serwerem.",
             "answer": "Nie udało się uzyskać odpowiedzi od wszystkich serwerów.",
             "forbidden": "Połączenie z tym serwerem jest zabronione.",
             "pluginNotAvailable": "Wtyczka \"{nodePlugin}\" nie jest dostępna na bieżącym serwerze.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Na Twoim urządzeniu Ledger otwarto nieprawidłową aplikację.",
             "locked": "Odblokuj swoje urządzenie Ledger wprowadzając kod PIN.",
             "mnemonicMismatch": "Podłączono nieprawidłowe urządzenie Ledger lub zmieniono wyrazy ratunkowe.",
-            "notConnected": "Nie wykryto urządzenia Ledger.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Nie znaleziono urządzenia Ledger.",
             "otherConnected": "Na Twoim urządzeniu Ledger otwarto nieprawidłową aplikację.",
             "generateAddress": "Podczas generowania adresu wystąpił błąd.",
@@ -1555,7 +1587,7 @@
     "tabs": {
         "wallet": "Portfel",
         "staking": "Staking",
-        "developer": "Developer"
+        "developer": "Deweloper"
     },
     "pills": {
         "stake": {
@@ -1611,7 +1643,7 @@
             "claimed": "odebrano",
             "expired": "wygasło"
         },
-        "locked": "locked"
+        "locked": "zablokowano"
     },
     "menus": {
         "expirationTimePicker": {

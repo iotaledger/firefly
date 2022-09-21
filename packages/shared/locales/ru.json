@@ -3,100 +3,100 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Send, Receive & Manage your {protocol} tokens",
-                    "body": "Firefly is the official wallet software for {protocol}."
+                    "title": "Отправлять, получать и управлять своими {protocol} токенами",
+                    "body": "Firefly - это официальное программное обеспечение кошелька для {protocol}."
                 },
                 "legal": {
-                    "title": "Privacy Policy & Terms of Service",
-                    "body": "Please review the Privacy Policy and Terms of Service.",
-                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
+                    "title": "Политика конфиденциальности и Условия предоставления услуг",
+                    "body": "Пожалуйста, ознакомьтесь с Политикой конфиденциальности и Условиями предоставления услуг.",
+                    "checkbox": "Я прочитал и принимаю Политику конфиденциальности и Условия предоставления услуг"
                 },
                 "languageAndAppearance": {
-                    "title": "Language & appearance",
-                    "body": "Choose your language and theme."
+                    "title": "Язык и внешний вид",
+                    "body": "Выберите язык и внешний вид."
                 }
             },
             "networkSetup": {
                 "chooseProtocol": {
-                    "title": "Choose protocol",
-                    "body": "Set the protocol for your profile.",
-                    "iota": "Default IOTA network",
-                    "shimmer": "Experimental IOTA staging network"
+                    "title": "Выбрать протокол",
+                    "body": "Установить протокол для вашего профиля.",
+                    "iota": "По умолчанию сеть IOTA",
+                    "shimmer": "Экспериментальная промежуточная сеть IOTA"
                 },
                 "chooseNetwork": {
-                    "title": "Choose network",
-                    "body": "Set the network for your profile.",
+                    "title": "Выбрать сеть",
+                    "body": "Установить сеть для вашего профиля.",
                     "iota": {
                         "mainnet": {
-                            "title": "Mainnet",
-                            "body": "IOTA Mainnet"
+                            "title": "Основная сеть",
+                            "body": "Основная сеть IOTA"
                         },
                         "devnet": {
-                            "title": "Devnet",
-                            "body": "Developer network for IOTA"
+                            "title": "Сеть разработки",
+                            "body": "Сеть разработчика IOTA"
                         },
                         "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with active TIPs"
+                            "title": "Личная сеть",
+                            "body": "Поддержка настраиваемых сетей с активными TIPS"
                         }
                     },
                     "shimmer": {
                         "mainnet": {
                             "title": "Shimmer",
-                            "body": "Staging network for IOTA"
+                            "body": "Промежуточная сеть для IOTA"
                         },
                         "devnet": {
-                            "title": "Testnet",
-                            "body": "Public beta network for Shimmer"
+                            "title": "Тестовая сеть",
+                            "body": "Публичная бета-сеть для Shimmer"
                         },
                         "private-net": {
-                            "title": "Private net",
-                            "body": "Support for custom networks with draft TIPs"
+                            "title": "Личная сеть",
+                            "body": "Поддержка пользовательских сетей с черновыми TIPS"
                         }
                     }
                 },
                 "setupPrivateNetworkConnection": {
-                    "title": "Connect to a private network",
-                    "body": "Fill the form with the node information and connect to a private network."
+                    "title": "Подключение к личной сети",
+                    "body": "Заполните форму информацией об узле и подключитесь к личной сети."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "title": "Создайте {protocol, select, IOTA {an} Shimmer {a}} {protocol} профиль",
                     "chrysalisTitle": "TODO TODO TODO",
                     "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Learn about the Shimmer network"
+                    "learnMore": "Узнайте о сети Shimmer"
                 },
                 "setupNew": {
-                    "title": "Create a profile",
-                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "title": "Создать профиль",
+                    "body": "Вы можете выбрать обычный программный кошелек или, если у вас есть устройство Ledger, настроить аппаратный кошелек.",
                     "softwareAccount": {
-                        "title": "Create a software profile",
-                        "description": "Provides a Stronghold file and recovery phrase"
+                        "title": "Создать программный профиль",
+                        "description": "Предоставляет файл Stronghold и фразу восстановления"
                     },
                     "ledgerAccount": {
-                        "title": "Create a hardware profile",
-                        "description": "Ledger Nano S or Nano X required"
+                        "title": "Создать аппаратный профиль",
+                        "description": "Требуется Ledger Nano S или Nano X"
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {protocol} profile",
-                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
-                    "importMnemonic": "Use recovery phrase",
-                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
-                    "importFile": "Use Stronghold backup",
-                    "importFileDescription": "Import your Stronghold backup file",
-                    "importLedger": "Use Ledger device",
-                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                    "title": "Восстановить профиль {protocol}",
+                    "body": "Если у вас уже есть мнемоника или резервный файл Stronghold, вы можете импортировать его сюда.",
+                    "importMnemonic": "Использовать фразу восстановления",
+                    "importMnemonicDescription": "Введите вашу мнемоническую фразу в 24 слова",
+                    "importFile": "Использовать резервную копию Stronghold",
+                    "importFileDescription": "Импортировать файл резервной копии Stronghold",
+                    "importLedger": "Используйте устройство Ledger",
+                    "importLedgerDescription": "Восстановление с устройства Ledger Nano S или X"
                 },
                 "setupClaimed": {
-                    "title": "Claim Shimmer staking rewards",
-                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                    "title": "Запросить вознаграждение за ставки в Shimmer",
+                    "body": "Импортируйте свой профиль IOTA и получите вознаграждение за ставку в Shimmer."
                 },
                 "enterName": {
-                    "title": "Create your {protocol} profile",
-                    "profileName": "Profile name",
-                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "title": "Создайте свой профиль {protocol}",
+                    "profileName": "Имя профиля",
+                    "body1": "Вы можете создать несколько профилей пользователей, чтобы организовать свои кошельки и повысить уровень секретности.",
                     "body2": {
                         "first": "For now, let's start with your first profile name.",
                         "nonFirst": "For now, let's start with your profile name."
@@ -184,10 +184,10 @@
                 "title": "Profile setup complete",
                 "fundsMigrated": "Funds migrated",
                 "body": "Your new profile is ready to use.",
-                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-                "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
-                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
-                "exportMigration": "Export migration log and finish setup"
+                "softwareMigratedBody": "Вы успешно мигрировали свои средства в новую сеть",
+                "fireflyLedgerBody": "Ваш Ledger аккаунт успешно восстановлен, и вы можете продолжить.",
+                "trinityLedgerBody": "Вы успешно перевели свой Ledger в новую сеть.",
+                "exportMigration": "Экспортировать журнал миграции и завершить установку"
             }
         },
         "setupLedger": {
@@ -200,7 +200,7 @@
         },
         "ledgerInstallationGuide": {
             "title": "Вы установили необходимые Ledger приложения?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
+            "body1": "Прежде чем продолжить, необходимо с помощью Ledger Live найти и установить приложение {protocol}.",
             "body2": "Убедитесь, что прошивка Ledger актуальна. Любые предварительно установленные приложения должны быть обновлены до их последних версий.",
             "action": "Да, я установил эти приложения"
         },
@@ -215,9 +215,9 @@
         "connectLedger": {
             "title": "Подключите вашу Ledger к Firefly",
             "body": "Чтобы ваше устройство Ledger было найдено Firefly, убедитесь, что официальное приложение Ledger Live закрыто.",
-            "connect": "Connect your Ledger device",
-            "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "connect": "Подключите ваше устройство Ledger",
+            "unlock": "Разблокируйте ваш Ledger с помощью пин-кода",
+            "openApp": "Откройте приложение Shimmer на вашем Ledger",
             "tips": "Советы, если ваш Ledger не подключается"
         },
         "restoreFromFireflyLedger": {
@@ -368,8 +368,8 @@
                 "includeNode": "Включить узел",
                 "editDetails": "Изменить детали",
                 "viewInfo": "Посмотреть информацию",
-                "setAsPrimary": "Set primary node",
-                "unsetAsPrimary": "Clear primary node",
+                "setAsPrimary": "Установить основной узел",
+                "unsetAsPrimary": "Удалить основной узел",
                 "removeNode": "Удалить узел",
                 "includeOfficialNodeList": "Включить список официальных узлов",
                 "noNodes": "Нет узлов, не удается подключиться к сети",
@@ -437,15 +437,15 @@
         },
         "loadProfile": {
             "loginSteps": {
-                "buildProfileManager": "Initialising profile manager",
-                "updateNodeInfo": "Checking node health",
-                "recoverAccounts": "Generating accounts",
-                "loadAccounts": "Syncing accounts",
-                "loadAssets": "Loading native assets",
-                "loadActivities": "Building activity history",
-                "setStrongholdStatus": "Securing stronghold",
-                "startBackgroundSync": "Starting background sync",
-                "loggingIn": "Loading dashboard"
+                "buildProfileManager": "Инициализация менеджера профилей",
+                "updateNodeInfo": "Проверка состояния узла",
+                "recoverAccounts": "Создание учетных записей",
+                "loadAccounts": "Синхронизация учетных записей",
+                "loadAssets": "Загрузка собственных средств",
+                "loadActivities": "История строительной деятельности",
+                "setStrongholdStatus": "Обеспечение безопасности stronghold",
+                "startBackgroundSync": "Запуск фоновой синхронизации",
+                "loggingIn": "Загрузка информационной панели"
             }
         },
         "dashboard": {
@@ -469,7 +469,7 @@
                 "hardware": {
                     "title": "Аппаратное устройство",
                     "statuses": {
-                        "appNotOpen": "Ledger unlocked but app not open",
+                        "appNotOpen": "Ledger разблокирован, но приложение не открыто",
                         "correctAppOpen": "Ledger unlocked and app open ",
                         "locked": "Ledger securely locked",
                         "mnemonicMismatch": "Неправильный Ledger или Mnemonic",
@@ -585,6 +585,14 @@
         "backupStronghold": {
             "title": "Создайте запасную копию stronghold файла",
             "body": "Важно регулярно создавать запасные копии своего кошелька, чтобы быть уверенным, что у вас есть копия вашего кошелька и истории транзакций. Если вы потеряете запасную копию и фразу для восстановления, вы потеряете доступ к своим средствам."
+        },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
         "deleteAccount": {
             "title": "Удалить {name}?",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Подтверждение адреса приема",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 месяц"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Продолжить",
         "back": "Назад",
         "previous": "Предыдущий",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Тёмная",
         "systemTheme": "Система",
         "balance": "Баланс",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Все",
         "incoming": "Входящие",
         "outgoing": "Исходящие",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Невозможно использовать десятичные знаки при выбранной наименьшей единице измерения",
             "amountInvalidFormat": "Сумма является недопустимым числом.",
             "amountSmallerThanSubunit": "Сумма должна быть больше, чем наименьшая субъединица.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Сумма должна быть больше 0.",
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
             "invalidAddress": "Адрес недействителен.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "На этом кошельке недостаточно средств.",
             "insufficientFundsStorageDeposit": "Недостаточно средств для покрытия депозита для хранения",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Вы не выбрали кошелек для отправки средств.",
             "sendingDust": "Вы не можете отправить менее 1 Mi.",
             "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "На вашем устройстве Ledger открыто неправильное приложение.",
             "locked": "Пожалуйста, разблокируйте ваше устройство Ledger, введя PIN-код.",
             "mnemonicMismatch": "Вы подключили не то устройство Ledger или изменилась мнемоника.",
-            "notConnected": "Устройство Ledger не обнаружено.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Ledger устройство не найдено.",
             "otherConnected": "На вашем устройстве Ledger открыто неправильное приложение.",
             "generateAddress": "Произошла ошибка при генерировании адреса.",
