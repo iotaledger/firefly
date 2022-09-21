@@ -16,6 +16,8 @@ import {
     ActivityType,
     DateFilterOption,
 } from '../enums'
+import { getAssetById } from './selected-account-assets.store'
+import { isValidIRC30 } from '@lib/utils/isValidIRC30'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -97,7 +99,10 @@ export const activitySearchTerm: Writable<string> = writable('')
 export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
-        let activityList = $selectedAccountActivities.filter((_activity) => !_activity.isHidden)
+        let activityList = $selectedAccountActivities.filter((_activity) => {
+            const asset = getAssetById(_activity.data.assetId)
+            return !_activity.isHidden && asset && isValidIRC30(asset.metadata)
+        })
 
         activityList = activityList.filter((activity) => isVisibleActivity(activity))
 
