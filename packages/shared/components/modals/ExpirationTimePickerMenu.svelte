@@ -82,8 +82,6 @@
             icon="calendar"
             title={localize('menus.expirationTimePicker.none')}
             onClick={() => handleChooseExpirationTimeClick(ExpirationTime.None)}
-            first
-            last
             selected={selected === ExpirationTime.None}
         />
         <HR />
@@ -95,7 +93,6 @@
                 timeStyle: 'medium',
             })}
             onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneHour)}
-            first
             selected={selected === ExpirationTime.OneHour}
         />
         <MenuItem
@@ -116,7 +113,6 @@
                 timeStyle: 'medium',
             })}
             onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneWeek)}
-            last
             selected={selected === ExpirationTime.OneWeek}
         />
         <HR />
@@ -127,8 +123,6 @@
                 ? formatDate(customDate, { dateStyle: 'long', timeStyle: 'medium' })
                 : localize('menus.expirationTimePicker.customDate.subtitle')}
             onClick={() => handleChooseExpirationTimeClick(ExpirationTime.Custom)}
-            first
-            last
             selected={selected === ExpirationTime.Custom}
         />
     </expiration-time-picker-modal>

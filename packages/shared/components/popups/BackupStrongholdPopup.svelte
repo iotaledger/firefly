@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="flex flex-row justify-between space-x-4 w-full">
-        <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={busy}>
+        <Button outline classes="w-1/2" onClick={handleCancelClick} disabled={busy}>
             {localize('actions.cancel')}
         </Button>
         <ExportStrongholdButton showNotification overrideTitle={localize('actions.backup')} classes="w-1/2" />

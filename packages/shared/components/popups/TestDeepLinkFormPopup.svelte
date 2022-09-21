@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
-    import { Button, Spinner, Text, TextInput } from 'shared/components'
+    import { Button, Text, TextInput } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
 
     const PREFIX = process.env.APP_PROTOCOL + '://'
@@ -30,15 +30,11 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button secondary classes="w-full" onClick={handleCancel}>
+        <Button outline classes="w-full" onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button autofocus classes="w-full" onClick={handleTest}>
-            {#if $isTransferring}
-                <Spinner busy classes="justify-center break-all" />
-            {:else}
-                {localize('actions.test')}
-            {/if}
+        <Button autofocus classes="w-full" onClick={handleTest} isBusy={$isTransferring}>
+            {localize('actions.test')}
         </Button>
     </div>
 </div>

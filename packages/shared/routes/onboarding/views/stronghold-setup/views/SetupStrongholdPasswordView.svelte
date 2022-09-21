@@ -14,6 +14,7 @@
     } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
+    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     let strongholdPassword = ''
     let confirmedStrongholdPassword = ''
@@ -130,7 +131,7 @@
     </div>
     <div slot="leftpane__action">
         <Button
-            type="submit"
+            type={HTMLButtonType.Submit}
             form="password-form"
             classes="w-full"
             disabled={!strongholdPassword || !confirmedStrongholdPassword || busy}

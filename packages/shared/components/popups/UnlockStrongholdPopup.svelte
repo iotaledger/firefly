@@ -3,6 +3,7 @@
     import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
+    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let subtitle: string
     export let returnPassword = false
@@ -46,8 +47,8 @@
         autofocus
     />
     <div class="flex flex-row justify-between w-full space-x-4">
-        <Button secondary classes="w-1/2" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
-        <Button classes="w-1/2" type="submit" disabled={!password || password.length === 0}>
+        <Button outline classes="w-1/2" onClick={handleCancelClick}>{localize('actions.cancel')}</Button>
+        <Button classes="w-1/2" type={HTMLButtonType.Submit} disabled={!password || password.length === 0}>
             {localize('actions.unlock')}
         </Button>
     </div>

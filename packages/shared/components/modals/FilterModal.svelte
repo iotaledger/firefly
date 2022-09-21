@@ -5,6 +5,7 @@
     import { localize } from '@core/i18n'
     import { Button } from 'shared/components'
     import { activeProfileId } from '@core/profile'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let modal: Modal
     export let filter: Filter
@@ -36,11 +37,11 @@
 >
     <div class="filter-modal">
         <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3 rounded-t-xl">
-            <Button secondary xsmall onClick={clear}>{localize('actions.clear')}</Button>
+            <Button outline size={ButtonSize.Small} onClick={clear}>{localize('actions.clear')}</Button>
             <Text fontWeight={FontWeight.semibold} fontSize="14" classes="text-center flex grow-1"
                 >{localize('filters.title')}</Text
             >
-            <Button disabled={!isChanged} xsmall onClick={confirm}>{localize('actions.apply')}</Button>
+            <Button disabled={!isChanged} size={ButtonSize.Small} onClick={confirm}>{localize('actions.apply')}</Button>
         </div>
         <div>
             <slot />
