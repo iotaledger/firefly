@@ -1,7 +1,5 @@
 import { get, writable } from 'svelte/store'
 
-import { profiles } from '@core/profile'
-
 import { AppRoute, LoginRoute } from './enums'
 import { Router } from './router'
 import { FireflyEvent } from './types'
@@ -17,7 +15,7 @@ export class AppRouter extends Router<AppRoute> {
     }
 
     public init(): void {
-        const hasCompletedOnboarding = get(profiles).length > 0
+        const hasCompletedOnboarding = false
         this.routeStore.set(hasCompletedOnboarding ? AppRoute.Login : AppRoute.Onboarding)
     }
 
