@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Vee {name} uit?",
             "body": "Hierdie beursie het geen transaksiegeskiedenis nie. Dit kan veilig verwyder word.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Bevestig die ontvang adres",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 maand"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Gaan voort",
         "back": "Terug",
         "previous": "Vorige",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Donker",
         "systemTheme": "Stelsel",
         "balance": "Balans",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Inkomende",
         "outgoing": "Uitgaande",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Die bedrag lyk na 'n ongeldige nommer.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Die bedrag moet groter as 0 wees.",
             "wrongAddressPrefix": "Adresse begin met die voorvoegsel {prefix}.",
             "wrongAddressFormat": "Die adres is nie korrek geformateer nie.",
             "invalidAddress": "Die adres is nie geldig nie.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Hierdie beursie het onvoldoende fondse.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Jy het nie 'n beursie gekies om die fondse na te stuur nie.",
             "sendingDust": "Jy kan nie minder as 1 Mi. stuur nie.",
             "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Die verkeerde app is oop op Ledger toestel.",
             "locked": "Ontsluit jou Ledger toestel deur die PIN in te voer.",
             "mnemonicMismatch": "Jy het die verkeerde Ledger toestel gekoppel of die geheueverandering het verander.",
-            "notConnected": "Geen Ledger toestel bespeur nie.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Ledger toestel nie gevind nie.",
             "otherConnected": "Die verkeerde app is oop op Ledger toestel.",
             "generateAddress": "Kon nie 'n adres genereer nie.",

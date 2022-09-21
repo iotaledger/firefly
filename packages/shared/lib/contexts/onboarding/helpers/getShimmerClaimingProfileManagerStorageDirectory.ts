@@ -1,8 +1,8 @@
 import { getStorageDirectoryOfProfiles } from '@core/profile'
 
-import { IOTA_PROFILE_MANAGER_DIRECTORY_NAME } from '../constants'
+import { SHIMMER_CLAIMING_PROFILE_MANAGER_DIRECTORY_NAME } from '../constants'
 
 export async function getShimmerClaimingProfileManagerStorageDirectory(): Promise<string> {
     const storageDir = await getStorageDirectoryOfProfiles()
-    return `${storageDir}/${IOTA_PROFILE_MANAGER_DIRECTORY_NAME}`
+    return `${storageDir}/${SHIMMER_CLAIMING_PROFILE_MANAGER_DIRECTORY_NAME}`
 }
