@@ -1,6 +1,7 @@
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
 const WalletApi = require('@iota/wallet')
+const fs = require('fs')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}
@@ -42,6 +43,11 @@ window.addEventListener('unhandledrejection', (event) => {
 try {
     const { STAGE, NODE_ENV } = process.env
     if (NODE_ENV === 'development' || STAGE === 'alpha' || STAGE === 'beta') {
+        const logDir = './log'
+        if (!fs.existsSync(logDir)) {
+            fs.mkdirSync(logDir)
+        }
+
         const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
         const loggerOptions = {
             colorEnabled: true,
