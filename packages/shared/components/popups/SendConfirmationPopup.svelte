@@ -17,7 +17,7 @@
         InclusionState,
         sendOutput,
         validateSendConfirmation,
-        generateRawAmount,
+        convertToRawAmount,
         selectedAccountAssets,
         getStorageDepositFromOutput,
         DEFAULT_TRANSACTION_OPTIONS,
@@ -44,7 +44,7 @@
     let outputOptions: OutputOptions
     let error: BaseError
 
-    const rawAmount = generateRawAmount(amount, unit, asset.metadata)
+    const rawAmount = convertToRawAmount(amount, unit, asset.metadata)
     let initialExpirationDate
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
