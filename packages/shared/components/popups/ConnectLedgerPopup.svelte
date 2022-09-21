@@ -36,6 +36,7 @@
 
     function onCancelClick(): void {
         if (isFunction(onCancel)) {
+            closePopup()
             onCancel()
         } else {
             closePopup()
@@ -44,6 +45,7 @@
 
     function onContinueClick(): void {
         if (isFunction(onContinue)) {
+            closePopup()
             onContinue()
         } else {
             closePopup()

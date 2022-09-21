@@ -4,15 +4,25 @@
     import { mobile } from '@core/app'
     import { onboardingRouter, ledgerSetupRouter } from '@core/router'
     import { localize } from '@core/i18n'
-    import { completeOnboardingProcess, ProfileRecoveryType } from '@contexts/onboarding'
+    import { completeOnboardingProcess, isOnboardingLedgerProfile, ProfileRecoveryType } from '@contexts/onboarding'
     import { onboardingProfile } from '@contexts/onboarding'
+    import { checkOrConnectLedger } from '@core/ledger'
 
     // TODO: what are these localised bodies they are not self documenting?
     let localizedBody = 'body'
 
     function onContinueClick(): void {
+        if ($isOnboardingLedgerProfile) {
+            checkOrConnectLedger(_continue)
+        } else {
+            _continue
+        }
+    }
+
+    function _continue(): Promise<void> {
         completeOnboardingProcess()
         $onboardingRouter.next()
+        return Promise.resolve()
     }
 
     onMount(() => {
