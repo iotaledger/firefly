@@ -15,6 +15,7 @@
         restoreBackupFromStrongholdFile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
+    import { showAppNotification } from '@lib/notifications'
 
     export let error = ''
     export let busy = false
@@ -45,7 +46,11 @@
                     error = localize('error.password.incorrect')
                 } else {
                     console.error(err)
-                    error = localize('error.global.generic')
+                    showAppNotification({
+                        type: 'error',
+                        alert: true,
+                        message: localize('error.global.generic'),
+                    })
                 }
             }
         }

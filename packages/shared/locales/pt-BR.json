@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Excluir {name}?",
             "body": "Esta carteira não tem histórico de transações. Ela pode ser excluída com segurança.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Confirmar endereço de recebimento",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 mês"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Continuar",
         "back": "Voltar",
         "previous": "Anterior",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Escuro",
         "systemTheme": "Sistema",
         "balance": "Saldo",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Todos",
         "incoming": "Recebendo",
         "outgoing": "Enviando",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "O valor parece ser um número inválido.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "O valor deve ser maior que 0.",
             "wrongAddressPrefix": "Endereços começam com o prefixo {prefix}.",
             "wrongAddressFormat": "O endereço não está formatado corretamente.",
             "invalidAddress": "O endereço não é válido.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Esta carteira tem fundos insuficientes.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Você não selecionou uma carteira para enviar os fundos.",
             "sendingDust": "Você não pode enviar menos de 1 Mi.",
             "leavingDust": "Você não pode deixar menos do que 1 Mi no seu endereço.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "O app errado está aberto no seu dispositivo Ledger.",
             "locked": "Por favor, desbloqueie seu dispositivo Ledger digitando o PIN.",
             "mnemonicMismatch": "Você conectou o dispositivo Ledger errado ou o mnemônico mudou.",
-            "notConnected": "Nenhum dispositivo Ledger detectado.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Dispositivo Ledger não encontrado.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "Ocorreu um erro ao gerar um endereço.",

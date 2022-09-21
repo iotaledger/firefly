@@ -586,6 +586,14 @@
             "title": "备份 Stronghold 文件",
             "body": "定期备份你的钱包很重要，这样可以确保你有一个钱包和交易记录的副本。如果你失去了你的备份和恢复短语，你将失去对资金的访问权限。"
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "删除{name}?",
             "body": "此钱包没有交易历史。它可以被安全地删除。",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "确认接收地址",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1个月"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "继续",
         "back": "返回",
         "previous": "上一步",
@@ -1098,6 +1112,7 @@
         "darkTheme": "暗色",
         "systemTheme": "系统",
         "balance": "余额",
+        "balanceWithValue": "Balance: {balance}",
         "all": "全部",
         "incoming": "收到",
         "outgoing": "转出",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "验证状态",
             "new": "新的",
-            "notVerified": "未验证",
-            "verified": "已验证"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "资产"
@@ -1251,6 +1267,18 @@
             "range": "介于",
             "greater": "大于",
             "less": "小于"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "状态",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "在选择最小单位的情况下，不能使用小数位。",
             "amountInvalidFormat": "金额似乎是一个无效的数字。",
             "amountSmallerThanSubunit": "金额必须大于最小的子单位。",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "金额必须大于零。",
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
             "invalidAddress": "地址无效的",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "该账户资金不足。",
             "insufficientFundsStorageDeposit": "没有足够的资金来支付存储押金",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
             "leavingDust": "您的地址余额不能少于1Mi。",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Ledger设备上打开的应用程序不正确。",
             "locked": "请输入 PIN 码来解锁您的Ledger设备。",
             "mnemonicMismatch": "您连接了错误的Ledger设备或助记符已更改。",
-            "notConnected": "没有检测到Ledger设备。",
+            "notConnected": "No Ledger device detected.",
             "notFound": "未找到Ledger设备",
             "otherConnected": "Ledger设备上打开的应用程序不正确。",
             "generateAddress": "地址生成出错。",

@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Xóa {name}?",
             "body": "Ví này không có lịch sử giao dịch. Nó có thể được xóa một cách an toàn.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Xác nhận địa chỉ nhận",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 tháng"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Tiếp tục",
         "back": "Quay lại",
         "previous": "Trước đó",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Tối",
         "systemTheme": "Hệ thống",
         "balance": "Số dư",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Tiền chuyển đến",
         "outgoing": "Tiền chuyển đi",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Số tiền dường như là một số không hợp lệ.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Số tiền phải lớn hơn 0.",
             "wrongAddressPrefix": "Địa chỉ bắt đầu bằng tiền tố {prefix}.",
             "wrongAddressFormat": "Địa chỉ không được định dạng đúng.",
             "invalidAddress": "Địa chỉ không hợp lệ.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Ví này không đủ tiền.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Bạn chưa chọn ví để gửi tài sản tới.",
             "sendingDust": "Bạn không thể gửi ít hơn 1 Mi.",
             "leavingDust": "Bạn không thể để lại ít hơn 1 Mi trên địa chỉ của bạn.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Ứng dụng sai đang mở trên thiết bị Ledger của bạn.",
             "locked": "Vui lòng mở khóa thiết bị Ledger của bạn bằng cách nhập mã PIN.",
             "mnemonicMismatch": "Bạn đã kết nối sai thiết bị Ledger hoặc Mnemonic đã thay đổi.",
-            "notConnected": "Không phát hiện thấy thiết bị Ledger nào.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Không tìm thấy thiết bị Ledger.",
             "otherConnected": "Ứng dụng sai đang mở trên thiết bị Ledger của bạn.",
             "generateAddress": "Đã xảy ra lỗi khi tạo địa chỉ.",
