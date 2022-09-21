@@ -5,7 +5,7 @@
     import { displayErrorEventToUser } from '@lib/errors'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from '@lib/ledger'
     import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
-    import { closePopup } from '@lib/popup'
+    import { closePopup, popupState } from '@lib/popup'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from '@lib/profile'
     import {
         asyncSetStrongholdPassword,
@@ -17,7 +17,6 @@
     import { mobile, isKeyboardOpened, keyboardHeight, getKeyboardTransitionSpeed } from 'shared/lib/app'
 
     export let locale: Locale
-    export let onBusyChanged = (isBusy: boolean): void => {}
 
     const { balanceOverview, accounts } = $wallet
 
@@ -34,8 +33,11 @@
 
     $: if (isBusy && !$isSyncing && $currentSyncingAccountStore === null) {
         isBusy = false
-        onBusyChanged(isBusy)
         hasUsedBalanceFinder = true
+    }
+
+    $: if ($mobile) {
+        $popupState.hideClose = isBusy
     }
 
     async function handleFindBalances() {
@@ -53,7 +55,6 @@
             }
 
             isBusy = true
-            onBusyChanged(isBusy)
             await asyncSyncAccounts(startAddressIndex, currentGapLimit, accountDiscoveryThreshold, false)
 
             previousGapLimit = currentGapLimit
@@ -66,7 +67,6 @@
             displayErrorEventToUser(err)
         } finally {
             isBusy = false
-            onBusyChanged(isBusy)
         }
     }
 
