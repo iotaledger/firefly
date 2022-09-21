@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "حذف {name}؟",
             "body": "هذه المحفظة ليس لها سجل معاملات. يمكن حذفها بأمان.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "أكد حساب الاستقبال الخاص بك",
@@ -889,6 +902,7 @@
         "timeframe1Month": "شهر واحد"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "مواصلة",
         "back": "الى الخلف",
         "previous": "السابق",
@@ -1098,6 +1112,7 @@
         "darkTheme": "غامق",
         "systemTheme": "المظهر المعتمد في نظام التشغيل لديك",
         "balance": "الرصيد",
+        "balanceWithValue": "Balance: {balance}",
         "all": "الكل",
         "incoming": "الواردة",
         "outgoing": "الصادرة",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "يبدو أن المبلغ رقم غير صالح.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "يجب أن تكون القيمة أكبر من {0}.",
             "wrongAddressPrefix": "تبدأ الحسابات بالبادئة {prefix}.",
             "wrongAddressFormat": "الحساب غير منسق بشكل صحيح.",
             "invalidAddress": "الحساب غير صحيح.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "أرصدة هذه المحفظة غير كافية.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "لم تقم باختيار محفظة لإرسال الأموال إليها.",
             "sendingDust": "لا يمكنك إرسال أقل من 1 مَايُوتاَ.",
             "leavingDust": "لا يمكنك ترك أقل من 1 مَايُوتاَ في حسابك.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "التطبيق الخطأ مفتوح على جهاز لِدْجرْ الخاص بك.",
             "locked": "الرجاء فتح قفل جهاز لِدْجرْ الخاص بك عن طريق إدخال رمز التعريف الشخصي.",
             "mnemonicMismatch": "لقد قمت بتوصيل جهاز لِدْجرْ خاطئ أو أن الكلمات السرية تم تغيرها.",
-            "notConnected": "لم يتم الكشف على جهاز لِدْجرْ.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "لم يتم العثور على جهاز لِدْجرْ.",
             "otherConnected": "التطبيق الخطأ مفتوح على جهاز لِدْجرْ الخاص بك.",
             "generateAddress": "حدث خطأ أثناء إنشاء الحساب.",

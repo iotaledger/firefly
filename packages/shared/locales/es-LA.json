@@ -586,6 +586,14 @@
             "title": "Copia de seguridad de su archivo Stronghold",
             "body": "Es importante hacer una copia de seguridad de su billetera regularmente para asegurarse de que tiene una copia de tus billeteras e historial de transacciones. Si pierde su copia de seguridad y su frase de recuperación perderá el acceso a sus fondos."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "¿Eliminar {name}?",
             "body": "Esta billetera no tiene historial de transacciones. Puede ser eliminada con seguridad.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Confirmar dirección de recepción",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 mes"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Continuar",
         "back": "Atrás",
         "previous": "Anterior",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Oscuro",
         "systemTheme": "Sistema",
         "balance": "Balance",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Todos",
         "incoming": "Entrante",
         "outgoing": "Saliente",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "No se pueden usar decimales con la unidad más pequeña seleccionada",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
             "amountSmallerThanSubunit": "La cantidad debe ser mayor que la subunidad más pequeña.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "La cantidad debe ser mayor que 0.",
             "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",
             "wrongAddressFormat": "La dirección no tiene el formato correcto.",
             "invalidAddress": "La dirección no es válida.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Esta billetera tiene fondos insuficientes.",
             "insufficientFundsStorageDeposit": "Fondos insuficientes para cubrir el depósito de almacenamiento",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "No has seleccionado una billetera a la que enviar los fondos.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
             "leavingDust": "No puede dejar menos de 1 Mi en su dirección.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Está abierta la aplicación incorrecta en tu dispositivo Ledger.",
             "locked": "Por favor, desbloquea tu dispositivo Ledger ingresando el PIN.",
             "mnemonicMismatch": "Has conectado un dispositivo Ledger incorrecto o el mnemónico ha cambiado.",
-            "notConnected": "Ningún dispositivo Ledger detectado.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Dispositivo Ledger no encontrado.",
             "otherConnected": "Está abierta la aplicación incorrecta en tu dispositivo Ledger.",
             "generateAddress": "Hubo un error al generar una address.",
