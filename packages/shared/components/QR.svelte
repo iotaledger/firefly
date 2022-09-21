@@ -32,7 +32,7 @@
                     <rect
                         height={1}
                         key={cellIndex}
-                        style="fill: {cell ? (darkModeEnabled ? '#ffffff' : '#000000') : 'none'};"
+                        style="fill: {cell ? (darkModeEnabled ? '#ffffff' : '#25395F') : 'none'};"
                         width={1}
                         x={cellIndex}
                         y={rowIndex}

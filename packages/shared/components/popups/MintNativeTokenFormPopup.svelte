@@ -8,6 +8,7 @@
     import { AddInputButton, Button, ClosableInput, Error, NumberInput, Text, TextInput } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
     import { onMount } from 'svelte'
+    import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -249,6 +250,7 @@
             bind:open={isDecimalsInputOpen}
             inputType="number"
             isInteger
+            maxlength={MAX_SUPPORTED_DECIMALS}
             label={localize('popups.mintNativeTokenForm.inputs.decimals')}
             placeholder={localize('popups.mintNativeTokenForm.inputs.decimals')}
             error={decimalsError}

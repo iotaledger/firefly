@@ -3,9 +3,19 @@
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
     import { ButtonVariant, ButtonSize } from 'shared/components/Button.svelte'
+    import { deleteProfile } from '@contexts/settings'
 
     function handleDeleteClick() {
-        openPopup({ type: 'deleteProfile' })
+        openPopup({
+            type: 'confirmation',
+            props: {
+                title: localize('popups.deleteProfile.title'),
+                hint: localize('popups.deleteProfile.confirmation'),
+                warning: true,
+                confirmText: localize('actions.delete'),
+                onConfirm: deleteProfile,
+            },
+        })
     }
 </script>
 
