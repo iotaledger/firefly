@@ -4,7 +4,7 @@
     import { openPopup } from 'shared/lib/popup'
 
     function handleBalanceFinderClick() {
-        openPopup({ type: 'balanceFinder', hideClose: true })
+        openPopup({ type: 'balanceFinder', hideClose: false })
     }
 </script>
 
