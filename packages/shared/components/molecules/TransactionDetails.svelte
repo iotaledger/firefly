@@ -26,6 +26,7 @@
     import { truncateString } from '@lib/helpers'
     import { setClipboard } from '@lib/utils'
     import { time } from '@core/app'
+    import {} from '@auxiliary/deep-link'
 
     export let asset: IAsset
     export let asyncStatus: ActivityAsyncStatus = null
@@ -66,17 +67,36 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
+    let detailsList: { [key in string]: { data: unknown; tooltipText?: string } }
     $: detailsList = {
-        ...(formattedTransactionTime && { transactionTime: formattedTransactionTime }),
-        ...(metadata && { metadata }),
-        ...(tag && { tag }),
+        ...(formattedTransactionTime && { transactionTime: { data: formattedTransactionTime } }),
+        ...(metadata && { metadata: { data: metadata } }),
+        ...(tag && { tag: { data: tag } }),
         ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
-            storageDeposit: formattedStorageDeposit,
+            storageDeposit: {
+                data: formattedStorageDeposit,
+                tooltipText: localize('tooltips.transactionDetails.storageDeposit'),
+            },
         }),
-        ...(giftedStorageDeposit && { giftedStorageDeposit: formattedGiftedStorageDeposit }),
-        ...(expirationTime && { expirationTime }),
-        ...(timelockDate && { timelockDate: formattedTimelockDate }),
-        ...(claimedTime && { claimedTime }),
+        ...(giftedStorageDeposit && {
+            giftedStorageDeposit: {
+                data: formattedGiftedStorageDeposit,
+                tooltipText: localize('tooltips.transactionDetails.giftedStorageDeposit'),
+            },
+        }),
+        ...(expirationTime && {
+            expirationTime: {
+                data: expirationTime,
+                tooltipText: localize('tooltips.transactionDetails.expirationTime'),
+            },
+        }),
+        ...(timelockDate && {
+            timelockDate: {
+                data: formattedTimelockDate,
+                tooltipText: localize('tooltips.transactionDetails.timelockDate'),
+            },
+        }),
+        ...(claimedTime && { claimedTime: { data: claimedTime } }),
     }
 
     function getDateFormat(date: Date): string {
@@ -153,7 +173,11 @@
     {#if Object.entries(detailsList).length > 0}
         <details-list class="flex flex-col space-y-2">
             {#each Object.entries(detailsList) as [key, value]}
-                <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
+                <KeyValueBox
+                    keyText={localize(`general.${key}`)}
+                    valueText={value.data}
+                    tooltipText={value.tooltipText}
+                />
             {/each}
             {#if claimingTransactionId}
                 <KeyValueBox keyText={localize(isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>

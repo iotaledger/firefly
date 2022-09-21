@@ -1573,6 +1573,12 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "transactionDetails": {
+            "storageDeposit": "",
+            "giftedStorageDeposit": "This setting is predefined by Soonaverse and can not be edited.\n\nIn this case, the storage deposit will be attached to the transaction and will not be returned to you.",
+            "expirationTime": "To be able to have access to the funds, the user must be claimed this transaction until the specified date. If the due date is past, the funds will be returned to its sender",
+            "timelockDate": "The user is able to have access to the funds AFTER the specified date past"
         }
     },
     "exports": {

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
+    import { Text, TooltipIcon } from 'shared/components'
     import { FontWeight } from 'shared/components/Text.svelte'
     import { onMount } from 'svelte'
     import CopyableBox from './CopyableBox.svelte'
@@ -14,6 +14,7 @@
     export let classes: string = ''
     export let copyValue: string = ''
     export let isCopyable: boolean = false
+    export let tooltipText: string = ''
 
     let isVertical: boolean = false
     let valueContainer: HTMLElement
@@ -41,19 +42,26 @@
                 ? 'max-h-20 flex-col space-y-1 overflow-y-auto'
                 : 'flex-row space-x-2 justify-between'}"
         >
-            {#if keyText}
-                <Text
-                    fontSize="13"
-                    lineHeight="5"
-                    color={textColor}
-                    darkColor={darkTextColor}
-                    fontWeight={FontWeight.medium}
-                >
-                    {keyText}
-                </Text>
-            {:else}
-                <slot name="key" />
-            {/if}
+            <div class="flex flex-row items-center">
+                {#if keyText}
+                    <Text
+                        fontSize="13"
+                        lineHeight="5"
+                        color={textColor}
+                        darkColor={darkTextColor}
+                        fontWeight={FontWeight.medium}
+                    >
+                        {keyText}
+                    </Text>
+                {:else}
+                    <slot name="key" />
+                {/if}
+                {#if tooltipText}
+                    <div class="ml-1">
+                        <TooltipIcon text={tooltipText} width={12} height={12} />
+                    </div>
+                {/if}
+            </div>
             {#if valueText}
                 <div
                     bind:this={valueContainer}
