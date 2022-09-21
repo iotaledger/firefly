@@ -5,7 +5,7 @@
     import { displayErrorEventToUser } from '@lib/errors'
     import { displayNotificationForLedgerProfile, isLedgerConnected } from '@lib/ledger'
     import { cacheAllStakingPeriods, StakingAirdrop } from '@lib/participation'
-    import { closePopup } from '@lib/popup'
+    import { closePopup, popupState } from '@lib/popup'
     import { isLedgerProfile, isSoftwareProfile, isStrongholdLocked } from '@lib/profile'
     import {
         asyncSetStrongholdPassword,
@@ -34,6 +34,10 @@
     $: if (isBusy && !$isSyncing && $currentSyncingAccountStore === null) {
         isBusy = false
         hasUsedBalanceFinder = true
+    }
+
+    $: if ($mobile) {
+        $popupState.hideClose = isBusy
     }
 
     async function handleFindBalances() {
