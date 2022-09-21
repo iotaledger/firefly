@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Learn about the Shimmer network"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Create a profile",
@@ -1053,7 +1051,8 @@
         "test": "Test",
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
-        "initializing": "Initializing"
+        "initializing": "Initializing",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Recipient",
@@ -1491,7 +1490,9 @@
             "seedCharacters": "The seed should only contain characters A-Z or 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
-            "phraseCaseWord": "The word \"{word}\" should be lower case"
+            "phraseCaseWord": "The word \"{word}\" should be lower case",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "You must open the IOTA app on your Ledger device.",

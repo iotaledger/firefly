@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "{name}මකන්නද?",
             "body": "මෙම මුදල් පසුම්බියට ගනුදෙනු ඉතිහාසයක් නොමැත. එය ආරක්ෂිතව මකා දැමිය හැක.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "ලැබෙන ලිපිනය තහවුරු කරන්න",
@@ -889,6 +902,7 @@
         "timeframe1Month": "මාස 1 යි"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "දිගටම කරගෙන යන්න",
         "back": "ආපසු",
         "previous": "කලින්",
@@ -1098,6 +1112,7 @@
         "darkTheme": "අඳුරු",
         "systemTheme": "පද්ධතිය",
         "balance": "ශේෂය",
+        "balanceWithValue": "Balance: {balance}",
         "all": "සියලුම",
         "incoming": "එන",
         "outgoing": "පිටතට යන",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "මුදල වලංගු නොවන අංකයක් බව පෙනේ.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "ප්‍රමාණය 0 ට වඩා වැඩි විය යුතුය.",
             "wrongAddressPrefix": "ලිපින {prefix}උපසර්ගයෙන් ආරම්භ වේ.",
             "wrongAddressFormat": "ලිපිනය නිවැරදිව හැඩගස්වා නොමැත.",
             "invalidAddress": "ලිපිනය වලංගු නැත.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "මෙම මුදල් පසුම්බියට ප්‍රමාණවත් අරමුදල් නොමැත.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "ඔබ අරමුදල් යැවීමට පසුම්බියක් තෝරාගෙන නැත.",
             "sendingDust": "ඔබට 1 Mi ට වඩා අඩුවෙන් යැවිය නොහැක.",
             "leavingDust": "ඔබට ඔබගේ ලිපිනයෙහි 1 Mi ට වඩා අඩුවෙන් තැබිය නොහැක.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "වැරදි යෙදුම ඔබගේ ලෙජර් උපාංගයේ විවෘතයි.",
             "locked": "කරුණාකර PIN අංකය ඇතුළත් කිරීමෙන් ඔබේ ලෙජර් උපාංගය අගුළු හරින්න.",
             "mnemonicMismatch": "ඔබ වැරදි Ledger උපාංගයක් සම්බන්ධ කර ඇත හෝ සිහිවටනය වෙනස් වී ඇත.",
-            "notConnected": "ලෙජර් උපාංගයක් අනාවරණය කර ගෙන නොමැත.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "ලෙජර් උපාංගය හමු නොවීය.",
             "otherConnected": "වැරදි යෙදුම ඔබගේ ලෙජර් උපාංගයේ විවෘතයි.",
             "generateAddress": "ලිපිනයක් උත්පාදනය කිරීමේදී දෝෂයක් ඇති විය.",

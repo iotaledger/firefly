@@ -215,9 +215,9 @@
         "connectLedger": {
             "title": "Connectez votre Ledger à Firefly",
             "body": "Pour que votre Ledger soit trouvé par Firefly, assurez-vous que l'application officielle de Ledger Live est fermée.",
-            "connect": "Connect your Ledger device",
-            "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "connect": "Connectez votre clé Ledger",
+            "unlock": "Débloquez votre clé Ledger avec son code",
+            "openApp": "Ouvrez l'application Shimmer sur votre clé Ledger",
             "tips": "Conseils si votre Ledger ne se connecte pas"
         },
         "restoreFromFireflyLedger": {
@@ -469,11 +469,11 @@
                 "hardware": {
                     "title": "Périphérique Matériel",
                     "statuses": {
-                        "appNotOpen": "Ledger unlocked but app not open",
-                        "correctAppOpen": "Ledger unlocked and app open ",
-                        "locked": "Ledger securely locked",
+                        "appNotOpen": "Ledger déverrouillé mais l'application n'est pas ouverte",
+                        "correctAppOpen": "Ledger déverrouillé et application ouverte ",
+                        "locked": "Clé Ledger verrouillée",
                         "mnemonicMismatch": "Ledger ou mnémonique incorrect",
-                        "notConnected": "Ledger not connected",
+                        "notConnected": "Clé Ledger non connectée",
                         "otherConnected": "Application ouverte"
                     }
                 },
@@ -550,11 +550,11 @@
     },
     "popups": {
         "enableLedgerBlindSigning": {
-            "title": "Enable Blind Signing",
-            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
-            "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
-            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "title": "Autoriser la signature à l'aveugle",
+            "info": "Pour confirmer cette transaction, vous devez autoriser la signature à l'aveugle sur votre clé ledger.",
+            "step_1": "Connectez et déverrouillez votre appareil Ledger",
+            "step_2": "Ouvrir l'Application Shimmer",
+            "step_3": "Appuyer sur le bouton droit pour ouvrir les paramètres. Appuyez ensuite sur les deux boutons pour valider. Votre clé Ledger affiche Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
         "storageDepositBreakdown": {
@@ -585,6 +585,14 @@
         "backupStronghold": {
             "title": "Sauvegarder votre fichier stronghold",
             "body": "Il est important de sauvegarder régulièrement votre portefeuille pour vous assurer d'avoir une copie de vos portefeuilles et de l'historique des transactions. Si vous perdez votre phrase de sauvegarde et de récupération, vous perdrez l'accès à vos fonds."
+        },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
         "deleteAccount": {
             "title": "Supprimer {name} ?",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Confirmer l'adresse de réception",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 mois"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Continuer",
         "back": "Retour",
         "previous": "Précédent",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Sombre",
         "systemTheme": "Système",
         "balance": "Solde",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Tout",
         "incoming": "Entrant",
         "outgoing": "Sortant",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Impossible d'utiliser des décimales avec la plus petite unité sélectionnée",
             "amountInvalidFormat": "Le montant semble être un nombre invalide.",
             "amountSmallerThanSubunit": "Le montant doit être supérieur à la plus petite sous-unité.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Le montant doit être supérieur à 0.",
             "wrongAddressPrefix": "Les adresses commencent par le préfixe {prefix}.",
             "wrongAddressFormat": "L'adresse n'est pas correctement formatée.",
             "invalidAddress": "Cette adresse n'est pas valide.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Ce portefeuille a des fonds insuffisants.",
             "insufficientFundsStorageDeposit": "Fonds insuffisants pour couvrir la caution de stockage",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Vous n'avez pas sélectionné de portefeuille vers lequel envoyer les fonds.",
             "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
             "leavingDust": "Vous ne pouvez pas laisser moins de 1 Mi sur votre adresse.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "La mauvaise application est ouverte sur votre Ledger.",
             "locked": "Veuillez déverrouiller votre Ledger.",
             "mnemonicMismatch": "Vous avez connecté le mauvais Ledger ou le mnémonique a changé.",
-            "notConnected": "Aucun appareil Ledger détecté.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Appareil Ledger introuvable.",
             "otherConnected": "La mauvaise application est ouverte sur votre Ledger.",
             "generateAddress": "Une erreur s'est produite lors de la génération d'une adresse.",

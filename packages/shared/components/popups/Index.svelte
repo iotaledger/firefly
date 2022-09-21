@@ -17,7 +17,6 @@
     import CreateAccountPopup from './CreateAccountPopup.svelte'
     import DeepLinkErrorPopup from './DeepLinkErrorPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
-    import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
     import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
     import ErrorLog from './ErrorLog.svelte'
@@ -102,7 +101,6 @@
         storageDepositBreakdown: StorageDepositBreakdownPopup,
         errorLog: ErrorLog,
         createAccount: CreateAccountPopup,
-        deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
         walletFinder: WalletFinderPopup,
         video: Video,
