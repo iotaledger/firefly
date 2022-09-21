@@ -1,13 +1,13 @@
 import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
+import { resetNewTransactionDetails, resetMintTokenDetails } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 import { closePopup, openPopup, popupState } from '@lib/popup'
 
 import { LEDGER_ERROR_LOCALES } from '../constants'
 import { LedgerError } from '../enums'
 import { deriveLedgerError } from '../helpers'
-import { resetNewTransactionDetails, resetMintTokenDetails } from '@core/wallet'
 
 export function handleLedgerError(error: string, resetConfirmationPropsOnDenial: boolean = true): void {
     const ledgerError = deriveLedgerError(error)

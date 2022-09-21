@@ -215,9 +215,9 @@
         "connectLedger": {
             "title": "Anslut din Ledger till Firefly",
             "body": "För att din Ledger enhet ska hittas av Firefly, se till att den officiella Ledger Live-applikationen är stängd.",
-            "connect": "Connect your Ledger device",
-            "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "connect": "Anslut din Ledger-enhet",
+            "unlock": "Lås upp din Ledger med dess PIN-kod",
+            "openApp": "Öppna Shimmer-appen på din Ledger",
             "tips": "Tips om din Ledger inte ansluter"
         },
         "restoreFromFireflyLedger": {
@@ -469,11 +469,11 @@
                 "hardware": {
                     "title": "Hårdvaruenhet",
                     "statuses": {
-                        "appNotOpen": "Ledger unlocked but app not open",
-                        "correctAppOpen": "Ledger unlocked and app open ",
-                        "locked": "Ledger securely locked",
+                        "appNotOpen": "Ledger upplåst men appen är inte öppen",
+                        "correctAppOpen": "Ledger upplåst och appen öppen ",
+                        "locked": "Ledger säkert låst",
                         "mnemonicMismatch": "Fel Ledger eller Mnemonik",
-                        "notConnected": "Ledger not connected",
+                        "notConnected": "Ledger inte ansluten",
                         "otherConnected": "App öppen"
                     }
                 },
@@ -550,12 +550,12 @@
     },
     "popups": {
         "enableLedgerBlindSigning": {
-            "title": "Enable Blind Signing",
-            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
-            "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
-            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
-            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+            "title": "Aktivera blind signering",
+            "info": "För att bekräfta denna transaktion måste du aktivera blind signering på din Ledger-enhet.",
+            "step_1": "Anslut och lås upp din Ledger-enhet",
+            "step_2": "Öppna Shimmer-appen",
+            "step_3": "Tryck på höger knapp för att navigera till Inställningar. Tryck sedan på båda knapparna för att validera. Ledger-enheten visar blind signering.",
+            "step_4": "Tryck på båda knapparna för att aktivera blind signering. Enheten visar Aktiverad. Du är klar."
         },
         "storageDepositBreakdown": {
             "title": "Lagringsdeposition breakdown",
@@ -585,6 +585,14 @@
         "backupStronghold": {
             "title": "Säkerhetskopiera din Stronghold-fil",
             "body": "Det är viktigt att säkerhetskopiera plånboken regelbundet för att se till att du har en kopia av din plånbok och transaktionshistorik. Om du förlorar din backup och återställningsfras förlorar du åtkomst till dina tillgångar."
+        },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
         "deleteAccount": {
             "title": "Ta bort {name}?",
@@ -731,11 +739,11 @@
             "bodyFirefly": "Firefly är inaktiverad tills det är klart. Token-migrering kommer fortfarande att vara möjlig efteråt."
         },
         "ledgerNotConnected": {
-            "title": "Connect your Ledger",
-            "notConnected": "Connect your Ledger device to continue.",
-            "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
-            "correctAppOpen": "Ledger successfully connected, please continue."
+            "title": "Anslut din Ledger",
+            "notConnected": "Anslut din Ledger-enhet för att fortsätta.",
+            "locked": "Lås upp din Ledger-enhet för att fortsätta.",
+            "appNotOpen": "Öppna {protocol} appen på din Ledger-enhet för att fortsätta.",
+            "correctAppOpen": "Ledger har anslutits framgångsrikt, vänligen fortsätt."
         },
         "ledgerConfirmation": {
             "confirm": "För att fortsätta, bekräfta uppmaningen som visas på din Ledger-enhet"
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Bekräfta mottagaradress",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 månad"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Fortsätt",
         "back": "Bakåt",
         "previous": "Föregående",
@@ -898,7 +912,7 @@
         "dismiss": "Avfärda",
         "claim": "Anspråk",
         "claiming": "Gör anspråk",
-        "claimingRewards": "Claiming rewards",
+        "claimingRewards": "Hämtar belöningar",
         "reject": "Avvisa",
         "confirmRejection": {
             "title": "Avvisa transaktion",
@@ -1036,9 +1050,9 @@
         "faucetRequest": "Skaffa {token} tokens",
         "refreshTokenMetadata": "Uppdatera metadata för token",
         "test": "Test",
-        "testDeepLink": "Test deep link",
-        "initialize": "Initialize",
-        "initializing": "Initializing"
+        "testDeepLink": "Testa hyperlänk",
+        "initialize": "Initiera",
+        "initializing": "Initierar"
     },
     "general": {
         "recipient": "Mottagare",
@@ -1054,9 +1068,9 @@
         "received": "Mottaget",
         "transfer": "Överföring",
         "transferring": "Överför",
-        "shimmerClaimed": "Claimed",
-        "shimmerClaiming": "Claiming",
-        "shimmerGenesis": "Shimmer Genesis",
+        "shimmerClaimed": "Anspråkstagen",
+        "shimmerClaiming": "Gör anspråk",
+        "shimmerGenesis": "Shimmer genesis",
         "minted": "Mintad",
         "minting": "Mintar",
         "sendPayment": "Skicka tokens",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Mörkt",
         "systemTheme": "System",
         "balance": "Saldo",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Alla",
         "incoming": "Inkommande",
         "outgoing": "Utgående",
@@ -1200,7 +1215,7 @@
         "storageDeposit": "Lagringsdeposition",
         "giftedStorageDeposit": "Skänkt lagringsdeposition",
         "expirationTime": "Utgångstid",
-        "timelockDate": "Timelock",
+        "timelockDate": "Tidlås",
         "claimedTime": "Gjorde anspråk vid",
         "copiedToClipboard": "Kopierad till urklipp",
         "total": "Totalt: {balance}",
@@ -1209,8 +1224,8 @@
         "metadata": "Metadata",
         "tag": "Tagg",
         "nodeList": "Nodlista",
-        "claimedIn": "Claimed in",
-        "claimingIn": "Claiming in",
+        "claimedIn": "Gjorde anspråk i",
+        "claimingIn": "Gör anspråk i",
         "assets": "Tillgångar",
         "nativeTokens": "Inhemska tokens",
         "mintNativeTokenDescription": "Minta imhemsk token som följer IRC30 standard",
@@ -1219,8 +1234,8 @@
         "refreshTokenMetadataHint": "Detta kommer att återställa alla dina tokens metadata inklusive verifieringsstatus och visa dina dolda tillgångar.",
         "giftStorageDeposit": "Skänk lagringsdeposition",
         "excluded": "Exkluderad",
-        "developerTools": "Developer tools",
-        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "developerTools": "Utvecklarverktyg",
+        "testDeepLinkDescription": "Simulera en hyperlänkförfrågan skickad till Firefly",
         "url": "URL",
         "hash": "Hash"
     },
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verifieringsstatus",
             "new": "Ny",
-            "notVerified": "Ej verifierad",
-            "verified": "Verifierad"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Tillgångar"
@@ -1251,6 +1267,18 @@
             "range": "är mellan",
             "greater": "är större än",
             "less": "är mindre än"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1306,12 +1334,12 @@
             "receivedWhileLoggedOut": "Vänligen logga in för att initiera hyperlänken",
             "notEnabled": "Hyperlänkar är inte aktiverat",
             "invalidFormat": "Hyperlänken du följde är ogiltig",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidNumber": "Beloppet i hyperlänken är inte ett nummer {amount}",
             "wallet": {
                 "send": {
                     "success": "Betalningsinformation tillagd från hyperlänk"
                 },
-                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
+                "unrecognizedOperation": "Okänd plånboksoperation: {operation}"
             }
         },
         "syncing": "Vänta tills synkroniseringen är klar för att ändra plånbok.",
@@ -1335,7 +1363,7 @@
             "success": "All token metadata har blivit återställd och förnyad"
         },
         "restoreFromStrongholdBackup": {
-            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
+            "wrongProtocol": "Protokollet matchar inte den mynttyp som finns i Stronghold-backupen",
             "wrongProtocolForClaiming": "Du måste använda en IOTA-baserad Stronghold säkerhetskopia för att hämta Shimmer-belöningar"
         },
         "findShimmerRewards": {
@@ -1343,7 +1371,7 @@
             "error": "Ett fel inträffade vid sökning efter belöningar"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
+            "success": "Framgångsrikt hämtat Shimmer-belöningar för {accountAlias}",
             "error": "Ett fel inträffade när belöningar skulle hämtas"
         }
     },
@@ -1354,8 +1382,8 @@
             "delete": {
                 "nonEmptyAccounts": "Du måste överföra alla saldon innan du kan ta bort din profil."
             },
-            "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "type": "Går inte att fastställa profiltypen",
+            "setupType": "Går inte att fastställa profilinställningstypen"
         },
         "password": {
             "doNotMatch": "Lösenorden matchar inte.",
@@ -1396,8 +1424,8 @@
             "cannotRemove": "Kan inte ta bort plånbok.",
             "withBalance": "Du måste överföra alla tillgångar innan du kan ta bort denna plånbok.",
             "notLast": "Du kan bara ta bort din sista plånbok.",
-            "notFound": "Unable to find account",
-            "cannotGetBoundAccount": "Unable to get bound account"
+            "notFound": "Det gick inte att hitta kontot",
+            "cannotGetBoundAccount": "Det gick inte att hämta bundet konto"
         },
         "send": {
             "addressLength": "Adresser bör vara {length, plural, one {# tecken} other {# tecken}} lång.",
@@ -1405,20 +1433,24 @@
             "amountNoFloat": "Kan inte använda decimaltecken med den minsta enhet som valts",
             "amountInvalidFormat": "Beloppet verkar vara ett ogiltigt nummer.",
             "amountSmallerThanSubunit": "Beloppet måste vara större än den minsta subenheten.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Beloppet måste vara större än 0.",
             "wrongAddressPrefix": "Adresser börjar med prefixet {prefix}.",
             "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
             "invalidAddress": "Adressen är inte giltig.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Denna plånbok har inte tillräckligt med tillgångar.",
             "insufficientFundsStorageDeposit": "Otillräcktligt med tillgångar för att täcka lagringsdepositionen",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Du har inte valt en plånbok att skicka tillgångarna till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
             "leavingDust": "Du kan inte lämna mindre än 1 Mi på din adress.",
             "cancelled": "Transaktionen avbröts.",
             "transaction": "Det uppstod ett fel. Vänligen försök igen.",
             "invalidExpirationDateTime": "Det valda utgångsdatumet/tiden är ogiltig.",
-            "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
+            "missingTransactionId": "Transaktions-ID saknas",
+            "missingTransactionProgressEventPayload": "Händelseförloppet för transaktionen saknas"
         },
         "node": {
             "invalid": "Ange en giltig URL.",
@@ -1430,8 +1462,8 @@
             "https": "HTTPS krävs; osäkra anslutningar över HTTP stöds inte just nu.",
             "duplicate": "Den här noden har redan lagts till.",
             "unsynced": "Noden är inte synkroniserad.",
-            "noSyncedNode": "No synced node is available.",
-            "timeNotSynced": "Device time is incorrect, unable to sync node.",
+            "noSyncedNode": "Ingen synkroniserad nod är tillgänglig.",
+            "timeNotSynced": "Enhetens tid är felaktig, det går inte att synkronisera noden.",
             "answer": "Det gick inte att få svar från alla noder.",
             "forbidden": "Denna nodanslutning är förbjuden.",
             "pluginNotAvailable": "Pluginet \"{nodePlugin}\" är inte tillgänglig på den aktuella noden.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Fel app är öppen på din Ledger-enhet.",
             "locked": "Lås upp din Ledger-enhet genom att ange PIN-koden.",
             "mnemonicMismatch": "Du har anslutit fel Ledger-enhet eller så har din mnemonik ändrats.",
-            "notConnected": "Ingen Ledger-enhet upptäckt.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Ledger-enheten hittades inte.",
             "otherConnected": "Fel app är öppen på din Ledger-enhet.",
             "generateAddress": "Det gick inte att generera en adress.",
@@ -1555,7 +1587,7 @@
     "tabs": {
         "wallet": "Plånbok",
         "staking": "Staking",
-        "developer": "Developer"
+        "developer": "Utvecklare"
     },
     "pills": {
         "stake": {
@@ -1611,7 +1643,7 @@
             "claimed": "anspråkstaget",
             "expired": "löpt ut"
         },
-        "locked": "locked"
+        "locked": "låst"
     },
     "menus": {
         "expirationTimePicker": {

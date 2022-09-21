@@ -2,19 +2,28 @@ import { get } from 'svelte/store'
 import { selectedAccountId } from '@core/account'
 import { ledgerNanoStatus } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
-import {
-    MissingTransactionProgressEventPayloadError,
-    isPreparedTransaction,
-    isPreparedTransactionEssenceHash,
-} from '@core/profile-manager'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 import { closePopup, openPopup } from '@lib/popup'
-import { TransactionProgressEventPayload } from '../types'
 import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 
-export function handleTransactionProgressEvent(accountId: string, payload: TransactionProgressEventPayload): void {
+import { WalletApiEvent } from '../../enums'
+import { MissingTransactionProgressEventPayloadError } from '../../errors'
+import { isPreparedTransaction, isPreparedTransactionEssenceHash } from '../../helpers'
+import { TransactionProgressEventPayload } from '../../types'
+import { validateWalletApiEvent } from '../../utils'
+
+export function handleTransactionProgressEvent(error: Error, rawEvent: string): void {
+    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.TransactionProgress)
+    /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+    handleTransactionProgressEventInternal(accountIndex, payload as TransactionProgressEventPayload)
+}
+
+export function handleTransactionProgressEventInternal(
+    accountIndex: number,
+    payload: TransactionProgressEventPayload
+): void {
     if (get(isActiveLedgerProfile)) {
-        if (get(selectedAccountId) === accountId) {
+        if (get(selectedAccountId) === accountIndex.toString()) {
             openPopupIfVerificationNeeded(payload)
         }
     } else if (get(isOnboardingLedgerProfile)) {
