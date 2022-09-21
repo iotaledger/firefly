@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
+    import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest } from '@common/deep-links'
     import { Locale } from '@core/i18n'
     import {
         AccountRoute,
