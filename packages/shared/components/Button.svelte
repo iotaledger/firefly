@@ -86,7 +86,7 @@
     class:dark
     class:outline
     class:is-busy={isBusy}
-    style:--border-width={outline && '1px'}
+    style:--border-width={outline ? '1px' : '0px'}
     use:bindEvents={events}
     on:click|stopPropagation={onClick}
     bind:this={buttonElement}
