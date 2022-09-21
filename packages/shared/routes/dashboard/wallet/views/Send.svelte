@@ -558,7 +558,6 @@
                         classes="mb-6"
                     />
                     {#if showBridgeFields}
-                        <KeyValueBox value={'swapOut'} key={localize('general.index')} />
                         <KeyValueBox bind:value={$sendParams.chainId} key={localize('general.chainId')} />
                         <KeyValueBox
                             bind:value={$sendParams.receiverAddress}
