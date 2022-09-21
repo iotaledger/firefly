@@ -15,7 +15,7 @@
         if ($isOnboardingLedgerProfile) {
             checkOrConnectLedger(_continue)
         } else {
-            _continue
+            void _continue()
         }
     }
 
