@@ -2,7 +2,7 @@ import { AppTheme } from '../enums'
 import { IAppSettings } from '../interfaces'
 
 export const DEFAULT_APP_SETTINGS: IAppSettings = {
-    deepLinking: true,
+    deepLinking: false,
     language: 'en',
     theme: AppTheme.Light,
     darkMode: false,
