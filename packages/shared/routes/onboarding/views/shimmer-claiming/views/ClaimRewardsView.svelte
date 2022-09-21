@@ -64,7 +64,7 @@
 
     async function onSearchForRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            checkOrConnectLedger(searchForRewards)
+            void checkOrConnectLedger(searchForRewards)
         } else {
             await searchForRewards()
         }
@@ -84,14 +84,13 @@
                 closePopup(true)
                 pollLedgerNanoStatus()
             }
-            isClaimingRewards = false
             hasTriedClaimingRewards = true
         }
     }
 
     async function onClaimRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            checkOrConnectLedger(claimRewards)
+            void checkOrConnectLedger(claimRewards)
         } else {
             await claimRewards()
         }
