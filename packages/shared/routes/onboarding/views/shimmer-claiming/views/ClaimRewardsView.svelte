@@ -25,7 +25,7 @@
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
     let isSearchingForRewards = false
-    const hasSearchedForRewardsBefore = false
+    let hasSearchedForRewardsBefore = false
 
     let hasTriedClaimingRewards = false
 
@@ -57,6 +57,7 @@
             if ($isOnboardingLedgerProfile) {
                 pollLedgerNanoStatus()
             }
+            hasSearchedForRewardsBefore = true
             isSearchingForRewards = false
         }
     }
