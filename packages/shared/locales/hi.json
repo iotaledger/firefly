@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "हटाएँ {name}?",
             "body": "इस वॉलेट का कोई लेन-देन इतिहास नहीं है। इसे सुरक्षित रूप से हटाया जा सकता है।",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "पता प्राप्त करने की पुष्टि करें",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 महीना"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "जारी रखें",
         "back": "पीछे",
         "previous": "पिछला",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "बैलेंस",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "आने वाला",
         "outgoing": "बाहर जाने वाले",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "राशि अमान्य संख्या प्रतीत होती है",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "ट्रांसफ़र राशि शून्य से अधिक होनी चाहिए",
             "wrongAddressPrefix": "पते {prefix} उपसर्ग से शुरू होते हैं",
             "wrongAddressFormat": "पता सही रूप से स्वरूपित नहीं है।",
             "invalidAddress": "पता मान्य नहीं है",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "इस वॉलेट में अपर्याप्त राशि है।",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "आपने फंड भेजने के लिए वॉलेट का चयन नहीं किया है।",
             "sendingDust": "आप 1 Mi से कम नहीं भेज सकते",
             "leavingDust": "आप अपने पते पर 1 Mi से कम नहीं छोड़ सकते।",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "आपके लेजर डिवाइस पर गलत ऐप खुला है।",
             "locked": "कृपया पिन दर्ज करके अपने लेजर डिवाइस को अनलॉक करें।",
             "mnemonicMismatch": "आपने गलत लेज़र डिवाइस कनेक्ट किया है या स्मरक बदल गया है।",
-            "notConnected": "कोई लेजर डिवाइस नहीं मिला।",
+            "notConnected": "No Ledger device detected.",
             "notFound": "लेज़र डिवाइस नहीं मिला।",
             "otherConnected": "आपके लेजर डिवाइस पर गलत ऐप खुला है।",
             "generateAddress": "पता जनरेट करने में त्रुटि हुई थी.",

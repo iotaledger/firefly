@@ -1,14 +1,13 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingButton, Link, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import features from '@features/features'
     import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import { formatProtocolName } from '@core/network'
     import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
-    import { Platform } from '@lib/platform'
 
     function onProfileSetupSelectionClick(setupType: ProfileSetupType): void {
         updateOnboardingProfile({ setupType })
@@ -33,21 +32,12 @@
             })}</Text
         >
     </div>
-    <div slot="leftpane__content" class:hidden={$onboardingProfile?.networkProtocol !== NetworkProtocol.IOTA}>
-        <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-16 p-8 pt-16">
-            <div class="absolute -top-14">
-                <Logo width="auto" height="auto" logo="logo-chrysalis-gem" />
-            </div>
-            <Text type="h3" classes="mb-6 text-center"
-                >{localize('views.onboarding.profileSetup.setup.chrysalisTitle')}</Text
-            >
-            <Text type="p" secondary classes="mb-8"
-                >{localize('views.onboarding.profileSetup.setup.chrysalisBody')}</Text
-            >
-            <Link onClick={() => Platform.openUrl('https://blog.iota.org/firefly-token-migration/')}>
-                {localize('views.onboarding.profileSetup.setup.learnMore')}
-            </Link>
-        </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-8"
+            >{localize('views.onboarding.profileSetup.setup.body', {
+                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+            })}</Text
+        >
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton

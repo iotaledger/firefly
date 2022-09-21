@@ -2,8 +2,13 @@
     import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { displayNotificationForLedgerProfile, getLedgerDeviceStatus } from '@core/ledger'
-    import { subscribeToWalletApiEvents, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
+    import {
+        displayNotificationForLedgerProfile,
+        getLedgerDeviceStatus,
+        pollLedgerNanoStatus,
+        stopPollingLedgerNanoStatus,
+    } from '@core/ledger'
+    import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { shimmerClaimingRouter } from '@core/router'
     import {
         canUserClaimRewards,
@@ -16,7 +21,9 @@
         hasUserClaimedRewards,
         isOnboardingLedgerProfile,
         onboardingProfile,
+        ShimmerClaimingAccountState,
         shimmerClaimingProfileManager,
+        subscribeToWalletApiEventsForShimmerClaiming,
     } from '@contexts/onboarding'
     import { closePopup } from '@lib/popup'
 
@@ -25,8 +32,11 @@
     let isSearchingForRewards = false
     let hasSearchedForRewardsBefore = false
 
-    let isClaimingRewards = false
     let hasTriedClaimingRewards = false
+
+    $: isClaimingRewards = shimmerClaimingAccounts.some(
+        (shimmerClaimingAccount) => shimmerClaimingAccount.state === ShimmerClaimingAccountState.Claiming
+    )
 
     $: shouldSearchForRewardsButtonBeEnabled = !isSearchingForRewards && !isClaimingRewards
     $: shouldClaimRewardsButtonBeEnabled =
@@ -46,12 +56,20 @@
     async function searchForRewards(): Promise<void> {
         try {
             isSearchingForRewards = true
+            if ($isOnboardingLedgerProfile) {
+                stopPollingLedgerNanoStatus()
+            }
             await findShimmerRewards()
         } catch (err) {
             throw new FindShimmerRewardsError()
         } finally {
             isSearchingForRewards = false
             hasSearchedForRewardsBefore = true
+            if ($isOnboardingLedgerProfile) {
+                pollLedgerNanoStatus({
+                    profileManager: shimmerClaimingProfileManager,
+                })
+            }
         }
     }
 
@@ -91,15 +109,8 @@
     }
 
     async function onMountHelper(): Promise<void> {
-        if ($isOnboardingLedgerProfile) {
-            /**
-             * NOTE: We have to register and event handler for transaction
-             * progress specifically for Ledger profiles, since the user
-             * MUST confirm what is displayed in the UI matches what is prompted
-             * on the actual Ledger device.
-             */
-            subscribeToWalletApiEvents(shimmerClaimingProfileManager)
-        }
+        subscribeToWalletApiEventsForShimmerClaiming()
+        await $shimmerClaimingProfileManager.startBackgroundSync({ syncOnlyMostBasicOutputs: true })
 
         /**
          * NOTE: If the user only has one Shimmer claiming account,
@@ -124,10 +135,16 @@
         void onMountHelper()
     })
 
-    onDestroy(() => {
+    async function onDestroyHelper(): Promise<void> {
+        unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
+        await $shimmerClaimingProfileManager?.stopBackgroundSync()
         if ($isOnboardingLedgerProfile) {
-            unsubscribeFromWalletApiEvents(shimmerClaimingProfileManager)
+            stopPollingLedgerNanoStatus()
         }
+    }
+
+    onDestroy(() => {
+        void onDestroyHelper()
     })
 </script>
 
