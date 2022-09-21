@@ -82,6 +82,7 @@
     }
 
     const unsubscribeHeaderScale = headerScale.subscribe((curr) => mobileHeaderAnimation.set(curr))
+    const [safeArea] = getComputedStyle(document.documentElement).getPropertyValue('--sat').split('px')
 
     let unsubscribeLiftDasboard = () => {}
     let unsubscribeScrollDetection = () => {}
@@ -89,6 +90,7 @@
     const viewableAccounts = getContext<Readable<WalletAccount[]>>('viewableAccounts')
 
     let modal: Modal
+    let bottomOffset = '0px'
 
     $: {
         if ($isDeepLinkRequestActive && $sendParams && $sendParams.address) {
@@ -96,6 +98,9 @@
             isDeepLinkRequestActive.set(false)
         }
     }
+
+    $: bottomNavigation?.getHeight(),
+        (bottomOffset = `${headerHeight * 0.6 - (bottomNavigation?.getHeight() - parseInt(safeArea) / 2)}px`)
 
     let isGeneratingAddress = false
 
@@ -440,7 +445,6 @@
     }
 
     function liftDashboard(node: HTMLElement): void {
-        const [safeArea] = getComputedStyle(document.documentElement).getPropertyValue('--sat').split('px')
         node.style.zIndex = '0'
         unsubscribeLiftDasboard = headerScale.subscribe((curr) => {
             const topOffset = parseInt(safeArea) * (1 - curr)
@@ -519,11 +523,7 @@
                         {#if $walletRoute === WalletRoute.Assets}
                             <div class="h-full" in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 200 }}>
                                 {#key $haveStakingResultsCached}
-                                    <AccountAssets
-                                        {scroll}
-                                        {scrollDetection}
-                                        bottomOffset="{bottomNavigation?.getHeight()}px"
-                                    />
+                                    <AccountAssets {scroll} {scrollDetection} {bottomOffset} />
                                 {/key}
                             </div>
                         {:else if $walletRoute === WalletRoute.AccountHistory}
@@ -532,7 +532,7 @@
                                     {scroll}
                                     {scrollDetection}
                                     transactions={getAccountMessages($selectedAccountStore)}
-                                    bottomOffset="{bottomNavigation?.getHeight() * 0.8}px"
+                                    {bottomOffset}
                                 />
                             </div>
                         {/if}
