@@ -2,12 +2,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import {
-        displayNotificationForLedgerProfile,
-        getLedgerDeviceStatus,
-        pollLedgerNanoStatus,
-        stopPollingLedgerNanoStatus,
-    } from '@core/ledger'
+    import { checkOrConnectLedger, pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { shimmerClaimingRouter } from '@core/router'
     import {
@@ -46,10 +41,6 @@
         $shimmerClaimingRouter.previous()
     }
 
-    function _onLedgerNotConnected(): void {
-        displayNotificationForLedgerProfile('error', true)
-    }
-
     async function searchForRewards(): Promise<void> {
         try {
             isSearchingForRewards = true
@@ -61,18 +52,16 @@
         } catch (err) {
             throw new FindShimmerRewardsError()
         } finally {
-            isSearchingForRewards = false
             if ($isOnboardingLedgerProfile) {
-                pollLedgerNanoStatus({
-                    profileManager: shimmerClaimingProfileManager,
-                })
+                pollLedgerNanoStatus()
             }
+            isSearchingForRewards = false
         }
     }
 
     async function onSearchForRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            await getLedgerDeviceStatus(searchForRewards, _onLedgerNotConnected, _onLedgerNotConnected)
+            checkOrConnectLedger(searchForRewards)
         } else {
             await searchForRewards()
         }
@@ -81,19 +70,23 @@
     async function claimRewards(): Promise<void> {
         try {
             hasTriedClaimingRewards = true
+            if ($isOnboardingLedgerProfile) {
+                stopPollingLedgerNanoStatus()
+            }
             await claimShimmerRewards()
         } catch (err) {
             throw new ClaimShimmerRewardsError()
         } finally {
             if ($isOnboardingLedgerProfile) {
                 closePopup(true)
+                pollLedgerNanoStatus()
             }
         }
     }
 
     async function onClaimRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            await getLedgerDeviceStatus(claimRewards, _onLedgerNotConnected, _onLedgerNotConnected)
+            checkOrConnectLedger(claimRewards)
         } else {
             await claimRewards()
         }
@@ -117,10 +110,16 @@
         if ($onboardingProfile?.shimmerClaimingAccounts?.length === 1) {
             try {
                 isSearchingForRewards = true
+                if ($isOnboardingLedgerProfile) {
+                    stopPollingLedgerNanoStatus()
+                }
                 await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
             } catch (err) {
                 throw new FindShimmerRewardsError()
             } finally {
+                if ($isOnboardingLedgerProfile) {
+                    pollLedgerNanoStatus()
+                }
                 isSearchingForRewards = false
             }
         }
