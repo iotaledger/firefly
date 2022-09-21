@@ -1,3 +1,4 @@
+import Big from 'big.js'
 import { convertDateToUnixTimestamp } from '@core/utils'
 import type { OutputOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
@@ -7,7 +8,7 @@ import { selectedAccountAssets } from '../stores'
 export function getOutputOptions(
     expirationDate: Date,
     recipientAddress: string,
-    rawAmount: number,
+    rawAmount: Big,
     metadata: string,
     tag: string,
     asset?: IAsset,
@@ -15,9 +16,10 @@ export function getOutputOptions(
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
+    const bigAmount = BigInt(rawAmount.toNumber())
     return <OutputOptions>{
         recipientAddress,
-        amount: nativeTokenId ? '0' : String(rawAmount),
+        amount: nativeTokenId ? '0' : bigAmount.toString(),
         features: {
             ...(metadata && { metadata }),
             ...(tag && { tag }),
@@ -30,7 +32,7 @@ export function getOutputOptions(
                 nativeTokens: [
                     {
                         id: nativeTokenId,
-                        amount: '0x' + rawAmount.toString(16),
+                        amount: '0x' + bigAmount.toString(16),
                     },
                 ],
             },

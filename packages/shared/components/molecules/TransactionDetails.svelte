@@ -107,7 +107,7 @@
             <transaction-value class="flex flex-col items-center">
                 <div class="flex flex-row space-x-3">
                     <AssetIcon {asset} />
-                    <div class="flex flex-row items-baseline space-x-0.1">
+                    <div class="flex flex-row flex-wrap justify-center items-baseline space-x-0.1">
                         <Text type="h1" fontWeight={FontWeight.semibold}>
                             {amount}
                         </Text>
