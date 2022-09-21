@@ -500,6 +500,11 @@
   resolved "https://registry.npmjs.org/@iota/types/-/types-1.0.0-beta.11.tgz"
   integrity sha512-jFma7n4dpf+AikSIvY6CzrDDQ/TVnlV3HBIeOrDUDJku3oCcOkm8Jp/i0uKSD/krP2BAcDrWrNUr5Tn9MIw7+A==
 
+"@iota/types@^1.0.0-beta.15":
+  version "1.0.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@iota/types/-/types-1.0.0-beta.15.tgz#1a1f5722ef176a45d03e92f4cb5bd9a4ea74ec27"
+  integrity sha512-67DrzDO5bl2c7RIMpOdtjdOa27Bv1EmX/BHPTQD8c3RtPPAzJpSIpuI8JsIDl3U6Qe4zdLX3kRv9zGBXcr0fZA==
+
 "@iota/types@^1.0.0-beta.9":
   version "1.0.0-beta.9"
   resolved "https://registry.npmjs.org/@iota/types/-/types-1.0.0-beta.9.tgz"
@@ -520,15 +525,15 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.2-alpha.24":
-  version "2.0.2-alpha.24"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.24.tgz#c601361d9249f7bc78adf54ef32ba968bec33fee"
-  integrity sha512-qIOxapo1XOvPmYhSLXZqXwKgAVljLWjXM+Nn6CZ/kcIkeQfToHR0wMpy6HAKGWZen6lJvTcqq1ldT2T3QvxWMQ==
+"@iota/wallet@2.0.2-alpha.27":
+  version "2.0.2-alpha.27"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.27.tgz#6ba7db368bdb65c9583d10eca306db13dd717a21"
+  integrity sha512-lXt+2572HXByA+pTp2NEIGmkavbC9PjtUnzGRDemMc7y/cnee+Q/lUs/g+vVepr5gLX/Ug8SenNcgRR7FOKFzg==
   dependencies:
-    "@iota/types" "^1.0.0-beta.11"
+    "@iota/types" "^1.0.0-beta.15"
     cargo-cp-artifact "^0.1.5"
     prebuild-install "^7.1.1"
-    typescript "^4.7.4"
+    typescript "^4.8.3"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -8641,10 +8646,10 @@ typescript@*, typescript@^3.9.5:
   resolved "https://registry.npmjs.org/typescript/-/typescript-3.9.7.tgz"
   integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
 
-typescript@^4.7.4:
-  version "4.7.4"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.7.4.tgz"
-  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
+typescript@^4.8.3:
+  version "4.8.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.3.tgz#d59344522c4bc464a65a730ac695007fdb66dd88"
+  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
 
 union-value@^1.0.0:
   version "1.0.1"
