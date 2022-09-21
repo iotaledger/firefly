@@ -4,6 +4,7 @@
     import { showAppNotification } from '@lib/notifications'
     import { openPopup } from '@lib/popup'
     import { Button } from 'shared/components'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let isBusy = false
     export let message = ''
@@ -56,6 +57,12 @@
     }
 </script>
 
-<Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={isBusy} {...$$restProps}>
+<Button
+    size={ButtonSize.Medium}
+    inlineStyle="min-width: 156px;"
+    onClick={handleExportClick}
+    disabled={isBusy}
+    {...$$restProps}
+>
     {overrideTitle || localize('actions.export')}
 </Button>

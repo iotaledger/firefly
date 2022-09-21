@@ -11,7 +11,7 @@
 </script>
 
 {#if busy || message}
-    <div class={`flex flex-row items-center ${classes}`}>
+    <spinner-container class={`flex flex-row items-center ${classes}`}>
         {#if busy}
             <Icon
                 icon="refresh"
@@ -23,5 +23,5 @@
         {#if message}
             <Text type="p" classes="ml-2" secondary>{message}</Text>
         {/if}
-    </div>
+    </spinner-container>
 {/if}

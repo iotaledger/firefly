@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { Button, KeyValueBox, Spinner, Text, TextHint } from 'shared/components'
+    import { Button, KeyValueBox, Text, TextHint } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
     import { closePopup, openPopup } from '@lib/popup'
     import { showAppNotification } from '@lib/notifications'
@@ -139,13 +139,17 @@
 </div>
 
 <div class="flex flex-row flex-nowrap w-full space-x-4 mt-6">
-    <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>
+    <Button classes="w-full" outline onClick={handleCancelClick} disabled={isBusy}>
         {localize('actions.cancel')}
     </Button>
-    <Button classes="w-full" onClick={handleFindBalances} disabled={isBusy}>
-        {#if isBusy}
-            <Spinner busy={true} message={localize('actions.searching')} classes="justify-center" />
-        {:else if hasUsedWalletFinder}
+    <Button
+        classes="w-full"
+        onClick={handleFindBalances}
+        disabled={isBusy}
+        {isBusy}
+        busyMessage={localize('actions.searching')}
+    >
+        {#if hasUsedWalletFinder}
             {localize('actions.searchAgain')}
         {:else}
             {localize('actions.search')}
