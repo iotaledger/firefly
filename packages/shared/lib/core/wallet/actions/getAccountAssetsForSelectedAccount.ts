@@ -1,6 +1,7 @@
 import { selectedAccount } from '@core/account'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile } from '@core/profile'
+import { isValidIRC30 } from '@lib/utils/isValidIRC30'
 import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
 import { IAccountAssets } from '../interfaces/account-assets.interface'
@@ -23,7 +24,7 @@ export function getAccountAssetsForSelectedAccount(): IAccountAssets {
     const tokens = account?.balances?.nativeTokens ?? []
     for (const token of tokens) {
         const persistedAsset = getAssetFromPersistedAssets(token.tokenId)
-        if (persistedAsset) {
+        if (persistedAsset && isValidIRC30(persistedAsset.metadata)) {
             nativeTokens.push({
                 ...persistedAsset,
                 balance: {
