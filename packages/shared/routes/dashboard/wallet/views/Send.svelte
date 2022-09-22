@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { accountRouter } from '@core/router'
+    import { accountRouter, backButtonStore } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, Illustration, Input, ProgressBar, Text } from 'shared/components'
     import {
@@ -20,7 +20,7 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
-    import { startQRScanner } from 'shared/lib/device'
+    import { startQRScanner, stopQRScanner } from 'shared/lib/device'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -431,16 +431,19 @@
 
     const onQRClick = (): void => {
         const onSuccess = (result: string) => {
+            $backButtonStore?.pop()
             selectedSendType = SEND_TYPE.EXTERNAL
             to = null
             address = result
         }
         const onError = (): void => {
+            $backButtonStore?.pop()
             showAppNotification({
                 type: 'error',
                 message: localize('error.global.generic'),
             })
         }
+        $backButtonStore?.add(stopQRScanner as () => Promise<void>)
         void startQRScanner(onSuccess, onError)
     }
 

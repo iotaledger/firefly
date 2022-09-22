@@ -69,6 +69,7 @@
     })
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
+        if (preventClose) return
         // Calc slide gesture velocity between events
         const displacement = fromLeft ? event.detail.endX - event.detail.initX : event.detail.endY - event.detail.initY
         const time = (event.detail.endTime - event.detail.initTime) / 1000
@@ -110,6 +111,7 @@
     }
 
     export async function close(): Promise<void> {
+        if (preventClose) return
         await coords.set(
             {
                 x: fromLeft ? -viewportLength : 0,
