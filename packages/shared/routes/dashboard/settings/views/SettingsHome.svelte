@@ -54,7 +54,7 @@
                     Platform.openUrl(ExternalRoute.FAQ)
                     break
                 case HelpAndInfo.ReportAnIssue:
-                    Platform.openUrl(ExternalRoute.FAQ)
+                    Platform.openUrl(ExternalRoute.IssueReport)
                     break
             }
         } else {
