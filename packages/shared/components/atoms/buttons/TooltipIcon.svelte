@@ -8,23 +8,23 @@
     export let height: number = 16
     export let classes: string = ''
 
-    let tooltipAnchor
-    let showTooltip = false
+    let tooltipAnchor: HTMLElement
+    let isTooltipVisible = false
 
-    function _showTooltip(show: boolean): void {
-        showTooltip = show
+    function showTooltip(show: boolean): void {
+        isTooltipVisible = show
     }
 </script>
 
 <div
-    on:mouseenter={() => _showTooltip(true)}
-    on:mouseleave={() => _showTooltip(false)}
+    on:mouseenter={() => showTooltip(true)}
+    on:mouseleave={() => showTooltip(false)}
     bind:this={tooltipAnchor}
     class="text-gray-600 {classes}"
 >
     <Icon {width} {height} {icon} />
 </div>
-{#if showTooltip}
+{#if isTooltipVisible}
     <Tooltip anchor={tooltipAnchor} position="right">
         <Text type="h5" classes="text-left mb-2">{title}</Text>
         <Text classes="text-left">{text}</Text>
