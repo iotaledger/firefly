@@ -1,24 +1,22 @@
 import { Writable } from 'svelte/store'
 
-import { AccountMeta } from '@iota/wallet'
-
 import { getBoundAccount, IAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { IProfileManager, profileManager as _profileManager } from '@core/profile-manager'
 import { sortAccountsByIndex } from '@core/utils'
 
 export async function getSortedRenamedBoundAccounts(
-    accountMetadataList: AccountMeta[],
+    accounts: IAccount[],
     profileManager: Writable<IProfileManager> = _profileManager
 ): Promise<IAccount[]> {
     return (
         await Promise.all(
-            accountMetadataList.map(async (accountMetadata) => {
-                const account = await getBoundAccount(accountMetadata?.index, true, profileManager)
-                account.meta.alias = Number.isNaN(accountMetadata?.alias)
-                    ? accountMetadata?.alias
-                    : `${localize('general.account')} ${accountMetadata?.index + 1}`
-                return account
+            accounts.map(async (account) => {
+                const boundAccount = await getBoundAccount(account?.meta?.index, true, profileManager)
+                boundAccount.meta.alias = Number.isNaN(account?.meta?.alias)
+                    ? account?.meta?.alias
+                    : `${localize('general.account')} ${account?.meta?.index + 1}`
+                return boundAccount
             })
         )
     ).sort(sortAccountsByIndex)

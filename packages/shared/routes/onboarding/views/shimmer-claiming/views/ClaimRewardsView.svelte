@@ -2,12 +2,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import {
-        displayNotificationForLedgerProfile,
-        getLedgerDeviceStatus,
-        pollLedgerNanoStatus,
-        stopPollingLedgerNanoStatus,
-    } from '@core/ledger'
+    import { checkOrConnectLedger, pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { shimmerClaimingRouter } from '@core/router'
     import {
@@ -17,6 +12,7 @@
         findShimmerRewards,
         FindShimmerRewardsError,
         findShimmerRewardsForAccount,
+        hasNoUnclaimedRewards,
         hasUserClaimedRewards,
         isOnboardingLedgerProfile,
         onboardingProfile,
@@ -40,20 +36,17 @@
     $: shouldSearchForRewardsButtonBeEnabled = !isSearchingForRewards && !isClaimingRewards
     $: shouldClaimRewardsButtonBeEnabled =
         canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
-    $: shouldShowContinueButton = hasUserClaimedRewards(shimmerClaimingAccounts)
+    $: shouldShowContinueButton =
+        hasUserClaimedRewards(shimmerClaimingAccounts) ||
+        (hasSearchedForRewardsBefore && hasNoUnclaimedRewards(shimmerClaimingAccounts))
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
     }
 
-    function _onLedgerNotConnected(): void {
-        displayNotificationForLedgerProfile('error', true)
-    }
-
     async function searchForRewards(): Promise<void> {
         try {
             isSearchingForRewards = true
-            hasSearchedForRewardsBefore = true
             if ($isOnboardingLedgerProfile) {
                 stopPollingLedgerNanoStatus()
             }
@@ -61,18 +54,17 @@
         } catch (err) {
             throw new FindShimmerRewardsError()
         } finally {
-            isSearchingForRewards = false
             if ($isOnboardingLedgerProfile) {
-                pollLedgerNanoStatus({
-                    profileManager: shimmerClaimingProfileManager,
-                })
+                pollLedgerNanoStatus()
             }
+            hasSearchedForRewardsBefore = true
+            isSearchingForRewards = false
         }
     }
 
     async function onSearchForRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            await getLedgerDeviceStatus(searchForRewards, _onLedgerNotConnected, _onLedgerNotConnected)
+            void checkOrConnectLedger(searchForRewards)
         } else {
             await searchForRewards()
         }
@@ -81,19 +73,24 @@
     async function claimRewards(): Promise<void> {
         try {
             hasTriedClaimingRewards = true
+            if ($isOnboardingLedgerProfile) {
+                stopPollingLedgerNanoStatus()
+            }
             await claimShimmerRewards()
         } catch (err) {
             throw new ClaimShimmerRewardsError()
         } finally {
             if ($isOnboardingLedgerProfile) {
                 closePopup(true)
+                pollLedgerNanoStatus()
             }
+            hasTriedClaimingRewards = true
         }
     }
 
     async function onClaimRewardsClick(): Promise<void> {
         if ($isOnboardingLedgerProfile) {
-            await getLedgerDeviceStatus(claimRewards, _onLedgerNotConnected, _onLedgerNotConnected)
+            void checkOrConnectLedger(claimRewards)
         } else {
             await claimRewards()
         }
@@ -117,10 +114,16 @@
         if ($onboardingProfile?.shimmerClaimingAccounts?.length === 1) {
             try {
                 isSearchingForRewards = true
+                if ($isOnboardingLedgerProfile) {
+                    stopPollingLedgerNanoStatus()
+                }
                 await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
             } catch (err) {
                 throw new FindShimmerRewardsError()
             } finally {
+                if ($isOnboardingLedgerProfile) {
+                    pollLedgerNanoStatus()
+                }
                 isSearchingForRewards = false
             }
         }
@@ -167,7 +170,7 @@
             {localize(`actions.${hasSearchedForRewardsBefore ? 'searchAgain' : 'searchForRewards'}`)}
         </Button>
         {#if shouldShowContinueButton}
-            <Button classes="w-full" onClick={onContinueClick}>
+            <Button classes="w-full" disabled={isSearchingForRewards} onClick={onContinueClick}>
                 {localize('actions.continue')}
             </Button>
         {:else}

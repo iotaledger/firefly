@@ -40,22 +40,20 @@
             icon={Icon.Doc}
             title={localize('actions.viewStorageDeposit')}
             onClick={handleViewStorageDepositClick}
-            first
         />
         <MenuItem
             icon={Icon.Customize}
             title={localize('actions.customizeAcount')}
             onClick={handleCustomiseAccountClick}
         />
-        <ToggleHiddenAccountMenuItem onClick={() => modal.close()} last />
+        <ToggleHiddenAccountMenuItem onClick={() => modal.close()} />
         <HR />
         {#if showDeleteAccount}
             <MenuItem
                 icon={Icon.Delete}
                 title={localize('actions.deleteAccount')}
                 onClick={handleDeleteAccountClick}
-                first
-                last
+                variant="error"
             />
         {/if}
     </div>

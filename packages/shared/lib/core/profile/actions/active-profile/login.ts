@@ -58,7 +58,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             if (loginOptions) {
                 const { isFromOnboardingFlow, shouldRecoverAccounts, shouldCreateAccount } = loginOptions
                 if (isFromOnboardingFlow && shouldRecoverAccounts) {
-                    const accountMetadatas = await recoverAccounts(
+                    const accounts = await recoverAccounts(
                         0,
                         INITIAL_ACCOUNT_GAP_LIMIT[type],
                         INITIAL_ADDRESS_GAP_LIMIT[type],
@@ -69,7 +69,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                      * NOTE: In the case no accounts with funds were recovered, we must
                      * create one for the new profile.
                      */
-                    if (accountMetadatas?.length === 0) {
+                    if (accounts?.length === 0) {
                         await createNewAccount()
                     }
                 } else if (isFromOnboardingFlow && shouldCreateAccount) {
