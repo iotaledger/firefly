@@ -33,11 +33,12 @@ export interface IAccount {
     buildBasicOutput(data: BuildBasicOutputData): Promise<IBasicOutput>
     buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput>
     buildNftOutput(data: BuildNftOutputData): Promise<INftOutput>
-    claimOutputs(outputIds: string[]): Promise<Transaction[]>
-    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction[]>
+    // TODO: add burnNativeTokenMethod + missing methods https://github.com/iotaledger/wallet.rs/blob/develop/bindings/nodejs/CHANGELOG.md#202-alpha25
+    claimOutputs(outputIds: string[]): Promise<Transaction>
+    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction>
     generateAddress(options?: AddressGenerationOptions): Promise<Address>
     generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
-    getAlias(): string
+    getMetadata(): string
     getBalance(): Promise<AccountBalance>
     getFoundryOutput(tokenId: string): Promise<IFoundryOutput>
     getOutput(outputId: string): Promise<OutputData>
@@ -76,5 +77,4 @@ export interface IAccount {
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
     sync(options?: AccountSyncOptions): Promise<AccountBalance>
-    tryClaimOutputs(outputsToClaim: OutputsToClaim): Promise<Transaction[]>
 }

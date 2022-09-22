@@ -67,11 +67,11 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction[]> {
+    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    getAlias(): string {
+    getMetadata(): string {
         return ''
     }
 
@@ -79,8 +79,8 @@ export class AccountMock implements IAccount {
         return Promise.resolve(MOCK_ACCOUNT_BALANCE)
     }
 
-    claimOutputs(): Promise<Transaction[]> {
-        return Promise.resolve([])
+    claimOutputs(): Promise<Transaction> {
+        throw new Error('Method not implemented.')
     }
 
     getOutput(outputId: string): Promise<OutputData> {
@@ -227,10 +227,6 @@ export class AccountMock implements IAccount {
     }
 
     sync(options?): Promise<AccountBalance> {
-        throw new Error('Method not implemented.')
-    }
-
-    tryClaimOutputs(outputsToClaim: OutputsToClaim): Promise<Transaction[]> {
         throw new Error('Method not implemented.')
     }
 }
