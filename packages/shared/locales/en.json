@@ -1575,7 +1575,8 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
-        }
+        },
+        "optionalInput": "This optional input will be public on the explorer and viewable by everyone."
     },
     "exports": {
         "transactionHistoryCsv": {
