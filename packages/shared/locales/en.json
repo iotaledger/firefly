@@ -179,9 +179,10 @@
                 }
             },
             "congratulations": {
-                "title": "Profile setup complete",
+                "title": "Profile setup is almost complete",
                 "fundsMigrated": "Funds migrated",
-                "body": "Your new profile is ready to use.",
+                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
+                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
                 "softwareMigratedBody": "You have successfully migrated your funds to the new network",
                 "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
                 "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",

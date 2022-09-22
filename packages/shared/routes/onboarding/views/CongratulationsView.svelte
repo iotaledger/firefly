@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Animation, Button, Icon, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, Icon, OnboardingLayout, Text, TextHint } from 'shared/components'
     import { onDestroy, onMount } from 'svelte'
     import { mobile } from '@core/app'
     import { onboardingRouter, ledgerSetupRouter } from '@core/router'
@@ -21,7 +21,7 @@
 
     function _continue(): Promise<void> {
         completeOnboardingProcess()
-        $onboardingRouter.next()
+        $onboardingRouter.next({ ledgerRecovery: true })
         return Promise.resolve()
     }
 
@@ -37,7 +37,7 @@
 </script>
 
 <OnboardingLayout allowBack={false}>
-    <div slot="leftpane__content">
+    <div slot="leftpane__content" class="flex flex-col space-y-6">
         <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-10 p-10 pb-6">
             <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="success-check" classes="text-white" />
@@ -47,6 +47,9 @@
                 >{localize(`views.onboarding.congratulations.${localizedBody}`)}</Text
             >
         </div>
+        {#if $isOnboardingLedgerProfile}
+            <TextHint warning text={localize('views.onboarding.congratulations.ledgerHint')} />
+        {/if}
     </div>
     <div slot="leftpane__action">
         <Button autofocus classes="w-full" onClick={onContinueClick}>
