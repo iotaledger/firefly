@@ -57,9 +57,7 @@
                     <slot name="key" />
                 {/if}
                 {#if tooltipText}
-                    <div class="ml-1">
-                        <TooltipIcon text={tooltipText} title={keyText} width={12} height={12} />
-                    </div>
+                    <TooltipIcon text={tooltipText} title={keyText} width={12} height={12} classes="ml-1" />
                 {/if}
             </div>
             {#if valueText}

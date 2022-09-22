@@ -26,7 +26,6 @@
     import { truncateString } from '@lib/helpers'
     import { setClipboard } from '@lib/utils'
     import { time } from '@core/app'
-    import {} from '@auxiliary/deep-link'
 
     export let asset: IAsset
     export let asyncStatus: ActivityAsyncStatus = null
