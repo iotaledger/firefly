@@ -15,7 +15,6 @@
         "big.js": "^6.0.3",
         "chart.js": "^2.9.3",
         "lottie-web": "^5.7.8",
-        "qr.js": "0.0.0",
         "svelte": "^3.49.0",
         "svelte-i18n": "^3.0.4",
         "svelty-picker": "^1.3.0",
