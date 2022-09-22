@@ -959,6 +959,8 @@
         "chooseFile": "Choose a File",
         "dropHere": "Drop your file here",
         "syncAll": "Sync all",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Export",
         "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
@@ -1239,7 +1241,9 @@
         "developerTools": "Developer tools",
         "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
     },
     "filters":{
         "title": "Filters",

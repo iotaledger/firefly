@@ -131,7 +131,7 @@
     </div>
     <div slot="leftpane__action">
         {#if verified}
-            <Button autofocus classes="w-full" onClick={() => onContinueClick()} disabled={busy}>
+            <Button autofocus classes="w-full" onClick={onContinueClick} disabled={busy}>
                 {localize('actions.continue')}
             </Button>
         {:else if $mobile && !verified}

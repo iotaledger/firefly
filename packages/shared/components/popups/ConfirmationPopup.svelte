@@ -3,6 +3,7 @@
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
+    import { ButtonVariant } from 'shared/components/Button.svelte'
 
     export let title: string
     export let description: string
@@ -45,7 +46,9 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={cancelClick}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" warning={warning || danger} onClick={confirmClick}>{confirmText}</Button>
+        <Button classes="w-full" outline onClick={cancelClick}>{localize('actions.cancel')}</Button>
+        <Button classes="w-full" variant={(warning || danger) && ButtonVariant.Warning} onClick={confirmClick}
+            >{confirmText}</Button
+        >
     </popup-buttons>
 </div>
