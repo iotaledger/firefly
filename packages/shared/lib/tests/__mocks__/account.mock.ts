@@ -9,6 +9,7 @@ import type {
 } from '@iota/types'
 import {
     AccountBalance,
+    AccountMetadata,
     Address,
     AddressNativeTokens,
     AddressNftId,
@@ -114,8 +115,8 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    getMetadata(): string {
-        return ''
+    getMetadata(): AccountMetadata {
+        throw new Error('Method not implemented.')
     }
 
     getOutput(outputId: string): Promise<OutputData> {

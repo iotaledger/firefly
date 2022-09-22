@@ -35,6 +35,7 @@ import {
     OutputOptions,
     FilterOptions,
     IncreaseNativeTokenSupplyOptions,
+    AccountMetadata,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -62,7 +63,7 @@ export interface IAccount {
     generateAddresses(amount: number, options?: AddressGenerationOptions): Promise<Address[]>
     getBalance(): Promise<AccountBalance>
     getFoundryOutput(tokenId: string): Promise<IFoundryOutput>
-    getMetadata(): string
+    getMetadata(): AccountMetadata
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
     getTransaction(transactionId: string): Promise<Transaction>
