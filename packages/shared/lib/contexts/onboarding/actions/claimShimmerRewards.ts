@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
-import { BASE_TOKEN, COIN_TYPE, NetworkProtocol, SECONDS_PER_MILESTONE } from '@core/network'
+import { BASE_TOKEN, COIN_TYPE, NetworkProtocol } from '@core/network'
 import {
     DEFAULT_TRANSACTION_OPTIONS,
     formatTokenAmountBestMatch,
@@ -9,15 +9,11 @@ import {
     getOutputOptions,
     resetNewTransactionDetails,
     setNewTransactionDetails,
-    validateSendConfirmation,
 } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
-import { sleep } from '@lib/utils'
 import type { Transaction } from '@iota/wallet'
 
 import { ShimmerClaimingAccountState } from '../enums'
-import { prepareShimmerClaimingAccount } from '../helpers'
 import { IShimmerClaimingAccount } from '../interfaces'
 import {
     isOnboardingLedgerProfile,
@@ -44,13 +40,6 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
                 state: ShimmerClaimingAccountState.Claiming,
             })
             await claimShimmerRewardsForShimmerClaimingAccount(shimmerClaimingAccount)
-            showAppNotification({
-                type: 'success',
-                alert: true,
-                message: localize('notifications.claimShimmerRewards.success', {
-                    values: { accountAlias: shimmerClaimingAccount?.meta?.alias },
-                }),
-            })
         } catch (err) {
             updateShimmerClaimingAccount({
                 ...shimmerClaimingAccount,
@@ -76,7 +65,6 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-    validateSendConfirmation(outputOptions, preparedOutput)
 
     let claimingTransaction: Transaction
     if (get(isOnboardingLedgerProfile)) {
@@ -104,15 +92,18 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     }
     persistShimmerClaimingTransaction(claimingTransaction?.transactionId)
 
-    // TODO: https://github.com/iotaledger/firefly/issues/4223
-    await sleep((5 + SECONDS_PER_MILESTONE) * MILLISECONDS_PER_SECOND)
-
-    const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
-        shimmerClaimingAccount,
-        shimmerClaimingAccount?.twinAccount,
-        true,
-        null,
-        claimingTransaction
-    )
-    updateShimmerClaimingAccount(syncedShimmerClaimingAccount)
+    const claimedRewards = shimmerClaimingAccount?.claimedRewards + rawAmount
+    const unclaimedRewards = shimmerClaimingAccount?.unclaimedRewards - rawAmount
+    updateShimmerClaimingAccount({
+        ...shimmerClaimingAccount,
+        /**
+         * NOTE: We still explicitly set the state here to
+         * display as "claiming" to user until it's updated
+         * later by the transaction inclusion event handler.
+         */
+        state: ShimmerClaimingAccountState.Claiming,
+        claimingTransaction,
+        claimedRewards,
+        unclaimedRewards,
+    })
 }

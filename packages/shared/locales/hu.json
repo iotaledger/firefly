@@ -215,9 +215,9 @@
         "connectLedger": {
             "title": "Ledger csatlakoztatása Firefly-hoz",
             "body": "Ahhoz, hogy a Ledger-t megtalálja a Firefly, kérem győződjön meg arról, hogy a Ledger Live applikáció be van zárva.",
-            "connect": "Connect your Ledger device",
-            "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "connect": "Csatlakoztassa hardver tárcáját",
+            "unlock": "Nyissa ki hardver tárcáját a PIN-kód megadásával",
+            "openApp": "Nyissa meg a Shimmer applikációt a hardver tárcáján",
             "tips": "Javaslatok, ha a Ledger nem csatlakozik"
         },
         "restoreFromFireflyLedger": {
@@ -469,11 +469,11 @@
                 "hardware": {
                     "title": "Hardvereszköz",
                     "statuses": {
-                        "appNotOpen": "Ledger unlocked but app not open",
-                        "correctAppOpen": "Ledger unlocked and app open ",
-                        "locked": "Ledger securely locked",
+                        "appNotOpen": "Hardver tárca nyitva, de az applikáció nem fut",
+                        "correctAppOpen": "Hardver tárca nyitva és az applikáció fut",
+                        "locked": "Hardver tárca biztonságos bezárva",
                         "mnemonicMismatch": "Rossz Ledger eszköz vagy helyreállító kódszólista",
-                        "notConnected": "Ledger not connected",
+                        "notConnected": "Hardver tárca nincs csatlakoztatva",
                         "otherConnected": "Alkalmazás megnyitva"
                     }
                 },
@@ -550,12 +550,12 @@
     },
     "popups": {
         "enableLedgerBlindSigning": {
-            "title": "Enable Blind Signing",
-            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
-            "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
-            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
-            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+            "title": "Vak aláírás engedélyezése",
+            "info": "A tranzakció jóváhagyásához engédelyeznie kell a vak aláírást hardver tárcáján.",
+            "step_1": "Csatlakoztassa majd nyissa ki hardver tárcáját",
+            "step_2": "Nyissa meg a Shimmer applikációt",
+            "step_3": "Nyomja meg a jobb gombot a Beállítások kiválasztásához, majd nyomja meg mindkét gombot egyszerre a jóváhagyáshoz. A hardver eszközén ekkor megjelenik a vak aláírás.",
+            "step_4": "Nyomja meg mindkét gombot a tranzakciók vak aláírásának engedélyezéséhez. A hardver tárcán ekkor megjelenik: Engedélyezve."
         },
         "storageDepositBreakdown": {
             "title": "Tárolt letét részletezése",
@@ -585,6 +585,14 @@
         "backupStronghold": {
             "title": "Készítsen Stronghold biztonsági mentést",
             "body": "Fontos, hogy rendszeresen készítsen biztonsági másolatot a tárcáiról és azok tranzakciós előzményeiről. Ha elveszíti a biztonsági mentést és a helyreállító kódszólistát, többé nem fog hozzáférni a pénzéhez."
+        },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
         "deleteAccount": {
             "title": "{name} törölhető?",
@@ -731,11 +739,11 @@
             "bodyFirefly": "A Firefly átmenetileg nem használható, amíg a hálózatfrissítés be nem fejeződik. A tokenek migrálására a frissítés után is lesz lehetőség."
         },
         "ledgerNotConnected": {
-            "title": "Connect your Ledger",
-            "notConnected": "Connect your Ledger device to continue.",
-            "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
-            "correctAppOpen": "Ledger successfully connected, please continue."
+            "title": "Hardver tárca csatlakoztatása",
+            "notConnected": "A folytatáshoz csatlakoztassa hardver tárcáját.",
+            "locked": "A folytatáshoz nyissa ki hardver tárcáját.",
+            "appNotOpen": "A folytatáshoz nyissa meg a(z) {protocol} applikációt a hardver eszközén.",
+            "correctAppOpen": "Hardver tárca csatlakoztatva, kérjük folytassa."
         },
         "ledgerConfirmation": {
             "confirm": "A folytatáshoz kövesse a megjelenített utasításokat a Ledger eszközén"
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Fogadó cím megerősítése",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 hónap"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Tovább",
         "back": "Vissza",
         "previous": "Vissza",
@@ -898,7 +912,7 @@
         "dismiss": "Elvet",
         "claim": "Igénylés",
         "claiming": "Igénylés folyamatban",
-        "claimingRewards": "Claiming rewards",
+        "claimingRewards": "Jutalmak igénylése",
         "reject": "Elutasítás",
         "confirmRejection": {
             "title": "Tranzakció elutasítása",
@@ -1035,10 +1049,10 @@
         "burnToken": "Token elégetése",
         "faucetRequest": "{token} token igénylése",
         "refreshTokenMetadata": "Token metaadatok frissítése",
-        "test": "Test",
-        "testDeepLink": "Test deep link",
-        "initialize": "Initialize",
-        "initializing": "Initializing"
+        "test": "Teszt",
+        "testDeepLink": "Mélyhivatkozás tesztelése",
+        "initialize": "Előkészítés",
+        "initializing": "Előkészítés folyamatban"
     },
     "general": {
         "recipient": "Címzett",
@@ -1054,9 +1068,9 @@
         "received": "Fogadott",
         "transfer": "Átutalás",
         "transferring": "Átutalás folyamatban",
-        "shimmerClaimed": "Claimed",
-        "shimmerClaiming": "Claiming",
-        "shimmerGenesis": "Shimmer Genesis",
+        "shimmerClaimed": "Igényelve",
+        "shimmerClaiming": "Igénylés folyamatban",
+        "shimmerGenesis": "Shimmer genezis",
         "minted": "Kibocsátás elkészült",
         "minting": "Kibocsátás folyamatban",
         "sendPayment": "Átutalás",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Sötét",
         "systemTheme": "Rendszer",
         "balance": "Egyenleg",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Összes",
         "incoming": "Bejövő",
         "outgoing": "Kimenő",
@@ -1200,7 +1215,7 @@
         "storageDeposit": "Tárolt letét",
         "giftedStorageDeposit": "Ajándékozott tárolt letét",
         "expirationTime": "Lejárati idő",
-        "timelockDate": "Timelock",
+        "timelockDate": "Időzár",
         "claimedTime": "Igénylés ideje:",
         "copiedToClipboard": "Vágólapra másolva",
         "total": "Összes egyenleg: {balance}",
@@ -1209,8 +1224,8 @@
         "metadata": "Metaadatok",
         "tag": "Címke",
         "nodeList": "Csomópontok listája",
-        "claimedIn": "Claimed in",
-        "claimingIn": "Claiming in",
+        "claimedIn": "Igénylés tranzakcióazonosítója:",
+        "claimingIn": "Igénylés tranzakcióazonosítója:",
         "assets": "Pénzeszközök",
         "nativeTokens": "Natív tokenek",
         "mintNativeTokenDescription": "Készítsen az IRC30 szabványnak megfelelő natív tokeneket",
@@ -1219,10 +1234,10 @@
         "refreshTokenMetadataHint": "Ez alaphelyzetbe állítja az összes tokenjének metaadatát, beleértve az ellenőrzés állapotát és bármely rejtett pénzeszközt.",
         "giftStorageDeposit": "Tárolt letét ajándékozása",
         "excluded": "Mellőzve",
-        "developerTools": "Developer tools",
-        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "developerTools": "Fejlesztői eszközök",
+        "testDeepLinkDescription": "Firefly-nak küldött mélyhivatkozás kipróbálása",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Ellenőrző összeg"
     },
     "filters": {
         "title": "Szűrők",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Ellenőrzés állapota",
             "new": "Új",
-            "notVerified": "Nem ellenőrzött",
-            "verified": "Ellenőrzött"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Pénzeszközök"
@@ -1251,6 +1267,18 @@
             "range": "között",
             "greater": "nagyobb, mint",
             "less": "kevesebb, mint"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Állapot",
@@ -1306,12 +1334,12 @@
             "receivedWhileLoggedOut": "Kérjük, jelentkezzen be a mélyhivatkozás érvényesítéséhez",
             "notEnabled": "A mélyhivatkozások nincsenek engedélyezve",
             "invalidFormat": "A megadott mélyhivatkozás érvénytelen",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidNumber": "A mélyhivatkozásban szereplő összeg nem egy szám: {amount}",
             "wallet": {
                 "send": {
                     "success": "Fizetés részletei a mélyhivatkozás alapján kitöltve"
                 },
-                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
+                "unrecognizedOperation": "Ismeretlen tárca művelet: {operation}"
             }
         },
         "syncing": "Kérjük várja meg a szinkronizáció befejeződését mielőtt másik tárcára vált.",
@@ -1335,7 +1363,7 @@
             "success": "Az összes token metaadat alaphelyzetbe állítva és frissítve"
         },
         "restoreFromStrongholdBackup": {
-            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
+            "wrongProtocol": "A protokoll nem egyezik a Stronghold biztonsági mentésben lévő token típusával",
             "wrongProtocolForClaiming": "IOTA-alapú Stronghold biztonsági mentés szükséges a Shimmer jutalom beváltásához"
         },
         "findShimmerRewards": {
@@ -1343,7 +1371,7 @@
             "error": "Hiba történt a jutalom keresése közben"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
+            "success": "Shimmer jutalom sikeresen igényelve a(z) {accountAlias} számlára",
             "error": "Hiba történt a jutalom beváltása közben"
         }
     },
@@ -1354,8 +1382,8 @@
             "delete": {
                 "nonEmptyAccounts": "A profilt csak akkor tudja törölni, ha a teljes egyenlegét átutalta egy másik számlára."
             },
-            "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "type": "Nem sikerült a profil típusát meghatározni",
+            "setupType": "Nem sikerült a profilbeállítás típusát meghatározni"
         },
         "password": {
             "doNotMatch": "A jelszavak nem egyeznek.",
@@ -1396,8 +1424,8 @@
             "cannotRemove": "A tárca törlése nem lehetséges.",
             "withBalance": "Ezt a tárcát csak akkor tudja törölni, ha a teljes egyenlegét átutalta egy másik számlára.",
             "notLast": "Csak a legutóbbi tárcája törölhető.",
-            "notFound": "Unable to find account",
-            "cannotGetBoundAccount": "Unable to get bound account"
+            "notFound": "Számla nem található",
+            "cannotGetBoundAccount": "Kapcsolt számla nem található"
         },
         "send": {
             "addressLength": "A címnek {length, plural, one {# karakter} other {# karakter}} hosszúnak kell lennie.",
@@ -1405,20 +1433,24 @@
             "amountNoFloat": "A legkisebb egység kiválasztása esetén nem használhat tizedesjegyeket",
             "amountInvalidFormat": "Úgy tűnik, hogy az összeg egy érvénytelen szám.",
             "amountSmallerThanSubunit": "Az összegnek nagyobbnak kell lennie, mint a legkisebb alegység.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Az összegnek nagyobbnak kell lennie, mint 0.",
             "wrongAddressPrefix": "A címeknek {prefix} előtaggal kell kezdődniük.",
             "wrongAddressFormat": "A cím nem megfelelő formátumú.",
             "invalidAddress": "Helytelen cím.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Nincs elég összeg a tárcájában a tranzakció végrehajtásához.",
             "insufficientFundsStorageDeposit": "Nincs elegendő egyenlege a tárolási letét fedezetéhez",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Nem választotta ki melyik tárcájába szeretne küldeni.",
             "sendingDust": "1 Mi-nél kevesebbet nem lehet elküldeni.",
             "leavingDust": "Minimum 1 Mi-nek maradnia kell a számláján.",
             "cancelled": "A tranzakció megszakítva.",
             "transaction": "Hiba történt a tranzakció küldésekor. Kérem próbálja újra.",
             "invalidExpirationDateTime": "A kiválasztott lejárati dátum/idő érvénytelen.",
-            "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
+            "missingTransactionId": "Hiányzó tranzakcióazonosító",
+            "missingTransactionProgressEventPayload": "Hiányzó tranzakció előrehaladást jelző üzenettartalom"
         },
         "node": {
             "invalid": "Kérjük, adjon meg egy érvényes URL címet!",
@@ -1430,8 +1462,8 @@
             "https": "HTTPS kapcsolat használata kötelező. Biztonsági okokból a HTTP kapcsolat használata jelenleg nem támogatott.",
             "duplicate": "Ez a csomópont már korábban hozzá lett adva.",
             "unsynced": "A csomópont nincs szinkronban.",
-            "noSyncedNode": "No synced node is available.",
-            "timeNotSynced": "Device time is incorrect, unable to sync node.",
+            "noSyncedNode": "Nincs elérhető szinkronizált csomópont.",
+            "timeNotSynced": "Az eszköz órája nem megfelelően jár, nem sikerült a csomóponttal szinkronizálni.",
             "answer": "Nem minden csomóponttól érkezett válasz.",
             "forbidden": "Ezzel a csomóponttal tiltott a kapcsolatfelépítés.",
             "pluginNotAvailable": "A “{nodePlugin}” kiegészítést a jelenlegi csomópont nem támogatja.",
@@ -1464,13 +1496,13 @@
             "legacyConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
             "locked": "Kérem oldja fel Ledger eszközét a PIN-kóddal.",
             "mnemonicMismatch": "Rossz Ledger eszközt csatlakozatott vagy az emlékeztető megváltozott.",
-            "notConnected": "Nem észlelhető Ledger eszköz.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Nem található Ledger eszköz.",
             "otherConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
             "generateAddress": "Hiba történt a cím generálása közben.",
             "timeout": "A Ledger eszköze időtúllépés miatt nem elérhető.",
             "disconnected": "Megszakadt a kapcsolat a Ledger eszközével.",
-            "noStronghold": "Hardveres tárca profillal nem lehet a Stronghold-ot használni."
+            "noStronghold": "Hardver tárca profillal nem lehet a Stronghold-ot használni."
         },
         "popup": {
             "preventClose": "A felugró ablakot nem lehet bezárni."
@@ -1555,7 +1587,7 @@
     "tabs": {
         "wallet": "Tárca",
         "staking": "Letétbe helyezés",
-        "developer": "Developer"
+        "developer": "Fejlesztő"
     },
     "pills": {
         "stake": {
@@ -1611,7 +1643,7 @@
             "claimed": "igényelve",
             "expired": "lejárt"
         },
-        "locked": "locked"
+        "locked": "lezárva"
     },
     "menus": {
         "expirationTimePicker": {

@@ -586,6 +586,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "למחוק את {name}?",
             "body": "This wallet has no transaction history. It can safely be deleted.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "אמת דואר לתקבול",
@@ -889,6 +902,7 @@
         "timeframe1Month": "חודש אחד"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "המשך",
         "back": "הקודם",
         "previous": "קודם",
@@ -1098,6 +1112,7 @@
         "darkTheme": "כהה",
         "systemTheme": "מערכת",
         "balance": "יתרה",
+        "balanceWithValue": "Balance: {balance}",
         "all": "הכל",
         "incoming": "תקבולים",
         "outgoing": "תשלומים",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
-            "notVerified": "Not verified",
-            "verified": "Verified"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Assets"
@@ -1251,6 +1267,18 @@
             "range": "is between",
             "greater": "is greater than",
             "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "מספר הסכום אינו תקין.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "הסכום חייב להיות גדול מ0.",
             "wrongAddressPrefix": "כתובות מתחילות את התחילית {prefix}.",
             "wrongAddressFormat": "הפורמט שהוזן אינו תקין.",
             "invalidAddress": "הכתובת אינה תקינה.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "לארנק זה אין מספיק כספים.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "לא בחרת ארנק נמען להעברת הכספים.",
             "sendingDust": "לא תוכל לשלוח פחות מ1 Mi.",
             "leavingDust": "לא תוכל להשאיר פחות מ1Mi בכתובת שלך.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
             "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notConnected": "לא זוהה התקן חומרה של ארנק קר.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "לא נמצא התקן ארנק קר.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",

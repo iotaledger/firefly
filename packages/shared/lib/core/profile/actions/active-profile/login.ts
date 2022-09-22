@@ -7,9 +7,8 @@ import {
     isStrongholdUnlocked,
     profileManager,
     recoverAccounts,
-    subscribeToWalletApiEvents,
 } from '@core/profile-manager'
-import { setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
+import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
 import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
@@ -31,6 +30,9 @@ import { ILoginOptions } from '../../interfaces'
 import { logout } from './logout'
 import { pollLedgerNanoStatus } from '@core/ledger'
 import { isLedgerProfile } from '@core/profile/utils'
+
+import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
+import { cleanupOnboarding } from '@contexts/onboarding'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
@@ -54,25 +56,20 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
-            if (loginOptions) {
-                const { isFromOnboardingFlow, shouldRecoverAccounts, shouldCreateAccount } = loginOptions
-                if (isFromOnboardingFlow && shouldRecoverAccounts) {
-                    const accountMetadatas = await recoverAccounts(
-                        INITIAL_ACCOUNT_GAP_LIMIT[type],
-                        INITIAL_ADDRESS_GAP_LIMIT[type],
-                        { syncIncomingTransactions: true }
-                    )
-
-                    /**
-                     * NOTE: In the case no accounts with funds were recovered, we must
-                     * create one for the new profile.
-                     */
-                    if (accountMetadatas?.length === 0) {
-                        await createNewAccount()
-                    }
-                } else if (isFromOnboardingFlow && shouldCreateAccount) {
-                    await createNewAccount()
-                }
+            let accounts
+            if (loginOptions?.isFromOnboardingFlow && loginOptions?.shouldRecoverAccounts) {
+                accounts = await recoverAccounts(0, INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type], {
+                    syncIncomingTransactions: true,
+                })
+            } else {
+                accounts = await getAccounts()
+            }
+            /**
+             * NOTE: In the case no accounts with funds were recovered, we must
+             * create one for the new profile.
+             */
+            if (accounts?.length === 0) {
+                await createNewAccount()
             }
 
             // Step 4: load accounts
@@ -102,7 +99,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 8: start background sync
             incrementLoginProgress()
-            subscribeToWalletApiEvents()
+            subscribeToWalletApiEventsForActiveProfile()
             await startBackgroundSync({ syncIncomingTransactions: true })
 
             // Step 9: finish login
@@ -117,10 +114,16 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 _loginRouter.next()
                 resetLoginProgress()
             }, 500)
+
+            void cleanupOnboarding()
+        } else {
+            throw Error('No active profile error')
         }
     } catch (err) {
         handleError(err)
-        await logout()
+        if (!loginOptions?.isFromOnboardingFlow) {
+            await logout()
+        }
         _loginRouter.previous()
         resetLoginProgress()
     }

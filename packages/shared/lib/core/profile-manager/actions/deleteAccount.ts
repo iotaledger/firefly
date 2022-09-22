@@ -1,14 +1,8 @@
-import { get } from 'svelte/store'
 import { setSelectedAccount } from '@core/account'
 import { removeAccountFromActiveAccounts, visibleActiveAccounts } from '@core/profile'
-import {
-    CannotRemoveAccountError,
-    RemoveAccountWithBalanceError,
-    removeLatestAccount,
-    RemoveNotLastAccountError,
-} from '@core/profile-manager'
+import { CannotRemoveAccountError, removeLatestAccount, RemoveNotLastAccountError } from '@core/profile-manager'
 import { resetWalletRoute } from '@core/router'
-import { parseCurrency } from '@lib/currency'
+import { get } from 'svelte/store'
 
 export async function deleteAccount(id: string): Promise<void> {
     const accountToBeDeleted = get(visibleActiveAccounts).find((account) => account?.id === id)
@@ -16,10 +10,6 @@ export async function deleteAccount(id: string): Promise<void> {
 
     if (accountToBeDeleted !== accounts[accounts.length - 1]) {
         throw new RemoveNotLastAccountError()
-    }
-
-    if (parseCurrency(accountToBeDeleted?.balances?.baseCoin?.total) > 0) {
-        throw new RemoveAccountWithBalanceError()
     }
 
     try {
