@@ -148,6 +148,7 @@ export class ProfileManagerMock implements IProfileManager {
     }
 
     recoverAccounts(
+        accountStartIndex: number,
         accountGapLimit: number,
         addressGapLimit: number,
         syncOptions: AccountSyncOptions
