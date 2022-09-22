@@ -14,7 +14,6 @@
     export let glimpse = false
     export let smaller = false
     export let error
-    export let onSubmit: () => void
 
     let inputs = new Array(PIN_LENGTH)
     $: {
