@@ -41,7 +41,7 @@
 <div class="mb-5">
     <Text type="h4">
         {localize('popups.deleteAccount.title', {
-            values: { name: $selectedAccount?.getAlias() },
+            values: { name: $selectedAccount?.getMetadata().alias },
         })}
     </Text>
 </div>

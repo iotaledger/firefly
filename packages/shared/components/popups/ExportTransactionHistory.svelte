@@ -15,12 +15,13 @@
 
     const profileName = $activeProfile?.name
     const { isStrongholdLocked } = $activeProfile
+    const accountAlias = $selectedAccount.getMetadata().alias
 
     let password = ''
     let error = ''
     let isBusy = false
 
-    async function handleExportTransactionHistory() {
+    async function handleExportTransactionHistory(): Promise<void> {
         try {
             error = ''
             isBusy = true
@@ -32,8 +33,7 @@
                 displayNotificationForLedgerProfile('warning')
                 return
             }
-
-            const fileName = generateTransactionHistoryFileName(profileName, $selectedAccount.getAlias())
+            const fileName = generateTransactionHistoryFileName(profileName, accountAlias)
             const contents = generateTransactionHistoryCsvFromAccount($selectedAccount, {
                 id: true,
                 internal: true,
@@ -49,7 +49,7 @@
                     showAppNotification({
                         type: 'info',
                         message: localize('notifications.exportTransactionHistory.success', {
-                            values: { accountAlias: $selectedAccount.getAlias(), filePath: filePath },
+                            values: { accountAlias, filePath: filePath },
                         }),
                     })
                 }
@@ -57,7 +57,7 @@
                 showAppNotification({
                     type: 'error',
                     message: localize('notifications.exportTransactionHistory.error', {
-                        values: { accountAlias: $selectedAccount.getAlias() },
+                        values: { accountAlias },
                     }),
                 })
             }
@@ -79,7 +79,7 @@
         }
     }
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         closePopup()
     }
 </script>
@@ -93,7 +93,7 @@
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
         <Text type="p">{localize('popups.exportTransactionHistory.accountName')}</Text>
-        <Text type="p" highlighted>{$selectedAccount.getAlias()}</Text>
+        <Text type="p" highlighted>{accountAlias}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
         {#if $isSoftwareProfile && $isStrongholdLocked}
