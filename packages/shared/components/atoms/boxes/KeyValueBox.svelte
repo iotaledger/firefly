@@ -58,7 +58,7 @@
                 {/if}
                 {#if tooltipText}
                     <div class="ml-1">
-                        <TooltipIcon text={tooltipText} width={12} height={12} />
+                        <TooltipIcon text={tooltipText} title={keyText} width={12} height={12} />
                     </div>
                 {/if}
             </div>

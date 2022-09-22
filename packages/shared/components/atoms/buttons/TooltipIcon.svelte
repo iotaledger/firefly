@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip } from 'shared/components'
 
+    export let title: string
     export let text: string
     export let icon: string = 'info'
     export let width: number = 16
@@ -25,6 +26,7 @@
 </div>
 {#if showTooltip}
     <Tooltip anchor={tooltipAnchor} position="right">
+        <Text type="h5" classes="text-left mb-2">{title}</Text>
         <Text classes="text-left">{text}</Text>
     </Tooltip>
 {/if}
