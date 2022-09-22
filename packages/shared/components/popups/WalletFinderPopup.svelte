@@ -11,8 +11,7 @@
     import {
         activeAccounts,
         activeProfile,
-        INITIAL_ACCOUNT_GAP_LIMIT,
-        INITIAL_ADDRESS_GAP_LIMIT,
+        INITIAL_GAP_LIMIT_CONFIGURATION,
         isActiveLedgerProfile,
         isSoftwareProfile,
         loadAccounts,
@@ -29,8 +28,8 @@
 
     const { isStrongholdLocked, type } = $activeProfile
 
-    const accountGapLimitIncrement = INITIAL_ACCOUNT_GAP_LIMIT[type]
-    const addressGapLimitIncrement = INITIAL_ADDRESS_GAP_LIMIT[type]
+    const accountGapLimitIncrement = INITIAL_GAP_LIMIT_CONFIGURATION[type].accountGapLimit
+    const addressGapLimitIncrement = INITIAL_GAP_LIMIT_CONFIGURATION[type].addressGapLimit
     let previousAccountGapLimit = 0
     let previousAddressGapLimit = 0
     let currentAccountGapLimit = accountGapLimitIncrement

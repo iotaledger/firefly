@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT, UnableToFindProfileTypeError } from '@core/profile'
+import { INITIAL_GAP_LIMIT_CONFIGURATION, UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
@@ -57,8 +57,9 @@ function setGapLimitIncrements(): void {
         throw new UnableToFindProfileTypeError()
     }
 
-    accountGapLimitIncrement = INITIAL_ACCOUNT_GAP_LIMIT[profileType] || 1
-    addressGapLimitIncrement = INITIAL_ADDRESS_GAP_LIMIT[profileType] || 10
+    const { accountGapLimit, addressGapLimit } = INITIAL_GAP_LIMIT_CONFIGURATION[profileType]
+    accountGapLimitIncrement = accountGapLimit || 1
+    addressGapLimitIncrement = addressGapLimit || 10
 
     hasSetGapLimitIncrements = true
 }
