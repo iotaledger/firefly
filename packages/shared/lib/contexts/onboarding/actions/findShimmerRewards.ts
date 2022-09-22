@@ -29,6 +29,7 @@ export async function findShimmerRewards(): Promise<void> {
 
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
     const unboundAccounts = await _shimmerClaimingProfileManager?.recoverAccounts(
+        0,
         accountGapLimit,
         addressGapLimit,
         DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS
