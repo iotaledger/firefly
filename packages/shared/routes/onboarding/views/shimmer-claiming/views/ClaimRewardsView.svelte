@@ -52,6 +52,7 @@
             }
             await findShimmerRewards()
         } catch (err) {
+            console.error(err)
             throw new FindShimmerRewardsError()
         } finally {
             if ($isOnboardingLedgerProfile) {
@@ -78,6 +79,7 @@
             }
             await claimShimmerRewards()
         } catch (err) {
+            console.error(err)
             throw new ClaimShimmerRewardsError()
         } finally {
             if ($isOnboardingLedgerProfile) {

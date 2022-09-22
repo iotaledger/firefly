@@ -1,22 +1,23 @@
 import { get } from 'svelte/store'
 
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-import { INITIAL_GAP_LIMIT_CONFIGURATION, UnableToFindProfileTypeError } from '@core/profile'
+import { UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 
-import { DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS } from '../constants'
+import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION } from '../constants'
 import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
 
-let accountGapLimitIncrement = 0
-let accountGapLimit = 3
 // let startAccountIndex = 0
-let addressGapLimitIncrement = 0
-let addressGapLimit = 10
+let accountGapLimit = -1
+let accountGapLimitIncrement = -1
+
 // let startAddressIndex = 0
+let addressGapLimit = -1
+let addressGapLimitIncrement = -1
 
 let totalUnclaimedShimmerRewards = 0
 
@@ -32,7 +33,7 @@ export async function findShimmerRewards(): Promise<void> {
         0,
         accountGapLimit,
         addressGapLimit,
-        DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS
+        SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS
     )
     const boundAccounts = await getSortedRenamedBoundAccounts(unboundAccounts, shimmerClaimingProfileManager)
     const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
@@ -57,9 +58,11 @@ function setGapLimitIncrements(): void {
         throw new UnableToFindProfileTypeError()
     }
 
-    const { accountGapLimit, addressGapLimit } = INITIAL_GAP_LIMIT_CONFIGURATION[profileType]
-    accountGapLimitIncrement = accountGapLimit || 1
-    addressGapLimitIncrement = addressGapLimit || 10
+    accountGapLimit = SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType].accountGapLimit
+    accountGapLimitIncrement = accountGapLimit
+
+    addressGapLimit = SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType].addressGapLimit
+    addressGapLimitIncrement = addressGapLimit
 
     hasSetGapLimitIncrements = true
 }
@@ -85,16 +88,8 @@ function updateRewardsFinderParameters(hasNewRewards: boolean): void {
     if (hasNewRewards) {
         accountGapLimit = accountGapLimitIncrement
         addressGapLimit = addressGapLimitIncrement
-
-        // TODO: https://github.com/iotaledger/firefly/issues/4297
-        // startAccountIndex = 0
-        // startAddressIndex = 0
     } else {
         accountGapLimit += accountGapLimitIncrement
         addressGapLimit += addressGapLimitIncrement
-
-        // TODO: https://github.com/iotaledger/firefly/issues/4297
-        // startAccountIndex += accountGapLimitIncrement
-        // startAddressIndex += addressGapLimitIncrement
     }
 }
