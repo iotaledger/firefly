@@ -61,6 +61,8 @@
     }
 
     async function handleSetPin(): Promise<void> {
+        busy = true
+
         await initialisePincodeManager(setPinInput)
 
         const canInitialiseFirstShimmerClaimingAccount =
@@ -70,6 +72,8 @@
         if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
             await initialiseFirstShimmerClaimingAccount()
         }
+
+        busy = false
 
         $storageProtectionSetupRouter.next()
     }
@@ -133,6 +137,8 @@
             type={HTMLButtonType.Submit}
             disabled={!(arePinInputsValid && arePinInputsMatching) || busy}
             form="setup-pin"
+            isBusy={busy}
+            busyMessage={`${localize('actions.initializing')}...`}
             bind:this={submitButtonElement}
         >
             {localize('actions.continue')}

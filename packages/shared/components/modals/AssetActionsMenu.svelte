@@ -64,7 +64,6 @@
                 iconProps={{ secondaryColor: 'white' }}
                 title={localize('actions.unverifyToken')}
                 onClick={handleUnverify}
-                first
             />
         {:else}
             <MenuItem
@@ -72,22 +71,20 @@
                 iconProps={{ secondaryColor: 'white' }}
                 title={localize('actions.verifyToken')}
                 onClick={handleVerify}
-                first
             />
         {/if}
         {#if asset?.hidden}
-            <MenuItem icon={Icon.View} title={localize('actions.unhideToken')} onClick={handleUnhide} first />
+            <MenuItem icon={Icon.View} title={localize('actions.unhideToken')} onClick={handleUnhide} />
         {:else}
-            <MenuItem icon={Icon.Hide} title={localize('actions.hideToken')} onClick={handleHide} first />
+            <MenuItem icon={Icon.Hide} title={localize('actions.hideToken')} onClick={handleHide} />
         {/if}
         <HR />
         <MenuItem
             icon={Icon.Delete}
             title={localize('actions.burnToken')}
             onClick={handleBurnToken}
-            first
-            last
             disabled={true}
+            variant="error"
         />
     </div>
 </Modal>

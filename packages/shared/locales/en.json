@@ -959,6 +959,8 @@
         "chooseFile": "Choose a File",
         "dropHere": "Drop your file here",
         "syncAll": "Sync all",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Export",
         "exporting": "Exporting",
         "exportNewStronghold": "Export a new Stronghold",
