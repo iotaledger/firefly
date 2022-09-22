@@ -121,7 +121,8 @@
         await pollMarketData()
         await pollNetworkStatus()
 
-        const initialLocale = $appRoute === AppRoute.Welcome ? null : $appSettings.language
+        const systemLanguage = await Platform.getLanguageCode()
+        const initialLocale = $appRoute === AppRoute.Welcome ? systemLanguage : $appSettings.language
         void setupI18n({ fallbackLocale: 'en', initialLocale })
     })
 

@@ -414,6 +414,11 @@ export const CapacitorApi: IPlatform = {
     hideKeyboard: async () => {
         await Keyboard.hide()
     },
+
+    getLanguageCode: async () => {
+        const { value } = await Device.getLanguageCode()
+        return value
+    },
 }
 
 window['__CAPACITOR__'] = CapacitorApi
