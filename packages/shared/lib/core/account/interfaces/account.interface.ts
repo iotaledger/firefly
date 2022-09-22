@@ -36,6 +36,7 @@ import {
     FilterOptions,
     IncreaseNativeTokenSupplyOptions,
     AccountMetadata,
+    AliasOutputOptions,
 } from '@iota/wallet'
 
 export interface IAccount {
@@ -52,6 +53,10 @@ export interface IAccount {
     burnNft(nftId: string, transactionOptions?: TransactionOptions): Promise<Transaction>
     claimOutputs(outputIds: string[]): Promise<Transaction>
     consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction>
+    createAliasOutput(
+        aliasOutputOptions?: AliasOutputOptions,
+        transactionOptions?: TransactionOptions
+    ): Promise<Transaction>
     decreaseNativeTokenSupply(
         tokenId: string,
         meltAmount: HexEncodedAmount,

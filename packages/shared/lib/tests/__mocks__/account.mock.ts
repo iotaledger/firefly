@@ -15,6 +15,7 @@ import {
     AddressNftId,
     AddressWithAmount,
     AddressWithMicroAmount,
+    AliasOutputOptions,
     BuildAliasOutputData,
     BuildBasicOutputData,
     BuildFoundryOutputData,
@@ -90,6 +91,13 @@ export class AccountMock implements IAccount {
     }
 
     claimOutputs(): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    createAliasOutput(
+        aliasOutputOptions?: AliasOutputOptions | undefined,
+        transactionOptions?: TransactionOptions | undefined
+    ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
