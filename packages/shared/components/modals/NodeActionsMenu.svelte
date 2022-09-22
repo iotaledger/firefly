@@ -101,7 +101,6 @@
         title={localize('views.settings.configureNodeList.editDetails')}
         onClick={handleEditNodeDetailsClick}
         disabled={isOfficialNode}
-        first
     />
     <MenuItem
         disabled={node?.disabled}
@@ -112,14 +111,12 @@
         disabled={!allowDisableOrRemove}
         title={localize(`views.settings.configureNodeList.${node.disabled ? 'include' : 'exclude'}Node`)}
         onClick={handleToggleDisabledNodeClick}
-        last
     />
     <HR />
     <MenuItem
         disabled={!allowDisableOrRemove}
         title={localize('views.settings.configureNodeList.removeNode')}
         onClick={handleRemoveNodeClick}
-        first
-        last
+        variant="error"
     />
 </Modal>
