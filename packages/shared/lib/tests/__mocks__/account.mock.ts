@@ -77,12 +77,12 @@ export class AccountMock implements IAccount {
     burnNativeToken(
         tokenId: string,
         burnAmount: string,
-        transactionOptions?: TransactionOptions | undefined
+        transactionOptions?: TransactionOptions
     ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    burnNft(nftId: string, transactionOptions?: TransactionOptions | undefined): Promise<Transaction> {
+    burnNft(nftId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -95,8 +95,8 @@ export class AccountMock implements IAccount {
     }
 
     createAliasOutput(
-        aliasOutputOptions?: AliasOutputOptions | undefined,
-        transactionOptions?: TransactionOptions | undefined
+        aliasOutputOptions?: AliasOutputOptions,
+        transactionOptions?: TransactionOptions
     ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
@@ -104,14 +104,14 @@ export class AccountMock implements IAccount {
     decreaseNativeTokenSupply(
         tokenId: string,
         meltAmount: string,
-        transactionOptions?: TransactionOptions | undefined
+        transactionOptions?: TransactionOptions
     ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
-    destroyAlias(aliasId: string, transactionOptions?: TransactionOptions | undefined): Promise<Transaction> {
+    destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
-    destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions | undefined): Promise<Transaction> {
+    destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
@@ -169,8 +169,8 @@ export class AccountMock implements IAccount {
     increaseNativeTokenSupply(
         tokenId: string,
         mintAmount: string,
-        increaseNativeTokenSupplyOptions?: IncreaseNativeTokenSupplyOptions | undefined,
-        transactionOptions?: TransactionOptions | undefined
+        increaseNativeTokenSupplyOptions?: IncreaseNativeTokenSupplyOptions,
+        transactionOptions?: TransactionOptions
     ): Promise<MintTokenTransaction> {
         throw new Error('Method not implemented.')
     }
