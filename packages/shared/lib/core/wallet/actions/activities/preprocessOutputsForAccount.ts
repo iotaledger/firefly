@@ -1,5 +1,6 @@
 import { IAccountState } from '@core/account'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
+import { containsFunds } from '@core/wallet/utils/transactions'
 import { OutputData, Transaction } from '@iota/wallet'
 import { IProcessedTransaction } from '../../interfaces/processed-transaction.interface'
 
@@ -28,9 +29,15 @@ export async function preprocessOutputsForAccount(account: IAccountState): Promi
 
     const processedTransactions: IProcessedTransaction[] = []
     for (const transactionId of Object.keys(groupedOutputs)) {
-        processedTransactions.push(
-            preprocessGroupedOutputs(groupedOutputs[transactionId], incomingTransactionMap[transactionId], account)
+        const processedTransaction = preprocessGroupedOutputs(
+            groupedOutputs[transactionId],
+            incomingTransactionMap[transactionId],
+            account
         )
+
+        if (containsFunds(processedTransaction, account)) {
+            processedTransactions.push(processedTransaction)
+        }
     }
     return processedTransactions
 }
