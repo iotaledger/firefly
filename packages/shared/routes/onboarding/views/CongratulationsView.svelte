@@ -21,7 +21,7 @@
 
     function _continue(): Promise<void> {
         completeOnboardingProcess()
-        $onboardingRouter.next({ ledgerRecovery: true })
+        $onboardingRouter.next()
         return Promise.resolve()
     }
 
