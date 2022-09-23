@@ -11,11 +11,13 @@ import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '..
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
 
-// let startAccountIndex = 0
+/**
+ * NOTE: These variables are unitialized because we
+ * must know the profile type to be able to determine
+ * gap limits that are sensible in terms of UX.
+ */
 let accountGapLimit = -1
 let accountGapLimitIncrement = -1
-
-// let startAddressIndex = 0
 let addressGapLimit = -1
 let addressGapLimitIncrement = -1
 
