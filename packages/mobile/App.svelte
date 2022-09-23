@@ -23,6 +23,8 @@
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
 
+    import { keyboardHeight, isKeyboardOpen } from './lib/app'
+
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn } = $activeProfile
@@ -128,6 +130,14 @@
             })
         }
     }
+
+    $keyboardHeight = window.innerHeight / 2
+    // Press ctrl + k to toggle the fake keyboard
+    document.onkeydown = function (e) {
+        if (e.ctrlKey && e.key === 'k') {
+            $isKeyboardOpen = !$isKeyboardOpen
+        }
+    }
 </script>
 
 <TitleBar>
@@ -164,6 +174,9 @@
         <ToastContainer />
     {/if}
 </TitleBar>
+{#if $isKeyboardOpen}
+    <div class="keyboard" />
+{/if}
 
 <style global type="text/scss">
     @tailwind base;
@@ -233,5 +246,14 @@
     }
     img {
         -webkit-user-drag: none;
+    }
+
+    .keyboard {
+        position: absolute;
+        bottom: 0;
+        height: 50%;
+        width: 100%;
+        background-color: black;
+        z-index: 100;
     }
 </style>
