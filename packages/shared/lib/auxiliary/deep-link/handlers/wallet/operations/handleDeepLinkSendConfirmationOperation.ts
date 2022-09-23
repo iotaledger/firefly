@@ -56,6 +56,22 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         throw new InvalidAddressError()
     }
 
+    const recipient: Subject = { type: 'address', address }
+
+    const assetId = searchParams.get(SendOperationParameter.AssetId)
+    const baseAsset = get(selectedAccountAssets).baseCoin
+    const asset = assetId ? getAssetById(assetId) : baseAsset
+    if (!asset) {
+        throw new UnknownAssetError()
+    }
+
+    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
+
+    let fee = searchParams.get(SendOperationParameter.Fee)
+    if (!Number(fee)) {
+        fee = null
+    }
+
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     if (getByteLengthOfString(metadata) > 8192) {
         throw new MetadataLengthError()
@@ -65,15 +81,8 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     if (getByteLengthOfString(tag) > 64) {
         throw new TagLengthError()
     }
-    const assetId = searchParams.get(SendOperationParameter.AssetId)
-    const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
-    if (!asset) {
-        throw new UnknownAssetError()
-    }
 
     const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
-    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
-    const recipient: Subject = { type: 'address', address }
     const giftStorageDeposit = isStringTrue(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = isStringTrue(searchParams.get(SendOperationParameter.DisableToggleGift))
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
@@ -86,6 +95,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         ...(metadata && { metadata }),
         ...(tag && { tag }),
         ...(giftStorageDeposit && { giftStorageDeposit }),
+        ...(fee && { fee }),
         ...(disableToggleGift && { disableToggleGift }),
         ...(disableChangeExpiration && { disableChangeExpiration }),
     }

@@ -34,7 +34,7 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
 
-    const { asset, amount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift } =
+    const { asset, amount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift, fee } =
         get(newTransactionDetails)
     let { expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
@@ -96,20 +96,32 @@
             metadata,
             tag,
             asset,
-            giftStorageDeposit
+            giftStorageDeposit,
+            fee
         )
         preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            getStorageDepositFromOutput(preparedOutput)
-        storageDeposit = _storageDeposit
-        giftedStorageDeposit = _giftedStorageDeposit
+
+        setStorageDeposit(preparedOutput, fee)
+
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
+    function setStorageDeposit(preparedOutput: OutputTypes, fee?: string): void {
+        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
+            getStorageDepositFromOutput(preparedOutput)
+        storageDeposit = _storageDeposit
+
+        if (fee && Number(fee) > _giftedStorageDeposit) {
+            giftedStorageDeposit = Number(fee)
+        } else {
+            giftedStorageDeposit = _giftedStorageDeposit
+        }
+    }
+
     async function updateStoresAndSend(): Promise<void> {
-        updateNewTransactionDetails({ expirationDate, giftStorageDeposit })
+        updateNewTransactionDetails({ expirationDate, giftStorageDeposit, fee })
         if ($isActiveLedgerProfile) {
             ledgerPreparedOutput.set(preparedOutput)
         }

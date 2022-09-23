@@ -12,14 +12,23 @@ export function getOutputOptions(
     metadata: string,
     tag: string,
     asset?: IAsset,
-    giftStorageDeposit?: boolean
+    giftStorageDeposit?: boolean,
+    fee?: string
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
     const bigAmount = BigInt(rawAmount.toString())
+
+    let amount: string
+    if (nativeTokenId && giftStorageDeposit && fee) {
+        amount = fee.toString()
+    } else {
+        amount = nativeTokenId ? '0' : bigAmount.toString()
+    }
+
     return <OutputOptions>{
         recipientAddress,
-        amount: nativeTokenId ? '0' : bigAmount.toString(),
+        amount,
         features: {
             ...(metadata && { metadata }),
             ...(tag && { tag }),
