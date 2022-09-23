@@ -278,6 +278,10 @@ module.exports = {
             borderWidth: {
                 3: '3px',
             },
+            scale: {
+                120: '1.2',
+                180: '1.8',
+            },
             spacing: {
                 4.5: pxToRem('18'),
                 18: pxToRem('72'),
