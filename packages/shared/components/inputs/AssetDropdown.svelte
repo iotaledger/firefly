@@ -2,13 +2,15 @@
     import { NetworkProtocol } from '@core/network'
     import { localize } from '@core/i18n'
     import { visibleSelectedAccountAssets } from '@core/wallet'
-    import { AssetIcon, AssetTile, Icon, Text, TextInput } from 'shared/components'
+    import { AssetIcon, AssetTile, Icon, InputContainer, Text, TextInput } from 'shared/components'
     import { FontWeight } from 'shared/components/Text.svelte'
     import { clickOutside } from 'shared/lib/actions'
 
     export let asset = $visibleSelectedAccountAssets?.baseCoin
 
     let isDropdownOpen = false
+    let hasFocus: boolean
+    let inputElement: HTMLInputElement
     let icon: string
 
     $: hasMultipleAssets = $visibleSelectedAccountAssets?.nativeTokens.length >= 1
@@ -68,13 +70,17 @@
             >
                 <!-- TODO: Filter dropdown list with asset name / unit -->
                 <!-- TODO: Fix which input has focus when inside dropdown input -->
-                <TextInput
-                    clearBackground
-                    clearBorder
-                    label={localize('general.asset')}
-                    placeholder={localize('general.asset')}
-                    fontSize="sm"
-                />
+                <InputContainer bind:inputElement clearPadding isFocused={hasFocus}>
+                    <TextInput
+                        bind:inputElement
+                        bind:hasFocus
+                        clearBackground
+                        clearBorder
+                        label={localize('general.search')}
+                        placeholder={localize('general.search')}
+                        fontSize="sm"
+                    />
+                </InputContainer>
                 <ul class="overflow-y-auto h-full -mr-2 pr-2">
                     <li>
                         <AssetTile
