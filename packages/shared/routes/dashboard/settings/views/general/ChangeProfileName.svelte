@@ -40,7 +40,7 @@
         {localize('views.settings.changeProfileName.description')}
     </Text>
     <Input {error} placeholder={$activeProfile?.name} bind:value={newName} classes="mb-5" />
-    <Button size={ButtonSize.Medium} form="form-change-profile-name" type={HTMLButtonType.Submit} {disabled}>
+    <Button size={ButtonSize.Medium} type={HTMLButtonType.Submit} {disabled}>
         {localize('views.settings.changeProfileName.title')}
     </Button>
 </form>

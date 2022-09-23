@@ -120,7 +120,6 @@
         <Button
             size={ButtonSize.Medium}
             type={HTMLButtonType.Submit}
-            form="pincode-change-form"
             disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}
         >
             {localize('views.settings.changePincode.action')}
