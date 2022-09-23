@@ -23,8 +23,9 @@ export async function mintNativeToken(
     try {
         isTransferring.set(true)
         const account = get(selectedAccount)
+        // TODO: replace aliasId with correct implementation
         const nativeTokenOptions: NativeTokenOptions = {
-            accountAddress: account.depositAddress,
+            aliasId: account.depositAddress,
             maximumSupply: Converter.decimalToHex(maximumSupply, true),
             circulatingSupply: Converter.decimalToHex(circulatingSupply, true),
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata), true),
