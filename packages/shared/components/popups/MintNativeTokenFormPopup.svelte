@@ -5,7 +5,7 @@
     import { mintNativeToken, setMintTokenDetails, mintTokenDetails, TokenStandard } from '@core/wallet'
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
-    import { AddInputButton, Button, ClosableInput, Error, NumberInput, Text, TextInput } from 'shared/components'
+    import { Button, Error, NumberInput, Text, TextInput, OptionalInput } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
@@ -29,42 +29,12 @@
     $: totalSupply, (totalSupplyError = '')
     let circulatingSupplyError: string
     $: circulatingSupply, (circulatingSupplyError = '')
-    let decimalsError: string
-    $: decimals, (decimalsError = '')
     let symbolError: string
     $: symbol, (symbolError = '')
-    let descriptionError: string
-    $: description, (descriptionError = '')
-    let urlError: string
-    $: url, (urlError = '')
-    let logoUrlError: string
-    $: logoUrl, (logoUrlError = '')
 
     let error: BaseError
 
-    let decimalsButtonElement: HTMLButtonElement
-    let isDecimalsInputOpen = false
-    function openDecimalsInput() {
-        isDecimalsInputOpen = true
-    }
-
-    let descriptionButtonElement: HTMLButtonElement
-    let isDescriptionInputOpen = false
-    function openDescriptionInput() {
-        isDescriptionInputOpen = true
-    }
-
-    let urlButtonElement: HTMLButtonElement
-    let isUrlInputOpen = false
-    function openUrlInput() {
-        isUrlInputOpen = true
-    }
-
-    let logoUrlButtonElement: HTMLButtonElement
-    let isLogoUrlInputOpen = false
-    function openLogoUrlInput() {
-        isLogoUrlInputOpen = true
-    }
+    let decimalsInput: OptionalInput
 
     async function mintAction() {
         try {
@@ -131,7 +101,7 @@
                 isNameValid(),
                 isTotalSupplyValid(),
                 isCirculatingSupplyValid(),
-                isDecimalsValid(),
+                decimalsInput?.validate(isDecimalsValid()),
                 isSymbolValid(),
             ])
             return true
@@ -178,15 +148,15 @@
     }
 
     function isDecimalsValid(): Promise<void> {
-        if (decimals.toString().length < 1) {
-            decimalsError = 'Decimals is required'
-            return Promise.reject(decimalsError)
-        } else if (Number(decimals) < 0) {
-            decimalsError = 'Decimals must be greater than or equal to 0'
-            return Promise.reject(decimalsError)
-        } else {
-            return Promise.resolve()
-        }
+        return new Promise((resolve, reject) => {
+            if (decimals.toString().length < 1) {
+                reject('Decimals is required')
+            } else if (Number(decimals) < 0) {
+                reject('Decimals must be greater than or equal to 0')
+            } else {
+                resolve()
+            }
+        })
     }
 
     function isSymbolValid(): Promise<void> {
@@ -244,71 +214,32 @@
             placeholder={localize('popups.mintNativeTokenForm.inputs.circulatingSupply')}
             error={circulatingSupplyError}
         />
-        <ClosableInput
-            bind:value={decimals}
-            bind:buttonElement={decimalsButtonElement}
-            bind:open={isDecimalsInputOpen}
-            inputType="number"
-            isInteger
-            maxlength={MAX_SUPPORTED_DECIMALS}
-            label={localize('popups.mintNativeTokenForm.inputs.decimals')}
-            placeholder={localize('popups.mintNativeTokenForm.inputs.decimals')}
-            error={decimalsError}
-        />
-        <ClosableInput
-            bind:value={description}
-            bind:buttonElement={descriptionButtonElement}
-            bind:open={isDescriptionInputOpen}
-            label={localize('popups.mintNativeTokenForm.inputs.description')}
-            placeholder={localize('popups.mintNativeTokenForm.inputs.description')}
-            error={descriptionError}
-        />
-        <ClosableInput
-            bind:value={url}
-            bind:buttonElement={urlButtonElement}
-            bind:open={isUrlInputOpen}
-            label={localize('popups.mintNativeTokenForm.inputs.url')}
-            placeholder={localize('popups.mintNativeTokenForm.inputs.url')}
-            error={urlError}
-        />
-        <ClosableInput
-            bind:value={logoUrl}
-            bind:buttonElement={logoUrlButtonElement}
-            bind:open={isLogoUrlInputOpen}
-            label={localize('popups.mintNativeTokenForm.inputs.logoUrl')}
-            placeholder={localize('popups.mintNativeTokenForm.inputs.logoUrl')}
-            error={logoUrlError}
-        />
-        {#if !isDescriptionInputOpen || !isUrlInputOpen || !isLogoUrlInputOpen}
-            <optional-input-buttons class="flex flex-wrap space-x-4">
-                <AddInputButton
-                    bind:buttonElement={decimalsButtonElement}
-                    bind:open={isDecimalsInputOpen}
-                    text={localize('popups.mintNativeTokenForm.inputs.decimals')}
-                    onClick={openDecimalsInput}
-                />
-                <AddInputButton
-                    bind:buttonElement={descriptionButtonElement}
-                    bind:open={isDescriptionInputOpen}
-                    text={localize('popups.mintNativeTokenForm.inputs.description')}
-                    onClick={openDescriptionInput}
-                />
-                <AddInputButton
-                    bind:buttonElement={urlButtonElement}
-                    bind:open={isUrlInputOpen}
-                    text={localize('popups.mintNativeTokenForm.inputs.url')}
-                    onClick={openUrlInput}
-                />
-                {#if false}
-                    <AddInputButton
-                        bind:buttonElement={logoUrlButtonElement}
-                        bind:open={isLogoUrlInputOpen}
-                        text={localize('popups.mintNativeTokenForm.inputs.logo')}
-                        onClick={openLogoUrlInput}
-                    />
-                {/if}
-            </optional-input-buttons>
-        {/if}
+        <optional-inputs class="flex flex-row flex-wrap gap-2">
+            <OptionalInput
+                bind:this={decimalsInput}
+                bind:value={decimals}
+                inputType="number"
+                isInteger
+                maxlength={MAX_SUPPORTED_DECIMALS}
+                label={localize('popups.mintNativeTokenForm.inputs.decimals')}
+                description={localize('tooltips.optionalInput')}
+            />
+            <OptionalInput
+                bind:value={description}
+                label={localize('popups.mintNativeTokenForm.inputs.description')}
+                description={localize('tooltips.optionalInput')}
+            />
+            <OptionalInput
+                bind:value={url}
+                label={localize('popups.mintNativeTokenForm.inputs.url')}
+                description={localize('tooltips.optionalInput')}
+            />
+            <OptionalInput
+                bind:value={logoUrl}
+                label={localize('popups.mintNativeTokenForm.inputs.logoUrl')}
+                description={localize('tooltips.optionalInput')}
+            />
+        </optional-inputs>
         {#if error}
             <Error error={error?.message} />
         {/if}
