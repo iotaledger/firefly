@@ -34,6 +34,7 @@ export interface IProfileManager {
     listen(eventTypes: EventType[], callback: WalletApiEventHandler): void
     clearListeners(eventTypes: EventType[]): void
     recoverAccounts(
+        accountStartIndex: number,
         accountGapLimit: number,
         addressGapLimit: number,
         syncOptions?: AccountSyncOptions

@@ -71,7 +71,7 @@
                     return
                 }
 
-                await recoverAccounts(currentAccountGapLimit, currentAddressGapLimit, {
+                await recoverAccounts(0, currentAccountGapLimit, currentAddressGapLimit, {
                     syncIncomingTransactions: true,
                 })
                 await loadAccounts()

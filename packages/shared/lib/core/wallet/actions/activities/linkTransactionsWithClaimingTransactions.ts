@@ -22,17 +22,19 @@ export function linkTransactionsWithClaimingTransactions(
 
     const claimedAccountActivities = get(claimedActivities)?.[account.id]
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
-    const incomingAsyncTransactions = []
-
+    const incomingAsyncTransactions: IProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
-        if (transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)) {
-            continue
-        } else if (
+        const isClaimingTransaction = transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)
+        const isIncomingAsyncTransaction =
             transaction.outputs.some((_output) => isOutputAsync(_output)) &&
             getDirectionFromTransaction(transaction, account.depositAddress) === ActivityDirection.In
-        ) {
+
+        if (isClaimingTransaction) {
+            continue
+        } else if (isIncomingAsyncTransaction) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
             const claimedActivity = claimedAccountActivities?.[transaction.transactionId]
+
             if (claimedActivity && claimedActivity.claimingTransactionId === transaction.transactionId) {
                 const claimingData = {
                     claimedDate: new Date(claimedActivity.claimedTimestamp),
@@ -45,6 +47,11 @@ export function linkTransactionsWithClaimingTransactions(
                 incomingAsyncTransactions.push(transaction)
             }
             resultingTransactions.push(transaction)
+        } else if (transaction.isIncoming) {
+            // Incoming transcations can never be claiming transactions
+            // Even though we specify self transactions as "Direction.In", "incoming" flag is false for them, which is important here,
+            // as self transactions are most of the time claiming transactions
+            resultingTransactions.push(transaction)
         } else {
             // For 'normal' transactions we search through the async transactions to check if one is the claiming transaction from the other one
             // If we find a match, we update the async transaction and ignore the current one
@@ -52,15 +59,14 @@ export function linkTransactionsWithClaimingTransactions(
                 incomingAsyncTransactions,
                 transaction
             )
-
             if (claimedTransaction) {
                 claimedTransaction.claimingData = {
                     claimedDate: transaction.time,
                     claimingTransactionId: transaction.transactionId,
                 }
 
-                addClaimedActivity(account.id, transaction.transactionId, {
-                    id: transaction.transactionId,
+                addClaimedActivity(account.id, claimedTransaction.transactionId, {
+                    id: claimedTransaction.transactionId,
                     claimedTimestamp: transaction.time.getTime(),
                     claimingTransactionId: transaction.transactionId,
                 })
