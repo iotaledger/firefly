@@ -128,7 +128,7 @@
                 />
             </div>
         {/if}
-        <Text color="gray-600" darkColor="gray-500" fontSize="xs">-</Text>
         <!-- Placeholder for asset USD value  -->
+        <Text color="gray-600" darkColor="gray-500" fontSize="xs">-</Text>
     </div>
 </InputContainer>
