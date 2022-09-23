@@ -28,7 +28,7 @@
     function validateOptionalInput(value: string, byteLimit: number, errorMessage: string): Promise<void> {
         return new Promise((resolve, reject) => {
             if (getByteLengthOfString(value) > byteLimit) {
-                return reject(errorMessage)
+                reject(errorMessage)
             }
             resolve()
         })

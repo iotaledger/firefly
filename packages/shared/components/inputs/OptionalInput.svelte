@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
+    import { fade } from 'svelte/transition'
     import { ClosableInput, AddInputButton, Tooltip, Text } from 'shared/components'
     import { Position } from 'shared/components/Tooltip.svelte'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
@@ -10,7 +11,7 @@
     export let error: string = ''
     export let classes: string = null
     export let isOpen: boolean = false
-    export let showTooltip: boolean = false
+    export let isTooltipVisible: boolean = false
 
     let buttonElement: HTMLButtonElement
 
@@ -29,15 +30,15 @@
     }
 
     function onMouseEnter(): void {
-        showTooltip = !!description // only show tooltip if it has description
+        isTooltipVisible = !!description // only show tooltip if it has description
     }
 
     function onMouseLeave(): void {
-        showTooltip = false
+        isTooltipVisible = false
     }
 
     $: if (!isOpen) {
-        showTooltip = false
+        isTooltipVisible = false
     }
     $: value, (error = '')
 
@@ -69,11 +70,13 @@
             {onMouseEnter}
             {onMouseLeave}
         />
-        {#if showTooltip}
-            <Tooltip anchor={buttonElement} position={Position.Right}>
-                <Text type={TextType.h4}>{label}</Text>
-                <Text>{description}</Text>
-            </Tooltip>
+        {#if isTooltipVisible}
+            <tooltip-container transition:fade={{ duration: 100 }}>
+                <Tooltip anchor={buttonElement} position={Position.Right}>
+                    <Text type={TextType.h4}>{label}</Text>
+                    <Text>{description}</Text>
+                </Tooltip>
+            </tooltip-container>
         {/if}
     {/if}
 </optional-input>
