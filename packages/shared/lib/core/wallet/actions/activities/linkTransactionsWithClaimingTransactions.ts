@@ -48,6 +48,9 @@ export function linkTransactionsWithClaimingTransactions(
             }
             resultingTransactions.push(transaction)
         } else if (transaction.isIncoming) {
+            // Incoming transcations can never be claiming transactions
+            // Even though we specify self transactions as "Direction.In", "incoming" flag is false for them, which is important here,
+            // as self transactions are most of the time claiming transactions
             resultingTransactions.push(transaction)
         } else {
             // For 'normal' transactions we search through the async transactions to check if one is the claiming transaction from the other one
