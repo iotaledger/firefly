@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-import { UnableToFindProfileTypeError } from '@core/profile'
+import { GapLimitProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
@@ -12,25 +12,30 @@ import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaiming
 import { sumTotalUnclaimedRewards } from '../utils'
 
 /**
- * NOTE: These variables are unitialized because we
+ * NOTE: This variable is unitialized because we
  * must know the profile type to be able to determine
  * gap limits that are sensible in terms of UX.
  */
-let accountGapLimit = -1
-let accountGapLimitIncrement = -1
-let addressGapLimit = -1
-let addressGapLimitIncrement = -1
+let gapLimitProfileConfiguration: GapLimitProfileConfiguration
 
 let totalUnclaimedShimmerRewards = 0
 
-let hasSetGapLimitIncrements = false
-
 export async function findShimmerRewards(): Promise<void> {
-    if (!hasSetGapLimitIncrements) {
-        setGapLimitIncrements()
+    if (gapLimitProfileConfiguration) {
+        const profileType = get(onboardingProfile)?.type
+        const hasMismatchedProfileType =
+            gapLimitProfileConfiguration.addressGapLimit !==
+            SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType].addressGapLimit
+        if (hasMismatchedProfileType) {
+            setGapLimitConfiguration()
+        }
+    } else {
+        setGapLimitConfiguration()
     }
 
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
+
+    const { accountGapLimit, addressGapLimit } = gapLimitProfileConfiguration
     const unboundAccounts = await _shimmerClaimingProfileManager?.recoverAccounts(
         0,
         accountGapLimit,
@@ -54,19 +59,13 @@ export async function findShimmerRewards(): Promise<void> {
     updateRewardsFinderParameters(hasNewRewards)
 }
 
-function setGapLimitIncrements(): void {
+function setGapLimitConfiguration(): void {
     const profileType = get(onboardingProfile)?.type
     if (!profileType) {
         throw new UnableToFindProfileTypeError()
     }
 
-    accountGapLimit = SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType].accountGapLimit
-    accountGapLimitIncrement = accountGapLimit
-
-    addressGapLimit = SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType].addressGapLimit
-    addressGapLimitIncrement = addressGapLimit
-
-    hasSetGapLimitIncrements = true
+    gapLimitProfileConfiguration = SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType]
 }
 
 export function setTotalUnclaimedShimmerRewards(_totalUnclaimedShimmerRewards: number): void {
