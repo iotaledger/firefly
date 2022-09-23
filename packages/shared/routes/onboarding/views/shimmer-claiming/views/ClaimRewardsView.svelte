@@ -33,7 +33,8 @@
         (shimmerClaimingAccount) => shimmerClaimingAccount.state === ShimmerClaimingAccountState.Claiming
     )
 
-    $: shouldSearchForRewardsButtonBeEnabled = !isSearchingForRewards && !isClaimingRewards
+    $: shouldSearchForRewardsButtonBeEnabled =
+        !isSearchingForRewards && !isClaimingRewards && !hasUserClaimedRewards(shimmerClaimingAccounts)
     $: shouldClaimRewardsButtonBeEnabled =
         canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
     $: shouldShowContinueButton =
