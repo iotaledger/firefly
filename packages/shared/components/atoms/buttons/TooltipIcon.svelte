@@ -1,0 +1,32 @@
+<script lang="typescript">
+    import { Icon, Text, Tooltip } from 'shared/components'
+
+    export let title: string
+    export let text: string
+    export let icon: string = 'info'
+    export let width: number = 16
+    export let height: number = 16
+    export let classes: string = ''
+
+    let tooltipAnchor: HTMLElement
+    let isTooltipVisible = false
+
+    function showTooltip(show: boolean): void {
+        isTooltipVisible = show
+    }
+</script>
+
+<div
+    on:mouseenter={() => showTooltip(true)}
+    on:mouseleave={() => showTooltip(false)}
+    bind:this={tooltipAnchor}
+    class="text-gray-600 {classes}"
+>
+    <Icon {width} {height} {icon} />
+</div>
+{#if isTooltipVisible}
+    <Tooltip anchor={tooltipAnchor} position="right">
+        <Text type="h5" classes="text-left mb-2">{title}</Text>
+        <Text classes="text-left">{text}</Text>
+    </Tooltip>
+{/if}

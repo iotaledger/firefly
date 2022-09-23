@@ -66,17 +66,48 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
+    $: localePrefix = `tooltips.transactionDetails.${direction === ActivityDirection.In ? 'incoming' : 'outgoing'}.`
+
+    let detailsList: { [key in string]: { data: unknown; tooltipText?: string } }
     $: detailsList = {
-        ...(formattedTransactionTime && { transactionTime: formattedTransactionTime }),
-        ...(metadata && { metadata }),
-        ...(tag && { tag }),
-        ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
-            storageDeposit: formattedStorageDeposit,
+        ...(formattedTransactionTime && { transactionTime: { data: formattedTransactionTime } }),
+        ...(metadata && {
+            metadata: {
+                data: metadata,
+                ooltipText: localize(localePrefix + 'metadata'),
+            },
         }),
-        ...(giftedStorageDeposit && { giftedStorageDeposit: formattedGiftedStorageDeposit }),
-        ...(expirationTime && { expirationTime }),
-        ...(timelockDate && { timelockDate: formattedTimelockDate }),
-        ...(claimedTime && { claimedTime }),
+        ...(tag && {
+            tag: {
+                data: tag,
+                tooltipText: localize(localePrefix + 'tag'),
+            },
+        }),
+        ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
+            storageDeposit: {
+                data: formattedStorageDeposit,
+                tooltipText: localize(localePrefix + 'storageDeposit'),
+            },
+        }),
+        ...(giftedStorageDeposit && {
+            giftedStorageDeposit: {
+                data: formattedGiftedStorageDeposit,
+                tooltipText: localize(localePrefix + 'giftedStorageDeposit'),
+            },
+        }),
+        ...(expirationTime && {
+            expirationTime: {
+                data: expirationTime,
+                tooltipText: localize(localePrefix + 'expirationTime'),
+            },
+        }),
+        ...(timelockDate && {
+            timelockDate: {
+                data: formattedTimelockDate,
+                tooltipText: localize(localePrefix + 'timelockDate'),
+            },
+        }),
+        ...(claimedTime && { claimedTime: { data: claimedTime } }),
     }
 
     function getDateFormat(date: Date): string {
@@ -153,7 +184,11 @@
     {#if Object.entries(detailsList).length > 0}
         <details-list class="flex flex-col space-y-2">
             {#each Object.entries(detailsList) as [key, value]}
-                <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
+                <KeyValueBox
+                    keyText={localize(`general.${key}`)}
+                    valueText={value.data}
+                    tooltipText={value.tooltipText}
+                />
             {/each}
             {#if claimingTransactionId}
                 <KeyValueBox keyText={localize(isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>

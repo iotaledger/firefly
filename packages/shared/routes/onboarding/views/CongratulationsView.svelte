@@ -4,8 +4,12 @@
     import { mobile } from '@core/app'
     import { onboardingRouter, ledgerSetupRouter } from '@core/router'
     import { localize } from '@core/i18n'
-    import { completeOnboardingProcess, isOnboardingLedgerProfile, ProfileRecoveryType } from '@contexts/onboarding'
-    import { onboardingProfile } from '@contexts/onboarding'
+    import {
+        onboardingProfile,
+        completeOnboardingProcess,
+        isOnboardingLedgerProfile,
+        ProfileRecoveryType,
+    } from '@contexts/onboarding'
     import { checkOrConnectLedger } from '@core/ledger'
 
     // TODO: what are these localised bodies they are not self documenting?
