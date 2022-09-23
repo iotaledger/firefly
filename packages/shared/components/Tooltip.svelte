@@ -75,7 +75,7 @@
 </script>
 
 <tooltip
-    class="{size} shadow-elevation-4 fixed text-center z-10
+    class="{size} shadow-elevation-4 fixed text-center z-10 whitespace-pre-line
     {size === 'small' ? 'px-2 py-1 rounded-md' : 'p-4 rounded-xl'}
     w-auto max-w-60 shadow-lg border border-solid bg-{backgroundColor} dark:bg-{darkBackgroundColor} border-{borderColor} dark:border-{darkBorderColor} {position} {classes}"
     class:darkmode={darkModeEnabled}
