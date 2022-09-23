@@ -66,33 +66,45 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
+    $: localePrefix = `tooltips.transactionDetails.${direction === ActivityDirection.In ? 'incoming' : 'outgoing'}.`
+
     let detailsList: { [key in string]: { data: unknown; tooltipText?: string } }
     $: detailsList = {
         ...(formattedTransactionTime && { transactionTime: { data: formattedTransactionTime } }),
-        ...(metadata && { metadata: { data: metadata } }),
-        ...(tag && { tag: { data: tag } }),
+        ...(metadata && {
+            metadata: {
+                data: metadata,
+                ooltipText: localize(localePrefix + 'metadata'),
+            },
+        }),
+        ...(tag && {
+            tag: {
+                data: tag,
+                tooltipText: localize(localePrefix + 'tag'),
+            },
+        }),
         ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
             storageDeposit: {
                 data: formattedStorageDeposit,
-                tooltipText: localize('tooltips.transactionDetails.storageDeposit'),
+                tooltipText: localize(localePrefix + 'storageDeposit'),
             },
         }),
         ...(giftedStorageDeposit && {
             giftedStorageDeposit: {
                 data: formattedGiftedStorageDeposit,
-                tooltipText: localize('tooltips.transactionDetails.giftedStorageDeposit'),
+                tooltipText: localize(localePrefix + 'giftedStorageDeposit'),
             },
         }),
         ...(expirationTime && {
             expirationTime: {
                 data: expirationTime,
-                tooltipText: localize('tooltips.transactionDetails.expirationTime'),
+                tooltipText: localize(localePrefix + 'expirationTime'),
             },
         }),
         ...(timelockDate && {
             timelockDate: {
                 data: formattedTimelockDate,
-                tooltipText: localize('tooltips.transactionDetails.timelockDate'),
+                tooltipText: localize(localePrefix + 'timelockDate'),
             },
         }),
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
