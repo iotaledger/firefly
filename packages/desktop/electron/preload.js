@@ -42,7 +42,7 @@ window.addEventListener('unhandledrejection', (event) => {
 
 try {
     const { STAGE, NODE_ENV } = process.env
-    if (NODE_ENV === 'development' || STAGE === 'alpha' || STAGE === 'beta') {
+    if (NODE_ENV === 'development') {
         const logDir = './log'
         if (!fs.existsSync(logDir)) {
             fs.mkdirSync(logDir)
