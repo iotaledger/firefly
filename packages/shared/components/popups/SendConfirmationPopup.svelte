@@ -45,7 +45,7 @@
     let error: BaseError
 
     const rawAmount = convertToRawAmount(amount, unit, asset.metadata)
-    let initialExpirationDate
+    let initialExpirationDate: ExpirationTime
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
