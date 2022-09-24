@@ -21,9 +21,12 @@
     export let unit: string
 
     let amountInputElement: HTMLInputElement
+    let dropdownInputElement: HTMLInputElement
     let error: string
     let previousAsset: IAsset
+    let isDropdownOpen: boolean
 
+    $: focusedInputElement = isDropdownOpen ? dropdownInputElement : amountInputElement
     $: isFocused && (error = '')
     $: if (asset !== previousAsset) {
         previousAsset = asset
@@ -85,7 +88,7 @@
 
 <InputContainer
     bind:this={inputElement}
-    bind:inputElement={amountInputElement}
+    bind:inputElement={focusedInputElement}
     col
     {disabled}
     {isFocused}
@@ -94,7 +97,7 @@
     on:clickOutside={() => (isFocused = false)}
 >
     <div class="flex flex-row w-full items-center space-x-0.5 relative">
-        <AssetDropdown bind:asset />
+        <AssetDropdown bind:asset bind:inputElement bind:isFocused bind:isDropdownOpen />
         <AmountInput
             bind:inputElement={amountInputElement}
             bind:amount

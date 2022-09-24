@@ -7,10 +7,11 @@
     import { clickOutside } from 'shared/lib/actions'
 
     export let asset = $visibleSelectedAccountAssets?.baseCoin
+    export let isFocused = false
+    export let isDropdownOpen = false
+    export let inputElement: HTMLInputElement
 
-    let isDropdownOpen = false
-    let hasFocus: boolean
-    let inputElement: HTMLInputElement
+    let searchQuery = ''
     let icon: string
 
     $: hasMultipleAssets = $visibleSelectedAccountAssets?.nativeTokens.length >= 1
@@ -26,6 +27,7 @@
     function handleDropdownClick() {
         if (hasMultipleAssets) {
             isDropdownOpen = !isDropdownOpen
+            isFocused = !isFocused
         }
     }
 
@@ -36,6 +38,7 @@
 
     function handleOnClickOutside(): void {
         isDropdownOpen = false
+        isFocused = false
     }
 </script>
 
@@ -69,11 +72,12 @@
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 max-h-96"
             >
                 <!-- TODO: Filter dropdown list with asset name / unit -->
-                <!-- TODO: Fix which input has focus when inside dropdown input -->
-                <InputContainer bind:inputElement clearPadding isFocused={hasFocus}>
+                <!-- TODO: Focus input when dropdown opens -->
+                <InputContainer bind:inputElement clearPadding bind:isFocused>
                     <TextInput
                         bind:inputElement
-                        bind:hasFocus
+                        bind:value={searchQuery}
+                        bind:hasFocus={isFocused}
                         clearBackground
                         clearBorder
                         label={localize('general.search')}
