@@ -73,8 +73,8 @@
         {#if isTooltipVisible}
             <tooltip-container transition:fade={{ duration: 100 }}>
                 <Tooltip anchor={buttonElement} position={Position.Right}>
-                    <Text type={TextType.h4}>{label}</Text>
-                    <Text>{description}</Text>
+                    <Text type={TextType.h5} classes="text-left mb-2">{label}</Text>
+                    <Text classes="text-left">{description}</Text>
                 </Tooltip>
             </tooltip-container>
         {/if}
