@@ -250,7 +250,7 @@ jobs:
                   release_name: Firefly Desktop ${{ env.RELEASE_NAME }}
                   body_path: packages/desktop/CHANGELOG.md
                   draft: true
-                  prerelease: ${{ env.STAGE != 'prod' }}
+                  prerelease: true
 
             - name: Upload macOS binary asset
               uses: actions/upload-release-asset@v1
