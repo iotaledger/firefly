@@ -1342,7 +1342,7 @@
             "receivedWhileLoggedOut": "Bitte melde dich an, um den Deep-Link zu initiieren",
             "notEnabled": "Deep-Links sind nicht aktiviert",
             "invalidFormat": "Der gewählte Deep-Link ist ungültig",
-            "invalidNumber": "Der Betrag im Deep-Link ist keine Zahl {amount}",
+            "invalidAmount": "Der Betrag im Deep-Link ist keine Zahl {amount}",
             "wallet": {
                 "send": {
                     "success": "Zahlungsinformationen aus Deep-Link hinzugefügt"

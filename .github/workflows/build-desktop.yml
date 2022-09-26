@@ -250,7 +250,7 @@ jobs:
                   release_name: Firefly Desktop ${{ env.RELEASE_NAME }}
                   body_path: packages/desktop/CHANGELOG.md
                   draft: true
-                  prerelease: ${{ env.STAGE != 'prod' }}
+                  prerelease: true
 
             - name: Upload macOS binary asset
               uses: actions/upload-release-asset@v1
@@ -294,21 +294,3 @@ jobs:
 
             - name: Listing artifacts
               run: ls -al assets
-
-            - name: Upload to S3
-              if: env.STAGE == 'prod'
-              run: |
-                  aws s3 cp assets/ s3://iotaledger-files/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
-                  aws s3 cp assets/ s3://iotaledger-files/firefly/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
-              env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  AWS_DEFAULT_REGION: eu-central-1
-
-            - name: Invalidate CloudFront cache for auto-update files
-              if: env.STAGE == 'prod'
-              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/latest*"
-              env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  AWS_DEFAULT_REGION: eu-central-1
