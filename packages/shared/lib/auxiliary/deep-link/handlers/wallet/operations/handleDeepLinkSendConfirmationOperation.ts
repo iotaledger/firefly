@@ -69,7 +69,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
 
     const fee = searchParams.get(SendOperationParameter.Fee)
-    if (parseInt(fee).toString() !== fee) {
+    if (fee && parseInt(fee).toString() !== fee) {
         throw new FeeNotANumberError(fee)
     }
 
