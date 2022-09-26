@@ -75,6 +75,7 @@
         tag,
         unit,
         isInternal,
+        hasFee: !!Number(fee),
         type: ActivityType.Transaction,
     }
 

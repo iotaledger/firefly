@@ -7,7 +7,7 @@
         KeyValueBox,
         AccountLabel,
     } from 'shared/components/atoms'
-    import { AssetIcon, Text, Pill } from 'shared/components'
+    import { AssetIcon, Text, TextHint, Pill } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { FontWeight } from 'shared/components/Text.svelte'
@@ -44,8 +44,9 @@
     export let subject: Subject = null
     export let tag: string = null
     export let transactionTime: Date = null
-    export let isInternal = false
-    export let isClaiming = false
+    export let isInternal: boolean = false
+    export let isClaiming: boolean = false
+    export let hasFee: boolean = false
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
@@ -55,6 +56,7 @@
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
     $: isTimelocked = timelockDate > $time
+    $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -68,7 +70,7 @@
 
     $: localePrefix = `tooltips.transactionDetails.${direction === ActivityDirection.In ? 'incoming' : 'outgoing'}.`
 
-    let detailsList: { [key in string]: { data: unknown; tooltipText?: string } }
+    let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {
         ...(formattedTransactionTime && { transactionTime: { data: formattedTransactionTime } }),
         ...(metadata && {
@@ -83,12 +85,20 @@
                 tooltipText: localize(localePrefix + 'tag'),
             },
         }),
-        ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
-            storageDeposit: {
-                data: formattedStorageDeposit,
-                tooltipText: localize(localePrefix + 'storageDeposit'),
-            },
-        }),
+        ...(hasStorageDeposit &&
+            hasFee && {
+                fee: {
+                    data: formattedStorageDeposit,
+                    tooltipText: localize(localePrefix + 'fee'),
+                },
+            }),
+        ...(hasStorageDeposit &&
+            !hasFee && {
+                storageDeposit: {
+                    data: formattedStorageDeposit,
+                    tooltipText: localize(localePrefix + 'storageDeposit'),
+                },
+            }),
         ...(giftedStorageDeposit && {
             giftedStorageDeposit: {
                 data: formattedGiftedStorageDeposit,
@@ -181,6 +191,9 @@
             {/if}
         {/if}
     </main-content>
+    {#if hasFee}
+        <TextHint warning text={localize('popups.transaction.feeIncluded')} />
+    {/if}
     {#if Object.entries(detailsList).length > 0}
         <details-list class="flex flex-col space-y-2">
             {#each Object.entries(detailsList) as [key, value]}
