@@ -1,20 +1,45 @@
 <script lang="typescript">
-    import QrCode from 'svelte-qrcode'
+    import { default as QrCode } from 'qrious'
     import { appSettings } from '@core/app'
+    import { onMount } from 'svelte'
 
-    export let data
-    export let size = 150
-    export let classes
+    export let data: string
+    export let classes: string = ''
 
-    $: darkModeEnabled = $appSettings.darkMode
+    $: color = $appSettings.darkMode ? '#ffffff' : '#000000'
+
+    const QRcode = new QrCode()
+    let image = ''
+
+    function generateQrCode() {
+        QRcode.set({
+            background: '#ffffff00',
+            foreground: color,
+            level: 'L',
+            padding: 0,
+            size: 200, // if this value is changed, the image gets some weird padding. Therefore we need to do the sizing with css
+            value: data,
+        })
+
+        image = QRcode.toDataURL('image/png')
+    }
+
+    $: if (data) {
+        generateQrCode()
+    }
+
+    onMount(() => {
+        generateQrCode()
+    })
 </script>
 
 <div class="flex justify-center {classes}">
-    <QrCode
-        value={data}
-        background={darkModeEnabled ? '#25395F' : '#ffffff'}
-        color={darkModeEnabled ? '#ffffff' : '#000000'}
-        {size}
-        padding="0"
-    />
+    <img src={image} alt={data} class="qrcode" />
 </div>
+
+<style lang="scss">
+    .qrcode {
+        width: 135px;
+        height: 135px;
+    }
+</style>
