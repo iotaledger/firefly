@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "设置 {protocol, select, IOTA {一个} Shimmer {一个}} {protocol} 档案",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "了解 Shimmer 网络"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "创建个人资料",
@@ -181,9 +179,10 @@
                 }
             },
             "congratulations": {
-                "title": "配置文件设置完成",
+                "title": "Profile setup is almost complete",
                 "fundsMigrated": "资金已迁移",
-                "body": "您的新钱包已准备就绪。",
+                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
+                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
                 "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
                 "fireflyLedgerBody": "您的Ledger 账号已成功恢复，您现在可以继续。",
                 "trinityLedgerBody": "您已成功地将 Ledger 迁移到新的网络。",
@@ -960,6 +959,8 @@
         "chooseFile": "选择一个文件",
         "dropHere": "将您的文件拖放至此处",
         "syncAll": "全部同步",
+        "import": "Import",
+        "importing": "Importing",
         "export": "导出",
         "exporting": "导出中",
         "exportNewStronghold": "导出一个新的Stronghold",
@@ -1052,7 +1053,8 @@
         "test": "Test",
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
-        "initializing": "Initializing"
+        "initializing": "Initializing",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "接收人",
@@ -1147,7 +1149,9 @@
         "loadingAccounts": "加载中，请稍候...",
         "addProfile": "添加个人档案",
         "noRecentHistory": "没有最近的历史记录",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "没有资产",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "本月",
         "search": "搜索",
         "firstSync": "同步历史记录，可能需要一段时间...",
@@ -1219,7 +1223,9 @@
         "claimedTime": "认领于",
         "copiedToClipboard": "复制到剪贴板",
         "total": "总计: {balance}",
-        "availableBalance": "可用余额: {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} 已认领",
         "metadata": "元数据",
         "tag": "标签",
@@ -1237,7 +1243,9 @@
         "developerTools": "Developer tools",
         "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
     },
     "filters": {
         "title": "过滤",
@@ -1488,7 +1496,9 @@
             "seedCharacters": "私钥种子只能包含大写字符 A-Z 或数字 9",
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
-            "phraseCaseWord": "单词 \"{word}\" 应为小写"
+            "phraseCaseWord": "单词 \"{word}\" 应为小写",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "您必须在您的Ledger设备上打开 IOTA应用程序。",
@@ -1520,7 +1530,16 @@
             "invalidStakingEventId": "无效的 质押活动 ID。"
         },
         "invalidDate": "无效日期",
-        "invalidTime": "无效时间"
+        "invalidTime": "无效时间",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
@@ -1558,6 +1577,25 @@
             "bodyWillNotReachMin": "您需要质押更多的IOTA，否则您将无法达到最低奖励值。",
             "bodyDidNotReachMin": "您没有质押足够的IOTA来达到 {airdrop} 的最低奖励 ({airdropRewardMin})。",
             "bodyMinBalanceAirdrop": "这个钱包的 IOTA 代币不足以达到 {airdrop} 的最小空投奖励。"
+        },
+        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            },
+            "outgoing": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            }
         }
     },
     "exports": {

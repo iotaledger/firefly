@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Learn about the Shimmer network"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Create a profile",
@@ -181,9 +179,10 @@
                 }
             },
             "congratulations": {
-                "title": "Profile setup complete",
+                "title": "Profile setup is almost complete",
                 "fundsMigrated": "Funds migrated",
-                "body": "Your new profile is ready to use.",
+                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
+                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
                 "softwareMigratedBody": "You have successfully migrated your funds to the new network",
                 "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
                 "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
@@ -960,6 +959,8 @@
         "chooseFile": "Kies een bestand",
         "dropHere": "Sleep uw bestand hier naartoe",
         "syncAll": "Synchroniseer alles",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Exporteer",
         "exporting": "Exporteren",
         "exportNewStronghold": "Exporteer een nieuwe Stronghold",
@@ -1052,7 +1053,8 @@
         "test": "Test",
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
-        "initializing": "Initializing"
+        "initializing": "Initializing",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Ontvanger",
@@ -1147,7 +1149,9 @@
         "loadingAccounts": "Laden, even geduld...",
         "addProfile": "Profiel Toevoegen",
         "noRecentHistory": "Geen recente geschiedenis",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "No assets",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "Deze maand",
         "search": "Zoeken",
         "firstSync": "Geschiedenis synchroniseren, dit kan even duren...",
@@ -1219,7 +1223,9 @@
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Totaal: {balance}",
-        "availableBalance": "Available balance: {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
         "tag": "Tag",
@@ -1237,7 +1243,9 @@
         "developerTools": "Developer tools",
         "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
     },
     "filters": {
         "title": "Filters",
@@ -1488,7 +1496,9 @@
             "seedCharacters": "De seed mag alleen de tekens A-Z of 9 bevatten",
             "phraseWordCount": "Er zouden 24 woorden in uw herstelzin moeten zitten, op dit moment {length, plural, one {is er slechts 1} other {zijn er slechts #}}.",
             "phraseUnrecognizedWord": "Het woord \"{word}\" is niet herkend in uw herstel zin",
-            "phraseCaseWord": "Het woord \"{word}\" mag alleen uit kleine letters bestaan"
+            "phraseCaseWord": "Het woord \"{word}\" mag alleen uit kleine letters bestaan",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "U moet de IOTA app op uw Ledger apparaat openen.",
@@ -1520,7 +1530,16 @@
             "invalidStakingEventId": "Ongeldig staking event ID."
         },
         "invalidDate": "ONGELDIGE DATUM",
-        "invalidTime": "ONGELDIGE TIJD"
+        "invalidTime": "ONGELDIGE TIJD",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
@@ -1558,6 +1577,25 @@
             "bodyWillNotReachMin": "Je zal de minimumbeloning niet behalen gedurende de resterend periode tenzij je meer IOTA toevoegt.",
             "bodyDidNotReachMin": "Je hebt niet genoeg IOTA gestaket om de minimumbeloning te halen voor {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Deze wallet heeft niet genoeg IOTA tokens om de minimumbeloning te behalen voor airdrop {airdrop}."
+        },
+        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            },
+            "outgoing": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            }
         }
     },
     "exports": {

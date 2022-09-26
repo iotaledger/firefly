@@ -6,6 +6,7 @@ import { linkTransactionsWithClaimingTransactions } from './linkTransactionsWith
 import { hideActivitiesForFoundries } from './hideActivitiesForFoundries'
 import { generateActivitiesFromProcessedTransactions } from './generateActivitiesFromProcessedTransactions'
 import { setAccountActivitiesInAllAccountActivities } from '@core/wallet/stores'
+import { loadAssetsForAllActivities } from './loadAssetsForAllAccounts'
 
 export async function generateAndStoreActivitiesForAccount(account: IAccountState): Promise<void> {
     // Step 1: process account transactions and outputs into processed transactions
@@ -25,4 +26,5 @@ export async function generateAndStoreActivitiesForAccount(account: IAccountStat
 
     hideActivitiesForFoundries(account)
     await setOutgoingAsyncActivitiesToClaimed(account)
+    await loadAssetsForAllActivities(account)
 }

@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Skonfiguruj profil {protocol, select, IOTA {} Shimmer {}} {protocol}",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Dowiedz się więcej o sieci Shimmer"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Utwórz profil",
@@ -87,11 +85,11 @@
                     "importFile": "Użyj kopii zapasowej Stronghold",
                     "importFileDescription": "Importuj plik kopii zapasowej Stronghold",
                     "importLedger": "Użyj urządzenia Ledger",
-                    "importLedgerDescription": "Przywróć ze swojego urządzenia Ledger Nano S lub X"
+                    "importLedgerDescription": "Przywróć profil ze swojego urządzenia Ledger Nano S lub X"
                 },
                 "setupClaimed": {
                     "title": "Odbierz nagrody Shimmer ze stakingu",
-                    "body": "Importuj swój profil IOTA i odbierz nagrody za staking Shimmer."
+                    "body": "Importuj swój profil IOTA i odbierz nagrody Shimmer za staking."
                 },
                 "enterName": {
                     "title": "Utwórz swój profil {protocol}",
@@ -176,14 +174,15 @@
                 },
                 "success": {
                     "title": "Zdobyte nagrody",
-                    "body": "Pomyślnie odebrałeś tokeny Shimmer dla Twojego nowego profilu.",
+                    "body": "Pomyślnie odebrałeś tokeny Shimmer na Twój nowy profil.",
                     "totalRewards": "Całkowita ilość nagród"
                 }
             },
             "congratulations": {
-                "title": "Konfiguracja profilu zakończona",
+                "title": "Profile setup is almost complete",
                 "fundsMigrated": "Środki zostały przeniesione",
-                "body": "Twój nowy profil jest gotowy do użycia.",
+                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
+                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
                 "softwareMigratedBody": "Twoje środki zostały pomyślnie przeniesione do nowej sieci",
                 "fireflyLedgerBody": "Twoje konto Ledger zostało pomyślnie odzyskane. Możesz kontynuować.",
                 "trinityLedgerBody": "Pomyślnie migrowałeś swój portfel Ledger do nowej sieci.",
@@ -587,12 +586,12 @@
             "body": "Ważne jest, aby regularnie wykonywać kopie zapasowe swojego portfela, aby upewnić się, że masz kopię swoich portfeli i historię transakcji. Jeśli stracisz kopię zapasową i wyrazy ratunkowe, stracisz dostęp do swoich środków."
         },
         "deeplinkAccountSwitch": {
-            "title": "Select a wallet",
-            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+            "title": "Wybierz portfel",
+            "body": "Użyłeś właśnie deep linku. Wybierz portfel, którym chcesz kontynuować."
         },
         "deeplinkError": {
-            "title": "Failed link",
-            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+            "title": "Nieudany link",
+            "body": "To łącze nie powiodło się lub jest nieprawidłowe. Proszę spróbować ponownie lub sprawdzić źródło linku."
         },
         "deleteAccount": {
             "title": "Usunąć {name}?",
@@ -771,13 +770,13 @@
             }
         },
         "verifyLedgerTransaction": {
-            "title": "Verify transaction",
-            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+            "title": "Zweryfikuj transakcję",
+            "info": "Porównaj i potwierdź informacje o transakcji wyświetlane na urządzeniu Ledger z informacjami poniżej."
         },
         "verifyInternalLedgerTransaction": {
-            "title": "Verify internal transaction",
-            "info": "Please confirm the internal transaction on your ledger.",
-            "hint": "All assets will remain on your wallet when sending an internal transaction."
+            "title": "Zweryfikuj transakcję wewnętrzną",
+            "info": "Potwierdź transakcję wewnętrzną na swoim urządzeniu Ledger.",
+            "hint": "Wszystkie aktywa pozostaną na Twoim portfelu podczas wysyłania transakcji wewnętrznej."
         },
         "ledgerAddress": {
             "title": "Potwierdź adres odbiorcy",
@@ -902,7 +901,7 @@
         "timeframe1Month": "1 miesiąc"
     },
     "actions": {
-        "apply": "Apply",
+        "apply": "Zastosuj",
         "continue": "Kontynuuj",
         "back": "Wstecz",
         "previous": "Wstecz",
@@ -960,6 +959,8 @@
         "chooseFile": "Wybierz plik",
         "dropHere": "Upuść plik tutaj",
         "syncAll": "Synchronizuj wszystko",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Eksportuj",
         "exporting": "Eksportowanie",
         "exportNewStronghold": "Eksportuj zaktualizowany plik Stronghold",
@@ -1052,7 +1053,8 @@
         "test": "Test",
         "testDeepLink": "Testuj deep link",
         "initialize": "Zainicjuj",
-        "initializing": "Inicjowanie"
+        "initializing": "Inicjowanie",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -1112,7 +1114,7 @@
         "darkTheme": "Ciemny",
         "systemTheme": "Systemowy",
         "balance": "Saldo",
-        "balanceWithValue": "Balance: {balance}",
+        "balanceWithValue": "Saldo: {balance}",
         "all": "Wszystko",
         "incoming": "Odebrano",
         "outgoing": "Wysłano",
@@ -1147,7 +1149,9 @@
         "loadingAccounts": "Wczytywanie, proszę czekać...",
         "addProfile": "Dodaj profil",
         "noRecentHistory": "Brak ostatniej aktywności",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "Brak aktywów",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "W tym miesiącu",
         "search": "Szukaj",
         "firstSync": "Synchronizowanie historii, może to chwilę potrwać...",
@@ -1219,7 +1223,9 @@
         "claimedTime": "Odebrano",
         "copiedToClipboard": "Skopiowano do schowka",
         "total": "Suma: {balance}",
-        "availableBalance": "Dostępne środki: {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} odebrano",
         "metadata": "Metadane",
         "tag": "Tag",
@@ -1237,7 +1243,9 @@
         "developerTools": "Narzędzia deweloperskie",
         "testDeepLinkDescription": "Symulacja deep linku wysłanego do firefly",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
     },
     "filters": {
         "title": "Filtry",
@@ -1254,44 +1262,44 @@
         "verificationStatus": {
             "label": "Status weryfikacji",
             "new": "Nowy",
-            "skipped": "Skipped verification",
-            "selfVerified": "Self-verified",
-            "official": "Official"
+            "skipped": "Weryfikacja pominięta",
+            "selfVerified": "Weryfikacja własna",
+            "official": "Oficjalny"
         },
         "asset": {
             "label": "Aktywa"
         },
         "amount": {
-            "label": "Ilość",
-            "equal": "jest równe",
-            "range": "jest między",
-            "greater": "jest większe od",
-            "less": "jest mniejsze niż"
+            "label": "Wartość",
+            "equal": "jest równa",
+            "range": "pomiędzy",
+            "greater": "większa niż",
+            "less": "mniejsza niż"
         },
         "date": {
-            "label": "Date",
-            "equals": "is equal to",
-            "last": "in the last",
-            "range": "is between",
-            "after": "is after",
-            "afterOrEquals": "is on or after",
-            "before": "is before",
-            "Days": "days",
-            "Months": "months",
-            "Years": "years"
+            "label": "Data",
+            "equals": "jest równa",
+            "last": "z ostatnich",
+            "range": "pomiędzy",
+            "after": "po",
+            "afterOrEquals": "w dniu lub po",
+            "before": "przed",
+            "Days": "dni",
+            "Months": "miesięcy",
+            "Years": "lat"
         },
         "status": {
             "label": "Status",
             "confirmed": "potwierdzono",
             "pending": "przetwarzanie",
             "claimed": "odebrano",
-            "unclaimed": "nieodebrane"
+            "unclaimed": "nie odebrano"
         },
         "type": {
             "label": "Typ",
-            "incoming": "odebrano",
-            "outgoing": "wysłano",
-            "internal": "transfer wewnętrzny"
+            "incoming": "transakcje przychodzące",
+            "outgoing": "transakcje wychodzące",
+            "internal": "transfery wewnętrzne"
         }
     },
     "dates": {
@@ -1357,7 +1365,7 @@
             "success": "Prośba o tokeny wysłana do faucetu"
         },
         "mintNativeToken": {
-            "success": "Transakcja mintowania natywnego tokenu wysłana"
+            "success": "Transakcja mintowania natywnego tokenu została wysłana"
         },
         "refreshTokenMetadata": {
             "success": "Wszystkie metadane tokenu zostały zresetowane i odświeżone"
@@ -1371,7 +1379,7 @@
             "error": "Wystąpił błąd podczas wyszukiwania nagród"
         },
         "claimShimmerRewards": {
-            "success": "Pomyślnie odebrano nagrody Shimmer przez {accountAlias}",
+            "success": "Pomyślnie odebrano nagrody Shimmer na {accountAlias}",
             "error": "Wystąpił błąd podczas odbierania nagród"
         }
     },
@@ -1433,16 +1441,16 @@
             "amountNoFloat": "Nie można używać miejsc dziesiętnych, kiedy wybrana jest najmniejsza jednostka",
             "amountInvalidFormat": "Wartość wydaje się być niepoprawna.",
             "amountSmallerThanSubunit": "Ilość musi być większa niż najmniejsza podjednostka.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "Tag nie może być dłuższy niż 64 bajty.",
+            "metadataTooLong": "Metadane nie mogą być dłuższe niż 8192 bajty.",
             "amountZero": "Wartość musi być większa niż 0.",
             "wrongAddressPrefix": "Adresy zaczynają się od prefiksu {prefix}.",
             "wrongAddressFormat": "Adres nie jest poprawnie sformatowany.",
             "invalidAddress": "Adres jest nieprawidłowy.",
-            "unknownAsset": "The asset is not known to this account.",
+            "unknownAsset": "Ten asset nie jest znany na tym koncie.",
             "insufficientFunds": "Brak wystarczających środków na tym portfelu.",
             "insufficientFundsStorageDeposit": "Niewystarczające środki na pokrycie depozytu",
-            "cannotClaimTwice": "Output has been already claimed",
+            "cannotClaimTwice": "Ta nagroda została już odebrana",
             "noToAccount": "Nie wybrano portfela docelowego na który chcesz wysłać środki.",
             "sendingDust": "Nie możesz wysłać mniej niż 1 Mi.",
             "leavingDust": "Na Twoim adresie nie może pozostać mniej niż 1 Mi.",
@@ -1488,7 +1496,9 @@
             "seedCharacters": "Seed może składać się tylko z liter A-Z oraz cyfr 9",
             "phraseWordCount": "Wyrazy ratunkowe powinny zawierać 24 słowa. Aktualnie jest {length, plural, one {ich #} few {ich #} many {ich #} other {ich #}}.",
             "phraseUnrecognizedWord": "Nierozpoznane słowo \"{word}\" w Twoich wyrazach ratunkowych",
-            "phraseCaseWord": "Słowo \"{word}\" powinno być pisane małymi literami"
+            "phraseCaseWord": "Słowo \"{word}\" powinno być pisane małymi literami",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "Musisz otworzyć aplikację IOTA na swoim urządzeniu Ledger.",
@@ -1496,7 +1506,7 @@
             "legacyConnected": "Na Twoim urządzeniu Ledger otwarto nieprawidłową aplikację.",
             "locked": "Odblokuj swoje urządzenie Ledger wprowadzając kod PIN.",
             "mnemonicMismatch": "Podłączono nieprawidłowe urządzenie Ledger lub zmieniono wyrazy ratunkowe.",
-            "notConnected": "No Ledger device detected.",
+            "notConnected": "Nie wykryto urządzenia Ledger.",
             "notFound": "Nie znaleziono urządzenia Ledger.",
             "otherConnected": "Na Twoim urządzeniu Ledger otwarto nieprawidłową aplikację.",
             "generateAddress": "Podczas generowania adresu wystąpił błąd.",
@@ -1520,7 +1530,16 @@
             "invalidStakingEventId": "Nieprawidłowe ID wydarzenia stakingu."
         },
         "invalidDate": "NIEPRAWIDŁOWA DATA",
-        "invalidTime": "NIEPRAWIDŁOWY CZAS"
+        "invalidTime": "NIEPRAWIDŁOWY CZAS",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
@@ -1558,6 +1577,25 @@
             "bodyWillNotReachMin": "Nie osiągniesz minimalnej wartości nagrody podczas pozostałego okresu stakingu, dopóki nie dodasz większej ilości IOTA.",
             "bodyDidNotReachMin": "Nie stakowałeś wystarczająco dużo IOTA, aby osiągnąć minimalną nagrodę za {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Ten portfel nie ma wystarczającej ilości tokenów IOTA, aby osiągnąć minimalną nagrodę airdrop dla {airdrop}."
+        },
+        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            },
+            "outgoing": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            }
         }
     },
     "exports": {
@@ -1639,9 +1677,9 @@
             "Conflicting": "nie udało się migrować"
         },
         "asyncStatus": {
-            "unclaimed": "nieodebrano",
+            "unclaimed": "nie odebrano",
             "claimed": "odebrano",
-            "expired": "wygasło"
+            "expired": "wygasła"
         },
         "locked": "zablokowano"
     },
