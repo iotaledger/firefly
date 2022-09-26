@@ -18,12 +18,13 @@ export class AppSetupRouter extends Subrouter<AppSetupRoute> {
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
             case AppSetupRoute.Welcome:
-                this.parentRouter.next()
+                nextRoute = AppSetupRoute.Legal
                 break
             case AppSetupRoute.Legal:
                 nextRoute = AppSetupRoute.LanguageAndAppearance
                 break
             case AppSetupRoute.LanguageAndAppearance:
+                this.parentRouter.next()
                 break
         }
 
