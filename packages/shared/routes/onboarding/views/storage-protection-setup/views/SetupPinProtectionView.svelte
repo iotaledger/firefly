@@ -92,7 +92,7 @@
     <div slot="title">
         <Text type="h2">{localize('views.onboarding.storageProtectionSetup.setupPinProtection.title')}</Text>
     </div>
-    <div slot="leftpane_content">
+    <div slot="leftpane__content">
         <div class="flex flex-col mb-8">
             <Text type="p" secondary classes="mb-4"
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body1')}</Text
@@ -126,7 +126,7 @@
             />
         </form>
     </div>
-    <div slot="leftpane_action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
+    <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
             type="submit"
