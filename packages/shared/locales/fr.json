@@ -1334,7 +1334,7 @@
             "receivedWhileLoggedOut": "Veuillez vous connecter pour initialiser le lien ciblé",
             "notEnabled": "Les liens ciblés ne sont pas activés",
             "invalidFormat": "Le lien ciblé que vous avez suivi n'est pas valide",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Détails de paiement ajoutés à partir du lien ciblé"

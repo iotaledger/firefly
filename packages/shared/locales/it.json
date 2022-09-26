@@ -1334,7 +1334,7 @@
             "receivedWhileLoggedOut": "Effettua il login per avviare il link",
             "notEnabled": "I link di Iota non sono abilitati",
             "invalidFormat": "Il link che hai attivato non è valido",
-            "invalidNumber": "L'importo nel link profondo non è un numero {amount}",
+            "invalidAmount": "L'importo nel link profondo non è un numero {amount}",
             "wallet": {
                 "send": {
                     "success": "Dettagli di pagamento aggiunti dal link"

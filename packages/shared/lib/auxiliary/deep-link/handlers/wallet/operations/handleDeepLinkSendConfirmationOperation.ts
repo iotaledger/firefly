@@ -12,7 +12,7 @@ import { openPopup } from '@lib/popup'
 
 import { SendOperationParameter } from '../../../enums'
 import {
-    AmountNotANumberError,
+    FeeNotANumberError,
     InvalidAddressError,
     MetadataLengthError,
     NoAddressSpecifiedError,
@@ -70,7 +70,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
 
     const fee = searchParams.get(SendOperationParameter.Fee)
     if (parseInt(fee).toString() !== fee) {
-        throw new AmountNotANumberError(fee)
+        throw new FeeNotANumberError(fee)
     }
 
     const metadata = searchParams.get(SendOperationParameter.Metadata)

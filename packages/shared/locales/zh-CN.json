@@ -1334,7 +1334,7 @@
             "receivedWhileLoggedOut": "请登录以启动深链接",
             "notEnabled": "深链接没有被激活。",
             "invalidFormat": "您使用的深链接无效",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "从深链接添加的付款详细信息"

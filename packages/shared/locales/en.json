@@ -1345,7 +1345,8 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidFee": "The fee in deep link is not a number {fee}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"

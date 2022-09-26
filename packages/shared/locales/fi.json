@@ -1334,7 +1334,7 @@
             "receivedWhileLoggedOut": "Ole hyvä ja kirjaudu aloittaaksesi syvälinkin",
             "notEnabled": "Syvälinkit eivät ole käytössä",
             "invalidFormat": "Seuraamasi syvälinkki on virheellinen",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Maksutiedot lisätty syvälinkistä"

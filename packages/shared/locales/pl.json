@@ -1334,7 +1334,7 @@
             "receivedWhileLoggedOut": "Zaloguj się, aby zainicjować deep link",
             "notEnabled": "Deep linki nie są włączone",
             "invalidFormat": "Deep link, który wybrałeś, jest nieprawidłowy",
-            "invalidNumber": "Podana ilość w deep linku nie jest liczbą {amount}",
+            "invalidAmount": "Podana ilość w deep linku nie jest liczbą {amount}",
             "wallet": {
                 "send": {
                     "success": "Szczegóły płatności zostały wypełnione przy użyciu deep linku"
