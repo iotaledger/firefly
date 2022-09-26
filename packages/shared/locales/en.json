@@ -1603,10 +1603,10 @@
             }
         },
         "mintNativeTokenForm": {
-            "decimals": "Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation)",
-            "description": "The human-readable description of the token.",
-            "url": "URL pointing to more resources about the token like a website or social media page.",
-            "logoUrl": "URL pointing to an image resource of the token logo."
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {
