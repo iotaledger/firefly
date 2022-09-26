@@ -7,10 +7,12 @@
         appSettings,
         appStage,
         AppStage,
+        AppTheme,
         appVersionDetails,
         initAppSettings,
         pollCheckForAppUpdate,
         setAppVersionDetails,
+        shouldBeDarkMode,
     } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { addError } from '@core/error'
@@ -19,7 +21,7 @@
     import { OnboardingRouter } from './routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { initialiseOnboardingProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingProfile, onboardingProfile } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
 
@@ -134,6 +136,13 @@
     $keyboardHeight = window.innerHeight / 2
     // Press ctrl + k to toggle the fake keyboard
     document.onkeydown = function (e) {
+        if (e.ctrlKey && e.key === 'c') {
+            $appSettings.theme = $appSettings.theme === AppTheme.Light ? AppTheme.Dark : AppTheme.Light
+            $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
+        }
+        if (e.ctrlKey && e.key === 'd') {
+            $onboardingProfile.isDeveloperProfile = true
+        }
         if (e.ctrlKey && e.key === 'k') {
             $isKeyboardOpen = !$isKeyboardOpen
         }
