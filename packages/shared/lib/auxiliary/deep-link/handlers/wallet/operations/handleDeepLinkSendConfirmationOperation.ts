@@ -4,8 +4,8 @@ import {
     getAssetById,
     INewTransactionDetails,
     selectedAccountAssets,
+    setNewTransactionDetails,
     Subject,
-    updateNewTransactionDetails,
 } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
@@ -26,7 +26,7 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
     const transactionDetails = parseSendConfirmationOperation(searchParams)
 
     if (transactionDetails) {
-        updateNewTransactionDetails({ ...transactionDetails })
+        setNewTransactionDetails(transactionDetails)
         openPopup({
             type: 'sendConfirmation',
             overflow: true,
