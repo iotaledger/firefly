@@ -89,9 +89,7 @@
     <Checkbox label={localize(getCheckboxText())} bind:checked classes="mt-4" />
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4">
-    <Button autofocus classes="w-full" onClick={handleConfirmClick} disabled={!checked}
-        >{localize('actions.confirm')}</Button
-    >
+    <Button classes="w-full" onClick={handleConfirmClick} disabled={!checked}>{localize('actions.confirm')}</Button>
 </div>
 
 <style type="text/scss">

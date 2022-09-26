@@ -249,7 +249,7 @@
         <Button outline classes="w-full" disabled={$isTransferring} onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button autofocus classes="w-full" disabled={$isTransferring} onClick={handleMint} isBusy={$isTransferring}>
+        <Button classes="w-full" disabled={$isTransferring} onClick={handleMint} isBusy={$isTransferring}>
             {localize('actions.mint')}
         </Button>
     </div>
