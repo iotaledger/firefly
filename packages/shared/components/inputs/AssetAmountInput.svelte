@@ -1,6 +1,6 @@
 <script lang="typescript">
     import Big from 'big.js'
-    import { Text, AssetDropdown, InputContainer, AmountInput } from 'shared/components'
+    import { Text, AssetDropdown, InputContainer, AmountInput, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
     import { parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
@@ -111,14 +111,24 @@
     </div>
     <div class="flex flex-row w-full items-end justify-between">
         {#if asset}
-            <button on:click={onClickAvailableBalance}>
-                <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
-                    {localize('general.balanceWithValue', {
-                        values: { balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata) },
-                    })}
-                </Text>
-            </button>
+            <div class="flex flex-row items-center">
+                <button on:click={onClickAvailableBalance}>
+                    <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
+                        {localize('general.availableBalanceWithValue', {
+                            values: { balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata) },
+                        })}
+                    </Text>
+                </button>
+                <TooltipIcon
+                    title={localize('general.availableBalance')}
+                    text={localize('general.availableBalanceTooltip')}
+                    width={15}
+                    height={15}
+                    classes="ml-1"
+                />
+            </div>
         {/if}
+        <!-- Placeholder for asset USD value  -->
         <Text color="gray-600" darkColor="gray-500" fontSize="xs">-</Text>
     </div>
 </InputContainer>
