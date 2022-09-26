@@ -1,9 +1,9 @@
 import { get, writable } from 'svelte/store'
+import Big from 'big.js'
 import { appSettings } from '@core/app'
 import { activeProfile } from '@core/profile'
 import { formatUnitBestMatch } from './units'
 import { AvailableExchangeRates, Currencies, CurrencyTypes, ExchangeRates } from './typings/currency'
-
 /**
  * Default exchange rates
  */
@@ -56,17 +56,19 @@ export const currencies = writable<Currencies>({} as Currencies)
  *
  * @method convertToFiat
  *
- * @param {number} amount
+ * @param {number} rawAmount
  * @param {number} usdPrice
  * @param {number} conversionRate
  *
  * @returns {number}
  */
-export const convertToFiat = (amount: number, usdPrice: number, conversionRate: number): number =>
+export const convertToFiat = (rawAmount: Big, usdPrice: number, conversionRate: number): number => {
     /**
      * NOTE: 1_000_000 is referring to 1Mi worth of value.
      */
-    +(((amount * usdPrice) / 1_000_000) * conversionRate).toFixed(2)
+    const amount = rawAmount.div(1_000_000).toNumber()
+    return +(amount * usdPrice * conversionRate).toFixed(2)
+}
 
 /**
  *
@@ -235,6 +237,17 @@ export const formatNumber = (
     maxZeros: number = 2,
     grouped: boolean = false
 ): string => {
+    // The decimals are truncated anyway if the value is larger than what JS can represent safely.
+    if (value > Number.MAX_SAFE_INTEGER) {
+        return String(value)
+    }
+
+    // The maximum decimals are equal to the max decimals of Ethereum.
+    // Larger values throw an error when trying to format.
+    if (maxDecimals > 18) {
+        return String(value)
+    }
+
     const appLanguage = get(appSettings).language
 
     const formatted = Intl.NumberFormat(appLanguage, {

@@ -13,6 +13,7 @@
         updateOnboardingProfile,
         verifyAndStoreMnemonic,
     } from '@contexts/onboarding'
+    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     let input = ''
 
@@ -53,7 +54,7 @@
         </form>
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button type="submit" form="text-import-form" classes="flex-1" disabled={input.length === 0}>
+        <Button type={HTMLButtonType.Submit} form="text-import-form" classes="flex-1" disabled={input.length === 0}>
             {localize('actions.continue')}
         </Button>
     </div>

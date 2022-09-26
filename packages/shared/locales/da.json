@@ -215,9 +215,9 @@
         "connectLedger": {
             "title": "Tilslut din Ledger til Firefly",
             "body": "For at Firefly kan finde Ledger-enheden, så sørg for, at den officielle Ledger Live-applikation er lukket.",
-            "connect": "Connect your Ledger device",
-            "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "connect": "Tilslut Ledger-enheden",
+            "unlock": "Oplås Ledger-enheden PIN-koden",
+            "openApp": "Åbn Shimmer-appen på Ledger-enheden",
             "tips": "Tips, hvis Ledger-enheden ikke tilsluttes"
         },
         "restoreFromFireflyLedger": {
@@ -469,11 +469,11 @@
                 "hardware": {
                     "title": "Hardware Device",
                     "statuses": {
-                        "appNotOpen": "Ledger unlocked but app not open",
-                        "correctAppOpen": "Ledger unlocked and app open ",
-                        "locked": "Ledger securely locked",
+                        "appNotOpen": "Ledger-enhed oplåst, men app er ikke åben",
+                        "correctAppOpen": "Ledger-enhed oplåst, og app er åben ",
+                        "locked": "Ledger-enheden sikkert låst",
                         "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notConnected": "Ledger not connected",
+                        "notConnected": "Ledger-enheden ikke tilsluttet",
                         "otherConnected": "App open"
                     }
                 },
@@ -550,12 +550,12 @@
     },
     "popups": {
         "enableLedgerBlindSigning": {
-            "title": "Enable Blind Signing",
-            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
-            "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
-            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
-            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+            "title": "Aktivér Blind Signering",
+            "info": "For at bekræfte denne transaktion, skal Blind Signering aktiveres på Ledger-enheden.",
+            "step_1": "Tilslut og oplås Ledger-enheden",
+            "step_2": "Åbn Shimmer-appen",
+            "step_3": "Tryk på højre knap for at gå til Indstillinger. Tryk derefter på begge knapper for at bekræfte. Ledger-enheden viser Blind Signering.",
+            "step_4": "Tryk på begge knapper for at aktivere blind signeringstransaktion. Enheden vises Aktiveret. Det var dét."
         },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
@@ -585,6 +585,14 @@
         "backupStronghold": {
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
+        },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
         "deleteAccount": {
             "title": "Slet {name}?",
@@ -731,11 +739,11 @@
             "bodyFirefly": "Firefly er deaktiveret, indtil den er færdig. Token migration vil stadig være mulig efterfølgende."
         },
         "ledgerNotConnected": {
-            "title": "Connect your Ledger",
-            "notConnected": "Connect your Ledger device to continue.",
-            "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
-            "correctAppOpen": "Ledger successfully connected, please continue."
+            "title": "Tilslut Ledger-enheden",
+            "notConnected": "Tilslut Ledger-enheden for at fortsætte.",
+            "locked": "Oplås Ledger-enheden for at fortsætte.",
+            "appNotOpen": "Åbn {protocol}-appen på Ledger-enheden for at fortsætte.",
+            "correctAppOpen": "Ledger-enheden er tilsluttet, fortsæt."
         },
         "ledgerConfirmation": {
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Confirm receive address",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 måned"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Fortsæt",
         "back": "Tilbage",
         "previous": "Previous",
@@ -898,7 +912,7 @@
         "dismiss": "Afvis",
         "claim": "Claim",
         "claiming": "Claiming",
-        "claimingRewards": "Claiming rewards",
+        "claimingRewards": "Modtagelse af belønninger",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -1036,9 +1050,9 @@
         "faucetRequest": "Hent {token} tokener",
         "refreshTokenMetadata": "Opdatér tokenmetadata",
         "test": "Test",
-        "testDeepLink": "Test deep link",
-        "initialize": "Initialize",
-        "initializing": "Initializing"
+        "testDeepLink": "Test dybt link",
+        "initialize": "Initialisér",
+        "initializing": "Initialiserer"
     },
     "general": {
         "recipient": "Recipient",
@@ -1054,8 +1068,8 @@
         "received": "Modtaget",
         "transfer": "Transfer",
         "transferring": "Transferring",
-        "shimmerClaimed": "Claimed",
-        "shimmerClaiming": "Claiming",
+        "shimmerClaimed": "Modtaget",
+        "shimmerClaiming": "Modtager",
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Mintet",
         "minting": "Mintning",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Saldo",
+        "balanceWithValue": "Balance: {balance}",
         "all": "All",
         "incoming": "Indgående",
         "outgoing": "Udgående",
@@ -1200,7 +1215,7 @@
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
-        "timelockDate": "Timelock",
+        "timelockDate": "Tidslås",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
@@ -1219,8 +1234,8 @@
         "refreshTokenMetadataHint": "Dette nulstiller alle tokeners metadata, herunder bekræftelsesstatus og viser evt. ellers skjulte aktiver.",
         "giftStorageDeposit": "Gift storage deposit",
         "excluded": "Udelukkede",
-        "developerTools": "Developer tools",
-        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "developerTools": "Udviklingsværktøjer",
+        "testDeepLinkDescription": "Simulér en anmodning om et dybt link sendt til Firefly",
         "url": "URL",
         "hash": "Hash"
     },
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Bekræftelsesstatus",
             "new": "Ny",
-            "notVerified": "Ubekræftet",
-            "verified": "Bekræftet"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Aktiver"
@@ -1251,6 +1267,18 @@
             "range": "er mellem",
             "greater": "er større end",
             "less": "er mindre end"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Status",
@@ -1306,12 +1334,12 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidNumber": "Beløbet i et dybt link er ikke et tal {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
                 },
-                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
+                "unrecognizedOperation": "Ikke-genkendt wallet-handling: {operation}"
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
@@ -1335,7 +1363,7 @@
             "success": "Alle tokenmetadata er nulstillet og opdateret"
         },
         "restoreFromStrongholdBackup": {
-            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
+            "wrongProtocol": "Protokollen matcher ikke coin-typen fundet i Stronghold-sikkerhedskopien",
             "wrongProtocolForClaiming": "Der skal bruges en IOTA-baseret Stronghold-sikkerhedskopi til at hente Shimmer-belønninger"
         },
         "findShimmerRewards": {
@@ -1343,7 +1371,7 @@
             "error": "En fejl opstod under søgning efter belønninger"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
+            "success": "Shimmer belønninger for {accountAlias} er nu hævet",
             "error": "En fejl opstod under hentning af belønninger"
         }
     },
@@ -1354,8 +1382,8 @@
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
             },
-            "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "type": "Profiltypen kan ikke bestemmes",
+            "setupType": "Profilopsætningstypen kan ikke bestemmes"
         },
         "password": {
             "doNotMatch": "Adgangskoderne er ikke ens.",
@@ -1396,8 +1424,8 @@
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
             "notLast": "You can only delete your last wallet.",
-            "notFound": "Unable to find account",
-            "cannotGetBoundAccount": "Unable to get bound account"
+            "notFound": "Konto kan ikke findes",
+            "cannotGetBoundAccount": "Tilknyttet konto kan ikke hentes"
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
@@ -1405,20 +1433,24 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Beløbet ser ud til at være et ugyldigt tal.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Beløb skal være større end 0.",
             "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
             "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
             "invalidAddress": "Adressen er ikke gyldig.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Denne wallet har ikke tilstrækkelige midler.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Du har ikke valgt en wallet at sende midlerne til.",
             "sendingDust": "Du kan ikke sende mindre end 1 Mi.",
             "leavingDust": "Du kan ikke forlade mindre end 1 Mi på din adresse.",
             "cancelled": "The transaction was cancelled.",
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
-            "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
+            "missingTransactionId": "Transaktions-ID'et mangler",
+            "missingTransactionProgressEventPayload": "Payload for transaktionstatusbegivenhed mangler"
         },
         "node": {
             "invalid": "Indtast venligst en gyldig URL.",
@@ -1430,8 +1462,8 @@
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Denne node er allerede blevet tilføjet.",
             "unsynced": "Noden er ikke synkroniseret.",
-            "noSyncedNode": "No synced node is available.",
-            "timeNotSynced": "Device time is incorrect, unable to sync node.",
+            "noSyncedNode": "Ingen synkede noder tilgængelig.",
+            "timeNotSynced": "Enhedsklokkeslæt forkert, kan ikke synke node.",
             "answer": "Failed to get an answer from all nodes.",
             "forbidden": "This node connection is forbidden.",
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
@@ -1555,7 +1587,7 @@
     "tabs": {
         "wallet": "Wallet",
         "staking": "Staking",
-        "developer": "Developer"
+        "developer": "Udvikler"
     },
     "pills": {
         "stake": {
@@ -1611,7 +1643,7 @@
             "claimed": "claimed",
             "expired": "expired"
         },
-        "locked": "locked"
+        "locked": "låst"
     },
     "menus": {
         "expirationTimePicker": {

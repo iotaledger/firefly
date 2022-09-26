@@ -1,19 +1,30 @@
-import type { IAliasOutput, IBasicOutput, IFoundryOutput, INftOutput, OutputTypes } from '@iota/types'
+import type {
+    IAliasOutput,
+    IBasicOutput,
+    IFoundryOutput,
+    INftOutput,
+    IOutputResponse,
+    ITransactionPayload,
+    OutputTypes,
+} from '@iota/types'
 import {
     AccountBalance,
+    AccountMetadata,
     Address,
     AddressNativeTokens,
     AddressNftId,
     AddressWithAmount,
     AddressWithMicroAmount,
+    AliasOutputOptions,
     BuildAliasOutputData,
     BuildBasicOutputData,
     BuildFoundryOutputData,
     BuildNftOutputData,
+    FilterOptions,
+    IncreaseNativeTokenSupplyOptions,
     MintTokenTransaction,
     OutputData,
     OutputOptions,
-    OutputsToClaim,
     PreparedTransactionData,
     SignedTransactionEssence,
     Transaction,
@@ -46,9 +57,6 @@ export class AccountMock implements IAccount {
     }
 
     constructor() {}
-    getFoundryOutput(tokenId: string): Promise<IFoundryOutput> {
-        throw new Error('Method not implemented.')
-    }
 
     buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput> {
         throw new Error('Method not implemented.')
@@ -66,20 +74,57 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction[]> {
+    burnNativeToken(
+        tokenId: string,
+        burnAmount: string,
+        transactionOptions?: TransactionOptions
+    ): Promise<Transaction> {
         throw new Error('Method not implemented.')
     }
 
-    getAlias(): string {
-        return ''
+    burnNft(nftId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    consolidateOutputs(force: boolean, outputConsolidationThreshold?: number): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    claimOutputs(): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    createAliasOutput(
+        aliasOutputOptions?: AliasOutputOptions,
+        transactionOptions?: TransactionOptions
+    ): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+
+    decreaseNativeTokenSupply(
+        tokenId: string,
+        meltAmount: string,
+        transactionOptions?: TransactionOptions
+    ): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+    destroyAlias(aliasId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
+        throw new Error('Method not implemented.')
+    }
+    destroyFoundry(foundryId: string, transactionOptions?: TransactionOptions): Promise<Transaction> {
+        throw new Error('Method not implemented.')
     }
 
     getBalance(): Promise<AccountBalance> {
         return Promise.resolve(MOCK_ACCOUNT_BALANCE)
     }
 
-    claimOutputs(): Promise<Transaction[]> {
-        return Promise.resolve([])
+    getFoundryOutput(tokenId: string): Promise<IFoundryOutput> {
+        throw new Error('Method not implemented.')
+    }
+
+    getMetadata(): AccountMetadata {
+        throw new Error('Method not implemented.')
     }
 
     getOutput(outputId: string): Promise<OutputData> {
@@ -121,6 +166,15 @@ export class AccountMock implements IAccount {
         return Promise.resolve([''])
     }
 
+    increaseNativeTokenSupply(
+        tokenId: string,
+        mintAmount: string,
+        increaseNativeTokenSupplyOptions?: IncreaseNativeTokenSupplyOptions,
+        transactionOptions?: TransactionOptions
+    ): Promise<MintTokenTransaction> {
+        throw new Error('Method not implemented.')
+    }
+
     listAddresses(): Promise<[]> {
         return Promise.resolve([])
     }
@@ -129,11 +183,15 @@ export class AccountMock implements IAccount {
         return Promise.resolve([])
     }
 
-    listOutputs(): Promise<[]> {
+    listOutputs(filterOptions?: FilterOptions): Promise<[]> {
         return Promise.resolve([])
     }
 
-    listUnspentOutputs(): Promise<[]> {
+    listIncomingTransactions(): Promise<[string, ITransactionPayload, IOutputResponse][]> {
+        throw new Error('Method not implemented.')
+    }
+
+    listUnspentOutputs(filterOptions?: FilterOptions): Promise<[]> {
         return Promise.resolve([])
     }
 
@@ -226,10 +284,6 @@ export class AccountMock implements IAccount {
     }
 
     sync(options?): Promise<AccountBalance> {
-        throw new Error('Method not implemented.')
-    }
-
-    tryClaimOutputs(outputsToClaim: OutputsToClaim): Promise<Transaction[]> {
         throw new Error('Method not implemented.')
     }
 }

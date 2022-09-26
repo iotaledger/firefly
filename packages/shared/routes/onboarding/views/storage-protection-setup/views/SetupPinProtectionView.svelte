@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, PinInput, Text } from 'shared/components'
+    import { onMount } from 'svelte'
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
@@ -13,7 +14,7 @@
     import { ProfileType } from '@core/profile'
     import { storageProtectionSetupRouter } from '@core/router'
     import { validatePinFormat } from '@lib/utils'
-    import { onMount } from 'svelte'
+    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let busy = false
 
@@ -60,6 +61,8 @@
     }
 
     async function handleSetPin(): Promise<void> {
+        busy = true
+
         await initialisePincodeManager(setPinInput)
 
         const canInitialiseFirstShimmerClaimingAccount =
@@ -69,6 +72,8 @@
         if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
             await initialiseFirstShimmerClaimingAccount()
         }
+
+        busy = false
 
         $storageProtectionSetupRouter.next()
     }
@@ -129,9 +134,11 @@
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
-            type="submit"
+            type={HTMLButtonType.Submit}
             disabled={!(arePinInputsValid && arePinInputsMatching) || busy}
             form="setup-pin"
+            isBusy={busy}
+            busyMessage={`${localize('actions.initializing')}...`}
             bind:this={submitButtonElement}
         >
             {localize('actions.continue')}

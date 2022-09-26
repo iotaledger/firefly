@@ -28,18 +28,17 @@ export async function findShimmerRewards(): Promise<void> {
     }
 
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
-    const accountMetadataList = await _shimmerClaimingProfileManager?.recoverAccounts(
+    const unboundAccounts = await _shimmerClaimingProfileManager?.recoverAccounts(
+        0,
         accountGapLimit,
         addressGapLimit,
         DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS
     )
-    const boundAccounts = await getSortedRenamedBoundAccounts(accountMetadataList, shimmerClaimingProfileManager)
+    const boundAccounts = await getSortedRenamedBoundAccounts(unboundAccounts, shimmerClaimingProfileManager)
     const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
     const hasNewRewards = updatedTotalUnclaimedShimmerRewards > totalUnclaimedShimmerRewards
     if (hasNewRewards) {
-        const boundTwinAccounts = await getSortedRenamedBoundAccounts(
-            boundAccounts?.map((boundAccount) => boundAccount?.meta)
-        )
+        const boundTwinAccounts = await getSortedRenamedBoundAccounts(boundAccounts)
         for (const [boundAccount, boundTwinAccount] of zip(boundAccounts, boundTwinAccounts)) {
             const shimmerClaimingAccount = await prepareShimmerClaimingAccount(boundAccount, boundTwinAccount, true)
             updateShimmerClaimingAccount(shimmerClaimingAccount)

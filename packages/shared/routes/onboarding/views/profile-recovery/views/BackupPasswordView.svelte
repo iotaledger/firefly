@@ -15,6 +15,7 @@
         restoreBackupFromStrongholdFile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
+    import { showAppNotification } from '@lib/notifications'
 
     export let error = ''
     export let busy = false
@@ -24,6 +25,7 @@
 
     async function onContinueClick(): Promise<void> {
         if (strongholdPassword) {
+            busy = true
             try {
                 if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
                     await restoreBackupForShimmerClaimingProfileManager(strongholdPassword)
@@ -45,9 +47,14 @@
                     error = localize('error.password.incorrect')
                 } else {
                     console.error(err)
-                    error = localize('error.global.generic')
+                    showAppNotification({
+                        type: 'error',
+                        alert: true,
+                        message: localize('error.global.generic'),
+                    })
                 }
             }
+            busy = false
         }
     }
 
@@ -93,7 +100,13 @@
         />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={strongholdPassword.length === 0 || busy} onClick={onContinueClick}>
+        <Button
+            classes="flex-1"
+            disabled={strongholdPassword.length === 0 || busy}
+            isBusy={busy}
+            busyMessage={`${localize('actions.importing')}...`}
+            onClick={onContinueClick}
+        >
             {localize('actions.continue')}
         </Button>
     </div>

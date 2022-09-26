@@ -33,13 +33,13 @@
         </Text>
     </div>
     <div class="w-full flex flex-row flex-nowrap space-x-4">
-        <Button classes="w-1/2" secondary onClick={() => changeIndex(-1)} disabled={stepIndex === 0}>
+        <Button classes="w-1/2" outline onClick={() => changeIndex(-1)} disabled={stepIndex === 0}>
             {locale('actions.previous')}
         </Button>
         {#if stepIndex < Object.keys(locale('popups.ledgerAppGuide.steps')).length - 1}
-            <Button classes="w-1/2" secondary onClick={() => changeIndex(1)}>{locale('actions.next')}</Button>
+            <Button classes="w-1/2" outline onClick={() => changeIndex(1)}>{locale('actions.next')}</Button>
         {:else}
-            <Button classes="w-1/2" primary onClick={handleCloseClick}>{locale('actions.close')}</Button>
+            <Button classes="w-1/2" onClick={handleCloseClick}>{locale('actions.close')}</Button>
         {/if}
     </div>
 </div>

@@ -1,52 +1,45 @@
 <script lang="typescript">
-    import QRCode from 'qr.js/lib/QRCode'
+    import { default as QrCode } from 'qrious'
     import { appSettings } from '@core/app'
+    import { onMount } from 'svelte'
 
-    export let data
-    export let size = 150
-    export let classes
+    export let data: string
+    export let classes: string = ''
 
-    let qr
-    let cells
+    $: color = $appSettings.darkMode ? '#ffffff' : '#000000'
 
-    $: darkModeEnabled = $appSettings.darkMode
-    $: data, create()
+    const QRcode = new QrCode()
+    let image = ''
 
-    function create() {
-        try {
-            qr = new QRCode(-1, 1)
-            qr.addData(data)
-            qr.make()
-            cells = qr.modules
-        } catch (e) {
-            console.error(e)
-        }
+    function generateQrCode() {
+        QRcode.set({
+            background: '#ffffff00',
+            foreground: color,
+            level: 'L',
+            padding: 0,
+            size: 200, // if this value is changed, the image gets some weird padding. Therefore we need to do the sizing with css
+            value: data,
+        })
+
+        image = QRcode.toDataURL('image/png')
     }
+
+    $: if (data) {
+        generateQrCode()
+    }
+
+    onMount(() => {
+        generateQrCode()
+    })
 </script>
 
-{#key data}
-    {#if cells}
-        <svg width={size} height={size} viewBox={`0 0 ${cells.length} ${cells.length}`} class={classes}>
-            {#each cells as row, rowIndex}
-                {#each row as cell, cellIndex}
-                    <rect
-                        height={1}
-                        key={cellIndex}
-                        style="fill: {cell ? (darkModeEnabled ? '#ffffff' : '#000000') : 'none'};"
-                        width={1}
-                        x={cellIndex}
-                        y={rowIndex}
-                    />
-                {/each}
-            {/each}
-        </svg>
-    {/if}
-{/key}
+<div class="flex justify-center {classes}">
+    <img src={image} alt={data} class="qrcode" />
+</div>
 
-<style>
-    svg {
-        display: block;
-        position: relative;
-        margin: 0 auto;
+<style lang="scss">
+    .qrcode {
+        width: 135px;
+        height: 135px;
     }
 </style>

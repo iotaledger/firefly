@@ -586,6 +586,14 @@
             "title": "Varmuuskopioi Stronghold-tiedostosi",
             "body": "On tärkeää varmuuskopioida lompakkosi säännöllisesti varmistaaksesi, että sinulla on kopio lompakostasi ja transaktiohistoriastasi. Jos menetät varmuuskopiosi ja palautuslausekkeesi, menetät pääsyn varoihisi."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "Poista {name}?",
             "body": "Tällä lompakolla ei ole transaktiohistoriaa. Se voidaan turvallisesti poistaa.",
@@ -762,9 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
+        "verifyLedgerTransaction": {
             "title": "Verify transaction",
             "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Vahvista vastaanotto-osoite",
@@ -889,6 +902,7 @@
         "timeframe1Month": "1 kuukausi"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "Jatka",
         "back": "Takaisin",
         "previous": "Edellinen",
@@ -1098,6 +1112,7 @@
         "darkTheme": "Tumma",
         "systemTheme": "Järjestelmä",
         "balance": "Saldo",
+        "balanceWithValue": "Balance: {balance}",
         "all": "Kaikki",
         "incoming": "Saapuva",
         "outgoing": "Lähtevä",
@@ -1239,8 +1254,9 @@
         "verificationStatus": {
             "label": "Vahvistustila",
             "new": "Uusi",
-            "notVerified": "Ei vahvistettu",
-            "verified": "Vahvistettu"
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
         },
         "asset": {
             "label": "Varat"
@@ -1251,6 +1267,18 @@
             "range": "on välillä",
             "greater": "on enemmän kuin",
             "less": "on vähemmän kuin"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
         },
         "status": {
             "label": "Tila",
@@ -1405,12 +1433,16 @@
             "amountNoFloat": "Et voi käyttää desimaalipaikkoja, kun valittuna on pienin yksikkö",
             "amountInvalidFormat": "Summa näyttää olevan virheellinen luku.",
             "amountSmallerThanSubunit": "Summan on oltava isompi kuin pienin alayksikkö.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "Summan on oltava suurempi kuin 0.",
             "wrongAddressPrefix": "Osoitteet alkavat etuliitteellä {prefix}.",
             "wrongAddressFormat": "Osoite on muotoiltu virheellisesti.",
             "invalidAddress": "Osoite ei ole kelvollinen.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Tässä lompakossa ei ole riittävästi varoja.",
             "insufficientFundsStorageDeposit": "Riittämättömät varat tallennusvakuuden kattamiseen",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Et ole valinnut lompakkoa, johon varat lähetetään.",
             "sendingDust": "Et voi lähettää alle 1 Mi.",
             "leavingDust": "Et voi jättää alle 1 Mi osoitteeseesi.",
@@ -1464,7 +1496,7 @@
             "legacyConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
             "locked": "Ole hyvä ja avaa Ledger-laitteesi lukitus syöttämällä PIN-koodisi.",
             "mnemonicMismatch": "Olet yhdistänyt väärän Ledger-laitteen tai mnemonic-fraasi on muuttunut.",
-            "notConnected": "Ledger-laitetta ei havaittu.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Ledger-laitetta ei löydy.",
             "otherConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
             "generateAddress": "Osoitetta luotaessa tapahtui virhe.",

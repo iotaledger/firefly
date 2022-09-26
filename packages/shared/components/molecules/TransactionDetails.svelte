@@ -69,17 +69,48 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
+    $: localePrefix = `tooltips.transactionDetails.${direction === ActivityDirection.In ? 'incoming' : 'outgoing'}.`
+
+    let detailsList: { [key in string]: { data: unknown; tooltipText?: string } }
     $: detailsList = {
-        ...(formattedTransactionTime && { transactionTime: formattedTransactionTime }),
-        ...(metadata && { metadata }),
-        ...(tag && { tag }),
-        ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
-            storageDeposit: formattedStorageDeposit,
+        ...(formattedTransactionTime && { transactionTime: { data: formattedTransactionTime } }),
+        ...(metadata && {
+            metadata: {
+                data: metadata,
+                ooltipText: localize(localePrefix + 'metadata'),
+            },
         }),
-        ...(giftedStorageDeposit && { giftedStorageDeposit: formattedGiftedStorageDeposit }),
-        ...(expirationTime && { expirationTime }),
-        ...(timelockDate && { timelockDate: formattedTimelockDate }),
-        ...(claimedTime && { claimedTime }),
+        ...(tag && {
+            tag: {
+                data: tag,
+                tooltipText: localize(localePrefix + 'tag'),
+            },
+        }),
+        ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
+            storageDeposit: {
+                data: formattedStorageDeposit,
+                tooltipText: localize(localePrefix + 'storageDeposit'),
+            },
+        }),
+        ...(giftedStorageDeposit && {
+            giftedStorageDeposit: {
+                data: formattedGiftedStorageDeposit,
+                tooltipText: localize(localePrefix + 'giftedStorageDeposit'),
+            },
+        }),
+        ...(expirationTime && {
+            expirationTime: {
+                data: expirationTime,
+                tooltipText: localize(localePrefix + 'expirationTime'),
+            },
+        }),
+        ...(timelockDate && {
+            timelockDate: {
+                data: formattedTimelockDate,
+                tooltipText: localize(localePrefix + 'timelockDate'),
+            },
+        }),
+        ...(claimedTime && { claimedTime: { data: claimedTime } }),
     }
 
     $: copyableDetailsList = {
@@ -116,7 +147,7 @@
             <transaction-value class="flex flex-col items-center">
                 <div class="flex flex-row space-x-3">
                     <AssetIcon {asset} />
-                    <div class="flex flex-row items-baseline space-x-0.1">
+                    <div class="flex flex-row flex-wrap justify-center items-baseline space-x-0.1">
                         <Text type="h1" fontWeight={FontWeight.semibold}>{amount}</Text>
                         {#if unit}
                             <Text type="h4" classes="ml-1" fontWeight={FontWeight.medium}>{unit}</Text>
@@ -160,10 +191,11 @@
     {#if Object.entries(detailsList).length > 0}
         <details-list class="flex flex-col space-y-2">
             {#each Object.entries(detailsList) as [key, value]}
-                <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
-            {/each}
-            {#each Object.entries(copyableDetailsList) as [key, value]}
-                <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} isCopyable />
+                <KeyValueBox
+                    keyText={localize(`general.${key}`)}
+                    valueText={value.data}
+                    tooltipText={value.tooltipText}
+                />
             {/each}
             {#if claimingTransactionId}
                 <KeyValueBox keyText={localize(isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
