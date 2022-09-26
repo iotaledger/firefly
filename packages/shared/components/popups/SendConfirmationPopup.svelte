@@ -125,11 +125,7 @@
         }
     }
 
-    async function updateStoresAndSend(): Promise<void> {
-        updateNewTransactionDetails({ expirationDate, giftStorageDeposit, fee })
-        if ($isActiveLedgerProfile) {
-            ledgerPreparedOutput.set(preparedOutput)
-        }
+    async function sendOutputAndClosePopup(): Promise<void> {
         await sendOutput(preparedOutput)
         closePopup()
     }
@@ -142,7 +138,11 @@
         error = null
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
-            await checkActiveProfileAuth(updateStoresAndSend, { stronghold: true, ledger: false })
+            updateNewTransactionDetails({ expirationDate, giftStorageDeposit, fee })
+            if ($isActiveLedgerProfile) {
+                ledgerPreparedOutput.set(preparedOutput)
+            }
+            await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             if (!error) {
                 error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
