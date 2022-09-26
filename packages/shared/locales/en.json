@@ -564,6 +564,9 @@
                 "subtitle": "For sending native assets and small IOTA amounts"
             }
         },
+        "alias": {
+            "title": "Confirm alias creation"
+        },
         "password": {
             "title": "Password required",
             "subtitle": "Please provide your password to unlock your wallets",
@@ -934,6 +937,7 @@
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
+        "createAlias": "Create alias",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPinCode": "Setup PIN code",

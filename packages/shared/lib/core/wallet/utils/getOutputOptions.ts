@@ -9,8 +9,8 @@ export function getOutputOptions(
     expirationDate: Date,
     recipientAddress: string,
     rawAmount: Big,
-    metadata: string,
-    tag: string,
+    metadata?: string,
+    tag?: string,
     asset?: IAsset,
     giftStorageDeposit?: boolean
 ): OutputOptions {
