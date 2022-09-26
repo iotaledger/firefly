@@ -1,10 +1,10 @@
 import { get } from 'svelte/store'
-import { IAccountState, selectedAccount } from '@core/account'
+import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
 import { Converter } from '@lib/converter'
 import { showAppNotification } from '@lib/notifications'
-import { activeProfile, ProfileType, updateActiveAccount } from '@core/profile'
+import { activeProfile, ProfileType } from '@core/profile'
 import { isTransferring } from '@lib/wallet'
 import { handleLedgerError } from '@core/ledger'
 import { Activity } from '../classes'
@@ -14,6 +14,7 @@ import { addActivityToAccountActivitiesInAllAccountActivities, resetMintTokenDet
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { preprocessTransaction } from '../utils'
 import { VerifiedStatus } from '../enums'
+import { createAliasIfNecessary } from '@core/account/api/createAliasIfNecessary'
 
 export async function mintNativeToken(
     maximumSupply: number,
@@ -61,16 +62,5 @@ export async function mintNativeToken(
         }
 
         return Promise.reject(reason)
-    }
-}
-
-async function createAliasIfNecessary(account: IAccountState): Promise<void> {
-    if (account.hasAlias) {
-        return
-    } else {
-        await account.createAliasOutput()
-        await new Promise((resolve) => setTimeout(resolve, 5000))
-        await account.sync()
-        updateActiveAccount(account.id, { hasAlias: true })
     }
 }
