@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { ProfileType } from '@core/profile'
+import { profiles, ProfileType } from '@core/profile'
 import { onboardingProfile, ProfileRecoveryType, ProfileSetupType } from '@contexts/onboarding'
 
 import { appRouter } from './app-router'
@@ -131,5 +131,5 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
 }
 
 function hasCompletedOnboardingBefore(): boolean {
-    return false
+    return get(profiles).length > 0
 }
