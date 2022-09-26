@@ -27,8 +27,6 @@
         resetActiveProfile()
         updateOnboardingProfile({ networkProtocol: null })
     })
-
-    $: $onboardingProfile.isDeveloperProfile = true
 </script>
 
 <OnboardingLayout {onBackClick}>

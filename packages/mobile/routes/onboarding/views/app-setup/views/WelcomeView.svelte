@@ -15,13 +15,10 @@
 
 <OnboardingLayout allowBack={false}>
     <div slot="illustration" class="w-full flex justify-center">
-        <Animation
-            classes="setup-anim-aspect-ratio transform scale-180 mt-16 absolute left-32"
-            animation="welcome-desktop"
-        />
+        <Animation classes="setup-anim-aspect-ratio transform scale-180 absolute left-32" animation="welcome-desktop" />
     </div>
     <div slot="content">
-        <div class="flex flex-col items-center text-center space-y-4 mb-8">
+        <div class="flex flex-col items-center text-center space-y-4 absolute bottom-1/4 px-8">
             <Text type="h3"
                 >{localize('views.onboarding.appSetup.welcome.title', {
                     values: {

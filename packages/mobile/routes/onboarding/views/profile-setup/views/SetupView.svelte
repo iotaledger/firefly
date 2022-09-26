@@ -40,7 +40,6 @@
             primaryText={localize('actions.createWallet', {
                 values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
             })}
-            secondaryText={localize('actions.createWalletDescription')}
             icon="plus"
             iconHeight="11"
             iconWidth="11"
@@ -52,7 +51,6 @@
         />
         <OnboardingButton
             primaryText={localize(`actions.restoreWallet.${$onboardingProfile?.networkProtocol}`)}
-            secondaryText={localize(`actions.restoreWalletDescription.${$onboardingProfile?.networkProtocol}`)}
             icon="transfer"
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.restoreProfile?.hidden}

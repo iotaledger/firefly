@@ -17,7 +17,7 @@
     }
 </script>
 
-<div data-label="mobile-onboarding-layout" class="relative h-full p-5 pb-8 flex flex-col justify-between">
+<div data-label="mobile-onboarding-layout" class="relative h-full p-5 flex flex-col justify-between">
     <header class="relative w-full flex justify-center">
         <Text type="h4" classes="text-center">
             <slot name="title" />
@@ -32,8 +32,8 @@
         {/if}
     </header>
     <!-- TODO: fix flex-col-reverse scrolls mobile-top-content to bottom -->
-    <div class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto h-full pt-5 justify-between">
-        <div class={$isKeyboardOpen && 'h-0'}>
+    <div class="flex {reverseContent ? 'flex-col-reverse' : 'flex-col'} overflow-y-auto h-full pt-5">
+        <div class={$isKeyboardOpen ? 'h-0' : 'mt-24'}>
             <slot name="illustration" />
         </div>
         <div bind:this={scrollWraper} class="overflow-hidden">

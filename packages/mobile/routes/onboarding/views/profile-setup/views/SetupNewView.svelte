@@ -42,7 +42,6 @@
     <div slot="footer" class="flex flex-col space-y-4">
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.softwareAccount.title')}
-            secondaryText={localize('views.onboarding.profileSetup.setupNew.softwareAccount.description')}
             icon="file"
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.newProfile?.softwareProfile?.hidden}
@@ -52,7 +51,6 @@
         />
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.title')}
-            secondaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.description')}
             icon="chip"
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.newProfile?.ledgerProfile?.hidden}

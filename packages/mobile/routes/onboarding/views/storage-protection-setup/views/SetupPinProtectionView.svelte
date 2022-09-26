@@ -110,7 +110,7 @@
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
-        <form id="setup-pin" class="flex flex-col" on:submit={onSetPinClick}>
+        <form id="setup-pin" class="flex flex-col mb-8" on:submit={onSetPinClick}>
             <PinInput
                 bind:value={setPinInput}
                 glimpse
