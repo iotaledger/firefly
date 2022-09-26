@@ -220,7 +220,7 @@
             </Button>
         {/if}
 
-        <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring} isBusy={$isTransferring}>
+        <Button classes="w-full" onClick={onConfirm} disabled={$isTransferring} isBusy={$isTransferring}>
             {localize('actions.confirm')}
         </Button>
     </popup-buttons>
