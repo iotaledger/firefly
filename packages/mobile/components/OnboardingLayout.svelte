@@ -7,6 +7,14 @@
     export let reverseContent = false
 
     export let onBackClick = (): void => {}
+
+    let scrollWraper: HTMLElement
+
+    $: if ($isKeyboardOpen) {
+        setTimeout(() => {
+            scrollWraper?.scrollTo({ top: 100 })
+        })
+    }
 </script>
 
 <div data-label="mobile-onboarding-layout" class="relative h-full p-5 pb-8 flex flex-col justify-between">
@@ -28,7 +36,9 @@
         <div class={$isKeyboardOpen && 'h-0'}>
             <slot name="illustration" />
         </div>
-        <slot name="content" />
+        <div bind:this={scrollWraper} class="overflow-hidden">
+            <slot name="content" />
+        </div>
     </div>
     <footer style={$isKeyboardOpen && `margin-bottom: ${$keyboardHeight}px`}>
         <slot name="footer" />

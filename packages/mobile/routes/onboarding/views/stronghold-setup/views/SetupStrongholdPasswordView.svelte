@@ -103,7 +103,7 @@
     <div slot="illustration" class="w-full h-full flex justify-center">
         <Animation classes="setup-anim-aspect-ratio" animation="password-desktop" />
     </div>
-    <div slot="content" class="overflow-y-auto">
+    <div slot="content">
         <form on:submit|preventDefault={onContinueClick} id="password-form">
             <Text type="p" classes="mb-4" secondary
                 >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text
