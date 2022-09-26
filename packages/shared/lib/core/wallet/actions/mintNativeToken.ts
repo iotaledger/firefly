@@ -1,10 +1,10 @@
 import { get } from 'svelte/store'
-import { selectedAccount } from '@core/account'
+import { IAccountState, selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
 import { Converter } from '@lib/converter'
 import { showAppNotification } from '@lib/notifications'
-import { activeProfile, ProfileType } from '@core/profile'
+import { activeProfile, ProfileType, updateActiveAccount } from '@core/profile'
 import { isTransferring } from '@lib/wallet'
 import { handleLedgerError } from '@core/ledger'
 import { Activity } from '../classes'
@@ -23,9 +23,11 @@ export async function mintNativeToken(
     try {
         isTransferring.set(true)
         const account = get(selectedAccount)
-        // TODO: replace aliasId with correct implementation
+
+        // TODO: remove this once UX is enhanced
+        await createAliasIfNecessary(account)
+
         const nativeTokenOptions: NativeTokenOptions = {
-            aliasId: account.depositAddress,
             maximumSupply: Converter.decimalToHex(maximumSupply, true),
             circulatingSupply: Converter.decimalToHex(circulatingSupply, true),
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata), true),
@@ -58,5 +60,16 @@ export async function mintNativeToken(
         }
 
         return Promise.reject(reason)
+    }
+}
+
+async function createAliasIfNecessary(account: IAccountState): Promise<void> {
+    if (account.hasAlias) {
+        return
+    } else {
+        await account.createAliasOutput()
+        await new Promise((resolve) => setTimeout(resolve, 5000))
+        await account.sync()
+        updateActiveAccount(account.id, { hasAlias: true })
     }
 }
