@@ -20,8 +20,8 @@ export function getOutputOptions(
     const bigAmount = BigInt(rawAmount.toString())
 
     let amount: string
-    if (nativeTokenId && giftStorageDeposit && fee) {
-        amount = fee.toString()
+    if (nativeTokenId && fee) {
+        amount = fee
     } else {
         amount = nativeTokenId ? '0' : bigAmount.toString()
     }

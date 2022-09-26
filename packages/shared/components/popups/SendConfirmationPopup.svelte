@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Toggle } from 'shared/components'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text, TextHint, Error, Toggle } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
@@ -49,7 +49,8 @@
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
-    $: isNativeToken = asset?.id !== $selectedAccountAssets?.baseCoin?.id
+    $: hideGiftToggle =
+        asset?.id === $selectedAccountAssets?.baseCoin?.id || (storageDeposit === 0 && giftedStorageDeposit === 0)
 
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
@@ -75,7 +76,7 @@
         tag,
         unit,
         isInternal,
-        hasFee: !!Number(fee),
+        fee,
         type: ActivityType.Transaction,
     }
 
@@ -101,23 +102,26 @@
             fee
         )
         preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-
-        setStorageDeposit(preparedOutput, fee)
+        setStorageDeposit(preparedOutput, Number(fee))
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
-    function setStorageDeposit(preparedOutput: OutputTypes, fee?: string): void {
+    function setStorageDeposit(preparedOutput: OutputTypes, fee?: number): void {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
         storageDeposit = _storageDeposit
 
-        if (fee && Number(fee) > _giftedStorageDeposit) {
-            giftedStorageDeposit = Number(fee)
-        } else {
+        // Only giftedStorageDeposit needs adjusting, since that is derived
+        // from the amount property instead of the unlock condition
+        if (!fee) {
             giftedStorageDeposit = _giftedStorageDeposit
+        } else if (fee >= _giftedStorageDeposit) {
+            giftedStorageDeposit = 0
+        } else {
+            giftedStorageDeposit = _giftedStorageDeposit - fee
         }
     }
 
@@ -175,7 +179,7 @@
     >
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} {formattedFiatValue} />
-        {#if isNativeToken}
+        {#if !hideGiftToggle}
             <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                 <Toggle
                     slot="value"
@@ -200,6 +204,9 @@
             <Error error={error?.message} />
         {/if}
     </div>
+    {#if fee}
+        <TextHint warning text={localize('popups.transaction.feeIncluded')} />
+    {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}
             <Button classes="w-full" outline onClick={onCancel} disabled={$isTransferring}>
