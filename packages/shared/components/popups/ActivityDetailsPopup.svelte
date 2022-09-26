@@ -99,6 +99,7 @@
                 hint: localize('actions.confirmRejection.node'),
                 info: true,
                 confirmText: localize('actions.reject'),
+                warning: true,
                 onConfirm: () => {
                     rejectActivity(activityId)
                     closePopup()
