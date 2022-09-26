@@ -10,7 +10,7 @@ export enum SendOperationParameter {
     Metadata = 'metadata',
     Tag = 'tag',
     GiftStorageDeposit = 'giftStorageDeposit',
-    Fee = 'fee',
+    Surplus = 'surplus',
     DisableToggleGift = 'disableToggleGift',
     DisableChangeExpiration = 'disableChangeExpiration',
 }

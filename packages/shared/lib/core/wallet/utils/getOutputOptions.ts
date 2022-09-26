@@ -13,15 +13,15 @@ export function getOutputOptions(
     tag: string,
     asset?: IAsset,
     giftStorageDeposit?: boolean,
-    fee?: string
+    surplus?: string
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
     const bigAmount = BigInt(rawAmount.toString())
 
     let amount: string
-    if (nativeTokenId && fee) {
-        amount = fee
+    if (nativeTokenId && surplus) {
+        amount = surplus
     } else {
         amount = nativeTokenId ? '0' : bigAmount.toString()
     }

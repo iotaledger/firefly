@@ -41,7 +41,7 @@
     export let unit: string
     export let storageDeposit = 0
     export let giftedStorageDeposit = 0
-    export let fee: string = null
+    export let surplus: string = null
     export let subject: Subject = null
     export let tag: string = null
     export let transactionTime: Date = null
@@ -56,7 +56,7 @@
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
     $: isTimelocked = timelockDate > $time
-    $: hasStorageDeposit = storageDeposit || !(storageDeposit === 0 && giftedStorageDeposit === 0)
+    $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -68,7 +68,7 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
-    $: formattedFee = formatTokenAmountPrecise(Number(fee) ?? 0, BASE_TOKEN[$activeProfile?.networkProtocol])
+    $: formattedSurplus = formatTokenAmountPrecise(Number(surplus) ?? 0, BASE_TOKEN[$activeProfile?.networkProtocol])
 
     $: localePrefix = `tooltips.transactionDetails.${direction === ActivityDirection.In ? 'incoming' : 'outgoing'}.`
 
@@ -99,10 +99,10 @@
                 tooltipText: localize(localePrefix + 'giftedStorageDeposit'),
             },
         }),
-        ...(fee && {
-            fee: {
-                data: formattedFee,
-                tooltipText: localize(localePrefix + 'fee'),
+        ...(surplus && {
+            surplus: {
+                data: formattedSurplus,
+                tooltipText: localize(localePrefix + 'surplus'),
             },
         }),
         ...(expirationTime && {

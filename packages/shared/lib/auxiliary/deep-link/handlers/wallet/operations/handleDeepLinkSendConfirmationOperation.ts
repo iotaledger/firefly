@@ -12,7 +12,7 @@ import { openPopup } from '@lib/popup'
 
 import { SendOperationParameter } from '../../../enums'
 import {
-    FeeNotANumberError,
+    SurplusNotANumberError,
     InvalidAddressError,
     MetadataLengthError,
     NoAddressSpecifiedError,
@@ -68,9 +68,9 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
 
     const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
 
-    const fee = searchParams.get(SendOperationParameter.Fee)
-    if (fee && parseInt(fee).toString() !== fee) {
-        throw new FeeNotANumberError(fee)
+    const surplus = searchParams.get(SendOperationParameter.Surplus)
+    if (surplus && parseInt(surplus).toString() !== surplus) {
+        throw new SurplusNotANumberError(surplus)
     }
 
     const metadata = searchParams.get(SendOperationParameter.Metadata)
@@ -96,7 +96,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         ...(metadata && { metadata }),
         ...(tag && { tag }),
         ...(giftStorageDeposit && { giftStorageDeposit }),
-        ...(fee && { fee }),
+        ...(surplus && { surplus }),
         ...(disableToggleGift && { disableToggleGift }),
         ...(disableChangeExpiration && { disableChangeExpiration }),
     }

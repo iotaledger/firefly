@@ -34,7 +34,7 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
 
-    const { asset, amount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift, fee } =
+    const { asset, amount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift, surplus } =
         get(newTransactionDetails)
     let { expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
@@ -76,7 +76,7 @@
         tag,
         unit,
         isInternal,
-        fee,
+        surplus,
         type: ActivityType.Transaction,
     }
 
@@ -99,29 +99,29 @@
             tag,
             asset,
             giftStorageDeposit,
-            fee
+            surplus
         )
         preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-        setStorageDeposit(preparedOutput, Number(fee))
+        setStorageDeposit(preparedOutput, Number(surplus))
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
-    function setStorageDeposit(preparedOutput: OutputTypes, fee?: number): void {
+    function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
         storageDeposit = _storageDeposit
 
         // Only giftedStorageDeposit needs adjusting, since that is derived
         // from the amount property instead of the unlock condition
-        if (!fee) {
+        if (!surplus) {
             giftedStorageDeposit = _giftedStorageDeposit
-        } else if (fee >= _giftedStorageDeposit) {
+        } else if (surplus >= _giftedStorageDeposit) {
             giftedStorageDeposit = 0
         } else {
-            giftedStorageDeposit = _giftedStorageDeposit - fee
+            giftedStorageDeposit = _giftedStorageDeposit - surplus
         }
     }
 
@@ -138,7 +138,7 @@
         error = null
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
-            updateNewTransactionDetails({ expirationDate, giftStorageDeposit, fee })
+            updateNewTransactionDetails({ expirationDate, giftStorageDeposit, surplus })
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
@@ -204,8 +204,8 @@
             <Error error={error?.message} />
         {/if}
     </div>
-    {#if fee}
-        <TextHint warning text={localize('popups.transaction.feeIncluded')} />
+    {#if surplus}
+        <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}

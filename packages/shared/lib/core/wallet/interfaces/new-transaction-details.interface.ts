@@ -9,7 +9,7 @@ export interface INewTransactionDetails {
     tag?: string
     unit?: string
     giftStorageDeposit?: boolean
-    fee?: string
+    surplus?: string
     disableToggleGift?: boolean
     disableChangeExpiration?: boolean
 }
