@@ -1342,7 +1342,7 @@
             "receivedWhileLoggedOut": "Пожалуйста, войдите, чтобы открыть глубокую ссылку",
             "notEnabled": "Глубокие ссылки не включены",
             "invalidFormat": "Глубокая ссылка, по которой вы перешли, недействительна",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Платежные реквизиты добавлены из глубокой ссылки"

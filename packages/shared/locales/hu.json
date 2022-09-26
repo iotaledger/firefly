@@ -1342,7 +1342,7 @@
             "receivedWhileLoggedOut": "Kérjük, jelentkezzen be a mélyhivatkozás érvényesítéséhez",
             "notEnabled": "A mélyhivatkozások nincsenek engedélyezve",
             "invalidFormat": "A megadott mélyhivatkozás érvénytelen",
-            "invalidNumber": "A mélyhivatkozásban szereplő összeg nem egy szám: {amount}",
+            "invalidAmount": "A mélyhivatkozásban szereplő összeg nem egy szám: {amount}",
             "wallet": {
                 "send": {
                     "success": "Fizetés részletei a mélyhivatkozás alapján kitöltve"

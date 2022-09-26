@@ -1342,7 +1342,7 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidNumber": "Beløbet i et dybt link er ikke et tal {amount}",
+            "invalidAmount": "Beløbet i et dybt link er ikke et tal {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"

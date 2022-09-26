@@ -35,17 +35,18 @@
     export let expirationDate: Date = null
     export let timelockDate: Date = null
     export let formattedFiatValue: string = null
-    export let inclusionState = InclusionState.Pending
+    export let inclusionState: InclusionState = InclusionState.Pending
     export let metadata: string = null
     export let amount: string = null
     export let unit: string
     export let storageDeposit = 0
     export let giftedStorageDeposit = 0
+    export let surplus: string = null
     export let subject: Subject = null
     export let tag: string = null
     export let transactionTime: Date = null
-    export let isInternal = false
-    export let isClaiming = false
+    export let isInternal: boolean = false
+    export let isClaiming: boolean = false
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
@@ -55,6 +56,7 @@
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
     $: isTimelocked = timelockDate > $time
+    $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -66,15 +68,17 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
+    $: formattedSurplus = formatTokenAmountPrecise(Number(surplus) ?? 0, BASE_TOKEN[$activeProfile?.networkProtocol])
+
     $: localePrefix = `tooltips.transactionDetails.${direction === ActivityDirection.In ? 'incoming' : 'outgoing'}.`
 
-    let detailsList: { [key in string]: { data: unknown; tooltipText?: string } }
+    let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {
         ...(formattedTransactionTime && { transactionTime: { data: formattedTransactionTime } }),
         ...(metadata && {
             metadata: {
                 data: metadata,
-                ooltipText: localize(localePrefix + 'metadata'),
+                tooltipText: localize(localePrefix + 'metadata'),
             },
         }),
         ...(tag && {
@@ -83,7 +87,7 @@
                 tooltipText: localize(localePrefix + 'tag'),
             },
         }),
-        ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
+        ...(hasStorageDeposit && {
             storageDeposit: {
                 data: formattedStorageDeposit,
                 tooltipText: localize(localePrefix + 'storageDeposit'),
@@ -93,6 +97,12 @@
             giftedStorageDeposit: {
                 data: formattedGiftedStorageDeposit,
                 tooltipText: localize(localePrefix + 'giftedStorageDeposit'),
+            },
+        }),
+        ...(surplus && {
+            surplus: {
+                data: formattedSurplus,
+                tooltipText: localize(localePrefix + 'surplus'),
             },
         }),
         ...(expirationTime && {
