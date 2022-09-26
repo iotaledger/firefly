@@ -45,12 +45,11 @@
     let error: BaseError
 
     const rawAmount = convertToRawAmount(amount, unit, asset.metadata)
-    let initialExpirationDate: ExpirationTime
+    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
-    $: hideGiftToggle =
-        asset?.id === $selectedAccountAssets?.baseCoin?.id || (storageDeposit === 0 && giftedStorageDeposit === 0)
+    $: hideGiftToggle = asset?.id === $selectedAccountAssets?.baseCoin?.id
 
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
