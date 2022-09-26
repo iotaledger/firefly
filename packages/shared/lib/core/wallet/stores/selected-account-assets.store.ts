@@ -47,7 +47,6 @@ export const visibleSelectedAccountAssets: Readable<IAccountAssets> = derived(
 
 export function getAssetById(assetId: string): IAsset {
     const { baseCoin, nativeTokens } = get(selectedAccountAssets)
-
     if (assetId === baseCoin.id) {
         return baseCoin
     } else {

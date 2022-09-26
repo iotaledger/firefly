@@ -709,6 +709,7 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
@@ -1217,6 +1218,7 @@
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
         "transactionTime": "Transaction time",
+        "surplus": "Surplus",
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
@@ -1343,7 +1345,8 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
@@ -1585,16 +1588,17 @@
                 "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
                 "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
                 "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
-                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbitrary data that is persisted on the ledger.",
                 "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
             },
             "outgoing": {
                 "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
                 "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
                 "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "surplus": "The transaction surplus in glow. You will send this amount together with the native token to the recipient",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbitrary data that is persisted on the ledger.",
                 "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
             }
         }
