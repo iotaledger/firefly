@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
+    import { OnboardingLayout } from '../../../../../components'
+    import { Animation, OnboardingButton, Text } from 'shared/components'
     import features from '@features/features'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
@@ -33,15 +33,16 @@
     <div slot="title">
         <Text type="h2">{localize('views.onboarding.profileSetup.setupNew.title')}</Text>
     </div>
-    <div slot="leftpane__content">
+    <div slot="illustration" class="w-full h-full flex justify-center">
+        <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
+    </div>
+    <div slot="content">
         <Text type="p" secondary classes="mb-8">{localize('views.onboarding.profileSetup.setupNew.body')}</Text>
     </div>
-    <div slot="leftpane__action" class="flex flex-col space-y-4">
+    <div slot="footer" class="flex flex-col space-y-4">
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.softwareAccount.title')}
-            secondaryText={!$mobile
-                ? localize('views.onboarding.profileSetup.setupNew.softwareAccount.description')
-                : ''}
+            secondaryText={localize('views.onboarding.profileSetup.setupNew.softwareAccount.description')}
             icon="file"
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.newProfile?.softwareProfile?.hidden}
@@ -51,7 +52,7 @@
         />
         <OnboardingButton
             primaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.title')}
-            secondaryText={!$mobile ? localize('views.onboarding.profileSetup.setupNew.ledgerAccount.description') : ''}
+            secondaryText={localize('views.onboarding.profileSetup.setupNew.ledgerAccount.description')}
             icon="chip"
             hidden={features?.onboarding?.[$onboardingProfile?.networkProtocol]?.[$onboardingProfile?.networkType]
                 ?.newProfile?.ledgerProfile?.hidden}
@@ -59,8 +60,5 @@
                 ?.newProfile?.ledgerProfile?.enabled}
             onClick={() => onProfileTypeSelectionClick(ProfileType.Ledger)}
         />
-    </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-purple dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
     </div>
 </OnboardingLayout>

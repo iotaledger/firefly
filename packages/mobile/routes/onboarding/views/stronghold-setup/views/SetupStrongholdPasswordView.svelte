@@ -1,7 +1,7 @@
 <script lang="typescript">
     import zxcvbn from 'zxcvbn'
-    import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
-    import { mobile } from '@core/app'
+    import { OnboardingLayout } from '../../../../../components'
+    import { Animation, Button, PasswordInput, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
@@ -100,7 +100,10 @@
     <div slot="title">
         <Text type="h2">{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.title')}</Text>
     </div>
-    <div slot="leftpane__content">
+    <div slot="illustration" class="w-full h-full flex justify-center">
+        <Animation classes="setup-anim-aspect-ratio" animation="password-desktop" />
+    </div>
+    <div slot="content" class="overflow-y-auto">
         <form on:submit|preventDefault={onContinueClick} id="password-form">
             <Text type="p" classes="mb-4" secondary
                 >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text
@@ -129,7 +132,7 @@
             />
         </form>
     </div>
-    <div slot="leftpane__action">
+    <div slot="footer">
         <Button
             type={HTMLButtonType.Submit}
             form="password-form"
@@ -138,8 +141,5 @@
         >
             {localize('actions.continue')}
         </Button>
-    </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="password-desktop" />
     </div>
 </OnboardingLayout>

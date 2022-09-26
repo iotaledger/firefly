@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, Button, Input, OnboardingLayout, Text } from 'shared/components'
-    import { mobile } from '@core/app'
+    import { OnboardingLayout } from '../../../../../components'
+    import { Animation, Button, Input, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
@@ -60,9 +60,12 @@
             })}</Text
         >
     </div>
-    <div slot="leftpane__content">
+    <div slot="illustration" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
+        <Animation classes="setup-anim-aspect-ratio" animation="profile-desktop" />
+    </div>
+    <div slot="content">
         <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileSetup.enterName.body1')}</Text>
-        <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-10'}>
+        <Text type="p" secondary classes="mb-4">
             {localize(
                 `views.onboarding.profileSetup.enterName.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`
             )}
@@ -77,12 +80,9 @@
             submitHandler={onContinueClick}
         />
     </div>
-    <div slot="leftpane__action" class="flex flex-col">
+    <div slot="footer" class="flex flex-col">
         <Button classes="w-full" disabled={!isProfileNameValid} onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
-    </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="profile-desktop" />
     </div>
 </OnboardingLayout>
