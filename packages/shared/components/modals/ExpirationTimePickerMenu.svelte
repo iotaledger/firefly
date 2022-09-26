@@ -89,7 +89,7 @@
             icon="calendar"
             title={localize('menus.expirationTimePicker.1hour')}
             subtitle={formatDate(dateIn1Hour, {
-                dateStyle: 'long',
+                dateStyle: 'medium',
                 timeStyle: 'medium',
             })}
             onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneHour)}
@@ -99,7 +99,7 @@
             icon="calendar"
             title={localize('menus.expirationTimePicker.1day')}
             subtitle={formatDate(dateIn1Day, {
-                dateStyle: 'long',
+                dateStyle: 'medium',
                 timeStyle: 'medium',
             })}
             onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneDay)}
@@ -109,7 +109,7 @@
             icon="calendar"
             title={localize('menus.expirationTimePicker.1week')}
             subtitle={formatDate(dateIn1Week, {
-                dateStyle: 'long',
+                dateStyle: 'medium',
                 timeStyle: 'medium',
             })}
             onClick={() => handleChooseExpirationTimeClick(ExpirationTime.OneWeek)}
@@ -120,7 +120,7 @@
             icon="calendar"
             title={localize('menus.expirationTimePicker.customDate.title')}
             subtitle={customDate
-                ? formatDate(customDate, { dateStyle: 'long', timeStyle: 'medium' })
+                ? formatDate(customDate, { dateStyle: 'medium', timeStyle: 'medium' })
                 : localize('menus.expirationTimePicker.customDate.subtitle')}
             onClick={() => handleChooseExpirationTimeClick(ExpirationTime.Custom)}
             selected={selected === ExpirationTime.Custom}
