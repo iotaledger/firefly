@@ -9,7 +9,7 @@
     export let onBackClick = (): void => {}
 </script>
 
-<div data-label="mobile-onboarding-layout" class="relative h-full p-5 pb-6 flex flex-col justify-between">
+<div data-label="mobile-onboarding-layout" class="relative h-full p-5 pb-8 flex flex-col justify-between">
     <header class="relative w-full flex justify-center">
         <Text type="h4" classes="text-center">
             <slot name="title" />

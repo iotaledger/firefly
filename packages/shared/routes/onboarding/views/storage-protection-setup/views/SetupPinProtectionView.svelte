@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, PinInput, Text } from 'shared/components'
+    import { OnboardingLayout } from '../../../../../components'
+    import { Animation, Button, PinInput, Text } from 'shared/components'
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
@@ -7,7 +8,6 @@
         onboardingProfile,
         ProfileSetupType,
     } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ProfileType } from '@core/profile'
@@ -92,7 +92,10 @@
     <div slot="title">
         <Text type="h2">{localize('views.onboarding.storageProtectionSetup.setupPinProtection.title')}</Text>
     </div>
-    <div slot="leftpane__content">
+    <div slot="illustration" class="w-full h-full flex justify-center">
+        <Animation classes="setup-anim-aspect-ratio" animation="pin-desktop" />
+    </div>
+    <div slot="content">
         <div class="flex flex-col mb-8">
             <Text type="p" secondary classes="mb-4"
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body1')}</Text
@@ -126,7 +129,7 @@
             />
         </form>
     </div>
-    <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
+    <div slot="footer" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
             type="submit"
@@ -136,8 +139,5 @@
         >
             {localize('actions.continue')}
         </Button>
-    </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-pink dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="pin-desktop" />
     </div>
 </OnboardingLayout>
