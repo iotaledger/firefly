@@ -1,1 +1,1 @@
-export const USE_LEDGER_SIMULATOR = true
+export const USE_LEDGER_SIMULATOR = false
