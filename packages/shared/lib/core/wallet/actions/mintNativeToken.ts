@@ -10,7 +10,7 @@ import { handleLedgerError } from '@core/ledger'
 import { Activity } from '../classes'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
-import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
+import { addActivityToAccountActivitiesInAllAccountActivities, resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { preprocessTransaction } from '../utils'
 import { VerifiedStatus } from '../enums'
@@ -49,6 +49,7 @@ export async function mintNativeToken(
             message: localize('notifications.mintNativeToken.success'),
             alert: true,
         })
+        resetMintTokenDetails()
         isTransferring.set(false)
         return Promise.resolve()
     } catch (reason) {
