@@ -222,22 +222,22 @@
                 isInteger
                 maxlength={MAX_SUPPORTED_DECIMALS}
                 label={localize('popups.mintNativeTokenForm.inputs.decimals')}
-                description={localize('tooltips.optionalInput')}
+                description={localize('tooltips.mintNativeTokenForm.decimals')}
             />
             <OptionalInput
                 bind:value={description}
                 label={localize('popups.mintNativeTokenForm.inputs.description')}
-                description={localize('tooltips.optionalInput')}
+                description={localize('tooltips.mintNativeTokenForm.description')}
             />
             <OptionalInput
                 bind:value={url}
                 label={localize('popups.mintNativeTokenForm.inputs.url')}
-                description={localize('tooltips.optionalInput')}
+                description={localize('tooltips.mintNativeTokenForm.url')}
             />
             <OptionalInput
                 bind:value={logoUrl}
                 label={localize('popups.mintNativeTokenForm.inputs.logoUrl')}
-                description={localize('tooltips.optionalInput')}
+                description={localize('tooltips.mintNativeTokenForm.logoUrl')}
             />
         </optional-inputs>
         {#if error}
