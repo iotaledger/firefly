@@ -11,7 +11,8 @@
             "@contexts/*": ["../shared/lib/contexts/*"],
             "@core/*": ["../shared/lib/core/*"],
             "@features/*": ["../shared/features/*"],
-            "@lib/*": ["../shared/lib/*"]
+            "@lib/*": ["../shared/lib/*"],
+            "@mobile/*": ["./*"]
         }
     },
     "include": ["./capacitor"]

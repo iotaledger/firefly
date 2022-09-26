@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { isLocaleLoaded, localeDirection, setupI18n, _ } from '@core/i18n'
+    import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
     import { AppRoute, appRouter, DashboardRoute, dashboardRouter, initialiseRouters, openSettings } from '@core/router'
-    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
+    import { Popup, Route, ToastContainer } from 'shared/components'
     import {
         appSettings,
         appStage,
@@ -16,7 +16,7 @@
     import { addError } from '@core/error'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from './routes'
+    import { OnboardingRouter } from './routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { initialiseOnboardingProfile } from '@contexts/onboarding'
@@ -140,40 +140,25 @@
     }
 </script>
 
-<TitleBar>
-    <!-- empty div to avoid auto-purge removing dark classes -->
-    <div class="scheme-dark" />
-    {#if !$isLocaleLoaded || splash}
-        <Splash />
-    {:else}
-        {#if $popupState.active}
-            <Popup
-                type={$popupState.type}
-                props={$popupState.props}
-                hideClose={$popupState.hideClose}
-                fullScreen={$popupState.fullScreen}
-                transition={$popupState.transition}
-                overflow={$popupState.overflow}
-                relative={$popupState.relative}
-                locale={$_}
-            />
-        {/if}
-        <Route route={AppRoute.Dashboard}>
-            <Dashboard locale={$_} />
-        </Route>
-        <Route route={AppRoute.Login}>
-            <LoginRouter />
-        </Route>
-        <Route route={AppRoute.Onboarding}>
-            <OnboardingRouter />
-        </Route>
-        {#if settings}
-            <Settings locale={$_} handleClose={() => (settings = false)} />
-        {/if}
+<!-- empty div to avoid auto-purge removing dark classes -->
+<div class="scheme-dark" />
+{#if $popupState.active}
+    <Popup
+        type={$popupState.type}
+        props={$popupState.props}
+        hideClose={$popupState.hideClose}
+        fullScreen={$popupState.fullScreen}
+        transition={$popupState.transition}
+        overflow={$popupState.overflow}
+        relative={$popupState.relative}
+        locale={$_}
+    />
+{/if}
+<Route route={AppRoute.Onboarding}>
+    <OnboardingRouter />
+</Route>
 
-        <ToastContainer />
-    {/if}
-</TitleBar>
+<ToastContainer />
 {#if $isKeyboardOpen}
     <div class="keyboard" />
 {/if}
