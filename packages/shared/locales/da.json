@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Læs mere om Shimmer-netværket"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Opret en profil",
@@ -181,9 +179,10 @@
                 }
             },
             "congratulations": {
-                "title": "Profilopsætning færdig",
+                "title": "Profile setup is almost complete",
                 "fundsMigrated": "Midler migreret",
-                "body": "Den nye profil er klar til brug.",
+                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
+                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
                 "softwareMigratedBody": "Midler er nu migreret til det nye netværk",
                 "fireflyLedgerBody": "Ledger-kontoen er nu genoprettet, og man kan nu fortsætte.",
                 "trinityLedgerBody": "Ledger er nu migreret til det nye netværk.",
@@ -587,12 +586,12 @@
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
         "deeplinkAccountSwitch": {
-            "title": "Select a wallet",
-            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+            "title": "Vælg wallet",
+            "body": "Du har netop fulgt et dybt link. Vælg den wallet, der skal fortsættes med."
         },
         "deeplinkError": {
-            "title": "Failed link",
-            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+            "title": "Fejl i link",
+            "body": "Link er fejlbehæftet eller ugyldigt. Forsøg igen eller dobbelttjek linkets kilde."
         },
         "deleteAccount": {
             "title": "Slet {name}?",
@@ -771,13 +770,13 @@
             }
         },
         "verifyLedgerTransaction": {
-            "title": "Verify transaction",
-            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+            "title": "Bekræft transaktion",
+            "info": "Sammenlign og bekræft transaktionsoplysningerne vist på Ledger-enheden med nedenstående oplysninger."
         },
         "verifyInternalLedgerTransaction": {
-            "title": "Verify internal transaction",
-            "info": "Please confirm the internal transaction on your ledger.",
-            "hint": "All assets will remain on your wallet when sending an internal transaction."
+            "title": "Bekræft intern transaktion",
+            "info": "Bekræft den interne transaktion på Ledger-enheden.",
+            "hint": "Alle aktiver forblive i ens wallet, når man sender en intern transaktion."
         },
         "ledgerAddress": {
             "title": "Confirm receive address",
@@ -902,7 +901,7 @@
         "timeframe1Month": "1 måned"
     },
     "actions": {
-        "apply": "Apply",
+        "apply": "Anvend",
         "continue": "Fortsæt",
         "back": "Tilbage",
         "previous": "Previous",
@@ -960,6 +959,8 @@
         "chooseFile": "Vælg fil",
         "dropHere": "Slip din fil her",
         "syncAll": "Synkronisér alle",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Eksportér",
         "exporting": "Eksportering",
         "exportNewStronghold": "Eksportér en ny Stronghold",
@@ -1052,7 +1053,8 @@
         "test": "Test",
         "testDeepLink": "Test dybt link",
         "initialize": "Initialisér",
-        "initializing": "Initialiserer"
+        "initializing": "Initialiserer",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Recipient",
@@ -1112,7 +1114,7 @@
         "darkTheme": "Dark",
         "systemTheme": "System",
         "balance": "Saldo",
-        "balanceWithValue": "Balance: {balance}",
+        "balanceWithValue": "Saldo: {balance}",
         "all": "All",
         "incoming": "Indgående",
         "outgoing": "Udgående",
@@ -1147,7 +1149,9 @@
         "loadingAccounts": "Indlæser, vent venligst...",
         "addProfile": "Tilføj Profil",
         "noRecentHistory": "Ingen nylig historik",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "Ingen aktiver",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "Synkroniserer historie, dette kan tage et stykke tid...",
@@ -1219,7 +1223,9 @@
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
-        "availableBalance": "Available balance: {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
         "tag": "Tag",
@@ -1237,7 +1243,9 @@
         "developerTools": "Udviklingsværktøjer",
         "testDeepLinkDescription": "Simulér en anmodning om et dybt link sendt til Firefly",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
     },
     "filters": {
         "title": "Filtre",
@@ -1254,9 +1262,9 @@
         "verificationStatus": {
             "label": "Bekræftelsesstatus",
             "new": "Ny",
-            "skipped": "Skipped verification",
-            "selfVerified": "Self-verified",
-            "official": "Official"
+            "skipped": "Bekræftelse oversprunget",
+            "selfVerified": "Selvbekræftet",
+            "official": "Officiel"
         },
         "asset": {
             "label": "Aktiver"
@@ -1269,16 +1277,16 @@
             "less": "er mindre end"
         },
         "date": {
-            "label": "Date",
-            "equals": "is equal to",
-            "last": "in the last",
-            "range": "is between",
-            "after": "is after",
-            "afterOrEquals": "is on or after",
-            "before": "is before",
-            "Days": "days",
-            "Months": "months",
-            "Years": "years"
+            "label": "Dato",
+            "equals": "er lig med",
+            "last": "i den seneste",
+            "range": "er mellem",
+            "after": "er efter",
+            "afterOrEquals": "er på eller efter",
+            "before": "er før",
+            "Days": "dage",
+            "Months": "måneder",
+            "Years": "år"
         },
         "status": {
             "label": "Status",
@@ -1433,16 +1441,16 @@
             "amountNoFloat": "Can not use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Beløbet ser ud til at være et ugyldigt tal.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "Tagget kan maks. udgøre 64 bytes.",
+            "metadataTooLong": "Metadataene kan maks. udgøre 8.192 bytes.",
             "amountZero": "Beløb skal være større end 0.",
             "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
             "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
             "invalidAddress": "Adressen er ikke gyldig.",
-            "unknownAsset": "The asset is not known to this account.",
+            "unknownAsset": "Aktivet kendes ikke af denne konto.",
             "insufficientFunds": "Denne wallet har ikke tilstrækkelige midler.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
-            "cannotClaimTwice": "Output has been already claimed",
+            "cannotClaimTwice": "Output er allerede indløst",
             "noToAccount": "Du har ikke valgt en wallet at sende midlerne til.",
             "sendingDust": "Du kan ikke sende mindre end 1 Mi.",
             "leavingDust": "Du kan ikke forlade mindre end 1 Mi på din adresse.",
@@ -1488,7 +1496,9 @@
             "seedCharacters": "Seedet må kun indeholder tegn A-Z eller 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Ordet \"{word}\" blev ikke genkendt i dine gendannelsesord",
-            "phraseCaseWord": "Ordet \"{word}\" skal være små bogstaver"
+            "phraseCaseWord": "Ordet \"{word}\" skal være små bogstaver",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "You must open the IOTA app on your Ledger device.",
@@ -1496,7 +1506,7 @@
             "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
             "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notConnected": "No Ledger device detected.",
+            "notConnected": "Ingen Ledger-enhed fundet.",
             "notFound": "Ledger device not found.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
@@ -1520,7 +1530,16 @@
             "invalidStakingEventId": "Invalid staking event ID."
         },
         "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidTime": "INVALID TIME",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
@@ -1558,6 +1577,25 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            },
+            "outgoing": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            }
         }
     },
     "exports": {
