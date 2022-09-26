@@ -1,7 +1,7 @@
 import {
     INewTransactionDetails,
     Subject,
-    updateNewTransactionDetails,
+    setNewTransactionDetails,
     selectedAccountAssets,
     getAssetById,
 } from '@core/wallet'
@@ -16,7 +16,7 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
     const transactionDetails = parseSendFormOperation(searchParams)
 
     if (transactionDetails) {
-        updateNewTransactionDetails({ ...transactionDetails })
+        setNewTransactionDetails(transactionDetails)
         openPopup({
             type: 'sendForm',
             overflow: true,
