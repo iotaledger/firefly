@@ -1587,17 +1587,17 @@
                 "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
                 "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
                 "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
-                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbitrary data that is persisted on the ledger.",
                 "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
             },
             "outgoing": {
                 "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
                 "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
                 "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
-                "fee": "The transaction specifies a fee in glow. You will send this amount together with the native token to the recipient",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "fee": "The transaction fee in glow. You will send this amount together with the native token to the recipient",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbitrary data that is persisted on the ledger.",
                 "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
             }
         }
