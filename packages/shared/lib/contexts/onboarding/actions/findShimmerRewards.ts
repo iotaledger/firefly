@@ -2,6 +2,7 @@
 
 import { get } from 'svelte/store'
 
+import { IAccount } from '@core/account'
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
 import { GapLimitProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
@@ -12,10 +13,11 @@ import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_GAP_LIMIT_CONFI
 import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
-import { IAccount } from '@core/account'
+
+const NUM_SEARCH_ROUNDS_BEFORE_ACCOUNT_INCREMENT = 2
 
 /**
- * NOTE: This variable is unitialized because we
+ * NOTE: This variable is uninitialized because we
  * must know the profile type to be able to determine
  * gap limits that are sensible in terms of UX.
  */
@@ -33,9 +35,8 @@ let breadthWindowAddressGapLimit = -1
 
 let totalUnclaimedShimmerRewards = 0
 
-let currentSearchCount = 0
+let currentSearchRound = 1
 
-// parameterize every 2, 3, n rounds
 // handle errors from await functions, where and how to handle
 // consider making parameters into an object
 
@@ -51,21 +52,10 @@ export async function findShimmerRewards(): Promise<void> {
 async function recoverAccountsInSeries(): Promise<IAccount[]> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
 
-    console.log('SEARCH COUNT: ', currentSearchCount)
-    console.log('\n')
-
     console.log('DEPTH WINDOW ACCOUNT START INDEX: ', depthWindowAccountStartIndex)
     console.log('DEPTH WINDOW ACCOUNT GAP LIMIT: ', depthWindowAccountGapLimit)
     console.log('DEPTH WINDOW ADDRESS START INDEX: ', depthWindowAddressStartIndex)
     console.log('DEPTH WINDOW ADDRESS GAP LIMIT: ', depthWindowAddressGapLimit)
-    const depthWindowSearchSpace =
-        (depthWindowAccountGapLimit - depthWindowAccountStartIndex) * depthWindowAddressGapLimit
-    console.log(
-        'DEPTH WINDOW SEARCH SPACE: ',
-        `(${depthWindowAccountGapLimit} - ${depthWindowAccountStartIndex}) * (${depthWindowAddressGapLimit})`,
-        depthWindowSearchSpace
-    )
-    console.log('\n')
 
     const depthWindowAccounts = await _shimmerClaimingProfileManager?.recoverAccounts(
         depthWindowAccountStartIndex,
@@ -77,29 +67,29 @@ async function recoverAccountsInSeries(): Promise<IAccount[]> {
         }
     )
 
-    let breadthWindowAccounts: IAccount[] = []
+    const breadthWindowAccounts: IAccount[] = []
     if (hasOnlySearchedDepthWindow()) {
         console.log('BREADTH WINDOW ACCOUNT START INDEX: ', breadthWindowAccountStartIndex)
         console.log('BREADTH WINDOW ACCOUNT GAP LIMIT: ', breadthWindowAccountGapLimit)
         console.log('BREADTH WINDOW ADDRESS START INDEX: ', breadthWindowAddressStartIndex)
         console.log('BREADTH WINDOW ADDRESS GAP LIMIT: ', breadthWindowAddressGapLimit)
-        const breadthWindowSearchSpace =
-            breadthWindowAccountGapLimit * (breadthWindowAddressGapLimit - breadthWindowAddressStartIndex)
-        console.log(
-            'BREADTH WINDOW SEARCH SPACE: ',
-            `(${breadthWindowAccountGapLimit}) * (${breadthWindowAddressGapLimit} - ${breadthWindowAddressStartIndex})`,
-            breadthWindowSearchSpace
-        )
-        console.log('\n')
-        breadthWindowAccounts = await _shimmerClaimingProfileManager?.recoverAccounts(
-            breadthWindowAccountStartIndex,
-            breadthWindowAccountGapLimit,
-            breadthWindowAddressGapLimit,
-            {
-                ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
-                addressStartIndex: breadthWindowAddressStartIndex,
-            }
-        )
+
+        let temporaryAddressStartIndex = 0
+        while (temporaryAddressStartIndex < breadthWindowAddressGapLimit) {
+            console.log('TEMP ADDR START IDX: ', temporaryAddressStartIndex)
+            breadthWindowAccounts.concat(
+                await _shimmerClaimingProfileManager?.recoverAccounts(
+                    breadthWindowAccountStartIndex,
+                    breadthWindowAccountGapLimit,
+                    gapLimitProfileConfiguration.addressGapLimit,
+                    {
+                        ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
+                        addressStartIndex: temporaryAddressStartIndex,
+                    }
+                )
+            )
+            temporaryAddressStartIndex += gapLimitProfileConfiguration.addressGapLimit
+        }
     }
     return depthWindowAccounts
         .concat(breadthWindowAccounts)
@@ -107,7 +97,7 @@ async function recoverAccountsInSeries(): Promise<IAccount[]> {
 }
 
 function hasOnlySearchedDepthWindow(): boolean {
-    return currentSearchCount !== 0 && currentSearchCount % 2 === 0
+    return currentSearchRound % NUM_SEARCH_ROUNDS_BEFORE_ACCOUNT_INCREMENT === 0
 }
 
 function updateRewardsFinderParameters(): void {
@@ -116,15 +106,17 @@ function updateRewardsFinderParameters(): void {
     depthWindowAccountStartIndex = 0
     depthWindowAccountGapLimit += hasSearchedOnlyDepth ? 1 : 0
     depthWindowAddressStartIndex += gapLimitProfileConfiguration.addressGapLimit
-    /* eslint-disable-next-line no-self-assign */
-    depthWindowAddressGapLimit = depthWindowAddressGapLimit
+    /**
+     * NOTE: The address gap limit stays the same for the depth window,
+     * so there is new assignment statement for its variable.
+     */
 
     breadthWindowAccountStartIndex += hasSearchedOnlyDepth ? 1 : 0
     breadthWindowAccountGapLimit = 1
     breadthWindowAddressStartIndex = 0
     breadthWindowAddressGapLimit += gapLimitProfileConfiguration.addressGapLimit
 
-    currentSearchCount++
+    currentSearchRound++
 }
 
 async function updateRecoveredAccounts(accounts: IAccount[]): Promise<void> {
@@ -173,7 +165,7 @@ function initialiseGapLimitConfiguration(): void {
     depthWindowAddressGapLimit = gapLimitProfileConfiguration.addressGapLimit
 
     breadthWindowAccountStartIndex = gapLimitProfileConfiguration.accountGapLimit
-    breadthWindowAccountGapLimit = gapLimitProfileConfiguration.accountGapLimit
+    breadthWindowAccountGapLimit = 1
     breadthWindowAddressStartIndex = 0
     breadthWindowAddressGapLimit = gapLimitProfileConfiguration.addressGapLimit
 }

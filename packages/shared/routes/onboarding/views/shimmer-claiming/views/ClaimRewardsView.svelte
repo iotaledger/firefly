@@ -16,7 +16,7 @@
         ClaimShimmerRewardsError,
         findShimmerRewards,
         FindShimmerRewardsError,
-        findShimmerRewardsForAccount,
+        syncShimmerClaimingAccount,
         hasNoUnclaimedRewards,
         hasUserClaimedRewards,
         isOnboardingLedgerProfile,
@@ -58,8 +58,11 @@
             }
             await findShimmerRewards()
         } catch (err) {
-            console.error(err)
-            throw new FindShimmerRewardsError()
+            if ($isOnboardingLedgerProfile) {
+                handleLedgerError(err?.error ?? err)
+            } else {
+                throw new FindShimmerRewardsError(err)
+            }
         } finally {
             if ($isOnboardingLedgerProfile) {
                 pollLedgerNanoStatus()
@@ -85,11 +88,10 @@
             }
             await claimShimmerRewards()
         } catch (err) {
-            console.error(err)
             if ($isOnboardingLedgerProfile) {
                 handleLedgerError(err?.error ?? err)
             } else {
-                throw new ClaimShimmerRewardsError()
+                throw new ClaimShimmerRewardsError(err)
             }
         } finally {
             if ($isOnboardingLedgerProfile) {
@@ -129,10 +131,14 @@
                 if ($isOnboardingLedgerProfile) {
                     stopPollingLedgerNanoStatus()
                 }
-                await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
+                await syncShimmerClaimingAccount($onboardingProfile?.shimmerClaimingAccounts[0])
                 await findShimmerRewards()
             } catch (err) {
-                throw new FindShimmerRewardsError()
+                if ($isOnboardingLedgerProfile) {
+                    handleLedgerError(err?.error ?? err)
+                } else {
+                    throw new FindShimmerRewardsError(err)
+                }
             } finally {
                 if ($isOnboardingLedgerProfile) {
                     pollLedgerNanoStatus()

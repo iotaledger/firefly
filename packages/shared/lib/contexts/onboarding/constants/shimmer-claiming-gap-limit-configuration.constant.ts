@@ -3,8 +3,8 @@ import { GapLimitConfiguration } from '@core/profile/types'
 
 export const SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION: GapLimitConfiguration = {
     [ProfileType.Ledger]: {
-        accountGapLimit: 4,
-        addressGapLimit: 10,
+        accountGapLimit: 5,
+        addressGapLimit: 5,
     },
     [ProfileType.Software]: {
         accountGapLimit: 10,
