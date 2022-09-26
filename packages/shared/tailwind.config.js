@@ -297,6 +297,7 @@ module.exports = {
             maxHeight: {
                 xl: pxToRem(648),
                 100: pxToRem(400),
+                108: pxToRem(432),
             },
         },
         fontFamily: {
