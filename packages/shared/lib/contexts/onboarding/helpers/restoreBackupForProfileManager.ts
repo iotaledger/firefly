@@ -20,6 +20,11 @@ export async function restoreBackupForShimmerClaimingProfileManagerHelper(
         await get(manager)?.setClientOptions(clientOptions)
     } catch (err) {
         console.error(err)
-        throw new UnableToRestoreBackupForProfileManagerError()
+        // Check if thrown err is because of an invalid password
+        if (err?.error.match(/`invalid stronghold password`/)) {
+            throw err
+        } else {
+            throw new UnableToRestoreBackupForProfileManagerError()
+        }
     }
 }

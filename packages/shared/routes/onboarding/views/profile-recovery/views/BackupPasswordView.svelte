@@ -53,8 +53,9 @@
                         message: localize('error.global.generic'),
                     })
                 }
+            } finally {
+                busy = false
             }
-            busy = false
         }
     }
 
