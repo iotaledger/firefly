@@ -26,7 +26,7 @@
         updateOnboardingProfile({ networkProtocol: null })
     })
 
-    $: $onboardingProfile.isDeveloperProfile = true
+    $: if ($onboardingProfile) $onboardingProfile.isDeveloperProfile = true
 </script>
 
 <OnboardingLayout {onBackClick}>
