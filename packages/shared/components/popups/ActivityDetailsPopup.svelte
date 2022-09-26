@@ -59,7 +59,8 @@
             isInternal: activity?.data.isInternal,
             claimedDate: activity?.data.claimedDate,
             claimingTransactionId: activity?.data.claimingTransactionId,
-            expirationDate: activity?.data.expirationDate,
+            expirationDate:
+                activity?.data?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity?.data.expirationDate : null,
             timelockDate: activity?.data.timelockDate,
             subject: activity?.data?.subject,
             tag: activity?.data?.tag,
