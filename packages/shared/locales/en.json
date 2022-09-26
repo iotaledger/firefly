@@ -709,7 +709,7 @@
         "transaction": {
             "title": "Confirm transaction",
             "body": "You’re about to send {amount} to",
-            "surplusIncluded": "This transaction contains a larger amount than necessary for the storage deposit. Please double check this is the amount you want to send.",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
