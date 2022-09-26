@@ -2,7 +2,12 @@
     import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { checkOrConnectLedger, pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
+    import {
+        checkOrConnectLedger,
+        handleLedgerError,
+        pollLedgerNanoStatus,
+        stopPollingLedgerNanoStatus,
+    } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { shimmerClaimingRouter } from '@core/router'
     import {
@@ -81,7 +86,11 @@
             await claimShimmerRewards()
         } catch (err) {
             console.error(err)
-            throw new ClaimShimmerRewardsError()
+            if ($isOnboardingLedgerProfile) {
+                handleLedgerError(err?.error ?? err)
+            } else {
+                throw new ClaimShimmerRewardsError()
+            }
         } finally {
             if ($isOnboardingLedgerProfile) {
                 closePopup(true)
@@ -121,6 +130,7 @@
                     stopPollingLedgerNanoStatus()
                 }
                 await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
+                await findShimmerRewards()
             } catch (err) {
                 throw new FindShimmerRewardsError()
             } finally {

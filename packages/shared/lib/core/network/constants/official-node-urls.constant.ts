@@ -14,6 +14,10 @@ export const OFFICIAL_NODE_URLS: Readonly<{ [key in NetworkProtocol]?: { [key in
     },
     [NetworkProtocol.Shimmer]: {
         [NetworkType.Mainnet]: [''],
-        [NetworkType.Devnet]: ['https://api.testnet.shimmer.network'],
+        [NetworkType.Devnet]: [
+            'https://api.shimmer.network',
+            'https://api.shimmer.network',
+            'https://api.shimmer.network',
+        ],
     },
 }
