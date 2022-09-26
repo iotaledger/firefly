@@ -36,7 +36,7 @@
 
     let decimalsInput: OptionalInput
 
-    async function mintAction() {
+    async function mintAction(): Promise<void> {
         try {
             await mintNativeToken(Number(totalSupply), Number(circulatingSupply), {
                 standard: TokenStandard.IRC30,

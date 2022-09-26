@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Learn about the Shimmer network"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Create a profile",
@@ -181,9 +179,10 @@
                 }
             },
             "congratulations": {
-                "title": "Profile setup complete",
+                "title": "Profile setup is almost complete",
                 "fundsMigrated": "Funds migrated",
-                "body": "Your new profile is ready to use.",
+                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
+                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
                 "softwareMigratedBody": "You have successfully migrated your funds to the new network",
                 "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
                 "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
@@ -960,6 +959,8 @@
         "chooseFile": "Обрати файл",
         "dropHere": "Перетягніть файл сюди",
         "syncAll": "Синхронізувати все",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Експортувати",
         "exporting": "Експортування",
         "exportNewStronghold": "Експортувати новий Stronghold",
@@ -1052,7 +1053,8 @@
         "test": "Test",
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
-        "initializing": "Initializing"
+        "initializing": "Initializing",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Recipient",
@@ -1147,7 +1149,9 @@
         "loadingAccounts": "Завантаження, будь ласка почекайте...",
         "addProfile": "Додати профіль",
         "noRecentHistory": "Немає недавньої історії",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "No assets",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "Синхронізація історії може зайняти деякий час...",
@@ -1219,7 +1223,9 @@
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Загальний: {balance}",
-        "availableBalance": "Available balance: {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
         "tag": "Tag",
@@ -1237,7 +1243,9 @@
         "developerTools": "Developer tools",
         "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
     },
     "filters": {
         "title": "Filters",
@@ -1334,7 +1342,7 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
@@ -1488,7 +1496,9 @@
             "seedCharacters": "Ключ повинен містити тільки символи A-Z або 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Нераспознанное слово \"{word}\" в твоїй фразі відновлення",
-            "phraseCaseWord": "Слово \"{word}\" має бути рядковим регістром"
+            "phraseCaseWord": "Слово \"{word}\" має бути рядковим регістром",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "Вам необхідно відкрити додаток IOTA на вашому пристрої Ledger.",
@@ -1520,7 +1530,16 @@
             "invalidStakingEventId": "Недійсний ідентифікатор події стекінгу."
         },
         "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidTime": "INVALID TIME",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
@@ -1558,6 +1577,25 @@
             "bodyWillNotReachMin": "У вас не буде достатній баланс токенів розподілення, протягом періоду, що залишився, якщо ви не поставите більше IOTA.",
             "bodyDidNotReachMin": "Ви не поставили достатньо IOTA, щоб отримати мінімальну винагороду {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "У цьому гаманці недостатньо токенів IOTA, щоб досягти мінімальної винагороди за {airdrop}."
+        },
+        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            },
+            "outgoing": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            }
         }
     },
     "exports": {

@@ -23,16 +23,10 @@
     let amountInputElement: HTMLInputElement
     let dropdownInputElement: HTMLInputElement
     let error: string
-    let previousAsset: IAsset
     let isDropdownOpen: boolean
 
     $: focusedInputElement = isDropdownOpen ? dropdownInputElement : amountInputElement
     $: isFocused && (error = '')
-    $: if (asset !== previousAsset) {
-        previousAsset = asset
-        unit = null
-        amount = ''
-    }
     $: rawAmount = convertToRawAmount(amount, unit, asset?.metadata)
 
     let allowedDecimals = 0

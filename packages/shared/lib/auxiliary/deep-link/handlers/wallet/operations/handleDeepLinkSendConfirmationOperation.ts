@@ -4,14 +4,15 @@ import {
     getAssetById,
     INewTransactionDetails,
     selectedAccountAssets,
+    setNewTransactionDetails,
     Subject,
-    updateNewTransactionDetails,
 } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@lib/popup'
 
 import { SendOperationParameter } from '../../../enums'
 import {
+    SurplusNotANumberError,
     InvalidAddressError,
     MetadataLengthError,
     NoAddressSpecifiedError,
@@ -26,7 +27,7 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
     const transactionDetails = parseSendConfirmationOperation(searchParams)
 
     if (transactionDetails) {
-        updateNewTransactionDetails({ ...transactionDetails })
+        setNewTransactionDetails(transactionDetails)
         openPopup({
             type: 'sendConfirmation',
             overflow: true,
@@ -56,6 +57,22 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         throw new InvalidAddressError()
     }
 
+    const recipient: Subject = { type: 'address', address }
+
+    const assetId = searchParams.get(SendOperationParameter.AssetId)
+    const baseAsset = get(selectedAccountAssets).baseCoin
+    const asset = assetId ? getAssetById(assetId) : baseAsset
+    if (!asset) {
+        throw new UnknownAssetError()
+    }
+
+    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
+
+    const surplus = searchParams.get(SendOperationParameter.Surplus)
+    if (surplus && parseInt(surplus).toString() !== surplus) {
+        throw new SurplusNotANumberError(surplus)
+    }
+
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     if (getByteLengthOfString(metadata) > 8192) {
         throw new MetadataLengthError()
@@ -65,15 +82,8 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     if (getByteLengthOfString(tag) > 64) {
         throw new TagLengthError()
     }
-    const assetId = searchParams.get(SendOperationParameter.AssetId)
-    const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
-    if (!asset) {
-        throw new UnknownAssetError()
-    }
 
     const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
-    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
-    const recipient: Subject = { type: 'address', address }
     const giftStorageDeposit = isStringTrue(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = isStringTrue(searchParams.get(SendOperationParameter.DisableToggleGift))
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
@@ -86,6 +96,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         ...(metadata && { metadata }),
         ...(tag && { tag }),
         ...(giftStorageDeposit && { giftStorageDeposit }),
+        ...(surplus && { surplus }),
         ...(disableToggleGift && { disableToggleGift }),
         ...(disableChangeExpiration && { disableChangeExpiration }),
     }
