@@ -5,8 +5,18 @@ import { localize } from '@core/i18n'
 import { isValidAddressAndPrefix } from '../../address'
 import { addError } from '../../errors'
 
-import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
-import { DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
+import {
+    DeepLinkContext,
+    SendOperationParameter,
+    SwapOperationParameter,
+    WalletOperation,
+} from '@common/deep-links/enums'
+import {
+    DeepLinkParameters,
+    DeepLinkRequest,
+    SendOperationParameters,
+    SwapOutOperationParameters,
+} from '@common/deep-links/types'
 import { formatNumber } from '@lib/currency'
 import { getNumberOfDecimalPlaces } from '@lib/utils'
 
@@ -21,7 +31,7 @@ import { getNumberOfDecimalPlaces } from '@lib/utils'
  * @return {void | DeepLinkRequest} The formatted content of a deep link request within the wallet context.
  */
 export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: string): void | DeepLinkRequest => {
-    let parameters
+    let parameters: DeepLinkParameters
 
     // Remove any leading and trailing slashes
     const pathnameParts = url.pathname.replace(/^\/+|\/+$/g, '').split('/')
@@ -30,9 +40,21 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
         return addError({ time: Date.now(), type: 'deepLink', message: 'No operation specified in the url' })
     }
 
+    const address = pathnameParts[1] ?? ''
+    if (!isValidAddress(address, expectedAddressPrefix)) {
+        return addError({
+            time: Date.now(),
+            type: 'deepLink',
+            message: `Address or prefix is not valid for ${address}`,
+        })
+    }
+
     switch (pathnameParts[0]) {
         case WalletOperation.Send:
-            parameters = parseSendOperation(pathnameParts[1] ?? '', url.searchParams, expectedAddressPrefix)
+            parameters = parseSendOperation(address, url.searchParams)
+            break
+        case WalletOperation.SwapOut:
+            parameters = parseSwapOutOperation(address, url.searchParams)
             break
         default:
             return addError({
@@ -64,26 +86,10 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
  *
  * @return {void | SendOperationParameters} The formatted parameters for the send operation.
  */
-const parseSendOperation = (
-    address: string,
-    searchParams: URLSearchParams,
-    expectedAddressPrefix: string
-): void | SendOperationParameters => {
+const parseSendOperation = (address: string, searchParams: URLSearchParams): void | SendOperationParameters => {
     let numDecimalPlaces = 0
     let parsedAmount: number | undefined
     let parsedUnit: Unit | undefined
-
-    // Check address exists and is valid this is not optional.
-    if (!address) {
-        return addError({ time: Date.now(), type: 'deepLink', message: 'No address specified in the url path' })
-    }
-    if (isValidAddressAndPrefix(address, expectedAddressPrefix)) {
-        return addError({
-            time: Date.now(),
-            type: 'deepLink',
-            message: `Address or prefix is not valid for ${address}`,
-        })
-    }
 
     // Optional parameter: amount
     // Check if exists and is valid or does not exist
@@ -125,5 +131,52 @@ const parseSendOperation = (
         amount: formatNumber(Math.abs(parsedAmount), numDecimalPlaces, numDecimalPlaces),
         unit: parsedUnit,
         message: '',
+    }
+}
+
+const parseSwapOutOperation = (
+    waspAddress: string,
+    searchParams: URLSearchParams
+): void | SwapOutOperationParameters => {
+    const sendParams = parseSendOperation(waspAddress, searchParams)
+    if (!sendParams) {
+        // Error handling is done in parseSendOperation already
+        return
+    }
+
+    const chainId = searchParams.get(SwapOperationParameter.ChainId)
+    if (!chainId) {
+        return addError({
+            time: Date.now(),
+            type: 'deepLink',
+            message: 'The chain ID is missing',
+        })
+    } else {
+        // TODO: validation logic
+    }
+
+    const receiverAddress = searchParams.get(SwapOperationParameter.ReceiverAddress)
+    if (!receiverAddress) {
+        return addError({
+            time: Date.now(),
+            type: 'deepLink',
+            message: 'The receiver address is missing',
+        })
+    } else {
+        // TODO: validation logic
+    }
+
+    return {
+        ...sendParams,
+        chainId,
+        receiverAddress,
+    }
+}
+
+const isValidAddress = (address: string, expectedAddressPrefix: string): boolean => {
+    if (address && isValidAddressAndPrefix(address, expectedAddressPrefix)) {
+        return true
+    } else {
+        return false
     }
 }

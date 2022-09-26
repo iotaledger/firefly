@@ -2,8 +2,26 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import { get, Readable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
-    import { Address, Amount, Button, Dropdown, Icon, KeyValueBox, ProgressBar, Text } from 'shared/components'
-    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
+    import {
+        Address,
+        Amount,
+        Button,
+        Dropdown,
+        Icon,
+        Illustration,
+        Input,
+        KeyValueBox,
+        ProgressBar,
+        Text,
+    } from 'shared/components'
+    import {
+        clearSendParams,
+        keyboardHeight,
+        isKeyboardOpened,
+        mobile,
+        sendParams,
+        getKeyboardTransitionSpeed,
+    } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -76,6 +94,7 @@
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
+    $: showBridgeFields = Boolean($sendParams.receiverAddress && $sendParams.chainId)
 
     const transferSteps: {
         [key in TransferProgressEventType]: {
@@ -538,9 +557,13 @@
                         autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
                         classes="mb-6"
                     />
-                    <KeyValueBox value={'swapOut'} key={localize('general.index')} />
-                    <KeyValueBox bind:value={chainId} key={localize('general.chainId')} />
-                    <KeyValueBox bind:value={bridgeAddress} key={localize('general.bridgeToAddress')} />
+                    {#if showBridgeFields}
+                        <KeyValueBox bind:value={$sendParams.chainId} key={localize('general.chainId')} />
+                        <KeyValueBox
+                            bind:value={$sendParams.receiverAddress}
+                            key={localize('general.bridgeToAddress')}
+                        />
+                    {/if}
                 </div>
             </div>
         </div>

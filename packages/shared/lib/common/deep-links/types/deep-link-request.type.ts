@@ -1,6 +1,11 @@
 import type { NotificationData } from '../../../typings/notification'
 
-import type { DeepLinkContext, SendOperationParameters, WalletOperation } from '@common/deep-links'
+import type {
+    DeepLinkContext,
+    SendOperationParameters,
+    SwapOutOperationParameters,
+    WalletOperation,
+} from '@common/deep-links'
 
 /**
  * A union type of all deep link contexts' operations.
@@ -10,7 +15,7 @@ export type DeepLinkOperation = WalletOperation
 /**
  * A union type of all deep link operations' parameters.
  */
-export type DeepLinkParameters = void | SendOperationParameters
+export type DeepLinkParameters = void | SendOperationParameters | SwapOutOperationParameters
 
 /**
  * The content of a deep link request.

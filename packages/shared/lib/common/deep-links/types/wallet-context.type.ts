@@ -9,3 +9,11 @@ export type SendOperationParameters = {
     unit: Unit
     message: string
 }
+
+/**
+ * The parameters of a bridge operation.
+ */
+export type SwapOutOperationParameters = SendOperationParameters & {
+    chainId: string
+    receiverAddress: string
+}
