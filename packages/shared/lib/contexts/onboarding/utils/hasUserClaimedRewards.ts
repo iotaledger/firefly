@@ -6,12 +6,14 @@ export function hasUserClaimedRewards(shimmerClaimingAccounts: IShimmerClaimingA
         const { state, claimingTransaction } = shimmerClaimingAccount
         if (state === ShimmerClaimingAccountState.UnclaimedWithoutRewards) {
             return true
-        } else if (state === ShimmerClaimingAccountState.FullyClaimed && claimingTransaction) {
-            /**
-             * NOTE: This side effect is here to avoid iterating more than once in
-             * the case that every account is "unclaimed without rewards".
-             */
-            hasAtLeastOneClaimingTransaction = true
+        } else if (state === ShimmerClaimingAccountState.FullyClaimed) {
+            if (claimingTransaction) {
+                /**
+                 * NOTE: This side effect is here to avoid iterating more than once in
+                 * the case that every account is "unclaimed without rewards".
+                 */
+                hasAtLeastOneClaimingTransaction = true
+            }
             return true
         } else {
             return false
