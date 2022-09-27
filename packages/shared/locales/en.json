@@ -1585,7 +1585,7 @@
                 "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
                 "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
                 "expirationTime": "Claim these funds before the expiration time or the funds will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to send them once the timelock expires.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
                 "metadata": "An optional data field for storing data persistently on the Tangle.",
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             },
@@ -1593,7 +1593,7 @@
                 "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
                 "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
                 "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock runs out.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
                 "metadata": "An optional data field for storing data persistently on the Tangle.",
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             }
