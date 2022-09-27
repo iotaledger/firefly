@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import { IAccount } from '@core/account'
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
 import { RecoverAccountsProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
@@ -64,12 +62,6 @@ export async function findShimmerRewards(): Promise<void> {
 }
 
 async function depthSearchAndRecoverAccounts(): Promise<void> {
-    console.log('DEPTH SEARCH ACCOUNT START IDX: ', DEPTH_SEARCH_ACCOUNT_START_INDEX)
-    console.log('DEPTH SEARCH ACCOUNT GL: ', depthSearchAccountGapLimit)
-    console.log('DEPTH SEARCH ADDRESS START IDX: ', depthSearchAddressStartIndex)
-    console.log('DEPTH SEARCH ADDRESS GL: ', depthSearchAddressGapLimit)
-    console.log('\n')
-
     const profileManager = get(shimmerClaimingProfileManager)
     const depthSearchAccounts = await profileManager?.recoverAccounts(
         DEPTH_SEARCH_ACCOUNT_START_INDEX,
@@ -88,15 +80,11 @@ async function depthSearchAndRecoverAccounts(): Promise<void> {
 async function breadthSearchAndRecoverAccounts(): Promise<void> {
     const profileManager = get(shimmerClaimingProfileManager)
     const { accountGapLimit, addressGapLimit } = recoverAccountsProfileConfiguration
-    console.log('BREADTH SEARCH ACCOUNT START IDX: ', breadthSearchAccountStartIndex)
-    console.log('BREADTH SEARCH ACCOUNT GL: ', accountGapLimit)
-    console.log('BREADTH SEARCH ADDRESS GL: ', addressGapLimit)
     for (
         let chunkAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX;
         chunkAddressStartIndex < breadthSearchAddressGapLimit;
         chunkAddressStartIndex += addressGapLimit
     ) {
-        console.log('CHUNK ADDRESS START IDX: ', chunkAddressStartIndex)
         const breadthSearchAccounts = await profileManager?.recoverAccounts(
             breadthSearchAccountStartIndex,
             accountGapLimit,
@@ -109,7 +97,6 @@ async function breadthSearchAndRecoverAccounts(): Promise<void> {
         )
         await updateRecoveredAccounts(breadthSearchAccounts)
     }
-    console.log('\n')
 }
 
 function hasOnlyDoneDepthSearch(): boolean {
