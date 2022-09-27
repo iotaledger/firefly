@@ -78,8 +78,10 @@
                         type={TextType.h5}
                         fontWeight={FontWeight.medium}
                         classes="text-left mb-2"
-                        color="gray-900">{label}</Text
+                        color="gray-900"
                     >
+                        {label}
+                    </Text>
                     <Text smaller classes="text-left" color="gray-700" lineHeight="leading-140">{description}</Text>
                 </Tooltip>
             </tooltip-container>

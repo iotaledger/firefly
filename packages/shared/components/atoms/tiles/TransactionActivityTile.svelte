@@ -193,7 +193,7 @@
                     {#if isUnclaimed || isTimelocked}
                         <TooltipIcon
                             icon={isTimelocked ? IconEnum.Timelock : IconEnum.ExpirationTime}
-                            classes="text-gray-600 dark:text-gray-200"
+                            iconClasses="text-gray-600 dark:text-gray-200"
                             title={localize(`general.${isUnclaimed ? 'expirationTime' : 'timelockDate'}`)}
                             text={asyncStatusTooltipText}
                             position={Position.Top}
@@ -210,6 +210,7 @@
                         <Button
                             onClick={handleRejectClick}
                             disabled={data.isClaiming || data.isRejected}
+                            inlineStyle="min-width: 4rem;"
                             size={ButtonSize.Small}
                             outline
                         >
@@ -219,6 +220,7 @@
                             onClick={handleClaimClick}
                             disabled={data.isClaiming}
                             isBusy={data.isClaiming}
+                            inlineStyle="min-width: 4rem;"
                             size={ButtonSize.Small}
                         >
                             {localize('actions.claim')}
