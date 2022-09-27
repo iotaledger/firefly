@@ -22,13 +22,8 @@
 
     let amountInputElement: HTMLInputElement
     let error: string
-    let previousAsset: IAsset
 
     $: isFocused && (error = '')
-    $: if (asset !== previousAsset) {
-        previousAsset = asset
-        unit = null
-    }
     $: rawAmount = convertToRawAmount(amount, unit, asset?.metadata)
 
     let allowedDecimals = 0

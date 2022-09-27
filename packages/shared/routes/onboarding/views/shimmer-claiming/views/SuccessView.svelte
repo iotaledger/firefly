@@ -33,7 +33,7 @@
         </div>
     </div>
     <div slot="leftpane__action">
-        <Button autofocus classes="w-full" onClick={onContinueClick}>
+        <Button classes="w-full" onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>

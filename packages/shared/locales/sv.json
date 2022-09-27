@@ -1342,7 +1342,7 @@
             "receivedWhileLoggedOut": "Vänligen logga in för att initiera hyperlänken",
             "notEnabled": "Hyperlänkar är inte aktiverat",
             "invalidFormat": "Hyperlänken du följde är ogiltig",
-            "invalidNumber": "Beloppet i hyperlänken är inte ett nummer {amount}",
+            "invalidAmount": "Beloppet i hyperlänken är inte ett nummer {amount}",
             "wallet": {
                 "send": {
                     "success": "Betalningsinformation tillagd från hyperlänk"
