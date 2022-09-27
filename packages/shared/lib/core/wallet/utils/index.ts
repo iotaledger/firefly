@@ -1,5 +1,6 @@
 // Files
 export * from './convertEd25519ToBech32'
+export * from './convertBech32ToEd25519'
 export * from './convertToRawAmount'
 export * from './formatTokenAmountBestMatch'
 export * from './formatTokenAmountDefault'

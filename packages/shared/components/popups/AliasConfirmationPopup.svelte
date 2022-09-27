@@ -4,59 +4,74 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import { getStorageDepositFromOutput } from '@core/wallet'
+    import { convertBech32ToEd25519 } from '@core/wallet'
     import { closePopup } from '@lib/popup'
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
+    import type { AliasOutputOptions } from '@iota/wallet'
 
     let storageDeposit = 0
+    const aliasOutputOptions: AliasOutputOptions = null
     let error: Error
 
     $: address = $selectedAccount.depositAddress
+    $: aliasOutput = address
+        ? {
+              aliasId: '0x0000000000000000000000000000000000000000000000000000000000000000',
+              unlockConditions: [
+                  {
+                      type: 4,
+                      address: {
+                          type: 0,
+                          pubKeyHash: `0x${convertBech32ToEd25519(address)}`,
+                      },
+                  },
+                  {
+                      type: 5,
+                      address: {
+                          type: 0,
+                          pubKeyHash: `0x${convertBech32ToEd25519(address)}`,
+                      },
+                  },
+              ],
+          }
+        : ''
 
-    prepareOutput()
+    $: setStorageDeposit(aliasOutput)
 
-    async function prepareOutput() {
-        const aliasOutput = {
-            aliasId: '0x0000000000000000000000000000000000000000000000000000000000000000',
-            unlockConditions: [
-                {
-                    type: 4,
-                    address: {
-                        type: 0,
-                        pubKeyHash: address,
-                    },
-                },
-                {
-                    type: 5,
-                    address: {
-                        type: 0,
-                        pubKeyHash: address,
-                    },
-                },
-            ],
-        }
-
+    async function setStorageDeposit(aliasOutput) {
         try {
             const preparedOutput = await $selectedAccount.buildAliasOutput(aliasOutput)
-            storageDeposit = getStorageDepositFromOutput(preparedOutput).storageDeposit
+            const aliasOutputOptions = {
+                amount: preparedOutput.amount,
+                aliasId: preparedOutput.aliasId,
+                stateIndex: preparedOutput.stateIndex,
+                stateMetadata: preparedOutput.stateMetadata,
+                foundryCounter: preparedOutput.foundryCounter,
+                immutableFeatures: preparedOutput.immutableFeatures,
+            }
+            storageDeposit = Number(aliasOutputOptions.amount)
         } catch (err) {
             console.error(err)
         }
     }
 
-    function createAlias(): void {
+    async function createAlias(): Promise<void> {
+        await $selectedAccount.createAliasOutput(aliasOutputOptions)
         closePopup()
     }
 
     async function onConfirm(): Promise<void> {
         error = null
         try {
+            $isTransferring = true
             await checkActiveProfileAuth(createAlias, { stronghold: true, ledger: false })
         } catch (err) {
             if (!error) {
                 error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
             }
+        } finally {
+            $isTransferring = false
         }
     }
 
