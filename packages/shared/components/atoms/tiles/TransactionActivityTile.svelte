@@ -193,7 +193,7 @@
                     {#if isUnclaimed || isTimelocked}
                         <TooltipIcon
                             icon={isTimelocked ? IconEnum.Timelock : IconEnum.ExpirationTime}
-                            classes="text-gray-600 dark:text-gray-200"
+                            iconClasses="text-gray-600 dark:text-gray-200"
                             title={localize(`general.${isUnclaimed ? 'expirationTime' : 'timelockDate'}`)}
                             text={asyncStatusTooltipText}
                             position={Position.Top}

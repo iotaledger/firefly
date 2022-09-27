@@ -9,6 +9,7 @@
     export let width: number = 16
     export let height: number = 16
     export let classes: string = ''
+    export let iconClasses: string = ''
     export let position: Position = Position.Right
 
     let tooltipAnchor: HTMLElement
@@ -19,14 +20,14 @@
     }
 </script>
 
-<tooltip-icon>
+<tooltip-icon class={classes}>
     <icon-container
         on:mouseenter={() => showTooltip(true)}
         on:mouseleave={() => showTooltip(false)}
         bind:this={tooltipAnchor}
-        class="text-gray-600 {classes}"
+        class="text-gray-600"
     >
-        <Icon {width} {height} {icon} />
+        <Icon {width} {height} {icon} classes={iconClasses} />
     </icon-container>
     {#if isTooltipVisible}
         <Tooltip anchor={tooltipAnchor} {position}>
