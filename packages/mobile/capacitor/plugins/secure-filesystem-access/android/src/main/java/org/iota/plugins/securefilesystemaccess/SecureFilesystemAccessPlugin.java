@@ -113,6 +113,12 @@ public class SecureFilesystemAccessPlugin extends Plugin {
     @RequiresApi(api = 26)
     @ActivityCallback
     private void pickResult(PluginCall call, ActivityResult result) throws Exception {
+        // For Android we need to make sure that we remove any previous tmp file
+        // otherwise the next import will not work on next start
+        File tmpStronghold = new File(getContext().getCacheDir(), "temp.stronghold");
+        if (tmpStronghold.exists()) {
+            tmpStronghold.delete();
+        }
         call.setKeepAlive(true);
         JSObject response = new JSObject();
         Intent data = result.getData();
