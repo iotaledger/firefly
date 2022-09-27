@@ -5,7 +5,7 @@
     import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName } from '@core/network'
+    import { formatProtocolName, getDefaultClientOptions } from '@core/network'
     import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
 
@@ -15,10 +15,18 @@
     }
 
     function onBackClick(): void {
+        updateOnboardingProfile({ clientOptions: undefined })
         $profileSetupRouter.previous()
     }
 
     onMount(() => {
+        if (!$onboardingProfile?.clientOptions) {
+            const clientOptions = getDefaultClientOptions(
+                $onboardingProfile?.networkProtocol,
+                $onboardingProfile?.networkType
+            )
+            updateOnboardingProfile({ clientOptions })
+        }
         destroyProfileManager()
         updateOnboardingProfile({ mustVisitProfileName: true, setupType: null, hasInitialisedProfileManager: false })
     })

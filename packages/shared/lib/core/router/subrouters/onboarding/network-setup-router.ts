@@ -12,7 +12,7 @@ export const networkSetupRouter = writable<NetworkSetupRouter>(null)
 
 export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
     constructor() {
-        super(NetworkSetupRoute.ChooseProtocol, networkSetupRoute, get(onboardingRouter))
+        super(NetworkSetupRoute.ChooseNetwork, networkSetupRoute, get(onboardingRouter))
     }
 
     next(): void {

@@ -13,7 +13,14 @@ export const onboardingRouter = writable<OnboardingRouter>(null)
 
 export class OnboardingRouter extends Router<OnboardingRoute> {
     constructor() {
-        super(hasCompletedOnboardingBefore() ? OnboardingRoute.NetworkSetup : OnboardingRoute.AppSetup, onboardingRoute)
+        super(
+            hasCompletedOnboardingBefore()
+                ? get(onboardingProfile)?.isDeveloperProfile
+                    ? OnboardingRoute.NetworkSetup
+                    : OnboardingRoute.ProfileSetup
+                : OnboardingRoute.AppSetup,
+            onboardingRoute
+        )
     }
 
     next(): void {
@@ -21,9 +28,15 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case OnboardingRoute.AppSetup:
-                nextRoute = OnboardingRoute.NetworkSetup
+            case OnboardingRoute.AppSetup: {
+                const _onboardingProfile = get(onboardingProfile)
+                if (_onboardingProfile?.isDeveloperProfile) {
+                    nextRoute = OnboardingRoute.NetworkSetup
+                } else {
+                    nextRoute = OnboardingRoute.ProfileSetup
+                }
                 break
+            }
             case OnboardingRoute.NetworkSetup:
                 nextRoute = OnboardingRoute.ProfileSetup
                 break

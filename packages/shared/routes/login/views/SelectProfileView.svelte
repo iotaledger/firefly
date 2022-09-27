@@ -5,7 +5,11 @@
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { initialiseOnboardingRouters, loginRouter } from '@core/router'
-    import { initialiseOnboardingProfile, shouldBeDeveloperProfile } from '@contexts/onboarding'
+    import {
+        initialiseOnboardingProfile,
+        shouldBeDeveloperProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { openPopup } from '@lib/popup'
 
     function onContinueClick(id: string) {
@@ -14,9 +18,12 @@
     }
 
     function onAddProfileClick() {
-        $loginRouter.next({ shouldAddProfile: true })
+        initialiseOnboardingProfile(shouldBeDeveloperProfile(), NetworkProtocol.Shimmer)
+        if (!shouldBeDeveloperProfile()) {
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+        }
         initialiseOnboardingRouters()
-        initialiseOnboardingProfile(shouldBeDeveloperProfile())
+        $loginRouter.next({ shouldAddProfile: true })
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
