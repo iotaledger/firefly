@@ -11,7 +11,7 @@
     import {
         activeAccounts,
         activeProfile,
-        INITIAL_GAP_LIMIT_CONFIGURATION,
+        INITIAL_RECOVER_ACCOUNTS_CONFIGURATION,
         isActiveLedgerProfile,
         isSoftwareProfile,
         loadAccounts,
@@ -28,11 +28,11 @@
 
     const { isStrongholdLocked, type } = $activeProfile
 
-    const accountGapLimitIncrement = INITIAL_GAP_LIMIT_CONFIGURATION[type].accountGapLimit
-    const addressGapLimitIncrement = INITIAL_GAP_LIMIT_CONFIGURATION[type].addressGapLimit
+    const initialAccountRange = INITIAL_RECOVER_ACCOUNTS_CONFIGURATION[type].initialAccountRange
+    const addressGapLimitIncrement = INITIAL_RECOVER_ACCOUNTS_CONFIGURATION[type].addressGapLimit
     let previousAccountGapLimit = 0
     let previousAddressGapLimit = 0
-    let currentAccountGapLimit = accountGapLimitIncrement
+    let currentAccountGapLimit = initialAccountRange
     let currentAddressGapLimit = addressGapLimitIncrement
     let error = ''
     let isBusy = false
@@ -77,7 +77,7 @@
 
                 previousAccountGapLimit = currentAccountGapLimit
                 previousAddressGapLimit = currentAddressGapLimit
-                currentAccountGapLimit += accountGapLimitIncrement
+                currentAccountGapLimit += initialAccountRange
                 currentAddressGapLimit += addressGapLimitIncrement
 
                 hasUsedWalletFinder = true

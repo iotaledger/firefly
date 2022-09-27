@@ -42,21 +42,21 @@ window.addEventListener('unhandledrejection', (event) => {
 
 try {
     const { STAGE, NODE_ENV } = process.env
-    if (NODE_ENV === 'development') {
-        const logDir = './log'
-        if (!fs.existsSync(logDir)) {
-            fs.mkdirSync(logDir)
-        }
-
-        const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
-        const loggerOptions = {
-            colorEnabled: true,
-            name: `./log/wallet-${today}.log`,
-            levelFilter: 'debug',
-            targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
-        }
-        WalletApi.initLogger(loggerOptions)
+    // if (NODE_ENV === 'development') {
+    const logDir = './log'
+    if (!fs.existsSync(logDir)) {
+        fs.mkdirSync(logDir)
     }
+
+    const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
+    const loggerOptions = {
+        colorEnabled: true,
+        name: `./log/wallet-${today}.log`,
+        levelFilter: 'debug',
+        targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
+    }
+    WalletApi.initLogger(loggerOptions)
+    // }
 } catch (error) {
     console.error('[Preload Context] Error:', error)
 }

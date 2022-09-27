@@ -1,13 +1,17 @@
 import { ProfileType } from '../enums'
-import { GapLimitConfiguration } from '../types'
+import { RecoverAccountsConfiguration } from '../types'
 
-export const INITIAL_GAP_LIMIT_CONFIGURATION: GapLimitConfiguration = {
+export const INITIAL_RECOVER_ACCOUNTS_CONFIGURATION: RecoverAccountsConfiguration = {
     [ProfileType.Ledger]: {
-        accountGapLimit: 3,
+        initialAccountRange: 3,
+        accountGapLimit: 1,
+        numberOfRoundsBetweenBreadthSearch: 1,
         addressGapLimit: 1,
     },
     [ProfileType.Software]: {
-        accountGapLimit: 10,
+        initialAccountRange: 10,
+        accountGapLimit: 1,
+        numberOfRoundsBetweenBreadthSearch: 1,
         addressGapLimit: 1,
     },
 }
