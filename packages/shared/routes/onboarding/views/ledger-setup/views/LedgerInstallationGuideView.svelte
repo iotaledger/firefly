@@ -42,7 +42,7 @@
     </div>
     <div slot="leftpane__action">
         <Link icon="info" onClick={handlePopupOpen} classes="mb-10 justify-center"
-            >{localize('popups.ledgerAppGuide.title', { values: { protocol: LedgerAppName.Shimmer } })}</Link
+            >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Link
         >
         <Button classes="w-full" onClick={handleContinueClick}
             >{localize('views.ledgerInstallationGuide.action', { values: { protocol: LedgerAppName.Shimmer } })}</Button

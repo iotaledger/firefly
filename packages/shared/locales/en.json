@@ -749,7 +749,7 @@
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the {protocol} app",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Install and open the Ledger Live application",
                 "1": "Ensure that your Ledger is connected",
