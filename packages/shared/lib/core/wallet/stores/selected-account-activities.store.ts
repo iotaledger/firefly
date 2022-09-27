@@ -14,7 +14,6 @@ import { ActivityFilter } from '../interfaces/filter/filter.interface'
 import { getAssetFromPersistedAssets } from '../utils'
 import { isVisibleActivity } from '../utils/isVisibleActivity'
 import { allAccountActivities } from './all-account-activities.store'
-import { getAssetById } from './selected-account-assets.store'
 import { isValidIRC30 } from '@lib/utils/isValidIRC30'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
@@ -98,7 +97,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
-            const asset = getAssetById(_activity.data.assetId)
+            const asset = getAssetFromPersistedAssets(_activity.data.assetId)
             return !_activity.isHidden && asset && isValidIRC30(asset.metadata)
         })
 

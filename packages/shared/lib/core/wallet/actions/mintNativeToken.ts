@@ -10,10 +10,11 @@ import { handleLedgerError } from '@core/ledger'
 import { Activity } from '../classes'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
-import { addActivityToAccountActivitiesInAllAccountActivities } from '../stores'
+import { addActivityToAccountActivitiesInAllAccountActivities, resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { preprocessTransaction } from '../utils'
 import { VerifiedStatus } from '../enums'
+import { createAliasIfNecessary } from '@core/account/api/createAliasIfNecessary'
 
 export async function mintNativeToken(
     maximumSupply: number,
@@ -23,9 +24,11 @@ export async function mintNativeToken(
     try {
         isTransferring.set(true)
         const account = get(selectedAccount)
-        // TODO: replace aliasId with correct implementation
+
+        // TODO: remove this once UX is enhanced
+        await createAliasIfNecessary(account)
+
         const nativeTokenOptions: NativeTokenOptions = {
-            aliasId: account.depositAddress,
             maximumSupply: Converter.decimalToHex(maximumSupply, true),
             circulatingSupply: Converter.decimalToHex(circulatingSupply, true),
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata), true),
@@ -47,6 +50,7 @@ export async function mintNativeToken(
             message: localize('notifications.mintNativeToken.success'),
             alert: true,
         })
+        resetMintTokenDetails()
         isTransferring.set(false)
         return Promise.resolve()
     } catch (reason) {

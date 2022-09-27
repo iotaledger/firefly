@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Learn about the Shimmer network"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Create a profile",
@@ -181,9 +179,10 @@
                 }
             },
             "congratulations": {
-                "title": "Profile setup complete",
+                "title": "Profile setup is almost complete",
                 "fundsMigrated": "Funds migrated",
-                "body": "Your new profile is ready to use.",
+                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
+                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
                 "softwareMigratedBody": "You have successfully migrated your funds to the new network",
                 "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
                 "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
@@ -960,6 +959,8 @@
         "chooseFile": "Sélectionnez un Fichier",
         "dropHere": "Déposez votre fichier ici",
         "syncAll": "Tout synchroniser",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Exporter",
         "exporting": "Exportation",
         "exportNewStronghold": "Exporter une nouvelle Stronghold",
@@ -1052,7 +1053,8 @@
         "test": "Test",
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
-        "initializing": "Initializing"
+        "initializing": "Initializing",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Destinataire",
@@ -1112,7 +1114,7 @@
         "darkTheme": "Sombre",
         "systemTheme": "Système",
         "balance": "Solde",
-        "balanceWithValue": "Balance: {balance}",
+        "balanceWithValue": "Solde: {balance}",
         "all": "Tout",
         "incoming": "Entrant",
         "outgoing": "Sortant",
@@ -1147,7 +1149,9 @@
         "loadingAccounts": " Chargement, veuillez patienter...",
         "addProfile": "Ajouter Profil",
         "noRecentHistory": "Aucun historique récent",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "No assets",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "Ce mois",
         "search": "Rechercher",
         "firstSync": "Synchronisation de l'historique, cela peut prendre un certain temps...",
@@ -1219,7 +1223,9 @@
         "claimedTime": "Réclamé à",
         "copiedToClipboard": "Copié dans le presse-papier",
         "total": "Total: {balance}",
-        "availableBalance": "Solde disponible : {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} réclamé",
         "metadata": "Metadonnés",
         "tag": "Étiquette",
@@ -1237,7 +1243,9 @@
         "developerTools": "Developer tools",
         "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
     },
     "filters": {
         "title": "Filters",
@@ -1276,7 +1284,7 @@
             "after": "is after",
             "afterOrEquals": "is on or after",
             "before": "is before",
-            "Days": "days",
+            "Days": "jours",
             "Months": "months",
             "Years": "years"
         },
@@ -1334,7 +1342,7 @@
             "receivedWhileLoggedOut": "Veuillez vous connecter pour initialiser le lien ciblé",
             "notEnabled": "Les liens ciblés ne sont pas activés",
             "invalidFormat": "Le lien ciblé que vous avez suivi n'est pas valide",
-            "invalidNumber": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
             "wallet": {
                 "send": {
                     "success": "Détails de paiement ajoutés à partir du lien ciblé"
@@ -1488,7 +1496,9 @@
             "seedCharacters": "La seed (graine) ne doit contenir que des caractères A-Z ou le chiffre 9",
             "phraseWordCount": "Il devrait y avoir 24 mots dans votre phrase de récupération; actuellement, leur nombre {length, plural, one {est #} other {est #}}.",
             "phraseUnrecognizedWord": "Mot \"{word}\" non reconnu dans votre phrase de récupération",
-            "phraseCaseWord": "Le mot \"{word}\" doit être écrit en minuscules"
+            "phraseCaseWord": "Le mot \"{word}\" doit être écrit en minuscules",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "Vous devez ouvrir l'application sur votre Ledger.",
@@ -1520,7 +1530,16 @@
             "invalidStakingEventId": "ID d'événement de staking invalide."
         },
         "invalidDate": "DATE NON VALIDE",
-        "invalidTime": "HEURE NON VALIDE"
+        "invalidTime": "HEURE NON VALIDE",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
@@ -1558,6 +1577,25 @@
             "bodyWillNotReachMin": "Vous n'atteindrez pas la valeur minimale de la récompense sur la période restante, à moins que vous n'ajoutiez plus de IOTA.",
             "bodyDidNotReachMin": "Vous n'avez pas engagé assez de IOTA pour atteindre la valeur de récompense minimale pour {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Ce portefeuille ne possède pas assez de jetons IOTA pour atteindre la récompense minimale et ne peut donc pas être engagé pour {airdrop}."
+        },
+        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            },
+            "outgoing": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            }
         }
     },
     "exports": {

@@ -1,19 +1,19 @@
 <script lang="typescript">
-    import { Text, Spinner } from 'shared/components'
+    import { Text, Button } from 'shared/components'
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
+        ActivityType,
         claimActivity,
         formatTokenAmountDefault,
-        selectedAccountActivities,
         getAssetFromPersistedAssets,
         rejectActivity,
-        ActivityType,
+        selectedAccountActivities,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
@@ -62,7 +62,8 @@
             isInternal: activity?.data.isInternal,
             claimedDate: activity?.data.claimedDate,
             claimingTransactionId: activity?.data.claimingTransactionId,
-            expirationDate: activity?.data.expirationDate,
+            expirationDate:
+                activity?.data?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity?.data.expirationDate : null,
             timelockDate: activity?.data.timelockDate,
             subject: activity?.data?.subject,
             tag: activity?.data?.tag,
@@ -110,6 +111,7 @@
                 hint: localize('actions.confirmRejection.node'),
                 info: true,
                 confirmText: localize('actions.reject'),
+                warning: true,
                 onConfirm: () => {
                     rejectActivity(activityId)
                     closePopup()
@@ -134,7 +136,7 @@
 
 <activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <div class="flex flex-col">
-        <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
+        <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
             {localize('popups.transactionDetails.title')}
         </Text>
         {#if explorerUrl && activity.transactionId}
@@ -155,29 +157,23 @@
     </div>
     <TransactionDetails {...transactionDetails} />
     {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
-        <div class="flex w-full justify-between space-x-4">
-            <button
+        <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
+            <Button
+                outline
+                classes="w-full"
                 disabled={activity.data.isClaiming || activity.data.isRejected}
-                class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300 {activity
-                    .data.isClaiming || activity.data.isRejected
-                    ? 'cursor-default text-gray-500'
-                    : 'cursor-pointer'}"
-                on:click={reject}
+                onClick={reject}
             >
                 {localize('actions.reject')}
-            </button>
-            <button
+            </Button>
+            <Button
+                classes="w-full"
                 disabled={activity.data.isClaiming}
-                class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white 
-                {activity.data.isClaiming ? 'cursor-default' : 'cursor-pointer'}"
-                on:click={onClaimClick}
+                onClick={onClaimClick}
+                isBusy={activity.data.isClaiming}
             >
-                {#if activity.data.isClaiming}
-                    <Spinner busy={true} classes="justify-center" />
-                {:else}
-                    {localize('actions.claim')}
-                {/if}
-            </button>
-        </div>
+                {localize('actions.claim')}
+            </Button>
+        </popup-buttons>
     {/if}
 </activity-details-popup>
