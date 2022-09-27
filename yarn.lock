@@ -525,10 +525,10 @@
   dependencies:
     big-integer "^1.6.51"
 
-"@iota/wallet@2.0.2-alpha.30":
-  version "2.0.2-alpha.30"
-  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.30.tgz#4518013df0a56e0389a615e19d2010a202454b42"
-  integrity sha512-raIIRg+JolF30LwwcnBqY/UfJxf+d/Rt5USL0nLhG3g6RIQ61PopofFtqmOSoUGwa32GOspLO/MmS+ajCc6DzQ==
+"@iota/wallet@2.0.2-alpha.31":
+  version "2.0.2-alpha.31"
+  resolved "https://registry.yarnpkg.com/@iota/wallet/-/wallet-2.0.2-alpha.31.tgz#01eb881b310cb5b5fce6801e29ad80a5a99916c1"
+  integrity sha512-33qZILTLUyB/LDLIIBirpASDeTSQKntlDSEDy7yOIsq+W1nVVwRCoR4Iqhpu7niWBnepIYItrVg208IVvLYReg==
   dependencies:
     "@iota/types" "^1.0.0-beta.15"
     cargo-cp-artifact "^0.1.5"
