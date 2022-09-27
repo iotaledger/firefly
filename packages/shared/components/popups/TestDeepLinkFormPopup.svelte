@@ -33,7 +33,7 @@
         <Button outline classes="w-full" onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button autofocus classes="w-full" onClick={handleTest} isBusy={$isTransferring}>
+        <Button classes="w-full" onClick={handleTest} isBusy={$isTransferring}>
             {localize('actions.test')}
         </Button>
     </div>

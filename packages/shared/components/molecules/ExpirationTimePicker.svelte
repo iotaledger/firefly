@@ -10,8 +10,18 @@
     let menu: ExpirationTimePickerMenu
     let anchor: HTMLElement
     let selected: ExpirationTime
+    let storedValue: Date
 
     $: selected = initialSelected
+
+    export function setNull(bool: boolean = true): void {
+        if (bool) {
+            storedValue = value
+            value = null
+        } else {
+            value = storedValue
+        }
+    }
 </script>
 
 <button

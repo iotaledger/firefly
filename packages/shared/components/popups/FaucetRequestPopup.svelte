@@ -46,7 +46,7 @@
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onBack} disabled={isBusy}>{localize('actions.back')}</Button>
-        <Button autofocus classes="w-full" onClick={onConfirm} disabled={isBusy} {isBusy}>
+        <Button classes="w-full" onClick={onConfirm} disabled={isBusy} {isBusy}>
             {localize('actions.confirm')}
         </Button>
     </popup-buttons>
