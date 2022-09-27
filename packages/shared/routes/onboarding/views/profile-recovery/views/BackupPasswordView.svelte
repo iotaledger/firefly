@@ -16,6 +16,7 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
+    import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
 
     export let error = ''
     export let busy = false
@@ -43,7 +44,7 @@
                         await destroyShimmerClaimingProfileManager()
                         await createShimmerClaimingProfileManager()
                     }
-                } else if (err?.error.match(/`invalid stronghold password`/)) {
+                } else if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
                     error = localize('error.password.incorrect')
                 } else {
                     console.error(err)
