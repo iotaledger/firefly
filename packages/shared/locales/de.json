@@ -182,9 +182,9 @@
                 "title": "Profil-Setup ist fast abgeschlossen...",
                 "fundsMigrated": "Guthaben migriert",
                 "body": "Dein neues Profil ist bereit, sobald das Dashboard erfolgreich geladen ist.",
-                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
+                "ledgerHint": "Entferne deinen Ledger erst, wenn das Dashboard vollständig geladen ist.",
                 "softwareMigratedBody": "Du hast dein Guthaben erfolgreich ins neue Netzwerk übertragen",
-                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
+                "fireflyLedgerBody": "Dein Ledger-Konto wurde erfolgreich wiederhergestellt und du kannst nun fortfahren.",
                 "trinityLedgerBody": "Du hast deinen Ledger erfolgreich in das neue Netzwerk migriert.",
                 "exportMigration": "Export Migrationsprotokoll und Abschluss der Einrichtung"
             }
@@ -198,10 +198,10 @@
             "videoGuide": "Video-Leitfaden zur Ledger-Migration"
         },
         "ledgerInstallationGuide": {
-            "title": "Hast du die notwendigen Ledger-Apps installiert?",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Bevor du fortfährst, musst du Ledger Live verwenden, um die {protocol} App zu finden und zu installieren.",
             "body2": "Stelle sicher, dass deine Ledger-Firmware aktuell ist. Alle vorinstallierten Apps sollten auf ihre neuesten Versionen aktualisiert werden.",
-            "action": "Ja, ich habe beide Apps installiert"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "Ledger wiederherstellen oder migrieren",
@@ -749,12 +749,12 @@
             "confirm": "Um fortzufahren, bestätige die Eingabeaufforderung, die auf deinem Ledger-Gerät angezeigt wird"
         },
         "ledgerAppGuide": {
-            "title": "Anleitung zur Installation der Ledger-Apps",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Installiere und öffne die Ledger Live Anwendung",
                 "1": "Stelle sicher, dass dein Ledger verbunden ist",
-                "2": "Suche nach den folgenden Apps: {legacy} and IOTA (MIOTA)",
-                "3": "Installiere beide Apps: {legacy} und IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Denke daran, dass es wichtig ist, Ledger Live zu schließen, bevor du zu Firefly zurückkehrst"
             }
         },
@@ -1586,7 +1586,7 @@
             "incoming": {
                 "storageDeposit": "Eine rückerstattbare Token Einzahlung, die benötigt wird, um Ihre Transaktion auf dem Tangle zu speichern.",
                 "giftedStorageDeposit": "Der Storage Deposit für diese Transaktion wurde dir geschenkt. Du musst ihn nicht zurückzahlen.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "expirationTime": "Beanspruche diese Guthaben vor der Verfallszeit. Anderenfalls werden sie an den Absender zurückerstattet.",
                 "timelockDate": "Der Absender hat eine Zeitsperre für diese Guthaben definiert. Du kannst sie ausgeben sobald die Sperre verfällt.",
                 "metadata": "Ein optionales Datenfeld zur dauerhaften Speicherung von Daten auf dem Tangle.",
                 "tag": "Ein kurzes optionales Datenfeld. Tag Gruppen von Transaktionen können die Suche erleichtern."

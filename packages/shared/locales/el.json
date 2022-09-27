@@ -198,10 +198,10 @@
             "videoGuide": "Βίντεο οδηγιών μεταγραφής σε Ledger"
         },
         "ledgerInstallationGuide": {
-            "title": "Έχετε εγκαταστήσει τις απαραίτητες εφαρμογές Ledger;",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Βεβαιωθείτε ότι το firmware του Ledger είναι ενημερωμένο. Οποιεσδήποτε προεγκατεστημένες εφαρμογές πρέπει να ενημερωθούν στις τελευταίες εκδόσεις τους.",
-            "action": "Ναι, έχω εγκαταστήσει αυτές τις εφαρμογές"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "Επαναφορά ή μεταγραφή του Ledger",
@@ -749,12 +749,12 @@
             "confirm": "Για να συνεχίσετε, επιβεβαιώστε την προτροπή που εμφανίζεται στη συσκευή Ledger"
         },
         "ledgerAppGuide": {
-            "title": "Οδηγός εγκατάστασης των εφαρμογών Ledger",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Εγκαταστήστε και ανοίξτε την εφαρμογή Ledger Live",
                 "1": "Βεβαιωθείτε ότι το Ledger σας είναι συνδεδεμένο",
-                "2": "Αναζήτηση εφαρμογών: {legacy} και IOTA (MIOTA)",
-                "3": "Εγκαταστήστε και τις δύο εφαρμογές: {legacy} και IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Θυμηθείτε ότι είναι σημαντικό να κλείσετε το Ledger Live πριν επιστρέψετε στο Firefly"
             }
         },
