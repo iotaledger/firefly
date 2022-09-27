@@ -1,7 +1,7 @@
 <script lang="typescript">
     import zxcvbn from 'zxcvbn'
     import { OnboardingLayout } from '../../../../../components'
-    import { Animation, Button, PasswordInput, Text } from 'shared/components'
+    import { Button, PasswordInput, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
@@ -15,6 +15,8 @@
     import { showAppNotification } from '@lib/notifications'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
     import { HTMLButtonType } from 'shared/components/Button.svelte'
+
+    const title = localize('views.onboarding.strongholdSetup.setupStrongholdPassword.title')
 
     let strongholdPassword = ''
     let confirmedStrongholdPassword = ''
@@ -96,18 +98,10 @@
     } // zxcvbn lib recommends to not validate long passwords because of performance issues https://github.com/dropbox/zxcvbn#user-content-performance
 </script>
 
-<OnboardingLayout {onBackClick} {busy}>
-    <div slot="title">
-        <Text type="h2">{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.title')}</Text>
-    </div>
-    <div slot="illustration" class="w-full h-full flex justify-center">
-        <Animation classes="setup-anim-aspect-ratio" animation="password-desktop" />
-    </div>
-    <div slot="content">
+<OnboardingLayout {onBackClick} {busy} {title} animation="password-desktop">
+    <div slot="content" class="mb-5">
         <form on:submit|preventDefault={onContinueClick} id="password-form">
-            <Text type="p" classes="mb-4" secondary
-                >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text
-            >
+            <Text type="p" secondary>{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text>
             <Text type="p" classes="mb-10" secondary
                 >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body2')}</Text
             >

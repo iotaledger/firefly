@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
-    import { Animation, Button, Input, Text } from 'shared/components'
+    import { Button, Input, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
@@ -14,6 +14,10 @@
         profileSetupRouter,
     } from '@core/router'
     import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
+
+    const title = localize('views.onboarding.profileSetup.enterName.title', {
+        values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+    })
 
     let error = ''
     let profileName = $onboardingProfile?.name ?? ''
@@ -52,17 +56,7 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick}>
-    <div slot="title">
-        <Text type="h2"
-            >{localize('views.onboarding.profileSetup.enterName.title', {
-                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
-            })}</Text
-        >
-    </div>
-    <div slot="illustration" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
-        <Animation classes="setup-anim-aspect-ratio" animation="profile-desktop" />
-    </div>
+<OnboardingLayout {onBackClick} {title} animation="profile-desktop">
     <div slot="content">
         <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileSetup.enterName.body1')}</Text>
         <Text type="p" secondary classes="mb-4">

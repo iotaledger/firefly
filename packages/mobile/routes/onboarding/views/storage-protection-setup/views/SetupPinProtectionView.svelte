@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { OnboardingLayout } from '../../../../../components'
-    import { Animation, Button, PinInput, Text } from 'shared/components'
+    import { Button, PinInput, Text } from 'shared/components'
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
@@ -17,6 +17,8 @@
     import { onMount } from 'svelte'
 
     export let busy = false
+
+    const title = localize('views.onboarding.storageProtectionSetup.setupPinProtection.title')
 
     let setPinInput = ''
     let setPinInputError = ''
@@ -93,16 +95,9 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick} {busy}>
-    <div slot="title">
-        <Text type="h2">{localize('views.onboarding.storageProtectionSetup.setupPinProtection.title')}</Text>
-    </div>
-    ´
-    <div slot="illustration" class="w-full h-full flex justify-center">
-        <Animation classes="setup-anim-aspect-ratio" animation="pin-desktop" />
-    </div>
+<OnboardingLayout {onBackClick} {busy} {title} animation="pin-desktop">
     <div slot="content">
-        <div class="flex flex-col mb-8">
+        <div class="flex flex-col">
             <Text type="p" secondary classes="mb-4"
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body1')}</Text
             >

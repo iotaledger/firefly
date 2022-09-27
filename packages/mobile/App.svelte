@@ -25,7 +25,7 @@
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
 
-    import { keyboardHeight, isKeyboardOpen } from './lib/app'
+    import { keyboardHeight, isKeyboardOpen } from './lib/auxiliary/keyboard'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 

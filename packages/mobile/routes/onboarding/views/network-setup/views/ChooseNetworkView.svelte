@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
-    import { Animation, OnboardingButton, Text } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
+    import { OnboardingButton } from 'shared/components'
     import features from '@features/features'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
@@ -35,13 +34,11 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick}>
-    <div slot="title">
-        <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.chooseNetwork.title')}</Text>
-    </div>
-    <div slot="illustration" class="w-full h-full flex justify-center">
-        <Animation classes="setup-anim-aspect-ratio" animation="onboarding-network-desktop" />
-    </div>
+<OnboardingLayout
+    {onBackClick}
+    title={localize('views.onboarding.networkSetup.chooseNetwork.title')}
+    animation="onboarding-network-desktop"
+>
     <div slot="footer" class="flex flex-col space-y-4">
         {#each Object.values(NetworkType) as networkType}
             <OnboardingButton

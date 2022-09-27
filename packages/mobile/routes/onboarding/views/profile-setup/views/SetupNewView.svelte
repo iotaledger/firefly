@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
-    import { Animation, OnboardingButton, Text } from 'shared/components'
+    import { OnboardingButton, Text } from 'shared/components'
     import features from '@features/features'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
@@ -12,6 +12,8 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { profileSetupRouter } from '@core/router'
+
+    const title = localize('views.onboarding.profileSetup.setupNew.title')
 
     function onProfileTypeSelectionClick(type: ProfileType): void {
         updateOnboardingProfile({ type })
@@ -29,13 +31,7 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick}>
-    <div slot="title">
-        <Text type="h2">{localize('views.onboarding.profileSetup.setupNew.title')}</Text>
-    </div>
-    <div slot="illustration" class="w-full h-full flex justify-center">
-        <Animation classes="setup-anim-aspect-ratio" animation="import-desktop" />
-    </div>
+<OnboardingLayout {onBackClick} {title} animation="import-desktop">
     <div slot="content">
         <Text type="p" secondary classes="mb-8">{localize('views.onboarding.profileSetup.setupNew.body')}</Text>
     </div>
