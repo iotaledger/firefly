@@ -61,6 +61,7 @@ async function recoverAccountsInSeries(): Promise<void> {
         {
             ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
             addressStartIndex: depthWindowAddressStartIndex,
+            addressStartIndexInternal: depthWindowAddressStartIndex,
         }
     )
     await updateRecoveredAccounts(depthWindowAccounts)
@@ -81,6 +82,7 @@ async function recoverAccountsInSeries(): Promise<void> {
                 {
                     ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
                     addressStartIndex: temporaryAddressStartIndex,
+                    addressStartIndexInternal: temporaryAddressStartIndex,
                 }
             )
             await updateRecoveredAccounts(breadthWindowAccounts)
