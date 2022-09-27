@@ -15,6 +15,14 @@
     let icon: string
 
     $: hasMultipleAssets = $visibleSelectedAccountAssets?.nativeTokens.length >= 1
+    $: searchQuery = searchQuery.toLocaleLowerCase()
+    $: dropdownAssetList = [$visibleSelectedAccountAssets?.baseCoin]
+        .concat($visibleSelectedAccountAssets?.nativeTokens)
+        .filter((asset) => {
+            const assetName = asset?.metadata?.name?.toLocaleLowerCase()
+            const assetUnit = asset?.metadata?.unit?.toLocaleLowerCase()
+            return assetName?.includes(searchQuery) || assetUnit?.includes(searchQuery)
+        })
     $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
         case NetworkProtocol.IOTA:
         case NetworkProtocol.Shimmer:
@@ -71,7 +79,6 @@
             <div
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 max-h-108"
             >
-                <!-- TODO: Filter dropdown list with asset name / unit -->
                 <!-- TODO: Focus input when dropdown opens -->
                 <InputContainer bind:inputElement clearPadding bind:isFocused>
                     <TextInput
@@ -85,28 +92,23 @@
                         fontSize="sm"
                     />
                 </InputContainer>
-                <ul class="overflow-y-auto h-full -mr-2 pt-2 pr-2">
-                    <li>
-                        <AssetTile
-                            onClick={() => handleAssetClick($visibleSelectedAccountAssets?.baseCoin)}
-                            asset={$visibleSelectedAccountAssets?.baseCoin}
-                            overrideColor
-                            classes="bg-white hover:bg-gray-50 dark:bg-transparent"
-                            squashed
-                        />
-                    </li>
-                    {#each $visibleSelectedAccountAssets?.nativeTokens as nativeToken}
-                        <li>
-                            <AssetTile
-                                onClick={() => handleAssetClick(nativeToken)}
-                                asset={nativeToken}
-                                overrideColor
-                                classes="bg-white hover:bg-gray-50 dark:bg-transparent"
-                                squashed
-                            />
-                        </li>
-                    {/each}
-                </ul>
+                {#if dropdownAssetList.length > 0}
+                    <ul class="overflow-y-auto h-full -mr-2 pt-2 pr-2">
+                        {#each dropdownAssetList as nativeToken}
+                            <li>
+                                <AssetTile
+                                    onClick={() => handleAssetClick(nativeToken)}
+                                    asset={nativeToken}
+                                    overrideColor
+                                    classes="bg-white hover:bg-gray-50 dark:bg-transparent"
+                                    squashed
+                                />
+                            </li>
+                        {/each}
+                    </ul>
+                {:else}
+                    <Text classes="mt-4">No assets match your search.</Text>
+                {/if}
             </div>
         {/if}
     </div>
