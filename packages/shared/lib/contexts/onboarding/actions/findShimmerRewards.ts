@@ -42,14 +42,11 @@ let currentSearchRound = 1
 
 export async function findShimmerRewards(): Promise<void> {
     resetGapLimitConfiguration()
-
-    const recoveredAccounts = await recoverAccountsInSeries()
-    await updateRecoveredAccounts(recoveredAccounts)
-
+    await recoverAccountsInSeries()
     updateRewardsFinderParameters()
 }
 
-async function recoverAccountsInSeries(): Promise<IAccount[]> {
+async function recoverAccountsInSeries(): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
 
     console.log('DEPTH WINDOW ACCOUNT START INDEX: ', depthWindowAccountStartIndex)
@@ -66,8 +63,8 @@ async function recoverAccountsInSeries(): Promise<IAccount[]> {
             addressStartIndex: depthWindowAddressStartIndex,
         }
     )
+    await updateRecoveredAccounts(depthWindowAccounts)
 
-    const breadthWindowAccounts: IAccount[] = []
     if (hasOnlySearchedDepthWindow()) {
         console.log('BREADTH WINDOW ACCOUNT START INDEX: ', breadthWindowAccountStartIndex)
         console.log('BREADTH WINDOW ACCOUNT GAP LIMIT: ', breadthWindowAccountGapLimit)
@@ -77,23 +74,19 @@ async function recoverAccountsInSeries(): Promise<IAccount[]> {
         let temporaryAddressStartIndex = 0
         while (temporaryAddressStartIndex < breadthWindowAddressGapLimit) {
             console.log('TEMP ADDR START IDX: ', temporaryAddressStartIndex)
-            breadthWindowAccounts.concat(
-                await _shimmerClaimingProfileManager?.recoverAccounts(
-                    breadthWindowAccountStartIndex,
-                    breadthWindowAccountGapLimit,
-                    gapLimitProfileConfiguration.addressGapLimit,
-                    {
-                        ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
-                        addressStartIndex: temporaryAddressStartIndex,
-                    }
-                )
+            const breadthWindowAccounts = await _shimmerClaimingProfileManager?.recoverAccounts(
+                breadthWindowAccountStartIndex,
+                breadthWindowAccountGapLimit,
+                gapLimitProfileConfiguration.addressGapLimit,
+                {
+                    ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
+                    addressStartIndex: temporaryAddressStartIndex,
+                }
             )
+            await updateRecoveredAccounts(breadthWindowAccounts)
             temporaryAddressStartIndex += gapLimitProfileConfiguration.addressGapLimit
         }
     }
-    return depthWindowAccounts
-        .concat(breadthWindowAccounts)
-        .filter((account, idx, arr) => idx === arr.findIndex((_account) => _account.meta.index === account.meta.index))
 }
 
 function hasOnlySearchedDepthWindow(): boolean {
