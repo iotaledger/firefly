@@ -1,7 +1,15 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
-    import { AppRoute, appRouter, DashboardRoute, dashboardRouter, initialiseRouters, openSettings } from '@core/router'
+    import {
+        AppRoute,
+        appRoute,
+        appRouter,
+        DashboardRoute,
+        dashboardRouter,
+        initialiseRouters,
+        openSettings,
+    } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import {
         appSettings,
@@ -23,7 +31,6 @@
     import { initialiseOnboardingProfile } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
-    import { profiles } from '@core/profile/stores/profiles.store'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -48,8 +55,7 @@
             Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
         }
     }
-    $: Electron.updateMenu('loggedIn', $loggedIn)
-    $: Electron.updateMenu('hasProfile', $profiles.length > 0)
+    $: Electron.updateMenu('isInLogin', $appRoute === AppRoute.Login)
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection

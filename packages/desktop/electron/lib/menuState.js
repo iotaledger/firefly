@@ -1,7 +1,6 @@
 export const menuState = {
-    loggedIn: false,
     enabled: true,
-    hasProfile: false,
+    isInLogin: false,
     strings: {
         about: 'About Firefly',
         checkForUpdates: 'Check for Updates',
