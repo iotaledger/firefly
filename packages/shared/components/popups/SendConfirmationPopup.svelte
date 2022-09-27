@@ -43,12 +43,14 @@
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
+    let expirationTimePicker: ExpirationTimePicker
 
     const rawAmount = convertToRawAmount(amount, unit, asset.metadata)
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
+    $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle = asset?.id === $selectedAccountAssets?.baseCoin?.id
 
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
@@ -193,6 +195,7 @@
             <KeyValueBox keyText={localize('general.expirationTime')}>
                 <ExpirationTimePicker
                     slot="value"
+                    bind:this={expirationTimePicker}
                     bind:value={expirationDate}
                     initialSelected={initialExpirationDate}
                     disabled={disableChangeExpiration}
