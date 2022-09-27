@@ -23,6 +23,7 @@
     import { initialiseOnboardingProfile } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
+    import { profiles } from '@core/profile/stores/profiles.store'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -48,6 +49,7 @@
         }
     }
     $: Electron.updateMenu('loggedIn', $loggedIn)
+    $: Electron.updateMenu('hasProfile', $profiles.length > 0)
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
