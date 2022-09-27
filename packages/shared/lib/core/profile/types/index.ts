@@ -1,1 +1,1 @@
-export * from './recover-accounts-configuration.type'
+export * from './account-recovery-configuration.type'

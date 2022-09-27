@@ -1,11 +1,11 @@
 import { IAccount } from '@core/account'
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-import { RecoverAccountsProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
+import { AccountRecoveryProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 import { get } from 'svelte/store'
-import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_RECOVER_ACCOUNTS_CONFIGURATION } from '../constants'
+import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION } from '../constants'
 import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
@@ -20,7 +20,7 @@ const INITIAL_TOTAL_UNCLAIMED_REWARDS = 0
  * must know the profile type to be able to determine
  * gap limits that are sensible in terms of UX.
  */
-let recoverAccountsProfileConfiguration: RecoverAccountsProfileConfiguration
+let accountRecoveryProfileConfiguration: AccountRecoveryProfileConfiguration
 
 let depthSearchAccountGapLimit: number
 let depthSearchAddressStartIndex: number
@@ -38,14 +38,14 @@ export function initialiseRecoverAccountsConfiguration(): void {
         throw new UnableToFindProfileTypeError()
     }
 
-    recoverAccountsProfileConfiguration = SHIMMER_CLAIMING_RECOVER_ACCOUNTS_CONFIGURATION[profileType]
+    accountRecoveryProfileConfiguration = SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION[profileType]
 
-    depthSearchAccountGapLimit = recoverAccountsProfileConfiguration.initialAccountRange
+    depthSearchAccountGapLimit = accountRecoveryProfileConfiguration.initialAccountRange
     depthSearchAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX
-    depthSearchAddressGapLimit = recoverAccountsProfileConfiguration.addressGapLimit
+    depthSearchAddressGapLimit = accountRecoveryProfileConfiguration.addressGapLimit
 
-    breadthSearchAccountStartIndex = recoverAccountsProfileConfiguration.initialAccountRange
-    breadthSearchAddressGapLimit = recoverAccountsProfileConfiguration.addressGapLimit
+    breadthSearchAccountStartIndex = accountRecoveryProfileConfiguration.initialAccountRange
+    breadthSearchAddressGapLimit = accountRecoveryProfileConfiguration.addressGapLimit
 
     currentSearchRound = INITIAL_SEARCH_ROUND
     totalUnclaimedShimmerRewards = INITIAL_TOTAL_UNCLAIMED_REWARDS
@@ -79,7 +79,7 @@ async function depthSearchAndRecoverAccounts(): Promise<void> {
 
 async function breadthSearchAndRecoverAccounts(): Promise<void> {
     const profileManager = get(shimmerClaimingProfileManager)
-    const { accountGapLimit, addressGapLimit } = recoverAccountsProfileConfiguration
+    const { accountGapLimit, addressGapLimit } = accountRecoveryProfileConfiguration
     for (
         let chunkAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX;
         chunkAddressStartIndex < breadthSearchAddressGapLimit;
@@ -100,14 +100,14 @@ async function breadthSearchAndRecoverAccounts(): Promise<void> {
 }
 
 function hasOnlyDoneDepthSearch(): boolean {
-    const { numberOfRoundsBetweenBreadthSearch } = recoverAccountsProfileConfiguration
+    const { numberOfRoundsBetweenBreadthSearch } = accountRecoveryProfileConfiguration
     return currentSearchRound % numberOfRoundsBetweenBreadthSearch === 0
 }
 
 function updateRewardsFinderParameters(): void {
     const hasSearchedOnlyDepth = hasOnlyDoneDepthSearch()
 
-    const { accountGapLimit, addressGapLimit } = recoverAccountsProfileConfiguration
+    const { accountGapLimit, addressGapLimit } = accountRecoveryProfileConfiguration
 
     depthSearchAccountGapLimit += hasSearchedOnlyDepth ? accountGapLimit : 0
     depthSearchAddressStartIndex += addressGapLimit

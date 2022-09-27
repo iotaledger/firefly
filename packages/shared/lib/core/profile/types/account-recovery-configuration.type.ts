@@ -1,12 +1,12 @@
 import { ProfileType } from '@core/profile'
 
-export type RecoverAccountsProfileConfiguration = {
+export type AccountRecoveryProfileConfiguration = {
     initialAccountRange: number
     accountGapLimit: number
     numberOfRoundsBetweenBreadthSearch: number
     addressGapLimit: number
 }
 
-export type RecoverAccountsConfiguration = {
-    [key in ProfileType]?: RecoverAccountsProfileConfiguration
+export type AccountRecoveryConfiguration = {
+    [key in ProfileType]?: AccountRecoveryProfileConfiguration
 }
