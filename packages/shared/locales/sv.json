@@ -63,7 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Konfigurera {protocol, select, IOTA {en} Shimmer {en}} {protocol} profil",
-                    "body": "Select the method you will use to set up your {protocol} profile."
+                    "body": "Select the appropriate method to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Skapa en profil",
@@ -150,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "Ange din återställningsfras",
-                    "body": "En återställningsfras är 24 ord lång, endast små bokstäver och mellanrum mellan varje ord. Denna används för att återställa befintliga Firefly-profiler.",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
                     "enter": "Ange din hemliga återställningsfras",
                     "phraseDetected": "24 ord lång återställningsfras upptäckt"
                 },
@@ -170,21 +170,21 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "Dina staking-belöningar från Shimmer",
-                    "body": "Kontrollera att dina staking-belöningar för Shimmer är korrekta. Om inte, använd \"Hitta saldo\"."
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
                 },
                 "success": {
-                    "title": "Belöningar hämtade",
-                    "body": "Du har framgångsrikt hämtat Shimmer tokens för din nya profil.",
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
                     "totalRewards": "Totalt antal belöningar"
                 }
             },
             "congratulations": {
-                "title": "Profile setup is almost complete",
+                "title": "Profile setup almost complete...",
                 "fundsMigrated": "Tillgångar migrerade",
-                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
-                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
                 "softwareMigratedBody": "Du har framgångsrikt migrerat dina tillgångar till det nya nätverket",
-                "fireflyLedgerBody": "Ditt Ledger-konto har återställts och du kan nu fortsätta.",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
                 "trinityLedgerBody": "Du har framgångsrikt migrerat din Ledger till det nya nätverket.",
                 "exportMigration": "Exportera migrationslogg och avsluta konfigurationen"
             }
@@ -490,7 +490,7 @@
             }
         },
         "staking": {
-            "welcome": "Välkommen till staking-instrumentpanelen!",
+            "welcome": "Välkommen till staking-översikten!",
             "status": {
                 "upcoming": "Event inte startat",
                 "commencing": "För-staking öppen",
@@ -709,6 +709,7 @@
         "transaction": {
             "title": "Bekräfta transaktion",
             "body": "Du håller på att skicka {amount} till",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt.",
             "sendingFromStakedAccountBelowMinReward": "Du skickar en överföring från en plånbok som ännu inte nått den lägsta belöningsnivån. Detta kan innebära att dina tokens slutar vara markerade som \"staked\" och du därmed förlorar dina stakingbelöningar på denna plånbok."
         },
@@ -932,7 +933,7 @@
         "createWallet": "Skapa en ny {protocol}-profil",
         "createWalletDescription": "Skapa en ny profil som körs på {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Hämta Shimmer staking-belöningar",
-        "claimShimmerDescription": "Migrera IOTA-profil och gör anspråk på staking-belöningar",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "savePassword": "Spara lösenord",
         "useBiometric": "Använd biometrisk säkerhet",
         "setupPinCode": "Ställ in PIN-kod",
@@ -959,8 +960,8 @@
         "chooseFile": "Välj en fil",
         "dropHere": "Släpp din fil här",
         "syncAll": "Synkronisera alla",
-        "import": "Import",
-        "importing": "Importing",
+        "import": "Importera",
+        "importing": "Importerar",
         "export": "Exportera",
         "exporting": "Exporterar",
         "exportNewStronghold": "Exportera en ny Stronghold",
@@ -1054,7 +1055,7 @@
         "testDeepLink": "Testa hyperlänk",
         "initialize": "Initiera",
         "initializing": "Initierar",
-        "delete": "Delete"
+        "delete": "Ta bort"
     },
     "general": {
         "recipient": "Mottagare",
@@ -1104,7 +1105,7 @@
         "generateNewAddress": "Skapa ny adress",
         "copyToClipboard": "Kopiera till urklipp",
         "copyAddress": "Kopiera adress",
-        "viewOnExplorer": "Visa i utforskaren",
+        "viewOnExplorer": "Visa i Explorer",
         "import": "Importera",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -1149,9 +1150,9 @@
         "loadingAccounts": "Laddar, vänligen vänta...",
         "addProfile": "Lägg till profil",
         "noRecentHistory": "Ingen historik",
-        "noFilteredActivity": "No matching activities",
+        "noFilteredActivity": "Inga matchande aktiviteter",
         "noAssets": "Inga tillgångar",
-        "noFilteredAsset": "No matching assets",
+        "noFilteredAsset": "Inga matchande tillgångar",
         "thisMonth": "Denna månad",
         "search": "Sök",
         "firstSync": "Synkroniserar historik, detta kan ta ett tag...",
@@ -1216,6 +1217,7 @@
         "unstakedFunds": "Ej stakade tillgångar",
         "accountColor": "Plånboksfärg",
         "transactionTime": "Transaktionstid",
+        "surplus": "Surplus",
         "storageDeposit": "Lagringsdeposition",
         "giftedStorageDeposit": "Skänkt lagringsdeposition",
         "expirationTime": "Utgångstid",
@@ -1223,9 +1225,9 @@
         "claimedTime": "Gjorde anspråk vid",
         "copiedToClipboard": "Kopierad till urklipp",
         "total": "Totalt: {balance}",
-        "availableBalanceWithValue": "Available balance: {balance}",
-        "availableBalance": "Available balance",
-        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
+        "availableBalanceWithValue": "Tillgängligt saldo: {balance}",
+        "availableBalance": "Tillgängligt saldo",
+        "availableBalanceTooltip": "En tillgångs totala saldo minus eventuella medel som krävs för att täcka insättningen av lagringsdeposition (dvs. medel som är låsta i väntande transaktioner, reserverade för inhemska tokens eller reserverade för NFTs).",
         "amountClaimed": "{amount} taget i anspråk",
         "metadata": "Metadata",
         "tag": "Tagg",
@@ -1244,8 +1246,8 @@
         "testDeepLinkDescription": "Simulera en hyperlänkförfrågan skickad till Firefly",
         "url": "URL",
         "hash": "Hash",
-        "creating": "Creating",
-        "updating": "Updating"
+        "creating": "Skapar",
+        "updating": "Uppdaterar"
     },
     "filters": {
         "title": "Filter",
@@ -1293,7 +1295,7 @@
             "confirmed": "bekräftad",
             "pending": "väntande",
             "claimed": "anspråkstagen",
-            "unclaimed": "ej anspråkstagen"
+            "unclaimed": "unclaimed"
         },
         "type": {
             "label": "Typ",
@@ -1342,7 +1344,8 @@
             "receivedWhileLoggedOut": "Vänligen logga in för att initiera hyperlänken",
             "notEnabled": "Hyperlänkar är inte aktiverat",
             "invalidFormat": "Hyperlänken du följde är ogiltig",
-            "invalidAmount": "Beloppet i hyperlänken är inte ett nummer {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "Betalningsinformation tillagd från hyperlänk"
@@ -1358,7 +1361,7 @@
             "error": "Anspråk av transaktion misslyckades"
         },
         "hideActivity": {
-            "success": "Dolde aktivitet framgångsrikt",
+            "success": "Activity was hidden",
             "error": "Misslyckades att dölja aktivitet"
         },
         "faucetRequest": {
@@ -1379,8 +1382,8 @@
             "error": "Ett fel inträffade vid sökning efter belöningar"
         },
         "claimShimmerRewards": {
-            "success": "Framgångsrikt hämtat Shimmer-belöningar för {accountAlias}",
-            "error": "Ett fel inträffade när belöningar skulle hämtas"
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         }
     },
     "error": {
@@ -1438,11 +1441,11 @@
         "send": {
             "addressLength": "Adresser bör vara {length, plural, one {# tecken} other {# tecken}} lång.",
             "amountTooHigh": "Detta är större än ditt tillgängliga saldo.",
-            "amountNoFloat": "Kan inte använda decimaltecken med den minsta enhet som valts",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Beloppet verkar vara ett ogiltigt nummer.",
             "amountSmallerThanSubunit": "Beloppet måste vara större än den minsta subenheten.",
-            "tagTooLong": "Taggen kan inte vara längre än 64 bytes.",
-            "metadataTooLong": "Metadatan kan inte vara längre än 8192 bytes.",
+            "tagTooLong": "The tag cannot be longer than 64 characters.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
             "amountZero": "Beloppet måste vara större än 0.",
             "wrongAddressPrefix": "Adresser börjar med prefixet {prefix}.",
             "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
@@ -1497,8 +1500,8 @@
             "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är #} other {är #}}.",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras",
             "phraseCaseWord": "Ordet \"{word}\" ska vara skrivet med små bokstäver",
-            "unableToCopyFile": "Unable to copy Stronghold backup file",
-            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
+            "unableToCopyFile": "Det gick inte att kopiera Stronghold backupfil",
+            "unableToRestoreForProfileManager": "Det går inte att återställa Stronghold backup för profilhanteraren"
         },
         "ledger": {
             "appNotOpen": "Du måste öppna IOTA appen på din Ledger-enhet.",
@@ -1532,18 +1535,18 @@
         "invalidDate": "INVALID DATUM",
         "invalidTime": "INVALID TID",
         "shimmerClaiming": {
-            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
-            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
-            "missingAccount": "Unable to find Shimmer claiming account"
+            "missingProfileManager": "Det gick inte att hitta profilhanteraren för Shimmer-hämtning",
+            "cannotInitialiseAccount": "Det gick inte att initiera hämtningskonto för Shimmer",
+            "missingAccount": "Det gick inte att hitta hämtningskonto för Shimmer"
         },
         "walletApiEvent": {
-            "invalidAccountIndex": "Invalid account index for {eventName} event",
-            "invalidPayload": "Invalid payload for {eventName} event"
+            "invalidAccountIndex": "Ogiltigt kontoindex för {eventName} händelse",
+            "invalidPayload": "Ogiltig nyttolast för {eventName} händelse"
         }
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "Det valda utgångsdatumet/tiden är ogiltig."
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "Att använda noder över HTTP lämnar trafik okrypterad och kan utgöra en säkerhetsrisk."
@@ -1578,24 +1581,30 @@
             "bodyDidNotReachMin": "Du stakade inte tillräckligt med IOTA för att nå den lägsta belöningen för {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Denna plånbok har inte tillräckligt med IOTA tokens för att nå den lägsta belöningsnivån för {airdrop}."
         },
-        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
             "incoming": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
-                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             },
             "outgoing": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             }
+        },
+        "mintNativeTokenForm": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {

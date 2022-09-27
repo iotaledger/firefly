@@ -63,7 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Configurar {protocol, select, IOTA {an} Shimmer {a}} Perfil de {protocol}",
-                    "body": "Select the method you will use to set up your {protocol} profile."
+                    "body": "Select the appropriate method to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Crear un perfil",
@@ -150,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "Ingresa tu frase de recuperación",
-                    "body": "Una frase de recuperación tiene 24 palabras, todas minúsculas, con espacios intermedios. Esto se utiliza para recuperar perfiles de Firefly existentes.",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
                     "enter": "Introduce tu frase de recuperación secreta",
                     "phraseDetected": "Frase de recuperación de 24 palabras detectada"
                 },
@@ -170,21 +170,21 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "Tus recompensas de staking de Shimmer",
-                    "body": "Por favor, comprueba que tus recompensas de staking de Shimmer son correctas. Si no, por favor usa el buscador de saldo."
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
                 },
                 "success": {
-                    "title": "Recompensas recibidas",
-                    "body": "Has reclamado con éxito tokens Shimmer para tu nuevo perfil.",
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
                     "totalRewards": "Total de recompensas"
                 }
             },
             "congratulations": {
-                "title": "Profile setup is almost complete",
+                "title": "Profile setup almost complete...",
                 "fundsMigrated": "Fondos migrados",
-                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
-                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
                 "softwareMigratedBody": "Has migrado correctamente tus fondos a la nueva red",
-                "fireflyLedgerBody": "Tu cuenta de Ledger se ha recuperado con éxito y ahora puedes continuar.",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
                 "trinityLedgerBody": "Has migrado con éxito tu Ledger a la nueva red.",
                 "exportMigration": "Exportar registro de migración y finalizar la configuración"
             }
@@ -709,6 +709,7 @@
         "transaction": {
             "title": "Confirmar transacción",
             "body": "Estás a punto de enviar {amount} a",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
             "sendingFromStakedAccountBelowMinReward": "Estas realizando una transferencia desde una cartera que no ha alcanzado la recompenza minima de staking. Esto podria remover el stake de estas monedas y podrias perder las recompenzas en esta cartera."
         },
@@ -932,7 +933,7 @@
         "createWallet": "Crear un nuevo perfil de {protocol}",
         "createWalletDescription": "Crea un perfil nuevo ejecutándose en {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Reclamar recompensas de staking de Shimmer",
-        "claimShimmerDescription": "Migrar perfil IOTA y reclamar recompensas de staking",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "savePassword": "Guardar contraseña",
         "useBiometric": "Usar seguridad biométrica",
         "setupPinCode": "Configurar código PIN",
@@ -1216,6 +1217,7 @@
         "unstakedFunds": "Fondos sin Stake",
         "accountColor": "Color de la billetera",
         "transactionTime": "Tiempo de transacción",
+        "surplus": "Surplus",
         "storageDeposit": "Depósito de almacenamiento",
         "giftedStorageDeposit": "Depósito de almacenamiento regalado",
         "expirationTime": "Tiempo de expiración",
@@ -1293,7 +1295,7 @@
             "confirmed": "confirmada",
             "pending": "pendiente",
             "claimed": "reclamado",
-            "unclaimed": "no reclamado"
+            "unclaimed": "unclaimed"
         },
         "type": {
             "label": "Type",
@@ -1342,7 +1344,8 @@
             "receivedWhileLoggedOut": "Inicie sesión para iniciar el enlace profundo",
             "notEnabled": "Los enlaces profundos no están habilitados",
             "invalidFormat": "El enlace profundo que has seguido no es válido",
-            "invalidAmount": "La cantidad en enlace profundo no es un número {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "Detalles de pago agregados desde un enlace profundo"
@@ -1358,7 +1361,7 @@
             "error": "Fallo al reclamar transacción"
         },
         "hideActivity": {
-            "success": "Actividad oculta con éxito",
+            "success": "Activity was hidden",
             "error": "Error al ocultar la actividad"
         },
         "faucetRequest": {
@@ -1379,8 +1382,8 @@
             "error": "Se ha producido un error al buscar recompensas"
         },
         "claimShimmerRewards": {
-            "success": "Recompensas de Shimmer reclamadas con éxito por {accountAlias}",
-            "error": "Se ha producido un error al reclamar recompensas"
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         }
     },
     "error": {
@@ -1438,11 +1441,11 @@
         "send": {
             "addressLength": "Las direcciones deben tener {length, plural, one {# carácter} other {# caracteres}} de largo.",
             "amountTooHigh": "Esto es superior a tu saldo disponible.",
-            "amountNoFloat": "No se pueden usar decimales con la unidad más pequeña seleccionada",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "La cantidad parece ser un número no válido.",
             "amountSmallerThanSubunit": "La cantidad debe ser mayor que la subunidad más pequeña.",
-            "tagTooLong": "La etiqueta no puede tener más de 64 bytes.",
-            "metadataTooLong": "Los metadatos no pueden tener más de 8192 bytes.",
+            "tagTooLong": "The tag cannot be longer than 64 characters.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
             "amountZero": "La cantidad debe ser mayor que 0.",
             "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",
             "wrongAddressFormat": "La dirección no tiene el formato correcto.",
@@ -1543,7 +1546,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "La fecha/hora de vencimiento elegida no es válida."
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "El uso de nodos sobre HTTP deja el tráfico sin cifrar y podría plantear un riesgo de seguridad."
@@ -1578,24 +1581,30 @@
             "bodyDidNotReachMin": "No has hecho Stake con la suficiente cantidad de IOTA para alcanzar las recompensas mínimas de {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Esta cartera no tiene suficientes tokens IOTA para alcanzar la recompensa mínima de airdrop de {airdrop}."
         },
-        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
             "incoming": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
-                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             },
             "outgoing": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             }
+        },
+        "mintNativeTokenForm": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {
