@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Richte {protocol, select, IOTA {ein} Shimmer {ein}} {protocol} Profil ein",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Erfahre mehr über das Shimmer-Netzwerk"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Profil erstellen",
@@ -181,9 +179,10 @@
                 }
             },
             "congratulations": {
-                "title": "Profil-Einrichtung abgeschlossen",
+                "title": "Profile setup is almost complete",
                 "fundsMigrated": "Guthaben migriert",
-                "body": "Dein neues Profil ist bereit zur Nutzung.",
+                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
+                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
                 "softwareMigratedBody": "Du hast dein Guthaben erfolgreich ins neue Netzwerk übertragen",
                 "fireflyLedgerBody": "Dein Ledger-Konto wurde erfolgreich wiederhergestellt und du kannst nun fortfahren.",
                 "trinityLedgerBody": "Du hast deinen Ledger erfolgreich in das neue Netzwerk migriert.",
@@ -587,12 +586,12 @@
             "body": "Es ist wichtig, regelmäßig ein Backup deiner Wallet durchzuführen. Damit stellst du sicher, dass du eine Kopie deiner Wallets mit vollständigem Transaktionsverlauf besitzt. Wenn du dein Backup und deine Wiederherstellungsphrase verlierst, hast du keinen Zugriff mehr auf dein Guthaben."
         },
         "deeplinkAccountSwitch": {
-            "title": "Select a wallet",
-            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+            "title": "Wallet wählen",
+            "body": "Du hast einen Deep Link ausgeführt. Bitte wähle die Wallet, mit der du fortfahren möchtest."
         },
         "deeplinkError": {
-            "title": "Failed link",
-            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+            "title": "Fehlerhafter Link",
+            "body": "Dieser Link ist fehlerhaft oder ungültig. Bitte versuche es erneut oder überprüfe die Quelle des Links."
         },
         "deleteAccount": {
             "title": "{name} löschen?",
@@ -771,13 +770,13 @@
             }
         },
         "verifyLedgerTransaction": {
-            "title": "Verify transaction",
-            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+            "title": "Transaktion verifizieren",
+            "info": "Vergleiche und bestätige die Transaktionsinformationen, die auf deinem Ledger-Gerät angezeigt werden."
         },
         "verifyInternalLedgerTransaction": {
-            "title": "Verify internal transaction",
-            "info": "Please confirm the internal transaction on your ledger.",
-            "hint": "All assets will remain on your wallet when sending an internal transaction."
+            "title": "Interne Transaktion verifizieren",
+            "info": "Bitte bestätige die interne Transaktion auf deinem Ledger.",
+            "hint": "Alle Assets verbleiben beim Senden einer internen Transaktion in deiner Wallet."
         },
         "ledgerAddress": {
             "title": "Empfangsadresse bestätigen",
@@ -902,7 +901,7 @@
         "timeframe1Month": "1 Monat"
     },
     "actions": {
-        "apply": "Apply",
+        "apply": "Anwenden",
         "continue": "Weiter",
         "back": "Zurück",
         "previous": "Zurück",
@@ -960,6 +959,8 @@
         "chooseFile": "Datei auswählen",
         "dropHere": "Datei hier ablegen",
         "syncAll": "Alle synchronisieren",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Exportieren",
         "exporting": "Wird exportiert",
         "exportNewStronghold": "Neuen Stronghold exportieren",
@@ -1052,7 +1053,8 @@
         "test": "Test",
         "testDeepLink": "Deep-Link testen",
         "initialize": "Initialisieren",
-        "initializing": "Initialisiere"
+        "initializing": "Initialisiere",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Empfänger",
@@ -1112,7 +1114,7 @@
         "darkTheme": "Dunkel",
         "systemTheme": "System",
         "balance": "Guthaben",
-        "balanceWithValue": "Balance: {balance}",
+        "balanceWithValue": "Guthaben: {balance}",
         "all": "Alle",
         "incoming": "Eingehend",
         "outgoing": "Ausgehend",
@@ -1147,7 +1149,9 @@
         "loadingAccounts": "Wird geladen, bitte warten...",
         "addProfile": "Profil hinzufügen",
         "noRecentHistory": "Kein aktueller Verlauf",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "Keine Assets",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "Aktueller Monat",
         "search": "Suche",
         "firstSync": "Verlauf wird synchronisiert, dies kann eine Weile dauern...",
@@ -1219,7 +1223,9 @@
         "claimedTime": "Beansprucht am",
         "copiedToClipboard": "In Zwischenablage kopiert",
         "total": "Gesamt: {balance}",
-        "availableBalance": "Verfügbares Guthaben: {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} Beansprucht",
         "metadata": "Metadaten",
         "tag": "Tag",
@@ -1237,7 +1243,9 @@
         "developerTools": "Entwicklerwerkzeuge",
         "testDeepLinkDescription": "Simuliere eine Deep-Link Anfrage, die an Firefly gesendet wurde",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
     },
     "filters": {
         "title": "Filter",
@@ -1254,9 +1262,9 @@
         "verificationStatus": {
             "label": "Verifizierungsstatus",
             "new": "Neu",
-            "skipped": "Skipped verification",
-            "selfVerified": "Self-verified",
-            "official": "Official"
+            "skipped": "Übersprungene Verifikationen",
+            "selfVerified": "Selbstverifiziert",
+            "official": "Offiziell"
         },
         "asset": {
             "label": "Assets"
@@ -1269,16 +1277,16 @@
             "less": "ist kleiner als"
         },
         "date": {
-            "label": "Date",
-            "equals": "is equal to",
-            "last": "in the last",
-            "range": "is between",
-            "after": "is after",
-            "afterOrEquals": "is on or after",
-            "before": "is before",
-            "Days": "days",
-            "Months": "months",
-            "Years": "years"
+            "label": "Datum",
+            "equals": "entspricht dem",
+            "last": "liegt in den letzten",
+            "range": "liegt zwischen",
+            "after": "liegt nach dem",
+            "afterOrEquals": "liegt am oder nach dem",
+            "before": "liegt bevor dem",
+            "Days": "Tage",
+            "Months": "Monate",
+            "Years": "Jahre"
         },
         "status": {
             "label": "Status",
@@ -1334,7 +1342,7 @@
             "receivedWhileLoggedOut": "Bitte melde dich an, um den Deep-Link zu initiieren",
             "notEnabled": "Deep-Links sind nicht aktiviert",
             "invalidFormat": "Der gewählte Deep-Link ist ungültig",
-            "invalidNumber": "Der Betrag im Deep-Link ist keine Zahl {amount}",
+            "invalidAmount": "Der Betrag im Deep-Link ist keine Zahl {amount}",
             "wallet": {
                 "send": {
                     "success": "Zahlungsinformationen aus Deep-Link hinzugefügt"
@@ -1433,16 +1441,16 @@
             "amountNoFloat": "Bei der kleinsten gewählten Einheit können keine Dezimalstellen verwendet werden",
             "amountInvalidFormat": "Der Betrag scheint eine ungültige Zahl zu sein.",
             "amountSmallerThanSubunit": "Der Betrag muss größer sein als die kleinste Untereinheit.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "Der Tag darf nicht größer als 64 Bytes sein.",
+            "metadataTooLong": "Die Metadaten dürfen nicht größer als 8192 Bytes sein.",
             "amountZero": "Der Betrag muss größer als 0 sein.",
             "wrongAddressPrefix": "Adressen beginnen mit dem Präfix {prefix}.",
             "wrongAddressFormat": "Die Adresse ist nicht korrekt formatiert.",
             "invalidAddress": "Die Adresse ist ungültig.",
-            "unknownAsset": "The asset is not known to this account.",
+            "unknownAsset": "Das Asset ist diesem Konto nicht bekannt.",
             "insufficientFunds": "Diese Wallet hat unzureichendes Guthaben.",
             "insufficientFundsStorageDeposit": "Unzureichendes Guthaben, um die Storage Deposit abzudecken",
-            "cannotClaimTwice": "Output has been already claimed",
+            "cannotClaimTwice": "UTXO Output wurde bereits beansprucht",
             "noToAccount": "Du hast keine Wallet ausgewählt, auf welche das Guthaben gesendet werden soll.",
             "sendingDust": "Du kannst nicht weniger als 1 Mi senden.",
             "leavingDust": "Du kannst nicht weniger als 1 Mi auf deiner Adresse hinterlassen.",
@@ -1488,7 +1496,9 @@
             "seedCharacters": "Der Seed darf nur die Buchstaben A-Z oder die Zahl 9 enthalten",
             "phraseWordCount": "Deine Wiederherstellungsphrase sollte aus 24 Wörtern bestehen. Aktuell {length, plural, one {ist es 1} other {sind es #}}.",
             "phraseUnrecognizedWord": "Unbekanntes Wort \"{word}\" in deiner Wiederherstellungsphrase",
-            "phraseCaseWord": "Das Wort \"{word}\" muss aus Kleinbuchstaben bestehen"
+            "phraseCaseWord": "Das Wort \"{word}\" muss aus Kleinbuchstaben bestehen",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "Du musst die IOTA App auf deinem Ledger-Gerät öffnen.",
@@ -1496,7 +1506,7 @@
             "legacyConnected": "Auf deinem Ledger-Gerät ist die falsche App geöffnet.",
             "locked": "Bitte entsperre dein Ledger-Gerät durch Eingabe der PIN.",
             "mnemonicMismatch": "Du hast das falsche Ledger-Gerät angeschlossen oder das Mnemonic hat sich geändert.",
-            "notConnected": "No Ledger device detected.",
+            "notConnected": "Kein Ledger-Gerät erkannt.",
             "notFound": "Ledger-Gerät nicht gefunden.",
             "otherConnected": "Auf deinem Ledger-Gerät ist die falsche App geöffnet.",
             "generateAddress": "Beim Generieren der Adresse ist ein Fehler aufgetreten.",
@@ -1520,7 +1530,16 @@
             "invalidStakingEventId": "Ungültige Staking-Event ID."
         },
         "invalidDate": "UNGÜLTIGES DATUM",
-        "invalidTime": "UNGÜLTIGE ZEIT"
+        "invalidTime": "UNGÜLTIGE ZEIT",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
@@ -1558,6 +1577,25 @@
             "bodyWillNotReachMin": "Du wirst das Minimum an Rewards während der verbleibenden Staking-Periode nicht erreichen, wenn du keine weiteren IOTA Token hinzufügst.",
             "bodyDidNotReachMin": "Du hast nicht ausreichend IOTA Token gestaked, um das Minimum an {airdrop}-Rewards ({airdropRewardMin}) zu erhalten.",
             "bodyMinBalanceAirdrop": "Diese Wallet besitzt nicht ausreichend IOTA Token, um das Minimum an Airdrop-Rewards für {airdrop} zu erhalten."
+        },
+        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            },
+            "outgoing": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            }
         }
     },
     "exports": {
@@ -1615,7 +1653,7 @@
                     "Conflicting": "Empfangen fehlgeschlagen"
                 },
                 "out": {
-                    "Pending": "sende an",
+                    "Pending": "senden an",
                     "Confirmed": "gesendet an",
                     "Conflicting": "Senden fehlgeschlagen"
                 }

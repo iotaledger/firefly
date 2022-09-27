@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
@@ -52,13 +51,6 @@
     function onCancel(): void {
         closePopup()
     }
-
-    let sendButtonElement: HTMLButtonElement
-    onMount(() => {
-        if (amount && recipient) {
-            sendButtonElement.focus()
-        }
-    })
 </script>
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -87,7 +79,7 @@
         <Button classes="w-full" outline onClick={onCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button bind:buttonElement={sendButtonElement} classes="w-full" onClick={onSend}>
+        <Button classes="w-full" onClick={onSend}>
             {localize('actions.send')}
         </Button>
     </popup-buttons>

@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Konfigurera {protocol, select, IOTA {en} Shimmer {en}} {protocol} profil",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Läs mer om Shimmer-nätverket"
+                    "body": "Select the method you will use to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Skapa en profil",
@@ -181,9 +179,10 @@
                 }
             },
             "congratulations": {
-                "title": "Profilkonfigurationen slutförd",
+                "title": "Profile setup is almost complete",
                 "fundsMigrated": "Tillgångar migrerade",
-                "body": "Din nya profil är redo att användas.",
+                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
+                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
                 "softwareMigratedBody": "Du har framgångsrikt migrerat dina tillgångar till det nya nätverket",
                 "fireflyLedgerBody": "Ditt Ledger-konto har återställts och du kan nu fortsätta.",
                 "trinityLedgerBody": "Du har framgångsrikt migrerat din Ledger till det nya nätverket.",
@@ -587,12 +586,12 @@
             "body": "Det är viktigt att säkerhetskopiera plånboken regelbundet för att se till att du har en kopia av din plånbok och transaktionshistorik. Om du förlorar din backup och återställningsfras förlorar du åtkomst till dina tillgångar."
         },
         "deeplinkAccountSwitch": {
-            "title": "Select a wallet",
-            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+            "title": "Välj en plånbok",
+            "body": "Du har precis följt en hyperlänk. Vänligen välj den plånbok du vill fortsätta med."
         },
         "deeplinkError": {
-            "title": "Failed link",
-            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+            "title": "Misslyckad länk",
+            "body": "Denna länk misslyckades eller är ogiltig. Försök igen eller dubbelkolla källan till länken."
         },
         "deleteAccount": {
             "title": "Ta bort {name}?",
@@ -771,13 +770,13 @@
             }
         },
         "verifyLedgerTransaction": {
-            "title": "Verify transaction",
-            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+            "title": "Verifiera transaktion",
+            "info": "Jämför och bekräfta transaktionsinformationen som visas på din Ledger-enhet mot informationen nedan."
         },
         "verifyInternalLedgerTransaction": {
-            "title": "Verify internal transaction",
-            "info": "Please confirm the internal transaction on your ledger.",
-            "hint": "All assets will remain on your wallet when sending an internal transaction."
+            "title": "Verifiera intern transaktion",
+            "info": "Vänligen bekräfta den interna transaktionen på din Ledger.",
+            "hint": "Alla tillgångar kommer att finnas kvar på din plånbok när du skickar en intern transaktion."
         },
         "ledgerAddress": {
             "title": "Bekräfta mottagaradress",
@@ -902,7 +901,7 @@
         "timeframe1Month": "1 månad"
     },
     "actions": {
-        "apply": "Apply",
+        "apply": "Verkställ",
         "continue": "Fortsätt",
         "back": "Bakåt",
         "previous": "Föregående",
@@ -960,6 +959,8 @@
         "chooseFile": "Välj en fil",
         "dropHere": "Släpp din fil här",
         "syncAll": "Synkronisera alla",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Exportera",
         "exporting": "Exporterar",
         "exportNewStronghold": "Exportera en ny Stronghold",
@@ -1052,7 +1053,8 @@
         "test": "Test",
         "testDeepLink": "Testa hyperlänk",
         "initialize": "Initiera",
-        "initializing": "Initierar"
+        "initializing": "Initierar",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Mottagare",
@@ -1112,7 +1114,7 @@
         "darkTheme": "Mörkt",
         "systemTheme": "System",
         "balance": "Saldo",
-        "balanceWithValue": "Balance: {balance}",
+        "balanceWithValue": "Saldo: {balance}",
         "all": "Alla",
         "incoming": "Inkommande",
         "outgoing": "Utgående",
@@ -1147,7 +1149,9 @@
         "loadingAccounts": "Laddar, vänligen vänta...",
         "addProfile": "Lägg till profil",
         "noRecentHistory": "Ingen historik",
+        "noFilteredActivity": "No matching activities",
         "noAssets": "Inga tillgångar",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "Denna månad",
         "search": "Sök",
         "firstSync": "Synkroniserar historik, detta kan ta ett tag...",
@@ -1219,7 +1223,9 @@
         "claimedTime": "Gjorde anspråk vid",
         "copiedToClipboard": "Kopierad till urklipp",
         "total": "Totalt: {balance}",
-        "availableBalance": "Tillgängligt saldo: {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} taget i anspråk",
         "metadata": "Metadata",
         "tag": "Tagg",
@@ -1237,7 +1243,9 @@
         "developerTools": "Utvecklarverktyg",
         "testDeepLinkDescription": "Simulera en hyperlänkförfrågan skickad till Firefly",
         "url": "URL",
-        "hash": "Hash"
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
     },
     "filters": {
         "title": "Filter",
@@ -1254,9 +1262,9 @@
         "verificationStatus": {
             "label": "Verifieringsstatus",
             "new": "Ny",
-            "skipped": "Skipped verification",
-            "selfVerified": "Self-verified",
-            "official": "Official"
+            "skipped": "Skippad verifiering",
+            "selfVerified": "Självverifierad",
+            "official": "Officiell"
         },
         "asset": {
             "label": "Tillgångar"
@@ -1269,16 +1277,16 @@
             "less": "är mindre än"
         },
         "date": {
-            "label": "Date",
-            "equals": "is equal to",
-            "last": "in the last",
-            "range": "is between",
-            "after": "is after",
-            "afterOrEquals": "is on or after",
-            "before": "is before",
-            "Days": "days",
-            "Months": "months",
-            "Years": "years"
+            "label": "Datum",
+            "equals": "är lika med",
+            "last": "i det sista",
+            "range": "är mellan",
+            "after": "är efter",
+            "afterOrEquals": "är på eller efter",
+            "before": "är före",
+            "Days": "dagar",
+            "Months": "månader",
+            "Years": "år"
         },
         "status": {
             "label": "Status",
@@ -1334,7 +1342,7 @@
             "receivedWhileLoggedOut": "Vänligen logga in för att initiera hyperlänken",
             "notEnabled": "Hyperlänkar är inte aktiverat",
             "invalidFormat": "Hyperlänken du följde är ogiltig",
-            "invalidNumber": "Beloppet i hyperlänken är inte ett nummer {amount}",
+            "invalidAmount": "Beloppet i hyperlänken är inte ett nummer {amount}",
             "wallet": {
                 "send": {
                     "success": "Betalningsinformation tillagd från hyperlänk"
@@ -1433,16 +1441,16 @@
             "amountNoFloat": "Kan inte använda decimaltecken med den minsta enhet som valts",
             "amountInvalidFormat": "Beloppet verkar vara ett ogiltigt nummer.",
             "amountSmallerThanSubunit": "Beloppet måste vara större än den minsta subenheten.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "Taggen kan inte vara längre än 64 bytes.",
+            "metadataTooLong": "Metadatan kan inte vara längre än 8192 bytes.",
             "amountZero": "Beloppet måste vara större än 0.",
             "wrongAddressPrefix": "Adresser börjar med prefixet {prefix}.",
             "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
             "invalidAddress": "Adressen är inte giltig.",
-            "unknownAsset": "The asset is not known to this account.",
+            "unknownAsset": "Tillgången är inte känd för detta konto.",
             "insufficientFunds": "Denna plånbok har inte tillräckligt med tillgångar.",
             "insufficientFundsStorageDeposit": "Otillräcktligt med tillgångar för att täcka lagringsdepositionen",
-            "cannotClaimTwice": "Output has been already claimed",
+            "cannotClaimTwice": "Utdatan har redan blivit anspråkstagen",
             "noToAccount": "Du har inte valt en plånbok att skicka tillgångarna till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
             "leavingDust": "Du kan inte lämna mindre än 1 Mi på din adress.",
@@ -1488,7 +1496,9 @@
             "seedCharacters": "Din seed ska innehålla tecknen A-Z eller 9",
             "phraseWordCount": "Det ska finnas 24 ord i din återställningsfras, just nu är det {length, plural, one {är #} other {är #}}.",
             "phraseUnrecognizedWord": "Okänt ord \"{word}\" i din återställningsfras",
-            "phraseCaseWord": "Ordet \"{word}\" ska vara skrivet med små bokstäver"
+            "phraseCaseWord": "Ordet \"{word}\" ska vara skrivet med små bokstäver",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "Du måste öppna IOTA appen på din Ledger-enhet.",
@@ -1496,7 +1506,7 @@
             "legacyConnected": "Fel app är öppen på din Ledger-enhet.",
             "locked": "Lås upp din Ledger-enhet genom att ange PIN-koden.",
             "mnemonicMismatch": "Du har anslutit fel Ledger-enhet eller så har din mnemonik ändrats.",
-            "notConnected": "No Ledger device detected.",
+            "notConnected": "Ingen Ledger-enhet upptäckt.",
             "notFound": "Ledger-enheten hittades inte.",
             "otherConnected": "Fel app är öppen på din Ledger-enhet.",
             "generateAddress": "Det gick inte att generera en adress.",
@@ -1520,7 +1530,16 @@
             "invalidStakingEventId": "Ogiltigt staking-event ID."
         },
         "invalidDate": "INVALID DATUM",
-        "invalidTime": "INVALID TID"
+        "invalidTime": "INVALID TID",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
@@ -1558,6 +1577,25 @@
             "bodyWillNotReachMin": "Du kommer inte att nå den lägsta belöningsnivån under den återstående stakingperioden om du inte lägger till mer IOTA.",
             "bodyDidNotReachMin": "Du stakade inte tillräckligt med IOTA för att nå den lägsta belöningen för {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Denna plånbok har inte tillräckligt med IOTA tokens för att nå den lägsta belöningsnivån för {airdrop}."
+        },
+        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
+                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            },
+            "outgoing": {
+                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
+                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
+                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
+                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
+                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+            }
         }
     },
     "exports": {
