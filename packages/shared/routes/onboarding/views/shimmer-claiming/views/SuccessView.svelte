@@ -27,8 +27,8 @@
                 {localize('views.onboarding.shimmerClaiming.success.body')}
             </Text>
             <div class="flex flex-col justify-center items-center">
-                <Text type="h3">{formatTokenAmountBestMatch(totalRewards, BASE_TOKEN[NetworkProtocol.Shimmer])}</Text>
                 <Text type="p" highlighted>{localize('views.onboarding.shimmerClaiming.success.totalRewards')}</Text>
+                <Text type="h3">{formatTokenAmountBestMatch(totalRewards, BASE_TOKEN[NetworkProtocol.Shimmer])}</Text>
             </div>
         </div>
     </div>
