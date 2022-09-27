@@ -62,8 +62,11 @@ export function initialiseGapLimitConfiguration(): void {
 // consider making parameters into an object
 
 export async function findShimmerRewards(): Promise<void> {
+    const t1 = performance.now()
     await recoverAccountsInSeries()
     updateRewardsFinderParameters()
+    const t2 = performance.now()
+    console.log(`Search took: ${t2 - t1} ms`)
 }
 
 async function recoverAccountsInSeries(): Promise<void> {
