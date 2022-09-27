@@ -34,7 +34,7 @@ let breadthSearchAddressGapLimit: number
 let totalUnclaimedShimmerRewards: number
 let currentSearchRound: number
 
-export function initialiseRecoverAccountsConfiguration(): void {
+export function initialiseAccountRecoveryConfigurationForShimmerClaiming(): void {
     const profileType = get(onboardingProfile)?.type
     if (!profileType) {
         throw new UnableToFindProfileTypeError()

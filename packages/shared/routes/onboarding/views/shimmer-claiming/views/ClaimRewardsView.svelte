@@ -24,7 +24,7 @@
         ShimmerClaimingAccountState,
         shimmerClaimingProfileManager,
         subscribeToWalletApiEventsForShimmerClaiming,
-        initialiseRecoverAccountsConfiguration,
+        initialiseAccountRecoveryConfigurationForShimmerClaiming,
     } from '@contexts/onboarding'
     import { closePopup } from '@lib/popup'
 
@@ -150,7 +150,7 @@
     }
 
     onMount(() => {
-        initialiseRecoverAccountsConfiguration()
+        initialiseAccountRecoveryConfigurationForShimmerClaiming()
         void onMountHelper()
     })
 
