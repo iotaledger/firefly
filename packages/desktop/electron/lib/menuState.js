@@ -1,6 +1,6 @@
 export const menuState = {
     enabled: true,
-    isInLogin: false,
+    canCreateNewProfile: false,
     strings: {
         about: 'About Firefly',
         checkForUpdates: 'Check for Updates',

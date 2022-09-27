@@ -9,6 +9,8 @@
         dashboardRouter,
         initialiseOnboardingRouters,
         initialiseRouters,
+        OnboardingRoute,
+        onboardingRoute,
         openSettings,
     } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
@@ -57,7 +59,15 @@
             Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
         }
     }
-    $: Electron.updateMenu('isInLogin', $appRoute === AppRoute.Login)
+
+    $: Electron.updateMenu(
+        'canCreateNewProfile',
+        $appRoute === AppRoute.Login ||
+            ($appRoute === AppRoute.Onboarding &&
+                $onboardingRoute !== OnboardingRoute.AppSetup &&
+                $onboardingRoute !== OnboardingRoute.ShimmerClaiming &&
+                $onboardingRoute !== OnboardingRoute.Congratulations)
+    )
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
