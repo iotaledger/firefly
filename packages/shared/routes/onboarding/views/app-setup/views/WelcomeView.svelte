@@ -24,17 +24,8 @@
                             ? formatProtocolName(NetworkProtocol.IOTA)
                             : formatProtocolName(NetworkProtocol.Shimmer),
                     },
-                })}</Text
-            >
-            <Text type="p" secondary
-                >{localize('views.onboarding.appSetup.welcome.body', {
-                    values: {
-                        protocol: features?.onboarding?.iota?.enabled
-                            ? formatProtocolName(NetworkProtocol.IOTA)
-                            : formatProtocolName(NetworkProtocol.Shimmer),
-                    },
-                })}</Text
-            >
+                })}
+            </Text>
         </div>
     </div>
     <div slot="leftpane__action">
