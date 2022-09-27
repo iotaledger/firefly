@@ -20,9 +20,10 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { initialiseOnboardingProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -100,13 +101,14 @@
         })
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
+            initialiseOnboardingProfile(true, NetworkProtocol.Shimmer)
             get(appRouter).next({ shouldAddProfile: true })
-            initialiseOnboardingProfile(true)
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
+            initialiseOnboardingProfile(false, NetworkProtocol.Shimmer)
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
             get(appRouter).next({ shouldAddProfile: true })
-            initialiseOnboardingProfile(false)
         })
         Electron.hookErrorLogger((err) => {
             addError(err)

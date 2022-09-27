@@ -9,7 +9,9 @@
         initialiseOnboardingProfile,
         onboardingProfile,
         shouldBeDeveloperProfile,
+        updateOnboardingProfile,
     } from '../../../../../lib/contexts/onboarding'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     /**
      * NOTE: It is necessary to use locale directly rather than the
@@ -52,7 +54,13 @@
 
     onMount(() => {
         _clonedVariable = appTheme
-        initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
+        initialiseOnboardingProfile(
+            $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
+            NetworkProtocol.Shimmer
+        )
+        if (!shouldBeDeveloperProfile()) {
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+        }
     })
 </script>
 
