@@ -1,7 +1,7 @@
 import { ProfileType } from '../enums'
 import { AccountRecoveryConfiguration } from '../types'
 
-export const INITIAL_RECOVER_ACCOUNTS_CONFIGURATION: AccountRecoveryConfiguration = {
+export const DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION: AccountRecoveryConfiguration = {
     [ProfileType.Ledger]: {
         initialAccountRange: 3,
         accountGapLimit: 1,

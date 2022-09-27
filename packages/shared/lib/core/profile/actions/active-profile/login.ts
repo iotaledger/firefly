@@ -13,7 +13,7 @@ import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
 import { get } from 'svelte/store'
-import { INITIAL_RECOVER_ACCOUNTS_CONFIGURATION, STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../../constants'
+import { DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION, STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../../constants'
 import {
     activeAccounts,
     activeProfile,
@@ -54,7 +54,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             let accounts
             if (loginOptions?.isFromOnboardingFlow && loginOptions?.shouldRecoverAccounts) {
-                const { initialAccountRange, addressGapLimit } = INITIAL_RECOVER_ACCOUNTS_CONFIGURATION[type]
+                const { initialAccountRange, addressGapLimit } = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type]
                 accounts = await recoverAccounts(0, initialAccountRange, addressGapLimit, {
                     syncIncomingTransactions: true,
                 })

@@ -11,7 +11,7 @@
     import {
         activeAccounts,
         activeProfile,
-        INITIAL_RECOVER_ACCOUNTS_CONFIGURATION,
+        DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION,
         isActiveLedgerProfile,
         isSoftwareProfile,
         loadAccounts,
@@ -28,8 +28,8 @@
 
     const { isStrongholdLocked, type } = $activeProfile
 
-    const initialAccountRange = INITIAL_RECOVER_ACCOUNTS_CONFIGURATION[type].initialAccountRange
-    const addressGapLimitIncrement = INITIAL_RECOVER_ACCOUNTS_CONFIGURATION[type].addressGapLimit
+    const initialAccountRange = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type].initialAccountRange
+    const addressGapLimitIncrement = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type].addressGapLimit
     let previousAccountGapLimit = 0
     let previousAddressGapLimit = 0
     let currentAccountGapLimit = initialAccountRange
