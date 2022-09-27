@@ -1342,7 +1342,7 @@
             "receivedWhileLoggedOut": "Inicie sesión para iniciar el enlace profundo",
             "notEnabled": "Los enlaces profundos no están habilitados",
             "invalidFormat": "El enlace profundo que has seguido no es válido",
-            "invalidNumber": "La cantidad en enlace profundo no es un número {amount}",
+            "invalidAmount": "La cantidad en enlace profundo no es un número {amount}",
             "wallet": {
                 "send": {
                     "success": "Detalles de pago agregados desde un enlace profundo"

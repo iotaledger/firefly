@@ -1342,7 +1342,7 @@
             "receivedWhileLoggedOut": "請登入以發起深度連結",
             "notEnabled": "深度連結未啟用",
             "invalidFormat": "您所追蹤的 深度連結 無效",
-            "invalidNumber": "深度連結中的填寫的數量不是一個數字: {amount}",
+            "invalidAmount": "深度連結中的填寫的數量不是一個數字: {amount}",
             "wallet": {
                 "send": {
                     "success": "已加入從深度連結所取得的支付細節"

@@ -1342,7 +1342,7 @@
             "receivedWhileLoggedOut": "Potrebno se prijaviti za pokretanje deep linka",
             "notEnabled": "Deep linkovi nisu omogućeni",
             "invalidFormat": "Deep link koji ste slijedili nije važeći",
-            "invalidNumber": "Iznos u deep linku nije broj {amount}",
+            "invalidAmount": "Iznos u deep linku nije broj {amount}",
             "wallet": {
                 "send": {
                     "success": "Podaci o plaćanju dodani s deep linka"
