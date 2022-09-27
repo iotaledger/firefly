@@ -210,6 +210,7 @@
                         <Button
                             onClick={handleRejectClick}
                             disabled={data.isClaiming || data.isRejected}
+                            inlineStyle="min-width: 4rem;"
                             size={ButtonSize.Small}
                             outline
                         >
@@ -219,6 +220,7 @@
                             onClick={handleClaimClick}
                             disabled={data.isClaiming}
                             isBusy={data.isClaiming}
+                            inlineStyle="min-width: 4rem;"
                             size={ButtonSize.Small}
                         >
                             {localize('actions.claim')}
