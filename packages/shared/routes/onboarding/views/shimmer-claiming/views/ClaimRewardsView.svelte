@@ -24,7 +24,7 @@
         ShimmerClaimingAccountState,
         shimmerClaimingProfileManager,
         subscribeToWalletApiEventsForShimmerClaiming,
-        initialiseGapLimitConfiguration,
+        initialiseRecoverAccountsConfiguration,
     } from '@contexts/onboarding'
     import { closePopup } from '@lib/popup'
 
@@ -87,6 +87,7 @@
             if ($isOnboardingLedgerProfile) {
                 stopPollingLedgerNanoStatus()
             }
+            await $shimmerClaimingProfileManager.startBackgroundSync({ syncOnlyMostBasicOutputs: true })
             await claimShimmerRewards()
         } catch (err) {
             if ($isOnboardingLedgerProfile) {
@@ -117,7 +118,6 @@
 
     async function onMountHelper(): Promise<void> {
         subscribeToWalletApiEventsForShimmerClaiming()
-        await $shimmerClaimingProfileManager.startBackgroundSync({ syncOnlyMostBasicOutputs: true })
 
         /**
          * NOTE: If the user only has one Shimmer claiming account,
@@ -150,7 +150,7 @@
     }
 
     onMount(() => {
-        initialiseGapLimitConfiguration()
+        initialiseRecoverAccountsConfiguration()
         void onMountHelper()
     })
 

@@ -1,27 +1,26 @@
-import { get } from 'svelte/store'
-
 import { IAccount } from '@core/account'
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-import { GapLimitProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
+import { RecoverAccountsProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
-
-import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION } from '../constants'
+import { get } from 'svelte/store'
+import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_RECOVER_ACCOUNTS_CONFIGURATION } from '../constants'
 import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
 
-const NUM_SEARCH_ROUNDS_BEFORE_ACCOUNT_INCREMENT = 2
-
 const DEPTH_SEARCH_ACCOUNT_START_INDEX = 0
-const BREADTH_SEARCH_ACCOUNT_GAP_LIMIT = 1
+const INITIAL_SEARCH_ADDRESS_START_INDEX = 0
+const INITIAL_SEARCH_ROUND = 1
+const INITIAL_TOTAL_UNCLAIMED_REWARDS = 0
+
 /**
  * NOTE: This variable is uninitialized because we
  * must know the profile type to be able to determine
  * gap limits that are sensible in terms of UX.
  */
-let gapLimitProfileConfiguration: GapLimitProfileConfiguration
+let recoverAccountsProfileConfiguration: RecoverAccountsProfileConfiguration
 
 let depthSearchAccountGapLimit: number
 let depthSearchAddressStartIndex: number
@@ -33,62 +32,38 @@ let breadthSearchAddressGapLimit: number
 let totalUnclaimedShimmerRewards: number
 let currentSearchRound: number
 
-export function initialiseGapLimitConfiguration(): void {
+export function initialiseRecoverAccountsConfiguration(): void {
     const profileType = get(onboardingProfile)?.type
     if (!profileType) {
         throw new UnableToFindProfileTypeError()
     }
 
-    gapLimitProfileConfiguration = SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType]
+    recoverAccountsProfileConfiguration = SHIMMER_CLAIMING_RECOVER_ACCOUNTS_CONFIGURATION[profileType]
 
-    depthSearchAccountGapLimit = gapLimitProfileConfiguration.accountGapLimit
-    depthSearchAddressStartIndex = 0
-    depthSearchAddressGapLimit = gapLimitProfileConfiguration.addressGapLimit
+    depthSearchAccountGapLimit = recoverAccountsProfileConfiguration.initialAccountRange
+    depthSearchAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX
+    depthSearchAddressGapLimit = recoverAccountsProfileConfiguration.addressGapLimit
 
-    breadthSearchAccountStartIndex = gapLimitProfileConfiguration.accountGapLimit
-    breadthSearchAddressGapLimit = gapLimitProfileConfiguration.addressGapLimit
+    breadthSearchAccountStartIndex = recoverAccountsProfileConfiguration.initialAccountRange
+    breadthSearchAddressGapLimit = recoverAccountsProfileConfiguration.addressGapLimit
 
-    currentSearchRound = 1
-    totalUnclaimedShimmerRewards = 0
+    currentSearchRound = INITIAL_SEARCH_ROUND
+    totalUnclaimedShimmerRewards = INITIAL_TOTAL_UNCLAIMED_REWARDS
 }
-
-// handle errors from await functions, where and how to handle
-// consider making parameters into an object
 
 export async function findShimmerRewards(): Promise<void> {
     await depthSearchAndRecoverAccounts()
 
-    if (hasOnlySearchedDepthWindow()) {
+    if (hasOnlyDoneDepthSearch()) {
         await breadthSearchAndRecoverAccounts()
     }
 
     updateRewardsFinderParameters()
 }
 
-async function breadthSearchAndRecoverAccounts(): Promise<void> {
-    const profileManager = get(shimmerClaimingProfileManager)
-    for (
-        let temporaryAddressStartIndex = 0;
-        temporaryAddressStartIndex < breadthSearchAddressGapLimit;
-        temporaryAddressStartIndex += gapLimitProfileConfiguration.addressGapLimit
-    ) {
-        const breadthWindowAccounts = await profileManager?.recoverAccounts(
-            breadthSearchAccountStartIndex,
-            BREADTH_SEARCH_ACCOUNT_GAP_LIMIT,
-            gapLimitProfileConfiguration.addressGapLimit,
-            {
-                ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
-                addressStartIndex: temporaryAddressStartIndex,
-                addressStartIndexInternal: temporaryAddressStartIndex,
-            }
-        )
-        await updateRecoveredAccounts(breadthWindowAccounts)
-    }
-}
-
 async function depthSearchAndRecoverAccounts(): Promise<void> {
     const profileManager = get(shimmerClaimingProfileManager)
-    const depthWindowAccounts = await profileManager?.recoverAccounts(
+    const depthSearchAccounts = await profileManager?.recoverAccounts(
         DEPTH_SEARCH_ACCOUNT_START_INDEX,
         depthSearchAccountGapLimit,
         depthSearchAddressGapLimit,
@@ -99,25 +74,46 @@ async function depthSearchAndRecoverAccounts(): Promise<void> {
         }
     )
 
-    await updateRecoveredAccounts(depthWindowAccounts)
+    await updateRecoveredAccounts(depthSearchAccounts)
 }
 
-function hasOnlySearchedDepthWindow(): boolean {
-    return currentSearchRound % NUM_SEARCH_ROUNDS_BEFORE_ACCOUNT_INCREMENT === 0
+async function breadthSearchAndRecoverAccounts(): Promise<void> {
+    const profileManager = get(shimmerClaimingProfileManager)
+    const { accountGapLimit, addressGapLimit } = recoverAccountsProfileConfiguration
+    for (
+        let chunkAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX;
+        chunkAddressStartIndex < breadthSearchAddressGapLimit;
+        chunkAddressStartIndex += addressGapLimit
+    ) {
+        const breadthSearchAccounts = await profileManager?.recoverAccounts(
+            breadthSearchAccountStartIndex,
+            accountGapLimit,
+            addressGapLimit,
+            {
+                ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
+                addressStartIndex: chunkAddressStartIndex,
+                addressStartIndexInternal: chunkAddressStartIndex,
+            }
+        )
+        await updateRecoveredAccounts(breadthSearchAccounts)
+    }
+}
+
+function hasOnlyDoneDepthSearch(): boolean {
+    const { numberOfRoundsBetweenBreadthSearch } = recoverAccountsProfileConfiguration
+    return currentSearchRound % numberOfRoundsBetweenBreadthSearch === 0
 }
 
 function updateRewardsFinderParameters(): void {
-    const hasSearchedOnlyDepth = hasOnlySearchedDepthWindow()
+    const hasSearchedOnlyDepth = hasOnlyDoneDepthSearch()
 
-    depthSearchAccountGapLimit += hasSearchedOnlyDepth ? 1 : 0
-    depthSearchAddressStartIndex += gapLimitProfileConfiguration.addressGapLimit
-    /**
-     * NOTE: The address gap limit stays the same for the depth window,
-     * so there is new assignment statement for its variable.
-     */
+    const { accountGapLimit, addressGapLimit } = recoverAccountsProfileConfiguration
 
-    breadthSearchAccountStartIndex += hasSearchedOnlyDepth ? 1 : 0
-    breadthSearchAddressGapLimit += gapLimitProfileConfiguration.addressGapLimit
+    depthSearchAccountGapLimit += hasSearchedOnlyDepth ? accountGapLimit : 0
+    depthSearchAddressStartIndex += addressGapLimit
+
+    breadthSearchAccountStartIndex += hasSearchedOnlyDepth ? accountGapLimit : 0
+    breadthSearchAddressGapLimit += addressGapLimit
 
     currentSearchRound++
 }

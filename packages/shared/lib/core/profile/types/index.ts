@@ -1,1 +1,1 @@
-export * from './gap-limit-configuration.type'
+export * from './recover-accounts-configuration.type'
