@@ -9,6 +9,7 @@
     import { networkSetupRouter } from '@core/router'
 
     const networkProtocol = $onboardingProfile.networkProtocol
+    const title = localize('views.onboarding.networkSetup.chooseNetwork.title')
 
     const networkIcon: Readonly<{ [key in NetworkType]: string }> = {
         [NetworkType.Mainnet]: networkProtocol,
@@ -34,11 +35,7 @@
     })
 </script>
 
-<OnboardingLayout
-    {onBackClick}
-    title={localize('views.onboarding.networkSetup.chooseNetwork.title')}
-    animation="onboarding-network-desktop"
->
+<OnboardingLayout {onBackClick} {title} animation="onboarding-network-desktop">
     <div slot="footer" class="flex flex-col space-y-4">
         {#each Object.values(NetworkType) as networkType}
             <OnboardingButton

@@ -9,6 +9,8 @@
     import { networkSetupRouter } from '@core/router'
     import { resetActiveProfile } from '@core/profile'
 
+    const title = localize('views.onboarding.networkSetup.chooseProtocol.title')
+
     function onProtocolSelectionClick(networkProtocol: NetworkProtocol): void {
         if ($onboardingProfile?.isDeveloperProfile) {
             updateOnboardingProfile({ networkProtocol })
@@ -29,11 +31,7 @@
     })
 </script>
 
-<OnboardingLayout
-    {onBackClick}
-    title={localize('views.onboarding.networkSetup.chooseProtocol.title')}
-    animation="onboarding-protocol-desktop"
->
+<OnboardingLayout {onBackClick} {title} animation="onboarding-protocol-desktop">
     <div slot="footer" class="flex flex-col space-y-4">
         {#each Object.keys(NetworkProtocol) as protocol}
             <OnboardingButton
