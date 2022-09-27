@@ -19,7 +19,7 @@
     }
 </script>
 
-<tooltip-icon>
+<tooltip-icon class="flex items-center">
     <icon-container
         on:mouseenter={() => showTooltip(true)}
         on:mouseleave={() => showTooltip(false)}
