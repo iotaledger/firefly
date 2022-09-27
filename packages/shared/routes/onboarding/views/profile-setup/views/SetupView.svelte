@@ -46,7 +46,7 @@
     })
 </script>
 
-<OnboardingLayout allowBack={$profiles.length > 0 || $onboardingProfile.isDeveloperProfile} {onBackClick}>
+<OnboardingLayout allowBack={$profiles.length > 0 || $onboardingProfile?.isDeveloperProfile} {onBackClick}>
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.setup.title', {
