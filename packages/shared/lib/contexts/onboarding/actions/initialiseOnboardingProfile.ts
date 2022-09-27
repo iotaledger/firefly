@@ -1,11 +1,9 @@
-import { get } from 'svelte/store'
-
+import { NetworkProtocol } from '@core/network'
 import { profileManager } from '@core/profile-manager'
-
+import { get } from 'svelte/store'
 import { OnboardingProfileManagerAlreadyInitializedError } from '../errors'
 import { buildOnboardingProfile } from '../helpers'
 import { onboardingProfile } from '../stores'
-import { NetworkProtocol } from '@core/network'
 
 /**
  * Builds a new onboarding profile and sets the Svelte store accordingly.

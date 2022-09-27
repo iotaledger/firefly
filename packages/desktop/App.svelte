@@ -1,7 +1,15 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
-    import { AppRoute, appRouter, DashboardRoute, dashboardRouter, initialiseRouters, openSettings } from '@core/router'
+    import {
+        AppRoute,
+        appRouter,
+        DashboardRoute,
+        dashboardRouter,
+        initialiseOnboardingRouters,
+        initialiseRouters,
+        openSettings,
+    } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import {
         appSettings,
@@ -102,12 +110,14 @@
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
             initialiseOnboardingProfile(true, NetworkProtocol.Shimmer)
+            initialiseOnboardingRouters()
             get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
             initialiseOnboardingProfile(false, NetworkProtocol.Shimmer)
             updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+            initialiseOnboardingRouters()
             get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.hookErrorLogger((err) => {
