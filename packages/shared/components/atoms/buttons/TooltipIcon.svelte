@@ -19,17 +19,19 @@
     }
 </script>
 
-<div
-    on:mouseenter={() => showTooltip(true)}
-    on:mouseleave={() => showTooltip(false)}
-    bind:this={tooltipAnchor}
-    class="text-gray-600 {classes}"
->
-    <Icon {width} {height} {icon} />
-</div>
-{#if isTooltipVisible}
-    <Tooltip anchor={tooltipAnchor} {position}>
-        <Text type="h5" classes="text-left mb-2">{title}</Text>
-        <Text classes="text-left">{text}</Text>
-    </Tooltip>
-{/if}
+<tooltip-icon>
+    <icon-container
+        on:mouseenter={() => showTooltip(true)}
+        on:mouseleave={() => showTooltip(false)}
+        bind:this={tooltipAnchor}
+        class="text-gray-600 {classes}"
+    >
+        <Icon {width} {height} {icon} />
+    </icon-container>
+    {#if isTooltipVisible}
+        <Tooltip anchor={tooltipAnchor} {position}>
+            <Text type="h5" classes="text-left mb-2">{title}</Text>
+            <Text classes="text-left">{text}</Text>
+        </Tooltip>
+    {/if}
+</tooltip-icon>
