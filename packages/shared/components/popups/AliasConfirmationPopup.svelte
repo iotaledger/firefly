@@ -20,14 +20,14 @@
               aliasId: '0x0000000000000000000000000000000000000000000000000000000000000000',
               unlockConditions: [
                   {
-                      type: 4,
+                      type: 4, // Governor
                       address: {
                           type: 0,
                           pubKeyHash: `0x${convertBech32ToEd25519(address)}`,
                       },
                   },
                   {
-                      type: 5,
+                      type: 5, // State controller
                       address: {
                           type: 0,
                           pubKeyHash: `0x${convertBech32ToEd25519(address)}`,

@@ -6,6 +6,7 @@
     "dependencies": {
         "@iota/bundle": "^1.0.0-beta.30",
         "@iota/converter": "^1.0.0-beta.30",
+        "@iota/crypto.js": "^1.8.6",
         "@iota/transaction": "^1.0.0-beta.30",
         "@iota/transaction-converter": "^1.0.0-beta.30",
         "@iota/unit-converter": "^1.0.0-beta.30",
