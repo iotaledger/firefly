@@ -63,7 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Создайте {protocol, select, IOTA {an} Shimmer {a}} {protocol} профиль",
-                    "body": "Select the method you will use to set up your {protocol} profile."
+                    "body": "Select the appropriate method to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Создать профиль",
@@ -150,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "Enter your recovery phrase",
-                    "body": "A recovery phrase is 24 words long, all lower case, with sapces between. This is used to recover existing Firefly profiles.",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
                     "enter": "Enter your secret recovery phrase",
                     "phraseDetected": "24 word recovery phrase detected"
                 },
@@ -170,21 +170,21 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "Your Shimmer staking rewards",
-                    "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
                 },
                 "success": {
-                    "title": "Rewards claimed",
-                    "body": "You have successfully claimed Shimmer tokens for your new profile.",
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
                     "totalRewards": "Total rewards"
                 }
             },
             "congratulations": {
-                "title": "Profile setup is almost complete",
+                "title": "Profile setup almost complete...",
                 "fundsMigrated": "Funds migrated",
-                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
-                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
                 "softwareMigratedBody": "Вы успешно мигрировали свои средства в новую сеть",
-                "fireflyLedgerBody": "Ваш Ledger аккаунт успешно восстановлен, и вы можете продолжить.",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
                 "trinityLedgerBody": "Вы успешно перевели свой Ledger в новую сеть.",
                 "exportMigration": "Экспортировать журнал миграции и завершить установку"
             }
@@ -709,6 +709,7 @@
         "transaction": {
             "title": "Подтвердить транзакцию",
             "body": "Вы собираетесь отправить {amount}",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "Вы отправляете перевод с кошелька, который в настоящее время задействован в ставке. Это может привести к тому, что ваши токены не будут зачислены. Не стесняйтесь отправлять перевод, но вам может потребоваться повторный залог оставшихся токенов.",
             "sendingFromStakedAccountBelowMinReward": "Вы отправляете перевод с кошелька, который еще не достиг минимального вознаграждения за ставку. Это может разблокировать ваши токены, и вы можете потерять вознаграждение за ставку на этом кошельке."
         },
@@ -932,7 +933,7 @@
         "createWallet": "Создать новый профиль {protocol}",
         "createWalletDescription": "Создайте новый профиль, запускающийся в {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Запросить вознаграждение за ставки в Shimmer",
-        "claimShimmerDescription": "Перенести профиль IOTA и запросить вознаграждение по ставке",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "savePassword": "Сохранить пароль",
         "useBiometric": "Использовать биометрическую защиту",
         "setupPinCode": "Установить PIN-код",
@@ -1216,6 +1217,7 @@
         "unstakedFunds": "Выведеноные средства",
         "accountColor": "Цвет кошелька",
         "transactionTime": "Время транзакции",
+        "surplus": "Surplus",
         "storageDeposit": "Депозит для хранения",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Окончание срока действия",
@@ -1293,7 +1295,7 @@
             "confirmed": "confirmed",
             "pending": "pending",
             "claimed": "claimed",
-            "unclaimed": "non-claimed"
+            "unclaimed": "unclaimed"
         },
         "type": {
             "label": "Type",
@@ -1343,6 +1345,7 @@
             "notEnabled": "Глубокие ссылки не включены",
             "invalidFormat": "Глубокая ссылка, по которой вы перешли, недействительна",
             "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "Платежные реквизиты добавлены из глубокой ссылки"
@@ -1358,7 +1361,7 @@
             "error": "Востребование трансакции не удалось"
         },
         "hideActivity": {
-            "success": "Успешно скрытая деятельность",
+            "success": "Activity was hidden",
             "error": "Не удалось скрыть деятельность"
         },
         "faucetRequest": {
@@ -1379,8 +1382,8 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
-            "error": "An error occurred while claiming rewards"
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         }
     },
     "error": {
@@ -1438,11 +1441,11 @@
         "send": {
             "addressLength": "Длина адресов должна быть {length, plural, one {# символ} other {# символов}}.",
             "amountTooHigh": "Это больше, чем твой баланс.",
-            "amountNoFloat": "Невозможно использовать десятичные знаки при выбранной наименьшей единице измерения",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Сумма является недопустимым числом.",
             "amountSmallerThanSubunit": "Сумма должна быть больше, чем наименьшая субъединица.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "The tag cannot be longer than 64 characters.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
             "amountZero": "Сумма должна быть больше 0.",
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
@@ -1543,7 +1546,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "Выбранная дата/время истечения срока действия недопустима."
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "Использование узлов через HTTP оставляет трафик незашифрованным и может представлять угрозу безопасности."
@@ -1578,24 +1581,30 @@
             "bodyDidNotReachMin": "Вы сделали недостаточно ставок IOTA, чтобы достичь минимального значения вознаграждения за {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "В этом кошельке недостаточно токенов IOTA для достижения минимального вознаграждения за {airdrop}."
         },
-        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
             "incoming": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
-                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             },
             "outgoing": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             }
+        },
+        "mintNativeTokenForm": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {

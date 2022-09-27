@@ -63,7 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Postavi {protocol, select, IOTA {} Shimmer {}} {protocol} profil",
-                    "body": "Select the method you will use to set up your {protocol} profile."
+                    "body": "Select the appropriate method to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Stvori novi profil",
@@ -150,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "Unesi frazu za oporavak",
-                    "body": "Fraza za oporavak sastoji se od 24 riječi, pisanih malim slovima, s razmacima između svake. Služi za oporavak postojećih Firefly profila.",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
                     "enter": "Unesi tajnu frazu za oporavak",
                     "phraseDetected": "Fraza od 24 riječi prepoznata"
                 },
@@ -170,21 +170,21 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "Vaše Shimmer staking nagrade",
-                    "body": "Molimo provjerite da li su vaše Shimmer staking nagrade točne. Ukoliko ne, upotrijebite \"Pronalazak sredstava\"."
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
                 },
                 "success": {
-                    "title": "Nagrade preuzete",
-                    "body": "Uspješno ste preuzeli Shimmer tokene za vaš novi profil.",
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
                     "totalRewards": "Ukupne nagrade"
                 }
             },
             "congratulations": {
-                "title": "Profile setup is almost complete",
+                "title": "Profile setup almost complete...",
                 "fundsMigrated": "Sredstva su migrirana",
-                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
-                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
                 "softwareMigratedBody": "Uspješno ste migrirali svoja sredstva na novu mrežu",
-                "fireflyLedgerBody": "Tvoj Ledger račun uspješno je oporavljen. Slobodno možeš nastaviti.",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
                 "trinityLedgerBody": "Uspješno ste migrirali svoj Ledger na novu mrežu.",
                 "exportMigration": "Izvezite detalje o migraciji i dovršite postupak"
             }
@@ -709,6 +709,7 @@
         "transaction": {
             "title": "Potvrdi transakciju",
             "body": "Ovim ćete poslati {amount} na račun",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "Šaljete transfer s novčanika koji trenutno stakea. Ovo može prekinuti staking vaših tokena. Možete slobodno poslati transfer, no možda ćete nakon toga morati ponovno pokrenuti staking vaših preostalih tokena.",
             "sendingFromStakedAccountBelowMinReward": "Šaljete transfer s novčanika koji još nije dostigao minimalnu staking nagradu. Ovo može prekinuti staking vaših tokena, te možete izgubiti staking nagrade na ovom novčaniku."
         },
@@ -932,7 +933,7 @@
         "createWallet": "Stvori novi {protocol} profil",
         "createWalletDescription": "Stvori novi profil za {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Preuzmi Shimmer staking nagrade",
-        "claimShimmerDescription": "Migriraj IOTA profil i preuzmi staking nagrade",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "savePassword": "Spremi lozinku",
         "useBiometric": "Koristi biometričku zaštitu",
         "setupPinCode": "Postavite PIN kȏd",
@@ -959,8 +960,8 @@
         "chooseFile": "Izaberite datoteku",
         "dropHere": "Ispustite datoteku ovdje",
         "syncAll": "Sinkroniziraj sve",
-        "import": "Import",
-        "importing": "Importing",
+        "import": "Uvezi",
+        "importing": "Uvoz u tijeku",
         "export": "Izvezi",
         "exporting": "Izvoz u tijeku",
         "exportNewStronghold": "Izvezi novi Stronghold",
@@ -1054,7 +1055,7 @@
         "testDeepLink": "Testiraj deep link",
         "initialize": "Inicijaliziraj",
         "initializing": "Inicijalizacija u tijeku",
-        "delete": "Delete"
+        "delete": "Obriši"
     },
     "general": {
         "recipient": "Primatelj",
@@ -1149,9 +1150,9 @@
         "loadingAccounts": "Učitavanje. Molimo pričekajte...",
         "addProfile": "Dodaj profil",
         "noRecentHistory": "Nema nedavnih povijesnih podataka",
-        "noFilteredActivity": "No matching activities",
+        "noFilteredActivity": "Nema podudarnih aktivnosti",
         "noAssets": "Nema sredstava",
-        "noFilteredAsset": "No matching assets",
+        "noFilteredAsset": "Nema podudarnih sredstava",
         "thisMonth": "Ovaj mjesec",
         "search": "Traži",
         "firstSync": "Sinkronizirano povijest aktivnosti, ovo bi moglo potrajati...",
@@ -1216,16 +1217,17 @@
         "unstakedFunds": "Sredstva koja nisu na stakeu",
         "accountColor": "Boja novčanika",
         "transactionTime": "Vrijeme transakcije",
+        "surplus": "Surplus",
         "storageDeposit": "Depozit za pohranu",
         "giftedStorageDeposit": "Poklonjeni depozit za pohranu",
         "expirationTime": "Vrijeme isteka",
-        "timelockDate": "Timelock",
+        "timelockDate": "Vremensko zaključavanje",
         "claimedTime": "Preuzeto u",
         "copiedToClipboard": "Kopirano u međuspremnik",
         "total": "Ukupno: {balance}",
-        "availableBalanceWithValue": "Available balance: {balance}",
-        "availableBalance": "Available balance",
-        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
+        "availableBalanceWithValue": "Raspoloživo stanje: {balance}",
+        "availableBalance": "Raspoloživo stanje",
+        "availableBalanceTooltip": "Ukupni saldo sredstava minus sva sredstva koja su potrebna za pokrivanje depozita za pohranu (tj. sredstva koja su zaključana u transakcijama u tijeku, rezervirana za nativne tokene ili rezervirana za NFT-ove).",
         "amountClaimed": "{amount} preuzeto",
         "metadata": "Metapodaci",
         "tag": "Tag",
@@ -1244,8 +1246,8 @@
         "testDeepLinkDescription": "Simuliraj deep link zahtjev poslan Fireflyu",
         "url": "URL",
         "hash": "Hash",
-        "creating": "Creating",
-        "updating": "Updating"
+        "creating": "Stvaranje",
+        "updating": "Ažuriranje"
     },
     "filters": {
         "title": "Filteri",
@@ -1293,7 +1295,7 @@
             "confirmed": "potvrđeno",
             "pending": "u tijeku",
             "claimed": "preuzeto",
-            "unclaimed": "nije preuzeto"
+            "unclaimed": "unclaimed"
         },
         "type": {
             "label": "Tip",
@@ -1342,7 +1344,8 @@
             "receivedWhileLoggedOut": "Potrebno se prijaviti za pokretanje deep linka",
             "notEnabled": "Deep linkovi nisu omogućeni",
             "invalidFormat": "Deep link koji ste slijedili nije važeći",
-            "invalidAmount": "Iznos u deep linku nije broj {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "Podaci o plaćanju dodani s deep linka"
@@ -1358,7 +1361,7 @@
             "error": "Preuzimanje transakcije nije uspjelo"
         },
         "hideActivity": {
-            "success": "Uspješno sakrivena aktivnost",
+            "success": "Activity was hidden",
             "error": "Nije bilo moguće sakriti aktivnost"
         },
         "faucetRequest": {
@@ -1379,8 +1382,8 @@
             "error": "Došlo je do greške prilikom potrage za nagradama"
         },
         "claimShimmerRewards": {
-            "success": "Shimmer nagrade uspješno preuzete za {accountAlias}",
-            "error": "Došlo je do greške prilikom preuzimanja nagrada"
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         }
     },
     "error": {
@@ -1438,11 +1441,11 @@
         "send": {
             "addressLength": "Adrese moraju sadržavati {length, plural, one {# znak} few {# znaka} other {# znakova}}.",
             "amountTooHigh": "Ovo je više od sredstava koja su vam na raspolaganju.",
-            "amountNoFloat": "Nije moguće koristiti decimalna mjesta s odabranom najmanjom jedinicom",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Djeluje da je iznos nevažeći broj.",
             "amountSmallerThanSubunit": "Iznos mora biti veći od najmanje podjedinice.",
-            "tagTooLong": "Tag ne može biti dulji od 64 bajta.",
-            "metadataTooLong": "Metapodaci ne mogu biti dulji od 8192 bajta.",
+            "tagTooLong": "The tag cannot be longer than 64 characters.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
             "amountZero": "Iznos mora biti veći od 0.",
             "wrongAddressPrefix": "Adrese započinju prefiksom {prefix}.",
             "wrongAddressFormat": "Adresa nije u ispravnom formatu.",
@@ -1497,8 +1500,8 @@
             "phraseWordCount": "Vaša fraza za oporavak mora se sastojati od 24 riječi. Trenutno ih ima {length, plural, one {samo #} other {samo #}}.",
             "phraseUnrecognizedWord": "Ne prepoznajemo riječ \"{word}\" u vašoj frazi za oporavak",
             "phraseCaseWord": "Riječ \"{word}\" treba započeti malim slovom",
-            "unableToCopyFile": "Unable to copy Stronghold backup file",
-            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
+            "unableToCopyFile": "Nije moguće kopirati datoteku sigurnosne kopije Stronghold",
+            "unableToRestoreForProfileManager": "Nije moguće vratiti sigurnosnu kopiju Stronghold za upravitelja profila"
         },
         "ledger": {
             "appNotOpen": "Potrebno je otvoriti IOTA aplikaciju na Ledger uređaju.",
@@ -1532,18 +1535,18 @@
         "invalidDate": "NEVAŽEĆI DATUM",
         "invalidTime": "NEVAŽEĆE VRIJEME",
         "shimmerClaiming": {
-            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
-            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
-            "missingAccount": "Unable to find Shimmer claiming account"
+            "missingProfileManager": "Nije moguće pronaći upravitelja profila za preuzimanje Shimmer nagrada",
+            "cannotInitialiseAccount": "Nije moguće inicijalizirati Shimmer račun za preuzimanje",
+            "missingAccount": "Nije moguće pronaći Shimmer račun za preuzimanje"
         },
         "walletApiEvent": {
-            "invalidAccountIndex": "Invalid account index for {eventName} event",
-            "invalidPayload": "Invalid payload for {eventName} event"
+            "invalidAccountIndex": "Nevažeći indeks računa za {eventName} događaj",
+            "invalidPayload": "Nevažeći payload za {eventName} događaj"
         }
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "Odabrani datum/vrijeme isteka nije važeći."
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "Korištenje nodeova preko HTTP-a ostavlja promet nešifriranim i može predstavljati sigurnosni rizik."
@@ -1578,24 +1581,30 @@
             "bodyDidNotReachMin": "Niste stakeali dovoljno IOTA tokena da bi dosegnuli minimalnu vrijednost nagrade za {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Ovaj novčanik nema dovoljno IOTA tokena za postizanje minimalne airdrop nagrade za {airdrop}."
         },
-        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
             "incoming": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
-                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             },
             "outgoing": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             }
+        },
+        "mintNativeTokenForm": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {
