@@ -4,7 +4,6 @@ import { NetworkProtocol } from '@core/network'
 import { getStorageDirectoryOfProfile } from '@core/profile'
 import { profileManager } from '@core/profile-manager'
 
-import { UnableToRestoreBackupForProfileManagerError } from '../errors'
 import {
     getShimmerClaimingProfileManagerStorageDirectory,
     restoreBackupForShimmerClaimingProfileManagerHelper,
@@ -41,6 +40,6 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
         )
     } catch (err) {
         console.error(err)
-        throw new UnableToRestoreBackupForProfileManagerError()
+        throw err
     }
 }
