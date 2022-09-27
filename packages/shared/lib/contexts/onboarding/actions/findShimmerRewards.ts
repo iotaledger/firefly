@@ -23,25 +23,45 @@ const NUM_SEARCH_ROUNDS_BEFORE_ACCOUNT_INCREMENT = 2
  */
 let gapLimitProfileConfiguration: GapLimitProfileConfiguration
 
-let depthWindowAccountStartIndex = -1
-let depthWindowAccountGapLimit = -1
-let depthWindowAddressStartIndex = -1
-let depthWindowAddressGapLimit = -1
+let depthWindowAccountStartIndex: number
+let depthWindowAccountGapLimit: number
+let depthWindowAddressStartIndex: number
+let depthWindowAddressGapLimit: number
 
-let breadthWindowAccountStartIndex = -1
-let breadthWindowAccountGapLimit = -1
-let breadthWindowAddressStartIndex = -1
-let breadthWindowAddressGapLimit = -1
+let breadthWindowAccountStartIndex: number
+let breadthWindowAccountGapLimit: number
+let breadthWindowAddressStartIndex: number
+let breadthWindowAddressGapLimit: number
 
-let totalUnclaimedShimmerRewards = 0
+let totalUnclaimedShimmerRewards: number
+let currentSearchRound: number
 
-let currentSearchRound = 1
+export function initialiseGapLimitConfiguration(): void {
+    const profileType = get(onboardingProfile)?.type
+    if (!profileType) {
+        throw new UnableToFindProfileTypeError()
+    }
+
+    gapLimitProfileConfiguration = SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType]
+
+    depthWindowAccountStartIndex = 0
+    depthWindowAccountGapLimit = gapLimitProfileConfiguration.accountGapLimit
+    depthWindowAddressStartIndex = 0
+    depthWindowAddressGapLimit = gapLimitProfileConfiguration.addressGapLimit
+
+    breadthWindowAccountStartIndex = gapLimitProfileConfiguration.accountGapLimit
+    breadthWindowAccountGapLimit = 1
+    breadthWindowAddressStartIndex = 0
+    breadthWindowAddressGapLimit = gapLimitProfileConfiguration.addressGapLimit
+
+    currentSearchRound = 1
+    totalUnclaimedShimmerRewards = 0
+}
 
 // handle errors from await functions, where and how to handle
 // consider making parameters into an object
 
 export async function findShimmerRewards(): Promise<void> {
-    resetGapLimitConfiguration()
     await recoverAccountsInSeries()
     updateRewardsFinderParameters()
 }
@@ -128,41 +148,6 @@ async function updateRecoveredAccounts(accounts: IAccount[]): Promise<void> {
         showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards)
         setTotalUnclaimedShimmerRewards(updatedTotalUnclaimedShimmerRewards)
     }
-}
-
-function resetGapLimitConfiguration(): void {
-    if (gapLimitProfileConfiguration) {
-        const profileType = get(onboardingProfile)?.type
-        const hasMismatchedProfileType =
-            gapLimitProfileConfiguration.accountGapLimit !==
-                SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType].accountGapLimit ||
-            gapLimitProfileConfiguration.addressGapLimit !==
-                SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType].addressGapLimit
-        if (hasMismatchedProfileType) {
-            initialiseGapLimitConfiguration()
-        }
-    } else {
-        initialiseGapLimitConfiguration()
-    }
-}
-
-function initialiseGapLimitConfiguration(): void {
-    const profileType = get(onboardingProfile)?.type
-    if (!profileType) {
-        throw new UnableToFindProfileTypeError()
-    }
-
-    gapLimitProfileConfiguration = SHIMMER_CLAIMING_GAP_LIMIT_CONFIGURATION[profileType]
-
-    depthWindowAccountStartIndex = 0
-    depthWindowAccountGapLimit = gapLimitProfileConfiguration.accountGapLimit
-    depthWindowAddressStartIndex = 0
-    depthWindowAddressGapLimit = gapLimitProfileConfiguration.addressGapLimit
-
-    breadthWindowAccountStartIndex = gapLimitProfileConfiguration.accountGapLimit
-    breadthWindowAccountGapLimit = 1
-    breadthWindowAddressStartIndex = 0
-    breadthWindowAddressGapLimit = gapLimitProfileConfiguration.addressGapLimit
 }
 
 export function setTotalUnclaimedShimmerRewards(_totalUnclaimedShimmerRewards: number): void {

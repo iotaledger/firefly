@@ -24,6 +24,7 @@
         ShimmerClaimingAccountState,
         shimmerClaimingProfileManager,
         subscribeToWalletApiEventsForShimmerClaiming,
+        initialiseGapLimitConfiguration,
     } from '@contexts/onboarding'
     import { closePopup } from '@lib/popup'
 
@@ -149,6 +150,7 @@
     }
 
     onMount(() => {
+        initialiseGapLimitConfiguration()
         void onMountHelper()
     })
 
