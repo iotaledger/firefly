@@ -13,7 +13,6 @@
         "@iota/wallet": "2.0.2-alpha.32",
         "@sveltejs/svelte-virtual-list": "^3.0.1",
         "big.js": "^6.0.3",
-        "chart.js": "^2.9.3",
         "lottie-web": "^5.7.8",
         "qrious": "^4.0.2",
         "svelte": "^3.49.0",
