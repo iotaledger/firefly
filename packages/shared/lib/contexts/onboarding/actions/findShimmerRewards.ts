@@ -1,40 +1,127 @@
 import { get } from 'svelte/store'
 
+import { IAccount } from '@core/account'
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-import { INITIAL_ACCOUNT_GAP_LIMIT, INITIAL_ADDRESS_GAP_LIMIT, UnableToFindProfileTypeError } from '@core/profile'
+import { AccountRecoveryProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet'
 import { showAppNotification } from '@lib/notifications'
 
-import { DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS } from '../constants'
+import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION } from '../constants'
 import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
 
-let accountGapLimitIncrement = 0
-let accountGapLimit = 3
-// let startAccountIndex = 0
-let addressGapLimitIncrement = 0
-let addressGapLimit = 10
-// let startAddressIndex = 0
+const DEPTH_SEARCH_ACCOUNT_START_INDEX = 0
+const INITIAL_SEARCH_ADDRESS_START_INDEX = 0
+const INITIAL_SEARCH_ROUND = 1
+const INITIAL_TOTAL_UNCLAIMED_REWARDS = 0
 
-let totalUnclaimedShimmerRewards = 0
+/**
+ * NOTE: This variable is uninitialized because we
+ * must know the profile type to be able to determine
+ * gap limits that are sensible in terms of UX.
+ */
+let accountRecoveryProfileConfiguration: AccountRecoveryProfileConfiguration
 
-let hasSetGapLimitIncrements = false
+let depthSearchAccountGapLimit: number
+let depthSearchAddressStartIndex: number
+let depthSearchAddressGapLimit: number
 
-export async function findShimmerRewards(): Promise<void> {
-    if (!hasSetGapLimitIncrements) {
-        setGapLimitIncrements()
+let breadthSearchAccountStartIndex: number
+let breadthSearchAddressGapLimit: number
+
+let totalUnclaimedShimmerRewards: number
+let currentSearchRound: number
+
+export function initialiseAccountRecoveryConfigurationForShimmerClaiming(): void {
+    const profileType = get(onboardingProfile)?.type
+    if (!profileType) {
+        throw new UnableToFindProfileTypeError()
     }
 
-    const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
-    const unboundAccounts = await _shimmerClaimingProfileManager?.recoverAccounts(
-        0,
-        accountGapLimit,
-        addressGapLimit,
-        DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS
+    accountRecoveryProfileConfiguration = SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION[profileType]
+
+    depthSearchAccountGapLimit = accountRecoveryProfileConfiguration.initialAccountRange
+    depthSearchAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX
+    depthSearchAddressGapLimit = accountRecoveryProfileConfiguration.addressGapLimit
+
+    breadthSearchAccountStartIndex = accountRecoveryProfileConfiguration.initialAccountRange
+    breadthSearchAddressGapLimit = accountRecoveryProfileConfiguration.addressGapLimit
+
+    currentSearchRound = INITIAL_SEARCH_ROUND
+    totalUnclaimedShimmerRewards = INITIAL_TOTAL_UNCLAIMED_REWARDS
+}
+
+export async function findShimmerRewards(): Promise<void> {
+    await depthSearchAndRecoverAccounts()
+
+    if (hasOnlyDoneDepthSearch()) {
+        await breadthSearchAndRecoverAccounts()
+    }
+
+    updateRewardsFinderParameters()
+}
+
+async function depthSearchAndRecoverAccounts(): Promise<void> {
+    const profileManager = get(shimmerClaimingProfileManager)
+    const depthSearchAccounts = await profileManager?.recoverAccounts(
+        DEPTH_SEARCH_ACCOUNT_START_INDEX,
+        depthSearchAccountGapLimit,
+        depthSearchAddressGapLimit,
+        {
+            ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
+            addressStartIndex: depthSearchAddressStartIndex,
+            addressStartIndexInternal: depthSearchAddressStartIndex,
+        }
     )
-    const boundAccounts = await getSortedRenamedBoundAccounts(unboundAccounts, shimmerClaimingProfileManager)
+
+    await updateRecoveredAccounts(depthSearchAccounts)
+}
+
+async function breadthSearchAndRecoverAccounts(): Promise<void> {
+    const profileManager = get(shimmerClaimingProfileManager)
+    const { accountGapLimit, addressGapLimit } = accountRecoveryProfileConfiguration
+    for (
+        let chunkAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX;
+        chunkAddressStartIndex < breadthSearchAddressGapLimit;
+        chunkAddressStartIndex += addressGapLimit
+    ) {
+        const breadthSearchAccounts = await profileManager?.recoverAccounts(
+            breadthSearchAccountStartIndex,
+            accountGapLimit,
+            addressGapLimit,
+            {
+                ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
+                addressStartIndex: chunkAddressStartIndex,
+                addressStartIndexInternal: chunkAddressStartIndex,
+            }
+        )
+        await updateRecoveredAccounts(breadthSearchAccounts)
+    }
+}
+
+function hasOnlyDoneDepthSearch(): boolean {
+    const { numberOfRoundsBetweenBreadthSearch } = accountRecoveryProfileConfiguration
+    return currentSearchRound % numberOfRoundsBetweenBreadthSearch === 0
+}
+
+function updateRewardsFinderParameters(): void {
+    const hasSearchedOnlyDepth = hasOnlyDoneDepthSearch()
+
+    const { accountGapLimit, addressGapLimit } = accountRecoveryProfileConfiguration
+
+    depthSearchAccountGapLimit += hasSearchedOnlyDepth ? accountGapLimit : 0
+    depthSearchAddressStartIndex += addressGapLimit
+
+    breadthSearchAccountStartIndex += hasSearchedOnlyDepth ? accountGapLimit : 0
+    breadthSearchAddressGapLimit += addressGapLimit
+
+    currentSearchRound++
+}
+
+async function updateRecoveredAccounts(accounts: IAccount[]): Promise<void> {
+    const boundAccounts = await getSortedRenamedBoundAccounts(accounts, shimmerClaimingProfileManager)
     const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
     const hasNewRewards = updatedTotalUnclaimedShimmerRewards > totalUnclaimedShimmerRewards
     if (hasNewRewards) {
@@ -47,20 +134,6 @@ export async function findShimmerRewards(): Promise<void> {
         showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards)
         setTotalUnclaimedShimmerRewards(updatedTotalUnclaimedShimmerRewards)
     }
-
-    updateRewardsFinderParameters(hasNewRewards)
-}
-
-function setGapLimitIncrements(): void {
-    const profileType = get(onboardingProfile)?.type
-    if (!profileType) {
-        throw new UnableToFindProfileTypeError()
-    }
-
-    accountGapLimitIncrement = INITIAL_ACCOUNT_GAP_LIMIT[profileType] || 1
-    addressGapLimitIncrement = INITIAL_ADDRESS_GAP_LIMIT[profileType] || 10
-
-    hasSetGapLimitIncrements = true
 }
 
 export function setTotalUnclaimedShimmerRewards(_totalUnclaimedShimmerRewards: number): void {
@@ -78,22 +151,4 @@ function showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards: numbe
         alert: true,
         message: `Successfully found ${foundRewardsAmountFormatted}`,
     })
-}
-
-function updateRewardsFinderParameters(hasNewRewards: boolean): void {
-    if (hasNewRewards) {
-        accountGapLimit = accountGapLimitIncrement
-        addressGapLimit = addressGapLimitIncrement
-
-        // TODO: https://github.com/iotaledger/firefly/issues/4297
-        // startAccountIndex = 0
-        // startAddressIndex = 0
-    } else {
-        accountGapLimit += accountGapLimitIncrement
-        addressGapLimit += addressGapLimitIncrement
-
-        // TODO: https://github.com/iotaledger/firefly/issues/4297
-        // startAccountIndex += accountGapLimitIncrement
-        // startAddressIndex += addressGapLimitIncrement
-    }
 }

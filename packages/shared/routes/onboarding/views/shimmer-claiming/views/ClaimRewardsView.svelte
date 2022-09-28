@@ -2,7 +2,12 @@
     import { onDestroy, onMount } from 'svelte'
     import { Animation, Button, OnboardingLayout, ShimmerClaimingAccountList, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { checkOrConnectLedger, pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
+    import {
+        checkOrConnectLedger,
+        handleLedgerError,
+        pollLedgerNanoStatus,
+        stopPollingLedgerNanoStatus,
+    } from '@core/ledger'
     import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { shimmerClaimingRouter } from '@core/router'
     import {
@@ -11,7 +16,7 @@
         ClaimShimmerRewardsError,
         findShimmerRewards,
         FindShimmerRewardsError,
-        findShimmerRewardsForAccount,
+        syncShimmerClaimingAccount,
         hasNoUnclaimedRewards,
         hasUserClaimedRewards,
         isOnboardingLedgerProfile,
@@ -19,6 +24,7 @@
         ShimmerClaimingAccountState,
         shimmerClaimingProfileManager,
         subscribeToWalletApiEventsForShimmerClaiming,
+        initialiseAccountRecoveryConfigurationForShimmerClaiming,
     } from '@contexts/onboarding'
     import { closePopup } from '@lib/popup'
 
@@ -53,7 +59,11 @@
             }
             await findShimmerRewards()
         } catch (err) {
-            throw new FindShimmerRewardsError()
+            if ($isOnboardingLedgerProfile) {
+                handleLedgerError(err?.error ?? err)
+            } else {
+                throw new FindShimmerRewardsError(err)
+            }
         } finally {
             if ($isOnboardingLedgerProfile) {
                 pollLedgerNanoStatus()
@@ -77,9 +87,14 @@
             if ($isOnboardingLedgerProfile) {
                 stopPollingLedgerNanoStatus()
             }
+            await $shimmerClaimingProfileManager.startBackgroundSync({ syncOnlyMostBasicOutputs: true })
             await claimShimmerRewards()
         } catch (err) {
-            throw new ClaimShimmerRewardsError()
+            if ($isOnboardingLedgerProfile) {
+                handleLedgerError(err?.error ?? err)
+            } else {
+                throw new ClaimShimmerRewardsError(err)
+            }
         } finally {
             if ($isOnboardingLedgerProfile) {
                 closePopup(true)
@@ -103,7 +118,6 @@
 
     async function onMountHelper(): Promise<void> {
         subscribeToWalletApiEventsForShimmerClaiming()
-        await $shimmerClaimingProfileManager.startBackgroundSync({ syncOnlyMostBasicOutputs: true })
 
         /**
          * NOTE: If the user only has one Shimmer claiming account,
@@ -118,9 +132,14 @@
                 if ($isOnboardingLedgerProfile) {
                     stopPollingLedgerNanoStatus()
                 }
-                await findShimmerRewardsForAccount($onboardingProfile?.shimmerClaimingAccounts[0])
+                await syncShimmerClaimingAccount($onboardingProfile?.shimmerClaimingAccounts[0])
+                await findShimmerRewards()
             } catch (err) {
-                throw new FindShimmerRewardsError()
+                if ($isOnboardingLedgerProfile) {
+                    handleLedgerError(err?.error ?? err)
+                } else {
+                    throw new FindShimmerRewardsError(err)
+                }
             } finally {
                 if ($isOnboardingLedgerProfile) {
                     pollLedgerNanoStatus()
@@ -131,6 +150,7 @@
     }
 
     onMount(() => {
+        initialiseAccountRecoveryConfigurationForShimmerClaiming()
         void onMountHelper()
     })
 
