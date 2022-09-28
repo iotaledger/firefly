@@ -1,6 +1,6 @@
 import { OutputTypes } from '@iota/types'
 
-export interface IOutput {
+export interface IWrappedOutput {
     outputId: string
     output: OutputTypes
 }

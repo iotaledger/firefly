@@ -1,4 +1,4 @@
-import { IOutput, IProcessedTransaction } from '../../interfaces'
+import { IWrappedOutput, IProcessedTransaction } from '../../interfaces'
 import { OutputData } from '@iota/wallet'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { IOutputResponse, ITransactionPayload, IUTXOInput, IAliasOutput } from '@iota/types'
@@ -27,7 +27,7 @@ export function preprocessGroupedOutputs(
 
     const isIncoming = isTransactionIncoming(outputDatas, account.depositAddress)
 
-    const outputGroups: IOutput[][] = splitOutputs(outputDatas)
+    const outputGroups: IWrappedOutput[][] = splitOutputs(outputDatas)
     const processedTransactions = outputGroups.map((outputs) => ({
         outputs,
         transactionId: transactionMetadata?.transactionId,
@@ -49,7 +49,7 @@ function isTransactionIncoming(outputs: OutputData[], accountAddress: string): b
     return address === accountAddress
 }
 
-function splitOutputs(outputDatas: OutputData[]): IOutput[][] {
+function splitOutputs(outputDatas: OutputData[]): IWrappedOutput[][] {
     const outputs = outputDatas.map((outputData) => ({
         outputId: outputData.outputId,
         output: outputData.output,

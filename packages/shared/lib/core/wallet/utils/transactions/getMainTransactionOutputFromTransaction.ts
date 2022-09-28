@@ -1,12 +1,12 @@
 import { getRecipientAddressFromOutput } from '..'
-import { IOutput } from '@core/wallet/interfaces'
+import { IWrappedOutput } from '@core/wallet/interfaces'
 
 export function getMainTransactionOutputFromTransaction(
-    outputs: IOutput[],
+    wrappedOutputs: IWrappedOutput[],
     accountAddress: string,
     isIncoming: boolean
-): { wrappedOutput: IOutput; isSelfTransaction: boolean } {
-    const nonRemainerOutput = outputs.find((output) => {
+): { wrappedOutput: IWrappedOutput; isSelfTransaction: boolean } {
+    const nonRemainerOutput = wrappedOutputs.find((output) => {
         const recipientAddress = getRecipientAddressFromOutput(output.output)
 
         if (isIncoming) {
@@ -21,7 +21,7 @@ export function getMainTransactionOutputFromTransaction(
             isSelfTransaction: false,
         }
     } else {
-        const output = outputs.find((output) => accountAddress === getRecipientAddressFromOutput(output.output))
+        const output = wrappedOutputs.find((output) => accountAddress === getRecipientAddressFromOutput(output.output))
         if (output) {
             return { wrappedOutput: output, isSelfTransaction: true }
         }

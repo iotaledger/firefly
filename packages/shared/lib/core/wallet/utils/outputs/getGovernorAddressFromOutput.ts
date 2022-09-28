@@ -3,7 +3,7 @@ import { OutputTypes, IGovernorAddressUnlockCondition, IEd25519Address } from '@
 import { convertEd25519ToBech32 } from '../convertEd25519ToBech32'
 
 export function getGovernorAddressFromOutput(output: OutputTypes): string {
-    if (output && output?.type === OUTPUT_TYPE_ALIAS) {
+    if (output && output.type === OUTPUT_TYPE_ALIAS) {
         const governorUnlockCondition = output.unlockConditions.find(
             (unlockCondition) => unlockCondition.type === UNLOCK_CONDITION_GOVERNOR_ADDRESS
         ) as IGovernorAddressUnlockCondition

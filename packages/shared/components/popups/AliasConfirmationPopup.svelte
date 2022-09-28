@@ -1,78 +1,58 @@
 <script lang="typescript">
-    import { Button, KeyValueBox, Text, Error } from 'shared/components'
+    import { Button, KeyValueBox, Text } from 'shared/components'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, activeProfile } from '@core/profile'
     import { convertBech32ToEd25519, formatTokenAmountPrecise } from '@core/wallet'
     import { closePopup } from '@lib/popup'
-    import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
-    import type { AliasOutputOptions } from '@iota/wallet'
     import { onMount } from 'svelte'
     import { BASE_TOKEN } from '@core/network'
+    import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     let storageDeposit: string = '0'
-    const aliasOutputOptions: AliasOutputOptions = null
-    let error: Error
 
-    $: address = $selectedAccount.depositAddress
+    $: address = {
+        type: 0,
+        pubKeyHash: `0x${convertBech32ToEd25519($selectedAccount.depositAddress)}`,
+    }
     $: aliasOutput = address
         ? {
               aliasId: '0x0000000000000000000000000000000000000000000000000000000000000000',
               unlockConditions: [
                   {
                       type: 4, // Governor
-                      address: {
-                          type: 0,
-                          pubKeyHash: `0x${convertBech32ToEd25519(address)}`,
-                      },
+                      address,
                   },
                   {
                       type: 5, // State controller
-                      address: {
-                          type: 0,
-                          pubKeyHash: `0x${convertBech32ToEd25519(address)}`,
-                      },
+                      address,
                   },
               ],
           }
         : ''
 
-    $: setStorageDeposit(aliasOutput)
+    $: void setStorageDeposit(aliasOutput)
 
-    async function setStorageDeposit(aliasOutput) {
+    async function setStorageDeposit(aliasOutput): Promise<void> {
         try {
-            const preparedOutput = await $selectedAccount.buildAliasOutput(aliasOutput)
-            const aliasOutputOptions = {
-                amount: preparedOutput.amount,
-                aliasId: preparedOutput.aliasId,
-                stateIndex: preparedOutput.stateIndex,
-                stateMetadata: preparedOutput.stateMetadata,
-                foundryCounter: preparedOutput.foundryCounter,
-                immutableFeatures: preparedOutput.immutableFeatures,
-            }
-            storageDeposit = formatTokenAmountPrecise(
-                Number(aliasOutputOptions.amount),
-                BASE_TOKEN[$activeProfile?.networkProtocol]
-            )
+            const { amount } = await $selectedAccount.buildAliasOutput(aliasOutput)
+            storageDeposit = formatTokenAmountPrecise(Number(amount), BASE_TOKEN[$activeProfile?.networkProtocol])
         } catch (err) {
-            console.error(err)
+            handleError(err)
         }
     }
 
     async function createAlias(): Promise<void> {
-        error = null
         try {
             $isTransferring = true
-            await $selectedAccount.createAliasOutput(aliasOutputOptions)
+            await $selectedAccount.createAliasOutput()
             closePopup()
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
-            }
+            handleError(err)
         } finally {
             $isTransferring = false
         }
@@ -90,9 +70,7 @@
         try {
             await _onMount()
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
-            }
+            handleError(err)
         }
     })
 </script>
