@@ -42,7 +42,7 @@ There are a few options to install Firefly Shimmer:
 Help out the Firefly project by filing a [bug report](https://github.com/iotaledger/firefly/issues/new?assignees=&labels=bug&template=bug_report.yml), making a [feature request](https://github.com/iotaledger/firefly/issues/new?assignees=&labels=feat&template=feature_request.md) or opening a [pull request](https://github.com/iotaledger/firefly/pulls/).
 Checkout the [contribution guidelines](https://github.com/iotaledger/firefly/blob/stardust-develop/.github/CONTRIBUTING.md) before making a code contribution.
 
-For all of the details, see our [development handbook](https://iotaledger.github.io/firefly/).
+See our [development handbook](https://iotaledger.github.io/firefly/) for more details.
 
 ## Joining the discussion
 
