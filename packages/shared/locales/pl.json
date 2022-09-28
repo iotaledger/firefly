@@ -198,10 +198,10 @@
             "videoGuide": "Migracja z użyciem portfela Ledger - poradnik wideo"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the {protocol} app on your Ledger device?",
+            "title": "Czy zainstalowałeś aplikację {protocol} na swoim urządzeniu Ledger?",
             "body1": "Zanim przejdziesz dalej, musisz użyć aplikacji Ledger Live aby wyszukać i zainstalować aplikację {protocol}.",
             "body2": "Upewnij się, że oprogramowanie Ledger jest aktualne. Wszystkie zainstalowane aplikacje powinny być zaktualizowane do najnowszych wersji.",
-            "action": "Yes, I've installed the {protocol} app"
+            "action": "Tak, zainstalowałem aplikację {protocol}"
         },
         "importFromLedger": {
             "title": "Przywróć lub migruj swoje urządzenie Ledger",
@@ -749,12 +749,12 @@
             "confirm": "Aby kontynuować, potwierdź informację wyświetlaną na urządzeniu Ledger"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the {legacy} app",
+            "title": "Przewodnik po instalacji aplikacji {legacy}",
             "steps": {
                 "0": "Zainstaluj i otwórz aplikację Ledger Live",
                 "1": "Upewnij się, że Twój Ledger jest połączony",
-                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
-                "3": "Install the {legacy} app",
+                "2": "Wyszukaj aplikację {legacy}. Może być konieczne włączenie \"Developer mode\" w Ledger Live.",
+                "3": "Zainstaluj aplikację {legacy}",
                 "4": "Pamiętaj, żeby zamknąć aplikację Ledger Live przed powrotem do Firefly"
             }
         },
