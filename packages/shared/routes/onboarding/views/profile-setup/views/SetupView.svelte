@@ -2,12 +2,19 @@
     import { onMount } from 'svelte'
     import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import features from '@features/features'
-    import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        initialiseOnboardingProfile,
+        onboardingProfile,
+        ProfileSetupType,
+        shouldBeDeveloperProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, getDefaultClientOptions } from '@core/network'
+    import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
+    import { profiles } from '@core/profile'
 
     function onProfileSetupSelectionClick(setupType: ProfileSetupType): void {
         updateOnboardingProfile({ setupType })
@@ -20,6 +27,13 @@
     }
 
     onMount(() => {
+        if (!$onboardingProfile?.id) {
+            initialiseOnboardingProfile(
+                $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
+                NetworkProtocol.Shimmer
+            )
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+        }
         if (!$onboardingProfile?.clientOptions) {
             const clientOptions = getDefaultClientOptions(
                 $onboardingProfile?.networkProtocol,
@@ -32,18 +46,22 @@
     })
 </script>
 
-<OnboardingLayout {onBackClick}>
+<OnboardingLayout allowBack={$profiles.length > 0 || $onboardingProfile?.isDeveloperProfile} {onBackClick}>
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.setup.title', {
-                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+                values: {
+                    protocol: formatProtocolName($onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer),
+                },
             })}</Text
         >
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-8"
             >{localize('views.onboarding.profileSetup.setup.body', {
-                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+                values: {
+                    protocol: formatProtocolName($onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer),
+                },
             })}</Text
         >
     </div>
@@ -62,11 +80,13 @@
         />
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
-                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+                values: {
+                    protocol: formatProtocolName($onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer),
+                },
             })}
             secondaryText={!$mobile
                 ? localize('actions.createWalletDescription', {
-                      values: { protocol: $onboardingProfile?.networkProtocol },
+                      values: { protocol: $onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer },
                   })
                 : ''}
             icon="plus"

@@ -198,10 +198,10 @@
             "videoGuide": "लेज़र प्रवास वीडियो मार्गदर्शक"
         },
         "ledgerInstallationGuide": {
-            "title": "क्या आपने आवश्यक लेजर ऐप्स इंस्टॉल किए हैं?",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "सुनिश्चित करें कि आपका लेजर फर्मवेयर अप-टू-डेट है। किसी भी पहले से इंस्टॉल किए गए ऐप्स को उनके नवीनतम संस्करणों में अपडेट किया जाना चाहिए।",
-            "action": "हां, मैंने ये ऐप्स इंस्टॉल कर लिए हैं"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "अपने लेजर को पुनर्स्थापित या माइग्रेट करें",
@@ -749,12 +749,12 @@
             "confirm": "आगे बढ़ने के लिए, अपने लेजर डिवाइस पर प्रदर्शित संकेत की पुष्टि करें"
         },
         "ledgerAppGuide": {
-            "title": "लेजर ऐप्स इंस्टॉल करने के लिए गाइड",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "लेजर लाइव एप्लिकेशन इंस्टॉल करें और खोलें",
                 "1": "सुनिश्चित करें कि आपका लेजर जुड़ा हुआ है",
-                "2": "ऐप्स खोजें: {legacy} और IOTA (MIOTA)",
-                "3": "दोनों ऐप्लिकेशन इंस्टॉल करें: {legacy} और IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "याद रखें कि फायरफ्लाई पर लौटने से पहले लेजर लाइव को बंद करना महत्वपूर्ण है"
             }
         },

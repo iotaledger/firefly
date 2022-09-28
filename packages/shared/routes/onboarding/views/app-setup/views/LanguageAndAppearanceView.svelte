@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, Dropdown, OnboardingLayout, Text } from 'shared/components'
-    import { appSettings, AppTheme, mobile, shouldBeDarkMode } from '@core/app'
+    import { appSettings, AppTheme, hasCompletedAppSetup, mobile, shouldBeDarkMode } from '@core/app'
     import { Locale, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
     import type { DropdownChoice } from '@core/utils'
@@ -45,6 +45,7 @@
     }
 
     function onContinueClick(): void {
+        hasCompletedAppSetup.set(true)
         $appSetupRouter.next()
     }
 
