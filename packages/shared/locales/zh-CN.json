@@ -63,7 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "设置 {protocol, select, IOTA {一个} Shimmer {一个}} {protocol} 档案",
-                    "body": "Select the appropriate method to set up your {protocol} profile."
+                    "body": "请选择适当的方法来设置你的 {protocol} 配置文件。"
                 },
                 "setupNew": {
                     "title": "创建个人资料",
@@ -150,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "输入您的恢复短语",
-                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
+                    "body": "一个恢复短语有24个字，全部为小写，中间有空格。这用于恢复现有的 Firefly 配置文件。",
                     "enter": "输入您的恢复短语",
                     "phraseDetected": "检测到24个单词恢复密语"
                 },
@@ -170,21 +170,21 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "您的 Shimmer 质押奖励",
-                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
+                    "body": "检查你的 Shimmer 质押奖励是否正确。你可能需要多次搜索才能找到你的全部余额。"
                 },
                 "success": {
-                    "title": "Shimmer claimed",
-                    "body": "You have successfully claimed your Shimmer tokens.",
+                    "title": "已认领 Shimmer",
+                    "body": "您已成功认领了您的 Shimmer 代币。",
                     "totalRewards": "奖励总额"
                 }
             },
             "congratulations": {
-                "title": "Profile setup almost complete...",
+                "title": "配置文件设置快要完成...",
                 "fundsMigrated": "资金已迁移",
-                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
-                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
+                "body": "一旦仪表板成功加载，你的新配置文件就会准备就绪。",
+                "ledgerHint": "在仪表盘加载完成之前，请不要断开您的Ledger设备。",
                 "softwareMigratedBody": "您已成功地将您的资金迁移到新的网络",
-                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
+                "fireflyLedgerBody": "您的 Ledger 配置文件已成功恢复，您现在可以继续。",
                 "trinityLedgerBody": "您已成功地将 Ledger 迁移到新的网络。",
                 "exportMigration": "导出迁移日志并完成设置"
             }
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger 迁移视频指南"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the {protocol} app on your Ledger device?",
+            "title": "您是否在您的Ledger设备上安装了 {protocol} 应用？",
             "body1": "在继续之前，您必须使用 Ledger Live来查找并安装 {protocol} 应用程序。",
             "body2": "请确保您的Ledger固件是最新的。任何预安装的应用都应更新到他们的最新版本。",
-            "action": "Yes, I've installed the {protocol} app"
+            "action": "是的，我已经安装了 {protocol} 应用程序"
         },
         "importFromLedger": {
             "title": "还原或迁移您的Ledger",
@@ -214,9 +214,9 @@
         "connectLedger": {
             "title": "将您的账单连接到Fifly",
             "body": "为了让Firefly找到的您的Ledger设备，请确保官方的Ledger Live应用程序已关闭。",
-            "connect": "Connect your Ledger device",
-            "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "connect": "连接您的 Ledger 设备",
+            "unlock": "用密码解锁你的 Ledger",
+            "openApp": "在您的Ledger上打开 Shimmer 应用",
             "tips": "Ledger无法连接时的处理技巧"
         },
         "restoreFromFireflyLedger": {
@@ -468,11 +468,11 @@
                 "hardware": {
                     "title": "硬件设备",
                     "statuses": {
-                        "appNotOpen": "Ledger unlocked but app not open",
-                        "correctAppOpen": "Ledger unlocked and app open ",
-                        "locked": "Ledger securely locked",
+                        "appNotOpen": "Ledger已解锁，但应用程序未打开",
+                        "correctAppOpen": "Ledger 已解锁，应用程序已打开 ",
+                        "locked": "Ledger 已安全锁定",
                         "mnemonicMismatch": "错误的Ledger设备或助记词",
-                        "notConnected": "Ledger not connected",
+                        "notConnected": "Ledger 未连接",
                         "otherConnected": "应用打开"
                     }
                 },
@@ -549,12 +549,12 @@
     },
     "popups": {
         "enableLedgerBlindSigning": {
-            "title": "Enable Blind Signing",
-            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
-            "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
-            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
-            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+            "title": "启用 Blind 签名",
+            "info": "为了确认此交易，您需要在您的ledger设备上启用 Blind 签名。",
+            "step_1": "连接并解锁您的 Ledger 设备",
+            "step_2": "打开 Shimmer 应用程序",
+            "step_3": "按右键导航到设置。然后按两个按钮进行验证。您的Ledger设备显示Blind签名。",
+            "step_4": "按两个按钮以启用交易盲签。设备显示已启用。您已完成。"
         },
         "storageDepositBreakdown": {
             "title": "存储押金明细",
@@ -586,12 +586,12 @@
             "body": "定期备份你的钱包很重要，这样可以确保你有一个钱包和交易记录的副本。如果你失去了你的备份和恢复短语，你将失去对资金的访问权限。"
         },
         "deeplinkAccountSwitch": {
-            "title": "Select a wallet",
-            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+            "title": "选择钱包",
+            "body": "您刚刚激活了一个深链接。请选择您想要继续的钱包。"
         },
         "deeplinkError": {
-            "title": "Failed link",
-            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+            "title": "失败的链接",
+            "body": "此链接失败或无效。请重试或再次检查链接的来源。"
         },
         "deleteAccount": {
             "title": "删除{name}?",
@@ -709,7 +709,7 @@
         "transaction": {
             "title": "确认交易",
             "body": "您将要发送 {amount} 到",
-            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
+            "surplusIncluded": "此交易包含一个剩余的金额。请仔细检查这是你要发送的金额。",
             "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
             "sendingFromStakedAccountBelowMinReward": "你正在从一个尚未达到最低质押奖励的钱包发送转账。这可能会解除你在这个钱包的代币质押而失去你的抵押奖励。"
         },
@@ -739,22 +739,22 @@
             "bodyFirefly": "在完成之前Firefly将被暂停使用。完成之后您仍然可以进行代币迁移。"
         },
         "ledgerNotConnected": {
-            "title": "Connect your Ledger",
-            "notConnected": "Connect your Ledger device to continue.",
-            "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
-            "correctAppOpen": "Ledger successfully connected, please continue."
+            "title": "连接您的Ledger",
+            "notConnected": "连接您的Ledger设备以继续。",
+            "locked": "解锁您的Ledger设备以继续。",
+            "appNotOpen": "打开您Ledger设备上的 {protocol} 应用以继续。",
+            "correctAppOpen": "Ledger连接成功，请继续。"
         },
         "ledgerConfirmation": {
             "confirm": "若要继续，请确认Ledger设备上的弹出窗口"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the {legacy} app",
+            "title": "{legacy} 应用安装指南",
             "steps": {
                 "0": "安装并打开 Ledger Live 应用程序",
                 "1": "请确保您的Ledger设备已连接",
-                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
-                "3": "Install the {legacy} app",
+                "2": "搜索 {legacy} 应用。您可能需要启用 Ledger Live 开发者模式。",
+                "3": "安装 {legacy} 应用程序",
                 "4": "请记住，在返回Fifly之前关闭Ledger Live是非常重要的"
             }
         },
@@ -771,13 +771,13 @@
             }
         },
         "verifyLedgerTransaction": {
-            "title": "Verify transaction",
-            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+            "title": "验证交易",
+            "info": "将你的 ledger 设备上显示的交易信息与以下信息进行比较并确认。"
         },
         "verifyInternalLedgerTransaction": {
-            "title": "Verify internal transaction",
-            "info": "Please confirm the internal transaction on your ledger.",
-            "hint": "All assets will remain on your wallet when sending an internal transaction."
+            "title": "验证内部交易",
+            "info": "请在ledger上确认您的内部交易。",
+            "hint": "当发送内部交易时，所有资产都将留在你的钱包中。"
         },
         "ledgerAddress": {
             "title": "确认接收地址",
@@ -902,7 +902,7 @@
         "timeframe1Month": "1个月"
     },
     "actions": {
-        "apply": "Apply",
+        "apply": "应用",
         "continue": "继续",
         "back": "返回",
         "previous": "上一步",
@@ -912,7 +912,7 @@
         "dismiss": "取消",
         "claim": "认领",
         "claiming": "认领中...",
-        "claimingRewards": "Claiming rewards",
+        "claimingRewards": "认领奖励",
         "reject": "忽略",
         "confirmRejection": {
             "title": "忽略交易",
@@ -933,7 +933,7 @@
         "createWallet": "创建新的 {protocol} 配置文件",
         "createWalletDescription": "创建一个运行在 {protocol, select, iota {Chrysalis} shimmer {Shimmer}} 的新配置文件",
         "claimShimmer": "认领您的 Shimmer 质押奖励",
-        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
+        "claimShimmerDescription": "导入您的 IOTA个人资料并领取质押奖励。",
         "savePassword": "保存密码",
         "useBiometric": "使用生物特征安全机制",
         "setupPinCode": "设置 PIN 码",
@@ -960,8 +960,8 @@
         "chooseFile": "选择一个文件",
         "dropHere": "将您的文件拖放至此处",
         "syncAll": "全部同步",
-        "import": "Import",
-        "importing": "Importing",
+        "import": "导入",
+        "importing": "正在导入",
         "export": "导出",
         "exporting": "导出中",
         "exportNewStronghold": "导出一个新的Stronghold",
@@ -1051,11 +1051,11 @@
         "burnToken": "燃烧代币",
         "faucetRequest": "获得 {token} 代币",
         "refreshTokenMetadata": "刷新代币元数据",
-        "test": "Test",
-        "testDeepLink": "Test deep link",
-        "initialize": "Initialize",
-        "initializing": "Initializing",
-        "delete": "Delete"
+        "test": "测试",
+        "testDeepLink": "测试深链接",
+        "initialize": "初始化",
+        "initializing": "正在初始化",
+        "delete": "删除"
     },
     "general": {
         "recipient": "接收人",
@@ -1071,9 +1071,9 @@
         "received": "已收到",
         "transfer": "转帐",
         "transferring": "转账中",
-        "shimmerClaimed": "Claimed",
-        "shimmerClaiming": "Claiming",
-        "shimmerGenesis": "Shimmer Genesis",
+        "shimmerClaimed": "已认领",
+        "shimmerClaiming": "认领中...",
+        "shimmerGenesis": "Shimmer 创世块",
         "minted": "已锻造",
         "minting": "锻造中",
         "sendPayment": "发送资金",
@@ -1115,7 +1115,7 @@
         "darkTheme": "暗色",
         "systemTheme": "系统",
         "balance": "余额",
-        "balanceWithValue": "Balance: {balance}",
+        "balanceWithValue": "余额：{balance}",
         "all": "全部",
         "incoming": "收到",
         "outgoing": "转出",
@@ -1150,9 +1150,9 @@
         "loadingAccounts": "加载中，请稍候...",
         "addProfile": "添加个人档案",
         "noRecentHistory": "没有最近的历史记录",
-        "noFilteredActivity": "No matching activities",
+        "noFilteredActivity": "未找到匹配的活动。",
         "noAssets": "没有资产",
-        "noFilteredAsset": "No matching assets",
+        "noFilteredAsset": "没有匹配的资产",
         "thisMonth": "本月",
         "search": "搜索",
         "firstSync": "同步历史记录，可能需要一段时间...",
@@ -1217,23 +1217,23 @@
         "unstakedFunds": "未质押的资金",
         "accountColor": "钱包颜色",
         "transactionTime": "交易时间",
-        "surplus": "Surplus",
+        "surplus": "剩余",
         "storageDeposit": "存储押金",
         "giftedStorageDeposit": "赠与的存储押金",
         "expirationTime": "过期时间",
-        "timelockDate": "Timelock",
+        "timelockDate": "时间锁",
         "claimedTime": "认领于",
         "copiedToClipboard": "复制到剪贴板",
         "total": "总计: {balance}",
-        "availableBalanceWithValue": "Available balance: {balance}",
-        "availableBalance": "Available balance",
-        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
+        "availableBalanceWithValue": "可用余额: {balance}",
+        "availableBalance": "可用余额",
+        "availableBalanceTooltip": "资产的总余额减去任何需要支付存储押金的资金（即锁定在待处理的交易中的资金，为原生资产保留的资金，或为NFT保留的资金）。",
         "amountClaimed": "{amount} 已认领",
         "metadata": "元数据",
         "tag": "标签",
         "nodeList": "节点列表",
-        "claimedIn": "Claimed in",
-        "claimingIn": "Claiming in",
+        "claimedIn": "已认领于",
+        "claimingIn": "认领中...",
         "assets": "资产",
         "nativeTokens": "原生代币",
         "mintNativeTokenDescription": "按照 IRC30 标准锻造原生代币",
@@ -1242,12 +1242,12 @@
         "refreshTokenMetadataHint": "这将重置您所有的代币元数据，包括验证状态并取消隐藏任何隐藏的资产。",
         "giftStorageDeposit": "赠送存储押金",
         "excluded": "排除",
-        "developerTools": "Developer tools",
-        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "developerTools": "开发工具",
+        "testDeepLinkDescription": "模拟一个发送Firefly的深链接请求",
         "url": "URL",
         "hash": "Hash",
-        "creating": "Creating",
-        "updating": "Updating"
+        "creating": "正在创建",
+        "updating": "正在更新"
     },
     "filters": {
         "title": "过滤",
@@ -1264,9 +1264,9 @@
         "verificationStatus": {
             "label": "验证状态",
             "new": "新的",
-            "skipped": "Skipped verification",
-            "selfVerified": "Self-verified",
-            "official": "Official"
+            "skipped": "已跳过验证",
+            "selfVerified": "自验证",
+            "official": "官方"
         },
         "asset": {
             "label": "资产"
@@ -1279,23 +1279,23 @@
             "less": "小于"
         },
         "date": {
-            "label": "Date",
-            "equals": "is equal to",
-            "last": "in the last",
-            "range": "is between",
-            "after": "is after",
-            "afterOrEquals": "is on or after",
-            "before": "is before",
-            "Days": "days",
-            "Months": "months",
-            "Years": "years"
+            "label": "日期",
+            "equals": "等于",
+            "last": "位于最后",
+            "range": "介于",
+            "after": "晚于",
+            "afterOrEquals": "迟于（含）",
+            "before": "先于",
+            "Days": "天",
+            "Months": "月",
+            "Years": "年"
         },
         "status": {
             "label": "状态",
             "confirmed": "已确认",
             "pending": "待处理",
             "claimed": "已认领",
-            "unclaimed": "unclaimed"
+            "unclaimed": "未认领"
         },
         "type": {
             "label": "类型",
@@ -1344,13 +1344,13 @@
             "receivedWhileLoggedOut": "请登录以启动深链接",
             "notEnabled": "深链接没有被激活。",
             "invalidFormat": "您使用的深链接无效",
-            "invalidAmount": "The amount in deep link is not a number {amount}",
-            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
+            "invalidAmount": "深链接中的金额不是数字 {amount}",
+            "invalidSurplus": "深链接中的余额不是数字 {surplus}",
             "wallet": {
                 "send": {
                     "success": "从深链接添加的付款详细信息"
                 },
-                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
+                "unrecognizedOperation": "无法识别的钱包操作: {operation}"
             }
         },
         "syncing": "请稍候，直到同步完成后才能变更钱包。",
@@ -1361,7 +1361,7 @@
             "error": "认领失败的交易"
         },
         "hideActivity": {
-            "success": "Activity was hidden",
+            "success": "活动已隐藏",
             "error": "隐藏活动失败"
         },
         "faucetRequest": {
@@ -1374,7 +1374,7 @@
             "success": "所有代币元数据已被重置和刷新。"
         },
         "restoreFromStrongholdBackup": {
-            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
+            "wrongProtocol": "协议与在 Stronghold 备份中发现的代币类型不匹配",
             "wrongProtocolForClaiming": "您必须使用基于 IOTA的 Stronghold 备份来认领 Shimmer 奖励。"
         },
         "findShimmerRewards": {
@@ -1382,8 +1382,8 @@
             "error": "查找奖励时出现错误"
         },
         "claimShimmerRewards": {
-            "success": "Shimmer rewards claimed for {accountAlias}",
-            "error": "An error occurred while claiming. Try again."
+            "success": "为 {accountAlias} 领取 Shimmer 奖励",
+            "error": "认领奖励时出现错误，请重试。"
         }
     },
     "error": {
@@ -1393,8 +1393,8 @@
             "delete": {
                 "nonEmptyAccounts": "您必须先转移所有余额才能删除您的账户。"
             },
-            "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "type": "无法确定配置文件类型",
+            "setupType": "无法确定配置文件设置类型"
         },
         "password": {
             "doNotMatch": "密码不匹配。",
@@ -1435,33 +1435,33 @@
             "cannotRemove": "无法删除钱包",
             "withBalance": "您必须先转移所有余额才能删除您的账户。",
             "notLast": "您只能删除最后一个钱包。",
-            "notFound": "Unable to find account",
-            "cannotGetBoundAccount": "Unable to get bound account"
+            "notFound": "无法找到帐户",
+            "cannotGetBoundAccount": "无法获取绑定账户"
         },
         "send": {
             "addressLength": "地址的长度应该是 {length, plural,one {1 个字符} other {# 个字符}}。",
             "amountTooHigh": "这大于您可用的余额。",
-            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
+            "amountNoFloat": "在选择最小的单位时不能使用小数位数",
             "amountInvalidFormat": "金额似乎是一个无效的数字。",
             "amountSmallerThanSubunit": "金额必须大于最小的子单位。",
-            "tagTooLong": "The tag cannot be longer than 64 characters.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
+            "tagTooLong": "标签的长度不能超过64个字符。",
+            "metadataTooLong": "元数据的长度不能超过8192个字符。",
             "amountZero": "金额必须大于零。",
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
             "invalidAddress": "地址无效的",
-            "unknownAsset": "The asset is not known to this account.",
+            "unknownAsset": "该资产在这个账户中未知。",
             "insufficientFunds": "该账户资金不足。",
             "insufficientFundsStorageDeposit": "没有足够的资金来支付存储押金",
-            "cannotClaimTwice": "Output has been already claimed",
+            "cannotClaimTwice": "输出已被认领。",
             "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
             "leavingDust": "您的地址余额不能少于1Mi。",
             "cancelled": "您的交易已被取消。",
             "transaction": "发送交易错误。请再次尝试。",
             "invalidExpirationDateTime": "选择的过期日期/时间无效。",
-            "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
+            "missingTransactionId": "事务 ID缺失。",
+            "missingTransactionProgressEventPayload": "交易进度事件的有效载荷缺失。"
         },
         "node": {
             "invalid": "请输入有效的URL",
@@ -1473,8 +1473,8 @@
             "https": "需要HTTPS。目前不支持通过 HTTP 进行不安全的连接。",
             "duplicate": "此节点已被添加。",
             "unsynced": "节点未同步。",
-            "noSyncedNode": "No synced node is available.",
-            "timeNotSynced": "Device time is incorrect, unable to sync node.",
+            "noSyncedNode": "没有可用的同步节点。",
+            "timeNotSynced": "设备时间不正确，无法同步节点。",
             "answer": "无法从所有节点获得响应。",
             "forbidden": "此节点连接被禁止。",
             "pluginNotAvailable": "\"{nodePlugin}\"插件在当前节点上不可用。",
@@ -1500,8 +1500,8 @@
             "phraseWordCount": "您的恢复密语中应该有24个单词，目前 {length, plural, one {只有 1}other {是 #}} 个单词。",
             "phraseUnrecognizedWord": "恢复短语中无法识别的单词“{word}”",
             "phraseCaseWord": "单词 \"{word}\" 应为小写",
-            "unableToCopyFile": "Unable to copy Stronghold backup file",
-            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
+            "unableToCopyFile": "无法复制 Stronghold 备份文件",
+            "unableToRestoreForProfileManager": "无法还原配置文件管理器的 Stronghold 备份"
         },
         "ledger": {
             "appNotOpen": "您必须在您的Ledger设备上打开 IOTA应用程序。",
@@ -1509,7 +1509,7 @@
             "legacyConnected": "Ledger设备上打开的应用程序不正确。",
             "locked": "请输入 PIN 码来解锁您的Ledger设备。",
             "mnemonicMismatch": "您连接了错误的Ledger设备或助记符已更改。",
-            "notConnected": "No Ledger device detected.",
+            "notConnected": "没有检测到Ledger设备。",
             "notFound": "未找到Ledger设备",
             "otherConnected": "Ledger设备上打开的应用程序不正确。",
             "generateAddress": "地址生成出错。",
@@ -1535,18 +1535,18 @@
         "invalidDate": "无效日期",
         "invalidTime": "无效时间",
         "shimmerClaiming": {
-            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
-            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
-            "missingAccount": "Unable to find Shimmer claiming account"
+            "missingProfileManager": "找不到 Shimmer 认领账户管理器",
+            "cannotInitialiseAccount": "无法初始化 Shimmer 认领账户",
+            "missingAccount": "找不到 Shimmer 认领账户"
         },
         "walletApiEvent": {
-            "invalidAccountIndex": "Invalid account index for {eventName} event",
-            "invalidPayload": "Invalid payload for {eventName} event"
+            "invalidAccountIndex": "{eventName} 事件的帐户索引无效",
+            "invalidPayload": "{eventName} 事件的有效负载无效"
         }
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "The chosen expiration date is invalid."
+            "invalidExpirationDateTime": "所选过期日期无效。"
         },
         "node": {
             "http": "通过 HTTP 使用节点使得流量未加密，可能造成安全风险。"
@@ -1581,30 +1581,30 @@
             "bodyDidNotReachMin": "您没有质押足够的IOTA来达到 {airdrop} 的最低奖励 ({airdropRewardMin})。",
             "bodyMinBalanceAirdrop": "这个钱包的 IOTA 代币不足以达到 {airdrop} 的最小空投奖励。"
         },
-        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
+        "optionalInput": "这些可选数据将在explorer 上公开，并可由所有人查看。",
         "transactionDetails": {
             "incoming": {
-                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "storageDeposit": "一个可退还的代币押金，用于将你的交易存储在Tangle上。",
+                "giftedStorageDeposit": "此项交易的存储押金是赠送给你的。你不需要退还押金。",
+                "expirationTime": "请在到期前认领这些资金，否则它们将被退回给发件人。",
+                "timelockDate": "发送者在这些资金上设置了一个时间锁。您将能够在到期后使用它们。",
+                "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
+                "tag": "一个简短的可选数据字段。对交易组进行标记可以使它们更容易被搜索到。"
             },
             "outgoing": {
-                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
-                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "storageDeposit": "存储押金是在Tangle上储存你的交易所需的可退还押金。",
+                "giftedStorageDeposit": "收款人无需退还存储押金。",
+                "expirationTime": "如果接收人没有及时认领，你的代币将被退回给你。",
+                "timelockDate": "您为这笔交易添加了一个时间锁。收件人将无法花费这些资金，直到时间锁到期。",
+                "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
+                "tag": "一个简短的可选数据字段。对各组交易分别进行标记可以使它们更容易被搜索到。"
             }
         },
         "mintNativeTokenForm": {
-            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
-            "description": "IRC30 optional parameter: The human-readable description of the token.",
-            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
-            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+            "decimals": "IRC30 可选参数：代币使用的小数点数(将代币金额除以10^小数，以获得其用户代表权)。",
+            "description": "IRC30的可选参数：代币的人性化描述。",
+            "url": "IRC30 可选参数：指向有关该代币的更多资源的URL，如网站或社交媒体页面。",
+            "logoUrl": "IRC30 可选参数：指向代币Logo的图像资源的URL。"
         }
     },
     "exports": {
@@ -1634,7 +1634,7 @@
     "tabs": {
         "wallet": "钱包",
         "staking": "质押",
-        "developer": "Developer"
+        "developer": "开发者"
     },
     "pills": {
         "stake": {
@@ -1690,7 +1690,7 @@
             "claimed": "已认领",
             "expired": "已过期"
         },
-        "locked": "locked"
+        "locked": "已锁定"
     },
     "menus": {
         "expirationTimePicker": {

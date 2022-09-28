@@ -198,7 +198,7 @@
             "videoGuide": "Video-Leitfaden zur Ledger-Migration"
         },
         "ledgerInstallationGuide": {
-            "title": "Haben Sie die {protocol} App auf Ihrem Ledger Gerät installiert?",
+            "title": "Haben du die {protocol} App auf deinem Ledger Gerät installiert?",
             "body1": "Bevor du fortfährst, musst du Ledger Live verwenden, um die {protocol} App zu finden und zu installieren.",
             "body2": "Stelle sicher, dass deine Ledger-Firmware aktuell ist. Alle vorinstallierten Apps sollten auf ihre neuesten Versionen aktualisiert werden.",
             "action": "Ja, ich habe die {protocol} App installiert"
@@ -754,7 +754,7 @@
                 "0": "Installiere und öffne die Ledger Live Anwendung",
                 "1": "Stelle sicher, dass dein Ledger verbunden ist",
                 "2": "Suche nach der {legacy} App. Möglicherweise musst du den Ledger Live Entwicklermodus aktivieren.",
-                "3": "Installieren Sie die {legacy} App",
+                "3": "Installiere die {legacy} App",
                 "4": "Denke daran, dass es wichtig ist, Ledger Live zu schließen, bevor du zu Firefly zurückkehrst"
             }
         },
