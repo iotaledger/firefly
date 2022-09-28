@@ -63,7 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-                    "body": "Select the appropriate method to set up your {protocol} profile."
+                    "body": "Vælg den passende metode til opsætning af {protocol}-profilen."
                 },
                 "setupNew": {
                     "title": "Opret en profil",
@@ -150,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "Angiv genoprettelsessætningen",
-                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
+                    "body": "En gendannelsessætning på 24 ord, alle minuskler, opdelt af mellemrum, bruges til at gendanne eksisterende Firefly-profiler.",
                     "enter": "Angiv den hemmelige genoprettelsessætning",
                     "phraseDetected": "24-ords gendannelsessætning fundet"
                 },
@@ -170,21 +170,21 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "Shimmer-staking belønninger",
-                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
+                    "body": "Tjek at Shimmer staking-belønningerne er korrekte. Man skal muligvis søge flere gange for at finde sin fulde saldo."
                 },
                 "success": {
-                    "title": "Shimmer claimed",
-                    "body": "You have successfully claimed your Shimmer tokens.",
+                    "title": "Shimmer indløst",
+                    "body": "Shimmer-tokenerne er nu indløst.",
                     "totalRewards": "Belønninger i alt"
                 }
             },
             "congratulations": {
-                "title": "Profile setup almost complete...",
+                "title": "Profilopsætning næsten færdig...",
                 "fundsMigrated": "Midler migreret",
-                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
-                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
+                "body": "Den nye profil vil være klar til brug, når kontrolpanelet er indlæst.",
+                "ledgerHint": "Frakobl ikke Ledger-enheden, før kontrolpanelet er fuldstændigt indlæst.",
                 "softwareMigratedBody": "Midler er nu migreret til det nye netværk",
-                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
+                "fireflyLedgerBody": "Ledger-kontoen er nu genoprettet, og man kan nu fortsætte.",
                 "trinityLedgerBody": "Ledger er nu migreret til det nye netværk.",
                 "exportMigration": "Eksportér migreringslog og afslut opsætning"
             }
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger migreringsvideoguide"
         },
         "ledgerInstallationGuide": {
-            "title": "Er de krævede Ledger-apps installeret?",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Før der fortsættes, så brug Ledger Live til at finde og installere {protocol}-appen.",
             "body2": "Sørg for, at Ledger-firmwaren er opdateret. Alle præinstallerede apps bør opdateres til seneste versioner.",
-            "action": "Ja, disse apps er installeret"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "Gendan eller migrér din Ledger",
@@ -709,7 +709,7 @@
         "transaction": {
             "title": "Bekræft transaktion",
             "body": "Du er ved at sende {amount} til",
-            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
+            "surplusIncluded": "Denne transaktion indeholder et overskudsbeløb. Dobbelttjek, at dette er dét beløb, der ønskes sendt.",
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
@@ -749,12 +749,12 @@
             "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the Ledger apps",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Install and open the Ledger Live application",
                 "1": "Ensure that your Ledger is connected",
-                "2": "Search for apps: {legacy} and IOTA (MIOTA)",
-                "3": "Install both apps: {legacy} and IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Remember that it's important to close Ledger Live before returning to Firefly"
             }
         },
@@ -933,7 +933,7 @@
         "createWallet": "Create a new {protocol} profile",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking rewards",
-        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
+        "claimShimmerDescription": "Importér IOTA-profilen og indløs staking-belønninger",
         "savePassword": "Gem adgangskode",
         "useBiometric": "Brug biometrisk sikkerhed",
         "setupPinCode": "Setup PIN code",
@@ -1217,7 +1217,7 @@
         "unstakedFunds": "Unstaked funds",
         "accountColor": "Wallet color",
         "transactionTime": "Transaction time",
-        "surplus": "Surplus",
+        "surplus": "Overskud",
         "storageDeposit": "Storage deposit",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
@@ -1295,7 +1295,7 @@
             "confirmed": "bekræftet",
             "pending": "afventer",
             "claimed": "hævet",
-            "unclaimed": "unclaimed"
+            "unclaimed": "ikke-indløst"
         },
         "type": {
             "label": "Type",
@@ -1344,8 +1344,8 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidAmount": "The amount in deep link is not a number {amount}",
-            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
+            "invalidAmount": "Dybt link-beløbet er ikke et tal {amount}",
+            "invalidSurplus": "Dybt link-overskuddet er ikke et tal {surplus}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
@@ -1361,7 +1361,7 @@
             "error": "Claiming transaction failed"
         },
         "hideActivity": {
-            "success": "Activity was hidden",
+            "success": "Aktivitet er skjult",
             "error": "Failed to hide activity"
         },
         "faucetRequest": {
@@ -1382,8 +1382,8 @@
             "error": "En fejl opstod under søgning efter belønninger"
         },
         "claimShimmerRewards": {
-            "success": "Shimmer rewards claimed for {accountAlias}",
-            "error": "An error occurred while claiming. Try again."
+            "success": "Shimmer-belønninger indløst for {accountAlias}",
+            "error": "En fejl opstod under indløsning. Forsøg igen."
         }
     },
     "error": {
@@ -1441,11 +1441,11 @@
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
             "amountTooHigh": "Dette er større end din tilgængelige saldo.",
-            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
+            "amountNoFloat": "Kan ikke bruge decimalpladser med den mindste valgte enhed",
             "amountInvalidFormat": "Beløbet ser ud til at være et ugyldigt tal.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
-            "tagTooLong": "The tag cannot be longer than 64 characters.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
+            "tagTooLong": "Tagget kan maks. udgøre 64 tegn.",
+            "metadataTooLong": "Metadataene kan maks. udgøre 8.192 tegn.",
             "amountZero": "Beløb skal være større end 0.",
             "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
             "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
@@ -1546,7 +1546,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "The chosen expiration date is invalid."
+            "invalidExpirationDateTime": "Den valgte udløbsdato er ugyldig."
         },
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
@@ -1581,30 +1581,30 @@
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
         },
-        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
+        "optionalInput": "Disse valgfrie data vil være offentlige i Explorer og synlige for alle.",
         "transactionDetails": {
             "incoming": {
-                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "storageDeposit": "En refunderbar tokenindbetaling kræves for at gemme transaktionen på Tangle.",
+                "giftedStorageDeposit": "Lagerdepositum for denne transaktion udgjorde en gave. Man behøver ikke at refundere depositummet.",
+                "expirationTime": "Indløs disse midler inden udløbstidspunktet, da de ellers returneres til afsenderen.",
+                "timelockDate": "Afsender opsatter en tidslås for disse midler. De vil kunne bruges, når tidslåsen udløber.",
+                "metadata": "Et valgfrit datafelt til at lagre data vedvarende på Tangle.",
+                "tag": "Et kort valgfrit datafelt. Tagning af grupper af transaktioner kan gøre dem lettere at fremsøge."
             },
             "outgoing": {
-                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
-                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "storageDeposit": "Et lagerdepositum, der er refunderbart, kræves for at gemme transaktionen på Tangle.",
+                "giftedStorageDeposit": "Modtageren behøver ikke at tilbagebetale depositummet.",
+                "expirationTime": "Indløser modtageren ikke i tide, får man sine tokener returneret.",
+                "timelockDate": "Tidslås føjet til denne transaktion. Modtageren vil ikke kunne bruge disse midler, før tidslåsen udløber.",
+                "metadata": "Et valgfrit datafelt til at lagre data vedvarende på Tangle.",
+                "tag": "Et kort valgfrit datafelt. Tagning af grupper af transaktioner kan gøre dem lettere at fremsøge."
             }
         },
         "mintNativeTokenForm": {
-            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
-            "description": "IRC30 optional parameter: The human-readable description of the token.",
-            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
-            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+            "decimals": "Valgfri IRC30-parameter: Antal decimaler tokenet bruger (dividér token-beløbet med 10^decimaler for at få dets brugerrepræsentation).",
+            "description": "Valgfri IRC30-parameter: Den menneskelig læsbare beskrivelse af tokenet.",
+            "url": "Valgfri IRC30-parameter: URL, der peger på flere ressourcer for tokenet, såsom et websted eller sociale medier-side.",
+            "logoUrl": "Valgfri IRC30-parameter: URL, der peger på en billedressource for tokenlogoet."
         }
     },
     "exports": {

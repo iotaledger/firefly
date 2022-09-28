@@ -198,10 +198,10 @@
             "videoGuide": "Ledger migrasjons videoguide"
         },
         "ledgerInstallationGuide": {
-            "title": "Har du installert de nødvendige Ledger-appene?",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Sørg for at din Ledger firmware er oppdatert. Alle forhåndsinstallerte apper skal oppdateres til sine siste versjoner.",
-            "action": "Ja, jeg har installert disse appene"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "Gjenopprett eller migrer din Ledger",
@@ -749,12 +749,12 @@
             "confirm": "For å fortsette, bekreft at ledeteksten vises på din Ledger enhet"
         },
         "ledgerAppGuide": {
-            "title": "Guide å installere Ledger-appene",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Installer og åpne Ledger Live-appen",
                 "1": "Sjekk at din Ledger er tilkoblet",
-                "2": "Søk etter appene: {legacy} og IOTA (MIOTA)",
-                "3": "Installer begge appene: {legacy} og IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Husk at det er viktig å lukke Ledger Live før du kommer tilbake til Firefly"
             }
         },

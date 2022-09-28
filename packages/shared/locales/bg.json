@@ -198,10 +198,10 @@
             "videoGuide": "Видео инструкции за Ledger миграция"
         },
         "ledgerInstallationGuide": {
-            "title": "Инсталирахте ли необходимите Ledger приложения?",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Уверете се, че Ledger фърмуерът е обновен. Всички вече инсталирани приложения следва да са обновени до последна версия.",
-            "action": "Да, инсталирани са тези приложения"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "Възстановяване или миграране на Ledger",
@@ -749,12 +749,12 @@
             "confirm": "За да продължите потвърдете запитването на Вашето Ledger устройство"
         },
         "ledgerAppGuide": {
-            "title": "Наръчник за инсталиране на Ledger приложения",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Инсталиране и отваряне на Ledger Live приложение",
                 "1": "Уверете се, че Ledger е свързан",
-                "2": "Търсене на приложение: {legacy} и IOTA(MIOTA)",
-                "3": "Инсталиране на двете приложения: {legacy} и IOTA(MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Запомнете, че е важно да затворите Ledger Live преди да се върнете към Firefly"
             }
         },

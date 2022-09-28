@@ -63,7 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-                    "body": "Select the appropriate method to set up your {protocol} profile."
+                    "body": "Selecteer de juiste methode om uw {protocol} -profiel in te stellen."
                 },
                 "setupNew": {
                     "title": "Create a profile",
@@ -150,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "Enter your recovery phrase",
-                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
+                    "body": "Een herstel zin is 24 woorden lang en bevat alleen kleine letters met spaties ertussen. De herstel zin wordt gebruikt om bestaande Firefly profielen te herstellen.",
                     "enter": "Enter your secret recovery phrase",
                     "phraseDetected": "24 word recovery phrase detected"
                 },
@@ -170,18 +170,18 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "Your Shimmer staking rewards",
-                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
+                    "body": "Controleer of je Shimmer staking beloning juist is. Je moet mogelijk meerdere keren zoeken om je volledige saldo te vinden."
                 },
                 "success": {
-                    "title": "Shimmer claimed",
-                    "body": "You have successfully claimed your Shimmer tokens.",
+                    "title": "Schimmer opgeëist",
+                    "body": "Je hebt met succes je Shimmer tokens geclaimd.",
                     "totalRewards": "Total rewards"
                 }
             },
             "congratulations": {
-                "title": "Profile setup almost complete...",
+                "title": "Instellen van profiel bijna voltooid...",
                 "fundsMigrated": "Funds migrated",
-                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "body": "Je nieuwe profiel zal klaar zijn zodra het dashboard met succes geladen is.",
                 "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
                 "softwareMigratedBody": "You have successfully migrated your funds to the new network",
                 "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger migratie instructie video"
         },
         "ledgerInstallationGuide": {
-            "title": "Heb je de benodigde Ledger apps geïnstalleerd?",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Zorg ervoor dat uw Ledger firmware up-to-date is. Alle vooraf geïnstalleerde apps moeten worden bijgewerkt naar de nieuwste versies.",
-            "action": "Ja, ik heb deze apps geïnstalleerd"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "Herstel of Migreer uw Ledger",
@@ -709,7 +709,7 @@
         "transaction": {
             "title": "Bevestig transactie",
             "body": "U staat op het punt {amount} te sturen naar",
-            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
+            "surplusIncluded": "Deze transactie bevat een overschot. Controleer of dit het bedrag is dat u wilt versturen.",
             "sendingFromStakedAccount": "U wilt een transactie versturen vanuit een portemonnee die huidig gestaked word. Dit zou uw staking kunnen stopzetten. Voelt u vrij om uw transfer te voltooien, maar u moet daarna wellicht uw resterende tokens opnieuw laten staken.",
             "sendingFromStakedAccountBelowMinReward": "Je verstuurt een transactie vanuit een portemonnee die de minimum staking beloningen nog niet heeft bereikt. Dit kan er voor zorgen dat je tokens niet langer gestaket worden en je je staking beloningen op deze portemonnee verliest."
         },
@@ -749,12 +749,12 @@
             "confirm": "Om door te gaan, bevestig de prompt die wordt weergegeven op uw Ledger apparaat"
         },
         "ledgerAppGuide": {
-            "title": "Gids voor het installeren van de Ledger apps",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Installeer en open de Ledger Live applicatie",
                 "1": "Zorg ervoor dat uw Ledger is verbonden",
-                "2": "Zoek naar apps: {legacy} en IOTA (MIOTA)",
-                "3": "Installeer beide apps: {legacy} en IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Vergeet niet dat het belangrijk is om Ledger Live te sluiten voordat u terugkeert naar Firefly"
             }
         },
@@ -933,7 +933,7 @@
         "createWallet": "Maak een nieuw {protocol} profiel aan",
         "createWalletDescription": "Maak een nieuw profiel aan voor {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking beloningen",
-        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
+        "claimShimmerDescription": "Importeer IOTA profiel en claim staking beloning",
         "savePassword": "Wachtwoord opslaan",
         "useBiometric": "Biometrische beveiliging gebruiken",
         "setupPinCode": "Pincode instellen",
@@ -1217,7 +1217,7 @@
         "unstakedFunds": "Niet ingezet saldo",
         "accountColor": "Kleur portemonnee",
         "transactionTime": "Transactie tijd",
-        "surplus": "Surplus",
+        "surplus": "Overschot",
         "storageDeposit": "Opslag borg",
         "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
@@ -1295,7 +1295,7 @@
             "confirmed": "confirmed",
             "pending": "pending",
             "claimed": "claimed",
-            "unclaimed": "unclaimed"
+            "unclaimed": "niet-opgeëist"
         },
         "type": {
             "label": "Type",
@@ -1344,8 +1344,8 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidAmount": "The amount in deep link is not a number {amount}",
-            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
+            "invalidAmount": "Het bedrag in de diepe link is geen nummer {amount}",
+            "invalidSurplus": "Het overschot in de diepe link is geen nummer {surplus}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
@@ -1361,7 +1361,7 @@
             "error": "Claiming transaction failed"
         },
         "hideActivity": {
-            "success": "Activity was hidden",
+            "success": "Activiteit is verborgen",
             "error": "Verbergen van activiteit mislukt"
         },
         "faucetRequest": {
@@ -1382,8 +1382,8 @@
             "error": "An error occurred while searching for rewards"
         },
         "claimShimmerRewards": {
-            "success": "Shimmer rewards claimed for {accountAlias}",
-            "error": "An error occurred while claiming. Try again."
+            "success": "Schimmer beloning opgeëist voor {accountAlias}",
+            "error": "Er is een fout opgetreden tijdens het claimen. Probeer het opnieuw."
         }
     },
     "error": {
@@ -1441,11 +1441,11 @@
         "send": {
             "addressLength": "Adressen moeten {length, plural, one {1 teken} other {# tekens}} lang zijn.",
             "amountTooHigh": "Dit is hoger dan uw beschikbare saldo.",
-            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
+            "amountNoFloat": "Kan geen decimaal teken gebruiken voor de kleinste geselecteerde eenheid",
             "amountInvalidFormat": "De opgegeven waarde lijkt een ongeldige waarde te zijn.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
-            "tagTooLong": "The tag cannot be longer than 64 characters.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
+            "tagTooLong": "De tag mag niet langer zijn dan 64 tekens.",
+            "metadataTooLong": "De metadata mag niet langer zijn dan 8192 tekens.",
             "amountZero": "De waarde moet groter zijn dan 0.",
             "wrongAddressPrefix": "Adressen beginnen met het voorvoegsel {prefix}.",
             "wrongAddressFormat": "Het adres is niet correct opgemaakt.",
@@ -1546,7 +1546,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "The chosen expiration date is invalid."
+            "invalidExpirationDateTime": "De gekozen vervaldatum is ongeldig."
         },
         "node": {
             "http": "Het gebruik van nodes over HTTP laat verkeer onversleuteld en kan een veiligheidsrisico opleveren."
@@ -1581,30 +1581,30 @@
             "bodyDidNotReachMin": "Je hebt niet genoeg IOTA gestaket om de minimumbeloning te halen voor {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Deze wallet heeft niet genoeg IOTA tokens om de minimumbeloning te behalen voor airdrop {airdrop}."
         },
-        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
+        "optionalInput": "Deze optionele gegevens zullen openbaar zijn op de verkenner en zichtbaar zijn voor iedereen.",
         "transactionDetails": {
             "incoming": {
-                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "storageDeposit": "Een terugvorderbare-storting is nodig om uw transactie op de Tangle op te slaan.",
+                "giftedStorageDeposit": "De opslag-storting voor deze transactie is aan u cadeau gedaan. U hoeft de storting niet terug te betalen.",
                 "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "timelockDate": "De afzender stelt een tijdslot in voor deze fondsen. U kunt deze besteden zodra het tijdslot verloopt.",
+                "metadata": "Een optioneel gegevensveld voor het blijvend opslaan van gegevens op de Tangle.",
+                "tag": "Een kort optioneel gegevensveld. Door groepen transacties te taggen zouden deze makkelijker vindbaar kunnen worden."
             },
             "outgoing": {
-                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
-                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "storageDeposit": "Een opslag-storting is een terugvorderbare storting die nodig is om uw transactie op de Tangle op te slaan.",
+                "giftedStorageDeposit": "De ontvanger hoeft de storting niet terug te betalen.",
+                "expirationTime": "Als de ontvanger niet op tijd claimt dan worden je tokens aan jou teruggestuurd.",
+                "timelockDate": "U heeft een tijdslot toegevoegd aan deze transactie. De ontvanger zal deze gelden niet kunnen uitgeven totdat het tijdslot verloopt.",
+                "metadata": "Een optioneel gegevensveld voor het blijvend opslaan van gegevens op de Tangle.",
+                "tag": "Een kort optioneel gegevensveld. Door groepen transacties te taggen zouden deze makkelijker vindbaar kunnen worden."
             }
         },
         "mintNativeTokenForm": {
-            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
-            "description": "IRC30 optional parameter: The human-readable description of the token.",
-            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
-            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+            "decimals": "IRC30 optionele parameter: Aantal decimalen dat de token gebruikt wordt (deel het tokenbedrag met 10 ^ decimalen om de gebruikersvertegenwoordiging te krijgen).",
+            "description": "IRC30 optionele parameter: De menselijke leesbare beschrijving van de token.",
+            "url": "IRC30 optionele parameter: URL wijst naar meer bronnen over het token zoals een website of sociale mediagina.",
+            "logoUrl": "IRC30 optionele parameter: URL wijst naar een afbeeldingsbron van het token logo."
         }
     },
     "exports": {

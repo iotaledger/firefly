@@ -198,10 +198,10 @@
             "videoGuide": "دليل الترحيل من وإلى جهاز لِدْجرْ"
         },
         "ledgerInstallationGuide": {
-            "title": "هل قمت بتحميل التطبيقات الخاصة بجهاز لِدْجرْ ؟",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "تأكد من أن لديك أخر إصدار أو تحديث لتطبيق جهاز لِدْجرْ الخاص بك. ويجب أن تكون البرامج الأخرى المرتبطة مع جهازك لِدْجرْ بأحدث إصدارتها إيضا.",
-            "action": "نعم، لقد قمت بتثبيت هذه التطبيقات"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "إستعادة محتويات جهاز لِدْجرْ الخاص بك",
@@ -749,12 +749,12 @@
             "confirm": "للمتابعة، قم بتأكيد الطلب الظاهر على جهاز لِدْجرْ الخاص بك"
         },
         "ledgerAppGuide": {
-            "title": "دليل تثبيت تطبيقات جهاز لِدْجرْ",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "قم بتنصيب وفتح تطبيق لِدْجرْ الرئيسي",
                 "1": "تأكد من أن جهاز لِدْجرْ الخاص بك متصل",
-                "2": "إبحث عن تطبيقات: {legacy} و أَيُوتاَ (مأَيُوتاَ)",
-                "3": "يرجى تنصيب تطبيق كل من {legacy} و أَيُوتاَ (مأَيُوتاَ)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "لا تنسى أنه من المهم جدا إغلاق برنامج لِدْجرْ الرسمي قبل العودة للعمل على محفظة فايَرْفلاَي الخاصة بك"
             }
         },
