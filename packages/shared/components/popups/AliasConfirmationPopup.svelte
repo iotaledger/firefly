@@ -3,17 +3,18 @@
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
-    import { convertBech32ToEd25519 } from '@core/wallet'
+    import { checkActiveProfileAuth, activeProfile } from '@core/profile'
+    import { convertBech32ToEd25519, formatTokenAmountPrecise } from '@core/wallet'
     import { closePopup } from '@lib/popup'
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
     import type { AliasOutputOptions } from '@iota/wallet'
     import { onMount } from 'svelte'
+    import { BASE_TOKEN } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    let storageDeposit = 0
+    let storageDeposit: string = '0'
     const aliasOutputOptions: AliasOutputOptions = null
     let error: Error
 
@@ -53,7 +54,10 @@
                 foundryCounter: preparedOutput.foundryCounter,
                 immutableFeatures: preparedOutput.immutableFeatures,
             }
-            storageDeposit = Number(aliasOutputOptions.amount)
+            storageDeposit = formatTokenAmountPrecise(
+                Number(aliasOutputOptions.amount),
+                BASE_TOKEN[$activeProfile?.networkProtocol]
+            )
         } catch (err) {
             console.error(err)
         }

@@ -12,6 +12,6 @@
 
 <OnboardingButton
     primaryText={localize('actions.createAlias')}
-    secondaryText={localize('general.createAliasDescription')}
+    secondaryText={localize('actions.createAliasDescription')}
     onClick={handleCreateAlias}
 />
