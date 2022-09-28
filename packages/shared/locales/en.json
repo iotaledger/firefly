@@ -939,6 +939,7 @@
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "createAlias": "Create alias",
+        "createAliasDescription": "Create alias output",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPinCode": "Setup PIN code",
@@ -1700,7 +1701,8 @@
             "claimed": "claimed",
             "expired": "expired"
         },
-        "locked": "locked"
+        "locked": "locked",
+        "aliasCreated": "alias created"
     },
     "menus": {
         "expirationTimePicker": {

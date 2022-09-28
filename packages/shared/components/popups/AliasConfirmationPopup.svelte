@@ -9,6 +9,9 @@
     import { BaseError } from '@core/error'
     import { isTransferring } from '@lib/wallet'
     import type { AliasOutputOptions } from '@iota/wallet'
+    import { onMount } from 'svelte'
+
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     let storageDeposit = 0
     const aliasOutputOptions: AliasOutputOptions = null
@@ -57,15 +60,11 @@
     }
 
     async function createAlias(): Promise<void> {
-        await $selectedAccount.createAliasOutput(aliasOutputOptions)
-        closePopup()
-    }
-
-    async function onConfirm(): Promise<void> {
         error = null
         try {
             $isTransferring = true
-            await checkActiveProfileAuth(createAlias, { stronghold: true, ledger: false })
+            await $selectedAccount.createAliasOutput(aliasOutputOptions)
+            closePopup()
         } catch (err) {
             if (!error) {
                 error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
@@ -75,9 +74,23 @@
         }
     }
 
+    async function onConfirm(): Promise<void> {
+        await checkActiveProfileAuth(createAlias, { stronghold: true, ledger: false })
+    }
+
     function onCancel(): void {
         closePopup()
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            if (!error) {
+                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
+            }
+        }
+    })
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">

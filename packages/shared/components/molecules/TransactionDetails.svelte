@@ -123,10 +123,14 @@
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
     }
 
+    let copyableDetailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: copyableDetailsList = {
-        ...(aliasId && { aliasId }),
-        ...(governorAddress && { governorAddress }),
-        ...(stateControllerAddress && { stateControllerAddress }),
+        ...(governorAddress && {
+            governorAddress: { data: governorAddress },
+        }),
+        ...(stateControllerAddress && {
+            stateControllerAddress: { data: stateControllerAddress },
+        }),
     }
 
     function getDateFormat(date: Date): string {
@@ -181,6 +185,11 @@
                     {localize('pills.locked')}
                 </Pill>
             {/if}
+            {#if type === ActivityType.Alias}
+                <Pill backgroundColor="green-300" darkBackgroundColor="gray-200">
+                    {localize('pills.aliasCreated')}
+                </Pill>
+            {/if}
         </transaction-status>
         {#if type === ActivityType.Transaction}
             {#if subject?.type === 'account'}
@@ -197,6 +206,9 @@
                 </Box>
             {/if}
         {/if}
+        {#if type === ActivityType.Alias}
+            <AddressBox clearBackground clearPadding isCopyable address={aliasId} />
+        {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}
         <details-list class="flex flex-col space-y-2">
@@ -205,6 +217,14 @@
                     keyText={localize(`general.${key}`)}
                     valueText={value.data}
                     tooltipText={value.tooltipText}
+                />
+            {/each}
+            {#each Object.entries(copyableDetailsList) as [key, value]}
+                <KeyValueBox
+                    keyText={localize(`general.${key}`)}
+                    valueText={value.data}
+                    tooltipText={value.tooltipText}
+                    isCopyable
                 />
             {/each}
             {#if claimingTransactionId}
