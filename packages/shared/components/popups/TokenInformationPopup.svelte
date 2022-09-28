@@ -112,7 +112,7 @@
             <Button outline classes="w-full" onClick={onSkipClick}>
                 {localize('actions.skip')}
             </Button>
-            <Button autofocus classes="w-full" onClick={onVerifyClick}>
+            <Button classes="w-full" onClick={onVerifyClick}>
                 {localize('popups.tokenInformation.buttons.verifyToken')}
             </Button>
         {:else}

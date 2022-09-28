@@ -6,6 +6,7 @@ import { IProfileManager } from '@core/profile-manager'
 
 import { copyStrongholdFileToProfileDirectory } from './copyStrongholdFileToProfileDirectory'
 import { UnableToRestoreBackupForProfileManagerError } from '../errors'
+import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
 
 export async function restoreBackupForShimmerClaimingProfileManagerHelper(
     importFilePath: string,
@@ -20,6 +21,11 @@ export async function restoreBackupForShimmerClaimingProfileManagerHelper(
         await get(manager)?.setClientOptions(clientOptions)
     } catch (err) {
         console.error(err)
-        throw new UnableToRestoreBackupForProfileManagerError()
+        // Check if thrown err is because of an invalid password
+        if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
+            throw err
+        } else {
+            throw new UnableToRestoreBackupForProfileManagerError()
+        }
     }
 }

@@ -11,7 +11,7 @@ import { formatTokenAmountBestMatch } from '@core/wallet'
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
 import { showAppNotification } from '@lib/notifications'
 
-export async function findShimmerRewardsForAccount(account: IAccount): Promise<void> {
+export async function syncShimmerClaimingAccount(account: IAccount): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
     if (!_shimmerClaimingProfileManager) {
         throw new MissingShimmerClaimingProfileManagerError()

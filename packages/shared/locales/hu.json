@@ -63,9 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "{protocol, select, IOTA {egy} Shimmer {egy}} {protocol} profil beállítása",
-                    "chrysalisTitle": "TODO TODO TODO",
-                    "chrysalisBody": "TODO TODO TODO TODO TODO",
-                    "learnMore": "Tudjon meg többet a Shimmer hálózatról"
+                    "body": "Select the appropriate method to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Profil létrehozása",
@@ -152,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "Adja meg a helyreállító kódszólistát",
-                    "body": "A helyreállító kódszólista 24 kisbetűs, szóközökkel elválasztott szóból áll, amely már meglévő Firefly profilok helyreállítására szolgál.",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
                     "enter": "Adja meg a titkos helyreállító kódszólistáját",
                     "phraseDetected": "24 szóból álló helyreállító kódszólista észlelve"
                 },
@@ -172,20 +170,21 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "Az Ön Shimmer jutalma",
-                    "body": "Kérjük ellenőrizze, hogy a lekötés után jutalomként kapott Shimmer mennyisége helyese-e! Ha nem, kérjük használja az egyenlegkeresőt."
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
                 },
                 "success": {
-                    "title": "Jutalom beváltva",
-                    "body": "Sikeresen beváltotta Shimmer tokenjeit az új profiljában.",
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
                     "totalRewards": "Összes jutalom"
                 }
             },
             "congratulations": {
-                "title": "Profilbeállítás kész",
+                "title": "Profile setup almost complete...",
                 "fundsMigrated": "Egyenleg átköltöztetve",
-                "body": "Az új profilja használatra kész.",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
                 "softwareMigratedBody": "Sikeresen átköltöztette tokenjeit az új hálózatra",
-                "fireflyLedgerBody": "A Ledger számlája sikeresen helyreállt és továbbléphet a folyamatban.",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
                 "trinityLedgerBody": "Sikeresen átköltöztette Ledger eszközét az új hálózatra.",
                 "exportMigration": "Költöztetési napló exportálása és beállítások véglegesítése"
             }
@@ -199,10 +198,10 @@
             "videoGuide": "Ledger migráció video útmutató"
         },
         "ledgerInstallationGuide": {
-            "title": "Telepítette a szükéséges Ledger alkalmazásokat?",
+            "title": "Feltelepítette a(z) {protocol} appot a Ledger-eszközére?",
             "body1": "Mielőtt tovább lépne, először a Ledger Live segítségével telepítenie kell a {protocol} alkalmazást.",
             "body2": "Győződjön meg, hogy a Ledger firmware a legfrissebb verzióval rendelkezik. Minden előzetesen telepített alkalmazást a legújabb verzióra kell frissíteni.",
-            "action": "Igen, feltelepítettem az alkalmazásokat"
+            "action": "Igen, telepítettem a(z) {protocol} appot"
         },
         "importFromLedger": {
             "title": "Ledger helyreállítása vagy migrálása",
@@ -587,12 +586,12 @@
             "body": "Fontos, hogy rendszeresen készítsen biztonsági másolatot a tárcáiról és azok tranzakciós előzményeiről. Ha elveszíti a biztonsági mentést és a helyreállító kódszólistát, többé nem fog hozzáférni a pénzéhez."
         },
         "deeplinkAccountSwitch": {
-            "title": "Select a wallet",
-            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+            "title": "Tárca kiválasztása",
+            "body": "Egy mélyhivatkozást nyitott meg. Kérjük válassza ki tárcáját a folytatáshoz."
         },
         "deeplinkError": {
-            "title": "Failed link",
-            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+            "title": "Hibás mélyhivatkozás",
+            "body": "A mélyhivatkozás hibás vagy érvénytelen. Kérjük próbálja meg újra vagy ellenőrizze, hogy a mélyhivatkozás valóban helyes-e."
         },
         "deleteAccount": {
             "title": "{name} törölhető?",
@@ -710,6 +709,7 @@
         "transaction": {
             "title": "Küldés jóváhagyása",
             "body": "{amount} küldése",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "Olyan tárcából kíván küldeni, amely jelenleg letétbe van helyezve. Ez azzal járhat, hogy a továbbiakban tokenjei nem lesznek letétbe helyezve. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó összeget valószínűleg újra letétbe kell majd helyeznie.",
             "sendingFromStakedAccountBelowMinReward": "Egy olyan tárcából készül küldeni, amely nem érte még el a jóváírható jutalom minimális értékét. Ha mégis kiveszi a letétbe helyezett tokeneket, lehetséges, hogy ezzel a tárcával egyáltalán nem fog kapni jutalmat."
         },
@@ -749,12 +749,12 @@
             "confirm": "A folytatáshoz kövesse a megjelenített utasításokat a Ledger eszközén"
         },
         "ledgerAppGuide": {
-            "title": "Útmutató Ledger alkalmazások telepítéséhez",
+            "title": "Útmutató a(z) {legacy} app telepítéséhez",
             "steps": {
                 "0": "Ledger Live alkalmazás telepítése és megnyitása",
                 "1": "Győződjön meg, hogy a Ledger csatlakoztatva van",
-                "2": "Alkalmazások keresése: {legacy} és IOTA (MIOTA)",
-                "3": "Alkalmazások telepítése: {legacy} és IOTA (MIOTA)",
+                "2": "{legacy} app keresése. Előfordulhat, hogy engedélyeznie kell a Ledger Live fejlesztői módját.",
+                "3": "Telepítse a(z) {legacy} appot",
                 "4": "Fontos, hogy zárja be a Ledger Live alkalmazást mielőtt visszatér a Firefly-hoz"
             }
         },
@@ -771,13 +771,13 @@
             }
         },
         "verifyLedgerTransaction": {
-            "title": "Verify transaction",
-            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+            "title": "Tranzakció ellenőrzése",
+            "info": "Hasonlítsa össze a képernyőn és a hardver tárcán megjelenő tranzakciós adatokat és ha rendben vannak, hagyja jóvá a tranzakciót."
         },
         "verifyInternalLedgerTransaction": {
-            "title": "Verify internal transaction",
-            "info": "Please confirm the internal transaction on your ledger.",
-            "hint": "All assets will remain on your wallet when sending an internal transaction."
+            "title": "Tárcán belüli tranzakció",
+            "info": "Kérjük hagyja jóvá a tárcán belüli tranzakciót a hardver tárcán.",
+            "hint": "Minden token a tárcájában marad a tárcán belüli tranzakció végrehajtása során."
         },
         "ledgerAddress": {
             "title": "Fogadó cím megerősítése",
@@ -902,7 +902,7 @@
         "timeframe1Month": "1 hónap"
     },
     "actions": {
-        "apply": "Apply",
+        "apply": "Végrehajtás",
         "continue": "Tovább",
         "back": "Vissza",
         "previous": "Vissza",
@@ -933,7 +933,7 @@
         "createWallet": "Hozzon létre egy új {protocol}-profilt",
         "createWalletDescription": "Hozzon létre egy új profilt a {protocol, select, iota {Chrysalis} shimmer {Shimmer}}-hálózaton",
         "claimShimmer": "Shimmer jutalom igénylése",
-        "claimShimmerDescription": "IOTA-profil átköltöztetése és lekötési jutalom igénylése",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "savePassword": "Jelszó mentése",
         "useBiometric": "Biometrikus azonosítás használata",
         "setupPinCode": "PIN-kód beállítása",
@@ -960,6 +960,8 @@
         "chooseFile": "Válasszon egy fájlt",
         "dropHere": "Húzza ide a fájlt",
         "syncAll": "Minden szinkronizálása",
+        "import": "Importálás",
+        "importing": "Importálás",
         "export": "Exportálás",
         "exporting": "Exportálás",
         "exportNewStronghold": "Új Stronghold exportálása",
@@ -1052,7 +1054,8 @@
         "test": "Teszt",
         "testDeepLink": "Mélyhivatkozás tesztelése",
         "initialize": "Előkészítés",
-        "initializing": "Előkészítés folyamatban"
+        "initializing": "Előkészítés folyamatban",
+        "delete": "Törlés"
     },
     "general": {
         "recipient": "Címzett",
@@ -1112,7 +1115,7 @@
         "darkTheme": "Sötét",
         "systemTheme": "Rendszer",
         "balance": "Egyenleg",
-        "balanceWithValue": "Balance: {balance}",
+        "balanceWithValue": "Egyenleg: {balance}",
         "all": "Összes",
         "incoming": "Bejövő",
         "outgoing": "Kimenő",
@@ -1147,7 +1150,9 @@
         "loadingAccounts": "Betöltés folyamatban. Kérjük, várjon...",
         "addProfile": "Profil hozzáadása",
         "noRecentHistory": "Nincsenek előzmények",
+        "noFilteredActivity": "Nincs a szűrőfeltételeknek megfelelő tevékenység",
         "noAssets": "Nincsenek pénzeszközök",
+        "noFilteredAsset": "Nincs a szűrőfeltételeknek megfelelő token",
         "thisMonth": "Aktuális hónap",
         "search": "Keresés",
         "firstSync": "Tranzakciós lista szinkronizálása folyamatban. Ez eltarthat egy ideig...",
@@ -1212,6 +1217,7 @@
         "unstakedFunds": "Letétben nem lévő összeg",
         "accountColor": "Tárcaszín",
         "transactionTime": "Tranzakció időpontja",
+        "surplus": "Surplus",
         "storageDeposit": "Tárolt letét",
         "giftedStorageDeposit": "Ajándékozott tárolt letét",
         "expirationTime": "Lejárati idő",
@@ -1219,7 +1225,9 @@
         "claimedTime": "Igénylés ideje:",
         "copiedToClipboard": "Vágólapra másolva",
         "total": "Összes egyenleg: {balance}",
-        "availableBalance": "Rendelkezésre álló egyenleg: {balance}",
+        "availableBalanceWithValue": "Elérhető egyenleg: {balance}",
+        "availableBalance": "Elérhető egyenleg",
+        "availableBalanceTooltip": "Egy token teljes egyenlege mínusz a tárolt letétekhez szükséges összeg (pl. folyamatban levő tranzakciókhoz zárolt összegek, natív tokenekhez vagy NFT-khez fenntartott összegek).",
         "amountClaimed": "{amount} igényelve",
         "metadata": "Metaadatok",
         "tag": "Címke",
@@ -1237,7 +1245,9 @@
         "developerTools": "Fejlesztői eszközök",
         "testDeepLinkDescription": "Firefly-nak küldött mélyhivatkozás kipróbálása",
         "url": "URL",
-        "hash": "Ellenőrző összeg"
+        "hash": "Ellenőrző összeg",
+        "creating": "Létrehozás",
+        "updating": "Frissítés"
     },
     "filters": {
         "title": "Szűrők",
@@ -1254,9 +1264,9 @@
         "verificationStatus": {
             "label": "Ellenőrzés állapota",
             "new": "Új",
-            "skipped": "Skipped verification",
-            "selfVerified": "Self-verified",
-            "official": "Official"
+            "skipped": "Ellenőrzés kihagyva",
+            "selfVerified": "Önellenőrzött",
+            "official": "Hivatalos"
         },
         "asset": {
             "label": "Pénzeszközök"
@@ -1269,23 +1279,23 @@
             "less": "kevesebb, mint"
         },
         "date": {
-            "label": "Date",
-            "equals": "is equal to",
-            "last": "in the last",
-            "range": "is between",
-            "after": "is after",
-            "afterOrEquals": "is on or after",
-            "before": "is before",
-            "Days": "days",
-            "Months": "months",
-            "Years": "years"
+            "label": "Dátum",
+            "equals": "egyenlő",
+            "last": "az utóbbi",
+            "range": "között",
+            "after": "után",
+            "afterOrEquals": "napon vagy utána",
+            "before": "előtt",
+            "Days": "nap",
+            "Months": "hónap",
+            "Years": "év"
         },
         "status": {
             "label": "Állapot",
             "confirmed": "megerősítve",
             "pending": "függőben lévő",
             "claimed": "beváltott",
-            "unclaimed": "nem beváltott"
+            "unclaimed": "unclaimed"
         },
         "type": {
             "label": "Típus",
@@ -1334,7 +1344,8 @@
             "receivedWhileLoggedOut": "Kérjük, jelentkezzen be a mélyhivatkozás érvényesítéséhez",
             "notEnabled": "A mélyhivatkozások nincsenek engedélyezve",
             "invalidFormat": "A megadott mélyhivatkozás érvénytelen",
-            "invalidNumber": "A mélyhivatkozásban szereplő összeg nem egy szám: {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "Fizetés részletei a mélyhivatkozás alapján kitöltve"
@@ -1350,7 +1361,7 @@
             "error": "Igénylési tranzakció meghiúsult"
         },
         "hideActivity": {
-            "success": "Sikeresen rejtett tevékenység",
+            "success": "Activity was hidden",
             "error": "Tevékenység rejtése sikertelen"
         },
         "faucetRequest": {
@@ -1371,8 +1382,8 @@
             "error": "Hiba történt a jutalom keresése közben"
         },
         "claimShimmerRewards": {
-            "success": "Shimmer jutalom sikeresen igényelve a(z) {accountAlias} számlára",
-            "error": "Hiba történt a jutalom beváltása közben"
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         }
     },
     "error": {
@@ -1430,19 +1441,19 @@
         "send": {
             "addressLength": "A címnek {length, plural, one {# karakter} other {# karakter}} hosszúnak kell lennie.",
             "amountTooHigh": "Ez több, mint a rendelkezésre álló egyenleg.",
-            "amountNoFloat": "A legkisebb egység kiválasztása esetén nem használhat tizedesjegyeket",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Úgy tűnik, hogy az összeg egy érvénytelen szám.",
             "amountSmallerThanSubunit": "Az összegnek nagyobbnak kell lennie, mint a legkisebb alegység.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "The tag cannot be longer than 64 characters.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
             "amountZero": "Az összegnek nagyobbnak kell lennie, mint 0.",
             "wrongAddressPrefix": "A címeknek {prefix} előtaggal kell kezdődniük.",
             "wrongAddressFormat": "A cím nem megfelelő formátumú.",
             "invalidAddress": "Helytelen cím.",
-            "unknownAsset": "The asset is not known to this account.",
+            "unknownAsset": "A token ezen a számlán nem ismert.",
             "insufficientFunds": "Nincs elég összeg a tárcájában a tranzakció végrehajtásához.",
             "insufficientFundsStorageDeposit": "Nincs elegendő egyenlege a tárolási letét fedezetéhez",
-            "cannotClaimTwice": "Output has been already claimed",
+            "cannotClaimTwice": "A jutalmat már korábban igényelte",
             "noToAccount": "Nem választotta ki melyik tárcájába szeretne küldeni.",
             "sendingDust": "1 Mi-nél kevesebbet nem lehet elküldeni.",
             "leavingDust": "Minimum 1 Mi-nek maradnia kell a számláján.",
@@ -1488,7 +1499,9 @@
             "seedCharacters": "A seed csak A-Z vagy 9 karaktereket tartalmazhat",
             "phraseWordCount": "24 helyett csak {length, plural, one {#} other {#}} helyreállító kódszót adott meg.",
             "phraseUnrecognizedWord": "Ismeretlen szó \"{word}\" található a helyreállító kódszólistában",
-            "phraseCaseWord": "A “{word}” szó csak kisbetűkből állhat"
+            "phraseCaseWord": "A “{word}” szó csak kisbetűkből állhat",
+            "unableToCopyFile": "Nem sikerült a Stronghold biztonsági mentést átmásolni",
+            "unableToRestoreForProfileManager": "Nem sikerült a Stronghold biztonsági mentést helyreállítani a profil menedzserhez"
         },
         "ledger": {
             "appNotOpen": "Nyissa meg az új IOTA alkalmazást Ledger eszközén.",
@@ -1496,7 +1509,7 @@
             "legacyConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
             "locked": "Kérem oldja fel Ledger eszközét a PIN-kóddal.",
             "mnemonicMismatch": "Rossz Ledger eszközt csatlakozatott vagy az emlékeztető megváltozott.",
-            "notConnected": "No Ledger device detected.",
+            "notConnected": "Nem észlelhető hardver tárca.",
             "notFound": "Nem található Ledger eszköz.",
             "otherConnected": "Nem megfelelő alkalmazás van megnyitva a Ledger eszközén.",
             "generateAddress": "Hiba történt a cím generálása közben.",
@@ -1520,11 +1533,20 @@
             "invalidStakingEventId": "Hibás staking esemény azonosító."
         },
         "invalidDate": "Helytelen dátum",
-        "invalidTime": "Helytelen idő"
+        "invalidTime": "Helytelen idő",
+        "shimmerClaiming": {
+            "missingProfileManager": "Nem található Shimmer-igénylő profilmenedzser",
+            "cannotInitialiseAccount": "Nem sikerült létrehozni Shimmer-igénylő fiókot",
+            "missingAccount": "Nem található Shimmer-igénylő fiók"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Helytelen {eventName} esemény számlasorszám",
+            "invalidPayload": "Helytelen {eventName} esemény tartalom"
+        }
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "A kiválasztott lejárati dátum/idő érvénytelen."
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "A csomópontok HTTP kapcsolaton történő elérése a titkosítatlan adatforgalom miatt biztonsági kockázattal jár."
@@ -1558,6 +1580,31 @@
             "bodyWillNotReachMin": "Nem fogja elérni a minimálisan jóváírható jutalmat a staking esemény végéig, hacsak nem helyez letétbe még több IOTA tokent.",
             "bodyDidNotReachMin": "Nem helyezett letétbe elegendő IOTA tokent ahhoz, hogy elérje a minimálisan jóváírható {airdrop} jutalmat ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "A tárcában nincs elegendő IOTA token ahhoz, hogy a minimálisan jóváírható {airdrop} jutalmat megkapja."
+        },
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
+            "outgoing": {
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            }
+        },
+        "mintNativeTokenForm": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {

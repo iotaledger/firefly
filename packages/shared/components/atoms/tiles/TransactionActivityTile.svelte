@@ -8,20 +8,32 @@
         ActivityAsyncStatus,
         ActivityDirection,
         claimActivity,
-        rejectActivity,
-        InclusionState,
-        selectedAccountAssets,
         getAssetFromPersistedAssets,
+        getTimeDifference,
+        InclusionState,
         IPersistedAsset,
         ITransactionActivityData,
-        getTimeDifference,
-        Subject,
         NotVerifiedStatus,
+        rejectActivity,
+        selectedAccountAssets,
+        Subject,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
-    import { ActivityAsyncStatusPill, ClickableTile, HR, Icon, Text, Spinner, AssetIcon, Pill } from 'shared/components'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
+    import {
+        ActivityAsyncStatusPill,
+        ClickableTile,
+        HR,
+        TooltipIcon,
+        Text,
+        AssetIcon,
+        Pill,
+        Button,
+    } from 'shared/components'
     import { FontWeight } from 'shared/components/Text.svelte'
+    import { Position } from 'shared/components/Tooltip.svelte'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let activityId: string
     export let amount: string
@@ -30,51 +42,70 @@
     export let data: ITransactionActivityData
 
     let asset: IPersistedAsset
+    let asyncStatusTooltipText: string
 
-    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(data.assetId))
-    $: isIncomingActivityUnclaimed =
-        (data.direction === ActivityDirection.In || data.isSelfTransaction) &&
-        data.asyncStatus === ActivityAsyncStatus.Unclaimed
-    $: isTimelocked = data.asyncStatus === ActivityAsyncStatus.Timelocked
     $: title = getTitle(data, inclusionState)
     $: subjectLocale = getSubjectLocale(data.subject, data.isShimmerClaiming)
     $: timeDiff = getTimeDiff(data)
+    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(data.assetId))
 
-    function getTimeDiff(txData: ITransactionActivityData): string {
-        if (isTimelocked) {
-            return getTimeDifference(txData.timelockDate, $time)
-        } else if (txData.isAsync && !txData.isClaimed && txData?.expirationDate) {
-            return getTimeDifference(txData.expirationDate, $time)
-        } else {
-            return localize('general.none')
+    $: isUnclaimed = data.asyncStatus === ActivityAsyncStatus.Unclaimed
+    $: isTimelocked = data.asyncStatus === ActivityAsyncStatus.Timelocked
+    $: isIncoming = data.direction === ActivityDirection.In
+    $: isIncomingActivityUnclaimed = (isIncoming || data.isSelfTransaction) && isUnclaimed
+    $: isAsyncActivity = isTimelocked || (data.isAsync && (data.direction === ActivityDirection.Out || isUnclaimed))
+    $: {
+        if (isUnclaimed || isTimelocked) {
+            const activityDirectionKey = isIncoming ? 'incoming' : 'outgoing'
+            const activityAsyncStatusKey = isUnclaimed ? 'expirationTime' : 'timelockDate'
+            const textKey = `tooltips.transactionDetails.${activityDirectionKey}.${activityAsyncStatusKey}`
+            asyncStatusTooltipText = localize(textKey)
         }
     }
 
+    function getTimeDiff(txData: ITransactionActivityData): string {
+        const { asyncStatus, isAsync, isClaimed, expirationDate, timelockDate } = txData
+
+        if (asyncStatus === ActivityAsyncStatus.Timelocked) {
+            return getTimeDifference(timelockDate, $time)
+        }
+        if (isAsync && !isClaimed && expirationDate) {
+            return getTimeDifference(expirationDate, $time)
+        }
+        return localize('general.none')
+    }
+
     function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
-        if (txData.isShimmerClaiming) {
-            return inclusionState === InclusionState.Confirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
-        } else if (txData.isInternal) {
-            return inclusionState === InclusionState.Confirmed ? 'general.transfer' : 'general.transferring'
-        } else {
-            if (txData.direction === ActivityDirection.In) {
-                return inclusionState === InclusionState.Confirmed ? 'general.received' : 'general.receiving'
-            } else if (txData.direction === ActivityDirection.Out) {
-                return inclusionState === InclusionState.Confirmed ? 'general.sent' : 'general.sending'
-            }
+        const { isShimmerClaiming, isInternal, direction } = txData
+        const isInclusionStateConfirmed = inclusionState === InclusionState.Confirmed
+
+        if (isShimmerClaiming) {
+            return isInclusionStateConfirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
+        }
+        if (isInternal) {
+            return isInclusionStateConfirmed ? 'general.transfer' : 'general.transferring'
+        }
+        if (direction === ActivityDirection.In) {
+            return isInclusionStateConfirmed ? 'general.received' : 'general.receiving'
+        }
+        if (direction === ActivityDirection.Out) {
+            return isInclusionStateConfirmed ? 'general.sent' : 'general.sending'
         }
     }
 
     function getSubjectLocale(subject: Subject, isShimmerClaiming: boolean): string {
         if (isShimmerClaiming) {
             return localize('general.shimmerGenesis')
-        } else if (subject?.type === 'account') {
-            return truncateString(subject?.account?.name, 13, 0)
-        } else if (subject?.type === 'address') {
-            return truncateString(subject?.address, $networkHrp.length, 6)
-        } else {
-            return localize('general.unknownAddress')
         }
+        if (subject?.type === 'account') {
+            return truncateString(subject?.account?.name, 13, 0)
+        }
+        if (subject?.type === 'address') {
+            return truncateString(subject?.address, $networkHrp.length, 6)
+        }
+        return localize('general.unknownAddress')
     }
+
     function handleTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
             openPopup({
@@ -122,8 +153,8 @@
     onClick={handleTransactionClick}
     classes={inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}
 >
-    <div class="w-full flex flex-col space-y-4">
-        <div class="flex flex-row items-center text-left space-x-4">
+    <activity-tile class="w-full flex flex-col space-y-4">
+        <info-container class="flex flex-row items-center text-left space-x-4">
             <AssetIcon {asset} showVerifiedBadgeOnly />
             <div class="flex flex-col w-full space-y-0.5">
                 <div class="flex flex-row justify-between space-x-1">
@@ -137,67 +168,68 @@
                     <Text
                         fontWeight={FontWeight.semibold}
                         lineHeight="140"
-                        color={data.direction === ActivityDirection.In ? 'blue-700' : ''}
+                        color={isIncoming ? 'blue-700' : ''}
                         classes="whitespace-nowrap"
                     >
                         {amount}
                     </Text>
                 </div>
-
                 <div class="flex flex-row justify-between">
                     <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
-                        {localize(
-                            data.direction === ActivityDirection.In ? 'general.fromAddress' : 'general.toAddress',
-                            { values: { account: subjectLocale } }
-                        )}
+                        {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
+                            values: { account: subjectLocale },
+                        })}
                     </Text>
                     <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
                         {fiatAmount}
                     </Text>
                 </div>
             </div>
-        </div>
-        {#if isTimelocked || (data.isAsync && (data.direction === ActivityDirection.Out || !data.isClaimed))}
+        </info-container>
+        {#if isAsyncActivity}
             <HR />
-            <div class="flex w-full justify-between space-x-4">
-                <div class="flex flex-row justify-center items-center space-x-2">
-                    {#if !data.isClaimed || isTimelocked}
-                        <Icon width="16" height="16" icon="timer" classes="text-gray-600" />
+            <async-activity-container class="flex w-full justify-between space-x-4">
+                <info-container class="flex flex-row justify-center items-center space-x-2">
+                    {#if isUnclaimed || isTimelocked}
+                        <TooltipIcon
+                            icon={isTimelocked ? IconEnum.Timelock : IconEnum.ExpirationTime}
+                            iconClasses="text-gray-600 dark:text-gray-200"
+                            title={localize(`general.${isUnclaimed ? 'expirationTime' : 'timelockDate'}`)}
+                            text={asyncStatusTooltipText}
+                            position={Position.Top}
+                        />
                         <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
                     {/if}
-                </div>
-                <div class="flex flex-row justify-end w-1/2 space-x-2">
+                </info-container>
+                <claim-container class="flex flex-row justify-end w-1/2 space-x-2">
                     {#if isTimelocked}
                         <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
                             {localize('pills.locked')}
                         </Pill>
                     {:else if isIncomingActivityUnclaimed}
-                        <button
+                        <Button
+                            onClick={handleRejectClick}
                             disabled={data.isClaiming || data.isRejected}
-                            class="action px-3 py-1 w-1/2 text-center rounded-4 font-normal text-14 text-blue-500 bg-transparent 
-                            {data.isClaiming || data.isRejected
-                                ? 'cursor-default text-gray-500'
-                                : 'cursor-pointer hover:bg-blue-200'}"
-                            on:click|stopPropagation={handleRejectClick}
+                            inlineStyle="min-width: 4rem;"
+                            size={ButtonSize.Small}
+                            outline
                         >
                             {localize('actions.reject')}
-                        </button>
-                        <button
-                            class="action px-3 py-1 w-1/2 h-8 text-center rounded-4 font-normal text-14 text-white bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-400"
-                            on:click|stopPropagation={handleClaimClick}
+                        </Button>
+                        <Button
+                            onClick={handleClaimClick}
                             disabled={data.isClaiming}
+                            isBusy={data.isClaiming}
+                            inlineStyle="min-width: 4rem;"
+                            size={ButtonSize.Small}
                         >
-                            {#if data.isClaiming}
-                                <Spinner busy={true} classes="justify-center h-fit" />
-                            {:else}
-                                {localize('actions.claim')}
-                            {/if}
-                        </button>
+                            {localize('actions.claim')}
+                        </Button>
                     {:else}
                         <ActivityAsyncStatusPill asyncStatus={data.asyncStatus} />
                     {/if}
-                </div>
-            </div>
+                </claim-container>
+            </async-activity-container>
         {/if}
-    </div>
+    </activity-tile>
 </ClickableTile>
