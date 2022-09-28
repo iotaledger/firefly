@@ -25,7 +25,7 @@
 </script>
 
 <Text type="h4" classes="mb-6"
-    >{localize('views.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Text
+    >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Text
 >
 <div class="w-full flex flex-row flex-wrap">
     <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" bgClasses="top-6" />
