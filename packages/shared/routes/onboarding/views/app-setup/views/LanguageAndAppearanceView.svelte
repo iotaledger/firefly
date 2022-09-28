@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, Dropdown, OnboardingLayout, Text } from 'shared/components'
-    import { appSettings, AppTheme, mobile, shouldBeDarkMode } from '@core/app'
+    import { appSettings, AppTheme, hasCompletedAppSetup, mobile, shouldBeDarkMode } from '@core/app'
     import { Locale, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
     import type { DropdownChoice } from '@core/utils'
@@ -9,7 +9,9 @@
         initialiseOnboardingProfile,
         onboardingProfile,
         shouldBeDeveloperProfile,
+        updateOnboardingProfile,
     } from '../../../../../lib/contexts/onboarding'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     /**
      * NOTE: It is necessary to use locale directly rather than the
@@ -43,6 +45,7 @@
     }
 
     function onContinueClick(): void {
+        hasCompletedAppSetup.set(true)
         $appSetupRouter.next()
     }
 
@@ -52,7 +55,13 @@
 
     onMount(() => {
         _clonedVariable = appTheme
-        initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile())
+        initialiseOnboardingProfile(
+            $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
+            NetworkProtocol.Shimmer
+        )
+        if (!shouldBeDeveloperProfile()) {
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+        }
     })
 </script>
 

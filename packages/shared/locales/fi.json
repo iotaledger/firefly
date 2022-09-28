@@ -63,7 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "Luo {protocol, select, IOTA {} Shimmer {}} {protocol}-profiili",
-                    "body": "Select the method you will use to set up your {protocol} profile."
+                    "body": "Select the appropriate method to set up your {protocol} profile."
                 },
                 "setupNew": {
                     "title": "Luo profiili",
@@ -150,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "Syötä palautuslausekkeesi",
-                    "body": "Palautuslauseke on pituudeltaan 24 sanaa, kaikki pienillä kirjaimilla ja välilyönnit sanojen välissä. Sitä käytetään olemassaolevien Firefly-profiilien palauttamiseen.",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
                     "enter": "Syötä salainen palautuslausekkeesi",
                     "phraseDetected": "24 sanan palautuslauseke havaittu"
                 },
@@ -170,21 +170,21 @@
             "shimmerClaiming": {
                 "claimRewards": {
                     "title": "Sinun Shimmer-palkkiosi stakingista",
-                    "body": "Ole hyvä ja tarkista, että sinun Shimmer-palkkiosi stakingista ovat oikein. Jos näin ei ole, käytä saldon etsijää."
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
                 },
                 "success": {
-                    "title": "Palkkiot lunastettu",
-                    "body": "Olet onnistuneesti lunastanut Shimmer-tokenit uudelle profiilillesi.",
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
                     "totalRewards": "Palkkiot yhteensä"
                 }
             },
             "congratulations": {
-                "title": "Profile setup is almost complete",
+                "title": "Profile setup almost complete...",
                 "fundsMigrated": "Varat siirretty",
-                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
-                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
                 "softwareMigratedBody": "Olet onnistuneesti siirtänyt varasi uuteen verkkoon",
-                "fireflyLedgerBody": "Ledger-tilisi on onnistuneesti palautettu ja voit nyt jatkaa.",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
                 "trinityLedgerBody": "Olet onnistuneesti siirtänyt Ledger-laitteesi uuteen verkkoon.",
                 "exportMigration": "Vie migraatioloki ja viimeistele määritys"
             }
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger-migraation opasvideo"
         },
         "ledgerInstallationGuide": {
-            "title": "Oletko asentanut tarvittavat Ledger-sovellukset?",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Ennen kuin jatkat, sinun on käytettävä Ledger Liveä löytääksesi ja asentaaksesi {protocol} -sovelluksen.",
             "body2": "Varmista, että Ledger-laitteesi laiteohjelmisto on ajan tasalla. Kaikki valmiiksi asennetut sovellukset tulee päivittää uusimpiin versioihin.",
-            "action": "Kyllä, olen asentanut nämä sovellukset"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "Palauta tai siirrä Ledger-laitteesi",
@@ -709,6 +709,7 @@
         "transaction": {
             "title": "Vahvista transaktio",
             "body": "Olet lähettämässä {amount} osoitteeseen",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen.",
             "sendingFromStakedAccountBelowMinReward": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta."
         },
@@ -748,12 +749,12 @@
             "confirm": "Jatkaaksesi, vahvista Ledger-laitteellasi näkyvä kehotus"
         },
         "ledgerAppGuide": {
-            "title": "Opas Ledger-sovellusten asentamiseen",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Asenna ja avaa Ledger Live -sovellus",
                 "1": "Varmista, että Ledger-laitteesi on yhdistetty",
-                "2": "Etsi sovelluksia: {legacy} ja IOTA (MIOTA)",
-                "3": "Asenna molemmat sovellukset: {legacy} ja IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Muista, että on tärkeää sulkea Ledger Live ennen Fireflyhyn palaamista"
             }
         },
@@ -932,7 +933,7 @@
         "createWallet": "Luo uusi {protocol}-profiili",
         "createWalletDescription": "Luo uusi profiili {protocol, select, iota {Chrysalis} shimmer {Shimmer}}-alustalle",
         "claimShimmer": "Lunasta Shimmer-palkkiosi stakingista",
-        "claimShimmerDescription": "Siirrä IOTA-profiili ja lunasta staking-palkkiot",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "savePassword": "Tallenna salasana",
         "useBiometric": "Käytä biometristä suojausta",
         "setupPinCode": "Määritä PIN-koodi",
@@ -1216,6 +1217,7 @@
         "unstakedFunds": "Varat ilman stakea",
         "accountColor": "Lompakon väri",
         "transactionTime": "Transaktion aika",
+        "surplus": "Surplus",
         "storageDeposit": "Tallennusvakuus",
         "giftedStorageDeposit": "Lahjoitettu tallennusvakuus",
         "expirationTime": "Erääntymisaika",
@@ -1293,7 +1295,7 @@
             "confirmed": "vahvistettu",
             "pending": "odottaa",
             "claimed": "lunastettu",
-            "unclaimed": "lunastamaton"
+            "unclaimed": "unclaimed"
         },
         "type": {
             "label": "Tyyppi",
@@ -1343,6 +1345,7 @@
             "notEnabled": "Syvälinkit eivät ole käytössä",
             "invalidFormat": "Seuraamasi syvälinkki on virheellinen",
             "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "Maksutiedot lisätty syvälinkistä"
@@ -1358,7 +1361,7 @@
             "error": "Transaktion lunastaminen epäonnistui"
         },
         "hideActivity": {
-            "success": "Tapahtuman piilotus onnistui",
+            "success": "Activity was hidden",
             "error": "Tapahtuman piilotus epäonnistui"
         },
         "faucetRequest": {
@@ -1379,8 +1382,8 @@
             "error": "Palkkioita etsiessä tapahtui virhe"
         },
         "claimShimmerRewards": {
-            "success": "Successfully claimed Shimmer rewards for {accountAlias}",
-            "error": "Palkkioita lunastaesssa tapahtui virhe"
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         }
     },
     "error": {
@@ -1438,11 +1441,11 @@
         "send": {
             "addressLength": "Osoitteiden tulee olla {length, plural, one {# merkin pituinen} other {# merkkiä pitkä}}.",
             "amountTooHigh": "Tämä on suurempi kuin käytettävissä oleva saldosi.",
-            "amountNoFloat": "Et voi käyttää desimaalipaikkoja, kun valittuna on pienin yksikkö",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Summa näyttää olevan virheellinen luku.",
             "amountSmallerThanSubunit": "Summan on oltava isompi kuin pienin alayksikkö.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "The tag cannot be longer than 64 characters.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
             "amountZero": "Summan on oltava suurempi kuin 0.",
             "wrongAddressPrefix": "Osoitteet alkavat etuliitteellä {prefix}.",
             "wrongAddressFormat": "Osoite on muotoiltu virheellisesti.",
@@ -1543,7 +1546,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "Valittu erääntymispäivä/-aika on virheellinen."
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "Solmujen käyttäminen HTTP:n yli jättää liikenteen salaamattomaksi ja voi aiheuttaa turvallisuusriskin."
@@ -1578,24 +1581,30 @@
             "bodyDidNotReachMin": "Et stakennut tarpeeksi IOTA:a saavuttaaksesi vähimmäispalkkioarvoa airdropille {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Tässä lompakossa ei ole riittävästi IOTA-tokeneita vähimmäispalkkion saavuttamiseksi airdropille {airdrop}."
         },
-        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
             "incoming": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
-                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             },
             "outgoing": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             }
+        },
+        "mintNativeTokenForm": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {

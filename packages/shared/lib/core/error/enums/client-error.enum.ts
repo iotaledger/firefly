@@ -1,5 +1,6 @@
 export enum ClientError {
+    InvalidStrongholdPassword = 'invalidStrongholdPassword',
     NoSyncedNode = 'noSyncedNode',
-    TimeNotSynced = 'timeNotSynced',
     NotEnoughFundsToClaim = 'NotEnoughFundsToClaim',
+    TimeNotSynced = 'timeNotSynced',
 }
