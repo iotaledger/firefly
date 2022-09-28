@@ -17,6 +17,7 @@ import {
     getTransactionActivityData,
 } from '../utils'
 import { IUTXOInput } from '@iota/types'
+import { containsFunds } from '../utils/transactions/containsFunds'
 
 export class Activity implements IActivity {
     id: string
@@ -36,7 +37,7 @@ export class Activity implements IActivity {
         const type = getActivityType(outputs)
 
         this.type = type
-        this.isHidden = false
+        this.isHidden = !containsFunds(processedTransaction, account)
 
         this.transactionId = transactionId
         this.inclusionState = inclusionState

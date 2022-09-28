@@ -1,6 +1,5 @@
 import { IAccountState } from '@core/account'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
-import { containsFunds } from '@core/wallet/utils/transactions'
 import { OutputData, Transaction } from '@iota/wallet'
 import { IProcessedTransaction } from '../../interfaces/processed-transaction.interface'
 
@@ -35,9 +34,7 @@ export async function preprocessOutputsForAccount(account: IAccountState): Promi
             account
         )
 
-        if (containsFunds(processedTransaction, account)) {
-            processedTransactions.push(processedTransaction)
-        }
+        processedTransactions.push(processedTransaction)
     }
     return processedTransactions
 }

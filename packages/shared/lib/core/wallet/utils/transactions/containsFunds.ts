@@ -20,5 +20,5 @@ export function containsFunds(processedTransaction: IProcessedTransaction, accou
 
     const { storageDeposit } = getStorageDepositFromOutput(output)
     const rawAmount = getAmountFromOutput(output) - storageDeposit
-    return isAsync && (rawAmount > 0 || (nativeToken && Number(nativeToken.amount) > 0))
+    return !isAsync || rawAmount > 0 || (nativeToken && Number(nativeToken.amount) > 0)
 }

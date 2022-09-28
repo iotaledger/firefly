@@ -98,7 +98,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
             const asset = getAssetFromPersistedAssets(_activity.data.assetId)
-            return !_activity.isHidden && asset && isValidIRC30(asset.metadata)
+            return asset && isValidIRC30(asset.metadata)
         })
 
         activityList = activityList.filter((activity) => isVisibleActivity(activity))
