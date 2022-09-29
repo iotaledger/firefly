@@ -17,7 +17,7 @@
         findShimmerRewards,
         FindShimmerRewardsError,
         syncShimmerClaimingAccount,
-        hasNoUnclaimedRewards,
+        canUserRecoverWithShimmerClaimingAccounts,
         hasUserClaimedRewards,
         isOnboardingLedgerProfile,
         onboardingProfile,
@@ -49,7 +49,7 @@
     function canUserContinue(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
         return (
             hasUserClaimedRewards(shimmerClaimingAccounts) ||
-            (hasSearchedForRewardsBefore && hasNoUnclaimedRewards(shimmerClaimingAccounts))
+            (hasSearchedForRewardsBefore && canUserRecoverWithShimmerClaimingAccounts(shimmerClaimingAccounts))
         )
     }
 

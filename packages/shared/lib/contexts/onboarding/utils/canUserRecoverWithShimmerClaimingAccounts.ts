@@ -1,6 +1,6 @@
 import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
 
-export function hasNoUnclaimedRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
+export function canUserRecoverWithShimmerClaimingAccounts(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
     return shimmerClaimingAccounts?.every((shimmerClaimingAccount) => {
         const { state } = shimmerClaimingAccount
         return (
