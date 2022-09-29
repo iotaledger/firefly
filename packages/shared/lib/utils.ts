@@ -478,3 +478,9 @@ export function getNumberOfDecimalPlaces(x: number): number {
 
     return x.toString().split('.')[1].length || 0
 }
+
+export function convertStringToUtf8Array(input: string): number[] {
+    const characterArray = input.split('')
+    const numberArray = characterArray.map((c) => c.charCodeAt(0))
+    return numberArray
+}
