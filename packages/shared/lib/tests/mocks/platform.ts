@@ -117,6 +117,9 @@ const Platform: IPlatform = {
     loadJsonFile(filepath: string): Promise<unknown> {
         return Promise.resolve({ filepath })
     },
+    getLanguageCode(): Promise<string> {
+        return Promise.resolve('')
+    },
 }
 
 window['__CAPACITOR__'] = Platform
