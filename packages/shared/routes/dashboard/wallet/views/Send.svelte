@@ -74,6 +74,7 @@
     $: to, (toError = '')
     $: address, (addressError = '')
     $: showBridgeFields = Boolean($sendParams.receiverAddress && $sendParams.chainId)
+    $: data = showBridgeFields ? `${$sendParams.receiverAddress}:${$sendParams.chainId}` : null
 
     const transferSteps: {
         [key in TransferProgressEventType]: {
@@ -368,7 +369,7 @@
                       amountRaw,
                       selectedSendType === SEND_TYPE.INTERNAL
                   )
-                : onSend($selectedAccountStore.id, address, amountRaw)
+                : onSend($selectedAccountStore.id, address, amountRaw, data)
 
         if ($isSoftwareProfile) {
             _send(isInternal)
