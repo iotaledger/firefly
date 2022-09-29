@@ -47,8 +47,12 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.Onboarding: {
-                loginRoute.set(LoginRoute.LoadProfile)
-                nextRoute = AppRoute.Login
+                if (params.shouldAddProfile) {
+                    nextRoute = AppRoute.Onboarding
+                } else {
+                    loginRoute.set(LoginRoute.LoadProfile)
+                    nextRoute = AppRoute.Login
+                }
                 break
             }
         }

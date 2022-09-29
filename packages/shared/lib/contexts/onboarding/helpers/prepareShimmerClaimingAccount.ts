@@ -5,7 +5,7 @@ import { Transaction } from '@iota/wallet'
 import { IAccount, sumTotalFromOutputs, syncAccountsInParallel, syncAccountsInSeries } from '@core/account'
 import { filterShimmerClaimingOutputs } from '@core/utils'
 
-import { DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS } from '../constants'
+import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS } from '../constants'
 import { ShimmerClaimingAccountState } from '../enums'
 import { IShimmerClaimingAccount } from '../interfaces'
 import { isOnboardingLedgerProfile } from '../stores'
@@ -27,9 +27,9 @@ export async function prepareShimmerClaimingAccount(
              * the device from multiple profile managers at once),
              * we sync the accounts in series.
              */
-            await syncAccountsInSeries(DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS, account, twinAccount)
+            await syncAccountsInSeries(SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, account, twinAccount)
         } else {
-            await syncAccountsInParallel(DEFAULT_SHIMMER_CLAIMING_SYNC_OPTIONS, account, twinAccount)
+            await syncAccountsInParallel(SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, account, twinAccount)
         }
     }
 

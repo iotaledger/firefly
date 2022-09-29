@@ -182,9 +182,9 @@
                 "title": "Konfiguracja profilu jest już prawie zakończona...",
                 "fundsMigrated": "Środki zostały przeniesione",
                 "body": "Twój nowy profil będzie gotowy, gdy główny panel portfela zostanie pomyślnie załadowany.",
-                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
+                "ledgerHint": "Nie odłączaj urządzenia Ledger do czasu załadowania głównego panelu portfela.",
                 "softwareMigratedBody": "Twoje środki zostały pomyślnie przeniesione do nowej sieci",
-                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
+                "fireflyLedgerBody": "Twój profil Ledger został pomyślnie przywrócony i możesz teraz kontynuować.",
                 "trinityLedgerBody": "Pomyślnie migrowałeś swój portfel Ledger do nowej sieci.",
                 "exportMigration": "Eksportuj dziennik migracji i zakończ konfigurację"
             }
@@ -198,10 +198,10 @@
             "videoGuide": "Migracja z użyciem portfela Ledger - poradnik wideo"
         },
         "ledgerInstallationGuide": {
-            "title": "Czy zainstalowałeś niezbędne aplikacje na urządzeniu Ledger?",
+            "title": "Czy zainstalowałeś aplikację {protocol} na swoim urządzeniu Ledger?",
             "body1": "Zanim przejdziesz dalej, musisz użyć aplikacji Ledger Live aby wyszukać i zainstalować aplikację {protocol}.",
             "body2": "Upewnij się, że oprogramowanie Ledger jest aktualne. Wszystkie zainstalowane aplikacje powinny być zaktualizowane do najnowszych wersji.",
-            "action": "Tak, zainstalowałem te aplikacje"
+            "action": "Tak, zainstalowałem aplikację {protocol}"
         },
         "importFromLedger": {
             "title": "Przywróć lub migruj swoje urządzenie Ledger",
@@ -749,12 +749,12 @@
             "confirm": "Aby kontynuować, potwierdź informację wyświetlaną na urządzeniu Ledger"
         },
         "ledgerAppGuide": {
-            "title": "Jak zainstalować wymagane aplikacje na urządzeniu Ledger?",
+            "title": "Przewodnik po instalacji aplikacji {legacy}",
             "steps": {
                 "0": "Zainstaluj i otwórz aplikację Ledger Live",
                 "1": "Upewnij się, że Twój Ledger jest połączony",
-                "2": "Wyszukaj aplikacje: {legacy} oraz IOTA (MIOTA)",
-                "3": "Zainstaluj obie aplikacje: {legacy} oraz IOTA (MIOTA)",
+                "2": "Wyszukaj aplikację {legacy}. Może być konieczne włączenie \"Developer mode\" w Ledger Live.",
+                "3": "Zainstaluj aplikację {legacy}",
                 "4": "Pamiętaj, żeby zamknąć aplikację Ledger Live przed powrotem do Firefly"
             }
         },
@@ -1586,7 +1586,7 @@
             "incoming": {
                 "storageDeposit": "Zwrotny depozyt tokena, potrzebny do przechowywania transakcji w sieci Tangle.",
                 "giftedStorageDeposit": "Depozyt magazynowy dla tej transakcji został Ci podarowany. Nie musisz zwracać depozytu.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "expirationTime": "Odbierz te środki przed upływem ich terminu ważności, w przeciwnym razie zostaną one zwrócone do nadawcy.",
                 "timelockDate": "Nadawca ustawił blokadę czasową tych środków. Będziesz mógł je wydać dopiero wtedy, gdy blokada czasowa wygaśnie.",
                 "metadata": "Opcjonalne pole danych do trwałego przechowywania danych w Tangle.",
                 "tag": "Krótkie, opcjonalne pole danych. Oznaczanie grup transakcji może ułatwić ich wyszukiwanie."

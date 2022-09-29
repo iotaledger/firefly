@@ -198,10 +198,10 @@
             "videoGuide": "Ledger migráció video útmutató"
         },
         "ledgerInstallationGuide": {
-            "title": "Telepítette a szükéséges Ledger alkalmazásokat?",
+            "title": "Feltelepítette a(z) {protocol} appot a Ledger-eszközére?",
             "body1": "Mielőtt tovább lépne, először a Ledger Live segítségével telepítenie kell a {protocol} alkalmazást.",
             "body2": "Győződjön meg, hogy a Ledger firmware a legfrissebb verzióval rendelkezik. Minden előzetesen telepített alkalmazást a legújabb verzióra kell frissíteni.",
-            "action": "Igen, feltelepítettem az alkalmazásokat"
+            "action": "Igen, telepítettem a(z) {protocol} appot"
         },
         "importFromLedger": {
             "title": "Ledger helyreállítása vagy migrálása",
@@ -749,12 +749,12 @@
             "confirm": "A folytatáshoz kövesse a megjelenített utasításokat a Ledger eszközén"
         },
         "ledgerAppGuide": {
-            "title": "Útmutató Ledger alkalmazások telepítéséhez",
+            "title": "Útmutató a(z) {legacy} app telepítéséhez",
             "steps": {
                 "0": "Ledger Live alkalmazás telepítése és megnyitása",
                 "1": "Győződjön meg, hogy a Ledger csatlakoztatva van",
-                "2": "Alkalmazások keresése: {legacy} és IOTA (MIOTA)",
-                "3": "Alkalmazások telepítése: {legacy} és IOTA (MIOTA)",
+                "2": "{legacy} app keresése. Előfordulhat, hogy engedélyeznie kell a Ledger Live fejlesztői módját.",
+                "3": "Telepítse a(z) {legacy} appot",
                 "4": "Fontos, hogy zárja be a Ledger Live alkalmazást mielőtt visszatér a Firefly-hoz"
             }
         },

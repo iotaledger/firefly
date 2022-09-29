@@ -198,10 +198,10 @@
             "videoGuide": "Ledger移行ビデオガイド"
         },
         "ledgerInstallationGuide": {
-            "title": "必要なLedgerアプリをインストールしましたか？",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Ledger ファームウェアが最新であることを確認してください。すでに インストールされているアプリはすべて、最新バージョンに更新する必要があります。",
-            "action": "はい、これらのアプリをインストールしました"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "Ledgerを復元または移行する",
@@ -749,12 +749,12 @@
             "confirm": "続行するには、Ledgerデバイスに表示されている要求を確認してください"
         },
         "ledgerAppGuide": {
-            "title": "Ledgerアプリのインストールガイド",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Ledger Liveアプリケーションをインストールして開きます",
                 "1": "Ledgerが接続されていることを確認して ください",
-                "2": "アプリを検索: {legacy} と IOTA(MIOTA)",
-                "3": "両方のアプリをインストール: {legacy} と IOTA(MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Firefly に戻る前に、Ledger Liveを閉じることが重要です。"
             }
         },
