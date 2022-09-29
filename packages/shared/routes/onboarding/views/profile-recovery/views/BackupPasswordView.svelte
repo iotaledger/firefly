@@ -31,7 +31,11 @@
                 if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
                     await restoreBackupForShimmerClaimingProfileManager(strongholdPassword)
                 } else {
-                    await restoreBackupFromStrongholdFile(strongholdPassword)
+                    try {
+                        await restoreBackupFromStrongholdFile(strongholdPassword)
+                    } catch {
+                        await restoreBackupFromStrongholdFile(strongholdPassword, true)
+                    }
                 }
 
                 updateOnboardingProfile({ strongholdPassword })
