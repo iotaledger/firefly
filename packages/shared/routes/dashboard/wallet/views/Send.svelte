@@ -2,26 +2,8 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import { get, Readable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
-    import {
-        Address,
-        Amount,
-        Button,
-        Dropdown,
-        Icon,
-        Illustration,
-        Input,
-        KeyValueBox,
-        ProgressBar,
-        Text,
-    } from 'shared/components'
-    import {
-        clearSendParams,
-        keyboardHeight,
-        isKeyboardOpened,
-        mobile,
-        sendParams,
-        getKeyboardTransitionSpeed,
-    } from 'shared/lib/app'
+    import { Address, Amount, Button, Dropdown, Icon, KeyValueBox, ProgressBar, Text } from 'shared/components'
+    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
