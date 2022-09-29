@@ -11,19 +11,14 @@ export function getPersistedAsset(tokenId: string): IPersistedAsset {
     return get(persistedAssets)?.[get(activeProfile)?.id]?.[tokenId]
 }
 
-export function setPersistedAssets(newPersistedAssets: { [tokenId: string]: IPersistedAsset }): void {
-    persistedAssets.update((state) => {
-        state[get(activeProfile).id] = newPersistedAssets
-        return state
-    })
-}
-
-export function addPersistedAsset(persistedAsset: IPersistedAsset): void {
+export function addPersistedAsset(...newPersistedAssets: IPersistedAsset[]): void {
     persistedAssets.update((state) => {
         if (!state[get(activeProfile).id]) {
             state[get(activeProfile).id] = {}
         }
-        state[get(activeProfile).id][persistedAsset.id] = persistedAsset
+        for (const asset of newPersistedAssets) {
+            state[get(activeProfile).id][asset.id] = asset
+        }
         return state
     })
 }

@@ -30,5 +30,7 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
     for (const accountId of balancesToUpdate) {
         syncBalance(accountId.toString())
     }
-    void refreshAccountAssetsForActiveProfile()
+    if (balancesToUpdate.length) {
+        void refreshAccountAssetsForActiveProfile()
+    }
 }
