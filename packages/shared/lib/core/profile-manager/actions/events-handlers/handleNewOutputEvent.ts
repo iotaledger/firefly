@@ -27,7 +27,7 @@ export async function handleNewOutputEventInternal(
         output?.address?.type === ADDRESS_TYPE_ED25519 ? convertEd25519ToBech32(output?.address?.pubKeyHash) : ''
 
     if (output?.address?.type === ADDRESS_TYPE_ED25519 && account?.depositAddress === address && !output?.remainder) {
-        syncBalance(account.id)
+        await syncBalance(account.id)
 
         const processedOutput = preprocessGroupedOutputs(
             [output],

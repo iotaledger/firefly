@@ -2,7 +2,6 @@ import { getBalance } from '../api/getBalance'
 import { selectedAccount, updateSelectedAccount } from '../stores'
 import { updateActiveAccount } from '@core/profile'
 import { get } from 'svelte/store'
-import { refreshAccountAssetsForActiveProfile } from '@core/wallet/actions/refreshAccountAssetsForActiveProfile'
 
 export async function syncBalance(accountId: string): Promise<void> {
     const balances = await getBalance(accountId)
@@ -11,6 +10,5 @@ export async function syncBalance(accountId: string): Promise<void> {
     } else {
         updateActiveAccount(accountId, { balances })
     }
-    refreshAccountAssetsForActiveProfile()
     return
 }

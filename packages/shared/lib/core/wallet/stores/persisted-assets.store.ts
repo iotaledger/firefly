@@ -11,6 +11,13 @@ export function getPersistedAsset(tokenId: string): IPersistedAsset {
     return get(persistedAssets)?.[get(activeProfile)?.id]?.[tokenId]
 }
 
+export function setPersistedAssets(newPersistedAssets: { [tokenId: string]: IPersistedAsset }): void {
+    persistedAssets.update((state) => {
+        state[get(activeProfile).id] = newPersistedAssets
+        return state
+    })
+}
+
 export function addPersistedAsset(persistedAsset: IPersistedAsset): void {
     persistedAssets.update((state) => {
         if (!state[get(activeProfile).id]) {

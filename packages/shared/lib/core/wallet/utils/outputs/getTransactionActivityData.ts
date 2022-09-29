@@ -3,7 +3,7 @@ import { IAccountState } from '@core/account'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
 import { get } from 'svelte/store'
-import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '../../enums'
+import { ActivityDirection, ActivityType } from '../../enums'
 import { IProcessedTransaction, ITransactionActivityData } from '../../interfaces'
 import { isActivityHiddenForAccountId } from '../../stores/hidden-activities.store'
 import {
@@ -47,7 +47,7 @@ export function getTransactionActivityData(
     const direction = isIncoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
 
     const isAsync = isOutputAsync(output)
-    const asyncStatus = isAsync ? ActivityAsyncStatus.Unclaimed : null
+    const asyncStatus = null // we need to initialize every activity with `null`. This will be updated later in `setAsyncStatusOfAccountActivities`
     const isClaimed = !!claimingData
     const isClaiming = false
     const claimingTransactionId = claimingData?.claimingTransactionId
