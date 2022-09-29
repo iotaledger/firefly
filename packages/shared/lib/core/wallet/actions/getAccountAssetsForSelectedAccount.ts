@@ -21,8 +21,8 @@ export function getAccountAssetsForSelectedAccount(): IAccountAssets {
     }
 
     const nativeTokens: IAsset[] = []
-    const tokens = account?.balances?.nativeTokens ?? []
-    for (const token of tokens) {
+    const sortedTokens = account?.balances?.nativeTokens.sort((a, b) => (a.tokenId > b.tokenId ? 1 : 0)) ?? []
+    for (const token of sortedTokens) {
         const persistedAsset = getAssetFromPersistedAssets(token.tokenId)
         if (persistedAsset && isValidIRC30(persistedAsset.metadata)) {
             nativeTokens.push({
