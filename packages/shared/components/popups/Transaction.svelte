@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { Unit } from '@iota/unit-converter'
-    import { Button, Icon, Illustration, Text } from 'shared/components'
+    import { Button, Icon, Illustration, Popup, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
     import { isAccountStaked, isParticipationPossible } from 'shared/lib/participation'
     import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
@@ -12,6 +12,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { TrackedParticipationItem } from 'shared/lib/participation/types'
+    import { sendParams } from '@lib/app'
 
     export let accountId: string
     export let internal = false
@@ -123,7 +124,20 @@
         </div>
         <div class="w-full text-center my-6 px-10">
             <Text type="h4" highlighted classes="mb-2">
-                {localize('popups.transaction.body', { values: { amount: displayAmount } })}
+                {#if $sendParams.receiverAddress && $sendParams.chainId}
+                    {localize('popups.transaction.bridgeBody', {
+                        values: {
+                            amount: displayAmount,
+                            chainId: $sendParams.chainId,
+                        },
+                    })}
+                    <Text type={internal ? 'p' : 'pre'} secondary bigger classess="mt-2"
+                        >{$sendParams.receiverAddress}</Text
+                    >
+                    {localize('popups.transaction.bridgeControl')}
+                {:else}
+                    {localize('popups.transaction.body', { values: { amount: displayAmount } })}
+                {/if}
             </Text>
             <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
         </div>
