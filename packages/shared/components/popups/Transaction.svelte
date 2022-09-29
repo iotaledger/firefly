@@ -124,22 +124,19 @@
         </div>
         <div class="w-full text-center my-6 px-10">
             <Text type="h4" highlighted classes="mb-2">
-                {#if $sendParams.receiverAddress && $sendParams.chainId}
-                    {localize('popups.transaction.bridgeBody', {
-                        values: {
-                            amount: displayAmount,
-                            chainId: $sendParams.chainId,
-                        },
-                    })}
-                    <Text type={internal ? 'p' : 'pre'} secondary bigger classess="mt-2"
-                        >{$sendParams.receiverAddress}</Text
-                    >
-                    {localize('popups.transaction.bridgeControl')}
-                {:else}
-                    {localize('popups.transaction.body', { values: { amount: displayAmount } })}
-                {/if}
+                {localize('popups.transaction.body', { values: { amount: displayAmount } })}
             </Text>
-            <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
+            <Text type={internal ? 'p' : 'pre'} secondary bigger classes="mb-2">{to}</Text>
+            {#if $sendParams.tag && $sendParams.metadata}
+                <Text type="h4" highlighted classes="mb-2">
+                    {localize('popups.transaction.tag')}
+                </Text>
+                <Text type={internal ? 'p' : 'pre'} secondary bigger classes="mb-2">{$sendParams.tag}</Text>
+                <Text type="h4" highlighted classes="mb-2">
+                    {localize('popups.transaction.metadata')}
+                </Text>
+                <Text type={internal ? 'p' : 'pre'} secondary bigger classes="mb-2">{$sendParams.metadata}</Text>
+            {/if}
         </div>
     {/if}
     <div class="flex flex-row flex-nowrap w-full space-x-4">

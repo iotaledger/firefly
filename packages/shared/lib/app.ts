@@ -52,8 +52,8 @@ export const sendParams = writable<SendParams>({
     address: '',
     message: '',
     isInternal: false,
-    receiverAddress: '',
-    chainId: '',
+    tag: '',
+    metadata: '',
 })
 export const clearSendParams = (isInternal = false): void =>
     sendParams.set({

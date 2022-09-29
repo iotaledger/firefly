@@ -214,11 +214,9 @@
         }
     }
 
-    function onSend(senderAccountId, receiveAddress, amount, dataString) {
+    function onSend(senderAccountId, receiveAddress, amount, tag, data) {
         const _send = () => {
             isTransferring.set(true)
-            const index = dataString ? 'swapOut' : 'firefly'
-            const data = dataString ? convertStringToUtf8Array(dataString) : null
             api.send(
                 senderAccountId,
                 {
@@ -227,7 +225,7 @@
                     remainder_value_strategy: {
                         strategy: 'ChangeAddress',
                     },
-                    indexation: { index, data },
+                    indexation: { index: tag ?? 'firefly', data: data ? convertStringToUtf8Array(data) : null },
                 },
                 {
                     onSuccess(response) {

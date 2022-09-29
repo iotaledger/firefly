@@ -45,7 +45,6 @@
     export let onInternalTransfer = (..._: any[]): void => {}
 
     const { accounts } = $wallet
-
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
     const addressPrefix = ($selectedAccountStore ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
 
@@ -73,8 +72,7 @@
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
-    $: showBridgeFields = Boolean($sendParams.receiverAddress && $sendParams.chainId)
-    $: data = showBridgeFields ? `${$sendParams.receiverAddress}:${$sendParams.chainId}` : null
+    $: showBridgeFields = Boolean($sendParams.tag && $sendParams.metadata)
 
     const transferSteps: {
         [key in TransferProgressEventType]: {
@@ -369,7 +367,7 @@
                       amountRaw,
                       selectedSendType === SEND_TYPE.INTERNAL
                   )
-                : onSend($selectedAccountStore.id, address, amountRaw, data)
+                : onSend($selectedAccountStore.id, address, amountRaw, $sendParams.tag, $sendParams.metadata)
 
         if ($isSoftwareProfile) {
             _send(isInternal)
@@ -538,11 +536,8 @@
                         classes="mb-6"
                     />
                     {#if showBridgeFields}
-                        <KeyValueBox bind:value={$sendParams.chainId} key={localize('general.chainId')} />
-                        <KeyValueBox
-                            bind:value={$sendParams.receiverAddress}
-                            key={localize('general.bridgeToAddress')}
-                        />
+                        <KeyValueBox bind:value={$sendParams.tag} key={localize('general.tag')} />
+                        <KeyValueBox bind:value={$sendParams.metadata} key={localize('general.metadata')} />
                     {/if}
                 </div>
             </div>
