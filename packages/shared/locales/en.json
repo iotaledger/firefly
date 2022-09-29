@@ -1153,6 +1153,7 @@
         "noRecentHistory": "No recent history",
         "noFilteredActivity": "No matching activities",
         "noAssets": "No assets",
+        "noAssetsMatchSearch": "No assets match your search",
         "noFilteredAsset": "No matching assets",
         "thisMonth": "This month",
         "search": "Search",

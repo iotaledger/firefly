@@ -16,12 +16,14 @@
 
     $: hasMultipleAssets = $visibleSelectedAccountAssets?.nativeTokens.length >= 1
     $: searchQuery = searchQuery.toLocaleLowerCase()
-    $: dropdownAssetList = [$visibleSelectedAccountAssets?.baseCoin, ...$visibleSelectedAccountAssets?.nativeTokens]
-        .filter((asset) => {
-            const assetName = asset?.metadata?.name?.toLocaleLowerCase()
-            const assetUnit = asset?.metadata?.unit?.toLocaleLowerCase()
-            return assetName?.includes(searchQuery) || assetUnit?.includes(searchQuery)
-        })
+    $: dropdownAssetList = [
+        $visibleSelectedAccountAssets?.baseCoin,
+        ...$visibleSelectedAccountAssets?.nativeTokens,
+    ].filter((asset) => {
+        const assetName = asset?.metadata?.name?.toLocaleLowerCase()
+        const assetUnit = asset?.metadata?.unit?.toLocaleLowerCase()
+        return assetName?.includes(searchQuery) || assetUnit?.includes(searchQuery)
+    })
     $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
         case NetworkProtocol.IOTA:
         case NetworkProtocol.Shimmer:
@@ -34,7 +36,6 @@
     function handleDropdownClick() {
         if (hasMultipleAssets) {
             isDropdownOpen = !isDropdownOpen
-            isFocused = !isFocused
         }
     }
 
@@ -45,7 +46,6 @@
 
     function handleOnClickOutside(): void {
         isDropdownOpen = false
-        isFocused = false
     }
 </script>
 
@@ -106,7 +106,7 @@
                         {/each}
                     </ul>
                 {:else}
-                    <Text classes="mt-4">No assets match your search.</Text>
+                    <Text classes="mt-4">{localize('general.noAssetsMatchSearch')}</Text>
                 {/if}
             </div>
         {/if}
