@@ -214,7 +214,7 @@
             placeholder={localize('popups.mintNativeTokenForm.inputs.circulatingSupply')}
             error={circulatingSupplyError}
         />
-        <optional-inputs class="flex flex-row flex-wrap gap-2">
+        <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
                 bind:this={decimalsInput}
                 bind:value={decimals}
@@ -223,21 +223,25 @@
                 maxlength={MAX_SUPPORTED_DECIMALS}
                 label={localize('popups.mintNativeTokenForm.inputs.decimals')}
                 description={localize('tooltips.mintNativeTokenForm.decimals')}
+                fontSize="14"
             />
             <OptionalInput
                 bind:value={description}
                 label={localize('popups.mintNativeTokenForm.inputs.description')}
                 description={localize('tooltips.mintNativeTokenForm.description')}
+                fontSize="14"
             />
             <OptionalInput
                 bind:value={url}
                 label={localize('popups.mintNativeTokenForm.inputs.url')}
                 description={localize('tooltips.mintNativeTokenForm.url')}
+                fontSize="14"
             />
             <OptionalInput
                 bind:value={logoUrl}
                 label={localize('popups.mintNativeTokenForm.inputs.logoUrl')}
                 description={localize('tooltips.mintNativeTokenForm.logoUrl')}
+                fontSize="14"
             />
         </optional-inputs>
         {#if error}
