@@ -16,8 +16,7 @@
 
     $: hasMultipleAssets = $visibleSelectedAccountAssets?.nativeTokens.length >= 1
     $: searchQuery = searchQuery.toLocaleLowerCase()
-    $: dropdownAssetList = [$visibleSelectedAccountAssets?.baseCoin]
-        .concat($visibleSelectedAccountAssets?.nativeTokens)
+    $: dropdownAssetList = [$visibleSelectedAccountAssets?.baseCoin, ...$visibleSelectedAccountAssets?.nativeTokens]
         .filter((asset) => {
             const assetName = asset?.metadata?.name?.toLocaleLowerCase()
             const assetUnit = asset?.metadata?.unit?.toLocaleLowerCase()
