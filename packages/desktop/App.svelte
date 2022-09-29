@@ -120,15 +120,15 @@
         })
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
-            initialiseOnboardingProfile(true, NetworkProtocol.Shimmer)
             initialiseOnboardingRouters()
+            initialiseOnboardingProfile(true, NetworkProtocol.Shimmer, true)
             get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
-            initialiseOnboardingProfile(false, NetworkProtocol.Shimmer)
-            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
             initialiseOnboardingRouters()
+            initialiseOnboardingProfile(false, NetworkProtocol.Shimmer, true)
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
             get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.hookErrorLogger((err) => {
