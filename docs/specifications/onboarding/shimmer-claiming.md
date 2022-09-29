@@ -20,62 +20,6 @@ where `coinType = 4218` (IOTA). The reason is so that we can generate the same E
 were ultimately used when the IOTA community staked for Shimmer rewards in November 2021. This special 
 object is called the `shimmerClaimingProfileManager`.
 
-## Flowchart
-
-:::caution
-This needs to be adjusted to **1)** use output-based logic rather than only syncing and **2)** include lower level account manager functions like `prepareOutputs`, `sendOutputs`, etc.
-:::
-
-```mermaid
-sequenceDiagram
-    actor SCPM as Shimmer Claiming Profile Manager
-    participant SN as Shimmer Network
-    actor OPM as Onboarding Profile Manager
-    
-    critical initialiseFirstAccount
-        SCPM ->> SCPM: createAccount
-        SCPM ->> SCPM: getAccount (with bound methods)
-        SCPM -)+ SN: sync
-        SN --)- SCPM: SyncedBalance
-    option failure
-        SCPM -)+ SN: findShimmerRewards (see below)
-        SN --)- SCPM: SyncedBalance[]
-    end
-    
-    critical findShimmerRewards
-        SCPM ->> SCPM: updateBalanceFinderParameters
-        SCPM -)+ SN: recoverAccounts/sync
-        SN --)- SCPM: SyncedBalance[]
-    option failure
-        SCPM -)+ SN: findShimmerRewards (retry)
-        SN --)- SCPM: SyncedBalance[]
-    end
-    
-    critical claimShimmerRewards
-        critical createShimmerClaimingParameters
-            SCPM ->> SCPM: getShimmerClaimingAccounts
-            SCPM -)+ OPM: generateShimmerClaimingDepositAddressesForAccounts
-            loop Number of accounts to claim
-                OPM ->> OPM: createAccount
-                OPM ->> OPM: getAccount (with bound methods)
-                OPM ->> OPM: generateAddress
-            end
-            OPM --)- SCPM: ShimmerClaimingDepositAddress[]
-        option failure
-            SCPM --> SCPM: logError
-        end
-        critical claimShimmerRewardsFromParameters
-            loop number of Shimmer claiming accounts
-                SCPM --> SCPM: prepareOutputs
-                SCPM -)+ SN: sendOutputs
-                SN --)- SCPM: TransactionConfirmedEvent
-            end
-        option failure
-            SCPM -) SN: claimShimmerRewardsFromParameters (retry)
-        end
-    end
-```
-
 ## Finding Rewards
 
 It is possible that a user has a high number of accounts, addresses, or both, where they staked 
