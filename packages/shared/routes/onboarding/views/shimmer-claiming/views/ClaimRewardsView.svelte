@@ -25,6 +25,7 @@
         shimmerClaimingProfileManager,
         subscribeToWalletApiEventsForShimmerClaiming,
         initialiseAccountRecoveryConfigurationForShimmerClaiming,
+        IShimmerClaimingAccount,
     } from '@contexts/onboarding'
     import { closePopup } from '@lib/popup'
 
@@ -43,9 +44,14 @@
         !isSearchingForRewards && !isClaimingRewards && !hasUserClaimedRewards(shimmerClaimingAccounts)
     $: shouldClaimRewardsButtonBeEnabled =
         canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
-    $: shouldShowContinueButton =
-        hasUserClaimedRewards(shimmerClaimingAccounts) ||
-        (hasSearchedForRewardsBefore && hasNoUnclaimedRewards(shimmerClaimingAccounts))
+    $: shouldShowContinueButton = canUserContinue(shimmerClaimingAccounts)
+
+    function canUserContinue(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
+        return (
+            hasUserClaimedRewards(shimmerClaimingAccounts) ||
+            (hasSearchedForRewardsBefore && hasNoUnclaimedRewards(shimmerClaimingAccounts))
+        )
+    }
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
