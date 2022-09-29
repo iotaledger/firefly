@@ -1,6 +1,6 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { activeAccounts } from '@core/profile/stores'
-import { convertEd25519ToBech32, tryGetAndStoreAssetFromPersistedAssets } from '@core/wallet'
+import { convertEd25519ToBech32, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
 import { Activity } from '@core/wallet/classes/activity.class'
 import { ADDRESS_TYPE_ED25519 } from '@core/wallet/constants'
 import { addActivityToAccountActivitiesInAllAccountActivities } from '@core/wallet/stores/all-account-activities.store'
@@ -35,7 +35,7 @@ export async function handleNewOutputEventInternal(
             account
         )
         const activity = new Activity(processedOutput, account)
-        await tryGetAndStoreAssetFromPersistedAssets(activity.data?.assetId)
+        await getOrRequestAssetFromPersistedAssets(activity.data?.assetId)
         addActivityToAccountActivitiesInAllAccountActivities(account.id, activity)
     }
 }

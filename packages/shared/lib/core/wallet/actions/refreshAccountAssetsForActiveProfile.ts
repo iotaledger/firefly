@@ -2,7 +2,7 @@ import { BASE_TOKEN, COIN_TYPE } from '@core/network'
 import { activeAccounts, activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { clearPersistedAssetForActiveProfile, setPersistedAssets } from '../stores/persisted-assets.store'
-import { tryGetAndStoreAssetFromPersistedAssets } from '../actions'
+import { getOrRequestAssetFromPersistedAssets } from '../actions'
 import { VerifiedStatus } from '../enums'
 import { IPersistedAsset } from '../interfaces'
 
@@ -30,7 +30,7 @@ export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets 
         const tokens = account?.balances?.nativeTokens ?? []
         for (const token of tokens) {
             try {
-                const persistedAsset = await tryGetAndStoreAssetFromPersistedAssets(token.tokenId)
+                const persistedAsset = await getOrRequestAssetFromPersistedAssets(token.tokenId)
                 if (persistedAsset) {
                     persistedAssets[persistedAsset.id] = persistedAsset
                 }

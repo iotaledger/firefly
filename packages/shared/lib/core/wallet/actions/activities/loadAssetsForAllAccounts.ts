@@ -1,16 +1,20 @@
-import { tryGetAndStoreAssetFromPersistedAssets } from '../tryGetAndStoreAssetFromPersistedAssets'
+import { getOrRequestAssetFromPersistedAssets } from '../getOrRequestAssetFromPersistedAssets'
 import { IAccountState } from '@core/account'
 import { get } from 'svelte/store'
-import { allAccountActivities } from '../../stores'
+import { allAccountActivities, setPersistedAssets } from '../../stores'
+import { IPersistedAsset } from '@core/wallet/interfaces'
 
 export async function loadAssetsForAllActivities(account: IAccountState): Promise<void> {
     const accountActivities = get(allAccountActivities)[Number(account.id)]
 
-    for (const activity of accountActivities) {
-        try {
-            await tryGetAndStoreAssetFromPersistedAssets(activity.data.assetId)
-        } catch (reason) {
-            console.error(reason)
+    try {
+        const persistedAssets: { [tokenId: string]: IPersistedAsset } = {}
+        for (const activity of accountActivities) {
+            const assets = await getOrRequestAssetFromPersistedAssets(activity.data.assetId)
+            persistedAssets[assets.id] = assets
         }
+        setPersistedAssets(persistedAssets)
+    } catch (reason) {
+        console.error(reason)
     }
 }

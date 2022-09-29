@@ -5,7 +5,7 @@ import { IPersistedAsset } from '../interfaces'
 import { AssetVerification } from '../types'
 import { getIrc30MetadataFromFoundryOutput } from '../utils/getIrc30MetadataFromFoundryOutput'
 
-export async function requestAndStorePersistedAsset(tokenId: string): Promise<IPersistedAsset> {
+export async function requestPersistedAsset(tokenId: string): Promise<IPersistedAsset> {
     const tokenMetadata = await getIrc30MetadataFromFoundryOutput(tokenId)
     if (tokenMetadata) {
         const verification: AssetVerification = OFFICIAL_TOKEN_IDS.includes(tokenId)
