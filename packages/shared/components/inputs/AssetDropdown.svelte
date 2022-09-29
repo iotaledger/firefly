@@ -93,11 +93,11 @@
                 </InputContainer>
                 {#if dropdownAssetList.length > 0}
                     <ul class="overflow-y-auto h-full -mr-2 pt-2 pr-2">
-                        {#each dropdownAssetList as nativeToken}
+                        {#each dropdownAssetList as asset}
                             <li>
                                 <AssetTile
-                                    onClick={() => handleAssetClick(nativeToken)}
-                                    asset={nativeToken}
+                                    onClick={() => handleAssetClick(asset)}
+                                    {asset}
                                     overrideColor
                                     classes="bg-white hover:bg-gray-50 dark:bg-transparent"
                                     squashed
