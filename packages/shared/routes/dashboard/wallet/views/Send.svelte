@@ -62,9 +62,6 @@
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
 
-    export let bridgeAddress = '0xF65e3cCbe04D4784EDa9CC4a33F84A6162aC9EB6'
-    export let chainId = '4002'
-
     const { accounts } = $wallet
 
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
