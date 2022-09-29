@@ -122,7 +122,9 @@
         await pollNetworkStatus()
 
         const systemLanguage = await Platform.getLanguageCode()
-        const initialLocale = $appRoute === AppRoute.Welcome ? systemLanguage : $appSettings.language
+        let initialLocale = $appRoute === AppRoute.Welcome ? systemLanguage : $appSettings.language
+        // handle 'es' & 'pt' cases when we can't get the region code
+        initialLocale = initialLocale === 'es' ? 'es-ES' : initialLocale === 'pt' ? 'pt-PT' : initialLocale
         void setupI18n({ fallbackLocale: 'en', initialLocale })
     })
 
