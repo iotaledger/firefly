@@ -36,17 +36,18 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                 const profileType = get(onboardingProfile)?.type
                 if (profileType === ProfileType.Software) {
                     this.parentRouter.next()
+                    return
                 } else {
                     nextRoute = ProfileSetupRoute.EnterName
+                    break
                 }
-                break
             }
             case ProfileSetupRoute.SetupNew:
                 nextRoute = ProfileSetupRoute.EnterName
                 break
             case ProfileSetupRoute.EnterName: {
                 this.parentRouter.next()
-                break
+                return
             }
         }
 
