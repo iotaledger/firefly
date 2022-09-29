@@ -25,7 +25,6 @@
         shimmerClaimingProfileManager,
         subscribeToWalletApiEventsForShimmerClaiming,
         initialiseAccountRecoveryConfigurationForShimmerClaiming,
-        IShimmerClaimingAccount,
     } from '@contexts/onboarding'
     import { closePopup } from '@lib/popup'
 
@@ -44,14 +43,9 @@
         !isSearchingForRewards && !isClaimingRewards && !hasUserClaimedRewards(shimmerClaimingAccounts)
     $: shouldClaimRewardsButtonBeEnabled =
         canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
-    $: shouldShowContinueButton = canUserContinue(shimmerClaimingAccounts)
-
-    function canUserContinue(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
-        return (
-            hasUserClaimedRewards(shimmerClaimingAccounts) ||
-            (hasSearchedForRewardsBefore && canUserRecoverWithShimmerClaimingAccounts(shimmerClaimingAccounts))
-        )
-    }
+    $: shouldShowContinueButton =
+        hasUserClaimedRewards(shimmerClaimingAccounts) ||
+        (hasSearchedForRewardsBefore && canUserRecoverWithShimmerClaimingAccounts(shimmerClaimingAccounts))
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
@@ -64,6 +58,7 @@
                 stopPollingLedgerNanoStatus()
             }
             await findShimmerRewards()
+            hasSearchedForRewardsBefore = true
         } catch (err) {
             if ($isOnboardingLedgerProfile) {
                 handleLedgerError(err?.error ?? err)
@@ -74,7 +69,6 @@
             if ($isOnboardingLedgerProfile) {
                 pollLedgerNanoStatus()
             }
-            hasSearchedForRewardsBefore = true
             isSearchingForRewards = false
         }
     }
