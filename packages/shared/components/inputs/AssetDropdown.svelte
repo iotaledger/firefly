@@ -20,14 +20,14 @@
         $visibleSelectedAccountAssets?.baseCoin,
         ...$visibleSelectedAccountAssets?.nativeTokens,
     ].filter((asset) => {
-        const assetName = asset?.metadata?.name?.toLocaleLowerCase()
-        const assetUnit = asset?.metadata?.unit?.toLocaleLowerCase()
+        const assetName = asset.metadata?.name.toLocaleLowerCase()
+        const assetUnit = asset.metadata?.unit.toLocaleLowerCase()
         return assetName?.includes(searchQuery) || assetUnit?.includes(searchQuery)
     })
-    $: switch (asset?.metadata?.name?.toLocaleLowerCase()) {
+    $: switch (asset.metadata?.name.toLocaleLowerCase()) {
         case NetworkProtocol.IOTA:
         case NetworkProtocol.Shimmer:
-            icon = asset?.metadata?.name?.toLocaleLowerCase()
+            icon = asset.metadata?.name.toLocaleLowerCase()
             break
         default:
             icon = 'tokens'
@@ -65,7 +65,7 @@
                     fontSize="15"
                     classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
                 >
-                    {asset?.metadata?.name ?? asset?.id}
+                    {asset.metadata?.name ?? asset.id}
                 </Text>
             </div>
             {#if hasMultipleAssets}
