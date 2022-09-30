@@ -90,7 +90,7 @@ const features = {
     },
     electron: {
         developerTools: {
-            enabled: true,
+            enabled: false,
         },
     },
     wallet: {
