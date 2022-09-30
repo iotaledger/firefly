@@ -71,4 +71,5 @@ export interface IPlatform {
     setKeyboardStyle(style: KeyboardStyle): Promise<void>
     showKeyboard(): Promise<void>
     hideKeyboard(): Promise<void>
+    getLanguageCode(): Promise<string>
 }

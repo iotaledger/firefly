@@ -72,7 +72,7 @@
         document.dir = $localeDirection
     }
 
-    $: if ($isLocaleLoaded) {
+    $: if ($isLocaleLoaded && showSplash) {
         void hideSplashScreen()
     }
 
@@ -107,28 +107,38 @@
     async function hideSplashScreen() {
         await tick()
         nativeSplash.hide()
+        $isAndroid = (await Platform.getOS()) !== 'ios'
+
+        // Display splash screen at least for 3 seconds
+        // only on Welcome onboarding screen needed to wait
+        // for locales glitch on Android devices
+        if ($appRoute === AppRoute.Welcome && $isAndroid) {
+            setTimeout(() => {
+                showSplash = false
+            }, 3000)
+        } else {
+            showSplash = true
+        }
     }
 
-    void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
-
     onMount(async () => {
-        isAndroid.set((await Platform.getOS()) !== 'ios')
-        // Display splash screen at least for 3 seconds
-        setTimeout(() => {
-            showSplash = false
-        }, 3000)
-
         initRouters()
         await getVersionDetails()
         await pollMarketData()
         await pollNetworkStatus()
+
+        const systemLanguage = await Platform.getLanguageCode()
+        let initialLocale = $appRoute === AppRoute.Welcome ? systemLanguage : $appSettings.language
+        // handle 'es' & 'pt' cases when we can't get the region code
+        initialLocale = initialLocale === 'es' ? 'es-ES' : initialLocale === 'pt' ? 'pt-PT' : initialLocale
+        void setupI18n({ fallbackLocale: 'en', initialLocale })
     })
 
     // TODO: Has to be enabled again when system notifications are implemented
     $appSettings.notifications = false
 </script>
 
-{#if $isLocaleLoaded && !showSplash}
+{#if $isLocaleLoaded}
     <!-- empty div to avoid auto-purge removing dark classes -->
     <div class="scheme-dark" />
     <div class="scanner-hide" style="--transition-scroll: cubic-bezier(0, 0.3, 0, 1)">
