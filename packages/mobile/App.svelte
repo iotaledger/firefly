@@ -108,9 +108,9 @@
         await tick()
         nativeSplash.hide()
         $isAndroid = (await Platform.getOS()) !== 'ios'
-        
+
         // Display splash screen at least for 3 seconds
-        // only on Welcome onboarding screen needed to wait 
+        // only on Welcome onboarding screen needed to wait
         // for locales glitch on Android devices
         if ($appRoute === AppRoute.Welcome && $isAndroid) {
             setTimeout(() => {
@@ -122,7 +122,6 @@
     }
 
     onMount(async () => {
-        
         initRouters()
         await getVersionDetails()
         await pollMarketData()
