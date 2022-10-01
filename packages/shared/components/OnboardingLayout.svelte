@@ -60,22 +60,23 @@
         >
             <div class="w-full h-full flex flex-col justify-between" style="max-width: 406px;">
                 <div class="flex flex-col h-full">
-                    {#if allowBack}
-                        <button
-                            on:click={onBackClick}
-                            class="mb-8 w-6 h-6 {busy && 'pointer-events-none opacity-50'} highlight {$platform ===
-                            PlatformOption.MacOs
-                                ? 'mt-9'
-                                : ''}"
-                            disabled={busy}
-                            aria-label={localize('actions.back')}
-                        >
-                            <Icon
-                                icon="arrow-left"
-                                classes={busy ? 'pointer-events-none text-gray-500' : 'cursor-pointer text-blue-500'}
-                            />
-                        </button>
-                    {/if}
+                    <div class="mb-8 {$platform === PlatformOption.MacOs ? 'mt-9' : ''}">
+                        {#if allowBack}
+                            <button
+                                on:click={onBackClick}
+                                class="w-6 h-6 {busy && 'pointer-events-none opacity-50'} highlight"
+                                disabled={busy}
+                                aria-label={localize('actions.back')}
+                            >
+                                <Icon
+                                    icon="arrow-left"
+                                    classes={busy
+                                        ? 'pointer-events-none text-gray-500'
+                                        : 'cursor-pointer text-blue-500'}
+                                />
+                            </button>
+                        {/if}
+                    </div>
                     <div data-label="leftpane-content" class="h-full flex flex-col">
                         {#if $$slots.title}
                             <div class="mb-5">

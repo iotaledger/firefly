@@ -2,7 +2,7 @@
     import { LedgerAnimation, Button, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { LedgerAppName } from '@core/ledger'
-    import { Locale } from '@core/i18n'
+    import { Locale, localize } from '@core/i18n'
 
     export let locale: Locale
 
@@ -24,7 +24,9 @@
     }
 </script>
 
-<Text type="h4" classes="mb-6">{locale('popups.ledgerAppGuide.title')}</Text>
+<Text type="h4" classes="mb-6"
+    >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Text
+>
 <div class="w-full flex flex-row flex-wrap">
     <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" bgClasses="top-6" />
     <div class="w-full text-center my-9 px-10">

@@ -49,7 +49,7 @@
                   },
               ]
             : []),
-        ...(features?.developerTools?.enabled
+        ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
                       icon: 'tools',

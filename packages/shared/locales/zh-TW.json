@@ -63,7 +63,7 @@
             "profileSetup": {
                 "setup": {
                     "title": "設定 {protocol, select, IOTA {an} Shimmer {a}} {protocol} 設定檔",
-                    "body": "Select the method you will use to set up your {protocol} profile."
+                    "body": "選擇適合的方式設定您的{protocol} 檔案。"
                 },
                 "setupNew": {
                     "title": "建立個人設定檔",
@@ -150,7 +150,7 @@
             "profileRecovery": {
                 "importMnemonicPhrase": {
                     "title": "輸入您的還原助記詞",
-                    "body": "還原助記詞的長度為 24 個單字，全部小寫並以空格相隔。這用於恢復現有的 Firefly 設定檔。",
+                    "body": "助記詞長度為24單字，全小寫且有間隔。這是用於恢復既存的Firefly錢包。",
                     "enter": "輸入您的還原助記詞",
                     "phraseDetected": "檢測到 24 個單字的助記詞"
                 },
@@ -169,22 +169,22 @@
             },
             "shimmerClaiming": {
                 "claimRewards": {
-                    "title": "Your Shimmer staking rewards",
-                    "body": "請檢查您的Shimmer質押獎勵是否正確。若非，請使用資金查詢功能。"
+                    "title": "您的Shimmer質押獎勵",
+                    "body": "檢查您的Shimmer質押獎勵是否正確。您或許需要檢索數次才能找到完整餘額。"
                 },
                 "success": {
-                    "title": "獎勵已領取",
-                    "body": "您已經成功替您的個人設定檔領取Shimmer 代幣。",
+                    "title": "已領取Shimmer",
+                    "body": "您已成果領取Shimmer代幣。",
                     "totalRewards": "獎勵總額"
                 }
             },
             "congratulations": {
-                "title": "Profile setup is almost complete",
-                "fundsMigrated": "Funds migrated",
-                "body": "Your new profile will be ready to use once the dashboard is successfully loaded.",
-                "ledgerHint": "Do not disconnect your ledger until the dashboard has successfully loaded.",
+                "title": "個人設定檔將近完成...",
+                "fundsMigrated": "資金遷移完成",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
                 "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-                "fireflyLedgerBody": "您的 Ledgar 帳號已成功復原，現在可繼續使用。",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
                 "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
                 "exportMigration": "Export migration log and finish setup"
             }
@@ -198,10 +198,10 @@
             "videoGuide": "Ledger 遷移影片教學"
         },
         "ledgerInstallationGuide": {
-            "title": "你是否已安裝必須的 Ledger apps？",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
             "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "請確認您的Ledger韌體是最新版本。所有已安裝的軟體都必須更新至最新版本。",
-            "action": "是，我已安裝這些 apps。"
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "還原或遷移您的Ledger",
@@ -709,6 +709,7 @@
         "transaction": {
             "title": "確認交易",
             "body": "您即將發送 {amount} 到",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
             "sendingFromStakedAccountBelowMinReward": "您正從未達質押門檻的錢包傳送交易。這將解除錢包內的代幣質押，並將使您錯失質押獎勵。"
         },
@@ -748,12 +749,12 @@
             "confirm": "請確認在 Ledger 裝置上的通知再繼續"
         },
         "ledgerAppGuide": {
-            "title": "Ledger app 的安裝指南",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "安裝並開啟 Ledger Live 軟體",
                 "1": "確保您的 Ledger 裝置已連上",
-                "2": "搜尋應用程式：{legacy} 和 IOTA (MIOTA)",
-                "3": "同時安裝應用程式：{legacy} 和 IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "重要：返回 Firefly 之前，記得先關閉 Ledger Live"
             }
         },
@@ -879,7 +880,7 @@
                 "decimals": "小數點位",
                 "url": "網址",
                 "logoUrl": "Logo URL",
-                "logo": "Logo"
+                "logo": "標誌"
             }
         },
         "faucetRequest": {
@@ -932,7 +933,7 @@
         "createWallet": "建立一個新的 {protocol} 檔案",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "領取Shimmer質押獎勵",
-        "claimShimmerDescription": "遷移IOTA檔與領取質押獎勵",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "savePassword": "儲存密碼",
         "useBiometric": "使用生物識別安全機制",
         "setupPinCode": "設定PIN碼",
@@ -959,8 +960,8 @@
         "chooseFile": "選擇一個檔案",
         "dropHere": "將檔案拖至此處",
         "syncAll": "同步全部",
-        "import": "Import",
-        "importing": "Importing",
+        "import": "匯入",
+        "importing": "匯入中",
         "export": "匯出",
         "exporting": "正在匯出",
         "exportNewStronghold": "輸出一個新的 Stronghold",
@@ -1054,7 +1055,7 @@
         "testDeepLink": "測試深度連結",
         "initialize": "初始化",
         "initializing": "初始化中",
-        "delete": "Delete"
+        "delete": "刪除"
     },
     "general": {
         "recipient": "接收方",
@@ -1149,9 +1150,9 @@
         "loadingAccounts": "載入中，請稍候...",
         "addProfile": "添加個人檔案",
         "noRecentHistory": "沒有最近的歷史紀錄",
-        "noFilteredActivity": "No matching activities",
+        "noFilteredActivity": "無相符的活動",
         "noAssets": "沒有資產",
-        "noFilteredAsset": "No matching assets",
+        "noFilteredAsset": "無相符的資產",
         "thisMonth": "本月",
         "search": "搜尋",
         "firstSync": "正在同步歷史記錄，這可能需要一段時間...",
@@ -1216,6 +1217,7 @@
         "unstakedFunds": "未質押的資金",
         "accountColor": "錢包顏色",
         "transactionTime": "交易時間",
+        "surplus": "Surplus",
         "storageDeposit": "存儲空間費用",
         "giftedStorageDeposit": "被贈與之存儲空間費用",
         "expirationTime": "逾期時間",
@@ -1223,8 +1225,8 @@
         "claimedTime": "已收取於",
         "copiedToClipboard": "複製到剪貼簿",
         "total": "總額： {balance}",
-        "availableBalanceWithValue": "Available balance: {balance}",
-        "availableBalance": "Available balance",
+        "availableBalanceWithValue": "可用餘額：{balance}",
+        "availableBalance": "可用餘額",
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "已領取{amount}",
         "metadata": "Metadata",
@@ -1244,11 +1246,11 @@
         "testDeepLinkDescription": "模擬將一個深度連結的請求傳送至 Firefly 錢包",
         "url": "網址",
         "hash": "雜湊",
-        "creating": "Creating",
-        "updating": "Updating"
+        "creating": "正在創建",
+        "updating": "正在更新"
     },
     "filters": {
-        "title": "Filters",
+        "title": "篩選",
         "showHidden": {
             "label": "Show hidden",
             "yes": "是",
@@ -1293,7 +1295,7 @@
             "confirmed": "已確認",
             "pending": "等待中",
             "claimed": "已領取",
-            "unclaimed": "尚未領取"
+            "unclaimed": "unclaimed"
         },
         "type": {
             "label": "類型",
@@ -1342,7 +1344,8 @@
             "receivedWhileLoggedOut": "請登入以發起深度連結",
             "notEnabled": "深度連結未啟用",
             "invalidFormat": "您所追蹤的 深度連結 無效",
-            "invalidAmount": "深度連結中的填寫的數量不是一個數字: {amount}",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "已加入從深度連結所取得的支付細節"
@@ -1358,7 +1361,7 @@
             "error": "領取交易失敗"
         },
         "hideActivity": {
-            "success": "成功隱藏活動",
+            "success": "活動已隱藏",
             "error": "隱藏活動失敗"
         },
         "faucetRequest": {
@@ -1379,8 +1382,8 @@
             "error": "在尋找 Shimmer 獎勵時發生錯誤"
         },
         "claimShimmerRewards": {
-            "success": "成功領取 {accountAlias} 的 Shimmer 獎勵",
-            "error": "領取獎勵時發生錯誤"
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         }
     },
     "error": {
@@ -1438,11 +1441,11 @@
         "send": {
             "addressLength": "地址長度應符合 {length, plural, one {# 字元} other {# 字元}}。",
             "amountTooHigh": "您輸入的數值大於您的可用餘額。",
-            "amountNoFloat": "Can not use decimal places with the smallest unit selected",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "該金額是無效數字。",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "tagTooLong": "The tag cannot be longer than 64 characters.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
             "amountZero": "金額必須大於0。",
             "wrongAddressPrefix": "地址必須以 {prefix} 開頭。",
             "wrongAddressFormat": "地址格式不正確。",
@@ -1497,7 +1500,7 @@
             "phraseWordCount": "您的助記詞應該要有 24 個單字，目前有{length, plural, one { # } other { # }}個單字。",
             "phraseUnrecognizedWord": "您的助記詞中有無法辨識的單詞 “{word}”",
             "phraseCaseWord": "這個字\"{word}\" 應該要是小寫",
-            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToCopyFile": "無法複製 Stronghold 備份檔",
             "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
@@ -1543,7 +1546,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "您選擇的 失效日期/時間 為無效的"
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "透過 HTTP 未加密連接來使用節點，可能會造成安全性風險。"
@@ -1578,24 +1581,30 @@
             "bodyDidNotReachMin": "您沒有質押足夠的IOTA來達到 {airdrop} ({airdropRewardMin}) 的最低獎勵。",
             "bodyMinBalanceAirdrop": "這個錢包的 IOTA 代幣數量未達 {airdrop} 空投獎勵的最低門檻。"
         },
-        "optionalInput": "This optional input will be public on the explorer and viewable by everyone.",
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
             "incoming": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore you do not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which you can claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to the sender.",
-                "timelockDate": "The sender added a timelock to this transaction. You can spend these funds once the timlock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             },
             "outgoing": {
-                "storageDeposit": "Storage deposit is a refundable amount needed for dust protection to secure a piece of the ledger state for your transaction or asset.",
-                "giftedStorageDeposit": "The storage deposit was gifted for this transaction. Therefore the recipient does not need to claim it or refund the deposit.",
-                "expirationTime": "The time until which the recipient has to claim this transaction. If not claimed before that date, the ownership of the amount sent and storage deposit will automatically revert to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funcs until the timelock runs out.",
-                "metadata": "An optional data field that can be used to store arbituary data that is persisted on the ledger.",
-                "tag": "An optional data field, that is searchable in the explorer or ledger. Tags can be added to a group of transactions to easier find them."
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             }
+        },
+        "mintNativeTokenForm": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {

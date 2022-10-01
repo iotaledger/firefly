@@ -1,17 +1,20 @@
 <script lang="typescript">
     import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
-    import { AppRoute, appRouter, DashboardRoute, dashboardRouter, initialiseRouters, openSettings } from '@core/router'
-    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import {
-        appSettings,
-        appStage,
-        AppStage,
-        appVersionDetails,
-        initAppSettings,
-        pollCheckForAppUpdate,
-        setAppVersionDetails,
-    } from '@core/app'
+        AppRoute,
+        appRoute,
+        appRouter,
+        DashboardRoute,
+        dashboardRouter,
+        initialiseOnboardingRouters,
+        initialiseRouters,
+        OnboardingRoute,
+        onboardingRoute,
+        openSettings,
+    } from '@core/router'
+    import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
+    import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { addError } from '@core/error'
     import { showAppNotification } from 'shared/lib/notifications'
@@ -20,9 +23,10 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { initialiseOnboardingProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -47,7 +51,15 @@
             Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
         }
     }
-    $: Electron.updateMenu('loggedIn', $loggedIn)
+
+    $: Electron.updateMenu(
+        'canCreateNewProfile',
+        $appRoute === AppRoute.Login ||
+            ($appRoute === AppRoute.Onboarding &&
+                $onboardingRoute !== OnboardingRoute.AppSetup &&
+                $onboardingRoute !== OnboardingRoute.ShimmerClaiming &&
+                $onboardingRoute !== OnboardingRoute.Congratulations)
+    )
 
     $: if (document.dir !== $localeDirection) {
         document.dir = $localeDirection
@@ -70,10 +82,10 @@
 
         /* eslint-disable no-undef */
         // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        if (!devMode && get(appStage) === AppStage.PROD) {
-            await setAppVersionDetails()
-            pollCheckForAppUpdate()
-        }
+        // if (!devMode && get(appStage) === AppStage.PROD) {
+        //     await setAppVersionDetails()
+        //     pollCheckForAppUpdate()
+        // }
         Electron.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
         })
@@ -100,13 +112,16 @@
         })
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
+            initialiseOnboardingProfile(true, NetworkProtocol.Shimmer)
+            initialiseOnboardingRouters()
             get(appRouter).next({ shouldAddProfile: true })
-            initialiseOnboardingProfile(true)
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
+            initialiseOnboardingProfile(false, NetworkProtocol.Shimmer)
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+            initialiseOnboardingRouters()
             get(appRouter).next({ shouldAddProfile: true })
-            initialiseOnboardingProfile(false)
         })
         Electron.hookErrorLogger((err) => {
             addError(err)

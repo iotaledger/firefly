@@ -8,6 +8,7 @@
     export let label: string = ''
     export let description: string = ''
     export let value: string = null
+    export let fontSize: number = 15
     export let error: string = ''
     export let classes: string = null
     export let isOpen: boolean = false
@@ -57,7 +58,7 @@
         bind:error
         {label}
         placeholder={label}
-        fontSize="15"
+        {fontSize}
         fontWeight={FontWeight.medium}
         {...$$restProps}
     />
@@ -78,8 +79,10 @@
                         type={TextType.h5}
                         fontWeight={FontWeight.medium}
                         classes="text-left mb-2"
-                        color="gray-900">{label}</Text
+                        color="gray-900"
                     >
+                        {label}
+                    </Text>
                     <Text smaller classes="text-left" color="gray-700" lineHeight="leading-140">{description}</Text>
                 </Tooltip>
             </tooltip-container>
