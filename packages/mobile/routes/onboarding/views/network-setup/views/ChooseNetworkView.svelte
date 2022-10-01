@@ -1,17 +1,24 @@
 <script lang="typescript">
+    import {
+        initialiseOnboardingProfile,
+        onboardingProfile,
+        shouldBeDeveloperProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
+    import { localize } from '@core/i18n'
+    import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+    import { networkSetupRouter } from '@core/router'
+    import features from '@features/features'
+    import { OnboardingButton } from 'shared/components'
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
-    import { OnboardingButton } from 'shared/components'
-    import features from '@features/features'
-    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import { localize } from '@core/i18n'
-    import { getDefaultClientOptions, NetworkType } from '@core/network'
-    import { networkSetupRouter } from '@core/router'
 
-    const networkProtocol = $onboardingProfile.networkProtocol
     const title = localize('views.onboarding.networkSetup.chooseNetwork.title')
 
-    const networkIcon: Readonly<{ [key in NetworkType]: string }> = {
+    $: networkProtocol = $onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer
+
+    let networkIcon: { [key in NetworkType]: string }
+    $: networkIcon = {
         [NetworkType.Mainnet]: networkProtocol,
         [NetworkType.Devnet]: 'settings',
         [NetworkType.PrivateNet]: 'settings',
@@ -31,6 +38,12 @@
     }
 
     onMount(() => {
+        if (!$onboardingProfile?.id) {
+            initialiseOnboardingProfile(
+                $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
+                NetworkProtocol.Shimmer
+            )
+        }
         updateOnboardingProfile({ networkType: null })
     })
 </script>

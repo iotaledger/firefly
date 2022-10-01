@@ -1,16 +1,33 @@
 <script lang="typescript">
-    import { OnboardingLayout } from '../../../../../components'
-    import { Button, Text, Checkbox } from 'shared/components'
-    import features from '@features/features'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
     import { appSetupRouter } from '@core/router'
+    import features from '@features/features'
+    import { Button, Checkbox, Text } from 'shared/components'
+    import {
+        initialiseOnboardingProfile,
+        onboardingProfile,
+        shouldBeDeveloperProfile,
+        updateOnboardingProfile,
+    } from 'shared/lib/contexts/onboarding'
+    import { onMount } from 'svelte'
+    import { OnboardingLayout } from '../../../../../components'
 
     let checked = false
 
     function onContinueClick(): void {
         $appSetupRouter.next()
     }
+
+    onMount(() => {
+        initialiseOnboardingProfile(
+            $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
+            NetworkProtocol.Shimmer
+        )
+        if (!shouldBeDeveloperProfile()) {
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+        }
+    })
 </script>
 
 <OnboardingLayout allowBack={false} animation="welcome-desktop">

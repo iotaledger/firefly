@@ -1,8 +1,5 @@
 <script lang="typescript">
-    import { localeDirection, setupI18n, _ } from '@core/i18n'
-    import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
-    import { AppRoute, appRouter, DashboardRoute, dashboardRouter, initialiseRouters, openSettings } from '@core/router'
-    import { Popup, Route, ToastContainer } from 'shared/components'
+    import { initialiseOnboardingProfile, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import {
         appSettings,
         appStage,
@@ -14,18 +11,33 @@
         setAppVersionDetails,
         shouldBeDarkMode,
     } from '@core/app'
-    import { Electron } from 'shared/lib/electron'
+    import { setPlatform } from '@core/app/stores/platform.store'
     import { addError } from '@core/error'
+    import { localeDirection, setupI18n, _ } from '@core/i18n'
+    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
+    import {
+        AppRoute,
+        appRoute,
+        appRouter,
+        DashboardRoute,
+        dashboardRouter,
+        initialiseOnboardingRouters,
+        initialiseRouters,
+        OnboardingRoute,
+        onboardingRoute,
+        openSettings,
+    } from '@core/router'
+    import { Platform } from '@lib/platform'
+    import { Popup, Route, ToastContainer } from 'shared/components'
+    import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup, popupState } from 'shared/lib/popup'
-    import { OnboardingRouter } from './routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { initialiseOnboardingProfile, onboardingProfile } from '@contexts/onboarding'
-    import { Platform } from '@lib/platform'
-    import { setPlatform } from '@core/app/stores/platform.store'
+    import { OnboardingRouter } from './routes'
 
-    import { keyboardHeight, isKeyboardOpen } from './lib/auxiliary/keyboard'
+    import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -44,6 +56,15 @@
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
         : document.body.classList.remove('scheme-dark')
+
+    $: Electron.updateMenu(
+        'canCreateNewProfile',
+        $appRoute === AppRoute.Login ||
+            ($appRoute === AppRoute.Onboarding &&
+                $onboardingRoute !== OnboardingRoute.AppSetup &&
+                $onboardingRoute !== OnboardingRoute.ShimmerClaiming &&
+                $onboardingRoute !== OnboardingRoute.Congratulations)
+    )
 
     $: Electron.updateMenu('loggedIn', $loggedIn)
 
@@ -98,13 +119,16 @@
         })
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
+            initialiseOnboardingProfile(true, NetworkProtocol.Shimmer)
+            initialiseOnboardingRouters()
             get(appRouter).next({ shouldAddProfile: true })
-            initialiseOnboardingProfile(true)
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
+            initialiseOnboardingProfile(false, NetworkProtocol.Shimmer)
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+            initialiseOnboardingRouters()
             get(appRouter).next({ shouldAddProfile: true })
-            initialiseOnboardingProfile(false)
         })
         Electron.hookErrorLogger((err) => {
             addError(err)
