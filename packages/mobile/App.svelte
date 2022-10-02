@@ -1,20 +1,5 @@
 <script lang="typescript">
-    import { initialiseOnboardingProfile, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import {
-        appSettings,
-        appStage,
-        AppStage,
-        AppTheme,
-        appVersionDetails,
-        initAppSettings,
-        pollCheckForAppUpdate,
-        setAppVersionDetails,
-        shouldBeDarkMode,
-    } from '@core/app'
-    import { setPlatform } from '@core/app/stores/platform.store'
-    import { addError } from '@core/error'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
-    import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
     import {
         AppRoute,
@@ -28,14 +13,27 @@
         onboardingRoute,
         openSettings,
     } from '@core/router'
-    import { Platform } from '@lib/platform'
-    import { Popup, Route, ToastContainer } from 'shared/components'
+    import { Route, ToastContainer } from 'shared/components'
+    import {
+        AppTheme,
+        appSettings,
+        appStage,
+        AppStage,
+        appVersionDetails,
+        initAppSettings,
+        shouldBeDarkMode,
+    } from '@core/app'
     import { Electron } from 'shared/lib/electron'
+    import { addError } from '@core/error'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { openPopup } from 'shared/lib/popup'
+    import { OnboardingRouter } from './routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { OnboardingRouter } from './routes'
+    import { onboardingProfile, initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import { Platform } from '@lib/platform'
+    import { setPlatform } from '@core/app/stores/platform.store'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
 
@@ -89,10 +87,10 @@
 
         /* eslint-disable no-undef */
         // @ts-expect-error: This value is replaced by Webpack DefinePlugin
-        if (!devMode && get(appStage) === AppStage.PROD) {
-            await setAppVersionDetails()
-            pollCheckForAppUpdate()
-        }
+        // if (!devMode && get(appStage) === AppStage.PROD) {
+        //     await setAppVersionDetails()
+        //     pollCheckForAppUpdate()
+        // }
         Electron.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
         })
@@ -175,18 +173,6 @@
 
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
-{#if $popupState.active}
-    <Popup
-        type={$popupState.type}
-        props={$popupState.props}
-        hideClose={$popupState.hideClose}
-        fullScreen={$popupState.fullScreen}
-        transition={$popupState.transition}
-        overflow={$popupState.overflow}
-        relative={$popupState.relative}
-        locale={$_}
-    />
-{/if}
 <Route route={AppRoute.Onboarding}>
     <OnboardingRouter />
 </Route>
