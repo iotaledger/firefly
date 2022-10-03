@@ -129,13 +129,13 @@
             <Text type={internal ? 'p' : 'pre'} secondary bigger classes="mb-2">{to}</Text>
             {#if $sendParams.tag && $sendParams.metadata}
                 <Text type="h4" highlighted classes="mb-2">
-                    {localize('popups.transaction.tag')}
+                    {localize('general.tag')}:
                 </Text>
-                <Text type={internal ? 'p' : 'pre'} secondary bigger classes="mb-2">{$sendParams.tag}</Text>
+                <Text type={'pre'} secondary bigger classes="mb-2">{$sendParams.tag}</Text>
                 <Text type="h4" highlighted classes="mb-2">
-                    {localize('popups.transaction.metadata')}
+                    {localize('general.metadata')}:
                 </Text>
-                <Text type={internal ? 'p' : 'pre'} secondary bigger classes="mb-2">{$sendParams.metadata}</Text>
+                <Text type={'pre'} secondary bigger classes="mb-2">{$sendParams.metadata}</Text>
             {/if}
         </div>
     {/if}
