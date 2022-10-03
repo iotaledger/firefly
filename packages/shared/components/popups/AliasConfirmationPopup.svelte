@@ -84,8 +84,16 @@
             valueText={storageDeposit}
             tooltipText={localize('tooltips.transactionDetails.incoming.storageDeposit')}
         />
-        <KeyValueBox keyText={localize('general.governorAddress')} valueText={address} isCopyable />
-        <KeyValueBox keyText={localize('general.stateControllerAddress')} valueText={address} isCopyable />
+        <KeyValueBox
+            keyText={localize('general.governorAddress')}
+            valueText={$selectedAccount.depositAddress}
+            isCopyable
+        />
+        <KeyValueBox
+            keyText={localize('general.stateControllerAddress')}
+            valueText={$selectedAccount.depositAddress}
+            isCopyable
+        />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancel} disabled={$isTransferring}>
