@@ -27,7 +27,7 @@
 <Modal bind:this={modal} position={{ left: '80px', top: '25px' }}>
     <network-indicator-content class="flex flex-col">
         <div class="py-5">
-            {#if $activeProfile?.isDeveloperProfile}
+            {#if $activeProfile?.isDeveloperProfile && $nodeInfo?.protocol?.networkName}
                 <Text type={TextType.h3} classes="px-7">{$nodeInfo?.protocol?.networkName}</Text>
             {/if}
             <Text classes="px-7" color={healthColor} darkColor={healthColor}>
