@@ -17,7 +17,7 @@
         findShimmerRewards,
         FindShimmerRewardsError,
         syncShimmerClaimingAccount,
-        canUserRecoverWithShimmerClaimingAccounts,
+        canUserRecoverFromShimmerClaiming,
         hasUserClaimedRewards,
         isOnboardingLedgerProfile,
         onboardingProfile,
@@ -45,7 +45,7 @@
         canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
     $: shouldShowContinueButton =
         hasUserClaimedRewards(shimmerClaimingAccounts) ||
-        (hasSearchedForRewardsBefore && canUserRecoverWithShimmerClaimingAccounts(shimmerClaimingAccounts))
+        (hasSearchedForRewardsBefore && canUserRecoverFromShimmerClaiming(shimmerClaimingAccounts))
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()

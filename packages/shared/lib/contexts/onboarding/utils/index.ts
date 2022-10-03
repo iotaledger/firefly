@@ -1,5 +1,5 @@
 export * from './canUserClaimRewards'
-export * from './canUserRecoverWithShimmerClaimingAccounts'
+export * from './canUserRecoverFromShimmerClaiming'
 export * from './getProfileTypeFromProfileRecoveryType'
 export * from './hasUserClaimedRewards'
 export * from './shouldBeDeveloperProfile'
