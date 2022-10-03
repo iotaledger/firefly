@@ -8,10 +8,10 @@ import {
     getNativeTokenFromOutput,
     getStorageDepositFromOutput,
     getStateControllerAddressFromOutput,
-    convertEd25519ToBech32,
+    convertHexAddressToBech32,
 } from '..'
 import { ActivityType } from '@core/wallet/enums'
-import { OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
+import { ADDRESS_TYPE_ALIAS, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { OutputTypes } from '@iota/types'
 import { Converter } from '@lib/converter'
 import { Blake2b } from '@iota/crypto.js'
@@ -43,8 +43,9 @@ function getAliasId(output: OutputTypes, outputId: string): string {
     if (output.type === OUTPUT_TYPE_ALIAS) {
         const isNewAlias = output.aliasId === '0x0000000000000000000000000000000000000000000000000000000000000000'
         if (isNewAlias) {
-            const hexEncodedOutputId = Converter.bytesToHex(Blake2b.sum256(Converter.hexToBytes(outputId.substring(2))))
-            return convertEd25519ToBech32(`0x${hexEncodedOutputId}`)
+            const hexEncodedOutputId =
+                '0x' + Converter.bytesToHex(Blake2b.sum256(Converter.hexToBytes(outputId.substring(2))))
+            return convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexEncodedOutputId)
         } else {
             return output.aliasId
         }
