@@ -10,7 +10,7 @@
         "@iota/transaction-converter": "^1.0.0-beta.30",
         "@iota/unit-converter": "^1.0.0-beta.30",
         "@iota/util.js": "^1.9.0-stardust.5",
-        "@iota/wallet": "2.0.2-alpha.32",
+        "@iota/wallet": "2.0.3-rc.1",
         "@sveltejs/svelte-virtual-list": "^3.0.1",
         "big.js": "^6.0.3",
         "lottie-web": "^5.7.8",
