@@ -480,7 +480,11 @@ export function getNumberOfDecimalPlaces(x: number): number {
 }
 
 export function convertStringToUtf8Array(input: string): number[] {
-    const characterArray = input.split('')
-    const numberArray = characterArray.map((c) => c.charCodeAt(0))
-    return numberArray
+    if (input) {
+        const characterArray = input.split('')
+        const numberArray = characterArray.map((c) => c.charCodeAt(0))
+        return numberArray
+    } else {
+        return []
+    }
 }

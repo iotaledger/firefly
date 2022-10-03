@@ -225,7 +225,7 @@
                     remainder_value_strategy: {
                         strategy: 'ChangeAddress',
                     },
-                    indexation: { index: tag ?? 'firefly', data: data ? convertStringToUtf8Array(data) : null },
+                    indexation: { index: tag ?? 'firefly', data: convertStringToUtf8Array(data) },
                 },
                 {
                     onSuccess(response) {
