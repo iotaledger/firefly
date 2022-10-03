@@ -4,9 +4,9 @@ import { OutputData, Transaction } from '@iota/wallet'
 import { IProcessedTransaction } from '../../interfaces/processed-transaction.interface'
 
 export async function preprocessOutputsForAccount(account: IAccountState): Promise<IProcessedTransaction[]> {
-    const outputs = await account.listOutputs()
+    const outputs = await account.outputs()
 
-    const transactions = await account.listTransactions()
+    const transactions = await account.transactions()
     const transactionMap = getTransactionsMapFromList(transactions)
     // TODO: uncomment this when `account.listIncomingTransactions()` is implemented
     // const incomingTransactions = await account.listIncomingTransactions()
