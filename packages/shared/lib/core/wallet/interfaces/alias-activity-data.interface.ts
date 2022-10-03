@@ -1,4 +1,4 @@
-import { ActivityType } from '../enums'
+import { ActivityType, AliasType } from '../enums'
 
 export interface IPartialAliasActivityDataWithType extends Omit<Partial<IAliasActivityData>, 'type'> {
     type: ActivityType.Alias
@@ -10,6 +10,7 @@ export interface IAliasActivityData {
     assetId: string
     storageDeposit: number
     aliasId: string
+    aliasType: AliasType
     governorAddress: string
     stateControllerAddress: string
 }

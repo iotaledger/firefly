@@ -10,7 +10,7 @@ import {
     getStateControllerAddressFromOutput,
     convertHexAddressToBech32,
 } from '..'
-import { ActivityType } from '@core/wallet/enums'
+import { ActivityType, AliasType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_ALIAS, NEW_ALIAS_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { OutputTypes } from '@iota/types'
 import { Converter } from '@lib/converter'
@@ -27,12 +27,15 @@ export function getAliasActivityData(processedTransaction: IProcessedTransaction
     const governorAddress = getGovernorAddressFromOutput(output)
     const stateControllerAddress = getStateControllerAddressFromOutput(output)
     const aliasId = getAliasId(output, outputId)
+    const aliasType =
+        output.type === OUTPUT_TYPE_ALIAS && output.aliasId === NEW_ALIAS_ID ? AliasType.Created : AliasType.Other
 
     return {
         type: ActivityType.Alias,
         outputId,
         assetId,
         aliasId,
+        aliasType,
         storageDeposit,
         governorAddress,
         stateControllerAddress,

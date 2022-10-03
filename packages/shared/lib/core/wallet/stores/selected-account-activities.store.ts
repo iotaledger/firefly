@@ -3,6 +3,7 @@ import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../classes/activity.class'
 import {
     ActivityType,
+    AliasType,
     BooleanFilterOption,
     DateFilterOption,
     NumberFilterOption,
@@ -98,7 +99,12 @@ export const queriedActivities: Readable<Activity[]> = derived(
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
             const asset = getAssetFromPersistedAssets(_activity.data.assetId)
-            return !_activity.isHidden && asset && isValidIRC30(asset.metadata)
+            return (
+                !_activity.isHidden &&
+                asset &&
+                isValidIRC30(asset.metadata) &&
+                (_activity.data.type !== ActivityType.Alias || _activity.data.aliasType === AliasType.Created)
+            )
         })
 
         activityList = activityList.filter((activity) => isVisibleActivity(activity))
