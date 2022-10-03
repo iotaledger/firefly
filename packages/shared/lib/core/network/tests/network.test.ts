@@ -132,7 +132,7 @@ describe('File: network.ts', () => {
             ],
         },
         [NetworkProtocol.Shimmer]: {
-            [NetworkType.Mainnet]: [''],
+            [NetworkType.Mainnet]: ['https://api.shimmer.network'],
             [NetworkType.Devnet]: ['https://api.testnet.shimmer.network'],
         },
     }
