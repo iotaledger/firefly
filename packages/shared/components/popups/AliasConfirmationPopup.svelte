@@ -4,7 +4,12 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, activeProfile } from '@core/profile'
-    import { convertBech32ToEd25519, formatTokenAmountPrecise } from '@core/wallet'
+    import {
+        convertBech32ToHexAddress,
+        formatTokenAmountPrecise,
+        UNLOCK_CONDITION_GOVERNOR_ADDRESS,
+        UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
+    } from '@core/wallet'
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
     import { onMount } from 'svelte'
@@ -17,18 +22,18 @@
 
     $: address = {
         type: 0,
-        pubKeyHash: `0x${convertBech32ToEd25519($selectedAccount.depositAddress)}`,
+        pubKeyHash: convertBech32ToHexAddress($selectedAccount.depositAddress),
     }
     $: aliasOutput = address
         ? {
               aliasId: '0x0000000000000000000000000000000000000000000000000000000000000000',
               unlockConditions: [
                   {
-                      type: 4, // Governor
+                      type: UNLOCK_CONDITION_GOVERNOR_ADDRESS,
                       address,
                   },
                   {
-                      type: 5, // State controller
+                      type: UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
                       address,
                   },
               ],

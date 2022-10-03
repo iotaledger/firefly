@@ -51,7 +51,7 @@
                 </div>
                 <div class="flex flex-row">
                     <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
-                        {truncateString(data.aliasId, 20, 0)}
+                        {truncateString(data.aliasId, 5, 6)}
                     </Text>
                 </div>
             </div>

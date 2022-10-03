@@ -26,11 +26,11 @@
                     {#if features.developerTools.faucet.enabled}
                         <FaucetRequestButton />
                     {/if}
-                    {#if features.developerTools.minting.enabled}
-                        <MintNativeTokenButton />
-                    {/if}
                     {#if features.developerTools.alias.enabled}
                         <CreateAliasButton />
+                    {/if}
+                    {#if features.developerTools.minting.enabled}
+                        <MintNativeTokenButton />
                     {/if}
                     {#if features.developerTools.refreshTokens.enabled}
                         <RefreshTokenMetadataButton />

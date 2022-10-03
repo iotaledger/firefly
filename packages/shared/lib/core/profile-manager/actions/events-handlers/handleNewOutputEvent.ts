@@ -34,7 +34,7 @@ export async function handleNewOutputEventInternal(
             [output],
             [payload?.transaction, payload?.transactionInputs],
             account
-        )[0]
+        )
         const activity = new Activity(processedOutput, account)
         await tryGetAndStoreAssetFromPersistedAssets(activity.data?.assetId)
         addActivityToAccountActivitiesInAllAccountActivities(account.id, activity)

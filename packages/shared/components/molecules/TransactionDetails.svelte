@@ -205,8 +205,7 @@
                     </Text>
                 </Box>
             {/if}
-        {/if}
-        {#if type === ActivityType.Alias}
+        {:else if type === ActivityType.Alias}
             <AddressBox clearBackground clearPadding isCopyable address={aliasId} />
         {/if}
     </main-content>

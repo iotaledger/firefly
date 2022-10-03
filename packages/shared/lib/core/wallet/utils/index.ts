@@ -1,7 +1,7 @@
 // Files
 export * from './getBech32AddressFromAddressTypes'
 export * from './convertHexAddressToBech32'
-export * from './convertBech32ToEd25519'
+export * from './convertBech32ToHexAddress'
 export * from './convertToRawAmount'
 export * from './formatTokenAmountBestMatch'
 export * from './formatTokenAmountDefault'
