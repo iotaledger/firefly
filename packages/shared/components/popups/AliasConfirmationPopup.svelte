@@ -5,8 +5,12 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, activeProfile } from '@core/profile'
     import {
+        Activity,
+        addActivityToAccountActivitiesInAllAccountActivities,
         convertBech32ToHexAddress,
         formatTokenAmountPrecise,
+        NEW_ALIAS_ID,
+        preprocessTransaction,
         UNLOCK_CONDITION_GOVERNOR_ADDRESS,
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
     } from '@core/wallet'
@@ -26,7 +30,7 @@
     }
     $: aliasOutput = address
         ? {
-              aliasId: '0x0000000000000000000000000000000000000000000000000000000000000000',
+              aliasId: NEW_ALIAS_ID,
               unlockConditions: [
                   {
                       type: UNLOCK_CONDITION_GOVERNOR_ADDRESS,
@@ -54,7 +58,9 @@
     async function createAlias(): Promise<void> {
         try {
             $isTransferring = true
-            await $selectedAccount.createAliasOutput()
+            const transaction = await $selectedAccount.createAliasOutput()
+            const activity = new Activity(preprocessTransaction(transaction), $selectedAccount)
+            addActivityToAccountActivitiesInAllAccountActivities($selectedAccount.id, activity)
             closePopup()
         } catch (err) {
             handleError(err)

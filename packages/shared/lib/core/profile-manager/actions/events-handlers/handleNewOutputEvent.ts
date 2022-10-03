@@ -2,7 +2,10 @@ import { syncBalance } from '@core/account/actions/syncBalance'
 import { activeAccounts } from '@core/profile/stores'
 import { tryGetAndStoreAssetFromPersistedAssets } from '@core/wallet'
 import { Activity } from '@core/wallet/classes/activity.class'
-import { addActivityToAccountActivitiesInAllAccountActivities } from '@core/wallet/stores/all-account-activities.store'
+import {
+    addActivityToAccountActivitiesInAllAccountActivities,
+    allAccountActivities,
+} from '@core/wallet/stores/all-account-activities.store'
 import { OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { get } from 'svelte/store'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
@@ -25,7 +28,10 @@ export async function handleNewOutputEventInternal(
     const output = payload?.output
 
     const address = getBech32AddressFromAddressTypes(output?.address)
-    const isNewAliasOutput = output.output.type === OUTPUT_TYPE_ALIAS && output.output.stateIndex === 0
+    const isNewAliasOutput =
+        output.output.type === OUTPUT_TYPE_ALIAS &&
+        output.output.stateIndex === 0 &&
+        !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === output.outputId)
 
     if ((account.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
         syncBalance(account.id)
