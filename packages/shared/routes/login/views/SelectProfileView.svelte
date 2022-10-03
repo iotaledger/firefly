@@ -3,13 +3,9 @@
     import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
-    import { initialiseOnboardingRouters, loginRouter } from '@core/router'
-    import {
-        initialiseOnboardingProfile,
-        shouldBeDeveloperProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { loadPersistedProfileIntoActiveProfile, profiles, ProfileType } from '@core/profile'
+    import { loginRouter } from '@core/router'
+    import { initialiseOnboarding, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import { openPopup } from '@lib/popup'
 
     function onContinueClick(id: string) {
@@ -18,11 +14,14 @@
     }
 
     function onAddProfileClick() {
-        initialiseOnboardingProfile(shouldBeDeveloperProfile(), NetworkProtocol.Shimmer)
-        if (!shouldBeDeveloperProfile()) {
-            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
-        }
-        initialiseOnboardingRouters()
+        const isDeveloperProfile = shouldBeDeveloperProfile()
+        initialiseOnboarding({
+            isDeveloperProfile,
+            networkProtocol: NetworkProtocol.Shimmer,
+            ...(!isDeveloperProfile && { networkType: NetworkType.Mainnet }),
+            resetProfileManagers: true,
+            resetRouters: true,
+        })
         $loginRouter.next({ shouldAddProfile: true })
     }
 

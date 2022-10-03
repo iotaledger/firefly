@@ -6,18 +6,19 @@ import { IOnboardingInitialisationOptions } from '../interfaces'
 import { updateOnboardingProfile } from '../stores'
 
 import { initialiseOnboardingProfile } from './initialiseOnboardingProfile'
-import { NetworkProtocol, NetworkType } from '@core/network'
 
 export function initialiseOnboarding(options: IOnboardingInitialisationOptions): void {
     const { isDeveloperProfile, networkProtocol, networkType, resetProfileManagers, resetRouters } = options
 
-    if (resetRouters) {
-        initialiseOnboardingRouters()
-    }
-
     if (resetProfileManagers) {
-        destroyProfileManager()
+        /**
+         * CAUTION: We MUST stop polling the Ledger
+         * Nano status because it uses the underlying
+         * profile manager, which if reset will become
+         * null or undefined.
+         */
         stopPollingLedgerNanoStatus()
+        destroyProfileManager()
     }
 
     initialiseOnboardingProfile(isDeveloperProfile, networkProtocol, true)
@@ -25,23 +26,8 @@ export function initialiseOnboarding(options: IOnboardingInitialisationOptions):
     if (networkType) {
         updateOnboardingProfile({ networkType })
     }
-}
 
-export function initialiseOnboardingForNormalProfile(): void {
-    initialiseOnboarding({
-        isDeveloperProfile: false,
-        networkProtocol: NetworkProtocol.Shimmer,
-        networkType: NetworkType.Mainnet,
-        resetProfileManagers: true,
-        resetRouters: true,
-    })
-}
-
-export function initialiseOnboardingForDeveloperProfile(): void {
-    initialiseOnboarding({
-        isDeveloperProfile: true,
-        networkProtocol: NetworkProtocol.Shimmer,
-        resetProfileManagers: true,
-        resetRouters: true,
-    })
+    if (resetRouters) {
+        initialiseOnboardingRouters()
+    }
 }

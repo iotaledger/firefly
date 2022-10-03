@@ -7,7 +7,6 @@
         appRouter,
         DashboardRoute,
         dashboardRouter,
-        initialiseOnboardingRouters,
         initialiseRouters,
         OnboardingRoute,
         onboardingRoute,
@@ -30,7 +29,7 @@
     import { OnboardingRouter } from './routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { onboardingProfile, initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import { onboardingProfile, initialiseOnboarding } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -117,15 +116,23 @@
         })
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
-            initialiseOnboardingProfile(true, NetworkProtocol.Shimmer)
-            initialiseOnboardingRouters()
+            initialiseOnboarding({
+                isDeveloperProfile: true,
+                networkProtocol: NetworkProtocol.Shimmer,
+                resetProfileManagers: true,
+                resetRouters: true,
+            })
             get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
-            initialiseOnboardingProfile(false, NetworkProtocol.Shimmer)
-            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
-            initialiseOnboardingRouters()
+            initialiseOnboarding({
+                isDeveloperProfile: false,
+                networkProtocol: NetworkProtocol.Shimmer,
+                networkType: NetworkType.Mainnet,
+                resetProfileManagers: true,
+                resetRouters: true,
+            })
             get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.hookErrorLogger((err) => {
