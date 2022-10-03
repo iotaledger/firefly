@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { Unit } from '@iota/unit-converter'
-    import { Button, Icon, Illustration, Text } from 'shared/components'
+    import { Button, Icon, Illustration, Popup, Text } from 'shared/components'
     import { convertToFiat, currencies, exchangeRates, formatCurrency, isFiatCurrency } from 'shared/lib/currency'
     import { isAccountStaked, isParticipationPossible } from 'shared/lib/participation'
     import { selectedAccountParticipationOverview } from 'shared/lib/participation/account'
@@ -12,6 +12,7 @@
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
     import { formatUnitBestMatch, formatUnitPrecision } from 'shared/lib/units'
     import { TrackedParticipationItem } from 'shared/lib/participation/types'
+    import { sendParams } from '@lib/app'
 
     export let accountId: string
     export let internal = false
@@ -125,7 +126,17 @@
             <Text type="h4" highlighted classes="mb-2">
                 {localize('popups.transaction.body', { values: { amount: displayAmount } })}
             </Text>
-            <Text type={internal ? 'p' : 'pre'} secondary bigger>{to}</Text>
+            <Text type={internal ? 'p' : 'pre'} secondary bigger classes="mb-2">{to}</Text>
+            {#if $sendParams.tag && $sendParams.metadata}
+                <Text type="h4" highlighted classes="mb-2">
+                    {localize('general.tag')}:
+                </Text>
+                <Text type={'pre'} secondary bigger classes="mb-2">{$sendParams.tag}</Text>
+                <Text type="h4" highlighted classes="mb-2">
+                    {localize('general.metadata')}:
+                </Text>
+                <Text type={'pre'} secondary bigger classes="mb-2">{$sendParams.metadata}</Text>
+            {/if}
         </div>
     {/if}
     <div class="flex flex-row flex-nowrap w-full space-x-4">

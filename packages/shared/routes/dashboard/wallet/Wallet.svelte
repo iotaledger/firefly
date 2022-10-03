@@ -3,6 +3,7 @@
     import { localize } from '@core/i18n'
     import { accountRoute, accountRouter } from '@core/router'
     import { AccountRoute } from '@core/router/enums'
+    import { convertStringToUtf8Array } from '@lib/utils'
     import { asyncGetAccounts, setSelectedAccount } from '@lib/wallet'
     import { AccountActionsModal, DashboardPane, Modal, Text } from 'shared/components'
     import { clearSendParams, loggedIn, sendParams } from 'shared/lib/app'
@@ -213,7 +214,7 @@
         }
     }
 
-    function onSend(senderAccountId, receiveAddress, amount) {
+    function onSend(senderAccountId, receiveAddress, amount, tag, data) {
         const _send = () => {
             isTransferring.set(true)
             api.send(
@@ -224,7 +225,7 @@
                     remainder_value_strategy: {
                         strategy: 'ChangeAddress',
                     },
-                    indexation: { index: 'firefly', data: [] },
+                    indexation: { index: tag ?? 'firefly', data: convertStringToUtf8Array(data) },
                 },
                 {
                     onSuccess(response) {

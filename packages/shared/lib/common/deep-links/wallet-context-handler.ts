@@ -15,7 +15,7 @@ import {
     DeepLinkParameters,
     DeepLinkRequest,
     SendOperationParameters,
-    SwapOutOperationParameters,
+    SendWithMetaDataOperationParameters,
 } from '@common/deep-links/types'
 import { formatNumber } from '@lib/currency'
 import { getNumberOfDecimalPlaces } from '@lib/utils'
@@ -137,7 +137,7 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams): voi
 const parseSwapOutOperation = (
     waspAddress: string,
     searchParams: URLSearchParams
-): void | SwapOutOperationParameters => {
+): void | SendWithMetaDataOperationParameters => {
     const sendParams = parseSendOperation(waspAddress, searchParams)
     if (!sendParams) {
         // Error handling is done in parseSendOperation already
@@ -168,8 +168,8 @@ const parseSwapOutOperation = (
 
     return {
         ...sendParams,
-        chainId,
-        receiverAddress,
+        tag: WalletOperation.SwapOut,
+        metadata: `${receiverAddress}:${chainId}`,
     }
 }
 

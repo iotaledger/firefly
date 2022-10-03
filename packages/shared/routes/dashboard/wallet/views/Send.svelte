@@ -2,26 +2,8 @@
     import { getContext, onDestroy, onMount } from 'svelte'
     import { get, Readable } from 'svelte/store'
     import { Unit } from '@iota/unit-converter'
-    import {
-        Address,
-        Amount,
-        Button,
-        Dropdown,
-        Icon,
-        Illustration,
-        Input,
-        KeyValueBox,
-        ProgressBar,
-        Text,
-    } from 'shared/components'
-    import {
-        clearSendParams,
-        keyboardHeight,
-        isKeyboardOpened,
-        mobile,
-        sendParams,
-        getKeyboardTransitionSpeed,
-    } from 'shared/lib/app'
+    import { Address, Amount, Button, Dropdown, Icon, KeyValueBox, ProgressBar, Text } from 'shared/components'
+    import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
     import {
         convertFromFiat,
         convertToFiat,
@@ -62,11 +44,7 @@
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
 
-    export let bridgeAddress = '0xF65e3cCbe04D4784EDa9CC4a33F84A6162aC9EB6'
-    export let chainId = '4002'
-
     const { accounts } = $wallet
-
     const liveAccounts = getContext<Readable<WalletAccount[]>>('liveAccounts')
     const addressPrefix = ($selectedAccountStore ?? $liveAccounts[0])?.depositAddress?.split('1')?.[0]
 
@@ -94,7 +72,7 @@
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
-    $: showBridgeFields = Boolean($sendParams.receiverAddress && $sendParams.chainId)
+    $: showBridgeFields = Boolean($sendParams.tag && $sendParams.metadata)
 
     const transferSteps: {
         [key in TransferProgressEventType]: {
@@ -389,7 +367,7 @@
                       amountRaw,
                       selectedSendType === SEND_TYPE.INTERNAL
                   )
-                : onSend($selectedAccountStore.id, address, amountRaw)
+                : onSend($selectedAccountStore.id, address, amountRaw, $sendParams.tag, $sendParams.metadata)
 
         if ($isSoftwareProfile) {
             _send(isInternal)
@@ -558,11 +536,8 @@
                         classes="mb-6"
                     />
                     {#if showBridgeFields}
-                        <KeyValueBox bind:value={$sendParams.chainId} key={localize('general.chainId')} />
-                        <KeyValueBox
-                            bind:value={$sendParams.receiverAddress}
-                            key={localize('general.bridgeToAddress')}
-                        />
+                        <KeyValueBox bind:value={$sendParams.tag} key={localize('general.tag')} />
+                        <KeyValueBox bind:value={$sendParams.metadata} key={localize('general.metadata')} />
                     {/if}
                 </div>
             </div>

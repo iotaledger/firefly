@@ -13,7 +13,7 @@ export type SendOperationParameters = {
 /**
  * The parameters of a bridge operation.
  */
-export type SwapOutOperationParameters = SendOperationParameters & {
-    chainId: string
-    receiverAddress: string
+export type SendWithMetaDataOperationParameters = SendOperationParameters & {
+    tag: string
+    metadata: string
 }
