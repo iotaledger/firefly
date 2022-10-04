@@ -1,3 +1,5 @@
+import { get } from 'svelte/store'
+
 import { initialiseOnboardingRouters, OnboardingRoute, onboardingRouter } from '@core/router'
 
 import { IOnboardingInitialisationOptions } from '../interfaces'
@@ -5,7 +7,6 @@ import { updateOnboardingProfile } from '../stores'
 
 import { initialiseOnboardingProfile } from './initialiseOnboardingProfile'
 import { logout } from '@core/profile'
-import { get } from 'svelte/store'
 
 export async function initialiseOnboarding(options: IOnboardingInitialisationOptions): Promise<void> {
     const { isDeveloperProfile, networkProtocol, networkType, resetRouters } = options

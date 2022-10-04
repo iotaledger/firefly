@@ -14,18 +14,18 @@
     } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings } from '@core/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Electron } from '@lib/electron'
     import { addError } from '@core/error'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { showAppNotification } from '@lib/notifications'
+    import { openPopup, popupState } from '@lib/popup'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
-    import { initialiseOnboarding } from 'shared/lib/contexts/onboarding'
-    import { NetworkProtocol, NetworkType } from 'shared/lib/core/network'
+    import { initialiseOnboarding } from '@contexts/onboarding'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -37,8 +37,9 @@
         }
     }
 
-    const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
-        Electron.updateAppSettings({ sendCrashReports })
+    async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
+        await Electron.updateAppSettings({ sendCrashReports })
+    }
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
     $: $appSettings.darkMode
