@@ -60,15 +60,11 @@
             }
             &.dark.selected {
                 @apply bg-blue-300;
-                span {
-                    @apply text-gray-600;
-                }
+                @apply bg-opacity-10;
             }
             &.dark.errored {
                 @apply bg-red-300;
-                span {
-                    @apply text-gray-600;
-                }
+                @apply bg-opacity-10;
             }
         }
     }
