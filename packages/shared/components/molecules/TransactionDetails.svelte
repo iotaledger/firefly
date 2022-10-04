@@ -187,7 +187,7 @@
             {/if}
             {#if type === ActivityType.Alias}
                 <Pill backgroundColor="green-300" darkBackgroundColor="gray-200">
-                    {localize('pills.aliasCreated')}
+                    {localize(`pills.alias.${inclusionState === InclusionState.Confirmed ? 'created' : 'creating'}`)}
                 </Pill>
             {/if}
         </transaction-status>
