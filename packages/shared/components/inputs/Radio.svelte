@@ -5,9 +5,9 @@
 
     export let value = undefined
     export let group = undefined
-    export let label = ''
-    export let classes = ''
-    export let tabindex
+    export let label: string = ''
+    export let classes: string = ''
+    export let tabindex: number = undefined
 
     const dispatch = createEventDispatcher()
 </script>

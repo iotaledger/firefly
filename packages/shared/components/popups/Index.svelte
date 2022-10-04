@@ -45,8 +45,8 @@
 
     export let type: string
     export let props: any
-    export let hideClose: boolean
-    export let preventClose: boolean
+    export let hideClose: boolean = false
+    export let preventClose: boolean = false
     export let fullScreen: boolean
     export let transition = true
     export let overflow = false

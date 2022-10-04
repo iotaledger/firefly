@@ -8,9 +8,9 @@
     import { truncateString } from 'shared/lib/helpers'
     import { fade } from 'svelte/transition'
 
-    export let modal: Modal
-    export let searchValue: string
-    export let selected: IAccountState
+    export let modal: Modal = undefined
+    export let searchValue: string = ''
+    export let selected: IAccountState = undefined
     export let showBalance: boolean = false
     export let includeSelectedAccount: boolean = false
     export let onClose: () => void

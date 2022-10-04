@@ -10,7 +10,7 @@
     import { activeProfile } from '@core/profile'
     import { localize } from '@core/i18n'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     $: health = $networkStatus.health ?? 0
     $: description = $networkStatus.description ?? NetworkStatusDescription[NetworkHealth.Disconnected]

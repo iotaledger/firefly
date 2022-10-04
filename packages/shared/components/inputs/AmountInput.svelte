@@ -2,10 +2,10 @@
     import { NumberInput } from 'shared/components'
     import { FontWeight } from 'shared/components/Text.svelte'
 
-    export let inputElement: HTMLInputElement
+    export let inputElement: HTMLInputElement = undefined
     export let disabled = false
     export let hasFocus = false
-    export let amount: string
+    export let amount: string = ''
 </script>
 
 <NumberInput

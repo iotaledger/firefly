@@ -8,7 +8,7 @@
     export let disabled: boolean = false
 
     let menu: ExpirationTimePickerMenu
-    let anchor: HTMLElement
+    let anchor: HTMLElement = undefined
     let selected: ExpirationTime
     let storedValue: Date
 

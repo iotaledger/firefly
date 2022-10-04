@@ -5,7 +5,7 @@
     import { unlockStronghold } from '@core/profile'
     import { HTMLButtonType } from 'shared/components/Button.svelte'
 
-    export let subtitle: string
+    export let subtitle: string = ''
     export let returnPassword = false
 
     export let onSuccess: (..._: any[]) => void = () => {}

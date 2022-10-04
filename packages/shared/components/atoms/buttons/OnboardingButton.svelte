@@ -3,16 +3,16 @@
     import { Icon, Spinner, Text } from 'shared/components'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
-    export let primaryText = ''
-    export let secondaryText = ''
-    export let icon
-    export let iconColor = 'blue-500'
-    export let iconHeight: string
-    export let iconWidth: string
-    export let busy = false
-    export let disabled = false
-    export let hidden = false
-    export let classes = ''
+    export let primaryText: string = ''
+    export let secondaryText: string = ''
+    export let icon: string = ''
+    export let iconColor: string = 'blue-500'
+    export let iconHeight: string = undefined
+    export let iconWidth: string = undefined
+    export let busy: boolean = false
+    export let disabled: boolean = false
+    export let hidden: boolean = false
+    export let classes: string = ''
 
     export let onClick: () => unknown
 

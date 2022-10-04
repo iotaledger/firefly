@@ -7,7 +7,7 @@
     import { activeProfileId } from '@core/profile'
     import { ButtonSize } from 'shared/components/Button.svelte'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
     export let filter: Filter
     export let isChanged: boolean
     export let onSetFilters: () => void

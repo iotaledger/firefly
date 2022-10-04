@@ -2,10 +2,10 @@
     import Input from './Input.svelte'
     import { FontWeight, TextPropTypes, TextType } from 'shared/components/Text.svelte'
 
-    export let inputElement: HTMLInputElement
-    export let hasFocus: boolean = false
     export let value: string
-    export let error: string
+    export let inputElement: HTMLInputElement = undefined
+    export let hasFocus: boolean = false
+    export let error: string = ''
 
     // Text Props
     export let type = TextType.p

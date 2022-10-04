@@ -14,7 +14,7 @@
     import { FontWeight } from '../Text.svelte'
 
     export let asset: IAsset
-    export let activityId: string
+    export let activityId: string = undefined
 
     function onSkipClick(): void {
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
@@ -72,7 +72,7 @@
     </div>
 
     <div class="space-y-3 flex flex-col items-center justify-center">
-        <AssetIcon {asset} large showVerificationBadge />
+        <AssetIcon {asset} large showVerifiedBadgeOnly />
         <Text type="h2" fontWeight={FontWeight.bold}>
             {asset?.metadata?.tickerSymbol ?? asset?.metadata?.unit}
         </Text>

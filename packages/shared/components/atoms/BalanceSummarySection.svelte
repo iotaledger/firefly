@@ -7,7 +7,7 @@
 
     export let totalRow = false
     export let title: string
-    export let subtitle: string
+    export let subtitle: string = ''
     export let amount: number
 
     $: formattedAmount = formatTokenAmountPrecise(amount, BASE_TOKEN[$activeProfile.networkProtocol])

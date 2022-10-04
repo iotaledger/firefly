@@ -47,11 +47,11 @@
     export let busyMessage: string = ''
 
     export let form: string = null
-    export let buttonElement: HTMLButtonElement
+    export let buttonElement: HTMLButtonElement = undefined
 
     export let events: Event<unknown>[] = []
 
-    export let onClick: () => unknown
+    export let onClick: () => unknown = () => {}
 
     export function resetAndFocus(): void {
         if (disabled) {

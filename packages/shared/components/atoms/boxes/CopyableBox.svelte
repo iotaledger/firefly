@@ -10,7 +10,7 @@
     export let isCopyable = true
     export let clearPadding = false
     export let clearBoxPadding = false
-    export let offset: number
+    export let offset: number = undefined
     export let classes = ''
 
     let tooltipAnchor

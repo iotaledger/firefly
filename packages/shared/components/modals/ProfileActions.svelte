@@ -11,7 +11,7 @@
     import { checkOrUnlockStronghold } from '@core/stronghold'
     import { ButtonSize } from 'shared/components/Button.svelte'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     const profileColor = 'blue' // TODO: each profile has a different color
     const isUpToDate = $appVersionDetails.upToDate

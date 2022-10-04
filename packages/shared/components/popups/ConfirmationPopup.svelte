@@ -6,7 +6,7 @@
     import { ButtonVariant } from 'shared/components/Button.svelte'
 
     export let title: string
-    export let description: string
+    export let description: string = ''
     export let hint: string = ''
     export let info: boolean = false
     export let success: boolean = false
