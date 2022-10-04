@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
     import { appSetupRouter } from '@core/router'
-    import features from '@features/features'
+    import features from '../../../../../features/features'
     import { Button, Checkbox, Text } from 'shared/components'
     import {
         initialiseOnboardingProfile,
