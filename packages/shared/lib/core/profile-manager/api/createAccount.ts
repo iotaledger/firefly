@@ -2,9 +2,9 @@ import { get, Writable } from 'svelte/store'
 
 import { CreateAccountPayload } from '@iota/wallet'
 
-import { api, IProfileManager, profileManager } from '../'
-
 import { IAccount } from '@core/account'
+
+import { api, IProfileManager, profileManager } from '..'
 
 export function createAccount(
     payload: CreateAccountPayload,
