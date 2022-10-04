@@ -10,7 +10,6 @@ import {
 } from '@iota/types'
 import {
     AccountBalance,
-    AccountMeta,
     AccountSyncOptions,
     Address,
     AddressGenerationOptions,
@@ -40,7 +39,6 @@ import {
 } from '@iota/wallet'
 
 export interface IAccount {
-    meta: AccountMeta
     addresses(): Promise<Address[]>
     addressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
     buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput>
@@ -74,7 +72,7 @@ export interface IAccount {
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
     getTransaction(transactionId: string): Promise<Transaction>
-    incomingTransactions(): Promise<[string, ITransactionPayload, IOutputResponse][]>
+    incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]>
     increaseNativeTokenSupply(
         tokenId: string,
         mintAmount: HexEncodedAmount,

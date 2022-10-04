@@ -20,8 +20,8 @@ export async function getBoundAccount(
         if (err?.type === ErrorType?.AccountNotFound && createAccountsIfNotFound) {
             for (let indexToCreateAccount = 0; indexToCreateAccount < accountIndex; indexToCreateAccount++) {
                 const account = await get(profileManager)?.createAccount({})
-                if (account?.meta?.index === accountIndex) {
-                    return api?.getAccount(get(profileManager)?.id, account?.meta?.index)
+                if (account?.getMetadata()?.index === accountIndex) {
+                    return account
                 }
             }
             throw new UnableToGetBoundAccountError()

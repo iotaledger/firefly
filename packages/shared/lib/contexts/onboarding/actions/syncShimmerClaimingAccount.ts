@@ -16,9 +16,10 @@ export async function syncShimmerClaimingAccount(account: IAccount): Promise<voi
     if (!_shimmerClaimingProfileManager) {
         throw new MissingShimmerClaimingProfileManagerError()
     }
-    const boundShimmerClaimingAccount = await api.getAccount(_shimmerClaimingProfileManager?.id, account?.meta?.index)
-    const boundTwinAccount = await api.getAccount(get(profileManager)?.id, account?.meta?.index)
-    if (boundShimmerClaimingAccount?.meta?.index !== boundTwinAccount?.meta?.index) {
+    const { index } = account?.getMetadata()
+    const boundShimmerClaimingAccount = await api.getAccount(_shimmerClaimingProfileManager?.id, index)
+    const boundTwinAccount = await api.getAccount(get(profileManager)?.id, index)
+    if (boundShimmerClaimingAccount?.getMetadata()?.index !== boundTwinAccount?.getMetadata()?.index) {
         return
     }
 

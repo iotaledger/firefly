@@ -4,8 +4,15 @@
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
     import { FontWeight } from 'shared/components/Text.svelte'
+    import type { Address } from '@iota/wallet'
 
-    $: receiveAddress = $selectedAccount.meta.publicAddresses[0].address
+    let receiveAddress: Address
+
+    $: $selectedAccount, void setReceiveAddress()
+
+    async function setReceiveAddress(): Promise<void> {
+        receiveAddress = (await $selectedAccount.addresses())[0]
+    }
 </script>
 
 <receive-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">

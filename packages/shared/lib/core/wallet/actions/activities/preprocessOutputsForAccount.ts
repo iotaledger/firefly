@@ -8,10 +8,7 @@ export async function preprocessOutputsForAccount(account: IAccountState): Promi
 
     const transactions = await account.transactions()
     const transactionMap = getTransactionsMapFromList(transactions)
-    // TODO: uncomment this when `account.listIncomingTransactions()` is implemented
-    // const incomingTransactions = await account.listIncomingTransactions()
-    // const incomingTransactionMap = getTransactionsMapFromList(incomingTransactions)
-    const incomingTransactionMap = account?.meta?.incomingTransactions
+    const incomingTransactions = await account.incomingTransactions()
 
     const groupedOutputs: { [key: string]: OutputData[] } = {}
     for (const output of outputs) {
@@ -29,7 +26,7 @@ export async function preprocessOutputsForAccount(account: IAccountState): Promi
     const processedTransactions: IProcessedTransaction[] = []
     for (const transactionId of Object.keys(groupedOutputs)) {
         processedTransactions.push(
-            preprocessGroupedOutputs(groupedOutputs[transactionId], incomingTransactionMap[transactionId], account)
+            preprocessGroupedOutputs(groupedOutputs[transactionId], incomingTransactions[transactionId], account)
         )
     }
     return processedTransactions

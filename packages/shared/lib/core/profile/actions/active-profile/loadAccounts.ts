@@ -14,7 +14,7 @@ export async function loadAccounts(): Promise<void> {
         const loadedAccounts = await Promise.all(
             accountsResponse?.map((accountResponse) => loadAccount(accountResponse))
         )
-        activeAccounts.set(loadedAccounts.sort((a, b) => a.meta.index - b.meta.index))
+        activeAccounts.set(loadedAccounts.sort((a, b) => a.getMetadata().index - b.getMetadata().index))
         hasLoadedAccounts.set(true)
     }
 }

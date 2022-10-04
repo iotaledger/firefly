@@ -37,25 +37,6 @@ import { MOCK_ACCOUNT_BALANCE } from './account-balance.mock'
 import { MOCK_ADDRESS } from './address.mock'
 
 export class AccountMock implements IAccount {
-    meta = {
-        index: 0,
-        coinType: 0,
-        alias: 'testAccount',
-        publicAddresses: [],
-        internalAddresses: [],
-        addressesWithUnspentOutputs: [],
-        outputs: {},
-        lockedOutputs: new Set<string>(),
-        unspentOutputs: {},
-        transactions: {},
-        incomingTransactions: {},
-        pendingTransactions: new Set<string>(),
-        accountOptions: {
-            outputConsolidationThreshold: 0,
-            automaticOutputConsolidation: false,
-        },
-    }
-
     constructor() {}
 
     addresses(): Promise<[]> {
