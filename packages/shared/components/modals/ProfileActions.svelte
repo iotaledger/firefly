@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
-    import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
+    import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
     import { popupState, openPopup } from 'shared/lib/popup'
@@ -9,7 +9,6 @@
     import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, logout, lockStronghold } from '@core/profile'
     import { checkOrUnlockStronghold } from '@core/stronghold'
-    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let modal: Modal = undefined
 

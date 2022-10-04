@@ -7,7 +7,7 @@
     export let disabled: boolean = false
     export let hasFocus: boolean = false
     export let isInteger: boolean = false
-    export let value: string
+    export let value: string = undefined
     export let error: string = ''
 
     // Text Props

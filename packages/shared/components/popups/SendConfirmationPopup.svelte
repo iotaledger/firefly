@@ -79,7 +79,6 @@
         direction: ActivityDirection.Out,
         inclusionState: InclusionState.Pending,
         metadata,
-        rawAmount,
         storageDeposit: giftStorageDeposit ? giftedStorageDeposit : storageDeposit,
         subject: recipient,
         amount,

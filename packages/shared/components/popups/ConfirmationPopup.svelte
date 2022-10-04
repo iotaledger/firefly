@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { Button, Text, TextHint, FontWeight, TextType } from 'shared/components'
+    import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
-    import { ButtonVariant } from 'shared/components/Button.svelte'
 
     export let title: string
     export let description: string = ''

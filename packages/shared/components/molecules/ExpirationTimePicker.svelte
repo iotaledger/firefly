@@ -3,7 +3,7 @@
     import { formatDate, localize } from '@core/i18n'
     import { ExpirationTime } from '@core/utils'
 
-    export let value: Date
+    export let value: Date = undefined
     export let initialSelected: ExpirationTime = ExpirationTime.None
     export let disabled: boolean = false
 

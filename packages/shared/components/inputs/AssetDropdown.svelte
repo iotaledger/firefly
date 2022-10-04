@@ -69,9 +69,7 @@
                         <AssetTile
                             onClick={() => handleAssetClick($visibleSelectedAccountAssets?.baseCoin)}
                             asset={$visibleSelectedAccountAssets?.baseCoin}
-                            overrideColor
                             classes="bg-white hover:bg-gray-50 dark:bg-transparent"
-                            squashed
                         />
                     </li>
                     {#each $visibleSelectedAccountAssets?.nativeTokens as nativeToken}
@@ -79,9 +77,7 @@
                             <AssetTile
                                 onClick={() => handleAssetClick(nativeToken)}
                                 asset={nativeToken}
-                                overrideColor
                                 classes="bg-white hover:bg-gray-50 dark:bg-transparent"
-                                squashed
                             />
                         </li>
                     {/each}

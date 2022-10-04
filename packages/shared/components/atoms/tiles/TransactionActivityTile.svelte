@@ -31,9 +31,9 @@
         Pill,
         Button,
         FontWeight,
+        ButtonSize,
     } from 'shared/components'
     import { Position } from 'shared/components/Tooltip.svelte'
-    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let activityId: string
     export let amount: string

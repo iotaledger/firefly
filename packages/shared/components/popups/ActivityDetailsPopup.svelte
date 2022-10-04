@@ -43,7 +43,6 @@
         type: activity?.type,
         transactionTime: activity?.time,
         inclusionState: activity?.inclusionState,
-        rawAmount: activity?.data.rawAmount,
         formattedFiatValue: activity?.getFiatAmount(
             $currencies[CurrencyTypes.USD],
             $exchangeRates[$activeProfile?.settings?.currency]

@@ -1,9 +1,8 @@
 <script lang="typescript">
-    import { Modal, Text, FontWeight, Button } from 'shared/components'
+    import { Modal, Text, FontWeight, Button, ButtonSize } from 'shared/components'
     import type { Filter } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
-    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let modal: Modal = undefined
     export let filter: Filter

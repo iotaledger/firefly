@@ -81,7 +81,6 @@
     bind:this={inputElement}
     bind:inputElement={amountInputElement}
     col
-    {disabled}
     {isFocused}
     {error}
     classes="space-y-2"
