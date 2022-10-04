@@ -29,7 +29,7 @@ export class LedgerSetupRouter extends Subrouter<LedgerSetupRoute> {
             }
             case LedgerSetupRoute.ConnectLedger: {
                 this.parentRouter.next()
-                break
+                return
             }
         }
 

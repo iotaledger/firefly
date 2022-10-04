@@ -30,7 +30,7 @@ export class StorageProtectionSetupRouter extends Subrouter<StorageProtectionSet
             }
             case StorageProtectionSetupRoute.SetupPinProtection:
                 this.parentRouter.next()
-                break
+                return
         }
 
         this.setNext(nextRoute)
