@@ -186,7 +186,10 @@
                 </Pill>
             {/if}
             {#if type === ActivityType.Alias}
-                <Pill backgroundColor="green-300" darkBackgroundColor="gray-200">
+                <Pill
+                    backgroundColor={inclusionState === InclusionState.Confirmed ? 'green-300' : 'blue-100'}
+                    darkBackgroundColor="gray-200"
+                >
                     {localize(`pills.alias.${inclusionState === InclusionState.Confirmed ? 'created' : 'creating'}`)}
                 </Pill>
             {/if}
