@@ -1,6 +1,6 @@
 <script lang="typescript">
     export let recoveryPhrase: Mnemonic = []
-    export let verifyRecoveryPhrase = undefined
+    export let verifyRecoveryPhrase: Mnemonic = undefined
 
     export let hide = false
     export let classes = ''
