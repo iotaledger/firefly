@@ -1,16 +1,17 @@
 import features from 'shared/features/features'
-import { initAutoUpdate } from './lib/appUpdater'
-import { shouldReportError } from './lib/errorHandling'
-const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
-const path = require('path')
-const os = require('os')
-const fs = require('fs')
-const { execSync } = require('child_process')
-const { machineIdSync } = require('node-machine-id')
-const Keychain = require('./lib/keychain')
-const { initMenu, contextMenu } = require('./lib/menu')
+import { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } from 'electron'
+import path from 'path'
+import os from 'os'
+import fs from 'fs'
+import { execSync } from 'child_process'
+import { machineIdSync } from 'node-machine-id'
+import { initAutoUpdate } from './lib/auto-update'
+import { shouldReportError } from './lib/handlers'
+import { KeychainManager } from './lib/managers'
+import { initMenu, createContextMenu } from './lib/menu'
+import sentry from '../sentry'
 
-const canSendCrashReports = () => {
+function canSendCrashReports(): boolean {
     let sendCrashReports = loadJsonConfig('settings.json')?.sendCrashReports
     if (typeof sendCrashReports === 'undefined') {
         sendCrashReports = false
@@ -20,12 +21,13 @@ const canSendCrashReports = () => {
     return sendCrashReports
 }
 
-const CAN_LOAD_SENTRY = app.isPackaged
-const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
+const CAN_LOAD_SENTRY: boolean = app.isPackaged
+const SEND_CRASH_REPORTS: boolean = CAN_LOAD_SENTRY && canSendCrashReports()
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 let captureException = (..._) => {}
 if (SEND_CRASH_REPORTS) {
-    captureException = require('../sentry')(true).captureException
+    captureException = sentry(true).captureException
 }
 
 /**
@@ -74,7 +76,7 @@ let lastError = {}
 /**
  * Setup the error handlers early so they catch any issues
  */
-const handleError = (errorType, error, isRenderProcessError) => {
+function handleError(errorType, error, isRenderProcessError = false) {
     if (app.isPackaged) {
         const errorMessage = error.message || error.reason || error
         if (!shouldReportError(errorMessage)) {
@@ -212,12 +214,12 @@ function isUrlAllowed(targetUrl) {
 /**
  * Handles url navigation events
  */
-const handleNavigation = (e, url) => {
+async function handleNavigation(e, url) {
     e.preventDefault()
 
     try {
         if (isUrlAllowed(url)) {
-            shell.openExternal(url)
+            await shell.openExternal(url)
         }
     } catch (error) {
         console.error(error)
@@ -228,7 +230,7 @@ const handleNavigation = (e, url) => {
  * Create main window
  * @returns {BrowserWindow} Main window
  */
-function createWindow() {
+function createWindow(): BrowserWindow {
     /**
      * Register firefly file protocol
      */
@@ -288,7 +290,7 @@ function createWindow() {
     windows.main.webContents.on('context-menu', (_e, props) => {
         const { isEditable } = props
         if (isEditable) {
-            contextMenu().popup(windows.main)
+            createContextMenu().popup(windows.main)
         }
     })
 
@@ -344,7 +346,7 @@ app.whenReady().then(createWindow)
  * Gets BrowserWindow instance
  * @returns {BrowserWindow} Requested window
  */
-export const getWindow = function (windowName) {
+export const getWindow = function (windowName: keyof typeof windows): unknown {
     return windows[windowName]
 }
 
@@ -353,7 +355,7 @@ export const getWindow = function (windowName) {
  * @param {string} windowName
  * @returns {BrowserWindow} Requested window
  */
-export const getOrInitWindow = (windowName) => {
+export function getOrInitWindow(windowName: keyof typeof windows): BrowserWindow {
     if (!windows[windowName]) {
         if (windowName === 'main') {
             return createWindow()
@@ -402,11 +404,11 @@ app.once('ready', () => {
 // URLs
 ipcMain.handle('open-url', (_e, url) => handleNavigation(_e, url))
 
-// Keychain
-ipcMain.handle('keychain-getAll', (_e) => Keychain.getAll())
-ipcMain.handle('keychain-get', (_e, key) => Keychain.get(key))
-ipcMain.handle('keychain-set', (_e, key, content) => Keychain.set(key, content))
-ipcMain.handle('keychain-remove', (_e, key) => Keychain.remove(key))
+// KeychainManager
+ipcMain.handle('keychain-getAll', () => KeychainManager.getAll())
+ipcMain.handle('keychain-get', (_e, key) => KeychainManager.get(key))
+ipcMain.handle('keychain-set', (_e, key, content) => KeychainManager.set(key, content))
+ipcMain.handle('keychain-remove', (_e, key) => KeychainManager.remove(key))
 
 // Dialogs
 ipcMain.handle('show-open-dialog', (_e, options) => dialog.showOpenDialog(options))
@@ -420,7 +422,7 @@ ipcMain.handle('get-path', (_e, path) => {
     }
     return app.getPath(path)
 })
-ipcMain.handle('get-version-details', (_e) => versionDetails)
+ipcMain.handle('get-version-details', () => versionDetails)
 
 ipcMain.handle('copy-file', (_e, sourceFilePath, destinationFilePath) => {
     const src = path.resolve(sourceFilePath)
@@ -452,12 +454,10 @@ const getDiagnostics = () => {
         [5, ['Puma', '10.1']],
     ])
 
-    let platform = os.platform()
+    const platform = os.platform()
     let platformVersion = os.release()
 
     if (platform === 'darwin') {
-        platform = 'macOS'
-
         try {
             platformVersion = execSync('sw_vers -productVersion').toString().trim()
         } catch (_err) {
@@ -465,6 +465,7 @@ const getDiagnostics = () => {
             const verSplit = platformVersion.split('.')
             const num = Number.parseInt(verSplit[0], 10)
             if (!Number.isNaN(num)) {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const [_, version] = osXNameMap.get(num)
                 if (version) {
                     platformVersion = version
@@ -474,7 +475,7 @@ const getDiagnostics = () => {
     }
 
     return [
-        { label: 'popups.diagnostics.platform', value: platform },
+        { label: 'popups.diagnostics.platform', value: platform === 'darwin' ? 'macOS' : platform },
         { label: 'popups.diagnostics.platformVersion', value: platformVersion },
         { label: 'popups.diagnostics.platformArchitecture', value: os.arch() },
         { label: 'popups.diagnostics.cpuCount', value: os.cpus().length },
@@ -483,15 +484,15 @@ const getDiagnostics = () => {
     ]
 }
 
-ipcMain.handle('diagnostics', (_e) => getDiagnostics())
+ipcMain.handle('diagnostics', getDiagnostics)
 
 ipcMain.handle('handle-error', (_e, errorType, error) => {
     handleError(errorType, error, true)
 })
 
 // System
-ipcMain.handle('get-os', (_e) => process.platform)
-ipcMain.handle('get-machine-id', (_e) => getMachineId())
+ipcMain.handle('get-os', () => process.platform)
+ipcMain.handle('get-machine-id', getMachineId)
 
 // Settings
 ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
@@ -581,7 +582,7 @@ ipcMain.on('notification-activated', (ev, contextData) => {
  * Create about window
  * @returns {BrowserWindow} About window
  */
-export const openAboutWindow = () => {
+export function openAboutWindow(): BrowserWindow {
     if (windows.about !== null) {
         windows.about.focus()
         return windows.about
@@ -617,18 +618,14 @@ export const openAboutWindow = () => {
     return windows.about
 }
 
-export const closeAboutWindow = () => {
+export function closeAboutWindow(): void {
     if (windows.about) {
         windows.about.close()
         windows.about = null
     }
 }
 
-/**
- * Create error window
- * @returns {BrowserWindow} Error window
- */
-export const openErrorWindow = () => {
+export function openErrorWindow(): BrowserWindow {
     if (windows.error !== null) {
         windows.error.focus()
         return windows.error
@@ -662,7 +659,7 @@ export const openErrorWindow = () => {
     return windows.error
 }
 
-export const closeErrorWindow = () => {
+export function closeErrorWindow(): void {
     if (windows.error) {
         windows.error.close()
         windows.error = null
@@ -758,7 +755,7 @@ function getJsonConfig(filename) {
     return path.join(userDataPath, filename)
 }
 
-export const updateAppVersionDetails = (details) => {
+export function updateAppVersionDetails(details: Partial<typeof versionDetails>): void {
     versionDetails = Object.assign({}, versionDetails, details)
     if (process.env.STAGE !== 'prod') {
         // Always true to avoid triggering auto-updater

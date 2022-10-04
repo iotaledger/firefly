@@ -13,7 +13,9 @@
             "@features/*": ["../shared/features/*"],
             "@lib/*": ["../shared/lib/*"]
         },
-        "types": ["node"]
+        "types": ["node"],
+        "resolveJsonModule": true
     },
-    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"]
+    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts", "./electron"],
+    "exclude": ["./**/*.test.ts"]
 }
