@@ -1,12 +1,13 @@
 import { get } from 'svelte/store'
 
-import { deleteAccountsAndDatabase, destroyProfileManager, profileManager } from '@core/profile-manager'
+import { destroyProfileManager, profileManager } from '@core/profile-manager'
+import { removeProfileFolder } from '@core/profile'
 
 export async function cleanupOnboardingProfileManager(): Promise<void> {
     if (!get(profileManager)) {
         return
     }
 
-    await deleteAccountsAndDatabase()
     destroyProfileManager()
+    await removeProfileFolder('temp')
 }

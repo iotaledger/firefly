@@ -21,11 +21,11 @@ export interface IProfileManager {
     changeStrongholdPassword(currentPassword: string, newPassword: string): Promise<void>
     clearStrongholdPassword(): Promise<void>
     createAccount(payload: CreateAccountPayload): Promise<IAccount>
-    deleteAccountsAndDatabase(): Promise<void>
     destroy(): void
     emitTestEvent(event: WalletEvent): Promise<void>
     generateMnemonic(): Promise<string>
     getAccount(accountId: AccountId): Promise<IAccount>
+    getAccountIndexes(): Promise<number[]>
     getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>

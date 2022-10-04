@@ -4,7 +4,7 @@ import { profileManager } from '../stores'
 import { getAccount } from './getAccount'
 
 export async function getAccounts(): Promise<IAccount[]> {
-    const accountsResponse = await get(profileManager).getAccounts()
-    const accountsPromises = accountsResponse.map((acc) => getAccount(acc.meta.index))
+    const accountIndices = await get(profileManager).getAccountIndexes()
+    const accountsPromises = accountIndices.map((index) => getAccount(index))
     return Promise.all(accountsPromises)
 }
