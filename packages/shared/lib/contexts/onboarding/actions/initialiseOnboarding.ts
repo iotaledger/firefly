@@ -1,25 +1,16 @@
-import { stopPollingLedgerNanoStatus } from '@core/ledger'
-import { destroyProfileManager } from '@core/profile-manager'
-import { initialiseOnboardingRouters } from '@core/router'
+import { initialiseOnboardingRouters, OnboardingRoute, onboardingRouter } from '@core/router'
 
 import { IOnboardingInitialisationOptions } from '../interfaces'
 import { updateOnboardingProfile } from '../stores'
 
 import { initialiseOnboardingProfile } from './initialiseOnboardingProfile'
+import { logout } from '@core/profile'
+import { get } from 'svelte/store'
 
-export function initialiseOnboarding(options: IOnboardingInitialisationOptions): void {
-    const { isDeveloperProfile, networkProtocol, networkType, resetProfileManagers, resetRouters } = options
+export async function initialiseOnboarding(options: IOnboardingInitialisationOptions): Promise<void> {
+    const { isDeveloperProfile, networkProtocol, networkType, resetRouters } = options
 
-    if (resetProfileManagers) {
-        /**
-         * CAUTION: We MUST stop polling the Ledger
-         * Nano status because it uses the underlying
-         * profile manager, which if reset will become
-         * null or undefined.
-         */
-        stopPollingLedgerNanoStatus()
-        destroyProfileManager()
-    }
+    await logout()
 
     initialiseOnboardingProfile(isDeveloperProfile, networkProtocol, true)
 
@@ -29,5 +20,7 @@ export function initialiseOnboarding(options: IOnboardingInitialisationOptions):
 
     if (resetRouters) {
         initialiseOnboardingRouters()
+        const route = isDeveloperProfile ? OnboardingRoute.NetworkSetup : OnboardingRoute.ProfileSetup
+        get(onboardingRouter).goTo(route)
     }
 }

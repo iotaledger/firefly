@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
+    import { _, isLocaleLoaded, Locale, localeDirection, setupI18n } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
     import {
         AppRoute,
@@ -22,9 +22,10 @@
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { initialiseOnboardingForDeveloperProfile, initialiseOnboardingForNormalProfile } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
+    import { initialiseOnboarding } from 'shared/lib/contexts/onboarding'
+    import { NetworkProtocol, NetworkType } from 'shared/lib/core/network'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -110,12 +111,21 @@
         })
         Electron.onEvent('menu-create-developer-profile', () => {
             get(appRouter).reset()
-            initialiseOnboardingForDeveloperProfile()
+            void initialiseOnboarding({
+                isDeveloperProfile: true,
+                networkProtocol: NetworkProtocol.Shimmer,
+                resetRouters: true,
+            })
             get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
             get(appRouter).reset()
-            initialiseOnboardingForNormalProfile()
+            void initialiseOnboarding({
+                isDeveloperProfile: false,
+                networkProtocol: NetworkProtocol.Shimmer,
+                networkType: NetworkType.Mainnet,
+                resetRouters: true,
+            })
             get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.hookErrorLogger((err) => {

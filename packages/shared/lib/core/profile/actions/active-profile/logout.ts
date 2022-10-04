@@ -15,6 +15,7 @@ import {
     isLedgerProfile,
 } from '@core/profile'
 import { resetSelectedAccount } from '@core/account'
+import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 
 /**
  * Logout from active profile
@@ -26,7 +27,7 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
     return new Promise((resolve) => {
         if (get(isSoftwareProfile)) {
             _lockStronghold && lockStronghold()
-        } else if (isLedgerProfile(type)) {
+        } else if (isLedgerProfile(type) || get(isOnboardingLedgerProfile)) {
             get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
         }
 
@@ -39,7 +40,7 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
 
             // stop background sync
             // TODO: Make sure we need this. Would destroying the profile manager also stop background syncing automatically?
-            manager.stopBackgroundSync()
+            manager?.stopBackgroundSync()
 
             // Unsubscribe to listeners
             // https://github.com/iotaledger/wallet.rs/issues/1133
