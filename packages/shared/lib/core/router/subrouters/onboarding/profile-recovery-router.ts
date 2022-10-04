@@ -51,7 +51,7 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
             }
             case ProfileRecoveryRoute.Success:
                 this.parentRouter.next()
-                break
+                return
         }
 
         this.setNext(nextRoute)
