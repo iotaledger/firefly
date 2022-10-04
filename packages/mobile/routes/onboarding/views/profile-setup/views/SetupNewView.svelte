@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
     import { OnboardingButton, Text } from 'shared/components'
-    import features from '@features/features'
+    import features from '../../../../../features/features'
     import { localize } from '@core/i18n'
     import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'

@@ -1,3 +1,4 @@
+export { default as AliasActivityTile } from './AliasActivityTile.svelte'
 export { default as TransactionActivityTile } from './TransactionActivityTile.svelte'
 export { default as FoundryActivityTile } from './FoundryActivityTile.svelte'
 export { default as AssetTile } from './AssetTile.svelte'

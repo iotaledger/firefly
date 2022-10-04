@@ -1,7 +1,7 @@
-import { OutputTypes } from '@iota/types'
 import { OUTPUT_TYPE_FOUNDRY } from '@core/wallet/constants'
+import { IWrappedOutput } from '@core/wallet/interfaces'
 
-export function getFoundryOutputFromTransaction(outputs: OutputTypes[]): { output: OutputTypes; outputIndex: number } {
-    const outputIndex = outputs.findIndex((output) => output.type === OUTPUT_TYPE_FOUNDRY)
-    return { output: outputs[outputIndex], outputIndex: outputIndex }
+export function getFoundryOutputFromTransaction(outputs: IWrappedOutput[]): IWrappedOutput {
+    const output = outputs.find((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
+    return output
 }

@@ -6,6 +6,7 @@ export interface IPartialFoundryActivityDataWithType extends Omit<Partial<IFound
 
 export interface IFoundryActivityData {
     type: ActivityType.Foundry
+    outputId: string
     assetId: string
     storageDeposit: number
     giftedStorageDeposit: number
