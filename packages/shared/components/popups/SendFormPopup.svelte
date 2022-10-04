@@ -60,7 +60,7 @@
     <send-form-inputs class="flex flex-col space-y-4">
         <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:amount bind:unit />
         <RecipientInput bind:this={recipientInput} bind:recipient />
-        <optional-inputs class="flex flex-row flex-wrap gap-2">
+        <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
                 bind:this={metadataInput}
                 bind:value={metadata}
