@@ -1,2 +1,2 @@
-export * from './updateActiveAccountMetadata'
 export * from './findActiveAccountWithAddress'
+export * from './updateActiveAccountMetadata'
