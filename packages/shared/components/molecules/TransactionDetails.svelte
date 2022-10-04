@@ -18,7 +18,7 @@
         Subject,
         InclusionState,
         ActivityDirection,
-        IAsset,
+        IPersistedAsset,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -27,7 +27,7 @@
     import { setClipboard } from '@lib/utils'
     import { time } from '@core/app'
 
-    export let asset: IAsset
+    export let asset: IPersistedAsset
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
@@ -44,6 +44,9 @@
     export let surplus: string = null
     export let subject: Subject = null
     export let tag: string = null
+    export let aliasId: string = null
+    export let governorAddress: string = null
+    export let stateControllerAddress: string = null
     export let transactionTime: Date = null
     export let isInternal: boolean = false
     export let isClaiming: boolean = false
@@ -120,6 +123,16 @@
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
     }
 
+    let copyableDetailsList: { [key in string]: { data: string; tooltipText?: string } }
+    $: copyableDetailsList = {
+        ...(governorAddress && {
+            governorAddress: { data: governorAddress },
+        }),
+        ...(stateControllerAddress && {
+            stateControllerAddress: { data: stateControllerAddress },
+        }),
+    }
+
     function getDateFormat(date: Date): string {
         try {
             if (date) {
@@ -149,9 +162,7 @@
                 <div class="flex flex-row space-x-3">
                     <AssetIcon {asset} />
                     <div class="flex flex-row flex-wrap justify-center items-baseline space-x-0.1">
-                        <Text type="h1" fontWeight={FontWeight.semibold}>
-                            {amount}
-                        </Text>
+                        <Text type="h1" fontWeight={FontWeight.semibold}>{amount}</Text>
                         {#if unit}
                             <Text type="h4" classes="ml-1" fontWeight={FontWeight.medium}>{unit}</Text>
                         {/if}
@@ -174,6 +185,14 @@
                     {localize('pills.locked')}
                 </Pill>
             {/if}
+            {#if type === ActivityType.Alias}
+                <Pill
+                    backgroundColor={inclusionState === InclusionState.Confirmed ? 'green-300' : 'blue-100'}
+                    darkBackgroundColor="gray-200"
+                >
+                    {localize(`pills.alias.${inclusionState === InclusionState.Confirmed ? 'created' : 'creating'}`)}
+                </Pill>
+            {/if}
         </transaction-status>
         {#if type === ActivityType.Transaction}
             {#if subject?.type === 'account'}
@@ -189,6 +208,8 @@
                     </Text>
                 </Box>
             {/if}
+        {:else if type === ActivityType.Alias}
+            <AddressBox clearBackground clearPadding isCopyable address={aliasId} />
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}
@@ -198,6 +219,14 @@
                     keyText={localize(`general.${key}`)}
                     valueText={value.data}
                     tooltipText={value.tooltipText}
+                />
+            {/each}
+            {#each Object.entries(copyableDetailsList) as [key, value]}
+                <KeyValueBox
+                    keyText={localize(`general.${key}`)}
+                    valueText={value.data}
+                    tooltipText={value.tooltipText}
+                    isCopyable
                 />
             {/each}
             {#if claimingTransactionId}

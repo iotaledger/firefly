@@ -186,8 +186,6 @@
         @apply m-0;
     }
     input {
-        font-feature-settings: 'calt' off; // disables 'x' formatting while surrounded by numbers
-
         &::placeholder {
             @apply text-gray-500;
         }

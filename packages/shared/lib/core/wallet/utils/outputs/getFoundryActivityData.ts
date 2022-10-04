@@ -12,7 +12,7 @@ import { ActivityType } from '@core/wallet/enums'
 
 export function getFoundryActivityData(processedTransaction: IProcessedTransaction): IFoundryActivityData {
     const { outputs } = processedTransaction
-    const { output } = getFoundryOutputFromTransaction(outputs)
+    const { output, outputId } = getFoundryOutputFromTransaction(outputs)
 
     const nativeToken = getNativeTokenFromOutput(output)
     const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
@@ -22,6 +22,7 @@ export function getFoundryActivityData(processedTransaction: IProcessedTransacti
 
     return {
         type: ActivityType.Foundry,
+        outputId,
         assetId,
         storageDeposit,
         giftedStorageDeposit,
