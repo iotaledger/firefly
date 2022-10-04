@@ -50,7 +50,7 @@ export function isVisibleActivity(activity: Activity): boolean {
 function isVisibleWithActiveHiddenFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
-        (activity.isAssetHidden || activity.isHidden)
+        (activity.isAssetHidden || !activity.containsFunds)
     ) {
         return false
     }

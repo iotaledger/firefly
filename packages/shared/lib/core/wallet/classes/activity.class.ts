@@ -27,6 +27,7 @@ export class Activity implements IActivity {
     inclusionState: InclusionState
     inputs: IUTXOInput[]
     isHidden?: boolean
+    containsFunds: boolean
     isAssetHidden: boolean
 
     data: ITransactionActivityData | IFoundryActivityData
@@ -37,7 +38,8 @@ export class Activity implements IActivity {
         const type = getActivityType(outputs)
 
         this.type = type
-        this.isHidden = !containsFunds(processedTransaction, account)
+        this.isHidden = false
+        this.containsFunds = containsFunds(processedTransaction, account)
 
         this.transactionId = transactionId
         this.inclusionState = inclusionState
