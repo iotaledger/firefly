@@ -44,9 +44,6 @@
     export let surplus: string = null
     export let subject: Subject = null
     export let tag: string = null
-    export let aliasId: string = null
-    export let governorAddress: string = null
-    export let stateControllerAddress: string = null
     export let transactionTime: Date = null
     export let isInternal: boolean = false
     export let isClaiming: boolean = false
@@ -77,7 +74,7 @@
 
     let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {
-        ...(formattedTransactionTime && { transactionTime: { data: formattedTransactionTime } }),
+        transactionTime: { data: formattedTransactionTime },
         ...(metadata && {
             metadata: {
                 data: metadata,
@@ -123,35 +120,21 @@
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
     }
 
-    let copyableDetailsList: { [key in string]: { data: string; tooltipText?: string } }
-    $: copyableDetailsList = {
-        ...(governorAddress && {
-            governorAddress: { data: governorAddress },
-        }),
-        ...(stateControllerAddress && {
-            stateControllerAddress: { data: stateControllerAddress },
-        }),
-    }
-
-    function getDateFormat(date: Date): string {
-        try {
-            if (date) {
-                return formatDate(date, {
-                    dateStyle: 'long',
-                    timeStyle: 'medium',
-                })
-            } else {
-                return undefined
-            }
-        } catch {
-            return undefined
-        }
-    }
-
     function handleTransactionIdClick(): void {
         explorerUrl
             ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
             : setClipboard(claimingTransactionId)
+    }
+
+    function getDateFormat(date: Date): string {
+        if (date) {
+            return formatDate(date, {
+                dateStyle: 'long',
+                timeStyle: 'medium',
+            })
+        } else {
+            return undefined
+        }
     }
 </script>
 
@@ -185,28 +168,19 @@
                     {localize('pills.locked')}
                 </Pill>
             {/if}
-            {#if type === ActivityType.Alias}
-                <Pill backgroundColor="green-300" darkBackgroundColor="gray-200">
-                    {localize('pills.aliasCreated')}
-                </Pill>
-            {/if}
         </transaction-status>
-        {#if type === ActivityType.Transaction}
-            {#if subject?.type === 'account'}
-                <Box row clearBackground clearPadding classes="justify-center">
-                    <AccountLabel account={subject.account} />
-                </Box>
-            {:else if subject?.type === 'address'}
-                <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
-            {:else}
-                <Box row clearBackground clearPadding classes="justify-center">
-                    <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
-                        {localize('general.unknownAddress')}
-                    </Text>
-                </Box>
-            {/if}
-        {:else if type === ActivityType.Alias}
-            <AddressBox clearBackground clearPadding isCopyable address={aliasId} />
+        {#if subject?.type === 'account'}
+            <Box row clearBackground clearPadding classes="justify-center">
+                <AccountLabel account={subject.account} />
+            </Box>
+        {:else if subject?.type === 'address'}
+            <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
+        {:else}
+            <Box row clearBackground clearPadding classes="justify-center">
+                <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
+                    {localize('general.unknownAddress')}
+                </Text>
+            </Box>
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}
@@ -216,14 +190,6 @@
                     keyText={localize(`general.${key}`)}
                     valueText={value.data}
                     tooltipText={value.tooltipText}
-                />
-            {/each}
-            {#each Object.entries(copyableDetailsList) as [key, value]}
-                <KeyValueBox
-                    keyText={localize(`general.${key}`)}
-                    valueText={value.data}
-                    tooltipText={value.tooltipText}
-                    isCopyable
                 />
             {/each}
             {#if claimingTransactionId}

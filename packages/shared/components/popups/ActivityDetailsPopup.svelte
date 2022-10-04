@@ -4,7 +4,7 @@
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
-    import { TransactionDetails } from 'shared/components/molecules'
+    import { TransactionDetails, AliasDetails, FoundryDetails } from 'shared/components/molecules'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -42,42 +42,63 @@
         (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) &&
         activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    $: transactionDetails = {
-        asset,
-        type: activity?.type,
-        transactionTime: activity?.time,
-        inclusionState: activity?.inclusionState,
-        formattedFiatValue: activity?.getFiatAmount(
-            $currencies[CurrencyTypes.USD],
-            $exchangeRates[$activeProfile?.settings?.currency]
-        ),
-        storageDeposit: activity?.data.storageDeposit,
-        amount,
-        unit: asset?.metadata?.unit,
-        ...(activity?.data.type === ActivityType.Transaction && {
-            rawAmount: activity?.data.rawAmount,
-            giftedStorageDeposit: activity?.data.giftedStorageDeposit,
-            asyncStatus: activity?.data.asyncStatus,
-            direction: activity?.data.direction,
-            isInternal: activity?.data.isInternal,
-            claimedDate: activity?.data.claimedDate,
-            claimingTransactionId: activity?.data.claimingTransactionId,
-            expirationDate:
-                activity?.data?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity?.data.expirationDate : null,
-            timelockDate: activity?.data.timelockDate,
-            subject: activity?.data?.subject,
-            tag: activity?.data?.tag,
-            metadata: activity?.data?.metadata,
-        }),
-        ...(activity?.data.type === ActivityType.Foundry && {
-            rawAmount: activity?.data.rawAmount,
-            giftedStorageDeposit: activity?.data.giftedStorageDeposit,
-        }),
-        ...(activity?.data.type === ActivityType.Alias && {
-            aliasId: activity.data.aliasId,
-            governorAddress: activity.data.governorAddress,
-            stateControllerAddress: activity.data.stateControllerAddress,
-        }),
+    let details
+    $: activity, (details = getActivityDetails())
+
+    function getActivityDetails() {
+        if (!activity) {
+            return {}
+        }
+        const details = {
+            asset,
+            type: activity.type,
+            transactionTime: activity.time,
+            inclusionState: activity.inclusionState,
+            formattedFiatValue: activity.getFiatAmount(
+                $currencies[CurrencyTypes.USD],
+                $exchangeRates[$activeProfile?.settings?.currency]
+            ),
+        }
+        if (activity.data.type === ActivityType.Transaction) {
+            return {
+                ...details,
+                storageDeposit: activity.data.storageDeposit,
+                amount,
+                unit: asset?.metadata?.unit,
+                rawAmount: activity.data.rawAmount,
+                giftedStorageDeposit: activity.data.giftedStorageDeposit,
+                asyncStatus: activity.data.asyncStatus,
+                direction: activity.data.direction,
+                isInternal: activity.data.isInternal,
+                claimedDate: activity.data.claimedDate,
+                claimingTransactionId: activity.data.claimingTransactionId,
+                expirationDate:
+                    activity.data?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity.data.expirationDate : null,
+                timelockDate: activity.data.timelockDate,
+                subject: activity.data?.subject,
+                tag: activity.data?.tag,
+                metadata: activity.data?.metadata,
+            }
+        } else if (activity.data.type === ActivityType.Foundry) {
+            return {
+                ...details,
+                storageDeposit: activity.data.storageDeposit,
+                amount,
+                unit: asset?.metadata?.unit,
+                rawAmount: activity.data.rawAmount,
+                giftedStorageDeposit: activity.data.giftedStorageDeposit,
+            }
+        } else if (activity.data.type === ActivityType.Alias) {
+            return {
+                ...details,
+                storageDeposit: activity.data.storageDeposit,
+                amount,
+                unit: asset?.metadata?.unit,
+                aliasId: activity.data.aliasId,
+                governorAddress: activity.data.governorAddress,
+                stateControllerAddress: activity.data.stateControllerAddress,
+            }
+        }
     }
 
     function handleExplorerClick(): void {
@@ -155,7 +176,13 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {...transactionDetails} />
+    {#if activity?.data.type === ActivityType.Transaction}
+        <TransactionDetails {...details} />
+    {:else if activity?.data.type === ActivityType.Foundry}
+        <FoundryDetails {...details} />
+    {:else}
+        <AliasDetails {...details} />
+    {/if}
     {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
             <Button
