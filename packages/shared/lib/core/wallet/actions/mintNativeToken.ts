@@ -1,11 +1,10 @@
 import { get } from 'svelte/store'
-import { selectedAccount } from '@core/account'
+import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { NativeTokenOptions, TransactionOptions } from '@iota/wallet'
 import { Converter } from '@lib/converter'
 import { showAppNotification } from '@lib/notifications'
 import { activeProfile, ProfileType } from '@core/profile'
-import { isTransferring } from '@lib/wallet'
 import { handleLedgerError } from '@core/ledger'
 import { Activity } from '../classes'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
@@ -22,7 +21,7 @@ export async function mintNativeToken(
     metadata: IIrc30Metadata
 ): Promise<void> {
     try {
-        isTransferring.set(true)
+        updateSelectedAccount({ isTransferring: true })
         const account = get(selectedAccount)
 
         // TODO: remove this once UX is enhanced
@@ -51,10 +50,10 @@ export async function mintNativeToken(
             alert: true,
         })
         resetMintTokenDetails()
-        isTransferring.set(false)
+        updateSelectedAccount({ isTransferring: false })
         return Promise.resolve()
     } catch (reason) {
-        isTransferring.set(false)
+        updateSelectedAccount({ isTransferring: false })
 
         const _activeProfile = get(activeProfile)
         if (_activeProfile.type === ProfileType.Ledger) {

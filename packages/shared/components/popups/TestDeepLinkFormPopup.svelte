@@ -3,7 +3,6 @@
 
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
-    import { isTransferring } from '@lib/wallet'
     import { Button, Text, TextInput } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
 
@@ -33,7 +32,7 @@
         <Button outline classes="w-full" onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={handleTest} isBusy={$isTransferring}>
+        <Button classes="w-full" onClick={handleTest}>
             {localize('actions.test')}
         </Button>
     </div>
