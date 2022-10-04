@@ -17,7 +17,7 @@ export class StrongholdSetupRouter extends Subrouter<StrongholdSetupRoute> {
         switch (currentRoute) {
             case StrongholdSetupRoute.SetupStrongholdPassword:
                 this.parentRouter.next()
-                break
+                return
         }
     }
 }
