@@ -17,7 +17,7 @@
         findShimmerRewards,
         FindShimmerRewardsError,
         syncShimmerClaimingAccount,
-        hasNoUnclaimedRewards,
+        canUserRecoverFromShimmerClaiming,
         hasUserClaimedRewards,
         isOnboardingLedgerProfile,
         onboardingProfile,
@@ -45,7 +45,7 @@
         canUserClaimRewards(shimmerClaimingAccounts) && !isSearchingForRewards && !isClaimingRewards
     $: shouldShowContinueButton =
         hasUserClaimedRewards(shimmerClaimingAccounts) ||
-        (hasSearchedForRewardsBefore && hasNoUnclaimedRewards(shimmerClaimingAccounts))
+        (hasSearchedForRewardsBefore && canUserRecoverFromShimmerClaiming(shimmerClaimingAccounts))
 
     function onBackClick(): void {
         $shimmerClaimingRouter.previous()
@@ -58,6 +58,7 @@
                 stopPollingLedgerNanoStatus()
             }
             await findShimmerRewards()
+            hasSearchedForRewardsBefore = true
         } catch (err) {
             if ($isOnboardingLedgerProfile) {
                 handleLedgerError(err?.error ?? err)
@@ -68,7 +69,6 @@
             if ($isOnboardingLedgerProfile) {
                 pollLedgerNanoStatus()
             }
-            hasSearchedForRewardsBefore = true
             isSearchingForRewards = false
         }
     }

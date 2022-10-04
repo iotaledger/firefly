@@ -26,7 +26,7 @@ export function linkTransactionsWithClaimingTransactions(
     for (const transaction of sortedTransactions) {
         const isClaimingTransaction = transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)
         const isIncomingAsyncTransaction =
-            transaction.outputs.some((_output) => isOutputAsync(_output)) &&
+            transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
             getDirectionFromTransaction(transaction, account.depositAddress) === ActivityDirection.In
 
         if (isClaimingTransaction) {
