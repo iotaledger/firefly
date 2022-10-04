@@ -14,7 +14,7 @@ import {
     verifyMnemonic,
     backup,
     restoreBackup,
-    createStardustAccount,
+    createAccount,
 } from '../api'
 import { profileManager } from '../stores'
 
@@ -101,11 +101,11 @@ describe('File: api.test.ts', () => {
         })
     })
 
-    describe('Function: createStardustAccount', () => {
-        it('should call createStardustAccount', async () => {
+    describe('Function: createAccount', () => {
+        it('should call createAccount', async () => {
             spy = jest.spyOn(profileManagerMock, 'createAccount')
             const payload = { alias: 'alias', coinType: 4219 }
-            const account = await createStardustAccount(payload)
+            const account = await createAccount(payload)
             expect(account).toEqual(new AccountMock())
             expect(spy).toBeCalledTimes(1)
             expect(spy).toBeCalledWith(payload)

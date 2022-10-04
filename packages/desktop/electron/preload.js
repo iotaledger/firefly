@@ -99,6 +99,17 @@ try {
 
             return account
         },
+        async createAccount(managerId, payload) {
+            const manager = profileManagers[managerId]
+            const account = await manager.createAccount(payload)
+            const protoProps = Object.getOwnPropertyNames(WalletApi.Account.prototype)
+            protoProps.forEach((key) => {
+                if (key !== 'constructor') {
+                    account[key] = account[key].bind(account)
+                }
+            })
+            return account
+        },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
 } catch (error) {

@@ -1,8 +1,8 @@
 import { get } from 'svelte/store'
 
-import { createBoundAccount, IAccount } from '@core/account'
+import { IAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { api, profileManager } from '@core/profile-manager'
+import { api, profileManager, createAccount } from '@core/profile-manager'
 import { sortAccountsByIndex, zip } from '@core/utils'
 
 import { ProfileRecoveryType } from '../enums'
@@ -34,34 +34,33 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
              * will NOT have any accounts, so we create one.
              */
             const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
-                await createBoundAccount({ alias }, shimmerClaimingProfileManager),
-                await createBoundAccount({ alias }, profileManager)
+                await createAccount({ alias }, shimmerClaimingProfileManager),
+                await createAccount({ alias }, profileManager)
             )
             updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
         } else if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
-            const unboundAccounts = await _shimmerClaimingProfileManager?.getAccounts()
-            if (unboundAccounts?.length === 0) {
-                const unboundAccount = await _shimmerClaimingProfileManager?.createAccount({ alias })
-                unboundAccounts.push(unboundAccount)
+            // TODO: add getAccounts() to preload.js
+            const accountIndices = await _shimmerClaimingProfileManager?.getAccountIndexes()
+            if (accountIndices?.length === 0) {
+                await _shimmerClaimingProfileManager?.createAccount({ alias })
+                accountIndices.push(0)
             }
-            const boundAccounts = (
+            const accounts = (
                 await Promise.all(
-                    unboundAccounts.map((unboundAccount) =>
-                        api?.getAccount(_shimmerClaimingProfileManager?.id, unboundAccount?.meta?.index)
-                    )
+                    accountIndices.map((index) => api?.getAccount(_shimmerClaimingProfileManager?.id, index))
                 )
             ).sort(sortAccountsByIndex)
-            const boundTwinAccounts = (
+            const twinAccounts = (
                 await Promise.all(
-                    boundAccounts.map((boundAccount) =>
-                        createBoundAccount({ alias: boundAccount?.meta?.alias ?? alias }, profileManager)
+                    accounts.map((boundAccount) =>
+                        createAccount({ alias: boundAccount?.getMetadata()?.alias ?? alias }, profileManager)
                     )
                 )
             ).sort(sortAccountsByIndex)
             const shimmerClaimingAccounts = (
                 await Promise.all(
-                    zip<IAccount, IAccount>(boundAccounts, boundTwinAccounts).map(([boundAccount, boundTwinAccount]) =>
-                        prepareShimmerClaimingAccount(boundAccount, boundTwinAccount)
+                    zip<IAccount, IAccount>(accounts, twinAccounts).map(([account, twinAccount]) =>
+                        prepareShimmerClaimingAccount(account, twinAccount)
                     )
                 )
             ).sort(sortAccountsByIndex)
@@ -72,7 +71,7 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
         if (get(isOnboardingLedgerProfile)) {
             handleLedgerError(err?.error ?? err)
         }
-
+        console.error(err)
         throw new CannotInitialiseShimmerClaimingAccountError()
     }
 }
