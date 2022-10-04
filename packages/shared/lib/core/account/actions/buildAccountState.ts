@@ -26,6 +26,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         ...metadata,
         depositAddress: account.meta.publicAddresses[0].address,
         balances,
+        isTransferring: false,
         // TODO: refactor onto the profile
         signerType: SignerType.Stronghold,
         // TODO: refactor or remove these below
