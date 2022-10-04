@@ -10,5 +10,4 @@ export interface IAccountState extends IAccount, IAccountMetadata {
     // TODO: refactor or remove these below
     signerType: SignerType
     messages: Message[]
-    isSyncing: boolean
 }
