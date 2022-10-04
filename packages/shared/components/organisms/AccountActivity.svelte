@@ -16,8 +16,8 @@
         TextInput,
         TogglableButton,
         Filter,
+        FontWeight,
     } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
     import { debounce } from 'shared/lib/utils'
     import VirtualList from '@sveltejs/svelte-virtual-list'

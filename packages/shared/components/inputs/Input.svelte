@@ -1,10 +1,8 @@
 <script lang="typescript">
     import { onMount, createEventDispatcher, tick } from 'svelte'
-    import { Text, InputContainer } from 'shared/components'
+    import { Text, InputContainer, TextPropTypes, TextType } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
-    import { TextType } from 'shared/components/Text.svelte'
-    import type { TextPropTypes } from 'shared/components/Text.svelte'
 
     export let value: string = ''
     export let classes: string = ''

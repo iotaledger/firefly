@@ -4,8 +4,7 @@
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
-    import { Button, Text, TextInput } from 'shared/components'
-    import { FontWeight } from '../Text.svelte'
+    import { Button, Text, TextInput, FontWeight } from 'shared/components'
 
     const PREFIX = process.env.APP_PROTOCOL + '://'
     let url: string = PREFIX

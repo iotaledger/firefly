@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text, Tile } from 'shared/components'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { Icon, Text, Tile, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
     import { formatTokenAmountBestMatch } from '@core/wallet'

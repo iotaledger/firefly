@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import Input from './Input.svelte'
-    import { FontWeight, TextPropTypes, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextPropTypes, TextType } from 'shared/components'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled: boolean = false

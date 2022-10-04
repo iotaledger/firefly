@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { appSettings } from '@core/app'
-    import { Icon, Spinner, Text } from 'shared/components'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { Icon, Spinner, Text, FontWeight, TextType } from 'shared/components'
 
     export let primaryText: string = ''
     export let secondaryText: string = ''

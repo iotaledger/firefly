@@ -10,8 +10,7 @@
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { openPopup } from '@lib/popup'
-    import { ClickableTile, Text, AssetIcon } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { ClickableTile, Text, AssetIcon, FontWeight } from 'shared/components'
 
     export let activityId: string
     export let amount: string

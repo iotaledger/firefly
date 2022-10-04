@@ -10,8 +10,7 @@
         VerifiedStatus,
     } from '@core/wallet'
     import { openPopup, updatePopupProps } from '@lib/popup'
-    import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
-    import { FontWeight } from '../Text.svelte'
+    import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox, FontWeight } from 'shared/components'
 
     export let asset: IAsset
     export let activityId: string = undefined

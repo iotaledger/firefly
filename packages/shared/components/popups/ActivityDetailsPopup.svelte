@@ -1,9 +1,8 @@
 <script lang="typescript">
-    import { Text, Button } from 'shared/components'
+    import { Text, Button, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import { TransactionDetails } from 'shared/components/molecules'
     import {
         ActivityAsyncStatus,

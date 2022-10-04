@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { NumberInput } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { NumberInput, FontWeight } from 'shared/components'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false

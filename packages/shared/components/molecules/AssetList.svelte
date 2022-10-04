@@ -4,8 +4,7 @@
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
     import { openPopup } from '@lib/popup'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { AssetTile, Text, Filter } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
+    import { AssetTile, Text, Filter, TextType } from 'shared/components'
 
     export let assets: IAccountAssets
 

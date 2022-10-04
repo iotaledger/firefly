@@ -7,10 +7,9 @@
         KeyValueBox,
         AccountLabel,
     } from 'shared/components/atoms'
-    import { AssetIcon, Text, Pill } from 'shared/components'
+    import { AssetIcon, Text, Pill, FontWeight } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { FontWeight } from 'shared/components/Text.svelte'
     import {
         formatTokenAmountPrecise,
         ActivityAsyncStatus,

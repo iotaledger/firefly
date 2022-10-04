@@ -30,8 +30,8 @@
         AssetIcon,
         Pill,
         Button,
+        FontWeight,
     } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
     import { Position } from 'shared/components/Tooltip.svelte'
     import { ButtonSize } from 'shared/components/Button.svelte'
 

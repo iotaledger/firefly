@@ -1,9 +1,8 @@
 <script lang="typescript">
     import { setClipboard } from 'shared/lib/utils'
     import Box from './Box.svelte'
-    import { Text, Tooltip } from 'shared/components'
+    import { Text, Tooltip, FontWeight } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { FontWeight } from 'shared/components/Text.svelte'
     import { onDestroy } from 'svelte'
 
     export let value = ''

@@ -84,7 +84,7 @@
         <Sidebar />
         <!-- Dashboard Pane -->
         <div class="flex flex-col w-full h-full">
-            <svelte:component this={tabs[$dashboardRoute]} locale={localize} on:next={$appRouter.next} />
+            <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
         </div>
     </div>
 </div>

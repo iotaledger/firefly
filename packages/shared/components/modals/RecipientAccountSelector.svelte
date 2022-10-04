@@ -3,8 +3,7 @@
     import { BASE_TOKEN } from '@core/network'
     import { visibleActiveAccounts, activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
-    import { AccountLabel, Modal, Text } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
+    import { AccountLabel, Modal, Text, TextType } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
     import { fade } from 'svelte/transition'
 

@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { NetworkProtocol } from '@core/network'
     import { visibleSelectedAccountAssets } from '@core/wallet'
-    import { AssetTile, Icon, Text, AssetIcon } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
 
     export let asset = $visibleSelectedAccountAssets?.baseCoin

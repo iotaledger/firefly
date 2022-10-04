@@ -10,9 +10,8 @@
         SecuritySettings,
     } from '@core/router'
     import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text, TextType } from 'shared/components'
     import features from 'shared/features/features'
-    import { TextType } from 'shared/components/Text.svelte'
 
     export let group
     export let settings:

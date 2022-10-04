@@ -1,6 +1,6 @@
 <script lang="typescript">
     import Input from './Input.svelte'
-    import { FontWeight, TextPropTypes, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextPropTypes, TextType } from 'shared/components'
 
     export let value: string
     export let inputElement: HTMLInputElement = undefined

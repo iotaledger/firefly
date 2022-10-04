@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
+    import { Animation, OnboardingButton, OnboardingLayout, Text, TextType } from 'shared/components'
     import features from '@features/features'
     import {
         initialiseOnboardingProfile,

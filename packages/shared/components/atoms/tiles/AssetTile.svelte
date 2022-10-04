@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
-    import { AssetIcon, ClickableTile, Text } from 'shared/components'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { AssetIcon, ClickableTile, Text, FontWeight, TextType } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
 
     export let asset: IAsset

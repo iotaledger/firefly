@@ -1,9 +1,7 @@
 <script lang="typescript">
-    import { FontWeight } from 'shared/components/Text.svelte'
-    import { Modal, Text } from 'shared/components'
+    import { Modal, Text, FontWeight, Button } from 'shared/components'
     import type { Filter } from '@core/wallet'
     import { localize } from '@core/i18n'
-    import { Button } from 'shared/components'
     import { activeProfileId } from '@core/profile'
     import { ButtonSize } from 'shared/components/Button.svelte'
 

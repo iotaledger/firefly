@@ -5,8 +5,7 @@
     import { mintNativeToken, setMintTokenDetails, mintTokenDetails, TokenStandard } from '@core/wallet'
     import { closePopup } from '@lib/popup'
     import { isTransferring } from '@lib/wallet'
-    import { Button, Error, NumberInput, Text, TextInput, OptionalInput } from 'shared/components'
-    import { FontWeight } from '../Text.svelte'
+    import { Button, Error, NumberInput, Text, TextInput, OptionalInput, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
 
