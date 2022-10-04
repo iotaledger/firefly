@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { OnboardingLayout } from '../../../components'
-    import { Button, Icon, Text, TextHint } from 'shared/components'
+    import { Button, Icon, Text } from 'shared/components'
     import { onboardingRouter } from '@core/router'
     import { localize } from '@core/i18n'
-    import { completeOnboardingProcess, isOnboardingLedgerProfile } from '@contexts/onboarding'
+    import { completeOnboardingProcess } from '@contexts/onboarding'
 
     function onContinueClick(): Promise<void> {
         completeOnboardingProcess()
@@ -23,9 +23,6 @@
                 >{localize('views.onboarding.congratulations.body')}</Text
             >
         </div>
-        {#if $isOnboardingLedgerProfile}
-            <TextHint warning text={localize('views.onboarding.congratulations.ledgerHint')} />
-        {/if}
     </div>
     <div slot="footer">
         <Button autofocus classes="w-full" onClick={onContinueClick}>

@@ -17,7 +17,6 @@
     let verifyIndex = 0
     let verified = false
 
-    const wordElements: HTMLButtonElement[] = []
     const title = localize('views.onboarding.profileBackup.verifyMnemonic.title')
 
     $: if (verified) {
@@ -71,30 +70,10 @@
         $profileBackupRouter.previous()
     }
 
-    function onKeyPress(event: KeyboardEvent): void {
-        if (!verified) {
-            switch (event.key) {
-                case '1':
-                    wordElements[0].click()
-                    break
-                case '2':
-                    wordElements[1].click()
-                    break
-                case '3':
-                    wordElements[2].click()
-                    break
-                default:
-                    break
-            }
-        }
-    }
-
     onMount(() => {
         fillChoices()
     })
 </script>
-
-<svelte:window on:keypress={onKeyPress} />
 
 <OnboardingLayout {onBackClick} {busy} {title}>
     <div slot="content" class="w-full h-full flex flex-col p-0">

@@ -1,9 +1,14 @@
 <script lang="typescript">
+    import { appSettings } from '@core/app'
+    import { Mnemonic } from '@contexts/onboarding'
+
     export let recoveryPhrase: Mnemonic = []
     export let verifyRecoveryPhrase: Mnemonic = undefined
 
     export let hide = false
     export let classes = ''
+
+    $: dark = $appSettings.darkMode
 </script>
 
 {#if recoveryPhrase}
@@ -16,12 +21,16 @@
             <span
                 id="recovery-word-{i}"
                 class="p-3 flex flex-row items-center bg-transparent text-gray-500 border border-solid border-transparent"
+                class:dark
+                class:selected={verifyRecoveryPhrase &&
+                    verifyRecoveryPhrase.length === i &&
+                    verifyRecoveryPhrase[i - 1] === recoveryPhrase[i - 1]}
                 class:errored={verifyRecoveryPhrase &&
                     verifyRecoveryPhrase[i] &&
                     verifyRecoveryPhrase[i] !== recoveryPhrase[i]}
             >
-                <span class="text-gray-500 mr-2">{`${i + 1}. `}</span>
-                <span class="'text-gray-500 dark:text-white"
+                <span class="text-gray-600 mr-2">{`${i + 1}. `}</span>
+                <span class="'text-gray-600 dark:text-white"
                     >{verifyRecoveryPhrase && verifyRecoveryPhrase[i] !== recoveryPhrase[i] ? '*****' : word}</span
                 >
             </span>
@@ -31,16 +40,35 @@
 
 <style type="text/scss">
     div {
-        max-width: 460px;
         &.hide {
             filter: blur(4px);
         }
         span {
+            &.selected {
+                @apply rounded;
+                @apply border-solid;
+                @apply border;
+                @apply border-blue-500;
+                @apply bg-blue-50;
+            }
             &.errored {
                 @apply rounded;
                 @apply border-solid;
                 @apply border;
-                @apply border-red-300;
+                @apply border-red-500;
+                @apply bg-red-50;
+            }
+            &.dark.selected {
+                @apply bg-blue-300;
+                span {
+                    @apply text-gray-600;
+                }
+            }
+            &.dark.errored {
+                @apply bg-red-300;
+                span {
+                    @apply text-gray-600;
+                }
             }
         }
     }
