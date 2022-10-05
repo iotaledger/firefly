@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { AddressBox, KeyValueBox } from 'shared/components/atoms'
-    import { Pill } from 'shared/components'
+    import { Pill, AddressBox, KeyValueBox } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountPrecise, InclusionState } from '@core/wallet'
@@ -36,15 +35,15 @@
     }
 </script>
 
-<transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<alias-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
-        <transaction-status class="flex flex-row w-full space-x-2 justify-center">
+        <alias-status class="flex flex-row w-full space-x-2 justify-center">
             <Pill backgroundColor="green-300" darkBackgroundColor="gray-200">
                 {localize(
                     inclusionState === InclusionState.Confirmed ? 'general.aliasCreated' : 'general.creatingAlias'
                 )}
             </Pill>
-        </transaction-status>
+        </alias-status>
         <AddressBox clearBackground clearPadding isCopyable address={aliasId} />
     </main-content>
     {#if Object.entries(detailsList).length > 0}
@@ -59,4 +58,4 @@
             {/each}
         </details-list>
     {/if}
-</transaction-details>
+</alias-details>
