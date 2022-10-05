@@ -28,7 +28,7 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
-    $: localePrefix = `tooltips.transactionDetails.${direction === ActivityDirection.In ? 'incoming' : 'outgoing'}.`
+    $: localePrefix = `tooltips.transactionDetails.${direction}.`
 
     let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {

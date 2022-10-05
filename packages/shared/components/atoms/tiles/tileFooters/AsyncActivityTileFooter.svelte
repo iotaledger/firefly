@@ -7,7 +7,7 @@
         rejectActivity,
         getTimeDifference,
     } from '@core/wallet'
-    import { ActivityAsyncStatusPill, TooltipIcon, Text, Pill, Button, HR } from 'shared/components'
+    import { ActivityAsyncStatusPill, TooltipIcon, Text, Button, TileFooter } from 'shared/components'
     import { time } from '@core/app'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Position } from 'shared/components/Tooltip.svelte'
@@ -21,23 +21,11 @@
     export let activityId: string
     export let data: ITransactionActivityData
 
-    let asyncStatusTooltipText: string
+    $: shouldShowActions =
+        data.direction === ActivityDirection.Incoming && data.asyncStatus === ActivityAsyncStatus.Unclaimed
+    $: shouldShowAsyncFooter = data.asyncStatus !== ActivityAsyncStatus.Claimed
+
     $: timeDiff = getTimeDiff(data)
-
-    $: isUnclaimed = data.asyncStatus === ActivityAsyncStatus.Unclaimed
-    $: isTimelocked = data.asyncStatus === ActivityAsyncStatus.Timelocked
-    $: isIncoming = data.direction === ActivityDirection.In
-    $: isIncomingActivityUnclaimed = (isIncoming || data.isSelfTransaction) && isUnclaimed
-    $: isAsyncActivity = isTimelocked || (data.isAsync && (data.direction === ActivityDirection.Out || isUnclaimed))
-
-    $: {
-        if (isUnclaimed || isTimelocked) {
-            const activityDirectionKey = isIncoming ? 'incoming' : 'outgoing'
-            const activityAsyncStatusKey = isUnclaimed ? 'expirationTime' : 'timelockDate'
-            const textKey = `tooltips.transactionDetails.${activityDirectionKey}.${activityAsyncStatusKey}`
-            asyncStatusTooltipText = localize(textKey)
-        }
-    }
 
     function handleRejectClick(): void {
         openPopup({
@@ -76,27 +64,20 @@
     }
 </script>
 
-{#if isAsyncActivity}
-    <HR />
-    <async-activity-actions class="flex w-full justify-between space-x-4">
-        <info-container class="flex flex-row justify-center items-center space-x-2">
-            {#if isUnclaimed || isTimelocked}
-                <TooltipIcon
-                    icon={isTimelocked ? IconEnum.Timelock : IconEnum.ExpirationTime}
-                    iconClasses="text-gray-600 dark:text-gray-200"
-                    title={localize(`general.${isUnclaimed ? 'expirationTime' : 'timelockDate'}`)}
-                    text={asyncStatusTooltipText}
-                    position={Position.Top}
-                />
-                <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
-            {/if}
-        </info-container>
-        <claim-container class="flex flex-row justify-end w-1/2 space-x-2">
-            {#if isTimelocked}
-                <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
-                    {localize('pills.locked')}
-                </Pill>
-            {:else if isIncomingActivityUnclaimed}
+{#if shouldShowAsyncFooter}
+    <TileFooter>
+        <svelte:fragment slot="left">
+            <TooltipIcon
+                icon={IconEnum.ExpirationTime}
+                iconClasses="text-gray-600 dark:text-gray-200"
+                title={localize('general.expirationTime')}
+                text={localize(`tooltips.transactionDetails.${data.direction}.expirationTime`)}
+                position={Position.Top}
+            />
+            <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
+        </svelte:fragment>
+        <svelte:fragment slot="right">
+            {#if shouldShowActions}
                 <Button
                     onClick={handleRejectClick}
                     disabled={data.isClaiming || data.isRejected}
@@ -118,6 +99,6 @@
             {:else}
                 <ActivityAsyncStatusPill asyncStatus={data.asyncStatus} />
             {/if}
-        </claim-container>
-    </async-activity-actions>
+        </svelte:fragment>
+    </TileFooter>
 {/if}

@@ -1644,24 +1644,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "prijenos s",
                     "Confirmed": "preneseno s",
                     "Conflicting": "prijenos nije uspio"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "prijenos na",
                     "Confirmed": "preneseno na",
                     "Conflicting": "prijenos nije uspio"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "primanje od",
                     "Confirmed": "primljeno od",
                     "Conflicting": "primanje nije uspjelo"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "slanje na",
                     "Confirmed": "poslano na",
                     "Conflicting": "slanje nije uspjelo"
@@ -1669,12 +1669,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "mintanje u tijeku",
                 "Confirmed": "mintano",
                 "Conflicting": "mintanje nije uspjelo"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "mintanje u tijeku",
                 "Confirmed": "mintano",
                 "Conflicting": "mintanje nije uspjelo"

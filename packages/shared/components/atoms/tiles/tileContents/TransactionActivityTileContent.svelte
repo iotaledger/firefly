@@ -15,7 +15,7 @@
     $: title = getTitle(data, inclusionState)
     $: subjectLocale = getSubjectLocale(data.subject, data.isShimmerClaiming)
 
-    $: isIncoming = data.direction === ActivityDirection.In
+    $: isIncoming = data.direction === ActivityDirection.Incoming
 
     function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
         const { isShimmerClaiming, isInternal, direction } = txData
@@ -27,10 +27,10 @@
         if (isInternal) {
             return isInclusionStateConfirmed ? 'general.transfer' : 'general.transferring'
         }
-        if (direction === ActivityDirection.In) {
+        if (direction === ActivityDirection.Incoming) {
             return isInclusionStateConfirmed ? 'general.received' : 'general.receiving'
         }
-        if (direction === ActivityDirection.Out) {
+        if (direction === ActivityDirection.Outgoing) {
             return isInclusionStateConfirmed ? 'general.sent' : 'general.sending'
         }
     }

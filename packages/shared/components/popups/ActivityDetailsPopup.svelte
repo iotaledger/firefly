@@ -35,7 +35,7 @@
     $: isActivityIncomingAndUnclaimed =
         activity.data.type === ActivityType.Transaction &&
         activity.data.isAsync &&
-        (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) &&
+        (activity?.data.direction === ActivityDirection.Incoming || activity.data.isSelfTransaction) &&
         activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     let details
