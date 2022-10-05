@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
-import { OutputData, Transaction } from '@iota/wallet/out/types'
+import { OutputData, Transaction } from '@iota/wallet'
 import { IProcessedTransaction } from '../../interfaces'
 
 export async function preprocessOutputsForAccount(account: IAccountState): Promise<IProcessedTransaction[]> {

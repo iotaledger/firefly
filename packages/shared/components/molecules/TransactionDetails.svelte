@@ -44,6 +44,9 @@
     export let surplus: string = null
     export let subject: Subject = null
     export let tag: string = null
+    export let aliasId: string = null
+    export let governorAddress: string = null
+    export let stateControllerAddress: string = null
     export let transactionTime: Date = null
     export let isInternal: boolean = false
     export let isClaiming: boolean = false
@@ -166,6 +169,14 @@
             {#if isTimelocked}
                 <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
                     {localize('pills.locked')}
+                </Pill>
+            {/if}
+            {#if type === ActivityType.Alias}
+                <Pill
+                    backgroundColor={inclusionState === InclusionState.Confirmed ? 'green-300' : 'blue-100'}
+                    darkBackgroundColor="gray-200"
+                >
+                    {localize(`pills.alias.${inclusionState === InclusionState.Confirmed ? 'created' : 'creating'}`)}
                 </Pill>
             {/if}
         </transaction-status>

@@ -1701,8 +1701,11 @@
             "claimed": "claimed",
             "expired": "expired"
         },
-        "locked": "locked",
-        "aliasCreated": "alias created"
+        "alias": {
+            "created": "alias created",
+            "creating": "creating alias"
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {

@@ -6,8 +6,6 @@ import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddress
 
 export function getSenderFromInputs(inputs: IOutputResponse[]): Subject {
     for (const { output } of inputs) {
-        // TODO: currently getSubjectFromAddressTypes only handles basic outputs
-        // We need to add a wrapper function to handle alias, NFT and Foundry outputs
         if (output.type !== OUTPUT_TYPE_TREASURY) {
             const { unlockConditions } = output
 

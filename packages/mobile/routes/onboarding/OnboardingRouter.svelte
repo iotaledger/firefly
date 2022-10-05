@@ -3,7 +3,9 @@
     import {
         // routers
         AppSetupRouter,
+        CongratulationsView,
         NetworkSetupRouter,
+        ProfileBackupRouter,
         ProfileSetupRouter,
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
@@ -23,6 +25,10 @@
     <Transition>
         <ProfileSetupRouter />
     </Transition>
+{:else if $onboardingRoute === OnboardingRoute.ProfileBackup}
+    <Transition transition={false}>
+        <ProfileBackupRouter />
+    </Transition>
 {:else if $onboardingRoute === OnboardingRoute.StrongholdSetup}
     <Transition>
         <StrongholdSetupRouter />
@@ -30,5 +36,9 @@
 {:else if $onboardingRoute === OnboardingRoute.StorageProtectionSetup}
     <Transition transition={false}>
         <StorageProtectionSetupRouter />
+    </Transition>
+{:else if $onboardingRoute === OnboardingRoute.Congratulations}
+    <Transition>
+        <CongratulationsView />
     </Transition>
 {/if}
