@@ -125,7 +125,6 @@ function updateRewardsFinderParameters(): void {
 async function updateRecoveredAccounts(accounts: IAccount[]): Promise<void> {
     const boundAccounts = await getSortedRenamedBoundAccounts(accounts, shimmerClaimingProfileManager)
     const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)
-
     const hasNewRewards = updatedTotalUnclaimedShimmerRewards > totalUnclaimedShimmerRewards
     if (hasNewRewards) {
         const boundTwinAccounts = await getSortedRenamedBoundAccounts(boundAccounts)
