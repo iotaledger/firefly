@@ -72,7 +72,9 @@
 
     let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {
-        transactionTime: { data: formattedTransactionTime },
+        ...(transactionTime && {
+            transactionTime: { data: formattedTransactionTime },
+        }),
         ...(metadata && {
             metadata: {
                 data: metadata,
