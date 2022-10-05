@@ -1,3 +1,4 @@
+export * from './alias-icon.svg'
 export * from './arrow-left.svg'
 export * from './arrow-right.svg'
 export * from './assembly.svg'

@@ -56,7 +56,7 @@
                     {asset}
                 />
             {:else if activity.data.type === ActivityType.Alias}
-                <AliasActivityTileContent inclusionState={activity.inclusionState} data={activity.data} {asset} />
+                <AliasActivityTileContent inclusionState={activity.inclusionState} data={activity.data} />
             {:else}
                 <FoundryActivityTileContent
                     inclusionState={activity.inclusionState}

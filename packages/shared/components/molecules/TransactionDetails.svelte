@@ -125,12 +125,16 @@
     }
 
     function getDateFormat(date: Date): string {
-        if (date) {
-            return formatDate(date, {
-                dateStyle: 'long',
-                timeStyle: 'medium',
-            })
-        } else {
+        try {
+            if (date) {
+                return formatDate(date, {
+                    dateStyle: 'long',
+                    timeStyle: 'medium',
+                })
+            } else {
+                return undefined
+            }
+        } catch (error) {
             return undefined
         }
     }

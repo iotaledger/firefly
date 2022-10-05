@@ -1,16 +1,20 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { InclusionState, IPersistedAsset, IAliasActivityData } from '@core/wallet'
+    import { InclusionState, IAliasActivityData } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
-    import { Text, AssetIcon } from 'shared/components'
+    import { Text, Icon } from 'shared/components'
     import { FontWeight } from 'shared/components/Text.svelte'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let inclusionState: InclusionState
     export let data: IAliasActivityData
-    export let asset: IPersistedAsset
 </script>
 
-<AssetIcon {asset} showVerifiedBadgeOnly />
+<div class="relative flex w-8 h-8">
+    <div class="rounded-full flex justify-center items-center transition-none p-1 w-8 h-8 bg-gray-500">
+        <Icon icon={IconEnum.AliasIcon} width="80%" height="80%" classes="text-white dark:text-gray-800 text-center" />
+    </div>
+</div>
 <div class="flex flex-col w-full space-y-0.5">
     <div class="flex flex-row">
         <Text
