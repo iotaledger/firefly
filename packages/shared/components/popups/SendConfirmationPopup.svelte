@@ -28,7 +28,6 @@
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
-    import { isTransferring } from '@lib/wallet'
     import { ledgerPreparedOutput } from '@core/ledger'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -52,8 +51,8 @@
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle = asset?.id === $selectedAccountAssets?.baseCoin?.id
-
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
+    $: isTransferring = $selectedAccount.isTransferring
 
     function refreshSendConfirmationState(): void {
         error = null
@@ -211,16 +210,16 @@
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}
-            <Button classes="w-full" outline onClick={onCancel} disabled={$isTransferring}>
+            <Button classes="w-full" outline onClick={onCancel} disabled={isTransferring}>
                 {localize('actions.cancel')}
             </Button>
         {:else}
-            <Button classes="w-full" outline onClick={onBack} disabled={$isTransferring}>
+            <Button classes="w-full" outline onClick={onBack} disabled={isTransferring}>
                 {localize('actions.back')}
             </Button>
         {/if}
 
-        <Button classes="w-full" onClick={onConfirm} disabled={$isTransferring} isBusy={$isTransferring}>
+        <Button classes="w-full" onClick={onConfirm} disabled={isTransferring} isBusy={isTransferring}>
             {localize('actions.confirm')}
         </Button>
     </popup-buttons>

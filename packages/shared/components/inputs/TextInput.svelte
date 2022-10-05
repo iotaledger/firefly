@@ -1,35 +1,23 @@
 <script lang="typescript">
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import Input from './Input.svelte'
+    import { FontWeight, TextPropTypes, TextType } from 'shared/components/Text.svelte'
 
     export let inputElement: HTMLInputElement
-
+    export let hasFocus: boolean = false
     export let value: string
-    export let hasFocus: boolean
-    export let error = ''
+    export let error: string
 
     // Text Props
     export let type = TextType.p
+    export let fontWeight: FontWeight = FontWeight.normal
     export let fontSize = 'sm'
     export let lineHeight = '140'
-    export let fontWeight = FontWeight.normal
     export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
+
+    let textProps: TextPropTypes
+    $: textProps = { type, fontSize, lineHeight, fontWeight }
 </script>
 
-<Input
-    bind:inputElement
-    bind:value
-    bind:hasFocus
-    type="text"
-    {error}
-    textProps={{
-        type,
-        fontSize,
-        lineHeight,
-        fontWeight,
-    }}
-    {alignment}
-    {...$$restProps}
->
+<Input bind:inputElement bind:value bind:hasFocus type="text" {error} {textProps} {alignment} {...$$restProps}>
     <slot />
 </Input>

@@ -31,7 +31,7 @@ export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
 
             case ProfileBackupRoute.BackupStronghold: {
                 this.parentRouter.next()
-                break
+                return
             }
         }
 
