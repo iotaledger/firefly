@@ -1,5 +1,12 @@
 <script lang="typescript">
-    import { TransactionActivityStatusPill, ActivityAsyncStatusPill, KeyValueBox, Pill } from 'shared/components'
+    import {
+        TransactionActivityStatusPill,
+        ActivityAsyncStatusPill,
+        KeyValueBox,
+        Pill,
+        AmountBox,
+        SubjectBox,
+    } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import {
