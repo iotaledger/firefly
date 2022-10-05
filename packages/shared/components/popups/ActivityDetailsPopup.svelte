@@ -30,10 +30,6 @@
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
     $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
-    $: amount =
-        activity && activity.data.type !== ActivityType.Alias
-            ? formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
-            : undefined
     $: isTimelocked =
         activity.data.type === ActivityType.Transaction && activity.data.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
@@ -63,7 +59,7 @@
             return {
                 ...details,
                 storageDeposit: activity.data.storageDeposit,
-                amount,
+                amount: formatTokenAmountDefault(activity.data.rawAmount, asset?.metadata),
                 unit: asset?.metadata?.unit,
                 rawAmount: activity.data.rawAmount,
                 giftedStorageDeposit: activity.data.giftedStorageDeposit,
@@ -83,7 +79,7 @@
             return {
                 ...details,
                 storageDeposit: activity.data.storageDeposit,
-                amount,
+                amount: formatTokenAmountDefault(activity.data.rawAmount, asset?.metadata),
                 unit: asset?.metadata?.unit,
                 rawAmount: activity.data.rawAmount,
                 giftedStorageDeposit: activity.data.giftedStorageDeposit,
@@ -92,8 +88,6 @@
             return {
                 ...details,
                 storageDeposit: activity.data.storageDeposit,
-                amount,
-                unit: asset?.metadata?.unit,
                 aliasId: activity.data.aliasId,
                 governorAddress: activity.data.governorAddress,
                 stateControllerAddress: activity.data.stateControllerAddress,

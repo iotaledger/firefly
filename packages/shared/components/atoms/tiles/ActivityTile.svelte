@@ -14,6 +14,7 @@
         TransactionActivityTileContent,
         FoundryActivityTileContent,
         AliasActivityTileContent,
+        AsyncActivityActions,
     } from 'shared/components'
 
     export let activity: Activity
@@ -45,24 +46,28 @@
     classes={activity.inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}
 >
     <activity-tile class="w-full flex flex-col space-y-4">
+        <info-container class="flex flex-row items-center text-left space-x-4">
+            {#if activity.data.type === ActivityType.Transaction}
+                <TransactionActivityTileContent
+                    inclusionState={activity.inclusionState}
+                    fiatAmount={activity.getFiatAmount()}
+                    amount={activity.getFormattedAmount(false)}
+                    data={activity.data}
+                    {asset}
+                />
+            {:else if activity.data.type === ActivityType.Alias}
+                <AliasActivityTileContent inclusionState={activity.inclusionState} data={activity.data} {asset} />
+            {:else}
+                <FoundryActivityTileContent
+                    inclusionState={activity.inclusionState}
+                    fiatAmount={activity.getFiatAmount()}
+                    amount={activity.getFormattedAmount(false)}
+                    {asset}
+                />
+            {/if}
+        </info-container>
         {#if activity.data.type === ActivityType.Transaction}
-            <TransactionActivityTileContent
-                activityId={activity.id}
-                inclusionState={activity.inclusionState}
-                fiatAmount={activity.getFiatAmount()}
-                amount={activity.getFormattedAmount(false)}
-                data={activity.data}
-                {asset}
-            />
-        {:else if activity.data.type === ActivityType.Alias}
-            <AliasActivityTileContent inclusionState={activity.inclusionState} data={activity.data} {asset} />
-        {:else}
-            <FoundryActivityTileContent
-                inclusionState={activity.inclusionState}
-                fiatAmount={activity.getFiatAmount()}
-                amount={activity.getFormattedAmount(false)}
-                {asset}
-            />
+            <AsyncActivityActions activityId={activity.id} data={activity.data} />
         {/if}
     </activity-tile>
 </ClickableTile>
