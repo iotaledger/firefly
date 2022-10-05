@@ -1,4 +1,5 @@
-export { default as ActivityStatusPill } from './ActivityStatusPill.svelte'
 export { default as ActivityAsyncStatusPill } from './ActivityAsyncStatusPill.svelte'
+export { default as ActivityInclusionStatusPill } from './ActivityInclusionStatusPill.svelte'
 export { default as DeveloperIndicatorPill } from './DeveloperIndicatorPill.svelte'
 export { default as Pill } from './Pill.svelte'
+export { default as TransactionActivityStatusPill } from './TransactionActivityStatusPill.svelte'

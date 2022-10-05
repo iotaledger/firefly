@@ -78,7 +78,7 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 }
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.amount.active) {
+    if (filter.amount.active && activity.data.type !== ActivityType.Alias) {
         const asset = getAssetFromPersistedAssets(activity.data.assetId)
         const activityAmount = Big(activity.data.rawAmount)
 
@@ -256,14 +256,14 @@ function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilte
         if (
             filter.type.selected === TypeFilterOption.Incoming &&
             activity.data.type === ActivityType.Transaction &&
-            activity.data.direction !== ActivityDirection.In
+            activity.data.direction !== ActivityDirection.Incoming
         ) {
             return false
         }
         if (
             filter.type.selected === TypeFilterOption.Outgoing &&
             activity.data.type === ActivityType.Transaction &&
-            activity.data.direction !== ActivityDirection.Out
+            activity.data.direction !== ActivityDirection.Outgoing
         ) {
             return false
         }

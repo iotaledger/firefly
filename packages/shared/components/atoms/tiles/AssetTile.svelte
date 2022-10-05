@@ -9,7 +9,7 @@
 </script>
 
 <ClickableTile {onClick} {...$$restProps}>
-    <div class="asset w-full flex flex-row justify-between items-center">
+    <div class="w-full flex flex-row justify-between items-center">
         <div class="flex flex-row items-center text-left space-x-4">
             <AssetIcon small={squashed} {asset} />
             <div class="flex flex-col">
@@ -40,9 +40,3 @@
         </div>
     </div>
 </ClickableTile>
-
-<style type="text/scss">
-    .asset {
-        fontfeature-settings: 'calt' off; // disables 'x' formatting while surrounded by numbers
-    }
-</style>

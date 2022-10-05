@@ -1,13 +1,13 @@
 import { getRecipientAddressFromOutput } from '..'
-import { OutputTypes } from '@iota/types'
+import { IWrappedOutput } from '@core/wallet/interfaces'
 
 export function getMainTransactionOutputFromTransaction(
-    outputs: OutputTypes[],
+    wrappedOutputs: IWrappedOutput[],
     accountAddress: string,
     isIncoming: boolean
-): { output: OutputTypes; outputIndex: number; isSelfTransaction: boolean } {
-    const nonRemainerOutputIndex = outputs.findIndex((output) => {
-        const recipientAddress = getRecipientAddressFromOutput(output)
+): { wrappedOutput: IWrappedOutput; isSelfTransaction: boolean } {
+    const nonRemainerOutput = wrappedOutputs.find((output) => {
+        const recipientAddress = getRecipientAddressFromOutput(output.output)
 
         if (isIncoming) {
             return accountAddress === recipientAddress
@@ -15,18 +15,16 @@ export function getMainTransactionOutputFromTransaction(
             return accountAddress !== recipientAddress
         }
     })
-    if (nonRemainerOutputIndex >= 0) {
+    if (nonRemainerOutput) {
         return {
-            output: outputs[nonRemainerOutputIndex],
-            outputIndex: nonRemainerOutputIndex,
+            wrappedOutput: nonRemainerOutput,
             isSelfTransaction: false,
         }
     } else {
-        if (outputs.every((output) => accountAddress === getRecipientAddressFromOutput(output))) {
-            const outputIndex = outputs.findIndex((output) => accountAddress === getRecipientAddressFromOutput(output))
-
-            return { output: outputs[outputIndex], outputIndex: outputIndex, isSelfTransaction: true }
+        const output = wrappedOutputs.find((output) => accountAddress === getRecipientAddressFromOutput(output.output))
+        if (output) {
+            return { wrappedOutput: output, isSelfTransaction: true }
         }
     }
-    return { output: undefined, outputIndex: undefined, isSelfTransaction: undefined }
+    return { wrappedOutput: undefined, isSelfTransaction: undefined }
 }

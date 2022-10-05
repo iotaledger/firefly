@@ -11,7 +11,6 @@ export function preprocessGroupedOutputs(
     incomingTransactions: [ITransactionPayload, IOutputResponse[]],
     account: IAccountState
 ): IProcessedTransaction {
-    const outputs = outputDatas.map((outputData) => outputData.output)
     const transactionMetadata = outputDatas[0]?.metadata
     const detailedTransactionInputs = incomingTransactions?.[1]
 
@@ -28,7 +27,7 @@ export function preprocessGroupedOutputs(
     const isIncoming = isTransactionIncoming(outputDatas, account.depositAddress)
 
     return {
-        outputs: outputs,
+        outputs: outputDatas,
         transactionId: transactionMetadata?.transactionId,
         isIncoming,
         time: new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),

@@ -3,8 +3,7 @@
 
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
-    import { isTransferring } from '@lib/wallet'
-    import { Button, Text, TextInput, FontWeight } from 'shared/components'
+    import { Button, Text, TextInput, FontWeight, TextType } from 'shared/components'
 
     const PREFIX = process.env.APP_PROTOCOL + '://'
     let url: string = PREFIX
@@ -20,7 +19,7 @@
 </script>
 
 <div class="space-y-6">
-    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
+    <Text type={TextType.h4} fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
         {localize('actions.testDeepLink')}
     </Text>
 
@@ -32,7 +31,7 @@
         <Button outline classes="w-full" onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={handleTest} isBusy={$isTransferring}>
+        <Button classes="w-full" onClick={handleTest}>
             {localize('actions.test')}
         </Button>
     </div>

@@ -6,6 +6,9 @@ const developerToolsFeatures = {
     minting: {
         enabled: true,
     },
+    alias: {
+        enabled: true,
+    },
     refreshTokens: {
         enabled: true,
     },

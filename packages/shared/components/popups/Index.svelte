@@ -8,6 +8,7 @@
 
     // Popups
     import AccountSwitcherPopup from './AccountSwitcherPopup.svelte'
+    import AliasConfirmationPopup from './AliasConfirmationPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
@@ -81,6 +82,7 @@
 
     const types = {
         accountSwitcher: AccountSwitcherPopup,
+        aliasConfirmation: AliasConfirmationPopup,
         unlockStronghold: UnlockStrongholdPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,

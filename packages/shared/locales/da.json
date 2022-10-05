@@ -1644,24 +1644,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "overfører fra",
                     "Confirmed": "overført fra",
                     "Conflicting": "overførsel mislykkedes"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "overfører til",
                     "Confirmed": "overført til",
                     "Conflicting": "overførsel mislykkedes"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "modtager fra",
                     "Confirmed": "modtaget fra",
                     "Conflicting": "modtagelse mislykkedes"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "sender til",
                     "Confirmed": "sendt til",
                     "Conflicting": "afsendelse mislykkedes"
@@ -1669,12 +1669,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "mintning",
                 "Confirmed": "mintet",
                 "Conflicting": "mintning mislykkedes"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "mintning",
                 "Confirmed": "mintet",
                 "Conflicting": "mintning mislykkedes"
