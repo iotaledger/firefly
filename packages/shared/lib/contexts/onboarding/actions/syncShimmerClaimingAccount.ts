@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { IAccount } from '@core/account'
-import { api, profileManager } from '@core/profile-manager'
+import { getAccount, profileManager } from '@core/profile-manager'
 
 import { MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
@@ -17,8 +17,8 @@ export async function syncShimmerClaimingAccount(account: IAccount): Promise<voi
         throw new MissingShimmerClaimingProfileManagerError()
     }
     const { index } = account?.getMetadata()
-    const boundShimmerClaimingAccount = await api.getAccount(_shimmerClaimingProfileManager?.id, index)
-    const boundTwinAccount = await api.getAccount(get(profileManager)?.id, index)
+    const boundShimmerClaimingAccount = await getAccount(index, shimmerClaimingProfileManager)
+    const boundTwinAccount = await getAccount(index, profileManager)
     if (boundShimmerClaimingAccount?.getMetadata()?.index !== boundTwinAccount?.getMetadata()?.index) {
         return
     }

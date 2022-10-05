@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { IAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { api, profileManager, createAccount } from '@core/profile-manager'
+import { profileManager, createAccount, getAccounts } from '@core/profile-manager'
 import { sortAccountsByIndex, zip } from '@core/utils'
 
 import { ProfileRecoveryType } from '../enums'
@@ -17,8 +17,7 @@ import {
 import { handleLedgerError } from '@core/ledger'
 
 export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
-    const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
-    if (!_shimmerClaimingProfileManager) {
+    if (!get(shimmerClaimingProfileManager)) {
         throw new MissingShimmerClaimingProfileManagerError()
     }
 
@@ -39,17 +38,13 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             )
             updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
         } else if (profileRecoveryType === ProfileRecoveryType.Stronghold) {
-            // TODO: add getAccounts() to preload.js
-            const accountIndices = await _shimmerClaimingProfileManager?.getAccountIndexes()
-            if (accountIndices?.length === 0) {
-                await _shimmerClaimingProfileManager?.createAccount({ alias })
-                accountIndices.push(0)
+            const accounts = await getAccounts(shimmerClaimingProfileManager)
+            if (accounts?.length === 0) {
+                const account = await createAccount({ alias }, shimmerClaimingProfileManager)
+                accounts.push(account)
             }
-            const accounts = (
-                await Promise.all(
-                    accountIndices.map((index) => api?.getAccount(_shimmerClaimingProfileManager?.id, index))
-                )
-            ).sort(sortAccountsByIndex)
+            accounts.sort(sortAccountsByIndex)
+
             const twinAccounts = (
                 await Promise.all(
                     accounts.map((boundAccount) =>

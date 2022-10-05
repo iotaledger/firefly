@@ -13,7 +13,7 @@ export async function restoreBackupFromStrongholdFile(strongholdPassword: string
      * NOTE: We must check that the Stronghold file's coin_type matches the current networkProtocol
      * and is not based on an alternate protocol.
      */
-    await validateStrongholdCoinType(get(profileManager), networkProtocol)
+    await validateStrongholdCoinType(profileManager, networkProtocol)
 
     updateOnboardingProfile({ lastStrongholdBackupTime: new Date() })
 }

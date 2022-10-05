@@ -10,6 +10,6 @@ export function createAccount(
     payload: CreateAccountPayload,
     manager: Writable<IProfileManager> = profileManager
 ): Promise<IAccount> {
-    const $manager = get(manager)
-    return api.createAccount($manager.id, payload)
+    const { id } = get(manager)
+    return api.createAccount(id, payload)
 }
