@@ -52,7 +52,7 @@
         ...(features?.collectibles?.enabled
             ? [
                   {
-                      icon: 'work',
+                      icon: 'collectibles',
                       label: localize('tabs.collectibles'),
                       route: DashboardRoute.Collectibles,
                       onClick: openCollectibles,
