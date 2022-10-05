@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { KeyValueBox, AmountBox, SubjectBox } from 'shared/components'
+    import { KeyValueBox, AmountBox, SubjectBox, ActivityInclusionStatusPill } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountPrecise, Subject, ActivityDirection, IPersistedAsset } from '@core/wallet'
+    import { formatTokenAmountPrecise, Subject, ActivityDirection, InclusionState, IPersistedAsset } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
 
     export let asset: IPersistedAsset
     export let direction: ActivityDirection
+    export let inclusionState: InclusionState
     export let formattedFiatValue: string = null
     export let amount: string = null
     export let unit: string
@@ -53,6 +54,9 @@
         {#if amount}
             <AmountBox {amount} fiatAmount={formattedFiatValue} {unit} {asset} />
         {/if}
+        <foundry-status class="flex flex-row w-full space-x-2 justify-center">
+            <ActivityInclusionStatusPill localizationKey={'foundry.minting'} {inclusionState} />
+        </foundry-status>
         {#if subject}
             <SubjectBox {subject} />
         {/if}

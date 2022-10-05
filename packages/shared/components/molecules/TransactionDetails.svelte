@@ -1,6 +1,6 @@
 <script lang="typescript">
     import {
-        ActivityStatusPill,
+        TransactionActivityStatusPill,
         ActivityAsyncStatusPill,
         KeyValueBox,
         AmountBox,
@@ -68,7 +68,7 @@
 
     $: formattedSurplus = formatTokenAmountPrecise(Number(surplus) ?? 0, BASE_TOKEN[$activeProfile?.networkProtocol])
 
-    $: localePrefix = `tooltips.transactionDetails.${direction === ActivityDirection.In ? 'incoming' : 'outgoing'}.`
+    $: localePrefix = `tooltips.transactionDetails.${direction}.`
 
     let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {
@@ -147,7 +147,7 @@
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if inclusionState && direction}
-                <ActivityStatusPill {type} {direction} {isInternal} {inclusionState} />
+                <TransactionActivityStatusPill {type} {direction} {isInternal} {inclusionState} />
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />

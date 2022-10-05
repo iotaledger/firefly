@@ -1679,13 +1679,8 @@
                 }
             }
         },
-        "minting": {
-            "incoming": {
-                "Pending": "minting",
-                "Confirmed": "minted",
-                "Conflicting": "failed to mint"
-            },
-            "outgoing": {
+        "foundry": {
+            "minting": {
                 "Pending": "minting",
                 "Confirmed": "minted",
                 "Conflicting": "failed to mint"
@@ -1702,8 +1697,11 @@
             "expired": "expired"
         },
         "alias": {
-            "created": "alias created",
-            "creating": "creating alias"
+            "creation": {
+                "Pending": "creating alias",
+                "Confirmed": "alias created",
+                "Failed": "Failed to create alias"
+            }
         },
         "locked": "locked"
     },
