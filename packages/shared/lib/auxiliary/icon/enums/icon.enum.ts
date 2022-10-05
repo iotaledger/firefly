@@ -2,7 +2,7 @@
  * The icons available in the app.
  */
 export enum Icon {
-    AliasIcon = 'alias-icon',
+    Alias = 'alias',
     ArrowLeft = 'arrow-left',
     ArrowRight = 'arrow-right',
     Assembly = 'assembly',

@@ -1,6 +1,6 @@
 import { ISvg } from '../interfaces'
 
-export const ALIAS_ICON_SVG: ISvg = {
+export const ALIAS_SVG: ISvg = {
     width: 24,
     height: 24,
     path: [

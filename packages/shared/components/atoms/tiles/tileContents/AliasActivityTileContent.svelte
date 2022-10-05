@@ -13,7 +13,7 @@
 <div class="relative flex w-8 h-8">
     <div class="rounded-full flex justify-center items-center transition-none p-1 w-8 h-8 bg-gray-500">
         <Icon
-            icon={IconEnum.AliasIcon}
+            icon={IconEnum.Alias}
             width="83.33333%"
             height="83.33333%"
             classes="text-white dark:text-gray-800 text-center"
