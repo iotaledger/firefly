@@ -44,9 +44,6 @@
     export let surplus: string = null
     export let subject: Subject = null
     export let tag: string = null
-    export let aliasId: string = null
-    export let governorAddress: string = null
-    export let stateControllerAddress: string = null
     export let transactionTime: Date = null
     export let isInternal: boolean = false
     export let isClaiming: boolean = false

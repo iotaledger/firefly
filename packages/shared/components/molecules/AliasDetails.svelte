@@ -3,11 +3,12 @@
     import { Pill } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountPrecise } from '@core/wallet'
+    import { formatTokenAmountPrecise, InclusionState } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
 
     export let storageDeposit = 0
     export let giftedStorageDeposit = 0
+    export let inclusionState: InclusionState
     export let aliasId: string = null
     export let governorAddress: string = null
     export let stateControllerAddress: string = null
@@ -39,7 +40,9 @@
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             <Pill backgroundColor="green-300" darkBackgroundColor="gray-200">
-                {localize('pills.aliasCreated')}
+                {localize(
+                    inclusionState === InclusionState.Confirmed ? 'general.aliasCreated' : 'general.creatingAlias'
+                )}
             </Pill>
         </transaction-status>
         <AddressBox clearBackground clearPadding isCopyable address={aliasId} />
