@@ -15,7 +15,6 @@
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
     } from '@core/wallet'
     import { closePopup } from '@lib/popup'
-    import { isTransferring } from '@lib/wallet'
     import { onMount } from 'svelte'
     import { BASE_TOKEN } from '@core/network'
     import { handleError } from '@core/error/handlers/handleError'
@@ -45,6 +44,7 @@
         : ''
 
     $: void setStorageDeposit(aliasOutput)
+    $: isTransferring = $selectedAccount.isTransferring
 
     async function setStorageDeposit(aliasOutput): Promise<void> {
         try {
@@ -57,7 +57,7 @@
 
     async function createAlias(): Promise<void> {
         try {
-            $isTransferring = true
+            isTransferring = true
             const transaction = await $selectedAccount.createAliasOutput()
             const activity = new Activity(preprocessTransaction(transaction), $selectedAccount)
             addActivityToAccountActivitiesInAllAccountActivities($selectedAccount.id, activity)
@@ -65,7 +65,7 @@
         } catch (err) {
             handleError(err)
         } finally {
-            $isTransferring = false
+            isTransferring = false
         }
     }
 
@@ -107,10 +107,10 @@
         />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onCancel} disabled={$isTransferring}>
+        <Button classes="w-full" outline onClick={onCancel} disabled={isTransferring}>
             {localize('actions.cancel')}
         </Button>
-        <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring} isBusy={$isTransferring}>
+        <Button autofocus classes="w-full" onClick={onConfirm} disabled={isTransferring} isBusy={isTransferring}>
             {localize('actions.confirm')}
         </Button>
     </popup-buttons>

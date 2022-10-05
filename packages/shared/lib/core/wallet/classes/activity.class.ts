@@ -91,14 +91,14 @@ export class Activity implements IActivity {
         return null
     }
 
-    getFormattedAmount(signed: boolean): string {
+    getFormattedAmount(signed: boolean = true): string {
         if (this.data.type === ActivityType.Alias) {
             return ''
         }
         const metadata = getAssetFromPersistedAssets(this.data.assetId)?.metadata
         const amount = formatTokenAmountBestMatch(this.data.rawAmount, metadata, 2)
         if (this.data.type === ActivityType.Transaction) {
-            return `${this.data.direction !== ActivityDirection.In && signed ? '- ' : ''}${amount}`
+            return `${this.data.direction !== ActivityDirection.Incoming && signed ? '- ' : ''}${amount}`
         } else {
             return amount
         }

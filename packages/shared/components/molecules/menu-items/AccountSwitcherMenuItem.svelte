@@ -2,30 +2,17 @@
     import { Text } from 'shared/components'
     import { AccountLabel } from 'shared/components/atoms'
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
-    import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
-    import { showAppNotification } from '@lib/notifications'
 
     export let account: IAccountState
     export let onClick: () => unknown
     export let id: string = ''
 
     function handleAccountClick(accountId: string): void {
-        if (account.isSyncing) {
-            showWarning(localize('notifications.syncing'))
-        } else {
-            setSelectedAccount(accountId)
-            onClick && onClick()
-        }
-    }
-
-    function showWarning(message: string) {
-        showAppNotification({
-            type: 'warning',
-            message,
-        })
+        setSelectedAccount(accountId)
+        onClick && onClick()
     }
 </script>
 
