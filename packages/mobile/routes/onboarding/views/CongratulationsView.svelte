@@ -1,12 +1,14 @@
 <script lang="typescript">
     import { OnboardingLayout } from '../../../components'
     import { Button, Icon, Text } from 'shared/components'
+    import { hasCompletedAppSetup } from '@core/app'
     import { onboardingRouter } from '@core/router'
     import { localize } from '@core/i18n'
     import { completeOnboardingProcess } from '@contexts/onboarding'
 
     function onContinueClick(): Promise<void> {
         completeOnboardingProcess()
+        hasCompletedAppSetup.set(true)
         $onboardingRouter.next()
         return Promise.resolve()
     }
