@@ -66,7 +66,7 @@
 
     $: transactionDetails = {
         asset,
-        direction: ActivityDirection.Out,
+        direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
         metadata,
         rawAmount,
