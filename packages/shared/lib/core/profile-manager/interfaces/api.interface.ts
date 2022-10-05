@@ -3,7 +3,7 @@ import { AccountManagerOptions, CreateAccountPayload } from '@iota/wallet'
 import { IAccount } from '@core/account'
 
 import { IProfileManager } from './profile-manager.interface'
-import { RecoverAccountsPayload } from '@core/profile-manager/interfaces/recover-account-payload.interface'
+import { RecoverAccountsPayload } from './recover-account-payload.interface'
 
 export interface IApi {
     createAccountManager(id: string, options: AccountManagerOptions): IProfileManager

@@ -155,7 +155,7 @@ export class AccountMock implements IAccount {
         return Promise.resolve([''])
     }
 
-    incomingTransactions(): Promise<[string, ITransactionPayload, IOutputResponse][]> {
+    incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]> {
         throw new Error('Method not implemented.')
     }
 

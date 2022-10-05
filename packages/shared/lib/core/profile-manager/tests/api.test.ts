@@ -100,15 +100,4 @@ describe('File: api.test.ts', () => {
             spy.mockRestore()
         })
     })
-
-    describe('Function: createAccount', () => {
-        it('should call createAccount', async () => {
-            spy = jest.spyOn(profileManagerMock, 'createAccount')
-            const payload = { alias: 'alias', coinType: 4219 }
-            const account = await createAccount(payload)
-            expect(account).toEqual(new AccountMock())
-            expect(spy).toBeCalledTimes(1)
-            expect(spy).toBeCalledWith(payload)
-        })
-    })
 })

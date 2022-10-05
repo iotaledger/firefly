@@ -64,7 +64,7 @@ export class ProfileManagerMock implements IProfileManager {
         throw new Error('Method not implemented.')
     }
 
-    getAccountIndexes(): Promise<AccountId[]> {
+    getAccountIndexes(): Promise<number[]> {
         throw new Error('Method not implemented.')
     }
 
