@@ -1,14 +1,20 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingButton, Link, Logo, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
     import features from '@features/features'
-    import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        initialiseOnboardingProfile,
+        onboardingProfile,
+        ProfileSetupType,
+        shouldBeDeveloperProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatProtocolName, NetworkProtocol } from '@core/network'
+    import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
-    import { Platform } from '@lib/platform'
+    import { profiles } from '@core/profile'
 
     function onProfileSetupSelectionClick(setupType: ProfileSetupType): void {
         updateOnboardingProfile({ setupType })
@@ -16,38 +22,48 @@
     }
 
     function onBackClick(): void {
+        updateOnboardingProfile({ clientOptions: undefined })
         $profileSetupRouter.previous()
     }
 
     onMount(() => {
+        if (!$onboardingProfile?.id) {
+            initialiseOnboardingProfile(
+                $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
+                NetworkProtocol.Shimmer
+            )
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+        }
+        if (!$onboardingProfile?.clientOptions) {
+            const clientOptions = getDefaultClientOptions(
+                $onboardingProfile?.networkProtocol,
+                $onboardingProfile?.networkType
+            )
+            updateOnboardingProfile({ clientOptions })
+        }
         destroyProfileManager()
         updateOnboardingProfile({ mustVisitProfileName: true, setupType: null, hasInitialisedProfileManager: false })
     })
 </script>
 
-<OnboardingLayout {onBackClick}>
+<OnboardingLayout allowBack={$profiles.length > 0 || $onboardingProfile?.isDeveloperProfile} {onBackClick}>
     <div slot="title">
         <Text type="h2"
             >{localize('views.onboarding.profileSetup.setup.title', {
-                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+                values: {
+                    protocol: formatProtocolName($onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer),
+                },
             })}</Text
         >
     </div>
-    <div slot="leftpane__content" class:hidden={$onboardingProfile?.networkProtocol !== NetworkProtocol.IOTA}>
-        <div class="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl mt-16 p-8 pt-16">
-            <div class="absolute -top-14">
-                <Logo width="auto" height="auto" logo="logo-chrysalis-gem" />
-            </div>
-            <Text type="h3" classes="mb-6 text-center"
-                >{localize('views.onboarding.profileSetup.setup.chrysalisTitle')}</Text
-            >
-            <Text type="p" secondary classes="mb-8"
-                >{localize('views.onboarding.profileSetup.setup.chrysalisBody')}</Text
-            >
-            <Link onClick={() => Platform.openUrl('https://blog.iota.org/firefly-token-migration/')}>
-                {localize('views.onboarding.profileSetup.setup.learnMore')}
-            </Link>
-        </div>
+    <div slot="leftpane__content">
+        <Text type="p" secondary classes="mb-8"
+            >{localize('views.onboarding.profileSetup.setup.body', {
+                values: {
+                    protocol: formatProtocolName($onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer),
+                },
+            })}</Text
+        >
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         <OnboardingButton
@@ -64,11 +80,13 @@
         />
         <OnboardingButton
             primaryText={localize('actions.createWallet', {
-                values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
+                values: {
+                    protocol: formatProtocolName($onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer),
+                },
             })}
             secondaryText={!$mobile
                 ? localize('actions.createWalletDescription', {
-                      values: { protocol: $onboardingProfile?.networkProtocol },
+                      values: { protocol: $onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer },
                   })
                 : ''}
             icon="plus"
@@ -93,7 +111,7 @@
             onClick={() => onProfileSetupSelectionClick(ProfileSetupType.Recovered)}
         />
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
         <Animation classes="setup-anim-aspect-ratio" animation="setup-desktop" />
     </div>
 </OnboardingLayout>

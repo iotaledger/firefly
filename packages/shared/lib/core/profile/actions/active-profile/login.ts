@@ -1,5 +1,6 @@
 import { createNewAccount, setSelectedAccount } from '@core/account'
-import { getAndUpdateNodeInfo } from '@core/network'
+import { handleError } from '@core/error/handlers/handleError'
+import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
 import {
     buildProfileManagerOptionsFromProfileData,
     initialiseProfileManager,
@@ -7,20 +8,12 @@ import {
     profileManager,
     recoverAccounts,
 } from '@core/profile-manager'
-import {
-    setStrongholdPasswordClearInterval,
-    startBackgroundSync,
-    subscribe as subscribeToWalletEvents,
-} from '@core/profile-manager/api'
+import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
+import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'
-import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
-import { loadAllAccountActivities } from '@core/wallet/actions/loadAllAccountActivities'
+import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
 import { get } from 'svelte/store'
-import {
-    INITIAL_ACCOUNT_GAP_LIMIT,
-    INITIAL_ADDRESS_GAP_LIMIT,
-    STRONGHOLD_PASSWORD_CLEAR_INTERVAL,
-} from '../../constants'
+import { DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION, STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../../constants'
 import {
     activeAccounts,
     activeProfile,
@@ -29,8 +22,15 @@ import {
     setTimeStrongholdLastUnlocked,
 } from '../../stores'
 import { loadAccounts } from './loadAccounts'
+import { ILoginOptions } from '../../interfaces'
+import { logout } from './logout'
+import { pollLedgerNanoStatus } from '@core/ledger'
+import { isLedgerProfile } from '@core/profile/utils'
 
-export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: boolean): Promise<void> {
+import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
+import { cleanupOnboarding } from '@contexts/onboarding'
+
+export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
     try {
         const _activeProfile = get(activeProfile)
@@ -47,13 +47,25 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
 
             // Step 2: get node info to check we have a synced node
             incrementLoginProgress()
-            await getAndUpdateNodeInfo()
+            await getAndUpdateNodeInfo(true)
+            void pollNetworkStatus()
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
-            if (isOnboardingFlow && shouldRecoverAccounts) {
-                await recoverAccounts(INITIAL_ACCOUNT_GAP_LIMIT[type], INITIAL_ADDRESS_GAP_LIMIT[type])
-            } else if (isOnboardingFlow) {
+            let accounts
+            if (loginOptions?.isFromOnboardingFlow && loginOptions?.shouldRecoverAccounts) {
+                const { initialAccountRange, addressGapLimit } = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type]
+                accounts = await recoverAccounts(0, initialAccountRange, addressGapLimit, {
+                    syncIncomingTransactions: true,
+                })
+            } else {
+                accounts = await getAccounts()
+            }
+            /**
+             * NOTE: In the case no accounts with funds were recovered, we must
+             * create one for the new profile.
+             */
+            if (accounts?.length === 0) {
                 await createNewAccount()
             }
 
@@ -65,26 +77,33 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
             incrementLoginProgress()
             await refreshAccountAssetsForActiveProfile()
 
-            // Step 6: load account activities
+            // Step 6: generate and store activities for all accounts
             incrementLoginProgress()
-            await loadAllAccountActivities()
+            await generateAndStoreActivitiesForAllAccounts()
 
-            // Step 7: set initial stronghold status
-            incrementLoginProgress()
-            const strongholdUnlocked = await isStrongholdUnlocked()
-            isStrongholdLocked.set(!strongholdUnlocked)
-            setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
-            if (strongholdUnlocked) {
-                setTimeStrongholdLastUnlocked()
+            if (type === ProfileType.Software) {
+                // Step 7: set initial stronghold status
+                incrementLoginProgress()
+                const strongholdUnlocked = await isStrongholdUnlocked()
+                isStrongholdLocked.set(!strongholdUnlocked)
+                setStrongholdPasswordClearInterval(STRONGHOLD_PASSWORD_CLEAR_INTERVAL)
+                if (strongholdUnlocked) {
+                    setTimeStrongholdLastUnlocked()
+                }
+            } else {
+                incrementLoginProgress(2)
             }
 
             // Step 8: start background sync
             incrementLoginProgress()
-            subscribeToWalletEvents()
+            subscribeToWalletApiEventsForActiveProfile()
             await startBackgroundSync({ syncIncomingTransactions: true })
 
             // Step 9: finish login
             incrementLoginProgress()
+            if (isLedgerProfile(type)) {
+                pollLedgerNanoStatus()
+            }
             setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
@@ -92,9 +111,16 @@ export async function login(isOnboardingFlow?: boolean, shouldRecoverAccounts?: 
                 _loginRouter.next()
                 resetLoginProgress()
             }, 500)
+
+            void cleanupOnboarding()
+        } else {
+            throw Error('No active profile error')
         }
     } catch (err) {
-        console.error(err)
+        handleError(err)
+        if (!loginOptions?.isFromOnboardingFlow) {
+            await logout()
+        }
         _loginRouter.previous()
         resetLoginProgress()
     }

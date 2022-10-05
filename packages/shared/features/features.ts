@@ -1,7 +1,9 @@
-import onboardingFeatures from './onboardingFeatures'
+import onboardingFeatures from './onboarding.features'
+import developerToolsFeatures from './developer-tools.features'
 
 const features = {
     onboarding: onboardingFeatures,
+    developerTools: developerToolsFeatures,
     settings: {
         enabled: true,
         general: {
@@ -88,7 +90,7 @@ const features = {
     },
     electron: {
         developerTools: {
-            enabled: true,
+            enabled: false,
         },
     },
     wallet: {
@@ -101,9 +103,6 @@ const features = {
         },
         assets: {
             enabled: true,
-            mintNativeTokens: {
-                enabled: true,
-            },
         },
         activityHistory: {
             enabled: true,
@@ -115,16 +114,10 @@ const features = {
             },
         },
     },
-    staking: {
-        enabled: false,
-    },
     governance: {
         enabled: false,
     },
     collectibles: {
-        enabled: true,
-    },
-    developerTools: {
         enabled: true,
     },
 }

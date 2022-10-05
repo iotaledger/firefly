@@ -1,9 +1,11 @@
 <script lang="typescript">
-    import { FontWeightNumber } from 'shared/components/Text.svelte'
+    import { FontWeight } from 'shared/components/Text.svelte'
     import { Modal, Text } from 'shared/components'
-    import { Filter } from '@core/wallet/interfaces/filter.interface'
+    import type { Filter } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { Button } from 'shared/components'
+    import { activeProfileId } from '@core/profile'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let modal: Modal
     export let filter: Filter
@@ -17,13 +19,14 @@
             filter[key].value = undefined
         }
         onSetFilters()
-        modal.toggle()
     }
 
     function confirm(): void {
         onSetFilters()
         modal.toggle()
     }
+
+    $: $activeProfileId, clear()
 </script>
 
 <Modal
@@ -33,14 +36,14 @@
     classes="overflow-visible"
 >
     <div class="filter-modal">
-        <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3">
-            <Button secondary xsmall onClick={clear}>{localize('actions.clear')}</Button>
-            <Text fontWeight={FontWeightNumber._600} fontSize="14" classes="text-center flex grow-1"
+        <div class="flex flex-row items-center justify-between bg-gray-50 dark:bg-transparent px-4 py-3 rounded-t-xl">
+            <Button outline size={ButtonSize.Small} onClick={clear}>{localize('actions.clear')}</Button>
+            <Text fontWeight={FontWeight.semibold} fontSize="14" classes="text-center flex grow-1"
                 >{localize('filters.title')}</Text
             >
-            <Button disabled={!isChanged} xsmall onClick={confirm}>{localize('actions.done')}</Button>
+            <Button disabled={!isChanged} size={ButtonSize.Small} onClick={confirm}>{localize('actions.apply')}</Button>
         </div>
-        <div class="pb-1">
+        <div>
             <slot />
         </div>
     </div>
@@ -48,6 +51,7 @@
 
 <style type="text/scss">
     .filter-modal {
+        border-radius: inherit;
         width: 254px;
     }
 </style>

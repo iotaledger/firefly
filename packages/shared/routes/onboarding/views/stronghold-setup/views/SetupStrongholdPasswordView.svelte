@@ -6,9 +6,15 @@
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
     import { onboardingRouter } from '@core/router'
-    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        onboardingProfile,
+        ProfileSetupType,
+        shimmerClaimingProfileManager,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
-    import passwordInfo from '@lib/password'
+    import { PASSWORD_REASON_MAP } from '@core/stronghold'
+    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     let strongholdPassword = ''
     let confirmedStrongholdPassword = ''
@@ -32,8 +38,8 @@
             })
         } else if (passwordStrength?.score !== 4) {
             let errKey = 'error.password.tooWeak'
-            if (passwordStrength?.feedback.warning && passwordInfo[passwordStrength?.feedback.warning]) {
-                errKey = `error.password.${passwordInfo[passwordStrength?.feedback.warning]}`
+            if (passwordStrength?.feedback.warning && PASSWORD_REASON_MAP[passwordStrength?.feedback.warning]) {
+                errKey = `error.password.${PASSWORD_REASON_MAP[passwordStrength?.feedback.warning]}`
             }
             error = localize(errKey)
         } else if (strongholdPassword !== confirmedStrongholdPassword) {
@@ -42,13 +48,23 @@
             try {
                 busy = true
 
+                const isClaimedProfileSetupType = $onboardingProfile?.setupType === ProfileSetupType.Claimed
                 const mustChangePassword =
                     $onboardingProfile?.strongholdPassword &&
                     $onboardingProfile?.strongholdPassword !== strongholdPassword
                 if (mustChangePassword) {
                     await changeStrongholdPassword($onboardingProfile?.strongholdPassword, strongholdPassword)
+                    if (isClaimedProfileSetupType) {
+                        await $shimmerClaimingProfileManager?.changeStrongholdPassword(
+                            $onboardingProfile?.strongholdPassword,
+                            strongholdPassword
+                        )
+                    }
                 } else {
                     await setStrongholdPassword(strongholdPassword)
+                    if (isClaimedProfileSetupType) {
+                        await $shimmerClaimingProfileManager?.setStrongholdPassword(strongholdPassword)
+                    }
                 }
 
                 updateOnboardingProfile({ strongholdPassword })
@@ -115,7 +131,7 @@
     </div>
     <div slot="leftpane__action">
         <Button
-            type="submit"
+            type={HTMLButtonType.Submit}
             form="password-form"
             classes="w-full"
             disabled={!strongholdPassword || !confirmedStrongholdPassword || busy}

@@ -1,532 +1,264 @@
+<script lang="typescript" context="module">
+    export enum ButtonSize {
+        Large = 'lg',
+        Medium = 'md',
+        Small = 'sm',
+    }
+
+    export enum ButtonVariant {
+        Primary = 'primary',
+        Caution = 'caution',
+        Warning = 'warning',
+    }
+
+    export enum HTMLButtonType {
+        Button = 'button',
+        Submit = 'submit',
+        Reset = 'reset',
+    }
+</script>
+
 <script lang="typescript">
-    import { Icon } from 'shared/components'
-    import { appSettings } from '@core/app'
-    import { bindEvents } from 'shared/lib/utils'
+    import { Icon, Spinner } from 'shared/components'
     import { onMount } from 'svelte'
+    import { appSettings } from '@core/app'
+    import { bindEvents } from '@lib/utils'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
+    import { Event } from '@lib/typings/events'
 
-    export let events = []
+    export let autofocus: boolean = false
+    export let classes: string = ''
+    export let disabled: boolean = false
+    export let hidden: boolean = false
+    export let inlineStyle: string = ''
+    export let type: HTMLButtonType = HTMLButtonType.Button
 
-    export let secondary = false
-    export let disabled = false
-    export let hidden = false
-    export let caution = false
-    export let warning = false
-    export let active = false
-    export let outline = false
-    export let icon = undefined
-    export let iconReverse = false
-    export let iconColor = ''
-    export let xl = false
-    export let medium = false
-    export let small = false
-    export let xsmall = false
-    export let classes = ''
-    export let type = 'button'
-    export let form = undefined
-    export let autofocus = false
-    export let inlineStyle = ''
-    export let showHoverText = undefined
-    export let iconOnly = false
-    export let iconHeight: string
-    export let iconWidth: string
+    export let variant: ButtonVariant = ButtonVariant.Primary
+    export let size: ButtonSize = ButtonSize.Large
+    export let outline: boolean = false
+
+    export let icon: IconEnum = null
+    export let iconHeight: number = null
+    export let iconWidth: number = null
+    export let iconColor: string = null
+    export let iconReverse: boolean = false
+
+    export let isBusy: boolean = false
+    export let busyMessage: string = ''
+
+    export let form: string = null
+    export let buttonElement: HTMLButtonElement = null
+
+    export let events: Event<unknown>[] = []
 
     export let onClick: () => unknown
-
-    export let buttonElement
-    let darkModeEnabled
-
-    $: darkModeEnabled = $appSettings.darkMode
 
     export function resetAndFocus(): void {
         if (disabled) {
             setTimeout(resetAndFocus, 100)
         } else {
-            buttonElement.focus()
+            buttonElement?.focus()
         }
     }
 
+    const ICON_DEFAULT_SIZE: Readonly<{ [key in ButtonSize]: number }> = {
+        [ButtonSize.Large]: 20,
+        [ButtonSize.Medium]: 16,
+        [ButtonSize.Small]: 12,
+    }
+
+    $: dark = $appSettings.darkMode
+
     onMount(() => {
         if (autofocus) {
-            buttonElement.focus()
+            buttonElement?.focus()
         }
     })
 </script>
 
-{#if xl}
-    <button
-        {type}
-        {form}
-        class={`xl cursor-pointer text-center rounded-xl pt-8 pb-4 px-4 flex flex-col items-center ${classes}`}
-        use:bindEvents={events}
-        on:click|stopPropagation={onClick}
-        class:secondary
-        class:active
-        class:hidden
-        class:with-icon={icon}
-        class:custom-icon-color={iconColor}
-        class:darkmode={darkModeEnabled}
-        style={inlineStyle}
-        {disabled}
-        bind:this={buttonElement}
-    >
-        <Icon classes="mb-1 text-{iconColor}" {icon} height={iconHeight} width={iconWidth} />
-        <span class="text-12 leading-140">
-            <slot />
-        </span>
-    </button>
-{:else}
-    <button
-        {type}
-        {form}
-        class="cursor-pointer text-center rounded-xl px-3 pt-2.5 pb-3.5 {classes}"
-        use:bindEvents={events}
-        on:click|stopPropagation={onClick}
-        class:secondary
-        class:hidden
-        class:caution
-        class:warning
-        class:medium
-        class:small
-        class:xsmall
-        class:outline
-        class:with-icon={icon}
-        class:custom-icon-color={iconColor}
-        class:iconReverse
-        class:active
-        class:darkmode={darkModeEnabled}
-        class:showHoverText
-        style={inlineStyle}
-        {disabled}
-        bind:this={buttonElement}
-    >
-        {#if icon}
-            {#if small}
-                {#if iconReverse}
-                    <div class="relative flex flex-row justify-between">
-                        <div class="relative flex items-center flex-1">
-                            <div class="absolute left-0 flex items-center">
-                                <Icon
-                                    width={iconWidth ?? '16'}
-                                    height={iconHeight ?? '16'}
-                                    classes="mr-4 text-{iconColor}"
-                                    {icon}
-                                />
-                            </div>
-                            <span class="font-bold text-12 leading-140"><slot /></span>
-                        </div>
-                    </div>
-                {:else}
-                    <div class="relative flex flex-row justify-between">
-                        <div class="relative flex items-center flex-1">
-                            <span class="font-bold text-12 leading-140"><slot /></span>
-                            <div class="absolute right-0 flex items-center">
-                                <Icon
-                                    width={showHoverText ? 20 : iconWidth ?? 16}
-                                    height={showHoverText ? 20 : iconHeight ?? 16}
-                                    classes="ml-4 showHoverText text-{iconColor}"
-                                    {icon}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                {/if}
-            {:else if iconOnly}
-                <Icon width={iconWidth ?? 24} height={iconHeight ?? 24} {icon} />
-            {:else}
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-1 h-full flex justify-center items-center justify-items-center">
-                        <Icon height={iconHeight} width={iconWidth} {icon} classes="text-{iconColor}" />
-                    </div>
-                    <div class="col-span-10 h-full flex items-center">
-                        <span class="font-bold text-12 leading-140"><slot /></span>
-                    </div>
-                    {#if !disabled}
-                        <div class="absolute right-0 flex items-center h-full">
-                            <Icon icon="chevron-right" classes="right" />
-                        </div>
-                    {/if}
-                </div>
+<button
+    {disabled}
+    {hidden}
+    {type}
+    {form}
+    style={inlineStyle}
+    class={`${size} ${variant} ${classes}`}
+    class:dark
+    class:outline
+    class:is-busy={isBusy}
+    style:--border-width={outline ? '1px' : '0px'}
+    use:bindEvents={events}
+    on:click|stopPropagation={onClick}
+    bind:this={buttonElement}
+>
+    {#if isBusy}
+        <div class="relative flex justify-center items-center h-4 w-4 flex-shrink-0" class:mr-3={busyMessage}>
+            <Spinner busy classes="absolute items-center justify-center" />
+        </div>
+        {busyMessage}
+    {:else}
+        <div class="flex flex-row items-center justify-center w-full" class:flex-row-reverse={iconReverse}>
+            {#if icon}
+                <Icon
+                    {icon}
+                    classes="text-{iconColor}"
+                    height={iconHeight ?? ICON_DEFAULT_SIZE[size]}
+                    width={iconWidth ?? ICON_DEFAULT_SIZE[size]}
+                />
             {/if}
-        {:else}
-            <span class="text-12 leading-140"><slot /></span>
-        {/if}
-    </button>
-{/if}
+            <slot />
+        </div>
+    {/if}
+</button>
 
 <style type="text/scss">
     button {
-        @apply bg-blue-500;
-        min-width: 100px;
-        span {
+        @apply flex;
+        @apply flex-row;
+        @apply items-center;
+        @apply justify-center;
+        @apply cursor-pointer;
+        @apply box-border;
+        @apply text-center;
+        @apply font-500;
+        @apply text-15;
+        @apply leading-4;
+        @apply rounded-lg;
+
+        &.is-busy {
+            @apply text-left;
+        }
+    }
+
+    button:disabled {
+        @apply pointer-events-none;
+        @apply bg-gray-200;
+        @apply text-gray-500;
+
+        :global(spinner-container svg) {
+            @apply text-gray-500;
+        }
+    }
+
+    button.dark:disabled {
+        @apply bg-gray-700;
+        @apply bg-opacity-10;
+        @apply text-gray-700;
+    }
+
+    .lg {
+        @apply px-8;
+        --lg-py: 1rem;
+        padding-top: calc(var(--lg-py) - var(--border-width, 0));
+        padding-bottom: calc(var(--lg-py) - var(--border-width, 0));
+    }
+
+    .md {
+        @apply px-8;
+        --md-py: 0.75rem;
+        padding-top: calc(var(--md-py) - var(--border-width, 0));
+        padding-bottom: calc(var(--md-py) - var(--border-width, 0));
+    }
+
+    .sm {
+        @apply px-3;
+        @apply text-13;
+        --sm-py: 0.5rem;
+        padding-top: calc(var(--sm-py) - var(--border-width, 0));
+        padding-bottom: calc(var(--sm-py) - var(--border-width, 0));
+    }
+
+    @mixin button-variant($color) {
+        @apply bg-#{$color}-500;
+        @apply text-white;
+
+        :global(spinner-container svg) {
             @apply text-white;
         }
-        &:not(.secondary) {
-            span {
-                @apply font-bold;
-            }
+
+        &:hover {
+            @apply bg-#{$color}-600;
         }
-        &:not(.with-icon) {
-            &:hover,
-            &:focus {
-                @apply bg-blue-600;
-            }
-            &:active {
-                @apply bg-blue-700;
-            }
-            &.caution {
-                @apply bg-yellow-600;
-                min-width: 100px;
-                span {
-                    @apply text-white;
-                }
-                &:hover {
-                    @apply bg-yellow-700;
-                }
-                &:active,
-                &:focus {
-                    @apply bg-yellow-800;
-                }
-                &:disabled {
-                    @apply pointer-events-none;
-                    @apply bg-gray-200;
-                    span {
-                        @apply text-gray-500;
-                    }
-                    &.darkmode {
-                        @apply bg-gray-700;
-                        @apply bg-opacity-10;
-                        span {
-                            @apply text-gray-700;
-                        }
-                    }
-                }
-            }
-            &.warning {
-                @apply bg-red-500;
-                min-width: 100px;
-                span {
-                    @apply text-white;
-                }
-                &:hover {
-                    @apply bg-red-600;
-                }
-                &:active,
-                &:focus {
-                    @apply bg-red-700;
-                }
-                &:disabled {
-                    @apply pointer-events-none;
-                    @apply bg-gray-200;
-                    span {
-                        @apply text-gray-500;
-                    }
-                    &.darkmode {
-                        @apply bg-gray-700;
-                        @apply bg-opacity-10;
-                        span {
-                            @apply text-gray-700;
-                        }
-                    }
-                }
-            }
-            &.medium {
-                @apply pt-1.5;
-                @apply pb-2.5;
-            }
+
+        &:active,
+        &:focus {
+            @apply bg-#{$color}-700;
+            @apply ring-4;
+            @apply ring-#{$color}-400;
+            @apply ring-opacity-20;
         }
-        &.secondary {
+
+        &.outline {
+            @apply bg-white;
+            @apply text-#{$color}-500;
             @apply border;
             @apply border-solid;
             @apply border-gray-300;
-            @apply bg-white;
-            span {
-                @apply text-blue-500;
-            }
+
             &:hover {
-                @apply bg-blue-50;
-                @apply border-blue-200;
+                @apply bg-#{$color}-50;
+                @apply border-#{$color}-200;
             }
+
             &:active,
             &:focus {
-                @apply bg-blue-100;
-                @apply border-blue-400;
-                @apply text-blue-600;
+                @apply bg-#{$color}-100;
+                @apply border-#{$color}-400;
+                @apply text-#{$color}-600;
             }
 
             &:disabled {
-                @apply pointer-events-none;
+                @apply text-gray-500;
                 @apply bg-gray-50;
-                span {
-                    @apply text-gray-500;
-                }
+                @apply bg-opacity-50;
+                @apply border-opacity-50;
             }
-            &.darkmode {
-                @apply bg-gray-700;
-                @apply border-gray-700;
-                @apply bg-opacity-30;
-                @apply border-opacity-30;
-                span {
-                    @apply text-white;
-                }
-                &:hover {
-                    @apply bg-opacity-50;
-                    @apply border-opacity-50;
-                }
-                &:focus,
-                &:active {
-                    @apply bg-opacity-80;
-                    @apply border-opacity-50;
-                }
-                &:disabled {
-                    @apply bg-gray-700;
-                    @apply border-gray-700;
-                    @apply bg-opacity-10;
-                    @apply border-opacity-10;
-                    span {
-                        @apply text-gray-700;
-                    }
-                }
-            }
-        }
-        &.outline {
-            @apply bg-opacity-0;
-            @apply border-2;
-            span {
-                @apply text-blue-500;
-            }
-            &.secondary {
-                @apply border-white;
-                span {
-                    @apply text-white;
-                }
-            }
-            &.caution {
-                span {
-                    @apply text-yellow-600;
-                }
-            }
-            &.warning {
-                span {
-                    @apply text-red-500;
-                }
-            }
-            &:hover {
-                @apply border-opacity-0;
-                span {
-                    @apply text-gray-900;
-                }
-            }
-        }
-        &.with-icon:not(.custom-icon-color) :global(svg) {
-            @apply text-blue-500;
-        }
-        &.with-icon {
-            min-width: 200px;
-            @apply border;
-            @apply border-solid;
-            @apply border-gray-300;
-            @apply bg-white;
-            @apply p-5;
-            @apply text-left;
-            &.secondary.showHoverText {
-                @apply border-transparent;
-                @apply bg-transparent;
-                min-width: unset;
-                span {
-                    transform: translateX(5px);
-                    transition: all 0.2s;
-                    @apply font-500;
-                    @apply opacity-0;
-                    @apply overflow-hidden;
-                    @apply max-w-0;
-                    @apply whitespace-nowrap;
-                }
-                :global(svg.showHoverText) {
-                    @apply text-blue-500;
-                }
-                &:hover {
-                    @apply border-gray-300;
-                    @apply bg-white;
-                    span {
-                        transform: translateX(0);
-                        @apply max-w-full;
-                        @apply opacity-100;
-                    }
-                    &.darkmode {
-                        @apply border-gray-700;
-                        @apply bg-transparent;
-                    }
-                }
-                &:disabled {
-                    :global(svg.showHoverText) {
-                        @apply text-gray-400;
-                    }
-                    &.darkmode {
-                        :global(svg.showHoverText) {
-                            @apply text-gray-700;
-                        }
-                    }
-                }
-            }
-            &.xl {
-                @apply pb-6;
-                @apply px-5;
-            }
-            span {
-                @apply text-gray-800;
-            }
-            :global(svg.right) {
+
+            :global(spinner-container svg) {
                 @apply text-gray-500;
             }
-            &:hover,
-            &:focus {
-                @apply border-gray-500;
-            }
-            &:disabled {
-                :global(svg) {
-                    @apply text-gray-500;
-                }
-            }
-            &.active {
-                @apply bg-blue-500;
-                span,
-                :global(svg) {
-                    @apply text-white;
-                }
-            }
+        }
+    }
 
-            &.darkmode {
-                @apply border-gray-700;
-                @apply bg-transparent;
-                span {
-                    @apply text-white;
-                }
-                :global(svg),
-                :global(svg.right) {
-                    @apply text-gray-500;
-                }
-                &:hover,
-                &:focus {
-                    @apply bg-gray-700;
-                    @apply bg-opacity-20;
-                }
-                &:disabled {
-                    :global(svg) {
-                        @apply text-gray-500;
-                    }
-                }
-                &.active {
-                    @apply bg-gray-700;
-                    @apply border-gray-700;
-                    span,
-                    :global(svg) {
-                        @apply text-white;
-                    }
-                }
-            }
+    .primary {
+        @include button-variant('blue');
+    }
+
+    .caution {
+        @include button-variant('yellow');
+    }
+
+    .warning {
+        @include button-variant('red');
+    }
+
+    .dark.outline.primary {
+        @apply bg-gray-700;
+        @apply bg-opacity-20;
+        @apply border-gray-600;
+        @apply border-opacity-40;
+        @apply text-gray-400;
+
+        &:hover {
+            @apply bg-opacity-40;
+            @apply border-opacity-60;
+            @apply text-white;
         }
-        &.small {
-            @apply p-2.5;
-            @apply rounded-lg;
-            min-width: 78px;
-            &.with-icon {
-                @apply p-2.5;
-                @apply text-white;
-                span {
-                    @apply ml-0;
-                    @apply mr-6;
-                }
-                &.iconReverse {
-                    span {
-                        @apply ml-6;
-                        @apply mr-0;
-                    }
-                }
-                &.secondary {
-                    :global(svg) {
-                        @apply text-gray-500;
-                    }
-                }
-            }
-        }
-        &.xsmall {
-            @apply p-1;
-            @apply rounded-lg;
-            min-width: 64px;
-            &.with-icon {
-                @apply p-2.5;
-                @apply text-white;
-                span {
-                    @apply ml-0;
-                    @apply mr-6;
-                }
-                &.iconReverse {
-                    span {
-                        @apply ml-6;
-                        @apply mr-0;
-                    }
-                }
-                &.secondary {
-                    :global(svg) {
-                        @apply text-gray-500;
-                    }
-                }
-            }
-        }
-        &.xl {
-            min-width: 100px;
-            &:not(:disabled),
-            &:hover,
-            &:active {
-                @apply text-gray-800;
-            }
-            span {
-                @apply mx-0;
-            }
-            &.darkmode {
-                @apply bg-gray-700;
-                @apply border-gray-700;
-                @apply bg-opacity-30;
-                @apply border-opacity-30;
-                @apply text-white;
-                &:hover {
-                    @apply bg-opacity-50;
-                    @apply border-opacity-50;
-                }
-                &:focus,
-                &:active {
-                    @apply bg-opacity-80;
-                    @apply border-opacity-50;
-                }
-                &:disabled {
-                    @apply bg-gray-700;
-                    @apply border-gray-700;
-                    @apply bg-opacity-10;
-                    @apply border-opacity-10;
-                    @apply text-gray-700;
-                    :global(svg) {
-                        @apply text-gray-500;
-                    }
-                }
-                :global(svg) {
-                    @apply text-blue-500;
-                }
-            }
+
+        &:active,
+        &:focus {
+            @apply bg-opacity-40;
+            @apply border-blue-400;
+            @apply border-opacity-100;
+            @apply text-white;
         }
 
         &:disabled {
-            @apply pointer-events-none;
-            @apply bg-gray-200;
-            span {
-                @apply text-gray-500;
-            }
-            &.darkmode {
-                @apply bg-gray-700;
-                @apply bg-opacity-10;
-                span {
-                    @apply text-gray-700;
-                }
-            }
+            @apply bg-transparent;
+            @apply border-gray-700;
+            @apply border-opacity-50;
+            @apply text-gray-500;
+            @apply text-opacity-50;
         }
     }
 </style>

@@ -7,6 +7,7 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { networkSetupRouter } from '@core/router'
+    import { resetActiveProfile } from '@core/profile'
 
     function onProtocolSelectionClick(networkProtocol: NetworkProtocol): void {
         if ($onboardingProfile?.isDeveloperProfile) {
@@ -23,6 +24,7 @@
     }
 
     onMount(() => {
+        resetActiveProfile()
         updateOnboardingProfile({ networkProtocol: null })
     })
 </script>

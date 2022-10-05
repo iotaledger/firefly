@@ -4,7 +4,7 @@
         addOfficialNodesToClientOptions,
         NetworkHealth,
         networkStatus,
-        NetworkStatusDescription,
+        NETWORK_STATUS_DESCRIPTION,
         NetworkType,
         NETWORK_HEALTH_COLORS,
         nodeInfo,
@@ -13,6 +13,7 @@
     import { activeProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
     import { Button, Checkbox, HR, Text, NodeListTable } from 'shared/components'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     let nodesContainer: HTMLElement
 
@@ -58,7 +59,7 @@
                 <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
                     {localize(
                         `views.dashboard.network.${
-                            $networkStatus.description || NetworkStatusDescription[NetworkHealth.Disconnected]
+                            $networkStatus.description || NETWORK_STATUS_DESCRIPTION[NetworkHealth.Disconnected]
                         }`
                     )}
                 </p>
@@ -73,8 +74,8 @@
         <div class="flex flex-row justify-between space-x-3 w-full mt-4">
             {#if networkType !== NetworkType.PrivateNet}
                 <Button
-                    medium
-                    secondary
+                    outline
+                    size={ButtonSize.Medium}
                     inlineStyle="min-width: 156px;"
                     classes="w-1/2"
                     onClick={addOfficialNodesToClientOptions}
@@ -83,8 +84,8 @@
                 </Button>
             {/if}
             <Button
-                medium
                 inlineStyle="min-width: 156px;"
+                size={ButtonSize.Medium}
                 classes={networkType === NetworkType.PrivateNet ? '' : 'w-1/2'}
                 onClick={handleAddNodeClick}
             >

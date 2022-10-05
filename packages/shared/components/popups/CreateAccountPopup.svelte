@@ -1,12 +1,10 @@
 <script lang="typescript">
-    import { Button, ColorPicker, Input, Spinner, Text } from 'shared/components'
+    import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { promptUserToConnectLedger } from 'shared/lib/ledger'
     import { closePopup, updatePopupProps } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { checkActiveProfileAuth } from '@core/profile'
     import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
-    import { checkStronghold } from '@lib/stronghold'
     import { onMount } from 'svelte'
     import { BaseError } from '@core/error'
 
@@ -17,8 +15,6 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const { isStrongholdLocked } = $activeProfile
-
     $: accountAlias, (error = null)
     $: trimmedAccountAlias = accountAlias.trim()
 
@@ -27,18 +23,11 @@
             if (!trimmedAccountAlias) {
                 return
             }
-
             isBusy = true
             error = null
             await validateAccountName(trimmedAccountAlias)
             updatePopupProps({ accountAlias, color, error, isBusy })
-            if ($isLedgerProfile) {
-                void promptUserToConnectLedger(false, _create, _cancel)
-            } else if ($isSoftwareProfile && $isStrongholdLocked) {
-                await checkStronghold(_create, true)
-            } else {
-                await _create()
-            }
+            await checkActiveProfileAuth(_create, { stronghold: true, ledger: true })
             isBusy = false
         } catch (err) {
             if (!error) {
@@ -55,13 +44,13 @@
 
     async function _create(): Promise<void> {
         if (trimmedAccountAlias && color) {
-            await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
-            closePopup()
+            try {
+                await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
+                closePopup()
+            } catch (err) {
+                isBusy = false
+            }
         }
-    }
-
-    function _cancel(): void {
-        isBusy = false
     }
 
     onMount(async () => {
@@ -95,21 +84,18 @@
             <ColorPicker title={localize('general.accountColor')} bind:active={color} classes="mb-4" />
         </div>
     </div>
-    {#if isBusy && !error}
-        <Spinner busy={true} message={localize('general.creatingAccount')} classes="justify-center h-12" />
-    {/if}
-    {#if !isBusy}
-        <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleCancelClick()}>
-                {localize('actions.cancel')}
-            </Button>
-            <Button
-                disabled={!getTrimmedLength(accountAlias) || isBusy}
-                classes="-mx-2 w-1/2"
-                onClick={() => handleCreateClick()}
-            >
-                {localize('actions.create')}
-            </Button>
-        </div>
-    {/if}
+    <div class="flex flex-row justify-between px-2">
+        <Button outline classes="-mx-2 w-1/2" onClick={handleCancelClick} disabled={isBusy}>
+            {localize('actions.cancel')}
+        </Button>
+        <Button
+            disabled={!getTrimmedLength(accountAlias) || isBusy}
+            classes="-mx-2 w-1/2"
+            onClick={handleCreateClick}
+            {isBusy}
+            busyMessage={localize('general.creating')}
+        >
+            {localize('actions.create')}
+        </Button>
+    </div>
 </div>

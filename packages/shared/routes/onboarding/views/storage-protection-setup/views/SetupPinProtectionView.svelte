@@ -1,10 +1,20 @@
 <script lang="typescript">
     import { Animation, Button, OnboardingLayout, PinInput, Text } from 'shared/components'
-    import { initialisePincodeManager } from '@contexts/onboarding'
+    import { onMount } from 'svelte'
+    import {
+        initialiseFirstShimmerClaimingAccount,
+        initialisePincodeManager,
+        isOnboardingLedgerProfile,
+        onboardingProfile,
+        ProfileSetupType,
+    } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
+    import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
+    import { ProfileType } from '@core/profile'
     import { storageProtectionSetupRouter } from '@core/router'
     import { validatePinFormat } from '@lib/utils'
+    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let busy = false
 
@@ -28,18 +38,20 @@
     }
 
     function onBackClick(): void {
+        if ($isOnboardingLedgerProfile) {
+            /**
+             * CAUTION: We must make sure to stop polling if the user
+             * goes back as we've started it when this view is mounted.
+             */
+            stopPollingLedgerNanoStatus()
+        }
         $storageProtectionSetupRouter.previous()
     }
 
     async function onSetPinClick(): Promise<void> {
-        await initialisePincodeManager(setPinInput)
-        $storageProtectionSetupRouter.next()
-    }
-
-    async function handleSetPinSubmit(): Promise<void> {
         resetPinInputErrors()
         if (arePinInputsValid && arePinInputsMatching) {
-            await onSetPinClick()
+            await handleSetPin()
         }
     }
 
@@ -47,6 +59,38 @@
         setPinInputError = ''
         confirmPinInputError = ''
     }
+
+    async function handleSetPin(): Promise<void> {
+        busy = true
+
+        await initialisePincodeManager(setPinInput)
+
+        const canInitialiseFirstShimmerClaimingAccount =
+            $onboardingProfile?.type === ProfileType.Software &&
+            $onboardingProfile?.setupType === ProfileSetupType.Claimed
+        const shouldInitialiseFirstShimmerClaimingAccount = $onboardingProfile?.shimmerClaimingAccounts?.length < 1
+        if (canInitialiseFirstShimmerClaimingAccount && shouldInitialiseFirstShimmerClaimingAccount) {
+            await initialiseFirstShimmerClaimingAccount()
+        }
+
+        busy = false
+
+        $storageProtectionSetupRouter.next()
+    }
+
+    onMount(() => {
+        /**
+         * NOTE: We begin Ledger Nano status polling
+         * here because it's the closest common view between
+         * all Ledger flows that comes before the status
+         * check page, improving the UX as the status will
+         * already have been set by that point rather than setting
+         * it on mount.
+         */
+        if ($isOnboardingLedgerProfile) {
+            pollLedgerNanoStatus()
+        }
+    })
 </script>
 
 <OnboardingLayout {onBackClick} {busy}>
@@ -62,7 +106,7 @@
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
-        <form id="setup-pin" class="flex flex-col" on:submit={handleSetPinSubmit}>
+        <form id="setup-pin" class="flex flex-col" on:submit={onSetPinClick}>
             <PinInput
                 bind:value={setPinInput}
                 glimpse
@@ -72,7 +116,7 @@
                 error={setPinInputError}
                 label={localize('actions.setPin')}
                 on:filled={confirmPinInputElement.focus}
-                on:submit={handleSetPinSubmit}
+                on:submit={onSetPinClick}
             />
             <PinInput
                 bind:value={confirmPinInput}
@@ -83,16 +127,18 @@
                 label={localize('actions.confirmPin')}
                 bind:this={confirmPinInputElement}
                 on:filled={submitButtonElement.resetAndFocus}
-                on:submit={handleSetPinSubmit}
+                on:submit={onSetPinClick}
             />
         </form>
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
         <Button
             classes="flex-1"
-            type="submit"
+            type={HTMLButtonType.Submit}
             disabled={!(arePinInputsValid && arePinInputsMatching) || busy}
             form="setup-pin"
+            isBusy={busy}
+            busyMessage={`${localize('actions.initializing')}...`}
             bind:this={submitButtonElement}
         >
             {localize('actions.continue')}

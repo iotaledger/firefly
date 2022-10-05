@@ -56,7 +56,7 @@
             />
             <Text type="h4">{localize('actions.dragDrop')}</Text>
             <Text classes="mb-12" type="p" secondary smaller>{extentionsLabel}</Text>
-            <Button secondary onClick={onDrop}>{localize('actions.chooseFile')}</Button>
+            <Button outline onClick={onDrop}>{localize('actions.chooseFile')}</Button>
         {/if}
     </content>
 </dropzone>

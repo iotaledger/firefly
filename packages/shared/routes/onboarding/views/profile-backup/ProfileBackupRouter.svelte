@@ -1,23 +1,23 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
-    import { BackupMnemonic, BackupStronghold, VerifyMnemonic, ViewMnemonic } from './views'
+    import { BackupMnemonicView, BackupStrongholdView, VerifyMnemonicView, ViewMnemonicView } from './views'
     import { profileBackupRoute, ProfileBackupRoute } from '@core/router'
 </script>
 
 {#if $profileBackupRoute === ProfileBackupRoute.BackupMnemonic}
     <Transition>
-        <BackupMnemonic />
+        <BackupMnemonicView />
     </Transition>
 {:else if $profileBackupRoute === ProfileBackupRoute.ViewMnemonic}
     <Transition>
-        <ViewMnemonic />
+        <ViewMnemonicView />
     </Transition>
 {:else if $profileBackupRoute === ProfileBackupRoute.VerifyMnemonic}
     <Transition>
-        <VerifyMnemonic />
+        <VerifyMnemonicView />
     </Transition>
 {:else if $profileBackupRoute === ProfileBackupRoute.BackupStronghold}
     <Transition>
-        <BackupStronghold />
+        <BackupStrongholdView />
     </Transition>
 {/if}

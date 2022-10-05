@@ -4,11 +4,14 @@
     import { createEventDispatcher } from 'svelte'
     import { Tooltip, Button } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let value: Date
+    export let startDate: Date = null
+    export let mode: 'auto' | 'datetime' | 'date' | 'time' = 'auto'
 
     const dispatch = createEventDispatcher()
-    const sveltyPickerStartDate = convertDateToSveltyPickerFormat(new Date())
+    const sveltyPickerStartDate = convertDateToSveltyPickerFormat(startDate)
 
     let sveltyPickerDate = convertDateToSveltyPickerFormat(value) ?? sveltyPickerStartDate
     let tooltip: Tooltip
@@ -31,6 +34,7 @@
     <SveltyPicker
         pickerOnly
         autoclose
+        {mode}
         clearBtn={false}
         todayBtn={false}
         startDate={sveltyPickerStartDate}
@@ -40,8 +44,12 @@
         on:change={tooltip?.refreshPosition}
     />
     <div class="flex flex-row justify-center items-center space-x-4 w-full">
-        <Button small secondary onClick={handleCancelClick} classes="w-full">{localize('actions.cancel')}</Button>
-        <Button small onClick={handleConfirmClick} classes="w-full">{localize('actions.confirm')}</Button>
+        <Button size={ButtonSize.Small} outline onClick={handleCancelClick} classes="w-full"
+            >{localize('actions.cancel')}</Button
+        >
+        <Button size={ButtonSize.Small} onClick={handleConfirmClick} classes="w-full"
+            >{localize('actions.confirm')}</Button
+        >
     </div>
 </Tooltip>
 

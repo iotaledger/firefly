@@ -1,17 +1,16 @@
 <script lang="typescript">
     import { Icon, Logo, Profile } from 'shared/components'
-    import {
-        isAwareOfCrashReporting,
-        mobile,
-        needsToAcceptLatestPrivacyPolicy,
-        needsToAcceptLatestTermsOfService,
-    } from '@core/app'
+    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { ProfileType, profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
     import { initialiseOnboardingRouters, loginRouter } from '@core/router'
-    import { initialiseOnboardingProfile, shouldUseDeveloperProfile } from '@contexts/onboarding'
-    import { openPopup, popupState } from '@lib/popup'
+    import {
+        initialiseOnboardingProfile,
+        shouldBeDeveloperProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
+    import { openPopup } from '@lib/popup'
 
     function onContinueClick(id: string) {
         loadPersistedProfileIntoActiveProfile(id)
@@ -19,26 +18,17 @@
     }
 
     function onAddProfileClick() {
-        $loginRouter.next({ shouldAddProfile: true })
+        initialiseOnboardingProfile(shouldBeDeveloperProfile(), NetworkProtocol.Shimmer)
+        if (!shouldBeDeveloperProfile()) {
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+        }
         initialiseOnboardingRouters()
-        initialiseOnboardingProfile(shouldUseDeveloperProfile())
+        $loginRouter.next({ shouldAddProfile: true })
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
             type: 'legalUpdate',
-            hideClose: true,
-            preventClose: true,
-        })
-    }
-
-    /**
-     * NOTE: We check for mobile because it's only necessary
-     * for existing desktop installation.
-     */
-    $: if ($popupState?.type === null && !$popupState?.active && !$mobile && !$isAwareOfCrashReporting) {
-        openPopup({
-            type: 'crashReporting',
             hideClose: true,
             preventClose: true,
         })
@@ -49,7 +39,7 @@
     <Logo width="64px" logo="logo-firefly" classes="absolute top-20" />
     <div
         class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile &&
-            'overflow-y-auto'} flex flex-row flex-wrap"
+            'overlay-scrollbar'} flex flex-row flex-wrap"
     >
         {#each $profiles as profile}
             <div class="mx-7 mb-8">
@@ -61,8 +51,7 @@
                     isDeveloper={profile.isDeveloperProfile}
                     networkType={profile?.networkType ?? NetworkType.Devnet}
                     networkProtocol={profile?.networkProtocol ?? NetworkProtocol.IOTA}
-                    isLedgerProfile={profile?.type === ProfileType.Ledger ||
-                        profile?.type === ProfileType.LedgerSimulator}
+                    isLedgerProfile={profile?.type === ProfileType.Ledger}
                     classes="cursor-pointer"
                 />
             </div>

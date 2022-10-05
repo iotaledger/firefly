@@ -17,8 +17,8 @@ const stage = process.env.STAGE || 'alpha'
  * If stage = 'alpha' -> 'Firefly Alpha'
  */
 const appName =
-    stage === 'prod' ? 'Firefly Stardust' : `Firefly Stardust - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
-const appId = stage === 'prod' ? 'org.iota.firefly-stardust' : `org.iota.firefly-stardust.${stage}`
+    stage === 'prod' ? 'Firefly Shimmer' : `Firefly Shimmer - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
+const appId = stage === 'prod' ? 'org.iota.firefly-shimmer' : `org.iota.firefly-shimmer.${stage}`
 
 const appProtocol = stage === 'prod' ? 'firefly' : `firefly-${stage.toLowerCase()}`
 
@@ -148,6 +148,15 @@ const rendererPlugins = [
                     return 'locales/[name].[ext]'
                 },
             },
+            ...(process.platform === 'win32'
+                ? [
+                      {
+                          from: '**/*',
+                          context: path.resolve(__dirname, 'nsis'),
+                          to: 'build',
+                      },
+                  ]
+                : []),
         ],
     }),
     new MiniCssExtractPlugin({
@@ -210,6 +219,13 @@ module.exports = [
         devtool: prod ? (SENTRY ? 'source-map' : false) : 'cheap-module-source-map',
         devServer: {
             hot: true,
+            static: path.join(__dirname, 'public'),
+            client: {
+                overlay: {
+                    errors: true,
+                    warnings: false,
+                },
+            },
         },
     },
     {

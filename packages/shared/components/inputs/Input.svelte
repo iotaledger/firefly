@@ -1,13 +1,14 @@
 <script lang="typescript">
-    import { onMount, createEventDispatcher } from 'svelte'
+    import { onMount, createEventDispatcher, tick } from 'svelte'
     import { Text, InputContainer } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
     import { TextType } from 'shared/components/Text.svelte'
     import type { TextPropTypes } from 'shared/components/Text.svelte'
 
-    export let value = ''
-    export let classes = ''
+    export let value: string = ''
+    export let classes: string = ''
+    export let containerClasses: string = ''
     export let style: string
     export let label: string
     export let placeholder: string
@@ -120,8 +121,9 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (autofocus) {
+            await tick()
             inputElement.focus()
         }
     })
@@ -137,7 +139,7 @@
             {clearBackground}
             {clearPadding}
             {clearBorder}
-            classes="relative"
+            classes="relative {containerClasses}"
         >
             <Text {...textProps} classes="flex w-full">
                 <input
@@ -169,6 +171,7 @@
                 <floating-label {disabled} class:hasFocus class:floating-active={value && label}>{label}</floating-label
                 >
             {/if}
+            <slot />
         </InputContainer>
     </div>
     {#if capsLockWarning && hasFocus && capsLockOn}
@@ -183,8 +186,6 @@
         @apply m-0;
     }
     input {
-        font-feature-settings: 'calt' off; // disables 'x' formatting while surrounded by numbers
-
         &::placeholder {
             @apply text-gray-500;
         }
@@ -205,7 +206,7 @@
         @apply opacity-0;
         @apply pointer-events-none;
         @apply absolute;
-        @apply left-3;
+        @apply left-4;
         @apply select-none;
         @apply whitespace-nowrap;
         @apply w-auto;

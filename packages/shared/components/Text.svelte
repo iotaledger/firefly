@@ -35,7 +35,7 @@
         error?: boolean
         overrideColor?: boolean
         color?: string
-        darkColoe?: string
+        darkColor?: string
         overrideLeading?: boolean
         classes?: string
     }
@@ -163,6 +163,9 @@
                 break
             case TextType.pre:
                 _fontSize = bigger ? 'text-13' : smaller ? 'text-11' : _fontSize
+                break
+            case TextType.h5:
+                _fontSize = bigger ? 'text-15' : smaller ? 'text-13' : _fontSize
                 break
         }
 

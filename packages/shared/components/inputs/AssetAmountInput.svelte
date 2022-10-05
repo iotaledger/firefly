@@ -1,33 +1,35 @@
 <script lang="typescript">
-    import { Text, AssetDropdown, InputContainer, AmountInput } from 'shared/components'
+    import Big from 'big.js'
+    import { Text, AssetDropdown, InputContainer, AmountInput, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
     import { parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountBestMatch, generateRawAmount, IAsset, formatTokenAmountDefault } from '@core/wallet'
+    import {
+        formatTokenAmountBestMatch,
+        convertToRawAmount,
+        IAsset,
+        formatTokenAmountDefault,
+        visibleSelectedAccountAssets,
+    } from '@core/wallet'
     import { UNIT_MAP } from '@lib/units'
 
     export let inputElement: HTMLInputElement
     export let disabled = false
     export let isFocused = false
-    export let asset: IAsset
+    export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
     export let amount: string
     export let unit: string
 
     let amountInputElement: HTMLInputElement
     let error: string
-    let previousAsset: IAsset
 
     $: isFocused && (error = '')
-    $: if (asset !== previousAsset) {
-        previousAsset = asset
-        unit = null
-    }
-    $: rawAmount = generateRawAmount(parseCurrency(amount).toString(), unit, asset?.metadata)
+    $: rawAmount = convertToRawAmount(amount, unit, asset?.metadata)
 
     let allowedDecimals = 0
     $: if (!asset?.metadata?.useMetricPrefix) {
         if (unit === asset?.metadata.unit) {
-            allowedDecimals = asset?.metadata.decimals
+            allowedDecimals = Math.min(asset?.metadata.decimals, 18)
         } else if (unit === asset?.metadata?.subunit) {
             allowedDecimals = 0
         }
@@ -61,11 +63,11 @@
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
-        } else if (rawAmount > asset?.balance?.available) {
+        } else if (rawAmount.gt(Big(asset?.balance?.available))) {
             error = localize('error.send.amountTooHigh')
-        } else if (rawAmount <= 0) {
+        } else if (rawAmount.lte(Big(0))) {
             error = localize('error.send.amountZero')
-        } else if (rawAmount % 1 !== 0) {
+        } else if (!rawAmount.mod(1).eq(Big(0))) {
             error = localize('error.send.amountSmallerThanSubunit')
         }
 
@@ -83,6 +85,7 @@
     {isFocused}
     {error}
     classes="space-y-2"
+    on:clickOutside={() => (isFocused = false)}
 >
     <div class="flex flex-row w-full items-center space-x-0.5 relative">
         <AssetDropdown bind:asset />
@@ -103,14 +106,24 @@
     </div>
     <div class="flex flex-row w-full items-end justify-between">
         {#if asset}
-            <button on:click={onClickAvailableBalance}>
-                <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
-                    {localize('general.availableBalance', {
-                        values: { balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata) },
-                    })}
-                </Text>
-            </button>
+            <div class="flex flex-row items-center">
+                <button on:click={onClickAvailableBalance}>
+                    <Text color="gray-600" darkColor="gray-500" fontSize="xs" classes="cursor-pointer">
+                        {localize('general.availableBalanceWithValue', {
+                            values: { balance: formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata) },
+                        })}
+                    </Text>
+                </button>
+                <TooltipIcon
+                    title={localize('general.availableBalance')}
+                    text={localize('general.availableBalanceTooltip')}
+                    width={15}
+                    height={15}
+                    classes="ml-1"
+                />
+            </div>
         {/if}
+        <!-- Placeholder for asset USD value  -->
         <Text color="gray-600" darkColor="gray-500" fontSize="xs">-</Text>
     </div>
 </InputContainer>

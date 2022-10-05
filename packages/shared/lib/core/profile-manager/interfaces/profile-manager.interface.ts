@@ -1,5 +1,3 @@
-import { IAccount } from '@core/account'
-import { IAuth } from '@core/network'
 import {
     AccountId,
     AccountSyncOptions,
@@ -10,6 +8,11 @@ import {
     NodeInfoWrapper,
     WalletEvent,
 } from '@iota/wallet'
+
+import { IAccount } from '@core/account'
+import { IAuth } from '@core/network'
+
+import { WalletApiEventHandler } from '../types'
 
 export interface IProfileManager {
     id: string
@@ -25,12 +28,17 @@ export interface IProfileManager {
     getAccount(accountId: AccountId): Promise<IAccount>
     getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
-    getLedgerStatus(): Promise<LedgerNanoStatus>
+    getLedgerNanoStatus(): Promise<LedgerNanoStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     isStrongholdPasswordAvailable(): Promise<boolean>
-    listen(eventTypes: EventType[], callback: (error: Error, result: string) => void): void
+    listen(eventTypes: EventType[], callback: WalletApiEventHandler): void
     clearListeners(eventTypes: EventType[]): void
-    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]>
+    recoverAccounts(
+        accountStartIndex: number,
+        accountGapLimit: number,
+        addressGapLimit: number,
+        syncOptions?: AccountSyncOptions
+    ): Promise<IAccount[]>
     removeLatestAccount(): Promise<void>
     restoreBackup(source: string, password: string): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>

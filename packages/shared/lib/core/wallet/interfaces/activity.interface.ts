@@ -1,38 +1,22 @@
-import { IAccountState } from '@core/account'
-import { Transaction } from '@iota/wallet'
-import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
-import { Subject } from '../types'
+import { ActivityAsyncStatus, ActivityType, InclusionState } from '../enums'
 import { IUTXOInput } from '@iota/types'
+import { ITransactionActivityData } from './transaction-activity-data.interface'
+import { IFoundryActivityData } from './foundry-activity-data.interface'
+import { IAliasActivityData } from './alias-activity-data.interface'
 
 export interface IActivity {
     id: string
-    outputId?: string
     transactionId?: string
     type: ActivityType
     time: Date
-    direction: ActivityDirection
     inclusionState: InclusionState
-    isInternal: boolean
-    rawAmount: number
-    sender: Subject
-    recipient: Subject
-    isSelfTransaction: boolean
-    assetId: string
-    isAsync: boolean
-    asyncStatus: ActivityAsyncStatus
-    expirationDate?: Date
     inputs: IUTXOInput[]
     isHidden?: boolean
     isAssetHidden: boolean
-    isRejected: boolean
-    isClaiming?: boolean
-    isClaimed?: boolean
-    publicNote?: string
-    claimingTransactionId?: string
-    claimedDate?: Date
+
+    data: ITransactionActivityData | IFoundryActivityData | IAliasActivityData
 
     updateFromPartialActivity(partialActivity: Partial<IActivity>): void
-    setFromTransaction(transaction: Transaction, account: IAccountState): void
     getAsyncStatus(time: Date): ActivityAsyncStatus
     getFormattedAmount(signum: boolean): string
     getFiatAmount(fiatPrice: number, exchangeRate: number): string

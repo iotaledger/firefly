@@ -2,36 +2,22 @@
     import { Text } from 'shared/components'
     import { AccountLabel } from 'shared/components/atoms'
     import { IAccountState, selectedAccount, setSelectedAccount } from '@core/account'
-    import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
-    import { showAppNotification } from '@lib/notifications'
-    import { participationAction } from '@lib/participation/stores'
 
     export let account: IAccountState
     export let onClick: () => unknown
+    export let id: string = ''
 
     function handleAccountClick(accountId: string): void {
-        if (account.isSyncing) {
-            showWarning(localize('notifications.syncing'))
-        } else if ($participationAction) {
-            showWarning(localize('notifications.participating'))
-        } else {
-            setSelectedAccount(accountId)
-            onClick && onClick()
-        }
-    }
-
-    function showWarning(message: string) {
-        showAppNotification({
-            type: 'warning',
-            message,
-        })
+        setSelectedAccount(accountId)
+        onClick && onClick()
     }
 </script>
 
 <button
+    {id}
     on:click={() => handleAccountClick(account.id)}
     class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row justify-between p-4 rounded"
 >

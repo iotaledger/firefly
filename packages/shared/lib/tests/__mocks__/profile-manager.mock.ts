@@ -124,7 +124,7 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
-    getLedgerStatus(): Promise<LedgerNanoStatus> {
+    getLedgerNanoStatus(): Promise<LedgerNanoStatus> {
         return new Promise((resolve) =>
             resolve({
                 connected: true,
@@ -146,7 +146,12 @@ export class ProfileManagerMock implements IProfileManager {
         return
     }
 
-    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
+    recoverAccounts(
+        accountStartIndex: number,
+        accountGapLimit: number,
+        addressGapLimit: number,
+        syncOptions: AccountSyncOptions
+    ): Promise<IAccount[]> {
         return Promise.resolve([])
     }
 

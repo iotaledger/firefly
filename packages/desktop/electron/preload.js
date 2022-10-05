@@ -1,5 +1,7 @@
 const { ipcRenderer, contextBridge } = require('electron')
 const ElectronApi = require('./electronApi')
+const WalletApi = require('@iota/wallet')
+const fs = require('fs')
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
 let captureException = (..._) => {}
@@ -39,19 +41,27 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 try {
-    const WalletApi = require('@iota/wallet')
-
     const { STAGE, NODE_ENV } = process.env
-    if (NODE_ENV === 'development' || STAGE === 'alpha' || STAGE === 'beta') {
+    if (NODE_ENV === 'development') {
+        const logDir = './log'
+        if (!fs.existsSync(logDir)) {
+            fs.mkdirSync(logDir)
+        }
+
+        const today = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '-')
         const loggerOptions = {
             colorEnabled: true,
-            name: './wallet.log',
+            name: `./log/wallet-${today}.log`,
             levelFilter: 'debug',
             targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
         }
         WalletApi.initLogger(loggerOptions)
     }
+} catch (error) {
+    console.error('[Preload Context] Error:', error)
+}
 
+try {
     // contextBridge doesn't allow passing custom properties & methods on prototype chain
     // https://www.electronjs.org/docs/latest/api/context-bridge
     // This workaround exposes the classes through factory methods

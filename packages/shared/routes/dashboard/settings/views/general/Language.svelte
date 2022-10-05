@@ -2,7 +2,6 @@
     import { Dropdown, Text } from 'shared/components'
     import { appSettings } from '@core/app'
     import { SUPPORTED_LOCALES, localize, setLanguage } from '@core/i18n'
-    import { refreshBalanceOverview } from 'shared/lib/wallet'
     import type { DropdownChoice } from '@core/utils'
 
     let languageList: DropdownChoice[]
@@ -10,7 +9,6 @@
 
     const handleLanguage = (item) => {
         setLanguage(item)
-        refreshBalanceOverview()
     }
 </script>
 
@@ -20,4 +18,5 @@
     onSelect={handleLanguage}
     value={SUPPORTED_LOCALES[$appSettings.language]}
     items={languageList}
+    enableTyping
 />

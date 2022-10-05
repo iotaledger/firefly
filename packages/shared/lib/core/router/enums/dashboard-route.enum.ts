@@ -1,6 +1,5 @@
 export enum DashboardRoute {
     Wallet = 'wallet',
+    Developer = 'developer',
     Settings = 'settings',
-    Staking = 'staking',
-    DeveloperTools = 'developerTools',
 }

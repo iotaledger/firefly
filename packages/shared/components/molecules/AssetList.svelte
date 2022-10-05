@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { assetFilter, IAccountAssets, IAsset } from '@core/wallet'
-    import { isFilteredAsset } from '@core/wallet/utils/isFilteredAsset'
+    import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
     import { openPopup } from '@lib/popup'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text, Filter } from 'shared/components'
@@ -10,14 +10,19 @@
     export let assets: IAccountAssets
 
     let assetList: IAsset[]
-    $: $assetFilter, assets, updateFilteredAssetList()
+    $: $assetFilter, assets, updateFilteredAssetList(), scrollToTop()
+    $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
 
+    function scrollToTop() {
+        const listElement = document.querySelector('.asset-list')?.querySelector('svelte-virtual-list-viewport')
+        if (listElement) listElement.scroll(0, 0)
+    }
     function updateFilteredAssetList() {
         const list = []
-        if (assets?.baseCoin && !isFilteredAsset(assets?.baseCoin)) {
+        if (assets?.baseCoin && isVisibleAsset(assets?.baseCoin)) {
             list.push(assets.baseCoin)
         }
-        list.push(...assets?.nativeTokens.filter((_nativeToken) => !isFilteredAsset(_nativeToken)))
+        list.push(...assets?.nativeTokens.filter((_nativeToken) => isVisibleAsset(_nativeToken)))
         assetList = list
     }
 
@@ -38,14 +43,16 @@
             <Text classes="text-left" type={TextType.h5}>{localize('general.assets')}</Text>
             <Filter filterStore={assetFilter} />
         </div>
-        <div class="flex-auto h-full scroll-secondary pb-10">
-            {#if assets?.baseCoin || assets?.nativeTokens?.length > 0}
+        <div class="flex-auto h-full pb-10">
+            {#if assetList.length > 0}
                 <VirtualList items={assetList} let:item>
                     <AssetTile classes="mb-2" onClick={() => handleAssetTileClick(item)} asset={item} />
                 </VirtualList>
             {:else}
                 <div class="h-full flex flex-col items-center justify-center text-center">
-                    <Text secondary>{localize('general.noAssets')}</Text>
+                    <Text secondary
+                        >{localize(`general.${isEmptyBecauseOfFilter ? 'noFilteredAsset' : 'noAssets'}`)}</Text
+                    >
                 </div>
             {/if}
         </div>
@@ -54,10 +61,10 @@
 
 <style lang="scss">
     .asset-list :global(svelte-virtual-list-viewport) {
-        margin-right: -1.25rem !important;
+        margin-right: -1rem !important;
         flex: auto;
         overflow-y: scroll;
-        padding-right: 1rem !important;
+        padding-right: 1.5rem !important;
     }
     .asset-list :global(svelte-virtual-list-contents) {
         margin-right: -1rem !important;

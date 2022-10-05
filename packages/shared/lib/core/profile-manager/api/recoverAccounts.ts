@@ -1,8 +1,21 @@
 import { get } from 'svelte/store'
-import { profileManager } from '../stores'
+
+import type { AccountSyncOptions } from '@iota/wallet'
+
 import { IAccount } from '@core/account'
 
-export async function recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
+import { profileManager } from '../stores'
+
+export async function recoverAccounts(
+    accountStartIndex: number,
+    accountGapLimit: number,
+    addressGapLimit: number,
+    syncOptions?: AccountSyncOptions
+): Promise<IAccount[]> {
     const manager = get(profileManager)
-    return manager.recoverAccounts(accountGapLimit, addressGapLimit)
+    if (syncOptions) {
+        return manager.recoverAccounts(accountStartIndex, accountGapLimit, addressGapLimit, syncOptions)
+    } else {
+        return manager.recoverAccounts(accountStartIndex, accountGapLimit, addressGapLimit)
+    }
 }

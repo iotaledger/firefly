@@ -1,8 +1,12 @@
+import {
+    onboardingProfile,
+    ProfileRecoveryType,
+    ProfileSetupType,
+    shouldBeDeveloperProfile,
+} from '@contexts/onboarding'
+import { hasCompletedAppSetup } from '@core/app'
+import { ProfileType } from '@core/profile'
 import { get, writable } from 'svelte/store'
-
-import { profiles, ProfileType } from '@core/profile'
-import { onboardingProfile, ProfileRecoveryType, ProfileSetupType } from '@contexts/onboarding'
-
 import { appRouter } from './app-router'
 import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from './enums'
 import { Router } from './router'
@@ -13,7 +17,7 @@ export const onboardingRouter = writable<OnboardingRouter>(null)
 
 export class OnboardingRouter extends Router<OnboardingRoute> {
     constructor() {
-        super(hasCompletedOnboardingBefore() ? OnboardingRoute.NetworkSetup : OnboardingRoute.AppSetup, onboardingRoute)
+        super(getInitialRoute(), onboardingRoute)
     }
 
     next(): void {
@@ -21,9 +25,15 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case OnboardingRoute.AppSetup:
-                nextRoute = OnboardingRoute.NetworkSetup
+            case OnboardingRoute.AppSetup: {
+                const _onboardingProfile = get(onboardingProfile)
+                if (_onboardingProfile?.isDeveloperProfile) {
+                    nextRoute = OnboardingRoute.NetworkSetup
+                } else {
+                    nextRoute = OnboardingRoute.ProfileSetup
+                }
                 break
+            }
             case OnboardingRoute.NetworkSetup:
                 nextRoute = OnboardingRoute.ProfileSetup
                 break
@@ -103,9 +113,16 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                 }
                 break
             }
-            case OnboardingRoute.ShimmerClaiming:
-                nextRoute = OnboardingRoute.Congratulations
+            case OnboardingRoute.ShimmerClaiming: {
+                const profileRecoveryType = get(onboardingProfile)?.recoveryType
+                if (profileRecoveryType === ProfileRecoveryType.Mnemonic) {
+                    profileBackupRoute.set(ProfileBackupRoute.BackupStronghold)
+                    nextRoute = OnboardingRoute.ProfileBackup
+                } else {
+                    nextRoute = OnboardingRoute.Congratulations
+                }
                 break
+            }
             case OnboardingRoute.Congratulations:
                 get(appRouter).next()
                 return
@@ -123,6 +140,22 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
     }
 }
 
-function hasCompletedOnboardingBefore(): boolean {
-    return get(profiles).length > 0
+function getInitialRoute(): OnboardingRoute {
+    if (get(hasCompletedAppSetup)) {
+        if (get(onboardingProfile)?.id) {
+            if (get(onboardingProfile)?.isDeveloperProfile) {
+                return OnboardingRoute.NetworkSetup
+            } else {
+                return OnboardingRoute.ProfileSetup
+            }
+        } else {
+            if (shouldBeDeveloperProfile()) {
+                return OnboardingRoute.NetworkSetup
+            } else {
+                return OnboardingRoute.ProfileSetup
+            }
+        }
+    } else {
+        return OnboardingRoute.AppSetup
+    }
 }

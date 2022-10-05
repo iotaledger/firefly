@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
     import { closePopup } from '@lib/popup'
-    import { Button, Error, Spinner, Text } from 'shared/components'
+    import { Button, Error, Text } from 'shared/components'
     import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
     let isBusy = false
@@ -45,13 +45,9 @@
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onBack} disabled={isBusy}>{localize('actions.back')}</Button>
-        <Button autofocus classes="w-full" onClick={onConfirm} disabled={isBusy}>
-            {#if isBusy}
-                <Spinner busy classes="justify-center break-all" />
-            {:else}
-                {localize('actions.confirm')}
-            {/if}
+        <Button classes="w-full" outline onClick={onBack} disabled={isBusy}>{localize('actions.back')}</Button>
+        <Button classes="w-full" onClick={onConfirm} disabled={isBusy} {isBusy}>
+            {localize('actions.confirm')}
         </Button>
     </popup-buttons>
 </faucet-request-popup>

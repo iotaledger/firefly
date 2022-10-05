@@ -37,7 +37,7 @@
 </script>
 
 {#if asset}
-    <div class="asset-dropdown flex flex-col" use:clickOutside on:clickOutside={handleOnClickOutside}>
+    <div class="flex flex-col" use:clickOutside on:clickOutside={handleOnClickOutside}>
         <div
             class="flex flex-row items-center p-2 space-x-2 text-left bg-gray-100 dark:bg-gray-700 rounded-md cursor-default"
             class:cursor-pointer={hasMultipleAssets}
@@ -65,7 +65,7 @@
             <div
                 class="dropdown bg-white dark:bg-gray-800 absolute flex flex-col top-12 -left-5 -right-5 border border-solid border-blue-500 rounded-xl z-10 p-4 max-h-96"
             >
-                <ul class="overflow-y-auto h-full -mr-2 pr-2 scroll-secondary">
+                <ul class="overflow-y-auto h-full -mr-2 pr-2">
                     <li>
                         <AssetTile
                             onClick={() => handleAssetClick($visibleSelectedAccountAssets?.baseCoin)}
@@ -93,12 +93,8 @@
 {/if}
 
 <style lang="scss">
-    .asset-dropdown {
-        font-feature-settings: 'calt' off;
-
-        /* odd margin needed to match the size of the upper parent box */
-        .dropdown {
-            margin: 0 3px;
-        }
+    /* odd margin needed to match the size of the upper parent box */
+    .dropdown {
+        margin: 0 3px;
     }
 </style>

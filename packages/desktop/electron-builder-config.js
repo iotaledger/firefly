@@ -14,7 +14,7 @@ const APP_PROTOCOL = getAppProtocol()
  * @returns
  */
 function getAppName() {
-    return STAGE === 'prod' ? 'Firefly Stardust' : `Firefly Stardust - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
+    return STAGE === 'prod' ? 'Firefly Shimmer' : `Firefly Shimmer - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
 }
 
 function getAppProtocol() {
@@ -22,7 +22,7 @@ function getAppProtocol() {
 }
 
 function getAppId() {
-    const defaultAppId = 'org.iota.firefly-stardust'
+    const defaultAppId = 'org.iota.firefly-shimmer'
     if (STAGE === 'prod') {
         return defaultAppId
     }
@@ -35,7 +35,7 @@ const prodConfig = () => ({
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/@iota/wallet/target/*'],
-    appId: 'org.iota.firefly',
+    appId: APP_ID,
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
@@ -57,7 +57,7 @@ const prodConfig = () => ({
             { x: 170, y: 250, type: 'file' },
         ],
     },
-    nsis: { oneClick: true, deleteAppDataOnUninstall: false },
+    nsis: { oneClick: true, deleteAppDataOnUninstall: false, perMachine: true, include: './build/installer.nsh' },
     win: {
         icon: './public/assets/icons/prod/icon1024x1024.png',
         publisherName: 'IOTA Stiftung',
@@ -89,7 +89,7 @@ const prodConfig = () => ({
     publish: {
         provider: 'generic',
         url: 'https://dl.firefly.iota.org/',
-        publishAutoUpdate: true,
+        publishAutoUpdate: false,
         channel: 'latest',
     },
 })

@@ -10,7 +10,7 @@
 </script>
 
 <ClickableTile {onClick} {...$$restProps}>
-    <div class="asset w-full flex flex-row justify-between items-center">
+    <div class="w-full flex flex-row justify-between items-center">
         <div class="flex flex-row items-center text-left space-x-4">
             <AssetIcon small={squashed} {asset} />
             <div class="flex flex-col">
@@ -21,7 +21,7 @@
                 </Text>
                 {#if !squashed}
                     <div class="flex flex-row justify-between items-center text-left">
-                        <Text type={TextType.p} secondary smaller>{asset?.fiatPrice ?? '-'}</Text>
+                        <Text type={TextType.p} secondary smaller>{asset?.fiatPrice ?? ''}</Text>
                         <slot name="subLabel" />
                     </div>
                 {/if}
@@ -34,16 +34,10 @@
             {#if !squashed}
                 <div class="flex flex-row justify-between items-center text-right">
                     <Text type={TextType.p} secondary smaller classes="flex-grow">
-                        {asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : '-'}
+                        {asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : ''}
                     </Text>
                 </div>
             {/if}
         </div>
     </div>
 </ClickableTile>
-
-<style type="text/scss">
-    .asset {
-        font-feature-settings: 'calt' off; // disables 'x' formatting while surrounded by numbers
-    }
-</style>

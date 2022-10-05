@@ -1,5 +1,7 @@
 import { get, writable } from 'svelte/store'
 
+import { PopupProps } from '@auxiliary/popup'
+
 interface PopupState {
     active: boolean
     type: string
@@ -7,7 +9,7 @@ interface PopupState {
     preventClose?: boolean
     fullScreen?: boolean
     transition?: boolean
-    props?: Record<string, unknown>
+    props?: PopupProps
     overflow?: boolean
     relative?: boolean
 }
@@ -42,7 +44,7 @@ export const openPopup = (
         forceClose
     )
 
-export const closePopup = (forceClose: boolean = false): void =>
+export function closePopup(forceClose: boolean = false): void {
     modifyPopupState(
         {
             active: false,
@@ -56,6 +58,7 @@ export const closePopup = (forceClose: boolean = false): void =>
         },
         forceClose
     )
+}
 
 const modifyPopupState = (state: PopupState, forceClose: boolean = false): void => {
     /**

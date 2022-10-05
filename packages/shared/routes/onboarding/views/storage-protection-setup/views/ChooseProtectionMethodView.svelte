@@ -24,13 +24,13 @@
         <Button
             icon="biometric"
             classes="w-full mb-5"
-            secondary
+            outline
             disabled
             onClick={() => handleContinueClick('biometric')}
         >
             {localize('actions.useBiometric')}
         </Button>
-        <Button icon="pin" classes="w-full mb-8" secondary onClick={() => handleContinueClick('pin')}>
+        <Button icon="pin" classes="w-full mb-8" outline onClick={() => handleContinueClick('pin')}>
             {localize('actions.setupPin')}
         </Button>
     </div>

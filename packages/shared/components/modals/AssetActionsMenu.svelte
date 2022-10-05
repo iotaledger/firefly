@@ -1,7 +1,15 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { hideAsset, IAsset, unhideAsset, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
-    import { hideActivitiesForHiddenAssets } from '@core/wallet/actions/hideActivitiesForHiddenAssets'
+    import {
+        hideAsset,
+        IAsset,
+        unhideAsset,
+        unverifyAsset,
+        verifyAsset,
+        hideActivitiesForHiddenAssets,
+        NotVerifiedStatus,
+        VerifiedStatus,
+    } from '@core/wallet'
     import { Icon } from '@lib/auxiliary/icon'
     import { updatePopupProps } from '@lib/popup'
     import { HR, MenuItem, Modal } from 'shared/components'
@@ -10,17 +18,17 @@
     export let asset: IAsset
 
     const handleUnverify = () => {
-        unverifyAsset(asset.id)
+        unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
         updatePopupProps({
-            asset: { ...asset, verification: VerificationStatus.NotVerified },
+            asset: { ...asset, verification: { verified: false, status: NotVerifiedStatus.Skipped } },
         })
         modal.close()
     }
 
     function handleVerify() {
-        verifyAsset(asset.id)
+        verifyAsset(asset.id, VerifiedStatus.SelfVerified)
         updatePopupProps({
-            asset: { ...asset, verification: VerificationStatus.Verified },
+            asset: { ...asset, verification: { verified: true, status: VerifiedStatus.SelfVerified } },
         })
         modal.close()
     }
@@ -50,13 +58,12 @@
 
 <Modal bind:this={modal}>
     <div class="flex flex-col">
-        {#if asset?.verification === VerificationStatus.Verified}
+        {#if asset?.verification?.status === VerifiedStatus.SelfVerified}
             <MenuItem
                 icon={Icon.NotVerified}
                 iconProps={{ secondaryColor: 'white' }}
                 title={localize('actions.unverifyToken')}
                 onClick={handleUnverify}
-                first
             />
         {:else}
             <MenuItem
@@ -64,22 +71,20 @@
                 iconProps={{ secondaryColor: 'white' }}
                 title={localize('actions.verifyToken')}
                 onClick={handleVerify}
-                first
             />
         {/if}
         {#if asset?.hidden}
-            <MenuItem icon={Icon.View} title={localize('actions.unhideToken')} onClick={handleUnhide} first />
+            <MenuItem icon={Icon.View} title={localize('actions.unhideToken')} onClick={handleUnhide} />
         {:else}
-            <MenuItem icon={Icon.Hide} title={localize('actions.hideToken')} onClick={handleHide} first />
+            <MenuItem icon={Icon.Hide} title={localize('actions.hideToken')} onClick={handleHide} />
         {/if}
         <HR />
         <MenuItem
             icon={Icon.Delete}
             title={localize('actions.burnToken')}
             onClick={handleBurnToken}
-            first
-            last
             disabled={true}
+            variant="error"
         />
     </div>
 </Modal>

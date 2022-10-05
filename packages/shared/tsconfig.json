@@ -12,7 +12,8 @@
             "@core/*": ["./lib/core/*"],
             "@features/*": ["./features/*"],
             "@lib/*": ["./lib/*"]
-        }
+        },
+        "types": ["node"]
     },
     "include": ["./lib", "./features"],
     "exclude": ["**/node_modules", "**/tests"]

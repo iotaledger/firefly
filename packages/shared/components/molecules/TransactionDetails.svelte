@@ -1,16 +1,14 @@
 <script lang="typescript">
     import {
-        ActivityStatusPill,
+        TransactionActivityStatusPill,
         ActivityAsyncStatusPill,
-        Box,
-        AddressBox,
         KeyValueBox,
-        AccountLabel,
-    } from 'shared/components/atoms'
-    import { AssetIcon, Text } from 'shared/components'
+        AmountBox,
+        SubjectBox,
+        Pill,
+    } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { FontWeight } from 'shared/components/Text.svelte'
     import {
         formatTokenAmountPrecise,
         ActivityAsyncStatus,
@@ -18,20 +16,22 @@
         Subject,
         InclusionState,
         ActivityDirection,
-        IAsset,
+        IPersistedAsset,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
     import { truncateString } from '@lib/helpers'
     import { setClipboard } from '@lib/utils'
+    import { time } from '@core/app'
 
-    export let asset: IAsset
+    export let asset: IPersistedAsset
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
     export let direction: ActivityDirection
     export let expirationDate: Date = null
+    export let timelockDate: Date = null
     export let formattedFiatValue: string = null
     export let inclusionState: InclusionState = InclusionState.Pending
     export let metadata: string = null
@@ -39,16 +39,22 @@
     export let unit: string
     export let storageDeposit = 0
     export let giftedStorageDeposit = 0
+    export let surplus: string = null
     export let subject: Subject = null
     export let tag: string = null
-    export let time: Date = null
+    export let transactionTime: Date = null
+    export let isInternal: boolean = false
+    export let isClaiming: boolean = false
     export let type: ActivityType
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: transactionTime = getDateFormat(time)
+    $: formattedTransactionTime = getDateFormat(transactionTime)
+    $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
+    $: isTimelocked = timelockDate > $time
+    $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -60,16 +66,64 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
+    $: formattedSurplus = formatTokenAmountPrecise(Number(surplus) ?? 0, BASE_TOKEN[$activeProfile?.networkProtocol])
+
+    $: localePrefix = `tooltips.transactionDetails.${direction}.`
+
+    let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {
-        ...(transactionTime && { transactionTime }),
-        ...(metadata && { metadata }),
-        ...(tag && { tag }),
-        ...((storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)) && {
-            storageDeposit: formattedStorageDeposit,
+        ...(transactionTime && {
+            transactionTime: { data: formattedTransactionTime },
         }),
-        ...(giftedStorageDeposit && { giftedStorageDeposit: formattedGiftedStorageDeposit }),
-        ...(expirationTime && { expirationTime }),
-        ...(claimedTime && { claimedTime }),
+        ...(metadata && {
+            metadata: {
+                data: metadata,
+                tooltipText: localize(localePrefix + 'metadata'),
+            },
+        }),
+        ...(tag && {
+            tag: {
+                data: tag,
+                tooltipText: localize(localePrefix + 'tag'),
+            },
+        }),
+        ...(hasStorageDeposit && {
+            storageDeposit: {
+                data: formattedStorageDeposit,
+                tooltipText: localize(localePrefix + 'storageDeposit'),
+            },
+        }),
+        ...(giftedStorageDeposit && {
+            giftedStorageDeposit: {
+                data: formattedGiftedStorageDeposit,
+                tooltipText: localize(localePrefix + 'giftedStorageDeposit'),
+            },
+        }),
+        ...(surplus && {
+            surplus: {
+                data: formattedSurplus,
+                tooltipText: localize(localePrefix + 'surplus'),
+            },
+        }),
+        ...(expirationTime && {
+            expirationTime: {
+                data: expirationTime,
+                tooltipText: localize(localePrefix + 'expirationTime'),
+            },
+        }),
+        ...(timelockDate && {
+            timelockDate: {
+                data: formattedTimelockDate,
+                tooltipText: localize(localePrefix + 'timelockDate'),
+            },
+        }),
+        ...(claimedTime && { claimedTime: { data: claimedTime } }),
+    }
+
+    function handleTransactionIdClick(): void {
+        explorerUrl
+            ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
+            : setClipboard(claimingTransactionId)
     }
 
     function getDateFormat(date: Date): string {
@@ -82,67 +136,45 @@
             } else {
                 return undefined
             }
-        } catch {
+        } catch (error) {
             return undefined
         }
-    }
-
-    function handleTransactionIdClick(): void {
-        explorerUrl
-            ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
-            : setClipboard(claimingTransactionId)
     }
 </script>
 
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-4">
+    <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
         {#if amount}
-            <transaction-value class="flex flex-col space-y-0.5 items-center">
-                <div class="flex flex-row space-x-3">
-                    <AssetIcon {asset} />
-                    <div class="flex flex-row items-baseline space-x-0.1">
-                        <Text type="h1" fontWeight={FontWeight.semibold}>
-                            {amount}
-                        </Text>
-                        {#if unit}
-                            <Text type="h4" classes="ml-1" fontWeight={FontWeight.medium}>{unit}</Text>
-                        {/if}
-                    </div>
-                </div>
-                {#if formattedFiatValue}
-                    <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedFiatValue}</Text>
-                {/if}
-            </transaction-value>
+            <AmountBox {amount} fiatAmount={formattedFiatValue} {unit} {asset} />
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
-            {#if inclusionState}
-                <ActivityStatusPill {type} {direction} {inclusionState} />
+            {#if inclusionState && direction}
+                <TransactionActivityStatusPill {type} {direction} {isInternal} {inclusionState} />
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />
             {/if}
+            {#if isTimelocked}
+                <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
+                    {localize('pills.locked')}
+                </Pill>
+            {/if}
         </transaction-status>
-        {#if subject?.type === 'account'}
-            <Box row clearBackground clearPadding classes="justify-center">
-                <AccountLabel account={subject.account} />
-            </Box>
-        {:else if subject?.type === 'address'}
-            <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
-        {:else}
-            <Box col clearBackground clearPadding>
-                <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
-                    {localize('general.unknownAddress')}
-                </Text>
-            </Box>
+        {#if subject}
+            <SubjectBox {subject} />
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}
         <details-list class="flex flex-col space-y-2">
             {#each Object.entries(detailsList) as [key, value]}
-                <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
+                <KeyValueBox
+                    keyText={localize(`general.${key}`)}
+                    valueText={value.data}
+                    tooltipText={value.tooltipText}
+                />
             {/each}
             {#if claimingTransactionId}
-                <KeyValueBox keyText={localize('general.claimingTransactionId')}>
+                <KeyValueBox keyText={localize(isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
                     <button
                         slot="value"
                         class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"

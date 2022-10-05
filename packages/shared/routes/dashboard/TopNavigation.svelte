@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { PlatformOption, platform } from '@core/app'
     import { localize } from '@core/i18n'
     import {
         collectiblesRoute,
@@ -11,25 +12,17 @@
         settingsRouter,
     } from '@core/router'
     import { AccountSwitcher, Icon, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
     import { popupState } from 'shared/lib/popup'
-    import { onMount } from 'svelte'
 
     export let classes = ''
 
-    let os = ''
     let showBackButton = false
-
     $: {
         if ($settingsRoute || $collectiblesRoute) {
             showBackButton = isCorrectRoute()
         }
     }
     $: showingPopup = $popupState.active && $popupState.type !== 'busy'
-
-    onMount(async () => {
-        os = await Platform.getOS()
-    })
 
     function isCorrectRoute(): boolean {
         switch ($dashboardRoute) {
@@ -57,8 +50,8 @@
 </script>
 
 <div
-    class="fixed top-0 left-20 flex flex-row justify-center items-center py-2 w-full z-10 {os === 'win32' &&
-    showingPopup
+    class="fixed top-0 left-20 flex flex-row justify-center items-center py-2 w-full z-10 {$platform ===
+        PlatformOption.Windows && showingPopup
         ? 'opacity-50 pointer-events-none'
         : ''} {classes}"
 >
