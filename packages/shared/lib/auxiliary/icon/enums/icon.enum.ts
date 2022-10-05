@@ -22,6 +22,7 @@ export enum Icon {
     ChevronUp = 'chevron-up',
     Chip = 'chip',
     Close = 'close',
+    Collectibles = 'collectibles',
     Copy = 'copy',
     Currency = 'currency',
     Customize = 'customize',
