@@ -1,6 +1,7 @@
 <script lang="typescript">
     import {
         initialiseOnboardingProfile,
+        initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
         ProfileSetupType,
         shouldBeDeveloperProfile,
@@ -8,19 +9,22 @@
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
+    import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
     import { profileSetupRouter } from '@core/router'
-    import features from '../../../../../features/features'
     import { OnboardingButton } from 'shared/components'
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
+    import features from '../../../../../features/features'
 
     const title = localize('views.onboarding.profileSetup.setup.title', {
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },
     })
 
     function onProfileSetupSelectionClick(setupType: ProfileSetupType): void {
-        updateOnboardingProfile({ setupType })
+        // We dont support Ledger profiles on mobile yet, so we hardcode the type to Software
+        updateOnboardingProfile({ setupType, type: ProfileType.Software })
+        initialiseProfileManagerFromOnboardingProfile()
         $profileSetupRouter.next()
     }
 
@@ -45,7 +49,12 @@
             updateOnboardingProfile({ clientOptions })
         }
         destroyProfileManager()
-        updateOnboardingProfile({ mustVisitProfileName: true, setupType: null, hasInitialisedProfileManager: false })
+        updateOnboardingProfile({
+            mustVisitProfileName: true,
+            setupType: null,
+            hasInitialisedProfileManager: false,
+            type: null,
+        })
     })
 </script>
 

@@ -4,11 +4,11 @@
     import { checkActiveProfileAuth } from '@core/profile'
     import { mintNativeToken, setMintTokenDetails, mintTokenDetails, TokenStandard } from '@core/wallet'
     import { closePopup } from '@lib/popup'
-    import { isTransferring } from '@lib/wallet'
     import { Button, Error, NumberInput, Text, TextInput, OptionalInput } from 'shared/components'
     import { FontWeight } from '../Text.svelte'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
+    import { selectedAccount } from '@core/account'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -31,6 +31,8 @@
     $: circulatingSupply, (circulatingSupplyError = '')
     let symbolError: string
     $: symbol, (symbolError = '')
+
+    $: isTransferring = $selectedAccount.isTransferring
 
     let error: BaseError
 
@@ -250,10 +252,10 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={$isTransferring} onClick={handleCancel}>
+        <Button outline classes="w-full" disabled={isTransferring} onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" disabled={$isTransferring} onClick={handleMint} isBusy={$isTransferring}>
+        <Button classes="w-full" disabled={isTransferring} onClick={handleMint} isBusy={isTransferring}>
             {localize('actions.mint')}
         </Button>
     </div>

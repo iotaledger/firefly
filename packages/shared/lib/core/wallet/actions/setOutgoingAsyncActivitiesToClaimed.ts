@@ -12,7 +12,7 @@ export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState
     const activities = accountActivities.filter(
         (activity) =>
             activity.data.type === ActivityType.Transaction &&
-            activity.data.direction === ActivityDirection.Out &&
+            activity.data.direction === ActivityDirection.Outgoing &&
             activity.data.isAsync
     )
 

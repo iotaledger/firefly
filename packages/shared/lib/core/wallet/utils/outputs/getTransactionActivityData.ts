@@ -44,7 +44,7 @@ export function getTransactionActivityData(
     const subject = isIncoming ? sender : recipient
     const isInternal = isSubjectInternal(subject)
 
-    const direction = isIncoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
+    const direction = isIncoming || isSelfTransaction ? ActivityDirection.Incoming : ActivityDirection.Outgoing
 
     const isAsync = isOutputAsync(output)
     const asyncStatus = isAsync ? ActivityAsyncStatus.Unclaimed : null

@@ -1,11 +1,9 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { ActivityDirection, ActivityType, InclusionState } from '@core/wallet'
+    import { InclusionState } from '@core/wallet'
     import Pill from './Pill.svelte'
 
-    export let type: ActivityType
-    export let isInternal: boolean
-    export let direction: ActivityDirection
+    export let localizationKey: string
     export let inclusionState: InclusionState
 
     let backgroundColor = 'gray-200'
@@ -30,10 +28,8 @@
     }
 </script>
 
-{#if type && inclusionState}
+{#if localizationKey && inclusionState}
     <Pill {backgroundColor} {darkBackgroundColor} {textColor}>
-        {localize(
-            'pills.' + type + '.' + (isInternal ? 'internal' : 'external') + '.' + direction + '.' + inclusionState
-        ).toLowerCase()}
+        {localize(`pills.${localizationKey}.${inclusionState}`).toLowerCase()}
     </Pill>
 {/if}
