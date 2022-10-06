@@ -5,7 +5,7 @@
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { loadPersistedProfileIntoActiveProfile, profiles, ProfileType } from '@core/profile'
     import { loginRouter } from '@core/router'
-    import { initialiseOnboarding, shouldBeDeveloperProfile } from '@contexts/onboarding'
+    import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import { openPopup } from '@lib/popup'
 
     function onContinueClick(id: string) {
@@ -15,7 +15,7 @@
 
     function onAddProfileClick() {
         const isDeveloperProfile = shouldBeDeveloperProfile()
-        initialiseOnboarding({
+        initialiseOnboardingFlow({
             isDeveloperProfile,
             networkProtocol: NetworkProtocol.Shimmer,
             ...(!isDeveloperProfile && { networkType: NetworkType.Mainnet }),

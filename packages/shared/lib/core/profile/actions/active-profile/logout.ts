@@ -15,7 +15,6 @@ import {
     isLedgerProfile,
 } from '@core/profile'
 import { resetSelectedAccount } from '@core/account'
-import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 
 /**
  * Logout from active profile
@@ -27,7 +26,7 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
     return new Promise((resolve) => {
         if (get(isSoftwareProfile)) {
             _lockStronghold && lockStronghold()
-        } else if (isLedgerProfile(type) || get(isOnboardingLedgerProfile)) {
+        } else if (isLedgerProfile(type)) {
             get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
         }
 

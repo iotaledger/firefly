@@ -4,7 +4,6 @@
     import {
         AppRoute,
         appRoute,
-        appRouter,
         DashboardRoute,
         dashboardRouter,
         initialiseRouters,
@@ -20,11 +19,10 @@
     import { openPopup, popupState } from '@lib/popup'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
-    import { initialiseOnboarding } from '@contexts/onboarding'
+    import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
@@ -111,23 +109,17 @@
             openPopup({ type: 'diagnostics' })
         })
         Electron.onEvent('menu-create-developer-profile', () => {
-            get(appRouter).reset()
-            void initialiseOnboarding({
+            void initialiseOnboardingFlow({
                 isDeveloperProfile: true,
                 networkProtocol: NetworkProtocol.Shimmer,
-                resetRouters: true,
             })
-            get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
-            get(appRouter).reset()
-            void initialiseOnboarding({
+            void initialiseOnboardingFlow({
                 isDeveloperProfile: false,
                 networkProtocol: NetworkProtocol.Shimmer,
                 networkType: NetworkType.Mainnet,
-                resetRouters: true,
             })
-            get(appRouter).next({ shouldAddProfile: true })
         })
         Electron.hookErrorLogger((err) => {
             addError(err)
