@@ -46,7 +46,6 @@
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
-    // @TODO: move to shared lib
     function setButtonText(time) {
         return localize('views.login.pleaseWait', { values: { time: time.toString() } })
     }
@@ -54,7 +53,6 @@
     let maxAttemptsTimer = null
     let shakeTimeout = null
 
-    // @TODO: move to shared lib
     function countdown(): void {
         if (!hasReachedMaxAttempts) {
             return
@@ -71,7 +69,6 @@
         }
     }
 
-    // @TODO: move to shared lib
     async function onSubmitClick(): Promise<void> {
         if (!hasReachedMaxAttempts) {
             isBusy = true
@@ -96,7 +93,6 @@
         }
     }
 
-    // @TODO: move to shared lib
     function onBackClick(): void {
         if (!hasReachedMaxAttempts) {
             resetActiveProfile()

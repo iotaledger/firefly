@@ -15,13 +15,11 @@
 
     $: dark = $appSettings.darkMode
 
-    // @TODO: move to shared lib
     function onContinueClick(id: string) {
         loadPersistedProfileIntoActiveProfile(id)
         $loginRouter.next()
     }
 
-    // @TODO: move to shared lib
     function onAddProfileClick() {
         initialiseOnboardingProfile(shouldBeDeveloperProfile(), NetworkProtocol.Shimmer)
         if (!shouldBeDeveloperProfile()) {

@@ -20,4 +20,6 @@
     }
 </script>
 
-<LoadingScreen showProgressBar {statusMessage} {percent} />
+<div class="h-full p-5">
+    <LoadingScreen showProgressBar {statusMessage} {percent} />
+</div>
