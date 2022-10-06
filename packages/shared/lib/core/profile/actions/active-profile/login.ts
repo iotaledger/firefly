@@ -2,6 +2,7 @@ import { cleanupOnboarding } from '@contexts/onboarding'
 import { createNewAccount, IAccount, setSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
 import { pollLedgerNanoStatus } from '@core/ledger'
+import { pollMarketPrices } from '@core/market/actions'
 import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
 import { loadNftsForActiveProfile } from '@core/nfts'
 import {
@@ -10,7 +11,7 @@ import {
     isStrongholdUnlocked,
     profileManager,
     recoverAccounts,
-    RecoverAccountsPayload,
+    RecoverAccountsPayload
 } from '@core/profile-manager'
 import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
 import { loginRouter } from '@core/router'
@@ -24,7 +25,7 @@ import {
     activeProfile,
     incrementLoginProgress,
     resetLoginProgress,
-    setTimeStrongholdLastUnlocked,
+    setTimeStrongholdLastUnlocked
 } from '../../stores'
 import { isLedgerProfile } from '../../utils'
 import { loadAccounts } from './loadAccounts'
@@ -117,6 +118,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 _loginRouter.next()
                 resetLoginProgress()
             }, 500)
+            pollMarketPrices()
 
             void cleanupOnboarding()
         } else {

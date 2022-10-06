@@ -15,6 +15,7 @@ import {
     isLedgerProfile,
 } from '@core/profile'
 import { resetSelectedAccount } from '@core/account'
+import { clearPollMarketPrices } from '@core/market/actions'
 
 /**
  * Logout from active profile
@@ -31,6 +32,7 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
         }
 
         clearPollNetworkInterval()
+        clearPollMarketPrices()
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
             const manager = get(profileManager)

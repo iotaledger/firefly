@@ -1,4 +1,5 @@
 export * from './bech32-address-length.constant'
+export * from './default-application-json-request-options.constant'
 export * from './default-exchange-rates.constant'
 export * from './hex.constants'
 export * from './iota-unit-map.constant'
