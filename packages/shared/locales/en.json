@@ -1279,7 +1279,6 @@
         "assetOrder": {
             "label": "Order",
             "Name": "Name",
-            "Date": "Date",
             "Amount": "Amount"
         },
         "verificationStatus": {

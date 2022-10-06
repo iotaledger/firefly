@@ -16,9 +16,6 @@ export function sortAssets(assets: IAsset[]): IAsset[] {
             case AssetOrderOption.Amount:
                 orderFunction = sortByAmount
                 break
-            case AssetOrderOption.Date:
-                orderFunction = sortByDate
-                break
         }
         isAscending = filter.order.ascDesc === OrderOption.Asc
     }
@@ -31,9 +28,5 @@ function sortByName(asset1: IAsset, asset2: IAsset, asc: boolean): number {
 }
 
 function sortByAmount(asset1: IAsset, asset2: IAsset, asc: boolean): number {
-    return asset1.balance.total > asset2.balance.total ? (asc ? 1 : -1) : asc ? -1 : 1
-}
-
-function sortByDate(asset1: IAsset, asset2: IAsset, asc: boolean): number {
     return asset1.balance.total > asset2.balance.total ? (asc ? 1 : -1) : asc ? -1 : 1
 }

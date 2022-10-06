@@ -30,7 +30,7 @@ export const assetFilter: Writable<AssetFilter> = writable({
         localeKey: 'filters.assetOrder',
         selected: AssetOrderOption.Name,
         ascDesc: OrderOption.Asc,
-        choices: [AssetOrderOption.Name, AssetOrderOption.Date, AssetOrderOption.Amount],
+        choices: [AssetOrderOption.Name, AssetOrderOption.Amount],
     },
 })
 
