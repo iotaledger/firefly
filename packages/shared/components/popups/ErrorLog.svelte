@@ -3,7 +3,7 @@
     import { errorLog } from '@core/error'
     import { Locale } from '@core/i18n'
     import { closePopup } from '@lib/popup'
-    import { setClipboard } from '@lib/utils'
+    import { setClipboard } from '@core/utils'
 
     export let locale: Locale
 
