@@ -45,8 +45,6 @@
             return {}
         }
         const details = {
-            asset,
-            type: activity.type,
             transactionTime: activity.time,
             inclusionState: activity.inclusionState,
             formattedFiatValue: activity.getFiatAmount(
@@ -57,6 +55,8 @@
         if (activity.data.type === ActivityType.Transaction) {
             return {
                 ...details,
+                type: activity.type,
+                asset,
                 storageDeposit: activity.data.storageDeposit,
                 amount: formatTokenAmountDefault(activity.data.rawAmount, asset?.metadata),
                 unit: asset?.metadata?.unit,
@@ -76,6 +76,7 @@
         } else if (activity.data.type === ActivityType.Foundry) {
             return {
                 ...details,
+                asset,
                 storageDeposit: activity.data.storageDeposit,
                 amount: formatTokenAmountDefault(activity.data.rawAmount, asset?.metadata),
                 unit: asset?.metadata?.unit,
