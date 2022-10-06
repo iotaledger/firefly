@@ -1,11 +1,12 @@
+import { selectedAccount } from '@core/account/stores/selected-account.store'
+import { marketCoinPrices } from '@core/market'
+import { activeProfileId } from '@core/profile'
+import { derived, get, Readable, writable, Writable } from 'svelte/store'
+import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
+import { AssetOrderOption, BooleanFilterOption, NotVerifiedStatus, OrderOption, VerifiedStatus } from '../enums'
+import { AssetFilter, IAsset } from '../interfaces'
 import { IAccountAssets } from '../interfaces/account-assets.interface'
 import { persistedAssets } from './persisted-assets.store'
-import { activeProfileId } from '@core/profile'
-import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
-import { derived, get, Readable, writable, Writable } from 'svelte/store'
-import { AssetFilter, IAsset } from '../interfaces'
-import { AssetOrderOption, BooleanFilterOption, NotVerifiedStatus, OrderOption, VerifiedStatus } from '../enums'
-import { selectedAccount } from '@core/account/stores/selected-account.store'
 
 export const assetFilter: Writable<AssetFilter> = writable({
     verificationStatus: {
@@ -35,10 +36,10 @@ export const assetFilter: Writable<AssetFilter> = writable({
 })
 
 export const selectedAccountAssets: Readable<IAccountAssets> = derived(
-    [activeProfileId, selectedAccount, persistedAssets, assetFilter],
-    ([$activeProfileId]) => {
+    [activeProfileId, marketCoinPrices, selectedAccount, persistedAssets, assetFilter],
+    ([$activeProfileId, $marketCoinPrices]) => {
         if ($activeProfileId) {
-            return getAccountAssetsForSelectedAccount()
+            return getAccountAssetsForSelectedAccount($marketCoinPrices)
         } else {
             return { baseCoin: undefined, nativeTokens: [] }
         }

@@ -1,4 +1,3 @@
-import { MarketCoinId } from '../enums'
-import { MarketCoinPrices } from './market-coin-prices.type'
+import { MarketCurrency } from '../enums'
 
-export type MarketPrices = { [key in MarketCoinId]?: MarketCoinPrices }
+export type MarketPrices = { [key in MarketCurrency]?: number }

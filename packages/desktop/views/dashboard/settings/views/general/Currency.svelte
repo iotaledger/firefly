@@ -1,17 +1,17 @@
 <script lang="typescript">
-    import { Dropdown, Text } from 'shared/components'
-    import { exchangeRates } from '@core/utils'
     import { localize } from '@core/i18n'
+    import { MarketCurrency } from '@core/market'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'
+    import { Dropdown, Text } from 'shared/components'
 
     let currencyList: IDropdownChoice[]
-    $: currencyList = Object.keys($exchangeRates)
-        .map((currency) => ({ value: currency, label: currency }))
+    $: currencyList = Object.values(MarketCurrency)
+        .map((currency) => ({ value: currency, label: currency.toUpperCase() }))
         .sort()
 
-    function handleCurrencySelect(item): void {
-        updateActiveProfileSettings({ currency: item.value })
+    const handleCurrencySelect = (item) => {
+        updateActiveProfileSettings({ marketCurrency: item.value })
     }
 </script>
 
@@ -20,7 +20,7 @@
 <Dropdown
     sortItems={true}
     onSelect={handleCurrencySelect}
-    value={$activeProfile?.settings.currency}
+    value={$activeProfile?.settings.marketCurrency}
     items={currencyList}
     enableTyping
 />

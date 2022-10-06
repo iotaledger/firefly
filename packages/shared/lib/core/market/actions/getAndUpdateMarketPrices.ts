@@ -1,11 +1,11 @@
 import { MarketCoinId, MarketCurrency } from '../enums'
-import { updateMarketPrices } from '../stores'
-import { getMarketPrices } from './getMarketPrices'
+import { updateMarketCoinPrices } from '../stores'
+import { getMarketCoinPrices } from './getMarketPrices'
 
 export async function getAndUpdateMarketPrices(): Promise<void> {
     try {
-        const marketPricesResponse = await getMarketPrices([MarketCoinId.Shimmer], Object.values(MarketCurrency))
-        updateMarketPrices(marketPricesResponse)
+        const marketPricesResponse = await getMarketCoinPrices([MarketCoinId.Shimmer], Object.values(MarketCurrency))
+        updateMarketCoinPrices(marketPricesResponse)
     } catch (error) {
         console.error(error)
     }

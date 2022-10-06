@@ -1,6 +1,5 @@
+import { DEFAULT_MARKET_CURRENCY } from '@core/market'
 import { NetworkProtocol, NetworkType } from '@core/network'
-import { ExchangeRate } from '@core/utils'
-
 import { ProfileType } from '../enums'
 import { IPersistedProfile } from '../interfaces'
 import { PROFILE_VERSION } from './profile-version.constant'
@@ -14,7 +13,7 @@ export const DEFAULT_ACTIVE_PROFILE_VALUE: IPersistedProfile = {
     networkType: NetworkType?.Mainnet,
     lastStrongholdBackupTime: new Date(),
     settings: {
-        currency: ExchangeRate.USD,
+        marketCurrency: DEFAULT_MARKET_CURRENCY,
         lockScreenTimeoutInMinutes: 5,
         hideNetworkStatistics: true,
     },
