@@ -1272,6 +1272,11 @@
             "yes": "Yes",
             "no": "No"
         },
+        "showValueless": {
+            "label": "Show valueless",
+            "yes": "Yes",
+            "no": "No"
+        },
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",

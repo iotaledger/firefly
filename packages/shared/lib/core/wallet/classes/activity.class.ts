@@ -18,7 +18,7 @@ import {
     getTransactionActivityData,
 } from '../utils'
 import { IUTXOInput } from '@iota/types'
-import { containsFunds } from '../utils/transactions/containsFunds'
+import { containsValue } from '../utils/transactions/containsValue'
 import { getAliasActivityData } from '../utils/outputs/getAliasActivityData'
 
 export class Activity implements IActivity {
@@ -29,7 +29,7 @@ export class Activity implements IActivity {
     inclusionState: InclusionState
     inputs: IUTXOInput[]
     isHidden?: boolean
-    containsFunds: boolean
+    containsValue: boolean
     isAssetHidden: boolean
 
     data: ITransactionActivityData | IFoundryActivityData | IAliasActivityData
@@ -41,7 +41,7 @@ export class Activity implements IActivity {
 
         this.type = type
         this.isHidden = false
-        this.containsFunds = containsFunds(processedTransaction, account)
+        this.containsValue = containsValue(processedTransaction, account)
 
         this.transactionId = transactionId
         this.inclusionState = inclusionState

@@ -90,6 +90,13 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
     },
+    showValueless: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.showValueless',
+        selected: BooleanFilterOption.Yes,
+        choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
+    },
 })
 
 export const activitySearchTerm: Writable<string> = writable('')

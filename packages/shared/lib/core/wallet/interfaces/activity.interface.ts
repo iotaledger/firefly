@@ -12,7 +12,7 @@ export interface IActivity {
     inclusionState: InclusionState
     inputs: IUTXOInput[]
     isHidden?: boolean
-    containsFunds: boolean
+    containsValue: boolean
     isAssetHidden: boolean
 
     data: ITransactionActivityData | IFoundryActivityData | IAliasActivityData
