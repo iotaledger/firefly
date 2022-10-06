@@ -53,7 +53,7 @@ export function isVisibleActivity(activity: Activity): boolean {
 function isVisibleWithActiveHiddenFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
-        (activity.isAssetHidden || (!activity.containsValue && !isVisibleWithActiveValuelessFilter(activity, filter)))
+        activity.isAssetHidden
     ) {
         return false
     }
@@ -63,6 +63,7 @@ function isVisibleWithActiveHiddenFilter(activity: Activity, filter: ActivityFil
 function isVisibleWithActiveValuelessFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showValueless.active || filter.showValueless.selected === BooleanFilterOption.No) &&
+        (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
         !activity.containsValue
     ) {
         return false
