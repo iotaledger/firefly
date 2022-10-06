@@ -17,6 +17,7 @@
     import { Platform } from 'shared/lib/platform'
     import { Developer, Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
+    import Collectibles from './collectibles/Collectibles.svelte'
     import TopNavigation from './TopNavigation.svelte'
 
     $: $activeProfile, saveActiveProfile()
@@ -24,6 +25,7 @@
     const tabs = {
         wallet: Wallet,
         settings: Settings,
+        collectibles: Collectibles,
         developer: Developer,
     }
 
