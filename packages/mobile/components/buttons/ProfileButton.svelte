@@ -10,7 +10,6 @@
     export let networkType: NetworkType
     export let networkProtocol: NetworkProtocol
     export let disabled = false
-    export let hidden = false
 
     export let onClick: undefined | ((id: string) => void) = undefined
 
@@ -18,7 +17,6 @@
         onClick && onClick(id)
     }
 
-    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
 
     // @TODO: move to shared lib
@@ -38,7 +36,6 @@
     {disabled}
     class="rounded-xl px-4 py-3 w-full"
     on:click={handleOnClick}
-    class:hidden
     class:darkmode={darkModeEnabled}
 >
     <div class="flex flex-row">
