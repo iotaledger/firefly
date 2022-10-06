@@ -564,6 +564,9 @@
                 "subtitle": "For sending native assets and small IOTA amounts"
             }
         },
+        "alias": {
+            "title": "Confirm alias creation"
+        },
         "password": {
             "title": "Password required",
             "subtitle": "Please provide your password to unlock your wallets",
@@ -935,6 +938,8 @@
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
+        "createAlias": "Create alias",
+        "createAliasDescription": "Create alias output",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPinCode": "Setup PIN code",
@@ -1077,6 +1082,8 @@
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
+        "aliasCreated": "Alias created",
+        "creatingAlias": "Creating Alias",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
@@ -1224,6 +1231,9 @@
         "expirationTime": "Expiration time",
         "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
+        "aliasId": "Alias ID",
+        "governorAddress": "Governor Address",
+        "stateControllerAddress": "State Controller Address",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalanceWithValue": "Available balance: {balance}",
@@ -1644,7 +1654,7 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking",
+        "collectibles": "Collectibles",
         "developer": "Developer"
     },
     "pills": {
@@ -1655,37 +1665,32 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "transferring from",
                     "Confirmed": "transferred from",
                     "Conflicting": "failed to transfer"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "transferring to",
                     "Confirmed": "transferred to",
                     "Conflicting": "failed to transfer"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "receiving from",
                     "Confirmed": "received from",
                     "Conflicting": "failed to receive"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "sending to",
                     "Confirmed": "sent to",
                     "Conflicting": "failed to send"
                 }
             }
         },
-        "minting": {
-            "in": {
-                "Pending": "minting",
-                "Confirmed": "minted",
-                "Conflicting": "failed to mint"
-            },
-            "out": {
+        "foundry": {
+            "minting": {
                 "Pending": "minting",
                 "Confirmed": "minted",
                 "Conflicting": "failed to mint"
@@ -1700,6 +1705,13 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
+        },
+        "alias": {
+            "creation": {
+                "Pending": "creating alias",
+                "Confirmed": "alias created",
+                "Failed": "Failed to create alias"
+            }
         },
         "locked": "locked"
     },

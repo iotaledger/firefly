@@ -8,6 +8,7 @@ import {
     IPartialTransactionActivityDataWithType,
     IProcessedTransaction,
     ITransactionActivityData,
+    IAliasActivityData,
 } from '../interfaces'
 import {
     formatTokenAmountBestMatch,
@@ -17,6 +18,7 @@ import {
     getTransactionActivityData,
 } from '../utils'
 import { IUTXOInput } from '@iota/types'
+import { getAliasActivityData } from '../utils/outputs/getAliasActivityData'
 
 export class Activity implements IActivity {
     id: string
@@ -28,7 +30,7 @@ export class Activity implements IActivity {
     isHidden?: boolean
     isAssetHidden: boolean
 
-    data: ITransactionActivityData | IFoundryActivityData
+    data: ITransactionActivityData | IFoundryActivityData | IAliasActivityData
 
     constructor(processedTransaction: IProcessedTransaction, account: IAccountState) {
         const { outputs, transactionId, time, inclusionState, transactionInputs } = processedTransaction
@@ -43,13 +45,14 @@ export class Activity implements IActivity {
         this.time = time
         this.inputs = transactionInputs
 
-        this.id = transactionId
-
         if (type === ActivityType.Transaction) {
             this.data = getTransactionActivityData(processedTransaction, account)
         } else if (type === ActivityType.Foundry) {
             this.data = getFoundryActivityData(processedTransaction)
+        } else if (type === ActivityType.Alias) {
+            this.data = getAliasActivityData(processedTransaction)
         }
+        this.id = this.data.outputId || transactionId
     }
 
     updateFromPartialActivity(partialActivity: Partial<IActivity>): void {
@@ -88,18 +91,21 @@ export class Activity implements IActivity {
         return null
     }
 
-    getFormattedAmount(signed: boolean): string {
+    getFormattedAmount(signed: boolean = true): string {
+        if (this.data.type === ActivityType.Alias) {
+            return ''
+        }
         const metadata = getAssetFromPersistedAssets(this.data.assetId)?.metadata
         const amount = formatTokenAmountBestMatch(this.data.rawAmount, metadata, 2)
         if (this.data.type === ActivityType.Transaction) {
-            return `${this.data.direction !== ActivityDirection.In && signed ? '- ' : ''}${amount}`
+            return `${this.data.direction !== ActivityDirection.Incoming && signed ? '- ' : ''}${amount}`
         } else {
             return amount
         }
     }
 
     getFiatAmount(fiatPrice?: number, exchangeRate?: number): string {
-        if (fiatPrice && exchangeRate) {
+        if (fiatPrice && exchangeRate && this.data.type !== ActivityType.Alias) {
             const fiatValue = formatCurrency(convertToFiat(this.data.rawAmount, fiatPrice, exchangeRate))
             return fiatValue ? fiatValue : ''
         } else {
