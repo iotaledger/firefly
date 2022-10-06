@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Platform } from '@lib/platform'
-    import { PIN_LENGTH } from '@lib/utils'
+    import { PINCODE_LENGTH } from '@core/utils'
     import { HTMLButtonType, ButtonSize } from 'shared/components/Button.svelte'
 
     let currentPincode = ''
@@ -20,10 +20,10 @@
         if (currentPincode && newPincode && confirmedPincode) {
             reset()
 
-            if (newPincode.length !== PIN_LENGTH) {
+            if (newPincode.length !== PINCODE_LENGTH) {
                 newPincodeError = localize('error.pincode.length', {
                     values: {
-                        length: PIN_LENGTH,
+                        length: PINCODE_LENGTH,
                     },
                 })
             } else if (newPincode !== confirmedPincode) {

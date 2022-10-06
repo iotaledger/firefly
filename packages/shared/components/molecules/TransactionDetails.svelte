@@ -22,7 +22,7 @@
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
     import { truncateString } from '@lib/helpers'
-    import { setClipboard } from '@lib/utils'
+    import { setClipboard } from '@core/utils'
     import { time } from '@core/app'
 
     export let asset: IPersistedAsset

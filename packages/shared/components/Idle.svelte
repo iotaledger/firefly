@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { activeProfile, logout } from '@core/profile'
-    import { debounce } from 'shared/lib/utils'
+    import { debounce } from '@core/utils'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
     import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/time'

@@ -18,7 +18,7 @@
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import { setClipboard } from '@lib/utils'
+    import { setClipboard } from '@core/utils'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
     import { onMount } from 'svelte'

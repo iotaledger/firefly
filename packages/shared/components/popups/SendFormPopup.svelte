@@ -5,7 +5,7 @@
     import { Button, Text, RecipientInput, AssetAmountInput, OptionalInput } from 'shared/components'
     import { FontWeight } from 'shared/components/Text.svelte'
     import { closePopup, openPopup } from '@lib/popup'
-    import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
+    import { getByteLengthOfString } from '@core/utils'
 
     let { asset, amount, unit, recipient, metadata, tag } = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput

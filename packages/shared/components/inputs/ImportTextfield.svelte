@@ -3,7 +3,7 @@
     import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
     import { verifyMnemonic } from '@core/profile-manager'
-    import { debounce } from '@lib/utils'
+    import { debounce } from '@core/utils'
     import { Mnemonic } from '../../lib/contexts/onboarding'
 
     enum Type {

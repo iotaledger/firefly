@@ -13,7 +13,7 @@
     import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ProfileType } from '@core/profile'
     import { storageProtectionSetupRouter } from '@core/router'
-    import { validatePinFormat } from '@lib/utils'
+    import { isValidPincode } from '@core/utils'
     import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let busy = false
@@ -30,7 +30,7 @@
     $: setPinInput, (setPinInputError = '')
     $: confirmPinInput, (confirmPinInputError = '')
     $: arePinInputsMatching = setPinInput === confirmPinInput
-    $: arePinInputsValid = validatePinFormat(setPinInput) && validatePinFormat(confirmPinInput)
+    $: arePinInputsValid = isValidPincode(setPinInput) && isValidPincode(confirmPinInput)
     $: if (arePinInputsValid && !arePinInputsMatching) {
         confirmPinInputError = localize('error.pincode.match')
     } else {

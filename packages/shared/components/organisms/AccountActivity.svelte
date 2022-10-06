@@ -11,9 +11,8 @@
     import { ActivityTile, Text, TextInput, TogglableButton, Filter } from 'shared/components'
     import { FontWeight } from 'shared/components/Text.svelte'
     import features from 'shared/features/features'
-    import { debounce } from 'shared/lib/utils'
+    import { debounce, getMonthYear } from '@core/utils'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { getMonthYear } from '@lib/utils'
 
     let searchActive = false
     let inputElement: HTMLInputElement

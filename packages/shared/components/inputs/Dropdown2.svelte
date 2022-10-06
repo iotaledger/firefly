@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Icon, Text, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
-    import { isNumberLetterOrPunctuation } from '@lib/utils/isNumberLetterOrPunctuation'
+    import { isNumberLetterOrPunctuation } from '@core/utils'
 
     export let value: string
     export let label: string
@@ -142,7 +142,7 @@
 >
     <div
         class="selection relative flex flex-row space-x-0 pl-1 pb-1.5 items-end w-full whitespace-nowrap
-    bg-white dark:bg-gray-800 
+    bg-white dark:bg-gray-800
             {hasFocus ? '-mr-1 pr-1' : 'pr-0'}
             {items.length > 1 ? 'cursor-pointer' : ''}
             {dropdown
@@ -172,7 +172,7 @@
     {/if}
     <nav
         class:active={dropdown}
-        class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
+        class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left
         bg-white dark:bg-gray-800
             border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700"
     >
@@ -180,7 +180,7 @@
             {#each items as item}
                 <button
                     class="relative flex items-center p-2 pl-1 w-full whitespace-nowrap
-                        {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
+                        {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-600 dark:focus:bg-opacity-20"
                     id={item[valueKey]}

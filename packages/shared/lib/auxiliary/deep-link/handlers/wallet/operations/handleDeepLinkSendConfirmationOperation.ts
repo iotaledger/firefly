@@ -20,8 +20,7 @@ import {
     UnknownAssetError,
 } from '../../../errors'
 import { getAmountFromSearchParam } from '../../../utils'
-import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
-import { isStringTrue } from '@core/utils'
+import { isStringTrue, getByteLengthOfString } from '@core/utils'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)

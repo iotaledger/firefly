@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { setClipboard } from 'shared/lib/utils'
+    import { setClipboard } from '@core/utils'
     import Box from './Box.svelte'
     import { Text, Tooltip } from 'shared/components'
     import { localize } from '@core/i18n'

@@ -2,7 +2,7 @@
     import { Error, Icon, Text } from 'shared/components'
     import { createEventDispatcher, onMount } from 'svelte'
     import { mobile, PlatformOption, platform } from '@core/app'
-    import { validatePinFormat, PIN_LENGTH } from '@lib/utils'
+    import { isValidPincode, PINCODE_LENGTH } from '@core/utils'
 
     const dispatch = createEventDispatcher()
     const isAndroid = $platform === PlatformOption.Android
@@ -16,14 +16,14 @@
     export let error: string
     export let label: string
 
-    let inputs = new Array(PIN_LENGTH)
+    let inputs = new Array(PINCODE_LENGTH)
 
     $: {
         if (!value) {
-            inputs = new Array(PIN_LENGTH)
+            inputs = new Array(PINCODE_LENGTH)
         }
     }
-    $: value.length === PIN_LENGTH && dispatch('filled')
+    $: value.length === PINCODE_LENGTH && dispatch('filled')
 
     let root: HTMLElement
     const inputElements: HTMLElement[] = []
@@ -42,7 +42,7 @@
 
     export function resetAndFocus(): void {
         if (!disabled) {
-            inputs = new Array(PIN_LENGTH)
+            inputs = new Array(PINCODE_LENGTH)
             selectFirstEmpty()
         } else {
             setTimeout(resetAndFocus, 100)
@@ -50,8 +50,8 @@
     }
 
     function selectFirstEmpty(): void {
-        for (let j = 0; j < PIN_LENGTH; j++) {
-            if (!inputs[j] || j === PIN_LENGTH - 1) {
+        for (let j = 0; j < PINCODE_LENGTH; j++) {
+            if (!inputs[j] || j === PINCODE_LENGTH - 1) {
                 inputElements[j].focus()
                 return
             }
@@ -67,8 +67,8 @@
     function handleBackspace(): void {
         // Search for the last child with a value
         // and remove it
-        for (let j = 1; j <= PIN_LENGTH; j++) {
-            if (j === PIN_LENGTH || !inputs[j]) {
+        for (let j = 1; j <= PINCODE_LENGTH; j++) {
+            if (j === PINCODE_LENGTH || !inputs[j]) {
                 inputs[j - 1] = ''
                 inputElements[j - 1].focus()
                 break
@@ -82,7 +82,7 @@
         if (event.key === KEYBOARD.BACKSPACE) {
             handleBackspace()
         } else if (event.key === KEYBOARD.ENTER) {
-            if (validatePinFormat(inputs.join(''))) {
+            if (isValidPincode(inputs.join(''))) {
                 dispatch('submit')
             }
         } else if (event.key === KEYBOARD.TAB) {
@@ -94,10 +94,10 @@
             if (regex.test(event.key)) {
                 // Search from the first child to find the first
                 // empty value and start filling from there
-                for (let j = 0; j < PIN_LENGTH; j++) {
+                for (let j = 0; j < PINCODE_LENGTH; j++) {
                     if (!inputs[j]) {
                         inputs[j] = event.key
-                        if (j < PIN_LENGTH - 1) {
+                        if (j < PINCODE_LENGTH - 1) {
                             inputElements[j + 1].focus()
                         }
                         break
@@ -135,7 +135,7 @@
         <Text type="p" secondary classes="mb-1">{label}</Text>
     {/if}
     <pin-input
-        style="--pin-input-size: {PIN_LENGTH}"
+        style="--pin-input-size: {PINCODE_LENGTH}"
         class={`flex items-center justify-between w-full relative z-0 rounded-xl border border-solid
             bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700
             ${smaller ? 'h-14 pl-6 pr-4' : 'h-20 pl-12 pr-8'}`}

@@ -1,5 +1,5 @@
 import { appSettings } from '@core/app'
-import { generateRandomId } from 'shared/lib/utils'
+import { generateRandomId } from '@core/utils'
 import { get, writable } from 'svelte/store'
 import { Platform } from './platform'
 import { NotificationData, NotificationType } from './typings/notification'

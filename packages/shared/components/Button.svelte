@@ -22,7 +22,7 @@
     import { Icon, Spinner } from 'shared/components'
     import { onMount } from 'svelte'
     import { appSettings } from '@core/app'
-    import { bindEvents } from '@lib/utils'
+    import { bindEvents } from '@core/utils'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Event } from '@lib/typings/events'
 
