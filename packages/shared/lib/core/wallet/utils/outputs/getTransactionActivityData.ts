@@ -16,7 +16,6 @@ import {
     getTagFromOutput,
     isOutputAsync,
     isSubjectInternal,
-    outputIdFromTransactionData,
     getSenderFromTransaction,
     getSenderFromInputs,
     getMainTransactionOutputFromTransaction,
@@ -29,13 +28,14 @@ export function getTransactionActivityData(
 ): ITransactionActivityData {
     const { outputs, transactionId, isIncoming, detailedTransactionInputs, claimingData } = processedTransaction
 
-    const { output, outputIndex, isSelfTransaction } = getMainTransactionOutputFromTransaction(
+    const { wrappedOutput, isSelfTransaction } = getMainTransactionOutputFromTransaction(
         outputs,
         account.depositAddress,
         isIncoming
     )
-    const outputId = outputIdFromTransactionData(transactionId, outputIndex) // Only required for async transactions e.g. when claimed or to get the full output with `getOutput`
+    const outputId = wrappedOutput.outputId
 
+    const { output } = wrappedOutput
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs
         ? getSenderFromInputs(detailedTransactionInputs)
@@ -44,7 +44,7 @@ export function getTransactionActivityData(
     const subject = isIncoming ? sender : recipient
     const isInternal = isSubjectInternal(subject)
 
-    const direction = isIncoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
+    const direction = isIncoming || isSelfTransaction ? ActivityDirection.Incoming : ActivityDirection.Outgoing
 
     const isAsync = isOutputAsync(output)
     const asyncStatus = isAsync ? ActivityAsyncStatus.Unclaimed : null

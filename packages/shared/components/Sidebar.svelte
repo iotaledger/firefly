@@ -49,6 +49,16 @@
                   },
               ]
             : []),
+        ...(features?.collectibles?.enabled
+            ? [
+                  {
+                      icon: 'collectibles',
+                      label: localize('tabs.collectibles'),
+                      route: DashboardRoute.Collectibles,
+                      onClick: openCollectibles,
+                  },
+              ]
+            : []),
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
@@ -63,6 +73,10 @@
 
     function openWallet() {
         resetWalletRoute()
+    }
+
+    function openCollectibles() {
+        $dashboardRouter.goTo(DashboardRoute.Collectibles)
     }
 
     function openDeveloper() {

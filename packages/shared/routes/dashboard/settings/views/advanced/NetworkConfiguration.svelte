@@ -4,7 +4,7 @@
         addOfficialNodesToClientOptions,
         NetworkHealth,
         networkStatus,
-        NetworkStatusDescription,
+        NETWORK_STATUS_DESCRIPTION,
         NetworkType,
         NETWORK_HEALTH_COLORS,
         nodeInfo,
@@ -59,7 +59,7 @@
                 <p class="text-13 text-{NETWORK_HEALTH_COLORS[$networkStatus.health || 0]}-500">
                     {localize(
                         `views.dashboard.network.${
-                            $networkStatus.description || NetworkStatusDescription[NetworkHealth.Disconnected]
+                            $networkStatus.description || NETWORK_STATUS_DESCRIPTION[NetworkHealth.Disconnected]
                         }`
                     )}
                 </p>

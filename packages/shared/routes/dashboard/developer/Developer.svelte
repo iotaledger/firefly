@@ -4,6 +4,7 @@
     import {
         FaucetRequestButton,
         MintNativeTokenButton,
+        CreateAliasButton,
         Pane,
         RefreshTokenMetadataButton,
         Text,
@@ -24,6 +25,9 @@
                     </Text>
                     {#if features.developerTools.faucet.enabled}
                         <FaucetRequestButton />
+                    {/if}
+                    {#if features.developerTools.alias.enabled}
+                        <CreateAliasButton />
                     {/if}
                     {#if features.developerTools.minting.enabled}
                         <MintNativeTokenButton />

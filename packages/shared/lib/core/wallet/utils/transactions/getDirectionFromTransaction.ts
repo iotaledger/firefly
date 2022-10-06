@@ -10,6 +10,6 @@ export function getDirectionFromTransaction(
 
     const { isSelfTransaction } = getMainTransactionOutputFromTransaction(outputs, accountAddress, isIncoming)
 
-    const direction = isIncoming || isSelfTransaction ? ActivityDirection.In : ActivityDirection.Out
+    const direction = isIncoming || isSelfTransaction ? ActivityDirection.Incoming : ActivityDirection.Outgoing
     return direction
 }

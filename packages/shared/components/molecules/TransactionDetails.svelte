@@ -1,16 +1,14 @@
 <script lang="typescript">
     import {
-        ActivityStatusPill,
+        TransactionActivityStatusPill,
         ActivityAsyncStatusPill,
-        Box,
-        AddressBox,
         KeyValueBox,
-        AccountLabel,
-    } from 'shared/components/atoms'
-    import { AssetIcon, Text, Pill } from 'shared/components'
+        AmountBox,
+        SubjectBox,
+        Pill,
+    } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { FontWeight } from 'shared/components/Text.svelte'
     import {
         formatTokenAmountPrecise,
         ActivityAsyncStatus,
@@ -18,7 +16,7 @@
         Subject,
         InclusionState,
         ActivityDirection,
-        IAsset,
+        IPersistedAsset,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -27,7 +25,7 @@
     import { setClipboard } from '@lib/utils'
     import { time } from '@core/app'
 
-    export let asset: IAsset
+    export let asset: IPersistedAsset
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
@@ -70,11 +68,13 @@
 
     $: formattedSurplus = formatTokenAmountPrecise(Number(surplus) ?? 0, BASE_TOKEN[$activeProfile?.networkProtocol])
 
-    $: localePrefix = `tooltips.transactionDetails.${direction === ActivityDirection.In ? 'incoming' : 'outgoing'}.`
+    $: localePrefix = `tooltips.transactionDetails.${direction}.`
 
     let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {
-        ...(formattedTransactionTime && { transactionTime: { data: formattedTransactionTime } }),
+        ...(transactionTime && {
+            transactionTime: { data: formattedTransactionTime },
+        }),
         ...(metadata && {
             metadata: {
                 data: metadata,
@@ -120,6 +120,12 @@
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
     }
 
+    function handleTransactionIdClick(): void {
+        explorerUrl
+            ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
+            : setClipboard(claimingTransactionId)
+    }
+
     function getDateFormat(date: Date): string {
         try {
             if (date) {
@@ -130,41 +136,20 @@
             } else {
                 return undefined
             }
-        } catch {
+        } catch (error) {
             return undefined
         }
-    }
-
-    function handleTransactionIdClick(): void {
-        explorerUrl
-            ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
-            : setClipboard(claimingTransactionId)
     }
 </script>
 
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
         {#if amount}
-            <transaction-value class="flex flex-col items-center">
-                <div class="flex flex-row space-x-3">
-                    <AssetIcon {asset} />
-                    <div class="flex flex-row flex-wrap justify-center items-baseline space-x-0.1">
-                        <Text type="h1" fontWeight={FontWeight.semibold}>
-                            {amount}
-                        </Text>
-                        {#if unit}
-                            <Text type="h4" classes="ml-1" fontWeight={FontWeight.medium}>{unit}</Text>
-                        {/if}
-                    </div>
-                </div>
-                {#if formattedFiatValue}
-                    <Text fontSize="md" color="gray-600" darkColor="gray-500">{formattedFiatValue}</Text>
-                {/if}
-            </transaction-value>
+            <AmountBox {amount} fiatAmount={formattedFiatValue} {unit} {asset} />
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if inclusionState && direction}
-                <ActivityStatusPill {type} {direction} {isInternal} {inclusionState} />
+                <TransactionActivityStatusPill {type} {direction} {isInternal} {inclusionState} />
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />
@@ -175,20 +160,8 @@
                 </Pill>
             {/if}
         </transaction-status>
-        {#if type === ActivityType.Transaction}
-            {#if subject?.type === 'account'}
-                <Box row clearBackground clearPadding classes="justify-center">
-                    <AccountLabel account={subject.account} />
-                </Box>
-            {:else if subject?.type === 'address'}
-                <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
-            {:else}
-                <Box row clearBackground clearPadding classes="justify-center">
-                    <Text type="pre" fontSize="base" fontWeight={FontWeight.medium}>
-                        {localize('general.unknownAddress')}
-                    </Text>
-                </Box>
-            {/if}
+        {#if subject}
+            <SubjectBox {subject} />
         {/if}
     </main-content>
     {#if Object.entries(detailsList).length > 0}

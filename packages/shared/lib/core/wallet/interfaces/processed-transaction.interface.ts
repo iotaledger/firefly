@@ -1,9 +1,9 @@
-import type { OutputTypes } from '@iota/types'
 import { InclusionState } from '@core/wallet/enums'
 import { IOutputResponse, IUTXOInput } from '@iota/types'
+import { IWrappedOutput } from './wrapped-output.interface'
 
 export interface IProcessedTransaction {
-    outputs: OutputTypes[]
+    outputs: IWrappedOutput[]
     transactionId: string
     isIncoming: boolean
     time: Date

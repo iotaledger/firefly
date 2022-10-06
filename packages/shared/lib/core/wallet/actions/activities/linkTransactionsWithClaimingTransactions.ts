@@ -26,8 +26,8 @@ export function linkTransactionsWithClaimingTransactions(
     for (const transaction of sortedTransactions) {
         const isClaimingTransaction = transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)
         const isIncomingAsyncTransaction =
-            transaction.outputs.some((_output) => isOutputAsync(_output)) &&
-            getDirectionFromTransaction(transaction, account.depositAddress) === ActivityDirection.In
+            transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
+            getDirectionFromTransaction(transaction, account.depositAddress) === ActivityDirection.Incoming
 
         if (isClaimingTransaction) {
             continue
@@ -48,7 +48,7 @@ export function linkTransactionsWithClaimingTransactions(
             }
             resultingTransactions.push(transaction)
         } else if (transaction.isIncoming) {
-            // Incoming transcations can never be claiming transactions
+            // Incoming transactions can never be claiming transactions
             // Even though we specify self transactions as "Direction.In", "incoming" flag is false for them, which is important here,
             // as self transactions are most of the time claiming transactions
             resultingTransactions.push(transaction)
