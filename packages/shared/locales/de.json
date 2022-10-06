@@ -1644,24 +1644,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "übertrage von",
                     "Confirmed": "übertragen von",
                     "Conflicting": "Übertragung fehlgeschlagen"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "übertrage an",
                     "Confirmed": "übertragen zu",
                     "Conflicting": "Übertragung fehlgeschlagen"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "empfange von",
                     "Confirmed": "empfangen von",
                     "Conflicting": "Empfangen fehlgeschlagen"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "senden an",
                     "Confirmed": "gesendet an",
                     "Conflicting": "Senden fehlgeschlagen"
@@ -1669,12 +1669,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "minte",
                 "Confirmed": "gemintet",
                 "Conflicting": "Minten fehlgeschlagen"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "erstelle",
                 "Confirmed": "gemintet",
                 "Conflicting": "Minten fehlgeschlagen"

@@ -47,7 +47,7 @@
     export let busyMessage: string = ''
 
     export let form: string = null
-    export let buttonElement: HTMLButtonElement
+    export let buttonElement: HTMLButtonElement = null
 
     export let events: Event<unknown>[] = []
 

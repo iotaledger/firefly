@@ -1,4 +1,4 @@
 export enum ActivityDirection {
-    In = 'in',
-    Out = 'out',
+    Incoming = 'incoming',
+    Outgoing = 'outgoing',
 }
