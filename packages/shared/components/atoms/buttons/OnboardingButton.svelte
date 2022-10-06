@@ -18,7 +18,6 @@
     const secondaryIcon = 'chevron-right'
     const secondaryIconColor = 'gray-500'
 
-    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
 </script>
 

@@ -5,11 +5,12 @@
     import { fade } from 'svelte/transition'
     import Alert from './Alert.svelte'
 
-    let toasts
     $: toasts = $displayNotifications.map((notification) => ({
         type: notification.type,
         alert: notification.alert,
         message: notification.message,
+        subMessage: notification.subMessage,
+        progress: notification.progress,
         actions: notification.actions.map((action, actionIndex) => ({
             ...action,
             onClick: () => action.callback(notification, actionIndex),
