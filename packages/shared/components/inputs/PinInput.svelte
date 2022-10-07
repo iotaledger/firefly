@@ -7,14 +7,14 @@
     const dispatch = createEventDispatcher()
     const isAndroid = $platform === PlatformOption.Android
 
+    export let value: string
+    export let error: string = ''
+    export let label: string = ''
     export let classes = ''
     export let disabled = false
     export let autofocus = false
     export let glimpse = false
     export let smaller = false
-    export let value: string
-    export let error: string
-    export let label: string
 
     let inputs = new Array(PIN_LENGTH)
 

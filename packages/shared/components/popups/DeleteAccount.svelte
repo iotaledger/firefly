@@ -1,12 +1,11 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text, Error } from 'shared/components'
+    import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { isSoftwareProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { BaseError } from '@core/error'
-    import { ButtonVariant, HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let deleteAccount: (id: string) => Promise<void> = async () => {}
 

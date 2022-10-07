@@ -27,7 +27,7 @@
         ...(hasStorageDeposit && {
             storageDeposit: {
                 data: formattedStorageDeposit,
-                tooltipText: localize('tooltips.transactionDetails.incomingstorageDeposit'),
+                tooltipText: localize('tooltips.transactionDetails.incoming.storageDeposit'),
             },
         }),
         governorAddress: { data: governorAddress, isCopyable: true },

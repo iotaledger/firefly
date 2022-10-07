@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import Input from './Input.svelte'
-    import { FontWeight, TextPropTypes, TextType } from 'shared/components/Text.svelte'
+    import { FontWeight, TextPropTypes, TextType } from 'shared/components'
 
-    export let inputElement: HTMLInputElement
+    export let inputElement: HTMLInputElement = undefined
     export let disabled: boolean = false
     export let hasFocus: boolean = false
     export let isInteger: boolean = false
-    export let value: string
-    export let error: string
+    export let value: string = undefined
+    export let error: string = ''
 
     // Text Props
     export let type = TextType.p

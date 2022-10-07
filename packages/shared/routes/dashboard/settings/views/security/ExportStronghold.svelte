@@ -1,7 +1,6 @@
 <script lang="typescript">
-    import { ExportStrongholdButton, Spinner, Text } from 'shared/components'
+    import { ExportStrongholdButton, Spinner, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { TextType } from 'shared/components/Text.svelte'
 
     let exportBusy = false
     let exportMessage = ''

@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text } from 'shared/components'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { Icon, Text, FontWeight, TextType } from 'shared/components'
 
     export let type: string
     export let message: string

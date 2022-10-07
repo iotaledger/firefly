@@ -2,9 +2,7 @@
     import { selectedAccount } from '@core/account'
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
-    import { QR, Text } from 'shared/components'
-    import { AddressBox } from 'shared/components/atoms'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { QR, Text, FontWeight, AddressBox } from 'shared/components'
 
     let addressBoxElement: AddressBox
 
