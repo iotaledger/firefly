@@ -5,14 +5,19 @@ import { hiddenActivities } from '../stores/hidden-activities.store'
 import { localize } from '@core/i18n'
 import { showAppNotification } from '@lib/notifications'
 import { ActivityType } from '../enums'
+import { activeProfileId } from '@core/profile'
 
 export function rejectActivity(id: string): void {
     const accountIndex = get(selectedAccount).index
     hiddenActivities.update((state) => {
-        if (!state[accountIndex] || !Array.isArray(state[accountIndex].activities)) {
-            state[accountIndex].activities = []
+        const profileId = get(activeProfileId)
+        if (!state[profileId]) {
+            state[profileId] = {}
         }
-        state[accountIndex].activities.push(id)
+        if (!state[profileId][accountIndex] || !Array.isArray(state[accountIndex].activities)) {
+            state[profileId][accountIndex] = []
+        }
+        state[profileId][accountIndex].push(id)
         return state
     })
 
