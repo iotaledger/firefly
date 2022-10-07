@@ -59,16 +59,6 @@
                   },
               ]
             : []),
-        ...(features?.collectibles?.enabled
-            ? [
-                  {
-                      icon: 'work',
-                      label: localize('tabs.collectibles'),
-                      route: DashboardRoute.Collectibles,
-                      onClick: openCollectibles,
-                  },
-              ]
-            : []),
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
