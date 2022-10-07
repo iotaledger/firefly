@@ -10,6 +10,7 @@
         : ''
     $: $loginProgress?.stepMessage, calculatePercentage()
 
+    // @TODO: move to share
     function calculatePercentage(): void {
         const currentStep = $loginProgress?.stepCount
         const totalSteps = Object.keys(LOGIN_STEPS).length

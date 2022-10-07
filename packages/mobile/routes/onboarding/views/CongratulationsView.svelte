@@ -8,6 +8,8 @@
 
     function onContinueClick(): Promise<void> {
         completeOnboardingProcess()
+        // @TODO: Should be called sooner when the App configuration is completed and the
+        // legal has been accepted
         hasCompletedAppSetup.set(true)
         $onboardingRouter.next()
         return Promise.resolve()

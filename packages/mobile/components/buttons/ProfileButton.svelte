@@ -39,7 +39,7 @@
     class:darkmode={darkModeEnabled}
 >
     <div class="flex flex-row">
-        <div on:click={handleOnClick} class="relative">
+        <div class="relative">
             <div class="h-14 w-14 rounded-full bg-blue-500 flex items-center justify-center">
                 <Text type="h5" classes="text-white">{getInitials()}</Text>
             </div>
@@ -47,20 +47,17 @@
                 <NetworkIcon {networkType} {networkProtocol} height={14} width={14} />
             </div>
         </div>
-        <div class="pl-4 my-auto">
-            <span>
-                <Text
-                    type={TextType.p}
-                    color="gray-800"
-                    darkColor="white"
-                    fontSize="14"
-                    fontWeight={FontWeight.semibold}
-                    lineHeight="5"
-                    >{name}
-                </Text>
-            </span>
-        </div>
-        <div class="flex w-full items-center justify-end">
+        <Text
+            type={TextType.p}
+            color="gray-800"
+            darkColor="white"
+            fontSize="14"
+            fontWeight={FontWeight.semibold}
+            lineHeight="5"
+            classes="px-4 my-auto flex-grow text-left truncate"
+            >{name}
+        </Text>
+        <div class="w-4 items-center my-auto">
             <Icon icon="chevron-right" classes="text-gray-500 dark:text-white" />
         </div>
     </div>
