@@ -89,14 +89,11 @@
                     </div>
                 </KeyValueBox>
                 <KeyValueBox keyText={localize('views.collectibles.details.nftType')} valueText={type} />
-                <KeyValueBox valueText={storageDeposit}>
-                    <div slot="key" class="flex items-center mr-4">
-                        <Text fontSize="14" lineHeight="5" color="gray-600" darkColor="gray-500" classes="mr-1">
-                            {localize('views.collectibles.details.storageDeposit')}
-                        </Text>
-                        <Icon icon="info" classes="text-gray-600 dark:text-gray-500 w-4 h-4" />
-                    </div>
-                </KeyValueBox>
+                <KeyValueBox
+                    keyText={localize('views.collectibles.details.storageDeposit')}
+                    tooltipText={localize('views.collectibles.details.storageDepositDescription')}
+                    valueText={storageDeposit}
+                />
             </div>
             <div>
                 <Text type="h3" classes="mb-4">{localize('views.collectibles.details.attributes')}</Text>
@@ -117,7 +114,7 @@
             </div>
         </div>
         <div class="flex w-full space-x-4 self-end mt-auto pt-4">
-            <Button secondary classes="flex-1">{localize('general.viewOnExplorer')}</Button>
+            <Button outline classes="flex-1">{localize('general.viewOnExplorer')}</Button>
             <Button classes="flex-1">{localize('actions.send')}</Button>
         </div>
     </Pane>

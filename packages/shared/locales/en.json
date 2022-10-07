@@ -552,6 +552,7 @@
                 "nftId": "NFT ID",
                 "nftType": "NFT Type",
                 "storageDeposit": "Storage deposit",
+                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
                 "attributes": "Attributes",
                 "menu": {
                     "download": "Download",
