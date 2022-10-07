@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
 
-    export let icon: string
-    export let iconProps: Record<string, unknown>
+    export let icon: string = ''
+    export let iconProps: Record<string, unknown> = undefined
     export let title: string
     export let subtitle = ''
     export let onClick: () => any

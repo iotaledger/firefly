@@ -1,9 +1,8 @@
 <script lang="typescript">
-    import { QR, Text } from 'shared/components'
+    import { QR, Text, FontWeight } from 'shared/components'
     import { AddressBox } from 'shared/components/atoms'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
-    import { FontWeight } from 'shared/components/Text.svelte'
 
     $: receiveAddress = $selectedAccount.meta.publicAddresses[0].address
 </script>

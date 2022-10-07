@@ -3,8 +3,7 @@
 
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
-    import { Button, Text, TextInput } from 'shared/components'
-    import { FontWeight } from '../Text.svelte'
+    import { Button, Text, TextInput, FontWeight, TextType } from 'shared/components'
 
     const PREFIX = process.env.APP_PROTOCOL + '://'
     let url: string = PREFIX
@@ -20,7 +19,7 @@
 </script>
 
 <div class="space-y-6">
-    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
+    <Text type={TextType.h4} fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
         {localize('actions.testDeepLink')}
     </Text>
 

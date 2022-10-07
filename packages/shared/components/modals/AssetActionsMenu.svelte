@@ -14,7 +14,7 @@
     import { updatePopupProps } from '@lib/popup'
     import { HR, MenuItem, Modal } from 'shared/components'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
     export let asset: IAsset
 
     const handleUnverify = () => {

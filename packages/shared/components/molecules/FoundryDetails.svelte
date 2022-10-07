@@ -2,11 +2,10 @@
     import { KeyValueBox, AmountBox, SubjectBox, ActivityInclusionStatusPill } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountPrecise, Subject, ActivityDirection, InclusionState, IPersistedAsset } from '@core/wallet'
+    import { formatTokenAmountPrecise, Subject, InclusionState, IPersistedAsset } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
 
     export let asset: IPersistedAsset
-    export let direction: ActivityDirection
     export let inclusionState: InclusionState
     export let formattedFiatValue: string = null
     export let amount: string = null
@@ -29,7 +28,7 @@
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
-    $: localePrefix = `tooltips.transactionDetails.${direction}.`
+    $: localePrefix = 'tooltips.transactionDetails.incoming.'
 
     let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {

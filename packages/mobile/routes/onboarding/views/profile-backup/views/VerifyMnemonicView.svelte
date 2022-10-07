@@ -4,7 +4,6 @@
     import { RecoveryPhrase } from '../../../../../components'
     import { Icon, Text } from 'shared/components'
     import { english } from '@auxiliary/wordlists'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
     import { Mnemonic, onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
@@ -46,10 +45,8 @@
     }
 
     function handleChoice(word: string): void {
-        if ($mobile) {
-            const wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
-            wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }
+        const wordElement = document.getElementById(`recovery-word-${verifyIndex}`)
+        wordElement?.scrollIntoView({ behavior: 'smooth', block: 'center' })
         verifyRecoveryPhrase[verifyIndex] = word
         if ($onboardingProfile?.mnemonic[verifyIndex] === word) {
             if (verifyIndex === $onboardingProfile?.mnemonic.length - 1) {

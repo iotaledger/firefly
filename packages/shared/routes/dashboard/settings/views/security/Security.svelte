@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { exportStronghold } from '@contexts/settings'
     import { isSoftwareProfile } from '@core/profile'
     import { SecuritySettingsRoute } from '@core/router'
     import { HR } from 'shared/components'
@@ -18,17 +17,13 @@
         { component: DeleteProfile, childRoute: SecuritySettingsRoute.DeleteProfile },
     ]
     const visibleSettings = settings.filter((setting) => features?.settings?.security?.[setting.childRoute]?.enabled)
-
-    const props = {
-        [SecuritySettingsRoute.ChangePassword]: { exportStronghold },
-    }
 </script>
 
 <div>
     {#each visibleSettings as { component, childRoute, requireSoftware }, index}
         {#if !requireSoftware || (requireSoftware && $isSoftwareProfile)}
             <section id={childRoute} class="w-full sm:w-3/4">
-                <svelte:component this={component} {...props[childRoute]} />
+                <svelte:component this={component} />
             </section>
             {#if index < settings.length - 1}
                 <HR classes="pb-5 mt-5 justify-center" />

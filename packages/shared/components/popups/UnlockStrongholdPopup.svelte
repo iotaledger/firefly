@@ -1,11 +1,10 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text } from 'shared/components'
+    import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
-    export let subtitle: string
+    export let subtitle: string = ''
     export let returnPassword = false
 
     export let onSuccess: (..._: any[]) => void = () => {}
