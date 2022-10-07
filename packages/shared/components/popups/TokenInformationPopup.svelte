@@ -1,49 +1,53 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { IActivity, IAsset, unverifyAsset, VerificationStatus, verifyAsset } from '@core/wallet'
-    import { truncateString } from '@lib/helpers'
+    import {
+        TokenStandard,
+        IAsset,
+        setNewTransactionDetails,
+        unverifyAsset,
+        verifyAsset,
+        NotVerifiedStatus,
+        VerifiedStatus,
+    } from '@core/wallet'
     import { openPopup, updatePopupProps } from '@lib/popup'
-    import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox } from 'shared/components'
-    import { FontWeightText } from '../Text.svelte'
+    import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox, FontWeight } from 'shared/components'
 
     export let asset: IAsset
-    export let activity: IActivity
+    export let activityId: string = undefined
 
-    function handleSkip() {
-        unverifyAsset(asset.id)
-        if (activity) {
+    function onSkipClick(): void {
+        unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
+        if (activityId) {
             openPopup({
                 type: 'activityDetails',
-                props: { activity },
+                props: { activityId },
             })
         } else {
             updatePopupProps({
-                asset: { ...asset, verification: VerificationStatus.NotVerified },
+                asset: { ...asset, verification: { verified: false, status: NotVerifiedStatus.Skipped } },
             })
         }
     }
 
-    function handleVerify() {
-        verifyAsset(asset.id)
-        if (activity) {
+    function onVerifyClick(): void {
+        verifyAsset(asset.id, VerifiedStatus.SelfVerified)
+        if (activityId) {
             openPopup({
                 type: 'activityDetails',
-                props: { activity },
+                props: { activityId },
             })
         } else {
             updatePopupProps({
-                asset: { ...asset, verification: VerificationStatus.Verified },
+                asset: { ...asset, verification: { verified: true, status: VerifiedStatus.SelfVerified } },
             })
         }
     }
 
-    function handleSend() {
+    function onSendClick(): void {
+        setNewTransactionDetails({ asset })
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                asset,
-            },
         })
     }
 </script>
@@ -54,27 +58,27 @@
             type="h4"
             fontSize="18"
             lineHeight="6"
-            fontWeight={FontWeightText.semibold}
+            fontWeight={FontWeight.semibold}
             classes="overflow-hidden whitespace-nowrap overflow-ellipsis"
         >
-            {asset?.verification === VerificationStatus.New
+            {asset?.verification?.status === NotVerifiedStatus.New
                 ? localize('popups.tokenInformation.newTokenTitle')
                 : asset?.metadata?.name}
         </Text>
-        {#if asset?.standard === 'IRC30'}
+        {#if asset?.standard === TokenStandard.IRC30}
             <AssetActionsButton {asset} />
         {/if}
     </div>
 
     <div class="space-y-3 flex flex-col items-center justify-center">
-        <AssetIcon {asset} large showVerificationBadge />
-        <Text type="h2" fontWeight={FontWeightText.bold}>
+        <AssetIcon {asset} large showVerifiedBadgeOnly />
+        <Text type="h2" fontWeight={FontWeight.bold}>
             {asset?.metadata?.tickerSymbol ?? asset?.metadata?.unit}
         </Text>
     </div>
 
     <div class="space-y-4 flex flex-col items-center justify-center">
-        {#if asset?.verification !== VerificationStatus.Verified}
+        {#if !asset?.verification?.verified}
             <TextHint warning text={localize('popups.tokenInformation.verificationWarning')} />
         {/if}
         <div class="w-full flex flex-col space-y-2">
@@ -88,8 +92,8 @@
             />
             <KeyValueBox
                 keyText={localize('popups.tokenInformation.tokenMetadata.tokenId')}
-                valueText={truncateString(asset?.id, 18, 18, 3)}
-                isCopyable={asset?.standard === 'IRC30'}
+                valueText={asset?.id}
+                isCopyable={asset?.standard === TokenStandard.IRC30}
                 copyValue={asset?.id}
             />
             {#if asset?.metadata?.url}
@@ -103,43 +107,17 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        {#if asset?.verification === VerificationStatus.New}
-            <Button secondary classes="w-full" onClick={handleSkip}>
+        {#if asset?.verification?.status === NotVerifiedStatus.New}
+            <Button outline classes="w-full" onClick={onSkipClick}>
                 {localize('actions.skip')}
             </Button>
-            <Button autofocus classes="w-full" onClick={handleVerify}>
+            <Button classes="w-full" onClick={onVerifyClick}>
                 {localize('popups.tokenInformation.buttons.verifyToken')}
             </Button>
         {:else}
-            <Button classes="w-full" onClick={handleSend}>
+            <Button classes="w-full" onClick={onSendClick}>
                 {localize('actions.send')}
             </Button>
         {/if}
     </div>
 </div>
-
-<style type="text/css">
-    #star8 {
-        @apply bg-gray-600;
-        width: 10px;
-        height: 10px;
-        position: relative;
-        -webkit-transform: rotate(20deg);
-        -moz-transform: rotate(20deg);
-        -ms-transform: rotate(20deg);
-        -o-transform: rotate(20eg);
-    }
-    #star8:before {
-        @apply bg-gray-600;
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 10px;
-        width: 10px;
-        -webkit-transform: rotate(135deg);
-        -moz-transform: rotate(135deg);
-        -ms-transform: rotate(135deg);
-        -o-transform: rotate(135deg);
-    }
-</style>

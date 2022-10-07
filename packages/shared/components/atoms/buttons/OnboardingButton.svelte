@@ -1,24 +1,23 @@
 <script lang="typescript">
     import { appSettings } from '@core/app'
-    import { Icon, Text } from 'shared/components'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
+    import { Icon, Spinner, Text, FontWeight, TextType } from 'shared/components'
 
-    export let primaryText = ''
-    export let secondaryText = ''
-    export let icon
-    export let iconColor = 'blue-500'
-    export let iconHeight: string
-    export let iconWidth: string
-    export let disabled = false
-    export let hidden = false
-    export let classes = ''
+    export let primaryText: string = ''
+    export let secondaryText: string = ''
+    export let icon: string = ''
+    export let iconColor: string = 'blue-500'
+    export let iconHeight: string = undefined
+    export let iconWidth: string = undefined
+    export let busy: boolean = false
+    export let disabled: boolean = false
+    export let hidden: boolean = false
+    export let classes: string = ''
 
     export let onClick: () => unknown
 
     const secondaryIcon = 'chevron-right'
     const secondaryIconColor = 'gray-500'
 
-    let darkModeEnabled
     $: darkModeEnabled = $appSettings.darkMode
 </script>
 
@@ -49,7 +48,7 @@
                     color="gray-800"
                     darkColor="white"
                     fontSize="14"
-                    fontWeight={FontWeightText.semibold}
+                    fontWeight={FontWeight.semibold}
                     lineHeight="5"
                     >{primaryText}
                 </Text>
@@ -59,7 +58,7 @@
                         color="gray-600"
                         darkColor="gray-400"
                         fontSize="12"
-                        fontWeight={FontWeightText.normal}
+                        fontWeight={FontWeight.normal}
                         lineHeight="3.5"
                         >{secondaryText}
                     </Text>
@@ -68,7 +67,11 @@
         </div>
         {#if secondaryIcon && !disabled}
             <div class="col-span-1 col-end-13 h-full flex justify-center items-center justify-items-center">
-                <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
+                {#if busy}
+                    <Spinner busy width="20" height="20" color="gray-500" darkColor="gray-500" />
+                {:else}
+                    <Icon icon={secondaryIcon} classes="text-{secondaryIconColor}" />
+                {/if}
             </div>
         {/if}
     </div>

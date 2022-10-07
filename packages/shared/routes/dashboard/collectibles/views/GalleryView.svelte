@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Text, Button } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
+    import { TextType, FontWeight } from 'shared/components/Text.svelte'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
 
     function onClick() {
@@ -15,3 +15,4 @@
 <Text type={TextType.h3}>Collectibles</Text>
 <Button {onClick}>Details</Button>
 <Button onClick={onClick2}>Collection</Button>
+<Text type={TextType.h3} fontWeight={FontWeight.semibold}>Collectibles</Text>

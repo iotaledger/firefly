@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@lib/notifications'
     import { openPopup } from '@lib/popup'
-    import { Button } from 'shared/components'
+    import { Button, ButtonSize } from 'shared/components'
 
     export let isBusy = false
     export let message = ''
@@ -42,7 +42,7 @@
         message = ''
 
         openPopup({
-            type: 'password',
+            type: 'unlockStronghold',
             props: {
                 onSuccess: (password: string) => {
                     isBusy = true
@@ -56,6 +56,12 @@
     }
 </script>
 
-<Button medium inlineStyle="min-width: 156px;" onClick={handleExportClick} disabled={isBusy} {...$$restProps}>
+<Button
+    size={ButtonSize.Medium}
+    inlineStyle="min-width: 156px;"
+    onClick={handleExportClick}
+    disabled={isBusy}
+    {...$$restProps}
+>
     {overrideTitle || localize('actions.export')}
 </Button>

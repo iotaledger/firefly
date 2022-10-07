@@ -46,7 +46,7 @@ jobs:
         needs: [setup]
         strategy:
             matrix:
-                os: [ubuntu-18.04, macos-11, windows-2019]
+                os: [ubuntu-20.04, macos-11, windows-2019]
             fail-fast: false
         env:
             VERSION: ${{ needs.setup.outputs.version }}
@@ -58,7 +58,7 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v1
               with:
-                  node-version: 14.x
+                  node-version: 16.4.2
 
             - name: Set up Python 2.x
               uses: actions/setup-python@v2
@@ -92,7 +92,7 @@ jobs:
                   sudo apt install -y gcc-multilib g++-multilib build-essential libssl-dev rpm libsecret-1-dev \
                     software-properties-common apt-transport-https libudev-dev libusb-1.0-0-dev \
                     llvm-dev libclang-dev clang
-              if: matrix.os == 'ubuntu-18.04'
+              if: matrix.os == 'ubuntu-20.04'
 
             - name: Enable verbose output for electron-builder (macOS/Linux)
               run: echo "DEBUG=electron-builder" >> $GITHUB_ENV
@@ -146,7 +146,7 @@ jobs:
             - name: Build Electron app (Linux)
               run: yarn compile:${STAGE}:linux
               working-directory: packages/desktop
-              if: matrix.os == 'ubuntu-18.04'
+              if: matrix.os == 'ubuntu-20.04'
 
             - name: Import GPG key (Linux)
               run: |
@@ -155,19 +155,19 @@ jobs:
               env:
                   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
                   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-              if: matrix.os == 'ubuntu-18.04'
+              if: matrix.os == 'ubuntu-20.04'
 
             - name: Sign AppImage (Linux)
               run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-desktop*.AppImage
               working-directory: packages/desktop/out
               env:
                   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-              if: matrix.os == 'ubuntu-18.04'
+              if: matrix.os == 'ubuntu-20.04'
 
             - name: Compute checksums (Linux)
               run: for i in `ls | grep 'firefly-desktop*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
-              if: matrix.os == 'ubuntu-18.04'
+              if: matrix.os == 'ubuntu-20.04'
 
             - name: Compute checksums (macOS)
               run: for i in `ls | grep 'firefly-desktop*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
@@ -217,7 +217,7 @@ jobs:
             - name: Downloading artifacts
               uses: actions/download-artifact@v2
               with:
-                  name: firefly-desktop-ubuntu-18.04
+                  name: firefly-desktop-ubuntu-20.04
                   path: assets
 
             - name: Preparing release body
@@ -250,7 +250,7 @@ jobs:
                   release_name: Firefly Desktop ${{ env.RELEASE_NAME }}
                   body_path: packages/desktop/CHANGELOG.md
                   draft: true
-                  prerelease: ${{ env.STAGE != 'prod' }}
+                  prerelease: true
 
             - name: Upload macOS binary asset
               uses: actions/upload-release-asset@v1
@@ -294,21 +294,3 @@ jobs:
 
             - name: Listing artifacts
               run: ls -al assets
-
-            - name: Upload to S3
-              if: env.STAGE == 'prod'
-              run: |
-                  aws s3 cp assets/ s3://iotaledger-files/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
-                  aws s3 cp assets/ s3://iotaledger-files/firefly/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
-              env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  AWS_DEFAULT_REGION: eu-central-1
-
-            - name: Invalidate CloudFront cache for auto-update files
-              if: env.STAGE == 'prod'
-              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/latest*"
-              env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  AWS_DEFAULT_REGION: eu-central-1

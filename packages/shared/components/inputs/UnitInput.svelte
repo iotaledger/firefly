@@ -38,11 +38,3 @@
 </script>
 
 <Dropdown2 bind:isFocused value={unit} {items} {onSelect} contentWidth small />
-
-<style type="text/scss">
-    .selection {
-        min-height: 36px;
-        @apply border-solid;
-        @apply border;
-    }
-</style>

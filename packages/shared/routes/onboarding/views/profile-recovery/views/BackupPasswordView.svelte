@@ -4,22 +4,58 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileRecoveryRouter } from '@core/router'
-    import { restoreBackupFromStrongholdFile, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        CannotRestoreWithMismatchedCoinTypeError,
+        createShimmerClaimingProfileManager,
+        destroyShimmerClaimingProfileManager,
+        initialiseProfileManagerFromOnboardingProfile,
+        onboardingProfile,
+        ProfileSetupType,
+        restoreBackupForShimmerClaimingProfileManager,
+        restoreBackupFromStrongholdFile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
+    import { showAppNotification } from '@lib/notifications'
+    import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
 
     export let error = ''
     export let busy = false
 
     let strongholdPassword = ''
+    $: strongholdPassword, (error = '')
 
     async function onContinueClick(): Promise<void> {
         if (strongholdPassword) {
+            busy = true
             try {
-                await restoreBackupFromStrongholdFile(strongholdPassword)
+                if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
+                    await restoreBackupForShimmerClaimingProfileManager(strongholdPassword)
+                } else {
+                    await restoreBackupFromStrongholdFile(strongholdPassword)
+                }
+
                 updateOnboardingProfile({ strongholdPassword })
                 $profileRecoveryRouter.next()
             } catch (err) {
-                console.error(err)
-                error = localize('error.password.incorrect')
+                if (err instanceof CannotRestoreWithMismatchedCoinTypeError) {
+                    await initialiseProfileManagerFromOnboardingProfile(false)
+
+                    if ($onboardingProfile?.setupType === ProfileSetupType.Claimed) {
+                        await destroyShimmerClaimingProfileManager()
+                        await createShimmerClaimingProfileManager()
+                    }
+                } else if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
+                    error = localize('error.password.incorrect')
+                } else {
+                    console.error(err)
+                    showAppNotification({
+                        type: 'error',
+                        alert: true,
+                        message: localize('error.global.generic'),
+                    })
+                }
+            } finally {
+                busy = false
             }
         }
     }
@@ -66,7 +102,13 @@
         />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={strongholdPassword.length === 0 || busy} onClick={onContinueClick}>
+        <Button
+            classes="flex-1"
+            disabled={strongholdPassword.length === 0 || busy}
+            isBusy={busy}
+            busyMessage={`${localize('actions.importing')}...`}
+            onClick={onContinueClick}
+        >
             {localize('actions.continue')}
         </Button>
     </div>

@@ -1,51 +1,29 @@
-import { selectedAccountId } from '@core/account'
-import { syncBalance } from '@core/account/actions/syncBalance'
 import { selectedAccount } from '@core/account/stores/selected-account.store'
-import { BaseError } from '@core/error'
-import { localize } from '@core/i18n'
-import { showAppNotification } from '@lib/notifications'
-import { checkStronghold } from '@lib/stronghold'
+import { handleError } from '@core/error/handlers/handleError'
+import { handleLedgerError } from '@core/ledger'
+import { activeProfile, ProfileType } from '@core/profile'
 import { get } from 'svelte/store'
-import { Activity } from '../classes'
-import { ActivityAsyncStatus } from '../enums'
-import { addClaimedActivity, updateActivityByActivityId } from '../stores'
+import { ActivityType } from '../enums'
+import { ITransactionActivityData } from '../interfaces'
+import { updateActivityDataByActivityId } from '../stores'
 
-export async function claimActivity(activity: Activity): Promise<void> {
-    await checkStronghold()
+export async function claimActivity(activityId: string, data: ITransactionActivityData): Promise<void> {
     const account = get(selectedAccount)
+    const _activeProfile = get(activeProfile)
     try {
-        updateActivityByActivityId(account.id, activity.id, { isClaiming: true })
-        const results = await account.claimOutputs([activity.outputId])
-        if (results.length > 0) {
-            const transactionId = results[0].transactionId
-            addClaimedActivity(account.id, activity.transactionId, {
-                id: activity.id,
-                claimingTransactionId: transactionId,
-                claimedTimestamp: new Date().getTime(),
-            })
-            updateActivityByActivityId(account.id, activity.id, {
-                isClaimed: true,
-                claimingTransactionId: transactionId,
-                asyncStatus: ActivityAsyncStatus.Claimed,
-                claimedDate: new Date(),
-            })
-
-            syncBalance(get(selectedAccountId))
-
-            showAppNotification({
-                type: 'info',
-                message: localize('notifications.claimed.success'),
-            })
-        }
+        updateActivityDataByActivityId(account.id, activityId, { type: ActivityType.Transaction, isClaiming: true })
+        const result = await account.claimOutputs([data.outputId])
+        const transactionId = result.transactionId
+        updateActivityDataByActivityId(account.id, activityId, {
+            type: ActivityType.Transaction,
+            claimingTransactionId: transactionId,
+        })
     } catch (err) {
-        if (!err.message) {
-            new BaseError({
-                message: localize('notifications.claimed.error'),
-                logToConsole: true,
-                showNotification: true,
-            })
+        if (_activeProfile.type === ProfileType.Ledger) {
+            handleLedgerError(err.error)
+        } else {
+            handleError(err)
         }
-    } finally {
-        updateActivityByActivityId(account.id, activity.id, { isClaiming: false })
+        updateActivityDataByActivityId(account.id, activityId, { type: ActivityType.Transaction, isClaiming: false })
     }
 }

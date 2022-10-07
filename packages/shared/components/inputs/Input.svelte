@@ -1,27 +1,27 @@
 <script lang="typescript">
-    import { onMount, createEventDispatcher } from 'svelte'
-    import { Text, InputContainer } from 'shared/components'
+    import { onMount, createEventDispatcher, tick } from 'svelte'
+    import { Text, InputContainer, TextPropTypes, TextType } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
-    import { TextPropTypes, TextType } from 'shared/components/Text.svelte'
 
-    export let value = ''
-    export let classes = ''
-    export let style: string
-    export let label: string
-    export let placeholder: string
+    export let value: string = ''
+    export let classes: string = ''
+    export let containerClasses: string = ''
+    export let style: string = ''
+    export let label: string = ''
+    export let placeholder: string = ''
     export let type = 'text'
-    export let error: string
-    export let maxlength: number
+    export let error: string = ''
+    export let maxlength: number = undefined
     export let float = false
     export let integer = false
     export let autofocus = false
     export let submitHandler = (): void => {}
     export let disabled = false
-    export let maxDecimals: number
+    export let maxDecimals: number = undefined
     export let disableContextMenu = false
     export let capsLockWarning = false
-    export let inputElement: HTMLInputElement
+    export let inputElement: HTMLInputElement = undefined
     export let clearBackground = false
     export let clearPadding = false
     export let clearBorder = false
@@ -119,8 +119,9 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (autofocus) {
+            await tick()
             inputElement.focus()
         }
     })
@@ -130,13 +131,12 @@
     <div class="w-full relative">
         <InputContainer
             bind:inputElement
-            {disabled}
             {error}
             isFocused={hasFocus}
             {clearBackground}
             {clearPadding}
             {clearBorder}
-            classes="relative"
+            classes="relative {containerClasses}"
         >
             <Text {...textProps} classes="flex w-full">
                 <input
@@ -168,6 +168,7 @@
                 <floating-label {disabled} class:hasFocus class:floating-active={value && label}>{label}</floating-label
                 >
             {/if}
+            <slot />
         </InputContainer>
     </div>
     {#if capsLockWarning && hasFocus && capsLockOn}
@@ -182,59 +183,16 @@
         @apply m-0;
     }
     input {
-        font-feature-settings: 'calt' off; // disables 'x' formatting while surrounded by numbers
-
         &::placeholder {
             @apply text-gray-500;
-        }
-
-        &:disabled {
-            &,
-            + floating-label.floating-active {
-                @apply pointer-events-none;
-                @apply opacity-50;
-            }
         }
 
         &.floating-active {
             @apply pt-2;
             @apply -mb-2;
         }
-
-        + floating-label {
-            transform: translateY(3px);
-            @apply block;
-            @apply text-gray-500;
-            @apply text-11;
-            @apply leading-120;
-            @apply overflow-hidden;
-            @apply opacity-0;
-            @apply pointer-events-none;
-            @apply absolute;
-            @apply left-3;
-            @apply select-none;
-            @apply whitespace-nowrap;
-            @apply w-auto;
-            @apply transition-none;
-            top: 8px;
-        }
-        &:not(:disabled) {
-            + floating-label {
-                &.floating-active {
-                    @apply transition-all;
-                    @apply ease-out;
-                    @apply opacity-100;
-                    transform: none;
-                }
-            }
-        }
-
-        &:focus {
-            + floating-label {
-                @apply text-blue-500;
-            }
-        }
     }
+
     floating-label {
         transform: translateY(3px);
         @apply block;
@@ -245,7 +203,7 @@
         @apply opacity-0;
         @apply pointer-events-none;
         @apply absolute;
-        @apply left-3;
+        @apply left-4;
         @apply select-none;
         @apply whitespace-nowrap;
         @apply w-auto;

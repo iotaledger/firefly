@@ -1,7 +1,6 @@
 import { IAppSettings, IAppVersionDetails } from '@core/app'
 import { IError } from '@core/error'
 import { IDeepLinkManager } from '@auxiliary/deep-link'
-import { ILedger } from './ledger'
 import { INotificationManager } from './notificationManager'
 import { IPincodeManager } from './pincodeManager'
 import { EventMap } from './events'
@@ -13,11 +12,8 @@ export enum Platforms {
 }
 
 export interface IPlatform {
-    ledger: ILedger
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
-    exportMigrationLog(sourcePath: string, defaultFileName: string): Promise<boolean | null>
-    exportLedgerMigrationLog(content: unknown, defaultFileName: string): Promise<boolean | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string> | string
@@ -37,6 +33,7 @@ export interface IPlatform {
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
     hookErrorLogger(logger: (error: IError) => void): void
+    copyFile(sourceFilePath: string, destinationFilePath: string): Promise<void>
 
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined
@@ -53,7 +50,6 @@ export interface IPlatform {
     unhandledException(title: string, err: IError | unknown): Promise<void>
 
     // SeedVault API methods
-    importLegacySeed(buffer: unknown, password: string): Promise<string>
     validateSeedVault(buffer: unknown): Promise<boolean>
 
     onEvent<K extends keyof EventMap>(eventName: K, callback: (param: EventMap[K]) => void)

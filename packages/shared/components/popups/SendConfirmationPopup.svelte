@@ -1,79 +1,101 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, ExpirationTimePicker, KeyValueBox, Text, Error, Spinner, Toggle } from 'shared/components'
+    import { get } from 'svelte/store'
+    import {
+        Button,
+        ExpirationTimePicker,
+        KeyValueBox,
+        Text,
+        TextHint,
+        Error,
+        Toggle,
+        FontWeight,
+        TextType,
+    } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { FontWeightText, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
         ActivityType,
         getOutputOptions,
-        IAsset,
         InclusionState,
-        Subject,
         sendOutput,
         validateSendConfirmation,
-        generateRawAmount,
+        convertToRawAmount,
         selectedAccountAssets,
         getStorageDepositFromOutput,
+        DEFAULT_TRANSACTION_OPTIONS,
+        newTransactionDetails,
+        updateNewTransactionDetails,
     } from '@core/wallet'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency, parseCurrency } from '@lib/currency'
+    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
-    import { isTransferring } from '@lib/wallet'
-    import { checkStronghold } from '@lib/stronghold'
+    import { ledgerPreparedOutput } from '@core/ledger'
 
-    export let asset: IAsset
-    export let amount = '0'
-    export let unit: string
-    export let recipient: Subject
-    export let internal = false
-    export let metadata: string
-    export let tag: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
-    export let giftStorageDeposit = false
-    export let disableToggleGift = false
+    export let disableBack = false
 
-    let expirationDate: Date
+    const { asset, amount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift, surplus } =
+        get(newTransactionDetails)
+    let { expirationDate, giftStorageDeposit } = get(newTransactionDetails)
+
     let storageDeposit = 0
     let giftedStorageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
+    let expirationTimePicker: ExpirationTimePicker
 
-    $: asset = asset ?? $selectedAccountAssets?.baseCoin
-    $: rawAmount = asset?.metadata
-        ? generateRawAmount(String(parseCurrency(amount)), unit, asset.metadata)
-        : parseCurrency(amount)
+    const rawAmount = convertToRawAmount(amount, unit, asset.metadata)
+    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
+
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
-    $: internal = recipient.type === 'account'
-    $: isNativeToken = asset?.id !== $selectedAccountAssets?.baseCoin?.id
+    $: isInternal = recipient.type === 'account'
+    $: expirationTimePicker?.setNull(giftStorageDeposit)
+    $: hideGiftToggle = asset?.id === $selectedAccountAssets?.baseCoin?.id
+    $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
+    $: isTransferring = $selectedAccount.isTransferring
 
-    $: $$props, expirationDate, rawAmount, void _prepareOutput()
+    function refreshSendConfirmationState(): void {
+        error = null
+        void _prepareOutput()
+    }
 
-    $: expirationDate, (error = null)
     $: formattedFiatValue =
         formatCurrency(
             convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
-        ) || '-'
+        ) || ''
 
     $: transactionDetails = {
         asset,
-        direction: ActivityDirection.Out,
+        direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
         metadata,
-        rawAmount,
         storageDeposit: giftStorageDeposit ? giftedStorageDeposit : storageDeposit,
         subject: recipient,
         amount,
         tag,
         unit,
-        type: internal ? ActivityType.InternalTransaction : ActivityType.ExternalTransaction,
+        isInternal,
+        surplus,
+        type: ActivityType.Transaction,
+    }
+
+    function getInitialExpirationDate(): ExpirationTime {
+        if (expirationDate) {
+            return ExpirationTime.Custom
+        } else if (storageDeposit && !giftStorageDeposit) {
+            return ExpirationTime.OneDay
+        } else {
+            return ExpirationTime.None
+        }
     }
 
     async function _prepareOutput(): Promise<void> {
@@ -84,22 +106,34 @@
             metadata,
             tag,
             asset,
-            giftStorageDeposit
+            giftStorageDeposit,
+            surplus
         )
-        preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, {
-            remainderValueStrategy: {
-                strategy: 'ReuseAddress',
-                value: null,
-            },
-        })
+        preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+        setStorageDeposit(preparedOutput, Number(surplus))
+
+        if (!initialExpirationDate) {
+            initialExpirationDate = getInitialExpirationDate()
+        }
+    }
+
+    function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
         storageDeposit = _storageDeposit
-        giftedStorageDeposit = _giftedStorageDeposit
+
+        // Only giftedStorageDeposit needs adjusting, since that is derived
+        // from the amount property instead of the unlock condition
+        if (!surplus) {
+            giftedStorageDeposit = _giftedStorageDeposit
+        } else if (surplus >= _giftedStorageDeposit) {
+            giftedStorageDeposit = 0
+        } else {
+            giftedStorageDeposit = _giftedStorageDeposit - surplus
+        }
     }
 
-    async function validateAndSendOutput(): Promise<void> {
-        validateSendConfirmation(outputOptions, preparedOutput)
+    async function sendOutputAndClosePopup(): Promise<void> {
         await sendOutput(preparedOutput)
         closePopup()
     }
@@ -111,9 +145,12 @@
     async function onConfirm(): Promise<void> {
         error = null
         try {
-            if ($isSoftwareProfile) {
-                await checkStronghold(validateAndSendOutput, true)
+            validateSendConfirmation(outputOptions, preparedOutput)
+            updateNewTransactionDetails({ expirationDate, giftStorageDeposit, surplus })
+            if ($isActiveLedgerProfile) {
+                ledgerPreparedOutput.set(preparedOutput)
             }
+            await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             if (!error) {
                 error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
@@ -126,15 +163,11 @@
         openPopup({
             type: 'sendForm',
             overflow: true,
-            props: {
-                asset,
-                amount,
-                unit,
-                recipient,
-                metadata,
-                tag,
-            },
         })
+    }
+
+    function onCancel(): void {
+        closePopup()
     }
 
     onMount(async () => {
@@ -149,12 +182,12 @@
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type={TextType.h3} fontWeight={FontWeightText.semibold} classes="text-left"
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
         >{localize('popups.transaction.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
         <TransactionDetails {...transactionDetails} {formattedFiatValue} />
-        {#if isNativeToken}
+        {#if !hideGiftToggle}
             <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                 <Toggle
                     slot="value"
@@ -165,12 +198,14 @@
                 />
             </KeyValueBox>
         {/if}
-        {#if storageDeposit !== undefined}
+        {#if initialExpirationDate !== undefined}
             <KeyValueBox keyText={localize('general.expirationTime')}>
                 <ExpirationTimePicker
                     slot="value"
+                    bind:this={expirationTimePicker}
                     bind:value={expirationDate}
-                    initialSelected={storageDeposit ? '1day' : 'none'}
+                    initialSelected={initialExpirationDate}
+                    disabled={disableChangeExpiration}
                 />
             </KeyValueBox>
         {/if}
@@ -178,16 +213,22 @@
             <Error error={error?.message} />
         {/if}
     </div>
+    {#if surplus}
+        <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
+    {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={onBack} disabled={$isTransferring}
-            >{localize('actions.back')}</Button
-        >
-        <Button autofocus classes="w-full" onClick={onConfirm} disabled={$isTransferring}>
-            {#if $isTransferring}
-                <Spinner busy classes="justify-center break-all" />
-            {:else}
-                {localize('actions.confirm')}
-            {/if}
+        {#if disableBack}
+            <Button classes="w-full" outline onClick={onCancel} disabled={isTransferring}>
+                {localize('actions.cancel')}
+            </Button>
+        {:else}
+            <Button classes="w-full" outline onClick={onBack} disabled={isTransferring}>
+                {localize('actions.back')}
+            </Button>
+        {/if}
+
+        <Button classes="w-full" onClick={onConfirm} disabled={isTransferring} isBusy={isTransferring}>
+            {localize('actions.confirm')}
         </Button>
     </popup-buttons>
 </send-confirmation-popup>

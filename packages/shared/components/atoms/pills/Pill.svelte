@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { FontWeightText } from 'shared/components/Text.svelte'
-    import { Text } from 'shared/components'
+    import { Text, FontWeight } from 'shared/components'
 
     export let data = ''
     export let textColor = 'gray-800'
@@ -13,7 +12,7 @@
 <Text
     type="p"
     smaller
-    fontWeight={FontWeightText.semibold}
+    fontWeight={FontWeight.semibold}
     color={textColor}
     darkColor={darkTextColor || textColor}
     classes="px-2.5 py-1 rounded-2xl

@@ -24,17 +24,8 @@
                             ? formatProtocolName(NetworkProtocol.IOTA)
                             : formatProtocolName(NetworkProtocol.Shimmer),
                     },
-                })}</Text
-            >
-            <Text type="p" secondary
-                >{localize('views.onboarding.appSetup.welcome.body', {
-                    values: {
-                        protocol: features?.onboarding?.iota?.enabled
-                            ? formatProtocolName(NetworkProtocol.IOTA)
-                            : formatProtocolName(NetworkProtocol.Shimmer),
-                    },
-                })}</Text
-            >
+                })}
+            </Text>
         </div>
     </div>
     <div slot="leftpane__action">
@@ -44,21 +35,3 @@
         <Animation classes="setup-anim-aspect-ratio" animation="welcome-desktop" />
     </div>
 </OnboardingLayout>
-
-<style type="text/scss">
-    .languages {
-        max-height: calc(100vh - 100vw - 150px);
-        @screen md {
-            max-height: inherit;
-        }
-        button {
-            &.active {
-                @apply bg-blue-500;
-                @apply bg-opacity-10;
-                :global(p) {
-                    @apply text-blue-500;
-                }
-            }
-        }
-    }
-</style>

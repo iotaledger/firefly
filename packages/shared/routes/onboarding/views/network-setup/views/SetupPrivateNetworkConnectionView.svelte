@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingLayout, Text, Button, Spinner, NodeConfigurationForm } from 'shared/components'
+    import { Animation, OnboardingLayout, Text, Button, NodeConfigurationForm, HTMLButtonType } from 'shared/components'
     import {
         cleanupOnboardingProfileManager,
         initialiseProfileManagerFromOnboardingProfile,
@@ -73,19 +73,17 @@
     <div slot="leftpane__action">
         <Button
             disabled={!node?.url || isBusy}
-            type="submit"
+            type={HTMLButtonType.Submit}
             form="node-configuration-form"
             classes="w-full"
             onClick={onContinueClick}
+            {isBusy}
+            busyMessage={localize('actions.addingNode')}
         >
-            {#if isBusy}
-                <Spinner busy={isBusy} message={localize('actions.addingNode')} classes="justify-center" />
-            {:else}
-                {localize('actions.continue')}
-            {/if}
+            {localize('actions.continue')}
         </Button>
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="onboarding-protocol-desktop" />
+        <Animation classes="setup-anim-aspect-ratio" animation="onboarding-custom-network-desktop" />
     </div>
 </OnboardingLayout>

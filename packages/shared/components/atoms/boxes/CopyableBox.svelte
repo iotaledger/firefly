@@ -1,15 +1,15 @@
 <script lang="typescript">
     import { setClipboard } from 'shared/lib/utils'
     import Box from './Box.svelte'
-    import { Text, Tooltip } from 'shared/components'
+    import { Text, Tooltip, FontWeight } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { FontWeightText } from 'shared/components/Text.svelte'
     import { onDestroy } from 'svelte'
 
     export let value = ''
     export let isCopyable = true
     export let clearPadding = false
-    export let offset: number
+    export let clearBoxPadding = false
+    export let offset: number = undefined
     export let classes = ''
 
     let tooltipAnchor
@@ -37,7 +37,7 @@
         on:click={onClick}
         class="{clearPadding ? '' : 'w-full'} {isCopyable ? 'cursor-pointer' : 'cursor-default'}"
     >
-        <Box {clearPadding} {...$$restProps} {classes}>
+        <Box clearPadding={clearBoxPadding} {...$$restProps} {classes}>
             <slot />
         </Box>
     </button>
@@ -51,7 +51,7 @@
         backgroundColor="green-600"
         borderColor="green-600"
     >
-        <Text type="p" fontSize="14" fontWeight={FontWeightText.semibold} color="white"
+        <Text type="p" fontSize="14" fontWeight={FontWeight.semibold} color="white"
             >{localize('general.copiedToClipboard')}</Text
         >
     </Tooltip>

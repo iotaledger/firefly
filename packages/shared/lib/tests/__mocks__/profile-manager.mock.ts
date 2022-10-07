@@ -7,7 +7,7 @@ import type {
     ClientOptions,
     EventType,
     WalletEvent,
-    LedgerStatus,
+    LedgerNanoStatus,
 } from '@iota/wallet'
 
 import { IAccount } from '@core/account'
@@ -92,7 +92,7 @@ export class ProfileManagerMock implements IProfileManager {
                     pruningIndex: 34629,
                 },
                 protocol: {
-                    protocolVersion: 2,
+                    version: 2,
                     networkName: 'alphanet-5',
                     bech32Hrp: 'rms',
                     minPowScore: 1000,
@@ -124,7 +124,7 @@ export class ProfileManagerMock implements IProfileManager {
         })
     }
 
-    getLedgerStatus(): Promise<LedgerStatus> {
+    getLedgerNanoStatus(): Promise<LedgerNanoStatus> {
         return new Promise((resolve) =>
             resolve({
                 connected: true,
@@ -146,7 +146,12 @@ export class ProfileManagerMock implements IProfileManager {
         return
     }
 
-    recoverAccounts(accountGapLimit: number, addressGapLimit: number): Promise<IAccount[]> {
+    recoverAccounts(
+        accountStartIndex: number,
+        accountGapLimit: number,
+        addressGapLimit: number,
+        syncOptions: AccountSyncOptions
+    ): Promise<IAccount[]> {
         return Promise.resolve([])
     }
 

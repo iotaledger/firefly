@@ -1,22 +1,23 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Animation, Button, ButtonRadio, Dropdown, OnboardingLayout, Text } from 'shared/components'
-    import { appSettings, AppTheme, mobile, shouldBeDarkMode } from '@core/app'
-    import { Locale, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
+    import { appSettings, AppTheme, hasCompletedAppSetup, mobile, shouldBeDarkMode } from '@core/app'
+    import { localize, setLanguage, SUPPORTED_LOCALES } from '@core/i18n'
     import { appSetupRouter } from '@core/router'
     import type { DropdownChoice } from '@core/utils'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
-        shouldUseDeveloperProfile,
+        shouldBeDeveloperProfile,
+        updateOnboardingProfile,
     } from '../../../../../lib/contexts/onboarding'
+    import { NetworkProtocol, NetworkType } from '@core/network'
 
     /**
      * NOTE: It is necessary to use locale directly rather than the
      * localize function because this components must be reactive towards
      * the language.
      */
-    export let locale: Locale
 
     const BLINK_SEGMENTS = [[1, 200]]
     const SWITCH_SEGMENTS = [
@@ -43,6 +44,7 @@
     }
 
     function onContinueClick(): void {
+        hasCompletedAppSetup.set(true)
         $appSetupRouter.next()
     }
 
@@ -52,17 +54,23 @@
 
     onMount(() => {
         _clonedVariable = appTheme
-        initialiseOnboardingProfile($onboardingProfile?.isDeveloperProfile ?? shouldUseDeveloperProfile())
+        initialiseOnboardingProfile(
+            $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
+            NetworkProtocol.Shimmer
+        )
+        if (!shouldBeDeveloperProfile()) {
+            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
+        }
     })
 </script>
 
 <OnboardingLayout {onBackClick}>
     <div slot="title">
-        <Text type="h2">{locale('views.onboarding.appSetup.languageAndAppearance.title')}</Text>
+        <Text type="h2">{localize('views.onboarding.appSetup.languageAndAppearance.title')}</Text>
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-8'}
-            >{locale('views.onboarding.appSetup.languageAndAppearance.body')}</Text
+            >{localize('views.onboarding.appSetup.languageAndAppearance.body')}</Text
         >
         {#if $mobile}
             <div class="languages flex flex-wrap space-y-2 overflow-y-auto">
@@ -78,27 +86,29 @@
             </div>
         {:else}
             <div class="mb-8 flex flex-col">
-                <Text type="p" secondary classes="mb-2" smaller>{locale('general.language')}</Text>
+                <Text type="p" secondary classes="mb-2" smaller>{localize('general.language')}</Text>
                 <Dropdown
                     sortItems
                     onSelect={onLanguageSelectionClick}
                     value={SUPPORTED_LOCALES[$appSettings.language]}
                     items={languageList}
+                    enableTyping
                 />
             </div>
         {/if}
 
-        <Text type="p" secondary classes="mb-2" smaller>{locale('general.appearance')}</Text>
+        <Text type="p" secondary classes="mb-2" smaller>{localize('general.appearance')}</Text>
         <ButtonRadio icon="theme-light" value={'light'} bind:group={appTheme}>
-            {locale('general.lightTheme')}
+            {localize('general.lightTheme')}
         </ButtonRadio>
-        <ButtonRadio icon="theme-dark" value={'dark'} bind:group={appTheme}>{locale('general.darkTheme')}</ButtonRadio>
+        <ButtonRadio icon="theme-dark" value={'dark'} bind:group={appTheme}>{localize('general.darkTheme')}</ButtonRadio
+        >
         <ButtonRadio icon="settings" value={'system'} bind:group={appTheme}>
-            {locale('general.systemTheme')}
+            {localize('general.systemTheme')}
         </ButtonRadio>
     </div>
     <div slot="leftpane__action">
-        <Button onClick={onContinueClick} classes="w-full">{locale('actions.continue')}</Button>
+        <Button onClick={onContinueClick} classes="w-full">{localize('actions.continue')}</Button>
     </div>
     <div
         slot="rightpane"

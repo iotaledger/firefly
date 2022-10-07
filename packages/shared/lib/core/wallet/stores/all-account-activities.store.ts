@@ -1,11 +1,11 @@
 import { writable } from 'svelte/store'
 import { Activity } from '../classes'
-import { IActivity } from '../interfaces'
+import { IActivity, IPartialFoundryActivityDataWithType, IPartialTransactionActivityDataWithType } from '../interfaces'
 
 export const allAccountActivities = writable<Activity[][]>([])
 
 export function addEmptyAccountActivitiesToAllAccountActivities(accountId: string): void {
-    replaceAccountActivitiesInAllAccountActivities(accountId, [])
+    setAccountActivitiesInAllAccountActivities(accountId, [])
 }
 
 export function addActivityToAccountActivitiesInAllAccountActivities(accountId: string, activity: Activity): void {
@@ -18,9 +18,9 @@ export function addActivityToAccountActivitiesInAllAccountActivities(accountId: 
     })
 }
 
-export function replaceAccountActivitiesInAllAccountActivities(accountId: string, accountActivities: Activity[]): void {
+export function setAccountActivitiesInAllAccountActivities(accountId: string, accountActivities: Activity[]): void {
     allAccountActivities.update((state) => {
-        state[accountId] = accountActivities
+        state[Number(accountId)] = accountActivities
         return state
     })
 }
@@ -31,7 +31,7 @@ export function updateActivityByTransactionId(
     partialActivity: Partial<IActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[accountId]?.find((_activity) => _activity.id === transactionId)
+        const activity = state[Number(accountId)]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
             activity.updateFromPartialActivity(partialActivity)
@@ -46,10 +46,40 @@ export function updateActivityByActivityId(
     partialActivity: Partial<IActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[accountId]?.find((_activity) => _activity.id === activityId)
+        const activity = state[Number(accountId)]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
             activity.updateFromPartialActivity(partialActivity)
+        }
+        return state
+    })
+}
+
+export function updateActivityDataByActivityId(
+    accountId: string,
+    activityId: string,
+    partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
+): void {
+    allAccountActivities.update((state) => {
+        const activity = state[Number(accountId)]?.find((_activity) => _activity.id === activityId)
+
+        if (activity) {
+            activity.updateDataFromPartialActivity(partialData)
+        }
+        return state
+    })
+}
+
+export function updateActivityDataByTransactionId(
+    accountId: string,
+    transactionId: string,
+    partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
+): void {
+    allAccountActivities.update((state) => {
+        const activity = state[Number(accountId)]?.find((_activity) => _activity.transactionId === transactionId)
+
+        if (activity) {
+            activity.updateDataFromPartialActivity(partialData)
         }
         return state
     })

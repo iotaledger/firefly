@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { FontWeightText } from 'shared/components/Text.svelte'
-    import { Text, CopyableBox } from 'shared/components'
+    import { Text, CopyableBox, FontWeight } from 'shared/components'
 
     export let address = ''
     export let isCopyable = false
@@ -14,11 +13,11 @@
 </script>
 
 {#if address}
-    <CopyableBox bind:this={copyableBoxElement} col {isCopyable} value={address} {...$$restProps}>
-        <Text type="pre" {fontSize} fontWeight={FontWeightText.medium}>
+    <CopyableBox bind:this={copyableBoxElement} col {isCopyable} value={address} clearBoxPadding {...$$restProps}>
+        <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
             {address.slice(0, address.length / 2)}
         </Text>
-        <Text type="pre" {fontSize} fontWeight={FontWeightText.medium}>
+        <Text type="pre" {fontSize} fontWeight={FontWeight.medium}>
             {address.slice(address.length / 2)}
         </Text>
     </CopyableBox>

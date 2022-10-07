@@ -1,102 +1,193 @@
 {
     "views": {
-        "onboarding1": {
-            "title": "Send, Receive & Manage your {protocol} tokens",
-            "body": "Firefly는 IOTA 공식 지갑 소프트웨어입니다."
-        },
-        "legal": {
-            "title": "개인정보 보호 정책 & 이용 약관",
-            "body": "개인정보 보호 정책과 서비스 약관을 검토바랍니다.",
-            "checkbox": "개인정보 보호 정책과 서비스 약관을 읽었으며 이에 동의합니다"
-        },
-        "crashReporting": {
-            "title": "충돌 보고",
-            "body": "오류 또는 충돌이 발생할 때 진단 데이터를 자동으로 보내면 개발자가 Firefly를 개선하는 데 도움이 됩니다.",
-            "checkbox": "IOTA 재단으로 충돌 보고서 전송"
-        },
-        "languageAndAppearance": {
-            "title": "Language & appearance",
-            "body": "Choose your language and theme"
-        },
-        "profile": {
-            "title": "Create your {protocol} profile",
-            "profileName": "프로필 이름",
-            "body1": "여러 사용자 프로필을 만들어 지갑을 구성하고 보안성을 높일 수 있습니다.",
-            "body2": {
-                "first": "이제 여러분의 첫번째 프로필 이름부터 만들어볼까요.",
-                "nonFirst": "이제 여러분의 프로필 이름부터 만들어볼까요."
-            },
-            "addMore": "나중에 다른 프로필도 더 추가할 수 있습니다.",
-            "advancedOptions": "고급 설정",
-            "developer": {
-                "label": "개발자 프로필",
-                "info": "devnet 혹은 사설 네트워크로 연결"
-            }
-        },
-        "setup": {
-            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-            "chrysalisTitle": "Chrysalis 네트워크 업데이트",
-            "chrysalisBody": "2021년 4월 21일부터 토큰을 새로운 Chrysalis 네트워크로 마이그레이션할 수 있습니다. 보유하고 있는 토큰을 서둘러 마이그레이션할 것을 권장합니다.",
-            "learnMore": "마이그레이션에 대해 알아보기"
-        },
-        "secure": {
-            "title": "지갑을 안전하게 보관하기",
-            "body1": "복원 양식 PDF 파일을 받아 인쇄하세요.",
-            "body2": "복구 키트를 작성하고 안전하게 보관하면 항상 지갑을 복구 할 수 있습니다."
-        },
-        "create": {
-            "title": "지갑 만들기",
-            "body": "새로운 지갑을 생성하세요. 일반 소프트웨어 지갑을 선택할 수도 있고, Ledger 장치를 가지고 있는 분들은 하드웨어 지갑을 설정할 수도 있습니다.",
-            "softwareAccount": {
-                "title": "Create a software wallet",
-                "description": "Provides a Stronghold file and recovery phrase"
-            },
-            "ledgerAccount": {
-                "title": "Create a hardware wallet",
-                "description": "Ledger Nano S 또는 Nano X 필요"
-            }
-        },
-        "protocol": {
-            "title": "Choose protocol",
-            "body": "Set the protocol for your profile",
-            "iota": "IOTA Mainnet",
-            "shimmer": "Staging network for IOTA Mainnet"
-        },
-        "network": {
-            "title": "Choose network",
-            "body": "Set the network for your profile",
-            "iota": {
-                "mainnet": {
-                    "title": "Mainnet",
-                    "body": "IOTA Mainnet"
+        "onboarding": {
+            "appSetup": {
+                "welcome": {
+                    "title": "Send, Receive & Manage your {protocol} tokens",
+                    "body": "Firefly is the official wallet software for {protocol}."
                 },
-                "devnet": {
-                    "title": "Devnet",
-                    "body": "Developer network for IOTA"
+                "legal": {
+                    "title": "Privacy Policy & Terms of Service",
+                    "body": "Please review the Privacy Policy and Terms of Service.",
+                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with active TIPS"
+                "languageAndAppearance": {
+                    "title": "Language & appearance",
+                    "body": "Choose your language and theme."
                 }
             },
-            "shimmer": {
-                "mainnet": {
-                    "title": "Shimmer",
-                    "body": "Staging network for IOTA"
+            "networkSetup": {
+                "chooseProtocol": {
+                    "title": "Choose protocol",
+                    "body": "Set the protocol for your profile.",
+                    "iota": "Default IOTA network",
+                    "shimmer": "Experimental IOTA staging network"
                 },
-                "devnet": {
-                    "title": "Shimmer Beta",
-                    "body": "Beta network for Shimmer"
+                "chooseNetwork": {
+                    "title": "Choose network",
+                    "body": "Set the network for your profile.",
+                    "iota": {
+                        "mainnet": {
+                            "title": "Mainnet",
+                            "body": "IOTA Mainnet"
+                        },
+                        "devnet": {
+                            "title": "Devnet",
+                            "body": "Developer network for IOTA"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with active TIPs"
+                        }
+                    },
+                    "shimmer": {
+                        "mainnet": {
+                            "title": "Shimmer",
+                            "body": "Staging network for IOTA"
+                        },
+                        "devnet": {
+                            "title": "Testnet",
+                            "body": "Public beta network for Shimmer"
+                        },
+                        "private-net": {
+                            "title": "Private net",
+                            "body": "Support for custom networks with draft TIPs"
+                        }
+                    }
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with draft TIPS"
+                "setupPrivateNetworkConnection": {
+                    "title": "Connect to a private network",
+                    "body": "Fill the form with the node information and connect to a private network."
                 }
+            },
+            "profileSetup": {
+                "setup": {
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "body": "Select the appropriate method to set up your {protocol} profile."
+                },
+                "setupNew": {
+                    "title": "Create a profile",
+                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "softwareAccount": {
+                        "title": "Create a software profile",
+                        "description": "Provides a Stronghold file and recovery phrase"
+                    },
+                    "ledgerAccount": {
+                        "title": "Create a hardware profile",
+                        "description": "Ledger Nano S or Nano X required"
+                    }
+                },
+                "setupRecovered": {
+                    "title": "Recover {protocol} profile",
+                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
+                    "importMnemonic": "Use recovery phrase",
+                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
+                    "importFile": "Use Stronghold backup",
+                    "importFileDescription": "Import your Stronghold backup file",
+                    "importLedger": "Use Ledger device",
+                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                },
+                "setupClaimed": {
+                    "title": "Claim Shimmer staking rewards",
+                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                },
+                "enterName": {
+                    "title": "Create your {protocol} profile",
+                    "profileName": "Profile name",
+                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "body2": {
+                        "first": "For now, let's start with your first profile name.",
+                        "nonFirst": "For now, let's start with your profile name."
+                    },
+                    "addMore": "You can add more profiles later."
+                }
+            },
+            "strongholdSetup": {
+                "setupStrongholdPassword": {
+                    "title": "Create a password",
+                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                }
+            },
+            "storageProtectionSetup": {
+                "setupPinProtection": {
+                    "title": "Set up PIN code",
+                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+                    "body2": "Use numbers only"
+                }
+            },
+            "profileBackup": {
+                "backupMnemonic": {
+                    "title": "Back up your recovery phrase",
+                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                },
+                "viewMnemonic": {
+                    "title": "Recovery phrase",
+                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+                    "body2": "Keep this private and safely stored.",
+                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+                    "revealRecoveryPhrase": "Reveal recovery phrase",
+                    "hideRecoveryPhrase": "Hide recovery phrase"
+                },
+                "verifyMnemonic": {
+                    "title": "Verify recovery phrase",
+                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
+                    "word": "Word",
+                    "verified": "Recovery phrase verified",
+                    "verifiedBody": "Remember to keep it private and safely stored."
+                },
+                "backupStronghold": {
+                    "title": "Back up to a Stronghold file",
+                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
+                    "body2": "Reasons why digital backups are important:",
+                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
+                    "reason2": "Import your wallets on other devices",
+                    "reason3": "Recover your full transaction history"
+                }
+            },
+            "profileRecovery": {
+                "importMnemonicPhrase": {
+                    "title": "Enter your recovery phrase",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
+                    "enter": "Enter your secret recovery phrase",
+                    "phraseDetected": "24 word recovery phrase detected"
+                },
+                "importStrongholdBackup": {
+                    "title": "Import your Stronghold backup",
+                    "body": "Import a Stronghold backup file to restore your profile."
+                },
+                "backupPassword": {
+                    "body1": "Please enter your backup password.",
+                    "body2": "This is the password you set when you first created your backup."
+                },
+                "success": {
+                    "title": "You have successfully recovered your backup",
+                    "body": "You can now set up your new profile."
+                }
+            },
+            "shimmerClaiming": {
+                "claimRewards": {
+                    "title": "Your Shimmer staking rewards",
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
+                },
+                "success": {
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
+                    "totalRewards": "Total rewards"
+                }
+            },
+            "congratulations": {
+                "title": "Profile setup almost complete...",
+                "fundsMigrated": "Funds migrated",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
+                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
+                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
+                "exportMigration": "Export migration log and finish setup"
             }
-        },
-        "customNetwork": {
-            "title": "Connect to a custom network",
-            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "Ledger 연결",
@@ -107,117 +198,10 @@
             "videoGuide": "Ledger 마이그레이션 비디오 가이드"
         },
         "ledgerInstallationGuide": {
-            "title": "필수 Ledger 앱을 설치하셨습니까?",
-            "body1": "진행하기 전에 반드시 Ledger Live를 통해 {legacy} 앱과 새로운 IOTA 앱을 찾고 설치해야 합니다.",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Ledger 펌웨어가 최신인지 반드시 확인하세요. 이전에 설치했던 모든 앱들을 전부 최신 버전으로 업데이트 해야합니다.",
-            "action": "이미 앱을 설치했습니다"
-        },
-        "password": {
-            "title": "비밀번호 만들기",
-            "body1": "잔고를 보호하기 위해서는 강력한 비밀번호가 필요합니다. 여러 단어의 조합을 사용하고, 흔한 문장, 이름, 날짜 등은 피해 주세요.",
-            "body2": "비밀번호를 복원 양식에 기록하는 것을 권장합니다."
-        },
-        "protect": {
-            "title": "Protect your wallet",
-            "body1": "본인 만 프로필을 입력 할 수 있도록 로그인 PIN을 설정합니다.",
-            "body2": "PIN을 안전하게 보관하세요!"
-        },
-        "setupPin": {
-            "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
-        },
-        "backup": {
-            "title": "지갑 백업",
-            "body1": "이제 복원 문구를 확인합니다. 이 문구를 복원 양식에 기록해 주세요.",
-            "body2": "복원 문구는 다른 사람에게 알려주지 마세요. 이 복원 문구가 있으면 어디에서나 토큰에 접근할 수 있습니다.",
-            "body3": "복원 문구를 잃어버리게 될 경우 지갑 잔고를 잃어버릴 수도 있습니다."
-        },
-        "recoveryPhrase": {
-            "title": "복원 문구",
-            "body1": "복원 양식에 아래에 보여지는 단어들을 순서에 맞게 정확히 기록하세요.",
-            "body2": "이 문구를 안전하게 보관하세요.",
-            "body3": "수기로 기록된 백업을 남겨 놓는 것이 중요합니다. 컴퓨터와 전자 파일은 오류를 발생시킬 수 있습니다.",
-            "revealRecoveryPhrase": "복원 문구 보기",
-            "hideRecoveryPhrase": "복원 문구 숨기기"
-        },
-        "verifyRecoveryPhrase": {
-            "title": "복원 문구 확인",
-            "body": "복원 문구를 정확히 기록하였는지 확인합니다. 아래에서 단어를 순서에 맞게 선택해 주세요.",
-            "word": "단어",
-            "verified": "복원 문구가 확인되었습니다",
-            "verifiedBody": "복원 문구는 항상 안전하게 보관하도록 하세요."
-        },
-        "backupWallet": {
-            "title": "Stronghold 파일로 백업",
-            "body1": "지갑을 Stronghold 파일로 백업하려면 비밀번호를 입력하십시오. 비밀번호는 백업을 암호화하는 데 사용됩니다.",
-            "body2": "아래와 같은 이유 때문에 전자 백업도 중요합니다.",
-            "reason1": "복원 문구를 입력하지 않고 지갑을 쉽게 복구할 수 있습니다.",
-            "reason2": "다른 기기에서 지갑 가져 오기",
-            "reason3": "전체 거래 내역을 복구할 수 있습니다."
-        },
-        "recoveryPhraseSaved": {
-            "title": "백업 성공",
-            "body": "Stronghold로 지갑을 백업하였습니다."
-        },
-        "claimRewards": {
-            "title": "Your Shimmer staking rewards",
-            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
-        },
-        "congratulations": {
-            "title": "지갑 설정 완료",
-            "fundsMigrated": "이전 된 자금",
-            "body": "이제 새로 설정된 지갑을 사용할 수 있습니다.",
-            "softwareMigratedBody": "여러분의 자금을 새로운 네트워크로 무사히 이동시켰습니다.",
-            "fireflyLedgerBody": "Ledger 계정이 성공적으로 복원되어 이제 계속할 수 있습니다.",
-            "trinityLedgerBody": "여러분의 Ledger를 새로운 네트워크로 무사히 이동시켰습니다.",
-            "exportMigration": "마이그레이션 로그 내보내기 및 설정 완료"
-        },
-        "import": {
-            "title": {
-                "iota": "Recover or migrate IOTA funds",
-                "shimmer": "Recover Shimmer profile"
-            },
-            "body": {
-                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
-            },
-            "importSeed": "81 자 시드가 있습니다",
-            "importSeedDescription": "시드를 입력하고 자금을 Chrysalis로 마이그레이션",
-            "importMnemonic": "Use recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase",
-            "importFile": {
-                "iota": "Use backup file",
-                "shimmer": "Use Stronghold backup file"
-            },
-            "importFileDescription": {
-                "iota": "Upload a Seedvault or Stronghold file",
-                "shimmer": "Upload Stronghold file"
-            },
-            "importLedger": "Use Ledger hardware device",
-            "importLedgerDescription": {
-                "iota": "Restore or migrate a Ledger profile",
-                "shimmer": "Restore using Nano S or Nano X devices"
-            }
-        },
-        "importFromText": {
-            "seed": {
-                "title": "마이그레이션을 시작하려면 시드를 입력해주세요",
-                "body": "시드는 81개의 글자로 이루어져 있습니다. 시드가 있으면 기존에 사용하던 Trinity 지갑을 복구할 수 있습니다.",
-                "enter": "시드를 입력해주세요"
-            },
-            "mnemonic": {
-                "title": "복원 문구를 입력해주세요",
-                "body": "복원 문구는 띄어쓰기와 24개의 소문자 단어로 이루어진 문장입니다. 복원 문구가 있으면 기존에 사용하던 Firefly 지갑을 복구할 수 있습니다.",
-                "enter": "복원 문구를 입력해주세요"
-            },
-            "seedDetected": "81자의 시드 감지됨",
-            "phraseDetected": "24개 단어로 된 복원 문구 감지",
-            "checksum": "체크섬"
-        },
-        "importFromFile": {
-            "title": "백업 파일로부터 지갑 복원",
-            "body": "지갑을 복구하는 데 사용할 백업 파일을 불러옵니다. Stronghold (.stronghold) 또는 Trinity 지갑의 SeedVault (.kdbx) 파일을 선택해 주세요."
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "여러분의 Ledger를 복원하거나 마이그레이션하세요.",
@@ -230,8 +214,9 @@
         "connectLedger": {
             "title": "Ledger를 Firefly에 연결하세요.",
             "body": "Firefly가 Ledger 장치를 발견하려면, 공식 Ledger Live 애플리케이션이 반드시 종료된 상태여야 합니다.",
-            "trafficLight1": "Ledger을 연결하고 PIN 번호를 입력하여 잠금을 해제하세요.",
-            "trafficLight2": "Ledger에서 새로운 IOTA 앱을 여세요.",
+            "connect": "Connect your Ledger device",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Ledger에서 새로운 Shimmer 앱을 여세요.",
             "tips": "Ledger 연결이 잘 되지 않을 때 참고할 도움말"
         },
         "restoreFromFireflyLedger": {
@@ -246,7 +231,7 @@
             "readMore": "마이그레이션 과정에서 기대할 수 있는 것"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "새 주소 생성",
             "body": "Firefly와 함께 토큰을 마이그레이션하려면 새로운 주소를 생성해야 합니다. 계속하려면 아래의 버튼을 클릭하세요.",
             "confirmTitle": "새로운 주소를 확인하세요.",
             "confirmBody": "보안을 위해서 Ledger 장치에 생성된 주소를 아래에 표시된 주소와 비교해주세요. 만약 일치한다면, Ledger의 두 버튼을 안내된대로 누르세요.",
@@ -268,82 +253,6 @@
             "takingAWhile": "이 작업은 잠시 시간이 걸릴 수 있습니다…",
             "notGeneratingAddresses": "Ledger가 주소들을 생성하고 있습니까?",
             "reinstallLegacy": "아니라면, 장치의 연결을 끊고 다시 시도하세요. 만약 문제가 계속된다면, {legacy} 앱을 다시 설치해보세요."
-        },
-        "importBackupPassword": {
-            "body1": "백업 파일의 비밀번호를 입력해 주세요.",
-            "body2": "백업 파일을 처음 만들때 설정했던 비밀번호를 입력합니다."
-        },
-        "importSuccess": {
-            "title": "백업 파일에서 복구 완료",
-            "body": "이제 새로운 프로필을 설정할 수 있습니다."
-        },
-        "migrate": {
-            "title": "잔고 옮기는 중",
-            "body1": "이것은 자금을 새 지갑으로 이체하는 자동화 된 프로세스입니다.",
-            "body2": "시간이 다소 걸릴 수 있습니다. 잔액을 옮기는 동안 기기를 끄지 마세요.",
-            "existing": "이전 지갑",
-            "new": "새 지갑",
-            "learn": "Learn about the migration",
-            "beginMigration": "마이그레이션 시작",
-            "migrating": "자금 이전 중...",
-            "migrated": "{balance} 이전됨",
-            "migrationFailed": "마이그레이션 실패",
-            "noAddressesForMigration": "이전하지 않을 주소를 선택하십시오.",
-            "restoringWallet": "지갑 복원 중...",
-            "findingBalance": "잔고 찾는 중...",
-            "incorrectSeedVaultPassword": "잘못된 SeedVault 비밀번호입니다.",
-            "noDataSeedVault": "SeedVault에서 데이터를 찾을 수 없습니다.",
-            "signingBundle": "Signing 번들",
-            "broadcastingBundle": "Broadcasting 번들",
-            "miningBundle": "Mining 번들",
-            "problemRestoringWallet": "지갑을 복원하는 중에 문제가 발생했습니다. 다시 시도하십시오.",
-            "minimumMigrationAmountSpentAddresses": "각 지출 주소의 최소 마이그레이션 금액은 1Mi입니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
-            "tooManyAddressesToMigrate": "잔고가 얼마 되지않는 주소들을 너무 많이 소유하고 있어 마이그레이션을 할 수 없습니다. 잔고 합계가 이상한 것 같다면 다시 확인해보세요.",
-            "cannotMigrateAllYourFunds": "일부 주소의 가치가 너무 낮아 모든 자금을 마이그레이션 할 수 없습니다. 어쨌든 계속할 수 있습니다. {value} 가 손실됩니다.",
-            "error": "자금을 이전하는 중에 오류가 발생했습니다. 다시 시도하십시오."
-        },
-        "bundleMiningWarning": {
-            "title": "경고",
-            "body1": "하나 이상의 지출 주소에 자금이 있습니다.",
-            "body2": "이러한 자금을 안전하게 보호하고 이체 할 수 있도록 자동화 된 프로세스를 실행하는 것이 좋습니다.",
-            "body3": "앱을 닫으면 전체 마이그레이션을 다시 시작해야합니다.",
-            "learn": "지출 주소에 대해 알아보기"
-        },
-        "secureSpentAddresses": {
-            "title": "잠금 지출 주소",
-            "body1": "{number, plural, one {# 지출 된 주소} other {# 지출 된 주소}}에서 자금이 감지되었습니다.",
-            "body2": "자금을 안전하게 보호하고 이체 할 수 있도록 자동화 된 프로세스를 실행하는 것이 좋습니다.",
-            "error": "1Mi 미만의 지출 주소는 마이그레이션 할 수 없습니다."
-        },
-        "securityCheckCompleted": {
-            "title": "보안 점검 완료",
-            "body1": "보안 위험 수준을 계산했습니다. 이 프로세스를 다시 실행하면 위험 수준이 낮아질 수 있습니다.",
-            "body2": "위험 수준(들) 에 만족하면 계속을 누르십시오.",
-            "rerun": "선택한 주소에 대한 프로세스 다시 실행",
-            "continueMigration": "마이그레이션 계속하기"
-        },
-        "securingSpentAddresses": {
-            "title": "지출 주소 잠그는 중...",
-            "body1": "이 작업에는 {minutes, plural, one {1분} other {#분}}이 소요됩니다.",
-            "body2": "컴퓨터가 최대 용량으로 실행됩니다. 이 작업이 완료 될 때까지 기다리는 동안 다른 작업을 수행 할 수 있습니다."
-        },
-        "transferFragmentedFunds": {
-            "body1": "이제 Firefly가 자금 마이그레이션을 진행합니다. 시간이 걸릴 수 있습니다.",
-            "body2": "Ledger가 연결되어 있는지 확인하고 {legacy} 앱이 마이그레이션 과정에서 항상 열려 있도록 해주세요.",
-            "migrate": "자금 마이그레이션 하기",
-            "transaction": "거래 번호 {number}",
-            "rerun": "Try again"
-        },
-        "migrateFailed": {
-            "title": "To do",
-            "body": "To do"
-        },
-        "balance": {
-            "title": "내 잔액",
-            "body": "계속하기 전에 잔액이 올바른지 확인하십시오. 올바르지 않으면 다시 확인할 수 있습니다.",
-            "error": "최소 마이그레이션 양은 1Mi입니다. 잔액이 올바르지 않은지 다시 확인하십시오.",
-            "zeroBalance": "다시 확인하십시오. 여전히 잔액을 찾을 수 없다면 시드를 잘못 입력했을 수 있습니다.",
-            "zeroBalanceLedgerLegacy": "다시 확인해주세요. 여전히 잔고를 찾을 수 없다면 잘못된 계정 인덱스를 선택했었던 것일 수 있습니다."
         },
         "settings": {
             "settings": "설정",
@@ -458,8 +367,9 @@
                 "includeNode": "포함 노드",
                 "editDetails": "세부 정보 수정",
                 "viewInfo": "정보 보기",
-                "setAsPrimary": "주 노드로 설정",
-                "removeNode": "Remove node",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
+                "removeNode": "노드 삭제",
                 "includeOfficialNodeList": "공식 노드 목록 포함",
                 "noNodes": "노드가 없으며, 네트워크에 연결할 수 없습니다",
                 "noNodesAuto": "노드가 없으며 대신 자동 선택이 사용됩니다"
@@ -524,6 +434,19 @@
             "pleaseWait": "{time, plural, other {#초}} 동안 기다려주십시오.",
             "incorrectAttempts": "{attempts, plural, other {잘못된 시도 #회}}"
         },
+        "loadProfile": {
+            "loginSteps": {
+                "buildProfileManager": "Initialising profile manager",
+                "updateNodeInfo": "Checking node health",
+                "recoverAccounts": "Generating accounts",
+                "loadAccounts": "Syncing accounts",
+                "loadAssets": "Loading native assets",
+                "loadActivities": "Building activity history",
+                "setStrongholdStatus": "Securing stronghold",
+                "startBackgroundSync": "Starting background sync",
+                "loggingIn": "Loading dashboard"
+            }
+        },
         "dashboard": {
             "network": {
                 "operational": "Network operational",
@@ -545,19 +468,18 @@
                 "hardware": {
                     "title": "하드웨어 장치",
                     "statuses": {
-                        "appNotOpen": "IOTA 앱 열리지 않음",
-                        "connected": "연결됨",
-                        "legacyConnected": "구형 앱 열림",
-                        "locked": "잠김",
+                        "appNotOpen": "Ledger의 잠금이 풀렸으나 앱이 열리지 않았습니다",
+                        "correctAppOpen": "Ledger 잠금이 풀렸으며 앱이 열렸습니다 ",
+                        "locked": "Ledger가 안전하게 잠겼습니다",
                         "mnemonicMismatch": "잘못된 Ledger 또는 Mnemonic",
-                        "notDetected": "감지되지 않음",
+                        "notConnected": "Ledger에 연결되지 않았습니다",
                         "otherConnected": "앱 열림"
                     }
                 },
                 "backup": {
                     "title": "지갑 백업",
-                    "lastBackup": "You last backed up {date}",
-                    "notBackedUp": "Not backed up",
+                    "lastBackup": "{date} 마지막으로 백업했습니다",
+                    "notBackedUp": "백업되지 않음",
                     "button": "백업"
                 },
                 "version": {
@@ -585,7 +507,7 @@
                     "upcoming": "나중에 다시 확인",
                     "commencing": "Pre-staking 시작",
                     "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
+                    "ended": "스테이킹이 이제 종료되었습니다",
                     "inactive": "No staking events detected"
                 },
                 "bodies": {
@@ -626,6 +548,14 @@
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Connect and unlock your Ledger Device",
+            "step_2": "Open Shimmer Application",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
@@ -655,6 +585,14 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
+        "deeplinkAccountSwitch": {
+            "title": "Select a wallet",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+        },
         "deleteAccount": {
             "title": "{name} 계정을 삭제할까요?",
             "body": "이 지갑에는 거래내역이 없으며, 안전하게 삭제될 수 있습니다.",
@@ -679,6 +617,14 @@
             "internal": "내부 주소",
             "external": "입금 주소"
         },
+        "excludeNode": {
+            "title": "Exclude node",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
+        },
+        "unsetAsPrimaryNode": {
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
+        },
         "node": {
             "titleAdd": "노드 추가",
             "titleUpdate": "노드 변경",
@@ -695,7 +641,6 @@
             "optionalJwt": "JSON 웹 토큰 (선택)",
             "setAsPrimaryNode": "주 노드로 설정",
             "removeConfirmation": "이 노드를 삭제하시겠습니까?",
-            "removeAllConfirmation": "정말로 모든 노드를 삭제하시겠습니까?",
             "info": {
                 "general": {
                     "tab": "General",
@@ -720,7 +665,7 @@
                     "network": "Network",
                     "bech32Hrp": "Bech32 HRP",
                     "tokenSupply": "Token supply",
-                    "protocolVersion": "Version",
+                    "version": "Version",
                     "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {
@@ -764,6 +709,7 @@
         "transaction": {
             "title": "트랜잭션 확인",
             "body": "{amount} 만큼 보내려고 합니다",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "현재 staking중인 지갑에서 이체를 하고 있습니다. 이로 인해 여러분의 토큰 staking이 취소될 수 있습니다. 자유로이 이체하시되 그후에 남은 토큰을 다시 staking할 필요가 있을 수 있다는 점을 알아두세요.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
@@ -793,19 +739,22 @@
             "bodyFirefly": "Firefly는 완료 될 때까지 비활성화됩니다. 이후에도 토큰 마이그레이션이 가능합니다."
         },
         "ledgerNotConnected": {
-            "connect": "Ledger 기기에서 새 IOTA 앱을 열어 계속",
-            "connectLegacy": "계속하기 위해 Ledger 장치의 {legacy} 앱을 여세요."
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "진행하기 위해서 Ledger 장치에 표시된 안내를 확인하세요."
         },
         "ledgerAppGuide": {
-            "title": "Ledger 앱 설치 가이드",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Ledger Live 앱을 설치하고 여세요.",
                 "1": "Ledger가 연결되어 있는지 확인하세요.",
-                "2": "앱 찾기: {legacy} 그리고 IOTA(MIOTA)",
-                "3": "두 앱 모두 설치: {legacy} 그리고 IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Firfly로 돌아가기 전에 Ledger Live를 종료하는 것이 중요하다는 것을 기억하세요."
             }
         },
@@ -821,15 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "나머지 주소를 확인하세요.",
-                "info": "Ledger에 표시된 나머지 주소가 아래에 표시된 것과 일치하는지 확인하세요. 만약 일치한다면 Ledger의 두 버튼을 안내된대로 누르세요."
-            },
-            "transaction": {
-                "title": "Confirm transaction",
-                "info": "Ledger 장치에 표시된 거래 정보가 아래에 표시된 정보와 일치하는지 확인하세요. 만약 일치한다면 Ledger의 두 버튼을 안내된대로 누르세요."
-            }
+        "verifyLedgerTransaction": {
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "받는 주소를 확인하세요.",
@@ -906,6 +854,38 @@
         },
         "sendForm": {
             "title": "Send funds"
+        },
+        "tokenInformation": {
+            "newTokenTitle": "New token",
+            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "tokenMetadata": {
+                "standard": "Standard",
+                "name": "Name",
+                "tokenId": "Token ID",
+                "url": "URL"
+            },
+            "buttons": {
+                "verifyToken": "I verify this token"
+            }
+        },
+        "mintNativeTokenForm": {
+            "title": "Mint native tokens",
+            "inputs": {
+                "totalSupply": "Total Supply",
+                "circulatingSupply": "Circulating Supply",
+                "standard": "Standard",
+                "name": "Name",
+                "description": "Description",
+                "symbol": "Symbol",
+                "decimals": "Decimals",
+                "url": "URL",
+                "logoUrl": "Logo URL",
+                "logo": "Logo"
+            }
+        },
+        "faucetRequest": {
+            "title": "Faucet request",
+            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
     },
     "charts": {
@@ -922,6 +902,7 @@
         "timeframe1Month": "1달"
     },
     "actions": {
+        "apply": "Apply",
         "continue": "계속하기",
         "back": "뒤로가기",
         "previous": "이전",
@@ -931,6 +912,7 @@
         "dismiss": "무시하기",
         "claim": "Claim",
         "claiming": "Claiming",
+        "claimingRewards": "보상 요청 중",
         "reject": "Reject",
         "confirmRejection": {
             "title": "Reject transaction",
@@ -951,7 +933,7 @@
         "createWallet": "Create a new {protocol} profile",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking rewards",
-        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "savePassword": "비밀번호 저장하기",
         "useBiometric": "생체 인증 사용하기",
         "setupPinCode": "Setup PIN code",
@@ -978,10 +960,12 @@
         "chooseFile": "파일을 선택하기",
         "dropHere": "파일을 여기로 끌어넣으세요.",
         "syncAll": "모두 동기화하기",
+        "import": "Import",
+        "importing": "Importing",
         "export": "내보내기",
         "exporting": "내보내는 중",
         "exportNewStronghold": "새 Stronghold 내보내기",
-        "enableDeepLinks": "IOTA 링크 활성화",
+        "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
         "exportTransactionHistory": "Export transaction history",
@@ -996,9 +980,10 @@
         "deleteAccount": "Delete wallet",
         "max": "최대",
         "addNode": "노드 추가",
+        "addingNode": "Adding node",
+        "addOfficialNodes": "Add official nodes",
         "updateNode": "노드 변경",
         "removeNode": "노드 삭제",
-        "removeAllNodes": "Remove all nodes",
         "hide": "숨기기",
         "hideOthers": "나머지 숨기기",
         "showAll": "모두 보기",
@@ -1034,8 +1019,8 @@
         "findWallets": "Find wallets",
         "useBalanceFinder": "Use balance finder",
         "search": "Search",
-        "searchAgain": "다시 검색",
         "searching": "Searching",
+        "searchAgain": "다시 검색",
         "closeFirefly": "Firefly 닫기",
         "generateAddress": "Generate address",
         "migrateAgain": "다른 인덱스 마이그레이션",
@@ -1051,11 +1036,26 @@
         "done": "완료",
         "okIUnderstand": "OK, I understand",
         "readMore": "Read more",
+        "searchForRewards": "Search for rewards",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
-        "backup": "Backup"
+        "backup": "Backup",
+        "mint": "Mint",
+        "mintNativeToken": "Mint native token",
+        "verifyToken": "Verify token",
+        "unverifyToken": "Unverify token",
+        "hideToken": "Hide token",
+        "unhideToken": "Unhide token",
+        "burnToken": "Burn token",
+        "faucetRequest": "Get {token} tokens",
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "테스트",
+        "testDeepLink": "딥 링크 테스트",
+        "initialize": "초기화",
+        "initializing": "초기화 중",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Recipient",
@@ -1071,6 +1071,11 @@
         "received": "받음",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "shimmerClaimed": "받음",
+        "shimmerClaiming": "받는 중",
+        "shimmerGenesis": "Shimmer Genesis",
+        "minted": "Minted",
+        "minting": "Minting",
         "sendPayment": "보내기",
         "moveFunds": "내부 전송",
         "sendTo": "전송",
@@ -1088,6 +1093,7 @@
         "reference": "참고",
         "from": "보낸이",
         "to": "받는이",
+        "and": "and",
         "receiveFunds": "Receive funds",
         "address": "주소",
         "myAddress": "내 주소",
@@ -1109,6 +1115,7 @@
         "darkTheme": "어둡게",
         "systemTheme": "시스템",
         "balance": "잔고",
+        "balanceWithValue": "Balance: {balance}",
         "all": "전부",
         "incoming": "받음",
         "outgoing": "보냄",
@@ -1143,6 +1150,9 @@
         "loadingAccounts": "불러오는 중입니다. 잠시만 기다려 주세요...",
         "addProfile": "프로필 추가",
         "noRecentHistory": "최근 기록 없음",
+        "noFilteredActivity": "No matching activities",
+        "noAssets": "No assets",
+        "noFilteredAsset": "No matching assets",
         "thisMonth": "This month",
         "search": "Search",
         "firstSync": "기록을 동기화하는 중입니다. 다소 시간이 걸릴 수 있습니다...",
@@ -1207,18 +1217,92 @@
         "unstakedFunds": "Unstaked funds",
         "accountColor": "지갑 색상",
         "transactionTime": "Transaction time",
+        "surplus": "Surplus",
         "storageDeposit": "Storage deposit",
+        "giftedStorageDeposit": "Gifted storage deposit",
         "expirationTime": "Expiration time",
+        "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
         "copiedToClipboard": "Copied to clipboard",
         "total": "총액: {balance}",
-        "availableBalance": "Available balance: {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
         "tag": "Tag",
         "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
-        "assets": "Assets"
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
+        "assets": "Assets",
+        "nativeTokens": "Native tokens",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
+        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded",
+        "developerTools": "Developer tools",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "해시",
+        "creating": "Creating",
+        "updating": "Updating"
+    },
+    "filters": {
+        "title": "Filters",
+        "showHidden": {
+            "label": "Show hidden",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "showRejected": {
+            "label": "Show rejected",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "verificationStatus": {
+            "label": "Verification status",
+            "new": "New",
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
+        },
+        "asset": {
+            "label": "Assets"
+        },
+        "amount": {
+            "label": "Amount",
+            "equal": "is equal to",
+            "range": "is between",
+            "greater": "is greater than",
+            "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
+        },
+        "status": {
+            "label": "Status",
+            "confirmed": "confirmed",
+            "pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "unclaimed"
+        },
+        "type": {
+            "label": "Type",
+            "incoming": "incoming",
+            "outgoing": "outgoing",
+            "internal": "internal"
+        }
     },
     "dates": {
         "today": "오늘",
@@ -1260,10 +1344,13 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
@@ -1274,8 +1361,29 @@
             "error": "Claiming transaction failed"
         },
         "hideActivity": {
-            "success": "Successfully hidden activity",
+            "success": "Activity was hidden",
             "error": "Failed to hide activity"
+        },
+        "faucetRequest": {
+            "success": "Request for tokens sent to the faucet"
+        },
+        "mintNativeToken": {
+            "success": "Native token minting transaction sent"
+        },
+        "refreshTokenMetadata": {
+            "success": "All token metadata has been reset and refreshed"
+        },
+        "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
+            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+        },
+        "findShimmerRewards": {
+            "success": "Successfully found Shimmer rewards",
+            "error": "An error occurred while searching for rewards"
+        },
+        "claimShimmerRewards": {
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         }
     },
     "error": {
@@ -1284,7 +1392,9 @@
             "duplicate": "같은 이름의 사용자가 이미 존재합니다",
             "delete": {
                 "nonEmptyAccounts": "프로필을 삭제하기 전 모든 잔액을 전송해야 합니다."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "비밀번호가 맞지 않습니다.",
@@ -1324,26 +1434,34 @@
             "syncing": "지갑을 동기화하는 중 에러가 발생했습니다.",
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "notLast": "You can only delete your last wallet.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
             "addressLength": "주소는 {length, plural, other {#자}}여야 합니다.",
             "amountTooHigh": "사용 가능한 잔액보다 큽니다.",
-            "amountNoFloat": "Can not use decimal places with the smallest unit selected",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "금액에 잘못된 내용이 있습니다.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 characters.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
             "amountZero": "보내는 양은 0보다 커야 합니다.",
             "wrongAddressPrefix": "주소는 {prefix}로 시작합니다.",
             "wrongAddressFormat": "주소가 형식에 맞지 않습니다.",
             "invalidAddress": "주소가 유효하지 않습니다.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "지갑에 자금이 부족합니다.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "보낼 지갑을 선택하지 않았습니다.",
             "sendingDust": "1 Mi 미만은 보낼 수 없습니다.",
             "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다.",
             "cancelled": "거래가 취소되었습니다.",
             "transaction": "거래를 보내는 중 에러가 발생했습니다. 다시 시도하세요.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "유효한 URL을 입력하세요.",
@@ -1355,7 +1473,8 @@
             "https": "HTTPS 연결이 필요합니다. 현재 HTTP로 안전하지 않은 연결을 하는 것은 지원하지 않습니다.",
             "duplicate": "이미 추가된 노드입니다.",
             "unsynced": "동기화되지 않은 노드입니다.",
-            "noSynced": "사용할 수 있는 동기화된 노드가 없습니다.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "모든 노드로부터 응답을 받을 수 없습니다.",
             "forbidden": "이 노드 연결은 금지되었습니다.",
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
@@ -1380,7 +1499,9 @@
             "seedCharacters": "시드에는 A부터 Z까지의 알파벳과 숫자 9만 포함되어야 합니다.",
             "phraseWordCount": "복원 문구는 단어 24개로 이루어지며, 현재 단어 {length, plural, other {#}}개를 입력하였습니다.",
             "phraseUnrecognizedWord": "복원 문구에 인식할 수 없는 단어 \"{word}\"가 있습니다",
-            "phraseCaseWord": "\"{word}\" 단어는 소문자로 입력해주세요."
+            "phraseCaseWord": "\"{word}\" 단어는 소문자로 입력해주세요.",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "Ledger 장치에서 IOTA 앱을 열어야합니다.",
@@ -1388,7 +1509,7 @@
             "legacyConnected": "Ledger 장치에서 잘못된 앱이 열려있습니다.",
             "locked": "PIN 전호를 입력하여 Ledger 장치의 잠금을 해제하세요.",
             "mnemonicMismatch": "잘못된 Ledger 장치를 연결하였거나 mnemonic이 바뀌었습니다.",
-            "notDetected": "Ledger 장치가 발견되지 않았습니다.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Ledger 장치를 찾을 수 없습니다.",
             "otherConnected": "Ledger 장치에서 잘못된 앱을 열었습니다.",
             "generateAddress": "주소를 생성하는 중 에러가 있었습니다.",
@@ -1412,11 +1533,20 @@
             "invalidStakingEventId": "Invalid staking event ID."
         },
         "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidTime": "INVALID TIME",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "HTTP를 기반으로 노드를 이용하는 경우 트래픽이 암호화되지 않으며 보안 위험을 초래할 수 있습니다."
@@ -1450,6 +1580,31 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
+            "outgoing": {
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            }
+        },
+        "mintNativeTokenForm": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {
@@ -1478,7 +1633,8 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking"
+        "staking": "Staking",
+        "developer": "개발자"
     },
     "pills": {
         "stake": {
@@ -1486,28 +1642,42 @@
             "Confirmed": "staked for",
             "Conflicting": "failed to stake"
         },
-        "internalTransaction": {
-            "in": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+        "transaction": {
+            "internal": {
+                "incoming": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "outgoing": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
             },
-            "out": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+            "external": {
+                "incoming": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "outgoing": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
             }
         },
-        "externalTransaction": {
-            "in": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+        "minting": {
+            "incoming": {
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             },
-            "out": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+            "outgoing": {
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             }
         },
         "migrate": {
@@ -1519,7 +1689,8 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
-        }
+        },
+        "locked": "locked"
     },
     "menus": {
         "expirationTimePicker": {

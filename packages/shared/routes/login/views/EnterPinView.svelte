@@ -1,24 +1,14 @@
 <script lang="typescript">
-    import { createEventDispatcher, onDestroy } from 'svelte'
-    import { Icon, PinInput, Profile, Text } from 'shared/components'
-    import {
-        isAwareOfCrashReporting,
-        mobile,
-        needsToAcceptLatestPrivacyPolicy,
-        needsToAcceptLatestTermsOfService,
-    } from '@core/app'
+    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { activeProfile, login, resetActiveProfile } from '@core/profile'
-    import {
-        buildProfileManagerOptionsFromProfileData,
-        initialiseProfileManager,
-        profileManager,
-    } from '@core/profile-manager'
-    import { ongoingSnapshot, openSnapshotPopup } from '@lib/migration'
+    import { activeProfile, login, ProfileType, resetActiveProfile } from '@core/profile'
+    import { loginRouter } from '@core/router'
     import { Platform } from '@lib/platform'
     import { openPopup, popupState } from '@lib/popup'
     import { validatePinFormat } from '@lib/utils'
+    import { Icon, PinInput, Profile, Text } from 'shared/components'
+    import { onDestroy } from 'svelte'
 
     let attempts = 0
     let pinCode = ''
@@ -42,18 +32,6 @@
         })
     }
 
-    /**
-     * NOTE: We check for mobile because it's only necessary
-     * for existing desktop installation.
-     */
-    $: if ($popupState?.type === null && !$popupState?.active && !$mobile && !$isAwareOfCrashReporting) {
-        openPopup({
-            type: 'crashReporting',
-            hideClose: true,
-            preventClose: true,
-        })
-    }
-
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (validatePinFormat(pinCode)) {
@@ -71,8 +49,6 @@
     function setButtonText(time) {
         return localize('views.login.pleaseWait', { values: { time: time.toString() } })
     }
-
-    const dispatch = createEventDispatcher()
 
     let maxAttemptsTimer = null
     let shakeTimeout = null
@@ -94,24 +70,12 @@
     }
 
     async function onSubmitClick(): Promise<void> {
-        if ($ongoingSnapshot === true) {
-            openSnapshotPopup()
-        } else if (!hasReachedMaxAttempts) {
+        if (!hasReachedMaxAttempts) {
             isBusy = true
             const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
             if (isVerified) {
-                const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
-                const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
-                const manager = initialiseProfileManager(
-                    storagePath,
-                    coinType,
-                    clientOptions,
-                    secretManager,
-                    $activeProfile?.id
-                )
-                profileManager.set(manager)
                 void login()
-                dispatch('next')
+                $loginRouter.next()
             } else {
                 shake = true
                 shakeTimeout = setTimeout(() => {
@@ -132,7 +96,7 @@
     function onBackClick(): void {
         if (!hasReachedMaxAttempts) {
             resetActiveProfile()
-            dispatch('previous')
+            $loginRouter.previous()
         }
     }
 
@@ -149,6 +113,7 @@
                 name={$activeProfile?.name}
                 networkType={$activeProfile?.networkType ?? NetworkType.Devnet}
                 networkProtocol={$activeProfile?.networkProtocol ?? NetworkProtocol.Shimmer}
+                isLedgerProfile={$activeProfile?.type === ProfileType.Ledger}
                 bgColor="blue"
             />
             <div class="flex mt-18 w-full items-center">

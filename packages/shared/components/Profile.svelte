@@ -7,11 +7,11 @@
 
     export let name = ''
     export let id = ''
-    export let networkType: NetworkType
-    export let networkProtocol: NetworkProtocol
+    export let networkType: NetworkType = undefined
+    export let networkProtocol: NetworkProtocol = undefined
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let bgColor: string
+    export let bgColor: string = ''
 
     export let onClick: undefined | ((id: string) => void) = undefined
 
@@ -52,7 +52,7 @@
             {#if isLedgerProfile}
                 <Icon
                     icon="ledger"
-                    classes="text-gray-400 dark:text-gray-700 relative top-0.5"
+                    classes="text-gray-900 dark:text-gray-100 relative top-0.5"
                     width={14}
                     height={14}
                 />

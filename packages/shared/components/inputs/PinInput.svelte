@@ -1,21 +1,20 @@
 <script lang="typescript">
     import { Error, Icon, Text } from 'shared/components'
     import { createEventDispatcher, onMount } from 'svelte'
-    import { mobile } from '@core/app'
-    import { Platform } from '@lib/platform'
+    import { mobile, PlatformOption, platform } from '@core/app'
     import { validatePinFormat, PIN_LENGTH } from '@lib/utils'
 
     const dispatch = createEventDispatcher()
-    const isAndroid = Platform.getOS() === 'android'
+    const isAndroid = $platform === PlatformOption.Android
 
+    export let value: string
+    export let error: string = ''
+    export let label: string = ''
     export let classes = ''
     export let disabled = false
     export let autofocus = false
     export let glimpse = false
     export let smaller = false
-    export let value: string
-    export let error: string
-    export let label: string
 
     let inputs = new Array(PIN_LENGTH)
 

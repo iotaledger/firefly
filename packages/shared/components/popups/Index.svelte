@@ -1,63 +1,50 @@
 <script lang="typescript">
+    import { mobile, PlatformOption, platform } from '@core/app'
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
-    import { Locale } from '@core/i18n'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
+
+    // Popups
+    import AccountSwitcherPopup from './AccountSwitcherPopup.svelte'
+    import AliasConfirmationPopup from './AliasConfirmationPopup.svelte'
+    import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
-    import AirdropNetworkInfo from './AirdropNetworkInfo.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
-    import Busy from './Busy.svelte'
-    import CrashReporting from './CrashReporting.svelte'
-    import CreateAccountPopup from './CreateAccountPopup.svelte'
     import ConfirmationPopup from './ConfirmationPopup.svelte'
+    import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
+    import CreateAccountPopup from './CreateAccountPopup.svelte'
+    import DeepLinkErrorPopup from './DeepLinkErrorPopup.svelte'
     import DeleteAccount from './DeleteAccount.svelte'
-    import DeleteProfile from './DeleteProfile.svelte'
     import Diagnostics from './Diagnostics.svelte'
+    import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
     import ErrorLog from './ErrorLog.svelte'
     import ExportTransactionHistory from './ExportTransactionHistory.svelte'
-    import LedgerAddress from './LedgerAddress.svelte'
-    import LedgerAppGuide from './LedgerAppGuide.svelte'
-    import LedgerConfirmation from './LedgerConfirmation.svelte'
-    import LedgerConnectionGuide from './LedgerConnectionGuide.svelte'
-    import LedgerLegacyTransaction from './LedgerLegacyTransaction.svelte'
-    import LedgerMigrateIndex from './LedgerMigrateIndex.svelte'
-    import LedgerNotConnected from './LedgerNotConnected.svelte'
-    import LedgerTransaction from './LedgerTransaction.svelte'
-    import MissingBundle from './MissingBundle.svelte'
+    import FaucetRequestPopup from './FaucetRequestPopup.svelte'
+    import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
+    import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
+    import LegalUpdate from './LegalUpdate.svelte'
+    import ManageAccountPopup from './ManageAccountPopup.svelte'
+    import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
-    import PasswordPopup from './PasswordPopup.svelte'
-    import QR from './QR.svelte'
+    import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
-    import RiskFunds from './RiskFunds.svelte'
-    import Snapshot from './Snapshot.svelte'
-    import StakingConfirmation from './StakingConfirmation.svelte'
-    import StakingManager from './StakingManager.svelte'
+    import SendConfirmationPopup from './SendConfirmationPopup.svelte'
+    import SendFormPopup from './SendFormPopup.svelte'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
-    import NewStakingPeriodNotification from './NewStakingPeriodNotification.svelte'
+    import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
+    import TokenInformationPopup from './TokenInformationPopup.svelte'
+    import UnlockStrongholdPopup from './UnlockStrongholdPopup.svelte'
+    import VerifyLedgerTransactionPopup from './VerifyLedgerTransactionPopup.svelte'
     import Version from './Version.svelte'
     import Video from './Video.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
-    import ConfirmDeveloperProfile from './ConfirmDeveloperProfile.svelte'
-    import LegalUpdate from './LegalUpdate.svelte'
-    import { mobile } from '@core/app'
-    import { Platform } from 'shared/lib/platform'
-    import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
-    import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
-    import SendConfirmationPopup from './SendConfirmationPopup.svelte'
-    import SendFormPopup from './SendFormPopup.svelte'
-    import ManageAccountPopup from './ManageAccountPopup.svelte'
-    import TokenInformationPopup from './TokenInformationPopup.svelte'
-    import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
-    import FaucetRequestPopup from './FaucetRequestPopup.svelte'
-
-    export let locale: Locale
 
     export let type: string
     export let props: any
-    export let hideClose: boolean
-    export let preventClose: boolean
+    export let hideClose: boolean = false
+    export let preventClose: boolean = false
     export let fullScreen: boolean
     export let transition = true
     export let overflow = false
@@ -71,10 +58,9 @@
     }
 
     let size: PopupSize = PopupSize.Medium
-    let os = ''
 
     $: switch (type) {
-        case 'ledgerNotConnected':
+        case 'connectLedger':
         case 'createAccount':
         case 'manageAccount':
             size = PopupSize.Small
@@ -84,7 +70,6 @@
         case 'ledgerConnectionGuide':
             size = PopupSize.Large
             break
-        case 'stakingManager':
         case 'transactionDetails':
             autofocusContent = false
             break
@@ -96,42 +81,28 @@
     let popupContent
 
     const types = {
-        qr: QR,
-        password: PasswordPopup,
+        accountSwitcher: AccountSwitcherPopup,
+        aliasConfirmation: AliasConfirmationPopup,
+        unlockStronghold: UnlockStrongholdPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,
         confirmation: ConfirmationPopup,
+        deepLinkError: DeepLinkErrorPopup,
         deleteAccount: DeleteAccount,
         exportTransactionHistory: ExportTransactionHistory,
-        ledgerNotConnected: LedgerNotConnected,
-        ledgerConfirmation: LedgerConfirmation,
-        ledgerAppGuide: LedgerAppGuide,
-        ledgerConnectionGuide: LedgerConnectionGuide,
-        ledgerTransaction: LedgerTransaction,
-        ledgerLegacyTransaction: LedgerLegacyTransaction,
-        ledgerAddress: LedgerAddress,
-        ledgerMigrateIndex: LedgerMigrateIndex,
+        connectLedger: ConnectLedgerPopup,
+        ledgerAppGuide: LedgerAppGuidePopup,
+        ledgerConnectionGuide: LedgerConnectionGuidePopup,
+        verifyLedgerTransaction: VerifyLedgerTransactionPopup,
         nodeInfo: NodeInfoPopup,
         addNode: AddNodePopup,
         removeNode: RemoveNode,
         storageDepositBreakdown: StorageDepositBreakdownPopup,
-        busy: Busy,
         errorLog: ErrorLog,
-        crashReporting: CrashReporting,
         createAccount: CreateAccountPopup,
-        deleteProfile: DeleteProfile,
         diagnostics: Diagnostics,
-        riskFunds: RiskFunds,
-        missingBundle: MissingBundle,
         walletFinder: WalletFinderPopup,
-        snapshot: Snapshot,
         video: Video,
-        // Participation (voting / staking)
-        stakingConfirmation: StakingConfirmation,
-        stakingManager: StakingManager,
-        newStakingPeriodNotification: NewStakingPeriodNotification,
-        airdropNetworkInfo: AirdropNetworkInfo,
-        confirmDeveloperProfile: ConfirmDeveloperProfile,
         legalUpdate: LegalUpdate,
         receiveAddress: ReceiveAddressPopup,
         activityDetails: ActivityDetailsPopup,
@@ -141,6 +112,8 @@
         tokenInformation: TokenInformationPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,
         faucetRequest: FaucetRequestPopup,
+        enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
+        testDeepLinkForm: TestDeepLinkFormPopup,
     }
 
     const onKey = (e) => {
@@ -180,12 +153,11 @@
         e.preventDefault()
     }
 
-    onMount(async () => {
+    onMount(() => {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[hideClose || elems.length === 1 || !autofocusContent ? 0 : 1].focus()
         }
-        os = await Platform.getOS()
     })
 </script>
 
@@ -193,15 +165,15 @@
 {#if $mobile && !fullScreen}
     <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
         <div bind:this={popupContent} class="p-8">
-            <svelte:component this={types[type]} {...props} {locale} />
+            <svelte:component this={types[type]} {...props} />
         </div>
     </Drawer>
 {:else}
     <popup
         in:fade={{ duration: transition ? 100 : 0 }}
-        class={`flex items-center justify-center fixed ${os === 'win32' ? 'top-9' : 'top-0'} left-0 w-screen p-6 ${
-            overflow ? '' : 'overflow-hidden'
-        }
+        class={`flex items-center justify-center fixed ${
+            $platform === PlatformOption.Windows ? 'top-9' : 'top-0'
+        } left-0 w-screen p-6 ${overflow ? '' : 'overflow-hidden'}
                 h-full z-20 ${
                     fullScreen
                         ? 'bg-white dark:bg-gray-900'
@@ -225,7 +197,7 @@
                     />
                 </button>
             {/if}
-            <svelte:component this={types[type]} {...props} {locale} />
+            <svelte:component this={types[type]} {...props} />
         </popup-content>
         <div tabindex="0" on:focus={handleFocusLast} />
     </popup>

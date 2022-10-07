@@ -10,6 +10,8 @@
         appVersionDetails,
         AppStage,
         appStage,
+        PlatformOption,
+        platform,
     } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { formatDate, localize } from '@core/i18n'
@@ -31,7 +33,7 @@
     }
 
     onMount(async () => {
-        // @ts-ignore: This value is replaced by Webpack DefinePlugin
+        // @ts-expect-error: This value is replaced by Webpack DefinePlugin
         if (!devMode) {
             await setAppVersionDetails()
             if (get(appStage) === AppStage.PROD) {
@@ -39,8 +41,7 @@
                 checkForAppUpdate()
             }
         }
-        const os = await Platform.getOS()
-        hasAutoUpdate = os !== 'win32'
+        hasAutoUpdate = $platform !== PlatformOption.Windows
     })
 </script>
 
@@ -72,7 +73,7 @@
             </Text>
         </div>
         <div class="flex flex-row justify-center w-full">
-            <Button secondary onClick={() => handleCloseClick()}>{localize('actions.close')}</Button>
+            <Button outline onClick={handleCloseClick}>{localize('actions.close')}</Button>
         </div>
     {:else}
         <div class="my-6">
@@ -95,8 +96,8 @@
             {/if}
         </div>
         <div class="flex flex-row justify-between space-x-4 w-full md:px-8">
-            <Button secondary classes="w-1/2" onClick={() => handleCloseClick()}>{localize('actions.cancel')}</Button>
-            <Button classes="w-1/2" onClick={() => handleDownload()} disabled={$appUpdateBusy}>
+            <Button outline classes="w-1/2" onClick={handleCloseClick}>{localize('actions.cancel')}</Button>
+            <Button classes="w-1/2" onClick={handleDownload} disabled={$appUpdateBusy}>
                 {localize('actions.updateFirefly')}
             </Button>
         </div>
@@ -104,9 +105,6 @@
 </div>
 
 <style type="text/scss">
-    img {
-        width: 196px;
-    }
     .changelog {
         max-height: 50vh;
     }

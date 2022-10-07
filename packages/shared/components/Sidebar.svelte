@@ -11,15 +11,8 @@
     } from 'shared/components'
     import { appVersionDetails, mobile } from '@core/app'
     import { getInitials, isRecentDate } from '@lib/helpers'
-    import { isStakingPossible } from '@lib/participation'
-    import {
-        assemblyStakingEventState,
-        partiallyUnstakedAmount,
-        shimmerStakingEventState,
-    } from '@lib/participation/stores'
     import { activeProfile } from '@core/profile'
     import {
-        dashboardRoute,
         dashboardRouter,
         DashboardRoute,
         resetWalletRoute,
@@ -34,21 +27,13 @@
 
     let profileModal: Modal
     let drawer: Drawer
-    let prevPartiallyUnstakedAmount = 0 // store the previous unstaked funds to avoid notifying when unstaked funds decrease
-    let showStakingNotification = false
 
     const profileColor = 'blue' // TODO: each profile has a different color
 
     const { shouldOpenProfileModal } = $activeProfile
 
     $: profileInitial = getInitials($activeProfile?.name, 1)
-    $: $dashboardRoute,
-        $assemblyStakingEventState,
-        $shimmerStakingEventState,
-        $partiallyUnstakedAmount,
-        manageUnstakedAmountNotification()
 
-    // $: $activeProfile?.hasVisitedStaking, showStakingNotification, updateSidebarNotification()
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
@@ -64,13 +49,13 @@
                   },
               ]
             : []),
-        ...(features?.staking?.enabled
+        ...(features?.collectibles?.enabled
             ? [
                   {
-                      icon: 'tokens',
-                      label: localize('tabs.staking'),
-                      route: DashboardRoute.Staking,
-                      onClick: openStaking,
+                      icon: 'collectibles',
+                      label: localize('tabs.collectibles'),
+                      route: DashboardRoute.Collectibles,
+                      onClick: openCollectibles,
                   },
               ]
             : []),
@@ -84,13 +69,13 @@
                   },
               ]
             : []),
-        ...(features?.developerTools?.enabled
+        ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
                       icon: 'tools',
-                      label: localize('tabs.developerTools'),
-                      route: DashboardRoute.DeveloperTools,
-                      onClick: openDeveloperTools,
+                      label: localize('tabs.developer'),
+                      route: DashboardRoute.Developer,
+                      onClick: openDeveloper,
                   },
               ]
             : []),
@@ -112,30 +97,8 @@
         $dashboardRouter.goTo(DashboardRoute.DeveloperTools)
     }
 
-    // function updateSidebarNotification() {
-    //     sidebarTabs = sidebarTabs.map((tab) => {
-    //         if (DashboardRoute.Staking === tab.route) {
-    //             tab.notificationType = !$activeProfile?.hasVisitedStaking
-    //                 ? 'error'
-    //                 : showStakingNotification
-    //                 ? 'warning'
-    //                 : null
-    //         }
-    //         return tab
-    //     })
-    // }
-
-    function manageUnstakedAmountNotification() {
-        if (isStakingPossible($assemblyStakingEventState) || isStakingPossible($shimmerStakingEventState)) {
-            if ($dashboardRoute !== DashboardRoute.Staking && $partiallyUnstakedAmount > prevPartiallyUnstakedAmount) {
-                showStakingNotification = true
-            } else {
-                showStakingNotification = false
-            }
-            prevPartiallyUnstakedAmount = $partiallyUnstakedAmount
-        } else {
-            showStakingNotification = false
-        }
+    function openDeveloper() {
+        $dashboardRouter.goTo(DashboardRoute.Developer)
     }
 
     function handleBackClick() {

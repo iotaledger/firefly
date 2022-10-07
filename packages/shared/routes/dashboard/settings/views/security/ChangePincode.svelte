@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
-    import { Button, PinInput, Spinner, Text } from 'shared/components'
+    import { Button, PinInput, Spinner, Text, HTMLButtonType, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Platform } from '@lib/platform'
@@ -117,9 +117,8 @@
     />
     <div class="flex flex-row items-center">
         <Button
-            medium
-            type="submit"
-            form="pincode-change-form"
+            size={ButtonSize.Medium}
+            type={HTMLButtonType.Submit}
             disabled={!currentPincode || !newPincode || !confirmedPincode || pinCodeBusy}
         >
             {localize('views.settings.changePincode.action')}

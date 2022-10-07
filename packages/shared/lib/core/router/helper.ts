@@ -27,6 +27,8 @@ import {
     ShimmerClaimingRouter,
     strongholdSetupRouter,
     StrongholdSetupRouter,
+    LoginRouter,
+    loginRouter,
 } from './subrouters'
 
 export function initialiseRouters(): void {
@@ -57,6 +59,7 @@ function initialiseBaseOnboardingRouters(): void {
 }
 
 function initialiseSubrouters(): void {
+    loginRouter.set(new LoginRouter())
     initialiseOnboardingSubrouters()
 }
 
@@ -87,6 +90,7 @@ function resetBaseRouters(): void {
 
 function resetSubrouters(): void {
     get(appSetupRouter).reset()
+    get(loginRouter).reset()
     get(ledgerSetupRouter).reset()
     get(networkSetupRouter).reset()
     get(strongholdSetupRouter).reset()

@@ -12,7 +12,7 @@
             "@lib/*": ["./lib/*"],
             "@mocks/*": ["./lib/tests/__mocks__/*"]
         },
-        "types": ["jest"],
+        "types": ["jest", "node"],
         "resolveJsonModule": true
     },
     "include": ["./lib/**/tests"],

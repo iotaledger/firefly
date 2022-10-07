@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { SettingsMenu, Text } from 'shared/components'
+    import { SettingsMenu, Text, TextType } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import {
         AdvancedSettingsRoute,
         AdvancedSettingsRouteNoProfile,
@@ -14,7 +14,6 @@
         settingsRouter,
     } from '@core/router'
     import features from 'shared/features/features'
-    import { TextType } from 'shared/components/Text.svelte'
 
     const { loggedIn } = $activeProfile
 
@@ -26,7 +25,7 @@
         delete securitySettings.ExportStronghold
         delete securitySettings.ChangePassword
     }
-    $: if (!$isLedgerProfile) {
+    $: if (!$isActiveLedgerProfile) {
         delete advancedSettings.MigrateLedgerIndex
     }
 

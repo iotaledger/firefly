@@ -3,39 +3,37 @@
         generateTransactionHistoryCsvFromAccount,
         generateTransactionHistoryFileName,
     } from 'shared/lib/transactionHistory'
-    import { Button, PasswordInput, Spinner, Text } from 'shared/components'
+    import { Button, PasswordInput, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
+    import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
     import { closePopup } from 'shared/lib/popup'
-    import { activeProfile, isLedgerProfile, isSoftwareProfile } from '@core/profile'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { selectedAccount } from '@core/account'
 
     const profileName = $activeProfile?.name
     const { isStrongholdLocked } = $activeProfile
+    const accountAlias = $selectedAccount.getMetadata().alias
 
     let password = ''
     let error = ''
     let isBusy = false
 
-    async function handleExportTransactionHistory() {
+    async function handleExportTransactionHistory(): Promise<void> {
         try {
             error = ''
             isBusy = true
 
             if ($isSoftwareProfile && $isStrongholdLocked) {
                 await setStrongholdPassword(password)
-            } else if ($isLedgerProfile && !isLedgerConnected()) {
+            } else if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
                 isBusy = false
-
                 displayNotificationForLedgerProfile('warning')
-
                 return
             }
-
-            const fileName = generateTransactionHistoryFileName(profileName, $selectedAccount.getAlias())
+            const fileName = generateTransactionHistoryFileName(profileName, accountAlias)
             const contents = generateTransactionHistoryCsvFromAccount($selectedAccount, {
                 id: true,
                 internal: true,
@@ -51,7 +49,7 @@
                     showAppNotification({
                         type: 'info',
                         message: localize('notifications.exportTransactionHistory.success', {
-                            values: { accountAlias: $selectedAccount.getAlias(), filePath: filePath },
+                            values: { accountAlias, filePath: filePath },
                         }),
                     })
                 }
@@ -59,7 +57,7 @@
                 showAppNotification({
                     type: 'error',
                     message: localize('notifications.exportTransactionHistory.error', {
-                        value: { accountAlias: $selectedAccount.getAlias() },
+                        values: { accountAlias },
                     }),
                 })
             }
@@ -68,8 +66,8 @@
         } catch (err) {
             error = localize(err.error)
 
-            if ($isLedgerProfile) {
-                displayNotificationForLedgerProfile('error', true, true, false, false, err)
+            if ($isActiveLedgerProfile) {
+                displayNotificationForLedgerProfile('error', true, true, err)
             } else {
                 showAppNotification({
                     type: 'error',
@@ -81,7 +79,7 @@
         }
     }
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         closePopup()
     }
 </script>
@@ -95,7 +93,7 @@
     </div>
     <div class="flex w-full flex-row flex-wrap mb-1 justify-between">
         <Text type="p">{localize('popups.exportTransactionHistory.accountName')}</Text>
-        <Text type="p" highlighted>{$selectedAccount.getAlias()}</Text>
+        <Text type="p" highlighted>{accountAlias}</Text>
     </div>
     <div class="flex w-full flex-row flex-wrap mt-4 mb-6 justify-between">
         {#if $isSoftwareProfile && $isStrongholdLocked}
@@ -113,17 +111,17 @@
         {/if}
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}
+        <Button classes="w-full" outline onClick={handleCancelClick} disabled={isBusy}
             >{localize('actions.cancel')}</Button
         >
         <Button
             classes="w-full"
             onClick={handleExportTransactionHistory}
             disabled={($isSoftwareProfile && $isStrongholdLocked && password.length === 0) || isBusy}
+            {isBusy}
+            busyMessage={localize('actions.exporting')}
         >
-            {#if isBusy}
-                <Spinner busy={true} message={localize('actions.exporting')} classes="justify-center" />
-            {:else}{localize('actions.export')}{/if}
+            {localize('actions.export')}
         </Button>
     </div>
 </div>

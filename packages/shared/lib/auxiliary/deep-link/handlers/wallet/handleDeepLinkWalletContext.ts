@@ -1,7 +1,9 @@
 import { addError } from '@core/error'
+import { localize } from '@core/i18n'
+import { openPopup } from '@lib/popup'
 
 import { WalletOperation } from '../../enums'
-import { handleDeepLinkSendOperation } from './operations/handleDeepLinkSendOperation'
+import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperation } from './operations'
 
 /**
  * Parses a deep link within the wallet context.
@@ -9,30 +11,36 @@ import { handleDeepLinkSendOperation } from './operations/handleDeepLinkSendOper
  * @method parseWalletDeepLinkRequest
  *
  * @param {URL} url The URL that was opened by the user.
- * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
  *
- * @return {void | DeepLinkRequest} The formatted content of a deep link request within the wallet context.
+ * @return {void} The formatted content of a deep link request within the wallet context.
  */
 export function handleDeepLinkWalletContext(url: URL): void {
     // Remove any leading and trailing slashes
     const pathnameParts = url.pathname.replace(/^\/+|\/+$/g, '').split('/')
-
-    if (pathnameParts.length === 0) {
-        return addError({ time: Date.now(), type: 'deepLink', message: 'No operation specified in the url' })
-    }
-
-    switch (pathnameParts[0]) {
-        case WalletOperation.SendForm:
-            handleDeepLinkSendOperation(url.searchParams)
-            break
-        case WalletOperation.SendConfirmation:
-            handleDeepLinkSendOperation(url.searchParams, true)
-            break
-        default:
-            return addError({
-                time: Date.now(),
-                type: 'deepLink',
-                message: `Unrecognized wallet operation '${pathnameParts[0]}'`,
-            })
+    try {
+        if (pathnameParts.length === 0 || !pathnameParts[0]) {
+            throw new Error('No operation specified in the url')
+        }
+        switch (pathnameParts[0]) {
+            case WalletOperation.SendForm:
+                handleDeepLinkSendFormOperation(url.searchParams)
+                break
+            case WalletOperation.SendConfirmation:
+                handleDeepLinkSendConfirmationOperation(url.searchParams)
+                break
+            default: {
+                throw new Error(
+                    localize('notifications.deepLinkingRequest.wallet.unrecognizedOperation', {
+                        values: { operation: pathnameParts[0] },
+                    })
+                )
+            }
+        }
+    } catch (err) {
+        openPopup({
+            type: 'deepLinkError',
+            props: { error: err, url },
+        })
+        addError({ time: Date.now(), type: 'deepLink', message: `Error handling deep link. ${err.message}` })
     }
 }

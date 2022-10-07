@@ -16,14 +16,19 @@ export class BaseError extends Error {
             console.error(message)
         }
 
+        if (params?.originalError) {
+            console.error(params?.originalError)
+        }
+
         if (params?.saveToErrorLog) {
-            addError({ message })
+            addError({ ...params, message, type: 'BaseError', time: Date.now() })
         }
 
         if (params?.showNotification) {
             showAppNotification({
                 type: 'error',
                 message,
+                alert: true,
             })
         }
 

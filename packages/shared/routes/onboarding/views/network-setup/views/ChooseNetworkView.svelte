@@ -1,17 +1,23 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingButton, OnboardingLayout, Text } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
+    import { Animation, OnboardingButton, OnboardingLayout, Text, TextType } from 'shared/components'
     import features from '@features/features'
-    import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        initialiseOnboardingProfile,
+        onboardingProfile,
+        shouldBeDeveloperProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { getDefaultClientOptions, NetworkType } from '@core/network'
+    import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { networkSetupRouter } from '@core/router'
+    import { profiles } from '@core/profile'
 
-    const networkProtocol = $onboardingProfile.networkProtocol
+    $: networkProtocol = $onboardingProfile?.networkProtocol ?? NetworkProtocol.Shimmer
 
-    const networkIcon: Readonly<{ [key in NetworkType]: string }> = {
+    let networkIcon: { [key in NetworkType]: string }
+    $: networkIcon = {
         [NetworkType.Mainnet]: networkProtocol,
         [NetworkType.Devnet]: 'settings',
         [NetworkType.PrivateNet]: 'settings',
@@ -31,11 +37,17 @@
     }
 
     onMount(() => {
+        if (!$onboardingProfile?.id) {
+            initialiseOnboardingProfile(
+                $onboardingProfile?.isDeveloperProfile ?? shouldBeDeveloperProfile(),
+                NetworkProtocol.Shimmer
+            )
+        }
         updateOnboardingProfile({ networkType: null })
     })
 </script>
 
-<OnboardingLayout {onBackClick}>
+<OnboardingLayout allowBack={$profiles.length > 0} {onBackClick}>
     <div slot="title">
         <Text type={TextType.h2}>{localize('views.onboarding.networkSetup.chooseNetwork.title')}</Text>
     </div>

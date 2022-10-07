@@ -11,8 +11,8 @@
 
     const addressPrefix = $networkHrp
 
-    let inputElement: HTMLInputElement
-    let modal: Modal
+    let inputElement: HTMLInputElement = undefined
+    let modal: Modal = undefined
 
     let selectedAccount: IAccountState
     let value: string

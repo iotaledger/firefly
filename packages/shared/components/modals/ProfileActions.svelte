@@ -1,25 +1,22 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
-    import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
+    import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { LocaleArguments } from '@core/i18n/types'
-    import { ledgerDeviceState } from 'shared/lib/ledger'
+    import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
     import { popupState, openPopup } from 'shared/lib/popup'
     import { openSettings } from '@core/router'
-    import { LedgerAppName, LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { appVersionDetails } from '@core/app'
-    import { activeProfile, isSoftwareProfile, isLedgerProfile, logout, lockStronghold } from '@core/profile'
+    import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, logout, lockStronghold } from '@core/profile'
+    import { checkOrUnlockStronghold } from '@core/stronghold'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     const profileColor = 'blue' // TODO: each profile has a different color
     const isUpToDate = $appVersionDetails.upToDate
 
     const { isStrongholdLocked, shouldOpenProfileModal } = $activeProfile
 
-    let isLedgerConnected = false
-    let isCheckingLedger = false
     let ledgerConnectionText = ''
 
     $: profileName = $activeProfile?.name
@@ -32,9 +29,8 @@
     // used to prevent the modal from closing when interacting with the password popup
     // to be able to see the stronghold toggle change
     $: isPasswordPopupOpen = $popupState?.active && $popupState?.type === 'password'
-    $: if ($isLedgerProfile && $ledgerDeviceState) {
+    $: if ($isActiveLedgerProfile && $ledgerConnectionState) {
         updateLedgerConnectionText()
-        isLedgerConnected = $ledgerDeviceState === LedgerDeviceState.Connected
     }
 
     const handleSettingsClick = (): void => {
@@ -48,44 +44,14 @@
 
     const handleStrongholdToggleClick = (): void => {
         if ($isStrongholdLocked) {
-            openPopup({
-                type: 'password',
-                props: {
-                    isStrongholdLocked: $isStrongholdLocked,
-                },
-            })
+            checkOrUnlockStronghold()
         } else {
             lockStronghold()
         }
     }
 
-    const syncLedgerDeviceStatus = (): void => {
-        isCheckingLedger = true
-        // const _onComplete = () => setTimeout(() => (isCheckingLedger = false), 500)
-        // getLedgerDeviceStatus(false, _onComplete, _onComplete, _onComplete)
-    }
-
     const updateLedgerConnectionText = (): void => {
-        const values: LocaleArguments =
-            $ledgerDeviceState === LedgerDeviceState.LegacyConnected ? { legacy: LedgerAppName.IOTALegacy } : {}
-        const text = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerDeviceState}`, { values })
-
-        /**
-         * NOTE: The text for when another app (besides IOTA or IOTA Legacy) is open
-         * requires an app name to be prepended or else the text won't make sense.
-         */
-        if ($ledgerDeviceState === LedgerDeviceState.OtherConnected) {
-            // getLedgerOpenedApp()
-            //     .then((la: LedgerApp) => {
-            //         ledgerConnectionText = `${la.name} ${text}`
-            //     })
-            //     .catch((err) => {
-            //         ledgerDeviceState.set(LedgerDeviceState.NotDetected)
-            //         console.error(err)
-            //     })
-        } else {
-            ledgerConnectionText = text
-        }
+        ledgerConnectionText = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerConnectionState}`)
     }
 
     function handleBackupClick() {
@@ -119,8 +85,8 @@
                     <DeveloperIndicatorPill />
                 {/if}
             </div>
-            {#if $isLedgerProfile}
-                <Icon icon="ledger" classes="text-gray-500 w-4 h-4" />
+            {#if $isActiveLedgerProfile}
+                <Icon icon="ledger" classes="text-gray-900 dark:text-gray-100 w-4 h-4" />
             {/if}
         </div>
         <HR />
@@ -138,8 +104,8 @@
                             </Text>
                         </div>
                     </div>
-                    <Button secondary xsmall onClick={() => handleVersionUpdateClick()}>
-                        <Text type="p">{localize('views.dashboard.profileModal.version.button')}</Text>
+                    <Button size={ButtonSize.Small} onClick={handleVersionUpdateClick}>
+                        {localize('views.dashboard.profileModal.version.button')}
                     </Button>
                 </div>
             </div>
@@ -168,8 +134,8 @@
                                 </Text>
                             </div>
                         </div>
-                        <Button secondary xsmall onClick={() => handleBackupClick()}>
-                            <Text type="p">{localize('views.dashboard.profileModal.backup.button')}</Text>
+                        <Button outline size={ButtonSize.Small} onClick={handleBackupClick}>
+                            {localize('views.dashboard.profileModal.backup.button')}
                         </Button>
                     </div>
                 </div>
@@ -205,21 +171,18 @@
                     <Icon
                         icon="chip"
                         boxed
-                        classes={isLedgerConnected ? 'text-blue-500' : 'text-gray-500 dark:text-white'}
-                        boxClasses={isLedgerConnected ? 'bg-blue-100 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-800'}
+                        classes={$ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
+                            ? 'text-blue-500'
+                            : 'text-gray-500 dark:text-white'}
+                        boxClasses={$ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
+                            ? 'bg-blue-100 dark:bg-gray-800'
+                            : 'bg-gray-100 dark:bg-gray-800'}
                     />
                     <div>
                         <Text type="p">{localize('views.dashboard.profileModal.hardware.title')}</Text>
                         <Text type="p" overrideColor classes="text-gray-500 -mt-0.5">{ledgerConnectionText}</Text>
                     </div>
                 </div>
-                <button on:click={() => syncLedgerDeviceStatus()}>
-                    <Icon
-                        icon="refresh"
-                        classes="{isCheckingLedger &&
-                            'animate-spin-reverse'} text-gray-500 dark:text-white cursor-pointer"
-                    />
-                </button>
             </div>
             <HR />
         {/if}

@@ -1,18 +1,18 @@
 import { resetRouters } from '@core/router'
-import { stopPollingLedgerStatus } from '@lib/ledger'
+import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { closePopup } from '@lib/popup'
 import { get } from 'svelte/store'
-import { destroyProfileManager } from '@core/profile-manager'
+import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
 import { resetDashboardState } from '../resetDashboardState'
 import { clearPollNetworkInterval } from '@core/network'
 import {
     resetActiveProfile,
     activeProfile,
-    isLedgerProfile,
     isSoftwareProfile,
     activeAccounts,
     lockStronghold,
+    isLedgerProfile,
 } from '@core/profile'
 import { resetSelectedAccount } from '@core/account'
 
@@ -20,20 +20,22 @@ import { resetSelectedAccount } from '@core/account'
  * Logout from active profile
  */
 export function logout(clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
-    const { lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
+    const { lastActiveAt, loggedIn, hasLoadedAccounts, type } = get(activeProfile)
 
     // (TODO): Figure out why we are using a promise here?
     return new Promise((resolve) => {
-        if (_lockStronghold && get(isSoftwareProfile)) {
-            lockStronghold()
-        } else if (get(isLedgerProfile)) {
-            stopPollingLedgerStatus()
+        if (get(isSoftwareProfile)) {
+            _lockStronghold && lockStronghold()
+        } else if (isLedgerProfile(type)) {
+            get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
         }
 
         clearPollNetworkInterval()
         const _activeProfile = get(activeProfile)
         if (_activeProfile) {
             const manager = get(profileManager)
+
+            unsubscribeFromWalletApiEvents()
 
             // stop background sync
             // TODO: Make sure we need this. Would destroying the profile manager also stop background syncing automatically?

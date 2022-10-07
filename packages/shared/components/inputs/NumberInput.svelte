@@ -1,22 +1,39 @@
 <script lang="typescript">
-    import { TextInput } from 'shared/components'
     import { localize } from '@core/i18n'
+    import Input from './Input.svelte'
+    import { FontWeight, TextPropTypes, TextType } from 'shared/components'
 
-    export let inputElement: HTMLInputElement
+    export let inputElement: HTMLInputElement = undefined
+    export let disabled: boolean = false
+    export let hasFocus: boolean = false
+    export let isInteger: boolean = false
+    export let value: string = undefined
+    export let error: string = ''
 
-    export let disabled = false
-    export let hasFocus = false
-    export let value: string
-    export let isInteger: boolean
+    // Text Props
+    export let type = TextType.p
+    export let fontWeight = FontWeight.normal
+    export let fontSize = 'sm'
+    export let lineHeight = '140'
+    export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
+
+    let textProps: TextPropTypes
+    $: textProps = { type, fontSize, lineHeight, fontWeight }
 </script>
 
-<TextInput
+<Input
     bind:inputElement
     bind:value
     bind:hasFocus
-    {disabled}
-    placeholder={localize('general.amount')}
+    type="number"
     float={!isInteger}
     integer={isInteger}
+    placeholder={localize('general.amount')}
+    {disabled}
+    {error}
+    {textProps}
+    {alignment}
     {...$$restProps}
-/>
+>
+    <slot />
+</Input>

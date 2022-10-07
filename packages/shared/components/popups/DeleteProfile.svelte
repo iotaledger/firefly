@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text, Spinner } from 'shared/components'
+    import { Button, PasswordInput, Text, ButtonVariant } from 'shared/components'
     import { isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
@@ -43,12 +43,14 @@
     {/if}
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full">
-    <Button secondary classes="w-1/2" onClick={closePopup} disabled={isBusy}>{localize('actions.no')}</Button>
-    <Button disabled={(!password && $isSoftwareProfile) || isBusy} classes="w-1/2" onClick={handleDeleteClick} warning>
-        {#if isBusy}
-            <Spinner busy classes="justify-center" />
-        {:else}
-            {localize('actions.yes')}
-        {/if}
+    <Button outline classes="w-1/2" onClick={closePopup} disabled={isBusy}>{localize('actions.no')}</Button>
+    <Button
+        disabled={(!password && $isSoftwareProfile) || isBusy}
+        classes="w-1/2"
+        onClick={handleDeleteClick}
+        variant={ButtonVariant.Warning}
+        {isBusy}
+    >
+        {localize('actions.yes')}
     </Button>
 </div>

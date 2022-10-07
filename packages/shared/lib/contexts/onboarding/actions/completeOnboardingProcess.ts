@@ -1,27 +1,23 @@
+import { activeProfile, login, UnableToFindProfileSetupTypeError } from '@core/profile'
 import { get } from 'svelte/store'
-
-import { createNewAccount } from '@core/account'
-import { login } from '@core/profile'
-
 import { ProfileSetupType } from '../enums'
 import { onboardingProfile } from '../stores'
+import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnboardingProfile'
 
-import { addOnboardingProfile } from './addOnboardingProfile'
-import { cleanupOnboarding } from './cleanupOnboarding'
+export function completeOnboardingProcess(): void {
+    // if we already have an active profile
+    // it means we are trying to load again after an error
+    // and we don't need to add it again
+    if (!get(activeProfile)?.id) {
+        createNewProfileFromOnboardingProfile()
+    }
 
-export async function completeOnboardingProcess(): Promise<void> {
-    addOnboardingProfile()
+    const setupType = get(onboardingProfile)?.setupType
+    if (!setupType) {
+        throw new UnableToFindProfileSetupTypeError()
+    }
 
-    /**
-     * NOTE: If recovering from a Stronghold that already contains
-     * at least one account, calling this function will cause
-     * an "AccountAliasAlreadyExists" error from wallet-rs. This
-     * error does NOT cause side-effects while creating a profile.
-     */
-    await createNewAccount()
-
-    const recoverAccounts = get(onboardingProfile)?.setupType !== ProfileSetupType.New
-    void login(recoverAccounts)
-
-    void cleanupOnboarding()
+    const shouldRecoverAccounts = setupType === ProfileSetupType.Recovered
+    const shouldCreateAccount = setupType === ProfileSetupType.New
+    void login({ isFromOnboardingFlow: true, shouldRecoverAccounts, shouldCreateAccount })
 }

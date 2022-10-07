@@ -1,102 +1,193 @@
 {
     "views": {
-        "onboarding1": {
-            "title": "Send, Receive & Manage your {protocol} tokens",
-            "body": "Firefly je oficiálna IOTA peňaženka."
-        },
-        "legal": {
-            "title": "Ochrana osobných údajov a zmluvné podmienky",
-            "body": "Prosím preštudujte si Zásady ochrany osobných údajov a zmluvné podmienky.",
-            "checkbox": "Prečítal som a súhlasím so Zásadami ochrany osobných údajov a Podmienkami služby"
-        },
-        "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
-        },
-        "languageAndAppearance": {
-            "title": "Language & appearance",
-            "body": "Choose your language and theme"
-        },
-        "profile": {
-            "title": "Create your {protocol} profile",
-            "profileName": "Názov profilu",
-            "body1": "Môžete si vytvoriť viaceré používateľské profily pre organizáciu vašich peňaženiek a zvýšenie súkromia.",
-            "body2": {
-                "first": "Začnime s menom vášho prvého profilu.",
-                "nonFirst": "Začnime s menom vášho profilu."
-            },
-            "addMore": "Viac profilov viete pridať neskôr.",
-            "advancedOptions": "Advanced options",
-            "developer": {
-                "label": "Vývojársky profil",
-                "info": "Connect to the devnet or a private network"
-            }
-        },
-        "setup": {
-            "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
-            "chrysalisTitle": "Aktualizácia siete Chrysalis",
-            "chrysalisBody": "Od 21. apríla 2021 môžu používatelia migrovať svoje tokeny na novú sieť Chrisalis. Odporúčame Vám preniesť si svoje už existujúce tokeny čo najskôr.",
-            "learnMore": "Naučte sa o presune"
-        },
-        "secure": {
-            "title": "Zabezpečte svoju peňaženku",
-            "body1": "Uložiť a vytlačiť PDF šablónu dokumentu pre overenie.",
-            "body2": "Ak vyplníte dokument pre overenie a bezpečne si ho uschováte, budete schopný kedykoľvek obnoviť svoje peňaženky."
-        },
-        "create": {
-            "title": "Vytvoriť peňaženku",
-            "body": "Vytvorte novú peňaženku. Môžete si vybrať buď softwarovú peňaženku alebo ak máte zariadenie Ledger, môžete si zvoliť hardwarovú peňaženku.",
-            "softwareAccount": {
-                "title": "Create a software wallet",
-                "description": "Provides a Stronghold file and recovery phrase"
-            },
-            "ledgerAccount": {
-                "title": "Create a hardware wallet",
-                "description": "Potrebný Ledger Nano S alebo Nano X"
-            }
-        },
-        "protocol": {
-            "title": "Choose protocol",
-            "body": "Set the protocol for your profile",
-            "iota": "IOTA Mainnet",
-            "shimmer": "Staging network for IOTA Mainnet"
-        },
-        "network": {
-            "title": "Choose network",
-            "body": "Set the network for your profile",
-            "iota": {
-                "mainnet": {
-                    "title": "Mainnet",
-                    "body": "IOTA Mainnet"
+        "onboarding": {
+            "appSetup": {
+                "welcome": {
+                    "title": "Posielajte, Prijímajte a Manažujte svoje {protocol} tokeny",
+                    "body": "Firefly je oficiálna peňaženka pre {protocol}."
                 },
-                "devnet": {
-                    "title": "Devnet",
-                    "body": "Developer network for IOTA"
+                "legal": {
+                    "title": "Ochrana osobných údajov a zmluvné podmienky",
+                    "body": "Please review the Privacy Policy and Terms of Service.",
+                    "checkbox": "Prečítal som a súhlasím so Zásadami ochrany osobných údajov a zmluvnými podmienkami"
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with active TIPS"
+                "languageAndAppearance": {
+                    "title": "Language & appearance",
+                    "body": "Choose your language and theme."
                 }
             },
-            "shimmer": {
-                "mainnet": {
-                    "title": "Shimmer",
-                    "body": "Staging network for IOTA"
+            "networkSetup": {
+                "chooseProtocol": {
+                    "title": "Choose protocol",
+                    "body": "Set the protocol for your profile.",
+                    "iota": "Default IOTA network",
+                    "shimmer": "Experimental IOTA staging network"
                 },
-                "devnet": {
-                    "title": "Shimmer Beta",
-                    "body": "Beta network for Shimmer"
+                "chooseNetwork": {
+                    "title": "Zvoliť sieť",
+                    "body": "Set the network for your profile.",
+                    "iota": {
+                        "mainnet": {
+                            "title": "Mainnet",
+                            "body": "IOTA Mainnet"
+                        },
+                        "devnet": {
+                            "title": "Devnet",
+                            "body": "Developer network for IOTA"
+                        },
+                        "private-net": {
+                            "title": "Súkromná sieť",
+                            "body": "Support for custom networks with active TIPs"
+                        }
+                    },
+                    "shimmer": {
+                        "mainnet": {
+                            "title": "Shimmer",
+                            "body": "Staging network for IOTA"
+                        },
+                        "devnet": {
+                            "title": "Testnet",
+                            "body": "Public beta network for Shimmer"
+                        },
+                        "private-net": {
+                            "title": "Súkromná sieť",
+                            "body": "Support for custom networks with draft TIPs"
+                        }
+                    }
                 },
-                "private-net": {
-                    "title": "Custom Network",
-                    "body": "Support for custom networks with draft TIPS"
+                "setupPrivateNetworkConnection": {
+                    "title": "Connect to a private network",
+                    "body": "Fill the form with the node information and connect to a private network."
                 }
+            },
+            "profileSetup": {
+                "setup": {
+                    "title": "Set up {protocol, select, IOTA {an} Shimmer {a}} {protocol} profile",
+                    "body": "Select the appropriate method to set up your {protocol} profile."
+                },
+                "setupNew": {
+                    "title": "Vytvoriť profil",
+                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "softwareAccount": {
+                        "title": "Create a software profile",
+                        "description": "Provides a Stronghold file and recovery phrase"
+                    },
+                    "ledgerAccount": {
+                        "title": "Create a hardware profile",
+                        "description": "Ledger Nano S or Nano X required"
+                    }
+                },
+                "setupRecovered": {
+                    "title": "Recover {protocol} profile",
+                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
+                    "importMnemonic": "Use recovery phrase",
+                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
+                    "importFile": "Use Stronghold backup",
+                    "importFileDescription": "Import your Stronghold backup file",
+                    "importLedger": "Use Ledger device",
+                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                },
+                "setupClaimed": {
+                    "title": "Claim Shimmer staking rewards",
+                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                },
+                "enterName": {
+                    "title": "Create your {protocol} profile",
+                    "profileName": "Profile name",
+                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "body2": {
+                        "first": "For now, let's start with your first profile name.",
+                        "nonFirst": "For now, let's start with your profile name."
+                    },
+                    "addMore": "You can add more profiles later."
+                }
+            },
+            "strongholdSetup": {
+                "setupStrongholdPassword": {
+                    "title": "Create a password",
+                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
+                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                }
+            },
+            "storageProtectionSetup": {
+                "setupPinProtection": {
+                    "title": "Set up PIN code",
+                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
+                    "body2": "Use numbers only"
+                }
+            },
+            "profileBackup": {
+                "backupMnemonic": {
+                    "title": "Back up your recovery phrase",
+                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
+                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
+                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                },
+                "viewMnemonic": {
+                    "title": "Fráza pre obnovenie",
+                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
+                    "body2": "Keep this private and safely stored.",
+                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
+                    "revealRecoveryPhrase": "Ukázať frázu pre obnovenie",
+                    "hideRecoveryPhrase": "Skryť frázu pre obnovenie"
+                },
+                "verifyMnemonic": {
+                    "title": "Overiť frázu pre obnovenie",
+                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
+                    "word": "Slovo",
+                    "verified": "Fráza pre obnovenie overená",
+                    "verifiedBody": "Nezabudnite ju uchovať v súkromí a bezpečí."
+                },
+                "backupStronghold": {
+                    "title": "Zálohovať do súboru Stronghold",
+                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
+                    "body2": "Dôvody prečo digitálne zálohy sú dôležité:",
+                    "reason1": "Jednoducho obnovte vaše peňaženky bez zadávania frázy obnovenia",
+                    "reason2": "Importovať vaše peňaženky do iných zariadení",
+                    "reason3": "Obnovte celú vašu históriu transakcii"
+                }
+            },
+            "profileRecovery": {
+                "importMnemonicPhrase": {
+                    "title": "Zadajte obnovovaciu frázu",
+                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
+                    "enter": "Zadajte vašu tajnú obnovovaciu frázu",
+                    "phraseDetected": "24-slovná fráza obnovenia detegovaná"
+                },
+                "importStrongholdBackup": {
+                    "title": "Import your Stronghold backup",
+                    "body": "Import a Stronghold backup file to restore your profile."
+                },
+                "backupPassword": {
+                    "body1": "Prosím, zadajte heslo vašej zálohy.",
+                    "body2": "This is the password you set when you first created your backup."
+                },
+                "success": {
+                    "title": "Úspešne ste obnovili vašu zálohu",
+                    "body": "Teraz si môžete nastaviť svoj nový profil."
+                }
+            },
+            "shimmerClaiming": {
+                "claimRewards": {
+                    "title": "Your Shimmer staking rewards",
+                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
+                },
+                "success": {
+                    "title": "Shimmer claimed",
+                    "body": "You have successfully claimed your Shimmer tokens.",
+                    "totalRewards": "Total rewards"
+                }
+            },
+            "congratulations": {
+                "title": "Profile setup almost complete...",
+                "fundsMigrated": "Prostriedky premigrované",
+                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
+                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
+                "softwareMigratedBody": "Úspešne ste premigrovali vaše prostriedky do novej siete",
+                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
+                "trinityLedgerBody": "Úspešne ste premigrovali váš Ledger do novej siete.",
+                "exportMigration": "Exportovať log migrácie a dokončiť nastavenie"
             }
-        },
-        "customNetwork": {
-            "title": "Connect to a custom network",
-            "body": "Fill the form with the node information and connect to a custom network"
         },
         "setupLedger": {
             "progress1": "Pripojte váš Ledger",
@@ -107,117 +198,10 @@
             "videoGuide": "Video-návod pre Ledger migráciu"
         },
         "ledgerInstallationGuide": {
-            "title": "Nainštalovali ste potrebné Ledger aplikácie?",
-            "body1": "Skôr než budete pokračovať, musíte nájsť a nainštalovať aplikáciu {legacy} aj novú aplikáciu IOTA prostredníctvom Ledger Live.",
+            "title": "Have you installed the {protocol} app on your Ledger device?",
+            "body1": "Before you proceed, you must use Ledger Live to find and install the {protocol} app.",
             "body2": "Uistite sa, že je firmware Ledger aktuálny. Všetky predinštalované aplikácie by mali byť aktualizované na najnovšiu verziu.",
-            "action": "Áno, nainštaloval som tieto aplikácie"
-        },
-        "password": {
-            "title": "Vytvoriť heslo",
-            "body1": "Potrebujete silné heslo k ochrane vašich prostriedkov. Použite kombináciu slov a vyhnite sa bežným frázam, menám či dátumom.",
-            "body2": "Je doporučené si zapísať vaše heslo do sady pre overenie."
-        },
-        "protect": {
-            "title": "Protect your wallet",
-            "body1": "Nastavte prihlasovací PIN kód pre uistenie sa, že iba vy máte prístup k profilu.",
-            "body2": "Uchovajte váš PIN kód v bezpečí!"
-        },
-        "setupPin": {
-            "title": "Set up PIN code",
-            "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-            "body2": "Use numbers only"
-        },
-        "backup": {
-            "title": "Zálohujte vašu peňaženku",
-            "body1": "Teraz bude zobrazená fráza pre obnovenie. Zapíšte si ju do svojho dokumentu pre obnovenie.",
-            "body2": "S nikým svoju obnovovaciu frázu nezdieľajte. Môže byť použitá pre prístup k vašim tokenom odkiaľkoľvek.",
-            "body3": "Ak stratíte svoju frázu obnovenia, môžete prísť o svoje prostriedky."
-        },
-        "recoveryPhrase": {
-            "title": "Fráza pre obnovenie",
-            "body1": "Zapíšte zobrazené slová v rovnakom poradí do vášho dokumentu pre obnovenie.",
-            "body2": "Toto uchovajte v bezpečí a súkromí.",
-            "body3": "Je dôležité mať písanú zálohu. Počítače často zlyhávajú a súbory sa môžu poškodiť.",
-            "revealRecoveryPhrase": "Ukázať frázu pre obnovenie",
-            "hideRecoveryPhrase": "Skryť frázu pre obnovenie"
-        },
-        "verifyRecoveryPhrase": {
-            "title": "Overiť frázu pre obnovenie",
-            "body": "Poďme skontrolovať či ste si zapísali frázu správne. Prosím, vyberte jednotlivé slová v ich očíslovanom poradí.",
-            "word": "Slovo",
-            "verified": "Fráza pre obnovenie overená",
-            "verifiedBody": "Nezabudnite ju uchovať v súkromí a bezpečí."
-        },
-        "backupWallet": {
-            "title": "Zálohovať do súboru Stronghold",
-            "body1": "Zadajte svoje heslo pre zálohovanie vašich peňaženiek do Stronghold súboru. Vaše heslo je použité pre zašifrovanie zálohy.",
-            "body2": "Dôvody prečo digitálne zálohy sú dôležité:",
-            "reason1": "Jednoducho obnovte vaše peňaženky bez zadávania frázy obnovenia",
-            "reason2": "Importovať vaše peňaženky do iných zariadení",
-            "reason3": "Obnovte celú vašu históriu transakcii"
-        },
-        "recoveryPhraseSaved": {
-            "title": "Úspešne zálohované",
-            "body": "Zálohovali ste svoje peňaženky do Strongholdu."
-        },
-        "claimRewards": {
-            "title": "Your Shimmer staking rewards",
-            "body": "Please check that your Shimmer staking rewards are correct. If not, please use the balance finder."
-        },
-        "congratulations": {
-            "title": "Nastavenie peňaženky dokončené",
-            "fundsMigrated": "Prevedene prostriedky",
-            "body": "Vaša nová peňaženka je pripravená na použitie.",
-            "softwareMigratedBody": "Úspešne ste premigrovali vaše prostriedky do novej siete",
-            "fireflyLedgerBody": "Vaše Ledger konto bolo úspešne obnovené a teraz môžete pokračovať.",
-            "trinityLedgerBody": "Úspešne ste premigrovali váš Ledger do novej siete.",
-            "exportMigration": "Exportovať log migrácie a dokončiť nastavenie"
-        },
-        "import": {
-            "title": {
-                "iota": "Recover or migrate IOTA funds",
-                "shimmer": "Recover Shimmer profile"
-            },
-            "body": {
-                "iota": "If you have an existing seed or wallet back up file, you can import it here. If you hold older network funds, you will be taken through the migration steps to move to the Chrysalis network.",
-                "shimmer": "If you have an existing seed or wallet back up file, you can import it here."
-            },
-            "importSeed": "Mám 81 znakový seed",
-            "importSeedDescription": "Zadajte seed a migrujte prostriedky do Chrysalis",
-            "importMnemonic": "Use recovery phrase",
-            "importMnemonicDescription": "Enter your secret phrase",
-            "importFile": {
-                "iota": "Use backup file",
-                "shimmer": "Use Stronghold backup file"
-            },
-            "importFileDescription": {
-                "iota": "Upload a Seedvault or Stronghold file",
-                "shimmer": "Upload Stronghold file"
-            },
-            "importLedger": "Use Ledger hardware device",
-            "importLedgerDescription": {
-                "iota": "Restore or migrate a Ledger profile",
-                "shimmer": "Restore using Nano S or Nano X devices"
-            }
-        },
-        "importFromText": {
-            "seed": {
-                "title": "Zadajte svoj seed pre začatie migrácie",
-                "body": "Seed pozostáva z 81 znakov. Je používaný pre obnovenie zo staršej Trinity aplikácie.",
-                "enter": "Vložte váš Seed"
-            },
-            "mnemonic": {
-                "title": "Zadajte vašu obnovovaciu frázu",
-                "body": "Fráza obnovenia je dlhá 24 slov oddelených medzerami a zložených iba z malých písmen. Je použitá pre obnovenie existujúcich Firefly peňaženiek.",
-                "enter": "Zadajte vašu tajnú obnovovaciu frázu"
-            },
-            "seedDetected": "81 znakový seed detegovaný",
-            "phraseDetected": "24-slovná fráza obnovenia detegovaná",
-            "checksum": "Kontrolný súčet"
-        },
-        "importFromFile": {
-            "title": "Obnovte svoje peňaženky pomocou zálohy zo súboru",
-            "body": "Importovať súbor zálohy pre obnovenie vašich peňaženiek. Záloha môže byť buď Stronghold (.stronghold) alebo Trinity SeedVault (.kdbx)."
+            "action": "Yes, I've installed the {protocol} app"
         },
         "importFromLedger": {
             "title": "Obnoviť alebo Migrovať váš Ledger",
@@ -230,8 +214,9 @@
         "connectLedger": {
             "title": "Pripojte váš Ledger k Firefly",
             "body": "Aby Firefly mohlo nájsť vaše zariadenie Ledger, uistite sa, že je oficiálna aplikácie Ledger Live zatvorená.",
-            "trafficLight1": "Pripojiť a odomknúť váš Ledger s vaším PIN kódom",
-            "trafficLight2": "Otvorte novú IOTA aplikáciu na vašom Ledger zariadení",
+            "connect": "Pripojte vaše zariadenie Ledger",
+            "unlock": "Unlock your Ledger with its pin",
+            "openApp": "Open the Shimmer app on your Ledger",
             "tips": "Tipy, ak sa váš Ledger nepripája"
         },
         "restoreFromFireflyLedger": {
@@ -246,7 +231,7 @@
             "readMore": "Čo očakávať od procesu migrácie"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "Generovať novú adresu",
             "body": "Pre migráciu tokenov s Firefly potrebujete vygenerovať novú adresu. Pre pokračovanie kliknite na tlačidlo nižšie.",
             "confirmTitle": "Potvrdiť novú adresu",
             "confirmBody": "Z bezpečnostných dôvodov, prosím porovnajte adresu vygenerovanú na vašom Ledger zariadení s adresou vyobrazenou nižšie. Pokiaľ sa zhodujú, stlačte podľa výzvy obidve tlačidlá na vašom Ledgeri.",
@@ -268,82 +253,6 @@
             "takingAWhile": "Toto akosi trvá...",
             "notGeneratingAddresses": "Generuje vaša Ledger adresy?",
             "reinstallLegacy": "Ak nie, odpojte zariadenie a skúste to znova. Ak problém pretrváva, možno budete musieť znova nainštalovať aplikáciu {legacy}."
-        },
-        "importBackupPassword": {
-            "body1": "Prosím, zadajte heslo vašej zálohy.",
-            "body2": "Toto je heslo, ktoré ste nastavili keď ste si prvýkrát vytvorili zálohu."
-        },
-        "importSuccess": {
-            "title": "Úspešne ste obnovili vašu zálohu",
-            "body": "Teraz si môžete nastaviť svoj nový profil."
-        },
-        "migrate": {
-            "title": "Migrujte vaše prostriedky",
-            "body1": "Tento automatický proces prevedie Vaše prostriedky do novej peňaženky.",
-            "body2": "Môže to nejakú dobu trvať. Počas migrácie svoje zariadenie nevypínajte.",
-            "existing": "Vaša stará peňaženka",
-            "new": "Vaša nová peňaženka",
-            "learn": "Naučte sa o presune",
-            "beginMigration": "Začatie presunu",
-            "migrating": "Presúvanie prostriedkov...",
-            "migrated": "{balance} presunuté",
-            "migrationFailed": "Presúvanie zlyhalo",
-            "noAddressesForMigration": "Prosím vyberte si adresy ktoré majú byť zabezpečené.",
-            "restoringWallet": "Obnovovanie peňaženky...",
-            "findingBalance": "Vyhľadávanie zostatkov...",
-            "incorrectSeedVaultPassword": "Nesprávne SeedVault heslo.",
-            "noDataSeedVault": "V SeedVaulte neboli nájdené žiadne dáta.",
-            "signingBundle": "Podpisovanie zväzku",
-            "broadcastingBundle": "Vysielanie zväzka",
-            "miningBundle": "Ťaženie zväzka",
-            "problemRestoringWallet": "Vyskytol sa problém so sieťou pri obnovovaní vašej peňaženky. Skúste to znova.",
-            "minimumMigrationAmountSpentAddresses": "Minimálna suma pre každú použitú adresu je 1 Mi. Skontrolujte ešte raz, ak zostatok nevyzera správne.",
-            "tooManyAddressesToMigrate": "Máte príliš veľa adries s malým zostatok na migráciu. Skontrolujte ešte raz či vás zostatok náhodou nevyzerá nesprávne.",
-            "cannotMigrateAllYourFunds": "Nemožeme presunúť všetky vaše prostriedky, pretože niektoré adresy majú nízky zostatok. Ale v každom prípade možete pokračovať. {value} budú stratené.",
-            "error": "Vyskytla sa chyba pri presúvani Vašich prostriedkov. Prosím skúste znova."
-        },
-        "bundleMiningWarning": {
-            "title": "Upozornenie",
-            "body1": "Máte prostriedky na jednej alebo viacerých použitých adresách.",
-            "body2": "Doporučujeme spustiť automatizovaný proces, ktorý pomôže s bezpečným prevodom týchto prostriedkov.",
-            "body3": "Ak zatvoríte aplikáciu bude potrebné reštartovať celú migráciu.",
-            "learn": "Viac o použitých adresách"
-        },
-        "secureSpentAddresses": {
-            "title": "Zabezpečte použité adresy",
-            "body1": "Vaše prostriedky sú na {number, plural, one {# použitéj adrese} other {# použitých adresách}}.",
-            "body2": "Doporučujeme spustiť automatizovaný proces, ktorý pomôže s bezpečným prevodom vašich prostriedkov.",
-            "error": "Nemôžete migrovať použité adresy so zostatkom nižším ako 1 Mi"
-        },
-        "securityCheckCompleted": {
-            "title": "Bezpečnostná kontrola bola dokončená",
-            "body1": "Vypočítali sme úroveň bezpečnostného rizika. Spustenie tohto procesu môže znížiť úroveň rizika.",
-            "body2": "Akonáhle ste spokojný s úrovňou rizika, stlačte pokračovať.",
-            "rerun": "Opakovať proces pre vybrané adresy",
-            "continueMigration": "Pokračovanie v presune"
-        },
-        "securingSpentAddresses": {
-            "title": "Zabezpečujeme použité adresy...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
-            "body2": "Počítač bude bežať na plnú kapacitu, medzitým môžete robiť niečo iné."
-        },
-        "transferFragmentedFunds": {
-            "body1": "Firefly začne migrovať vaše prostriedky. Tento proces môže chvíľu trvať.",
-            "body2": "Zaistite aby bola vaša Ledger pripojená a aplikácia {legacy} bola počas migrácie otvorená.",
-            "migrate": "Migrácia prostriedkov",
-            "transaction": "Transakcia {number}",
-            "rerun": "Try again"
-        },
-        "migrateFailed": {
-            "title": "To do",
-            "body": "To do"
-        },
-        "balance": {
-            "title": "Váš zostatok",
-            "body": "Pred pokračovaním sa uistite, že zostatok je správny. V prípade, že zostatok nesedí, máte možnosť ho skontrolovať znova.",
-            "error": "Minimálna suma pre každú použitú adresu je 1 Mi. Skontrolujte ešte raz, ak zostatok nevyzera správne.",
-            "zeroBalance": "Skúste znovu skontrolovať. Pokiaľ stále nemôžete nájsť svoj zostatok, možno ste zadali seed nesprávne.",
-            "zeroBalanceLedgerLegacy": "Skúste znovu skontrolovať. Pokiaľ stále nemôžete nájsť svoj zostatok, možno ste zvolili nesprávny index účtu."
         },
         "settings": {
             "settings": "Nastavenia",
@@ -458,8 +367,9 @@
                 "includeNode": "Zahrnúť uzol",
                 "editDetails": "Upraviť podrobnosti",
                 "viewInfo": "Zobraziť info",
-                "setAsPrimary": "Nastaviť ako hlavný",
-                "removeNode": "Remove node",
+                "setAsPrimary": "Set primary node",
+                "unsetAsPrimary": "Clear primary node",
+                "removeNode": "Odstrániť uzol",
                 "includeOfficialNodeList": "Zahrnúť oficiálny zoznam uzlov",
                 "noNodes": "Momentálne nie sú k dispozícii žiadne uzly, nie je množné pripojiť sa k sieti",
                 "noNodesAuto": "Neexistujú žiadne uzly, bude použitý automatický výber"
@@ -473,7 +383,7 @@
                 "description": "Zobraziť chyby pre debugovanie problému"
             },
             "crashReporting": {
-                "title": "Crash reports",
+                "title": "Hlásenia o zlyhaní",
                 "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
                 "checkbox": "Send crash reports",
                 "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
@@ -524,6 +434,19 @@
             "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
+        "loadProfile": {
+            "loginSteps": {
+                "buildProfileManager": "Initialising profile manager",
+                "updateNodeInfo": "Checking node health",
+                "recoverAccounts": "Generating accounts",
+                "loadAccounts": "Syncing accounts",
+                "loadAssets": "Loading native assets",
+                "loadActivities": "Building activity history",
+                "setStrongholdStatus": "Securing stronghold",
+                "startBackgroundSync": "Starting background sync",
+                "loggingIn": "Loading dashboard"
+            }
+        },
         "dashboard": {
             "network": {
                 "operational": "Network operational",
@@ -535,40 +458,39 @@
                 "referencedRate": "Referencovaná miera"
             },
             "profileModal": {
-                "allSettings": "All settings",
+                "allSettings": "Všetky nastavenia",
                 "logout": "Odhlásiť sa",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "Uzamknutie profilu",
+                    "locked": "Stronghold uzamknutý",
+                    "unlocked": "Stronghold odomknutý"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "Hardvérové zariadenie",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
-                        "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
-                        "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "appNotOpen": "Ledger unlocked but app not open",
+                        "correctAppOpen": "Ledger unlocked and app open ",
+                        "locked": "Ledger securely locked",
+                        "mnemonicMismatch": "Nesprávny Ledger alebo mnemotechnická pomôcka",
+                        "notConnected": "Ledger not connected",
+                        "otherConnected": "Aplikácia otvorená"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
+                    "title": "Zálohujte vaše peňaženky",
                     "lastBackup": "You last backed up {date}",
                     "notBackedUp": "Not backed up",
-                    "button": "Backup"
+                    "button": "Záloha"
                 },
                 "version": {
-                    "title": "New update available",
+                    "title": "K dispozícii je nová aktualizácia",
                     "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "button": "Aktualizácia"
                 }
             }
         },
         "staking": {
-            "welcome": "Welcome to the staking dashboard!",
+            "welcome": "Vitajte v staking prehľade!",
             "status": {
                 "upcoming": "Udalosť ešte nezačala",
                 "commencing": "Pre-staking otvorený",
@@ -582,8 +504,8 @@
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
+                    "upcoming": "Vráťte sa neskôr",
+                    "commencing": "Pre-staking je otvorený",
                     "holding": "{duration} of staking left",
                     "ended": "Staking has now ended",
                     "inactive": "No staking events detected"
@@ -614,29 +536,37 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "Nová udalosť",
+                "complete": "Dokončené"
             }
         },
         "picker": {
             "color": {
-                "title": "Color picker",
+                "title": "Výber farieb",
                 "hexCode": "Color hex code"
             }
         }
     },
     "popups": {
+        "enableLedgerBlindSigning": {
+            "title": "Enable Blind Signing",
+            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
+            "step_1": "Pripojte a odomknite váš Ledger",
+            "step_2": "Otvoriť aplikáciu Shimmer",
+            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
+            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
         "storageDepositBreakdown": {
             "title": "Storage deposit breakdown",
             "totalStorageDeposit": "Total storage deposit",
             "pendingTransactions": {
-                "title": "Locked in pending transactions",
+                "title": "Uzamknuté v čakajúcich transakciách",
                 "subtitle": "For sending native assets and small IOTA amounts"
             }
         },
         "password": {
             "title": "Heslo je vyžadované",
-            "subtitle": "Please provide your password to unlock your wallets",
+            "subtitle": "Pre odomknutie vašich peňaženiek zadajte prosím svoje heslo",
             "backup": "Pre exportovanie zálohy zadajte prosím svoje heslo"
         },
         "qr": {
@@ -652,8 +582,16 @@
             "preReleaseDescription": "You are running a pre-release version of Firefly. Updates are disabled."
         },
         "backupStronghold": {
-            "title": "Backup your stronghold file",
+            "title": "Zálohovať súbor Stronghold",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
+        },
+        "deeplinkAccountSwitch": {
+            "title": "Zvoľte peňaženku",
+            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+        },
+        "deeplinkError": {
+            "title": "Failed link",
+            "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
         "deleteAccount": {
             "title": "Vymazať {name}?",
@@ -675,19 +613,27 @@
         },
         "addressHistory": {
             "title": "Hístória adries konta {name} \n",
-            "currentBalance": "Balance: {balance}",
+            "currentBalance": "Zostatok: {balance}",
             "internal": "Internal Address",
             "external": "Deposit Address"
+        },
+        "excludeNode": {
+            "title": "Vylúčiť uzol",
+            "body": "Are you sure you want to exclude {url} from the available node pool?"
+        },
+        "unsetAsPrimaryNode": {
+            "title": "Clear primary node",
+            "body": "Are you sure you want to clear {url} as the primary node?"
         },
         "node": {
             "titleAdd": "Pridať uzol",
             "titleUpdate": "Aktualizacia uzla",
             "titleRemove": "Odstrániť uzol",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "Odstrániť všetky uzly",
             "titleDetails": "Detaily uzla",
             "titleInfo": "Node information",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
+            "addingNode": "Pridávanie uzla",
+            "updatingNode": "Aktualizácia uzla",
             "loadingNodeInfo": "Loading node info",
             "nodeAddress": "Adresa uzla",
             "optionalUsername": "Užívateľské meno (voliteľné)",
@@ -695,32 +641,31 @@
             "optionalJwt": "JSON web token (optional)",
             "setAsPrimaryNode": "Nastaviť ako primárny uzol",
             "removeConfirmation": "Ste si istý, že chcete odstrániť tento uzol?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
             "info": {
                 "general": {
-                    "tab": "General",
-                    "name": "Name",
+                    "tab": "Všeobecné",
+                    "name": "Názov",
                     "url": "URL",
-                    "version": "Version",
+                    "version": "Verzia",
                     "latestMilestone": "Latest milestone",
                     "confirmedMilestone": "Confirmed milestone",
                     "pruningIndex": "Pruning index",
-                    "features": "Features"
+                    "features": "Vlastnosti"
                 },
                 "metrics": {
-                    "tab": "Metrics",
-                    "blocksPerSecond": "Blocks per second",
+                    "tab": "Metriky",
+                    "blocksPerSecond": "Bloky za sekundu",
                     "referencedBlocksPerSecond": "Referenced blocks per second",
-                    "referencedRate": "Referenced rate",
+                    "referencedRate": "Referencovaná miera",
                     "latestMilestone": "Latest milestone",
                     "confirmedMilestone": "Confirmed milestone"
                 },
                 "protocol": {
-                    "tab": "Protocol",
-                    "network": "Network",
+                    "tab": "Protokol",
+                    "network": "Sieť",
                     "bech32Hrp": "Bech32 HRP",
                     "tokenSupply": "Token supply",
-                    "protocolVersion": "Version",
+                    "version": "Verzia",
                     "minPowScore": "Min PoW Score"
                 },
                 "baseToken": {
@@ -735,8 +680,8 @@
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
+            "title": "Zmeniť sieť",
+            "newNetwork": "Nová sieť",
             "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
             "switchingNetwork": "Switching network",
             "typePassword": "Type your password to switch to:"
@@ -746,12 +691,12 @@
             "empty": "Záznam chýb je prázdny."
         },
         "deleteProfile": {
-            "title": "Delete profile",
+            "title": "Odstrániť profil",
             "confirmation": "Naozaj chcete odstrániť tento profil? Túto akciu nie je možné vrátiť späť.",
             "typePassword": "Pre potvrdenie napíšte Vaše heslo."
         },
         "diagnostics": {
-            "title": "Diagnostics",
+            "title": "Diagnostika",
             "node": "Uzol",
             "platform": "Platforma",
             "platformVersion": "Verzia platformy",
@@ -764,6 +709,7 @@
         "transaction": {
             "title": "Potvrdenie transakcie",
             "body": "Chcete poslať {amount} ",
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "Posielaš prevod z peňaženky, ktorá je práve stakovaná. Tento prevod odstakuje tvoje tokeny. Prevod pokojne vykonaj, avšak zvyšné tokeny bude potom treba znovu stakovať.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
@@ -793,24 +739,27 @@
             "bodyFirefly": "Firefly je do dokončenia odstavená. Migrácia tokenov bude stále možná aj potom."
         },
         "ledgerNotConnected": {
-            "connect": "Pre pokračovanie otvorte novú IOTA aplikáciu na vašom Ledger zariadení",
-            "connectLegacy": "Pre pokračovanie otvorte aplikáciu {legacy} na vašom Ledger zariadení"
+            "title": "Connect your Ledger",
+            "notConnected": "Connect your Ledger device to continue.",
+            "locked": "Unlock your Ledger device to continue.",
+            "appNotOpen": "Open the {protocol} app on your Ledger device to continue.",
+            "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
             "confirm": "Pre pokračovanie potvrďte výzvu zobrazenú na vašom Ledger zariadení"
         },
         "ledgerAppGuide": {
-            "title": "Návod na inštaláciu Ledger aplikácii",
+            "title": "Guide to installing the {legacy} app",
             "steps": {
                 "0": "Nainštalujte a otvorte Ledger Live aplikáciu",
                 "1": "Uistite sa, že váš Ledger je pripojený",
-                "2": "Vyhľadajte aplikácie: {legacy} a IOTA (MIOTA)",
-                "3": "Nainštalujte obidve aplikácie: {legacy} a IOTA (MIOTA)",
+                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
+                "3": "Install the {legacy} app",
                 "4": "Nezabudnite, že je dôležité zatvoriť Ledger Live pred návratom do Firefly"
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Tipy, ak sa váš Ledger nepripája",
             "steps": {
                 "0": "Uistite sa, že Ledger Live nie je otvorený na vašom počítači",
                 "1": "Uistite sa, že ste odomkli vaše Ledger zariadenie s vaším PIN kódom",
@@ -821,15 +770,14 @@
                 }
             }
         },
-        "ledgerTransaction": {
-            "remainderAddress": {
-                "title": "Potvrdiť ostatkovú adresu",
-                "info": "Potvrďte, že zostatková adresa zobrazená na vašom Ledgeri zodpovedá adrese, ktorá je zobrazená nižšie. Pokiaľ sa zhodujú, stlačte podľa výzvy obidve tlačidlá na vašom Ledgeri."
-            },
-            "transaction": {
-                "title": "Confirm transaction",
-                "info": "Potvrďte, že transakčné informácie zobrazené na vašom Ledger zariadení zodpovedá informáciám vyobrazeným nižšie. Pokiaľ sa zhodujú, stlačte podľa výzvy obidve tlačidlá na vašom Ledgeri."
-            }
+        "verifyLedgerTransaction": {
+            "title": "Verify transaction",
+            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+        },
+        "verifyInternalLedgerTransaction": {
+            "title": "Verify internal transaction",
+            "info": "Please confirm the internal transaction on your ledger.",
+            "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
         "ledgerAddress": {
             "title": "Potvrdiť prijímaciu adresu",
@@ -840,10 +788,10 @@
             "body": "Migráciu môžete vykonať aj neskôr v Rozšírených nastaveniach."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
+            "title": "Exportovať históriu transakcií",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
             "profileName": "Názov profilu:",
-            "accountName": "Wallet name:",
+            "accountName": "Názov peňaženky:",
             "typePassword": "Type your password to allow exporting"
         },
         "stakingManager": {
@@ -855,12 +803,12 @@
             "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "Potvrdiť účasť",
             "subtitleStake": "Chystáte sa stakovať",
-            "subtitleMerge": "You are about to merge",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
-            "estimatedAirdrop": "Estimated rewards"
+            "subtitleMerge": "Chystáte sa zlúčiť",
+            "multiAirdropWarning": "Ak sa nechceš zúčastniť oboch airdropov, odhlásiť sa môžeš nižšie. Odstakovať a znovu stakovať môžeš kedykoľvek.",
+            "mergeStakeWarning": "Tvoje prostriedky budú stakované pre {airdrop}. Pre zmenu airdropov na ktorých sa chceš podielať, odstakuj túto peňaženku a stakuj ju znovu.",
+            "estimatedAirdrop": "Odhadovaná odmena"
         },
         "newStakingPeriodNotification": {
             "title": "Staking phase {periodNumber} from {date}",
@@ -868,12 +816,12 @@
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
-            "title": "About Shimmer",
+            "title": "O Shimmer",
             "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
             "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
         },
         "assembly-info": {
-            "title": "About Assembly",
+            "title": "O Assembly",
             "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
@@ -882,13 +830,13 @@
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         },
         "crashReporting": {
-            "title": "Crash reporting",
+            "title": "Hlásenia o zlyhaní",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
-            "tosTitle": "Terms of Service",
-            "privPolicyTitle": "Privacy Policy",
+            "tosTitle": "Podmienky použitia",
+            "privPolicyTitle": "Zásady ochrany osobných údajov",
             "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
             "tosBody": "We have updated Firefly's Terms of Service.",
             "privPolicyBody": "We have updated Firefly's Privacy Policy.",
@@ -902,10 +850,42 @@
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         },
         "transactionDetails": {
-            "title": "Transaction details"
+            "title": "Podrobnosti transakcie"
         },
         "sendForm": {
-            "title": "Send funds"
+            "title": "Odoslať prostriedky"
+        },
+        "tokenInformation": {
+            "newTokenTitle": "Nový token",
+            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "tokenMetadata": {
+                "standard": "Štandardný",
+                "name": "Názov",
+                "tokenId": "Token ID",
+                "url": "URL"
+            },
+            "buttons": {
+                "verifyToken": "I verify this token"
+            }
+        },
+        "mintNativeTokenForm": {
+            "title": "Mint native tokens",
+            "inputs": {
+                "totalSupply": "Celkové množstvo",
+                "circulatingSupply": "Circulating Supply",
+                "standard": "Štandardný",
+                "name": "Názov",
+                "description": "Popis",
+                "symbol": "Symbol",
+                "decimals": "Počet des. miest",
+                "url": "URL",
+                "logoUrl": "URL loga",
+                "logo": "Logo"
+            }
+        },
+        "faucetRequest": {
+            "title": "Faucet request",
+            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
     },
     "charts": {
@@ -913,7 +893,7 @@
         "outgoingMi": "Odchádzajúce {value}",
         "portoflio": "Portfólio",
         "token": "Token",
-        "holdings": "Holdings",
+        "holdings": "Vlastníctvo",
         "accountValue": "Hodnota peňaženky",
         "accountActivity": "Aktivita peňaženky",
         "timeframe1Hour": "1 hodina",
@@ -922,6 +902,7 @@
         "timeframe1Month": "1 mesiac"
     },
     "actions": {
+        "apply": "Použiť",
         "continue": "Pokračovať",
         "back": "Späť",
         "previous": "Naspäť",
@@ -931,39 +912,40 @@
         "dismiss": "Zavrieť",
         "claim": "Claim",
         "claiming": "Claiming",
-        "reject": "Reject",
+        "claimingRewards": "Claiming rewards",
+        "reject": "Odmietnuť",
         "confirmRejection": {
-            "title": "Reject transaction",
-            "description": "Are you sure you want to reject this transaction?",
+            "title": "Odmietnuť transakciu",
+            "description": "Ste si istý/á, že chcete zamietnuť túto transakciu?",
             "node": "Please note that rejecting a transaction only hides it from your Activity feed"
         },
         "proceedAnyway": "Aj tak pokračovať ",
         "save": "Uložiť",
         "importSeed": "Importovať existujúci seed",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Premigrujte alebo obnovte peňaženku",
             "shimmer": "Restore Shimmer profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Premigrujte do Chrysalis alebo obnovte existujúcu peňaženku",
             "shimmer": "Restore an existing Shimmer profile"
         },
         "createWallet": "Create a new {protocol} profile",
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking rewards",
-        "claimShimmerDescription": "Migrate IOTA profile and claim staking rewards",
+        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
         "savePassword": "Uložiť heslo",
         "useBiometric": "Použiť zabezpečenie biometriou",
-        "setupPinCode": "Setup PIN code",
-        "setPin": "Set PIN",
-        "setPinCode": "Set PIN code",
-        "confirmPin": "Confirm PIN",
-        "confirmPinCode": "Confirm PIN code",
+        "setupPinCode": "Nastaviť PIN kód",
+        "setPin": "Nastaviť PIN",
+        "setPinCode": "Nastaviť PIN kód",
+        "confirmPin": "Potvrdiť PIN",
+        "confirmPinCode": "Potvrdiť PIN kód",
         "enterYourPin": "Zadajte svoj PIN kód",
         "saveBackupFile": "Uložiť súbor zálohy",
         "iveWrittenRecoveryPhrase": "Zapísal som si svoju frázu obnovenia",
-        "verifyRecoveryPhrase": "Verify recovery phrase",
-        "revealRecoveryPhrase": "Reveal recovery phrase",
+        "verifyRecoveryPhrase": "Overiť frázu pre obnovenie",
+        "revealRecoveryPhrase": "Ukázať frázu pre obnovenie",
         "importSeedvault": "Importovať SeedVault",
         "checkAgain": "Skontrolovať ešte raz",
         "importFromFile": "Importovať zo súboru",
@@ -978,27 +960,30 @@
         "chooseFile": "Vybrať súbor",
         "dropHere": "Presuňte sem váš súbor",
         "syncAll": "Synchronizovať všetko",
+        "import": "Import",
+        "importing": "Importing",
         "export": "Exportovať",
-        "exporting": "Exporting",
+        "exporting": "Export",
         "exportNewStronghold": "Exportovať nový Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
+        "enableDeepLinks": "Zapnúť deep linky",
         "enableDeveloperMode": "Zapnúť vývojársky režim",
         "enableSystemNotifications": "Zapnúť systémové notifikácie",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "Exportovať históriu transakcií",
         "localProofOfWork": "Miestny proof of work",
         "unlock": "Odomknúť",
         "updateFirefly": "Aktualizovať Firefly",
         "restartNow": "Reštartovať",
         "saveBackup": "Uložiť Stronghold zálohu",
         "customizeAcount": "Prispôsobiť peňaženku",
-        "hideAccount": "Hide wallet",
+        "hideAccount": "Skryť peňaženku",
         "showAccount": "Odokryť peňaženku",
-        "deleteAccount": "Delete wallet",
+        "deleteAccount": "Odstrániť peňaženku",
         "max": "Max",
         "addNode": "Pridať uzol",
+        "addingNode": "Pridávanie uzla",
+        "addOfficialNodes": "Pridať oficiálne uzly",
         "updateNode": "Aktualizácia uzla",
         "removeNode": "Odstrániť uzol",
-        "removeAllNodes": "Remove all nodes",
         "hide": "Skryť",
         "hideOthers": "Skryť ostatné",
         "showAll": "Zobraziť všetko",
@@ -1008,7 +993,7 @@
         "redo": "Opakovať",
         "cut": "Vystrihnúť",
         "copy": "Kopírovať",
-        "copyAllInformation": "Copy all information",
+        "copyAllInformation": "Skopírovať všetky informácie",
         "paste": "Prilepiť",
         "selectAll": "Vybrať všetko",
         "addAccount": "Pridať peňaženku",
@@ -1034,28 +1019,43 @@
         "findWallets": "Find wallets",
         "useBalanceFinder": "Use balance finder",
         "search": "Search",
-        "searchAgain": "Hľadať znova",
         "searching": "Searching",
+        "searchAgain": "Hľadať znova",
         "closeFirefly": "Zavrieť Firefly",
-        "generateAddress": "Generate address",
+        "generateAddress": "Generovať adresu",
         "migrateAgain": "Migrovať ďalší index",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
+        "visitWebsite": "Navštíviť webovú stránku",
+        "howItWorks": "Ako to funguje",
         "learnAboutStaking": "Learn about staking",
         "stake": "Stakovať",
         "unstake": "Odstakovať",
         "stakeFunds": "Stakuj prostriedky",
         "manageStake": "Upraviť stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
-        "done": "Done",
-        "okIUnderstand": "OK, I understand",
+        "merge": "Zlúčiť",
+        "mergeFunds": "Zlúčenie prostriedkov",
+        "done": "Hotovo",
+        "okIUnderstand": "OK, rozumiem",
         "readMore": "Read more",
+        "searchForRewards": "Search for rewards",
         "claimRewards": "Claim rewards",
         "rerunClaimProcess": "Rerun claim process",
         "finishProfileSetupWithProtocol": "Finish {protocol} profile setup",
         "addPublicNote": "Add public note",
-        "backup": "Backup"
+        "backup": "Backup",
+        "mint": "Mint",
+        "mintNativeToken": "Mint native token",
+        "verifyToken": "Verify token",
+        "unverifyToken": "Unverify token",
+        "hideToken": "Hide token",
+        "unhideToken": "Unhide token",
+        "burnToken": "Burn token",
+        "faucetRequest": "Get {token} tokens",
+        "refreshTokenMetadata": "Refresh token metadata",
+        "test": "Test",
+        "testDeepLink": "Test deep link",
+        "initialize": "Initialize",
+        "initializing": "Initializing",
+        "delete": "Delete"
     },
     "general": {
         "recipient": "Recipient",
@@ -1071,6 +1071,11 @@
         "received": "Prijaté",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "shimmerClaimed": "Claimed",
+        "shimmerClaiming": "Claiming",
+        "shimmerGenesis": "Shimmer Genesis",
+        "minted": "Minted",
+        "minting": "Minting",
         "sendPayment": "Odoslať Platbu",
         "moveFunds": "Interný prevod",
         "sendTo": "Odoslať",
@@ -1081,15 +1086,16 @@
         "sendTokensToAddress": "Odoslať tokeny na adresu",
         "manageAccount": "Spravovať peňaženku",
         "customizeAcount": "Prispôsobiť vašu peňaženku",
-        "account": "Wallet",
+        "account": "Peňaženka",
         "sendingToAddress": "Odosielanie na adresu",
         "amount": "Čiastka",
         "addAddress": "Pridať adresu",
         "reference": "Odkaz",
         "from": "Od",
         "to": "Komu",
-        "receiveFunds": "Receive funds",
-        "address": "Address",
+        "and": "a",
+        "receiveFunds": "Prijať prostriedky",
+        "address": "Adresa",
         "myAddress": "Moja adresa",
         "myNetworkAddress": "My {networkName} address",
         "shareAddress": "Zdieľať adresu",
@@ -1097,9 +1103,9 @@
         "newRemainder": "Nový ostatok",
         "remainder": "Ostatok",
         "generateNewAddress": "Generovať novú adresu",
-        "copyToClipboard": "Copy to clipboard",
+        "copyToClipboard": "Skopírovať do schránky",
         "copyAddress": "Kopírovať adresu",
-        "viewOnExplorer": "View on Explorer",
+        "viewOnExplorer": "Zobraziť v Exploreri",
         "import": "Importovať",
         "seedvault": "SeedVault",
         "stronghold": "Stronghold",
@@ -1107,9 +1113,10 @@
         "appearance": "Vzhľad",
         "lightTheme": "Light",
         "darkTheme": "Dark",
-        "systemTheme": "System",
+        "systemTheme": "Systém",
         "balance": "Zostatok",
-        "all": "All",
+        "balanceWithValue": "Zostatok: {balance}",
+        "all": "Všetko",
         "incoming": "Prichádzajúce",
         "outgoing": "Odchádzajúce",
         "totalIn": "Celkovo prijatých",
@@ -1119,14 +1126,14 @@
         "profiles": "Profily",
         "dev": "Vývojár",
         "createAccount": "Vytvoriť peňaženku",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Pridať peňaženku",
         "accountName": "Názov peňaženky",
         "latestTransactions": "Posledné transakcie",
         "transactions": "Transakcie",
-        "activity": "Activity",
-        "security": "Security",
+        "activity": "Aktivita",
+        "security": "Zabezpečenie",
         "accountAddress": "Adresa peňaženky",
-        "network": "Network",
+        "network": "Sieť",
         "nodes": "Uzly",
         "wallet": "Peňaženka",
         "help": "Nápoveda",
@@ -1136,15 +1143,18 @@
         "receiveAddress": "Prijímacia adresa",
         "newAddress": "Nová adresa",
         "date": "Dátum",
-        "status": "Status",
+        "status": "Stav",
         "confirmed": "Potvrdené",
         "pending": "Čakajúce",
         "noAccounts": "Nemáte žiadne peňaženky, jednu prosím vytvorte.",
         "loadingAccounts": "Načítavanie, počkajte prosím...",
         "addProfile": "Pridať profil",
         "noRecentHistory": "Žiadna nedávna história",
-        "thisMonth": "This month",
-        "search": "Search",
+        "noFilteredActivity": "No matching activities",
+        "noAssets": "Žiadne prostriedky",
+        "noFilteredAsset": "No matching assets",
+        "thisMonth": "Tento mesiac",
+        "search": "Hľadať",
         "firstSync": "Synchronizácia histórie, tento úkon môže chvíľu trvať...",
         "transferSyncing": "Synchronizácia peňaženky",
         "transferSelectingInputs": "Výber vstupov",
@@ -1155,7 +1165,7 @@
         "transferBroadcasting": "Vysielanie transakcie",
         "transferComplete": "Prenos bol dokončený",
         "generatingReceiveAddress": "Generovanie prijímacej adresy",
-        "broadcasting": "Broadcasting",
+        "broadcasting": "Vysielanie",
         "confirming": "Confirming",
         "creatingAccount": "Vytváranie peňaženky, prosím počkajte...",
         "updatingAccount": "Aktualizácia peňaženky, prosím čakajte...",
@@ -1183,9 +1193,9 @@
         "accountRemoved": "Táto peňaženka je skrytá. Pre vykonávanie prevodov ju najprv zobrazte.",
         "fromAddress": "from {account}",
         "toAddress": "to {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
+        "stakedFor": "Stake-ované za {account}",
+        "unstakedFor": "Odstake-ované za {account}",
+        "votedFor": "Hlasované za {account}",
         "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
@@ -1194,9 +1204,9 @@
         "legacyNetwork": "Zastaralá sieť",
         "capsLock": "Caps Lock je zapnutý",
         "version": "Verzia {version}",
-        "yourWallets": "Your Wallets",
+        "yourWallets": "Vaše peňaženky",
         "unknown": "Neuvedené",
-        "unknownAddress": "Unknown address",
+        "unknownAddress": "Neznáma adresa",
         "none": "Žiadne",
         "staked": "Stakované",
         "unstaked": "Odstakované",
@@ -1205,20 +1215,94 @@
         "notStaked": "Nestakované",
         "stakedFunds": "Stakované prostriedky",
         "unstakedFunds": "Odstakované prostriedky",
-        "accountColor": "Wallet color",
-        "transactionTime": "Transaction time",
+        "accountColor": "Farba peňaženky",
+        "transactionTime": "Čas transakcie",
+        "surplus": "Surplus",
         "storageDeposit": "Storage deposit",
-        "expirationTime": "Expiration time",
+        "giftedStorageDeposit": "Gifted storage deposit",
+        "expirationTime": "Čas exspirácie",
+        "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
-        "copiedToClipboard": "Copied to clipboard",
-        "total": "Total: {balance}",
-        "availableBalance": "Available balance: {balance}",
+        "copiedToClipboard": "Skopírované do schránky",
+        "total": "Celkovo: {balance}",
+        "availableBalanceWithValue": "Available balance: {balance}",
+        "availableBalance": "Available balance",
+        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
-        "metadata": "Metadata",
-        "tag": "Tag",
-        "nodeList": "Node list",
-        "claimingTransactionId": "Claimed in",
-        "assets": "Assets"
+        "metadata": "Metadáta",
+        "tag": "Značka",
+        "nodeList": "Zoznam uzlov",
+        "claimedIn": "Claimed in",
+        "claimingIn": "Claiming in",
+        "assets": "Prostriedky",
+        "nativeTokens": "Natívne tokeny",
+        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
+        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
+        "giftStorageDeposit": "Gift storage deposit",
+        "excluded": "Excluded",
+        "developerTools": "Nástroje pre vývojárov",
+        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "url": "URL",
+        "hash": "Hash",
+        "creating": "Creating",
+        "updating": "Updating"
+    },
+    "filters": {
+        "title": "Filtre",
+        "showHidden": {
+            "label": "Zobraziť skryté",
+            "yes": "Áno",
+            "no": "Nie"
+        },
+        "showRejected": {
+            "label": "Zobraziť zamietnuté",
+            "yes": "Áno",
+            "no": "Nie"
+        },
+        "verificationStatus": {
+            "label": "Verification status",
+            "new": "New",
+            "skipped": "Skipped verification",
+            "selfVerified": "Self-verified",
+            "official": "Official"
+        },
+        "asset": {
+            "label": "Assets"
+        },
+        "amount": {
+            "label": "Amount",
+            "equal": "is equal to",
+            "range": "is between",
+            "greater": "is greater than",
+            "less": "is less than"
+        },
+        "date": {
+            "label": "Date",
+            "equals": "is equal to",
+            "last": "in the last",
+            "range": "is between",
+            "after": "is after",
+            "afterOrEquals": "is on or after",
+            "before": "is before",
+            "Days": "days",
+            "Months": "months",
+            "Years": "years"
+        },
+        "status": {
+            "label": "Status",
+            "confirmed": "confirmed",
+            "pending": "pending",
+            "claimed": "claimed",
+            "unclaimed": "unclaimed"
+        },
+        "type": {
+            "label": "Type",
+            "incoming": "incoming",
+            "outgoing": "outgoing",
+            "internal": "internal"
+        }
     },
     "dates": {
         "today": "Dnes",
@@ -1229,10 +1313,10 @@
         "yearsAgo": "pred {time, plural,\n  one {1 rokom}\n  other {# rokmi}\n}"
     },
     "times": {
-        "second": "{time, plural, one {# second} other {# seconds}}",
-        "minute": "{time, plural, one {# minute} other {# minutes}}",
-        "hour": "{time, plural, one {# hour} other {# hours}}",
-        "day": "{time, plural, one {# day} other {# days}}",
+        "second": "{time, plural, \none {1 sekundu} \nfew {# sekundy} \nother {# sekúnd}}",
+        "minute": "{time, plural, one {# minúta} few {# minúty} other {# minút}}",
+        "hour": "{time, plural, one {# hodina} few {# hodiny} other {# hodín}}",
+        "day": "{time, plural,\n  one {1 deň}\n  few {# dni}\n  other {# dní}\n\n}",
         "week": "{time, plural, one {# week} other {# weeks}}",
         "month": "{time, plural, one {# month} other {# months}}",
         "year": "{time, plural, one {# year} other {# years}}"
@@ -1260,10 +1344,13 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
+            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
                     "success": "Payment details added from deep link"
-                }
+                },
+                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
@@ -1274,8 +1361,29 @@
             "error": "Claiming transaction failed"
         },
         "hideActivity": {
-            "success": "Successfully hidden activity",
+            "success": "Activity was hidden",
             "error": "Failed to hide activity"
+        },
+        "faucetRequest": {
+            "success": "Request for tokens sent to the faucet"
+        },
+        "mintNativeToken": {
+            "success": "Native token minting transaction sent"
+        },
+        "refreshTokenMetadata": {
+            "success": "All token metadata has been reset and refreshed"
+        },
+        "restoreFromStrongholdBackup": {
+            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
+            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+        },
+        "findShimmerRewards": {
+            "success": "Successfully found Shimmer rewards",
+            "error": "An error occurred while searching for rewards"
+        },
+        "claimShimmerRewards": {
+            "success": "Shimmer rewards claimed for {accountAlias}",
+            "error": "An error occurred while claiming. Try again."
         }
     },
     "error": {
@@ -1284,7 +1392,9 @@
             "duplicate": "Profil s týmto názvom už existuje.",
             "delete": {
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
-            }
+            },
+            "type": "Unable to determine the profile type",
+            "setupType": "Unable to determine the profile setup type"
         },
         "password": {
             "doNotMatch": "Heslá sa nezhodujú.",
@@ -1304,15 +1414,15 @@
             "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
+            "length": "Váš PIN kód musí pozostávať z {length, plural, one {1 číslice} other {# číslic}}.",
             "match": "PIN kódy sa nezhodujú.",
             "incorrect": "Aktuálny PIN kód je nesprávny.",
-            "invalid": "Invalid PIN code."
+            "invalid": "Neplatný PIN kód."
         },
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "Musíte použiť svoju najnovšiu peňaženku pred vytvorením novej.",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "Názov profilu musí obsahovať aspoň 1 znak.",
             "notEmpty": "Pred odstránením tejto peňaženky musíte previesť svoj zostatok.",
             "duplicate": "Peňaženka s týmto názvom už existuje.",
             "tilde": "Profilové meno sa nemože začínať znakom '~'.",
@@ -1324,38 +1434,47 @@
             "syncing": "Pri synchronizovaní vašich peňaženiek sa vyskytla chyba.",
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet."
+            "notLast": "You can only delete your last wallet.",
+            "notFound": "Unable to find account",
+            "cannotGetBoundAccount": "Unable to get bound account"
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
+            "addressLength": "Adresy by mali mať dĺžku {length, plural, one {1 znak} other {# znakov}}.",
             "amountTooHigh": "Suma je vyššia ako vaše dostupné prostriedky.",
-            "amountNoFloat": "Can not use decimal places with the smallest unit selected",
+            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "Zdá sa, že čiastka je neplatné číslo.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
+            "tagTooLong": "The tag cannot be longer than 64 characters.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
             "amountZero": "Hodnota musí byť vyššia ako 0.",
             "wrongAddressPrefix": "Adresy začínaju s predponou {prefix}.",
             "wrongAddressFormat": "Adresa nie je v spravnom formáte.",
             "invalidAddress": "Adresa nie je správna.",
+            "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Táto peňaženka nemá dostatok prostriedkov.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit",
+            "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Nezvolili ste peňaženku na ktoré majú byť zaslané prostriedky.",
             "sendingDust": "Nemôžete odoslať menej ako 1 Mi.",
             "leavingDust": "Zostatok vašej adresy nemôže byť nižší ako 1 Mi.",
             "cancelled": "Transakcia bola zrušená.",
             "transaction": "Pri posielaní vašej transakcie sa vyskytla chyba. Skúste to znova.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "missingTransactionId": "The transaction ID is missing",
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
         "node": {
             "invalid": "Prosím, zadajte platnú adresu URL.",
             "dns": "Could not find DNS resolution for node.",
-            "timedOut": "The connection timed out.",
-            "refused": "The connection was refused.",
+            "timedOut": "Časový limit pripojenia vypršal.",
+            "refused": "Pripojenie bolo zamietnuté.",
             "handshake": "Could not complete handshake with node.",
             "invalidCertificate": "Could not connect with invalid certificate.",
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "Tento uzol už bol raz pridaný.",
             "unsynced": "Uzol nie je synchronizovaný.",
-            "noSynced": "Žiadne synchronizované uzly nie sú dostupné.",
+            "noSyncedNode": "No synced node is available.",
+            "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Failed to get an answer from all nodes.",
             "forbidden": "This node connection is forbidden.",
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
@@ -1380,7 +1499,9 @@
             "seedCharacters": "Seed môže obsahovať iba znaky A-Z alebo 9",
             "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Neznáme slovo \"{word}\" vo vašej fráze obnovenia",
-            "phraseCaseWord": "Slovo \"{word}\" ma byť napisané malými písmenami"
+            "phraseCaseWord": "Slovo \"{word}\" ma byť napisané malými písmenami",
+            "unableToCopyFile": "Unable to copy Stronghold backup file",
+            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
             "appNotOpen": "Musíte otvoriť IOTA aplikáciu na vašom Ledger zariadení.",
@@ -1388,7 +1509,7 @@
             "legacyConnected": "Nesprávna aplikácia je otvorená vo vašom Ledger zariadení.",
             "locked": "Prosím, odomknite vaše Ledger zariadenie zadaním PIN kódu.",
             "mnemonicMismatch": "Pripojili ste nesprávne zariadenie Ledger alebo mnemotechnická pomôcka bola zmenená.",
-            "notDetected": "Nebolo detegované zariadenie Ledger.",
+            "notConnected": "No Ledger device detected.",
             "notFound": "Zariadenie Ledger nenájdené.",
             "otherConnected": "Nesprávna aplikácia je otvorená vo vašom Ledger zariadení.",
             "generateAddress": "Pri generovaní adresy sa vyskytla chyba.",
@@ -1411,12 +1532,21 @@
             "cannotVisitAirdropWebsite": "Nie je možné otvoriť {airdrop} stránku.",
             "invalidStakingEventId": "Nesprávne staking event ID."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidDate": "NESPRÁVNY DÁTUM",
+        "invalidTime": "NESPRÁVNY ČAS",
+        "shimmerClaiming": {
+            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
+            "missingAccount": "Unable to find Shimmer claiming account"
+        },
+        "walletApiEvent": {
+            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidPayload": "Invalid payload for {eventName} event"
+        }
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid."
+            "invalidExpirationDateTime": "The chosen expiration date is invalid."
         },
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
@@ -1450,15 +1580,40 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
+        "transactionDetails": {
+            "incoming": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
+            "outgoing": {
+                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
+                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
+                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            }
+        },
+        "mintNativeTokenForm": {
+            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
+            "description": "IRC30 optional parameter: The human-readable description of the token.",
+            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
+            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Message ID",
+            "messageId": "ID správy",
             "internal": "Interná",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "Date",
+            "date": "Dátum",
             "time": "Čas"
         }
     },
@@ -1477,8 +1632,9 @@
         }
     },
     "tabs": {
-        "wallet": "Wallet",
-        "staking": "Staking"
+        "wallet": "Peňaženka",
+        "staking": "Staking",
+        "developer": "Vývojár"
     },
     "pills": {
         "stake": {
@@ -1486,28 +1642,42 @@
             "Confirmed": "staked for",
             "Conflicting": "failed to stake"
         },
-        "internalTransaction": {
-            "in": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+        "transaction": {
+            "internal": {
+                "incoming": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "outgoing": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
             },
-            "out": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+            "external": {
+                "incoming": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "outgoing": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
             }
         },
-        "externalTransaction": {
-            "in": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+        "minting": {
+            "incoming": {
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             },
-            "out": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+            "outgoing": {
+                "Pending": "minting",
+                "Confirmed": "minted",
+                "Conflicting": "failed to mint"
             }
         },
         "migrate": {
@@ -1517,18 +1687,19 @@
         },
         "asyncStatus": {
             "unclaimed": "unclaimed",
-            "claimed": "claimed",
-            "expired": "expired"
-        }
+            "claimed": "prevzaté",
+            "expired": "expirované"
+        },
+        "locked": "uzamknuté"
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "No expiration time",
-            "1hour": "In 1 hour",
-            "1day": "In 1 day",
-            "1week": "In 1 week",
+            "none": "Žiadny čas exspirácie",
+            "1hour": "Za 1 hodinu",
+            "1day": "Za 1 deň",
+            "1week": "Za 1 týždeň",
             "customDate": {
-                "title": "Custom date",
+                "title": "Vlastný dátum",
                 "subtitle": "Set custom expiry date"
             }
         }

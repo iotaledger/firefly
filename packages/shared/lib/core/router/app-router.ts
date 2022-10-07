@@ -2,9 +2,10 @@ import { get, writable } from 'svelte/store'
 
 import { profiles } from '@core/profile'
 
-import { AppRoute } from './enums'
+import { AppRoute, LoginRoute } from './enums'
 import { Router } from './router'
 import { FireflyEvent } from './types'
+import { loginRoute } from './subrouters'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
@@ -46,7 +47,12 @@ export class AppRouter extends Router<AppRoute> {
                 break
             }
             case AppRoute.Onboarding: {
-                nextRoute = AppRoute.Dashboard
+                if (params.shouldAddProfile) {
+                    nextRoute = AppRoute.Onboarding
+                } else {
+                    loginRoute.set(LoginRoute.LoadProfile)
+                    nextRoute = AppRoute.Login
+                }
                 break
             }
         }

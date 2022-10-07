@@ -1,39 +1,97 @@
 <script lang="typescript">
-    import { Text } from 'shared/components'
+    import { Text, Button, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { FontWeightText } from 'shared/components/Text.svelte'
-    import { TransactionDetails } from 'shared/components/molecules'
+    import { TransactionDetails, AliasDetails, FoundryDetails } from 'shared/components/molecules'
     import {
-        Activity,
         ActivityAsyncStatus,
         ActivityDirection,
+        ActivityType,
         claimActivity,
         formatTokenAmountDefault,
         getAssetFromPersistedAssets,
         rejectActivity,
+        selectedAccountActivities,
     } from '@core/wallet'
-    import { Spinner } from 'shared/components'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { currencies, exchangeRates } from '@lib/currency'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { setClipboard } from '@lib/utils'
     import { truncateString } from '@lib/helpers'
     import { closePopup, openPopup } from '@lib/popup'
+    import { onMount } from 'svelte'
 
-    export let activity: Activity
+    export let activityId: string
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const asset = getAssetFromPersistedAssets(activity?.assetId)
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    let isClaiming = activity.isClaiming
-    $: amount = formatTokenAmountDefault(activity?.rawAmount, asset.metadata)
+    $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
+    $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
+    $: isTimelocked =
+        activity.data.type === ActivityType.Transaction && activity.data.asyncStatus === ActivityAsyncStatus.Timelocked
+    $: isActivityIncomingAndUnclaimed =
+        activity.data.type === ActivityType.Transaction &&
+        activity.data.isAsync &&
+        (activity?.data.direction === ActivityDirection.Incoming || activity.data.isSelfTransaction) &&
+        activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    $: formattedFiatValue = activity.getFiatAmount(
-        $currencies[CurrencyTypes.USD],
-        $exchangeRates[$activeProfile?.settings?.currency]
-    )
+    let details
+    $: activity, (details = getActivityDetails())
+
+    function getActivityDetails() {
+        if (!activity) {
+            return {}
+        }
+        const details = {
+            transactionTime: activity.time,
+            inclusionState: activity.inclusionState,
+            formattedFiatValue: activity.getFiatAmount(
+                $currencies[CurrencyTypes.USD],
+                $exchangeRates[$activeProfile?.settings?.currency]
+            ),
+        }
+        if (activity.data.type === ActivityType.Transaction) {
+            return {
+                ...details,
+                type: activity.type,
+                asset,
+                storageDeposit: activity.data.storageDeposit,
+                amount: formatTokenAmountDefault(activity.data.rawAmount, asset?.metadata),
+                unit: asset?.metadata?.unit,
+                giftedStorageDeposit: activity.data.giftedStorageDeposit,
+                asyncStatus: activity.data.asyncStatus,
+                direction: activity.data.direction,
+                isInternal: activity.data.isInternal,
+                claimedDate: activity.data.claimedDate,
+                claimingTransactionId: activity.data.claimingTransactionId,
+                expirationDate:
+                    activity.data?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity.data.expirationDate : null,
+                timelockDate: activity.data.timelockDate,
+                subject: activity.data?.subject,
+                tag: activity.data?.tag,
+                metadata: activity.data?.metadata,
+            }
+        } else if (activity.data.type === ActivityType.Foundry) {
+            return {
+                ...details,
+                asset,
+                storageDeposit: activity.data.storageDeposit,
+                amount: formatTokenAmountDefault(activity.data.rawAmount, asset?.metadata),
+                unit: asset?.metadata?.unit,
+                giftedStorageDeposit: activity.data.giftedStorageDeposit,
+            }
+        } else if (activity.data.type === ActivityType.Alias) {
+            return {
+                ...details,
+                storageDeposit: activity.data.storageDeposit,
+                aliasId: activity.data.aliasId,
+                governorAddress: activity.data.governorAddress,
+                stateControllerAddress: activity.data.stateControllerAddress,
+            }
+        }
+    }
 
     function handleExplorerClick(): void {
         Platform.openUrl(`${explorerUrl}/block/${activity.transactionId}`)
@@ -43,42 +101,55 @@
         setClipboard(activity.transactionId)
     }
 
-    async function claim() {
-        isClaiming = true
-        await claimActivity(activity)
-        isClaiming = false
-        openPopup({
-            type: 'activityDetails',
-            props: { activity },
-        })
+    async function claim(): Promise<void> {
+        if (activity.data.type === ActivityType.Transaction) {
+            await claimActivity(activity.id, activity.data)
+            openPopup({
+                type: 'activityDetails',
+                props: { activityId },
+            })
+        }
     }
 
-    function reject() {
+    async function onClaimClick(): Promise<void> {
+        await checkActiveProfileAuth(claim, { stronghold: true, ledger: false })
+    }
+
+    function reject(): void {
         openPopup({
             type: 'confirmation',
             props: {
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
                 hint: localize('actions.confirmRejection.node'),
-                warning: true,
+                info: true,
                 confirmText: localize('actions.reject'),
+                warning: true,
                 onConfirm: () => {
-                    rejectActivity(activity.id)
+                    rejectActivity(activityId)
                     closePopup()
                 },
                 onCancel: () =>
                     openPopup({
                         type: 'activityDetails',
-                        props: { activity },
+                        props: { activityId },
                     }),
             },
         })
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            console.error(err)
+        }
+    })
 </script>
 
 <activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <div class="flex flex-col">
-        <Text type="h3" fontWeight={FontWeightText.semibold} classes="text-left">
+        <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
             {localize('popups.transactionDetails.title')}
         </Text>
         {#if explorerUrl && activity.transactionId}
@@ -97,30 +168,31 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {formattedFiatValue} {...activity} {amount} unit={asset?.metadata?.unit} {asset} />
-    {#if activity.isAsync && (activity?.direction === ActivityDirection.In || activity.isSelfTransaction) && activity.asyncStatus === ActivityAsyncStatus.Unclaimed}
-        <div class="flex w-full justify-between space-x-4">
-            <button
-                disabled={isClaiming || activity.isRejected}
-                class="action p-4 w-full text-center font-medium text-15 text-blue-500 rounded-lg border border-solid border-gray-300 {isClaiming ||
-                activity.isRejected
-                    ? 'cursor-default text-gray-500'
-                    : 'cursor-pointer'}"
-                on:click={reject}
+    {#if activity?.data.type === ActivityType.Transaction}
+        <TransactionDetails {...details} />
+    {:else if activity?.data.type === ActivityType.Foundry}
+        <FoundryDetails {...details} />
+    {:else}
+        <AliasDetails {...details} />
+    {/if}
+    {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
+        <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
+            <Button
+                outline
+                classes="w-full"
+                disabled={activity.data.isClaiming || activity.data.isRejected}
+                onClick={reject}
             >
                 {localize('actions.reject')}
-            </button>
-            <button
-                disabled={isClaiming}
-                class="action p-4 w-full text-center rounded-lg font-medium text-15 bg-blue-500 text-white"
-                on:click={claim}
+            </Button>
+            <Button
+                classes="w-full"
+                disabled={activity.data.isClaiming}
+                onClick={onClaimClick}
+                isBusy={activity.data.isClaiming}
             >
-                {#if isClaiming}
-                    <Spinner busy={true} classes="justify-center" />
-                {:else}
-                    {localize('actions.claim')}
-                {/if}
-            </button>
-        </div>
+                {localize('actions.claim')}
+            </Button>
+        </popup-buttons>
     {/if}
 </activity-details-popup>

@@ -14,18 +14,20 @@
         "eslint-plugin-svelte3": "^3.4.1",
         "husky": "^7.0.0",
         "lint-staged": "^12.3.3",
-        "patch-package": "^6.2.2",
+        "patch-package": "^6.4.7",
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.7.0",
-        "retypeapp": "^2.3.0"
+        "retypeapp": "^2.3.0",
+        "@types/node": "^14.11.1"
     },
     "scripts": {
         "docs:start": "cd docs/ && retype watch",
-        "format": "prettier -w \"**/*.{ts,js,json,scss,css,svelte}\"",
-        "format-check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
-        "lint": "eslint . --cache",
-        "lint-debug": "eslint . --cache --debug",
-        "lint-fix": "eslint . --cache --fix",
+        "format": "yarn format:write",
+        "format:check": "prettier -c \"**/*.{ts,js,json,scss,css,svelte}\"",
+        "format:write": "prettier -w \"**/*.{ts,js,json,scss,css,svelte}\"",
+        "lint": "yarn lint:fix",
+        "lint:check": "eslint . --cache",
+        "lint:fix": "eslint . --cache --fix",
         "postinstall": "patch-package",
         "pre-commit": "yarn format-check && yarn lint",
         "prepare": "husky install",
@@ -37,7 +39,8 @@
         "ansi-regex": "5.0.1",
         "glob-parent": " >=5.1.2",
         "node-abi": "^3.8.0",
-        "selfsigned": "^2.0.1"
+        "selfsigned": "^2.0.1",
+        "shell-quote": "1.7.3"
     },
     "lint-staged": {
         "*.{ts,js,svelte}": "eslint --cache --fix",

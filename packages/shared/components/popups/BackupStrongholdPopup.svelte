@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { TextType } from 'shared/components/Text.svelte'
-    import { Button, Logo, Text, ExportStrongholdButton } from 'shared/components'
+    import { Button, Logo, Text, ExportStrongholdButton, TextType } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
 
     const busy = false
@@ -26,7 +25,7 @@
         </div>
     </div>
     <div class="flex flex-row justify-between space-x-4 w-full">
-        <Button secondary classes="w-1/2" onClick={handleCancelClick} disabled={busy}>
+        <Button outline classes="w-1/2" onClick={handleCancelClick} disabled={busy}>
             {localize('actions.cancel')}
         </Button>
         <ExportStrongholdButton showNotification overrideTitle={localize('actions.backup')} classes="w-1/2" />

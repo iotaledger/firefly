@@ -3,7 +3,7 @@
     import { getAndUpdateNodeInfo, networkStatus, NETWORK_HEALTH_COLORS } from '@core/network'
     import { activeProfile } from '@core/profile'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     $: healthStatus = $networkStatus.health ?? 0
 

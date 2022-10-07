@@ -1,33 +1,37 @@
 <script lang="typescript">
-    import { Button, KeyValueBox, Spinner, Text, TextHint } from 'shared/components'
-    import { closePopup, openPopup } from 'shared/lib/popup'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { displayNotificationForLedgerProfile, isLedgerConnected } from 'shared/lib/ledger'
+    import { onDestroy } from 'svelte'
+    import { Button, KeyValueBox, Text, TextHint, FontWeight } from 'shared/components'
+    import { closePopup, openPopup } from '@lib/popup'
+    import { showAppNotification } from '@lib/notifications'
+    import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
+    import { sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
+    import { BASE_TOKEN } from '@core/network'
     import {
         activeAccounts,
         activeProfile,
-        INITIAL_ACCOUNT_GAP_LIMIT,
-        INITIAL_ADDRESS_GAP_LIMIT,
-        isLedgerProfile,
+        DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION,
+        isActiveLedgerProfile,
         isSoftwareProfile,
-        recoverAndLoadAccounts,
+        loadAccounts,
         visibleActiveAccounts,
     } from '@core/profile'
-    import { formatTokenAmountBestMatch } from '@core/wallet'
-    import { BASE_TOKEN } from '@core/network'
-    import { sumBalanceForAccounts } from '@core/account'
-    import { FontWeightText } from '../Text.svelte'
+    import { recoverAccounts } from '@core/profile-manager'
+    import {
+        formatTokenAmountBestMatch,
+        generateAndStoreActivitiesForAllAccounts,
+        refreshAccountAssetsForActiveProfile,
+    } from '@core/wallet'
 
     export let searchForBalancesOnLoad = false
 
     const { isStrongholdLocked, type } = $activeProfile
 
-    const accountGapLimitIncrement = INITIAL_ACCOUNT_GAP_LIMIT[type]
-    const addressGapLimitIncrement = INITIAL_ADDRESS_GAP_LIMIT[type]
+    const initialAccountRange = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type].initialAccountRange
+    const addressGapLimitIncrement = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type].addressGapLimit
     let previousAccountGapLimit = 0
     let previousAddressGapLimit = 0
-    let currentAccountGapLimit = accountGapLimitIncrement
+    let currentAccountGapLimit = initialAccountRange
     let currentAddressGapLimit = addressGapLimitIncrement
     let error = ''
     let isBusy = false
@@ -39,7 +43,7 @@
     async function handleFindBalances() {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
-                type: 'password',
+                type: 'unlockStronghold',
                 props: {
                     onSuccess: function () {
                         openPopup({
@@ -59,26 +63,28 @@
                 error = ''
                 isBusy = true
 
-                if ($isLedgerProfile && !isLedgerConnected()) {
+                if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
                     isBusy = false
-
                     displayNotificationForLedgerProfile('warning')
-
                     return
                 }
 
-                await recoverAndLoadAccounts(currentAccountGapLimit, currentAddressGapLimit)
+                await recoverAccounts(0, currentAccountGapLimit, currentAddressGapLimit, {
+                    syncIncomingTransactions: true,
+                })
+                await loadAccounts()
 
                 previousAccountGapLimit = currentAccountGapLimit
                 previousAddressGapLimit = currentAddressGapLimit
-                currentAccountGapLimit += accountGapLimitIncrement
+                currentAccountGapLimit += initialAccountRange
                 currentAddressGapLimit += addressGapLimitIncrement
+
                 hasUsedWalletFinder = true
             } catch (err) {
                 error = localize(err.error)
 
-                if ($isLedgerProfile) {
-                    displayNotificationForLedgerProfile('error', true, true, false, false, err)
+                if ($isActiveLedgerProfile) {
+                    displayNotificationForLedgerProfile('error', true, true, err)
                 } else {
                     showAppNotification({
                         type: 'error',
@@ -94,9 +100,16 @@
     function handleCancelClick() {
         closePopup()
     }
+
+    onDestroy(async () => {
+        if (hasUsedWalletFinder) {
+            await refreshAccountAssetsForActiveProfile()
+            await generateAndStoreActivitiesForAllAccounts()
+        }
+    })
 </script>
 
-<Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeightText.semibold} classes="mb-6"
+<Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold} classes="mb-6"
     >{localize('popups.walletFinder.title')}</Text
 >
 
@@ -118,19 +131,23 @@
         />
     </div>
 
-    {#if true}
-        <TextHint warning text={localize('popups.walletFinder.searchAgainHint')} />
+    {#if hasUsedWalletFinder}
+        <TextHint info icon="exclamation" text={localize('popups.walletFinder.searchAgainHint')} />
     {/if}
 </div>
 
 <div class="flex flex-row flex-nowrap w-full space-x-4 mt-6">
-    <Button classes="w-full" secondary onClick={handleCancelClick} disabled={isBusy}>
+    <Button classes="w-full" outline onClick={handleCancelClick} disabled={isBusy}>
         {localize('actions.cancel')}
     </Button>
-    <Button classes="w-full" onClick={handleFindBalances} disabled={isBusy}>
-        {#if isBusy}
-            <Spinner busy={true} message={localize('actions.searching')} classes="justify-center" />
-        {:else if hasUsedWalletFinder}
+    <Button
+        classes="w-full"
+        onClick={handleFindBalances}
+        disabled={isBusy}
+        {isBusy}
+        busyMessage={localize('actions.searching')}
+    >
+        {#if hasUsedWalletFinder}
             {localize('actions.searchAgain')}
         {:else}
             {localize('actions.search')}
