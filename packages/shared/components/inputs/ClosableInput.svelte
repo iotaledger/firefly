@@ -3,7 +3,7 @@
 
     export let value = ''
     export let open = false
-    export let buttonElement: HTMLButtonElement
+    export let buttonElement: HTMLButtonElement = undefined
     export let label: string
     export let placeholder: string
     export let error: string

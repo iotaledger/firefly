@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { Transition } from 'shared/components'
     import { LanguageAndAppearanceView, LegalView, WelcomeView } from './views'
-    import { _ } from '@core/i18n'
     import { AppSetupRoute, appSetupRoute } from '@core/router'
 </script>
 
@@ -15,6 +14,6 @@
     </Transition>
 {:else if $appSetupRoute === AppSetupRoute.LanguageAndAppearance}
     <Transition>
-        <LanguageAndAppearanceView locale={$_} />
+        <LanguageAndAppearanceView />
     </Transition>
 {/if}

@@ -6,7 +6,7 @@
     import { onDestroy } from 'svelte'
     import { SettingsHome, SettingsViewer } from './views'
 
-    export let handleClose: () => void
+    export let handleClose: () => void = undefined
 
     function closeSettings(): void {
         $dashboardRouter.previous()

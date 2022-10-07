@@ -2,8 +2,7 @@
     import { localize } from '@core/i18n'
     import { InclusionState, IPersistedAsset } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
-    import { Text, AssetIcon } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { Text, AssetIcon, FontWeight } from 'shared/components'
 
     export let amount: string
     export let fiatAmount: string

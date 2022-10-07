@@ -3,8 +3,7 @@
     import { networkHrp } from '@core/network'
     import { ActivityDirection, InclusionState, IPersistedAsset, ITransactionActivityData, Subject } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
-    import { Text, AssetIcon } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { Text, AssetIcon, FontWeight } from 'shared/components'
 
     export let amount: string
     export let fiatAmount: string

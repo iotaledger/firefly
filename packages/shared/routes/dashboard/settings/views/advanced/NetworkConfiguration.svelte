@@ -12,8 +12,7 @@
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
-    import { Button, Checkbox, HR, Text, NodeListTable } from 'shared/components'
-    import { ButtonSize } from 'shared/components/Button.svelte'
+    import { Button, Checkbox, HR, Text, NodeListTable, ButtonSize } from 'shared/components'
 
     let nodesContainer: HTMLElement
 

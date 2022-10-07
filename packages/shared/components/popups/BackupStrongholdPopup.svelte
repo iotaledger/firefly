@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { TextType } from 'shared/components/Text.svelte'
-    import { Button, Logo, Text, ExportStrongholdButton } from 'shared/components'
+    import { Button, Logo, Text, ExportStrongholdButton, TextType } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
 
     const busy = false

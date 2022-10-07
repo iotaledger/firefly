@@ -1,9 +1,18 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Button, ExpirationTimePicker, KeyValueBox, Text, TextHint, Error, Toggle } from 'shared/components'
+    import {
+        Button,
+        ExpirationTimePicker,
+        KeyValueBox,
+        Text,
+        TextHint,
+        Error,
+        Toggle,
+        FontWeight,
+        TextType,
+    } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
@@ -69,7 +78,6 @@
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
         metadata,
-        rawAmount,
         storageDeposit: giftStorageDeposit ? giftedStorageDeposit : storageDeposit,
         subject: recipient,
         amount,
