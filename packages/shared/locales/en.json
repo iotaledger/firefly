@@ -1659,9 +1659,8 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking",
         "collectibles": "Collectibles",
-        "developerTools": "Developer Tools"
+        "developer": "Developer"
     },
     "pills": {
         "stake": {

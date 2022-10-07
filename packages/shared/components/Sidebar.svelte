@@ -85,16 +85,8 @@
         resetWalletRoute()
     }
 
-    function openStaking() {
-        $dashboardRouter.goTo(DashboardRoute.Staking)
-    }
-
     function openCollectibles() {
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
-    }
-
-    function openDeveloperTools() {
-        $dashboardRouter.goTo(DashboardRoute.DeveloperTools)
     }
 
     function openDeveloper() {

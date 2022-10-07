@@ -25,9 +25,8 @@
     const tabs = {
         wallet: Wallet,
         settings: Settings,
-        staking: Staking,
         collectibles: Collectibles,
-        developerTools: DeveloperTools,
+        developer: Developer,
     }
 
     let fundsSoonNotificationId

@@ -17,7 +17,6 @@
     export let classes = ''
 
     let showBackButton = false
-
     $: {
         if ($settingsRoute || $collectiblesRoute) {
             showBackButton = isCorrectRoute()
