@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
-import { ActivityDirection } from '@core/wallet/enums'
-import { IProcessedTransaction } from '@core/wallet/interfaces'
+import { activeProfileId } from '@core/profile'
+import { ActivityDirection, IProcessedTransaction } from '@core/wallet'
 import { getDirectionFromTransaction } from '@core/wallet/utils'
 import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
 import { get } from 'svelte/store'
@@ -20,7 +20,7 @@ export function linkTransactionsWithClaimingTransactions(
     const resultingTransactions = []
     const transactionsIncludedAsClaimingTransactions = []
 
-    const claimedAccountActivities = get(claimedActivities)?.[account.index]
+    const claimedAccountActivities = get(claimedActivities)?.[get(activeProfileId)]?.[account.index]
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
     const incomingAsyncTransactions: IProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
@@ -34,11 +34,10 @@ export function linkTransactionsWithClaimingTransactions(
         } else if (isIncomingAsyncTransaction) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
             const claimedActivity = claimedAccountActivities?.[transaction.transactionId]
-
             if (claimedActivity && claimedActivity.claimingTransactionId === transaction.transactionId) {
                 const claimingData = {
                     claimedDate: new Date(claimedActivity.claimedTimestamp),
-                    claimingTransactionId: claimedActivity.transactionId,
+                    claimingTransactionId: claimedActivity.claimingTransactionId,
                 }
                 transaction.claimingData = claimingData
                 transactionsIncludedAsClaimingTransactions.push(claimingData.claimingTransactionId)

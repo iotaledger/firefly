@@ -1,6 +1,9 @@
-export interface IClaimedActivitiesPerAccount {
-    accountIndex: number
-    activities: Map<string, IClaimedActivities>
+export interface IClaimedActivitiesPerProfile {
+    [profileId: string]: {
+        [accountIndex: string]: {
+            [transactionId: string]: IClaimedActivities
+        }
+    }
 }
 
 export interface IClaimedActivities {

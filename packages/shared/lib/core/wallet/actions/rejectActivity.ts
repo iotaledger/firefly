@@ -11,6 +11,10 @@ export function rejectActivity(id: string): void {
     const accountIndex = get(selectedAccount).index
     hiddenActivities.update((state) => {
         const profileId = get(activeProfileId)
+        if (Array.isArray(state)) {
+            // needed because of legacy way to store hidden activities
+            state = {}
+        }
         if (!state[profileId]) {
             state[profileId] = {}
         }
