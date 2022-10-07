@@ -23,7 +23,7 @@ export function addAccountMetadataToActiveProfile(metadata: IAccountMetadata): v
     }))
 }
 
-export function getAccountMetadataById(index: number): IAccountMetadata {
+export function getAccountMetadataByIndex(index: number): IAccountMetadata {
     const { accountMetadata } = get(activeProfile)
     return accountMetadata.find((metadata) => metadata.index === index)
 }
