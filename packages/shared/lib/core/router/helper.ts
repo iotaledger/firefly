@@ -3,6 +3,7 @@ import { get } from 'svelte/store'
 import { closePopup } from '@lib/popup'
 
 import { appRouter, AppRouter } from './app-router'
+import { collectiblesRouter, CollectiblesRouter } from './collectibles-router'
 import { DashboardRouter, dashboardRouter } from './dashboard-router'
 import { DashboardRoute } from './enums'
 import { onboardingRouter, OnboardingRouter } from './onboarding-router'
@@ -49,6 +50,7 @@ function initialiseBaseRouters(): void {
     appRouter.set(new AppRouter())
     dashboardRouter.set(new DashboardRouter())
     settingsRouter.set(new SettingsRouter())
+    collectiblesRouter.set(new CollectiblesRouter())
     initialiseBaseOnboardingRouters()
 }
 
@@ -83,6 +85,7 @@ function resetBaseRouters(): void {
     get(dashboardRouter).reset()
     get(onboardingRouter).reset()
     get(settingsRouter).reset()
+    get(collectiblesRouter).reset()
 }
 
 function resetSubrouters(): void {
