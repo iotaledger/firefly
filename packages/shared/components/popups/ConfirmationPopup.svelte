@@ -1,12 +1,10 @@
 <script lang="typescript">
-    import { Button, Text, TextHint } from 'shared/components'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup } from '@lib/popup'
-    import { ButtonVariant } from 'shared/components/Button.svelte'
 
     export let title: string
-    export let description: string
+    export let description: string = ''
     export let hint: string = ''
     export let info: boolean = false
     export let success: boolean = false

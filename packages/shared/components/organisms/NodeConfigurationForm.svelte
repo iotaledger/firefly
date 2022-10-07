@@ -10,8 +10,8 @@
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
     export let formError = ''
-    export let currentClientOptions: IClientOptions
-    export let isDeveloperProfile: boolean
+    export let currentClientOptions: IClientOptions = undefined
+    export let isDeveloperProfile: boolean = false
 
     $: node.url, (formError = '')
 

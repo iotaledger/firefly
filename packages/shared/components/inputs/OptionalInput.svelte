@@ -1,9 +1,8 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
-    import { ClosableInput, AddInputButton, Tooltip, Text } from 'shared/components'
+    import { ClosableInput, AddInputButton, Tooltip, Text, FontWeight, TextType } from 'shared/components'
     import { Position } from 'shared/components/Tooltip.svelte'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
     export let label: string = ''
     export let description: string = ''

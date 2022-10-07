@@ -1644,24 +1644,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "siirretään kohteesta",
                     "Confirmed": "siirretty kohteesta",
                     "Conflicting": "siirto epäonnistui"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "siirretään kohteeseen",
                     "Confirmed": "siirretty kohteeseen",
                     "Conflicting": "siirto epäonnistui"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "vastaanotetaan kohteesta",
                     "Confirmed": "vastaanotettu kohteesta",
                     "Conflicting": "vastaanotto epäonnistui"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "lähetetään kohteeseen",
                     "Confirmed": "lähetetty kohteeseen",
                     "Conflicting": "lähetys epäonnistui"
@@ -1669,12 +1669,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "lyönti",
                 "Confirmed": "lyöty",
                 "Conflicting": "lyönti epäonnistui"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "lyönti",
                 "Confirmed": "lyöty",
                 "Conflicting": "lyönti epäonnistui"

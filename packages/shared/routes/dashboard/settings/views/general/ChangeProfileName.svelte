@@ -1,9 +1,8 @@
 <script lang="typescript">
-    import { Button, Input, Text } from 'shared/components'
+    import { Button, Input, Text, HTMLButtonType, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { showAppNotification } from 'shared/lib/notifications'
     import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
-    import { HTMLButtonType, ButtonSize } from 'shared/components/Button.svelte'
 
     let newName = $activeProfile?.name
     let error = ''

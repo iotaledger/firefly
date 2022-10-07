@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { Text, Button, AccountInput } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { Text, Button, AccountInput, FontWeight } from 'shared/components'
     import { closePopup } from '@lib/popup'
     import { IAccountState, setSelectedAccount } from '@core/account'
 

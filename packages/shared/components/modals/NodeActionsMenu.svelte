@@ -14,7 +14,7 @@
 
     export let node: INode
     export let clientOptions: IClientOptions
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     $: isOfficialNode = getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType).some(
         (n) => n.url === node?.url

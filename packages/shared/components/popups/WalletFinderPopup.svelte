@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { Button, KeyValueBox, Text, TextHint } from 'shared/components'
-    import { FontWeight } from '../Text.svelte'
+    import { Button, KeyValueBox, Text, TextHint, FontWeight } from 'shared/components'
     import { closePopup, openPopup } from '@lib/popup'
     import { showAppNotification } from '@lib/notifications'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'

@@ -1643,7 +1643,7 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking",
+        "collectibles": "Collectibles",
         "developer": "Developer"
     },
     "pills": {
@@ -1654,37 +1654,32 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "transferring from",
                     "Confirmed": "transferred from",
                     "Conflicting": "failed to transfer"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "transferring to",
                     "Confirmed": "transferred to",
                     "Conflicting": "failed to transfer"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "receiving from",
                     "Confirmed": "received from",
                     "Conflicting": "failed to receive"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "sending to",
                     "Confirmed": "sent to",
                     "Conflicting": "failed to send"
                 }
             }
         },
-        "minting": {
-            "in": {
-                "Pending": "minting",
-                "Confirmed": "minted",
-                "Conflicting": "failed to mint"
-            },
-            "out": {
+        "foundry": {
+            "minting": {
                 "Pending": "minting",
                 "Confirmed": "minted",
                 "Conflicting": "failed to mint"
@@ -1701,8 +1696,11 @@
             "expired": "expired"
         },
         "alias": {
-            "created": "alias created",
-            "creating": "creating alias"
+            "creation": {
+                "Pending": "creating alias",
+                "Confirmed": "alias created",
+                "Failed": "Failed to create alias"
+            }
         },
         "locked": "locked"
     },

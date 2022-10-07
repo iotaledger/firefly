@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, OnboardingLayout, Text, Button, NodeConfigurationForm } from 'shared/components'
+    import { Animation, OnboardingLayout, Text, Button, NodeConfigurationForm, HTMLButtonType } from 'shared/components'
     import {
         cleanupOnboardingProfileManager,
         initialiseProfileManagerFromOnboardingProfile,
@@ -12,7 +12,6 @@
     import { destroyProfileManager, getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
-    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode
