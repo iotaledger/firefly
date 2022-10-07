@@ -21,7 +21,7 @@ export async function handleSpentOutputEventInternal(
     accountIndex: number,
     payload: ISpentOutputEventPayload
 ): Promise<void> {
-    await syncBalance(accountIndex.toString())
+    await syncBalance(accountIndex)
     const outputId = payload?.output?.outputId
     const activity = get(allAccountActivities)?.[accountIndex]?.find(
         (_activity) =>
@@ -32,7 +32,7 @@ export async function handleSpentOutputEventInternal(
 
     if (activity) {
         const transactionId = payload?.output?.metadata?.transactionId
-        updateActivityDataByTransactionId(accountIndex.toString(), transactionId, {
+        updateActivityDataByTransactionId(accountIndex, transactionId, {
             type: ActivityType.Transaction,
             isClaimed: true,
             asyncStatus: ActivityAsyncStatus.Claimed,

@@ -9,7 +9,7 @@ import { setSelectedAccount } from './setSelectedAccount'
 export async function tryCreateAdditionalAccount(alias: string, color: string): Promise<void> {
     try {
         const account = await createNewAccount(alias, color)
-        setSelectedAccount(account?.id)
+        setSelectedAccount(account?.index)
         return Promise.resolve()
     } catch (err) {
         const errorMessage = err?.error || err

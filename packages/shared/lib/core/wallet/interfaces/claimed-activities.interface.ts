@@ -1,5 +1,5 @@
 export interface IClaimedActivitiesPerAccount {
-    accountId: string
+    accountIndex: number
     activities: Map<string, IClaimedActivities>
 }
 

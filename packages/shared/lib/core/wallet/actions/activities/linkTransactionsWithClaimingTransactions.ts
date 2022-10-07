@@ -20,7 +20,7 @@ export function linkTransactionsWithClaimingTransactions(
     const resultingTransactions = []
     const transactionsIncludedAsClaimingTransactions = []
 
-    const claimedAccountActivities = get(claimedActivities)?.[account.id]
+    const claimedAccountActivities = get(claimedActivities)?.[account.index]
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
     const incomingAsyncTransactions: IProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
@@ -65,7 +65,7 @@ export function linkTransactionsWithClaimingTransactions(
                     claimingTransactionId: transaction.transactionId,
                 }
 
-                addClaimedActivity(account.id, claimedTransaction.transactionId, {
+                addClaimedActivity(account.index, claimedTransaction.transactionId, {
                     id: claimedTransaction.transactionId,
                     claimedTimestamp: transaction.time.getTime(),
                     claimingTransactionId: transaction.transactionId,

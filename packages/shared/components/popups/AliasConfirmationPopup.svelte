@@ -59,7 +59,7 @@
             isTransferring = true
             const transaction = await $selectedAccount.createAliasOutput()
             const activity = new Activity(preprocessTransaction(transaction), $selectedAccount)
-            addActivityToAccountActivitiesInAllAccountActivities($selectedAccount.id, activity)
+            addActivityToAccountActivitiesInAllAccountActivities($selectedAccount.index, activity)
             closePopup()
         } catch (err) {
             handleError(err)

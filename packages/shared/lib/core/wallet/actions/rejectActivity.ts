@@ -7,16 +7,16 @@ import { showAppNotification } from '@lib/notifications'
 import { ActivityType } from '../enums'
 
 export function rejectActivity(id: string): void {
-    const accountId = get(selectedAccount).id
+    const accountIndex = get(selectedAccount).index
     hiddenActivities.update((state) => {
-        if (!state[accountId] || !Array.isArray(state[accountId])) {
-            state[accountId] = []
+        if (!state[accountIndex] || !Array.isArray(state[accountIndex].activities)) {
+            state[accountIndex].activities = []
         }
-        state[accountId].push(id)
+        state[accountIndex].activities.push(id)
         return state
     })
 
-    updateActivityDataByActivityId(accountId, id, { type: ActivityType.Transaction, isRejected: true })
+    updateActivityDataByActivityId(accountIndex, id, { type: ActivityType.Transaction, isRejected: true })
     showAppNotification({
         type: 'success',
         alert: true,

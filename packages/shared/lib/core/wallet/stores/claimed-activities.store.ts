@@ -4,15 +4,15 @@ import { IClaimedActivities } from '../interfaces'
 export const claimedActivities = persistent<IClaimedActivities[]>('claimedActivities', [])
 
 export function addClaimedActivity(
-    accountId: string,
+    accountIndex: number,
     transactionId: string,
     claimedActivity: IClaimedActivities
 ): void {
     claimedActivities.update((state) => {
-        if (!state[accountId]) {
-            state[accountId] = {}
+        if (!state[accountIndex]) {
+            state[accountIndex] = null
         }
-        state[accountId][transactionId] = claimedActivity
+        state[accountIndex][transactionId] = claimedActivity
         return state
     })
 }

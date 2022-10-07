@@ -109,7 +109,7 @@
             giftStorageDeposit,
             surplus
         )
-        preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
         setStorageDeposit(preparedOutput, Number(surplus))
 
         if (!initialExpirationDate) {
