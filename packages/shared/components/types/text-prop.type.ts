@@ -3,7 +3,7 @@ import { TextType, FontWeight } from '../enums'
 export type TextPropTypes = {
     type?: TextType
     fontSize?: string
-    fontWeight?: FontWeight | ''
+    fontWeight?: FontWeight
     lineHeight?: string
     secondary?: boolean
     disabled?: boolean
