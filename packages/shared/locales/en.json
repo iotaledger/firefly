@@ -858,7 +858,7 @@
         "sendForm": {
             "title": "Send funds"
         },
-        "tokenInformation" : {
+        "tokenInformation": {
             "newTokenTitle": "New token",
             "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
             "tokenMetadata": {
@@ -871,9 +871,10 @@
                 "verifyToken": "I verify this token"
             }
         },
-        "mintNativeTokenForm" : {
-            "title": "Mint native tokens",
-            "inputs": {
+        "mintNativeToken": {
+            "formTitle": "Mint native tokens",
+            "confirmationTitle": "Mint native tokens",
+            "property": {
                 "totalSupply": "Total Supply",
                 "circulatingSupply": "Circulating Supply",
                 "standard": "Standard",
@@ -883,7 +884,8 @@
                 "decimals": "Decimals",
                 "url": "URL",
                 "logoUrl": "Logo URL",
-                "logo": "Logo"
+                "logo": "Logo",
+                "alias": "Alias"
             }
         },
         "faucetRequest": {
