@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { Button, Text } from 'shared/components'
+    import { Button, Text, ButtonVariant, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
-    import { ButtonVariant, ButtonSize } from 'shared/components/Button.svelte'
     import { deleteProfile } from '@contexts/settings'
 
     function handleDeleteClick() {

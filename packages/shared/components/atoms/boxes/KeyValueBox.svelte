@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { Text, TooltipIcon } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { Text, TooltipIcon, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
     import CopyableBox from './CopyableBox.svelte'
 

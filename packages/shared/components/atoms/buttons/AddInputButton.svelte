@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Icon, Text } from 'shared/components'
 
-    export let buttonElement: HTMLButtonElement
+    export let buttonElement: HTMLButtonElement = undefined
     export let text: string
     export let open = false
     export let onClick: () => void

@@ -9,7 +9,7 @@
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { tick } from 'svelte'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 

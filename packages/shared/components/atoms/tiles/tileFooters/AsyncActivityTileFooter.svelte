@@ -7,16 +7,22 @@
         rejectActivity,
         getTimeDifference,
     } from '@core/wallet'
-    import { ActivityAsyncStatusPill, TooltipIcon, Text, Button, TileFooter } from 'shared/components'
+    import {
+        ActivityAsyncStatusPill,
+        TooltipIcon,
+        Text,
+        Button,
+        TileFooter,
+        FontWeight,
+        ButtonSize,
+    } from 'shared/components'
     import { time } from '@core/app'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Position } from 'shared/components/Tooltip.svelte'
-    import { ButtonSize } from 'shared/components/Button.svelte'
     import { localize } from '@core/i18n'
     import { showInternalVerificationPopup } from '@core/ledger'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
-    import { FontWeight } from 'shared/components/Text.svelte'
 
     export let activityId: string
     export let data: ITransactionActivityData

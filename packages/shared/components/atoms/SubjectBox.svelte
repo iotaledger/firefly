@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { Subject } from '@core/wallet'
-    import { TextType, FontWeight } from 'shared/components/Text.svelte'
-    import { Box, AddressBox, Text, AccountLabel } from 'shared/components'
+    import { Box, AddressBox, Text, AccountLabel, TextType, FontWeight } from 'shared/components'
 
     export let subject: Subject = null
 </script>

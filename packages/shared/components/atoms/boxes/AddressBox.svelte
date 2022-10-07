@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { FontWeight } from 'shared/components/Text.svelte'
-    import { Text, CopyableBox } from 'shared/components'
+    import { Text, CopyableBox, FontWeight } from 'shared/components'
 
     export let address = ''
     export let isCopyable = false

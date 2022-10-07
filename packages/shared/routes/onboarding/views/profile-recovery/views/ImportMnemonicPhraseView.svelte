@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Animation, Button, ImportTextfield, OnboardingLayout, Text } from 'shared/components'
+    import { Animation, Button, ImportTextfield, OnboardingLayout, Text, HTMLButtonType } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
@@ -13,7 +13,6 @@
         updateOnboardingProfile,
         verifyAndStoreMnemonic,
     } from '@contexts/onboarding'
-    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     let input = ''
 

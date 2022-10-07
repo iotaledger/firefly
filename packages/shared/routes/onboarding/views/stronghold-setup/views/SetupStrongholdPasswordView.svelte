@@ -1,6 +1,6 @@
 <script lang="typescript">
     import zxcvbn from 'zxcvbn'
-    import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, PasswordInput, Text, HTMLButtonType } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
@@ -14,7 +14,6 @@
     } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
-    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     let strongholdPassword = ''
     let confirmedStrongholdPassword = ''

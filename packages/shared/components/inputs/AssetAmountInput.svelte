@@ -13,12 +13,12 @@
     } from '@core/wallet'
     import { UNIT_MAP } from '@lib/units'
 
-    export let inputElement: HTMLInputElement
+    export let inputElement: HTMLInputElement = undefined
     export let disabled = false
     export let isFocused = false
     export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
-    export let amount: string
-    export let unit: string
+    export let amount: string = undefined
+    export let unit: string = undefined
 
     let amountInputElement: HTMLInputElement
     let error: string
@@ -81,7 +81,6 @@
     bind:this={inputElement}
     bind:inputElement={amountInputElement}
     col
-    {disabled}
     {isFocused}
     {error}
     classes="space-y-2"

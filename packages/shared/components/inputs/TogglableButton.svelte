@@ -1,8 +1,8 @@
 <script type="typescript">
     import { Icon } from 'shared/components'
 
-    export let active: boolean
     export let icon: string
+    export let active: boolean = false
     export let onClick: () => void = () => {}
 
     function clickToggle() {

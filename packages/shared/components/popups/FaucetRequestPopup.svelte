@@ -4,8 +4,7 @@
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
     import { closePopup } from '@lib/popup'
-    import { Button, Error, Text } from 'shared/components'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { Button, Error, Text, FontWeight, TextType } from 'shared/components'
 
     let isBusy = false
     let error: BaseError

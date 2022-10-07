@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { Button, KeyValueBox, Text } from 'shared/components'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, activeProfile } from '@core/profile'
