@@ -3,7 +3,6 @@
         Button,
         CollectibleDetailsMenu,
         Icon,
-        Illustration,
         MeatballMenuButton,
         KeyValueBox,
         Modal,
@@ -56,10 +55,10 @@
 </script>
 
 <div class="flex flex-row w-full space-x-4 overflow-auto">
-    <div class="w-full h-full">
-        <Illustration illustration="shimmer-info-bg" />
+    <div class="w-full h-full bg-orange-300 rounded-2xl">
+        <!-- NFT asset goes here -->
     </div>
-    <Pane classes="flex flex-col p-6 w-full h-full">
+    <Pane classes="flex flex-col p-6 w-full h-full max-w-lg">
         <div class="mb-6 flex justify-between items-center">
             <Text type="h2">{name}</Text>
             <MeatballMenuButton onClick={modal?.toggle} />
