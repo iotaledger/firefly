@@ -1,7 +1,7 @@
 import { persistent } from '@lib/helpers'
-import { IClaimedActivities } from '../interfaces'
+import { IClaimedActivities, IClaimedActivitiesPerAccount } from '../interfaces'
 
-export const claimedActivities = persistent<IClaimedActivities[]>('claimedActivities', [])
+export const claimedActivities = persistent<IClaimedActivitiesPerAccount[]>('claimedActivities', [])
 
 export function addClaimedActivity(
     accountIndex: number,
@@ -10,7 +10,7 @@ export function addClaimedActivity(
 ): void {
     claimedActivities.update((state) => {
         if (!state[accountIndex]) {
-            state[accountIndex] = null
+            state[accountIndex] = { accountIndex, activities: undefined }
         }
         state[accountIndex][transactionId] = claimedActivity
         return state
