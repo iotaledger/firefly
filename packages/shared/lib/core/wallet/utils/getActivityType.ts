@@ -1,5 +1,5 @@
 import { ActivityType } from '../enums'
-import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_FOUNDRY } from '../constants'
+import { OUTPUT_TYPE_ALIAS, OUTPUT_TYPE_FOUNDRY, OUTPUT_TYPE_NFT } from '../constants'
 import { IWrappedOutput } from '../interfaces'
 
 export function getActivityType(outputs: IWrappedOutput[]): ActivityType {
@@ -8,6 +8,8 @@ export function getActivityType(outputs: IWrappedOutput[]): ActivityType {
     }
     if (outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS)) {
         return ActivityType.Alias
+    } else if (outputs.some((output) => output.output.type === OUTPUT_TYPE_NFT)) {
+        return ActivityType.Nft
     } else {
         return ActivityType.Transaction
     }

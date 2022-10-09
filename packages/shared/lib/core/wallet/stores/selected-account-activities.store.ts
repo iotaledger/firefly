@@ -134,7 +134,10 @@ function getFieldsToSearchFromActivity(activity: IActivity): string[] {
         fieldsToSearch.push(getAssetFromPersistedAssets(activity.data.assetId)?.metadata?.name)
     }
 
-    if (activity.data.type !== ActivityType.Alias && activity.data.rawAmount) {
+    if (
+        (activity.data.type === ActivityType.Transaction, activity.data.type === ActivityType.Foundry) &&
+        activity.data.rawAmount
+    ) {
         fieldsToSearch.push(activity.data.rawAmount?.toString())
         fieldsToSearch.push(activity.getFormattedAmount(false)?.toLowerCase())
     }

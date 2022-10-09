@@ -172,7 +172,7 @@
         <TransactionDetails {...details} />
     {:else if activity?.data.type === ActivityType.Foundry}
         <FoundryDetails {...details} />
-    {:else}
+    {:else if activity?.data.type === ActivityType.Foundry}
         <AliasDetails {...details} />
     {/if}
     {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}

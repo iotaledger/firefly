@@ -1,22 +1,23 @@
 <script lang="typescript">
     import {
-        InclusionState,
-        selectedAccountAssets,
-        getAssetFromPersistedAssets,
-        IPersistedAsset,
         Activity,
-        ActivityType,
-        NotVerifiedStatus,
         ActivityAsyncStatus,
+        ActivityType,
+        getAssetFromPersistedAssets,
+        InclusionState,
+        IPersistedAsset,
+        NotVerifiedStatus,
+        selectedAccountAssets,
     } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import {
-        ClickableTile,
-        TransactionActivityTileContent,
-        FoundryActivityTileContent,
         AliasActivityTileContent,
-        TimelockActivityTileFooter,
         AsyncActivityTileFooter,
+        ClickableTile,
+        FoundryActivityTileContent,
+        NftActivityTileContent,
+        TimelockActivityTileFooter,
+        TransactionActivityTileContent,
     } from 'shared/components'
 
     export let activity: Activity
@@ -59,7 +60,9 @@
                 />
             {:else if activity.data.type === ActivityType.Alias}
                 <AliasActivityTileContent inclusionState={activity.inclusionState} data={activity.data} />
-            {:else}
+            {:else if activity.data.type === ActivityType.Nft}
+                <NftActivityTileContent inclusionState={activity.inclusionState} data={activity.data} />
+            {:else if activity.data.type === ActivityType.Foundry}
                 <FoundryActivityTileContent
                     inclusionState={activity.inclusionState}
                     fiatAmount={activity.getFiatAmount()}

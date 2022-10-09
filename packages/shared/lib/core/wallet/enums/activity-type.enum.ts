@@ -4,4 +4,5 @@ export enum ActivityType {
     Foundry = 'foundry',
     Alias = 'alias',
     Migrate = 'migrate',
+    Nft = 'nft',
 }
