@@ -7,6 +7,7 @@
         NetworkSetupRouter,
         ProfileBackupRouter,
         ProfileSetupRouter,
+        ProfileRecoveryRouter,
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
     } from './views'
@@ -37,6 +38,8 @@
     <Transition transition={false}>
         <StorageProtectionSetupRouter />
     </Transition>
+{:else if $onboardingRoute === OnboardingRoute.ProfileRecovery}
+    <ProfileRecoveryRouter />
 {:else if $onboardingRoute === OnboardingRoute.Congratulations}
     <Transition>
         <CongratulationsView />

@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { setContext } from 'svelte'
-    import { Transition } from 'shared/components'
     import { ImportMnemonicPhraseView, SuccessView } from './views'
     import { localize } from '@core/i18n'
     import {
@@ -23,11 +22,7 @@
             await $profileRecoveryRouter.next()
         } catch (err) {
             if (!err.snapshot) {
-                if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
-                    error = localize('views.migrate.incorrectSeedVaultPassword')
-                } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
-                    error = localize('views.migrate.noDataSeedVault')
-                } else if ($profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase) {
+                if ($profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase) {
                     showAppNotification({
                         type: 'error',
                         message: localize('views.migrate.problemRestoringWallet'),
@@ -46,11 +41,7 @@
 </script>
 
 {#if $profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase}
-    <Transition>
-        <ImportMnemonicPhraseView on:next={next} on:previous={previous} />
-    </Transition>
+    <ImportMnemonicPhraseView on:next={next} on:previous={previous} />
 {:else if $profileRecoveryRoute === ProfileRecoveryRoute.Success}
-    <Transition>
-        <SuccessView on:next={next} on:previous={previous} />
-    </Transition>
+    <SuccessView on:next={next} on:previous={previous} />
 {/if}
