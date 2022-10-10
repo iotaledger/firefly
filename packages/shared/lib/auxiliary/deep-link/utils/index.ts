@@ -1,1 +1,1 @@
-export * from './getAmountFromSearchParam'
+export * from './getRawAmountFromSearchParam'

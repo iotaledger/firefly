@@ -17,6 +17,7 @@
         InclusionState,
         ActivityDirection,
         IPersistedAsset,
+        formatTokenAmountDefault,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -35,7 +36,7 @@
     export let formattedFiatValue: string = null
     export let inclusionState: InclusionState = InclusionState.Pending
     export let metadata: string = null
-    export let amount: string = null
+    export let rawAmount: string = null
     export let unit: string
     export let storageDeposit = 0
     export let giftedStorageDeposit = 0
@@ -49,6 +50,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
+    $: amount = formatTokenAmountDefault(Number(rawAmount), asset?.metadata)
     $: formattedTransactionTime = getDateFormat(transactionTime)
     $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)
