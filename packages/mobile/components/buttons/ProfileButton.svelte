@@ -40,7 +40,7 @@
     <div class="flex flex-row">
         <div class="relative">
             <div class="h-14 w-14 rounded-full bg-blue-500 flex items-center justify-center">
-                <Text type="h5" classes="text-white">{getInitials()}</Text>
+                <Text type={TextType.h5} classes="text-white">{getInitials()}</Text>
             </div>
             <div class="absolute right-0 bottom-0">
                 <NetworkIcon {networkType} {networkProtocol} height={14} width={14} />
