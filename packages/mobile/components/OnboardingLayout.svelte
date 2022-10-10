@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { Animation, Icon, Text } from 'shared/components'
-    import { keyboardHeight, isKeyboardOpen } from '../lib/auxiliary/keyboard'
+    import { Animation, Icon, Text, TextType } from 'shared/components'
+    import { isKeyboardOpen, keyboardHeight } from '../lib/auxiliary/keyboard'
 
     export let allowBack = true
     export let animation = ''
@@ -20,7 +20,7 @@
 
 <div data-label="mobile-onboarding-layout" class="relative h-full p-5 flex flex-col justify-between">
     <header class="relative w-full flex justify-center px-6">
-        <Text type="h4" classes="text-center">{title}</Text>
+        <Text type={TextType.h4} classes="text-center">{title}</Text>
         {#if allowBack}
             <button on:click={onBackClick} class="absolute left-0" disabled={busy}>
                 <Icon
