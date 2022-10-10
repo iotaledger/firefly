@@ -3,16 +3,14 @@
     import { InputContainer, Modal, TextInput, AliasSelector } from 'shared/components'
 
     export let alias: string
+    export let error: string = ''
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
 
-    let value: string
-    let error: string
     let hasFocus: boolean
 
     $: hasFocus && (error = '')
-    $: value && modal?.open()
 
     $: if (hasFocus) {
         setTimeout(() => modal?.open(), 101)
@@ -23,12 +21,12 @@
     <InputContainer bind:inputElement clearPadding isFocused={hasFocus} {error}>
         <TextInput
             bind:inputElement
-            bind:value
+            bind:value={alias}
             bind:hasFocus
             clearBackground
             clearBorder
-            label={localize('popups.mintNativeToken.alias')}
-            placeholder={localize('popups.mintNativeToken.alias')}
+            label={localize('popups.mintNativeToken.property.alias')}
+            placeholder={localize('popups.mintNativeToken.property.alias')}
             fontSize="sm"
             {...$$restProps}
         />

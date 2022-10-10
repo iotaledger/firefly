@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { setMintTokenDetails, mintTokenDetails } from '@core/wallet'
+    import { setMintTokenDetails, mintTokenDetails, selectedAccountActivities, ActivityType } from '@core/wallet'
     import { closePopup, openPopup } from '@lib/popup'
     import {
         Button,
@@ -15,6 +15,7 @@
     } from 'shared/components'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
+    import { get } from 'svelte/store'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -42,8 +43,12 @@
     $: aliasId, (aliasIdError = '')
 
     let error: BaseError
-
     let decimalsInput: OptionalInput
+
+    let aliasIds: string[]
+    $: aliasIds = get(selectedAccountActivities)
+        .filter((activity) => activity.data.type === ActivityType.Alias)
+        .map((activity) => (activity.data.type === ActivityType.Alias ? activity.data.aliasId : ''))
 
     function handleCancel(): void {
         closePopup()
@@ -97,8 +102,12 @@
     }
 
     function isAliasIdValid(): Promise<void> {
+        const isValidAliasId = aliasId && aliasIds.some((_aliasId) => _aliasId === aliasId)
         if (!aliasId) {
             aliasIdError = 'Alias is required'
+            return Promise.reject(aliasIdError)
+        } else if (!isValidAliasId) {
+            aliasIdError = 'You\'re not the owner of this alias'
             return Promise.reject(aliasIdError)
         } else {
             return Promise.resolve()
@@ -172,7 +181,7 @@
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
-        <AliasInput bind:alias={aliasId} />
+        <AliasInput bind:alias={aliasId} bind:error={aliasIdError} />
         <TextInput
             bind:value={tokenName}
             label={localize('popups.mintNativeToken.property.name')}
