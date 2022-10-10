@@ -878,7 +878,7 @@
                 "totalSupply": "Total Supply",
                 "circulatingSupply": "Circulating Supply",
                 "standard": "Standard",
-                "name": "Name",
+                "tokenName": "Name",
                 "description": "Description",
                 "symbol": "Symbol",
                 "decimals": "Decimals",
@@ -1617,7 +1617,7 @@
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             }
         },
-        "mintNativeTokenForm": {
+        "mintNativeToken": {
             "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
             "description": "IRC30 optional parameter: The human-readable description of the token.",
             "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",

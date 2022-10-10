@@ -16,6 +16,7 @@
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
     import { get } from 'svelte/store'
+    import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -166,11 +167,7 @@
         try {
             await _onMount()
         } catch (err) {
-            if (!error) {
-                error = err.error
-                    ? new BaseError({ message: err.error ?? err.message, logToConsole: true, saveToErrorLog: true })
-                    : err
-            }
+            handleError(error)
         }
     })
 </script>
@@ -184,8 +181,8 @@
         <AliasInput bind:alias={aliasId} bind:error={aliasIdError} />
         <TextInput
             bind:value={tokenName}
-            label={localize('popups.mintNativeToken.property.name')}
-            placeholder={localize('popups.mintNativeToken.property.name')}
+            label={localize('popups.mintNativeToken.property.tokenName')}
+            placeholder={localize('popups.mintNativeToken.property.tokenName')}
             error={nameError}
         />
         <TextInput
@@ -217,25 +214,25 @@
                 isInteger
                 maxlength={MAX_SUPPORTED_DECIMALS}
                 label={localize('popups.mintNativeToken.property.decimals')}
-                description={localize('tooltips.mintNativeToken.property')}
+                description={localize('tooltips.mintNativeToken.decimals')}
                 fontSize="14"
             />
             <OptionalInput
                 bind:value={description}
                 label={localize('popups.mintNativeToken.property.description')}
-                description={localize('tooltips.mintNativeToken.property')}
+                description={localize('tooltips.mintNativeToken.description')}
                 fontSize="14"
             />
             <OptionalInput
                 bind:value={url}
                 label={localize('popups.mintNativeToken.property.url')}
-                description={localize('tooltips.mintNativeToken.property')}
+                description={localize('tooltips.mintNativeToken.url')}
                 fontSize="14"
             />
             <OptionalInput
                 bind:value={logoUrl}
                 label={localize('popups.mintNativeToken.property.logoUrl')}
-                description={localize('tooltips.mintNativeToken.property')}
+                description={localize('tooltips.mintNativeToken.logoUrl')}
                 fontSize="14"
             />
         </optional-inputs>

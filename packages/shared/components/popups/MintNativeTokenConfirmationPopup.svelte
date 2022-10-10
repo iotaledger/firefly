@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { mintNativeToken, mintTokenDetails, TokenStandard } from '@core/wallet'
     import { closePopup, openPopup } from '@lib/popup'
-    import { Button, Error, KeyValueBox, Text, FontWeight } from 'shared/components'
+    import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
@@ -25,12 +24,10 @@
 
     $: isTransferring = $selectedAccount.isTransferring
 
-    let error: BaseError
-
     let detailsList: { [key in string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
     $: detailsList = {
         ...(aliasId && {
-            aliasId: { data: aliasId, isCopyable: true },
+            alias: { data: aliasId, isCopyable: true },
         }),
         ...(tokenName && {
             tokenName: { data: tokenName },
@@ -66,9 +63,6 @@
             closePopup()
         } catch (reason) {
             handleError(reason.error)
-            if (!error) {
-                error = reason.error
-            }
         }
     }
 
@@ -81,14 +75,10 @@
     }
 
     async function handleMint(): Promise<void> {
-        error = null
         try {
             await checkActiveProfileAuth(mintAction, { stronghold: true, ledger: false })
         } catch (reason) {
             handleError(reason.error)
-            if (!error) {
-                error = reason.error
-            }
         }
     }
 
@@ -97,9 +87,6 @@
             await _onMount()
         } catch (err) {
             handleError(err.error)
-            if (!error) {
-                error = err.error
-            }
         }
     })
 </script>
@@ -120,9 +107,6 @@
                     />
                 {/each}
             </details-list>
-        {/if}
-        {#if error}
-            <Error error={error.message} />
         {/if}
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
