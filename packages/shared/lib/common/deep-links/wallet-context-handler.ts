@@ -2,7 +2,7 @@ import { Unit } from '@iota/unit-converter'
 
 import { localize } from '@core/i18n'
 
-import { isValidAddressAndPrefix } from '../../address'
+import { isValidAddressAndPrefix, isValidEVMAddress } from '../../address'
 import { addError } from '../../errors'
 
 import {
@@ -151,19 +151,19 @@ const parseSwapOutOperation = (
             type: 'deepLink',
             message: 'The chain ID is missing',
         })
-    } else {
-        // TODO: validation logic
+    } else if (!Number.isInteger(Number(chainId))) {
+        return addError({ time: Date.now(), type: 'deepLink', message: `Chain ID is not an integer '${chainId}'` })
     }
 
     const receiverAddress = searchParams.get(SwapOperationParameter.ReceiverAddress)
     if (!receiverAddress) {
+        return addError({ time: Date.now(), type: 'deepLink', message: 'The receiver address is missing' })
+    } else if (!isValidEVMAddress(receiverAddress)) {
         return addError({
             time: Date.now(),
             type: 'deepLink',
-            message: 'The receiver address is missing',
+            message: `The receiver address is not an EVM address: '${receiverAddress}'`,
         })
-    } else {
-        // TODO: validation logic
     }
 
     return {
