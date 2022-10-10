@@ -7,7 +7,7 @@
     import { Platform } from '@lib/platform'
     import { openPopup, popupState } from '@lib/popup'
     import { validatePinFormat } from '@lib/utils'
-    import { Icon, PinInput, Profile, Text } from 'shared/components'
+    import { Icon, PinInput, Profile, Text, TextType } from 'shared/components'
     import { onDestroy } from 'svelte'
 
     let attempts = 0
@@ -108,7 +108,7 @@
 
 <div class="relative h-full p-5 flex flex-col">
     <header class="relative w-full flex justify-center">
-        <Text type="h4" classes="text-center">{localize('general.profiles')}</Text>
+        <Text type={TextType.h4} classes="text-center">{localize('general.profiles')}</Text>
         <button
             data-label="back-button"
             class="absolute left-0"
@@ -136,7 +136,7 @@
                     autofocus
                 />
             </div>
-            <Text type="p" bold classes="text-center mt-4">
+            <Text type={TextType.p} bold classes="text-center mt-4">
                 {attempts > 0
                     ? localize('views.login.incorrectAttempts', {
                           values: { attempts: attempts.toString() },

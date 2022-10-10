@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { ProfileButton } from '../../../components'
-    import { Button, Logo, Text } from 'shared/components'
+    import { Button, Logo, Text, TextType } from 'shared/components'
     import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
@@ -42,7 +42,7 @@
     <section class="overlay-scrollbar flex flex-col items-center w-full h-full pt-16">
         <Logo width="64px" logo="logo-firefly" />
         <!-- @TODO: Add text to locals -->
-        <Text type="h3" bold classes="text-center mt-4">Welcome back!</Text>
+        <Text type={TextType.h3} bold classes="text-center mt-4">Welcome back!</Text>
         <div class="w-full flex flex-col mt-10">
             {#each $profiles as profile}
                 <div class="w-full item-center mb-4">
