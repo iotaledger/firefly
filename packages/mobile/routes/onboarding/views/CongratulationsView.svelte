@@ -1,16 +1,12 @@
 <script lang="typescript">
     import { OnboardingLayout } from '../../../components'
     import { Button, Icon, Text } from 'shared/components'
-    import { hasCompletedAppSetup } from '@core/app'
     import { onboardingRouter } from '@core/router'
     import { localize } from '@core/i18n'
     import { completeOnboardingProcess } from '@contexts/onboarding'
 
     function onContinueClick(): Promise<void> {
         completeOnboardingProcess()
-        // @TODO: Should be called sooner when the App configuration is completed and the
-        // legal has been accepted
-        hasCompletedAppSetup.set(true)
         $onboardingRouter.next()
         return Promise.resolve()
     }
