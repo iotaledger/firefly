@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { Icon, Text, Tooltip } from 'shared/components'
+    import { Icon, Text, Tooltip, FontWeight, TextType } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Position } from 'shared/components/Tooltip.svelte'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
     export let title: string
     export let text: string

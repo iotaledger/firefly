@@ -5,7 +5,7 @@
     import { openPopup } from '@lib/popup'
     import { Text, NodeActionsButton, Pill } from 'shared/components'
 
-    export let nodesContainer: HTMLElement
+    export let nodesContainer: HTMLElement = undefined
 
     $: clientOptions = $activeProfile?.clientOptions
 

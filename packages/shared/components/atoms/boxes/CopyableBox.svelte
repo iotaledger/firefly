@@ -1,16 +1,15 @@
 <script lang="typescript">
     import { setClipboard } from 'shared/lib/utils'
     import Box from './Box.svelte'
-    import { Text, Tooltip } from 'shared/components'
+    import { Text, Tooltip, FontWeight } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { FontWeight } from 'shared/components/Text.svelte'
     import { onDestroy } from 'svelte'
 
     export let value = ''
     export let isCopyable = true
     export let clearPadding = false
     export let clearBoxPadding = false
-    export let offset: number
+    export let offset: number = undefined
     export let classes = ''
 
     let tooltipAnchor

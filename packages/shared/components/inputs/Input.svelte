@@ -1,29 +1,27 @@
 <script lang="typescript">
     import { onMount, createEventDispatcher, tick } from 'svelte'
-    import { Text, InputContainer } from 'shared/components'
+    import { Text, InputContainer, TextPropTypes, TextType } from 'shared/components'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
-    import { TextType } from 'shared/components/Text.svelte'
-    import type { TextPropTypes } from 'shared/components/Text.svelte'
 
     export let value: string = ''
     export let classes: string = ''
     export let containerClasses: string = ''
-    export let style: string
-    export let label: string
-    export let placeholder: string
+    export let style: string = ''
+    export let label: string = ''
+    export let placeholder: string = ''
     export let type = 'text'
-    export let error: string
-    export let maxlength: number
+    export let error: string = ''
+    export let maxlength: number = undefined
     export let float = false
     export let integer = false
     export let autofocus = false
     export let submitHandler = (): void => {}
     export let disabled = false
-    export let maxDecimals: number
+    export let maxDecimals: number = undefined
     export let disableContextMenu = false
     export let capsLockWarning = false
-    export let inputElement: HTMLInputElement
+    export let inputElement: HTMLInputElement = undefined
     export let clearBackground = false
     export let clearPadding = false
     export let clearBorder = false
@@ -133,7 +131,6 @@
     <div class="w-full relative">
         <InputContainer
             bind:inputElement
-            {disabled}
             {error}
             isFocused={hasFocus}
             {clearBackground}

@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { HR, Modal, Text } from 'shared/components'
+    import { HR, Modal, Text, TextType } from 'shared/components'
     import {
         NETWORK_HEALTH_COLORS,
         networkStatus,
@@ -9,9 +9,8 @@
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { TextType } from 'shared/components/Text.svelte'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     let health: NetworkHealth
 

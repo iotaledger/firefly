@@ -3,9 +3,9 @@
         TransactionActivityStatusPill,
         ActivityAsyncStatusPill,
         KeyValueBox,
+        Pill,
         AmountBox,
         SubjectBox,
-        Pill,
     } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'

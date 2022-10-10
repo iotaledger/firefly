@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { Button, Text } from 'shared/components'
+    import { Button, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
-    import { ButtonSize } from 'shared/components/Button.svelte'
 
     function handleWalletFinderClick() {
         openPopup({ type: 'walletFinder' })

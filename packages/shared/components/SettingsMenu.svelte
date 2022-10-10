@@ -2,33 +2,32 @@
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import {
-        AdvancedSettings,
-        AdvancedSettingsNoProfile,
-        GeneralSettings,
-        GeneralSettingsNoProfile,
-        HelpAndInfo,
-        SecuritySettings,
+        AdvancedSettingsRoute,
+        AdvancedSettingsRouteNoProfile,
+        GeneralSettingsRoute,
+        GeneralSettingsRouteNoProfile,
+        HelpAndInfoRoute,
+        SecuritySettingsRoute,
     } from '@core/router'
     import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text, TextType } from 'shared/components'
     import features from 'shared/features/features'
-    import { TextType } from 'shared/components/Text.svelte'
 
     export let group
     export let settings:
-        | AdvancedSettings
-        | AdvancedSettingsNoProfile
-        | GeneralSettings
-        | GeneralSettingsNoProfile
-        | HelpAndInfo
-        | SecuritySettings
+        | AdvancedSettingsRoute
+        | AdvancedSettingsRouteNoProfile
+        | GeneralSettingsRoute
+        | GeneralSettingsRouteNoProfile
+        | HelpAndInfoRoute
+        | SecuritySettingsRoute
     export let activeSettings:
-        | AdvancedSettings[]
-        | AdvancedSettingsNoProfile[]
-        | GeneralSettings[]
-        | GeneralSettingsNoProfile[]
-        | HelpAndInfo[]
-        | SecuritySettings[] = []
+        | AdvancedSettingsRoute[]
+        | AdvancedSettingsRouteNoProfile[]
+        | GeneralSettingsRoute[]
+        | GeneralSettingsRouteNoProfile[]
+        | HelpAndInfoRoute[]
+        | SecuritySettingsRoute[] = []
     export let icon = undefined
     export let iconColor = undefined
     export let title
