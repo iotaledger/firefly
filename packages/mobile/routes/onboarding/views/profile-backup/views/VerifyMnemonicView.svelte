@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { OnboardingLayout } from '../../../../../components'
-    import { RecoveryPhrase } from '../../../../../components'
-    import { Icon, Text } from 'shared/components'
+    import { OnboardingLayout, RecoveryPhrase } from '../../../../../components'
+    import { Icon, Text, TextType } from 'shared/components'
     import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
@@ -75,7 +74,7 @@
 <OnboardingLayout {onBackClick} {busy} {title}>
     <div slot="content" class="w-full h-full flex flex-col p-0">
         {#if !verified}
-            <Text type="p" secondary classes="mb-4">
+            <Text type={TextType.p} secondary classes="mb-4">
                 {localize('views.onboarding.profileBackup.verifyMnemonic.body')}
             </Text>
         {:else}
@@ -83,10 +82,10 @@
                 <div class="bg-green-500 rounded-2xl relative -top-10">
                     <Icon icon="success-check" classes="text-white" />
                 </div>
-                <Text type="h2" classes="mb-5 text-center"
+                <Text type={TextType.h2} classes="mb-5 text-center"
                     >{localize('views.onboarding.profileBackup.verifyMnemonic.verified')}</Text
                 >
-                <Text type="p" secondary classes="mb-2"
+                <Text type={TextType.p} secondary classes="mb-2"
                     >{localize('views.onboarding.profileBackup.verifyMnemonic.verifiedBody')}</Text
                 >
             </div>
