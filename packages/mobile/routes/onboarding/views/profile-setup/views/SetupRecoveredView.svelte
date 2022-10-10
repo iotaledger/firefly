@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
-    import { OnboardingButton, Text } from 'shared/components'
+    import { OnboardingButton, Text, TextType } from 'shared/components'
     import features from '../../../../../features/features'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
@@ -44,7 +44,9 @@
 
 <OnboardingLayout {onBackClick} {title} animation="import-desktop">
     <div slot="content">
-        <Text type="p" secondary classes="mb-8">{localize('views.onboarding.profileSetup.setupRecovered.body')}</Text>
+        <Text type={TextType.p} secondary classes="mb-8"
+            >{localize('views.onboarding.profileSetup.setupRecovered.body')}</Text
+        >
     </div>
     <div slot="footer" class="flex flex-col space-y-4">
         <OnboardingButton
