@@ -18,7 +18,7 @@ export function rejectActivity(id: string): void {
         if (!state[profileId]) {
             state[profileId] = {}
         }
-        if (!state[profileId][accountIndex] || !Array.isArray(state[accountIndex].activities)) {
+        if (!state[profileId][accountIndex]) {
             state[profileId][accountIndex] = []
         }
         state[profileId][accountIndex].push(id)
