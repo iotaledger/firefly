@@ -1644,24 +1644,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "正在接收来自",
                     "Confirmed": "接收到来自",
                     "Conflicting": "传送失败"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "正在发送给",
                     "Confirmed": "已发送给",
                     "Conflicting": "传送失败"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "正在接收来自",
                     "Confirmed": "收到来自",
                     "Conflicting": "接收失败"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "正在发送给",
                     "Confirmed": "发送到",
                     "Conflicting": "发送失败"
@@ -1669,12 +1669,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "锻造中",
                 "Confirmed": "已锻造",
                 "Conflicting": "锻造失败"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "锻造中",
                 "Confirmed": "已锻造",
                 "Conflicting": "锻造失败"

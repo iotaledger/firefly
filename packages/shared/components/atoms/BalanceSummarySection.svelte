@@ -1,13 +1,12 @@
 <script lang="typescript">
-    import { FontWeight } from 'shared/components/Text.svelte'
-    import { Text } from 'shared/components'
+    import { Text, FontWeight } from 'shared/components'
     import { formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
 
     export let totalRow = false
     export let title: string
-    export let subtitle: string
+    export let subtitle: string = ''
     export let amount: number
 
     $: formattedAmount = formatTokenAmountPrecise(amount, BASE_TOKEN[$activeProfile.networkProtocol])

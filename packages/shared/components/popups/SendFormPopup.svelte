@@ -2,8 +2,7 @@
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
-    import { Button, Text, RecipientInput, AssetAmountInput, OptionalInput } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { Button, Text, RecipientInput, AssetAmountInput, OptionalInput, FontWeight } from 'shared/components'
     import { closePopup, openPopup } from '@lib/popup'
     import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
 

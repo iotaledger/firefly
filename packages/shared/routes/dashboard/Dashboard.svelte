@@ -17,6 +17,7 @@
     import { Platform } from 'shared/lib/platform'
     import { Developer, Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
+    import Collectibles from './collectibles/Collectibles.svelte'
     import TopNavigation from './TopNavigation.svelte'
 
     $: $activeProfile, saveActiveProfile()
@@ -24,6 +25,7 @@
     const tabs = {
         wallet: Wallet,
         settings: Settings,
+        collectibles: Collectibles,
         developer: Developer,
     }
 
@@ -84,7 +86,7 @@
         <Sidebar />
         <!-- Dashboard Pane -->
         <div class="flex flex-col w-full h-full">
-            <svelte:component this={tabs[$dashboardRoute]} locale={localize} on:next={$appRouter.next} />
+            <svelte:component this={tabs[$dashboardRoute]} on:next={$appRouter.next} />
         </div>
     </div>
 </div>

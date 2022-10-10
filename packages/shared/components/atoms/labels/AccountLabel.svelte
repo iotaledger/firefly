@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { IAccountState } from '@core/account'
-    import { Text } from 'shared/components/'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { Text, FontWeight } from 'shared/components/'
 
     export let account: IAccountState
     export let selected = true

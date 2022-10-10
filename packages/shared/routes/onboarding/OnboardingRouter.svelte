@@ -39,15 +39,15 @@
         <StrongholdSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.StorageProtectionSetup}
-    <Transition transition={false}>
+    <Transition>
         <StorageProtectionSetupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.ProfileBackup}
-    <Transition transition={false}>
+    <Transition>
         <ProfileBackupRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.ProfileRecovery}
-    <Transition transition={false}>
+    <Transition>
         <ProfileRecoveryRouter />
     </Transition>
 {:else if $onboardingRoute === OnboardingRoute.ShimmerClaiming}

@@ -1,8 +1,8 @@
 <script lang="typescript">
+    import { hasCompletedAppSetup } from '@core/app'
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
     import { appSetupRouter } from '@core/router'
-    import features from '../../../../../features/features'
     import { Button, Checkbox, Text } from 'shared/components'
     import {
         initialiseOnboardingProfile,
@@ -12,10 +12,12 @@
     } from 'shared/lib/contexts/onboarding'
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
+    import features from '../../../../../features/features'
 
     let checked = false
 
     function onContinueClick(): void {
+        hasCompletedAppSetup.set(true)
         $appSetupRouter.next()
     }
 

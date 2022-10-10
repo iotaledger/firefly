@@ -256,14 +256,14 @@ function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilte
         if (
             filter.type.selected === TypeFilterOption.Incoming &&
             activity.data.type === ActivityType.Transaction &&
-            activity.data.direction !== ActivityDirection.In
+            activity.data.direction !== ActivityDirection.Incoming
         ) {
             return false
         }
         if (
             filter.type.selected === TypeFilterOption.Outgoing &&
             activity.data.type === ActivityType.Transaction &&
-            activity.data.direction !== ActivityDirection.Out
+            activity.data.direction !== ActivityDirection.Outgoing
         ) {
             return false
         }

@@ -4,21 +4,11 @@
     import {
         activityFilter,
         activitySearchTerm,
-        ActivityType,
         queriedActivities,
         selectedAccountActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
-    import {
-        TransactionActivityTile,
-        FoundryActivityTile,
-        AliasActivityTile,
-        Text,
-        TextInput,
-        TogglableButton,
-        Filter,
-    } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { ActivityTile, Text, TextInput, TogglableButton, Filter, FontWeight } from 'shared/components'
     import features from 'shared/features/features'
     import { debounce } from 'shared/lib/utils'
     import VirtualList from '@sveltejs/svelte-virtual-list'
@@ -107,29 +97,7 @@
                             {item.title} • {item.amount}
                         </Text>
                     {/if}
-                    {#if item.activity.data.type === ActivityType.Transaction}
-                        <TransactionActivityTile
-                            activityId={item.activity.id}
-                            inclusionState={item.activity.inclusionState}
-                            fiatAmount={item.activity.getFiatAmount()}
-                            amount={item.activity.getFormattedAmount(false)}
-                            data={item.activity.data}
-                        />
-                    {:else if item.activity.data.type === ActivityType.Alias}
-                        <AliasActivityTile
-                            activityId={item.activity.id}
-                            inclusionState={item.activity.inclusionState}
-                            data={item.activity.data}
-                        />
-                    {:else}
-                        <FoundryActivityTile
-                            activityId={item.activity.id}
-                            inclusionState={item.activity.inclusionState}
-                            fiatAmount={item.activity.getFiatAmount()}
-                            amount={item.activity.getFormattedAmount(false)}
-                            data={item.activity.data}
-                        />
-                    {/if}
+                    <ActivityTile activity={item.activity} />
                 </div>
             </VirtualList>
         {:else}
