@@ -545,6 +545,22 @@
                 "title": "Color picker",
                 "hexCode": "Color hex code"
             }
+        },
+        "collectibles": {
+            "details": {
+                "collection": "Collection",
+                "nftId": "NFT ID",
+                "nftType": "NFT Type",
+                "storageDeposit": "Storage deposit",
+                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
+                "attributes": "Attributes",
+                "menu": {
+                    "download": "Download",
+                    "setAvatar": "Set NFT as profile avatar",
+                    "view": "View in IPFS",
+                    "burn": "Burn NFT"
+                }
+            }
         }
     },
     "popups": {
