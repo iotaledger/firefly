@@ -4,34 +4,34 @@ import { IActivity, IPartialFoundryActivityDataWithType, IPartialTransactionActi
 
 export const allAccountActivities = writable<Activity[][]>([])
 
-export function addEmptyAccountActivitiesToAllAccountActivities(accountId: string): void {
-    setAccountActivitiesInAllAccountActivities(accountId, [])
+export function addEmptyAccountActivitiesToAllAccountActivities(accountIndex: number): void {
+    setAccountActivitiesInAllAccountActivities(accountIndex, [])
 }
 
-export function addActivityToAccountActivitiesInAllAccountActivities(accountId: string, activity: Activity): void {
+export function addActivityToAccountActivitiesInAllAccountActivities(accountIndex: number, activity: Activity): void {
     allAccountActivities.update((state) => {
-        if (!state[accountId]) {
-            state[accountId] = []
+        if (!state[accountIndex]) {
+            state[accountIndex] = []
         }
-        state[accountId].push(activity)
+        state[accountIndex].push(activity)
         return state
     })
 }
 
-export function setAccountActivitiesInAllAccountActivities(accountId: string, accountActivities: Activity[]): void {
+export function setAccountActivitiesInAllAccountActivities(accountIndex: number, accountActivities: Activity[]): void {
     allAccountActivities.update((state) => {
-        state[Number(accountId)] = accountActivities
+        state[accountIndex] = accountActivities
         return state
     })
 }
 
 export function updateActivityByTransactionId(
-    accountId: string,
+    accountIndex: number,
     transactionId: string,
     partialActivity: Partial<IActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[Number(accountId)]?.find((_activity) => _activity.transactionId === transactionId)
+        const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
             activity.updateFromPartialActivity(partialActivity)
@@ -41,12 +41,12 @@ export function updateActivityByTransactionId(
 }
 
 export function updateActivityByActivityId(
-    accountId: string,
+    accountIndex: number,
     activityId: string,
     partialActivity: Partial<IActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[Number(accountId)]?.find((_activity) => _activity.id === activityId)
+        const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
             activity.updateFromPartialActivity(partialActivity)
@@ -56,12 +56,12 @@ export function updateActivityByActivityId(
 }
 
 export function updateActivityDataByActivityId(
-    accountId: string,
+    accountIndex: number,
     activityId: string,
     partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[Number(accountId)]?.find((_activity) => _activity.id === activityId)
+        const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
             activity.updateDataFromPartialActivity(partialData)
@@ -71,12 +71,12 @@ export function updateActivityDataByActivityId(
 }
 
 export function updateActivityDataByTransactionId(
-    accountId: string,
+    accountIndex: number,
     transactionId: string,
     partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[Number(accountId)]?.find((_activity) => _activity.transactionId === transactionId)
+        const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
             activity.updateDataFromPartialActivity(partialData)

@@ -10,7 +10,7 @@ export async function tryEditSelectedAccountMetadata(metadata: Partial<IAccountM
     try {
         // TODO: Replace Promise.resolve() with update metadata in wallet.rs when api is exposed
         await Promise.resolve()
-        updateActiveAccountMetadata(get(selectedAccount)?.id, metadata)
+        updateActiveAccountMetadata(get(selectedAccount)?.index, metadata)
         updateSelectedAccount(metadata)
     } catch (error) {
         if (error) {

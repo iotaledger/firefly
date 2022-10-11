@@ -6,7 +6,7 @@
 
     export let value: Date
     export let selected: ExpirationTime = ExpirationTime.None
-    export let anchor: HTMLElement
+    export let anchor: HTMLElement = undefined
 
     export function tryOpen(): void {
         if (!canShowDateTimePicker) {

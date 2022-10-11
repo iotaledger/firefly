@@ -1,8 +1,7 @@
 <script lang="typescript">
     import { NetworkProtocol } from '@core/network'
     import { visibleSelectedAccountAssets } from '@core/wallet'
-    import { AssetTile, Icon, Text, AssetIcon } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
 
     export let asset = $visibleSelectedAccountAssets?.baseCoin
@@ -70,9 +69,7 @@
                         <AssetTile
                             onClick={() => handleAssetClick($visibleSelectedAccountAssets?.baseCoin)}
                             asset={$visibleSelectedAccountAssets?.baseCoin}
-                            overrideColor
                             classes="bg-white hover:bg-gray-50 dark:bg-transparent"
-                            squashed
                         />
                     </li>
                     {#each $visibleSelectedAccountAssets?.nativeTokens as nativeToken}
@@ -80,9 +77,7 @@
                             <AssetTile
                                 onClick={() => handleAssetClick(nativeToken)}
                                 asset={nativeToken}
-                                overrideColor
                                 classes="bg-white hover:bg-gray-50 dark:bg-transparent"
-                                squashed
                             />
                         </li>
                     {/each}

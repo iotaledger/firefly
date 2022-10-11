@@ -1,13 +1,10 @@
 <script lang="typescript">
-    import { FontWeight } from 'shared/components/Text.svelte'
-    import { Modal, Text } from 'shared/components'
+    import { Modal, Text, FontWeight, Button, ButtonSize } from 'shared/components'
     import type { Filter } from '@core/wallet'
     import { localize } from '@core/i18n'
-    import { Button } from 'shared/components'
     import { activeProfileId } from '@core/profile'
-    import { ButtonSize } from 'shared/components/Button.svelte'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
     export let filter: Filter
     export let isChanged: boolean
     export let onSetFilters: () => void

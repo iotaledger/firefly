@@ -4,11 +4,11 @@
     import { clickOutside } from '@lib/actions'
     import { createEventDispatcher } from 'svelte'
 
-    export let inputElement: HTMLInputElement
+    export let inputElement: HTMLInputElement = undefined
 
-    export let isFocused = false
-    export let error = ''
-    export let classes = ''
+    export let isFocused: boolean = false
+    export let error: string = ''
+    export let classes: string = ''
     export let backgroundColor = 'white'
     export let darkBackgroundColor = 'gray-800'
     export let clearBackground = false

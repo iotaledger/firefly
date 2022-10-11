@@ -1,9 +1,19 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Button, ExpirationTimePicker, KeyValueBox, Text, TextHint, Error, Toggle } from 'shared/components'
+    import Big from 'big.js'
+    import {
+        Button,
+        ExpirationTimePicker,
+        KeyValueBox,
+        Text,
+        TextHint,
+        Error,
+        Toggle,
+        FontWeight,
+        TextType,
+    } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
     import type { OutputTypes } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
@@ -17,7 +27,6 @@
         InclusionState,
         sendOutput,
         validateSendConfirmation,
-        convertToRawAmount,
         selectedAccountAssets,
         getStorageDepositFromOutput,
         DEFAULT_TRANSACTION_OPTIONS,
@@ -33,7 +42,7 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
 
-    const { asset, amount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift, surplus } =
+    const { asset, rawAmount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift, surplus } =
         get(newTransactionDetails)
     let { expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
@@ -44,7 +53,6 @@
     let error: BaseError
     let expirationTimePicker: ExpirationTimePicker
 
-    const rawAmount = convertToRawAmount(amount, unit, asset.metadata)
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
@@ -61,7 +69,11 @@
 
     $: formattedFiatValue =
         formatCurrency(
-            convertToFiat(rawAmount, $currencies[CurrencyTypes.USD], $exchangeRates[$activeProfile?.settings?.currency])
+            convertToFiat(
+                Big(rawAmount),
+                $currencies[CurrencyTypes.USD],
+                $exchangeRates[$activeProfile?.settings?.currency]
+            )
         ) || ''
 
     $: transactionDetails = {
@@ -69,10 +81,9 @@
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
         metadata,
-        rawAmount,
         storageDeposit: giftStorageDeposit ? giftedStorageDeposit : storageDeposit,
         subject: recipient,
-        amount,
+        rawAmount,
         tag,
         unit,
         isInternal,
@@ -101,7 +112,7 @@
             giftStorageDeposit,
             surplus
         )
-        preparedOutput = await prepareOutput($selectedAccount.id, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
         setStorageDeposit(preparedOutput, Number(surplus))
 
         if (!initialExpirationDate) {

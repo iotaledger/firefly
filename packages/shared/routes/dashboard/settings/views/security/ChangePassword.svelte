@@ -1,12 +1,11 @@
 <script lang="typescript">
-    import { Button, Checkbox, PasswordInput, Spinner, Text } from 'shared/components'
+    import { Button, Checkbox, PasswordInput, Spinner, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changePasswordAndUnlockStronghold } from '@core/profile-manager'
     import zxcvbn from 'zxcvbn'
     import { exportStronghold } from '@contexts/settings'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
-    import { ButtonSize } from 'shared/components/Button.svelte'
 
     let exportStrongholdChecked: boolean
     let startOfPasswordChange: number

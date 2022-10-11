@@ -24,7 +24,7 @@ export async function handleNewOutputEventInternal(
     accountIndex: number,
     payload: INewOutputEventPayload
 ): Promise<void> {
-    const account = get(activeAccounts)?.find((account) => account.id === accountIndex.toString())
+    const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
     const output = payload?.output
 
     const address = getBech32AddressFromAddressTypes(output?.address)
@@ -34,7 +34,7 @@ export async function handleNewOutputEventInternal(
         !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === output.outputId)
 
     if ((account.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
-        syncBalance(account.id)
+        syncBalance(account.index)
 
         const processedOutput = preprocessGroupedOutputs(
             [output],
@@ -43,6 +43,6 @@ export async function handleNewOutputEventInternal(
         )
         const activity = new Activity(processedOutput, account)
         await tryGetAndStoreAssetFromPersistedAssets(activity.data?.assetId)
-        addActivityToAccountActivitiesInAllAccountActivities(account.id, activity)
+        addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
     }
 }

@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { mobile, PlatformOption, platform } from '@core/app'
-    import { Locale } from '@core/i18n'
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
@@ -42,12 +41,10 @@
     import Video from './Video.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
 
-    export let locale: Locale
-
     export let type: string
     export let props: any
-    export let hideClose: boolean
-    export let preventClose: boolean
+    export let hideClose: boolean = false
+    export let preventClose: boolean = false
     export let fullScreen: boolean
     export let transition = true
     export let overflow = false
@@ -168,7 +165,7 @@
 {#if $mobile && !fullScreen}
     <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
         <div bind:this={popupContent} class="p-8">
-            <svelte:component this={types[type]} {...props} {locale} />
+            <svelte:component this={types[type]} {...props} />
         </div>
     </Drawer>
 {:else}
@@ -200,7 +197,7 @@
                     />
                 </button>
             {/if}
-            <svelte:component this={types[type]} {...props} {locale} />
+            <svelte:component this={types[type]} {...props} />
         </popup-content>
         <div tabindex="0" on:focus={handleFocusLast} />
     </popup>

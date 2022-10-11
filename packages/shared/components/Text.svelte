@@ -1,47 +1,6 @@
-<script lang="typescript" context="module">
-    export enum TextType {
-        h1 = 'h1',
-        h2 = 'h2',
-        h3 = 'h3',
-        h4 = 'h4',
-        h5 = 'h5',
-        p = 'p',
-        pre = 'pre',
-    }
-
-    export enum FontWeight {
-        thin = 'font-100',
-        extralight = 'font-200',
-        light = 'font-300',
-        normal = 'font-400',
-        medium = 'font-500',
-        semibold = 'font-600',
-        bold = 'font-700',
-        extrabold = 'font-800',
-        black = 'font-900',
-    }
-
-    export type TextPropTypes = {
-        type?: TextType
-        fontSize?: string
-        fontWeight?: FontWeight
-        lineHeight?: string
-        secondary?: boolean
-        disabled?: boolean
-        highlighted?: boolean
-        bold?: boolean
-        smaller?: boolean
-        bigger?: boolean
-        error?: boolean
-        overrideColor?: boolean
-        color?: string
-        darkColor?: string
-        overrideLeading?: boolean
-        classes?: string
-    }
-</script>
-
 <script lang="typescript">
+    import { TextType, FontWeight } from './enums'
+
     export let type: TextType = TextType.p
     export let fontSize = ''
     export let fontWeight: FontWeight | '' = ''

@@ -34,7 +34,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
     try {
         const _activeProfile = get(activeProfile)
-        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountId } = _activeProfile
+        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountIndex } = _activeProfile
         if (id) {
             // Step 1: create profile manager if its doesn't exist
             incrementLoginProgress()
@@ -104,7 +104,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             if (isLedgerProfile(type)) {
                 pollLedgerNanoStatus()
             }
-            setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
+            setSelectedAccount(lastUsedAccountIndex ?? get(activeAccounts)?.[0]?.index ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
             setTimeout(() => {

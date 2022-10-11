@@ -7,11 +7,11 @@
 
     export let name = ''
     export let id = ''
-    export let networkType: NetworkType
-    export let networkProtocol: NetworkProtocol
+    export let networkType: NetworkType = undefined
+    export let networkProtocol: NetworkProtocol = undefined
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let bgColor: string
+    export let bgColor: string = ''
 
     export let onClick: undefined | ((id: string) => void) = undefined
 

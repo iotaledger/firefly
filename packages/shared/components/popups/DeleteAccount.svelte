@@ -1,14 +1,13 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text, Error } from 'shared/components'
+    import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { isSoftwareProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
     import { BaseError } from '@core/error'
-    import { ButtonVariant, HTMLButtonType } from 'shared/components/Button.svelte'
 
-    export let deleteAccount: (id: string) => Promise<void> = async () => {}
+    export let deleteAccount: (index: number) => Promise<void> = async () => {}
 
     let password: string
     let error: BaseError
@@ -26,7 +25,7 @@
             if ($isSoftwareProfile) {
                 await setStrongholdPassword(password)
             }
-            await deleteAccount($selectedAccount?.id)
+            await deleteAccount($selectedAccount?.index)
             closePopup()
         } catch (err) {
             error = !error && err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
@@ -41,7 +40,7 @@
 <div class="mb-5">
     <Text type="h4">
         {localize('popups.deleteAccount.title', {
-            values: { name: $selectedAccount?.getMetadata().alias },
+            values: { name: $selectedAccount?.name },
         })}
     </Text>
 </div>

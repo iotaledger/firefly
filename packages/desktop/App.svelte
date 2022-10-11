@@ -24,6 +24,7 @@
     import { setPlatform } from '@core/app/stores/platform.store'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { Transition } from 'shared/components'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -164,11 +165,12 @@
                 transition={$popupState.transition}
                 overflow={$popupState.overflow}
                 relative={$popupState.relative}
-                locale={$_}
             />
         {/if}
         <Route route={AppRoute.Dashboard}>
-            <Dashboard locale={$_} />
+            <Transition>
+                <Dashboard />
+            </Transition>
         </Route>
         <Route route={AppRoute.Login}>
             <LoginRouter />
@@ -177,7 +179,7 @@
             <OnboardingRouter />
         </Route>
         {#if settings}
-            <Settings locale={$_} handleClose={() => (settings = false)} />
+            <Settings handleClose={() => (settings = false)} />
         {/if}
 
         <ToastContainer />
