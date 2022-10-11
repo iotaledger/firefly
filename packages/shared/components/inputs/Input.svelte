@@ -56,7 +56,7 @@
                         event.preventDefault()
                     }
                 } else if ('0123456789'?.indexOf(event.key) < 0) {
-                    // if float or interger we accept numbers
+                    // if float or integer we accept numbers
                     event.preventDefault()
                 } else if (float && maxDecimals !== undefined && '0123456789'?.indexOf(event.key) >= 0) {
                     // If max decimals are set only allow certain number after decimal separator
