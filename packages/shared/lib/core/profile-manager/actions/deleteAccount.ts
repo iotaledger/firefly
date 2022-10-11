@@ -4,8 +4,8 @@ import { CannotRemoveAccountError, removeLatestAccount, RemoveNotLastAccountErro
 import { resetWalletRoute } from '@core/router'
 import { get } from 'svelte/store'
 
-export async function deleteAccount(id: string): Promise<void> {
-    const accountToBeDeleted = get(visibleActiveAccounts).find((account) => account?.id === id)
+export async function deleteAccount(index: number): Promise<void> {
+    const accountToBeDeleted = get(visibleActiveAccounts).find((account) => account?.index === index)
     const accounts = get(visibleActiveAccounts)
 
     if (accountToBeDeleted !== accounts[accounts.length - 1]) {
@@ -14,8 +14,8 @@ export async function deleteAccount(id: string): Promise<void> {
 
     try {
         await removeLatestAccount()
-        removeAccountFromActiveAccounts(id)
-        setSelectedAccount(get(visibleActiveAccounts)?.[0]?.id ?? null)
+        removeAccountFromActiveAccounts(index)
+        setSelectedAccount(get(visibleActiveAccounts)?.[0]?.index ?? null)
         resetWalletRoute()
     } catch (err) {
         throw new CannotRemoveAccountError()

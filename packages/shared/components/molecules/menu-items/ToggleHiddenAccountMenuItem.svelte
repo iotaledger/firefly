@@ -8,13 +8,13 @@
     export let onClick: () => unknown
 
     function handleShowAccountClick(): void {
-        updateActiveAccountMetadata($selectedAccount.id, { hidden: false })
+        updateActiveAccountMetadata($selectedAccount.index, { hidden: false })
         onClick && onClick()
     }
 
     function handleHideAccountClick(): void {
         if ($nonHiddenActiveAccounts.length > 1) {
-            updateActiveAccountMetadata($selectedAccount.id, { hidden: true })
+            updateActiveAccountMetadata($selectedAccount.index, { hidden: true })
             if (!$activeProfile.showHiddenAccounts) {
                 setNextSelectedAccount()
             }

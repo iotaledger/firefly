@@ -25,7 +25,7 @@ export interface IProfileManager {
     destroy(): void
     emitTestEvent(event: WalletEvent): Promise<void>
     generateMnemonic(): Promise<string>
-    getAccount(accountId: AccountId): Promise<IAccount>
+    getAccount(accountIndex: AccountId): Promise<IAccount>
     getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>

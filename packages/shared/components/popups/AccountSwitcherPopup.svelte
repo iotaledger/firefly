@@ -10,7 +10,7 @@
     let account: IAccountState
 
     function onConfirmClick(): void {
-        setSelectedAccount(account.id)
+        setSelectedAccount(account.index)
         onConfirm && onConfirm()
     }
 
