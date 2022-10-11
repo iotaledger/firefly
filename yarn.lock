@@ -1148,6 +1148,11 @@
   dependencies:
     tslib "^2.1.0"
 
+"@capacitor/device@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@capacitor/device/-/device-1.1.2.tgz#ac22702ad29971456cb83143ab11e712174e38a0"
+  integrity sha512-1i6yvuSC7Ys7fs4JsUtfwG/00d2FF2TvWpbYs7YbkXhp1vOTL510gwjc5S6FTyhh8M9sAaUU5tKB68XwlSK/GA==
+
 "@capacitor/docgen@^0.0.10":
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/@capacitor/docgen/-/docgen-0.0.10.tgz#5d69db6862f5d7e3be101651b2fd528a482432ec"

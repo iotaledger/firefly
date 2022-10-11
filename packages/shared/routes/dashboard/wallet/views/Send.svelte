@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { accountRouter } from '@core/router'
+    import { accountRouter, backButtonStore } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, Illustration, Input, ProgressBar, Text } from 'shared/components'
     import {
@@ -20,7 +20,7 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
-    import { startQRScanner } from 'shared/lib/device'
+    import { startQRScanner, stopQRScanner } from 'shared/lib/device'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -431,16 +431,19 @@
 
     const onQRClick = (): void => {
         const onSuccess = (result: string) => {
+            $backButtonStore?.pop()
             selectedSendType = SEND_TYPE.EXTERNAL
             to = null
             address = result
         }
         const onError = (): void => {
+            $backButtonStore?.pop()
             showAppNotification({
                 type: 'error',
                 message: localize('error.global.generic'),
             })
         }
+        $backButtonStore?.add(stopQRScanner as () => Promise<void>)
         void startQRScanner(onSuccess, onError)
     }
 
@@ -583,16 +586,16 @@
         </div>
         {#if !$isTransferring}
             <div
-                class="mt-8 flex flex-row justify-between px-2"
+                class="mt-8 flex flex-row justify-between px-2 space-x-8"
                 style="margin-bottom: {$isKeyboardOpened
                     ? $keyboardHeight
                     : 0}px; transition: margin-bottom {getKeyboardTransitionSpeed($isKeyboardOpened) +
                     'ms'} var(--transition-scroll)"
             >
-                <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
+                <Button secondary classes="-ml-1 w-1/2" onClick={() => handleBackClick()}>
                     {localize('actions.cancel')}
                 </Button>
-                <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
+                <Button classes="-mr-1 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
             </div>
         {/if}
         {#if $isTransferring}

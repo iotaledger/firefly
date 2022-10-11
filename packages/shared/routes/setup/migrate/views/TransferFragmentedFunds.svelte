@@ -469,7 +469,10 @@
                 {locale('views.transferFragmentedFunds.body2', { values: { legacy: LedgerAppName.IOTALegacy } })}
             </Text>
         {/if}
-        <div class="flex-auto overflow-y-auto h-1 space-y-4 w-full scrollable-y scroll-secondary">
+        <div
+            style="{$mobile ? 'max-height: 30vh;' : ''} "
+            class="{$mobile ? '' : 'h-1'} flex-auto overflow-y-auto space-y-4 w-full scrollable-y scroll-secondary"
+        >
             {#each transactions as transaction}
                 <TransactionItem {...transaction} {locale} />
             {/each}

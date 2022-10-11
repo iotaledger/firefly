@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { DeepLinkContext, isDeepLinkRequestActive, parseDeepLinkRequest, WalletOperation } from '@common/deep-links'
-    import { Locale } from '@core/i18n'
+    import { Locale, _ } from '@core/i18n'
     import {
         AccountRoute,
         accountRouter,
@@ -397,12 +397,14 @@
 
 {#if $mobile}
     <Idle />
-    <div class="flex flex-col w-full h-full bg-white dark:bg-gray-800">
-        <MainMenu />
-        <TopNavigation {onCreateAccount} />
-        <!-- Dashboard Pane -->
-        <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
-    </div>
+    {#key $_}
+        <div class="flex flex-col w-full h-full bg-white dark:bg-gray-800">
+            <MainMenu />
+            <TopNavigation {onCreateAccount} />
+            <!-- Dashboard Pane -->
+            <svelte:component this={tabs[$dashboardRoute]} {locale} on:next={$appRouter.next} />
+        </div>
+    {/key}
 {:else}
     <Idle />
     <div class="dashboard-wrapper flex flex-col w-full h-full">

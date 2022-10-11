@@ -7,7 +7,8 @@
         "legal": {
             "title": "プライバシーポリシーと利用規約",
             "body": "プライバシーポリシーと利用規約に同意します",
-            "checkbox": "プライバシーポリシーと利用規約に同意します"
+            "checkbox": "プライバシーポリシーと利用規約に同意します",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "クラッシュレポート",
@@ -124,9 +125,9 @@
             "body": "ウォレットを Stronghold にバックアップしました"
         },
         "congratulations": {
-            "title": "ウォレットのセットアップが完了しました",
+            "title": "Profile setup complete!",
             "fundsMigrated": "資金が移行されました",
-            "body": "新しいウォレットを使用する準備ができました。",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "資金を新しいネットワークに移行しました",
             "fireflyLedgerBody": "Ledgerアカウントは正常に復元され、続行できます。",
             "trinityLedgerBody": "Ledgerを新しいネットワークに移行しました。",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "バックアップファイルを使用してウォレットを復元する",
-            "body": "ウォレットを復元するためにバックアップファイルをインポートします。バックアップは、Stronghold(.stronghold)またはTrinity SeedVault(.kdbx)のいずれかにすることができます。"
+            "body": "ウォレットを復元するためにバックアップファイルをインポートします。バックアップは、Stronghold(.stronghold)またはTrinity SeedVault(.kdbx)のいずれかにすることができます。",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Ledgerを復元または移行する",
@@ -190,7 +192,7 @@
             "readMore": "移行プロセスから期待されること"
         },
         "generateNewLedgerAddress": {
-            "title": "新しいアドレスを作成する",
+            "title": "Generate new address",
             "body": "Fireflyでトークンを移行するには、新しいアドレスを作成 する必要があります。続行するには下のボタンをクリックしてください。",
             "confirmTitle": "新しいアドレスを確認します",
             "confirmBody": "セキュリティ上の理由から、Ledgerデバイスで作成 されたアドレスを以下に表示されているアドレスと比較してください。それらが一致する場合は、Ledgerの両方のボタンを押します。",
@@ -227,7 +229,7 @@
             "body2": "しばらく時間がかかる場合があります。移行中にデバイスをオフにしないでください。",
             "existing": "あなたの古いウォレット",
             "new": "あなたの新しいウォレット",
-            "learn": "移行について詳しく見る",
+            "learn": "Learn about the migration",
             "beginMigration": "移行を開始",
             "migrating": "資金を移行中...",
             "migrated": "{balance} が移行されました",
@@ -250,7 +252,7 @@
             "title": "警告",
             "body1": "1つ以上の使用済みアドレスに資金があります。",
             "body2": "これらの資金を安全に送金するために自動化されたプロセスを実行することをお勧めします。",
-            "body3": "アプリを閉じると、移行全体を再起動する必要があります。",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "使用済みアドレスについて詳しく見る"
         },
         "secureSpentAddresses": {
@@ -276,7 +278,7 @@
             "body2": "Ledgerが接続されており、移行中は常に {legacy} アプリが開いていることを確認してください。",
             "migrate": "資金の移行",
             "transaction": "取引 {number}",
-            "rerun": "やり直す"
+            "rerun": "Try again"
         },
         "migrateFailed": {
             "title": "To do",
@@ -403,7 +405,7 @@
                 "editDetails": "詳細を編集",
                 "viewInfo": "情報を表示",
                 "setAsPrimary": "プライマリとして設定",
-                "removeNode": "ノードを削除",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "公式ノードリストを含める",
                 "noNodes": "ノードがないため、ネットワークに接続できません",
                 "noNodesAuto": "ノードがありません。自動選択が代わりに使用されます"
@@ -465,12 +467,16 @@
                 "networkOperational": "ネットワークは正常に機能しています",
                 "networkDegraded": "ネットワークが劣化しました",
                 "networkDown": "ネットワーク接続が切断されました",
+                "networkUnreachable": "Network unreachable",
                 "status": "ステータス",
                 "messagesPerSecond": "毎秒あたりのメッセージ",
                 "referencedRate": "参照元"
             },
             "profileModal": {
-                "allSettings": "すべての設定",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "ログアウト",
                 "stronghold": {
                     "title": "プロフィールロック",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "ウォレットをバックアップ",
-                    "lastBackup": "最後に {date} をバックアップしました",
-                    "notBackedUp": "バックアップされていません",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "バックアップ"
                 },
                 "version": {
@@ -607,7 +613,7 @@
             "events": {
                 "status": {
                     "upcoming": "お知らせ",
-                    "commencing": "投票を受付中",
+                    "commencing": "Voting open",
                     "holding": "カウント",
                     "ended": "終了"
                 },
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "{name} を非表示にしますか？",
             "body": "詳細設定で「非表示のウォレットを表示」を有効にすると、後でこのウォレットを見つけることができます。",
-            "typePassword": "ウォレットパスワードを入力して確認してください。",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "ウォレットの非表示",
             "errorTitle": "{name} を非表示にできません",
             "errorBody1": "ウォレットを非表示にするには残高が0である必要があります。",
@@ -718,8 +724,8 @@
                 "features": "特徴",
                 "confirmedMilestoneIndex": "確認済みのマイルストーンインデックス",
                 "pruningIndex": "Pruningインデックス",
-                "messagesPerSecond": "毎秒あたりのメッセージ",
-                "referencedRate": "参照元"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -734,12 +740,12 @@
             "empty": "エラーログは空です。"
         },
         "deleteProfile": {
-            "title": "プロフィールを削除",
+            "title": "Delete profile",
             "confirmation": "このプロフィールを削除してもよろしいですか？この操作を行うと元には 戻せません。",
             "typePassword": "パスワードを入力して確認してください。"
         },
         "diagnostics": {
-            "title": "診断",
+            "title": "Diagnostics",
             "node": "ノード",
             "platform": "プラットフォーム",
             "platformVersion": "プラットフォームのバージョン",
@@ -757,12 +763,12 @@
             "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
             "sendingFromActiveParticipationAccount": {
                 "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "現在ステークされているウォレットから送金を行っていますが、これはトークンのステークを解除する可能性があります。 送金は自由ですが、後で残りのトークンを再度 ステークする必要があるかもしれません。",
+                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
                 "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
             }
         },
         "balanceFinder": {
-            "title": "残高を検索する",
+            "title": "Balance finder",
             "body": "アドレスのより徹底的な検索を実行して、不足している残高と以前のエアドロップ報酬を見つけます。 これは時間がかかる場合があります。",
             "accountsSearched": "検索されたウォレット",
             "addressesSearched": "ウォレットごとに検索されたアドレス",
@@ -777,7 +783,7 @@
             "body2": "リスクレベルが中程度以上のアドレスに対してプロセスを再実行することをお勧めします。"
         },
         "missingBundle": {
-            "title": "警告：移行中にあなたの資金が危険にさらされています",
+            "title": "Warning: funds at risk during migration",
             "body": "使用済みアドレスに資金がありますが、それらを保護するために必要な情報が見つかりませんでした。この問題は、かなり前に取引を行った場合に発生する可能性があります。 続行できますが、移行中に{value}が危険にさらされます。",
             "learnMore": "使用済みアドレスについてもっと詳しく見る",
             "proceed": "はい 、リスクを理解しています。"
@@ -806,7 +812,7 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Ledgerが接続されていない場合の 案内",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Ledger Liveがお使いのコンピュータで開いていないことを確認してください",
                 "1": "PINを使用してLedgerデバイスのロックを解除したことを確認してください",
@@ -823,7 +829,7 @@
                 "info": "Ledgerに表示される、残っているアドレスと下に表示されるアドレスが一致していることを確認してください。それらが一致する場合は、要求に応じてLedgerの両方のボタンを押してください"
             },
             "transaction": {
-                "title": "取引を承認する",
+                "title": "Confirm transaction",
                 "info": "Ledgerに表示される、取引情報と下に表示されるアドレスが一致していることを確認してください。それらが一致する場合は、要求に応じてLedgerの両方のボタンを押してください"
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "ステークの合計",
             "stakedSuccessfully": "あなたの資金は {account}にステークされました。",
             "unstakedSuccessfully": "あなたの資金は {account}にステーク解除されました。",
-            "singleAccountHint": "ウォレットをお探しですか？Firefly が変更されました。トップメニューバーのウォレット間を切り替えます。"
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "参加します",
@@ -877,7 +883,8 @@
             "changingVote": "投票の変更中",
             "manageVotes": "投票の管理",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "投票を管理中",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -904,10 +911,14 @@
             "title": "開発者プロフィール を作成しています",
             "body": "デフォルトではChrysalis Devnetに接続され、手動でネットワークを切り替えることができます。内容を理解されている場合のみ、続行することができます。"
         },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
+        },
         "crashReporting": {
             "title": "クラッシュレポート",
             "body": "エラーやクラッシュが発生したときに診断データを自動的に送信することで、Firefly の改善のため開発者を支援します。選択した場合は、Fireflyを再起動した後に有効になります。",
-            "checkbox": "クラッシュレポートをIOTA財団に送信する"
+            "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
             "tosTitle": "利用規約",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Chrysalisに移行するか、既存のウォレットを復元します",
         "createWallet": "新しいウォレットを作成",
         "createWalletDescription": "Chrysalisで実行中の新しいウォレットを作成する",
+        "exploreWallet": "Explore wallet",
         "savePassword": "パスワードの保存",
         "useBiometric": "生体認証セキュリティを使用",
         "setupPin": "PIN コードを設定",
@@ -962,7 +974,7 @@
         "saveBackupFile": "バックアップファイルを保存",
         "iveWrittenRecoveryPhrase": "復元フレーズを書き留めました",
         "verifyRecoveryPhrase": "復元フレーズを確認",
-        "revealRecoveryPhrase": "復元フレーズを表示",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "SeedVault をインポート",
         "checkAgain": "いいえ、もう一度確認します",
         "importFromFile": "ファイルからインポート",
@@ -991,14 +1003,14 @@
         "saveBackup": "Stronghold のバックアップを保存",
         "customizeAcount": "ウォレットをカスタマイズ",
         "viewAddressHistory": "アドレス履歴を表示",
-        "hideAccount": "ウォレットの非表示",
+        "hideAccount": "Hide wallet",
         "showAccount": "ウォレットの表示",
-        "deleteAccount": "ウォレットを削除",
+        "deleteAccount": "Delete wallet",
         "max": "Max",
         "addNode": "ノードの追加",
         "updateNode": "ノードを更新",
         "removeNode": "ノードを削除",
-        "removeAllNodes": "すべてのノードを削除",
+        "removeAllNodes": "Remove all nodes",
         "hide": "非表示",
         "hideOthers": "その他を非表示",
         "showAll": "すべて表示",
@@ -1034,7 +1046,7 @@
         "searchAgain": "再検索",
         "searching": "検索しています...",
         "closeFirefly": "Firefly を閉じる",
-        "generateAddress": "アドレスを生成",
+        "generateAddress": "Generate address",
         "migrateAgain": "別のインデックスを移行",
         "visitWebsite": "ウェブサイトを開く",
         "howItWorks": "使い方",
@@ -1047,14 +1059,16 @@
         "mergeFunds": "資金を統合",
         "done": "完了しました",
         "castVotes": "投票する",
-        "changeVotes": "投票の変更",
+        "changeVotes": "Change vote",
         "mergeVotes": "投票を統合",
-        "stopVotes": "投票を停止",
+        "stopVotes": "Stop voting",
         "okIUnderstand": "はい。分かりました",
-        "readMore": "もっと読む"
+        "readMore": "もっと読む",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "パスワード",
+        "close": "Close",
         "confirmPassword": "パスワード（確認）",
         "currentPassword": "現在のパスワード",
         "newPassword": "新しいパスワード",
@@ -1066,15 +1080,18 @@
         "received": "受取り",
         "sendPayment": "支払いの送信",
         "moveFunds": "内部送金",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "送信先",
         "sendFunds": "資金を送金",
         "sendToAddress": "アドレスへ送金する",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "QRコードをスキャンするかアドレスを貼り付けてください",
         "moveFundsBetweenAccounts": "ウォレット間で資金を移動する",
         "sendTokensToAddress": "トークンをアドレスに送金",
         "manageAccount": "ウォレットの管理",
         "customizeAcount": "ウォレットをカスタマイズする",
-        "account": "ウォレット",
+        "account": "Wallet",
         "sendingToAddress": "アドレスへ送金中",
         "amount": "合計",
         "addAddress": "アドレスの追加",
@@ -1111,6 +1128,7 @@
         "createAccount": "ウォレットを作成",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "ウォレット名",
         "latestTransactions": "最新の取引",
         "transactions": "取引履歴",
@@ -1205,7 +1223,9 @@
         "accountColor": "ウォレットの色",
         "myAssets": "My Assets(マイアセット)",
         "option": "オプション",
-        "total": "合計: {balance}"
+        "total": "合計: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "今日",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "IOTAを追加しない限り、ステーキング期間中の最小報酬額に達することはありません。",
             "bodyDidNotReachMin": "{airdrop}（{airdropRewardMin}）の最小報酬額に達するのに十分なIOTAがありませんでした。",
             "bodyMinBalanceAirdrop": "このウォレットには、 {airdrop}の最低エアドロップ報酬に達するのに十分なIOTAトークンがありません。"
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "メッセージ ID：",
+            "messageId": "Message ID",
             "internal": "内部",
             "rawValue": "生の値",
             "formattedValue": "フォーマットされた値",
-            "date": "日付",
+            "date": "Date",
             "time": "時間"
         }
     },
@@ -1443,8 +1468,8 @@
         }
     },
     "tabs": {
-        "wallet": "ウォレット",
-        "staking": "ステーキング",
+        "wallet": "Wallet",
+        "staking": "Staking",
         "governance": "ガバナンス",
         "tokens": "Tokens",
         "activity": "Activity"

@@ -7,7 +7,8 @@
         "legal": {
             "title": "Polityka prywatności i Warunki świadczenia usług",
             "body": "Zapoznaj się z Polityką prywatności oraz Warunkami świadczenia usług.",
-            "checkbox": "Przeczytałem i akceptuję Politykę prywatności oraz Warunki korzystania z usług"
+            "checkbox": "Przeczytałem i akceptuję Politykę prywatności oraz Warunki korzystania z usług",
+            "checkboxMobile": "Przeczytałem i akceptuję"
         },
         "crashReporting": {
             "title": "Zgłaszanie awarii",
@@ -124,9 +125,9 @@
             "body": "Wykonałeś kopię zapasową swoich portfeli do Stronghold."
         },
         "congratulations": {
-            "title": "Konfiguracja portfela zakończona",
+            "title": "Konfiguracja profilu zakończona!",
             "fundsMigrated": "Środki zostały przeniesione",
-            "body": "Twój nowy portfel jest już gotowy do użycia.",
+            "body": "Twój nowy profil jest gotowy do użycia.",
             "softwareMigratedBody": "Twoje środki zostały pomyślnie przeniesione do nowej sieci",
             "fireflyLedgerBody": "Twoje konto Ledger zostało pomyślnie odzyskane. Możesz kontynuować.",
             "trinityLedgerBody": "Pomyślnie przeniosłeś swój portfel Ledger do nowej sieci.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Przywróć portfel przy użyciu pliku kopii zapasowej",
-            "body": "Importuj plik kopii zapasowej, aby przywrócić portfele. Możliwe rodzaje kopii zapasowych to Stronghold (.stronghold) lub Trinity SeedVault (.kdbx)."
+            "body": "Importuj plik kopii zapasowej, aby przywrócić portfele. Możliwe rodzaje kopii zapasowych to Stronghold (.stronghold) lub Trinity SeedVault (.kdbx).",
+            "bodyMobile": "Prześlij plik, aby przywrócić istniejące środki. Na portfelu mobilnym, obsługiwana jest jedynie kopia Firefly Stronghold. Aby przywrócić plik Trinity SeedVault, użyj portfela w wersji na komputery stacjonarne."
         },
         "importFromLedger": {
             "title": "Przywróć lub migruj swoje urządzenie Ledger",
@@ -250,7 +252,7 @@
             "title": "Ostrzeżenie",
             "body1": "Posiadasz środki na jednym lub kilku zużytych adresach.",
             "body2": "Zalecamy uruchomienie zautomatyzowanego procesu, aby pomóc zabezpieczyć i bezpiecznie przenieść te środki.",
-            "body3": "Jeśli zamkniesz aplikację, będziesz musiał wykonać całą migrację ponownie.",
+            "body3": "Nie możemy zagwarantować, że Twoje środki zostaną bezpiecznie przeniesione przy użyciu telefonu. Zalecamy migrację, używając Firefly na komputerze osobistym.",
             "learn": "Dowiedz się więcej o zużytych adresach"
         },
         "secureSpentAddresses": {
@@ -465,12 +467,16 @@
                 "networkOperational": "Sieć działa poprawnie",
                 "networkDegraded": "Pogorszenie stanu sieci",
                 "networkDown": "Brak dostępu do sieci",
+                "networkUnreachable": "Sieć niedostępna",
                 "status": "Status",
                 "messagesPerSecond": "Wiadomości na sekundę",
                 "referencedRate": "Potwierdzeń w sieci"
             },
             "profileModal": {
-                "allSettings": "Wszystkie ustawienia",
+                "allSettings": {
+                    "title": "Wszystkie ustawienia",
+                    "description": "Profil, aplikacja, bezpieczeństwo"
+                },
                 "logout": "Wyloguj się",
                 "stronghold": {
                     "title": "Blokada profilu",
@@ -492,7 +498,7 @@
                 "backup": {
                     "title": "Utwórz backup portfeli",
                     "lastBackup": "Ostatnia kopia została wykonana {date}",
-                    "notBackedUp": "Nie wykonano",
+                    "notBackedUp": "Nie wykonano kopii zapasowej",
                     "button": "Utwórz kopię"
                 },
                 "version": {
@@ -526,7 +532,7 @@
                 },
                 "bodies": {
                     "upcoming": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się {date}.",
-                    "commencing": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy staking rozpocznie się {date}.",
+                    "commencing": "Stakuj swoje tokeny {token}, aby automatycznie otrzymywać nagrody co 10 sekund, gdy {date} rozpocznie się staking.",
                     "holdingAndStaking": "Automatycznie otrzymujesz nagrody co 10 sekund.",
                     "holdingAndNotStaking": "Stakuj swoje tokeny {token}, aby otrzymywać nagrody co 10 sekund.",
                     "endedAndDidStake": "Nagrody {token} zostaną przesłane na Twój portfel po uruchomieniu sieci.",
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Stakujesz łącznie",
             "stakedSuccessfully": "Twoje środki zostały stakowane przez {account}.",
             "unstakedSuccessfully": "Środki zostały odstakowane przez {account}.",
-            "singleAccountHint": "Szukasz swoich portfeli? Firefly zmienił się. Możesz przełączać pomiędzy swoimi portfelami w górnym pasku wyboru."
+            "mergeStakeDisclaimerVoting": "Dołączenie stakingu dołączy także Twoje głosy."
         },
         "stakingConfirmation": {
             "title": "Potwierdź uczestnictwo",
@@ -877,7 +883,8 @@
             "changingVote": "Zmiana głosu",
             "manageVotes": "Zarządzaj głosami",
             "partialVoteInfo": "Otrzymałeś {amount} na {account}. Możesz zagłosować tymi środkami poprzez dołączenie ich do aktualnego głosu.",
-            "mergeVoteDisclaimer": "Pamiętaj, że dołączenie głosów nie będzie miało wpływu na głosy, które zostały już policzone",
+            "mergeVoteDisclaimer": "Pamiętaj, że dołączenie głosów nie będzie miało wpływu na głosy, które zostały już policzone.",
+            "mergeVoteDisclaimerStaking": "Dołączenie głosów dołączy także Twoje środki do stakingu.",
             "mergingVotes": "Dołączanie głosów",
             "votedSuccessfully": "Zacząłeś głosować ({account}).",
             "unvotedSuccessfully": "Przestałeś głosować z użyciem {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "Tworzysz profil dewelopera",
             "body": "Twoim domyślnym połączeniem będzie Chrysalis Devnet. Będziesz mógł przełączać sieci ręcznie. Kontynuuj tylko jeśli wiesz co robisz."
+        },
+        "confirmCloseApp": {
+            "title": "Zamierzasz zamknąć aplikację",
+            "body": "Naciśnij przycisk wstecz ponownie, aby zamknąć aplikację."
         },
         "crashReporting": {
             "title": "Zgłaszanie awarii",
@@ -953,6 +964,7 @@
         "restoreWalletDescription": "Migracja do sieci Chrysalis lub przywrócenie istniejącego portfela",
         "createWallet": "Utwórz nowy portfel",
         "createWalletDescription": "Tworzenie nowego portfela w sieci Chrysalis",
+        "exploreWallet": "Przeglądaj portfel",
         "savePassword": "Zapisz hasło",
         "useBiometric": "Użyj zabezpieczeń biometrycznych",
         "setupPin": "Ustaw kod PIN",
@@ -1034,7 +1046,7 @@
         "searchAgain": "Szukaj ponownie",
         "searching": "Wyszukiwanie...",
         "closeFirefly": "Zamknij Firefly",
-        "generateAddress": "Generowanie adresu",
+        "generateAddress": "Wygeneruj adres",
         "migrateAgain": "Migruj kolejny indeks",
         "visitWebsite": "Odwiedź stronę",
         "howItWorks": "Jak to działa",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Dołącz głos",
         "stopVotes": "Zatrzymaj głosowanie",
         "okIUnderstand": "OK, rozumiem",
-        "readMore": "Czytaj więcej"
+        "readMore": "Czytaj więcej",
+        "chooseBackupFile": "Wybierz plik kopii zapasowej"
     },
     "general": {
         "password": "Hasło",
+        "close": "Zamknij",
         "confirmPassword": "Potwierdź hasło",
         "currentPassword": "Aktualne hasło",
         "newPassword": "Nowe hasło",
@@ -1066,9 +1080,12 @@
         "received": "Odebrano",
         "sendPayment": "Wyślij płatność",
         "moveFunds": "Transfer wewnętrzny",
+        "moveFundsButton": "Transfer wewnętrzny",
+        "unit": "Jednostka",
         "sendTo": "Wyślij do",
         "sendFunds": "Wyślij środki",
         "sendToAddress": "Wyślij na adres",
+        "scanQr": "Skanuj kod QR",
         "scanQrOrPaste": "Zeskanuj kod QR lub wklej adres",
         "moveFundsBetweenAccounts": "Przenieś środki pomiędzy portfelami",
         "sendTokensToAddress": "Wyślij tokeny na adres",
@@ -1111,6 +1128,7 @@
         "createAccount": "Utwórz portfel",
         "createNewWallet": "Utwórz nowy portfel",
         "switchWallet": "Przełącz portfel",
+        "addAWallet": "Dodaj portfel",
         "accountName": "Nazwa portfela",
         "latestTransactions": "Ostatnie transakcje",
         "transactions": "Transakcje",
@@ -1205,7 +1223,9 @@
         "accountColor": "Kolor portfela",
         "myAssets": "Moje środki",
         "option": "Wybór",
-        "total": "Suma: {balance}"
+        "total": "Suma: {balance}",
+        "openExplorer": "Pokaż w Eksploratorze",
+        "activityDetails": "Szczegóły transakcji"
     },
     "dates": {
         "today": "Dzisiaj",
@@ -1419,6 +1439,11 @@
             "bodyWillNotReachMin": "Nie osiągniesz minimalnej wartości nagrody podczas pozostałego okresu stakingu, dopóki nie dodasz większej ilości IOTA.",
             "bodyDidNotReachMin": "Nie stakowałeś wystarczająco dużo IOTA, aby osiągnąć minimalną nagrodę za {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "Ten portfel nie ma wystarczającej ilości tokenów IOTA, aby osiągnąć minimalną nagrodę airdrop dla {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Aktualizacja jednostki Shimmer",
+            "body1": "Jednostki SMR zostały zmienione w wyniku decyzji społeczności. Tokeny Shimmer są teraz wyświetlane z 6 miejscami po przecinku; 1 SMR = 1 000 000 glow.",
+            "body2": "Nadal masz taką samą ilość nagród SMR, Firefly po prostu inaczej formatuje wartość."
         }
     },
     "exports": {

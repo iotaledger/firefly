@@ -1,18 +1,19 @@
 {
     "views": {
         "onboarding1": {
-            "title": "שלח, קבל או נהל את אסימוני הIOTA שלך",
+            "title": "שלח, קבל או נהל את מאבעות האיוטה שלך",
             "body": "Firefly הוא הארנק הרשמי של IOTA."
         },
         "legal": {
             "title": "מדיניות הפרטיות ותנאי השירות",
             "body": "אנא קראו בעיון את מסמכי מדיניות הפרטיות שלנו.",
-            "checkbox": "קראתי, הבנתי והסכמתי עם מדיניות הפרטיות ותנאי השירות"
+            "checkbox": "קראתי, הבנתי והסכמתי עם מדיניות הפרטיות ותנאי השירות",
+            "checkboxMobile": "קראתי ואני מאשר"
         },
         "crashReporting": {
-            "title": "Crash Reporting",
-            "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "title": "דיווח תקלות",
+            "body": "עזור למפתחים לשפר את הארנק על ידי שליחת נתונים כשתקלות מתרחשות",
+            "checkbox": "שלח דוח תקלות לצוות איוטה"
         },
         "appearance": {
             "title": "מראה",
@@ -27,16 +28,16 @@
                 "nonFirst": "כעת, נא ציין את שם הפרופיל שלך."
             },
             "addMore": "תוכל להוסיף פרופילים נוספים בהמשך.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "אפשרויות מתקדמות",
             "developer": {
                 "label": "פרופיל מפתח",
-                "info": "Connect to the devnet or a private network"
+                "info": "התחבר לרשת המפתחים או לרשת פרטית"
             }
         },
         "setup": {
             "title": "הגדר ארנק",
             "chrysalisTitle": "עדכון רשת הChrysalis",
-            "chrysalisBody": "החל מאפריל 21, משתמשים יכולים לבצע העברה של האסימונים שלהם לרשת הקריסליס החדשה. אנו ממליצים להעביר את כל האסימונים שלך בהקדם האפשרי.",
+            "chrysalisBody": "החל מאפריל 21, משתמשים יכולים לבצע העברה של המטבעות שלהם לרשת הקריסליס החדשה. אנו ממליצים להעביר את כל המטבעות שלך בהקדם האפשרי.",
             "learnMore": "למד אודות ההגירה"
         },
         "secure": {
@@ -71,29 +72,29 @@
             "action": "כן, התקנתי את האפליקציות האלו"
         },
         "password": {
-            "title": "צור סיסמא חדשה",
+            "title": "צור סיסמא",
             "body1": "בחר סיסמה חזקה על מנת לאבטח את הארנק. מומלץ להימנע משימוש של מילים, שמות או תאריכים מוכרים.",
             "body2": "מומלץ שתרשום את הסיסמה ושמור אותה במקום בטוח."
         },
         "protect": {
             "title": "Protect your wallet",
-            "body1": "הגדר מספר זיהוי להתחברות כדי לוודא שרק אתה תוכל להיכנס לארנק.",
-            "body2": "שמור את מספר הזיהוי שלך בבטחה!"
+            "body1": "הגדר קוד גישה להתחברות כדי לוודא שרק אתה תוכל להיכנס לארנק.",
+            "body2": "שמור את קוד הגישה שלך חסוי!"
         },
         "pin": {
-            "title": "הגדר מספר זיהוי",
-            "body1": "הזן מספר זיהוי באורך 6 ספרות למטה. נדרש ממך להכניס את מספר הזיהוי כדי לגשת לפרופיל שלך.",
+            "title": "הגדר קוד גישה",
+            "body1": "הזן קוד גישה באורך 6 ספרות למטה. נדרש ממך להכניס את קוד הגישה כדי לגשת לפרופיל שלך.",
             "body2": "השתמש במספרים בלבד"
         },
         "confirmPin": {
-            "title": "אמת את מספר הזיהוי שלך",
-            "body1": "מספר הזיהוי שלך שומר על פרטיות המאזן והטרנזקציות שלך.",
-            "body2": "Re-enter your PIN code to proceed."
+            "title": "אמת את קוד הגישה שלך",
+            "body1": "קוד הגישה שלך שומר על פרטיות העיסקאות ויתרות שלך.",
+            "body2": "הקש שוב את קוד הגישה כדי להמשיך."
         },
         "backup": {
             "title": "גבה את הארנק שלך",
             "body1": "כעט יוצג לך ביטוי שחזור. רשום אותו בערכת השחזור שלך.",
-            "body2": "אל תשתף את ביטוי השחזור שלך עם אף אחד. ניתן להשתמש בו כדי לגשת לאסימונים שלך מכל מקום.",
+            "body2": "אל תשתף את ביטוי השחזור שלך עם אף אחד. ניתן להשתמש בו כדי לגשת למטבעות שלך מכל מקום.",
             "body3": "אם תאבד את ביטוי השחזור שלך, אתה עלול לאבד את כספים שלך."
         },
         "recoveryPhrase": {
@@ -115,7 +116,7 @@
             "title": "גבה לקובץ מבצר (Stronghold)",
             "body1": "הזן את הסיסמה שלך כדי לגבות את הארנקים שלך לקובץ מבצר (Stronghold). יבוצע שימוש בסיסמא שלך כדי להצפין את הגיבוי.",
             "body2": "סיבות לכך שגיבויים דיגיטליים הם חשובים:",
-            "reason1": "שחזר את הארנקים שלך בקלות מבלי לרשום את ביטוי השחזור שלך",
+            "reason1": "שחזר את הארנקים שלך בקלות מבלי לרשום את ביטויי השחזור שלך",
             "reason2": "יבא את הארנקים שלך למכשירים אחרים",
             "reason3": "שחזר את היסטוריית הטרנזקציות המלאה שלך"
         },
@@ -124,9 +125,9 @@
             "body": "ביצעת גיבוי של הארנקים שלך למבצר (Stronghold)."
         },
         "congratulations": {
-            "title": "הגדרת הארנק הושלמה",
+            "title": "Profile setup complete!",
             "fundsMigrated": "הגירת הכספים בוצעה",
-            "body": "הארנק שלך מוכן לשימוש.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "הצלחת להעביר את כספך לרשת החדשה",
             "fireflyLedgerBody": "משתמש הLedger שלך שוחזר בהצלחה, תוכל להמשיך כעת.",
             "trinityLedgerBody": "הצלחת להעביר את הLedger ברשותך לרשת החדשה.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "שחזר את הארנקים שלך בעזרת קובץ גיבוי",
-            "body": "יבא קובץ גיבוי כדי לשחזר את הארנקים שלך. גיבויים יכולים להיות קבצי (stronghold.) או (kdbx.)."
+            "body": "יבא קובץ גיבוי כדי לשחזר את הארנקים שלך. גיבויים יכולים להיות קבצי (stronghold.) או (kdbx.).",
+            "bodyMobile": "העלאה קובץ כדי לשחזר את כספי הארנק הקיימים. רק גיבוי Sronghold נתמך במובייל. לגיבוי טרינטי seedvault בבקשה השתמש במחשב נייח."
         },
         "importFromLedger": {
             "title": "שחזר או העבר את פרופיל הLedger שלך",
@@ -174,7 +176,7 @@
         "connectLedger": {
             "title": "חבר את הLedger ברשותך לFirefly",
             "body": "על מנת שFirefly ימצא את מכשיר הLedger שברשותך, ודא כי אפליקציית הLedger Live סגורה.",
-            "trafficLight1": "התחבר ופתח את הLedger שברשותך בעזרת קוד",
+            "trafficLight1": "התחבר ופתח את הארנק הקר עם קוד הגישה",
             "trafficLight2": "פתח את האפליקציה החדשה של IOTA בLedger שברשותך",
             "tips": "טיפים במידה והLedger שברשותך לא מחובר"
         },
@@ -184,14 +186,14 @@
             "restoring": "משחזר מLedger..."
         },
         "legacyLedgerIntro": {
-            "title": "Start your Ledger migration using Firefly",
-            "body1": "פיירפליי יעזור לך לבצע העברה של האסימונים שלך לרשת קרסילס החדשה",
-            "body2": "אחרי העברה, תהיה זמין לשלוח ולקבל את האסימונים באמצעות ארנק הלדג'ר עם פיירפליי",
+            "title": "התחל את ההגירה מהארנק הקר שלך באמצעות ארנק הפיירפליי",
+            "body1": "פיירפליי יעזור לך לבצע העברה של המטבעות שלך לרשת קרסילס החדשה.",
+            "body2": "אחרי העברה, תהיה זמין לשלוח ולקבל את המטבעות באמצעות הארנק הקר עם פיירפליי.",
             "readMore": "מה לצפות מתהליך העברה"
         },
         "generateNewLedgerAddress": {
-            "title": "צור כתובת חדשה",
-            "body": "עלייך ליצור כתובת חדשה כדי להעביר את האסימונים שלך עם פיירפליי. תלחץ על הכפתור למטה כדי להמשיך",
+            "title": "Generate new address",
+            "body": "עלייך ליצור כתובת חדשה כדי להעביר את המטבעות שלך עם פיירפליי. תלחץ על הכפתור למטה כדי להמשיך.",
             "confirmTitle": "תאשר את הכתובת החדשה",
             "confirmBody": "למען הביטחון, אנא השווה את הכתובת בארנק הלדג'ר שלך לכתובת שמופיעה מטה. אם הן מתאימות, לחץ על שני הכפתורים בארנק הלדג'ר שלך כמבוקש.",
             "confirmedTitle": "הכתובת אושרה",
@@ -210,8 +212,8 @@
             "standard": "סטנדרטי",
             "expert": "מומחה",
             "takingAWhile": "זה לוקח זמן...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
+            "notGeneratingAddresses": "האם הארנק הקר שלך מייצר כתובות?",
+            "reinstallLegacy": "אם לא, תתנתק מהארנק הקר ותנסה שוב. אם הבעיה חוזרת, יש צורך בהתקנה חוזרת."
         },
         "importBackupPassword": {
             "body1": "בבקשה הזן את סיסמאת הגיבוי שלך.",
@@ -227,7 +229,7 @@
             "body2": "זה עשוי לקחת זמן. אל תכבה את המכשיר בזמן ההגירה.",
             "existing": "הארנק הישן שלך",
             "new": "הארנק החדש שלך",
-            "learn": "למד אודות ההגירה",
+            "learn": "Learn about the migration",
             "beginMigration": "התחל הגירה",
             "migrating": "מבצע הגירת כספים...",
             "migrated": "הוגרו {balance}",
@@ -242,7 +244,7 @@
             "miningBundle": "כורה חבילה",
             "problemRestoringWallet": "הרעה שגיאת רשת בזמן שחזור הארנק. אנא נסה שוב.",
             "minimumMigrationAmountSpentAddresses": "הסכום המינימלי לביצוע הגירה עבור כתובת אחת הוא 1 Mi. בדוק שוב שהמאזן תקין.",
-            "tooManyAddressesToMigrate": "You have too many addresses with a low balance to migrate. Check again if your total balance doesn't look right.",
+            "tooManyAddressesToMigrate": "יש לך יותר מדי כתובות ואין מספיק יתרות על מנת לבצע. תבדוק שוב אם היתרות שלך לא נראות נכון.",
             "cannotMigrateAllYourFunds": "איננו יכולים להגר את כל הכספים שלך בגלל שחלק מהכתובות שלך מכילות ערך נמוך מדי. תוכל להמשיך בכל מקרה. אך {value} יאבדו.",
             "error": "הרעה שגיאה בהגירת הכספים, אנא נסה/י שוב."
         },
@@ -250,7 +252,7 @@
             "title": "אזהרה",
             "body1": "יש לך כספים על אחד או כמה כתובות משומשות (\"spent addresses\").",
             "body2": "אנו ממליצים לך לבצע תהליך אוטומטי כדי לעזור לאבטח ולהעביר את הכספים האלו בבטחה.",
-            "body3": "אם תסגור את האפלקציה תצטרך להתחיל מחדש את כל תהליך ההגירה.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "למד עוד אודות כתובות משומשות (\"spent addresses\")"
         },
         "secureSpentAddresses": {
@@ -260,22 +262,22 @@
             "error": "לא לניתן להגר כתובות משומשות (\"spent addresses\") עם פחות מ 1MI"
         },
         "securityCheckCompleted": {
-            "title": "Security check completed",
-            "body1": "We have calculated the security risk level. Running this process again may lower your risk level.",
-            "body2": "When you are happy with the risk level(s) press continue.",
-            "rerun": "Rerun process for selected addresses",
-            "continueMigration": "Continue migration"
+            "title": "בדיקת האבטחה הסתיימה",
+            "body1": "אנו חישבנו את רמת סיכון האבטחה. תריץ שוב ואולי הסיכון ירד אף יותר.",
+            "body2": "אם אתה מקבל את רמ(ות) הסיכון תלחץ המשך.",
+            "rerun": "הרץ שוב את התהליך לכתובות הנבחרות.",
+            "continueMigration": "המשך הגירה"
         },
         "securingSpentAddresses": {
-            "title": "Securing spent addresses...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
-            "body2": "Your computer will run at full capacity, you may wish to do something else while you wait for this to complete."
+            "title": "מבצע אבטחת ארנקים...",
+            "body1": "התהליך הזה לוקח\nדקה דקות",
+            "body2": "המחשב שלך פועל בקיבולת מקסימלית, אנא המתן לסיום הפעולה."
         },
         "transferFragmentedFunds": {
-            "body1": "Firefly will now proceed to migrate your funds. This may take a while.",
-            "body2": "Ensure your Ledger is connected and the {legacy} app is open at all times during migration.",
-            "migrate": "Migrate funds",
-            "transaction": "Transaction {number}",
+            "body1": "ארנק הפיירפליי כעת מבצע את הגירת הכספים שלך. זה לוקח קצת זמן.",
+            "body2": "וודא שהארנק הקר שלך מחובר וה אפליקציה {legacy} פתוחה בזמן כל ביצוע ההגירה.",
+            "migrate": "הגירת כספים",
+            "transaction": "העברה {number}",
             "rerun": "נסה שנית"
         },
         "migrateFailed": {
@@ -284,24 +286,24 @@
         },
         "balance": {
             "title": "היתרה שלך:",
-            "body": "Make sure your balance is correct before continuing. You can check again if things don't look correct.",
-            "error": "The minimum migration amount is 1 Mi. Check again if your balance doesn't look right.",
-            "zeroBalance": "Try checking again. If you still can't find your balance you might have entered your seed incorrectly.",
-            "zeroBalanceLedgerLegacy": "Try checking again. If you still can't find your balance you might have selected the wrong account index."
+            "body": "אנא בדוק כי היתרה נכונה לפני ההתחלה. אתה יכול לבדוק שוב אם היא נכונה.",
+            "error": "הסכום המינימלי לביצוע הגירה הוא 1 Mi. אנא בדוק שוב.",
+            "zeroBalance": "נסה לבדוק שוב. אם אתה עדיין לא רואה את היתרה שלך כנראה שהסיד שהכנסת לא נכון.",
+            "zeroBalanceLedgerLegacy": "נסה לבדוק שוב. אם אתה עדיין לא רואה את היתרה שלך כנראה שבחרת בחשבון הלא נכון."
         },
         "settings": {
             "settings": "הגדרות",
             "generalSettings": {
-                "title": "General",
-                "description": "Configure your app's appearance and other general settings"
+                "title": "כללי",
+                "description": "הגדר את מראה האפליקציה שלך ואת ההגדרות הכלליות האחרות"
             },
             "security": {
                 "title": "אבטחה",
-                "description": "Change your password and adjust security-related settings"
+                "description": "שנה את הסיסמה שלך והגדר את הגדרות האבטחה"
             },
             "advancedSettings": {
-                "title": "Advanced",
-                "description": "Tools and manual settings for technical users"
+                "title": "מתקדם",
+                "description": "כלים והגדרות ידניות למשתמשים טכניים"
             },
             "helpAndInfo": {
                 "title": "עזרה ומידע",
@@ -318,7 +320,7 @@
             "theme": {
                 "title": "עיצוב",
                 "description": "",
-                "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
+                "advice": "עם שינוי ערכת הנושא, כנראה ותצטרך להפעיל מחדש את הארנק כדי לראות את השינוי"
             },
             "language": {
                 "title": "שפה",
@@ -326,232 +328,236 @@
             },
             "currency": {
                 "title": "מטבע",
-                "description": "Adjusts balance conversion and updates chart options"
+                "description": "מעדכן המרת יתרה ומעדכן את אפשרויות הגרף"
             },
             "notifications": {
                 "title": "התראות",
-                "description": "System notifications for transaction events"
+                "description": "התראות מערכת על ביצועי עיסקאות"
             },
             "networkStatus": {
-                "title": "Network status",
-                "description": "Displays the status of the node you are currently connected to"
+                "title": "סטטוס הרשת",
+                "description": "תצוגות המצב על צומת השרת שאתה כרגע מחובר אליו"
             },
             "exportStronghold": {
-                "title": "Export backup",
-                "description": "Export to a Stronghold file - a complete encrypted backup of your wallets and latest transaction history"
+                "title": "ייצא גיבוי",
+                "description": "מיצא לקובץ ה stronghold - גיבוי מוצפן מלא של הארנקים שלך והיסטורית העיסקאות האחרונות"
             },
             "appLock": {
-                "title": "Automatic lock",
-                "description": "Inactivity time before your wallets lock and you are logged out"
+                "title": "נעילה אוטומטית",
+                "description": "זמן שהיה לפני נעילת הארנקים והתנתקות"
             },
             "changePassword": {
                 "title": "שנה סיסמא",
-                "description": "Your password is used to secure your wallets. You must use a strong password to protect your funds"
+                "description": "הסיסמא שלך משמשת לאבטחת הארנקים שלך. אתה חייב להשתמש בסיסמא חזקה כדי להגן על הכספים שלך"
             },
             "changePincode": {
                 "title": "שנה קוד גישה",
-                "description": "Your PIN keeps your balance and transactions private",
+                "description": "קוד הגישה שלך שומר על פרטיות העיסקאות והיתרה שלך",
                 "currentPincode": "קוד גישה נוכחי",
                 "newPincode": "קוד גישה חדש",
                 "confirmNewPincode": "אישור קוד גישה",
                 "action": "שינוי קוד גישה"
             },
             "changeProfileName": {
-                "title": "Change profile name",
-                "description": "Change your Firefly profile name",
-                "success": "You changed your profile name"
+                "title": "שנה שם פרופיל",
+                "description": "שנה את שם הפרופיל בארנק הפיירפלי שלך",
+                "success": "עידכנת את שם הפרופיל שלך"
             },
             "balanceFinder": {
-                "title": "Balance finder",
-                "description": "Perform an extended search of your addresses for tokens"
+                "title": "מחפש היתרות",
+                "description": "בצע חיפוש מורחב של הכתובות שלך בשביל המטבעות"
             },
             "hiddenAccounts": {
-                "title": "Hidden wallets",
-                "description": "Selecting this options will show wallets that were previously hidden"
+                "title": "ארנקים מוסתרים",
+                "description": "בחירה באופציה זו תראה את הארנקים המוסתרים שלך"
             },
             "deleteProfile": {
                 "title": "מחק פרופיל",
-                "description": "Deletes your entire profile, wallets and transaction history. Make sure you have a backup"
+                "description": "מוחק את כל הפרופיל, הארנקים והיסטוריית העסקאות שלך. ודא שיש לך גיבוי"
             },
             "deepLinks": {
-                "title": "IOTA links",
-                "description": "Automatically fill transaction data in Firefly upon clicking an IOTA link"
+                "title": "קישורי איוטה",
+                "description": "מילוי אוטומטי שלך נתוני עיסקאות בארנק הפיירפלי, בלחיצת כפתור על קישור איוטה"
             },
             "networkConfiguration": {
-                "title": "Network config",
-                "title2": "Network configuration",
+                "title": "תצורת רשת",
+                "title2": "תצורת רשת",
                 "description": {
-                    "dev": "Your network settings will update automatically according to the current node configuration (switching networks will result in resetting the wallet state)",
-                    "nonDev": "Your network settings will update automatically according to the current node configuration"
+                    "dev": "הגדרות הרשת שלך יעודכנו אוטומטית עם תצורת צומת הרשת הנכונה (שינוי תקשורות יגרום לאיפוס הגדרות הארנק)",
+                    "nonDev": "הגדרות הרשת שלך יעודכנו אוטומטית עם תצורת צומת הרשת הנכונה"
                 },
-                "switchedNetworks": "Successfully switched network to \"{networkName}\".",
-                "resetWallet": "Your wallet state has been reset.",
-                "connectedTo": "Connected to",
+                "switchedNetworks": "הרשת שונתה בהצלחה ל \"{networkName}\".",
+                "resetWallet": "הגדרות הארנק שלך אופסו.",
+                "connectedTo": "התחבר ל",
                 "nodeConfiguration": {
-                    "title": "Node selection",
-                    "description": "Select \"Manual\" to configure node settings and connect to your own node(s)",
-                    "automatic": "Automatic",
-                    "manual": "Manual"
+                    "title": "בחירת צומת רשת",
+                    "description": "תבחר ״ידני״ להגדרות תצוגת צומת רשת והתחבר לצומת(צמתי) הרשת שלך",
+                    "automatic": "אוטומטי",
+                    "manual": "ידני"
                 }
             },
             "configureNodeList": {
-                "title": "Node configuration",
-                "description": "Manage the list of nodes you connect to",
-                "primaryNode": "Primary node",
-                "excludeNode": "Exclude node",
-                "includeNode": "Include node",
-                "editDetails": "Edit details",
-                "viewInfo": "View info",
-                "setAsPrimary": "Set as primary",
-                "removeNode": "הסר צומת",
-                "includeOfficialNodeList": "Include official node list",
-                "noNodes": "There are no nodes, unable to connect to the network",
-                "noNodesAuto": "There are no nodes, automatic selection will be used instead"
+                "title": "תצורת רשת",
+                "description": "נהל את רשימת צמתי השרתים שאתה מחובר אליהם",
+                "primaryNode": "צומת הרשת העיקרי",
+                "excludeNode": "צומת רשת לא כלולה",
+                "includeNode": "צומת רשת כלולה",
+                "editDetails": "ערוך פרטים",
+                "viewInfo": "ראה מידע",
+                "setAsPrimary": "הגדר כראשי",
+                "removeNode": "Remove node",
+                "includeOfficialNodeList": "כלול רשימה רישמית של צומת רשת",
+                "noNodes": "לא נמצאו צומתי רשת, לא ניתן להתחבר לתקשורת",
+                "noNodesAuto": "לא נמצאו צומתי רשת, הבחירה האוטומטית תבחר במקום זאת"
             },
             "proofOfWork": {
-                "title": "Proof of work",
+                "title": "מערכת הוכחת עבודה",
                 "description": "Complete proof of work locally on your device or outsource to the node"
             },
             "errorLog": {
                 "title": "יומן שגיאות",
-                "description": "View errors to debug an issue"
+                "description": "הצג שגיאות כדי לפתור בעיות"
             },
             "crashReporting": {
-                "title": "Crash reports",
-                "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs",
-                "checkbox": "Send crash reports",
+                "title": "דו\"ח קריסה",
+                "body": "עזור למפתחים לשפר את פיירפלי על ידי שליחה אוטומטית של נותני אבחון כשיש שגיאה או מתרחשת קריסה",
+                "checkbox": "שלח דוח קריסה",
                 "advice": "Please restart the Firefly application to {sendCrashReports, select, true {start sharing crash reports} false {stop sharing crash reports} other {apply this change}}"
             },
             "diagnostics": {
-                "title": "Diagnostics",
-                "description": "View system and application information"
+                "title": "אבחונים",
+                "description": "הצג מידע מערכת"
             },
             "migrateLedgerIndex": {
                 "title": "Migrate Ledger index",
                 "description": "Migrate another Trinity account index"
             },
             "troubleshoot": {
-                "title": "Troubleshoot",
-                "description": "Use the troubleshooting wizard to solve common problems"
+                "title": "פתרון בעיות",
+                "description": "השתמש באשף פתירת בעיות כדי לפתור בעיות נפוצות"
             },
             "documentation": {
-                "title": "Documentation",
+                "title": "תיעוד",
                 "description": "View the documentation for in depth explanations of how things work"
             },
             "faq": {
-                "title": "FAQ",
-                "title2": "Frequently asked questions",
-                "description": "View the FAQs to get help with a common problem or question"
+                "title": "שאלות נפוצות",
+                "title2": "שאלות נפוצות שנשאלו",
+                "description": "הצג את שאלות נפוצות כדי לקבל עזרה עם שאלות ובעיות נפוצות"
             },
             "discord": {
-                "title": "Discord",
-                "description": "Get help from the IOTA community on Discord"
+                "title": "דיסקורד",
+                "description": "קבל עזרה מקהילת איוטה בדיסקורד"
             },
             "about": {
                 "title": "אודות",
                 "description": ""
             },
             "reportAnIssue": {
-                "title": "Report an issue",
-                "description": "Report a bug to the developers. Check through to make sure it hasn't already been reported"
+                "title": "דוח על תקלה",
+                "description": "דווח על באג למפתחים. בדוק שזה עדיין לא דווח"
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "pleaseWait": "בבקשה המתן {time, plural, one {# שנייה} other {# שניות}}",
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
             "network": {
-                "networkOperational": "Network operational",
+                "networkOperational": "רשת תפעולית",
                 "networkDegraded": "Network degraded",
-                "networkDown": "Network disconnected",
+                "networkDown": "הרשת התנתקה",
+                "networkUnreachable": "Network unreachable",
                 "status": "סטטוס",
-                "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "messagesPerSecond": "הודעות לשנייה",
+                "referencedRate": "שיעור התייחסות"
             },
             "profileModal": {
-                "allSettings": "כל ההגדרות",
+                "allSettings": {
+                    "title": "כל ההגדרות",
+                    "description": "פרופיל, אפליקציה, אבטחה"
+                },
                 "logout": "התנתק",
                 "stronghold": {
-                    "title": "Profile lock",
-                    "locked": "Stronghold locked",
-                    "unlocked": "Stronghold unlocked"
+                    "title": "פרופיל נעול",
+                    "locked": "Stronghold נעול",
+                    "unlocked": "Stronghold פתוח"
                 },
                 "hardware": {
-                    "title": "Hardware Device",
+                    "title": "התקן חומרה",
                     "statuses": {
-                        "appNotOpen": "IOTA app not open",
-                        "connected": "Connected",
+                        "appNotOpen": "אפליקצית איוטה לא נפתחת",
+                        "connected": "מחובר",
                         "legacyConnected": "Legacy app open",
-                        "locked": "Locked",
+                        "locked": "נעול",
                         "mnemonicMismatch": "Wrong Ledger or mnemonic",
-                        "notDetected": "Not detected",
-                        "otherConnected": "App open"
+                        "notDetected": "לא מזוהה",
+                        "otherConnected": "אפליקציה פתוחה"
                     }
                 },
                 "backup": {
-                    "title": "Backup your wallets",
-                    "lastBackup": "You last backed up {date}",
-                    "notBackedUp": "Not backed up",
-                    "button": "Backup"
+                    "title": "גבה את הארנק שלך",
+                    "lastBackup": "גיבית לאחרונה ב {date}",
+                    "notBackedUp": "לא מגובה",
+                    "button": "גיבוי"
                 },
                 "version": {
-                    "title": "New update available",
-                    "updateVersion": "Firefly v{version}",
-                    "button": "Update"
+                    "title": "עידכון חדש זמין",
+                    "updateVersion": "פיירפליי v{version}",
+                    "button": "עדכון"
                 }
             }
         },
         "staking": {
-            "welcome": "Welcome to the staking dashboard!",
+            "welcome": "ברוך הבא לאיזור הסטייקינג!",
             "status": {
-                "upcoming": "Event not started",
-                "commencing": "Pre-staking open",
-                "holdingActive": "Staking in progress",
-                "holdingInactive": "Staking open",
-                "inactive": "Staking not detected",
-                "ended": "Staking ended"
+                "upcoming": "האירוע עוד לא התחיל",
+                "commencing": "קדם הסטייקינג פתוח",
+                "holdingActive": "הסטייקינג בפעולה",
+                "holdingInactive": "הסטייקינג זמין",
+                "inactive": "סטייקינג לא זוהה",
+                "ended": "הסטייקינג הסתיים"
             },
             "summary": {
-                "stakedFunds": "Staked funds"
+                "stakedFunds": "יתרה בסטייקינג"
             },
             "info": {
                 "headers": {
-                    "upcoming": "Check back later",
-                    "commencing": "Pre-staking is open",
-                    "holding": "{duration} of staking left",
-                    "ended": "Staking has now ended",
-                    "inactive": "No staking events detected",
-                    "fetching": "Fetching staking event info..."
+                    "upcoming": "בדוק שוב מאוחר יותר",
+                    "commencing": "קדם הסטייקינג פתוח",
+                    "holding": "{duration} לסטייקינג",
+                    "ended": "הסטייקינג מסתיים",
+                    "inactive": "לא זוהו תוכניות סטייקינג",
+                    "fetching": "מאתר מידע על תוכנית הסטייקינג..."
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
+                    "upcoming": "בצע סטייקינג למטבעות {token} שלך כדי לקבל תגמולים אוטומטים כל 10 דקות עם פתיחת תוכנית הסטייקינג אשר תפתח ב{date}.",
+                    "commencing": "בצע סטייקינג למטבעות {token} שלך כדי לקבל תגמולים אוטומטים כל 10 דקות עם פתיחת תוכנית הסטייקינג אשר תפתח ב{date}.",
+                    "holdingAndStaking": "אתה מקבל אוטומטית תגמולים כל 10 דקות.",
+                    "holdingAndNotStaking": "בצע סטייקינג למטבעות {token} שלך כדי לקבל תגמולים כל 10 דקות.",
+                    "endedAndDidStake": "תגמולי {token} יועברו לארנק שלך ברגע שהרשת תפעל.",
+                    "endedAndDidNotStake": "לא השתתפת באיירדרופ הזה.",
+                    "endedAndDidNotReachMinRewards": "לא היה מספיק מטבעות לסטייקינג {token} כדי להיות זכאי למתגמולי האיירדרופ המינימאלים.",
                     "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
                 }
             },
             "airdrops": {
-                "holding": "Remaining",
-                "commencing": "Until staking begins",
-                "currentStakingPeriod": "Current staking period",
-                "totalWalletRewards": "Total wallet rewards",
+                "holding": "נותרו",
+                "commencing": "עד התחלת הסטייקינג",
+                "currentStakingPeriod": "תוכנית הסטייקינג הנוכחית",
+                "totalWalletRewards": "סך התגמולים של הארנק",
                 "assembly": {
-                    "name": "Assembly",
+                    "name": "אסמבלי",
                     "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3."
                 },
                 "shimmer": {
-                    "name": "Shimmer",
+                    "name": "שימר",
                     "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "אירוע חדש",
+                "complete": "השלם"
             }
         },
         "picker": {
@@ -562,97 +568,97 @@
         },
         "governance": {
             "votingPower": {
-                "title": "My voting weight",
+                "title": "משקל ההצבעה שלי",
                 "info": {
-                    "title": "Your voting weight",
-                    "equality": "1000 IOTA = 1 VOTE",
+                    "title": "משקל ההצבעה שלך",
+                    "equality": "1000 מטבעות איוטה = הצבעה אחת",
                     "description1": "Your voting weight is derived from your wallet balance. When a voting proposal is in the Counting phase, active votes are counted and accumulated every 10s.",
-                    "description2": "1 Ki of voting weight (1000 IOTA tokens) yields 1 vote every 10s. This means you must continue voting for the full duration of the Counting phase in order to achieve your full voting weight."
+                    "description2": "1 Ki משקל הצבעה (1000 מטבעות איוטה) שווה הצבעה אחת כל 10 שניות. המשמעות היא שעליך להמשיך עד השלב הסופי כדי להשיג את משקל ההצבעה המקסימלי שלך."
                 }
             },
             "info": {
                 "title": "Governance info",
-                "description": "With the help of the IOTA Foundation, the IOTA community has developed an IOTA voting protocol, allowing you to participate in governance decisions by voting with your IOTA tokens in Firefly.",
+                "description": "בעזרת צוות איוטה, קהילת איוטה פיתחה פרוטוקול הצבעה, המאפשר לך להשתתף בדיונים ולהצביע עם מטבעות איוטה שלך בארנק הפיירפלי.",
                 "link": "Learn about voting with IOTA",
                 "tooltip": {
                     "eventStatusTimeline": {
-                        "votingOpen": "Voting open",
-                        "countingStarts": "Counting begins",
-                        "countingStops": "Counting ends",
-                        "votingOpened": "Voting opened",
-                        "countingStarted": "Counting began",
-                        "countingStopped": "Counting ended"
+                        "votingOpen": "הצבעה פתוחה",
+                        "countingStarts": "הספירה החלה",
+                        "countingStops": "הספירה מסתיימת",
+                        "votingOpened": "הצבעה נפתחה",
+                        "countingStarted": "הספירה החלה",
+                        "countingStopped": "הספירה הסתיימה"
                     },
                     "votingRate": {
-                        "title": "Voting rate",
+                        "title": "שיעור הצבעה",
                         "body": "{amount} will generate {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "countedVotes": {
-                        "title": "Counted votes",
+                        "title": "ההצבעות הספורות",
                         "body": "Votes are counted at {time, plural, one {# second} other {# seconds}} intervals throughout the Counting period. {amount} generates {votesPerMilestone} votes every {time, plural, one {# second} other {# seconds}}."
                     },
                     "partiallyVoted": {
                         "title": "New unused funds: {amount}",
-                        "body": "You have received additional funds to {account}. You can vote with these tokens by merging your vote."
+                        "body": "קיבלת מטבעות נוספים ל {account}. אתה יכול להצביע איתם ולמזג את ההצבעה שלך."
                     },
                     "maximumVotes": {
-                        "title": "Maximum votes",
-                        "body": "You must keep voting for the remaining Counting period in order to reach your maximum votes."
+                        "title": "הצבעות מקסימליות",
+                        "body": "עלייך להמשיך להצביע לאורך כל תקופת ההצבעה כדי להגיע להצבעה המקסימלית שלך."
                     },
                     "chart": {
-                        "totalVotes": "Votes: {amount}"
+                        "totalVotes": "הצבעות: {amount}"
                     }
                 }
             },
             "events": {
                 "status": {
-                    "upcoming": "Announcement",
+                    "upcoming": "הכרזה",
                     "commencing": "Voting open",
-                    "holding": "Counting",
-                    "ended": "Ended"
+                    "holding": "ספירה",
+                    "ended": "הסתיים"
                 },
-                "button": "View proposal",
+                "button": "צפה בהצעה",
                 "treasury": {
                     "notFound": {
                         "title": "Unable to load Community Treasury vote",
                         "subtitle": "Please connect to a node that has added this vote",
-                        "buttonConnect": "Connect to default node",
-                        "buttonSettings": "View node settings",
+                        "buttonConnect": "התחבר לצומת הרשת בברירת המחדל",
+                        "buttonSettings": "הצג הגדרות צומת רשת",
                         "fetching": "Fetching governance event info..."
                     }
                 }
             },
             "eventDetails": {
-                "votingOpens": "Voting opens on",
-                "votingProgress": "Time remaining",
-                "votingPower": "Your voting weight",
-                "votesCounted": "Your counted votes",
-                "maximumVotes": "Your maximum votes",
-                "countingStarts": "Counting begins on",
-                "currentResult": "Current result",
-                "finalResult": "Final result",
+                "votingOpens": "הצבעה תפתח ב",
+                "votingProgress": "זמן שנותר",
+                "votingPower": "משקל ההצבעה שלך",
+                "votesCounted": "ההצבעות הספורות שלך",
+                "maximumVotes": "ההצבעות המקסימליות שלך",
+                "countingStarts": "הספירה תחל ב",
+                "currentResult": "תוצאה נוכחית",
+                "finalResult": "תוצאה סופית",
                 "answerHeader": {
-                    "activeVoting": "Active voting",
-                    "selected": "Submitted",
-                    "notSelected": "Not selected",
-                    "winner": "Winner"
+                    "activeVoting": "הצבעה פעילה",
+                    "selected": "הוגש",
+                    "notSelected": "לא נבחר",
+                    "winner": "מנצח"
                 }
             },
-            "votes": "votes",
-            "manageVote": "Manage vote"
+            "votes": "הצבעות",
+            "manageVote": "נהל הצבעה"
         }
     },
     "popups": {
         "password": {
             "title": "נדרשת סיסמא",
-            "subtitle": "Please enter your password to unlock your wallets",
-            "backup": "Please enter your password to export a backup"
+            "subtitle": "הזן סיסמא כדי לפתוח את הארנקים שלך",
+            "backup": "הזן סיסמא כדי ליצא גיבוי"
         },
         "qr": {
-            "title": "Your QR code"
+            "title": "קוד הQR שלך"
         },
         "version": {
-            "title": "Current version: {version}",
+            "title": "גרסה נוכחית: {version}",
             "upToDateTitle": "Firefly is up to date",
             "upToDateDescription": "You are running the latest and safest version of Firefly.",
             "updateAvailable": "Firefly update available",
@@ -670,7 +676,7 @@
             "saving": "שומר..."
         },
         "deleteAccount": {
-            "title": "Delete {name}?",
+            "title": "למחוק את {name}?",
             "body": "This wallet has no transaction history. It can safely be deleted.",
             "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "מחק ארנק",
@@ -678,44 +684,44 @@
             "errorBody1": "You cannot delete this wallet, you must have at least one."
         },
         "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide wallet",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
+            "title": "להסתיר את {name}?",
+            "body": "אתה יכול למצוא ארנק זה לאחר מכן על ידי לחיצה על ״הצג ארנקים מוסתרים״ בהגדרות מתקדמות.",
+            "typePassword": "הקלד את הסיסמא שלך כדי לבצע.",
+            "hideAccount": "ארנק מוסתר",
+            "errorTitle": "לא ניתן להסתיר את {name}",
+            "errorBody1": "כדי להסתיר ארנק היתרה חייבת להיות 0.",
             "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
             "errorBody3": "You cannot hide this wallet, you must have at least one."
         },
         "addressHistory": {
             "title": "{name} address history",
-            "currentBalance": "Balance: {balance}",
+            "currentBalance": "יתרה: {balance}",
             "internal": "Internal Address",
-            "external": "Deposit Address"
+            "external": "כתובת לתקבול"
         },
         "node": {
             "titleAdd": "הוסף צומת",
             "titleUpdate": "עדכן צומת",
             "titleRemove": "הסר צומת",
-            "titleRemoveAll": "Remove all nodes",
+            "titleRemoveAll": "הסר צומתי רשת",
             "titleDetails": "פרטי הצומת",
-            "titleInfo": "Node info",
-            "addingNode": "Adding node",
-            "updatingNode": "Updating node",
+            "titleInfo": "מידע על צומת הרשת",
+            "addingNode": "הוסף צומת רשת",
+            "updatingNode": "עדכן צומת רשת",
             "loadingNodeInfo": "Loading node info",
             "nodeAddress": "כתובת הצומת",
             "optionalUsername": "שם משתמש (אופציונלי)",
             "optionalPassword": "סיסמא (אופציונלי)",
             "optionalJwt": "JSON web token (optional)",
-            "setAsPrimaryNode": "Set as primary node",
-            "removeConfirmation": "Are you sure you want to remove this node?",
-            "removeAllConfirmation": "Are you sure you want to remove all nodes?",
+            "setAsPrimaryNode": "הגדר כצומת רשת ראשי",
+            "removeConfirmation": "האם ברצונך למחוק את צומת הרשת הזו?",
+            "removeAllConfirmation": "האם ברצונך למחוק את כל צומתי הרשת?",
             "info": {
-                "url": "URL",
-                "software": "Software",
-                "networkId": "Network ID",
+                "url": "כתובת אינטרנט",
+                "software": "תוכנה",
+                "networkId": "מזהה רשת",
                 "bech32HRP": "Bech32 HRP",
-                "features": "Features",
+                "features": "פיצ'רים",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "Pruning index",
                 "messagesPerSecond": "Messages per second",
@@ -723,28 +729,28 @@
             }
         },
         "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
+            "title": "החלף רשת",
+            "newNetwork": "רשת חדשה",
+            "resetWarning": "החלפת רשת תנתק אותך ותפעיל מחדש את כל החשבונות, היתרות, והיסטורית העיסקאות של פרופיל זה.",
+            "switchingNetwork": "החלפת רשת",
+            "typePassword": "הקש סיסמא כדי להחליף ל:"
         },
         "errorLog": {
             "title": "יומן שגיאות",
             "empty": "יומן השגיאות ריק"
         },
         "deleteProfile": {
-            "title": "מחק פרופיל",
+            "title": "Delete profile",
             "confirmation": "האם אתה בטוח למחוק פרופיל זה? לא ניתן לבטל פעולה זו.",
             "typePassword": "הקלד את הסיסמא שלך לאישור"
         },
         "diagnostics": {
             "title": "Diagnostics",
-            "node": "Node",
+            "node": "צומת רשת",
             "platform": "פלטפורמה",
             "platformVersion": "גרסת פלטפורמה",
-            "platformArchitecture": "Platform Architecture",
-            "cpuCount": "CPU Count",
+            "platformArchitecture": "ארכיטקטורת הפלטפורמה",
+            "cpuCount": "ספירת CPU",
             "totalMem": "סך כל הזיכרון",
             "freeMem": "זכרון פנוי",
             "userPath": "User Path"
@@ -752,13 +758,13 @@
         "transaction": {
             "title": "אימות העברה",
             "body": "You’re about to send {amount} to",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet.",
-            "sendingFromStakedAccountBelowMinRewardVote": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet. You may also need to vote again.",
+            "sendingFromStakedAccount": "אתה שולח העברה מארנק שכרגע בסטייקינג. זה עלול להפסיק את הסטייקינג. תוכל לבצע את העברה, אבל אתה תצטרך לעשות סטייקינג מחדש עם המטבעות שנותרו לאחר מכן.",
+            "sendingFromStakedAccountBelowMinReward": "אתה מבצע העברה מארנק שעוד לא קיבל את התגמולים המינימאלים. פעולה זו יכולה לגרום לכך שתפסיד את התגמולים בארנק זה.",
+            "sendingFromStakedAccountBelowMinRewardVote": "אתה מבצע העברה מארנק שעוד לא קיבל את התגמולים המינימאלים. פעולה זו יכולה לגרום לכך שתפסיד את התגמולים בארנק זה. אתה תצטרך גם להצביע שוב.",
             "sendingFromActiveParticipationAccount": {
-                "stakeVote": "You are sending a transfer from a wallet that is currently staking and voting. This may unstake your tokens and stop your vote. Feel free to send the transfer but you may need to restake and vote again with your remaining tokens afterwards.",
-                "stake": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-                "vote": "You are sending a transfer from a wallet that is currently voting. This may stop your vote. Feel free to send the transfer but you may need to vote again with your remaining tokens afterwards."
+                "stakeVote": "אתה מבצע העברה מארנק שכרגע בהצבעה ובסטייקינג. זה עלול להפסיק את ההצבעה והסטייקינג. תוכל לבצע את העברה, אבל אתה תצטרך לעשות סטייקינג מחדש ולהצביע שוב עם המטבעות שנותרו לאחר מכן.",
+                "stake": "אתה מבצע העברה מארנק שכרגע בסטייקינג. זה עלול להפסיק את הסטייקינג. תוכל לבצע את העברה, אבל אתה תצטרך לעשות סטייקינג מחדש עם המטבעות שנותרו לאחר מכן.",
+                "vote": "אתה מבצע העברה מארנק שכרגע בהצבעה. זה עלול להפסיק את ההצבעה. תוכל לבצע את העברה, אבל אתה תצטרך לעשות הצבעה מחדש עם המטבעות שנותרו לאחר מכן."
             }
         },
         "balanceFinder": {
@@ -766,7 +772,7 @@
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
-            "accountsFound": "Wallets found",
+            "accountsFound": "ארנקים נמצאו",
             "totalWalletBalance": "יתרה כוללת",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Press search again until your full balance is shown.",
             "typePassword": "Type your password to allow searching."
@@ -783,17 +789,17 @@
             "proceed": "אני מבין את הסיכונים"
         },
         "snapshot": {
-            "title": "Ongoing network upgrade",
-            "body": "The Chrysalis network upgrade has begun.",
+            "title": "שדרוג הרשת מתבצע",
+            "body": "עידכון רשת הקרסיליס מתבצע.",
             "bodyMigration": "Migration is disabled until it is complete.",
-            "bodyFirefly": "Firefly is disabled until it is complete. Token migration will still be possible afterwards."
+            "bodyFirefly": "ארנק הפיירפלי מושבת עד להשלמה. הגירת המטבעות עדיין תהא זמינה לאחר מכן."
         },
         "ledgerNotConnected": {
-            "connect": "Open the new IOTA app on your Ledger device to continue",
-            "connectLegacy": "Open the {legacy} app on your Ledger device to continue"
+            "connect": "פתח את האפליקציה החדשה של איוטה בחומרת ארנק הקר שלך כדי למשיך",
+            "connectLegacy": "פתח את אפליקציית {legacy} על הארנק הקר שלך כדי להמשיך"
         },
         "ledgerConfirmation": {
-            "confirm": "To proceed, confirm the prompt displayed on your Ledger device"
+            "confirm": "כדי להמשיך, אשר את הפעולה המוצגת בארנק הקר שלך"
         },
         "ledgerAppGuide": {
             "title": "Guide to installing the Ledger apps",
@@ -806,14 +812,14 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "טיפים במידה והLedger שברשותך לא מחובר",
+            "title": "Tips if your Ledger isn’t connecting",
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
-                "1": "Ensure you have unlocked your Ledger device with your PIN",
+                "1": "ודא שפתחת את הארנק הקר שלך עם קוד הגישה",
                 "2": "Open the new IOTA app on your Ledger device",
                 "3": {
-                    "text": "Still no luck?",
-                    "link": "Try the official Ledger support page"
+                    "text": "עדיין לא הצליח?",
+                    "link": "נסה את דף התמיכה הראשי של הארנק הקר"
                 }
             }
         },
@@ -823,36 +829,36 @@
                 "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
-                "title": "אימות העברה",
+                "title": "Confirm transaction",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
             }
         },
         "ledgerAddress": {
-            "title": "Confirm receive address",
-            "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
+            "title": "אמת דואר לתקבול",
+            "body": "ודא שכתובת התקבול שלך המופיעה מטה תואמת לכתובת בארנק הקר שלך, אם כן, לחץ על שני הכפתורים שלך בארנק הקר כמבוקש."
         },
         "ledgerMigrateIndex": {
             "title": "Do you need to migrate another Trinity account index?",
             "body": "You can also migrate later in Advanced Settings."
         },
         "exportTransactionHistory": {
-            "title": "Export transaction history",
+            "title": "ייצוא היסטוריית עיסקאות",
             "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Wallet name:",
+            "profileName": "שם הפרופיל:",
+            "accountName": "שם הארנק:",
             "typePassword": "Type your password to allow exporting"
         },
         "stakingManager": {
             "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "description": "כשאתה עושה סטייקינג בארנק, אתה מבצע עיסקה שמסמנת את הכספים כ ״ בסטייקינג״. אתה יכול להעביר את המטבעות בכל זמן, אבל אתה לא תוכל להמשיך לקבל מטבעות מתגמולי סטייקינג.",
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
-            "subtitleStake": "You are about to stake",
+            "subtitleStake": "אתה עומד לבצע סטייקינג",
             "subtitleMerge": "You are about to merge",
             "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
             "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
@@ -860,30 +866,31 @@
         },
         "newStakingPeriodNotification": {
             "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "body": "סטייקינג למטבעות איוטה כדי לקבל אסימבלי ממשיך... השתתף בשלב {periodNumber} למשך 90 ימים. בצע סטייקינג למטבעות איוטה וקבל תגמולים של מטבעות אסימבלי!",
+            "info": "סטייקינג של שימר הסתיים, כרגע תוכל להנות מסטייקינג למטבעות ASMB."
         },
         "governanceManager": {
             "castYourVote": "Cast your vote",
             "castYourVoteInfo": "You're about to vote for Option {voteValue} ({voteText}) with {amount}",
             "castingVotes": "Casting votes",
-            "stopVoting": "Stop voting",
-            "stopVotingInfo": "Are you sure you want to stop voting for Option {voteValue} ({voteText})?",
+            "stopVoting": "הפסק הצבעה",
+            "stopVotingInfo": "האם אתה רוצה להפסיק הצבעה בתמורה ל {voteValue} ({voteText})?",
             "stopVotingDisclaimer": "Please note that stopping voting during the counting period won't impact any votes that have already been counted",
-            "stoppingVoting": "Stopping voting",
-            "changeVote": "Change vote",
+            "stoppingVoting": "הפסקת הצבעה",
+            "changeVote": "שנה הצבעה",
             "changeVoteDisclaimer": "Please note that changing your vote during the counting period won't impact any votes that have already been counted",
             "changeVoteInfo": "Are you sure you want to change your vote to Option {voteValue} ({voteText})?",
-            "changingVote": "Changing vote",
-            "manageVotes": "Manage votes",
-            "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "changingVote": "שינוי הצבעה",
+            "manageVotes": "נהל הצבעות",
+            "partialVoteInfo": "קיבלת {amount} מטבעות ל {account}. אתה יכול להצביע איתם ולמזג אותם להצבע הנוכחית שלך.",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
             "successPopup": {
-                "castVotesTitle": "Voted successfully",
-                "stopVotesTitle": "Voting stopped",
+                "castVotesTitle": "ההצבעה הצליחה",
+                "stopVotesTitle": "ההצבעה הופסקה",
                 "mergeVotesTitle": "Vote merged",
                 "changeVotesTitle": "Vote changed",
                 "castBody": "You are now voting for Option {voteValue} ({voteText}).",
@@ -891,48 +898,52 @@
             }
         },
         "shimmer-info": {
-            "title": "About Shimmer",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
-            "body2": "We aim to launch Shimmer in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "מידע על שימר",
+            "body1": "מזל טוב, קיבלת מטבעות SMR מסטייקינג. שימר הינו תקשורת בטא לבדיקת עידכונים גדולים על איוטה.",
+            "body2": "אנו שואפים להשיק את שימר ב2022. המטבעות שלך יהפכו לזמינים להעברה ברגע שהתקשורת תושק."
         },
         "assembly-info": {
-            "title": "About Assembly",
-            "body1": "Congratulations you have earned ASMB tokens as a staking reward. Assembly is a multi-chain network for deploying scalable smart contracts on IOTA.",
-            "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
+            "title": "אודות אסימבלי",
+            "body1": "מזל טוב, קיבלת מטבעות ASMB מסטייקינג. אסימבלי הינו מולטי רשת לפריסת חוזים חכמים על איוטה.",
+            "body2": "אנו שואפים להשיק את אסימבלי ב2022. המטבעות שלך יהפכו לזמינים להעברה ברגע שהתקשורת תושק."
         },
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
+        },
         "crashReporting": {
-            "title": "Crash reporting",
+            "title": "דו\"ח קריסה",
             "body": "Help the developers improve Firefly by automatically sending diagnostic data when an error or crash occurs. If selected, this will take effect after restarting Firefly.",
             "checkbox": "Send crash reports to the IOTA Foundation"
         },
         "legalUpdate": {
-            "tosTitle": "Terms of Service",
-            "privPolicyTitle": "Privacy Policy",
+            "tosTitle": "תנאי השירות",
+            "privPolicyTitle": "מדיניות הפרטיות",
             "tosAndPrivPolicyBody": "We have updated Firefly's Terms of Service and Privacy Policy.",
-            "tosBody": "We have updated Firefly's Terms of Service.",
-            "privPolicyBody": "We have updated Firefly's Privacy Policy.",
-            "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
-            "tosCheckbox": "I've read and I accept the updated Terms of Service",
-            "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
+            "tosBody": "עדכנו את התנאים וההגבלות של ארנק הפיירפלי.",
+            "privPolicyBody": "עדכנו את מדיניות הפרטיות של ארנק הפיירפלי.",
+            "tosAndPrivPolicyCheckbox": "קראתי ואני מסכים לעידכון תנאי השירות ומדיניות הפרטיות",
+            "tosCheckbox": "קראתי, ואני מסכים לעידכון בתנאי השירות",
+            "privPolicyCheckbox": "קראתי, ואני מסכים לעידכון במדיניות הפרטיות"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
+            "title": "הדרך שבה אתה משתמש בארנק הפיירפלי משתנה",
             "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
             "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         }
     },
     "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
-        "portoflio": "Portfolio",
-        "token": "Token",
-        "holdings": "Holdings",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
+        "incomingMi": "תקבולים {value}",
+        "outgoingMi": "תשלומים {value}",
+        "portoflio": "תיק השקעות",
+        "token": "מטבע",
+        "holdings": "החזקות",
+        "accountValue": "יתרת ארנק",
+        "accountActivity": "תנועות הארנק",
         "timeframe1Hour": "שעה",
         "timeframe1Day": "יום",
         "timeframe1Week": "שבוע אחד",
@@ -941,71 +952,72 @@
     "actions": {
         "continue": "המשך",
         "back": "הקודם",
-        "previous": "Previous",
-        "next": "Next",
+        "previous": "קודם",
+        "next": "הבא",
         "cancel": "ביטול",
         "close": "סגור",
-        "dismiss": "Dismiss",
+        "dismiss": "דחה",
         "proceedAnyway": "המשך בכל זאת",
         "save": "שמור",
         "importSeed": "Import an existing seed",
         "restoreWallet": "Migrate or restore a wallet",
         "restoreWalletDescription": "Migrate to Chrysalis or restore an existing wallet",
-        "createWallet": "Create new wallet",
+        "createWallet": "יצירת ארנק חדש",
         "createWalletDescription": "Create a fresh wallet running on Chrysalis",
-        "savePassword": "Save password",
-        "useBiometric": "Use biometric security",
-        "setupPin": "הגדר מספר זיהוי",
-        "setPin": "Set PIN code",
-        "confirmPin": "Confirm PIN code",
-        "enterYourPin": "Enter your PIN",
-        "saveBackupFile": "Save backup file",
-        "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
-        "verifyRecoveryPhrase": "אמת את ביטוי השחזור",
-        "revealRecoveryPhrase": "חשוף את ביטוי השחזור",
-        "importSeedvault": "Import SeedVault",
+        "exploreWallet": "Explore wallet",
+        "savePassword": "שמור סיסמא",
+        "useBiometric": "השתמש באבטחה ביומטרית",
+        "setupPin": "Set up PIN code",
+        "setPin": "הגדר קוד גישה",
+        "confirmPin": "אשר קוד גישה",
+        "enterYourPin": "הזן קוד גישה",
+        "saveBackupFile": "שמור קובץ גיבוי",
+        "iveWrittenRecoveryPhrase": "כתבתי מטה את ביטויי השיחזור שלי",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
+        "importSeedvault": "ייבא SeedVault",
         "checkAgain": "בדוק שוב",
         "importFromFile": "ייבוא מקובץ",
         "send": "שלח",
-        "receive": "התקבל",
+        "receive": "קבל",
         "create": "צור",
-        "beginTransfer": "Begin Transfer",
+        "beginTransfer": "התחל העברה",
         "tryAgain": "נסה שנית",
-        "visitDiscord": "Visit Discord",
-        "dragDrop": "Drag & Drop",
+        "visitDiscord": "בקר בדיסקורד",
+        "dragDrop": "גרור ושחרר",
         "importExtentions": ".kdbx or .stronghold file",
-        "chooseFile": "Choose a File",
-        "dropHere": "Drop your file here",
+        "chooseFile": "בחר קובץ",
+        "dropHere": "העלה את הקובץ שלך כאן",
         "syncAll": "סנכרן הכל",
         "export": "ייצא",
-        "exporting": "Exporting",
+        "exporting": "מייצא",
         "exportNewStronghold": "Export a new Stronghold",
-        "enableDeepLinks": "Enable IOTA links",
-        "enableDeveloperMode": "Enable developer mode",
-        "enableSystemNotifications": "Enable system notifications",
+        "enableDeepLinks": "אשר קישורי איוטה",
+        "enableDeveloperMode": "הפעל מצב מפתח",
+        "enableSystemNotifications": "אפשר התראות מערכת",
         "exportTransactionHistory": "Export transaction history",
         "localProofOfWork": "Local proof of work",
         "unlock": "בטל נעילה",
         "updateFirefly": "עדכן את הארנק",
         "restartNow": "הפעל מחדש כעת",
         "saveBackup": "Save Stronghold backup",
-        "customizeAcount": "Customise wallet",
-        "viewAddressHistory": "View address history",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
-        "deleteAccount": "מחק ארנק",
+        "customizeAcount": "ערוך ארנק",
+        "viewAddressHistory": "צפה בהיסטוריית הארנק",
+        "hideAccount": "ארנק מוסתר",
+        "showAccount": "הצג ארנק מוסתר",
+        "deleteAccount": "Delete wallet",
         "max": "מקסימום",
         "addNode": "הוסף צומת",
         "updateNode": "עדכן צומת",
         "removeNode": "הסר צומת",
-        "removeAllNodes": "Remove all nodes",
+        "removeAllNodes": "הסר צומתי רשת",
         "hide": "הסתר",
         "hideOthers": "הסתר אחרים",
         "showAll": "הצג הכל",
         "quit": "יציאה",
         "edit": "ערוך",
-        "undo": "Undo",
-        "redo": "Redo",
+        "undo": "בטל",
+        "redo": "בצע מחדש",
         "cut": "גזור",
         "copy": "העתק",
         "paste": "הדבק",
@@ -1013,243 +1025,251 @@
         "addAccount": "הוסף ארנק",
         "checkForUpdates": "חפש עדכונים",
         "reportAnIssue": "דווח על תקלה",
-        "restore": "Restore",
+        "restore": "שחזור",
         "clear": "נקה",
         "hideDetails": "הסתר פרטים",
         "yes": "כן",
         "no": "לא",
         "skip": "דלג",
         "reset": "אפס",
-        "downloadRecoveryKit": "Save Recovery Kit template",
-        "skipBackup": "Skip file backup",
+        "downloadRecoveryKit": "שמור תבנית שחזור",
+        "skipBackup": "דלג על קובץ הגיבוי",
         "finishSetup": "סיים את ההתקנה",
-        "readDocumentation": "Read the documentation",
-        "visitFaq": "Visit FAQ",
-        "viewStatus": "View status",
-        "showHiddenAccounts": "Show hidden wallets",
+        "readDocumentation": "עיין בתיעוד",
+        "visitFaq": "בקר בשאלות נפוצות",
+        "viewStatus": "הצג סטטוס",
+        "showHiddenAccounts": "הצג ארנקים מוסתרים",
         "confirm": "אשר",
-        "hideNetworkStatistics": "Hide network statistics",
-        "findBalances": "Find balances",
-        "searchBalances": "Search for balances",
-        "searchAgain": "Search again",
-        "searching": "Searching...",
-        "closeFirefly": "Close Firefly",
-        "generateAddress": "צור כתובת",
+        "hideNetworkStatistics": "הסתר סטטיסטיקות רשת",
+        "findBalances": "חפש יתרות",
+        "searchBalances": "מחפש יתרות",
+        "searchAgain": "חפש שוב",
+        "searching": "מחפש...",
+        "closeFirefly": "סגור ארנק פיירפלי",
+        "generateAddress": "Generate address",
         "migrateAgain": "Migrate another index",
-        "visitWebsite": "Visit website",
-        "howItWorks": "How it works",
-        "learnAboutStaking": "Learn about staking",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
-        "merge": "Merge",
-        "mergeFunds": "Merge funds",
-        "done": "Done",
+        "visitWebsite": "בקר באתר",
+        "howItWorks": "איך זה עובד",
+        "learnAboutStaking": "למד על סטייקינג",
+        "stake": "בצע סטייקינג",
+        "unstake": "הוצא מסטייקינג",
+        "stakeFunds": "כספים בסטייקינג",
+        "manageStake": "נהל סטייקינג",
+        "merge": "מזג",
+        "mergeFunds": "מזג כספים",
+        "done": "בוצע",
         "castVotes": "Cast votes",
-        "changeVotes": "Change vote",
+        "changeVotes": "שנה הצבעה",
         "mergeVotes": "Merge vote",
-        "stopVotes": "Stop voting",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "stopVotes": "הפסק הצבעה",
+        "okIUnderstand": "הבנתי, אני מאשר",
+        "readMore": "קרא עוד",
+        "chooseBackupFile": "בחר קובץ גיבוי"
     },
     "general": {
-        "password": "Password",
-        "confirmPassword": "Confirm password",
+        "password": "סיסמא",
+        "close": "Close",
+        "confirmPassword": "אימות סיסמה",
         "currentPassword": "סיסמא נוכחית",
         "newPassword": "סיסמה חדשה",
         "confirmNewPassword": "אשר סיסמה חדשה",
-        "yourSeed": "Your Seed",
-        "recoveryPhrase": "Recovery Phrase",
-        "recentActivity": "Recent Activity",
+        "yourSeed": "הסיד שלך",
+        "recoveryPhrase": "ביטוי השחזור",
+        "recentActivity": "תנועות אחרונות",
         "sent": "נשלח",
         "received": "התקבל",
         "sendPayment": "שלח תשלום",
-        "moveFunds": "Internal Transfer",
-        "sendTo": "Send To",
-        "sendFunds": "Send funds",
-        "sendToAddress": "Send to address",
-        "scanQrOrPaste": "Scan a QR code or paste an Address",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
-        "sendTokensToAddress": "Send tokens to an address",
-        "manageAccount": "Manage Wallet",
-        "customizeAcount": "Customize your wallet",
+        "moveFunds": "העברה פנימית",
+        "moveFundsButton": "פנימי",
+        "unit": "יחידה",
+        "sendTo": "שלח אל",
+        "sendFunds": "שלח כספים",
+        "sendToAddress": "שלח לארנק",
+        "scanQr": "סריקת קוד QR",
+        "scanQrOrPaste": "סרוק קוד QR או הדבק כתובת",
+        "moveFundsBetweenAccounts": "העבר כספים בין הארנקים",
+        "sendTokensToAddress": "שלח מטבעות לכתובת",
+        "manageAccount": "נהל ארנק",
+        "customizeAcount": "ערוך את הארנק שלך",
         "account": "ארנק",
-        "sendingToAddress": "Sending to address",
+        "sendingToAddress": "שולח לארנק",
         "amount": "כמות",
         "addAddress": "הוסף כתובת",
-        "reference": "Reference",
+        "reference": "התייחסות",
         "from": "מ־",
         "to": "ל-",
-        "receiveFunds": "Receive Funds",
-        "address": "Address",
+        "receiveFunds": "קבל כספים",
+        "address": "כתובת",
         "myAddress": "הכתובת שלי",
         "shareAddress": "שתף כתובת",
         "yourAddress": "הכתובות שלך",
-        "newRemainder": "New Remainder",
-        "remainder": "Remainder",
+        "newRemainder": "תזכורת חדשה",
+        "remainder": "תזכורת",
         "generateNewAddress": "צור כתובת חדשה",
         "copyAddress": "העתק כתובת",
-        "import": "Import",
+        "import": "ייבא",
         "seedvault": "Seedvault",
         "stronghold": "Stronghold",
-        "language": "Language",
-        "appearance": "Appearance",
-        "lightTheme": "Light",
-        "darkTheme": "Dark",
-        "systemTheme": "System",
+        "language": "שפה",
+        "appearance": "נראות",
+        "lightTheme": "בהיר",
+        "darkTheme": "כהה",
+        "systemTheme": "מערכת",
         "balance": "יתרה",
-        "all": "All",
-        "incoming": "הכנסות",
-        "outgoing": "Outgoing",
-        "totalIn": "Total in",
-        "totalOut": "Total out",
+        "all": "הכל",
+        "incoming": "תקבולים",
+        "outgoing": "תשלומים",
+        "totalIn": "סך הכל התקבלו",
+        "totalOut": "סך הכל יצאו",
         "accounts": "ארנקים",
         "myAccounts": "הארנקים שלי",
         "profiles": "פרופילים",
-        "dev": "Dev",
+        "dev": "מפתח",
         "createAccount": "צור ארנק",
-        "createNewWallet": "Create a new wallet",
-        "switchWallet": "Switch wallet",
+        "createNewWallet": "יצירת ארנק חדש",
+        "switchWallet": "החלף ארנק",
+        "addAWallet": "הוסף ארנק",
         "accountName": "שם ארנק",
         "latestTransactions": "תנועות אחרונות",
         "transactions": "תנועות",
-        "security": "אבטחה",
+        "security": "Security",
         "accountAddress": "כתובת הארנק",
-        "network": "Network",
+        "network": "רשת",
         "nodes": "צמתים",
         "wallet": "ארנק",
         "help": "עזרה",
         "you": "אתה",
-        "messageId": "Message ID",
-        "inputAddress": "Send Address",
-        "receiveAddress": "Receive Address",
-        "newAddress": "New Address",
+        "messageId": "הודעת ID",
+        "inputAddress": "שלח כתובת",
+        "receiveAddress": "כתובת לתקבול",
+        "newAddress": "כתובת חדשה",
         "date": "תאריך",
-        "status": "סטטוס",
+        "status": "Status",
         "confirmed": "אושר",
         "pending": "ממתין",
         "noAccounts": "אין לך ארנק, אנא צור אחד",
         "loadingAccounts": "טוען, אנא המתן...",
         "addProfile": "הוסף פרופיל",
-        "noRecentHistory": "No recent history",
-        "firstSync": "Syncing history, this may take a while...",
-        "transferSyncing": "Syncing wallet",
-        "transferSelectingInputs": "Selecting inputs",
+        "noRecentHistory": "אין היסטורית תקבולים",
+        "firstSync": "מסנכרן היסטוריה, זה יכול לקחת קצת זמן...",
+        "transferSyncing": "סנכרן ארנקים",
+        "transferSelectingInputs": "בחירת הוצאות",
         "transferRemainderAddress": "Generating remainder address",
         "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Signing the transaction",
         "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
-        "transferComplete": "Transfer complete",
-        "generatingReceiveAddress": "Generating receive address",
+        "transferComplete": "ההעברה הושלמה",
+        "generatingReceiveAddress": "יצירת כתובת לתקבול",
         "broadcasting": "Broadcasting",
         "confirming": "Confirming",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
-        "passwordUpdating": "Updating password...",
-        "passwordSuccess": "Updated password successfully",
-        "passwordFailed": "Updating password failed",
-        "syncing": "Syncing",
-        "syncingAccounts": "Syncing wallets...",
+        "creatingAccount": "יוצר ארנק, המתן בבקשה...",
+        "updatingAccount": "מעדכן את הארנק, המתן בבקשה...",
+        "accountSyncing": "ארנק מסונכרן",
+        "accountSyncComplete": "סנכרון הארנק בוצע",
+        "passwordUpdating": "מעדכן סיסמה...",
+        "passwordSuccess": "הסיסמא עודכנה בהצלחה",
+        "passwordFailed": "עידכון הסיסמא נכשל",
+        "syncing": "סינכרון",
+        "syncingAccounts": "מסנכרן ארנקים...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
         "exportingStrongholdFailed": "Exporting Stronghold failed",
-        "pinCodeUpdating": "Updating PIN code...",
-        "pinCodeSuccess": "Updated PIN code successfully",
-        "pinCodeFailed": "Updating PIN code failed",
-        "passwordStrength": "Password strength",
+        "pinCodeUpdating": "מעדכן קוד גישה...",
+        "pinCodeSuccess": "קוד גישה עודכן בהצלחה",
+        "pinCodeFailed": "עידכון קוד גישה נכשל",
+        "passwordStrength": "חוזק הסיסמא",
         "passwordStrength0": "רע",
         "passwordStrength1": "דל",
         "passwordStrength2": "חלש",
         "passwordStrength3": "ממוצע",
         "passwordStrength4": "חזק",
-        "creatingProfile": "Creating profile, please wait...",
-        "fundMigration": "Fund migration",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
+        "creatingProfile": "יוצר פרופיל, המתן בבקשה...",
+        "fundMigration": "הגירת כספים",
+        "accountRemoved": "הארנק הזה נסתר. בטל הסתרה כדי להציג העברות.",
         "receivingFrom": "Receiving from {account}",
-        "sendingTo": "Sending to {account}",
-        "receivedFrom": "Received from {account}",
-        "sentTo": "Sent to {account}",
-        "transferringFrom": "Transferring from {account}",
-        "transferringTo": "Transferring to {account}",
-        "transferFrom": "Transfer from {account}",
-        "transferTo": "Transfer to {account}",
+        "sendingTo": "נשלח ל {account}",
+        "receivedFrom": "התקבל מאת {account}",
+        "sentTo": "שלח ל {account}",
+        "transferringFrom": "העברה מ {account}",
+        "transferringTo": "העברה ל {account}",
+        "transferFrom": "העברה מ {account}",
+        "transferTo": "העבר ל {account}",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
-        "votingTransaction": "Voting Transaction",
+        "votingTransaction": "טרנזקצית הצבעה",
         "unvotingTransaction": "Unvoting Transaction",
         "participationTransaction": "Participation Transaction",
         "receiving": "Receiving",
-        "sending": "Sending",
+        "sending": "שולח",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
-        "yourWallets": "Your Wallets",
-        "walletActions": "Wallet Actions",
-        "unknown": "Unknown",
+        "yourWallets": "הארנקים שלך",
+        "walletActions": "תנועות הארנק",
+        "unknown": "לא ידוע",
         "none": "None",
         "staked": "Staked",
-        "voted": "Voted",
-        "unstaked": "Unstaked",
-        "unvoted": "Unvoted",
-        "staking": "Staking",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
+        "voted": "הצבעת",
+        "unstaked": "הוצא מסטייקינג",
+        "unvoted": "הצבעה הוסרה",
+        "staking": "סטייקינג",
+        "unstaking": "יציאה מסטייקינג",
+        "notStaked": "לא הוכנס לסטייקינג",
         "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds",
-        "voting": "Voting",
-        "unvoting": "Unvoting",
-        "accountColor": "Wallet color",
-        "myAssets": "My assets",
-        "option": "Option",
-        "total": "Total: {balance}"
+        "unstakedFunds": "יתרות לא בסטייקינג",
+        "voting": "הצבעה",
+        "unvoting": "לבטל הצבעה",
+        "accountColor": "צבע ארנק",
+        "myAssets": "הנכסים שלי",
+        "option": "אפשרות",
+        "total": "סך הכל: {balance}",
+        "openExplorer": "צפה באמצעות הסייר",
+        "activityDetails": "פרטי העסקה"
     },
     "dates": {
-        "today": "Today",
-        "yesterday": "Yesterday",
-        "daysAgo": "{time, plural, one {# day} other {# days}} ago",
-        "weeksAgo": "{time, plural, one {# week} other {# weeks}} ago",
-        "monthsAgo": "{time, plural, one {# month} other {# months}} ago",
-        "yearsAgo": "{time, plural, one {# year} other {# years}} ago"
+        "today": "היום",
+        "yesterday": "אתמול",
+        "daysAgo": "לפני {time, plural, one {# יום} other {# ימים}}",
+        "weeksAgo": "לפני {time, plural, one {# יום} other {# ימים}}",
+        "monthsAgo": "לפני {time, plural, one {# חודש} other {# חודשים}}\n",
+        "yearsAgo": "לפני {time, plural, one {# שנה} other {# שנתיים}}\n"
     },
     "times": {
-        "second": "{time, plural, one {# second} other {# seconds}}",
-        "minute": "{time, plural, one {# minute} other {# minutes}}",
-        "hour": "{time, plural, one {# hour} other {# hours}}",
-        "day": "{time, plural, one {# day} other {# days}}",
-        "week": "{time, plural, one {# week} other {# weeks}}",
-        "month": "{time, plural, one {# month} other {# months}}",
-        "year": "{time, plural, one {# year} other {# years}}"
+        "second": "{time, plural, one {# שנייה} other {# שניות}}",
+        "minute": "{time, plural, one {# דקה} other {# דקות}}",
+        "hour": "{time, plural, one {# שעה} other {# שעות}}",
+        "day": "{time, plural, one {# יום} other {# ימים}}",
+        "week": "{time, plural, one {# שבוע} other {# שבועות}}",
+        "month": "{time, plural, one {# חודש} other {# חודשים}}",
+        "year": "{time, plural, one {# שנה} other {# שנתים}}"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
+        "valueTx": "{{value}} מקבל ל {{account}}",
+        "confirmed": "תשלום בסך {{value}} מאת {{account}} אושר",
+        "confirmedInternal": "{{value}} מאת {{senderAccount}} אל {{receiverAccount}} אושר",
         "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
         "failed": "Outgoing {{value}} from {{account}} has failed",
-        "downloadingUpdate": "Downloading update",
-        "updateReady": "Update ready",
+        "downloadingUpdate": "מוריד עדכון",
+        "updateReady": "עידכון מוכן",
         "updateError": "An error occurred during the update, please try again",
-        "restartInstall": "Restart to install",
-        "calcMinutesRemaining": "Calculating minutes remaining...",
+        "restartInstall": "הפעל מחדש להתקנה",
+        "calcMinutesRemaining": "מחשב דקות שנותרו...",
         "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
-        "copiedToClipboard": "Copied to clipboard",
+        "copiedToClipboard": "הועתק ללוח",
         "accountsSynchronized": "Wallet synchronization complete",
-        "fundsAvailableSoon": "Your funds will become available shortly",
+        "fundsAvailableSoon": "הכספים שלך יהיו זמינים בקרוב",
         "exportTransactionHistory": {
             "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
             "error": "Unable to export transaction history for {accountAlias}"
         },
         "deepLinkingRequest": {
             "recievedWhileLoggedOut": "Please login to initiate the IOTA link",
-            "notEnabled": "IOTA links are not enabled",
-            "invalidFormat": "The IOTA link you followed is invalid",
+            "notEnabled": "קישורי איוטה לא זמינים",
+            "invalidFormat": "קישור האיוטה שלחצץ עליו לא תקין",
             "wallet": {
                 "send": {
-                    "success": "Payment details added from IOTA link"
+                    "success": "פרטי התשלום התווספו מקישור איוטה"
                 }
             }
         },
@@ -1262,39 +1282,39 @@
     "error": {
         "profile": {
             "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
-            "duplicate": "A profile with this name already exists.",
+            "duplicate": "פרופיל עם שם כזה כבר קיים.",
             "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
+                "nonEmptyAccounts": "אתה חייב להעביר את כל היתרות לפני שאתה מוחק את הפרופיל."
             }
         },
         "password": {
-            "doNotMatch": "Passwords do not match.",
-            "tooWeak": "Your new password is too weak.",
+            "doNotMatch": "הסיסמאות לא תואמות.",
+            "tooWeak": "הסיסמא החדשה שלך קלה מדי.",
             "row": "Straight rows of keys are easy to guess.",
             "pattern": "Short keyboard patterns are easy to guess.",
-            "names": "Common names and surnames are easy to guess.",
-            "repeats": "Repeats like 'aaa' are easy to guess.",
+            "names": "שמות וכינויים נפוצים קלים לניחוש.",
+            "repeats": "אותיות חוזרות כמו 'aaa' קלות מדי לניחוש.",
             "repeats2": "Repeats like 'abcabcabc' are easy to guess.",
             "sequence": "Sequences of characters are easy to guess.",
             "years": "Recent years are easy to guess.",
             "dates": "Dates are easy to guess.",
-            "common": "This is a very common password.",
-            "similar": "This is similar to a common password.",
-            "word": "A single word is easy to guess.",
-            "incorrect": "Your password is incorrect.",
+            "common": "זו סיסמא נפוצה ביותר.",
+            "similar": "סיסמא זו דומה מאוד לסיסמא נפוצה.",
+            "word": "מילה אחת קל לנחש.",
+            "incorrect": "הסיסמא אינה נכונה.",
             "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
-            "match": "קוד זיהוי לא מתאים.",
-            "incorrect": "קוד הזיהוי הנוכחי שלך אינו תקין."
+            "length": "קוד הגישה שלך חייב להיות {length, plural, one {# מספר} other {# ספרות}} ארוך יותר.",
+            "match": "קוד הגישה אינו תואם.",
+            "incorrect": "קוד הגישה הנוכחי שלך אינו תקין."
         },
         "account": {
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "empty": "אתה חייב להשתמש בארנק האחרון שלך לפני יצירת ארנק חדש.",
             "emptyName": "A profile name must contain at least 1 character.",
-            "notEmpty": "עליך להעביר את המאזן שלך לפני מחיקת הארנק.",
-            "duplicate": "קיים ארנק עם השם הזה כבר.",
+            "notEmpty": "עליך להעביר את היתרה שלך לפני מחיקת הארנק.",
+            "duplicate": "קיים ארנק עם השם הזה.",
             "tilde": "שם הפרופיל לא יכול להתחיל עם תו '~'.",
             "control": "שם פרופיל לא יכול להכיל תווים אשר מספרם 0 – 31 בטבלת הASCII.",
             "startDot": "שם פרופיל לא יכול להתחיל ב'.'.",
@@ -1305,7 +1325,7 @@
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
-            "amountTooHigh": "זה גדול יותר מהמאזן הזמין שלך.",
+            "amountTooHigh": "גדול יותר מהיתרה הזמינה שלך.",
             "amountNoFloat": "אם יחידת המידה הינה `i` לא תוכל להשתמש בנקודה העשרונית.",
             "amountInvalidFormat": "מספר הסכום אינו תקין.",
             "amountZero": "הסכום חייב להיות גדול מ0.",
@@ -1329,7 +1349,7 @@
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "This node has already been added.",
             "unsynced": "The node is not in sync.",
-            "noSynced": "No synced nodes are available.",
+            "noSynced": "אין צומתי רשת מסונכרנים זמינים.",
             "answer": "Failed to get an answer from all nodes.",
             "forbidden": "This node connection is forbidden.",
             "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
@@ -1341,11 +1361,11 @@
             "nonEmptyAccount": "You must transfer all balances before switching networks."
         },
         "global": {
-            "generic": "Something went wrong."
+            "generic": "משהו השתבש."
         },
         "backup": {
-            "invalid": "The backup file was not recognised.",
-            "destination": "The backup destination was not valid.",
+            "invalid": "קובץ הגיבוי לא מוכר.",
+            "destination": "יעד הגיבוי לא מוכר.",
             "mnemonic": "The mnemonic is not valid.",
             "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
             "seedCharacters": "The seed should only contain characters A-Z or 9",
@@ -1359,12 +1379,12 @@
             "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
             "mnemonicMismatch": "You have connected the wrong Ledger device or the mnemonic has changed.",
-            "notDetected": "No Ledger device detected.",
-            "notFound": "Ledger device not found.",
+            "notDetected": "לא זוהה התקן חומרה של ארנק קר.",
+            "notFound": "לא נמצא התקן ארנק קר.",
             "otherConnected": "The wrong app is open on your Ledger device.",
             "generateAddress": "There was an error generating an address.",
-            "timeout": "Your Ledger device timed out.",
-            "disconnected": "Your Ledger device was disconnected.",
+            "timeout": "הזמן הקצוב לארנק הקר שלך הסתיים.",
+            "disconnected": "התקן הארנק הקר שלך נותק.",
             "noStronghold": "Unable to use Stronghold with Ledger profile."
         },
         "popup": {
@@ -1383,15 +1403,15 @@
             "invalidStakingEventId": "Invalid staking event ID.",
             "failedToFetchPreviousRewards": "Failed to fetch previous rewards, please check your firewall settings."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME"
+        "invalidDate": "תאריך לא חוקי",
+        "invalidTime": "זמן לא חוקי"
     },
     "warning": {
         "node": {
             "http": "Using nodes over HTTP leaves traffic unencrypted and could pose a security risk."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "אין לך מטבעות איוטה."
         }
     },
     "tooltips": {
@@ -1406,19 +1426,24 @@
         "partiallyStakedFunds": {
             "title": "New unstaked funds: {amount}",
             "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens that are not staked.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "preBody": "קיבלת מטבעות שלא בסטייקינג.",
+            "body": "אתה צריך לבצע סטייקינג ידני של מטבעות אלו כדי לקבל מהם תגמולי איירדרופ."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
+            "title": "ערך מינימאלי של הרווחים מטה",
+            "titleMinBalance": "{amount} נדרשת יתרה מינימלית",
+            "bodyMinBalance": "בארנק הזה אין מספיק מטבעות איוטה כדי להיות זכאי לתגמולי האיירדרופ המינימלאים ולכן לא יכול להשתתף.",
+            "continue": "המשך לבצע סטייקינג לאחר {duration}.",
             "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "bodyMinBalanceAirdrop": "בארנק הזה אין מספיק מטבעות איוטה כדי להיות זכאי לתגמולי האיירדרופ המינימלאים של {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
@@ -1427,8 +1452,8 @@
             "internal": "Internal",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "תאריך",
-            "time": "Time"
+            "date": "Date",
+            "time": "זמן"
         }
     },
     "indicators": {
@@ -1438,15 +1463,15 @@
     },
     "permissions": {
         "camera": {
-            "request": "We need your permission to use your camera to be able to scan QR codes.",
-            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
+            "request": "אנחנו צריכים אישור גישה למצלמה שלך על מנת שתוכל לבצע סריקת QR.",
+            "requestInAppSettings": "אם ברצונך להעניק הרשאה לשימוש במצלמה שלך לסריקת קודי QR, אנא הפעל זאת בהגדרות האפליקציה."
         }
     },
     "tabs": {
-        "wallet": "ארנק",
-        "staking": "Staking",
+        "wallet": "Wallet",
+        "staking": "סטייקינג",
         "governance": "Governance",
-        "tokens": "Tokens",
-        "activity": "Activity"
+        "tokens": "מטבעות",
+        "activity": "תנועות"
     }
 }

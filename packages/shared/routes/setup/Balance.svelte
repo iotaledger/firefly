@@ -217,7 +217,7 @@
             <Text type="p" highlighted classes="py-1 uppercase">{fiatBalance}</Text>
         </Box>
         {#if error.text}
-            <Toast classes="mt-4" type="error" message={error.text} />
+            <Toast classes="mt-4" type="error" message={error.text} hideDismiss />
         {/if}
     </div>
     <div slot="leftpane__action" class="flex flex-row justify-between items-center space-x-4">

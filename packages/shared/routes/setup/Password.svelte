@@ -8,6 +8,7 @@
         getKeyboardTransitionSpeed,
     } from 'shared/lib/app'
     import { showAppNotification } from 'shared/lib/notifications'
+    import { tabFormWithEnterKey } from '@lib/keyboard'
     import passwordInfo from 'shared/lib/password'
     import { asyncChangeStrongholdPassword, asyncSetStrongholdPassword, MAX_PASSWORD_LENGTH } from 'shared/lib/wallet'
     import zxcvbn from 'zxcvbn'
@@ -84,6 +85,10 @@
             return zxcvbn(limitedPassword)
         }
     } // zxcvbn lib recommends to not validate long passwords because of performance issues https://github.com/dropbox/zxcvbn#user-content-performance
+
+    function onKeyPress(e) {
+        tabFormWithEnterKey(e, document, 'set-password')
+    }
 </script>
 
 <OnboardingLayout onBackClick={handleBackClick} {busy}>
@@ -98,7 +103,12 @@
             'ms'} var(--transition-scroll)"
         bind:this={passwordContainer}
     >
-        <form on:submit|preventDefault={handleContinueClick} id="password-form">
+        <form
+            on:submit|preventDefault={handleContinueClick}
+            on:keypress={onKeyPress}
+            id="password-form"
+            name="set-password"
+        >
             <Text type="p" classes="mb-4" secondary>{locale('views.password.body1')}</Text>
             <Text type="p" classes="mb-10" secondary>{locale('views.password.body2')}</Text>
             <Password

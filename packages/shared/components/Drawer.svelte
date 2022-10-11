@@ -32,7 +32,7 @@
 
 <script lang="typescript">
     import { appSettings } from 'shared/lib/appSettings'
-    import { createEventDispatcher, onMount } from 'svelte'
+    import { createEventDispatcher, onMount, tick } from 'svelte'
     import { quintOut } from 'svelte/easing'
     import { tweened } from 'svelte/motion'
     import { slidable } from '@lib/actions'
@@ -69,6 +69,7 @@
     })
 
     async function handleSlideMove(event: CustomEvent): Promise<void> {
+        if (preventClose) return
         // Calc slide gesture velocity between events
         const displacement = fromLeft ? event.detail.endX - event.detail.initX : event.detail.endY - event.detail.initY
         const time = (event.detail.endTime - event.detail.initTime) / 1000
@@ -90,6 +91,7 @@
             }),
             { duration: 0 }
         )
+        await tick()
     }
 
     async function handleSlideEnd() {
@@ -109,6 +111,7 @@
     }
 
     export async function close(): Promise<void> {
+        if (preventClose) return
         await coords.set(
             {
                 x: fromLeft ? -viewportLength : 0,
@@ -134,6 +137,7 @@
 <drawer class="absolute top-0 {zIndex}" class:invisible={!isOpen}>
     <dim-zone
         class="fixed h-screen w-screen"
+        class:prevent-default={isOpen}
         use:slidable={!preventClose}
         on:slideMove={handleSlideMove}
         on:slideEnd={handleSlideEnd}
@@ -148,6 +152,7 @@
         on:slideEnd={handleSlideEnd}
         class="fixed bottom-0 overflow-auto w-screen h-screen bg-white dark:bg-gray-800 {classes}"
         class:darkmode={darkModeEnabled}
+        class:prevent-default={isOpen}
         style="--y: {fromLeft ? 0 : $coords.y}px; 
 			--x: {fromLeft ? $coords.x : 0}px; 
 			--opacity: {contentOpacity}; 
@@ -163,14 +168,18 @@
 </drawer>
 
 <style type="text/scss">
+    .prevent-default {
+        touch-action: none;
+    }
     content {
         will-change: transform;
-        transform: translate(var(--x), var(--y));
+        transform: translate3d(var(--x), var(--y), 0);
         border-radius: var(--border-radius);
         height: var(--height);
-        opacity: var(--opacity);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        // We get better perf without opacity
+        // opacity: var(--opacity);
+        backdrop-filter: blur(var(--blur));
+        -webkit-backdrop-filter: blur(var(--blur));
         --bg-mark-color: #d0d0d0;
         --top-mark: 8px;
         &.darkmode {

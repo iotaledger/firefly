@@ -7,7 +7,8 @@
         "legal": {
             "title": "Политика за приватност и Услови за користење",
             "body": "Ве молиме прегледајте ги Политиката на приватност и Условите за користење.",
-            "checkbox": "Ги прочитав и ги прифаќам Политиката на приватност и Условите за користење"
+            "checkbox": "Ги прочитав и ги прифаќам Политиката на приватност и Условите за користење",
+            "checkboxMobile": "I've read and I accept the"
         },
         "crashReporting": {
             "title": "Crash Reporting",
@@ -124,9 +125,9 @@
             "body": "Имате направено резервна копија од вашите паричници како Stronghold."
         },
         "congratulations": {
-            "title": "Паричникот е успешно конфигуриран",
+            "title": "Profile setup complete!",
             "fundsMigrated": "Средствата се мигрирани",
-            "body": "Вашиот нов паричник е спремен за користење.",
+            "body": "Your new profile is ready to use.",
             "softwareMigratedBody": "You have successfully migrated your funds to the new network",
             "fireflyLedgerBody": "Your Ledger account is successfully recovered and you can now continue.",
             "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
@@ -161,7 +162,8 @@
         },
         "importFromFile": {
             "title": "Опоравете ги вашите паричници користејќи датотека со резервна копија",
-            "body": "Импортирајте датотека со резервна копија за да ги опоравите вашите паричници. Резервните копии можат да бидат Stronghold (.stronghold) или Trinity SeedVault (.kbdx)."
+            "body": "Импортирајте датотека со резервна копија за да ги опоравите вашите паричници. Резервните копии можат да бидат Stronghold (.stronghold) или Trinity SeedVault (.kbdx).",
+            "bodyMobile": "Upload a file to restore existing wallet funds. Only Firefly Stronghold backup is supported on mobile. For Trinity SeedVault backup, please use the  desktop wallet."
         },
         "importFromLedger": {
             "title": "Restore or Migrate your Ledger",
@@ -190,7 +192,7 @@
             "readMore": "What to expect from the migration process"
         },
         "generateNewLedgerAddress": {
-            "title": "Генерирај нова адреса",
+            "title": "Generate new address",
             "body": "You need to generate a new address to migrate your tokens with Firefly. Click the button below to continue.",
             "confirmTitle": "Confirm the new address",
             "confirmBody": "For security, please compare the address generated on your Ledger device with the one displayed below. If they match, press both buttons on your Ledger as prompted.",
@@ -250,7 +252,7 @@
             "title": "Предупредување",
             "body1": "Имате средства на една или повеќе искористени адреси.",
             "body2": "Препорачуваме да го извршите автоматизираниот процес за безбедно да ги резервирате и пренесете овие средства.",
-            "body3": "Ако ја затворите апликацијата ќе треба да ја почнете целата миграција одново.",
+            "body3": "It is not possible to guarantee your funds will be migrated securely on mobile. We recommend that you use the Firefly desktop app to migrate.",
             "learn": "Дознајте повеќе за искористените адреси"
         },
         "secureSpentAddresses": {
@@ -321,7 +323,7 @@
                 "advice": "If you change your system theme, you may need to restart Firefly to see the effects"
             },
             "language": {
-                "title": "Јазик",
+                "title": "Language",
                 "description": ""
             },
             "currency": {
@@ -403,7 +405,7 @@
                 "editDetails": "Edit details",
                 "viewInfo": "View info",
                 "setAsPrimary": "Постави како примарно",
-                "removeNode": "Отстрани го јазолот",
+                "removeNode": "Remove node",
                 "includeOfficialNodeList": "Додај ја официјалната листа на јазли",
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
@@ -465,12 +467,16 @@
                 "networkOperational": "Network operational",
                 "networkDegraded": "Network degraded",
                 "networkDown": "Network disconnected",
+                "networkUnreachable": "Network unreachable",
                 "status": "Статус",
                 "messagesPerSecond": "Пораки во секунда",
                 "referencedRate": "Стапка на референцирање"
             },
             "profileModal": {
-                "allSettings": "Сите поставки",
+                "allSettings": {
+                    "title": "All settings",
+                    "description": "Profile, application, security"
+                },
                 "logout": "Одјави се",
                 "stronghold": {
                     "title": "Profile lock",
@@ -491,8 +497,8 @@
                 },
                 "backup": {
                     "title": "Backup your wallets",
-                    "lastBackup": "Последно направивте резервна копија на {date}",
-                    "notBackedUp": "Не е направена резервна копија",
+                    "lastBackup": "You last backed up {date}",
+                    "notBackedUp": "Not backed up",
                     "button": "Backup"
                 },
                 "version": {
@@ -680,7 +686,7 @@
         "hideAccount": {
             "title": "Скриј го {name}?",
             "body": "Можете да го пронајдете овој паричник подоцна со овозможување на \"Прикажи скриени паричници\" во Напредни поставувања.",
-            "typePassword": "Внесете ја лозинката на вашиот паричник за да потврдите.",
+            "typePassword": "Type your wallet password to confirm.",
             "hideAccount": "Сокриј го паричникот",
             "errorTitle": "Не може да се сокрие {name}",
             "errorBody1": "За да го сокриете паричникот, мора билансот да му е 0.",
@@ -718,8 +724,8 @@
                 "features": "Features",
                 "confirmedMilestoneIndex": "Confirmed milestone index",
                 "pruningIndex": "Pruning index",
-                "messagesPerSecond": "Пораки во секунда",
-                "referencedRate": "Стапка на референцирање"
+                "messagesPerSecond": "Messages per second",
+                "referencedRate": "Referenced rate"
             }
         },
         "switchNetwork": {
@@ -734,7 +740,7 @@
             "empty": "Записникот на грешки е празен."
         },
         "deleteProfile": {
-            "title": "Избриши го профилот",
+            "title": "Delete profile",
             "confirmation": "Дали сте сигурни дека сакате да го избришете овој профил? Оваа операција не може да се поништи.",
             "typePassword": "Внесете ја вашата лозинка за да потврдите."
         },
@@ -762,7 +768,7 @@
             }
         },
         "balanceFinder": {
-            "title": "Пронаоѓач на салдото",
+            "title": "Balance finder",
             "body": "Perform a more exhaustive search of addresses to find missing balances and previous airdrop rewards. This may take a while.",
             "accountsSearched": "Wallets searched",
             "addressesSearched": "Addresses searched per wallet",
@@ -823,7 +829,7 @@
                 "info": "Confirm that the remainder address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
             },
             "transaction": {
-                "title": "Потврди ја трансакцијата",
+                "title": "Confirm transaction",
                 "info": "Confirm that the transaction information displayed on your Ledger device matches the information displayed below. If they match, press both buttons on your Ledger as prompted."
             }
         },
@@ -848,7 +854,7 @@
             "totalFundsStaked": "Total funds staked",
             "stakedSuccessfully": "Your funds have been staked for {account}.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "mergeStakeDisclaimerVoting": "Merging your stake will also merge your votes."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -877,7 +883,8 @@
             "changingVote": "Changing vote",
             "manageVotes": "Manage votes",
             "partialVoteInfo": "You have received {amount} to {account}. You can vote with these funds by merging them with your current vote.",
-            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted",
+            "mergeVoteDisclaimer": "Please note that merging votes won't impact any votes that have already been counted.",
+            "mergeVoteDisclaimerStaking": "Merging your vote will also merge your staked funds.",
             "mergingVotes": "Merging votes",
             "votedSuccessfully": "You have started voting with {account}.",
             "unvotedSuccessfully": "You have stopped voting with {account}.",
@@ -903,6 +910,10 @@
         "confirmDeveloperProfile": {
             "title": "You are creating a developer profile",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+        },
+        "confirmCloseApp": {
+            "title": "You are about to close the app",
+            "body": "Are you sure? go back again to close the app."
         },
         "crashReporting": {
             "title": "Crash reporting",
@@ -953,16 +964,17 @@
         "restoreWalletDescription": "Мигрирајте на Chrysalis или обновете постоечки паричник",
         "createWallet": "Креирајте нов паричник",
         "createWalletDescription": "Креирајте нов паричник на мрежата Chrysalis",
+        "exploreWallet": "Explore wallet",
         "savePassword": "Зачувај ја лозинката",
         "useBiometric": "Користи биометриска безбедност",
-        "setupPin": "Поставете PIN код",
+        "setupPin": "Set up PIN code",
         "setPin": "Поставете PIN код",
         "confirmPin": "Потврдете го PIN кодот",
         "enterYourPin": "Внесете го вашиот PIN",
         "saveBackupFile": "Зачувајте ја датотеката на резервната копија",
         "iveWrittenRecoveryPhrase": "Ја имам запишано мојата фраза за опоравување",
-        "verifyRecoveryPhrase": "Потврди ја фразата за опоравување",
-        "revealRecoveryPhrase": "Откриј ја фразата за опоравување",
+        "verifyRecoveryPhrase": "Verify recovery phrase",
+        "revealRecoveryPhrase": "Reveal recovery phrase",
         "importSeedvault": "Импортирајте SeedVault",
         "checkAgain": "Провери повторно",
         "importFromFile": "Импортирајте од датотека",
@@ -991,9 +1003,9 @@
         "saveBackup": "Зачувајте ја Stronghold резервната копија",
         "customizeAcount": "Прилагоди го паричникот",
         "viewAddressHistory": "Погледни ја историјата на адресата",
-        "hideAccount": "Сокриј го паричникот",
+        "hideAccount": "Hide wallet",
         "showAccount": "Прикажи паричник",
-        "deleteAccount": "Избриши го паричникот",
+        "deleteAccount": "Delete wallet",
         "max": "Максимум",
         "addNode": "Додај го јазолот",
         "updateNode": "Ажурирај го јазолот",
@@ -1051,10 +1063,12 @@
         "mergeVotes": "Merge vote",
         "stopVotes": "Stop voting",
         "okIUnderstand": "OK, I understand",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "chooseBackupFile": "Choose backup file"
     },
     "general": {
         "password": "Лозинка",
+        "close": "Close",
         "confirmPassword": "Потврди ја лозинката",
         "currentPassword": "Тековна лозинка",
         "newPassword": "Нова лозинка",
@@ -1066,15 +1080,18 @@
         "received": "Примено",
         "sendPayment": "Испрати плаќање",
         "moveFunds": "Интерен трансфер",
+        "moveFundsButton": "Internal",
+        "unit": "Unit",
         "sendTo": "Send To",
         "sendFunds": "Прати средства",
         "sendToAddress": "Прати на адреса",
+        "scanQr": "Scan QR code",
         "scanQrOrPaste": "Скенирајте QR код или залепете адреса",
         "moveFundsBetweenAccounts": "Преместете ги средствата помеѓу паричниците",
         "sendTokensToAddress": "Испратете токени на адреса",
         "manageAccount": "Управувај со паричникот",
         "customizeAcount": "Прилагодете го вашиот паричник",
-        "account": "Паричник",
+        "account": "Wallet",
         "sendingToAddress": "Праќање на адреса",
         "amount": "Износ",
         "addAddress": "Додај адреса",
@@ -1111,10 +1128,11 @@
         "createAccount": "Креирај паричник",
         "createNewWallet": "Create a new wallet",
         "switchWallet": "Switch wallet",
+        "addAWallet": "Add a wallet",
         "accountName": "Име на паричник",
         "latestTransactions": "Последни трансакции",
         "transactions": "Трансакции",
-        "security": "Безбедност",
+        "security": "Security",
         "accountAddress": "Адреса на паричникот",
         "network": "Network",
         "nodes": "Јазли",
@@ -1126,7 +1144,7 @@
         "receiveAddress": "Прими адреса",
         "newAddress": "New Address",
         "date": "Датум",
-        "status": "Статус",
+        "status": "Status",
         "confirmed": "Потврдено",
         "pending": "Во исчекување",
         "noAccounts": "Немате паричници, ве молиме креирајте паричник.",
@@ -1205,7 +1223,9 @@
         "accountColor": "Wallet color",
         "myAssets": "My assets",
         "option": "Option",
-        "total": "Total: {balance}"
+        "total": "Total: {balance}",
+        "openExplorer": "View in Explorer",
+        "activityDetails": "Transaction details"
     },
     "dates": {
         "today": "Денес",
@@ -1419,15 +1439,20 @@
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+        },
+        "shimmerTokenFormatting": {
+            "title": "Shimmer unit update",
+            "body1": "SMR units have changed following a governance decision. Shimmer tokens are now displayed with 6 decimal places; 1 SMR = 1,000,000 glow.",
+            "body2": "You still have the same amount of SMR rewards, Firefly just formats the value differently."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "ID на пораката",
+            "messageId": "Message ID",
             "internal": "Internal",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
-            "date": "Датум",
+            "date": "Date",
             "time": "Time"
         }
     },
@@ -1443,7 +1468,7 @@
         }
     },
     "tabs": {
-        "wallet": "Паричник",
+        "wallet": "Wallet",
         "staking": "Staking",
         "governance": "Governance",
         "tokens": "Tokens",
