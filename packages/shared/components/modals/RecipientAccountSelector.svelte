@@ -15,7 +15,7 @@
     export let onClose: () => void
 
     $: accounts = $visibleActiveAccounts?.filter(
-        (account) => account.id !== $selectedAccount.id || includeSelectedAccount
+        (account) => account.index !== $selectedAccount.index || includeSelectedAccount
     )
     $: filteredAccounts = accounts?.filter(
         (account) =>

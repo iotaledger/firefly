@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { formatProtocolName, NetworkProtocol, NetworkType } from '@core/network'
     import { appSetupRouter } from '@core/router'
-    import { Button, Checkbox, Text } from 'shared/components'
+    import { Button, Checkbox, Text, TextType } from 'shared/components'
     import {
         initialiseOnboardingProfile,
         onboardingProfile,
@@ -35,7 +35,7 @@
 <OnboardingLayout allowBack={false} animation="welcome-desktop">
     <div slot="content">
         <div class="flex flex-col items-center text-center space-y-4 absolute bottom-1/4 px-8">
-            <Text type="h3"
+            <Text type={TextType.h3}
                 >{localize('views.onboarding.appSetup.welcome.title', {
                     values: {
                         protocol: features?.onboarding?.iota?.enabled
@@ -49,7 +49,7 @@
     <div slot="footer" class="space-y-8">
         <div class="flex flex-row items-center space-x-3">
             <Checkbox bind:checked />
-            <Text type="p" secondary>
+            <Text type={TextType.p} secondary>
                 I agree to the
                 <span class="text-blue-500"> Terms of Service </span>
             </Text>

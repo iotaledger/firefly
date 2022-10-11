@@ -12,11 +12,14 @@
     $: $assetFilter, assets, updateFilteredAssetList(), scrollToTop()
     $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
 
-    function scrollToTop() {
+    function scrollToTop(): void {
         const listElement = document.querySelector('.asset-list')?.querySelector('svelte-virtual-list-viewport')
-        if (listElement) listElement.scroll(0, 0)
+        if (listElement) {
+            listElement.scroll(0, 0)
+        }
     }
-    function updateFilteredAssetList() {
+
+    function updateFilteredAssetList(): void {
         const list = []
         if (assets?.baseCoin && isVisibleAsset(assets?.baseCoin)) {
             list.push(assets.baseCoin)
@@ -25,7 +28,7 @@
         assetList = list
     }
 
-    function handleAssetTileClick(asset): void {
+    function handleAssetTileClick(asset: IAsset): void {
         openPopup({
             type: 'tokenInformation',
             overflow: true,

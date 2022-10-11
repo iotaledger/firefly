@@ -18,7 +18,7 @@ export function saveActiveProfile(): void {
             isDeveloperProfile: _activeProfile?.isDeveloperProfile,
             clientOptions: _activeProfile?.clientOptions,
             ...(_activeProfile?.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile?.hasVisitedDashboard }),
-            ...(_activeProfile?.lastUsedAccountId && { lastUsedAccountId: _activeProfile?.lastUsedAccountId }),
+            ...(_activeProfile?.lastUsedAccountIndex && { lastUsedAccountIndex: _activeProfile?.lastUsedAccountIndex }),
             ...(_activeProfile?.accountMetadata && { accountMetadata: _activeProfile?.accountMetadata }),
         }
         saveProfile(profileToPersist)

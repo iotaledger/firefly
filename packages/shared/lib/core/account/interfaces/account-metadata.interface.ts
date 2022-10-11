@@ -1,5 +1,5 @@
 export interface IAccountMetadata {
-    id: string
+    index: number
     name: string
     color: string
     hidden: boolean
