@@ -15,8 +15,8 @@ export function handleTransactionInclusionEventInternal(
     accountIndex: number,
     payload: ITransactionInclusionEventPayload
 ): void {
-    updateActivityByTransactionId(accountIndex.toString(), payload.transactionId, {
+    updateActivityByTransactionId(accountIndex, payload.transactionId, {
         inclusionState: payload.inclusionState,
     })
-    updateClaimingTransactionInclusion(payload.transactionId, payload.inclusionState, accountIndex.toString())
+    updateClaimingTransactionInclusion(payload.transactionId, payload.inclusionState, accountIndex)
 }

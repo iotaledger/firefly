@@ -7,7 +7,7 @@
     import { selectedAccount } from '@core/account'
     import { BaseError } from '@core/error'
 
-    export let deleteAccount: (id: string) => Promise<void> = async () => {}
+    export let deleteAccount: (index: number) => Promise<void> = async () => {}
 
     let password: string
     let error: BaseError
@@ -25,7 +25,7 @@
             if ($isSoftwareProfile) {
                 await setStrongholdPassword(password)
             }
-            await deleteAccount($selectedAccount?.id)
+            await deleteAccount($selectedAccount?.index)
             closePopup()
         } catch (err) {
             error = !error && err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
@@ -40,7 +40,7 @@
 <div class="mb-5">
     <Text type="h4">
         {localize('popups.deleteAccount.title', {
-            values: { name: $selectedAccount?.getMetadata().alias },
+            values: { name: $selectedAccount?.name },
         })}
     </Text>
 </div>
