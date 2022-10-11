@@ -27,7 +27,7 @@
     import { addError } from '@core/error'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { OnboardingRouter } from './routes'
+    import { LoginRouter, OnboardingRouter } from './routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { onboardingProfile, initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
@@ -173,6 +173,9 @@
 
 <!-- empty div to avoid auto-purge removing dark classes -->
 <div class="scheme-dark" />
+<Route route={AppRoute.Login}>
+    <LoginRouter />
+</Route>
 <Route route={AppRoute.Onboarding}>
     <OnboardingRouter />
 </Route>

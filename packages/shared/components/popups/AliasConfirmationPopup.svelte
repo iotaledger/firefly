@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
-    import { selectedAccount } from '@core/account'
+    import { selectedAccount, updateSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, activeProfile } from '@core/profile'
     import {
@@ -56,15 +56,15 @@
 
     async function createAlias(): Promise<void> {
         try {
-            isTransferring = true
+            updateSelectedAccount({ isTransferring: true })
             const transaction = await $selectedAccount.createAliasOutput()
             const activity = new Activity(preprocessTransaction(transaction), $selectedAccount)
-            addActivityToAccountActivitiesInAllAccountActivities($selectedAccount.id, activity)
+            addActivityToAccountActivitiesInAllAccountActivities($selectedAccount.index, activity)
             closePopup()
         } catch (err) {
             handleError(err)
         } finally {
-            isTransferring = false
+            updateSelectedAccount({ isTransferring: false })
         }
     }
 

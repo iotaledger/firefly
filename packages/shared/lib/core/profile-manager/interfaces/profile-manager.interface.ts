@@ -10,6 +10,7 @@ import {
 import { IAuth } from '@core/network'
 
 import { WalletApiEventHandler } from '../types'
+import { IAccount } from '@core/account'
 
 export interface IProfileManager {
     id: string
@@ -21,6 +22,8 @@ export interface IProfileManager {
     emitTestEvent(event: WalletEvent): Promise<void>
     generateMnemonic(): Promise<string>
     getAccountIndexes(): Promise<number[]>
+    getAccount(accountIndex: number): Promise<IAccount>
+    getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>

@@ -19,7 +19,7 @@ import {
     TagLengthError,
     UnknownAssetError,
 } from '../../../errors'
-import { getAmountFromSearchParam } from '../../../utils'
+import { getRawAmountFromSearchParam } from '../../../utils'
 import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
 import { isStringTrue } from '@core/utils'
 
@@ -66,7 +66,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         throw new UnknownAssetError()
     }
 
-    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
+    const rawAmount = getRawAmountFromSearchParam(searchParams)
 
     const surplus = searchParams.get(SendOperationParameter.Surplus)
     if (surplus && parseInt(surplus).toString() !== surplus) {
@@ -91,7 +91,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     return {
         ...(asset && { asset }),
         ...(recipient && { recipient }),
-        ...(amount && { amount }),
+        ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
         ...(metadata && { metadata }),
         ...(tag && { tag }),

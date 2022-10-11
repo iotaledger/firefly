@@ -7,7 +7,7 @@ import { allAccountActivities, updateActivityDataByActivityId } from '../stores'
 import { getExpirationDateFromOutput } from '../utils'
 
 export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState): Promise<void> {
-    const accountActivities = get(allAccountActivities)[Number(account.id)]
+    const accountActivities = get(allAccountActivities)[account.index]
 
     const activities = accountActivities.filter(
         (activity) =>
@@ -22,7 +22,7 @@ export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState
                 const detailedOutput = await account.getOutput(activity.data.outputId)
                 const isClaimed = isOutputClaimed(detailedOutput)
                 if (isClaimed) {
-                    updateActivityDataByActivityId(account.id, activity.id, {
+                    updateActivityDataByActivityId(account.index, activity.id, {
                         type: ActivityType.Transaction,
                         isClaimed: true,
                         claimedDate: new Date(
