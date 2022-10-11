@@ -61,7 +61,7 @@ const prodConfig = () => ({
         oneClick: true,
         deleteAppDataOnUninstall: false,
         perMachine: true,
-        include: './build/installer.nsh',
+        include: 'public/installer.nsh',
     },
     win: {
         icon: './public/assets/icons/prod/icon1024x1024.png',
