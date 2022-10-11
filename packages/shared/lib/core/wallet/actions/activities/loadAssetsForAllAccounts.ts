@@ -4,7 +4,7 @@ import { get } from 'svelte/store'
 import { allAccountActivities } from '../../stores'
 
 export async function loadAssetsForAllActivities(account: IAccountState): Promise<void> {
-    const accountActivities = get(allAccountActivities)[Number(account.id)]
+    const accountActivities = get(allAccountActivities)[account.index]
 
     for (const activity of accountActivities) {
         try {

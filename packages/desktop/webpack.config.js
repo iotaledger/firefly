@@ -148,15 +148,6 @@ const rendererPlugins = [
                     return 'locales/[name].[ext]'
                 },
             },
-            ...(process.platform === 'win32'
-                ? [
-                      {
-                          from: '**/*',
-                          context: path.resolve(__dirname, 'nsis'),
-                          to: 'build',
-                      },
-                  ]
-                : []),
         ],
     }),
     new MiniCssExtractPlugin({

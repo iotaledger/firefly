@@ -115,7 +115,7 @@ export interface ErrorEventPayload {
 export interface BalanceChangeEventPayload {
     indexationId: string
     messageId: string
-    accountId: string
+    accountIndex: number
     address: string
     balanceChange: {
         spent: number
@@ -124,19 +124,19 @@ export interface BalanceChangeEventPayload {
 }
 
 export interface TransactionEventPayload {
-    accountId: string
+    accountIndex: number
     message: Message
 }
 
 export interface ConfirmationStateChangeEventPayload {
-    accountId: string
+    accountIndex: number
     message: Message
     confirmed: boolean
 }
 
 export interface ReattachmentEventPayload {
     indexationId: string
-    accountId: string
+    accountIndex: number
     message: Message
     reattachedMessageId: string
 }
@@ -199,7 +199,7 @@ export interface TransferState extends TransferProgressEvent {
 }
 
 export interface TransferProgressEventPayload {
-    accountId: string
+    accountIndex: number
     event: TransferProgressEventData
 }
 

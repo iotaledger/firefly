@@ -10,7 +10,7 @@ import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'
 import { UnknownAssetError } from '../../../errors'
-import { getAmountFromSearchParam } from '../../../utils'
+import { getRawAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendFormOperation(searchParams)
@@ -42,7 +42,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionD
 
     const address = searchParams.get(SendOperationParameter.Address)
     const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
-    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
+    const rawAmount = getRawAmountFromSearchParam(searchParams)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)
     const recipient: Subject = address ? { type: 'address', address } : undefined
@@ -50,7 +50,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionD
     return {
         ...(asset && { asset }),
         ...(recipient && { recipient }),
-        ...(amount && { amount }),
+        ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
         ...(metadata && { metadata }),
         ...(tag && { tag }),

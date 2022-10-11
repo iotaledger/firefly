@@ -64,7 +64,7 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve(MOCK_MNEMONIC)
     }
 
-    getAccount(accountId: AccountId): Promise<IAccount> {
+    getAccount(accountIndex: AccountId): Promise<IAccount> {
         throw new Error('Method not implemented.')
     }
 

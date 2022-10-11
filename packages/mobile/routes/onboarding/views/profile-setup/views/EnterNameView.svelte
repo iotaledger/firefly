@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
-    import { Button, Input, Text } from 'shared/components'
+    import { Button, Input, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
@@ -58,8 +58,10 @@
 
 <OnboardingLayout {onBackClick} {title} animation="profile-desktop">
     <div slot="content">
-        <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileSetup.enterName.body1')}</Text>
-        <Text type="p" secondary classes="mb-4">
+        <Text type={TextType.p} secondary classes="mb-4"
+            >{localize('views.onboarding.profileSetup.enterName.body1')}</Text
+        >
+        <Text type={TextType.p} secondary classes="mb-4">
             {localize(
                 `views.onboarding.profileSetup.enterName.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`
             )}
