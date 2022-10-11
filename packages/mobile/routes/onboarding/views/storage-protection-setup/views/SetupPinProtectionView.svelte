@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { OnboardingLayout } from '../../../../../components'
-    import { Button, PinInput, Text, HTMLButtonType } from 'shared/components'
+    import { Button, PinInput, Text, HTMLButtonType, TextType } from 'shared/components'
     import {
         initialiseFirstShimmerClaimingAccount,
         initialisePincodeManager,
@@ -97,10 +97,10 @@
 <OnboardingLayout {onBackClick} {busy} {title} animation="pin-desktop">
     <div slot="content">
         <div class="flex flex-col">
-            <Text type="p" secondary classes="mb-4"
+            <Text type={TextType.p} secondary classes="mb-4"
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body1')}</Text
             >
-            <Text type="p" secondary highlighted
+            <Text type={TextType.p} secondary highlighted
                 >{localize('views.onboarding.storageProtectionSetup.setupPinProtection.body2')}</Text
             >
         </div>
