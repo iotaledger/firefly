@@ -7,7 +7,7 @@
 
     $: aliases = get(selectedAccountActivities).filter((activity) => activity.type === ActivityType.Alias)
 
-    function handleMintNativeToken() {
+    function handleMintNativeToken(): void {
         if (aliases.length > 0) {
             openPopup({
                 type: 'mintNativeTokenForm',
