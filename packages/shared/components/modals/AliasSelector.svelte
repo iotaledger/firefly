@@ -9,10 +9,11 @@
     export let selected: string = undefined
     export let onClose: () => void
 
-    $: aliasIds = $selectedAccount.balances.aliases.map((hexAliasId) => {
-        const aliasId = convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexAliasId)
-        return { value: aliasId, label: truncateString(aliasId, 9, 9) }
-    })
+    $: aliasIds =
+        $selectedAccount.balances?.aliases.map((hexAliasId) => {
+            const aliasId = convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexAliasId)
+            return { value: aliasId, label: truncateString(aliasId, 9, 9) }
+        }) ?? []
 
     function onClick(_selected: string): void {
         modal?.close()
