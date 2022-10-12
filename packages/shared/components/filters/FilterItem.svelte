@@ -2,7 +2,7 @@
     import type { FilterUnit } from '@core/wallet/interfaces'
     import { Checkbox, Icon } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { DateFilterItem, NumberFilterItem, SelectionFilterItem, AssetFilterItem } from './items'
+    import { DateFilterItem, NumberFilterItem, SelectionFilterItem, AssetFilterItem, OrderFilterItem } from './items'
     import { createEventDispatcher } from 'svelte'
 
     export let filterUnit: FilterUnit
@@ -48,6 +48,8 @@
                 <DateFilterItem bind:filterUnit />
             {:else if filterUnit.type === 'selection'}
                 <SelectionFilterItem bind:filterUnit />
+            {:else if filterUnit.type === 'order'}
+                <OrderFilterItem bind:filterUnit />
             {:else if filterUnit.type === 'asset'}
                 <AssetFilterItem bind:filterUnit />
             {/if}
