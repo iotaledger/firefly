@@ -10,7 +10,7 @@ export async function restoreBackupFromStrongholdFile(strongholdPassword: string
     const { id, importFilePath, clientOptions, networkProtocol } = get(onboardingProfile)
     try {
         await restoreBackup(importFilePath, strongholdPassword)
-        await validateStrongholdCoinType(profileManager, networkProtocol)
+        await validateStrongholdCoinType(get(profileManager), networkProtocol)
         updateOnboardingProfile({ lastStrongholdBackupTime: new Date() })
     } catch (err) {
         const storageDirectory = await getStorageDirectoryOfProfile(id)

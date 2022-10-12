@@ -28,7 +28,7 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
          * NOTE: We must check that the Stronghold was an IOTA-based backup and
          * not a Shimmer one.
          */
-        await validateStrongholdCoinType(shimmerClaimingProfileManager, NetworkProtocol.IOTA)
+        await validateStrongholdCoinType(get(shimmerClaimingProfileManager), NetworkProtocol.IOTA)
 
         const profileDirectory = await getStorageDirectoryOfProfile(id)
         await restoreBackupByCopyingFile(

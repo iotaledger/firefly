@@ -16,14 +16,13 @@ export function updateOnboardingProfile(payload: Partial<IOnboardingProfile>): v
 
 export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerClaimingAccount): void {
     const _onboardingProfile = get(onboardingProfile)
-    const claimingAccountIndex = shimmerClaimingAccount?.getMetadata()?.index
     const isNewShimmerClaimingAccount = !_onboardingProfile?.shimmerClaimingAccounts?.some(
-        (_shimmerClaimingAccount) => _shimmerClaimingAccount?.getMetadata()?.index === claimingAccountIndex
+        (_shimmerClaimingAccount) => _shimmerClaimingAccount?.meta?.index === shimmerClaimingAccount?.meta?.index
     )
     const shimmerClaimingAccounts = isNewShimmerClaimingAccount
         ? [..._onboardingProfile?.shimmerClaimingAccounts, shimmerClaimingAccount]
         : _onboardingProfile?.shimmerClaimingAccounts?.map((_shimmerClaimingAccount) =>
-              _shimmerClaimingAccount?.getMetadata()?.index === claimingAccountIndex
+              _shimmerClaimingAccount?.meta?.index === shimmerClaimingAccount?.meta?.index
                   ? shimmerClaimingAccount
                   : _shimmerClaimingAccount
           )

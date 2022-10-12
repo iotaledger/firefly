@@ -1,26 +1,27 @@
+import { get, Writable } from 'svelte/store'
+
 import { IAccount, UnableToGetBoundAccountError } from '@core/account'
-import { WalletRsError } from '@core/error'
-import { createAccount, getAccount, profileManager as _profileManager } from '@core/profile-manager'
+import { api, IProfileManager, profileManager as _profileManager } from '@core/profile-manager'
+import { ErrorType } from '@lib/typings/events'
 
 export async function getBoundAccount(
     accountIndex: number,
     createAccountsIfNotFound: boolean = false,
-    profileManager = _profileManager
+    profileManager: Writable<IProfileManager> = _profileManager
 ): Promise<IAccount> {
     try {
         /**
-         * CAUTION: Do NOT remove the `await` keyword here.
+         * CAUTION: Do NOT remove the unnecessary `await` keyword here.
          * It is needed in the case of handling an AccountNotFound
          * error by creating more accounts.
          */
-        const account = await getAccount(accountIndex ?? 0, profileManager)
-        return account
+        return await api?.getAccount(get(profileManager)?.id, accountIndex ?? 0)
     } catch (err) {
-        if (err?.type === WalletRsError?.AccountNotFound && createAccountsIfNotFound) {
+        if (err?.type === ErrorType?.AccountNotFound && createAccountsIfNotFound) {
             for (let indexToCreateAccount = 0; indexToCreateAccount < accountIndex; indexToCreateAccount++) {
-                const account = await createAccount({}, profileManager)
-                if (account?.getMetadata()?.index === accountIndex) {
-                    return account
+                const account = await get(profileManager)?.createAccount({})
+                if (account?.meta?.index === accountIndex) {
+                    return api?.getAccount(get(profileManager)?.id, account?.meta?.index)
                 }
             }
             throw new UnableToGetBoundAccountError()

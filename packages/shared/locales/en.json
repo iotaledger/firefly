@@ -1462,8 +1462,8 @@
             "invalid": "Invalid PIN code."
         },
         "account": {
-            "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "empty": "You must use your latest wallet before creating a new one.",
             "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "You must transfer your balance before deleting this wallet.",
             "duplicate": "A wallet with this name already exists.",
@@ -1515,6 +1515,7 @@
             "invalidCertificate": "Could not connect with invalid certificate.",
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "This node has already been added.",
+            "unsynced": "The node is not in sync.",
             "noSyncedNode": "No synced node is available.",
             "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Failed to get an answer from all nodes.",

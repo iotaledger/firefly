@@ -1,4 +1,4 @@
-import { createNewAccount, IAccount, setSelectedAccount } from '@core/account'
+import { createNewAccount, setSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
 import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
 import {
@@ -7,7 +7,6 @@ import {
     isStrongholdUnlocked,
     profileManager,
     recoverAccounts,
-    RecoverAccountsPayload,
 } from '@core/profile-manager'
 import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
 import { ProfileType } from '@core/profile/enums'
@@ -53,16 +52,12 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
-            let accounts: IAccount[]
+            let accounts
             if (loginOptions?.isFromOnboardingFlow && loginOptions?.shouldRecoverAccounts) {
                 const { initialAccountRange, addressGapLimit } = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type]
-                const recoverAccountsPayload: RecoverAccountsPayload = {
-                    accountStartIndex: 0,
-                    accountGapLimit: initialAccountRange,
-                    addressGapLimit,
-                    syncOptions: { syncIncomingTransactions: true },
-                }
-                accounts = await recoverAccounts(recoverAccountsPayload)
+                accounts = await recoverAccounts(0, initialAccountRange, addressGapLimit, {
+                    syncIncomingTransactions: true,
+                })
             } else {
                 accounts = await getAccounts()
             }

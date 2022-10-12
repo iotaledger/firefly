@@ -5,10 +5,10 @@ import { ProfileType } from '@core/profile'
 
 export function getSecretManagerFromProfileType(type: ProfileType, storagePath?: string): SecretManager {
     const strongholdSecretManager = {
-        stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
+        Stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
     }
     const ledgerSecretManager = {
-        ledgerNano: USE_LEDGER_SIMULATOR,
+        LedgerNano: USE_LEDGER_SIMULATOR,
     }
 
     switch (type) {

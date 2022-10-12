@@ -2,14 +2,16 @@ import { IAccountState } from '@core/account'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
 import { OutputData, Transaction } from '@iota/wallet'
 import { IProcessedTransaction } from '../../interfaces'
-import { IOutputResponse, ITransactionPayload } from '@iota/types'
 
 export async function preprocessOutputsForAccount(account: IAccountState): Promise<IProcessedTransaction[]> {
-    const outputs = await account.outputs()
+    const outputs = await account.listOutputs()
 
-    const transactions = await account.transactions()
+    const transactions = await account.listTransactions()
     const transactionMap = getTransactionsMapFromList(transactions)
-    const incomingTransactions = getMapFromList(await account.incomingTransactions())
+    // TODO: uncomment this when `account.listIncomingTransactions()` is implemented
+    // const incomingTransactions = await account.listIncomingTransactions()
+    // const incomingTransactionMap = getTransactionsMapFromList(incomingTransactions)
+    const incomingTransactionMap = account?.meta?.incomingTransactions
 
     const groupedOutputs: { [key: string]: OutputData[] } = {}
     for (const output of outputs) {
@@ -26,9 +28,8 @@ export async function preprocessOutputsForAccount(account: IAccountState): Promi
 
     const processedTransactions: IProcessedTransaction[] = []
     for (const transactionId of Object.keys(groupedOutputs)) {
-        const incomingTransaction = incomingTransactions[transactionId]
         processedTransactions.push(
-            preprocessGroupedOutputs(groupedOutputs[transactionId], incomingTransaction, account)
+            preprocessGroupedOutputs(groupedOutputs[transactionId], incomingTransactionMap[transactionId], account)
         )
     }
     return processedTransactions
@@ -38,16 +39,6 @@ function getTransactionsMapFromList(transactions: Transaction[]): { [transaction
     const transactionMap = {}
     for (const transaction of transactions) {
         transactionMap[transaction.transactionId] = true
-    }
-    return transactionMap
-}
-
-function getMapFromList(transactions: [string, [ITransactionPayload, IOutputResponse[]]][]): {
-    [transactionId: string]: [ITransactionPayload, IOutputResponse[]]
-} {
-    const transactionMap = {}
-    for (const [transactionId, payload] of transactions) {
-        transactionMap[transactionId] = payload
     }
     return transactionMap
 }

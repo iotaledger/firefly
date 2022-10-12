@@ -37,15 +37,26 @@ import { MOCK_ACCOUNT_BALANCE } from './account-balance.mock'
 import { MOCK_ADDRESS } from './address.mock'
 
 export class AccountMock implements IAccount {
+    meta = {
+        index: 0,
+        coinType: 0,
+        alias: 'testAccount',
+        publicAddresses: [],
+        internalAddresses: [],
+        addressesWithUnspentOutputs: [],
+        outputs: {},
+        lockedOutputs: new Set<string>(),
+        unspentOutputs: {},
+        transactions: {},
+        incomingTransactions: {},
+        pendingTransactions: new Set<string>(),
+        accountOptions: {
+            outputConsolidationThreshold: 0,
+            automaticOutputConsolidation: false,
+        },
+    }
+
     constructor() {}
-
-    addresses(): Promise<[]> {
-        return Promise.resolve([])
-    }
-
-    addressesWithUnspentOutputs(): Promise<[]> {
-        return Promise.resolve([])
-    }
 
     buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput> {
         throw new Error('Method not implemented.')
@@ -155,10 +166,6 @@ export class AccountMock implements IAccount {
         return Promise.resolve([''])
     }
 
-    incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]> {
-        throw new Error('Method not implemented.')
-    }
-
     increaseNativeTokenSupply(
         tokenId: string,
         mintAmount: string,
@@ -168,16 +175,36 @@ export class AccountMock implements IAccount {
         throw new Error('Method not implemented.')
     }
 
-    minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string> {
+    listAddresses(): Promise<[]> {
+        return Promise.resolve([])
+    }
+
+    listAddressesWithUnspentOutputs(): Promise<[]> {
+        return Promise.resolve([])
+    }
+
+    listOutputs(filterOptions?: FilterOptions): Promise<[]> {
+        return Promise.resolve([])
+    }
+
+    listIncomingTransactions(): Promise<[string, ITransactionPayload, IOutputResponse][]> {
         throw new Error('Method not implemented.')
     }
 
-    outputs(filterOptions?: FilterOptions): Promise<[]> {
+    listUnspentOutputs(filterOptions?: FilterOptions): Promise<[]> {
         return Promise.resolve([])
     }
 
-    pendingTransactions(): Promise<[]> {
+    listPendingTransactions(): Promise<[]> {
         return Promise.resolve([])
+    }
+
+    listTransactions(): Promise<[]> {
+        return Promise.resolve([])
+    }
+
+    minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string> {
+        throw new Error('Method not implemented.')
     }
 
     prepareSendAmount(
@@ -258,13 +285,5 @@ export class AccountMock implements IAccount {
 
     sync(options?): Promise<AccountBalance> {
         throw new Error('Method not implemented.')
-    }
-
-    transactions(): Promise<[]> {
-        return Promise.resolve([])
-    }
-
-    unspentOutputs(filterOptions?: FilterOptions): Promise<[]> {
-        return Promise.resolve([])
     }
 }

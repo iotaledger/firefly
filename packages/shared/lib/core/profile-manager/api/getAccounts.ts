@@ -1,9 +1,10 @@
 import { IAccount } from '@core/account'
-import { api } from './api'
 import { get } from 'svelte/store'
 import { profileManager } from '../stores'
+import { getAccount } from './getAccount'
 
-export function getAccounts(manager = profileManager): Promise<IAccount[]> {
-    const { id } = get(manager)
-    return api.getAccounts(id)
+export async function getAccounts(): Promise<IAccount[]> {
+    const accountsResponse = await get(profileManager).getAccounts()
+    const accountsPromises = accountsResponse.map((acc) => getAccount(acc.meta.index))
+    return Promise.all(accountsPromises)
 }

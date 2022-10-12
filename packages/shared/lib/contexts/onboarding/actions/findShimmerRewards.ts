@@ -11,7 +11,6 @@ import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, SHIMMER_CLAIMING_ACCOUNT_RECOVER
 import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
-import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
 
 const DEPTH_SEARCH_ACCOUNT_START_INDEX = 0
 const INITIAL_SEARCH_ADDRESS_START_INDEX = 0
@@ -65,40 +64,39 @@ export async function findShimmerRewards(): Promise<void> {
 }
 
 async function depthSearchAndRecoverAccounts(): Promise<void> {
-    const recoverAccountsPayload: RecoverAccountsPayload = {
-        accountStartIndex: DEPTH_SEARCH_ACCOUNT_START_INDEX,
-        accountGapLimit: depthSearchAccountGapLimit,
-        addressGapLimit: depthSearchAddressGapLimit,
-        syncOptions: {
+    const profileManager = get(shimmerClaimingProfileManager)
+    const depthSearchAccounts = await profileManager?.recoverAccounts(
+        DEPTH_SEARCH_ACCOUNT_START_INDEX,
+        depthSearchAccountGapLimit,
+        depthSearchAddressGapLimit,
+        {
             ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
             addressStartIndex: depthSearchAddressStartIndex,
             addressStartIndexInternal: depthSearchAddressStartIndex,
-        },
-    }
-    const depthSearchAccounts = await recoverAccounts(recoverAccountsPayload, shimmerClaimingProfileManager)
+        }
+    )
 
     await updateRecoveredAccounts(depthSearchAccounts)
 }
 
 async function breadthSearchAndRecoverAccounts(): Promise<void> {
+    const profileManager = get(shimmerClaimingProfileManager)
     const { accountGapLimit, addressGapLimit } = accountRecoveryProfileConfiguration
     for (
         let chunkAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX;
         chunkAddressStartIndex < breadthSearchAddressGapLimit;
         chunkAddressStartIndex += addressGapLimit
     ) {
-        const recoverAccountsPayload: RecoverAccountsPayload = {
-            accountStartIndex: breadthSearchAccountStartIndex,
+        const breadthSearchAccounts = await profileManager?.recoverAccounts(
+            breadthSearchAccountStartIndex,
             accountGapLimit,
             addressGapLimit,
-            syncOptions: {
+            {
                 ...SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS,
                 addressStartIndex: chunkAddressStartIndex,
                 addressStartIndexInternal: chunkAddressStartIndex,
-            },
-        }
-        const breadthSearchAccounts = await recoverAccounts(recoverAccountsPayload, shimmerClaimingProfileManager)
-
+            }
+        )
         await updateRecoveredAccounts(breadthSearchAccounts)
     }
 }

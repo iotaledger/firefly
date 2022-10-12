@@ -27,7 +27,7 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
     const profileId = get(onboardingProfile)?.id
     const { transactionId, inclusionState } = payload
     const shimmerClaimingAccount = get(onboardingProfile)?.shimmerClaimingAccounts?.find(
-        (_shimmerClaimingAccount) => _shimmerClaimingAccount?.getMetadata()?.index === accountIndex
+        (_shimmerClaimingAccount) => _shimmerClaimingAccount?.meta?.index === accountIndex
     )
     if (shimmerClaimingAccount) {
         if (profileId in _shimmerClaimingTransactions && transactionId in _shimmerClaimingTransactions[profileId]) {
@@ -40,7 +40,7 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
                     type: 'success',
                     alert: true,
                     message: localize('notifications.claimShimmerRewards.success', {
-                        values: { accountAlias: shimmerClaimingAccount?.getMetadata()?.alias },
+                        values: { accountAlias: shimmerClaimingAccount?.meta?.alias },
                     }),
                 })
             } else if (inclusionState === InclusionState.Pending) {

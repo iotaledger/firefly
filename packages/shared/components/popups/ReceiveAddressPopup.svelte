@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
 
-    $: receiveAddress = $selectedAccount.depositAddress
+    $: receiveAddress = $selectedAccount.meta.publicAddresses[0].address
 </script>
 
 <receive-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">

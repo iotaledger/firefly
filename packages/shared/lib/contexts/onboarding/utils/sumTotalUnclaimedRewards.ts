@@ -5,7 +5,7 @@ export async function sumTotalUnclaimedRewards(accounts: IAccount[]): Promise<nu
     let totalUnclaimedRewards = 0
 
     for (const account of accounts) {
-        const unspentOutputs = (await account?.unspentOutputs()).filter(filterShimmerClaimingOutputs)
+        const unspentOutputs = (await account?.listUnspentOutputs()).filter(filterShimmerClaimingOutputs)
         totalUnclaimedRewards += sumTotalFromOutputs(unspentOutputs)
     }
 

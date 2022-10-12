@@ -16,7 +16,7 @@
         loadAccounts,
         visibleActiveAccounts,
     } from '@core/profile'
-    import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
+    import { recoverAccounts } from '@core/profile-manager'
     import {
         formatTokenAmountBestMatch,
         generateAndStoreActivitiesForAllAccounts,
@@ -69,13 +69,9 @@
                     return
                 }
 
-                const recoverAccountsPayload: RecoverAccountsPayload = {
-                    accountStartIndex: 0,
-                    accountGapLimit: currentAccountGapLimit,
-                    addressGapLimit: currentAddressGapLimit,
-                    syncOptions: { syncIncomingTransactions: true },
-                }
-                await recoverAccounts(recoverAccountsPayload)
+                await recoverAccounts(0, currentAccountGapLimit, currentAddressGapLimit, {
+                    syncIncomingTransactions: true,
+                })
                 await loadAccounts()
 
                 previousAccountGapLimit = currentAccountGapLimit

@@ -60,7 +60,7 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
 async function claimShimmerRewardsForShimmerClaimingAccount(
     shimmerClaimingAccount: IShimmerClaimingAccount
 ): Promise<void> {
-    const recipientAddress = (await shimmerClaimingAccount?.twinAccount?.addresses())[0].address
+    const recipientAddress = shimmerClaimingAccount?.twinAccount?.meta?.publicAddresses[0]?.address
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
     const outputOptions = getOutputOptions(null, recipientAddress, rawAmount.toString(), '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)

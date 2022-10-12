@@ -10,6 +10,7 @@ import {
 } from '@iota/types'
 import {
     AccountBalance,
+    AccountMeta,
     AccountSyncOptions,
     Address,
     AddressGenerationOptions,
@@ -39,8 +40,7 @@ import {
 } from '@iota/wallet'
 
 export interface IAccount {
-    addresses(): Promise<Address[]>
-    addressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
+    meta: AccountMeta
     buildAliasOutput(data: BuildAliasOutputData): Promise<IAliasOutput>
     buildBasicOutput(data: BuildBasicOutputData): Promise<IBasicOutput>
     buildFoundryOutput(data: BuildFoundryOutputData): Promise<IFoundryOutput>
@@ -72,22 +72,26 @@ export interface IAccount {
     getOutput(outputId: string): Promise<OutputData>
     getOutputsWithAdditionalUnlockConditions(outputs: OutputsToClaim): Promise<string[]>
     getTransaction(transactionId: string): Promise<Transaction>
-    incomingTransactions(): Promise<[string, [ITransactionPayload, IOutputResponse[]]][]>
     increaseNativeTokenSupply(
         tokenId: string,
         mintAmount: HexEncodedAmount,
         increaseNativeTokenSupplyOptions?: IncreaseNativeTokenSupplyOptions,
         transactionOptions?: TransactionOptions
     ): Promise<MintTokenTransaction>
+    listAddresses(): Promise<Address[]>
+    listAddressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
+    listIncomingTransactions(): Promise<[string, ITransactionPayload, IOutputResponse][]>
+    listOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
+    listPendingTransactions(): Promise<Transaction[]>
+    listTransactions(): Promise<Transaction[]>
+    listUnspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     minimumRequiredStorageDeposit(outputs: OutputTypes[]): Promise<string>
     mintNativeToken(
         nativeTokenOptions: NativeTokenOptions,
         transactionOptions?: TransactionOptions
     ): Promise<MintTokenTransaction>
     mintNfts(nftsOptions: NftOptions[], transactionOptions?: TransactionOptions): Promise<Transaction>
-    outputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     prepareOutput(options: OutputOptions, transactionOptions?: TransactionOptions): Promise<OutputTypes>
-    pendingTransactions(): Promise<Transaction[]>
     prepareSendAmount(
         addressWithAmount: AddressWithAmount[],
         options?: TransactionOptions
@@ -108,6 +112,4 @@ export interface IAccount {
     signTransactionEssence(preparedTransactionData: PreparedTransactionData): Promise<SignedTransactionEssence>
     submitAndStoreTransaction(signedTransactionData: SignedTransactionEssence): Promise<Transaction>
     sync(options?: AccountSyncOptions): Promise<AccountBalance>
-    transactions(): Promise<Transaction[]>
-    unspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
 }
