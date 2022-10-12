@@ -8,19 +8,17 @@
     import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import { openPopup } from '@lib/popup'
 
-    function onContinueClick(id: string) {
+    function onContinueClick(id: string): void {
         loadPersistedProfileIntoActiveProfile(id)
         $loginRouter.next()
     }
 
-    function onAddProfileClick() {
+    async function onAddProfileClick(): Promise<void> {
         const isDeveloperProfile = shouldBeDeveloperProfile()
-        initialiseOnboardingFlow({
+        await initialiseOnboardingFlow({
             isDeveloperProfile,
             networkProtocol: NetworkProtocol.Shimmer,
             ...(!isDeveloperProfile && { networkType: NetworkType.Mainnet }),
-            resetProfileManagers: true,
-            resetRouters: true,
         })
         $loginRouter.next({ shouldAddProfile: true })
     }

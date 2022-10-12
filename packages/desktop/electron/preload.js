@@ -54,7 +54,7 @@ try {
             levelFilter: 'debug',
             targetExclusions: ['h2', 'hyper', 'rustls', 'message_handler'],
         }
-        // WalletApi.initLogger(loggerOptions)
+        WalletApi.initLogger(loggerOptions)
     }
 } catch (error) {
     console.error('[Preload Context] Error:', error)
