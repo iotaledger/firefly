@@ -6,6 +6,7 @@ import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
 import { IAccountAssets } from '../interfaces/account-assets.interface'
 import { getAssetFromPersistedAssets } from '../utils'
+import { sortAssets } from '../utils/sortAssets'
 
 export function getAccountAssetsForSelectedAccount(): IAccountAssets {
     const account = get(selectedAccount)
@@ -37,6 +38,6 @@ export function getAccountAssetsForSelectedAccount(): IAccountAssets {
 
     return {
         baseCoin,
-        nativeTokens,
+        nativeTokens: sortAssets(nativeTokens),
     }
 }

@@ -1,6 +1,7 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { ActivityType } from '@core/wallet/enums'
 import { allAccountActivities } from '../../stores'
+import { refreshAccountAssetsForActiveProfile } from '../refreshAccountAssetsForActiveProfile'
 
 export function setAsyncStatusOfAccountActivities(time: Date): void {
     const balancesToUpdate: number[] = []
@@ -14,7 +15,11 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
                 if (activity.data.type === ActivityType.Transaction) {
                     const oldAsyncStatus = activity.data.asyncStatus
                     activity.data.asyncStatus = activity.getAsyncStatus(time)
-                    if (!balancesToUpdate.includes(accountIndex) && oldAsyncStatus !== activity.data.asyncStatus) {
+                    if (
+                        !balancesToUpdate.includes(accountIndex) &&
+                        oldAsyncStatus !== null &&
+                        oldAsyncStatus !== activity.data.asyncStatus
+                    ) {
                         balancesToUpdate.push(accountIndex)
                     }
                 }
@@ -24,5 +29,8 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
     })
     for (const accountIndex of balancesToUpdate) {
         syncBalance(accountIndex)
+    }
+    if (balancesToUpdate.length) {
+        void refreshAccountAssetsForActiveProfile()
     }
 }

@@ -48,10 +48,6 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve(new AccountMock())
     }
 
-    deleteAccountsAndDatabase(): Promise<void> {
-        return Promise.resolve()
-    }
-
     destroy(): Promise<void> {
         return Promise.resolve()
     }
@@ -65,6 +61,10 @@ export class ProfileManagerMock implements IProfileManager {
     }
 
     getAccount(accountIndex: AccountId): Promise<IAccount> {
+        throw new Error('Method not implemented.')
+    }
+
+    getAccountIndexes(): Promise<number[]> {
         throw new Error('Method not implemented.')
     }
 
