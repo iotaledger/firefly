@@ -1,6 +1,6 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { activeAccounts } from '@core/profile/stores'
-import { getOrRequestAssetFromPersistedAssets } from '@core/wallet'
+import { addPersistedAsset, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
 import { Activity } from '@core/wallet/classes/activity.class'
 import {
     addActivityToAccountActivitiesInAllAccountActivities,
@@ -42,7 +42,8 @@ export async function handleNewOutputEventInternal(
             account
         )
         const activity = new Activity(processedOutput, account)
-        await getOrRequestAssetFromPersistedAssets(activity.data?.assetId)
+        const asset = await getOrRequestAssetFromPersistedAssets(activity.data?.assetId)
+        addPersistedAsset(asset)
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
     }
 }
