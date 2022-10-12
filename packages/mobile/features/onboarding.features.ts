@@ -151,13 +151,13 @@ const onboardingFeatures = {
                 },
             },
             restoreProfile: {
-                enabled: false,
+                enabled: true,
                 migrateSeed: {
                     enabled: false,
                     hidden: true,
                 },
                 recoveryPhrase: {
-                    enabled: false,
+                    enabled: true,
                 },
                 strongholdBackup: {
                     enabled: false,

@@ -1,17 +1,9 @@
 <script lang="typescript">
-    import { setContext } from 'svelte'
+    import { onMount } from 'svelte'
     import { ImportMnemonicPhraseView, SuccessView } from './views'
     import { localize } from '@core/i18n'
-    import {
-        profileRecoveryRoute,
-        profileRecoveryRouter,
-        ProfileRecoveryRouter,
-        ProfileRecoveryRoute,
-    } from '@core/router'
+    import { profileRecoveryRoute, profileRecoveryRouter, ProfileRecoveryRoute } from '@core/router'
     import { showAppNotification } from '@lib/notifications'
-
-    setContext<ProfileRecoveryRouter>('importRouter', $profileRecoveryRouter)
-    $profileRecoveryRouter.resetRoute()
 
     let busy = false
     let error = ''
@@ -36,8 +28,12 @@
     }
 
     function previous(): void {
-        $profileRecoveryRouter.previous()
+        $profileRecoveryRouter?.previous()
     }
+
+    onMount(() => {
+        $profileRecoveryRouter?.resetRoute()
+    })
 </script>
 
 {#if $profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase}
