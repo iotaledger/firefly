@@ -47,15 +47,21 @@ export class Activity implements IActivity {
         this.time = time
         this.inputs = transactionInputs
 
-        if (type === ActivityType.Transaction) {
-            this.data = getTransactionActivityData(processedTransaction, account)
-        } else if (type === ActivityType.Nft) {
-            this.data = getNftActivityData(processedTransaction, account)
-        } else if (type === ActivityType.Foundry) {
-            this.data = getFoundryActivityData(processedTransaction)
-        } else if (type === ActivityType.Alias) {
-            this.data = getAliasActivityData(processedTransaction)
+        switch (type) {
+            case ActivityType.Transaction:
+                this.data = getTransactionActivityData(processedTransaction, account)
+                break
+            case ActivityType.Foundry:
+                this.data = getFoundryActivityData(processedTransaction)
+                break
+            case ActivityType.Alias:
+                this.data = getAliasActivityData(processedTransaction)
+                break
+            case ActivityType.Nft:
+                this.data = getNftActivityData(processedTransaction, account)
+                break
         }
+
         this.id = this.data.outputId || transactionId
     }
 

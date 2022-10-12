@@ -2,12 +2,14 @@
     import { localize } from '@core/i18n'
     import { ActivityDirection, InclusionState, INftActivityData, Subject } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
-    import { Text, FontWeight } from 'shared/components'
+    import { Text, FontWeight, Icon } from 'shared/components'
     import { networkHrp } from '@core/network'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let inclusionState: InclusionState
     export let data: INftActivityData
 
+    $: isIncoming = data.direction === ActivityDirection.Incoming
     $: title = getTitle(data, inclusionState)
     $: subjectLocale = getSubjectLocale(data.subject)
 
@@ -27,19 +29,25 @@
     }
 
     function getSubjectLocale(subject: Subject): string {
+        let description
         if (subject?.type === 'account') {
-            return truncateString(subject?.account?.name, 13, 0)
+            description = truncateString(subject?.account?.name, 13, 0)
         }
         if (subject?.type === 'address') {
-            return truncateString(subject?.address, $networkHrp.length, 6)
+            description = truncateString(subject?.address, $networkHrp.length, 6)
         }
-        return localize('general.unknownAddress')
+        return description ? description : localize('general.unknownAddress')
     }
 </script>
 
-<div class="relative flex w-6 h-6">
-    <div class="rounded-full flex justify-center items-center transition-none p-1 w-6 h-6 bg-blue-500">
-        <p style="font-size: 12px;" class="transition-none font-600 text-blue-500 text-center">NFT</p>
+<div class="relative flex w-8 h-8">
+    <div class="rounded-full flex justify-center items-center transition-none p-1 w-8 h-8 bg-gray-500">
+        <Icon
+            icon={IconEnum.Collectibles}
+            width="83.33333%"
+            height="83.33333%"
+            classes="text-white dark:text-gray-800 text-center"
+        />
     </div>
 </div>
 
@@ -56,7 +64,9 @@
 
     <div class="flex flex-row items-start">
         <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
-            {subjectLocale}
+            {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
+                values: { account: subjectLocale },
+            })}
         </Text>
     </div>
 </div>

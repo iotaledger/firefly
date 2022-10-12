@@ -28,7 +28,7 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
-    $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
+    $: asset = activity.data.type !== ActivityType.Nft ? getAssetFromPersistedAssets(activity.data.assetId) : undefined
     $: isTimelocked =
         activity.data.type === ActivityType.Transaction && activity.data.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
@@ -172,7 +172,7 @@
         <TransactionDetails {...details} />
     {:else if activity?.data.type === ActivityType.Foundry}
         <FoundryDetails {...details} />
-    {:else}
+    {:else if activity?.data.type === ActivityType.Alias}
         <AliasDetails {...details} />
     {/if}
     {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
