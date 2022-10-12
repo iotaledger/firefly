@@ -1,6 +1,6 @@
-import { selectedAccount, selectedAccountId } from '../stores'
+import { selectedAccount, selectedAccountIndex } from '../stores'
 
 export function resetSelectedAccount(): void {
-    selectedAccountId.set(null)
+    selectedAccountIndex.set(null)
     selectedAccount.set(null)
 }

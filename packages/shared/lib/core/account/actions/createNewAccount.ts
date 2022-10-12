@@ -19,7 +19,7 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
     const [newAccount, metadata] = await buildAccountStateAndMetadata(account, name, color)
     addAccountToActiveAccounts(newAccount)
     addAccountMetadataToActiveProfile(metadata)
-    addEmptyAccountActivitiesToAllAccountActivities(`${createdAccount.meta.index}`)
+    addEmptyAccountActivitiesToAllAccountActivities(newAccount.index)
 
     return newAccount
 }

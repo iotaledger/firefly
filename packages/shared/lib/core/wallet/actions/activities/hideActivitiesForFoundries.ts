@@ -4,7 +4,7 @@ import { ActivityType } from '../../enums'
 import { allAccountActivities } from '../../stores'
 
 export function hideActivitiesForFoundries(account: IAccountState): void {
-    const accountActivities = get(allAccountActivities)[Number(account.id)]
+    const accountActivities = get(allAccountActivities)[account.index]
 
     const activities = accountActivities.filter((activity) => activity.type === ActivityType.Foundry)
 
