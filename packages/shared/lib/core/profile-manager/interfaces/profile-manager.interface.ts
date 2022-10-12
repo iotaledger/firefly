@@ -1,18 +1,16 @@
 import {
-    AccountId,
     AccountSyncOptions,
     ClientOptions,
-    CreateAccountPayload,
     EventType,
     LedgerNanoStatus,
     NodeInfoWrapper,
     WalletEvent,
 } from '@iota/wallet'
 
-import { IAccount } from '@core/account'
 import { IAuth } from '@core/network'
 
 import { WalletApiEventHandler } from '../types'
+import { IAccount } from '@core/account'
 
 export interface IProfileManager {
     id: string
@@ -20,12 +18,11 @@ export interface IProfileManager {
     bech32ToHex(bech32Address: string): Promise<string>
     changeStrongholdPassword(currentPassword: string, newPassword: string): Promise<void>
     clearStrongholdPassword(): Promise<void>
-    createAccount(payload: CreateAccountPayload): Promise<IAccount>
-    deleteAccountsAndDatabase(): Promise<void>
     destroy(): void
     emitTestEvent(event: WalletEvent): Promise<void>
     generateMnemonic(): Promise<string>
-    getAccount(accountIndex: AccountId): Promise<IAccount>
+    getAccountIndexes(): Promise<number[]>
+    getAccount(accountIndex: number): Promise<IAccount>
     getAccounts(): Promise<IAccount[]>
     getNodeInfo(url?: string, auth?: IAuth): Promise<NodeInfoWrapper>
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
@@ -33,12 +30,6 @@ export interface IProfileManager {
     isStrongholdPasswordAvailable(): Promise<boolean>
     listen(eventTypes: EventType[], callback: WalletApiEventHandler): void
     clearListeners(eventTypes: EventType[]): void
-    recoverAccounts(
-        accountStartIndex: number,
-        accountGapLimit: number,
-        addressGapLimit: number,
-        syncOptions?: AccountSyncOptions
-    ): Promise<IAccount[]>
     removeLatestAccount(): Promise<void>
     restoreBackup(source: string, password: string): Promise<void>
     setClientOptions(options: ClientOptions): Promise<void>

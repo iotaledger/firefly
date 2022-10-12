@@ -1,6 +1,6 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { activeAccounts } from '@core/profile/stores'
-import { ActivityType, tryGetAndStoreAssetFromPersistedAssets } from '@core/wallet'
+import { ActivityType, addPersistedAsset, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
 import { Activity } from '@core/wallet/classes/activity.class'
 import {
     addActivityToAccountActivitiesInAllAccountActivities,
@@ -34,7 +34,7 @@ export async function handleNewOutputEventInternal(
         !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === output.outputId)
 
     if ((account.depositAddress === address && !output?.remainder) || isNewAliasOutput) {
-        syncBalance(account.index)
+        await syncBalance(account.index)
 
         const processedOutput = preprocessGroupedOutputs(
             [output],
@@ -43,7 +43,8 @@ export async function handleNewOutputEventInternal(
         )
         const activity = new Activity(processedOutput, account)
         if (activity.data.type !== ActivityType.Nft) {
-            await tryGetAndStoreAssetFromPersistedAssets(activity.data.assetId)
+            await getOrRequestAssetFromPersistedAssets(activity.data.assetId)
+            addPersistedAsset(asset)
         }
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
     }

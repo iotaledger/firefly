@@ -4,7 +4,8 @@ import { activeProfileId } from '@core/profile'
 import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
 import { derived, get, Readable, writable, Writable } from 'svelte/store'
 import { AssetFilter, IAsset } from '../interfaces'
-import { BooleanFilterOption, NotVerifiedStatus, VerifiedStatus } from '../enums'
+import { AssetOrderOption, BooleanFilterOption, NotVerifiedStatus, OrderOption, VerifiedStatus } from '../enums'
+import { selectedAccount } from '@core/account/stores/selected-account.store'
 
 export const assetFilter: Writable<AssetFilter> = writable({
     verificationStatus: {
@@ -23,10 +24,18 @@ export const assetFilter: Writable<AssetFilter> = writable({
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
     },
+    order: {
+        active: false,
+        type: 'order',
+        localeKey: 'filters.assetOrder',
+        selected: AssetOrderOption.Name,
+        ascDesc: OrderOption.Asc,
+        choices: [AssetOrderOption.Name, AssetOrderOption.Amount],
+    },
 })
 
 export const selectedAccountAssets: Readable<IAccountAssets> = derived(
-    [activeProfileId, persistedAssets],
+    [activeProfileId, selectedAccount, persistedAssets, assetFilter],
     ([$activeProfileId]) => {
         if ($activeProfileId) {
             return getAccountAssetsForSelectedAccount()

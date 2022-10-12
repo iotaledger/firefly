@@ -3,7 +3,7 @@ import { preprocessTransaction } from '../../utils'
 import { IProcessedTransaction } from '../../interfaces/processed-transaction.interface'
 
 export async function preprocessTransactionsForAccount(account: IAccountState): Promise<IProcessedTransaction[]> {
-    const transactions = await account.listTransactions()
+    const transactions = await account.transactions()
 
     const processedTransactions: IProcessedTransaction[] = transactions.map((transaction) =>
         preprocessTransaction(transaction)
