@@ -1,9 +1,10 @@
 import { AccountMock } from './account.mock'
 import { ProfileManagerMock } from './profile-manager.mock'
 
-import { AccountId, AccountManagerOptions } from '@iota/wallet'
+import { AccountManagerOptions, CreateAccountPayload } from '@iota/wallet'
 
-import { IApi } from '@core/profile-manager'
+import { IApi, RecoverAccountsPayload } from '@core/profile-manager'
+import { IAccount } from '@core/account'
 
 const profileManagers = {}
 
@@ -15,14 +16,29 @@ const api: IApi = {
 
         return manager
     },
+    createAccount(_: string, __: CreateAccountPayload): Promise<IAccount> {
+        return new Promise((resolve) => {
+            resolve(new AccountMock())
+        })
+    },
     deleteAccountManager(id: string) {
         if (id && id in profileManagers) {
             delete profileManagers[id]
         }
     },
-    getAccount(_: AccountId): Promise<AccountMock> {
+    getAccount(_: string, __: number): Promise<AccountMock> {
         return new Promise((resolve) => {
             resolve(new AccountMock())
+        })
+    },
+    getAccounts(_: string): Promise<AccountMock[]> {
+        return new Promise((resolve) => {
+            resolve([])
+        })
+    },
+    recoverAccounts(_: string, __: RecoverAccountsPayload): Promise<IAccount[]> {
+        return new Promise((resolve) => {
+            resolve([])
         })
     },
 }
