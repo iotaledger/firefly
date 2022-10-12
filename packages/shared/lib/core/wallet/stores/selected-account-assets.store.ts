@@ -1,7 +1,6 @@
 import { IAccountAssets } from '../interfaces/account-assets.interface'
 import { persistedAssets } from './persisted-assets.store'
 import { activeProfileId } from '@core/profile'
-import { selectedAccountId } from '@core/account/stores/selected-account-id.store'
 import { getAccountAssetsForSelectedAccount } from '../actions/getAccountAssetsForSelectedAccount'
 import { derived, get, Readable, writable, Writable } from 'svelte/store'
 import { AssetFilter, IAsset } from '../interfaces'
@@ -35,9 +34,9 @@ export const assetFilter: Writable<AssetFilter> = writable({
 })
 
 export const selectedAccountAssets: Readable<IAccountAssets> = derived(
-    [activeProfileId, selectedAccountId, persistedAssets, assetFilter],
-    ([$activeProfileId, $selectedAccountId]) => {
-        if ($activeProfileId && $selectedAccountId) {
+    [activeProfileId, persistedAssets, assetFilter],
+    ([$activeProfileId]) => {
+        if ($activeProfileId) {
             return getAccountAssetsForSelectedAccount()
         } else {
             return { baseCoin: undefined, nativeTokens: [] }

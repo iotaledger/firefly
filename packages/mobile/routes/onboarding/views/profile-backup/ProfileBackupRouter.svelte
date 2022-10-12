@@ -1,15 +1,10 @@
 <script lang="typescript">
-    import { Transition } from 'shared/components'
     import { VerifyMnemonicView, ViewMnemonicView } from './views'
     import { profileBackupRoute, ProfileBackupRoute } from '@core/router'
 </script>
 
 {#if $profileBackupRoute === ProfileBackupRoute.ViewMnemonic}
-    <Transition>
-        <ViewMnemonicView />
-    </Transition>
+    <ViewMnemonicView />
 {:else if $profileBackupRoute === ProfileBackupRoute.VerifyMnemonic}
-    <Transition>
-        <VerifyMnemonicView />
-    </Transition>
+    <VerifyMnemonicView />
 {/if}

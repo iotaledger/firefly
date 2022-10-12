@@ -5,7 +5,7 @@ import { allAccountActivities, addPersistedAsset } from '../../stores'
 import { IPersistedAsset } from '@core/wallet/interfaces'
 
 export async function loadAssetsForAllActivities(account: IAccountState): Promise<void> {
-    const accountActivities = get(allAccountActivities)[Number(account.id)]
+    const accountActivities = get(allAccountActivities)[account.index]
 
     try {
         const persistedAssets: IPersistedAsset[] = []

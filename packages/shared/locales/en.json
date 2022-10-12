@@ -545,6 +545,22 @@
                 "title": "Color picker",
                 "hexCode": "Color hex code"
             }
+        },
+        "collectibles": {
+            "details": {
+                "collection": "Collection",
+                "nftId": "NFT ID",
+                "nftType": "NFT Type",
+                "storageDeposit": "Storage deposit",
+                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
+                "attributes": "Attributes",
+                "menu": {
+                    "download": "Download",
+                    "setAvatar": "Set NFT as profile avatar",
+                    "view": "View in IPFS",
+                    "burn": "Burn NFT"
+                }
+            }
         }
     },
     "popups": {
@@ -1364,7 +1380,7 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {

@@ -24,10 +24,12 @@
 
     function scrollToTop() {
         const listElement = document.querySelector('.asset-list')?.querySelector('svelte-virtual-list-viewport')
-        if (listElement) listElement.scroll(0, 0)
+        if (listElement) {
+            listElement.scroll(0, 0)
+        }
     }
 
-    function handleAssetTileClick(asset): void {
+    function handleAssetTileClick(asset: IAsset): void {
         openPopup({
             type: 'tokenInformation',
             overflow: true,

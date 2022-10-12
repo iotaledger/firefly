@@ -17,14 +17,14 @@
     export let disabled = false
     export let isFocused = false
     export let asset: IAsset = $visibleSelectedAccountAssets?.baseCoin
-    export let amount: string = undefined
+    export let rawAmount: string = undefined
     export let unit: string = undefined
 
+    let amount: string = undefined
     let amountInputElement: HTMLInputElement
     let error: string
 
     $: isFocused && (error = '')
-    $: rawAmount = convertToRawAmount(amount, unit, asset?.metadata)
 
     let allowedDecimals = 0
     $: if (!asset?.metadata?.useMetricPrefix) {
@@ -52,6 +52,7 @@
     export function validate(allowZeroOrNull = false): Promise<void> {
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
+        const bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
         // Zero value transactions can still contain metadata/tags
         if (allowZeroOrNull && isAmountZeroOrNull) {
             return
@@ -63,17 +64,18 @@
             Number.parseInt(amount, 10).toString() !== amount
         ) {
             error = localize('error.send.amountNoFloat')
-        } else if (rawAmount.gt(Big(asset?.balance?.available))) {
+        } else if (bigAmount.gt(Big(asset?.balance?.available))) {
             error = localize('error.send.amountTooHigh')
-        } else if (rawAmount.lte(Big(0))) {
+        } else if (bigAmount.lte(Big(0))) {
             error = localize('error.send.amountZero')
-        } else if (!rawAmount.mod(1).eq(Big(0))) {
+        } else if (!bigAmount.mod(1).eq(Big(0))) {
             error = localize('error.send.amountSmallerThanSubunit')
         }
 
         if (error) {
             return Promise.reject(error)
         }
+        rawAmount = bigAmount.toString()
     }
 </script>
 

@@ -3,12 +3,12 @@ import { selectedAccount, updateSelectedAccount } from '../stores'
 import { updateActiveAccount } from '@core/profile'
 import { get } from 'svelte/store'
 
-export async function syncBalance(accountId: string): Promise<void> {
-    const balances = await getBalance(accountId)
-    if (get(selectedAccount)?.id === accountId) {
+export async function syncBalance(accountIndex: number): Promise<void> {
+    const balances = await getBalance(accountIndex)
+    if (get(selectedAccount)?.index === accountIndex) {
         updateSelectedAccount({ balances })
     } else {
-        updateActiveAccount(accountId, { balances })
+        updateActiveAccount(accountIndex, { balances })
     }
     return
 }
