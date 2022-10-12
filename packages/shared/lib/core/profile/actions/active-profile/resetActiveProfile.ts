@@ -3,8 +3,8 @@ import { Platform } from '@lib/platform'
 import { get } from 'svelte/store'
 
 export function resetActiveProfile(): void {
-    const { lastUsedAccountId } = get(activeProfile)
-    activeProfile.set(<IProfile>{ ...INITIAL_ACTIVE_PROFILE, lastUsedAccountId })
+    const { lastUsedAccountIndex } = get(activeProfile)
+    activeProfile.set(<IProfile>{ ...INITIAL_ACTIVE_PROFILE, lastUsedAccountIndex })
     activeProfileId.set(null)
     Platform.updateActiveProfile(null)
 }

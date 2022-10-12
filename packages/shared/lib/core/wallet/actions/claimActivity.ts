@@ -11,10 +11,10 @@ export async function claimActivity(activityId: string, data: ITransactionActivi
     const account = get(selectedAccount)
     const _activeProfile = get(activeProfile)
     try {
-        updateActivityDataByActivityId(account.id, activityId, { type: ActivityType.Transaction, isClaiming: true })
+        updateActivityDataByActivityId(account.index, activityId, { type: ActivityType.Transaction, isClaiming: true })
         const result = await account.claimOutputs([data.outputId])
         const transactionId = result.transactionId
-        updateActivityDataByActivityId(account.id, activityId, {
+        updateActivityDataByActivityId(account.index, activityId, {
             type: ActivityType.Transaction,
             claimingTransactionId: transactionId,
         })
@@ -24,6 +24,6 @@ export async function claimActivity(activityId: string, data: ITransactionActivi
         } else {
             handleError(err)
         }
-        updateActivityDataByActivityId(account.id, activityId, { type: ActivityType.Transaction, isClaiming: false })
+        updateActivityDataByActivityId(account.index, activityId, { type: ActivityType.Transaction, isClaiming: false })
     }
 }

@@ -9,23 +9,27 @@
     export let assets: IAccountAssets
 
     let assetList: IAsset[]
-    $: $assetFilter, assets, updateFilteredAssetList(), scrollToTop()
+    $: $assetFilter, assets, (assetList = getFilteredAssetList()), scrollToTop()
     $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
+
+    function getFilteredAssetList() {
+        const list = []
+
+        if (assets?.baseCoin) {
+            list.push(assets.baseCoin)
+        }
+        list.push(...assets?.nativeTokens)
+        return list.filter((_nativeToken) => isVisibleAsset(_nativeToken))
+    }
 
     function scrollToTop() {
         const listElement = document.querySelector('.asset-list')?.querySelector('svelte-virtual-list-viewport')
-        if (listElement) listElement.scroll(0, 0)
-    }
-    function updateFilteredAssetList() {
-        const list = []
-        if (assets?.baseCoin && isVisibleAsset(assets?.baseCoin)) {
-            list.push(assets.baseCoin)
+        if (listElement) {
+            listElement.scroll(0, 0)
         }
-        list.push(...assets?.nativeTokens.filter((_nativeToken) => isVisibleAsset(_nativeToken)))
-        assetList = list
     }
 
-    function handleAssetTileClick(asset): void {
+    function handleAssetTileClick(asset: IAsset): void {
         openPopup({
             type: 'tokenInformation',
             overflow: true,

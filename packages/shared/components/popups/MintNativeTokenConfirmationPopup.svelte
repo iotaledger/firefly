@@ -66,7 +66,7 @@
         }
     }
 
-    function handleBack() {
+    function handleBack(): void {
         closePopup()
         openPopup({
             type: 'mintNativeTokenForm',

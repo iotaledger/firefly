@@ -15,7 +15,7 @@
 
     async function scrollToSelectedAccount(): Promise<void> {
         await tick()
-        const el = document.getElementById(`account-${$selectedAccount.id}`)
+        const el = document.getElementById(`account-${$selectedAccount.index}`)
         el?.scrollIntoView({ behavior: 'auto' })
     }
 
@@ -35,7 +35,7 @@
     <div class="p-4">
         <div class="accounts flex flex-col space-y-1 max-h-96 scrollable-y">
             {#each $visibleActiveAccounts as account}
-                <AccountSwitcherMenuItem id="account-{account.id}" {account} onClick={() => modal?.close()} />
+                <AccountSwitcherMenuItem id="account-{account.index}" {account} onClick={() => modal?.close()} />
             {/each}
         </div>
     </div>

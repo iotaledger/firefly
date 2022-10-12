@@ -6,10 +6,10 @@ import { localize } from '@core/i18n'
 export function updateClaimingTransactionInclusion(
     transactionId: string,
     inclusionState: InclusionState,
-    accountId: string
+    accountIndex: number
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[Number(accountId)]?.find(
+        const activity = state[accountIndex]?.find(
             (_activity) =>
                 _activity.data.type === ActivityType.Transaction &&
                 _activity.data.claimingTransactionId === transactionId
@@ -24,7 +24,7 @@ export function updateClaimingTransactionInclusion(
                     claimedDate: new Date(),
                     asyncStatus: ActivityAsyncStatus.Claimed,
                 })
-                addClaimedActivity(accountId, activity.transactionId, {
+                addClaimedActivity(accountIndex, activity.transactionId, {
                     id: activity.id,
                     claimingTransactionId: transactionId,
                     claimedTimestamp: new Date().getTime(),

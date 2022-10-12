@@ -6,7 +6,7 @@
     import { closePopup, openPopup } from '@lib/popup'
     import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
 
-    let { asset, amount, unit, recipient, metadata, tag } = get(newTransactionDetails)
+    let { asset, rawAmount, unit, recipient, metadata, tag } = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
@@ -15,7 +15,7 @@
     async function onSend(): Promise<void> {
         const valid = await validate()
         if (valid) {
-            updateNewTransactionDetails({ asset, amount, unit, recipient, metadata, tag })
+            updateNewTransactionDetails({ asset, rawAmount, unit, recipient, metadata, tag })
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
@@ -57,7 +57,7 @@
         {localize('popups.sendForm.title')}
     </Text>
     <send-form-inputs class="flex flex-col space-y-4">
-        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:amount bind:unit />
+        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         <RecipientInput bind:this={recipientInput} bind:recipient />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
