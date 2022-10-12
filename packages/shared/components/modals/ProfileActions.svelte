@@ -39,7 +39,7 @@
     }
 
     const handleLogoutClick = (): void => {
-        void logout(true)
+        void logout()
     }
 
     const handleStrongholdToggleClick = (): void => {
