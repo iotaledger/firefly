@@ -1288,6 +1288,15 @@
             "yes": "Yes",
             "no": "No"
         },
+        "ascDesc": {
+            "Asc": "Ascending",
+            "Desc": "Descending"
+        },
+        "assetOrder": {
+            "label": "Order",
+            "Name": "Name",
+            "Amount": "Amount"
+        },
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
