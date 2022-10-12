@@ -6,7 +6,7 @@ import { profileManager } from '@core/profile-manager'
 
 import {
     getShimmerClaimingProfileManagerStorageDirectory,
-    restoreBackupForShimmerClaimingProfileManagerHelper,
+    restoreBackupByCopyingFile,
     validateStrongholdCoinType,
 } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
@@ -16,7 +16,7 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
         const { id, importFilePath, clientOptions } = get(onboardingProfile)
 
         const tempProfileDirectory = await getShimmerClaimingProfileManagerStorageDirectory()
-        await restoreBackupForShimmerClaimingProfileManagerHelper(
+        await restoreBackupByCopyingFile(
             importFilePath,
             tempProfileDirectory,
             strongholdPassword,
@@ -31,7 +31,7 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
         await validateStrongholdCoinType(shimmerClaimingProfileManager, NetworkProtocol.IOTA)
 
         const profileDirectory = await getStorageDirectoryOfProfile(id)
-        await restoreBackupForShimmerClaimingProfileManagerHelper(
+        await restoreBackupByCopyingFile(
             importFilePath,
             profileDirectory,
             strongholdPassword,
