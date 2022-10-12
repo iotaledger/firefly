@@ -12,13 +12,11 @@ export async function deleteOnboardingProfile(): Promise<void> {
     const profile = get(onboardingProfile)
     if (profile) {
         try {
-            // TODO: delete storage with new api when implemented
-            // await asyncDeleteStorage()
+            destroyProfileManager()
             await removeProfileFolder(profile.id)
         } catch (err) {
             console.error(err)
         }
-        destroyProfileManager()
     }
     onboardingProfile.set(null)
 }

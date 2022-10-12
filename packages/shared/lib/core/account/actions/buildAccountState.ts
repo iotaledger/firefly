@@ -15,8 +15,11 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         potentiallyLockedOutputs: {},
         aliases: [],
     }
+    let depositAddress: string
     try {
         balances = await account.getBalance()
+        const addresses = await account.addresses()
+        depositAddress = addresses.find((address) => address.internal === false && address.keyIndex === 0).address
     } catch (error) {
         console.error(error)
     }
@@ -24,7 +27,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     return {
         ...account,
         ...metadata,
-        depositAddress: account.meta.publicAddresses[0].address,
+        depositAddress,
         balances,
         isTransferring: false,
         // TODO: refactor onto the profile
