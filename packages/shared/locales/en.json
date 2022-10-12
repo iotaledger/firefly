@@ -906,7 +906,7 @@
         },
         "noAlias": {
             "title": "Unable to mint",
-            "description": "You must own an alias output to mint native tokens. To continue, please first create an alias"
+            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
         "faucetRequest": {
             "title": "Faucet request",

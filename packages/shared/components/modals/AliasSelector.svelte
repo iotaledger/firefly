@@ -1,20 +1,18 @@
 <script lang="typescript">
-    import { ActivityType, IAliasActivityData, selectedAccountActivities } from '@core/wallet'
+    import { selectedAccount } from '@core/account'
+    import { ADDRESS_TYPE_ALIAS, convertHexAddressToBech32 } from '@core/wallet'
     import { Modal, Text, TextType } from 'shared/components'
     import { truncateString } from 'shared/lib/helpers'
-    import { get } from 'svelte/store'
     import { fade } from 'svelte/transition'
 
     export let modal: Modal = undefined
     export let selected: string = undefined
     export let onClose: () => void
 
-    $: aliasIds = get(selectedAccountActivities)
-        .filter((activity) => activity.type === ActivityType.Alias)
-        .map((activity) => {
-            const aliasId = (activity.data as IAliasActivityData).aliasId
-            return { value: aliasId, label: truncateString(aliasId, 9, 9) }
-        })
+    $: aliasIds = $selectedAccount.balances.aliases.map((hexAliasId) => {
+        const aliasId = convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexAliasId)
+        return { value: aliasId, label: truncateString(aliasId, 9, 9) }
+    })
 
     function onClick(_selected: string): void {
         modal?.close()

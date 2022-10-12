@@ -1,14 +1,13 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { ActivityType, selectedAccountActivities } from '@core/wallet'
     import { closePopup, openPopup } from '@lib/popup'
     import { OnboardingButton } from 'shared/components'
-    import { get } from 'svelte/store'
+    import { selectedAccount } from '@core/account'
 
-    $: aliases = get(selectedAccountActivities).filter((activity) => activity.type === ActivityType.Alias)
+    $: hasAliases = $selectedAccount.balances.aliases.length > 0
 
     function handleMintNativeToken(): void {
-        if (aliases.length > 0) {
+        if (hasAliases) {
             openPopup({
                 type: 'mintNativeTokenForm',
             })
