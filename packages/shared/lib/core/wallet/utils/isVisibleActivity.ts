@@ -69,7 +69,7 @@ function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityF
 }
 
 function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.asset.active && filter.asset.selected) {
+    if (filter.asset.active && filter.asset.selected && activity.data.type !== ActivityType.Nft) {
         if (filter.asset.selected && activity.data.assetId !== filter.asset.selected) {
             return false
         }
@@ -78,7 +78,7 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 }
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.amount.active && activity.data.type !== ActivityType.Alias) {
+    if (filter.amount.active && activity.data.type !== ActivityType.Alias && activity.data.type !== ActivityType.Nft) {
         const asset = getAssetFromPersistedAssets(activity.data.assetId)
         const activityAmount = Big(activity.data.rawAmount)
 

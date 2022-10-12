@@ -1,6 +1,6 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { activeAccounts } from '@core/profile/stores'
-import { tryGetAndStoreAssetFromPersistedAssets } from '@core/wallet'
+import { ActivityType, tryGetAndStoreAssetFromPersistedAssets } from '@core/wallet'
 import { Activity } from '@core/wallet/classes/activity.class'
 import {
     addActivityToAccountActivitiesInAllAccountActivities,
@@ -42,7 +42,9 @@ export async function handleNewOutputEventInternal(
             account
         )
         const activity = new Activity(processedOutput, account)
-        await tryGetAndStoreAssetFromPersistedAssets(activity.data?.assetId)
+        if (activity.data.type !== ActivityType.Nft) {
+            await tryGetAndStoreAssetFromPersistedAssets(activity.data.assetId)
+        }
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
     }
 }

@@ -1,6 +1,7 @@
 export * from './getDirectionFromTransaction'
 export * from './getFoundryOutputFromTransaction'
 export * from './getMainTransactionOutputFromTransaction'
+export * from './getNftOutputFromTransaction'
 export * from './getSenderFromTransaction'
 export * from './getSenderFromInputs'
 export * from './receiverAddressesFromTransactionPayload'
