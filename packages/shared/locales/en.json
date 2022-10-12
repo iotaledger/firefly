@@ -1289,8 +1289,8 @@
             "no": "No"
         },
         "ascDesc": {
-            "Asc": "ascending",
-            "Desc": "descending"
+            "Asc": "Ascending",
+            "Desc": "Descending"
         },
         "assetOrder": {
             "label": "Order",
