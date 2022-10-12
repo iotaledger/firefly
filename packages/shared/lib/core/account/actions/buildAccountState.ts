@@ -1,3 +1,4 @@
+import { getDepositAddress } from '@core/account/utils'
 import { AccountBalance } from '@iota/wallet'
 import { SignerType } from '../enums'
 import { IAccount, IAccountMetadata, IAccountState } from '../interfaces'
@@ -18,8 +19,7 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     let depositAddress: string
     try {
         balances = await account.getBalance()
-        const addresses = await account.addresses()
-        depositAddress = addresses.find((address) => address.internal === false && address.keyIndex === 0).address
+        depositAddress = await getDepositAddress(account)
     } catch (error) {
         console.error(error)
     }
