@@ -23,7 +23,7 @@ export const nonHiddenActiveAccounts: Readable<IAccountState[]> = derived([activ
         return []
     }
     const unsortedNonHiddenAccounts = $activeAccounts?.filter((account) => !account?.hidden)
-    return unsortedNonHiddenAccounts.sort((a, b) => a.getMetadata().index - b.getMetadata().index)
+    return unsortedNonHiddenAccounts.sort((a, b) => a.index - b.index)
 })
 
 export const visibleActiveAccounts: Readable<IAccountState[]> = derived(
@@ -36,6 +36,6 @@ export const visibleActiveAccounts: Readable<IAccountState[]> = derived(
             $activeProfile?.showHiddenAccounts ?? false
                 ? $activeAccounts
                 : $activeAccounts?.filter((account) => !account?.hidden)
-        return unsortedVisibleAccounts.sort((a, b) => a.getMetadata().index - b.getMetadata().index)
+        return unsortedVisibleAccounts.sort((a, b) => a.index - b.index)
     }
 )

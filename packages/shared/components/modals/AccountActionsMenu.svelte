@@ -10,7 +10,7 @@
     export let modal: Modal = undefined
 
     const showDeleteAccount =
-        $selectedAccount?.getMetadata()?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
+        $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
     const handleCustomiseAccountClick = () => {
         openPopup({ type: 'manageAccount' })
