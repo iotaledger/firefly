@@ -7,8 +7,9 @@ export function setNextSelectedAccount(): void {
     const otherAccounts = get(nonHiddenActiveAccounts)
     if (otherAccounts.length > 0) {
         if (account?.hidden) {
-            const nextSelectedAccountId = otherAccounts[account?.id]?.id ?? otherAccounts[otherAccounts?.length - 1]?.id
-            setSelectedAccount(nextSelectedAccountId)
+            const nextSelectedAccountIndex =
+                otherAccounts[account?.index]?.index ?? otherAccounts[otherAccounts?.length - 1]?.index
+            setSelectedAccount(nextSelectedAccountIndex)
         }
     } else {
         throw new Error('No accounts to select from')

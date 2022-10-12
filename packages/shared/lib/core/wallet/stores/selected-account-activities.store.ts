@@ -21,7 +21,7 @@ export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
     ([$selectedAccount, $allAccountActivities]) => {
         if (selectedAccount) {
-            return $allAccountActivities[$selectedAccount?.id] ?? []
+            return $allAccountActivities[$selectedAccount?.index] ?? []
         } else {
             return []
         }

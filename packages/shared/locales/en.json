@@ -545,6 +545,22 @@
                 "title": "Color picker",
                 "hexCode": "Color hex code"
             }
+        },
+        "collectibles": {
+            "details": {
+                "collection": "Collection",
+                "nftId": "NFT ID",
+                "nftType": "NFT Type",
+                "storageDeposit": "Storage deposit",
+                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
+                "attributes": "Attributes",
+                "menu": {
+                    "download": "Download",
+                    "setAvatar": "Set NFT as profile avatar",
+                    "view": "View in IPFS",
+                    "burn": "Burn NFT"
+                }
+            }
         }
     },
     "popups": {
@@ -1277,6 +1293,15 @@
             "yes": "Yes",
             "no": "No"
         },
+        "ascDesc": {
+            "Asc": "Ascending",
+            "Desc": "Descending"
+        },
+        "assetOrder": {
+            "label": "Order",
+            "Name": "Name",
+            "Amount": "Amount"
+        },
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
@@ -1360,7 +1385,7 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
@@ -1436,8 +1461,8 @@
             "invalid": "Invalid PIN code."
         },
         "account": {
+            "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
             "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "You must transfer your balance before deleting this wallet.",
             "duplicate": "A wallet with this name already exists.",
@@ -1488,7 +1513,6 @@
             "invalidCertificate": "Could not connect with invalid certificate.",
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
             "noSyncedNode": "No synced node is available.",
             "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Failed to get an answer from all nodes.",

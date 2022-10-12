@@ -3,9 +3,9 @@ import { IAccountState } from '@core/account'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
 import { get } from 'svelte/store'
-import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '../../enums'
+import { ActivityDirection, ActivityType } from '../../enums'
 import { IProcessedTransaction, ITransactionActivityData } from '../../interfaces'
-import { isActivityHiddenForAccountId } from '../../stores/hidden-activities.store'
+import { isActivityHiddenForAccountIndex } from '../../stores/hidden-activities.store'
 import {
     getAmountFromOutput,
     getExpirationDateFromOutput,
@@ -47,7 +47,7 @@ export function getTransactionActivityData(
     const direction = isIncoming || isSelfTransaction ? ActivityDirection.Incoming : ActivityDirection.Outgoing
 
     const isAsync = isOutputAsync(output)
-    const asyncStatus = isAsync ? ActivityAsyncStatus.Unclaimed : null
+    const asyncStatus = null // we need to initialize every activity with `null`. This will be updated later in `setAsyncStatusOfAccountActivities`
     const isClaimed = !!claimingData
     const isClaiming = false
     const claimingTransactionId = claimingData?.claimingTransactionId
@@ -57,7 +57,7 @@ export function getTransactionActivityData(
 
     const nativeToken = getNativeTokenFromOutput(output)
     const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
-    const isRejected = isActivityHiddenForAccountId(account.id, transactionId)
+    const isRejected = isActivityHiddenForAccountIndex(account.index, transactionId)
 
     const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
     const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit

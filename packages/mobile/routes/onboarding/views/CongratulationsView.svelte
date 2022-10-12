@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { OnboardingLayout } from '../../../components'
-    import { Button, Icon, Text } from 'shared/components'
+    import { Button, Icon, Text, TextType } from 'shared/components'
     import { onboardingRouter } from '@core/router'
     import { localize } from '@core/i18n'
     import { completeOnboardingProcess } from '@contexts/onboarding'
@@ -18,8 +18,10 @@
             <div class="bg-green-500 rounded-2xl absolute -top-6 w-12 h-12 flex items-center justify-center">
                 <Icon icon="success-check" classes="text-white" />
             </div>
-            <Text type="h2" classes="mb-5 text-center">{localize('views.onboarding.congratulations.title')}</Text>
-            <Text type="p" secondary classes="mb-2 text-center"
+            <Text type={TextType.h2} classes="mb-5 text-center"
+                >{localize('views.onboarding.congratulations.title')}</Text
+            >
+            <Text type={TextType.p} secondary classes="mb-2 text-center"
                 >{localize('views.onboarding.congratulations.body')}</Text
             >
         </div>

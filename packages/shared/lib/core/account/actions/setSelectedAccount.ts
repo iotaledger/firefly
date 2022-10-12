@@ -1,14 +1,14 @@
 import { activeAccounts, updateActiveProfile } from '@core/profile'
 import { get } from 'svelte/store'
-import { selectedAccount, selectedAccountId } from '../stores'
+import { selectedAccount, selectedAccountIndex } from '../stores'
 
-export function setSelectedAccount(id: string): void {
-    const account = get(activeAccounts)?.find((_account) => _account.id === id)
+export function setSelectedAccount(index: number): void {
+    const account = get(activeAccounts)?.find((_account) => _account.index === index)
     if (account) {
-        selectedAccountId.set(id)
+        selectedAccountIndex.set(index)
         selectedAccount.set(account)
-        updateActiveProfile({ lastUsedAccountId: id })
+        updateActiveProfile({ lastUsedAccountIndex: index })
     } else {
-        throw new Error(`Account with ID ${id} cannot be found!`)
+        throw new Error(`Account with ID ${index} cannot be found!`)
     }
 }

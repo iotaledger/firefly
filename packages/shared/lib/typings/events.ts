@@ -22,82 +22,6 @@ export interface EventMap {
     'notification-activated': unknown
 }
 
-// Reference: https://github.com/iotaledger/wallet.rs/blob/develop/src/error.rs
-export enum ErrorType {
-    // Generic
-    IoError = 'IoError',
-    JsonError = 'JsonError',
-    ClientError = 'ClientError',
-    Panic = 'Panic',
-
-    // Account
-    LatestAccountIsEmpty = 'LatestAccountIsEmpty',
-    AccountNotEmpty = 'AccountNotEmpty',
-    AccountInitialiseRequiredField = 'AccountInitialiseRequiredField',
-    CannotUseIndexIdentifier = 'CannotUseIndexIdentifier',
-    AccountAliasAlreadyExists = 'AccountAliasAlreadyExists',
-    InvalidBackupFile = 'InvalidBackupFile',
-    InvalidBackupDestination = 'InvalidBackupDestination',
-    InsufficientFunds = 'InsufficientFunds',
-    MnemonicEncode = 'MnemonicEncode',
-    InvalidMnemonic = 'InvalidMnemonic',
-    AccountNotFound = 'AccountNotFound',
-
-    // Address
-    InvalidAddress = 'InvalidAddress',
-    InvalidAddressLength = 'InvalidAddressLength',
-    InvalidRemainderValueAddress = 'InvalidRemainderValueAddress',
-    AddressBuildRequiredField = 'AddressBuildRequiredField',
-
-    // Message
-    MessageNotFound = 'MessageNotFound',
-    InvalidMessageIdLength = 'InvalidMessageIdLength',
-    InvalidMessageId = 'InvalidMessageId',
-    InvalidOutputKind = 'InvalidOutputKind',
-    InvalidTransactionId = 'InvalidTransactionId',
-
-    // Stronghold
-    StrongholdError = 'StrongholdError',
-
-    // Database
-    StorageDoesntExist = 'StorageDoesntExist',
-    Storage = 'Storage',
-    StorageAdapterNotDefined = 'StorageAdapterNotDefined',
-    StorageExists = 'StorageExists',
-    StorageAdapterNotSet = 'StorageAdapterNotSet',
-    StorageIsEncrypted = 'StorageIsEncrypted',
-    RecordDecrypt = 'RecordDecrypt',
-    RecordEncrypt = 'RecordEncrypt',
-    RecordNotFound = 'RecordNotFound',
-
-    // Bee (https://github.com/iotaledger/bee)
-    BeeMessage = 'BeeMessage',
-
-    // Nodes
-    UrlError = 'UrlError',
-    NodesNotSynced = 'NodesNotSynced',
-
-    // Ledger
-    LedgerMiscError = 'LedgerMiscError',
-    LedgerDongleLocked = 'LedgerDongleLocked',
-    LedgerDeniedByUser = 'LedgerDeniedByUser',
-    LedgerDeviceNotFound = 'LedgerDeviceNotFound',
-    LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
-    WrongLedgerSeedError = 'WrongLedgerSeedError',
-
-    // Dust output
-    LeavingDustError = 'LeavingDustError',
-}
-
-export enum LedgerErrorType {
-    LedgerMiscError = 'LedgerMiscError',
-    LedgerDongleLocked = 'LedgerDongleLocked',
-    LedgerDeniedByUser = 'LedgerDeniedByUser',
-    LedgerDeviceNotFound = 'LedgerDeviceNotFound',
-    LedgerEssenceTooLarge = 'LedgerEssenceTooLarge',
-    WrongLedgerSeedError = 'WrongLedgerSeedError',
-}
-
 export type Callback<T> = (error: string, data: T) => void
 
 export interface Event<T> {
@@ -107,15 +31,10 @@ export interface Event<T> {
     payload: T
 }
 
-export interface ErrorEventPayload {
-    type: ErrorType
-    error: string
-}
-
 export interface BalanceChangeEventPayload {
     indexationId: string
     messageId: string
-    accountId: string
+    accountIndex: number
     address: string
     balanceChange: {
         spent: number
@@ -124,19 +43,19 @@ export interface BalanceChangeEventPayload {
 }
 
 export interface TransactionEventPayload {
-    accountId: string
+    accountIndex: number
     message: Message
 }
 
 export interface ConfirmationStateChangeEventPayload {
-    accountId: string
+    accountIndex: number
     message: Message
     confirmed: boolean
 }
 
 export interface ReattachmentEventPayload {
     indexationId: string
-    accountId: string
+    accountIndex: number
     message: Message
     reattachedMessageId: string
 }
@@ -199,7 +118,7 @@ export interface TransferState extends TransferProgressEvent {
 }
 
 export interface TransferProgressEventPayload {
-    accountId: string
+    accountIndex: number
     event: TransferProgressEventData
 }
 
