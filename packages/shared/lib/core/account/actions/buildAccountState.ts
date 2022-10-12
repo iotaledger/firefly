@@ -18,7 +18,8 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     let depositAddress: string
     try {
         balances = await account.getBalance()
-        depositAddress = (await account.addresses())[0].address
+        const addresses = await account.addresses()
+        depositAddress = addresses.find((address) => address.internal === false && address.keyIndex === 0).address
     } catch (error) {
         console.error(error)
     }
