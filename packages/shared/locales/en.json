@@ -1502,6 +1502,7 @@
             "cancelled": "The transaction was cancelled.",
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "noInputs": "No inputs found.",
             "missingTransactionId": "The transaction ID is missing",
             "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },

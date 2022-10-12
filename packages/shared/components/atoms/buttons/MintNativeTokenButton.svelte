@@ -4,7 +4,7 @@
     import { OnboardingButton } from 'shared/components'
     import { selectedAccount } from '@core/account'
 
-    $: hasAliases = $selectedAccount.balances.aliases.length > 0
+    $: hasAliases = $selectedAccount.balances?.aliases.length > 0
 
     function handleMintNativeToken(): void {
         if (hasAliases) {
