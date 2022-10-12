@@ -13,8 +13,8 @@ export async function initialiseProfileManagerFromOnboardingProfile(checkForExis
     const existingManager = get(profileManager)
     if (existingManager) {
         if (!checkForExistingManager) {
-            removeProfileFolder(existingManager.id)
             existingManager.destroy()
+            removeProfileFolder(existingManager.id)
         } else {
             return
         }
