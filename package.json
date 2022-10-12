@@ -35,10 +35,13 @@
         "test:shared": "cd packages/shared && yarn test"
     },
     "resolutions": {
-        "lodash": ">=4.17.21",
         "ansi-regex": "5.0.1",
         "glob-parent": " >=5.1.2",
+        "lodash": ">=4.17.21",
+        "nanoid": "^3.1.31",
         "node-abi": "^3.8.0",
+        "nwsapi": "^2.2.1",
+        "prompts": "^2.4.2",
         "selfsigned": "^2.0.1",
         "shell-quote": "1.7.3"
     },
