@@ -1294,6 +1294,11 @@
             "yes": "Yes",
             "no": "No"
         },
+        "showValueless": {
+            "label": "Show valueless",
+            "yes": "Yes",
+            "no": "No"
+        },
         "ascDesc": {
             "Asc": "Ascending",
             "Desc": "Descending"

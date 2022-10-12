@@ -27,9 +27,13 @@ export async function preprocessOutputsForAccount(account: IAccountState): Promi
     const processedTransactions: IProcessedTransaction[] = []
     for (const transactionId of Object.keys(groupedOutputs)) {
         const incomingTransaction = incomingTransactions[transactionId]
-        processedTransactions.push(
-            preprocessGroupedOutputs(groupedOutputs[transactionId], incomingTransaction, account)
+        const processedTransaction = preprocessGroupedOutputs(
+            groupedOutputs[transactionId],
+            incomingTransaction,
+            account
         )
+
+        processedTransactions.push(processedTransaction)
     }
     return processedTransactions
 }

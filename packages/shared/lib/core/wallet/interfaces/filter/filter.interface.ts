@@ -16,6 +16,7 @@ export interface ActivityFilter {
     date: DateFilterUnit
     showRejected: SelectionFilterUnit
     showHidden: SelectionFilterUnit
+    showValueless: SelectionFilterUnit
 }
 
 export interface AssetFilter {
