@@ -27,6 +27,7 @@
     import LegalUpdate from './LegalUpdate.svelte'
     import ManageAccountPopup from './ManageAccountPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
+    import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
@@ -111,6 +112,7 @@
         manageAccount: ManageAccountPopup,
         tokenInformation: TokenInformationPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,
+        mintNativeTokenConfirmation: MintNativeTokenConfirmationPopup,
         faucetRequest: FaucetRequestPopup,
         enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
         testDeepLinkForm: TestDeepLinkFormPopup,
