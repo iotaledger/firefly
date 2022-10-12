@@ -108,7 +108,7 @@
             aliasIdError = 'Alias is required'
             return Promise.reject(aliasIdError)
         } else if (!isValidAliasId) {
-            aliasIdError = 'You\'re not the owner of this alias'
+            aliasIdError = 'You are not the owner of this alias'
             return Promise.reject(aliasIdError)
         } else {
             return Promise.resolve()
