@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { TransactionDetails, AliasDetails, FoundryDetails } from 'shared/components/molecules'
+    import { TransactionDetails, AliasDetails, FoundryDetails, NftDetails } from 'shared/components/molecules'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -89,6 +89,24 @@
                 governorAddress: activity.data.governorAddress,
                 stateControllerAddress: activity.data.stateControllerAddress,
             }
+        } else if (activity.data.type === ActivityType.Nft) {
+            return {
+                ...details,
+                type: activity.type,
+                asset,
+                storageDeposit: activity.data.storageDeposit,
+                giftedStorageDeposit: activity.data.giftedStorageDeposit,
+                metadata: activity.data.metadata,
+                asyncStatus: activity.data.asyncStatus,
+                direction: activity.data.direction,
+                isInternal: activity.data.isInternal,
+                claimedDate: activity.data.claimedDate,
+                claimingTransactionId: activity.data.claimingTransactionId,
+                expirationDate:
+                    activity.data?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity.data.expirationDate : null,
+                timelockDate: activity.data.timelockDate,
+                subject: activity.data?.subject,
+            }
         }
     }
 
@@ -173,6 +191,8 @@
         <FoundryDetails {...details} />
     {:else if activity?.data.type === ActivityType.Alias}
         <AliasDetails {...details} />
+    {:else if activity?.data.type === ActivityType.Nft}
+        <NftDetails {...details} />
     {/if}
     {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

@@ -15,16 +15,16 @@
 
     function getTitle(txData: INftActivityData, inclusionState: InclusionState): string {
         const { isInternal, direction } = txData
-        const isInclusionStateConfirmed = inclusionState === InclusionState.Confirmed
+        const isConfirmed = inclusionState === InclusionState.Confirmed
 
         if (isInternal) {
-            return isInclusionStateConfirmed ? 'general.transferNft' : 'general.transferringNft'
+            return isConfirmed ? 'general.transferNft' : 'general.transferringNft'
         }
         if (direction === ActivityDirection.Incoming) {
-            return isInclusionStateConfirmed ? 'general.receivedNft' : 'general.receivingNft'
+            return isConfirmed ? 'general.receivedNft' : 'general.receivingNft'
         }
         if (direction === ActivityDirection.Outgoing) {
-            return isInclusionStateConfirmed ? 'general.sentNft' : 'general.sendingNft'
+            return isConfirmed ? 'general.sentNft' : 'general.sendingNft'
         }
     }
 

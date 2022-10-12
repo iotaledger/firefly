@@ -1709,6 +1709,32 @@
                 }
             }
         },
+        "nft": {
+            "internal": {
+                "incoming": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "outgoing": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
+            },
+            "external": {
+                "incoming": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "outgoing": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
+            }
+        },
         "foundry": {
             "minting": {
                 "Pending": "minting",

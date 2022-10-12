@@ -18,19 +18,19 @@
 
     function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
         const { isShimmerClaiming, isInternal, direction } = txData
-        const isInclusionStateConfirmed = inclusionState === InclusionState.Confirmed
+        const isConfirmed = inclusionState === InclusionState.Confirmed
 
         if (isShimmerClaiming) {
-            return isInclusionStateConfirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
+            return isConfirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
         }
         if (isInternal) {
-            return isInclusionStateConfirmed ? 'general.transfer' : 'general.transferring'
+            return isConfirmed ? 'general.transfer' : 'general.transferring'
         }
         if (direction === ActivityDirection.Incoming) {
-            return isInclusionStateConfirmed ? 'general.received' : 'general.receiving'
+            return isConfirmed ? 'general.received' : 'general.receiving'
         }
         if (direction === ActivityDirection.Outgoing) {
-            return isInclusionStateConfirmed ? 'general.sent' : 'general.sending'
+            return isConfirmed ? 'general.sent' : 'general.sending'
         }
     }
 

@@ -8,7 +8,7 @@ export interface IPartialNftActivityDataWithType extends Omit<Partial<INftActivi
 export interface INftActivityData {
     type: ActivityType.Nft
     outputId: string
-    immutableMetadata: Record<string, unknown>
+    metadata: Record<string, unknown>
 
     storageDeposit: number
     giftedStorageDeposit: number

@@ -22,7 +22,7 @@ export function getNftActivityData(
     const { output, outputId } = getNftOutputFromTransaction(outputs)
 
     const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output) // probably we need to sum up all storage deposits
-    const immutableMetadata = getImmutableMetadataFromNft(output)
+    const metadata = getImmutableMetadataFromNft(output)
 
     const recipient = getRecipientFromOutput(output)
     const sender = getSenderFromNft(output)
@@ -41,7 +41,7 @@ export function getNftActivityData(
         isInternal,
         storageDeposit,
         giftedStorageDeposit,
-        immutableMetadata,
+        metadata,
         sender,
         recipient,
         subject,
