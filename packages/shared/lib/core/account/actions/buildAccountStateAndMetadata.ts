@@ -8,9 +8,10 @@ export async function buildAccountStateAndMetadata(
     name?: string,
     color?: string
 ): Promise<[IAccountState, IAccountMetadata]> {
+    const { index } = account.getMetadata()
     const metadata = {
-        index: account.meta.index,
-        name: name || `${localize('general.account')} ${account.meta.index + 1}`,
+        index,
+        name: name || `${localize('general.account')} ${index + 1}`,
         color: color || getRandomAccountColor(),
         hidden: false,
     }
