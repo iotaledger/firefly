@@ -10,9 +10,10 @@ In our case we are interested in the user experiences that they enable
 between websites, applications, platforms, etc. by providing more interoperability.
 
 Firefly has its own deep link scheme, exposing (limited) functionality that is required in 
-some type of user flow. A trivial example would be a user is buying native tokens on Soonaverse and must make a payment transaction
-in order to execute the buy order. Clicking on a deep link embedded inside the Soonaverse platform will trigger Firefly to 
-open and auto-fill the transaction data as necessary, making it simple confirm and click job for the user. 
+some type of user flow. A trivial example would be a user who buys native tokens on Soonaverse and 
+must make a payment transaction to execute the buy order. Clicking on a deep link embedded inside the 
+Soonaverse platform triggers Firefly to open and auto-fill the transaction data as necessary, making it 
+a simple confirm and click job for the user. 
 
 :::caution
 Firefly **will NEVER** automatically execute actions initiated by a deep link; they should **ALWAYS** require manual 
