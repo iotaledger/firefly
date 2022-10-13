@@ -54,6 +54,7 @@ const typescriptEslintRules = {
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/ban-types': 'error',
     '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/explicit-function-return-type': 'warn', // Warn b/c return types are not supported in Svelte markdown
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/no-array-constructor': 'error',
     '@typescript-eslint/no-empty-function': 'off', // OFF b/c we use empty functions a lot (esp. for initialization)
@@ -81,6 +82,12 @@ const typescriptEslintRules = {
     '@typescript-eslint/restrict-template-expressions': 'off', // OFF b/c using any is useful in template expressions
     '@typescript-eslint/require-await': 'error',
     '@typescript-eslint/unbound-method': 'error',
+}
+
+const linterRules = {
+    ...eslintRules,
+    ...eslintRulesOnlyTypescript,
+    ...typescriptEslintRules,
 }
 
 const svelteRules = {
@@ -116,11 +123,7 @@ module.exports = {
                 tsconfigRootDir: './',
             },
             plugins: ['@typescript-eslint', 'svelte3'],
-            rules: {
-                ...eslintRules,
-                ...eslintRulesOnlyTypescript,
-                ...typescriptEslintRules,
-            },
+            rules: linterRules,
             settings: svelteSettings,
         },
         {
@@ -128,9 +131,7 @@ module.exports = {
             processor: 'svelte3/svelte3',
             settings: svelteSettings,
             rules: {
-                ...eslintRules,
-                ...eslintRulesOnlyTypescript,
-                ...typescriptEslintRules,
+                ...linterRules,
                 ...svelteRules,
             }
         },
