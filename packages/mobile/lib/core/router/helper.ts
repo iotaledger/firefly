@@ -10,16 +10,12 @@ import {
     profileBackupRouter,
     ProfileRecoveryRouter,
     profileRecoveryRouter,
-    ledgerSetupRouter,
-    LedgerSetupRouter,
     NetworkSetupRouter,
     networkSetupRouter,
     ProfileSetupRouter,
     profileSetupRouter,
     storageProtectionSetupRouter,
     StorageProtectionSetupRouter,
-    shimmerClaimingRouter,
-    ShimmerClaimingRouter,
     strongholdSetupRouter,
     StrongholdSetupRouter,
 } from '@core/router/subrouters'
@@ -55,14 +51,12 @@ function initialiseSubrouters(): void {
 
 function initialiseOnboardingSubrouters(): void {
     appSetupRouter.set(new AppSetupRouter())
-    ledgerSetupRouter.set(new LedgerSetupRouter())
     networkSetupRouter.set(new NetworkSetupRouter())
     strongholdSetupRouter.set(new StrongholdSetupRouter())
     profileBackupRouter.set(new ProfileBackupRouter())
     profileRecoveryRouter.set(new ProfileRecoveryRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
-    shimmerClaimingRouter.set(new ShimmerClaimingRouter())
 }
 
 export function resetRouters(): void {
@@ -78,12 +72,10 @@ function resetBaseRouters(): void {
 function resetSubrouters(): void {
     get(appSetupRouter).reset()
     get(loginRouter).reset()
-    get(ledgerSetupRouter).reset()
     get(networkSetupRouter).reset()
     get(strongholdSetupRouter).reset()
     get(profileBackupRouter).reset()
     get(profileRecoveryRouter).reset()
     get(profileSetupRouter).reset()
     get(storageProtectionSetupRouter).reset()
-    get(shimmerClaimingRouter).reset()
 }
