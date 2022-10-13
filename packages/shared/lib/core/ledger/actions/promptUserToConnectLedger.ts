@@ -12,11 +12,11 @@ export function promptUserToConnectLedger(
     onCancel: () => void = (): void => {},
     overridePopup: boolean = false
 ): void {
-    function _onDisconnected(): void {
+    function onDisconnected(): void {
         if (!get(popupState).active || overridePopup) {
             openLedgerNotConnectedPopup(onCancel, () => pollLedgerNanoStatus(), overridePopup)
         }
     }
 
-    void getLedgerDeviceStatus(onConnected, _onDisconnected, onCancel)
+    void getLedgerDeviceStatus(onConnected, onDisconnected, onCancel)
 }
