@@ -143,7 +143,40 @@ Coming :soon:
 
 #### Register Proposal
 
-Coming :soon:
+This operation brings the user to the register proposal popup:
+
+:::image
+![](../static/register-proposal-popup.png "Register proposal popup")
+:::
+
+The deep link structure is as follows:
+
+```
+firefly://governance/registerProposal?eventId=<eventId>[&nodeUrl=<nodeUrl>]
+```
+
+The following parameters are **required**:
+
+- `eventId` - the event ID of the proposal's corresponding participation event in the network
+
+The following parameter(s) are **optional**:
+
+- `nodeUrl` - the specific node that is tracking the proposal's correspoding participation event
+
+:::info
+If your node requires authentication (e.g. username / password, JWT), it will require the user
+to manually enter the information. 
+:::
+
+Example:
+
+[!button Click me!](firefly://governance/registerProposal?eventId=TODO&nodeUrl=TODO)
+
+Source:
+
+```
+firefly://governance/registerProposal?eventId=TODO&nodeUrl=TODO
+```
 
 #### Vote
 
