@@ -7,7 +7,7 @@
     export let removeAll = false
     export let onSuccess: (..._: any[]) => void
 
-    function removeCustomNode() {
+    function removeCustomNode(): void {
         if (onSuccess) {
             onSuccess(node)
         }

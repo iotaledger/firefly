@@ -12,7 +12,7 @@
     $: $assetFilter, assets, (assetList = getFilteredAssetList()), scrollToTop()
     $: isEmptyBecauseOfFilter = (assets.baseCoin || assets.nativeTokens?.length > 0) && assetList.length === 0
 
-    function getFilteredAssetList() {
+    function getFilteredAssetList(): IAsset[] {
         const list = []
 
         if (assets?.baseCoin) {

@@ -16,7 +16,7 @@ export function displayNotificationForLedgerProfile(
 ): string {
     let notificationId
 
-    const _notify = () => {
+    const _notify: () => void = () => {
         const _ledgerConnectionState = get(ledgerConnectionState)
         const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
 

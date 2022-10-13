@@ -13,10 +13,10 @@ interface ITransactionHistoryHeaderParameters {
 
 const NEW_LINE = '\r\n'
 
-export const generateTransactionHistoryCsvFromAccount = (
+export function generateTransactionHistoryCsvFromAccount(
     IAccountState: IAccountState,
     headerParams: ITransactionHistoryHeaderParameters
-): string => {
+): string {
     const headerParts = []
     headerParams.id && headerParts.push(localize('exports.transactionHistoryCsv.messageId'))
     headerParams.internal && headerParts.push(localize('exports.transactionHistoryCsv.internal'))
@@ -69,7 +69,7 @@ export const generateTransactionHistoryCsvFromAccount = (
     return csv
 }
 
-export const generateTransactionHistoryFileName = (profileName: string, accountAlias: string): string => {
+export function generateTransactionHistoryFileName(profileName: string, accountAlias: string): string {
     const DEFAULT_FILE_NAME_PATTERN = 'firefly-transaction-history-{{profileName}}-{{accountAlias}}-{{date}}'
     const tzoffset = new Date().getTimezoneOffset() * 60000 // offset in milliseconds
     const localISOTime = new Date(Date.now() - tzoffset).toISOString()
@@ -79,8 +79,11 @@ export const generateTransactionHistoryFileName = (profileName: string, accountA
         .replace('{{accountAlias}}', accountAlias.toLowerCase())
         .replace('{{date}}', date)
 
-    return sanitiseFilename(fileName)
+    sanitiseFilename(fileName)
+    return fileName
 }
 
 // TODO: Refactor out of this file
-const sanitiseFilename = (s: string) => s.replace(/[^a-z0-9-]/gi, '-').replace(/-{2,}/g, '-')
+function sanitiseFilename(s: string): void {
+    s.replace(/[^a-z0-9-]/gi, '-').replace(/-{2,}/g, '-')
+}

@@ -64,15 +64,12 @@ export function downloadAppUpdate(): void {
                 actions: [
                     {
                         label: localize('actions.restartNow'),
-                        callback: () => {
-                            cleanup()
-                            installAppUpdate()
-                        },
+                        callback: restartNow,
                         isPrimary: true,
                     },
                     {
                         label: localize('actions.dismiss'),
-                        callback: () => cleanup(),
+                        callback: cleanup,
                     },
                 ],
             })
@@ -89,7 +86,7 @@ export function downloadAppUpdate(): void {
                 actions: [
                     {
                         label: localize('actions.dismiss'),
-                        callback: () => cleanup(),
+                        callback: cleanup,
                         isPrimary: true,
                     },
                 ],
@@ -97,7 +94,12 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    const cleanup = () => {
+    function restartNow(): void {
+        cleanup()
+        installAppUpdate()
+    }
+
+    function cleanup(): void {
         removeDisplayNotification(notificationId)
 
         unsubscribeProgress()
@@ -114,7 +116,7 @@ export function downloadAppUpdate(): void {
         actions: [
             {
                 label: localize('actions.cancel'),
-                callback: () => {
+                callback: (): void => {
                     cancelAppUpdateDownload()
                     cleanup()
                 },

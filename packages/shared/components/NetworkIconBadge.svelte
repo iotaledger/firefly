@@ -10,7 +10,7 @@
 
     $: tooltipText = NETWORK?.[networkProtocol]?.[networkType]?.name
 
-    const _showTooltip = (show: boolean): void => {
+    function _showTooltip(show: boolean): void {
         showTooltip = show
     }
 </script>

@@ -28,7 +28,8 @@
         await initialiseProfileManagerFromOnboardingProfile(true)
         $profileSetupRouter.next()
     }
-    function onBackClick() {
+
+    function onBackClick(): void {
         $profileSetupRouter.previous()
     }
 

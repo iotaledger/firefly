@@ -15,7 +15,7 @@
     let pinCodeBusy = false
     let pinCodeMessage = ''
 
-    function changePincode() {
+    function changePincode(): void {
         if (currentPincode && newPincode && confirmedPincode) {
             reset()
 
@@ -31,7 +31,7 @@
                 pinCodeBusy = true
                 pinCodeMessage = localize('general.pinCodeUpdating')
 
-                const _clear = (err?) => {
+                const _clear: (err?: unknown) => void = (err?) => {
                     setTimeout(() => {
                         pinCodeMessage = ''
                     }, 2000)
@@ -76,7 +76,7 @@
         }
     }
 
-    function reset() {
+    function reset(): void {
         currentPincodeError = ''
         newPincodeError = ''
         confirmationPincodeError = ''

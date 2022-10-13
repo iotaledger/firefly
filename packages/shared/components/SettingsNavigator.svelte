@@ -18,12 +18,12 @@
         | GeneralSettingsRouteNoProfile
         | HelpAndInfoRoute
         | SecuritySettingsRoute
-    export let routes
-    export let route
+    export let routes: string[]
+    export let route: string
 
     export let onSettingClick: (..._: any[]) => void
 
-    function changeRoute(setting) {
+    function changeRoute(setting: string): void {
         document.getElementById('scroller').scrollTop = 0
         route = setting
     }

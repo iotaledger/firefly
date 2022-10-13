@@ -2,7 +2,7 @@
     import { Button, Text, TextType } from 'shared/components'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
 
-    function onClick() {
+    function onClick(): void {
         $collectiblesRouter.goTo(CollectiblesRoute.Details)
     }
 </script>

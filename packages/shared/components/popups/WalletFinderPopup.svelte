@@ -40,7 +40,7 @@
     $: searchForBalancesOnLoad && !$isStrongholdLocked && handleFindBalances()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 
-    async function handleFindBalances() {
+    async function handleFindBalances(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
                 type: 'unlockStronghold',
@@ -101,7 +101,7 @@
         }
     }
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         closePopup()
     }
 

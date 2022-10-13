@@ -5,7 +5,7 @@
     import { closePopup, openPopup } from '@lib/popup'
     import { OnboardingButton } from 'shared/components'
 
-    function refreshTokenMetadata() {
+    function refreshTokenMetadata(): void {
         refreshAccountAssetsForActiveProfile(true)
         showAppNotification({
             type: 'success',
@@ -15,7 +15,7 @@
         closePopup()
     }
 
-    function handleRefreshTokenMetadata() {
+    function handleRefreshTokenMetadata(): void {
         openPopup({
             type: 'confirmation',
             props: {

@@ -19,11 +19,15 @@
         value = customDate.toString()
         canShowDateTimePicker = false
     }
+
+    function handleShowDateTimePickerClick(): void {
+        canShowDateTimePicker = true
+    }
 </script>
 
 <button
     bind:this={anchor}
-    on:click={() => (canShowDateTimePicker = true)}
+    on:click={handleShowDateTimePickerClick}
     class="flex flex-row justify-between border border-solid border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-500 dark:hover:border-gray-700 text-center rounded-xl px-2 py-1"
 >
     <Icon width="20" height="20" classes="text-gray-500" icon="calendar" />

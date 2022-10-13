@@ -39,7 +39,7 @@
     let details
     $: activity, (details = getActivityDetails())
 
-    function getActivityDetails() {
+    function getActivityDetails(): void {
         if (!activity) {
             return {}
         }

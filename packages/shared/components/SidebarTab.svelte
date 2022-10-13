@@ -4,15 +4,15 @@
 
     export let tab: SidebarTab = undefined
 
-    let tooltipAnchor
+    let tooltipAnchor: HTMLButtonElement
     let showTooltip = false
 
-    const handleClick = (): void => {
+    function handleClick(): void {
         _showTooltip(false)
         tab?.onClick()
     }
 
-    const _showTooltip = (show: boolean): void => {
+    function _showTooltip(show: boolean): void {
         showTooltip = show
     }
 </script>

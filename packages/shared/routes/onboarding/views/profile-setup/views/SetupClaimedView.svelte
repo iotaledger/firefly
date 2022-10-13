@@ -34,7 +34,7 @@
             $profileSetupRouter.next()
         }
     }
-    function onBackClick() {
+    function onBackClick(): void {
         $profileSetupRouter.previous()
     }
 

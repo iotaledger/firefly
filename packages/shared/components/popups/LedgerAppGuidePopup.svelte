@@ -13,11 +13,11 @@
         'ledger-close-live-desktop',
     ]
 
-    function changeIndex(increment) {
+    function changeIndex(increment: number): void {
         stepIndex += increment
     }
 
-    function handleCloseClick() {
+    function handleCloseClick(): void {
         closePopup()
     }
 </script>
