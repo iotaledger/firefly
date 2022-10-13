@@ -48,7 +48,7 @@
     export let isClaiming: boolean = false
     export let type: ActivityType
 
-    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType) ?? ''
 
     $: amount = parseRawAmount(Number(rawAmount), unit, asset?.metadata)
     $: formattedTransactionTime = getDateFormat(transactionTime)
