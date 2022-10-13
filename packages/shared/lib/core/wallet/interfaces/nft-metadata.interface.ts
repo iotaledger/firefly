@@ -11,6 +11,5 @@ export interface INftMetadata {
     royalties: Record<string, number>
     issuerName: string
     description: string
-    description2: string
     attributes: { trait_type: string; value: string | number }[]
 }
