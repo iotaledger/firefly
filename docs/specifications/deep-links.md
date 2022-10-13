@@ -6,8 +6,7 @@ icon: link
 
 Deep links are special URLs that, when navigated to, open
 applications rather than a website.
-They are useful for a number of things, however in our case
-we are interested in the user experiences that they enable
+In our case we are interested in the user experiences that they enable
 between websites, applications, platforms, etc. by providing more interoperability.
 
 Firefly has its own deep link scheme, exposing (limited) functionality that is required in 
