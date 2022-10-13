@@ -15,7 +15,7 @@
 
     const profileName = $activeProfile?.name
     const { isStrongholdLocked } = $activeProfile
-    const accountAlias = $selectedAccount.getMetadata().alias
+    const accountAlias = $selectedAccount.name
 
     let password = ''
     let error = ''

@@ -4,6 +4,7 @@ import { IErrorParameters } from '../interfaces'
 export const WALLET_RS_ERROR_PARAMETERS: Readonly<{
     [WalletRsError.ClientError]?: { [key in ClientError]?: Partial<IErrorParameters> }
     [WalletRsError.InsufficientFunds]?: Partial<IErrorParameters>
+    [WalletRsError.IotaClientError]?: Partial<IErrorParameters>
 }> = {
     [WalletRsError.ClientError]: {
         [ClientError.NoSyncedNode]: {
@@ -21,6 +22,12 @@ export const WALLET_RS_ERROR_PARAMETERS: Readonly<{
     },
     [WalletRsError.InsufficientFunds]: {
         localizationKey: 'error.send.insufficientFundsStorageDeposit',
+        logToConsole: true,
+        saveToErrorLog: true,
+        showNotification: true,
+    },
+    [WalletRsError.IotaClientError]: {
+        localizationKey: 'error.send.noInputs',
         logToConsole: true,
         saveToErrorLog: true,
         showNotification: true,

@@ -17,7 +17,7 @@
         InclusionState,
         ActivityDirection,
         IPersistedAsset,
-        formatTokenAmountDefault,
+        parseRawAmount,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -50,7 +50,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: amount = formatTokenAmountDefault(Number(rawAmount), asset?.metadata)
+    $: amount = parseRawAmount(Number(rawAmount), unit, asset?.metadata)
     $: formattedTransactionTime = getDateFormat(transactionTime)
     $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)

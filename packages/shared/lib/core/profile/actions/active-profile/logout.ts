@@ -19,7 +19,7 @@ import { resetSelectedAccount } from '@core/account'
 /**
  * Logout from active profile
  */
-export function logout(clearActiveProfile: boolean = false, _lockStronghold: boolean = true): Promise<void> {
+export function logout(clearActiveProfile: boolean = true, _lockStronghold: boolean = true): Promise<void> {
     const { lastActiveAt, loggedIn, hasLoadedAccounts, type } = get(activeProfile)
 
     // (TODO): Figure out why we are using a promise here?
@@ -39,7 +39,7 @@ export function logout(clearActiveProfile: boolean = false, _lockStronghold: boo
 
             // stop background sync
             // TODO: Make sure we need this. Would destroying the profile manager also stop background syncing automatically?
-            manager.stopBackgroundSync()
+            manager?.stopBackgroundSync()
 
             // Unsubscribe to listeners
             // https://github.com/iotaledger/wallet.rs/issues/1133

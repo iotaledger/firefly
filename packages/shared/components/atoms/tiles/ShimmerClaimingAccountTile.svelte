@@ -19,7 +19,9 @@
         <div class="w-full flex flex-row justify-between items-center space-x-4">
             <div class="flex flex-row items-center text-left space-x-2">
                 <Icon icon="wallet" width={28} height={28} classes="text-blue-500" />
-                <Text type={TextType.p} fontWeight={FontWeight.medium}>{shimmerClaimingAccount?.meta?.alias}</Text>
+                <Text type={TextType.p} fontWeight={FontWeight.medium}>
+                    {shimmerClaimingAccount?.getMetadata()?.alias}
+                </Text>
             </div>
             <div class="flex flex-col">
                 {#if shimmerClaimingAccount?.state === ShimmerClaimingAccountState.Claiming}

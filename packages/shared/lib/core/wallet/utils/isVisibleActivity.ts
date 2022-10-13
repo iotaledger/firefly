@@ -23,6 +23,9 @@ import Big from 'big.js'
 export function isVisibleActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
 
+    if (!isVisibleWithActiveValuelessFilter(activity, filter)) {
+        return false
+    }
     if (!isVisibleWithActiveHiddenFilter(activity, filter)) {
         return false
     }
@@ -51,6 +54,17 @@ function isVisibleWithActiveHiddenFilter(activity: Activity, filter: ActivityFil
     if (
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
         activity.isAssetHidden
+    ) {
+        return false
+    }
+    return true
+}
+
+function isVisibleWithActiveValuelessFilter(activity: Activity, filter: ActivityFilter): boolean {
+    if (
+        (!filter.showValueless.active || filter.showValueless.selected === BooleanFilterOption.No) &&
+        (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
+        !activity.containsValue
     ) {
         return false
     }

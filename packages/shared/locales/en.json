@@ -874,7 +874,7 @@
         "sendForm": {
             "title": "Send funds"
         },
-        "tokenInformation" : {
+        "tokenInformation": {
             "newTokenTitle": "New token",
             "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
             "tokenMetadata": {
@@ -887,20 +887,26 @@
                 "verifyToken": "I verify this token"
             }
         },
-        "mintNativeTokenForm" : {
-            "title": "Mint native tokens",
-            "inputs": {
+        "mintNativeToken": {
+            "formTitle": "Mint native tokens",
+            "confirmationTitle": "Mint native tokens",
+            "property": {
                 "totalSupply": "Total Supply",
                 "circulatingSupply": "Circulating Supply",
                 "standard": "Standard",
-                "name": "Name",
+                "tokenName": "Name",
                 "description": "Description",
                 "symbol": "Symbol",
                 "decimals": "Decimals",
                 "url": "URL",
                 "logoUrl": "Logo URL",
-                "logo": "Logo"
+                "logo": "Logo",
+                "alias": "Alias"
             }
+        },
+        "noAlias": {
+            "title": "Unable to mint",
+            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
         "faucetRequest": {
             "title": "Faucet request",
@@ -1288,6 +1294,20 @@
             "yes": "Yes",
             "no": "No"
         },
+        "showValueless": {
+            "label": "Show valueless",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "ascDesc": {
+            "Asc": "Ascending",
+            "Desc": "Descending"
+        },
+        "assetOrder": {
+            "label": "Order",
+            "Name": "Name",
+            "Amount": "Amount"
+        },
         "verificationStatus": {
             "label": "Verification status",
             "new": "New",
@@ -1447,8 +1467,8 @@
             "invalid": "Invalid PIN code."
         },
         "account": {
+            "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
             "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "You must transfer your balance before deleting this wallet.",
             "duplicate": "A wallet with this name already exists.",
@@ -1487,6 +1507,7 @@
             "cancelled": "The transaction was cancelled.",
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "noInputs": "No inputs found.",
             "missingTransactionId": "The transaction ID is missing",
             "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
@@ -1499,7 +1520,6 @@
             "invalidCertificate": "Could not connect with invalid certificate.",
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
             "noSyncedNode": "No synced node is available.",
             "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Failed to get an answer from all nodes.",
@@ -1627,7 +1647,7 @@
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
             }
         },
-        "mintNativeTokenForm": {
+        "mintNativeToken": {
             "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
             "description": "IRC30 optional parameter: The human-readable description of the token.",
             "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",

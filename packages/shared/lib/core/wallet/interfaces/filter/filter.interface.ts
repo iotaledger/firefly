@@ -1,4 +1,10 @@
-import { AssetFilterUnit, DateFilterUnit, NumberFilterUnit, SelectionFilterUnit } from './filter-unit.interface'
+import {
+    AssetFilterUnit,
+    DateFilterUnit,
+    NumberFilterUnit,
+    OrderFilterUnit,
+    SelectionFilterUnit,
+} from './filter-unit.interface'
 
 export type Filter = ActivityFilter | AssetFilter
 
@@ -10,9 +16,11 @@ export interface ActivityFilter {
     date: DateFilterUnit
     showRejected: SelectionFilterUnit
     showHidden: SelectionFilterUnit
+    showValueless: SelectionFilterUnit
 }
 
 export interface AssetFilter {
     verificationStatus: SelectionFilterUnit
     showHidden: SelectionFilterUnit
+    order: OrderFilterUnit
 }

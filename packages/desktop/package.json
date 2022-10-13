@@ -1,7 +1,7 @@
 {
     "name": "desktop",
     "productName": "Firefly Shimmer",
-    "version": "2.0.0",
+    "version": "2.0.1-beta-1",
     "description": "Official wallet application of Shimmer",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
@@ -44,7 +44,7 @@
         "copy-webpack-plugin": "^7.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.1",
-        "electron": "19.1.0",
+        "electron": "19.1.1",
         "electron-builder": "^23.5.1",
         "electron-notarize": "^1.0.0",
         "lodash.merge": "^4.6.2",
