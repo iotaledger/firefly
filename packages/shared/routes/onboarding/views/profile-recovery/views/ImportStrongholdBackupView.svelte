@@ -15,7 +15,7 @@
         path?: string
     }
 
-    const allowedExtensions = ['kdbx', 'stronghold']
+    const allowedExtensions = ['stronghold']
 
     let importFile: ImportFile
     let importFileName = ''

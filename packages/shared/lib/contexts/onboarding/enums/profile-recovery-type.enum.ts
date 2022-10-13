@@ -4,7 +4,6 @@ export enum ProfileRecoveryType {
     Mnemonic = 'mnemonic',
     Ledger = 'ledger',
     Seed = 'seed',
-    SeedVault = 'seedVault',
     Stronghold = 'stronghold',
     TrinityLedger = 'trinityLedger',
 }

@@ -49,9 +49,6 @@ export interface IPlatform {
 
     unhandledException(title: string, err: IError | unknown): Promise<void>
 
-    // SeedVault API methods
-    validateSeedVault(buffer: unknown): Promise<boolean>
-
     onEvent<K extends keyof EventMap>(eventName: K, callback: (param: EventMap[K]) => void)
     removeListenersForEvent<K extends keyof EventMap>(eventName: K)
 }
