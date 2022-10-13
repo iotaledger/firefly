@@ -123,7 +123,7 @@ The following parameters are **optional**:
 - `giftStorageDeposit` - gifts the tokens used in funding the storage deposit for a transaction
 - `disableToggleGift` - prevents the user from being able to toggle the option to gift the storage deposit
 - `disableChangeExpiration` - prevents the user from being able to change the expiration time of the transaction
-- `surplus` - ???
+- `surplus` - send additional amounts of the base token when transferring native tokens
 
 Example:
 
