@@ -43,7 +43,7 @@ export async function handleNewOutputEventInternal(
         )
         const activity = new Activity(processedOutput, account)
         if (activity.data.type !== ActivityType.Nft) {
-            await getOrRequestAssetFromPersistedAssets(activity.data.assetId)
+            const asset = await getOrRequestAssetFromPersistedAssets(activity.data.assetId)
             addPersistedAsset(asset)
         }
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)

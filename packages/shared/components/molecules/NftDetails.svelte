@@ -16,6 +16,7 @@
         Subject,
         InclusionState,
         ActivityDirection,
+        INftMetadata,
     } from '@core/wallet'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { BASE_TOKEN } from '@core/network'
@@ -25,7 +26,7 @@
     import { setClipboard } from '@lib/utils'
     import { time } from '@core/app'
 
-    export let metadata: Record<string, unknown>
+    export let metadata: INftMetadata
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
@@ -67,7 +68,10 @@
         ...(transactionTime && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...metadata,
+        ...(metadata?.name && { metadataName: { data: metadata.name } }),
+        ...(metadata?.collectionName && { metadataCollectionName: { data: metadata.collectionName } }),
+        ...(metadata?.collectionId && { metadataCollectionId: { data: metadata.collectionId } }),
+        ...(metadata?.description && { metadataDescription: { data: metadata.description } }),
         ...(hasStorageDeposit && {
             storageDeposit: {
                 data: formattedStorageDeposit,

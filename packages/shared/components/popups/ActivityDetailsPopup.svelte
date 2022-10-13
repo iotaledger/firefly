@@ -93,7 +93,6 @@
             return {
                 ...details,
                 type: activity.type,
-                asset,
                 storageDeposit: activity.data.storageDeposit,
                 giftedStorageDeposit: activity.data.giftedStorageDeposit,
                 metadata: activity.data.metadata,

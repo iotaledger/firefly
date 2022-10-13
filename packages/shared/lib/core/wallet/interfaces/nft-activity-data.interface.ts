@@ -1,5 +1,6 @@
 import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '../enums'
 import { Subject } from '../types'
+import { INftMetadata } from './nft-metadata.interface'
 
 export interface IPartialNftActivityDataWithType extends Omit<Partial<INftActivityData>, 'type'> {
     type: ActivityType.Nft
@@ -8,8 +9,7 @@ export interface IPartialNftActivityDataWithType extends Omit<Partial<INftActivi
 export interface INftActivityData {
     type: ActivityType.Nft
     outputId: string
-    metadata: Record<string, unknown>
-
+    metadata: INftMetadata
     storageDeposit: number
     giftedStorageDeposit: number
     direction: ActivityDirection
