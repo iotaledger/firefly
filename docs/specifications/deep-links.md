@@ -5,7 +5,7 @@ icon: link
 # Deep Links
 
 Deep links are special URLs that, when navigated to, open
-applications rather than a website in a browser.
+applications rather than a website.
 They are useful for a number of things, however in our case
 we are interested in the user experiences that they enable
 between websites, applications, platforms, etc. by providing more interoperability.
