@@ -72,6 +72,7 @@ function getMetadataFromNft(output: OutputTypes): INftMetadata {
 
         // TODO: Add some validation that everything is correct
         const parsedMetadata: INftMetadata = {
+            id: parsedData.id,
             standard: parsedData.standard,
             version: parsedData.version,
             type: parsedData.type as MimeType,
@@ -82,7 +83,7 @@ function getMetadataFromNft(output: OutputTypes): INftMetadata {
             royalties: parsedData.royalties,
             issuerName: parsedData.issuerName,
             description: parsedData.description,
-            attributes: parsedData.attributes.map((attribute) => ({
+            attributes: parsedData.attributes?.map((attribute) => ({
                 trait_type: attribute.trait_type,
                 value: attribute.value,
             })),

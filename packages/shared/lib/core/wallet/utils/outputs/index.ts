@@ -1,4 +1,5 @@
 export * from './getAmountFromOutput'
+export * from './getAsyncDataFromOutput'
 export * from './getExpirationDateFromOutput'
 export * from './getFoundryActivityData'
 export * from './getGovernorAddressFromOutput'
