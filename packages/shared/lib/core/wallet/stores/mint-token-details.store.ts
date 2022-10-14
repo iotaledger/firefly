@@ -10,6 +10,7 @@ export const mintTokenDetails = writable<IMintTokenDetails>({
     description: undefined,
     url: undefined,
     logoUrl: undefined,
+    aliasId: undefined,
 })
 
 export function setMintTokenDetails(payload: IMintTokenDetails): void {
@@ -26,5 +27,6 @@ export function resetMintTokenDetails(): void {
         description: undefined,
         url: undefined,
         logoUrl: undefined,
+        aliasId: undefined,
     })
 }
