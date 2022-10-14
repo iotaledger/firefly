@@ -100,8 +100,6 @@ const features = {
         },
         sendAndReceive: {
             enabled: true,
-        },
-        send: {
             nft: {
                 enabled: false,
             },

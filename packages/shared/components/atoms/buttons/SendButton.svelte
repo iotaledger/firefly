@@ -21,7 +21,7 @@
             description: localize('general.sendTokensToAddress'),
             action: onL1SendClick,
         },
-        ...(features.wallet.send.nft.enabled
+        ...(features.wallet.sendAndReceive.nft.enabled
             ? [
                   {
                       title: localize('general.sendNft'),
