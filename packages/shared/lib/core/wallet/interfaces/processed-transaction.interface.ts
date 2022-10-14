@@ -13,7 +13,7 @@ export interface IProcessedTransaction {
     claimingData?: IClaimData
 }
 
-interface IClaimData {
+export interface IClaimData {
     claimedDate: Date
     claimingTransactionId: string
 }

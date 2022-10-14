@@ -12,12 +12,12 @@
     const showDeleteAccount =
         $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
-    const handleCustomiseAccountClick = () => {
+    function handleCustomiseAccountClick(): void {
         openPopup({ type: 'manageAccount' })
         modal.close()
     }
 
-    function handleViewStorageDepositClick() {
+    function handleViewStorageDepositClick(): void {
         openPopup({ type: 'storageDepositBreakdown' })
         modal.close()
     }

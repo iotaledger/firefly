@@ -8,8 +8,8 @@
     export let threshold = 0
     export let y = 0
 
-    let scroller
-    let sections
+    let scroller: HTMLElement
+    let sections: NodeListOf<Element>
 
     onMount(() => {
         if (typeof scroller !== 'undefined') {

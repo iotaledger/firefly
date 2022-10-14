@@ -1,7 +1,7 @@
 {
     "name": "desktop",
     "productName": "Firefly Shimmer",
-    "version": "2.0.0",
+    "version": "2.0.1-beta-1",
     "description": "Official wallet application of Shimmer",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
@@ -32,7 +32,6 @@
         "argon2": "^0.27.1",
         "electron-log": "^4.3.1",
         "electron-updater": "^4.3.5",
-        "kdbxweb": "^1.14.4",
         "keytar": "^7.9.0",
         "node-machine-id": "^1.1.12",
         "shared": "0.0.0"

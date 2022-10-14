@@ -19,7 +19,7 @@
     let revealed = false
     let type = 'password'
 
-    const revealToggle = () => {
+    function revealToggle(): void {
         type = type === 'password' ? 'text' : 'password'
         revealed = !revealed
     }

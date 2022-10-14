@@ -15,7 +15,7 @@
         path?: string
     }
 
-    const allowedExtensions = ['kdbx', 'stronghold']
+    const allowedExtensions = ['stronghold']
 
     let importFile: ImportFile
     let importFileName = ''
@@ -64,7 +64,7 @@
 
         const reader = new FileReader()
 
-        reader.onload = (e) => {
+        reader.onload = (e): void => {
             setFile(e.target.result, fileWithPath)
             if ($mobile) {
                 onContinueClick()

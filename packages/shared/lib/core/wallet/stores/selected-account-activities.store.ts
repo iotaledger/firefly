@@ -105,11 +105,12 @@ export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
-            const asset = getAssetFromPersistedAssets(_activity.data.assetId)
+            const asset =
+                _activity.data.type !== ActivityType.Nft && getAssetFromPersistedAssets(_activity.data.assetId)
+            const hasValidAsset = _activity.data.type === ActivityType.Nft || (asset && isValidIRC30(asset.metadata))
             return (
                 !_activity.isHidden &&
-                asset &&
-                isValidIRC30(asset.metadata) &&
+                hasValidAsset &&
                 (_activity.data.type !== ActivityType.Alias || _activity.data.aliasType === AliasType.Created)
             )
         })
@@ -136,12 +137,16 @@ function getFieldsToSearchFromActivity(activity: IActivity): string[] {
         fieldsToSearch.push(activity.transactionId)
     }
 
-    if (activity.data.assetId) {
+    if (activity.data.type !== ActivityType.Nft && activity.data.assetId) {
         fieldsToSearch.push(activity.data.assetId)
         fieldsToSearch.push(getAssetFromPersistedAssets(activity.data.assetId)?.metadata?.name)
     }
 
-    if (activity.data.type !== ActivityType.Alias && activity.data.rawAmount) {
+    if (
+        activity.data.type !== ActivityType.Alias &&
+        activity.data.type !== ActivityType.Nft &&
+        activity.data.rawAmount
+    ) {
         fieldsToSearch.push(activity.data.rawAmount?.toString())
         fieldsToSearch.push(activity.getFormattedAmount(false)?.toLowerCase())
     }
