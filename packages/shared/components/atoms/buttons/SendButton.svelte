@@ -1,18 +1,17 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { resetLedgerPreparedOutput, resetShowInternalVerificationPopup } from '@core/ledger'
-    import { resetNewTransactionDetails } from '@core/wallet'
+    import { resetNewTransactionDetails, selectedSendOptionIndex } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { appSettings } from '@core/app'
     import { Text, FontWeight, TextType, Icon, Modal } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    let selectedOptionIndex: number = 0
     let modal: Modal = undefined
     let isModalOpened: boolean = false
 
     $: darkModeEnabled = $appSettings.darkMode
-    $: selectedOption = buttonOptions[selectedOptionIndex]
+    $: selectedOption = buttonOptions[$selectedSendOptionIndex]
 
     const buttonOptions = [
         {
@@ -33,7 +32,7 @@
     }
 
     function onSelection(index: number): void {
-        selectedOptionIndex = index
+        $selectedSendOptionIndex = index
         isModalOpened = false
         modal?.close()
     }
@@ -64,12 +63,8 @@
 </script>
 
 <div class="relative">
-    <div class="button-container flex flex-row justify-between rounded-xl">
-        <button
-            class="px-4 py-3.5 text-center w-full"
-            on:click|stopPropagation={onSendClick}
-            class:darkmode={darkModeEnabled}
-        >
+    <div class="button-container flex flex-row justify-between rounded-xl" class:darkmode={darkModeEnabled}>
+        <button class="px-4 py-3.5 text-center w-full" on:click|stopPropagation={onSendClick}>
             <span class="flex flex-col justify-center items-start">
                 <Text
                     type={TextType.p}
@@ -112,7 +107,7 @@
                     class="w-full flex flex-row flex-1 justify-between items-center px-2 py-3 space-x-2 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                 >
                     <div class="flex w-4 justify-center items-center">
-                        {#if selectedOptionIndex === index}
+                        {#if $selectedSendOptionIndex === index}
                             <Icon icon={IconEnum.Checkmark} classes="text-blue-500" width="16" height="16" />
                         {/if}
                     </div>
@@ -134,6 +129,30 @@
         span {
             min-height: 36px;
         }
+        &.darkmode {
+            @apply border-gray-700;
+            @apply bg-transparent;
+
+            button {
+                &:hover,
+                &:focus,
+                &:active {
+                    @apply bg-gray-700;
+                    @apply bg-opacity-20;
+                    @apply border-opacity-50;
+                }
+                &:disabled {
+                    @apply bg-gray-700;
+                    @apply bg-opacity-10;
+                    @apply border-gray-700;
+                    @apply border-opacity-10;
+                }
+
+                &:last-child {
+                    @apply border-gray-700;
+                }
+            }
+        }
 
         button {
             &:hover {
@@ -154,30 +173,14 @@
                 @apply bg-gray-50;
             }
 
-            &.darkmode {
-                @apply border-gray-700;
-                @apply bg-transparent;
-                &:hover,
-                &:focus,
-                &:active {
-                    @apply bg-gray-700;
-                    @apply bg-opacity-20;
-                    @apply border-opacity-50;
-                }
-                &:disabled {
-                    @apply bg-gray-700;
-                    @apply bg-opacity-10;
-                    @apply border-gray-700;
-                    @apply border-opacity-10;
-                }
-            }
-
             &:first-child {
                 border-top-left-radius: 0.75rem;
                 border-bottom-left-radius: 0.75rem;
             }
 
             &:last-child {
+                border-left: 1px solid;
+                @apply border-gray-300;
                 border-top-right-radius: 0.75rem;
                 border-bottom-right-radius: 0.75rem;
             }
