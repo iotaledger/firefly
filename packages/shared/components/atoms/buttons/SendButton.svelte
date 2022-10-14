@@ -6,12 +6,14 @@
     import { appSettings } from '@core/app'
     import { Text, FontWeight, TextType, Icon, Modal } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import features from '@features/features'
 
     let modal: Modal = undefined
     let isModalOpened: boolean = false
 
     $: darkModeEnabled = $appSettings.darkMode
     $: selectedOption = buttonOptions[$selectedSendOptionIndex]
+    $: hasMultipleOptions = buttonOptions.length > 1
 
     const buttonOptions = [
         {
@@ -19,11 +21,15 @@
             description: localize('general.sendTokensToAddress'),
             action: onL1SendClick,
         },
-        {
-            title: localize('general.sendNft'),
-            description: localize('general.sendNftToAddress'),
-            action: onNftSendClick,
-        },
+        ...(features.wallet.send.nft.enabled
+            ? [
+                  {
+                      title: localize('general.sendNft'),
+                      description: localize('general.sendNftToAddress'),
+                      action: onNftSendClick,
+                  },
+              ]
+            : []),
     ]
 
     function openModal(): void {
@@ -64,7 +70,10 @@
 
 <div class="relative">
     <div class="button-container flex flex-row justify-between rounded-xl" class:darkmode={darkModeEnabled}>
-        <button class="px-4 py-3.5 text-center w-full" on:click|stopPropagation={onSendClick}>
+        <button
+            class="px-4 py-3.5 text-center flex flex-row justify-between w-full"
+            on:click|stopPropagation={onSendClick}
+        >
             <span class="flex flex-col justify-center items-start">
                 <Text
                     type={TextType.p}
@@ -85,13 +94,18 @@
                     >{selectedOption.description}
                 </Text>
             </span>
+            {#if !hasMultipleOptions}
+                <Icon icon={IconEnum.ChevronRight} classes="text-gray-500 h-full" />
+            {/if}
         </button>
-        <button class="p-4" on:click={openModal}>
-            <Icon
-                icon={isModalOpened ? IconEnum.ChevronUp : IconEnum.ChevronDown}
-                classes={isModalOpened ? 'text-blue-500' : 'text-gray-500'}
-            />
-        </button>
+        {#if hasMultipleOptions}
+            <button class="p-4" on:click={openModal}>
+                <Icon
+                    icon={isModalOpened ? IconEnum.ChevronUp : IconEnum.ChevronDown}
+                    classes={isModalOpened ? 'text-blue-500' : 'text-gray-500'}
+                />
+            </button>
+        {/if}
     </div>
 
     <Modal
@@ -111,7 +125,9 @@
                             <Icon icon={IconEnum.Checkmark} classes="text-blue-500" width="16" height="16" />
                         {/if}
                     </div>
-                    <Text type={TextType.p} color="gray-800" classes="w-full text-left">{option.title}</Text>
+                    <Text type={TextType.p} fontWeight={FontWeight.medium} color="gray-800" classes="w-full text-left"
+                        >{option.title}</Text
+                    >
                 </button>
             {/each}
         </action-picker-modal>
