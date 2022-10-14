@@ -2,10 +2,7 @@ import { formatNumber } from '@lib/currency'
 import { ITokenMetadata } from '../interfaces'
 
 export function formatTokenAmountDefault(amount: number, tokenMetadata: ITokenMetadata): string {
-    if (!amount) {
-        // Required for the place holder on AssetAmountInput
-        return undefined
-    } else if (amount < 0) {
+    if (amount < 0) {
         throw new Error('Amount is negative')
     } else if (isDecimal(amount)) {
         throw new Error('Amount is a decimal number')
