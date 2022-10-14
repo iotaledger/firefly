@@ -33,16 +33,16 @@
         updateLedgerConnectionText()
     }
 
-    const handleSettingsClick = (): void => {
+    function handleSettingsClick(): void {
         openSettings()
         modal?.close()
     }
 
-    const handleLogoutClick = (): void => {
+    function handleLogoutClick(): void {
         void logout()
     }
 
-    const handleStrongholdToggleClick = (): void => {
+    function handleStrongholdToggleClick(): void {
         if ($isStrongholdLocked) {
             checkOrUnlockStronghold()
         } else {
@@ -50,18 +50,18 @@
         }
     }
 
-    const updateLedgerConnectionText = (): void => {
+    function updateLedgerConnectionText(): void {
         ledgerConnectionText = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerConnectionState}`)
     }
 
-    function handleBackupClick() {
+    function handleBackupClick(): void {
         modal?.close()
         openPopup({
             type: 'backupStronghold',
         })
     }
 
-    function handleVersionUpdateClick() {
+    function handleVersionUpdateClick(): void {
         modal?.close()
         openPopup({ type: 'version' })
     }

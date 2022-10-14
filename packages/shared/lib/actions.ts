@@ -6,13 +6,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export function clickOutside(node: any, options?: { includeScroll }): { destroy } {
-    const handleClick = (event) => {
+    const handleClick: (event: MouseEvent) => void = (event) => {
         if (node && !node.contains(event.target) && !event.defaultPrevented) {
             node.dispatchEvent(new CustomEvent('clickOutside', node))
         }
     }
 
-    const handleScroll = () => {
+    const handleScroll: () => void = () => {
         node.dispatchEvent(new CustomEvent('clickOutside', node))
     }
 
@@ -23,7 +23,7 @@ export function clickOutside(node: any, options?: { includeScroll }): { destroy 
     }
 
     return {
-        destroy() {
+        destroy(): void {
             document.removeEventListener('click', handleClick, true)
             if (options?.includeScroll) {
                 document.removeEventListener('scroll', handleScroll, true)

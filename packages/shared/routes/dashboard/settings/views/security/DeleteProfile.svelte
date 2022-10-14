@@ -4,7 +4,7 @@
     import { openPopup } from 'shared/lib/popup'
     import { deleteProfile } from '@contexts/settings'
 
-    function handleDeleteClick() {
+    function handleDeleteClick(): void {
         openPopup({
             type: 'confirmation',
             props: {

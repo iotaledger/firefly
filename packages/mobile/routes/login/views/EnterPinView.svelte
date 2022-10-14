@@ -46,7 +46,7 @@
 
     let buttonText = setButtonText(timeRemainingBeforeNextAttempt)
 
-    function setButtonText(time) {
+    function setButtonText(time: number): string {
         return localize('views.login.pleaseWait', { values: { time: time.toString() } })
     }
 

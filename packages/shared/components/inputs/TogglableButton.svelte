@@ -5,7 +5,7 @@
     export let active: boolean = false
     export let onClick: () => void = () => {}
 
-    function clickToggle() {
+    function clickToggle(): void {
         active = !active
         onClick && onClick()
     }

@@ -7,5 +7,5 @@ export const time = readable(null, (set) => {
         set(new Date())
     }, 1000)
 
-    return () => clearInterval(interval)
+    return (): void => clearInterval(interval)
 })

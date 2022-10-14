@@ -9,7 +9,7 @@
 
     $: clientOptions = $activeProfile?.clientOptions
 
-    function isPrimary(node: INode) {
+    function isPrimary(node: INode): boolean {
         return node.url === clientOptions?.primaryNode?.url
     }
 

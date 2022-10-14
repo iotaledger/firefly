@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Dropdown2 } from 'shared/components'
+    import { Dropdown2, DropdownItem } from 'shared/components'
     import { ITokenMetadata } from '@core/wallet'
     import { Unit } from '@lib/units'
 
@@ -15,7 +15,7 @@
         previousTokenMetadata = tokenMetadata
     }
 
-    let items = []
+    let items: DropdownItem<string> = []
     $: if (!tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
         items = [{ label: tokenMetadata?.unit, value: tokenMetadata?.unit }]
         if (tokenMetadata.subunit) {
@@ -32,7 +32,7 @@
         ]
     }
 
-    function onSelect(selected) {
+    function onSelect(selected: DropdownItem<string>): void {
         unit = selected.value
     }
 </script>

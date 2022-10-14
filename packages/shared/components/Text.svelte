@@ -100,13 +100,13 @@
     $: formattedColor = color ? TEXT_PREFIX + color : ''
     $: formattedDarkColor = darkColor ? DARKMODE_PREFIX + TEXT_PREFIX + darkColor : ''
 
-    let _fontSize
-    let _lineHeight
-    let _color
-    let _darkColor
+    let _fontSize: string
+    let _lineHeight: string
+    let _color: string
+    let _darkColor: string
 
     // Format custom inputs
-    function setCustomStyles() {
+    function setCustomStyles(): void {
         _fontSize = formattedFontSize
         _lineHeight = formattedLineHeight
         _color = formattedColor
@@ -114,7 +114,7 @@
     }
 
     // Adjust font for old override classes
-    function adjustFont() {
+    function adjustFont(): void {
         switch (type) {
             case TextType.p:
                 _fontSize = bigger ? 'text-16' : smaller ? 'text-12' : _fontSize
@@ -133,7 +133,7 @@
     }
 
     // Adjust colours for old override classes
-    function adjustColor() {
+    function adjustColor(): void {
         _color = overrideColor ? '' : _color
         _darkColor = overrideColor ? '' : _darkColor
 
@@ -154,8 +154,7 @@
 
     $: $$props, setCustomStyles(), adjustFont(), adjustColor()
 
-    let customClasses: ICustomClass
-    $: customClasses = {
+    $: customClasses = <ICustomClass>{
         ...DEFAULT_CLASSES_LIST[type],
         ...(_fontSize && { fontSize: _fontSize }),
         ...(fontWeight && { fontWeight }),

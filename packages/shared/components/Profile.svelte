@@ -15,13 +15,13 @@
 
     export let onClick: undefined | ((id: string) => void) = undefined
 
-    function handleOnClick() {
+    function handleOnClick(): void {
         onClick && onClick(id)
     }
 
     const slots = $$props.$$slots
 
-    function getInitials() {
+    function getInitials(): string {
         const initials = _getInitials(name, 1)
         if (initials.length === 1) {
             return initials

@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { openPopup } from 'shared/lib/popup'
 
-    function handleWalletFinderClick() {
+    function handleWalletFinderClick(): void {
         openPopup({ type: 'walletFinder' })
     }
 </script>

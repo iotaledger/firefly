@@ -11,7 +11,7 @@
         .map((currency) => ({ value: currency, label: currency }))
         .sort()
 
-    const handleCurrencySelect = (item) => {
+    function handleCurrencySelect(item): void {
         updateActiveProfileSettings({ currency: item.value })
         void addProfileCurrencyPriceData()
     }

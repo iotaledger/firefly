@@ -118,13 +118,13 @@
         testDeepLinkForm: TestDeepLinkFormPopup,
     }
 
-    const onKey = (e) => {
-        if (e.key === 'Escape') {
+    function onKey(event: KeyboardEvent): void {
+        if (event.key === 'Escape') {
             tryClosePopup()
         }
     }
 
-    const tryClosePopup = (): void => {
+    function tryClosePopup(): void {
         if (!preventClose) {
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
@@ -133,26 +133,28 @@
         }
     }
 
-    const focusableElements = () =>
-        [
+    function focusableElements(): HTMLElement[] {
+        return [
             ...popupContent.querySelectorAll(
                 'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
             ),
         ].filter((el) => !el.hasAttribute('disabled'))
+    }
 
-    const handleFocusFirst = (e) => {
+    function handleFocusFirst(event: FocusEvent): void {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[elems.length - 1].focus()
         }
-        e.preventDefault()
+        event.preventDefault()
     }
-    const handleFocusLast = (e) => {
+
+    function handleFocusLast(event: FocusEvent): void {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[0].focus()
         }
-        e.preventDefault()
+        event.preventDefault()
     }
 
     onMount(() => {
