@@ -77,9 +77,6 @@ const Platform: IPlatform = {
         return Promise.resolve(undefined)
     },
     updateMenu(attribute: string, value: unknown): void {},
-    validateSeedVault(buffer: unknown): Promise<boolean> {
-        return Promise.resolve(false)
-    },
     copyFile(copyFilePath: string, destinationFilePath: string): Promise<void> {
         return Promise.resolve()
     },
