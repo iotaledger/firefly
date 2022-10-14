@@ -1095,9 +1095,17 @@
         "recoveryPhrase": "Recovery Phrase",
         "recentActivity": "Recent Activity",
         "sent": "Sent",
+        "sending": "Sending",
         "received": "Received",
+        "receiving": "Receiving",
+        "sentNft": "NFT sent",
+        "sendingNft": "Sending NFT",
+        "receivedNft": "NFT received",
+        "receivingNft": "Receiving NFT",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "transferNft": "Transfer NFT",
+        "transferringNft": "Transferring NFT",
         "shimmerClaimed": "Claimed",
         "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
@@ -1227,8 +1235,6 @@
         "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
-        "receiving": "Receiving",
-        "sending": "Sending",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
@@ -1261,6 +1267,7 @@
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
+        "metadataName": "Name",
         "tag": "Tag",
         "nodeList": "Node list",
         "claimedIn": "Claimed in",
@@ -1688,6 +1695,32 @@
             "Conflicting": "failed to stake"
         },
         "transaction": {
+            "internal": {
+                "incoming": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "outgoing": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
+            },
+            "external": {
+                "incoming": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "outgoing": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
+            }
+        },
+        "nft": {
             "internal": {
                 "incoming": {
                     "Pending": "transferring from",
