@@ -38,7 +38,7 @@
     export let metadata: string = null
     export let rawAmount: string = null
     export let unit: string
-    export let storageDeposit = 0
+    export let storageDeposit: number = 0
     export let giftedStorageDeposit = 0
     export let surplus: string = null
     export let subject: Subject = null
