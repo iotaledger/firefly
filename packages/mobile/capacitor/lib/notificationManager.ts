@@ -12,6 +12,6 @@ export const NotificationManager: INotificationManager = {
             data: contextData,
         })
 
-        notification.onclick = () => {}
+        notification.onclick = (): void => {}
     },
 }

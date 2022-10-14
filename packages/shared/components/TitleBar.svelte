@@ -31,7 +31,7 @@
         window.removeEventListener('resize', handleResize)
     })
 
-    async function handleResize() {
+    async function handleResize(): Promise<void> {
         isMaximized = await Platform.isMaximized()
     }
 </script>

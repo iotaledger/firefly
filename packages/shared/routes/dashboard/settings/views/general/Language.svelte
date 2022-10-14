@@ -7,7 +7,7 @@
     let languageList: DropdownChoice[]
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
-    const handleLanguage = (item) => {
+    function handleLanguage(item): void {
         setLanguage(item)
     }
 </script>

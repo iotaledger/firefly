@@ -8,7 +8,7 @@
     export let loop = true
     export let autoplay = true
     export let segments = undefined
-    export let renderer = 'svg'
+    export let renderer: 'svg' | 'canvas' | 'html' = 'svg'
 
     const animations = {
         'welcome-desktop': {
@@ -193,13 +193,13 @@
         lottieAnimation.addEventListener('DOMLoaded', handleSegments)
     }
 
-    function handleSegments() {
+    function handleSegments(): void {
         if (segments) {
             lottieAnimation.playSegments(segments, true)
         }
     }
 
-    function destroyAnimation() {
+    function destroyAnimation(): void {
         if (lottieAnimation) {
             try {
                 lottieAnimation.destroy()

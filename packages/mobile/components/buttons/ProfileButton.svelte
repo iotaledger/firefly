@@ -12,7 +12,7 @@
 
     export let onClick: undefined | ((id: string) => void) = undefined
 
-    function handleOnClick() {
+    function handleOnClick(): void {
         onClick && onClick(id)
     }
 

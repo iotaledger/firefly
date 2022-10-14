@@ -49,8 +49,10 @@
         }
     })
 
-    function slidable(node: HTMLElement, use: boolean = true) {
-        if (!use) return
+    function slidable(node: HTMLElement, use: boolean = true): { destroy(): void } {
+        if (!use) {
+            return
+        }
         let x: number
         let y: number
         let init: number
@@ -68,7 +70,7 @@
             node.addEventListener('touchend', handleTouchend)
         }
 
-        function handleTouchmove(event: TouchEvent) {
+        function handleTouchmove(event: TouchEvent): void {
             if (event.targetTouches.length === 1) {
                 const sx = event.touches[0].pageX - x
                 const sy = event.touches[0].pageY - y
@@ -83,7 +85,7 @@
             }
         }
 
-        function handleTouchend() {
+        function handleTouchend(): void {
             node.dispatchEvent(new CustomEvent('slideEnd'))
 
             const elapsed = window.performance.now()
@@ -98,7 +100,7 @@
         node.addEventListener('touchstart', handleTouchstart)
 
         return {
-            destroy() {
+            destroy(): void {
                 node.removeEventListener('touchstart', handleTouchstart)
             },
         }
@@ -114,7 +116,7 @@
         )
     }
 
-    async function handleSlideEnd() {
+    async function handleSlideEnd(): Promise<void> {
         const thresholdUnreached = fromRight
             ? (viewportLength - dimLength) / 2 > $coords.x
             : (viewportLength - dimLength) / 1.2 > $coords.y

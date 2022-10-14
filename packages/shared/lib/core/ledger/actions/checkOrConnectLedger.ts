@@ -5,7 +5,7 @@ import { LedgerConnectionState } from '../interfaces'
 import { ledgerConnectionState } from '../stores'
 
 export function checkOrConnectLedger(
-    callback: () => Promise<unknown> = async () => {},
+    callback: () => Promise<unknown> = async (): Promise<void> => {},
     reopenPopup?: boolean
 ): Promise<unknown> {
     const previousPopup = get(popupState)

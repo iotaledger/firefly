@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Icon, Text, Error } from 'shared/components'
+    import { Icon, Text, Error, DropdownItem } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { isNumberLetterOrPunctuation } from '@lib/utils/isNumberLetterOrPunctuation'
 
@@ -10,7 +10,7 @@
     export let disabled = false
     export let valueKey = 'label'
     export let sortItems = false
-    export let items: { label: string; value: unknown }[] = []
+    export let items: DropdownItem<unknown>[] = []
     export let small = false
     export let contentWidth = false
     export let error = ''
@@ -39,7 +39,7 @@
         dropdown = false
     }
 
-    function toggleDropDown() {
+    function toggleDropDown(): void {
         if (items.length <= 1) {
             return
         }

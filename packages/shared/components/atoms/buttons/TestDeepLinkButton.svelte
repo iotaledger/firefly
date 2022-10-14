@@ -3,7 +3,7 @@
     import { openPopup } from '@lib/popup'
     import { OnboardingButton } from 'shared/components'
 
-    function handleClick() {
+    function handleClick(): void {
         openPopup({
             type: 'testDeepLinkForm',
         })

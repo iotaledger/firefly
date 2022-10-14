@@ -137,7 +137,7 @@
         Electron.DeepLinkManager.clearDeepLinkRequest()
     })
 
-    const showDeepLinkNotification = () => {
+    function showDeepLinkNotification(): void {
         if (!$loggedIn) {
             showAppNotification({
                 type: 'info',
@@ -148,7 +148,7 @@
 
     $keyboardHeight = window.innerHeight / 2
     // Press ctrl + k to toggle the fake keyboard
-    document.onkeydown = function (e) {
+    document.onkeydown = function (e): void {
         if (e.ctrlKey && e.key === 'c') {
             $appSettings.theme = $appSettings.theme === AppTheme.Light ? AppTheme.Dark : AppTheme.Light
             $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)

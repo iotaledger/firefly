@@ -38,7 +38,7 @@
             | GeneralSettingsRouteNoProfile
             | AdvancedSettingsRouteNoProfile
             | HelpAndInfoRoute
-    ) {
+    ): void {
         $settingsRouter.goToChildRoute(route, childRoute)
     }
 </script>

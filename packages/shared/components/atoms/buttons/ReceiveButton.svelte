@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { openPopup } from '@lib/popup'
 
-    function handleReceiveClick() {
+    function handleReceiveClick(): void {
         openPopup({
             type: 'receiveAddress',
         })
