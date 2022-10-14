@@ -7,6 +7,7 @@ export { default as ExpirationTimePickerMenu } from './ExpirationTimePickerMenu.
 export { default as FilterModal } from './FilterModal.svelte'
 export { default as Modal } from './Modal.svelte'
 export { default as NetworkSummaryModal } from './NetworkSummaryModal.svelte'
+export { default as NftSelector } from './NftSelector.svelte'
 export { default as NodeActionsMenu } from './NodeActionsMenu.svelte'
 export { default as ProfileActionsModal } from './ProfileActions.svelte'
 export { default as RecipientAccountSelector } from './RecipientAccountSelector.svelte'

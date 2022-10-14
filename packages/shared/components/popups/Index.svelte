@@ -31,8 +31,7 @@
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
-    import SendConfirmationPopup from './SendConfirmationPopup.svelte'
-    import SendFormPopup from './SendFormPopup.svelte'
+    import { SendFormPopup, SendConfirmationPopup, SendNftFormPopup, SendNftConfirmationPopup } from './send'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
     import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
     import TokenInformationPopup from './TokenInformationPopup.svelte'
@@ -109,6 +108,8 @@
         activityDetails: ActivityDetailsPopup,
         sendConfirmation: SendConfirmationPopup,
         sendForm: SendFormPopup,
+        sendNftConfirmation: SendNftConfirmationPopup,
+        sendNftForm: SendNftFormPopup,
         manageAccount: ManageAccountPopup,
         tokenInformation: TokenInformationPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,

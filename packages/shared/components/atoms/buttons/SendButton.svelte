@@ -62,7 +62,7 @@
         resetLedgerPreparedOutput()
         resetShowInternalVerificationPopup()
         openPopup({
-            type: 'sendForm',
+            type: 'sendNftForm',
             overflow: true,
         })
     }
