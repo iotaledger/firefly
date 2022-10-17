@@ -11,7 +11,6 @@ export interface INftActivityData {
     outputId: string
     metadata: INftMetadata
     storageDeposit: number
-    giftedStorageDeposit: number
     direction: ActivityDirection
     isInternal: boolean
     sender: Subject

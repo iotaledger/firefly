@@ -7,12 +7,13 @@ import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetNewNftTransactionDetails } from '../stores'
 import { handleLedgerError } from '@core/ledger'
 import { preprocessTransaction } from '../utils'
+import { INftOutput } from '@iota/types'
 
-export async function sendNft(nftId: string, address: string): Promise<void> {
+export async function sendNft(output: INftOutput): Promise<void> {
     try {
         updateSelectedAccount({ isTransferring: true })
         const account = get(selectedAccount)
-        const transaction = await account.sendNft([{ nftId, address }], DEFAULT_TRANSACTION_OPTIONS)
+        const transaction = await account.sendOutputs([output], DEFAULT_TRANSACTION_OPTIONS)
         // Reset transaction details state, since the transaction has been sent
         resetNewNftTransactionDetails()
         const processedTransaction = preprocessTransaction(transaction)

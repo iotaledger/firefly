@@ -1,6 +1,5 @@
 import { IProcessedTransaction, INftActivityData, INftMetadata } from '../../interfaces'
 import {
-    getStorageDepositFromOutput,
     getNftOutputFromTransaction,
     getRecipientFromOutput,
     isSubjectInternal,
@@ -13,7 +12,7 @@ import { IAccountState } from '@core/account'
 import type { IMetadataFeature, ISenderFeature, OutputTypes } from '@iota/types'
 import { Converter } from '@lib/converter'
 import { getAsyncDataFromOutput } from './getAsyncDataFromOutput'
-import { MimeType } from '@core/wallet/types'
+import { MimeType, Subject } from '@core/wallet/types'
 
 export function getNftActivityData(
     processedTransaction: IProcessedTransaction,
@@ -22,7 +21,7 @@ export function getNftActivityData(
     const { outputs, isIncoming, claimingData, transactionId } = processedTransaction
     const { output, outputId } = getNftOutputFromTransaction(outputs)
 
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output) // probably we need to sum up all storage deposits
+    const storageDeposit = Number(output.amount)
     const metadata = getMetadataFromNft(output)
 
     const recipient = getRecipientFromOutput(output)
@@ -41,7 +40,6 @@ export function getNftActivityData(
         outputId,
         isInternal,
         storageDeposit,
-        giftedStorageDeposit,
         metadata,
         sender,
         recipient,
@@ -50,7 +48,7 @@ export function getNftActivityData(
     }
 }
 
-function getSenderFromNft(output: OutputTypes) {
+function getSenderFromNft(output: OutputTypes): Subject {
     if (output.type === OUTPUT_TYPE_NFT) {
         const sender = output.immutableFeatures?.find((feature) => feature.type === 0) as ISenderFeature
         if (!sender) {

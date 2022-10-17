@@ -14,10 +14,11 @@
         newNftTransactionDetails,
         updateNewNftTransactionDetails,
         sendNft,
-        convertBech32ToHexAddress,
+        buildNftOutputData,
     } from '@core/wallet'
     import { closePopup, openPopup } from '@lib/popup'
     import { handleError } from '@core/error/handlers/handleError'
+    import type { INftOutput } from '@iota/types'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -25,16 +26,18 @@
     const { nftId, recipient } = get(newNftTransactionDetails)
     let { expirationDate, giftStorageDeposit } = get(newNftTransactionDetails)
 
-    const storageDeposit = 0
+    let storageDeposit = 0
     const giftedStorageDeposit = 0
+    let preparedOutput: INftOutput
     let expirationTimePicker: ExpirationTimePicker
 
-    const initialExpirationDate: ExpirationTime = getInitialExpirationDate()
+    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: isTransferring = $selectedAccount.isTransferring
+    $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
 
     $: transactionDetails = {
         nftId,
@@ -44,6 +47,20 @@
         subject: recipient,
         isInternal,
         type: ActivityType.Nft,
+    }
+
+    function refreshSendConfirmationState(): void {
+        void _prepareOutput()
+    }
+
+    async function _prepareOutput(): Promise<void> {
+        const outputData = buildNftOutputData(expirationDate, nftId, recipientAddress, $selectedAccount.depositAddress)
+        preparedOutput = await $selectedAccount.buildNftOutput(outputData)
+        storageDeposit = Number(preparedOutput.amount)
+
+        if (!initialExpirationDate) {
+            initialExpirationDate = getInitialExpirationDate()
+        }
     }
 
     function getInitialExpirationDate(): ExpirationTime {
@@ -57,7 +74,7 @@
     }
 
     async function sendOutputAndClosePopup(): Promise<void> {
-        await sendNft(convertBech32ToHexAddress(nftId), recipientAddress)
+        await sendNft(preparedOutput)
         closePopup()
     }
 
@@ -70,6 +87,7 @@
             updateNewNftTransactionDetails({ expirationDate, giftStorageDeposit })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
+            console.error(err)
             handleError(err.error)
         }
     }
