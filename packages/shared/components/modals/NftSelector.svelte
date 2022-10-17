@@ -10,7 +10,7 @@
     export let onClose: () => void
 
     $: nftIds =
-        $selectedAccount.balances?.aliases.map((hexNftId) => {
+        $selectedAccount.balances?.nfts.map((hexNftId) => {
             const nftId = convertHexAddressToBech32(ADDRESS_TYPE_NFT, hexNftId)
             return { value: nftId, label: truncateString(nftId, 9, 9) }
         }) ?? []
