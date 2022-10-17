@@ -20,7 +20,7 @@
     export let rawAmount: string = undefined
     export let unit: string = undefined
 
-    let amount: string = rawAmount ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata) : undefined
+    let amount: string = rawAmount ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit) : undefined
     let amountInputElement: HTMLInputElement
     let error: string
 
@@ -40,7 +40,7 @@
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
         if (isRawAmount) {
-            const parsedAmount = formatTokenAmountDefault(asset?.balance?.available, asset?.metadata)
+            const parsedAmount = formatTokenAmountDefault(asset?.balance?.available, asset?.metadata, unit)
             amount = parsedAmount
             unit = asset?.metadata?.unit
             return

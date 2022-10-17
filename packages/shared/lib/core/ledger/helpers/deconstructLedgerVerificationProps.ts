@@ -13,7 +13,8 @@ export function deconstructLedgerVerificationProps(): PopupProps {
         : (transactionDetails?.recipient as IAccountSubject)?.account?.depositAddress
     const toAmount = `${formatTokenAmountDefault(
         Number(transactionDetails?.rawAmount),
-        transactionDetails?.asset.metadata
+        transactionDetails?.asset.metadata,
+        transactionDetails?.unit
     )}`
 
     return {

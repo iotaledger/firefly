@@ -50,7 +50,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: amount = formatTokenAmountDefault(Number(rawAmount), asset?.metadata)
+    $: amount = formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit)
     $: formattedTransactionTime = getDateFormat(transactionTime)
     $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)
