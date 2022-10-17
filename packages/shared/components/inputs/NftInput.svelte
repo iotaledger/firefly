@@ -25,8 +25,8 @@
             bind:hasFocus
             clearBackground
             clearBorder
-            label={localize('popups.mintNativeToken.property.nft')}
-            placeholder={localize('popups.mintNativeToken.property.nft')}
+            label={localize('popups.sendNft.property.nft')}
+            placeholder={localize('popups.sendNft.property.nft')}
             fontSize="sm"
             {...$$restProps}
         />

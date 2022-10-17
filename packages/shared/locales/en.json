@@ -887,6 +887,13 @@
                 "verifyToken": "I verify this token"
             }
         },
+        "sendNft": {
+            "formTitle": "Send NFT",
+            "confirmationTitle": "Confirm sending NFT",
+            "property": {
+                "nft": "NFT"
+            }
+        },
         "mintNativeToken": {
             "formTitle": "Mint native tokens",
             "confirmationTitle": "Mint native tokens",

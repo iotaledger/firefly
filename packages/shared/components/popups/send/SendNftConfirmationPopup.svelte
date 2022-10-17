@@ -1,94 +1,49 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import Big from 'big.js'
-    import {
-        Button,
-        ExpirationTimePicker,
-        KeyValueBox,
-        Text,
-        TextHint,
-        Error,
-        Toggle,
-        FontWeight,
-        TextType,
-    } from 'shared/components'
-    import { TransactionDetails } from 'shared/components/molecules'
-    import type { OutputTypes } from '@iota/types'
-    import type { OutputOptions } from '@iota/wallet'
-    import { prepareOutput, selectedAccount } from '@core/account'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text, Toggle, FontWeight, TextType } from 'shared/components'
+    import { NftDetails } from 'shared/components/molecules'
+    import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { checkActiveProfileAuth } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
         ActivityType,
-        getOutputOptions,
         InclusionState,
-        sendOutput,
-        validateSendConfirmation,
-        selectedAccountAssets,
-        getStorageDepositFromOutput,
-        DEFAULT_TRANSACTION_OPTIONS,
-        newTransactionDetails,
-        updateNewTransactionDetails,
+        newNftTransactionDetails,
+        updateNewNftTransactionDetails,
+        sendNft,
+        convertBech32ToHexAddress,
     } from '@core/wallet'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@lib/popup'
-    import { CurrencyTypes } from '@lib/typings/currency'
-    import { BaseError } from '@core/error'
-    import { ledgerPreparedOutput } from '@core/ledger'
+    import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
 
-    const { asset, rawAmount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift, surplus } =
-        get(newTransactionDetails)
-    let { expirationDate, giftStorageDeposit } = get(newTransactionDetails)
+    const { nftId, recipient } = get(newNftTransactionDetails)
+    let { expirationDate, giftStorageDeposit } = get(newNftTransactionDetails)
 
-    let storageDeposit = 0
-    let giftedStorageDeposit = 0
-    let preparedOutput: OutputTypes
-    let outputOptions: OutputOptions
-    let error: BaseError
+    const storageDeposit = 0
+    const giftedStorageDeposit = 0
     let expirationTimePicker: ExpirationTimePicker
 
-    let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
+    const initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
-    $: hideGiftToggle = asset?.id === $selectedAccountAssets?.baseCoin?.id
-    $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
-    function refreshSendConfirmationState(): void {
-        error = null
-        void _prepareOutput()
-    }
-
-    $: formattedFiatValue =
-        formatCurrency(
-            convertToFiat(
-                Big(rawAmount),
-                $currencies[CurrencyTypes.USD],
-                $exchangeRates[$activeProfile?.settings?.currency]
-            )
-        ) || ''
-
     $: transactionDetails = {
-        asset,
+        nftId,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
-        metadata,
         storageDeposit: giftStorageDeposit ? giftedStorageDeposit : storageDeposit,
         subject: recipient,
-        rawAmount,
-        tag,
-        unit,
         isInternal,
-        surplus,
-        type: ActivityType.Transaction,
+        type: ActivityType.Nft,
     }
 
     function getInitialExpirationDate(): ExpirationTime {
@@ -101,43 +56,8 @@
         }
     }
 
-    async function _prepareOutput(): Promise<void> {
-        outputOptions = getOutputOptions(
-            expirationDate,
-            recipientAddress,
-            rawAmount,
-            metadata,
-            tag,
-            asset,
-            giftStorageDeposit,
-            surplus
-        )
-        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-        setStorageDeposit(preparedOutput, Number(surplus))
-
-        if (!initialExpirationDate) {
-            initialExpirationDate = getInitialExpirationDate()
-        }
-    }
-
-    function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
-        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            getStorageDepositFromOutput(preparedOutput)
-        storageDeposit = _storageDeposit
-
-        // Only giftedStorageDeposit needs adjusting, since that is derived
-        // from the amount property instead of the unlock condition
-        if (!surplus) {
-            giftedStorageDeposit = _giftedStorageDeposit
-        } else if (surplus >= _giftedStorageDeposit) {
-            giftedStorageDeposit = 0
-        } else {
-            giftedStorageDeposit = _giftedStorageDeposit - surplus
-        }
-    }
-
     async function sendOutputAndClosePopup(): Promise<void> {
-        await sendOutput(preparedOutput)
+        await sendNft(convertBech32ToHexAddress(nftId), recipientAddress)
         closePopup()
     }
 
@@ -146,25 +66,18 @@
     }
 
     async function onConfirm(): Promise<void> {
-        error = null
         try {
-            validateSendConfirmation(outputOptions, preparedOutput)
-            updateNewTransactionDetails({ expirationDate, giftStorageDeposit, surplus })
-            if ($isActiveLedgerProfile) {
-                ledgerPreparedOutput.set(preparedOutput)
-            }
+            updateNewNftTransactionDetails({ expirationDate, giftStorageDeposit })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
-            }
+            handleError(err.error)
         }
     }
 
     function onBack(): void {
         closePopup()
         openPopup({
-            type: 'sendForm',
+            type: 'sendNftForm',
             overflow: true,
         })
     }
@@ -177,9 +90,7 @@
         try {
             await _onMount()
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
-            }
+            handleError(err?.error)
         }
     })
 </script>
@@ -189,18 +100,10 @@
         >{localize('popups.transaction.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
-        <TransactionDetails {...transactionDetails} {formattedFiatValue} />
-        {#if !hideGiftToggle}
-            <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
-                <Toggle
-                    slot="value"
-                    color="green"
-                    disabled={disableToggleGift}
-                    active={giftStorageDeposit}
-                    onClick={toggleGiftStorageDeposit}
-                />
-            </KeyValueBox>
-        {/if}
+        <NftDetails {...transactionDetails} />
+        <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
+            <Toggle slot="value" color="green" active={giftStorageDeposit} onClick={toggleGiftStorageDeposit} />
+        </KeyValueBox>
         {#if initialExpirationDate !== undefined}
             <KeyValueBox keyText={localize('general.expirationTime')}>
                 <ExpirationTimePicker
@@ -208,17 +111,10 @@
                     bind:this={expirationTimePicker}
                     bind:value={expirationDate}
                     initialSelected={initialExpirationDate}
-                    disabled={disableChangeExpiration}
                 />
             </KeyValueBox>
         {/if}
-        {#if error}
-            <Error error={error?.message} />
-        {/if}
     </div>
-    {#if surplus}
-        <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
-    {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}
             <Button classes="w-full" outline onClick={onCancel} disabled={isTransferring}>

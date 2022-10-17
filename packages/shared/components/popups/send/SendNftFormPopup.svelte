@@ -1,20 +1,19 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
+    import { newNftTransactionDetails, updateNewNftTransactionDetails } from '@core/wallet'
     import { Button, Text, RecipientInput, NftInput, FontWeight } from 'shared/components'
     import { closePopup, openPopup } from '@lib/popup'
 
-    let { asset, rawAmount, unit, recipient, metadata, tag } = get(newTransactionDetails)
-    let nftId: string
+    let { nftId, recipient } = get(newNftTransactionDetails)
     let recipientInput: RecipientInput
 
     async function onSend(): Promise<void> {
         const valid = await validate()
         if (valid) {
-            updateNewTransactionDetails({ asset, rawAmount, unit, recipient, metadata, tag })
+            updateNewNftTransactionDetails({ nftId, recipient })
             openPopup({
-                type: 'sendConfirmation',
+                type: 'sendNftConfirmation',
                 overflow: true,
             })
         }
@@ -37,7 +36,7 @@
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
-        {localize('popups.sendNftForm.title')}
+        {localize('popups.sendNft.title')}
     </Text>
     <send-form-inputs class="flex flex-col space-y-4">
         <NftInput bind:nftId />
