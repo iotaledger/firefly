@@ -78,7 +78,7 @@
         <Text type="h2">{locale('views.secureSpentAddresses.title')}</Text>
     </div>
     <div slot="leftpane__content" class="relative h-full flex flex-col flex-wrap">
-        <Text type="p mb-4" secondary>
+        <Text classes="mb-4" type="p" secondary>
             {locale('views.secureSpentAddresses.body1', { values: { number: addresses.length } })}
         </Text>
         <Text type="p" secondary classes="mb-4">{locale('views.secureSpentAddresses.body2')}</Text>
