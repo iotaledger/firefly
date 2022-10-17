@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { appRouter, AppRouter } from './app-router'
-import { onboardingRouter, OnboardingRouter } from '@core/router'
+import { onboardingRouter, OnboardingRouter } from './onboarding-router'
 import { LoginRouter, loginRouter } from './subrouters'
 import {
     AppSetupRouter,
@@ -18,7 +18,7 @@ import {
     StorageProtectionSetupRouter,
     strongholdSetupRouter,
     StrongholdSetupRouter,
-} from '@core/router/subrouters'
+} from './subrouters'
 
 export function initialiseRouters(): void {
     /**
