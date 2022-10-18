@@ -2,7 +2,7 @@
     import { ButtonSize, ButtonVariant, HTMLButtonType, Icon, Spinner } from 'shared/components'
     import { onMount } from 'svelte'
     import { appSettings } from '@core/app'
-    import { bindEvents } from '@lib/utils'
+    import { bindEvents, debounce } from '@lib/utils'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import type { Event } from '@lib/typings/events'
 
@@ -68,7 +68,7 @@
     class:is-busy={isBusy}
     style:--border-width={outline ? '1px' : '0px'}
     use:bindEvents={events}
-    on:click|stopPropagation={onClick}
+    on:click|stopPropagation={debounce(onClick, 100)}
     bind:this={buttonElement}
 >
     {#if isBusy}
