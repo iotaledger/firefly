@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
     import { Subject } from '@core/wallet'
-    import { BECH32_ADDRESS_CHARACTER_LENGTH, validateBech32Address } from '@core/utils'
+    import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils'
     import { InputContainer, Modal, RecipientAccountSelector, TextInput } from 'shared/components'
 
     export let recipient: Subject
@@ -54,10 +54,10 @@
             return Promise.resolve()
         }
 
-        if (value.length !== BECH32_ADDRESS_CHARACTER_LENGTH + addressPrefix.length) {
+        if (value.length !== BECH32_ADDRESS_LENGTH + addressPrefix.length) {
             error = localize('error.send.addressLength', {
                 values: {
-                    length: BECH32_ADDRESS_CHARACTER_LENGTH + addressPrefix.length,
+                    length: BECH32_ADDRESS_LENGTH + addressPrefix.length,
                 },
             })
         } else {

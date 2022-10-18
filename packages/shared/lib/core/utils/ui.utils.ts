@@ -12,7 +12,7 @@ export function bindEvents(element: Element, events: Event<unknown>[]): { destro
     return {
         destroy() {
             listeners.forEach(([event, listener]) => {
-                element.removeEventListener(event, listener)
+                element.removeEventListener(event as string, listener)
             })
         },
     }
