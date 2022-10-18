@@ -32,7 +32,6 @@
     export let events: Event<unknown>[] = []
 
     export let onClick: () => unknown = () => {}
-    export let isDebounceEnabled: boolean = true
 
     export function resetAndFocus(): void {
         if (disabled) {
@@ -69,7 +68,7 @@
     class:is-busy={isBusy}
     style:--border-width={outline ? '1px' : '0px'}
     use:bindEvents={events}
-    on:click|stopPropagation={isDebounceEnabled ? debounce(onClick) : onClick}
+    on:click|stopPropagation={debounce(onClick, 100)}
     bind:this={buttonElement}
 >
     {#if isBusy}
