@@ -556,15 +556,15 @@
                     />
                     <KeyValueBox
                         bind:value={tag}
+                        key={localize('general.tag')}
                         error={tagError}
                         disabled={$isTransferring}
-                        key={localize('general.tag')}
                     />
                     <KeyValueBox
                         bind:value={metadata}
+                        key={localize('general.metadata')}
                         error={metadataError}
                         disabled={$isTransferring}
-                        key={localize('general.metadata')}
                     />
                 </div>
             </div>
