@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { resetLedgerPreparedOutput, resetShowInternalVerificationPopup } from '@core/ledger'
-    import { resetNewTransactionDetails, selectedSendOptionIndex } from '@core/wallet'
+    import { resetNewNftTransactionDetails, resetNewTransactionDetails, selectedSendOptionIndex } from '@core/wallet'
     import { openPopup } from '@lib/popup'
     import { appSettings } from '@core/app'
     import { Text, FontWeight, TextType, Icon, Modal } from 'shared/components'
@@ -58,7 +58,7 @@
     }
 
     function onNftSendClick(): void {
-        resetNewTransactionDetails()
+        resetNewNftTransactionDetails()
         resetLedgerPreparedOutput()
         resetShowInternalVerificationPopup()
         openPopup({

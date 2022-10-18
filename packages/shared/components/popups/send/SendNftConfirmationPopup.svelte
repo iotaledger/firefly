@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Button, ExpirationTimePicker, KeyValueBox, Text, Toggle, FontWeight, TextType } from 'shared/components'
+    import { Button, ExpirationTimePicker, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { NftDetails } from 'shared/components/molecules'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
@@ -24,10 +24,9 @@
     export let disableBack = false
 
     const { nftId, recipient } = get(newNftTransactionDetails)
-    let { expirationDate, giftStorageDeposit } = get(newNftTransactionDetails)
+    let { expirationDate } = get(newNftTransactionDetails)
 
     let storageDeposit = 0
-    const giftedStorageDeposit = 0
     let preparedOutput: INftOutput
     let expirationTimePicker: ExpirationTimePicker
 
@@ -35,15 +34,14 @@
 
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
-    $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: isTransferring = $selectedAccount.isTransferring
-    $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
+    $: expirationDate, refreshSendConfirmationState()
 
     $: transactionDetails = {
         nftId,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
-        storageDeposit: giftStorageDeposit ? giftedStorageDeposit : storageDeposit,
+        storageDeposit,
         subject: recipient,
         isInternal,
         type: ActivityType.Nft,
@@ -66,7 +64,7 @@
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
             return ExpirationTime.Custom
-        } else if (storageDeposit && !giftStorageDeposit) {
+        } else if (storageDeposit) {
             return ExpirationTime.OneDay
         } else {
             return ExpirationTime.None
@@ -78,13 +76,9 @@
         closePopup()
     }
 
-    function toggleGiftStorageDeposit(): void {
-        giftStorageDeposit = !giftStorageDeposit
-    }
-
     async function onConfirm(): Promise<void> {
         try {
-            updateNewNftTransactionDetails({ expirationDate, giftStorageDeposit })
+            updateNewNftTransactionDetails({ expirationDate })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             console.error(err)
@@ -115,13 +109,10 @@
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
-        >{localize('popups.transaction.title')}</Text
+        >{localize('popups.sendNft.confirmationTitle')}</Text
     >
     <div class="w-full flex-col space-y-2">
         <NftDetails {...transactionDetails} />
-        <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
-            <Toggle slot="value" color="green" active={giftStorageDeposit} onClick={toggleGiftStorageDeposit} />
-        </KeyValueBox>
         {#if initialExpirationDate !== undefined}
             <KeyValueBox keyText={localize('general.expirationTime')}>
                 <ExpirationTimePicker
