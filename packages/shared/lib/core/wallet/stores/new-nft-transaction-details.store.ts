@@ -4,6 +4,7 @@ import type { INewNftTransactionDetails } from '..'
 export const newNftTransactionDetails: Writable<INewNftTransactionDetails> = writable({
     expirationDate: undefined,
     recipient: undefined,
+    immutableFeatures: [],
     nftId: undefined,
 })
 
@@ -11,6 +12,7 @@ export function resetNewNftTransactionDetails(): void {
     newNftTransactionDetails.set({
         expirationDate: undefined,
         recipient: undefined,
+        immutableFeatures: [],
         nftId: undefined,
     })
 }

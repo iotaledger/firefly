@@ -1,3 +1,4 @@
+import { FeatureTypes } from '@iota/types'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '../enums'
 import { Subject } from '../types'
 import { INftMetadata } from './nft-metadata.interface'
@@ -9,7 +10,9 @@ export interface IPartialNftActivityDataWithType extends Omit<Partial<INftActivi
 export interface INftActivityData {
     type: ActivityType.Nft
     outputId: string
+    nftId: string
     metadata: INftMetadata
+    immutableFeatures: FeatureTypes[]
     storageDeposit: number
     direction: ActivityDirection
     isInternal: boolean

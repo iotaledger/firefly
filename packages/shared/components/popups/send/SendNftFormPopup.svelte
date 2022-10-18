@@ -1,9 +1,15 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { newNftTransactionDetails, updateNewNftTransactionDetails } from '@core/wallet'
+    import {
+        ActivityType,
+        newNftTransactionDetails,
+        selectedAccountActivities,
+        updateNewNftTransactionDetails,
+    } from '@core/wallet'
     import { Button, Text, RecipientInput, NftInput, FontWeight } from 'shared/components'
     import { closePopup, openPopup } from '@lib/popup'
+    import type { FeatureTypes } from '@iota/types'
 
     let { nftId, recipient } = get(newNftTransactionDetails)
     let recipientInput: RecipientInput
@@ -11,7 +17,7 @@
     async function onSend(): Promise<void> {
         const valid = await validate()
         if (valid) {
-            updateNewNftTransactionDetails({ nftId, recipient })
+            updateNewNftTransactionDetails({ nftId, recipient, immutableFeatures: getNftImmutableFeatures() })
             openPopup({
                 type: 'sendNftConfirmation',
                 overflow: true,
@@ -27,6 +33,13 @@
             console.error('Error: ', error)
             return false
         }
+    }
+
+    function getNftImmutableFeatures(): FeatureTypes[] {
+        const nftActivity = $selectedAccountActivities.find(
+            (activity) => activity.data.type === ActivityType.Nft && activity.data.nftId === nftId
+        )
+        return nftActivity?.data.type === ActivityType.Nft ? nftActivity.data.immutableFeatures : []
     }
 
     function onCancel(): void {

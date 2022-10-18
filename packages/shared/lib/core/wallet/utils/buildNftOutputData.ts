@@ -1,11 +1,12 @@
 import { convertDateToUnixTimestamp } from '@core/utils'
-import { UnlockConditionTypes } from '@iota/types'
+import { FeatureTypes, UnlockConditionTypes } from '@iota/types'
 import type { BuildNftOutputData } from '@iota/wallet'
 import { convertBech32ToHexAddress } from './convertBech32ToHexAddress'
 
 export function buildNftOutputData(
     expirationDate: Date,
     nftId: string,
+    immutableFeatures: FeatureTypes[],
     recipientAddress: string,
     accountAddress: string
 ): BuildNftOutputData {
@@ -33,6 +34,7 @@ export function buildNftOutputData(
 
     return <BuildNftOutputData>{
         nftId: convertBech32ToHexAddress(nftId),
+        immutableFeatures,
         unlockConditions,
     }
 }

@@ -23,7 +23,7 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
 
-    const { nftId, recipient } = get(newNftTransactionDetails)
+    const { nftId, recipient, immutableFeatures } = get(newNftTransactionDetails)
     let { expirationDate } = get(newNftTransactionDetails)
 
     let storageDeposit = 0
@@ -52,7 +52,13 @@
     }
 
     async function _prepareOutput(): Promise<void> {
-        const outputData = buildNftOutputData(expirationDate, nftId, recipientAddress, $selectedAccount.depositAddress)
+        const outputData = buildNftOutputData(
+            expirationDate,
+            nftId,
+            immutableFeatures,
+            recipientAddress,
+            $selectedAccount.depositAddress
+        )
         preparedOutput = await $selectedAccount.buildNftOutput(outputData)
         storageDeposit = Number(preparedOutput.amount)
 
