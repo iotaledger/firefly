@@ -3,8 +3,9 @@
 
     export let key = ''
     export let value = ''
+    export let error = ''
 </script>
 
 <key-value>
-    <Input label={key} bind:value error={''} disabled={true} inputElement={undefined} classes="mb-6" />
+    <Input label={key} bind:value {error} inputElement={undefined} classes="mb-6" />
 </key-value>
