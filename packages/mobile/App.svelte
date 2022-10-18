@@ -18,7 +18,7 @@
     import { addError } from '@core/error'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { LoginRouter, OnboardingRouter } from './routes'
+    import { DashboardRouter, LoginRouter, OnboardingRouter } from './routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { onboardingProfile, initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
@@ -169,6 +169,9 @@
 </Route>
 <Route route={AppRoute.Onboarding}>
     <OnboardingRouter />
+</Route>
+<Route route={AppRoute.Dashboard}>
+    <DashboardRouter />
 </Route>
 
 <ToastContainer />
