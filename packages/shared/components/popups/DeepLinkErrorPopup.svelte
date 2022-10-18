@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { Text, Button, TextHint, FontWeight } from 'shared/components'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     export let error: Error
 </script>

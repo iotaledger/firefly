@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { openPopup, popupState } from '@lib/popup'
+import { openPopup, popupState } from '@auxiliary/popup'
 
 export function openLedgerNotConnectedPopup(
     cancel: () => void = () => {},

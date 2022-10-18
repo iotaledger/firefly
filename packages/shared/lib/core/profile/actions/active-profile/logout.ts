@@ -1,6 +1,6 @@
 import { resetRouters } from '@core/router'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
-import { closePopup } from '@lib/popup'
+import { closePopup } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'

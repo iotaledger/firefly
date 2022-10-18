@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
     import { isSoftwareProfile } from '@core/profile'

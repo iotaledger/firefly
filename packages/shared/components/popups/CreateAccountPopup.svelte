@@ -2,7 +2,7 @@
     import { Button, ColorPicker, Input, Text } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
-    import { closePopup, updatePopupProps } from 'shared/lib/popup'
+    import { closePopup, updatePopupProps } from '@auxiliary/popup'
     import { checkActiveProfileAuth } from '@core/profile'
     import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
     import { onMount } from 'svelte'

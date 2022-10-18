@@ -7,7 +7,7 @@ import { resetDeepLink } from '../actions'
 import { DeepLinkContext } from '../enums'
 import { isDeepLinkRequestActive } from '../stores'
 import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContext'
-import { closePopup, openPopup } from '@lib/popup'
+import { closePopup, openPopup } from '@auxiliary/popup'
 import { visibleActiveAccounts } from '@core/profile/stores/active-accounts.store'
 
 /**

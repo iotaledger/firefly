@@ -1,5 +1,5 @@
 import { BaseError } from '@core/error'
-import { openPopup, popupState } from '@lib/popup'
+import { openPopup, popupState } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 import { LedgerConnectionState } from '../interfaces'
 import { ledgerConnectionState } from '../stores'

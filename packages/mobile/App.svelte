@@ -17,7 +17,7 @@
     import { Electron } from 'shared/lib/electron'
     import { addError } from '@core/error'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import { DashboardRouter, LoginRouter, OnboardingRouter } from './routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
