@@ -73,7 +73,7 @@
         </tile-content>
         {#if activity.data.type === ActivityType.Transaction && activity?.data.asyncStatus === ActivityAsyncStatus.Timelocked}
             <TimelockActivityTileFooter data={activity.data} />
-        {:else if activity.data.type === ActivityType.Transaction && activity?.data?.isAsync}
+        {:else if (activity.data.type === ActivityType.Transaction || activity.data.type === ActivityType.Nft) && activity?.data?.isAsync}
             <AsyncActivityTileFooter activityId={activity.id} data={activity.data} />
         {/if}
     </activity-tile>
