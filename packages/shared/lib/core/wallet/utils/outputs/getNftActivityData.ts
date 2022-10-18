@@ -3,29 +3,31 @@ import {
     getNftOutputFromTransaction,
     getRecipientFromOutput,
     isSubjectInternal,
-    getSubjectFromAddress,
-    getBech32AddressFromAddressTypes,
+    getSenderFromInputs,
+    getSenderFromTransaction,
 } from '..'
 import { ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
-import type { IMetadataFeature, ISenderFeature, OutputTypes } from '@iota/types'
+import type { IMetadataFeature, OutputTypes } from '@iota/types'
 import { Converter } from '@lib/converter'
 import { getAsyncDataFromOutput } from './getAsyncDataFromOutput'
-import { MimeType, Subject } from '@core/wallet/types'
+import { MimeType } from '@core/wallet/types'
 
 export function getNftActivityData(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): INftActivityData {
-    const { outputs, isIncoming, claimingData, transactionId } = processedTransaction
+    const { outputs, isIncoming, claimingData, detailedTransactionInputs, transactionId } = processedTransaction
     const { output, outputId } = getNftOutputFromTransaction(outputs)
 
     const storageDeposit = Number(output.amount)
     const metadata = getMetadataFromNft(output)
 
     const recipient = getRecipientFromOutput(output)
-    const sender = getSenderFromNft(output)
+    const sender = detailedTransactionInputs
+        ? getSenderFromInputs(detailedTransactionInputs)
+        : getSenderFromTransaction(isIncoming, account.depositAddress, output)
 
     const subject = isIncoming ? sender : recipient
     const isInternal = isSubjectInternal(subject)
@@ -46,18 +48,6 @@ export function getNftActivityData(
         subject,
         ...asyncData,
     }
-}
-
-function getSenderFromNft(output: OutputTypes): Subject {
-    if (output.type === OUTPUT_TYPE_NFT) {
-        const sender = output.immutableFeatures?.find((feature) => feature.type === 0) as ISenderFeature
-        if (!sender) {
-            return undefined
-        }
-        const address = getBech32AddressFromAddressTypes(sender.address)
-        return getSubjectFromAddress(address)
-    }
-    return undefined
 }
 
 function getMetadataFromNft(output: OutputTypes): INftMetadata {
