@@ -1,4 +1,4 @@
-import { time } from '@core/app'
+import { time } from '@core/app/stores'
 import { derived } from 'svelte/store'
 import { timeStrongholdLastUnlocked } from './timeStrongholdLastUnlocked.store'
 
