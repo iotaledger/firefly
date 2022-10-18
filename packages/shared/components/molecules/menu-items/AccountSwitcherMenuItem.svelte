@@ -10,21 +10,21 @@
     export let onClick: () => unknown
     export let id: string = ''
 
-    function handleAccountClick(accountId: string): void {
-        setSelectedAccount(accountId)
+    function handleAccountClick(accountIndex: number): void {
+        setSelectedAccount(accountIndex)
         onClick && onClick()
     }
 </script>
 
 <button
     {id}
-    on:click={() => handleAccountClick(account.id)}
+    on:click={() => handleAccountClick(account.index)}
     class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row justify-between p-4 rounded"
 >
     <div class="flex flex-row items-center space-x-4">
-        <AccountLabel selected={account.id === $selectedAccount?.id} {account} />
+        <AccountLabel selected={account.index === $selectedAccount?.index} {account} />
     </div>
-    <Text classes={account.id !== $selectedAccount?.id ? 'opacity-50' : ''} type="h5">
+    <Text classes={account.index === $selectedAccount?.index ? '' : 'opacity-50'} type="h5">
         {formatTokenAmountBestMatch(
             Number(account.balances.baseCoin.total),
             BASE_TOKEN[$activeProfile.networkProtocol]

@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { FontWeight } from 'shared/components/Text.svelte'
-    import { HR, BalanceSummarySection, Text } from 'shared/components'
+    import { HR, BalanceSummarySection, Text, FontWeight } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
 </script>

@@ -2,9 +2,7 @@
     import { LedgerAnimation, Button, Text } from 'shared/components'
     import { closePopup } from 'shared/lib/popup'
     import { LedgerAppName } from '@core/ledger'
-    import { Locale, localize } from '@core/i18n'
-
-    export let locale: Locale
+    import { localize } from '@core/i18n'
 
     let stepIndex = 0
     const stepAnimations = [
@@ -15,11 +13,11 @@
         'ledger-close-live-desktop',
     ]
 
-    function changeIndex(increment) {
+    function changeIndex(increment: number): void {
         stepIndex += increment
     }
 
-    function handleCloseClick() {
+    function handleCloseClick(): void {
         closePopup()
     }
 </script>
@@ -31,17 +29,17 @@
     <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" bgClasses="top-6" />
     <div class="w-full text-center my-9 px-10">
         <Text secondary>
-            {locale(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.Shimmer } })}
+            {localize(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.Shimmer } })}
         </Text>
     </div>
     <div class="w-full flex flex-row flex-nowrap space-x-4">
         <Button classes="w-1/2" outline onClick={() => changeIndex(-1)} disabled={stepIndex === 0}>
-            {locale('actions.previous')}
+            {localize('actions.previous')}
         </Button>
-        {#if stepIndex < Object.keys(locale('popups.ledgerAppGuide.steps')).length - 1}
-            <Button classes="w-1/2" outline onClick={() => changeIndex(1)}>{locale('actions.next')}</Button>
+        {#if stepIndex < Object.keys(localize('popups.ledgerAppGuide.steps')).length - 1}
+            <Button classes="w-1/2" outline onClick={() => changeIndex(1)}>{localize('actions.next')}</Button>
         {:else}
-            <Button classes="w-1/2" onClick={handleCloseClick}>{locale('actions.close')}</Button>
+            <Button classes="w-1/2" onClick={handleCloseClick}>{localize('actions.close')}</Button>
         {/if}
     </div>
 </div>

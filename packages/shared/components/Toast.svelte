@@ -8,11 +8,11 @@
         onClick?: () => void
     }
 
-    export let classes: string
     export let type: string
     export let message: string
-    export let subMessage: string
-    export let progress: number
+    export let classes: string = ''
+    export let subMessage: string = ''
+    export let progress: number = undefined
     export let actions: Action[] = []
 
     const TOAST_STYLE = {

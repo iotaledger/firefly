@@ -2,11 +2,10 @@
 <script lang="ts">
     import SveltyPicker from 'svelty-picker'
     import { createEventDispatcher } from 'svelte'
-    import { Tooltip, Button } from 'shared/components'
+    import { Tooltip, Button, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { ButtonSize } from 'shared/components/Button.svelte'
 
-    export let value: Date
+    export let value: Date = undefined
     export let startDate: Date = null
     export let mode: 'auto' | 'datetime' | 'date' | 'time' = 'auto'
 

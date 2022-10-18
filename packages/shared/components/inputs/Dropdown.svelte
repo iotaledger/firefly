@@ -5,8 +5,8 @@
     import { DropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
 
     export let value: string
-    export let label: string
-    export let placeholder: string
+    export let label: string = ''
+    export let placeholder: string = ''
     export let disabled = false
     export let valueKey = 'label'
     export let sortItems = false

@@ -2,8 +2,7 @@
     import { localize } from '@core/i18n'
     import { InclusionState, IAliasActivityData } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
-    import { Text, Icon } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { Text, Icon, FontWeight } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let inclusionState: InclusionState

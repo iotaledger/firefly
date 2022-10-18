@@ -3,14 +3,14 @@
     import { getAndUpdateNodeInfo, networkStatus, NETWORK_HEALTH_COLORS } from '@core/network'
     import { activeProfile } from '@core/profile'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     $: healthStatus = $networkStatus.health ?? 0
 
     // TODO: Move this to dashboard or onload logic
     // $: healthStatus !== 2 && showNetworkIssuesNotification()
 
-    function onClick() {
+    function onClick(): void {
         modal?.open()
         getAndUpdateNodeInfo()
     }

@@ -9,6 +9,7 @@ describe('File: formatTokenAmountDefault.ts', () => {
         decimalToken = {
             name: 'Hoi',
             unit: 'SMR',
+            subunit: 'glow',
             decimals: 0,
         }
         appSettings.update((state) => ({ ...state, language: 'en' }))
@@ -79,5 +80,11 @@ describe('File: formatTokenAmountDefault.ts', () => {
         decimalToken.decimals = 2e100
         const formattedAmount = formatTokenAmountDefault(amount, decimalToken)
         expect(formattedAmount).toEqual('0')
+    })
+    it('should return the normal string amount if unit equals subunit', () => {
+        const amount = 12
+        const unit = 'glow'
+        const formattedAmount = formatTokenAmountDefault(amount, decimalToken, unit)
+        expect(formattedAmount).toEqual('12')
     })
 })

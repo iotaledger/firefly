@@ -1,30 +1,10 @@
-<script lang="typescript" context="module">
-    export enum ButtonSize {
-        Large = 'lg',
-        Medium = 'md',
-        Small = 'sm',
-    }
-
-    export enum ButtonVariant {
-        Primary = 'primary',
-        Caution = 'caution',
-        Warning = 'warning',
-    }
-
-    export enum HTMLButtonType {
-        Button = 'button',
-        Submit = 'submit',
-        Reset = 'reset',
-    }
-</script>
-
 <script lang="typescript">
-    import { Icon, Spinner } from 'shared/components'
+    import { ButtonSize, ButtonVariant, HTMLButtonType, Icon, Spinner } from 'shared/components'
     import { onMount } from 'svelte'
     import { appSettings } from '@core/app'
-    import { bindEvents } from '@core/utils'
+    import { bindEvents, debounce } from '@core/utils'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Event } from '@lib/typings/events'
+    import type { Event } from '@lib/typings/events'
 
     export let autofocus: boolean = false
     export let classes: string = ''
@@ -47,11 +27,11 @@
     export let busyMessage: string = ''
 
     export let form: string = null
-    export let buttonElement: HTMLButtonElement = null
+    export let buttonElement: HTMLButtonElement = undefined
 
     export let events: Event<unknown>[] = []
 
-    export let onClick: () => unknown
+    export let onClick: () => unknown = () => {}
 
     export function resetAndFocus(): void {
         if (disabled) {
@@ -88,7 +68,7 @@
     class:is-busy={isBusy}
     style:--border-width={outline ? '1px' : '0px'}
     use:bindEvents={events}
-    on:click|stopPropagation={onClick}
+    on:click|stopPropagation={debounce(onClick, 100)}
     bind:this={buttonElement}
 >
     {#if isBusy}

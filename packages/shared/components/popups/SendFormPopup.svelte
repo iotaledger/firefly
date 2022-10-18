@@ -2,12 +2,11 @@
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
-    import { Button, Text, RecipientInput, AssetAmountInput, OptionalInput } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { Button, Text, RecipientInput, AssetAmountInput, OptionalInput, FontWeight } from 'shared/components'
     import { closePopup, openPopup } from '@lib/popup'
     import { getByteLengthOfString } from '@core/utils'
 
-    let { asset, amount, unit, recipient, metadata, tag } = get(newTransactionDetails)
+    let { asset, rawAmount, unit, recipient, metadata, tag } = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
@@ -16,7 +15,7 @@
     async function onSend(): Promise<void> {
         const valid = await validate()
         if (valid) {
-            updateNewTransactionDetails({ asset, amount, unit, recipient, metadata, tag })
+            updateNewTransactionDetails({ asset, rawAmount, unit, recipient, metadata, tag })
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
@@ -58,7 +57,7 @@
         {localize('popups.sendForm.title')}
     </Text>
     <send-form-inputs class="flex flex-col space-y-4">
-        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:amount bind:unit />
+        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         <RecipientInput bind:this={recipientInput} bind:recipient />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput

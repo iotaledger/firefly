@@ -23,6 +23,9 @@ import Big from 'big.js'
 export function isVisibleActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
 
+    if (!isVisibleWithActiveValuelessFilter(activity, filter)) {
+        return false
+    }
     if (!isVisibleWithActiveHiddenFilter(activity, filter)) {
         return false
     }
@@ -57,6 +60,17 @@ function isVisibleWithActiveHiddenFilter(activity: Activity, filter: ActivityFil
     return true
 }
 
+function isVisibleWithActiveValuelessFilter(activity: Activity, filter: ActivityFilter): boolean {
+    if (
+        (!filter.showValueless.active || filter.showValueless.selected === BooleanFilterOption.No) &&
+        (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
+        !activity.containsValue
+    ) {
+        return false
+    }
+    return true
+}
+
 function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
@@ -69,7 +83,7 @@ function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityF
 }
 
 function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.asset.active && filter.asset.selected) {
+    if (filter.asset.active && filter.asset.selected && activity.data.type !== ActivityType.Nft) {
         if (filter.asset.selected && activity.data.assetId !== filter.asset.selected) {
             return false
         }
@@ -78,7 +92,7 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 }
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.amount.active && activity.data.type !== ActivityType.Alias) {
+    if (filter.amount.active && activity.data.type !== ActivityType.Alias && activity.data.type !== ActivityType.Nft) {
         const asset = getAssetFromPersistedAssets(activity.data.assetId)
         const activityAmount = Big(activity.data.rawAmount)
 

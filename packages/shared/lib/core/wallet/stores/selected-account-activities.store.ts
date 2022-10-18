@@ -1,4 +1,7 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
+
+import { isValidIrc30 } from '@core/token'
+
 import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../classes/activity.class'
 import {
@@ -15,13 +18,12 @@ import { ActivityFilter } from '../interfaces/filter/filter.interface'
 import { getAssetFromPersistedAssets } from '../utils'
 import { isVisibleActivity } from '../utils/isVisibleActivity'
 import { allAccountActivities } from './all-account-activities.store'
-import { isValidIrc30 } from '@core/token'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
     ([$selectedAccount, $allAccountActivities]) => {
         if (selectedAccount) {
-            return $allAccountActivities[$selectedAccount?.id] ?? []
+            return $allAccountActivities[$selectedAccount?.index] ?? []
         } else {
             return []
         }
@@ -90,6 +92,13 @@ export const activityFilter: Writable<ActivityFilter> = writable({
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
     },
+    showValueless: {
+        active: false,
+        type: 'selection',
+        localeKey: 'filters.showValueless',
+        selected: BooleanFilterOption.Yes,
+        choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
+    },
 })
 
 export const activitySearchTerm: Writable<string> = writable('')
@@ -98,11 +107,12 @@ export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
-            const asset = getAssetFromPersistedAssets(_activity.data.assetId)
+            const asset =
+                _activity.data.type !== ActivityType.Nft && getAssetFromPersistedAssets(_activity.data.assetId)
+            const hasValidAsset = _activity.data.type === ActivityType.Nft || (asset && isValidIrc30(asset.metadata))
             return (
                 !_activity.isHidden &&
-                asset &&
-                isValidIrc30(asset.metadata) &&
+                hasValidAsset &&
                 (_activity.data.type !== ActivityType.Alias || _activity.data.aliasType === AliasType.Created)
             )
         })
@@ -129,12 +139,16 @@ function getFieldsToSearchFromActivity(activity: IActivity): string[] {
         fieldsToSearch.push(activity.transactionId)
     }
 
-    if (activity.data.assetId) {
+    if (activity.data.type !== ActivityType.Nft && activity.data.assetId) {
         fieldsToSearch.push(activity.data.assetId)
         fieldsToSearch.push(getAssetFromPersistedAssets(activity.data.assetId)?.metadata?.name)
     }
 
-    if (activity.data.type !== ActivityType.Alias && activity.data.rawAmount) {
+    if (
+        activity.data.type !== ActivityType.Alias &&
+        activity.data.type !== ActivityType.Nft &&
+        activity.data.rawAmount
+    ) {
         fieldsToSearch.push(activity.data.rawAmount?.toString())
         fieldsToSearch.push(activity.getFormattedAmount(false)?.toLowerCase())
     }

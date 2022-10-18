@@ -17,7 +17,7 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
         // Reset transaction details state, since the transaction has been sent
         resetNewTransactionDetails()
         const processedTransaction = preprocessTransaction(transaction)
-        addActivityToAccountActivitiesInAllAccountActivities(account.id, new Activity(processedTransaction, account))
+        addActivityToAccountActivitiesInAllAccountActivities(account.index, new Activity(processedTransaction, account))
         updateSelectedAccount({ isTransferring: false })
         return
     } catch (err) {

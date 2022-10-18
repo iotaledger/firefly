@@ -22,7 +22,7 @@ export async function generateAndStoreActivitiesForAccount(account: IAccountStat
     const activities = generateActivitiesFromProcessedTransactions(linkedProcessedTransactions, account)
 
     // Step 4: set account activities with generated activities
-    setAccountActivitiesInAllAccountActivities(account.id, activities)
+    setAccountActivitiesInAllAccountActivities(account.index, activities)
 
     hideActivitiesForFoundries(account)
     await setOutgoingAsyncActivitiesToClaimed(account)

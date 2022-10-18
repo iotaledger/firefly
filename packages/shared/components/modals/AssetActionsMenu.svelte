@@ -14,10 +14,10 @@
     import { updatePopupProps } from '@lib/popup'
     import { HR, MenuItem, Modal } from 'shared/components'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
     export let asset: IAsset
 
-    const handleUnverify = () => {
+    function handleUnverify(): void {
         unverifyAsset(asset.id, NotVerifiedStatus.Skipped)
         updatePopupProps({
             asset: { ...asset, verification: { verified: false, status: NotVerifiedStatus.Skipped } },
@@ -25,7 +25,7 @@
         modal.close()
     }
 
-    function handleVerify() {
+    function handleVerify(): void {
         verifyAsset(asset.id, VerifiedStatus.SelfVerified)
         updatePopupProps({
             asset: { ...asset, verification: { verified: true, status: VerifiedStatus.SelfVerified } },
@@ -33,7 +33,7 @@
         modal.close()
     }
 
-    const handleUnhide = () => {
+    function handleUnhide(): void {
         unhideAsset(asset.id)
         hideActivitiesForHiddenAssets()
         updatePopupProps({
@@ -42,7 +42,7 @@
         modal.close()
     }
 
-    function handleHide() {
+    function handleHide(): void {
         hideAsset(asset.id)
         hideActivitiesForHiddenAssets()
         updatePopupProps({

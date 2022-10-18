@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { Animation, Button, OnboardingLayout, PasswordInput, Text } from 'shared/components'
+    import { Animation, Button, OnboardingLayout, PasswordInput, Text, HTMLButtonType } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { profileBackupRouter } from '@core/router'
     import { backupInitialStronghold, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     export let busy = false
 

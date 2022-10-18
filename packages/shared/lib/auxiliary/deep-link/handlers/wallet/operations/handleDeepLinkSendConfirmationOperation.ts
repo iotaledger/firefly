@@ -1,5 +1,7 @@
 import { get } from 'svelte/store'
+
 import { networkHrp } from '@core/network'
+import { isStringTrue, getByteLengthOfString } from '@core/utils'
 import {
     getAssetById,
     INewTransactionDetails,
@@ -19,8 +21,7 @@ import {
     TagLengthError,
     UnknownAssetError,
 } from '../../../errors'
-import { getAmountFromSearchParam } from '../../../utils'
-import { isStringTrue, getByteLengthOfString } from '@core/utils'
+import { getRawAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -65,7 +66,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         throw new UnknownAssetError()
     }
 
-    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
+    const rawAmount = getRawAmountFromSearchParam(searchParams)
 
     const surplus = searchParams.get(SendOperationParameter.Surplus)
     if (surplus && parseInt(surplus).toString() !== surplus) {
@@ -90,7 +91,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     return {
         ...(asset && { asset }),
         ...(recipient && { recipient }),
-        ...(amount && { amount }),
+        ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
         ...(metadata && { metadata }),
         ...(tag && { tag }),

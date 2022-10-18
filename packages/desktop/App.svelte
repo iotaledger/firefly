@@ -1,13 +1,11 @@
 <script lang="typescript">
-    import { isLocaleLoaded, Locale, localeDirection, setupI18n, _ } from '@core/i18n'
+    import { _, isLocaleLoaded, Locale, localeDirection, setupI18n } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
     import {
         AppRoute,
         appRoute,
-        appRouter,
         DashboardRoute,
         dashboardRouter,
-        initialiseOnboardingRouters,
         initialiseRouters,
         OnboardingRoute,
         onboardingRoute,
@@ -15,18 +13,18 @@
     } from '@core/router'
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings } from '@core/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Electron } from '@lib/electron'
     import { addError } from '@core/error'
-    import { showAppNotification } from 'shared/lib/notifications'
-    import { openPopup, popupState } from 'shared/lib/popup'
+    import { showAppNotification } from '@lib/notifications'
+    import { openPopup, popupState } from '@lib/popup'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { getLocalisedMenuItems } from './lib/helpers'
-    import { initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
     import { setPlatform } from '@core/app/stores/platform.store'
+    import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { Transition } from 'shared/components'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -38,8 +36,9 @@
         }
     }
 
-    const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
-        Electron.updateAppSettings({ sendCrashReports })
+    async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
+        await Electron.updateAppSettings({ sendCrashReports })
+    }
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
     $: $appSettings.darkMode
@@ -111,17 +110,17 @@
             openPopup({ type: 'diagnostics' })
         })
         Electron.onEvent('menu-create-developer-profile', () => {
-            get(appRouter).reset()
-            initialiseOnboardingProfile(true, NetworkProtocol.Shimmer)
-            initialiseOnboardingRouters()
-            get(appRouter).next({ shouldAddProfile: true })
+            void initialiseOnboardingFlow({
+                isDeveloperProfile: true,
+                networkProtocol: NetworkProtocol.Shimmer,
+            })
         })
         Electron.onEvent('menu-create-normal-profile', () => {
-            get(appRouter).reset()
-            initialiseOnboardingProfile(false, NetworkProtocol.Shimmer)
-            updateOnboardingProfile({ networkType: NetworkType.Mainnet })
-            initialiseOnboardingRouters()
-            get(appRouter).next({ shouldAddProfile: true })
+            void initialiseOnboardingFlow({
+                isDeveloperProfile: false,
+                networkProtocol: NetworkProtocol.Shimmer,
+                networkType: NetworkType.Mainnet,
+            })
         })
         Electron.hookErrorLogger((err) => {
             addError(err)
@@ -141,7 +140,7 @@
         Electron.DeepLinkManager.clearDeepLinkRequest()
     })
 
-    const showDeepLinkNotification = () => {
+    function showDeepLinkNotification(): void {
         if (!$loggedIn) {
             showAppNotification({
                 type: 'info',
@@ -166,11 +165,12 @@
                 transition={$popupState.transition}
                 overflow={$popupState.overflow}
                 relative={$popupState.relative}
-                locale={$_}
             />
         {/if}
         <Route route={AppRoute.Dashboard}>
-            <Dashboard locale={$_} />
+            <Transition>
+                <Dashboard />
+            </Transition>
         </Route>
         <Route route={AppRoute.Login}>
             <LoginRouter />
@@ -179,7 +179,7 @@
             <OnboardingRouter />
         </Route>
         {#if settings}
-            <Settings locale={$_} handleClose={() => (settings = false)} />
+            <Settings handleClose={() => (settings = false)} />
         {/if}
 
         <ToastContainer />

@@ -35,7 +35,7 @@ export function showNotification(notificationData: NotificationData, showSystemN
     } else {
         for (const action of notificationData.actions) {
             if (!action.callback) {
-                action.callback = (notificationData) => removeDisplayNotification(notificationData.id)
+                action.callback = (notificationData): void => removeDisplayNotification(notificationData.id)
             }
         }
 

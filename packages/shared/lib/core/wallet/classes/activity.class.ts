@@ -9,15 +9,18 @@ import {
     IProcessedTransaction,
     ITransactionActivityData,
     IAliasActivityData,
+    INftActivityData,
 } from '../interfaces'
 import {
     formatTokenAmountBestMatch,
     getActivityType,
     getAssetFromPersistedAssets,
     getFoundryActivityData,
+    getNftActivityData,
     getTransactionActivityData,
 } from '../utils'
 import { IUTXOInput } from '@iota/types'
+import { containsValue } from '../utils/transactions/containsValue'
 import { getAliasActivityData } from '../utils/outputs/getAliasActivityData'
 
 export class Activity implements IActivity {
@@ -28,9 +31,10 @@ export class Activity implements IActivity {
     inclusionState: InclusionState
     inputs: IUTXOInput[]
     isHidden?: boolean
+    containsValue: boolean
     isAssetHidden: boolean
 
-    data: ITransactionActivityData | IFoundryActivityData | IAliasActivityData
+    data: ITransactionActivityData | IFoundryActivityData | IAliasActivityData | INftActivityData
 
     constructor(processedTransaction: IProcessedTransaction, account: IAccountState) {
         const { outputs, transactionId, time, inclusionState, transactionInputs } = processedTransaction
@@ -39,19 +43,28 @@ export class Activity implements IActivity {
 
         this.type = type
         this.isHidden = false
+        this.containsValue = containsValue(processedTransaction, account)
 
         this.transactionId = transactionId
         this.inclusionState = inclusionState
         this.time = time
         this.inputs = transactionInputs
 
-        if (type === ActivityType.Transaction) {
-            this.data = getTransactionActivityData(processedTransaction, account)
-        } else if (type === ActivityType.Foundry) {
-            this.data = getFoundryActivityData(processedTransaction)
-        } else if (type === ActivityType.Alias) {
-            this.data = getAliasActivityData(processedTransaction)
+        switch (type) {
+            case ActivityType.Transaction:
+                this.data = getTransactionActivityData(processedTransaction, account)
+                break
+            case ActivityType.Foundry:
+                this.data = getFoundryActivityData(processedTransaction)
+                break
+            case ActivityType.Alias:
+                this.data = getAliasActivityData(processedTransaction)
+                break
+            case ActivityType.Nft:
+                this.data = getNftActivityData(processedTransaction, account)
+                break
         }
+
         this.id = this.data.outputId || transactionId
     }
 
@@ -92,7 +105,7 @@ export class Activity implements IActivity {
     }
 
     getFormattedAmount(signed: boolean = true): string {
-        if (this.data.type === ActivityType.Alias) {
+        if (this.data.type === ActivityType.Alias || this.data.type === ActivityType.Nft) {
             return ''
         }
         const metadata = getAssetFromPersistedAssets(this.data.assetId)?.metadata
@@ -105,7 +118,7 @@ export class Activity implements IActivity {
     }
 
     getFiatAmount(fiatPrice?: number, exchangeRate?: number): string {
-        if (fiatPrice && exchangeRate && this.data.type !== ActivityType.Alias) {
+        if (fiatPrice && exchangeRate && this.data.type !== ActivityType.Alias && this.data.type !== ActivityType.Nft) {
             const fiatValue = formatCurrency(convertToFiat(this.data.rawAmount, fiatPrice, exchangeRate))
             return fiatValue ? fiatValue : ''
         } else {

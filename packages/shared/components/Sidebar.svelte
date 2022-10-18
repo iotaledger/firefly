@@ -71,19 +71,19 @@
             : []),
     ]
 
-    function openWallet() {
+    function openWallet(): void {
         resetWalletRoute()
     }
 
-    function openCollectibles() {
+    function openCollectibles(): void {
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
     }
 
-    function openDeveloper() {
+    function openDeveloper(): void {
         $dashboardRouter.goTo(DashboardRoute.Developer)
     }
 
-    function handleBackClick() {
+    function handleBackClick(): void {
         if ($settingsRoute === SettingsRoute.Init) {
             drawer?.close()
         } else {

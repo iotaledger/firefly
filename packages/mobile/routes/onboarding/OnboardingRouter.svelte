@@ -1,5 +1,4 @@
 <script lang="typescript">
-    import { Transition } from 'shared/components'
     import {
         // routers
         AppSetupRouter,
@@ -7,6 +6,7 @@
         NetworkSetupRouter,
         ProfileBackupRouter,
         ProfileSetupRouter,
+        ProfileRecoveryRouter,
         StorageProtectionSetupRouter,
         StrongholdSetupRouter,
     } from './views'
@@ -14,31 +14,19 @@
 </script>
 
 {#if $onboardingRoute === OnboardingRoute.AppSetup}
-    <Transition>
-        <AppSetupRouter />
-    </Transition>
+    <AppSetupRouter />
 {:else if $onboardingRoute === OnboardingRoute.NetworkSetup}
-    <Transition>
-        <NetworkSetupRouter />
-    </Transition>
+    <NetworkSetupRouter />
 {:else if $onboardingRoute === OnboardingRoute.ProfileSetup}
-    <Transition>
-        <ProfileSetupRouter />
-    </Transition>
+    <ProfileSetupRouter />
 {:else if $onboardingRoute === OnboardingRoute.ProfileBackup}
-    <Transition transition={false}>
-        <ProfileBackupRouter />
-    </Transition>
+    <ProfileBackupRouter />
 {:else if $onboardingRoute === OnboardingRoute.StrongholdSetup}
-    <Transition>
-        <StrongholdSetupRouter />
-    </Transition>
+    <StrongholdSetupRouter />
 {:else if $onboardingRoute === OnboardingRoute.StorageProtectionSetup}
-    <Transition transition={false}>
-        <StorageProtectionSetupRouter />
-    </Transition>
+    <StorageProtectionSetupRouter />
+{:else if $onboardingRoute === OnboardingRoute.ProfileRecovery}
+    <ProfileRecoveryRouter />
 {:else if $onboardingRoute === OnboardingRoute.Congratulations}
-    <Transition>
-        <CongratulationsView />
-    </Transition>
+    <CongratulationsView />
 {/if}

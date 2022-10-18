@@ -1,11 +1,10 @@
 <script lang="typescript">
     import { ActivityAsyncStatus, ITransactionActivityData, getTimeDifference } from '@core/wallet'
-    import { TooltipIcon, Text, Pill, TileFooter } from 'shared/components'
+    import { TooltipIcon, Text, Pill, TileFooter, FontWeight } from 'shared/components'
     import { time } from '@core/app'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Position } from 'shared/components/Tooltip.svelte'
     import { localize } from '@core/i18n'
-    import { FontWeight } from 'shared/components/Text.svelte'
 
     export let data: ITransactionActivityData
 

@@ -29,11 +29,7 @@
             await $profileRecoveryRouter.next()
         } catch (err) {
             if (!err.snapshot) {
-                if (err && err.name === 'KdbxError' && err.code === 'InvalidKey') {
-                    error = localize('views.migrate.incorrectSeedVaultPassword')
-                } else if (err && err.name === 'KdbxError' && err.code === 'FileCorrupt') {
-                    error = localize('views.migrate.noDataSeedVault')
-                } else if ($profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase) {
+                if ($profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase) {
                     showAppNotification({
                         type: 'error',
                         message: localize('views.migrate.problemRestoringWallet'),

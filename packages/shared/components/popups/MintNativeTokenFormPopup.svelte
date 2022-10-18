@@ -1,14 +1,22 @@
 <script lang="typescript">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
-    import { mintNativeToken, setMintTokenDetails, mintTokenDetails, TokenStandard } from '@core/wallet'
-    import { closePopup } from '@lib/popup'
-    import { Button, Error, NumberInput, Text, TextInput, OptionalInput } from 'shared/components'
-    import { FontWeight } from '../Text.svelte'
+    import { setMintTokenDetails, mintTokenDetails, selectedAccountActivities, ActivityType } from '@core/wallet'
+    import { closePopup, openPopup } from '@lib/popup'
+    import {
+        Button,
+        Error,
+        NumberInput,
+        Text,
+        TextInput,
+        OptionalInput,
+        FontWeight,
+        AliasInput,
+    } from 'shared/components'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
-    import { selectedAccount } from '@core/account'
+    import { get } from 'svelte/store'
+    import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -21,6 +29,7 @@
         description,
         url,
         logoUrl,
+        aliasId,
     } = $mintTokenDetails
 
     let nameError: string = ''
@@ -31,69 +40,39 @@
     $: circulatingSupply, (circulatingSupplyError = '')
     let symbolError: string
     $: symbol, (symbolError = '')
-
-    $: isTransferring = $selectedAccount.isTransferring
+    let aliasIdError: string
+    $: aliasId, (aliasIdError = '')
 
     let error: BaseError
-
     let decimalsInput: OptionalInput
 
-    async function mintAction(): Promise<void> {
-        try {
-            await mintNativeToken(Number(totalSupply), Number(circulatingSupply), {
-                standard: TokenStandard.IRC30,
-                name: tokenName,
-                symbol,
-                decimals: Number(decimals),
-                ...(description && { description }),
-                ...(url && { url }),
-                ...(logoUrl && { logoUrl }),
-            })
-            closePopup()
-        } catch (reason) {
-            if (!error) {
-                error = reason.error
-                    ? new BaseError({
-                          message: reason.error ?? reason.message,
-                          logToConsole: true,
-                          saveToErrorLog: true,
-                      })
-                    : reason
-            }
-        }
-    }
+    let aliasIds: string[]
+    $: aliasIds = get(selectedAccountActivities)
+        .filter((activity) => activity.data.type === ActivityType.Alias)
+        .map((activity) => (activity.data.type === ActivityType.Alias ? activity.data.aliasId : ''))
 
-    function handleCancel() {
+    function handleCancel(): void {
         closePopup()
     }
 
-    async function handleMint(): Promise<void> {
-        error = null
+    async function handleContinue(): Promise<void> {
         const valid = await validate()
         if (valid) {
-            try {
-                setMintTokenDetails({
-                    name: tokenName,
-                    totalSupply,
-                    circulatingSupply,
-                    decimals,
-                    symbol,
-                    description,
-                    url,
-                    logoUrl,
-                })
-                await checkActiveProfileAuth(mintAction, { stronghold: true, ledger: false })
-            } catch (reason) {
-                if (!error) {
-                    error = reason.error
-                        ? new BaseError({
-                              message: reason.error ?? reason.message,
-                              logToConsole: true,
-                              saveToErrorLog: true,
-                          })
-                        : reason
-                }
-            }
+            setMintTokenDetails({
+                name: tokenName,
+                totalSupply,
+                circulatingSupply,
+                decimals,
+                symbol,
+                description,
+                url,
+                logoUrl,
+                aliasId,
+            })
+            openPopup({
+                type: 'mintNativeTokenConfirmation',
+                overflow: true,
+            })
         }
     }
 
@@ -101,6 +80,7 @@
         try {
             await Promise.all([
                 isNameValid(),
+                isAliasIdValid(),
                 isTotalSupplyValid(),
                 isCirculatingSupplyValid(),
                 decimalsInput?.validate(isDecimalsValid()),
@@ -117,6 +97,19 @@
         if (!tokenName) {
             nameError = 'Name is required'
             return Promise.reject(nameError)
+        } else {
+            return Promise.resolve()
+        }
+    }
+
+    function isAliasIdValid(): Promise<void> {
+        const isValidAliasId = aliasId && aliasIds.some((_aliasId) => _aliasId === aliasId)
+        if (!aliasId) {
+            aliasIdError = 'Alias is required'
+            return Promise.reject(aliasIdError)
+        } else if (!isValidAliasId) {
+            aliasIdError = 'You are not the owner of this alias'
+            return Promise.reject(aliasIdError)
         } else {
             return Promise.resolve()
         }
@@ -174,46 +167,43 @@
         try {
             await _onMount()
         } catch (err) {
-            if (!error) {
-                error = err.error
-                    ? new BaseError({ message: err.error ?? err.message, logToConsole: true, saveToErrorLog: true })
-                    : err
-            }
+            handleError(error)
         }
     })
 </script>
 
 <div class="space-y-6">
     <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
-        {localize('popups.mintNativeTokenForm.title')}
+        {localize('popups.mintNativeToken.formTitle')}
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
+        <AliasInput bind:alias={aliasId} bind:error={aliasIdError} />
         <TextInput
             bind:value={tokenName}
-            label={localize('popups.mintNativeTokenForm.inputs.name')}
-            placeholder={localize('popups.mintNativeTokenForm.inputs.name')}
+            label={localize('popups.mintNativeToken.property.tokenName')}
+            placeholder={localize('popups.mintNativeToken.property.tokenName')}
             error={nameError}
         />
         <TextInput
             bind:value={symbol}
-            label={localize('popups.mintNativeTokenForm.inputs.symbol')}
-            placeholder={localize('popups.mintNativeTokenForm.inputs.symbol')}
+            label={localize('popups.mintNativeToken.property.symbol')}
+            placeholder={localize('popups.mintNativeToken.property.symbol')}
             maxlength={5}
             error={symbolError}
         />
         <NumberInput
             bind:value={totalSupply}
             isInteger
-            label={localize('popups.mintNativeTokenForm.inputs.totalSupply')}
-            placeholder={localize('popups.mintNativeTokenForm.inputs.totalSupply')}
+            label={localize('popups.mintNativeToken.property.totalSupply')}
+            placeholder={localize('popups.mintNativeToken.property.totalSupply')}
             error={totalSupplyError}
         />
         <NumberInput
             bind:value={circulatingSupply}
             isInteger
-            label={localize('popups.mintNativeTokenForm.inputs.circulatingSupply')}
-            placeholder={localize('popups.mintNativeTokenForm.inputs.circulatingSupply')}
+            label={localize('popups.mintNativeToken.property.circulatingSupply')}
+            placeholder={localize('popups.mintNativeToken.property.circulatingSupply')}
             error={circulatingSupplyError}
         />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
@@ -223,26 +213,26 @@
                 inputType="number"
                 isInteger
                 maxlength={MAX_SUPPORTED_DECIMALS}
-                label={localize('popups.mintNativeTokenForm.inputs.decimals')}
-                description={localize('tooltips.mintNativeTokenForm.decimals')}
+                label={localize('popups.mintNativeToken.property.decimals')}
+                description={localize('tooltips.mintNativeToken.decimals')}
                 fontSize="14"
             />
             <OptionalInput
                 bind:value={description}
-                label={localize('popups.mintNativeTokenForm.inputs.description')}
-                description={localize('tooltips.mintNativeTokenForm.description')}
+                label={localize('popups.mintNativeToken.property.description')}
+                description={localize('tooltips.mintNativeToken.description')}
                 fontSize="14"
             />
             <OptionalInput
                 bind:value={url}
-                label={localize('popups.mintNativeTokenForm.inputs.url')}
-                description={localize('tooltips.mintNativeTokenForm.url')}
+                label={localize('popups.mintNativeToken.property.url')}
+                description={localize('tooltips.mintNativeToken.url')}
                 fontSize="14"
             />
             <OptionalInput
                 bind:value={logoUrl}
-                label={localize('popups.mintNativeTokenForm.inputs.logoUrl')}
-                description={localize('tooltips.mintNativeTokenForm.logoUrl')}
+                label={localize('popups.mintNativeToken.property.logoUrl')}
+                description={localize('tooltips.mintNativeToken.logoUrl')}
                 fontSize="14"
             />
         </optional-inputs>
@@ -252,11 +242,11 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={isTransferring} onClick={handleCancel}>
+        <Button outline classes="w-full" onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" disabled={isTransferring} onClick={handleMint} isBusy={isTransferring}>
-            {localize('actions.mint')}
+        <Button classes="w-full" onClick={handleContinue}>
+            {localize('actions.continue')}
         </Button>
     </div>
 </div>

@@ -3,13 +3,14 @@
         TransactionActivityStatusPill,
         ActivityAsyncStatusPill,
         KeyValueBox,
+        Pill,
         AmountBox,
         SubjectBox,
-        Pill,
     } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import {
+        formatTokenAmountDefault,
         formatTokenAmountPrecise,
         ActivityAsyncStatus,
         ActivityType,
@@ -35,7 +36,7 @@
     export let formattedFiatValue: string = null
     export let inclusionState: InclusionState = InclusionState.Pending
     export let metadata: string = null
-    export let amount: string = null
+    export let rawAmount: string = null
     export let unit: string
     export let storageDeposit = 0
     export let giftedStorageDeposit = 0
@@ -49,6 +50,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
+    $: amount = formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit)
     $: formattedTransactionTime = getDateFormat(transactionTime)
     $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)

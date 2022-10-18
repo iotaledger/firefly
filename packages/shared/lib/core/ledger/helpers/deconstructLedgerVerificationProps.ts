@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { PopupProps } from '@auxiliary/popup'
-import { IAccountSubject, IAddressSubject, newTransactionDetails } from '@core/wallet'
+import { formatTokenAmountDefault, IAccountSubject, IAddressSubject, newTransactionDetails } from '@core/wallet'
 
 export function deconstructLedgerVerificationProps(): PopupProps {
     const transactionDetails = get(newTransactionDetails)
@@ -11,7 +11,11 @@ export function deconstructLedgerVerificationProps(): PopupProps {
     const toAddress = isAddressRecipientType
         ? (transactionDetails?.recipient as IAddressSubject)?.address
         : (transactionDetails?.recipient as IAccountSubject)?.account?.depositAddress
-    const toAmount = `${transactionDetails?.amount} ${transactionDetails?.unit}`
+    const toAmount = `${formatTokenAmountDefault(
+        Number(transactionDetails?.rawAmount),
+        transactionDetails?.asset.metadata,
+        transactionDetails?.unit
+    )}`
 
     return {
         toAddress,

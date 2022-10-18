@@ -1,4 +1,4 @@
-import { createNewAccount, setSelectedAccount } from '@core/account'
+import { createNewAccount, IAccount, setSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
 import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
 import {
@@ -7,6 +7,7 @@ import {
     isStrongholdUnlocked,
     profileManager,
     recoverAccounts,
+    RecoverAccountsPayload,
 } from '@core/profile-manager'
 import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
 import { ProfileType } from '@core/profile/enums'
@@ -34,7 +35,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
     try {
         const _activeProfile = get(activeProfile)
-        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountId } = _activeProfile
+        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountIndex } = _activeProfile
         if (id) {
             // Step 1: create profile manager if its doesn't exist
             incrementLoginProgress()
@@ -52,12 +53,16 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
-            let accounts
+            let accounts: IAccount[]
             if (loginOptions?.isFromOnboardingFlow && loginOptions?.shouldRecoverAccounts) {
                 const { initialAccountRange, addressGapLimit } = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type]
-                accounts = await recoverAccounts(0, initialAccountRange, addressGapLimit, {
-                    syncIncomingTransactions: true,
-                })
+                const recoverAccountsPayload: RecoverAccountsPayload = {
+                    accountStartIndex: 0,
+                    accountGapLimit: initialAccountRange,
+                    addressGapLimit,
+                    syncOptions: { syncIncomingTransactions: true },
+                }
+                accounts = await recoverAccounts(recoverAccountsPayload)
             } else {
                 accounts = await getAccounts()
             }
@@ -104,7 +109,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             if (isLedgerProfile(type)) {
                 pollLedgerNanoStatus()
             }
-            setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
+            setSelectedAccount(lastUsedAccountIndex ?? get(activeAccounts)?.[0]?.index ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
             setTimeout(() => {
@@ -119,7 +124,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
     } catch (err) {
         handleError(err)
         if (!loginOptions?.isFromOnboardingFlow) {
-            await logout()
+            await logout(false)
         }
         _loginRouter.previous()
         resetLoginProgress()

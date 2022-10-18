@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
-    import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
+    import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
     import { popupState, openPopup } from 'shared/lib/popup'
@@ -9,9 +9,8 @@
     import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, logout, lockStronghold } from '@core/profile'
     import { checkOrUnlockStronghold } from '@core/stronghold'
-    import { ButtonSize } from 'shared/components/Button.svelte'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     const profileColor = 'blue' // TODO: each profile has a different color
     const isUpToDate = $appVersionDetails.upToDate
@@ -34,16 +33,16 @@
         updateLedgerConnectionText()
     }
 
-    const handleSettingsClick = (): void => {
+    function handleSettingsClick(): void {
         openSettings()
         modal?.close()
     }
 
-    const handleLogoutClick = (): void => {
-        void logout(true)
+    function handleLogoutClick(): void {
+        void logout()
     }
 
-    const handleStrongholdToggleClick = (): void => {
+    function handleStrongholdToggleClick(): void {
         if ($isStrongholdLocked) {
             checkOrUnlockStronghold()
         } else {
@@ -51,18 +50,18 @@
         }
     }
 
-    const updateLedgerConnectionText = (): void => {
+    function updateLedgerConnectionText(): void {
         ledgerConnectionText = localize(`views.dashboard.profileModal.hardware.statuses.${$ledgerConnectionState}`)
     }
 
-    function handleBackupClick() {
+    function handleBackupClick(): void {
         modal?.close()
         openPopup({
             type: 'backupStronghold',
         })
     }
 
-    function handleVersionUpdateClick() {
+    function handleVersionUpdateClick(): void {
         modal?.close()
         openPopup({ type: 'version' })
     }

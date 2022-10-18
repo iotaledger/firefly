@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store'
 
-export const selectedAccountId = writable<string>(null)
+export const selectedAccountIndex = writable<number>(null)

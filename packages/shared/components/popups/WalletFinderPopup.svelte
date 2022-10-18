@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { Button, KeyValueBox, Text, TextHint } from 'shared/components'
-    import { FontWeight } from '../Text.svelte'
+    import { Button, KeyValueBox, Text, TextHint, FontWeight } from 'shared/components'
     import { closePopup, openPopup } from '@lib/popup'
     import { showAppNotification } from '@lib/notifications'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
@@ -17,7 +16,7 @@
         loadAccounts,
         visibleActiveAccounts,
     } from '@core/profile'
-    import { recoverAccounts } from '@core/profile-manager'
+    import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
     import {
         formatTokenAmountBestMatch,
         generateAndStoreActivitiesForAllAccounts,
@@ -41,7 +40,7 @@
     $: searchForBalancesOnLoad && !$isStrongholdLocked && handleFindBalances()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 
-    async function handleFindBalances() {
+    async function handleFindBalances(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
                 type: 'unlockStronghold',
@@ -70,9 +69,13 @@
                     return
                 }
 
-                await recoverAccounts(0, currentAccountGapLimit, currentAddressGapLimit, {
-                    syncIncomingTransactions: true,
-                })
+                const recoverAccountsPayload: RecoverAccountsPayload = {
+                    accountStartIndex: 0,
+                    accountGapLimit: currentAccountGapLimit,
+                    addressGapLimit: currentAddressGapLimit,
+                    syncOptions: { syncIncomingTransactions: true },
+                }
+                await recoverAccounts(recoverAccountsPayload)
                 await loadAccounts()
 
                 previousAccountGapLimit = currentAccountGapLimit
@@ -98,7 +101,7 @@
         }
     }
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         closePopup()
     }
 

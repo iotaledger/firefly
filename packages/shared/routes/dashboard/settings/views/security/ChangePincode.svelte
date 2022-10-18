@@ -1,11 +1,10 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
-    import { Button, PinInput, Spinner, Text } from 'shared/components'
+    import { Button, PinInput, Spinner, Text, HTMLButtonType, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Platform } from '@lib/platform'
     import { PINCODE_LENGTH } from '@core/utils'
-    import { HTMLButtonType, ButtonSize } from 'shared/components/Button.svelte'
 
     let currentPincode = ''
     let newPincode = ''
@@ -16,7 +15,7 @@
     let pinCodeBusy = false
     let pinCodeMessage = ''
 
-    function changePincode() {
+    function changePincode(): void {
         if (currentPincode && newPincode && confirmedPincode) {
             reset()
 
@@ -32,7 +31,7 @@
                 pinCodeBusy = true
                 pinCodeMessage = localize('general.pinCodeUpdating')
 
-                const _clear = (err?) => {
+                const _clear: (err?: unknown) => void = (err?) => {
                     setTimeout(() => {
                         pinCodeMessage = ''
                     }, 2000)
@@ -77,7 +76,7 @@
         }
     }
 
-    function reset() {
+    function reset(): void {
         currentPincodeError = ''
         newPincodeError = ''
         confirmationPincodeError = ''

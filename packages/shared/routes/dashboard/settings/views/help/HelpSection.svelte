@@ -1,15 +1,14 @@
 <script lang="typescript">
-    import { Button, Text } from 'shared/components'
+    import { Button, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { Platform } from 'shared/lib/platform'
     import { HelpAndInfoRoute } from '@core/router'
-    import { ButtonSize } from 'shared/components/Button.svelte'
 
     export let route: HelpAndInfoRoute
     export let url: string
     export let actionLocale: string
 
-    const handleClick = () => {
+    function handleClick(): void {
         Platform.openUrl(url)
     }
 </script>

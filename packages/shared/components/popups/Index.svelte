@@ -1,6 +1,5 @@
 <script lang="typescript">
     import { mobile, PlatformOption, platform } from '@core/app'
-    import { Locale } from '@core/i18n'
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { closePopup, popupState } from 'shared/lib/popup'
@@ -28,6 +27,7 @@
     import LegalUpdate from './LegalUpdate.svelte'
     import ManageAccountPopup from './ManageAccountPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
+    import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
@@ -42,12 +42,10 @@
     import Video from './Video.svelte'
     import WalletFinderPopup from './WalletFinderPopup.svelte'
 
-    export let locale: Locale
-
     export let type: string
     export let props: any
-    export let hideClose: boolean
-    export let preventClose: boolean
+    export let hideClose: boolean = false
+    export let preventClose: boolean = false
     export let fullScreen: boolean
     export let transition = true
     export let overflow = false
@@ -114,18 +112,19 @@
         manageAccount: ManageAccountPopup,
         tokenInformation: TokenInformationPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,
+        mintNativeTokenConfirmation: MintNativeTokenConfirmationPopup,
         faucetRequest: FaucetRequestPopup,
         enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
         testDeepLinkForm: TestDeepLinkFormPopup,
     }
 
-    const onKey = (e) => {
-        if (e.key === 'Escape') {
+    function onKey(event: KeyboardEvent): void {
+        if (event.key === 'Escape') {
             tryClosePopup()
         }
     }
 
-    const tryClosePopup = (): void => {
+    function tryClosePopup(): void {
         if (!preventClose) {
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
@@ -134,26 +133,28 @@
         }
     }
 
-    const focusableElements = () =>
-        [
+    function focusableElements(): HTMLElement[] {
+        return [
             ...popupContent.querySelectorAll(
                 'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
             ),
         ].filter((el) => !el.hasAttribute('disabled'))
+    }
 
-    const handleFocusFirst = (e) => {
+    function handleFocusFirst(event: FocusEvent): void {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[elems.length - 1].focus()
         }
-        e.preventDefault()
+        event.preventDefault()
     }
-    const handleFocusLast = (e) => {
+
+    function handleFocusLast(event: FocusEvent): void {
         const elems = focusableElements()
         if (elems && elems.length > 0) {
             elems[0].focus()
         }
-        e.preventDefault()
+        event.preventDefault()
     }
 
     onMount(() => {
@@ -168,7 +169,7 @@
 {#if $mobile && !fullScreen}
     <Drawer opened zIndex="z-40" preventClose={hideClose} on:close={() => closePopup($popupState?.preventClose)}>
         <div bind:this={popupContent} class="p-8">
-            <svelte:component this={types[type]} {...props} {locale} />
+            <svelte:component this={types[type]} {...props} />
         </div>
     </Drawer>
 {:else}
@@ -200,7 +201,7 @@
                     />
                 </button>
             {/if}
-            <svelte:component this={types[type]} {...props} {locale} />
+            <svelte:component this={types[type]} {...props} />
         </popup-content>
         <div tabindex="0" on:focus={handleFocusLast} />
     </popup>

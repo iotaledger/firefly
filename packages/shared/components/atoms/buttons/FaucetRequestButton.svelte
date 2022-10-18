@@ -5,7 +5,7 @@
     import { OnboardingButton } from 'shared/components'
     import { activeProfile } from '@core/profile'
 
-    function handleGetTokens() {
+    function handleGetTokens(): void {
         openPopup({
             type: 'faucetRequest',
         })

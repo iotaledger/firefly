@@ -15,7 +15,6 @@ export * from './getOutputOptions'
 export * from './getSenderAddressFromUnlockCondition'
 export * from './getSubjectFromAddress'
 export * from './isSubjectInternal'
-export * from './parseRawAmount'
 export * from './validateIrc30Metadata'
 
 // Folders

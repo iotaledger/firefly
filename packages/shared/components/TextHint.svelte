@@ -16,11 +16,11 @@
     export let textColor = 'gray-700'
     export let textDarkColor = 'gray-400'
 
-    let _classes
-    let _icon
-    let _iconClasses
+    let _classes: string
+    let _icon: string
+    let _iconClasses: string
 
-    function setClasses() {
+    function setClasses(): void {
         if (primary) {
             _classes = 'bg-gray-50 dark:bg-gray-800'
         } else if (secondary) {

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import zxcvbn from 'zxcvbn'
     import { OnboardingLayout } from '../../../../../components'
-    import { Button, PasswordInput, Text } from 'shared/components'
+    import { Button, PasswordInput, Text, HTMLButtonType, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
@@ -14,7 +14,6 @@
     } from '@contexts/onboarding'
     import { showAppNotification } from '@lib/notifications'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
-    import { HTMLButtonType } from 'shared/components/Button.svelte'
 
     const title = localize('views.onboarding.strongholdSetup.setupStrongholdPassword.title')
 
@@ -101,8 +100,10 @@
 <OnboardingLayout {onBackClick} {busy} {title} animation="password-desktop">
     <div slot="content" class="mb-5">
         <form on:submit|preventDefault={onContinueClick} id="password-form">
-            <Text type="p" secondary>{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text>
-            <Text type="p" classes="mb-10" secondary
+            <Text type={TextType.p} secondary
+                >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body1')}</Text
+            >
+            <Text type={TextType.p} classes="mb-10" secondary
                 >{localize('views.onboarding.strongholdSetup.setupStrongholdPassword.body2')}</Text
             >
             <PasswordInput

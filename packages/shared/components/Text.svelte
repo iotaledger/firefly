@@ -1,47 +1,6 @@
-<script lang="typescript" context="module">
-    export enum TextType {
-        h1 = 'h1',
-        h2 = 'h2',
-        h3 = 'h3',
-        h4 = 'h4',
-        h5 = 'h5',
-        p = 'p',
-        pre = 'pre',
-    }
-
-    export enum FontWeight {
-        thin = 'font-100',
-        extralight = 'font-200',
-        light = 'font-300',
-        normal = 'font-400',
-        medium = 'font-500',
-        semibold = 'font-600',
-        bold = 'font-700',
-        extrabold = 'font-800',
-        black = 'font-900',
-    }
-
-    export type TextPropTypes = {
-        type?: TextType
-        fontSize?: string
-        fontWeight?: FontWeight
-        lineHeight?: string
-        secondary?: boolean
-        disabled?: boolean
-        highlighted?: boolean
-        bold?: boolean
-        smaller?: boolean
-        bigger?: boolean
-        error?: boolean
-        overrideColor?: boolean
-        color?: string
-        darkColor?: string
-        overrideLeading?: boolean
-        classes?: string
-    }
-</script>
-
 <script lang="typescript">
+    import { TextType, FontWeight } from './enums'
+
     export let type: TextType = TextType.p
     export let fontSize = ''
     export let fontWeight: FontWeight | '' = ''
@@ -141,13 +100,13 @@
     $: formattedColor = color ? TEXT_PREFIX + color : ''
     $: formattedDarkColor = darkColor ? DARKMODE_PREFIX + TEXT_PREFIX + darkColor : ''
 
-    let _fontSize
-    let _lineHeight
-    let _color
-    let _darkColor
+    let _fontSize: string
+    let _lineHeight: string
+    let _color: string
+    let _darkColor: string
 
     // Format custom inputs
-    function setCustomStyles() {
+    function setCustomStyles(): void {
         _fontSize = formattedFontSize
         _lineHeight = formattedLineHeight
         _color = formattedColor
@@ -155,7 +114,7 @@
     }
 
     // Adjust font for old override classes
-    function adjustFont() {
+    function adjustFont(): void {
         switch (type) {
             case TextType.p:
                 _fontSize = bigger ? 'text-16' : smaller ? 'text-12' : _fontSize
@@ -174,7 +133,7 @@
     }
 
     // Adjust colours for old override classes
-    function adjustColor() {
+    function adjustColor(): void {
         _color = overrideColor ? '' : _color
         _darkColor = overrideColor ? '' : _darkColor
 
@@ -195,8 +154,7 @@
 
     $: $$props, setCustomStyles(), adjustFont(), adjustColor()
 
-    let customClasses: ICustomClass
-    $: customClasses = {
+    $: customClasses = <ICustomClass>{
         ...DEFAULT_CLASSES_LIST[type],
         ...(_fontSize && { fontSize: _fontSize }),
         ...(fontWeight && { fontWeight }),

@@ -41,8 +41,7 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 try {
-    const { STAGE, NODE_ENV } = process.env
-    if (NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
         const logDir = './log'
         if (!fs.existsSync(logDir)) {
             fs.mkdirSync(logDir)
@@ -68,39 +67,52 @@ try {
     // The factory method also copies all the prototype methods to the object so that it gets passed through the bridge
     contextBridge.exposeInMainWorld('__WALLET__API__', {
         createAccountManager(id, options) {
-            const protoProps = Object.getOwnPropertyNames(WalletApi.AccountManager.prototype)
             const manager = new WalletApi.AccountManager(options)
             manager.id = id
             profileManagers[id] = manager
-
-            protoProps.forEach((key) => {
-                if (key !== 'constructor') {
-                    manager[key] = manager[key].bind(manager)
-                }
-            })
-
+            bindMethodsAcrossContextBridge(WalletApi.AccountManager.prototype, manager)
             return manager
+        },
+        async createAccount(managerId, payload) {
+            const manager = profileManagers[managerId]
+            const account = await manager.createAccount(payload)
+            bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
+            return account
         },
         deleteAccountManager(id) {
             if (id && id in profileManagers) {
                 delete profileManagers[id]
             }
         },
-        async getAccount(id, index) {
-            const manager = profileManagers[id]
+        async getAccount(managerId, index) {
+            const manager = profileManagers[managerId]
             const account = await manager.getAccount(index)
-            const protoProps = Object.getOwnPropertyNames(WalletApi.Account.prototype)
-
-            protoProps.forEach((key) => {
-                if (key !== 'constructor') {
-                    account[key] = account[key].bind(account)
-                }
-            })
-
+            bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account)
             return account
+        },
+        async getAccounts(managerId) {
+            const manager = profileManagers[managerId]
+            const accounts = await manager.getAccounts()
+            accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
+            return accounts
+        },
+        async recoverAccounts(managerId, payload) {
+            const manager = profileManagers[managerId]
+            const accounts = await manager.recoverAccounts(...Object.values(payload))
+            accounts.forEach((account) => bindMethodsAcrossContextBridge(WalletApi.Account.prototype, account))
+            return accounts
         },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
 } catch (error) {
     ipcRenderer.invoke('handle-error', '[Preload Context] Error', error)
+}
+
+function bindMethodsAcrossContextBridge(prototype, object) {
+    const prototypeProperties = Object.getOwnPropertyNames(prototype)
+    prototypeProperties.forEach((key) => {
+        if (key !== 'constructor') {
+            object[key] = object[key].bind(object)
+        }
+    })
 }
