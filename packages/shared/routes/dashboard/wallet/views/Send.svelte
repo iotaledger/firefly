@@ -28,7 +28,7 @@
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
-    import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
+    import { ADDRESS_LENGTH, validateBech32Address, getByteLengthOfString } from 'shared/lib/utils'
     import {
         DUST_THRESHOLD,
         isTransferring,
@@ -57,9 +57,13 @@
     let unit = Unit.Mi
     let amount = ''
     let address = ''
+    let tag = ''
+    let metadata = ''
     let amountError = ''
     let addressError = ''
     let toError = ''
+    let tagError = ''
+    let metadataError = ''
     let to: LabeledWalletAccount
     let amountRaw: number
 
@@ -72,7 +76,8 @@
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
-    $: showBridgeFields = Boolean($sendParams.tag && $sendParams.metadata)
+    $: tag, (tagError = '')
+    $: metadata, (metadataError = '')
 
     const transferSteps: {
         [key in TransferProgressEventType]: {
@@ -320,7 +325,15 @@
             }
         }
 
-        if (!amountError && !addressError && !toError) {
+        if (getByteLengthOfString(tag) > 64) {
+            tagError = localize('error.send.tagLength')
+        }
+
+        if (getByteLengthOfString(metadata) > 8192) {
+            metadataError = localize('error.send.metadataLength')
+        }
+
+        if (!amountError && !addressError && !toError && !tagError && !metadataError) {
             // If this is an external send but the dest address is in one of
             // the other accounts, detect it to display the right popup
             // but keep the tx external to keep the original entered address
@@ -405,6 +418,8 @@
         amount = sendParams.amount !== undefined ? String(sendParams.amount) : ''
         address = sendParams.address
         to = sendParams?.toWalletAccount?.id !== $selectedAccountStore.id ? sendParams?.toWalletAccount : undefined
+        tag = sendParams?.tag ?? ''
+        metadata = sendParams?.metadata ?? ''
         if (accountsDropdownItems) {
             to =
                 $liveAccounts.length === 2
@@ -444,11 +459,15 @@
         amount,
         selectedSendType,
         to,
+        tag,
+        metadata,
         sendParams.update((_sendParams) => ({
             ..._sendParams,
             address,
             unit,
             amount: amount ? String(amount) : '',
+            tag,
+            metadata,
             toWalletAccount: to ? addLabel(to) : undefined,
             isInternal: selectedSendType === SEND_TYPE.INTERNAL,
         }))
@@ -535,10 +554,8 @@
                         autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
                         classes="mb-6"
                     />
-                    {#if showBridgeFields}
-                        <KeyValueBox bind:value={$sendParams.tag} key={localize('general.tag')} />
-                        <KeyValueBox bind:value={$sendParams.metadata} key={localize('general.metadata')} />
-                    {/if}
+                    <KeyValueBox bind:value={tag} error={tagError} key={localize('general.tag')} />
+                    <KeyValueBox bind:value={metadata} error={metadataError} key={localize('general.metadata')} />
                 </div>
             </div>
         </div>

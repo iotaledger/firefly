@@ -1321,7 +1321,9 @@
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than 1 Mi on your address.",
             "cancelled": "The transaction was cancelled.",
-            "transaction": "There was an error sending your transaction. Please try again."
+            "transaction": "There was an error sending your transaction. Please try again.",
+            "tagLength": "The tag length is greater than 64 bytes",
+            "metadataLength": "The metadata length is greater than 8192 bytes"
         },
         "node": {
             "invalid": "Please enter a valid URL.",

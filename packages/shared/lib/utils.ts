@@ -488,3 +488,7 @@ export function convertStringToUtf8Array(input: string): number[] {
         return []
     }
 }
+
+export function getByteLengthOfString(str: string): number {
+    return new Blob([str]).size
+}
