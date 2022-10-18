@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Platform } from '@lib/platform'
-    import { PINCODE_LENGTH } from '@core/utils'
+    import { PIN_LENGTH } from '@core/utils'
 
     let currentPincode = ''
     let newPincode = ''
@@ -19,10 +19,10 @@
         if (currentPincode && newPincode && confirmedPincode) {
             reset()
 
-            if (newPincode.length !== PINCODE_LENGTH) {
+            if (newPincode.length !== PIN_LENGTH) {
                 newPincodeError = localize('error.pincode.length', {
                     values: {
-                        length: PINCODE_LENGTH,
+                        length: PIN_LENGTH,
                     },
                 })
             } else if (newPincode !== confirmedPincode) {

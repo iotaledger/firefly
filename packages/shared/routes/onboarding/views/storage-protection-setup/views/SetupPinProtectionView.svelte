@@ -13,7 +13,7 @@
     import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ProfileType } from '@core/profile'
     import { storageProtectionSetupRouter } from '@core/router'
-    import { isValidPincode } from '@core/utils'
+    import { isValidPin } from '@core/utils'
 
     export let busy = false
 
@@ -29,7 +29,7 @@
     $: setPinInput, (setPinInputError = '')
     $: confirmPinInput, (confirmPinInputError = '')
     $: arePinInputsMatching = setPinInput === confirmPinInput
-    $: arePinInputsValid = isValidPincode(setPinInput) && isValidPincode(confirmPinInput)
+    $: arePinInputsValid = isValidPin(setPinInput) && isValidPin(confirmPinInput)
     $: if (arePinInputsValid && !arePinInputsMatching) {
         confirmPinInputError = localize('error.pincode.match')
     } else {
