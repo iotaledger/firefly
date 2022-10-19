@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { EnterNameView, SetupView, SetupRecoveredView } from './views'
-    import { ProfileSetupRoute, profileSetupRoute } from '@core/router'
+    import { ProfileSetupRoute, profileSetupRoute } from '../../../../lib/core/router'
 </script>
 
 {#if $profileSetupRoute === ProfileSetupRoute.Setup}

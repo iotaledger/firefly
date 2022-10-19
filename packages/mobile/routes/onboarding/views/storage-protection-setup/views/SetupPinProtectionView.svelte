@@ -11,7 +11,7 @@
     import { localize } from '@core/i18n'
     import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ProfileType } from '@core/profile'
-    import { storageProtectionSetupRouter } from '@core/router'
+    import { storageProtectionSetupRouter } from '../../../../../lib/core/router'
     import { validatePinFormat } from '@lib/utils'
     import { onMount } from 'svelte'
 

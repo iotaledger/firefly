@@ -14,8 +14,9 @@ import {
     getTagFromOutput,
     isSubjectInternal,
     getSenderFromTransaction,
-    getSenderFromInputs,
+    getSenderAddressFromInputs,
     getMainTransactionOutputFromTransaction,
+    getSubjectFromAddress,
 } from '../../utils'
 import { getAsyncDataFromOutput } from './getAsyncDataFromOutput'
 
@@ -35,7 +36,7 @@ export function getTransactionActivityData(
     const { output } = wrappedOutput
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs
-        ? getSenderFromInputs(detailedTransactionInputs)
+        ? getSubjectFromAddress(getSenderAddressFromInputs(detailedTransactionInputs))
         : getSenderFromTransaction(isIncoming, account.depositAddress, output)
 
     const subject = isIncoming ? sender : recipient
