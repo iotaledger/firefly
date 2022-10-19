@@ -12,7 +12,7 @@
         ProfileSetupRoute,
         profileSetupRoute,
         profileSetupRouter,
-    } from '@core/router'
+    } from '../../../../../lib/core/router'
     import { onboardingProfile, ProfileSetupType, updateOnboardingProfile } from '@contexts/onboarding'
 
     const title = localize('views.onboarding.profileSetup.enterName.title', {

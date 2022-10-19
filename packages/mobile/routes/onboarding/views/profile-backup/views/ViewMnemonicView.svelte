@@ -3,7 +3,7 @@
     import { OnboardingLayout, RecoveryPhrase } from '../../../../../components'
     import { Button, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { profileBackupRouter } from '@core/router'
+    import { profileBackupRouter } from '../../../../../lib/core/router'
     import {
         onboardingProfile,
         generateMnemonicForOnboardingProfile,

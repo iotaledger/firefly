@@ -5,7 +5,7 @@
     import features from '../../../../../features/features'
     import { localize } from '@core/i18n'
     import { formatProtocolName } from '@core/network'
-    import { profileSetupRouter } from '@core/router'
+    import { profileSetupRouter } from '../../../../../lib/core/router'
     import {
         getProfileTypeFromProfileRecoveryType,
         initialiseProfileManagerFromOnboardingProfile,
