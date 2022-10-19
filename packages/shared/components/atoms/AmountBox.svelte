@@ -1,21 +1,53 @@
 <script lang="typescript">
     import { IPersistedAsset } from '@core/wallet'
+    import { getGroupSeparator } from '@lib/currency'
     import { AssetIcon, Text, FontWeight, TextType } from 'shared/components'
 
     export let asset: IPersistedAsset
     export let unit: string
-    export let amount: string
+    export let amount: string = ''
     export let fiatAmount: string = ''
+
+    let displayedAmount: string[] = [amount]
+    $: {
+        if (amount.length > 12) {
+            displayedAmount = breakAmountIntoLines(amount)
+        } else {
+            displayedAmount = [amount]
+        }
+    }
+
+    function breakAmountIntoLines(amount: string): string[] {
+        const NUMBERS_PER_THOUSAND_GROUP = 3
+        const LINES = 2
+
+        const amountLengthWithoutSeparator = amount.split(',').join('').length
+        const thousandSeparatorsIndexes: number[] = Array.from(amount).reduce(
+            (acc, char, i) => (char === getGroupSeparator() ? [...acc, i] : acc),
+            []
+        )
+        const thousandGroups = Math.ceil(amountLengthWithoutSeparator / NUMBERS_PER_THOUSAND_GROUP / LINES)
+
+        const result: string[] = []
+        result.push(amount.substring(0, thousandSeparatorsIndexes[thousandGroups - 1] + 1))
+        result.push(amount.substring(result[0].length, amount.length))
+
+        return result
+    }
 </script>
 
 <amount class="flex flex-col items-center">
     <div class="flex flex-row space-x-3">
         <AssetIcon {asset} />
-        <div class="flex flex-row flex-wrap justify-center items-baseline space-x-0.1">
-            <Text type={TextType.h1} fontWeight={FontWeight.semibold}>{amount}</Text>
-            {#if unit}
-                <Text type={TextType.h4} classes="ml-1" fontWeight={FontWeight.medium}>{unit}</Text>
-            {/if}
+        <div class="flex flex-col flex-wrap justify-center items-baseline space-x-0.1">
+            {#each displayedAmount as line, index}
+                <div class="flex items-baseline">
+                    <Text type={TextType.h1} fontWeight={FontWeight.semibold}>{line}</Text>
+                    {#if unit && index === displayedAmount.length - 1}
+                        <Text type={TextType.h4} classes="ml-1" fontWeight={FontWeight.medium}>{unit}</Text>
+                    {/if}
+                </div>
+            {/each}
         </div>
     </div>
     {#if fiatAmount}
