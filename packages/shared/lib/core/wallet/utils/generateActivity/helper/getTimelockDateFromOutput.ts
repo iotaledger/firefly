@@ -1,6 +1,6 @@
 import { OutputTypes } from '@iota/types'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
-import { OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_TIMELOCK } from '../../constants'
+import { OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_TIMELOCK } from '../../../constants'
 
 export function getTimelockDateFromOutput(output: OutputTypes): Date {
     if (output && output?.type !== OUTPUT_TYPE_TREASURY) {

@@ -1,6 +1,6 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
 import { selectedAccount } from '../../account/stores/selected-account.store'
-import { Activity } from '../classes/activity.class'
+import { Activity } from '../types/activity.type'
 import {
     ActivityType,
     AliasType,
@@ -10,9 +10,8 @@ import {
     StatusFilterOption,
     TypeFilterOption,
 } from '../enums'
-import { IActivity } from '../interfaces'
 import { ActivityFilter } from '../interfaces/filter/filter.interface'
-import { getAssetFromPersistedAssets } from '../utils'
+import { getAssetFromPersistedAssets, getFormattedAmountFromActivity } from '../utils'
 import { isVisibleActivity } from '../utils/isVisibleActivity'
 import { allAccountActivities } from './all-account-activities.store'
 import { isValidIRC30 } from '@lib/utils/isValidIRC30'
@@ -105,13 +104,12 @@ export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
-            const asset =
-                _activity.data.type !== ActivityType.Nft && getAssetFromPersistedAssets(_activity.data.assetId)
-            const hasValidAsset = _activity.data.type === ActivityType.Nft || (asset && isValidIRC30(asset.metadata))
+            const asset = _activity.type !== ActivityType.Nft && getAssetFromPersistedAssets(_activity.assetId)
+            const hasValidAsset = _activity.type === ActivityType.Nft || (asset && isValidIRC30(asset.metadata))
             return (
                 !_activity.isHidden &&
                 hasValidAsset &&
-                (_activity.data.type !== ActivityType.Alias || _activity.data.aliasType === AliasType.Created)
+                (_activity.type !== ActivityType.Alias || _activity.aliasType === AliasType.Created)
             )
         })
 
@@ -130,48 +128,44 @@ export const queriedActivities: Readable<Activity[]> = derived(
     }
 )
 
-function getFieldsToSearchFromActivity(activity: IActivity): string[] {
+function getFieldsToSearchFromActivity(activity: Activity): string[] {
     const fieldsToSearch: string[] = []
 
     if (activity.transactionId) {
         fieldsToSearch.push(activity.transactionId)
     }
 
-    if (activity.data.type !== ActivityType.Nft && activity.data.assetId) {
-        fieldsToSearch.push(activity.data.assetId)
-        fieldsToSearch.push(getAssetFromPersistedAssets(activity.data.assetId)?.metadata?.name)
+    if (activity.type !== ActivityType.Nft && activity.assetId) {
+        fieldsToSearch.push(activity.assetId)
+        fieldsToSearch.push(getAssetFromPersistedAssets(activity.assetId)?.metadata?.name)
     }
 
-    if (
-        activity.data.type !== ActivityType.Alias &&
-        activity.data.type !== ActivityType.Nft &&
-        activity.data.rawAmount
-    ) {
-        fieldsToSearch.push(activity.data.rawAmount?.toString())
-        fieldsToSearch.push(activity.getFormattedAmount(false)?.toLowerCase())
+    if (activity.type !== ActivityType.Alias && activity.type !== ActivityType.Nft && activity.rawAmount) {
+        fieldsToSearch.push(activity.rawAmount?.toString())
+        fieldsToSearch.push(getFormattedAmountFromActivity(activity, false)?.toLowerCase())
     }
 
-    if (activity.data.type === ActivityType.Transaction) {
-        if (activity.data.subject?.type === 'account') {
-            fieldsToSearch.push(activity.data.subject?.account?.name)
-        } else if (activity.data.subject?.type === 'address') {
-            fieldsToSearch.push(activity.data.subject?.address)
+    if (activity.type === ActivityType.Transaction) {
+        if (activity.subject?.type === 'account') {
+            fieldsToSearch.push(activity.subject?.account?.name)
+        } else if (activity.subject?.type === 'address') {
+            fieldsToSearch.push(activity.subject?.address)
         }
 
-        if (activity.data.claimingTransactionId) {
-            fieldsToSearch.push(activity.data.claimingTransactionId)
+        if (activity.claimingTransactionId) {
+            fieldsToSearch.push(activity.claimingTransactionId)
         }
 
-        if (activity.data.metadata) {
-            fieldsToSearch.push(activity.data.metadata)
+        if (activity.metadata) {
+            fieldsToSearch.push(activity.metadata)
         }
 
-        if (activity.data.tag) {
-            fieldsToSearch.push(activity.data.tag)
+        if (activity.tag) {
+            fieldsToSearch.push(activity.tag)
         }
 
-        if (activity.data.outputId) {
-            fieldsToSearch.push(activity.data.outputId)
+        if (activity.outputId) {
+            fieldsToSearch.push(activity.outputId)
         }
     }
 

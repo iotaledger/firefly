@@ -1,4 +1,4 @@
-import { FEATURE_TYPE_TAG, OUTPUT_TYPE_TREASURY } from '../../constants'
+import { FEATURE_TYPE_TAG, OUTPUT_TYPE_TREASURY } from '../../../constants'
 import { ITagFeature, OutputTypes } from '@iota/types'
 import { Converter } from '@lib/converter'
 

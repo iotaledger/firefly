@@ -6,12 +6,11 @@ import { Converter } from '@lib/converter'
 import { showAppNotification } from '@lib/notifications'
 import { activeProfile, ProfileType } from '@core/profile'
 import { handleLedgerError } from '@core/ledger'
-import { Activity } from '../classes'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
-import { preprocessTransaction } from '../utils'
+import { generateActivity, preprocessTransaction } from '../utils'
 import { VerifiedStatus } from '../enums'
 import { createAliasIfNecessary } from '@core/account/api/createAliasIfNecessary'
 
@@ -43,7 +42,10 @@ export async function mintNativeToken(
         )
         const processedTransaction = preprocessTransaction(mintTokenTransaction.transaction)
         addPersistedAsset(persistedAsset)
-        addActivityToAccountActivitiesInAllAccountActivities(account.index, new Activity(processedTransaction, account))
+        addActivityToAccountActivitiesInAllAccountActivities(
+            account.index,
+            generateActivity(processedTransaction, account)
+        )
         showAppNotification({
             type: 'success',
             message: localize('notifications.mintNativeToken.success'),

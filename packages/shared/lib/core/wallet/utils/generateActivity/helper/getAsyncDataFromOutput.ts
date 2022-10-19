@@ -1,9 +1,9 @@
 import { IAccountState } from '@core/account'
 import { isActivityHiddenForAccountIndex, ActivityAsyncStatus, IClaimData } from '@core/wallet'
 import type { OutputTypes } from '@iota/types'
-import { getExpirationDateFromOutput } from './getExpirationDateFromOutput'
+import { getExpirationDateFromOutput } from '../../outputs/getExpirationDateFromOutput'
 import { getTimelockDateFromOutput } from './getTimelockDateFromOutput'
-import { isOutputAsync } from './isOutputAsync'
+import { isOutputAsync } from '../../outputs/isOutputAsync'
 
 export function getAsyncDataFromOutput(
     output: OutputTypes,

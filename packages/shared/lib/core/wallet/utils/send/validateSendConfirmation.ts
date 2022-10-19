@@ -4,7 +4,7 @@ import { convertUnixTimestampToDate, isValidExpirationDateTime } from '@core/uti
 import { OutputTypes } from '@iota/types'
 import { OutputOptions } from '@iota/wallet'
 import { get } from 'svelte/store'
-import { getStorageDepositFromOutput } from '../outputs'
+import { getStorageDepositFromOutput } from '../generateActivity/helper'
 
 export function validateSendConfirmation(outputOptions: OutputOptions, outputTypes: OutputTypes): void {
     const parseNumber: (value: string) => number = (value: string) => parseInt(value, 10) ?? 0

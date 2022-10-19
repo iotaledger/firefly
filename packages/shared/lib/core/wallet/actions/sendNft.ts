@@ -2,11 +2,10 @@ import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { activeProfile, ProfileType } from '@core/profile'
 import { get } from 'svelte/store'
 
-import { Activity } from '../classes'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetNewNftTransactionDetails } from '../stores'
 import { handleLedgerError } from '@core/ledger'
-import { preprocessTransaction } from '../utils'
+import { generateActivity, preprocessTransaction } from '../utils'
 import { INftOutput } from '@iota/types'
 
 export async function sendNft(output: INftOutput): Promise<void> {
@@ -17,7 +16,10 @@ export async function sendNft(output: INftOutput): Promise<void> {
         // Reset transaction details state, since the transaction has been sent
         resetNewNftTransactionDetails()
         const processedTransaction = preprocessTransaction(transaction)
-        addActivityToAccountActivitiesInAllAccountActivities(account.index, new Activity(processedTransaction, account))
+        addActivityToAccountActivitiesInAllAccountActivities(
+            account.index,
+            generateActivity(processedTransaction, account)
+        )
     } catch (err) {
         const _activeProfile = get(activeProfile)
 

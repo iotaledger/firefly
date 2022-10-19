@@ -1,7 +1,6 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { activeAccounts } from '@core/profile/stores'
-import { ActivityType, addPersistedAsset, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
-import { Activity } from '@core/wallet/classes/activity.class'
+import { ActivityType, addPersistedAsset, generateActivity, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
 import {
     addActivityToAccountActivitiesInAllAccountActivities,
     allAccountActivities,
@@ -41,9 +40,9 @@ export async function handleNewOutputEventInternal(
             [payload?.transaction, payload?.transactionInputs],
             account
         )
-        const activity = new Activity(processedOutput, account)
-        if (activity.data.type !== ActivityType.Nft) {
-            const asset = await getOrRequestAssetFromPersistedAssets(activity.data.assetId)
+        const activity = generateActivity(processedOutput, account)
+        if (activity.type !== ActivityType.Nft) {
+            const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
             addPersistedAsset(asset)
         }
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)

@@ -37,9 +37,9 @@
 
     function getNftImmutableFeatures(): FeatureTypes[] {
         const nftActivity = $selectedAccountActivities.find(
-            (activity) => activity.data.type === ActivityType.Nft && activity.data.nftId === nftId
+            (activity) => activity.type === ActivityType.Nft && activity.nftId === nftId
         )
-        return nftActivity?.data.type === ActivityType.Nft ? nftActivity.data.immutableFeatures : []
+        return nftActivity?.type === ActivityType.Nft ? nftActivity.immutableFeatures : []
     }
 
     function onCancel(): void {

@@ -1,13 +1,20 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { InclusionState, IPersistedAsset } from '@core/wallet'
+    import {
+        FoundryActivity,
+        getFiatAmount,
+        getFormattedAmountFromActivity,
+        InclusionState,
+        IPersistedAsset,
+    } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
 
-    export let amount: string
-    export let fiatAmount: string
-    export let inclusionState: InclusionState
+    export let activity: FoundryActivity
     export let asset: IPersistedAsset
+
+    $: amount = getFormattedAmountFromActivity(activity)
+    $: fiatAmount = getFiatAmount(activity)
 </script>
 
 <AssetIcon {asset} showVerifiedBadgeOnly />
@@ -18,7 +25,7 @@
             lineHeight="140"
             classes="overflow-hidden overflow-ellipsis multiwrap-line2"
         >
-            {localize(inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting')}
+            {localize(activity.inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting')}
         </Text>
         <Text fontWeight={FontWeight.semibold} lineHeight="140" color="blue-700" classes="whitespace-nowrap">
             {amount}

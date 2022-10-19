@@ -19,6 +19,7 @@ export * from './isSubjectInternal'
 export * from './validateIrc30Metadata'
 
 // Folders
+export * from './generateActivity'
 export * from './outputs'
 export * from './send'
 export * from './transactions'

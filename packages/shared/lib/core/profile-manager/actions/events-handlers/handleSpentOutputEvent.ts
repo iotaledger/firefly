@@ -1,10 +1,7 @@
 import { get } from 'svelte/store'
 
 import { syncBalance } from '@core/account/actions/syncBalance'
-import {
-    allAccountActivities,
-    updateActivityDataByTransactionId,
-} from '@core/wallet/stores/all-account-activities.store'
+import { allAccountActivities, updateActivityByTransactionId } from '@core/wallet/stores/all-account-activities.store'
 import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
 
 import { WalletApiEvent } from '../../enums'
@@ -25,15 +22,14 @@ export async function handleSpentOutputEventInternal(
     const outputId = payload?.output?.outputId
     const activity = get(allAccountActivities)?.[accountIndex]?.find(
         (_activity) =>
-            _activity.data.type === ActivityType.Transaction &&
-            _activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed &&
-            _activity.data.outputId === outputId
+            _activity.type === ActivityType.Transaction &&
+            _activity.asyncStatus === ActivityAsyncStatus.Unclaimed &&
+            _activity.outputId === outputId
     )
 
     if (activity) {
         const transactionId = payload?.output?.metadata?.transactionId
-        updateActivityDataByTransactionId(accountIndex, transactionId, {
-            type: ActivityType.Transaction,
+        updateActivityByTransactionId(accountIndex, transactionId, {
             isClaimed: true,
             asyncStatus: ActivityAsyncStatus.Claimed,
         })

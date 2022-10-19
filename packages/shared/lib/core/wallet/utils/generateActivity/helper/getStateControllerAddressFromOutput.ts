@@ -1,6 +1,6 @@
 import { OUTPUT_TYPE_ALIAS, UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS } from '@core/wallet/constants'
 import { OutputTypes, IStateControllerAddressUnlockCondition } from '@iota/types'
-import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddressTypes'
+import { getBech32AddressFromAddressTypes } from '../../getBech32AddressFromAddressTypes'
 
 export function getStateControllerAddressFromOutput(output: OutputTypes): string {
     if (output && output.type === OUTPUT_TYPE_ALIAS) {

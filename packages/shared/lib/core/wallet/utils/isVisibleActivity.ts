@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { Activity } from '../classes'
+import { Activity } from '../types'
 import { activityFilter } from '../stores'
 import { getAssetFromPersistedAssets } from './getAssetFromPersistedAssets'
 import {
@@ -74,8 +74,8 @@ function isVisibleWithActiveValuelessFilter(activity: Activity, filter: Activity
 function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
-        activity.data.type === ActivityType.Transaction &&
-        activity.data.isRejected
+        activity.type === ActivityType.Transaction &&
+        activity.isRejected
     ) {
         return false
     }
@@ -83,8 +83,8 @@ function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityF
 }
 
 function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.asset.active && filter.asset.selected && activity.data.type !== ActivityType.Nft) {
-        if (filter.asset.selected && activity.data.assetId !== filter.asset.selected) {
+    if (filter.asset.active && filter.asset.selected && activity.type !== ActivityType.Nft) {
+        if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
             return false
         }
     }
@@ -92,9 +92,9 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 }
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.amount.active && activity.data.type !== ActivityType.Alias && activity.data.type !== ActivityType.Nft) {
-        const asset = getAssetFromPersistedAssets(activity.data.assetId)
-        const activityAmount = Big(activity.data.rawAmount)
+    if (filter.amount.active && activity.type !== ActivityType.Alias && activity.type !== ActivityType.Nft) {
+        const asset = getAssetFromPersistedAssets(activity.assetId)
+        const activityAmount = Big(activity.rawAmount)
 
         if (
             filter.amount.selected === NumberFilterOption.Equal &&
@@ -249,15 +249,15 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
         }
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
-            activity.data.type === ActivityType.Transaction &&
-            activity.data.asyncStatus !== ActivityAsyncStatus.Claimed
+            activity.type === ActivityType.Transaction &&
+            activity.asyncStatus !== ActivityAsyncStatus.Claimed
         ) {
             return false
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
-            activity.data.type === ActivityType.Transaction &&
-            (!activity.data.asyncStatus || activity.data.asyncStatus === ActivityAsyncStatus.Claimed)
+            activity.type === ActivityType.Transaction &&
+            (!activity.asyncStatus || activity.asyncStatus === ActivityAsyncStatus.Claimed)
         ) {
             return false
         }
@@ -269,22 +269,22 @@ function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilte
     if (filter.type.active && filter.type.selected) {
         if (
             filter.type.selected === TypeFilterOption.Incoming &&
-            activity.data.type === ActivityType.Transaction &&
-            activity.data.direction !== ActivityDirection.Incoming
+            activity.type === ActivityType.Transaction &&
+            activity.direction !== ActivityDirection.Incoming
         ) {
             return false
         }
         if (
             filter.type.selected === TypeFilterOption.Outgoing &&
-            activity.data.type === ActivityType.Transaction &&
-            activity.data.direction !== ActivityDirection.Outgoing
+            activity.type === ActivityType.Transaction &&
+            activity.direction !== ActivityDirection.Outgoing
         ) {
             return false
         }
         if (
             filter.type.selected === TypeFilterOption.Internal &&
-            activity.data.type === ActivityType.Transaction &&
-            !activity.data.isInternal
+            activity.type === ActivityType.Transaction &&
+            !activity.isInternal
         ) {
             return false
         }

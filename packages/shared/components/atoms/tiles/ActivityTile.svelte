@@ -23,7 +23,8 @@
     export let activity: Activity
 
     let asset: IPersistedAsset
-    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.data.assetId))
+    $: $selectedAccountAssets,
+        (asset = activity.type !== ActivityType.Nft ? getAssetFromPersistedAssets(activity.assetId) : undefined)
 
     function handleTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
@@ -50,31 +51,20 @@
 >
     <activity-tile class="w-full flex flex-col space-y-4">
         <tile-content class="flex flex-row items-center text-left space-x-4">
-            {#if activity.data.type === ActivityType.Transaction}
-                <TransactionActivityTileContent
-                    inclusionState={activity.inclusionState}
-                    fiatAmount={activity.getFiatAmount()}
-                    amount={activity.getFormattedAmount()}
-                    data={activity.data}
-                    {asset}
-                />
-            {:else if activity.data.type === ActivityType.Alias}
-                <AliasActivityTileContent inclusionState={activity.inclusionState} data={activity.data} />
-            {:else if activity.data.type === ActivityType.Nft}
-                <NftActivityTileContent inclusionState={activity.inclusionState} data={activity.data} />
+            {#if activity.type === ActivityType.Transaction}
+                <TransactionActivityTileContent {activity} {asset} />
+            {:else if activity.type === ActivityType.Alias}
+                <AliasActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Nft}
+                <NftActivityTileContent {activity} />
             {:else}
-                <FoundryActivityTileContent
-                    inclusionState={activity.inclusionState}
-                    fiatAmount={activity.getFiatAmount()}
-                    amount={activity.getFormattedAmount()}
-                    {asset}
-                />
+                <FoundryActivityTileContent {activity} {asset} />
             {/if}
         </tile-content>
-        {#if activity.data.type === ActivityType.Transaction && activity?.data.asyncStatus === ActivityAsyncStatus.Timelocked}
-            <TimelockActivityTileFooter data={activity.data} />
-        {:else if (activity.data.type === ActivityType.Transaction || activity.data.type === ActivityType.Nft) && activity?.data?.isAsync}
-            <AsyncActivityTileFooter activityId={activity.id} data={activity.data} />
+        {#if activity.type === ActivityType.Transaction && activity?.asyncStatus === ActivityAsyncStatus.Timelocked}
+            <TimelockActivityTileFooter {activity} />
+        {:else if (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) && activity.isAsync}
+            <AsyncActivityTileFooter {activity} />
         {/if}
     </activity-tile>
 </ClickableTile>

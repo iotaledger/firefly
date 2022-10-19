@@ -28,7 +28,6 @@
         sendOutput,
         validateSendConfirmation,
         selectedAccountAssets,
-        getStorageDepositFromOutput,
         DEFAULT_TRANSACTION_OPTIONS,
         newTransactionDetails,
         updateNewTransactionDetails,
@@ -38,6 +37,7 @@
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
     import { ledgerPreparedOutput } from '@core/ledger'
+    import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false

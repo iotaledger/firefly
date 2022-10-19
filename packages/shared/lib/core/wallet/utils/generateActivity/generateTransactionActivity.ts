@@ -2,28 +2,32 @@ import { isShimmerClaimingTransaction } from '@contexts/onboarding'
 import { IAccountState } from '@core/account'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
+import { TransactionActivity } from '@core/wallet/types'
 import { get } from 'svelte/store'
-import { ActivityDirection, ActivityType } from '../../enums'
-import { IProcessedTransaction, ITransactionActivityData } from '../../interfaces'
+import { ActivityType } from '../../enums'
+import { IProcessedTransaction } from '../../interfaces'
+import { getNativeTokenFromOutput, getMainTransactionOutputFromTransaction, outputContainsValue } from '../../utils'
 import {
     getAmountFromOutput,
+    getAsyncDataFromOutput,
     getMetadataFromOutput,
-    getNativeTokenFromOutput,
-    getRecipientFromOutput,
+    getSendingInformation,
     getStorageDepositFromOutput,
     getTagFromOutput,
-    isSubjectInternal,
-    getSenderFromTransaction,
-    getSenderFromInputs,
-    getMainTransactionOutputFromTransaction,
-} from '../../utils'
-import { getAsyncDataFromOutput } from './getAsyncDataFromOutput'
+} from './helper'
 
-export function getTransactionActivityData(
+export function generateTransactionActivity(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
-): ITransactionActivityData {
-    const { outputs, transactionId, isIncoming, detailedTransactionInputs, claimingData } = processedTransaction
+): TransactionActivity {
+    const { outputs, transactionId, isIncoming, claimingData, time, inclusionState, transactionInputs } =
+        processedTransaction
+
+    const isHidden = false
+    const isAssetHidden = false
+    const containsValue = outputContainsValue(processedTransaction, account)
+
+    const inputs = transactionInputs
 
     const { wrappedOutput, isSelfTransaction } = getMainTransactionOutputFromTransaction(
         outputs,
@@ -31,19 +35,9 @@ export function getTransactionActivityData(
         isIncoming
     )
     const outputId = wrappedOutput.outputId
+    const id = outputId || transactionId
 
     const { output } = wrappedOutput
-    const recipient = getRecipientFromOutput(output)
-    const sender = detailedTransactionInputs
-        ? getSenderFromInputs(detailedTransactionInputs)
-        : getSenderFromTransaction(isIncoming, account.depositAddress, output)
-
-    const subject = isIncoming ? sender : recipient
-    const isInternal = isSubjectInternal(subject)
-
-    const direction = isIncoming || isSelfTransaction ? ActivityDirection.Incoming : ActivityDirection.Outgoing
-
-    const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
     const isShimmerClaiming = isShimmerClaimingTransaction(transactionId, get(activeProfileId))
 
@@ -52,28 +46,34 @@ export function getTransactionActivityData(
 
     const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
     const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit
-
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
     const publicNote = ''
 
+    const sendingInfo = getSendingInformation(processedTransaction, output, account)
+    const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
+
     return {
         type: ActivityType.Transaction,
-        direction,
+        isHidden,
+        id,
+        transactionId,
+        time,
+        isAssetHidden,
+        inclusionState,
+        inputs,
+        containsValue,
         outputId,
-        isInternal,
         storageDeposit,
         giftedStorageDeposit,
         rawAmount,
-        sender,
-        recipient,
-        subject,
         isSelfTransaction,
         isShimmerClaiming,
         publicNote,
         metadata,
         tag,
         assetId,
+        ...sendingInfo,
         ...asyncData,
     }
 }

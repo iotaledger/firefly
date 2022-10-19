@@ -48,8 +48,8 @@
 
     let aliasIds: string[]
     $: aliasIds = get(selectedAccountActivities)
-        .filter((activity) => activity.data.type === ActivityType.Alias)
-        .map((activity) => (activity.data.type === ActivityType.Alias ? activity.data.aliasId : ''))
+        .filter((activity) => activity.type === ActivityType.Alias)
+        .map((activity) => (activity.type === ActivityType.Alias ? activity.aliasId : ''))
 
     function handleCancel(): void {
         closePopup()

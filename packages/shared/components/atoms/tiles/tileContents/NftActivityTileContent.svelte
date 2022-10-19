@@ -1,20 +1,19 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { ActivityDirection, InclusionState, INftActivityData, Subject } from '@core/wallet'
+    import { ActivityDirection, InclusionState, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { Text, FontWeight, Icon } from 'shared/components'
     import { networkHrp } from '@core/network'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
-    export let inclusionState: InclusionState
-    export let data: INftActivityData
+    export let activity: NftActivity
 
-    $: isIncoming = data.direction === ActivityDirection.Incoming
-    $: title = getTitle(data, inclusionState)
-    $: subjectLocale = getSubjectLocale(data.subject)
+    $: isIncoming = activity.direction === ActivityDirection.Incoming
+    $: title = getTitle(activity)
+    $: subjectLocale = getSubjectLocale(activity.subject)
 
-    function getTitle(txData: INftActivityData, inclusionState: InclusionState): string {
-        const { isInternal, direction } = txData
+    function getTitle(_activity: NftActivity): string {
+        const { isInternal, direction, inclusionState } = _activity
         const isConfirmed = inclusionState === InclusionState.Confirmed
 
         if (isInternal) {

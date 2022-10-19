@@ -1,4 +1,4 @@
-import { FEATURE_TYPE_METADATA, OUTPUT_TYPE_TREASURY } from '../../constants'
+import { FEATURE_TYPE_METADATA, OUTPUT_TYPE_TREASURY } from '../../../constants'
 import { IMetadataFeature, OutputTypes } from '@iota/types'
 import { Converter } from '@lib/converter'
 

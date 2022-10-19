@@ -1,16 +1,10 @@
 import { IAccountState } from '@core/account'
 import { ActivityType } from '@core/wallet/enums'
 import { IProcessedTransaction } from '../../interfaces'
-import {
-    getAmountFromOutput,
-    getNativeTokenFromOutput,
-    getStorageDepositFromOutput,
-    getMainTransactionOutputFromTransaction,
-    isOutputAsync,
-    getActivityType,
-} from '..'
+import { getNativeTokenFromOutput, getMainTransactionOutputFromTransaction, isOutputAsync, getActivityType } from '..'
+import { getAmountFromOutput, getStorageDepositFromOutput } from '../generateActivity/helper'
 
-export function containsValue(processedTransaction: IProcessedTransaction, account: IAccountState): boolean {
+export function outputContainsValue(processedTransaction: IProcessedTransaction, account: IAccountState): boolean {
     const { wrappedOutput } = getMainTransactionOutputFromTransaction(
         processedTransaction.outputs,
         account.depositAddress,

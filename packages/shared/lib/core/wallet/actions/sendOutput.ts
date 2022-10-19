@@ -2,12 +2,10 @@ import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { OutputTypes } from '@iota/types'
 import { activeProfile, ProfileType } from '@core/profile'
 import { get } from 'svelte/store'
-
-import { Activity } from '../classes'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetNewTransactionDetails } from '../stores'
 import { handleLedgerError } from '@core/ledger'
-import { preprocessTransaction } from '../utils'
+import { generateActivity, preprocessTransaction } from '../utils'
 
 export async function sendOutput(output: OutputTypes): Promise<void> {
     try {
@@ -17,7 +15,10 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
         // Reset transaction details state, since the transaction has been sent
         resetNewTransactionDetails()
         const processedTransaction = preprocessTransaction(transaction)
-        addActivityToAccountActivitiesInAllAccountActivities(account.index, new Activity(processedTransaction, account))
+        addActivityToAccountActivitiesInAllAccountActivities(
+            account.index,
+            generateActivity(processedTransaction, account)
+        )
         updateSelectedAccount({ isTransferring: false })
         return
     } catch (err) {

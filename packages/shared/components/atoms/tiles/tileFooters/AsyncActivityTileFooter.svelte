@@ -2,10 +2,10 @@
     import {
         ActivityAsyncStatus,
         ActivityDirection,
-        ITransactionActivityData,
         claimActivity,
         rejectActivity,
         getTimeDifference,
+        Activity,
     } from '@core/wallet'
     import {
         ActivityAsyncStatusPill,
@@ -24,14 +24,13 @@
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { closePopup, openPopup } from '@lib/popup'
 
-    export let activityId: string
-    export let data: ITransactionActivityData
+    export let activity: Activity
 
     $: shouldShowActions =
-        data.direction === ActivityDirection.Incoming && data.asyncStatus === ActivityAsyncStatus.Unclaimed
-    $: shouldShowAsyncFooter = data.asyncStatus !== ActivityAsyncStatus.Claimed
+        activity.direction === ActivityDirection.Incoming && activity.asyncStatus === ActivityAsyncStatus.Unclaimed
+    $: shouldShowAsyncFooter = activity.asyncStatus !== ActivityAsyncStatus.Claimed
 
-    $: timeDiff = getTimeDiff(data)
+    $: timeDiff = getTimeDiff(activity)
 
     function handleRejectClick(): void {
         openPopup({
@@ -43,7 +42,7 @@
                 warning: true,
                 confirmText: localize('actions.reject'),
                 onConfirm: () => {
-                    rejectActivity(activityId)
+                    rejectActivity(activity.id)
                     closePopup()
                 },
             },
@@ -54,11 +53,11 @@
         if ($isActiveLedgerProfile) {
             $showInternalVerificationPopup = true
         }
-        checkActiveProfileAuth(() => claimActivity(activityId, data))
+        checkActiveProfileAuth(() => claimActivity(activity))
     }
 
-    function getTimeDiff(txData: ITransactionActivityData): string {
-        const { asyncStatus, isAsync, isClaimed, expirationDate, timelockDate } = txData
+    function getTimeDiff(activity: Activity): string {
+        const { asyncStatus, isAsync, isClaimed, expirationDate, timelockDate } = activity
 
         if (asyncStatus === ActivityAsyncStatus.Timelocked) {
             return getTimeDifference(timelockDate, $time)
@@ -77,7 +76,7 @@
                 icon={IconEnum.ExpirationTime}
                 iconClasses="text-gray-600 dark:text-gray-200"
                 title={localize('general.expirationTime')}
-                text={localize(`tooltips.transactionDetails.${data.direction}.expirationTime`)}
+                text={localize(`tooltips.transactionDetails.${activity.direction}.expirationTime`)}
                 position={Position.Top}
             />
             <Text fontSize="13" color="gray-600" fontWeight={FontWeight.semibold}>{timeDiff}</Text>
@@ -86,7 +85,7 @@
             {#if shouldShowActions}
                 <Button
                     onClick={handleRejectClick}
-                    disabled={data.isClaiming || data.isRejected}
+                    disabled={activity.isClaiming || activity.isRejected}
                     inlineStyle="min-width: 4rem;"
                     size={ButtonSize.Small}
                     outline
@@ -95,15 +94,15 @@
                 </Button>
                 <Button
                     onClick={handleClaimClick}
-                    disabled={data.isClaiming}
-                    isBusy={data.isClaiming}
+                    disabled={activity.isClaiming}
+                    isBusy={activity.isClaiming}
                     inlineStyle="min-width: 4rem;"
                     size={ButtonSize.Small}
                 >
                     {localize('actions.claim')}
                 </Button>
             {:else}
-                <ActivityAsyncStatusPill asyncStatus={data.asyncStatus} />
+                <ActivityAsyncStatusPill asyncStatus={activity.asyncStatus} />
             {/if}
         </svelte:fragment>
     </TileFooter>

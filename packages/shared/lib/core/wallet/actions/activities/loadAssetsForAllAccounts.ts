@@ -11,8 +11,8 @@ export async function loadAssetsForAllActivities(account: IAccountState): Promis
     const persistedAssets: IPersistedAsset[] = []
     for (const activity of accountActivities) {
         try {
-            if (activity.data.type !== ActivityType.Nft) {
-                const asset = await getOrRequestAssetFromPersistedAssets(activity.data.assetId)
+            if (activity.type !== ActivityType.Nft) {
+                const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
                 if (asset) {
                     persistedAssets.push(asset)
                 }

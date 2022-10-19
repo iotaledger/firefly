@@ -1,5 +1,5 @@
 import { OutputTypes, IStorageDepositReturnUnlockCondition } from '@iota/types'
-import { OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '../../constants'
+import { OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '../../../constants'
 
 export function getStorageDepositFromOutput(output: OutputTypes): {
     storageDeposit: number

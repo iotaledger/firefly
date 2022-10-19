@@ -1,6 +1,5 @@
 import { writable } from 'svelte/store'
-import { Activity } from '../classes'
-import { IActivity, IPartialFoundryActivityDataWithType, IPartialTransactionActivityDataWithType } from '../interfaces'
+import { Activity, BaseActivity } from '../types'
 
 export const allAccountActivities = writable<Activity[][]>([])
 
@@ -28,13 +27,13 @@ export function setAccountActivitiesInAllAccountActivities(accountIndex: number,
 export function updateActivityByTransactionId(
     accountIndex: number,
     transactionId: string,
-    partialActivity: Partial<IActivity>
+    partialBaseActivity: Partial<BaseActivity>
 ): void {
     allAccountActivities.update((state) => {
         const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
-            activity.updateFromPartialActivity(partialActivity)
+            Object.assign(activity, partialBaseActivity)
         }
         return state
     })
@@ -43,43 +42,13 @@ export function updateActivityByTransactionId(
 export function updateActivityByActivityId(
     accountIndex: number,
     activityId: string,
-    partialActivity: Partial<IActivity>
+    partialBaseActivity: Partial<BaseActivity>
 ): void {
     allAccountActivities.update((state) => {
         const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
-            activity.updateFromPartialActivity(partialActivity)
-        }
-        return state
-    })
-}
-
-export function updateActivityDataByActivityId(
-    accountIndex: number,
-    activityId: string,
-    partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
-): void {
-    allAccountActivities.update((state) => {
-        const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
-
-        if (activity) {
-            activity.updateDataFromPartialActivity(partialData)
-        }
-        return state
-    })
-}
-
-export function updateActivityDataByTransactionId(
-    accountIndex: number,
-    transactionId: string,
-    partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
-): void {
-    allAccountActivities.update((state) => {
-        const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
-
-        if (activity) {
-            activity.updateDataFromPartialActivity(partialData)
+            Object.assign(activity, partialBaseActivity)
         }
         return state
     })

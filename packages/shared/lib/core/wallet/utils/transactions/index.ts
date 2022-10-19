@@ -1,4 +1,4 @@
-export * from './containsValue'
+export * from './outputContainsValue'
 export * from './getDirectionFromTransaction'
 export * from './getFoundryOutputFromTransaction'
 export * from './getMainTransactionOutputFromTransaction'

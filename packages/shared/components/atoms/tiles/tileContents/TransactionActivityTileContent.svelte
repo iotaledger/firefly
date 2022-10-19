@@ -1,23 +1,29 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
-    import { ActivityDirection, InclusionState, IPersistedAsset, ITransactionActivityData, Subject } from '@core/wallet'
+    import {
+        ActivityDirection,
+        getFiatAmount,
+        InclusionState,
+        IPersistedAsset,
+        getFormattedAmountFromActivity,
+        TransactionActivity,
+    } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
 
-    export let amount: string
-    export let fiatAmount: string
-    export let inclusionState: InclusionState
-    export let data: ITransactionActivityData
+    export let activity: TransactionActivity
     export let asset: IPersistedAsset
 
-    $: title = getTitle(data, inclusionState)
-    $: subjectLocale = getSubjectLocale(data.subject, data.isShimmerClaiming)
+    $: title = getTitle(activity)
+    $: subjectLocale = getSubjectLocale(activity)
+    $: amount = getFormattedAmountFromActivity(activity)
+    $: fiatAmount = getFiatAmount(activity)
 
-    $: isIncoming = data.direction === ActivityDirection.Incoming
+    $: isIncoming = activity.direction === ActivityDirection.Incoming
 
-    function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
-        const { isShimmerClaiming, isInternal, direction } = txData
+    function getTitle(_activity: TransactionActivity): string {
+        const { isShimmerClaiming, isInternal, direction, inclusionState } = _activity
         const isConfirmed = inclusionState === InclusionState.Confirmed
 
         if (isShimmerClaiming) {
@@ -34,7 +40,8 @@
         }
     }
 
-    function getSubjectLocale(subject: Subject, isShimmerClaiming: boolean): string {
+    function getSubjectLocale(_activity: TransactionActivity): string {
+        const { isShimmerClaiming, subject } = _activity
         if (isShimmerClaiming) {
             return localize('general.shimmerGenesis')
         }
