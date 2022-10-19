@@ -41,9 +41,6 @@ export class ProfileSetupRouter extends Subrouter<ProfileSetupRoute> {
                     break
                 }
             }
-            case ProfileSetupRoute.SetupNew:
-                nextRoute = ProfileSetupRoute.EnterName
-                break
             case ProfileSetupRoute.EnterName: {
                 this.parentRouter.next()
                 return

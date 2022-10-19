@@ -3,5 +3,4 @@ export enum ProfileSetupRoute {
     Setup = 'setup',
     SetupClaimed = 'setupClaimed',
     SetupRecovered = 'setupRecovered',
-    SetupNew = 'setupNew',
 }

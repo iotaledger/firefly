@@ -8,9 +8,9 @@ import { hasCompletedAppSetup } from '@core/app'
 import { ProfileType } from '@core/profile'
 import { get, writable } from 'svelte/store'
 import { appRouter } from './app-router'
-import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from './enums'
+import { OnboardingRoute, ProfileSetupRoute } from './enums'
 import { Router } from '@core/router/router'
-import { profileBackupRoute, profileSetupRoute } from './subrouters'
+import { profileSetupRoute } from './subrouters'
 
 export const onboardingRoute = writable<OnboardingRoute>(null)
 export const onboardingRouter = writable<OnboardingRouter>(null)
@@ -73,16 +73,7 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
                     } else if (profileSetupType === ProfileSetupType.New) {
                         nextRoute = OnboardingRoute.ProfileBackup
                     } else {
-                        const profileRecoveryType = _onboardingProfile?.recoveryType
-                        if (
-                            profileRecoveryType === ProfileRecoveryType.Stronghold ||
-                            profileRecoveryType === ProfileRecoveryType.Mnemonic
-                        ) {
-                            nextRoute = OnboardingRoute.Congratulations
-                        } else {
-                            profileBackupRoute.set(ProfileBackupRoute.BackupStronghold)
-                            nextRoute = OnboardingRoute.ProfileBackup
-                        }
+                        nextRoute = OnboardingRoute.Congratulations
                     }
                 }
                 break
@@ -119,7 +110,6 @@ export class OnboardingRouter extends Router<OnboardingRoute> {
             case OnboardingRoute.ShimmerClaiming: {
                 const profileRecoveryType = get(onboardingProfile)?.recoveryType
                 if (profileRecoveryType === ProfileRecoveryType.Mnemonic) {
-                    profileBackupRoute.set(ProfileBackupRoute.BackupStronghold)
                     nextRoute = OnboardingRoute.ProfileBackup
                 } else {
                     nextRoute = OnboardingRoute.Congratulations
