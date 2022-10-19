@@ -44,11 +44,6 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
                 nextRoute = ProfileRecoveryRoute.Success
                 break
             }
-            case ProfileRecoveryRoute.LedgerImport: {
-                // const _profileRecoveryType = get(onboardingProfile)?.recoveryType
-                // this.parentRouter.next()
-                break
-            }
             case ProfileRecoveryRoute.Success:
                 this.parentRouter.next()
                 return
@@ -64,7 +59,5 @@ function getInitialRoute(): ProfileRecoveryRoute {
             return ProfileRecoveryRoute.ImportMnemonicPhrase
         case ProfileRecoveryType.Stronghold:
             return ProfileRecoveryRoute.ImportStrongholdBackup
-        case ProfileRecoveryType.Ledger:
-            return ProfileRecoveryRoute.LedgerImport
     }
 }

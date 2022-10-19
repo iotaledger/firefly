@@ -19,7 +19,7 @@ export class AppSetupRouter extends Subrouter<AppSetupRoute> {
         switch (currentRoute) {
             case AppSetupRoute.Welcome:
                 this.parentRouter.next()
-                break
+                return
             case AppSetupRoute.Legal:
                 nextRoute = AppSetupRoute.Welcome
                 break

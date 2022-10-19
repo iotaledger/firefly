@@ -23,7 +23,7 @@ export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
 
             case ProfileBackupRoute.VerifyMnemonic:
                 this.parentRouter.next()
-                break
+                return
         }
 
         this.setNext(nextRoute)
