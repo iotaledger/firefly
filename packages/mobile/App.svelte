@@ -1,8 +1,18 @@
 <script lang="typescript">
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
-    import { AppRoute, appRoute, appRouter, initialiseRouters, initialiseOnboardingRouters } from './lib/core/router'
-    import { DashboardRoute, dashboardRouter, OnboardingRoute, onboardingRoute, openSettings } from '@core/router'
+    import {
+        AppRoute,
+        appRoute,
+        appRouter,
+        initialiseRouters,
+        initialiseOnboardingRouters,
+        DashboardRoute,
+        dashboardRouter,
+        OnboardingRoute,
+        onboardingRoute,
+    } from './lib/core/router'
+    import { openSettings } from '@core/router'
     import { Route } from './components'
     import { ToastContainer } from 'shared/components'
     import {
