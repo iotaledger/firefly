@@ -5,6 +5,7 @@ import { ICommonOutput, IOutputResponse, ITransactionPayload, IUTXOInput } from 
 import { InclusionState } from '@core/wallet/enums'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { IAccountState } from '@core/account'
+import { getSenderAddressFromInputs } from '../transactions'
 
 export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
@@ -24,7 +25,7 @@ export function preprocessGroupedOutputs(
                 } as IUTXOInput)
         ) ?? []
 
-    const isIncoming = isTransactionIncoming(outputDatas, account.depositAddress)
+    const isIncoming = isTransactionIncoming(outputDatas, detailedTransactionInputs, account.depositAddress)
 
     return {
         outputs: outputDatas,
@@ -37,11 +38,17 @@ export function preprocessGroupedOutputs(
     }
 }
 
-function isTransactionIncoming(outputs: OutputData[], accountAddress: string): boolean {
+function isTransactionIncoming(
+    outputs: OutputData[],
+    detailedTransactionInputs: IOutputResponse[],
+    accountAddress: string
+): boolean {
     const nonRemainderOutputs = outputs.filter((output) => !output.remainder)
     if (nonRemainderOutputs.length === 0) {
         return false
     }
-    const address = getRecipientAddressFromOutput(nonRemainderOutputs[0].output as ICommonOutput)
-    return address === accountAddress
+    const recipientAddress = getRecipientAddressFromOutput(nonRemainderOutputs[0].output as ICommonOutput)
+    const senderAddress = detailedTransactionInputs ? getSenderAddressFromInputs(detailedTransactionInputs) : ''
+
+    return recipientAddress === accountAddress && recipientAddress !== senderAddress
 }
