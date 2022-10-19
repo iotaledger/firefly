@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.719508672366">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.719523498324">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
@@ -32,11 +32,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/icon_firefly.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.719508672366" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.719523498324" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.719508672366" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.719523498324" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.719508672366" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.719523498324" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -287,17 +287,19 @@
     </h3>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>account</code>: Manages the accounts of a profile</li>
-<li><code v-pre>app</code>: Application configuration, setup, settings, etc.</li>
-<li><code v-pre>error</code>: Generic code for building domain-specific errors</li>
-<li><code v-pre>i18n</code>: Logic related to internationalization, languages, locales, etc.</li>
-<li><code v-pre>network</code>: Client options and node configuration, protocol settings, etc.</li>
-<li><code v-pre>nft</code>: Managing NFTs, e.g. claiming, burning, transferring</li>
-<li><code v-pre>profile</code>: General application logic to support profiles</li>
-<li><code v-pre>profile-manager</code>: Library-related logic for managing and interacting with profiles</li>
-<li><code v-pre>router</code>: Manage application views and flows</li>
-<li><code v-pre>token</code>: Deals with tokens, metadata, conversion rates, registry, etc.</li>
-<li><code v-pre>utils</code>: Useful and generic functions, e.g. formatting strings, converting units</li>
+<li><code v-pre>account</code> - Manages the accounts of a profile</li>
+<li><code v-pre>app</code> - Application configuration, setup, settings, etc.</li>
+<li><code v-pre>error</code> - Generic code for building domain-specific errors</li>
+<li><code v-pre>i18n</code> - Logic related to internationalization, languages, locales, etc.</li>
+<li><code v-pre>ledger</code> - Code related to Ledger Nano profiles and devices</li>
+<li><code v-pre>network</code> - Client options and node configuration, protocol settings, etc.</li>
+<li><code v-pre>nft</code> - Managing NFTs, e.g. claiming, burning, transferring</li>
+<li><code v-pre>profile</code> - General application logic to support profiles</li>
+<li><code v-pre>profile-manager</code> - Library-related logic for managing and interacting with profiles</li>
+<li><code v-pre>router</code> - Manage application views and flows</li>
+<li><code v-pre>stronghold</code> - Code for Stronghold operations, utils, constants, etc. for software profiles</li>
+<li><code v-pre>token</code> - Deals with tokens, metadata, conversion rates, registry, etc.</li>
+<li><code v-pre>utils</code> - Useful and generic functions, e.g. formatting strings, converting units</li>
 </ul>
 <doc-anchor-target id="rules">
     <h3>
@@ -306,6 +308,7 @@
     </h3>
 </doc-anchor-target>
 <ul>
+<li><strong>MAY</strong> import code from other core modules</li>
 <li><strong>MAY NOT</strong> import code from context or auxiliary modules</li>
 </ul>
 <doc-anchor-target id="contexts">
@@ -323,11 +326,12 @@
 </doc-anchor-target>
 <ul>
 <li><code v-pre>collectibles</code> - managing or viewing an account&#x27;s NFTs</li>
+<li><code v-pre>developer</code> - using developer tools to make lives easier</li>
 <li><code v-pre>onboarding</code> - creating or restoring a profile or initial app setup</li>
 <li><code v-pre>settings</code> - changing configuration of the app, profile, network, etc.</li>
 <li><code v-pre>staking</code> - staking tokens to receive more tokens</li>
-<li><code v-pre>voting</code> - using tokens to cast votes for community proposals</li>
-<li><code v-pre>wallet</code> - sending or receiving coins and tokens</li>
+<li><code v-pre>governance</code> - using tokens to cast votes for community proposals</li>
+<li><code v-pre>wallet</code> - sending or receiving coins and tokens, i.e. asset management</li>
 </ul>
 <doc-anchor-target id="rules-1">
     <h3>
@@ -335,7 +339,10 @@
         <span>Rules</span>
     </h3>
 </doc-anchor-target>
-<p><em>None</em></p>
+<ul>
+<li><strong>MAY</strong> import code from core and auxiliary modules</li>
+<li><strong>SHOULD NOT</strong> import code from other context modules</li>
+</ul>
 <doc-anchor-target id="auxiliary">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#auxiliary">#</doc-anchor-trigger>
@@ -363,6 +370,7 @@
 </doc-anchor-target>
 <ul>
 <li><strong>MAY NOT</strong> import code from context modules</li>
+<li><strong>SHOULD NOT</strong> import code from other auxiliary modules</li>
 </ul>
 
                                 
