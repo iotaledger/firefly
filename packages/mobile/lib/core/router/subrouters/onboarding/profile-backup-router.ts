@@ -17,10 +17,6 @@ export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
 
         const currentRoute = get(this.routeStore)
         switch (currentRoute) {
-            case ProfileBackupRoute.BackupMnemonic:
-                nextRoute = ProfileBackupRoute.ViewMnemonic
-                break
-
             case ProfileBackupRoute.ViewMnemonic:
                 nextRoute = ProfileBackupRoute.VerifyMnemonic
                 break
@@ -28,11 +24,6 @@ export class ProfileBackupRouter extends Subrouter<ProfileBackupRoute> {
             case ProfileBackupRoute.VerifyMnemonic:
                 this.parentRouter.next()
                 break
-
-            case ProfileBackupRoute.BackupStronghold: {
-                this.parentRouter.next()
-                return
-            }
         }
 
         this.setNext(nextRoute)

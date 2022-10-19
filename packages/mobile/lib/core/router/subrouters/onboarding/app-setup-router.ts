@@ -21,10 +21,7 @@ export class AppSetupRouter extends Subrouter<AppSetupRoute> {
                 this.parentRouter.next()
                 break
             case AppSetupRoute.Legal:
-                nextRoute = AppSetupRoute.LanguageAndAppearance
-                break
-            case AppSetupRoute.LanguageAndAppearance:
-                this.parentRouter.next()
+                nextRoute = AppSetupRoute.Welcome
                 return
         }
 
