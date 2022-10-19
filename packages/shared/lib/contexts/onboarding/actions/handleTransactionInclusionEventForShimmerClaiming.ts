@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { localize } from '@core/i18n'
 import { ITransactionInclusionEventPayload, validateWalletApiEvent, WalletApiEvent } from '@core/profile-manager'
 import { InclusionState, MissingTransactionIdError } from '@core/wallet'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 
 import { ShimmerClaimingAccountState } from '../enums'
 import { MissingShimmerClaimingAccountError } from '../errors'

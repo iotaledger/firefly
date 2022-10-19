@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Input, Text, HTMLButtonType, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
     import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'
 
     let newName = $activeProfile?.name

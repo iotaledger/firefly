@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { INode, INodeInfo } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
     import { resolveObjectPath, setClipboard } from 'shared/lib/utils'
     import { getNodeInfo } from '@core/profile-manager'
 

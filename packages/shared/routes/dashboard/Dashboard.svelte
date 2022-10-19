@@ -13,7 +13,7 @@
     import { appRouter, dashboardRoute } from '@core/router'
     import { Idle, Sidebar } from 'shared/components'
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
-    import { removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
+    import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
     import { Platform } from 'shared/lib/platform'
     import { Developer, Settings, Wallet } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'

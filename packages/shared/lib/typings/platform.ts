@@ -1,10 +1,11 @@
 import { IAppSettings, IAppVersionDetails } from '@core/app'
 import { IError } from '@core/error'
 import { IDeepLinkManager } from '@auxiliary/deep-link'
-import { INotificationManager } from './notificationManager'
-import { IPincodeManager } from './pincodeManager'
-import { EventMap } from './events'
+import { INotificationManager } from '@auxiliary/notification'
+
 import { IBarcodeManager } from './barcodeManager'
+import { EventMap } from './events'
+import { IPincodeManager } from './pincodeManager'
 
 export enum Platforms {
     MOBILE = 'mobile',
