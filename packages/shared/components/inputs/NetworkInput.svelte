@@ -9,6 +9,13 @@
     let modal: Modal = undefined
 </script>
 
-<SelectorInput labelLocale="general.network" bind:value={network} bind:inputElement bind:modal {error} readonly>
+<SelectorInput
+    labelLocale="general.destinationNetwork"
+    bind:value={network}
+    bind:inputElement
+    bind:modal
+    {error}
+    readonly
+>
     <NetworkSelector bind:modal bind:selected={network} onClose={() => inputElement.blur()} />
 </SelectorInput>

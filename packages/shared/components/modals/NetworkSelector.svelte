@@ -1,5 +1,6 @@
 <script lang="typescript">
-    import { DestinationNetwork } from '@core/network'
+    import { DestinationNetwork, DESTINATION_NETWORK_ADDRESS } from '@core/network'
+    import { truncateString } from '@lib/helpers'
     import { Modal, Text, TextType } from 'shared/components'
     import { fade } from 'svelte/transition'
 
@@ -23,7 +24,10 @@
                     on:click={() => onClick(network)}
                     class="w-full flex flex-row flex-1 justify-between px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                 >
-                    <Text type={TextType.pre} fontSize="sm" color="gray-600">{network}</Text>
+                    <Text type={TextType.pre} fontSize="sm" color="gray-800">{network}</Text>
+                    <Text type={TextType.pre} fontSize="sm" color="gray-600"
+                        >{truncateString(DESTINATION_NETWORK_ADDRESS[network], 10, 10)}</Text
+                    >
                 </button>
             {/each}
         </network-picker-modal>
