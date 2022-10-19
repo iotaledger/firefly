@@ -3,9 +3,10 @@ import {
     getNftOutputFromTransaction,
     getRecipientFromOutput,
     isSubjectInternal,
-    getSenderFromInputs,
     getSenderFromTransaction,
     convertHexAddressToBech32,
+    getSubjectFromAddress,
+    getSenderAddressFromInputs,
 } from '..'
 import { ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_NFT, EMPTY_HEX_ID, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
@@ -31,7 +32,7 @@ export function getNftActivityData(
 
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs
-        ? getSenderFromInputs(detailedTransactionInputs)
+        ? getSubjectFromAddress(getSenderAddressFromInputs(detailedTransactionInputs))
         : getSenderFromTransaction(isIncoming, account.depositAddress, output)
 
     const subject = isIncoming ? sender : recipient
