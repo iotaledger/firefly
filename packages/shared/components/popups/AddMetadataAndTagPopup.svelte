@@ -50,19 +50,20 @@
     }
 </script>
 
-<add-optional-metadata-popup>
+<add-optional-metadata-popup class="flex flex-col space-y-4">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.addOptionalMetadata.title')}
     </Text>
-    <Text type={TextType.h4} fontWeight={FontWeight.semibold} classes="text-left" color="gray-600">
-        {localize('popups.addOptionalMetadata.title')}
+    <Text type={TextType.h5} fontWeight={FontWeight.normal} classes="text-left" color="gray-600">
+        {localize('popups.addOptionalMetadata.description')}
     </Text>
-    <add-optional-metadata-form-inputs>
+    <add-optional-metadata-form-inputs class="flex flex-col space-y-4">
         <TextInput
             bind:this={metadataInput}
             bind:value={metadata}
             error={metadataError}
             label={localize('general.metadata')}
+            placeholder={localize('general.metadata')}
             description={localize('tooltips.optionalInput')}
         />
         <TextInput
@@ -70,6 +71,7 @@
             bind:value={tag}
             error={tagError}
             label={localize('general.tag')}
+            placeholder={localize('general.tag')}
             description={localize('tooltips.optionalInput')}
         />
     </add-optional-metadata-form-inputs>
