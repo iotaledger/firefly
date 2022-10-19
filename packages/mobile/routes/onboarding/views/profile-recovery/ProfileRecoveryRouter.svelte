@@ -2,16 +2,16 @@
     import { onMount } from 'svelte'
     import { ImportMnemonicPhraseView, SuccessView } from './views'
     import { localize } from '@core/i18n'
-    import { profileRecoveryRoute, profileRecoveryRouter, ProfileRecoveryRoute } from '@core/router'
+    import { profileRecoveryRoute, profileRecoveryRouter, ProfileRecoveryRoute } from '../../../../lib/core/router'
     import { showAppNotification } from '@lib/notifications'
 
     let busy = false
     let error = ''
 
-    async function next(): Promise<void> {
+    function next(): Promise<void> {
         busy = true
         try {
-            await $profileRecoveryRouter.next()
+            $profileRecoveryRouter.next()
         } catch (err) {
             if (!err.snapshot) {
                 if ($profileRecoveryRoute === ProfileRecoveryRoute.ImportMnemonicPhrase) {
