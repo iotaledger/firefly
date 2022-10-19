@@ -24,7 +24,18 @@
         const valid = await validate()
         if (valid) {
             updateNewTransactionDetails({ asset, rawAmount, unit, recipient })
-            // TODO: Update flow
+            openNextPopup()
+        }
+    }
+
+    function openNextPopup(): void {
+        if (network === DestinationNetwork.Shimmer) {
+            openPopup({
+                type: 'addMetadataAndTag',
+                overflow: true,
+            })
+        } else {
+            // TODO: add wrappingToL2 function
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
