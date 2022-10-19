@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { Text, TextInput, Button, TextType, FontWeight } from 'shared/components'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
 
     let { metadata, tag } = get(newTransactionDetails)
