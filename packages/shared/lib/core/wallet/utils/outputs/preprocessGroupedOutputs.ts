@@ -1,7 +1,7 @@
 import { IProcessedTransaction } from '../../interfaces'
 import { OutputData } from '@iota/wallet'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
-import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
+import { ICommonOutput, IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
 import { InclusionState } from '@core/wallet/enums'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { IAccountState } from '@core/account'
@@ -42,6 +42,6 @@ function isTransactionIncoming(outputs: OutputData[], accountAddress: string): b
     if (nonRemainderOutputs.length === 0) {
         return false
     }
-    const address = getRecipientAddressFromOutput(nonRemainderOutputs[0].output)
+    const address = getRecipientAddressFromOutput(nonRemainderOutputs[0].output as ICommonOutput)
     return address === accountAddress
 }

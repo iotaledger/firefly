@@ -1,5 +1,6 @@
 import { getRecipientAddressFromOutput } from '..'
 import { IWrappedOutput } from '@core/wallet/interfaces'
+import { ICommonOutput } from '@iota/types'
 
 export function getMainTransactionOutputFromTransaction(
     wrappedOutputs: IWrappedOutput[],
@@ -7,7 +8,7 @@ export function getMainTransactionOutputFromTransaction(
     isIncoming: boolean
 ): { wrappedOutput: IWrappedOutput; isSelfTransaction: boolean } {
     const nonRemainerOutput = wrappedOutputs.find((output) => {
-        const recipientAddress = getRecipientAddressFromOutput(output.output)
+        const recipientAddress = getRecipientAddressFromOutput(output.output as ICommonOutput)
 
         if (isIncoming) {
             return accountAddress === recipientAddress
@@ -21,7 +22,9 @@ export function getMainTransactionOutputFromTransaction(
             isSelfTransaction: false,
         }
     } else {
-        const output = wrappedOutputs.find((output) => accountAddress === getRecipientAddressFromOutput(output.output))
+        const output = wrappedOutputs.find(
+            (output) => accountAddress === getRecipientAddressFromOutput(output.output as ICommonOutput)
+        )
         if (output) {
             return { wrappedOutput: output, isSelfTransaction: true }
         }

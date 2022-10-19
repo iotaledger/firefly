@@ -1,4 +1,5 @@
 import { IAccountState } from '@core/account'
+import { IBasicOutput } from '@iota/types'
 import { OutputData } from '@iota/wallet'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { get } from 'svelte/store'
@@ -37,7 +38,7 @@ export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState
 }
 
 function isOutputClaimed(output: OutputData): boolean {
-    const expirationDate = getExpirationDateFromOutput(output?.output)
+    const expirationDate = getExpirationDateFromOutput(output?.output as IBasicOutput)
 
     if (expirationDate) {
         return (

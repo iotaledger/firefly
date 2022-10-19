@@ -1,18 +1,13 @@
-import { OutputTypes } from '@iota/types'
-import { OUTPUT_TYPE_TREASURY } from '../../constants'
+import { IBasicOutput, IAliasOutput, IFoundryOutput, INftOutput } from '@iota/types'
 import { Subject } from '../../types'
 import { getSubjectFromAddress } from '../getSubjectFromAddress'
 import { getSenderAddressFromUnlockCondition } from '../getSenderAddressFromUnlockCondition'
 
-export function getSenderFromOutput(output: OutputTypes): Subject {
-    if (output && output?.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            const senderAddress = getSenderAddressFromUnlockCondition(unlockCondition)
-            if (senderAddress) {
-                return getSubjectFromAddress(senderAddress)
-            }
+export function getSenderFromOutput(output: IBasicOutput | IAliasOutput | IFoundryOutput | INftOutput): Subject {
+    for (const unlockCondition of output.unlockConditions) {
+        const senderAddress = getSenderAddressFromUnlockCondition(unlockCondition)
+        if (senderAddress) {
+            return getSubjectFromAddress(senderAddress)
         }
-    } else {
-        return undefined
     }
 }

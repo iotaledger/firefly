@@ -12,13 +12,17 @@ import {
     getStorageDepositFromOutput,
 } from './helper'
 import { IAccountState } from '@core/account'
+import { IFoundryOutput } from '@iota/types'
 
 export function generateFoundryActivity(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): FoundryActivity {
     const { outputs, transactionId, claimingData, transactionInputs, time, inclusionState } = processedTransaction
-    const { output, outputId } = getFoundryOutputFromTransaction(outputs)
+    const wrappedOutput = getFoundryOutputFromTransaction(outputs)
+
+    const output = wrappedOutput.output as IFoundryOutput
+    const outputId = wrappedOutput.outputId
 
     const isHidden = false
     const isAssetHidden = false

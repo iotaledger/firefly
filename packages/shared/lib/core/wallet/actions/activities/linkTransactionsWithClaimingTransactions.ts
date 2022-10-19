@@ -3,6 +3,7 @@ import { activeProfileId } from '@core/profile'
 import { ActivityDirection, IProcessedTransaction } from '@core/wallet'
 import { getDirectionFromTransaction } from '@core/wallet/utils'
 import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
+import { ICommonOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { addClaimedActivity, claimedActivities } from '../../stores'
 
@@ -26,7 +27,7 @@ export function linkTransactionsWithClaimingTransactions(
     for (const transaction of sortedTransactions) {
         const isClaimingTransaction = transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)
         const isIncomingAsyncTransaction =
-            transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
+            transaction.outputs.some((_output) => isOutputAsync(_output.output as ICommonOutput)) &&
             getDirectionFromTransaction(transaction, account.depositAddress) === ActivityDirection.Incoming
 
         if (isClaimingTransaction) {
