@@ -925,6 +925,10 @@
         "faucetRequest": {
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
+        },
+        "addOptionalMetadata": {
+            "title": "Add optional metadata",
+            "description": "Add an optional reference to give the receiver some further information about the transaction."
         }
     },
     "charts": {
@@ -1096,7 +1100,8 @@
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
         "initializing": "Initializing",
-        "delete": "Delete"
+        "delete": "Delete",
+        "review": "Review"
     },
     "general": {
         "recipient": "Recipient",
