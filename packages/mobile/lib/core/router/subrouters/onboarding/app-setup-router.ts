@@ -22,7 +22,7 @@ export class AppSetupRouter extends Subrouter<AppSetupRoute> {
                 break
             case AppSetupRoute.Legal:
                 nextRoute = AppSetupRoute.Welcome
-                return
+                break
         }
 
         this.setNext(nextRoute)
