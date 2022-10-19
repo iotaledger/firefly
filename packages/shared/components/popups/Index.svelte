@@ -11,6 +11,7 @@
     import AliasConfirmationPopup from './AliasConfirmationPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
+    import AddMetadataAndTagPopup from './AddMetadataAndTagPopup.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
     import ConfirmationPopup from './ConfirmationPopup.svelte'
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
@@ -85,6 +86,7 @@
 
     const types = {
         accountSwitcher: AccountSwitcherPopup,
+        addMetadataAndTag: AddMetadataAndTagPopup,
         aliasConfirmation: AliasConfirmationPopup,
         unlockStronghold: UnlockStrongholdPopup,
         version: Version,
