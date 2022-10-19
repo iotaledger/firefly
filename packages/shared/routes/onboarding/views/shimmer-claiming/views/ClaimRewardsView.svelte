@@ -26,7 +26,7 @@
         subscribeToWalletApiEventsForShimmerClaiming,
         initialiseAccountRecoveryConfigurationForShimmerClaiming,
     } from '@contexts/onboarding'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 

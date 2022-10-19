@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { LedgerAnimation, Button, Icon, Link, OnboardingLayout, Text } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import { LedgerAppName } from '@core/ledger'
 
     const dispatch = createEventDispatcher()

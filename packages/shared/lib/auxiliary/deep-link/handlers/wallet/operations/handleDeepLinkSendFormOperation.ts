@@ -5,7 +5,7 @@ import {
     selectedAccountAssets,
     getAssetById,
 } from '@core/wallet'
-import { openPopup } from '@lib/popup'
+import { openPopup } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'

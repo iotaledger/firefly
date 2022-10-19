@@ -2,7 +2,7 @@
     import { handleDeepLink } from '@auxiliary/deep-link'
 
     import { localize } from '@core/i18n'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { Button, Text, TextInput, FontWeight, TextType } from 'shared/components'
 
     const PREFIX = process.env.APP_PROTOCOL + '://'

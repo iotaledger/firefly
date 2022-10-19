@@ -1,6 +1,6 @@
 import { addError } from '@core/error'
 import { localize } from '@core/i18n'
-import { openPopup } from '@lib/popup'
+import { openPopup } from '@auxiliary/popup'
 
 import { WalletOperation } from '../../enums'
 import { handleDeepLinkSendConfirmationOperation, handleDeepLinkSendFormOperation } from './operations'

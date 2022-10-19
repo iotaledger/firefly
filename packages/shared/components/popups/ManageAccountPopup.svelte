@@ -3,7 +3,7 @@
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     export let error = ''
 
