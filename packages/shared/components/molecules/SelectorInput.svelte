@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { InputContainer, Modal, TextInput } from 'shared/components'
 
-    export let value: string = undefined
+    export let value: string = ''
     export let error: string = ''
     export let disabled: boolean = false
     export let labelLocale: string = ''
