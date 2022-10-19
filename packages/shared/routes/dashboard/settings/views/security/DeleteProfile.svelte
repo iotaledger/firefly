@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text, ButtonVariant, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
 
     function handleDeleteClick(): void {

@@ -7,7 +7,7 @@
     import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { showAppNotification } from 'shared/lib/notifications'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'

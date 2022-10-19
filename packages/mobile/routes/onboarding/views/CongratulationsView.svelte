@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { OnboardingLayout } from '../../../components'
     import { Button, Icon, Text, TextType } from 'shared/components'
-    import { onboardingRouter } from '@core/router'
+    import { onboardingRouter } from '../../../lib/core/router'
     import { localize } from '@core/i18n'
     import { completeOnboardingProcess } from '@contexts/onboarding'
 

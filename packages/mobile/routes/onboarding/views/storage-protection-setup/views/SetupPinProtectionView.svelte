@@ -11,13 +11,9 @@
     import { localize } from '@core/i18n'
     import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ProfileType } from '@core/profile'
-    import { storageProtectionSetupRouter } from '@core/router'
     import { isValidPin } from '@core/utils'
     import { onMount } from 'svelte'
-
     export let busy = false
-
-    const title = localize('views.onboarding.storageProtectionSetup.setupPinProtection.title')
 
     let setPinInput = ''
     let setPinInputError = ''

@@ -10,7 +10,7 @@ import {
     Subject,
 } from '@core/wallet'
 import { isValidAddressAndPrefix } from '@lib/address'
-import { openPopup } from '@lib/popup'
+import { openPopup } from '@auxiliary/popup'
 
 import { SendOperationParameter } from '../../../enums'
 import {

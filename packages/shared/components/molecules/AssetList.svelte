@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { assetFilter, IAccountAssets, IAsset } from '@core/wallet'
     import { isVisibleAsset } from '@core/wallet/utils/isVisibleAsset'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AssetTile, Text, Filter, TextType } from 'shared/components'
 

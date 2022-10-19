@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { Button, Logo, Text, ExportStrongholdButton, TextType } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     const busy = false
 

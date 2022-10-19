@@ -5,7 +5,7 @@
     import { activeProfile, login, ProfileType, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { Platform } from '@lib/platform'
-    import { openPopup, popupState } from '@lib/popup'
+    import { openPopup, popupState } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
     import { Icon, PinInput, Profile, Text } from 'shared/components'
     import { onDestroy } from 'svelte'

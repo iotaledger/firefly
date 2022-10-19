@@ -6,7 +6,7 @@ export function formatTokenAmountDefault(amount: number, tokenMetadata: ITokenMe
         throw new Error('Amount is negative')
     } else if (isDecimal(amount)) {
         throw new Error('Amount is a decimal number')
-    } else if (unit === tokenMetadata?.subunit) {
+    } else if (unit && unit === tokenMetadata?.subunit) {
         return formatNumber(amount, 0, 0, 0, true)
     } else {
         const value = tokenMetadata?.decimals ? amount / 10 ** tokenMetadata?.decimals : amount

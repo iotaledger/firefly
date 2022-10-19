@@ -11,7 +11,7 @@
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
 
     $: dark = $appSettings.darkMode
 
@@ -59,7 +59,7 @@
     </section>
     <footer class="w-full pt-5">
         <Button
-            classes="w-full text-blue-500 border border-solid 
+            classes="w-full text-blue-500 border border-solid
                 {dark ? 'border-gray-700' : 'border-gray-300'}"
             variant="none"
             onClick={onAddProfileClick}

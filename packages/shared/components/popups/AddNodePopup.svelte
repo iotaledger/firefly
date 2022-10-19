@@ -2,7 +2,7 @@
     import { Text, NodeConfigurationForm, Button, HTMLButtonType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode, addNodeToClientOptions, editNodeInClientOptions } from '@core/network'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
     import { showAppNotification } from '@lib/notifications'
 

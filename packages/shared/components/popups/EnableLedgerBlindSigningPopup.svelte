@@ -7,7 +7,7 @@
         ledgerPreparedOutput,
         resetLedgerPreparedOutput,
     } from '@core/ledger'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { sendOutput } from '@core/wallet'
 
     const STEPS = [1, 2, 3, 4]

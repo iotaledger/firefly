@@ -3,7 +3,7 @@
     import { Button, Checkbox, CopyableBox, Spinner, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { INode, INodeInfo } from '@core/network'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from 'shared/lib/notifications'
     import { resolveObjectPath, setClipboard } from '@core/utils'
     import { getNodeInfo } from '@core/profile-manager'
