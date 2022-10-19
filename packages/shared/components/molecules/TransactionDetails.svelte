@@ -10,6 +10,7 @@
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import {
+        formatTokenAmountDefault,
         formatTokenAmountPrecise,
         ActivityAsyncStatus,
         ActivityType,
@@ -17,7 +18,6 @@
         InclusionState,
         ActivityDirection,
         IPersistedAsset,
-        parseRawAmount,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -50,7 +50,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: amount = parseRawAmount(Number(rawAmount), unit, asset?.metadata)
+    $: amount = formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit)
     $: formattedTransactionTime = getDateFormat(transactionTime)
     $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)
