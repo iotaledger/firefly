@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { profiles, loadPersistedProfileIntoActiveProfile } from '@core/profile'
-    import { initialiseOnboardingRouters, loginRouter } from '@core/router'
+    import { initialiseOnboardingRouters, loginRouter } from '../../../lib/core/router'
     import {
         initialiseOnboardingProfile,
         shouldBeDeveloperProfile,

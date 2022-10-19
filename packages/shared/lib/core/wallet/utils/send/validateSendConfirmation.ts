@@ -7,7 +7,7 @@ import { get } from 'svelte/store'
 import { getStorageDepositFromOutput } from '../outputs'
 
 export function validateSendConfirmation(outputOptions: OutputOptions, outputTypes: OutputTypes): void {
-    const parseNumber = (value: string) => parseInt(value, 10) ?? 0
+    const parseNumber: (value: string) => number = (value: string) => parseInt(value, 10) ?? 0
     const amount = parseNumber(outputTypes?.amount)
     const balance = parseNumber(get(selectedAccount)?.balances?.baseCoin.available)
     const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(outputTypes)

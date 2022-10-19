@@ -21,7 +21,7 @@ export function bindEvents(element: Element, events: Event<unknown>[]): { destro
     })
 
     return {
-        destroy() {
+        destroy(): void {
             listeners.forEach(([event, listener]) => {
                 element.removeEventListener(event, listener)
             })
@@ -114,7 +114,7 @@ export const validateBech32Address = (prefix: string, addr: string): string => {
  */
 export function debounce(callback: () => void, wait = 500): (...args: unknown[]) => void {
     let _timeout
-    return (...args) => {
+    return (...args): void => {
         /* eslint-disable @typescript-eslint/no-this-alias */
         const context = this
         clearTimeout(_timeout)

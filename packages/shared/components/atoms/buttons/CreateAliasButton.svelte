@@ -3,7 +3,7 @@
     import { openPopup } from '@lib/popup'
     import { OnboardingButton } from 'shared/components'
 
-    function handleCreateAlias() {
+    function handleCreateAlias(): void {
         openPopup({
             type: 'aliasConfirmation',
         })

@@ -1,5 +1,4 @@
 export * from './default-stronghold-password.constant'
-export * from './seedvault-regex.constant'
 export * from './shimmer-claiming-account-recovery-configuration.constant'
 export * from './shimmer-claiming-account-sync-options.constant'
 export * from './shimmer-claiming-profile-manager-directory-name.constant'

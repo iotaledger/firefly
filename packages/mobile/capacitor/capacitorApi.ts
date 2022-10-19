@@ -51,8 +51,6 @@ export const CapacitorApi: IPlatform = {
 
     importLegacySeed: () => new Promise<string>(() => {}),
 
-    validateSeedVault: () => new Promise<boolean>(() => {}),
-
     getUserDataPath: () =>
         new Promise<string>((resolve) => {
             resolve('DATA')

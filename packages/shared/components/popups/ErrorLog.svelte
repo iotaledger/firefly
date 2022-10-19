@@ -5,12 +5,12 @@
     import { closePopup } from '@lib/popup'
     import { setClipboard } from '@lib/utils'
 
-    const handleClearClick = () => {
+    function handleClearClick(): () => void {
         errorLog.set([])
         closePopup()
     }
 
-    const handleCopyClick = () => {
+    function handleCopyClick(): () => void {
         const str = []
 
         for (const err of $errorLog) {

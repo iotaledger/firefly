@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { NetworkProtocol } from '@core/network'
-    import { visibleSelectedAccountAssets } from '@core/wallet'
+    import { IAsset, visibleSelectedAccountAssets } from '@core/wallet'
     import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
 
@@ -19,13 +19,13 @@
             icon = 'tokens'
     }
 
-    function handleDropdownClick() {
+    function handleDropdownClick(): void {
         if (hasMultipleAssets) {
             isDropdownOpen = !isDropdownOpen
         }
     }
 
-    function handleAssetClick(_asset) {
+    function handleAssetClick(_asset: IAsset): void {
         asset = _asset
         isDropdownOpen = false
     }

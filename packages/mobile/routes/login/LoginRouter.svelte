@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { EnterPinView, SelectProfileView, LoadProfileView } from './views'
-    import { loginRoute, LoginRoute } from '@core/router'
+    import { loginRoute, LoginRoute } from '../../lib/core/router'
 </script>
 
 {#if $loginRoute === LoginRoute.SelectProfile}

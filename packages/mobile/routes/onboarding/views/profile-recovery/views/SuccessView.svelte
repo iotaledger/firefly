@@ -9,7 +9,7 @@
         profileRecoveryRouter,
         ProfileSetupRoute,
         profileSetupRoute,
-    } from '@core/router'
+    } from '../../../../../lib/core/router'
     import { updateOnboardingProfile } from '@contexts/onboarding'
 
     function onContinueClick(): void {

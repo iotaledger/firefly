@@ -8,7 +8,7 @@
     export let url: string
     export let actionLocale: string
 
-    const handleClick = () => {
+    function handleClick(): void {
         Platform.openUrl(url)
     }
 </script>

@@ -10,7 +10,7 @@
     // TODO: Move this to dashboard or onload logic
     // $: healthStatus !== 2 && showNetworkIssuesNotification()
 
-    function onClick() {
+    function onClick(): void {
         modal?.open()
         getAndUpdateNodeInfo()
     }

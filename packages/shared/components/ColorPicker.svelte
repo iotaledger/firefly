@@ -10,7 +10,7 @@
     export let classes = ''
 
     const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
-    const hex2rgb = (hex) => {
+    function hex2rgb(hex: string): string {
         hex = hex.length >= 7 ? hex : '#FFFFFF'
         return hex
             .match(/\w\w/g)
@@ -39,14 +39,14 @@
         inputColor = 'gray-800'
     }
 
-    let tooltipAnchor
+    let tooltipAnchor: HTMLElement
     let showTooltip = false
-    const toggleTooltip = (): void => {
+    function toggleTooltip(): void {
         showTooltip = !showTooltip
     }
 
     let isCustomHover = false
-    const toggleCustomHover = (): void => {
+    function toggleCustomHover(): void {
         isCustomHover = !isCustomHover
     }
 

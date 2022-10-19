@@ -6,14 +6,14 @@ const BarcodeManager = Platform.BarcodeManager
 
 export const showCameraScanner: Writable<boolean> = writable(false)
 
-export const startQRScanner = (_onSuccess: (result: string) => void, _onError: () => void): void => {
+export function startQRScanner(_onSuccess: (result: string) => void, _onError: () => void): void {
     if (get(mobile)) {
         showCameraScanner.set(true)
-        const onSuccess = (result: string) => {
+        const onSuccess: (result: string) => void = (result: string) => {
             showCameraScanner.set(false)
             _onSuccess(result)
         }
-        const onError = () => {
+        const onError: () => void = () => {
             showCameraScanner.set(false)
             _onError()
         }
@@ -21,7 +21,7 @@ export const startQRScanner = (_onSuccess: (result: string) => void, _onError: (
     }
 }
 
-export const stopQRScanner = (): void => {
+export function stopQRScanner(): void {
     if (get(mobile)) {
         showCameraScanner.set(false)
         void BarcodeManager.stopScanner()

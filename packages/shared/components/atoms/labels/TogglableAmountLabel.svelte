@@ -6,7 +6,7 @@
     export let tokenMetadata: ITokenMetadata
 
     let showPreciseValue = false
-    function togglePreciseValue() {
+    function togglePreciseValue(): void {
         showPreciseValue = !showPreciseValue
     }
 </script>

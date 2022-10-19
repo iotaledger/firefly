@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { TransactionDetails, AliasDetails, FoundryDetails } from 'shared/components/molecules'
+    import { TransactionDetails, AliasDetails, FoundryDetails, NftDetails } from 'shared/components/molecules'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -27,7 +27,7 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
-    $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
+    $: asset = activity.data.type !== ActivityType.Nft ? getAssetFromPersistedAssets(activity.data.assetId) : undefined
     $: isTimelocked =
         activity.data.type === ActivityType.Transaction && activity.data.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
@@ -39,7 +39,7 @@
     let details
     $: activity, (details = getActivityDetails())
 
-    function getActivityDetails() {
+    function getActivityDetails(): void {
         if (!activity) {
             return {}
         }
@@ -88,6 +88,23 @@
                 aliasId: activity.data.aliasId,
                 governorAddress: activity.data.governorAddress,
                 stateControllerAddress: activity.data.stateControllerAddress,
+            }
+        } else if (activity.data.type === ActivityType.Nft) {
+            return {
+                ...details,
+                type: activity.type,
+                storageDeposit: activity.data.storageDeposit,
+                giftedStorageDeposit: activity.data.giftedStorageDeposit,
+                metadata: activity.data.metadata,
+                asyncStatus: activity.data.asyncStatus,
+                direction: activity.data.direction,
+                isInternal: activity.data.isInternal,
+                claimedDate: activity.data.claimedDate,
+                claimingTransactionId: activity.data.claimingTransactionId,
+                expirationDate:
+                    activity.data?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity.data.expirationDate : null,
+                timelockDate: activity.data.timelockDate,
+                subject: activity.data?.subject,
             }
         }
     }
@@ -171,8 +188,10 @@
         <TransactionDetails {...details} />
     {:else if activity?.data.type === ActivityType.Foundry}
         <FoundryDetails {...details} />
-    {:else}
+    {:else if activity?.data.type === ActivityType.Alias}
         <AliasDetails {...details} />
+    {:else if activity?.data.type === ActivityType.Nft}
+        <NftDetails {...details} />
     {/if}
     {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

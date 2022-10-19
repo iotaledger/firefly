@@ -140,7 +140,7 @@
         Electron.DeepLinkManager.clearDeepLinkRequest()
     })
 
-    const showDeepLinkNotification = () => {
+    function showDeepLinkNotification(): void {
         if (!$loggedIn) {
             showAppNotification({
                 type: 'info',

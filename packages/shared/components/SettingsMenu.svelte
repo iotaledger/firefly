@@ -13,7 +13,7 @@
     import { Icon, Text, TextType } from 'shared/components'
     import features from 'shared/features/features'
 
-    export let group
+    export let group: string
     export let settings:
         | AdvancedSettingsRoute
         | AdvancedSettingsRouteNoProfile
@@ -30,8 +30,8 @@
         | SecuritySettingsRoute[] = []
     export let icon = undefined
     export let iconColor = undefined
-    export let title
-    export let description
+    export let title: string
+    export let description: string
     export let onClick: (..._: any[]) => void
 
     $: Object.keys(features?.settings?.[group])?.forEach((setting) => {

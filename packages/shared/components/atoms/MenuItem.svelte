@@ -29,7 +29,7 @@
         }
     }
 
-    function handleOnClick() {
+    function handleOnClick(): () => void {
         if (!disabled && onClick) {
             return onClick()
         }

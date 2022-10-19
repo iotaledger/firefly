@@ -8,7 +8,7 @@
     const PREFIX = process.env.APP_PROTOCOL + '://'
     let url: string = PREFIX
 
-    function handleCancel() {
+    function handleCancel(): void {
         closePopup()
     }
 

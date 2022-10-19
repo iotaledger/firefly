@@ -5,15 +5,16 @@
         AppRoute,
         appRoute,
         appRouter,
+        initialiseRouters,
+        initialiseOnboardingRouters,
         DashboardRoute,
         dashboardRouter,
-        initialiseOnboardingRouters,
-        initialiseRouters,
         OnboardingRoute,
         onboardingRoute,
-        openSettings,
-    } from '@core/router'
-    import { Route, ToastContainer } from 'shared/components'
+    } from './lib/core/router'
+    import { openSettings } from '@core/router'
+    import { Route } from './components'
+    import { ToastContainer } from 'shared/components'
     import {
         AppTheme,
         appSettings,
@@ -27,7 +28,7 @@
     import { addError } from '@core/error'
     import { showAppNotification } from 'shared/lib/notifications'
     import { openPopup } from 'shared/lib/popup'
-    import { LoginRouter, OnboardingRouter } from './routes'
+    import { DashboardRouter, LoginRouter, OnboardingRouter } from './routes'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { onboardingProfile, initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
@@ -146,7 +147,7 @@
         Electron.DeepLinkManager.clearDeepLinkRequest()
     })
 
-    const showDeepLinkNotification = () => {
+    function showDeepLinkNotification(): void {
         if (!$loggedIn) {
             showAppNotification({
                 type: 'info',
@@ -157,7 +158,7 @@
 
     $keyboardHeight = window.innerHeight / 2
     // Press ctrl + k to toggle the fake keyboard
-    document.onkeydown = function (e) {
+    document.onkeydown = function (e): void {
         if (e.ctrlKey && e.key === 'c') {
             $appSettings.theme = $appSettings.theme === AppTheme.Light ? AppTheme.Dark : AppTheme.Light
             $appSettings.darkMode = shouldBeDarkMode($appSettings.theme)
@@ -178,6 +179,9 @@
 </Route>
 <Route route={AppRoute.Onboarding}>
     <OnboardingRouter />
+</Route>
+<Route route={AppRoute.Dashboard}>
+    <DashboardRouter />
 </Route>
 
 <ToastContainer />
