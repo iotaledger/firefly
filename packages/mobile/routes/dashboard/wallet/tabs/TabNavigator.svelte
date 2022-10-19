@@ -26,7 +26,7 @@
             : []),
     ]
 
-    function onNavigationItemClick(tab: WalletTab) {
+    function onNavigationItemClick(tab: WalletTab): void {
         updateActiveWalletTab(tab)
     }
 </script>
