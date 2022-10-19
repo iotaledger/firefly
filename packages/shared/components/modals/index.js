@@ -6,6 +6,7 @@ export { default as CollectibleDetailsMenu } from './CollectibleDetailsMenu.svel
 export { default as ExpirationTimePickerMenu } from './ExpirationTimePickerMenu.svelte'
 export { default as FilterModal } from './FilterModal.svelte'
 export { default as Modal } from './Modal.svelte'
+export { default as NetworkSelector } from './NetworkSelector.svelte'
 export { default as NetworkSummaryModal } from './NetworkSummaryModal.svelte'
 export { default as NodeActionsMenu } from './NodeActionsMenu.svelte'
 export { default as ProfileActionsModal } from './ProfileActions.svelte'

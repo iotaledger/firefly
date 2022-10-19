@@ -2,15 +2,26 @@
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
-    import { Button, Text, RecipientInput, AssetAmountInput, OptionalInput, FontWeight } from 'shared/components'
+    import {
+        Button,
+        Text,
+        RecipientInput,
+        AssetAmountInput,
+        OptionalInput,
+        FontWeight,
+        NetworkInput,
+    } from 'shared/components'
     import { closePopup, openPopup } from '@lib/popup'
     import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
+    import { DestinationNetwork } from '@core/network'
 
     let { asset, rawAmount, unit, recipient, metadata, tag } = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
+
+    let network: DestinationNetwork
 
     async function onSend(): Promise<void> {
         const valid = await validate()
@@ -58,6 +69,7 @@
     </Text>
     <send-form-inputs class="flex flex-col space-y-4">
         <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
+        <NetworkInput bind:network />
         <RecipientInput bind:this={recipientInput} bind:recipient />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
