@@ -4,7 +4,7 @@
     import { networkHrp } from '@core/network'
     import { Subject } from '@core/wallet'
     import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
-    import { InputContainer, Modal, RecipientAccountSelector, TextInput } from 'shared/components'
+    import { Modal, RecipientAccountSelector, SelectorInput } from 'shared/components'
 
     export let recipient: Subject
     export let disabled = false
@@ -17,7 +17,6 @@
     let selectedAccount: IAccountState
     let value: string
     let error: string
-    let hasFocus: boolean
     let previousValue: string
 
     if (!selectedAccount && recipient?.type === 'account') {
@@ -29,13 +28,6 @@
     $: recipient = {
         ...(selectedAccount && { type: 'account', account: selectedAccount }),
         ...(!selectedAccount && { type: 'address', address: value }),
-    }
-
-    $: hasFocus && (error = '')
-    $: value && modal?.open()
-
-    $: if (hasFocus) {
-        setTimeout(() => modal?.open(), 101)
     }
 
     $: {
@@ -71,25 +63,11 @@
     }
 </script>
 
-<recipient-input class="w-full relative">
-    <InputContainer bind:inputElement clearPadding isFocused={hasFocus} {error}>
-        <TextInput
-            bind:inputElement
-            bind:value
-            bind:hasFocus
-            clearBackground
-            clearBorder
-            {disabled}
-            label={localize('general.recipient')}
-            placeholder={localize('general.recipient')}
-            fontSize="sm"
-            {...$$restProps}
-        />
-    </InputContainer>
+<SelectorInput labelLocale="popups.mintNativeToken.property.alias" bind:value bind:inputElement bind:modal {disabled}>
     <RecipientAccountSelector
         bind:modal
         bind:selected={selectedAccount}
         searchValue={value}
         onClose={() => inputElement.blur()}
     />
-</recipient-input>
+</SelectorInput>
