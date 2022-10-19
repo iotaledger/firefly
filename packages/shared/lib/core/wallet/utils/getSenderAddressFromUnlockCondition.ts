@@ -1,4 +1,4 @@
-import { UnlockConditionTypes } from '@iota/types'
+import { IExpirationUnlockCondition, IStorageDepositReturnUnlockCondition } from '@iota/types'
 import {
     ADDRESS_TYPE_ED25519,
     UNLOCK_CONDITION_EXPIRATION,
@@ -6,7 +6,9 @@ import {
 } from '../constants'
 import { getBech32AddressFromAddressTypes } from './getBech32AddressFromAddressTypes'
 
-export function getSenderAddressFromUnlockCondition(unlockCondition: UnlockConditionTypes): string {
+export function getSenderAddressFromUnlockCondition(
+    unlockCondition: IStorageDepositReturnUnlockCondition | IExpirationUnlockCondition
+): string {
     if (
         (unlockCondition?.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN ||
             unlockCondition?.type === UNLOCK_CONDITION_EXPIRATION) &&
