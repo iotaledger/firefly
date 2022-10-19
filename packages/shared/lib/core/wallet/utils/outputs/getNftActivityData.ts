@@ -8,7 +8,7 @@ import {
     convertHexAddressToBech32,
 } from '..'
 import { ActivityDirection, ActivityType } from '@core/wallet/enums'
-import { ADDRESS_TYPE_NFT, NEW_NFT_ID, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
+import { ADDRESS_TYPE_NFT, EMPTY_HEX_ID, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
 import type { IMetadataFeature, INftOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
@@ -87,7 +87,7 @@ function getMetadataFromNft(output: INftOutput): INftMetadata {
 }
 
 function getNftId(output: INftOutput, outputId: string): string {
-    const isNewNft = output.nftId === NEW_NFT_ID
+    const isNewNft = output.nftId === EMPTY_HEX_ID
     const nftId = isNewNft
         ? '0x' + Converter.bytesToHex(Blake2b.sum256(Converter.hexToBytes(outputId.substring(2))))
         : output.nftId

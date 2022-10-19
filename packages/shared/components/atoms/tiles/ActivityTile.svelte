@@ -23,7 +23,9 @@
     export let activity: Activity
 
     let asset: IPersistedAsset
-    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.data.assetId))
+    $: $selectedAccountAssets,
+        (asset =
+            activity.data.type !== ActivityType.Nft ? getAssetFromPersistedAssets(activity.data.assetId) : undefined)
 
     function handleTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
