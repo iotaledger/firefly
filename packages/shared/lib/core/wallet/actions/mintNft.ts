@@ -8,20 +8,26 @@ import { showAppNotification } from '@lib/notifications'
 import { localize } from '@core/i18n'
 import { Activity } from '../classes'
 import { preprocessTransaction } from '../utils'
+import { Converter } from '@lib/converter'
 
-export async function mintNft(): Promise<void> {
+export async function mintNft(metadata: Record<string, unknown>): Promise<void> {
     try {
         updateSelectedAccount({ isTransferring: true })
         const account = get(selectedAccount)
-
         await createAliasIfNecessary(account)
 
-        // TODO: fill in options
-        const nftOptions: NftOptions = {} // fill out
-        const transactionOptions: TransactionOptions = {} // fill out
+        const nftOptions: NftOptions = {
+            immutableMetadata: Converter.utf8ToHex(JSON.stringify(metadata), true),
+        }
+        const transactionOptions: TransactionOptions = {
+            remainderValueStrategy: { strategy: 'ReuseAddress', value: null },
+        }
+
         const mintNftTransaction = await account.mintNfts([nftOptions], transactionOptions)
+        // QUESTION: do we need a buildPersistedAssetFromIrc27Metadata() then addPersistedAsset()?
         const processedTransaction = preprocessTransaction(mintNftTransaction)
         const activity = new Activity(processedTransaction, account)
+
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
         showAppNotification({
             type: 'success',

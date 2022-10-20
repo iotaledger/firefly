@@ -3,7 +3,7 @@
     import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
-    import { mintNft, mintNftDetails } from '@core/wallet'
+    import { mintNft, mintNftDetails, TokenStandard } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { openPopup, closePopup } from '@lib/popup'
@@ -44,7 +44,17 @@
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNft()
+            await mintNft({
+                standard: TokenStandard.IRC27,
+                name,
+                type,
+                uri,
+                ...(collectionId && { collectionId }),
+                ...(collectionName && { collectionName }),
+                ...(issuerName && { issuerName }),
+                ...(description && { description }),
+                ...(attribute && { attribute }),
+            })
             closePopup()
         } catch (reason) {
             handleError(reason.error)
