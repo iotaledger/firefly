@@ -88,7 +88,13 @@ const features = {
     },
     wallet: {
         enabled: false,
-        accountSummary: {
+        profileActions: {
+            enabled: false,
+        },
+        accountSwitcher: {
+            enabled: false,
+        },
+        accountActions: {
             enabled: false,
         },
         send: {
@@ -98,7 +104,7 @@ const features = {
             enabled: true,
         },
         activity: {
-            enabled: false,
+            enabled: true,
             sync: {
                 enabled: false,
             },
