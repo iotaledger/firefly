@@ -87,7 +87,6 @@ const features = {
         },
     },
     wallet: {
-        enabled: false,
         accountSummary: {
             enabled: false,
         },
@@ -95,7 +94,7 @@ const features = {
             enabled: false,
         },
         activity: {
-            enabled: false,
+            enabled: true,
             sync: {
                 enabled: false,
             },
