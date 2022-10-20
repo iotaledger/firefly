@@ -79,7 +79,7 @@
 
 <div class="space-y-6">
     <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
-        {localize('popups.mintNativeTokenForm.title')}
+        {localize('popups.mintNftForm.title')}
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y overflow-x-hidden flex-1">
