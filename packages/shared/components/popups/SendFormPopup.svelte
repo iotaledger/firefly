@@ -12,7 +12,7 @@
         NetworkInput,
     } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import type { DestinationNetwork } from '@core/network'
+    import { DestinationNetwork } from '@core/network'
 
     let { asset, rawAmount, unit, recipient } = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput
