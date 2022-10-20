@@ -4,12 +4,12 @@ import { NftOptions, TransactionOptions } from '@iota/wallet'
 import { activeProfile, ProfileType } from '@core/profile'
 import { handleLedgerError } from '@core/ledger'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetails } from '../stores'
-import { showAppNotification } from '@lib/notifications'
 import { localize } from '@core/i18n'
 import { Activity } from '../classes'
 import { preprocessTransaction } from '../utils'
 import { Converter } from '@lib/converter'
 import { INftMetadata } from '../interfaces'
+import { showAppNotification } from '@auxiliary/notification'
 
 export async function mintNft(metadata: INftMetadata): Promise<void> {
     try {

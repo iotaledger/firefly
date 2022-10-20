@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { setMintNftDetails, mintNftDetails, MimeType, TokenStandard } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}

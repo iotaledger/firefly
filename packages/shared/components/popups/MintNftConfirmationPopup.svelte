@@ -6,7 +6,7 @@
     import { mintNft, mintNftDetails } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
-    import { openPopup, closePopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
