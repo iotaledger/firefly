@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { Text, TextInput, Button, TextType, FontWeight } from 'shared/components'
-    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { openPopup } from '@auxiliary/popup'
     import { getByteLengthOfString } from '@core/utils'
 
     let { metadata, tag } = get(newTransactionDetails)
@@ -17,11 +17,14 @@
     $: metadata, (metadataError = '')
     $: tag, (tagError = '')
 
-    function onCancel(): void {
-        closePopup()
+    function onBackClick(): void {
+        openPopup({
+            type: 'sendForm',
+            overflow: true,
+        })
     }
 
-    function onReview(): void {
+    function onReviewClick(): void {
         if (isValidMetadataAndTag()) {
             updateNewTransactionDetails({ tag, metadata })
             openPopup({
@@ -68,10 +71,10 @@
         />
     </add-optional-metadata-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onCancel}>
-            {localize('actions.cancel')}
+        <Button classes="w-full" outline onClick={onBackClick}>
+            {localize('actions.back')}
         </Button>
-        <Button classes="w-full" onClick={onReview}>
+        <Button classes="w-full" onClick={onReviewClick}>
             {localize('actions.review')}
         </Button>
     </popup-buttons>

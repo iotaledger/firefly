@@ -33,7 +33,7 @@
     export let textProps: TextPropTypes = { type: TextType.p, fontSize: '11', lineHeight: '140' }
     export let hasFocus = false
 
-    export let infoIcon: Icon = undefined
+    export let infoIcon: HTMLElement = undefined
     export let description: string = ''
     export let isDescriptionVisible: boolean = false
 
