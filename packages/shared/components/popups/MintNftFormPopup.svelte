@@ -4,8 +4,9 @@
     import { checkActiveProfileAuth } from '@core/profile'
     import { mintNft, setMintNftDetails, mintNftDetails } from '@core/wallet'
     import { closePopup } from '@lib/popup'
-    import { Button, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
+    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
     import { selectedAccount } from '@core/account'
+    import { DropdownChoice } from '@core/utils'
 
     let { type, uri, name, collectionId, collectionName, issuerName, description, attribute } = $mintNftDetails
 
@@ -19,6 +20,13 @@
     $: isTransferring = $selectedAccount.isTransferring
 
     let error: BaseError
+    const nftTypeOptions: DropdownChoice[] = [
+        { label: 'image/jpeg', value: 'image/jpeg' },
+        { label: 'image/png', value: 'image/png' },
+        { label: 'image/gif', value: 'image/gif' },
+        { label: 'application/pdf', value: 'application/pdf' },
+        { label: 'text/plain', value: 'text/plain' },
+    ]
 
     async function mintAction(): Promise<void> {
         // TODO: implement
@@ -59,6 +67,10 @@
         }
     }
 
+    function handleSelectNftType(item: DropdownChoice) {
+        type = item.value
+    }
+
     function validate(): boolean {
         // TODO: implement
         return true
@@ -70,12 +82,16 @@
         {localize('popups.mintNativeTokenForm.title')}
     </Text>
 
-    <div class="space-y-4 max-h-100 scrollable-y flex-1">
-        <!-- TODO: Change to dropdown with NftType options -->
-        <TextInput
+    <div class="space-y-4 max-h-100 scrollable-y overflow-x-hidden flex-1">
+        <Dropdown
             bind:value={type}
+            onSelect={handleSelectNftType}
             label={localize('popups.mintNftForm.inputs.type')}
             placeholder={localize('popups.mintNftForm.inputs.type')}
+            items={nftTypeOptions}
+            fontSize="sm"
+            lineHeight="140"
+            fontWeight={FontWeight.medium}
             error={typeError}
         />
         <TextInput
