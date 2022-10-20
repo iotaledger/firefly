@@ -6,7 +6,7 @@
     import { Button, PasswordInput, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
-    import { showAppNotification } from 'shared/lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
     import { closePopup } from '@auxiliary/popup'
     import { activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'

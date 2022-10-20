@@ -1,5 +1,5 @@
 import { localize } from '@core/i18n'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 
 import { IErrorParameters } from '../interfaces'
 import { addError } from '../stores'
