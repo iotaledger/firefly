@@ -1,9 +1,12 @@
 <script lang="typescript">
+    import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Icon } from 'shared/components'
     import features from '../../../../features/features'
-    import { updateActiveWalletTab, WalletTab } from '../../../../lib/contexts/wallet'
+    import { activeWalletTab, updateActiveWalletTab, WalletTab } from '../../../../lib/contexts/wallet'
+
+    $: darkModeEnabled = $appSettings.darkMode
 
     const NAVIGATION_ITEMS: { icon: IconEnum; label: string; tab: WalletTab }[] = [
         ...(features?.tokens?.enabled
@@ -18,7 +21,7 @@
         ...(features?.activity?.enabled
             ? [
                   {
-                      icon: IconEnum.Tokens,
+                      icon: IconEnum.Activity,
                       label: localize('tabs.activity'),
                       tab: WalletTab.Activity,
                   },
@@ -31,14 +34,29 @@
     }
 </script>
 
-<div class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-elevation-1 flex justify-between items-center">
+<tab-navigator
+    class="w-full bg-white dark:bg-gray-800 grid grid-cols-{NAVIGATION_ITEMS.length} grid-rows-1 gap-4 pt-4 pb-7 px-5"
+    class:darkmode={darkModeEnabled}
+>
     {#each NAVIGATION_ITEMS as item}
-        <button
-            class="flex flex-col items-center justify-center px-4 text-14 text-gray-500 dark:text-gray-400 border-b-2 border-transparent hover:text-gray-700 dark:hover:text-gray-300"
+        <div
+            class="relative flex flex-col items-center justify-center text-center font-semibold text-11 {$activeWalletTab ===
+            item.tab
+                ? 'text-blue-500'
+                : 'text-gray-500'}"
             on:click={() => onNavigationItemClick(item.tab)}
         >
-            <Icon icon={item.icon} />
-            <span class="ml-2">{item.label}</span>
-        </button>
+            <Icon width={24} height={24} icon={item.icon} />
+            <span class="overflow-hidden overflow-ellipsis w-full">{item.label}</span>
+        </div>
     {/each}
-</div>
+</tab-navigator>
+
+<style type="text/scss">
+    tab-navigator {
+        box-shadow: 0px 4px 4px rgb(0 0 0 / 25%), 0px 2px 12px rgb(0 25 66 / 16%);
+        &.darkmode {
+            box-shadow: 0px 4px 4px rgb(0 0 0 / 25%), 0px 2px 12px rgb(0 25 66 / 30%);
+        }
+    }
+</style>

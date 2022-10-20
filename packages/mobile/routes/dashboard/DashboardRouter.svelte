@@ -5,13 +5,15 @@
 </script>
 
 {#if $selectedAccount}
-    <div class="flex flex-col w-screen h-screen">
+    <div class="flex flex-col w-screen h-screen bg-white dark:bg-gray-800">
         <div class="w-full h-18">BALANCE PLACEHOLDER</div>
-        <div class="flex flex-col flex-auto w-full">
-            <div class="flex-auto">
+        <div class="relative flex flex-col flex-auto w-full">
+            <div class="z-0 flex-auto">
                 <svelte:component this={WALLET_TAB_COMPONENT[$activeWalletTab]} />
             </div>
-            <TabNavigator />
+            <div class="z-10">
+                <TabNavigator />
+            </div>
         </div>
     </div>
 {/if}
