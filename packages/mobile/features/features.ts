@@ -94,10 +94,7 @@ const features = {
         sendAndReceive: {
             enabled: false,
         },
-        assets: {
-            enabled: false,
-        },
-        activityHistory: {
+        activity: {
             enabled: false,
             sync: {
                 enabled: false,
@@ -106,18 +103,18 @@ const features = {
                 enabled: false,
             },
         },
-    },
-    tokens: {
-        enabled: false,
-    },
-    activity: {
-        enabled: false,
-    },
-    governance: {
-        enabled: false,
-    },
-    collectibles: {
-        enabled: false,
+        tokens: {
+            enabled: true,
+            search: {
+                enabled: false,
+            },
+        },
+        governance: {
+            enabled: false,
+        },
+        collectibles: {
+            enabled: false,
+        },
     },
 }
 
