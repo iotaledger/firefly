@@ -1,9 +1,7 @@
 import onboardingFeatures from './onboarding.features'
-import developerToolsFeatures from './developer-tools.features'
 
 const features = {
     onboarding: onboardingFeatures,
-    developerTools: developerToolsFeatures,
     settings: {
         enabled: false,
         general: {
@@ -108,6 +106,12 @@ const features = {
                 enabled: false,
             },
         },
+    },
+    tokens: {
+        enabled: false,
+    },
+    activity: {
+        enabled: false,
     },
     governance: {
         enabled: false,
