@@ -2,8 +2,7 @@
     import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
-    import { isNumberLetterOrPunctuation } from '@lib/utils/isNumberLetterOrPunctuation'
-    import { DropdownChoice } from '@core/utils'
+    import { DropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
 
     export let value: string
     export let label: string = ''
@@ -174,7 +173,7 @@
     {/if}
     <nav
         class:active={dropdown}
-        class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
+        class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left
         bg-white dark:bg-gray-800
             border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700"
     >
@@ -182,7 +181,7 @@
             {#each items as item}
                 <button
                     class="relative flex items-center p-4 w-full whitespace-nowrap
-                        {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
+                        {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-600 dark:focus:bg-opacity-20"
                     id={item[valueKey]}

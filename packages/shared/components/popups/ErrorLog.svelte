@@ -3,7 +3,7 @@
     import { errorLog } from '@core/error'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
-    import { setClipboard } from '@lib/utils'
+    import { setClipboard } from '@core/utils'
 
     function handleClearClick(): () => void {
         errorLog.set([])

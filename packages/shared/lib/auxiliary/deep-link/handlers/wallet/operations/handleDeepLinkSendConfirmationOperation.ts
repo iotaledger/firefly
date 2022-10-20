@@ -1,5 +1,7 @@
 import { get } from 'svelte/store'
+
 import { networkHrp } from '@core/network'
+import { isStringTrue, getByteLengthOfString } from '@core/utils'
 import {
     getAssetById,
     INewTransactionDetails,
@@ -20,8 +22,6 @@ import {
     UnknownAssetError,
 } from '../../../errors'
 import { getRawAmountFromSearchParam } from '../../../utils'
-import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
-import { isStringTrue } from '@core/utils'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)

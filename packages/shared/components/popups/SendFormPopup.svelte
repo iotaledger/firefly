@@ -4,7 +4,7 @@
     import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { Button, Text, RecipientInput, AssetAmountInput, OptionalInput, FontWeight } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
+    import { getByteLengthOfString } from '@core/utils'
 
     let { asset, rawAmount, unit, recipient, metadata, tag } = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput
