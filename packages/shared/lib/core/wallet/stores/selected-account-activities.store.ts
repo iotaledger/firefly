@@ -1,4 +1,6 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
+import { isValidIrc30 } from '@core/token'
+
 import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../types/activity.type'
 import {
@@ -14,7 +16,6 @@ import { ActivityFilter } from '../interfaces/filter/filter.interface'
 import { getAssetFromPersistedAssets, getFormattedAmountFromActivity } from '../utils'
 import { isVisibleActivity } from '../utils/isVisibleActivity'
 import { allAccountActivities } from './all-account-activities.store'
-import { isValidIRC30 } from '@lib/utils/isValidIRC30'
 
 export const selectedAccountActivities: Readable<Activity[]> = derived(
     [selectedAccount, allAccountActivities],
@@ -105,7 +106,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
             const asset = _activity.type !== ActivityType.Nft && getAssetFromPersistedAssets(_activity.assetId)
-            const hasValidAsset = _activity.type === ActivityType.Nft || (asset && isValidIRC30(asset.metadata))
+            const hasValidAsset = _activity.type === ActivityType.Nft || (asset && isValidIrc30(asset.metadata))
             return (
                 !_activity.isHidden &&
                 hasValidAsset &&

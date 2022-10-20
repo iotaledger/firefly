@@ -1,9 +1,7 @@
 import onboardingFeatures from './onboarding.features'
-import developerToolsFeatures from './developer-tools.features'
 
 const features = {
     onboarding: onboardingFeatures,
-    developerTools: developerToolsFeatures,
     settings: {
         enabled: false,
         general: {
@@ -96,10 +94,7 @@ const features = {
         sendAndReceive: {
             enabled: false,
         },
-        assets: {
-            enabled: false,
-        },
-        activityHistory: {
+        activity: {
             enabled: false,
             sync: {
                 enabled: false,
@@ -108,12 +103,18 @@ const features = {
                 enabled: false,
             },
         },
-    },
-    governance: {
-        enabled: false,
-    },
-    collectibles: {
-        enabled: false,
+        tokens: {
+            enabled: true,
+            search: {
+                enabled: false,
+            },
+        },
+        governance: {
+            enabled: false,
+        },
+        collectibles: {
+            enabled: false,
+        },
     },
 }
 

@@ -1,5 +1,6 @@
 import { Icon } from '../enums'
 import {
+    ACTIVITY_SVG,
     ALIAS_SVG,
     ARROW_LEFT_SVG,
     ARROW_RIGHT_SVG,
@@ -106,6 +107,7 @@ import {
 import { VERIFICATION_STATUS_OFFICIAL } from '../svgs/verification-status-official.svg'
 
 export const ICON_SVG = {
+    [Icon.Activity]: ACTIVITY_SVG,
     [Icon.Alias]: ALIAS_SVG,
     [Icon.ArrowLeft]: ARROW_LEFT_SVG,
     [Icon.ArrowRight]: ARROW_RIGHT_SVG,

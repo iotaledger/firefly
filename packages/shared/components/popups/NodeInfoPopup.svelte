@@ -5,7 +5,7 @@
     import { INode, INodeInfo } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
-    import { resolveObjectPath, setClipboard } from 'shared/lib/utils'
+    import { resolveObjectPath, setClipboard } from '@core/utils'
     import { getNodeInfo } from '@core/profile-manager'
 
     enum NodeInfoTab {

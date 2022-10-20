@@ -14,7 +14,7 @@ import {
     DateFilterOption,
     DateUnit,
 } from '../enums'
-import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@lib/utils/dateUtils'
+import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@core/utils'
 import { ActivityFilter } from '../interfaces'
 import { convertToRawAmount } from '.'
 import Big from 'big.js'

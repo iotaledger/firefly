@@ -28,6 +28,8 @@
     import ManageAccountPopup from './ManageAccountPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
+    import MintNftFormPopup from './MintNftFormPopup.svelte'
+    import MintNftConfirmationPopup from './MintNftConfirmationPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
@@ -114,6 +116,8 @@
         tokenInformation: TokenInformationPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,
         mintNativeTokenConfirmation: MintNativeTokenConfirmationPopup,
+        mintNftForm: MintNftFormPopup,
+        mintNftConfirmation: MintNftConfirmationPopup,
         faucetRequest: FaucetRequestPopup,
         enableLedgerBlindSigning: EnableLedgerBlindSigningPopup,
         testDeepLinkForm: TestDeepLinkFormPopup,

@@ -7,6 +7,7 @@
     export let value: string = ''
     export let classes: string = ''
     export let containerClasses: string = ''
+    export let inputClasses: string = ''
     export let style: string = ''
     export let label: string = ''
     export let placeholder: string = ''
@@ -146,7 +147,9 @@
                     {maxlength}
                     class="w-full text-{alignment}
                         bg-white dark:bg-gray-800
-                        {disabled ? 'text-gray-400 dark:text-gray-700' : 'text-gray-800 dark:text-white'}"
+                        {disabled
+                        ? 'text-gray-400 dark:text-gray-700'
+                        : 'text-gray-800 dark:text-white'} {inputClasses}"
                     class:floating-active={value && label}
                     on:input={handleInput}
                     on:keypress={onKeyPress}
