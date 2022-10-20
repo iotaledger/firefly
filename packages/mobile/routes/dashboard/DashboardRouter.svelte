@@ -16,14 +16,12 @@
     <div class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
         <div class="px-5 py-6">
             <TopBar />
-            {#if features?.wallet?.balance?.enabled}
-                <div class="flex justify-center w-full mt-5">
-                    <TogglableAmountLabel
-                        amount={$selectedAccount.balances?.baseCoin?.available}
-                        tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
-                    />
-                </div>
-            {/if}
+            <div class="flex justify-center w-full mt-5">
+                <TogglableAmountLabel
+                    amount={$selectedAccount.balances?.baseCoin?.available}
+                    tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
+                />
+            </div>
             {#if features?.wallet?.sendAndReceive?.enabled}
                 <div class="flex flex-row items-center justify-center w-full space-x-2 mt-8">
                     <Button classes="w-1/2 h-10">

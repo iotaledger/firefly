@@ -88,9 +88,6 @@ const features = {
     },
     wallet: {
         enabled: false,
-        balance: {
-            enabled: false,
-        },
         profileActions: {
             enabled: false,
         },
