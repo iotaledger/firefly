@@ -63,7 +63,7 @@
     }
 </script>
 
-<SelectorInput labelLocale="general.recipient" bind:value bind:inputElement bind:modal {disabled}>
+<SelectorInput labelLocale="general.recipient" bind:value bind:inputElement bind:modal bind:error {disabled}>
     <RecipientAccountSelector
         bind:modal
         bind:selected={selectedAccount}

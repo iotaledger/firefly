@@ -1,10 +1,10 @@
 <script lang="typescript">
-    import { TopBar } from '../../components'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile } from '@core/profile'
     import features from '../../features/features'
+    import { TabPane, TopBar } from '../../../mobile/components'
     import { activeWalletTab, WALLET_TAB_COMPONENT } from '../../lib/contexts/wallet'
     import { Button, TogglableAmountLabel } from 'shared/components'
     import { TabNavigator } from './wallet/tabs'
@@ -35,9 +35,9 @@
         </div>
         {#if activeWalletTabComponent}
             <div class="relative flex flex-col flex-auto w-full">
-                <div class="flex-auto">
+                <TabPane>
                     <svelte:component this={WALLET_TAB_COMPONENT[$activeWalletTab]} />
-                </div>
+                </TabPane>
                 <TabNavigator />
             </div>
         {/if}
