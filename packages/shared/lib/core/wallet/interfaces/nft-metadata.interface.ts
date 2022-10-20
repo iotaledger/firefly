@@ -1,8 +1,9 @@
+import { TokenStandard } from '../enums'
 import { MimeType } from '../types'
 
 export interface INftMetadata {
     id: string
-    standard: string
+    standard: TokenStandard
     version: string
     type: MimeType
     uri: string

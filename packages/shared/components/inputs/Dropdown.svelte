@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text, Error } from 'shared/components'
+    import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
     import { DropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
@@ -16,11 +16,19 @@
     export let error = ''
     export let classes = ''
     export let autofocus = false
-    export let valueTextType = 'p'
-    export let itemTextType = 'p'
     export let showBorderWhenClosed = true
     export let isFocused = false
     export let enableTyping = false
+
+    // Text Props
+    export let type = TextType.p
+    export let fontSize = '12'
+    export let lineHeight = '120'
+    export let fontWeight: FontWeight = FontWeight.normal
+
+    let textProps: TextPropTypes
+    $: textProps = { type, fontSize, lineHeight, fontWeight }
+    $: placeholderColor = value ? '' : 'gray-500'
 
     export let onSelect: (..._: DropdownChoice[]) => void
 
@@ -146,7 +154,7 @@
         bind:this={divContainer}
     >
         <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
-            <Text classes="overflow-hidden" type={valueTextType} smaller>
+            <Text color="{placeholderColor}," darkColor={placeholderColor} {...textProps} classes="overflow-hidden">
                 {search || value || placeholder || ''}
             </Text>
         </div>
@@ -180,8 +188,7 @@
                     on:click={() => onSelect(item)}
                     on:focus={() => focusItem(item[valueKey])}
                     tabindex={dropdown ? 0 : -1}
-                    class:active={item[valueKey] === value}
-                    ><Text type={itemTextType} smaller>{item[valueKey]}</Text></button
+                    class:active={item[valueKey] === value}><Text {...textProps}>{item[valueKey]}</Text></button
                 >
             {/each}
         </div>
