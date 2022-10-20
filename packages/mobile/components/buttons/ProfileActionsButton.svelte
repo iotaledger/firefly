@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
     import { activeProfile } from '@core/profile'
     import { getInitials } from '@lib/helpers'
 
