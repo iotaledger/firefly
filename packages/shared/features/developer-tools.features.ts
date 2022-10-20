@@ -3,7 +3,10 @@ const developerToolsFeatures = {
     faucet: {
         enabled: true,
     },
-    minting: {
+    mintNft: {
+        enabled: true,
+    },
+    mintNativeTokens: {
         enabled: true,
     },
     alias: {

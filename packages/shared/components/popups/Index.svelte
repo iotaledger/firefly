@@ -28,6 +28,7 @@
     import ManageAccountPopup from './ManageAccountPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
+    import MintNftFormPopup from './MintNftFormPopup.svelte'
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
@@ -111,6 +112,7 @@
         sendForm: SendFormPopup,
         manageAccount: ManageAccountPopup,
         tokenInformation: TokenInformationPopup,
+        mintNftForm: MintNftFormPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,
         mintNativeTokenConfirmation: MintNativeTokenConfirmationPopup,
         faucetRequest: FaucetRequestPopup,

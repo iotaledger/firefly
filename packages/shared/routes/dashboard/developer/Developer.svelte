@@ -4,6 +4,7 @@
     import {
         FaucetRequestButton,
         MintNativeTokenButton,
+        MintNftButton,
         CreateAliasButton,
         Pane,
         RefreshTokenMetadataButton,
@@ -29,7 +30,10 @@
                     {#if features.developerTools.alias.enabled}
                         <CreateAliasButton />
                     {/if}
-                    {#if features.developerTools.minting.enabled}
+                    {#if features.developerTools.mintNft.enabled}
+                        <MintNftButton />
+                    {/if}
+                    {#if features.developerTools.mintNativeTokens.enabled}
                         <MintNativeTokenButton />
                     {/if}
                     {#if features.developerTools.refreshTokens.enabled}
