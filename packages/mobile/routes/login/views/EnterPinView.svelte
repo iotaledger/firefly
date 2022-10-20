@@ -5,8 +5,8 @@
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '../../../lib/core/router'
     import { Platform } from '@lib/platform'
-    import { openPopup, popupState } from '@lib/popup'
-    import { validatePinFormat } from '@lib/utils'
+    import { openPopup, popupState } from '@auxiliary/popup'
+    import { isValidPin } from '@core/utils'
     import { Icon, PinInput, Profile, Text, TextType } from 'shared/components'
     import { onDestroy } from 'svelte'
 
@@ -34,7 +34,7 @@
 
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
-        if (validatePinFormat(pinCode)) {
+        if (isValidPin(pinCode)) {
             void onSubmitClick()
         }
     }

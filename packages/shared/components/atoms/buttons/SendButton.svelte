@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { resetLedgerPreparedOutput, resetShowInternalVerificationPopup } from '@core/ledger'
     import { resetNewTransactionDetails, selectedSendOptionIndex } from '@core/wallet'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import { appSettings } from '@core/app'
     import { Text, FontWeight, TextType, Icon, Modal } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'

@@ -1,7 +1,7 @@
-import { IAccountMetadata } from '@core/account'
+import type { IAccountMetadata } from '@core/account'
 import { get, writable } from 'svelte/store'
 import { INITIAL_ACTIVE_PROFILE } from '../constants'
-import { IProfile, IProfileSettings } from '../interfaces'
+import type { IProfile, IProfileSettings } from '../interfaces'
 
 export const activeProfile = writable<IProfile>(<IProfile>INITIAL_ACTIVE_PROFILE)
 

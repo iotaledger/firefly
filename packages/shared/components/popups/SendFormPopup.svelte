@@ -11,9 +11,9 @@
         FontWeight,
         NetworkInput,
     } from 'shared/components'
-    import { closePopup, openPopup } from '@lib/popup'
-    import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
-    import { DestinationNetwork } from '@core/network'
+    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { getByteLengthOfString } from '@core/utils'
+    import type { DestinationNetwork } from '@core/network'
 
     let { asset, rawAmount, unit, recipient, metadata, tag } = get(newTransactionDetails)
     let assetAmountInput: AssetAmountInput

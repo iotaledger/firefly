@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { updateActivityDataByActivityId } from '../stores'
 import { hiddenActivities } from '../stores/hidden-activities.store'
 import { localize } from '@core/i18n'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 import { ActivityType } from '../enums'
 import { activeProfileId } from '@core/profile'
 

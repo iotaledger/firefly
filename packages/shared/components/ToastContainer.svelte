@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { Toast } from 'shared/components'
     import { mobile } from '@core/app'
-    import { displayNotifications } from 'shared/lib/notifications'
+    import { notifications } from '@auxiliary/notification'
     import { fade } from 'svelte/transition'
     import Alert from './Alert.svelte'
 
-    $: toasts = $displayNotifications.map((notification) => ({
+    $: toasts = $notifications.map((notification) => ({
         type: notification.type,
         alert: notification.alert,
         message: notification.message,

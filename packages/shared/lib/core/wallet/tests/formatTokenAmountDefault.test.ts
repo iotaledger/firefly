@@ -87,4 +87,14 @@ describe('File: formatTokenAmountDefault.ts', () => {
         const formattedAmount = formatTokenAmountDefault(amount, decimalToken, unit)
         expect(formattedAmount).toEqual('12')
     })
+    it('should return the normal string amount if unit is undefined', () => {
+        const amount = 12
+        const newToken = {
+            name: 'WEN',
+            decimals: 4,
+            unit: 'soon',
+        }
+        const formattedAmount = formatTokenAmountDefault(amount, newToken)
+        expect(formattedAmount).toEqual('0.0012')
+    })
 })

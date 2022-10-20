@@ -9,7 +9,7 @@
         toggleDisabledNodeInClientOptions,
         togglePrimaryNodeInClientOptions,
     } from '@core/network'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
 
     export let node: INode

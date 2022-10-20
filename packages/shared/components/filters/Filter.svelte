@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { TogglableButton, FilterModal, FilterItem, Modal } from 'shared/components'
     import type { Filter } from '@core/wallet/interfaces/filter/filter.interface'
-    import { deepCopy } from '@lib/utils'
+    import { deepCopy } from '@core/utils'
     import type { Writable } from 'svelte/store'
 
     export let filterStore: Writable<Filter>

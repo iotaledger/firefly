@@ -1,8 +1,8 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
-    import { showAppNotification } from '@lib/notifications'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
 
     function refreshTokenMetadata(): void {

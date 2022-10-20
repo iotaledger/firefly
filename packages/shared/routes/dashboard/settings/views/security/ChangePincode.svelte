@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Platform } from '@lib/platform'
-    import { PIN_LENGTH } from '@lib/utils'
+    import { PIN_LENGTH } from '@core/utils'
 
     let currentPincode = ''
     let newPincode = ''

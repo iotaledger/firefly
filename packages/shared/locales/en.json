@@ -908,11 +908,24 @@
             "title": "Unable to mint",
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
         },
+        "mintNftForm": {
+            "title": "Mint simple NFT",
+            "inputs": {
+                "type": "Type",
+                "uri": "URI",
+                "name": "Name",
+                "collectionId" : "Collection Id",
+                "collectionName": "Collection Name",
+                "royalties": "Royalties",
+                "issuerName": "Issuer Name",
+                "description": "Description",
+                "attributes": "Attributes"
+            }
+        },
         "faucetRequest": {
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
-
     },
     "charts": {
         "incomingMi": "Incoming {value}",
@@ -1071,6 +1084,7 @@
         "backup": "Backup",
         "mint": "Mint",
         "mintNativeToken": "Mint native token",
+        "mintNft": "Mint NFT",
         "verifyToken": "Verify token",
         "unverifyToken": "Unverify token",
         "hideToken": "Hide token",
@@ -1278,6 +1292,7 @@
         "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "mintNftDescription": "Mint NFT following IRC27 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
@@ -1424,6 +1439,9 @@
         },
         "mintNativeToken": {
             "success": "Native token minting transaction sent"
+        },
+        "mintNft": {
+            "success": "NFT minting transaction sent"
         },
         "refreshTokenMetadata": {
             "success": "All token metadata has been reset and refreshed"
@@ -1660,6 +1678,14 @@
             "description": "IRC30 optional parameter: The human-readable description of the token.",
             "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
             "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+        },
+        "mintNftForm": {
+            "collectionId" : "Optional parameter: UTXO string of the collection NFT that minted this NFT",
+            "collectionName": "Optional parameter: The collection's name",
+            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
+            "issuerName": "Optional parameter: The name of the creator",
+            "description": "Optional parameter: A description of the NFT",
+            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT"
         }
     },
     "exports": {

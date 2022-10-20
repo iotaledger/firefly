@@ -11,7 +11,7 @@
     import { INode } from '@core/network'
     import { destroyProfileManager, getNodeInfo } from '@core/profile-manager'
     import { networkSetupRouter } from '@core/router'
-    import { showAppNotification } from '@lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
 
     let nodeConfigurationForm: NodeConfigurationForm
     let node: INode

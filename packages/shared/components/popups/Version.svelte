@@ -15,7 +15,7 @@
     } from '@core/app'
     import { Platform } from 'shared/lib/platform'
     import { formatDate, localize } from '@core/i18n'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     let hasAutoUpdate = true
     let isPreRelease = true
