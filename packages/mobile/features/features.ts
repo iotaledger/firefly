@@ -108,7 +108,7 @@ const features = {
         },
     },
     tokens: {
-        enabled: false,
+        enabled: true,
     },
     activity: {
         enabled: false,

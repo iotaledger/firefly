@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
+    import { TabPane } from '../../../mobile/components'
     import { activeWalletTab, WALLET_TAB_COMPONENT } from '../../lib/contexts/wallet'
     import { TabNavigator } from './wallet/tabs'
 
@@ -11,9 +12,9 @@
         <div class="w-full h-18">BALANCE PLACEHOLDER</div>
         {#if activeWalletTabComponent}
             <div class="relative flex flex-col flex-auto w-full">
-                <div class="flex-auto">
+                <TabPane>
                     <svelte:component this={WALLET_TAB_COMPONENT[$activeWalletTab]} />
-                </div>
+                </TabPane>
                 <TabNavigator />
             </div>
         {/if}
