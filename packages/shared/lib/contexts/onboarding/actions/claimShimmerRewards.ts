@@ -9,7 +9,7 @@ import {
     resetNewTransactionDetails,
     setNewTransactionDetails,
 } from '@core/wallet'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 import type { Transaction } from '@iota/wallet'
 
 import { ShimmerClaimingAccountState } from '../enums'

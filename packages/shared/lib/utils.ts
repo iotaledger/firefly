@@ -1,7 +1,7 @@
 import { Bech32 } from 'shared/lib/bech32'
 import { Platform } from 'shared/lib/platform'
 import { formatDate, localize } from '@core/i18n'
-import { showAppNotification } from 'shared/lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 import validUrl from 'valid-url'
 import { Event } from './typings/events'
 

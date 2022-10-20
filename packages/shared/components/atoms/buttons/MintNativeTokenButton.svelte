@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
     import { selectedAccount } from '@core/account'
 

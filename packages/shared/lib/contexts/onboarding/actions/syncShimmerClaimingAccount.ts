@@ -9,7 +9,7 @@ import { shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../
 import { setTotalUnclaimedShimmerRewards } from '@contexts/onboarding'
 import { formatTokenAmountBestMatch } from '@core/wallet'
 import { BASE_TOKEN, NetworkProtocol } from '@core/network'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 
 export async function syncShimmerClaimingAccount(account: IAccount): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)

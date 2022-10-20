@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { openPopup } from 'shared/lib/popup'
+    import { openPopup } from '@auxiliary/popup'
 
     function handleErrorLogClick(): void {
         openPopup({ type: 'errorLog' })

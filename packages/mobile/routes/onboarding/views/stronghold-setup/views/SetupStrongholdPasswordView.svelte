@@ -12,7 +12,7 @@
         shimmerClaimingProfileManager,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { showAppNotification } from '@lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
 
     const title = localize('views.onboarding.strongholdSetup.setupStrongholdPassword.title')

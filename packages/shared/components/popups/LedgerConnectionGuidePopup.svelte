@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { LedgerAnimation, Button, Link, Text } from 'shared/components'
     import { Platform } from 'shared/lib/platform'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
 
     let stepIndex = 0

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     export let title: string
     export let description: string = ''

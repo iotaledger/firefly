@@ -2,19 +2,26 @@
     import { KeyValueBox, AmountBox, SubjectBox, ActivityInclusionStatusPill } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountPrecise, Subject, InclusionState, IPersistedAsset } from '@core/wallet'
+    import {
+        formatTokenAmountPrecise,
+        Subject,
+        InclusionState,
+        IPersistedAsset,
+        formatTokenAmountDefault,
+    } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
 
     export let asset: IPersistedAsset
     export let inclusionState: InclusionState
     export let formattedFiatValue: string = null
-    export let amount: string = null
+    export let rawAmount: string = null
     export let unit: string
     export let storageDeposit = 0
     export let giftedStorageDeposit = 0
     export let subject: Subject = null
     export let transactionTime: Date = null
 
+    $: amount = formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit)
     $: formattedTransactionTime = formatDate(transactionTime, { dateStyle: 'long', timeStyle: 'medium' })
     $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
 

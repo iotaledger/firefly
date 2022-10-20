@@ -4,7 +4,7 @@
     import { activeAccounts, visibleActiveAccounts } from '@core/profile'
     import { deleteAccount } from '@core/profile-manager'
     import { Icon } from '@lib/auxiliary/icon'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import { HR, MenuItem, Modal, ToggleHiddenAccountMenuItem } from 'shared/components'
 
     export let modal: Modal = undefined

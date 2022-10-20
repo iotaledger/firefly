@@ -9,7 +9,7 @@
         NotVerifiedStatus,
         ActivityAsyncStatus,
     } from '@core/wallet'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import {
         ClickableTile,
         TransactionActivityTileContent,
