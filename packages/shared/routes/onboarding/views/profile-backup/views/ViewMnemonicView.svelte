@@ -9,7 +9,7 @@
         generateMnemonicForOnboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { downloadRecoveryKit } from '@lib/utils'
+    import { downloadRecoveryKit } from '@core/utils'
 
     const busy = false
     let hide = true

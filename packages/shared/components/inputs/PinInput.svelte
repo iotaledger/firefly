@@ -2,7 +2,7 @@
     import { Error, Icon, Text } from 'shared/components'
     import { createEventDispatcher, onMount } from 'svelte'
     import { mobile, PlatformOption, platform } from '@core/app'
-    import { validatePinFormat, PIN_LENGTH } from '@lib/utils'
+    import { isValidPin, PIN_LENGTH } from '@core/utils'
 
     const dispatch = createEventDispatcher()
     const isAndroid = $platform === PlatformOption.Android
@@ -82,7 +82,7 @@
         if (event.key === KEYBOARD.BACKSPACE) {
             handleBackspace()
         } else if (event.key === KEYBOARD.ENTER) {
-            if (validatePinFormat(inputs.join(''))) {
+            if (isValidPin(inputs.join(''))) {
                 dispatch('submit')
             }
         } else if (event.key === KEYBOARD.TAB) {

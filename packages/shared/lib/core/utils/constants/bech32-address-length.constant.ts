@@ -1,0 +1,1 @@
+export const BECH32_ADDRESS_LENGTH = 60
