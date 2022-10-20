@@ -1,4 +1,4 @@
-import type { NotificationData } from '@lib/typings/notification'
+import type { INotificationData } from '@auxiliary/notification'
 
 import type { DeepLinkContext, WalletOperation } from '../enums'
 import type { SendOperationParameters } from './wallet-context.type'
@@ -20,5 +20,5 @@ export type DeepLinkRequest = {
     context: DeepLinkContext
     operation: DeepLinkOperation
     parameters: DeepLinkParameters
-    notification: NotificationData
+    notification: INotificationData
 }

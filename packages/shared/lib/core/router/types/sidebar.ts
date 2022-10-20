@@ -1,5 +1,5 @@
 import { DashboardRoute } from '@core/router'
-import { NotificationType } from 'shared/lib/typings/notification'
+import { NotificationType } from '@auxiliary/notification'
 
 export type SidebarTab = {
     icon: string
