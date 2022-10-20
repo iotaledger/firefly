@@ -1,65 +1,50 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
-    import { mintNativeToken, mintTokenDetails, TokenStandard } from '@core/wallet'
-    import { closePopup, openPopup } from '@auxiliary/popup'
-    import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
+    import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
+    import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
+    import { mintNft, mintNftDetails } from '@core/wallet'
+    import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
+    import { openPopup, closePopup } from '@lib/popup'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const {
-        name: tokenName,
-        totalSupply,
-        circulatingSupply,
-        decimals,
-        symbol,
-        description,
-        url,
-        logoUrl,
-        aliasId,
-    } = $mintTokenDetails
+    const { type, uri, name, collectionId, collectionName, issuerName, description, attribute } = $mintNftDetails
 
     $: isTransferring = $selectedAccount.isTransferring
 
-    let detailsList: { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
+    let detailsList: { [key: string]: { data: unknown; tooltipText?: string; isCopyable?: boolean } } = {}
     $: detailsList = {
-        ...(aliasId && {
-            alias: { data: aliasId, isCopyable: true },
+        ...(name && {
+            name: { data: name },
         }),
-        ...(tokenName && {
-            tokenName: { data: tokenName },
+        ...(type && {
+            type: { data: type },
         }),
-        ...(totalSupply && {
-            totalSupply: { data: String(totalSupply) },
+        ...(uri && {
+            uri: { data: uri, isCopyable: true },
         }),
-        ...(decimals && {
-            decimals: { data: String(decimals) },
+        ...(collectionId && {
+            collectionId: { data: collectionId },
         }),
-        ...(symbol && {
-            symbol: { data: symbol },
+        ...(collectionName && {
+            collectionName: { data: collectionName },
         }),
-        ...(url && {
-            url: { data: url },
+        ...(issuerName && {
+            issuerName: { data: issuerName },
         }),
-        ...(logoUrl && {
-            logoUrl: { data: logoUrl },
+        ...(description && {
+            description: { data: description },
+        }),
+        ...(attribute && {
+            attribute: { data: attribute },
         }),
     }
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNativeToken(Number(totalSupply), Number(circulatingSupply), {
-                standard: TokenStandard.IRC30,
-                name: tokenName,
-                symbol,
-                decimals: Number(decimals),
-                ...(description && { description }),
-                ...(url && { url }),
-                ...(logoUrl && { logoUrl }),
-            })
+            await mintNft()
             closePopup()
         } catch (reason) {
             handleError(reason.error)
@@ -69,7 +54,7 @@
     function handleBack(): void {
         closePopup()
         openPopup({
-            type: 'mintNativeTokenForm',
+            type: 'mintNftForm',
             overflow: true,
         })
     }
@@ -93,15 +78,14 @@
 
 <div class="space-y-6">
     <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
-        {localize('popups.mintNativeToken.confirmationTitle')}
+        {localize('popups.mintNftForm.title')}
     </Text>
-
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
         {#if Object.entries(detailsList).length > 0}
             <details-list class="flex flex-col space-y-2">
                 {#each Object.entries(detailsList) as [key, value]}
                     <KeyValueBox
-                        keyText={localize(`popups.mintNativeToken.property.${key}`)}
+                        keyText={localize(`popups.mintNftForm.inputs.${key}`)}
                         valueText={value.data}
                         isCopyable={value.isCopyable}
                     />

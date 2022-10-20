@@ -1,11 +1,9 @@
 <script lang="typescript">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
-    import { mintNft, setMintNftDetails, mintNftDetails } from '@core/wallet'
-    import { closePopup } from '@lib/popup'
+    import { setMintNftDetails, mintNftDetails } from '@core/wallet'
+    import { closePopup, openPopup } from '@lib/popup'
     import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
-    import { selectedAccount } from '@core/account'
     import { DropdownChoice } from '@core/utils'
 
     let { type, uri, name, collectionId, collectionName, issuerName, description, attribute } = $mintNftDetails
@@ -17,8 +15,6 @@
     let typeError: string = ''
     $: type, (typeError = '')
 
-    $: isTransferring = $selectedAccount.isTransferring
-
     let error: BaseError
     const nftTypeOptions: DropdownChoice[] = [
         { label: 'image/jpeg', value: 'image/jpeg' },
@@ -28,42 +24,27 @@
         { label: 'text/plain', value: 'text/plain' },
     ]
 
-    async function mintAction(): Promise<void> {
-        // TODO: implement
-        await mintNft()
-    }
-
     function handleCancel() {
         closePopup()
     }
 
-    async function handleMint() {
-        error = null
+    function handleContinue() {
         const valid = validate()
         if (valid) {
-            try {
-                setMintNftDetails({
-                    type,
-                    uri,
-                    name,
-                    collectionId,
-                    collectionName,
-                    issuerName,
-                    description,
-                    attribute,
-                })
-                await checkActiveProfileAuth(mintAction, { stronghold: true, ledger: false })
-            } catch (reason) {
-                if (!error) {
-                    error = reason.error
-                        ? new BaseError({
-                              message: reason.error ?? reason.message,
-                              logToConsole: true,
-                              saveToErrorLog: true,
-                          })
-                        : reason
-                }
-            }
+            setMintNftDetails({
+                type,
+                uri,
+                name,
+                collectionId,
+                collectionName,
+                issuerName,
+                description,
+                attribute,
+            })
+            openPopup({
+                type: 'mintNftConfirmation',
+                overflow: true,
+            })
         }
     }
 
@@ -144,11 +125,11 @@
     </div>
 
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={isTransferring} onClick={handleCancel}>
+        <Button outline classes="w-full" onClick={handleCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" disabled={isTransferring} onClick={handleMint} isBusy={isTransferring}>
-            {localize('actions.mint')}
+        <Button classes="w-full" onClick={handleContinue}>
+            {localize('actions.continue')}
         </Button>
     </div>
 </div>
