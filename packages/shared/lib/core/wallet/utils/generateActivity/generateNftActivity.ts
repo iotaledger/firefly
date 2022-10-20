@@ -1,14 +1,6 @@
 import { IProcessedTransaction, INftMetadata } from '../../interfaces'
-import {
-    getNftOutputFromTransaction,
-    getRecipientFromOutput,
-    isSubjectInternal,
-    getSenderFromInputs,
-    getSenderFromTransaction,
-    convertHexAddressToBech32,
-    outputContainsValue,
-} from '..'
-import { ActivityDirection, ActivityType } from '@core/wallet/enums'
+import { getNftOutputFromTransaction, convertHexAddressToBech32, outputContainsValue } from '..'
+import { ActivityType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_NFT, NEW_NFT_ID, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
 import type { IMetadataFeature, INftOutput } from '@iota/types'
@@ -19,16 +11,7 @@ import { Blake2b } from '@iota/crypto.js'
 import { getSendingInformation } from './helper'
 
 export function generateNftActivity(processedTransaction: IProcessedTransaction, account: IAccountState): NftActivity {
-    const {
-        outputs,
-        isIncoming,
-        claimingData,
-        transactionInputs,
-        detailedTransactionInputs,
-        time,
-        inclusionState,
-        transactionId,
-    } = processedTransaction
+    const { outputs, claimingData, transactionInputs, time, inclusionState, transactionId } = processedTransaction
     const wrappedOutput = getNftOutputFromTransaction(outputs)
     const outputId = wrappedOutput.outputId
     const output = wrappedOutput.output as INftOutput
@@ -45,22 +28,11 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
     const giftedStorageDeposit = 0
     const metadata = getMetadataFromNft(output)
 
-    const recipient = getRecipientFromOutput(output)
-    const sender = detailedTransactionInputs
-        ? getSenderFromInputs(detailedTransactionInputs)
-        : getSenderFromTransaction(isIncoming, account.depositAddress, output)
-
-    const subject = isIncoming ? sender : recipient
-    const isInternal = isSubjectInternal(subject)
-
-    const direction = isIncoming ? ActivityDirection.Incoming : ActivityDirection.Outgoing
-
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
     return {
         type: ActivityType.Nft,
-        direction,
         id,
         transactionId,
         outputId,
@@ -73,12 +45,8 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
         inputs,
         inclusionState,
         immutableFeatures: output.type === OUTPUT_TYPE_NFT ? output.immutableFeatures : [],
-        isInternal,
         storageDeposit,
         metadata,
-        sender,
-        recipient,
-        subject,
         ...sendingInfo,
         ...asyncData,
     }
