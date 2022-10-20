@@ -1,4 +1,4 @@
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
 import { Platform } from '@lib/platform'
 
