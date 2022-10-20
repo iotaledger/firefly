@@ -8,7 +8,7 @@
         updateNewNftTransactionDetails,
     } from '@core/wallet'
     import { Button, Text, RecipientInput, NftInput, FontWeight } from 'shared/components'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import type { FeatureTypes } from '@iota/types'
 
     let { nftId, recipient } = get(newNftTransactionDetails)

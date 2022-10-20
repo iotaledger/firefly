@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Modal, NftSelector, SelectorInput } from 'shared/components'
 
-    export let nftId: string
+    export let nftId: string = ''
     export let error: string = ''
 
     let inputElement: HTMLInputElement = undefined
