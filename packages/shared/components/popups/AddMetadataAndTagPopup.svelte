@@ -32,10 +32,10 @@
     }
 
     function isValidMetadataAndTag(): boolean {
-        const validMetadata = getByteLengthOfString(metadata) >= 8192
+        const validMetadata = getByteLengthOfString(metadata) <= 8192
         metadataError = validMetadata ? '' : localize('error.send.metadataTooLong')
 
-        const validTag = getByteLengthOfString(tag) >= 64
+        const validTag = getByteLengthOfString(tag) <= 64
         tagError = validTag ? '' : localize('error.send.tagTooLong')
 
         return validMetadata && validTag
