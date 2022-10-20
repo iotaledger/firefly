@@ -1,6 +1,9 @@
 <script lang="typescript">
     import { onMount, createEventDispatcher, tick } from 'svelte'
-    import { Text, InputContainer, TextPropTypes, TextType } from 'shared/components'
+    import { fade } from 'svelte/transition'
+    import { Text, InputContainer, TextPropTypes, TextType, Tooltip, FontWeight, Icon } from 'shared/components'
+    import { Position } from 'shared/components/Tooltip.svelte'
+    import { Icon as IconEnum } from '@auxiliary/icon'
     import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from '@lib/currency'
     import { localize } from '@core/i18n'
 
@@ -29,6 +32,10 @@
     export let alignment: 'left' | 'right' | 'center' | 'justify' = 'left'
     export let textProps: TextPropTypes = { type: TextType.p, fontSize: '11', lineHeight: '140' }
     export let hasFocus = false
+
+    export let infoIcon: Icon = undefined
+    export let description: string = ''
+    export let isDescriptionVisible: boolean = false
 
     const dispatch = createEventDispatcher()
     const allDecimalSeparators = getAllDecimalSeparators()
@@ -120,6 +127,14 @@
         }
     }
 
+    function onInfoMouseEnter(): void {
+        isDescriptionVisible = true
+    }
+
+    function onInfoMouseLeave(): void {
+        isDescriptionVisible = false
+    }
+
     onMount(async () => {
         if (autofocus) {
             await tick()
@@ -172,6 +187,34 @@
                 >
             {/if}
             <slot />
+            {#if description}
+                <icon-container bind:this={infoIcon} on:mouseenter={onInfoMouseEnter} on:mouseleave={onInfoMouseLeave}>
+                    <Icon
+                        icon={IconEnum.Info}
+                        classes="cursor-default {disabled
+                            ? 'text-gray-400 dark:text-gray-700'
+                            : 'text-gray-800 dark:text-gray-500'}"
+                        width={16}
+                        height={16}
+                    />
+                </icon-container>
+            {/if}
+            {#if isDescriptionVisible}
+                <tooltip-container transition:fade={{ duration: 100 }}>
+                    <Tooltip anchor={infoIcon} position={Position.Right}>
+                        <Text
+                            bigger
+                            type={TextType.h5}
+                            fontWeight={FontWeight.medium}
+                            classes="text-left mb-2"
+                            color="gray-900"
+                        >
+                            {label}
+                        </Text>
+                        <Text smaller classes="text-left" color="gray-700" lineHeight="leading-140">{description}</Text>
+                    </Tooltip>
+                </tooltip-container>
+            {/if}
         </InputContainer>
     </div>
     {#if capsLockWarning && hasFocus && capsLockOn}
