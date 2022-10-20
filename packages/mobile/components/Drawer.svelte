@@ -8,19 +8,19 @@
     let panelHeight
     let touchStartY
 
-    function onTouchStart(event) {
+    function onTouchStart(event): void {
         moving = true
         touchStartY = event.touches[0].pageY
     }
 
-    function onTouchMove(event) {
+    function onTouchMove(event): void {
         if (moving && event.targetTouches.length === 1) {
             const touchY = event.touches[0].pageY
             panelBottom = Math.min(touchStartY - touchY, 0)
         }
     }
 
-    function onTouchEnd() {
+    function onTouchEnd(): void {
         moving = false
         if (panelBottom < -panelHeight / 3) {
             onClose()
