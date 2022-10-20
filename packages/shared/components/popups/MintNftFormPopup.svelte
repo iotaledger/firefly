@@ -1,12 +1,16 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { setMintNftDetails, mintNftDetails } from '@core/wallet'
+    import { setMintNftDetails, mintNftDetails, MimeType, TokenStandard } from '@core/wallet'
+    import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup } from '@lib/popup'
     import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
-    import { DropdownChoice } from '@core/utils'
 
-    let { type, uri, name, collectionId, collectionName, issuerName, description, attribute } = $mintNftDetails
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
+
+    let { type, uri, name, collectionId, collectionName, royalties, issuerName, description, attributes } =
+        $mintNftDetails
 
     let nameError: string = ''
     $: name, (nameError = '')
@@ -16,7 +20,8 @@
     $: type, (typeError = '')
 
     let error: BaseError
-    const nftTypeOptions: DropdownChoice[] = [
+
+    const nftTypeOptions: { label: MimeType; value: MimeType }[] = [
         { label: 'image/jpeg', value: 'image/jpeg' },
         { label: 'image/png', value: 'image/png' },
         { label: 'image/gif', value: 'image/gif' },
@@ -32,14 +37,18 @@
         const valid = validate()
         if (valid) {
             setMintNftDetails({
+                id: undefined,
+                standard: TokenStandard.IRC27,
+                version: undefined,
                 type,
                 uri,
                 name,
                 collectionId,
                 collectionName,
+                royalties,
                 issuerName,
                 description,
-                attribute,
+                attributes,
             })
             openPopup({
                 type: 'mintNftConfirmation',
@@ -48,14 +57,22 @@
         }
     }
 
-    function handleSelectNftType(item: DropdownChoice) {
+    function handleSelectNftType(item: { label: MimeType; value: MimeType }) {
         type = item.value
     }
 
     function validate(): boolean {
-        // TODO: implement
+        // TODO: implement validation
         return true
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            handleError(error)
+        }
+    })
 </script>
 
 <div class="space-y-6">
@@ -101,6 +118,12 @@
                 fontSize="14"
             />
             <OptionalInput
+                bind:value={royalties}
+                label={localize('popups.mintNftForm.inputs.royalties')}
+                description={localize('tooltips.mintNftForm.royalties')}
+                fontSize="14"
+            />
+            <OptionalInput
                 bind:value={issuerName}
                 label={localize('popups.mintNftForm.inputs.issuerName')}
                 description={localize('tooltips.mintNftForm.issuerName')}
@@ -113,9 +136,9 @@
                 fontSize="14"
             />
             <OptionalInput
-                bind:value={attribute}
-                label={localize('popups.mintNftForm.inputs.attribute')}
-                description={localize('tooltips.mintNftForm.attribute')}
+                bind:value={attributes}
+                label={localize('popups.mintNftForm.inputs.attributes')}
+                description={localize('tooltips.mintNftForm.attributes')}
                 fontSize="14"
             />
         </optional-inputs>

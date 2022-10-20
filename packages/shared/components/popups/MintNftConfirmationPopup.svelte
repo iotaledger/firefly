@@ -3,14 +3,15 @@
     import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
-    import { mintNft, mintNftDetails, TokenStandard } from '@core/wallet'
+    import { mintNft, mintNftDetails } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { openPopup, closePopup } from '@lib/popup'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const { type, uri, name, collectionId, collectionName, issuerName, description, attribute } = $mintNftDetails
+    const { standard, type, uri, name, collectionId, collectionName, royalties, issuerName, description, attributes } =
+        $mintNftDetails
 
     $: isTransferring = $selectedAccount.isTransferring
 
@@ -31,29 +32,35 @@
         ...(collectionName && {
             collectionName: { data: collectionName },
         }),
+        ...(royalties && {
+            royalties: { data: royalties },
+        }),
         ...(issuerName && {
             issuerName: { data: issuerName },
         }),
         ...(description && {
             description: { data: description },
         }),
-        ...(attribute && {
-            attribute: { data: attribute },
+        ...(attributes && {
+            attribute: { data: attributes },
         }),
     }
 
     async function mintAction(): Promise<void> {
         try {
             await mintNft({
-                standard: TokenStandard.IRC27,
+                id: undefined,
+                standard,
+                version: undefined,
                 name,
                 type,
                 uri,
                 ...(collectionId && { collectionId }),
                 ...(collectionName && { collectionName }),
+                ...(royalties && { royalties }),
                 ...(issuerName && { issuerName }),
                 ...(description && { description }),
-                ...(attribute && { attribute }),
+                ...(attributes && { attributes }),
             })
             closePopup()
         } catch (reason) {

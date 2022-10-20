@@ -9,8 +9,9 @@ import { localize } from '@core/i18n'
 import { Activity } from '../classes'
 import { preprocessTransaction } from '../utils'
 import { Converter } from '@lib/converter'
+import { INftMetadata } from '../interfaces'
 
-export async function mintNft(metadata: Record<string, unknown>): Promise<void> {
+export async function mintNft(metadata: INftMetadata): Promise<void> {
     try {
         updateSelectedAccount({ isTransferring: true })
         const account = get(selectedAccount)

@@ -916,9 +916,10 @@
                 "name": "Name",
                 "collectionId" : "Collection Id",
                 "collectionName": "Collection Name",
+                "royalties": "Royalties",
                 "issuerName": "Issuer Name",
                 "description": "Description",
-                "attribute": "Attribute"
+                "attributes": "Attributes"
             }
         },
         "faucetRequest": {
@@ -1680,9 +1681,10 @@
         "mintNftForm": {
             "collectionId" : "Optional parameter: UTXO string of the collection NFT that minted this NFT",
             "collectionName": "Optional parameter: The collection's name",
+            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
             "issuerName": "Optional parameter: The name of the creator",
             "description": "Optional parameter: A description of the NFT",
-            "attribute": "Optional parameter: An array of traits and values that define attributes of the NFT"
+            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT"
         }
     },
     "exports": {
