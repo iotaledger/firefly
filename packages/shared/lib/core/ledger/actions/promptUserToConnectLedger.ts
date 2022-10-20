@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { popupState } from '@lib/popup'
+import { popupState } from '@auxiliary/popup'
 
 import { openLedgerNotConnectedPopup } from '../utils'
 

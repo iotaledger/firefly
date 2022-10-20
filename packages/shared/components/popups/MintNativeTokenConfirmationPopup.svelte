@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { mintNativeToken, mintTokenDetails, TokenStandard } from '@core/wallet'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
@@ -24,7 +24,7 @@
 
     $: isTransferring = $selectedAccount.isTransferring
 
-    let detailsList: { [key in string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
+    let detailsList: { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
     $: detailsList = {
         ...(aliasId && {
             alias: { data: aliasId, isCopyable: true },

@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { closePopup } from '@lib/popup'
+import { closePopup } from '@auxiliary/popup'
 
 import { appRouter, AppRouter } from './app-router'
 import { collectiblesRouter, CollectiblesRouter } from './collectibles-router'

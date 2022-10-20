@@ -1,4 +1,4 @@
-import { INotificationManager } from '@lib/typings/notificationManager'
+import { INotificationManager } from '@auxiliary/notification'
 
 /**
  * Create and show a native notification

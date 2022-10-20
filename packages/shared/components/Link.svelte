@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
-    import { bindEvents } from 'shared/lib/utils'
+    import { bindEvents } from '@core/utils'
 
     export let events = []
     export let href = undefined

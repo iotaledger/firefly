@@ -1,4 +1,4 @@
-import { IFoundryOutput } from '@iota/types'
+import type { IFoundryOutput } from '@iota/types'
 
 export function getMetadataFromFoundryOutput(foundry: IFoundryOutput): string {
     if (foundry?.immutableFeatures?.length > 0) {

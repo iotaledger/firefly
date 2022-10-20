@@ -2,8 +2,8 @@
     import { Button, Text } from 'shared/components'
     import { errorLog } from '@core/error'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@lib/popup'
-    import { setClipboard } from '@lib/utils'
+    import { closePopup } from '@auxiliary/popup'
+    import { setClipboard } from '@core/utils'
 
     function handleClearClick(): () => void {
         errorLog.set([])

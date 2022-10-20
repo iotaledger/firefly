@@ -11,13 +11,9 @@
     import { localize } from '@core/i18n'
     import { pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { ProfileType } from '@core/profile'
-    import { storageProtectionSetupRouter } from '../../../../../lib/core/router'
-    import { validatePinFormat } from '@lib/utils'
+    import { isValidPin } from '@core/utils'
     import { onMount } from 'svelte'
-
     export let busy = false
-
-    const title = localize('views.onboarding.storageProtectionSetup.setupPinProtection.title')
 
     let setPinInput = ''
     let setPinInputError = ''
@@ -31,7 +27,7 @@
     $: setPinInput, (setPinInputError = '')
     $: confirmPinInput, (confirmPinInputError = '')
     $: arePinInputsMatching = setPinInput === confirmPinInput
-    $: arePinInputsValid = validatePinFormat(setPinInput) && validatePinFormat(confirmPinInput)
+    $: arePinInputsValid = isValidPin(setPinInput) && isValidPin(confirmPinInput)
     $: if (arePinInputsValid && !arePinInputsMatching) {
         confirmPinInputError = localize('error.pincode.match')
     } else {

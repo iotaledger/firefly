@@ -15,7 +15,7 @@
         ProfileRecoveryRouter,
         ProfileRecoveryRoute,
     } from '@core/router'
-    import { showAppNotification } from '@lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
 
     setContext<ProfileRecoveryRouter>('importRouter', $profileRecoveryRouter)
     $profileRecoveryRouter.resetRoute()

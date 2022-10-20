@@ -3,7 +3,7 @@
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { Button, Error, Text, FontWeight, TextType } from 'shared/components'
 
     let isBusy = false

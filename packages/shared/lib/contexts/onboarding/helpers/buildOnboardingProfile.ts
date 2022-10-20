@@ -1,5 +1,5 @@
 import { NetworkProtocol } from '@core/network'
-import { generateRandomId } from '@lib/utils'
+import { generateRandomId } from '@core/utils'
 
 import { IOnboardingProfile } from '../interfaces'
 

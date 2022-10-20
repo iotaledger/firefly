@@ -22,7 +22,7 @@
     import { localize } from '@core/i18n'
     import { showInternalVerificationPopup } from '@core/ledger'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
 
     export let activityId: string
     export let data: ITransactionActivityData

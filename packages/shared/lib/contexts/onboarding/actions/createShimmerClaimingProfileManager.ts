@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import { getSecretManagerFromProfileType, initialiseProfileManager } from '@core/profile-manager'
-import { generateRandomId } from '@lib/utils'
+import { generateRandomId } from '@core/utils'
 
 import { getShimmerClaimingProfileManagerStorageDirectory } from '../helpers'
 import { shimmerClaimingProfileManager, onboardingProfile } from '../stores'

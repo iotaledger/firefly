@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
 

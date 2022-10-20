@@ -4,7 +4,7 @@ import { MOCK_MNEMONIC, ProfileManagerMock } from '@mocks/profile-manager.mock'
 
 import { get } from 'svelte/store'
 
-import { generateRandomId } from '@lib/utils'
+import { generateRandomId } from '@core/utils'
 
 import { destroyProfileManager } from '../actions'
 import {

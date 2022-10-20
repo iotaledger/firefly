@@ -13,7 +13,7 @@
         UNLOCK_CONDITION_GOVERNOR_ADDRESS,
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
     } from '@core/wallet'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { BASE_TOKEN } from '@core/network'
     import { handleError } from '@core/error/handlers/handleError'
