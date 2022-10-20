@@ -63,16 +63,16 @@
             bind:value={metadata}
             error={metadataError}
             label={localize('general.metadata')}
-            placeholder={localize('general.metadata')}
-            description={localize('tooltips.optionalInput')}
+            placeholder={localize('general.metadata') + ` (${localize('general.optional')})`}
+            description={localize('tooltips.transactionDetails.outgoing.metadata')}
         />
         <TextInput
             bind:this={tagInput}
             bind:value={tag}
             error={tagError}
             label={localize('general.tag')}
-            placeholder={localize('general.tag')}
-            description={localize('tooltips.optionalInput')}
+            placeholder={localize('general.tag') + ` (${localize('general.optional')})`}
+            description={localize('tooltips.transactionDetails.outgoing.tag')}
         />
     </add-optional-metadata-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
