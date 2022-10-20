@@ -4,7 +4,7 @@
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
     import { selectedAccount, sumBalanceForAccounts } from '@core/account'
     import { formatTokenAmountBestMatch } from '@core/wallet'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import { AccountSwitcherMenuItem } from 'shared/components/molecules'
     import { HR, Icon, Modal, Text } from 'shared/components'
     import { tick } from 'svelte'

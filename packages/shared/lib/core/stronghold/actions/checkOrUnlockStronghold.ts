@@ -1,6 +1,6 @@
 import { BaseError } from '@core/error'
 import { isStrongholdUnlocked } from '@core/profile-manager'
-import { openPopup, popupState } from '@lib/popup'
+import { openPopup, popupState } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 
 export async function checkOrUnlockStronghold(

@@ -6,7 +6,7 @@
     import { activeProfile } from '@core/profile'
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     export let onCancel: () => void
     export let onContinue: () => void

@@ -2,7 +2,7 @@
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { setMintTokenDetails, mintTokenDetails, selectedAccountActivities, ActivityType } from '@core/wallet'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import {
         Button,
         Error,

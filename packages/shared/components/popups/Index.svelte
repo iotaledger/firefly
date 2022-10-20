@@ -2,7 +2,7 @@
     import { mobile, PlatformOption, platform } from '@core/app'
     import { Drawer, Icon } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
-    import { closePopup, popupState } from 'shared/lib/popup'
+    import { closePopup, popupState } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
 

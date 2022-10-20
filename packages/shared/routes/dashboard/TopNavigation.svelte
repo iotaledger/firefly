@@ -12,7 +12,7 @@
         settingsRouter,
     } from '@core/router'
     import { AccountSwitcher, Icon, Text } from 'shared/components'
-    import { popupState } from 'shared/lib/popup'
+    import { popupState } from '@auxiliary/popup'
 
     export let classes = ''
 

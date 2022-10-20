@@ -2,7 +2,7 @@ import { selectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { FAUCET_URLS } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 import { get } from 'svelte/store'
 
 export async function requestTokensFromFaucet(): Promise<void> {

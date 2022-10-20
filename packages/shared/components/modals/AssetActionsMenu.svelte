@@ -11,7 +11,7 @@
         VerifiedStatus,
     } from '@core/wallet'
     import { Icon } from '@lib/auxiliary/icon'
-    import { updatePopupProps } from '@lib/popup'
+    import { updatePopupProps } from '@auxiliary/popup'
     import { HR, MenuItem, Modal } from 'shared/components'
 
     export let modal: Modal = undefined

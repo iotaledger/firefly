@@ -9,7 +9,7 @@
         NotVerifiedStatus,
         VerifiedStatus,
     } from '@core/wallet'
-    import { openPopup, updatePopupProps } from '@lib/popup'
+    import { openPopup, updatePopupProps } from '@auxiliary/popup'
     import { AssetIcon, Button, Text, TextHint, AssetActionsButton, KeyValueBox, FontWeight } from 'shared/components'
 
     export let asset: IAsset

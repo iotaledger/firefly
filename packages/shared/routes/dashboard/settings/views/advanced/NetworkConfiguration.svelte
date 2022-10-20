@@ -11,7 +11,7 @@
         toggleLocalPowInClientOptions,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { Button, Checkbox, HR, Text, NodeListTable, ButtonSize } from 'shared/components'
 
     let nodesContainer: HTMLElement

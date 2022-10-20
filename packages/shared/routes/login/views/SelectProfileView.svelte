@@ -6,7 +6,7 @@
     import { loadPersistedProfileIntoActiveProfile, profiles, ProfileType } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
 
     function onContinueClick(id: string): void {
         loadPersistedProfileIntoActiveProfile(id)

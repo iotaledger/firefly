@@ -15,7 +15,7 @@
         ProfileSetupType,
         isOnboardingLedgerProfile,
     } from '@contexts/onboarding'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
 
     let isBusy = false
 

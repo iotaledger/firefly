@@ -1,6 +1,6 @@
 import { ActivityAsyncStatus, ActivityType, InclusionState } from '@core/wallet/enums'
 import { addClaimedActivity, allAccountActivities } from '@core/wallet/stores'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
 import { updateFromPartialActivity } from '@core/wallet/utils/generateActivity/helper'
 

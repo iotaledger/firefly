@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { updateActivityByActivityId } from '../stores'
 import { hiddenActivities } from '../stores/hidden-activities.store'
 import { localize } from '@core/i18n'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 import { activeProfileId } from '@core/profile'
 
 export function rejectActivity(id: string): void {

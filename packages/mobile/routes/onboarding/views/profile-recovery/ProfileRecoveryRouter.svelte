@@ -3,7 +3,7 @@
     import { ImportMnemonicPhraseView, SuccessView } from './views'
     import { localize } from '@core/i18n'
     import { profileRecoveryRoute, profileRecoveryRouter, ProfileRecoveryRoute } from '../../../../lib/core/router'
-    import { showAppNotification } from '@lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
 
     let busy = false
     let error = ''
