@@ -1,6 +1,6 @@
 import { activeProfile, IPersistedProfile, updateActiveProfile } from '@core/profile'
 import { DEFAULT_ACTIVE_PROFILE_VALUE } from '@core/profile/constants/default-active-profile-values.constant'
-import { migrateObjects } from '@lib/utils'
+import { migrateObjects } from '@core/utils'
 import { get } from 'svelte/store'
 
 // TODO: Fix this function does not seem to be migrating optional properties, at least on nested objects

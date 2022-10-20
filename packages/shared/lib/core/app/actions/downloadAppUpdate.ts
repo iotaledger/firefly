@@ -5,8 +5,8 @@ import {
     showAppNotification,
     updateDisplayNotification,
     updateDisplayNotificationProgress,
-} from '@lib/notifications'
-import { NotificationData } from '@lib/typings/notification'
+} from '@auxiliary/notification'
+import { INotificationData } from '@auxiliary/notification'
 import { Platform } from '@lib/platform'
 
 import { installAppUpdate } from '../utils'
@@ -108,7 +108,7 @@ export function downloadAppUpdate(): void {
         unsubscribeMinutesRemaining()
     }
 
-    const downloadingNotification: NotificationData = {
+    const downloadingNotification: INotificationData = {
         type: 'info',
         message: localize('notifications.downloadingUpdate'),
         progress: 0,

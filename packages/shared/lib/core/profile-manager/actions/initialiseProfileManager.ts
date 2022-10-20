@@ -1,6 +1,6 @@
 import { ClientOptions, CoinType, SecretManager } from '@iota/wallet'
 
-import { generateRandomId } from '@lib/utils'
+import { generateRandomId } from '@core/utils'
 
 import { api } from '../api'
 import { IProfileManager } from '../interfaces'

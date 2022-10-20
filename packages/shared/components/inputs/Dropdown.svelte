@@ -1,9 +1,8 @@
 <script lang="typescript">
-    import { Icon, Text, Error } from 'shared/components'
+    import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
     import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
-    import { isNumberLetterOrPunctuation } from '@lib/utils/isNumberLetterOrPunctuation'
-    import { DropdownChoice } from '@core/utils'
+    import { DropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
 
     export let value: string
     export let label: string = ''
@@ -17,11 +16,19 @@
     export let error = ''
     export let classes = ''
     export let autofocus = false
-    export let valueTextType = 'p'
-    export let itemTextType = 'p'
     export let showBorderWhenClosed = true
     export let isFocused = false
     export let enableTyping = false
+
+    // Text Props
+    export let type = TextType.p
+    export let fontSize = '12'
+    export let lineHeight = '120'
+    export let fontWeight: FontWeight = FontWeight.normal
+
+    let textProps: TextPropTypes
+    $: textProps = { type, fontSize, lineHeight, fontWeight }
+    $: placeholderColor = value ? '' : 'gray-500'
 
     export let onSelect: (..._: DropdownChoice[]) => void
 
@@ -147,7 +154,7 @@
         bind:this={divContainer}
     >
         <div class="w-full text-12 leading-140 text-gray-800 dark:text-white">
-            <Text classes="overflow-hidden" type={valueTextType} smaller>
+            <Text color="{placeholderColor}," darkColor={placeholderColor} {...textProps} classes="overflow-hidden">
                 {search || value || placeholder || ''}
             </Text>
         </div>
@@ -166,7 +173,7 @@
     {/if}
     <nav
         class:active={dropdown}
-        class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left 
+        class="absolute w-full overflow-hidden pointer-events-none opacity-0 z-10 text-left
         bg-white dark:bg-gray-800
             border border-solid border-blue-500 border-t-gray-500 dark:border-t-gray-700"
     >
@@ -174,15 +181,14 @@
             {#each items as item}
                 <button
                     class="relative flex items-center p-4 w-full whitespace-nowrap
-                        {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'} 
+                        {item[valueKey] === value && 'bg-gray-100 dark:bg-gray-700 dark:bg-opacity-20'}
                         hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:bg-opacity-20
                         focus:bg-gray-200 dark:focus:bg-gray-600 dark:focus:bg-opacity-20"
                     id={item[valueKey]}
                     on:click={() => onSelect(item)}
                     on:focus={() => focusItem(item[valueKey])}
                     tabindex={dropdown ? 0 : -1}
-                    class:active={item[valueKey] === value}
-                    ><Text type={itemTextType} smaller>{item[valueKey]}</Text></button
+                    class:active={item[valueKey] === value}><Text {...textProps}>{item[valueKey]}</Text></button
                 >
             {/each}
         </div>

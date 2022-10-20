@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
     import { Subject } from '@core/wallet'
-    import { ADDRESS_LENGTH, validateBech32Address } from '@lib/utils'
+    import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils'
     import { Modal, RecipientAccountSelector, SelectorInput } from 'shared/components'
 
     export let recipient: Subject
@@ -46,10 +46,10 @@
             return Promise.resolve()
         }
 
-        if (value.length !== ADDRESS_LENGTH + addressPrefix.length) {
+        if (value.length !== BECH32_ADDRESS_LENGTH + addressPrefix.length) {
             error = localize('error.send.addressLength', {
                 values: {
-                    length: ADDRESS_LENGTH + addressPrefix.length,
+                    length: BECH32_ADDRESS_LENGTH + addressPrefix.length,
                 },
             })
         } else {
@@ -63,7 +63,7 @@
     }
 </script>
 
-<SelectorInput labelLocale="popups.mintNativeToken.property.alias" bind:value bind:inputElement bind:modal {disabled}>
+<SelectorInput labelLocale="general.recipient" bind:value bind:inputElement bind:modal {disabled}>
     <RecipientAccountSelector
         bind:modal
         bind:selected={selectedAccount}

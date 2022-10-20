@@ -24,7 +24,7 @@
 
     $: isTransferring = $selectedAccount.isTransferring
 
-    let detailsList: { [key in string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
+    let detailsList: { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
     $: detailsList = {
         ...(aliasId && {
             alias: { data: aliasId, isCopyable: true },

@@ -2,7 +2,7 @@
     import { ButtonSize, ButtonVariant, HTMLButtonType, Icon, Spinner } from 'shared/components'
     import { onMount } from 'svelte'
     import { appSettings } from '@core/app'
-    import { bindEvents, debounce } from '@lib/utils'
+    import { bindEvents, debounce } from '@core/utils'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import type { Event } from '@lib/typings/events'
 

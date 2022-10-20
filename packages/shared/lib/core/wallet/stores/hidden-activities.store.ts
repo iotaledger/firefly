@@ -1,7 +1,7 @@
 import { activeProfileId } from '@core/profile'
 import { persistent } from '@lib/helpers'
 import { get } from 'svelte/store'
-import { IHiddenActivities } from '../interfaces'
+import type { IHiddenActivities } from '../interfaces'
 
 export const hiddenActivities = persistent<IHiddenActivities>('hiddenActivities', {})
 

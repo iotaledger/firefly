@@ -3,7 +3,7 @@
     import { DateTimePicker } from 'shared/components'
     import { localize } from '@core/i18n'
     import { isValidExpirationDateTime } from '@core/utils'
-    import { showAppNotification } from '@lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
 
     export let value: Date
 

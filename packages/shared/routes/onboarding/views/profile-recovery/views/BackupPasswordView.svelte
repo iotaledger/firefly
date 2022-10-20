@@ -15,7 +15,7 @@
         restoreBackupFromStrongholdFile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { showAppNotification } from '@lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
     import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
 
     export let error = ''

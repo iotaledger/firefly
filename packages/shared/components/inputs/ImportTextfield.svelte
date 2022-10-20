@@ -3,8 +3,8 @@
     import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
     import { verifyMnemonic } from '@core/profile-manager'
-    import { debounce } from '@lib/utils'
-    import { Mnemonic } from '../../lib/contexts/onboarding'
+    import { debounce } from '@core/utils'
+    import { Mnemonic } from '@contexts/onboarding'
 
     enum Type {
         Seed = 'seed',

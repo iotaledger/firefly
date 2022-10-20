@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import type { IAccountState } from '@core/account'
 import { convertToFiat, formatCurrency } from '@lib/currency'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import {

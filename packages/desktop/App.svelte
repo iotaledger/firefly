@@ -15,7 +15,7 @@
     import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings } from '@core/app'
     import { Electron } from '@lib/electron'
     import { addError } from '@core/error'
-    import { showAppNotification } from '@lib/notifications'
+    import { showAppNotification } from '@auxiliary/notification'
     import { openPopup, popupState } from '@auxiliary/popup'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
