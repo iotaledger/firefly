@@ -1,5 +1,5 @@
 import { writable, Writable } from 'svelte/store'
-import { DateDiff } from './typings/wallet'
+import { DateDifference } from './typings/dateDifference'
 
 /**
  * Update application path
@@ -127,7 +127,7 @@ export const truncateString = (
  * @param firstDate: first date to compare
  * @param secondDate: second sate to compare
  */
-export const diffDates = (firstDate: Date, secondDate: Date): DateDiff => {
+export const diffDates = (firstDate: Date, secondDate: Date): DateDifference => {
     if (!(firstDate instanceof Date) || !(secondDate instanceof Date)) {
         return null
     }
