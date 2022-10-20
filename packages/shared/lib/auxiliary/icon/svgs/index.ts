@@ -1,3 +1,4 @@
+export * from './activity.svg'
 export * from './alias.svg'
 export * from './arrow-left.svg'
 export * from './arrow-right.svg'

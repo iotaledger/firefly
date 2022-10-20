@@ -1715,7 +1715,9 @@
     "tabs": {
         "wallet": "Wallet",
         "collectibles": "Collectibles",
-        "developer": "Developer"
+        "developer": "Developer",
+        "tokens": "Tokens",
+        "activity": "Activity"
     },
     "pills": {
         "stake": {
