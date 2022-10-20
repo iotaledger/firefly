@@ -119,6 +119,18 @@ const features = {
     collectibles: {
         enabled: false,
     },
+    balance: {
+        enabled: false,
+    },
+    profileActions: {
+        enabled: false,
+    },
+    accountSwitcher: {
+        enabled: false,
+    },
+    accountActions: {
+        enabled: false,
+    },
 }
 
 export default features
