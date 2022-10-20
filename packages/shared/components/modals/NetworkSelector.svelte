@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { activeProfile } from '@core/profile'
-    import { DestinationNetwork, NETWORK_ADDRESS } from '@core/network'
+    import { DestinationNetwork, NETWORK_ADDRESSES } from '@core/network'
     import { truncateString } from '@lib/helpers'
     import { Modal, Text, TextType } from 'shared/components'
     import { fade } from 'svelte/transition'
@@ -27,7 +27,7 @@
                 >
                     <Text type={TextType.pre} fontSize="sm" color="gray-800">{network}</Text>
                     <Text type={TextType.pre} fontSize="sm" color="gray-600">
-                        {truncateString(NETWORK_ADDRESS[$activeProfile.networkType][network], 6, 6)}
+                        {truncateString(NETWORK_ADDRESSES[$activeProfile.networkType][network], 6, 6)}
                     </Text>
                 </button>
             {/each}

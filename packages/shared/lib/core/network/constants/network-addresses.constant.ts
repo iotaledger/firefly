@@ -1,6 +1,6 @@
 import { DestinationNetwork, NetworkType } from '../enums'
 
-export const NETWORK_ADDRESS: Readonly<{ [key in NetworkType]?: { [key in DestinationNetwork]?: string } }> = {
+export const NETWORK_ADDRESSES: Readonly<{ [key in NetworkType]?: { [key in DestinationNetwork]?: string } }> = {
     [NetworkType.Mainnet]: {
         [DestinationNetwork.Shimmer]: '-',
         [DestinationNetwork.ShimmerEvm]: 'TO_DO',
