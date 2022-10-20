@@ -11,12 +11,10 @@
         <div class="w-full h-18">BALANCE PLACEHOLDER</div>
         {#if activeWalletTabComponent}
             <div class="relative flex flex-col flex-auto w-full">
-                <div class="z-0 flex-auto">
+                <div class="flex-auto">
                     <svelte:component this={WALLET_TAB_COMPONENT[$activeWalletTab]} />
                 </div>
-                <div class="z-10">
-                    <TabNavigator />
-                </div>
+                <TabNavigator />
             </div>
         {/if}
     </div>
