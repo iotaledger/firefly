@@ -23,7 +23,7 @@
 
     function onReview(): void {
         if (isValidMetadataAndTag()) {
-            updateNewTransactionDetails({ metadata, tag })
+            updateNewTransactionDetails({ tag, metadata })
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
@@ -59,20 +59,20 @@
     </Text>
     <add-optional-metadata-form-inputs class="flex flex-col space-y-4">
         <TextInput
-            bind:this={metadataInput}
-            bind:value={metadata}
-            error={metadataError}
-            label={localize('general.metadata')}
-            placeholder={localize('general.metadata') + ` (${localize('general.optional')})`}
-            description={localize('tooltips.transactionDetails.outgoing.metadata')}
-        />
-        <TextInput
             bind:this={tagInput}
             bind:value={tag}
             error={tagError}
             label={localize('general.tag')}
             placeholder={localize('general.tag') + ` (${localize('general.optional')})`}
             description={localize('tooltips.transactionDetails.outgoing.tag')}
+        />
+        <TextInput
+            bind:this={metadataInput}
+            bind:value={metadata}
+            error={metadataError}
+            label={localize('general.metadata')}
+            placeholder={localize('general.metadata') + ` (${localize('general.optional')})`}
+            description={localize('tooltips.transactionDetails.outgoing.metadata')}
         />
     </add-optional-metadata-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
