@@ -4,5 +4,5 @@
     let modal: Modal
 </script>
 
-<MeatballMenuButton onClick={() => {}} includeBackground />
+<MeatballMenuButton onClick={modal?.toggle} includeBackground />
 <AccountActionsMenu bind:modal />

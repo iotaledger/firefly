@@ -2,4 +2,4 @@
     import { MeatballMenuButton } from 'shared/components'
 </script>
 
-<MeatballMenuButton classes="items-center text-gray-500" />
+<MeatballMenuButton onClick={() => {}} classes="items-center text-gray-500" />
