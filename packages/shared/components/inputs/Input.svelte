@@ -191,9 +191,7 @@
                 <icon-container bind:this={infoIcon} on:mouseenter={onInfoMouseEnter} on:mouseleave={onInfoMouseLeave}>
                     <Icon
                         icon={IconEnum.Info}
-                        classes="cursor-default {disabled
-                            ? 'text-gray-400 dark:text-gray-700'
-                            : 'text-gray-800 dark:text-gray-500'}"
+                        classes="cursor-default text-gray-500 dark:text-gray-700"
                         width={16}
                         height={16}
                     />
