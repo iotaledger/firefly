@@ -101,7 +101,7 @@ const features = {
             enabled: false,
         },
         activity: {
-            enabled: false,
+            enabled: true,
             sync: {
                 enabled: false,
             },
