@@ -33,7 +33,7 @@
                         </Button>
                     {/if}
                     {#if features?.wallet?.receive?.enabled}
-                        <Button classes="w-full h-10" on:click={() => $dashboardRouter.goTo(DashboardRoute.Receive)}>
+                        <Button classes="w-full h-10" onClick={() => $dashboardRouter.goTo(DashboardRoute.Receive)}>
                             {localize('actions.receive')}
                         </Button>
                     {/if}
