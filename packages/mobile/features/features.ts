@@ -92,7 +92,7 @@ const features = {
             enabled: false,
         },
         sendAndReceive: {
-            enabled: false,
+            enabled: true,
         },
         assets: {
             enabled: false,
