@@ -25,7 +25,6 @@ export async function mintNft(metadata: INftMetadata): Promise<void> {
         }
 
         const mintNftTransaction = await account.mintNfts([nftOptions], transactionOptions)
-        // QUESTION: do we need a buildPersistedAssetFromIrc27Metadata() then addPersistedAsset()?
         const processedTransaction = preprocessTransaction(mintNftTransaction)
         const activity = new Activity(processedTransaction, account)
 
@@ -36,16 +35,15 @@ export async function mintNft(metadata: INftMetadata): Promise<void> {
             alert: true,
         })
         resetMintNftDetails()
-        updateSelectedAccount({ isTransferring: false })
         return Promise.resolve()
     } catch (reason) {
-        updateSelectedAccount({ isTransferring: false })
-
         const _activeProfile = get(activeProfile)
         if (_activeProfile.type === ProfileType.Ledger) {
             handleLedgerError(reason.error)
         }
 
         return Promise.reject(reason)
+    } finally {
+        updateSelectedAccount({ isTransferring: false })
     }
 }

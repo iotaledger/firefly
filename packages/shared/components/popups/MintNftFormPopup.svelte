@@ -29,11 +29,11 @@
         { label: 'text/plain', value: 'text/plain' },
     ]
 
-    function handleCancel() {
+    function handleCancel(): void {
         closePopup()
     }
 
-    function handleContinue() {
+    function handleContinue(): void {
         const valid = validate()
         if (valid) {
             setMintNftDetails({
@@ -57,7 +57,7 @@
         }
     }
 
-    function handleSelectNftType(item: { label: MimeType; value: MimeType }) {
+    function handleSelectNftType(item: { label: MimeType; value: MimeType }): void {
         type = item.value
     }
 
