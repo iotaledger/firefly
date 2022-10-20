@@ -107,6 +107,12 @@ const features = {
             },
         },
     },
+    tokens: {
+        enabled: false,
+    },
+    activity: {
+        enabled: false,
+    },
     governance: {
         enabled: false,
     },
