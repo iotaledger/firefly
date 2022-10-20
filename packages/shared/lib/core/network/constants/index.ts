@@ -1,6 +1,6 @@
 export * from './base-token.constant'
 export * from './coin-type.constant'
-export * from './destination-network-address.constant'
+export * from './network-address.constant'
 export * from './explorer-urls.constant'
 export * from './faucet-urls.constant'
 export * from './network-health-colours.constant'
