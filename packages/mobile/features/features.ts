@@ -88,7 +88,16 @@ const features = {
     },
     wallet: {
         enabled: false,
-        accountSummary: {
+        balance: {
+            enabled: false,
+        },
+        profileActions: {
+            enabled: false,
+        },
+        accountSwitcher: {
+            enabled: false,
+        },
+        accountActions: {
             enabled: false,
         },
         sendAndReceive: {
@@ -117,18 +126,6 @@ const features = {
         enabled: false,
     },
     collectibles: {
-        enabled: false,
-    },
-    balance: {
-        enabled: false,
-    },
-    profileActions: {
-        enabled: false,
-    },
-    accountSwitcher: {
-        enabled: false,
-    },
-    accountActions: {
         enabled: false,
     },
 }

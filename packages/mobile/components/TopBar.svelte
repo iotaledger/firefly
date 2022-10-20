@@ -4,13 +4,13 @@
 </script>
 
 <div class="flex flex-row justify-between">
-    {#if features?.profileActions?.enabled}
+    {#if features?.wallet?.profileActions?.enabled}
         <ProfileActionsButton />
     {/if}
-    {#if features?.accountSwitcher?.enabled}
+    {#if features?.wallet?.accountSwitcher?.enabled}
         <AccountSwitcher />
     {/if}
-    {#if features?.accountActions?.enabled}
+    {#if features?.wallet?.accountActions?.enabled}
         <AccountActionsButton />
     {/if}
 </div>

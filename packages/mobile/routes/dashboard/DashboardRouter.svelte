@@ -16,7 +16,7 @@
     <div class="flex flex-col w-screen h-screen bg-gray-50 dark:bg-gray-900">
         <div class="px-5 py-6">
             <TopBar />
-            {#if features?.balance?.enabled}
+            {#if features?.wallet?.balance?.enabled}
                 <div class="flex justify-center w-full mt-5">
                     <TogglableAmountLabel
                         amount={$selectedAccount.balances?.baseCoin?.available}
