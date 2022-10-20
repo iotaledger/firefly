@@ -16,6 +16,7 @@
     bind:modal
     {error}
     readonly
+    class="cursor-pointer"
 >
     <NetworkSelector bind:modal bind:selected={network} onClose={() => inputElement.blur()} />
 </SelectorInput>
