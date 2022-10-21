@@ -9,7 +9,7 @@
     $: darkModeEnabled = $appSettings.darkMode
 
     const NAVIGATION_ITEMS: { icon: IconEnum; label: string; tab: WalletTab }[] = [
-        ...(features?.tokens?.enabled
+        ...(features?.wallet?.tokens?.enabled
             ? [
                   {
                       icon: IconEnum.Tokens,
@@ -18,7 +18,7 @@
                   },
               ]
             : []),
-        ...(features?.activity?.enabled
+        ...(features?.wallet?.activity?.enabled
             ? [
                   {
                       icon: IconEnum.Activity,
