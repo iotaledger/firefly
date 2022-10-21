@@ -97,11 +97,14 @@ const features = {
         accountActions: {
             enabled: false,
         },
-        sendAndReceive: {
+        send: {
             enabled: false,
         },
+        receive: {
+            enabled: true,
+        },
         activity: {
-            enabled: false,
+            enabled: true,
             sync: {
                 enabled: false,
             },
