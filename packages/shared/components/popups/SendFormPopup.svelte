@@ -1,10 +1,11 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
+    import { getLayer2TransactionData, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import {
         Button,
         Text,
+        TextInput,
         RecipientInput,
         AssetAmountInput,
         OptionalInput,
@@ -22,6 +23,7 @@
     let tagInput: OptionalInput
 
     let network: DestinationNetwork
+    let layer2Address: string
 
     $: isLayer1Transaction = network === DestinationNetwork.Shimmer
 
@@ -29,6 +31,9 @@
         const valid = await validate()
         if (valid) {
             updateNewTransactionDetails({ asset, rawAmount, unit, recipient, metadata, tag })
+            if (!isLayer1Transaction) {
+                setLayer2TransactionData(network)
+            }
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
@@ -36,11 +41,18 @@
         }
     }
 
+    function setLayer2TransactionData(network: DestinationNetwork): void {
+        const layer2Data = getLayer2TransactionData(network, layer2Address)
+        metadata = layer2Data.metadata
+        recipient = layer2Data.recipient
+        updateNewTransactionDetails({ metadata, recipient })
+    }
+
     async function validate(): Promise<boolean> {
         try {
             await Promise.all([
                 assetAmountInput?.validate(),
-                recipientInput?.validate(),
+                // recipientInput?.validate(),
                 metadataInput?.validate(validateOptionalInput(metadata, 8192, localize('error.send.metadataTooLong'))),
                 tagInput?.validate(validateOptionalInput(tag, 64, localize('error.send.tagTooLong'))),
             ])
@@ -72,7 +84,11 @@
     <send-form-inputs class="flex flex-col space-y-4">
         <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         <NetworkInput bind:network />
-        <RecipientInput bind:this={recipientInput} bind:recipient />
+        {#if isLayer1Transaction}
+            <RecipientInput bind:this={recipientInput} bind:recipient />
+        {:else}
+            <TextInput bind:value={layer2Address} />
+        {/if}
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
                 bind:this={tagInput}
