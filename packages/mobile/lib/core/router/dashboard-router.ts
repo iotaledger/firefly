@@ -8,6 +8,6 @@ export const dashboardRoute = writable<DashboardRoute>(null)
 
 export class DashboardRouter extends Router<DashboardRoute> {
     constructor() {
-        super(DashboardRoute.Wallet, dashboardRoute)
+        super(DashboardRoute.Init, dashboardRoute)
     }
 }

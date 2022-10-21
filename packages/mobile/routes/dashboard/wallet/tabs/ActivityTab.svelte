@@ -1,1 +1,5 @@
-<h1>ActivityTab</h1>
+<script lang="typescript">
+    import { ActivityList } from '../../../../../mobile/components'
+</script>
+
+<ActivityList />
