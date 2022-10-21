@@ -88,17 +88,23 @@ const features = {
     },
     wallet: {
         enabled: false,
-        accountSummary: {
+        profileActions: {
             enabled: false,
         },
-        sendAndReceive: {
+        accountSwitcher: {
             enabled: false,
         },
-        assets: {
+        accountActions: {
             enabled: false,
         },
-        activityHistory: {
+        send: {
             enabled: false,
+        },
+        receive: {
+            enabled: true,
+        },
+        activity: {
+            enabled: true,
             sync: {
                 enabled: false,
             },
@@ -106,18 +112,18 @@ const features = {
                 enabled: false,
             },
         },
-    },
-    tokens: {
-        enabled: false,
-    },
-    activity: {
-        enabled: false,
-    },
-    governance: {
-        enabled: false,
-    },
-    collectibles: {
-        enabled: false,
+        tokens: {
+            enabled: true,
+            search: {
+                enabled: false,
+            },
+        },
+        governance: {
+            enabled: false,
+        },
+        collectibles: {
+            enabled: false,
+        },
     },
 }
 
