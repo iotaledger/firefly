@@ -92,10 +92,13 @@ const features = {
             enabled: false,
         },
         accountSwitcher: {
-            enabled: false,
+            enabled: true,
         },
         accountActions: {
             enabled: false,
+        },
+        createAccount: {
+            enabled: true,
         },
         send: {
             enabled: false,
