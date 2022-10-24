@@ -11,7 +11,7 @@ import {
     convertHexAddressToBech32,
 } from '..'
 import { ActivityType, AliasType } from '@core/wallet/enums'
-import { ADDRESS_TYPE_ALIAS, NEW_ALIAS_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
+import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { OutputTypes } from '@iota/types'
 import { Converter } from '@lib/converter'
 import { Blake2b } from '@iota/crypto.js'
@@ -28,7 +28,7 @@ export function getAliasActivityData(processedTransaction: IProcessedTransaction
     const stateControllerAddress = getStateControllerAddressFromOutput(output)
     const aliasId = getAliasId(output, outputId)
     const aliasType =
-        output.type === OUTPUT_TYPE_ALIAS && output.aliasId === NEW_ALIAS_ID ? AliasType.Created : AliasType.Other
+        output.type === OUTPUT_TYPE_ALIAS && output.aliasId === EMPTY_HEX_ID ? AliasType.Created : AliasType.Other
 
     return {
         type: ActivityType.Alias,
@@ -44,7 +44,7 @@ export function getAliasActivityData(processedTransaction: IProcessedTransaction
 
 function getAliasId(output: OutputTypes, outputId: string): string {
     if (output.type === OUTPUT_TYPE_ALIAS) {
-        const isNewAlias = output.aliasId === NEW_ALIAS_ID
+        const isNewAlias = output.aliasId === EMPTY_HEX_ID
         if (isNewAlias) {
             const hexEncodedOutputId =
                 '0x' + Converter.bytesToHex(Blake2b.sum256(Converter.hexToBytes(outputId.substring(2))))

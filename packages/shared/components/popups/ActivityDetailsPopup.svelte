@@ -31,15 +31,16 @@
     $: isTimelocked =
         activity.data.type === ActivityType.Transaction && activity.data.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
-        activity.data.type === ActivityType.Transaction &&
+        (activity.data.type === ActivityType.Transaction || activity.data.type === ActivityType.Nft) &&
         activity.data.isAsync &&
-        (activity?.data.direction === ActivityDirection.Incoming || activity.data.isSelfTransaction) &&
+        (activity?.data.direction === ActivityDirection.Incoming ||
+            (activity.data.type === ActivityType.Transaction && activity.data.isSelfTransaction)) &&
         activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    let details
+    let details: Record<string, unknown>
     $: activity, (details = getActivityDetails())
 
-    function getActivityDetails(): void {
+    function getActivityDetails(): Record<string, unknown> {
         if (!activity) {
             return {}
         }
@@ -94,7 +95,6 @@
                 ...details,
                 type: activity.type,
                 storageDeposit: activity.data.storageDeposit,
-                giftedStorageDeposit: activity.data.giftedStorageDeposit,
                 metadata: activity.data.metadata,
                 asyncStatus: activity.data.asyncStatus,
                 direction: activity.data.direction,
@@ -193,7 +193,7 @@
     {:else if activity?.data.type === ActivityType.Nft}
         <NftDetails {...details} />
     {/if}
-    {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
+    {#if !isTimelocked && (activity.data.type === ActivityType.Transaction || activity.data.type === ActivityType.Nft) && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
             <Button
                 outline

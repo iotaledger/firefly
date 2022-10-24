@@ -887,6 +887,13 @@
                 "verifyToken": "I verify this token"
             }
         },
+        "sendNft": {
+            "formTitle": "Send NFT",
+            "confirmationTitle": "Confirm sending NFT",
+            "property": {
+                "nft": "NFT"
+            }
+        },
         "mintNativeToken": {
             "formTitle": "Mint native tokens",
             "confirmationTitle": "Mint native tokens",
@@ -1534,6 +1541,7 @@
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
             "noInputs": "No inputs found.",
+            "notEnoughBalance": "Not enough balance.",
             "missingTransactionId": "The transaction ID is missing",
             "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
         },
