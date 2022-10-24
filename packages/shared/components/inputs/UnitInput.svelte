@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Dropdown2, DropdownItem } from 'shared/components'
     import { ITokenMetadata } from '@core/wallet'
-    import { Unit } from '@lib/units'
+    import { IotaUnit } from '@core/utils'
 
     export let unit: string
     export let isFocused: boolean
@@ -24,11 +24,11 @@
     } else if (tokenMetadata?.useMetricPrefix && tokenMetadata?.unit) {
         items = [
             { label: tokenMetadata?.unit, value: tokenMetadata?.unit },
-            { label: Unit.K + tokenMetadata?.unit, value: Unit.K + tokenMetadata?.unit },
-            { label: Unit.M + tokenMetadata?.unit, value: Unit.M + tokenMetadata?.unit },
-            { label: Unit.G + tokenMetadata?.unit, value: Unit.G + tokenMetadata?.unit },
-            { label: Unit.T + tokenMetadata?.unit, value: Unit.T + tokenMetadata?.unit },
-            { label: Unit.P + tokenMetadata?.unit, value: Unit.P + tokenMetadata?.unit },
+            { label: IotaUnit.K + tokenMetadata?.unit, value: IotaUnit.K + tokenMetadata?.unit },
+            { label: IotaUnit.M + tokenMetadata?.unit, value: IotaUnit.M + tokenMetadata?.unit },
+            { label: IotaUnit.G + tokenMetadata?.unit, value: IotaUnit.G + tokenMetadata?.unit },
+            { label: IotaUnit.T + tokenMetadata?.unit, value: IotaUnit.T + tokenMetadata?.unit },
+            { label: IotaUnit.P + tokenMetadata?.unit, value: IotaUnit.P + tokenMetadata?.unit },
         ]
     }
 
