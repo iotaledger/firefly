@@ -28,26 +28,26 @@ export function getLayer2TransactionData(
     metadataStream.writeBytes('allowance', allowance.length, allowance)
 
     metadataStream.writeUInt16('end', 0)
-    const metadata = metadataStream.finalHex()
-
+    const metadata = '0x' + metadataStream.finalHex()
     return { recipient, metadata }
 }
 
 function getSmartContractParameters(address: string): Uint8Array {
     const parameters = new WriteStream()
 
-    const encodedAddress = getEncodedAddress(address)
+    const encodedAddress = getEncodedAddress(address.toLowerCase())
     const smartContractParameters = Object.entries({ a: encodedAddress, c: '255' })
     parameters.writeUInt32('parametersLength', smartContractParameters.length)
 
     for (const parameter of smartContractParameters) {
         const [key, value] = parameter
-        parameters.writeUInt16('keyLength', key.length)
+
         const keyBytes = Converter.utf8ToBytes(key)
+        parameters.writeUInt16('keyLength', key.length)
         parameters.writeBytes('keyBytes', keyBytes.length, keyBytes)
 
-        parameters.writeUInt32('valueLength', value.length)
-        const valueBytes = Converter.utf8ToBytes(value)
+        const valueBytes = Converter.hexToBytes(value)
+        parameters.writeUInt32('valueLength', valueBytes.length)
         parameters.writeBytes('valueBytes', valueBytes.length, valueBytes)
     }
     return parameters.finalBytes()
