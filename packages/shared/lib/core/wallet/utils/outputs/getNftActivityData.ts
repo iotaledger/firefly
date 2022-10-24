@@ -1,32 +1,39 @@
 import { IProcessedTransaction, INftActivityData, INftMetadata } from '../../interfaces'
 import {
-    getStorageDepositFromOutput,
     getNftOutputFromTransaction,
     getRecipientFromOutput,
     isSubjectInternal,
+    getSenderFromTransaction,
+    convertHexAddressToBech32,
     getSubjectFromAddress,
-    getBech32AddressFromAddressTypes,
+    getSenderAddressFromInputs,
 } from '..'
 import { ActivityDirection, ActivityType } from '@core/wallet/enums'
-import { OUTPUT_TYPE_NFT } from '@core/wallet/constants'
+import { ADDRESS_TYPE_NFT, EMPTY_HEX_ID, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
-import type { IMetadataFeature, ISenderFeature, OutputTypes } from '@iota/types'
+import type { IMetadataFeature, INftOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
 import { getAsyncDataFromOutput } from './getAsyncDataFromOutput'
 import { MimeType } from '@core/wallet/types'
+import { Blake2b } from '@iota/crypto.js'
 
 export function getNftActivityData(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): INftActivityData {
-    const { outputs, isIncoming, claimingData, transactionId } = processedTransaction
-    const { output, outputId } = getNftOutputFromTransaction(outputs)
+    const { outputs, isIncoming, claimingData, detailedTransactionInputs, transactionId } = processedTransaction
+    const wrappedOutput = getNftOutputFromTransaction(outputs)
+    const outputId = wrappedOutput.outputId
+    const output = wrappedOutput.output as INftOutput
 
-    const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output) // probably we need to sum up all storage deposits
+    const nftId = getNftId(output, outputId)
+    const storageDeposit = Number(output.amount)
     const metadata = getMetadataFromNft(output)
 
     const recipient = getRecipientFromOutput(output)
-    const sender = getSenderFromNft(output)
+    const sender = detailedTransactionInputs
+        ? getSubjectFromAddress(getSenderAddressFromInputs(detailedTransactionInputs))
+        : getSenderFromTransaction(isIncoming, account.depositAddress, output)
 
     const subject = isIncoming ? sender : recipient
     const isInternal = isSubjectInternal(subject)
@@ -39,9 +46,10 @@ export function getNftActivityData(
         type: ActivityType.Nft,
         direction,
         outputId,
+        nftId,
+        immutableFeatures: output.type === OUTPUT_TYPE_NFT ? output.immutableFeatures : [],
         isInternal,
         storageDeposit,
-        giftedStorageDeposit,
         metadata,
         sender,
         recipient,
@@ -50,46 +58,39 @@ export function getNftActivityData(
     }
 }
 
-function getSenderFromNft(output: OutputTypes) {
-    if (output.type === OUTPUT_TYPE_NFT) {
-        const sender = output.immutableFeatures?.find((feature) => feature.type === 0) as ISenderFeature
-        if (!sender) {
-            return undefined
-        }
-        const address = getBech32AddressFromAddressTypes(sender.address)
-        return getSubjectFromAddress(address)
+function getMetadataFromNft(output: INftOutput): INftMetadata {
+    const metadata = output.immutableFeatures?.find((feature) => feature.type === 2) as IMetadataFeature
+    if (!metadata) {
+        return undefined
     }
-    return undefined
+    const parsedData = JSON.parse(Converter.hexToUtf8(metadata.data))
+
+    // TODO: Add some validation that everything is correct
+    const parsedMetadata: INftMetadata = {
+        id: parsedData.id,
+        standard: parsedData.standard,
+        version: parsedData.version,
+        type: parsedData.type as MimeType,
+        uri: parsedData.uri,
+        name: parsedData.name,
+        collectionId: parsedData.collectionId,
+        collectionName: parsedData.collectionName,
+        royalties: parsedData.royalties,
+        issuerName: parsedData.issuerName,
+        description: parsedData.description,
+        attributes: parsedData.attributes?.map((attribute) => ({
+            trait_type: attribute.trait_type,
+            value: attribute.value,
+        })),
+    }
+
+    return parsedMetadata
 }
 
-function getMetadataFromNft(output: OutputTypes): INftMetadata {
-    if (output.type === OUTPUT_TYPE_NFT) {
-        const metadata = output.immutableFeatures?.find((feature) => feature.type === 2) as IMetadataFeature
-        if (!metadata) {
-            return undefined
-        }
-        const parsedData = JSON.parse(Converter.hexToUtf8(metadata.data))
-
-        // TODO: Add some validation that everything is correct
-        const parsedMetadata: INftMetadata = {
-            id: parsedData.id,
-            standard: parsedData.standard,
-            version: parsedData.version,
-            type: parsedData.type as MimeType,
-            uri: parsedData.uri,
-            name: parsedData.name,
-            collectionId: parsedData.collectionId,
-            collectionName: parsedData.collectionName,
-            royalties: parsedData.royalties,
-            issuerName: parsedData.issuerName,
-            description: parsedData.description,
-            attributes: parsedData.attributes?.map((attribute) => ({
-                trait_type: attribute.trait_type,
-                value: attribute.value,
-            })),
-        }
-
-        return parsedMetadata
-    }
-    return undefined
+function getNftId(output: INftOutput, outputId: string): string {
+    const isNewNft = output.nftId === EMPTY_HEX_ID
+    const nftId = isNewNft
+        ? '0x' + Converter.bytesToHex(Blake2b.sum256(Converter.hexToBytes(outputId.substring(2))))
+        : output.nftId
+    return convertHexAddressToBech32(ADDRESS_TYPE_NFT, nftId)
 }

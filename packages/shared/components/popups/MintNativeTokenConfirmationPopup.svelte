@@ -1,12 +1,21 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
-    import { mintNativeToken, mintTokenDetails, TokenStandard } from '@core/wallet'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import {
+        mintNativeToken,
+        mintTokenDetails,
+        TokenStandard,
+        buildFoundryOutputData,
+        formatTokenAmountPrecise,
+        IIrc30Metadata,
+    } from '@core/wallet'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
     import { onMount } from 'svelte'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
+    import type { IFoundryOutput } from '@iota/types'
+    import { BASE_TOKEN } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -22,12 +31,37 @@
         aliasId,
     } = $mintTokenDetails
 
+    let storageDeposit = '0'
+    let preparedOutput: IFoundryOutput
+
+    let metadata: IIrc30Metadata
+    $: metadata = {
+        standard: TokenStandard.IRC30,
+        name: tokenName,
+        symbol,
+        decimals: Number(decimals),
+        ...(description && { description }),
+        ...(url && { url }),
+        ...(logoUrl && { logoUrl }),
+    }
     $: isTransferring = $selectedAccount.isTransferring
+
+    async function prepareFoundryOutput(): Promise<void> {
+        const outputData = buildFoundryOutputData(Number(totalSupply), Number(circulatingSupply), metadata, aliasId)
+        preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
+        storageDeposit = formatTokenAmountPrecise(
+            Number(preparedOutput.amount) ?? 0,
+            BASE_TOKEN[$activeProfile?.networkProtocol]
+        )
+    }
 
     let detailsList: { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
     $: detailsList = {
         ...(aliasId && {
             alias: { data: aliasId, isCopyable: true },
+        }),
+        ...(storageDeposit && {
+            storageDeposit: { data: storageDeposit },
         }),
         ...(tokenName && {
             tokenName: { data: tokenName },
@@ -51,15 +85,7 @@
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNativeToken(Number(totalSupply), Number(circulatingSupply), {
-                standard: TokenStandard.IRC30,
-                name: tokenName,
-                symbol,
-                decimals: Number(decimals),
-                ...(description && { description }),
-                ...(url && { url }),
-                ...(logoUrl && { logoUrl }),
-            })
+            await mintNativeToken(Number(totalSupply), Number(circulatingSupply), metadata)
             closePopup()
         } catch (reason) {
             handleError(reason.error)
@@ -85,6 +111,7 @@
     onMount(async () => {
         try {
             await _onMount()
+            await prepareFoundryOutput()
         } catch (err) {
             handleError(err.error)
         }
