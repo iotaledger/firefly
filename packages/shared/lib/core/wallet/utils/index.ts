@@ -15,6 +15,7 @@ export * from './getMetadataFromFoundryOutput'
 export * from './getOutputOptions'
 export * from './getSenderAddressFromUnlockCondition'
 export * from './getSubjectFromAddress'
+export * from './hashOutputId'
 export * from './isSubjectInternal'
 export * from './validateIrc30Metadata'
 

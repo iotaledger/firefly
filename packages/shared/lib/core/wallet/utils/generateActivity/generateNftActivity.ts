@@ -1,5 +1,5 @@
 import { IProcessedTransaction, INftMetadata } from '../../interfaces'
-import { getNftOutputFromTransaction, convertHexAddressToBech32, outputContainsValue } from '..'
+import { getNftOutputFromTransaction, convertHexAddressToBech32, outputContainsValue, hashOutputId } from '..'
 import { ActivityType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_NFT, EMPTY_HEX_ID } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
@@ -7,7 +7,6 @@ import type { IMetadataFeature, INftOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
 import { getAsyncDataFromOutput } from '../generateActivity/helper/getAsyncDataFromOutput'
 import { MimeType, NftActivity } from '@core/wallet/types'
-import { Blake2b } from '@iota/crypto.js'
 import { getSendingInformation } from './helper'
 
 export function generateNftActivity(processedTransaction: IProcessedTransaction, account: IAccountState): NftActivity {
@@ -83,8 +82,6 @@ function getMetadataFromNft(output: INftOutput): INftMetadata {
 
 function getNftId(output: INftOutput, outputId: string): string {
     const isNewNft = output.nftId === EMPTY_HEX_ID
-    const nftId = isNewNft
-        ? '0x' + Converter.bytesToHex(Blake2b.sum256(Converter.hexToBytes(outputId.substring(2))))
-        : output.nftId
+    const nftId = isNewNft ? hashOutputId(outputId) : output.nftId
     return convertHexAddressToBech32(ADDRESS_TYPE_NFT, nftId)
 }

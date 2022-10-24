@@ -2,12 +2,10 @@ import { COIN_TYPE } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { IProcessedTransaction } from '../../interfaces'
-import { getNativeTokenFromOutput, convertHexAddressToBech32, outputContainsValue } from '..'
+import { getNativeTokenFromOutput, convertHexAddressToBech32, outputContainsValue, hashOutputId } from '..'
 import { ActivityType, AliasType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { IAliasOutput } from '@iota/types'
-import { Converter } from '@lib/converter'
-import { Blake2b } from '@iota/crypto.js'
 import { AliasActivity } from '@core/wallet/types'
 import {
     getAmountFromOutput,
@@ -75,11 +73,6 @@ export function generateAliasActivity(
 
 function getAliasId(output: IAliasOutput, outputId: string): string {
     const isNewAlias = output.aliasId === EMPTY_HEX_ID
-    if (isNewAlias) {
-        const hexEncodedOutputId =
-            '0x' + Converter.bytesToHex(Blake2b.sum256(Converter.hexToBytes(outputId.substring(2))))
-        return convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexEncodedOutputId)
-    } else {
-        return output.aliasId
-    }
+    const aliasId = isNewAlias ? hashOutputId(outputId) : output.aliasId
+    return convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, aliasId)
 }
