@@ -27,8 +27,7 @@
     let storageDeposit = 0
     let preparedOutput: IFoundryOutput
 
-    let metadata: IIrc30Metadata
-    $: metadata = {
+    $: metadata= <IIrc30Metadata>{
         standard: TokenStandard.IRC30,
         name: tokenName,
         symbol,
