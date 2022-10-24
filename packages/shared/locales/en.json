@@ -895,6 +895,7 @@
                 "circulatingSupply": "Circulating Supply",
                 "standard": "Standard",
                 "tokenName": "Name",
+                "storageDeposit": "Storage Deposit",
                 "description": "Description",
                 "symbol": "Symbol",
                 "decimals": "Decimals",
