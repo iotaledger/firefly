@@ -33,7 +33,6 @@ const Platform: IPlatform = {
     getAppVersionDetails(): Promise<IAppVersionDetails> {
         return Promise.resolve(undefined)
     },
-    hookErrorLogger(logger: (error: IError) => void): void {},
     isMaximized(): Promise<boolean> {
         return Promise.resolve(false)
     },

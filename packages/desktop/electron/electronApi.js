@@ -5,7 +5,6 @@ const PincodeManager = require('./lib/pincodeManager')
 const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { menuState } = require('./lib/menuState')
-const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
 
 let activeProfileId = null
 const eventListeners = {}
@@ -315,11 +314,6 @@ const ElectronApi = {
                 }
             })
     },
-    /**
-     * Hook the logger
-     * @returns
-     */
-    hookErrorLogger,
 }
 
 module.exports = ElectronApi
