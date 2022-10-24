@@ -16,9 +16,9 @@
         sendNft,
         buildNftOutputData,
     } from '@core/wallet'
-    import { closePopup, openPopup } from '@lib/popup'
     import { handleError } from '@core/error/handlers/handleError'
     import type { INftOutput } from '@iota/types'
+    import { closePopup, openPopup } from '@auxiliary/popup'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false

@@ -1,7 +1,7 @@
 import { IProcessedTransaction, INftMetadata } from '../../interfaces'
 import { getNftOutputFromTransaction, convertHexAddressToBech32, outputContainsValue } from '..'
 import { ActivityType } from '@core/wallet/enums'
-import { ADDRESS_TYPE_NFT, NEW_NFT_ID, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
+import { ADDRESS_TYPE_NFT, NEW_NFT_ID } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
 import type { IMetadataFeature, INftOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
@@ -44,7 +44,7 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
         containsValue,
         inputs,
         inclusionState,
-        immutableFeatures: output.type === OUTPUT_TYPE_NFT ? output.immutableFeatures : [],
+        immutableFeatures: output.immutableFeatures,
         storageDeposit,
         metadata,
         ...sendingInfo,

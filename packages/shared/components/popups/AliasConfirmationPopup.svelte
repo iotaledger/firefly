@@ -8,7 +8,7 @@
         convertBech32ToHexAddress,
         formatTokenAmountPrecise,
         generateActivity,
-        NEW_ALIAS_ID,
+        EMPTY_HEX_ID,
         preprocessTransaction,
         UNLOCK_CONDITION_GOVERNOR_ADDRESS,
         UNLOCK_CONDITION_STATE_CONTROLLER_ADDRESS,
@@ -28,7 +28,7 @@
     }
     $: aliasOutput = address
         ? {
-              aliasId: NEW_ALIAS_ID,
+              aliasId: EMPTY_HEX_ID,
               unlockConditions: [
                   {
                       type: UNLOCK_CONDITION_GOVERNOR_ADDRESS,

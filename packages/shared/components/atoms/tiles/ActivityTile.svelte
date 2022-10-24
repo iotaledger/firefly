@@ -61,7 +61,7 @@
                 <FoundryActivityTileContent {activity} {asset} />
             {/if}
         </tile-content>
-        {#if activity.type === ActivityType.Transaction && activity?.asyncStatus === ActivityAsyncStatus.Timelocked}
+        {#if activity.type === ActivityType.Transaction && activity.asyncStatus === ActivityAsyncStatus.Timelocked}
             <TimelockActivityTileFooter {activity} />
         {:else if (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) && activity.isAsync}
             <AsyncActivityTileFooter {activity} />

@@ -32,9 +32,10 @@
     $: isTimelocked =
         activity.type === ActivityType.Transaction && activity.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
-        activity.type === ActivityType.Transaction &&
+        (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) &&
         activity.isAsync &&
-        (activity?.direction === ActivityDirection.Incoming || activity.isSelfTransaction) &&
+        (activity?.direction === ActivityDirection.Incoming ||
+            (activity.type === ActivityType.Transaction && activity.isSelfTransaction)) &&
         activity.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     let details: Record<string, unknown>

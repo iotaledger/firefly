@@ -8,7 +8,7 @@
         updateNewNftTransactionDetails,
     } from '@core/wallet'
     import { Button, Text, RecipientInput, NftInput, FontWeight } from 'shared/components'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import type { FeatureTypes } from '@iota/types'
 
     let { nftId, recipient } = get(newNftTransactionDetails)
@@ -39,7 +39,7 @@
         const nftActivity = $selectedAccountActivities.find(
             (activity) => activity.type === ActivityType.Nft && activity.nftId === nftId
         )
-        return nftActivity?.type === ActivityType.Nft ? nftActivity.immutableFeatures : []
+        return nftActivity?.type === ActivityType.Nft ? nftActivity?.immutableFeatures : []
     }
 
     function onCancel(): void {
