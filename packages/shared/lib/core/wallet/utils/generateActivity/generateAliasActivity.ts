@@ -4,7 +4,7 @@ import { get } from 'svelte/store'
 import { IProcessedTransaction } from '../../interfaces'
 import { getNativeTokenFromOutput, convertHexAddressToBech32, outputContainsValue } from '..'
 import { ActivityType, AliasType } from '@core/wallet/enums'
-import { ADDRESS_TYPE_ALIAS, NEW_ALIAS_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
+import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { IAliasOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
 import { Blake2b } from '@iota/crypto.js'
@@ -34,7 +34,7 @@ export function generateAliasActivity(
     const governorAddress = getGovernorAddressFromOutput(output)
     const stateControllerAddress = getStateControllerAddressFromOutput(output)
     const aliasId = getAliasId(output, outputId)
-    const aliasType = output.aliasId === NEW_ALIAS_ID ? AliasType.Created : AliasType.Other
+    const aliasType = output.aliasId === EMPTY_HEX_ID ? AliasType.Created : AliasType.Other
 
     const isHidden = false
     const isAssetHidden = false
@@ -74,7 +74,7 @@ export function generateAliasActivity(
 }
 
 function getAliasId(output: IAliasOutput, outputId: string): string {
-    const isNewAlias = output.aliasId === NEW_ALIAS_ID
+    const isNewAlias = output.aliasId === EMPTY_HEX_ID
     if (isNewAlias) {
         const hexEncodedOutputId =
             '0x' + Converter.bytesToHex(Blake2b.sum256(Converter.hexToBytes(outputId.substring(2))))

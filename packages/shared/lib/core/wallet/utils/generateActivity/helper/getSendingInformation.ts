@@ -3,9 +3,10 @@ import { ActivityDirection } from '@core/wallet/enums'
 import { IProcessedTransaction } from '@core/wallet/interfaces'
 import { Subject } from '@core/wallet/types'
 import { IBasicOutput, IAliasOutput, IFoundryOutput, INftOutput } from '@iota/types'
+import { getSubjectFromAddress } from '../../getSubjectFromAddress'
 import { isSubjectInternal } from '../../isSubjectInternal'
 import { getRecipientFromOutput } from '../../outputs'
-import { getSenderFromInputs, getSenderFromTransaction } from '../../transactions'
+import { getSenderAddressFromInputs, getSenderFromTransaction } from '../../transactions'
 
 export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
@@ -23,7 +24,7 @@ export function getSendingInformation(
 
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs
-        ? getSenderFromInputs(detailedTransactionInputs)
+        ? getSubjectFromAddress(getSenderAddressFromInputs(detailedTransactionInputs))
         : getSenderFromTransaction(isIncoming, account.depositAddress, output)
 
     const subject = isIncoming ? sender : recipient
