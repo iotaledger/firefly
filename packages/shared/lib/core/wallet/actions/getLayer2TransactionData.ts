@@ -36,7 +36,8 @@ export function getLayer2TransactionData(
 function getSmartContractParameters(address: string): Uint8Array {
     const parameters = new WriteStream()
 
-    const smartContractParameters = Object.entries({ a: address, c: '255' })
+    const encodedAddress = getEncodedAddress(address)
+    const smartContractParameters = Object.entries({ a: encodedAddress, c: '255' })
     parameters.writeUInt32('parametersLength', smartContractParameters.length)
 
     for (const parameter of smartContractParameters) {
@@ -50,6 +51,16 @@ function getSmartContractParameters(address: string): Uint8Array {
         parameters.writeBytes('valueBytes', valueBytes.length, valueBytes)
     }
     return parameters.finalBytes()
+}
+
+function getEncodedAddress(address: string): string {
+    const encodedAddress = new WriteStream()
+    encodedAddress.writeUInt8('Address Type ID', 3)
+    const [, ...addressBytes] = Converter.hexToBytes(address)
+    for (const byte of addressBytes) {
+        encodedAddress.writeUInt8('Address byte', byte)
+    }
+    return encodedAddress.finalHex()
 }
 
 function getEncodedAllowance(): Uint8Array {
