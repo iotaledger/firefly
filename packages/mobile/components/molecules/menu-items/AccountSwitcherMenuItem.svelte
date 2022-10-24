@@ -16,11 +16,7 @@
     }
 </script>
 
-<button
-    {id}
-    on:click={() => handleAccountClick(account.index)}
-    class="hover:bg-gray-50 dark:hover:bg-gray-800 flex flex-row justify-between rounded py-4"
->
+<button {id} on:click={() => handleAccountClick(account.index)} class="flex flex-row justify-between rounded py-4">
     <AccountLabel selected={account.index === $selectedAccount?.index} {account} />
     <Text classes={account.index === $selectedAccount?.index ? '' : 'opacity-50'} type="h5">
         {formatTokenAmountBestMatch(

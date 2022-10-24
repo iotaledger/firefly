@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
+
     export let onClose: () => unknown = () => {}
     export let fullScreen: boolean = false
     export let title: string = ''
