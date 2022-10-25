@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
+    import { resetNewTransactionDetails } from '@core/wallet'
     import { Drawer } from '../../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../../lib/core/router'
-    import { Token } from './views'
+    import { Recipient, Token } from './views'
 
     export let onClose: () => unknown = () => {}
 
@@ -12,6 +13,11 @@
 
     $: $sendRoute, (setTitle(), setAllowBack(), setFullScreen())
 
+    function onDrawerClose(): void {
+        onClose && onClose()
+        $sendRouter.reset()
+        resetNewTransactionDetails()
+    }
     function setTitle(): void {
         switch ($sendRoute) {
             default:
@@ -44,8 +50,10 @@
     }
 </script>
 
-<Drawer {onClose} {title} {fullScreen} {allowBack} onBackClick={() => $sendRouter.previous()}>
+<Drawer onClose={onDrawerClose} {title} {fullScreen} {allowBack} onBackClick={() => $sendRouter.previous()}>
     {#if $sendRoute === SendRoute.Token}
         <Token />
+    {:else if $sendRoute === SendRoute.Recipient}
+        <Recipient />
     {/if}
 </Drawer>

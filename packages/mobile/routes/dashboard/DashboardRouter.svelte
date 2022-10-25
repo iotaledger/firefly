@@ -7,18 +7,14 @@
     import { TabPane, TopBar } from '../../../mobile/components'
     import features from '../../features/features'
     import { activeWalletTab, WALLET_TAB_COMPONENT } from '../../lib/contexts/wallet'
-    import { dashboardRoute, DashboardRoute, dashboardRouter, sendRouter } from '../../lib/core/router'
+    import { dashboardRoute, DashboardRoute, dashboardRouter } from '../../lib/core/router'
     import { AccountSwitcherDrawer, ReceiveDrawer, SendDrawer } from './wallet/drawers'
     import { TabNavigator } from './wallet/tabs'
 
     $: activeWalletTabComponent = WALLET_TAB_COMPONENT[$activeWalletTab]
 
-    function onReceiveDrawerClose(): void {
+    function onRouteDrawerClose(): void {
         $dashboardRouter.previous()
-    }
-    function onSendDrawerClose(): void {
-        $dashboardRouter.previous()
-        $sendRouter.reset()
     }
 </script>
 
@@ -60,9 +56,9 @@
 {/if}
 <!-- Routes -->
 {#if $dashboardRoute === DashboardRoute.Receive && features?.wallet?.receive?.enabled}
-    <ReceiveDrawer onClose={onReceiveDrawerClose} />
+    <ReceiveDrawer onClose={onRouteDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.Send && features?.wallet?.send?.enabled}
-    <SendDrawer onClose={onSendDrawerClose} />
+    <SendDrawer onClose={onRouteDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.AccountSwitcher && features?.wallet?.accountSwitcher?.enabled}
-    <AccountSwitcherDrawer onClose={() => $dashboardRouter.previous()} />
+    <AccountSwitcherDrawer onClose={onRouteDrawerClose} />
 {/if}
