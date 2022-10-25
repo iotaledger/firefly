@@ -5,7 +5,7 @@ import { onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 
 import { ProfileSetupRoute } from '../../enums'
 import { onboardingRouter } from '../../onboarding-router'
-import { Subrouter } from '../subrouter'
+import { Subrouter } from '../../classes'
 
 export const profileSetupRoute = writable<ProfileSetupRoute>(null)
 export const profileSetupRouter = writable<ProfileSetupRouter>(null)

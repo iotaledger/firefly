@@ -1,7 +1,8 @@
 import { Writable } from 'svelte/store'
 
-import { Router } from '../router'
 import { IRouter } from '../interfaces'
+
+import { Router } from './router.class'
 
 export abstract class Subrouter<R> extends Router<R> {
     protected parentRouter: IRouter

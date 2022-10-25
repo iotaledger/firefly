@@ -1,7 +1,8 @@
 import { get, writable } from 'svelte/store'
+
 import { LedgerSetupRoute } from '../../enums'
 import { onboardingRouter } from '../../onboarding-router'
-import { Subrouter } from '../subrouter'
+import { Subrouter } from '../../classes'
 
 export const ledgerSetupRoute = writable<LedgerSetupRoute>(null)
 export const ledgerSetupRouter = writable<LedgerSetupRouter>(null)

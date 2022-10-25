@@ -5,7 +5,7 @@ import { NetworkType } from '@core/network'
 
 import { NetworkSetupRoute } from '../../enums'
 import { onboardingRouter } from '../../onboarding-router'
-import { Subrouter } from '../subrouter'
+import { Subrouter } from '../../classes'
 
 export const networkSetupRoute = writable<NetworkSetupRoute>(null)
 export const networkSetupRouter = writable<NetworkSetupRouter>(null)

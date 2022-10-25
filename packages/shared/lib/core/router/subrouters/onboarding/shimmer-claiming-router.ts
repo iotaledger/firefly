@@ -4,7 +4,7 @@ import { hasUserClaimedRewards, onboardingProfile } from '@contexts/onboarding'
 
 import { ShimmerClaimingRoute } from '../../enums'
 import { onboardingRouter } from '../../onboarding-router'
-import { Subrouter } from '../subrouter'
+import { Subrouter } from '../../classes'
 
 export const shimmerClaimingRoute = writable<ShimmerClaimingRoute>(null)
 export const shimmerClaimingRouter = writable<ShimmerClaimingRouter>(null)

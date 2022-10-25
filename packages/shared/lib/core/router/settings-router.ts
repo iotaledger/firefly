@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
+import { Router } from './classes'
 import { SettingsRoute } from './enums'
-import { Router } from './router'
 
 export const settingsRouter = writable<SettingsRouter>(null)
 export const settingsRoute = writable<SettingsRoute>(null)
