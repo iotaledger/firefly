@@ -1,4 +1,4 @@
-import { IRouterEvent } from '../types'
+import { IRouterEvent } from './router-event.interface'
 
 export interface IRouter {
     next(event?: IRouterEvent): void

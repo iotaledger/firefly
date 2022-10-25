@@ -26,7 +26,7 @@
     } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from '@auxiliary/notification'
-    import { openPopup } from '@auxiliary/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
@@ -96,6 +96,7 @@
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
+                closePopup()
                 openSettings()
             } else {
                 settings = true

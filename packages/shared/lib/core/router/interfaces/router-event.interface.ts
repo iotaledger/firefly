@@ -1,4 +1,4 @@
-export type IRouterEvent = {
+export interface IRouterEvent {
     reset?: boolean
     shouldAddProfile?: boolean
 }

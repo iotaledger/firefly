@@ -10,9 +10,9 @@ import { hasCompletedAppSetup } from '@core/app'
 import { ProfileType } from '@core/profile'
 
 import { appRouter } from './app-router'
-import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from './enums'
-import { Router } from './classes'
-import { profileBackupRoute, profileSetupRoute } from './subrouters'
+import { OnboardingRoute, ProfileBackupRoute, ProfileSetupRoute } from '../enums'
+import { Router } from '../classes'
+import { profileBackupRoute, profileSetupRoute } from '../subrouters'
 
 export const onboardingRoute = writable<OnboardingRoute>(null)
 export const onboardingRouter = writable<OnboardingRouter>(null)

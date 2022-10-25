@@ -1,9 +1,9 @@
 import { get, writable } from 'svelte/store'
 
-import { appRouter } from '../app-router'
 import { Subrouter } from '../classes'
 import { LoginRoute } from '../enums'
-import { IRouterEvent } from '../types'
+import { IRouterEvent } from '../interfaces'
+import { appRouter } from '../routers'
 
 export const loginRoute = writable<LoginRoute>(null)
 export const loginRouter = writable<LoginRouter>(null)

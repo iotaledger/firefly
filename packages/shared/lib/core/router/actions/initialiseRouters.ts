@@ -1,35 +1,37 @@
-import { get } from 'svelte/store'
-
-import { closePopup } from '@auxiliary/popup'
-
-import { appRouter, AppRouter } from './app-router'
-import { collectiblesRouter, CollectiblesRouter } from './collectibles-router'
-import { DashboardRouter, dashboardRouter } from './dashboard-router'
-import { DashboardRoute } from './enums'
-import { onboardingRouter, OnboardingRouter } from './onboarding-router'
-import { SettingsRouter, settingsRouter } from './settings-router'
+import {
+    appRouter,
+    AppRouter,
+    collectiblesRouter,
+    CollectiblesRouter,
+    DashboardRouter,
+    dashboardRouter,
+    OnboardingRouter,
+    onboardingRouter,
+    SettingsRouter,
+    settingsRouter,
+} from '../routers'
 import {
     AppSetupRouter,
     appSetupRouter,
+    LedgerSetupRouter,
+    ledgerSetupRouter,
+    loginRouter,
+    LoginRouter,
+    NetworkSetupRouter,
+    networkSetupRouter,
     ProfileBackupRouter,
     profileBackupRouter,
     ProfileRecoveryRouter,
     profileRecoveryRouter,
-    ledgerSetupRouter,
-    LedgerSetupRouter,
-    NetworkSetupRouter,
-    networkSetupRouter,
     ProfileSetupRouter,
     profileSetupRouter,
-    storageProtectionSetupRouter,
-    StorageProtectionSetupRouter,
-    shimmerClaimingRouter,
     ShimmerClaimingRouter,
-    strongholdSetupRouter,
+    shimmerClaimingRouter,
+    StorageProtectionSetupRouter,
+    storageProtectionSetupRouter,
     StrongholdSetupRouter,
-    LoginRouter,
-    loginRouter,
-} from './subrouters'
+    strongholdSetupRouter,
+} from '../subrouters'
 
 export function initialiseRouters(): void {
     /**
@@ -73,40 +75,4 @@ function initialiseOnboardingSubrouters(): void {
     profileSetupRouter.set(new ProfileSetupRouter())
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
     shimmerClaimingRouter.set(new ShimmerClaimingRouter())
-}
-
-export function resetRouters(): void {
-    resetSubrouters()
-    resetBaseRouters()
-}
-
-function resetBaseRouters(): void {
-    get(appRouter).reset()
-    get(dashboardRouter).reset()
-    get(onboardingRouter).reset()
-    get(settingsRouter).reset()
-    get(collectiblesRouter).reset()
-}
-
-function resetSubrouters(): void {
-    get(appSetupRouter).reset()
-    get(loginRouter).reset()
-    get(ledgerSetupRouter).reset()
-    get(networkSetupRouter).reset()
-    get(strongholdSetupRouter).reset()
-    get(profileBackupRouter).reset()
-    get(profileRecoveryRouter).reset()
-    get(profileSetupRouter).reset()
-    get(storageProtectionSetupRouter).reset()
-    get(shimmerClaimingRouter).reset()
-}
-
-export function resetWalletRoute(): void {
-    get(dashboardRouter).reset()
-}
-
-export function openSettings(): void {
-    closePopup()
-    get(dashboardRouter).goTo(DashboardRoute.Settings)
-    get(settingsRouter).reset()
 }
