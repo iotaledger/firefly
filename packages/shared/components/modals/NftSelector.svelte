@@ -22,7 +22,7 @@
                     on:click={() => onClick(nft.id)}
                     class="w-full flex flex-row flex-1 justify-between px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                 >
-                    <Text type={TextType.pre} fontSize="sm" color="gray-600">{nft.name}</Text>
+                    <Text type={TextType.pre} fontSize="sm" color="gray-600">{nft.name ?? 'NFT'}</Text>
                     <Text type={TextType.pre} fontSize="sm" color="gray-600">{truncateString(nft.id, 9, 9)}</Text>
                 </button>
             {/each}
