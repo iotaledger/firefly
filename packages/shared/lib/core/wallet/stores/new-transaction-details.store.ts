@@ -47,8 +47,17 @@ export function setToNewNftTransactionDetails(): void {
     })
 }
 
-export function updateNewTransactionDetails(payload: Partial<NewTransactionDetails>): void {
-    newTransactionDetails.update((state) => ({ ...state, ...payload }))
+export function updateNewTransactionDetails(
+    payload: Partial<NewTransactionDetails> & Pick<NewTransactionDetails, 'type'>
+): void {
+    newTransactionDetails.update((state) => {
+        if (payload.type === 'newToken' && state.type === 'newToken') {
+            state = { ...state, ...payload }
+        } else if (payload.type === 'newNft' && state.type === 'newNft') {
+            state = { ...state, ...payload }
+        }
+        return state
+    })
 }
 
 export function setNewTransactionDetails(payload: NewTransactionDetails): void {

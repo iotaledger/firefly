@@ -23,7 +23,12 @@
     export async function handleFormSubmit(): Promise<boolean> {
         const valid = await validate()
         if (valid) {
-            updateNewTransactionDetails({ nftId, recipient, immutableFeatures: getNftImmutableFeatures() })
+            updateNewTransactionDetails({
+                type: 'newNft',
+                nftId,
+                recipient,
+                immutableFeatures: getNftImmutableFeatures(),
+            })
         }
         return valid
     }

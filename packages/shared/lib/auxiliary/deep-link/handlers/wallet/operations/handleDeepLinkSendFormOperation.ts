@@ -1,5 +1,5 @@
 import {
-    INewTransactionDetails,
+    NewTransactionDetails,
     Subject,
     setNewTransactionDetails,
     selectedAccountAssets,
@@ -31,9 +31,9 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
  *
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
  *
- * @return {INewTransactionDetails} The formatted parameters for the send operation.
+ * @return {NewTransactionDetails} The formatted parameters for the send operation.
  */
-function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionDetails {
+function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDetails {
     const assetId = searchParams.get(SendOperationParameter.AssetId)
     const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
     if (!asset) {
@@ -48,6 +48,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionD
     const recipient: Subject = address ? { type: 'address', address } : undefined
 
     return {
+        type: 'newToken',
         ...(asset && { asset }),
         ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),
