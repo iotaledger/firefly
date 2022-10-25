@@ -33,7 +33,6 @@ export interface IPlatform {
     isMaximized(): Promise<boolean>
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void>
     openUrl(url: string): void
-    hookErrorLogger(logger: (error: IError) => void): void
     copyFile(sourceFilePath: string, destinationFilePath: string): Promise<void>
 
     NotificationManager: INotificationManager | undefined
