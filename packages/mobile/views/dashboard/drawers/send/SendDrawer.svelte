@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { Drawer } from '../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
-    import { Token } from './views'
+    import SendRouter from './SendRouter.svelte'
 
     export let onClose: () => unknown = () => {}
 
@@ -45,7 +45,5 @@
 </script>
 
 <Drawer {onClose} {title} {fullScreen} {allowBack} onBackClick={() => $sendRouter.previous()}>
-    {#if $sendRoute === SendRoute.Token}
-        <Token />
-    {/if}
+    <SendRouter />
 </Drawer>

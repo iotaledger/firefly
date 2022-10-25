@@ -27,7 +27,7 @@
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from '@auxiliary/notification'
     import { openPopup } from '@auxiliary/popup'
-    import { DashboardRouter, LoginRouter, OnboardingRouter } from './views'
+    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { onboardingProfile, initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
@@ -177,7 +177,7 @@
     <OnboardingRouter />
 </Route>
 <Route route={AppRoute.Dashboard}>
-    <DashboardRouter />
+    <DashboardView />
 </Route>
 
 <ToastContainer />

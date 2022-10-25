@@ -1,1 +1,1 @@
-export { default as DashboardRouter } from './DashboardRouter.svelte'
+export { default as DashboardView } from './DashboardView.svelte'
