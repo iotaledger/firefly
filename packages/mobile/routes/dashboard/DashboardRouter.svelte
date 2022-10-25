@@ -16,7 +16,7 @@
     function onReceiveDrawerClose(): void {
         $dashboardRouter.previous()
     }
-    function onSendDrawerClose() {
+    function onSendDrawerClose(): void {
         $dashboardRouter.previous()
         $sendRouter.reset()
     }
