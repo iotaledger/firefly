@@ -4,9 +4,9 @@ import { Router } from '../router'
 import { ParentRouter } from '../types'
 
 export abstract class Subrouter<Route> extends Router<Route> {
-    protected parentRouter: ParentRouter
+    protected parentRouter: ParentRouter<Route>
 
-    constructor(protected initialRoute: Route, storeRoute: Writable<Route>, parentRouter: ParentRouter) {
+    constructor(protected initialRoute: Route, storeRoute: Writable<Route>, parentRouter: ParentRouter<Route>) {
         super(initialRoute, storeRoute)
         this.parentRouter = parentRouter
     }
