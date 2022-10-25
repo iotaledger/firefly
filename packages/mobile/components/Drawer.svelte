@@ -1,7 +1,10 @@
 <script lang="typescript">
+    import { Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
+
     export let onClose: () => unknown = () => {}
     export let fullScreen: boolean = false
+    export let title: string = ''
 
     let panelBottom = 0
     let moving = false
@@ -50,7 +53,12 @@
         style="bottom: {panelBottom}px;"
     >
         <decorator class="absolute top-2 w-12 h-1 bg-gray-300 dark:bg-gray-700 rounded" />
-        <slot />
+        <div class="flex flex-col w-full">
+            {#if title}
+                <Text type={TextType.h4} classes="text-center">{title}</Text>
+            {/if}
+            <slot />
+        </div>
     </panel>
 </drawer>
 

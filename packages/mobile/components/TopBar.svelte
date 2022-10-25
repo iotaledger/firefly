@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { AccountSwitcher, AccountActionsButton, ProfileActionsButton } from './'
+    import { AccountActionsButton, AccountSwitcherButton, ProfileActionsButton } from './'
     import features from '../features/features'
 </script>
 
@@ -11,7 +11,7 @@
     </div>
     <div class="flex justify-center col-span-2 content-center">
         {#if features?.wallet?.accountSwitcher?.enabled}
-            <AccountSwitcher />
+            <AccountSwitcherButton />
         {/if}
     </div>
     <div class="flex justify-end col-span-1">

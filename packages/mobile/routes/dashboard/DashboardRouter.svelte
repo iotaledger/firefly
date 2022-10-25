@@ -8,7 +8,7 @@
     import features from '../../features/features'
     import { activeWalletTab, WALLET_TAB_COMPONENT } from '../../lib/contexts/wallet'
     import { dashboardRoute, DashboardRoute, dashboardRouter } from '../../lib/core/router'
-    import { ReceiveDrawer } from './wallet/drawers'
+    import { AccountSwitcherDrawer, ReceiveDrawer } from './wallet/drawers'
     import { TabNavigator } from './wallet/tabs'
 
     $: activeWalletTabComponent = WALLET_TAB_COMPONENT[$activeWalletTab]
@@ -53,4 +53,7 @@
 <!-- Routes -->
 {#if $dashboardRoute === DashboardRoute.Receive && features?.wallet?.receive?.enabled}
     <ReceiveDrawer onClose={() => $dashboardRouter.previous()} />
+{/if}
+{#if $dashboardRoute === DashboardRoute.AccountSwitcher && features?.wallet?.accountSwitcher?.enabled}
+    <AccountSwitcherDrawer onClose={() => $dashboardRouter.previous()} />
 {/if}

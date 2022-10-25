@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Modal, AliasSelector, SelectorInput } from 'shared/components'
 
-    export let alias: string
+    export let alias: string = ''
     export let error: string = ''
 
     let inputElement: HTMLInputElement = undefined
