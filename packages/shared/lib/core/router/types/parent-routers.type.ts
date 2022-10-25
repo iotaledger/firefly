@@ -1,4 +1,4 @@
-import { Router } from '../router'
-import { Subrouter } from '../subrouters'
+import { AppRouter } from '../app-router'
+import { OnboardingRouter } from '../onboarding-router'
 
-export type ParentRouter<T> = Router<T> | Subrouter<T>
+export type ParentRouter = AppRouter | OnboardingRouter

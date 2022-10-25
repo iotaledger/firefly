@@ -1,12 +1,12 @@
 import { Writable } from 'svelte/store'
 
 import { Router } from '../router'
-import { ParentRouter } from '../types'
+import { ParentRouter } from '@core/router/types/parent-routers.type'
 
 export abstract class Subrouter<Route> extends Router<Route> {
-    protected parentRouter: ParentRouter<Route>
+    protected parentRouter: ParentRouter
 
-    constructor(protected initialRoute: Route, storeRoute: Writable<Route>, parentRouter: ParentRouter<Route>) {
+    constructor(protected initialRoute: Route, storeRoute: Writable<Route>, parentRouter: ParentRouter) {
         super(initialRoute, storeRoute)
         this.parentRouter = parentRouter
     }
