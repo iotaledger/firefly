@@ -37,7 +37,7 @@
 </script>
 
 <svelte:window on:touchend={onTouchEnd} on:touchmove={onTouchMove} />
-<drawer class="fixed top-0 z-30 w-screen h-screen z-40">
+<drawer class="fixed top-0 left-0 z-30 w-screen h-screen z-40">
     <overlay
         in:fade={{ duration: 300 }}
         out:fade={{ duration: 200 }}
