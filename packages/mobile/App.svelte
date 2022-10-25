@@ -11,7 +11,7 @@
         dashboardRouter,
         OnboardingRoute,
         onboardingRoute,
-    } from './lib/core/router'
+    } from './lib/routers'
     import { openSettings } from '@core/router'
     import { Route } from './components'
     import { ToastContainer } from 'shared/components'

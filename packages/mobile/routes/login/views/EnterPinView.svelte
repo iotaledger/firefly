@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
-    import { loginRouter } from '../../../lib/core/router'
+    import { loginRouter } from '../../../lib/routers'
     import { Platform } from '@lib/platform'
     import { openPopup, popupState } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'

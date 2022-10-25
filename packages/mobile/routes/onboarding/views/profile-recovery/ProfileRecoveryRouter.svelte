@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { ImportMnemonicPhraseView, SuccessView } from './views'
     import { localize } from '@core/i18n'
-    import { profileRecoveryRoute, profileRecoveryRouter, ProfileRecoveryRoute } from '../../../../lib/core/router'
+    import { profileRecoveryRoute, profileRecoveryRouter, ProfileRecoveryRoute } from '../../../../lib/routers'
     import { showAppNotification } from '@auxiliary/notification'
 
     let busy = false

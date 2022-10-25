@@ -11,7 +11,7 @@
     import { formatProtocolName, getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
     import { ProfileType } from '@core/profile'
     import { destroyProfileManager } from '@core/profile-manager'
-    import { profileSetupRouter } from '../../../../../lib/core/router'
+    import { profileSetupRouter } from '../../../../../lib/routers'
     import { OnboardingButton } from 'shared/components'
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'

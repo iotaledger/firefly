@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { WelcomeView } from './views'
-    import { AppSetupRoute, appSetupRoute } from '../../../../lib/core/router'
+    import { AppSetupRoute, appSetupRoute } from '../../../../lib/routers'
 </script>
 
 {#if $appSetupRoute === AppSetupRoute.Welcome}

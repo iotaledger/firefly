@@ -4,7 +4,7 @@
     import { Button, HTMLButtonType, ImportTextfield, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { profileRecoveryRouter } from '../../../../../lib/core/router'
+    import { profileRecoveryRouter } from '../../../../../lib/routers'
     import {
         DEFAULT_STRONGHOLD_PASSWORD,
         onboardingProfile,

@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { changeStrongholdPassword, setStrongholdPassword } from '@core/profile-manager'
-    import { onboardingRouter } from '../../../../../lib/core/router'
+    import { onboardingRouter } from '../../../../../lib/routers'
     import {
         onboardingProfile,
         ProfileSetupType,

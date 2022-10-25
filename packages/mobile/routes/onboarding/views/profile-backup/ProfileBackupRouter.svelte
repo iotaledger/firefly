@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { VerifyMnemonicView, ViewMnemonicView } from './views'
-    import { profileBackupRoute, ProfileBackupRoute } from '../../../../lib/core/router'
+    import { profileBackupRoute, ProfileBackupRoute } from '../../../../lib/routers'
 </script>
 
 {#if $profileBackupRoute === ProfileBackupRoute.ViewMnemonic}

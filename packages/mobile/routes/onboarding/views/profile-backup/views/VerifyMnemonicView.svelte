@@ -4,7 +4,7 @@
     import { Icon, Text, TextType } from 'shared/components'
     import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
-    import { profileBackupRouter } from '../../../../../lib/core/router'
+    import { profileBackupRouter } from '../../../../../lib/routers'
     import { Mnemonic, onboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
 
     export let busy = false

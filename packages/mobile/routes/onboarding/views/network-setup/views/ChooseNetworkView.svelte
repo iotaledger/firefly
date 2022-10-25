@@ -7,7 +7,7 @@
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { getDefaultClientOptions, NetworkProtocol, NetworkType } from '@core/network'
-    import { networkSetupRouter } from '../../../../../lib/core/router'
+    import { networkSetupRouter } from '../../../../../lib/routers'
     import features from '../../../../../features/features'
     import { OnboardingButton } from 'shared/components'
     import { onMount } from 'svelte'

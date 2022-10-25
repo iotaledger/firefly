@@ -7,7 +7,7 @@
     import { TabPane, TopBar } from '../../../mobile/components'
     import features from '../../features/features'
     import { activeWalletTab, WALLET_TAB_COMPONENT } from '../../lib/contexts/wallet'
-    import { dashboardRoute, DashboardRoute, dashboardRouter, sendRouter } from '../../lib/core/router'
+    import { dashboardRoute, DashboardRoute, dashboardRouter, sendRouter } from '../../lib/routers'
     import { AccountSwitcherDrawer, ReceiveDrawer, SendDrawer } from './wallet/drawers'
     import { TabNavigator } from './wallet/tabs'
 

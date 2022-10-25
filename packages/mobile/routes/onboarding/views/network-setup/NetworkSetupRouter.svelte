@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { ChooseNetworkView, ChooseProtocolView } from './views'
-    import { NetworkSetupRoute, networkSetupRoute } from '../../../../lib/core/router'
+    import { NetworkSetupRoute, networkSetupRoute } from '../../../../lib/routers'
 </script>
 
 {#if $networkSetupRoute === NetworkSetupRoute.ChooseProtocol}

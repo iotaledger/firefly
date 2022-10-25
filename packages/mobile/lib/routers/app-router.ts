@@ -1,9 +1,8 @@
 import { get, writable } from 'svelte/store'
 
 import { profiles } from '@core/profile'
+import { FireflyEvent, Router } from '@core/router'
 
-import { Router } from '@core/router/router'
-import { FireflyEvent } from '@core/router/types'
 import { AppRoute, LoginRoute } from './enums'
 import { loginRoute } from './subrouters'
 

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { Drawer } from '../../../../../components'
-    import { sendRoute, SendRoute, sendRouter } from '../../../../../lib/core/router'
+    import { sendRoute, SendRoute, sendRouter } from '../../../../../lib/routers'
     import { Token } from './views'
 
     export let onClose: () => unknown = () => {}
