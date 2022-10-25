@@ -10,7 +10,7 @@
     let allowBack: boolean
     let fullScreen: boolean
 
-    $: $sendRouter, (setTitle(), setAllowBack(), setFullScreen())
+    $: $sendRoute, (setTitle(), setAllowBack(), setFullScreen())
 
     function setTitle(): void {
         switch ($sendRoute) {
@@ -46,6 +46,6 @@
 
 <Drawer {onClose} {title} {fullScreen} {allowBack} onBackClick={() => $sendRouter.previous()}>
     {#if $sendRoute === SendRoute.Token}
-        <Token onClose={() => $sendRouter.previous()} />
+        <Token />
     {/if}
 </Drawer>
