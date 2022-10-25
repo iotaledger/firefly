@@ -1,16 +1,17 @@
 import { get, Writable } from 'svelte/store'
 import { FireflyEvent } from '@core/router'
+import { IRouter } from './interfaces'
 
-export abstract class Router<Route> {
-    protected history: Route[] = []
-    protected readonly routeStore: Writable<Route>
+export abstract class Router<R> implements IRouter {
+    protected history: R[] = []
+    protected readonly routeStore: Writable<R>
 
-    constructor(protected initialRoute: Route, storeRoute: Writable<Route>) {
+    constructor(protected initialRoute: R, storeRoute: Writable<R>) {
         this.routeStore = storeRoute
         this.setRoute(initialRoute)
     }
 
-    private setRoute(route: Route): void {
+    private setRoute(route: R): void {
         this.routeStore.set(route)
     }
 
@@ -19,7 +20,7 @@ export abstract class Router<Route> {
         this.history.push(currentRoute)
     }
 
-    protected setNext(route: Route): void {
+    protected setNext(route: R): void {
         if (route) {
             this.updateHistory()
             this.setRoute(route)
@@ -41,7 +42,7 @@ export abstract class Router<Route> {
         }
     }
 
-    goTo(route: Route): void {
+    goTo(route: R): void {
         if (get(this.routeStore) === route) {
             return
         }
@@ -53,7 +54,7 @@ export abstract class Router<Route> {
         this.setRoute(this.initialRoute)
     }
 
-    filterHistory(route: Route): void {
+    filterHistory(route: R): void {
         if (this.history.length && route !== get(this.routeStore)) {
             this.history = this.history.filter((_route) => _route !== route)
         }
