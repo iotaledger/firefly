@@ -25,7 +25,6 @@
         shouldBeDarkMode,
     } from '@core/app'
     import { Electron } from 'shared/lib/electron'
-    import { addError } from '@core/error'
     import { showAppNotification } from '@auxiliary/notification'
     import { openPopup } from '@auxiliary/popup'
     import { DashboardRouter, LoginRouter, OnboardingRouter } from './routes'
@@ -128,9 +127,6 @@
             updateOnboardingProfile({ networkType: NetworkType.Mainnet })
             initialiseOnboardingRouters()
             get(appRouter).next({ shouldAddProfile: true })
-        })
-        Electron.hookErrorLogger((err) => {
-            addError(err)
         })
 
         Electron.onEvent('deep-link-request', showDeepLinkNotification)
