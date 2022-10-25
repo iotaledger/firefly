@@ -4,7 +4,7 @@ import { onboardingProfile, ProfileProtectionType } from '@contexts/onboarding'
 
 import { onboardingRouter } from '../../onboarding-router'
 import { StorageProtectionSetupRoute } from '../../enums'
-import { Subrouter } from '@core/router'
+import { Subrouter } from '../subrouter'
 
 export const storageProtectionSetupRoute = writable<StorageProtectionSetupRoute>(null)
 export const storageProtectionSetupRouter = writable<StorageProtectionSetupRouter>(null)

@@ -6,7 +6,6 @@ import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
-import { hookErrorLogger } from '@lib/shell/errorLogger'
 import { IAppVersionDetails } from '@core/app'
 import { IPlatform } from '@lib/typings/platform'
 
@@ -145,7 +144,6 @@ export const CapacitorApi: IPlatform = {
     removeListenersForEvent: () => new Promise<void>(() => {}),
 
     saveRecoveryKit: () => new Promise<void>(() => {}),
-    hookErrorLogger,
     ledger: undefined,
 }
 
