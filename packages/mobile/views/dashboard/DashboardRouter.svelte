@@ -6,12 +6,12 @@
     import { Button, TogglableAmountLabel } from 'shared/components'
     import { TabPane, TopBar } from '../../../mobile/components'
     import features from '../../features/features'
-    import { activeWalletTab, WALLET_TAB_COMPONENT } from '../../lib/contexts/wallet'
+    import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '../../lib/contexts/dashboard'
     import { dashboardRoute, DashboardRoute, dashboardRouter, sendRouter } from '../../lib/routers'
-    import { AccountSwitcherDrawer, ReceiveDrawer, SendDrawer } from './wallet/drawers'
-    import { TabNavigator } from './wallet/tabs'
+    import { AccountSwitcherDrawer, ReceiveDrawer, SendDrawer } from './drawers'
+    import { TabNavigator } from './tabs'
 
-    $: activeWalletTabComponent = WALLET_TAB_COMPONENT[$activeWalletTab]
+    $: activeDashboardTabComponent = DASHBOARD_TAB_COMPONENT[$activeDashboardTab]
 
     function onReceiveDrawerClose(): void {
         $dashboardRouter.previous()
@@ -33,14 +33,14 @@
                     tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
                 />
             </div>
-            {#if features?.wallet?.send?.enabled || features?.wallet?.receive?.enabled}
+            {#if features?.dashboard?.send?.enabled || features?.dashboard?.receive?.enabled}
                 <div class="flex flex-row items-center justify-center w-full space-x-2 mt-8">
-                    {#if features?.wallet?.send?.enabled}
+                    {#if features?.dashboard?.send?.enabled}
                         <Button classes="w-full h-10" onClick={() => $dashboardRouter.goTo(DashboardRoute.Send)}>
                             {localize('actions.send')}
                         </Button>
                     {/if}
-                    {#if features?.wallet?.receive?.enabled}
+                    {#if features?.dashboard?.receive?.enabled}
                         <Button classes="w-full h-10" onClick={() => $dashboardRouter.goTo(DashboardRoute.Receive)}>
                             {localize('actions.receive')}
                         </Button>
@@ -48,10 +48,10 @@
                 </div>
             {/if}
         </div>
-        {#if activeWalletTabComponent}
+        {#if activeDashboardTabComponent}
             <div class="relative flex flex-col flex-auto w-full">
                 <TabPane>
-                    <svelte:component this={WALLET_TAB_COMPONENT[$activeWalletTab]} />
+                    <svelte:component this={DASHBOARD_TAB_COMPONENT[$activeDashboardTab]} />
                 </TabPane>
                 <TabNavigator />
             </div>
@@ -59,10 +59,10 @@
     </div>
 {/if}
 <!-- Routes -->
-{#if $dashboardRoute === DashboardRoute.Receive && features?.wallet?.receive?.enabled}
+{#if $dashboardRoute === DashboardRoute.Receive && features?.dashboard?.receive?.enabled}
     <ReceiveDrawer onClose={onReceiveDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.Send && features?.wallet?.send?.enabled}
+{:else if $dashboardRoute === DashboardRoute.Send && features?.dashboard?.send?.enabled}
     <SendDrawer onClose={onSendDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.AccountSwitcher && features?.wallet?.accountSwitcher?.enabled}
+{:else if $dashboardRoute === DashboardRoute.AccountSwitcher && features?.dashboard?.accountSwitcher?.enabled}
     <AccountSwitcherDrawer onClose={() => $dashboardRouter.previous()} />
 {/if}

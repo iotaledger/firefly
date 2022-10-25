@@ -4,8 +4,8 @@
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
     import { sumBalanceForAccounts } from '@core/account'
     import { formatTokenAmountBestMatch } from '@core/wallet'
-    import features from '../../../../features/features'
-    import { AccountSwitcherMenuItem, Drawer } from '../../../../../mobile/components'
+    import features from '../../../features/features'
+    import { AccountSwitcherMenuItem, Drawer } from '../../../../mobile/components'
     import { HR, Icon, Text, TextType } from 'shared/components'
 
     export let onClose: () => unknown = () => {}
@@ -29,7 +29,7 @@
                     },
                 })}
             </Text>
-            {#if features?.wallet?.createAccount?.enabled}
+            {#if features?.dashboard?.createAccount?.enabled}
                 <button class="h-full" on:click={() => {}}>
                     <div class="flex flex-row items-center space-x-4">
                         <Icon icon="plus" height="12" width="12" classes="text-blue-500" />

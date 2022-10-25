@@ -3,34 +3,34 @@
     import { localize } from '@core/i18n'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Icon } from 'shared/components'
-    import features from '../../../../features/features'
-    import { activeWalletTab, updateActiveWalletTab, WalletTab } from '../../../../lib/contexts/wallet'
+    import features from '../../../features/features'
+    import { activeDashboardTab, updateActiveDashboardTab, DashboardTab } from '../../../lib/contexts/dashboard'
 
     $: darkModeEnabled = $appSettings.darkMode
 
-    const NAVIGATION_ITEMS: { icon: IconEnum; label: string; tab: WalletTab }[] = [
-        ...(features?.wallet?.tokens?.enabled
+    const NAVIGATION_ITEMS: { icon: IconEnum; label: string; tab: DashboardTab }[] = [
+        ...(features?.dashboard?.tokens?.enabled
             ? [
                   {
                       icon: IconEnum.Tokens,
                       label: localize('tabs.tokens'),
-                      tab: WalletTab.Tokens,
+                      tab: DashboardTab.Tokens,
                   },
               ]
             : []),
-        ...(features?.wallet?.activity?.enabled
+        ...(features?.dashboard?.activity?.enabled
             ? [
                   {
                       icon: IconEnum.Activity,
                       label: localize('tabs.activity'),
-                      tab: WalletTab.Activity,
+                      tab: DashboardTab.Activity,
                   },
               ]
             : []),
     ]
 
-    function onNavigationItemClick(tab: WalletTab): void {
-        updateActiveWalletTab(tab)
+    function onNavigationItemClick(tab: DashboardTab): void {
+        updateActiveDashboardTab(tab)
     }
 </script>
 
@@ -40,7 +40,7 @@
 >
     {#each NAVIGATION_ITEMS as item}
         <div
-            class="relative flex flex-col items-center justify-center text-center font-semibold text-11 {$activeWalletTab ===
+            class="relative flex flex-col items-center justify-center text-center font-semibold text-11 {$activeDashboardTab ===
             item.tab
                 ? 'text-blue-500'
                 : 'text-gray-500'}"

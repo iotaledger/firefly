@@ -1,4 +1,4 @@
-export enum WalletTab {
+export enum DashboardTab {
     Activity = 'activity',
     Tokens = 'tokens',
 }

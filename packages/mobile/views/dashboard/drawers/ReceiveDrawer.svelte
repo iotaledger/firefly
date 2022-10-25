@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
     import { FontWeight, QR, Text, TextType } from 'shared/components'
-    import { Drawer } from '../../../../components'
+    import { Drawer } from '../../../components'
 
     export let onClose: () => unknown = () => {}
 
