@@ -12,8 +12,9 @@
         Toggle,
         FontWeight,
         TextType,
+        NftDetails,
+        TransactionDetails,
     } from 'shared/components'
-    import { TransactionDetails } from 'shared/components/molecules'
     import type { OutputTypes } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
@@ -32,19 +33,24 @@
         DEFAULT_TRANSACTION_OPTIONS,
         newTransactionDetails,
         updateNewTransactionDetails,
+        updateNewNftTransactionDetails,
+        buildNftOutputData,
+        NewTokenTransactionDetails,
+        NewNftTransactionDetails,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
     import { ledgerPreparedOutput } from '@core/ledger'
+    import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
+    export let tokenSend = false
 
-    const { asset, rawAmount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift, surplus } =
+    let { recipient, expirationDate, giftStorageDeposit, surplus, disableChangeExpiration, disableToggleGift } =
         get(newTransactionDetails)
-    let { expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
     let storageDeposit = 0
     let giftedStorageDeposit = 0
@@ -55,10 +61,11 @@
 
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
+    $: txDetails = get(newTransactionDetails)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
-    $: hideGiftToggle = asset?.id === $selectedAccountAssets?.baseCoin?.id
+    $: hideGiftToggle = txDetails.type === 'newToken' && txDetails.asset?.id === $selectedAccountAssets?.baseCoin?.id
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
@@ -68,28 +75,15 @@
     }
 
     $: formattedFiatValue =
-        formatCurrency(
-            convertToFiat(
-                Big(rawAmount),
-                $currencies[CurrencyTypes.USD],
-                $exchangeRates[$activeProfile?.settings?.currency]
-            )
-        ) || ''
-
-    $: transactionDetails = {
-        asset,
-        direction: ActivityDirection.Outgoing,
-        inclusionState: InclusionState.Pending,
-        metadata,
-        storageDeposit: giftStorageDeposit ? giftedStorageDeposit : storageDeposit,
-        subject: recipient,
-        rawAmount,
-        tag,
-        unit,
-        isInternal,
-        surplus,
-        type: ActivityType.Transaction,
-    }
+        txDetails.type === 'newToken'
+            ? formatCurrency(
+                  convertToFiat(
+                      Big(txDetails.rawAmount),
+                      $currencies[CurrencyTypes.USD],
+                      $exchangeRates[$activeProfile?.settings?.currency]
+                  )
+              )
+            : ''
 
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
@@ -102,22 +96,43 @@
     }
 
     async function _prepareOutput(): Promise<void> {
-        outputOptions = getOutputOptions(
-            expirationDate,
-            recipientAddress,
-            rawAmount,
-            metadata,
-            tag,
-            asset,
-            giftStorageDeposit,
-            surplus
-        )
-        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-        setStorageDeposit(preparedOutput, Number(surplus))
+        const txDetails = get(newTransactionDetails)
+        if (txDetails.type === 'newToken') {
+            await prepareTokenOutput(txDetails)
+        } else if (txDetails.type === 'newNft') {
+            await prepareNftOutput(txDetails)
+        }
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
+    }
+
+    async function prepareTokenOutput(txDetails: NewTokenTransactionDetails): Promise<void> {
+        outputOptions = getOutputOptions(
+            expirationDate,
+            recipientAddress,
+            txDetails.rawAmount,
+            txDetails.metadata,
+            txDetails.tag,
+            txDetails.asset,
+            giftStorageDeposit,
+            txDetails.surplus
+        )
+        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+        setStorageDeposit(preparedOutput, Number(txDetails.surplus))
+    }
+
+    async function prepareNftOutput(txDetails: NewNftTransactionDetails): Promise<void> {
+        const outputData = buildNftOutputData(
+            expirationDate,
+            txDetails.nftId,
+            txDetails.immutableFeatures,
+            recipientAddress,
+            $selectedAccount.depositAddress
+        )
+        preparedOutput = await $selectedAccount.buildNftOutput(outputData)
+        storageDeposit = Number(preparedOutput.amount)
     }
 
     function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
@@ -149,15 +164,16 @@
         error = null
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
+
+            updateNewNftTransactionDetails({ expirationDate })
+
             updateNewTransactionDetails({ expirationDate, giftStorageDeposit, surplus })
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
-            }
+            handleError(err?.error)
         }
     }
 
@@ -177,19 +193,43 @@
         try {
             await _onMount()
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
-            }
+            handleError(err?.error)
         }
     })
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
-        >{localize('popups.transaction.title')}</Text
+        >{localize(tokenSend ? 'popups.transaction.title' : 'popups.sendNft.confirmationTitle')}</Text
     >
     <div class="w-full flex-col space-y-2">
-        <TransactionDetails {...transactionDetails} {formattedFiatValue} />
+        {#if txDetails.type === 'newToken'}
+            <TransactionDetails
+                asset={txDetails.asset}
+                metadata={txDetails.metadata}
+                storageDeposit={giftStorageDeposit ? giftedStorageDeposit : storageDeposit}
+                subject={recipient}
+                rawAmount={txDetails.rawAmount}
+                tag={txDetails.tag}
+                unit={txDetails.unit}
+                {isInternal}
+                {surplus}
+                type={ActivityType.Transaction}
+                direction={ActivityDirection.Outgoing}
+                inclusionState={InclusionState.Pending}
+                {formattedFiatValue}
+            />
+        {:else if txDetails.type === 'newNft'}
+            <NftDetails
+                nftId={txDetails.nftId}
+                direction={ActivityDirection.Outgoing}
+                inclusionState={InclusionState.Pending}
+                {storageDeposit}
+                subject={recipient}
+                isInternal
+                type={ActivityType.Nft}
+            />
+        {/if}
         {#if !hideGiftToggle}
             <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                 <Toggle

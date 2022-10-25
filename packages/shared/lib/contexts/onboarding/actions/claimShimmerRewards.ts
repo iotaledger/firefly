@@ -6,7 +6,7 @@ import {
     DEFAULT_TRANSACTION_OPTIONS,
     getAssetFromPersistedAssets,
     getOutputOptions,
-    resetNewTransactionDetails,
+    setToNewTokenTransactionDetails,
     setNewTransactionDetails,
 } from '@core/wallet'
 import { showAppNotification } from '@auxiliary/notification'
@@ -69,6 +69,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     let claimingTransaction: Transaction
     if (get(isOnboardingLedgerProfile)) {
         setNewTransactionDetails({
+            type: 'newToken',
             asset: {
                 ...getAssetFromPersistedAssets(COIN_TYPE[NetworkProtocol.Shimmer].toString()),
                 balance: {
@@ -85,7 +86,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
             tag: '',
         })
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
-        resetNewTransactionDetails()
+        setToNewTokenTransactionDetails()
     } else {
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     }

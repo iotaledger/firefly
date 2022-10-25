@@ -1,60 +1,32 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
-    import {
-        Button,
-        Text,
-        RecipientInput,
-        AssetAmountInput,
-        OptionalInput,
-        FontWeight,
-        NetworkInput,
-    } from 'shared/components'
+    import { Button, Text, FontWeight, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { getByteLengthOfString } from '@core/utils'
-    import type { DestinationNetwork } from '@core/network'
+    import { SendNftForm, SendTokenForm } from './forms'
+    import { setToNewNftTransactionDetails, setToNewTokenTransactionDetails } from '@core/wallet'
 
-    let { asset, rawAmount, unit, recipient, metadata, tag } = get(newTransactionDetails)
-    let assetAmountInput: AssetAmountInput
-    let recipientInput: RecipientInput
-    let metadataInput: OptionalInput
-    let tagInput: OptionalInput
+    let activeTab = localize('general.sendToken')
 
-    let network: DestinationNetwork
+    let sendTokenForm: SendTokenForm
+    let sendNftForm: SendNftForm
 
-    async function onSend(): Promise<void> {
-        const valid = await validate()
+    $: selectedForm = activeTab === localize('general.sendToken') ? sendTokenForm : sendNftForm
+    $: tabs = [localize('general.sendToken'), localize('general.sendNft')]
+    $: {
+        if (activeTab === localize('general.sendToken')) {
+            setToNewTokenTransactionDetails()
+        } else {
+            setToNewNftTransactionDetails()
+        }
+    }
+
+    async function onContinue(): Promise<void> {
+        const valid = await selectedForm.handleFormSubmit()
         if (valid) {
-            updateNewTransactionDetails({ asset, rawAmount, unit, recipient, metadata, tag })
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
             })
-        }
-    }
-
-    function validateOptionalInput(value: string, byteLimit: number, errorMessage: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (getByteLengthOfString(value) > byteLimit) {
-                reject(errorMessage)
-            }
-            resolve()
-        })
-    }
-
-    async function validate(): Promise<boolean> {
-        try {
-            await Promise.all([
-                assetAmountInput?.validate(),
-                recipientInput?.validate(),
-                metadataInput?.validate(validateOptionalInput(metadata, 8192, localize('error.send.metadataTooLong'))),
-                tagInput?.validate(validateOptionalInput(tag, 64, localize('error.send.tagTooLong'))),
-            ])
-            return true
-        } catch (error) {
-            console.error('Error: ', error)
-            return false
         }
     }
 
@@ -64,33 +36,22 @@
 </script>
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
-        {localize('popups.sendForm.title')}
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
+        {localize(activeTab === localize('general.sendToken') ? 'popups.sendForm.title' : 'popups.sendNft.formTitle')}
     </Text>
+    <Tabs bind:activeTab tabs={['hoi', 'Hoi']} />
     <send-form-inputs class="flex flex-col space-y-4">
-        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
-        <NetworkInput bind:network />
-        <RecipientInput bind:this={recipientInput} bind:recipient />
-        <optional-inputs class="flex flex-row flex-wrap gap-4">
-            <OptionalInput
-                bind:this={metadataInput}
-                bind:value={metadata}
-                label={localize('general.metadata')}
-                description={localize('tooltips.optionalInput')}
-            />
-            <OptionalInput
-                bind:this={tagInput}
-                bind:value={tag}
-                label={localize('general.tag')}
-                description={localize('tooltips.optionalInput')}
-            />
-        </optional-inputs>
+        {#if activeTab === localize('general.sendToken')}
+            <SendTokenForm bind:this={sendTokenForm} />
+        {:else}
+            <SendNftForm bind:this={sendNftForm} />
+        {/if}
     </send-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={onSend}>
+        <Button classes="w-full" onClick={onContinue}>
             {localize('actions.send')}
         </Button>
     </popup-buttons>

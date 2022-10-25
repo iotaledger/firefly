@@ -26,7 +26,8 @@
     import { setClipboard } from '@core/utils'
     import { time } from '@core/app'
 
-    export let metadata: INftMetadata
+    export let nftId: string = ''
+    export let metadata: INftMetadata = null
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
@@ -68,6 +69,7 @@
         ...(transactionTime && {
             transactionTime: { data: formattedTransactionTime },
         }),
+        ...(nftId && { nftId: { data: nftId } }),
         ...(metadata?.name && { metadataName: { data: metadata.name } }),
         ...(metadata?.collectionName && { metadataCollectionName: { data: metadata.collectionName } }),
         ...(metadata?.collectionId && { metadataCollectionId: { data: metadata.collectionId } }),

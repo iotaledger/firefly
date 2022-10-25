@@ -1141,6 +1141,7 @@
         "sendFunds": "Send funds",
         "sendTokensToAddress": "Send tokens to an address",
         "sendToAddress": "Send to address",
+        "sendToken": "Send Token",
         "sendNft": "Send NFT",
         "sendNftToAddress": "Send NFT to an address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
