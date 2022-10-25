@@ -7,11 +7,19 @@
     import { TabPane, TopBar } from '../../../mobile/components'
     import features from '../../features/features'
     import { activeWalletTab, WALLET_TAB_COMPONENT } from '../../lib/contexts/wallet'
-    import { dashboardRoute, DashboardRoute, dashboardRouter } from '../../lib/core/router'
-    import { ReceiveDrawer } from './wallet/drawers'
+    import { dashboardRoute, DashboardRoute, dashboardRouter, sendRouter } from '../../lib/core/router'
+    import { ReceiveDrawer, SendDrawer } from './wallet/drawers'
     import { TabNavigator } from './wallet/tabs'
 
     $: activeWalletTabComponent = WALLET_TAB_COMPONENT[$activeWalletTab]
+
+    function onReceiveDrawerClose(): void {
+        $dashboardRouter.previous()
+    }
+    function onSendDrawerClose() {
+        $dashboardRouter.previous()
+        $sendRouter.reset()
+    }
 </script>
 
 <!-- Wallet base welcome screen -->
@@ -28,7 +36,7 @@
             {#if features?.wallet?.send?.enabled || features?.wallet?.receive?.enabled}
                 <div class="flex flex-row items-center justify-center w-full space-x-2 mt-8">
                     {#if features?.wallet?.send?.enabled}
-                        <Button classes="w-full h-10">
+                        <Button classes="w-full h-10" onClick={() => $dashboardRouter.goTo(DashboardRoute.Send)}>
                             {localize('actions.send')}
                         </Button>
                     {/if}
@@ -52,5 +60,7 @@
 {/if}
 <!-- Routes -->
 {#if $dashboardRoute === DashboardRoute.Receive && features?.wallet?.receive?.enabled}
-    <ReceiveDrawer onClose={() => $dashboardRouter.previous()} />
+    <ReceiveDrawer onClose={onReceiveDrawerClose} />
+{:else if $dashboardRoute === DashboardRoute.Send && features?.wallet?.send?.enabled}
+    <SendDrawer onClose={onSendDrawerClose} />
 {/if}

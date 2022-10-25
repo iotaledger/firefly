@@ -3,18 +3,21 @@ import { get } from 'svelte/store'
 import { appRouter, AppRouter } from './app-router'
 import { dashboardRouter, DashboardRouter } from './dashboard-router'
 import { onboardingRouter, OnboardingRouter } from './onboarding-router'
-import { LoginRouter, loginRouter } from './subrouters'
 import {
     AppSetupRouter,
     appSetupRouter,
+    LoginRouter,
+    loginRouter,
+    NetworkSetupRouter,
+    networkSetupRouter,
     ProfileBackupRouter,
     profileBackupRouter,
     ProfileRecoveryRouter,
     profileRecoveryRouter,
-    NetworkSetupRouter,
-    networkSetupRouter,
     ProfileSetupRouter,
     profileSetupRouter,
+    SendRouter,
+    sendRouter,
     storageProtectionSetupRouter,
     StorageProtectionSetupRouter,
     strongholdSetupRouter,
@@ -53,6 +56,7 @@ function initialiseBaseDashboardRouters(): void {
 function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
     initialiseOnboardingSubrouters()
+    initialiseWalletSubrouters()
 }
 
 function initialiseOnboardingSubrouters(): void {
@@ -63,6 +67,10 @@ function initialiseOnboardingSubrouters(): void {
     profileRecoveryRouter.set(new ProfileRecoveryRouter())
     profileSetupRouter.set(new ProfileSetupRouter())
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
+}
+
+function initialiseWalletSubrouters(): void {
+    sendRouter.set(new SendRouter())
 }
 
 export function resetRouters(): void {
@@ -85,4 +93,5 @@ function resetSubrouters(): void {
     get(profileRecoveryRouter).reset()
     get(profileSetupRouter).reset()
     get(storageProtectionSetupRouter).reset()
+    get(sendRouter).reset()
 }
