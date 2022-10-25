@@ -1,5 +1,5 @@
 import { get, writable } from 'svelte/store'
-import { Subrouter } from '@core/router'
+import { Subrouter } from './subrouter'
 import { dashboardRouter } from '../dashboard-router'
 import { SendRoute } from '../enums'
 

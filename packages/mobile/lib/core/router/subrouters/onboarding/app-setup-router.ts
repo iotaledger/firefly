@@ -2,7 +2,7 @@ import { get, writable } from 'svelte/store'
 
 import { AppSetupRoute } from '../../enums'
 import { onboardingRouter } from '../../onboarding-router'
-import { Subrouter } from '@core/router'
+import { Subrouter } from '../subrouter'
 
 export const appSetupRoute = writable<AppSetupRoute>(null)
 export const appSetupRouter = writable<AppSetupRouter>(null)
