@@ -33,7 +33,6 @@
         DEFAULT_TRANSACTION_OPTIONS,
         newTransactionDetails,
         updateNewTransactionDetails,
-        updateNewNftTransactionDetails,
         buildNftOutputData,
         NewTokenTransactionDetails,
         NewNftTransactionDetails,
@@ -102,6 +101,7 @@
         } else if (txDetails.type === 'newNft') {
             await prepareNftOutput(txDetails)
         }
+        setStorageDeposit(preparedOutput, Number(txDetails.surplus))
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
@@ -120,19 +120,31 @@
             txDetails.surplus
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-        setStorageDeposit(preparedOutput, Number(txDetails.surplus))
     }
 
     async function prepareNftOutput(txDetails: NewNftTransactionDetails): Promise<void> {
-        const outputData = buildNftOutputData(
+        let outputData = buildNftOutputData(
             expirationDate,
             txDetails.nftId,
             txDetails.immutableFeatures,
             recipientAddress,
-            $selectedAccount.depositAddress
+            $selectedAccount.depositAddress,
+            '0',
+            giftStorageDeposit
+        )
+        const tmpOutput = await $selectedAccount.buildNftOutput(outputData)
+        const storageDeposit = tmpOutput.amount
+
+        outputData = buildNftOutputData(
+            expirationDate,
+            txDetails.nftId,
+            txDetails.immutableFeatures,
+            recipientAddress,
+            $selectedAccount.depositAddress,
+            storageDeposit,
+            giftStorageDeposit
         )
         preparedOutput = await $selectedAccount.buildNftOutput(outputData)
-        storageDeposit = Number(preparedOutput.amount)
     }
 
     function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
@@ -164,8 +176,6 @@
         error = null
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
-
-            updateNewNftTransactionDetails({ expirationDate })
 
             updateNewTransactionDetails({ expirationDate, giftStorageDeposit, surplus })
             if ($isActiveLedgerProfile) {
@@ -224,7 +234,7 @@
                 nftId={txDetails.nftId}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
-                {storageDeposit}
+                storageDeposit={giftStorageDeposit ? giftedStorageDeposit : storageDeposit}
                 subject={recipient}
                 isInternal
                 type={ActivityType.Nft}

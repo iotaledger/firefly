@@ -37,9 +37,9 @@
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
-        {localize(activeTab === localize('general.sendToken') ? 'popups.sendForm.title' : 'popups.sendNft.formTitle')}
+        {localize('general.sendAsset')}
     </Text>
-    <Tabs bind:activeTab tabs={['hoi', 'Hoi']} />
+    <Tabs bind:activeTab {tabs} />
     <send-form-inputs class="flex flex-col space-y-4">
         {#if activeTab === localize('general.sendToken')}
             <SendTokenForm bind:this={sendTokenForm} />

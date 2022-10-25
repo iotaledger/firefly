@@ -5,7 +5,7 @@
         newTransactionDetails,
         selectedAccountActivities,
         Subject,
-        updateNewNftTransactionDetails,
+        updateNewTransactionDetails,
     } from '@core/wallet'
     import { RecipientInput, NftInput } from 'shared/components'
     import type { FeatureTypes } from '@iota/types'
@@ -23,7 +23,7 @@
     export async function handleFormSubmit(): Promise<boolean> {
         const valid = await validate()
         if (valid) {
-            updateNewNftTransactionDetails({ nftId, recipient, immutableFeatures: getNftImmutableFeatures() })
+            updateNewTransactionDetails({ nftId, recipient, immutableFeatures: getNftImmutableFeatures() })
         }
         return valid
     }
