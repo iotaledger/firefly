@@ -3,12 +3,12 @@ import { INftOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { OUTPUT_TYPE_NFT } from '../constants'
 import { INftMetadata } from '../interfaces'
-import { setAccountNftsInAllAccountNfts } from '../stores'
+import { allAccountNfts, setAccountNftsInAllAccountNfts } from '../stores'
 import { getMetadataFromNftOutput, getNftId } from '../utils'
 
 export async function setNftMetadataForAccount(accountIndex: number): Promise<void> {
     const account = get(activeAccounts)[accountIndex]
-
+    const accountNfts = get(allAccountNfts)[accountIndex]
     const nftBalance: INftMetadata[] = []
     const nftIds = account?.balances?.nfts ?? []
 
@@ -17,16 +17,21 @@ export async function setNftMetadataForAccount(accountIndex: number): Promise<vo
     )
 
     for (const nftId of nftIds) {
-        const nftOutput = unspentNftOutputs.find((outputData) => {
-            const output = outputData.output as INftOutput
-            const outputNftId = getNftId(output.nftId, outputData.outputId)
-            return outputNftId === nftId
-        })?.output as INftOutput
+        const nftMetadata = accountNfts?.find((nft) => nft.id === nftId)
+        if (nftMetadata) {
+            nftBalance.push(nftMetadata)
+        } else {
+            const nftOutput = unspentNftOutputs.find((outputData) => {
+                const output = outputData.output as INftOutput
+                const outputNftId = getNftId(output.nftId, outputData.outputId)
+                return outputNftId === nftId
+            })?.output as INftOutput
 
-        if (nftOutput) {
-            const metadata = getMetadataFromNftOutput(nftOutput)
-            metadata.id = nftId
-            nftBalance.push(metadata)
+            if (nftOutput) {
+                const metadata = getMetadataFromNftOutput(nftOutput)
+                metadata.id = nftId
+                nftBalance.push(metadata)
+            }
         }
     }
 
