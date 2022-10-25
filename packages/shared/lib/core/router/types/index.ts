@@ -1,2 +1,2 @@
-export * from './event'
+export * from './router-event'
 export * from './sidebar'

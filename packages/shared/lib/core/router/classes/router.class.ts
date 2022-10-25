@@ -1,7 +1,7 @@
 import { get, Writable } from 'svelte/store'
 
 import { IRouter } from '../interfaces'
-import { FireflyEvent } from '../types'
+import { IRouterEvent } from '../types'
 
 export abstract class Router<R> implements IRouter {
     protected history: R[] = []
@@ -31,7 +31,7 @@ export abstract class Router<R> implements IRouter {
     }
 
     // This function should be implemented in the child router
-    next(event?: FireflyEvent): void {
+    next(event?: IRouterEvent): void {
         throw Error(`Unimplemented state machine within custom router!\n
         Called with event: ${event}`)
     }

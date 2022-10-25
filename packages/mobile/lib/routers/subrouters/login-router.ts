@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store'
 
-import { FireflyEvent, Subrouter } from '@core/router'
+import { IRouterEvent, Subrouter } from '@core/router'
 
 import { appRouter } from '../app-router'
 import { LoginRoute } from '../enums'
@@ -13,7 +13,7 @@ export class LoginRouter extends Subrouter<LoginRoute> {
         super(LoginRoute.SelectProfile, loginRoute, get(appRouter))
     }
 
-    next(event?: FireflyEvent): void {
+    next(event?: IRouterEvent): void {
         let nextRoute: LoginRoute
         const currentRoute = get(this.routeStore)
 

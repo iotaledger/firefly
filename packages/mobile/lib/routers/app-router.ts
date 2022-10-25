@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store'
 
 import { profiles } from '@core/profile'
-import { FireflyEvent, Router } from '@core/router'
+import { IRouterEvent, Router } from '@core/router'
 
 import { AppRoute, LoginRoute } from './enums'
 import { loginRoute } from './subrouters'
@@ -25,7 +25,7 @@ export class AppRouter extends Router<AppRoute> {
         this.init()
     }
 
-    public next(event?: FireflyEvent): void {
+    public next(event?: IRouterEvent): void {
         const params = event || {}
         let nextRoute: AppRoute
 

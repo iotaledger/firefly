@@ -1,7 +1,7 @@
-import { FireflyEvent } from '../types'
+import { IRouterEvent } from '../types'
 
 export interface IRouter {
-    next(event?: FireflyEvent): void
+    next(event?: IRouterEvent): void
     previous(): void
 
     reset?(): void
