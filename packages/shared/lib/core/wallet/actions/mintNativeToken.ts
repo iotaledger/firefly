@@ -13,7 +13,6 @@ import { addActivityToAccountActivitiesInAllAccountActivities, resetMintTokenDet
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { preprocessTransaction } from '../utils'
 import { VerifiedStatus } from '../enums'
-import { createAliasIfNecessary } from '@core/account/api/createAliasIfNecessary'
 
 export async function mintNativeToken(
     maximumSupply: number,
@@ -23,9 +22,6 @@ export async function mintNativeToken(
     try {
         updateSelectedAccount({ isTransferring: true })
         const account = get(selectedAccount)
-
-        // TODO: remove this once UX is enhanced
-        await createAliasIfNecessary(account)
 
         const nativeTokenOptions: NativeTokenOptions = {
             maximumSupply: Converter.decimalToHex(maximumSupply, true),
