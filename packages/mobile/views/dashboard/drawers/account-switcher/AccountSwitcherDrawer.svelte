@@ -42,7 +42,7 @@
         }
     }
 
-    async function onSuccess() {
+    async function onSuccess(): Promise<void> {
         await tryCreateAdditionalAccount(accountAlias, color)
         onClose()
     }
