@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { newTransactionDetails } from '@core/wallet'
     import { get } from 'svelte/store'
-    import { RecipientInput } from '../../../../../../../mobile/components'
+    import { RecipientInput } from '../../../../../../mobile/components'
 
     const { recipient } = get(newTransactionDetails)
 </script>
