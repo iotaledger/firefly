@@ -1,7 +1,9 @@
 // Copyright 2020 IOTA Stiftung
 // SPDX-License-Identifier: Apache-2.0
+
 /* eslint-disable no-bitwise */
 /* eslint-disable no-mixed-operators */
+
 /**
  * Class to help with base64 Encoding/Decoding.
  * Sourced from https://github.com/beatgammit/base64-js.
