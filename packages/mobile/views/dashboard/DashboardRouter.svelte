@@ -13,12 +13,12 @@
         $dashboardRouter.previous()
     }
     function onSendDrawerClose(): void {
-        $dashboardRouter.previous()
         $sendRouter.reset()
+        $dashboardRouter.previous()
     }
     function onAccountSwitcherDrawerClose(): void {
-        $dashboardRouter.previous()
         $accountSwitcherRouter.reset()
+        $dashboardRouter.previous()
     }
 </script>
 

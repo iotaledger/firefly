@@ -10,7 +10,7 @@
     import { HR, Icon, Text, TextType } from 'shared/components'
 
     export let onSwitch: () => unknown = () => {}
-    export let onAddClicked: () => unknown = () => {}
+    export let onAddClick: () => unknown = () => {}
 
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 </script>
@@ -31,7 +31,7 @@
             })}
         </Text>
         {#if features?.dashboard?.createAccount?.enabled}
-            <button class="h-full" on:click={onAddClicked}>
+            <button class="h-full" on:click={onAddClick}>
                 <div class="flex flex-row items-center space-x-4">
                     <Icon icon="plus" height="12" width="12" classes="text-blue-500" />
                     <Text highlighted type={TextType.h5} classes="whitespace-nowrap"

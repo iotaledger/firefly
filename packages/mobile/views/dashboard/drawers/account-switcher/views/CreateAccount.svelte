@@ -5,9 +5,9 @@
     import { getRandomAccountColor, validateAccountName } from '@core/account'
     import { BaseError } from '@core/error'
 
-    export let accountAlias = ''
-    export let color = getRandomAccountColor()
-    export let isBusy = false
+    export let accountAlias: string = ''
+    export let color: string = getRandomAccountColor()
+    export let isBusy: boolean = false
 
     export let onCreate: (accountAlias: string, color: string) => unknown = () => {}
     export let onCancel: () => unknown = () => {}

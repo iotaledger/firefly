@@ -58,7 +58,7 @@ function initialiseBaseDashboardRouters(): void {
 function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
     initialiseOnboardingSubrouters()
-    initialiseWalletSubrouters()
+    initialiseDashboardSubrouters()
 }
 
 function initialiseOnboardingSubrouters(): void {
@@ -71,7 +71,7 @@ function initialiseOnboardingSubrouters(): void {
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
 }
 
-function initialiseWalletSubrouters(): void {
+function initialiseDashboardSubrouters(): void {
     accountSwitcherRouter.set(new AccountSwitcherRouter())
     sendRouter.set(new SendRouter())
 }
@@ -89,7 +89,7 @@ function resetBaseRouters(): void {
 
 function resetSubrouters(): void {
     resetOnboardingSubrouters()
-    resetWalletSubrouters()
+    resetDashboardSubrouters()
 }
 
 function resetOnboardingSubrouters(): void {
@@ -103,7 +103,7 @@ function resetOnboardingSubrouters(): void {
     get(storageProtectionSetupRouter).reset()
 }
 
-function resetWalletSubrouters(): void {
+function resetDashboardSubrouters(): void {
     get(accountSwitcherRouter).reset()
     get(sendRouter).reset()
 }
