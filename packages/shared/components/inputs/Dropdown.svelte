@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
-    import { clickOutside } from '@core/utils'
     import { onMount } from 'svelte'
-    import { IDropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
+    import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
+    import { clickOutside, IDropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
 
     export let value: string
     export let label: string = ''
