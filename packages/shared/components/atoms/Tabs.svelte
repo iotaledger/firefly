@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
+
     export let tabs: string[]
     export let activeTab: string
 </script>
@@ -10,7 +12,7 @@
             class="w-full border-sm {activeTab === tab ? 'text-blue-500 bg-white' : 'text-gray-600'}"
             class:active={activeTab === tab}
         >
-            {tab}
+            {localize(tab)}
         </button>
     {/each}
 </div>

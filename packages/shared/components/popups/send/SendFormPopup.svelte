@@ -5,15 +5,15 @@
     import { SendNftForm, SendTokenForm } from './forms'
     import { setToNewNftTransactionDetails, setToNewTokenTransactionDetails } from '@core/wallet'
 
-    let activeTab = localize('general.sendToken')
+    const tabs = ['general.sendToken', 'general.sendNft']
+    let activeTab = 'general.sendToken'
 
     let sendTokenForm: SendTokenForm
     let sendNftForm: SendNftForm
 
-    $: selectedForm = activeTab === localize('general.sendToken') ? sendTokenForm : sendNftForm
-    $: tabs = [localize('general.sendToken'), localize('general.sendNft')]
+    $: selectedForm = activeTab === 'general.sendToken' ? sendTokenForm : sendNftForm
     $: {
-        if (activeTab === localize('general.sendToken')) {
+        if (activeTab === 'general.sendToken') {
             setToNewTokenTransactionDetails()
         } else {
             setToNewNftTransactionDetails()
@@ -41,7 +41,7 @@
     </Text>
     <Tabs bind:activeTab {tabs} />
     <send-form-inputs class="flex flex-col space-y-4">
-        {#if activeTab === localize('general.sendToken')}
+        {#if activeTab === 'general.sendToken'}
             <SendTokenForm bind:this={sendTokenForm} />
         {:else}
             <SendNftForm bind:this={sendNftForm} />
