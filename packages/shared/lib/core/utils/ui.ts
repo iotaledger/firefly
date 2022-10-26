@@ -3,6 +3,7 @@
 
 import { Event } from '@lib/typings/events'
 
+import { isRecentDate } from './date'
 import { Element } from './interfaces'
 
 export function bindEvents(element: Element, events: Event<unknown>[]): { destroy } {
@@ -60,4 +61,35 @@ export function clickOutside(node: any, options?: { includeScroll }): { destroy 
             }
         },
     }
+}
+
+/**
+ * Returns a boolean indicating if color is bright using YIQ conversion
+ * @param color The color to be tested (can be HEX or RGB)
+ * @returns Boolean true if color is bright
+ */
+export function isBright(color: string): boolean {
+    if (color) {
+        const rgb =
+            color.includes('#') && color.length >= 7
+                ? color.match(/\w\w/g)?.map((x) => parseInt(x, 16))
+                : color.match(/[0-9]+/g)?.map((c) => parseInt(c, 10))
+        if (rgb) {
+            const yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000
+            return yiq >= 186
+        }
+    }
+}
+
+/**
+ * Returns warning text color for last Stronghold backup
+ * @param lastBackupDate: Blue if less than a month. Orange if less than three months. Red if more.
+ */
+export function getBackupWarningColor(lastBackupDate: Date): string {
+    if (!(lastBackupDate instanceof Date)) {
+        return 'red'
+    }
+    const { lessThanAMonth, lessThanThreeMonths } = isRecentDate(lastBackupDate)
+
+    return lessThanAMonth ? 'blue' : lessThanThreeMonths ? 'yellow' : 'orange'
 }

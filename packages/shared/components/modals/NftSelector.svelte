@@ -2,7 +2,7 @@
     import { selectedAccount } from '@core/account'
     import { ADDRESS_TYPE_NFT, convertHexAddressToBech32 } from '@core/wallet'
     import { Modal, Text, TextType } from 'shared/components'
-    import { truncateString } from 'shared/lib/helpers'
+    import { truncateString } from '@core/utils'
     import { fade } from 'svelte/transition'
 
     export let modal: Modal = undefined

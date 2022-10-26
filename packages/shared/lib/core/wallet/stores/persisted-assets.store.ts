@@ -1,9 +1,10 @@
-import { activeProfile } from '@core/profile'
-import { persistent } from '@lib/helpers'
 import { get } from 'svelte/store'
+
+import { activeProfile } from '@core/profile'
+import { persistent } from '@core/utils/store'
+
 import { NotVerifiedStatus, VerifiedStatus } from '../enums'
-import { IPersistedAsset } from '../interfaces'
-import { IPersistedAssets } from '../interfaces/persisted-assets.interface'
+import { IPersistedAsset, IPersistedAssets } from '../interfaces'
 
 export const persistedAssets = persistent<IPersistedAssets>('persistedAssets', {})
 

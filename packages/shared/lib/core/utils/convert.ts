@@ -66,6 +66,25 @@ export function convertBytesToHexString(bytes: number[]): string | undefined {
     return bytes.map((byte) => ('0' + (byte & 0xff).toString(16)).slice(-2)).join('')
 }
 
+/**
+ * Convert HEX color to RGBA
+ * @param hexCode: hex color to convert
+ * @param opacity: [0,100], default = 100
+ */
+export function convertHexToRGBA(hexCode: string, opacity: number = 100): string {
+    let hex = hexCode.replace('#', '')
+
+    if (hex.length === 3) {
+        hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`
+    }
+
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
+
+    return `rgba(${r},${g},${b},${opacity / 100})`
+}
+
 // Copyright 2020 IOTA Stiftung
 // SPDX-License-Identifier: Apache-2.0
 

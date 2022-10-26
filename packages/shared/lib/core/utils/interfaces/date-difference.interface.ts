@@ -1,4 +1,4 @@
-export interface DateDifference {
+export interface IDateDifference {
     unit: string
     value?: number
 }
