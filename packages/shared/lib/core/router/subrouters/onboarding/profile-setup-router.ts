@@ -3,9 +3,9 @@ import { get, writable } from 'svelte/store'
 import { ProfileType } from '@core/profile'
 import { onboardingProfile, ProfileSetupType } from '@contexts/onboarding'
 
+import { Subrouter } from '../../classes'
 import { ProfileSetupRoute } from '../../enums'
-import { onboardingRouter } from '../../onboarding-router'
-import { Subrouter } from '../subrouter'
+import { onboardingRouter } from '../../routers'
 
 export const profileSetupRoute = writable<ProfileSetupRoute>(null)
 export const profileSetupRouter = writable<ProfileSetupRouter>(null)

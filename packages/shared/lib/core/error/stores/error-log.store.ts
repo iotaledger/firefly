@@ -10,6 +10,6 @@ export const errorLog = persistent<IError[]>('errorLog', [])
 /**
  * Adds an error to the error log store.
  */
-export const addError = (err: IError): void => {
+export function addError(err: IError): void {
     errorLog.update((log) => [err, ...log])
 }

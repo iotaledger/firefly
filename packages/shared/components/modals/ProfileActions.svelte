@@ -3,7 +3,7 @@
     import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
-    import { popupState, openPopup } from '@auxiliary/popup'
+    import { popupState, openPopup, closePopup } from '@auxiliary/popup'
     import { openSettings } from '@core/router'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
     import { appVersionDetails } from '@core/app'
@@ -34,6 +34,7 @@
     }
 
     function handleSettingsClick(): void {
+        closePopup()
         openSettings()
         modal?.close()
     }
