@@ -2,6 +2,8 @@
 
 import { localize } from '@core/i18n'
 
+import { convertBytesToHexString } from './convert'
+
 export function validateBech32Address(prefix: string, addr: string): string {
     if (!addr || !addr.startsWith(prefix)) {
         return localize('error.send.wrongAddressPrefix', {
@@ -29,6 +31,12 @@ export function validateBech32Address(prefix: string, addr: string): string {
 
 export function isValidBech32AddressAndPrefix(address: string, expectedAddressPrefix: string): boolean {
     return new RegExp(`^${expectedAddressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)
+}
+
+export function convertBech32AddressToEd25519Address(bech32Address: string, includeTypeByte: boolean = false): string {
+    if (!bech32Address) return ''
+
+    return convertBytesToHexString(Array.from(Bech32.decode(bech32Address).data).slice(includeTypeByte ? 0 : 1))
 }
 
 // Copyright 2020 IOTA Stiftung
