@@ -11,7 +11,7 @@
     let recipientValidationError: string
 
     onMount(() => {
-        recipient = $newTransactionDetails?.recipient
+        recipient = <IAddressSubject>$newTransactionDetails?.recipient 
     })
 
     function onContinueClick(): void {
