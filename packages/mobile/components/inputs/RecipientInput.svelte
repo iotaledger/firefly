@@ -14,6 +14,7 @@
     let value: string
 
     $: addressPrefix = $networkHrp
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     $: value = (recipient )?.address ?? ''
     $: value, validateValue()
 
