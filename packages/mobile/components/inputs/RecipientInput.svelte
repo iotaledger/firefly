@@ -2,11 +2,9 @@
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
     import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils'
-    // @TODO fix the linting error that IAddressSubject isn't used
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    import { IAddressSubject, Subject } from '@core/wallet'
+    import { IAddressSubject } from '@core/wallet'
 
-    export let recipient: Subject
+    export let recipient: IAddressSubject
     export let disabled: boolean = false
     export let error: string = undefined
 
@@ -14,8 +12,7 @@
     let value: string
 
     $: addressPrefix = $networkHrp
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    $: value = (recipient )?.address ?? ''
+    $: value = recipient?.address ?? ''
     $: value, validateValue()
 
     function onInputChange(e: Event) {
