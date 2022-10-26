@@ -2,9 +2,9 @@ import { get, writable } from 'svelte/store'
 
 import { hasUserClaimedRewards, onboardingProfile } from '@contexts/onboarding'
 
+import { Subrouter } from '../../classes'
 import { ShimmerClaimingRoute } from '../../enums'
-import { onboardingRouter } from '../../onboarding-router'
-import { Subrouter } from '../subrouter'
+import { onboardingRouter } from '../../routers'
 
 export const shimmerClaimingRoute = writable<ShimmerClaimingRoute>(null)
 export const shimmerClaimingRouter = writable<ShimmerClaimingRouter>(null)

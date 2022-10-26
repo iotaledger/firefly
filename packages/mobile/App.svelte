@@ -11,7 +11,7 @@
         dashboardRouter,
         OnboardingRoute,
         onboardingRoute,
-    } from './lib/core/router'
+    } from './lib/routers'
     import { openSettings } from '@core/router'
     import { Route } from './components'
     import { ToastContainer } from 'shared/components'
@@ -26,8 +26,8 @@
     } from '@core/app'
     import { Electron } from 'shared/lib/electron'
     import { showAppNotification } from '@auxiliary/notification'
-    import { openPopup } from '@auxiliary/popup'
-    import { DashboardRouter, LoginRouter, OnboardingRouter } from './routes'
+    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
     import { onDestroy, onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { onboardingProfile, initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
@@ -96,6 +96,7 @@
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
+                closePopup()
                 openSettings()
             } else {
                 settings = true
@@ -177,7 +178,7 @@
     <OnboardingRouter />
 </Route>
 <Route route={AppRoute.Dashboard}>
-    <DashboardRouter />
+    <DashboardView />
 </Route>
 
 <ToastContainer />
