@@ -3,7 +3,6 @@
         Drawer,
         Icon,
         ProfileActionsModal,
-        SidebarTab,
         Text,
         Modal,
         NetworkIndicator,
@@ -21,9 +20,10 @@
         SettingsRoute,
         SidebarTab as SidebarTabType,
     } from '@core/router'
-    import { Settings } from 'shared/routes'
     import { localize } from '@core/i18n'
     import features from 'shared/features/features'
+    import { SidebarTab } from '../../components'
+    import { Settings } from './settings'
 
     let profileModal: Modal
     let drawer: Drawer
