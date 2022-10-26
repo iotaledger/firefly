@@ -25,3 +25,7 @@ export function validateBech32Address(prefix: string, addr: string): string {
         return localize('error.send.invalidAddress')
     }
 }
+
+export function isValidBech32AddressAndPrefix(address: string, expectedAddressPrefix: string): boolean {
+    return new RegExp(`^${expectedAddressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)
+}
