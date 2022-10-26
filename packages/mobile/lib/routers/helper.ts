@@ -4,6 +4,8 @@ import { appRouter, AppRouter } from './app-router'
 import { dashboardRouter, DashboardRouter } from './dashboard-router'
 import { onboardingRouter, OnboardingRouter } from './onboarding-router'
 import {
+    AccountSwitcherRouter,
+    accountSwitcherRouter,
     AppSetupRouter,
     appSetupRouter,
     LoginRouter,
@@ -70,6 +72,7 @@ function initialiseOnboardingSubrouters(): void {
 }
 
 function initialiseWalletSubrouters(): void {
+    accountSwitcherRouter.set(new AccountSwitcherRouter())
     sendRouter.set(new SendRouter())
 }
 
@@ -85,6 +88,11 @@ function resetBaseRouters(): void {
 }
 
 function resetSubrouters(): void {
+    resetOnboardingSubrouters()
+    resetWalletSubrouters()
+}
+
+function resetOnboardingSubrouters() {
     get(appSetupRouter).reset()
     get(loginRouter).reset()
     get(networkSetupRouter).reset()
@@ -93,5 +101,9 @@ function resetSubrouters(): void {
     get(profileRecoveryRouter).reset()
     get(profileSetupRouter).reset()
     get(storageProtectionSetupRouter).reset()
+}
+
+function resetWalletSubrouters(): void {
+    get(accountSwitcherRouter).reset()
     get(sendRouter).reset()
 }
