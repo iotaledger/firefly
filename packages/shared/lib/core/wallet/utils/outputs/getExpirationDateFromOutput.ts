@@ -1,5 +1,5 @@
 import { OutputTypes } from '@iota/types'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_EXPIRATION } from '../../constants'
 
 export function getExpirationDateFromOutput(output: OutputTypes): Date {

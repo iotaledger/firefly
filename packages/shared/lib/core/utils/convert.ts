@@ -1,7 +1,92 @@
+/* eslint-disable no-bitwise */
+
+import { Base64 } from './encode'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
+
+/**
+ * Returns a UNIX timestamp from a given Date object.
+ */
+export function convertDateToUnixTimestamp(date: Date): number {
+    if (date) {
+        return Math.round(date.getTime() / MILLISECONDS_PER_SECOND)
+    } else {
+        return undefined
+    }
+}
+
+/**
+ * Returns a Date object from a given UNIX timestamp.
+ */
+export function convertUnixTimestampToDate(timestamp: number): Date {
+    if (timestamp) {
+        return new Date(timestamp * MILLISECONDS_PER_SECOND)
+    } else {
+        return undefined
+    }
+}
+
+export function convertUInt16NumberToLittleEndianHex(num: number): string {
+    const littleEndianNumber = ((num & 0xff) << 8) | ((num >> 8) & 0xff)
+    const hex = ('0000' + littleEndianNumber.toString(16).toUpperCase()).slice(-4)
+    return hex
+}
+
+export function convertBytesToUtf8String(bytes: Uint8Array | number[]): string {
+    if (!bytes || bytes.length <= 0) return ''
+
+    const extraByteMap = [1, 1, 1, 1, 2, 2, 3, 0]
+    const charCount = bytes.length
+
+    let result = ''
+
+    for (let idx = 0; idx < charCount; ) {
+        let char = bytes[idx++]
+        if (char & 0x80) {
+            let extraChar = extraByteMap[(char >> 3) & 0x07]
+            if (!(char & 0x40) || !extraChar || idx + extraChar > charCount) return ''
+
+            char = char & (0x3f >> extraChar)
+            for (; extraChar > 0; extraChar--) {
+                const _char = bytes[idx++]
+                if ((_char & 0xc0) !== 0x80) return ''
+
+                char = (char << 6) | (_char & 0x3f)
+            }
+        }
+
+        result += String.fromCharCode(char)
+    }
+
+    return result
+}
+
+export function convertBytesToHexString(bytes: number[]): string | undefined {
+    if (!bytes || bytes.length <= 0) return undefined
+
+    return bytes.map((byte) => ('0' + (byte & 0xff).toString(16)).slice(-2)).join('')
+}
+
+/**
+ * Convert HEX color to RGBA
+ * @param hexCode: hex color to convert
+ * @param opacity: [0,100], default = 100
+ */
+export function convertHexToRGBA(hexCode: string, opacity: number = 100): string {
+    let hex = hexCode.replace('#', '')
+
+    if (hex.length === 3) {
+        hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`
+    }
+
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
+
+    return `rgba(${r},${g},${b},${opacity / 100})`
+}
+
 // Copyright 2020 IOTA Stiftung
 // SPDX-License-Identifier: Apache-2.0
-/* eslint-disable no-bitwise */
-import { Base64 } from './base64'
 
 /**
  * Convert arrays to and from different formats.

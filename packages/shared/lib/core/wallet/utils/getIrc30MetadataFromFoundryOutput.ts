@@ -1,6 +1,6 @@
 import { IIrc30Metadata } from '../interfaces'
 import { get } from 'svelte/store'
-import { Converter } from '@lib/converter'
+import { Converter } from '@core/utils'
 import { validateIrc30Metadata } from './validateIrc30Metadata'
 import { getMetadataFromFoundryOutput } from './getMetadataFromFoundryOutput'
 import { activeAccounts } from '@core/profile'

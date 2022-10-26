@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { COIN_TYPE, NetworkProtocol } from '@core/network'
     import { getAssetInitials, IPersistedAsset, NotVerifiedStatus, ANIMATED_TOKEN_IDS } from '@core/wallet'
-    import { isBright } from '@lib/helpers'
+    import { isBright } from '@core/utils'
     import { Animation, Icon, VerificationBadge } from 'shared/components'
 
     export let asset: IPersistedAsset

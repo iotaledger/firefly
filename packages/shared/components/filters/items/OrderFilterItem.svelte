@@ -2,17 +2,17 @@
     import type { OrderFilterUnit } from '@core/wallet/interfaces'
     import { Dropdown } from 'shared/components'
     import { localize } from '@core/i18n'
-    import type { DropdownChoice } from '@core/utils'
+    import type { IDropdownChoice } from '@core/utils'
     import { OrderOption } from '@core/wallet'
 
     export let filterUnit: OrderFilterUnit
 
-    const choices: DropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
-    const ascDescChoices: DropdownChoice[] = [OrderOption.Asc, OrderOption.Desc].map((choice) => ({
+    const ascDescChoices: IDropdownChoice[] = [OrderOption.Asc, OrderOption.Desc].map((choice) => ({
         label: localize(`filters.ascDesc.${choice}`),
         value: choice,
     }))
