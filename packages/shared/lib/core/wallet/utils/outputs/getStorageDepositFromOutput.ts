@@ -1,5 +1,5 @@
 import { OutputTypes, IStorageDepositReturnUnlockCondition } from '@iota/types'
-import { OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '../../constants'
+import { OUTPUT_TYPE_NFT, OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '../../constants'
 
 export function getStorageDepositFromOutput(output: OutputTypes): {
     storageDeposit: number
@@ -13,7 +13,7 @@ export function getStorageDepositFromOutput(output: OutputTypes): {
         )
         if (storageDepositReturnUnlockCondition) {
             return { storageDeposit: Number(storageDepositReturnUnlockCondition.amount), giftedStorageDeposit: 0 }
-        } else if (output.nativeTokens?.length > 0 && Number(output.amount) > 0) {
+        } else if ((output.type === OUTPUT_TYPE_NFT || output.nativeTokens?.length > 0) && Number(output.amount) > 0) {
             return { storageDeposit: 0, giftedStorageDeposit: Number(output.amount) }
         } else {
             return { storageDeposit: 0, giftedStorageDeposit: 0 }

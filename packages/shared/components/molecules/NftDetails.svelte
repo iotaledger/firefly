@@ -64,12 +64,12 @@
 
     $: localePrefix = `tooltips.transactionDetails.${direction}.`
 
-    let detailsList: { [key in string]: { data: string; tooltipText?: string } }
+    let detailsList: { [key in string]: { data: string; tooltipText?: string; copyable?: boolean } }
     $: detailsList = {
         ...(transactionTime && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(nftId && { nftId: { data: nftId } }),
+        ...(nftId && { nftId: { data: nftId, copyable: true } }),
         ...(metadata?.name && { metadataName: { data: metadata.name } }),
         ...(metadata?.collectionName && { metadataCollectionName: { data: metadata.collectionName } }),
         ...(metadata?.collectionId && { metadataCollectionId: { data: metadata.collectionId } }),
@@ -159,6 +159,7 @@
                     keyText={localize(`general.${key}`)}
                     valueText={value.data}
                     tooltipText={value.tooltipText}
+                    isCopyable={value.copyable}
                 />
             {/each}
             {#if claimingTransactionId}

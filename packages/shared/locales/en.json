@@ -1284,6 +1284,7 @@
         "expirationTime": "Expiration time",
         "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
+        "nftId": "NFT ID",
         "aliasId": "Alias ID",
         "governorAddress": "Governor Address",
         "stateControllerAddress": "State Controller Address",

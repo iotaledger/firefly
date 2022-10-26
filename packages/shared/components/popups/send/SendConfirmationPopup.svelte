@@ -52,7 +52,6 @@
         get(newTransactionDetails)
 
     let storageDeposit = 0
-    let giftedStorageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
@@ -150,16 +149,19 @@
     function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
-        storageDeposit = _storageDeposit
 
-        // Only giftedStorageDeposit needs adjusting, since that is derived
-        // from the amount property instead of the unlock condition
-        if (!surplus) {
-            giftedStorageDeposit = _giftedStorageDeposit
-        } else if (surplus >= _giftedStorageDeposit) {
-            giftedStorageDeposit = 0
+        if (giftStorageDeposit) {
+            // Only giftedStorageDeposit needs adjusting, since that is derived
+            // from the amount property instead of the unlock condition
+            if (!surplus) {
+                storageDeposit = _giftedStorageDeposit
+            } else if (surplus >= _giftedStorageDeposit) {
+                storageDeposit = 0
+            } else {
+                storageDeposit = _giftedStorageDeposit - surplus
+            }
         } else {
-            giftedStorageDeposit = _giftedStorageDeposit - surplus
+            storageDeposit = _storageDeposit
         }
     }
 
@@ -177,7 +179,7 @@
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
 
-            updateNewTransactionDetails({ expirationDate, giftStorageDeposit, surplus })
+            updateNewTransactionDetails({ type: txDetails.type, expirationDate, giftStorageDeposit, surplus })
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
@@ -217,7 +219,7 @@
             <TransactionDetails
                 asset={txDetails.asset}
                 metadata={txDetails.metadata}
-                storageDeposit={giftStorageDeposit ? giftedStorageDeposit : storageDeposit}
+                {storageDeposit}
                 subject={recipient}
                 rawAmount={txDetails.rawAmount}
                 tag={txDetails.tag}
@@ -234,7 +236,7 @@
                 nftId={txDetails.nftId}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
-                storageDeposit={giftStorageDeposit ? giftedStorageDeposit : storageDeposit}
+                {storageDeposit}
                 subject={recipient}
                 isInternal
                 type={ActivityType.Nft}

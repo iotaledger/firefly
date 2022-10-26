@@ -33,7 +33,7 @@
     export async function handleFormSubmit(): Promise<boolean> {
         const valid = await validate()
         if (valid) {
-            updateNewTransactionDetails({ asset, rawAmount, unit, recipient, metadata, tag })
+            updateNewTransactionDetails({ type: 'newToken', asset, rawAmount, unit, recipient, metadata, tag })
         }
         return valid
     }
