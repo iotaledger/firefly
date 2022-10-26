@@ -1,5 +1,6 @@
-import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from './constants'
 import { formatDate } from '@core/i18n'
+
+import { HEXADECIMAL_PREFIX, HEXADECIMAL_REGEXP } from './constants'
 
 export function capitalizeString(str: string): string {
     if (!str) return str

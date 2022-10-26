@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Transition } from 'shared/components'
-    import { FireflyEvent, ledgerSetupRoute, ledgerSetupRouter, LedgerSetupRoute } from '@core/router'
+    import { IRouterEvent, ledgerSetupRoute, ledgerSetupRouter, LedgerSetupRoute } from '@core/router'
     import { ConnectLedgerView, LedgerInstallationGuideView } from './views'
 
     onMount(() => {
         $ledgerSetupRouter.restartIfNotInLedgerFlow()
     })
 
-    function next(event: CustomEvent<FireflyEvent>): void {
+    function next(event: CustomEvent<IRouterEvent>): void {
         $ledgerSetupRouter.next(event.detail)
     }
 

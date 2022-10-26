@@ -11,7 +11,7 @@
         formatTokenAmountDefault,
         visibleSelectedAccountAssets,
     } from '@core/wallet'
-    import { UNIT_MAP } from '@lib/units'
+    import { IOTA_UNIT_MAP } from '@core/utils'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
@@ -34,7 +34,7 @@
             allowedDecimals = 0
         }
     } else if (asset?.metadata?.useMetricPrefix) {
-        allowedDecimals = UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
+        allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
     }
 
     function onClickAvailableBalance(): void {

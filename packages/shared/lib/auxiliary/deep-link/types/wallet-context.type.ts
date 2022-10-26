@@ -1,4 +1,4 @@
-import { Unit } from '@lib/units'
+import { IotaUnit } from '@core/utils'
 
 /**
  * The parameters of a send operation.
@@ -6,6 +6,6 @@ import { Unit } from '@lib/units'
 export type SendOperationParameters = {
     address: string
     amount: string
-    unit: Unit
+    unit: IotaUnit
     message: string
 }
