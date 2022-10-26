@@ -1,8 +1,13 @@
 import { writable, Writable } from 'svelte/store'
 import { NewTransactionDetails } from '../types/new-transaction-details.type'
 
+export enum NewTransactionType {
+    TokenTransfer = 'TokenTransfer',
+    NftTransfer = 'NftTransfer',
+}
+
 export const newTransactionDetails: Writable<NewTransactionDetails> = writable({
-    type: 'newToken',
+    type: NewTransactionType.TokenTransfer,
     rawAmount: undefined,
     asset: undefined,
     expirationDate: undefined,
@@ -18,7 +23,7 @@ export const newTransactionDetails: Writable<NewTransactionDetails> = writable({
 
 export function setToNewTokenTransactionDetails(): void {
     newTransactionDetails.set({
-        type: 'newToken',
+        type: NewTransactionType.TokenTransfer,
         rawAmount: undefined,
         asset: undefined,
         expirationDate: undefined,
@@ -35,7 +40,7 @@ export function setToNewTokenTransactionDetails(): void {
 
 export function setToNewNftTransactionDetails(): void {
     newTransactionDetails.set({
-        type: 'newNft',
+        type: NewTransactionType.NftTransfer,
         expirationDate: undefined,
         recipient: undefined,
         immutableFeatures: [],
@@ -51,9 +56,9 @@ export function updateNewTransactionDetails(
     payload: Partial<NewTransactionDetails> & Pick<NewTransactionDetails, 'type'>
 ): void {
     newTransactionDetails.update((state) => {
-        if (payload.type === 'newToken' && state.type === 'newToken') {
+        if (payload.type === NewTransactionType.TokenTransfer && state.type === NewTransactionType.TokenTransfer) {
             state = { ...state, ...payload }
-        } else if (payload.type === 'newNft' && state.type === 'newNft') {
+        } else if (payload.type === NewTransactionType.NftTransfer && state.type === NewTransactionType.NftTransfer) {
             state = { ...state, ...payload }
         }
         return state

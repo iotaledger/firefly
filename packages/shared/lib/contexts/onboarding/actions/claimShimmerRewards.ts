@@ -8,6 +8,7 @@ import {
     getOutputOptions,
     setToNewTokenTransactionDetails,
     setNewTransactionDetails,
+    NewTransactionType,
 } from '@core/wallet'
 import { showAppNotification } from '@auxiliary/notification'
 import type { Transaction } from '@iota/wallet'
@@ -69,7 +70,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     let claimingTransaction: Transaction
     if (get(isOnboardingLedgerProfile)) {
         setNewTransactionDetails({
-            type: 'newToken',
+            type: NewTransactionType.TokenTransfer,
             asset: {
                 ...getAssetFromPersistedAssets(COIN_TYPE[NetworkProtocol.Shimmer].toString()),
                 balance: {

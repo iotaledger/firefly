@@ -5,6 +5,7 @@ import { isStringTrue, getByteLengthOfString } from '@core/utils'
 import {
     getAssetById,
     NewTransactionDetails,
+    NewTransactionType,
     selectedAccountAssets,
     setNewTransactionDetails,
     Subject,
@@ -89,7 +90,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
 
     return {
-        type: 'newToken',
+        type: NewTransactionType.TokenTransfer,
         ...(asset && { asset }),
         ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),

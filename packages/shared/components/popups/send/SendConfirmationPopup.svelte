@@ -36,6 +36,7 @@
         buildNftOutputData,
         NewTokenTransactionDetails,
         NewNftTransactionDetails,
+        NewTransactionType,
     } from '@core/wallet'
     import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
     import { closePopup, openPopup } from '@auxiliary/popup'
@@ -59,11 +60,13 @@
 
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
-    $: txDetails = get(newTransactionDetails)
+    $: transactionDetails = get(newTransactionDetails)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
-    $: hideGiftToggle = txDetails.type === 'newToken' && txDetails.asset?.id === $selectedAccountAssets?.baseCoin?.id
+    $: hideGiftToggle =
+        transactionDetails.type === NewTransactionType.TokenTransfer &&
+        transactionDetails.asset?.id === $selectedAccountAssets?.baseCoin?.id
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
@@ -73,10 +76,10 @@
     }
 
     $: formattedFiatValue =
-        txDetails.type === 'newToken'
+        transactionDetails.type === NewTransactionType.TokenTransfer
             ? formatCurrency(
                   convertToFiat(
-                      Big(txDetails.rawAmount),
+                      Big(transactionDetails.rawAmount),
                       $currencies[CurrencyTypes.USD],
                       $exchangeRates[$activeProfile?.settings?.currency]
                   )
@@ -94,38 +97,38 @@
     }
 
     async function _prepareOutput(): Promise<void> {
-        const txDetails = get(newTransactionDetails)
-        if (txDetails.type === 'newToken') {
-            await prepareTokenOutput(txDetails)
-        } else if (txDetails.type === 'newNft') {
-            await prepareNftOutput(txDetails)
+        const transactionDetails = get(newTransactionDetails)
+        if (transactionDetails.type === NewTransactionType.TokenTransfer) {
+            await prepareTokenOutput(transactionDetails)
+        } else if (transactionDetails.type === NewTransactionType.NftTransfer) {
+            await prepareNftOutput(transactionDetails)
         }
-        setStorageDeposit(preparedOutput, Number(txDetails.surplus))
+        setStorageDeposit(preparedOutput, Number(transactionDetails.surplus))
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
-    async function prepareTokenOutput(txDetails: NewTokenTransactionDetails): Promise<void> {
+    async function prepareTokenOutput(transactionDetails: NewTokenTransactionDetails): Promise<void> {
         outputOptions = getOutputOptions(
             expirationDate,
             recipientAddress,
-            txDetails.rawAmount,
-            txDetails.metadata,
-            txDetails.tag,
-            txDetails.asset,
+            transactionDetails.rawAmount,
+            transactionDetails.metadata,
+            transactionDetails.tag,
+            transactionDetails.asset,
             giftStorageDeposit,
-            txDetails.surplus
+            transactionDetails.surplus
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
     }
 
-    async function prepareNftOutput(txDetails: NewNftTransactionDetails): Promise<void> {
+    async function prepareNftOutput(transactionDetails: NewNftTransactionDetails): Promise<void> {
         let outputData = buildNftOutputData(
             expirationDate,
-            txDetails.nftId,
-            txDetails.immutableFeatures,
+            transactionDetails.nftId,
+            transactionDetails.immutableFeatures,
             recipientAddress,
             $selectedAccount.depositAddress,
             '0',
@@ -136,8 +139,8 @@
 
         outputData = buildNftOutputData(
             expirationDate,
-            txDetails.nftId,
-            txDetails.immutableFeatures,
+            transactionDetails.nftId,
+            transactionDetails.immutableFeatures,
             recipientAddress,
             $selectedAccount.depositAddress,
             storageDeposit,
@@ -179,7 +182,7 @@
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
 
-            updateNewTransactionDetails({ type: txDetails.type, expirationDate, giftStorageDeposit, surplus })
+            updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
@@ -215,15 +218,15 @@
         >{localize(tokenSend ? 'popups.transaction.title' : 'popups.sendNft.confirmationTitle')}</Text
     >
     <div class="w-full flex-col space-y-2">
-        {#if txDetails.type === 'newToken'}
+        {#if transactionDetails.type === NewTransactionType.TokenTransfer}
             <TransactionDetails
-                asset={txDetails.asset}
-                metadata={txDetails.metadata}
+                asset={transactionDetails.asset}
+                metadata={transactionDetails.metadata}
                 {storageDeposit}
                 subject={recipient}
-                rawAmount={txDetails.rawAmount}
-                tag={txDetails.tag}
-                unit={txDetails.unit}
+                rawAmount={transactionDetails.rawAmount}
+                tag={transactionDetails.tag}
+                unit={transactionDetails.unit}
                 {isInternal}
                 {surplus}
                 type={ActivityType.Transaction}
@@ -231,9 +234,9 @@
                 inclusionState={InclusionState.Pending}
                 {formattedFiatValue}
             />
-        {:else if txDetails.type === 'newNft'}
+        {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftDetails
-                nftId={txDetails.nftId}
+                nftId={transactionDetails.nftId}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
                 {storageDeposit}

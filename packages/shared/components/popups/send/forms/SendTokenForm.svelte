@@ -1,7 +1,13 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { IAsset, newTransactionDetails, Subject, updateNewTransactionDetails } from '@core/wallet'
+    import {
+        IAsset,
+        newTransactionDetails,
+        NewTransactionType,
+        Subject,
+        updateNewTransactionDetails,
+    } from '@core/wallet'
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput } from 'shared/components'
     import { getByteLengthOfString } from '@core/utils'
     import type { DestinationNetwork } from '@core/network'
@@ -21,7 +27,7 @@
     let unit: string
 
     const transactionDetail = get(newTransactionDetails)
-    if (transactionDetail.type === 'newToken') {
+    if (transactionDetail.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetail.rawAmount
         asset = transactionDetail.asset
         metadata = transactionDetail.metadata
@@ -33,7 +39,15 @@
     export async function handleFormSubmit(): Promise<boolean> {
         const valid = await validate()
         if (valid) {
-            updateNewTransactionDetails({ type: 'newToken', asset, rawAmount, unit, recipient, metadata, tag })
+            updateNewTransactionDetails({
+                type: NewTransactionType.TokenTransfer,
+                asset,
+                rawAmount,
+                unit,
+                recipient,
+                metadata,
+                tag,
+            })
         }
         return valid
     }

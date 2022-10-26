@@ -5,15 +5,19 @@
     import { SendNftForm, SendTokenForm } from './forms'
     import { setToNewNftTransactionDetails, setToNewTokenTransactionDetails } from '@core/wallet'
 
-    const tabs = ['general.sendToken', 'general.sendNft']
-    let activeTab = 'general.sendToken'
+    enum SendForm {
+        SendToken = 'general.sendToken',
+        SendNft = 'general.sendNft',
+    }
+    const tabs: SendForm[] = [SendForm.SendToken, SendForm.SendNft]
+    let activeTab: SendForm = SendForm.SendToken
 
     let sendTokenForm: SendTokenForm
     let sendNftForm: SendNftForm
 
-    $: selectedForm = activeTab === 'general.sendToken' ? sendTokenForm : sendNftForm
+    $: selectedForm = activeTab === SendForm.SendToken ? sendTokenForm : sendNftForm
     $: {
-        if (activeTab === 'general.sendToken') {
+        if (activeTab === SendForm.SendToken) {
             setToNewTokenTransactionDetails()
         } else {
             setToNewNftTransactionDetails()
@@ -41,7 +45,7 @@
     </Text>
     <Tabs bind:activeTab {tabs} />
     <send-form-inputs class="flex flex-col space-y-4">
-        {#if activeTab === 'general.sendToken'}
+        {#if activeTab === SendForm.SendToken}
             <SendTokenForm bind:this={sendTokenForm} />
         {:else}
             <SendNftForm bind:this={sendNftForm} />

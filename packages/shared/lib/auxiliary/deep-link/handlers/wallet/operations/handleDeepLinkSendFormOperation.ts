@@ -4,6 +4,7 @@ import {
     setNewTransactionDetails,
     selectedAccountAssets,
     getAssetById,
+    NewTransactionType,
 } from '@core/wallet'
 import { openPopup } from '@auxiliary/popup'
 import { get } from 'svelte/store'
@@ -48,7 +49,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDe
     const recipient: Subject = address ? { type: 'address', address } : undefined
 
     return {
-        type: 'newToken',
+        type: NewTransactionType.TokenTransfer,
         ...(asset && { asset }),
         ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),

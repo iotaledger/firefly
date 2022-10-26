@@ -1,10 +1,10 @@
 import type { FeatureTypes } from '@iota/types'
-import { IAsset, Subject } from '@core/wallet'
+import { IAsset, Subject, NewTransactionType } from '@core/wallet'
 
 export type NewTransactionDetails = NewNftTransactionDetails | NewTokenTransactionDetails
 
 export type NewTokenTransactionDetails = {
-    type: 'newToken'
+    type: NewTransactionType.TokenTransfer
     rawAmount: string
     asset: IAsset
     metadata: string
@@ -19,7 +19,7 @@ export type NewTokenTransactionDetails = {
 }
 
 export type NewNftTransactionDetails = {
-    type: 'newNft'
+    type: NewTransactionType.NftTransfer
     nftId: string
     recipient: Subject
     immutableFeatures: FeatureTypes[]

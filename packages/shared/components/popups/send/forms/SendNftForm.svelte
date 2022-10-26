@@ -3,6 +3,7 @@
     import {
         ActivityType,
         newTransactionDetails,
+        NewTransactionType,
         selectedAccountActivities,
         Subject,
         updateNewTransactionDetails,
@@ -15,7 +16,7 @@
     let recipient: Subject
 
     const transactionDetail = get(newTransactionDetails)
-    if (transactionDetail.type === 'newNft') {
+    if (transactionDetail.type === NewTransactionType.NftTransfer) {
         nftId = transactionDetail.nftId
         recipient = transactionDetail.recipient
     }
@@ -24,7 +25,7 @@
         const valid = await validate()
         if (valid) {
             updateNewTransactionDetails({
-                type: 'newNft',
+                type: NewTransactionType.NftTransfer,
                 nftId,
                 recipient,
                 immutableFeatures: getNftImmutableFeatures(),
