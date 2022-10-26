@@ -23,10 +23,7 @@ export function getMetadataFromNftOutput(output: INftOutput): INftMetadata {
         royalties: parsedData.royalties,
         issuerName: parsedData.issuerName,
         description: parsedData.description,
-        attributes: parsedData.attributes?.map((attribute) => ({
-            trait_type: attribute.trait_type,
-            value: attribute.value,
-        })),
+        attributes: parsedData.attributes,
     }
 
     return parsedMetadata
