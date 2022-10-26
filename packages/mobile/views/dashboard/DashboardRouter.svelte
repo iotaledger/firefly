@@ -1,11 +1,11 @@
 <script lang="typescript">
     import features from '../../features/features'
     import {
+        accountSwitcherRouter,
         dashboardRoute,
         DashboardRoute,
         dashboardRouter,
         sendRouter,
-        accountSwitcherRouter,
     } from '../../lib/routers'
     import { AccountSwitcherDrawer, ReceiveDrawer, SendDrawer } from './drawers'
 

@@ -1,7 +1,8 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
     import { tryCreateAdditionalAccount } from '@core/account'
+    import { localize } from '@core/i18n'
     import { isStrongholdUnlocked } from '@core/profile-manager'
+
     import { Drawer, StrongholdUnlock } from '../../../../components'
     import { AccountSwitcherRoute, accountSwitcherRoute, accountSwitcherRouter } from '../../../../lib/routers'
     import { AccountSwitcher, CreateAccount } from './views'

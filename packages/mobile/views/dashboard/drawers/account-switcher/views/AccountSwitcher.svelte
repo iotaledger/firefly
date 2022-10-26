@@ -4,6 +4,7 @@
     import { BASE_TOKEN } from '@core/network'
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
+
     import features from '../../../../../features/features'
     import { AccountSwitcherMenuItem } from '../../../../../components'
     import { HR, Icon, Text, TextType } from 'shared/components'
