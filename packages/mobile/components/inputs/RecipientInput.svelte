@@ -15,7 +15,7 @@
     $: value = recipient?.address ?? ''
     $: value, validateValue()
 
-    function onInputChange(e: Event) {
+    function onInputChange(e: Event): void {
         value = (e.target as HTMLInputElement).value
         recipient = { type: 'address', address: value }
     }

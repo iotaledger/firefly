@@ -1,12 +1,13 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { newTransactionDetails, Subject, updateNewTransactionDetails } from '@core/wallet'
+    import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { Button } from 'shared/components'
     import { onMount } from 'svelte'
     import { RecipientInput } from '../../../../../components'
     import { sendRouter } from '../../../../../lib/routers'
+    import { IAddressSubject } from '@core/wallet'
 
-    let recipient: Subject
+    let recipient: IAddressSubject
     let recipientValidationError: string
 
     onMount(() => {
