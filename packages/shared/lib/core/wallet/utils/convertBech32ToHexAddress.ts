@@ -1,5 +1,5 @@
 import { networkHrp } from '@core/network'
-import { Bech32Helper } from '@lib/bech32Helper'
+import { Bech32Helper } from '@core/utils'
 import { Converter } from '@lib/converter'
 import { get } from 'svelte/store'
 

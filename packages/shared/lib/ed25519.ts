@@ -1,4 +1,4 @@
-import { Bech32 } from '@lib/bech32'
+import { Bech32 } from '@core/utils'
 import { convertBytesToHexString } from '@core/utils'
 
 /**
