@@ -92,7 +92,7 @@ function resetSubrouters(): void {
     resetWalletSubrouters()
 }
 
-function resetOnboardingSubrouters() {
+function resetOnboardingSubrouters(): void {
     get(appSetupRouter).reset()
     get(loginRouter).reset()
     get(networkSetupRouter).reset()

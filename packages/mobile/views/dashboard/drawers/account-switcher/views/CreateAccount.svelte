@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, ColorPicker, Input, Text } from 'shared/components'
+    import { Button, ColorPicker, Input } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { getRandomAccountColor, validateAccountName } from '@core/account'
@@ -44,9 +44,6 @@
 
 <div class="flex flex-col h-full justify-between">
     <div>
-        <div class="flex flex-row mb-6">
-            <Text type="h5">{localize('general.addAWallet')}</Text>
-        </div>
         <div class="w-full flex flex-col justify-between">
             <Input
                 error={error?.message}

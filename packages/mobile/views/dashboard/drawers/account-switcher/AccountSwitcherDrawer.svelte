@@ -4,17 +4,28 @@
     import { isStrongholdUnlocked } from '@core/profile-manager'
     import { Drawer, StrongholdUnlock } from '../../../../components'
     import { AccountSwitcherRoute, accountSwitcherRoute, accountSwitcherRouter } from '../../../../lib/routers'
-    import { onDestroy } from 'svelte'
     import { AccountSwitcher, CreateAccount } from './views'
 
     export let onClose: () => unknown = () => {}
 
-    let accountAlias = ''
-    let color = ''
+    let accountAlias: string
+    let color: string
+    let title: string
 
-    const titles = {
-        [AccountSwitcherRoute.Switcher]: localize('general.accounts'),
-        [AccountSwitcherRoute.CreateAccount]: localize('general.createAccount'),
+    $: $accountSwitcherRoute, setTitle()
+
+    function setTitle(): void {
+        switch ($accountSwitcherRoute) {
+            case AccountSwitcherRoute.CreateAccount:
+                title = localize('general.createAccount')
+                break
+            case AccountSwitcherRoute.Password:
+                title = localize('popups.password.title')
+                break
+            default:
+                title = localize('general.accounts')
+                break
+        }
     }
 
     async function onCreate(newAccountAlias: string, newColor: string): Promise<void> {
@@ -30,17 +41,13 @@
         }
     }
 
-    async function onUnlock() {
+    async function onSuccess() {
         await tryCreateAdditionalAccount(accountAlias, color)
         onClose()
     }
-
-    onDestroy(() => {
-        $accountSwitcherRouter.reset()
-    })
 </script>
 
-<Drawer {onClose} title={titles[$accountSwitcherRoute]}>
+<Drawer {onClose} {title}>
     {#if $accountSwitcherRoute === AccountSwitcherRoute.Switcher}
         <AccountSwitcher onSwitch={onClose} onAddClicked={() => $accountSwitcherRouter.next()} />
     {/if}
@@ -49,7 +56,7 @@
     {/if}
     {#if $accountSwitcherRoute === AccountSwitcherRoute.Password}
         <StrongholdUnlock
-            {onUnlock}
+            {onSuccess}
             onCancel={() => $accountSwitcherRouter.previous()}
             busyMessage={localize('general.creating')}
         />

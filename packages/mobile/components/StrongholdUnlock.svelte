@@ -1,23 +1,25 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
+    import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
 
-    export let subtitle: string = ''
+    export let subtitle: string | undefined = undefined
     export let busyMessage: string = ''
 
-    export let onUnlock: (..._: any[]) => unknown = () => {}
-    export let onCancel: () => unknown = () => {}
+    export let onSuccess: (..._: any[]) => Promise<unknown>
+    export let onCancel: () => unknown
 
     let password: string
-    let error = ''
+    let error: string
     let isBusy = false
 
     async function handleSubmit(): Promise<void> {
         try {
+            error = ''
             isBusy = true
             await unlockStronghold(password)
-            onUnlock && onUnlock()
+            onSuccess && (await onSuccess())
+            isBusy = false
         } catch (err) {
             console.error(err)
             error = localize(err?.message ?? err)
@@ -31,7 +33,6 @@
 </script>
 
 <div class="mb-5">
-    <Text type="h4">{localize('popups.password.title')}</Text>
     <Text type="p" secondary>{subtitle ?? localize('popups.password.subtitle')}</Text>
 </div>
 <form id="password-popup-form" class="flex justify-center w-full flex-row flex-wrap" on:submit={handleSubmit}>
