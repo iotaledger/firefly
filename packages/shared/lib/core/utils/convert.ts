@@ -1,7 +1,7 @@
 /* eslint-disable no-bitwise */
 
 import { Base64 } from './encode'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
 /**
  * Returns a UNIX timestamp from a given Date object.

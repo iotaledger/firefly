@@ -3,7 +3,7 @@
     import { debounce } from '@core/utils'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/time'
+    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
 
     let timeout
     let isDestroyed = false
