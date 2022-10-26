@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
 import { formatDate, localize } from '@core/i18n'
-import { formatUnitBestMatch } from './units'
+import { formatIotaUnitBestMatch } from '@core/utils'
 
 interface ITransactionHistoryHeaderParameters {
     id?: boolean
@@ -33,8 +33,8 @@ export function generateTransactionHistoryCsvFromAccount(
             const { internal, incoming, value } = message.payload.data.essence.data
             const valueString = incoming ? String(value) : '-' + value
             const formattedValueString = incoming
-                ? formatUnitBestMatch(value, true)
-                : '-' + formatUnitBestMatch(value, true)
+                ? formatIotaUnitBestMatch(value, true)
+                : '-' + formatIotaUnitBestMatch(value, true)
             let date
             let time
             try {

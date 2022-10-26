@@ -14,9 +14,8 @@
     import { Popup, Route, TitleBar, ToastContainer } from 'shared/components'
     import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings } from '@core/app'
     import { Electron } from '@lib/electron'
-    import { addError } from '@core/error'
     import { showAppNotification } from '@auxiliary/notification'
-    import { openPopup, popupState } from '@auxiliary/popup'
+    import { closePopup, openPopup, popupState } from '@auxiliary/popup'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from 'shared/routes'
     import { onDestroy, onMount } from 'svelte'
     import { getLocalisedMenuItems } from './lib/helpers'
@@ -90,6 +89,7 @@
         })
         Electron.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
+                closePopup()
                 openSettings()
             } else {
                 settings = true
@@ -121,9 +121,6 @@
                 networkProtocol: NetworkProtocol.Shimmer,
                 networkType: NetworkType.Mainnet,
             })
-        })
-        Electron.hookErrorLogger((err) => {
-            addError(err)
         })
 
         Electron.onEvent('deep-link-request', showDeepLinkNotification)

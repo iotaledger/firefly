@@ -3,7 +3,7 @@
     import { selectedAccount } from '@core/account'
     import { Icon } from 'shared/components'
     import { AccountLabel } from 'shared/components/atoms/'
-    import { DashboardRoute, dashboardRoute, dashboardRouter } from '../../lib/core/router'
+    import { DashboardRoute, dashboardRoute, dashboardRouter } from '../../lib/routers'
 
     $: isDrawerOpen = $dashboardRoute === DashboardRoute.AccountSwitcher
 </script>

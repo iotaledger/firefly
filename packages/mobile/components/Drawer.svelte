@@ -1,10 +1,13 @@
 <script lang="typescript">
-    import { Text, TextType } from 'shared/components'
+    import { Icon as IconEnum } from '@lib/auxiliary/icon'
+    import { Icon, Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
 
     export let onClose: () => unknown = () => {}
+    export let onBackClick: () => unknown = () => {}
+    export let allowBack: boolean = false
+    export let title: string | undefined = undefined
     export let fullScreen: boolean = false
-    export let title: string = ''
 
     let panelBottom = 0
     let moving = false
@@ -34,7 +37,7 @@
 </script>
 
 <svelte:window on:touchend={onTouchEnd} on:touchmove={onTouchMove} />
-<drawer class="fixed top-0 z-30 w-screen h-screen z-40">
+<drawer class="fixed top-0 left-0 z-30 w-screen h-screen z-40">
     <overlay
         in:fade={{ duration: 300 }}
         out:fade={{ duration: 200 }}
@@ -47,18 +50,31 @@
         out:fly={{ y: 100, duration: 200 }}
         bind:clientHeight={panelHeight}
         class:moving
-        class="py-6 px-5 fixed w-full flex flex-auto {fullScreen
+        class="py-6 px-5 fixed w-full flex flex-col flex-auto {fullScreen
             ? 'h-screen'
-            : ''} justify-center z-10 bg-white dark:bg-gray-800 rounded-t-2xl"
+            : ''} z-10 bg-white dark:bg-gray-800 rounded-t-2xl"
         style="bottom: {panelBottom}px;"
     >
-        <decorator class="absolute top-2 w-12 h-1 bg-gray-300 dark:bg-gray-700 rounded" />
-        <div class="flex flex-col w-full">
-            {#if title}
-                <Text type={TextType.h4} classes="text-center">{title}</Text>
-            {/if}
-            <slot />
-        </div>
+        <decorator
+            class="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gray-300 dark:bg-gray-700 rounded"
+        />
+        {#if title || (allowBack && onBackClick)}
+            <div class="grid grid-cols-4 h-6 mb-6">
+                <div class="col-span-1">
+                    {#if allowBack && onBackClick}
+                        <button type="button" on:click={onBackClick}>
+                            <Icon width="24" height="24" icon={IconEnum.ArrowLeft} classes="text-gray-500" />
+                        </button>
+                    {/if}
+                </div>
+                <div class="flex justify-center col-span-2 content-center">
+                    {#if title}
+                        <Text type={TextType.h4}>{title}</Text>
+                    {/if}
+                </div>
+            </div>
+        {/if}
+        <slot />
     </panel>
 </drawer>
 
