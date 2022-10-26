@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { Icon, Text, Error, DropdownItem } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils'
     import { isNumberLetterOrPunctuation } from '@core/utils'
 
     export let value: string

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils'
     import { onMount } from 'svelte'
     import { IDropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
 
