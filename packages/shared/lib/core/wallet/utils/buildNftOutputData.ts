@@ -13,6 +13,8 @@ export function buildNftOutputData(
     expirationDate: Date,
     nftId: string,
     immutableFeatures: FeatureTypes[],
+    metadata: string,
+    tag: string,
     recipientAddress: string,
     accountAddress: string,
     storageDeposit: string,
@@ -53,6 +55,8 @@ export function buildNftOutputData(
 
     return <BuildNftOutputData>{
         nftId: convertBech32ToHexAddress(nftId),
+        metadata,
+        tag,
         immutableFeatures,
         unlockConditions,
     }

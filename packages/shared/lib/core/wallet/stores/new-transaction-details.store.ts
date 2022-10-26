@@ -21,7 +21,7 @@ export const newTransactionDetails: Writable<NewTransactionDetails> = writable({
     disableChangeExpiration: false,
 })
 
-export function setToNewTokenTransactionDetails(): void {
+export function resetNewTokenTransactionDetails(): void {
     newTransactionDetails.set({
         type: NewTransactionType.TokenTransfer,
         rawAmount: undefined,
@@ -32,20 +32,6 @@ export function setToNewTokenTransactionDetails(): void {
         tag: undefined,
         unit: undefined,
         giftStorageDeposit: false,
-        surplus: undefined,
-        disableToggleGift: false,
-        disableChangeExpiration: false,
-    })
-}
-
-export function setToNewNftTransactionDetails(): void {
-    newTransactionDetails.set({
-        type: NewTransactionType.NftTransfer,
-        expirationDate: undefined,
-        recipient: undefined,
-        immutableFeatures: [],
-        giftStorageDeposit: false,
-        nftId: undefined,
         surplus: undefined,
         disableToggleGift: false,
         disableChangeExpiration: false,

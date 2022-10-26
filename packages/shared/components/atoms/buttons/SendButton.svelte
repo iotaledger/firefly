@@ -1,12 +1,12 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { resetLedgerPreparedOutput, resetShowInternalVerificationPopup } from '@core/ledger'
-    import { setToNewTokenTransactionDetails } from '@core/wallet'
+    import { resetNewTokenTransactionDetails } from '@core/wallet'
     import { openPopup } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
 
     function onSendClick(): void {
-        setToNewTokenTransactionDetails()
+        resetNewTokenTransactionDetails()
         resetLedgerPreparedOutput()
         resetShowInternalVerificationPopup()
         openPopup({

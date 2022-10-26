@@ -2,31 +2,123 @@
     import { localize } from '@core/i18n'
     import { Button, Text, FontWeight, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { SendNftForm, SendTokenForm } from './forms'
-    import { setToNewNftTransactionDetails, setToNewTokenTransactionDetails } from '@core/wallet'
+    import {
+        ActivityType,
+        IAsset,
+        NewTransactionDetails,
+        newTransactionDetails,
+        NewTransactionType,
+        selectedAccountActivities,
+        setNewTransactionDetails,
+        Subject,
+    } from '@core/wallet'
+    import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
+    import { DestinationNetwork } from '@core/network'
+    import { getByteLengthOfString } from '@core/utils'
+    import { get } from 'svelte/store'
+    import type { FeatureTypes } from '@iota/types'
 
     enum SendForm {
         SendToken = 'general.sendToken',
         SendNft = 'general.sendNft',
     }
+    let assetAmountInput: AssetAmountInput
+    let recipientInput: RecipientInput
+    let metadataInput: OptionalInput
+    let tagInput: OptionalInput
+
+    let network: DestinationNetwork
+
+    let nftId: string
+
+    let rawAmount: string
+    let asset: IAsset
+    let metadata: string
+    let recipient: Subject
+    let tag: string
+    let unit: string
+
+    const transactionDetail = get(newTransactionDetails)
+    if (transactionDetail.type === NewTransactionType.TokenTransfer) {
+        rawAmount = transactionDetail.rawAmount
+        asset = transactionDetail.asset
+        unit = transactionDetail.unit
+        metadata = transactionDetail.metadata
+        recipient = transactionDetail.recipient
+        tag = transactionDetail.tag
+    } else {
+        nftId = transactionDetail.nftId
+        metadata = transactionDetail.metadata
+        recipient = transactionDetail.recipient
+        tag = transactionDetail.tag
+    }
+
     const tabs: SendForm[] = [SendForm.SendToken, SendForm.SendNft]
-    let activeTab: SendForm = SendForm.SendToken
+    let activeTab: SendForm =
+        transactionDetail.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
-    let sendTokenForm: SendTokenForm
-    let sendNftForm: SendNftForm
-
-    $: selectedForm = activeTab === SendForm.SendToken ? sendTokenForm : sendNftForm
-    $: {
+    function getTransactionDetails(): NewTransactionDetails {
         if (activeTab === SendForm.SendToken) {
-            setToNewTokenTransactionDetails()
+            return {
+                type: NewTransactionType.TokenTransfer,
+                asset,
+                rawAmount,
+                unit,
+                recipient,
+                metadata,
+                tag,
+            }
         } else {
-            setToNewNftTransactionDetails()
+            return {
+                type: NewTransactionType.NftTransfer,
+                nftId,
+                recipient,
+                immutableFeatures: getNftImmutableFeatures(),
+                metadata,
+                tag,
+            }
         }
     }
 
+    async function validate(): Promise<boolean> {
+        try {
+            if (activeTab === SendForm.SendToken) {
+                await assetAmountInput?.validate()
+            } else if (!nftId) {
+                return false
+            }
+            await Promise.all([
+                recipientInput?.validate(),
+                metadataInput?.validate(validateOptionalInput(metadata, 8192, localize('error.send.metadataTooLong'))),
+                tagInput?.validate(validateOptionalInput(tag, 64, localize('error.send.tagTooLong'))),
+            ])
+            return true
+        } catch (error) {
+            console.error('Error: ', error)
+            return false
+        }
+    }
+
+    function validateOptionalInput(value: string, byteLimit: number, errorMessage: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            if (getByteLengthOfString(value) > byteLimit) {
+                reject(errorMessage)
+            }
+            resolve()
+        })
+    }
+
+    function getNftImmutableFeatures(): FeatureTypes[] {
+        const nftActivity = $selectedAccountActivities.find(
+            (activity) => activity.data.type === ActivityType.Nft && activity.data.nftId === nftId
+        )
+        return nftActivity?.data.type === ActivityType.Nft ? nftActivity.data.immutableFeatures : []
+    }
+
     async function onContinue(): Promise<void> {
-        const valid = await selectedForm.handleFormSubmit()
+        const valid = await validate()
         if (valid) {
+            setNewTransactionDetails(getTransactionDetails())
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
@@ -46,10 +138,26 @@
     <Tabs bind:activeTab {tabs} />
     <send-form-inputs class="flex flex-col space-y-4">
         {#if activeTab === SendForm.SendToken}
-            <SendTokenForm bind:this={sendTokenForm} />
+            <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         {:else}
-            <SendNftForm bind:this={sendNftForm} />
+            <NftInput bind:nftId />
         {/if}
+        <NetworkInput bind:network />
+        <RecipientInput bind:this={recipientInput} bind:recipient />
+        <optional-inputs class="flex flex-row flex-wrap gap-4">
+            <OptionalInput
+                bind:this={metadataInput}
+                bind:value={metadata}
+                label={localize('general.metadata')}
+                description={localize('tooltips.optionalInput')}
+            />
+            <OptionalInput
+                bind:this={tagInput}
+                bind:value={tag}
+                label={localize('general.tag')}
+                description={localize('tooltips.optionalInput')}
+            />
+        </optional-inputs>
     </send-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancel}>

@@ -6,7 +6,7 @@ import {
     DEFAULT_TRANSACTION_OPTIONS,
     getAssetFromPersistedAssets,
     getOutputOptions,
-    setToNewTokenTransactionDetails,
+    resetNewTokenTransactionDetails,
     setNewTransactionDetails,
     NewTransactionType,
 } from '@core/wallet'
@@ -87,7 +87,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
             tag: '',
         })
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
-        setToNewTokenTransactionDetails()
+        resetNewTokenTransactionDetails()
     } else {
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     }

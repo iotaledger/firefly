@@ -125,10 +125,14 @@
     }
 
     async function prepareNftOutput(transactionDetails: NewNftTransactionDetails): Promise<void> {
+        // This first building of the NFT output is required because we initially want to find out what the required storage deposit is
+        // and after that we can add the SDRUC with the correct amount
         let outputData = buildNftOutputData(
             expirationDate,
             transactionDetails.nftId,
             transactionDetails.immutableFeatures,
+            transactionDetails.metadata,
+            transactionDetails.tag,
             recipientAddress,
             $selectedAccount.depositAddress,
             '0',
@@ -141,6 +145,8 @@
             expirationDate,
             transactionDetails.nftId,
             transactionDetails.immutableFeatures,
+            transactionDetails.metadata,
+            transactionDetails.tag,
             recipientAddress,
             $selectedAccount.depositAddress,
             storageDeposit,
@@ -221,7 +227,6 @@
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
             <TransactionDetails
                 asset={transactionDetails.asset}
-                metadata={transactionDetails.metadata}
                 {storageDeposit}
                 subject={recipient}
                 rawAmount={transactionDetails.rawAmount}
@@ -230,6 +235,7 @@
                 {isInternal}
                 {surplus}
                 type={ActivityType.Transaction}
+                metadata={transactionDetails.metadata}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
                 {formattedFiatValue}
@@ -241,6 +247,8 @@
                 inclusionState={InclusionState.Pending}
                 {storageDeposit}
                 subject={recipient}
+                tag={transactionDetails.tag}
+                metadata={transactionDetails.metadata}
                 isInternal
                 type={ActivityType.Nft}
             />

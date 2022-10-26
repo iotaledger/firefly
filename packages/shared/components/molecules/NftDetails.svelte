@@ -27,7 +27,9 @@
     import { time } from '@core/app'
 
     export let nftId: string = ''
-    export let metadata: INftMetadata = null
+    export let nftMetadata: INftMetadata = null
+    export let metadata: string = null
+    export let tag: string = null
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
@@ -70,10 +72,19 @@
             transactionTime: { data: formattedTransactionTime },
         }),
         ...(nftId && { nftId: { data: nftId, copyable: true } }),
-        ...(metadata?.name && { metadataName: { data: metadata.name } }),
-        ...(metadata?.collectionName && { metadataCollectionName: { data: metadata.collectionName } }),
-        ...(metadata?.collectionId && { metadataCollectionId: { data: metadata.collectionId } }),
-        ...(metadata?.description && { metadataDescription: { data: metadata.description } }),
+        ...(nftMetadata && { nftMetadata: { data: JSON.stringify(nftMetadata) } }),
+        ...(metadata && {
+            metadata: {
+                data: metadata,
+                tooltipText: localize(localePrefix + 'metadata'),
+            },
+        }),
+        ...(tag && {
+            tag: {
+                data: tag,
+                tooltipText: localize(localePrefix + 'tag'),
+            },
+        }),
         ...(hasStorageDeposit && {
             storageDeposit: {
                 data: formattedStorageDeposit,
