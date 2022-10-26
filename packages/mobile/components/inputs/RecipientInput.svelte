@@ -1,75 +1,71 @@
 <script lang="typescript">
-    import { IAccountState } from '@core/account'
     import { localize } from '@core/i18n'
-    // import { networkHrp } from '@core/network'
-    // import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils'
-    import { Subject } from '@core/wallet'
+    import { networkHrp } from '@core/network'
+    import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils'
+    // @TODO fix the linting error that IAddressSubject isn't used
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    import { IAddressSubject, Subject } from '@core/wallet'
 
     export let recipient: Subject
-    export let disabled = false
+    export let disabled: boolean = false
+    export let error: string = undefined
 
-    // const addressPrefix = $networkHrp
-
-    let inputElement: HTMLInputElement = undefined
-
-    let selectedAccount: IAccountState
+    let addressPrefix: string
     let value: string
-    // let error: string
-    let previousValue: string
 
-    if (!selectedAccount && recipient?.type === 'account') {
-        selectedAccount = recipient?.account
-    } else if (!selectedAccount && recipient?.type === 'address' && previousValue === value) {
-        value = recipient?.address
+    $: addressPrefix = $networkHrp
+    $: value = (recipient )?.address ?? ''
+    $: value, validateValue()
+
+    function onInputChange(e: Event) {
+        value = (e.target as HTMLInputElement).value
+        recipient = { type: 'address', address: value }
     }
 
-    $: recipient = {
-        ...(selectedAccount && { type: 'account', account: selectedAccount }),
-        ...(!selectedAccount && { type: 'address', address: value }),
-    }
-
-    $: {
-        if (inputElement && selectedAccount) {
-            inputElement.value = selectedAccount?.name
+    function validateValue(): void {
+        error = null
+        if (!value?.length) {
+            error = localize('general.enterAddress')
+        } else if (value?.length !== BECH32_ADDRESS_LENGTH + addressPrefix.length) {
+            error = localize('error.send.addressLength', {
+                values: {
+                    length: BECH32_ADDRESS_LENGTH + addressPrefix.length,
+                },
+            })
+        } else {
+            error = validateBech32Address(addressPrefix, value)
         }
     }
-    $: {
-        if (value) {
-            selectedAccount = undefined
-        }
-    }
-
-    // function isValid(): boolean {
-    //     if (selectedAccount) {
-    //         return true
-    //     }
-
-    //     if (value.length !== BECH32_ADDRESS_LENGTH + addressPrefix.length) {
-    //         error = localize('error.send.addressLength', {
-    //             values: {
-    //                 length: BECH32_ADDRESS_LENGTH + addressPrefix.length,
-    //             },
-    //         })
-    //     } else {
-    //         error = validateBech32Address(addressPrefix, value)
-    //     }
-
-    //     if (error) {
-    //         return false
-    //     }
-    //     return true
-    // }
 </script>
 
 <div class="flex flex-row space-x-3">
-    <span>Recipient: </span>
+    <span class="text-gray-600">Recipient: </span>
     <input
         type="text"
         {value}
-        bind:this={inputElement}
-        class="w-full"
+        on:input={onInputChange}
+        class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
         {disabled}
         placeholder={localize('general.enterAddress')}
         spellcheck={false}
     />
 </div>
+
+<style global type="text/scss">
+    div {
+        height: fit-content;
+    }
+    * {
+        @apply font-semibold;
+        @apply text-15;
+        @apply leading-5;
+    }
+    input::placeholder {
+        @apply text-gray-500;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        @apply m-0;
+    }
+</style>

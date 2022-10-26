@@ -1,10 +1,12 @@
 <script lang="typescript">
     import { sendRoute, SendRoute } from '../../../../lib/routers'
-    import { Recipient, Token } from './views'
+    import { AmountView, RecipientView, TokenView } from './views'
 </script>
 
 {#if $sendRoute === SendRoute.Token}
-    <Token />
+    <TokenView />
 {:else if $sendRoute === SendRoute.Recipient}
-    <Recipient />
+    <RecipientView />
+{:else if $sendRoute === SendRoute.Amount}
+    <AmountView />
 {/if}

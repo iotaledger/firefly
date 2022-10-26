@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { IAsset, selectedAccountAssets, updateNewTransactionDetails } from '@core/wallet'
-    import { AssetList } from '../../../../../../mobile/components'
+    import { AssetList } from '../../../../../components'
     import { sendRouter } from '../../../../../lib/routers'
 
     function onAssetClick(asset: IAsset) {
