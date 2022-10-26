@@ -1,4 +1,4 @@
-export interface DropdownChoice {
+export interface IDropdownChoice {
     label: string
     value: unknown
 }
