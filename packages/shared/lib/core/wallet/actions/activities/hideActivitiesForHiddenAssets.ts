@@ -9,8 +9,8 @@ export function hideActivitiesForHiddenAssets(): void {
     const assets = get(persistedAssets)?.[get(activeProfile)?.id]
     allAccountActivities.update((state) => {
         state[get(selectedAccountIndex)].forEach((_activity) => {
-            if (_activity.type !== ActivityType.Nft) {
-                const isAssetHidden = !assets[_activity?.assetId] || assets[_activity?.assetId]?.hidden
+            if (_activity.type === ActivityType.Transaction || _activity.type === ActivityType.Foundry) {
+                const isAssetHidden = !assets[_activity.assetId] || assets[_activity.assetId]?.hidden
                 updateFromPartialActivity(_activity, { isAssetHidden })
             }
         })

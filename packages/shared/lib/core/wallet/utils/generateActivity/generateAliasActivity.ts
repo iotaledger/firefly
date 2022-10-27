@@ -1,8 +1,5 @@
-import { COIN_TYPE } from '@core/network'
-import { activeProfile } from '@core/profile'
-import { get } from 'svelte/store'
 import { IProcessedTransaction } from '../../interfaces'
-import { getNativeTokenFromOutput, convertHexAddressToBech32, outputContainsValue, hashOutputId } from '..'
+import { convertHexAddressToBech32, outputContainsValue, hashOutputId } from '..'
 import { ActivityType, AliasType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { IAliasOutput } from '@iota/types'
@@ -42,9 +39,6 @@ export function generateAliasActivity(
 
     const id = outputId || transactionId
 
-    const nativeToken = getNativeTokenFromOutput(output)
-    const assetId = nativeToken?.id ?? String(COIN_TYPE[get(activeProfile).networkProtocol])
-
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
 
@@ -53,7 +47,6 @@ export function generateAliasActivity(
         id,
         outputId,
         transactionId,
-        assetId,
         aliasId,
         aliasType,
         storageDeposit,
@@ -66,8 +59,8 @@ export function generateAliasActivity(
         time,
         inclusionState,
         containsValue,
+        asyncData,
         ...sendingInfo,
-        ...asyncData,
     }
 }
 

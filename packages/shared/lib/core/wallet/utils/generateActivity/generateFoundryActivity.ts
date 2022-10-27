@@ -55,7 +55,7 @@ export function generateFoundryActivity(
         containsValue,
         isAssetHidden,
         isHidden,
+        asyncData,
         ...sendingInfo,
-        ...asyncData,
     }
 }

@@ -4,7 +4,7 @@ import { OutputData } from '@iota/wallet'
 import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { get } from 'svelte/store'
 import { ActivityDirection, ActivityType } from '../enums'
-import { allAccountActivities, updateActivityByActivityId } from '../stores'
+import { allAccountActivities, updateAsyncDataByActivityId } from '../stores'
 import { getExpirationDateFromOutput } from '../utils'
 
 export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState): Promise<void> {
@@ -14,7 +14,7 @@ export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState
         (activity) =>
             activity.type === ActivityType.Transaction &&
             activity.direction === ActivityDirection.Outgoing &&
-            activity.isAsync
+            activity.asyncData
     )
 
     for (const activity of activities) {
@@ -23,7 +23,7 @@ export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState
                 const detailedOutput = await account.getOutput(activity.outputId)
                 const isClaimed = isOutputClaimed(detailedOutput)
                 if (isClaimed) {
-                    updateActivityByActivityId(account.index, activity.id, {
+                    updateAsyncDataByActivityId(account.index, activity.id, {
                         isClaimed: true,
                         claimedDate: new Date(
                             detailedOutput.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND

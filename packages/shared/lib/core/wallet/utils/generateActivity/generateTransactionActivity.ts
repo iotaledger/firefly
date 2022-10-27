@@ -74,7 +74,7 @@ export function generateTransactionActivity(
         metadata,
         tag,
         assetId,
+        asyncData,
         ...sendingInfo,
-        ...asyncData,
     }
 }

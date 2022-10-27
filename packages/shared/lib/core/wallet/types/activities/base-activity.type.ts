@@ -2,7 +2,7 @@ import { ActivityAsyncStatus, ActivityDirection, InclusionState } from '../../en
 import { IUTXOInput } from '@iota/types'
 import { Subject } from '../subject.type'
 
-export type BaseActivity = AsyncData & {
+export type BaseActivity = {
     id: string
     outputId: string
     transactionId: string
@@ -20,10 +20,10 @@ export type BaseActivity = AsyncData & {
     recipient: Subject
     subject: Subject
     isSelfTransaction: boolean
+    asyncData: AsyncData
 }
 
 export type AsyncData = {
-    isAsync: boolean
     asyncStatus: ActivityAsyncStatus
     timelockDate: Date
     expirationDate: Date

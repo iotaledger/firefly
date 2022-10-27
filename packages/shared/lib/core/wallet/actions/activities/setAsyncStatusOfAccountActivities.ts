@@ -8,17 +8,14 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
     const balancesToUpdate: number[] = []
     allAccountActivities.update((state) => {
         state.forEach((accountActivities, accountIndex) => {
-            for (const activity of accountActivities.filter(
-                (_activity) =>
-                    _activity.type === ActivityType.Transaction && (_activity.isAsync || _activity.timelockDate)
-            )) {
+            for (const activity of accountActivities.filter((_activity) => _activity.asyncData)) {
                 if (activity.type === ActivityType.Transaction) {
-                    const oldAsyncStatus = activity.asyncStatus
-                    activity.asyncStatus = getAsyncStatus(activity, time)
+                    const oldAsyncStatus = activity.asyncData.asyncStatus
+                    activity.asyncData.asyncStatus = getAsyncStatus(activity, time)
                     if (
                         !balancesToUpdate.includes(accountIndex) &&
                         oldAsyncStatus !== null &&
-                        oldAsyncStatus !== activity.asyncStatus
+                        oldAsyncStatus !== activity.asyncData.asyncStatus
                     ) {
                         balancesToUpdate.push(accountIndex)
                     }
@@ -36,16 +33,15 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
 }
 
 function getAsyncStatus(activity: TransactionActivity, time: Date): ActivityAsyncStatus {
-    if (activity.timelockDate) {
-        if (activity.timelockDate.getTime() > time.getTime()) {
+    if (activity.asyncData?.timelockDate) {
+        if (activity.asyncData.timelockDate.getTime() > time.getTime()) {
             return ActivityAsyncStatus.Timelocked
         }
-    }
-    if (activity.isAsync) {
-        if (activity.isClaimed) {
+    } else if (activity.asyncData) {
+        if (activity.asyncData.isClaimed) {
             return ActivityAsyncStatus.Claimed
         } else {
-            if (time > activity.expirationDate) {
+            if (time > activity.asyncData.expirationDate) {
                 return ActivityAsyncStatus.Expired
             } else {
                 return ActivityAsyncStatus.Unclaimed

@@ -46,8 +46,8 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
         immutableFeatures: output.immutableFeatures,
         storageDeposit,
         metadata,
+        asyncData,
         ...sendingInfo,
-        ...asyncData,
     }
 }
 

@@ -12,17 +12,21 @@ export function updateClaimingTransactionInclusion(
     allAccountActivities.update((state) => {
         const activity = state[accountIndex]?.find(
             (_activity) =>
-                _activity.type === ActivityType.Transaction && _activity.claimingTransactionId === transactionId
+                _activity.type === ActivityType.Transaction &&
+                _activity.asyncData.claimingTransactionId === transactionId
         )
 
         if (activity) {
             if (inclusionState === InclusionState.Confirmed) {
                 updateFromPartialActivity(activity, {
                     type: ActivityType.Transaction,
-                    isClaimed: true,
-                    isClaiming: false,
-                    claimedDate: new Date(),
-                    asyncStatus: ActivityAsyncStatus.Claimed,
+                    asyncData: {
+                        ...activity.asyncData,
+                        isClaimed: true,
+                        isClaiming: false,
+                        claimedDate: new Date(),
+                        asyncStatus: ActivityAsyncStatus.Claimed,
+                    },
                 })
                 addClaimedActivity(accountIndex, activity.transactionId, {
                     id: activity.id,
@@ -38,10 +42,13 @@ export function updateClaimingTransactionInclusion(
             } else if (inclusionState === InclusionState.Conflicting) {
                 updateFromPartialActivity(activity, {
                     type: ActivityType.Transaction,
-                    isClaimed: false,
-                    isClaiming: false,
-                    claimingTransactionId: undefined,
-                    asyncStatus: ActivityAsyncStatus.Unclaimed,
+                    asyncData: {
+                        ...activity.asyncData,
+                        isClaimed: false,
+                        isClaiming: false,
+                        claimingTransactionId: undefined,
+                        asyncStatus: ActivityAsyncStatus.Unclaimed,
+                    },
                 })
                 showAppNotification({
                     type: 'error',

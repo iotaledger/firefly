@@ -105,8 +105,13 @@ export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
-            const asset = _activity.type !== ActivityType.Nft && getAssetFromPersistedAssets(_activity.assetId)
-            const hasValidAsset = _activity.type === ActivityType.Nft || (asset && isValidIrc30(asset.metadata))
+            const asset =
+                (_activity.type === ActivityType.Transaction || _activity.type === ActivityType.Foundry) &&
+                getAssetFromPersistedAssets(_activity.assetId)
+            const hasValidAsset =
+                _activity.type === ActivityType.Nft ||
+                _activity.type === ActivityType.Alias ||
+                (asset && isValidIrc30(asset.metadata))
             return (
                 !_activity.isHidden &&
                 hasValidAsset &&
@@ -136,7 +141,7 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(activity.transactionId)
     }
 
-    if (activity.type !== ActivityType.Nft && activity.assetId) {
+    if ((activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) && activity.assetId) {
         fieldsToSearch.push(activity.assetId)
         fieldsToSearch.push(getAssetFromPersistedAssets(activity.assetId)?.metadata?.name)
     }
@@ -153,8 +158,8 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
             fieldsToSearch.push(activity.subject?.address)
         }
 
-        if (activity.claimingTransactionId) {
-            fieldsToSearch.push(activity.claimingTransactionId)
+        if (activity.asyncData.claimingTransactionId) {
+            fieldsToSearch.push(activity.asyncData.claimingTransactionId)
         }
 
         if (activity.metadata) {

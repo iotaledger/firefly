@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import { Activity, BaseActivity } from '../types'
+import { Activity, AsyncData, BaseActivity } from '../types'
 
 export const allAccountActivities = writable<Activity[][]>([])
 
@@ -49,6 +49,36 @@ export function updateActivityByActivityId(
 
         if (activity) {
             Object.assign(activity, partialBaseActivity)
+        }
+        return state
+    })
+}
+
+export function updateAsyncDataByActivityId(
+    accountIndex: number,
+    activityId: string,
+    partialAsyncData: Partial<AsyncData>
+): void {
+    allAccountActivities.update((state) => {
+        const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
+
+        if (activity) {
+            Object.assign(activity, { ...activity.asyncData, ...partialAsyncData })
+        }
+        return state
+    })
+}
+
+export function updateAsyncDataByTransactionId(
+    accountIndex: number,
+    transactionId: string,
+    partialAsyncData: Partial<AsyncData>
+): void {
+    allAccountActivities.update((state) => {
+        const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
+
+        if (activity) {
+            Object.assign(activity, { ...activity.asyncData, ...partialAsyncData })
         }
         return state
     })

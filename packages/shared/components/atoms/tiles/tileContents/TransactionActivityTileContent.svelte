@@ -8,12 +8,16 @@
         IPersistedAsset,
         getFormattedAmountFromActivity,
         TransactionActivity,
+        selectedAccountAssets,
+        getAssetFromPersistedAssets,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
 
     export let activity: TransactionActivity
-    export let asset: IPersistedAsset
+
+    let asset: IPersistedAsset
+    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
 
     $: title = getTitle(activity)
     $: subjectLocale = getSubjectLocale(activity)

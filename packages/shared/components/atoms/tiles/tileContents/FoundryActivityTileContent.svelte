@@ -2,17 +2,20 @@
     import { localize } from '@core/i18n'
     import {
         FoundryActivity,
+        getAssetFromPersistedAssets,
         getFiatAmount,
         getFormattedAmountFromActivity,
         InclusionState,
         IPersistedAsset,
+        selectedAccountAssets,
     } from '@core/wallet'
     import { truncateString } from '@lib/helpers'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
 
     export let activity: FoundryActivity
-    export let asset: IPersistedAsset
 
+    let asset: IPersistedAsset
+    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
     $: amount = getFormattedAmountFromActivity(activity)
     $: fiatAmount = getFiatAmount(activity)
 </script>

@@ -75,7 +75,7 @@ function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityF
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
         activity.type === ActivityType.Transaction &&
-        activity.isRejected
+        activity.asyncData.isRejected
     ) {
         return false
     }
@@ -83,7 +83,11 @@ function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityF
 }
 
 function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.asset.active && filter.asset.selected && activity.type !== ActivityType.Nft) {
+    if (
+        filter.asset.active &&
+        filter.asset.selected &&
+        (activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry)
+    ) {
         if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
             return false
         }
@@ -250,14 +254,14 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
             activity.type === ActivityType.Transaction &&
-            activity.asyncStatus !== ActivityAsyncStatus.Claimed
+            activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
         ) {
             return false
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
             activity.type === ActivityType.Transaction &&
-            (!activity.asyncStatus || activity.asyncStatus === ActivityAsyncStatus.Claimed)
+            (!activity.asyncData.asyncStatus || activity.asyncData.asyncStatus === ActivityAsyncStatus.Claimed)
         ) {
             return false
         }

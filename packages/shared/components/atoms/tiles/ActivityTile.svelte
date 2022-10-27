@@ -24,7 +24,10 @@
 
     let asset: IPersistedAsset
     $: $selectedAccountAssets,
-        (asset = activity.type !== ActivityType.Nft ? getAssetFromPersistedAssets(activity.assetId) : undefined)
+        (asset =
+            activity.type !== ActivityType.Nft && activity.type !== ActivityType.Alias
+                ? getAssetFromPersistedAssets(activity.assetId)
+                : undefined)
 
     function handleTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
@@ -52,18 +55,18 @@
     <activity-tile class="w-full flex flex-col space-y-4">
         <tile-content class="flex flex-row items-center text-left space-x-4">
             {#if activity.type === ActivityType.Transaction}
-                <TransactionActivityTileContent {activity} {asset} />
+                <TransactionActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Alias}
                 <AliasActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Nft}
                 <NftActivityTileContent {activity} />
             {:else}
-                <FoundryActivityTileContent {activity} {asset} />
+                <FoundryActivityTileContent {activity} />
             {/if}
         </tile-content>
-        {#if activity.type === ActivityType.Transaction && activity.asyncStatus === ActivityAsyncStatus.Timelocked}
+        {#if activity.asyncStatus === ActivityAsyncStatus.Timelocked}
             <TimelockActivityTileFooter {activity} />
-        {:else if (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) && activity.isAsync}
+        {:else if activity.isAsync}
             <AsyncActivityTileFooter {activity} />
         {/if}
     </activity-tile>
