@@ -10,5 +10,5 @@
 </script>
 
 <key-value>
-    <Input label={key} bind:value {disabled} {error} {placeholder} inputElement={undefined} classes="mb-6" />
+    <Input label={key} bind:value {disabled} {error} {placeholder} inputElement={undefined} />
 </key-value>

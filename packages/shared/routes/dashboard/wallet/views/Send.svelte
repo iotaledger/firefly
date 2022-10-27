@@ -474,8 +474,8 @@
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-6">
-    <div>
-        <div class="flex flex-row w-full justify-between mb-6">
+    <div class="flex flex-col flex-auto space-y-6 h-full">
+        <div class="flex flex-row w-full justify-between">
             <div class="flex flex-row space-x-6">
                 <button
                     on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
@@ -519,67 +519,54 @@
                 </button>
             </div>
         </div>
-        <div class="w-full h-full flex flex-col justify-between">
-            <div>
-                <div class="w-full block">
-                    {#if selectedSendType === SEND_TYPE.INTERNAL}
-                        <Dropdown
-                            value={to?.label || null}
-                            label={localize('general.to')}
-                            placeholder={localize('general.to')}
-                            items={accountsDropdownItems.filter((a) => a.id !== $selectedAccountStore.id)}
-                            onSelect={handleToSelect}
-                            disabled={$isTransferring || $liveAccounts.length === 2}
-                            error={toError}
-                            classes="mb-6"
-                            autofocus={$liveAccounts.length > 2}
-                        />
-                    {:else}
-                        <Address
-                            error={addressError}
-                            bind:address
-                            label={localize('general.sendToAddress')}
-                            disabled={$isTransferring}
-                            placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
-                            classes="mb-6"
-                            autofocus
-                        />
-                    {/if}
-                    <Amount
-                        error={amountError}
-                        bind:amount
-                        bind:unit
-                        onMaxClick={handleMaxClick}
-                        disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
-                        classes="mb-6"
-                    />
-                    {#if selectedSendType === SEND_TYPE.EXTERNAL}
-                        <KeyValueBox
-                            bind:value={tag}
-                            key={localize('general.tag')}
-                            error={tagError}
-                            disabled={$isTransferring}
-                        />
-                        <KeyValueBox
-                            bind:value={metadata}
-                            key={localize('general.metadata')}
-                            error={metadataError}
-                            disabled={$isTransferring}
-                        />
-                    {/if}
-                </div>
-            </div>
+        <div
+            class="flex flex-col space-y-6 w-full overflow-x-hidden overflow-y-auto flex-auto h-1 -mr-2 pr-2 scroll-secondary pb-4"
+        >
+            {#if selectedSendType === SEND_TYPE.INTERNAL}
+                <Dropdown
+                    value={to?.label || null}
+                    label={localize('general.to')}
+                    placeholder={localize('general.to')}
+                    items={accountsDropdownItems.filter((a) => a.id !== $selectedAccountStore.id)}
+                    onSelect={handleToSelect}
+                    disabled={$isTransferring || $liveAccounts.length === 2}
+                    error={toError}
+                    autofocus={$liveAccounts.length > 2}
+                />
+            {:else}
+                <Address
+                    error={addressError}
+                    bind:address
+                    label={localize('general.sendToAddress')}
+                    disabled={$isTransferring}
+                    placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
+                    autofocus
+                />
+            {/if}
+            <Amount
+                error={amountError}
+                bind:amount
+                bind:unit
+                onMaxClick={handleMaxClick}
+                disabled={$isTransferring}
+                autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+            />
+            {#if selectedSendType === SEND_TYPE.EXTERNAL}
+                <KeyValueBox
+                    bind:value={tag}
+                    key={localize('general.tag')}
+                    error={tagError}
+                    disabled={$isTransferring}
+                />
+                <KeyValueBox
+                    bind:value={metadata}
+                    key={localize('general.metadata')}
+                    error={metadataError}
+                    disabled={$isTransferring}
+                />
+            {/if}
         </div>
     </div>
-    {#if !$isTransferring}
-        <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
-                {localize('actions.cancel')}
-            </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
-        </div>
-    {/if}
     {#if $isTransferring}
         <ProgressBar
             preloading={!$transferState}
@@ -587,6 +574,13 @@
             message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
             percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent}
         />
+    {:else}
+        <div class="flex flex-row justify-between px-2">
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
+                {localize('actions.cancel')}
+            </Button>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
+        </div>
     {/if}
 </div>
 
