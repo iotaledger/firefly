@@ -20,7 +20,7 @@ export function getLayer2TransactionData(
     metadataStream.writeUInt32('senderContract', 0)
     metadataStream.writeUInt32('targetContract', 0x3c4b5e02)
     metadataStream.writeUInt32('contractFunction', 0x23f4e3a1)
-    metadataStream.writeUInt64('gasBudget', BigInteger(500000000))
+    metadataStream.writeUInt64('gasBudget', BigInteger(500000))
 
     const parameters = getSmartContractParameters(address)
     metadataStream.writeBytes('smartContractParameters', parameters.length, parameters)
@@ -28,15 +28,19 @@ export function getLayer2TransactionData(
     metadataStream.writeBytes('allowance', allowance.length, allowance)
 
     metadataStream.writeUInt16('end', 0)
-    const metadata = '0x' + metadataStream.finalHex()
-    return { recipient, metadata }
+    const metadata = metadataStream.finalBytes()
+    let stringifiedBytes = ''
+    for (const byte of metadata) {
+        stringifiedBytes += String.fromCodePoint(byte)
+    }
+    return { recipient, metadata: stringifiedBytes }
 }
 
 function getSmartContractParameters(address: string): Uint8Array {
     const parameters = new WriteStream()
 
     const encodedAddress = getEncodedAddress(address.toLowerCase())
-    const smartContractParameters = Object.entries({ a: encodedAddress, c: '255' })
+    const smartContractParameters = Object.entries({ a: encodedAddress, c: 'ff' })
     parameters.writeUInt32('parametersLength', smartContractParameters.length)
 
     for (const parameter of smartContractParameters) {
@@ -65,19 +69,20 @@ function getEncodedAddress(address: string): string {
 
 function getEncodedAllowance(): Uint8Array {
     const allowance = new WriteStream()
+    const tokenBuffer = new WriteStream()
+
     const { asset, surplus, rawAmount } = get(newTransactionDetails)
     allowance.writeUInt8('encodedAllowance', 0)
     if (asset === get(selectedAccountAssets).baseCoin) {
         allowance.writeUInt64('iotaAmount', BigInteger(rawAmount))
+        allowance.writeUInt16('noTokens', 2)
+        allowance.writeUInt16('emptyTokenBuffer', 0)
     } else {
         allowance.writeUInt64('iotaAmount', BigInteger(surplus ?? '0'))
-
-        const tokenBuffer = new WriteStream()
         const tokenIdBytes = Converter.hexToBytes(asset.id)
         tokenBuffer.writeBytes('tokenId', tokenIdBytes.length, tokenIdBytes)
         tokenBuffer.writeUInt256('amount', BigInteger(rawAmount))
         const tokenBufferBytes = tokenBuffer.finalBytes()
-
         allowance.writeUInt16('tokensLength', tokenBufferBytes.length)
         allowance.writeBytes('tokenBuffer', tokenBufferBytes.length, tokenBufferBytes)
     }
