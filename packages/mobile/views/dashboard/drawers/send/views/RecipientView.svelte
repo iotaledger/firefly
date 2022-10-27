@@ -11,7 +11,9 @@
     let recipientValidationError: string
 
     onMount(() => {
-        recipient = <IAddressSubject>$newTransactionDetails?.recipient 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        recipient = $newTransactionDetails?.recipient
     })
 
     function onContinueClick(): void {
