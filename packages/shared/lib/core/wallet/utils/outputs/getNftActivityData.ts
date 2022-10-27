@@ -7,6 +7,8 @@ import {
     convertHexAddressToBech32,
     getSubjectFromAddress,
     getSenderAddressFromInputs,
+    getTagFromOutput,
+    getMetadataFromOutput,
 } from '..'
 import { ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_NFT, EMPTY_HEX_ID, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
@@ -28,7 +30,7 @@ export function getNftActivityData(
 
     const nftId = getNftId(output, outputId)
     const storageDeposit = Number(output.amount)
-    const metadata = getMetadataFromNft(output)
+    const nftMetadata = getMetadataFromNft(output)
 
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs
@@ -40,6 +42,8 @@ export function getNftActivityData(
 
     const direction = isIncoming ? ActivityDirection.Incoming : ActivityDirection.Outgoing
 
+    const metadata = getMetadataFromOutput(output)
+    const tag = getTagFromOutput(output)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
     return {
@@ -50,7 +54,9 @@ export function getNftActivityData(
         immutableFeatures: output.type === OUTPUT_TYPE_NFT ? output.immutableFeatures : [],
         isInternal,
         storageDeposit,
+        nftMetadata,
         metadata,
+        tag,
         sender,
         recipient,
         subject,

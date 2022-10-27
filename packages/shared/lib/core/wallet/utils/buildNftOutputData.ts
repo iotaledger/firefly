@@ -1,8 +1,11 @@
 import { convertDateToUnixTimestamp } from '@core/utils'
-import { FeatureTypes, UnlockConditionTypes } from '@iota/types'
+import type { FeatureTypes, UnlockConditionTypes } from '@iota/types'
 import type { BuildNftOutputData } from '@iota/wallet'
+import { Converter } from '@lib/converter'
 import {
     ADDRESS_TYPE_ED25519,
+    FEATURE_TYPE_METADATA,
+    FEATURE_TYPE_TAG,
     UNLOCK_CONDITION_ADDRESS,
     UNLOCK_CONDITION_EXPIRATION,
     UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
@@ -53,10 +56,18 @@ export function buildNftOutputData(
         })
     }
 
+    const features: FeatureTypes[] = []
+    if (metadata) {
+        features.push({ type: FEATURE_TYPE_METADATA, data: Converter.utf8ToHex(metadata, true) })
+    }
+
+    if (tag) {
+        features.push({ type: FEATURE_TYPE_TAG, tag: Converter.utf8ToHex(tag, true) })
+    }
+
     return <BuildNftOutputData>{
         nftId: convertBech32ToHexAddress(nftId),
-        metadata,
-        tag,
+        features,
         immutableFeatures,
         unlockConditions,
     }

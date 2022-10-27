@@ -1285,6 +1285,7 @@
         "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
         "nftId": "NFT ID",
+        "nftMetadata": "NFT Metadata",
         "aliasId": "Alias ID",
         "governorAddress": "Governor Address",
         "stateControllerAddress": "State Controller Address",

@@ -96,6 +96,8 @@
                 type: activity.type,
                 storageDeposit: activity.data.storageDeposit,
                 metadata: activity.data.metadata,
+                tag: activity.data?.tag,
+                nftMetadata: activity.data?.nftMetadata,
                 asyncStatus: activity.data.asyncStatus,
                 direction: activity.data.direction,
                 isInternal: activity.data.isInternal,
