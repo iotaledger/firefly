@@ -11,17 +11,14 @@ export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState
     const accountActivities = get(allAccountActivities)[account.index]
 
     const activities = accountActivities.filter(
-        (activity) =>
-            activity.type === ActivityType.Transaction &&
-            activity.direction === ActivityDirection.Outgoing &&
-            activity.asyncData
+        (activity) => activity.direction === ActivityDirection.Outgoing && activity.asyncData
     )
 
     for (const activity of activities) {
         try {
             if (activity.type === ActivityType.Transaction) {
                 const detailedOutput = await account.getOutput(activity.outputId)
-                const isClaimed = isOutputClaimed(detailedOutput)
+                const isClaimed = detailedOutput && isOutputClaimed(detailedOutput)
                 if (isClaimed) {
                     updateAsyncDataByActivityId(account.index, activity.id, {
                         isClaimed: true,

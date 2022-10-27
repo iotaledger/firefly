@@ -74,8 +74,7 @@ function isVisibleWithActiveValuelessFilter(activity: Activity, filter: Activity
 function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
-        activity.type === ActivityType.Transaction &&
-        activity.asyncData.isRejected
+        activity.asyncData?.isRejected
     ) {
         return false
     }
@@ -254,14 +253,14 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
             activity.type === ActivityType.Transaction &&
-            activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
+            activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
         ) {
             return false
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
             activity.type === ActivityType.Transaction &&
-            (!activity.asyncData.asyncStatus || activity.asyncData.asyncStatus === ActivityAsyncStatus.Claimed)
+            (!activity.asyncData?.asyncStatus || activity.asyncData?.asyncStatus === ActivityAsyncStatus.Claimed)
         ) {
             return false
         }

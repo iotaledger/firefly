@@ -1,6 +1,6 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { ActivityAsyncStatus, ActivityType } from '@core/wallet/enums'
-import { TransactionActivity } from '@core/wallet/types'
+import { ActivityAsyncStatus } from '@core/wallet/enums'
+import { Activity } from '@core/wallet/types'
 import { allAccountActivities } from '../../stores'
 import { refreshAccountAssetsForActiveProfile } from '../refreshAccountAssetsForActiveProfile'
 
@@ -9,16 +9,14 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
     allAccountActivities.update((state) => {
         state.forEach((accountActivities, accountIndex) => {
             for (const activity of accountActivities.filter((_activity) => _activity.asyncData)) {
-                if (activity.type === ActivityType.Transaction) {
-                    const oldAsyncStatus = activity.asyncData.asyncStatus
-                    activity.asyncData.asyncStatus = getAsyncStatus(activity, time)
-                    if (
-                        !balancesToUpdate.includes(accountIndex) &&
-                        oldAsyncStatus !== null &&
-                        oldAsyncStatus !== activity.asyncData.asyncStatus
-                    ) {
-                        balancesToUpdate.push(accountIndex)
-                    }
+                const oldAsyncStatus = activity.asyncData.asyncStatus
+                activity.asyncData.asyncStatus = getAsyncStatus(activity, time)
+                if (
+                    !balancesToUpdate.includes(accountIndex) &&
+                    oldAsyncStatus !== null &&
+                    oldAsyncStatus !== activity.asyncData.asyncStatus
+                ) {
+                    balancesToUpdate.push(accountIndex)
                 }
             }
         })
@@ -32,7 +30,7 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
     }
 }
 
-function getAsyncStatus(activity: TransactionActivity, time: Date): ActivityAsyncStatus {
+function getAsyncStatus(activity: Activity, time: Date): ActivityAsyncStatus {
     if (activity.asyncData?.timelockDate) {
         if (activity.asyncData.timelockDate.getTime() > time.getTime()) {
             return ActivityAsyncStatus.Timelocked

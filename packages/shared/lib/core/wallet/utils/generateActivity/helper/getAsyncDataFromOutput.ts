@@ -11,7 +11,6 @@ export function getAsyncDataFromOutput(
     claimingData: IClaimData,
     account: IAccountState
 ): {
-    isAsync: boolean
     asyncStatus: ActivityAsyncStatus
     timelockDate: Date
     expirationDate: Date
@@ -22,25 +21,28 @@ export function getAsyncDataFromOutput(
     claimedDate: Date
 } {
     const isAsync = isOutputAsync(output)
-    const asyncStatus = isAsync ? ActivityAsyncStatus.Unclaimed : null
-    const isClaimed = !!claimingData
-    const isClaiming = false
-    const claimingTransactionId = claimingData?.claimingTransactionId
-    const claimedDate = claimingData?.claimedDate
-    const isRejected = isActivityHiddenForAccountIndex(account.index, transactionId)
+    if (isAsync) {
+        const asyncStatus = ActivityAsyncStatus.Unclaimed
+        const isClaimed = !!claimingData
+        const isClaiming = false
+        const claimingTransactionId = claimingData?.claimingTransactionId
+        const claimedDate = claimingData?.claimedDate
+        const isRejected = isActivityHiddenForAccountIndex(account.index, transactionId)
 
-    const expirationDate = getExpirationDateFromOutput(output)
-    const timelockDate = getTimelockDateFromOutput(output)
+        const expirationDate = getExpirationDateFromOutput(output)
+        const timelockDate = getTimelockDateFromOutput(output)
 
-    return {
-        isAsync,
-        asyncStatus,
-        timelockDate,
-        expirationDate,
-        isRejected,
-        isClaiming,
-        isClaimed,
-        claimingTransactionId,
-        claimedDate,
+        return {
+            asyncStatus,
+            timelockDate,
+            expirationDate,
+            isRejected,
+            isClaiming,
+            isClaimed,
+            claimingTransactionId,
+            claimedDate,
+        }
+    } else {
+        return null
     }
 }

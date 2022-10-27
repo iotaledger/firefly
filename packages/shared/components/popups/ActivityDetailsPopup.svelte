@@ -28,15 +28,18 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
-    $: asset = activity.type !== ActivityType.Nft ? getAssetFromPersistedAssets(activity.assetId) : undefined
+    $: asset =
+        activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry
+            ? getAssetFromPersistedAssets(activity.assetId)
+            : undefined
     $: isTimelocked =
-        activity.type === ActivityType.Transaction && activity.asyncStatus === ActivityAsyncStatus.Timelocked
+        activity.type === ActivityType.Transaction && activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) &&
-        activity.isAsync &&
+        activity.asyncData &&
         (activity?.direction === ActivityDirection.Incoming ||
             (activity.type === ActivityType.Transaction && activity.isSelfTransaction)) &&
-        activity.asyncStatus === ActivityAsyncStatus.Unclaimed
+        activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     let details: Record<string, unknown>
     $: activity, (details = getActivityDetails())
@@ -48,11 +51,6 @@
         const details = {
             transactionTime: activity.time,
             inclusionState: activity.inclusionState,
-            formattedFiatValue: getFiatAmount(
-                activity,
-                $currencies[CurrencyTypes.USD],
-                $exchangeRates[$activeProfile?.settings?.currency]
-            ),
         }
         if (activity.type === ActivityType.Transaction) {
             return {
@@ -63,16 +61,24 @@
                 rawAmount: activity.rawAmount,
                 unit: asset?.metadata?.unit,
                 giftedStorageDeposit: activity.giftedStorageDeposit,
-                asyncStatus: activity.asyncStatus,
+                asyncStatus: activity.asyncData?.asyncStatus,
                 direction: activity.direction,
                 isInternal: activity.isInternal,
-                claimedDate: activity.claimedDate,
-                claimingTransactionId: activity.claimingTransactionId,
-                expirationDate: activity?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity.expirationDate : null,
-                timelockDate: activity.timelockDate,
+                claimedDate: activity.asyncData?.claimedDate,
+                claimingTransactionId: activity.asyncData?.claimingTransactionId,
+                expirationDate:
+                    activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
+                        ? activity.asyncData?.expirationDate
+                        : null,
+                timelockDate: activity.asyncData?.timelockDate,
                 subject: activity?.subject,
                 tag: activity?.tag,
                 metadata: activity?.metadata,
+                formattedFiatValue: getFiatAmount(
+                    activity,
+                    $currencies[CurrencyTypes.USD],
+                    $exchangeRates[$activeProfile?.settings?.currency]
+                ),
             }
         } else if (activity.type === ActivityType.Foundry) {
             return {
@@ -82,6 +88,11 @@
                 rawAmount: activity.rawAmount,
                 unit: asset?.metadata?.unit,
                 giftedStorageDeposit: activity.giftedStorageDeposit,
+                formattedFiatValue: getFiatAmount(
+                    activity,
+                    $currencies[CurrencyTypes.USD],
+                    $exchangeRates[$activeProfile?.settings?.currency]
+                ),
             }
         } else if (activity.type === ActivityType.Alias) {
             return {
@@ -97,13 +108,16 @@
                 type: activity.type,
                 storageDeposit: activity.storageDeposit,
                 metadata: activity.metadata,
-                asyncStatus: activity.asyncStatus,
+                asyncStatus: activity.asyncData?.asyncStatus,
                 direction: activity.direction,
                 isInternal: activity.isInternal,
-                claimedDate: activity.claimedDate,
-                claimingTransactionId: activity.claimingTransactionId,
-                expirationDate: activity?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity.expirationDate : null,
-                timelockDate: activity.timelockDate,
+                claimedDate: activity.asyncData?.claimedDate,
+                claimingTransactionId: activity.asyncData?.claimingTransactionId,
+                expirationDate:
+                    activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
+                        ? activity.asyncData?.expirationDate
+                        : null,
+                timelockDate: activity.asyncData?.timelockDate,
                 subject: activity?.subject,
             }
         }
@@ -195,10 +209,20 @@
     {/if}
     {#if !isTimelocked && (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-            <Button outline classes="w-full" disabled={activity.isClaiming || activity.isRejected} onClick={reject}>
+            <Button
+                outline
+                classes="w-full"
+                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
+                onClick={reject}
+            >
                 {localize('actions.reject')}
             </Button>
-            <Button classes="w-full" disabled={activity.isClaiming} onClick={onClaimClick} isBusy={activity.isClaiming}>
+            <Button
+                classes="w-full"
+                disabled={activity.asyncData?.isClaiming}
+                onClick={onClaimClick}
+                isBusy={activity.asyncData?.isClaiming}
+            >
                 {localize('actions.claim')}
             </Button>
         </popup-buttons>

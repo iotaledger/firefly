@@ -27,8 +27,9 @@
     export let activity: Activity
 
     $: shouldShowActions =
-        activity.direction === ActivityDirection.Incoming && activity.asyncStatus === ActivityAsyncStatus.Unclaimed
-    $: shouldShowAsyncFooter = activity.asyncStatus !== ActivityAsyncStatus.Claimed
+        activity.direction === ActivityDirection.Incoming &&
+        activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
+    $: shouldShowAsyncFooter = activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
 
     $: timeDiff = getTimeDiff(activity)
 
@@ -57,13 +58,14 @@
     }
 
     function getTimeDiff(activity: Activity): string {
-        const { asyncStatus, isAsync, isClaimed, expirationDate, timelockDate } = activity
-
-        if (asyncStatus === ActivityAsyncStatus.Timelocked) {
-            return getTimeDifference(timelockDate, $time)
-        }
-        if (isAsync && !isClaimed && expirationDate) {
-            return getTimeDifference(expirationDate, $time)
+        if (activity.asyncData) {
+            const { asyncStatus, isClaimed, expirationDate, timelockDate } = activity.asyncData
+            if (asyncStatus === ActivityAsyncStatus.Timelocked) {
+                return getTimeDifference(timelockDate, $time)
+            }
+            if (!isClaimed && expirationDate) {
+                return getTimeDifference(expirationDate, $time)
+            }
         }
         return localize('general.none')
     }
@@ -85,7 +87,7 @@
             {#if shouldShowActions}
                 <Button
                     onClick={handleRejectClick}
-                    disabled={activity.isClaiming || activity.isRejected}
+                    disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
                     inlineStyle="min-width: 4rem;"
                     size={ButtonSize.Small}
                     outline
@@ -94,15 +96,15 @@
                 </Button>
                 <Button
                     onClick={handleClaimClick}
-                    disabled={activity.isClaiming}
-                    isBusy={activity.isClaiming}
+                    disabled={activity.asyncData?.isClaiming}
+                    isBusy={activity.asyncData?.isClaiming}
                     inlineStyle="min-width: 4rem;"
                     size={ButtonSize.Small}
                 >
                     {localize('actions.claim')}
                 </Button>
             {:else}
-                <ActivityAsyncStatusPill asyncStatus={activity.asyncStatus} />
+                <ActivityAsyncStatusPill asyncStatus={activity.asyncData?.asyncStatus} />
             {/if}
         </svelte:fragment>
     </TileFooter>

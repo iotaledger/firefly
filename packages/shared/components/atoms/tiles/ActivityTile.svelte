@@ -64,9 +64,9 @@
                 <FoundryActivityTileContent {activity} />
             {/if}
         </tile-content>
-        {#if activity.asyncStatus === ActivityAsyncStatus.Timelocked}
+        {#if activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked}
             <TimelockActivityTileFooter {activity} />
-        {:else if activity.isAsync}
+        {:else if activity.asyncData}
             <AsyncActivityTileFooter {activity} />
         {/if}
     </activity-tile>

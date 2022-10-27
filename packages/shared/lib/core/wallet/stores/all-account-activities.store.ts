@@ -63,7 +63,7 @@ export function updateAsyncDataByActivityId(
         const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
-            Object.assign(activity, { ...activity.asyncData, ...partialAsyncData })
+            Object.assign(activity, { asyncData: { ...activity.asyncData, ...partialAsyncData } })
         }
         return state
     })
@@ -78,7 +78,7 @@ export function updateAsyncDataByTransactionId(
         const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
-            Object.assign(activity, { ...activity.asyncData, ...partialAsyncData })
+            Object.assign(activity, { asyncData: { ...activity.asyncData, ...partialAsyncData } })
         }
         return state
     })

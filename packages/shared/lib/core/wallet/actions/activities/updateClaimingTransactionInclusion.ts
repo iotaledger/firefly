@@ -11,9 +11,7 @@ export function updateClaimingTransactionInclusion(
 ): void {
     allAccountActivities.update((state) => {
         const activity = state[accountIndex]?.find(
-            (_activity) =>
-                _activity.type === ActivityType.Transaction &&
-                _activity.asyncData.claimingTransactionId === transactionId
+            (_activity) => _activity.asyncData?.claimingTransactionId === transactionId
         )
 
         if (activity) {

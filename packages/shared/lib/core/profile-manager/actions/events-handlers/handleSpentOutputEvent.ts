@@ -22,7 +22,7 @@ export async function handleSpentOutputEventInternal(
     const outputId = payload?.output?.outputId
     const activity = get(allAccountActivities)?.[accountIndex]?.find(
         (_activity) =>
-            _activity.asyncData.asyncStatus === ActivityAsyncStatus.Unclaimed && _activity.outputId === outputId
+            _activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed && _activity.outputId === outputId
     )
 
     if (activity) {

@@ -11,8 +11,8 @@
     $: timeDiff = getTimeDiff(activity)
 
     function getTimeDiff(_activity: Activity): string {
-        if (_activity.asyncStatus === ActivityAsyncStatus.Timelocked) {
-            return getTimeDifference(_activity.timelockDate, $time)
+        if (_activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked) {
+            return getTimeDifference(_activity.asyncData?.timelockDate, $time)
         }
         return localize('general.none')
     }
