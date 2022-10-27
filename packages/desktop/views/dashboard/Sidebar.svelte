@@ -9,7 +9,7 @@
         NotificationBadge,
     } from 'shared/components'
     import { appVersionDetails, mobile } from '@core/app'
-    import { getInitials, isRecentDate } from '@lib/helpers'
+    import { getInitials, isRecentDate } from '@core/utils'
     import { activeProfile } from '@core/profile'
     import {
         dashboardRouter,

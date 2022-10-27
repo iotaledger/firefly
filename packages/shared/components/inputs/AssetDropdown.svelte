@@ -2,7 +2,7 @@
     import { NetworkProtocol } from '@core/network'
     import { IAsset, visibleSelectedAccountAssets } from '@core/wallet'
     import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils'
 
     export let asset = $visibleSelectedAccountAssets?.baseCoin
 

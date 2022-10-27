@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { activeProfile } from '@core/profile'
     import { DestinationNetwork, NETWORK_ADDRESS } from '@core/network'
-    import { truncateString } from '@lib/helpers'
+    import { truncateString } from '@core/utils'
     import { Modal, Text, TextType } from 'shared/components'
     import { fade } from 'svelte/transition'
 

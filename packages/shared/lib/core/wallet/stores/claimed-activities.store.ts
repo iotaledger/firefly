@@ -1,6 +1,8 @@
-import { activeProfileId } from '@core/profile'
-import { persistent } from '@lib/helpers'
 import { get } from 'svelte/store'
+
+import { activeProfileId } from '@core/profile'
+import { persistent } from '@core/utils/store'
+
 import { IClaimedActivities, IClaimedActivitiesPerProfile } from '../interfaces'
 
 export const claimedActivities = persistent<IClaimedActivitiesPerProfile>('claimedActivities', {})

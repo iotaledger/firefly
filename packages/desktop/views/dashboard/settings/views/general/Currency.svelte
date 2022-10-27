@@ -3,9 +3,9 @@
     import { exchangeRates } from 'shared/lib/currency'
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
-    import type { DropdownChoice } from '@core/utils'
+    import type { IDropdownChoice } from '@core/utils'
 
-    let currencyList: DropdownChoice[]
+    let currencyList: IDropdownChoice[]
     $: currencyList = Object.keys($exchangeRates)
         .map((currency) => ({ value: currency, label: currency }))
         .sort()
