@@ -4,7 +4,7 @@
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
     import { sumBalanceForAccounts } from '@core/account'
     import { formatTokenAmountBestMatch } from '@core/wallet'
-    import features from '../../../features/features'
+    import features from '@features/features'
     import { AccountSwitcherMenuItem, Drawer } from '../../../../mobile/components'
     import { HR, Icon, Text, TextType } from 'shared/components'
 

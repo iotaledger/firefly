@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import features from '../../features/features'
+    import features from '@features/features'
     import { dashboardRoute, DashboardRoute, dashboardRouter, sendRouter } from '../../lib/routers'
     import { AccountSwitcherDrawer, ReceiveDrawer, SendDrawer } from './drawers'
 
