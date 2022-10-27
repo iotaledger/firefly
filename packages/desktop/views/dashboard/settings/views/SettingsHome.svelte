@@ -13,7 +13,7 @@
         SettingsRoute,
         settingsRouter,
     } from '@core/router'
-    import features from 'shared/features/features'
+    import features from '@features/features'
 
     const { loggedIn } = $activeProfile
 

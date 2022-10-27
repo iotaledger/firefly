@@ -9,7 +9,7 @@
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
     import { ActivityTile, Text, TextInput, TogglableButton, Filter, FontWeight } from 'shared/components'
-    import features from 'shared/features/features'
+    import features from '@features/features'
     import { debounce, getMonthYear } from '@core/utils'
     import VirtualList from '@sveltejs/svelte-virtual-list'
 
