@@ -14,7 +14,7 @@
         TextType,
     } from 'shared/components'
     import { TransactionDetails } from 'shared/components/molecules'
-    import type { OutputTypes } from '@iota/types'
+    import type { IBasicOutput } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
@@ -48,7 +48,7 @@
 
     let storageDeposit = 0
     let giftedStorageDeposit = 0
-    let preparedOutput: OutputTypes
+    let preparedOutput: IBasicOutput
     let outputOptions: OutputOptions
     let error: BaseError
     let expirationTimePicker: ExpirationTimePicker
@@ -112,7 +112,11 @@
             giftStorageDeposit,
             surplus
         )
-        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+        preparedOutput = (await prepareOutput(
+            $selectedAccount.index,
+            outputOptions,
+            DEFAULT_TRANSACTION_OPTIONS
+        )) as IBasicOutput
         setStorageDeposit(preparedOutput, Number(surplus))
 
         if (!initialExpirationDate) {
@@ -120,7 +124,7 @@
         }
     }
 
-    function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
+    function setStorageDeposit(preparedOutput: IBasicOutput, surplus?: number): void {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
         storageDeposit = _storageDeposit

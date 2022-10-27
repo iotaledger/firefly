@@ -1,15 +1,12 @@
-import { FEATURE_TYPE_TAG, OUTPUT_TYPE_TREASURY } from '../../../constants'
-import { ITagFeature, OutputTypes } from '@iota/types'
+import { FEATURE_TYPE_TAG } from '../../../constants'
+import { ITagFeature, IBasicOutput, IAliasOutput, IFoundryOutput, INftOutput } from '@iota/types'
 import { Converter } from '@lib/converter'
 
-export function getTagFromOutput(output: OutputTypes): string {
-    if (output && output?.type !== OUTPUT_TYPE_TREASURY) {
-        const { tag } = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG) ?? {
-            tag: undefined,
-        }
-        if (tag) {
-            return Converter.hexToUtf8(tag)
-        }
+export function getTagFromOutput(output: IBasicOutput | IAliasOutput | IFoundryOutput | INftOutput): string {
+    const { tag } = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG) ?? {
+        tag: undefined,
     }
-    return undefined
+    if (tag) {
+        return Converter.hexToUtf8(tag)
+    }
 }
