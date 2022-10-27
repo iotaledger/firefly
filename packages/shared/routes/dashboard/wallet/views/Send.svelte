@@ -554,18 +554,20 @@
                         autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
                         classes="mb-6"
                     />
-                    <KeyValueBox
-                        bind:value={tag}
-                        key={localize('general.tag')}
-                        error={tagError}
-                        disabled={$isTransferring}
-                    />
-                    <KeyValueBox
-                        bind:value={metadata}
-                        key={localize('general.metadata')}
-                        error={metadataError}
-                        disabled={$isTransferring}
-                    />
+                    {#if selectedSendType === SEND_TYPE.EXTERNAL}
+                        <KeyValueBox
+                            bind:value={tag}
+                            key={localize('general.tag')}
+                            error={tagError}
+                            disabled={$isTransferring}
+                        />
+                        <KeyValueBox
+                            bind:value={metadata}
+                            key={localize('general.metadata')}
+                            error={metadataError}
+                            disabled={$isTransferring}
+                        />
+                    {/if}
                 </div>
             </div>
         </div>
