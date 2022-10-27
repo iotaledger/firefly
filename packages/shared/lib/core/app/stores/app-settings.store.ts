@@ -1,5 +1,7 @@
-import { persistent } from '@lib/helpers'
 import { writable } from 'svelte/store'
+
+import { persistent } from '@core/utils/store'
+
 import { DEFAULT_APP_SETTINGS } from '../constants'
 import { IAppSettings } from '../interfaces'
 

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { activeProfile } from '@core/profile'
-    import { getInitials } from '@lib/helpers'
+    import { getInitials } from '@core/utils'
 
     // @TODO fix the linting error that profileInitial isn't used
     /* eslint-disable @typescript-eslint/no-unused-vars */

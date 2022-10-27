@@ -7,7 +7,7 @@ import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetai
 import { localize } from '@core/i18n'
 import { Activity } from '../classes'
 import { preprocessTransaction } from '../utils'
-import { Converter } from '@lib/converter'
+import { Converter } from '@core/utils'
 import { INftMetadata } from '../interfaces'
 import { showAppNotification } from '@auxiliary/notification'
 

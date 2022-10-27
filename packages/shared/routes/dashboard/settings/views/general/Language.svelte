@@ -2,9 +2,9 @@
     import { Dropdown, Text } from 'shared/components'
     import { appSettings } from '@core/app'
     import { SUPPORTED_LOCALES, localize, setLanguage } from '@core/i18n'
-    import type { DropdownChoice } from '@core/utils'
+    import type { IDropdownChoice } from '@core/utils'
 
-    let languageList: DropdownChoice[]
+    let languageList: IDropdownChoice[]
     $: languageList = Object.values(SUPPORTED_LOCALES).map((locale) => ({ value: locale, label: locale }))
 
     function handleLanguage(item): void {

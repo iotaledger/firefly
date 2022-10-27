@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils'
     import { fade } from 'svelte/transition'
     import { createEventDispatcher } from 'svelte'
 

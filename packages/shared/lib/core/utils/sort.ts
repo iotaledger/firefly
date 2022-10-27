@@ -1,4 +1,4 @@
-import { IAccount } from '@core/account'
+import { IAccount } from '@core/account/interfaces'
 
 export function sortAccountsByIndex(account1: IAccount, account2: IAccount): number {
     const index1 = account1.getMetadata()?.index

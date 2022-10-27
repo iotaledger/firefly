@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { mobile, PlatformOption, platform } from '@core/app'
     import { Drawer, Icon } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils'
     import { closePopup, popupState } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
