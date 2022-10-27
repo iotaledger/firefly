@@ -13,8 +13,6 @@ export function getSendingInformation(
     output: IBasicOutput | IAliasOutput | IFoundryOutput | INftOutput,
     account: IAccountState
 ): {
-    sender: Subject
-    recipient: Subject
     subject: Subject
     direction: ActivityDirection
     isInternal: boolean
@@ -40,8 +38,6 @@ export function getSendingInformation(
     const direction = isIncoming || isSelfTransaction ? ActivityDirection.Incoming : ActivityDirection.Outgoing
 
     return {
-        recipient,
-        sender,
         subject,
         isInternal,
         direction,

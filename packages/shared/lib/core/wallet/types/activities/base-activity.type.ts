@@ -16,8 +16,6 @@ export type BaseActivity = {
     isInternal: boolean
     storageDeposit: number
     giftedStorageDeposit: number
-    sender: Subject
-    recipient: Subject
     subject: Subject
     isSelfTransaction: boolean
     asyncData: AsyncData
