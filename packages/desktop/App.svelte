@@ -1,10 +1,5 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
-    import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
-    import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
-    import { showAppNotification } from '@auxiliary/notification'
-    import { closePopup, openPopup, popupState } from '@auxiliary/popup'
-    import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings, setPlatform } from '@core/app'
     import { _, isLocaleLoaded, Locale, localeDirection, setupI18n } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
     import {
@@ -17,11 +12,16 @@
         onboardingRoute,
         openSettings,
     } from '@core/router'
+    import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings, setPlatform } from '@core/app'
     import { Electron } from '@lib/electron'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { closePopup, openPopup, popupState } from '@auxiliary/popup'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Platform } from '@lib/platform'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
+    import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 

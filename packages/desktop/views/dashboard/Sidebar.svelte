@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Drawer, Icon, ProfileActionsModal, Text, Modal, NetworkIndicator, NotificationBadge } from '@ui'
     import { SidebarTab } from '@components'
-    import { Settings } from '@views'
+    import { Settings } from './settings'
     import features from '@features/features'
     import { appVersionDetails, mobile } from '@core/app'
     import { getInitials, isRecentDate } from '@core/utils'

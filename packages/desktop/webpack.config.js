@@ -24,10 +24,6 @@ const appProtocol = stage === 'prod' ? 'firefly' : `firefly-${stage.toLowerCase(
 
 // / ------------------------ Resolve ------------------------
 
-const tsConfigOptions = {
-    configFile: './tsconfig.json',
-}
-
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
