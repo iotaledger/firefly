@@ -1,6 +1,6 @@
 import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
-import { updateActivityByActivityId } from '../stores'
+import { updateAsyncDataByActivityId } from '../stores'
 import { hiddenActivities } from '../stores/hidden-activities.store'
 import { localize } from '@core/i18n'
 import { showAppNotification } from '@auxiliary/notification'
@@ -24,7 +24,7 @@ export function rejectActivity(id: string): void {
         return state
     })
 
-    updateActivityByActivityId(accountIndex, id, { isRejected: true })
+    updateAsyncDataByActivityId(accountIndex, id, { isRejected: true })
     showAppNotification({
         type: 'success',
         alert: true,
