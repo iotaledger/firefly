@@ -124,7 +124,7 @@
 
     function handleTransactionIdClick(): void {
         explorerUrl
-            ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
+            ? Platform.openUrl(`${explorerUrl}/transaction/${claimingTransactionId}`)
             : setClipboard(claimingTransactionId)
     }
 
