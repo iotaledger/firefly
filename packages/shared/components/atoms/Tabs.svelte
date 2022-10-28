@@ -5,7 +5,10 @@
     export let activeTab: string
 </script>
 
-<div class="tabs relative flex flex-row p-1 gap-1 border border-solid border-gray-300 dark:border-gray-700 rounded-lg">
+<div
+    class="relative flex flex-row p-1 gap-1 border border-solid border-gray-300 dark:border-gray-700 rounded-lg"
+    style="height: 40px"
+>
     {#each tabs as tab}
         <button
             on:click={() => (activeTab = tab)}
@@ -18,9 +21,3 @@
         </button>
     {/each}
 </div>
-
-<style lang="scss">
-    .tabs {
-        height: 40px;
-    }
-</style>
