@@ -1,20 +1,3 @@
-import { LocaleOptions } from '../types'
-
-/**
- * The default locale options, useful for when a specific
- * translation is not supported.
- */
-export const DEFAULT_LOCALE_OPTIONS: LocaleOptions = {
-    fallbackLocale: 'en',
-    initialLocale: null,
-    loadingDelay: 200,
-    formats: {},
-    warnOnMissingMessages: true,
-}
-
-/**
- * The available locales supported by the app.
- */
 export const SUPPORTED_LOCALES = {
     en: 'English',
     af: 'Afrikaans',
