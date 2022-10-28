@@ -5,11 +5,13 @@
     export let activeTab: string
 </script>
 
-<div class="tabs relative flex flex-row bg-gray-50 p-1 gap-4">
+<div class="tabs relative flex flex-row p-1 gap-1 border border-solid border-gray-300 dark:border-gray-700 rounded-lg">
     {#each tabs as tab}
         <button
             on:click={() => (activeTab = tab)}
-            class="w-full border-sm {activeTab === tab ? 'text-blue-500 bg-white' : 'text-gray-600'}"
+            class="w-full text-13 rounded-lg {activeTab === tab
+                ? 'text-gray-800 dark:text-white bg-gray-100 dark:bg-gray-700'
+                : 'text-gray-500'}"
             class:active={activeTab === tab}
         >
             {localize(tab)}
@@ -19,6 +21,6 @@
 
 <style lang="scss">
     .tabs {
-        height: 50px;
+        height: 40px;
     }
 </style>
