@@ -3,8 +3,12 @@
 
     export let key = ''
     export let value = ''
+    export let error = ''
+    export let disabled = false
+
+    const placeholder = key
 </script>
 
 <key-value>
-    <Input label={key} bind:value error={''} disabled={true} inputElement={undefined} classes="mb-6" />
+    <Input label={key} bind:value {disabled} {error} {placeholder} inputElement={undefined} />
 </key-value>

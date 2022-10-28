@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { getContext, onDestroy, onMount } from 'svelte'
-    import { get, Readable } from 'svelte/store'
+    import { localize } from '@core/i18n'
+    import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, KeyValueBox, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
@@ -14,7 +14,6 @@
         parseCurrency,
     } from 'shared/lib/currency'
     import { startQRScanner } from 'shared/lib/device'
-    import { localize } from '@core/i18n'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -23,23 +22,24 @@
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRouter } from '@core/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { NotificationType } from 'shared/lib/typings/notification'
+    import { SendParams } from 'shared/lib/typings/sendParams'
+    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
-    import { ADDRESS_LENGTH, validateBech32Address } from 'shared/lib/utils'
+    import { ADDRESS_LENGTH, getByteLengthOfString, validateBech32Address } from 'shared/lib/utils'
     import {
         DUST_THRESHOLD,
+        handleTransactionEventData,
         isTransferring,
         selectedAccountStore,
         transferState,
         wallet,
-        handleTransactionEventData,
     } from 'shared/lib/wallet'
-    import { NotificationType } from 'shared/lib/typings/notification'
-    import { SendParams } from 'shared/lib/typings/sendParams'
-    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import { get, Readable } from 'svelte/store'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
@@ -57,9 +57,13 @@
     let unit = Unit.Mi
     let amount = ''
     let address = ''
+    let tag = ''
+    let metadata = ''
     let amountError = ''
     let addressError = ''
     let toError = ''
+    let tagError = ''
+    let metadataError = ''
     let to: LabeledWalletAccount
     let amountRaw: number
 
@@ -69,10 +73,16 @@
     let transactionTimeoutId = null
     let transactionNotificationId = null
 
+    let amountComponentMountTrigger = 0
+
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
-    $: showBridgeFields = Boolean($sendParams.tag && $sendParams.metadata)
+    $: tag, (tagError = '')
+    $: metadata, (metadataError = '')
+
+    $: amountError, toError, addressError, tagError, metadataError, updateAmountComponentMountTrigger()
+    $: selectedSendType, updateAmountComponentMountTrigger()
 
     const transferSteps: {
         [key in TransferProgressEventType]: {
@@ -320,7 +330,15 @@
             }
         }
 
-        if (!amountError && !addressError && !toError) {
+        if (getByteLengthOfString(tag) > 64) {
+            tagError = localize('error.send.tagLength')
+        }
+
+        if (getByteLengthOfString(metadata) > 8192) {
+            metadataError = localize('error.send.metadataLength')
+        }
+
+        if (!amountError && !addressError && !toError && !tagError && !metadataError) {
             // If this is an external send but the dest address is in one of
             // the other accounts, detect it to display the right popup
             // but keep the tx external to keep the original entered address
@@ -405,6 +423,8 @@
         amount = sendParams.amount !== undefined ? String(sendParams.amount) : ''
         address = sendParams.address
         to = sendParams?.toWalletAccount?.id !== $selectedAccountStore.id ? sendParams?.toWalletAccount : undefined
+        tag = sendParams?.tag ?? ''
+        metadata = sendParams?.metadata ?? ''
         if (accountsDropdownItems) {
             to =
                 $liveAccounts.length === 2
@@ -444,19 +464,27 @@
         amount,
         selectedSendType,
         to,
+        tag,
+        metadata,
         sendParams.update((_sendParams) => ({
             ..._sendParams,
             address,
             unit,
             amount: amount ? String(amount) : '',
+            tag,
+            metadata,
             toWalletAccount: to ? addLabel(to) : undefined,
             isInternal: selectedSendType === SEND_TYPE.INTERNAL,
         }))
+
+    function updateAmountComponentMountTrigger(): void {
+        amountComponentMountTrigger += 1
+    }
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-6">
-    <div>
-        <div class="flex flex-row w-full justify-between mb-6">
+    <div class="flex flex-col flex-auto space-y-6">
+        <div class="flex flex-row w-full justify-between">
             <div class="flex flex-row space-x-6">
                 <button
                     on:click={() => handleSendTypeClick(SEND_TYPE.EXTERNAL)}
@@ -500,57 +528,57 @@
                 </button>
             </div>
         </div>
-        <div class="w-full h-full flex flex-col justify-between">
-            <div>
-                <div class="w-full block">
-                    {#if selectedSendType === SEND_TYPE.INTERNAL}
-                        <Dropdown
-                            value={to?.label || null}
-                            label={localize('general.to')}
-                            placeholder={localize('general.to')}
-                            items={accountsDropdownItems.filter((a) => a.id !== $selectedAccountStore.id)}
-                            onSelect={handleToSelect}
-                            disabled={$isTransferring || $liveAccounts.length === 2}
-                            error={toError}
-                            classes="mb-6"
-                            autofocus={$liveAccounts.length > 2}
-                        />
-                    {:else}
-                        <Address
-                            error={addressError}
-                            bind:address
-                            label={localize('general.sendToAddress')}
-                            disabled={$isTransferring}
-                            placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
-                            classes="mb-6"
-                            autofocus
-                        />
-                    {/if}
-                    <Amount
-                        error={amountError}
-                        bind:amount
-                        bind:unit
-                        onMaxClick={handleMaxClick}
-                        disabled={$isTransferring}
-                        autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
-                        classes="mb-6"
-                    />
-                    {#if showBridgeFields}
-                        <KeyValueBox bind:value={$sendParams.tag} key={localize('general.tag')} />
-                        <KeyValueBox bind:value={$sendParams.metadata} key={localize('general.metadata')} />
-                    {/if}
-                </div>
-            </div>
+        <div
+            on:scroll={() => updateAmountComponentMountTrigger()}
+            class="relative flex flex-col space-y-6 w-full overflow-x-hidden overflow-y-auto flex-auto h-1 -mr-2 pr-2 scroll-secondary pb-4"
+        >
+            {#if selectedSendType === SEND_TYPE.INTERNAL}
+                <Dropdown
+                    value={to?.label || null}
+                    label={localize('general.to')}
+                    placeholder={localize('general.to')}
+                    items={accountsDropdownItems.filter((a) => a.id !== $selectedAccountStore.id)}
+                    onSelect={handleToSelect}
+                    disabled={$isTransferring || $liveAccounts.length === 2}
+                    error={toError}
+                    autofocus={$liveAccounts.length > 2}
+                />
+            {:else}
+                <Address
+                    error={addressError}
+                    bind:address
+                    label={localize('general.sendToAddress')}
+                    disabled={$isTransferring}
+                    placeholder={`${localize('general.sendToAddress')}\n${addressPrefix}...`}
+                    autofocus
+                />
+            {/if}
+            {#key amountComponentMountTrigger}
+                <Amount
+                    error={amountError}
+                    bind:amount
+                    bind:unit
+                    onMaxClick={handleMaxClick}
+                    disabled={$isTransferring}
+                    autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+                />
+            {/key}
+            {#if selectedSendType === SEND_TYPE.EXTERNAL}
+                <KeyValueBox
+                    bind:value={tag}
+                    key={localize('general.tag')}
+                    error={tagError}
+                    disabled={$isTransferring}
+                />
+                <KeyValueBox
+                    bind:value={metadata}
+                    key={localize('general.metadata')}
+                    error={metadataError}
+                    disabled={$isTransferring}
+                />
+            {/if}
         </div>
     </div>
-    {#if !$isTransferring}
-        <div class="flex flex-row justify-between px-2">
-            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
-                {localize('actions.cancel')}
-            </Button>
-            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
-        </div>
-    {/if}
     {#if $isTransferring}
         <ProgressBar
             preloading={!$transferState}
@@ -558,6 +586,13 @@
             message={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.label}
             percent={transferSteps[$transferState?.type || TransferProgressEventType.SyncingAccount]?.percent}
         />
+    {:else}
+        <div class="flex flex-row justify-between px-2">
+            <Button secondary classes="-mx-2 w-1/2" onClick={() => handleBackClick()}>
+                {localize('actions.cancel')}
+            </Button>
+            <Button classes="-mx-2 w-1/2" onClick={() => handleSendClick()}>{localize('actions.send')}</Button>
+        </div>
     {/if}
 </div>
 
