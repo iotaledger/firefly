@@ -16,6 +16,14 @@ const tsConfigOptions = {
 const resolve = {
     alias: {
         svelte: path.dirname(require.resolve('svelte/package.json')),
+        '@auxiliary': path.resolve(__dirname, './lib/auxiliary'),
+        '@contexts': path.resolve(__dirname, '../shared/lib/contexts'),
+        '@components': path.resolve(__dirname, './components/'),
+        '@core': path.resolve(__dirname, '../shared/lib/core'),
+        '@features': path.resolve(__dirname, './features'),
+        '@lib': path.resolve(__dirname, '../shared/lib'),
+        '@ui': path.resolve(__dirname, '../shared/components/'),
+        '@views': path.resolve(__dirname, './views/'),
     },
     extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
@@ -24,7 +32,6 @@ const resolve = {
         fs: false,
         crypto: false,
     },
-    plugins: [new TsconfigPathsPlugin(tsConfigOptions)],
 }
 
 // ------------------------ Output ------------------------

@@ -22,7 +22,7 @@
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { truncateString } from '@lib/helpers'
+    import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
     import { time } from '@core/app'
 
@@ -124,7 +124,7 @@
 
     function handleTransactionIdClick(): void {
         explorerUrl
-            ? Platform.openUrl(`${explorerUrl}/block/${claimingTransactionId}`)
+            ? Platform.openUrl(`${explorerUrl}/transaction/${claimingTransactionId}`)
             : setClipboard(claimingTransactionId)
     }
 

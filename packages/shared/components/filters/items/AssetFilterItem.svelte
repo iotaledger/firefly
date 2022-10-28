@@ -1,13 +1,13 @@
 <script lang="typescript">
     import type { AssetFilterUnit } from '@core/wallet/interfaces'
     import { Dropdown } from 'shared/components'
-    import type { DropdownChoice } from '@core/utils'
+    import type { IDropdownChoice } from '@core/utils'
     import { visibleSelectedAccountAssets } from '@core/wallet'
 
     export let filterUnit: AssetFilterUnit
     const { baseCoin, nativeTokens } = $visibleSelectedAccountAssets
 
-    const choices: DropdownChoice[] = [baseCoin, ...nativeTokens].map((choice) => ({
+    const choices: IDropdownChoice[] = [baseCoin, ...nativeTokens].map((choice) => ({
         label: choice.metadata.name,
         value: choice.metadata.name,
     }))

@@ -5,7 +5,7 @@
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
     import { popupState, openPopup, closePopup } from '@auxiliary/popup'
     import { openSettings } from '@core/router'
-    import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from 'shared/lib/helpers'
+    import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from '@core/utils'
     import { appVersionDetails } from '@core/app'
     import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, logout, lockStronghold } from '@core/profile'
     import { checkOrUnlockStronghold } from '@core/stronghold'

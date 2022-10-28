@@ -1,4 +1,4 @@
-import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@lib/time'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
 
 /**
  * The amount of time between checking if an updated version of the application has been

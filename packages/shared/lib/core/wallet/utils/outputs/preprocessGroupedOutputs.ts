@@ -1,6 +1,6 @@
 import { IProcessedTransaction } from '../../interfaces'
 import { OutputData } from '@iota/wallet'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
 import { InclusionState } from '@core/wallet/enums'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'

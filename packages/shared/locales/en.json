@@ -1315,7 +1315,8 @@
         "url": "URL",
         "hash": "Hash",
         "creating": "Creating",
-        "updating": "Updating"
+        "updating": "Updating",
+        "enterAddress": "Enter address"
     },
     "filters":{
         "title": "Filters",

@@ -5,7 +5,7 @@ import {
     MINUTES_PER_HOUR,
     SECONDS_PER_DAY,
     SECONDS_PER_MINUTE,
-} from 'shared/lib/time'
+} from '@core/utils'
 
 export function getTimeDifferenceUntilExpirationTime(data: ITransactionActivityData, time: Date): string {
     if (data.isAsync && !data.isClaimed && data?.expirationDate) {
