@@ -12,7 +12,11 @@ import {
 import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
 import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'
-import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
+import {
+    generateAndStoreActivitiesForAllAccounts,
+    refreshAccountAssetsForActiveProfile,
+    initialiseNftMetadataForAllAccount,
+} from '@core/wallet'
 import { get } from 'svelte/store'
 import { DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION, STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../../constants'
 import {
@@ -86,8 +90,12 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             await generateAndStoreActivitiesForAllAccounts()
 
+            // Step 7: generate and store activities for all accounts
+            incrementLoginProgress()
+            await initialiseNftMetadataForAllAccount()
+
             if (type === ProfileType.Software) {
-                // Step 7: set initial stronghold status
+                // Step 8: set initial stronghold status
                 incrementLoginProgress()
                 const strongholdUnlocked = await isStrongholdUnlocked()
                 isStrongholdLocked.set(!strongholdUnlocked)
@@ -99,12 +107,12 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 incrementLoginProgress(2)
             }
 
-            // Step 8: start background sync
+            // Step 9: start background sync
             incrementLoginProgress()
             subscribeToWalletApiEventsForActiveProfile()
             await startBackgroundSync({ syncIncomingTransactions: true })
 
-            // Step 9: finish login
+            // Step 10: finish login
             incrementLoginProgress()
             if (isLedgerProfile(type)) {
                 pollLedgerNanoStatus()

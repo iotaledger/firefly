@@ -27,6 +27,7 @@ export function getNftActivityData(
     const nftId = getNftId(output.nftId, outputId)
     const storageDeposit = Number(output.amount)
     const metadata = getMetadataFromNftOutput(output)
+    metadata.id = nftId
 
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs

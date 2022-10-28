@@ -20,6 +20,7 @@
     import {
         formatTokenAmountBestMatch,
         generateAndStoreActivitiesForAllAccounts,
+        initialiseNftMetadataForAllAccount,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
 
@@ -109,6 +110,7 @@
         if (hasUsedWalletFinder) {
             await refreshAccountAssetsForActiveProfile()
             await generateAndStoreActivitiesForAllAccounts()
+            initialiseNftMetadataForAllAccount()
         }
     })
 </script>

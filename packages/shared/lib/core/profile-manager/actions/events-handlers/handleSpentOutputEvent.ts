@@ -5,7 +5,7 @@ import {
     allAccountActivities,
     updateActivityDataByTransactionId,
 } from '@core/wallet/stores/all-account-activities.store'
-import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
+import { ActivityAsyncStatus, ActivityType, updateNftInAllAccountNfts } from '@core/wallet'
 
 import { WalletApiEvent } from '../../enums'
 import { ISpentOutputEventPayload } from '../../interfaces'
@@ -24,18 +24,22 @@ export async function handleSpentOutputEventInternal(
     await syncBalance(accountIndex)
     const outputId = payload?.output?.outputId
     const activity = get(allAccountActivities)?.[accountIndex]?.find(
-        (_activity) =>
-            _activity.data.type === ActivityType.Transaction &&
-            _activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed &&
-            _activity.data.outputId === outputId
+        (_activity) => _activity.data.outputId === outputId
     )
 
-    if (activity) {
+    if (
+        activity &&
+        activity.data.type === ActivityType.Transaction &&
+        activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
+    ) {
         const transactionId = payload?.output?.metadata?.transactionId
         updateActivityDataByTransactionId(accountIndex, transactionId, {
             type: ActivityType.Transaction,
             isClaimed: true,
             asyncStatus: ActivityAsyncStatus.Claimed,
         })
+    }
+    if (activity?.data.type === ActivityType.Nft) {
+        updateNftInAllAccountNfts(accountIndex, activity.data.metadata.id, { isUnspent: false })
     }
 }

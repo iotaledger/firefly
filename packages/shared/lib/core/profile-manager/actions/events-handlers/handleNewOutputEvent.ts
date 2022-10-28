@@ -1,6 +1,12 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { activeAccounts } from '@core/profile/stores'
-import { ActivityType, addPersistedAsset, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
+import {
+    ActivityDirection,
+    ActivityType,
+    addOrUpdateNftInAllAccountNfts,
+    addPersistedAsset,
+    getOrRequestAssetFromPersistedAssets,
+} from '@core/wallet'
 import { Activity } from '@core/wallet/classes/activity.class'
 import {
     addActivityToAccountActivitiesInAllAccountActivities,
@@ -45,6 +51,11 @@ export async function handleNewOutputEventInternal(
         if (activity.data.type !== ActivityType.Nft) {
             const asset = await getOrRequestAssetFromPersistedAssets(activity.data.assetId)
             addPersistedAsset(asset)
+        } else {
+            const isUnspent =
+                activity.data.direction === ActivityDirection.Incoming &&
+                (!activity.data.isAsync || activity.data.isClaimed)
+            addOrUpdateNftInAllAccountNfts(account.index, activity.data.metadata, { isUnspent })
         }
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
     }

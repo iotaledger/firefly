@@ -19,11 +19,13 @@
         <alias-picker-modal class="max-h-64 flex flex-col space-y-1 scrollable-y" in:fade={{ duration: 100 }}>
             {#each $selectedAccountNfts as nft}
                 <button
-                    on:click={() => onClick(nft.id)}
+                    on:click={() => onClick(nft.nftMetadata.id)}
                     class="w-full flex flex-row flex-1 justify-between px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                 >
-                    <Text type={TextType.pre} fontSize="sm" color="gray-600">{nft.name ?? 'NFT'}</Text>
-                    <Text type={TextType.pre} fontSize="sm" color="gray-600">{truncateString(nft.id, 9, 9)}</Text>
+                    <Text type={TextType.pre} fontSize="sm" color="gray-600">{nft.nftMetadata.name ?? 'NFT'}</Text>
+                    <Text type={TextType.pre} fontSize="sm" color="gray-600"
+                        >{truncateString(nft.nftMetadata.id, 9, 9)}</Text
+                    >
                 </button>
             {/each}
         </alias-picker-modal>
