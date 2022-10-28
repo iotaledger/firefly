@@ -17,7 +17,7 @@
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
     import { handleError } from '@core/error/handlers/handleError'
     import { selectedAccount } from '@core/account'
-    import { truncateString } from '@lib/helpers'
+    import { truncateString } from '@core/utils'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
