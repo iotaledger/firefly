@@ -1,12 +1,11 @@
 ---
-icon: list-ordered
+icon: workflow
 ---
 
-# Account Activity
+# Generation Flow
 
-The following document explains how the Activity History is generated from IOTA's [UTXO](https://wiki.iota.org/IOTA-2.0-Research-Specifications/5.1UTXO) architecture. The main goal is to optimize UX by simplifying the complex UTXO architecture into a transaction based overview.
-
-This approach and the related architectural design choices have its limitations. The corresponding sections address these.
+This document describes our approach of transforming the list of outputs associated with an account into an activity history.
+The following approach and the related architectural design choices have its limitations. The corresponding sections address these.
 
 ## Activity Initialization
 
