@@ -1,8 +1,7 @@
 <script lang="typescript">
-    import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
-    import { clickOutside } from 'shared/lib/actions'
     import { onMount } from 'svelte'
-    import { DropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
+    import { FontWeight, Icon, Text, TextPropTypes, TextType, Error } from 'shared/components'
+    import { clickOutside, IDropdownChoice, isNumberLetterOrPunctuation } from '@core/utils'
 
     export let value: string
     export let label: string = ''
@@ -10,7 +9,7 @@
     export let disabled = false
     export let valueKey = 'label'
     export let sortItems = false
-    export let items: DropdownChoice[] = []
+    export let items: IDropdownChoice[] = []
     export let small = false
     export let contentWidth = false
     export let error = ''
@@ -30,7 +29,7 @@
     $: textProps = { type, fontSize, lineHeight, fontWeight }
     $: placeholderColor = value ? '' : 'gray-500'
 
-    export let onSelect: (..._: DropdownChoice[]) => void
+    export let onSelect: (..._: IDropdownChoice[]) => void
 
     let dropdown = false
     let navContainer

@@ -1,7 +1,7 @@
 import { get, Writable } from 'svelte/store'
 
 import { MissingTransactionIdError } from '@core/wallet'
-import { persistent } from '@lib/helpers'
+import { persistent } from '@core/utils/store'
 
 import { IShimmerClaimingTransactionStore } from '../interfaces'
 

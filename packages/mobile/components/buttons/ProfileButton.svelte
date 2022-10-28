@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { appSettings } from '@core/app'
     import { Icon, NetworkIcon, Text, FontWeight, TextType } from 'shared/components'
-    import { getInitials as _getInitials } from 'shared/lib/helpers'
+    import { getInitials as _getInitials } from '@core/utils'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let name = ''

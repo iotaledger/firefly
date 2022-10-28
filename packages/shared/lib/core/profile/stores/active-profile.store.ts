@@ -1,5 +1,7 @@
-import type { IAccountMetadata } from '@core/account'
 import { get, writable } from 'svelte/store'
+
+import type { IAccountMetadata } from '@core/account/interfaces'
+
 import { INITIAL_ACTIVE_PROFILE } from '../constants'
 import type { IProfile, IProfileSettings } from '../interfaces'
 
