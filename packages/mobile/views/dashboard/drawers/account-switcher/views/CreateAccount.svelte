@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Button, ColorPicker, Input } from 'shared/components'
+    import { ColorPicker } from '../../../../../components'
     import { getTrimmedLength } from 'shared/lib/helpers'
     import { localize } from '@core/i18n'
     import { getRandomAccountColor, validateAccountName } from '@core/account'
