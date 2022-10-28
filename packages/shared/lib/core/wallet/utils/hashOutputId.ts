@@ -1,4 +1,4 @@
-import { Converter } from '@lib/converter'
+import { Converter } from '@core/utils'
 import { Blake2b } from '@iota/crypto.js'
 
 export function hashOutputId(outputId: string): string {

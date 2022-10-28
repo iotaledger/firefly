@@ -1,6 +1,6 @@
 import { UnlockConditionTypes } from '@iota/types'
 import type { BuildFoundryOutputData } from '@iota/wallet'
-import { Converter } from '@lib/converter'
+import { Converter } from '@core/utils'
 import { ADDRESS_TYPE_ALIAS, FEATURE_TYPE_METADATA, UNLOCK_CONDITION_IMMUTABLE_ALIAS } from '../constants'
 import { IIrc30Metadata } from '../interfaces'
 import { convertBech32ToHexAddress } from './convertBech32ToHexAddress'

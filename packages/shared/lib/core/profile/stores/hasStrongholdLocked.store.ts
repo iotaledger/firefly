@@ -1,5 +1,7 @@
 import { derived, get } from 'svelte/store'
+
 import { STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../constants'
+
 import { isSoftwareProfile } from './is-software-profile.store'
 import { timeSinceStrongholdUnlocked } from './timeSinceStrongholdUnlocked.store'
 

@@ -9,4 +9,5 @@ export { default as Route } from './Route.svelte'
 export { default as TabPane } from './TabPane.svelte'
 
 export * from './buttons'
+export * from './inputs'
 export * from './molecules'

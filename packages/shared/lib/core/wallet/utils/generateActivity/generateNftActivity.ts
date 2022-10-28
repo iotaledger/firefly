@@ -4,10 +4,10 @@ import { ActivityType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_NFT, EMPTY_HEX_ID } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
 import type { IMetadataFeature, INftOutput } from '@iota/types'
-import { Converter } from '@lib/converter'
 import { getAsyncDataFromOutput } from '../generateActivity/helper/getAsyncDataFromOutput'
 import { MimeType, NftActivity } from '@core/wallet/types'
 import { getSendingInformation } from './helper'
+import { Converter } from '@core/utils'
 
 export function generateNftActivity(processedTransaction: IProcessedTransaction, account: IAccountState): NftActivity {
     const { outputs, claimingData, transactionInputs, time, inclusionState, transactionId } = processedTransaction

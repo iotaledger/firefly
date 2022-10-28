@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { DeveloperIndicatorPill, Icon, NetworkIconBadge, Text } from 'shared/components'
-    import { getInitials as _getInitials } from 'shared/lib/helpers'
+    import { getInitials as _getInitials } from '@core/utils'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let classes = undefined

@@ -1,5 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
+    import { resetNewTransactionDetails } from '@core/wallet'
     import { Drawer } from '../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
     import SendRouter from './SendRouter.svelte'
@@ -12,6 +13,11 @@
 
     $: $sendRoute, (setTitle(), setAllowBack(), setFullScreen())
 
+    function onDrawerClose(): void {
+        onClose && onClose()
+        $sendRouter.reset()
+        resetNewTransactionDetails()
+    }
     function setTitle(): void {
         switch ($sendRoute) {
             default:
@@ -44,6 +50,6 @@
     }
 </script>
 
-<Drawer {onClose} {title} {fullScreen} {allowBack} onBackClick={() => $sendRouter.previous()}>
+<Drawer onClose={onDrawerClose} {title} {fullScreen} {allowBack} onBackClick={() => $sendRouter.previous()}>
     <SendRouter />
 </Drawer>

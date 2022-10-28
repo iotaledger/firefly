@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { InclusionState, AliasActivity } from '@core/wallet'
-    import { truncateString } from '@lib/helpers'
+    import { truncateString } from '@core/utils'
     import { Text, Icon, FontWeight } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 

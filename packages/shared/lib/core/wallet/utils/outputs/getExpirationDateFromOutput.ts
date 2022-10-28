@@ -1,6 +1,6 @@
 import { ICommonOutput } from '@iota/types'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { UNLOCK_CONDITION_EXPIRATION } from '../../constants'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
 export function getExpirationDateFromOutput(output: ICommonOutput): Date {
     for (const unlockCondition of output.unlockConditions) {

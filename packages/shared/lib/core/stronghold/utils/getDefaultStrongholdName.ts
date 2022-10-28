@@ -1,4 +1,4 @@
-import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@lib/time'
+import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
 
 export function getDefaultStrongholdName(): string {
     // Match https://github.com/iotaledger/wallet.rs/blob/ffbeaa3466b44f79dd5f87e14ed1bdc4846d9e85/src/account_manager.rs#L1428

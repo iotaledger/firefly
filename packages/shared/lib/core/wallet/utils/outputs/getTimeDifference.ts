@@ -4,7 +4,7 @@ import {
     MINUTES_PER_HOUR,
     SECONDS_PER_DAY,
     SECONDS_PER_MINUTE,
-} from 'shared/lib/time'
+} from '@core/utils'
 
 export function getTimeDifference(lateDate: Date, earlyDate: Date): string {
     const elapsedTime = lateDate.getTime() - earlyDate.getTime()

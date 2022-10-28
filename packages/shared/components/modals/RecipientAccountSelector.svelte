@@ -4,7 +4,7 @@
     import { visibleActiveAccounts, activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import { AccountLabel, Modal, Text, TextType } from 'shared/components'
-    import { truncateString } from 'shared/lib/helpers'
+    import { truncateString } from '@core/utils'
     import { fade } from 'svelte/transition'
 
     export let modal: Modal = undefined

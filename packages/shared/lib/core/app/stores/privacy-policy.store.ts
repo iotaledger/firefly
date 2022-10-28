@@ -1,4 +1,4 @@
-import { persistent } from '@lib/helpers'
+import { persistent } from '@core/utils/store'
 
 /**
  * The store containing the last accepted version of the Privacy Policy.

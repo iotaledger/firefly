@@ -1,7 +1,7 @@
 import { IAccountState } from '@core/account'
 import { IBasicOutput } from '@iota/types'
 import { OutputData } from '@iota/wallet'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { get } from 'svelte/store'
 import { ActivityDirection, ActivityType } from '../enums'
 import { allAccountActivities, updateAsyncDataByActivityId } from '../stores'

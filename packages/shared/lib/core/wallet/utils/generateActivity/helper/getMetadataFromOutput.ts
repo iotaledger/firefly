@@ -1,6 +1,6 @@
 import { FEATURE_TYPE_METADATA } from '../../../constants'
 import { ICommonOutput, IMetadataFeature } from '@iota/types'
-import { Converter } from '@lib/converter'
+import { Converter } from '@core/utils'
 
 export function getMetadataFromOutput(output: ICommonOutput): string {
     const { data } = <IMetadataFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_METADATA) ?? {

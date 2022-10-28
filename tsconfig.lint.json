@@ -14,7 +14,6 @@
         "packages/shared/lib/shell",
         "packages/shared/lib/typings",
         "packages/shared/locales/en.json",
-        "packages/shared/routes",
         "packages/shared/tailwind.config.js"
     ],
     "exclude": [".eslintrc.js", "**/node_modules", "**/tests"]

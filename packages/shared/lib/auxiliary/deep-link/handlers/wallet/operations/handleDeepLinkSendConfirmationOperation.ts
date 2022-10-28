@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { networkHrp } from '@core/network'
-import { isStringTrue, getByteLengthOfString } from '@core/utils'
+import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString } from '@core/utils'
 import {
     getAssetById,
     INewTransactionDetails,
@@ -9,7 +9,6 @@ import {
     setNewTransactionDetails,
     Subject,
 } from '@core/wallet'
-import { isValidAddressAndPrefix } from '@lib/address'
 import { openPopup } from '@auxiliary/popup'
 
 import { SendOperationParameter } from '../../../enums'
@@ -53,7 +52,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     if (!address) {
         throw new NoAddressSpecifiedError()
     }
-    if (!isValidAddressAndPrefix(address, get(networkHrp))) {
+    if (!isValidBech32AddressAndPrefix(address, get(networkHrp))) {
         throw new InvalidAddressError()
     }
 

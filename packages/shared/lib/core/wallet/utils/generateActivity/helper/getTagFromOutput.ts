@@ -1,6 +1,6 @@
 import { FEATURE_TYPE_TAG } from '../../../constants'
 import { ITagFeature, IBasicOutput, IAliasOutput, IFoundryOutput, INftOutput } from '@iota/types'
-import { Converter } from '@lib/converter'
+import { Converter } from '@core/utils'
 
 export function getTagFromOutput(output: IBasicOutput | IAliasOutput | IFoundryOutput | INftOutput): string {
     const { tag } = <ITagFeature>output?.features?.find((feature) => feature.type === FEATURE_TYPE_TAG) ?? {

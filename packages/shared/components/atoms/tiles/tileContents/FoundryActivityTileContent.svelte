@@ -9,7 +9,7 @@
         IPersistedAsset,
         selectedAccountAssets,
     } from '@core/wallet'
-    import { truncateString } from '@lib/helpers'
+    import { truncateString } from '@core/utils'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
 
     export let activity: FoundryActivity

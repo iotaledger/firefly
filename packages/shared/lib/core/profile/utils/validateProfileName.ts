@@ -1,5 +1,5 @@
 import { localize } from '@core/i18n'
-import { getTrimmedLength, validateFilenameChars } from '@lib/helpers'
+import { getTrimmedLength, validateFilenameChars } from '@core/utils'
 import { get } from 'svelte/store'
 import { MAX_PROFILE_NAME_LENGTH } from '../constants'
 import { profiles } from '../stores'
