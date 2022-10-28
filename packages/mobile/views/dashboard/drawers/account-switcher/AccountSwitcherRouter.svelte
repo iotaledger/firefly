@@ -36,7 +36,7 @@
 {:else if $accountSwitcherRoute === AccountSwitcherRoute.CreateAccount}
     <CreateAccount
         {onCreate}
-        {submitCreation}
+        submitCreationOnMount={submitCreation}
         {accountAlias}
         {color}
         onCancel={() => $accountSwitcherRouter.previous()}

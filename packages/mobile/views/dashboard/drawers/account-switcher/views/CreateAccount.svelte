@@ -4,12 +4,13 @@
     import { localize } from '@core/i18n'
     import { Button, Input } from 'shared/components'
     import { getTrimmedLength } from 'shared/lib/helpers'
+    import { onMount } from 'svelte'
     import { ColorPicker } from '../../../../../components'
 
     export let accountAlias: string = ''
     export let color: string = getRandomAccountColor()
     export let isBusy: boolean = false
-    export let submitCreation: boolean = false
+    export let submitCreationOnMount: boolean = false
 
     export let onCreate: (accountAlias: string, color: string) => unknown = () => {}
     export let onCancel: () => unknown = () => {}
@@ -18,9 +19,11 @@
 
     $: accountAlias, (error = null)
 
-    if (submitCreation) {
-        handleCreateClick()
-    }
+    onMount(() => {
+        if (submitCreationOnMount) {
+            handleCreateClick()
+        }
+    })
 
     async function handleCreateClick(): Promise<void> {
         try {
