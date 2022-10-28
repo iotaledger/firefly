@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { Unit } from '@iota/unit-converter'
     import { Input, Text } from 'shared/components'
     import {
@@ -10,10 +11,10 @@
         isFiatCurrency,
         parseCurrency,
     } from 'shared/lib/currency'
-    import { localize } from '@core/i18n'
     import { activeProfile } from 'shared/lib/profile'
-    import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
     import { AvailableExchangeRates, CurrencyTypes } from 'shared/lib/typings/currency'
+    import { changeUnits, formatUnitBestMatch, formatUnitPrecision, MAX_NUM_IOTAS, UNIT_MAP } from 'shared/lib/units'
+    import { onMount } from 'svelte'
 
     type AmountUnit = Unit | AvailableExchangeRates
 
@@ -36,6 +37,10 @@
     let unitsButton
     let focusedItem
     let amountForLabel
+
+    let navigationMenuAnchor
+    let navigationMenuTop = 0
+    let navigationMenuRight = 0
 
     const getFormattedLabel = (_amount) =>
         isFiatCurrency(unit) ? convertAmountFromFiat(_amount) : convertAmountToFiat(_amount)
@@ -61,6 +66,8 @@
             }
         }
     }
+
+    onMount(updateNavigationMenuPosition)
 
     const convertAmountToFiat = (_amount) => {
         if (isFiatCurrency(unit)) return _amount
@@ -159,10 +166,17 @@
     }
 
     const getMaxDecimals = (_unit: AmountUnit) => (isFiatCurrency(_unit) ? 2 : UNIT_MAP[_unit].dp)
+
+    function updateNavigationMenuPosition(): void {
+        const inputElement = navigationMenuAnchor?.getElementsByTagName('input')?.[0]
+        navigationMenuTop = inputElement?.getBoundingClientRect().top + inputElement?.offsetHeight
+        navigationMenuRight = window.innerWidth - inputElement?.getBoundingClientRect().right
+        navigationMenuAnchor.find
+    }
 </script>
 
-<svelte:window on:click={onOutsideClick} />
-<amount-input class:disabled class="relative block {classes}" on:keydown={handleKey}>
+<svelte:window on:click={onOutsideClick} on:resize={updateNavigationMenuPosition} />
+<amount-input bind:this={navigationMenuAnchor} class:disabled class="relative block {classes}" on:keydown={handleKey}>
     <Input
         {error}
         label={amountForLabel || localize('general.amount')}
@@ -199,9 +213,10 @@
         >
             {unit}
             <nav
-                class="absolute w-10 overflow-y-auto pointer-events-none opacity-0 z-10 text-left top-10 right-0 rounded-b-lg bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown
+                class="fixed w-10 overflow-y-auto pointer-events-none opacity-0 z-10 text-left rounded-b-lg bg-white dark:bg-gray-800 border border-solid border-blue-500 {showDropdown
                     ? 'dropdown'
                     : ''}"
+                style="top: {navigationMenuTop}px; right:{navigationMenuRight}px;"
                 bind:this={navContainer}
             >
                 {#each units as _unit}

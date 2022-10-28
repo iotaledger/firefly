@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { getContext, onDestroy, onMount } from 'svelte'
-    import { get, Readable } from 'svelte/store'
+    import { localize } from '@core/i18n'
+    import { accountRouter } from '@core/router'
     import { Unit } from '@iota/unit-converter'
     import { Address, Amount, Button, Dropdown, Icon, KeyValueBox, ProgressBar, Text } from 'shared/components'
     import { clearSendParams, mobile, sendParams } from 'shared/lib/app'
@@ -14,7 +14,6 @@
         parseCurrency,
     } from 'shared/lib/currency'
     import { startQRScanner } from 'shared/lib/device'
-    import { localize } from '@core/i18n'
     import {
         displayNotificationForLedgerProfile,
         ledgerDeviceState,
@@ -23,23 +22,24 @@
     import { displayNotifications, removeDisplayNotification, showAppNotification } from 'shared/lib/notifications'
     import { closePopup, openPopup, popupState } from 'shared/lib/popup'
     import { isLedgerProfile, isSoftwareProfile } from 'shared/lib/profile'
-    import { accountRouter } from '@core/router'
     import { CurrencyTypes } from 'shared/lib/typings/currency'
     import { TransferProgressEventData, TransferProgressEventType, TransferState } from 'shared/lib/typings/events'
     import { LedgerDeviceState } from 'shared/lib/typings/ledger'
+    import { NotificationType } from 'shared/lib/typings/notification'
+    import { SendParams } from 'shared/lib/typings/sendParams'
+    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
     import { changeUnits, formatUnitPrecision } from 'shared/lib/units'
-    import { ADDRESS_LENGTH, validateBech32Address, getByteLengthOfString } from 'shared/lib/utils'
+    import { ADDRESS_LENGTH, getByteLengthOfString, validateBech32Address } from 'shared/lib/utils'
     import {
         DUST_THRESHOLD,
+        handleTransactionEventData,
         isTransferring,
         selectedAccountStore,
         transferState,
         wallet,
-        handleTransactionEventData,
     } from 'shared/lib/wallet'
-    import { NotificationType } from 'shared/lib/typings/notification'
-    import { SendParams } from 'shared/lib/typings/sendParams'
-    import { LabeledWalletAccount, WalletAccount } from 'shared/lib/typings/wallet'
+    import { getContext, onDestroy, onMount } from 'svelte'
+    import { get, Readable } from 'svelte/store'
 
     export let onSend = (..._: any[]): void => {}
     export let onInternalTransfer = (..._: any[]): void => {}
@@ -73,11 +73,16 @@
     let transactionTimeoutId = null
     let transactionNotificationId = null
 
+    let amountComponentMountTrigger = 0
+
     $: amount, (amountError = '')
     $: to, (toError = '')
     $: address, (addressError = '')
     $: tag, (tagError = '')
     $: metadata, (metadataError = '')
+
+    $: amountError, toError, addressError, tagError, metadataError, updateAmountComponentMountTrigger()
+    $: selectedSendType, updateAmountComponentMountTrigger()
 
     const transferSteps: {
         [key in TransferProgressEventType]: {
@@ -471,10 +476,14 @@
             toWalletAccount: to ? addLabel(to) : undefined,
             isInternal: selectedSendType === SEND_TYPE.INTERNAL,
         }))
+
+    function updateAmountComponentMountTrigger(): void {
+        amountComponentMountTrigger += 1
+    }
 </script>
 
 <div class="w-full h-full flex flex-col justify-between p-6">
-    <div class="flex flex-col flex-auto space-y-6 h-full">
+    <div class="flex flex-col flex-auto space-y-6">
         <div class="flex flex-row w-full justify-between">
             <div class="flex flex-row space-x-6">
                 <button
@@ -520,7 +529,8 @@
             </div>
         </div>
         <div
-            class="flex flex-col space-y-6 w-full overflow-x-hidden overflow-y-auto flex-auto h-1 -mr-2 pr-2 scroll-secondary pb-4"
+            on:scroll={() => updateAmountComponentMountTrigger()}
+            class="relative flex flex-col space-y-6 w-full overflow-x-hidden overflow-y-auto flex-auto h-1 -mr-2 pr-2 scroll-secondary pb-4"
         >
             {#if selectedSendType === SEND_TYPE.INTERNAL}
                 <Dropdown
@@ -543,14 +553,16 @@
                     autofocus
                 />
             {/if}
-            <Amount
-                error={amountError}
-                bind:amount
-                bind:unit
-                onMaxClick={handleMaxClick}
-                disabled={$isTransferring}
-                autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
-            />
+            {#key amountComponentMountTrigger}
+                <Amount
+                    error={amountError}
+                    bind:amount
+                    bind:unit
+                    onMaxClick={handleMaxClick}
+                    disabled={$isTransferring}
+                    autofocus={selectedSendType === SEND_TYPE.INTERNAL && $liveAccounts.length === 2}
+                />
+            {/key}
             {#if selectedSendType === SEND_TYPE.EXTERNAL}
                 <KeyValueBox
                     bind:value={tag}
