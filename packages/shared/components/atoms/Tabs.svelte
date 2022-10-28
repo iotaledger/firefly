@@ -9,7 +9,7 @@
     {#each tabs as tab}
         <button
             on:click={() => (activeTab = tab)}
-            class="w-full text-13 rounded-lg {activeTab === tab
+            class="w-full text-13 rounded-md {activeTab === tab
                 ? 'text-gray-800 dark:text-white bg-gray-100 dark:bg-gray-700'
                 : 'text-gray-500'}"
             class:active={activeTab === tab}
