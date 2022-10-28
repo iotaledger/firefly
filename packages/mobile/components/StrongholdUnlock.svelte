@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
-    import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
+    import { Button, HTMLButtonType, PasswordInput, Text } from 'shared/components'
 
     export let busyMessage: string = ''
 
-    export let onSuccess: (..._: any[]) => Promise<unknown>
+    export let onSuccess: () => unknown
     export let onCancel: () => unknown
 
     let password: string
@@ -17,7 +17,7 @@
             error = ''
             isBusy = true
             await unlockStronghold(password)
-            onSuccess && (await onSuccess())
+            onSuccess && onSuccess()
             isBusy = false
         } catch (err) {
             console.error(err)

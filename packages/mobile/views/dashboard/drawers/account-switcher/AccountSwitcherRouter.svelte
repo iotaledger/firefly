@@ -2,14 +2,15 @@
     import { tryCreateAdditionalAccount } from '@core/account'
     import { isStrongholdUnlocked } from '@core/profile-manager'
 
-    import { AccountSwitcherRoute, accountSwitcherRoute, accountSwitcherRouter } from '../../../../lib/routers'
     import { StrongholdUnlock } from '../../../../components'
+    import { AccountSwitcherRoute, accountSwitcherRoute, accountSwitcherRouter } from '../../../../lib/routers'
     import { AccountSwitcher, CreateAccount } from './views'
 
     export let onClose: () => unknown = () => {}
 
     let accountAlias: string
     let color: string
+    let submitCreation: boolean = false
 
     async function onCreate(newAccountAlias: string, newColor: string): Promise<void> {
         accountAlias = newAccountAlias
@@ -24,16 +25,22 @@
         }
     }
 
-    async function onSuccess(): Promise<void> {
-        await tryCreateAdditionalAccount(accountAlias, color)
-        onClose()
+    function onSuccess(): void {
+        submitCreation = true
+        $accountSwitcherRouter.previous()
     }
 </script>
 
 {#if $accountSwitcherRoute === AccountSwitcherRoute.Switcher}
     <AccountSwitcher onSwitch={onClose} onAddClick={() => $accountSwitcherRouter.next()} />
 {:else if $accountSwitcherRoute === AccountSwitcherRoute.CreateAccount}
-    <CreateAccount {onCreate} onCancel={() => $accountSwitcherRouter.previous()} />
+    <CreateAccount
+        {onCreate}
+        {submitCreation}
+        {accountAlias}
+        {color}
+        onCancel={() => $accountSwitcherRouter.previous()}
+    />
 {:else if $accountSwitcherRoute === AccountSwitcherRoute.Password}
     <StrongholdUnlock {onSuccess} onCancel={() => $accountSwitcherRouter.previous()} />
 {/if}

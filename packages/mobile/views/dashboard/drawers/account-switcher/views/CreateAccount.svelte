@@ -1,13 +1,15 @@
 <script lang="typescript">
-    import { ColorPicker } from '../../../../../components'
-    import { getTrimmedLength } from 'shared/lib/helpers'
-    import { localize } from '@core/i18n'
     import { getRandomAccountColor, validateAccountName } from '@core/account'
     import { BaseError } from '@core/error'
+    import { localize } from '@core/i18n'
+    import { Button, Input } from 'shared/components'
+    import { getTrimmedLength } from 'shared/lib/helpers'
+    import { ColorPicker } from '../../../../../components'
 
     export let accountAlias: string = ''
     export let color: string = getRandomAccountColor()
     export let isBusy: boolean = false
+    export let submitCreation: boolean = false
 
     export let onCreate: (accountAlias: string, color: string) => unknown = () => {}
     export let onCancel: () => unknown = () => {}
@@ -15,14 +17,18 @@
     let error: BaseError
 
     $: accountAlias, (error = null)
-    $: trimmedAccountAlias = accountAlias.trim()
+
+    if (submitCreation) {
+        handleCreateClick()
+    }
 
     async function handleCreateClick(): Promise<void> {
         try {
+            const trimmedAccountAlias = accountAlias.trim()
+
             if (!trimmedAccountAlias) {
                 return
             }
-
             isBusy = true
             error = null
             await validateAccountName(trimmedAccountAlias)
