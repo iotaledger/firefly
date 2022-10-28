@@ -110,7 +110,7 @@
     }
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/block/${activity.transactionId}`)
+        Platform.openUrl(`${explorerUrl}/transaction/${activity.transactionId}`)
     }
 
     function handleTransactionIdClick(): void {
