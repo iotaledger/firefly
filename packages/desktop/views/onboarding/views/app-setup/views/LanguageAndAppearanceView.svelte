@@ -10,7 +10,7 @@
         onboardingProfile,
         shouldBeDeveloperProfile,
         updateOnboardingProfile,
-    } from '../../../../../lib/contexts/onboarding'
+    } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
     /**

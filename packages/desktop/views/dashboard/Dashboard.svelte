@@ -11,13 +11,16 @@
         saveActiveProfile,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
-    import { Idle, Sidebar } from 'shared/components'
+    import { Idle } from 'shared/components'
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
     import { Platform } from 'shared/lib/platform'
-    import { Developer, Settings, Wallet } from 'shared/routes'
+    import { Developer } from './developer'
+    import { Settings } from './settings'
+    import { Wallet } from './wallet'
     import { onDestroy, onMount } from 'svelte'
     import Collectibles from './collectibles/Collectibles.svelte'
+    import Sidebar from './Sidebar.svelte'
     import TopNavigation from './TopNavigation.svelte'
 
     $: $activeProfile, saveActiveProfile()

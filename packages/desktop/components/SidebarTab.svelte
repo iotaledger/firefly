@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text, Tooltip, PingingBadge } from 'shared/components'
+    import { Icon, Text, Tooltip, PingingBadge } from '@ui'
     import { SidebarTab, dashboardRoute } from '@core/router'
 
     export let tab: SidebarTab = undefined
