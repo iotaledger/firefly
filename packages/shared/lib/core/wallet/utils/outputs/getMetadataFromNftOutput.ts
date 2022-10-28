@@ -1,8 +1,8 @@
 import { INftMetadata } from '../../interfaces'
 import type { IMetadataFeature, INftOutput } from '@iota/types'
-import { Converter } from '@lib/converter'
 import { MimeType } from '@core/wallet/types'
 import { FEATURE_TYPE_METADATA } from '@core/wallet/constants'
+import { Converter } from '@core/utils/convert'
 
 export function getMetadataFromNftOutput(output: INftOutput): INftMetadata {
     const metadata = output.immutableFeatures?.find(
