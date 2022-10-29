@@ -13,7 +13,7 @@ import {
 import { ActivityType, AliasType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { OutputTypes } from '@iota/types'
-import { Converter } from '@lib/converter'
+import { Converter } from '@core/utils'
 import { Blake2b } from '@iota/crypto.js'
 
 export function getAliasActivityData(processedTransaction: IProcessedTransaction): IAliasActivityData {

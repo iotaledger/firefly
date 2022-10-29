@@ -1,6 +1,6 @@
-import { formatHexString } from '@core/utils/format.utils'
+import { formatHexString } from '@core/utils/format'
 
-describe('File: format.utils.ts', () => {
+describe('File: format.ts', () => {
     describe('Function: formatHexString', () => {
         const NULL_RESULT = '00'
 

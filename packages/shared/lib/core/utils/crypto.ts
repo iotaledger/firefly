@@ -1,6 +1,46 @@
+/* eslint-disable no-bitwise */
+
+import { localize } from '@core/i18n'
+
+import { convertBytesToHexString } from './convert'
+
+export function validateBech32Address(prefix: string, addr: string): string {
+    if (!addr || !addr.startsWith(prefix)) {
+        return localize('error.send.wrongAddressPrefix', {
+            values: {
+                prefix: prefix,
+            },
+        })
+    }
+    if (!new RegExp(`^${prefix}1[02-9ac-hj-np-z]{59}$`).test(addr)) {
+        return localize('error.send.wrongAddressFormat')
+    }
+
+    let isValid = false
+    try {
+        const decoded = Bech32.decode(addr)
+        isValid = decoded && decoded.humanReadablePart === prefix
+    } catch (err) {
+        console.error('error.crypto.cannotDecodeBech32')
+    }
+
+    if (!isValid) {
+        return localize('error.send.invalidAddress')
+    }
+}
+
+export function isValidBech32AddressAndPrefix(address: string, expectedAddressPrefix: string): boolean {
+    return new RegExp(`^${expectedAddressPrefix}1[02-9ac-hj-np-z]{59}$`).test(address)
+}
+
+export function convertBech32AddressToEd25519Address(bech32Address: string, includeTypeByte: boolean = false): string {
+    if (!bech32Address) return ''
+
+    return convertBytesToHexString(Array.from(Bech32.decode(bech32Address).data).slice(includeTypeByte ? 0 : 1))
+}
+
 // Copyright 2020 IOTA Stiftung
 // SPDX-License-Identifier: Apache-2.0
-/* eslint-disable no-bitwise */
 
 /**
  * Class to help with Bech32 encoding/decoding
@@ -275,5 +315,81 @@ export class Bech32 {
             }
         }
         return new Uint8Array(res)
+    }
+}
+
+/**
+ * Convert address to bech32.
+ */
+export class Bech32Helper {
+    /**
+     * The default human readable part of the bech32 addresses for mainnet, currently 'iota'.
+     */
+    public static BECH32_DEFAULT_HRP_MAIN: string = 'iota'
+
+    /**
+     * The default human readable part of the bech32 addresses for devnet, currently 'atoi'.
+     */
+    public static BECH32_DEFAULT_HRP_DEV: string = 'atoi'
+
+    /**
+     * Encode an address to bech32.
+     * @param addressType The address type to encode.
+     * @param addressBytes The address bytes to encode.
+     * @param humanReadablePart The human readable part to use.
+     * @returns The array formated as hex.
+     */
+    public static toBech32(addressType: number, addressBytes: Uint8Array, humanReadablePart: string): string {
+        const addressData = new Uint8Array(1 + addressBytes.length)
+        addressData[0] = addressType
+        addressData.set(addressBytes, 1)
+        return Bech32.encode(humanReadablePart, addressData)
+    }
+
+    /**
+     * Decode an address from bech32.
+     * @param bech32Text The bech32 text to decode.
+     * @param humanReadablePart The human readable part to use.
+     * @returns The address type and address bytes or undefined if it cannot be decoded.
+     */
+    public static fromBech32(
+        bech32Text: string,
+        humanReadablePart: string
+    ):
+        | {
+              addressType: number
+              addressBytes: Uint8Array
+          }
+        | undefined {
+        const decoded = Bech32.decode(bech32Text)
+        if (decoded) {
+            if (decoded.humanReadablePart !== humanReadablePart) {
+                throw new Error(
+                    `The hrp part of the address should be ${humanReadablePart}, it is ${decoded.humanReadablePart}`
+                )
+            }
+
+            if (decoded.data.length === 0) {
+                throw new Error('The data part of the address should be at least length 1, it is 0')
+            }
+
+            const addressType = decoded.data[0]
+            const addressBytes = decoded.data.slice(1)
+
+            return {
+                addressType,
+                addressBytes,
+            }
+        }
+    }
+
+    /**
+     * Does the provided string look like it might be an bech32 address with matching hrp.
+     * @param bech32Text The bech32 text to text.
+     * @param humanReadablePart The human readable part to match.
+     * @returns True if the passed address matches the pattern for a bech32 address.
+     */
+    public static matches(bech32Text: string, humanReadablePart: string): boolean {
+        return Bech32.matches(humanReadablePart, bech32Text)
     }
 }

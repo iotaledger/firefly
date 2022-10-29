@@ -2,11 +2,11 @@
     import type { SelectionFilterUnit } from '@core/wallet/interfaces'
     import { Dropdown } from 'shared/components'
     import { localize } from '@core/i18n'
-    import type { DropdownChoice } from '@core/utils'
+    import type { IDropdownChoice } from '@core/utils'
 
     export let filterUnit: SelectionFilterUnit
 
-    const choices: DropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))

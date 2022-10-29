@@ -1,4 +1,4 @@
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
 const INTERVAL_IN_SECONDS = 1
 

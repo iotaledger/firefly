@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Box } from 'shared/components/atoms'
     import { Error } from 'shared/components/'
-    import { clickOutside } from '@lib/actions'
+    import { clickOutside } from '@core/utils'
     import { createEventDispatcher } from 'svelte'
 
     export let inputElement: HTMLInputElement = undefined
@@ -38,7 +38,7 @@
             {clearPadding}
             {backgroundColor}
             {darkBackgroundColor}
-            classes="w-full flex 
+            classes="w-full flex
                 {!clearPadding ? 'p-4' : ''}
                 {!clearBorder ? 'border border-solid' : ''}
                 {classes}

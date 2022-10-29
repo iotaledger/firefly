@@ -1,17 +1,20 @@
-// BASE
 import { localize } from '@core/i18n'
 
-export const MILLISECONDS_PER_SECOND = 1000
-export const SECONDS_PER_MINUTE = 60
-export const MINUTES_PER_HOUR = 60
-export const HOURS_PER_DAY = 24
-export const DAYS_PER_WEEK = 7
-export const MONTHS_PER_YEAR = 12
+import { HOURS_PER_DAY, MILLISECONDS_PER_SECOND, MINUTES_PER_HOUR, SECONDS_PER_MINUTE } from './constants'
+import { Duration } from './types'
 
-// DERIVED
-export const SECONDS_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE
-
-type Duration = 'day' | 'hour' | 'minute' | 'second'
+/**
+ * Returns true if a given expiration date/time is valid or
+ * has not yet expired.
+ */
+export function isValidExpirationDateTime(expirationDateTime: Date): boolean {
+    if (expirationDateTime) {
+        const nowDateTime = new Date(Date.now())
+        return expirationDateTime.getTime() > nowDateTime.getTime()
+    } else {
+        return false
+    }
+}
 
 /**
  * Formats a duration in milliseconds into the best matching unit, i.e.

@@ -1,4 +1,4 @@
-import { persistent } from '@lib/helpers'
+import { persistent } from '@core/utils/store'
 
 import { IError } from '../interfaces'
 

@@ -2,17 +2,17 @@
     import type { DateFilterUnit } from '@core/wallet/interfaces'
     import { DateInputButton, Dropdown, Icon, Text, NumberInput } from 'shared/components'
     import { localize } from '@core/i18n'
-    import type { DropdownChoice } from '@core/utils'
+    import type { IDropdownChoice } from '@core/utils'
     import { DateFilterOption, DateUnit } from '@core/wallet'
 
     export let filterUnit: DateFilterUnit
 
-    const choices: DropdownChoice[] = filterUnit.choices.map((choice) => ({
+    const choices: IDropdownChoice[] = filterUnit.choices.map((choice) => ({
         label: localize(`${filterUnit.localeKey}.${choice}`),
         value: choice,
     }))
 
-    const unitChoices: DropdownChoice[] = Object.keys(DateUnit).map((val) => ({
+    const unitChoices: IDropdownChoice[] = Object.keys(DateUnit).map((val) => ({
         label: localize(`${filterUnit.localeKey}.${val}`),
         value: val,
     }))
