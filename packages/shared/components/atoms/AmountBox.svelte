@@ -1,19 +1,25 @@
 <script lang="typescript">
+    import { AssetIcon, Text, FontWeight, TextType, Tooltip } from 'shared/components'
+    import { getNthOccurrenceIndex } from '@core/utils'
     import { IPersistedAsset } from '@core/wallet'
     import { getDecimalSeparator, getGroupSeparator } from '@lib/currency'
-    import { AssetIcon, Text, FontWeight, TextType, Tooltip } from 'shared/components'
 
     export let asset: IPersistedAsset
     export let unit: string
-    export let amount: string = ''
+    const amount: string = '1,000,000,000.918402112321'
     export let fiatAmount: string = ''
+
+    const MAX_LENGTH_PER_LINE = 15
 
     let displayedAmount: string[] = [amount]
     let tokenAmountElement: HTMLElement = null
     let isTooltipVisible = false
 
+    const hasDecimal = amount.includes(getDecimalSeparator())
+    const amountWithoutDecimals = amount.split(getDecimalSeparator())[0]
+
     $: {
-        if (amount.length > 12) {
+        if (amount.length > MAX_LENGTH_PER_LINE) {
             displayedAmount = breakAmountIntoLines(amount)
         } else {
             displayedAmount = [amount]
@@ -21,9 +27,8 @@
     }
 
     function showTooltip(): void {
-        const hasDecimal = amount.includes(getDecimalSeparator())
         const hasMoreThanTwoDecimalNumbers = hasDecimal && amount.split(getDecimalSeparator())[1].length > 2
-        if (amount.length > 12 && hasDecimal && hasMoreThanTwoDecimalNumbers) {
+        if (amount.length > MAX_LENGTH_PER_LINE && hasDecimal && hasMoreThanTwoDecimalNumbers) {
             isTooltipVisible = true
         }
     }
@@ -33,22 +38,48 @@
     }
 
     function breakAmountIntoLines(amount: string): string[] {
-        const NUMBERS_PER_THOUSAND_GROUP = 3
-        const LINES = 2
-
-        const amountWithTwoDecimalNumbers = amount.slice(0, amount.indexOf(getDecimalSeparator()) + 3)
-        const amountLengthWithoutSeparator = amountWithTwoDecimalNumbers.split(',').join('').length
-        const thousandSeparatorsIndexes: number[] = Array.from(amountWithTwoDecimalNumbers).reduce(
-            (acc, char, i) => (char === getGroupSeparator() ? [...acc, i] : acc),
-            []
-        )
-        const thousandGroups = Math.ceil(amountLengthWithoutSeparator / NUMBERS_PER_THOUSAND_GROUP / LINES)
-
-        const result: string[] = []
-        result.push(amountWithTwoDecimalNumbers.substring(0, thousandSeparatorsIndexes[thousandGroups - 1] + 1))
-        result.push(amountWithTwoDecimalNumbers.substring(result[0].length, amountWithTwoDecimalNumbers.length))
-
+        const decimals = trimDecimals(amount)
+        const thousands = breakThousands(amount, decimals)
+        const result: string[] = [...thousands]
+        result[result.length - 1] = result[result.length - 1] + decimals
         return result
+    }
+
+    function trimDecimals(amount: string): string {
+        if (hasDecimal) {
+            const TWO_DECIMALS_WITH_SEPARATOR_LENGTH = 3
+
+            const decimalSeparatorIndex = amount.indexOf(getDecimalSeparator())
+            const decimalsLength =
+                amountWithoutDecimals.length >= MAX_LENGTH_PER_LINE - TWO_DECIMALS_WITH_SEPARATOR_LENGTH
+                    ? TWO_DECIMALS_WITH_SEPARATOR_LENGTH
+                    : MAX_LENGTH_PER_LINE - amountWithoutDecimals.length
+
+            return amount.slice(decimalSeparatorIndex, decimalSeparatorIndex + decimalsLength)
+        } else {
+            return ''
+        }
+    }
+
+    function breakThousands(amount: string, decimals: string = ''): string[] {
+        const thousandGroups = amount.split(getGroupSeparator()).length
+
+        if (amount.includes(getGroupSeparator()) && thousandGroups > 3) {
+            const lines = Math.ceil((amountWithoutDecimals.length + decimals.length) / MAX_LENGTH_PER_LINE)
+
+            const brokenThousands: string[] = [amountWithoutDecimals]
+            for (let index = 0; index < lines - 1; index++) {
+                const thousands =
+                    index === lines - 1 ? Math.floor(thousandGroups / lines) : Math.ceil(thousandGroups / lines)
+                const nthSeparatorIndex = getNthOccurrenceIndex(brokenThousands[index], getGroupSeparator(), thousands)
+                brokenThousands[index + 1] = brokenThousands[index].slice(nthSeparatorIndex + 1)
+                brokenThousands[index] = brokenThousands[index].slice(0, nthSeparatorIndex + 1)
+            }
+
+            return brokenThousands
+        } else {
+            return [amountWithoutDecimals]
+        }
     }
 </script>
 
