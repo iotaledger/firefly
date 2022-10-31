@@ -6,7 +6,7 @@
 
     export let asset: IPersistedAsset
     export let unit: string
-    const amount: string = '10.918402112321'
+    export let amount: string = ''
     export let fiatAmount: string = ''
 
     const MAX_LENGTH_PER_LINE = 15
