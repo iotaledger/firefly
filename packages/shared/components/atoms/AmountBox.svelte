@@ -116,7 +116,7 @@
             {/each}
         </div>
         {#if isTooltipVisible}
-            <Tooltip anchor={tokenAmountElement}><Text>{amount} {unit}</Text></Tooltip>
+            <Tooltip anchor={tokenAmountElement}><Text classes="break-all">{amount} {unit}</Text></Tooltip>
         {/if}
     </token-amount>
     {#if fiatAmount}
