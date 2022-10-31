@@ -16,7 +16,7 @@ import { loginRouter } from '@core/router'
 import {
     generateAndStoreActivitiesForAllAccounts,
     refreshAccountAssetsForActiveProfile,
-    initialiseNftMetadataForAllAccount,
+    loadNftsForActiveProfile,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 
@@ -87,17 +87,14 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 5: load assets
             incrementLoginProgress()
             await refreshAccountAssetsForActiveProfile()
+            await loadNftsForActiveProfile()
 
             // Step 6: generate and store activities for all accounts
             incrementLoginProgress()
             await generateAndStoreActivitiesForAllAccounts()
 
-            // Step 7: generate and store activities for all accounts
-            incrementLoginProgress()
-            await initialiseNftMetadataForAllAccount()
-
             if (type === ProfileType.Software) {
-                // Step 8: set initial stronghold status
+                // Step 7: set initial stronghold status
                 incrementLoginProgress()
                 const strongholdUnlocked = await isStrongholdUnlocked()
                 isStrongholdLocked.set(!strongholdUnlocked)
@@ -109,12 +106,12 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 incrementLoginProgress(2)
             }
 
-            // Step 9: start background sync
+            // Step 8: start background sync
             incrementLoginProgress()
             subscribeToWalletApiEventsForActiveProfile()
             await startBackgroundSync({ syncIncomingTransactions: true })
 
-            // Step 10: finish login
+            // Step 9: finish login
             incrementLoginProgress()
             if (isLedgerProfile(type)) {
                 pollLedgerNanoStatus()

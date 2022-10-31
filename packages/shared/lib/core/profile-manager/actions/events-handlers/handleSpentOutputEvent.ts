@@ -40,6 +40,6 @@ export async function handleSpentOutputEventInternal(
         })
     }
     if (activity?.data.type === ActivityType.Nft) {
-        updateNftInAllAccountNfts(accountIndex, activity.data.metadata.id, { isUnspent: false })
+        updateNftInAllAccountNfts(accountIndex, activity.data.nftId, { isOwned: false })
     }
 }

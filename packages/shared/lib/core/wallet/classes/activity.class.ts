@@ -83,7 +83,7 @@ export class Activity implements IActivity {
     }
 
     getAsyncStatus(time: Date): ActivityAsyncStatus {
-        if (this.data.type === ActivityType.Transaction) {
+        if (this.data.type === ActivityType.Transaction || this.data.type === ActivityType.Nft) {
             if (this.data.timelockDate) {
                 if (this.data.timelockDate.getTime() > time.getTime()) {
                     return ActivityAsyncStatus.Timelocked

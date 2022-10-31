@@ -1,24 +1,26 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { activeAccounts } from '@core/profile/stores'
 import {
-    ActivityDirection,
     ActivityType,
     addOrUpdateNftInAllAccountNfts,
     addPersistedAsset,
+    buildNftFromNftOutput,
+    getIsOwnedFromUnspentNftOutput,
     getOrRequestAssetFromPersistedAssets,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/classes/activity.class'
+import { OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import {
     addActivityToAccountActivitiesInAllAccountActivities,
     allAccountActivities,
 } from '@core/wallet/stores/all-account-activities.store'
-import { OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
-import { get } from 'svelte/store'
+import { getBech32AddressFromAddressTypes } from '@core/wallet/utils/getBech32AddressFromAddressTypes'
 import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
+import { INftOutput } from '@iota/types'
+import { get } from 'svelte/store'
 import { WalletApiEvent } from '../../enums'
 import { INewOutputEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
-import { getBech32AddressFromAddressTypes } from '@core/wallet/utils/getBech32AddressFromAddressTypes'
 
 export function handleNewOutputEvent(error: Error, rawEvent: string): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.NewOutput)
@@ -48,14 +50,13 @@ export async function handleNewOutputEventInternal(
             account
         )
         const activity = new Activity(processedOutput, account)
-        if (activity.data.type !== ActivityType.Nft) {
+        if (activity.data.type === ActivityType.Nft) {
+            const isOwned = getIsOwnedFromUnspentNftOutput(account.depositAddress, output.output as INftOutput)
+            const nft = buildNftFromNftOutput(output.output as INftOutput, output.outputId, isOwned)
+            addOrUpdateNftInAllAccountNfts(account.index, nft)
+        } else {
             const asset = await getOrRequestAssetFromPersistedAssets(activity.data.assetId)
             addPersistedAsset(asset)
-        } else {
-            const isUnspent =
-                activity.data.direction === ActivityDirection.Incoming &&
-                (!activity.data.isAsync || activity.data.isClaimed)
-            addOrUpdateNftInAllAccountNfts(account.index, activity.data.metadata, { isUnspent })
         }
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
     }

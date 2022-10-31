@@ -22,3 +22,11 @@ export function getStorageDepositFromOutput(output: OutputTypes): {
         return { storageDeposit: 0, giftedStorageDeposit: 0 }
     }
 }
+
+export function getStorageDepositUnlockConditionFromOutput(output: OutputTypes): IStorageDepositReturnUnlockCondition {
+    if (output && output?.type !== OUTPUT_TYPE_TREASURY) {
+        return output?.unlockConditions?.find(
+            (unlockCondition) => unlockCondition?.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN
+        ) as IStorageDepositReturnUnlockCondition
+    }
+}

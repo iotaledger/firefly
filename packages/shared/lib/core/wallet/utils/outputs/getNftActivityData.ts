@@ -14,6 +14,7 @@ import { OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
 import type { INftOutput } from '@iota/types'
 import { getAsyncDataFromOutput } from './getAsyncDataFromOutput'
+import { getNftByIdFromAllAccountNfts } from '@core/wallet/stores'
 
 export function getNftActivityData(
     processedTransaction: IProcessedTransaction,
@@ -26,8 +27,8 @@ export function getNftActivityData(
 
     const nftId = getNftId(output.nftId, outputId)
     const storageDeposit = Number(output.amount)
-    const metadata = getMetadataFromNftOutput(output)
-    metadata.id = nftId
+    const nft = getNftByIdFromAllAccountNfts(account.index, nftId)
+    const metadata = nft?.metadata ?? getMetadataFromNftOutput(output)
 
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs
