@@ -1,4 +1,5 @@
-import { formatNumber } from '@lib/currency'
+import { formatNumber } from '@core/i18n'
+
 import { ITokenMetadata } from '../interfaces'
 
 export function formatTokenAmountPrecise(amount: number, tokenMetadata: ITokenMetadata): string {

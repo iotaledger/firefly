@@ -1,5 +1,9 @@
+import { IUTXOInput } from '@iota/types'
+
 import type { IAccountState } from '@core/account'
-import { convertToFiat, formatCurrency } from '@lib/currency'
+import { formatCurrency } from '@core/i18n'
+import { miotaToFiat } from '@core/utils'
+
 import { ActivityAsyncStatus, ActivityDirection, ActivityType, InclusionState } from '../enums'
 import {
     IFoundryActivityData,
@@ -19,7 +23,6 @@ import {
     getNftActivityData,
     getTransactionActivityData,
 } from '../utils'
-import { IUTXOInput } from '@iota/types'
 import { containsValue } from '../utils/transactions/containsValue'
 import { getAliasActivityData } from '../utils/outputs/getAliasActivityData'
 
@@ -119,7 +122,7 @@ export class Activity implements IActivity {
 
     getFiatAmount(fiatPrice?: number, exchangeRate?: number): string {
         if (fiatPrice && exchangeRate && this.data.type !== ActivityType.Alias && this.data.type !== ActivityType.Nft) {
-            const fiatValue = formatCurrency(convertToFiat(this.data.rawAmount, fiatPrice, exchangeRate))
+            const fiatValue = formatCurrency(miotaToFiat(this.data.rawAmount, fiatPrice, exchangeRate))
             return fiatValue ? fiatValue : ''
         } else {
             return ''

@@ -1,5 +1,5 @@
+import { formatNumber } from '@core/i18n'
 import { getIotaUnit, IOTA_UNIT_MAP } from '@core/utils'
-import { formatNumber } from '@lib/currency'
 
 import { ITokenMetadata } from '../interfaces'
 import { formatTokenAmountDefault } from './formatTokenAmountDefault'
