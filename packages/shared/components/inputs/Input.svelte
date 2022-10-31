@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount, createEventDispatcher, tick } from 'svelte'
     import { Text, InputContainer, TextPropTypes, TextType } from 'shared/components'
-    import { formatNumber, getAllDecimalSeparators, getDecimalSeparator, parseCurrency } from '@lib/currency'
+    import { DECIMAL_SEPARATORS, formatNumber, getDecimalSeparator, parseCurrency } from '@core/i18n'
     import { localize } from '@core/i18n'
 
     export let value: string = ''
@@ -31,7 +31,6 @@
     export let hasFocus = false
 
     const dispatch = createEventDispatcher()
-    const allDecimalSeparators = getAllDecimalSeparators()
     const decimalSeparator = getDecimalSeparator()
 
     let capsLockOn = false
@@ -101,7 +100,7 @@
                 }
             } else if (integer) {
                 // Dicard anything with a decimal separator
-                if (allDecimalSeparators.some((sep) => pasteVal?.indexOf(sep) >= 0)) {
+                if (DECIMAL_SEPARATORS.some((sep) => pasteVal?.indexOf(sep) >= 0)) {
                     event.preventDefault()
                 } else {
                     const val = Number.parseInt(pasteVal, 10)
