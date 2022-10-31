@@ -9,7 +9,7 @@ import { Activity } from '../classes'
 import { preprocessTransaction } from '../utils'
 import { Converter } from '@core/utils'
 import { showAppNotification } from '@auxiliary/notification'
-import { IIrc27Metadata } from '../interfaces'
+import { IIrc27Metadata } from '@core/nfts'
 
 export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
     try {

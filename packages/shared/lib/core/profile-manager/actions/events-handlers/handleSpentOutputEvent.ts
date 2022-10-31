@@ -5,11 +5,12 @@ import {
     allAccountActivities,
     updateActivityDataByTransactionId,
 } from '@core/wallet/stores/all-account-activities.store'
-import { ActivityAsyncStatus, ActivityType, updateNftInAllAccountNfts } from '@core/wallet'
+import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
 
 import { WalletApiEvent } from '../../enums'
 import { ISpentOutputEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
+import { updateNftInAllAccountNfts } from '@core/nfts'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: string): Promise<void> {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.SpentOutput)

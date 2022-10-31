@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { selectedAccountNfts } from '@core/wallet'
+    import { selectedAccountNfts } from '@core/nfts'
     import { Modal, Text, TextType } from 'shared/components'
     import { truncateString } from '@core/utils'
     import { fade } from 'svelte/transition'

@@ -1,4 +1,4 @@
-import { TokenStandard } from '../enums'
+import { TokenStandard } from '@core/wallet'
 import { MimeType } from '../types'
 
 export interface IIrc27Metadata {

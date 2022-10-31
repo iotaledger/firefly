@@ -20,9 +20,9 @@
     import {
         formatTokenAmountBestMatch,
         generateAndStoreActivitiesForAllAccounts,
-        initialiseNftMetadataForAllAccount,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
+    import { loadNftsForActiveProfile } from '@core/nfts'
 
     export let searchForBalancesOnLoad = false
 
@@ -110,7 +110,7 @@
         if (hasUsedWalletFinder) {
             await refreshAccountAssetsForActiveProfile()
             await generateAndStoreActivitiesForAllAccounts()
-            initialiseNftMetadataForAllAccount()
+            loadNftsForActiveProfile()
         }
     })
 </script>

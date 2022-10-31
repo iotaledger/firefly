@@ -1,5 +1,5 @@
 import { AddressTypes } from '@iota/types'
-import { IIrc27Metadata } from '..'
+import { IIrc27Metadata } from '../interfaces'
 
 export interface INft {
     id: string

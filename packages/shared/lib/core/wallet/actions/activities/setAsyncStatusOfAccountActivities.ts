@@ -1,6 +1,7 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
+import { updateNftInAllAccountNfts } from '@core/nfts'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet/enums'
-import { allAccountActivities, updateNftInAllAccountNfts } from '../../stores'
+import { allAccountActivities } from '../../stores'
 import { refreshAccountAssetsForActiveProfile } from '../refreshAccountAssetsForActiveProfile'
 
 export function setAsyncStatusOfAccountActivities(time: Date): void {

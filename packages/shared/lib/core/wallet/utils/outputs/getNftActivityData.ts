@@ -14,7 +14,7 @@ import { OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
 import type { INftOutput } from '@iota/types'
 import { getAsyncDataFromOutput } from './getAsyncDataFromOutput'
-import { getNftByIdFromAllAccountNfts } from '@core/wallet/stores'
+import { getNftByIdFromAllAccountNfts } from '@core/nfts'
 
 export function getNftActivityData(
     processedTransaction: IProcessedTransaction,

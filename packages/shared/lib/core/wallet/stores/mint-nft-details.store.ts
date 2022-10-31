@@ -1,5 +1,5 @@
+import { IIrc27Metadata } from '@core/nfts'
 import { writable } from 'svelte/store'
-import { IIrc27Metadata } from '../interfaces'
 
 export const mintNftDetails = writable<IIrc27Metadata>({
     standard: undefined,

@@ -1,13 +1,7 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
+import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, getIsOwnedFromUnspentNftOutput } from '@core/nfts'
 import { activeAccounts } from '@core/profile/stores'
-import {
-    ActivityType,
-    addOrUpdateNftInAllAccountNfts,
-    addPersistedAsset,
-    buildNftFromNftOutput,
-    getIsOwnedFromUnspentNftOutput,
-    getOrRequestAssetFromPersistedAssets,
-} from '@core/wallet'
+import { ActivityType, addPersistedAsset, getOrRequestAssetFromPersistedAssets } from '@core/wallet'
 import { Activity } from '@core/wallet/classes/activity.class'
 import { OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import {
