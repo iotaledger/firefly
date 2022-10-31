@@ -1,6 +1,6 @@
 import Big from 'big.js'
 
-import { formatNumber, getCurrencyPosition } from '@lib/currency'
+import { formatNumber, getCurrencyPosition } from '@core/i18n'
 
 import { IOTA_UNIT_MAP } from './constants'
 import { IotaUnit } from './enums'
