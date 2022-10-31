@@ -1,7 +1,6 @@
-import { convertDateToUnixTimestamp } from '@core/utils'
+import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import type { FeatureTypes, UnlockConditionTypes } from '@iota/types'
 import type { BuildNftOutputData } from '@iota/wallet'
-import { Converter } from '@lib/converter'
 import {
     ADDRESS_TYPE_ED25519,
     FEATURE_TYPE_METADATA,
