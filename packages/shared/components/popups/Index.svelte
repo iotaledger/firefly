@@ -20,7 +20,6 @@
     import Diagnostics from './Diagnostics.svelte'
     import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
     import ErrorLog from './ErrorLog.svelte'
-    import ExportTransactionHistory from './ExportTransactionHistory.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
@@ -91,7 +90,6 @@
         confirmation: ConfirmationPopup,
         deepLinkError: DeepLinkErrorPopup,
         deleteAccount: DeleteAccount,
-        exportTransactionHistory: ExportTransactionHistory,
         connectLedger: ConnectLedgerPopup,
         ledgerAppGuide: LedgerAppGuidePopup,
         ledgerConnectionGuide: LedgerConnectionGuidePopup,
