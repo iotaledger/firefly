@@ -24,8 +24,9 @@
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
     import { time } from '@core/app'
+    import { IIrc27Metadata } from '@core/nfts'
 
-    export let metadata: string
+    export let metadata: IIrc27Metadata
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
@@ -43,56 +44,79 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: formattedTransactionTime = getDateFormat(transactionTime)
-    $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
     $: isTimelocked = timelockDate > $time
     $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
 
+    $: formattedTransactionTime = getDateFormat(transactionTime)
+    $: formattedTimelockDate = getDateFormat(timelockDate)
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
-
     $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(
         giftedStorageDeposit ?? 0,
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
-    $: localePrefix = `tooltips.transactionDetails.${direction}.`
-
-    let detailsList: { [key in string]: { data: string; tooltipText?: string } }
-    $: detailsList = {
+    let transactionDetailsList: { [key in string]: { data: string; isTooltipVisible?: boolean } }
+    $: transactionDetailsList = {
         ...(transactionTime && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(metadata && { metadata: { data: metadata } }),
         ...(hasStorageDeposit && {
-            storageDeposit: {
-                data: formattedStorageDeposit,
-                tooltipText: localize(localePrefix + 'storageDeposit'),
-            },
+            storageDeposit: { data: formattedStorageDeposit, isTooltipVisible: true },
         }),
         ...(giftedStorageDeposit && {
-            giftedStorageDeposit: {
-                data: formattedGiftedStorageDeposit,
-                tooltipText: localize(localePrefix + 'giftedStorageDeposit'),
-            },
+            giftedStorageDeposit: { data: formattedGiftedStorageDeposit, isTooltipVisible: true },
         }),
         ...(expirationTime && {
-            expirationTime: {
-                data: expirationTime,
-                tooltipText: localize(localePrefix + 'expirationTime'),
-            },
+            expirationTime: { data: expirationTime, isTooltipVisible: true },
         }),
         ...(timelockDate && {
-            timelockDate: {
-                data: formattedTimelockDate,
-                tooltipText: localize(localePrefix + 'timelockDate'),
-            },
+            timelockDate: { data: formattedTimelockDate, isTooltipVisible: true },
         }),
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
+    }
+
+    let metadataDetailsList: {
+        [key in keyof typeof metadata]: { data: unknown; isTooltipVisible?: boolean; isCopyable?: boolean }
+    }
+    $: metadataDetailsList = {
+        ...(metadata?.standard && {
+            standard: { data: metadata.standard, isTooltipVisible: true },
+        }),
+        ...(metadata?.version && {
+            version: { data: metadata.version },
+        }),
+        ...(metadata?.name && {
+            name: { data: metadata.name },
+        }),
+        ...(metadata?.type && {
+            type: { data: metadata.type as string, isTooltipVisible: true },
+        }),
+        ...(metadata?.uri && {
+            uri: { data: metadata.uri, isCopyable: true },
+        }),
+        ...(metadata?.collectionId && {
+            collectionId: { data: metadata.collectionId, isTooltipVisible: true },
+        }),
+        ...(metadata?.collectionName && {
+            collectionName: { data: metadata.collectionName },
+        }),
+        ...(metadata?.royalties && {
+            royalties: { data: metadata.royalties, isTooltipVisible: true },
+        }),
+        ...(metadata?.issuerName && {
+            issuerName: { data: metadata.issuerName, isTooltipVisible: true },
+        }),
+        ...(metadata?.description && {
+            description: { data: metadata.description },
+        }),
+        ...(metadata?.attributes && {
+            attributes: { data: metadata.attributes, isTooltipVisible: true },
+        }),
     }
 
     function handleTransactionIdClick(): void {
@@ -146,13 +170,25 @@
             <SubjectBox {subject} />
         {/if}
     </main-content>
-    {#if Object.entries(detailsList).length > 0}
+    {#if Object.entries(transactionDetailsList).length > 0}
         <details-list class="flex flex-col space-y-2">
-            {#each Object.entries(detailsList) as [key, value]}
+            {#each Object.entries(transactionDetailsList) as [key, value]}
                 <KeyValueBox
                     keyText={localize(`general.${key}`)}
                     valueText={value.data}
-                    tooltipText={value.tooltipText}
+                    tooltipText={value.isTooltipVisible
+                        ? localize(`tooltips.transactionDetails.${direction}.${key}`)
+                        : undefined}
+                />
+            {/each}
+            {#each Object.entries(metadataDetailsList) as [key, value]}
+                <KeyValueBox
+                    keyText={localize(`views.collectibles.metadata.${key}`)}
+                    valueText={value.data}
+                    tooltipText={value.isTooltipVisible
+                        ? localize(`tooltips.transactionDetails.nftMetadata.${key}`)
+                        : undefined}
+                    isCopyable={value.isCopyable}
                 />
             {/each}
             {#if claimingTransactionId}
