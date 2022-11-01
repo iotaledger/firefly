@@ -8,12 +8,6 @@ export type SendOperationParameters = {
     amount: string
     unit: Unit
     message: string
-}
-
-/**
- * The parameters of a bridge operation.
- */
-export type SendWithMetaDataOperationParameters = SendOperationParameters & {
-    tag: string
-    metadata: string
+    tag?: string
+    metadata?: string
 }
