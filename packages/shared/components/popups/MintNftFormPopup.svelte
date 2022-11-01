@@ -6,8 +6,8 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
-    import { MimeType } from '@core/nfts'
-    import { NftMimeType, INftMetadata } from '@core/collectibles'
+    import { IIrc27Metadata, MimeType } from '@core/nfts'
+    import { NftMimeType } from '@core/collectibles'
     import { isValidUrl, validateBech32Address } from '@core/utils'
     import { networkHrp } from '@core/network'
 
@@ -148,7 +148,7 @@
         }
     }
 
-    function convertInputsToMetadataType(inputs: Inputs): INftMetadata {
+    function convertInputsToMetadataType(inputs: Inputs): IIrc27Metadata {
         return {
             standard: standard ?? TokenStandard.IRC27,
             version,
