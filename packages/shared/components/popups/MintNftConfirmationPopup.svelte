@@ -49,7 +49,6 @@
     async function mintAction(): Promise<void> {
         try {
             await mintNft({
-                id: undefined,
                 standard,
                 version: undefined,
                 name,
