@@ -8,7 +8,7 @@ import { addError } from '../../errors'
 import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
 import { DeepLinkParameters, DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
 import { formatNumber } from '@lib/currency'
-import { getNumberOfDecimalPlaces } from '@lib/utils'
+import { getByteLengthOfString, getNumberOfDecimalPlaces } from '@lib/utils'
 
 /**
  * Parses a deep link within the wallet context.
@@ -112,11 +112,27 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams): voi
         })
     }
 
+    const tag = searchParams.get(SendOperationParameter.Tag)
+    if (tag) {
+        if (getByteLengthOfString(tag) > 64) {
+            return addError({ time: Date.now(), type: 'deepLink', message: localize('error.send.tagLength') })
+        }
+    }
+
+    const metadata = searchParams.get(SendOperationParameter.Metadata)
+    if (metadata) {
+        if (getByteLengthOfString(metadata) > 8192) {
+            return addError({ time: Date.now(), type: 'deepLink', message: localize('error.send.metadataLength') })
+        }
+    }
+
     return {
         address,
         amount: formatNumber(Math.abs(parsedAmount), numDecimalPlaces, numDecimalPlaces),
         unit: parsedUnit,
         message: '',
+        tag,
+        metadata,
     }
 }
 

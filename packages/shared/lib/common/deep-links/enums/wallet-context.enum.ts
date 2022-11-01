@@ -12,4 +12,6 @@ export enum WalletOperation {
 export enum SendOperationParameter {
     Amount = 'amount',
     Unit = 'unit',
+    Tag = 'tag',
+    Metadata = 'metadata',
 }
