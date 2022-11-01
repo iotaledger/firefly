@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, KeyValueBox, Text, FontWeight } from 'shared/components'
+    import { Button, Text, FontWeight, NftDetails } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
     import { mintNft, mintNftDetails } from '@core/wallet'
@@ -14,37 +14,6 @@
         $mintNftDetails
 
     $: isTransferring = $selectedAccount.isTransferring
-
-    let detailsList: { [key: string]: { data: unknown; tooltipText?: string; isCopyable?: boolean } } = {}
-    $: detailsList = {
-        ...(name && {
-            name: { data: name },
-        }),
-        ...(type && {
-            type: { data: type },
-        }),
-        ...(uri && {
-            uri: { data: uri, isCopyable: true },
-        }),
-        ...(collectionId && {
-            collectionId: { data: collectionId },
-        }),
-        ...(collectionName && {
-            collectionName: { data: collectionName },
-        }),
-        ...(royalties && {
-            royalties: { data: royalties },
-        }),
-        ...(issuerName && {
-            issuerName: { data: issuerName },
-        }),
-        ...(description && {
-            description: { data: description },
-        }),
-        ...(attributes && {
-            attribute: { data: attributes },
-        }),
-    }
 
     async function mintAction(): Promise<void> {
         try {
@@ -97,17 +66,7 @@
         {localize('popups.mintNftForm.title')}
     </Text>
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
-        {#if Object.entries(detailsList).length > 0}
-            <details-list class="flex flex-col space-y-2">
-                {#each Object.entries(detailsList) as [key, value]}
-                    <KeyValueBox
-                        keyText={localize(`popups.mintNftForm.inputs.${key}`)}
-                        valueText={value.data}
-                        isCopyable={value.isCopyable}
-                    />
-                {/each}
-            </details-list>
-        {/if}
+        <NftDetails metadata={$mintNftDetails} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" disabled={isTransferring} onClick={handleBack}>
