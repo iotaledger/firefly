@@ -560,6 +560,19 @@
                     "view": "View in IPFS",
                     "burn": "Burn NFT"
                 }
+            },
+            "metadata": {
+                "standard": "Standard",
+                "version": "Version",
+                "type": "Type",
+                "uri": "URI",
+                "name": "Name",
+                "collectionId" : "Collection Id",
+                "collectionName": "Collection Name",
+                "royalties": "Royalties",
+                "issuerName": "Issuer Name",
+                "description": "Description",
+                "attributes": "Attributes"
             }
         }
     },
@@ -1681,6 +1694,14 @@
                 "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
                 "metadata": "An optional data field for storing data persistently on the Tangle.",
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
+            "nftMetadata": {
+                "standard": "The NFT standard e.g. IRC27.",
+                "type": "The MimeType of the NFT. e.g. image/png.",
+                "collectionId" : "UTXO string of the collection NFT that minted this NFT",
+                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
+                "issuerName": "The name of the creator",
+                "attributes": "An array of traits and values that define attributes of the NFT"
             }
         },
         "mintNativeToken": {
