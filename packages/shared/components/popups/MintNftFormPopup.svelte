@@ -16,7 +16,9 @@
     const { standard, version, ...metadata } = $mintNftDetails
 
     type Inputs = { [key in keyof typeof metadata]: string }
-    const inputs = Object.fromEntries(Object.entries(metadata).map(([key]) => [key, ''])) as Inputs
+    const inputs = Object.fromEntries(
+        Object.entries(metadata).map(([key, value]) => [key, (value as string) ?? ''])
+    ) as Inputs
 
     type InputErrors = Inputs
     const inputErrors = Object.fromEntries(Object.entries(inputs).map(([key]) => [key, ''])) as InputErrors
