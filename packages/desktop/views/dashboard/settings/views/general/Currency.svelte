@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Dropdown, Text } from 'shared/components'
-    import { exchangeRates } from 'shared/lib/currency'
+    import { exchangeRates } from '@core/utils'
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownChoice } from '@core/utils'

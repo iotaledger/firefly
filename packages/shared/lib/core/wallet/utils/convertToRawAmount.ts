@@ -1,6 +1,8 @@
 import Big from 'big.js'
+
+import { parseCurrency } from '@core/i18n'
 import { IOTA_UNIT_MAP } from '@core/utils'
-import { parseCurrency } from '@lib/currency'
+
 import { ITokenMetadata } from '../interfaces'
 import { MAX_SUPPORTED_DECIMALS } from '../constants/max-supported-decimals.constants'
 

@@ -2,8 +2,7 @@
     import Big from 'big.js'
     import { Text, AssetDropdown, InputContainer, AmountInput, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
-    import { parseCurrency } from '@lib/currency'
-    import { localize } from '@core/i18n'
+    import { localize, parseCurrency } from '@core/i18n'
     import {
         formatTokenAmountBestMatch,
         convertToRawAmount,
