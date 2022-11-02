@@ -14,7 +14,7 @@ const features = {
             enabled: false,
         },
         createAccount: {
-            enabled: false,
+            enabled: true,
         },
         send: {
             enabled: false,
