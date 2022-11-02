@@ -66,6 +66,7 @@
             if (!isClaimed && expirationDate) {
                 return getTimeDifference(expirationDate, $time)
             }
+        }
         return localize('general.none')
     }
 </script>

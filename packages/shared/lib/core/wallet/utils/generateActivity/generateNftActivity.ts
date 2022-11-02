@@ -5,9 +5,7 @@ import { IAccountState } from '@core/account'
 import type { INftOutput } from '@iota/types'
 import { getAsyncDataFromOutput } from '../generateActivity/helper/getAsyncDataFromOutput'
 import { NftActivity } from '@core/wallet/types'
-import { getSendingInformation } from './helper'
-import { getNftByIdFromAllAccountNfts } from '@core/nfts'
-import { getMetadataFromNftOutput } from '../outputs/getMetadataFromNftOutput'
+import { getMetadataFromOutput, getSendingInformation, getTagFromOutput } from './helper'
 import { getNftId } from '../outputs/getNftId'
 
 export function generateNftActivity(processedTransaction: IProcessedTransaction, account: IAccountState): NftActivity {
@@ -26,8 +24,8 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
     const nftId = getNftId(output.nftId, outputId)
     const storageDeposit = Number(output.amount)
     const giftedStorageDeposit = 0
-    const nft = getNftByIdFromAllAccountNfts(account.index, nftId)
-    const metadata = nft?.metadata ?? getMetadataFromNftOutput(output)
+    const metadata = getMetadataFromOutput(output)
+    const tag = getTagFromOutput(output)
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
@@ -48,6 +46,7 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
         immutableFeatures: output.immutableFeatures,
         storageDeposit,
         metadata,
+        tag,
         asyncData,
         ...sendingInfo,
     }

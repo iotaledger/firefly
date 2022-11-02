@@ -15,7 +15,7 @@
         getFiatAmount,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
-    import { currencies, exchangeRates } from '@core/utils'
+    import { currencies, Currency, exchangeRates } from '@core/utils'
     import { setClipboard } from '@core/utils'
     import { truncateString } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
@@ -75,7 +75,7 @@
                 metadata: activity?.metadata,
                 formattedFiatValue: getFiatAmount(
                     activity,
-                    $currencies[CurrencyTypes.USD],
+                    $currencies[Currency.USD],
                     $exchangeRates[$activeProfile?.settings?.currency]
                 ),
             }
@@ -89,7 +89,7 @@
                 giftedStorageDeposit: activity.giftedStorageDeposit,
                 formattedFiatValue: getFiatAmount(
                     activity,
-                    $currencies[CurrencyTypes.USD],
+                    $currencies[Currency.USD],
                     $exchangeRates[$activeProfile?.settings?.currency]
                 ),
             }

@@ -1,5 +1,6 @@
 import { FoundryActivity, TransactionActivity } from '@core/wallet/types'
-import { convertToFiat, formatCurrency } from '@lib/currency'
+import { formatCurrency } from '@core/i18n'
+import { miotaToFiat } from '@core/utils'
 
 export function getFiatAmount(
     activity: TransactionActivity | FoundryActivity,
@@ -7,7 +8,7 @@ export function getFiatAmount(
     exchangeRate?: number
 ): string {
     if (fiatPrice && exchangeRate) {
-        const fiatValue = formatCurrency(convertToFiat(activity.rawAmount, fiatPrice, exchangeRate))
+        const fiatValue = formatCurrency(miotaToFiat(activity.rawAmount, fiatPrice, exchangeRate))
         return fiatValue ? fiatValue : ''
     } else {
         return ''
