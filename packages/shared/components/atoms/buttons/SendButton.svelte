@@ -6,7 +6,7 @@
     import { appSettings } from '@core/app'
     import { Text, FontWeight, TextType, Icon, Modal } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import features from '@features/features'
+    import features from '../../../../desktop/features/features'
 
     let modal: Modal = undefined
     let isModalOpened: boolean = false

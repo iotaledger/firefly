@@ -11,7 +11,7 @@
     } from '@core/router'
     import { SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
     import { Icon, Text, TextType } from 'shared/components'
-    import features from '@features/features'
+    import features from '../../desktop/features/features'
 
     export let group: string
     export let settings:
