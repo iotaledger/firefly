@@ -105,7 +105,7 @@
         on:mouseleave={hideTooltip}
     >
         <AssetIcon {asset} />
-        <Text type={TextType.h1} fontWeight={FontWeight.semibold} classes="whitespace-pre items-baseline">
+        <Text type={TextType.h1} fontWeight={FontWeight.semibold} classes="whitespace-pre">
             {displayedAmount.join('\n')}
             {#if unit}
                 <Text type={TextType.h4} classes="inline" fontWeight={FontWeight.medium}>{unit}</Text>
