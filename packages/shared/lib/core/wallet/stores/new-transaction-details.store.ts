@@ -10,15 +10,10 @@ export const newTransactionDetails: Writable<NewTransactionDetails> = writable({
     type: NewTransactionType.TokenTransfer,
     rawAmount: undefined,
     asset: undefined,
-    expirationDate: undefined,
     metadata: undefined,
     recipient: undefined,
     tag: undefined,
     unit: undefined,
-    giftStorageDeposit: false,
-    surplus: undefined,
-    disableToggleGift: false,
-    disableChangeExpiration: false,
 })
 
 export function resetNewTokenTransactionDetails(): void {
@@ -26,15 +21,10 @@ export function resetNewTokenTransactionDetails(): void {
         type: NewTransactionType.TokenTransfer,
         rawAmount: undefined,
         asset: undefined,
-        expirationDate: undefined,
         metadata: undefined,
         recipient: undefined,
         tag: undefined,
         unit: undefined,
-        giftStorageDeposit: false,
-        surplus: undefined,
-        disableToggleGift: false,
-        disableChangeExpiration: false,
     })
 }
 
