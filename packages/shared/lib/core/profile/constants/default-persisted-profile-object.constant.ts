@@ -1,5 +1,5 @@
-import { NetworkProtocol, NetworkType } from '@core/network'
-import { ExchangeRate } from '@core/utils'
+import { NetworkProtocol, NetworkType } from '@core/network/enums'
+import { ExchangeRate } from '@core/utils/enums'
 
 import { ProfileType } from '../enums'
 import { IPersistedProfile } from '../interfaces'
