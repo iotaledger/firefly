@@ -2,9 +2,10 @@
     import { Text, TextType, NftGalleryItem } from 'shared/components'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { INft, selectedAccountNfts } from '@core/nfts'
+    import { selectedNftId } from '../stores/selected-nft.store'
 
     function handleNftClick(nft: INft): void {
-    function onClick(): void {
+        $selectedNftId = nft.id
         $collectiblesRouter.goTo(CollectiblesRoute.Details)
     }
 </script>
