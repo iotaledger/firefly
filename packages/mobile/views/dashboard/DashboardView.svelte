@@ -2,7 +2,7 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN } from '@core/network'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, hasStrongholdLocked, reflectLockedStronghold, saveActiveProfile } from '@core/profile'
     import { Button, TogglableAmountLabel } from 'shared/components'
     import { TabPane, TopBar } from '../../components'
     import features from '../../features/features'
@@ -12,6 +12,10 @@
     import { TabNavigator } from './tabs'
 
     $: activeDashboardTabComponent = DASHBOARD_TAB_COMPONENT[$activeDashboardTab]
+
+    $: $activeProfile, saveActiveProfile()
+
+    $: $hasStrongholdLocked && reflectLockedStronghold()
 </script>
 
 {#if $selectedAccount}

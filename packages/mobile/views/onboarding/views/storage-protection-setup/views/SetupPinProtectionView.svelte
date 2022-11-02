@@ -13,7 +13,11 @@
     import { ProfileType } from '@core/profile'
     import { isValidPin } from '@core/utils'
     import { onMount } from 'svelte'
+    import { storageProtectionSetupRouter } from '../../../../../lib/routers'
+
     export let busy = false
+
+    const title = localize('views.onboarding.storageProtectionSetup.setupPinProtection.title')
 
     let setPinInput = ''
     let setPinInputError = ''
