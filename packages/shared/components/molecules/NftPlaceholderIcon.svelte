@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { INft } from '@core/nfts'
+    import { INft, ParentMimeType } from '@core/nfts'
     import { Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
@@ -14,19 +14,19 @@
         const nftType = nft?.parsedMetadata?.type?.split('/', 1)
 
         switch (nftType?.[0]) {
-            case 'image':
+            case ParentMimeType.Image:
                 return IconEnum.Picture
-            case 'video':
+            case ParentMimeType.Video:
                 return IconEnum.Play
-            case 'audio':
+            case ParentMimeType.Audio:
                 return IconEnum.Bell
-            case 'text':
+            case ParentMimeType.Text:
                 return IconEnum.Doc
-            case 'application':
+            case ParentMimeType.Application:
                 return IconEnum.Parchment
-            case 'model':
+            case ParentMimeType.Model:
                 return IconEnum.Help
-            case 'font':
+            case ParentMimeType.Font:
                 return IconEnum.Language
             default:
                 return IconEnum.Collectibles
