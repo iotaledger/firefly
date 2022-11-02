@@ -1,4 +1,3 @@
-import { SendWithMetaDataOperationParameters } from '@common/deep-links'
 import { Unit } from '@iota/unit-converter'
 import { LabeledWalletAccount } from './wallet'
 

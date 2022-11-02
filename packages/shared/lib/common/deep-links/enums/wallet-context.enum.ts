@@ -12,12 +12,6 @@ export enum WalletOperation {
 export enum SendOperationParameter {
     Amount = 'amount',
     Unit = 'unit',
-}
-
-/**
- * The query parameters available exclusively for a bridge operation
- */
-export enum SwapOperationParameter {
-    ChainId = 'chainId',
-    ReceiverAddress = 'receiverAddress',
+    Tag = 'tag',
+    Metadata = 'metadata',
 }

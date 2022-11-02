@@ -2,23 +2,13 @@ import { Unit } from '@iota/unit-converter'
 
 import { localize } from '@core/i18n'
 
-import { isValidAddressAndPrefix, isValidEVMAddress } from '../../address'
+import { isValidAddressAndPrefix } from '../../address'
 import { addError } from '../../errors'
 
-import {
-    DeepLinkContext,
-    SendOperationParameter,
-    SwapOperationParameter,
-    WalletOperation,
-} from '@common/deep-links/enums'
-import {
-    DeepLinkParameters,
-    DeepLinkRequest,
-    SendOperationParameters,
-    SendWithMetaDataOperationParameters,
-} from '@common/deep-links/types'
+import { DeepLinkContext, SendOperationParameter, WalletOperation } from '@common/deep-links/enums'
+import { DeepLinkParameters, DeepLinkRequest, SendOperationParameters } from '@common/deep-links/types'
 import { formatNumber } from '@lib/currency'
-import { getNumberOfDecimalPlaces } from '@lib/utils'
+import { getByteLengthOfString, getNumberOfDecimalPlaces } from '@lib/utils'
 
 /**
  * Parses a deep link within the wallet context.
@@ -53,9 +43,6 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
         case WalletOperation.Send:
             parameters = parseSendOperation(address, url.searchParams)
             break
-        case WalletOperation.SwapOut:
-            parameters = parseSwapOutOperation(address, url.searchParams)
-            break
         default:
             return addError({
                 time: Date.now(),
@@ -82,7 +69,6 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
  *
  * @param {string} address The recipient's Bech32 address.
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
- * @param {string} expectedAddressPrefix The expected human-readable part of a Bech32 address.
  *
  * @return {void | SendOperationParameters} The formatted parameters for the send operation.
  */
@@ -126,50 +112,27 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams): voi
         })
     }
 
+    const tag = searchParams.get(SendOperationParameter.Tag)
+    if (tag) {
+        if (getByteLengthOfString(tag) > 64) {
+            return addError({ time: Date.now(), type: 'deepLink', message: localize('error.send.tagLength') })
+        }
+    }
+
+    const metadata = searchParams.get(SendOperationParameter.Metadata)
+    if (metadata) {
+        if (getByteLengthOfString(metadata) > 8192) {
+            return addError({ time: Date.now(), type: 'deepLink', message: localize('error.send.metadataLength') })
+        }
+    }
+
     return {
         address,
         amount: formatNumber(Math.abs(parsedAmount), numDecimalPlaces, numDecimalPlaces),
         unit: parsedUnit,
         message: '',
-    }
-}
-
-const parseSwapOutOperation = (
-    waspAddress: string,
-    searchParams: URLSearchParams
-): void | SendWithMetaDataOperationParameters => {
-    const sendParams = parseSendOperation(waspAddress, searchParams)
-    if (!sendParams) {
-        // Error handling is done in parseSendOperation already
-        return
-    }
-
-    const chainId = searchParams.get(SwapOperationParameter.ChainId)
-    if (!chainId) {
-        return addError({
-            time: Date.now(),
-            type: 'deepLink',
-            message: 'The chain ID is missing',
-        })
-    } else if (!Number.isInteger(Number(chainId))) {
-        return addError({ time: Date.now(), type: 'deepLink', message: `Chain ID is not an integer '${chainId}'` })
-    }
-
-    const receiverAddress = searchParams.get(SwapOperationParameter.ReceiverAddress)
-    if (!receiverAddress) {
-        return addError({ time: Date.now(), type: 'deepLink', message: 'The receiver address is missing' })
-    } else if (!isValidEVMAddress(receiverAddress)) {
-        return addError({
-            time: Date.now(),
-            type: 'deepLink',
-            message: `The receiver address is not an EVM address: '${receiverAddress}'`,
-        })
-    }
-
-    return {
-        ...sendParams,
-        tag: WalletOperation.SwapOut,
-        metadata: `${receiverAddress}:${chainId}`,
+        tag,
+        metadata,
     }
 }
 
