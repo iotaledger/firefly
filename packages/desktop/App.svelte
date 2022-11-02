@@ -13,7 +13,6 @@
         openSettings,
     } from '@core/router'
     import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings, setPlatform } from '@core/app'
-    import { Electron } from '@lib/electron'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, popupState } from '@auxiliary/popup'
     import { getLocalisedMenuItems } from './lib/helpers'
@@ -24,6 +23,8 @@
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
+
+    const Electron = window['__ELECTRON__']
 
     const { loggedIn } = $activeProfile
 
