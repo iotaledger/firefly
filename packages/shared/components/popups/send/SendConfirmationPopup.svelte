@@ -33,8 +33,6 @@
         DEFAULT_TRANSACTION_OPTIONS,
         newTransactionDetails,
         updateNewTransactionDetails,
-        NewTokenTransactionDetails,
-        NewNftTransactionDetails,
         NewTransactionType,
     } from '@core/wallet'
     import { formatCurrency } from '@core/i18n'
@@ -71,7 +69,7 @@
 
     function refreshSendConfirmationState(): void {
         error = null
-        void _prepareOutput()
+        void prepareTransactionOutput()
     }
 
     $: formattedFiatValue =
@@ -95,48 +93,25 @@
         }
     }
 
-    async function _prepareOutput(): Promise<void> {
+    async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
-        if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-            await prepareTokenOutput(transactionDetails)
-        } else if (transactionDetails.type === NewTransactionType.NftTransfer) {
-            await prepareNftOutput(transactionDetails)
-        }
+        outputOptions = getOutputOptions(
+            expirationDate,
+            recipientAddress,
+            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0',
+            transactionDetails.metadata,
+            transactionDetails.tag,
+            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
+            giftStorageDeposit,
+            transactionDetails.surplus
+        )
+        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
+
         setStorageDeposit(preparedOutput, Number(transactionDetails.surplus))
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
-    }
-
-    async function prepareTokenOutput(transactionDetails: NewTokenTransactionDetails): Promise<void> {
-        outputOptions = getOutputOptions(
-            expirationDate,
-            recipientAddress,
-            transactionDetails.rawAmount,
-            transactionDetails.metadata,
-            transactionDetails.tag,
-            transactionDetails.asset,
-            giftStorageDeposit,
-            transactionDetails.surplus
-        )
-        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-    }
-
-    async function prepareNftOutput(transactionDetails: NewNftTransactionDetails): Promise<void> {
-        outputOptions = getOutputOptions(
-            expirationDate,
-            recipientAddress,
-            '0',
-            transactionDetails.metadata,
-            transactionDetails.tag,
-            undefined,
-            giftStorageDeposit,
-            transactionDetails.surplus,
-            transactionDetails.nftId
-        )
-
-        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
     }
 
     function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
