@@ -7,11 +7,14 @@
         "importsNotUsedAsValues": "remove",
         "lib": ["DOM", "ESNext"],
         "paths": {
-            "@auxiliary/*": ["../shared/lib/auxiliary/*"],
+            "@auxiliary/*": ["./lib/auxiliary/*"],
             "@contexts/*": ["../shared/lib/contexts/*"],
+            "@components": ["./components"],
             "@core/*": ["../shared/lib/core/*"],
-            "@features/*": ["../shared/features/*"],
-            "@lib/*": ["../shared/lib/*"]
+            "@features/*": ["./features/*"],
+            "@lib/*": ["../shared/lib/*"],
+            "@ui": ["../shared/components"],
+            "@views": ["./views"]
         }
     },
     "include": ["./capacitor"]

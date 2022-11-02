@@ -14,10 +14,9 @@
         selectedAccountActivities,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
-    import { currencies, exchangeRates } from '@lib/currency'
-    import { CurrencyTypes } from 'shared/lib/typings/currency'
+    import { currencies, Currency, exchangeRates } from '@core/utils'
     import { setClipboard } from '@core/utils'
-    import { truncateString } from '@lib/helpers'
+    import { truncateString } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
 
@@ -48,7 +47,7 @@
             transactionTime: activity.time,
             inclusionState: activity.inclusionState,
             formattedFiatValue: activity.getFiatAmount(
-                $currencies[CurrencyTypes.USD],
+                $currencies[Currency.USD],
                 $exchangeRates[$activeProfile?.settings?.currency]
             ),
         }
@@ -110,7 +109,7 @@
     }
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/block/${activity.transactionId}`)
+        Platform.openUrl(`${explorerUrl}/transaction/${activity.transactionId}`)
     }
 
     function handleTransactionIdClick(): void {

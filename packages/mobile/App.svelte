@@ -1,41 +1,41 @@
 <script lang="typescript">
+    import { onDestroy, onMount } from 'svelte'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
     import {
         AppRoute,
         appRoute,
         appRouter,
-        initialiseRouters,
-        initialiseOnboardingRouters,
         DashboardRoute,
         dashboardRouter,
+        initialiseOnboardingRouters,
+        initialiseRouters,
         OnboardingRoute,
         onboardingRoute,
     } from './lib/routers'
-    import { openSettings } from '@core/router'
-    import { Route } from './components'
-    import { ToastContainer } from 'shared/components'
     import {
-        AppTheme,
         appSettings,
         appStage,
         AppStage,
+        AppTheme,
         appVersionDetails,
         initAppSettings,
+        setPlatform,
         shouldBeDarkMode,
     } from '@core/app'
-    import { Electron } from 'shared/lib/electron'
+    import { Electron } from '@lib/electron'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
-    import { onboardingProfile, initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
-    import { setPlatform } from '@core/app/stores/platform.store'
-    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { initialiseOnboardingProfile, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 
+    import { NetworkProtocol, NetworkType } from '@core/network'
+    import { openSettings } from '@core/router'
+    import { ToastContainer } from '@ui'
+    import { get } from 'svelte/store'
+    import { Route } from './components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
+    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -47,8 +47,9 @@
         }
     }
 
-    const handleCrashReporting = async (sendCrashReports: boolean): Promise<void> =>
-        Electron.updateAppSettings({ sendCrashReports })
+    async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
+        await Electron.updateAppSettings({ sendCrashReports })
+    }
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
     $: $appSettings.darkMode

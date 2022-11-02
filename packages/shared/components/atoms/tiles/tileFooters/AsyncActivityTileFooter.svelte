@@ -3,6 +3,7 @@
         ActivityAsyncStatus,
         ActivityDirection,
         ITransactionActivityData,
+        INftActivityData,
         claimActivity,
         rejectActivity,
         getTimeDifference,
@@ -25,7 +26,7 @@
     import { closePopup, openPopup } from '@auxiliary/popup'
 
     export let activityId: string
-    export let data: ITransactionActivityData
+    export let data: ITransactionActivityData | INftActivityData
 
     $: shouldShowActions =
         data.direction === ActivityDirection.Incoming && data.asyncStatus === ActivityAsyncStatus.Unclaimed
@@ -57,7 +58,7 @@
         checkActiveProfileAuth(() => claimActivity(activityId, data))
     }
 
-    function getTimeDiff(txData: ITransactionActivityData): string {
+    function getTimeDiff(txData: ITransactionActivityData | INftActivityData): string {
         const { asyncStatus, isAsync, isClaimed, expirationDate, timelockDate } = txData
 
         if (asyncStatus === ActivityAsyncStatus.Timelocked) {

@@ -5,6 +5,7 @@
     import { AssetTile, Text } from 'shared/components'
 
     export let assets: IAccountAssets
+    export let onAssetTileClick: (asset: IAsset) => unknown = () => {}
 
     let assetList: IAsset[]
     $: assets, (assetList = getAssetList())
@@ -24,7 +25,7 @@
     <div class="asset-list h-full flex flex-auto flex-col flex-grow flex-shrink-0">
         {#if assetList.length > 0}
             <VirtualList items={assetList} let:item>
-                <AssetTile classes="mb-2" onClick={() => {}} asset={item} />
+                <AssetTile classes="mb-2" onClick={() => onAssetTileClick(item)} asset={item} />
             </VirtualList>
         {:else}
             <div class="h-full flex flex-col items-center justify-center text-center">

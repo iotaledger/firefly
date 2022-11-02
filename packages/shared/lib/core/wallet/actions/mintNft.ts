@@ -7,11 +7,11 @@ import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetai
 import { localize } from '@core/i18n'
 import { Activity } from '../classes'
 import { preprocessTransaction } from '../utils'
-import { Converter } from '@lib/converter'
-import { INftMetadata } from '../interfaces'
+import { Converter } from '@core/utils'
 import { showAppNotification } from '@auxiliary/notification'
+import { IIrc27Metadata } from '@core/nfts'
 
-export async function mintNft(metadata: INftMetadata): Promise<void> {
+export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
     try {
         updateSelectedAccount({ isTransferring: true })
         const account = get(selectedAccount)
