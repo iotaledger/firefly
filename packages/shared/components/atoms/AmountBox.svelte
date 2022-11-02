@@ -105,16 +105,12 @@
         on:mouseleave={hideTooltip}
     >
         <AssetIcon {asset} />
-        <div class="flex flex-col flex-wrap justify-center items-baseline space-x-0.1">
-            {#each displayedAmount as line, index}
-                <div class="flex items-baseline">
-                    <Text type={TextType.h1} fontWeight={FontWeight.semibold}>{line}</Text>
-                    {#if unit && index === displayedAmount.length - 1}
-                        <Text type={TextType.h4} classes="ml-1" fontWeight={FontWeight.medium}>{unit}</Text>
-                    {/if}
-                </div>
-            {/each}
-        </div>
+        <Text type={TextType.h1} fontWeight={FontWeight.semibold} classes="whitespace-pre items-baseline">
+            {displayedAmount.join('\n')}
+            {#if unit}
+                <Text type={TextType.h4} classes="inline" fontWeight={FontWeight.medium}>{unit}</Text>
+            {/if}
+        </Text>
         {#if isTooltipVisible}
             <Tooltip anchor={tokenAmountElement}><Text classes="break-all">{amount} {unit}</Text></Tooltip>
         {/if}
