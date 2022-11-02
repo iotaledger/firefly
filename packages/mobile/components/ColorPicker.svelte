@@ -2,7 +2,7 @@
     import { AccountColors } from '@core/account'
     import { localize } from '@core/i18n'
     import { Icon, Text } from 'shared/components'
-    import { isBright } from 'shared/lib/helpers'
+    import { isBright } from '@core/utils'
 
     export let active: string
     export let classes: string = ''
