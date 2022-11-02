@@ -2,9 +2,8 @@
     import { localize } from '@core/i18n'
     import { ActivityDirection, InclusionState, INftActivityData, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
-    import { Text, FontWeight, Icon } from 'shared/components'
+    import { Text, FontWeight, NftMediaContainer, NftMediaSize } from 'shared/components'
     import { networkHrp } from '@core/network'
-    import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let inclusionState: InclusionState
     export let data: INftActivityData
@@ -41,14 +40,7 @@
 </script>
 
 <div class="relative flex w-8 h-8">
-    <div class="rounded-full flex justify-center items-center transition-none p-1 w-8 h-8 bg-gray-500">
-        <Icon
-            icon={IconEnum.Collectibles}
-            width="83.33333%"
-            height="83.33333%"
-            classes="text-white dark:text-gray-800 text-center"
-        />
-    </div>
+    <NftMediaContainer nftId={data.nftId} size={NftMediaSize.Small} />
 </div>
 
 <div class="flex flex-col w-full space-y-0.5">
