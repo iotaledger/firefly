@@ -1,13 +1,14 @@
-import { IPersistedProfile } from '@core/profile'
-import { DEFAULT_ACTIVE_PROFILE_VALUE } from '@core/profile/constants/default-active-profile-values.constant'
+import { IPersistedProfile } from '@core/profile/interfaces'
+import { DEFAULT_PERSISTED_PROFILE_OBJECT } from '@core/profile/constants'
 
 import { IOnboardingProfile } from '../interfaces'
+import { sanitizeOnboardingProfile } from './sanitizeOnboardingProfile'
 
 export function convertOnboardingProfileToPersistedProfile(
     onboardingProfile: Partial<IOnboardingProfile>
 ): IPersistedProfile {
     return {
-        ...DEFAULT_ACTIVE_PROFILE_VALUE,
-        ...onboardingProfile,
+        ...DEFAULT_PERSISTED_PROFILE_OBJECT,
+        ...sanitizeOnboardingProfile(onboardingProfile),
     }
 }
