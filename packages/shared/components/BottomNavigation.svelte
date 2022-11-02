@@ -5,7 +5,7 @@
 
     export let locale: Locale
 
-    let navigation: HTMLElement
+    let height = 0
 
     const tabs: BottomNavigationType[] = [
         {
@@ -30,11 +30,11 @@
     }
 
     export function getHeight(): number {
-        return navigation.getBoundingClientRect().height
+        return height
     }
 </script>
 
-<div class="w-full bottom-0 z-10" bind:this={navigation}>
+<div class="w-full bottom-0 z-10" bind:clientHeight={height}>
     <div class="nav-wrapper flex flex-row justify-center pt-4 space-x-24 bg-white dark:bg-gray-900 shadow-elevation-4">
         {#each tabs as tab}
             <BottomNavigationTab {tab} />
