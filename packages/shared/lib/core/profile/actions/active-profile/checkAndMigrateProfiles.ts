@@ -1,5 +1,6 @@
 import { get } from 'svelte/store'
-import { migrateObjects } from '@core/utils'
+import { migrateObjects } from '@core/utils/object'
+
 import { DEFAULT_PERSISTED_PROFILE_OBJECT, PROFILE_VERSION } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'

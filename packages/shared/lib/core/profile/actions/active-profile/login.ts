@@ -123,6 +123,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             throw Error('No active profile error')
         }
     } catch (err) {
+        console.error(err)
         handleError(err)
         if (!loginOptions?.isFromOnboardingFlow) {
             await logout(false)
