@@ -1,5 +1,5 @@
 import { convertDateToUnixTimestamp } from '@core/utils'
-import type { OutputOptions } from '@iota/wallet'
+import type { OutputOptions, Assets } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'
@@ -12,7 +12,8 @@ export function getOutputOptions(
     tag?: string,
     asset?: IAsset,
     giftStorageDeposit?: boolean,
-    surplus?: string
+    surplus?: string,
+    nftId?: string
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
@@ -25,6 +26,19 @@ export function getOutputOptions(
         amount = nativeTokenId ? '0' : bigAmount.toString()
     }
 
+    const assets: Assets = {}
+    if (nativeTokenId) {
+        assets.nativeTokens = [
+            {
+                id: nativeTokenId,
+                amount: '0x' + bigAmount.toString(16),
+            },
+        ]
+    }
+    if (nftId) {
+        assets.nftId = nftId
+    }
+
     return <OutputOptions>{
         recipientAddress,
         amount,
@@ -35,16 +49,7 @@ export function getOutputOptions(
         unlocks: {
             ...(unixTime && { expirationUnixTime: unixTime }),
         },
-        ...(nativeTokenId && {
-            assets: {
-                nativeTokens: [
-                    {
-                        id: nativeTokenId,
-                        amount: '0x' + bigAmount.toString(16),
-                    },
-                ],
-            },
-        }),
+        ...((nativeTokenId || nftId) && { assets }),
         storageDeposit: {
             returnStrategy: giftStorageDeposit ? 'Gift' : 'Return',
         },

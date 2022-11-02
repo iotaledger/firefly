@@ -33,7 +33,6 @@
         DEFAULT_TRANSACTION_OPTIONS,
         newTransactionDetails,
         updateNewTransactionDetails,
-        buildNftOutputData,
         NewTokenTransactionDetails,
         NewNftTransactionDetails,
         NewTransactionType,
@@ -125,34 +124,19 @@
     }
 
     async function prepareNftOutput(transactionDetails: NewNftTransactionDetails): Promise<void> {
-        // This first building of the NFT output is required because we initially want to find out what the required storage deposit is
-        // and after that we can add the SDRUC with the correct amount
-        let outputData = buildNftOutputData(
+        outputOptions = getOutputOptions(
             expirationDate,
-            transactionDetails.nftId,
-            transactionDetails.immutableFeatures,
-            transactionDetails.metadata,
-            transactionDetails.tag,
             recipientAddress,
-            $selectedAccount.depositAddress,
             '0',
-            giftStorageDeposit
-        )
-        const tmpOutput = await $selectedAccount.buildNftOutput(outputData)
-        const storageDeposit = tmpOutput.amount
-
-        outputData = buildNftOutputData(
-            expirationDate,
-            transactionDetails.nftId,
-            transactionDetails.immutableFeatures,
             transactionDetails.metadata,
             transactionDetails.tag,
-            recipientAddress,
-            $selectedAccount.depositAddress,
-            storageDeposit,
-            giftStorageDeposit
+            undefined,
+            giftStorageDeposit,
+            transactionDetails.surplus,
+            transactionDetails.nftId
         )
-        preparedOutput = await $selectedAccount.buildNftOutput(outputData)
+
+        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
     }
 
     function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
@@ -226,30 +210,24 @@
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
             <TransactionDetails
-                asset={transactionDetails.asset}
+                {...transactionDetails}
                 {storageDeposit}
                 subject={recipient}
-                rawAmount={transactionDetails.rawAmount}
-                tag={transactionDetails.tag}
-                unit={transactionDetails.unit}
                 {isInternal}
                 {surplus}
                 type={ActivityType.Transaction}
-                metadata={transactionDetails.metadata}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
                 {formattedFiatValue}
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftDetails
-                nftId={transactionDetails.nftId}
+                {...transactionDetails}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
                 {storageDeposit}
                 subject={recipient}
-                tag={transactionDetails.tag}
-                metadata={transactionDetails.metadata}
-                isInternal
+                {isInternal}
                 type={ActivityType.Nft}
             />
         {/if}

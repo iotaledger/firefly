@@ -10,7 +10,6 @@
         NewTransactionType,
         selectedAccountActivities,
         setNewTransactionDetails,
-        Subject,
     } from '@core/wallet'
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
     import { DestinationNetwork } from '@core/network'
@@ -33,24 +32,17 @@
 
     let rawAmount: string
     let asset: IAsset
-    let metadata: string
-    let recipient: Subject
-    let tag: string
     let unit: string
 
     const transactionDetail = get(newTransactionDetails)
+    let { metadata, recipient, tag } = transactionDetail
+
     if (transactionDetail.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetail.rawAmount
         asset = transactionDetail.asset
         unit = transactionDetail.unit
-        metadata = transactionDetail.metadata
-        recipient = transactionDetail.recipient
-        tag = transactionDetail.tag
     } else {
         nftId = transactionDetail.nftId
-        metadata = transactionDetail.metadata
-        recipient = transactionDetail.recipient
-        tag = transactionDetail.tag
     }
 
     const tabs: SendForm[] = [SendForm.SendToken, SendForm.SendNft]
