@@ -4,6 +4,8 @@ import { appRouter, AppRouter } from './app-router'
 import { dashboardRouter, DashboardRouter } from './dashboard-router'
 import { onboardingRouter, OnboardingRouter } from './onboarding-router'
 import {
+    AccountSwitcherRouter,
+    accountSwitcherRouter,
     AppSetupRouter,
     appSetupRouter,
     LoginRouter,
@@ -56,7 +58,7 @@ function initialiseBaseDashboardRouters(): void {
 function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
     initialiseOnboardingSubrouters()
-    initialiseWalletSubrouters()
+    initialiseDashboardSubrouters()
 }
 
 function initialiseOnboardingSubrouters(): void {
@@ -69,7 +71,8 @@ function initialiseOnboardingSubrouters(): void {
     storageProtectionSetupRouter.set(new StorageProtectionSetupRouter())
 }
 
-function initialiseWalletSubrouters(): void {
+function initialiseDashboardSubrouters(): void {
+    accountSwitcherRouter.set(new AccountSwitcherRouter())
     sendRouter.set(new SendRouter())
 }
 
@@ -85,6 +88,11 @@ function resetBaseRouters(): void {
 }
 
 function resetSubrouters(): void {
+    resetOnboardingSubrouters()
+    resetDashboardSubrouters()
+}
+
+function resetOnboardingSubrouters(): void {
     get(appSetupRouter).reset()
     get(loginRouter).reset()
     get(networkSetupRouter).reset()
@@ -93,5 +101,9 @@ function resetSubrouters(): void {
     get(profileRecoveryRouter).reset()
     get(profileSetupRouter).reset()
     get(storageProtectionSetupRouter).reset()
+}
+
+function resetDashboardSubrouters(): void {
+    get(accountSwitcherRouter).reset()
     get(sendRouter).reset()
 }
