@@ -7,7 +7,15 @@
         selectedAccountActivities,
         updateNewNftTransactionDetails,
     } from '@core/wallet'
-    import { Button, Text, RecipientInput, NftInput, NftMediaSize, NftMediaView, FontWeight } from 'shared/components'
+    import {
+        Button,
+        Text,
+        RecipientInput,
+        NftInput,
+        NftMediaSize,
+        NftMediaContainer,
+        FontWeight,
+    } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import type { FeatureTypes } from '@iota/types'
 
@@ -51,8 +59,7 @@
     <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.sendNft.formTitle')}
     </Text>
-    <!-- TODO: add NFT to NftMediaView once selected in NftInput dropdown, or pull from store? -->
-    <NftMediaView size={NftMediaSize.medium} />
+    <NftMediaContainer {nftId} size={NftMediaSize.Medium} />
     <send-form-inputs class="flex flex-col space-y-4">
         <NftInput bind:nftId />
         <RecipientInput bind:this={recipientInput} bind:recipient />
