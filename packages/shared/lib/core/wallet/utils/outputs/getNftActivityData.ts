@@ -1,21 +1,20 @@
-import { IProcessedTransaction, INftActivityData, INftMetadata } from '../../interfaces'
+import { IProcessedTransaction, INftActivityData } from '../../interfaces'
 import {
     getNftOutputFromTransaction,
     getRecipientFromOutput,
     isSubjectInternal,
     getSenderFromTransaction,
-    convertHexAddressToBech32,
     getSubjectFromAddress,
     getSenderAddressFromInputs,
+    getMetadataFromNftOutput,
+    getNftId,
 } from '..'
 import { ActivityDirection, ActivityType } from '@core/wallet/enums'
-import { ADDRESS_TYPE_NFT, EMPTY_HEX_ID, OUTPUT_TYPE_NFT } from '@core/wallet/constants'
+import { OUTPUT_TYPE_NFT } from '@core/wallet/constants'
 import { IAccountState } from '@core/account'
-import type { IMetadataFeature, INftOutput } from '@iota/types'
-import { Converter } from '@core/utils'
+import type { INftOutput } from '@iota/types'
 import { getAsyncDataFromOutput } from './getAsyncDataFromOutput'
-import { MimeType } from '@core/wallet/types'
-import { Blake2b } from '@iota/crypto.js'
+import { getNftByIdFromAllAccountNfts } from '@core/nfts'
 
 export function getNftActivityData(
     processedTransaction: IProcessedTransaction,
@@ -26,9 +25,10 @@ export function getNftActivityData(
     const outputId = wrappedOutput.outputId
     const output = wrappedOutput.output as INftOutput
 
-    const nftId = getNftId(output, outputId)
+    const nftId = getNftId(output.nftId, outputId)
     const storageDeposit = Number(output.amount)
-    const metadata = getMetadataFromNft(output)
+    const nft = getNftByIdFromAllAccountNfts(account.index, nftId)
+    const metadata = nft?.metadata ?? getMetadataFromNftOutput(output)
 
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs
@@ -56,41 +56,4 @@ export function getNftActivityData(
         subject,
         ...asyncData,
     }
-}
-
-function getMetadataFromNft(output: INftOutput): INftMetadata {
-    const metadata = output.immutableFeatures?.find((feature) => feature.type === 2) as IMetadataFeature
-    if (!metadata) {
-        return undefined
-    }
-    const parsedData = JSON.parse(Converter.hexToUtf8(metadata.data))
-
-    // TODO: Add some validation that everything is correct
-    const parsedMetadata: INftMetadata = {
-        id: parsedData.id,
-        standard: parsedData.standard,
-        version: parsedData.version,
-        type: parsedData.type as MimeType,
-        uri: parsedData.uri,
-        name: parsedData.name,
-        collectionId: parsedData.collectionId,
-        collectionName: parsedData.collectionName,
-        royalties: parsedData.royalties,
-        issuerName: parsedData.issuerName,
-        description: parsedData.description,
-        attributes: parsedData.attributes?.map((attribute) => ({
-            trait_type: attribute.trait_type,
-            value: attribute.value,
-        })),
-    }
-
-    return parsedMetadata
-}
-
-function getNftId(output: INftOutput, outputId: string): string {
-    const isNewNft = output.nftId === EMPTY_HEX_ID
-    const nftId = isNewNft
-        ? '0x' + Converter.bytesToHex(Blake2b.sum256(Converter.hexToBytes(outputId.substring(2))))
-        : output.nftId
-    return convertHexAddressToBech32(ADDRESS_TYPE_NFT, nftId)
 }
