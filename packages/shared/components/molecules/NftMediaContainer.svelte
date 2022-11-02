@@ -7,7 +7,6 @@
     export let nftId: string
     export let shape: 'square' | 'circle' | 'squircle' = 'squircle'
     $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
-    // TODO: Change styling of view depending on size prop
 
     let width
     let height

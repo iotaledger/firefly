@@ -4,5 +4,3 @@ export interface INft {
     id: string
     standard: NftStandard | undefined
 }
-
-// delete ?
