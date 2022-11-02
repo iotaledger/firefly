@@ -1400,6 +1400,18 @@ export const findAccountWithAnyAddress = (
     }
 }
 
+export const findExternalAddress = (addresses: string[]): string => {
+    if (!addresses) {
+        return
+    }
+    const accounts = get(get(wallet).accounts)
+    const internalAddresses = accounts.flatMap((acc) => acc.addresses.map((addr) => addr.address))
+    const externalAddress = addresses.filter((add) => !internalAddresses.includes(add))
+    if (externalAddress.length > 0) {
+        return externalAddress[0]
+    }
+}
+
 /**
  * Get the sync options for an account
  * @param {boolean} isManualSync A boolean value indicating if a user (via the UI) invoked this function

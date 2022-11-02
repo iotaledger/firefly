@@ -9,6 +9,7 @@
     import {
         findAccountWithAddress,
         findAccountWithAnyAddress,
+        findExternalAddress,
         getIncomingFlag,
         getInternalFlag,
         getMilestoneMessageValue,
@@ -74,8 +75,9 @@
                 accountAlias = acc.alias
             } else {
                 // We can't find the address in our accounts so just display the abbreviated address
+                const receiverAddress = findExternalAddress(receiverAddresses)
                 accountAlias = truncateString(
-                    txPayload.data.essence.data.incoming ? receiverAddresses[0] : senderAddress,
+                    txPayload.data.essence.data.incoming ? senderAddress : receiverAddress,
                     4,
                     3
                 )
