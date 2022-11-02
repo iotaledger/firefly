@@ -63,8 +63,6 @@
         class="flex justify-center items-center transition-none p-{padding} bg-gray-500 w-{width} h-{height} rounded-{radius} "
     >
         {#if !isLoaded}
-            <!-- TODO: Add NFT to Placeholder parameters -->
-            <!-- TODO: Remove size prop and handle within this file -->
             <NftPlaceholderIcon {nft} />
         {:else}
             <div>

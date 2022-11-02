@@ -4,9 +4,9 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let nft: INft = undefined
-    export let width = '100%'
-    export let height = '100%'
-    // export let radius
+
+    const width = '100%'
+    const height = '100%'
 
     $: icon = mapNftToIcon(nft)
 
