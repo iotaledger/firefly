@@ -1,10 +1,9 @@
-import { get } from 'svelte/store'
-
 import { cleanupOnboarding } from '@contexts/onboarding'
 import { createNewAccount, IAccount, setSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
 import { pollLedgerNanoStatus } from '@core/ledger'
 import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
+import { loadNftsForActiveProfile } from '@core/nfts'
 import {
     buildProfileManagerOptionsFromProfileData,
     initialiseProfileManager,
@@ -16,7 +15,7 @@ import {
 import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
 import { loginRouter } from '@core/router'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
-
+import { get } from 'svelte/store'
 import { DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION, STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../../constants'
 import { ProfileType } from '../../enums'
 import { ILoginOptions } from '../../interfaces'
@@ -28,10 +27,8 @@ import {
     setTimeStrongholdLastUnlocked,
 } from '../../stores'
 import { isLedgerProfile } from '../../utils'
-
 import { loadAccounts } from './loadAccounts'
 import { logout } from './logout'
-
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
@@ -84,6 +81,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 5: load assets
             incrementLoginProgress()
             await refreshAccountAssetsForActiveProfile()
+            await loadNftsForActiveProfile()
 
             // Step 6: generate and store activities for all accounts
             incrementLoginProgress()

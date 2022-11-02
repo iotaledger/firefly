@@ -65,8 +65,7 @@ export function buildNftOutputData(
     }
 
     return <BuildNftOutputData>{
-        nftId: convertBech32ToHexAddress(nftId),
-        features,
+        nftId,
         immutableFeatures,
         unlockConditions,
     }

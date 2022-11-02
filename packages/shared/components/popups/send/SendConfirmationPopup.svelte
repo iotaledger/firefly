@@ -38,9 +38,9 @@
         NewNftTransactionDetails,
         NewTransactionType,
     } from '@core/wallet'
-    import { convertToFiat, currencies, exchangeRates, formatCurrency } from '@lib/currency'
+    import { formatCurrency } from '@core/i18n'
+    import { currencies, Currency, exchangeRates, miotaToFiat } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { CurrencyTypes } from '@lib/typings/currency'
     import { BaseError } from '@core/error'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { handleError } from '@core/error/handlers/handleError'
@@ -78,9 +78,9 @@
     $: formattedFiatValue =
         transactionDetails.type === NewTransactionType.TokenTransfer
             ? formatCurrency(
-                  convertToFiat(
+                  miotaToFiat(
                       Big(transactionDetails.rawAmount),
-                      $currencies[CurrencyTypes.USD],
+                      $currencies[Currency.USD],
                       $exchangeRates[$activeProfile?.settings?.currency]
                   )
               )

@@ -16,7 +16,6 @@
         Subject,
         InclusionState,
         ActivityDirection,
-        INftMetadata,
     } from '@core/wallet'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { BASE_TOKEN } from '@core/network'
@@ -27,7 +26,7 @@
     import { time } from '@core/app'
 
     export let nftId: string = ''
-    export let nftMetadata: INftMetadata = null
+    export let nftMetadata: string = null
     export let metadata: string = null
     export let tag: string = null
     export let asyncStatus: ActivityAsyncStatus = null
