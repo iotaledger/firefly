@@ -1,7 +1,7 @@
 <script lang="typescript">
     import features from '../../features/features'
     import { dashboardRoute, DashboardRoute, dashboardRouter, sendRouter } from '../../lib/routers'
-    import { AccountSwitcherDrawer, ReceiveDrawer, SendDrawer } from './drawers'
+    import { AccountSwitcherDrawer, ProfileActionsDrawer, ReceiveDrawer, SendDrawer } from './drawers'
 
     function onReceiveDrawerClose(): void {
         $dashboardRouter.previous()
@@ -9,6 +9,9 @@
     function onSendDrawerClose(): void {
         $dashboardRouter.previous()
         $sendRouter.reset()
+    }
+    function onProfileActionsDrawerClose(): void {
+        $dashboardRouter.previous()
     }
 </script>
 
@@ -18,4 +21,6 @@
     <SendDrawer onClose={onSendDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.AccountSwitcher && features?.dashboard?.accountSwitcher?.enabled}
     <AccountSwitcherDrawer onClose={() => $dashboardRouter.previous()} />
+{:else if $dashboardRoute === DashboardRoute.ProfileActions && features?.dashboard?.profileActions?.enabled}
+    <ProfileActionsDrawer onClose={onProfileActionsDrawerClose} />
 {/if}
