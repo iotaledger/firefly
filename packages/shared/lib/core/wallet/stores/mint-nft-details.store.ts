@@ -1,8 +1,7 @@
+import { IIrc27Metadata } from '@core/nfts'
 import { writable } from 'svelte/store'
-import { INftMetadata } from '../interfaces'
 
-export const mintNftDetails = writable<INftMetadata>({
-    id: undefined,
+export const mintNftDetails = writable<IIrc27Metadata>({
     standard: undefined,
     version: undefined,
     type: undefined,
@@ -16,13 +15,12 @@ export const mintNftDetails = writable<INftMetadata>({
     attributes: undefined,
 })
 
-export function setMintNftDetails(payload: INftMetadata): void {
+export function setMintNftDetails(payload: IIrc27Metadata): void {
     mintNftDetails.set(payload)
 }
 
 export function resetMintNftDetails(): void {
     mintNftDetails.set({
-        id: undefined,
         standard: undefined,
         version: undefined,
         type: undefined,

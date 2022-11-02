@@ -15,8 +15,7 @@
         getFiatAmount,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
-    import { currencies, exchangeRates } from '@lib/currency'
-    import { CurrencyTypes } from 'shared/lib/typings/currency'
+    import { currencies, exchangeRates } from '@core/utils'
     import { setClipboard } from '@core/utils'
     import { truncateString } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'

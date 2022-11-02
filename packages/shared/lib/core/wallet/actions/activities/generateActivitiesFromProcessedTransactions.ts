@@ -7,5 +7,14 @@ export function generateActivitiesFromProcessedTransactions(
     processedTransactions: IProcessedTransaction[],
     account: IAccountState
 ): Activity[] {
-    return processedTransactions.map((_preparedActivity) => generateActivity(_preparedActivity, account))
+    const activities: Activity[] = []
+    for (const _preparedActivity of processedTransactions) {
+        try {
+            const activity = generateActivity(_preparedActivity, account)
+            activities.push(activity)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    return activities
 }

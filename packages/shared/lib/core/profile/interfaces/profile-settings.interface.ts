@@ -1,7 +1,7 @@
-import { AvailableExchangeRates } from '@lib/typings/currency'
+import { ExchangeRate } from '@core/utils'
 
 export interface IProfileSettings {
-    currency: AvailableExchangeRates
+    currency: ExchangeRate
     lockScreenTimeoutInMinutes: number
     hideNetworkStatistics: boolean
 }

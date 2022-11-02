@@ -37,7 +37,6 @@
         const valid = validate()
         if (valid) {
             setMintNftDetails({
-                id: undefined,
                 standard: TokenStandard.IRC27,
                 version: undefined,
                 type,
