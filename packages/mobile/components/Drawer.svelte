@@ -8,30 +8,37 @@
     export let allowBack: boolean = false
     export let title: string | undefined = undefined
     export let fullScreen: boolean = false
+    export let enterFromSide: boolean = false
 
-    let panelBottom = 0
+    let position = 0
     let moving = false
-    let panelHeight
-    let touchStartY
+    let panelHeight = 0
+    let panelWidth = 0
+    let touchStart = 0
+
+    const directon = enterFromSide ? { x: -100 } : { y: 100 }
 
     function onTouchStart(event): void {
         moving = true
-        touchStartY = event.touches[0].pageY
+        const [touch] = event.touches
+        touchStart = enterFromSide ? -touch.pageX : touch.pageY
     }
 
     function onTouchMove(event): void {
         if (moving && event.targetTouches.length === 1) {
-            const touchY = event.touches[0].pageY
-            panelBottom = Math.min(touchStartY - touchY, 0)
+            const [touch] = event.touches
+            const nextTouch = enterFromSide ? -touch.pageX : touch.pageY
+            position = Math.min(touchStart - nextTouch, 0)
         }
     }
 
     function onTouchEnd(): void {
         moving = false
-        if (panelBottom < -panelHeight / 3) {
+        const panelSize = enterFromSide ? panelWidth : panelHeight
+        if (position < -panelSize / 3) {
             onClose()
         } else {
-            panelBottom = 0
+            position = 0
         }
     }
 </script>
@@ -46,18 +53,21 @@
     />
     <panel
         on:touchstart={onTouchStart}
-        in:fly={{ y: 100, duration: 300 }}
-        out:fly={{ y: 100, duration: 200 }}
+        in:fly={{ ...directon, duration: 300 }}
+        out:fly={{ ...directon, duration: 200 }}
         bind:clientHeight={panelHeight}
+        bind:clientWidth={panelWidth}
         class:moving
         class="py-6 px-5 fixed w-full flex flex-col flex-auto {fullScreen
             ? 'h-screen'
-            : ''} z-10 bg-white dark:bg-gray-800 rounded-t-2xl"
-        style="bottom: {panelBottom}px;"
+            : ''} z-10 bg-white dark:bg-gray-800 {enterFromSide ? '' : 'rounded-t-2xl'}"
+        style={enterFromSide ? `left: ${position}px;` : `bottom: ${position}px;`}
     >
-        <decorator
-            class="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gray-300 dark:bg-gray-700 rounded"
-        />
+        {#if enterFromSide === false}
+            <decorator
+                class="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gray-300 dark:bg-gray-700 rounded"
+            />
+        {/if}
         {#if title || (allowBack && onBackClick)}
             <div class="grid grid-cols-4 h-6 mb-6">
                 <div class="col-span-1">
