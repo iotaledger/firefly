@@ -1,40 +1,41 @@
 <script lang="typescript">
+    import { onDestroy, onMount } from 'svelte'
     import { localeDirection, setupI18n, _ } from '@core/i18n'
     import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
     import {
         AppRoute,
         appRoute,
         appRouter,
-        initialiseRouters,
-        initialiseOnboardingRouters,
         DashboardRoute,
         dashboardRouter,
+        initialiseOnboardingRouters,
+        initialiseRouters,
         OnboardingRoute,
         onboardingRoute,
     } from './lib/routers'
-    import { openSettings } from '@core/router'
-    import { Route } from '@components'
-    import { ToastContainer } from '@ui'
     import {
-        AppTheme,
         appSettings,
         appStage,
         AppStage,
+        AppTheme,
         appVersionDetails,
         initAppSettings,
-        shouldBeDarkMode,
         setPlatform,
+        shouldBeDarkMode,
     } from '@core/app'
     import { Electron } from '@lib/electron'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { DashboardView, LoginRouter, OnboardingRouter } from '@views'
-    import { onDestroy, onMount } from 'svelte'
-    import { get } from 'svelte/store'
-    import { onboardingProfile, initialiseOnboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { Platform } from '@lib/platform'
+    import { initialiseOnboardingProfile, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { openSettings } from '@core/router'
+    import { ToastContainer } from '@ui'
+    import { get } from 'svelte/store'
+    import { Route } from './components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
+    import { DashboardView, LoginRouter, OnboardingRouter } from './views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
