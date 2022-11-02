@@ -1,7 +1,6 @@
 import { Capacitor } from '@capacitor/core'
 
 import { SplashScreen } from '@capacitor/splash-screen'
-import { BarcodeManager } from './lib/barcodeManager'
 import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
@@ -37,8 +36,6 @@ export const CapacitorApi: IPlatform = {
     DeepLinkManager: DeepLinkManager,
 
     NotificationManager: NotificationManager,
-
-    BarcodeManager: BarcodeManager,
 
     getStrongholdBackupDestination: () => new Promise<string>(() => {}),
 

@@ -1,6 +1,6 @@
 <script lang="typescript">
-    import { Icon } from 'shared/components'
-    import { showCameraScanner, stopQRScanner } from 'shared/lib/device'
+    import { Icon } from '@components'
+    import { showCameraScanner, stopQrScanner } from '@auxiliary/scanner'
 </script>
 
 {#if $showCameraScanner}
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <button on:click={stopQRScanner} class="absolute top-6 right-8 text-white">
+        <button on:click={stopQrScanner} class="absolute top-6 right-8 text-white">
             <Icon icon="close" />
         </button>
     </div>
