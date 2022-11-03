@@ -20,14 +20,14 @@
 
     function onTouchStart(event): void {
         moving = true
-        const [touch] = event.touches
-        touchStart = enterFromSide ? -touch.pageX : touch.pageY
+        const { pageX, pageY } = event.touches[0]
+        touchStart = enterFromSide ? -pageX : pageY
     }
 
     function onTouchMove(event): void {
         if (moving && event.targetTouches.length === 1) {
-            const [touch] = event.touches
-            const nextTouch = enterFromSide ? -touch.pageX : touch.pageY
+            const { pageX, pageY } = event.touches[0]
+            const nextTouch = enterFromSide ? -pageX : pageY
             position = Math.min(touchStart - nextTouch, 0)
         }
     }
