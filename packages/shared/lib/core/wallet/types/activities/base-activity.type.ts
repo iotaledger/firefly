@@ -17,6 +17,8 @@ export type BaseActivity = {
     storageDeposit: number
     giftedStorageDeposit: number
     subject: Subject
+    metadata: string
+    tag: string
     isSelfTransaction: boolean
     asyncData: AsyncData
 }

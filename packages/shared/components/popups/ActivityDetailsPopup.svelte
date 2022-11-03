@@ -50,6 +50,16 @@
         const details = {
             transactionTime: activity.time,
             inclusionState: activity.inclusionState,
+            tag: activity.tag,
+            metadata: activity.metadata,
+            asyncStatus: activity.asyncData?.asyncStatus,
+            claimedDate: activity.asyncData?.claimedDate,
+            claimingTransactionId: activity.asyncData?.claimingTransactionId,
+            expirationDate:
+                activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
+                    ? activity.asyncData?.expirationDate
+                    : null,
+            timelockDate: activity.asyncData?.timelockDate,
         }
         if (activity.type === ActivityType.Transaction) {
             return {
@@ -60,19 +70,9 @@
                 rawAmount: activity.rawAmount,
                 unit: asset?.metadata?.unit,
                 giftedStorageDeposit: activity.giftedStorageDeposit,
-                asyncStatus: activity.asyncData?.asyncStatus,
                 direction: activity.direction,
                 isInternal: activity.isInternal,
-                claimedDate: activity.asyncData?.claimedDate,
-                claimingTransactionId: activity.asyncData?.claimingTransactionId,
-                expirationDate:
-                    activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
-                        ? activity.asyncData?.expirationDate
-                        : null,
-                timelockDate: activity.asyncData?.timelockDate,
                 subject: activity?.subject,
-                tag: activity?.tag,
-                metadata: activity?.metadata,
                 formattedFiatValue: getFiatAmount(
                     activity,
                     $currencies[Currency.USD],
@@ -106,19 +106,9 @@
                 ...details,
                 type: activity.type,
                 storageDeposit: activity.storageDeposit,
-                metadata: activity.metadata,
-                tag: activity.tag,
                 nftMetadata: activity.nftMetadata,
-                asyncStatus: activity.asyncData?.asyncStatus,
                 direction: activity.direction,
                 isInternal: activity.isInternal,
-                claimedDate: activity.asyncData?.claimedDate,
-                claimingTransactionId: activity.asyncData?.claimingTransactionId,
-                expirationDate:
-                    activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
-                        ? activity.asyncData?.expirationDate
-                        : null,
-                timelockDate: activity.asyncData?.timelockDate,
                 subject: activity?.subject,
             }
         }
