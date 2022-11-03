@@ -15,10 +15,10 @@
     import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings, setPlatform } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, popupState } from '@auxiliary/popup'
-    import { getLocalisedMenuItems } from './lib/helpers'
-    import { Electron } from './electron/lib/electron'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { Electron } from './lib/electron'
+    import { getLocalisedMenuItems } from './lib/helpers'
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
 
