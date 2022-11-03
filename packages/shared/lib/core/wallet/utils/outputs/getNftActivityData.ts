@@ -6,6 +6,8 @@ import {
     getSenderFromTransaction,
     getSubjectFromAddress,
     getSenderAddressFromInputs,
+    getTagFromOutput,
+    getMetadataFromOutput,
     getMetadataFromNftOutput,
     getNftId,
 } from '..'
@@ -28,7 +30,7 @@ export function getNftActivityData(
     const nftId = getNftId(output.nftId, outputId)
     const storageDeposit = Number(output.amount)
     const nft = getNftByIdFromAllAccountNfts(account.index, nftId)
-    const metadata = nft?.metadata ?? getMetadataFromNftOutput(output)
+    const nftMetadata = nft?.metadata ?? getMetadataFromNftOutput(output)
 
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs
@@ -40,6 +42,8 @@ export function getNftActivityData(
 
     const direction = isIncoming ? ActivityDirection.Incoming : ActivityDirection.Outgoing
 
+    const metadata = getMetadataFromOutput(output)
+    const tag = getTagFromOutput(output)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
     return {
@@ -50,7 +54,9 @@ export function getNftActivityData(
         immutableFeatures: output.type === OUTPUT_TYPE_NFT ? output.immutableFeatures : [],
         isInternal,
         storageDeposit,
+        nftMetadata,
         metadata,
+        tag,
         sender,
         recipient,
         subject,
