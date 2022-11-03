@@ -3,7 +3,7 @@ import { OutputTypes } from '@iota/types'
 import { activeProfile, ProfileType } from '@core/profile'
 import { get } from 'svelte/store'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
-import { addActivityToAccountActivitiesInAllAccountActivities, resetNewTransactionDetails } from '../stores'
+import { addActivityToAccountActivitiesInAllAccountActivities, resetNewTokenTransactionDetails } from '../stores'
 import { handleLedgerError } from '@core/ledger'
 import { generateActivity, preprocessTransaction } from '../utils'
 
@@ -13,7 +13,7 @@ export async function sendOutput(output: OutputTypes): Promise<void> {
         const account = get(selectedAccount)
         const transaction = await account.sendOutputs([output], DEFAULT_TRANSACTION_OPTIONS)
         // Reset transaction details state, since the transaction has been sent
-        resetNewTransactionDetails()
+        resetNewTokenTransactionDetails()
         const processedTransaction = preprocessTransaction(transaction)
         addActivityToAccountActivitiesInAllAccountActivities(
             account.index,
