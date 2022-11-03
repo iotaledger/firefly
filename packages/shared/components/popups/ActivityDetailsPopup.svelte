@@ -54,6 +54,7 @@
             inclusionState: activity.inclusionState,
             tag: activity.tag,
             metadata: activity.metadata,
+            direction: activity.direction,
             asyncStatus: activity.asyncData?.asyncStatus,
             claimedDate: activity.asyncData?.claimedDate,
             claimingTransactionId: activity.asyncData?.claimingTransactionId,
@@ -72,9 +73,7 @@
                 rawAmount: activity.rawAmount,
                 unit: asset?.metadata?.unit,
                 giftedStorageDeposit: activity.giftedStorageDeposit,
-                direction: activity.direction,
                 isInternal: activity.isInternal,
-                subject: activity?.subject,
                 formattedFiatValue: getFiatAmount(
                     activity,
                     $currencies[Currency.USD],
@@ -107,11 +106,9 @@
             return {
                 ...details,
                 type: activity.type,
+                nftId: activity.nftId,
                 storageDeposit: activity.storageDeposit,
-                nftMetadata: activity.nftMetadata,
-                direction: activity.direction,
                 isInternal: activity.isInternal,
-                subject: activity?.subject,
             }
         }
     }
