@@ -3,7 +3,6 @@ import { IError } from '@core/error'
 import { IDeepLinkManager } from '@auxiliary/deep-link'
 import { INotificationManager } from '@auxiliary/notification'
 
-import { IBarcodeManager } from './barcodeManager'
 import { EventMap } from './events'
 import { IPincodeManager } from './pincodeManager'
 
@@ -38,7 +37,6 @@ export interface IPlatform {
     NotificationManager: INotificationManager | undefined
     DeepLinkManager: IDeepLinkManager | undefined
     PincodeManager: IPincodeManager | undefined
-    BarcodeManager: IBarcodeManager | undefined
 
     getAppVersionDetails(): Promise<IAppVersionDetails>
 
