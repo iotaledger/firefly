@@ -23,11 +23,7 @@ export async function handleSpentOutputEventInternal(
     const outputId = payload?.output?.outputId
     const activity = get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity.outputId === outputId)
 
-    if (
-        activity &&
-        activity.type === ActivityType.Transaction &&
-        activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
-    ) {
+    if (activity && activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed) {
         const transactionId = payload?.output?.metadata?.transactionId
         updateAsyncDataByTransactionId(accountIndex, transactionId, {
             isClaimed: true,

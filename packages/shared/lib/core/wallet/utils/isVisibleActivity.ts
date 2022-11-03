@@ -95,7 +95,10 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 }
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (filter.amount.active && activity.type !== ActivityType.Alias && activity.type !== ActivityType.Nft) {
+    if (
+        filter.amount.active &&
+        (activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry)
+    ) {
         const asset = getAssetFromPersistedAssets(activity.assetId)
         const activityAmount = Big(activity.rawAmount)
 
@@ -270,25 +273,13 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
 
 function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.type.active && filter.type.selected) {
-        if (
-            filter.type.selected === TypeFilterOption.Incoming &&
-            activity.type === ActivityType.Transaction &&
-            activity.direction !== ActivityDirection.Incoming
-        ) {
+        if (filter.type.selected === TypeFilterOption.Incoming && activity.direction !== ActivityDirection.Incoming) {
             return false
         }
-        if (
-            filter.type.selected === TypeFilterOption.Outgoing &&
-            activity.type === ActivityType.Transaction &&
-            activity.direction !== ActivityDirection.Outgoing
-        ) {
+        if (filter.type.selected === TypeFilterOption.Outgoing && activity.direction !== ActivityDirection.Outgoing) {
             return false
         }
-        if (
-            filter.type.selected === TypeFilterOption.Internal &&
-            activity.type === ActivityType.Transaction &&
-            !activity.isInternal
-        ) {
+        if (filter.type.selected === TypeFilterOption.Internal && !activity.isInternal) {
             return false
         }
     }

@@ -1,4 +1,4 @@
-export enum AliasType {
+export enum AliasSubtype {
     Created = 'Created',
     Other = 'Other',
 }

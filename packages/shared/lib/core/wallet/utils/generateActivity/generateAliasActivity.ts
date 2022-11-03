@@ -1,6 +1,6 @@
 import { IProcessedTransaction } from '../../interfaces'
 import { convertHexAddressToBech32, outputContainsValue, hashOutputId } from '..'
-import { ActivityType, AliasType } from '@core/wallet/enums'
+import { ActivityType, AliasSubtype } from '@core/wallet/enums'
 import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { IAliasOutput } from '@iota/types'
 import { AliasActivity } from '@core/wallet/types'
@@ -8,9 +8,11 @@ import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
     getGovernorAddressFromOutput,
+    getMetadataFromOutput,
     getSendingInformation,
     getStateControllerAddressFromOutput,
     getStorageDepositFromOutput,
+    getTagFromOutput,
 } from './helper'
 import { IAccountState } from '@core/account'
 
@@ -23,13 +25,14 @@ export function generateAliasActivity(
 
     const output = wrappedOutput.output as IAliasOutput
     const outputId = wrappedOutput.outputId
+    const id = outputId || transactionId
 
     const { storageDeposit: _storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
     const governorAddress = getGovernorAddressFromOutput(output)
     const stateControllerAddress = getStateControllerAddressFromOutput(output)
     const aliasId = getAliasId(output, outputId)
-    const aliasType = output.aliasId === EMPTY_HEX_ID ? AliasType.Created : AliasType.Other
+    const aliasSubtype = output.aliasId === EMPTY_HEX_ID ? AliasSubtype.Created : AliasSubtype.Other
 
     const isHidden = false
     const isAssetHidden = false
@@ -37,8 +40,8 @@ export function generateAliasActivity(
 
     const inputs = transactionInputs
 
-    const id = outputId || transactionId
-
+    const metadata = getMetadataFromOutput(output)
+    const tag = getTagFromOutput(output)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
 
@@ -48,7 +51,7 @@ export function generateAliasActivity(
         outputId,
         transactionId,
         aliasId,
-        aliasType,
+        aliasSubtype,
         storageDeposit,
         giftedStorageDeposit,
         governorAddress,
@@ -57,6 +60,8 @@ export function generateAliasActivity(
         isAssetHidden,
         inputs,
         time,
+        metadata,
+        tag,
         inclusionState,
         containsValue,
         asyncData,

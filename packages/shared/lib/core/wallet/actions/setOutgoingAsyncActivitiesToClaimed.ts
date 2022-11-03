@@ -3,7 +3,7 @@ import { IBasicOutput } from '@iota/types'
 import { OutputData } from '@iota/wallet'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { get } from 'svelte/store'
-import { ActivityDirection, ActivityType } from '../enums'
+import { ActivityDirection } from '../enums'
 import { allAccountActivities, updateAsyncDataByActivityId } from '../stores'
 import { getExpirationDateFromOutput } from '../utils'
 
@@ -16,17 +16,13 @@ export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState
 
     for (const activity of activities) {
         try {
-            if (activity.type === ActivityType.Transaction) {
-                const detailedOutput = await account.getOutput(activity.outputId)
-                const isClaimed = detailedOutput && isOutputClaimed(detailedOutput)
-                if (isClaimed) {
-                    updateAsyncDataByActivityId(account.index, activity.id, {
-                        isClaimed: true,
-                        claimedDate: new Date(
-                            detailedOutput.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND
-                        ),
-                    })
-                }
+            const detailedOutput = await account.getOutput(activity.outputId)
+            const isClaimed = detailedOutput && isOutputClaimed(detailedOutput)
+            if (isClaimed) {
+                updateAsyncDataByActivityId(account.index, activity.id, {
+                    isClaimed: true,
+                    claimedDate: new Date(detailedOutput.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND),
+                })
             }
         } catch (err) {
             console.error(err)

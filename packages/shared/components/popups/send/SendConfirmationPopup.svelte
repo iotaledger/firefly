@@ -12,8 +12,8 @@
         Toggle,
         FontWeight,
         TextType,
-        NftDetails,
-        TransactionDetails,
+        NftActivityDetails,
+        BasicActivityDetails,
     } from 'shared/components'
     import type { IBasicOutput } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
@@ -188,7 +188,7 @@
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <TransactionDetails
+            <BasicActivityDetails
                 {...transactionDetails}
                 {storageDeposit}
                 subject={recipient}
@@ -200,7 +200,7 @@
                 {formattedFiatValue}
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
-            <NftDetails
+            <NftActivityDetails
                 {...transactionDetails}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}

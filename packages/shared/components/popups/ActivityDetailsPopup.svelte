@@ -3,7 +3,12 @@
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from 'shared/lib/platform'
-    import { TransactionDetails, AliasDetails, FoundryDetails, NftDetails } from 'shared/components/molecules'
+    import {
+        BasicActivityDetails,
+        AliasActivityDetails,
+        FoundryActivityDetails,
+        NftActivityDetails,
+    } from 'shared/components/molecules'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -31,13 +36,10 @@
         activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry
             ? getAssetFromPersistedAssets(activity.assetId)
             : undefined
-    $: isTimelocked =
-        activity.type === ActivityType.Transaction && activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
+    $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
-        (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) &&
         activity.asyncData &&
-        (activity?.direction === ActivityDirection.Incoming ||
-            (activity.type === ActivityType.Transaction && activity.isSelfTransaction)) &&
+        (activity?.direction === ActivityDirection.Incoming || activity.isSelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     let details: Record<string, unknown>
@@ -123,13 +125,11 @@
     }
 
     async function claim(): Promise<void> {
-        if (activity.type === ActivityType.Transaction) {
-            await claimActivity(activity)
-            openPopup({
-                type: 'activityDetails',
-                props: { activityId },
-            })
-        }
+        await claimActivity(activity)
+        openPopup({
+            type: 'activityDetails',
+            props: { activityId },
+        })
     }
 
     async function onClaimClick(): Promise<void> {
@@ -190,15 +190,15 @@
         {/if}
     </div>
     {#if activity?.type === ActivityType.Transaction}
-        <TransactionDetails {...details} />
+        <BasicActivityDetails {...details} />
     {:else if activity?.type === ActivityType.Foundry}
-        <FoundryDetails {...details} />
+        <FoundryActivityDetails {...details} />
     {:else if activity?.type === ActivityType.Alias}
-        <AliasDetails {...details} />
+        <AliasActivityDetails {...details} />
     {:else if activity?.type === ActivityType.Nft}
-        <NftDetails {...details} />
+        <NftActivityDetails {...details} />
     {/if}
-    {#if !isTimelocked && (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) && isActivityIncomingAndUnclaimed}
+    {#if !isTimelocked && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
             <Button
                 outline

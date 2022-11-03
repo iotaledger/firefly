@@ -58,7 +58,7 @@ classDiagram
     class Alias Activity {
         - type: ActivityType.Alias
         - aliasId: string
-        - aliasType: AliasType
+        - aliasSubype: AliasSubtype
         - governorAddress: string
         - stateControllerAddress: string
     }

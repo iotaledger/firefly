@@ -5,7 +5,7 @@ import { selectedAccount } from '../../account/stores/selected-account.store'
 import { Activity } from '../types/activity.type'
 import {
     ActivityType,
-    AliasType,
+    AliasSubtype,
     BooleanFilterOption,
     DateFilterOption,
     NumberFilterOption,
@@ -105,18 +105,19 @@ export const queriedActivities: Readable<Activity[]> = derived(
     [selectedAccountActivities, activitySearchTerm, activityFilter],
     ([$selectedAccountActivities, $activitySearchTerm]) => {
         let activityList = $selectedAccountActivities.filter((_activity) => {
+            if (
+                !_activity.isHidden &&
+                (_activity.type === ActivityType.Nft ||
+                    (_activity.type === ActivityType.Alias && _activity.aliasSubtype === AliasSubtype.Created))
+            ) {
+                return true
+            }
+
             const asset =
                 (_activity.type === ActivityType.Transaction || _activity.type === ActivityType.Foundry) &&
                 getAssetFromPersistedAssets(_activity.assetId)
-            const hasValidAsset =
-                _activity.type === ActivityType.Nft ||
-                _activity.type === ActivityType.Alias ||
-                (asset && isValidIrc30(asset.metadata))
-            return (
-                !_activity.isHidden &&
-                hasValidAsset &&
-                (_activity.type !== ActivityType.Alias || _activity.aliasType === AliasType.Created)
-            )
+            const hasValidAsset = asset && isValidIrc30(asset.metadata)
+            return !_activity.isHidden && hasValidAsset
         })
 
         activityList = activityList.filter((activity) => isVisibleActivity(activity))
@@ -146,33 +147,31 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(getAssetFromPersistedAssets(activity.assetId)?.metadata?.name)
     }
 
-    if (activity.type !== ActivityType.Alias && activity.type !== ActivityType.Nft && activity.rawAmount) {
+    if ((activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) && activity.rawAmount) {
         fieldsToSearch.push(activity.rawAmount?.toString())
         fieldsToSearch.push(getFormattedAmountFromActivity(activity, false)?.toLowerCase())
     }
 
-    if (activity.type === ActivityType.Transaction) {
-        if (activity.subject?.type === 'account') {
-            fieldsToSearch.push(activity.subject?.account?.name)
-        } else if (activity.subject?.type === 'address') {
-            fieldsToSearch.push(activity.subject?.address)
-        }
+    if (activity.subject?.type === 'account') {
+        fieldsToSearch.push(activity.subject?.account?.name)
+    } else if (activity.subject?.type === 'address') {
+        fieldsToSearch.push(activity.subject?.address)
+    }
 
-        if (activity.asyncData.claimingTransactionId) {
-            fieldsToSearch.push(activity.asyncData.claimingTransactionId)
-        }
+    if (activity.asyncData.claimingTransactionId) {
+        fieldsToSearch.push(activity.asyncData.claimingTransactionId)
+    }
 
-        if (activity.metadata) {
-            fieldsToSearch.push(activity.metadata)
-        }
+    if (activity.metadata) {
+        fieldsToSearch.push(activity.metadata)
+    }
 
-        if (activity.tag) {
-            fieldsToSearch.push(activity.tag)
-        }
+    if (activity.tag) {
+        fieldsToSearch.push(activity.tag)
+    }
 
-        if (activity.outputId) {
-            fieldsToSearch.push(activity.outputId)
-        }
+    if (activity.outputId) {
+        fieldsToSearch.push(activity.outputId)
     }
 
     return fieldsToSearch

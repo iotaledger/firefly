@@ -8,8 +8,10 @@ import { FoundryActivity } from '@core/wallet/types'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
+    getMetadataFromOutput,
     getSendingInformation,
     getStorageDepositFromOutput,
+    getTagFromOutput,
 } from './helper'
 import { IAccountState } from '@core/account'
 import { IFoundryOutput } from '@iota/types'
@@ -36,6 +38,8 @@ export function generateFoundryActivity(
 
     const { storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output) // probably we need to sum up all storage deposits
     const rawAmount = nativeToken ? Number(nativeToken?.amount) : getAmountFromOutput(output) - storageDeposit
+    const metadata = getMetadataFromOutput(output)
+    const tag = getTagFromOutput(output)
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
@@ -55,6 +59,8 @@ export function generateFoundryActivity(
         containsValue,
         isAssetHidden,
         isHidden,
+        metadata,
+        tag,
         asyncData,
         ...sendingInfo,
     }
