@@ -21,7 +21,7 @@ if (SENTRY_MAIN_PROCESS || PRELOAD_SCRIPT) {
         console.error(error)
     }
 } else {
-    const { Electron } = require('shared/lib/electron')
+    const { Electron } = require('./electron/lib/electron')
     Electron.getMachineId().then((id) => {
         machineId = id
     })

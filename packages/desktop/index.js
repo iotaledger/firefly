@@ -1,7 +1,6 @@
 import App from './App.svelte'
+import { Electron } from './electron/lib/electron'
 import { shouldReportError } from './electron/lib/errorHandling'
-
-const Electron = window['__ELECTRON__']
 
 const captureException = require('./sentry')(false).captureException || function (..._) {}
 
