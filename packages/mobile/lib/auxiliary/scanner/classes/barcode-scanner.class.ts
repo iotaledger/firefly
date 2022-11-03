@@ -81,7 +81,7 @@ export class BarcodeScanner {
     }
 
     public static async prepare(): Promise<void> {
-        await BarcodeScanner.prepare()
+        await _BarcodeScanner.prepare()
     }
 
     public static async start(onSuccess: (response: string) => void, onError: () => void): Promise<void> {
