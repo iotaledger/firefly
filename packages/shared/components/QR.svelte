@@ -9,7 +9,6 @@
     let qr
     let cells
 
-    $: darkModeEnabled = $appSettings.darkMode
     $: data, create()
 
     function create() {
@@ -32,7 +31,7 @@
                     <rect
                         height={1}
                         key={cellIndex}
-                        style="fill: {cell ? (darkModeEnabled ? '#ffffff' : '#000000') : 'none'};"
+                        style="fill: {cell ? '#000000' : 'none'};"
                         width={1}
                         x={cellIndex}
                         y={rowIndex}
