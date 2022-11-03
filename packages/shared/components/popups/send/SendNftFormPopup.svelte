@@ -7,7 +7,15 @@
         selectedAccountActivities,
         updateNewNftTransactionDetails,
     } from '@core/wallet'
-    import { Button, Text, RecipientInput, NftInput, FontWeight } from 'shared/components'
+    import {
+        Button,
+        Text,
+        RecipientInput,
+        NftInput,
+        NftMediaSize,
+        NftMediaContainer,
+        FontWeight,
+    } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import type { FeatureTypes } from '@iota/types'
 
@@ -51,6 +59,7 @@
     <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.sendNft.formTitle')}
     </Text>
+    <NftMediaContainer {nftId} size={NftMediaSize.Medium} />
     <send-form-inputs class="flex flex-col space-y-4">
         <NftInput bind:nftId />
         <RecipientInput bind:this={recipientInput} bind:recipient />
