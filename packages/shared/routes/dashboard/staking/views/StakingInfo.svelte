@@ -20,7 +20,12 @@
     import { getBestTimeDuration } from 'shared/lib/time'
     import { selectedAccountIdStore } from '@lib/wallet'
     import { Token } from '@lib/typings/assets'
-    import { ASSEMBLY_EVENT_ID, ASSEMBLY_EVENT_START_DATE, SHIMMER_EVENT_ID } from '@lib/participation'
+    import {
+        ASSEMBLY_EVENT_ID,
+        ASSEMBLY_EVENT_START_DATE,
+        ASSEMBLY_STAKING_BLOG_POST_URL,
+        SHIMMER_EVENT_ID,
+    } from '@lib/participation'
     import { getStakingEventFromAirdrop } from '@lib/participation/staking'
     import { StakingAirdrop } from '@lib/participation/types'
 
@@ -150,7 +155,7 @@
     }
 
     function onClickLearnMore(): void {
-        Platform.openUrl('https://blog.iota.org/iota-staking-for-assembly-part-3/')
+        Platform.openUrl(ASSEMBLY_STAKING_BLOG_POST_URL)
     }
 </script>
 
