@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { resetNewTransactionDetails } from '@core/wallet'
+    import { resetNewTokenTransactionDetails } from '@core/wallet'
     import { Drawer } from '../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
     import SendRouter from './SendRouter.svelte'
@@ -16,7 +16,7 @@
     function onDrawerClose(): void {
         onClose && onClose()
         $sendRouter.reset()
-        resetNewTransactionDetails()
+        resetNewTokenTransactionDetails()
     }
     function setTitle(): void {
         switch ($sendRoute) {
