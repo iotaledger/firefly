@@ -76,7 +76,7 @@ const parseSendOperation = (
     if (!address) {
         return addError({ time: Date.now(), type: 'deepLink', message: 'No address specified in the url path' })
     }
-    if (isValidAddressAndPrefix(address, expectedAddressPrefix)) {
+    if (!isValidAddressAndPrefix(address, expectedAddressPrefix)) {
         return addError({
             time: Date.now(),
             type: 'deepLink',
@@ -140,13 +140,5 @@ const parseSendOperation = (
         message: '',
         tag,
         metadata,
-    }
-}
-
-const isValidAddress = (address: string, expectedAddressPrefix: string): boolean => {
-    if (address && isValidAddressAndPrefix(address, expectedAddressPrefix)) {
-        return true
-    } else {
-        return false
     }
 }
