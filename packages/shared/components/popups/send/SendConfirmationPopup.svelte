@@ -46,7 +46,7 @@
     export let disableBack = false
     export let tokenSend = false
 
-    let { subject, expirationDate, giftStorageDeposit, surplus, disableChangeExpiration, disableToggleGift } =
+    let { recipient, expirationDate, giftStorageDeposit, surplus, disableChangeExpiration, disableToggleGift } =
         get(newTransactionDetails)
 
     let storageDeposit = 0
@@ -58,8 +58,8 @@
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
     $: transactionDetails = get(newTransactionDetails)
-    $: recipientAddress = subject.type === 'account' ? subject.account.depositAddress : subject.address
-    $: isInternal = subject.type === 'account'
+    $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
+    $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
         transactionDetails.type === NewTransactionType.TokenTransfer &&
@@ -188,6 +188,7 @@
             <TransactionDetails
                 {...transactionDetails}
                 {storageDeposit}
+                subject={recipient}
                 {isInternal}
                 {surplus}
                 type={ActivityType.Transaction}
@@ -201,6 +202,7 @@
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
                 {storageDeposit}
+                subject={recipient}
                 {isInternal}
                 type={ActivityType.Nft}
             />

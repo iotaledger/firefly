@@ -10,10 +10,9 @@ export function deconstructLedgerVerificationProps(): PopupProps {
 
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
     const toAddress =
-        transactionDetails?.subject?.type === 'address'
-            ? transactionDetails?.subject?.address
-            : transactionDetails?.subject?.account?.depositAddress
-
+        transactionDetails?.recipient?.type === 'address'
+            ? transactionDetails?.recipient?.address
+            : transactionDetails?.recipient?.account?.depositAddress
     let toAmount = '0'
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         toAmount = `${formatTokenAmountDefault(

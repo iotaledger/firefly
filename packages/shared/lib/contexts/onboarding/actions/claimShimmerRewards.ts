@@ -79,7 +79,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
             },
             rawAmount: rawAmount.toString(),
             unit: '',
-            subject: {
+            recipient: {
                 type: 'address',
                 address: recipientAddress,
             },

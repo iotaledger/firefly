@@ -11,7 +11,7 @@ export const newTransactionDetails: Writable<NewTransactionDetails> = writable({
     rawAmount: undefined,
     asset: undefined,
     metadata: undefined,
-    subject: undefined,
+    recipient: undefined,
     tag: undefined,
     unit: undefined,
 })
@@ -22,7 +22,7 @@ export function resetNewTokenTransactionDetails(): void {
         rawAmount: undefined,
         asset: undefined,
         metadata: undefined,
-        subject: undefined,
+        recipient: undefined,
         tag: undefined,
         unit: undefined,
     })

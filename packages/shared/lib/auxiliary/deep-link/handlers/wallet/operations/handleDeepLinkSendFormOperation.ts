@@ -46,12 +46,12 @@ function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDe
     const rawAmount = getRawAmountFromSearchParam(searchParams)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)
-    const subject: Subject = address ? { type: 'address', address } : undefined
+    const recipient: Subject = address ? { type: 'address', address } : undefined
 
     return {
         type: NewTransactionType.TokenTransfer,
         ...(asset && { asset }),
-        ...(subject && { subject }),
+        ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
         ...(metadata && { metadata }),

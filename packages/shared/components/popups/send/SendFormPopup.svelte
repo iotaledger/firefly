@@ -40,7 +40,7 @@
     let unit: string
 
     const transactionDetails = get(newTransactionDetails)
-    let { metadata, subject, tag } = transactionDetails
+    let { metadata, recipient, tag } = transactionDetails
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetails.rawAmount
@@ -61,7 +61,7 @@
                 asset,
                 rawAmount,
                 unit,
-                subject,
+                recipient,
                 metadata,
                 tag,
             }
@@ -69,7 +69,7 @@
             return {
                 type: NewTransactionType.NftTransfer,
                 nftId,
-                subject,
+                recipient,
                 metadata,
                 tag,
             }
@@ -133,7 +133,7 @@
             <NftInput bind:nftId />
         {/if}
         <NetworkInput bind:network />
-        <RecipientInput bind:this={recipientInput} bind:recipient={subject} />
+        <RecipientInput bind:this={recipientInput} bind:recipient />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
                 bind:this={metadataInput}

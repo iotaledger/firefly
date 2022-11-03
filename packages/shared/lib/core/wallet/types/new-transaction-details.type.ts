@@ -4,7 +4,7 @@ export type NewTransactionDetails = NewNftTransactionDetails | NewTokenTransacti
 
 type NewBaseTransactionDetails = {
     metadata: string
-    subject: Subject
+    recipient: Subject
     tag: string
     expirationDate?: Date
     giftStorageDeposit?: boolean
