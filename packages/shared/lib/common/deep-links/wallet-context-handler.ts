@@ -30,18 +30,9 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
         return addError({ time: Date.now(), type: 'deepLink', message: 'No operation specified in the url' })
     }
 
-    const address = pathnameParts[1] ?? ''
-    if (!isValidAddress(address, expectedAddressPrefix)) {
-        return addError({
-            time: Date.now(),
-            type: 'deepLink',
-            message: `Address or prefix is not valid for ${address}`,
-        })
-    }
-
     switch (pathnameParts[0]) {
         case WalletOperation.Send:
-            parameters = parseSendOperation(address, url.searchParams)
+            parameters = parseSendOperation(pathnameParts[1] ?? '', url.searchParams, expectedAddressPrefix)
             break
         default:
             return addError({
@@ -72,10 +63,26 @@ export const parseWalletDeepLinkRequest = (url: URL, expectedAddressPrefix: stri
  *
  * @return {void | SendOperationParameters} The formatted parameters for the send operation.
  */
-const parseSendOperation = (address: string, searchParams: URLSearchParams): void | SendOperationParameters => {
+const parseSendOperation = (
+    address: string,
+    searchParams: URLSearchParams,
+    expectedAddressPrefix: string
+): void | SendOperationParameters => {
     let numDecimalPlaces = 0
     let parsedAmount: number | undefined
     let parsedUnit: Unit | undefined
+
+    // Check address exists and is valid this is not optional.
+    if (!address) {
+        return addError({ time: Date.now(), type: 'deepLink', message: 'No address specified in the url path' })
+    }
+    if (!isValidAddressAndPrefix(address, expectedAddressPrefix)) {
+        return addError({
+            time: Date.now(),
+            type: 'deepLink',
+            message: `Address or prefix is not valid for ${address}`,
+        })
+    }
 
     // Optional parameter: amount
     // Check if exists and is valid or does not exist
@@ -133,13 +140,5 @@ const parseSendOperation = (address: string, searchParams: URLSearchParams): voi
         message: '',
         tag,
         metadata,
-    }
-}
-
-const isValidAddress = (address: string, expectedAddressPrefix: string): boolean => {
-    if (address && isValidAddressAndPrefix(address, expectedAddressPrefix)) {
-        return true
-    } else {
-        return false
     }
 }
