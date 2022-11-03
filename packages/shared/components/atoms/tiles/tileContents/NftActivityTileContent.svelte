@@ -39,7 +39,7 @@
 </script>
 
 <div class="relative flex w-8 h-8">
-    <NftMediaContainer nftId={data.nftId} size={NftMediaSize.Small} />
+    <NftMediaContainer nftId={activity.nftId} size={NftMediaSize.Small} />
 </div>
 
 <div class="flex flex-col w-full space-y-0.5">
