@@ -1,12 +1,11 @@
 import { IAccountState } from '@core/account'
-import { isActivityHiddenForAccountIndex, ActivityAsyncStatus, IClaimData } from '@core/wallet'
-import type { ICommonOutput } from '@iota/types'
+import { isActivityHiddenForAccountIndex, ActivityAsyncStatus, IClaimData, Output } from '@core/wallet'
 import { getExpirationDateFromOutput } from '../../outputs/getExpirationDateFromOutput'
 import { getTimelockDateFromOutput } from './getTimelockDateFromOutput'
 import { isOutputAsync } from '../../outputs/isOutputAsync'
 
 export function getAsyncDataFromOutput(
-    output: ICommonOutput,
+    output: Output,
     transactionId: string,
     claimingData: IClaimData,
     account: IAccountState

@@ -1,7 +1,6 @@
 export * from './account-assets.interface'
 export * from './account-subject.interface'
 export * from './address-subject.interface'
-export * from './alias-activity-data.interface'
 export * from './asset-balance.interface'
 export * from './asset.interface'
 export * from './base-token-metadata.interface'

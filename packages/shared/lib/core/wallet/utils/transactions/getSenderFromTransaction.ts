@@ -1,12 +1,7 @@
-import { Subject } from '@core/wallet/types'
-import { IBasicOutput, IAliasOutput, IFoundryOutput, INftOutput } from '@iota/types'
+import { Output, Subject } from '@core/wallet/types'
 import { getSenderFromOutput } from '../outputs/getSenderFromOutput'
 
-export function getSenderFromTransaction(
-    isIncoming: boolean,
-    accountAddress: string,
-    output: IBasicOutput | IAliasOutput | IFoundryOutput | INftOutput
-): Subject {
+export function getSenderFromTransaction(isIncoming: boolean, accountAddress: string, output: Output): Subject {
     if (isIncoming) {
         return getSenderFromOutput(output)
     } else {

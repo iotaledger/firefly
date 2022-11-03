@@ -1,8 +1,7 @@
 import { IAccountState } from '@core/account'
 import { ActivityDirection } from '@core/wallet/enums'
 import { IProcessedTransaction } from '@core/wallet/interfaces'
-import { Subject } from '@core/wallet/types'
-import { IBasicOutput, IAliasOutput, IFoundryOutput, INftOutput } from '@iota/types'
+import { Output, Subject } from '@core/wallet/types'
 import { getSubjectFromAddress } from '../../getSubjectFromAddress'
 import { isSubjectInternal } from '../../isSubjectInternal'
 import { getRecipientFromOutput } from '../../outputs'
@@ -10,7 +9,7 @@ import { getSenderAddressFromInputs, getSenderFromTransaction } from '../../tran
 
 export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
-    output: IBasicOutput | IAliasOutput | IFoundryOutput | INftOutput,
+    output: Output,
     account: IAccountState
 ): {
     subject: Subject

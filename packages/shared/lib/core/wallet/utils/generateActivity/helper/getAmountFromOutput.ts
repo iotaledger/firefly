@@ -1,5 +1,5 @@
-import { OutputTypes } from '@iota/types'
+import { Output } from '@core/wallet/types'
 
-export function getAmountFromOutput(output: OutputTypes): number {
+export function getAmountFromOutput(output: Output): number {
     return Number(output?.amount ?? 0)
 }

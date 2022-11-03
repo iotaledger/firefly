@@ -7,7 +7,7 @@ import { IBasicOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { ActivityType } from '../../enums'
 import { IProcessedTransaction } from '../../interfaces'
-import { getNativeTokenFromOutput, getMainTransactionOutputFromTransaction, outputContainsValue } from '../../utils'
+import { getNativeTokenFromOutput, getMainOutputFromTransaction, outputContainsValue } from '../../utils'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -30,7 +30,7 @@ export function generateTransactionActivity(
 
     const inputs = transactionInputs
 
-    const { wrappedOutput, isSelfTransaction } = getMainTransactionOutputFromTransaction(
+    const { wrappedOutput, isSelfTransaction } = getMainOutputFromTransaction(
         outputs,
         account.depositAddress,
         isIncoming

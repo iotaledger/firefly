@@ -1,13 +1,8 @@
-import {
-    IBasicOutput,
-    IAliasOutput,
-    IFoundryOutput,
-    INftOutput,
-    IStorageDepositReturnUnlockCondition,
-} from '@iota/types'
+import { Output } from '@core/wallet/types'
+import { IStorageDepositReturnUnlockCondition } from '@iota/types'
 import { OUTPUT_TYPE_NFT, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '../../../constants'
 
-export function getStorageDepositFromOutput(output: IBasicOutput | IAliasOutput | IFoundryOutput | INftOutput): {
+export function getStorageDepositFromOutput(output: Output): {
     storageDeposit: number
     giftedStorageDeposit: number
 } {

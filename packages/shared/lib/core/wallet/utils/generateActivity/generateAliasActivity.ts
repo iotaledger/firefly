@@ -7,10 +7,10 @@ import { AliasActivity } from '@core/wallet/types'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
-    getGovernorAddressFromOutput,
+    getGovernorAddressFromAliasOutput,
     getMetadataFromOutput,
     getSendingInformation,
-    getStateControllerAddressFromOutput,
+    getStateControllerAddressFromAliasOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
@@ -29,8 +29,8 @@ export function generateAliasActivity(
 
     const { storageDeposit: _storageDeposit, giftedStorageDeposit } = getStorageDepositFromOutput(output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
-    const governorAddress = getGovernorAddressFromOutput(output)
-    const stateControllerAddress = getStateControllerAddressFromOutput(output)
+    const governorAddress = getGovernorAddressFromAliasOutput(output)
+    const stateControllerAddress = getStateControllerAddressFromAliasOutput(output)
     const aliasId = getAliasId(output, outputId)
     const aliasSubtype = output.aliasId === EMPTY_HEX_ID ? AliasSubtype.Created : AliasSubtype.Other
 
