@@ -1,1 +1,1 @@
-export * from './barcode-scanner.class'
+export * from './barcode-scanner-dummy.class'
