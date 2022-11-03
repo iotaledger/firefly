@@ -1,2 +1,2 @@
-export * from './startQrScanner'
-export * from './stopQrScanner'
+export * from './startScanner'
+export * from './stopScanner'
