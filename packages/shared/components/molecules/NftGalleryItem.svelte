@@ -9,8 +9,6 @@
 <button on:click={onClick} style="height: 300px;">
     <NftMediaContainer nftId={nft.id} size={NftMediaSize.Large} />
     <div class="description w-full flex flex-col justify-center p-3">
-        <Text weight={FontWeight.normal} fontSize="12" classes="text-left"
-            >{nft.parsedMetadata?.collectionName ?? 'Collection'}</Text
-        >
+        <Text weight={FontWeight.semibold} fontSize="12" classes="text-left">{nft.name}</Text>
     </div>
 </button>
