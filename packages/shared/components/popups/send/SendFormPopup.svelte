@@ -3,19 +3,16 @@
     import { Button, Text, FontWeight, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import {
-        ActivityType,
         IAsset,
         NewTransactionDetails,
         newTransactionDetails,
         NewTransactionType,
-        selectedAccountActivities,
         setNewTransactionDetails,
     } from '@core/wallet'
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
     import { DestinationNetwork } from '@core/network'
     import { getByteLengthOfString } from '@core/utils'
     import { get } from 'svelte/store'
-    import type { FeatureTypes } from '@iota/types'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -34,20 +31,20 @@
     let asset: IAsset
     let unit: string
 
-    const transactionDetail = get(newTransactionDetails)
-    let { metadata, recipient, tag } = transactionDetail
+    const transactionDetails = get(newTransactionDetails)
+    let { metadata, subject, tag } = transactionDetails
 
-    if (transactionDetail.type === NewTransactionType.TokenTransfer) {
-        rawAmount = transactionDetail.rawAmount
-        asset = transactionDetail.asset
-        unit = transactionDetail.unit
+    if (transactionDetails.type === NewTransactionType.TokenTransfer) {
+        rawAmount = transactionDetails.rawAmount
+        asset = transactionDetails.asset
+        unit = transactionDetails.unit
     } else {
-        nftId = transactionDetail.nftId
+        nftId = transactionDetails.nftId
     }
 
     const tabs: SendForm[] = [SendForm.SendToken, SendForm.SendNft]
     let activeTab: SendForm =
-        transactionDetail.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
+        transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
     function getTransactionDetails(): NewTransactionDetails {
         if (activeTab === SendForm.SendToken) {
@@ -56,7 +53,7 @@
                 asset,
                 rawAmount,
                 unit,
-                recipient,
+                subject,
                 metadata,
                 tag,
             }
@@ -64,8 +61,7 @@
             return {
                 type: NewTransactionType.NftTransfer,
                 nftId,
-                recipient,
-                immutableFeatures: getNftImmutableFeatures(),
+                subject,
                 metadata,
                 tag,
             }
@@ -100,13 +96,6 @@
         })
     }
 
-    function getNftImmutableFeatures(): FeatureTypes[] {
-        const nftActivity = $selectedAccountActivities.find(
-            (activity) => activity.data.type === ActivityType.Nft && activity.data.nftId === nftId
-        )
-        return nftActivity?.data.type === ActivityType.Nft ? nftActivity.data.immutableFeatures : []
-    }
-
     async function onContinue(): Promise<void> {
         const valid = await validate()
         if (valid) {
@@ -135,7 +124,7 @@
             <NftInput bind:nftId />
         {/if}
         <NetworkInput bind:network />
-        <RecipientInput bind:this={recipientInput} bind:recipient />
+        <RecipientInput bind:this={recipientInput} bind:recipient={subject} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
                 bind:this={metadataInput}

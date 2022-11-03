@@ -27,16 +27,15 @@ export function getOutputOptions(
     }
 
     const assets: Assets = {}
-    if (nativeTokenId) {
+    if (nftId) {
+        assets.nftId = nftId
+    } else if (nativeTokenId) {
         assets.nativeTokens = [
             {
                 id: nativeTokenId,
                 amount: '0x' + bigAmount.toString(16),
             },
         ]
-    }
-    if (nftId) {
-        assets.nftId = nftId
     }
 
     return <OutputOptions>{

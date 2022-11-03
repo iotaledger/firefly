@@ -57,7 +57,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
         throw new InvalidAddressError()
     }
 
-    const recipient: Subject = { type: 'address', address }
+    const subject: Subject = { type: 'address', address }
 
     const assetId = searchParams.get(SendOperationParameter.AssetId)
     const baseAsset = get(selectedAccountAssets).baseCoin
@@ -91,7 +91,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     return {
         type: NewTransactionType.TokenTransfer,
         ...(asset && { asset }),
-        ...(recipient && { recipient }),
+        ...(subject && { subject }),
         ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
         ...(metadata && { metadata }),
