@@ -4,7 +4,8 @@ import { networkHrp } from '@core/network'
 import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString } from '@core/utils'
 import {
     getAssetById,
-    INewTransactionDetails,
+    NewTransactionDetails,
+    NewTransactionType,
     selectedAccountAssets,
     setNewTransactionDetails,
     Subject,
@@ -44,9 +45,9 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
  *
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
  *
- * @return {INewTransactionDetails} The formatted parameters for the send operation.
+ * @return {NewTransactionDetails} The formatted parameters for the send operation.
  */
-function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTransactionDetails {
+function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTransactionDetails {
     // Check address exists and is valid this is not optional.
     const address = searchParams.get(SendOperationParameter.Address)
     if (!address) {
@@ -88,6 +89,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
 
     return {
+        type: NewTransactionType.TokenTransfer,
         ...(asset && { asset }),
         ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),

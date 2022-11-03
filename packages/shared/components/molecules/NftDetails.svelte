@@ -25,7 +25,10 @@
     import { setClipboard } from '@core/utils'
     import { time } from '@core/app'
 
-    export let metadata: string
+    export let nftId: string = ''
+    export let nftMetadata: string = null
+    export let metadata: string = null
+    export let tag: string = null
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
@@ -62,12 +65,25 @@
 
     $: localePrefix = `tooltips.transactionDetails.${direction}.`
 
-    let detailsList: { [key in string]: { data: string; tooltipText?: string } }
+    let detailsList: { [key in string]: { data: string; tooltipText?: string; copyable?: boolean } }
     $: detailsList = {
         ...(transactionTime && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(metadata && { metadata: { data: metadata } }),
+        ...(nftId && { nftId: { data: nftId, copyable: true } }),
+        ...(nftMetadata && { nftMetadata: { data: JSON.stringify(nftMetadata) } }),
+        ...(metadata && {
+            metadata: {
+                data: metadata,
+                tooltipText: localize(localePrefix + 'metadata'),
+            },
+        }),
+        ...(tag && {
+            tag: {
+                data: tag,
+                tooltipText: localize(localePrefix + 'tag'),
+            },
+        }),
         ...(hasStorageDeposit && {
             storageDeposit: {
                 data: formattedStorageDeposit,
@@ -153,6 +169,7 @@
                     keyText={localize(`general.${key}`)}
                     valueText={value.data}
                     tooltipText={value.tooltipText}
+                    isCopyable={value.copyable}
                 />
             {/each}
             {#if claimingTransactionId}
