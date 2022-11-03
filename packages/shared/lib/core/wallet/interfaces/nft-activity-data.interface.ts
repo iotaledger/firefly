@@ -10,9 +10,11 @@ export interface INftActivityData {
     type: ActivityType.Nft
     outputId: string
     nftId: string
-    metadata: string
+    nftMetadata: string
     immutableFeatures: FeatureTypes[]
     storageDeposit: number
+    tag: string
+    metadata: string
     direction: ActivityDirection
     isInternal: boolean
     sender: Subject

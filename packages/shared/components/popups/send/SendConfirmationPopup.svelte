@@ -12,8 +12,9 @@
         Toggle,
         FontWeight,
         TextType,
+        NftDetails,
+        TransactionDetails,
     } from 'shared/components'
-    import { TransactionDetails } from 'shared/components/molecules'
     import type { OutputTypes } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
@@ -32,22 +33,23 @@
         DEFAULT_TRANSACTION_OPTIONS,
         newTransactionDetails,
         updateNewTransactionDetails,
+        NewTransactionType,
     } from '@core/wallet'
     import { formatCurrency } from '@core/i18n'
     import { currencies, Currency, exchangeRates, miotaToFiat } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { BaseError } from '@core/error'
     import { ledgerPreparedOutput } from '@core/ledger'
+    import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
+    export let tokenSend = false
 
-    const { asset, rawAmount, unit, recipient, metadata, tag, disableChangeExpiration, disableToggleGift, surplus } =
+    let { recipient, expirationDate, giftStorageDeposit, surplus, disableChangeExpiration, disableToggleGift } =
         get(newTransactionDetails)
-    let { expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
     let storageDeposit = 0
-    let giftedStorageDeposit = 0
     let preparedOutput: OutputTypes
     let outputOptions: OutputOptions
     let error: BaseError
@@ -55,37 +57,31 @@
 
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
+    $: transactionDetails = get(newTransactionDetails)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
     $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
-    $: hideGiftToggle = asset?.id === $selectedAccountAssets?.baseCoin?.id
+    $: hideGiftToggle =
+        transactionDetails.type === NewTransactionType.TokenTransfer &&
+        transactionDetails.asset?.id === $selectedAccountAssets?.baseCoin?.id
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
 
     function refreshSendConfirmationState(): void {
         error = null
-        void _prepareOutput()
+        void prepareTransactionOutput()
     }
 
     $: formattedFiatValue =
-        formatCurrency(
-            miotaToFiat(Big(rawAmount), $currencies[Currency.USD], $exchangeRates[$activeProfile?.settings?.currency])
-        ) || ''
-
-    $: transactionDetails = {
-        asset,
-        direction: ActivityDirection.Outgoing,
-        inclusionState: InclusionState.Pending,
-        metadata,
-        storageDeposit: giftStorageDeposit ? giftedStorageDeposit : storageDeposit,
-        subject: recipient,
-        rawAmount,
-        tag,
-        unit,
-        isInternal,
-        surplus,
-        type: ActivityType.Transaction,
-    }
+        transactionDetails.type === NewTransactionType.TokenTransfer
+            ? formatCurrency(
+                  miotaToFiat(
+                      Big(transactionDetails.rawAmount),
+                      $currencies[Currency.USD],
+                      $exchangeRates[$activeProfile?.settings?.currency]
+                  )
+              )
+            : ''
 
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
@@ -97,19 +93,22 @@
         }
     }
 
-    async function _prepareOutput(): Promise<void> {
+    async function prepareTransactionOutput(): Promise<void> {
+        const transactionDetails = get(newTransactionDetails)
         outputOptions = getOutputOptions(
             expirationDate,
             recipientAddress,
-            rawAmount,
-            metadata,
-            tag,
-            asset,
+            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0',
+            transactionDetails.metadata,
+            transactionDetails.tag,
+            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
             giftStorageDeposit,
-            surplus
+            transactionDetails.surplus,
+            transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-        setStorageDeposit(preparedOutput, Number(surplus))
+
+        setStorageDeposit(preparedOutput, Number(transactionDetails.surplus))
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
@@ -119,16 +118,19 @@
     function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
-        storageDeposit = _storageDeposit
 
-        // Only giftedStorageDeposit needs adjusting, since that is derived
-        // from the amount property instead of the unlock condition
-        if (!surplus) {
-            giftedStorageDeposit = _giftedStorageDeposit
-        } else if (surplus >= _giftedStorageDeposit) {
-            giftedStorageDeposit = 0
+        if (giftStorageDeposit) {
+            // Only giftedStorageDeposit needs adjusting, since that is derived
+            // from the amount property instead of the unlock condition
+            if (!surplus) {
+                storageDeposit = _giftedStorageDeposit
+            } else if (surplus >= _giftedStorageDeposit) {
+                storageDeposit = 0
+            } else {
+                storageDeposit = _giftedStorageDeposit - surplus
+            }
         } else {
-            giftedStorageDeposit = _giftedStorageDeposit - surplus
+            storageDeposit = _storageDeposit
         }
     }
 
@@ -145,15 +147,14 @@
         error = null
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
-            updateNewTransactionDetails({ expirationDate, giftStorageDeposit, surplus })
+
+            updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error ?? err.message, logToConsole: true }) : err
-            }
+            handleError(err?.error)
         }
     }
 
@@ -173,19 +174,39 @@
         try {
             await _onMount()
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
-            }
+            handleError(err?.error)
         }
     })
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
-        >{localize('popups.transaction.title')}</Text
+        >{localize(tokenSend ? 'popups.transaction.title' : 'popups.sendNft.confirmationTitle')}</Text
     >
     <div class="w-full flex-col space-y-2">
-        <TransactionDetails {...transactionDetails} {formattedFiatValue} />
+        {#if transactionDetails.type === NewTransactionType.TokenTransfer}
+            <TransactionDetails
+                {...transactionDetails}
+                {storageDeposit}
+                subject={recipient}
+                {isInternal}
+                {surplus}
+                type={ActivityType.Transaction}
+                direction={ActivityDirection.Outgoing}
+                inclusionState={InclusionState.Pending}
+                {formattedFiatValue}
+            />
+        {:else if transactionDetails.type === NewTransactionType.NftTransfer}
+            <NftDetails
+                {...transactionDetails}
+                direction={ActivityDirection.Outgoing}
+                inclusionState={InclusionState.Pending}
+                {storageDeposit}
+                subject={recipient}
+                {isInternal}
+                type={ActivityType.Nft}
+            />
+        {/if}
         {#if !hideGiftToggle}
             <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                 <Toggle
