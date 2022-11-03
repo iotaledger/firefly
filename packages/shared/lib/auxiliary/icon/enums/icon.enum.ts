@@ -60,6 +60,7 @@ export enum Icon {
     Network = 'network',
     NotVerified = 'not-verified',
     Parchment = 'parchment',
+    Picture = 'picture',
     Play = 'play',
     Plus = 'plus',
     Profile = 'profile',

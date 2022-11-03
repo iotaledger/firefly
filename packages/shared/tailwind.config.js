@@ -34,6 +34,7 @@ module.exports = {
                 /^hover:font-/,
                 /^dark:font-/,
                 /^grid-cols-/,
+                /^rounded-/,
                 // `p-${size}`
                 /^p-/,
                 'scheme-dark',
