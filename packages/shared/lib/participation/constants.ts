@@ -50,6 +50,8 @@ export const STAKING_AIRDROP_TOKENS: { [key in StakingAirdrop]: string } = {
  */
 export const PARTICIPATION_POLL_DURATION = 10 * MILLISECONDS_PER_SECOND
 
+export const ASSEMBLY_STAKING_BLOG_POST_URL = 'https://blog.iota.org/iota-staking-for-assembly-round-4/'
+
 export const REMOTE_STAKING_RESULT_URL: string =
     'https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/'
 
