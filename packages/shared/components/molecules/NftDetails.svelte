@@ -26,7 +26,10 @@
     import { time } from '@core/app'
     import { IIrc27Metadata } from '@core/nfts'
 
-    export let metadata: IIrc27Metadata
+    export let nftId: string = ''
+    export let nftMetadata: IIrc27Metadata
+    export let metadata: string = null
+    export let tag: string = null
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
@@ -65,6 +68,13 @@
         ...(transactionTime && {
             transactionTime: { data: formattedTransactionTime },
         }),
+        ...(nftId && { nftId: { data: nftId, copyable: true } }),
+        ...(metadata && {
+            metadata: { data: metadata, isTooltipVisible: true },
+        }),
+        ...(tag && {
+            tag: { data: tag, isTooltipVisible: true },
+        }),
         ...(hasStorageDeposit && {
             storageDeposit: { data: formattedStorageDeposit, isTooltipVisible: true },
         }),
@@ -80,42 +90,42 @@
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
     }
 
-    let metadataDetailsList: {
-        [key in keyof typeof metadata]: { data: unknown; isTooltipVisible?: boolean; isCopyable?: boolean }
+    let nftMetadataDetailsList: {
+        [key in keyof typeof nftMetadata]: { data: unknown; isTooltipVisible?: boolean; isCopyable?: boolean }
     }
-    $: metadataDetailsList = {
-        ...(metadata?.standard && {
-            standard: { data: metadata.standard, isTooltipVisible: true },
+    $: nftMetadataDetailsList = {
+        ...(nftMetadata?.standard && {
+            standard: { data: nftMetadata.standard, isTooltipVisible: true },
         }),
-        ...(metadata?.version && {
-            version: { data: metadata.version },
+        ...(nftMetadata?.version && {
+            version: { data: nftMetadata.version },
         }),
-        ...(metadata?.name && {
-            name: { data: metadata.name },
+        ...(nftMetadata?.name && {
+            name: { data: nftMetadata.name },
         }),
-        ...(metadata?.type && {
-            type: { data: metadata.type as string, isTooltipVisible: true },
+        ...(nftMetadata?.type && {
+            type: { data: nftMetadata.type as string, isTooltipVisible: true },
         }),
-        ...(metadata?.uri && {
-            uri: { data: metadata.uri, isCopyable: true },
+        ...(nftMetadata?.uri && {
+            uri: { data: nftMetadata.uri, isCopyable: true },
         }),
-        ...(metadata?.collectionId && {
-            collectionId: { data: metadata.collectionId, isTooltipVisible: true },
+        ...(nftMetadata?.collectionId && {
+            collectionId: { data: nftMetadata.collectionId, isTooltipVisible: true },
         }),
-        ...(metadata?.collectionName && {
-            collectionName: { data: metadata.collectionName },
+        ...(nftMetadata?.collectionName && {
+            collectionName: { data: nftMetadata.collectionName },
         }),
-        ...(metadata?.royalties && {
-            royalties: { data: metadata.royalties, isTooltipVisible: true },
+        ...(nftMetadata?.royalties && {
+            royalties: { data: nftMetadata.royalties, isTooltipVisible: true },
         }),
-        ...(metadata?.issuerName && {
-            issuerName: { data: metadata.issuerName, isTooltipVisible: true },
+        ...(nftMetadata?.issuerName && {
+            issuerName: { data: nftMetadata.issuerName, isTooltipVisible: true },
         }),
-        ...(metadata?.description && {
-            description: { data: metadata.description },
+        ...(nftMetadata?.description && {
+            description: { data: nftMetadata.description },
         }),
-        ...(metadata?.attributes && {
-            attributes: { data: metadata.attributes, isTooltipVisible: true },
+        ...(nftMetadata?.attributes && {
+            attributes: { data: nftMetadata.attributes, isTooltipVisible: true },
         }),
     }
 
@@ -181,7 +191,7 @@
                         : undefined}
                 />
             {/each}
-            {#each Object.entries(metadataDetailsList) as [key, value]}
+            {#each Object.entries(nftMetadataDetailsList) as [key, value]}
                 <KeyValueBox
                     keyText={localize(`views.collectibles.metadata.${key}`)}
                     valueText={value.data}
