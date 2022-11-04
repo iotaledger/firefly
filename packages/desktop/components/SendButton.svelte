@@ -4,9 +4,9 @@
     import { resetNewNftTransactionDetails, resetNewTransactionDetails, selectedSendOptionIndex } from '@core/wallet'
     import { openPopup } from '@auxiliary/popup'
     import { appSettings } from '@core/app'
-    import { Text, FontWeight, TextType, Icon, Modal } from 'shared/components'
+    import { Text, FontWeight, TextType, Icon, Modal } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import features from '../../../../desktop/features/features'
+    import features from '@features/features'
 
     let modal: Modal = undefined
     let isModalOpened: boolean = false
