@@ -18,11 +18,11 @@
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
     const { id, name } = nft
-    const { type, collectionName, attributes } = nft.parsedMetadata
+    const { type, collectionName, attributes } = nft.parsedMetadata || {}
 
     let modal: Modal
 
-    const storageDeposit = 0
+    const storageDeposit = 0 // TODO: get storage deposit from corresponding activity
 </script>
 
 <div class="flex flex-row w-full space-x-4 overflow-auto">

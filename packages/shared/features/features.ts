@@ -121,7 +121,7 @@ const features = {
         enabled: false,
     },
     collectibles: {
-        enabled: true,
+        enabled: false,
     },
 }
 
