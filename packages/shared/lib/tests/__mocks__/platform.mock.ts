@@ -4,7 +4,6 @@ import { EventMap } from '@lib/typings/events'
 import { IPlatform } from '@lib/typings/platform'
 
 const Platform: IPlatform = {
-    BarcodeManager: undefined,
     DeepLinkManager: undefined,
     NotificationManager: undefined,
     PincodeManager: undefined,

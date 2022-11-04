@@ -20,7 +20,6 @@
     import Diagnostics from './Diagnostics.svelte'
     import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
     import ErrorLog from './ErrorLog.svelte'
-    import ExportTransactionHistory from './ExportTransactionHistory.svelte'
     import FaucetRequestPopup from './FaucetRequestPopup.svelte'
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
@@ -33,7 +32,7 @@
     import NodeInfoPopup from './NodeInfoPopup.svelte'
     import ReceiveAddressPopup from './ReceiveAddressPopup.svelte'
     import RemoveNode from './RemoveNode.svelte'
-    import { SendFormPopup, SendConfirmationPopup, SendNftFormPopup, SendNftConfirmationPopup } from './send'
+    import { SendFormPopup, SendConfirmationPopup } from './send'
     import StorageDepositBreakdownPopup from './StorageDepositBreakdownPopup.svelte'
     import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
     import TokenInformationPopup from './TokenInformationPopup.svelte'
@@ -91,7 +90,6 @@
         confirmation: ConfirmationPopup,
         deepLinkError: DeepLinkErrorPopup,
         deleteAccount: DeleteAccount,
-        exportTransactionHistory: ExportTransactionHistory,
         connectLedger: ConnectLedgerPopup,
         ledgerAppGuide: LedgerAppGuidePopup,
         ledgerConnectionGuide: LedgerConnectionGuidePopup,
@@ -110,8 +108,6 @@
         activityDetails: ActivityDetailsPopup,
         sendConfirmation: SendConfirmationPopup,
         sendForm: SendFormPopup,
-        sendNftConfirmation: SendNftConfirmationPopup,
-        sendNftForm: SendNftFormPopup,
         manageAccount: ManageAccountPopup,
         tokenInformation: TokenInformationPopup,
         mintNativeTokenForm: MintNativeTokenFormPopup,

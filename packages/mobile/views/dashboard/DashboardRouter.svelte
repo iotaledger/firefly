@@ -2,12 +2,12 @@
     import features from '@features/features'
     import {
         accountSwitcherRouter,
-        dashboardRoute,
         DashboardRoute,
+        dashboardRoute,
         dashboardRouter,
         sendRouter,
     } from '../../lib/routers'
-    import { AccountSwitcherDrawer, ReceiveDrawer, SendDrawer } from './drawers'
+    import { AccountSwitcherDrawer, ProfileActionsDrawer, ReceiveDrawer, SendDrawer } from './drawers'
 
     function onReceiveDrawerClose(): void {
         $dashboardRouter.previous()
@@ -20,6 +20,9 @@
         $accountSwitcherRouter.reset()
         $dashboardRouter.previous()
     }
+    function onProfileActionsDrawerClose(): void {
+        $dashboardRouter.previous()
+    }
 </script>
 
 {#if $dashboardRoute === DashboardRoute.Receive && features?.dashboard?.receive?.enabled}
@@ -28,4 +31,6 @@
     <SendDrawer onClose={onSendDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.AccountSwitcher && features?.dashboard?.accountSwitcher?.enabled}
     <AccountSwitcherDrawer onClose={onAccountSwitcherDrawerClose} />
+{:else if $dashboardRoute === DashboardRoute.ProfileActions && features?.dashboard?.profileActions?.enabled}
+    <ProfileActionsDrawer onClose={onProfileActionsDrawerClose} />
 {/if}
