@@ -1,10 +1,9 @@
 <script lang="typescript">
-    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
+    import { needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService, Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { activeProfile, login, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '../../../lib/routers'
-    import { Platform } from '@core/app'
     import { openPopup, popupState } from '@auxiliary/popup'
     import { isValidPin } from '@core/utils'
     import { Icon, PinInput, Profile, Text, TextType } from 'shared/components'

@@ -20,10 +20,9 @@
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
-    import { Platform } from '@core/app'
+    import { Platform, time } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
-    import { time } from '@core/app'
 
     export let nftId: string = ''
     export let nftMetadata: string = null

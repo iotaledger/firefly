@@ -21,10 +21,9 @@
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
-    import { Platform } from '@core/app'
+    import { Platform, time } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
-    import { time } from '@core/app'
 
     export let asset: IPersistedAsset
     export let asyncStatus: ActivityAsyncStatus = null

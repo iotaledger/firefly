@@ -10,10 +10,10 @@
         appVersionDetails,
         AppStage,
         appStage,
+        Platform,
         PlatformOption,
         platform,
     } from '@core/app'
-    import { Platform } from '@core/app'
     import { formatDate, localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
 
