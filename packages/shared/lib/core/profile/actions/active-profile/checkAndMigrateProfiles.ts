@@ -1,11 +1,7 @@
 import { get } from 'svelte/store'
-import { migrateObjects } from '@core/utils/object'
-
-import { DEFAULT_PERSISTED_PROFILE_OBJECT, PROFILE_VERSION } from '../../constants'
+import { PROFILE_VERSION } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
-
-// TODO: Fix this function does not seem to be migrating optional properties, at least on nested objects
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -20,17 +16,54 @@ export function checkAndMigrateProfiles(): void {
     }
 }
 
-export function migratePersistedProfiles(): void {
+function migratePersistedProfiles(): void {
     const _profiles = get(profiles)
     for (const profile of _profiles) {
         migratePersistedProfile(profile)
     }
 }
 
-export function migratePersistedProfile(persistedProfile: IPersistedProfile): void {
-    const migratedPersistedProfile = migrateObjects<IPersistedProfile>(
-        persistedProfile,
-        DEFAULT_PERSISTED_PROFILE_OBJECT
-    )
+function migratePersistedProfile(persistedProfile: IPersistedProfile): void {
+    let migratedPersistedProfile = persistedProfile
+    let migrationVersion = get(currentProfileVersion)
+    for (migrationVersion; migrationVersion < PROFILE_VERSION; migrationVersion++) {
+        migratedPersistedProfile = profileMigrationsMap?.[migrationVersion](migratedPersistedProfile)
+    }
     saveProfile(migratedPersistedProfile)
+}
+
+const profileMigrationsMap = {
+    /**
+     * NOTE: 0-2 are missing here because we wrote this functionality,
+     * when the profile version was already 3.
+     */
+    3: persistedProfileMigrationToV4,
+}
+
+function persistedProfileMigrationToV4(existingProfile: unknown): IPersistedProfile {
+    const newProfile = {}
+
+    const keysToKeep = [
+        'id',
+        'name',
+        'type',
+        'networkProtocol',
+        'networkType',
+        'lastStrongholdBackupTime',
+        'settings',
+        'accountMetadata',
+        'isDeveloperProfile',
+        'hasVisitedDashboard',
+        'lastUsedAccountIndex',
+        'clientOptions',
+    ]
+
+    keysToKeep.forEach((key) => {
+        const existingValue = existingProfile?.[key]
+        if (existingValue) {
+            newProfile[key] = existingValue
+        }
+    })
+
+    return newProfile as IPersistedProfile
 }
