@@ -27,6 +27,7 @@
         SendNft = 'general.sendNft',
     }
     let assetAmountInput: AssetAmountInput
+    let nftInput: NftInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
@@ -78,12 +79,8 @@
 
     async function validate(): Promise<boolean> {
         try {
-            if (activeTab === SendForm.SendToken) {
-                await assetAmountInput?.validate()
-            } else if (!nftId) {
-                return false
-            }
             await Promise.all([
+                activeTab === SendForm.SendToken ? assetAmountInput?.validate() : nftInput?.validate(),
                 recipientInput?.validate(),
                 metadataInput?.validate(validateOptionalInput(metadata, 8192, localize('error.send.metadataTooLong'))),
                 tagInput?.validate(validateOptionalInput(tag, 64, localize('error.send.tagTooLong'))),
@@ -130,7 +127,7 @@
             <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         {:else}
             <NftMediaContainer {nftId} size={NftMediaSize.Medium} />
-            <NftInput bind:nftId />
+            <NftInput bind:this={nftInput} bind:nftId />
         {/if}
         <NetworkInput bind:network />
         <RecipientInput bind:this={recipientInput} bind:recipient />
