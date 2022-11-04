@@ -5,7 +5,7 @@
     import { isValidExpirationDateTime } from '@core/utils'
     import { showAppNotification } from '@auxiliary/notification'
 
-    export let value: Date
+    export let value: Date = new Date()
 
     const dispatch = createEventDispatcher()
 
