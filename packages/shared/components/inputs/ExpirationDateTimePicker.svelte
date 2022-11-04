@@ -2,10 +2,10 @@
     import { createEventDispatcher } from 'svelte'
     import { DateTimePicker } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { isValidExpirationDateTime } from '@core/utils'
+    import { isValidExpirationDateTime, MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
     import { showAppNotification } from '@auxiliary/notification'
 
-    export let value: Date = new Date()
+    export let value: Date = new Date(Date.now() + 5 * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND)
 
     const dispatch = createEventDispatcher()
 
