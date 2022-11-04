@@ -27,12 +27,12 @@ function migratePersistedProfile(persistedProfile: IPersistedProfile): void {
     let migratedPersistedProfile = persistedProfile
     let migrationVersion = get(currentProfileVersion)
     for (migrationVersion; migrationVersion < PROFILE_VERSION; migrationVersion++) {
-        migratedPersistedProfile = profileMigrationsMap?.[migrationVersion]?.(migratedPersistedProfile)
+        migratedPersistedProfile = persistedProfileMigrationsMap?.[migrationVersion]?.(migratedPersistedProfile)
     }
     saveProfile(migratedPersistedProfile)
 }
 
-const profileMigrationsMap = {
+const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) => IPersistedProfile> = {
     /**
      * NOTE: 0-2 are missing here because we wrote this functionality,
      * when the profile version was already 3.
