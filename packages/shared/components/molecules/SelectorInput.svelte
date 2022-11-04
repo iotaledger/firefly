@@ -15,6 +15,11 @@
 
     let hasFocus: boolean
 
+    function handleClick(option: any) {
+        modal?.close()
+        onClick ?? onClick(option)
+    }
+
     $: hasFocus && (error = '')
 
     $: if (hasFocus) {
@@ -40,7 +45,7 @@
             <picker-modal class="max-h-64 flex flex-col space-y-1 scrollable-y" in:fade={{ duration: 100 }}>
                 {#each options as option, index}
                     <button
-                        on:click={() => onClick?.(option)}
+                        on:click={() => handleClick(option)}
                         class="w-full flex flex-row flex-1 justify-between px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                     >
                         <slot {option} {index}>

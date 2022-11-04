@@ -1,10 +1,11 @@
 <script lang="typescript">
-    import { IAccountState } from '@core/account'
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
     import { Subject } from '@core/wallet'
-    import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils'
-    import { Modal, RecipientAccountSelector, SelectorInput } from 'shared/components'
+    import { BECH32_ADDRESS_LENGTH, truncateString, validateBech32Address } from '@core/utils'
+    import { Modal, AccountLabel, SelectorInput, Text, TextType } from 'shared/components'
+    import { visibleActiveAccounts } from '@core/profile'
+    import { IAccountState, selectedAccount } from '@core/account'
 
     export let recipient: Subject
     export let disabled = false
@@ -14,30 +15,30 @@
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
 
-    let selectedAccount: IAccountState
-    let value: string
+    let selected: IAccountState
+    let searchValue: string
     let error: string
     let previousValue: string
 
-    if (!selectedAccount && recipient?.type === 'account') {
-        selectedAccount = recipient?.account
-    } else if (!selectedAccount && recipient?.type === 'address' && previousValue === value) {
-        value = recipient?.address
+    if (!selected && recipient?.type === 'account') {
+        selected = recipient?.account
+    } else if (!selected && recipient?.type === 'address' && previousValue === searchValue) {
+        searchValue = recipient?.address
     }
 
     $: recipient = {
-        ...(selectedAccount && { type: 'account', account: selectedAccount }),
-        ...(!selectedAccount && { type: 'address', address: value }),
+        ...(selected && { type: 'account', account: selected }),
+        ...(!selected && { type: 'address', address: searchValue }),
     }
 
     $: {
-        if (inputElement && selectedAccount) {
-            inputElement.value = selectedAccount?.name
+        if (inputElement && selected) {
+            inputElement.value = selected?.name
         }
     }
     $: {
-        if (value) {
-            selectedAccount = undefined
+        if (searchValue) {
+            selected = undefined
         }
     }
 
@@ -46,14 +47,14 @@
             return Promise.resolve()
         }
 
-        if (value.length !== BECH32_ADDRESS_LENGTH + addressPrefix.length) {
+        if (searchValue.length !== BECH32_ADDRESS_LENGTH + addressPrefix.length) {
             error = localize('error.send.addressLength', {
                 values: {
                     length: BECH32_ADDRESS_LENGTH + addressPrefix.length,
                 },
             })
         } else {
-            error = validateBech32Address(addressPrefix, value)
+            error = validateBech32Address(addressPrefix, searchValue)
         }
 
         if (error) {
@@ -61,13 +62,34 @@
         }
         return Promise.resolve()
     }
+
+    $: filteredAccounts = $visibleActiveAccounts?.filter(
+        (account) =>
+            (account.index !== $selectedAccount.index &&
+                account.name.toLowerCase().includes(searchValue?.toLowerCase() ?? '')) ||
+            account.depositAddress.toLowerCase().includes(searchValue?.toLowerCase() ?? '')
+    )
+
+    function getSuffixForAccount(account: IAccountState): string {
+        return truncateString(account?.depositAddress, 10, 10)
+    }
+
+    function onClick(_selected: IAccountState): void {
+        selected = _selected
+    }
 </script>
 
-<SelectorInput labelLocale="general.recipient" bind:value bind:inputElement bind:modal bind:error {disabled}>
-    <RecipientAccountSelector
-        bind:modal
-        bind:selected={selectedAccount}
-        searchValue={value}
-        onClose={() => inputElement.blur()}
-    />
+<SelectorInput
+    labelLocale="general.recipient"
+    bind:value={searchValue}
+    bind:inputElement
+    bind:modal
+    bind:error
+    {onClick}
+    {disabled}
+    options={filteredAccounts}
+    let:option
+>
+    <AccountLabel account={option} />
+    <Text type={TextType.pre} fontSize="sm" color="gray-600">{getSuffixForAccount(option)}</Text>
 </SelectorInput>

@@ -19,7 +19,6 @@
     }
 
     function onClick(_selected): void {
-        modal?.close()
         nftId = _selected.id
     }
 </script>

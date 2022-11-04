@@ -25,8 +25,7 @@
         }
     }
 
-    function onClick(_selected): void {
-        modal?.close()
+    function onClick(_selected: any): void {
         alias = _selected.value
     }
 </script>
