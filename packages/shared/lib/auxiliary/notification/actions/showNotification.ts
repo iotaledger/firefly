@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { appSettings } from '@core/app'
 import { generateRandomId } from '@core/utils'
-import { Platform } from '@lib/platform'
+import { Platform } from '@core/app'
 
 import { DEFAULT_NOTIFICATION_TIMEOUT, NOTIFICATION_TIMEOUT_NEVER } from '../constants'
 import { INotificationData } from '../interfaces'

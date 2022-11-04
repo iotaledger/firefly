@@ -21,7 +21,7 @@
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
     import { time } from '@core/app'

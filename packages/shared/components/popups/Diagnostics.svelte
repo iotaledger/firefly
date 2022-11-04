@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { Button, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/app'
     import { setClipboard } from '@core/utils'
     import { onMount } from 'svelte'
 

@@ -12,7 +12,7 @@
         setPlatform,
         shouldBeDarkMode,
     } from '@core/app'
-    import { Platform } from '@lib/platform'
+    import { Platform } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
     import { ToastContainer } from '@ui'
     import { Route } from './components'

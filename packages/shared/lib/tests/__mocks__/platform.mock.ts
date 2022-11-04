@@ -1,7 +1,5 @@
-import { IAppSettings, IAppVersionDetails } from '@core/app'
+import { IAppSettings, IAppVersionDetails, IPlatform, IPlatformEventMap } from '@core/app'
 import { IError } from '@core/error'
-import { EventMap } from '@lib/typings/events'
-import { IPlatform } from '@lib/typings/platform'
 
 const Platform: IPlatform = {
     DeepLinkManager: undefined,
@@ -42,10 +40,10 @@ const Platform: IPlatform = {
         return Promise.resolve(false)
     },
     minimize(): void {},
-    onEvent<K extends keyof EventMap>(eventName: K, callback: (param: EventMap[K]) => void) {},
+    onEvent<K extends keyof IPlatformEventMap>(eventName: K, callback: (param: IPlatformEventMap[K]) => void) {},
     openUrl(url: string): void {},
     popupMenu(): void {},
-    removeListenersForEvent<K extends keyof EventMap>(eventName: K) {},
+    removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K) {},
     removeProfileFolder(profilePath: string): Promise<void> {
         return Promise.resolve(undefined)
     },

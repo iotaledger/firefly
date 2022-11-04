@@ -6,7 +6,7 @@ import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
 
 import { IAppVersionDetails } from '@core/app'
-import { IPlatform } from '@lib/typings/platform'
+import { IPlatform } from '@core/app'
 
 let activeProfileId = null
 

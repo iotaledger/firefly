@@ -2,7 +2,7 @@
     import { appRoute, AppRoute, dashboardRoute, DashboardRoute } from '@core/router'
     import { activeProfile } from '@core/profile'
     import { appSettings, PlatformOption, platform } from '@core/app'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/app'
     import { popupState } from '@auxiliary/popup'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { onDestroy, onMount } from 'svelte'

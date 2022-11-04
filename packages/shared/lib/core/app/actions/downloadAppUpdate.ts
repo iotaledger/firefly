@@ -7,8 +7,8 @@ import {
     updateDisplayNotificationProgress,
 } from '@auxiliary/notification'
 import { INotificationData } from '@auxiliary/notification'
-import { Platform } from '@lib/platform'
 
+import { Platform } from '../classes'
 import { installAppUpdate } from '../utils'
 import {
     appUpdateBusy,
