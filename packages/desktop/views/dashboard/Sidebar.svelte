@@ -13,9 +13,9 @@
         settingsRoute,
         settingsRouter,
         SettingsRoute,
-        SidebarTab as SidebarTabType,
     } from '@core/router'
     import { localize } from '@core/i18n'
+    import { ISidebarTab } from '../../lib/routers'
 
     let profileModal: Modal
     let drawer: Drawer
@@ -30,7 +30,7 @@
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
-    const sidebarTabs: SidebarTabType[] = [
+    const sidebarTabs: ISidebarTab[] = [
         ...(features?.wallet?.enabled
             ? [
                   {
