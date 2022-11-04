@@ -27,7 +27,7 @@ function migratePersistedProfile(persistedProfile: IPersistedProfile): void {
     let migratedPersistedProfile = persistedProfile
     let migrationVersion = get(currentProfileVersion)
     for (migrationVersion; migrationVersion < PROFILE_VERSION; migrationVersion++) {
-        migratedPersistedProfile = profileMigrationsMap?.[migrationVersion](migratedPersistedProfile)
+        migratedPersistedProfile = profileMigrationsMap?.[migrationVersion]?.(migratedPersistedProfile)
     }
     saveProfile(migratedPersistedProfile)
 }
