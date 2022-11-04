@@ -10,7 +10,7 @@ export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     type: ProfileType.Software,
     networkProtocol: NetworkProtocol?.Shimmer,
     networkType: NetworkType?.Mainnet,
-    lastStrongholdBackupTime: new Date(),
+    lastStrongholdBackupTime: undefined,
     settings: {
         currency: ExchangeRate.USD,
         lockScreenTimeoutInMinutes: 5,
