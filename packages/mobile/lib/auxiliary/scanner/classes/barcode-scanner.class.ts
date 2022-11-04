@@ -85,7 +85,8 @@ export class BarcodeScanner {
         // await _BarcodeScanner.prepare()
     }
 
-    public static async start(): Promise<void> {
+    /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+    public static async start(onSuccess: (result: string) => void, onError: () => void): Promise<void> {
         // try {
         //     const permissionGranted = await this._didUserGrantPermission()
         //     if (permissionGranted) {
