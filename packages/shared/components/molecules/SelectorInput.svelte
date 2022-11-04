@@ -11,7 +11,6 @@
     export let inputElement: HTMLInputElement = undefined
     export let options = []
     export let onClick: (val: unknown) => void = undefined
-    export let onClose: () => void = undefined
 
     let hasFocus: boolean
 
@@ -41,7 +40,12 @@
     />
 
     {#if options.length > 0}
-        <Modal bind:this={modal} position={{ left: '0', top: '100%' }} classes="w-full p-4" on:close={onClose}>
+        <Modal
+            bind:this={modal}
+            position={{ left: '0', top: '100%' }}
+            classes="w-full p-4"
+            on:close={() => inputElement.blur()}
+        >
             <picker-modal class="max-h-64 flex flex-col space-y-1 scrollable-y" in:fade={{ duration: 100 }}>
                 {#each options as option, index}
                     <button
