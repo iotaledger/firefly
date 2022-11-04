@@ -6,8 +6,8 @@ android {
         applicationId 'org.iota.firefly.mobile.alpha'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdk 30
-        versionCode 30
-        versionName '0.1.0'
+        versionCode 32
+        versionName '1.0.2'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
