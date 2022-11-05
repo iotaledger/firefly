@@ -19,7 +19,9 @@
     export let rawAmount: string = undefined
     export let unit: string = undefined
 
-    let amount: string = rawAmount ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit) : undefined
+    let amount: string = rawAmount
+        ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit, false)
+        : undefined
     let amountInputElement: HTMLInputElement
     let error: string
 
