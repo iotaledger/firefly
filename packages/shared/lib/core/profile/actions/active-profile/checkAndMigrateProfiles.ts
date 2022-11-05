@@ -27,7 +27,8 @@ function migratePersistedProfile(persistedProfile: IPersistedProfile): void {
     let migratedPersistedProfile = persistedProfile
     let migrationVersion = get(currentProfileVersion)
     for (migrationVersion; migrationVersion < PROFILE_VERSION; migrationVersion++) {
-        migratedPersistedProfile = persistedProfileMigrationsMap?.[migrationVersion]?.(migratedPersistedProfile)
+        migratedPersistedProfile =
+            persistedProfileMigrationsMap?.[migrationVersion]?.(migratedPersistedProfile) ?? migratedPersistedProfile
     }
     saveProfile(migratedPersistedProfile)
 }
@@ -60,7 +61,7 @@ function persistedProfileMigrationToV4(existingProfile: unknown): IPersistedProf
 
     keysToKeep.forEach((key) => {
         const existingValue = existingProfile?.[key]
-        if (existingValue) {
+        if (existingValue !== undefined) {
             newProfile[key] = existingValue
         }
     })
