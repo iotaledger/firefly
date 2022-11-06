@@ -100,3 +100,12 @@ export function getTrimmedLength(name: string | undefined): number {
 
     return name.trim().match(/./gu)?.length ?? 0
 }
+
+export function getNthOccurrenceIndex(string: string, char: string, n: number): number {
+    let index = -1
+    while (n-- && index++ < string.length) {
+        index = string.indexOf(char, index)
+        if (index < 0) break
+    }
+    return index
+}
