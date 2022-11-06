@@ -1,25 +1,35 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
 
-    import { IotaUnit } from '@core/utils'
-    import { IAsset, newTransactionDetails, selectedAccountAssets, updateNewTransactionDetails } from '@core/wallet'
-
-    import { AssetList } from '../../../../../components'
+    import { selectedAccountAssets, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
     import { sendRouter } from '../../../../../lib/routers'
 
-    function onAssetClick(asset: IAsset) {
-        updateNewTransactionDetails({ type: $newTransactionDetails.type, asset })
-        $sendRouter.next()
-    }
+    let amount = ''
+    // let unit
+    const error = ''
 
+    // $: unit,
     onMount(() => {
+        // if SMR we show the toggle SMR/Glow, otherwise we show nothing
+        // updateNewTransactionDetails({
+        //     type: $newTransactionDetails.type,
+        //     unit: $newTransactionDetails?.unit ?? IotaUnit.M,
+        // })
+    })
+
+    function onContinueClick(): void {
         updateNewTransactionDetails({
             type: $newTransactionDetails.type,
-            unit: $newTransactionDetails?.unit ?? IotaUnit.M,
+            rawAmount: amount,
+            unit: $selectedAccountAssets.baseCoin.metadata.unit,
         })
-    })
+        $sendRouter.next()
+    }
 </script>
 
 <div class="w-full overflow-y-auto flex flex-auto h-1">
-    <AssetList onAssetTileClick={onAssetClick} assets={$selectedAccountAssets} />
+    <input type="number" bind:value={amount} />
+    <!-- {#if condition}
+    {/if} -->
+    <button on:click={onContinueClick}>{error ?? 'continue'}</button>
 </div>
