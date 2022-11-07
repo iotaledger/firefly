@@ -14,7 +14,7 @@
     import { Idle } from 'shared/components'
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/app'
     import { Developer } from './developer'
     import { Settings } from './settings'
     import { Wallet } from './wallet'

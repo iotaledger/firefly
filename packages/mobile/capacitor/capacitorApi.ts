@@ -1,12 +1,11 @@
 import { Capacitor } from '@capacitor/core'
-
 import { SplashScreen } from '@capacitor/splash-screen'
+
+import { IAppVersionDetails, IPlatform } from '@core/app'
+
 import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
-
-import { IAppVersionDetails } from '@core/app'
-import { IPlatform } from '@lib/typings/platform'
 
 let activeProfileId = null
 

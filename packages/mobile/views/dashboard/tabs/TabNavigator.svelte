@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Icon } from 'shared/components'
-    import features from '../../../features/features'
+    import features from '@features/features'
     import { activeDashboardTab, updateActiveDashboardTab, DashboardTab } from '../../../lib/contexts/dashboard'
 
     $: darkModeEnabled = $appSettings.darkMode
