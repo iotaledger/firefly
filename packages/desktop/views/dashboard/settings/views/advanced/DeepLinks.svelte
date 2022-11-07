@@ -2,7 +2,7 @@
     import { Checkbox, Text } from 'shared/components'
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/app'
 
     let deepLinkingChecked = $appSettings.deepLinking
 

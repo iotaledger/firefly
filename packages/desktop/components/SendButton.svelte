@@ -3,7 +3,7 @@
     import { resetLedgerPreparedOutput, resetShowInternalVerificationPopup } from '@core/ledger'
     import { resetNewTokenTransactionDetails } from '@core/wallet'
     import { openPopup } from '@auxiliary/popup'
-    import { OnboardingButton } from 'shared/components'
+    import { OnboardingButton } from '@ui'
 
     function onSendClick(): void {
         resetNewTokenTransactionDetails()

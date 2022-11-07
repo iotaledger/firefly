@@ -1,6 +1,6 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
-import { Platform } from '@lib/platform'
+import { Platform } from '@core/app'
 
 export function sleep(ms: number): Promise<number> {
     return new Promise((resolve) => setTimeout(resolve, ms))

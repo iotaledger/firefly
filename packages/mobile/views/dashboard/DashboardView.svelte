@@ -5,7 +5,7 @@
     import { activeProfile, hasStrongholdLocked, reflectLockedStronghold, saveActiveProfile } from '@core/profile'
     import { Button, TogglableAmountLabel } from 'shared/components'
     import { TabPane, TopBar } from '../../components'
-    import features from '../../features/features'
+    import features from '@features/features'
     import { activeDashboardTab, DASHBOARD_TAB_COMPONENT } from '../../lib/contexts/dashboard'
     import { DashboardRoute, dashboardRouter } from '../../lib/routers'
     import DashboardRouter from './DashboardRouter.svelte'
