@@ -84,6 +84,7 @@
     {onClick}
     {disabled}
     options={filteredAccounts}
+    {...$$restProps}
     let:option
 >
     <AccountLabel account={option} />

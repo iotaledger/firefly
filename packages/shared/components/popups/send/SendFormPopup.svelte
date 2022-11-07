@@ -130,7 +130,7 @@
             <NftInput bind:this={nftInput} bind:nftId />
         {/if}
         <NetworkInput bind:network />
-        <RecipientInput bind:this={recipientInput} bind:recipient />
+        <RecipientInput bind:this={recipientInput} bind:recipient maxHeight="max-h-48" />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
                 bind:this={metadataInput}

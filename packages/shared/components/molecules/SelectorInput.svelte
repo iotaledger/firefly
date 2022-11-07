@@ -10,13 +10,14 @@
     export let modal: Modal = undefined
     export let inputElement: HTMLInputElement = undefined
     export let options = []
-    export let onClick: (val: unknown) => void = undefined
+    export let maxHeight: string = 'max-h-64'
+    export let onClick: (val: unknown) => void = () => {}
 
     let hasFocus: boolean
 
     function handleClick(option: unknown) {
         modal?.close()
-        onClick?.(option)
+        onClick(option)
     }
 
     $: hasFocus && (error = '')
@@ -46,7 +47,7 @@
             classes="w-full p-4"
             on:close={() => inputElement.blur()}
         >
-            <picker-modal class="max-h-64 flex flex-col space-y-1 scrollable-y" in:fade={{ duration: 100 }}>
+            <picker-modal class="{maxHeight} flex flex-col space-y-1 scrollable-y" in:fade={{ duration: 100 }}>
                 {#each options as option, index}
                     <button
                         on:click={() => handleClick(option)}
