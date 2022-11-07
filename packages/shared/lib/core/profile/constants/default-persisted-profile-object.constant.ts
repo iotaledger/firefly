@@ -1,18 +1,16 @@
-import { NetworkProtocol, NetworkType } from '@core/network'
-import { ExchangeRate } from '@core/utils'
+import { NetworkProtocol, NetworkType } from '@core/network/enums'
+import { ExchangeRate } from '@core/utils/enums'
 
 import { ProfileType } from '../enums'
 import { IPersistedProfile } from '../interfaces'
-import { PROFILE_VERSION } from './profile-version.constant'
 
-export const DEFAULT_ACTIVE_PROFILE_VALUE: IPersistedProfile = {
+export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     id: '',
     name: '',
     type: ProfileType.Software,
-    version: PROFILE_VERSION,
     networkProtocol: NetworkProtocol?.Shimmer,
     networkType: NetworkType?.Mainnet,
-    lastStrongholdBackupTime: new Date(),
+    lastStrongholdBackupTime: undefined,
     settings: {
         currency: ExchangeRate.USD,
         lockScreenTimeoutInMinutes: 5,
