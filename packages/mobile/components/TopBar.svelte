@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { AccountActionsButton, AccountSwitcherButton, ProfileActionsButton } from './'
-    import features from '../features/features'
+    import features from '@features/features'
 </script>
 
 <div class="grid grid-cols-4 h-10">

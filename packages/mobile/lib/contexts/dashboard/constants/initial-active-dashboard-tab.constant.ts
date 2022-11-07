@@ -1,5 +1,5 @@
 import { DashboardTab } from '../enums'
-import features from '../../../../features/features'
+import features from '@features/features'
 
 export const INITIAL_ACTIVE_DASHBOARD_TAB: DashboardTab | null = getInitialActiveDashboardTab()
 

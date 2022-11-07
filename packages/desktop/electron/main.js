@@ -1,4 +1,4 @@
-import features from 'shared/features/features'
+import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { shouldReportError } from './lib/errorHandling'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')

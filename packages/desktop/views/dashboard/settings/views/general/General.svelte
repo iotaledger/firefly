@@ -4,7 +4,7 @@
     import { Currency, Language, NetworkStatus, Notifications, Theme } from './'
     import ChangeProfileName from './ChangeProfileName.svelte'
     import { activeProfile } from '@core/profile'
-    import features from 'shared/features/features'
+    import features from '@features/features'
 
     const settings: {
         component: unknown
