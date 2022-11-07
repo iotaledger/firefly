@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { Link, Text } from 'shared/components'
-    import { Platform } from '@lib/platform'
+    import { Platform } from '@core/app'
 </script>
 
 <div class="mb-8">

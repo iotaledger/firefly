@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { Platform } from '@lib/platform'
+import { Platform } from '@core/app'
 import { InvalidBackupDestinationError } from '@core/profile'
 import { backup } from '@core/profile-manager'
 import { getDefaultStrongholdName } from '@core/stronghold'

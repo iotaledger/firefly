@@ -1,5 +1,5 @@
 import { getSecretManagerPath } from '@core/profile-manager'
-import { Platform } from '@lib/platform'
+import { Platform } from '@core/app'
 
 import { UnableToCopyStrongholdBackupFileError } from '../errors'
 
