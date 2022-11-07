@@ -1,8 +1,6 @@
 <script lang="typescript">
     import { Icon } from 'shared/components'
-    import { bindEvents } from '@core/utils'
 
-    export let events = []
     export let href = undefined
     export let secondary = false
     export let disabled = false
@@ -16,7 +14,6 @@
 <a
     class="text-12 leading-140 cursor-pointer text-blue-500 {icon && 'flex flex-row items-center'} {classes}"
     data-label="link"
-    use:bindEvents={events}
     {href}
     on:click={onClick}
     class:secondary
