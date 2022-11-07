@@ -726,7 +726,7 @@
             "userPath": "User Path"
         },
         "transaction": {
-            "title": "Confirm transaction",
+            "title": "Send asset",
             "body": "You’re about to send {amount} to",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
@@ -1141,7 +1141,6 @@
         "sendFunds": "Send funds",
         "sendTokensToAddress": "Send tokens to an address",
         "sendToAddress": "Send to address",
-        "sendAsset": "Send asset",
         "sendToken": "Send token",
         "sendNft": "Send NFT",
         "sendNftToAddress": "Send NFT to an address",
