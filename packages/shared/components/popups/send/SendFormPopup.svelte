@@ -21,6 +21,7 @@
     import { DestinationNetwork } from '@core/network'
     import { getByteLengthOfString } from '@core/utils'
     import { get } from 'svelte/store'
+    import { selectedAccount } from '@core/account'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -53,6 +54,8 @@
     const tabs: SendForm[] = [SendForm.SendToken, SendForm.SendNft]
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
+
+    $: ownsNfts = $selectedAccount.balances.nfts.length > 0
 
     function getTransactionDetails(): NewTransactionDetails {
         if (activeTab === SendForm.SendToken) {
@@ -124,7 +127,9 @@
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('general.sendAsset')}
     </Text>
-    <Tabs bind:activeTab {tabs} />
+    {#if ownsNfts}
+        <Tabs bind:activeTab {tabs} />
+    {/if}
     <send-form-inputs class="flex flex-col space-y-4">
         {#if activeTab === SendForm.SendToken}
             <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
