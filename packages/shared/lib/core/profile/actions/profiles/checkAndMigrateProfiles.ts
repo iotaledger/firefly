@@ -61,9 +61,7 @@ function persistedProfileMigrationToV4(existingProfile: unknown): IPersistedProf
 
     keysToKeep.forEach((key) => {
         const existingValue = existingProfile?.[key]
-        if (existingValue !== undefined) {
-            newProfile[key] = existingValue
-        }
+        newProfile[key] = existingValue
     })
 
     return newProfile as IPersistedProfile

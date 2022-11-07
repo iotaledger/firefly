@@ -1,5 +1,4 @@
 export * from './checkActiveProfileAuth'
-export * from './checkAndMigrateProfiles'
 export * from './loadAccounts'
 export * from './loadPersistedProfileIntoActiveProfile'
 export * from './lockStronghold'
