@@ -1,4 +1,4 @@
-import { Platform } from '@lib/platform'
+import { Platform } from '@core/app'
 
 import { isDeepLinkRequestActive } from '../stores'
 

@@ -2,13 +2,13 @@
     import { Text, Button, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
-    import { Platform } from 'shared/lib/platform'
     import {
         BasicActivityDetails,
         AliasActivityDetails,
         FoundryActivityDetails,
         NftActivityDetails,
     } from 'shared/components/molecules'
+    import { Platform } from '@core/app'
     import {
         ActivityAsyncStatus,
         ActivityDirection,

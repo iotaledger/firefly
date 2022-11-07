@@ -1,15 +1,9 @@
-import { IAppSettings, IAppVersionDetails } from '@core/app'
 import { IError } from '@core/error'
-import { IDeepLinkManager } from '@auxiliary/deep-link'
-import { INotificationManager } from '@auxiliary/notification'
 
-import { EventMap } from './events'
-import { IPincodeManager } from './pincodeManager'
-
-export enum Platforms {
-    MOBILE = 'mobile',
-    DESKTOP = 'desktop',
-}
+import { IDeepLinkManager, INotificationManager, IPincodeManager } from './managers'
+import { IAppSettings } from './app-settings.interface'
+import { IAppVersionDetails } from './app-version-details.interface'
+import { IPlatformEventMap } from './platform-event-map.interface'
 
 export interface IPlatform {
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
@@ -47,6 +41,6 @@ export interface IPlatform {
 
     unhandledException(title: string, err: IError | unknown): Promise<void>
 
-    onEvent<K extends keyof EventMap>(eventName: K, callback: (param: EventMap[K]) => void)
-    removeListenersForEvent<K extends keyof EventMap>(eventName: K)
+    onEvent<K extends keyof IPlatformEventMap>(eventName: K, callback: (param: IPlatformEventMap[K]) => void)
+    removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K)
 }

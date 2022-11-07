@@ -1,4 +1,4 @@
-import { INotificationManager } from '@auxiliary/notification'
+import { INotificationManager } from '@core/app'
 
 /**
  * Create and show a native notification

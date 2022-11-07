@@ -17,7 +17,7 @@
             await backupInitialStronghold()
         }
 
-        updateOnboardingProfile({ mnemonic: null })
+        updateOnboardingProfile({ mnemonic: null, strongholdPassword: null, importFile: null, importFilePath: null })
 
         $profileBackupRouter.next()
     }

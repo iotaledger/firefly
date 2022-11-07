@@ -12,7 +12,7 @@
         NetworkConfiguration,
         WalletFinder,
     } from './'
-    import features from 'shared/features/features'
+    import features from '@features/features'
 
     const settings: {
         component: unknown
