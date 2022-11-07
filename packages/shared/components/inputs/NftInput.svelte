@@ -18,8 +18,8 @@
         }
     }
 
-    function onClick(_selected): void {
-        nftId = _selected.id
+    function onClick(selectedNft): void {
+        nftId = selectedNft.id
     }
 </script>
 

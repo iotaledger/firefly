@@ -12,9 +12,8 @@
 
     const networks = Object.values(DestinationNetwork)
 
-    function onClick(_selected: DestinationNetwork): void {
-        modal?.close()
-        network = _selected
+    function onClick(selectedNetwork: DestinationNetwork): void {
+        network = selectedNetwork
     }
 </script>
 

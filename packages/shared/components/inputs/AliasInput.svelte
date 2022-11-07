@@ -25,8 +25,8 @@
         }
     }
 
-    function onClick(_selected: any): void {
-        alias = _selected.value
+    function onClick(selectedAlias: { value: string; label: string }): void {
+        alias = selectedAlias.value
     }
 </script>
 

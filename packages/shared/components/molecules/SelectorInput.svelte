@@ -14,9 +14,9 @@
 
     let hasFocus: boolean
 
-    function handleClick(option: any) {
+    function handleClick(option: unknown) {
         modal?.close()
-        onClick ?? onClick(option)
+        onClick?.(option)
     }
 
     $: hasFocus && (error = '')
