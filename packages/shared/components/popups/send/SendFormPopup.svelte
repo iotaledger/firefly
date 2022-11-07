@@ -117,7 +117,7 @@
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
-        {localize('general.sendAsset')}
+        {localize('popups.transaction.title')}
     </Text>
     {#if ownsNfts}
         <Tabs bind:activeTab {tabs} />
