@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { Button, Text, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/app'
     import { HelpAndInfoRoute } from '@core/router'
 
     export let route: HelpAndInfoRoute

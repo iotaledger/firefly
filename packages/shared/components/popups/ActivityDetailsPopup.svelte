@@ -2,7 +2,7 @@
     import { Text, Button, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/app'
     import { TransactionDetails, AliasDetails, FoundryDetails, NftDetails } from 'shared/components/molecules'
     import {
         ActivityAsyncStatus,
