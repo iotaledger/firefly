@@ -13,13 +13,12 @@
         openSettings,
     } from '@core/router'
     import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings, setPlatform } from '@core/app'
-    import { Electron } from '@lib/electron'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, popupState } from '@auxiliary/popup'
-    import { getLocalisedMenuItems } from './lib/helpers'
-    import { Platform } from '@lib/platform'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { Electron } from './lib/electron'
+    import { getLocalisedMenuItems } from './lib/helpers'
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
 
@@ -122,7 +121,7 @@
         await cleanupEmptyProfiles()
         // loadPersistedProfileIntoActiveProfile($activeProfileId)
 
-        const platform = await Platform.getOS()
+        const platform = await Electron.getOS()
         setPlatform(platform)
     })
 
