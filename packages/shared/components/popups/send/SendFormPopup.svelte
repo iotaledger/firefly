@@ -9,15 +9,7 @@
         NewTransactionType,
         setNewTransactionDetails,
     } from '@core/wallet'
-    import {
-        RecipientInput,
-        AssetAmountInput,
-        OptionalInput,
-        NetworkInput,
-        NftInput,
-        NftMediaSize,
-        NftMediaContainer,
-    } from 'shared/components'
+    import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
     import { DestinationNetwork } from '@core/network'
     import { getByteLengthOfString } from '@core/utils'
     import { get } from 'svelte/store'
@@ -134,7 +126,6 @@
         {#if activeTab === SendForm.SendToken}
             <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         {:else}
-            <NftMediaContainer {nftId} size={NftMediaSize.Medium} />
             <NftInput bind:nftId />
         {/if}
         <NetworkInput bind:network />
