@@ -15,7 +15,7 @@
     import { OnboardingButton } from 'shared/components'
     import { onMount } from 'svelte'
     import { OnboardingLayout } from '../../../../../components'
-    import features from '../../../../../features/features'
+    import features from '@features/features'
 
     const title = localize('views.onboarding.profileSetup.setup.title', {
         values: { protocol: formatProtocolName($onboardingProfile?.networkProtocol) },

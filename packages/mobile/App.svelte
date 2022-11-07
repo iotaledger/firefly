@@ -9,10 +9,10 @@
         AppStage,
         AppTheme,
         initAppSettings,
+        Platform,
         setPlatform,
         shouldBeDarkMode,
     } from '@core/app'
-    import { Platform } from '@lib/platform'
     import { onboardingProfile } from '@contexts/onboarding'
     import { ToastContainer } from '@ui'
     import { Route } from './components'

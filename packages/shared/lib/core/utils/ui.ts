@@ -1,26 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import { Event } from '@lib/typings/events'
-
 import { isRecentDate } from './date'
-import { Element } from './interfaces'
-
-export function bindEvents(element: Element, events: Event<unknown>[]): { destroy } {
-    const listeners = Object.entries(events).map(([event, handler]) => {
-        const listener = element.addEventListener(event, handler)
-
-        return [event, listener]
-    })
-
-    return {
-        destroy() {
-            listeners.forEach(([event, listener]) => {
-                element.removeEventListener(event as string, listener)
-            })
-        },
-    }
-}
 
 export function debounce(callback: () => void, wait = 500): (...args: unknown[]) => void {
     let _timeout

@@ -1,4 +1,4 @@
-import { Platform } from '@lib/platform'
+import { Platform } from '../classes'
 
 /**
  * Performs a check for an application update.
