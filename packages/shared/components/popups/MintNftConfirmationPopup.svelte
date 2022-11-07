@@ -66,7 +66,7 @@
         {localize('popups.mintNftForm.title')}
     </Text>
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
-        <NftDetails metadata={$mintNftDetails} />
+        <NftDetails nftMetadata={$mintNftDetails} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" disabled={isTransferring} onClick={handleBack}>

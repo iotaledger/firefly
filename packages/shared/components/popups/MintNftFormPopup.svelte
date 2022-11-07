@@ -6,8 +6,7 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
-    import { IIrc27Metadata, MimeType } from '@core/nfts'
-    import { NftMimeType } from '@core/collectibles'
+    import { IIrc27Metadata, MimeType, SupportedMimeType } from '@core/nfts'
     import { isValidUrl, validateBech32Address } from '@core/utils'
     import { networkHrp } from '@core/network'
 
@@ -20,12 +19,18 @@
         Object.entries(metadata).map(([key, value]) => [key, (value as string) ?? ''])
     ) as Inputs
 
-    type InputErrors = Inputs
-    const inputErrors = Object.fromEntries(Object.entries(inputs).map(([key]) => [key, ''])) as InputErrors
+    type OptionalInputErrors = Omit<Inputs, 'type' | 'uri' | 'name'>
+    const optionalInputErrors = Object.fromEntries(
+        Object.entries(inputs)
+            .filter((input) => !['type', 'uri', 'name'].includes(input[0]))
+            .map(([key]) => [key, ''])
+    ) as OptionalInputErrors
+
+    let typeError: string, uriError: string, nameError: string
 
     const error: BaseError = null
 
-    const nftTypeOptions = Object.keys(NftMimeType)
+    const nftTypeOptions = Object.keys(SupportedMimeType)
         .filter((key) => Number.isNaN(Number(key)))
         .map((type) => ({
             label: type as MimeType,
@@ -53,17 +58,17 @@
 
     function validate(): boolean {
         if (!nftTypeOptions.map((e) => e.value).includes(inputs.type as MimeType)) {
-            inputErrors.type = 'Invalid MimeType, check if the file type is supported'
+            typeError = 'Invalid MimeType, check if the file type is supported'
         }
 
         if (inputs.name.length === 0) {
-            inputErrors.name = 'Empty name, it is a required field'
+            nameError = 'Empty name, it is a required field'
         }
 
         if (inputs.uri.length === 0) {
-            inputErrors.uri = 'Empty URI, please provide a valid URI'
+            uriError = 'Empty URI, please provide a valid URI'
         } else if (!isValidUrl(inputs.uri)) {
-            inputErrors.uri = 'Invalid URI, please provide a valid URI'
+            uriError = 'Invalid URI, please provide a valid URI'
         }
 
         if (inputs.royalties) {
@@ -74,7 +79,9 @@
             validateAttributes()
         }
 
-        const hasErrors = Object.values(inputErrors).some((e) => e !== '')
+        const hasErrors = Object.values({ ...optionalInputErrors, typeError, nameError, uriError }).some(
+            (e) => e !== ''
+        )
         return !hasErrors
     }
 
@@ -83,24 +90,24 @@
         try {
             royalties = JSON.parse(inputs.royalties)
         } catch (err) {
-            inputErrors.royalties = 'Royalties must be a valid JSON'
+            optionalInputErrors.royalties = 'Royalties must be a valid JSON'
             return
         }
 
         const isKeysValid = Object.keys(royalties).every((key) => !validateBech32Address($networkHrp, key))
         if (!isKeysValid) {
-            inputErrors.royalties = `Invalid address, must be a valid ${$networkHrp} address where royalties will be sent to.`
+            optionalInputErrors.royalties = `Invalid address, must be a valid ${$networkHrp} address where royalties will be sent to.`
             return
         }
         const isValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
         if (!isValuesValid) {
-            inputErrors.royalties =
+            optionalInputErrors.royalties =
                 'Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05'
             return
         }
         const isSumValid = Object.values(royalties).reduce((acc, val) => acc + val, 0) <= 1
         if (!isSumValid) {
-            inputErrors.royalties = 'Invalid value, the sum of all royalties must be less than or equal to 1'
+            optionalInputErrors.royalties = 'Invalid value, the sum of all royalties must be less than or equal to 1'
             return
         }
     }
@@ -110,19 +117,19 @@
         try {
             attributes = JSON.parse(inputs.attributes)
         } catch (err) {
-            inputErrors.attributes = 'Attributes must be a valid JSON'
+            optionalInputErrors.attributes = 'Attributes must be a valid JSON'
             return
         }
 
         if (!Array.isArray(attributes)) {
-            inputErrors.attributes = 'Attributes must be an array'
+            optionalInputErrors.attributes = 'Attributes must be an array'
             return
         }
         const isArrayOfObjects = attributes.every(
             (attribute) => typeof attribute === 'object' && !Array.isArray(attribute) && attribute !== null
         )
         if (!isArrayOfObjects) {
-            inputErrors.attributes = 'Attributes must be an array of objects'
+            optionalInputErrors.attributes = 'Attributes must be an array of objects'
             return
         }
         const isKeysValid = attributes.every(
@@ -132,7 +139,7 @@
                 Object.keys(attribute).filter((key) => key === 'value').length === 1
         )
         if (!isKeysValid) {
-            inputErrors.attributes = 'Invalid key, attributes must have the keys "trait_type" and "value"'
+            optionalInputErrors.attributes = 'Invalid key, attributes must have the keys "trait_type" and "value"'
             return
         }
         const isValuesValid = attributes.every(
@@ -144,7 +151,7 @@
                 typeof attribute.value === 'number'
         )
         if (!isValuesValid) {
-            inputErrors.attributes =
+            optionalInputErrors.attributes =
                 'Invalid value, "trait_type" must be a non empty string and "value" must be a non empty string or a number'
             return
         }
@@ -178,7 +185,7 @@
     <popup-inputs class="block space-y-4 max-h-100 scrollable-y overflow-x-hidden flex-1">
         <Dropdown
             bind:value={inputs.type}
-            bind:error={inputErrors.type}
+            bind:error={typeError}
             onSelect={handleSelectNftType}
             label={localize('popups.mintNftForm.inputs.type')}
             placeholder={localize('popups.mintNftForm.inputs.type')}
@@ -189,13 +196,13 @@
         />
         <TextInput
             bind:value={inputs.uri}
-            bind:error={inputErrors.uri}
+            bind:error={uriError}
             label={localize('popups.mintNftForm.inputs.uri')}
             placeholder={localize('popups.mintNftForm.inputs.uri')}
         />
         <TextInput
             bind:value={inputs.name}
-            bind:error={inputErrors.name}
+            bind:error={nameError}
             label={localize('popups.mintNftForm.inputs.name')}
             placeholder={localize('popups.mintNftForm.inputs.name')}
         />
@@ -203,7 +210,7 @@
             {#each Object.keys(inputs).filter((key) => !['type', 'uri', 'name'].includes(key)) as key}
                 <OptionalInput
                     bind:value={inputs[key]}
-                    bind:error={inputErrors[key]}
+                    bind:error={optionalInputErrors[key]}
                     label={localize(`popups.mintNftForm.inputs.${key}`)}
                     description={localize(`tooltips.mintNftForm.${key}`)}
                     fontSize="14"

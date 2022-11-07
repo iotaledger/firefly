@@ -33,7 +33,7 @@
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
-    export let direction: ActivityDirection
+    export let direction: ActivityDirection = ActivityDirection.Incoming
     export let expirationDate: Date = null
     export let timelockDate: Date = null
     export let inclusionState: InclusionState = InclusionState.Pending
