@@ -2,9 +2,8 @@
     import { ButtonSize, ButtonVariant, HTMLButtonType, Icon, Spinner } from 'shared/components'
     import { onMount } from 'svelte'
     import { appSettings } from '@core/app'
-    import { bindEvents, debounce } from '@core/utils'
+    import { debounce } from '@core/utils'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import type { Event } from '@lib/typings/events'
 
     export let autofocus: boolean = false
     export let classes: string = ''
@@ -28,8 +27,6 @@
 
     export let form: string = null
     export let buttonElement: HTMLButtonElement = undefined
-
-    export let events: Event<unknown>[] = []
 
     export let onClick: () => unknown = () => {}
 
@@ -67,7 +64,6 @@
     class:outline
     class:is-busy={isBusy}
     style:--border-width={outline ? '1px' : '0px'}
-    use:bindEvents={events}
     on:click|stopPropagation={debounce(onClick, 100)}
     bind:this={buttonElement}
 >
