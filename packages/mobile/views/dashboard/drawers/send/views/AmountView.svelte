@@ -1,14 +1,21 @@
 <script lang="typescript">
+    import { AmountInput, Button, UnitInput } from '@ui'
     import { onMount } from 'svelte'
 
-    import { selectedAccountAssets, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
+    import { newTransactionDetails, NewTransactionType, updateNewTransactionDetails } from '@core/wallet'
     import { sendRouter } from '../../../../../lib/routers'
 
-    let amount = ''
-    // let unit
+    let amount =
+        $newTransactionDetails?.type === NewTransactionType.TokenTransfer
+            ? $newTransactionDetails?.rawAmount
+            : undefined
+    let unit: string =
+        $newTransactionDetails?.type === NewTransactionType.TokenTransfer ? $newTransactionDetails?.unit : undefined
     const error = ''
 
-    // $: unit,
+    let amountInputElement: HTMLInputElement
+
+    // $: amount, validate()
     onMount(() => {
         // if SMR we show the toggle SMR/Glow, otherwise we show nothing
         // updateNewTransactionDetails({
@@ -21,15 +28,27 @@
         updateNewTransactionDetails({
             type: $newTransactionDetails.type,
             rawAmount: amount,
-            unit: $selectedAccountAssets.baseCoin.metadata.unit,
+            unit,
         })
         $sendRouter.next()
     }
 </script>
 
-<div class="w-full overflow-y-auto flex flex-auto h-1">
-    <input type="number" bind:value={amount} />
-    <!-- {#if condition}
-    {/if} -->
-    <button on:click={onContinueClick}>{error ?? 'continue'}</button>
+<div class="w-full overflow-y-auto flex flex-col flex-auto h-1">
+    <div class="flex flex-row">
+        <!-- <input type="number" bind:value={amount} /> -->
+        <AmountInput bind:inputElement={amountInputElement} bind:amount maxDecimals={false} isInteger={true} />
+        <!-- {#if condition}
+        {/if} -->
+        <UnitInput
+            bind:unit
+            tokenMetadata={$newTransactionDetails?.type === NewTransactionType.TokenTransfer
+                ? $newTransactionDetails.asset?.metadata
+                : undefined}
+            isFocused={false}
+        />
+    </div>
+    <Button onClick={onContinueClick} disabled={false} classes="w-full">
+        {error ? error : 'continue'}
+    </Button>
 </div>
