@@ -19,7 +19,7 @@
         NftMediaContainer,
     } from 'shared/components'
     import { DestinationNetwork } from '@core/network'
-    import { getByteLengthOfString } from '@core/utils'
+    import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { get } from 'svelte/store'
 
     enum SendForm {
@@ -82,8 +82,10 @@
             await Promise.all([
                 activeTab === SendForm.SendToken ? assetAmountInput?.validate() : nftInput?.validate(),
                 recipientInput?.validate(),
-                metadataInput?.validate(validateOptionalInput(metadata, 8192, localize('error.send.metadataTooLong'))),
-                tagInput?.validate(validateOptionalInput(tag, 64, localize('error.send.tagTooLong'))),
+                metadataInput?.validate(
+                    validateOptionalInput(metadata, MAX_METADATA_BYTES, localize('error.send.metadataTooLong'))
+                ),
+                tagInput?.validate(validateOptionalInput(tag, MAX_TAG_BYTES, localize('error.send.tagTooLong'))),
             ])
             return true
         } catch (error) {
