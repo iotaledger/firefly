@@ -26,7 +26,6 @@ export async function handleSpentOutputEventInternal(
     if (activity && activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed) {
         const transactionId = payload?.output?.metadata?.transactionId
         updateAsyncDataByTransactionId(accountIndex, transactionId, {
-            isClaimed: true,
             asyncStatus: ActivityAsyncStatus.Claimed,
         })
     }

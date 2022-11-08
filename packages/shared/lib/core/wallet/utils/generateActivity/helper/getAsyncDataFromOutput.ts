@@ -15,14 +15,12 @@ export function getAsyncDataFromOutput(
     expirationDate: Date
     isRejected: boolean
     isClaiming: boolean
-    isClaimed: boolean
     claimingTransactionId: string
     claimedDate: Date
 } {
     const isAsync = isOutputAsync(output)
     if (isAsync) {
-        const asyncStatus = ActivityAsyncStatus.Unclaimed
-        const isClaimed = !!claimingData
+        const asyncStatus = claimingData ? ActivityAsyncStatus.Claimed : ActivityAsyncStatus.Unclaimed
         const isClaiming = false
         const claimingTransactionId = claimingData?.claimingTransactionId
         const claimedDate = claimingData?.claimedDate
@@ -37,7 +35,6 @@ export function getAsyncDataFromOutput(
             expirationDate,
             isRejected,
             isClaiming,
-            isClaimed,
             claimingTransactionId,
             claimedDate,
         }

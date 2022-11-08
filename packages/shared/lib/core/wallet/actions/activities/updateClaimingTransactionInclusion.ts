@@ -20,7 +20,6 @@ export function updateClaimingTransactionInclusion(
                     type: ActivityType.Transaction,
                     asyncData: {
                         ...activity.asyncData,
-                        isClaimed: true,
                         isClaiming: false,
                         claimedDate: new Date(),
                         asyncStatus: ActivityAsyncStatus.Claimed,
@@ -42,7 +41,6 @@ export function updateClaimingTransactionInclusion(
                     type: ActivityType.Transaction,
                     asyncData: {
                         ...activity.asyncData,
-                        isClaimed: false,
                         isClaiming: false,
                         claimingTransactionId: undefined,
                         asyncStatus: ActivityAsyncStatus.Unclaimed,

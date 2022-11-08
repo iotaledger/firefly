@@ -59,11 +59,11 @@
 
     function getTimeDiff(activity: Activity): string {
         if (activity.asyncData) {
-            const { asyncStatus, isClaimed, expirationDate, timelockDate } = activity.asyncData
+            const { asyncStatus, expirationDate, timelockDate } = activity.asyncData
             if (asyncStatus === ActivityAsyncStatus.Timelocked) {
                 return getTimeDifference(timelockDate, $time)
             }
-            if (!isClaimed && expirationDate) {
+            if (asyncStatus !== ActivityAsyncStatus.Claimed && expirationDate) {
                 return getTimeDifference(expirationDate, $time)
             }
         }
