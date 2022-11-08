@@ -17,7 +17,7 @@
 </script>
 
 <OnboardingButton
-    primaryText={localize('general.sendFunds')}
-    secondaryText={localize('general.sendTokensToAddress')}
+    primaryText={localize('general.sendAssets')}
+    secondaryText={localize('general.sendAssetToAddress')}
     onClick={onSendClick}
 />
