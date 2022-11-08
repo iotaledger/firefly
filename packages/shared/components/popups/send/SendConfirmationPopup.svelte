@@ -44,7 +44,6 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
-    export let tokenSend = false
 
     let { recipient, expirationDate, giftStorageDeposit, surplus, disableChangeExpiration, disableToggleGift } =
         get(newTransactionDetails)
@@ -181,7 +180,7 @@
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
-        >{localize(tokenSend ? 'popups.transaction.title' : 'popups.sendNft.confirmationTitle')}</Text
+        >{localize('popups.transaction.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}

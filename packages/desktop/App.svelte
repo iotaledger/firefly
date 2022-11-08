@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
     import { _, isLocaleLoaded, Locale, localeDirection, setupI18n } from '@core/i18n'
-    import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
+    import { activeProfile, checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
     import {
         AppRoute,
         appRoute,
@@ -13,13 +13,12 @@
         openSettings,
     } from '@core/router'
     import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings, setPlatform } from '@core/app'
-    import { Electron } from '@lib/electron'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, popupState } from '@auxiliary/popup'
-    import { getLocalisedMenuItems } from './lib/helpers'
-    import { Platform } from '@lib/platform'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
+    import { Electron } from './lib/electron'
+    import { getLocalisedMenuItems } from './lib/helpers'
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
 
@@ -27,11 +26,7 @@
 
     const { loggedIn } = $activeProfile
 
-    $: if ($loggedIn) {
-        if (isActiveProfileOutdated($activeProfile?.version)) {
-            migrateActiveProfile()
-        }
-    }
+    checkAndMigrateProfiles()
 
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
         await Electron.updateAppSettings({ sendCrashReports })
@@ -126,7 +121,7 @@
         await cleanupEmptyProfiles()
         // loadPersistedProfileIntoActiveProfile($activeProfileId)
 
-        const platform = await Platform.getOS()
+        const platform = await Electron.getOS()
         setPlatform(platform)
     })
 
