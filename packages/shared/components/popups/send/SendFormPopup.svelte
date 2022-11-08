@@ -119,10 +119,10 @@
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.transaction.title')}
     </Text>
-    {#if ownsNfts}
-        <Tabs bind:activeTab {tabs} />
-    {/if}
     <send-form-inputs class="flex flex-col space-y-4">
+        {#if ownsNfts}
+            <Tabs bind:activeTab {tabs} />
+        {/if}
         {#if activeTab === SendForm.SendToken}
             <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         {:else}
