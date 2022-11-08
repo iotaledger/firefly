@@ -150,7 +150,7 @@
             {localize('actions.cancel')}
         </Button>
         <Button classes="w-full" onClick={onContinue}>
-            {localize('actions.send')}
+            {localize('actions.next')}
         </Button>
     </popup-buttons>
 </send-form-popup>
