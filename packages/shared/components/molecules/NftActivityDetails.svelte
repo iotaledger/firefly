@@ -23,15 +23,16 @@
     import { Platform, time } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
+    import { IIrc27Metadata } from '@core/nfts'
 
     export let nftId: string = ''
-    export let nftMetadata: string = null
+    export let nftMetadata: IIrc27Metadata
     export let metadata: string = null
     export let tag: string = null
     export let asyncStatus: ActivityAsyncStatus = null
     export let claimedDate: Date = null
     export let claimingTransactionId: string = null
-    export let direction: ActivityDirection
+    export let direction: ActivityDirection = ActivityDirection.Incoming
     export let expirationDate: Date = null
     export let timelockDate: Date = null
     export let inclusionState: InclusionState = InclusionState.Pending
@@ -45,69 +46,86 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
-    $: formattedTransactionTime = getDateFormat(transactionTime)
-    $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
     $: isTimelocked = timelockDate > $time
     $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
 
+    $: formattedTransactionTime = getDateFormat(transactionTime)
+    $: formattedTimelockDate = getDateFormat(timelockDate)
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
-
     $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(
         giftedStorageDeposit ?? 0,
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
-    $: localePrefix = `tooltips.transactionDetails.${direction}.`
-
-    let detailsList: { [key in string]: { data: string; tooltipText?: string; copyable?: boolean } }
-    $: detailsList = {
+    let transactionDetailsList: { [key in string]: { data: string; isTooltipVisible?: boolean } }
+    $: transactionDetailsList = {
         ...(transactionTime && {
             transactionTime: { data: formattedTransactionTime },
         }),
         ...(nftId && { nftId: { data: nftId, copyable: true } }),
-        ...(nftMetadata && { nftMetadata: { data: JSON.stringify(nftMetadata) } }),
         ...(metadata && {
-            metadata: {
-                data: metadata,
-                tooltipText: localize(localePrefix + 'metadata'),
-            },
+            metadata: { data: metadata, isTooltipVisible: true },
         }),
         ...(tag && {
-            tag: {
-                data: tag,
-                tooltipText: localize(localePrefix + 'tag'),
-            },
+            tag: { data: tag, isTooltipVisible: true },
         }),
         ...(hasStorageDeposit && {
-            storageDeposit: {
-                data: formattedStorageDeposit,
-                tooltipText: localize(localePrefix + 'storageDeposit'),
-            },
+            storageDeposit: { data: formattedStorageDeposit, isTooltipVisible: true },
         }),
         ...(giftedStorageDeposit && {
-            giftedStorageDeposit: {
-                data: formattedGiftedStorageDeposit,
-                tooltipText: localize(localePrefix + 'giftedStorageDeposit'),
-            },
+            giftedStorageDeposit: { data: formattedGiftedStorageDeposit, isTooltipVisible: true },
         }),
         ...(expirationTime && {
-            expirationTime: {
-                data: expirationTime,
-                tooltipText: localize(localePrefix + 'expirationTime'),
-            },
+            expirationTime: { data: expirationTime, isTooltipVisible: true },
         }),
         ...(timelockDate && {
-            timelockDate: {
-                data: formattedTimelockDate,
-                tooltipText: localize(localePrefix + 'timelockDate'),
-            },
+            timelockDate: { data: formattedTimelockDate, isTooltipVisible: true },
         }),
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
+    }
+
+    let nftMetadataDetailsList: {
+        [key in keyof typeof nftMetadata]: { data: unknown; isTooltipVisible?: boolean; isCopyable?: boolean }
+    }
+    $: nftMetadataDetailsList = {
+        ...(nftMetadata?.standard && {
+            standard: { data: nftMetadata.standard, isTooltipVisible: true },
+        }),
+        ...(nftMetadata?.version && {
+            version: { data: nftMetadata.version },
+        }),
+        ...(nftMetadata?.name && {
+            name: { data: nftMetadata.name },
+        }),
+        ...(nftMetadata?.type && {
+            type: { data: nftMetadata.type as string, isTooltipVisible: true },
+        }),
+        ...(nftMetadata?.uri && {
+            uri: { data: nftMetadata.uri, isCopyable: true },
+        }),
+        ...(nftMetadata?.collectionId && {
+            collectionId: { data: nftMetadata.collectionId, isTooltipVisible: true },
+        }),
+        ...(nftMetadata?.collectionName && {
+            collectionName: { data: nftMetadata.collectionName },
+        }),
+        ...(nftMetadata?.royalties && {
+            royalties: { data: nftMetadata.royalties, isTooltipVisible: true },
+        }),
+        ...(nftMetadata?.issuerName && {
+            issuerName: { data: nftMetadata.issuerName, isTooltipVisible: true },
+        }),
+        ...(nftMetadata?.description && {
+            description: { data: nftMetadata.description },
+        }),
+        ...(nftMetadata?.attributes && {
+            attributes: { data: nftMetadata.attributes, isTooltipVisible: true },
+        }),
     }
 
     function handleTransactionIdClick(): void {
@@ -161,14 +179,25 @@
             <SubjectBox {subject} />
         {/if}
     </main-content>
-    {#if Object.entries(detailsList).length > 0}
+    {#if Object.entries(transactionDetailsList).length > 0}
         <details-list class="flex flex-col space-y-2">
-            {#each Object.entries(detailsList) as [key, value]}
+            {#each Object.entries(transactionDetailsList) as [key, value]}
                 <KeyValueBox
                     keyText={localize(`general.${key}`)}
                     valueText={value.data}
-                    tooltipText={value.tooltipText}
-                    isCopyable={value.copyable}
+                    tooltipText={value.isTooltipVisible
+                        ? localize(`tooltips.transactionDetails.${direction}.${key}`)
+                        : undefined}
+                />
+            {/each}
+            {#each Object.entries(nftMetadataDetailsList) as [key, value]}
+                <KeyValueBox
+                    keyText={localize(`views.collectibles.metadata.${key}`)}
+                    valueText={value.data}
+                    tooltipText={value.isTooltipVisible
+                        ? localize(`tooltips.transactionDetails.nftMetadata.${key}`)
+                        : undefined}
+                    isCopyable={value.isCopyable}
                 />
             {/each}
             {#if claimingTransactionId}
