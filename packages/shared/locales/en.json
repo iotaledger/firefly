@@ -1139,7 +1139,7 @@
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
         "sendAssets": "Send assets",
-        "sendAssetToAddress": "Send asset to an address or wallet",
+        "sendAssetToAddress": "Send asset to an address",
         "sendToAddress": "Send to address",
         "sendToken": "Send token",
         "sendNft": "Send NFT",
