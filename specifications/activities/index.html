@@ -4,39 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.721229492650">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="2.4.0.721304466342">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 2.4.0">
 
     <!-- Primary Meta Tags -->
-    <title>Account Activity | Firefly Team Handbook</title>
-    <meta name="title" content="Account Activity | Firefly Team Handbook">
-    <meta name="description" content="The following document explains how the Activity History is generated from IOTA's UTXO architecture." />
+    <title>Activities | Firefly Team Handbook</title>
+    <meta name="title" content="Activities | Firefly Team Handbook">
+    <meta name="description" content="This section describes the Activity History, its generation and internal structure. Due to IOTA's and Shimmers" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://iotaledger.github.io/firefly/specifications/account-activity/" />
+    <link rel="canonical" href="https://iotaledger.github.io/firefly/specifications/activities/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://iotaledger.github.io/firefly/specifications/account-activity/">
-    <meta property="og:title" content="Account Activity | Firefly Team Handbook">
-    <meta property="og:description" content="The following document explains how the Activity History is generated from IOTA's UTXO architecture.">
+    <meta property="og:url" content="https://iotaledger.github.io/firefly/specifications/activities/">
+    <meta property="og:title" content="Activities | Firefly Team Handbook">
+    <meta property="og:description" content="This section describes the Activity History, its generation and internal structure. Due to IOTA's and Shimmers">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://iotaledger.github.io/firefly/specifications/account-activity/">
-    <meta property="twitter:title" content="Account Activity | Firefly Team Handbook">
-    <meta property="twitter:description" content="The following document explains how the Activity History is generated from IOTA's UTXO architecture.">
+    <meta property="twitter:url" content="https://iotaledger.github.io/firefly/specifications/activities/">
+    <meta property="twitter:title" content="Activities | Firefly Team Handbook">
+    <meta property="twitter:description" content="This section describes the Activity History, its generation and internal structure. Due to IOTA's and Shimmers">
 
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/firefly/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/icon_firefly.png" rel="icon" />
-    <link href="../../resources/css/retype.css?v=2.4.0.721229492650" rel="stylesheet" />
+    <link href="../../resources/css/retype.css?v=2.4.0.721304466342" rel="stylesheet" />
 
-    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.721229492650" data-turbo-eval="false" defer></script>
+    <script type="text/javascript" src="../../resources/js/config.js?v=2.4.0.721304466342" data-turbo-eval="false" defer></script>
     <script type="text/javascript" src="../../resources/js/retype.js?v=2.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.721229492650" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" type="text/javascript" src="../../resources/js/lunr.js?v=2.4.0.721304466342" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -266,86 +266,14 @@
                                 <div id="docs-sidebar-right-toggle"></div>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="account-activity" class="break-words">
+<doc-anchor-target id="activities" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#account-activity">#</doc-anchor-trigger>
-        <span>Account Activity</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#activities">#</doc-anchor-trigger>
+        <span>Activities</span>
     </h1>
 </doc-anchor-target>
-<p>The following document explains how the Activity History is generated from IOTA&#x27;s <a href="https://wiki.iota.org/IOTA-2.0-Research-Specifications/5.1UTXO">UTXO</a> architecture. The main goal is to optimize UX by simplifying the complex UTXO architecture into a transaction based overview.</p>
-<p>This approach and the related architectural design choices have its limitations. The corresponding sections address these.</p>
-<doc-anchor-target id="activity-initialization">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#activity-initialization">#</doc-anchor-trigger>
-        <span>Activity Initialization</span>
-    </h2>
-</doc-anchor-target>
-<p>After syncing all of the accounts, the accounts contains <strong>outgoing transactions</strong> and <strong>incoming outputs</strong>. These objects are highly nested and too complex for a non-technical user to understand and draw simple conclusions from them (e.g. Who was the sender/receiver? Do I have to claim that first?).</p>
-<p>The first step is to transform both <strong>transactions</strong> and <strong>outputs</strong> into <strong>activities</strong>. Transactions contain the most information, so these have the highest priority for the activity overview.</p>
-<doc-anchor-target id="transactions">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#transactions">#</doc-anchor-trigger>
-        <span>Transactions</span>
-    </h3>
-</doc-anchor-target>
-<p>With transactions we can build complete activities.</p>
-<p>Currently we only have <em>outgoing</em> transactions. Soon we will also get transactions attached to the <em>incoming</em> outputs, allowing us to add more information to these activities as well.</p>
-<p><strong>Important</strong>: They are guaranteed to persist in wallet.rs, but not on the nodes. This means we can lose the information and therefore need a fallback option.</p>
-<doc-anchor-target id="outputs">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#outputs">#</doc-anchor-trigger>
-        <span>Outputs</span>
-    </h3>
-</doc-anchor-target>
-<p>If transactions were pruned on the nodes, and we restore a profile, we cannot access them anymore. For this case, we fallback on creating activities from pure outputs. These contain no information about its origin, so there&#x27;s no way to compute the sender for incoming ones.</p>
-<p>Additionally we don&#x27;t have outputs generated by transactions initialized by us.</p>
-<doc-anchor-target id="activity-post-processing">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#activity-post-processing">#</doc-anchor-trigger>
-        <span>Activity Post-Processing</span>
-    </h2>
-</doc-anchor-target>
-<p>The previous step initialized all activities. But activities on their own are missing some important UX properties, because they can only be deduced by comparing them with each other. Depending on the result of such a comparison, some activities get updated, while others get hidden to not confuse the user.</p>
-<p>Currently we have 2 post-processing steps, but this list can be expanded if new requirements arise.</p>
-<doc-anchor-target id="claimed-activity">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#claimed-activity">#</doc-anchor-trigger>
-        <span>Claimed Activity</span>
-    </h3>
-</doc-anchor-target>
-<p>Activities can be <em>claimable</em> because of different reasons: a contained storage deposit, expiration date, etc. Claiming one always results in a new transaction, consuming the claimable activity and resulting in an output to the corresponding account.</p>
-<doc-anchor-target id="incoming">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#incoming">#</doc-anchor-trigger>
-        <span>Incoming</span>
-    </h4>
-</doc-anchor-target>
-<p>We can compute incoming, claimed activities because we have all incoming outputs (which contain the claimable activities) and outgoing transactions (which includes the claiming activity).</p>
-<p><strong>Find Matching Pair</strong>: For each async activity A1 another future activity A2 is searched, that contains A1 as an input. If one is found, we have a match.</p>
-<p><strong>Result</strong>: Claimed activity A1 gets updated, claim status is set to true, claim time and claim id will be updated to the claiming transactions infos. Claiming activity A2 gets hidden</p>
-<doc-anchor-target id="outgoing">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#outgoing">#</doc-anchor-trigger>
-        <span>Outgoing</span>
-    </h4>
-</doc-anchor-target>
-<p>Currently not implemented / not possible. We can compute which of the activities result in a claimable activity for the receiver account, but we have no way to check if they consumed it.</p>
-<doc-anchor-target id="storage-deposit-return">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#storage-deposit-return">#</doc-anchor-trigger>
-        <span>Storage Deposit Return</span>
-    </h3>
-</doc-anchor-target>
-<p>Sending small funds result in a storage deposit. When the receiving account claims the funds, they send a transaction back to the original sender containing that storage deposit return (SDR).</p>
-<p><strong>Find Matching Pair</strong>: For each activity A1 with a SDR, we narrow the potential SDR activities down by some conditions (currently: Candidate happened after A1. Candidates amount needs to be the same as the storage deposit). These candidates need to be checked around 2 corners: If the input of the input of the candidate is A1, we have a match.</p>
-<p><strong>Result</strong>: Activity containing the storage deposit gets updated, storage deposit gets crossed out in detailpopup. Return activity gets hidden</p>
-<doc-anchor-target id="preparation-for-overview">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#preparation-for-overview">#</doc-anchor-trigger>
-        <span>Preparation for Overview</span>
-    </h2>
-</doc-anchor-target>
-<p>After creating and post-processing the activities, they are being prepared for the UI. Depending on the selected account, inserted search term or active filter, a corresponding subset of all activities is displayed, after being grouped together by the transaction time.</p>
+<p>This section describes the Activity History, its generation and internal structure.
+Due to IOTA&#x27;s and Shimmers <a href="https://wiki.iota.org/IOTA-2.0-Research-Specifications/5.1UTXO">UTXO</a> architecture, there is no 1:1 mapping between transactions and activities. Each output has to classified and has to be combined/hidden/updated in different cases. The main goal is to optimize UX by simplifying the complex UTXO architecture into a transaction based overview.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -353,7 +281,7 @@
                             </div>
                             <footer class="clear-both">
                                 <div class="flex flex-wrap items-center justify-between mt-14">
-                                    <a class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline" href="https://github.com/iotaledger/firefly/blob/chore/create-firefly-handbook/docs/specifications/account-activity.md" target="_blank" rel="noopener">
+                                    <a class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline" href="https://github.com/iotaledger/firefly/blob/chore/create-firefly-handbook/docs/specifications/activities/index.md" target="_blank" rel="noopener">
                                         <svg class="mr-1.5" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M20 12c-.55 0-1 .45-1 1v7c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h7c.55 0 1-.45 1-1s-.45-1-1-1H4C2.35 3 1 4.35 1 6v14c0 1.65 1.35 3 3 3h14c1.65 0 3-1.35 3-3v-7c0-.55-.45-1-1-1z" /><path d="M22.21 1.79c-1.18-1.18-3.24-1.18-4.41 0l-9.5 9.5c-.13.13-.22.29-.26.46l-1 4c-.08.34.01.7.26.95.18.2.44.3.7.3.08 0 .16-.01.24-.03l4-1c.18-.04.34-.13.46-.26l9.5-9.5c1.22-1.22 1.22-3.2.01-4.42zm-1.42 3l-9.3 9.3-2.11.53.53-2.11 9.3-9.3c.42-.42 1.16-.42 1.59 0 .43.43.43 1.15-.01 1.58z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         <span>Edit this page</span>
                                     </a>
@@ -361,20 +289,20 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../specifications/onboarding/shimmer-claiming/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../specifications/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Shimmer Claiming</span>
+                                                <span class="block mt-1">Specifications</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../specifications/deep-links/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../specifications/activities/class-diagram/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Deep Links</span>
+                                                <span class="block mt-1">Class Diagram</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -418,6 +346,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script>window.__DOCS__ = { "title": "Account Activity", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    <script>window.__DOCS__ = { "title": "Activities", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
 </body>
 </html>
