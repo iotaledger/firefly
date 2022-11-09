@@ -4,5 +4,7 @@
     let modal: Modal
 </script>
 
-<MeatballMenuButton onClick={modal?.toggle} includeBackground />
-<AccountActionsMenu bind:modal />
+<div class="relative">
+    <MeatballMenuButton onClick={modal?.toggle} includeBackground />
+    <AccountActionsMenu bind:modal position={{ right: '0' }} classes="mt-1.5" />
+</div>

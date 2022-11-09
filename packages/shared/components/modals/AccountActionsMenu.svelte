@@ -34,7 +34,7 @@
     }
 </script>
 
-<Modal bind:this={modal} position={{ top: '52px', right: '24px' }}>
+<Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
         <MenuItem
             icon={Icon.Doc}
