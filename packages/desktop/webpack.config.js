@@ -31,7 +31,7 @@ const resolve = {
         '@contexts': path.resolve(__dirname, '../shared/lib/contexts'),
         '@components': path.resolve(__dirname, './components/'),
         '@core': path.resolve(__dirname, '../shared/lib/core'),
-        '@features': path.resolve(__dirname, '../shared/features'),
+        '@features': path.resolve(__dirname, './features'),
         '@lib': path.resolve(__dirname, '../shared/lib'),
         '@ui': path.resolve(__dirname, '../shared/components/'),
         '@views': path.resolve(__dirname, './views/'),

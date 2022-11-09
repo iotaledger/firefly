@@ -3,7 +3,7 @@ import { allAccountActivities, persistedAssets } from '../../stores'
 import { activeProfile } from '@core/profile'
 import { selectedAccountIndex } from '@core/account'
 import { ActivityType } from '@core/wallet/enums'
-import { updateFromPartialActivity } from '@core/wallet/utils/generateActivity/helper'
+import { updateActivityFromPartialActivity } from '@core/wallet/utils/generateActivity/helper'
 
 export function hideActivitiesForHiddenAssets(): void {
     const assets = get(persistedAssets)?.[get(activeProfile)?.id]
@@ -11,7 +11,7 @@ export function hideActivitiesForHiddenAssets(): void {
         state[get(selectedAccountIndex)].forEach((_activity) => {
             if (_activity.type === ActivityType.Transaction || _activity.type === ActivityType.Foundry) {
                 const isAssetHidden = !assets[_activity.assetId] || assets[_activity.assetId]?.hidden
-                updateFromPartialActivity(_activity, { isAssetHidden })
+                updateActivityFromPartialActivity(_activity, { isAssetHidden })
             }
         })
         return state

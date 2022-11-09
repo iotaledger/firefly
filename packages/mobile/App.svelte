@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { localeDirection, setupI18n } from '@core/i18n'
-    import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
+    import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
     import { AppRoute, initialiseRouters } from './lib/routers'
     import {
         appSettings,
@@ -9,10 +9,10 @@
         AppStage,
         AppTheme,
         initAppSettings,
+        Platform,
         setPlatform,
         shouldBeDarkMode,
     } from '@core/app'
-    import { Platform } from '@lib/platform'
     import { onboardingProfile } from '@contexts/onboarding'
     import { ToastContainer } from '@ui'
     import { Route } from './components'
@@ -21,13 +21,7 @@
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
-    const { loggedIn } = $activeProfile
-
-    $: if ($loggedIn) {
-        if (isActiveProfileOutdated($activeProfile?.version)) {
-            migrateActiveProfile()
-        }
-    }
+    checkAndMigrateProfiles()
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')

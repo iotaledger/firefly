@@ -1,13 +1,11 @@
-import { get } from 'svelte/store'
-
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { allAccountActivities, updateAsyncDataByTransactionId } from '@core/wallet/stores/all-account-activities.store'
+import { updateNftInAllAccountNfts } from '@core/nfts'
 import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
-
+import { allAccountActivities, updateAsyncDataByTransactionId } from '@core/wallet/stores/all-account-activities.store'
+import { get } from 'svelte/store'
 import { WalletApiEvent } from '../../enums'
 import { ISpentOutputEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
-import { updateNftInAllAccountNfts } from '@core/nfts'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: string): Promise<void> {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.SpentOutput)
@@ -26,7 +24,6 @@ export async function handleSpentOutputEventInternal(
     if (activity && activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed) {
         const transactionId = payload?.output?.metadata?.transactionId
         updateAsyncDataByTransactionId(accountIndex, transactionId, {
-            isClaimed: true,
             asyncStatus: ActivityAsyncStatus.Claimed,
         })
     }

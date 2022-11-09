@@ -15,7 +15,6 @@
         NftActivityDetails,
         BasicActivityDetails,
     } from 'shared/components'
-    import type { IBasicOutput } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
@@ -33,6 +32,7 @@
         newTransactionDetails,
         updateNewTransactionDetails,
         NewTransactionType,
+        Output,
     } from '@core/wallet'
     import { formatCurrency } from '@core/i18n'
     import { currencies, Currency, exchangeRates, miotaToFiat } from '@core/utils'
@@ -49,7 +49,7 @@
         get(newTransactionDetails)
 
     let storageDeposit = 0
-    let preparedOutput: IBasicOutput
+    let preparedOutput: Output
     let outputOptions: OutputOptions
     let error: BaseError
     let expirationTimePicker: ExpirationTimePicker
@@ -109,7 +109,7 @@
             $selectedAccount.index,
             outputOptions,
             DEFAULT_TRANSACTION_OPTIONS
-        )) as IBasicOutput
+        ))
 
         setStorageDeposit(preparedOutput, Number(surplus))
 
@@ -118,7 +118,7 @@
         }
     }
 
-    function setStorageDeposit(preparedOutput: IBasicOutput, surplus?: number): void {
+    function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
 
@@ -251,7 +251,7 @@
         {/if}
 
         <Button classes="w-full" onClick={onConfirm} disabled={isTransferring} isBusy={isTransferring}>
-            {localize('actions.confirm')}
+            {localize('actions.send')}
         </Button>
     </popup-buttons>
 </send-confirmation-popup>

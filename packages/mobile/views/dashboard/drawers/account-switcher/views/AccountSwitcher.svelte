@@ -5,9 +5,9 @@
     import { activeProfile, visibleActiveAccounts } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
 
-    import features from '../../../../../features/features'
-    import { AccountSwitcherMenuItem } from '../../../../../components'
-    import { HR, Icon, Text, TextType } from 'shared/components'
+    import features from '@features/features'
+    import { AccountSwitcherMenuItem } from '../../../../../../mobile/components'
+    import { HR, Icon, Text, TextType } from '@ui'
 
     export let onSwitch: () => unknown = () => {}
     export let onAddClick: () => unknown = () => {}

@@ -1,6 +1,7 @@
 import { get } from 'svelte/store'
 
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
+import { resetActiveProfile } from '@core/profile'
 import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
 import { AppRoute, appRouter, initialiseOnboardingRouters, OnboardingRoute, onboardingRouter } from '@core/router'
 
@@ -11,6 +12,8 @@ import { deleteOnboardingProfile } from './deleteOnboardingProfile'
 import { initialiseOnboardingProfile } from './initialiseOnboardingProfile'
 
 export async function initialiseOnboardingFlow(options: IOnboardingInitialisationOptions): Promise<void> {
+    resetActiveProfile()
+
     await deleteOnboardingProfile()
 
     if (get(isPollingLedgerDeviceStatus)) {

@@ -11,6 +11,9 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
         state.forEach((accountActivities, accountIndex) => {
             for (const activity of accountActivities.filter((_activity) => _activity.asyncData)) {
                 const oldAsyncStatus = activity.asyncData.asyncStatus
+                if (oldAsyncStatus === ActivityAsyncStatus.Claimed) {
+                    continue
+                }
                 activity.asyncData.asyncStatus = getAsyncStatus(activity, time)
 
                 if (oldAsyncStatus !== null && oldAsyncStatus !== activity.asyncData.asyncStatus) {
@@ -44,9 +47,7 @@ function getAsyncStatus(activity: Activity, time: Date): ActivityAsyncStatus {
             return ActivityAsyncStatus.Timelocked
         }
     } else if (activity.asyncData) {
-        if (activity.asyncData.isClaimed) {
-            return ActivityAsyncStatus.Claimed
-        } else {
+        if (activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed) {
             if (time > activity.asyncData.expirationDate) {
                 return ActivityAsyncStatus.Expired
             } else {

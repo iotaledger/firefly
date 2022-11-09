@@ -9,18 +9,11 @@
         NewTransactionType,
         setNewTransactionDetails,
     } from '@core/wallet'
-    import {
-        RecipientInput,
-        AssetAmountInput,
-        OptionalInput,
-        NetworkInput,
-        NftInput,
-        NftMediaSize,
-        NftMediaContainer,
-    } from 'shared/components'
+    import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
     import { DestinationNetwork } from '@core/network'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { get } from 'svelte/store'
+    import { selectedAccount } from '@core/account'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -54,6 +47,8 @@
     const tabs: SendForm[] = [SendForm.SendToken, SendForm.SendNft]
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
+
+    $: ownsNfts = $selectedAccount.balances.nfts.length > 0
 
     function getTransactionDetails(): NewTransactionDetails {
         if (activeTab === SendForm.SendToken) {
@@ -121,15 +116,16 @@
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
-        {localize('general.sendAsset')}
+        {localize('popups.transaction.title')}
     </Text>
-    <Tabs bind:activeTab {tabs} />
     <send-form-inputs class="flex flex-col space-y-4">
+        {#if ownsNfts}
+            <Tabs bind:activeTab {tabs} />
+        {/if}
         {#if activeTab === SendForm.SendToken}
             <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         {:else}
-            <NftMediaContainer {nftId} size={NftMediaSize.Medium} />
-            <NftInput bind:this={nftInput} bind:nftId />
+            <NftInput bind:nftId />
         {/if}
         <NetworkInput bind:network />
         <RecipientInput bind:this={recipientInput} bind:recipient maxHeight="max-h-48" />
@@ -153,7 +149,7 @@
             {localize('actions.cancel')}
         </Button>
         <Button classes="w-full" onClick={onContinue}>
-            {localize('actions.send')}
+            {localize('actions.next')}
         </Button>
     </popup-buttons>
 </send-form-popup>

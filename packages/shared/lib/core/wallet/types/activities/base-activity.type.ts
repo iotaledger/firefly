@@ -29,7 +29,6 @@ export type AsyncData = {
     expirationDate: Date
     isRejected: boolean
     isClaiming: boolean
-    isClaimed: boolean
     claimingTransactionId: string
     claimedDate: Date
 }
