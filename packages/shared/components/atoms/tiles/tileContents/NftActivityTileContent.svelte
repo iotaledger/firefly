@@ -1,19 +1,18 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { ActivityDirection, InclusionState, INftActivityData, Subject } from '@core/wallet'
+    import { ActivityDirection, InclusionState, NftActivity, Subject } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, FontWeight, NftMediaContainer, NftMediaSize } from 'shared/components'
     import { networkHrp } from '@core/network'
 
-    export let inclusionState: InclusionState
-    export let data: INftActivityData
+    export let activity: NftActivity
 
-    $: isIncoming = data.direction === ActivityDirection.Incoming
-    $: title = getTitle(data, inclusionState)
-    $: subjectLocale = getSubjectLocale(data.subject)
+    $: isIncoming = activity.direction === ActivityDirection.Incoming
+    $: title = getTitle(activity)
+    $: subjectLocale = getSubjectLocale(activity.subject)
 
-    function getTitle(txData: INftActivityData, inclusionState: InclusionState): string {
-        const { isInternal, direction } = txData
+    function getTitle(_activity: NftActivity): string {
+        const { isInternal, direction, inclusionState } = _activity
         const isConfirmed = inclusionState === InclusionState.Confirmed
 
         if (isInternal) {
@@ -40,7 +39,7 @@
 </script>
 
 <div class="relative flex w-8 h-8">
-    <NftMediaContainer nftId={data.nftId} size={NftMediaSize.Small} />
+    <NftMediaContainer nftId={activity.nftId} size={NftMediaSize.Small} />
 </div>
 
 <div class="flex flex-col w-full space-y-0.5">

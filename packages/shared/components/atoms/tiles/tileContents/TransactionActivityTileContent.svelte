@@ -1,23 +1,33 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
-    import { ActivityDirection, InclusionState, IPersistedAsset, ITransactionActivityData, Subject } from '@core/wallet'
+    import {
+        ActivityDirection,
+        getFiatAmount,
+        InclusionState,
+        IPersistedAsset,
+        getFormattedAmountFromActivity,
+        TransactionActivity,
+        selectedAccountAssets,
+        getAssetFromPersistedAssets,
+    } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
 
-    export let amount: string
-    export let fiatAmount: string
-    export let inclusionState: InclusionState
-    export let data: ITransactionActivityData
-    export let asset: IPersistedAsset
+    export let activity: TransactionActivity
 
-    $: title = getTitle(data, inclusionState)
-    $: subjectLocale = getSubjectLocale(data.subject, data.isShimmerClaiming)
+    let asset: IPersistedAsset
+    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
 
-    $: isIncoming = data.direction === ActivityDirection.Incoming
+    $: title = getTitle(activity)
+    $: subjectLocale = getSubjectLocale(activity)
+    $: amount = getFormattedAmountFromActivity(activity)
+    $: fiatAmount = getFiatAmount(activity)
 
-    function getTitle(txData: ITransactionActivityData, inclusionState: InclusionState): string {
-        const { isShimmerClaiming, isInternal, direction } = txData
+    $: isIncoming = activity.direction === ActivityDirection.Incoming
+
+    function getTitle(_activity: TransactionActivity): string {
+        const { isShimmerClaiming, isInternal, direction, inclusionState } = _activity
         const isConfirmed = inclusionState === InclusionState.Confirmed
 
         if (isShimmerClaiming) {
@@ -34,7 +44,8 @@
         }
     }
 
-    function getSubjectLocale(subject: Subject, isShimmerClaiming: boolean): string {
+    function getSubjectLocale(_activity: TransactionActivity): string {
+        const { isShimmerClaiming, subject } = _activity
         if (isShimmerClaiming) {
             return localize('general.shimmerGenesis')
         }
