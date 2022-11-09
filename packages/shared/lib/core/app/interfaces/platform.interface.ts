@@ -1,4 +1,4 @@
-import { IError } from '@core/error'
+import { IError } from '@core/error/interfaces'
 
 import { IDeepLinkManager, INotificationManager, IPincodeManager } from './managers'
 import { IAppSettings } from './app-settings.interface'
@@ -10,7 +10,7 @@ export interface IPlatform {
     exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
-    getOS(): Promise<string> | string
+    getOS(): Promise<string>
     getMachineId(): Promise<string>
     updateAppSettings(settings: Partial<IAppSettings>): Promise<void>
     getActiveProfile(): string
@@ -40,6 +40,8 @@ export interface IPlatform {
     downloadAppUpdate(): Promise<void>
 
     unhandledException(title: string, err: IError | unknown): Promise<void>
+
+    resetRouters?(): void
 
     onEvent<K extends keyof IPlatformEventMap>(eventName: K, callback: (param: IPlatformEventMap[K]) => void)
     removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K)

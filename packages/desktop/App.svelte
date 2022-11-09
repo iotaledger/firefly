@@ -12,15 +12,24 @@
         onboardingRoute,
         openSettings,
     } from '@core/router'
-    import { appSettings, appStage, AppStage, appVersionDetails, initAppSettings, setPlatform } from '@core/app'
+    import {
+        appSettings,
+        appStage,
+        AppStage,
+        appVersionDetails,
+        extendPlatform,
+        initAppSettings,
+        Platform,
+        setPlatform,
+    } from '@core/app'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, popupState } from '@auxiliary/popup'
     import { initialiseOnboardingFlow } from '@contexts/onboarding'
     import { NetworkProtocol, NetworkType } from '@core/network'
-    import { Electron } from './lib/electron'
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
+    import { resetRouters } from './lib/routers'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -33,7 +42,7 @@
     }
 
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
-        await Electron.updateAppSettings({ sendCrashReports })
+        await Platform.updateAppSettings({ sendCrashReports })
     }
 
     $: void handleCrashReporting($appSettings.sendCrashReports)
@@ -43,11 +52,11 @@
 
     $: {
         if ($isLocaleLoaded) {
-            Electron.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
+            Platform.updateMenu('strings', getLocalisedMenuItems($_ as Locale))
         }
     }
 
-    $: Electron.updateMenu(
+    $: Platform.updateMenu(
         'canCreateNewProfile',
         $appRoute === AppRoute.Login ||
             ($appRoute === AppRoute.Onboarding &&
@@ -81,10 +90,10 @@
         //     await setAppVersionDetails()
         //     pollCheckForAppUpdate()
         // }
-        Electron.onEvent('menu-navigate-wallet', () => {
+        Platform.onEvent('menu-navigate-wallet', () => {
             $dashboardRouter.goTo(DashboardRoute.Wallet)
         })
-        Electron.onEvent('menu-navigate-settings', () => {
+        Platform.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 closePopup()
                 openSettings()
@@ -92,7 +101,7 @@
                 settings = true
             }
         })
-        Electron.onEvent('menu-check-for-update', () => {
+        Platform.onEvent('menu-check-for-update', () => {
             openPopup({
                 type: 'version',
                 props: {
@@ -100,19 +109,19 @@
                 },
             })
         })
-        Electron.onEvent('menu-error-log', () => {
+        Platform.onEvent('menu-error-log', () => {
             openPopup({ type: 'errorLog' })
         })
-        Electron.onEvent('menu-diagnostics', () => {
+        Platform.onEvent('menu-diagnostics', () => {
             openPopup({ type: 'diagnostics' })
         })
-        Electron.onEvent('menu-create-developer-profile', () => {
+        Platform.onEvent('menu-create-developer-profile', () => {
             void initialiseOnboardingFlow({
                 isDeveloperProfile: true,
                 networkProtocol: NetworkProtocol.Shimmer,
             })
         })
-        Electron.onEvent('menu-create-normal-profile', () => {
+        Platform.onEvent('menu-create-normal-profile', () => {
             void initialiseOnboardingFlow({
                 isDeveloperProfile: false,
                 networkProtocol: NetworkProtocol.Shimmer,
@@ -120,18 +129,19 @@
             })
         })
 
-        Electron.onEvent('deep-link-request', showDeepLinkNotification)
+        Platform.onEvent('deep-link-request', showDeepLinkNotification)
+
+        extendPlatform('resetRouters', resetRouters)
 
         await cleanupEmptyProfiles()
-        // loadPersistedProfileIntoActiveProfile($activeProfileId)
 
-        const platform = await Electron.getOS()
+        const platform = await Platform.getOS()
         setPlatform(platform)
     })
 
     onDestroy(() => {
-        Electron.removeListenersForEvent('deep-link-request')
-        Electron.DeepLinkManager.clearDeepLinkRequest()
+        Platform.removeListenersForEvent('deep-link-request')
+        Platform.DeepLinkManager.clearDeepLinkRequest()
     })
 
     function showDeepLinkNotification(): void {
