@@ -65,7 +65,8 @@
                 }),
                 description: localize('actions.confirmTokenBurn.description'),
                 hint: localize('actions.confirmTokenBurn.hint'),
-                warning: true,
+                info: true,
+                warningConfirmButton: true,
                 confirmText: localize('actions.burnToken'),
                 onConfirm: () => {
                     checkActiveProfileAuth(async () => {

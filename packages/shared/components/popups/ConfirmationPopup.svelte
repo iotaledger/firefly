@@ -10,6 +10,7 @@
     export let success: boolean = false
     export let warning: boolean = false
     export let danger: boolean = false
+    export let warningConfirmButton: boolean = false
     export let confirmText: string = localize('actions.confirm')
     export let onConfirm: () => void = undefined
     export let onCancel: () => void = undefined
@@ -45,8 +46,10 @@
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={cancelClick}>{localize('actions.cancel')}</Button>
-        <Button classes="w-full" variant={(warning || danger) && ButtonVariant.Warning} onClick={confirmClick}
-            >{confirmText}</Button
+        <Button
+            classes="w-full"
+            variant={(warning || danger || warningConfirmButton) && ButtonVariant.Warning}
+            onClick={confirmClick}>{confirmText}</Button
         >
     </popup-buttons>
 </div>
