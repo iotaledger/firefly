@@ -1,10 +1,11 @@
 <script lang="typescript">
     import { networkHrp } from '@core/network'
     import { validateBech32Address } from '@core/utils'
-    import { Modal, SelectorInput } from 'shared/components'
+    import { Modal, SelectorInput, IOption } from 'shared/components'
     import { visibleActiveAccounts } from '@core/profile'
+    import { getSubjectFromAddress, Subject } from '@core/wallet'
 
-    export let recipient: string
+    export let recipient: Subject
     export let disabled = false
 
     const addressPrefix = $networkHrp
@@ -13,21 +14,24 @@
     let modal: Modal = undefined
 
     let error: string
-    let selected
-
-    const accountOptions = $visibleActiveAccounts?.map((account) => ({
+    let selected: IOption =
+        recipient?.type === 'account'
+            ? { key: recipient.account.name, value: recipient.account.depositAddress }
+            : { value: recipient?.address }
+    const accountOptions: IOption[] = $visibleActiveAccounts?.map((account) => ({
         key: account.name,
         value: account.depositAddress,
     }))
 
-    $: recipient = selected?.value
+    $: recipient = getSubjectFromAddress(selected?.value)
 
     export function validate(): Promise<void> {
         if (recipient) {
             return Promise.resolve()
         }
-
-        error = validateBech32Address(addressPrefix, recipient)
+        if (recipient?.type === 'address') {
+            error = validateBech32Address(addressPrefix, recipient?.address)
+        }
         if (error) {
             return Promise.reject(error)
         }

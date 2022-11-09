@@ -1,13 +1,8 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { Modal, TextInput, Text, TextType, FontWeight } from 'shared/components'
+    import { Modal, TextInput, Text, TextType, FontWeight, IOption } from 'shared/components'
     import { fade } from 'svelte/transition'
     import { truncateString } from '@core/utils'
-
-    interface IOption {
-        key?: string
-        value: string
-    }
 
     export let error: string = ''
     export let disabled: boolean = false
@@ -17,17 +12,16 @@
     export let options: IOption[] = []
     export let selected: IOption = undefined
     export let maxHeight: string = 'max-h-64'
-    export let onClick: (val: IOption) => void = () => {}
 
     let previousValue: string = ''
-    let value: string = ''
+    let value: string = selected?.key ?? selected?.value
     let hasFocus: boolean
     let filteredOptions: IOption[] = options
 
     $: if (previousValue !== value) {
         selected = { value }
         previousValue = value
-        setFilterOptions(value)
+        setFilteredOptions(value)
     }
 
     $: hasFocus && (error = '')
@@ -36,7 +30,7 @@
         setTimeout(() => modal?.open(), 100)
     }
 
-    function setFilterOptions(searchValue?: string): void {
+    function setFilteredOptions(searchValue?: string): void {
         const lowerCaseSearchValue = searchValue?.toLowerCase()
         filteredOptions = lowerCaseSearchValue
             ? options.filter(
@@ -52,8 +46,7 @@
         selected = option
         value = option?.key ?? option.value
         previousValue = value
-        onClick(selected)
-        setFilterOptions()
+        setFilteredOptions()
     }
 </script>
 

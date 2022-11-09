@@ -1,15 +1,19 @@
 <script lang="typescript">
-    import { Modal, SelectorInput } from 'shared/components'
+    import { Modal, SelectorInput, IOption } from 'shared/components'
     import { selectedAccountNfts } from '@core/nfts'
+    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { selectedAccountIndex } from '@core/account'
 
     export let nftId: string = ''
     export let error: string = ''
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
-    let selected
+    let selected: IOption = nftId
+        ? { key: getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId).name, value: nftId }
+        : {}
 
-    const nftOptions = $selectedAccountNfts.map((_nft) => ({ key: _nft.name, value: _nft.id }))
+    const nftOptions: IOption[] = $selectedAccountNfts.map((_nft) => ({ key: _nft.name, value: _nft.id }))
 
     $: nftId = selected?.value
 

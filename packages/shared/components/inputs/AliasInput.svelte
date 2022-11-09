@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Modal, SelectorInput } from 'shared/components'
+    import { Modal, SelectorInput, IOption } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { ADDRESS_TYPE_ALIAS, convertHexAddressToBech32 } from '@core/wallet'
     import { validateBech32Address } from '@core/utils'
@@ -10,9 +10,9 @@
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
-    let selected
+    let selected: IOption = { value: alias }
 
-    const aliasOptions =
+    const aliasOptions: IOption[] =
         $selectedAccount.balances?.aliases.map((hexAliasId, index) => {
             const aliasId = convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexAliasId)
             return { key: 'Alias ' + (index + 1), value: aliasId }

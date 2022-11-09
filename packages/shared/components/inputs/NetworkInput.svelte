@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Modal, SelectorInput } from 'shared/components'
+    import { Modal, SelectorInput, IOption } from 'shared/components'
     import { activeProfile } from '@core/profile'
     import { DestinationNetwork, NETWORK_ADDRESS } from '@core/network'
 
@@ -7,23 +7,25 @@
     export let error: string = ''
     export let modal: Modal = undefined
 
-    let inputElement: HTMLInputElement = undefined
-    let selectedNetwork: { key: string; value: string } = undefined
+    const networksAddresses = NETWORK_ADDRESS[$activeProfile.networkType]
 
-    const networks = Object.values(DestinationNetwork).map((_network) => ({
+    let inputElement: HTMLInputElement = undefined
+    let selected: IOption = {
+        key: network,
+        value: networksAddresses[network],
+    }
+
+    const networks: IOption[] = Object.values(DestinationNetwork).map((_network) => ({
         key: _network,
-        value: NETWORK_ADDRESS[$activeProfile.networkType][_network],
+        value: networksAddresses[_network],
     }))
 
-    function onClick(selectedNetwork: DestinationNetwork): void {
-        network = selectedNetwork
-    }
+    $: network = selected?.key
 </script>
 
 <SelectorInput
     labelLocale="general.destinationNetwork"
-    bind:value={network}
-    bind:option={selectedNetwork}
+    bind:selected
     bind:inputElement
     bind:modal
     {error}
@@ -31,5 +33,4 @@
     options={networks}
     inputClasses="cursor-pointer"
     containerClasses="cursor-pointer"
-    {onClick}
 />
