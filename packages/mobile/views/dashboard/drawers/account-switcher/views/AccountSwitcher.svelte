@@ -6,7 +6,7 @@
     import { formatTokenAmountBestMatch } from '@core/wallet'
 
     import features from '@features/features'
-    import { AccountSwitcherMenuItem } from '@components'
+    import { AccountSwitcherMenuItem } from '../../../../../../mobile/components'
     import { HR, Icon, Text, TextType } from '@ui'
 
     export let onSwitch: () => unknown = () => {}

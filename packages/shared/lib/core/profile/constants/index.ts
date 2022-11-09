@@ -1,5 +1,6 @@
-export * from './initial-active-profile.constant'
 export * from './default-account-recovery-configuration.constant'
+export * from './default-persisted-profile-object.constant'
+export * from './initial-active-profile.constant'
 export * from './login-steps.constant'
 export * from './max-profile-name-length.constant'
 export * from './max-stronghold-password-length.constant'

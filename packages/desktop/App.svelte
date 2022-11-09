@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { onDestroy, onMount } from 'svelte'
     import { _, isLocaleLoaded, Locale, localeDirection, setupI18n } from '@core/i18n'
-    import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
+    import { activeProfile, checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
     import {
         AppRoute,
         appRoute,
@@ -35,11 +35,7 @@
 
     const { loggedIn } = $activeProfile
 
-    $: if ($loggedIn) {
-        if (isActiveProfileOutdated($activeProfile?.version)) {
-            migrateActiveProfile()
-        }
-    }
+    checkAndMigrateProfiles()
 
     async function handleCrashReporting(sendCrashReports: boolean): Promise<void> {
         await Platform.updateAppSettings({ sendCrashReports })

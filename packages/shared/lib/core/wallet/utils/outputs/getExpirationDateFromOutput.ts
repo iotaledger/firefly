@@ -1,18 +1,16 @@
-import { OutputTypes } from '@iota/types'
+import { UNLOCK_CONDITION_EXPIRATION } from '../../constants'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
-import { OUTPUT_TYPE_TREASURY, UNLOCK_CONDITION_EXPIRATION } from '../../constants'
+import { Output } from '@core/wallet/types'
 
-export function getExpirationDateFromOutput(output: OutputTypes): Date {
+export function getExpirationDateFromOutput(output: Output): Date {
     const expirationTime = getExpirationUnixTimeFromOutput(output)
     return expirationTime ? new Date(expirationTime) : undefined
 }
 
-export function getExpirationUnixTimeFromOutput(output: OutputTypes): number {
-    if (output && output?.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            if (unlockCondition?.type === UNLOCK_CONDITION_EXPIRATION) {
-                return unlockCondition?.unixTime * MILLISECONDS_PER_SECOND
-            }
+export function getExpirationUnixTimeFromOutput(output: Output): number {
+    for (const unlockCondition of output.unlockConditions) {
+        if (unlockCondition?.type === UNLOCK_CONDITION_EXPIRATION) {
+            return unlockCondition?.unixTime * MILLISECONDS_PER_SECOND
         }
     }
 }

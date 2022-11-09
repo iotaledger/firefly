@@ -1,16 +1,11 @@
-import { get } from 'svelte/store'
-
 import { syncBalance } from '@core/account/actions/syncBalance'
-import {
-    allAccountActivities,
-    updateActivityDataByTransactionId,
-} from '@core/wallet/stores/all-account-activities.store'
+import { updateNftInAllAccountNfts } from '@core/nfts'
 import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
-
+import { allAccountActivities, updateAsyncDataByTransactionId } from '@core/wallet/stores/all-account-activities.store'
+import { get } from 'svelte/store'
 import { WalletApiEvent } from '../../enums'
 import { ISpentOutputEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
-import { updateNftInAllAccountNfts } from '@core/nfts'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: string): Promise<void> {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.SpentOutput)
@@ -24,23 +19,15 @@ export async function handleSpentOutputEventInternal(
 ): Promise<void> {
     await syncBalance(accountIndex)
     const outputId = payload?.output?.outputId
-    const activity = get(allAccountActivities)?.[accountIndex]?.find(
-        (_activity) => _activity.data.outputId === outputId
-    )
+    const activity = get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity.outputId === outputId)
 
-    if (
-        activity &&
-        activity.data.type === ActivityType.Transaction &&
-        activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
-    ) {
+    if (activity && activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed) {
         const transactionId = payload?.output?.metadata?.transactionId
-        updateActivityDataByTransactionId(accountIndex, transactionId, {
-            type: ActivityType.Transaction,
-            isClaimed: true,
+        updateAsyncDataByTransactionId(accountIndex, transactionId, {
             asyncStatus: ActivityAsyncStatus.Claimed,
         })
     }
-    if (activity?.data.type === ActivityType.Nft) {
-        updateNftInAllAccountNfts(accountIndex, activity.data.nftId, { isOwned: false })
+    if (activity?.type === ActivityType.Nft) {
+        updateNftInAllAccountNfts(accountIndex, activity.nftId, { isOwned: false })
     }
 }
