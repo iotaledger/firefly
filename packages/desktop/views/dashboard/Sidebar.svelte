@@ -3,17 +3,10 @@
     import { SidebarTab } from '@components'
     import { Settings } from './settings'
     import features from '@features/features'
-    import { appVersionDetails, mobile } from '@core/app'
+    import { appVersionDetails, mobile, Platform } from '@core/app'
     import { getInitials, isRecentDate } from '@core/utils'
     import { activeProfile } from '@core/profile'
-    import {
-        dashboardRouter,
-        DashboardRoute,
-        resetWalletRoute,
-        settingsRoute,
-        settingsRouter,
-        SettingsRoute,
-    } from '@core/router'
+    import { dashboardRouter, DashboardRoute, settingsRoute, settingsRouter, SettingsRoute } from '@core/router'
     import { localize } from '@core/i18n'
     import { ISidebarTab } from '../../lib/routers'
 
@@ -64,7 +57,7 @@
     ]
 
     function openWallet(): void {
-        resetWalletRoute()
+        Platform.resetDashboardRouters()
     }
 
     function openCollectibles(): void {

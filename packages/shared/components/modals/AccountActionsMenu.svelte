@@ -1,13 +1,13 @@
 <script lang="typescript">
+    import { Platform } from '@core/app/classes'
     import { selectedAccount, setSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeAccounts, visibleActiveAccounts } from '@core/profile'
-    import { deleteAccount } from '@core/profile-manager'
+    import { activeAccounts, visibleActiveAccounts } from '@core/profile/stores'
+    import { deleteAccount } from '@core/profile-manager/actions'
     import { Icon } from '@lib/auxiliary/icon'
     import { openPopup } from '@auxiliary/popup'
     import { HR, MenuItem, Modal, ToggleHiddenAccountMenuItem } from 'shared/components'
     import { get } from 'svelte/store'
-    import { resetWalletRoute } from '../../lib/core/router'
 
     export let modal: Modal = undefined
 
@@ -32,7 +32,7 @@
                 deleteAccount: async (index: number) => {
                     await deleteAccount(index)
                     setSelectedAccount(get(visibleActiveAccounts)?.[0]?.index ?? null)
-                    resetWalletRoute()
+                    Platform.resetDashboardRouters()
                 },
             },
         })

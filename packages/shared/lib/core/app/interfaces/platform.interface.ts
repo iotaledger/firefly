@@ -42,6 +42,8 @@ export interface IPlatform {
     unhandledException(title: string, err: IError | unknown): Promise<void>
 
     resetRouters?(): void
+    // This method is temporary while routers have not been removed from shared
+    resetDashboardRouters?(): void
 
     onEvent<K extends keyof IPlatformEventMap>(eventName: K, callback: (param: IPlatformEventMap[K]) => void)
     removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K)
