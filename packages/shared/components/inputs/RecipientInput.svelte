@@ -2,8 +2,8 @@
     import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
     import { Subject } from '@core/wallet'
-    import { BECH32_ADDRESS_LENGTH, truncateString, validateBech32Address } from '@core/utils'
-    import { Modal, AccountLabel, SelectorInput, Text, TextType } from 'shared/components'
+    import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils'
+    import { Modal, SelectorInput } from 'shared/components'
     import { visibleActiveAccounts } from '@core/profile'
     import { IAccountState, selectedAccount } from '@core/account'
 
@@ -19,6 +19,11 @@
     let searchValue: string
     let error: string
     let previousValue: string
+
+    const accountOptions = $visibleActiveAccounts?.filter((account) => ({
+        key: account.name,
+        value: account.depositAddress,
+    }))
 
     if (!account && recipient?.type === 'account') {
         account = recipient?.account
@@ -83,10 +88,6 @@
     bind:error
     {onClick}
     {disabled}
-    options={filteredAccounts}
+    options={accountOptions}
     {...$$restProps}
-    let:option
->
-    <AccountLabel account={option} />
-    <Text type={TextType.pre} fontSize="sm" color="gray-600">{truncateString(option?.depositAddress, 10, 10)}</Text>
-</SelectorInput>
+/>

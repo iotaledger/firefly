@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { Modal, SelectorInput, Text, TextType } from 'shared/components'
-    import { truncateString } from '@core/utils'
+    import { Modal, SelectorInput } from 'shared/components'
     import { selectedAccountNfts } from '@core/nfts'
 
     export let nftId: string = ''
@@ -9,17 +8,22 @@
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
 
+    const nftOptions = $selectedAccountNfts.map((_nft) => ({ key: _nft.name, value: _nft.id }))
+
     export async function validate(): Promise<void> {
         if (!nftId) {
             error = 'Nft is required'
+            return Promise.reject(error)
+        } else if (!isValidNft()) {
+            error = 'Nft is not in possession'
             return Promise.reject(error)
         } else {
             return Promise.resolve()
         }
     }
 
-    function onClick(selectedNft): void {
-        nftId = selectedNft.id
+    function isValidNft(): boolean {
+        return nftOptions.some((option) => option.value === nftId)
     }
 </script>
 
@@ -29,10 +33,6 @@
     bind:inputElement
     bind:modal
     bind:error
-    options={$selectedAccountNfts}
-    {onClick}
+    options={nftOptions}
     let:option
->
-    <Text type={TextType.pre} fontSize="sm" color="gray-600">{option.name}</Text>
-    <Text type={TextType.pre} fontSize="sm" color="gray-600">{truncateString(option.id, 9, 9)}</Text>
-</SelectorInput>
+/>

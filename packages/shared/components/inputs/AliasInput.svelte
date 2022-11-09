@@ -1,46 +1,55 @@
 <script lang="typescript">
-    import { Modal, SelectorInput, Text, TextType } from 'shared/components'
+    import { Modal, SelectorInput } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { ADDRESS_TYPE_ALIAS, convertHexAddressToBech32 } from '@core/wallet'
-    import { truncateString } from '@core/utils'
+    import { validateBech32Address } from '@core/utils'
+    import { networkHrp } from '@core/network'
 
     export let alias: string = ''
     export let error: string = ''
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
+    let selected
 
-    $: aliasIds =
-        $selectedAccount.balances?.aliases.map((hexAliasId) => {
+    const aliasOptions =
+        $selectedAccount.balances?.aliases.map((hexAliasId, index) => {
             const aliasId = convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexAliasId)
-            return { value: aliasId, label: truncateString(aliasId, 9, 9) }
+            return { key: 'Alias ' + (index + 1), value: aliasId }
         }) ?? []
+
+    $: alias = selected?.value
 
     export async function validate(): Promise<void> {
         if (!alias) {
             error = 'Alias is required'
+            return Promise.reject(error)
+        } else if (!isValidAliasAddress()) {
+            error = 'Alias not valid'
+            return Promise.reject(error)
+        } else if (!isAliasInPossession()) {
+            error = 'Alias not in possession'
             return Promise.reject(error)
         } else {
             return Promise.resolve()
         }
     }
 
-    function onClick(selectedAlias: { value: string; label: string }): void {
-        alias = selectedAlias.value
+    function isValidAliasAddress(): boolean {
+        const isValidBech32 = validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
+        return !isValidBech32
+    }
+
+    function isAliasInPossession(): boolean {
+        return aliasOptions.some((option) => option.value === alias)
     }
 </script>
 
 <SelectorInput
     labelLocale="popups.mintNativeToken.property.alias"
-    bind:value={alias}
+    bind:selected
     bind:inputElement
     bind:modal
-    options={aliasIds}
+    options={aliasOptions}
     {error}
-    {onClick}
-    let:option
-    let:index
->
-    <Text type={TextType.pre} fontSize="sm" color="gray-600">Alias {index + 1}</Text>
-    <Text type={TextType.pre} fontSize="sm" color="gray-600">{option.label}</Text>
-</SelectorInput>
+/>

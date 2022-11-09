@@ -1517,6 +1517,9 @@
             "incorrect": "Your current PIN is incorrect.",
             "invalid": "Invalid PIN code."
         },
+        "address": {
+            "wrongAddressType": "Wrong address type"
+        },
         "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
