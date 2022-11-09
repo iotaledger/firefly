@@ -5,10 +5,10 @@ import { activeProfile, ProfileType } from '@core/profile'
 import { handleLedgerError } from '@core/ledger'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetails } from '../stores'
 import { localize } from '@core/i18n'
-import { Activity } from '../classes'
 import { preprocessTransaction } from '../utils'
 import { Converter } from '@core/utils'
 import { showAppNotification } from '@auxiliary/notification'
+import { generateActivity } from '../utils/generateActivity'
 import { IIrc27Metadata } from '@core/nfts'
 
 export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
@@ -26,7 +26,7 @@ export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
 
         const mintNftTransaction = await account.mintNfts([nftOptions], transactionOptions)
         const processedTransaction = preprocessTransaction(mintNftTransaction)
-        const activity = new Activity(processedTransaction, account)
+        const activity = generateActivity(processedTransaction, account)
 
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
         showAppNotification({

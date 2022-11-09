@@ -1,18 +1,15 @@
-import { OutputTypes } from '@iota/types'
-import { OUTPUT_TYPE_TREASURY } from '../../constants'
-import { Subject } from '../../types'
+import { Output, Subject } from '../../types'
+import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddressTypes'
+import { UNLOCK_CONDITION_EXPIRATION, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN } from '@core/wallet/constants'
 import { getSubjectFromAddress } from '../getSubjectFromAddress'
-import { getSenderAddressFromUnlockCondition } from '../getSenderAddressFromUnlockCondition'
 
-export function getSenderFromOutput(output: OutputTypes): Subject {
-    if (output && output?.type !== OUTPUT_TYPE_TREASURY) {
-        for (const unlockCondition of output.unlockConditions) {
-            const senderAddress = getSenderAddressFromUnlockCondition(unlockCondition)
-            if (senderAddress) {
-                return getSubjectFromAddress(senderAddress)
-            }
+export function getSenderFromOutput(output: Output): Subject {
+    for (const unlockCondition of output.unlockConditions) {
+        if (
+            unlockCondition?.type === UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN ||
+            unlockCondition?.type === UNLOCK_CONDITION_EXPIRATION
+        ) {
+            return getSubjectFromAddress(getBech32AddressFromAddressTypes(unlockCondition?.returnAddress))
         }
-    } else {
-        return undefined
     }
 }

@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { setMintTokenDetails, mintTokenDetails, selectedAccountActivities, ActivityType } from '@core/wallet'
+    import { setMintTokenDetails, mintTokenDetails, convertHexAddressToBech32, ADDRESS_TYPE_ALIAS } from '@core/wallet'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import {
         Button,
@@ -15,8 +15,9 @@
     } from 'shared/components'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
-    import { get } from 'svelte/store'
     import { handleError } from '@core/error/handlers/handleError'
+    import { selectedAccount } from '@core/account'
+    import { truncateString } from '@core/utils'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -46,10 +47,11 @@
     let error: BaseError
     let decimalsInput: OptionalInput
 
-    let aliasIds: string[]
-    $: aliasIds = get(selectedAccountActivities)
-        .filter((activity) => activity.data.type === ActivityType.Alias)
-        .map((activity) => (activity.data.type === ActivityType.Alias ? activity.data.aliasId : ''))
+    $: aliasIds =
+        $selectedAccount.balances?.aliases.map((hexAliasId) => {
+            const aliasId = convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexAliasId)
+            return { value: aliasId, label: truncateString(aliasId, 9, 9) }
+        }) ?? []
 
     function handleCancel(): void {
         closePopup()
@@ -103,7 +105,7 @@
     }
 
     function isAliasIdValid(): Promise<void> {
-        const isValidAliasId = aliasId && aliasIds.some((_aliasId) => _aliasId === aliasId)
+        const isValidAliasId = aliasId && aliasIds.some((_aliasId) => _aliasId.value === aliasId)
         if (!aliasId) {
             aliasIdError = 'Alias is required'
             return Promise.reject(aliasIdError)
