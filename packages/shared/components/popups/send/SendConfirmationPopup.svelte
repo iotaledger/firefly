@@ -153,7 +153,7 @@
             }
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
-            handleError(err?.error)
+            handleError(err)
         }
     }
 
@@ -173,7 +173,7 @@
         try {
             await _onMount()
         } catch (err) {
-            handleError(err?.error)
+            handleError(err)
         }
     })
 </script>
