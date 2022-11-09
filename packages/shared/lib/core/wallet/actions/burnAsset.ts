@@ -8,9 +8,9 @@ import { selectedAccountAssets } from '../stores'
 export async function burnAsset(assetId: string): Promise<void> {
     const account = get(selectedAccount)
     const _activeProfile = get(activeProfile)
+    const nativeTokens = get(selectedAccountAssets).nativeTokens
     try {
-        const balance = get(selectedAccountAssets).nativeTokens.find((_asset) => _asset.id === assetId)?.balance
-            .available
+        const balance = nativeTokens.find((_asset) => _asset.id === assetId)?.balance.available
         if (balance) {
             await account.burnNativeToken(assetId, '0x' + balance.toString(16))
         }
