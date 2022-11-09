@@ -24,8 +24,10 @@
         if (!alias) {
             error = 'Alias is required'
             return Promise.reject(error)
-        } else if (!isValidAliasAddress()) {
-            error = 'Alias not valid'
+        }
+        const addressValidationError = validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
+        if (addressValidationError) {
+            error = addressValidationError
             return Promise.reject(error)
         } else if (!isAliasInPossession()) {
             error = 'Alias not in possession'
@@ -33,11 +35,6 @@
         } else {
             return Promise.resolve()
         }
-    }
-
-    function isValidAliasAddress(): boolean {
-        const isValidBech32 = validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
-        return !isValidBech32
     }
 
     function isAliasInPossession(): boolean {
