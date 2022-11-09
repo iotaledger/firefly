@@ -4,10 +4,11 @@
     import { localize } from '@core/i18n'
     import { activeAccounts, visibleActiveAccounts } from '@core/profile/stores'
     import { deleteAccount } from '@core/profile-manager/actions'
-    import { Icon } from '@lib/auxiliary/icon'
-    import { openPopup } from '@auxiliary/popup'
+    import { Icon } from '@lib/auxiliary/icon/enums'
+    import { openPopup } from '@auxiliary/popup/actions'
     import { HR, MenuItem, Modal, ToggleHiddenAccountMenuItem } from 'shared/components'
     import { get } from 'svelte/store'
+    import { AppContext } from '@core/app/enums'
 
     export let modal: Modal = undefined
 
@@ -32,7 +33,7 @@
                 deleteAccount: async (index: number) => {
                     await deleteAccount(index)
                     setSelectedAccount(get(visibleActiveAccounts)?.[0]?.index ?? null)
-                    Platform.resetDashboardRouters()
+                    Platform.resetRouterForAppContext(AppContext.Dashboard)
                 },
             },
         })

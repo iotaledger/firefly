@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { Drawer, Icon, ProfileActionsModal, Text, Modal, NetworkIndicator, NotificationBadge } from '@ui'
+    import { Drawer, Icon, Modal, NetworkIndicator, NotificationBadge, ProfileActionsModal, Text } from '@ui'
     import { SidebarTab } from '@components'
     import { Settings } from './settings'
     import features from '@features/features'
-    import { appVersionDetails, mobile, Platform } from '@core/app'
+    import { AppContext, appVersionDetails, mobile, Platform } from '@core/app'
     import { getInitials, isRecentDate } from '@core/utils'
-    import { activeProfile } from '@core/profile'
-    import { dashboardRouter, DashboardRoute, settingsRoute, settingsRouter, SettingsRoute } from '@core/router'
+    import { activeProfile } from '@core/profile/stores'
+    import { DashboardRoute, dashboardRouter, settingsRoute, SettingsRoute, settingsRouter } from '@core/router'
     import { localize } from '@core/i18n'
     import { ISidebarTab } from '../../lib/routers'
 
@@ -57,7 +57,7 @@
     ]
 
     function openWallet(): void {
-        Platform.resetDashboardRouters()
+        Platform.resetRouterForAppContext(AppContext.Dashboard)
     }
 
     function openCollectibles(): void {

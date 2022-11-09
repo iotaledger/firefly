@@ -29,7 +29,7 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
-    import { getRouterForAppContext, resetDashboardRouters, resetRouters } from './lib/routers'
+    import { getRouterForAppContext, resetRouterForAppContext, resetRouters } from './lib/routers'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -133,7 +133,7 @@
 
         extendPlatform([
             ['getRouterForAppContext', getRouterForAppContext],
-            ['resetDashboardRouters', resetDashboardRouters],
+            ['resetRouterForAppContext', resetRouterForAppContext],
             ['resetRouters', resetRouters],
         ])
 
