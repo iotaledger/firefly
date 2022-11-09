@@ -1,4 +1,7 @@
 import { IError } from '@core/error/interfaces'
+import { IRouter } from '@core/router/interfaces'
+
+import { AppContext } from '../enums'
 
 import { IDeepLinkManager, INotificationManager, IPincodeManager } from './managers'
 import { IAppSettings } from './app-settings.interface'
@@ -42,6 +45,7 @@ export interface IPlatform {
     unhandledException(title: string, err: IError | unknown): Promise<void>
 
     resetRouters?(): void
+    getRouterForAppContext?(context: AppContext): IRouter
     // This method is temporary while routers have not been removed from shared
     resetDashboardRouters?(): void
 

@@ -1,1 +1,1 @@
-export type PlatformExtension = [string, () => unknown]
+export type PlatformExtension = [string, (..._: unknown[]) => unknown]
