@@ -33,7 +33,6 @@
         updateNewTransactionDetails,
         NewTransactionType,
         Output,
-        OUTPUT_TYPE_TREASURY,
     } from '@core/wallet'
     import { formatCurrency } from '@core/i18n'
     import { currencies, Currency, exchangeRates, miotaToFiat } from '@core/utils'
@@ -106,8 +105,7 @@
             transactionDetails.surplus,
             transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
         )
-        const output = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
-        preparedOutput = output.type !== OUTPUT_TYPE_TREASURY ? output : undefined
+        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
 
