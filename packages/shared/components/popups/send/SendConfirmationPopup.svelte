@@ -247,7 +247,7 @@
         {/if}
 
         <Button classes="w-full" onClick={onConfirm} disabled={isTransferring} isBusy={isTransferring}>
-            {localize('actions.confirm')}
+            {localize('actions.send')}
         </Button>
     </popup-buttons>
 </send-confirmation-popup>
