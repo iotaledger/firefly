@@ -690,10 +690,10 @@
     "@types/warning" "^3.0.0"
     warning "^4.0.3"
 
-"@iota/types@^1.0.0-beta.11":
-  version "1.0.0-beta.11"
-  resolved "https://registry.npmjs.org/@iota/types/-/types-1.0.0-beta.11.tgz"
-  integrity sha512-jFma7n4dpf+AikSIvY6CzrDDQ/TVnlV3HBIeOrDUDJku3oCcOkm8Jp/i0uKSD/krP2BAcDrWrNUr5Tn9MIw7+A==
+"@iota/types@2.0.0-rc.1":
+  version "2.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/@iota/types/-/types-2.0.0-rc.1.tgz#a5652d89ccd7db1770de30baf5603cd5194fd3b6"
+  integrity sha512-IDov83MBDlRJJXj98sPhBVslgCSqFexsvelDTDeWKZwYG8G7I+BnMCjdVXiOzLrWy3ScWJljqx1yW4cqmTdpRg==
 
 "@iota/types@^1.0.0-beta.15":
   version "1.0.0-beta.15"
