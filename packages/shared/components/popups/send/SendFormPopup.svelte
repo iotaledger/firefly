@@ -125,7 +125,7 @@
         {#if activeTab === SendForm.SendToken}
             <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         {:else}
-            <NftInput bind:nftId />
+            <NftInput bind:this={nftInput} bind:nftId />
         {/if}
         <NetworkInput bind:network />
         <RecipientInput bind:this={recipientInput} bind:recipient maxHeight="max-h-48" />
