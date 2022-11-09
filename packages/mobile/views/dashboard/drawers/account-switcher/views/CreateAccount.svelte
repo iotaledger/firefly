@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { getRandomAccountColor, validateAccountName } from '@core/account'
-    import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { Button, Input } from 'shared/components'
     import { getTrimmedLength } from '@core/utils'
     import { onMount } from 'svelte'
     import { ColorPicker } from '../../../../../components'
+    import { handleError } from '@core/error/handlers/handleError'
 
     export let accountAlias: string = ''
     export let color: string = getRandomAccountColor()
@@ -15,7 +15,7 @@
     export let onCreate: (accountAlias: string, color: string) => unknown = () => {}
     export let onCancel: () => unknown = () => {}
 
-    let error: BaseError
+    let error: string
 
     $: accountAlias, (error = null)
 
@@ -38,9 +38,8 @@
             await onCreate(trimmedAccountAlias, color.toString())
             isBusy = false
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
-            }
+            error = err.error
+            handleError(err)
             isBusy = false
         }
     }
@@ -55,7 +54,7 @@
     <div>
         <div class="w-full flex flex-col justify-between">
             <Input
-                error={error?.message}
+                {error}
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
                 autofocus
