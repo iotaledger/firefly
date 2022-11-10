@@ -1,20 +1,52 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { Modal, TextInput } from 'shared/components'
+    import { Modal, TextInput, Text, TextType, FontWeight, IOption } from 'shared/components'
+    import { fade } from 'svelte/transition'
+    import { truncateString } from '@core/utils'
 
-    export let value: string = ''
     export let error: string = ''
     export let disabled: boolean = false
     export let labelLocale: string = ''
     export let modal: Modal = undefined
     export let inputElement: HTMLInputElement = undefined
+    export let options: IOption[] = []
+    export let selected: IOption = undefined
+    export let maxHeight: string = 'max-h-64'
 
+    let value: string = selected?.key ?? selected?.value
+    let previousValue: string = value
     let hasFocus: boolean
+    let filteredOptions: IOption[] = options
+
+    $: if (previousValue !== value) {
+        selected = { value }
+        previousValue = value
+        setFilteredOptions(value)
+    }
 
     $: hasFocus && (error = '')
 
     $: if (hasFocus) {
         setTimeout(() => modal?.open(), 100)
+    }
+
+    function setFilteredOptions(searchValue?: string): void {
+        const lowerCaseSearchValue = searchValue?.toLowerCase()
+        filteredOptions = lowerCaseSearchValue
+            ? options.filter(
+                  (option) =>
+                      option?.key?.toLowerCase()?.includes(lowerCaseSearchValue) ||
+                      option?.value?.toLowerCase()?.includes(lowerCaseSearchValue)
+              )
+            : options
+    }
+
+    function handleClick(option: IOption): void {
+        modal?.close()
+        selected = option
+        value = option?.key ?? option.value
+        previousValue = value
+        setFilteredOptions()
     }
 </script>
 
@@ -30,7 +62,32 @@
         fontSize="sm"
         {...$$restProps}
     />
-    <slot onClose={() => inputElement.blur()}>
-        <!-- Contains Custom Selector -->
-    </slot>
+
+    {#if filteredOptions.length > 0}
+        <Modal
+            bind:this={modal}
+            position={{ left: '0', top: '100%' }}
+            classes="w-full p-4"
+            on:close={() => inputElement.blur()}
+        >
+            <picker-modal class="{maxHeight} flex flex-col space-y-1 scrollable-y" in:fade={{ duration: 100 }}>
+                {#each filteredOptions as option, index}
+                    <button
+                        on:click={() => handleClick(option)}
+                        class="w-full flex flex-row flex-1 justify-between px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
+                    >
+                        <slot {option} {index}>
+                            <!-- Contains Custom Selector -->
+                        </slot>
+                        <Text type={TextType.p} fontSize="sm" fontWeight={FontWeight.medium} color="gray-800"
+                            >{option.key}</Text
+                        >
+                        <Text type={TextType.pre} fontSize="sm" color="gray-600"
+                            >{truncateString(option.value, 9, 9)}</Text
+                        >
+                    </button>
+                {/each}
+            </picker-modal>
+        </Modal>
+    {/if}
 </selector-input>
