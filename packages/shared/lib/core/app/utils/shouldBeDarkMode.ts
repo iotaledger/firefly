@@ -1,4 +1,4 @@
-import { AppTheme } from '@core/app'
+import { AppTheme } from '../enums'
 
 /**
  * NOTE: This media query is performed only once to help make the UX

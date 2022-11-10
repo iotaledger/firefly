@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { localize } from '@core/i18n'
 import { ITransactionInclusionEventPayload, validateWalletApiEvent, WalletApiEvent } from '@core/profile-manager'
 import { InclusionState, MissingTransactionIdError } from '@core/wallet'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 
 import { ShimmerClaimingAccountState } from '../enums'
 import { MissingShimmerClaimingAccountError } from '../errors'
@@ -27,7 +27,7 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
     const profileId = get(onboardingProfile)?.id
     const { transactionId, inclusionState } = payload
     const shimmerClaimingAccount = get(onboardingProfile)?.shimmerClaimingAccounts?.find(
-        (_shimmerClaimingAccount) => _shimmerClaimingAccount?.meta?.index === accountIndex
+        (_shimmerClaimingAccount) => _shimmerClaimingAccount?.getMetadata()?.index === accountIndex
     )
     if (shimmerClaimingAccount) {
         if (profileId in _shimmerClaimingTransactions && transactionId in _shimmerClaimingTransactions[profileId]) {
@@ -40,7 +40,7 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
                     type: 'success',
                     alert: true,
                     message: localize('notifications.claimShimmerRewards.success', {
-                        values: { accountAlias: shimmerClaimingAccount?.meta?.alias },
+                        values: { accountAlias: shimmerClaimingAccount?.getMetadata()?.alias },
                     }),
                 })
             } else if (inclusionState === InclusionState.Pending) {

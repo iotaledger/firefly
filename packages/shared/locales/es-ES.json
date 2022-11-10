@@ -946,7 +946,6 @@
         "iveWrittenRecoveryPhrase": "He escrito mi frase de recuperación",
         "verifyRecoveryPhrase": "Verificar frase de recuperación",
         "revealRecoveryPhrase": "Mostrar frase de recuperación",
-        "importSeedvault": "Importar SeedVault",
         "checkAgain": "comprobar de nuevo",
         "importFromFile": "Importar desde un archivo",
         "send": "Enviar",
@@ -1107,7 +1106,6 @@
         "copyAddress": "Copiar Dirección",
         "viewOnExplorer": "Ver en el explorador",
         "import": "Importar",
-        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Idioma",
         "appearance": "Apariencia",
@@ -1644,24 +1642,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "transfiriendo desde",
                     "Confirmed": "Transferido desde",
                     "Conflicting": "no se pudo transferir"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "transfiriendo a",
                     "Confirmed": "transferido a",
                     "Conflicting": "no se pudo transferir"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "recibiendo de",
                     "Confirmed": "recibido de",
                     "Conflicting": "no se pudo recibir"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "enviando",
                     "Confirmed": "enviado a",
                     "Conflicting": "error en el envío"
@@ -1669,12 +1667,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "creando (minteando)",
                 "Confirmed": "creado (minteado)",
                 "Conflicting": "falló al acuñar (mintear)"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "creando (minteando)",
                 "Confirmed": "creado (minteado)",
                 "Conflicting": "falló al acuñar (mintear)"

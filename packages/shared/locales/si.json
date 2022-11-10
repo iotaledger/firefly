@@ -946,7 +946,6 @@
         "iveWrittenRecoveryPhrase": "මම මගේ ප්‍රතිසාධන වාක්‍ය ඛණ්ඩය ලියා ඇත",
         "verifyRecoveryPhrase": "ප්‍රතිසාධන වාක්‍ය ඛණ්ඩය තහවුරු කරන්න",
         "revealRecoveryPhrase": "ප්‍රතිසාධන වාක්‍ය ඛණ්ඩය හෙළි කරන්න",
-        "importSeedvault": "SeedVault ආනයනය කරන්න",
         "checkAgain": "නැවත පරීක්ෂා කරන්න",
         "importFromFile": "ගොනුවකින් ආයාත කරන්න",
         "send": "යවන්න",
@@ -1107,7 +1106,6 @@
         "copyAddress": "ලිපිනය පිටපත් කරන්න",
         "viewOnExplorer": "View on Explorer",
         "import": "ආනයන",
-        "seedvault": "SeedVault",
         "stronghold": "බලකොටුව",
         "language": "භාෂාව",
         "appearance": "පෙනුම",
@@ -1644,24 +1642,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "transferring from",
                     "Confirmed": "transferred from",
                     "Conflicting": "failed to transfer"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "transferring to",
                     "Confirmed": "transferred to",
                     "Conflicting": "failed to transfer"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "receiving from",
                     "Confirmed": "received from",
                     "Conflicting": "failed to receive"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "sending to",
                     "Confirmed": "sent to",
                     "Conflicting": "failed to send"
@@ -1669,12 +1667,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "minting",
                 "Confirmed": "minted",
                 "Conflicting": "failed to mint"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "minting",
                 "Confirmed": "minted",
                 "Conflicting": "failed to mint"

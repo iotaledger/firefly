@@ -4,7 +4,7 @@
     export let label: string = ''
     export let showBlock = false
 
-    const toggleBlockContent = () => {
+    function toggleBlockContent(): void {
         showBlock = !showBlock
     }
 </script>

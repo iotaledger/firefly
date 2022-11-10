@@ -1,27 +1,27 @@
 <script lang="typescript">
     import { DeveloperIndicatorPill, Icon, NetworkIconBadge, Text } from 'shared/components'
-    import { getInitials as _getInitials } from 'shared/lib/helpers'
+    import { getInitials as _getInitials } from '@core/utils'
     import { NetworkProtocol, NetworkType } from '@core/network'
 
     export let classes = undefined
 
     export let name = ''
     export let id = ''
-    export let networkType: NetworkType
-    export let networkProtocol: NetworkProtocol
+    export let networkType: NetworkType = undefined
+    export let networkProtocol: NetworkProtocol = undefined
     export let isDeveloper = false
     export let isLedgerProfile = false
-    export let bgColor: string
+    export let bgColor: string = ''
 
     export let onClick: undefined | ((id: string) => void) = undefined
 
-    function handleOnClick() {
+    function handleOnClick(): void {
         onClick && onClick(id)
     }
 
     const slots = $$props.$$slots
 
-    function getInitials() {
+    function getInitials(): string {
         const initials = _getInitials(name, 1)
         if (initials.length === 1) {
             return initials

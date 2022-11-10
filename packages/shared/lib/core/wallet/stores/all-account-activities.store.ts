@@ -1,85 +1,84 @@
 import { writable } from 'svelte/store'
-import { Activity } from '../classes'
-import { IActivity, IPartialFoundryActivityDataWithType, IPartialTransactionActivityDataWithType } from '../interfaces'
+import { Activity, AsyncData, BaseActivity } from '../types'
 
 export const allAccountActivities = writable<Activity[][]>([])
 
-export function addEmptyAccountActivitiesToAllAccountActivities(accountId: string): void {
-    setAccountActivitiesInAllAccountActivities(accountId, [])
+export function addEmptyAccountActivitiesToAllAccountActivities(accountIndex: number): void {
+    setAccountActivitiesInAllAccountActivities(accountIndex, [])
 }
 
-export function addActivityToAccountActivitiesInAllAccountActivities(accountId: string, activity: Activity): void {
+export function addActivityToAccountActivitiesInAllAccountActivities(accountIndex: number, activity: Activity): void {
     allAccountActivities.update((state) => {
-        if (!state[accountId]) {
-            state[accountId] = []
+        if (!state[accountIndex]) {
+            state[accountIndex] = []
         }
-        state[accountId].push(activity)
+        state[accountIndex].push(activity)
         return state
     })
 }
 
-export function setAccountActivitiesInAllAccountActivities(accountId: string, accountActivities: Activity[]): void {
+export function setAccountActivitiesInAllAccountActivities(accountIndex: number, accountActivities: Activity[]): void {
     allAccountActivities.update((state) => {
-        state[Number(accountId)] = accountActivities
+        state[accountIndex] = accountActivities
         return state
     })
 }
 
 export function updateActivityByTransactionId(
-    accountId: string,
+    accountIndex: number,
     transactionId: string,
-    partialActivity: Partial<IActivity>
+    partialBaseActivity: Partial<BaseActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[Number(accountId)]?.find((_activity) => _activity.transactionId === transactionId)
+        const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
-            activity.updateFromPartialActivity(partialActivity)
+            Object.assign(activity, partialBaseActivity)
         }
         return state
     })
 }
 
 export function updateActivityByActivityId(
-    accountId: string,
+    accountIndex: number,
     activityId: string,
-    partialActivity: Partial<IActivity>
+    partialBaseActivity: Partial<BaseActivity>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[Number(accountId)]?.find((_activity) => _activity.id === activityId)
+        const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
-            activity.updateFromPartialActivity(partialActivity)
+            Object.assign(activity, partialBaseActivity)
         }
         return state
     })
 }
 
-export function updateActivityDataByActivityId(
-    accountId: string,
+export function updateAsyncDataByActivityId(
+    accountIndex: number,
     activityId: string,
-    partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
+    partialAsyncData: Partial<AsyncData>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[Number(accountId)]?.find((_activity) => _activity.id === activityId)
+        const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
-            activity.updateDataFromPartialActivity(partialData)
+            Object.assign(activity, { asyncData: { ...activity.asyncData, ...partialAsyncData } })
         }
         return state
     })
 }
 
-export function updateActivityDataByTransactionId(
-    accountId: string,
+export function updateAsyncDataByTransactionId(
+    accountIndex: number,
     transactionId: string,
-    partialData: IPartialTransactionActivityDataWithType | IPartialFoundryActivityDataWithType
+    partialAsyncData: Partial<AsyncData>
 ): void {
     allAccountActivities.update((state) => {
-        const activity = state[Number(accountId)]?.find((_activity) => _activity.transactionId === transactionId)
+        const activity = state[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
 
         if (activity) {
-            activity.updateDataFromPartialActivity(partialData)
+            Object.assign(activity, { asyncData: { ...activity.asyncData, ...partialAsyncData } })
         }
         return state
     })

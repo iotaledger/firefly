@@ -1,11 +1,10 @@
 <script lang="typescript">
-    import { Button, PasswordInput, Text } from 'shared/components'
+    import { Button, PasswordInput, Text, ButtonVariant } from 'shared/components'
     import { isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { setStrongholdPassword } from '@core/profile-manager'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
-    import { ButtonVariant } from 'shared/components/Button.svelte'
 
     let isBusy = false
     let error = ''

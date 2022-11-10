@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { NETWORK, NetworkProtocol, NetworkType } from '@core/network'
-    import { NetworkIcon, Text, Tooltip } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
+    import { NetworkIcon, Text, Tooltip, FontWeight } from 'shared/components'
 
     export let networkType: NetworkType
     export let networkProtocol: NetworkProtocol
@@ -11,7 +10,7 @@
 
     $: tooltipText = NETWORK?.[networkProtocol]?.[networkType]?.name
 
-    const _showTooltip = (show: boolean): void => {
+    function _showTooltip(show: boolean): void {
         showTooltip = show
     }
 </script>

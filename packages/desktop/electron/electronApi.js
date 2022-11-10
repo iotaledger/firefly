@@ -5,8 +5,6 @@ const PincodeManager = require('./lib/pincodeManager')
 const DeepLinkManager = require('./lib/deepLinkManager')
 const NotificationManager = require('./lib/notificationManager')
 const { menuState } = require('./lib/menuState')
-const kdbx = require('./lib/kdbx')
-const { hookErrorLogger } = require('shared/lib/shell/errorLogger')
 
 let activeProfileId = null
 const eventListeners = {}
@@ -103,19 +101,6 @@ const ElectronApi = {
                     }
                 })
             })
-    },
-
-    /**
-     * Validates Seed Vault
-     *
-     * @method validateSeedVault
-     *
-     * @param {Buffer} buffer
-     *
-     * @returns {boolean}
-     */
-    validateSeedVault(buffer) {
-        return kdbx.checkFormat(buffer)
     },
     /**
      * Gets directory for app's configuration files
@@ -329,11 +314,6 @@ const ElectronApi = {
                 }
             })
     },
-    /**
-     * Hook the logger
-     * @returns
-     */
-    hookErrorLogger,
 }
 
 module.exports = ElectronApi

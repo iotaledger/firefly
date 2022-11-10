@@ -1,4 +1,4 @@
-import { isValidHttpsUrl, isValidUrl } from '@lib/utils'
+import { isValidHttpsUrl, isValidUrl } from '@core/utils'
 import { INode } from '../interfaces'
 
 /**

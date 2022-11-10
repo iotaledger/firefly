@@ -1,28 +1,58 @@
 import { syncBalance } from '@core/account/actions/syncBalance'
-import { ActivityType } from '@core/wallet/enums'
+import { Activity } from '@core/wallet/types'
+import { updateNftInAllAccountNfts } from '@core/nfts'
+import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { allAccountActivities } from '../../stores'
+import { refreshAccountAssetsForActiveProfile } from '../refreshAccountAssetsForActiveProfile'
 
 export function setAsyncStatusOfAccountActivities(time: Date): void {
-    const balancesToUpdate = []
+    const balancesToUpdate: number[] = []
     allAccountActivities.update((state) => {
-        state.forEach((accountActivities, accountId) => {
-            for (const activity of accountActivities.filter(
-                (_activity) =>
-                    _activity.data.type === ActivityType.Transaction &&
-                    (_activity.data.isAsync || _activity.data.timelockDate)
-            )) {
-                if (activity.data.type === ActivityType.Transaction) {
-                    const oldAsyncStatus = activity.data.asyncStatus
-                    activity.data.asyncStatus = activity.getAsyncStatus(time)
-                    if (!balancesToUpdate.includes(accountId) && oldAsyncStatus !== activity.data.asyncStatus) {
-                        balancesToUpdate.push(accountId)
+        state.forEach((accountActivities, accountIndex) => {
+            for (const activity of accountActivities.filter((_activity) => _activity.asyncData)) {
+                const oldAsyncStatus = activity.asyncData.asyncStatus
+                if (oldAsyncStatus === ActivityAsyncStatus.Claimed) {
+                    continue
+                }
+                activity.asyncData.asyncStatus = getAsyncStatus(activity, time)
+
+                if (oldAsyncStatus !== null && oldAsyncStatus !== activity.asyncData.asyncStatus) {
+                    if (!balancesToUpdate.includes(accountIndex)) {
+                        balancesToUpdate.push(accountIndex)
+                    }
+
+                    if (
+                        activity.type === ActivityType.Nft &&
+                        activity.asyncData.asyncStatus === ActivityAsyncStatus.Expired &&
+                        activity.direction === ActivityDirection.Outgoing
+                    ) {
+                        updateNftInAllAccountNfts(accountIndex, activity.nftId, { isOwned: true })
                     }
                 }
             }
         })
         return state
     })
-    for (const accountId of balancesToUpdate) {
-        syncBalance(accountId.toString())
+    for (const accountIndex of balancesToUpdate) {
+        syncBalance(accountIndex)
+    }
+    if (balancesToUpdate.length) {
+        void refreshAccountAssetsForActiveProfile()
+    }
+}
+
+function getAsyncStatus(activity: Activity, time: Date): ActivityAsyncStatus {
+    if (activity.asyncData?.timelockDate) {
+        if (activity.asyncData.timelockDate.getTime() > time.getTime()) {
+            return ActivityAsyncStatus.Timelocked
+        }
+    } else if (activity.asyncData) {
+        if (activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed) {
+            if (time > activity.asyncData.expirationDate) {
+                return ActivityAsyncStatus.Expired
+            } else {
+                return ActivityAsyncStatus.Unclaimed
+            }
+        }
     }
 }

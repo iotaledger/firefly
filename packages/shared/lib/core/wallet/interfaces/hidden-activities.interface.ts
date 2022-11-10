@@ -1,4 +1,5 @@
 export interface IHiddenActivities {
-    accountId: string
-    activities: string[]
+    [profileId: string]: {
+        [accountIndex: string]: string[]
+    }
 }

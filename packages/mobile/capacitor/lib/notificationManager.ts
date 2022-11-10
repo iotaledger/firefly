@@ -1,4 +1,4 @@
-import { INotificationManager } from '@lib/typings/notificationManager'
+import { INotificationManager } from '@core/app'
 
 /**
  * Create and show a native notification
@@ -12,6 +12,6 @@ export const NotificationManager: INotificationManager = {
             data: contextData,
         })
 
-        notification.onclick = () => {}
+        notification.onclick = (): void => {}
     },
 }

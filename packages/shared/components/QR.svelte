@@ -11,7 +11,7 @@
     const QRcode = new QrCode()
     let image = ''
 
-    function generateQrCode() {
+    function generateQrCode(): void {
         QRcode.set({
             background: '#ffffff00',
             foreground: color,
@@ -28,7 +28,7 @@
         generateQrCode()
     }
 
-    onMount(() => {
+    onMount((): void => {
         generateQrCode()
     })
 </script>

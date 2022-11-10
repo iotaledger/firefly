@@ -1,14 +1,16 @@
 import { get } from 'svelte/store'
+
 import { networkHrp } from '@core/network'
+import { isStringTrue, isValidBech32AddressAndPrefix, getByteLengthOfString } from '@core/utils'
 import {
     getAssetById,
-    INewTransactionDetails,
+    NewTransactionDetails,
+    NewTransactionType,
     selectedAccountAssets,
     setNewTransactionDetails,
     Subject,
 } from '@core/wallet'
-import { isValidAddressAndPrefix } from '@lib/address'
-import { openPopup } from '@lib/popup'
+import { openPopup } from '@auxiliary/popup'
 
 import { SendOperationParameter } from '../../../enums'
 import {
@@ -19,9 +21,7 @@ import {
     TagLengthError,
     UnknownAssetError,
 } from '../../../errors'
-import { getAmountFromSearchParam } from '../../../utils'
-import { getByteLengthOfString } from '@lib/utils/getByteLengthOfString'
-import { isStringTrue } from '@core/utils'
+import { getRawAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -45,15 +45,15 @@ export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchP
  *
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
  *
- * @return {INewTransactionDetails} The formatted parameters for the send operation.
+ * @return {NewTransactionDetails} The formatted parameters for the send operation.
  */
-function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTransactionDetails {
+function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTransactionDetails {
     // Check address exists and is valid this is not optional.
     const address = searchParams.get(SendOperationParameter.Address)
     if (!address) {
         throw new NoAddressSpecifiedError()
     }
-    if (!isValidAddressAndPrefix(address, get(networkHrp))) {
+    if (!isValidBech32AddressAndPrefix(address, get(networkHrp))) {
         throw new InvalidAddressError()
     }
 
@@ -66,7 +66,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
         throw new UnknownAssetError()
     }
 
-    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
+    const rawAmount = getRawAmountFromSearchParam(searchParams)
 
     const surplus = searchParams.get(SendOperationParameter.Surplus)
     if (surplus && parseInt(surplus).toString() !== surplus) {
@@ -89,9 +89,10 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): INewTran
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
 
     return {
+        type: NewTransactionType.TokenTransfer,
         ...(asset && { asset }),
         ...(recipient && { recipient }),
-        ...(amount && { amount }),
+        ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
         ...(metadata && { metadata }),
         ...(tag && { tag }),

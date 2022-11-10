@@ -1,15 +1,13 @@
 <script lang="typescript">
     import { Button, Text } from 'shared/components'
-    import { closePopup } from 'shared/lib/popup'
-    import { Locale } from '@core/i18n'
-
-    export let locale: Locale
+    import { closePopup } from '@auxiliary/popup'
+    import { localize } from '@core/i18n'
 
     export let node
     export let removeAll = false
     export let onSuccess: (..._: any[]) => void
 
-    function removeCustomNode() {
+    function removeCustomNode(): void {
         if (onSuccess) {
             onSuccess(node)
         }
@@ -17,11 +15,11 @@
     }
 </script>
 
-<Text type="h4" classes="mb-5">{locale(`popups.node.titleRemove${removeAll ? 'All' : ''}`)}</Text>
+<Text type="h4" classes="mb-5">{localize(`popups.node.titleRemove${removeAll ? 'All' : ''}`)}</Text>
 <div class="w-full h-full mb-7">
-    <Text>{locale(`popups.node.remove${removeAll ? 'All' : ''}Confirmation`)}</Text>
+    <Text>{localize(`popups.node.remove${removeAll ? 'All' : ''}Confirmation`)}</Text>
 </div>
 <div class="flex flex-row justify-between space-x-4 w-full md:px-8 ">
-    <Button outline classes="w-1/2" onClick={closePopup}>{locale('actions.no')}</Button>
-    <Button classes="w-1/2" onClick={removeCustomNode}>{locale('actions.yes')}</Button>
+    <Button outline classes="w-1/2" onClick={closePopup}>{localize('actions.no')}</Button>
+    <Button classes="w-1/2" onClick={removeCustomNode}>{localize('actions.yes')}</Button>
 </div>

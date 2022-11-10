@@ -1,9 +1,10 @@
-import { activeProfile } from '@core/profile'
-import { persistent } from '@lib/helpers'
 import { get } from 'svelte/store'
+
+import { activeProfile } from '@core/profile'
+import { persistent } from '@core/utils/store'
+
 import { NotVerifiedStatus, VerifiedStatus } from '../enums'
-import { IPersistedAsset } from '../interfaces'
-import { IPersistedAssets } from '../interfaces/persisted-assets.interface'
+import { IPersistedAsset, IPersistedAssets } from '../interfaces'
 
 export const persistedAssets = persistent<IPersistedAssets>('persistedAssets', {})
 
@@ -11,12 +12,14 @@ export function getPersistedAsset(tokenId: string): IPersistedAsset {
     return get(persistedAssets)?.[get(activeProfile)?.id]?.[tokenId]
 }
 
-export function addPersistedAsset(persistedAsset: IPersistedAsset): void {
+export function addPersistedAsset(...newPersistedAssets: IPersistedAsset[]): void {
     persistedAssets.update((state) => {
         if (!state[get(activeProfile).id]) {
             state[get(activeProfile).id] = {}
         }
-        state[get(activeProfile).id][persistedAsset.id] = persistedAsset
+        for (const asset of newPersistedAssets) {
+            state[get(activeProfile).id][asset.id] = asset
+        }
         return state
     })
 }

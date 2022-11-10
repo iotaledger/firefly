@@ -1,17 +1,18 @@
 import { IProcessedTransaction } from '../../interfaces'
 import { OutputData } from '@iota/wallet'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
 import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { InclusionState } from '@core/wallet/enums'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { IAccountState } from '@core/account'
+import { getSenderAddressFromInputs } from '../transactions'
+import { OUTPUT_TYPE_TREASURY } from '@core/wallet/constants'
 
 export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
     incomingTransactions: [ITransactionPayload, IOutputResponse[]],
     account: IAccountState
 ): IProcessedTransaction {
-    const outputs = outputDatas.map((outputData) => outputData.output)
     const transactionMetadata = outputDatas[0]?.metadata
     const detailedTransactionInputs = incomingTransactions?.[1]
 
@@ -25,10 +26,14 @@ export function preprocessGroupedOutputs(
                 } as IUTXOInput)
         ) ?? []
 
-    const isIncoming = isTransactionIncoming(outputDatas, account.depositAddress)
+    const isIncoming = isTransactionIncoming(outputDatas, detailedTransactionInputs, account.depositAddress)
+    const wrappedOutputs = outputDatas.map((outputData) => ({
+        outputId: outputData.outputId,
+        output: outputData.output.type !== OUTPUT_TYPE_TREASURY ? outputData.output : undefined,
+    }))
 
     return {
-        outputs: outputs,
+        outputs: wrappedOutputs,
         transactionId: transactionMetadata?.transactionId,
         isIncoming,
         time: new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
@@ -38,11 +43,19 @@ export function preprocessGroupedOutputs(
     }
 }
 
-function isTransactionIncoming(outputs: OutputData[], accountAddress: string): boolean {
+function isTransactionIncoming(
+    outputs: OutputData[],
+    detailedTransactionInputs: IOutputResponse[],
+    accountAddress: string
+): boolean {
     const nonRemainderOutputs = outputs.filter((output) => !output.remainder)
     if (nonRemainderOutputs.length === 0) {
         return false
     }
-    const address = getRecipientAddressFromOutput(nonRemainderOutputs[0].output)
-    return address === accountAddress
+    const output =
+        nonRemainderOutputs[0].output.type !== OUTPUT_TYPE_TREASURY ? nonRemainderOutputs[0].output : undefined
+    const recipientAddress = getRecipientAddressFromOutput(output)
+    const senderAddress = detailedTransactionInputs ? getSenderAddressFromInputs(detailedTransactionInputs) : ''
+
+    return recipientAddress === accountAddress && recipientAddress !== senderAddress
 }

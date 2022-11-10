@@ -1,13 +1,16 @@
 <script lang="typescript">
     import { Toast } from 'shared/components'
     import { mobile } from '@core/app'
-    import { displayNotifications } from 'shared/lib/notifications'
+    import { notifications } from '@auxiliary/notification'
     import { fade } from 'svelte/transition'
     import Alert from './Alert.svelte'
 
-    let toasts
-    $: toasts = $displayNotifications.map((notification) => ({
-        ...notification,
+    $: toasts = $notifications.map((notification) => ({
+        type: notification.type,
+        alert: notification.alert,
+        message: notification.message,
+        subMessage: notification.subMessage,
+        progress: notification.progress,
         actions: notification.actions.map((action, actionIndex) => ({
             ...action,
             onClick: () => action.callback(notification, actionIndex),
@@ -19,10 +22,16 @@
     <ul class="space-y-2">
         {#each toasts as toast}
             <li in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
-                {#if toast?.alert}
-                    <Alert classes={toast.classes} type={toast.type} message={toast.message} />
+                {#if toast.alert}
+                    <Alert type={toast.type} message={toast.message} />
                 {:else}
-                    <Toast {...toast} />
+                    <Toast
+                        type={toast.type}
+                        message={toast.message}
+                        subMessage={toast.subMessage}
+                        progress={toast.progress}
+                        actions={toast.actions}
+                    />
                 {/if}
             </li>
         {/each}

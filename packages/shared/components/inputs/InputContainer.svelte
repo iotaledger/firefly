@@ -1,14 +1,14 @@
 <script lang="typescript">
     import { Box } from 'shared/components/atoms'
     import { Error } from 'shared/components/'
-    import { clickOutside } from '@lib/actions'
+    import { clickOutside } from '@core/utils'
     import { createEventDispatcher } from 'svelte'
 
-    export let inputElement: HTMLInputElement
+    export let inputElement: HTMLInputElement = undefined
 
-    export let isFocused = false
-    export let error = ''
-    export let classes = ''
+    export let isFocused: boolean = false
+    export let error: string = ''
+    export let classes: string = ''
     export let backgroundColor = 'white'
     export let darkBackgroundColor = 'gray-800'
     export let clearBackground = false
@@ -38,7 +38,7 @@
             {clearPadding}
             {backgroundColor}
             {darkBackgroundColor}
-            classes="w-full flex 
+            classes="w-full flex
                 {!clearPadding ? 'p-4' : ''}
                 {!clearBorder ? 'border border-solid' : ''}
                 {classes}

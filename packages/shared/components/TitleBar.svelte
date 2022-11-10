@@ -1,9 +1,8 @@
 <script lang="typescript">
     import { appRoute, AppRoute, dashboardRoute, DashboardRoute } from '@core/router'
     import { activeProfile } from '@core/profile'
-    import { appSettings, PlatformOption, platform } from '@core/app'
-    import { Platform } from 'shared/lib/platform'
-    import { popupState } from 'shared/lib/popup'
+    import { appSettings, Platform, PlatformOption, platform } from '@core/app'
+    import { popupState } from '@auxiliary/popup'
     import tailwindConfig from 'shared/tailwind.config.js'
     import { onDestroy, onMount } from 'svelte'
     import resolveConfig from 'tailwindcss/resolveConfig'
@@ -31,7 +30,7 @@
         window.removeEventListener('resize', handleResize)
     })
 
-    async function handleResize() {
+    async function handleResize(): Promise<void> {
         isMaximized = await Platform.isMaximized()
     }
 </script>

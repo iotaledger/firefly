@@ -946,7 +946,6 @@
         "iveWrittenRecoveryPhrase": "我已寫下助記詞了",
         "verifyRecoveryPhrase": "驗證助記詞",
         "revealRecoveryPhrase": "顯示助記詞",
-        "importSeedvault": "匯入 SeedVault",
         "checkAgain": "請再次檢查",
         "importFromFile": "從檔案匯入",
         "send": "發送",
@@ -1107,7 +1106,6 @@
         "copyAddress": "複製地址",
         "viewOnExplorer": "在區塊鏈瀏覽器上查看",
         "import": "匯入",
-        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "語言",
         "appearance": "界面外觀",
@@ -1644,24 +1642,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "正傳送自",
                     "Confirmed": "傳送自",
                     "Conflicting": "傳送失敗"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "傳送至",
                     "Confirmed": "已傳送至",
                     "Conflicting": "傳送失敗"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "正接收自",
                     "Confirmed": "接收自",
                     "Conflicting": "接收失敗"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "正發送至",
                     "Confirmed": "已發送至",
                     "Conflicting": "傳送失敗"
@@ -1669,12 +1667,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "鑄造中",
                 "Confirmed": "已鑄造",
                 "Conflicting": "鑄造失敗"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "鑄造中",
                 "Confirmed": "已鑄造",
                 "Conflicting": "鑄造失敗"

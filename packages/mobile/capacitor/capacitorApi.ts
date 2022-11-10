@@ -1,14 +1,11 @@
 import { Capacitor } from '@capacitor/core'
-
 import { SplashScreen } from '@capacitor/splash-screen'
-import { BarcodeManager } from './lib/barcodeManager'
+
+import { IAppVersionDetails, IPlatform } from '@core/app'
+
 import { DeepLinkManager } from './lib/deepLinkManager'
 import { NotificationManager } from './lib/notificationManager'
 import { PincodeManager } from './lib/pincodeManager'
-
-import { hookErrorLogger } from '@lib/shell/errorLogger'
-import { IAppVersionDetails } from '@core/app'
-import { IPlatform } from '@lib/typings/platform'
 
 let activeProfileId = null
 
@@ -39,8 +36,6 @@ export const CapacitorApi: IPlatform = {
 
     NotificationManager: NotificationManager,
 
-    BarcodeManager: BarcodeManager,
-
     getStrongholdBackupDestination: () => new Promise<string>(() => {}),
 
     exportTransactionHistory: async () => new Promise<string>(() => {}),
@@ -50,8 +45,6 @@ export const CapacitorApi: IPlatform = {
     exportLedgerMigrationLog: () => new Promise<boolean>(() => {}),
 
     importLegacySeed: () => new Promise<string>(() => {}),
-
-    validateSeedVault: () => new Promise<boolean>(() => {}),
 
     getUserDataPath: () =>
         new Promise<string>((resolve) => {
@@ -147,7 +140,6 @@ export const CapacitorApi: IPlatform = {
     removeListenersForEvent: () => new Promise<void>(() => {}),
 
     saveRecoveryKit: () => new Promise<void>(() => {}),
-    hookErrorLogger,
     ledger: undefined,
 }
 

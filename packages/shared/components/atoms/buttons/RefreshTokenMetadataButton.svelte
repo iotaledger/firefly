@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
-    import { showAppNotification } from '@lib/notifications'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
 
-    function refreshTokenMetadata() {
+    function refreshTokenMetadata(): void {
         refreshAccountAssetsForActiveProfile(true)
         showAppNotification({
             type: 'success',
@@ -15,7 +15,7 @@
         closePopup()
     }
 
-    function handleRefreshTokenMetadata() {
+    function handleRefreshTokenMetadata(): void {
         openPopup({
             type: 'confirmation',
             props: {

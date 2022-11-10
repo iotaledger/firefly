@@ -1,9 +1,9 @@
 import { get } from 'svelte/store'
-import { selectedAccountId } from '@core/account'
+import { selectedAccountIndex } from '@core/account'
 import { ledgerNanoStatus } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
-import { closePopup, openPopup } from '@lib/popup'
+import { closePopup, openPopup } from '@auxiliary/popup'
 import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 
 import { WalletApiEvent } from '../../enums'
@@ -23,7 +23,7 @@ export function handleTransactionProgressEventInternal(
     payload: TransactionProgressEventPayload
 ): void {
     if (get(isActiveLedgerProfile)) {
-        if (get(selectedAccountId) === accountIndex.toString()) {
+        if (get(selectedAccountIndex) === accountIndex) {
             openPopupIfVerificationNeeded(payload)
         }
     } else if (get(isOnboardingLedgerProfile)) {

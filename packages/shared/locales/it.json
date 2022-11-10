@@ -946,7 +946,6 @@
         "iveWrittenRecoveryPhrase": "Ho scritto la mia frase di recupero",
         "verifyRecoveryPhrase": "Verifica la frase di recupero",
         "revealRecoveryPhrase": "Rivela frase di recupero",
-        "importSeedvault": "Importa un SeedVault",
         "checkAgain": "Controlla ancora",
         "importFromFile": "Importare da un file",
         "send": "Invia",
@@ -1107,7 +1106,6 @@
         "copyAddress": "Copia indirizzo",
         "viewOnExplorer": "Visualizza sull'Explorer",
         "import": "Importa",
-        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Lingua",
         "appearance": "Aspetto",
@@ -1644,24 +1642,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "trasferendo da",
                     "Confirmed": "trasferito da",
                     "Conflicting": "impossibile trasferire"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "trasferendo a",
                     "Confirmed": "trasferito a",
                     "Conflicting": "impossibile trasferire"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "ricevendo da",
                     "Confirmed": "ricevuto da",
                     "Conflicting": "impossibile ricevere"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "inviando a",
                     "Confirmed": "inviato a",
                     "Conflicting": "impossibile inviare"
@@ -1669,12 +1667,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "coniando",
                 "Confirmed": "coniato",
                 "Conflicting": "impossibile coniare"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "coniando",
                 "Confirmed": "coniato",
                 "Conflicting": "impossibile coniare"

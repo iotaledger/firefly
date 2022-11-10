@@ -1,35 +1,28 @@
 import { IAccountState } from '@core/account'
+import { IBasicOutput } from '@iota/types'
 import { OutputData } from '@iota/wallet'
-import { MILLISECONDS_PER_SECOND } from '@lib/time'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { get } from 'svelte/store'
-import { ActivityDirection, ActivityType } from '../enums'
-import { allAccountActivities, updateActivityDataByActivityId } from '../stores'
+import { ActivityAsyncStatus, ActivityDirection } from '../enums'
+import { allAccountActivities, updateAsyncDataByActivityId } from '../stores'
 import { getExpirationDateFromOutput } from '../utils'
 
 export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState): Promise<void> {
-    const accountActivities = get(allAccountActivities)[Number(account.id)]
+    const accountActivities = get(allAccountActivities)[account.index]
 
     const activities = accountActivities.filter(
-        (activity) =>
-            activity.data.type === ActivityType.Transaction &&
-            activity.data.direction === ActivityDirection.Out &&
-            activity.data.isAsync
+        (activity) => activity.direction === ActivityDirection.Outgoing && activity.asyncData
     )
 
     for (const activity of activities) {
         try {
-            if (activity.data.type === ActivityType.Transaction) {
-                const detailedOutput = await account.getOutput(activity.data.outputId)
-                const isClaimed = isOutputClaimed(detailedOutput)
-                if (isClaimed) {
-                    updateActivityDataByActivityId(account.id, activity.id, {
-                        type: ActivityType.Transaction,
-                        isClaimed: true,
-                        claimedDate: new Date(
-                            detailedOutput.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND
-                        ),
-                    })
-                }
+            const detailedOutput = await account.getOutput(activity.outputId)
+            const isClaimed = detailedOutput && isOutputClaimed(detailedOutput)
+            if (isClaimed) {
+                updateAsyncDataByActivityId(account.index, activity.id, {
+                    asyncStatus: ActivityAsyncStatus.Claimed,
+                    claimedDate: new Date(detailedOutput.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND),
+                })
             }
         } catch (err) {
             console.error(err)
@@ -38,7 +31,7 @@ export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState
 }
 
 function isOutputClaimed(output: OutputData): boolean {
-    const expirationDate = getExpirationDateFromOutput(output?.output)
+    const expirationDate = getExpirationDateFromOutput(output?.output as IBasicOutput)
 
     if (expirationDate) {
         return (

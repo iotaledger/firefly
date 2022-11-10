@@ -1,16 +1,16 @@
 import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
-import { BASE_TOKEN, COIN_TYPE, NetworkProtocol } from '@core/network'
+import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import {
     DEFAULT_TRANSACTION_OPTIONS,
-    formatTokenAmountBestMatch,
     getAssetFromPersistedAssets,
     getOutputOptions,
-    resetNewTransactionDetails,
+    resetNewTokenTransactionDetails,
     setNewTransactionDetails,
+    NewTransactionType,
 } from '@core/wallet'
-import { showAppNotification } from '@lib/notifications'
+import { showAppNotification } from '@auxiliary/notification'
 import type { Transaction } from '@iota/wallet'
 
 import { ShimmerClaimingAccountState } from '../enums'
@@ -22,6 +22,7 @@ import {
     updateShimmerClaimingAccount,
 } from '../stores'
 import { handleLedgerError } from '@core/ledger'
+import { getDepositAddress } from '@core/account'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
@@ -61,22 +62,22 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
 async function claimShimmerRewardsForShimmerClaimingAccount(
     shimmerClaimingAccount: IShimmerClaimingAccount
 ): Promise<void> {
-    const recipientAddress = shimmerClaimingAccount?.twinAccount?.meta?.publicAddresses[0]?.address
+    const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
-    const outputOptions = getOutputOptions(null, recipientAddress, rawAmount, '', '')
+    const outputOptions = getOutputOptions(null, recipientAddress, rawAmount.toString(), '', '')
     const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
     let claimingTransaction: Transaction
     if (get(isOnboardingLedgerProfile)) {
-        const shimmerTokenMetadata = BASE_TOKEN[NetworkProtocol.Shimmer]
         setNewTransactionDetails({
+            type: NewTransactionType.TokenTransfer,
             asset: {
                 ...getAssetFromPersistedAssets(COIN_TYPE[NetworkProtocol.Shimmer].toString()),
                 balance: {
                     total: rawAmount,
                 },
             },
-            amount: formatTokenAmountBestMatch(rawAmount, shimmerTokenMetadata),
+            rawAmount: rawAmount.toString(),
             unit: '',
             recipient: {
                 type: 'address',
@@ -86,7 +87,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
             tag: '',
         })
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
-        resetNewTransactionDetails()
+        resetNewTokenTransactionDetails()
     } else {
         claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     }

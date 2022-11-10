@@ -1,9 +1,8 @@
 <script lang="typescript">
-    import { activeProfile, logout } from '@core/profile'
-    import { debounce } from 'shared/lib/utils'
     import { onDestroy } from 'svelte'
     import { get } from 'svelte/store'
-    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from 'shared/lib/time'
+    import { activeProfile, logout } from '@core/profile'
+    import { debounce, MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
 
     let timeout
     let isDestroyed = false
@@ -54,7 +53,7 @@
     }
 
     function lock(): void {
-        void logout()
+        void logout(false)
     }
 
     onDestroy(() => {

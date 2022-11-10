@@ -5,10 +5,10 @@ import {
     showAppNotification,
     updateDisplayNotification,
     updateDisplayNotificationProgress,
-} from '@lib/notifications'
-import { NotificationData } from '@lib/typings/notification'
-import { Platform } from '@lib/platform'
+} from '@auxiliary/notification'
+import { INotificationData } from '@auxiliary/notification'
 
+import { Platform } from '../classes'
 import { installAppUpdate } from '../utils'
 import {
     appUpdateBusy,
@@ -64,15 +64,12 @@ export function downloadAppUpdate(): void {
                 actions: [
                     {
                         label: localize('actions.restartNow'),
-                        callback: () => {
-                            cleanup()
-                            installAppUpdate()
-                        },
+                        callback: restartNow,
                         isPrimary: true,
                     },
                     {
                         label: localize('actions.dismiss'),
-                        callback: () => cleanup(),
+                        callback: cleanup,
                     },
                 ],
             })
@@ -89,7 +86,7 @@ export function downloadAppUpdate(): void {
                 actions: [
                     {
                         label: localize('actions.dismiss'),
-                        callback: () => cleanup(),
+                        callback: cleanup,
                         isPrimary: true,
                     },
                 ],
@@ -97,7 +94,12 @@ export function downloadAppUpdate(): void {
         }
     })
 
-    const cleanup = () => {
+    function restartNow(): void {
+        cleanup()
+        installAppUpdate()
+    }
+
+    function cleanup(): void {
         removeDisplayNotification(notificationId)
 
         unsubscribeProgress()
@@ -106,7 +108,7 @@ export function downloadAppUpdate(): void {
         unsubscribeMinutesRemaining()
     }
 
-    const downloadingNotification: NotificationData = {
+    const downloadingNotification: INotificationData = {
         type: 'info',
         message: localize('notifications.downloadingUpdate'),
         progress: 0,
@@ -114,7 +116,7 @@ export function downloadAppUpdate(): void {
         actions: [
             {
                 label: localize('actions.cancel'),
-                callback: () => {
+                callback: (): void => {
                     cancelAppUpdateDownload()
                     cleanup()
                 },

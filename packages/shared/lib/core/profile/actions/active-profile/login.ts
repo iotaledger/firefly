@@ -1,19 +1,24 @@
-import { createNewAccount, setSelectedAccount } from '@core/account'
+import { cleanupOnboarding } from '@contexts/onboarding'
+import { createNewAccount, IAccount, setSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
+import { pollLedgerNanoStatus } from '@core/ledger'
 import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
+import { loadNftsForActiveProfile } from '@core/nfts'
 import {
     buildProfileManagerOptionsFromProfileData,
     initialiseProfileManager,
     isStrongholdUnlocked,
     profileManager,
     recoverAccounts,
+    RecoverAccountsPayload,
 } from '@core/profile-manager'
 import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
-import { ProfileType } from '@core/profile/enums'
 import { loginRouter } from '@core/router'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
 import { get } from 'svelte/store'
 import { DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION, STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../../constants'
+import { ProfileType } from '../../enums'
+import { ILoginOptions } from '../../interfaces'
 import {
     activeAccounts,
     activeProfile,
@@ -21,20 +26,16 @@ import {
     resetLoginProgress,
     setTimeStrongholdLastUnlocked,
 } from '../../stores'
+import { isLedgerProfile } from '../../utils'
 import { loadAccounts } from './loadAccounts'
-import { ILoginOptions } from '../../interfaces'
 import { logout } from './logout'
-import { pollLedgerNanoStatus } from '@core/ledger'
-import { isLedgerProfile } from '@core/profile/utils'
-
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
-import { cleanupOnboarding } from '@contexts/onboarding'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const _loginRouter = get(loginRouter)
     try {
         const _activeProfile = get(activeProfile)
-        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountId } = _activeProfile
+        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountIndex } = _activeProfile
         if (id) {
             // Step 1: create profile manager if its doesn't exist
             incrementLoginProgress()
@@ -52,12 +53,16 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
-            let accounts
+            let accounts: IAccount[]
             if (loginOptions?.isFromOnboardingFlow && loginOptions?.shouldRecoverAccounts) {
                 const { initialAccountRange, addressGapLimit } = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type]
-                accounts = await recoverAccounts(0, initialAccountRange, addressGapLimit, {
-                    syncIncomingTransactions: true,
-                })
+                const recoverAccountsPayload: RecoverAccountsPayload = {
+                    accountStartIndex: 0,
+                    accountGapLimit: initialAccountRange,
+                    addressGapLimit,
+                    syncOptions: { syncIncomingTransactions: true },
+                }
+                accounts = await recoverAccounts(recoverAccountsPayload)
             } else {
                 accounts = await getAccounts()
             }
@@ -76,6 +81,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 5: load assets
             incrementLoginProgress()
             await refreshAccountAssetsForActiveProfile()
+            await loadNftsForActiveProfile()
 
             // Step 6: generate and store activities for all accounts
             incrementLoginProgress()
@@ -104,7 +110,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             if (isLedgerProfile(type)) {
                 pollLedgerNanoStatus()
             }
-            setSelectedAccount(lastUsedAccountId ?? get(activeAccounts)?.[0]?.id ?? null)
+            setSelectedAccount(lastUsedAccountIndex ?? get(activeAccounts)?.[0]?.index ?? null)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
             setTimeout(() => {
@@ -119,7 +125,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
     } catch (err) {
         handleError(err)
         if (!loginOptions?.isFromOnboardingFlow) {
-            await logout()
+            await logout(false)
         }
         _loginRouter.previous()
         resetLoginProgress()

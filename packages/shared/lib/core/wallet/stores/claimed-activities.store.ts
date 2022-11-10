@@ -1,18 +1,30 @@
-import { persistent } from '@lib/helpers'
-import { IClaimedActivities } from '../interfaces'
+import { get } from 'svelte/store'
 
-export const claimedActivities = persistent<IClaimedActivities[]>('claimedActivities', [])
+import { activeProfileId } from '@core/profile'
+import { persistent } from '@core/utils/store'
+
+import { IClaimedActivities, IClaimedActivitiesPerProfile } from '../interfaces'
+
+export const claimedActivities = persistent<IClaimedActivitiesPerProfile>('claimedActivities', {})
 
 export function addClaimedActivity(
-    accountId: string,
+    accountIndex: number,
     transactionId: string,
     claimedActivity: IClaimedActivities
 ): void {
     claimedActivities.update((state) => {
-        if (!state[accountId]) {
-            state[accountId] = {}
+        const profileId = get(activeProfileId)
+        if (Array.isArray(state)) {
+            // needed because of legacy way to store claimed activities
+            state = {}
         }
-        state[accountId][transactionId] = claimedActivity
+        if (!state[profileId]) {
+            state[profileId] = {}
+        }
+        if (!state[profileId][accountIndex]) {
+            state[profileId][accountIndex] = {}
+        }
+        state[profileId][accountIndex][transactionId] = claimedActivity
         return state
     })
 }

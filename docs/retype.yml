@@ -4,42 +4,42 @@ url: iotaledger.github.io/firefly/
 favicon: static/icon_firefly.png
 
 branding:
-  title: Firefly
-  label: v2.0.0-beta
-  logo: "static/icon_firefly.svg"
+    title: Firefly
+    label: v2.0.1
+    logo: 'static/icon_firefly.svg'
 
 meta:
-  title: " | Firefly Team Handbook"
+    title: ' | Firefly Team Handbook'
 
 edit:
-  repo: "https://github.com/iotaledger/firefly"
-  base: /docs
-  branch: chore/create-firefly-handbook
+    repo: 'https://github.com/iotaledger/firefly'
+    base: /docs
+    branch: chore/create-firefly-handbook
 
 links:
-- text: Home
-  link: "./index.md"
-  icon: home
+    - text: Home
+      link: './index.md'
+      icon: home
 
-- text: Wiki
-  link: "https://github.com/iotaledger/firefly/wiki"
-  icon: book
-  target: blank
+    - text: Wiki
+      link: 'https://github.com/iotaledger/firefly/wiki'
+      icon: book
+      target: blank
 
-- text: Issues
-  link: "https://github.com/iotaledger/firefly/issues"
-  icon: issue-opened
-  target: blank
+    - text: Issues
+      link: 'https://github.com/iotaledger/firefly/issues'
+      icon: issue-opened
+      target: blank
 
-- text: Discussions
-  link: "https://github.com/iotaledger/firefly/discussions"
-  icon: comment-discussion
-  target: blank
+    - text: Discussions
+      link: 'https://github.com/iotaledger/firefly/discussions'
+      icon: comment-discussion
+      target: blank
 
-- text: GitHub
-  link: "https://github.com/iotaledger/firefly"
-  icon: mark-github
-  target: blank
+    - text: GitHub
+      link: 'https://github.com/iotaledger/firefly'
+      icon: mark-github
+      target: blank
 
 footer:
-  copyright: "&copy; Copyright {{ year }}. All rights reserved."
+    copyright: '&copy; Copyright {{ year }}. All rights reserved.'

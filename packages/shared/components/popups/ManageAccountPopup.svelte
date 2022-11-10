@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { Button, ColorPicker, Input, Text } from 'shared/components'
-    import { getTrimmedLength } from 'shared/lib/helpers'
+    import { getTrimmedLength } from '@core/utils'
     import { localize } from '@core/i18n'
     import { selectedAccount, tryEditSelectedAccountMetadata, validateAccountName } from '@core/account'
-    import { closePopup } from '@lib/popup'
+    import { closePopup } from '@auxiliary/popup'
 
     export let error = ''
 

@@ -2,9 +2,9 @@ import { get, writable } from 'svelte/store'
 
 import { onboardingProfile, ProfileProtectionType } from '@contexts/onboarding'
 
-import { onboardingRouter } from '../../onboarding-router'
+import { Subrouter } from '../../classes'
 import { StorageProtectionSetupRoute } from '../../enums'
-import { Subrouter } from '../subrouter'
+import { onboardingRouter } from '../../routers'
 
 export const storageProtectionSetupRoute = writable<StorageProtectionSetupRoute>(null)
 export const storageProtectionSetupRouter = writable<StorageProtectionSetupRouter>(null)
@@ -30,7 +30,7 @@ export class StorageProtectionSetupRouter extends Subrouter<StorageProtectionSet
             }
             case StorageProtectionSetupRoute.SetupPinProtection:
                 this.parentRouter.next()
-                break
+                return
         }
 
         this.setNext(nextRoute)

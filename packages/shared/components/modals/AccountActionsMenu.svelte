@@ -4,20 +4,20 @@
     import { activeAccounts, visibleActiveAccounts } from '@core/profile'
     import { deleteAccount } from '@core/profile-manager'
     import { Icon } from '@lib/auxiliary/icon'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import { HR, MenuItem, Modal, ToggleHiddenAccountMenuItem } from 'shared/components'
 
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     const showDeleteAccount =
-        $selectedAccount.meta.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
+        $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
 
-    const handleCustomiseAccountClick = () => {
+    function handleCustomiseAccountClick(): void {
         openPopup({ type: 'manageAccount' })
         modal.close()
     }
 
-    function handleViewStorageDepositClick() {
+    function handleViewStorageDepositClick(): void {
         openPopup({ type: 'storageDepositBreakdown' })
         modal.close()
     }

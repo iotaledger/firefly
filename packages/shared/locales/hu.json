@@ -946,7 +946,6 @@
         "iveWrittenRecoveryPhrase": "Leírtam a helyreállító kódszólistát",
         "verifyRecoveryPhrase": "Helyreállító kódszólista ellenőrzése",
         "revealRecoveryPhrase": "Helyreállító kódszólista megjelenítése",
-        "importSeedvault": "SeedVault importálása",
         "checkAgain": "Ellenőrizze újra",
         "importFromFile": "Importálás fájlból",
         "send": "Küldés",
@@ -1107,7 +1106,6 @@
         "copyAddress": "Cím másolása",
         "viewOnExplorer": "Megtekintés Explorerben",
         "import": "Importálás",
-        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Nyelv",
         "appearance": "Megjelenés",
@@ -1644,24 +1642,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "átutalás folyamatban innen:",
                     "Confirmed": "átutalva innen:",
                     "Conflicting": "átutalás sikertelen"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "átutalás folyamatban ide:",
                     "Confirmed": "átutalva ide:",
                     "Conflicting": "átutalás sikertelen"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "fogadás folyamatban innen:",
                     "Confirmed": "fogadva innen:",
                     "Conflicting": "fogadás sikertelen"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "küldés folyamatban ide:",
                     "Confirmed": "elküldve ide:",
                     "Conflicting": "küldés sikertelen"
@@ -1669,12 +1667,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "kibocsátás folyamatban",
                 "Confirmed": "kibocsátás elkészült",
                 "Conflicting": "kibocsátás sikertelen"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "kibocsátás folyamatban",
                 "Confirmed": "kibocsátás elkészült",
                 "Conflicting": "kibocsátás sikertelen"

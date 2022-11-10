@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { popupState } from '@lib/popup'
+import { popupState } from '@auxiliary/popup'
 
 import { openLedgerNotConnectedPopup } from '../utils'
 
@@ -8,22 +8,15 @@ import { getLedgerDeviceStatus } from './getLedgerDeviceStatus'
 import { pollLedgerNanoStatus } from './pollLedgerNanoStatus'
 
 export function promptUserToConnectLedger(
-    onConnected: () => void | Promise<void> = () => {},
-    onCancel: () => void = () => {},
+    onConnected: () => void = (): void => {},
+    onCancel: () => void = (): void => {},
     overridePopup: boolean = false
 ): void {
-    const _onCancel = () => {
-        onCancel()
-    }
-    const _onConnected = () => {
-        void onConnected()
-    }
-
-    const _onDisconnected = () => {
+    function onDisconnected(): void {
         if (!get(popupState).active || overridePopup) {
             openLedgerNotConnectedPopup(onCancel, () => pollLedgerNanoStatus(), overridePopup)
         }
     }
 
-    void getLedgerDeviceStatus(_onConnected, _onDisconnected, _onCancel)
+    void getLedgerDeviceStatus(onConnected, onDisconnected, onCancel)
 }

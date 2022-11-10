@@ -1,9 +1,8 @@
 <script lang="typescript">
     import { onDestroy } from 'svelte'
-    import { Button, KeyValueBox, Text, TextHint } from 'shared/components'
-    import { FontWeight } from '../Text.svelte'
-    import { closePopup, openPopup } from '@lib/popup'
-    import { showAppNotification } from '@lib/notifications'
+    import { Button, KeyValueBox, Text, TextHint, FontWeight } from 'shared/components'
+    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { showAppNotification } from '@auxiliary/notification'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { sumBalanceForAccounts } from '@core/account'
     import { localize } from '@core/i18n'
@@ -17,12 +16,13 @@
         loadAccounts,
         visibleActiveAccounts,
     } from '@core/profile'
-    import { recoverAccounts } from '@core/profile-manager'
+    import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
     import {
         formatTokenAmountBestMatch,
         generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
+    import { loadNftsForActiveProfile } from '@core/nfts'
 
     export let searchForBalancesOnLoad = false
 
@@ -41,7 +41,7 @@
     $: searchForBalancesOnLoad && !$isStrongholdLocked && handleFindBalances()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 
-    async function handleFindBalances() {
+    async function handleFindBalances(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
                 type: 'unlockStronghold',
@@ -70,9 +70,13 @@
                     return
                 }
 
-                await recoverAccounts(0, currentAccountGapLimit, currentAddressGapLimit, {
-                    syncIncomingTransactions: true,
-                })
+                const recoverAccountsPayload: RecoverAccountsPayload = {
+                    accountStartIndex: 0,
+                    accountGapLimit: currentAccountGapLimit,
+                    addressGapLimit: currentAddressGapLimit,
+                    syncOptions: { syncIncomingTransactions: true },
+                }
+                await recoverAccounts(recoverAccountsPayload)
                 await loadAccounts()
 
                 previousAccountGapLimit = currentAccountGapLimit
@@ -98,7 +102,7 @@
         }
     }
 
-    function handleCancelClick() {
+    function handleCancelClick(): void {
         closePopup()
     }
 
@@ -106,6 +110,7 @@
         if (hasUsedWalletFinder) {
             await refreshAccountAssetsForActiveProfile()
             await generateAndStoreActivitiesForAllAccounts()
+            loadNftsForActiveProfile()
         }
     })
 </script>

@@ -2,6 +2,8 @@
  * The icons available in the app.
  */
 export enum Icon {
+    Activity = 'activity',
+    Alias = 'alias',
     ArrowLeft = 'arrow-left',
     ArrowRight = 'arrow-right',
     Assembly = 'assembly',
@@ -21,6 +23,7 @@ export enum Icon {
     ChevronUp = 'chevron-up',
     Chip = 'chip',
     Close = 'close',
+    Collectibles = 'collectibles',
     Copy = 'copy',
     Currency = 'currency',
     Customize = 'customize',
@@ -57,6 +60,7 @@ export enum Icon {
     Network = 'network',
     NotVerified = 'not-verified',
     Parchment = 'parchment',
+    Picture = 'picture',
     Play = 'play',
     Plus = 'plus',
     Profile = 'profile',

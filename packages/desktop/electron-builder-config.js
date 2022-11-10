@@ -35,7 +35,7 @@ const prodConfig = () => ({
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/@iota/wallet/target/*'],
-    appId: 'org.iota.firefly',
+    appId: APP_ID,
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
@@ -57,7 +57,12 @@ const prodConfig = () => ({
             { x: 170, y: 250, type: 'file' },
         ],
     },
-    nsis: { oneClick: true, deleteAppDataOnUninstall: false, perMachine: true, include: './build/installer.nsh' },
+    nsis: {
+        oneClick: true,
+        deleteAppDataOnUninstall: false,
+        perMachine: true,
+        include: 'public/installer.nsh',
+    },
     win: {
         icon: './public/assets/icons/prod/icon1024x1024.png',
         publisherName: 'IOTA Stiftung',
@@ -89,7 +94,7 @@ const prodConfig = () => ({
     publish: {
         provider: 'generic',
         url: 'https://dl.firefly.iota.org/',
-        publishAutoUpdate: true,
+        publishAutoUpdate: false,
         channel: 'latest',
     },
 })

@@ -3,9 +3,9 @@ import { get, writable } from 'svelte/store'
 import { onboardingProfile } from '@contexts/onboarding'
 import { NetworkType } from '@core/network'
 
+import { Subrouter } from '../../classes'
 import { NetworkSetupRoute } from '../../enums'
-import { onboardingRouter } from '../../onboarding-router'
-import { Subrouter } from '../subrouter'
+import { onboardingRouter } from '../../routers'
 
 export const networkSetupRoute = writable<NetworkSetupRoute>(null)
 export const networkSetupRouter = writable<NetworkSetupRouter>(null)
@@ -25,23 +25,25 @@ export class NetworkSetupRouter extends Subrouter<NetworkSetupRoute> {
                 const isDeveloperProfile = _onboardingProfile?.isDeveloperProfile
                 if (isDeveloperProfile) {
                     nextRoute = NetworkSetupRoute.ChooseNetwork
+                    break
                 } else {
                     this.parentRouter.next()
+                    return
                 }
-                break
             }
             case NetworkSetupRoute.ChooseNetwork: {
                 const networkType = _onboardingProfile?.networkType ?? NetworkType.Devnet
                 if (networkType === NetworkType.PrivateNet) {
                     nextRoute = NetworkSetupRoute.SetupPrivateNetworkConnection
+                    break
                 } else {
                     this.parentRouter.next()
+                    return
                 }
-                break
             }
             case NetworkSetupRoute.SetupPrivateNetworkConnection:
                 this.parentRouter.next()
-                break
+                return
         }
 
         this.setNext(nextRoute)

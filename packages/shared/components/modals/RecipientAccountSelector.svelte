@@ -3,20 +3,19 @@
     import { BASE_TOKEN } from '@core/network'
     import { visibleActiveAccounts, activeProfile } from '@core/profile'
     import { formatTokenAmountBestMatch } from '@core/wallet'
-    import { AccountLabel, Modal, Text } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
-    import { truncateString } from 'shared/lib/helpers'
+    import { AccountLabel, Modal, Text, TextType } from 'shared/components'
+    import { truncateString } from '@core/utils'
     import { fade } from 'svelte/transition'
 
-    export let modal: Modal
-    export let searchValue: string
-    export let selected: IAccountState
+    export let modal: Modal = undefined
+    export let searchValue: string = ''
+    export let selected: IAccountState = undefined
     export let showBalance: boolean = false
     export let includeSelectedAccount: boolean = false
     export let onClose: () => void
 
     $: accounts = $visibleActiveAccounts?.filter(
-        (account) => account.id !== $selectedAccount.id || includeSelectedAccount
+        (account) => account.index !== $selectedAccount.index || includeSelectedAccount
     )
     $: filteredAccounts = accounts?.filter(
         (account) =>

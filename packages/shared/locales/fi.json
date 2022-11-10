@@ -946,7 +946,6 @@
         "iveWrittenRecoveryPhrase": "Olen tallentanut palautuslausekkeeni",
         "verifyRecoveryPhrase": "Vahvista palautuslauseke",
         "revealRecoveryPhrase": "Näytä palautuslauseke",
-        "importSeedvault": "Tuo Seedvault-tiedosto",
         "checkAgain": "Tarkista uudelleen",
         "importFromFile": "Tuo tiedostosta",
         "send": "Lähetä",
@@ -1107,7 +1106,6 @@
         "copyAddress": "Kopioi osoite",
         "viewOnExplorer": "Näytä Explorerissa",
         "import": "Tuo",
-        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Kieli",
         "appearance": "Ulkoasu",
@@ -1644,24 +1642,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "siirretään kohteesta",
                     "Confirmed": "siirretty kohteesta",
                     "Conflicting": "siirto epäonnistui"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "siirretään kohteeseen",
                     "Confirmed": "siirretty kohteeseen",
                     "Conflicting": "siirto epäonnistui"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "vastaanotetaan kohteesta",
                     "Confirmed": "vastaanotettu kohteesta",
                     "Conflicting": "vastaanotto epäonnistui"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "lähetetään kohteeseen",
                     "Confirmed": "lähetetty kohteeseen",
                     "Conflicting": "lähetys epäonnistui"
@@ -1669,12 +1667,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "lyönti",
                 "Confirmed": "lyöty",
                 "Conflicting": "lyönti epäonnistui"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "lyönti",
                 "Confirmed": "lyöty",
                 "Conflicting": "lyönti epäonnistui"

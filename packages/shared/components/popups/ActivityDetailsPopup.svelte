@@ -1,26 +1,33 @@
 <script lang="typescript">
-    import { Text, Button } from 'shared/components'
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
-    import { Platform } from 'shared/lib/platform'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
-    import { TransactionDetails } from 'shared/components/molecules'
+    import {
+        Text,
+        Button,
+        FontWeight,
+        TextType,
+        BasicActivityDetails,
+        AliasActivityDetails,
+        FoundryActivityDetails,
+        NftActivityDetails,
+        ActivityInformation,
+    } from 'shared/components'
+    import { Platform } from '@core/app'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
         ActivityType,
         claimActivity,
-        formatTokenAmountDefault,
         getAssetFromPersistedAssets,
         rejectActivity,
         selectedAccountActivities,
+        getFiatAmount,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
-    import { currencies, exchangeRates } from '@lib/currency'
-    import { CurrencyTypes } from 'shared/lib/typings/currency'
-    import { setClipboard } from '@lib/utils'
-    import { truncateString } from '@lib/helpers'
-    import { closePopup, openPopup } from '@lib/popup'
+    import { currencies, Currency, exchangeRates } from '@core/utils'
+    import { setClipboard } from '@core/utils'
+    import { truncateString } from '@core/utils'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
 
     export let activityId: string
@@ -29,47 +36,81 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
     $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
-    $: asset = getAssetFromPersistedAssets(activity?.data.assetId)
-    $: amount = formatTokenAmountDefault(activity?.data.rawAmount, asset?.metadata)
-    $: isTimelocked =
-        activity.data.type === ActivityType.Transaction && activity.data.asyncStatus === ActivityAsyncStatus.Timelocked
+    $: asset =
+        activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry
+            ? getAssetFromPersistedAssets(activity.assetId)
+            : undefined
+    $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
-        activity.data.type === ActivityType.Transaction &&
-        activity.data.isAsync &&
-        (activity?.data.direction === ActivityDirection.In || activity.data.isSelfTransaction) &&
-        activity.data.asyncStatus === ActivityAsyncStatus.Unclaimed
+        activity.asyncData &&
+        (activity?.direction === ActivityDirection.Incoming || activity.isSelfTransaction) &&
+        activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    $: transactionDetails = {
-        asset,
-        type: activity?.type,
-        transactionTime: activity?.time,
-        inclusionState: activity?.inclusionState,
-        rawAmount: activity?.data.rawAmount,
-        formattedFiatValue: activity?.getFiatAmount(
-            $currencies[CurrencyTypes.USD],
-            $exchangeRates[$activeProfile?.settings?.currency]
-        ),
-        storageDeposit: activity?.data.storageDeposit,
-        giftedStorageDeposit: activity?.data.giftedStorageDeposit,
-        amount,
-        unit: asset?.metadata?.unit,
-        ...(activity?.data.type === ActivityType.Transaction && {
-            asyncStatus: activity?.data.asyncStatus,
-            direction: activity?.data.direction,
-            isInternal: activity?.data.isInternal,
-            claimedDate: activity?.data.claimedDate,
-            claimingTransactionId: activity?.data.claimingTransactionId,
+    let details: Record<string, unknown>
+    $: activity, (details = getActivityDetails())
+
+    function getActivityDetails(): Record<string, unknown> {
+        if (!activity) {
+            return {}
+        }
+        const details = {
+            transactionTime: activity.time,
+            inclusionState: activity.inclusionState,
+            tag: activity.tag,
+            metadata: activity.metadata,
+            direction: activity.direction,
+            asyncStatus: activity.asyncData?.asyncStatus,
+            claimedDate: activity.asyncData?.claimedDate,
+            claimingTransactionId: activity.asyncData?.claimingTransactionId,
             expirationDate:
-                activity?.data?.asyncStatus !== ActivityAsyncStatus.Claimed ? activity?.data.expirationDate : null,
-            timelockDate: activity?.data.timelockDate,
-            subject: activity?.data?.subject,
-            tag: activity?.data?.tag,
-            metadata: activity?.data?.metadata,
-        }),
+                activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
+                    ? activity.asyncData?.expirationDate
+                    : null,
+            timelockDate: activity.asyncData?.timelockDate,
+        }
+        if (activity.type === ActivityType.Transaction) {
+            return {
+                ...details,
+                type: activity.type,
+                asset,
+                storageDeposit: activity.storageDeposit,
+                rawAmount: activity.rawAmount,
+                unit: asset?.metadata?.unit,
+                giftedStorageDeposit: activity.giftedStorageDeposit,
+                isInternal: activity.isInternal,
+                formattedFiatValue: getFiatAmount(
+                    activity,
+                    $currencies[Currency.USD],
+                    $exchangeRates[$activeProfile?.settings?.currency]
+                ),
+            }
+        } else if (activity.type === ActivityType.Foundry) {
+            return {
+                ...details,
+                asset,
+                storageDeposit: activity.storageDeposit,
+                rawAmount: activity.rawAmount,
+                unit: asset?.metadata?.unit,
+                giftedStorageDeposit: activity.giftedStorageDeposit,
+                formattedFiatValue: getFiatAmount(
+                    activity,
+                    $currencies[Currency.USD],
+                    $exchangeRates[$activeProfile?.settings?.currency]
+                ),
+            }
+        } else if (activity.type === ActivityType.Nft) {
+            return {
+                ...details,
+                type: activity.type,
+                nftId: activity.nftId,
+                storageDeposit: activity.storageDeposit,
+                isInternal: activity.isInternal,
+            }
+        }
     }
 
     function handleExplorerClick(): void {
-        Platform.openUrl(`${explorerUrl}/block/${activity.transactionId}`)
+        Platform.openUrl(`${explorerUrl}/transaction/${activity.transactionId}`)
     }
 
     function handleTransactionIdClick(): void {
@@ -77,13 +118,11 @@
     }
 
     async function claim(): Promise<void> {
-        if (activity.data.type === ActivityType.Transaction) {
-            await claimActivity(activity.id, activity.data)
-            openPopup({
-                type: 'activityDetails',
-                props: { activityId },
-            })
-        }
+        await claimActivity(activity)
+        openPopup({
+            type: 'activityDetails',
+            props: { activityId },
+        })
     }
 
     async function onClaimClick(): Promise<void> {
@@ -143,22 +182,34 @@
             </button>
         {/if}
     </div>
-    <TransactionDetails {...transactionDetails} />
-    {#if !isTimelocked && activity.data.type === ActivityType.Transaction && isActivityIncomingAndUnclaimed}
+    {#if activity?.type === ActivityType.Transaction}
+        <BasicActivityDetails {...details} />
+    {:else if activity?.type === ActivityType.Foundry}
+        <FoundryActivityDetails {...details} />
+    {:else if activity?.type === ActivityType.Alias}
+        <alias-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+            <AliasActivityDetails {activity} />
+            <ActivityInformation {activity} />
+        </alias-details>
+    {:else if activity?.type === ActivityType.Nft}
+        <NftActivityDetails {...details} />
+    {/if}
+
+    {#if !isTimelocked && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
             <Button
                 outline
                 classes="w-full"
-                disabled={activity.data.isClaiming || activity.data.isRejected}
+                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
                 onClick={reject}
             >
                 {localize('actions.reject')}
             </Button>
             <Button
                 classes="w-full"
-                disabled={activity.data.isClaiming}
+                disabled={activity.asyncData?.isClaiming}
                 onClick={onClaimClick}
-                isBusy={activity.data.isClaiming}
+                isBusy={activity.asyncData?.isClaiming}
             >
                 {localize('actions.claim')}
             </Button>

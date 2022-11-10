@@ -1,10 +1,20 @@
 import { IAccountState } from '@core/account'
 import { IProcessedTransaction } from '@core/wallet/interfaces/processed-transaction.interface'
-import { Activity } from '../../classes'
+import { Activity } from '@core/wallet/types'
+import { generateActivity } from '@core/wallet/utils'
 
 export function generateActivitiesFromProcessedTransactions(
     processedTransactions: IProcessedTransaction[],
     account: IAccountState
 ): Activity[] {
-    return processedTransactions.map((_preparedActivity) => new Activity(_preparedActivity, account))
+    const activities: Activity[] = []
+    for (const _preparedActivity of processedTransactions) {
+        try {
+            const activity = generateActivity(_preparedActivity, account)
+            activities.push(activity)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    return activities
 }

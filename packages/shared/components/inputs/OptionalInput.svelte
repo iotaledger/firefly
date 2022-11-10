@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
-    import { ClosableInput, AddInputButton, Tooltip, Text } from 'shared/components'
+    import { ClosableInput, AddInputButton, Tooltip, Text, FontWeight, TextType } from 'shared/components'
     import { Position } from 'shared/components/Tooltip.svelte'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
 
     export let label: string = ''
     export let description: string = ''
     export let value: string = null
+    export let fontSize: number = 15
     export let error: string = ''
     export let classes: string = null
     export let isOpen: boolean = false
@@ -57,7 +57,7 @@
         bind:error
         {label}
         placeholder={label}
-        fontSize="15"
+        {fontSize}
         fontWeight={FontWeight.medium}
         {...$$restProps}
     />

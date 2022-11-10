@@ -1,11 +1,11 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { FAUCET_URLS, nodeInfo } from '@core/network'
-    import { openPopup } from '@lib/popup'
+    import { openPopup } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
     import { activeProfile } from '@core/profile'
 
-    function handleGetTokens() {
+    function handleGetTokens(): void {
         openPopup({
             type: 'faucetRequest',
         })

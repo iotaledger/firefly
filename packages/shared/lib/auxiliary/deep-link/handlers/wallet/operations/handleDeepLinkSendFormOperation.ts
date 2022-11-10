@@ -1,16 +1,17 @@
 import {
-    INewTransactionDetails,
+    NewTransactionDetails,
     Subject,
     setNewTransactionDetails,
     selectedAccountAssets,
     getAssetById,
+    NewTransactionType,
 } from '@core/wallet'
-import { openPopup } from '@lib/popup'
+import { openPopup } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 
 import { SendOperationParameter } from '../../../enums'
 import { UnknownAssetError } from '../../../errors'
-import { getAmountFromSearchParam } from '../../../utils'
+import { getRawAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendFormOperation(searchParams)
@@ -31,9 +32,9 @@ export function handleDeepLinkSendFormOperation(searchParams: URLSearchParams): 
  *
  * @param {URLSearchParams} searchParams The query parameters of the deep link URL.
  *
- * @return {INewTransactionDetails} The formatted parameters for the send operation.
+ * @return {NewTransactionDetails} The formatted parameters for the send operation.
  */
-function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionDetails {
+function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDetails {
     const assetId = searchParams.get(SendOperationParameter.AssetId)
     const asset = assetId ? getAssetById(assetId) : get(selectedAccountAssets).baseCoin
     if (!asset) {
@@ -42,15 +43,16 @@ function parseSendFormOperation(searchParams: URLSearchParams): INewTransactionD
 
     const address = searchParams.get(SendOperationParameter.Address)
     const unit = searchParams.get(SendOperationParameter.Unit) ?? asset.metadata?.unit
-    const amount = getAmountFromSearchParam(searchParams, asset?.metadata)
+    const rawAmount = getRawAmountFromSearchParam(searchParams)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)
     const recipient: Subject = address ? { type: 'address', address } : undefined
 
     return {
+        type: NewTransactionType.TokenTransfer,
         ...(asset && { asset }),
         ...(recipient && { recipient }),
-        ...(amount && { amount }),
+        ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
         ...(metadata && { metadata }),
         ...(tag && { tag }),

@@ -1,12 +1,35 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { openPopup } from '@lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { OnboardingButton } from 'shared/components'
+    import { selectedAccount } from '@core/account'
+    import { resetMintTokenDetails } from '@core/wallet'
 
-    function handleMintNativeToken() {
-        openPopup({
-            type: 'mintNativeTokenForm',
-        })
+    $: hasAliases = $selectedAccount.balances?.aliases.length > 0
+
+    function handleMintNativeToken(): void {
+        resetMintTokenDetails()
+        if (hasAliases) {
+            openPopup({
+                type: 'mintNativeTokenForm',
+            })
+        } else {
+            openPopup({
+                type: 'confirmation',
+                props: {
+                    title: localize('popups.noAlias.title'),
+                    hint: localize('popups.noAlias.description'),
+                    warning: true,
+                    confirmText: localize('actions.createAlias'),
+                    onConfirm: () => {
+                        closePopup()
+                        openPopup({
+                            type: 'aliasConfirmation',
+                        })
+                    },
+                },
+            })
+        }
     }
 </script>
 

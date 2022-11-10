@@ -1,8 +1,8 @@
 import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
-import { NotificationType } from '@lib/typings/notification'
-import { isNewNotification, showAppNotification } from '@lib/notifications'
+import { NotificationType } from '@auxiliary/notification'
+import { isNewNotification, showAppNotification } from '@auxiliary/notification'
 
 import { ledgerConnectionState } from '../stores'
 import { getLedgerDeviceStatus } from './getLedgerDeviceStatus'
@@ -16,7 +16,7 @@ export function displayNotificationForLedgerProfile(
 ): string {
     let notificationId
 
-    const _notify = () => {
+    const _notify: () => void = () => {
         const _ledgerConnectionState = get(ledgerConnectionState)
         const allowedToNotify = allowMultiple ? true : isNewNotification(notificationType)
 

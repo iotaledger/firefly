@@ -1,5 +1,8 @@
 // Files
-export * from './convertEd25519ToBech32'
+export * from './buildFoundryOutputData'
+export * from './getBech32AddressFromAddressTypes'
+export * from './convertHexAddressToBech32'
+export * from './convertBech32ToHexAddress'
 export * from './convertToRawAmount'
 export * from './formatTokenAmountBestMatch'
 export * from './formatTokenAmountDefault'
@@ -12,11 +15,12 @@ export * from './getMetadataFromFoundryOutput'
 export * from './getOutputOptions'
 export * from './getSenderAddressFromUnlockCondition'
 export * from './getSubjectFromAddress'
+export * from './hashOutputId'
 export * from './isSubjectInternal'
-export * from './parseRawAmount'
 export * from './validateIrc30Metadata'
 
 // Folders
+export * from './generateActivity'
 export * from './outputs'
 export * from './send'
 export * from './transactions'

@@ -1,5 +1,7 @@
 import { AccountBalance } from '@iota/wallet'
-import { SignerType } from '../enums'
+
+import { getDepositAddress } from '@core/account/utils'
+
 import { IAccount, IAccountMetadata, IAccountState } from '../interfaces'
 
 export async function buildAccountState(account: IAccount, metadata: IAccountMetadata): Promise<IAccountState> {
@@ -15,8 +17,10 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         potentiallyLockedOutputs: {},
         aliases: [],
     }
+    let depositAddress: string
     try {
         balances = await account.getBalance()
+        depositAddress = await getDepositAddress(account)
     } catch (error) {
         console.error(error)
     }
@@ -24,12 +28,8 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     return {
         ...account,
         ...metadata,
-        depositAddress: account.meta.publicAddresses[0].address,
+        depositAddress,
         balances,
-        // TODO: refactor onto the profile
-        signerType: SignerType.Stronghold,
-        // TODO: refactor or remove these below
-        messages: [],
-        isSyncing: false,
+        isTransferring: false,
     }
 }

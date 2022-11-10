@@ -545,6 +545,35 @@
                 "title": "Color picker",
                 "hexCode": "Color hex code"
             }
+        },
+        "collectibles": {
+            "details": {
+                "collection": "Collection",
+                "nftId": "NFT ID",
+                "nftType": "NFT Type",
+                "storageDeposit": "Storage deposit",
+                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
+                "attributes": "Attributes",
+                "menu": {
+                    "download": "Download",
+                    "setAvatar": "Set NFT as profile avatar",
+                    "view": "View in IPFS",
+                    "burn": "Burn NFT"
+                }
+            },
+            "metadata": {
+                "standard": "Standard",
+                "version": "Version",
+                "type": "Type",
+                "uri": "URI",
+                "name": "Name",
+                "collectionId" : "Collection Id",
+                "collectionName": "Collection Name",
+                "royalties": "Royalties",
+                "issuerName": "Issuer Name",
+                "description": "Description",
+                "attributes": "Attributes"
+            }
         }
     },
     "popups": {
@@ -563,6 +592,9 @@
                 "title": "Locked in pending transactions",
                 "subtitle": "For sending native assets and small IOTA amounts"
             }
+        },
+        "alias": {
+            "title": "Confirm alias creation"
         },
         "password": {
             "title": "Password required",
@@ -707,7 +739,7 @@
             "userPath": "User Path"
         },
         "transaction": {
-            "title": "Confirm transaction",
+            "title": "Send asset",
             "body": "You’re about to send {amount} to",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
@@ -855,7 +887,7 @@
         "sendForm": {
             "title": "Send funds"
         },
-        "tokenInformation" : {
+        "tokenInformation": {
             "newTokenTitle": "New token",
             "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
             "tokenMetadata": {
@@ -868,26 +900,53 @@
                 "verifyToken": "I verify this token"
             }
         },
-        "mintNativeTokenForm" : {
-            "title": "Mint native tokens",
-            "inputs": {
+        "sendNft": {
+            "formTitle": "Send NFT",
+            "confirmationTitle": "Confirm sending NFT",
+            "property": {
+                "nft": "NFT"
+            }
+        },
+        "mintNativeToken": {
+            "formTitle": "Mint native tokens",
+            "confirmationTitle": "Mint native tokens",
+            "property": {
                 "totalSupply": "Total Supply",
                 "circulatingSupply": "Circulating Supply",
                 "standard": "Standard",
-                "name": "Name",
+                "tokenName": "Name",
+                "storageDeposit": "Storage Deposit",
                 "description": "Description",
                 "symbol": "Symbol",
                 "decimals": "Decimals",
                 "url": "URL",
                 "logoUrl": "Logo URL",
-                "logo": "Logo"
+                "logo": "Logo",
+                "alias": "Alias"
+            }
+        },
+        "noAlias": {
+            "title": "Unable to mint",
+            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
+        },
+        "mintNftForm": {
+            "title": "Mint simple NFT",
+            "inputs": {
+                "type": "Type",
+                "uri": "URI",
+                "name": "Name",
+                "collectionId" : "Collection Id",
+                "collectionName": "Collection Name",
+                "royalties": "Royalties",
+                "issuerName": "Issuer Name",
+                "description": "Description",
+                "attributes": "Attributes"
             }
         },
         "faucetRequest": {
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         }
-
     },
     "charts": {
         "incomingMi": "Incoming {value}",
@@ -935,6 +994,8 @@
         "createWalletDescription": "Create a fresh profile running on {protocol, select, iota {Chrysalis} shimmer {Shimmer}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
+        "createAlias": "Create alias",
+        "createAliasDescription": "Create alias output",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPinCode": "Setup PIN code",
@@ -947,7 +1008,6 @@
         "iveWrittenRecoveryPhrase": "I’ve written down my recovery phrase",
         "verifyRecoveryPhrase": "Verify recovery phrase",
         "revealRecoveryPhrase": "Reveal recovery phrase",
-        "importSeedvault": "Import SeedVault",
         "checkAgain": "Check Again",
         "importFromFile": "Import from a file",
         "send": "Send",
@@ -1045,6 +1105,7 @@
         "backup": "Backup",
         "mint": "Mint",
         "mintNativeToken": "Mint native token",
+        "mintNft": "Mint NFT",
         "verifyToken": "Verify token",
         "unverifyToken": "Unverify token",
         "hideToken": "Hide token",
@@ -1069,22 +1130,35 @@
         "recoveryPhrase": "Recovery Phrase",
         "recentActivity": "Recent Activity",
         "sent": "Sent",
+        "sending": "Sending",
         "received": "Received",
+        "receiving": "Receiving",
+        "sentNft": "NFT sent",
+        "sendingNft": "Sending NFT",
+        "receivedNft": "NFT received",
+        "receivingNft": "Receiving NFT",
         "transfer": "Transfer",
         "transferring": "Transferring",
+        "transferNft": "Transfer NFT",
+        "transferringNft": "Transferring NFT",
         "shimmerClaimed": "Claimed",
         "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
         "minted": "Minted",
         "minting": "Minting",
+        "aliasCreated": "Alias created",
+        "creatingAlias": "Creating Alias",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
-        "sendFunds": "Send funds",
+        "sendAssets": "Send assets",
+        "sendAssetToAddress": "Send asset to an address",
         "sendToAddress": "Send to address",
+        "sendToken": "Send token",
+        "sendNft": "Send NFT",
+        "sendNftToAddress": "Send NFT to an address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
         "moveFundsBetweenAccounts": "Move funds between wallets",
-        "sendTokensToAddress": "Send tokens to an address",
         "manageAccount": "Manage Wallet",
         "customizeAcount": "Customize your wallet",
         "account": "Wallet",
@@ -1108,7 +1182,6 @@
         "copyAddress": "Copy Address",
         "viewOnExplorer": "View on Explorer",
         "import": "Import",
-        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Language",
         "appearance": "Appearance",
@@ -1135,6 +1208,7 @@
         "security": "Security",
         "accountAddress": "Wallet Address",
         "network": "Network",
+        "destinationNetwork": "Destination network",
         "nodes": "Nodes",
         "wallet": "Wallet",
         "help": "Help",
@@ -1200,8 +1274,6 @@
         "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
-        "receiving": "Receiving",
-        "sending": "Sending",
         "legacyNetwork": "Legacy Network",
         "capsLock": "Caps Lock is on",
         "version": "Version {version}",
@@ -1224,6 +1296,11 @@
         "expirationTime": "Expiration time",
         "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
+        "nftId": "NFT ID",
+        "nftMetadata": "NFT Metadata",
+        "aliasId": "Alias ID",
+        "governorAddress": "Governor Address",
+        "stateControllerAddress": "State Controller Address",
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalanceWithValue": "Available balance: {balance}",
@@ -1231,6 +1308,7 @@
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
         "metadata": "Metadata",
+        "metadataName": "Name",
         "tag": "Tag",
         "nodeList": "Node list",
         "claimedIn": "Claimed in",
@@ -1238,6 +1316,7 @@
         "assets": "Assets",
         "nativeTokens": "Native tokens",
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
+        "mintNftDescription": "Mint NFT following IRC27 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
@@ -1248,7 +1327,10 @@
         "url": "URL",
         "hash": "Hash",
         "creating": "Creating",
-        "updating": "Updating"
+        "updating": "Updating",
+        "enterAddress": "Enter address",
+        "transaction": "Transaction",
+        "alias": "Alias"
     },
     "filters":{
         "title": "Filters",
@@ -1261,6 +1343,20 @@
             "label": "Show rejected",
             "yes": "Yes",
             "no": "No"
+        },
+        "showValueless": {
+            "label": "Show valueless",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "ascDesc": {
+            "Asc": "Ascending",
+            "Desc": "Descending"
+        },
+        "assetOrder": {
+            "label": "Order",
+            "Name": "Name",
+            "Amount": "Amount"
         },
         "verificationStatus": {
             "label": "Verification status",
@@ -1345,7 +1441,7 @@
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
             "invalidFormat": "The deep link you followed is invalid",
-            "invalidAmount": "The amount in deep link is not a number {amount}",
+            "invalidAmount": "The amount in deep link is not an integer number {amount}",
             "invalidSurplus": "The surplus in deep link is not a number {surplus}",
             "wallet": {
                 "send": {
@@ -1370,6 +1466,9 @@
         },
         "mintNativeToken": {
             "success": "Native token minting transaction sent"
+        },
+        "mintNft": {
+            "success": "NFT minting transaction sent"
         },
         "refreshTokenMetadata": {
             "success": "All token metadata has been reset and refreshed"
@@ -1420,9 +1519,12 @@
             "incorrect": "Your current PIN is incorrect.",
             "invalid": "Invalid PIN code."
         },
+        "address": {
+            "wrongAddressType": "Wrong address type"
+        },
         "account": {
+            "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
-            "empty": "You must use your latest wallet before creating a new one.",
             "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "You must transfer your balance before deleting this wallet.",
             "duplicate": "A wallet with this name already exists.",
@@ -1445,8 +1547,8 @@
             "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
-            "tagTooLong": "The tag cannot be longer than 64 characters.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
@@ -1461,8 +1563,14 @@
             "cancelled": "The transaction was cancelled.",
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
+            "noInputs": "No inputs found.",
+            "notEnoughBalance": "Not enough balance.",
             "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing",
+            "recipientRequired": "Recipient is required",
+            "nftRequired": "NFT is required",
+            "nftNotInHex": "NFT address has to be in HEX format",
+            "nftNotInPossession": "NFT not in possession"
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -1473,7 +1581,6 @@
             "invalidCertificate": "Could not connect with invalid certificate.",
             "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
             "duplicate": "This node has already been added.",
-            "unsynced": "The node is not in sync.",
             "noSyncedNode": "No synced node is available.",
             "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "Failed to get an answer from all nodes.",
@@ -1543,6 +1650,10 @@
         "walletApiEvent": {
             "invalidAccountIndex": "Invalid account index for {eventName} event",
             "invalidPayload": "Invalid payload for {eventName} event"
+        },
+        "aliasMinting": {
+            "aliasRequired": "Alias is required",
+            "aliasNotInPossession": "Alias not in possession"
         }
     },
     "warning": {
@@ -1599,13 +1710,29 @@
                 "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
                 "metadata": "An optional data field for storing data persistently on the Tangle.",
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
+            "nftMetadata": {
+                "standard": "The NFT standard e.g. IRC27.",
+                "type": "The MimeType of the NFT. e.g. image/png.",
+                "collectionId" : "UTXO string of the collection NFT that minted this NFT",
+                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
+                "issuerName": "The name of the creator",
+                "attributes": "An array of traits and values that define attributes of the NFT"
             }
         },
-        "mintNativeTokenForm": {
+        "mintNativeToken": {
             "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
             "description": "IRC30 optional parameter: The human-readable description of the token.",
             "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
             "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+        },
+        "mintNftForm": {
+            "collectionId" : "Optional parameter: UTXO string of the collection NFT that minted this NFT",
+            "collectionName": "Optional parameter: The collection's name",
+            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
+            "issuerName": "Optional parameter: The name of the creator",
+            "description": "Optional parameter: A description of the NFT",
+            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT"
         }
     },
     "exports": {
@@ -1634,8 +1761,10 @@
     },
     "tabs": {
         "wallet": "Wallet",
-        "staking": "Staking",
-        "developer": "Developer"
+        "collectibles": "Collectibles",
+        "developer": "Developer",
+        "tokens": "Tokens",
+        "activity": "Activity"
     },
     "pills": {
         "stake": {
@@ -1645,37 +1774,58 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "transferring from",
                     "Confirmed": "transferred from",
                     "Conflicting": "failed to transfer"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "transferring to",
                     "Confirmed": "transferred to",
                     "Conflicting": "failed to transfer"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "receiving from",
                     "Confirmed": "received from",
                     "Conflicting": "failed to receive"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "sending to",
                     "Confirmed": "sent to",
                     "Conflicting": "failed to send"
                 }
             }
         },
-        "minting": {
-            "in": {
-                "Pending": "minting",
-                "Confirmed": "minted",
-                "Conflicting": "failed to mint"
+        "nft": {
+            "internal": {
+                "incoming": {
+                    "Pending": "transferring from",
+                    "Confirmed": "transferred from",
+                    "Conflicting": "failed to transfer"
+                },
+                "outgoing": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
+                }
             },
-            "out": {
+            "external": {
+                "incoming": {
+                    "Pending": "receiving from",
+                    "Confirmed": "received from",
+                    "Conflicting": "failed to receive"
+                },
+                "outgoing": {
+                    "Pending": "sending to",
+                    "Confirmed": "sent to",
+                    "Conflicting": "failed to send"
+                }
+            }
+        },
+        "foundry": {
+            "minting": {
                 "Pending": "minting",
                 "Confirmed": "minted",
                 "Conflicting": "failed to mint"
@@ -1690,6 +1840,13 @@
             "unclaimed": "unclaimed",
             "claimed": "claimed",
             "expired": "expired"
+        },
+        "alias": {
+            "creation": {
+                "Pending": "creating alias",
+                "Confirmed": "alias created",
+                "Failed": "Failed to create alias"
+            }
         },
         "locked": "locked"
     },

@@ -1,5 +1,4 @@
-import { Platform } from '@lib/platform'
-
+import { Platform } from '../classes'
 import {
     appUpdateBusy,
     appUpdateComplete,

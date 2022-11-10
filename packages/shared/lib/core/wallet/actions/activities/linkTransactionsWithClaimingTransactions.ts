@@ -1,6 +1,6 @@
 import { IAccountState } from '@core/account'
-import { ActivityDirection } from '@core/wallet/enums'
-import { IProcessedTransaction } from '@core/wallet/interfaces'
+import { activeProfileId } from '@core/profile'
+import { ActivityDirection, IProcessedTransaction } from '@core/wallet'
 import { getDirectionFromTransaction } from '@core/wallet/utils'
 import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
 import { get } from 'svelte/store'
@@ -20,25 +20,24 @@ export function linkTransactionsWithClaimingTransactions(
     const resultingTransactions = []
     const transactionsIncludedAsClaimingTransactions = []
 
-    const claimedAccountActivities = get(claimedActivities)?.[account.id]
+    const claimedAccountActivities = get(claimedActivities)?.[get(activeProfileId)]?.[account.index]
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
     const incomingAsyncTransactions: IProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
         const isClaimingTransaction = transactionsIncludedAsClaimingTransactions.includes(transaction.transactionId)
         const isIncomingAsyncTransaction =
-            transaction.outputs.some((_output) => isOutputAsync(_output)) &&
-            getDirectionFromTransaction(transaction, account.depositAddress) === ActivityDirection.In
+            transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
+            getDirectionFromTransaction(transaction, account.depositAddress) === ActivityDirection.Incoming
 
         if (isClaimingTransaction) {
             continue
         } else if (isIncomingAsyncTransaction) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
             const claimedActivity = claimedAccountActivities?.[transaction.transactionId]
-
             if (claimedActivity && claimedActivity.claimingTransactionId === transaction.transactionId) {
                 const claimingData = {
                     claimedDate: new Date(claimedActivity.claimedTimestamp),
-                    claimingTransactionId: claimedActivity.transactionId,
+                    claimingTransactionId: claimedActivity.claimingTransactionId,
                 }
                 transaction.claimingData = claimingData
                 transactionsIncludedAsClaimingTransactions.push(claimingData.claimingTransactionId)
@@ -48,7 +47,7 @@ export function linkTransactionsWithClaimingTransactions(
             }
             resultingTransactions.push(transaction)
         } else if (transaction.isIncoming) {
-            // Incoming transcations can never be claiming transactions
+            // Incoming transactions can never be claiming transactions
             // Even though we specify self transactions as "Direction.In", "incoming" flag is false for them, which is important here,
             // as self transactions are most of the time claiming transactions
             resultingTransactions.push(transaction)
@@ -65,7 +64,7 @@ export function linkTransactionsWithClaimingTransactions(
                     claimingTransactionId: transaction.transactionId,
                 }
 
-                addClaimedActivity(account.id, claimedTransaction.transactionId, {
+                addClaimedActivity(account.index, claimedTransaction.transactionId, {
                     id: claimedTransaction.transactionId,
                     claimedTimestamp: transaction.time.getTime(),
                     claimingTransactionId: transaction.transactionId,

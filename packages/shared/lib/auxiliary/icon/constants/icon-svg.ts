@@ -1,5 +1,7 @@
 import { Icon } from '../enums'
 import {
+    ACTIVITY_SVG,
+    ALIAS_SVG,
     ARROW_LEFT_SVG,
     ARROW_RIGHT_SVG,
     ASSEMBLY_SVG,
@@ -20,6 +22,7 @@ import {
     CHIP_SVG,
     CLOSE_SVG,
     COPY_SVG,
+    COLLECTIBLES_SVG,
     CURRENCY_SVG,
     CUSTOMIZE_SVG,
     DELETE_SVG,
@@ -54,6 +57,7 @@ import {
     MINUS_SVG,
     NETWORK_SVG,
     PARCHMENT_SVG,
+    PICTURE_SVG,
     PLAY_SVG,
     PLUS_SVG,
     PROFILE_SVG,
@@ -104,6 +108,8 @@ import {
 import { VERIFICATION_STATUS_OFFICIAL } from '../svgs/verification-status-official.svg'
 
 export const ICON_SVG = {
+    [Icon.Activity]: ACTIVITY_SVG,
+    [Icon.Alias]: ALIAS_SVG,
     [Icon.ArrowLeft]: ARROW_LEFT_SVG,
     [Icon.ArrowRight]: ARROW_RIGHT_SVG,
     [Icon.Assembly]: ASSEMBLY_SVG,
@@ -123,6 +129,7 @@ export const ICON_SVG = {
     [Icon.ChevronUp]: CHEVRON_UP_SVG,
     [Icon.Chip]: CHIP_SVG,
     [Icon.Close]: CLOSE_SVG,
+    [Icon.Collectibles]: COLLECTIBLES_SVG,
     [Icon.Copy]: COPY_SVG,
     [Icon.Currency]: CURRENCY_SVG,
     [Icon.Customize]: CUSTOMIZE_SVG,
@@ -159,6 +166,7 @@ export const ICON_SVG = {
     [Icon.Network]: NETWORK_SVG,
     [Icon.NotVerified]: NOT_VERIFIED_SVG,
     [Icon.Parchment]: PARCHMENT_SVG,
+    [Icon.Picture]: PICTURE_SVG,
     [Icon.Play]: PLAY_SVG,
     [Icon.Plus]: PLUS_SVG,
     [Icon.Profile]: PROFILE_SVG,

@@ -181,7 +181,7 @@ When writing functions that return neither `void` nor `Promise<void>` nor `boole
 /**
  * Returns the converted amount in fiat from IOTAs.
  */
-export function convertToFiat(amount: number, usdPrice: number, conversionRate: number): number {
+export function miotaToFiat(amount: number, usdPrice: number, conversionRate: number): number {
     ...
 }
 ```

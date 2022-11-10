@@ -10,7 +10,6 @@ export function saveActiveProfile(): void {
             id: _activeProfile?.id,
             name: _activeProfile?.name,
             type: _activeProfile?.type,
-            version: _activeProfile?.version,
             networkProtocol: _activeProfile?.networkProtocol,
             networkType: _activeProfile?.networkType,
             lastStrongholdBackupTime: _activeProfile?.lastStrongholdBackupTime,
@@ -18,7 +17,7 @@ export function saveActiveProfile(): void {
             isDeveloperProfile: _activeProfile?.isDeveloperProfile,
             clientOptions: _activeProfile?.clientOptions,
             ...(_activeProfile?.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile?.hasVisitedDashboard }),
-            ...(_activeProfile?.lastUsedAccountId && { lastUsedAccountId: _activeProfile?.lastUsedAccountId }),
+            ...(_activeProfile?.lastUsedAccountIndex && { lastUsedAccountIndex: _activeProfile?.lastUsedAccountIndex }),
             ...(_activeProfile?.accountMetadata && { accountMetadata: _activeProfile?.accountMetadata }),
         }
         saveProfile(profileToPersist)

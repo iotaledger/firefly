@@ -4,14 +4,14 @@
     import { INode, checkNodeUrlValidity, checkNetworkId, IClientOptions, nodeInfo } from '@core/network'
     import { localize } from '@core/i18n'
     import { getNodeInfo } from '@core/profile-manager'
-    import { stripSpaces, stripTrailingSlash } from '@lib/helpers'
+    import { stripSpaces, stripTrailingSlash } from '@core/utils'
     import { activeProfile } from '@core/profile'
 
     export let node: INode = { url: '', auth: { username: '', password: '', jwt: '' } }
     export let isBusy = false
     export let formError = ''
-    export let currentClientOptions: IClientOptions
-    export let isDeveloperProfile: boolean
+    export let currentClientOptions: IClientOptions = undefined
+    export let isDeveloperProfile: boolean = false
 
     $: node.url, (formError = '')
 

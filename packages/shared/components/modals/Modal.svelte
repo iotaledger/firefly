@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { clickOutside } from 'shared/lib/actions'
+    import { clickOutside } from '@core/utils'
     import { fade } from 'svelte/transition'
     import { createEventDispatcher } from 'svelte'
 
@@ -24,7 +24,7 @@
     const { top = 'inherit', right = 'inherit', bottom = 'inherit', left = 'inherit', absolute = 'true' } = position
     const dispatch = createEventDispatcher()
 
-    function setShow(bool: boolean) {
+    function setShow(bool: boolean): void {
         if (!isBlockedByTimeout) {
             show = bool
             isBlockedByTimeout = true

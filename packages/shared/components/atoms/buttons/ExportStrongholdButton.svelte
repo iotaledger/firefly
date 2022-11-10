@@ -1,10 +1,9 @@
 <script lang="typescript">
     import { exportStronghold } from '@contexts/settings'
     import { localize } from '@core/i18n'
-    import { showAppNotification } from '@lib/notifications'
-    import { openPopup } from '@lib/popup'
-    import { Button } from 'shared/components'
-    import { ButtonSize } from 'shared/components/Button.svelte'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { openPopup } from '@auxiliary/popup'
+    import { Button, ButtonSize } from 'shared/components'
 
     export let isBusy = false
     export let message = ''

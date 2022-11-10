@@ -9,12 +9,12 @@
         toggleDisabledNodeInClientOptions,
         togglePrimaryNodeInClientOptions,
     } from '@core/network'
-    import { closePopup, openPopup } from 'shared/lib/popup'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
 
     export let node: INode
     export let clientOptions: IClientOptions
-    export let modal: Modal
+    export let modal: Modal = undefined
 
     $: isOfficialNode = getOfficialNodes($activeProfile?.networkProtocol, $activeProfile?.networkType).some(
         (n) => n.url === node?.url

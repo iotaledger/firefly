@@ -6,7 +6,7 @@ import {
     MILLISECONDS_PER_SECOND,
     MINUTES_PER_HOUR,
     SECONDS_PER_MINUTE,
-} from '@lib/time'
+} from '@core/utils'
 
 describe('File: time.ts', () => {
     describe('Function: getBestTimeDuration', () => {

@@ -1,9 +1,8 @@
 <script lang="typescript">
     import { NetworkProtocol } from '@core/network'
-    import { visibleSelectedAccountAssets } from '@core/wallet'
-    import { AssetTile, Icon, Text, AssetIcon } from 'shared/components'
-    import { FontWeight } from 'shared/components/Text.svelte'
-    import { clickOutside } from 'shared/lib/actions'
+    import { IAsset, visibleSelectedAccountAssets } from '@core/wallet'
+    import { AssetTile, Icon, Text, AssetIcon, FontWeight } from 'shared/components'
+    import { clickOutside } from '@core/utils'
 
     export let asset = $visibleSelectedAccountAssets?.baseCoin
 
@@ -20,13 +19,13 @@
             icon = 'tokens'
     }
 
-    function handleDropdownClick() {
+    function handleDropdownClick(): void {
         if (hasMultipleAssets) {
             isDropdownOpen = !isDropdownOpen
         }
     }
 
-    function handleAssetClick(_asset) {
+    function handleAssetClick(_asset: IAsset): void {
         asset = _asset
         isDropdownOpen = false
     }
@@ -37,7 +36,7 @@
 </script>
 
 {#if asset}
-    <div class="asset-dropdown flex flex-col" use:clickOutside on:clickOutside={handleOnClickOutside}>
+    <div class="flex flex-col" use:clickOutside on:clickOutside={handleOnClickOutside}>
         <div
             class="flex flex-row items-center p-2 space-x-2 text-left bg-gray-100 dark:bg-gray-700 rounded-md cursor-default"
             class:cursor-pointer={hasMultipleAssets}
@@ -70,9 +69,7 @@
                         <AssetTile
                             onClick={() => handleAssetClick($visibleSelectedAccountAssets?.baseCoin)}
                             asset={$visibleSelectedAccountAssets?.baseCoin}
-                            overrideColor
                             classes="bg-white hover:bg-gray-50 dark:bg-transparent"
-                            squashed
                         />
                     </li>
                     {#each $visibleSelectedAccountAssets?.nativeTokens as nativeToken}
@@ -80,9 +77,7 @@
                             <AssetTile
                                 onClick={() => handleAssetClick(nativeToken)}
                                 asset={nativeToken}
-                                overrideColor
                                 classes="bg-white hover:bg-gray-50 dark:bg-transparent"
-                                squashed
                             />
                         </li>
                     {/each}
@@ -93,12 +88,8 @@
 {/if}
 
 <style lang="scss">
-    .asset-dropdown {
-        font-feature-settings: 'calt' off;
-
-        /* odd margin needed to match the size of the upper parent box */
-        .dropdown {
-            margin: 0 3px;
-        }
+    /* odd margin needed to match the size of the upper parent box */
+    .dropdown {
+        margin: 0 3px;
     }
 </style>

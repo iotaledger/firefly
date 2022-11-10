@@ -1,30 +1,29 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import {
-        AdvancedSettings,
-        AdvancedSettingsNoProfile,
-        GeneralSettings,
-        GeneralSettingsNoProfile,
-        HelpAndInfo,
-        SecuritySettings,
+        AdvancedSettingsRoute,
+        AdvancedSettingsRouteNoProfile,
+        GeneralSettingsRoute,
+        GeneralSettingsRouteNoProfile,
+        HelpAndInfoRoute,
+        SecuritySettingsRoute,
     } from '@core/router'
     import { Icon as IconEnum, SETTINGS_ICON_SVG } from '@lib/auxiliary/icon'
-    import { Icon, Text } from 'shared/components'
-    import { TextType } from 'shared/components/Text.svelte'
+    import { Icon, Text, TextType } from 'shared/components'
 
     export let settings:
-        | AdvancedSettings
-        | AdvancedSettingsNoProfile
-        | GeneralSettings
-        | GeneralSettingsNoProfile
-        | HelpAndInfo
-        | SecuritySettings
-    export let routes
-    export let route
+        | AdvancedSettingsRoute
+        | AdvancedSettingsRouteNoProfile
+        | GeneralSettingsRoute
+        | GeneralSettingsRouteNoProfile
+        | HelpAndInfoRoute
+        | SecuritySettingsRoute
+    export let routes: string[]
+    export let route: string
 
     export let onSettingClick: (..._: any[]) => void
 
-    function changeRoute(setting) {
+    function changeRoute(setting: string): void {
         document.getElementById('scroller').scrollTop = 0
         route = setting
     }

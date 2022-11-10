@@ -2,9 +2,9 @@ import { get, writable } from 'svelte/store'
 
 import { onboardingProfile, ProfileRecoveryType } from '@contexts/onboarding'
 
+import { Subrouter } from '../../classes'
 import { ProfileRecoveryRoute } from '../../enums'
-import { onboardingRouter } from '../../onboarding-router'
-import { Subrouter } from '../subrouter'
+import { onboardingRouter } from '../../routers'
 
 export const profileRecoveryRoute = writable<ProfileRecoveryRoute>(null)
 export const profileRecoveryRouter = writable<ProfileRecoveryRouter>(null)
@@ -51,7 +51,7 @@ export class ProfileRecoveryRouter extends Subrouter<ProfileRecoveryRoute> {
             }
             case ProfileRecoveryRoute.Success:
                 this.parentRouter.next()
-                break
+                return
         }
 
         this.setNext(nextRoute)

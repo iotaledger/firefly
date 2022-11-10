@@ -1,6 +1,5 @@
 <script lang="typescript">
-    import { Icon, Text, Tile } from 'shared/components'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
+    import { Icon, Text, Tile, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { BASE_TOKEN, NetworkProtocol } from '@core/network'
     import { formatTokenAmountBestMatch } from '@core/wallet'
@@ -20,7 +19,9 @@
         <div class="w-full flex flex-row justify-between items-center space-x-4">
             <div class="flex flex-row items-center text-left space-x-2">
                 <Icon icon="wallet" width={28} height={28} classes="text-blue-500" />
-                <Text type={TextType.p} fontWeight={FontWeight.medium}>{shimmerClaimingAccount?.meta?.alias}</Text>
+                <Text type={TextType.p} fontWeight={FontWeight.medium}>
+                    {shimmerClaimingAccount?.getMetadata()?.alias}
+                </Text>
             </div>
             <div class="flex flex-col">
                 {#if shimmerClaimingAccount?.state === ShimmerClaimingAccountState.Claiming}

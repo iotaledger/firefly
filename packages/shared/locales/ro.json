@@ -946,7 +946,6 @@
         "iveWrittenRecoveryPhrase": "Am notat fraza de recuperare",
         "verifyRecoveryPhrase": "Verifică fraza de recuperare",
         "revealRecoveryPhrase": "Afișează fraza de recuperare",
-        "importSeedvault": "Importă SeedVault",
         "checkAgain": "Check Again",
         "importFromFile": "Importă dintr-un fișier",
         "send": "Trimite",
@@ -1107,7 +1106,6 @@
         "copyAddress": "Copy Address",
         "viewOnExplorer": "View on Explorer",
         "import": "Importă",
-        "seedvault": "SeedVault",
         "stronghold": "Stronghold",
         "language": "Limbă",
         "appearance": "Afișare",
@@ -1644,24 +1642,24 @@
         },
         "transaction": {
             "internal": {
-                "in": {
+                "incoming": {
                     "Pending": "transferring from",
                     "Confirmed": "transferred from",
                     "Conflicting": "failed to transfer"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "transferring to",
                     "Confirmed": "transferred to",
                     "Conflicting": "failed to transfer"
                 }
             },
             "external": {
-                "in": {
+                "incoming": {
                     "Pending": "receiving from",
                     "Confirmed": "received from",
                     "Conflicting": "failed to receive"
                 },
-                "out": {
+                "outgoing": {
                     "Pending": "sending to",
                     "Confirmed": "sent to",
                     "Conflicting": "failed to send"
@@ -1669,12 +1667,12 @@
             }
         },
         "minting": {
-            "in": {
+            "incoming": {
                 "Pending": "minting",
                 "Confirmed": "minted",
                 "Conflicting": "failed to mint"
             },
-            "out": {
+            "outgoing": {
                 "Pending": "minting",
                 "Confirmed": "minted",
                 "Conflicting": "failed to mint"

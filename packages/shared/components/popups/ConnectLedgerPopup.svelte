@@ -5,9 +5,8 @@
     import { formatProtocolName } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { isFunction } from '@core/utils'
-    import { Button, LedgerAnimation, Text, TextHint } from 'shared/components'
-    import { FontWeight, TextType } from 'shared/components/Text.svelte'
-    import { closePopup } from 'shared/lib/popup'
+    import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
+    import { closePopup } from '@auxiliary/popup'
 
     export let onCancel: () => void
     export let onContinue: () => void
