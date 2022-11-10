@@ -1,4 +1,2 @@
-export * from './initialiseRouters'
+export * from './initialiseRouterManager'
 export * from './openSettings'
-export * from './resetRouters'
-export * from './resetWalletRoute'

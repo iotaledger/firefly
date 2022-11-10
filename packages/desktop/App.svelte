@@ -7,7 +7,7 @@
         appRoute,
         DashboardRoute,
         dashboardRouter,
-        initialiseRouters,
+        initialiseRouterManager,
         OnboardingRoute,
         onboardingRoute,
         openSettings,
@@ -28,8 +28,7 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
-    import { getRouterForAppContext, resetRouterForAppContext, resetRouters } from './lib/routers'
-    import { initialiseRouterManager } from 'shared/lib/core/router/actions/initialiseRouterManager'
+    import { getRouterForAppContext, initialiseRouters, resetRouterForAppContext, resetRouters } from './lib/routers'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
