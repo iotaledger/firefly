@@ -1,7 +1,4 @@
 import { IError } from '@core/error/interfaces'
-import { IRouter } from '@core/router/interfaces'
-
-import { AppContext } from '../enums'
 
 import { IDeepLinkManager, INotificationManager, IPincodeManager } from './managers'
 import { IAppSettings } from './app-settings.interface'
@@ -43,10 +40,6 @@ export interface IPlatform {
     downloadAppUpdate(): Promise<void>
 
     unhandledException(title: string, err: IError | unknown): Promise<void>
-
-    resetRouters?(): void
-    resetRouterForAppContext?(context: AppContext): void
-    getRouterForAppContext?(context: AppContext): IRouter
 
     onEvent<K extends keyof IPlatformEventMap>(eventName: K, callback: (param: IPlatformEventMap[K]) => void)
     removeListenersForEvent<K extends keyof IPlatformEventMap>(eventName: K)

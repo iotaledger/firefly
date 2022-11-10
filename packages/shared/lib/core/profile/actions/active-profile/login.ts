@@ -29,10 +29,11 @@ import { isLedgerProfile } from '../../utils'
 import { loadAccounts } from './loadAccounts'
 import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
-import { AppContext, Platform } from '@core/app'
+import { AppContext } from '@core/app'
+import { routerManager } from '@core/router/stores'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
-    const loginRouter = Platform.getRouterForAppContext(AppContext.Login)
+    const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
     try {
         const _activeProfile = get(activeProfile)
         const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountIndex } = _activeProfile

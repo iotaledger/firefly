@@ -4,7 +4,6 @@ import { get } from 'svelte/store'
 import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
 import { profileManager } from '@core/profile-manager/stores'
 import { resetDashboardState } from '../resetDashboardState'
-import { Platform } from '@core/app/classes'
 import { clearPollNetworkInterval } from '@core/network'
 import {
     resetActiveProfile,
@@ -15,6 +14,7 @@ import {
     isLedgerProfile,
 } from '@core/profile'
 import { resetSelectedAccount } from '@core/account'
+import { routerManager } from '@core/router/stores'
 
 /**
  * Logout from active profile
@@ -58,7 +58,7 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
             resetActiveProfile()
         }
         resetDashboardState()
-        Platform.resetRouters()
+        get(routerManager).resetRouters()
 
         resolve()
     })

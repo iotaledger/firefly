@@ -17,7 +17,6 @@
         appStage,
         AppStage,
         appVersionDetails,
-        extendPlatform,
         initAppSettings,
         Platform,
         setPlatform,
@@ -30,6 +29,7 @@
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
     import { getRouterForAppContext, resetRouterForAppContext, resetRouters } from './lib/routers'
+    import { initialiseRouterManager } from 'shared/lib/core/router/actions/initialiseRouterManager'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -77,6 +77,14 @@
         }, 3000)
 
         initAppSettings.set($appSettings)
+
+        initialiseRouterManager({
+            extensions: [
+                ['getRouterForAppContext', getRouterForAppContext],
+                ['resetRouterForAppContext', resetRouterForAppContext],
+                ['resetRouters', resetRouters],
+            ],
+        })
 
         // await pollMarketData()
 
@@ -126,12 +134,6 @@
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
-
-        extendPlatform([
-            ['getRouterForAppContext', getRouterForAppContext],
-            ['resetRouterForAppContext', resetRouterForAppContext],
-            ['resetRouters', resetRouters],
-        ])
 
         await cleanupEmptyProfiles()
 
