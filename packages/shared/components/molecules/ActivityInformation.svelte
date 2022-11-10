@@ -9,7 +9,7 @@
         Alias = 'general.alias',
     }
 
-    let tabs = []
+    let tabs: Tab[] = []
     switch (activity.type) {
         case ActivityType.Transaction:
             tabs = [Tab.Transaction]
