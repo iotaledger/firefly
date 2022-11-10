@@ -13,8 +13,8 @@
     export let selected: IOption = undefined
     export let maxHeight: string = 'max-h-64'
 
-    let previousValue: string = ''
     let value: string = selected?.key ?? selected?.value
+    let previousValue: string = value
     let hasFocus: boolean
     let filteredOptions: IOption[] = options
 

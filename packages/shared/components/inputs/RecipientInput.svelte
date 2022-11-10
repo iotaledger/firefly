@@ -26,14 +26,15 @@
     $: recipient = getSubjectFromAddress(selected?.value)
 
     export function validate(): Promise<void> {
-        if (recipient) {
-            return Promise.resolve()
-        }
         if (recipient?.type === 'address') {
+            if (!recipient.address) {
+                error = 'Recipient is required'
+                return Promise.reject(error)
+            }
             error = validateBech32Address(addressPrefix, recipient?.address)
-        }
-        if (error) {
-            return Promise.reject(error)
+            if (error) {
+                return Promise.reject(error)
+            }
         }
         return Promise.resolve()
     }
