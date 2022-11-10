@@ -83,7 +83,6 @@ classDiagram
         - expirationDate: Date
         - isRejected: boolean
         - isClaiming: boolean
-        - : boolean
         - claimingTransactionId: string
         - claimedDate: Date
     }

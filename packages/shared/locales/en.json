@@ -1517,6 +1517,9 @@
             "incorrect": "Your current PIN is incorrect.",
             "invalid": "Invalid PIN code."
         },
+        "address": {
+            "wrongAddressType": "Wrong address type"
+        },
         "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
@@ -1542,8 +1545,8 @@
             "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
             "amountInvalidFormat": "The amount appears to be an invalid number.",
             "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
-            "tagTooLong": "The tag cannot be longer than 64 characters.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 characters.",
+            "tagTooLong": "The tag cannot be longer than 64 bytes.",
+            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
             "amountZero": "The amount must be greater than 0.",
             "wrongAddressPrefix": "Addresses start with the prefix {prefix}.",
             "wrongAddressFormat": "The address is not correctly formatted.",
@@ -1561,7 +1564,11 @@
             "noInputs": "No inputs found.",
             "notEnoughBalance": "Not enough balance.",
             "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing"
+            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing",
+            "recipientRequired": "Recipient is required",
+            "nftRequired": "NFT is required",
+            "nftNotInHex": "NFT address has to be in HEX format",
+            "nftNotInPossession": "NFT not in possession"
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -1641,6 +1648,10 @@
         "walletApiEvent": {
             "invalidAccountIndex": "Invalid account index for {eventName} event",
             "invalidPayload": "Invalid payload for {eventName} event"
+        },
+        "aliasMinting": {
+            "aliasRequired": "Alias is required",
+            "aliasNotInPossession": "Alias not in possession"
         }
     },
     "warning": {
