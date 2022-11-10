@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { PROFILE_VERSION } from '../../constants'
+import { DEFAULT_PERSISTED_PROFILE_OBJECT, PROFILE_VERSION } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
 
@@ -39,6 +39,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
      * when the profile version was already 3.
      */
     3: persistedProfileMigrationToV4,
+    4: persistedProfileMigrationToV5,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): IPersistedProfile {
@@ -65,4 +66,13 @@ function persistedProfileMigrationToV4(existingProfile: unknown): IPersistedProf
     })
 
     return newProfile as IPersistedProfile
+}
+
+function persistedProfileMigrationToV5(existingProfile: unknown): IPersistedProfile {
+    const newProfile: IPersistedProfile = existingProfile as IPersistedProfile
+
+    delete newProfile?.settings?.currency
+    newProfile.settings.marketCurrency = DEFAULT_PERSISTED_PROFILE_OBJECT.settings?.marketCurrency
+
+    return newProfile
 }

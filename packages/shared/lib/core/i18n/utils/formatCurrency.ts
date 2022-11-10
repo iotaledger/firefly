@@ -17,7 +17,7 @@ export function formatCurrency(
     const appLanguage = get(appSettings).language
 
     if (!currency) {
-        currency = get(activeProfile)?.settings?.currency
+        currency = get(activeProfile)?.settings?.marketCurrency
     }
 
     const parts = Intl.NumberFormat(appLanguage, {

@@ -1,1 +1,1 @@
-export * from './market-prices.store'
+export * from './market-coin-prices.store'

@@ -1,12 +1,12 @@
 <script lang="typescript">
-    import { AccountActionsButton, Text, TogglableAmountLabel } from 'shared/components'
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account'
-    import { BASE_TOKEN } from '@core/network'
-    import { activeProfile } from '@core/profile'
+    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { AccountActionsButton, FontWeight, Text, TextType, TogglableAmountLabel } from 'shared/components'
 
     export let classes = ''
+
+    $: ({ metadata, balance } = $selectedAccountAssets?.baseCoin)
 </script>
 
 <div
@@ -25,9 +25,11 @@
         </div>
     {/if}
     <div class="flex flex-col flex-wrap items-start space-y-1">
-        <TogglableAmountLabel
-            amount={$selectedAccount?.balances?.baseCoin?.available}
-            tokenMetadata={BASE_TOKEN[$activeProfile?.networkProtocol]}
-        />
+        <TogglableAmountLabel amount={balance?.total} tokenMetadata={metadata} />
+        <Text type={TextType.p} fontWeight={FontWeight.medium}>
+            {localize('general.availableBalanceWithValue', {
+                values: { balance: formatTokenAmountBestMatch(balance?.available, metadata) },
+            })}
+        </Text>
     </div>
 </div>
