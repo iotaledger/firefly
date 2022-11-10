@@ -94,14 +94,6 @@
                     $exchangeRates[$activeProfile?.settings?.currency]
                 ),
             }
-        } else if (activity.type === ActivityType.Alias) {
-            return {
-                ...details,
-                storageDeposit: activity.storageDeposit,
-                aliasId: activity.aliasId,
-                governorAddress: activity.governorAddress,
-                stateControllerAddress: activity.stateControllerAddress,
-            }
         } else if (activity.type === ActivityType.Nft) {
             return {
                 ...details,
@@ -191,7 +183,7 @@
     {:else if activity?.type === ActivityType.Foundry}
         <FoundryActivityDetails {...details} />
     {:else if activity?.type === ActivityType.Alias}
-        <AliasActivityDetails {...details} />
+        <AliasActivityDetails {activity} />
     {:else if activity?.type === ActivityType.Nft}
         <NftActivityDetails {...details} />
     {/if}
