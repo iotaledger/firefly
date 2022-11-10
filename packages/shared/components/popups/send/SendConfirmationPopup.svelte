@@ -12,10 +12,9 @@
         Toggle,
         FontWeight,
         TextType,
-        NftDetails,
-        TransactionDetails,
+        NftActivityDetails,
+        BasicActivityDetails,
     } from 'shared/components'
-    import type { OutputTypes } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
@@ -29,17 +28,18 @@
         sendOutput,
         validateSendConfirmation,
         selectedAccountAssets,
-        getStorageDepositFromOutput,
         DEFAULT_TRANSACTION_OPTIONS,
         newTransactionDetails,
         updateNewTransactionDetails,
         NewTransactionType,
+        Output,
     } from '@core/wallet'
     import { formatCurrency } from '@core/i18n'
     import { currencies, Currency, exchangeRates, miotaToFiat } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { BaseError } from '@core/error'
     import { ledgerPreparedOutput } from '@core/ledger'
+    import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -49,7 +49,7 @@
         get(newTransactionDetails)
 
     let storageDeposit = 0
-    let preparedOutput: OutputTypes
+    let preparedOutput: Output
     let outputOptions: OutputOptions
     let error: BaseError
     let expirationTimePicker: ExpirationTimePicker
@@ -107,14 +107,14 @@
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
-        setStorageDeposit(preparedOutput, Number(transactionDetails.surplus))
+        setStorageDeposit(preparedOutput, Number(surplus))
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
-    function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
+    function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
 
@@ -184,7 +184,7 @@
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <TransactionDetails
+            <BasicActivityDetails
                 {...transactionDetails}
                 {storageDeposit}
                 subject={recipient}
@@ -196,7 +196,7 @@
                 {formattedFiatValue}
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
-            <NftDetails
+            <NftActivityDetails
                 {...transactionDetails}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
