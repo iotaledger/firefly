@@ -4,6 +4,7 @@
     import { ADDRESS_TYPE_ALIAS, convertHexAddressToBech32 } from '@core/wallet'
     import { validateBech32Address } from '@core/utils'
     import { networkHrp } from '@core/network'
+    import { localize } from '@core/i18n'
 
     export let alias: string = ''
     export let error: string = ''
@@ -22,7 +23,7 @@
 
     export async function validate(): Promise<void> {
         if (!alias) {
-            error = 'Alias is required'
+            error = localize('error.aliasMinting.aliasRequired')
             return Promise.reject(error)
         }
         const addressValidationError = validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
@@ -30,7 +31,7 @@
             error = addressValidationError
             return Promise.reject(error)
         } else if (!isAliasInPossession()) {
-            error = 'Alias not in possession'
+            error = localize('error.aliasMinting.aliasNotInPossession')
             return Promise.reject(error)
         } else {
             return Promise.resolve()

@@ -3,6 +3,7 @@
     import { selectedAccountNfts } from '@core/nfts'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
+    import { localize } from '@core/i18n'
 
     export let nftId: string = ''
     export let error: string = ''
@@ -19,13 +20,13 @@
 
     export async function validate(): Promise<void> {
         if (!nftId) {
-            error = 'Nft is required'
+            error = localize('error.send.nftRequired')
             return Promise.reject(error)
         } else if (!nftId.startsWith('0x')) {
-            error = 'Nft has to be in HEX format'
+            error = localize('error.send.nftNotInHex')
             return Promise.reject(error)
         } else if (!isNftInPossession()) {
-            error = 'Nft not in possession'
+            error = localize('error.send.nftNotInPossession')
             return Promise.reject(error)
         } else {
             return Promise.resolve()
