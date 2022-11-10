@@ -105,11 +105,7 @@
             transactionDetails.surplus,
             transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
         )
-        preparedOutput = (await prepareOutput(
-            $selectedAccount.index,
-            outputOptions,
-            DEFAULT_TRANSACTION_OPTIONS
-        ))
+        preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
         setStorageDeposit(preparedOutput, Number(surplus))
 
