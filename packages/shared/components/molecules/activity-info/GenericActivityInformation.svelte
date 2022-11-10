@@ -77,25 +77,23 @@
     }
 </script>
 
-<details-list class="flex flex-col space-y-2">
-    {#each Object.entries(transactionDetailsList) as [key, value]}
-        <KeyValueBox
-            keyText={localize(`general.${key}`)}
-            valueText={value.data}
-            tooltipText={value.isTooltipVisible
-                ? localize(`tooltips.transactionDetails.${activity.direction}.${key}`)
-                : undefined}
-        />
-    {/each}
-    {#if activity.asyncData?.claimingTransactionId}
-        <KeyValueBox keyText={localize(activity.asyncData?.isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
-            <button
-                slot="value"
-                class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
-                on:click={handleTransactionIdClick}
-            >
-                {truncateString(activity.asyncData?.claimingTransactionId, 12, 12)}
-            </button>
-        </KeyValueBox>
-    {/if}
-</details-list>
+{#each Object.entries(transactionDetailsList) as [key, value]}
+    <KeyValueBox
+        keyText={localize(`general.${key}`)}
+        valueText={value.data}
+        tooltipText={value.isTooltipVisible
+            ? localize(`tooltips.transactionDetails.${activity.direction}.${key}`)
+            : undefined}
+    />
+{/each}
+{#if activity.asyncData?.claimingTransactionId}
+    <KeyValueBox keyText={localize(activity.asyncData?.isClaiming ? 'general.claimingIn' : 'general.claimedIn')}>
+        <button
+            slot="value"
+            class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
+            on:click={handleTransactionIdClick}
+        >
+            {truncateString(activity.asyncData?.claimingTransactionId, 12, 12)}
+        </button>
+    </KeyValueBox>
+{/if}

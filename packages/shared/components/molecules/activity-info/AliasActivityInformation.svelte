@@ -13,8 +13,6 @@
     }
 </script>
 
-<details-list class="flex flex-col space-y-2">
-    {#each Object.entries(detailsList) as [key, value]}
-        <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} isCopyable />
-    {/each}
-</details-list>
+{#each Object.entries(detailsList) as [key, value]}
+    <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} isCopyable />
+{/each}

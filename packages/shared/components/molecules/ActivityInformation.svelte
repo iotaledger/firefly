@@ -22,7 +22,7 @@
     let activeTab = Tab.Transaction
 </script>
 
-<activity-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+<activity-details class="w-full h-full space-y-2 flex flex-auto flex-col flex-shrink-0">
     {#if tabs.length > 1}
         <Tabs bind:activeTab {tabs} />
     {/if}
