@@ -1,12 +1,11 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { InclusionState, IAliasActivityData } from '@core/wallet'
+    import { InclusionState, AliasActivity } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, Icon, FontWeight } from 'shared/components'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
-    export let inclusionState: InclusionState
-    export let data: IAliasActivityData
+    export let activity: AliasActivity
 </script>
 
 <div class="relative flex w-8 h-8">
@@ -26,12 +25,14 @@
             lineHeight="140"
             classes="overflow-hidden overflow-ellipsis multiwrap-line2"
         >
-            {localize(inclusionState === InclusionState.Confirmed ? 'general.aliasCreated' : 'general.creatingAlias')}
+            {localize(
+                activity.inclusionState === InclusionState.Confirmed ? 'general.aliasCreated' : 'general.creatingAlias'
+            )}
         </Text>
     </div>
     <div class="flex flex-row">
         <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600">
-            {truncateString(data.aliasId, 20, 6)}
+            {truncateString(activity.aliasId, 20, 6)}
         </Text>
     </div>
 </div>
