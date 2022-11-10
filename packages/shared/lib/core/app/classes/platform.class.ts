@@ -13,8 +13,8 @@ export function extendPlatform(extensions: PlatformExtension[]): void {
     const extensionBoundObject = Object.fromEntries(extensions)
     Platform = {
         /**
-         * CAUTION: Normally the order of these spread operations would be reversed,
-         * but this ensures that important methods cannot be overridden.
+         * CAUTION: The order of the spread operations ensures that important
+         * methods cannot be overridden.
          */
         ...extensionBoundObject,
         ...Platform,

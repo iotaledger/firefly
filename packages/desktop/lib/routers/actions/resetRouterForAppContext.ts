@@ -1,17 +1,12 @@
-import { get } from 'svelte/store'
 import { AppContext } from '@core/app/enums'
-import { dashboardRouter } from '@core/router/routers'
+
+import { getRouterForAppContext } from '../utils'
 
 export function resetRouterForAppContext(context: AppContext): void {
-    get(dashboardRouter).reset()
-    switch (context) {
-        case AppContext.Dashboard:
-            get(dashboardRouter).reset()
-            break
-        case AppContext.Login:
-            get(dashboardRouter).reset()
-            break
-        default:
-            break
+    const router = getRouterForAppContext(context)
+    if (router) {
+        router.reset()
+    } else {
+        throw new Error(`No router implementation for the "${context}" context.`)
     }
 }

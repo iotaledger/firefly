@@ -3,7 +3,7 @@
     import { SidebarTab } from '@components'
     import { Settings } from './settings'
     import features from '@features/features'
-    import { AppContext, appVersionDetails, mobile, Platform } from '@core/app'
+    import { appVersionDetails, mobile } from '@core/app/stores'
     import { getInitials, isRecentDate } from '@core/utils'
     import { activeProfile } from '@core/profile/stores'
     import { DashboardRoute, dashboardRouter, settingsRoute, SettingsRoute, settingsRouter } from '@core/router'
@@ -57,7 +57,7 @@
     ]
 
     function openWallet(): void {
-        Platform.resetRouterForAppContext(AppContext.Dashboard)
+        $dashboardRouter.reset()
     }
 
     function openCollectibles(): void {
