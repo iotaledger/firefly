@@ -1335,7 +1335,9 @@
         "updating": "Updating",
         "enterAddress": "Enter address",
         "transaction": "Transaction",
-        "alias": "Alias"
+        "alias": "Alias",
+        "nft": "NFT",
+        "type": "Type"
     },
     "filters":{
         "title": "Filters",

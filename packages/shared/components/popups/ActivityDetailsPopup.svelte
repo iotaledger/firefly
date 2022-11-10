@@ -192,7 +192,7 @@
             <ActivityInformation {activity} />
         </alias-details>
     {:else if activity?.type === ActivityType.Nft}
-        <NftActivityDetails {...details} />
+        <NftActivityDetails activity={{ ...details }} />
     {/if}
 
     {#if !isTimelocked && isActivityIncomingAndUnclaimed}

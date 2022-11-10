@@ -197,13 +197,16 @@
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails
-                {...transactionDetails}
-                direction={ActivityDirection.Outgoing}
-                inclusionState={InclusionState.Pending}
-                {storageDeposit}
-                subject={recipient}
-                {isInternal}
-                type={ActivityType.Nft}
+                activity={{
+                    ...transactionDetails,
+                    storageDeposit,
+                    subject: recipient,
+                    isInternal,
+                    surplus,
+                    type: ActivityType.Transaction,
+                    direction: ActivityDirection.Outgoing,
+                    inclusionState: InclusionState.Pending,
+                }}
             />
         {/if}
         {#if !hideGiftToggle}
