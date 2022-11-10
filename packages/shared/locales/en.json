@@ -560,6 +560,19 @@
                     "view": "View in IPFS",
                     "burn": "Burn NFT"
                 }
+            },
+            "metadata": {
+                "standard": "Standard",
+                "version": "Version",
+                "type": "Type",
+                "uri": "URI",
+                "name": "Name",
+                "collectionId" : "Collection Id",
+                "collectionName": "Collection Name",
+                "royalties": "Royalties",
+                "issuerName": "Issuer Name",
+                "description": "Description",
+                "attributes": "Attributes"
             }
         }
     },
@@ -726,7 +739,7 @@
             "userPath": "User Path"
         },
         "transaction": {
-            "title": "Confirm transaction",
+            "title": "Send asset",
             "body": "You’re about to send {amount} to",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
@@ -1138,9 +1151,10 @@
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
-        "sendFunds": "Send funds",
-        "sendTokensToAddress": "Send tokens to an address",
+        "sendAssets": "Send assets",
+        "sendAssetToAddress": "Send asset to an address",
         "sendToAddress": "Send to address",
+        "sendToken": "Send token",
         "sendNft": "Send NFT",
         "sendNftToAddress": "Send NFT to an address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
@@ -1282,6 +1296,8 @@
         "expirationTime": "Expiration time",
         "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
+        "nftId": "NFT ID",
+        "nftMetadata": "NFT Metadata",
         "aliasId": "Alias ID",
         "governorAddress": "Governor Address",
         "stateControllerAddress": "State Controller Address",
@@ -1681,6 +1697,14 @@
                 "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
                 "metadata": "An optional data field for storing data persistently on the Tangle.",
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
+            "nftMetadata": {
+                "standard": "The NFT standard e.g. IRC27.",
+                "type": "The MimeType of the NFT. e.g. image/png.",
+                "collectionId" : "UTXO string of the collection NFT that minted this NFT",
+                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
+                "issuerName": "The name of the creator",
+                "attributes": "An array of traits and values that define attributes of the NFT"
             }
         },
         "mintNativeToken": {

@@ -3,7 +3,7 @@
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { Button, Input } from 'shared/components'
-    import { getTrimmedLength } from 'shared/lib/helpers'
+    import { getTrimmedLength } from '@core/utils'
     import { onMount } from 'svelte'
     import { ColorPicker } from '../../../../../components'
 

@@ -1,21 +1,24 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { newTransactionDetails, updateNewTransactionDetails } from '@core/wallet'
-    import {
-        Button,
-        Text,
-        RecipientInput,
-        AssetAmountInput,
-        OptionalInput,
-        FontWeight,
-        NetworkInput,
-    } from 'shared/components'
+    import { Button, Text, FontWeight, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
+    import {
+        IAsset,
+        NewTransactionDetails,
+        newTransactionDetails,
+        NewTransactionType,
+        setNewTransactionDetails,
+    } from '@core/wallet'
+    import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
+    import { DestinationNetwork } from '@core/network'
     import { getByteLengthOfString } from '@core/utils'
-    import type { DestinationNetwork } from '@core/network'
+    import { get } from 'svelte/store'
+    import { selectedAccount } from '@core/account'
 
-    let { asset, rawAmount, unit, recipient, metadata, tag } = get(newTransactionDetails)
+    enum SendForm {
+        SendToken = 'general.sendToken',
+        SendNft = 'general.sendNft',
+    }
     let assetAmountInput: AssetAmountInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
@@ -23,14 +26,67 @@
 
     let network: DestinationNetwork
 
-    async function onSend(): Promise<void> {
-        const valid = await validate()
-        if (valid) {
-            updateNewTransactionDetails({ asset, rawAmount, unit, recipient, metadata, tag })
-            openPopup({
-                type: 'sendConfirmation',
-                overflow: true,
-            })
+    let nftId: string
+
+    let rawAmount: string
+    let asset: IAsset
+    let unit: string
+
+    const transactionDetails = get(newTransactionDetails)
+    let { metadata, recipient, tag } = transactionDetails
+
+    if (transactionDetails.type === NewTransactionType.TokenTransfer) {
+        rawAmount = transactionDetails.rawAmount
+        asset = transactionDetails.asset
+        unit = transactionDetails.unit
+    } else {
+        nftId = transactionDetails.nftId
+    }
+
+    const tabs: SendForm[] = [SendForm.SendToken, SendForm.SendNft]
+    let activeTab: SendForm =
+        transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
+
+    $: ownsNfts = $selectedAccount.balances.nfts.length > 0
+
+    function getTransactionDetails(): NewTransactionDetails {
+        if (activeTab === SendForm.SendToken) {
+            return {
+                type: NewTransactionType.TokenTransfer,
+                asset,
+                rawAmount,
+                unit,
+                recipient,
+                metadata,
+                tag,
+            }
+        } else {
+            return {
+                type: NewTransactionType.NftTransfer,
+                nftId,
+                recipient,
+                metadata,
+                tag,
+            }
+        }
+    }
+
+    async function validate(): Promise<boolean> {
+        try {
+            if (activeTab === SendForm.SendToken) {
+                await assetAmountInput?.validate()
+            } else if (!nftId) {
+                return false
+            }
+            await Promise.all([
+                recipientInput?.validate(),
+                metadataInput?.validate(validateOptionalInput(metadata, 8192, localize('error.send.metadataTooLong'))),
+                tagInput?.validate(validateOptionalInput(tag, 64, localize('error.send.tagTooLong'))),
+            ])
+            return true
+        } catch (error) {
+            console.error('Error: ', error)
+            return false
         }
     }
 
@@ -43,18 +99,14 @@
         })
     }
 
-    async function validate(): Promise<boolean> {
-        try {
-            await Promise.all([
-                assetAmountInput?.validate(),
-                recipientInput?.validate(),
-                metadataInput?.validate(validateOptionalInput(metadata, 8192, localize('error.send.metadataTooLong'))),
-                tagInput?.validate(validateOptionalInput(tag, 64, localize('error.send.tagTooLong'))),
-            ])
-            return true
-        } catch (error) {
-            console.error('Error: ', error)
-            return false
+    async function onContinue(): Promise<void> {
+        const valid = await validate()
+        if (valid) {
+            setNewTransactionDetails(getTransactionDetails())
+            openPopup({
+                type: 'sendConfirmation',
+                overflow: true,
+            })
         }
     }
 
@@ -64,11 +116,18 @@
 </script>
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-    <Text type="h3" fontWeight={FontWeight.semibold} classes="text-left">
-        {localize('popups.sendForm.title')}
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
+        {localize('popups.transaction.title')}
     </Text>
     <send-form-inputs class="flex flex-col space-y-4">
-        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
+        {#if ownsNfts}
+            <Tabs bind:activeTab {tabs} />
+        {/if}
+        {#if activeTab === SendForm.SendToken}
+            <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
+        {:else}
+            <NftInput bind:nftId />
+        {/if}
         <NetworkInput bind:network />
         <RecipientInput bind:this={recipientInput} bind:recipient />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
@@ -90,8 +149,8 @@
         <Button classes="w-full" outline onClick={onCancel}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={onSend}>
-            {localize('actions.send')}
+        <Button classes="w-full" onClick={onContinue}>
+            {localize('actions.next')}
         </Button>
     </popup-buttons>
 </send-form-popup>

@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { LedgerAnimation, Button, Link, Text } from 'shared/components'
-    import { Platform } from 'shared/lib/platform'
+    import { Platform } from '@core/app'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
 

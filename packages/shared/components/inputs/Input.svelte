@@ -35,6 +35,8 @@
 
     let capsLockOn = false
 
+    $: value, (error = '')
+
     function handleInput(event: InputEvent): void {
         value = (event.target as HTMLInputElement).value
     }

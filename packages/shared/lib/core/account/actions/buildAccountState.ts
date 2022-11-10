@@ -1,6 +1,7 @@
-import { getDepositAddress } from '@core/account/utils'
 import { AccountBalance } from '@iota/wallet'
-import { SignerType } from '../enums'
+
+import { getDepositAddress } from '@core/account/utils'
+
 import { IAccount, IAccountMetadata, IAccountState } from '../interfaces'
 
 export async function buildAccountState(account: IAccount, metadata: IAccountMetadata): Promise<IAccountState> {
@@ -30,9 +31,5 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
         depositAddress,
         balances,
         isTransferring: false,
-        // TODO: refactor onto the profile
-        signerType: SignerType.Stronghold,
-        // TODO: refactor or remove these below
-        messages: [],
     }
 }

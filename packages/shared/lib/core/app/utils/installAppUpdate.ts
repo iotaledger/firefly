@@ -1,4 +1,4 @@
-import { Platform } from '@lib/platform'
+import { Platform } from '../classes'
 
 /**
  * Initializes the installation of an application update.

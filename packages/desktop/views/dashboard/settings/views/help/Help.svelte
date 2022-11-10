@@ -2,7 +2,7 @@
     import { HR } from 'shared/components'
     import { HelpAndInfoRoute } from '@core/router'
     import HelpSection from './HelpSection.svelte'
-    import features from 'shared/features/features'
+    import features from '@features/features'
     import { DISCORD_URL, DOCUMENTATION_URL, FAQ_URL, ISSUE_REPORT_URL } from '@contexts/settings'
 
     const settings: {
