@@ -11,7 +11,6 @@
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
-    let selected: IOption = { value: alias }
 
     const aliasOptions: IOption[] =
         $selectedAccount.balances?.aliases.map((hexAliasId, index) => {
@@ -19,6 +18,7 @@
             return { key: 'Alias ' + (index + 1), value: aliasId }
         }) ?? []
 
+    let selected: IOption = aliasOptions.find((option) => option.value === alias)
     $: alias = selected?.value
 
     export async function validate(): Promise<void> {
