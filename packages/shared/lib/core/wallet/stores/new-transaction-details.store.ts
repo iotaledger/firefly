@@ -8,22 +8,18 @@ export enum NewTransactionType {
 
 export const newTransactionDetails: Writable<NewTransactionDetails> = writable({
     type: NewTransactionType.TokenTransfer,
+    recipient: undefined,
     rawAmount: undefined,
     asset: undefined,
-    metadata: undefined,
-    recipient: undefined,
-    tag: undefined,
     unit: undefined,
 })
 
 export function resetNewTokenTransactionDetails(): void {
     newTransactionDetails.set({
         type: NewTransactionType.TokenTransfer,
+        recipient: undefined,
         rawAmount: undefined,
         asset: undefined,
-        metadata: undefined,
-        recipient: undefined,
-        tag: undefined,
         unit: undefined,
     })
 }
