@@ -182,7 +182,7 @@
                 "title": "個人設定檔將近完成...",
                 "fundsMigrated": "資金遷移完成",
                 "body": "Your new profile will be ready once the dashboard has successfully loaded.",
-                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
+                "ledgerHint": "儀表板上顯示載入完成前，請勿中斷你的 Ledger 裝置。",
                 "softwareMigratedBody": "You have successfully migrated your funds to the new network",
                 "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
                 "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
