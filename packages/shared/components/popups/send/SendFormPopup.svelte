@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
     import { Button, Text, FontWeight, TextInput, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
@@ -14,7 +16,6 @@
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
     import { DestinationNetwork } from '@core/network'
     import { Converter, getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
-    import { get } from 'svelte/store'
     import { selectedAccount } from '@core/account'
 
     enum SendForm {
@@ -126,6 +127,11 @@
     function onCancel(): void {
         closePopup()
     }
+
+    onMount(() => {
+        // Metadata is stored as a hex string in the transactionDetails stpre
+        metadata = Converter.hexToUtf8(metadata)
+    })
 </script>
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
