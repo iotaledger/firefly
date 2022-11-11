@@ -1,5 +1,5 @@
 import { RouterManagerExtension } from '../types'
 
-export interface IRouterManagerInitialisationOptions {
+export interface IRouterManagerOptions {
     extensions: RouterManagerExtension[]
 }

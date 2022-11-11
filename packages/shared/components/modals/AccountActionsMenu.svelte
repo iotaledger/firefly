@@ -27,9 +27,7 @@
             type: 'deleteAccount',
             props: {
                 account: selectedAccount,
-                deleteAccount: async (index: number) => {
-                    await deleteAccount(index)
-                },
+                deleteAccount,
             },
         })
         modal.close()

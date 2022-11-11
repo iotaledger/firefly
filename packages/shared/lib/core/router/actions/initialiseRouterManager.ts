@@ -1,9 +1,9 @@
 import { get } from 'svelte/store'
 
-import { IRouterManager, IRouterManagerInitialisationOptions } from '../interfaces'
+import { IRouterManager, IRouterManagerOptions } from '../interfaces'
 import { routerManager } from '../stores'
 
-export function initialiseRouterManager(options: IRouterManagerInitialisationOptions): void {
+export function initialiseRouterManager(options: IRouterManagerOptions): void {
     if (get(routerManager)) {
         throw new Error('Router manager has already been initialised.')
     } else {

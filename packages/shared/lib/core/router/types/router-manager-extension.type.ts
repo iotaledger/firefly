@@ -1,3 +1,4 @@
 import { RouterManagerExtensionName } from '../enums'
+import { RouterManagerExtensionFunction } from './router-manager-extension-function.type'
 
-export type RouterManagerExtension = [RouterManagerExtensionName, (..._: unknown[]) => unknown]
+export type RouterManagerExtension = [RouterManagerExtensionName, RouterManagerExtensionFunction]

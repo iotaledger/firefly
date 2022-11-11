@@ -7,10 +7,10 @@ import { loginRouter } from '@core/router/subrouters'
 
 export function getRouterForAppContext(context: AppContext): IRouter {
     switch (context) {
-        case AppContext.Login:
-            return get(loginRouter)
         case AppContext.Dashboard:
             return get(dashboardRouter)
+        case AppContext.Login:
+            return get(loginRouter)
         case AppContext.Onboarding:
             return get(onboardingRouter)
         case AppContext.Settings:
