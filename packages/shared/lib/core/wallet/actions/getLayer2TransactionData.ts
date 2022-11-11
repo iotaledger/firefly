@@ -28,9 +28,7 @@ export function getLayer2TransactionData(
     metadataStream.writeBytes('allowance', allowance.length, allowance)
 
     metadataStream.writeUInt16('end', 0)
-    const finalizedBytes = metadataStream.finalHex()
-    const metadata = Converter.hexToUtf8(finalizedBytes)
-
+    const metadata = '0x' + metadataStream.finalHex()
     return { recipient, metadata }
 }
 

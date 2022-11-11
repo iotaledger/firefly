@@ -1,4 +1,4 @@
-import { convertDateToUnixTimestamp, Converter } from '@core/utils'
+import { convertDateToUnixTimestamp } from '@core/utils'
 import type { OutputOptions, Assets } from '@iota/wallet'
 import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
@@ -42,8 +42,8 @@ export function getOutputOptions(
         recipientAddress,
         amount,
         features: {
-            ...(metadata && { metadata: Converter.utf8ToHex(metadata, true) }),
-            ...(tag && { tag: Converter.utf8ToHex(tag, true) }),
+            ...(metadata && { metadata }),
+            ...(tag && { tag }),
         },
         unlocks: {
             ...(unixTime && { expirationUnixTime: unixTime }),

@@ -13,7 +13,7 @@
     } from '@core/wallet'
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
     import { DestinationNetwork } from '@core/network'
-    import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
+    import { Converter, getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { get } from 'svelte/store'
     import { selectedAccount } from '@core/account'
 
@@ -54,17 +54,20 @@
     $: isLayer1Transaction = network === DestinationNetwork.Shimmer
 
     function setTransactionDetails(): void {
-        if (activeTab === SendForm.SendNft) {
+        let type: NewTransactionType
+        if (activeTab === SendForm.SendToken) {
+            type = NewTransactionType.TokenTransfer
             setNewTransactionDetails({
-                type: NewTransactionType.TokenTransfer,
+                type,
                 asset,
                 rawAmount,
                 unit,
                 recipient,
             })
         } else {
+            type = NewTransactionType.NftTransfer
             setNewTransactionDetails({
-                type: NewTransactionType.NftTransfer,
+                type,
                 nftId,
                 recipient,
             })
@@ -75,8 +78,9 @@
             layer2Data = getLayer2TransactionData(network, layer2Address)
         }
         updateNewTransactionDetails({
+            type,
             tag,
-            metadata: layer2Data ? layer2Data.metadata : metadata,
+            metadata: layer2Data ? layer2Data.metadata : Converter.utf8ToHex(metadata, true),
             recipient: layer2Data ? layer2Data.recipient : recipient,
         })
     }
