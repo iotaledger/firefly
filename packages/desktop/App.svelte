@@ -10,10 +10,12 @@
         initialiseRouterManager,
         OnboardingRoute,
         onboardingRoute,
+        onboardingRouter,
         routerManager,
         RouterManagerExtensionName,
     } from '@core/router'
     import {
+        AppContext,
         appSettings,
         appStage,
         AppStage,
@@ -91,6 +93,7 @@
                 [RouterManagerExtensionName.GetAppRouter, getAppRouter],
                 [RouterManagerExtensionName.GetRouterForAppContext, getRouterForAppContext],
                 [RouterManagerExtensionName.GoToAppContext, goToAppContext],
+                // TODO: https://github.com/iotaledger/firefly/issues/5201
                 [RouterManagerExtensionName.OpenSettings, openSettings],
                 [RouterManagerExtensionName.ResetRouterForAppContext, resetRouterForAppContext],
                 [RouterManagerExtensionName.ResetRouters, resetRouters],
@@ -135,6 +138,8 @@
                 isDeveloperProfile: true,
                 networkProtocol: NetworkProtocol.Shimmer,
             })
+            $routerManager.goToAppContext(AppContext.Onboarding)
+            $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
         })
         Platform.onEvent('menu-create-normal-profile', () => {
             void initialiseOnboardingFlow({
@@ -142,6 +147,8 @@
                 networkProtocol: NetworkProtocol.Shimmer,
                 networkType: NetworkType.Mainnet,
             })
+            $routerManager.goToAppContext(AppContext.Onboarding)
+            $onboardingRouter.goTo(OnboardingRoute.ProfileSetup)
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
