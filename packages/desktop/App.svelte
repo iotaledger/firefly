@@ -10,7 +10,8 @@
         initialiseRouterManager,
         OnboardingRoute,
         onboardingRoute,
-        openSettings,
+        routerManager,
+        RouterManagerExtensionName,
     } from '@core/router'
     import {
         appSettings,
@@ -29,6 +30,7 @@
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
     import { getRouterForAppContext, initialiseRouters, resetRouterForAppContext, resetRouters } from './lib/routers'
+    import { openSettings } from './lib/routers/actions/openSettings'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -79,9 +81,10 @@
 
         initialiseRouterManager({
             extensions: [
-                ['getRouterForAppContext', getRouterForAppContext],
-                ['resetRouterForAppContext', resetRouterForAppContext],
-                ['resetRouters', resetRouters],
+                [RouterManagerExtensionName.GetRouterForAppContext, getRouterForAppContext],
+                [RouterManagerExtensionName.ResetRouterForAppContext, resetRouterForAppContext],
+                [RouterManagerExtensionName.ResetRouters, resetRouters],
+                [RouterManagerExtensionName.OpenSettings, openSettings],
             ],
         })
 
@@ -99,7 +102,7 @@
         Platform.onEvent('menu-navigate-settings', () => {
             if ($loggedIn) {
                 closePopup()
-                openSettings()
+                $routerManager.openSettings()
             } else {
                 settings = true
             }

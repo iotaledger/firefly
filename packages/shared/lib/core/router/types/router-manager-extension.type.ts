@@ -1,1 +1,3 @@
-export type RouterManagerExtension = [string, (..._: unknown[]) => unknown]
+import { RouterManagerExtensionName } from '../enums'
+
+export type RouterManagerExtension = [RouterManagerExtensionName, (..._: unknown[]) => unknown]
