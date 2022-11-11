@@ -78,10 +78,12 @@
         if (!isLayer1Transaction) {
             layer2Data = getLayer2TransactionData(network, layer2Address)
         }
+
+        const metadataHex = metadata ? Converter.utf8ToHex(metadata, true) : null
         updateNewTransactionDetails({
             type,
             tag,
-            metadata: layer2Data ? layer2Data.metadata : Converter.utf8ToHex(metadata, true),
+            metadata: layer2Data ? layer2Data.metadata : metadataHex,
             recipient: layer2Data ? layer2Data.recipient : recipient,
             addSenderFeature: layer2Data ? true : false,
         })
