@@ -5,6 +5,6 @@
 </script>
 
 <div class="relative">
-    <MeatballMenuButton onClick={modal?.toggle} includeBackground />
+    <MeatballMenuButton onClick={modal?.toggle} />
     <AccountActionsMenu bind:modal position={{ right: '0' }} classes="mt-1.5" />
 </div>
