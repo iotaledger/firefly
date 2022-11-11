@@ -25,7 +25,7 @@
     let asset: IPersistedAsset
     $: $selectedAccountAssets,
         (asset =
-            activity.type === ActivityType.Transaction && activity.type === ActivityType.Foundry
+            activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry
                 ? getAssetFromPersistedAssets(activity.assetId)
                 : undefined)
 

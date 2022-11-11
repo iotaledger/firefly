@@ -1,13 +1,17 @@
 <script lang="typescript">
-    import { Text, Button, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import {
+        Text,
+        Button,
+        FontWeight,
+        TextType,
         BasicActivityDetails,
         AliasActivityDetails,
         FoundryActivityDetails,
         NftActivityDetails,
-    } from 'shared/components/molecules'
+        ActivityInformation,
+    } from 'shared/components'
     import { Platform } from '@core/app'
     import {
         ActivityAsyncStatus,
@@ -93,14 +97,6 @@
                     $currencies[Currency.USD],
                     $exchangeRates[$activeProfile?.settings?.currency]
                 ),
-            }
-        } else if (activity.type === ActivityType.Alias) {
-            return {
-                ...details,
-                storageDeposit: activity.storageDeposit,
-                aliasId: activity.aliasId,
-                governorAddress: activity.governorAddress,
-                stateControllerAddress: activity.stateControllerAddress,
             }
         } else if (activity.type === ActivityType.Nft) {
             return {
@@ -191,10 +187,14 @@
     {:else if activity?.type === ActivityType.Foundry}
         <FoundryActivityDetails {...details} />
     {:else if activity?.type === ActivityType.Alias}
-        <AliasActivityDetails {...details} />
+        <alias-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+            <AliasActivityDetails {activity} />
+            <ActivityInformation {activity} />
+        </alias-details>
     {:else if activity?.type === ActivityType.Nft}
         <NftActivityDetails {...details} />
     {/if}
+
     {#if !isTimelocked && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
             <Button

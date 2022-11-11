@@ -1,4 +1,3 @@
-import { resetRouters } from '@core/router'
 import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { closePopup } from '@auxiliary/popup'
 import { get } from 'svelte/store'
@@ -15,6 +14,7 @@ import {
     isLedgerProfile,
 } from '@core/profile'
 import { resetSelectedAccount } from '@core/account'
+import { routerManager } from '@core/router/stores'
 
 /**
  * Logout from active profile
@@ -58,7 +58,7 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
             resetActiveProfile()
         }
         resetDashboardState()
-        resetRouters()
+        get(routerManager).resetRouters()
 
         resolve()
     })
