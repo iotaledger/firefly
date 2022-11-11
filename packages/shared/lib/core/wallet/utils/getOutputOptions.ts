@@ -1,6 +1,8 @@
-import { convertDateToUnixTimestamp } from '@core/utils'
-import type { OutputOptions, Assets } from '@iota/wallet'
 import { get } from 'svelte/store'
+import type { OutputOptions, Assets } from '@iota/wallet'
+
+import { selectedAccount } from '@core/account'
+import { convertDateToUnixTimestamp } from '@core/utils'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'
 
@@ -13,7 +15,8 @@ export function getOutputOptions(
     asset?: IAsset,
     giftStorageDeposit?: boolean,
     surplus?: string,
-    nftId?: string
+    nftId?: string,
+    addSenderFeature?: boolean
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
@@ -44,6 +47,7 @@ export function getOutputOptions(
         features: {
             ...(metadata && { metadata }),
             ...(tag && { tag }),
+            ...(addSenderFeature && { sender: get(selectedAccount).depositAddress }),
         },
         unlocks: {
             ...(unixTime && { expirationUnixTime: unixTime }),

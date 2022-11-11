@@ -82,6 +82,7 @@
             tag,
             metadata: layer2Data ? layer2Data.metadata : Converter.utf8ToHex(metadata, true),
             recipient: layer2Data ? layer2Data.recipient : recipient,
+            addSenderFeature: layer2Data ? true : false,
         })
     }
 
