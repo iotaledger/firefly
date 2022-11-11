@@ -4,8 +4,8 @@ import BigInteger from 'big-integer'
 import { WriteStream } from '@iota/util.js'
 import { DestinationNetwork, NETWORK_ADDRESS } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { newTransactionDetails, selectedAccountAssets, Subject } from '@core/wallet'
-import { Converter } from '@lib/converter'
+import { newTransactionDetails, NewTransactionType, selectedAccountAssets, Subject } from '@core/wallet'
+import { Converter } from '@core/utils'
 
 export function getLayer2TransactionData(
     network: DestinationNetwork,
@@ -28,12 +28,10 @@ export function getLayer2TransactionData(
     metadataStream.writeBytes('allowance', allowance.length, allowance)
 
     metadataStream.writeUInt16('end', 0)
-    const metadata = metadataStream.finalBytes()
-    let stringifiedBytes = ''
-    for (const byte of metadata) {
-        stringifiedBytes += String.fromCodePoint(byte)
-    }
-    return { recipient, metadata: stringifiedBytes }
+    const finalizedBytes = metadataStream.finalHex()
+    const metadata = Converter.hexToUtf8(finalizedBytes)
+
+    return { recipient, metadata }
 }
 
 function getSmartContractParameters(address: string): Uint8Array {
@@ -71,20 +69,24 @@ function getEncodedAllowance(): Uint8Array {
     const allowance = new WriteStream()
     const tokenBuffer = new WriteStream()
 
-    const { asset, surplus, rawAmount } = get(newTransactionDetails)
-    allowance.writeUInt8('encodedAllowance', 0)
-    if (asset === get(selectedAccountAssets).baseCoin) {
-        allowance.writeUInt64('iotaAmount', BigInteger(rawAmount))
-        allowance.writeUInt16('noTokens', 2)
-        allowance.writeUInt16('emptyTokenBuffer', 0)
-    } else {
-        allowance.writeUInt64('iotaAmount', BigInteger(surplus ?? '0'))
-        const tokenIdBytes = Converter.hexToBytes(asset.id)
-        tokenBuffer.writeBytes('tokenId', tokenIdBytes.length, tokenIdBytes)
-        tokenBuffer.writeUInt256('amount', BigInteger(rawAmount))
-        const tokenBufferBytes = tokenBuffer.finalBytes()
-        allowance.writeUInt16('tokensLength', tokenBufferBytes.length)
-        allowance.writeBytes('tokenBuffer', tokenBufferBytes.length, tokenBufferBytes)
+    const transactionDetails = get(newTransactionDetails)
+    if (transactionDetails.type === NewTransactionType.TokenTransfer) {
+        allowance.writeUInt8('encodedAllowance', 0)
+
+        const { asset, surplus, rawAmount } = transactionDetails
+        if (asset === get(selectedAccountAssets).baseCoin) {
+            allowance.writeUInt64('iotaAmount', BigInteger(rawAmount))
+            allowance.writeUInt16('noTokens', 2)
+            allowance.writeUInt16('emptyTokenBuffer', 0)
+        } else {
+            allowance.writeUInt64('iotaAmount', BigInteger(surplus ?? '0'))
+            const tokenIdBytes = Converter.hexToBytes(asset.id)
+            tokenBuffer.writeBytes('tokenId', tokenIdBytes.length, tokenIdBytes)
+            tokenBuffer.writeUInt256('amount', BigInteger(rawAmount))
+            const tokenBufferBytes = tokenBuffer.finalBytes()
+            allowance.writeUInt16('tokensLength', tokenBufferBytes.length)
+            allowance.writeBytes('tokenBuffer', tokenBufferBytes.length, tokenBufferBytes)
+        }
     }
     return allowance.finalBytes()
 }

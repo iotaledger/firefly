@@ -1,13 +1,15 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { Button, Text, FontWeight, TextType, Tabs } from 'shared/components'
+    import { Button, Text, FontWeight, TextInput, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import {
+        getLayer2TransactionData,
         IAsset,
-        NewTransactionDetails,
         newTransactionDetails,
         NewTransactionType,
         setNewTransactionDetails,
+        Subject,
+        updateNewTransactionDetails,
     } from '@core/wallet'
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
     import { DestinationNetwork } from '@core/network'
@@ -26,9 +28,9 @@
     let tagInput: OptionalInput
 
     let network: DestinationNetwork
+    let layer2Address: string
 
     let nftId: string
-
     let rawAmount: string
     let asset: IAsset
     let unit: string
@@ -49,27 +51,34 @@
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
     $: ownsNfts = $selectedAccount.balances.nfts.length > 0
+    $: isLayer1Transaction = network === DestinationNetwork.Shimmer
 
-    function getTransactionDetails(): NewTransactionDetails {
-        if (activeTab === SendForm.SendToken) {
-            return {
+    function setTransactionDetails(): void {
+        if (activeTab === SendForm.SendNft) {
+            setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
                 asset,
                 rawAmount,
                 unit,
                 recipient,
-                metadata,
-                tag,
-            }
+            })
         } else {
-            return {
+            setNewTransactionDetails({
                 type: NewTransactionType.NftTransfer,
                 nftId,
                 recipient,
-                metadata,
-                tag,
-            }
+            })
         }
+
+        let layer2Data: { recipient: Subject; metadata: string }
+        if (!isLayer1Transaction) {
+            layer2Data = getLayer2TransactionData(network, layer2Address)
+        }
+        updateNewTransactionDetails({
+            tag,
+            metadata: layer2Data ? layer2Data.metadata : metadata,
+            recipient: layer2Data ? layer2Data.recipient : recipient,
+        })
     }
 
     async function validate(): Promise<boolean> {
@@ -101,7 +110,7 @@
     async function onContinue(): Promise<void> {
         const valid = await validate()
         if (valid) {
-            setNewTransactionDetails(getTransactionDetails())
+            setTransactionDetails()
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
@@ -128,14 +137,20 @@
             <NftInput bind:this={nftInput} bind:nftId />
         {/if}
         <NetworkInput bind:network />
-        <RecipientInput bind:this={recipientInput} bind:recipient maxHeight="max-h-48" />
+        {#if isLayer1Transaction}
+            <RecipientInput bind:this={recipientInput} bind:recipient />
+        {:else}
+            <TextInput bind:value={layer2Address} />
+        {/if}
         <optional-inputs class="flex flex-row flex-wrap gap-4">
-            <OptionalInput
-                bind:this={metadataInput}
-                bind:value={metadata}
-                label={localize('general.metadata')}
-                description={localize('tooltips.optionalInput')}
-            />
+            {#if isLayer1Transaction}
+                <OptionalInput
+                    bind:this={metadataInput}
+                    bind:value={metadata}
+                    label={localize('general.metadata')}
+                    description={localize('tooltips.optionalInput')}
+                />
+            {/if}
             <OptionalInput
                 bind:this={tagInput}
                 bind:value={tag}

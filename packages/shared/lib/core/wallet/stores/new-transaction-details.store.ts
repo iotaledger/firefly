@@ -28,9 +28,7 @@ export function resetNewTokenTransactionDetails(): void {
     })
 }
 
-export function updateNewTransactionDetails(
-    payload: Partial<NewTransactionDetails> & Pick<NewTransactionDetails, 'type'>
-): void {
+export function updateNewTransactionDetails(payload: Partial<NewTransactionDetails>): void {
     newTransactionDetails.update((state) => {
         if (payload.type === NewTransactionType.TokenTransfer && state.type === NewTransactionType.TokenTransfer) {
             state = { ...state, ...payload }

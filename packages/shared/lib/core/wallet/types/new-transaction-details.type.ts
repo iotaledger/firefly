@@ -3,9 +3,9 @@ import { IAsset, Subject, NewTransactionType } from '@core/wallet'
 export type NewTransactionDetails = NewNftTransactionDetails | NewTokenTransactionDetails
 
 type NewBaseTransactionDetails = {
-    metadata: string
+    metadata?: string
     recipient: Subject
-    tag: string
+    tag?: string
     expirationDate?: Date
     giftStorageDeposit?: boolean
     surplus?: string
