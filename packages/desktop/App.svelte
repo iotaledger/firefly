@@ -29,7 +29,14 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
-    import { getRouterForAppContext, initialiseRouters, resetRouterForAppContext, resetRouters } from './lib/routers'
+    import {
+        getAppRouter,
+        getRouterForAppContext,
+        goToAppContext,
+        initialiseRouters,
+        resetRouterForAppContext,
+        resetRouters,
+    } from './lib/routers'
     import { openSettings } from './lib/routers/actions/openSettings'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
@@ -81,10 +88,12 @@
 
         initialiseRouterManager({
             extensions: [
+                [RouterManagerExtensionName.GetAppRouter, getAppRouter],
                 [RouterManagerExtensionName.GetRouterForAppContext, getRouterForAppContext],
+                [RouterManagerExtensionName.GoToAppContext, goToAppContext],
+                [RouterManagerExtensionName.OpenSettings, openSettings],
                 [RouterManagerExtensionName.ResetRouterForAppContext, resetRouterForAppContext],
                 [RouterManagerExtensionName.ResetRouters, resetRouters],
-                [RouterManagerExtensionName.OpenSettings, openSettings],
             ],
         })
 

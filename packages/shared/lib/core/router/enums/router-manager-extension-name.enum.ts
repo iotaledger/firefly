@@ -1,6 +1,8 @@
 export enum RouterManagerExtensionName {
-    ResetRouters = 'resetRouters',
-    ResetRouterForAppContext = 'resetRouterForAppContext',
+    GetAppRouter = 'getAppRouter',
     GetRouterForAppContext = 'getRouterForAppContext',
+    GoToAppContext = 'goToAppContext',
     OpenSettings = 'openSettings',
+    ResetRouterForAppContext = 'resetRouterForAppContext',
+    ResetRouters = 'resetRouters',
 }
