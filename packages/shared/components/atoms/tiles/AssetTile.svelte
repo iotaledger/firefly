@@ -3,6 +3,7 @@
     import { AssetIcon, ClickableTile, Text, FontWeight, TextType } from 'shared/components'
     import { truncateString } from '@core/utils'
     import { activeProfile } from '@core/profile'
+    import { formatCurrency } from '@core/i18n/utils'
 
     export let asset: IAsset
     export let onClick: () => unknown
@@ -24,7 +25,7 @@
                 </Text>
                 {#if !squashed}
                     <div class="flex flex-row justify-between items-center text-left">
-                        <Text type={TextType.p} secondary smaller>{fiatPrice ?? ''}</Text>
+                        <Text type={TextType.p} secondary smaller>{fiatPrice ? formatCurrency(fiatPrice) : ''}</Text>
                         <slot name="subLabel" />
                     </div>
                 {/if}
@@ -37,7 +38,7 @@
             {#if !squashed}
                 <div class="flex flex-row justify-between items-center text-right">
                     <Text type={TextType.p} secondary smaller classes="flex-grow">
-                        {fiatBalance ? `≈ ${fiatBalance}` : ''}
+                        {fiatBalance ? `≈ ${formatCurrency(fiatBalance)}` : ''}
                     </Text>
                 </div>
             {/if}
