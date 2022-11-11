@@ -1,23 +1,36 @@
 <script lang="typescript">
-    import { DestinationNetwork } from '@core/network'
-    import { Modal, NetworkSelector, SelectorInput } from 'shared/components'
+    import { Modal, SelectorInput, IOption } from 'shared/components'
+    import { activeProfile } from '@core/profile'
+    import { DestinationNetwork, NETWORK_ADDRESS } from '@core/network'
 
     export let network: DestinationNetwork = DestinationNetwork.Shimmer
     export let error: string = ''
+    export let modal: Modal = undefined
+
+    const networksAddresses = NETWORK_ADDRESS[$activeProfile.networkType]
 
     let inputElement: HTMLInputElement = undefined
-    let modal: Modal = undefined
+    let selected: IOption = {
+        key: network,
+        value: networksAddresses[network],
+    }
+
+    const networks: IOption[] = Object.values(DestinationNetwork).map((_network) => ({
+        key: _network,
+        value: networksAddresses[_network],
+    }))
+
+    $: network = selected?.key
 </script>
 
 <SelectorInput
     labelLocale="general.destinationNetwork"
-    bind:value={network}
+    bind:selected
     bind:inputElement
     bind:modal
     {error}
     readonly
+    options={networks}
     inputClasses="cursor-pointer"
     containerClasses="cursor-pointer"
->
-    <NetworkSelector bind:modal bind:selected={network} onClose={() => inputElement.blur()} />
-</SelectorInput>
+/>

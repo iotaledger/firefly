@@ -1,10 +1,12 @@
 /* eslint-disable no-bitwise */
 
 import { localize } from '@core/i18n'
+import { ADDRESS_TYPE_MAP } from '@core/wallet'
 
 import { convertBytesToHexString } from './convert'
 
-export function validateBech32Address(prefix: string, addr: string): string {
+export function validateBech32Address(prefix: string, addr: string, addressType?: number): string {
+    const addressTypeLetter = ADDRESS_TYPE_MAP[addressType] ?? ''
     if (!addr || !addr.startsWith(prefix)) {
         return localize('error.send.wrongAddressPrefix', {
             values: {
@@ -14,6 +16,10 @@ export function validateBech32Address(prefix: string, addr: string): string {
     }
     if (!new RegExp(`^${prefix}1[02-9ac-hj-np-z]{59}$`).test(addr)) {
         return localize('error.send.wrongAddressFormat')
+    }
+
+    if (addressTypeLetter && !new RegExp(`^${prefix}1${addressTypeLetter}[02-9ac-hj-np-z]{58}$`).test(addr)) {
+        return localize('error.address.wrongAddressType')
     }
 
     let isValid = false
