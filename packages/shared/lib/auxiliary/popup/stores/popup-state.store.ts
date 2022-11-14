@@ -7,5 +7,5 @@ import { PopupProps } from '../types'
 export const popupState = writable<IPopupState>(DEFAULT_POPUP_STATE)
 
 export function updatePopupProps(payload: PopupProps): void {
-    popupState?.update((state) => ({ ...state, ...payload }))
+    popupState?.update((state) => ({ ...state, props: { ...state?.props, ...payload } }))
 }

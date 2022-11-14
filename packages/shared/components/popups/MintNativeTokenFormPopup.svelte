@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { setMintTokenDetails, mintTokenDetails, convertHexAddressToBech32, ADDRESS_TYPE_ALIAS } from '@core/wallet'
+    import { setMintTokenDetails, mintTokenDetails } from '@core/wallet'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import {
         Button,
@@ -16,8 +16,6 @@
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
     import { handleError } from '@core/error/handlers/handleError'
-    import { selectedAccount } from '@core/account'
-    import { truncateString } from '@core/utils'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -46,12 +44,7 @@
 
     let error: BaseError
     let decimalsInput: OptionalInput
-
-    $: aliasIds =
-        $selectedAccount.balances?.aliases.map((hexAliasId) => {
-            const aliasId = convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, hexAliasId)
-            return { value: aliasId, label: truncateString(aliasId, 9, 9) }
-        }) ?? []
+    let aliasInput: AliasInput
 
     function handleCancel(): void {
         closePopup()
@@ -82,7 +75,7 @@
         try {
             await Promise.all([
                 isNameValid(),
-                isAliasIdValid(),
+                aliasInput.validate(),
                 isTotalSupplyValid(),
                 isCirculatingSupplyValid(),
                 decimalsInput?.validate(isDecimalsValid()),
@@ -99,19 +92,6 @@
         if (!tokenName) {
             nameError = 'Name is required'
             return Promise.reject(nameError)
-        } else {
-            return Promise.resolve()
-        }
-    }
-
-    function isAliasIdValid(): Promise<void> {
-        const isValidAliasId = aliasId && aliasIds.some((_aliasId) => _aliasId.value === aliasId)
-        if (!aliasId) {
-            aliasIdError = 'Alias is required'
-            return Promise.reject(aliasIdError)
-        } else if (!isValidAliasId) {
-            aliasIdError = 'You are not the owner of this alias'
-            return Promise.reject(aliasIdError)
         } else {
             return Promise.resolve()
         }
@@ -180,7 +160,7 @@
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
-        <AliasInput bind:alias={aliasId} bind:error={aliasIdError} />
+        <AliasInput bind:this={aliasInput} bind:alias={aliasId} bind:error={aliasIdError} />
         <TextInput
             bind:value={tokenName}
             label={localize('popups.mintNativeToken.property.tokenName')}

@@ -1,21 +1,14 @@
 <script lang="typescript">
-    import { Drawer, Icon, ProfileActionsModal, Text, Modal, NetworkIndicator, NotificationBadge } from '@ui'
+    import { Drawer, Icon, Modal, NetworkIndicator, NotificationBadge, ProfileActionsModal, Text } from '@ui'
     import { SidebarTab } from '@components'
     import { Settings } from './settings'
     import features from '@features/features'
-    import { appVersionDetails, mobile } from '@core/app'
+    import { appVersionDetails, mobile } from '@core/app/stores'
     import { getInitials, isRecentDate } from '@core/utils'
-    import { activeProfile } from '@core/profile'
-    import {
-        dashboardRouter,
-        DashboardRoute,
-        resetWalletRoute,
-        settingsRoute,
-        settingsRouter,
-        SettingsRoute,
-        SidebarTab as SidebarTabType,
-    } from '@core/router'
+    import { activeProfile } from '@core/profile/stores'
+    import { DashboardRoute, dashboardRouter, settingsRoute, SettingsRoute, settingsRouter } from '@core/router'
     import { localize } from '@core/i18n'
+    import { ISidebarTab } from '../../lib/routers'
 
     let profileModal: Modal
     let drawer: Drawer
@@ -30,7 +23,7 @@
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
 
-    const sidebarTabs: SidebarTabType[] = [
+    const sidebarTabs: ISidebarTab[] = [
         ...(features?.wallet?.enabled
             ? [
                   {
@@ -64,7 +57,7 @@
     ]
 
     function openWallet(): void {
-        resetWalletRoute()
+        $dashboardRouter.reset()
     }
 
     function openCollectibles(): void {
