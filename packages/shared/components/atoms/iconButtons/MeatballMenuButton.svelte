@@ -8,7 +8,7 @@
     let active = false
 
     function handleClick(event: any): void {
-        active = true
+        active = !active
         onClick(event)
     }
 
