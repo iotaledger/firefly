@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { networkHrp } from '@core/network'
     import { validateBech32Address } from '@core/utils'
-    import { Modal, SelectorInput, IOption } from 'shared/components'
+    import { Modal, SelectorInput, IOption, ColoredCircle } from 'shared/components'
     import { visibleActiveAccounts } from '@core/profile'
     import { getSubjectFromAddress, Subject } from '@core/wallet'
     import { getAccountColorById, selectedAccountIndex } from '@core/account'
@@ -55,11 +55,5 @@
     {...$$restProps}
     let:option
 >
-    <div class="circle self-center rounded-full w-3 h-3" style="--account-color: {getAccountColorById(option?.id)};" />
+    <ColoredCircle color={getAccountColorById(option?.id)} />
 </SelectorInput>
-
-<style type="text/scss">
-    .circle {
-        background-color: var(--account-color);
-    }
-</style>
