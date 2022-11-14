@@ -61,7 +61,15 @@
         placeholder={localize(labelLocale)}
         fontSize="sm"
         {...$$restProps}
-    />
+    >
+        <div slot="right">
+            {#if selected?.key}
+                <Text slot="right" type={TextType.pre} fontSize="sm" color="gray-600" whitespace="pre">
+                    {truncateString(selected.value, 9, 9)}
+                </Text>
+            {/if}
+        </div>
+    </TextInput>
 
     {#if filteredOptions.length > 0}
         <Modal
