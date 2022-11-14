@@ -1,8 +1,9 @@
 <script lang="typescript">
     import { Icon, Text, Tooltip, PingingBadge } from '@ui'
-    import { SidebarTab, dashboardRoute } from '@core/router'
+    import { dashboardRoute } from '@core/router'
+    import { ISidebarTab } from '../lib/routers'
 
-    export let tab: SidebarTab = undefined
+    export let tab: ISidebarTab = undefined
 
     let tooltipAnchor: HTMLButtonElement
     let showTooltip = false

@@ -11,10 +11,9 @@ import {
     isStrongholdUnlocked,
     profileManager,
     recoverAccounts,
-    RecoverAccountsPayload
+    RecoverAccountsPayload,
 } from '@core/profile-manager'
 import { getAccounts, setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/profile-manager/api'
-import { loginRouter } from '@core/router'
 import { generateAndStoreActivitiesForAllAccounts, refreshAccountAssetsForActiveProfile } from '@core/wallet'
 import { get } from 'svelte/store'
 import { DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION, STRONGHOLD_PASSWORD_CLEAR_INTERVAL } from '../../constants'
@@ -25,15 +24,17 @@ import {
     activeProfile,
     incrementLoginProgress,
     resetLoginProgress,
-    setTimeStrongholdLastUnlocked
+    setTimeStrongholdLastUnlocked,
 } from '../../stores'
 import { isLedgerProfile } from '../../utils'
 import { loadAccounts } from './loadAccounts'
 import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
+import { AppContext } from '@core/app'
+import { routerManager } from '@core/router/stores'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
-    const _loginRouter = get(loginRouter)
+    const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
     try {
         const _activeProfile = get(activeProfile)
         const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedAccountIndex } = _activeProfile
@@ -115,7 +116,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             lastActiveAt.set(new Date())
             loggedIn.set(true)
             setTimeout(() => {
-                _loginRouter.next()
+                loginRouter?.next()
                 resetLoginProgress()
             }, 500)
             pollMarketPrices()
@@ -129,7 +130,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
         if (!loginOptions?.isFromOnboardingFlow) {
             await logout(false)
         }
-        _loginRouter.previous()
+        loginRouter?.previous()
         resetLoginProgress()
     }
 }

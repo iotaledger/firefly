@@ -1,21 +1,21 @@
-import { resetRouters } from '@core/router'
-import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
 import { closePopup } from '@auxiliary/popup'
-import { get } from 'svelte/store'
-import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
-import { profileManager } from '@core/profile-manager/stores'
-import { resetDashboardState } from '../resetDashboardState'
+import { resetSelectedAccount } from '@core/account'
+import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
+import { clearPollMarketPrices } from '@core/market/actions'
 import { clearPollNetworkInterval } from '@core/network'
 import {
-    resetActiveProfile,
-    activeProfile,
-    isSoftwareProfile,
     activeAccounts,
-    lockStronghold,
+    activeProfile,
     isLedgerProfile,
+    isSoftwareProfile,
+    lockStronghold,
+    resetActiveProfile,
 } from '@core/profile'
-import { resetSelectedAccount } from '@core/account'
-import { clearPollMarketPrices } from '@core/market/actions'
+import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
+import { profileManager } from '@core/profile-manager/stores'
+import { routerManager } from '@core/router/stores'
+import { get } from 'svelte/store'
+import { resetDashboardState } from '../resetDashboardState'
 
 /**
  * Logout from active profile
@@ -60,7 +60,7 @@ export function logout(clearActiveProfile: boolean = true, _lockStronghold: bool
             resetActiveProfile()
         }
         resetDashboardState()
-        resetRouters()
+        get(routerManager).resetRouters()
 
         resolve()
     })
