@@ -1333,7 +1333,9 @@
         "hash": "Hash",
         "creating": "Creating",
         "updating": "Updating",
-        "enterAddress": "Enter address"
+        "enterAddress": "Enter address",
+        "transaction": "Transaction",
+        "alias": "Alias"
     },
     "filters":{
         "title": "Filters",

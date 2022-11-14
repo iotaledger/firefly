@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { fade } from 'svelte/transition'
-    import { Button, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle, ButtonSize } from 'shared/components'
+    import { Button, ButtonSize, DeveloperIndicatorPill, HR, Icon, Modal, Text, Toggle } from 'shared/components'
     import { localize } from '@core/i18n'
     import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
-    import { popupState, openPopup, closePopup } from '@auxiliary/popup'
-    import { openSettings } from '@core/router'
+    import { closePopup, openPopup, popupState } from '@auxiliary/popup'
+    import { routerManager } from '@core/router'
     import { diffDates, getBackupWarningColor, getInitials, isRecentDate } from '@core/utils'
     import { appVersionDetails } from '@core/app'
-    import { activeProfile, isSoftwareProfile, isActiveLedgerProfile, logout, lockStronghold } from '@core/profile'
+    import { activeProfile, isActiveLedgerProfile, isSoftwareProfile, lockStronghold, logout } from '@core/profile'
     import { checkOrUnlockStronghold } from '@core/stronghold'
 
     export let modal: Modal = undefined
@@ -35,7 +35,7 @@
 
     function handleSettingsClick(): void {
         closePopup()
-        openSettings()
+        $routerManager.openSettings()
         modal?.close()
     }
 
