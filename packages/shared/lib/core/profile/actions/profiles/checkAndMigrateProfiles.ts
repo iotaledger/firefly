@@ -69,9 +69,16 @@ function persistedProfileMigrationToV4(existingProfile: unknown): IPersistedProf
 }
 
 function persistedProfileMigrationToV5(existingProfile: unknown): IPersistedProfile {
-    const newProfile: IPersistedProfile = existingProfile as IPersistedProfile
+    interface IOldPersistedProfile {
+        settings: {
+            currency: unknown
+        }
+    }
 
-    delete newProfile?.settings?.currency
+    const oldProfile = existingProfile as IOldPersistedProfile
+    delete oldProfile?.settings?.currency
+
+    const newProfile = oldProfile as unknown as IPersistedProfile
     newProfile.settings.marketCurrency = DEFAULT_PERSISTED_PROFILE_OBJECT.settings?.marketCurrency
 
     return newProfile
