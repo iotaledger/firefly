@@ -2,9 +2,12 @@ import { get } from 'svelte/store'
 import type { OutputOptions, Assets } from '@iota/wallet'
 
 import { selectedAccount } from '@core/account'
-import { convertDateToUnixTimestamp } from '@core/utils'
+import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'
+import { ILayer2Parameters, NETWORK_ADDRESS } from '@core/network'
+import { activeProfile } from '@core/profile'
+import { getLayer2Metadata } from '@core/wallet/actions'
 
 export function getOutputOptions(
     expirationDate: Date,
@@ -15,12 +18,20 @@ export function getOutputOptions(
     asset?: IAsset,
     giftStorageDeposit?: boolean,
     surplus?: string,
-    nftId?: string,
-    addSenderFeature?: boolean
+    layer2Parameters?: ILayer2Parameters,
+    nftId?: string
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
     const bigAmount = BigInt(rawAmount)
+
+    if (layer2Parameters) {
+        const { network, recipient } = layer2Parameters
+        metadata = getLayer2Metadata(recipient)
+        recipientAddress = NETWORK_ADDRESS[get(activeProfile).networkType][network]
+    } else {
+        metadata = Converter.utf8ToHex(metadata, true)
+    }
 
     let amount: string
     if (nativeTokenId && surplus) {
@@ -47,7 +58,7 @@ export function getOutputOptions(
         features: {
             ...(metadata && { metadata }),
             ...(tag && { tag }),
-            ...(addSenderFeature && { sender: get(selectedAccount).depositAddress }),
+            ...(layer2Parameters && { sender: get(selectedAccount).depositAddress }),
         },
         unlocks: {
             ...(unixTime && { expirationUnixTime: unixTime }),

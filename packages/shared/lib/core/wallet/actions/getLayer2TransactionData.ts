@@ -2,34 +2,25 @@ import { get } from 'svelte/store'
 import BigInteger from 'big-integer'
 
 import { WriteStream } from '@iota/util.js'
-import { DestinationNetwork, NETWORK_ADDRESS } from '@core/network'
-import { activeProfile } from '@core/profile'
-import { newTransactionDetails, NewTransactionType, selectedAccountAssets, Subject } from '@core/wallet'
+import { newTransactionDetails, NewTransactionType, selectedAccountAssets } from '@core/wallet'
 import { Converter } from '@core/utils'
 
-export function getLayer2TransactionData(
-    network: DestinationNetwork,
-    address: string
-): { recipient: Subject; metadata: string } {
+export function getLayer2Metadata(layer2Address: string): string {
     const metadataStream = new WriteStream()
-    const recipient = <Subject>{
-        type: 'address',
-        address: NETWORK_ADDRESS[get(activeProfile).networkType][network],
-    }
 
     metadataStream.writeUInt32('senderContract', 0)
     metadataStream.writeUInt32('targetContract', 0x3c4b5e02)
     metadataStream.writeUInt32('contractFunction', 0x23f4e3a1)
     metadataStream.writeUInt64('gasBudget', BigInteger(500000))
 
-    const parameters = getSmartContractParameters(address)
+    const parameters = getSmartContractParameters(layer2Address)
     metadataStream.writeBytes('smartContractParameters', parameters.length, parameters)
     const allowance = getEncodedAllowance()
     metadataStream.writeBytes('allowance', allowance.length, allowance)
 
     metadataStream.writeUInt16('end', 0)
     const metadata = '0x' + metadataStream.finalHex()
-    return { recipient, metadata }
+    return metadata
 }
 
 function getSmartContractParameters(address: string): Uint8Array {

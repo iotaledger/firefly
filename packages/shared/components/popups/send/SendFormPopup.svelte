@@ -1,43 +1,35 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
     import { Button, Text, FontWeight, TextInput, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import {
-        getLayer2TransactionData,
-        IAsset,
-        newTransactionDetails,
-        NewTransactionType,
-        setNewTransactionDetails,
-        Subject,
-        updateNewTransactionDetails,
-    } from '@core/wallet'
+    import { IAsset, newTransactionDetails, NewTransactionType, setNewTransactionDetails } from '@core/wallet'
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
-    import { DestinationNetwork } from '@core/network'
-    import { Converter, getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
+    import { DestinationNetwork, ILayer2Parameters } from '@core/network'
+    import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { selectedAccount } from '@core/account'
 
     enum SendForm {
         SendToken = 'general.sendToken',
         SendNft = 'general.sendNft',
     }
+
+    const transactionDetails = get(newTransactionDetails)
+    let { metadata, recipient, tag, layer2Parameters } = transactionDetails
+
     let assetAmountInput: AssetAmountInput
     let nftInput: NftInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
 
-    let network: DestinationNetwork
-    let layer2Address: string
+    let network = layer2Parameters?.network
+    let layer2Address = layer2Parameters?.recipient
 
     let nftId: string
     let rawAmount: string
     let asset: IAsset
     let unit: string
-
-    const transactionDetails = get(newTransactionDetails)
-    let { metadata, recipient, tag } = transactionDetails
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetails.rawAmount
@@ -55,38 +47,32 @@
     $: isLayer1Transaction = network === DestinationNetwork.Shimmer
 
     function setTransactionDetails(): void {
+        let layer2Parameters: ILayer2Parameters
+        if (!isLayer1Transaction) {
+            layer2Parameters = { network, recipient: layer2Address }
+        }
+
         let type: NewTransactionType
         if (activeTab === SendForm.SendToken) {
             type = NewTransactionType.TokenTransfer
             setNewTransactionDetails({
                 type,
+                recipient,
                 asset,
                 rawAmount,
                 unit,
-                recipient,
+                metadata,
+                layer2Parameters,
             })
         } else {
             type = NewTransactionType.NftTransfer
             setNewTransactionDetails({
                 type,
-                nftId,
                 recipient,
+                nftId,
+                metadata,
             })
         }
-
-        let layer2Data: { recipient: Subject; metadata: string }
-        if (!isLayer1Transaction) {
-            layer2Data = getLayer2TransactionData(network, layer2Address)
-        }
-
-        const metadataHex = metadata ? Converter.utf8ToHex(metadata, true) : null
-        updateNewTransactionDetails({
-            type,
-            tag,
-            metadata: layer2Data ? layer2Data.metadata : metadataHex,
-            recipient: layer2Data ? layer2Data.recipient : recipient,
-            addSenderFeature: layer2Data ? true : false,
-        })
     }
 
     async function validate(): Promise<boolean> {
@@ -129,11 +115,6 @@
     function onCancel(): void {
         closePopup()
     }
-
-    onMount(() => {
-        // Metadata is stored as a hex string in the transactionDetails stpre
-        metadata = Converter.hexToUtf8(metadata)
-    })
 </script>
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">

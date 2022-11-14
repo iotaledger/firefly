@@ -21,7 +21,7 @@
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform, time } from '@core/app'
-    import { Converter, truncateString } from '@core/utils'
+    import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
     import { IIrc27Metadata } from '@core/nfts'
 
@@ -61,7 +61,6 @@
         giftedStorageDeposit ?? 0,
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
-    $: formattedMetadata = Converter.hexToUtf8(metadata)
 
     let transactionDetailsList: { [key in string]: { data: string; isTooltipVisible?: boolean } }
     $: transactionDetailsList = {
@@ -70,7 +69,7 @@
         }),
         ...(nftId && { nftId: { data: nftId, copyable: true } }),
         ...(metadata && {
-            metadata: { data: formattedMetadata, isTooltipVisible: true },
+            metadata: { data: metadata, isTooltipVisible: true },
         }),
         ...(tag && {
             tag: { data: tag, isTooltipVisible: true },

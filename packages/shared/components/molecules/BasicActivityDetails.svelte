@@ -23,7 +23,7 @@
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform, time } from '@core/app'
     import { truncateString } from '@core/utils'
-    import { Converter, setClipboard } from '@core/utils'
+    import { setClipboard } from '@core/utils'
 
     export let asset: IPersistedAsset
     export let asyncStatus: ActivityAsyncStatus = null
@@ -54,7 +54,6 @@
     $: formattedTimelockDate = getDateFormat(timelockDate)
     $: expirationTime = getDateFormat(expirationDate)
     $: claimedTime = getDateFormat(claimedDate)
-    $: formattedMetadata = Converter.hexToUtf8(metadata)
     $: isTimelocked = timelockDate > $time
     $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
 
@@ -79,7 +78,7 @@
         }),
         ...(metadata && {
             metadata: {
-                data: formattedMetadata,
+                data: metadata,
                 tooltipText: localize(localePrefix + 'metadata'),
             },
         }),

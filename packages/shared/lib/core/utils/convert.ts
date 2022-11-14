@@ -248,9 +248,13 @@ export class Converter {
      * @returns The hex version of the bytes.
      */
     public static utf8ToHex(utf8: string, prefix = false): string {
-        return prefix
-            ? '0x' + Converter.bytesToHex(Converter.utf8ToBytes(utf8))
-            : Converter.bytesToHex(Converter.utf8ToBytes(utf8))
+        if (utf8) {
+            return prefix
+                ? '0x' + Converter.bytesToHex(Converter.utf8ToBytes(utf8))
+                : Converter.bytesToHex(Converter.utf8ToBytes(utf8))
+        } else {
+            return utf8
+        }
     }
 
     /**

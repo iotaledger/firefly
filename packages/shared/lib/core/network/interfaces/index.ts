@@ -1,5 +1,6 @@
 export * from './auth.interface'
 export * from './client-options.interface'
+export * from './layer2-parameters.interface'
 export * from './network.interface'
 export * from './network-status.interface'
 export * from './node.interface'

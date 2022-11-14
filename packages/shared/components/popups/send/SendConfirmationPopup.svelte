@@ -104,8 +104,8 @@
             transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
             giftStorageDeposit,
             transactionDetails.surplus,
-            transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined,
-            transactionDetails.addSenderFeature
+            transactionDetails.layer2Parameters,
+            transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 

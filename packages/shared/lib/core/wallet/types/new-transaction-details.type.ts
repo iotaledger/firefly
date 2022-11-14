@@ -1,3 +1,4 @@
+import { ILayer2Parameters } from '@core/network'
 import { IAsset, Subject, NewTransactionType } from '@core/wallet'
 
 export type NewTransactionDetails = NewNftTransactionDetails | NewTokenTransactionDetails
@@ -9,6 +10,7 @@ type NewBaseTransactionDetails = {
     expirationDate?: Date
     giftStorageDeposit?: boolean
     surplus?: string
+    layer2Parameters?: ILayer2Parameters
     disableToggleGift?: boolean
     disableChangeExpiration?: boolean
     addSenderFeature?: boolean
