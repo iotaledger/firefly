@@ -1,9 +1,7 @@
 /* eslint-disable no-bitwise */
 
-import Big from 'big.js'
-
-import { Base64 } from './encode'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
+import { Base64 } from './encode'
 
 /**
  * Returns a UNIX timestamp from a given Date object.
@@ -345,19 +343,4 @@ export class Converter {
             }
         }
     }
-}
-
-export function miotaToFiat(rawAmount: Big, usdPrice: number, conversionRate: number): number {
-    /**
-     * NOTE: 1_000_000 is referring to 1Mi worth of value.
-     */
-    const amount = rawAmount.div(1_000_000).toNumber()
-    return +(amount * usdPrice * conversionRate).toFixed(2)
-}
-
-export function fiatToMiota(amount: number, usdPrice: number, conversionRate: number): number {
-    /**
-     * NOTE: 1_000_000 is referring to 1Mi worth of value.
-     */
-    return +((amount / conversionRate / usdPrice) * 1_000_000).toFixed(0)
 }

@@ -1,6 +1,5 @@
 export * from './ensureZeroes'
 export * from './formatCurrency'
-export * from './formatCurrencyValue'
 export * from './formatNumber'
 export * from './getCurrencyPosition'
 export * from './getDecimalSeparator'
