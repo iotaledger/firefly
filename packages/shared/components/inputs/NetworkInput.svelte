@@ -15,10 +15,12 @@
         value: networksAddresses[network],
     }
 
-    const networks: IOption[] = Object.values(DestinationNetwork).map((_network) => ({
-        key: _network,
-        value: networksAddresses[_network],
-    }))
+    const networks: IOption[] = Object.values(DestinationNetwork)
+        .filter((_network) => !!networksAddresses[_network])
+        .map((_network) => ({
+            key: _network,
+            value: networksAddresses[_network],
+        }))
 
     $: network = selected?.key
 </script>
