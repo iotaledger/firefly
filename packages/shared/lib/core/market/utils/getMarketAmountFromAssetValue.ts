@@ -1,7 +1,7 @@
 import { IAsset } from '@core/wallet'
 import { getMarketPriceForAsset } from './getMarketPriceForAsset'
 
-export function getMarketAmountFromAssetValue(rawValue: number, asset: IAsset): number {
-    const fiatPrice = getMarketPriceForAsset(asset)
-    return (fiatPrice * rawValue) / 10 ** asset?.metadata?.decimals
+export function getMarketAmountFromAssetValue(amount: number, asset: IAsset): number {
+    const marketPrice = getMarketPriceForAsset(asset)
+    return (marketPrice * amount) / 10 ** asset?.metadata?.decimals
 }
