@@ -101,7 +101,6 @@
         {:else}
             <MenuItem icon={Icon.Hide} title={localize('actions.hideToken')} onClick={handleHide} />
         {/if}
-
         <MenuItem
             icon={Icon.Delete}
             disabled={!features?.wallet?.assets?.burnAsset?.enabled}
