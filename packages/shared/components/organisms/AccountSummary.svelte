@@ -1,12 +1,17 @@
 <script lang="typescript">
     import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
-    import { AccountActionsButton, FontWeight, Text, TextType, TogglableAmountLabel } from 'shared/components'
+    import { nodeInfo } from '@core/network'
+    import { selectedAccountAssets } from '@core/wallet'
+    import { AccountActionsButton, Text, TogglableAssetBalanceLabel } from 'shared/components'
 
     export let classes = ''
 
-    $: ({ metadata, balance } = $selectedAccountAssets?.baseCoin)
+    $: fomattedNetworkName = $nodeInfo?.protocol?.networkName
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.substring(1))
+        .join(' ')
+    $: ({ baseCoin } = $selectedAccountAssets)
 </script>
 
 <div
@@ -19,17 +24,12 @@
     {#if !$mobile}
         <div class="flex flex-row items-center justify-between">
             <Text type="h5" classes="text-left">
-                {localize('general.balance')}
+                {localize('general.balanceWithNetwork', { values: { network: fomattedNetworkName } })}
             </Text>
             <AccountActionsButton />
         </div>
     {/if}
     <div class="flex flex-col flex-wrap items-start space-y-1">
-        <TogglableAmountLabel amount={balance?.total} tokenMetadata={metadata} />
-        <Text type={TextType.p} fontWeight={FontWeight.medium}>
-            {localize('general.availableBalanceWithValue', {
-                values: { balance: formatTokenAmountBestMatch(balance?.available, metadata) },
-            })}
-        </Text>
+        <TogglableAssetBalanceLabel asset={baseCoin} />
     </div>
 </div>

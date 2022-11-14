@@ -1190,6 +1190,7 @@
         "systemTheme": "System",
         "balance": "Balance",
         "balanceWithValue": "Balance: {balance}",
+        "balanceWithNetwork": "{network} Balance",
         "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",
