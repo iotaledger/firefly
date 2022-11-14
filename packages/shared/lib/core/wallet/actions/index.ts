@@ -1,3 +1,4 @@
+export * from './burnAsset'
 export * from './claimActivity'
 export * from './getAccountAssetsForSelectedAccount'
 export * from './generateAndStoreActivitiesForAllAccounts'
