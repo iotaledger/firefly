@@ -4,7 +4,7 @@
     import { Modal, SelectorInput, IOption } from 'shared/components'
     import { visibleActiveAccounts } from '@core/profile'
     import { getSubjectFromAddress, Subject } from '@core/wallet'
-    import { selectedAccountIndex } from '@core/account'
+    import { getAccountColorById, selectedAccountIndex } from '@core/account'
 
     export let recipient: Subject
     export let disabled = false
@@ -22,6 +22,7 @@
     const accountOptions: IOption[] = $visibleActiveAccounts
         ?.filter((account) => account.index !== $selectedAccountIndex)
         ?.map((account) => ({
+            id: account.index,
             key: account.name,
             value: account.depositAddress,
         }))
@@ -52,4 +53,13 @@
     {disabled}
     options={accountOptions}
     {...$$restProps}
-/>
+    let:option
+>
+    <div class="circle self-center rounded-full w-3 h-3" style="--account-color: {getAccountColorById(option?.id)};" />
+</SelectorInput>
+
+<style type="text/scss">
+    .circle {
+        background-color: var(--account-color);
+    }
+</style>

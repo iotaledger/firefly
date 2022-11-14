@@ -74,17 +74,19 @@
                 {#each filteredOptions as option, index}
                     <button
                         on:click={() => handleClick(option)}
-                        class="w-full flex flex-row flex-1 justify-between px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
+                        class="w-full flex flex-row flex-1 space-x-4 px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                     >
                         <slot {option} {index}>
                             <!-- Contains Custom Selector -->
                         </slot>
-                        <Text type={TextType.p} fontSize="sm" fontWeight={FontWeight.medium} color="gray-800"
-                            >{option.key}</Text
-                        >
-                        <Text type={TextType.pre} fontSize="sm" color="gray-600"
-                            >{truncateString(option.value, 9, 9)}</Text
-                        >
+                        <div class="flex flex-row flex-1 justify-between">
+                            <Text type={TextType.p} fontSize="sm" fontWeight={FontWeight.medium} color="gray-800">
+                                {option.key}
+                            </Text>
+                            <Text type={TextType.pre} fontSize="sm" color="gray-600">
+                                {truncateString(option.value, 9, 9)}
+                            </Text>
+                        </div>
                     </button>
                 {/each}
             </picker-modal>
