@@ -29,7 +29,6 @@
     bind:inputElement
     bind:modal
     {error}
-    readonly
     options={networks}
     inputClasses="cursor-pointer"
     containerClasses="cursor-pointer"
