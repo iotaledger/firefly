@@ -1,0 +1,1 @@
+export const TRANSFER_ALLOWANCE = 0x23f4e3a1

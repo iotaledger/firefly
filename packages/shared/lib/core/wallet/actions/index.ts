@@ -1,6 +1,5 @@
 export * from './claimActivity'
 export * from './getAccountAssetsForSelectedAccount'
-export * from './getLayer2TransactionData'
 export * from './generateAndStoreActivitiesForAllAccounts'
 export * from './rejectActivity'
 export * from './refreshAccountAssetsForActiveProfile'

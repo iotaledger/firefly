@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { Modal, SelectorInput, IOption } from 'shared/components'
     import { activeProfile } from '@core/profile'
-    import { DestinationNetwork, NETWORK_ADDRESS } from '@core/network'
+    import { DestinationNetwork } from '@core/network'
+    import { NETWORK_ADDRESS } from '@core/layer-2'
 
     export let network: DestinationNetwork = DestinationNetwork.Shimmer
     export let error: string = ''

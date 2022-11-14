@@ -5,9 +5,9 @@ import { selectedAccount } from '@core/account'
 import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'
-import { ILayer2Parameters, NETWORK_ADDRESS } from '@core/network'
+import { ILayer2Parameters } from '@core/network'
 import { activeProfile } from '@core/profile'
-import { getLayer2Metadata } from '@core/wallet/actions'
+import { getLayer2Metadata, NETWORK_ADDRESS } from '@core/layer-2'
 
 export function getOutputOptions(
     expirationDate: Date,
