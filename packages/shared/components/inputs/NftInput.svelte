@@ -47,5 +47,5 @@
     options={nftOptions}
     let:option
 >
-    <NftMediaContainer nftId={option.value} size={NftMediaSize.Small} />
+    <NftMediaContainer nftId={option.value} size={NftMediaSize.ExtraSmall} />
 </SelectorInput>
