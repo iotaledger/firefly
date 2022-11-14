@@ -9,7 +9,7 @@ import {
     onboardingRouter,
     SettingsRouter,
     settingsRouter,
-} from '../routers'
+} from '@core/router/routers'
 import {
     AppSetupRouter,
     appSetupRouter,
@@ -31,7 +31,7 @@ import {
     storageProtectionSetupRouter,
     StrongholdSetupRouter,
     strongholdSetupRouter,
-} from '../subrouters'
+} from '@core/router/subrouters'
 
 export function initialiseRouters(): void {
     /**
