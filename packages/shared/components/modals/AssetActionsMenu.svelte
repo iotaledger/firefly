@@ -15,6 +15,7 @@
     import { closePopup, openPopup, updatePopupProps } from '@auxiliary/popup'
     import { MenuItem, Modal } from 'shared/components'
     import { checkActiveProfileAuth } from '@core/profile'
+    import features from '@features/features'
 
     export let modal: Modal = undefined
     export let asset: IAsset
@@ -100,6 +101,12 @@
         {:else}
             <MenuItem icon={Icon.Hide} title={localize('actions.hideToken')} onClick={handleHide} />
         {/if}
-        <MenuItem icon={Icon.Delete} title={localize('actions.burnToken')} onClick={handleBurnToken} />
+
+        <MenuItem
+            icon={Icon.Delete}
+            disabled={!features?.wallet?.assets?.burnAsset?.enabled}
+            title={localize('actions.burnToken')}
+            onClick={handleBurnToken}
+        />
     </div>
 </Modal>
