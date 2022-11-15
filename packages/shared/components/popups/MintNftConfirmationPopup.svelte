@@ -31,8 +31,8 @@
                 ...(attributes && { attributes }),
             })
             closePopup()
-        } catch (error) {
-            handleError(error)
+        } catch (err) {
+            handleError(err)
         }
     }
 
@@ -47,16 +47,16 @@
     async function handleMint(): Promise<void> {
         try {
             await checkActiveProfileAuth(mintAction, { stronghold: true, ledger: false })
-        } catch (error) {
-            handleError(error)
+        } catch (err) {
+            handleError(err)
         }
     }
 
     onMount(async () => {
         try {
             await _onMount()
-        } catch (error) {
-            handleError(error)
+        } catch (err) {
+            handleError(err)
         }
     })
 </script>
