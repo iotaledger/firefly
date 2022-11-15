@@ -5,7 +5,6 @@
     import { createEventDispatcher } from 'svelte'
 
     export let inputElement: HTMLInputElement = undefined
-
     export let isFocused: boolean = false
     export let error: string = ''
     export let classes: string = ''

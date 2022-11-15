@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { Icon, Logo, Profile } from 'shared/components'
-    import { mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
+    import { AppContext, mobile, needsToAcceptLatestPrivacyPolicy, needsToAcceptLatestTermsOfService } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkProtocol, NetworkType } from '@core/network'
     import { loadPersistedProfileIntoActiveProfile, profiles, ProfileType } from '@core/profile'
-    import { loginRouter } from '@core/router'
+    import { loginRouter, OnboardingRoute, onboardingRouter, routerManager } from '@core/router'
     import { initialiseOnboardingFlow, shouldBeDeveloperProfile } from '@contexts/onboarding'
     import { openPopup } from '@auxiliary/popup'
 
@@ -20,7 +20,8 @@
             networkProtocol: NetworkProtocol.Shimmer,
             ...(!isDeveloperProfile && { networkType: NetworkType.Mainnet }),
         })
-        $loginRouter.next({ shouldAddProfile: true })
+        $routerManager.goToAppContext(AppContext.Onboarding)
+        $onboardingRouter.goTo(isDeveloperProfile ? OnboardingRoute.NetworkSetup : OnboardingRoute.ProfileSetup)
     }
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {

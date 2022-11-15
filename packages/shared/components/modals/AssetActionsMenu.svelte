@@ -9,10 +9,13 @@
         hideActivitiesForHiddenAssets,
         NotVerifiedStatus,
         VerifiedStatus,
+        burnAsset,
     } from '@core/wallet'
     import { Icon } from '@lib/auxiliary/icon'
-    import { updatePopupProps } from '@auxiliary/popup'
-    import { HR, MenuItem, Modal } from 'shared/components'
+    import { closePopup, openPopup, updatePopupProps } from '@auxiliary/popup'
+    import { MenuItem, Modal } from 'shared/components'
+    import { checkActiveProfileAuth } from '@core/profile'
+    import features from '@features/features'
 
     export let modal: Modal = undefined
     export let asset: IAsset
@@ -53,10 +56,30 @@
 
     function handleBurnToken(): void {
         modal.close()
+        openPopup({
+            type: 'confirmation',
+            props: {
+                title: localize('actions.confirmTokenBurn.title', {
+                    values: {
+                        assetName: asset.metadata.name,
+                    },
+                }),
+                description: localize('actions.confirmTokenBurn.description'),
+                hint: localize('actions.confirmTokenBurn.hint'),
+                warning: true,
+                confirmText: localize('actions.burnToken'),
+                onConfirm: () => {
+                    checkActiveProfileAuth(async () => {
+                        await burnAsset(asset.id)
+                        closePopup()
+                    })
+                },
+            },
+        })
     }
 </script>
 
-<Modal bind:this={modal}>
+<Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
         {#if asset?.verification?.status === VerifiedStatus.SelfVerified}
             <MenuItem
@@ -78,13 +101,11 @@
         {:else}
             <MenuItem icon={Icon.Hide} title={localize('actions.hideToken')} onClick={handleHide} />
         {/if}
-        <HR />
         <MenuItem
             icon={Icon.Delete}
+            disabled={!features?.wallet?.assets?.burnAsset?.enabled}
             title={localize('actions.burnToken')}
             onClick={handleBurnToken}
-            disabled={true}
-            variant="error"
         />
     </div>
 </Modal>

@@ -3,8 +3,10 @@ import { AppContext } from '@core/app'
 import { IRouter } from '@core/router'
 
 export interface IRouterManager {
-    resetRouters(): void
-    resetRouterForAppContext(context: AppContext, resetSubrouters?: boolean): void
+    getAppRouter(): IRouter
     getRouterForAppContext(context: AppContext): IRouter
+    goToAppContext(context: AppContext): void
     openSettings(): void
+    resetRouterForAppContext(context: AppContext, resetSubrouters?: boolean): void
+    resetRouters(): void
 }

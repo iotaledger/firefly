@@ -1,6 +1,9 @@
 export enum RouterManagerExtensionName {
-    ResetRouters = 'resetRouters',
-    ResetRouterForAppContext = 'resetRouterForAppContext',
+    GetAppRouter = 'getAppRouter',
     GetRouterForAppContext = 'getRouterForAppContext',
+    GoToAppContext = 'goToAppContext',
+    // TODO: https://github.com/iotaledger/firefly/issues/5201
     OpenSettings = 'openSettings',
+    ResetRouterForAppContext = 'resetRouterForAppContext',
+    ResetRouters = 'resetRouters',
 }

@@ -7,7 +7,7 @@
     let modal: Modal
 </script>
 
-<div class="max-h-7 max-w-9 flex-none flex-initial overflow-visible">
+<div class="max-h-7 max-w-9 flex-none flex-initial overflow-visible relative">
     <MeatballMenuButton onClick={modal?.toggle} />
-    <AssetActionsMenu bind:modal {asset} />
+    <AssetActionsMenu bind:modal {asset} position={{ right: '0' }} classes="mt-1.5" />
 </div>
