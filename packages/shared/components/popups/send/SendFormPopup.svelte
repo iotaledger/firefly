@@ -7,6 +7,7 @@
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { selectedAccount } from '@core/account'
+    import { isLayer1Destination } from '@core/layer-2'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -43,7 +44,7 @@
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
     $: ownsNfts = $selectedAccount.balances.nfts.length > 0
-    $: isLayer1Transaction = networkAddress === undefined || networkAddress === '-'
+    $: isLayer1Transaction = isLayer1Destination(networkAddress)
 
     function setTransactionDetails(): void {
         if (isLayer1Transaction) {

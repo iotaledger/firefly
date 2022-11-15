@@ -1,4 +1,5 @@
-import { DestinationNetwork, NetworkType } from '../../network/enums'
+import { NetworkType } from '@core/network/enums'
+import { DestinationNetwork } from '../enums'
 
 export const NETWORK_ADDRESS: Readonly<{ [key in NetworkType]?: { [key in DestinationNetwork]?: string } }> = {
     [NetworkType.Mainnet]: {

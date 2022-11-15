@@ -1,19 +1,18 @@
 <script lang="typescript">
     import { Modal, SelectorInput, IOption } from 'shared/components'
     import { activeProfile } from '@core/profile'
-    import { DestinationNetwork } from '@core/network'
-    import { NETWORK_ADDRESS } from '@core/layer-2'
-
-    export let networkAddress: string = NETWORK_ADDRESS[DestinationNetwork.Shimmer]
+    import { NETWORK_ADDRESS, DestinationNetwork } from '@core/layer-2'
 
     const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
-    const networksAddresses = NETWORK_ADDRESS[$activeProfile.networkType]
+    const networkAddresses = NETWORK_ADDRESS[$activeProfile.networkType]
+
+    export let networkAddress: string = networkAddresses[DestinationNetwork.Shimmer]
 
     const networkOptions: IOption[] = Object.values(DestinationNetwork)
-        .filter((_network) => !!networksAddresses[_network])
+        .filter((_network) => !!networkAddresses[_network])
         .map((_network) => ({
             key: _network,
-            value: networksAddresses[_network],
+            value: networkAddresses[_network],
         }))
 
     let inputElement: HTMLInputElement = undefined
@@ -21,7 +20,7 @@
 
     let error: string
     let selected: IOption = {
-        key: networkOptions.find(({ key }) => NETWORK_ADDRESS[key] === networkAddress).key,
+        key: networkOptions.find(({ key }) => networkAddresses[key] === networkAddress)?.key,
         value: networkAddress,
     }
 
