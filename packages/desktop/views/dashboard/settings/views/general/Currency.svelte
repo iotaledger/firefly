@@ -10,7 +10,7 @@
         .map((currency) => ({ value: currency, label: currency.toUpperCase() }))
         .sort()
 
-    const handleCurrencySelect = (item) => {
+    function handleCurrencySelect(item): void {
         updateActiveProfileSettings({ marketCurrency: item.value })
     }
 </script>
