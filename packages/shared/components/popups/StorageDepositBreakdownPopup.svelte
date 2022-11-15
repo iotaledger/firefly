@@ -1,10 +1,27 @@
 <script lang="typescript">
-    import { HR, BalanceSummarySection, Text, FontWeight, Button } from 'shared/components'
+    import { closePopup, openPopup } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { closePopup, openPopup } from '@auxiliary/popup'
     import { checkActiveProfileAuth } from '@core/profile'
+    import { selectedAccountAssets } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
+    import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
+    import { BalanceSummarySection, Button, FontWeight, HR, Text } from 'shared/components'
+
+    $: ({ baseCoin } = $selectedAccountAssets)
+
+    let potentiallyLockedOutputsStorageDeposit = 0
+    $: $selectedAccount.balances.potentiallyLockedOutputs, void calculatePendingTransactionStorageDeposit()
+    async function calculatePendingTransactionStorageDeposit(): Promise<void> {
+        potentiallyLockedOutputsStorageDeposit = 0
+        for (const [outputId, unlocked] of Object.entries($selectedAccount.balances.potentiallyLockedOutputs)) {
+            if (!unlocked) {
+                const output = (await $selectedAccount.getOutput(outputId)).output
+                const storageDeposit = getStorageDepositFromOutput(output).storageDeposit
+                potentiallyLockedOutputsStorageDeposit += storageDeposit
+            }
+        }
+    }
 
     function handleConsolidation(): void {
         openPopup({
@@ -34,13 +51,14 @@
     <BalanceSummarySection
         title={localize('popups.storageDepositBreakdown.pendingTransactions.title')}
         subtitle={localize('popups.storageDepositBreakdown.pendingTransactions.subtitle')}
-        amount={(Number($selectedAccount?.balances.baseCoin.total) ?? 0) -
-            Number($selectedAccount?.balances.baseCoin.available ?? 0)}
+        amount={potentiallyLockedOutputsStorageDeposit}
+        asset={baseCoin}
     />
     <HR hidden />
     <BalanceSummarySection
         title={localize('popups.storageDepositBreakdown.totalStorageDeposit')}
-        amount={$selectedAccount.balances.requiredStorageDeposit}
+        amount={Number($selectedAccount.balances.requiredStorageDeposit) + potentiallyLockedOutputsStorageDeposit}
+        asset={baseCoin}
         totalRow
     />
     <Button onClick={handleConsolidation}>Consolidate Balance</Button>
