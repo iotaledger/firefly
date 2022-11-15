@@ -1,4 +1,4 @@
-import { ILayer2Parameters } from '@core/network'
+import { ILayer2Parameters } from '@core/layer-2'
 import { IAsset, Subject, NewTransactionType } from '@core/wallet'
 
 export type NewTransactionDetails = NewNftTransactionDetails | NewTokenTransactionDetails

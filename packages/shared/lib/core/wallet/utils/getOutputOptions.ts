@@ -6,6 +6,7 @@ import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'
 import { getLayer2MetadataForTransfer, ILayer2Parameters } from '@core/layer-2'
+import { addGasBudget } from '@core/layer-2/utils/addGasBudget'
 
 export function getOutputOptions(
     expirationDate: Date,
@@ -23,20 +24,21 @@ export function getOutputOptions(
     const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
     const bigAmount = BigInt(rawAmount)
 
-    tag = Converter.utf8ToHex(tag, true)
-    if (layer2Parameters) {
-        const { networkAddress, recipient } = layer2Parameters
-        metadata = getLayer2MetadataForTransfer(recipient)
-        recipientAddress = networkAddress
-    } else {
-        metadata = Converter.utf8ToHex(metadata, true)
-    }
-
     let amount: string
     if (nativeTokenId && surplus) {
         amount = surplus
     } else {
         amount = nativeTokenId ? '0' : bigAmount.toString()
+    }
+
+    tag = Converter.utf8ToHex(tag, true)
+    if (layer2Parameters) {
+        const { networkAddress, recipient } = layer2Parameters
+        amount = addGasBudget(rawAmount)
+        metadata = getLayer2MetadataForTransfer(recipient)
+        recipientAddress = networkAddress
+    } else {
+        metadata = Converter.utf8ToHex(metadata, true)
     }
 
     const assets: Assets = {}

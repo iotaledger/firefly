@@ -1,5 +1,5 @@
 import { writable, Writable } from 'svelte/store'
-import { NewTransactionDetails } from '../types/new-transaction-details.type'
+import type { NewTransactionDetails } from '../types'
 
 export enum NewTransactionType {
     TokenTransfer = 'TokenTransfer',
