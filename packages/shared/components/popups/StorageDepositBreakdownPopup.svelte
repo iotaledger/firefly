@@ -1,7 +1,29 @@
 <script lang="typescript">
-    import { HR, BalanceSummarySection, Text, FontWeight } from 'shared/components'
+    import { HR, BalanceSummarySection, Text, FontWeight, Button } from 'shared/components'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
+    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { checkActiveProfileAuth } from '@core/profile'
+    import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
+
+    function handleConsolidation(): void {
+        openPopup({
+            type: 'confirmation',
+            props: {
+                title: 'Consolidate Outputs',
+                description: 'Consolidate outputs description',
+                hint: 'Consolidate outputs hint',
+                warning: true,
+                confirmText: localize('actions.consolidate'),
+                onConfirm: () => {
+                    checkActiveProfileAuth(async () => {
+                        await consolidateOutputs()
+                        closePopup()
+                    })
+                },
+            },
+        })
+    }
 </script>
 
 <div class="flex flex-col space-y-6">
@@ -21,4 +43,5 @@
         amount={$selectedAccount.balances.requiredStorageDeposit}
         totalRow
     />
+    <Button onClick={handleConsolidation}>Consolidate Balance</Button>
 </div>
