@@ -13,7 +13,6 @@
 
     export let asset: IPersistedAsset
     export let inclusionState: InclusionState
-    export let formattedFiatValue: string = null
     export let rawAmount: string = null
     export let unit: string
     export let storageDeposit = 0
@@ -58,7 +57,7 @@
 <foundry-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
         {#if amount}
-            <AmountBox {amount} fiatAmount={formattedFiatValue} {unit} {asset} />
+            <AmountBox {amount} {unit} {asset} />
         {/if}
         <foundry-status class="flex flex-row w-full space-x-2 justify-center">
             <ActivityInclusionStatusPill localizationKey={'foundry.minting'} {inclusionState} />

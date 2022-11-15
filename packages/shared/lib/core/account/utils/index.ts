@@ -1,3 +1,4 @@
+export * from './getAccountColorById'
 export * from './getBoundAccount'
 export * from './getDepositAddress'
 export * from './getIconColorFromString'

@@ -1,4 +1,5 @@
-import { DestinationNetwork, NetworkType } from '../enums'
+import { NetworkType } from '@core/network/enums'
+import { DestinationNetwork } from '../enums'
 
 export const NETWORK_ADDRESS: Readonly<{ [key in NetworkType]?: { [key in DestinationNetwork]?: string } }> = {
     [NetworkType.Mainnet]: {
@@ -7,6 +8,6 @@ export const NETWORK_ADDRESS: Readonly<{ [key in NetworkType]?: { [key in Destin
     },
     [NetworkType.Devnet]: {
         [DestinationNetwork.Shimmer]: '-',
-        // [DestinationNetwork.ShimmerEvm]: 'rms1qrut5ajyfrtgjs325kd9chwfwyyy2z3fewy4vgy0vvdtf2pr8prg5u3zwjn',
+        [DestinationNetwork.ShimmerTestnetEvm]: 'rms1pzw5y4e4y6gzkytvjp0ukgjgs37vd33uvnju9tuf6rrztnnw4tj7crw72ar',
     },
 }

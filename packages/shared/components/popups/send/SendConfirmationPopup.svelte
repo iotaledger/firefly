@@ -1,14 +1,12 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import Big from 'big.js'
     import {
         Button,
         ExpirationTimePicker,
         KeyValueBox,
         Text,
         TextHint,
-        Error,
         Toggle,
         FontWeight,
         TextType,
@@ -18,7 +16,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
@@ -34,10 +32,7 @@
         NewTransactionType,
         Output,
     } from '@core/wallet'
-    import { formatCurrency } from '@core/i18n'
-    import { currencies, Currency, exchangeRates, miotaToFiat } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { BaseError } from '@core/error'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -51,7 +46,6 @@
     let storageDeposit = 0
     let preparedOutput: Output
     let outputOptions: OutputOptions
-    let error: BaseError
     let expirationTimePicker: ExpirationTimePicker
 
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
@@ -67,20 +61,8 @@
     $: isTransferring = $selectedAccount.isTransferring
 
     function refreshSendConfirmationState(): void {
-        error = null
         void prepareTransactionOutput()
     }
-
-    $: formattedFiatValue =
-        transactionDetails.type === NewTransactionType.TokenTransfer
-            ? formatCurrency(
-                  miotaToFiat(
-                      Big(transactionDetails.rawAmount),
-                      $currencies[Currency.USD],
-                      $exchangeRates[$activeProfile?.settings?.currency]
-                  )
-              )
-            : ''
 
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
@@ -94,6 +76,7 @@
 
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
+        // TODO: move arguments into transactionDetails object
         outputOptions = getOutputOptions(
             expirationDate,
             recipientAddress,
@@ -103,6 +86,7 @@
             transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
             giftStorageDeposit,
             transactionDetails.surplus,
+            transactionDetails.layer2Parameters,
             transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
@@ -143,7 +127,6 @@
     }
 
     async function onConfirm(): Promise<void> {
-        error = null
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
 
@@ -153,7 +136,7 @@
             }
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
-            handleError(err?.error)
+            handleError(err)
         }
     }
 
@@ -173,7 +156,7 @@
         try {
             await _onMount()
         } catch (err) {
-            handleError(err?.error)
+            handleError(err)
         }
     })
 </script>
@@ -193,7 +176,6 @@
                 type={ActivityType.Transaction}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
-                {formattedFiatValue}
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails
@@ -227,9 +209,6 @@
                     disabled={disableChangeExpiration}
                 />
             </KeyValueBox>
-        {/if}
-        {#if error}
-            <Error error={error?.message} />
         {/if}
     </div>
     {#if surplus}

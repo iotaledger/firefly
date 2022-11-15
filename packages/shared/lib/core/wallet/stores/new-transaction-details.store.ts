@@ -1,5 +1,5 @@
 import { writable, Writable } from 'svelte/store'
-import { NewTransactionDetails } from '../types/new-transaction-details.type'
+import type { NewTransactionDetails } from '../types'
 
 export enum NewTransactionType {
     TokenTransfer = 'TokenTransfer',
@@ -8,22 +8,18 @@ export enum NewTransactionType {
 
 export const newTransactionDetails: Writable<NewTransactionDetails> = writable({
     type: NewTransactionType.TokenTransfer,
+    recipient: undefined,
     rawAmount: undefined,
     asset: undefined,
-    metadata: undefined,
-    recipient: undefined,
-    tag: undefined,
     unit: undefined,
 })
 
 export function resetNewTokenTransactionDetails(): void {
     newTransactionDetails.set({
         type: NewTransactionType.TokenTransfer,
+        recipient: undefined,
         rawAmount: undefined,
         asset: undefined,
-        metadata: undefined,
-        recipient: undefined,
-        tag: undefined,
         unit: undefined,
     })
 }
