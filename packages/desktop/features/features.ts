@@ -106,6 +106,9 @@ const features = {
         },
         assets: {
             enabled: true,
+            burnAsset: {
+                enabled: false,
+            },
         },
         activityHistory: {
             enabled: true,

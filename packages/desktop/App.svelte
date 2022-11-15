@@ -10,10 +10,12 @@
         initialiseRouterManager,
         OnboardingRoute,
         onboardingRoute,
+        onboardingRouter,
         routerManager,
         RouterManagerExtensionName,
     } from '@core/router'
     import {
+        AppContext,
         appSettings,
         appStage,
         AppStage,
@@ -29,7 +31,14 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { Popup, Route, TitleBar, ToastContainer, Transition } from '@ui'
     import { Dashboard, LoginRouter, OnboardingRouter, Settings, Splash } from '@views'
-    import { getRouterForAppContext, initialiseRouters, resetRouterForAppContext, resetRouters } from './lib/routers'
+    import {
+        getAppRouter,
+        getRouterForAppContext,
+        goToAppContext,
+        initialiseRouters,
+        resetRouterForAppContext,
+        resetRouters,
+    } from './lib/routers'
     import { openSettings } from './lib/routers/actions/openSettings'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
@@ -81,10 +90,13 @@
 
         initialiseRouterManager({
             extensions: [
+                [RouterManagerExtensionName.GetAppRouter, getAppRouter],
                 [RouterManagerExtensionName.GetRouterForAppContext, getRouterForAppContext],
+                [RouterManagerExtensionName.GoToAppContext, goToAppContext],
+                // TODO: https://github.com/iotaledger/firefly/issues/5201
+                [RouterManagerExtensionName.OpenSettings, openSettings],
                 [RouterManagerExtensionName.ResetRouterForAppContext, resetRouterForAppContext],
                 [RouterManagerExtensionName.ResetRouters, resetRouters],
-                [RouterManagerExtensionName.OpenSettings, openSettings],
             ],
         })
 
@@ -126,6 +138,8 @@
                 isDeveloperProfile: true,
                 networkProtocol: NetworkProtocol.Shimmer,
             })
+            $routerManager.goToAppContext(AppContext.Onboarding)
+            $onboardingRouter.goTo(OnboardingRoute.NetworkSetup)
         })
         Platform.onEvent('menu-create-normal-profile', () => {
             void initialiseOnboardingFlow({
@@ -133,6 +147,8 @@
                 networkProtocol: NetworkProtocol.Shimmer,
                 networkType: NetworkType.Mainnet,
             })
+            $routerManager.goToAppContext(AppContext.Onboarding)
+            $onboardingRouter.goTo(OnboardingRoute.ProfileSetup)
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)

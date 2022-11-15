@@ -1,7 +1,9 @@
-import { removePersistedShimmerClaimingTransactions } from '@contexts/onboarding/stores'
-import { activeProfile, logout, profiles, removeProfile, removeProfileFolder } from '@core/profile'
-import { appRouter } from '@core/router'
 import { get } from 'svelte/store'
+
+import { AppContext } from '@core/app/enums'
+import { activeProfile, logout, profiles, removeProfile, removeProfileFolder } from '@core/profile'
+import { routerManager } from '@core/router/stores'
+import { removePersistedShimmerClaimingTransactions } from '@contexts/onboarding/stores'
 
 /**
  * It removes the active profile from the app's list of profiles, removes the profile's directory from
@@ -35,11 +37,11 @@ export async function deleteProfile(): Promise<void> {
         await removeProfileFolder(_activeProfile?.id)
 
         /**
-         * NOTE: If there are no more profiles then the user should be
+         * NOTE: If there are no more profiles, then the user should be
          * routed to the welcome screen.
          */
         if (get(profiles).length === 0) {
-            get(appRouter).reset()
+            get(routerManager).goToAppContext(AppContext.Onboarding)
         }
     } catch (err) {
         console.error(err)

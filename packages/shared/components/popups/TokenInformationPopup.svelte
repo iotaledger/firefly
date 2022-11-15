@@ -53,7 +53,7 @@
 </script>
 
 <div class="space-y-6">
-    <div class="flex flex-row items-center space-x-3 mr-16">
+    <div class="flex flex-row justify-between items-center space-x-3 mr-8">
         <Text
             type="h4"
             fontSize="18"
