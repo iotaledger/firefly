@@ -100,7 +100,7 @@ describe('File: network.ts', () => {
             },
             [NetworkType.Devnet]: {
                 id: 'testnet',
-                name: 'Shimmer Beta',
+                name: 'Testnet',
                 protocol: NetworkProtocol.Shimmer,
                 type: NetworkType.Devnet,
                 bech32Hrp: 'rms',

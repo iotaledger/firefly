@@ -7,7 +7,6 @@
     export let asset: IPersistedAsset
     export let unit: string
     export let amount: string = ''
-    export let fiatAmount: string = ''
 
     const MAX_LENGTH_PER_LINE = 15
 
@@ -115,7 +114,4 @@
             <Tooltip anchor={tokenAmountElement}><Text classes="break-all">{amount} {unit}</Text></Tooltip>
         {/if}
     </token-amount>
-    {#if fiatAmount}
-        <Text fontSize="md" color="gray-600" darkColor="gray-500">{fiatAmount}</Text>
-    {/if}
 </amount>

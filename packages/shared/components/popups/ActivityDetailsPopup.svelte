@@ -21,10 +21,8 @@
         getAssetFromPersistedAssets,
         rejectActivity,
         selectedAccountActivities,
-        getFiatAmount,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
-    import { currencies, Currency, exchangeRates } from '@core/utils'
     import { setClipboard } from '@core/utils'
     import { truncateString } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
@@ -79,11 +77,6 @@
                 unit: asset?.metadata?.unit,
                 giftedStorageDeposit: activity.giftedStorageDeposit,
                 isInternal: activity.isInternal,
-                formattedFiatValue: getFiatAmount(
-                    activity,
-                    $currencies[Currency.USD],
-                    $exchangeRates[$activeProfile?.settings?.currency]
-                ),
             }
         } else if (activity.type === ActivityType.Foundry) {
             return {
@@ -93,11 +86,6 @@
                 rawAmount: activity.rawAmount,
                 unit: asset?.metadata?.unit,
                 giftedStorageDeposit: activity.giftedStorageDeposit,
-                formattedFiatValue: getFiatAmount(
-                    activity,
-                    $currencies[Currency.USD],
-                    $exchangeRates[$activeProfile?.settings?.currency]
-                ),
             }
         } else if (activity.type === ActivityType.Nft) {
             return {

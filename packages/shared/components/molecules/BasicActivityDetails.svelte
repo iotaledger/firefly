@@ -32,7 +32,6 @@
     export let direction: ActivityDirection
     export let expirationDate: Date = null
     export let timelockDate: Date = null
-    export let formattedFiatValue: string = null
     export let inclusionState: InclusionState = InclusionState.Pending
     export let metadata: string = null
     export let rawAmount: string = null
@@ -146,7 +145,7 @@
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
         {#if amount}
-            <AmountBox {amount} fiatAmount={formattedFiatValue} {unit} {asset} />
+            <AmountBox {amount} {unit} {asset} />
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if inclusionState && direction}

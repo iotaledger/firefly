@@ -3,7 +3,6 @@
     import {
         FoundryActivity,
         getAssetFromPersistedAssets,
-        getFiatAmount,
         getFormattedAmountFromActivity,
         InclusionState,
         IPersistedAsset,
@@ -17,7 +16,6 @@
     let asset: IPersistedAsset
     $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
     $: amount = getFormattedAmountFromActivity(activity)
-    $: fiatAmount = getFiatAmount(activity)
 </script>
 
 <AssetIcon {asset} showVerifiedBadgeOnly />
@@ -38,9 +36,6 @@
     <div class="flex flex-row justify-between">
         <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
             {asset?.metadata?.name ? truncateString(asset?.metadata?.name, 20, 0) : truncateString(asset?.id, 6, 7)}
-        </Text>
-        <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
-            {fiatAmount}
         </Text>
     </div>
 </div>

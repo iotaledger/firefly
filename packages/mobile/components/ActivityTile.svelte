@@ -31,7 +31,6 @@
             {#if activity.data.type === ActivityType.Transaction}
                 <TransactionActivityTileContent
                     inclusionState={activity.inclusionState}
-                    fiatAmount={activity.getFiatAmount()}
                     amount={activity.getFormattedAmount()}
                     data={activity.data}
                     {asset}
@@ -43,7 +42,6 @@
             {:else}
                 <FoundryActivityTileContent
                     inclusionState={activity.inclusionState}
-                    fiatAmount={activity.getFiatAmount()}
                     amount={activity.getFormattedAmount()}
                     {asset}
                 />

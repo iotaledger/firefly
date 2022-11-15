@@ -2,6 +2,7 @@ import { cleanupOnboarding } from '@contexts/onboarding'
 import { createNewAccount, IAccount, setSelectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers/handleError'
 import { pollLedgerNanoStatus } from '@core/ledger'
+import { pollMarketPrices } from '@core/market/actions'
 import { getAndUpdateNodeInfo, pollNetworkStatus } from '@core/network'
 import { loadNftsForActiveProfile } from '@core/nfts'
 import {
@@ -118,6 +119,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 loginRouter?.next()
                 resetLoginProgress()
             }, 500)
+            pollMarketPrices()
 
             void cleanupOnboarding()
         } else {

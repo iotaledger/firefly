@@ -7,7 +7,7 @@ export function getDecimalSeparator(currency: string | undefined = undefined): s
     const appLanguage = get(appSettings).language
 
     if (!currency) {
-        currency = get(activeProfile)?.settings?.currency
+        currency = get(activeProfile)?.settings?.marketCurrency
     }
 
     return (

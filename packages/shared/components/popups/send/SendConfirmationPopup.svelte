@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import Big from 'big.js'
     import {
         Button,
         ExpirationTimePicker,
@@ -18,7 +17,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
@@ -34,8 +33,6 @@
         NewTransactionType,
         Output,
     } from '@core/wallet'
-    import { formatCurrency } from '@core/i18n'
-    import { currencies, Currency, exchangeRates, miotaToFiat } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { BaseError } from '@core/error'
     import { ledgerPreparedOutput } from '@core/ledger'
@@ -70,17 +67,6 @@
         error = null
         void prepareTransactionOutput()
     }
-
-    $: formattedFiatValue =
-        transactionDetails.type === NewTransactionType.TokenTransfer
-            ? formatCurrency(
-                  miotaToFiat(
-                      Big(transactionDetails.rawAmount),
-                      $currencies[Currency.USD],
-                      $exchangeRates[$activeProfile?.settings?.currency]
-                  )
-              )
-            : ''
 
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
@@ -195,7 +181,6 @@
                 type={ActivityType.Transaction}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
-                {formattedFiatValue}
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails

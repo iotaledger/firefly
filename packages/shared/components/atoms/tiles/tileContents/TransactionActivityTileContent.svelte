@@ -3,7 +3,6 @@
     import { networkHrp } from '@core/network'
     import {
         ActivityDirection,
-        getFiatAmount,
         InclusionState,
         IPersistedAsset,
         getFormattedAmountFromActivity,
@@ -18,12 +17,9 @@
 
     let asset: IPersistedAsset
     $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
-
     $: title = getTitle(activity)
     $: subjectLocale = getSubjectLocale(activity)
     $: amount = getFormattedAmountFromActivity(activity)
-    $: fiatAmount = getFiatAmount(activity)
-
     $: isIncoming = activity.direction === ActivityDirection.Incoming
 
     function getTitle(_activity: TransactionActivity): string {
@@ -83,9 +79,6 @@
             {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
                 values: { account: subjectLocale },
             })}
-        </Text>
-        <Text fontWeight={FontWeight.medium} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
-            {fiatAmount}
         </Text>
     </div>
 </div>
