@@ -53,24 +53,23 @@
             layer2Parameters = { networkAddress, recipient: layer2Address }
         }
 
-        let type: NewTransactionType
         if (activeTab === SendForm.SendToken) {
-            type = NewTransactionType.TokenTransfer
             setNewTransactionDetails({
-                type,
+                type: NewTransactionType.TokenTransfer,
                 recipient,
                 asset,
                 rawAmount,
                 unit,
+                tag,
                 metadata,
                 layer2Parameters,
             })
         } else {
-            type = NewTransactionType.NftTransfer
             setNewTransactionDetails({
-                type,
+                type: NewTransactionType.NftTransfer,
                 recipient,
                 nftId,
+                tag,
                 metadata,
             })
         }
