@@ -6,6 +6,7 @@
 
     export let networkAddress: string = NETWORK_ADDRESS[DestinationNetwork.Shimmer]
 
+    const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
     const networksAddresses = NETWORK_ADDRESS[$activeProfile.networkType]
 
     const networkOptions: IOption[] = Object.values(DestinationNetwork)
@@ -34,6 +35,7 @@
     bind:modal
     bind:error
     options={networkOptions}
+    {...readonlyAttribute}
     inputClasses="cursor-pointer"
     containerClasses="cursor-pointer"
 />
