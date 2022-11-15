@@ -6,6 +6,7 @@ import { newTransactionDetails, NewTransactionType, selectedAccountAssets } from
 import { Converter } from '@core/utils'
 import {
     ACCOUNTS_CONTRACT,
+    Allowance,
     EMPTY_BUFFER,
     EMPTY_BUFFER_BYTE_LENGTH,
     ENDING_SIGNAL_BYTE,
@@ -13,9 +14,8 @@ import {
     EXTERNALLY_OWNED_ACCOUNT_TYPE_ID,
     FORCE_OPEN_ACCOUNT,
     GAS_BUDGET,
-    SET_ALLOWANCE,
     TRANSFER_ALLOWANCE,
-} from '@core/layer-2/constants'
+} from '@core/layer-2'
 
 export function getLayer2MetadataForTransfer(layer2Address: string): string {
     const metadataStream = new WriteStream()
@@ -72,7 +72,7 @@ function encodeAllowance(): Uint8Array {
 
     const transactionDetails = get(newTransactionDetails)
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        allowance.writeUInt8('encodedAllowance', SET_ALLOWANCE)
+        allowance.writeUInt8('encodedAllowance', Allowance.NotSet)
 
         const { asset, surplus, rawAmount } = transactionDetails
         if (asset === get(selectedAccountAssets).baseCoin) {
