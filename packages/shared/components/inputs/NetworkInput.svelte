@@ -4,26 +4,27 @@
     import { DestinationNetwork } from '@core/network'
     import { NETWORK_ADDRESS } from '@core/layer-2'
 
-    export let network: DestinationNetwork = DestinationNetwork.Shimmer
-    export let error: string = ''
-    export let modal: Modal = undefined
+    export let networkAddress: string = NETWORK_ADDRESS[DestinationNetwork.Shimmer]
 
     const networksAddresses = NETWORK_ADDRESS[$activeProfile.networkType]
 
-    let inputElement: HTMLInputElement = undefined
-    let selected: IOption = {
-        key: network,
-        value: networksAddresses[network],
-    }
-
-    const networks: IOption[] = Object.values(DestinationNetwork)
+    const networkOptions: IOption[] = Object.values(DestinationNetwork)
         .filter((_network) => !!networksAddresses[_network])
         .map((_network) => ({
             key: _network,
             value: networksAddresses[_network],
         }))
 
-    $: network = selected?.key
+    let inputElement: HTMLInputElement = undefined
+    let modal: Modal = undefined
+
+    let error: string
+    let selected: IOption = {
+        key: networkOptions.find(({ key }) => NETWORK_ADDRESS[key] === networkAddress).key,
+        value: networkAddress,
+    }
+
+    $: networkAddress = selected?.value
 </script>
 
 <SelectorInput
@@ -31,8 +32,8 @@
     bind:selected
     bind:inputElement
     bind:modal
-    {error}
-    options={networks}
+    bind:error
+    options={networkOptions}
     inputClasses="cursor-pointer"
     containerClasses="cursor-pointer"
 />

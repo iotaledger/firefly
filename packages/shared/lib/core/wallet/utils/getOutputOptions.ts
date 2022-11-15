@@ -6,8 +6,7 @@ import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'
 import { ILayer2Parameters } from '@core/network'
-import { activeProfile } from '@core/profile'
-import { getLayer2Metadata, NETWORK_ADDRESS } from '@core/layer-2'
+import { getLayer2Metadata } from '@core/layer-2'
 
 export function getOutputOptions(
     expirationDate: Date,
@@ -26,9 +25,9 @@ export function getOutputOptions(
     const bigAmount = BigInt(rawAmount)
 
     if (layer2Parameters) {
-        const { network, recipient } = layer2Parameters
+        const { networkAddress, recipient } = layer2Parameters
         metadata = getLayer2Metadata(recipient)
-        recipientAddress = NETWORK_ADDRESS[get(activeProfile).networkType][network]
+        recipientAddress = networkAddress
     } else {
         metadata = Converter.utf8ToHex(metadata, true)
     }

@@ -5,7 +5,6 @@
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { IAsset, newTransactionDetails, NewTransactionType, setNewTransactionDetails } from '@core/wallet'
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
-    import { DestinationNetwork, ILayer2Parameters } from '@core/network'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { selectedAccount } from '@core/account'
 
@@ -23,7 +22,7 @@
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
 
-    let network = layer2Parameters?.network
+    let networkAddress = layer2Parameters?.networkAddress
     let layer2Address = layer2Parameters?.recipient
 
     let nftId: string
@@ -44,12 +43,13 @@
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
     $: ownsNfts = $selectedAccount.balances.nfts.length > 0
-    $: isLayer1Transaction = network === DestinationNetwork.Shimmer
+    $: isLayer1Transaction = networkAddress === undefined || networkAddress === '-'
 
     function setTransactionDetails(): void {
-        let layer2Parameters: ILayer2Parameters
-        if (!isLayer1Transaction) {
-            layer2Parameters = { network, recipient: layer2Address }
+        if (isLayer1Transaction) {
+            layer2Parameters = null
+        } else {
+            layer2Parameters = { networkAddress, recipient: layer2Address }
         }
 
         let type: NewTransactionType
@@ -130,7 +130,7 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId />
         {/if}
-        <NetworkInput bind:network />
+        <NetworkInput bind:networkAddress />
         {#if isLayer1Transaction}
             <RecipientInput bind:this={recipientInput} bind:recipient />
         {:else}
