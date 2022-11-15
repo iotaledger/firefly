@@ -75,16 +75,16 @@
         ...(transactionTime && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(metadata && {
-            metadata: {
-                data: metadata,
-                tooltipText: localize(localePrefix + 'metadata'),
-            },
-        }),
         ...(tag && {
             tag: {
                 data: tag,
                 tooltipText: localize(localePrefix + 'tag'),
+            },
+        }),
+        ...(metadata && {
+            metadata: {
+                data: metadata,
+                tooltipText: localize(localePrefix + 'metadata'),
             },
         }),
         ...(hasStorageDeposit && {

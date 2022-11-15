@@ -20,5 +20,5 @@
     integer={isInteger}
     {...$$restProps}
 >
-    <slot />
+    <slot name="right-full-h" slot="right-full-h" />
 </TextInput>

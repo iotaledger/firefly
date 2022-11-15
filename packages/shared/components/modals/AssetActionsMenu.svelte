@@ -79,7 +79,7 @@
     }
 </script>
 
-<Modal bind:this={modal}>
+<Modal bind:this={modal} {...$$restProps}>
     <div class="flex flex-col">
         {#if asset?.verification?.status === VerifiedStatus.SelfVerified}
             <MenuItem

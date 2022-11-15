@@ -1,40 +1,35 @@
 <script lang="typescript">
-    import { localize } from '@core/i18n'
-    import { Button, Text, FontWeight, TextType, Tabs } from 'shared/components'
-    import { closePopup, openPopup } from '@auxiliary/popup'
-    import {
-        IAsset,
-        NewTransactionDetails,
-        newTransactionDetails,
-        NewTransactionType,
-        setNewTransactionDetails,
-    } from '@core/wallet'
-    import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
-    import { DestinationNetwork } from '@core/network'
-    import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { get } from 'svelte/store'
+    import { localize } from '@core/i18n'
+    import { Button, Text, FontWeight, TextInput, TextType, Tabs } from 'shared/components'
+    import { closePopup, openPopup } from '@auxiliary/popup'
+    import { IAsset, newTransactionDetails, NewTransactionType, setNewTransactionDetails } from '@core/wallet'
+    import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
+    import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { selectedAccount } from '@core/account'
+    import { isLayer1Destination } from '@core/layer-2'
 
     enum SendForm {
         SendToken = 'general.sendToken',
         SendNft = 'general.sendNft',
     }
+
+    const transactionDetails = get(newTransactionDetails)
+    let { metadata, recipient, tag, layer2Parameters } = transactionDetails
+
     let assetAmountInput: AssetAmountInput
     let nftInput: NftInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
 
-    let network: DestinationNetwork
+    let networkAddress = layer2Parameters?.networkAddress
+    let layer2Address = layer2Parameters?.recipient
 
     let nftId: string
-
     let rawAmount: string
     let asset: IAsset
     let unit: string
-
-    const transactionDetails = get(newTransactionDetails)
-    let { metadata, recipient, tag } = transactionDetails
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetails.rawAmount
@@ -49,26 +44,34 @@
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
     $: ownsNfts = $selectedAccount.balances.nfts.length > 0
+    $: isLayer1Transaction = isLayer1Destination(networkAddress)
 
-    function getTransactionDetails(): NewTransactionDetails {
+    function setTransactionDetails(): void {
+        if (isLayer1Transaction) {
+            layer2Parameters = null
+        } else {
+            layer2Parameters = { networkAddress, recipient: layer2Address }
+        }
+
         if (activeTab === SendForm.SendToken) {
-            return {
+            setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
+                recipient,
                 asset,
                 rawAmount,
                 unit,
-                recipient,
-                metadata,
                 tag,
-            }
+                metadata,
+                layer2Parameters,
+            })
         } else {
-            return {
+            setNewTransactionDetails({
                 type: NewTransactionType.NftTransfer,
-                nftId,
                 recipient,
-                metadata,
+                nftId,
                 tag,
-            }
+                metadata,
+            })
         }
     }
 
@@ -101,7 +104,7 @@
     async function onContinue(): Promise<void> {
         const valid = await validate()
         if (valid) {
-            setNewTransactionDetails(getTransactionDetails())
+            setTransactionDetails()
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
@@ -127,21 +130,27 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId />
         {/if}
-        <NetworkInput bind:network />
-        <RecipientInput bind:this={recipientInput} bind:recipient maxHeight="max-h-48" />
+        <NetworkInput bind:networkAddress />
+        {#if isLayer1Transaction}
+            <RecipientInput bind:this={recipientInput} bind:recipient />
+        {:else}
+            <TextInput bind:value={layer2Address} />
+        {/if}
         <optional-inputs class="flex flex-row flex-wrap gap-4">
-            <OptionalInput
-                bind:this={metadataInput}
-                bind:value={metadata}
-                label={localize('general.metadata')}
-                description={localize('tooltips.optionalInput')}
-            />
             <OptionalInput
                 bind:this={tagInput}
                 bind:value={tag}
                 label={localize('general.tag')}
                 description={localize('tooltips.optionalInput')}
             />
+            {#if isLayer1Transaction}
+                <OptionalInput
+                    bind:this={metadataInput}
+                    bind:value={metadata}
+                    label={localize('general.metadata')}
+                    description={localize('tooltips.optionalInput')}
+                />
+            {/if}
         </optional-inputs>
     </send-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

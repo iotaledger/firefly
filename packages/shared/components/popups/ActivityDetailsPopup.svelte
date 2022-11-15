@@ -65,6 +65,7 @@
                     ? activity.asyncData?.expirationDate
                     : null,
             timelockDate: activity.asyncData?.timelockDate,
+            subject: activity.subject,
         }
         if (activity.type === ActivityType.Transaction) {
             return {

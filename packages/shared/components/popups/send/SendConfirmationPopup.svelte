@@ -80,6 +80,7 @@
 
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
+        // TODO: move arguments into transactionDetails object
         outputOptions = getOutputOptions(
             expirationDate,
             recipientAddress,
@@ -89,6 +90,7 @@
             transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
             giftStorageDeposit,
             transactionDetails.surplus,
+            transactionDetails.layer2Parameters,
             transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
