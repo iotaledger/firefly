@@ -3,7 +3,7 @@
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import { selectedAccountAssets } from '@core/wallet'
+    import { Output, selectedAccountAssets } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { BalanceSummarySection, Button, FontWeight, HR, Text } from 'shared/components'
@@ -16,7 +16,7 @@
         potentiallyLockedOutputsStorageDeposit = 0
         for (const [outputId, unlocked] of Object.entries($selectedAccount.balances.potentiallyLockedOutputs)) {
             if (!unlocked) {
-                const output = (await $selectedAccount.getOutput(outputId)).output
+                const output: Output = (await $selectedAccount.getOutput(outputId)).output as Output
                 const storageDeposit = getStorageDepositFromOutput(output).storageDeposit
                 potentiallyLockedOutputsStorageDeposit += storageDeposit
             }
