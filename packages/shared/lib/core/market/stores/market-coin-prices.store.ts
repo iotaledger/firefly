@@ -5,7 +5,7 @@ export const marketCoinPrices = writable<MarketCoinPrices>(undefined)
 
 export function updateMarketCoinPrices(payload: Partial<MarketCoinPrices>): void {
     return marketCoinPrices.update((state) => {
-        if (marketCoinPrices) {
+        if (payload) {
             return { ...state, ...payload }
         } else {
             return state
