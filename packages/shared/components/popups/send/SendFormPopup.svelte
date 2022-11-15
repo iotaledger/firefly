@@ -137,6 +137,12 @@
             <TextInput bind:value={layer2Address} />
         {/if}
         <optional-inputs class="flex flex-row flex-wrap gap-4">
+            <OptionalInput
+                bind:this={tagInput}
+                bind:value={tag}
+                label={localize('general.tag')}
+                description={localize('tooltips.optionalInput')}
+            />
             {#if isLayer1Transaction}
                 <OptionalInput
                     bind:this={metadataInput}
@@ -145,12 +151,6 @@
                     description={localize('tooltips.optionalInput')}
                 />
             {/if}
-            <OptionalInput
-                bind:this={tagInput}
-                bind:value={tag}
-                label={localize('general.tag')}
-                description={localize('tooltips.optionalInput')}
-            />
         </optional-inputs>
     </send-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
