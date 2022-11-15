@@ -68,11 +68,11 @@
             transactionTime: { data: formattedTransactionTime },
         }),
         ...(nftId && { nftId: { data: nftId, copyable: true } }),
-        ...(metadata && {
-            metadata: { data: metadata, isTooltipVisible: true },
-        }),
         ...(tag && {
             tag: { data: tag, isTooltipVisible: true },
+        }),
+        ...(metadata && {
+            metadata: { data: metadata, isTooltipVisible: true },
         }),
         ...(hasStorageDeposit && {
             storageDeposit: { data: formattedStorageDeposit, isTooltipVisible: true },

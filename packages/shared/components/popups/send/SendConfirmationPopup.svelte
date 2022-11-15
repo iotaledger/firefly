@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import Big from 'big.js'
     import {
         Button,
         ExpirationTimePicker,
@@ -17,7 +16,7 @@
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
@@ -33,8 +32,6 @@
         NewTransactionType,
         Output,
     } from '@core/wallet'
-    import { formatCurrency } from '@core/i18n'
-    import { currencies, Currency, exchangeRates, miotaToFiat } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
@@ -67,17 +64,6 @@
         void prepareTransactionOutput()
     }
 
-    $: formattedFiatValue =
-        transactionDetails.type === NewTransactionType.TokenTransfer
-            ? formatCurrency(
-                  miotaToFiat(
-                      Big(transactionDetails.rawAmount),
-                      $currencies[Currency.USD],
-                      $exchangeRates[$activeProfile?.settings?.currency]
-                  )
-              )
-            : ''
-
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
             return ExpirationTime.Custom
@@ -90,6 +76,7 @@
 
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
+        // TODO: move arguments into transactionDetails object
         outputOptions = getOutputOptions(
             expirationDate,
             recipientAddress,
@@ -99,6 +86,7 @@
             transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
             giftStorageDeposit,
             transactionDetails.surplus,
+            transactionDetails.layer2Parameters,
             transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
@@ -188,7 +176,6 @@
                 type={ActivityType.Transaction}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
-                {formattedFiatValue}
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails

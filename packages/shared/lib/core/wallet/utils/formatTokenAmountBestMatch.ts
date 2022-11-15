@@ -20,7 +20,7 @@ export function formatTokenAmountBestMatch(
         amountWithoutUnit = formatNumber(convertedAmount, 0, maxDecimals, undefined, true)
         amountWithUnit = amountWithoutUnit + ' ' + metricUnit + tokenMetadata.unit
     } else {
-        amountWithoutUnit = formatTokenAmountDefault(amount, tokenMetadata)
+        amountWithoutUnit = !isNaN(amount) ? formatTokenAmountDefault(amount, tokenMetadata) : '0'
         amountWithUnit = amountWithoutUnit + (tokenMetadata?.unit ? ' ' + tokenMetadata.unit : '')
     }
 

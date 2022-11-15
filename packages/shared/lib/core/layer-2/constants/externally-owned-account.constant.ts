@@ -1,0 +1,1 @@
+export const EXTERNALLY_OWNED_ACCOUNT = 0
