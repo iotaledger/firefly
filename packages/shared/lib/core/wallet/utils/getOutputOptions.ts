@@ -24,6 +24,7 @@ export function getOutputOptions(
     const nativeTokenId = asset?.id !== get(selectedAccountAssets)?.baseCoin?.id ? asset?.id : undefined
     const bigAmount = BigInt(rawAmount)
 
+    tag = Converter.utf8ToHex(tag, true)
     if (layer2Parameters) {
         const { networkAddress, recipient } = layer2Parameters
         metadata = getLayer2Metadata(recipient)
