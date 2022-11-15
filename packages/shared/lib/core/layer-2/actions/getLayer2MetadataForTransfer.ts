@@ -25,9 +25,12 @@ export function getLayer2MetadataForTransfer(layer2Address: string): string {
     metadataStream.writeUInt32('contractFunction', TRANSFER_ALLOWANCE)
     metadataStream.writeUInt64('gasBudget', GAS_BUDGET)
 
-    const parameters = getSmartContractParameters(layer2Address)
+    const encodedAddress = encodeAddress(layer2Address.toLowerCase())
+    const smartContractParameters = Object.entries({ a: encodedAddress, c: FORCE_OPEN_ACCOUNT })
+    const parameters = encodeSmartContractParameters(smartContractParameters)
     metadataStream.writeBytes('smartContractParameters', parameters.length, parameters)
-    const allowance = getEncodedAllowance()
+
+    const allowance = encodeAllowance()
     metadataStream.writeBytes('allowance', allowance.length, allowance)
 
     metadataStream.writeUInt16('end', ENDING_SIGNAL_BYTE)
@@ -35,28 +38,25 @@ export function getLayer2MetadataForTransfer(layer2Address: string): string {
     return metadata
 }
 
-function getSmartContractParameters(address: string): Uint8Array {
-    const parameters = new WriteStream()
+function encodeSmartContractParameters(parameters: [string, string][]): Uint8Array {
+    const encodedParameters = new WriteStream()
+    encodedParameters.writeUInt32('parametersLength', parameters.length)
 
-    const encodedAddress = getEncodedAddress(address.toLowerCase())
-    const smartContractParameters = Object.entries({ a: encodedAddress, c: FORCE_OPEN_ACCOUNT })
-    parameters.writeUInt32('parametersLength', smartContractParameters.length)
-
-    for (const parameter of smartContractParameters) {
+    for (const parameter of parameters) {
         const [key, value] = parameter
 
         const keyBytes = Converter.utf8ToBytes(key)
-        parameters.writeUInt16('keyLength', key.length)
-        parameters.writeBytes('keyBytes', keyBytes.length, keyBytes)
+        encodedParameters.writeUInt16('keyLength', key.length)
+        encodedParameters.writeBytes('keyBytes', keyBytes.length, keyBytes)
 
         const valueBytes = Converter.hexToBytes(value)
-        parameters.writeUInt32('valueLength', valueBytes.length)
-        parameters.writeBytes('valueBytes', valueBytes.length, valueBytes)
+        encodedParameters.writeUInt32('valueLength', valueBytes.length)
+        encodedParameters.writeBytes('valueBytes', valueBytes.length, valueBytes)
     }
-    return parameters.finalBytes()
+    return encodedParameters.finalBytes()
 }
 
-function getEncodedAddress(address: string): string {
+function encodeAddress(address: string): string {
     const encodedAddress = new WriteStream()
     encodedAddress.writeUInt8('Address Type ID', EXTERNALLY_OWNED_ACCOUNT_TYPE_ID)
     const [, ...addressBytes] = Converter.hexToBytes(address)
@@ -66,7 +66,7 @@ function getEncodedAddress(address: string): string {
     return encodedAddress.finalHex()
 }
 
-function getEncodedAllowance(): Uint8Array {
+function encodeAllowance(): Uint8Array {
     const allowance = new WriteStream()
     const tokenBuffer = new WriteStream()
 
