@@ -1,1 +1,1 @@
-export * from './getLayer2TransactionData'
+export * from './getLayer2MetadataForTransfer'

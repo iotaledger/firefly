@@ -17,7 +17,7 @@ import {
     TRANSFER_ALLOWANCE,
 } from '@core/layer-2/constants'
 
-export function getLayer2Metadata(layer2Address: string): string {
+export function getLayer2MetadataForTransfer(layer2Address: string): string {
     const metadataStream = new WriteStream()
 
     metadataStream.writeUInt32('senderContract', EXTERNALLY_OWNED_ACCOUNT)
