@@ -20,7 +20,7 @@
                 height = 6
                 // squircle or circle
                 radius = shape === 'squircle' ? 'md' : 'full'
-                padding = 2
+                padding = 1
                 break
             case NftMediaSize.Small:
                 width = 8
