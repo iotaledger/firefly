@@ -7,7 +7,6 @@
         KeyValueBox,
         Text,
         TextHint,
-        Error,
         Toggle,
         FontWeight,
         TextType,
@@ -34,7 +33,6 @@
         Output,
     } from '@core/wallet'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { BaseError } from '@core/error'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -48,7 +46,6 @@
     let storageDeposit = 0
     let preparedOutput: Output
     let outputOptions: OutputOptions
-    let error: BaseError
     let expirationTimePicker: ExpirationTimePicker
 
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
@@ -64,7 +61,6 @@
     $: isTransferring = $selectedAccount.isTransferring
 
     function refreshSendConfirmationState(): void {
-        error = null
         void prepareTransactionOutput()
     }
 
@@ -131,7 +127,6 @@
     }
 
     async function onConfirm(): Promise<void> {
-        error = null
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
 
@@ -141,7 +136,7 @@
             }
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
-            handleError(err?.error)
+            handleError(err)
         }
     }
 
@@ -161,7 +156,7 @@
         try {
             await _onMount()
         } catch (err) {
-            handleError(err?.error)
+            handleError(err)
         }
     })
 </script>
@@ -214,9 +209,6 @@
                     disabled={disableChangeExpiration}
                 />
             </KeyValueBox>
-        {/if}
-        {#if error}
-            <Error error={error?.message} />
         {/if}
     </div>
     {#if surplus}

@@ -6,11 +6,11 @@
     import { checkActiveProfileAuth } from '@core/profile'
     import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
     import { onMount } from 'svelte'
-    import { BaseError } from '@core/error'
+    import { handleError } from '@core/error/handlers/handleError'
 
     export let accountAlias = ''
     export let color = getRandomAccountColor()
-    export let error: BaseError
+    export let error: string
     export let isBusy = false
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -30,9 +30,8 @@
             await checkActiveProfileAuth(_create, { stronghold: true, ledger: true })
             isBusy = false
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
-            }
+            error = err.error
+            handleError(err)
             isBusy = false
         }
     }
@@ -58,9 +57,8 @@
         try {
             await _onMount()
         } catch (err) {
-            if (!error) {
-                error = err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
-            }
+            error = err.error
+            handleError(err)
         }
         isBusy = false
     })
@@ -73,7 +71,7 @@
         </div>
         <div class="w-full flex flex-col justify-between">
             <Input
-                error={error?.message}
+                {error}
                 bind:value={accountAlias}
                 placeholder={localize('general.accountName')}
                 autofocus

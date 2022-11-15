@@ -82,8 +82,8 @@
                 isSymbolValid(),
             ])
             return true
-        } catch (error) {
-            console.error('Error: ', error)
+        } catch (err) {
+            console.error('Error: ', err)
             return false
         }
     }
@@ -149,7 +149,7 @@
         try {
             await _onMount()
         } catch (err) {
-            handleError(error)
+            handleError(err)
         }
     })
 </script>
