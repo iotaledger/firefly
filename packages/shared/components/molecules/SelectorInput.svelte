@@ -76,12 +76,16 @@
                         on:click={() => handleClick(option)}
                         class="w-full flex flex-row flex-1 justify-between items-center px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                     >
-                        <div class="flex flex-row gap-2 justify-start items-center">
+                        <div class="flex flex-row gap-2 justify-start items-center" style="max-width: 50%;">
                             <slot {option} {index}>
                                 <!-- Contains Custom Selector -->
                             </slot>
-                            <Text type={TextType.p} fontSize="sm" fontWeight={FontWeight.medium} color="gray-800"
-                                >{option.key}</Text
+                            <Text
+                                type={TextType.p}
+                                fontSize="sm"
+                                fontWeight={FontWeight.medium}
+                                color="gray-800"
+                                classes="truncate">{option.key}</Text
                             >
                         </div>
                         <Text type={TextType.pre} fontSize="sm" color="gray-600"
