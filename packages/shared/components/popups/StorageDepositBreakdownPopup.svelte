@@ -22,7 +22,7 @@
         potentiallyLockedOutputsStorageDeposit = 0
         for (const [outputId, unlocked] of Object.entries(accountBalance?.potentiallyLockedOutputs ?? {})) {
             if (!unlocked) {
-                const output: Output = (await $selectedAccount.getOutput(outputId)).output
+                const output = (await $selectedAccount.getOutput(outputId)).output as Output
                 const storageDeposit = getStorageDepositFromOutput(output).storageDeposit
                 potentiallyLockedOutputsStorageDeposit += storageDeposit
             }
