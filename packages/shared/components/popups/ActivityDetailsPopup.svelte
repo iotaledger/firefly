@@ -98,14 +98,6 @@
                     $exchangeRates[$activeProfile?.settings?.currency]
                 ),
             }
-        } else if (activity.type === ActivityType.Nft) {
-            return {
-                ...details,
-                type: activity.type,
-                nftId: activity.nftId,
-                storageDeposit: activity.storageDeposit,
-                isInternal: activity.isInternal,
-            }
         }
     }
 
@@ -192,7 +184,10 @@
             <ActivityInformation {activity} />
         </alias-details>
     {:else if activity?.type === ActivityType.Nft}
-        <NftActivityDetails activity={{ ...details }} />
+        <nft-details>
+            <NftActivityDetails {activity} />
+            <ActivityInformation {activity} />
+        </nft-details>
     {/if}
 
     {#if !isTimelocked && isActivityIncomingAndUnclaimed}

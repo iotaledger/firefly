@@ -6,7 +6,6 @@
     import { Activity } from '@core/wallet'
 
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import ActivityInformation from './ActivityInformation.svelte'
 
     export let activity: Activity
 
@@ -47,5 +46,4 @@
             <SubjectBox subject={activity?.subject} />
         {/if}
     </main-content>
-    <ActivityInformation {activity} />
 </nft-transaction-details>
