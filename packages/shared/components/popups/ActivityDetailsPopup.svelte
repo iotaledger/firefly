@@ -173,7 +173,7 @@
             <ActivityInformation {activity} />
         </alias-details>
     {:else if activity?.type === ActivityType.Nft}
-        <nft-details>
+        <nft-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
             <NftActivityDetails {activity} />
             <ActivityInformation {activity} />
         </nft-details>
