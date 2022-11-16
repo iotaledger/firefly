@@ -1308,6 +1308,7 @@
         "expirationTime": "Expiration time",
         "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
+        "nftAddress": "NFT Address",
         "nftId": "NFT ID",
         "nftMetadata": "NFT Metadata",
         "aliasId": "Alias ID",
@@ -1342,7 +1343,10 @@
         "updating": "Updating",
         "enterAddress": "Enter address",
         "transaction": "Transaction",
-        "alias": "Alias"
+        "alias": "Alias",
+        "nft": "NFT",
+        "type": "Type",
+        "immutableIssuer": "Immutable Issuer"
     },
     "filters":{
         "title": "Filters",

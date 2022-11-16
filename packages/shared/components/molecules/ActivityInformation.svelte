@@ -1,5 +1,10 @@
 <script lang="typescript">
-    import { Tabs, GenericActivityInformation, AliasActivityInformation } from 'shared/components'
+    import {
+        Tabs,
+        GenericActivityInformation,
+        AliasActivityInformation,
+        NftActivityInformation,
+    } from 'shared/components'
     import { ActivityType, Activity } from '@core/wallet'
 
     export let activity: Activity
@@ -7,6 +12,7 @@
     enum Tab {
         Transaction = 'general.transaction',
         Alias = 'general.alias',
+        Nft = 'general.nft',
     }
 
     let tabs: Tab[] = []
@@ -16,6 +22,9 @@
             break
         case ActivityType.Alias:
             tabs = [Tab.Transaction, Tab.Alias]
+            break
+        case ActivityType.Nft:
+            tabs = [Tab.Transaction, Tab.Nft]
             break
     }
 
@@ -30,5 +39,7 @@
         <GenericActivityInformation {activity} />
     {:else if activeTab === Tab.Alias}
         <AliasActivityInformation {activity} />
+    {:else if activeTab === Tab.Nft}
+        <NftActivityInformation {activity} />
     {/if}
 </activity-details>
