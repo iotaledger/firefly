@@ -4,12 +4,7 @@
     import { selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
-    import {
-        ADDRESS_TYPE_NFT,
-        convertHexAddressToBech32,
-        getBech32AddressFromAddressTypes,
-        NftActivity,
-    } from '@core/wallet'
+    import { getBech32AddressFromAddressTypes, NftActivity } from '@core/wallet'
 
     export let activity: NftActivity
 
@@ -18,7 +13,6 @@
     let detailsList: { [key in string]: string }
     $: detailsList = {
         nftId: activity?.nftId,
-        nftAddress: convertHexAddressToBech32(ADDRESS_TYPE_NFT, activity?.nftId),
         immutableIssuer: getBech32AddressFromAddressTypes(storedNft?.issuer),
     }
 </script>
