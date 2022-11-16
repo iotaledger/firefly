@@ -10,7 +10,7 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const { standard, type, uri, name, collectionId, collectionName, royalties, issuerName, description, attributes } =
+    const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes } =
         $mintNftDetails
 
     $: isTransferring = $selectedAccount.isTransferring
@@ -23,7 +23,6 @@
                 name,
                 type,
                 uri,
-                ...(collectionId && { collectionId }),
                 ...(collectionName && { collectionName }),
                 ...(royalties && { royalties }),
                 ...(issuerName && { issuerName }),
