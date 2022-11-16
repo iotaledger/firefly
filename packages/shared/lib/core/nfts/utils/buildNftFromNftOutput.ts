@@ -9,7 +9,6 @@ export function buildNftFromNftOutput(nftOutput: INftOutput, outputId: string, i
     const issuer = getIssuerFromNftOutput(nftOutput)
     const metadata = getMetadataFromNftOutput(nftOutput)
     const parsedMetadata = parseNftMetadata(metadata)
-    const requiredStorageDeposit = Number(nftOutput.amount)
     return {
         id,
         name: parsedMetadata?.name ?? DEFAULT_NFT_NAME,
@@ -17,6 +16,5 @@ export function buildNftFromNftOutput(nftOutput: INftOutput, outputId: string, i
         isOwned,
         metadata,
         parsedMetadata: parsedMetadata,
-        requiredStorageDeposit,
     }
 }

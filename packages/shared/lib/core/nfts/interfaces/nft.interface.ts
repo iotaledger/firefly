@@ -8,5 +8,4 @@ export interface INft {
     metadata: string
     parsedMetadata?: IIrc27Metadata
     isOwned: boolean
-    requiredStorageDeposit: number
 }

@@ -2,7 +2,6 @@
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { selectedAccountNfts } from '@core/nfts'
     import { checkActiveProfileAuth } from '@core/profile'
     import { Output, selectedAccountAssets } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
@@ -26,17 +25,6 @@
                 const output: Output = (await $selectedAccount.getOutput(outputId)).output
                 const storageDeposit = getStorageDepositFromOutput(output).storageDeposit
                 potentiallyLockedOutputsStorageDeposit += storageDeposit
-            }
-        }
-    }
-
-    let nftOutputsStorageDeposit
-    $: accountBalance, void calculateNftOutputsStorageDeposit()
-    function calculateNftOutputsStorageDeposit(): void {
-        nftOutputsStorageDeposit = 0
-        for (const nft of $selectedAccountNfts) {
-            if (nft.isOwned) {
-                nftOutputsStorageDeposit += nft.requiredStorageDeposit
             }
         }
     }
@@ -70,12 +58,6 @@
         title={localize('popups.storageDepositBreakdown.pendingTransactions.title')}
         subtitle={localize('popups.storageDepositBreakdown.pendingTransactions.subtitle')}
         amount={potentiallyLockedOutputsStorageDeposit}
-        asset={baseCoin}
-    />
-    <BalanceSummarySection
-        title="Locked in NFTs"
-        subtitle={'Resevered for storing NFTs'}
-        amount={nftOutputsStorageDeposit}
         asset={baseCoin}
     />
     <HR hidden />
