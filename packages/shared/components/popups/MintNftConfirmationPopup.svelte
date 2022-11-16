@@ -7,28 +7,31 @@
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup } from '@auxiliary/popup'
+    import { CURRENT_IRC27_VERSION } from '@core/nfts'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes } =
         $mintNftDetails
 
+    $: actualMintDetails = {
+        standard,
+        version: CURRENT_IRC27_VERSION,
+        name,
+        type,
+        uri,
+        ...(collectionName && { collectionName }),
+        ...(royalties && { royalties }),
+        ...(issuerName && { issuerName }),
+        ...(description && { description }),
+        ...(attributes && { attributes }),
+    }
+
     $: isTransferring = $selectedAccount.isTransferring
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNft({
-                standard,
-                version: undefined,
-                name,
-                type,
-                uri,
-                ...(collectionName && { collectionName }),
-                ...(royalties && { royalties }),
-                ...(issuerName && { issuerName }),
-                ...(description && { description }),
-                ...(attributes && { attributes }),
-            })
+            await mintNft(actualMintDetails)
             closePopup()
         } catch (err) {
             handleError(err)
@@ -68,7 +71,7 @@
         <nft-details>
             <NftActivityDetails />
             <ActivityInformation
-                activity={{ metadata: JSON.stringify($mintNftDetails), direction: ActivityDirection.Outgoing }}
+                activity={{ metadata: JSON.stringify(actualMintDetails), direction: ActivityDirection.Outgoing }}
             />
         </nft-details>
     </div>

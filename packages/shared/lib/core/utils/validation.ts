@@ -7,6 +7,10 @@ export function isValidPin(pin: string): boolean {
     return REGEX.test(pin)
 }
 
+export function isValidUri(url: string): boolean {
+    return validUrl.isUri(url)
+}
+
 export function isValidUrl(url: string): boolean {
     return validUrl.isWebUri(url)
 }
