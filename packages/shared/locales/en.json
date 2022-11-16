@@ -979,6 +979,11 @@
             "description": "Are you sure you want to reject this transaction?",
             "node": "Please note that rejecting a transaction only hides it from your Activity feed"
         },
+        "confirmTokenBurn": {
+            "title": "Burn {assetName}",
+            "description": "Are you sure you want burn this token?",
+            "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
+        },
         "proceedAnyway": "Proceed anyway",
         "save": "Save",
         "importSeed": "Import an existing seed",
@@ -1190,6 +1195,7 @@
         "systemTheme": "System",
         "balance": "Balance",
         "balanceWithValue": "Balance: {balance}",
+        "balanceWithNetwork": "{network} Balance",
         "all": "All",
         "incoming": "Incoming",
         "outgoing": "Outgoing",

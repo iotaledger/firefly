@@ -1,5 +1,4 @@
 export * from './getExpirationDateFromOutput'
-export * from './getFiatAmount'
 export * from './getFormattedAmountFromActivity'
 export * from './getNativeTokenFromOutput'
 export * from './getSenderFromOutput'

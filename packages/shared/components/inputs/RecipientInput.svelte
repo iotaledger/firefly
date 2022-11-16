@@ -1,9 +1,10 @@
 <script lang="typescript">
     import { networkHrp } from '@core/network'
     import { validateBech32Address } from '@core/utils'
-    import { Modal, SelectorInput, IOption } from 'shared/components'
+    import { Modal, SelectorInput, IOption, ColoredCircle } from 'shared/components'
     import { visibleActiveAccounts } from '@core/profile'
     import { getSubjectFromAddress, Subject } from '@core/wallet'
+    import { getAccountColorById, selectedAccountIndex } from '@core/account'
 
     export let recipient: Subject
     export let disabled = false
@@ -18,10 +19,13 @@
         recipient?.type === 'account'
             ? { key: recipient.account.name, value: recipient.account.depositAddress }
             : { value: recipient?.address }
-    const accountOptions: IOption[] = $visibleActiveAccounts?.map((account) => ({
-        key: account.name,
-        value: account.depositAddress,
-    }))
+    const accountOptions: IOption[] = $visibleActiveAccounts
+        ?.filter((account) => account.index !== $selectedAccountIndex)
+        ?.map((account) => ({
+            id: account.index,
+            key: account.name,
+            value: account.depositAddress,
+        }))
 
     $: recipient = getSubjectFromAddress(selected?.value)
 
@@ -49,4 +53,7 @@
     {disabled}
     options={accountOptions}
     {...$$restProps}
-/>
+    let:option
+>
+    <ColoredCircle color={getAccountColorById(option?.id)} />
+</SelectorInput>

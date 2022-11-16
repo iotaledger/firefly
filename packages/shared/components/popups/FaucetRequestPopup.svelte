@@ -1,13 +1,13 @@
 <script lang="typescript">
     import { requestTokensFromFaucet } from '@contexts/developer'
-    import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
     import { Button, Error, Text, FontWeight, TextType } from 'shared/components'
+    import { handleError } from '@core/error/handlers/handleError'
 
     let isBusy = false
-    let error: BaseError
+    let error: string
 
     async function onConfirm(): Promise<void> {
         error = null
@@ -15,10 +15,9 @@
             isBusy = true
             await requestTokensFromFaucet()
             closePopup()
-        } catch (reason) {
-            error = reason
-                ? new BaseError({ message: reason?.error ?? reason?.message ?? reason, logToConsole: true })
-                : reason
+        } catch (err) {
+            error = err.error
+            handleError(err)
         } finally {
             isBusy = false
         }
@@ -40,7 +39,7 @@
             })}
         </Text>
         {#if error}
-            <Error error={error?.message} />
+            <Error {error} />
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

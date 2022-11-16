@@ -1,13 +1,12 @@
-import { get } from 'svelte/store'
-
 import { appSettings } from '@core/app'
 import { activeProfile } from '@core/profile'
+import { get } from 'svelte/store'
 
 export function getGroupSeparator(currency: string | undefined = undefined): string {
     const appLanguage = get(appSettings).language
 
     if (!currency) {
-        currency = get(activeProfile)?.settings?.currency
+        currency = get(activeProfile)?.settings?.marketCurrency
     }
 
     return (

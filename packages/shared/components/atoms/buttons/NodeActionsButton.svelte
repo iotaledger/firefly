@@ -8,7 +8,7 @@
     let modal: Modal
 </script>
 
-<div class="">
+<div>
     <MeatballMenuButton onClick={modal?.toggle} />
     <NodeActionsMenu bind:modal {node} {clientOptions} />
 </div>

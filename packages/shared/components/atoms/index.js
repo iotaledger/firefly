@@ -7,6 +7,7 @@ export * from './tiles'
 
 export { default as MenuItem } from './MenuItem.svelte'
 export { default as BalanceSummarySection } from './BalanceSummarySection.svelte'
+export { default as ColoredCircle } from './ColoredCircle.svelte'
 export { default as Icon } from './Icon.svelte'
 export { default as LedgerAnimation } from './LedgerAnimation.svelte'
 export { default as SubjectBox } from './SubjectBox.svelte'
