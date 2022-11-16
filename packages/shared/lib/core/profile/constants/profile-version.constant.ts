@@ -1,1 +1,1 @@
-export const PROFILE_VERSION = 4
+export const PROFILE_VERSION = 5

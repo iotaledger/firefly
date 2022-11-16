@@ -6,8 +6,6 @@ import { activeProfile } from '@core/profile'
 export function formatCurrency(
     value: number,
     currency: string | undefined = undefined,
-    minDecimals: number | undefined = undefined,
-    maxDecimals: number | undefined = undefined,
     grouped: boolean = false
 ): string {
     if (Number.isNaN(value)) {
@@ -17,30 +15,23 @@ export function formatCurrency(
     const appLanguage = get(appSettings).language
 
     if (!currency) {
-        currency = get(activeProfile)?.settings?.currency
+        currency = get(activeProfile)?.settings?.marketCurrency
     }
 
-    const parts = Intl.NumberFormat(appLanguage, {
+    if (value < 1) {
+        value = Number(value.toPrecision(2))
+    } else {
+        value = Number(value.toFixed(2))
+    }
+
+    const formatter = Intl.NumberFormat(appLanguage, {
         style: 'currency',
         currency: currency ?? 'USD',
         currencyDisplay: 'symbol',
-        minimumFractionDigits: minDecimals ?? 2,
-        maximumFractionDigits: maxDecimals,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 20,
         useGrouping: grouped,
-    }).formatToParts(value)
+    })
 
-    // Default symbol usage does not always include a literal beside
-    // the
-    const curIndex = parts.findIndex((p) => p.type === 'currency')
-    if (curIndex >= 0) {
-        if (curIndex === 0) {
-            if (parts[curIndex + 1].type !== 'literal') {
-                parts.splice(curIndex + 1, 0, { type: 'literal', value: ' ' })
-            }
-        } else if (parts[curIndex - 1].type !== 'literal') {
-            parts.splice(curIndex, 0, { type: 'literal', value: ' ' })
-        }
-    }
-
-    return parts.map((p) => p.value).join('')
+    return formatter.format(value)
 }
