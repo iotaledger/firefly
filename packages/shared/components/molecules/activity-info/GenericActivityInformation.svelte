@@ -82,7 +82,7 @@
         keyText={localize(`general.${key}`)}
         valueText={value.data}
         tooltipText={value.isTooltipVisible
-            ? localize(`tooltips.transactionDetails.${activity.direction}.${key}`)
+            ? localize(`tooltips.transactionDetails.${activity?.direction}.${key}`)
             : undefined}
     />
 {/each}
