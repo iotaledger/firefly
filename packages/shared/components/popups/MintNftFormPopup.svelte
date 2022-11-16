@@ -1,14 +1,14 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
-    import { BaseError } from '@core/error'
-    import { localize } from '@core/i18n'
-    import { setMintNftDetails, mintNftDetails, TokenStandard } from '@core/wallet'
-    import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
-    import { IIrc27Metadata, MimeType, SupportedMimeType } from '@core/nfts'
-    import { isValidUrl, validateBech32Address } from '@core/utils'
+    import { BaseError } from '@core/error'
+    import { handleError } from '@core/error/handlers/handleError'
+    import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
+    import { IIrc27Metadata, MimeType, SupportedMimeType } from '@core/nfts'
+    import { isValidUri, validateBech32Address } from '@core/utils'
+    import { mintNftDetails, setMintNftDetails, TokenStandard } from '@core/wallet'
+    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
+    import { onMount } from 'svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -67,7 +67,7 @@
 
         if (inputs.uri.length === 0) {
             uriError = 'Empty URI, please provide a valid URI'
-        } else if (!isValidUrl(inputs.uri)) {
+        } else if (!isValidUri(inputs.uri)) {
             uriError = 'Invalid URI, please provide a valid URI'
         }
 
