@@ -5,9 +5,11 @@
     import { visibleActiveAccounts } from '@core/profile'
     import { getSubjectFromAddress, Subject } from '@core/wallet'
     import { getAccountColorById, selectedAccountIndex } from '@core/account'
+    import { validateEthereumAddress } from '@core/layer-2'
 
     export let recipient: Subject
     export let disabled = false
+    export let isLayer2 = false
 
     const addressPrefix = $networkHrp
 
@@ -19,13 +21,16 @@
         recipient?.type === 'account'
             ? { key: recipient.account.name, value: recipient.account.depositAddress }
             : { value: recipient?.address }
-    const accountOptions: IOption[] = $visibleActiveAccounts
-        ?.filter((account) => account.index !== $selectedAccountIndex)
-        ?.map((account) => ({
-            id: account.index,
-            key: account.name,
-            value: account.depositAddress,
-        }))
+
+    const accountOptions: IOption[] = isLayer2
+        ? []
+        : $visibleActiveAccounts
+              ?.filter((account) => account.index !== $selectedAccountIndex)
+              ?.map((account) => ({
+                  id: account.index,
+                  key: account.name,
+                  value: account.depositAddress,
+              }))
 
     $: recipient = getSubjectFromAddress(selected?.value)
 
@@ -35,7 +40,11 @@
                 error = 'Recipient is required'
                 return Promise.reject(error)
             }
-            error = validateBech32Address(addressPrefix, recipient?.address)
+            if (isLayer2) {
+                error = validateEthereumAddress(recipient?.address)
+            } else {
+                error = validateBech32Address(addressPrefix, recipient?.address)
+            }
             if (error) {
                 return Promise.reject(error)
             }
