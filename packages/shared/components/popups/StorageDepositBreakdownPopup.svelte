@@ -10,11 +10,10 @@
         openPopup({
             type: 'confirmation',
             props: {
-                title: 'Consolidate Outputs',
-                description: 'Consolidate outputs description',
-                hint: 'Consolidate outputs hint',
-                warning: true,
-                confirmText: localize('actions.consolidate'),
+                title: localize('popups.minimizeStorageDeposit.title'),
+                description: localize('popups.minimizeStorageDeposit.description'),
+                confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
+                info: true,
                 onConfirm: () => {
                     checkActiveProfileAuth(async () => {
                         await consolidateOutputs()
@@ -43,5 +42,7 @@
         amount={$selectedAccount.balances.requiredStorageDeposit}
         totalRow
     />
-    <Button onClick={handleConsolidation}>Consolidate Balance</Button>
+    <Button onClick={handleConsolidation}
+        >{localize('popups.storageDepositBreakdown.minimizeStorageDepositButton')}</Button
+    >
 </div>
