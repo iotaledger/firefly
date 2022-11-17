@@ -7,7 +7,12 @@
         dashboardRouter,
         sendRouter,
     } from '../../lib/routers'
-    import { AccountSwitcherDrawer, ProfileActionsDrawer, ReceiveDrawer, SendDrawer } from './drawers'
+    import { selectedActivity } from '../../lib/wallet'
+    import { AccountSwitcherDrawer, ActivityDrawer, ProfileActionsDrawer, ReceiveDrawer, SendDrawer } from './drawers'
+
+    $: if ($selectedActivity) {
+        $dashboardRouter.goTo(DashboardRoute.Activity)
+    }
 
     function onReceiveDrawerClose(): void {
         $dashboardRouter.previous()
@@ -23,6 +28,10 @@
     function onProfileActionsDrawerClose(): void {
         $dashboardRouter.previous()
     }
+    function onActivityDrawerClose(): void {
+        $selectedActivity = null
+        $dashboardRouter.previous()
+    }
 </script>
 
 {#if $dashboardRoute === DashboardRoute.Receive && features?.dashboard?.receive?.enabled}
@@ -33,4 +42,6 @@
     <AccountSwitcherDrawer onClose={onAccountSwitcherDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.ProfileActions && features?.dashboard?.profileActions?.enabled}
     <ProfileActionsDrawer onClose={onProfileActionsDrawerClose} />
+{:else if $dashboardRoute === DashboardRoute.Activity && features?.dashboard?.activity?.details?.enabled}
+    <ActivityDrawer onClose={onActivityDrawerClose} />
 {/if}
