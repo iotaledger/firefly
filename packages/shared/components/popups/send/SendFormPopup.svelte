@@ -3,7 +3,13 @@
     import { localize } from '@core/i18n'
     import { Button, Text, FontWeight, TextInput, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { IAsset, newTransactionDetails, NewTransactionType, setNewTransactionDetails } from '@core/wallet'
+    import {
+        getAssetById,
+        IAsset,
+        newTransactionDetails,
+        NewTransactionType,
+        setNewTransactionDetails,
+    } from '@core/wallet'
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { selectedAccount } from '@core/account'
@@ -33,7 +39,7 @@
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetails.rawAmount
-        asset = transactionDetails.asset
+        asset = getAssetById(transactionDetails.assetId)
         unit = transactionDetails.unit
     } else {
         nftId = transactionDetails.nftId
@@ -57,7 +63,7 @@
             setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
                 recipient,
-                asset,
+                assetId: asset.id,
                 rawAmount,
                 unit,
                 tag,

@@ -57,9 +57,19 @@
     $: expirationTimePicker?.setNull(giftStorageDeposit)
     $: hideGiftToggle =
         transactionDetails.type === NewTransactionType.TokenTransfer &&
-        transactionDetails.asset?.id === $selectedAccountAssets?.baseCoin?.id
+        transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id
     $: expirationDate, giftStorageDeposit, refreshSendConfirmationState()
     $: isTransferring = $selectedAccount.isTransferring
+
+    $: activity = {
+        ...transactionDetails,
+        storageDeposit,
+        subject: recipient,
+        isInternal,
+        type: ActivityType.Basic,
+        direction: ActivityDirection.Outgoing,
+        inclusionState: InclusionState.Pending,
+    }
 
     function refreshSendConfirmationState(): void {
         void prepareTransactionOutput()
@@ -168,42 +178,11 @@
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <BasicActivityDetails
-                {...transactionDetails}
-                {storageDeposit}
-                subject={recipient}
-                {isInternal}
-                {surplus}
-                type={ActivityType.Transaction}
-                direction={ActivityDirection.Outgoing}
-                inclusionState={InclusionState.Pending}
-            />
+            <BasicActivityDetails {activity} />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
-            <nft-details>
-                <NftActivityDetails
-                    activity={{
-                        ...transactionDetails,
-                        storageDeposit,
-                        subject: recipient,
-                        isInternal,
-                        type: ActivityType.Transaction,
-                        direction: ActivityDirection.Outgoing,
-                        inclusionState: InclusionState.Pending,
-                    }}
-                />
-                <ActivityInformation
-                    activity={{
-                        ...transactionDetails,
-                        storageDeposit,
-                        subject: recipient,
-                        isInternal,
-                        type: ActivityType.Transaction,
-                        direction: ActivityDirection.Outgoing,
-                        inclusionState: InclusionState.Pending,
-                    }}
-                />
-            </nft-details>
+            <NftActivityDetails {activity} />
         {/if}
+        <ActivityInformation {activity} />
         {#if !hideGiftToggle}
             <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                 <Toggle
