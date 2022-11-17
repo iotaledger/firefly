@@ -6,6 +6,7 @@
         NftActivityInformation,
     } from 'shared/components'
     import { ActivityType, Activity } from '@core/wallet'
+    import NftMetadataInformation from './activity-info/NftMetadataInformation.svelte'
 
     export let activity: Partial<Activity> = {}
 
@@ -13,6 +14,7 @@
         Transaction = 'general.transaction',
         Alias = 'general.alias',
         Nft = 'general.nft',
+        Metadata = 'general.metadata',
     }
 
     let tabs: Tab[] = []
@@ -24,7 +26,7 @@
             tabs = [Tab.Transaction, Tab.Alias]
             break
         case ActivityType.Nft:
-            tabs = [Tab.Transaction, Tab.Nft]
+            tabs = [Tab.Transaction, Tab.Nft, Tab.Metadata]
             break
     }
 
@@ -41,5 +43,7 @@
         <AliasActivityInformation {activity} />
     {:else if activeTab === Tab.Nft}
         <NftActivityInformation {activity} />
+    {:else if activeTab === Tab.Metadata}
+        <NftMetadataInformation {activity} />
     {/if}
 </activity-details>

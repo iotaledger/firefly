@@ -3,9 +3,9 @@
 
     import { localize } from '@core/i18n'
     import { IIrc27Metadata, parseNftMetadata } from '@core/nfts'
-    import { NftActivity } from '@core/wallet'
+    import { Activity } from '@core/wallet'
 
-    export let activity: NftActivity
+    export let activity: Partial<Activity> = {}
 
     type NftMetadataDetailsList = {
         [key in keyof IIrc27Metadata]: {
