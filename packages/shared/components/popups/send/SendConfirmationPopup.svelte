@@ -66,6 +66,7 @@
         storageDeposit,
         subject: recipient,
         isInternal,
+        giftedStorageDeposit: 0,
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
