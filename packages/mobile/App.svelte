@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { localeDirection, setupI18n } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
-    import { RouterManagerExtensionName } from '@core/router'
+    import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
     import {
         appSettings,
         appStage,
@@ -21,6 +21,7 @@
         AppRoute,
         getAppRouter,
         getRouterForAppContext,
+        goToAppContext,
         initialiseRouters,
         resetRouterForAppContext,
         resetRouters,
@@ -65,8 +66,6 @@
                 [RouterManagerExtensionName.GetAppRouter, getAppRouter],
                 [RouterManagerExtensionName.GetRouterForAppContext, getRouterForAppContext],
                 [RouterManagerExtensionName.GoToAppContext, goToAppContext],
-                // TODO: https://github.com/iotaledger/firefly/issues/5201
-                [RouterManagerExtensionName.OpenSettings, openSettings],
                 [RouterManagerExtensionName.ResetRouterForAppContext, resetRouterForAppContext],
                 [RouterManagerExtensionName.ResetRouters, resetRouters],
             ],

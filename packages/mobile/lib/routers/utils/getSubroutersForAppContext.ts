@@ -18,7 +18,7 @@ import {
 export function getSubroutersForAppContext(context: AppContext): IRouter[] {
     switch (context) {
         case AppContext.Dashboard:
-            return [accountSwitcherRouter, sendRouter]
+            return [get(accountSwitcherRouter), get(sendRouter)]
         case AppContext.Login:
             return []
         case AppContext.Onboarding:
