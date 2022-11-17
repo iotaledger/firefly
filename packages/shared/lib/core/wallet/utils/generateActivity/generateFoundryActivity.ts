@@ -25,6 +25,7 @@ export function generateFoundryActivity(
 
     const output = wrappedOutput.output as IFoundryOutput
     const outputId = wrappedOutput.outputId
+    const { mintedTokens, meltedTokens, maximumSupply } = output.tokenScheme
 
     const isHidden = false
     const isAssetHidden = false
@@ -50,6 +51,9 @@ export function generateFoundryActivity(
         outputId,
         transactionId,
         assetId,
+        mintedTokens,
+        meltedTokens,
+        maximumSupply,
         storageDeposit,
         giftedStorageDeposit,
         rawAmount,

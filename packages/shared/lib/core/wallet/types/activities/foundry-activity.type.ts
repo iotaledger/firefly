@@ -5,4 +5,7 @@ export type FoundryActivity = BaseActivity & {
     type: ActivityType.Foundry
     rawAmount: number
     assetId: string
+    mintedTokens: string
+    meltedTokens: string
+    maximumSupply: string
 }

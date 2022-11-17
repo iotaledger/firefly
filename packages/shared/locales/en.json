@@ -913,11 +913,12 @@
                 "nft": "NFT"
             }
         },
-        "mintNativeToken": {
+        "nativeToken": {
             "formTitle": "Mint native tokens",
             "confirmationTitle": "Mint native tokens",
             "property": {
                 "totalSupply": "Total Supply",
+                "meltedSupply": "Melted Supply",
                 "circulatingSupply": "Circulating Supply",
                 "standard": "Standard",
                 "tokenName": "Name",
@@ -1344,6 +1345,7 @@
         "enterAddress": "Enter address",
         "transaction": "Transaction",
         "alias": "Alias",
+        "foundry": "Foundry",
         "nft": "NFT",
         "type": "Type",
         "immutableIssuer": "Immutable Issuer"
