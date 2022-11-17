@@ -84,6 +84,7 @@
         tooltipText={value.isTooltipVisible
             ? localize(`tooltips.transactionDetails.${activity?.direction}.${key}`)
             : undefined}
+        classes={key === 'metadata' ? 'whitespace-pre-wrap' : ''}
     />
 {/each}
 {#if activity.asyncData?.claimingTransactionId}
