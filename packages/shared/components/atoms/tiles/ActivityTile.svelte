@@ -25,7 +25,7 @@
     let asset: IPersistedAsset
     $: $selectedAccountAssets,
         (asset =
-            activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry
+            activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
                 ? getAssetFromPersistedAssets(activity.assetId)
                 : undefined)
 
@@ -54,7 +54,7 @@
 >
     <activity-tile class="w-full flex flex-col space-y-4">
         <tile-content class="flex flex-row items-center text-left space-x-4">
-            {#if activity.type === ActivityType.Transaction}
+            {#if activity.type === ActivityType.Basic}
                 <TransactionActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Alias}
                 <AliasActivityTileContent {activity} />

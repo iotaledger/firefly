@@ -19,7 +19,7 @@
 
     let tabs: Tab[] = []
     switch (activity.type) {
-        case ActivityType.Transaction:
+        case ActivityType.Basic:
             tabs = [Tab.Transaction]
             break
         case ActivityType.Alias:
