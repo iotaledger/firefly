@@ -7,7 +7,7 @@
     } from 'shared/components'
     import { ActivityType, Activity } from '@core/wallet'
 
-    export let activity: Activity
+    export let activity: Partial<Activity> = {}
 
     enum Tab {
         Transaction = 'general.transaction',

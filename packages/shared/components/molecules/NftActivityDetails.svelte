@@ -7,7 +7,7 @@
 
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
-    export let activity: Activity
+    export let activity: Partial<Activity> = {}
 
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
 </script>
