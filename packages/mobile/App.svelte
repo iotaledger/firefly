@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { localeDirection, setupI18n } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
-    import { AppRoute, initialiseRouters } from './lib/routers'
+    import { RouterManagerExtensionName } from '@core/router'
     import {
         appSettings,
         appStage,
@@ -17,6 +17,14 @@
     import { ToastContainer } from '@ui'
     import { Route } from './components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
+    import {
+        AppRoute,
+        getAppRouter,
+        getRouterForAppContext,
+        initialiseRouters,
+        resetRouterForAppContext,
+        resetRouters,
+    } from './lib/routers'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
@@ -51,6 +59,18 @@
         //     await setAppVersionDetails()
         //     pollCheckForAppUpdate()
         // }
+
+        initialiseRouterManager({
+            extensions: [
+                [RouterManagerExtensionName.GetAppRouter, getAppRouter],
+                [RouterManagerExtensionName.GetRouterForAppContext, getRouterForAppContext],
+                [RouterManagerExtensionName.GoToAppContext, goToAppContext],
+                // TODO: https://github.com/iotaledger/firefly/issues/5201
+                [RouterManagerExtensionName.OpenSettings, openSettings],
+                [RouterManagerExtensionName.ResetRouterForAppContext, resetRouterForAppContext],
+                [RouterManagerExtensionName.ResetRouters, resetRouters],
+            ],
+        })
 
         await cleanupEmptyProfiles()
         // loadPersistedProfileIntoActiveProfile($activeProfileId)
