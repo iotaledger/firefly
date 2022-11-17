@@ -69,7 +69,7 @@
         <nft-details>
             <NftActivityDetails />
             <ActivityInformation
-                activity={{ metadata: JSON.stringify($mintNftDetails), direction: ActivityDirection.Outgoing }}
+                activity={{ metadata: JSON.stringify($mintNftDetails, null, 2), direction: ActivityDirection.Outgoing }}
             />
         </nft-details>
     </div>
