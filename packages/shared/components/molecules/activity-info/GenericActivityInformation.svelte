@@ -2,14 +2,14 @@
     import { KeyValueBox } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountPrecise, BaseActivity } from '@core/wallet'
+    import { Activity, formatTokenAmountPrecise, NftActivity } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
 
-    export let activity: BaseActivity
+    export let activity: Activity
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
@@ -34,9 +34,10 @@
         ...(activity.time && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(activity.metadata && {
-            metadata: { data: activity.metadata, isTooltipVisible: true },
-        }),
+        ...(activity.metadata &&
+            !(activity as NftActivity).nftId && {
+                metadata: { data: activity.metadata, isTooltipVisible: true },
+            }),
         ...(activity.tag && {
             tag: { data: activity.tag, isTooltipVisible: true },
         }),
