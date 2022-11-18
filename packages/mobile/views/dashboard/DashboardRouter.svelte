@@ -2,6 +2,7 @@
     import features from '@features/features'
     import {
         accountSwitcherRouter,
+        activityRouter,
         DashboardRoute,
         dashboardRoute,
         dashboardRouter,
@@ -10,9 +11,7 @@
     import { selectedActivity } from '../../lib/wallet'
     import { AccountSwitcherDrawer, ActivityDrawer, ProfileActionsDrawer, ReceiveDrawer, SendDrawer } from './drawers'
 
-    $: if ($selectedActivity) {
-        $dashboardRouter.goTo(DashboardRoute.Activity)
-    }
+    $: $selectedActivity && $dashboardRouter.goTo(DashboardRoute.Activity)
 
     function onReceiveDrawerClose(): void {
         $dashboardRouter.previous()
@@ -30,6 +29,7 @@
     }
     function onActivityDrawerClose(): void {
         $selectedActivity = null
+        $activityRouter.reset()
         $dashboardRouter.previous()
     }
 </script>
