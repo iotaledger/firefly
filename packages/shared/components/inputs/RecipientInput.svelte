@@ -22,8 +22,7 @@
             ? { key: recipient.account.name, value: recipient.account.depositAddress }
             : { value: recipient?.address }
 
-    const accountOptions: IOption[] = isLayer2 ? [] : getLayer1AccountOptions()
-
+    $: accountOptions = isLayer2 ? <IOption[]>[] : getLayer1AccountOptions()
     $: recipient = getSubjectFromAddress(selected?.value)
 
     export function validate(): Promise<void> {

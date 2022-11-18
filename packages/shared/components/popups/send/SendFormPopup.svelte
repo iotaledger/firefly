@@ -44,11 +44,12 @@
 
     $: ownsNfts = $selectedAccount.balances.nfts.length > 0
     $: isLayer2 = !isLayer1Destination(networkAddress)
+    $: isSendTokenTab = activeTab === SendForm.SendToken
 
     function setTransactionDetails(): void {
         layer2Parameters = isLayer2 ? { networkAddress } : null
 
-        if (activeTab === SendForm.SendToken) {
+        if (isSendTokenTab) {
             setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
                 recipient,
@@ -73,7 +74,7 @@
     async function validate(): Promise<boolean> {
         try {
             await Promise.all([
-                activeTab === SendForm.SendToken ? assetAmountInput?.validate() : nftInput?.validate(),
+                isSendTokenTab ? assetAmountInput?.validate() : nftInput?.validate(),
                 recipientInput?.validate(),
                 metadataInput?.validate(
                     validateOptionalInput(metadata, MAX_METADATA_BYTES, localize('error.send.metadataTooLong'))
@@ -125,7 +126,7 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId />
         {/if}
-        <NetworkInput bind:networkAddress />
+        <NetworkInput bind:networkAddress showLayer2={isSendTokenTab} />
         <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
