@@ -1,4 +1,3 @@
-import { handleError } from '@core/error/handlers/handleError'
 import { networkHrp } from '@core/network'
 import { IIrc27Metadata, MimeType, SupportedMimeType } from '@core/nfts'
 import { isValidUri, validateBech32Address } from '@core/utils'
@@ -29,7 +28,6 @@ export function parseNftMetadata(metadata: string): IIrc27Metadata | string {
         }
         return parsedMetadata
     } catch (error) {
-        handleError(error)
         return undefined
     }
 }
