@@ -7,12 +7,12 @@ import { TokenStandard } from '@core/wallet'
 import { get } from 'svelte/store'
 
 export function parseNftMetadata(metadata: string): IIrc27Metadata | string {
-    const convertedData = Converter.hexToUtf8(metadata)
-    if (!convertedData.includes(`"standard":"${TokenStandard.IRC27}"`)) {
-        return JSON.stringify(JSON.parse(convertedData), null, 2)
-    }
-
     try {
+        const convertedData = Converter.hexToUtf8(metadata)
+        if (!convertedData.includes(`"standard":"${TokenStandard.IRC27}"`)) {
+            return JSON.stringify(JSON.parse(convertedData), null, 2)
+        }
+
         const parsedData = metadata ? JSON.parse(Converter.hexToUtf8(metadata)) : {}
         validate(parsedData)
         const parsedMetadata: IIrc27Metadata = {
