@@ -87,14 +87,6 @@
                 unit: asset?.metadata?.unit,
                 giftedStorageDeposit: activity.giftedStorageDeposit,
             }
-        } else if (activity.type === ActivityType.Nft) {
-            return {
-                ...details,
-                type: activity.type,
-                nftId: activity.nftId,
-                storageDeposit: activity.storageDeposit,
-                isInternal: activity.isInternal,
-            }
         }
     }
 
@@ -181,7 +173,10 @@
             <ActivityInformation {activity} />
         </alias-details>
     {:else if activity?.type === ActivityType.Nft}
-        <NftActivityDetails {...details} />
+        <nft-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+            <NftActivityDetails {activity} />
+            <ActivityInformation {activity} />
+        </nft-details>
     {/if}
 
     {#if !isTimelocked && isActivityIncomingAndUnclaimed}

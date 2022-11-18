@@ -12,6 +12,7 @@
         TextType,
         NftActivityDetails,
         BasicActivityDetails,
+        ActivityInformation,
     } from 'shared/components'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
@@ -178,15 +179,30 @@
                 inclusionState={InclusionState.Pending}
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
-            <NftActivityDetails
-                {...transactionDetails}
-                direction={ActivityDirection.Outgoing}
-                inclusionState={InclusionState.Pending}
-                {storageDeposit}
-                subject={recipient}
-                {isInternal}
-                type={ActivityType.Nft}
-            />
+            <nft-details>
+                <NftActivityDetails
+                    activity={{
+                        ...transactionDetails,
+                        storageDeposit,
+                        subject: recipient,
+                        isInternal,
+                        type: ActivityType.Transaction,
+                        direction: ActivityDirection.Outgoing,
+                        inclusionState: InclusionState.Pending,
+                    }}
+                />
+                <ActivityInformation
+                    activity={{
+                        ...transactionDetails,
+                        storageDeposit,
+                        subject: recipient,
+                        isInternal,
+                        type: ActivityType.Transaction,
+                        direction: ActivityDirection.Outgoing,
+                        inclusionState: InclusionState.Pending,
+                    }}
+                />
+            </nft-details>
         {/if}
         {#if !hideGiftToggle}
             <KeyValueBox keyText={localize('general.giftStorageDeposit')}>

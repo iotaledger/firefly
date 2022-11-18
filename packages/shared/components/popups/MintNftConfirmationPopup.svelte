@@ -1,35 +1,37 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Text, FontWeight, NftActivityDetails } from 'shared/components'
+    import { Button, Text, FontWeight, NftActivityDetails, ActivityInformation } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
-    import { mintNft, mintNftDetails } from '@core/wallet'
+    import { ActivityDirection, mintNft, mintNftDetails } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup } from '@auxiliary/popup'
+    import { CURRENT_IRC27_VERSION } from '@core/nfts'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
-    const { standard, type, uri, name, collectionId, collectionName, royalties, issuerName, description, attributes } =
+    const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes } =
         $mintNftDetails
+
+    $: actualMintDetails = {
+        standard,
+        version: CURRENT_IRC27_VERSION,
+        name,
+        type,
+        uri,
+        ...(collectionName && { collectionName }),
+        ...(royalties && { royalties }),
+        ...(issuerName && { issuerName }),
+        ...(description && { description }),
+        ...(attributes && { attributes }),
+    }
 
     $: isTransferring = $selectedAccount.isTransferring
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNft({
-                standard,
-                version: undefined,
-                name,
-                type,
-                uri,
-                ...(collectionId && { collectionId }),
-                ...(collectionName && { collectionName }),
-                ...(royalties && { royalties }),
-                ...(issuerName && { issuerName }),
-                ...(description && { description }),
-                ...(attributes && { attributes }),
-            })
+            await mintNft(actualMintDetails)
             closePopup()
         } catch (err) {
             handleError(err)
@@ -66,7 +68,12 @@
         {localize('popups.mintNftForm.title')}
     </Text>
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
-        <NftActivityDetails nftMetadata={$mintNftDetails} />
+        <nft-details>
+            <NftActivityDetails />
+            <ActivityInformation
+                activity={{ metadata: JSON.stringify(actualMintDetails), direction: ActivityDirection.Outgoing }}
+            />
+        </nft-details>
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" disabled={isTransferring} onClick={handleBack}>
