@@ -922,7 +922,7 @@
                 "mintedTokens": "Minted tokens",
                 "meltedSupply": "Melted Supply",
                 "circulatingSupply": "Circulating Supply",
-                "aliasAddress": "Alias ",
+                "aliasAddress": "Alias controller address",
                 "standard": "Standard",
                 "tokenName": "Name",
                 "unit": "Unit",
@@ -935,7 +935,7 @@
                 "logoUrl": "Logo URL",
                 "logo": "Logo",
                 "alias": "Alias",
-                "assedId": "Asset Id"
+                "assetId": "Asset Id"
             }
         },
         "noAlias": {
