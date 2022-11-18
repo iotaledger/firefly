@@ -29,8 +29,8 @@
     }
     function onActivityDrawerClose(): void {
         $selectedActivity = null
-        $activityRouter.reset()
         $dashboardRouter.previous()
+        $activityRouter.reset()
     }
 </script>
 
