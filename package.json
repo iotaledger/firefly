@@ -37,7 +37,6 @@
     "resolutions": {
         "ansi-regex": "5.0.1",
         "glob-parent": " >=5.1.2",
-        "keccak": "3.0.2",
         "lodash": ">=4.17.21",
         "nanoid": "^3.1.31",
         "node-abi": "^3.8.0",

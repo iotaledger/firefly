@@ -2,11 +2,11 @@ import { localize } from '@core/i18n'
 import { Keccak } from 'sha3'
 
 export function validateEthereumAddress(address: string): string {
+    // Check if it has the basic requirements of an address
     if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
-        // Check if it has the basic requirements of an address
         return localize('error.send.invalidAddress')
+        // Check if it's all small caps or all large caps
     } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
-        // If it's all small caps or all all caps, return null
         return null
     } else {
         // Otherwise check EIP-55 checksum
