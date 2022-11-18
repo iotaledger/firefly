@@ -30,6 +30,9 @@ const features = {
             search: {
                 enabled: false,
             },
+            details: {
+                enabled: false,
+            },
         },
         tokens: {
             enabled: true,
