@@ -2,8 +2,9 @@
     import { KeyValueBox } from 'shared/components'
 
     import { localize } from '@core/i18n'
-    import { IIrc27Metadata, parseNftMetadata } from '@core/nfts'
-    import { Activity } from '@core/wallet'
+    import { getNftByIdFromAllAccountNfts, IIrc27Metadata } from '@core/nfts'
+    import { Activity, NftActivity } from '@core/wallet'
+    import { selectedAccountIndex } from '@core/account'
 
     export let activity: Partial<Activity> = {}
 
@@ -14,8 +15,8 @@
         }
     }
 
-    $: nftMetadata = parseNftMetadata(activity?.metadata)
-    $: nftMetadataDetailsList = createNftMetadataDetailsList(nftMetadata)
+    $: storedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, (activity as NftActivity)?.nftId)
+    $: nftMetadataDetailsList = createNftMetadataDetailsList(storedNft?.parsedMetadata)
 
     function createNftMetadataDetailsList(
         metadata: IIrc27Metadata | string
@@ -71,7 +72,7 @@
             ? localize(`tooltips.transactionDetails.nftMetadata.${key}`)
             : ''}
         valueText={JSON.stringify(value, null, 2)}
-        isCopyable
         classes="whitespace-pre-wrap"
+        isCopyable
     />
 {/each}

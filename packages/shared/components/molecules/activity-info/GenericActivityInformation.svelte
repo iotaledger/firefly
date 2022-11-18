@@ -2,7 +2,7 @@
     import { KeyValueBox } from 'shared/components'
     import { formatDate, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { Activity, formatTokenAmountPrecise, NftActivity } from '@core/wallet'
+    import { Activity, formatTokenAmountPrecise } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { Platform } from '@core/app'
@@ -34,10 +34,9 @@
         ...(activity.time && {
             transactionTime: { data: formattedTransactionTime },
         }),
-        ...(activity.metadata &&
-            !(activity as NftActivity).nftId && {
-                metadata: { data: activity.metadata, isTooltipVisible: true },
-            }),
+        ...(activity.metadata && {
+            metadata: { data: activity.metadata, isTooltipVisible: true },
+        }),
         ...(activity.tag && {
             tag: { data: activity.tag, isTooltipVisible: true },
         }),
@@ -85,7 +84,6 @@
         tooltipText={value.isTooltipVisible
             ? localize(`tooltips.transactionDetails.${activity?.direction}.${key}`)
             : undefined}
-        classes={key === 'metadata' ? 'whitespace-pre-wrap' : ''}
     />
 {/each}
 {#if activity.asyncData?.claimingTransactionId}

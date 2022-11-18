@@ -11,7 +11,7 @@ export function buildNftFromNftOutput(nftOutput: INftOutput, outputId: string, i
     const parsedMetadata = parseNftMetadata(metadata)
     return {
         id,
-        name: parsedMetadata?.name ?? DEFAULT_NFT_NAME,
+        name: typeof parsedMetadata === 'string' ? DEFAULT_NFT_NAME : (parsedMetadata?.name ?? DEFAULT_NFT_NAME),
         issuer,
         isOwned,
         metadata,
