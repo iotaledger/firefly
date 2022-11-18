@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Icon } from '@components'
+    import { Icon } from '@ui'
     import { showCameraScanner, stopScanner } from '../lib/auxiliary/scanner'
 </script>
 
