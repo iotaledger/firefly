@@ -68,11 +68,12 @@
 
 {#each Object.entries(nftMetadataDetailsList) as [key, value]}
     <KeyValueBox
-        keyText={nftMetadataDetailsList[key].isTooltipVisible
+        keyText={localize(`views.collectibles.metadata.${key}`)}
+        valueText={value.data}
+        tooltipText={value.isTooltipVisible
             ? localize(`tooltips.transactionDetails.nftMetadata.${key}`)
-            : ''}
-        valueText={JSON.stringify(value, null, 2)}
-        classes="whitespace-pre-wrap"
+            : undefined}
+        classes={key === 'metadata' ? 'whitespace-pre-wrap' : ''}
         isCopyable
     />
 {/each}
