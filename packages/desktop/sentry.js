@@ -17,8 +17,8 @@ if (SENTRY_MAIN_PROCESS || PRELOAD_SCRIPT) {
     const { machineIdSync } = require('node-machine-id')
     try {
         machineId = machineIdSync()
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
     }
 } else {
     const { Electron } = require('./lib/electron')

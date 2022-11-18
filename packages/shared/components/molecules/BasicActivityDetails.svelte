@@ -136,7 +136,7 @@
             } else {
                 return undefined
             }
-        } catch (error) {
+        } catch (err) {
             return undefined
         }
     }
