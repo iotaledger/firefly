@@ -7,6 +7,7 @@
     import { selectedAccountIndex } from '@core/account'
 
     export let activity: Partial<Activity> = {}
+    export let nftMetadata: Partial<IIrc27Metadata> = {}
 
     type NftMetadataDetailsList = {
         [key in keyof IIrc27Metadata]: {
@@ -16,7 +17,7 @@
     }
 
     $: storedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, (activity as NftActivity)?.nftId)
-    $: nftMetadataDetailsList = createNftMetadataDetailsList(storedNft?.parsedMetadata)
+    $: nftMetadataDetailsList = createNftMetadataDetailsList(storedNft?.parsedMetadata ?? nftMetadata as IIrc27Metadata)
 
     function createNftMetadataDetailsList(
         metadata: IIrc27Metadata | string
