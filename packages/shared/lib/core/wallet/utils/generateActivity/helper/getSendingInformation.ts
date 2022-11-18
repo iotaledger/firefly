@@ -10,12 +10,12 @@ import { getSenderAddressFromInputs, getSenderFromTransaction } from '../../tran
 export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
     output: Output,
-    account: IAccountState
+    account: IAccountState,
+    isOnlyOutput: boolean
 ): {
     subject: Subject
     direction: ActivityDirection
     isInternal: boolean
-    isSelfTransaction: boolean
 } {
     const { isIncoming, detailedTransactionInputs } = processedTransaction
 
@@ -34,12 +34,18 @@ export function getSendingInformation(
         isSelfTransaction = recipient.address === sender.address
     }
 
-    const direction = isIncoming || isSelfTransaction ? ActivityDirection.Incoming : ActivityDirection.Outgoing
+    let direction = undefined
+    if (isSelfTransaction || isOnlyOutput) {
+        direction = ActivityDirection.SelfTransaction
+    } else if (isIncoming) {
+        direction = ActivityDirection.Incoming
+    } else {
+        direction = ActivityDirection.Outgoing
+    }
 
     return {
         subject,
         isInternal,
         direction,
-        isSelfTransaction,
     }
 }

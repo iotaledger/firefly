@@ -19,7 +19,6 @@ export type BaseActivity = {
     subject: Subject
     metadata?: string
     tag?: string
-    isSelfTransaction: boolean
     asyncData: AsyncData
 }
 

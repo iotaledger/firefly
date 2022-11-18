@@ -5,7 +5,7 @@ export function getMainOutputFromTransaction(
     wrappedOutputs: IWrappedOutput[],
     accountAddress: string,
     isIncoming: boolean
-): { wrappedOutput: IWrappedOutput; isSelfTransaction: boolean } {
+): { wrappedOutput: IWrappedOutput; isOnlyOutput: boolean } {
     const nonRemainerOutput = wrappedOutputs.find((outputData) => {
         const recipientAddress = getRecipientAddressFromOutput(outputData.output)
 
@@ -18,15 +18,15 @@ export function getMainOutputFromTransaction(
     if (nonRemainerOutput) {
         return {
             wrappedOutput: nonRemainerOutput,
-            isSelfTransaction: false,
+            isOnlyOutput: false,
         }
     } else {
         const output = wrappedOutputs.find(
             (outputData) => accountAddress === getRecipientAddressFromOutput(outputData.output)
         )
         if (output) {
-            return { wrappedOutput: output, isSelfTransaction: true }
+            return { wrappedOutput: output, isOnlyOutput: true }
         }
     }
-    return { wrappedOutput: undefined, isSelfTransaction: undefined }
+    return { wrappedOutput: undefined, isOnlyOutput: undefined }
 }

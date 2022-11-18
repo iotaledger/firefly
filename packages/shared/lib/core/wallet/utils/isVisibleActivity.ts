@@ -273,10 +273,18 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
 
 function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.type.active && filter.type.selected) {
-        if (filter.type.selected === TypeFilterOption.Incoming && activity.direction !== ActivityDirection.Incoming) {
+        if (
+            filter.type.selected === TypeFilterOption.Incoming &&
+            activity.direction !== ActivityDirection.Incoming &&
+            activity.direction !== ActivityDirection.SelfTransaction
+        ) {
             return false
         }
-        if (filter.type.selected === TypeFilterOption.Outgoing && activity.direction !== ActivityDirection.Outgoing) {
+        if (
+            filter.type.selected === TypeFilterOption.Outgoing &&
+            activity.direction !== ActivityDirection.Outgoing &&
+            activity.direction !== ActivityDirection.SelfTransaction
+        ) {
             return false
         }
         if (filter.type.selected === TypeFilterOption.Internal && !activity.isInternal) {

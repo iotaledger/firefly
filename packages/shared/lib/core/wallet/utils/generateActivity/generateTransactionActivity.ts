@@ -30,11 +30,7 @@ export function generateTransactionActivity(
 
     const inputs = transactionInputs
 
-    const { wrappedOutput, isSelfTransaction } = getMainOutputFromTransaction(
-        outputs,
-        account.depositAddress,
-        isIncoming
-    )
+    const { wrappedOutput, isOnlyOutput } = getMainOutputFromTransaction(outputs, account.depositAddress, isIncoming)
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
@@ -51,7 +47,7 @@ export function generateTransactionActivity(
     const tag = getTagFromOutput(output)
     const publicNote = ''
 
-    const sendingInfo = getSendingInformation(processedTransaction, output, account)
+    const sendingInfo = getSendingInformation(processedTransaction, output, account, isOnlyOutput)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
     return {
@@ -68,7 +64,6 @@ export function generateTransactionActivity(
         storageDeposit,
         giftedStorageDeposit,
         rawAmount,
-        isSelfTransaction,
         isShimmerClaiming,
         publicNote,
         metadata,

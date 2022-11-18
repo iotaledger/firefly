@@ -7,7 +7,8 @@
 
     export let activity: NftActivity
 
-    $: isIncoming = activity.direction === ActivityDirection.Incoming
+    $: isIncoming =
+        activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
     $: title = getTitle(activity)
     $: subjectLocale = getSubjectLocale(activity.subject)
 
@@ -18,7 +19,7 @@
         if (isInternal) {
             return isConfirmed ? 'general.transferNft' : 'general.transferringNft'
         }
-        if (direction === ActivityDirection.Incoming) {
+        if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
             return isConfirmed ? 'general.receivedNft' : 'general.receivingNft'
         }
         if (direction === ActivityDirection.Outgoing) {

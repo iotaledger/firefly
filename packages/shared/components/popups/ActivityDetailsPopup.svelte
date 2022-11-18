@@ -41,7 +41,8 @@
     $: isTimelocked = activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         activity.asyncData &&
-        (activity?.direction === ActivityDirection.Incoming || activity.isSelfTransaction) &&
+        (activity.direction === ActivityDirection.Incoming ||
+            activity.direction === ActivityDirection.SelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     let details: Record<string, unknown>

@@ -36,7 +36,6 @@ classDiagram
         - storageDeposit: number
         - giftedStorageDeposit: number
         - subject: Subject
-        - isSelfTransaction: boolean
         - asyncData: AsyncData
     }
     class Transaction Activity {
@@ -71,6 +70,7 @@ classDiagram
         <<Enum>>
         - Incoming
         - Outgoing
+        - SelfTransaction
     }
     class Alias Type {
         <<Enum>>

@@ -8,8 +8,13 @@ export function getDirectionFromTransaction(
 ): ActivityDirection {
     const { outputs, isIncoming } = transaction
 
-    const { isSelfTransaction } = getMainOutputFromTransaction(outputs, accountAddress, isIncoming)
+    const { isOnlyOutput } = getMainOutputFromTransaction(outputs, accountAddress, isIncoming)
 
-    const direction = isIncoming || isSelfTransaction ? ActivityDirection.Incoming : ActivityDirection.Outgoing
-    return direction
+    if (isOnlyOutput) {
+        return ActivityDirection.SelfTransaction
+    } else if (isIncoming) {
+        return ActivityDirection.Incoming
+    } else {
+        return ActivityDirection.Outgoing
+    }
 }
