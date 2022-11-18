@@ -2,7 +2,6 @@
     import features from '@features/features'
     import {
         accountSwitcherRouter,
-        activityRouter,
         DashboardRoute,
         dashboardRoute,
         dashboardRouter,
@@ -30,7 +29,6 @@
     function onActivityDrawerClose(): void {
         $selectedActivity = null
         $dashboardRouter.previous()
-        $activityRouter.reset()
     }
 </script>
 
