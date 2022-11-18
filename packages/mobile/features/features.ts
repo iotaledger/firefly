@@ -31,7 +31,7 @@ const features = {
                 enabled: false,
             },
             details: {
-                enabled: true,
+                enabled: false,
             },
             actions: {
                 enabled: false,
