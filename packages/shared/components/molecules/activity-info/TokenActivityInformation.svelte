@@ -10,6 +10,12 @@
 
     let detailsList: { [key in string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
     $: detailsList = {
+        ...(activity.assetId && {
+            assetId: { data: activity.assetId, isCopyable: true },
+        }),
+        ...(metadata?.name && {
+            tokenName: { data: metadata.name },
+        }),
         ...(metadata?.name && {
             tokenName: { data: metadata.name },
         }),
