@@ -35,11 +35,7 @@
                 tabs = [Tab.Transaction, Tab.Alias]
                 break
             case ActivityType.Nft:
-                tabs = [
-                    Tab.Transaction,
-                    Tab.Nft,
-                    ... hasMetadata ? [Tab.Metadata] : [],
-                ]
+                tabs = [Tab.Transaction, Tab.Nft, ...(hasMetadata ? [Tab.Metadata] : [])]
                 break
         }
     }

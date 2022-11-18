@@ -17,7 +17,9 @@
     }
 
     $: storedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, (activity as NftActivity)?.nftId)
-    $: nftMetadataDetailsList = createNftMetadataDetailsList(storedNft?.parsedMetadata ?? nftMetadata as IIrc27Metadata)
+    $: nftMetadataDetailsList = createNftMetadataDetailsList(
+        storedNft?.parsedMetadata ?? (nftMetadata as IIrc27Metadata)
+    )
 
     function createNftMetadataDetailsList(
         metadata: IIrc27Metadata | string
@@ -71,9 +73,7 @@
     <KeyValueBox
         keyText={localize(`views.collectibles.metadata.${key}`)}
         valueText={value.data}
-        tooltipText={value.isTooltipVisible
-            ? localize(`tooltips.transactionDetails.nftMetadata.${key}`)
-            : undefined}
+        tooltipText={value.isTooltipVisible ? localize(`tooltips.transactionDetails.nftMetadata.${key}`) : undefined}
         classes={key === 'metadata' ? 'whitespace-pre-wrap' : ''}
         isCopyable
     />
