@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { AmountBox, SubjectBox, ActivityInclusionStatusPill } from 'shared/components'
     import { formatTokenAmountDefault, getAssetFromPersistedAssets } from '@core/wallet'
-
     import { FoundryActivity } from '@core/wallet'
 
     export let activity: FoundryActivity

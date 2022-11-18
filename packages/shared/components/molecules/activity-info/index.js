@@ -1,4 +1,5 @@
 export { default as AliasActivityInformation } from './AliasActivityInformation'
 export { default as FoundryActivityInformation } from './FoundryActivityInformation'
 export { default as GenericActivityInformation } from './GenericActivityInformation'
+export { default as MetadataActivityInformation } from './MetadataActivityInformation'
 export { default as NftActivityInformation } from './NftActivityInformation'

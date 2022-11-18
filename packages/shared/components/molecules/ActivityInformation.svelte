@@ -5,6 +5,7 @@
         AliasActivityInformation,
         NftActivityInformation,
         FoundryActivityInformation,
+        MetadataActivityInformation,
     } from 'shared/components'
     import { ActivityType, Activity } from '@core/wallet'
 
@@ -15,6 +16,7 @@
         Alias = 'general.alias',
         Nft = 'general.nft',
         Foundry = 'general.foundry',
+        Metadata = 'general.metadata',
     }
 
     let tabs: Tab[] = []
@@ -29,7 +31,7 @@
             tabs = [Tab.Transaction, Tab.Nft]
             break
         case ActivityType.Foundry:
-            tabs = [Tab.Transaction, Tab.Foundry]
+            tabs = [Tab.Transaction, Tab.Foundry, Tab.Metadata]
             break
     }
 
@@ -48,5 +50,7 @@
         <NftActivityInformation {activity} />
     {:else if activeTab === Tab.Foundry}
         <FoundryActivityInformation {activity} />
+    {:else if activeTab === Tab.Metadata}
+        <MetadataActivityInformation {activity} />
     {/if}
 </activity-details>

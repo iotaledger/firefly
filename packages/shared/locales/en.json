@@ -922,6 +922,8 @@
                 "circulatingSupply": "Circulating Supply",
                 "standard": "Standard",
                 "tokenName": "Name",
+                "unit": "Unit",
+                "subunit": "Subunit",
                 "storageDeposit": "Storage Deposit",
                 "description": "Description",
                 "symbol": "Symbol",
