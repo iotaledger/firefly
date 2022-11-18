@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import features from '@features/features'
     import { ActivityAsyncStatus, ActivityDirection, getTimeDifference, Activity } from '@core/wallet'
     import {
         ActivityAsyncStatusPill,
@@ -20,7 +21,8 @@
 
     $: shouldShowActions =
         activity.direction === ActivityDirection.Incoming &&
-        activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
+        activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed &&
+        features.dashboard.activity.actions.enabled
     $: shouldShowAsyncFooter = activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
 
     $: timeDiff = getTimeDiff(activity)
