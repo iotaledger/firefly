@@ -1,16 +1,17 @@
 <script lang="typescript">
-    import { Text, FontWeight } from 'shared/components'
-    import { formatTokenAmountPrecise } from '@core/wallet'
-    import { BASE_TOKEN } from '@core/network'
-    import { activeProfile } from '@core/profile'
+    import { formatCurrency } from '@core/i18n'
+    import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import { formatTokenAmountPrecise, IAsset } from '@core/wallet'
+    import { FontWeight, Text } from 'shared/components'
 
     export let totalRow = false
     export let title: string
     export let subtitle: string = ''
     export let amount: number
+    export let asset: IAsset
 
-    $: formattedAmount = formatTokenAmountPrecise(amount, BASE_TOKEN[$activeProfile.networkProtocol])
-    $: convertedAmount = '-'
+    $: formattedAmount = formatTokenAmountPrecise(amount, asset.metadata)
+    $: convertedAmount = formatCurrency(getMarketAmountFromAssetValue(amount, asset))
 
     const PRIMARY_COLOR = 'gray-800'
     const PRIMARY_DARK_COLOR = 'white'

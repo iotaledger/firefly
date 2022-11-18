@@ -4,10 +4,11 @@ import { destroyProfileManager, profileManager } from '@core/profile-manager'
 import { removeProfileFolder } from '@core/profile'
 
 export async function cleanupOnboardingProfileManager(): Promise<void> {
-    const { id } = get(profileManager)
     if (!get(profileManager)) {
         return
     }
+
+    const { id } = get(profileManager)
 
     destroyProfileManager()
     await removeProfileFolder(id)

@@ -10,12 +10,12 @@ export async function getAndUpdateLedgerNanoStatus(
     try {
         const ledgerNanoStatusResponse = await getLedgerNanoStatus(profileManager)
         updateLedgerNanoStatus(ledgerNanoStatusResponse)
-    } catch (error) {
+    } catch (err) {
         resetLedgerNanoStatus()
         if (forwardErrors) {
-            return Promise.reject(error)
+            return Promise.reject(err)
         } else {
-            console.error(error)
+            console.error(err)
         }
     }
 }

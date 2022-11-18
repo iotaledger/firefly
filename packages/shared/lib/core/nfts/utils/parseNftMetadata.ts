@@ -21,7 +21,6 @@ export function parseNftMetadata(metadata: string): IIrc27Metadata | string {
             type: parsedData.type as MimeType,
             uri: parsedData.uri,
             name: parsedData.name,
-            collectionId: parsedData.collectionId,
             collectionName: parsedData.collectionName,
             royalties: parsedData.royalties,
             issuerName: parsedData.issuerName,

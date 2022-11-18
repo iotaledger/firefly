@@ -592,7 +592,13 @@
             "pendingTransactions": {
                 "title": "Locked in pending transactions",
                 "subtitle": "For sending native assets and small IOTA amounts"
-            }
+            },
+            "minimizeStorageDepositButton": "Minimize storage deposit"
+        },
+        "minimizeStorageDeposit": {
+            "title": "Minimize storage deposit",
+            "description": "Consolidate outputs to minimize your required storage deposit and increase your available balance.",
+            "confirmButton": "Consolidate"
         },
         "alias": {
             "title": "Confirm alias creation"
@@ -1665,7 +1671,8 @@
         "aliasMinting": {
             "aliasRequired": "Alias is required",
             "aliasNotInPossession": "Alias not in possession"
-        }
+        },
+        "noOutputsToConsolidate": "Not enough outputs to consolidate"
     },
     "warning": {
         "transaction": {
