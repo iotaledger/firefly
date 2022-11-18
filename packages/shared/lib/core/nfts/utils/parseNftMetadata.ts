@@ -8,8 +8,8 @@ import { get } from 'svelte/store'
 
 export function parseNftMetadata(metadata: string): IIrc27Metadata | string {
     const convertedData = Converter.hexToUtf8(metadata)
-    if (!convertedData.includes(`"type":"${TokenStandard.IRC27}"`)) {
-        return convertedData
+    if (!convertedData.includes(`"standard":"${TokenStandard.IRC27}"`)) {
+        return JSON.stringify(JSON.parse(convertedData), null, 2)
     }
 
     try {
