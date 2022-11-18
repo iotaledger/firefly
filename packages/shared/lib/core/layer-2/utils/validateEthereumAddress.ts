@@ -1,7 +1,14 @@
-import { localize } from '@core/i18n'
 import { Keccak } from 'sha3'
+import { get } from 'svelte/store'
+
+import { localize } from '@core/i18n'
+import { networkHrp } from '@core/network'
+import { validateBech32Address } from '@core/utils'
 
 export function validateEthereumAddress(address: string): string {
+    if (validateBech32Address(get(networkHrp), address)) {
+        return localize('error.layer2.layer1Recipient')
+    }
     // Check if it has the basic requirements of an address
     if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
         return localize('error.send.invalidAddress')

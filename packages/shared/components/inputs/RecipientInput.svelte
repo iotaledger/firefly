@@ -6,6 +6,7 @@
     import { getSubjectFromAddress, Subject } from '@core/wallet'
     import { getAccountColorById, selectedAccountIndex } from '@core/account'
     import { validateEthereumAddress } from '@core/layer-2'
+    import { localize } from '@core/i18n'
 
     export let recipient: Subject
     export let disabled = false
@@ -24,23 +25,31 @@
 
     $: accountOptions = isLayer2 ? <IOption[]>[] : getLayer1AccountOptions()
     $: recipient = getSubjectFromAddress(selected?.value)
+    $: isLayer2, (error = '')
 
     export function validate(): Promise<void> {
         if (recipient?.type === 'address') {
             if (!recipient.address) {
-                error = 'Recipient is required'
-                return Promise.reject(error)
+                error = localize('error.send.recipientRequired')
             }
             if (isLayer2) {
                 error = validateEthereumAddress(recipient?.address)
             } else {
                 error = validateBech32Address(addressPrefix, recipient?.address)
             }
-            if (error) {
-                return Promise.reject(error)
+        } else if (recipient?.type === 'account') {
+            if (isLayer2) {
+                error = localize('error.layer2.layer1Recipient')
             }
+        } else {
+            error = localize('error.send.recipientRequired')
         }
-        return Promise.resolve()
+
+        if (error) {
+            return Promise.reject(error)
+        } else {
+            return Promise.resolve()
+        }
     }
 
     function getLayer1AccountOptions(): IOption[] {
