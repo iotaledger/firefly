@@ -61,9 +61,9 @@ function getMachineId() {
     if (machineId === null) {
         try {
             machineId = machineIdSync()
-        } catch (error) {
+        } catch (err) {
             machineId = ''
-            console.error(error)
+            console.error(err)
         }
     }
     return machineId
@@ -219,8 +219,8 @@ const handleNavigation = (e, url) => {
         if (isUrlAllowed(url)) {
             shell.openExternal(url)
         }
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
     }
 }
 
@@ -236,8 +236,8 @@ function createWindow() {
         protocol.registerFileProtocol(process.env.APP_PROTOCOL, (request, callback) => {
             callback(request.url.replace(`${process.env.APP_PROTOCOL}:/`, app.getAppPath()).split('?')[0].split('#')[0])
         })
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
     }
 
     const mainWindowState = windowStateKeeper('main', 'settings.json')

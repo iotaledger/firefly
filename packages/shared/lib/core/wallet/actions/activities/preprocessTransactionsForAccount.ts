@@ -11,8 +11,8 @@ export async function preprocessTransactionsForAccount(account: IAccountState): 
         try {
             const processedTransaction = preprocessTransaction(transaction)
             processedTransactions.push(processedTransaction)
-        } catch (error) {
-            console.error(error)
+        } catch (err) {
+            console.error(err)
         }
     }
     return processedTransactions

@@ -7,13 +7,13 @@ export async function getAndUpdateNodeInfo(forwardErrors = false): Promise<void>
     try {
         nodeInfoResponse = await getNodeInfo()
         updateNodeInfo(nodeInfoResponse?.nodeInfo)
-    } catch (error) {
+    } catch (err) {
         nodeInfoResponse = null
         updateNodeInfo(nodeInfoResponse?.nodeInfo)
         if (forwardErrors) {
-            return Promise.reject(error)
+            return Promise.reject(err)
         } else {
-            console.error(error)
+            console.error(err)
         }
     }
 }

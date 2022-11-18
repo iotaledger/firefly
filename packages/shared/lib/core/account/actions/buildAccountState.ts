@@ -21,8 +21,8 @@ export async function buildAccountState(account: IAccount, metadata: IAccountMet
     try {
         balances = await account.getBalance()
         depositAddress = await getDepositAddress(account)
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
     }
 
     return {

@@ -16,8 +16,8 @@ export const PincodeManager: IPincodeManager = {
             } else {
                 throw new Error('pincode can not be stored')
             }
-        } catch (error) {
-            console.error(error)
+        } catch (err) {
+            console.error(err)
         }
     },
     /**
@@ -28,8 +28,8 @@ export const PincodeManager: IPincodeManager = {
         try {
             const { value } = await SecureStoragePlugin.get({ key })
             return value === pin
-        } catch (error) {
-            console.error(error)
+        } catch (err) {
+            console.error(err)
         }
     },
     /**
@@ -40,8 +40,8 @@ export const PincodeManager: IPincodeManager = {
         try {
             const { value } = await SecureStoragePlugin.remove({ key })
             return value
-        } catch (error) {
-            console.error(error)
+        } catch (err) {
+            console.error(err)
         }
     },
 }
