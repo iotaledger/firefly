@@ -1,7 +1,7 @@
 import { handleError } from '@core/error/handlers/handleError'
 import { networkHrp } from '@core/network'
 import { IIrc27Metadata, MimeType, SupportedMimeType } from '@core/nfts'
-import { isValidUrl, validateBech32Address } from '@core/utils'
+import { isValidUri, validateBech32Address } from '@core/utils'
 import { Converter } from '@core/utils/convert'
 import { TokenStandard } from '@core/wallet'
 import { get } from 'svelte/store'
@@ -30,6 +30,7 @@ export function parseNftMetadata(metadata: string): IIrc27Metadata | string {
         return parsedMetadata
     } catch (error) {
         handleError(error)
+        return undefined
     }
 }
 
@@ -48,7 +49,7 @@ function validate(data: IIrc27Metadata): void {
 
     if (data.uri.length === 0) {
         throw 'Empty URI'
-    } else if (!isValidUrl(data.uri)) {
+    } else if (!isValidUri(data.uri)) {
         throw 'Invalid URI'
     }
 
