@@ -5,8 +5,10 @@
         AliasActivityInformation,
         NftActivityInformation,
     } from 'shared/components'
-    import { ActivityType, Activity } from '@core/wallet'
+    import { ActivityType, Activity, NftActivity } from '@core/wallet'
     import NftMetadataInformation from './activity-info/NftMetadataInformation.svelte'
+    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { selectedAccountIndex } from '@core/account'
 
     export let activity: Partial<Activity> = {}
 
@@ -17,17 +19,29 @@
         Metadata = 'general.metadata',
     }
 
+    let hasMetadata = false
+    $: {
+        const storedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, (activity as NftActivity)?.nftId)
+        hasMetadata = !!storedNft?.parsedMetadata
+    }
+
     let tabs: Tab[] = []
-    switch (activity.type) {
-        case ActivityType.Transaction:
-            tabs = [Tab.Transaction]
-            break
-        case ActivityType.Alias:
-            tabs = [Tab.Transaction, Tab.Alias]
-            break
-        case ActivityType.Nft:
-            tabs = [Tab.Transaction, Tab.Nft, Tab.Metadata]
-            break
+    $: {
+        switch (activity.type) {
+            case ActivityType.Transaction:
+                tabs = [Tab.Transaction]
+                break
+            case ActivityType.Alias:
+                tabs = [Tab.Transaction, Tab.Alias]
+                break
+            case ActivityType.Nft:
+                tabs = [
+                    Tab.Transaction,
+                    Tab.Nft,
+                    ... hasMetadata ? [Tab.Metadata] : [],
+                ]
+                break
+        }
     }
 
     let activeTab = Tab.Transaction
