@@ -54,8 +54,8 @@
 
     function getLayer1AccountOptions(): IOption[] {
         return $visibleActiveAccounts
-            ?.filter((account) => account.index !== $selectedAccountIndex)
-            ?.map((account) => ({
+            .filter((account) => account.index !== $selectedAccountIndex)
+            .map((account) => ({
                 id: account.index,
                 key: account.name,
                 value: account.depositAddress,

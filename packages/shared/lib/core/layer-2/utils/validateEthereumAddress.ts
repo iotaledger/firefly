@@ -8,7 +8,12 @@ import { validateBech32Address } from '@core/utils'
 const HASH_SIZE = 256
 
 export function validateEthereumAddress(address: string): string {
-    if (!validateBech32Address(get(networkHrp), address)) {
+    // TODO: currently, validateBech32Address throws an error string if an invalid address is provided.
+    // If the address is a valid bech32 address, null is returned
+    // This evaluates to false, which accounts for the weird logic
+    // Issue to fix this: https://github.com/iotaledger/firefly/issues/5240
+    const validBech32Address = !validateBech32Address(get(networkHrp), address)
+    if (validBech32Address) {
         return localize('error.layer2.layer1Recipient')
     }
     // Check if it has the basic requirements of an address
