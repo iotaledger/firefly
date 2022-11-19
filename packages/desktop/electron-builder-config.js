@@ -40,9 +40,9 @@ const prodConfig = () => ({
         // eslint-disable-next-line no-useless-catch
         try {
             await notarize(APP_ID, APP_NAME)
-        } catch (error) {
+        } catch (err) {
             // This catch is necessary or the promise rejection is swallowed
-            throw error
+            throw err
         }
     },
     asar: true,

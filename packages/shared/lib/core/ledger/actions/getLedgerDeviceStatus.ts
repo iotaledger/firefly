@@ -4,9 +4,9 @@ import { closePopup, popupState } from '@auxiliary/popup'
 import { ledgerNanoStatus, updateLedgerNanoStatus } from '../stores'
 
 export async function getLedgerDeviceStatus(
-    onConnected: () => void = () => {},
-    onDisconnected: () => void = () => {},
-    onError: () => void = () => {}
+    onConnected = (): void => {},
+    onDisconnected = (): void => {},
+    onError = (): void => {}
 ): Promise<void> {
     try {
         const status = await getLedgerNanoStatus()
@@ -23,7 +23,7 @@ export async function getLedgerDeviceStatus(
         } else {
             onDisconnected()
         }
-    } catch (error) {
+    } catch (err) {
         onError()
     }
 }

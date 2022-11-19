@@ -20,7 +20,7 @@ export async function getIrc30MetadataFromFoundryOutput(tokenId: string): Promis
         } else {
             return undefined
         }
-    } catch (error) {
+    } catch (err) {
         return Promise.resolve(undefined)
     }
 }

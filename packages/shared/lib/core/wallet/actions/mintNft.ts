@@ -45,13 +45,13 @@ export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
         addOrUpdateNftInAllAccountNfts(account.index, nft)
 
         return Promise.resolve()
-    } catch (reason) {
+    } catch (err) {
         const _activeProfile = get(activeProfile)
         if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerError(reason.error)
+            handleLedgerError(err?.error)
         }
 
-        return Promise.reject(reason)
+        return Promise.reject(err)
     } finally {
         updateSelectedAccount({ isTransferring: false })
     }

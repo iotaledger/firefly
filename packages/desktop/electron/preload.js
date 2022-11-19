@@ -56,8 +56,8 @@ try {
         }
         WalletApi.initLogger(loggerOptions)
     }
-} catch (error) {
-    console.error('[Preload Context] Error:', error)
+} catch (err) {
+    console.error('[Preload Context] Error:', err)
 }
 
 try {
@@ -104,8 +104,8 @@ try {
         },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
-} catch (error) {
-    ipcRenderer.invoke('handle-error', '[Preload Context] Error', error)
+} catch (err) {
+    ipcRenderer.invoke('handle-error', '[Preload Context] Error', err)
 }
 
 function bindMethodsAcrossContextBridge(prototype, object) {

@@ -82,8 +82,8 @@
                 tagInput?.validate(validateOptionalInput(tag, MAX_TAG_BYTES, localize('error.send.tagTooLong'))),
             ])
             return true
-        } catch (error) {
-            console.error('Error: ', error)
+        } catch (err) {
+            console.error('Error: ', err)
             return false
         }
     }
