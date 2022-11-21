@@ -109,7 +109,7 @@
 
     function onUnlockSuccess(): void {
         submitSendOnMount = true
-        $sendRouter.previous()
+        $sendRouter.next()
     }
 </script>
 

@@ -31,7 +31,7 @@ export class SendRouter extends Subrouter<SendRoute> {
                 break
             }
             case SendRoute.Password: {
-                nextRoute = SendRoute.Amount
+                super.previous()
                 break
             }
         }
