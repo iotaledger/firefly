@@ -40,6 +40,7 @@
         hint={localize('actions.confirmRejection.node')}
         confirmText={localize('actions.reject')}
         onConfirm={onReject}
+        onCancel={handleClose}
         warning
         info
     />

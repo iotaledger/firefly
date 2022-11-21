@@ -10,6 +10,7 @@
     export let danger: boolean = false
     export let confirmText: string = localize('actions.confirm')
     export let onConfirm: () => void = undefined
+    export let onCancel: () => void = undefined
 </script>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -21,11 +22,15 @@
             <TextHint {info} {success} {warning} {danger} text={hint} />
         {/if}
     </div>
-    <Button
-        classes="w-full"
-        variant={warning || danger ? ButtonVariant.Warning : ButtonVariant.Primary}
-        onClick={onConfirm}
-    >
-        {confirmText}
-    </Button>
+
+    <div class="flex flex-row justify-between w-full space-x-4">
+        <Button classes="w-1/2" outline onClick={onCancel}>{localize('actions.cancel')}</Button>
+        <Button
+            classes="w-1/2"
+            variant={warning || danger ? ButtonVariant.Warning : ButtonVariant.Primary}
+            onClick={onConfirm}
+        >
+            {confirmText}
+        </Button>
+    </div>
 </div>
