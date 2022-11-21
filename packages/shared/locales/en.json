@@ -944,7 +944,7 @@
         },
         "mintNftForm": {
             "title": "Mint simple NFT",
-            "inputs": {
+            "property": {
                 "type": "Type",
                 "uri": "URI",
                 "name": "Name",
