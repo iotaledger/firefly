@@ -3,3 +3,4 @@ export { default as FoundryActivityInformation } from './FoundryActivityInformat
 export { default as GenericActivityInformation } from './GenericActivityInformation'
 export { default as TokenActivityInformation } from './TokenActivityInformation'
 export { default as NftActivityInformation } from './NftActivityInformation'
+export { default as NftMetadataInformation } from './NftMetadataInformation'

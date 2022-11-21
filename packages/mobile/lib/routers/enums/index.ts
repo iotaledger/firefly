@@ -1,6 +1,7 @@
 export * from './onboarding'
 
 export * from './account-switcher-route.enum'
+export * from './activity-route.enum'
 export * from './app-route.enum'
 export * from './dashboard-route.enum'
 export * from './login-route.enum'
