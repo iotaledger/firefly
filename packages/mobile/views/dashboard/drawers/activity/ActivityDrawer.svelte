@@ -7,24 +7,28 @@
     export let onClose: () => unknown = () => {}
 
     let title: string
+    let fullScreen: boolean = true
 
-    $: $activityRoute, setTitle()
+    $: $activityRoute, configureDrawer()
 
-    function setTitle(): void {
+    function configureDrawer(): void {
         switch ($activityRoute) {
             case ActivityRoute.Password:
                 title = localize('popups.password.title')
+                fullScreen = false
                 break
             case ActivityRoute.Reject:
                 title = localize('actions.confirmRejection.title')
+                fullScreen = false
                 break
             default:
                 title = localize('popups.transactionDetails.title')
+                fullScreen = true
                 break
         }
     }
 </script>
 
-<Drawer {onClose} {title}>
+<Drawer {onClose} {title} {fullScreen}>
     <ActivityRouter {onClose} />
 </Drawer>
