@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { resetNewTokenTransactionDetails } from '@core/wallet'
     import { Drawer } from '../../../../components'
@@ -50,6 +51,12 @@
     }
 </script>
 
-<Drawer onClose={onDrawerClose} {title} {fullScreen} {allowBack} onBackClick={() => $sendRouter.previous()}>
+<Drawer
+    onClose={onDrawerClose}
+    {title}
+    {fullScreen}
+    allowBack={!$selectedAccount.isTransferring && allowBack}
+    onBackClick={() => $sendRouter.previous()}
+>
     <SendRouter {onClose} />
 </Drawer>
