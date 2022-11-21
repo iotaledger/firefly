@@ -8,7 +8,6 @@ export interface IPersistedProfile {
     id: string
     name: string
     type: ProfileType
-    version: number
     networkProtocol: NetworkProtocol
     networkType: NetworkType
     lastStrongholdBackupTime: Date

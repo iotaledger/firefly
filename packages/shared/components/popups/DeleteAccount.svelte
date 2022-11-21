@@ -5,12 +5,12 @@
     import { setStrongholdPassword } from '@core/profile-manager'
     import { isSoftwareProfile } from '@core/profile'
     import { selectedAccount } from '@core/account'
-    import { BaseError } from '@core/error'
+    import { handleError } from '@core/error/handlers/handleError'
 
     export let deleteAccount: (index: number) => Promise<void> = async () => {}
 
     let password: string
-    let error: BaseError
+    let error: string
     let isBusy = false
 
     async function handleDeleteClick(): Promise<void> {
@@ -28,7 +28,8 @@
             await deleteAccount($selectedAccount?.index)
             closePopup()
         } catch (err) {
-            error = !error && err.error ? new BaseError({ message: err.error, logToConsole: true }) : err
+            error = err.error
+            handleError(err)
         }
     }
 
@@ -59,7 +60,7 @@
         />
     {/if}
     {#if error}
-        <Error error={error.message} />
+        <Error {error} />
     {/if}
     <div class="flex flex-row w-full space-x-4 justify-center mt-5">
         <Button outline classes="w-1/2" onClick={handleCancelClick} disabled={isBusy}>

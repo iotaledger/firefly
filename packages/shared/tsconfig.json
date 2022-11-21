@@ -10,11 +10,10 @@
             "@auxiliary/*": ["./lib/auxiliary/*"],
             "@contexts/*": ["./lib/contexts/*"],
             "@core/*": ["./lib/core/*"],
-            "@features/*": ["./features/*"],
             "@lib/*": ["./lib/*"]
         },
         "types": ["node"]
     },
-    "include": ["./lib", "./features"],
+    "include": ["./lib"],
     "exclude": ["**/node_modules", "**/tests"]
 }

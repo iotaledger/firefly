@@ -3,7 +3,7 @@
     import { Button, PinInput, Spinner, Text, HTMLButtonType, ButtonSize } from 'shared/components'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { Platform } from '@lib/platform'
+    import { Platform } from '@core/app'
     import { PIN_LENGTH } from '@core/utils'
 
     let currentPincode = ''

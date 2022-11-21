@@ -18,6 +18,8 @@
     $: textProps = { type, fontSize, lineHeight, fontWeight }
 </script>
 
-<Input bind:inputElement bind:value bind:hasFocus type="text" {error} {textProps} {alignment} {...$$restProps}>
-    <slot />
+<Input bind:inputElement bind:value bind:hasFocus bind:error type="text" {textProps} {alignment} {...$$restProps}>
+    <slot name="left" slot="left" />
+    <slot name="right" slot="right" />
+    <slot name="right-full-h" slot="right-full-h" />
 </Input>

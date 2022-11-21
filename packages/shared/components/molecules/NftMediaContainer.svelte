@@ -20,7 +20,7 @@
                 height = 6
                 // squircle or circle
                 radius = shape === 'squircle' ? 'md' : 'full'
-                padding = 2
+                padding = 1
                 break
             case NftMediaSize.Small:
                 width = 8
@@ -58,16 +58,14 @@
     const isLoaded = false
 </script>
 
-<div class="flex w-full items-center justify-center">
-    <div
-        class="flex justify-center items-center transition-none p-{padding} bg-gray-500 w-{width} h-{height} rounded-{radius} "
-    >
-        {#if !isLoaded}
-            <NftPlaceholderIcon {nft} />
-        {:else}
-            <div>
-                <!-- Loaded and Secure NFT Media  -->
-            </div>
-        {/if}
-    </div>
+<div
+    class="flex justify-center items-center transition-none p-{padding} bg-gray-500 w-{width} h-{height} rounded-{radius} "
+>
+    {#if !isLoaded}
+        <NftPlaceholderIcon {nft} />
+    {:else}
+        <div>
+            <!-- Loaded and Secure NFT Media  -->
+        </div>
+    {/if}
 </div>

@@ -2,10 +2,16 @@
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { AssetIcon, ClickableTile, Text, FontWeight, TextType } from 'shared/components'
     import { truncateString } from '@core/utils'
+    import { formatCurrency } from '@core/i18n/utils'
+    import { getMarketAmountFromAssetValue } from '@core/market/utils/getMarketAmountFromAssetValue'
+    import { getMarketPriceForAsset } from '@core/market/utils'
 
     export let asset: IAsset
     export let onClick: () => unknown
     export let squashed = false
+
+    $: marketPrice = getMarketPriceForAsset(asset)
+    $: marketBalance = getMarketAmountFromAssetValue(asset?.balance?.total, asset)
 </script>
 
 <ClickableTile {onClick} {...$$restProps}>
@@ -20,7 +26,8 @@
                 </Text>
                 {#if !squashed}
                     <div class="flex flex-row justify-between items-center text-left">
-                        <Text type={TextType.p} secondary smaller>{asset?.fiatPrice ?? ''}</Text>
+                        <Text type={TextType.p} secondary smaller>{marketPrice ? formatCurrency(marketPrice) : ''}</Text
+                        >
                         <slot name="subLabel" />
                     </div>
                 {/if}
@@ -33,7 +40,7 @@
             {#if !squashed}
                 <div class="flex flex-row justify-between items-center text-right">
                     <Text type={TextType.p} secondary smaller classes="flex-grow">
-                        {asset?.fiatBalance ? `≈ ${asset?.fiatBalance}` : ''}
+                        {marketBalance ? `≈ ${formatCurrency(marketBalance)}` : ''}
                     </Text>
                 </div>
             {/if}

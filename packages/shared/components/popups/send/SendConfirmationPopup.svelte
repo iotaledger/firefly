@@ -1,25 +1,23 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import Big from 'big.js'
     import {
         Button,
         ExpirationTimePicker,
         KeyValueBox,
         Text,
         TextHint,
-        Error,
         Toggle,
         FontWeight,
         TextType,
-        NftDetails,
-        TransactionDetails,
+        NftActivityDetails,
+        BasicActivityDetails,
+        ActivityInformation,
     } from 'shared/components'
-    import type { OutputTypes } from '@iota/types'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { ExpirationTime } from '@core/utils'
     import {
         ActivityDirection,
@@ -29,30 +27,26 @@
         sendOutput,
         validateSendConfirmation,
         selectedAccountAssets,
-        getStorageDepositFromOutput,
         DEFAULT_TRANSACTION_OPTIONS,
         newTransactionDetails,
         updateNewTransactionDetails,
         NewTransactionType,
+        Output,
     } from '@core/wallet'
-    import { formatCurrency } from '@core/i18n'
-    import { currencies, Currency, exchangeRates, miotaToFiat } from '@core/utils'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { BaseError } from '@core/error'
     import { ledgerPreparedOutput } from '@core/ledger'
+    import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
-    export let tokenSend = false
 
     let { recipient, expirationDate, giftStorageDeposit, surplus, disableChangeExpiration, disableToggleGift } =
         get(newTransactionDetails)
 
     let storageDeposit = 0
-    let preparedOutput: OutputTypes
+    let preparedOutput: Output
     let outputOptions: OutputOptions
-    let error: BaseError
     let expirationTimePicker: ExpirationTimePicker
 
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
@@ -68,20 +62,8 @@
     $: isTransferring = $selectedAccount.isTransferring
 
     function refreshSendConfirmationState(): void {
-        error = null
         void prepareTransactionOutput()
     }
-
-    $: formattedFiatValue =
-        transactionDetails.type === NewTransactionType.TokenTransfer
-            ? formatCurrency(
-                  miotaToFiat(
-                      Big(transactionDetails.rawAmount),
-                      $currencies[Currency.USD],
-                      $exchangeRates[$activeProfile?.settings?.currency]
-                  )
-              )
-            : ''
 
     function getInitialExpirationDate(): ExpirationTime {
         if (expirationDate) {
@@ -95,6 +77,7 @@
 
     async function prepareTransactionOutput(): Promise<void> {
         const transactionDetails = get(newTransactionDetails)
+        // TODO: move arguments into transactionDetails object
         outputOptions = getOutputOptions(
             expirationDate,
             recipientAddress,
@@ -104,18 +87,19 @@
             transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
             giftStorageDeposit,
             transactionDetails.surplus,
+            transactionDetails.layer2Parameters,
             transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
-        setStorageDeposit(preparedOutput, Number(transactionDetails.surplus))
+        setStorageDeposit(preparedOutput, Number(surplus))
 
         if (!initialExpirationDate) {
             initialExpirationDate = getInitialExpirationDate()
         }
     }
 
-    function setStorageDeposit(preparedOutput: OutputTypes, surplus?: number): void {
+    function setStorageDeposit(preparedOutput: Output, surplus?: number): void {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
             getStorageDepositFromOutput(preparedOutput)
 
@@ -144,7 +128,6 @@
     }
 
     async function onConfirm(): Promise<void> {
-        error = null
         try {
             validateSendConfirmation(outputOptions, preparedOutput)
 
@@ -154,7 +137,7 @@
             }
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
-            handleError(err?.error)
+            handleError(err)
         }
     }
 
@@ -174,18 +157,18 @@
         try {
             await _onMount()
         } catch (err) {
-            handleError(err?.error)
+            handleError(err)
         }
     })
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
-        >{localize(tokenSend ? 'popups.transaction.title' : 'popups.sendNft.confirmationTitle')}</Text
+        >{localize('popups.transaction.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <TransactionDetails
+            <BasicActivityDetails
                 {...transactionDetails}
                 {storageDeposit}
                 subject={recipient}
@@ -194,18 +177,32 @@
                 type={ActivityType.Transaction}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
-                {formattedFiatValue}
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
-            <NftDetails
-                {...transactionDetails}
-                direction={ActivityDirection.Outgoing}
-                inclusionState={InclusionState.Pending}
-                {storageDeposit}
-                subject={recipient}
-                {isInternal}
-                type={ActivityType.Nft}
-            />
+            <nft-details>
+                <NftActivityDetails
+                    activity={{
+                        ...transactionDetails,
+                        storageDeposit,
+                        subject: recipient,
+                        isInternal,
+                        type: ActivityType.Transaction,
+                        direction: ActivityDirection.Outgoing,
+                        inclusionState: InclusionState.Pending,
+                    }}
+                />
+                <ActivityInformation
+                    activity={{
+                        ...transactionDetails,
+                        storageDeposit,
+                        subject: recipient,
+                        isInternal,
+                        type: ActivityType.Transaction,
+                        direction: ActivityDirection.Outgoing,
+                        inclusionState: InclusionState.Pending,
+                    }}
+                />
+            </nft-details>
         {/if}
         {#if !hideGiftToggle}
             <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
@@ -229,9 +226,6 @@
                 />
             </KeyValueBox>
         {/if}
-        {#if error}
-            <Error error={error?.message} />
-        {/if}
     </div>
     {#if surplus}
         <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
@@ -248,7 +242,7 @@
         {/if}
 
         <Button classes="w-full" onClick={onConfirm} disabled={isTransferring} isBusy={isTransferring}>
-            {localize('actions.confirm')}
+            {localize('actions.send')}
         </Button>
     </popup-buttons>
 </send-confirmation-popup>

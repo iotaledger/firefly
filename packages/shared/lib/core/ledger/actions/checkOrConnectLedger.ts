@@ -1,8 +1,8 @@
-import { BaseError } from '@core/error'
 import { openPopup, popupState } from '@auxiliary/popup'
 import { get } from 'svelte/store'
 import { LedgerConnectionState } from '../interfaces'
 import { ledgerConnectionState } from '../stores'
+import { handleError } from '@core/error/handlers/handleError'
 
 export function checkOrConnectLedger(
     callback: () => Promise<unknown> = async (): Promise<void> => {},
@@ -30,6 +30,6 @@ export function checkOrConnectLedger(
             })
         }
     } catch (err) {
-        new BaseError({ message: err.error ?? err.message, logToConsole: true })
+        handleError(err)
     }
 }

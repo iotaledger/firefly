@@ -12,15 +12,15 @@ export async function tryEditSelectedAccountMetadata(metadata: Partial<IAccountM
         await Promise.resolve()
         updateActiveAccountMetadata(get(selectedAccount)?.index, metadata)
         updateSelectedAccount(metadata)
-    } catch (error) {
-        if (error) {
-            console.error(error?.error || error)
+    } catch (err) {
+        if (err) {
+            console.error(err?.error || err)
             if (get(isActiveLedgerProfile)) {
-                displayNotificationForLedgerProfile('error', true, false, error)
+                displayNotificationForLedgerProfile('error', true, false, err)
             } else {
                 showAppNotification({
                     type: 'error',
-                    message: localize(error?.error || error),
+                    message: localize(err?.error || err),
                 })
             }
         }

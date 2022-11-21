@@ -5,7 +5,7 @@ import { handleWalletRsError } from './walletRs'
 
 export function handleError(err: IError): void {
     if (Object.values(WalletRsError).includes(err?.type as WalletRsError)) {
-        handleWalletRsError({ ...err, message: err?.message })
+        handleWalletRsError(err)
     } else {
         handleGenericError(err)
     }

@@ -52,7 +52,7 @@ export const NETWORK: Readonly<{ [key in NetworkProtocol]?: { [key in NetworkTyp
         },
         [NetworkType.Devnet]: {
             id: 'testnet',
-            name: 'Shimmer Beta',
+            name: 'Testnet',
             protocol: NetworkProtocol.Shimmer,
             type: NetworkType.Devnet,
             bech32Hrp: 'rms',

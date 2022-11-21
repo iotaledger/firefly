@@ -35,6 +35,8 @@
 
     let capsLockOn = false
 
+    $: value, (error = '')
+
     function handleInput(event: InputEvent): void {
         value = (event.target as HTMLInputElement).value
     }
@@ -138,39 +140,43 @@
             {clearBorder}
             classes="relative {containerClasses}"
         >
-            <Text {...textProps} classes="flex w-full">
-                <input
-                    {type}
-                    {value}
-                    bind:this={inputElement}
-                    {maxlength}
-                    class="w-full text-{alignment}
-                        bg-white dark:bg-gray-800
-                        {disabled
-                        ? 'text-gray-400 dark:text-gray-700'
-                        : 'text-gray-800 dark:text-white'} {inputClasses}"
-                    class:floating-active={value && label}
-                    on:input={handleInput}
-                    on:keypress={onKeyPress}
-                    on:keydown={onKeyCaps}
-                    on:keyup={onKeyCaps}
-                    on:paste={onPaste}
-                    on:contextmenu={handleContextMenu}
-                    on:focus={() => (hasFocus = true)}
-                    on:blur={() => (hasFocus = false)}
-                    on:change={() => dispatch('change')}
-                    {disabled}
-                    {placeholder}
-                    {style}
-                    spellcheck={false}
-                    {...$$restProps}
-                />
-            </Text>
             {#if label}
-                <floating-label {disabled} class:hasFocus class:floating-active={value && label}>{label}</floating-label
-                >
+                <floating-label {disabled} class:hasFocus class:floating-active={value && label}>
+                    {label}
+                </floating-label>
             {/if}
-            <slot />
+            <div class="flex flex-row w-full" class:floating-active={value && label}>
+                <slot name="left" />
+                <Text {...textProps} classes="flex w-full">
+                    <input
+                        {type}
+                        {value}
+                        bind:this={inputElement}
+                        {maxlength}
+                        class="w-full text-{alignment}
+                            bg-white dark:bg-gray-800
+                            {disabled
+                            ? 'text-gray-400 dark:text-gray-700'
+                            : 'text-gray-800 dark:text-white'} {inputClasses}"
+                        on:input={handleInput}
+                        on:keypress={onKeyPress}
+                        on:keydown={onKeyCaps}
+                        on:keyup={onKeyCaps}
+                        on:paste={onPaste}
+                        on:contextmenu={handleContextMenu}
+                        on:focus={() => (hasFocus = true)}
+                        on:blur={() => (hasFocus = false)}
+                        on:change={() => dispatch('change')}
+                        {disabled}
+                        {placeholder}
+                        {style}
+                        spellcheck={false}
+                        {...$$restProps}
+                    />
+                </Text>
+                <slot name="right" />
+            </div>
+            <slot name="right-full-h" />
         </InputContainer>
     </div>
     {#if capsLockWarning && hasFocus && capsLockOn}
@@ -188,11 +194,11 @@
         &::placeholder {
             @apply text-gray-500;
         }
+    }
 
-        &.floating-active {
-            @apply pt-2;
-            @apply -mb-2;
-        }
+    .floating-active:not(floating-label) {
+        @apply pt-2;
+        @apply -mb-2;
     }
 
     floating-label {

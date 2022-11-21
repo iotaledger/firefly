@@ -1,4 +1,4 @@
-import features from 'shared/features/features'
+import features from '@features/features'
 import { initAutoUpdate } from './lib/appUpdater'
 import { shouldReportError } from './lib/errorHandling'
 const { app, dialog, ipcMain, protocol, shell, BrowserWindow, session } = require('electron')
@@ -61,9 +61,9 @@ function getMachineId() {
     if (machineId === null) {
         try {
             machineId = machineIdSync()
-        } catch (error) {
+        } catch (err) {
             machineId = ''
-            console.error(error)
+            console.error(err)
         }
     }
     return machineId
@@ -219,8 +219,8 @@ const handleNavigation = (e, url) => {
         if (isUrlAllowed(url)) {
             shell.openExternal(url)
         }
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
     }
 }
 
@@ -236,16 +236,14 @@ function createWindow() {
         protocol.registerFileProtocol(process.env.APP_PROTOCOL, (request, callback) => {
             callback(request.url.replace(`${process.env.APP_PROTOCOL}:/`, app.getAppPath()).split('?')[0].split('#')[0])
         })
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
     }
 
     const mainWindowState = windowStateKeeper('main', 'settings.json')
 
     // Create the browser window
     windows.main = new BrowserWindow({
-        x: mainWindowState.x,
-        y: mainWindowState.y,
         width: mainWindowState.width,
         height: mainWindowState.height,
         minWidth: 1280,

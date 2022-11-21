@@ -1,46 +1,34 @@
 <script lang="typescript">
+    import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
     import { Button, Text, FontWeight, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import {
-        IAsset,
-        NewTransactionDetails,
-        newTransactionDetails,
-        NewTransactionType,
-        setNewTransactionDetails,
-    } from '@core/wallet'
-    import {
-        RecipientInput,
-        AssetAmountInput,
-        OptionalInput,
-        NetworkInput,
-        NftInput,
-        NftMediaSize,
-        NftMediaContainer,
-    } from 'shared/components'
-    import { DestinationNetwork } from '@core/network'
-    import { getByteLengthOfString } from '@core/utils'
-    import { get } from 'svelte/store'
+    import { IAsset, newTransactionDetails, NewTransactionType, setNewTransactionDetails } from '@core/wallet'
+    import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
+    import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
+    import { selectedAccount } from '@core/account'
+    import { isLayer1Destination } from '@core/layer-2'
 
     enum SendForm {
         SendToken = 'general.sendToken',
         SendNft = 'general.sendNft',
     }
+
+    const transactionDetails = get(newTransactionDetails)
+    let { metadata, recipient, tag, layer2Parameters } = transactionDetails
+
     let assetAmountInput: AssetAmountInput
+    let nftInput: NftInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
 
-    let network: DestinationNetwork
+    let networkAddress = layer2Parameters?.networkAddress
 
     let nftId: string
-
     let rawAmount: string
     let asset: IAsset
     let unit: string
-
-    const transactionDetails = get(newTransactionDetails)
-    let { metadata, recipient, tag } = transactionDetails
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetails.rawAmount
@@ -54,43 +42,48 @@
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
-    function getTransactionDetails(): NewTransactionDetails {
-        if (activeTab === SendForm.SendToken) {
-            return {
+    $: ownsNfts = $selectedAccount.balances.nfts.length > 0
+    $: isLayer2 = !isLayer1Destination(networkAddress)
+    $: isSendTokenTab = activeTab === SendForm.SendToken
+
+    function setTransactionDetails(): void {
+        layer2Parameters = isLayer2 ? { networkAddress } : null
+
+        if (isSendTokenTab) {
+            setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
+                recipient,
                 asset,
                 rawAmount,
                 unit,
-                recipient,
-                metadata,
                 tag,
-            }
+                metadata,
+                layer2Parameters,
+            })
         } else {
-            return {
+            setNewTransactionDetails({
                 type: NewTransactionType.NftTransfer,
-                nftId,
                 recipient,
-                metadata,
+                nftId,
                 tag,
-            }
+                metadata,
+            })
         }
     }
 
     async function validate(): Promise<boolean> {
         try {
-            if (activeTab === SendForm.SendToken) {
-                await assetAmountInput?.validate()
-            } else if (!nftId) {
-                return false
-            }
             await Promise.all([
+                isSendTokenTab ? assetAmountInput?.validate() : nftInput?.validate(),
                 recipientInput?.validate(),
-                metadataInput?.validate(validateOptionalInput(metadata, 8192, localize('error.send.metadataTooLong'))),
-                tagInput?.validate(validateOptionalInput(tag, 64, localize('error.send.tagTooLong'))),
+                metadataInput?.validate(
+                    validateOptionalInput(metadata, MAX_METADATA_BYTES, localize('error.send.metadataTooLong'))
+                ),
+                tagInput?.validate(validateOptionalInput(tag, MAX_TAG_BYTES, localize('error.send.tagTooLong'))),
             ])
             return true
-        } catch (error) {
-            console.error('Error: ', error)
+        } catch (err) {
+            console.error('Error: ', err)
             return false
         }
     }
@@ -107,7 +100,7 @@
     async function onContinue(): Promise<void> {
         const valid = await validate()
         if (valid) {
-            setNewTransactionDetails(getTransactionDetails())
+            setTransactionDetails()
             openPopup({
                 type: 'sendConfirmation',
                 overflow: true,
@@ -122,31 +115,34 @@
 
 <send-form-popup class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
-        {localize('general.sendAsset')}
+        {localize('popups.transaction.title')}
     </Text>
-    <Tabs bind:activeTab {tabs} />
     <send-form-inputs class="flex flex-col space-y-4">
+        {#if ownsNfts}
+            <Tabs bind:activeTab {tabs} />
+        {/if}
         {#if activeTab === SendForm.SendToken}
             <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit />
         {:else}
-            <NftMediaContainer {nftId} size={NftMediaSize.Medium} />
-            <NftInput bind:nftId />
+            <NftInput bind:this={nftInput} bind:nftId />
         {/if}
-        <NetworkInput bind:network />
-        <RecipientInput bind:this={recipientInput} bind:recipient />
+        <NetworkInput bind:networkAddress showLayer2={isSendTokenTab} />
+        <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
-            <OptionalInput
-                bind:this={metadataInput}
-                bind:value={metadata}
-                label={localize('general.metadata')}
-                description={localize('tooltips.optionalInput')}
-            />
             <OptionalInput
                 bind:this={tagInput}
                 bind:value={tag}
                 label={localize('general.tag')}
                 description={localize('tooltips.optionalInput')}
             />
+            {#if !isLayer2}
+                <OptionalInput
+                    bind:this={metadataInput}
+                    bind:value={metadata}
+                    label={localize('general.metadata')}
+                    description={localize('tooltips.optionalInput')}
+                />
+            {/if}
         </optional-inputs>
     </send-form-inputs>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
@@ -154,7 +150,7 @@
             {localize('actions.cancel')}
         </Button>
         <Button classes="w-full" onClick={onContinue}>
-            {localize('actions.send')}
+            {localize('actions.next')}
         </Button>
     </popup-buttons>
 </send-form-popup>

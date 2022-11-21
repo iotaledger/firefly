@@ -2,7 +2,7 @@
     import Big from 'big.js'
     import { Text, AssetDropdown, InputContainer, AmountInput, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
-    import { localize, parseCurrency } from '@core/i18n'
+    import { formatCurrency, localize, parseCurrency } from '@core/i18n'
     import {
         formatTokenAmountBestMatch,
         convertToRawAmount,
@@ -11,6 +11,7 @@
         visibleSelectedAccountAssets,
     } from '@core/wallet'
     import { IOTA_UNIT_MAP } from '@core/utils'
+    import { getMarketAmountFromAssetValue } from '@core/market/utils'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
@@ -19,7 +20,9 @@
     export let rawAmount: string = undefined
     export let unit: string = undefined
 
-    let amount: string = rawAmount ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit) : undefined
+    let amount: string = rawAmount
+        ? formatTokenAmountDefault(Number(rawAmount), asset?.metadata, unit, false)
+        : undefined
     let amountInputElement: HTMLInputElement
     let error: string
 
@@ -36,6 +39,9 @@
         allowedDecimals = IOTA_UNIT_MAP?.[unit?.substring(0, 1)] ?? 0
     }
 
+    $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
+    $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
+
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && asset?.metadata?.unit
         if (isRawAmount) {
@@ -51,7 +57,6 @@
     export function validate(allowZeroOrNull = false): Promise<void> {
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
-        const bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
         // Zero value transactions can still contain metadata/tags
         if (allowZeroOrNull && isAmountZeroOrNull) {
             return
@@ -124,6 +129,6 @@
             </div>
         {/if}
         <!-- Placeholder for asset USD value  -->
-        <Text color="gray-600" darkColor="gray-500" fontSize="xs">-</Text>
+        <Text color="gray-600" darkColor="gray-500" fontSize="xs">{formatCurrency(marketAmount) ?? ''}</Text>
     </div>
 </InputContainer>

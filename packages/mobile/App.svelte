@@ -1,33 +1,36 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
     import { localeDirection, setupI18n } from '@core/i18n'
-    import { activeProfile, cleanupEmptyProfiles, isActiveProfileOutdated, migrateActiveProfile } from '@core/profile'
-    import { AppRoute, initialiseRouters } from './lib/routers'
+    import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
+    import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
     import {
         appSettings,
         appStage,
         AppStage,
         AppTheme,
         initAppSettings,
+        Platform,
         setPlatform,
         shouldBeDarkMode,
     } from '@core/app'
-    import { Platform } from '@lib/platform'
     import { onboardingProfile } from '@contexts/onboarding'
     import { ToastContainer } from '@ui'
     import { Route } from './components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
+    import {
+        AppRoute,
+        getAppRouter,
+        getRouterForAppContext,
+        goToAppContext,
+        initialiseRouters,
+        resetRouterForAppContext,
+        resetRouters,
+    } from './lib/routers'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
-    const { loggedIn } = $activeProfile
-
-    $: if ($loggedIn) {
-        if (isActiveProfileOutdated($activeProfile?.version)) {
-            migrateActiveProfile()
-        }
-    }
+    checkAndMigrateProfiles()
 
     $: $appSettings.darkMode
         ? document.body.classList.add('scheme-dark')
@@ -57,6 +60,16 @@
         //     await setAppVersionDetails()
         //     pollCheckForAppUpdate()
         // }
+
+        initialiseRouterManager({
+            extensions: [
+                [RouterManagerExtensionName.GetAppRouter, getAppRouter],
+                [RouterManagerExtensionName.GetRouterForAppContext, getRouterForAppContext],
+                [RouterManagerExtensionName.GoToAppContext, goToAppContext],
+                [RouterManagerExtensionName.ResetRouterForAppContext, resetRouterForAppContext],
+                [RouterManagerExtensionName.ResetRouters, resetRouters],
+            ],
+        })
 
         await cleanupEmptyProfiles()
         // loadPersistedProfileIntoActiveProfile($activeProfileId)

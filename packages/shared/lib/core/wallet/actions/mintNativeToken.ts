@@ -6,12 +6,11 @@ import { Converter } from '@core/utils'
 import { showAppNotification } from '@auxiliary/notification'
 import { activeProfile, ProfileType } from '@core/profile'
 import { handleLedgerError } from '@core/ledger'
-import { Activity } from '../classes'
 import { buildPersistedAssetFromIrc30Metadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
-import { preprocessTransaction } from '../utils'
+import { generateActivity, preprocessTransaction } from '../utils'
 import { VerifiedStatus } from '../enums'
 
 export async function mintNativeToken(
@@ -39,7 +38,10 @@ export async function mintNativeToken(
         )
         const processedTransaction = preprocessTransaction(mintTokenTransaction.transaction)
         addPersistedAsset(persistedAsset)
-        addActivityToAccountActivitiesInAllAccountActivities(account.index, new Activity(processedTransaction, account))
+        addActivityToAccountActivitiesInAllAccountActivities(
+            account.index,
+            generateActivity(processedTransaction, account)
+        )
         showAppNotification({
             type: 'success',
             message: localize('notifications.mintNativeToken.success'),
@@ -48,14 +50,14 @@ export async function mintNativeToken(
         resetMintTokenDetails()
         updateSelectedAccount({ isTransferring: false })
         return Promise.resolve()
-    } catch (reason) {
+    } catch (err) {
         updateSelectedAccount({ isTransferring: false })
 
         const _activeProfile = get(activeProfile)
         if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerError(reason.error)
+            handleLedgerError(err?.error)
         }
 
-        return Promise.reject(reason)
+        return Promise.reject(err)
     }
 }

@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store'
 
-import { Platform } from '@lib/platform'
-
+import { Platform } from '../classes'
 import { IAppVersionDetails } from '../interfaces'
 
 const DEFAULT_APP_VERSION_DETAILS: IAppVersionDetails = {

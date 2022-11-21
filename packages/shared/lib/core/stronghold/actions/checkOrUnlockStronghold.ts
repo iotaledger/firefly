@@ -1,7 +1,7 @@
-import { BaseError } from '@core/error'
 import { isStrongholdUnlocked } from '@core/profile-manager'
 import { openPopup, popupState } from '@auxiliary/popup'
 import { get } from 'svelte/store'
+import { handleError } from '@core/error/handlers/handleError'
 
 export async function checkOrUnlockStronghold(
     callback: () => Promise<unknown> = async () => {},
@@ -29,6 +29,6 @@ export async function checkOrUnlockStronghold(
             })
         }
     } catch (err) {
-        new BaseError({ message: err.error ?? err.message, logToConsole: true })
+        handleError(err)
     }
 }

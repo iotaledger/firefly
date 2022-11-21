@@ -1,8 +1,12 @@
-import { convertDateToUnixTimestamp } from '@core/utils'
-import type { OutputOptions, Assets } from '@iota/wallet'
 import { get } from 'svelte/store'
+import type { OutputOptions, Assets } from '@iota/wallet'
+
+import { selectedAccount } from '@core/account'
+import { convertDateToUnixTimestamp, Converter } from '@core/utils'
 import { IAsset } from '../interfaces'
 import { selectedAccountAssets } from '../stores'
+import { getLayer2MetadataForTransfer, ILayer2Parameters } from '@core/layer-2'
+import { addGasBudget } from '@core/layer-2/utils/addGasBudget'
 
 export function getOutputOptions(
     expirationDate: Date,
@@ -13,6 +17,7 @@ export function getOutputOptions(
     asset?: IAsset,
     giftStorageDeposit?: boolean,
     surplus?: string,
+    layer2Parameters?: ILayer2Parameters,
     nftId?: string
 ): OutputOptions {
     const unixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
@@ -24,6 +29,15 @@ export function getOutputOptions(
         amount = surplus
     } else {
         amount = nativeTokenId ? '0' : bigAmount.toString()
+    }
+
+    tag = Converter.utf8ToHex(tag, true)
+    if (layer2Parameters) {
+        amount = addGasBudget(rawAmount)
+        metadata = getLayer2MetadataForTransfer(recipientAddress)
+        recipientAddress = layer2Parameters.networkAddress
+    } else {
+        metadata = Converter.utf8ToHex(metadata, true)
     }
 
     const assets: Assets = {}
@@ -44,6 +58,7 @@ export function getOutputOptions(
         features: {
             ...(metadata && { metadata }),
             ...(tag && { tag }),
+            ...(layer2Parameters && { sender: get(selectedAccount).depositAddress }),
         },
         unlocks: {
             ...(unixTime && { expirationUnixTime: unixTime }),

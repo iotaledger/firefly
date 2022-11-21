@@ -11,12 +11,13 @@
             "@contexts/*": ["../shared/lib/contexts/*"],
             "@components": ["./components"],
             "@core/*": ["../shared/lib/core/*"],
-            "@features/*": ["../shared/features/*"],
+            "@features/*": ["./features/*"],
             "@lib/*": ["../shared/lib/*"],
             "@ui": ["../shared/components"],
             "@views": ["./views"]
         },
         "types": ["node"]
     },
-    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"]
+    "include": ["./lib/**/*.ts", "../shared/lib/**/*.ts"],
+    "exclude": ["../**/tests"]
 }

@@ -9,8 +9,8 @@
         needsToAcceptLatestPrivacyPolicy,
         TERMS_OF_SERVICE_VERSION,
         PRIVACY_POLICY_VERSION,
+        Platform,
     } from '@core/app'
-    import { Platform } from 'shared/lib/platform'
 
     const TOS_LINK = 'https://firefly.iota.org/terms'
     const PRIVACY_POLICY_LINK = 'https://firefly.iota.org/privacy'

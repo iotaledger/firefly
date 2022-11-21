@@ -1,73 +1,78 @@
 <script lang="typescript">
-    import { IAccountState } from '@core/account'
-    import { localize } from '@core/i18n'
     import { networkHrp } from '@core/network'
-    import { Subject } from '@core/wallet'
-    import { BECH32_ADDRESS_LENGTH, validateBech32Address } from '@core/utils'
-    import { Modal, RecipientAccountSelector, SelectorInput } from 'shared/components'
+    import { validateBech32Address } from '@core/utils'
+    import { Modal, SelectorInput, IOption, ColoredCircle } from 'shared/components'
+    import { visibleActiveAccounts } from '@core/profile'
+    import { getSubjectFromAddress, Subject } from '@core/wallet'
+    import { getAccountColorById, selectedAccountIndex } from '@core/account'
+    import { validateEthereumAddress } from '@core/layer-2'
+    import { localize } from '@core/i18n'
 
     export let recipient: Subject
     export let disabled = false
+    export let isLayer2 = false
 
     const addressPrefix = $networkHrp
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
 
-    let selectedAccount: IAccountState
-    let value: string
     let error: string
-    let previousValue: string
+    let selected: IOption =
+        recipient?.type === 'account'
+            ? { key: recipient.account.name, value: recipient.account.depositAddress }
+            : { value: recipient?.address }
 
-    if (!selectedAccount && recipient?.type === 'account') {
-        selectedAccount = recipient?.account
-    } else if (!selectedAccount && recipient?.type === 'address' && previousValue === value) {
-        value = recipient?.address
-    }
-
-    $: recipient = {
-        ...(selectedAccount && { type: 'account', account: selectedAccount }),
-        ...(!selectedAccount && { type: 'address', address: value }),
-    }
-
-    $: {
-        if (inputElement && selectedAccount) {
-            inputElement.value = selectedAccount?.name
-        }
-    }
-    $: {
-        if (value) {
-            selectedAccount = undefined
-        }
-    }
+    $: accountOptions = isLayer2 ? <IOption[]>[] : getLayer1AccountOptions()
+    $: recipient = getSubjectFromAddress(selected?.value)
+    $: isLayer2, (error = '')
 
     export function validate(): Promise<void> {
-        if (selectedAccount) {
-            return Promise.resolve()
-        }
-
-        if (value.length !== BECH32_ADDRESS_LENGTH + addressPrefix.length) {
-            error = localize('error.send.addressLength', {
-                values: {
-                    length: BECH32_ADDRESS_LENGTH + addressPrefix.length,
-                },
-            })
+        if (recipient?.type === 'address') {
+            if (!recipient.address) {
+                error = localize('error.send.recipientRequired')
+            }
+            if (isLayer2) {
+                error = validateEthereumAddress(recipient?.address)
+            } else {
+                error = validateBech32Address(addressPrefix, recipient?.address)
+            }
+        } else if (recipient?.type === 'account') {
+            if (isLayer2) {
+                error = localize('error.layer2.layer1Recipient')
+            }
         } else {
-            error = validateBech32Address(addressPrefix, value)
+            error = localize('error.send.recipientRequired')
         }
 
         if (error) {
             return Promise.reject(error)
+        } else {
+            return Promise.resolve()
         }
-        return Promise.resolve()
+    }
+
+    function getLayer1AccountOptions(): IOption[] {
+        return $visibleActiveAccounts
+            .filter((account) => account.index !== $selectedAccountIndex)
+            .map((account) => ({
+                id: account.index,
+                key: account.name,
+                value: account.depositAddress,
+            }))
     }
 </script>
 
-<SelectorInput labelLocale="general.recipient" bind:value bind:inputElement bind:modal bind:error {disabled}>
-    <RecipientAccountSelector
-        bind:modal
-        bind:selected={selectedAccount}
-        searchValue={value}
-        onClose={() => inputElement.blur()}
-    />
+<SelectorInput
+    labelLocale="general.recipient"
+    bind:selected
+    bind:inputElement
+    bind:modal
+    bind:error
+    {disabled}
+    options={accountOptions}
+    {...$$restProps}
+    let:option
+>
+    <ColoredCircle color={getAccountColorById(option?.id)} />
 </SelectorInput>

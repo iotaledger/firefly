@@ -1,5 +1,5 @@
 import { activeProfile, activeProfileId, INITIAL_ACTIVE_PROFILE, IProfile } from '@core/profile'
-import { Platform } from '@lib/platform'
+import { Platform } from '@core/app'
 import { get } from 'svelte/store'
 
 export function resetActiveProfile(): void {

@@ -1,13 +1,21 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { InclusionState, IPersistedAsset } from '@core/wallet'
+    import {
+        FoundryActivity,
+        getAssetFromPersistedAssets,
+        getFormattedAmountFromActivity,
+        InclusionState,
+        IPersistedAsset,
+        selectedAccountAssets,
+    } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
 
-    export let amount: string
-    export let fiatAmount: string
-    export let inclusionState: InclusionState
-    export let asset: IPersistedAsset
+    export let activity: FoundryActivity
+
+    let asset: IPersistedAsset
+    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
+    $: amount = getFormattedAmountFromActivity(activity)
 </script>
 
 <AssetIcon {asset} showVerifiedBadgeOnly />
@@ -18,7 +26,7 @@
             lineHeight="140"
             classes="overflow-hidden overflow-ellipsis multiwrap-line2"
         >
-            {localize(inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting')}
+            {localize(activity.inclusionState === InclusionState.Confirmed ? 'general.minted' : 'general.minting')}
         </Text>
         <Text fontWeight={FontWeight.semibold} lineHeight="140" color="blue-700" classes="whitespace-nowrap">
             {amount}
@@ -28,9 +36,6 @@
     <div class="flex flex-row justify-between">
         <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
             {asset?.metadata?.name ? truncateString(asset?.metadata?.name, 20, 0) : truncateString(asset?.id, 6, 7)}
-        </Text>
-        <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="whitespace-nowrap">
-            {fiatAmount}
         </Text>
     </div>
 </div>

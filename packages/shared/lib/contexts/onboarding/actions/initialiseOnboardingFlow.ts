@@ -1,8 +1,9 @@
 import { get } from 'svelte/store'
 
-import { isPollingLedgerDeviceStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
+import { stopPollingLedgerNanoStatus } from '@core/ledger/actions'
+import { isPollingLedgerDeviceStatus } from '@core/ledger/stores'
+import { resetActiveProfile } from '@core/profile/actions'
 import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
-import { AppRoute, appRouter, initialiseOnboardingRouters, OnboardingRoute, onboardingRouter } from '@core/router'
 
 import { IOnboardingInitialisationOptions } from '../interfaces'
 import { updateOnboardingProfile } from '../stores'
@@ -11,6 +12,8 @@ import { deleteOnboardingProfile } from './deleteOnboardingProfile'
 import { initialiseOnboardingProfile } from './initialiseOnboardingProfile'
 
 export async function initialiseOnboardingFlow(options: IOnboardingInitialisationOptions): Promise<void> {
+    resetActiveProfile()
+
     await deleteOnboardingProfile()
 
     if (get(isPollingLedgerDeviceStatus)) {
@@ -26,10 +29,4 @@ export async function initialiseOnboardingFlow(options: IOnboardingInitialisatio
     if (networkType) {
         updateOnboardingProfile({ networkType })
     }
-
-    initialiseOnboardingRouters()
-    const route = isDeveloperProfile ? OnboardingRoute.NetworkSetup : OnboardingRoute.ProfileSetup
-    get(onboardingRouter).goTo(route)
-    get(appRouter).reset()
-    get(appRouter).goTo(AppRoute.Onboarding)
 }
