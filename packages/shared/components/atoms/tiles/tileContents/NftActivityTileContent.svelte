@@ -24,6 +24,9 @@
         if (direction === ActivityDirection.Outgoing) {
             return isConfirmed ? 'general.sentNft' : 'general.sendingNft'
         }
+        if (direction === ActivityDirection.Minting) {
+            return isConfirmed ? 'general.mintedNft' : 'general.mintingNft'
+        }
     }
 
     function getSubjectLocale(subject: Subject): string {
