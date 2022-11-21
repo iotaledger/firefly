@@ -11,7 +11,7 @@ export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
     output: Output,
     account: IAccountState,
-    isOnlyOutput: boolean
+    isOnlyOutput?: boolean
 ): {
     subject: Subject
     direction: ActivityDirection
