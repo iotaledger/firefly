@@ -572,7 +572,8 @@
                 "royalties": "Royalties",
                 "issuerName": "Issuer Name",
                 "description": "Description",
-                "attributes": "Attributes"
+                "attributes": "Attributes",
+                "metadata": "Metadata"
             }
         }
     },

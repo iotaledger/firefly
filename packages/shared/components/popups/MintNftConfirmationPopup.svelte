@@ -1,9 +1,9 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Text, FontWeight, NftActivityDetails, ActivityInformation } from 'shared/components'
+    import { Button, Text, FontWeight, NftMediaContainer, NftMetadataInformation } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
-    import { ActivityDirection, mintNft, mintNftDetails } from '@core/wallet'
+    import { mintNft, mintNftDetails } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup } from '@auxiliary/popup'
@@ -68,11 +68,11 @@
         {localize('popups.mintNftForm.title')}
     </Text>
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
-        <nft-details>
-            <NftActivityDetails />
-            <ActivityInformation
-                activity={{ metadata: JSON.stringify(actualMintDetails), direction: ActivityDirection.Outgoing }}
-            />
+        <nft-details class="flex flex-col justify-center items-center space-y-4">
+            <NftMediaContainer />
+            <div class="w-full h-full space-y-2 flex flex-auto flex-col flex-shrink-0">
+                <NftMetadataInformation nftMetadata={actualMintDetails} />
+            </div>
         </nft-details>
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
