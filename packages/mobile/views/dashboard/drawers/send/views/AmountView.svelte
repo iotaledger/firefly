@@ -3,6 +3,7 @@
     import { onMount } from 'svelte'
 
     import { localize, parseCurrency } from '@core/i18n'
+    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { IOTA_UNIT_MAP } from '@core/utils'
     import {
         convertToRawAmount,
@@ -18,6 +19,9 @@
     import { TokenUnitSwapper } from '../../../../../components'
     import { sendRouter } from '../../../../../lib/routers'
 
+    export let onSend: () => Promise<void> = () => Promise.resolve()
+    export let submitSendOnMount: boolean = false
+
     let amount: string
     let rawAmount: string
     let asset: IAsset
@@ -26,6 +30,8 @@
 
     let error: string = null
     let amountInputElement: HTMLInputElement
+
+    let loading: boolean = false
 
     let allowedDecimals = 0
     $: if (!asset?.metadata?.useMetricPrefix) {
@@ -42,6 +48,10 @@
     $: amount, validate()
 
     onMount(() => {
+        if (submitSendOnMount) {
+            loading = true
+            onSend()
+        }
         if ($newTransactionDetails?.type === NewTransactionType.TokenTransfer) {
             const storedRawAmount = $newTransactionDetails?.rawAmount
             asset = $newTransactionDetails.asset
@@ -88,13 +98,19 @@
         amountInputElement.focus()
     }
 
-    function onContinueClick(): void {
+    async function onContinueClick(): Promise<void> {
+        loading = true
         updateNewTransactionDetails({
             type: $newTransactionDetails.type,
             rawAmount,
             unit,
         })
-        $sendRouter.next()
+        const isUnlocked = await isStrongholdUnlocked()
+        if (isUnlocked) {
+            await onSend()
+        } else {
+            $sendRouter.next()
+        }
     }
 </script>
 
@@ -110,6 +126,7 @@
                 clearBackground
                 clearPadding
                 clearBorder
+                disabled={loading}
             />
             <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
         </div>
@@ -117,7 +134,7 @@
             <TokenUnitSwapper {tokenMetadata} selectedUnit={unit} onClick={toggleUnit} />
         </div>
     </div>
-    <Button onClick={onContinueClick} disabled={!!error} classes="w-full">
+    <Button isBusy={loading} onClick={onContinueClick} disabled={!!error || loading} classes="w-full">
         {error ?? localize('actions.continue')}
     </Button>
 </div>

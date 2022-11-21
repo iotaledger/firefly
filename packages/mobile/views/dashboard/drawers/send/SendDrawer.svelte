@@ -51,5 +51,5 @@
 </script>
 
 <Drawer onClose={onDrawerClose} {title} {fullScreen} {allowBack} onBackClick={() => $sendRouter.previous()}>
-    <SendRouter />
+    <SendRouter {onClose} />
 </Drawer>

@@ -27,7 +27,11 @@ export class SendRouter extends Subrouter<SendRoute> {
                 break
             }
             case SendRoute.Amount: {
-                nextRoute = SendRoute.Confirm
+                nextRoute = SendRoute.Password
+                break
+            }
+            case SendRoute.Password: {
+                nextRoute = SendRoute.Amount
                 break
             }
         }
