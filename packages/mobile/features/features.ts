@@ -31,10 +31,10 @@ const features = {
                 enabled: false,
             },
             details: {
-                enabled: false,
+                enabled: true,
             },
             actions: {
-                enabled: false,
+                enabled: true,
             },
         },
         tokens: {
