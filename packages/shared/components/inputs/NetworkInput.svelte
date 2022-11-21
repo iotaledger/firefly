@@ -6,25 +6,36 @@
     const readonlyAttribute = $activeProfile?.isDeveloperProfile ? {} : { readonly: true }
     const networkAddresses = NETWORK_ADDRESS[$activeProfile.networkType]
 
-    export let networkAddress: string = networkAddresses[DestinationNetwork.Shimmer]
+    const LAYER_1_NETWORK_OPTION = {
+        key: DestinationNetwork.Shimmer,
+        value: networkAddresses[DestinationNetwork.Shimmer],
+    }
 
-    const networkOptions: IOption[] = Object.values(DestinationNetwork)
-        .filter((_network) => !!networkAddresses[_network])
-        .map((_network) => ({
-            key: _network,
-            value: networkAddresses[_network],
-        }))
+    export let networkAddress: string = LAYER_1_NETWORK_OPTION.value
+    export let showLayer2: boolean = false
+
+    $: networkOptions = showLayer2 ? getLayer2NetworkOptions() : [LAYER_1_NETWORK_OPTION]
+
+    let selected: IOption = LAYER_1_NETWORK_OPTION
+    $: if (!showLayer2) {
+        selected = LAYER_1_NETWORK_OPTION
+    }
 
     let inputElement: HTMLInputElement = undefined
     let modal: Modal = undefined
 
     let error: string
-    let selected: IOption = {
-        key: networkOptions.find(({ key }) => networkAddresses[key] === networkAddress)?.key,
-        value: networkAddress,
-    }
 
     $: networkAddress = selected?.value
+
+    function getLayer2NetworkOptions(): IOption[] {
+        return Object.values(DestinationNetwork)
+            .filter((_network) => !!networkAddresses[_network])
+            .map((_network) => ({
+                key: _network,
+                value: networkAddresses[_network],
+            }))
+    }
 </script>
 
 <SelectorInput
