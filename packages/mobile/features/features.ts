@@ -30,6 +30,12 @@ const features = {
             search: {
                 enabled: false,
             },
+            details: {
+                enabled: false,
+            },
+            actions: {
+                enabled: false,
+            },
         },
         tokens: {
             enabled: true,
