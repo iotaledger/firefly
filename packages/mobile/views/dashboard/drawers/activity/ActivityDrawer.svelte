@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { localize } from '@core/i18n'
     import { Drawer } from '../../../../components'
     import { ActivityRoute, activityRoute } from '../../../../lib/routers'
     import ActivityRouter from './ActivityRouter.svelte'
@@ -12,13 +13,13 @@
     function setTitle(): void {
         switch ($activityRoute) {
             case ActivityRoute.Password:
-                title = 'Password required'
+                title = localize('popups.password.title')
                 break
             case ActivityRoute.Reject:
-                title = 'Reject transaction'
+                title = localize('actions.confirmRejection.title')
                 break
             default:
-                title = 'Transaction details'
+                title = localize('popups.transactionDetails.title')
                 break
         }
     }
