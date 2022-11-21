@@ -107,7 +107,11 @@
         })
         const isUnlocked = await isStrongholdUnlocked()
         if (isUnlocked) {
-            await onSend()
+            try {
+                await onSend()
+            } catch (e) {
+                loading = false
+            }
         } else {
             $sendRouter.next()
         }
