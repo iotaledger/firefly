@@ -10,23 +10,15 @@
 
     let detailsList: { [key in string]: { data: string; tooltipText?: string; isCopyable?: boolean } }
     $: detailsList = {
-        ...(activity.assetId && {
-            assetId: { data: activity.assetId, isCopyable: true },
-        }),
-        ...(metadata?.name && {
-            tokenName: { data: metadata.name },
-        }),
         ...(metadata?.name && {
             tokenName: { data: metadata.name },
         }),
         ...(metadata?.unit && {
             unit: { data: metadata.unit },
         }),
-        ...(metadata?.subunit && {
-            subunit: { data: metadata.subunit },
-        }),
-        ...(metadata?.decimals && {
-            decimals: { data: String(metadata.decimals) },
+        decimals: { data: String(metadata.decimals) },
+        ...(metadata?.description && {
+            description: { data: metadata.description },
         }),
         ...(metadata?.tickerSymbol && {
             tickerSymbol: { data: metadata.tickerSymbol },
