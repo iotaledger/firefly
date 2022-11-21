@@ -8,8 +8,8 @@ import { getLedgerDeviceStatus } from './getLedgerDeviceStatus'
 import { pollLedgerNanoStatus } from './pollLedgerNanoStatus'
 
 export function promptUserToConnectLedger(
-    onConnected: () => void = (): void => {},
-    onCancel: () => void = (): void => {},
+    onConnected = (): void => {},
+    onCancel = (): void => {},
     overridePopup: boolean = false
 ): void {
     function onDisconnected(): void {
