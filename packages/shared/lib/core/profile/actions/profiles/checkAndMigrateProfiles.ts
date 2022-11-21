@@ -9,40 +9,38 @@ import { currentProfileVersion, profiles, saveProfile } from '../../stores'
  */
 
 export function checkAndMigrateProfiles(): void {
-    const shouldMigratePersistedProfiles = (get(currentProfileVersion) ?? -1) < PROFILE_VERSION
+    const shouldMigratePersistedProfiles = (get(currentProfileVersion) ?? 3) < PROFILE_VERSION
     if (shouldMigratePersistedProfiles) {
-        migratePersistedProfiles()
-        currentProfileVersion.set(PROFILE_VERSION)
+        migrateEachVersion()
     }
 }
 
-function migratePersistedProfiles(): void {
-    const _profiles = get(profiles)
-    for (const profile of _profiles) {
-        migratePersistedProfile(profile)
-    }
-}
-
-function migratePersistedProfile(persistedProfile: IPersistedProfile): void {
-    let migratedPersistedProfile = persistedProfile
+function migrateEachVersion(): void {
     let migrationVersion = get(currentProfileVersion)
     for (migrationVersion; migrationVersion < PROFILE_VERSION; migrationVersion++) {
-        migratedPersistedProfile =
-            persistedProfileMigrationsMap?.[migrationVersion]?.(migratedPersistedProfile) ?? migratedPersistedProfile
+        migratePersistedProfile(migrationVersion)
+        currentProfileVersion.set(migrationVersion + 1)
     }
-    saveProfile(migratedPersistedProfile)
 }
 
-const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) => IPersistedProfile> = {
+function migratePersistedProfile(migrationVersion): void {
+    const _profiles = get(profiles)
+    for (const profile of _profiles) {
+        persistedProfileMigrationsMap?.[migrationVersion]?.(profile)
+    }
+}
+
+const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) => void> = {
     /**
      * NOTE: 0-2 are missing here because we wrote this functionality,
      * when the profile version was already 3.
      */
     3: persistedProfileMigrationToV4,
     4: persistedProfileMigrationToV5,
+    5: persistedAssetsMigrationToV6,
 }
 
-function persistedProfileMigrationToV4(existingProfile: unknown): IPersistedProfile {
+function persistedProfileMigrationToV4(existingProfile: unknown): void {
     const newProfile = {}
 
     const keysToKeep = [
@@ -65,10 +63,10 @@ function persistedProfileMigrationToV4(existingProfile: unknown): IPersistedProf
         newProfile[key] = existingValue
     })
 
-    return newProfile as IPersistedProfile
+    saveProfile(newProfile as IPersistedProfile)
 }
 
-function persistedProfileMigrationToV5(existingProfile: unknown): IPersistedProfile {
+function persistedProfileMigrationToV5(existingProfile: unknown): void {
     interface IOldPersistedProfile {
         settings: {
             currency: unknown
@@ -81,5 +79,10 @@ function persistedProfileMigrationToV5(existingProfile: unknown): IPersistedProf
     const newProfile = oldProfile as unknown as IPersistedProfile
     newProfile.settings.marketCurrency = DEFAULT_PERSISTED_PROFILE_OBJECT.settings?.marketCurrency
 
-    return newProfile
+    saveProfile(newProfile)
+}
+
+function persistedAssetsMigrationToV6(existingProfile: IPersistedProfile): void {
+    existingProfile.forceAssetRefresh = true
+    saveProfile(existingProfile)
 }
