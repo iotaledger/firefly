@@ -13,19 +13,11 @@
 
     function onClaim(): void {
         $selectedActivity && claimActivity($selectedActivity)
-        if (detailsVisible) {
-            $activityRouter.previous()
-        } else {
-            onClose()
-        }
+        handleClose()
     }
     function onReject(): void {
         $selectedActivity && rejectActivity($selectedActivity.id)
-        if (detailsVisible) {
-            $activityRouter.previous()
-        } else {
-            onClose()
-        }
+        handleClose()
     }
     function handleClose(): void {
         if (detailsVisible) {
