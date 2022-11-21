@@ -16,7 +16,6 @@
 
     function onDrawerClose(): void {
         onClose && onClose()
-        $sendRouter.reset()
         resetNewTokenTransactionDetails()
     }
     function setTitle(): void {
