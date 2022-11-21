@@ -135,7 +135,7 @@
             <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
         </div>
         <div class="absolute right-0">
-            <TokenUnitSwapper {tokenMetadata} selectedUnit={unit} onClick={toggleUnit} />
+            <TokenUnitSwapper {tokenMetadata} selectedUnit={unit} onClick={toggleUnit} disabled={loading} />
         </div>
     </div>
     <Button isBusy={loading} onClick={onContinueClick} disabled={!!error || loading} classes="w-full">
