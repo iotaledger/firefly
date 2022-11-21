@@ -16,14 +16,15 @@
     let value: string = selected?.key ?? selected?.value
     let previousValue: string = value
     let hasFocus: boolean
-    let filteredOptions: IOption[] = options
 
+    $: filteredOptions = options
     $: if (previousValue !== value) {
         selected = { value }
         previousValue = value
         setFilteredOptions(value)
     }
 
+    $: options, resetValue()
     $: hasFocus && (error = '')
 
     $: if (hasFocus) {
@@ -47,6 +48,10 @@
         value = option?.key ?? option.value
         previousValue = value
         setFilteredOptions()
+    }
+
+    function resetValue(): void {
+        value = selected?.key ?? selected?.value
     }
 </script>
 
