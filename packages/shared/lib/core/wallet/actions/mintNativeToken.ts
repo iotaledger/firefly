@@ -50,14 +50,14 @@ export async function mintNativeToken(
         resetMintTokenDetails()
         updateSelectedAccount({ isTransferring: false })
         return Promise.resolve()
-    } catch (reason) {
+    } catch (err) {
         updateSelectedAccount({ isTransferring: false })
 
         const _activeProfile = get(activeProfile)
         if (_activeProfile.type === ProfileType.Ledger) {
-            handleLedgerError(reason.error)
+            handleLedgerError(err?.error)
         }
 
-        return Promise.reject(reason)
+        return Promise.reject(err)
     }
 }
