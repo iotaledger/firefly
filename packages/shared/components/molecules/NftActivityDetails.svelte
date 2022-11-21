@@ -3,11 +3,11 @@
 
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
-    import { Activity } from '@core/wallet'
+    import { NftActivity } from '@core/wallet'
 
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
-    export let activity: Partial<Activity>
+    export let activity: NftActivity
 
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
 </script>

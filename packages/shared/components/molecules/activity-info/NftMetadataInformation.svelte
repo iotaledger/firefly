@@ -3,11 +3,11 @@
 
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts, IIrc27Metadata } from '@core/nfts'
-    import { Activity, NftActivity } from '@core/wallet'
+    import { NftActivity } from '@core/wallet'
     import { selectedAccountIndex } from '@core/account'
 
-    export let activity: Partial<Activity> = {}
-    export let nftMetadata: Partial<IIrc27Metadata> = {}
+    export let activity: NftActivity
+    export let nftMetadata: IIrc27Metadata | string = undefined
 
     type NftMetadataDetailsList = {
         [key in keyof IIrc27Metadata]: {
@@ -16,16 +16,23 @@
         }
     }
 
-    $: storedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, (activity as NftActivity)?.nftId)
+    $: storedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity?.nftId)
     $: nftMetadataDetailsList = createNftMetadataDetailsList(
-        storedNft?.parsedMetadata ?? storedNft?.metadata ?? (nftMetadata as IIrc27Metadata)
+        storedNft?.parsedMetadata ?? storedNft?.metadata ?? nftMetadata
     )
 
     function createNftMetadataDetailsList(
         metadata: IIrc27Metadata | string
     ): NftMetadataDetailsList | { metadata: { data: string } } {
         if (typeof metadata === 'string') {
-            return { metadata: { data: metadata } }
+            let formattedMetadata: string
+            try {
+                formattedMetadata = JSON.stringify(JSON.parse(metadata), null, '\t')
+            } catch (e) {
+                formattedMetadata = metadata
+            }
+
+            return { metadata: { data: formattedMetadata } }
         }
         return createIrc27NftMetadataDetailsList(metadata)
     }
