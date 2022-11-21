@@ -71,6 +71,18 @@ if (isStrongholdPasswordValid(password)) {
 }
 ```
 
+## Catching an Error
+
+To catch an error use the following syntax:
+
+```typescript
+try {
+    ...
+} catch (err) {
+    ...
+}
+```
+
 ## Errors from wallet.rs
 
 We handle errors from wallet.rs by using the `handleError` function, e.g.

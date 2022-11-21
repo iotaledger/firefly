@@ -32,8 +32,8 @@ export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets 
                 if (persistedAsset) {
                     persistedAssets.push(persistedAsset)
                 }
-            } catch (reason) {
-                console.error(reason)
+            } catch (err) {
+                console.error(err)
             }
         }
     }
