@@ -10,8 +10,7 @@
         getAssetFromPersistedAssets,
     } from '@core/wallet'
     import features from '@features/features'
-    import { Button } from 'shared/components'
-    import { BasicActivityDetails } from '../../../../../components'
+    import { BasicActivityDetails, Button } from 'shared/components'
     import { ActivityRoute, activityRouter } from '../../../../../lib/routers'
 
     export let activity: Activity
