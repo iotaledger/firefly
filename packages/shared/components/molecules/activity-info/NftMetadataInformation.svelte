@@ -18,7 +18,7 @@
 
     $: storedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, (activity as NftActivity)?.nftId)
     $: nftMetadataDetailsList = createNftMetadataDetailsList(
-        storedNft?.parsedMetadata ?? (nftMetadata as IIrc27Metadata)
+        storedNft?.parsedMetadata ?? storedNft?.metadata ?? (nftMetadata as IIrc27Metadata)
     )
 
     function createNftMetadataDetailsList(
@@ -46,9 +46,6 @@
             }),
             ...(metadata?.uri && {
                 uri: { data: metadata.uri },
-            }),
-            ...(metadata?.collectionId && {
-                collectionId: { data: metadata.collectionId, isTooltipVisible: true },
             }),
             ...(metadata?.collectionName && {
                 collectionName: { data: metadata.collectionName },

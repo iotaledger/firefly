@@ -6,6 +6,6 @@ export interface INft {
     name: string
     issuer: AddressTypes
     metadata: string
-    parsedMetadata?: IIrc27Metadata | string
+    parsedMetadata?: IIrc27Metadata
     isOwned: boolean
 }

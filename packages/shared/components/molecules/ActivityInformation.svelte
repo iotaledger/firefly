@@ -22,7 +22,7 @@
     let hasMetadata = false
     $: {
         const storedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, (activity as NftActivity)?.nftId)
-        hasMetadata = !!storedNft?.parsedMetadata
+        hasMetadata = !!storedNft?.metadata
     }
 
     let tabs: Tab[] = []

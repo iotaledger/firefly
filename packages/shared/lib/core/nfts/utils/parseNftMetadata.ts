@@ -5,14 +5,10 @@ import { Converter } from '@core/utils/convert'
 import { TokenStandard } from '@core/wallet'
 import { get } from 'svelte/store'
 
-export function parseNftMetadata(metadata: string): IIrc27Metadata | string {
+export function parseNftMetadata(metadata: string): IIrc27Metadata {
     try {
         const convertedData = Converter.hexToUtf8(metadata)
-        if (!convertedData.includes(`"standard":"${TokenStandard.IRC27}"`)) {
-            return JSON.stringify(JSON.parse(convertedData), null, 2)
-        }
-
-        const parsedData = metadata ? JSON.parse(Converter.hexToUtf8(metadata)) : {}
+        const parsedData = metadata ? JSON.parse(convertedData) : {}
         validate(parsedData)
         const parsedMetadata: IIrc27Metadata = {
             standard: parsedData.standard,
@@ -52,42 +48,42 @@ function validate(data: IIrc27Metadata): void {
     }
 
     if (data.royalties) {
-        validateRoyalties(data)
+        validateRoyalties(data.royalties)
     }
 
     if (data.attributes) {
-        validateAttributes(data)
+        validateAttributes(data.attributes)
     }
 }
 
-function validateRoyalties(data: IIrc27Metadata): void {
-    const isKeysValid = Object.keys(data.royalties).every((key) => !validateBech32Address(get(networkHrp), key))
+function validateRoyalties(royalties: unknown): void {
+    const isKeysValid = Object.keys(royalties).every((key) => !validateBech32Address(get(networkHrp), key))
     if (!isKeysValid) {
         throw `Invalid royalty address, must be a valid ${get(networkHrp)} address where royalties will be sent to.`
     }
 
-    const isValuesValid = Object.values(data.royalties).every((value) => value >= 0 && value <= 1)
+    const isValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
     if (!isValuesValid) {
         throw 'Invalid royalty value, it must be a numeric decimal representative of the percentage required ie. 0.05'
     }
 
-    const isSumValid = Object.values(data.royalties).reduce((acc, val) => acc + val, 0) <= 1
+    const isSumValid = Object.values(royalties).reduce((acc, val) => acc + val, 0) <= 1
     if (!isSumValid) {
         throw 'Invalid royalty value, the sum of all royalties must be less than or equal to 1'
     }
 }
 
-function validateAttributes(data: IIrc27Metadata): void {
-    if (!Array.isArray(data.attributes)) {
+function validateAttributes(attributes: unknown): void {
+    if (!Array.isArray(attributes)) {
         throw 'Attributes must be an array'
     }
-    const isArrayOfObjects = data.attributes.every(
+    const isArrayOfObjects = attributes.every(
         (attribute) => typeof attribute === 'object' && !Array.isArray(attribute) && attribute !== null
     )
     if (!isArrayOfObjects) {
         throw 'Attributes must be an array of objects'
     }
-    const isKeysValid = data.attributes.every(
+    const isKeysValid = attributes.every(
         (attribute) =>
             Object.keys(attribute).every((key) => key === 'trait_type' || key === 'value') &&
             Object.keys(attribute).filter((key) => key === 'trait_type').length === 1 &&
@@ -96,7 +92,7 @@ function validateAttributes(data: IIrc27Metadata): void {
     if (!isKeysValid) {
         throw 'Invalid key, attributes must have the keys "trait_type" and "value"'
     }
-    const isValuesValid = data.attributes.every(
+    const isValuesValid = attributes.every(
         (attribute) =>
             (typeof attribute.trait_type === 'string' &&
                 attribute.trait_type.length > 0 &&
