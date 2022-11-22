@@ -57,12 +57,7 @@
     $: claimedTime = getDateFormat(claimedDate)
     $: isTimelocked = timelockDate > $time
     $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
-    $: destinationNetwork =
-        Object.entries(NETWORK_ADDRESS[$activeProfile?.networkType]).find(
-            (keyValueArr) => keyValueArr[1] === networkAddress
-        )?.[0] ??
-        networkAddress ??
-        DestinationNetwork.Shimmer
+    $: destinationNetwork = getDestinationNetwork(networkAddress)
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -150,6 +145,14 @@
         } catch (err) {
             return undefined
         }
+    }
+
+    function getDestinationNetwork(networkAddress: string): string {
+        const foundDestinationNetwork = Object.entries(NETWORK_ADDRESS[$activeProfile?.networkType]).find(
+            (keyValueArr) => keyValueArr[1] === networkAddress
+        )?.[0]
+
+        return foundDestinationNetwork ?? networkAddress ?? DestinationNetwork.Shimmer
     }
 </script>
 
