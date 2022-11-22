@@ -60,7 +60,7 @@
     $: destinationNetwork =
         Object.entries(NETWORK_ADDRESS[$activeProfile?.networkType]).find(
             (keyValueArr) => keyValueArr[1] === networkAddress
-        )[0] ??
+        )?.[0] ??
         networkAddress ??
         DestinationNetwork.Shimmer
 
