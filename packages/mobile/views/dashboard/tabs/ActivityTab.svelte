@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import features from '@features/features'
     import { isStrongholdUnlocked } from '@core/profile-manager'
     import { Activity, claimActivity } from '@core/wallet'
     import { ActivityList } from '../../../../mobile/components'
@@ -6,8 +7,10 @@
     import { selectedActivity } from '../../../lib/wallet'
 
     function onTileClick(activity: Activity): void {
-        $selectedActivity = activity
-        $activityRouter?.goTo(ActivityRoute.Details)
+        if (features?.dashboard?.activity?.details?.enabled) {
+            $selectedActivity = activity
+            $activityRouter?.goTo(ActivityRoute.Details)
+        }
     }
 
     function onReject(activity: Activity): void {
