@@ -7,9 +7,6 @@ export function validateIrc30Metadata(metadata: IIrc30Metadata): boolean {
     if (!metadata.name || typeof metadata.name !== 'string') {
         return false
     }
-    if (!metadata.description || typeof metadata.description !== 'string') {
-        return false
-    }
     if (!metadata.symbol || typeof metadata.symbol !== 'string') {
         return false
     }

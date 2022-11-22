@@ -37,7 +37,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
      */
     3: persistedProfileMigrationToV4,
     4: persistedProfileMigrationToV5,
-    5: persistedAssetsMigrationToV6,
+    5: persistedProfileMigrationToV6,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -82,7 +82,7 @@ function persistedProfileMigrationToV5(existingProfile: unknown): void {
     saveProfile(newProfile)
 }
 
-function persistedAssetsMigrationToV6(existingProfile: IPersistedProfile): void {
+function persistedProfileMigrationToV6(existingProfile: IPersistedProfile): void {
     existingProfile.forceAssetRefresh = true
     saveProfile(existingProfile)
 }
