@@ -2,7 +2,12 @@ import { COIN_TYPE } from '@core/network'
 import { activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
 import { IProcessedTransaction } from '../../interfaces'
-import { getNativeTokenFromOutput, getFoundryOutputFromTransaction, outputContainsValue } from '..'
+import {
+    getNativeTokenFromOutput,
+    getFoundryOutputFromTransaction,
+    outputContainsValue,
+    convertHexAddressToBech32,
+} from '..'
 import { ActivityType } from '@core/wallet/enums'
 import { FoundryActivity } from '@core/wallet/types'
 import {
@@ -14,7 +19,8 @@ import {
     getTagFromOutput,
 } from './helper'
 import { IAccountState } from '@core/account'
-import { IFoundryOutput } from '@iota/types'
+import type { IAliasAddress, IFoundryOutput, IImmutableAliasUnlockCondition } from '@iota/types'
+import { ADDRESS_TYPE_ALIAS, UNLOCK_CONDITION_IMMUTABLE_ALIAS } from '@core/wallet/constants'
 
 export function generateFoundryActivity(
     processedTransaction: IProcessedTransaction,
@@ -25,6 +31,13 @@ export function generateFoundryActivity(
 
     const output = wrappedOutput.output as IFoundryOutput
     const outputId = wrappedOutput.outputId
+    const { mintedTokens, meltedTokens, maximumSupply } = output.tokenScheme
+
+    const addressUnlockCondition = output.unlockConditions.find(
+        (unlockCondition) => unlockCondition.type === UNLOCK_CONDITION_IMMUTABLE_ALIAS
+    ) as IImmutableAliasUnlockCondition
+    const aliasId = (addressUnlockCondition?.address as IAliasAddress)?.aliasId
+    const aliasAddress = aliasId ? convertHexAddressToBech32(ADDRESS_TYPE_ALIAS, aliasId) : undefined
 
     const isHidden = false
     const isAssetHidden = false
@@ -50,6 +63,10 @@ export function generateFoundryActivity(
         outputId,
         transactionId,
         assetId,
+        aliasAddress,
+        mintedTokens,
+        meltedTokens,
+        maximumSupply,
         storageDeposit,
         giftedStorageDeposit,
         rawAmount,

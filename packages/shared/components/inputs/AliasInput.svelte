@@ -44,7 +44,7 @@
 </script>
 
 <SelectorInput
-    labelLocale="popups.mintNativeToken.property.alias"
+    labelLocale="popups.nativeToken.property.alias"
     bind:selected
     bind:inputElement
     bind:modal
