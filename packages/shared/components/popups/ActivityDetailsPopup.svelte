@@ -166,7 +166,6 @@
         {/if}
         <ActivityInformation {activity} />
     </activity-details>
-
     {#if !isTimelocked && isActivityIncomingAndUnclaimed}
         <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
             <Button

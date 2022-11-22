@@ -12,8 +12,8 @@ export function generateActivitiesFromProcessedTransactions(
         try {
             const activity = generateActivity(_preparedActivity, account)
             activities.push(activity)
-        } catch (error) {
-            console.error(error)
+        } catch (err) {
+            console.error(err)
         }
     }
     return activities

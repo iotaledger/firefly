@@ -868,9 +868,9 @@
                 "verifyToken": "Megjelölöm ellenőrzöttként"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "Natív token kibocsátása",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "Natív token kibocsátása",
+            "property": {
                 "totalSupply": "Teljes mennyiség",
                 "circulatingSupply": "Forgalomban levő mennyiség",
                 "standard": "Szabvány",

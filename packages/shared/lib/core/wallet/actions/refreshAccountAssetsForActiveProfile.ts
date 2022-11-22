@@ -1,12 +1,26 @@
 import { BASE_TOKEN, COIN_TYPE } from '@core/network'
 import { activeAccounts, activeProfile } from '@core/profile'
 import { get } from 'svelte/store'
-import { clearPersistedAssetForActiveProfile, addPersistedAsset } from '../stores/persisted-assets.store'
+import {
+    clearPersistedAssetForActiveProfile,
+    addPersistedAsset,
+    persistedAssets,
+} from '../stores/persisted-assets.store'
 import { getOrRequestAssetFromPersistedAssets } from '../actions'
 import { VerifiedStatus } from '../enums'
 import { IPersistedAsset } from '../interfaces'
 
-export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets = false): Promise<void> {
+export async function refreshAccountAssetsForActiveProfile(
+    clearPersistedAssets = false,
+    keepVerificationStatus = false
+): Promise<void> {
+    const storedVerificationStates = {}
+    if (keepVerificationStatus) {
+        const assets = get(persistedAssets)?.[get(activeProfile)?.id] ?? {}
+        for (const [id, asset] of Object.entries(assets)) {
+            storedVerificationStates[id] = asset.verification
+        }
+    }
     clearPersistedAssets && clearPersistedAssetForActiveProfile()
 
     const networkProtocol = get(activeProfile)?.networkProtocol
@@ -22,7 +36,7 @@ export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets 
         verification: { verified: true, status: VerifiedStatus.Official },
     }
 
-    const persistedAssets: IPersistedAsset[] = []
+    const assets: IPersistedAsset[] = []
     const accounts = get(activeAccounts)
     for (const account of accounts) {
         const tokens = account?.balances?.nativeTokens ?? []
@@ -30,12 +44,16 @@ export async function refreshAccountAssetsForActiveProfile(clearPersistedAssets 
             try {
                 const persistedAsset = await getOrRequestAssetFromPersistedAssets(token.tokenId)
                 if (persistedAsset) {
-                    persistedAssets.push(persistedAsset)
+                    if (keepVerificationStatus) {
+                        const verificationStatus = storedVerificationStates[persistedAsset.id]
+                        persistedAsset.verification = verificationStatus
+                    }
+                    assets.push(persistedAsset)
                 }
-            } catch (reason) {
-                console.error(reason)
+            } catch (err) {
+                console.error(err)
             }
         }
     }
-    addPersistedAsset(persistedBaseCoin, ...persistedAssets)
+    addPersistedAsset(persistedBaseCoin, ...assets)
 }

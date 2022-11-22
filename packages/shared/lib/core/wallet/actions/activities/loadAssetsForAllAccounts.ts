@@ -17,8 +17,8 @@ export async function loadAssetsForAllActivities(account: IAccountState): Promis
                     persistedAssets.push(asset)
                 }
             }
-        } catch (reason) {
-            console.error(reason)
+        } catch (err) {
+            console.error(err)
         }
     }
     addPersistedAsset(...persistedAssets)

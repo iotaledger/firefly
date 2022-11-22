@@ -35,8 +35,8 @@ export async function requestTokensFromFaucet(): Promise<void> {
             } else {
                 return Promise.reject('Request failed, please try again')
             }
-        } catch (reason) {
-            return Promise.reject(reason)
+        } catch (err) {
+            return Promise.reject(err)
         }
     } else {
         return Promise.reject()
