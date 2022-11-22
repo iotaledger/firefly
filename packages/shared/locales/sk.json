@@ -868,9 +868,9 @@
                 "verifyToken": "I verify this token"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "Mint native tokens",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "Mint native tokens",
+            "property": {
                 "totalSupply": "Celkové množstvo",
                 "circulatingSupply": "Circulating Supply",
                 "standard": "Štandardný",

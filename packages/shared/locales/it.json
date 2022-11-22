@@ -868,9 +868,9 @@
                 "verifyToken": "Verifico questo token"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "Conia token nativi",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "Conia token nativi",
+            "property": {
                 "totalSupply": "Disponibilità Totale",
                 "circulatingSupply": "Disponibilità Circolante",
                 "standard": "Standard",

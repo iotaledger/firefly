@@ -156,36 +156,36 @@
 
 <div class="space-y-6">
     <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
-        {localize('popups.mintNativeToken.formTitle')}
+        {localize('popups.nativeToken.formTitle')}
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
         <AliasInput bind:this={aliasInput} bind:alias={aliasId} bind:error={aliasIdError} />
         <TextInput
             bind:value={tokenName}
-            label={localize('popups.mintNativeToken.property.tokenName')}
-            placeholder={localize('popups.mintNativeToken.property.tokenName')}
+            label={localize('popups.nativeToken.property.tokenName')}
+            placeholder={localize('popups.nativeToken.property.tokenName')}
             error={nameError}
         />
         <TextInput
             bind:value={symbol}
-            label={localize('popups.mintNativeToken.property.symbol')}
-            placeholder={localize('popups.mintNativeToken.property.symbol')}
+            label={localize('popups.nativeToken.property.symbol')}
+            placeholder={localize('popups.nativeToken.property.symbol')}
             maxlength={5}
             error={symbolError}
         />
         <NumberInput
             bind:value={totalSupply}
             isInteger
-            label={localize('popups.mintNativeToken.property.totalSupply')}
-            placeholder={localize('popups.mintNativeToken.property.totalSupply')}
+            label={localize('popups.nativeToken.property.totalSupply')}
+            placeholder={localize('popups.nativeToken.property.totalSupply')}
             error={totalSupplyError}
         />
         <NumberInput
             bind:value={circulatingSupply}
             isInteger
-            label={localize('popups.mintNativeToken.property.circulatingSupply')}
-            placeholder={localize('popups.mintNativeToken.property.circulatingSupply')}
+            label={localize('popups.nativeToken.property.circulatingSupply')}
+            placeholder={localize('popups.nativeToken.property.circulatingSupply')}
             error={circulatingSupplyError}
         />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
@@ -195,25 +195,25 @@
                 inputType="number"
                 isInteger
                 maxlength={MAX_SUPPORTED_DECIMALS}
-                label={localize('popups.mintNativeToken.property.decimals')}
+                label={localize('popups.nativeToken.property.decimals')}
                 description={localize('tooltips.mintNativeToken.decimals')}
                 fontSize="14"
             />
             <OptionalInput
                 bind:value={description}
-                label={localize('popups.mintNativeToken.property.description')}
+                label={localize('popups.nativeToken.property.description')}
                 description={localize('tooltips.mintNativeToken.description')}
                 fontSize="14"
             />
             <OptionalInput
                 bind:value={url}
-                label={localize('popups.mintNativeToken.property.url')}
+                label={localize('popups.nativeToken.property.url')}
                 description={localize('tooltips.mintNativeToken.url')}
                 fontSize="14"
             />
             <OptionalInput
                 bind:value={logoUrl}
-                label={localize('popups.mintNativeToken.property.logoUrl')}
+                label={localize('popups.nativeToken.property.logoUrl')}
                 description={localize('tooltips.mintNativeToken.logoUrl')}
                 fontSize="14"
             />

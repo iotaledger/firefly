@@ -4,6 +4,8 @@
         GenericActivityInformation,
         AliasActivityInformation,
         NftActivityInformation,
+        FoundryActivityInformation,
+        TokenActivityInformation,
         NftMetadataInformation,
     } from 'shared/components'
     import { ActivityType, Activity } from '@core/wallet'
@@ -16,7 +18,9 @@
         Transaction = 'general.transaction',
         Alias = 'general.alias',
         Nft = 'general.nft',
-        Metadata = 'general.metadata',
+        Foundry = 'general.foundry',
+        Token = 'general.token',
+        NftMetadata = 'general.metadata',
     }
 
     let hasMetadata = false
@@ -38,7 +42,10 @@
                 tabs = [Tab.Transaction, Tab.Alias]
                 break
             case ActivityType.Nft:
-                tabs = [Tab.Transaction, Tab.Nft, ...(hasMetadata ? [Tab.Metadata] : [])]
+                tabs = [Tab.Transaction, Tab.Nft, ...(hasMetadata ? [Tab.NftMetadata] : [])]
+                break
+            case ActivityType.Foundry:
+                tabs = [Tab.Transaction, Tab.Foundry, Tab.Token]
                 break
         }
     }
@@ -56,7 +63,11 @@
         <AliasActivityInformation {activity} />
     {:else if activeTab === Tab.Nft && activity.type === ActivityType.Nft}
         <NftActivityInformation {activity} />
-    {:else if activeTab === Tab.Metadata && activity.type === ActivityType.Nft}
+    {:else if activeTab === Tab.Foundry}
+        <FoundryActivityInformation {activity} />
+    {:else if activeTab === Tab.Token}
+        <TokenActivityInformation {activity} />
+    {:else if activeTab === Tab.NftMetadata && activity.type === ActivityType.Nft}
         <NftMetadataInformation {activity} />
     {/if}
 </activity-details>
