@@ -1,7 +1,7 @@
 <script lang="typescript">
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { Button, Text, FontWeight, TextInput, TextType, Tabs } from 'shared/components'
+    import { Button, Text, FontWeight, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { IAsset, newTransactionDetails, NewTransactionType, setNewTransactionDetails } from '@core/wallet'
     import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
@@ -24,7 +24,6 @@
     let tagInput: OptionalInput
 
     let networkAddress = layer2Parameters?.networkAddress
-    let layer2Address = layer2Parameters?.recipient
 
     let nftId: string
     let rawAmount: string
@@ -44,16 +43,13 @@
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
     $: ownsNfts = $selectedAccount.balances.nfts.length > 0
-    $: isLayer1Transaction = isLayer1Destination(networkAddress)
+    $: isLayer2 = !isLayer1Destination(networkAddress)
+    $: isSendTokenTab = activeTab === SendForm.SendToken
 
     function setTransactionDetails(): void {
-        if (isLayer1Transaction) {
-            layer2Parameters = null
-        } else {
-            layer2Parameters = { networkAddress, recipient: layer2Address }
-        }
+        layer2Parameters = isLayer2 ? { networkAddress } : null
 
-        if (activeTab === SendForm.SendToken) {
+        if (isSendTokenTab) {
             setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
                 recipient,
@@ -78,7 +74,7 @@
     async function validate(): Promise<boolean> {
         try {
             await Promise.all([
-                activeTab === SendForm.SendToken ? assetAmountInput?.validate() : nftInput?.validate(),
+                isSendTokenTab ? assetAmountInput?.validate() : nftInput?.validate(),
                 recipientInput?.validate(),
                 metadataInput?.validate(
                     validateOptionalInput(metadata, MAX_METADATA_BYTES, localize('error.send.metadataTooLong'))
@@ -130,12 +126,8 @@
         {:else}
             <NftInput bind:this={nftInput} bind:nftId />
         {/if}
-        <NetworkInput bind:networkAddress />
-        {#if isLayer1Transaction}
-            <RecipientInput bind:this={recipientInput} bind:recipient />
-        {:else}
-            <TextInput bind:value={layer2Address} />
-        {/if}
+        <NetworkInput bind:networkAddress showLayer2={isSendTokenTab} />
+        <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
         <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
                 bind:this={tagInput}
@@ -143,7 +135,7 @@
                 label={localize('general.tag')}
                 description={localize('tooltips.optionalInput')}
             />
-            {#if isLayer1Transaction}
+            {#if !isLayer2}
                 <OptionalInput
                     bind:this={metadataInput}
                     bind:value={metadata}

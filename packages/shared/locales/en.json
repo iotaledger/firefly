@@ -572,7 +572,8 @@
                 "royalties": "Royalties",
                 "issuerName": "Issuer Name",
                 "description": "Description",
-                "attributes": "Attributes"
+                "attributes": "Attributes",
+                "metadata": "Metadata"
             }
         }
     },
@@ -913,14 +914,20 @@
                 "nft": "NFT"
             }
         },
-        "mintNativeToken": {
+        "nativeToken": {
             "formTitle": "Mint native tokens",
             "confirmationTitle": "Mint native tokens",
             "property": {
-                "totalSupply": "Total Supply",
-                "circulatingSupply": "Circulating Supply",
+                "totalSupply": "Total supply",
+                "maximumSupply": "Maximum supply",
+                "mintedTokens": "Minted tokens",
+                "meltedTokens": "Melted tokens",
+                "circulatingSupply": "Circulating supply",
+                "aliasAddress": "Alias controller address",
                 "standard": "Standard",
                 "tokenName": "Name",
+                "unit": "Unit",
+                "subunit": "Subunit",
                 "storageDeposit": "Storage Deposit",
                 "description": "Description",
                 "symbol": "Symbol",
@@ -928,7 +935,8 @@
                 "url": "URL",
                 "logoUrl": "Logo URL",
                 "logo": "Logo",
-                "alias": "Alias"
+                "alias": "Alias",
+                "assetId": "Asset Id"
             }
         },
         "noAlias": {
@@ -937,7 +945,7 @@
         },
         "mintNftForm": {
             "title": "Mint simple NFT",
-            "inputs": {
+            "property": {
                 "type": "Type",
                 "uri": "URI",
                 "name": "Name",
@@ -1344,6 +1352,8 @@
         "enterAddress": "Enter address",
         "transaction": "Transaction",
         "alias": "Alias",
+        "foundry": "Foundry",
+        "token": "Token",
         "nft": "NFT",
         "type": "Type",
         "immutableIssuer": "Immutable Issuer"
@@ -1587,6 +1597,9 @@
             "nftRequired": "NFT is required",
             "nftNotInHex": "NFT address has to be in HEX format",
             "nftNotInPossession": "NFT not in possession"
+        },
+        "layer2": {
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account"
         },
         "node": {
             "invalid": "Please enter a valid URL.",

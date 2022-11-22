@@ -868,9 +868,9 @@
                 "verifyToken": "Weryfikuję ten token"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "Mintuj natywne tokeny",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "Mintuj natywne tokeny",
+            "property": {
                 "totalSupply": "Łączna ilość",
                 "circulatingSupply": "Ilość w obiegu",
                 "standard": "Standard",
