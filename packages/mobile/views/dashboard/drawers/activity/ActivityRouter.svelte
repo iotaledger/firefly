@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import features from '@features/features'
     import { localize } from '@core/i18n'
     import { claimActivity, rejectActivity } from '@core/wallet'
     import { onMount } from 'svelte'
@@ -32,7 +33,7 @@
     })
 </script>
 
-{#if $activityRoute === ActivityRoute.Details}
+{#if $activityRoute === ActivityRoute.Details && features?.dashboard?.activity?.details?.enabled}
     <ActivityDetails activity={$selectedActivity} />
 {:else if $activityRoute === ActivityRoute.Reject}
     <Confirmation
