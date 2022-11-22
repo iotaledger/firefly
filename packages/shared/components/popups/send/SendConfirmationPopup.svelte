@@ -41,8 +41,15 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
 
-    let { recipient, expirationDate, giftStorageDeposit, surplus, disableChangeExpiration, disableToggleGift } =
-        get(newTransactionDetails)
+    let {
+        recipient,
+        expirationDate,
+        giftStorageDeposit,
+        surplus,
+        disableChangeExpiration,
+        disableToggleGift,
+        layer2Parameters,
+    } = get(newTransactionDetails)
 
     let storageDeposit = 0
     let preparedOutput: Output
@@ -177,6 +184,7 @@
                 type={ActivityType.Transaction}
                 direction={ActivityDirection.Outgoing}
                 inclusionState={InclusionState.Pending}
+                networkAddress={layer2Parameters?.networkAddress}
             />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <nft-details>

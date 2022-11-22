@@ -1878,7 +1878,8 @@
                 "Failed": "Failed to create alias"
             }
         },
-        "locked": "locked"
+        "locked": "locked",
+        "smartContractCall": "smart contract call"
     },
     "menus": {
         "expirationTimePicker": {
