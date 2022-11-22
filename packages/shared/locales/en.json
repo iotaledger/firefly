@@ -918,8 +918,7 @@
             "formTitle": "Mint native tokens",
             "confirmationTitle": "Mint native tokens",
             "property": {
-                "totalSupply": "Total Supply",
-                "meltedSupply": "Melted Supply",
+                "totalSupply": "Total supply",
                 "maximumSupply": "Maximum supply",
                 "mintedTokens": "Minted tokens",
                 "meltedTokens": "Melted tokens",
