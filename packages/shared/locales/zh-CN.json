@@ -868,9 +868,9 @@
                 "verifyToken": "我验证此代币"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "铸造原生代币",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "铸造原生代币",
+            "property": {
                 "totalSupply": "总供应量",
                 "circulatingSupply": "流通供应量",
                 "standard": "标准",

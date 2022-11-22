@@ -868,9 +868,9 @@
                 "verifyToken": "I verify this token"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "鑄造原生代幣",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "鑄造原生代幣",
+            "property": {
                 "totalSupply": "總供應量",
                 "circulatingSupply": "流通供應量",
                 "standard": "標準",

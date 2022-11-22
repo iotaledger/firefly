@@ -1,56 +1,63 @@
 <script lang="typescript">
-    import {
-        Activity,
-        ActivityAsyncStatus,
-        ActivityType,
-        getAssetFromPersistedAssets,
-        InclusionState,
-        IPersistedAsset,
-        selectedAccountAssets,
-    } from '@core/wallet'
+    import { isStrongholdUnlocked } from '@core/profile-manager'
+    import { Activity, ActivityAsyncStatus, ActivityType, claimActivity, InclusionState } from '@core/wallet'
     import {
         AliasActivityTileContent,
-        AsyncActivityTileFooter,
         ClickableTile,
         FoundryActivityTileContent,
         NftActivityTileContent,
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
     } from 'shared/components'
+    import { AsyncActivityTileFooter } from '../components'
+    import { activityRouter, ActivityRoute } from '../lib/routers'
+    import { selectedActivity } from '../lib/wallet'
 
     export let activity: Activity
     export let onClick: () => unknown = () => {}
 
-    let asset: IPersistedAsset
-    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.data.assetId))
+    function handleOnClick(): void {
+        $selectedActivity = activity
+        $activityRouter?.goTo(ActivityRoute.Details)
+        onClick()
+    }
+
+    function onReject(): void {
+        $selectedActivity = activity
+        $activityRouter?.goTo(ActivityRoute.Reject)
+    }
+
+    async function onClaim(): Promise<void> {
+        const isUnlocked = await isStrongholdUnlocked()
+        if (isUnlocked) {
+            claimActivity(activity)
+        } else {
+            $selectedActivity = activity
+            $activityRouter?.goTo(ActivityRoute.Password)
+        }
+    }
 </script>
 
-<ClickableTile {onClick} classes={activity.inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}>
+<ClickableTile
+    onClick={handleOnClick}
+    classes={activity.inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}
+>
     <activity-tile class="w-full flex flex-col space-y-4">
         <tile-content class="flex flex-row items-center text-left space-x-4">
-            {#if activity.data.type === ActivityType.Transaction}
-                <TransactionActivityTileContent
-                    inclusionState={activity.inclusionState}
-                    amount={activity.getFormattedAmount()}
-                    data={activity.data}
-                    {asset}
-                />
-            {:else if activity.data.type === ActivityType.Alias}
-                <AliasActivityTileContent inclusionState={activity.inclusionState} data={activity.data} />
-            {:else if activity.data.type === ActivityType.Nft}
-                <NftActivityTileContent inclusionState={activity.inclusionState} data={activity.data} />
+            {#if activity.type === ActivityType.Transaction}
+                <TransactionActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Alias}
+                <AliasActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Nft}
+                <NftActivityTileContent {activity} />
             {:else}
-                <FoundryActivityTileContent
-                    inclusionState={activity.inclusionState}
-                    amount={activity.getFormattedAmount()}
-                    {asset}
-                />
+                <FoundryActivityTileContent {activity} />
             {/if}
         </tile-content>
-        {#if activity.data.type === ActivityType.Transaction && activity?.data.asyncStatus === ActivityAsyncStatus.Timelocked}
-            <TimelockActivityTileFooter data={activity.data} />
-        {:else if activity.data.type === ActivityType.Transaction && activity?.data?.isAsync}
-            <AsyncActivityTileFooter activityId={activity.id} data={activity.data} />
+        {#if activity.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked}
+            <TimelockActivityTileFooter {activity} />
+        {:else if activity.asyncData}
+            <AsyncActivityTileFooter {activity} {onClaim} {onReject} />
         {/if}
     </activity-tile>
 </ClickableTile>
