@@ -63,7 +63,7 @@
     <div class="flex flex-row items-start" style="width: 70%">
         <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="truncate">
             {#if activity.direction === ActivityDirection.Minting}
-                {nft.name}
+                {nft?.name}
             {:else}
                 {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
                     values: { account: subjectLocale },

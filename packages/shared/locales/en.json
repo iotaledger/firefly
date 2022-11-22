@@ -1851,8 +1851,8 @@
                     "Conflicting": "failed to transfer"
                 },
                 "minting": {
-                    "Pending": "Minting",
-                    "Confirmed": "Minted",
+                    "Pending": "minting",
+                    "Confirmed": "minted",
                     "Conflicting": "failed to mint"
                 }
             },
