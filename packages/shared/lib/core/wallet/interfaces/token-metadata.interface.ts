@@ -2,6 +2,7 @@ export interface ITokenMetadata {
     name: string
     unit: string
     decimals: number
+    description?: string
     subunit?: string | null
     tickerSymbol?: string
     useMetricPrefix?: boolean
