@@ -2,7 +2,7 @@ import { IProcessedTransaction } from '../../interfaces'
 import { OutputData } from '@iota/wallet'
 import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
-import { InclusionState } from '@core/wallet/enums'
+import { ActivityDirection, InclusionState } from '@core/wallet/enums'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { IAccountState } from '@core/account'
 import { getSenderAddressFromInputs } from '../transactions'
@@ -26,7 +26,7 @@ export function preprocessGroupedOutputs(
                 } as IUTXOInput)
         ) ?? []
 
-    const isIncoming = isTransactionIncoming(outputDatas, detailedTransactionInputs, account.depositAddress)
+    const direction = isTransactionIncoming(outputDatas, detailedTransactionInputs, account.depositAddress)
     const wrappedOutputs = outputDatas.map((outputData) => ({
         outputId: outputData.outputId,
         output: outputData.output.type !== OUTPUT_TYPE_TREASURY ? outputData.output : undefined,
@@ -35,7 +35,7 @@ export function preprocessGroupedOutputs(
     return {
         outputs: wrappedOutputs,
         transactionId: transactionMetadata?.transactionId,
-        isIncoming,
+        direction,
         time: new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
         inclusionState: InclusionState.Confirmed,
         transactionInputs,
@@ -47,15 +47,22 @@ function isTransactionIncoming(
     outputs: OutputData[],
     detailedTransactionInputs: IOutputResponse[],
     accountAddress: string
-): boolean {
+): ActivityDirection {
     const nonRemainderOutputs = outputs.filter((output) => !output.remainder)
     if (nonRemainderOutputs.length === 0) {
-        return false
+        return ActivityDirection.Outgoing
     }
     const output =
         nonRemainderOutputs[0].output.type !== OUTPUT_TYPE_TREASURY ? nonRemainderOutputs[0].output : undefined
     const recipientAddress = getRecipientAddressFromOutput(output)
     const senderAddress = detailedTransactionInputs ? getSenderAddressFromInputs(detailedTransactionInputs) : ''
 
-    return recipientAddress === accountAddress && recipientAddress !== senderAddress
+    if (recipientAddress === accountAddress && recipientAddress === senderAddress) {
+        return ActivityDirection.SelfTransaction
+    }
+    if (recipientAddress === accountAddress && recipientAddress !== senderAddress) {
+        return ActivityDirection.Incoming
+    } else {
+        return ActivityDirection.Outgoing
+    }
 }

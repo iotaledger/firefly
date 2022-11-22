@@ -21,7 +21,7 @@ export function generateTransactionActivity(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): TransactionActivity {
-    const { outputs, transactionId, isIncoming, claimingData, time, inclusionState, transactionInputs } =
+    const { outputs, transactionId, direction, claimingData, time, inclusionState, transactionInputs } =
         processedTransaction
 
     const isHidden = false
@@ -30,7 +30,7 @@ export function generateTransactionActivity(
 
     const inputs = transactionInputs
 
-    const { wrappedOutput, isOnlyOutput } = getMainOutputFromTransaction(outputs, account.depositAddress, isIncoming)
+    const wrappedOutput = getMainOutputFromTransaction(outputs, account.depositAddress, direction)
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
@@ -47,7 +47,7 @@ export function generateTransactionActivity(
     const tag = getTagFromOutput(output)
     const publicNote = ''
 
-    const sendingInfo = getSendingInformation(processedTransaction, output, account, isOnlyOutput)
+    const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
     return {
@@ -56,6 +56,7 @@ export function generateTransactionActivity(
         id,
         transactionId,
         time,
+        direction,
         isAssetHidden,
         inclusionState,
         inputs,

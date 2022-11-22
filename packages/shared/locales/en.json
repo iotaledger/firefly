@@ -1813,6 +1813,11 @@
                     "Pending": "transferring to",
                     "Confirmed": "transferred to",
                     "Conflicting": "failed to transfer"
+                },
+                "selftransaction": {
+                    "Pending": "transferring to",
+                    "Confirmed": "transferred to",
+                    "Conflicting": "failed to transfer"
                 }
             },
             "external": {

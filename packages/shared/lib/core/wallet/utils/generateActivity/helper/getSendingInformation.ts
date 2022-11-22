@@ -10,42 +10,23 @@ import { getSenderAddressFromInputs, getSenderFromTransaction } from '../../tran
 export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
     output: Output,
-    account: IAccountState,
-    isOnlyOutput?: boolean
+    account: IAccountState
 ): {
     subject: Subject
-    direction: ActivityDirection
     isInternal: boolean
 } {
-    const { isIncoming, detailedTransactionInputs } = processedTransaction
+    const { direction, detailedTransactionInputs } = processedTransaction
 
     const recipient = getRecipientFromOutput(output)
     const sender = detailedTransactionInputs
         ? getSubjectFromAddress(getSenderAddressFromInputs(detailedTransactionInputs))
-        : getSenderFromTransaction(isIncoming, account.depositAddress, output)
+        : getSenderFromTransaction(direction === ActivityDirection.Incoming, account.depositAddress, output)
 
-    const subject = isIncoming ? sender : recipient
+    const subject = direction === ActivityDirection.Incoming ? sender : recipient
     const isInternal = isSubjectInternal(subject)
-
-    let isSelfTransaction = false
-    if (recipient?.type === 'account' && sender?.type === 'account') {
-        isSelfTransaction = recipient.account === sender.account
-    } else if (recipient?.type === 'address' && sender?.type === 'address') {
-        isSelfTransaction = recipient.address === sender.address
-    }
-
-    let direction = undefined
-    if (isSelfTransaction || isOnlyOutput) {
-        direction = ActivityDirection.SelfTransaction
-    } else if (isIncoming) {
-        direction = ActivityDirection.Incoming
-    } else {
-        direction = ActivityDirection.Outgoing
-    }
 
     return {
         subject,
         isInternal,
-        direction,
     }
 }

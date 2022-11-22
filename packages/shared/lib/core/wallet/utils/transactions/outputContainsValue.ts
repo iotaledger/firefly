@@ -6,10 +6,10 @@ import { getAmountFromOutput, getStorageDepositFromOutput } from '../generateAct
 import { IBasicOutput } from '@iota/types'
 
 export function outputContainsValue(processedTransaction: IProcessedTransaction, account: IAccountState): boolean {
-    const { wrappedOutput } = getMainOutputFromTransaction(
+    const wrappedOutput = getMainOutputFromTransaction(
         processedTransaction.outputs,
         account.depositAddress,
-        processedTransaction.isIncoming
+        processedTransaction.direction
     )
     const output = wrappedOutput.output as IBasicOutput
     const type = getActivityType(processedTransaction.outputs)

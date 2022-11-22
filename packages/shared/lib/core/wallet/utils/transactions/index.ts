@@ -1,5 +1,4 @@
 export * from './outputContainsValue'
-export * from './getDirectionFromTransaction'
 export * from './getFoundryOutputFromTransaction'
 export * from './getMainOutputFromTransaction'
 export * from './getNftOutputFromTransaction'
