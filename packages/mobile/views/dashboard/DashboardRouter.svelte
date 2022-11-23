@@ -1,35 +1,52 @@
 <script lang="typescript">
+    import { IRouter } from '@core/router/interfaces'
     import features from '@features/features'
+    import { onDestroy } from 'svelte'
+    import { DRAWER_OUT_ANIMATION_DURATION, selectedActivity } from '../../lib/contexts/dashboard'
     import {
+        activityRouter,
         accountSwitcherRouter,
         DashboardRoute,
         dashboardRoute,
         dashboardRouter,
         sendRouter,
     } from '../../lib/routers'
-    import { selectedActivity } from '../../lib/wallet'
     import { AccountSwitcherDrawer, ActivityDrawer, ProfileActionsDrawer, ReceiveDrawer, SendDrawer } from './drawers'
 
     $: $selectedActivity && $dashboardRouter.goTo(DashboardRoute.Activity)
+
+    let timeoutId: number
 
     function onReceiveDrawerClose(): void {
         $dashboardRouter.previous()
     }
     function onSendDrawerClose(): void {
-        $sendRouter.reset()
+        resetRouterWithDelay($sendRouter)
         $dashboardRouter.previous()
     }
     function onAccountSwitcherDrawerClose(): void {
-        $accountSwitcherRouter.reset()
+        resetRouterWithDelay($accountSwitcherRouter)
         $dashboardRouter.previous()
     }
     function onProfileActionsDrawerClose(): void {
         $dashboardRouter.previous()
     }
     function onActivityDrawerClose(): void {
+        resetRouterWithDelay($activityRouter)
         $selectedActivity = null
         $dashboardRouter.previous()
     }
+
+    function resetRouterWithDelay(router: IRouter): void {
+        const SAFE_DELAY_MS = 50
+        timeoutId = setTimeout(() => {
+            router?.reset()
+        }, DRAWER_OUT_ANIMATION_DURATION + SAFE_DELAY_MS)
+    }
+
+    onDestroy(() => {
+        clearTimeout(timeoutId)
+    })
 </script>
 
 {#if $dashboardRoute === DashboardRoute.Receive && features?.dashboard?.receive?.enabled}
