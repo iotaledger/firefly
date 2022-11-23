@@ -149,7 +149,7 @@
 
     function getDestinationNetwork(networkAddress: string): string {
         const foundDestinationNetwork = Object.entries(NETWORK_ADDRESS[$activeProfile?.networkType]).find(
-            (keyValueArr) => keyValueArr[1] === networkAddress
+            (networkAddressEntry) => networkAddressEntry[1] === networkAddress
         )?.[0]
 
         return foundDestinationNetwork ?? networkAddress ?? DestinationNetwork.Shimmer
