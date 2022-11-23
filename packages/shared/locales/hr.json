@@ -868,9 +868,9 @@
                 "verifyToken": "Verificiram ovaj token"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "Mintaj nativne tokene",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "Mintaj nativne tokene",
+            "property": {
                 "totalSupply": "Ukupna količina tokena",
                 "circulatingSupply": "Količina tokena u optjecaju",
                 "standard": "Standardni",

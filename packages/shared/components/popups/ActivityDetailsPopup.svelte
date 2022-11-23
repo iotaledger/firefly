@@ -78,15 +78,6 @@
                 giftedStorageDeposit: activity.giftedStorageDeposit,
                 isInternal: activity.isInternal,
             }
-        } else if (activity.type === ActivityType.Foundry) {
-            return {
-                ...details,
-                asset,
-                storageDeposit: activity.storageDeposit,
-                rawAmount: activity.rawAmount,
-                unit: asset?.metadata?.unit,
-                giftedStorageDeposit: activity.giftedStorageDeposit,
-            }
         }
     }
 
@@ -165,18 +156,17 @@
     </div>
     {#if activity?.type === ActivityType.Transaction}
         <BasicActivityDetails {...details} />
-    {:else if activity?.type === ActivityType.Foundry}
-        <FoundryActivityDetails {...details} />
-    {:else if activity?.type === ActivityType.Alias}
-        <alias-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-            <AliasActivityDetails {activity} />
+    {:else}
+        <activity-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
+            {#if activity?.type === ActivityType.Foundry}
+                <FoundryActivityDetails {activity} />
+            {:else if activity?.type === ActivityType.Nft}
+                <NftActivityDetails {activity} />
+            {:else if activity?.type === ActivityType.Alias}
+                <AliasActivityDetails {activity} />
+            {/if}
             <ActivityInformation {activity} />
-        </alias-details>
-    {:else if activity?.type === ActivityType.Nft}
-        <nft-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
-            <NftActivityDetails {activity} />
-            <ActivityInformation {activity} />
-        </nft-details>
+        </activity-details>
     {/if}
 
     {#if !isTimelocked && isActivityIncomingAndUnclaimed}
