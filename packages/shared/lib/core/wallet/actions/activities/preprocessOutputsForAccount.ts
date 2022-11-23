@@ -35,8 +35,8 @@ export async function preprocessOutputsForAccount(account: IAccountState): Promi
             )
 
             processedTransactions.push(processedTransaction)
-        } catch (error) {
-            console.error(error)
+        } catch (err) {
+            console.error(err)
         }
     }
     return processedTransactions

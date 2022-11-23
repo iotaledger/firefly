@@ -1,12 +1,13 @@
 import { IProcessedTransaction } from '../../interfaces'
 import { outputContainsValue, getNftOutputFromTransaction } from '..'
-import { ActivityType } from '@core/wallet/enums'
+import { ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { IAccountState } from '@core/account'
 import type { INftOutput } from '@iota/types'
 import { getAsyncDataFromOutput } from '../generateActivity/helper/getAsyncDataFromOutput'
 import { NftActivity } from '@core/wallet/types'
 import { getMetadataFromOutput, getSendingInformation, getTagFromOutput } from './helper'
 import { getNftId } from '../outputs/getNftId'
+import { EMPTY_HEX_ID } from '@core/wallet/constants'
 
 export function generateNftActivity(processedTransaction: IProcessedTransaction, account: IAccountState): NftActivity {
     const { outputs, claimingData, transactionInputs, time, inclusionState, transactionId } = processedTransaction
@@ -28,6 +29,10 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
     const tag = getTagFromOutput(output)
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
+    const { subject, isInternal, isSelfTransaction } = sendingInfo
+    let { direction } = sendingInfo
+
+    direction = output.nftId === EMPTY_HEX_ID ? ActivityDirection.Minting : direction
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
     return {
@@ -47,6 +52,9 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
         metadata,
         tag,
         asyncData,
-        ...sendingInfo,
+        subject,
+        isInternal,
+        direction,
+        isSelfTransaction,
     }
 }

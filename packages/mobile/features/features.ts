@@ -17,7 +17,7 @@ const features = {
             enabled: true,
         },
         send: {
-            enabled: false,
+            enabled: true,
         },
         receive: {
             enabled: true,
@@ -28,6 +28,12 @@ const features = {
                 enabled: false,
             },
             search: {
+                enabled: false,
+            },
+            details: {
+                enabled: false,
+            },
+            actions: {
                 enabled: false,
             },
         },

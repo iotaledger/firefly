@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { localeDirection, setupI18n } from '@core/i18n'
     import { checkAndMigrateProfiles, cleanupEmptyProfiles } from '@core/profile'
-    import { AppRoute, initialiseRouters } from './lib/routers'
+    import { initialiseRouterManager, RouterManagerExtensionName } from '@core/router'
     import {
         appSettings,
         appStage,
@@ -17,6 +17,15 @@
     import { ToastContainer } from '@ui'
     import { Route } from './components'
     import { isKeyboardOpen, keyboardHeight } from './lib/auxiliary/keyboard'
+    import {
+        AppRoute,
+        getAppRouter,
+        getRouterForAppContext,
+        goToAppContext,
+        initialiseRouters,
+        resetRouterForAppContext,
+        resetRouters,
+    } from './lib/routers'
     import { DashboardView, LoginRouter, OnboardingRouter } from './views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
@@ -51,6 +60,16 @@
         //     await setAppVersionDetails()
         //     pollCheckForAppUpdate()
         // }
+
+        initialiseRouterManager({
+            extensions: [
+                [RouterManagerExtensionName.GetAppRouter, getAppRouter],
+                [RouterManagerExtensionName.GetRouterForAppContext, getRouterForAppContext],
+                [RouterManagerExtensionName.GoToAppContext, goToAppContext],
+                [RouterManagerExtensionName.ResetRouterForAppContext, resetRouterForAppContext],
+                [RouterManagerExtensionName.ResetRouters, resetRouters],
+            ],
+        })
 
         await cleanupEmptyProfiles()
         // loadPersistedProfileIntoActiveProfile($activeProfileId)

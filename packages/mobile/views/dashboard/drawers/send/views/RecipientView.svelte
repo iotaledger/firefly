@@ -13,11 +13,11 @@
     onMount(() => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        recipient = $newTransactionDetails?.subject
+        recipient = $newTransactionDetails?.recipient
     })
 
     function onContinueClick(): void {
-        updateNewTransactionDetails({ type: $newTransactionDetails.type, subject: recipient })
+        updateNewTransactionDetails({ type: $newTransactionDetails.type, recipient })
         $sendRouter.next()
     }
 </script>
