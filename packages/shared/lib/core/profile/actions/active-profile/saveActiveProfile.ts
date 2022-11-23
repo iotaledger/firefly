@@ -16,6 +16,7 @@ export function saveActiveProfile(): void {
             settings: _activeProfile?.settings,
             isDeveloperProfile: _activeProfile?.isDeveloperProfile,
             clientOptions: _activeProfile?.clientOptions,
+            forceAssetRefresh: _activeProfile?.forceAssetRefresh,
             ...(_activeProfile?.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile?.hasVisitedDashboard }),
             ...(_activeProfile?.lastUsedAccountIndex && { lastUsedAccountIndex: _activeProfile?.lastUsedAccountIndex }),
             ...(_activeProfile?.accountMetadata && { accountMetadata: _activeProfile?.accountMetadata }),

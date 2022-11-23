@@ -18,5 +18,7 @@
 </script>
 
 {#each Object.entries(detailsList) as [key, value]}
-    <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} isCopyable />
+    {#if value}
+        <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} isCopyable />
+    {/if}
 {/each}

@@ -17,7 +17,7 @@ const features = {
             enabled: true,
         },
         send: {
-            enabled: false,
+            enabled: true,
         },
         receive: {
             enabled: true,
