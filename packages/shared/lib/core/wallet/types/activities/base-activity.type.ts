@@ -1,4 +1,4 @@
-import { ActivityAsyncStatus, ActivityDirection, InclusionState } from '../../enums'
+import { ActivityAsyncStatus, ActivityDirection, InclusionState, ActivityAction } from '../../enums'
 import { IUTXOInput } from '@iota/types'
 import { Subject } from '../subject.type'
 
@@ -13,6 +13,7 @@ export type BaseActivity = {
     containsValue: boolean
     isAssetHidden: boolean
     direction: ActivityDirection
+    action: ActivityAction
     isInternal: boolean
     storageDeposit: number
     giftedStorageDeposit: number

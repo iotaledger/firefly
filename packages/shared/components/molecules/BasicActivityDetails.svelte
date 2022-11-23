@@ -13,11 +13,11 @@
         formatTokenAmountDefault,
         formatTokenAmountPrecise,
         ActivityAsyncStatus,
-        ActivityType,
         Subject,
         InclusionState,
         ActivityDirection,
         IPersistedAsset,
+        ActivityAction,
     } from '@core/wallet'
     import { BASE_TOKEN } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
@@ -44,7 +44,7 @@
     export let transactionTime: Date = null
     export let isInternal: boolean = false
     export let isClaiming: boolean = false
-    export let type: ActivityType
+    export let action: ActivityAction
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
@@ -149,7 +149,7 @@
         {/if}
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if inclusionState && direction}
-                <TransactionActivityStatusPill {type} {direction} {isInternal} {inclusionState} />
+                <TransactionActivityStatusPill {action} {direction} {isInternal} {inclusionState} />
             {/if}
             {#if asyncStatus}
                 <ActivityAsyncStatusPill {asyncStatus} />

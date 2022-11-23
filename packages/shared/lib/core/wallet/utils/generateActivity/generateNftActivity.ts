@@ -1,6 +1,6 @@
 import { IProcessedTransaction } from '../../interfaces'
 import { outputContainsValue, getNftOutputFromTransaction } from '..'
-import { ActivityDirection, ActivityType } from '@core/wallet/enums'
+import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { IAccountState } from '@core/account'
 import type { INftOutput } from '@iota/types'
 import { getAsyncDataFromOutput } from '../generateActivity/helper/getAsyncDataFromOutput'
@@ -10,7 +10,8 @@ import { getNftId } from '../outputs/getNftId'
 import { EMPTY_HEX_ID } from '@core/wallet/constants'
 
 export function generateNftActivity(processedTransaction: IProcessedTransaction, account: IAccountState): NftActivity {
-    const { outputs, claimingData, transactionInputs, time, inclusionState, transactionId } = processedTransaction
+    const { outputs, claimingData, transactionInputs, time, inclusionState, transactionId, direction } =
+        processedTransaction
     const wrappedOutput = getNftOutputFromTransaction(outputs)
     const outputId = wrappedOutput.outputId
     const output = wrappedOutput.output as INftOutput
@@ -31,7 +32,7 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const { subject, isInternal } = sendingInfo
 
-    const direction = output.nftId === EMPTY_HEX_ID ? ActivityDirection.Minting : processedTransaction.direction
+    const action = output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
     return {
@@ -42,6 +43,7 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
         nftId,
         time,
         isHidden,
+        action,
         giftedStorageDeposit,
         isAssetHidden,
         containsValue,

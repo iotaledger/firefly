@@ -5,7 +5,7 @@ import { activeProfile, activeProfileId } from '@core/profile'
 import { TransactionActivity } from '@core/wallet/types'
 import { IBasicOutput } from '@iota/types'
 import { get } from 'svelte/store'
-import { ActivityType } from '../../enums'
+import { ActivityAction, ActivityType } from '../../enums'
 import { IProcessedTransaction } from '../../interfaces'
 import { getNativeTokenFromOutput, getMainOutputFromTransaction, outputContainsValue } from '../../utils'
 import {
@@ -47,6 +47,8 @@ export function generateTransactionActivity(
     const tag = getTagFromOutput(output)
     const publicNote = ''
 
+    const action = ActivityAction.Send
+
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
@@ -57,6 +59,7 @@ export function generateTransactionActivity(
         transactionId,
         time,
         direction,
+        action,
         isAssetHidden,
         inclusionState,
         inputs,

@@ -71,7 +71,7 @@
         if (activity.type === ActivityType.Transaction) {
             return {
                 ...details,
-                type: activity.type,
+                action: activity.action,
                 asset,
                 storageDeposit: activity.storageDeposit,
                 rawAmount: activity.rawAmount,

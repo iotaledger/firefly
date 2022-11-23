@@ -8,7 +8,7 @@ import {
     outputContainsValue,
     convertHexAddressToBech32,
 } from '..'
-import { ActivityType } from '@core/wallet/enums'
+import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { FoundryActivity } from '@core/wallet/types'
 import {
     getAmountFromOutput,
@@ -55,6 +55,7 @@ export function generateFoundryActivity(
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
 
+    const action = ActivityAction.Mint
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
@@ -64,6 +65,7 @@ export function generateFoundryActivity(
         outputId,
         transactionId,
         direction,
+        action,
         assetId,
         aliasAddress,
         mintedTokens,

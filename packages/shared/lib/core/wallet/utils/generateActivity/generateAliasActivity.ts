@@ -1,6 +1,6 @@
 import { IProcessedTransaction } from '../../interfaces'
 import { convertHexAddressToBech32, outputContainsValue, hashOutputId } from '..'
-import { ActivityType, AliasSubtype } from '@core/wallet/enums'
+import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { ADDRESS_TYPE_ALIAS, EMPTY_HEX_ID, OUTPUT_TYPE_ALIAS } from '@core/wallet/constants'
 import { IAliasOutput } from '@iota/types'
 import { AliasActivity } from '@core/wallet/types'
@@ -33,7 +33,7 @@ export function generateAliasActivity(
     const governorAddress = getGovernorAddressFromAliasOutput(output)
     const stateControllerAddress = getStateControllerAddressFromAliasOutput(output)
     const aliasId = getAliasId(output, outputId)
-    const aliasSubtype = output.aliasId === EMPTY_HEX_ID ? AliasSubtype.Created : AliasSubtype.Other
+    const action = output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send
 
     const isHidden = false
     const isAssetHidden = false
@@ -52,8 +52,8 @@ export function generateAliasActivity(
         outputId,
         transactionId,
         direction,
+        action,
         aliasId,
-        aliasSubtype,
         storageDeposit,
         giftedStorageDeposit,
         governorAddress,
