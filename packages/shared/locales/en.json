@@ -1160,6 +1160,8 @@
         "transferring": "Transferring",
         "transferNft": "Transfer NFT",
         "transferringNft": "Transferring NFT",
+        "mintedNft": "Minted NFT",
+        "mintingNft": "Minting NFT",
         "shimmerClaimed": "Claimed",
         "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
@@ -1725,6 +1727,14 @@
         },
         "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
+            "minting": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
             "incoming": {
                 "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
                 "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
@@ -1844,6 +1854,11 @@
                     "Pending": "transferring to",
                     "Confirmed": "transferred to",
                     "Conflicting": "failed to transfer"
+                },
+                "minting": {
+                    "Pending": "minting",
+                    "Confirmed": "minted",
+                    "Conflicting": "failed to mint"
                 }
             },
             "external": {

@@ -26,6 +26,14 @@ export class SendRouter extends Subrouter<SendRoute> {
                 nextRoute = SendRoute.Amount
                 break
             }
+            case SendRoute.Amount: {
+                nextRoute = SendRoute.Password
+                break
+            }
+            case SendRoute.Password: {
+                super.previous()
+                break
+            }
         }
 
         this.setNext(nextRoute)
