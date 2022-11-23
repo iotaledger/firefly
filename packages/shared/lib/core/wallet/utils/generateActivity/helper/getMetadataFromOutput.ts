@@ -13,7 +13,7 @@ export function getMetadataFromOutput(output: Output): string {
         if (metadataBytes.includes(0)) {
             // TODO, optimal way to figure out if bytes contain non-ASCII character
             // https://www.utf8-chartable.de/
-            parseLayer2MetadataForTransfer(metadataBytes)
+            return JSON.stringify({ ...parseLayer2MetadataForTransfer(metadataBytes), originalData: data })
         }
         return Converter.hexToUtf8(data)
     }
