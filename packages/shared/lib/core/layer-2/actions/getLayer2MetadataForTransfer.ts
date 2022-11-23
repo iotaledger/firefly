@@ -72,7 +72,7 @@ function encodeAllowance(): Uint8Array {
 
     const transactionDetails = get(newTransactionDetails)
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        allowance.writeUInt8('encodedAllowance', Allowance.NotSet)
+        allowance.writeUInt8('encodedAllowance', Allowance.Set)
 
         const { asset, surplus, rawAmount } = transactionDetails
         if (asset === get(selectedAccountAssets).baseCoin) {
