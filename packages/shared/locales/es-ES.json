@@ -1640,43 +1640,39 @@
             "Confirmed": "staked por",
             "Conflicting": "Stake fallido"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "transfiriendo desde",
-                    "Confirmed": "Transferido desde",
-                    "Conflicting": "no se pudo transferir"
-                },
-                "outgoing": {
-                    "Pending": "transfiriendo a",
-                    "Confirmed": "transferido a",
-                    "Conflicting": "no se pudo transferir"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "recibiendo de",
-                    "Confirmed": "recibido de",
-                    "Conflicting": "no se pudo recibir"
-                },
-                "outgoing": {
-                    "Pending": "enviando",
-                    "Confirmed": "enviado a",
-                    "Conflicting": "error en el envío"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "creando (minteando)",
-                "Confirmed": "creado (minteado)",
-                "Conflicting": "falló al acuñar (mintear)"
+                "Pending": "recibiendo de",
+                "Confirmed": "recibido de",
+                "Conflicting": "no se pudo recibir"
             },
             "outgoing": {
-                "Pending": "creando (minteando)",
-                "Confirmed": "creado (minteado)",
-                "Conflicting": "falló al acuñar (mintear)"
+                "Pending": "enviando",
+                "Confirmed": "enviado a",
+                "Conflicting": "error en el envío"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "transfiriendo desde",
+                "Confirmed": "Transferido desde",
+                "Conflicting": "no se pudo transferir"
+            },
+            "outgoing": {
+                "Pending": "transfiriendo a",
+                "Confirmed": "transferido a",
+                "Conflicting": "no se pudo transferir"
+            },
+            "selftransaction": {
+                "Pending": "transfiriendo a",
+                "Confirmed": "transferido a",
+                "Conflicting": "no se pudo transferir"
+            }
+        },
+        "mint": {
+            "Pending": "creando (minteando)",
+            "Confirmed": "creado (minteado)",
+            "Conflicting": "falló al acuñar (mintear)"
         },
         "migrate": {
             "Pending": "migrando para",

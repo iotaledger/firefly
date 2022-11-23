@@ -1640,43 +1640,39 @@
             "Confirmed": "staked for",
             "Conflicting": "failed to stake"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "overfører fra",
-                    "Confirmed": "overført fra",
-                    "Conflicting": "overførsel mislykkedes"
-                },
-                "outgoing": {
-                    "Pending": "overfører til",
-                    "Confirmed": "overført til",
-                    "Conflicting": "overførsel mislykkedes"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "modtager fra",
-                    "Confirmed": "modtaget fra",
-                    "Conflicting": "modtagelse mislykkedes"
-                },
-                "outgoing": {
-                    "Pending": "sender til",
-                    "Confirmed": "sendt til",
-                    "Conflicting": "afsendelse mislykkedes"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "mintning",
-                "Confirmed": "mintet",
-                "Conflicting": "mintning mislykkedes"
+                "Pending": "modtager fra",
+                "Confirmed": "modtaget fra",
+                "Conflicting": "modtagelse mislykkedes"
             },
             "outgoing": {
-                "Pending": "mintning",
-                "Confirmed": "mintet",
-                "Conflicting": "mintning mislykkedes"
+                "Pending": "sender til",
+                "Confirmed": "sendt til",
+                "Conflicting": "afsendelse mislykkedes"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "overfører fra",
+                "Confirmed": "overført fra",
+                "Conflicting": "overførsel mislykkedes"
+            },
+            "outgoing": {
+                "Pending": "overfører til",
+                "Confirmed": "overført til",
+                "Conflicting": "overførsel mislykkedes"
+            },
+            "selftransaction": {
+                "Pending": "transferring to",
+                "Confirmed": "transferred to",
+                "Conflicting": "failed to transfer"
+            }
+        },
+        "mint": {
+            "Pending": "mintning",
+            "Confirmed": "mintet",
+            "Conflicting": "mintning mislykkedes"
         },
         "migrate": {
             "Pending": "migrating for",
