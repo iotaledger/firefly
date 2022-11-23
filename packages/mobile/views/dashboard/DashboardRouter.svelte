@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { onDestroy } from 'svelte'
     import features from '@features/features'
     import {
         accountSwitcherRouter,
@@ -30,6 +31,10 @@
         $selectedActivity = null
         $dashboardRouter.previous()
     }
+
+    onDestroy(() => {
+        selectedActivity.set(null)
+    })
 </script>
 
 {#if $dashboardRoute === DashboardRoute.Receive && features?.dashboard?.receive?.enabled}
