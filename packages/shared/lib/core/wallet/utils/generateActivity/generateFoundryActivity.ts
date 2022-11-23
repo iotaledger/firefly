@@ -26,7 +26,8 @@ export function generateFoundryActivity(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): FoundryActivity {
-    const { outputs, transactionId, claimingData, transactionInputs, time, inclusionState } = processedTransaction
+    const { outputs, transactionId, claimingData, transactionInputs, time, direction, inclusionState } =
+        processedTransaction
     const wrappedOutput = getFoundryOutputFromTransaction(outputs)
 
     const output = wrappedOutput.output as IFoundryOutput
@@ -62,6 +63,7 @@ export function generateFoundryActivity(
         id,
         outputId,
         transactionId,
+        direction,
         assetId,
         aliasAddress,
         mintedTokens,

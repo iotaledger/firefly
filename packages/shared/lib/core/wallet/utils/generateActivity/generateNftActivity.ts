@@ -29,10 +29,9 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
     const tag = getTagFromOutput(output)
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    const { subject, isInternal, isSelfTransaction } = sendingInfo
-    let { direction } = sendingInfo
+    const { subject, isInternal } = sendingInfo
 
-    direction = output.nftId === EMPTY_HEX_ID ? ActivityDirection.Minting : direction
+    const direction = output.nftId === EMPTY_HEX_ID ? ActivityDirection.Minting : processedTransaction.direction
     const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
 
     return {

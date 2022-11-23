@@ -20,7 +20,8 @@ export function generateAliasActivity(
     processedTransaction: IProcessedTransaction,
     account: IAccountState
 ): AliasActivity {
-    const { outputs, transactionInputs, transactionId, claimingData, time, inclusionState } = processedTransaction
+    const { outputs, transactionInputs, transactionId, claimingData, direction, time, inclusionState } =
+        processedTransaction
     const wrappedOutput = outputs.find((output) => output.output.type === OUTPUT_TYPE_ALIAS)
 
     const output = wrappedOutput.output as IAliasOutput
@@ -50,6 +51,7 @@ export function generateAliasActivity(
         id,
         outputId,
         transactionId,
+        direction,
         aliasId,
         aliasSubtype,
         storageDeposit,
