@@ -71,6 +71,7 @@ classDiagram
         - Incoming
         - Outgoing
         - SelfTransaction
+        - Minting
     }
     class Alias Type {
         <<Enum>>
