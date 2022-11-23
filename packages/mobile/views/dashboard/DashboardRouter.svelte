@@ -2,7 +2,7 @@
     import { IRouter } from '@core/router/interfaces'
     import features from '@features/features'
     import { onDestroy } from 'svelte'
-    import { DRAWER_OUT_ANIMATION_DURATION, selectedActivity } from '../../lib/contexts/dashboard'
+    import { DRAWER_OUT_ANIMATION_DURATION_MS, selectedActivity } from '../../lib/contexts/dashboard'
     import {
         activityRouter,
         accountSwitcherRouter,
@@ -41,7 +41,7 @@
         const SAFE_DELAY_MS = 50
         timeoutId = setTimeout(() => {
             router?.reset()
-        }, DRAWER_OUT_ANIMATION_DURATION + SAFE_DELAY_MS)
+        }, DRAWER_OUT_ANIMATION_DURATION_MS + SAFE_DELAY_MS)
     }
 
     onDestroy(() => {
