@@ -1,19 +1,18 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
-    import { isStrongholdUnlocked } from '@core/profile-manager'
     import {
         Activity,
         ActivityAsyncStatus,
         ActivityDirection,
         ActivityType,
-        claimActivity,
         getAssetFromPersistedAssets,
     } from '@core/wallet'
     import features from '@features/features'
     import { BasicActivityDetails, Button } from 'shared/components'
-    import { ActivityRoute, activityRouter } from '../../../../../lib/routers'
 
     export let activity: Activity
+    export let onClaim: () => unknown = () => {}
+    export let onReject: () => unknown = () => {}
 
     let details: Record<string, unknown>
 
@@ -68,17 +67,6 @@
                 isInternal: activity.isInternal,
             }
         }
-    }
-    async function onClaim(): Promise<void> {
-        const isUnlocked = await isStrongholdUnlocked()
-        if (isUnlocked) {
-            claimActivity(activity)
-        } else {
-            $activityRouter?.goTo(ActivityRoute.Password)
-        }
-    }
-    function onReject(): void {
-        $activityRouter?.goTo(ActivityRoute.Reject)
     }
 </script>
 

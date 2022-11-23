@@ -1,7 +1,7 @@
 <script lang="typescript">
-    import features from '@features/features'
     import { isStrongholdUnlocked } from '@core/profile-manager'
     import { Activity, claimActivity } from '@core/wallet'
+    import features from '@features/features'
     import { ActivityList } from '../../../../mobile/components'
     import { ActivityRoute, activityRouter } from '../../../lib/routers'
     import { selectedActivity } from '../../../lib/wallet'
@@ -9,13 +9,12 @@
     function onTileClick(activity: Activity): void {
         if (features?.dashboard?.activity?.details?.enabled) {
             $selectedActivity = activity
-            $activityRouter?.goTo(ActivityRoute.Details)
         }
     }
 
     function onReject(activity: Activity): void {
         $selectedActivity = activity
-        $activityRouter?.goTo(ActivityRoute.Reject)
+        $activityRouter?.next({ route: ActivityRoute.Reject, backToDashboard: true })
     }
 
     async function onClaim(activity: Activity): Promise<void> {
@@ -24,7 +23,7 @@
             claimActivity(activity)
         } else {
             $selectedActivity = activity
-            $activityRouter?.goTo(ActivityRoute.Password)
+            $activityRouter?.next({ route: ActivityRoute.Password, backToDashboard: true })
         }
     }
 </script>

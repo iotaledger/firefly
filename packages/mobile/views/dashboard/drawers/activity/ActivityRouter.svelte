@@ -1,7 +1,8 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
+    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { claimActivity, rejectActivity } from '@core/wallet'
-    import { onMount } from 'svelte'
+    import { onDestroy } from 'svelte'
     import { Confirmation, StrongholdUnlock } from '../../../../components'
     import { activityRoute, ActivityRoute, activityRouter } from '../../../../lib/routers'
     import { selectedActivity } from '../../../../lib/wallet'
@@ -9,41 +10,40 @@
 
     export let onClose: () => unknown = () => {}
 
-    let detailsVisible = false
-
-    function onClaim(): void {
-        $selectedActivity && claimActivity($selectedActivity)
-        handleClose()
-    }
     function onReject(): void {
-        $selectedActivity && rejectActivity($selectedActivity.id)
-        handleClose()
-    }
-    function handleClose(): void {
-        if (detailsVisible) {
-            $activityRouter.previous()
-        } else {
+        if ($activityRoute === ActivityRoute.Reject) {
+            $selectedActivity && rejectActivity($selectedActivity.id)
             onClose()
+        } else {
+            $activityRouter.next({ route: ActivityRoute.Reject })
         }
     }
-
-    onMount(() => {
-        detailsVisible = $activityRoute === ActivityRoute.Details
+    async function onClaim(): Promise<void> {
+        const isUnlocked = await isStrongholdUnlocked()
+        if (isUnlocked) {
+            $selectedActivity && claimActivity($selectedActivity)
+            onClose()
+        } else {
+            $activityRouter.next({ route: ActivityRoute.Password })
+        }
+    }
+    onDestroy(() => {
+        $activityRouter.reset()
     })
 </script>
 
 {#if $activityRoute === ActivityRoute.Details}
-    <ActivityDetails activity={$selectedActivity} />
+    <ActivityDetails activity={$selectedActivity} {onClaim} {onReject} />
 {:else if $activityRoute === ActivityRoute.Reject}
     <Confirmation
         description={localize('actions.confirmRejection.description')}
         hint={localize('actions.confirmRejection.node')}
         confirmText={localize('actions.reject')}
         onConfirm={onReject}
-        onCancel={handleClose}
+        onCancel={() => $activityRouter.previous()}
         warning
         info
     />
 {:else if $activityRoute === ActivityRoute.Password}
-    <StrongholdUnlock onSuccess={onClaim} onCancel={handleClose} />
+    <StrongholdUnlock onSuccess={onClaim} onCancel={() => $activityRouter.previous()} />
 {/if}
