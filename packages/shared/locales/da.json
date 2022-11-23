@@ -868,9 +868,9 @@
                 "verifyToken": "Dette token bekræftes hermed"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "Mint native tokener",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "Mint native tokener",
+            "property": {
                 "totalSupply": "Samlet beholdning",
                 "circulatingSupply": "Cirkulerende beholdning",
                 "standard": "Standard",

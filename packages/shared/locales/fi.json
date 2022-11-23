@@ -868,9 +868,9 @@
                 "verifyToken": "Vahvistan tämän tokenin"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "Lyö natiiveja tokeneita",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "Lyö natiiveja tokeneita",
+            "property": {
                 "totalSupply": "Kokonaistarjonta",
                 "circulatingSupply": "Kierrossa oleva tarjonta",
                 "standard": "Standardi",
