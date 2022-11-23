@@ -54,6 +54,5 @@ export function generateNftActivity(processedTransaction: IProcessedTransaction,
         subject,
         isInternal,
         direction,
-        isSelfTransaction,
     }
 }
