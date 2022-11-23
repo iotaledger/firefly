@@ -2,7 +2,7 @@
     import { activityRoute, ActivityRoute } from '../../../../lib/routers'
     import { StrongholdUnlock } from '../../../../components'
     import { claimActivity } from '@core/wallet'
-    import { selectedActivity } from '../../../../lib/wallet'
+    import { selectedActivity } from '../../../../lib/contexts/dashboard'
 
     export let onClose: () => unknown = () => {}
 

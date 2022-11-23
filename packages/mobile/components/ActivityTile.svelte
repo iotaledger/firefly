@@ -11,7 +11,7 @@
     } from 'shared/components'
     import { AsyncActivityTileFooter } from '../components'
     import { activityRouter, ActivityRoute } from '../lib/routers'
-    import { selectedActivity } from '../lib/wallet'
+    import { selectedActivity } from '../lib/contexts/dashboard'
 
     export let activity: Activity
     export let onClick: () => unknown = () => {}
