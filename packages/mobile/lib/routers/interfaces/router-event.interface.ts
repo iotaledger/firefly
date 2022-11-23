@@ -1,7 +1,9 @@
 import { IRouterEvent } from '@core/router'
-import { ActivityRoute } from '../enums'
+import { Activity } from '@core/wallet'
 
 export interface IActivityRouterEvent extends IRouterEvent {
-    backToDashboard?: boolean
-    route: ActivityRoute
+    activity?: Activity
+    /* @TODO: remove magic strings */
+    action?: 'claim' | 'fastClaim' | 'reject' | 'fastReject'
+    isUnlocked?: boolean
 }

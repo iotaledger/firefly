@@ -1,30 +1,19 @@
 <script lang="typescript">
     import { isStrongholdUnlocked } from '@core/profile-manager'
-    import { Activity, claimActivity } from '@core/wallet'
-    import features from '@features/features'
+    import { Activity } from '@core/wallet'
     import { ActivityList } from '../../../../mobile/components'
-    import { ActivityRoute, activityRouter } from '../../../lib/routers'
-    import { selectedActivity } from '../../../lib/wallet'
+    import { activityRouter } from '../../../lib/routers'
 
     function onTileClick(activity: Activity): void {
-        if (features?.dashboard?.activity?.details?.enabled) {
-            $selectedActivity = activity
-        }
+        $activityRouter?.next({ activity })
     }
-
     function onReject(activity: Activity): void {
-        $selectedActivity = activity
-        $activityRouter?.next({ route: ActivityRoute.Reject, backToDashboard: true })
+        $activityRouter?.next({ action: 'fastReject', activity })
     }
 
     async function onClaim(activity: Activity): Promise<void> {
         const isUnlocked = await isStrongholdUnlocked()
-        if (isUnlocked) {
-            claimActivity(activity)
-        } else {
-            $selectedActivity = activity
-            $activityRouter?.next({ route: ActivityRoute.Password, backToDashboard: true })
-        }
+        $activityRouter?.next({ action: 'fastClaim', activity, isUnlocked })
     }
 </script>
 

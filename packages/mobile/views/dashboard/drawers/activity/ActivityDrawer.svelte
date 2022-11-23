@@ -1,10 +1,12 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
+    import { Activity } from '@core/wallet'
     import { Drawer } from '../../../../components'
     import { ActivityRoute, activityRoute } from '../../../../lib/routers'
     import ActivityRouter from './ActivityRouter.svelte'
 
     export let onClose: () => unknown = () => {}
+    export let activity: Activity
 
     let title: string
     let fullScreen: boolean = true
@@ -30,5 +32,5 @@
 </script>
 
 <Drawer {onClose} {title} {fullScreen}>
-    <ActivityRouter {onClose} />
+    <ActivityRouter {activity} />
 </Drawer>

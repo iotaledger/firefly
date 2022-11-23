@@ -1,7 +1,8 @@
 import { get, writable } from 'svelte/store'
 
 import { Subrouter } from '@core/router'
-
+import { claimActivity, rejectActivity } from '@core/wallet'
+import { selectedActivity } from '../../../lib/wallet'
 import { dashboardRouter } from '../dashboard-router'
 import { ActivityRoute } from '../enums'
 import { IActivityRouterEvent } from '../interfaces'
@@ -16,12 +17,26 @@ export class ActivityRouter extends Subrouter<ActivityRoute> {
         super(ActivityRoute.Details, activityRoute, get(dashboardRouter))
     }
     public next(event: IActivityRouterEvent): void {
-        this.backToDashboard = event.backToDashboard ? true : false
+        const { action, activity, isUnlocked } = event
 
-        if (event.route) {
-            this.setNext(event.route)
-        } else {
-            this.setNext(ActivityRoute.Details)
+        if (activity) {
+            selectedActivity.set(activity)
+        }
+
+        switch (action) {
+            case 'fastClaim':
+                this.backToDashboard = true
+                this.claim(isUnlocked)
+                return
+            case 'fastReject':
+                this.backToDashboard = true
+                this.reject()
+                return
+            case 'claim':
+                this.claim(isUnlocked)
+                return
+            case 'reject':
+                this.reject()
         }
     }
     public previous(): void {
@@ -30,6 +45,23 @@ export class ActivityRouter extends Subrouter<ActivityRoute> {
             this.backToDashboard = false
         } else {
             super.previous()
+        }
+    }
+    private claim(isUnlocked: boolean | undefined): void {
+        if (!isUnlocked) {
+            this.setNext(ActivityRoute.Password)
+        } else {
+            claimActivity(get(selectedActivity))
+            selectedActivity.set(null)
+            get(dashboardRouter).previous()
+        }
+    }
+    private reject(): void {
+        if (get(activityRoute) === ActivityRoute.Reject) {
+            rejectActivity(get(selectedActivity).id)
+            get(dashboardRouter).previous()
+        } else {
+            this.setNext(ActivityRoute.Reject)
         }
     }
 }

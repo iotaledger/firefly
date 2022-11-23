@@ -40,6 +40,6 @@
     <AccountSwitcherDrawer onClose={onAccountSwitcherDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.ProfileActions && features?.dashboard?.profileActions?.enabled}
     <ProfileActionsDrawer onClose={onProfileActionsDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.Activity}
-    <ActivityDrawer onClose={onActivityDrawerClose} />
+{:else if $dashboardRoute === DashboardRoute.Activity && $selectedActivity}
+    <ActivityDrawer activity={$selectedActivity} onClose={onActivityDrawerClose} />
 {/if}

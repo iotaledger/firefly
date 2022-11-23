@@ -1,31 +1,20 @@
 <script lang="typescript">
     import { localize } from '@core/i18n'
     import { isStrongholdUnlocked } from '@core/profile-manager'
-    import { claimActivity, rejectActivity } from '@core/wallet'
+    import { Activity } from '@core/wallet'
     import { onDestroy } from 'svelte'
     import { Confirmation, StrongholdUnlock } from '../../../../components'
     import { activityRoute, ActivityRoute, activityRouter } from '../../../../lib/routers'
-    import { selectedActivity } from '../../../../lib/wallet'
     import { ActivityDetails } from './views'
 
-    export let onClose: () => unknown = () => {}
+    export let activity: Activity
 
     function onReject(): void {
-        if ($activityRoute === ActivityRoute.Reject) {
-            $selectedActivity && rejectActivity($selectedActivity.id)
-            onClose()
-        } else {
-            $activityRouter.next({ route: ActivityRoute.Reject })
-        }
+        $activityRouter.next({ action: 'reject' })
     }
     async function onClaim(): Promise<void> {
         const isUnlocked = await isStrongholdUnlocked()
-        if (isUnlocked) {
-            $selectedActivity && claimActivity($selectedActivity)
-            onClose()
-        } else {
-            $activityRouter.next({ route: ActivityRoute.Password })
-        }
+        $activityRouter.next({ action: 'claim', isUnlocked })
     }
     onDestroy(() => {
         $activityRouter.reset()
@@ -33,7 +22,7 @@
 </script>
 
 {#if $activityRoute === ActivityRoute.Details}
-    <ActivityDetails activity={$selectedActivity} {onClaim} {onReject} />
+    <ActivityDetails {activity} {onClaim} {onReject} />
 {:else if $activityRoute === ActivityRoute.Reject}
     <Confirmation
         description={localize('actions.confirmRejection.description')}
