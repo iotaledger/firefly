@@ -3,7 +3,6 @@
     import { onMount } from 'svelte'
 
     import { localize, parseCurrency } from '@core/i18n'
-    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { IOTA_UNIT_MAP } from '@core/utils'
     import {
         convertToRawAmount,
@@ -17,10 +16,9 @@
     import { AmountInput, Button } from '@ui'
 
     import { TokenUnitSwapper } from '../../../../../components'
-    import { sendRouter } from '../../../../../lib/routers'
 
-    export let onSend: () => Promise<void> = () => Promise.resolve()
-    export let submitSendOnMount: boolean = false
+    export let sendTransaction: () => Promise<void>
+    export let triggerSendOnMount: boolean = false
 
     let amount: string
     let rawAmount: string
@@ -47,10 +45,18 @@
     $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
     $: amount, validate()
 
-    onMount(() => {
-        if (submitSendOnMount) {
+    async function asyncSendTransaction(): Promise<void> {
+        try {
             loading = true
-            onSend()
+            await sendTransaction()
+        } catch (err) {
+            loading = false
+        }
+    }
+
+    onMount(() => {
+        if (triggerSendOnMount) {
+            asyncSendTransaction()
         }
         if ($newTransactionDetails?.type === NewTransactionType.TokenTransfer) {
             const storedRawAmount = $newTransactionDetails?.rawAmount
@@ -98,23 +104,13 @@
         amountInputElement.focus()
     }
 
-    async function onContinueClick(): Promise<void> {
-        loading = true
+    function onContinueClick(): void {
         updateNewTransactionDetails({
             type: $newTransactionDetails.type,
             rawAmount,
             unit,
         })
-        const isUnlocked = await isStrongholdUnlocked()
-        if (isUnlocked) {
-            try {
-                await onSend()
-            } catch (e) {
-                loading = false
-            }
-        } else {
-            $sendRouter.next()
-        }
+        asyncSendTransaction()
     }
 </script>
 

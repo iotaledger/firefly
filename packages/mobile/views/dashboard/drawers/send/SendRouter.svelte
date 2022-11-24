@@ -3,6 +3,7 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { isActiveLedgerProfile } from '@core/profile'
+    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { ExpirationTime } from '@core/utils'
     import {
         DEFAULT_TRANSACTION_OPTIONS,
@@ -24,33 +25,43 @@
 
     $: ({ recipient, expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
 
-    export let onClose: () => unknown = () => {}
-
     let storageDeposit = 0
     let preparedOutput: Output
     let outputOptions: OutputOptions
     let expirationTimePicker: ExpirationTimePicker
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
-    let submitSendOnMount: boolean = false
+    let triggerSendOnMount: boolean = false
 
     $: transactionDetails = get(newTransactionDetails)
     $: recipientAddress = recipient?.type === 'account' ? recipient?.account?.depositAddress : recipient?.address
     $: expirationTimePicker?.setNull(giftStorageDeposit)
 
-    async function onSend(): Promise<void> {
-        try {
-            await prepareTransactionOutput()
-            validateSendConfirmation(outputOptions, preparedOutput)
+    async function sendTransaction(): Promise<void> {
+        triggerSendOnMount = false
+        const isUnlocked = await isStrongholdUnlocked()
+        if (isUnlocked) {
+            try {
+                await prepareTransactionOutput()
+                validateSendConfirmation(outputOptions, preparedOutput)
 
-            updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
-            if ($isActiveLedgerProfile) {
-                ledgerPreparedOutput.set(preparedOutput)
+                updateNewTransactionDetails({
+                    type: transactionDetails.type,
+                    expirationDate,
+                    giftStorageDeposit,
+                    surplus,
+                })
+                if ($isActiveLedgerProfile) {
+                    ledgerPreparedOutput.set(preparedOutput)
+                }
+                await sendOutput(preparedOutput)
+                $sendRouter.next()
+            } catch (err) {
+                handleError(err)
+                throw new Error(err)
             }
-            await sendOutput(preparedOutput)
-            onClose && onClose()
-        } catch (err) {
-            handleError(err)
+        } else {
+            $sendRouter.next({ needsUnlock: true })
         }
     }
 
@@ -108,7 +119,7 @@
     }
 
     function onUnlockSuccess(): void {
-        submitSendOnMount = true
+        triggerSendOnMount = true
         $sendRouter.next()
     }
 </script>
@@ -118,7 +129,7 @@
 {:else if $sendRoute === SendRoute.Recipient}
     <RecipientView />
 {:else if $sendRoute === SendRoute.Amount}
-    <AmountView {onSend} {submitSendOnMount} />
+    <AmountView {sendTransaction} {triggerSendOnMount} />
 {:else if $sendRoute === SendRoute.Confirm}
     <ConfirmView />
 {:else if $sendRoute === SendRoute.Password}

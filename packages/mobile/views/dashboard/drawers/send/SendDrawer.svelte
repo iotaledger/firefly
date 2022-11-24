@@ -1,7 +1,6 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { resetNewTokenTransactionDetails } from '@core/wallet'
     import { Drawer } from '../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
     import SendRouter from './SendRouter.svelte'
@@ -14,10 +13,6 @@
 
     $: $sendRoute, (setTitle(), setAllowBack(), setFullScreen())
 
-    function onDrawerClose(): void {
-        onClose && onClose()
-        resetNewTokenTransactionDetails()
-    }
     function setTitle(): void {
         switch ($sendRoute) {
             default:
@@ -51,11 +46,11 @@
 </script>
 
 <Drawer
-    onClose={onDrawerClose}
+    {onClose}
     {title}
     {fullScreen}
     allowBack={!$selectedAccount.isTransferring && allowBack}
     onBackClick={() => $sendRouter.previous()}
 >
-    <SendRouter {onClose} />
+    <SendRouter />
 </Drawer>
