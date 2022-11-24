@@ -1,14 +1,18 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
-    import { BaseError } from '@core/error'
+    import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
-    import { networkHrp } from '@core/network'
-    import { IIrc27Metadata, MimeType, SupportedMimeType } from '@core/nfts'
-    import { isValidUri, validateBech32Address } from '@core/utils'
-    import { mintNftDetails, setMintNftDetails, TokenStandard } from '@core/wallet'
-    import { Button, Dropdown, Error, FontWeight, OptionalInput, Text, TextInput } from 'shared/components'
-    import { onMount } from 'svelte'
+    import { networkHrp } from '@core/network/stores'
+    import { SupportedMimeType } from '@core/nfts/enums'
+    import { IIrc27Metadata } from '@core/nfts/interfaces'
+    import { MimeType } from '@core/nfts/types'
+    import { isValidUri } from '@core/utils/validation'
+    import { validateBech32Address } from '@core/utils/crypto'
+    import { TokenStandard } from '@core/wallet/enums'
+    import { mintNftDetails, setMintNftDetails } from '@core/wallet/stores'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -94,7 +98,7 @@
             return
         }
 
-        const isKeysValid = Object.keys(royalties).every((key) => !validateBech32Address($networkHrp, key))
+        const isKeysValid = Object.keys(royalties).every((key) => validateBech32Address($networkHrp, key))
         if (!isKeysValid) {
             optionalInputErrors.royalties = `Invalid address, must be a valid ${$networkHrp} address where royalties will be sent to.`
             return

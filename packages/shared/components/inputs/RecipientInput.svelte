@@ -1,12 +1,13 @@
 <script lang="typescript">
-    import { networkHrp } from '@core/network'
-    import { validateBech32Address } from '@core/utils'
     import { Modal, SelectorInput, IOption, ColoredCircle } from 'shared/components'
-    import { visibleActiveAccounts } from '@core/profile'
-    import { getSubjectFromAddress, Subject } from '@core/wallet'
-    import { getAccountColorById, selectedAccountIndex } from '@core/account'
-    import { validateEthereumAddress } from '@core/utils/crypto'
+    import { selectedAccountIndex } from '@core/account/stores'
+    import { getAccountColorById } from '@core/account/utils'
     import { localize } from '@core/i18n'
+    import { networkHrp } from '@core/network/stores'
+    import { visibleActiveAccounts } from '@core/profile/stores'
+    import { validateBech32Address, validateEthereumAddress } from '@core/utils/crypto'
+    import { Subject } from '@core/wallet/types'
+    import { getSubjectFromAddress } from '@core/wallet/utils'
 
     export let recipient: Subject
     export let disabled = false
@@ -35,7 +36,11 @@
             if (isLayer2) {
                 error = validateEthereumAddress(recipient?.address)
             } else {
-                error = validateBech32Address(addressPrefix, recipient?.address)
+                try {
+                    validateBech32Address(addressPrefix, recipient?.address)
+                } catch (err) {
+                    error = err?.message ?? err
+                }
             }
         } else if (recipient?.type === 'account') {
             if (isLayer2) {

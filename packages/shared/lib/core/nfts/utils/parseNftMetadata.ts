@@ -1,9 +1,14 @@
-import { networkHrp } from '@core/network'
-import { IIrc27Metadata, MimeType, SupportedMimeType } from '@core/nfts'
-import { isValidUri, validateBech32Address } from '@core/utils'
-import { Converter } from '@core/utils/convert'
-import { TokenStandard } from '@core/wallet'
 import { get } from 'svelte/store'
+
+import { networkHrp } from '@core/network/stores'
+import { isValidUri } from '@core/utils/validation'
+import { validateBech32Address } from '@core/utils/crypto'
+import { Converter } from '@core/utils/convert'
+import { TokenStandard } from '@core/wallet/enums'
+
+import { SupportedMimeType } from '../enums'
+import { IIrc27Metadata } from '../interfaces'
+import { MimeType } from '../types'
 
 export function parseNftMetadata(metadata: string): IIrc27Metadata {
     try {
@@ -57,7 +62,7 @@ function validate(data: IIrc27Metadata): void {
 }
 
 function validateRoyalties(royalties: unknown): void {
-    const isKeysValid = Object.keys(royalties).every((key) => !validateBech32Address(get(networkHrp), key))
+    const isKeysValid = Object.keys(royalties).every((key) => validateBech32Address(get(networkHrp), key))
     if (!isKeysValid) {
         throw `Invalid royalty address, must be a valid ${get(networkHrp)} address where royalties will be sent to.`
     }

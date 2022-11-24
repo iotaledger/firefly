@@ -1,10 +1,11 @@
 <script lang="typescript">
     import { Modal, SelectorInput, IOption } from 'shared/components'
-    import { selectedAccount } from '@core/account'
-    import { ADDRESS_TYPE_ALIAS, convertHexAddressToBech32 } from '@core/wallet'
-    import { validateBech32Address } from '@core/utils'
-    import { networkHrp } from '@core/network'
+    import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
+    import { networkHrp } from '@core/network/stores'
+    import { validateBech32Address } from '@core/utils/crypto'
+    import { ADDRESS_TYPE_ALIAS } from '@core/wallet/constants'
+    import { convertHexAddressToBech32 } from '@core/wallet/utils'
 
     export let alias: string = ''
     export let error: string = ''
@@ -26,15 +27,18 @@
             error = localize('error.aliasMinting.aliasRequired')
             return Promise.reject(error)
         }
-        const addressValidationError = validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
-        if (addressValidationError) {
-            error = addressValidationError
+
+        try {
+            validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
+            if (isAliasInPossession()) {
+                return Promise.resolve()
+            } else {
+                error = localize('error.aliasMinting.aliasNotInPossession')
+                return Promise.reject(error)
+            }
+        } catch (err) {
+            error = err?.message ?? err
             return Promise.reject(error)
-        } else if (!isAliasInPossession()) {
-            error = localize('error.aliasMinting.aliasNotInPossession')
-            return Promise.reject(error)
-        } else {
-            return Promise.resolve()
         }
     }
 
