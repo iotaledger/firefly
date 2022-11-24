@@ -81,10 +81,13 @@ function encodeAllowance(): Uint8Array {
             allowance.writeUInt16('emptyTokenBuffer', EMPTY_BUFFER)
         } else {
             allowance.writeUInt64('iotaAmount', BigInteger(surplus ?? '0'))
+
+            tokenBuffer.writeUInt16('amountOfTokens', 1)
             const tokenIdBytes = Converter.hexToBytes(asset.id.substring(2))
             tokenBuffer.writeBytes('tokenId', tokenIdBytes.length, tokenIdBytes)
             tokenBuffer.writeUInt256('amount', BigInteger(rawAmount))
             const tokenBufferBytes = tokenBuffer.finalBytes()
+
             allowance.writeUInt16('tokensLength', tokenBufferBytes.length)
             allowance.writeBytes('tokenBuffer', tokenBufferBytes.length, tokenBufferBytes)
         }
