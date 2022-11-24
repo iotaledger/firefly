@@ -2,10 +2,14 @@
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import { getMonthYear } from '@core/utils'
-    import { queriedActivities, setAsyncStatusOfAccountActivities } from '@core/wallet'
+    import { Activity, queriedActivities, setAsyncStatusOfAccountActivities } from '@core/wallet'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { FontWeight, Text } from 'shared/components'
     import { ActivityTile } from '../../mobile/components'
+
+    export let onTileClick: (activity: Activity) => unknown = () => {}
+    export let onReject: (activity: Activity) => unknown = () => {}
+    export let onClaim: (activity: Activity) => unknown = () => {}
 
     $: setAsyncStatusOfAccountActivities($time)
 
@@ -40,7 +44,12 @@
                         {item.title} • {item.amount}
                     </Text>
                 {/if}
-                <ActivityTile activity={item.activity} />
+                <ActivityTile
+                    activity={item.activity}
+                    onClick={() => onTileClick(item.activity)}
+                    onClaim={() => onClaim(item.activity)}
+                    onReject={() => onReject(item.activity)}
+                />
             </div>
         </VirtualList>
     {:else}

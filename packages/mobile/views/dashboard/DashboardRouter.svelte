@@ -1,4 +1,5 @@
 <script lang="typescript">
+    import { onDestroy } from 'svelte'
     import features from '@features/features'
     import {
         accountSwitcherRouter,
@@ -30,6 +31,10 @@
         $selectedActivity = null
         $dashboardRouter.previous()
     }
+
+    onDestroy(() => {
+        selectedActivity.set(null)
+    })
 </script>
 
 {#if $dashboardRoute === DashboardRoute.Receive && features?.dashboard?.receive?.enabled}
@@ -40,6 +45,6 @@
     <AccountSwitcherDrawer onClose={onAccountSwitcherDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.ProfileActions && features?.dashboard?.profileActions?.enabled}
     <ProfileActionsDrawer onClose={onProfileActionsDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.Activity && features?.dashboard?.activity?.details?.enabled}
-    <ActivityDrawer onClose={onActivityDrawerClose} />
+{:else if $dashboardRoute === DashboardRoute.Activity && $selectedActivity}
+    <ActivityDrawer activity={$selectedActivity} onClose={onActivityDrawerClose} />
 {/if}
