@@ -1,22 +1,33 @@
 <script lang="typescript">
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { ActivityDirection, ActivityType, InclusionState, newTransactionDetails, Subject } from '@core/wallet'
-    import { BasicActivityDetails, Button } from 'shared/components'
+    import {
+        ActivityDirection,
+        ActivityType,
+        InclusionState,
+        newTransactionDetails,
+        NewTransactionType,
+        selectedAccountAssets,
+    } from '@core/wallet'
+    import { BasicActivityDetails, Button, KeyValueBox, Toggle } from 'shared/components'
     import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let sendTransaction: () => Promise<void>
     export let triggerSendOnMount: boolean = false
     export let storageDeposit: number
 
-    let recipient: Subject
+    const { recipient, surplus, layer2Parameters } = get(newTransactionDetails)
+
     let loading: boolean = false
 
-    $: surplus = $newTransactionDetails.surplus
-    $: recipient = $newTransactionDetails?.recipient
-    $: isInternal = recipient.type === 'account'
+    // store the initial newTransactionDetails value to prevent undefined errors
+    $: transactionDetails = get(newTransactionDetails)
+    $: isInternal = recipient?.type === 'account'
     $: isTransferring = $selectedAccount.isTransferring
-    $: networkAddress = $newTransactionDetails.layer2Parameters?.networkAddress
+    $: hideGiftToggle =
+        transactionDetails?.type === NewTransactionType.TokenTransfer &&
+        transactionDetails?.asset?.id === $selectedAccountAssets?.baseCoin?.id
 
     onMount(() => {
         if (triggerSendOnMount) {
@@ -36,21 +47,38 @@
     function onContinueClick(): void {
         asyncSendTransaction()
     }
+
+    function toggleGiftStorageDeposit(): void {
+        newTransactionDetails.update((details) => ({ ...details, giftStorageDeposit: !details.giftStorageDeposit }))
+    }
 </script>
 
 <div class="w-full overflow-y-auto flex flex-col flex-auto h-1 justify-between">
     <div class="flex flex-row flex-1 items-center justify-center relative">
-        <BasicActivityDetails
-            {...$newTransactionDetails}
-            {storageDeposit}
-            subject={$newTransactionDetails?.recipient}
-            {isInternal}
-            {surplus}
-            type={ActivityType.Transaction}
-            direction={ActivityDirection.Outgoing}
-            inclusionState={InclusionState.Pending}
-            {networkAddress}
-        />
+        <div class="w-full flex-col space-y-2">
+            <BasicActivityDetails
+                {...transactionDetails}
+                {storageDeposit}
+                subject={recipient}
+                {isInternal}
+                {surplus}
+                type={ActivityType.Transaction}
+                direction={ActivityDirection.Outgoing}
+                inclusionState={InclusionState.Pending}
+                networkAddress={layer2Parameters?.networkAddress}
+            />
+            {#if !hideGiftToggle}
+                <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
+                    <Toggle
+                        slot="value"
+                        color="green"
+                        disabled={transactionDetails.disableToggleGift}
+                        active={transactionDetails.giftStorageDeposit}
+                        onClick={toggleGiftStorageDeposit}
+                    />
+                </KeyValueBox>
+            {/if}
+        </div>
     </div>
     <div class="flex flex-col space-y-4">
         <Button
