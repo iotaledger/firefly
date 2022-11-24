@@ -2,6 +2,8 @@ import { get, writable } from 'svelte/store'
 
 import { Subrouter } from '@core/router'
 import { claimActivity, rejectActivity } from '@core/wallet'
+
+import { ActivityAction } from '../../../lib/contexts/dashboard'
 import { selectedActivity } from '../../../lib/wallet'
 import { dashboardRouter } from '../dashboard-router'
 import { ActivityRoute } from '../enums'
@@ -24,18 +26,18 @@ export class ActivityRouter extends Subrouter<ActivityRoute> {
         }
 
         switch (action) {
-            case 'fastClaim':
+            case ActivityAction.FastClaim:
                 this.backToDashboard = true
                 this.claim(isUnlocked)
                 return
-            case 'fastReject':
+            case ActivityAction.FastReject:
                 this.backToDashboard = true
                 this.reject()
                 return
-            case 'claim':
+            case ActivityAction.Claim:
                 this.claim(isUnlocked)
                 return
-            case 'reject':
+            case ActivityAction.Reject:
                 this.reject()
         }
     }

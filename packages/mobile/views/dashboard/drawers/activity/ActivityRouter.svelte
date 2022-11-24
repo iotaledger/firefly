@@ -4,17 +4,18 @@
     import { Activity } from '@core/wallet'
     import { onDestroy } from 'svelte'
     import { Confirmation, StrongholdUnlock } from '../../../../components'
+    import { ActivityAction } from '../../../../lib/contexts/dashboard'
     import { activityRoute, ActivityRoute, activityRouter } from '../../../../lib/routers'
     import { ActivityDetails } from './views'
 
     export let activity: Activity
 
     function onReject(): void {
-        $activityRouter.next({ action: 'reject' })
+        $activityRouter.next({ action: ActivityAction.Reject })
     }
     async function onClaim(): Promise<void> {
         const isUnlocked = await isStrongholdUnlocked()
-        $activityRouter.next({ action: 'claim', isUnlocked })
+        $activityRouter.next({ action: ActivityAction.Claim, isUnlocked })
     }
     onDestroy(() => {
         $activityRouter.reset()
