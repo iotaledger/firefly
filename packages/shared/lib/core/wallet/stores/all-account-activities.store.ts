@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { Activity, AsyncData, BaseActivity } from '../types'
 
 export const allAccountActivities = writable<Activity[][]>([])
@@ -22,6 +22,10 @@ export function setAccountActivitiesInAllAccountActivities(accountIndex: number,
         state[accountIndex] = accountActivities
         return state
     })
+}
+
+export function getActivityByTransactionId(accountIndex: number, transactionId: string): Activity {
+    return get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity.transactionId === transactionId)
 }
 
 export function updateActivityByTransactionId(
