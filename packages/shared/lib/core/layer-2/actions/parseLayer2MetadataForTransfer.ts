@@ -19,10 +19,10 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
     const gasBudget = readStream.readUInt64('gasBudget')
 
     const smartContractParameters = parseSmartContractParameters(readStream)
-    const { baseTokenAmount, nativeTokens } = parseAllowance(readStream)
-
     const ethereumAddress = '0x' + smartContractParameters['a'].substring(2)
     const forceOpenAccount = smartContractParameters['c'] === FORCE_OPEN_ACCOUNT
+
+    const allowance = parseAllowance(readStream)
 
     return {
         senderContract: Converter.decimalToHex(senderContract, true),
@@ -31,8 +31,8 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
         gasBudget: gasBudget.toString(),
         ethereumAddress,
         forceOpenAccount,
-        baseTokenAmount,
-        nativeTokens,
+        baseTokenAmount: allowance?.baseTokenAmount,
+        nativeTokens: allowance?.nativeTokens,
     }
 }
 
