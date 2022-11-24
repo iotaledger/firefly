@@ -6,7 +6,7 @@ import { isOutputAsync } from '../../outputs/isOutputAsync'
 
 export function getAsyncDataFromOutput(
     output: Output,
-    transactionId: string,
+    outputId: string,
     claimingData: IClaimData,
     account: IAccountState
 ): AsyncData {
@@ -16,7 +16,7 @@ export function getAsyncDataFromOutput(
         const isClaiming = false
         const claimingTransactionId = claimingData?.claimingTransactionId
         const claimedDate = claimingData?.claimedDate
-        const isRejected = isActivityHiddenForAccountIndex(account.index, transactionId)
+        const isRejected = isActivityHiddenForAccountIndex(account.index, outputId)
 
         const expirationDate = getExpirationDateFromOutput(output)
         const timelockDate = getTimelockDateFromOutput(output)
