@@ -11,7 +11,7 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
         state.forEach((accountActivities, accountIndex) => {
             for (const activity of accountActivities.filter((_activity) => _activity.asyncData)) {
                 const oldAsyncStatus = activity.asyncData.asyncStatus
-                if (oldAsyncStatus === ActivityAsyncStatus.Claimed) {
+                if (oldAsyncStatus === ActivityAsyncStatus.Claimed || ActivityAsyncStatus.Expired) {
                     continue
                 }
                 activity.asyncData.asyncStatus = getAsyncStatus(activity, time)
