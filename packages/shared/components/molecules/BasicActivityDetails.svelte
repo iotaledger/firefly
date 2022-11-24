@@ -11,6 +11,7 @@
     import { time } from '@core/app'
 
     export let activity: TransactionActivity
+    export let networkAddress: string = null
 
     $: asset = getAssetFromPersistedAssets(activity.assetId)
     $: amount = formatTokenAmountDefault(Number(activity.rawAmount), asset?.metadata, asset?.metadata?.unit)
@@ -36,6 +37,11 @@
         {#if isTimelocked}
             <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
                 {localize('pills.locked')}
+            </Pill>
+        {/if}
+        {#if networkAddress}
+            <Pill backgroundColor="blue-200" darkBackgroundColor="blue-200">
+                {localize('pills.smartContractCall')}
             </Pill>
         {/if}
     </transaction-status>

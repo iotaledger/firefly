@@ -32,6 +32,7 @@
         updateNewTransactionDetails,
         NewTransactionType,
         Output,
+        getAssetById,
     } from '@core/wallet'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
@@ -41,8 +42,15 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
 
-    let { recipient, expirationDate, giftStorageDeposit, surplus, disableChangeExpiration, disableToggleGift } =
-        get(newTransactionDetails)
+    let {
+        recipient,
+        expirationDate,
+        giftStorageDeposit,
+        surplus,
+        disableChangeExpiration,
+        disableToggleGift,
+        layer2Parameters,
+    } = get(newTransactionDetails)
 
     let storageDeposit = 0
     let preparedOutput: Output
@@ -72,6 +80,11 @@
         inclusionState: InclusionState.Pending,
     }
 
+    $: asset =
+        transactionDetails.type === NewTransactionType.TokenTransfer
+            ? getAssetById(transactionDetails.assetId)
+            : undefined
+
     function refreshSendConfirmationState(): void {
         void prepareTransactionOutput()
     }
@@ -95,7 +108,7 @@
             transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0',
             transactionDetails.metadata,
             transactionDetails.tag,
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
+            asset,
             giftStorageDeposit,
             transactionDetails.surplus,
             transactionDetails.layer2Parameters,
@@ -179,11 +192,11 @@
     >
     <div class="w-full flex-col space-y-2">
         {#if transactionDetails.type === NewTransactionType.TokenTransfer}
-            <BasicActivityDetails {activity} />
+            <BasicActivityDetails {activity} networkAddress={layer2Parameters?.networkAddress} />
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails {activity} />
         {/if}
-        <ActivityInformation {activity} />
+        <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} />
         {#if !hideGiftToggle}
             <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                 <Toggle
