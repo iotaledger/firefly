@@ -1,21 +1,39 @@
 <script lang="typescript">
-    import { activityRoute, ActivityRoute } from '../../../../lib/routers'
-    import { StrongholdUnlock } from '../../../../components'
-    import { claimActivity } from '@core/wallet'
-    import { selectedActivity } from '../../../../lib/contexts/dashboard'
+    import { localize } from '@core/i18n'
+    import { isStrongholdUnlocked } from '@core/profile-manager'
+    import { Activity } from '@core/wallet'
+    import { onDestroy } from 'svelte'
+    import { Confirmation, StrongholdUnlock } from '../../../../components'
+    import { ActivityAction } from '../../../../lib/contexts/dashboard'
+    import { activityRoute, ActivityRoute, activityRouter } from '../../../../lib/routers'
+    import { ActivityDetails } from './views'
 
-    export let onClose: () => unknown = () => {}
+    export let activity: Activity
 
-    function onConfirm(): void {
-        $selectedActivity && claimActivity($selectedActivity)
-        onClose()
+    function onReject(): void {
+        $activityRouter.next({ action: ActivityAction.Reject })
     }
+    async function onClaim(): Promise<void> {
+        const isUnlocked = await isStrongholdUnlocked()
+        $activityRouter.next({ action: ActivityAction.Claim, isUnlocked })
+    }
+    onDestroy(() => {
+        $activityRouter.reset()
+    })
 </script>
 
 {#if $activityRoute === ActivityRoute.Details}
-    <p>Details</p>
+    <ActivityDetails {activity} {onClaim} {onReject} />
 {:else if $activityRoute === ActivityRoute.Reject}
-    <p>Reject</p>
+    <Confirmation
+        description={localize('actions.confirmRejection.description')}
+        hint={localize('actions.confirmRejection.node')}
+        confirmText={localize('actions.reject')}
+        onConfirm={onReject}
+        onCancel={() => $activityRouter.previous()}
+        warning
+        info
+    />
 {:else if $activityRoute === ActivityRoute.Password}
-    <StrongholdUnlock onSuccess={onConfirm} onCancel={onClose} />
+    <StrongholdUnlock onSuccess={onClaim} onCancel={() => $activityRouter.previous()} />
 {/if}

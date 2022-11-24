@@ -1,7 +1,7 @@
 <script lang="typescript">
+    import { onDestroy } from 'svelte'
     import { IRouter } from '@core/router/interfaces'
     import features from '@features/features'
-    import { onDestroy } from 'svelte'
     import { DRAWER_OUT_ANIMATION_DURATION_MS, selectedActivity } from '../../lib/contexts/dashboard'
     import {
         activityRouter,
@@ -46,6 +46,7 @@
 
     onDestroy(() => {
         clearTimeout(timeoutId)
+        selectedActivity.set(null)
     })
 </script>
 
@@ -57,6 +58,6 @@
     <AccountSwitcherDrawer onClose={onAccountSwitcherDrawerClose} />
 {:else if $dashboardRoute === DashboardRoute.ProfileActions && features?.dashboard?.profileActions?.enabled}
     <ProfileActionsDrawer onClose={onProfileActionsDrawerClose} />
-{:else if $dashboardRoute === DashboardRoute.Activity && features?.dashboard?.activity?.details?.enabled}
-    <ActivityDrawer onClose={onActivityDrawerClose} />
+{:else if $dashboardRoute === DashboardRoute.Activity && $selectedActivity}
+    <ActivityDrawer activity={$selectedActivity} onClose={onActivityDrawerClose} />
 {/if}
