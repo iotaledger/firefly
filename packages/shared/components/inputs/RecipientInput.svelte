@@ -5,7 +5,7 @@
     import { visibleActiveAccounts } from '@core/profile'
     import { getSubjectFromAddress, Subject } from '@core/wallet'
     import { getAccountColorById, selectedAccountIndex } from '@core/account'
-    import { validateEthereumAddress } from '@core/layer-2'
+    import { validateEthereumAddress } from '@core/utils/crypto'
     import { localize } from '@core/i18n'
 
     export let recipient: Subject

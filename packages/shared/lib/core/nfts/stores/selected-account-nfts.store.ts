@@ -1,5 +1,7 @@
-import { selectedAccount } from '@core/account'
 import { derived, Readable } from 'svelte/store'
+
+import { selectedAccount } from '@core/account/stores'
+
 import { INft } from '../interfaces'
 import { allAccountNfts } from './all-account-nfts.store'
 

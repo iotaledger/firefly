@@ -1,0 +1,1 @@
+export const ETHEREUM_ADDRESS_HASH_SIZE = 256
