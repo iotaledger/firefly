@@ -1,6 +1,6 @@
 <script lang="typescript">
     import { onMount } from 'svelte'
-    import { Button, Text, FontWeight, NftMediaContainer, NftMetadataInformation } from 'shared/components'
+    import { Button, Text, FontWeight, NftMediaContainer, Tabs, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
     import { mintNft, mintNftDetails } from '@core/wallet'
@@ -10,6 +10,16 @@
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
+
+    enum Tab {
+        Transaction = 'general.transaction',
+        Alias = 'general.alias',
+        Nft = 'general.nft',
+        Metadata = 'general.metadata',
+    }
+
+    const tabs: Tab[] = [Tab.Transaction, Tab.Nft, Tab.Metadata]
+    let activeTab = Tab.Transaction
 
     const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes } =
         $mintNftDetails
@@ -27,7 +37,16 @@
         ...(attributes && { attributes }),
     }
 
-    $: isTransferring = $selectedAccount.isTransferring
+    let nftTabDetails: { [key in string]: string }
+    $: {
+        nftTabDetails = {
+            name,
+            ...(description && { description }),
+            uri,
+            ...(issuerName && { issuerName }),
+            ...(collectionName && { collectionName }),
+        }
+    }
 
     async function mintAction(): Promise<void> {
         try {
@@ -70,16 +89,38 @@
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
         <nft-details class="flex flex-col justify-center items-center space-y-4">
             <NftMediaContainer />
-            <div class="w-full h-full space-y-2 flex flex-auto flex-col flex-shrink-0">
-                <NftMetadataInformation nftMetadata={actualMintDetails} />
-            </div>
+            <activity-details class="w-full h-full space-y-2 flex flex-auto flex-col flex-shrink-0">
+                <Tabs bind:activeTab {tabs} />
+                {#if activeTab === Tab.Transaction}
+                    <KeyValueBox keyText={localize('general.storageDeposit')} valueText="0" />
+                    <KeyValueBox
+                        keyText={localize('general.immutableIssuer')}
+                        valueText={$selectedAccount.depositAddress}
+                    />
+                {:else if activeTab === Tab.Nft}
+                    {#each Object.entries(nftTabDetails) as [key, value]}
+                        <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
+                    {/each}
+                {:else if activeTab === Tab.Metadata}
+                    <KeyValueBox
+                        keyText={localize('general.metadata')}
+                        valueText={JSON.stringify(actualMintDetails, null, '\t')}
+                        classes="whitespace-pre-wrap"
+                    />
+                {/if}
+            </activity-details>
         </nft-details>
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={isTransferring} onClick={handleBack}>
+        <Button outline classes="w-full" disabled={$selectedAccount.isTransferring} onClick={handleBack}>
             {localize('actions.back')}
         </Button>
-        <Button classes="w-full" disabled={isTransferring} onClick={handleMint} isBusy={isTransferring}>
+        <Button
+            classes="w-full"
+            disabled={$selectedAccount.isTransferring}
+            onClick={handleMint}
+            isBusy={$selectedAccount.isTransferring}
+        >
             {localize('actions.confirm')}
         </Button>
     </div>
