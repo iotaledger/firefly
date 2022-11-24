@@ -24,6 +24,7 @@
     import { Platform, time } from '@core/app'
     import { truncateString } from '@core/utils'
     import { setClipboard } from '@core/utils'
+    import { DestinationNetwork, NETWORK_ADDRESS } from '@core/layer-2'
 
     export let asset: IPersistedAsset
     export let asyncStatus: ActivityAsyncStatus = null
@@ -45,6 +46,7 @@
     export let isInternal: boolean = false
     export let isClaiming: boolean = false
     export let type: ActivityType
+    export let networkAddress: string = null
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.networkProtocol, $activeProfile?.networkType)
 
@@ -55,6 +57,7 @@
     $: claimedTime = getDateFormat(claimedDate)
     $: isTimelocked = timelockDate > $time
     $: hasStorageDeposit = storageDeposit || (storageDeposit === 0 && giftedStorageDeposit === 0)
+    $: destinationNetwork = getDestinationNetwork(networkAddress)
 
     $: formattedStorageDeposit = formatTokenAmountPrecise(
         storageDeposit ?? 0,
@@ -72,6 +75,9 @@
 
     let detailsList: { [key in string]: { data: string; tooltipText?: string } }
     $: detailsList = {
+        ...(destinationNetwork && {
+            destinationNetwork: { data: destinationNetwork },
+        }),
         ...(transactionTime && {
             transactionTime: { data: formattedTransactionTime },
         }),
@@ -140,6 +146,14 @@
             return undefined
         }
     }
+
+    function getDestinationNetwork(networkAddress: string): string {
+        const foundDestinationNetwork = Object.entries(NETWORK_ADDRESS[$activeProfile?.networkType]).find(
+            (networkAddressEntry) => networkAddressEntry[1] === networkAddress
+        )?.[0]
+
+        return foundDestinationNetwork ?? networkAddress ?? DestinationNetwork.Shimmer
+    }
 </script>
 
 <transaction-details class="w-full h-full space-y-6 flex flex-auto flex-col flex-shrink-0">
@@ -157,6 +171,11 @@
             {#if isTimelocked}
                 <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
                     {localize('pills.locked')}
+                </Pill>
+            {/if}
+            {#if networkAddress}
+                <Pill backgroundColor="blue-200" darkBackgroundColor="blue-200">
+                    {localize('pills.smartContractCall')}
                 </Pill>
             {/if}
         </transaction-status>
