@@ -33,14 +33,15 @@
             if (!recipient.address) {
                 error = localize('error.send.recipientRequired')
             }
-            if (isLayer2) {
-                error = validateEthereumAddress(recipient?.address)
-            } else {
-                try {
+
+            try {
+                if (isLayer2) {
+                    validateEthereumAddress(recipient?.address)
+                } else {
                     validateBech32Address(addressPrefix, recipient?.address)
-                } catch (err) {
-                    error = err?.message ?? err
                 }
+            } catch (err) {
+                error = err?.message ?? err
             }
         } else if (recipient?.type === 'account') {
             if (isLayer2) {
