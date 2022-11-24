@@ -4,7 +4,7 @@ export enum SendRoute {
     Amount = 'amount',
     Unit = 'unit',
     Review = 'review',
-    References = 'references',
+    Reference = 'reference',
     Expiration = 'expiration',
     CustomExpiration = 'customExpiration',
     Password = 'password',

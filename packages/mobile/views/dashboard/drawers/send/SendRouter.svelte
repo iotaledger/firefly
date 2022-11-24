@@ -20,7 +20,7 @@
     import { ExpirationTimePicker } from 'shared/components'
     import { StrongholdUnlock } from '../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
-    import { AmountView, RecipientView, ReviewView, TokenView } from './views'
+    import { AmountView, RecipientView, ReferenceView, ReviewView, TokenView } from './views'
 
     $: ({ recipient, expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
 
@@ -127,6 +127,8 @@
     <RecipientView />
 {:else if $sendRoute === SendRoute.Amount}
     <AmountView />
+{:else if $sendRoute === SendRoute.Reference}
+    <ReferenceView />
 {:else if $sendRoute === SendRoute.Review}
     <ReviewView {sendTransaction} {triggerSendOnMount} {storageDeposit} />
 {:else if $sendRoute === SendRoute.Password}

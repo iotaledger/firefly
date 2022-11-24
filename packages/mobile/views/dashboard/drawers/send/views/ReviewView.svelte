@@ -1,4 +1,6 @@
 <script lang="typescript">
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import {
@@ -10,8 +12,7 @@
         selectedAccountAssets,
     } from '@core/wallet'
     import { BasicActivityDetails, Button, KeyValueBox, Toggle } from 'shared/components'
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
+    import { sendRouter } from '../../../../../lib/routers'
 
     export let sendTransaction: () => Promise<void>
     export let triggerSendOnMount: boolean = false
@@ -44,8 +45,12 @@
         }
     }
 
-    function onContinueClick(): void {
+    function onSendClick(): void {
         asyncSendTransaction()
+    }
+
+    function onAddReferenceClick(): void {
+        $sendRouter.next({ addReference: true })
     }
 
     function toggleGiftStorageDeposit(): void {
@@ -83,11 +88,20 @@
     <div class="flex flex-col space-y-4">
         <Button
             isBusy={loading || isTransferring}
-            onClick={onContinueClick}
+            onClick={onSendClick}
             disabled={loading || isTransferring}
             classes="w-full"
         >
             {localize('actions.send')}
+        </Button>
+        <Button
+            outline
+            isBusy={loading || isTransferring}
+            onClick={onAddReferenceClick}
+            disabled={loading || isTransferring}
+            classes="w-full"
+        >
+            {localize('actions.addReference')}
         </Button>
     </div>
 </div>
