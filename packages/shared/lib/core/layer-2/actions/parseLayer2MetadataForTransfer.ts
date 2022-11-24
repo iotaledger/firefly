@@ -55,8 +55,8 @@ function parseAllowance(readStream: ReadStream): ILayer2Allowance {
 
     if (allowance === Allowance.Set) {
         const baseTokenAmount = readStream.readUInt64('baseTokenAmount').toString()
-        const tokenBufferLength = readStream.readUInt16('tokenBufferBytes.length')
-        const tokenAmount = Math.floor(tokenBufferLength / (TOKEN_ID_BYTE_LENGTH + 32))
+        readStream.readUInt16('tokenBufferBytesLength')
+        const tokenAmount = readStream.readUInt16('tokenAmount')
         const nativeTokens: NativeTokenAmount[] = []
 
         for (let token = 0; token < tokenAmount; token++) {
