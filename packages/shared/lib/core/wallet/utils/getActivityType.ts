@@ -12,6 +12,6 @@ export function getActivityType(outputs: IWrappedOutput[]): ActivityType {
     if (outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS)) {
         return ActivityType.Alias
     } else {
-        return ActivityType.Transaction
+        return ActivityType.Basic
     }
 }
