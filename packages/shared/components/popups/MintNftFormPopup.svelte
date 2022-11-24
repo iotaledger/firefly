@@ -19,6 +19,8 @@
         Object.entries(metadata).map(([key, value]) => [key, (value as string) ?? ''])
     ) as Inputs
 
+    inputs.type = 'image/jpeg'
+
     type OptionalInputErrors = Omit<Inputs, 'type' | 'uri' | 'name'>
     const optionalInputErrors = Object.fromEntries(
         Object.entries(inputs)
