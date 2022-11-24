@@ -32,6 +32,10 @@ export class SendRouter extends Subrouter<SendRoute> {
                 break
             }
             case SendRoute.Amount: {
+                nextRoute = SendRoute.Review
+                break
+            }
+            case SendRoute.Review: {
                 if (needsUnlock) {
                     nextRoute = SendRoute.Password
                 } else {

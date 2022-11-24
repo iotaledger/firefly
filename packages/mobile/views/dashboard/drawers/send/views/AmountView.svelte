@@ -16,9 +16,7 @@
     import { AmountInput, Button } from '@ui'
 
     import { TokenUnitSwapper } from '../../../../../components'
-
-    export let sendTransaction: () => Promise<void>
-    export let triggerSendOnMount: boolean = false
+    import { sendRouter } from '../../../../../lib/routers'
 
     let amount: string
     let rawAmount: string
@@ -28,8 +26,6 @@
 
     let error: string = null
     let amountInputElement: HTMLInputElement
-
-    let loading: boolean = false
 
     let allowedDecimals = 0
     $: if (!asset?.metadata?.useMetricPrefix) {
@@ -45,19 +41,7 @@
     $: bigAmount = convertToRawAmount(amount, unit, asset?.metadata)
     $: amount, validate()
 
-    async function asyncSendTransaction(): Promise<void> {
-        try {
-            loading = true
-            await sendTransaction()
-        } catch (err) {
-            loading = false
-        }
-    }
-
     onMount(() => {
-        if (triggerSendOnMount) {
-            asyncSendTransaction()
-        }
         if ($newTransactionDetails?.type === NewTransactionType.TokenTransfer) {
             const storedRawAmount = $newTransactionDetails?.rawAmount
             asset = $newTransactionDetails.asset
@@ -110,7 +94,7 @@
             rawAmount,
             unit,
         })
-        asyncSendTransaction()
+        $sendRouter.next()
     }
 </script>
 
@@ -126,15 +110,14 @@
                 clearBackground
                 clearPadding
                 clearBorder
-                disabled={loading}
             />
             <p class="font-600 text-gray-800 dark:text-white text-24 leading-140">{unit}</p>
         </div>
         <div class="absolute right-0">
-            <TokenUnitSwapper {tokenMetadata} selectedUnit={unit} onClick={toggleUnit} disabled={loading} />
+            <TokenUnitSwapper {tokenMetadata} selectedUnit={unit} onClick={toggleUnit} />
         </div>
     </div>
-    <Button isBusy={loading} onClick={onContinueClick} disabled={!!error || loading} classes="w-full">
+    <Button onClick={onContinueClick} disabled={!!error} classes="w-full">
         {error ?? localize('actions.continue')}
     </Button>
 </div>

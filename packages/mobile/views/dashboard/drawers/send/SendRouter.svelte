@@ -18,10 +18,9 @@
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { OutputOptions } from '@iota/wallet'
     import { ExpirationTimePicker } from 'shared/components'
-    import { get } from 'svelte/store'
     import { StrongholdUnlock } from '../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
-    import { AmountView, ConfirmView, RecipientView, TokenView } from './views'
+    import { AmountView, RecipientView, ReviewView, TokenView } from './views'
 
     $: ({ recipient, expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
 
@@ -33,7 +32,6 @@
 
     let triggerSendOnMount: boolean = false
 
-    $: transactionDetails = get(newTransactionDetails)
     $: recipientAddress = recipient?.type === 'account' ? recipient?.account?.depositAddress : recipient?.address
     $: expirationTimePicker?.setNull(giftStorageDeposit)
 
@@ -46,7 +44,7 @@
                 validateSendConfirmation(outputOptions, preparedOutput)
 
                 updateNewTransactionDetails({
-                    type: transactionDetails.type,
+                    type: $newTransactionDetails.type,
                     expirationDate,
                     giftStorageDeposit,
                     surplus,
@@ -66,19 +64,18 @@
     }
 
     async function prepareTransactionOutput(): Promise<void> {
-        const transactionDetails = get(newTransactionDetails)
         // TODO: move arguments into transactionDetails object
         outputOptions = getOutputOptions(
             expirationDate,
             recipientAddress,
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0',
-            transactionDetails.metadata,
-            transactionDetails.tag,
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
+            $newTransactionDetails.type === NewTransactionType.TokenTransfer ? $newTransactionDetails.rawAmount : '0',
+            $newTransactionDetails.metadata,
+            $newTransactionDetails.tag,
+            $newTransactionDetails.type === NewTransactionType.TokenTransfer ? $newTransactionDetails.asset : undefined,
             giftStorageDeposit,
-            transactionDetails.surplus,
-            transactionDetails.layer2Parameters,
-            transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
+            $newTransactionDetails.surplus,
+            $newTransactionDetails.layer2Parameters,
+            $newTransactionDetails.type === NewTransactionType.NftTransfer ? $newTransactionDetails.nftId : undefined
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
@@ -129,9 +126,9 @@
 {:else if $sendRoute === SendRoute.Recipient}
     <RecipientView />
 {:else if $sendRoute === SendRoute.Amount}
-    <AmountView {sendTransaction} {triggerSendOnMount} />
-{:else if $sendRoute === SendRoute.Confirm}
-    <ConfirmView />
+    <AmountView />
+{:else if $sendRoute === SendRoute.Review}
+    <ReviewView {sendTransaction} {triggerSendOnMount} {storageDeposit} />
 {:else if $sendRoute === SendRoute.Password}
     <StrongholdUnlock onSuccess={onUnlockSuccess} onCancel={() => $sendRouter.previous()} />
 {/if}
