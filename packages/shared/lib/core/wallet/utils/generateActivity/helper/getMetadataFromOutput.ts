@@ -10,10 +10,16 @@ export function getMetadataFromOutput(output: Output): string {
     }
     if (data) {
         const metadataBytes = Converter.hexToBytes(data.substring(2))
+        // TODO, optimal way to figure out if bytes contain non-ASCII character
+        // https://www.utf8-chartable.de/
         if (metadataBytes.includes(0)) {
-            // TODO, optimal way to figure out if bytes contain non-ASCII character
-            // https://www.utf8-chartable.de/
-            return JSON.stringify({ ...parseLayer2MetadataForTransfer(metadataBytes), originalData: data })
+            try {
+                const layer2Data = parseLayer2MetadataForTransfer(metadataBytes)
+                return JSON.stringify(layer2Data)
+            } catch (err) {
+                console.error(err)
+                return data
+            }
         }
         return Converter.hexToUtf8(data)
     }
