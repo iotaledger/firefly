@@ -8,8 +8,8 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
         const metadataByteArray = Converter.hexToBytes(metadata)
         const expected = {
             senderContract: '0x0',
-            targetContract: '0x3c4b5e02',
-            contractFunction: '0x23f4e3a1',
+            targetContract: 'Accounts',
+            contractFunction: 'transferAllowanceTo',
             gasBudget: '500000',
             forceOpenAccount: true,
             ethereumAddress: '0x807d707f59f1345e1063dbb64f2495d1491283a0',
@@ -26,8 +26,8 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
         const metadataByteArray = Converter.hexToBytes(metadata)
         const expected = {
             senderContract: '0x0',
-            targetContract: '0x3c4b5e02',
-            contractFunction: '0x23f4e3a1',
+            targetContract: 'Accounts',
+            contractFunction: 'transferAllowanceTo',
             gasBudget: '18446744073709551615',
             forceOpenAccount: true,
             ethereumAddress: '0x8cc8112290f8c350a60e1afdb8379c686e2a5bb3',
