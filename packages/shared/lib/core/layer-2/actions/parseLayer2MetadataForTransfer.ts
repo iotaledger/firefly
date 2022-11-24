@@ -1,25 +1,15 @@
 import { Converter } from '@core/utils'
 import { ReadStream } from '@iota/util.js'
-import { Allowance, FORCE_OPEN_ACCOUNT, ILayer2SmartContractCallData, ITransferAllowanceMetadata } from '@core/layer-2'
+import { Allowance, FORCE_OPEN_ACCOUNT, ILayer2TransferAllowanceMetadata } from '@core/layer-2'
 import { NativeTokenAmount, TOKEN_ID_BYTE_LENGTH } from '@core/token'
 
-export function parseLayer2MetadataForTransfer(metadata: Uint8Array): {
-    smartContractData: ILayer2SmartContractCallData
-    allowanceData: ITransferAllowanceMetadata
-} {
+export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadStream(metadata)
 
     const senderContract = readStream.readUInt32('senderContract')
     const targetContract = readStream.readUInt32('targetContract')
     const contractFunction = readStream.readUInt32('contractFunction')
     const gasBudget = readStream.readUInt64('gasBudget')
-
-    const smartContractData: ILayer2SmartContractCallData = {
-        senderContract: Converter.decimalToHex(senderContract, true),
-        targetContract: Converter.decimalToHex(targetContract, true),
-        contractFunction: Converter.decimalToHex(contractFunction, true),
-        gasBudget,
-    }
 
     const smartContractParametersAmount = readStream.readUInt32('parametersLength')
     const smartContractParameters: Record<string, string> = {}
@@ -55,15 +45,16 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): {
                 const amount = readStream.readUInt256('tokenAmount').toString()
                 nativeTokens.push({ tokenId, amount })
             }
-            const allowanceData: ITransferAllowanceMetadata = {
+
+            return {
+                senderContract: Converter.decimalToHex(senderContract, true),
+                targetContract: Converter.decimalToHex(targetContract, true),
+                contractFunction: Converter.decimalToHex(contractFunction, true),
+                gasBudget: gasBudget.toString(),
                 ethereumAddress: '0x' + smartContractParameters['a'].substring(2),
                 forceOpenAccount: smartContractParameters['c'] === FORCE_OPEN_ACCOUNT,
                 baseTokenAmount,
                 nativeTokens,
-            }
-            return {
-                smartContractData,
-                allowanceData,
             }
         } else {
             return
