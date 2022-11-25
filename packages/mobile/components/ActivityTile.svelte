@@ -19,7 +19,7 @@
 <ClickableTile {onClick} classes={activity.inclusionState === InclusionState.Confirmed ? '' : 'opacity-50'}>
     <activity-tile class="w-full flex flex-col space-y-4">
         <tile-content class="flex flex-row items-center text-left space-x-4">
-            {#if activity.type === ActivityType.Transaction}
+            {#if activity.type === ActivityType.Basic}
                 <TransactionActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Alias}
                 <AliasActivityTileContent {activity} />

@@ -1813,7 +1813,7 @@
             "Confirmed": "staked for",
             "Conflicting": "failed to stake"
         },
-        "transaction": {
+        "basic": {
             "internal": {
                 "incoming": {
                     "Pending": "transferring from",

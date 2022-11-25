@@ -1,6 +1,4 @@
 <script lang="typescript">
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import {
@@ -11,7 +9,9 @@
         NewTransactionType,
         selectedAccountAssets,
     } from '@core/wallet'
-    import { BasicActivityDetails, Button, KeyValueBox, Toggle } from 'shared/components'
+    import { BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from 'shared/components'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
     import { sendRouter } from '../../../../../lib/routers'
 
     export let sendTransaction: () => Promise<void>
@@ -27,8 +27,19 @@
     $: isInternal = recipient?.type === 'account'
     $: isTransferring = $selectedAccount.isTransferring
     $: hideGiftToggle =
-        transactionDetails?.type === NewTransactionType.TokenTransfer &&
-        transactionDetails?.asset?.id === $selectedAccountAssets?.baseCoin?.id
+        transactionDetails.type === NewTransactionType.TokenTransfer &&
+        transactionDetails.assetId === $selectedAccountAssets?.baseCoin?.id
+
+    $: activity = {
+        ...transactionDetails,
+        storageDeposit,
+        subject: recipient,
+        isInternal,
+        giftedStorageDeposit: 0,
+        type: ActivityType.Basic,
+        direction: ActivityDirection.Outgoing,
+        inclusionState: InclusionState.Pending,
+    }
 
     onMount(() => {
         if (triggerSendOnMount) {
@@ -61,17 +72,7 @@
 <div class="w-full overflow-y-auto flex flex-col flex-auto h-1 justify-between">
     <div class="flex flex-row flex-1 items-center justify-center relative">
         <div class="w-full flex-col space-y-2">
-            <BasicActivityDetails
-                {...transactionDetails}
-                {storageDeposit}
-                subject={recipient}
-                {isInternal}
-                {surplus}
-                type={ActivityType.Transaction}
-                direction={ActivityDirection.Outgoing}
-                inclusionState={InclusionState.Pending}
-                networkAddress={layer2Parameters?.networkAddress}
-            />
+            <BasicActivityDetails {activity} networkAddress={layer2Parameters?.networkAddress} />
             {#if !hideGiftToggle}
                 <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                     <Toggle
@@ -82,6 +83,9 @@
                         onClick={toggleGiftStorageDeposit}
                     />
                 </KeyValueBox>
+            {/if}
+            {#if surplus}
+                <TextHint warning text={localize('popups.transaction.surplusIncluded')} />
             {/if}
         </div>
     </div>

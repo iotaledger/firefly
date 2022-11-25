@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 import BigInteger from 'big-integer'
 
 import { WriteStream } from '@iota/util.js'
-import { newTransactionDetails, NewTransactionType, selectedAccountAssets } from '@core/wallet'
+import { getPersistedAsset, newTransactionDetails, NewTransactionType, selectedAccountAssets } from '@core/wallet'
 import { Converter } from '@core/utils'
 import {
     ACCOUNTS_CONTRACT,
@@ -72,19 +72,23 @@ function encodeAllowance(): Uint8Array {
 
     const transactionDetails = get(newTransactionDetails)
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        allowance.writeUInt8('encodedAllowance', Allowance.NotSet)
+        allowance.writeUInt8('encodedAllowance', Allowance.Set)
 
-        const { asset, surplus, rawAmount } = transactionDetails
+        const { assetId, surplus, rawAmount } = transactionDetails
+        const asset = getPersistedAsset(assetId)
         if (asset === get(selectedAccountAssets).baseCoin) {
             allowance.writeUInt64('iotaAmount', BigInteger(rawAmount))
             allowance.writeUInt16('noTokens', EMPTY_BUFFER_BYTE_LENGTH)
             allowance.writeUInt16('emptyTokenBuffer', EMPTY_BUFFER)
         } else {
             allowance.writeUInt64('iotaAmount', BigInteger(surplus ?? '0'))
-            const tokenIdBytes = Converter.hexToBytes(asset.id)
+
+            tokenBuffer.writeUInt16('amountOfTokens', 1)
+            const tokenIdBytes = Converter.hexToBytes(asset.id.substring(2))
             tokenBuffer.writeBytes('tokenId', tokenIdBytes.length, tokenIdBytes)
             tokenBuffer.writeUInt256('amount', BigInteger(rawAmount))
             const tokenBufferBytes = tokenBuffer.finalBytes()
+
             allowance.writeUInt16('tokensLength', tokenBufferBytes.length)
             allowance.writeBytes('tokenBuffer', tokenBufferBytes.length, tokenBufferBytes)
         }

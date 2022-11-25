@@ -1,4 +1,6 @@
 export * from './externally-owned-account-type-id.constant'
+export * from './target-contracts.constant'
+export * from './contract-functions.constant'
 export * from './transfer-allowance.constant'
 export * from './empty-buffer.constants'
 export * from './gas-budget.constant'
