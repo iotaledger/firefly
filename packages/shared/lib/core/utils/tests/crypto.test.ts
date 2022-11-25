@@ -20,9 +20,9 @@ describe('Module: crypto', () => {
             ).toThrowError('The address is not valid.')
         })
         it('should return undefined if address is valid', () => {
-            expect(
+            expect(() =>
                 validateBech32Address('iota', 'iota1qqf446qvry56672nefltyac6xw54k5eww43hr9lpdv03x9403uaewd807lx')
-            ).toEqual(true)
+            ).not.toThrow()
         })
     })
 })

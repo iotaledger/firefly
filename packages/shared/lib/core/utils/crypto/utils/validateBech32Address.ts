@@ -5,7 +5,7 @@ import { ADDRESS_TYPE_MAP } from '@core/wallet/constants'
 
 import { convertBytesToHexString } from '../../convert'
 
-export function validateBech32Address(prefix: string, addr: string, addressType?: number): boolean {
+export function validateBech32Address(prefix: string, addr: string, addressType?: number): void {
     const addressTypeLetter = ADDRESS_TYPE_MAP[addressType] ?? ''
     if (!addr || !addr.startsWith(prefix)) {
         throw new Error(
@@ -35,8 +35,6 @@ export function validateBech32Address(prefix: string, addr: string, addressType?
     if (!isValid) {
         throw new Error(localize('error.send.invalidAddress'))
     }
-
-    return true
 }
 
 export function isValidBech32AddressAndPrefix(address: string, expectedAddressPrefix: string): boolean {
@@ -44,7 +42,9 @@ export function isValidBech32AddressAndPrefix(address: string, expectedAddressPr
 }
 
 export function convertBech32AddressToEd25519Address(bech32Address: string, includeTypeByte: boolean = false): string {
-    if (!bech32Address) return ''
+    if (!bech32Address) {
+        return ''
+    }
 
     return convertBytesToHexString(Array.from(Bech32.decode(bech32Address).data).slice(includeTypeByte ? 0 : 1))
 }
