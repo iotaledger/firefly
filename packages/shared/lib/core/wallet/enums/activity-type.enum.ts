@@ -1,6 +1,6 @@
 export enum ActivityType {
     Stake = 'stake',
-    Transaction = 'transaction',
+    Basic = 'basic',
     Nft = 'nft',
     Foundry = 'foundry',
     Alias = 'alias',

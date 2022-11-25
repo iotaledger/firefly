@@ -1,14 +1,15 @@
 <script lang="typescript">
-    import { onDestroy } from 'svelte'
     import features from '@features/features'
+    import { selectedActivity } from '../../lib/contexts/dashboard'
     import {
         accountSwitcherRouter,
+        activityRouter,
         DashboardRoute,
         dashboardRoute,
         dashboardRouter,
+        resetRouterWithDrawerDelay,
         sendRouter,
     } from '../../lib/routers'
-    import { selectedActivity } from '../../lib/wallet'
     import { AccountSwitcherDrawer, ActivityDrawer, ProfileActionsDrawer, ReceiveDrawer, SendDrawer } from './drawers'
 
     $: $selectedActivity && $dashboardRouter.goTo(DashboardRoute.Activity)
@@ -17,24 +18,20 @@
         $dashboardRouter.previous()
     }
     function onSendDrawerClose(): void {
-        $sendRouter.reset()
-        $dashboardRouter.previous()
+        $sendRouter.closeDrawer()
     }
     function onAccountSwitcherDrawerClose(): void {
-        $accountSwitcherRouter.reset()
+        resetRouterWithDrawerDelay($accountSwitcherRouter)
         $dashboardRouter.previous()
     }
     function onProfileActionsDrawerClose(): void {
         $dashboardRouter.previous()
     }
     function onActivityDrawerClose(): void {
+        resetRouterWithDrawerDelay($activityRouter)
         $selectedActivity = null
         $dashboardRouter.previous()
     }
-
-    onDestroy(() => {
-        selectedActivity.set(null)
-    })
 </script>
 
 {#if $dashboardRoute === DashboardRoute.Receive && features?.dashboard?.receive?.enabled}

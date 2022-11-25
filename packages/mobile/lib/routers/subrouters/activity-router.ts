@@ -4,7 +4,7 @@ import { Subrouter } from '@core/router'
 import { claimActivity, rejectActivity } from '@core/wallet'
 
 import { ActivityAction } from '../../../lib/contexts/dashboard'
-import { selectedActivity } from '../../../lib/wallet'
+import { selectedActivity } from '../../../lib/contexts/dashboard'
 import { dashboardRouter } from '../dashboard-router'
 import { ActivityRoute } from '../enums'
 import { IActivityRouterEvent } from '../interfaces'
@@ -18,7 +18,7 @@ export class ActivityRouter extends Subrouter<ActivityRoute> {
     constructor() {
         super(ActivityRoute.Details, activityRoute, get(dashboardRouter))
     }
-    public next(event: IActivityRouterEvent): void {
+    public next(event: IActivityRouterEvent = {}): void {
         const { action, activity, isUnlocked } = event
 
         if (activity) {
