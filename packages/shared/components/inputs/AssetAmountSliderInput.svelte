@@ -104,7 +104,7 @@
     <div class="flex flex-col">
         <SliderInput
             bind:value={amount}
-            max={formatTokenAmountDefault(asset?.balance?.available, asset.metadata)}
+            max={Number(formatTokenAmountDefault(asset?.balance?.available, asset.metadata, unit, false))}
             decimals={asset.metadata.decimals}
         />
         <div class="flex flex-row justify-between">

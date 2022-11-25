@@ -22,7 +22,7 @@
         try {
             await assetAmountSliderInput.validate()
             checkActiveProfileAuth(async () => {
-                await burnAsset(asset.id)
+                await burnAsset(asset.id, rawAmount)
                 closePopup()
             })
         } catch (err) {
