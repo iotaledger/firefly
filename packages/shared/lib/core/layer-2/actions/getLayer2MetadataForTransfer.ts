@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 import BigInteger from 'big-integer'
 
 import { WriteStream } from '@iota/util.js'
-import { newTransactionDetails, NewTransactionType, selectedAccountAssets } from '@core/wallet'
+import { getPersistedAsset, newTransactionDetails, NewTransactionType, selectedAccountAssets } from '@core/wallet'
 import { Converter } from '@core/utils'
 import {
     ACCOUNTS_CONTRACT,
@@ -74,7 +74,8 @@ function encodeAllowance(): Uint8Array {
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         allowance.writeUInt8('encodedAllowance', Allowance.Set)
 
-        const { asset, surplus, rawAmount } = transactionDetails
+        const { assetId, surplus, rawAmount } = transactionDetails
+        const asset = getPersistedAsset(assetId)
         if (asset === get(selectedAccountAssets).baseCoin) {
             allowance.writeUInt64('iotaAmount', BigInteger(rawAmount))
             allowance.writeUInt16('noTokens', EMPTY_BUFFER_BYTE_LENGTH)

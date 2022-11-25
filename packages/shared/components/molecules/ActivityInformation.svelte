@@ -13,6 +13,7 @@
     import { selectedAccountIndex } from '@core/account'
 
     export let activity: Activity
+    export let networkAddress: string = null
 
     enum Tab {
         Transaction = 'general.transaction',
@@ -35,7 +36,7 @@
     let tabs: Tab[] = []
     $: {
         switch (activity.type) {
-            case ActivityType.Transaction:
+            case ActivityType.Basic:
                 tabs = [Tab.Transaction]
                 break
             case ActivityType.Alias:
@@ -58,7 +59,7 @@
         <Tabs bind:activeTab {tabs} />
     {/if}
     {#if activeTab === Tab.Transaction}
-        <GenericActivityInformation {activity} />
+        <GenericActivityInformation {activity} {networkAddress} />
     {:else if activeTab === Tab.Alias && activity.type === ActivityType.Alias}
         <AliasActivityInformation {activity} />
     {:else if activeTab === Tab.Nft && activity.type === ActivityType.Nft}
