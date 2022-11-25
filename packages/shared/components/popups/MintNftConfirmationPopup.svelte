@@ -112,7 +112,7 @@
                     />
                 {:else if activeTab === Tab.Nft}
                     {#each Object.entries(nftTabDetails) as [key, value]}
-                        <KeyValueBox keyText={localize(`general.${key}`)} valueText={value} />
+                        <KeyValueBox keyText={localize(`popups.mintNftForm.property.${key}`)} valueText={value} />
                     {/each}
                 {:else if activeTab === Tab.Metadata}
                     <KeyValueBox
