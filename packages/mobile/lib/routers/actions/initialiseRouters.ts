@@ -4,6 +4,8 @@ import { onboardingRouter, OnboardingRouter } from '../onboarding-router'
 import {
     AccountSwitcherRouter,
     accountSwitcherRouter,
+    ActivityRouter,
+    activityRouter,
     AppSetupRouter,
     appSetupRouter,
     LoginRouter,
@@ -71,5 +73,6 @@ function initialiseOnboardingSubrouters(): void {
 
 function initialiseDashboardSubrouters(): void {
     accountSwitcherRouter.set(new AccountSwitcherRouter())
+    activityRouter.set(new ActivityRouter())
     sendRouter.set(new SendRouter())
 }

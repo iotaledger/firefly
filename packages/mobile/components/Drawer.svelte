@@ -2,6 +2,7 @@
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Icon, Text, TextType } from 'shared/components'
     import { fade, fly } from 'svelte/transition'
+    import { DRAWER_IN_ANIMATION_DURATION_MS, DRAWER_OUT_ANIMATION_DURATION_MS } from '../lib/contexts/dashboard'
 
     export let onClose: () => unknown = () => {}
     export let onBackClick: () => unknown = () => {}
@@ -46,15 +47,15 @@
 <svelte:window on:touchend={onTouchEnd} on:touchmove={onTouchMove} />
 <drawer class="fixed top-0 left-0 z-30 w-screen h-screen z-40">
     <overlay
-        in:fade={{ duration: 300 }}
-        out:fade={{ duration: 200 }}
+        in:fade={{ duration: DRAWER_IN_ANIMATION_DURATION_MS }}
+        out:fade={{ duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
         on:click={onClose}
         class="fixed top-0 left-0 w-full h-full z-0 bg-gray-700 dark:bg-gray-900 bg-opacity-60 dark:bg-opacity-60"
     />
     <panel
         on:touchstart={onTouchStart}
-        in:fly={{ ...directon, duration: 300 }}
-        out:fly={{ ...directon, duration: 200 }}
+        in:fly={{ ...directon, duration: DRAWER_IN_ANIMATION_DURATION_MS }}
+        out:fly={{ ...directon, duration: DRAWER_OUT_ANIMATION_DURATION_MS }}
         bind:clientHeight={panelHeight}
         bind:clientWidth={panelWidth}
         class:moving

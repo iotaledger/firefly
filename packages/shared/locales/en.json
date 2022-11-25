@@ -572,7 +572,8 @@
                 "royalties": "Royalties",
                 "issuerName": "Issuer Name",
                 "description": "Description",
-                "attributes": "Attributes"
+                "attributes": "Attributes",
+                "metadata": "Metadata"
             }
         }
     },
@@ -913,14 +914,20 @@
                 "nft": "NFT"
             }
         },
-        "mintNativeToken": {
+        "nativeToken": {
             "formTitle": "Mint native tokens",
             "confirmationTitle": "Mint native tokens",
             "property": {
-                "totalSupply": "Total Supply",
-                "circulatingSupply": "Circulating Supply",
+                "totalSupply": "Total supply",
+                "maximumSupply": "Maximum supply",
+                "mintedTokens": "Minted tokens",
+                "meltedTokens": "Melted tokens",
+                "circulatingSupply": "Circulating supply",
+                "aliasAddress": "Alias controller address",
                 "standard": "Standard",
                 "tokenName": "Name",
+                "unit": "Unit",
+                "subunit": "Subunit",
                 "storageDeposit": "Storage Deposit",
                 "description": "Description",
                 "symbol": "Symbol",
@@ -928,7 +935,8 @@
                 "url": "URL",
                 "logoUrl": "Logo URL",
                 "logo": "Logo",
-                "alias": "Alias"
+                "alias": "Alias",
+                "assetId": "Asset Id"
             }
         },
         "noAlias": {
@@ -937,7 +945,7 @@
         },
         "mintNftForm": {
             "title": "Mint simple NFT",
-            "inputs": {
+            "property": {
                 "type": "Type",
                 "uri": "URI",
                 "name": "Name",
@@ -1151,6 +1159,8 @@
         "transferring": "Transferring",
         "transferNft": "Transfer NFT",
         "transferringNft": "Transferring NFT",
+        "mintedNft": "Minted NFT",
+        "mintingNft": "Minting NFT",
         "shimmerClaimed": "Claimed",
         "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
@@ -1343,6 +1353,8 @@
         "enterAddress": "Enter address",
         "transaction": "Transaction",
         "alias": "Alias",
+        "foundry": "Foundry",
+        "token": "Token",
         "nft": "NFT",
         "type": "Type",
         "immutableIssuer": "Immutable Issuer"
@@ -1587,6 +1599,9 @@
             "nftNotInHex": "NFT address has to be in HEX format",
             "nftNotInPossession": "NFT not in possession"
         },
+        "layer2": {
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account"
+        },
         "node": {
             "invalid": "Please enter a valid URL.",
             "dns": "Could not find DNS resolution for node.",
@@ -1711,6 +1726,14 @@
         },
         "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
+            "minting": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+            },
             "incoming": {
                 "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
                 "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
@@ -1788,7 +1811,7 @@
             "Confirmed": "staked for",
             "Conflicting": "failed to stake"
         },
-        "transaction": {
+        "basic": {
             "internal": {
                 "incoming": {
                     "Pending": "transferring from",
@@ -1825,6 +1848,11 @@
                     "Pending": "transferring to",
                     "Confirmed": "transferred to",
                     "Conflicting": "failed to transfer"
+                },
+                "minting": {
+                    "Pending": "minting",
+                    "Confirmed": "minted",
+                    "Conflicting": "failed to mint"
                 }
             },
             "external": {
@@ -1864,7 +1892,8 @@
                 "Failed": "Failed to create alias"
             }
         },
-        "locked": "locked"
+        "locked": "locked",
+        "smartContractCall": "smart contract call"
     },
     "menus": {
         "expirationTimePicker": {

@@ -868,9 +868,9 @@
                 "verifyToken": "Jag verifierar denna token"
             }
         },
-        "mintNativeTokenForm": {
-            "title": "Minta inhemska tokens",
-            "inputs": {
+        "nativeToken": {
+            "formTitle": "Minta inhemska tokens",
+            "property": {
                 "totalSupply": "Totalt antal",
                 "circulatingSupply": "Cirkulerande antal",
                 "standard": "Standard",

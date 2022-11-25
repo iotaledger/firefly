@@ -5,6 +5,7 @@ import { dashboardRouter } from '../dashboard-router'
 import { onboardingRouter } from '../onboarding-router'
 import {
     accountSwitcherRouter,
+    activityRouter,
     appSetupRouter,
     loginRouter,
     networkSetupRouter,
@@ -45,5 +46,6 @@ function resetOnboardingSubrouters(): void {
 
 function resetDashboardSubrouters(): void {
     get(accountSwitcherRouter).reset()
+    get(activityRouter).reset()
     get(sendRouter).reset()
 }

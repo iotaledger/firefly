@@ -17,4 +17,5 @@ export interface IPersistedProfile {
     hasVisitedDashboard?: boolean
     lastUsedAccountIndex?: number
     clientOptions: IClientOptions
+    forceAssetRefresh: boolean
 }

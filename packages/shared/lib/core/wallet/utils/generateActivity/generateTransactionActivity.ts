@@ -52,10 +52,10 @@ export function generateTransactionActivity(
     const publicNote = ''
 
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
+    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 
     return {
-        type: ActivityType.Transaction,
+        type: ActivityType.Basic,
         isHidden,
         id,
         transactionId,

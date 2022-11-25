@@ -4,7 +4,6 @@ import { localize } from '@core/i18n'
 import { COIN_TYPE, NetworkProtocol } from '@core/network'
 import {
     DEFAULT_TRANSACTION_OPTIONS,
-    getAssetFromPersistedAssets,
     getOutputOptions,
     resetNewTokenTransactionDetails,
     setNewTransactionDetails,
@@ -71,12 +70,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     if (get(isOnboardingLedgerProfile)) {
         setNewTransactionDetails({
             type: NewTransactionType.TokenTransfer,
-            asset: {
-                ...getAssetFromPersistedAssets(COIN_TYPE[NetworkProtocol.Shimmer].toString()),
-                balance: {
-                    total: rawAmount,
-                },
-            },
+            assetId: COIN_TYPE[NetworkProtocol.Shimmer].toString(),
             rawAmount: rawAmount.toString(),
             unit: '',
             recipient: {

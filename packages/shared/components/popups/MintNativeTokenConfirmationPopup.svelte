@@ -120,7 +120,7 @@
 
 <div class="space-y-6">
     <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
-        {localize('popups.mintNativeToken.confirmationTitle')}
+        {localize('popups.nativeToken.confirmationTitle')}
     </Text>
 
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
@@ -128,7 +128,7 @@
             <details-list class="flex flex-col space-y-2">
                 {#each Object.entries(detailsList) as [key, value]}
                     <KeyValueBox
-                        keyText={localize(`popups.mintNativeToken.property.${key}`)}
+                        keyText={localize(`popups.nativeToken.property.${key}`)}
                         valueText={value.data}
                         isCopyable={value.isCopyable}
                     />

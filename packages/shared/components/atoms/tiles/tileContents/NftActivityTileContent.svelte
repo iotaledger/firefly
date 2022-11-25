@@ -4,6 +4,8 @@
     import { truncateString } from '@core/utils'
     import { Text, FontWeight, NftMediaContainer, NftMediaSize } from 'shared/components'
     import { networkHrp } from '@core/network'
+    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { selectedAccountIndex } from '@core/account'
 
     export let activity: NftActivity
 
@@ -11,10 +13,15 @@
     $: title = getTitle(activity)
     $: subjectLocale = getSubjectLocale(activity.subject)
 
+    $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
+
     function getTitle(_activity: NftActivity): string {
         const { isInternal, direction, inclusionState } = _activity
         const isConfirmed = inclusionState === InclusionState.Confirmed
 
+        if (direction === ActivityDirection.Minting) {
+            return isConfirmed ? 'general.mintedNft' : 'general.mintingNft'
+        }
         if (isInternal) {
             return isConfirmed ? 'general.transferNft' : 'general.transferringNft'
         }
@@ -53,11 +60,15 @@
         </Text>
     </div>
 
-    <div class="flex flex-row items-start">
-        <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600">
-            {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
-                values: { account: subjectLocale },
-            })}
+    <div class="flex flex-row items-start" style="width: 70%">
+        <Text fontWeight={FontWeight.normal} lineHeight="140" color="gray-600" classes="truncate">
+            {#if activity.direction === ActivityDirection.Minting}
+                {nft?.name}
+            {:else}
+                {localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
+                    values: { account: subjectLocale },
+                })}
+            {/if}
         </Text>
     </div>
 </div>
