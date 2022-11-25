@@ -50,7 +50,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDe
 
     return {
         type: NewTransactionType.TokenTransfer,
-        ...(asset && { asset }),
+        ...(assetId && { assetId }),
         ...(recipient && { recipient }),
         ...(rawAmount && { rawAmount }),
         ...(unit && { unit }),
