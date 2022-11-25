@@ -32,7 +32,6 @@
     } = $mintTokenDetails
 
     let storageDeposit = '0'
-    let preparedOutput: IFoundryOutput
 
     let metadata: IIrc30Metadata
     $: metadata = {
@@ -48,7 +47,7 @@
 
     async function prepareFoundryOutput(): Promise<void> {
         const outputData = buildFoundryOutputData(Number(totalSupply), Number(circulatingSupply), metadata, aliasId)
-        preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
+        const preparedOutput: IFoundryOutput = await $selectedAccount.buildFoundryOutput(outputData)
         storageDeposit = formatTokenAmountPrecise(
             Number(preparedOutput.amount) ?? 0,
             BASE_TOKEN[$activeProfile?.networkProtocol]

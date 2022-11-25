@@ -3,11 +3,13 @@
     import { Button, Text, FontWeight, NftMediaContainer, Tabs, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
-    import { mintNft, mintNftDetails } from '@core/wallet'
-    import { checkActiveProfileAuth } from '@core/profile'
+    import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
+    import type { INftOutput } from '@iota/types'
+    import { BASE_TOKEN } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -21,6 +23,7 @@
     const tabs: Tab[] = [Tab.Transaction, Tab.Nft, Tab.Metadata]
     let activeTab = Tab.Transaction
 
+    let storageDeposit: string = '0'
     const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes } =
         $mintNftDetails
 
@@ -46,6 +49,15 @@
             ...(issuerName && { issuerName }),
             ...(collectionName && { collectionName }),
         }
+    }
+
+    async function prepareNftOutput(): Promise<void> {
+        const outputData = buildNftOutputData(actualMintDetails, $selectedAccount.depositAddress)
+        const preparedOutput: INftOutput = await $selectedAccount.buildNftOutput(outputData)
+        storageDeposit = formatTokenAmountPrecise(
+            Number(preparedOutput.amount) ?? 0,
+            BASE_TOKEN[$activeProfile?.networkProtocol]
+        )
     }
 
     async function mintAction(): Promise<void> {
@@ -76,6 +88,7 @@
     onMount(async () => {
         try {
             await _onMount()
+            await prepareNftOutput()
         } catch (err) {
             handleError(err)
         }
@@ -92,7 +105,7 @@
             <activity-details class="w-full h-full space-y-2 flex flex-auto flex-col flex-shrink-0">
                 <Tabs bind:activeTab {tabs} />
                 {#if activeTab === Tab.Transaction}
-                    <KeyValueBox keyText={localize('general.storageDeposit')} valueText="0" />
+                    <KeyValueBox keyText={localize('general.storageDeposit')} valueText={storageDeposit} />
                     <KeyValueBox
                         keyText={localize('general.immutableIssuer')}
                         valueText={$selectedAccount.depositAddress}
