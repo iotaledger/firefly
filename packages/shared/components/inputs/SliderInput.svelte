@@ -6,6 +6,7 @@
     export let max = 100
     export let initialValue = 0
     export let id = null
+    export let decimals = 0
     export let value = typeof initialValue === 'string' ? parseInt(initialValue) : initialValue
 
     // Node Bindings
@@ -19,8 +20,6 @@
     let currentThumb = null
     let holding = false
     let thumbHover = false
-    let keydownAcceleration = 0
-    let accelerationTimer = null
 
     // Dispatch 'change' events
     const dispatch = createEventDispatcher()
@@ -40,7 +39,7 @@
 
     // Allows both bind:value and on:change for parent value retrieval
     function setValue(val) {
-        value = val
+        value = String(val)
         dispatch('change', { value })
     }
 
@@ -75,33 +74,6 @@
         return true
     }
 
-    // Accessible keypress handling
-    function onKeyPress(e) {
-        // Max out at +/- 10 to value per event (50 events / 5)
-        // 100 below is to increase the amount of events required to reach max velocity
-        if (keydownAcceleration < 50) keydownAcceleration++
-        const throttled = Math.ceil(keydownAcceleration / 5)
-
-        if (e.key === 'ArrowUp' || e.key === 'ArrowRight') {
-            if (value + throttled > max || value >= max) {
-                setValue(max)
-            } else {
-                setValue(value + throttled)
-            }
-        }
-        if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') {
-            if (value - throttled < min || value <= min) {
-                setValue(min)
-            } else {
-                setValue(value - throttled)
-            }
-        }
-
-        // Reset acceleration after 100ms of no events
-        clearTimeout(accelerationTimer)
-        accelerationTimer = setTimeout(() => (keydownAcceleration = 1), 100)
-    }
-
     function calculateNewValue(clientX) {
         // Find distance between cursor and element's left cord (20px / 2 = 10px) - Center of thumb
         const delta = clientX - (elementX + 10)
@@ -113,7 +85,7 @@
         percent = percent < 0 ? 0 : percent > 100 ? 100 : percent
 
         // Limit value min -> max
-        setValue(parseInt((percent * (max - min)) / 100) + min)
+        setValue(parseInt((percent / 100) * (max - min) * 10 ** decimals) / 10 ** decimals + min)
     }
 
     // Handles both dragging of touch/mouse as well as simple one-off click/touches
@@ -138,11 +110,8 @@
 
     // Update progressbar and thumb styles to represent value
     $: if (progressBar && thumb) {
-        // Limit value min -> max
-        value = value > min ? value : min
-        value = value < max ? value : max
-
-        const percent = ((value - min) * 100) / (max - min)
+        let percent = ((Number(value) - min) * 100) / (max - min)
+        percent = Math.max(Math.min(percent, 100), 0)
         const offsetLeft = (container.clientWidth - 10) * (percent / 100) + 5
 
         // Update thumb position + active range track width
@@ -163,7 +132,6 @@
     <div
         class="range__wrapper"
         tabindex="0"
-        on:keydown={onKeyPress}
         bind:this={element}
         role="slider"
         aria-valuemin={min}

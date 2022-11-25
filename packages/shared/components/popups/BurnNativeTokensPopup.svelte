@@ -14,13 +14,20 @@
     import { checkActiveProfileAuth } from '@core/profile'
 
     export let asset: IAsset
+    let assetAmountSliderInput: AssetAmountSliderInput
 
     let rawAmount = '0'
-    function confirmClick(): void {
-        checkActiveProfileAuth(async () => {
-            await burnAsset(asset.id)
-            closePopup()
-        })
+
+    async function confirmClick(): Promise<void> {
+        try {
+            await assetAmountSliderInput.validate()
+            checkActiveProfileAuth(async () => {
+                await burnAsset(asset.id)
+                closePopup()
+            })
+        } catch (err) {
+            console.error(err)
+        }
     }
 </script>
 
@@ -33,7 +40,7 @@
         })}
     </Text>
     <div class="space-y-4">
-        <AssetAmountSliderInput bind:rawAmount {asset} />
+        <AssetAmountSliderInput bind:this={assetAmountSliderInput} bind:rawAmount {asset} />
         <TextHint warning text={localize('actions.confirmTokenBurn.hint')} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
