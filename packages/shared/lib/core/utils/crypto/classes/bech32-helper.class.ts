@@ -37,12 +37,10 @@ export class Bech32Helper {
     public static fromBech32(
         bech32Text: string,
         humanReadablePart: string
-    ):
-        | {
-              addressType: number
-              addressBytes: Uint8Array
-          }
-        | undefined {
+    ): {
+        addressType: number
+        addressBytes: Uint8Array
+    } {
         const decoded = Bech32.decode(bech32Text)
         if (decoded) {
             if (decoded.humanReadablePart !== humanReadablePart) {
@@ -63,15 +61,5 @@ export class Bech32Helper {
                 addressBytes,
             }
         }
-    }
-
-    /**
-     * Does the provided string look like it might be an bech32 address with matching hrp.
-     * @param bech32Text The bech32 text to text.
-     * @param humanReadablePart The human readable part to match.
-     * @returns True if the passed address matches the pattern for a bech32 address.
-     */
-    public static matches(bech32Text: string, humanReadablePart: string): boolean {
-        return Bech32.matches(humanReadablePart, bech32Text)
     }
 }
