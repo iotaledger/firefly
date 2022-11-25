@@ -4,7 +4,6 @@ import { localize } from '@core/i18n'
 import { ADDRESS_TYPE_MAP } from '@core/wallet/constants'
 
 import { convertBytesToHexString } from '../../convert'
-import { InvalidAddressError } from '@auxiliary/deep-link'
 
 export function validateBech32Address(prefix: string, addr: string, addressType?: number): void {
     const addressTypeLetter = ADDRESS_TYPE_MAP[addressType] ?? ''
@@ -34,7 +33,7 @@ export function validateBech32Address(prefix: string, addr: string, addressType?
     }
 
     if (!isValid) {
-        throw new InvalidAddressError()
+        throw new Error(localize('error.send.invalidAddress'))
     }
 }
 
