@@ -1,11 +1,13 @@
-import { IAccountState } from '@core/account'
+import { IAccountState } from '@core/account/interfaces'
+
+import { setAccountActivitiesInAllAccountActivities } from '../../stores'
+
 import { setOutgoingAsyncActivitiesToClaimed } from '../setOutgoingAsyncActivitiesToClaimed'
 import { preprocessTransactionsForAccount } from './preprocessTransactionsForAccount'
 import { preprocessOutputsForAccount } from './preprocessOutputsForAccount'
 import { linkTransactionsWithClaimingTransactions } from './linkTransactionsWithClaimingTransactions'
 import { hideActivitiesForFoundries } from './hideActivitiesForFoundries'
 import { generateActivitiesFromProcessedTransactions } from './generateActivitiesFromProcessedTransactions'
-import { setAccountActivitiesInAllAccountActivities } from '@core/wallet/stores'
 import { loadAssetsForAllActivities } from './loadAssetsForAllAccounts'
 
 export async function generateAndStoreActivitiesForAccount(account: IAccountState): Promise<void> {

@@ -1,7 +1,8 @@
-import { networkHrp } from '@core/network'
-import { Bech32Helper } from '@core/utils'
-import { Converter } from '@core/utils'
 import { get } from 'svelte/store'
+
+import { networkHrp } from '@core/network/stores'
+import { Converter } from '@core/utils/convert'
+import { Bech32Helper } from '@core/utils/crypto'
 
 export function convertBech32ToHexAddress(bech32: string): string {
     return bech32
