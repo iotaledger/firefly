@@ -8,7 +8,7 @@ import { networkHrp } from '@core/network/stores'
 import { ETHEREUM_ADDRESS_HASH_SIZE } from '../constants'
 import { validateBech32Address } from './validateBech32Address'
 
-export function validateEthereumAddress(address: string): boolean {
+export function validateEthereumAddress(address: string): void {
     validateBech32Address(get(networkHrp), address)
 
     // Check if it has the basic requirements of an address
@@ -16,15 +16,15 @@ export function validateEthereumAddress(address: string): boolean {
         throw new Error(localize('error.send.invalidAddress'))
         // Check if it's all small caps or all large caps
     } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
-        return true
+        return
     } else {
         // Otherwise check EIP-55 checksum
-        return validateEthereumAddressChecksum(address)
+        validateEthereumAddressChecksum(address)
     }
 }
 
 // Check if EIP-55 mixed-case checksum address encoding is followed (https://eips.ethereum.org/EIPS/eip-55)
-function validateEthereumAddressChecksum(address: string): boolean {
+function validateEthereumAddressChecksum(address: string): void {
     address = address.replace('0x', '')
     const keccak256 = new Keccak(ETHEREUM_ADDRESS_HASH_SIZE)
     const addressHash = keccak256.update(address.toLowerCase()).digest('hex')
@@ -37,6 +37,4 @@ function validateEthereumAddressChecksum(address: string): boolean {
             throw new Error(localize('error.send.invalidAddress'))
         }
     }
-
-    return true
 }

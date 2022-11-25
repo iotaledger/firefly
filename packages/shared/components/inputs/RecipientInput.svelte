@@ -29,32 +29,29 @@
     $: isLayer2, (error = '')
 
     export function validate(): Promise<void> {
-        if (recipient?.type === 'address') {
-            if (!recipient.address) {
-                error = localize('error.send.recipientRequired')
-            }
+        try {
+            if (recipient?.type === 'address') {
+                if (!recipient.address) {
+                    throw new Error(localize('error.send.recipientRequired'))
+                }
 
-            try {
                 if (isLayer2) {
                     validateEthereumAddress(recipient?.address)
                 } else {
                     validateBech32Address(addressPrefix, recipient?.address)
                 }
-            } catch (err) {
-                error = err?.message ?? err
+            } else if (recipient?.type === 'account') {
+                if (isLayer2) {
+                    throw new Error(localize('error.layer2.layer1Recipient'))
+                }
+            } else {
+                throw new Error(localize('error.send.recipientRequired'))
             }
-        } else if (recipient?.type === 'account') {
-            if (isLayer2) {
-                error = localize('error.layer2.layer1Recipient')
-            }
-        } else {
-            error = localize('error.send.recipientRequired')
-        }
 
-        if (error) {
+            Promise.resolve()
+        } catch (err) {
+            error = err?.message ?? err
             return Promise.reject(error)
-        } else {
-            return Promise.resolve()
         }
     }
 

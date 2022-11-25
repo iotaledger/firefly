@@ -23,27 +23,24 @@
     $: alias = selected?.value
 
     export async function validate(): Promise<void> {
-        if (!alias) {
-            error = localize('error.aliasMinting.aliasRequired')
-            return Promise.reject(error)
-        }
-
         try {
-            validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
-            if (isAliasInPossession()) {
-                return Promise.resolve()
-            } else {
-                error = localize('error.aliasMinting.aliasNotInPossession')
-                return Promise.reject(error)
+            if (!alias) {
+                throw new Error(localize('error.aliasMinting.aliasRequired'))
             }
+            validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
+            validateAliasInPossession()
         } catch (err) {
             error = err?.message ?? err
             return Promise.reject(error)
         }
     }
 
-    function isAliasInPossession(): boolean {
-        return aliasOptions.some((option) => option.value === alias)
+    function validateAliasInPossession(): void {
+        if (aliasOptions.some((option) => option.value === alias)) {
+            return
+        } else {
+            throw new Error(localize('error.aliasMinting.aliasNotInPossession'))
+        }
     }
 </script>
 
