@@ -8,6 +8,7 @@
     import { validateBech32Address, validateEthereumAddress } from '@core/utils/crypto'
     import { Subject } from '@core/wallet/types'
     import { getSubjectFromAddress } from '@core/wallet/utils'
+    import { Layer1RecipientError } from '@core/layer-2/errors'
 
     export let recipient: Subject
     export let disabled = false
@@ -42,7 +43,7 @@
                 }
             } else if (recipient?.type === 'account') {
                 if (isLayer2) {
-                    throw new Error(localize('error.layer2.layer1Recipient'))
+                    throw new Layer1RecipientError()
                 }
             } else {
                 throw new Error(localize('error.send.recipientRequired'))

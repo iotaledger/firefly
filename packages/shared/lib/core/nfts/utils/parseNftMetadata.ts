@@ -62,8 +62,9 @@ function validate(data: IIrc27Metadata): void {
 }
 
 function validateRoyalties(royalties: unknown): void {
-    const isKeysValid = Object.keys(royalties).every((key) => validateBech32Address(get(networkHrp), key))
-    if (!isKeysValid) {
+    try {
+        Object.keys(royalties).forEach((key) => validateBech32Address(get(networkHrp), key))
+    } catch (err) {
         throw `Invalid royalty address, must be a valid ${get(networkHrp)} address where royalties will be sent to.`
     }
 

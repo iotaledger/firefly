@@ -2,19 +2,19 @@ import { get } from 'svelte/store'
 
 import { Keccak } from 'sha3'
 
-import { localize } from '@core/i18n'
 import { networkHrp } from '@core/network/stores'
 
 import { KECCAK_HASH_SIZE } from '../constants'
 import { validateBech32Address } from './validateBech32Address'
 import { Layer1RecipientError } from '@core/layer-2/errors'
+import { InvalidAddressError } from '@auxiliary/deep-link'
 
 export function validateEthereumAddress(address: string): void {
     throwIfBech32Address(address)
 
     // Check if it has the basic requirements of an address
     if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
-        throw new Error(localize('error.send.invalidAddress'))
+        throw new InvalidAddressError()
         // Check if it's all small caps or all large caps
     } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
         return
@@ -35,7 +35,7 @@ function validateEthereumAddressChecksum(address: string): void {
             (parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) ||
             (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])
         ) {
-            throw new Error(localize('error.send.invalidAddress'))
+            throw new InvalidAddressError()
         }
     }
 }

@@ -27,19 +27,15 @@
             if (!alias) {
                 throw new Error(localize('error.aliasMinting.aliasRequired'))
             }
+
+            if (!aliasOptions.some((option) => option.value === alias)) {
+                throw new Error(localize('error.aliasMinting.aliasNotInPossession'))
+            }
+
             validateBech32Address($networkHrp, alias, ADDRESS_TYPE_ALIAS)
-            validateAliasInPossession()
         } catch (err) {
             error = err?.message ?? err
             return Promise.reject(error)
-        }
-    }
-
-    function validateAliasInPossession(): void {
-        if (aliasOptions.some((option) => option.value === alias)) {
-            return
-        } else {
-            throw new Error(localize('error.aliasMinting.aliasNotInPossession'))
         }
     }
 </script>

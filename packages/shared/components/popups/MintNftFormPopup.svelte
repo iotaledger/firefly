@@ -102,6 +102,7 @@
             Object.keys(royalties).forEach((key) => validateBech32Address($networkHrp, key))
         } catch (err) {
             optionalInputErrors.royalties = `Invalid address, must be a valid ${$networkHrp} address where royalties will be sent to.`
+            return
         }
 
         const isValuesValid = Object.values(royalties).every((value) => value >= 0 && value <= 1)
