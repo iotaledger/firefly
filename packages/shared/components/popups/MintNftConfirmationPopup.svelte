@@ -8,14 +8,12 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup } from '@auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
-    import type { INftOutput } from '@iota/types'
     import { BASE_TOKEN } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     enum Tab {
         Transaction = 'general.transaction',
-        Alias = 'general.alias',
         Nft = 'general.nft',
         Metadata = 'general.metadata',
     }
@@ -23,11 +21,11 @@
     const tabs: Tab[] = [Tab.Transaction, Tab.Nft, Tab.Metadata]
     let activeTab = Tab.Transaction
 
-    let storageDeposit: string = '0'
+    let storageDeposit = '0'
     const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes } =
         $mintNftDetails
 
-    $: actualMintDetails = {
+    $: irc27Metadata = {
         standard,
         version: CURRENT_IRC27_VERSION,
         name,
@@ -52,8 +50,8 @@
     }
 
     async function prepareNftOutput(): Promise<void> {
-        const outputData = buildNftOutputData(actualMintDetails, $selectedAccount.depositAddress)
-        const preparedOutput: INftOutput = await $selectedAccount.buildNftOutput(outputData)
+        const outputData = buildNftOutputData(irc27Metadata, $selectedAccount.depositAddress)
+        const preparedOutput = await $selectedAccount.buildNftOutput(outputData)
         storageDeposit = formatTokenAmountPrecise(
             Number(preparedOutput.amount) ?? 0,
             BASE_TOKEN[$activeProfile?.networkProtocol]
@@ -62,7 +60,7 @@
 
     async function mintAction(): Promise<void> {
         try {
-            await mintNft(actualMintDetails)
+            await mintNft(irc27Metadata)
             closePopup()
         } catch (err) {
             handleError(err)
@@ -117,7 +115,7 @@
                 {:else if activeTab === Tab.Metadata}
                     <KeyValueBox
                         keyText={localize('general.metadata')}
-                        valueText={JSON.stringify(actualMintDetails, null, '\t')}
+                        valueText={JSON.stringify(irc27Metadata, null, '\t')}
                         classes="whitespace-pre-wrap"
                     />
                 {/if}

@@ -1,4 +1,4 @@
-import { UnlockConditionTypes } from '@iota/types'
+import type { FeatureTypes, UnlockConditionTypes } from '@iota/types'
 import type { BuildNftOutputData } from '@iota/wallet'
 import { Converter } from '@core/utils'
 import { ADDRESS_TYPE_ED25519, EMPTY_HEX_ID, FEATURE_TYPE_METADATA, UNLOCK_CONDITION_ADDRESS } from '../constants'
@@ -16,14 +16,14 @@ export function buildNftOutputData(metadata: IIrc27Metadata, address: string): B
         },
     ]
 
-    const immutableFeatures = [
+    const immutableFeatures: FeatureTypes[] = [
         {
             type: FEATURE_TYPE_METADATA,
             data: Converter.utf8ToHex(JSON.stringify(metadata), true),
         },
     ]
 
-    return <BuildNftOutputData>{
+    return {
         nftId: EMPTY_HEX_ID,
         immutableFeatures,
         unlockConditions,
