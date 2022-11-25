@@ -1136,7 +1136,8 @@
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
         "initializing": "Initializing",
-        "delete": "Delete"
+        "delete": "Delete",
+        "addReference": "Add reference"
     },
     "general": {
         "recipient": "Recipient",
