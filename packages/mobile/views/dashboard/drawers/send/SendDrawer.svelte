@@ -15,6 +15,9 @@
 
     function setTitle(): void {
         switch ($sendRoute) {
+            case SendRoute.Reference:
+                title = localize('actions.addReference')
+                break
             default:
                 title = localize('popups.sendForm.title')
                 break
