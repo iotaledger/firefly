@@ -1,1 +1,1 @@
-export * from './ethereum-address-hash-size.constant'
+export * from './keccak-hash-size.constant'
