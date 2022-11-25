@@ -9,7 +9,7 @@
         NewTransactionType,
         selectedAccountAssets,
     } from '@core/wallet'
-    import { BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from 'shared/components'
+    import { ActivityInformation, BasicActivityDetails, Button, KeyValueBox, TextHint, Toggle } from 'shared/components'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { sendRouter } from '../../../../../lib/routers'
@@ -73,13 +73,14 @@
     <div class="flex flex-row flex-1 items-center justify-center relative">
         <div class="w-full flex-col space-y-2">
             <BasicActivityDetails {activity} networkAddress={layer2Parameters?.networkAddress} />
+            <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} />
             {#if !hideGiftToggle}
                 <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
                     <Toggle
                         slot="value"
                         color="green"
-                        disabled={transactionDetails.disableToggleGift}
-                        active={transactionDetails.giftStorageDeposit}
+                        disabled={$newTransactionDetails.disableToggleGift}
+                        active={$newTransactionDetails.giftStorageDeposit}
                         onClick={toggleGiftStorageDeposit}
                     />
                 </KeyValueBox>
@@ -98,13 +99,7 @@
         >
             {localize('actions.send')}
         </Button>
-        <Button
-            outline
-            isBusy={loading || isTransferring}
-            onClick={onAddReferenceClick}
-            disabled={loading || isTransferring}
-            classes="w-full"
-        >
+        <Button outline onClick={onAddReferenceClick} disabled={loading || isTransferring} classes="w-full">
             {localize('actions.addReference')}
         </Button>
     </div>

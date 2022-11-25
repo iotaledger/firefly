@@ -7,6 +7,7 @@
     import { ExpirationTime } from '@core/utils'
     import {
         DEFAULT_TRANSACTION_OPTIONS,
+        getAssetById,
         getOutputOptions,
         newTransactionDetails,
         NewTransactionType,
@@ -18,6 +19,7 @@
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { OutputOptions } from '@iota/wallet'
     import { ExpirationTimePicker } from 'shared/components'
+    import { get } from 'svelte/store'
     import { StrongholdUnlock } from '../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
     import { AmountView, RecipientView, ReferenceView, ReviewView, TokenView } from './views'
@@ -32,8 +34,13 @@
 
     let triggerSendOnMount: boolean = false
 
+    $: transactionDetails = get(newTransactionDetails)
     $: recipientAddress = recipient?.type === 'account' ? recipient?.account?.depositAddress : recipient?.address
     $: expirationTimePicker?.setNull(giftStorageDeposit)
+    $: asset =
+        transactionDetails.type === NewTransactionType.TokenTransfer
+            ? getAssetById(transactionDetails.assetId)
+            : undefined
 
     async function sendTransaction(): Promise<void> {
         triggerSendOnMount = false
@@ -71,7 +78,7 @@
             $newTransactionDetails.type === NewTransactionType.TokenTransfer ? $newTransactionDetails.rawAmount : '0',
             $newTransactionDetails.metadata,
             $newTransactionDetails.tag,
-            $newTransactionDetails.type === NewTransactionType.TokenTransfer ? $newTransactionDetails.asset : undefined,
+            asset,
             giftStorageDeposit,
             $newTransactionDetails.surplus,
             $newTransactionDetails.layer2Parameters,
