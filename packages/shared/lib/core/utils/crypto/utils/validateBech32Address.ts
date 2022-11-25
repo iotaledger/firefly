@@ -1,8 +1,9 @@
+import { Bech32 } from '@iota/crypto.js'
+
 import { localize } from '@core/i18n'
 import { ADDRESS_TYPE_MAP } from '@core/wallet/constants'
 
 import { convertBytesToHexString } from '../../convert'
-import { Bech32 } from '../classes'
 
 export function validateBech32Address(prefix: string, addr: string, addressType?: number): boolean {
     const addressTypeLetter = ADDRESS_TYPE_MAP[addressType] ?? ''
