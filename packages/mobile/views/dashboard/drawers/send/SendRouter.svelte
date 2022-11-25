@@ -3,6 +3,7 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { isActiveLedgerProfile } from '@core/profile'
+    import { isStrongholdUnlocked } from '@core/profile-manager'
     import { ExpirationTime } from '@core/utils'
     import {
         DEFAULT_TRANSACTION_OPTIONS,
@@ -17,14 +18,11 @@
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import type { OutputOptions } from '@iota/wallet'
     import { ExpirationTimePicker } from 'shared/components'
-    import { get } from 'svelte/store'
     import { StrongholdUnlock } from '../../../../components'
     import { sendRoute, SendRoute, sendRouter } from '../../../../lib/routers'
-    import { AmountView, ConfirmView, RecipientView, TokenView } from './views'
+    import { AmountView, RecipientView, ReviewView, TokenView } from './views'
 
     $: ({ recipient, expirationDate, giftStorageDeposit, surplus } = $newTransactionDetails)
-
-    export let onClose: () => unknown = () => {}
 
     let storageDeposit = 0
     let preparedOutput: Output
@@ -32,42 +30,52 @@
     let expirationTimePicker: ExpirationTimePicker
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
 
-    let submitSendOnMount: boolean = false
+    let triggerSendOnMount: boolean = false
 
-    $: transactionDetails = get(newTransactionDetails)
     $: recipientAddress = recipient?.type === 'account' ? recipient?.account?.depositAddress : recipient?.address
     $: expirationTimePicker?.setNull(giftStorageDeposit)
 
-    async function onSend(): Promise<void> {
-        try {
-            await prepareTransactionOutput()
-            validateSendConfirmation(outputOptions, preparedOutput)
+    async function sendTransaction(): Promise<void> {
+        triggerSendOnMount = false
+        const isUnlocked = await isStrongholdUnlocked()
+        if (isUnlocked) {
+            try {
+                await prepareTransactionOutput()
+                validateSendConfirmation(outputOptions, preparedOutput)
 
-            updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
-            if ($isActiveLedgerProfile) {
-                ledgerPreparedOutput.set(preparedOutput)
+                updateNewTransactionDetails({
+                    type: $newTransactionDetails.type,
+                    expirationDate,
+                    giftStorageDeposit,
+                    surplus,
+                })
+                if ($isActiveLedgerProfile) {
+                    ledgerPreparedOutput.set(preparedOutput)
+                }
+                await sendOutput(preparedOutput)
+                $sendRouter.next()
+            } catch (err) {
+                handleError(err)
+                throw new Error(err)
             }
-            await sendOutput(preparedOutput)
-            onClose && onClose()
-        } catch (err) {
-            handleError(err)
+        } else {
+            $sendRouter.next({ needsUnlock: true })
         }
     }
 
     async function prepareTransactionOutput(): Promise<void> {
-        const transactionDetails = get(newTransactionDetails)
         // TODO: move arguments into transactionDetails object
         outputOptions = getOutputOptions(
             expirationDate,
             recipientAddress,
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.rawAmount : '0',
-            transactionDetails.metadata,
-            transactionDetails.tag,
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset : undefined,
+            $newTransactionDetails.type === NewTransactionType.TokenTransfer ? $newTransactionDetails.rawAmount : '0',
+            $newTransactionDetails.metadata,
+            $newTransactionDetails.tag,
+            $newTransactionDetails.type === NewTransactionType.TokenTransfer ? $newTransactionDetails.asset : undefined,
             giftStorageDeposit,
-            transactionDetails.surplus,
-            transactionDetails.layer2Parameters,
-            transactionDetails.type === NewTransactionType.NftTransfer ? transactionDetails.nftId : undefined
+            $newTransactionDetails.surplus,
+            $newTransactionDetails.layer2Parameters,
+            $newTransactionDetails.type === NewTransactionType.NftTransfer ? $newTransactionDetails.nftId : undefined
         )
         preparedOutput = await prepareOutput($selectedAccount.index, outputOptions, DEFAULT_TRANSACTION_OPTIONS)
 
@@ -108,7 +116,7 @@
     }
 
     function onUnlockSuccess(): void {
-        submitSendOnMount = true
+        triggerSendOnMount = true
         $sendRouter.next()
     }
 </script>
@@ -118,9 +126,9 @@
 {:else if $sendRoute === SendRoute.Recipient}
     <RecipientView />
 {:else if $sendRoute === SendRoute.Amount}
-    <AmountView {onSend} {submitSendOnMount} />
-{:else if $sendRoute === SendRoute.Confirm}
-    <ConfirmView />
+    <AmountView />
+{:else if $sendRoute === SendRoute.Review}
+    <ReviewView {sendTransaction} {triggerSendOnMount} {storageDeposit} />
 {:else if $sendRoute === SendRoute.Password}
     <StrongholdUnlock onSuccess={onUnlockSuccess} onCancel={() => $sendRouter.previous()} />
 {/if}
