@@ -3,7 +3,7 @@ export enum SendRoute {
     Recipient = 'recipient',
     Amount = 'amount',
     Unit = 'unit',
-    Confirm = 'confirm',
+    Review = 'review',
     References = 'references',
     Expiration = 'expiration',
     CustomExpiration = 'customExpiration',
