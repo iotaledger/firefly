@@ -1,4 +1,4 @@
-import { Bech32 } from './bech32.class'
+import { Bech32 } from '@iota/crypto.js'
 
 /**
  * Convert address to bech32.
