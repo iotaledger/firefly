@@ -33,7 +33,7 @@ export function getOutputOptions(
 
     tag = Converter.utf8ToHex(tag, true)
     if (layer2Parameters) {
-        amount = addGasBudget(rawAmount)
+        amount = addGasBudget(amount)
         metadata = getLayer2MetadataForTransfer(recipientAddress)
         recipientAddress = layer2Parameters.networkAddress
     } else {
