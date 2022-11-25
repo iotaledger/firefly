@@ -1601,7 +1601,7 @@
             "nftNotInPossession": "NFT not in possession"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account"
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
