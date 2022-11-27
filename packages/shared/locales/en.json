@@ -1359,7 +1359,11 @@
         "token": "Token",
         "nft": "NFT",
         "type": "Type",
-        "immutableIssuer": "Immutable Issuer"
+        "immutableIssuer": "Immutable Issuer",
+        "smartContract": "Smart Contract",
+        "targetContract": "Target contract",
+        "contractFunction": "Contract function",
+        "gasBudget": "Gas budget"
     },
     "filters":{
         "title": "Filters",
