@@ -7,10 +7,12 @@
         FoundryActivityInformation,
         TokenActivityInformation,
         NftMetadataInformation,
+        SmartContractActivityInformation,
     } from 'shared/components'
     import { ActivityType, Activity } from '@core/wallet'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
+    import { DestinationNetwork } from '@core/layer-2'
 
     export let activity: Activity
     export let networkAddress: string = null
@@ -22,6 +24,7 @@
         Foundry = 'general.foundry',
         Token = 'general.token',
         NftMetadata = 'general.metadata',
+        SmartContract = 'general.smartContract',
     }
 
     let hasMetadata = false
@@ -33,11 +36,13 @@
         hasMetadata = !!storedNft?.metadata
     }
 
+    $: isLayer2 = activity.destinationNetwork !== DestinationNetwork.Shimmer
+
     let tabs: Tab[] = []
     $: {
         switch (activity.type) {
             case ActivityType.Basic:
-                tabs = [Tab.Transaction]
+                tabs = [Tab.Transaction, ...(isLayer2 ? [Tab.SmartContract] : [])]
                 break
             case ActivityType.Alias:
                 tabs = [Tab.Transaction, Tab.Alias]
@@ -70,5 +75,7 @@
         <TokenActivityInformation {activity} />
     {:else if activeTab === Tab.NftMetadata && activity.type === ActivityType.Nft}
         <NftMetadataInformation {activity} />
+    {:else if activeTab === Tab.SmartContract}
+        <SmartContractActivityInformation {activity} />
     {/if}
 </activity-details>
