@@ -21,6 +21,7 @@ export type BaseActivity = {
     tag?: string
     isSelfTransaction: boolean
     asyncData: AsyncData
+    destinationNetwork?: string
 }
 
 export type AsyncData = {

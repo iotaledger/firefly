@@ -1,5 +1,6 @@
 import { isShimmerClaimingTransaction } from '@contexts/onboarding'
 import { IAccountState } from '@core/account'
+import { getDestinationNetworkFromAddress } from '@core/layer-2'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
 import { TransactionActivity } from '@core/wallet/types'
@@ -54,6 +55,9 @@ export function generateTransactionActivity(
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
     const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
 
+    const sendingAddress = sendingInfo.subject.type === 'address' ? sendingInfo.subject.address : undefined
+    const destinationNetwork = getDestinationNetworkFromAddress(sendingAddress)
+
     return {
         type: ActivityType.Basic,
         isHidden,
@@ -75,6 +79,7 @@ export function generateTransactionActivity(
         tag,
         assetId,
         asyncData,
+        destinationNetwork,
         ...sendingInfo,
     }
 }
