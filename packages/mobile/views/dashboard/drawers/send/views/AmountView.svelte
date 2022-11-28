@@ -15,6 +15,7 @@
     } from '@core/wallet'
     import { AmountInput, Button } from '@ui'
 
+    import { getAssetById } from '@core/wallet'
     import { TokenUnitSwapper } from '../../../../../components'
     import { sendRouter } from '../../../../../lib/routers'
 
@@ -44,7 +45,7 @@
     onMount(() => {
         if ($newTransactionDetails?.type === NewTransactionType.TokenTransfer) {
             const storedRawAmount = $newTransactionDetails?.rawAmount
-            asset = $newTransactionDetails.asset
+            asset = getAssetById($newTransactionDetails.assetId)
             tokenMetadata = asset?.metadata
             unit = $newTransactionDetails.unit ?? tokenMetadata?.unit
             amount = storedRawAmount
