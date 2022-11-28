@@ -1,10 +1,10 @@
 <script lang="typescript">
     import { KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { NftActivity } from '@core/wallet'
+    import { BaseActivity } from '@core/wallet'
     import { parseLayer2Metadata } from '@core/layer-2'
 
-    export let activity: NftActivity
+    export let activity: BaseActivity
 
     $: layer2Metadata = parseLayer2Metadata(activity.metadata)
     $: detailsList = createDetailsList(layer2Metadata)
