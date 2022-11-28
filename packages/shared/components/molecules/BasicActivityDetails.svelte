@@ -9,6 +9,7 @@
     import { localize } from '@core/i18n'
     import { formatTokenAmountDefault, TransactionActivity, getAssetFromPersistedAssets } from '@core/wallet'
     import { time } from '@core/app'
+    import { DestinationNetwork, parseLayer2Metadata } from '@core/layer-2'
 
     export let activity: TransactionActivity
     export let networkAddress: string = null
@@ -16,6 +17,19 @@
     $: asset = getAssetFromPersistedAssets(activity.assetId)
     $: amount = formatTokenAmountDefault(Number(activity.rawAmount), asset?.metadata, asset?.metadata?.unit)
     $: isTimelocked = activity.asyncData?.timelockDate > $time
+
+    $: isLayer2 = activity.destinationNetwork !== DestinationNetwork.Shimmer
+    $: layer2Metadata = isLayer2 ? parseLayer2Metadata(activity.metadata) : undefined
+
+    let subjectData = activity.subject
+    $: if (isLayer2) {
+        subjectData = {
+            ...activity.subject,
+            ...(activity.subject?.type === 'address' && {
+                address: layer2Metadata?.ethereumAddress,
+            }),
+        }
+    }
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
@@ -46,6 +60,6 @@
         {/if}
     </transaction-status>
     {#if activity.subject}
-        <SubjectBox subject={activity.subject} />
+        <SubjectBox subject={subjectData} />
     {/if}
 </main-content>
