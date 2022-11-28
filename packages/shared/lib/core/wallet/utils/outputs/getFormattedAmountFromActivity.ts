@@ -9,7 +9,7 @@ export function getFormattedAmountFromActivity(
 ): string {
     const metadata = getAssetFromPersistedAssets(activity.assetId)?.metadata
     const amount = formatTokenAmountBestMatch(activity.rawAmount, metadata, 2)
-    if (activity.type === ActivityType.Transaction) {
+    if (activity.type === ActivityType.Basic) {
         return `${activity.direction === ActivityDirection.Outgoing && signed ? '- ' : ''}${amount}`
     } else {
         return amount

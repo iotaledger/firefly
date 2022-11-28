@@ -43,7 +43,7 @@ export function generateAliasActivity(
 
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
-    const asyncData = getAsyncDataFromOutput(output, transactionId, claimingData, account)
+    const asyncData = getAsyncDataFromOutput(output, outputId, claimingData, account)
     const sendingInfo = getSendingInformation(processedTransaction, output, account)
 
     return {

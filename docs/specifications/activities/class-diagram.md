@@ -39,7 +39,7 @@ classDiagram
         - asyncData: AsyncData
     }
     class Transaction Activity {
-        - type: ActivityType.Transaction
+        - type: ActivityType.Basic
         - rawAmount: number
         - assetId: string
         - publicNote: string

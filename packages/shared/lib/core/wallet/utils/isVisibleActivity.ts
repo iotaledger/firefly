@@ -85,7 +85,7 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
     if (
         filter.asset.active &&
         filter.asset.selected &&
-        (activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry)
+        (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry)
     ) {
         if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
             return false
@@ -95,10 +95,7 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 }
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
-    if (
-        filter.amount.active &&
-        (activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry)
-    ) {
+    if (filter.amount.active && (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry)) {
         const asset = getAssetFromPersistedAssets(activity.assetId)
         const activityAmount = Big(activity.rawAmount)
 
@@ -255,14 +252,14 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
         }
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
-            activity.type === ActivityType.Transaction &&
+            activity.type === ActivityType.Basic &&
             activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
         ) {
             return false
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
-            activity.type === ActivityType.Transaction &&
+            activity.type === ActivityType.Basic &&
             (!activity.asyncData?.asyncStatus || activity.asyncData?.asyncStatus === ActivityAsyncStatus.Claimed)
         ) {
             return false

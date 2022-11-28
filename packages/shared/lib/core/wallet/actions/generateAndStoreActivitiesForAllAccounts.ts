@@ -1,6 +1,8 @@
-import { activeAccounts } from '@core/profile'
-import { generateAndStoreActivitiesForAccount } from '@core/wallet'
 import { get } from 'svelte/store'
+
+import { activeAccounts } from '@core/profile/stores'
+
+import { generateAndStoreActivitiesForAccount } from './activities'
 
 export async function generateAndStoreActivitiesForAllAccounts(): Promise<void> {
     try {

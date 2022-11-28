@@ -16,7 +16,8 @@
 
     $: networkOptions = showLayer2 ? getLayer2NetworkOptions() : [LAYER_1_NETWORK_OPTION]
 
-    let selected: IOption = LAYER_1_NETWORK_OPTION
+    let selected: IOption =
+        getLayer2NetworkOptions().find((option) => option.value === networkAddress) ?? LAYER_1_NETWORK_OPTION
     $: if (!showLayer2) {
         selected = LAYER_1_NETWORK_OPTION
     }

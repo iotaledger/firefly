@@ -114,7 +114,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
             }
 
             const asset =
-                (_activity.type === ActivityType.Transaction || _activity.type === ActivityType.Foundry) &&
+                (_activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry) &&
                 getAssetFromPersistedAssets(_activity.assetId)
             const hasValidAsset = asset && isValidIrc30(asset.metadata)
             return !_activity.isHidden && hasValidAsset
@@ -142,12 +142,12 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(activity.transactionId)
     }
 
-    if ((activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) && activity.assetId) {
+    if ((activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) && activity.assetId) {
         fieldsToSearch.push(activity.assetId)
         fieldsToSearch.push(getAssetFromPersistedAssets(activity.assetId)?.metadata?.name)
     }
 
-    if ((activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) && activity.rawAmount) {
+    if ((activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) && activity.rawAmount) {
         fieldsToSearch.push(activity.rawAmount?.toString())
         fieldsToSearch.push(getFormattedAmountFromActivity(activity, false)?.toLowerCase())
     }

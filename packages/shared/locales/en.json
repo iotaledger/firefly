@@ -1136,7 +1136,8 @@
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
         "initializing": "Initializing",
-        "delete": "Delete"
+        "delete": "Delete",
+        "addReference": "Add reference"
     },
     "general": {
         "recipient": "Recipient",
@@ -1601,7 +1602,7 @@
             "nftNotInPossession": "NFT not in possession"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account"
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -1863,7 +1864,8 @@
                 "Failed": "Failed to create alias"
             }
         },
-        "locked": "locked"
+        "locked": "locked",
+        "smartContractCall": "smart contract call"
     },
     "menus": {
         "expirationTimePicker": {

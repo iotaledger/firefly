@@ -1,12 +1,12 @@
-import { IProcessedTransaction } from '../../interfaces'
 import { OutputData } from '@iota/wallet'
 import { IOutputResponse, ITransactionPayload, IUTXOInput } from '@iota/types'
-import { MILLISECONDS_PER_SECOND } from '@core/utils'
-import { ActivityDirection, InclusionState } from '@core/wallet/enums'
+import { MILLISECONDS_PER_SECOND } from '@core/utils/constants'
+import { IAccountState } from '@core/account/interfaces'
+import { InclusionState } from '../../enums'
+import { OUTPUT_TYPE_TREASURY } from '../../constants'
+import { IProcessedTransaction } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
-import { IAccountState } from '@core/account'
 import { getSenderAddressFromInputs } from '../transactions'
-import { OUTPUT_TYPE_TREASURY } from '@core/wallet/constants'
 
 export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
