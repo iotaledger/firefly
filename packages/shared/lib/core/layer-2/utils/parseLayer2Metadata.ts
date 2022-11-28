@@ -15,37 +15,38 @@ export function parseLayer2Metadata(metadata: string): Layer2Metadata {
             forceOpenAccount: parsedData.forceOpenAccount,
         }
         return parsedMetadata
-    } catch (error) {
+    } catch (err) {
+        console.error(err)
         return undefined
     }
 }
 
 function validate(data: Layer2Metadata): void {
     if (data.senderContract && typeof data.senderContract !== 'string') {
-        throw 'Invalid senderContract'
+        throw new Error('Invalid senderContract')
     }
 
     if (data.targetContract && typeof data.targetContract !== 'string') {
-        throw 'Invalid targetContract'
+        throw new Error('Invalid targetContract')
     }
 
     if (data.contractFunction && typeof data.contractFunction !== 'string') {
-        throw 'Invalid contractFunction'
+        throw new Error('Invalid contractFunction')
     }
 
     if (data.gasBudget) {
         try {
             parseInt(data.gasBudget, 10)
         } catch (error) {
-            throw 'Invalid gasBudget'
+            throw new Error('Invalid gasBudget')
         }
     }
 
     if (data.ethereumAddress && typeof data.ethereumAddress !== 'string') {
-        throw 'Invalid ethereumAddress'
+        throw new Error('Invalid ethereumAddress')
     }
 
     if (data.forceOpenAccount && typeof data.forceOpenAccount !== 'boolean') {
-        throw 'Invalid forceOpenAccount'
+        throw new Error('Invalid forceOpenAccount')
     }
 }
