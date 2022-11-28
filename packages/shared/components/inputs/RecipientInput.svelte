@@ -1,12 +1,14 @@
 <script lang="typescript">
-    import { networkHrp } from '@core/network'
-    import { validateBech32Address } from '@core/utils'
     import { Modal, SelectorInput, IOption, ColoredCircle } from 'shared/components'
-    import { visibleActiveAccounts } from '@core/profile'
-    import { getSubjectFromAddress, Subject } from '@core/wallet'
-    import { getAccountColorById, selectedAccountIndex } from '@core/account'
-    import { validateEthereumAddress } from '@core/layer-2'
+    import { selectedAccountIndex } from '@core/account/stores'
+    import { getAccountColorById } from '@core/account/utils'
     import { localize } from '@core/i18n'
+    import { networkHrp } from '@core/network/stores'
+    import { visibleActiveAccounts } from '@core/profile/stores'
+    import { validateBech32Address, validateEthereumAddress } from '@core/utils/crypto'
+    import { Subject } from '@core/wallet/types'
+    import { getSubjectFromAddress } from '@core/wallet/utils'
+    import { Layer1RecipientError } from '@core/layer-2/errors'
 
     export let recipient: Subject
     export let disabled = false
@@ -28,27 +30,29 @@
     $: isLayer2, (error = '')
 
     export function validate(): Promise<void> {
-        if (recipient?.type === 'address') {
-            if (!recipient.address) {
-                error = localize('error.send.recipientRequired')
-            }
-            if (isLayer2) {
-                error = validateEthereumAddress(recipient?.address)
-            } else {
-                error = validateBech32Address(addressPrefix, recipient?.address)
-            }
-        } else if (recipient?.type === 'account') {
-            if (isLayer2) {
-                error = localize('error.layer2.layer1Recipient')
-            }
-        } else {
-            error = localize('error.send.recipientRequired')
-        }
+        try {
+            if (recipient?.type === 'address') {
+                if (!recipient.address) {
+                    throw new Error(localize('error.send.recipientRequired'))
+                }
 
-        if (error) {
+                if (isLayer2) {
+                    validateEthereumAddress(recipient?.address)
+                } else {
+                    validateBech32Address(addressPrefix, recipient?.address)
+                }
+            } else if (recipient?.type === 'account') {
+                if (isLayer2) {
+                    throw new Layer1RecipientError()
+                }
+            } else {
+                throw new Error(localize('error.send.recipientRequired'))
+            }
+
+            Promise.resolve()
+        } catch (err) {
+            error = err?.message ?? err
             return Promise.reject(error)
-        } else {
-            return Promise.resolve()
         }
     }
 

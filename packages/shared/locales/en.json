@@ -1136,7 +1136,8 @@
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
         "initializing": "Initializing",
-        "delete": "Delete"
+        "delete": "Delete",
+        "addReference": "Add reference"
     },
     "general": {
         "recipient": "Recipient",
@@ -1601,7 +1602,7 @@
             "nftNotInPossession": "NFT not in possession"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account"
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
@@ -1812,7 +1813,7 @@
             "Confirmed": "staked for",
             "Conflicting": "failed to stake"
         },
-        "transaction": {
+        "basic": {
             "internal": {
                 "incoming": {
                     "Pending": "transferring from",

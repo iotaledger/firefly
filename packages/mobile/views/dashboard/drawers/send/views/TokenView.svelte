@@ -5,7 +5,7 @@
     import { sendRouter } from '../../../../../lib/routers'
 
     function onAssetClick(asset: IAsset) {
-        updateNewTransactionDetails({ type: $newTransactionDetails.type, asset })
+        updateNewTransactionDetails({ type: $newTransactionDetails.type, assetId: asset.id })
         $sendRouter.next()
     }
 </script>

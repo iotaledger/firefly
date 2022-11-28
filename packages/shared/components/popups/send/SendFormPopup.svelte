@@ -1,11 +1,16 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { localize } from '@core/i18n'
     import { closePopup, openPopup } from '@auxiliary/popup'
+    import { localize } from '@core/i18n'
     import { isLayer1Destination } from '@core/layer-2'
     import { selectedAccountNfts } from '@core/nfts'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
-    import { IAsset, newTransactionDetails, NewTransactionType, setNewTransactionDetails } from '@core/wallet'
+    import {
+        getAssetById,
+        IAsset,
+        newTransactionDetails,
+        NewTransactionType,
+        setNewTransactionDetails,
+    } from '@core/wallet'
     import {
         AssetAmountInput,
         Button,
@@ -18,6 +23,7 @@
         Text,
         TextType,
     } from 'shared/components'
+    import { get } from 'svelte/store'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -42,7 +48,7 @@
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {
         rawAmount = transactionDetails.rawAmount
-        asset = transactionDetails.asset
+        asset = getAssetById(transactionDetails.assetId)
         unit = transactionDetails.unit
     } else {
         nftId = transactionDetails.nftId
@@ -63,7 +69,7 @@
             setNewTransactionDetails({
                 type: NewTransactionType.TokenTransfer,
                 recipient,
-                asset,
+                assetId: asset.id,
                 rawAmount,
                 unit,
                 tag,
