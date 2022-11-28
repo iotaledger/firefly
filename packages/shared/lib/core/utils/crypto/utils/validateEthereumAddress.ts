@@ -8,6 +8,7 @@ import { KECCAK_HASH_SIZE } from '../constants'
 import { validateBech32Address } from './validateBech32Address'
 import { Layer1RecipientError } from '@core/layer-2/errors'
 import { InvalidAddressError } from '@auxiliary/deep-link'
+import { localize } from '@core/i18n'
 
 export function validateEthereumAddress(address: string): void {
     throwIfBech32Address(address)
@@ -45,7 +46,7 @@ function throwIfBech32Address(address: string): void {
         validateBech32Address(get(networkHrp), address)
         throw new Layer1RecipientError()
     } catch (err) {
-        if (err === new Layer1RecipientError()) {
+        if (err.message === localize('error.layer2.layer1Recipient')) {
             throw err
         }
     }
