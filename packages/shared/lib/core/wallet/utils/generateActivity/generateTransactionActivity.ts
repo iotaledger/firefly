@@ -1,6 +1,6 @@
 import { isShimmerClaimingTransaction } from '@contexts/onboarding'
 import { IAccountState } from '@core/account'
-import { getDestinationNetworkFromAddress } from '@core/layer-2'
+import { DestinationNetwork, getDestinationNetworkFromAddress, parseLayer2Metadata } from '@core/layer-2'
 import { COIN_TYPE } from '@core/network'
 import { activeProfile, activeProfileId } from '@core/profile'
 import { TransactionActivity } from '@core/wallet/types'
@@ -58,6 +58,9 @@ export function generateTransactionActivity(
     const sendingAddress = sendingInfo.subject.type === 'address' ? sendingInfo.subject.address : undefined
     const destinationNetwork = getDestinationNetworkFromAddress(sendingAddress)
 
+    const parsedLayer2Metadata =
+        destinationNetwork !== DestinationNetwork.Shimmer ? parseLayer2Metadata(metadata) : undefined
+
     return {
         type: ActivityType.Basic,
         isHidden,
@@ -80,6 +83,7 @@ export function generateTransactionActivity(
         assetId,
         asyncData,
         destinationNetwork,
+        parsedLayer2Metadata,
         ...sendingInfo,
     }
 }

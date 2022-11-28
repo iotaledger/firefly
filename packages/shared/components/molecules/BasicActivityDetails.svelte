@@ -9,7 +9,6 @@
     import { localize } from '@core/i18n'
     import { formatTokenAmountDefault, TransactionActivity, getAssetFromPersistedAssets } from '@core/wallet'
     import { time } from '@core/app'
-    import { DestinationNetwork, parseLayer2Metadata } from '@core/layer-2'
 
     export let activity: TransactionActivity
     export let networkAddress: string = null
@@ -18,15 +17,12 @@
     $: amount = formatTokenAmountDefault(Number(activity.rawAmount), asset?.metadata, asset?.metadata?.unit)
     $: isTimelocked = activity.asyncData?.timelockDate > $time
 
-    $: isLayer2 = activity.destinationNetwork !== DestinationNetwork.Shimmer
-    $: layer2Metadata = isLayer2 ? parseLayer2Metadata(activity.metadata) : undefined
-
     let subjectData = activity.subject
-    $: if (isLayer2) {
+    $: if (activity.parsedLayer2Metadata) {
         subjectData = {
             ...activity.subject,
             ...(activity.subject?.type === 'address' && {
-                address: layer2Metadata?.ethereumAddress,
+                address: activity.parsedLayer2Metadata?.ethereumAddress,
             }),
         }
     }

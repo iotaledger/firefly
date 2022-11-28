@@ -12,7 +12,6 @@
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Text, AssetIcon, FontWeight } from 'shared/components'
-    import { DestinationNetwork, parseLayer2Metadata } from '@core/layer-2'
 
     export let activity: TransactionActivity
 
@@ -22,9 +21,6 @@
     $: subjectLocale = getSubjectLocale(activity)
     $: amount = getFormattedAmountFromActivity(activity)
     $: isIncoming = activity.direction === ActivityDirection.Incoming
-
-    $: isLayer2 = activity.destinationNetwork !== DestinationNetwork.Shimmer
-    $: layer2Metadata = isLayer2 ? parseLayer2Metadata(activity.metadata) : undefined
 
     function getTitle(_activity: TransactionActivity): string {
         const { isShimmerClaiming, isInternal, direction, inclusionState } = _activity
@@ -53,8 +49,8 @@
             return truncateString(subject?.account?.name, 13, 0)
         }
         if (subject?.type === 'address') {
-            const address = layer2Metadata?.ethereumAddress ?? subject?.address
-            const hrpLength = isLayer2 ? '0x'.length : $networkHrp.length
+            const address = activity.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
+            const hrpLength = activity.parsedLayer2Metadata ? '0x'.length : $networkHrp.length
             return truncateString(address, hrpLength, 6)
         }
         return localize('general.unknownAddress')

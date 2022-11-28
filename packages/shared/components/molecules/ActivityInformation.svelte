@@ -12,7 +12,6 @@
     import { ActivityType, Activity } from '@core/wallet'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
-    import { DestinationNetwork } from '@core/layer-2'
 
     export let activity: Activity
     export let networkAddress: string = null
@@ -36,13 +35,11 @@
         hasMetadata = !!storedNft?.metadata
     }
 
-    $: isLayer2 = activity.destinationNetwork !== DestinationNetwork.Shimmer
-
     let tabs: Tab[] = []
     $: {
         switch (activity.type) {
             case ActivityType.Basic:
-                tabs = [Tab.Transaction, ...(isLayer2 ? [Tab.SmartContract] : [])]
+                tabs = [Tab.Transaction, ...(activity?.parsedLayer2Metadata ? [Tab.SmartContract] : [])]
                 break
             case ActivityType.Alias:
                 tabs = [Tab.Transaction, Tab.Alias]

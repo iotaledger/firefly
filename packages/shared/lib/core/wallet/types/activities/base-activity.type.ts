@@ -1,6 +1,7 @@
 import { ActivityAsyncStatus, ActivityDirection, InclusionState } from '../../enums'
 import { IUTXOInput } from '@iota/types'
 import { Subject } from '../subject.type'
+import { Layer2Metadata } from '@core/layer-2'
 
 export type BaseActivity = {
     id: string
@@ -22,6 +23,7 @@ export type BaseActivity = {
     isSelfTransaction: boolean
     asyncData: AsyncData
     destinationNetwork?: string
+    parsedLayer2Metadata?: Layer2Metadata
 }
 
 export type AsyncData = {

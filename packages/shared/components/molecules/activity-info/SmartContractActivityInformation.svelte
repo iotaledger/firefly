@@ -2,14 +2,13 @@
     import { KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { BaseActivity } from '@core/wallet'
-    import { parseLayer2Metadata } from '@core/layer-2'
+    import { Layer2Metadata } from '@core/layer-2'
 
     export let activity: BaseActivity
 
-    $: layer2Metadata = parseLayer2Metadata(activity.metadata)
-    $: detailsList = createDetailsList(layer2Metadata)
+    $: detailsList = createDetailsList(activity.parsedLayer2Metadata)
 
-    function createDetailsList(metadata: typeof layer2Metadata): { [key: string]: { data: unknown } } {
+    function createDetailsList(metadata: Layer2Metadata): { [key: string]: { data: unknown } } {
         return {
             ...(metadata?.targetContract && {
                 targetContract: { data: metadata.targetContract },
