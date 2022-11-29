@@ -12,6 +12,7 @@
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
+    import BurnNativeTokensPopup from './BurnNativeTokensPopup.svelte'
     import ConfirmationPopup from './ConfirmationPopup.svelte'
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
     import CreateAccountPopup from './CreateAccountPopup.svelte'
@@ -87,6 +88,7 @@
         unlockStronghold: UnlockStrongholdPopup,
         version: Version,
         backupStronghold: BackupStrongholdPopup,
+        burnNativeTokens: BurnNativeTokensPopup,
         confirmation: ConfirmationPopup,
         deepLinkError: DeepLinkErrorPopup,
         deleteAccount: DeleteAccount,
