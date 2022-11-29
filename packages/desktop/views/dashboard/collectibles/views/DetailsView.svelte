@@ -25,7 +25,7 @@
     const storageDeposit = 0 // TODO: get storage deposit from corresponding activity
 </script>
 
-<div class="flex flex-row w-full space-x-4 overflow-auto">
+<div class="flex flex-row w-full h-full space-x-4 overflow-auto">
     <div class="w-full h-full bg-orange-300 rounded-2xl">
         <!-- NFT asset goes here -->
     </div>

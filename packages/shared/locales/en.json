@@ -548,7 +548,9 @@
         },
         "collectibles": {
             "gallery": {
-                "title": "Collectibles"
+                "title": "Collectibles",
+                "emptyTitle": "No collectibles",
+                "emptyDescription": "Deposit or Receive your first collectible now!"
             },
             "details": {
                 "collection": "Collection",
@@ -1140,7 +1142,8 @@
         "initialize": "Initialize",
         "initializing": "Initializing",
         "delete": "Delete",
-        "addReference": "Add reference"
+        "addReference": "Add reference",
+        "depositNft": "Deposit NFTs"
     },
     "general": {
         "recipient": "Recipient",
