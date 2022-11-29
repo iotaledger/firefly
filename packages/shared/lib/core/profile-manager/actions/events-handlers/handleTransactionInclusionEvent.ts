@@ -1,5 +1,10 @@
+import { updateNftInAllAccountNfts } from '@core/nfts'
+import { ActivityDirection, ActivityType } from '@core/wallet'
 import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
-import { updateActivityByTransactionId } from '@core/wallet/stores/all-account-activities.store'
+import {
+    updateActivityByTransactionId,
+    getActivityByTransactionId,
+} from '@core/wallet/stores/all-account-activities.store'
 
 import { WalletApiEvent } from '../../enums'
 import { ITransactionInclusionEventPayload } from '../../interfaces'
@@ -18,5 +23,13 @@ export function handleTransactionInclusionEventInternal(
     updateActivityByTransactionId(accountIndex, payload.transactionId, {
         inclusionState: payload.inclusionState,
     })
+
+    const activity = getActivityByTransactionId(accountIndex, payload.transactionId)
+
+    if (activity.type === ActivityType.Nft) {
+        const isOwned = activity.direction === ActivityDirection.Incoming || activity.isSelfTransaction
+        updateNftInAllAccountNfts(accountIndex, activity.nftId, { isOwned })
+    }
+
     updateClaimingTransactionInclusion(payload.transactionId, payload.inclusionState, accountIndex)
 }
