@@ -15,21 +15,21 @@
 
         switch (nftType?.[0]) {
             case ParentMimeType.Image:
-                return IconEnum.Picture
+                return IconEnum.CollectiblesImagePlaceholder
             case ParentMimeType.Video:
-                return IconEnum.Play
+                return IconEnum.CollectiblesVideoPlaceholder
             case ParentMimeType.Audio:
-                return IconEnum.Bell
+                return IconEnum.CollectiblesAudioPlaceholder
             case ParentMimeType.Text:
-                return IconEnum.Doc
+                return IconEnum.CollectiblesTextPlaceholder
             case ParentMimeType.Application:
-                return IconEnum.Parchment
+                return IconEnum.CollectiblesApplicationPlaceholder
             case ParentMimeType.Model:
-                return IconEnum.Help
+                return IconEnum.CollectiblesModelPlaceholder
             case ParentMimeType.Font:
-                return IconEnum.Language
+                return IconEnum.CollectiblesFontPlaceholder
             default:
-                return IconEnum.Collectibles
+                return IconEnum.CollectiblesUnknownPlaceholder
         }
     }
 </script>
