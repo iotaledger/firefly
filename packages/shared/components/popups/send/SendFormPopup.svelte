@@ -1,8 +1,9 @@
 <script lang="typescript">
-    import { get } from 'svelte/store'
-    import { localize } from '@core/i18n'
-    import { Button, Text, FontWeight, TextType, Tabs } from 'shared/components'
     import { closePopup, openPopup } from '@auxiliary/popup'
+    import { localize } from '@core/i18n'
+    import { isLayer1Destination } from '@core/layer-2'
+    import { selectedAccountNfts } from '@core/nfts'
+    import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import {
         getAssetById,
         IAsset,
@@ -10,10 +11,19 @@
         NewTransactionType,
         setNewTransactionDetails,
     } from '@core/wallet'
-    import { RecipientInput, AssetAmountInput, OptionalInput, NetworkInput, NftInput } from 'shared/components'
-    import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
-    import { selectedAccount } from '@core/account'
-    import { isLayer1Destination } from '@core/layer-2'
+    import {
+        AssetAmountInput,
+        Button,
+        FontWeight,
+        NetworkInput,
+        NftInput,
+        OptionalInput,
+        RecipientInput,
+        Tabs,
+        Text,
+        TextType,
+    } from 'shared/components'
+    import { get } from 'svelte/store'
 
     enum SendForm {
         SendToken = 'general.sendToken',
@@ -48,7 +58,7 @@
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
-    $: ownsNfts = $selectedAccount.balances.nfts.length > 0
+    $: ownsNfts = $selectedAccountNfts.some((nft) => nft.isOwned)
     $: isLayer2 = !isLayer1Destination(networkAddress)
     $: isSendTokenTab = activeTab === SendForm.SendToken
 
