@@ -9,22 +9,14 @@
         NftMetadataInformation,
         SmartContractActivityInformation,
     } from 'shared/components'
+    import { Tab } from 'shared/components/enums'
     import { ActivityType, Activity } from '@core/wallet'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
 
     export let activity: Activity
     export let networkAddress: string = null
-
-    enum Tab {
-        Transaction = 'general.transaction',
-        Alias = 'general.alias',
-        Nft = 'general.nft',
-        Foundry = 'general.foundry',
-        Token = 'general.token',
-        NftMetadata = 'general.metadata',
-        SmartContract = 'general.smartContract',
-    }
+    export let activeTab = Tab.Transaction
 
     let hasMetadata = false
     $: {
@@ -52,8 +44,6 @@
                 break
         }
     }
-
-    let activeTab = Tab.Transaction
 </script>
 
 <activity-details class="w-full h-full space-y-2 flex flex-auto flex-col flex-shrink-0">
