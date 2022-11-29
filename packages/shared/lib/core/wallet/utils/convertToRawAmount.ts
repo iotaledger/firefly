@@ -6,7 +6,7 @@ import { IOTA_UNIT_MAP } from '@core/utils'
 import { ITokenMetadata } from '../interfaces'
 import { MAX_SUPPORTED_DECIMALS } from '../constants/max-supported-decimals.constants'
 
-export function convertToRawAmount(amount: string, unit: string, tokenMetadata?: ITokenMetadata): Big {
+export function convertToRawAmount(amount: string, unit: string, tokenMetadata: ITokenMetadata): Big {
     if (amount) {
         const parsedAmount = parseCurrency(amount)
         return convertToRawAmountFromMetadata(parsedAmount, unit, tokenMetadata)
