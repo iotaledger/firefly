@@ -27,6 +27,6 @@ export const queriedNfts: Readable<INft[]> = derived(
             nftList = nftList.filter((nft) => nft.name.toLowerCase().includes($nftSearchTerm.toLowerCase()))
         }
 
-        return nftList.sort((nft1, nft2) => (nft2.name < nft1.name ? 1 : -1))
+        return nftList.sort((nft1, nft2) => (nft2.name.toLowerCase() < nft1.name.toLowerCase() ? 1 : -1))
     }
 )
