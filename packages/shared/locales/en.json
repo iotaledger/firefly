@@ -547,6 +547,9 @@
             }
         },
         "collectibles": {
+            "gallery": {
+                "title": "Collectibles"
+            },
             "details": {
                 "collection": "Collection",
                 "nftId": "NFT ID",
