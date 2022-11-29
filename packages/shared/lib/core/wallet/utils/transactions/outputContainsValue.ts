@@ -14,7 +14,7 @@ export function outputContainsValue(processedTransaction: IProcessedTransaction,
     const output = wrappedOutput.output as IBasicOutput
     const type = getActivityType(processedTransaction.outputs)
 
-    const whiteListedActivityTypes = [ActivityType.Alias, ActivityType.Foundry]
+    const whiteListedActivityTypes = [ActivityType.Alias, ActivityType.Foundry, ActivityType.Nft]
     if (whiteListedActivityTypes.includes(type)) {
         return true
     }
