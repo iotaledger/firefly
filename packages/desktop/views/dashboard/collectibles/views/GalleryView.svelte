@@ -20,7 +20,7 @@
 
     <div class="w-full h-full flex items-center justify-center grow-1">
         {#if $selectedAccountNfts.length}
-            <div class="h-full flex flex-wrap flex-row gap-6 mt-4 scrollable-y">
+            <div class="h-full flex flex-wrap flex-row gap-6 scrollable-y">
                 {#each $selectedAccountNfts as nft}
                     <NftGalleryItem {nft} onClick={() => handleNftClick(nft)} />
                 {/each}
