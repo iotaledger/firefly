@@ -54,7 +54,7 @@
     }
 </script>
 
-<div class="flex flex-row w-full space-x-4 overflow-auto">
+<div class="flex flex-row w-full h-full space-x-4 overflow-auto">
     <div class="flex w-full h-full bg-gray-500 items-center justify-center rounded-2xl">
         <NftMediaContainer nftId={id} size={NftMediaSize.ExtraLarge} />
     </div>
