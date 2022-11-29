@@ -41,6 +41,8 @@
 
     let navWidth: string
 
+    $: value, (error = '')
+
     function handleClickOutside(): void {
         dropdown = false
     }
