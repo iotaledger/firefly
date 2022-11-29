@@ -16,7 +16,7 @@ classDiagram
     Base Activity <|-- Nft Activity
     Base Activity <|-- Alias Activity
     Base Activity <|-- Foundry Activity
-    BAse Activity -- Activity Action
+    Base Activity -- Activity Action
     class Base Activity {
         <<Interface>>
         - id: string
