@@ -2,9 +2,12 @@
     import {
         Button,
         CollectibleDetailsMenu,
-        Icon,
+        FontWeight,
+        NftMediaContainer,
+        NftMediaSize,
         MeatballMenuButton,
         KeyValueBox,
+        TextType,
         Modal,
         Pane,
         Text,
@@ -18,58 +21,73 @@
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
     const { id, name } = nft
-    const { type, collectionName, attributes } = nft.parsedMetadata || {}
+    const { standard, collectionName, attributes } = nft.parsedMetadata || {}
 
     let modal: Modal
 
-    const storageDeposit = 0 // TODO: get storage deposit from corresponding activity
+    $: storageDeposit = '0'
+
+    let detailsList: { [key in string]: { data: string; copyValue?: string; isCopyable?: boolean } }
+    $: detailsList = {
+        ...(collectionName && {
+            collection: { data: collectionName, isCopyable: true },
+        }),
+        ...(id && {
+            nftId: { data: truncateString(id, 6, 6), copyValue: id, isCopyable: true },
+        }),
+        ...(standard && {
+            nftType: { data: standard },
+        }),
+        ...(storageDeposit && {
+            storageDeposit: { data: storageDeposit },
+        }),
+    }
 </script>
 
 <div class="flex flex-row w-full space-x-4 overflow-auto">
-    <div class="w-full h-full bg-orange-300 rounded-2xl">
-        <!-- NFT asset goes here -->
+    <div class="flex w-full h-full bg-gray-500 items-center justify-center rounded-2xl">
+        <NftMediaContainer nftId={id} size={NftMediaSize.ExtraLarge} />
     </div>
     <Pane classes="flex flex-col p-6 w-full h-full max-w-lg">
         <div class="mb-6 flex justify-between items-center">
-            <Text type="h2">{name}</Text>
+            <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{name}</Text>
             <MeatballMenuButton onClick={modal?.toggle} />
             <CollectibleDetailsMenu bind:modal />
         </div>
         <div class="overflow-y-scroll h-full">
             <div class="space-y-2 mb-6">
-                <KeyValueBox keyText={localize('views.collectibles.details.collection')}>
-                    {collectionName}
-                </KeyValueBox>
-                <KeyValueBox
-                    keyText={localize('views.collectibles.details.nftId')}
-                    copyValue={id}
-                    isCopyable
-                    clearPadding
-                >
-                    <div slot="value" class="flex items-center">
-                        <Icon icon="copy" classes="text-gray-600 dark:text-gray-500 mr-1 w-4 h-4" />
-                        <Text fontSize="14" lineHeight="5" color="gray-600" darkColor="gray-500" classes="truncate">
-                            {truncateString(id, 6, 6)}
-                        </Text>
-                    </div>
-                </KeyValueBox>
-                <KeyValueBox keyText={localize('views.collectibles.details.nftType')} valueText={type} />
-                <KeyValueBox
-                    keyText={localize('views.collectibles.details.storageDeposit')}
-                    tooltipText={localize('views.collectibles.details.storageDepositDescription')}
-                    valueText={storageDeposit}
-                />
+                {#each Object.entries(detailsList) as [key, value]}
+                    <KeyValueBox
+                        keyText={localize('views.collectibles.details.' + key)}
+                        copyValue={value.copyValue ?? value.data}
+                        isCopyable={value.isCopyable}
+                        valueText={value.data}
+                    />
+                {/each}
             </div>
             {#if attributes}
                 <div>
-                    <Text type="h3" classes="mb-4">{localize('views.collectibles.details.attributes')}</Text>
-                    <div class="flex flex-wrap">
+                    <Text type={TextType.h5} fontWeight={FontWeight.semibold} classes="mb-4"
+                        >{localize('views.collectibles.details.attributes')}</Text
+                    >
+                    <div class="flex flex-wrap gap-3">
                         {#each Object.values(attributes) as attribute}
                             <div
-                                class="flex flex-col bg-gray-50 dark:bg-gray-850 rounded-2xl text-gray-800 p-3 mr-3 mb-3"
+                                class="flex flex-col bg-gray-50 dark:bg-gray-850 rounded-2xl p-3"
+                                style="max-width: 100px"
                             >
-                                <Text type="p" color="gray-500" darkColor="gray-500" bold>{attribute.trait_type}</Text>
-                                <Text type="p" color="gray-800" darkColor="gray-400" bold>{attribute.value}</Text>
+                                <Text
+                                    color="gray-500"
+                                    darkColor="gray-500"
+                                    classes="truncate"
+                                    fontWeight={FontWeight.semibold}>{attribute.trait_type}</Text
+                                >
+                                <Text
+                                    color="gray-800"
+                                    darkColor="gray-400"
+                                    classes="truncate"
+                                    fontWeight={FontWeight.semibold}>{attribute.value}</Text
+                                >
                             </div>
                         {/each}
                     </div>
