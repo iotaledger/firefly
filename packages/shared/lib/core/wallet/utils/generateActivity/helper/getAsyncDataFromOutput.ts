@@ -12,7 +12,6 @@ export function getAsyncDataFromOutput(
 ): AsyncData {
     const isAsync = isOutputAsync(output)
     if (isAsync) {
-        const asyncStatus = claimingData ? ActivityAsyncStatus.Claimed : ActivityAsyncStatus.Unclaimed
         const isClaiming = false
         const claimingTransactionId = claimingData?.claimingTransactionId
         const claimedDate = claimingData?.claimedDate
@@ -20,6 +19,19 @@ export function getAsyncDataFromOutput(
 
         const expirationDate = getExpirationDateFromOutput(output)
         const timelockDate = getTimelockDateFromOutput(output)
+
+        let asyncStatus
+        if (claimingData) {
+            asyncStatus = ActivityAsyncStatus.Claimed
+        } else if (timelockDate) {
+            if (timelockDate.getTime() > Date.now()) {
+                asyncStatus = ActivityAsyncStatus.Timelocked
+            }
+        } else if (expirationDate.getTime() < Date.now()) {
+            asyncStatus = ActivityAsyncStatus.Expired
+        } else {
+            asyncStatus = ActivityAsyncStatus.Unclaimed
+        }
 
         return {
             asyncStatus,
