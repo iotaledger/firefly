@@ -550,8 +550,8 @@
             "gallery": {
                 "title": "Collectibles",
                 "emptyTitle": "No collectibles",
-                "emptyDescription": "Deposit or Receive your first collectible now!",
-                "emptyDescription2": "You don't own any NFTs for the applied filters"
+                "noResults": "No results",
+                "emptyDescription": "Deposit or Receive your first collectible now!"
             },
             "details": {
                 "collection": "Collection",
