@@ -19,6 +19,7 @@
     $: claimedTime = getDateFormat(activity.asyncData?.claimedDate)
     $: hasStorageDeposit =
         activity.storageDeposit || (activity.storageDeposit === 0 && activity.giftedStorageDeposit === 0)
+    $: gasBudget = activity.parsedLayer2Metadata?.gasBudget ?? activity.layer2Parameters?.gasBudget
     $: destinationNetwork = getDestinationNetworkFromAddress(networkAddress)
 
     $: formattedTransactionTime = getDateFormat(activity.time)
@@ -29,6 +30,10 @@
     )
     $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(
         activity.giftedStorageDeposit ?? 0,
+        BASE_TOKEN[$activeProfile?.networkProtocol]
+    )
+    $: formattedGasBudget = formatTokenAmountPrecise(
+        Number(gasBudget ?? 0),
         BASE_TOKEN[$activeProfile?.networkProtocol]
     )
 
@@ -51,6 +56,9 @@
         }),
         ...(activity.giftedStorageDeposit && {
             giftedStorageDeposit: { data: formattedGiftedStorageDeposit, isTooltipVisible: true },
+        }),
+        ...(gasBudget && {
+            gasBudget: { data: formattedGasBudget, isTooltipVisible: true },
         }),
         ...(expirationTime && {
             expirationTime: { data: expirationTime, isTooltipVisible: true },
