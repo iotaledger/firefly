@@ -17,6 +17,10 @@
     import { getNftByIdFromAllAccountNfts, INft } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
     import { truncateString } from '@core/utils'
+    import { selectedAccountActivities } from '@core/wallet/stores'
+    import { ActivityType, formatTokenAmountPrecise } from '@core/wallet'
+    import { BASE_TOKEN } from '@core/network/constants'
+    import { activeProfile } from '@core/profile/stores'
 
     const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
 
@@ -25,7 +29,13 @@
 
     let modal: Modal
 
-    $: storageDeposit = '0'
+    $: nftActivity = $selectedAccountActivities.find(
+        (activity) => activity.type === ActivityType.Nft && activity.nftId === id
+    )
+    $: storageDeposit = formatTokenAmountPrecise(
+        nftActivity?.storageDeposit ?? 0,
+        BASE_TOKEN[$activeProfile?.networkProtocol]
+    )
 
     let detailsList: { [key in string]: { data: string; copyValue?: string; isCopyable?: boolean } }
     $: detailsList = {
@@ -39,7 +49,7 @@
             nftType: { data: standard },
         }),
         ...(storageDeposit && {
-            storageDeposit: { data: storageDeposit },
+            storageDeposit: { data: String(storageDeposit) },
         }),
     }
 </script>
