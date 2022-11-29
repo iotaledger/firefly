@@ -68,7 +68,7 @@
     </div>
 
     <div class="w-full h-full flex items-center justify-center grow-1">
-        {#if $selectedAccountNfts.length}
+        {#if $queriedNfts.length}
             <div class="h-full flex flex-wrap flex-row gap-6 scrollable-y">
                 {#each $queriedNfts as nft}
                     <NftGalleryItem {nft} onClick={() => handleNftClick(nft)} />
@@ -82,10 +82,16 @@
                         >{localize('views.collectibles.gallery.emptyTitle')}</Text
                     >
                     <Text fontSize="text-14" color="gray-500"
-                        >{localize('views.collectibles.gallery.emptyDescription')}</Text
+                        >{localize(
+                            `views.collectibles.gallery.${
+                                $selectedAccountNfts.length === 0 ? 'emptyDescription' : 'emptyDescription2'
+                            }`
+                        )}</Text
                     >
                 </div>
-                <ReceiveButton text={localize('actions.depositNft')} />
+                {#if $selectedAccountNfts.length === 0}
+                    <ReceiveButton text={localize('actions.depositNft')} />
+                {/if}
             </div>
         {/if}
     </div>
