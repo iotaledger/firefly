@@ -79,11 +79,9 @@
             {:else}
                 <div class="flex flex-col items-center space-y-8">
                     <Illustration illustration="empty-collectibles" width="134" height="134" />
-                    <div class="flex flex-col items-center">
-                        <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500"
-                            >{localize('views.collectibles.gallery.noResults')}</Text
-                        >
-                    </div>
+                    <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500"
+                        >{localize('views.collectibles.gallery.noResults')}</Text
+                    >
                 </div>
             {/if}
         </div>
