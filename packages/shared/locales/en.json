@@ -1001,7 +1001,6 @@
         },
         "confirmTokenBurn": {
             "title": "Burn {assetName}",
-            "description": "Are you sure you want burn this token?",
             "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
         },
         "proceedAnyway": "Proceed anyway",
