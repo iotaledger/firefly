@@ -25,8 +25,7 @@
 <div class="flex flex-row justify-between">
     <div class="flex flex-row text-left space-x-1 items-center">
         <Text fontSize="text-14" fontWeight={FontWeight.semibold}>{localize('views.collectibles.gallery.title')}</Text>
-        <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500">• {$selectedAccountNfts.length}</Text
-        >
+        <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500">• {$queriedNfts.length}</Text>
     </div>
 
     <div class="flex items-center" style="height: 40px">
