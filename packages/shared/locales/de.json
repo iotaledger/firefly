@@ -1640,43 +1640,39 @@
             "Confirmed": "Gestaked für",
             "Conflicting": "Staken fehlgeschlagen"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "übertrage von",
-                    "Confirmed": "übertragen von",
-                    "Conflicting": "Übertragung fehlgeschlagen"
-                },
-                "outgoing": {
-                    "Pending": "übertrage an",
-                    "Confirmed": "übertragen zu",
-                    "Conflicting": "Übertragung fehlgeschlagen"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "empfange von",
-                    "Confirmed": "empfangen von",
-                    "Conflicting": "Empfangen fehlgeschlagen"
-                },
-                "outgoing": {
-                    "Pending": "senden an",
-                    "Confirmed": "gesendet an",
-                    "Conflicting": "Senden fehlgeschlagen"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "minte",
-                "Confirmed": "gemintet",
-                "Conflicting": "Minten fehlgeschlagen"
+                "Pending": "empfange von",
+                "Confirmed": "empfangen von",
+                "Conflicting": "Empfangen fehlgeschlagen"
             },
             "outgoing": {
-                "Pending": "erstelle",
-                "Confirmed": "gemintet",
-                "Conflicting": "Minten fehlgeschlagen"
+                "Pending": "senden an",
+                "Confirmed": "gesendet an",
+                "Conflicting": "Senden fehlgeschlagen"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "übertrage von",
+                "Confirmed": "übertragen von",
+                "Conflicting": "Übertragung fehlgeschlagen"
+            },
+            "outgoing": {
+                "Pending": "übertrage an",
+                "Confirmed": "übertragen zu",
+                "Conflicting": "Übertragung fehlgeschlagen"
+            },
+            "selftransaction": {
+                "Pending": "übertrage an",
+                "Confirmed": "übertragen zu",
+                "Conflicting": "Übertragung fehlgeschlagen"
+            }
+        },
+        "mint": {
+            "Pending": "minte",
+            "Confirmed": "gemintet",
+            "Conflicting": "Minten fehlgeschlagen"
         },
         "migrate": {
             "Pending": "migriere für",

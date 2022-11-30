@@ -1640,43 +1640,39 @@
             "Confirmed": "stakowano",
             "Conflicting": "nie udało się stakować"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "przesyłanie z",
-                    "Confirmed": "przesłano z",
-                    "Conflicting": "nie udało się przesłać"
-                },
-                "outgoing": {
-                    "Pending": "przesyłanie do",
-                    "Confirmed": "przesłano do",
-                    "Conflicting": "nie udało się przesłać"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "odbieranie od",
-                    "Confirmed": "odebrano od",
-                    "Conflicting": "nie udało się odebrać"
-                },
-                "outgoing": {
-                    "Pending": "wysyłanie do",
-                    "Confirmed": "wysłano do",
-                    "Conflicting": "nie udało się wysłać"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "mintowanie",
-                "Confirmed": "mintowano",
-                "Conflicting": "mintowanie nieudane"
+                "Pending": "odbieranie od",
+                "Confirmed": "odebrano od",
+                "Conflicting": "nie udało się odebrać"
             },
             "outgoing": {
-                "Pending": "mintowanie",
-                "Confirmed": "mintowano",
-                "Conflicting": "mintowanie nieudane"
+                "Pending": "wysyłanie do",
+                "Confirmed": "wysłano do",
+                "Conflicting": "nie udało się wysłać"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "przesyłanie z",
+                "Confirmed": "przesłano z",
+                "Conflicting": "nie udało się przesłać"
+            },
+            "outgoing": {
+                "Pending": "przesyłanie do",
+                "Confirmed": "przesłano do",
+                "Conflicting": "nie udało się przesłać"
+            },
+            "selftransaction": {
+                "Pending": "przesyłanie do",
+                "Confirmed": "przesłano do",
+                "Conflicting": "nie udało się przesłać"
+            }
+        },
+        "mint": {
+            "Pending": "mintowanie",
+            "Confirmed": "mintowano",
+            "Conflicting": "mintowanie nieudane"
         },
         "migrate": {
             "Pending": "migrowanie",

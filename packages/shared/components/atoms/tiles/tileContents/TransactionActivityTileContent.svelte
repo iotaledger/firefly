@@ -20,7 +20,8 @@
     $: title = getTitle(activity)
     $: subjectLocale = getSubjectLocale(activity)
     $: amount = getFormattedAmountFromActivity(activity)
-    $: isIncoming = activity.direction === ActivityDirection.Incoming
+    $: isIncoming =
+        activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
 
     function getTitle(_activity: TransactionActivity): string {
         const { isShimmerClaiming, isInternal, direction, inclusionState } = _activity
@@ -32,7 +33,7 @@
         if (isInternal) {
             return isConfirmed ? 'general.transfer' : 'general.transferring'
         }
-        if (direction === ActivityDirection.Incoming) {
+        if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
             return isConfirmed ? 'general.received' : 'general.receiving'
         }
         if (direction === ActivityDirection.Outgoing) {

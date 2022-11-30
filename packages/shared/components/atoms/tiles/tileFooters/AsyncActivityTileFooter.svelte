@@ -27,7 +27,8 @@
     export let activity: Activity
 
     $: shouldShowActions =
-        activity.direction === ActivityDirection.Incoming &&
+        (activity.direction === ActivityDirection.Incoming ||
+            activity.direction === ActivityDirection.SelfTransaction) &&
         activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
     $: shouldShowAsyncFooter = activity.asyncData?.asyncStatus !== ActivityAsyncStatus.Claimed
 
