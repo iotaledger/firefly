@@ -5,6 +5,7 @@
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { burnNft } from '@core/wallet'
     import { INft } from '@core/nfts'
+    import { CollectiblesRoute, collectiblesRouter } from '@core/router'
 
     export let modal: Modal
     export let nft: INft
@@ -25,6 +26,7 @@
                 onConfirm: () => {
                     checkActiveProfileAuth(async () => {
                         await burnNft(nft.id)
+                        $collectiblesRouter.goTo(CollectiblesRoute.Gallery)
                         closePopup()
                     })
                 },
