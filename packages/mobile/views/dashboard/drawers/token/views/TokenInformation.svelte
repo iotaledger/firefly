@@ -10,6 +10,7 @@
         VerifiedStatus,
         verifyAsset,
     } from '@core/wallet'
+    import features from '@features/features'
     import { AssetIcon, Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
 
     export let asset: IAsset
@@ -73,7 +74,7 @@
     </token-content>
 
     <token-actions class="space-y-4">
-        {#if asset?.verification?.status === NotVerifiedStatus.New}
+        {#if asset?.verification?.status === NotVerifiedStatus.New && features.dashboard.tokens.actions.enabled}
             <Button classes="w-full" onClick={onVerifyClick}>
                 {localize('popups.tokenInformation.buttons.verifyToken')}
             </Button>
