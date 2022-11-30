@@ -35,7 +35,7 @@ export async function mintNft(metadata: IIrc27Metadata): Promise<void> {
         })
 
         // Generate Activity
-        const processedTransaction = preprocessTransaction(mintNftTransaction)
+        const processedTransaction = preprocessTransaction(mintNftTransaction, account.depositAddress)
         const activity: NftActivity = generateActivity(processedTransaction, account) as NftActivity
         addActivityToAccountActivitiesInAllAccountActivities(account.index, activity)
 

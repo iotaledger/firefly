@@ -1640,43 +1640,39 @@
             "Confirmed": "stakat för",
             "Conflicting": "misslyckades att staka"
         },
-        "transaction": {
-            "internal": {
-                "incoming": {
-                    "Pending": "överför från",
-                    "Confirmed": "överfört från",
-                    "Conflicting": "misslyckad överföring"
-                },
-                "outgoing": {
-                    "Pending": "överför till",
-                    "Confirmed": "överfört till",
-                    "Conflicting": "misslyckad överföring"
-                }
-            },
-            "external": {
-                "incoming": {
-                    "Pending": "tar emot från",
-                    "Confirmed": "tagit emot från",
-                    "Conflicting": "misslyckades att ta emot"
-                },
-                "outgoing": {
-                    "Pending": "skickar till",
-                    "Confirmed": "skickat till",
-                    "Conflicting": "misslyckades att skicka"
-                }
-            }
-        },
-        "minting": {
+        "external": {
             "incoming": {
-                "Pending": "mintar",
-                "Confirmed": "mintad",
-                "Conflicting": "misslyckades med att minta"
+                "Pending": "tar emot från",
+                "Confirmed": "tagit emot från",
+                "Conflicting": "misslyckades att ta emot"
             },
             "outgoing": {
-                "Pending": "mintar",
-                "Confirmed": "mintad",
-                "Conflicting": "misslyckades med att minta"
+                "Pending": "skickar till",
+                "Confirmed": "skickat till",
+                "Conflicting": "misslyckades att skicka"
             }
+        },
+        "internal": {
+            "incoming": {
+                "Pending": "överför från",
+                "Confirmed": "överfört från",
+                "Conflicting": "misslyckad överföring"
+            },
+            "outgoing": {
+                "Pending": "överför till",
+                "Confirmed": "överfört till",
+                "Conflicting": "misslyckad överföring"
+            },
+            "selftransaction": {
+                "Pending": "överför till",
+                "Confirmed": "överfört till",
+                "Conflicting": "misslyckad överföring"
+            }
+        },
+        "mint": {
+            "Pending": "mintar",
+            "Confirmed": "mintad",
+            "Conflicting": "misslyckades med att minta"
         },
         "migrate": {
             "Pending": "migrerar för",

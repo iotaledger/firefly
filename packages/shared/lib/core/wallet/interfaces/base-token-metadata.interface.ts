@@ -1,5 +1,7 @@
+import { TokenStandard } from '../enums'
+
 export interface IBaseTokenMetadata {
-    standard: 'BASE_COIN'
+    standard: TokenStandard.BaseCoin
     name: string
     tickerSymbol?: string
     unit: string

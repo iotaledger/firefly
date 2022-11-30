@@ -4,3 +4,4 @@ export { default as GenericActivityInformation } from './GenericActivityInformat
 export { default as TokenActivityInformation } from './TokenActivityInformation'
 export { default as NftActivityInformation } from './NftActivityInformation'
 export { default as NftMetadataInformation } from './NftMetadataInformation'
+export { default as SmartContractActivityInformation } from './SmartContractActivityInformation'

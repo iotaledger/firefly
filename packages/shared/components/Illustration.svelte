@@ -78,7 +78,7 @@
         // Wallet
         'empty-collectibles': {
             lightmode: 'wallet/empty-collectibles.svg',
-            darkmode: 'wallet/empty-collectibles.svg',
+            darkmode: 'wallet/empty-collectibles-darkmode.svg',
         },
     }
 </script>
