@@ -14,6 +14,7 @@
         BasicActivityDetails,
         ActivityInformation,
     } from 'shared/components'
+    import { Tab } from 'shared/components/enums'
     import type { OutputOptions } from '@iota/wallet'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
@@ -38,6 +39,13 @@
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
+    import {
+        ACCOUNTS_CONTRACT,
+        CONTRACT_FUNCTIONS,
+        GAS_BUDGET,
+        TARGET_CONTRACTS,
+        TRANSFER_ALLOWANCE,
+    } from '@core/layer-2'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
@@ -58,6 +66,7 @@
     let expirationTimePicker: ExpirationTimePicker
 
     let initialExpirationDate: ExpirationTime = getInitialExpirationDate()
+    let activeTab: Tab
 
     $: transactionDetails = get(newTransactionDetails)
     $: recipientAddress = recipient.type === 'account' ? recipient.account.depositAddress : recipient.address
@@ -78,6 +87,18 @@
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
+        ...(layer2Parameters?.networkAddress && {
+            layer2Parameters: {
+                ...transactionDetails.layer2Parameters,
+                gasBudget: GAS_BUDGET,
+            },
+        }),
+        ...(layer2Parameters?.networkAddress && {
+            parsedLayer2Metadata: {
+                targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
+                contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
+            },
+        }),
     }
 
     $: asset =
@@ -196,28 +217,32 @@
         {:else if transactionDetails.type === NewTransactionType.NftTransfer}
             <NftActivityDetails {activity} />
         {/if}
-        <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} />
-        {#if !hideGiftToggle}
-            <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
-                <Toggle
-                    slot="value"
-                    color="green"
-                    disabled={disableToggleGift}
-                    active={giftStorageDeposit}
-                    onClick={toggleGiftStorageDeposit}
-                />
-            </KeyValueBox>
-        {/if}
-        {#if initialExpirationDate !== undefined}
-            <KeyValueBox keyText={localize('general.expirationTime')}>
-                <ExpirationTimePicker
-                    slot="value"
-                    bind:this={expirationTimePicker}
-                    bind:value={expirationDate}
-                    initialSelected={initialExpirationDate}
-                    disabled={disableChangeExpiration}
-                />
-            </KeyValueBox>
+        <div class="pt-4">
+            <ActivityInformation {activity} networkAddress={layer2Parameters?.networkAddress} bind:activeTab />
+        </div>
+        {#if activeTab === Tab.Transaction}
+            {#if !hideGiftToggle}
+                <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
+                    <Toggle
+                        slot="value"
+                        color="green"
+                        disabled={disableToggleGift}
+                        active={giftStorageDeposit}
+                        onClick={toggleGiftStorageDeposit}
+                    />
+                </KeyValueBox>
+            {/if}
+            {#if initialExpirationDate !== undefined}
+                <KeyValueBox keyText={localize('general.expirationTime')}>
+                    <ExpirationTimePicker
+                        slot="value"
+                        bind:this={expirationTimePicker}
+                        bind:value={expirationDate}
+                        initialSelected={initialExpirationDate}
+                        disabled={disableChangeExpiration}
+                    />
+                </KeyValueBox>
+            {/if}
         {/if}
     </div>
     {#if surplus}

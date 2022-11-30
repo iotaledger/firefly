@@ -7,7 +7,7 @@ import {
     persistedAssets,
 } from '../stores/persisted-assets.store'
 import { getOrRequestAssetFromPersistedAssets } from '../actions'
-import { VerifiedStatus } from '../enums'
+import { VerifiedStatus, TokenStandard } from '../enums'
 import { IPersistedAsset } from '../interfaces'
 
 export async function refreshAccountAssetsForActiveProfile(
@@ -28,7 +28,7 @@ export async function refreshAccountAssetsForActiveProfile(
 
     const persistedBaseCoin: IPersistedAsset = {
         id: String(COIN_TYPE[networkProtocol]),
-        standard: 'BASE_COIN',
+        standard: TokenStandard.BaseCoin,
         metadata: {
             ...baseCoin,
         },

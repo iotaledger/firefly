@@ -50,7 +50,9 @@
             return truncateString(subject?.account?.name, 13, 0)
         }
         if (subject?.type === 'address') {
-            return truncateString(subject?.address, $networkHrp.length, 6)
+            const address = activity.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
+            const hrpLength = activity.parsedLayer2Metadata ? '0x'.length : $networkHrp.length
+            return truncateString(address, hrpLength, 6)
         }
         return localize('general.unknownAddress')
     }
